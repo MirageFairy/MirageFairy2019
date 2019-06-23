@@ -1,6 +1,10 @@
 package miragefairy2019.mod;
 
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = ModMirageFairy2019.MODID, name = ModMirageFairy2019.NAME, version = ModMirageFairy2019.VERSION)
 public class ModMirageFairy2019
@@ -9,58 +13,63 @@ public class ModMirageFairy2019
 	public static final String MODID = "miragefairy2019";
 	public static final String NAME = "MirageFairy2019";
 	public static final String VERSION = "0.0.1";
-	/*
-		public EventRegistryMod erMod = new EventRegistryMod();
 
-		public ModMirageFairy2018()
-		{
-			ModuleMain.init(erMod);
-			ModuleMaterial.init(erMod);
-			ModuleOre.init(erMod);
-			ModuleTool.init(erMod);
-			ModuleDreamyFlower.init(erMod);
-			ModuleFairy.init(erMod);
-			ModuleCity.init(erMod);
-		}
+	public EventRegistryMod erMod = new EventRegistryMod();
 
-		@EventHandler
-		public void preInit(FMLPreInitializationEvent event)
-		{
+	public ModMirageFairy2019()
+	{
+		/* TODO
+		ModuleMain.init(erMod);
+		ModuleFairy.init(erMod);
+		ModuleMaterial.init(erMod);
+		ModuleOre.init(erMod);
+		ModuleTool.init(erMod);
+		ModuleDreamyFlower.init(erMod);
+		ModuleCity.init(erMod);
+		*/
 
-			erMod.preInit.accept(event);
+		erMod.initCreativeTab.trigger().run();
 
-			Builder builder = new Builder(MODID, event.getSide(), ModuleMain.creativeTab);
+	}
 
-			erMod.registerBlock.accept(builder);
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event)
+	{
 
-			erMod.registerItem.accept(builder);
+		erMod.preInit.trigger().accept(event);
 
-			erMod.createItemStack.accept(builder);
+		InitializationContext initializationContext = new InitializationContext(MODID, event.getSide());
 
-			erMod.decorate.run();
+		erMod.registerBlock.trigger().accept(initializationContext);
 
-		}
+		erMod.registerItem.trigger().accept(initializationContext);
 
-		@EventHandler
-		public void init(FMLInitializationEvent event)
-		{
+		erMod.createItemStack.trigger().accept(initializationContext);
 
-			erMod.init.accept(event);
+		erMod.hookDecorator.trigger().run();
 
-			erMod.recipe.run();
+	}
 
-			if (event.getSide().isClient()) erMod.registerItemColorHandler.run();
+	@EventHandler
+	public void init(FMLInitializationEvent event)
+	{
 
-			erMod.registerTileEntity.run();
+		erMod.init.trigger().accept(event);
 
-		}
+		erMod.addRecipe.trigger().run();
 
-		@EventHandler
-		public void postInit(FMLPostInitializationEvent event)
-		{
+		if (event.getSide().isClient()) erMod.registerItemColorHandler.trigger().run();
 
-			erMod.postInit.accept(event);
+		erMod.registerTileEntity.trigger().run();
 
-		}
-	*/
+	}
+
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event)
+	{
+
+		erMod.postInit.trigger().accept(event);
+
+	}
+
 }
