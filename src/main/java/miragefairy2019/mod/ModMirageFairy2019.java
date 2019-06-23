@@ -1,5 +1,7 @@
 package miragefairy2019.mod;
 
+import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.app.ModuleMain;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -18,8 +20,8 @@ public class ModMirageFairy2019
 
 	public ModMirageFairy2019()
 	{
-		/* TODO
 		ModuleMain.init(erMod);
+		/* TODO
 		ModuleFairy.init(erMod);
 		ModuleMaterial.init(erMod);
 		ModuleOre.init(erMod);
@@ -38,7 +40,7 @@ public class ModMirageFairy2019
 
 		erMod.preInit.trigger().accept(event);
 
-		InitializationContext initializationContext = new InitializationContext(MODID, event.getSide());
+		InitializationContext initializationContext = new InitializationContext(MODID, event.getSide(), ApiMain.creativeTab);
 
 		erMod.registerBlock.trigger().accept(initializationContext);
 
