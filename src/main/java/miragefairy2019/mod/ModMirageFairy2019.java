@@ -1,6 +1,7 @@
 package miragefairy2019.mod;
 
 import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.app.ModuleFairy;
 import miragefairy2019.mod.app.ModuleMain;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -21,8 +22,8 @@ public class ModMirageFairy2019
 	public ModMirageFairy2019()
 	{
 		ModuleMain.init(erMod);
-		/* TODO
 		ModuleFairy.init(erMod);
+		/* TODO
 		ModuleMaterial.init(erMod);
 		ModuleOre.init(erMod);
 		ModuleTool.init(erMod);
