@@ -1,7 +1,9 @@
 package miragefairy2019.mod;
 
-import mirrg.boron.util.event.lib.EventProviderConsumer;
-import mirrg.boron.util.event.lib.EventProviderRunnable;
+import java.util.function.Consumer;
+
+import mirrg.boron.util.event.EventProviders;
+import mirrg.boron.util.event.IEventProvider;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -9,32 +11,32 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class EventRegistryMod
 {
 
-	public final EventProviderRunnable initCreativeTab = new EventProviderRunnable();
+	public final IEventProvider<Runnable> initCreativeTab = EventProviders.runnable();
 
 	//
 
-	public final EventProviderConsumer<FMLPreInitializationEvent> preInit = new EventProviderConsumer<>();
+	public final IEventProvider<Consumer<FMLPreInitializationEvent>> preInit = EventProviders.consumer();
 
-	public final EventProviderConsumer<InitializationContext> registerItem = new EventProviderConsumer<>();
+	public final IEventProvider<Consumer<InitializationContext>> registerItem = EventProviders.consumer();
 
-	public final EventProviderConsumer<InitializationContext> registerBlock = new EventProviderConsumer<>();
+	public final IEventProvider<Consumer<InitializationContext>> registerBlock = EventProviders.consumer();
 
-	public final EventProviderConsumer<InitializationContext> createItemStack = new EventProviderConsumer<>();
+	public final IEventProvider<Consumer<InitializationContext>> createItemStack = EventProviders.consumer();
 
-	public final EventProviderRunnable hookDecorator = new EventProviderRunnable();
-
-	//
-
-	public final EventProviderConsumer<FMLInitializationEvent> init = new EventProviderConsumer<>();
-
-	public final EventProviderRunnable addRecipe = new EventProviderRunnable();
-
-	public final EventProviderRunnable registerItemColorHandler = new EventProviderRunnable();
-
-	public final EventProviderRunnable registerTileEntity = new EventProviderRunnable();
+	public final IEventProvider<Runnable> hookDecorator = EventProviders.runnable();
 
 	//
 
-	public final EventProviderConsumer<FMLPostInitializationEvent> postInit = new EventProviderConsumer<>();
+	public final IEventProvider<Consumer<FMLInitializationEvent>> init = EventProviders.consumer();
+
+	public final IEventProvider<Runnable> addRecipe = EventProviders.runnable();
+
+	public final IEventProvider<Runnable> registerItemColorHandler = EventProviders.runnable();
+
+	public final IEventProvider<Runnable> registerTileEntity = EventProviders.runnable();
+
+	//
+
+	public final IEventProvider<Consumer<FMLPostInitializationEvent>> postInit = EventProviders.consumer();
 
 }
