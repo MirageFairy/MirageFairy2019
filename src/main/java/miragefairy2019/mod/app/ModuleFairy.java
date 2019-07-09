@@ -5,7 +5,9 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairy;
 import miragefairy2019.mod.api.ApiMain;
 import mirrg.boron.util.struct.Tuple;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
@@ -38,6 +40,23 @@ public class ModuleFairy
 					ModelLoader.setCustomModelResourceLocation(itemMirageFairy, tuple.x, new ModelResourceLocation(itemMirageFairy.getRegistryName(), null));
 				}
 			}
+
+		});
+		erMod.registerItemColorHandler.register(() -> {
+
+			Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
+				@Override
+				public int colorMultiplier(ItemStack stack, int tintIndex)
+				{
+					VariantMirageFairy variant = itemMirageFairy.getVariant(stack).orElse(null);
+					if (tintIndex == 0) return variant.type.colorSet.skin;
+					if (tintIndex == 1) return 0x8888ff;
+					if (tintIndex == 2) return variant.type.colorSet.bright;
+					if (tintIndex == 3) return variant.type.colorSet.dark;
+					if (tintIndex == 4) return variant.type.colorSet.hair;
+					return 0xFFFFFF;
+				}
+			}, itemMirageFairy);
 
 		});
 		erMod.createItemStack.register(ic -> {
