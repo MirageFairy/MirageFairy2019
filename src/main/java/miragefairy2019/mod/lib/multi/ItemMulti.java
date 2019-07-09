@@ -51,7 +51,7 @@ public class ItemMulti<V extends ItemVariant> extends Item
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return getVariant(stack).map(v -> v.getUnlocalizedName(stack)).orElse("item.null");
+		return getVariant(stack).map(v -> v.getUnlocalizedName()).orElse("item.null");
 	}
 
 	@Override

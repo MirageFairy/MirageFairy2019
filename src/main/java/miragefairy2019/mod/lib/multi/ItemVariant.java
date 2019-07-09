@@ -1,7 +1,5 @@
 package miragefairy2019.mod.lib.multi;
 
-import net.minecraft.item.ItemStack;
-
 public abstract class ItemVariant
 {
 
@@ -17,13 +15,13 @@ public abstract class ItemVariant
 		this.metadata = metadata;
 	}
 
-	public String getUnlocalizedName(ItemStack itemStack)
+	public String getUnlocalizedName()
 	{
-		return "item." + getOreName(itemStack);
+		return "item." + getOreName();
 	}
 
-	public abstract String getRegistryName(ItemStack itemStack);
+	public abstract String getRegistryName();
 
-	public abstract String getOreName(ItemStack itemStack);
+	public abstract String getOreName();
 
 }
