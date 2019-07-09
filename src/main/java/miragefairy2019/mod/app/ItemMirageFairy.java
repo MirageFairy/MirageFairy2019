@@ -27,9 +27,9 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy>
 		if (variant == null) return;
 
 		{
-			String stringRare = IntStream.range(0, variant.getRare()).mapToObj(i -> "★").collect(Collectors.joining());
+			String stringRare = IntStream.range(0, variant.type.rare).mapToObj(i -> "★").collect(Collectors.joining());
 			TextFormatting colorRare;
-			switch (variant.getRare()) {
+			switch (variant.type.rare) {
 				case 1:
 					colorRare = GRAY;
 					break;
@@ -51,7 +51,7 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy>
 			}
 
 			String stringRank;
-			int rank = variant.getRank();
+			int rank = variant.type.rank;
 			switch (rank) {
 				case 1:
 					stringRank = "I";
@@ -73,7 +73,7 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy>
 					break;
 			}
 			TextFormatting colorRank;
-			switch (variant.getRare()) {
+			switch (variant.type.rank) {
 				case 1:
 					colorRank = WHITE;
 					break;
@@ -94,15 +94,15 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy>
 					break;
 			}
 
-			tooltip.add("" + "Type: " + colorRare + stringRare + " " + colorRank + variant.getName() + " " + stringRank);
+			tooltip.add("" + "Type: " + colorRare + stringRare + " " + colorRank + variant.type.name + " " + stringRank);
 		}
 
-		tooltip.add("    " + format(shine, variant.getShine()));
-		tooltip.add("" + format(fire, variant.getFire()) + "    " + format(wind, variant.getWind()));
-		tooltip.add("" + format(gaia, variant.getGaia()) + "    " + format(aqua, variant.getAqua()));
-		tooltip.add("    " + format(dark, variant.getDark()));
+		tooltip.add("    " + format(shine, variant.type.shine));
+		tooltip.add("" + format(fire, variant.type.fire) + "    " + format(wind, variant.type.wind));
+		tooltip.add("" + format(gaia, variant.type.gaia) + "    " + format(aqua, variant.type.aqua));
+		tooltip.add("    " + format(dark, variant.type.dark));
 
-		tooltip.add("" + YELLOW + "Cost: " + WHITE + String.format("%.1f", variant.getCost()));
+		tooltip.add("" + YELLOW + "Cost: " + WHITE + String.format("%.1f", variant.type.cost));
 
 	}
 

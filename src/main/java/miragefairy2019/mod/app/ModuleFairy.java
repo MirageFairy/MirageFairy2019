@@ -24,10 +24,14 @@ public class ModuleFairy
 			ApiFairy.itemMirageFairy = itemMirageFairy = new ItemMirageFairy();
 			itemMirageFairy.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy");
 			itemMirageFairy.setCreativeTab(ApiMain.creativeTab);
-			itemMirageFairy.registerVariant(0, new VariantMirageFairy("mirage_fairy_air", "mirageFairyAir", "air", 1, 1, 20, 1, 0, 9, 0, 0, 0));
-			itemMirageFairy.registerVariant(1, new VariantMirageFairy("mirage_fairy_water", "mirageFairyWater", "water", 1, 1, 40, 0, 0, 0, 0, 8, 2));
-			itemMirageFairy.registerVariant(2, new VariantMirageFairy("mirage_fairy_dirt", "mirageFairyDirt", "dirt", 1, 1, 60, 0, 0, 0, 8, 0, 2));
-			itemMirageFairy.registerVariant(3, new VariantMirageFairy("mirage_fairy_fire", "mirageFairyFire", "fire", 1, 1, 20, 1, 9, 0, 0, 0, 0));
+			itemMirageFairy.registerVariant(0, new VariantMirageFairy("mirage_fairy_air", "mirageFairyAir",
+				new MirageFairyType("air", 1, 1, 20, 1, 0, 9, 0, 0, 0, new MirageFairyColorSet(0xFFBE80, 0xDEFFFF, 0xDEFFFF, 0xB0FFFF))));
+			itemMirageFairy.registerVariant(1, new VariantMirageFairy("mirage_fairy_water", "mirageFairyWater",
+				new MirageFairyType("water", 1, 1, 40, 0, 0, 0, 0, 8, 2, new MirageFairyColorSet(0x5469F2, 0x172AD3, 0x5985FF, 0x2D40F4))));
+			itemMirageFairy.registerVariant(2, new VariantMirageFairy("mirage_fairy_dirt", "mirageFairyDirt",
+				new MirageFairyType("dirt", 1, 1, 60, 0, 0, 0, 8, 0, 2, new MirageFairyColorSet(0xB87440, 0x593D29, 0xB9855C, 0x914A18))));
+			itemMirageFairy.registerVariant(3, new VariantMirageFairy("mirage_fairy_fire", "mirageFairyFire",
+				new MirageFairyType("fire", 1, 1, 20, 1, 9, 0, 0, 0, 0, new MirageFairyColorSet(0xFF6C01, 0xFF7324, 0xF9DFA4, 0xFF4000))));
 			ForgeRegistries.ITEMS.register(itemMirageFairy);
 			if (ApiMain.side.isClient()) {
 				for (Tuple<Integer, VariantMirageFairy> tuple : itemMirageFairy.getVariants()) {
