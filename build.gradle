@@ -60,7 +60,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-	compile group: 'mirrg.boron', name: 'mirrg.boron.util', version: '3.7+'
+	compile group: 'mirrg.boron', name: 'mirrg.boron.util', version: '[3.17,4['
 	compile group: 'mirrg.boron', name: 'mirrg.boron.swing', version: '0.1+'
 }
 
