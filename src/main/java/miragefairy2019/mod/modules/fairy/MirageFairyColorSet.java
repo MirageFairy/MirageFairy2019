@@ -1,4 +1,4 @@
-package miragefairy2019.mod.app;
+package miragefairy2019.mod.modules.fairy;
 
 public final class MirageFairyColorSet
 {

@@ -1,8 +1,8 @@
 package miragefairy2019.mod;
 
 import miragefairy2019.mod.api.ApiMain;
-import miragefairy2019.mod.app.ModuleFairy;
-import miragefairy2019.mod.app.ModuleMain;
+import miragefairy2019.mod.modules.ModuleMain;
+import miragefairy2019.mod.modules.fairy.ModuleFairy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

@@ -1,4 +1,4 @@
-package miragefairy2019.mod.app;
+package miragefairy2019.mod.modules.fairy;
 
 import static miragefairy2019.mod.modules.fairy.EnumManaType.*;
 import static net.minecraft.util.text.TextFormatting.*;
@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import miragefairy2019.mod.lib.multi.ItemMulti;
-import miragefairy2019.mod.modules.fairy.EnumManaType;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;

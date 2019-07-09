@@ -1,4 +1,4 @@
-package miragefairy2019.mod.app;
+package miragefairy2019.mod.modules;
 
 import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.api.ApiFairy;
