@@ -14,7 +14,7 @@ public class ModuleMain
 	public static void init(EventRegistryMod erMod)
 	{
 		erMod.initCreativeTab.register(() -> {
-			ApiMain.creativeTab = new CreativeTabs("mirageFairy2019") { // TODO itemGroup.mirageFairy2019
+			ApiMain.creativeTab = new CreativeTabs("mirageFairy2019") {
 				@Override
 				@SideOnly(Side.CLIENT)
 				public ItemStack getTabIconItem()
