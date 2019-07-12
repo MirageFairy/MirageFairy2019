@@ -1,5 +1,8 @@
 package miragefairy2019.mod.modules.mirageflower;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
@@ -30,6 +33,7 @@ public class ModuleMirageFlower
 			// 種
 			ApiMirageFlower.itemMirageFlowerSeeds = itemMirageFlowerSeeds = new ItemMirageFlowerSeeds();
 			itemMirageFlowerSeeds.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_seeds");
+			itemMirageFlowerSeeds.setUnlocalizedName("mirageFlowerSeeds");
 			itemMirageFlowerSeeds.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.ITEMS.register(itemMirageFlowerSeeds);
 			ModelLoader.setCustomModelResourceLocation(itemMirageFlowerSeeds, 0, new ModelResourceLocation(itemMirageFlowerSeeds.getRegistryName(), null));
@@ -53,32 +57,48 @@ public class ModuleMirageFlower
 		erMod.hookDecorator.register(() -> {
 
 			// 地形生成
+			List<BiomeDecoratorFlowers> biomeDecorators = new ArrayList<>();
 
-			BiomeDecoratorFlowers decoratorDreamyFlower = new BiomeDecoratorFlowers(
-				UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), worldGenerator1 -> {
-					worldGenerator1.blockCountMin = 1;
-					worldGenerator1.blockCountMax = 3;
+			biomeDecorators.add(new BiomeDecoratorFlowers(
+				UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
+					wg.blockCountMin = 1;
+					wg.blockCountMax = 3;
 				}),
-				0.025);
-			BiomeDecoratorFlowers decoratorDreamyFlowerMountain = new BiomeDecoratorFlowers(
-				UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), worldGenerator2 -> {
-					worldGenerator2.blockCountMin = 1;
-					worldGenerator2.blockCountMax = 5;
+				0.01));
+
+			biomeDecorators.add(new BiomeDecoratorFlowers(
+				UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
+					wg.blockCountMin = 1;
+					wg.blockCountMax = 10;
 				}),
-				0.25) {
+				0.1) {
 				@Override
 				protected boolean canGenerate(Biome biome)
 				{
 					return super.canGenerate(biome) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN);
 				}
-			};
+			});
+
+			biomeDecorators.add(new BiomeDecoratorFlowers(
+				UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
+					wg.blockCountMin = 1;
+					wg.blockCountMax = 10;
+				}),
+				0.5) {
+				@Override
+				protected boolean canGenerate(Biome biome)
+				{
+					return super.canGenerate(biome) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST);
+				}
+			});
 
 			MinecraftForge.EVENT_BUS.register(new Object() {
 				@SubscribeEvent
 				public void accept(DecorateBiomeEvent.Post event)
 				{
-					decoratorDreamyFlower.decorate(event);
-					decoratorDreamyFlowerMountain.decorate(event);
+					for (BiomeDecoratorFlowers biomeDecorator : biomeDecorators) {
+						biomeDecorator.decorate(event);
+					}
 				}
 			});
 
