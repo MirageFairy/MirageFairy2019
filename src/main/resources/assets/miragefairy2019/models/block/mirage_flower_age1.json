@@ -1,0 +1,7 @@
+{
+	"parent": "block/cross",
+	"textures": {
+		"particle": "miragefairy2018:blocks/dreamy_flower_age1",
+		"cross": "miragefairy2018:blocks/dreamy_flower_age1"
+	}
+}

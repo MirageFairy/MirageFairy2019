@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "miragefairy2018:items/dreamy_flower_seeds"
+	}
+}
