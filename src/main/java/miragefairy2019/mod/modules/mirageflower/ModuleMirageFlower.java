@@ -7,8 +7,10 @@ import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
 import miragefairy2019.mod.lib.WorldGenBush;
 import mirrg.boron.util.UtilsLambda;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
@@ -30,6 +32,7 @@ public class ModuleMirageFlower
 			itemMirageFlowerSeeds.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_seeds");
 			itemMirageFlowerSeeds.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.ITEMS.register(itemMirageFlowerSeeds);
+			ModelLoader.setCustomModelResourceLocation(itemMirageFlowerSeeds, 0, new ModelResourceLocation(itemMirageFlowerSeeds.getRegistryName(), null));
 
 		});
 		erMod.registerBlock.register(b -> {
