@@ -28,6 +28,8 @@ public class ItemMulti<V extends ItemVariant> extends Item
 	{
 		if (map.containsKey(metadata)) throw new IllegalArgumentException("Illegal metadata: " + metadata);
 		map.put(metadata, variant);
+
+		variant.setMetadata(metadata);
 	}
 
 	public Optional<V> getVariant(ItemStack stack)
