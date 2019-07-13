@@ -18,6 +18,11 @@ public class ModuleFairy
 
 	public static ItemMirageFairy itemMirageFairy;
 
+	public static VariantMirageFairy variantMirageFairyAir;
+	public static VariantMirageFairy variantMirageFairyWater;
+	public static VariantMirageFairy variantMirageFairyDirt;
+	public static VariantMirageFairy variantMirageFairyFire;
+
 	public static void init(EventRegistryMod erMod)
 	{
 		erMod.registerItem.register(b -> {
@@ -27,13 +32,13 @@ public class ModuleFairy
 			itemMirageFairy.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy");
 			itemMirageFairy.setUnlocalizedName("mirageFairy");
 			itemMirageFairy.setCreativeTab(ApiMain.creativeTab);
-			itemMirageFairy.registerVariant(0, new VariantMirageFairy("mirage_fairy_air", "mirageFairyAir",
+			itemMirageFairy.registerVariant(0, variantMirageFairyAir = new VariantMirageFairy("mirage_fairy_air", "mirageFairyAir",
 				new MirageFairyType("air", 1, 1, 20, 1, 0, 9, 0, 0, 0, new MirageFairyColorSet(0xFFBE80, 0xDEFFFF, 0xDEFFFF, 0xB0FFFF))));
-			itemMirageFairy.registerVariant(1, new VariantMirageFairy("mirage_fairy_water", "mirageFairyWater",
+			itemMirageFairy.registerVariant(1, variantMirageFairyWater = new VariantMirageFairy("mirage_fairy_water", "mirageFairyWater",
 				new MirageFairyType("water", 1, 1, 40, 0, 0, 0, 0, 8, 2, new MirageFairyColorSet(0x5469F2, 0x172AD3, 0x5985FF, 0x2D40F4))));
-			itemMirageFairy.registerVariant(2, new VariantMirageFairy("mirage_fairy_dirt", "mirageFairyDirt",
+			itemMirageFairy.registerVariant(2, variantMirageFairyDirt = new VariantMirageFairy("mirage_fairy_dirt", "mirageFairyDirt",
 				new MirageFairyType("dirt", 1, 1, 60, 0, 0, 0, 8, 0, 2, new MirageFairyColorSet(0xB87440, 0x593D29, 0xB9855C, 0x914A18))));
-			itemMirageFairy.registerVariant(3, new VariantMirageFairy("mirage_fairy_fire", "mirageFairyFire",
+			itemMirageFairy.registerVariant(3, variantMirageFairyFire = new VariantMirageFairy("mirage_fairy_fire", "mirageFairyFire",
 				new MirageFairyType("fire", 1, 1, 20, 1, 9, 0, 0, 0, 0, new MirageFairyColorSet(0xFF6C01, 0xFF7324, 0xF9DFA4, 0xFF4000))));
 			ForgeRegistries.ITEMS.register(itemMirageFairy);
 			if (ApiMain.side.isClient()) {
