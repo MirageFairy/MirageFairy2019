@@ -7,7 +7,9 @@ public class ApiFairy
 {
 
 	public static Item itemMirageFairy;
+	public static Item itemFairyCrystal;
 
 	public static ItemStack itemStackMirageFairyMain;
+	public static ItemStack itemStackFairyCrystal;
 
 }

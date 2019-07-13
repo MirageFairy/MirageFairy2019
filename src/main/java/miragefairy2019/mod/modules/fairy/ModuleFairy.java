@@ -16,6 +16,7 @@ public class ModuleFairy
 {
 
 	public static ItemMirageFairy itemMirageFairy;
+	public static ItemFairyCrystal itemFairyCrystal;
 
 	public static VariantMirageFairy variantMirageFairyAir;
 	public static VariantMirageFairy variantMirageFairyWater;
@@ -46,6 +47,14 @@ public class ModuleFairy
 				}
 			}
 
+			// 妖精結晶
+			ApiFairy.itemFairyCrystal = itemFairyCrystal = new ItemFairyCrystal();
+			itemFairyCrystal.setRegistryName(ModMirageFairy2019.MODID, "fairy_crystal");
+			itemFairyCrystal.setUnlocalizedName("fairyCrystal");
+			itemFairyCrystal.setCreativeTab(ApiMain.creativeTab);
+			ForgeRegistries.ITEMS.register(itemFairyCrystal);
+			ModelLoader.setCustomModelResourceLocation(itemFairyCrystal, 0, new ModelResourceLocation(itemFairyCrystal.getRegistryName(), null));
+
 		});
 		erMod.registerItemColorHandler.register(() -> {
 
@@ -66,6 +75,7 @@ public class ModuleFairy
 		});
 		erMod.createItemStack.register(ic -> {
 			ApiFairy.itemStackMirageFairyMain = variantMirageFairyAir.createItemStack();
+			ApiFairy.itemStackFairyCrystal = new ItemStack(itemFairyCrystal);
 		});
 	}
 
