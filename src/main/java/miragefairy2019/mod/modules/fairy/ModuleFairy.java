@@ -8,7 +8,6 @@ import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -66,7 +65,7 @@ public class ModuleFairy
 
 		});
 		erMod.createItemStack.register(ic -> {
-			ApiFairy.itemStackMirageFairyMain = new ItemStack(Items.LEAD); // TODO
+			ApiFairy.itemStackMirageFairyMain = variantMirageFairyAir.createItemStack();
 		});
 	}
 
