@@ -2,16 +2,18 @@ package miragefairy2019.mod.modules.mirageflower;
 
 import java.util.Random;
 
+import miragefairy2019.mod.api.ApiFairy;
 import miragefairy2019.mod.api.ApiMirageFlower;
+import miragefairy2019.mod.lib.Utils;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -19,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockMirageFlower extends BlockBush
+public class BlockMirageFlower extends BlockBush implements IGrowable
 {
 
 	public BlockMirageFlower()
@@ -62,7 +64,7 @@ public class BlockMirageFlower extends BlockBush
 		return getDefaultState().withProperty(AGE, age);
 	}
 
-	// style
+	// 判定
 
 	public static final AxisAlignedBB AABB_STAGE0 = new AxisAlignedBB(5 / 16.0, 0 / 16.0, 5 / 16.0, 11 / 16.0, 5 / 16.0, 11 / 16.0);
 	public static final AxisAlignedBB AABB_STAGE1 = new AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 12 / 16.0, 14 / 16.0);
@@ -82,6 +84,20 @@ public class BlockMirageFlower extends BlockBush
 
 	// 動作
 
+	protected boolean isMaxAge(IBlockState state)
+	{
+		return state.getValue(AGE) == 3;
+	}
+
+	protected void grow(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	{
+		if (!isMaxAge(state)) {
+			if (rand.nextInt(20) == 0) {
+				worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, state.getValue(AGE) + 1), 2);
+			}
+		}
+	}
+
 	/**
 	 * UpdateTickごとにAgeが1ずつ最大3まで増える。
 	 */
@@ -89,34 +105,35 @@ public class BlockMirageFlower extends BlockBush
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		super.updateTick(worldIn, pos, state, rand);
-
-		int age = state.getValue(AGE);
-		if (age < 3) {
-			worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, age + 1), 2);
-		}
-
+		if (!worldIn.isAreaLoaded(pos, 1)) return;
+		grow(worldIn, pos, state, rand);
 	}
 
 	/**
-	 * 何もドロップしない。
+	 * 骨粉をやると低確率で成長する。
 	 */
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
 	{
-		return Items.AIR;
+		grow(worldIn, pos, state, rand);
 	}
 
-	/**
-	 * 何もドロップしない。
-	 */
 	@Override
-	public int quantityDropped(Random random)
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
 	{
-		return 0;
+		return !isMaxAge(state);
 	}
 
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	{
+		return worldIn.rand.nextFloat() < 0.05;
+	}
+
+	// ドロップ
+
 	/**
-	 * 種をドロップする。
+	 * クリエイティブピックでの取得アイテム。
 	 */
 	@Override
 	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
@@ -126,48 +143,42 @@ public class BlockMirageFlower extends BlockBush
 
 	/**
 	 * Ageが最大のとき、種を1個ドロップする。
-	 * 幸運Lv1につき種のドロップ数が5%増える。
+	 * 幸運Lv1につき種のドロップ数が1%増える。
+	 * 地面破壊ドロップでも適用される。
 	 */
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		Random random = world instanceof World ? ((World) world).rand : new Random();
-		int seedCount = 1;
-		/*
-		// TODO ドロップ
-		int dropCount = 0;
-		int additionalDropCount = 0;
-		*/
 
-		if (state.getValue(AGE) >= 3) {
-			for (int i = 0; i <= fortune; i++) {
+		// 種1個は確定でドロップ
+		drops.add(ApiMirageFlower.itemStackMirageFlowerSeeds.copy());
 
-				if (random.nextDouble() < 0.05) seedCount++;
-
-				/*
-				if (random.nextDouble() < 0.5) dropCount++;
-				if (random.nextDouble() < 0.5) dropCount++;
-				if (random.nextDouble() < 0.5) dropCount++;
-				if (random.nextDouble() < 0.5) dropCount++;
-
-				if (random.nextDouble() < 0.05) additionalDropCount++;
-				*/
-
+		// 追加の種
+		{
+			int count = Utils.randomInt(isMaxAge(state) ? fortune * 0.01 : 0, random);
+			for (int i = 0; i < count; i++) {
+				drops.add(ApiMirageFlower.itemStackMirageFlowerSeeds.copy());
 			}
 		}
 
-		for (int i = 0; i < seedCount; i++) {
-			drops.add(ApiMirageFlower.itemStackMirageFlowerSeeds.copy());
+		// クリスタル
+		{
+			int count = Utils.randomInt(isMaxAge(state) ? 1 + fortune * 0.5 : 0, random);
+			for (int i = 0; i < count; i++) {
+				drops.add(ApiFairy.itemStackFairyCrystal.copy());
+			}
 		}
-		/*
-		for (int i = 0; i < dropCount; i++) {
-			drops.add(ModuleMaterial.dustTinyMiragium.createItemStack());
-		}
-		for (int i = 0; i < additionalDropCount; i++) {
-			drops.add(ModuleFairy.mirageWisp.createItemStack());
-		}
-		*/
 
+	}
+
+	/**
+	 * シルクタッチ無効。
+	 */
+	@Override
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
+	{
+		return false;
 	}
 
 }
