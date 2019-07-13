@@ -25,6 +25,7 @@ public class ModuleFairy
 			// 妖精
 			ApiFairy.itemMirageFairy = itemMirageFairy = new ItemMirageFairy();
 			itemMirageFairy.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy");
+			itemMirageFairy.setUnlocalizedName("mirageFairy");
 			itemMirageFairy.setCreativeTab(ApiMain.creativeTab);
 			itemMirageFairy.registerVariant(0, new VariantMirageFairy("mirage_fairy_air", "mirageFairyAir",
 				new MirageFairyType("air", 1, 1, 20, 1, 0, 9, 0, 0, 0, new MirageFairyColorSet(0xFFBE80, 0xDEFFFF, 0xDEFFFF, 0xB0FFFF))));
