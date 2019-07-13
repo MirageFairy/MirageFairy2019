@@ -1,6 +1,8 @@
 package miragefairy2019.mod.lib.multi;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
 public class ItemVariant
 {
 
@@ -34,6 +36,11 @@ public class ItemVariant
 	public void setItem(Item item)
 	{
 		this.item = item;
+	}
+
+	public ItemStack createItemStack()
+	{
+		return new ItemStack(item, 1, metadata);
 	}
 
 	public String getUnlocalizedName()
