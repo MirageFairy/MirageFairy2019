@@ -26,13 +26,13 @@ public class ItemFairyCrystal extends Item
 		{
 			int random = worldIn.rand.nextInt(100);
 			if (random >= 50) {
-				itemStackFairy = ModuleFairy.variantMirageFairyAir.createItemStack();
+				itemStackFairy = ModuleFairy.FairyTypes.air.createItemStack();
 			} else if (random >= 20) {
-				itemStackFairy = ModuleFairy.variantMirageFairyDirt.createItemStack();
+				itemStackFairy = ModuleFairy.FairyTypes.dirt.createItemStack();
 			} else if (random >= 5) {
-				itemStackFairy = ModuleFairy.variantMirageFairyWater.createItemStack();
+				itemStackFairy = ModuleFairy.FairyTypes.water.createItemStack();
 			} else if (random >= 0) {
-				itemStackFairy = ModuleFairy.variantMirageFairyFire.createItemStack();
+				itemStackFairy = ModuleFairy.FairyTypes.fire.createItemStack();
 			}
 		}
 

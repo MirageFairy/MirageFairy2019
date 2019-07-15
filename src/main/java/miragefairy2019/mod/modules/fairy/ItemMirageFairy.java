@@ -96,10 +96,10 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy>
 			tooltip.add("" + "Type: " + colorRare + stringRare + " " + colorRank + variant.type.name + " " + stringRank);
 		}
 
-		tooltip.add("    " + format(shine, variant.type.shine));
-		tooltip.add("" + format(fire, variant.type.fire) + "    " + format(wind, variant.type.wind));
-		tooltip.add("" + format(gaia, variant.type.gaia) + "    " + format(aqua, variant.type.aqua));
-		tooltip.add("    " + format(dark, variant.type.dark));
+		tooltip.add("    " + format(shine, variant.type.manaSet.shine));
+		tooltip.add("" + format(fire, variant.type.manaSet.fire) + "    " + format(wind, variant.type.manaSet.wind));
+		tooltip.add("" + format(gaia, variant.type.manaSet.gaia) + "    " + format(aqua, variant.type.manaSet.aqua));
+		tooltip.add("    " + format(dark, variant.type.manaSet.dark));
 
 		tooltip.add("" + YELLOW + "Cost: " + WHITE + String.format("%.1f", variant.type.cost));
 
