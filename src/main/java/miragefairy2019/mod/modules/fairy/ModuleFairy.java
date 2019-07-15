@@ -65,8 +65,8 @@ public class ModuleFairy
 					VariantMirageFairy variant = itemMirageFairy.getVariant(stack).orElse(null);
 					if (tintIndex == 0) return variant.type.colorSet.skin;
 					if (tintIndex == 1) return 0x8888ff;
-					if (tintIndex == 2) return variant.type.colorSet.bright;
-					if (tintIndex == 3) return variant.type.colorSet.dark;
+					if (tintIndex == 2) return variant.type.colorSet.dark;
+					if (tintIndex == 3) return variant.type.colorSet.bright;
 					if (tintIndex == 4) return variant.type.colorSet.hair;
 					return 0xFFFFFF;
 				}
