@@ -122,7 +122,7 @@ public enum EnumVariantOre1 implements IStringSerializable, IOreVariant
 	public void getDrops(NonNullList<ItemStack> drops, Random random, Block block, int metadata, int fortune)
 	{
 		if (nGemProvider != null) {
-			int count = Utils.randomInt(random, nGemProvider.amount + nGemProvider.amountPerFortune * fortune);
+			int count = Utils.randomInt(random, nGemProvider.amount + random.nextDouble() * nGemProvider.amountPerFortune * fortune);
 			for (int i = 0; i < count; i++) {
 				drops.add(nGemProvider.sItemStack.get());
 			}
