@@ -28,6 +28,7 @@ public class ModuleOre
 
 	public static ItemVariant variantGemFluorite;
 	public static ItemVariant variantGemApatite;
+	public static ItemVariant variantGemSulfur;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -70,6 +71,7 @@ public class ModuleOre
 			itemMaterials.setCreativeTab(ApiMain.creativeTab);
 			itemMaterials.registerVariant(0, variantGemApatite = new ItemVariant("apatite_gem", "gemApatite"));
 			itemMaterials.registerVariant(1, variantGemFluorite = new ItemVariant("fluorite_gem", "gemFluorite"));
+			itemMaterials.registerVariant(2, variantGemSulfur = new ItemVariant("sulfur_gem", "gemSulfur"));
 			ForgeRegistries.ITEMS.register(itemMaterials);
 			if (ApiMain.side.isClient()) {
 				for (Tuple<Integer, ItemVariant> tuple : itemMaterials.getVariants()) {
@@ -84,6 +86,7 @@ public class ModuleOre
 		erMod.createItemStack.register(ic -> {
 			ApiOre.itemStackGemApatite = variantGemApatite.createItemStack();
 			ApiOre.itemStackGemFluorite = variantGemFluorite.createItemStack();
+			ApiOre.itemStackGemSulfur = variantGemSulfur.createItemStack();
 		});
 		erMod.hookDecorator.register(() -> {
 

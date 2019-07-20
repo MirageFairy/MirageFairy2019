@@ -3,9 +3,11 @@ item.mirageFairy.name=Mirage Fairy
 item.mirageFlowerSeeds.name=Mirage Flower Seeds
 item.fairyCrystal.name=Fairy Crystal
 tile.oreApatite.name=Apatite Ore
-tile.oreFluorite.name=Fluorite Ore
 item.gemApatite.name=Apatite
+tile.oreFluorite.name=Fluorite Ore
 item.gemFluorite.name=Fluorite
+tile.oreSulfur.name=Sulfur Ore
+item.gemSulfur.name=Sulfur
 
 item.mirageFairy.air.name=Airia
 item.mirageFairy.water.name=Wateria

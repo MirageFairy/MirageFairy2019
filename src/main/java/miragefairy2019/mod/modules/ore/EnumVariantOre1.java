@@ -18,7 +18,9 @@ import net.minecraft.util.math.MathHelper;
 public enum EnumVariantOre1 implements IStringSerializable, IOreVariant
 {
 	APATITE_ORE(0, "apatite_ore", "oreApatite", 1, new GemProvider(() -> ApiOre.itemStackGemApatite.copy(), 3, 2, 1, 3)),
-	FLUORITE_ORE(1, "fluorite_ore", "oreFluorite", 2, new GemProvider(() -> ApiOre.itemStackGemFluorite.copy(), 3, 2, 20, 40)),;
+	FLUORITE_ORE(1, "fluorite_ore", "oreFluorite", 2, new GemProvider(() -> ApiOre.itemStackGemFluorite.copy(), 3, 2, 20, 40)),
+	SULFUR_ORE(2, "sulfur_ore", "oreSulfur", 1, new GemProvider(() -> ApiOre.itemStackGemSulfur.copy(), 5, 3, 1, 3)),
+	;
 
 	//
 

@@ -1,6 +1,7 @@
 {
 	"variants": {
 		"variant=0": { "model": "miragefairy2019:apatite_ore" },
-		"variant=1": { "model": "miragefairy2019:fluorite_ore" }
+		"variant=1": { "model": "miragefairy2019:fluorite_ore" },
+		"variant=2": { "model": "miragefairy2019:sulfur_ore" }
 	}
 }
