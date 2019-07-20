@@ -171,24 +171,24 @@ public class BlockOreSeed extends Block
 		//
 
 		public final int metadata;
-		public final String name;
+		public final String resourceName;
 		public final String unlocalizedName;
 
-		private EnumVariant(int metadata, String name, String unlocalizedName)
+		private EnumVariant(int metadata, String resourceName, String unlocalizedName)
 		{
 			this.metadata = metadata;
-			this.name = name;
+			this.resourceName = resourceName;
 			this.unlocalizedName = unlocalizedName;
 		}
 
 		public String toString()
 		{
-			return this.name;
+			return this.resourceName;
 		}
 
 		public String getName()
 		{
-			return this.name;
+			return this.resourceName;
 		}
 
 	}
