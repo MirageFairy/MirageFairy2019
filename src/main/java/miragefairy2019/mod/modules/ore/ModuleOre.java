@@ -97,22 +97,22 @@ public class ModuleOre
 				private WorldGenMinable worldGenOreSeed2 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.LAPIS), 7);
 				private WorldGenMinable worldGenOreSeed3 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.DIAMOND), 8);
 				private WorldGenMinable worldGenOreSeed4 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.IRON), 9);
-				private WorldGenMinable worldGenOreSeed5 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.MEDIUM), 13);
-				private WorldGenMinable worldGenOreSeed6 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.COAL), 17);
-				private WorldGenMinable worldGenOreSeed7 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.LARGE), 25);
-				private WorldGenMinable worldGenOreSeed8 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.DIRT), 33);
+				private WorldGenMinable worldGenOreSeed5 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.MEDIUM), 12);
+				private WorldGenMinable worldGenOreSeed6 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.LARGE), 15);
+				private WorldGenMinable worldGenOreSeed7 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.COAL), 17);
+				private WorldGenMinable worldGenOreSeed8 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.HUGE), 20);
 
 				@SubscribeEvent
 				public void accept(OreGenEvent.Post event)
 				{
-					genStandardOre(event, 512, worldGenOreSeed1, 0, 255);
-					genStandardOre(event, 384, worldGenOreSeed2, 0, 255);
-					genStandardOre(event, 256, worldGenOreSeed3, 0, 255);
-					genStandardOre(event, 192, worldGenOreSeed4, 0, 255);
-					genStandardOre(event, 128, worldGenOreSeed5, 0, 255);
-					genStandardOre(event, 96, worldGenOreSeed6, 0, 255);
-					genStandardOre(event, 64, worldGenOreSeed7, 0, 255);
-					genStandardOre(event, 32, worldGenOreSeed8, 0, 255);
+					genStandardOre(event, 474, worldGenOreSeed1, 0, 255);
+					genStandardOre(event, 293, worldGenOreSeed2, 0, 255);
+					genStandardOre(event, 272, worldGenOreSeed3, 0, 255);
+					genStandardOre(event, 263, worldGenOreSeed4, 0, 255);
+					genStandardOre(event, 144, worldGenOreSeed5, 0, 255);
+					genStandardOre(event, 120, worldGenOreSeed6, 0, 255);
+					genStandardOre(event, 90, worldGenOreSeed7, 0, 255);
+					genStandardOre(event, 37, worldGenOreSeed8, 0, 255);
 				}
 
 				private void genStandardOre(OreGenEvent.Post event, int count, WorldGenerator generator, int minHeightInclusive, int maxHeightExclusive)

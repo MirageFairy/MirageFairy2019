@@ -187,9 +187,9 @@ public class BlockOreSeed extends Block
 		DIAMOND(2, "diamond", "diamond"),
 		IRON(3, "iron", "iron"),
 		MEDIUM(4, "medium", "medium"),
-		COAL(5, "coal", "coal"),
-		LARGE(6, "large", "large"),
-		DIRT(7, "dirt", "dirt"),
+		LARGE(5, "large", "large"),
+		COAL(6, "coal", "coal"),
+		HUGE(7, "huge", "huge"),
 		;
 
 		//
