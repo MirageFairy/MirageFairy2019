@@ -174,7 +174,9 @@ public class ModuleFairy
 			itemFairyCrystal.setUnlocalizedName("fairyCrystal");
 			itemFairyCrystal.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.ITEMS.register(itemFairyCrystal);
-			ModelLoader.setCustomModelResourceLocation(itemFairyCrystal, 0, new ModelResourceLocation(itemFairyCrystal.getRegistryName(), null));
+			if (ApiMain.side.isClient()) {
+				ModelLoader.setCustomModelResourceLocation(itemFairyCrystal, 0, new ModelResourceLocation(itemFairyCrystal.getRegistryName(), null));
+			}
 
 		});
 		erMod.registerItemColorHandler.register(() -> {

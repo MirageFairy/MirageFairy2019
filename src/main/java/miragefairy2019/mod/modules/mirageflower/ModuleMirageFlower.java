@@ -36,7 +36,9 @@ public class ModuleMirageFlower
 			itemMirageFlowerSeeds.setUnlocalizedName("mirageFlowerSeeds");
 			itemMirageFlowerSeeds.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.ITEMS.register(itemMirageFlowerSeeds);
-			ModelLoader.setCustomModelResourceLocation(itemMirageFlowerSeeds, 0, new ModelResourceLocation(itemMirageFlowerSeeds.getRegistryName(), null));
+			if (ApiMain.side.isClient()) {
+				ModelLoader.setCustomModelResourceLocation(itemMirageFlowerSeeds, 0, new ModelResourceLocation(itemMirageFlowerSeeds.getRegistryName(), null));
+			}
 
 		});
 		erMod.registerBlock.register(b -> {

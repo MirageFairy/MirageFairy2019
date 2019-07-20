@@ -47,11 +47,13 @@ public class ModuleOre
 			itemOre1.setUnlocalizedName("ore1");
 			itemOre1.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.ITEMS.register(itemOre1);
-			for (IOreVariant variant : blockOre1.variantList) {
-				ModelLoader.setCustomModelResourceLocation(
-					itemOre1,
-					variant.getMetadata(),
-					new ModelResourceLocation(new ResourceLocation(itemOre1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
+			if (ApiMain.side.isClient()) {
+				for (IOreVariant variant : blockOre1.variantList) {
+					ModelLoader.setCustomModelResourceLocation(
+						itemOre1,
+						variant.getMetadata(),
+						new ModelResourceLocation(new ResourceLocation(itemOre1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
+				}
 			}
 
 		});
