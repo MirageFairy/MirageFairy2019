@@ -2,6 +2,8 @@ itemGroup.mirageFairy2019=MirageFairy 2019
 item.mirageFairy.name=Mirage Fairy
 item.mirageFlowerSeeds.name=Mirage Flower Seeds
 item.fairyCrystal.name=Fairy Crystal
+tile.oreApatite.name=Apatite Ore
+tile.oreFluorite.name=Fluorite Ore
 
 item.mirageFairy.air.name=Airia
 item.mirageFairy.water.name=Wateria

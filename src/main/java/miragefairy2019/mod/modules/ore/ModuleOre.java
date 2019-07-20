@@ -4,8 +4,11 @@ import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.ApiOre;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -15,16 +18,41 @@ public class ModuleOre
 {
 
 	public static BlockOreSeed blockOreSeed;
+	public static BlockOre<EnumVariantOre1> blockOre1;
+
+	public static ItemOre<EnumVariantOre1> itemOre1;
 
 	public static void init(EventRegistryMod erMod)
 	{
 		erMod.registerBlock.register(b -> {
 
-			// ブロック
+			// 鉱石の種
 			ApiOre.blockOreSeed = blockOreSeed = new BlockOreSeed();
 			blockOreSeed.setRegistryName(ModMirageFairy2019.MODID, "ore_seed");
 			blockOreSeed.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.BLOCKS.register(blockOreSeed);
+
+			// 鉱石
+			ApiOre.blockOre1 = blockOre1 = new BlockOre<>(EnumVariantOre1.variantList);
+			blockOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
+			blockOre1.setCreativeTab(ApiMain.creativeTab);
+			ForgeRegistries.BLOCKS.register(blockOre1);
+
+		});
+		erMod.registerItem.register(b -> {
+
+			// 鉱石
+			ApiOre.itemOre1 = itemOre1 = new ItemOre<>(blockOre1);
+			itemOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
+			itemOre1.setUnlocalizedName("ore1");
+			itemOre1.setCreativeTab(ApiMain.creativeTab);
+			ForgeRegistries.ITEMS.register(itemOre1);
+			for (IOreVariant variant : blockOre1.variantList) {
+				ModelLoader.setCustomModelResourceLocation(
+					itemOre1,
+					variant.getMetadata(),
+					new ModelResourceLocation(new ResourceLocation(itemOre1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
+			}
 
 		});
 		erMod.hookDecorator.register(() -> {
