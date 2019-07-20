@@ -74,14 +74,14 @@ public class ModuleOre
 				@SubscribeEvent
 				public void accept(OreGenEvent.Post event)
 				{
-					genStandardOre(event, 256, worldGenOreSeed1, 0, 255);
-					genStandardOre(event, 192, worldGenOreSeed2, 0, 255);
-					genStandardOre(event, 128, worldGenOreSeed3, 0, 255);
-					genStandardOre(event, 96, worldGenOreSeed4, 0, 255);
-					genStandardOre(event, 64, worldGenOreSeed5, 0, 255);
-					genStandardOre(event, 48, worldGenOreSeed6, 0, 255);
-					genStandardOre(event, 32, worldGenOreSeed7, 0, 255);
-					genStandardOre(event, 16, worldGenOreSeed8, 0, 255);
+					genStandardOre(event, 512, worldGenOreSeed1, 0, 255);
+					genStandardOre(event, 384, worldGenOreSeed2, 0, 255);
+					genStandardOre(event, 256, worldGenOreSeed3, 0, 255);
+					genStandardOre(event, 192, worldGenOreSeed4, 0, 255);
+					genStandardOre(event, 128, worldGenOreSeed5, 0, 255);
+					genStandardOre(event, 96, worldGenOreSeed6, 0, 255);
+					genStandardOre(event, 64, worldGenOreSeed7, 0, 255);
+					genStandardOre(event, 32, worldGenOreSeed8, 0, 255);
 				}
 
 				private void genStandardOre(OreGenEvent.Post event, int count, WorldGenerator generator, int minHeightInclusive, int maxHeightExclusive)
