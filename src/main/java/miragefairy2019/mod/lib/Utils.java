@@ -6,10 +6,16 @@ import java.util.Random;
 public class Utils
 {
 
+	@Deprecated // TODO 削除
+	public static int randomInt(double d, Random random)
+	{
+		return randomInt(random, d);
+	}
+
 	/**
 	 * 期待値がdになるように整数の乱数を生成します。
 	 */
-	public static int randomInt(double d, Random random)
+	public static int randomInt(Random random, double d)
 	{
 		int i = (int) Math.floor(d);
 		double mod = d - i;
