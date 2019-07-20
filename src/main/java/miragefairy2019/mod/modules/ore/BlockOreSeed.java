@@ -125,13 +125,13 @@ public class BlockOreSeed extends Block
 
 			IBlockState blockStateAfter;
 			if (variant == EnumVariant.MEDIUM) {
-				if (s < 0.95) {
+				if (s < 0.10) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.APATITE_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 				}
 			} else if (variant == EnumVariant.LAPIS) {
-				if (s < 0.05) {
+				if (s < 0.10) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.FLUORITE_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
