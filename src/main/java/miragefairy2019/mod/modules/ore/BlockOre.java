@@ -1,5 +1,7 @@
 package miragefairy2019.mod.modules.ore;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -87,7 +89,8 @@ public class BlockOre<V extends IOreVariant> extends Block
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		drops.add(new ItemStack(Item.getItemFromBlock(this), 1, getMetaFromState(state)));
+		Random random = world instanceof World ? ((World) world).rand : RANDOM;
+		variantList.byMetadata(getMetaFromState(state)).getDrops(drops, random, this, getMetaFromState(state), fortune);
 	}
 
 	@Override
@@ -97,9 +100,10 @@ public class BlockOre<V extends IOreVariant> extends Block
 	}
 
 	@Override
-	public int getExpDrop(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
+	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune)
 	{
-		return 0;
+		Random random = world instanceof World ? ((World) world).rand : new Random();
+		return variantList.byMetadata(getMetaFromState(state)).getExpDrop(random, fortune);
 	}
 
 	//
