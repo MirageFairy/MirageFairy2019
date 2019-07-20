@@ -1,0 +1,12 @@
+{
+	"variants": {
+		"variant=tiny": { "model": "minecraft:stone" },
+		"variant=lapis": { "model": "minecraft:stone" },
+		"variant=diamond": { "model": "minecraft:stone" },
+		"variant=iron": { "model": "minecraft:stone" },
+		"variant=medium": { "model": "minecraft:stone" },
+		"variant=coal": { "model": "minecraft:stone" },
+		"variant=large": { "model": "minecraft:stone" },
+		"variant=dirt": { "model": "minecraft:stone" }
+	}
+}
