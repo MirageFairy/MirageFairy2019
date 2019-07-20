@@ -4,6 +4,9 @@ import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.ApiOre;
+import miragefairy2019.mod.lib.multi.ItemMulti;
+import miragefairy2019.mod.lib.multi.ItemVariant;
+import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -21,6 +24,10 @@ public class ModuleOre
 	public static BlockOre<EnumVariantOre1> blockOre1;
 
 	public static ItemOre<EnumVariantOre1> itemOre1;
+	public static ItemMulti<ItemVariant> itemMaterials;
+
+	public static ItemVariant variantGemFluorite;
+	public static ItemVariant variantGemApatite;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -56,6 +63,27 @@ public class ModuleOre
 				}
 			}
 
+			// マテリアル
+			ApiOre.itemMaterials = itemMaterials = new ItemMulti<>();
+			itemMaterials.setRegistryName(ModMirageFairy2019.MODID, "materials");
+			itemMaterials.setUnlocalizedName("materials");
+			itemMaterials.setCreativeTab(ApiMain.creativeTab);
+			itemMaterials.registerVariant(0, variantGemApatite = new ItemVariant("apatite_gem", "gemApatite"));
+			itemMaterials.registerVariant(1, variantGemFluorite = new ItemVariant("fluorite_gem", "gemFluorite"));
+			ForgeRegistries.ITEMS.register(itemMaterials);
+			if (ApiMain.side.isClient()) {
+				for (Tuple<Integer, ItemVariant> tuple : itemMaterials.getVariants()) {
+					ModelLoader.setCustomModelResourceLocation(
+						itemMaterials,
+						tuple.x,
+						new ModelResourceLocation(new ResourceLocation(itemMaterials.getRegistryName().getResourceDomain(), tuple.y.registryName), null));
+				}
+			}
+
+		});
+		erMod.createItemStack.register(ic -> {
+			ApiOre.itemStackGemApatite = variantGemApatite.createItemStack();
+			ApiOre.itemStackGemFluorite = variantGemFluorite.createItemStack();
 		});
 		erMod.hookDecorator.register(() -> {
 

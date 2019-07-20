@@ -4,6 +4,8 @@ item.mirageFlowerSeeds.name=ミラージュの花の種
 item.fairyCrystal.name=妖晶
 tile.oreApatite.name=燐灰石鉱石
 tile.oreFluorite.name=蛍石鉱石
+item.gemApatite.name=燐灰石
+item.gemFluorite.name=蛍石
 
 item.mirageFairy.air.name=アイリャ
 item.mirageFairy.water.name=ワテーリャ
