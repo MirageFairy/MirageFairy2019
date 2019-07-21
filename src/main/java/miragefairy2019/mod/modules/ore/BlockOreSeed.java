@@ -145,6 +145,7 @@ public class BlockOreSeed extends Block
 			} else {
 				blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 			}
+			//blockStateAfter = ((BlockColored) Blocks.WOOL).getStateFromMeta(getMetaFromState(state));
 
 			Deque<BlockPos> poses = new ArrayDeque<>();
 			poses.addLast(pos);
