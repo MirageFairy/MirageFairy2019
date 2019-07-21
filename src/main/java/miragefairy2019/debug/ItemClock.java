@@ -97,6 +97,7 @@ public class ItemClock extends Item
 			}
 		}
 
+		System.out.println("------");
 		map.entrySet().stream().forEach(e -> {
 			System.out.println(e.getKey() + "\t" + e.getValue());
 		});
