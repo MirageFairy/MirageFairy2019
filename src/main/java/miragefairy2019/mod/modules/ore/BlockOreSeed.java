@@ -191,6 +191,16 @@ public class BlockOreSeed extends Block
 		LARGE(5, "large", "large"),
 		COAL(6, "coal", "coal"),
 		HUGE(7, "huge", "huge"),
+
+		STRING(8, "string", "string"),
+		HORIZONTAL(9, "horizontal", "horizontal"),
+		VERTICAL(10, "vertical", "vertical"),
+		POINT(11, "point", "point"),
+		STAR(12, "star", "star"),
+		RING(13, "ring", "ring"),
+		PYRAMID(14, "pyramid", "pyramid"),
+		CUBE(15, "cube", "cube"),
+
 		;
 
 		//
