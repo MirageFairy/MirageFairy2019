@@ -137,7 +137,7 @@ public class BlockOreSeed extends Block
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 				}
 			} else if (variant == EnumVariant.STAR) {
-				if (s < 0.30) {
+				if (pos.getY() <= 10 && s < 0.30) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.SULFUR_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
