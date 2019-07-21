@@ -124,20 +124,20 @@ public class BlockOreSeed extends Block
 			double s = random.nextDouble();
 
 			IBlockState blockStateAfter;
-			if (variant == EnumVariant.MEDIUM) {
-				if (s < 0.10) {
+			if (variant == EnumVariant.LARGE) {
+				if (s < 0.15) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.APATITE_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 				}
-			} else if (variant == EnumVariant.LAPIS) {
-				if (s < 0.10) {
+			} else if (variant == EnumVariant.PYRAMID) {
+				if (s < 0.15) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.FLUORITE_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 				}
-			} else if (variant == EnumVariant.TINY) {
-				if (s < 0.10) {
+			} else if (variant == EnumVariant.LAPIS) {
+				if (s < 0.30) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.SULFUR_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
