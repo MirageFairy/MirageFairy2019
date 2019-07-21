@@ -156,7 +156,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 		// 追加の種
 		{
-			int count = Utils.randomInt(isMaxAge(state) ? fortune * 0.01 : 0, random);
+			int count = Utils.randomInt(random, isMaxAge(state) ? fortune * 0.01 : 0);
 			for (int i = 0; i < count; i++) {
 				drops.add(ApiMirageFlower.itemStackMirageFlowerSeeds.copy());
 			}
@@ -164,7 +164,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 		// クリスタル
 		{
-			int count = Utils.randomInt(isMaxAge(state) ? 1 + fortune * 0.5 : 0, random);
+			int count = Utils.randomInt(random, isMaxAge(state) ? 1 + fortune * 0.5 : 0);
 			for (int i = 0; i < count; i++) {
 				drops.add(ApiFairy.itemStackFairyCrystal.copy());
 			}

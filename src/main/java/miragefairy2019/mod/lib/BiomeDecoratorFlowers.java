@@ -19,7 +19,7 @@ public class BiomeDecoratorFlowers
 
 	public void decorate(DecorateBiomeEvent.Post event)
 	{
-		int trialCount = Utils.randomInt(trialsPerChunk, event.getRand());
+		int trialCount = Utils.randomInt(event.getRand(), trialsPerChunk);
 
 		for (int i = 0; i < trialCount; ++i) {
 			int offsetX = event.getRand().nextInt(16);
