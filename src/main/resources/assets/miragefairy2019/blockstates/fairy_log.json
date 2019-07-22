@@ -1,0 +1,33 @@
+{
+	"variants": {
+		"facing=north,variant=oak": { "model": "miragefairy2019:oak_fairy_log" },
+		"facing=south,variant=oak": { "model": "miragefairy2019:oak_fairy_log", "y": 180 },
+		"facing=west,variant=oak":  { "model": "miragefairy2019:oak_fairy_log", "y": 270 },
+		"facing=east,variant=oak":  { "model": "miragefairy2019:oak_fairy_log", "y": 90 },
+
+		"facing=north,variant=birch": { "model": "miragefairy2019:birch_fairy_log" },
+		"facing=south,variant=birch": { "model": "miragefairy2019:birch_fairy_log", "y": 180 },
+		"facing=west,variant=birch":  { "model": "miragefairy2019:birch_fairy_log", "y": 270 },
+		"facing=east,variant=birch":  { "model": "miragefairy2019:birch_fairy_log", "y": 90 },
+
+		"facing=north,variant=spruce": { "model": "miragefairy2019:spruce_fairy_log" },
+		"facing=south,variant=spruce": { "model": "miragefairy2019:spruce_fairy_log", "y": 180 },
+		"facing=west,variant=spruce":  { "model": "miragefairy2019:spruce_fairy_log", "y": 270 },
+		"facing=east,variant=spruce":  { "model": "miragefairy2019:spruce_fairy_log", "y": 90 },
+
+		"facing=north,variant=jungle": { "model": "miragefairy2019:jungle_fairy_log" },
+		"facing=south,variant=jungle": { "model": "miragefairy2019:jungle_fairy_log", "y": 180 },
+		"facing=west,variant=jungle":  { "model": "miragefairy2019:jungle_fairy_log", "y": 270 },
+		"facing=east,variant=jungle":  { "model": "miragefairy2019:jungle_fairy_log", "y": 90 },
+
+		"facing=north,variant=acacia": { "model": "miragefairy2019:acacia_fairy_log" },
+		"facing=south,variant=acacia": { "model": "miragefairy2019:acacia_fairy_log", "y": 180 },
+		"facing=west,variant=acacia":  { "model": "miragefairy2019:acacia_fairy_log", "y": 270 },
+		"facing=east,variant=acacia":  { "model": "miragefairy2019:acacia_fairy_log", "y": 90 },
+
+		"facing=north,variant=dark_oak": { "model": "miragefairy2019:dark_oak_fairy_log" },
+		"facing=south,variant=dark_oak": { "model": "miragefairy2019:dark_oak_fairy_log", "y": 180 },
+		"facing=west,variant=dark_oak":  { "model": "miragefairy2019:dark_oak_fairy_log", "y": 270 },
+		"facing=east,variant=dark_oak":  { "model": "miragefairy2019:dark_oak_fairy_log", "y": 90 }
+    }
+}
