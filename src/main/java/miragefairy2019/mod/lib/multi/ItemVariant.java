@@ -38,9 +38,14 @@ public class ItemVariant
 		this.item = item;
 	}
 
+	public ItemStack createItemStack(int amount)
+	{
+		return new ItemStack(item, amount, metadata);
+	}
+
 	public ItemStack createItemStack()
 	{
-		return new ItemStack(item, 1, metadata);
+		return createItemStack(1);
 	}
 
 	public String getUnlocalizedName()
