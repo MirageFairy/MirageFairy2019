@@ -8,6 +8,7 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairy;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.lib.Utils;
+import miragefairy2019.mod.modules.fairy.ItemFairyCrystal.Drop;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.Minecraft;
@@ -199,6 +200,50 @@ public class ModuleFairy
 		erMod.createItemStack.register(ic -> {
 			ApiFairy.itemStackMirageFairyMain = FairyTypes.magentaglazedterracotta.createItemStack();
 			ApiFairy.itemStackFairyCrystal = new ItemStack(itemFairyCrystal);
+
+			{
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.air.createItemStack(), 1));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.water.createItemStack(), 0.5));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.lava.createItemStack(), 0.15));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.fire.createItemStack(), 0.015));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.thunder.createItemStack(), 0.0045));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.sun.createItemStack(), 0.000081));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.moon.createItemStack(), 0.000081));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.star.createItemStack(), 0.00027));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.stone.createItemStack(), 0.5));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.dirt.createItemStack(), 0.5));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.sand.createItemStack(), 0.5));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.gravel.createItemStack(), 0.15));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.iron.createItemStack(), 0.06));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.gold.createItemStack(), 0.018));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.diamond.createItemStack(), 0.0054));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.emerald.createItemStack(), 0.0054));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.redstone.createItemStack(), 0.018));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.lapislazuli.createItemStack(), 0.0054));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.enderman.createItemStack(), 0.0027));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.spider.createItemStack(), 0.03));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.enderdragon.createItemStack(), 0.00081));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.chicken.createItemStack(), 0.1));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.skeleton.createItemStack(), 0.1));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.zombie.createItemStack(), 0.1));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.witherskeleton.createItemStack(), 0.0027));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.wither.createItemStack(), 0.00081));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.creeper.createItemStack(), 0.03));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.wheat.createItemStack(), 0.03));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.lilac.createItemStack(), 0.009));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.torch.createItemStack(), 0.1));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.furnace.createItemStack(), 0.03));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.magentaglazedterracotta.createItemStack(), 0.009));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.bread.createItemStack(), 0.03));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.daytime.createItemStack(), 0.02));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.night.createItemStack(), 0.02));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.morning.createItemStack(), 0.006));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.fine.createItemStack(), 0.02));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.rain.createItemStack(), 0.006));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.plains.createItemStack(), 0.05));
+				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.forest.createItemStack(), 0.015));
+			}
+
 		});
 	}
 
