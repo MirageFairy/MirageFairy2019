@@ -34,6 +34,10 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
+configurations {
+    adder
+}
+
 repositories {
     maven { url 'https://mirrgieriana.github.io/mirrg.boron/maven' }
 }
@@ -62,6 +66,7 @@ dependencies {
 
 	compile group: 'mirrg.boron', name: 'mirrg.boron.util', version: '[3.17,4['
 	compile group: 'mirrg.boron', name: 'mirrg.boron.swing', version: '0.1+'
+	adder group: 'mirrg.boron', name: 'mirrg.boron.util', version: '[3.17,4['
 }
 
 processResources {
@@ -81,4 +86,8 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+jar {
+    from configurations.adder.collect { it.isDirectory() ? it : zipTree(it) }
 }
