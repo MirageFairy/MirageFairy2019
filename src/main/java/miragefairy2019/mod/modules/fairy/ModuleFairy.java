@@ -17,6 +17,8 @@ import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModuleFairy
 {
@@ -180,22 +182,29 @@ public class ModuleFairy
 			}
 
 		});
-		erMod.registerItemColorHandler.register(() -> {
-
-			Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
-				@Override
-				public int colorMultiplier(ItemStack stack, int tintIndex)
+		erMod.registerItemColorHandler.register(new Runnable() {
+			@SideOnly(Side.CLIENT)
+			@Override
+			public void run()
+			{
+				@SideOnly(Side.CLIENT)
+				class ItemColorImpl implements IItemColor
 				{
-					VariantMirageFairy variant = itemMirageFairy.getVariant(stack).orElse(null);
-					if (tintIndex == 0) return variant.type.colorSet.skin;
-					if (tintIndex == 1) return 0x8888ff;
-					if (tintIndex == 2) return variant.type.colorSet.dark;
-					if (tintIndex == 3) return variant.type.colorSet.bright;
-					if (tintIndex == 4) return variant.type.colorSet.hair;
-					return 0xFFFFFF;
-				}
-			}, itemMirageFairy);
 
+					@Override
+					public int colorMultiplier(ItemStack stack, int tintIndex)
+					{
+						VariantMirageFairy variant = itemMirageFairy.getVariant(stack).orElse(null);
+						if (tintIndex == 0) return variant.type.colorSet.skin;
+						if (tintIndex == 1) return 0x8888ff;
+						if (tintIndex == 2) return variant.type.colorSet.dark;
+						if (tintIndex == 3) return variant.type.colorSet.bright;
+						if (tintIndex == 4) return variant.type.colorSet.hair;
+						return 0xFFFFFF;
+					}
+				}
+				Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(), itemMirageFairy);
+			}
 		});
 		erMod.createItemStack.register(ic -> {
 			ApiFairy.itemStackMirageFairyMain = FairyTypes.magentaglazedterracotta.createItemStack();
