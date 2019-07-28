@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import miragefairy2019.mod.lib.multi.ItemMulti;
+import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -27,25 +28,28 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy>
 
 		{
 			String stringRare = IntStream.range(0, variant.type.rare).mapToObj(i -> "★").collect(Collectors.joining());
-			TextFormatting colorRare;
-			switch (variant.type.rare) {
+			TextFormatting colorRare = LIGHT_PURPLE;
+
+			String stringRareRank = IntStream.range(0, variant.type.rank - 1).mapToObj(i -> "★").collect(Collectors.joining());
+			TextFormatting colorRareRank;
+			switch (variant.type.rank) {
 				case 1:
-					colorRare = GRAY;
+					colorRareRank = GRAY;
 					break;
 				case 2:
-					colorRare = RED;
+					colorRareRank = RED;
 					break;
 				case 3:
-					colorRare = BLUE;
+					colorRareRank = BLUE;
 					break;
 				case 4:
-					colorRare = GREEN;
+					colorRareRank = GREEN;
 					break;
 				case 5:
-					colorRare = YELLOW;
+					colorRareRank = YELLOW;
 					break;
 				default:
-					colorRare = GRAY;
+					colorRareRank = LIGHT_PURPLE;
 					break;
 			}
 
@@ -74,7 +78,7 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy>
 			TextFormatting colorRank;
 			switch (variant.type.rank) {
 				case 1:
-					colorRank = WHITE;
+					colorRank = GRAY;
 					break;
 				case 2:
 					colorRank = RED;
@@ -93,7 +97,7 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy>
 					break;
 			}
 
-			tooltip.add("" + "Type: " + colorRare + stringRare + " " + colorRank + variant.type.name + " " + stringRank);
+			tooltip.add("" + "Type: " + colorRare + stringRare + colorRareRank + stringRareRank + " " + WHITE + variant.type.name + " " + colorRank + stringRank);
 		}
 
 		tooltip.add("    " + format(shine, variant.type.manaSet.shine));
@@ -103,13 +107,28 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy>
 
 		tooltip.add("" + YELLOW + "Cost: " + WHITE + String.format("%.1f", variant.type.cost));
 
+		{
+			String string = variant.type.abilitySet.tuples.suppliterator()
+				.sorted((a, b) -> -a.y.compareTo(b.y))
+				.map(tuple -> Tuple.of(tuple.x, format(tuple.y)))
+				.filter(tuple -> tuple.y >= 10)
+				.map(tuple -> "" + DARK_RED + tuple.x + WHITE + "(" + tuple.y + ")")
+				.join(", ");
+			tooltip.add("" + GREEN + "Abilities: " + WHITE + string);
+		}
+
+	}
+
+	private int format(double value)
+	{
+		int value2 = (int) value;
+		if (value2 == 0 && value > 0) value2 = 1;
+		return value2;
 	}
 
 	private String format(EnumManaType manaType, double value)
 	{
-		int value2 = (int) value;
-		if (value2 == 0 && value > 0) value2 = 1;
-		return "" + manaType.color + String.format("%4d", value2);
+		return "" + manaType.color + String.format("%4d", format(value));
 	}
 
 }

@@ -9,6 +9,7 @@ public final class MirageFairyType
 	public final int rank;
 	public final double cost;
 	public final MirageFairyManaSet manaSet;
+	public final MirageFairyAbilitySet abilitySet;
 	public final MirageFairyColorSet colorSet;
 
 	public MirageFairyType(
@@ -18,6 +19,7 @@ public final class MirageFairyType
 		int rank,
 		double cost,
 		MirageFairyManaSet manaSet,
+		MirageFairyAbilitySet abilitySet,
 		MirageFairyColorSet colorSet)
 	{
 		this.modid = modid;
@@ -26,6 +28,7 @@ public final class MirageFairyType
 		this.rank = rank;
 		this.cost = cost;
 		this.manaSet = manaSet;
+		this.abilitySet = abilitySet;
 		this.colorSet = colorSet;
 	}
 

@@ -6,7 +6,11 @@ import net.minecraft.item.ItemStack;
 public class ApiFairy
 {
 
-	public static Item itemMirageFairy;
+	public static Item itemMirageFairyR1;
+	public static Item itemMirageFairyR2;
+	public static Item itemMirageFairyR3;
+	public static Item itemMirageFairyR4;
+	public static Item itemMirageFairyR5;
 	public static Item itemFairyCrystal;
 
 	public static ItemStack itemStackMirageFairyMain;

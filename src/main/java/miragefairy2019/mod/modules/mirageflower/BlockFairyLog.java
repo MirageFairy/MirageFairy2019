@@ -157,7 +157,7 @@ public class BlockFairyLog extends Block
 		@SuppressWarnings("unused")
 		Random random = world instanceof World ? ((World) world).rand : new Random();
 
-		ItemStack itemStack = ModuleFairy.FairyTypes.forest.createItemStack();
+		ItemStack itemStack = ModuleFairy.FairyTypes.forest[0].createItemStack();
 
 		drops.add(itemStack);
 
