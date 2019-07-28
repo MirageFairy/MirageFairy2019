@@ -8,6 +8,8 @@ tile.oreFluorite.name=Fluorite Ore
 item.gemFluorite.name=Fluorite
 tile.oreSulfur.name=Sulfur Ore
 item.gemSulfur.name=Sulfur
+item.dustMiragium.name=Miragium Dust
+item.dustTinyMiragium.name=Tiny Pile of Miragium Dust
 
 item.mirageFairy.air.name=Airia
 item.mirageFairy.water.name=Wateria

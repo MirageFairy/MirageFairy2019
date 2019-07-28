@@ -8,6 +8,8 @@ tile.oreFluorite.name=蛍石鉱石
 item.gemFluorite.name=蛍石
 tile.oreSulfur.name=硫黄鉱石
 item.gemSulfur.name=硫黄
+item.dustMiragium.name=ミラジウムの粉
+item.dustTinyMiragium.name=ミラジウムの微粉
 
 item.mirageFairy.air.name=アイリャ
 item.mirageFairy.water.name=ワテーリャ

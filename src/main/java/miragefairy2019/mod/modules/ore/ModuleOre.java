@@ -25,6 +25,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleOre
 {
@@ -38,6 +39,8 @@ public class ModuleOre
 	public static ItemVariant variantGemFluorite;
 	public static ItemVariant variantGemApatite;
 	public static ItemVariant variantGemSulfur;
+	public static ItemVariant variantDustMiragium;
+	public static ItemVariant variantDustTinyMiragium;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -81,6 +84,8 @@ public class ModuleOre
 			itemMaterials.registerVariant(0, variantGemApatite = new ItemVariant("apatite_gem", "gemApatite"));
 			itemMaterials.registerVariant(1, variantGemFluorite = new ItemVariant("fluorite_gem", "gemFluorite"));
 			itemMaterials.registerVariant(2, variantGemSulfur = new ItemVariant("sulfur_gem", "gemSulfur"));
+			itemMaterials.registerVariant(3, variantDustMiragium = new ItemVariant("miragium_dust", "dustMiragium"));
+			itemMaterials.registerVariant(4, variantDustTinyMiragium = new ItemVariant("miragium_tiny_dust", "dustTinyMiragium"));
 			ForgeRegistries.ITEMS.register(itemMaterials);
 			if (ApiMain.side.isClient()) {
 				for (Tuple<Integer, ItemVariant> tuple : itemMaterials.getVariants()) {
@@ -96,6 +101,10 @@ public class ModuleOre
 			ApiOre.itemStackGemApatite = variantGemApatite.createItemStack();
 			ApiOre.itemStackGemFluorite = variantGemFluorite.createItemStack();
 			ApiOre.itemStackGemSulfur = variantGemSulfur.createItemStack();
+			ApiOre.itemStackDustMiragium = variantDustMiragium.createItemStack();
+			ApiOre.itemStackDustTinyMiragium = variantDustTinyMiragium.createItemStack();
+			OreDictionary.registerOre("dustMiragium", ApiOre.itemStackDustMiragium);
+			OreDictionary.registerOre("dustTinyMiragium", ApiOre.itemStackDustTinyMiragium);
 		});
 		erMod.hookDecorator.register(() -> {
 
