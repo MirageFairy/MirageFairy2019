@@ -125,7 +125,7 @@ public class ModuleMirageFlower
 				@SubscribeEvent
 				public void init(DecorateBiomeEvent.Post event)
 				{
-					int count = Utils.randomInt(event.getRand(), (event.getWorld().getHeight() / 16.0) * 100); // TODO
+					int count = Utils.randomInt(event.getRand(), (event.getWorld().getHeight() / 16.0) * 50); // TODO
 					for (int i = 0; i < count; i++) {
 						EnumFacing facing = EnumFacing.HORIZONTALS[event.getRand().nextInt(4)];
 						BlockPos posLog = event.getChunkPos().getBlock(
