@@ -10,6 +10,9 @@ public final class MirageFairyManaSet
 	public final double aqua;
 	public final double dark;
 
+	public final double max;
+	public final double sum;
+
 	public MirageFairyManaSet(
 		double shine,
 		double fire,
@@ -24,6 +27,9 @@ public final class MirageFairyManaSet
 		this.gaia = gaia;
 		this.aqua = aqua;
 		this.dark = dark;
+
+		max = Math.max(Math.max(Math.max(shine, fire), Math.max(wind, gaia)), Math.max(aqua, dark));
+		sum = shine + fire + wind + gaia + aqua + dark;
 	}
 
 	public double get(EnumManaType manaType)
