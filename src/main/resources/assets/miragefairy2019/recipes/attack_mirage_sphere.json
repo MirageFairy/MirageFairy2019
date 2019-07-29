@@ -1,0 +1,29 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "attack_mirage_sphere",
+	"ingredients": [
+		{
+			"item": "minecraft:water_bucket"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustMiragium"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "gemFluorite"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyAbilityAttack"
+		},
+		{
+			"item": "minecraft:iron_sword"
+		}
+	],
+	"result": {
+		"item": "miragefairy2019:mirage_spheres",
+		"data": 0,
+		"count": 1
+	}
+}

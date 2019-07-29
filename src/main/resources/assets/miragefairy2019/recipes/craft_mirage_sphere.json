@@ -1,0 +1,29 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "craft_mirage_sphere",
+	"ingredients": [
+		{
+			"item": "minecraft:water_bucket"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustMiragium"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "gemFluorite"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyAbilityCraft"
+		},
+		{
+			"item": "minecraft:crafting_table"
+		}
+	],
+	"result": {
+		"item": "miragefairy2019:mirage_spheres",
+		"data": 1,
+		"count": 1
+	}
+}
