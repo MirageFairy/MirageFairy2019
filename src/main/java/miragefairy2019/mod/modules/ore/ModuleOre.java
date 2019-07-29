@@ -103,8 +103,9 @@ public class ModuleOre
 			ApiOre.itemStackGemSulfur = variantGemSulfur.createItemStack();
 			ApiOre.itemStackDustMiragium = variantDustMiragium.createItemStack();
 			ApiOre.itemStackDustTinyMiragium = variantDustTinyMiragium.createItemStack();
-			OreDictionary.registerOre("dustMiragium", ApiOre.itemStackDustMiragium);
-			OreDictionary.registerOre("dustTinyMiragium", ApiOre.itemStackDustTinyMiragium);
+			for (Tuple<Integer, ItemVariant> tuple : itemMaterials.getVariants()) {
+				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
+			}
 		});
 		erMod.hookDecorator.register(() -> {
 
