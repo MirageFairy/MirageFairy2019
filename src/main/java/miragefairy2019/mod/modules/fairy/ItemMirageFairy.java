@@ -112,7 +112,7 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy>
 				.sorted((a, b) -> -a.y.compareTo(b.y))
 				.map(tuple -> Tuple.of(tuple.x, format(tuple.y)))
 				.filter(tuple -> tuple.y >= 10)
-				.map(tuple -> "" + DARK_RED + tuple.x + WHITE + "(" + tuple.y + ")")
+				.map(tuple -> "" + tuple.x.color + tuple.x + WHITE + "(" + tuple.y + ")")
 				.join(", ");
 			tooltip.add("" + GREEN + "Abilities: " + WHITE + string);
 		}
