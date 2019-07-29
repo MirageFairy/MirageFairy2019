@@ -343,6 +343,7 @@ public class ModuleFairy
 						public int colorMultiplier(ItemStack stack, int tintIndex)
 						{
 							VariantMirageFairy variant = itemMirageFairy.getVariant(stack).orElse(null);
+							if (variant == null) return 0xFFFFFF;
 							if (tintIndex == 0) return variant.type.colorSet.skin;
 							if (tintIndex == 1) return colorCloth;
 							if (tintIndex == 2) return variant.type.colorSet.dark;
