@@ -39,7 +39,10 @@ public class ModuleFairy
 	public static ItemMirageFairy itemMirageFairyR4;
 	public static ItemMirageFairy itemMirageFairyR5;
 	public static ItemFairyCrystal itemFairyCrystal;
+	public static ItemMulti<ItemVariant> itemMaterialsFairy;
 	public static ItemMulti<VariantAbility> itemMirageSpheres;
+
+	//public static ItemVariant variantBucketFairyWater;
 
 	public static VariantAbility variantMirageSphereAttack;
 	public static VariantAbility variantMirageSphereCraft;
@@ -300,6 +303,22 @@ public class ModuleFairy
 			ForgeRegistries.ITEMS.register(itemFairyCrystal);
 			if (ApiMain.side.isClient()) {
 				ModelLoader.setCustomModelResourceLocation(itemFairyCrystal, 0, new ModelResourceLocation(itemFairyCrystal.getRegistryName(), null));
+			}
+
+			// マテリアル
+			ApiFairy.itemMaterialsFairy = itemMaterialsFairy = new ItemMulti<>();
+			itemMaterialsFairy.setRegistryName(ModMirageFairy2019.MODID, "fairy_materials");
+			itemMaterialsFairy.setUnlocalizedName("materialsFairy");
+			itemMaterialsFairy.setCreativeTab(ApiMain.creativeTab);
+			//itemMaterialsFairy.registerVariant(0, variantBucketFairyWater = new ItemVariant("fairy_water_bucket", "bucketFairyWater"));
+			ForgeRegistries.ITEMS.register(itemMaterialsFairy);
+			if (ApiMain.side.isClient()) {
+				for (Tuple<Integer, ItemVariant> tuple : itemMaterialsFairy.getVariants()) {
+					ModelLoader.setCustomModelResourceLocation(
+						itemMaterialsFairy,
+						tuple.x,
+						new ModelResourceLocation(new ResourceLocation(itemMaterialsFairy.getRegistryName().getResourceDomain(), tuple.y.registryName), null));
+				}
 			}
 
 			// スフィア
