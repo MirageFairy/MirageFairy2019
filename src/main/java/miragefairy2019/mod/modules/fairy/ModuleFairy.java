@@ -458,6 +458,7 @@ public class ModuleFairy
 			for (Tuple<Integer, VariantAbility> tuple : itemMirageSpheres.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}
+			OreDictionary.registerOre("mirageFairyCrystal", new ItemStack(itemFairyCrystal));
 			OreDictionary.registerOre("mirageFairyWandCrafting", new ItemStack(itemFairyWandCrafting, 1, OreDictionary.WILDCARD_VALUE));
 
 			// ドロップ登録
