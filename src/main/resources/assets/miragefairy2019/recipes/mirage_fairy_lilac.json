@@ -1,0 +1,19 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "mirage_fairy_lilac",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyCrystal"
+		},
+		{
+			"item": "minecraft:double_plant",
+			"data": 1
+		}
+	],
+	"result": {
+		"item": "miragefairy2019:mirage_fairy",
+		"data": 18,
+		"count": 1
+	}
+}

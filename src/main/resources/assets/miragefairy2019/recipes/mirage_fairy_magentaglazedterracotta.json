@@ -1,0 +1,18 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "mirage_fairy_magentaglazedterracotta",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyCrystal"
+		},
+		{
+			"item": "minecraft:magenta_glazed_terracotta"
+		}
+	],
+	"result": {
+		"item": "miragefairy2019:mirage_fairy",
+		"data": 31,
+		"count": 1
+	}
+}
