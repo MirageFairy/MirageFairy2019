@@ -1,0 +1,22 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "fairy_sword",
+	"ingredients": [
+		{
+			"item": "minecraft:iron_sword"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "fairyWandCrafting"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "mirageSphereAttack"
+		}
+	],
+	"result": {
+		"item": "miragefairy2019:fairy_sword",
+		"data": 0,
+		"count": 1
+	}
+}

@@ -10,6 +10,7 @@ import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairy;
 import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.lib.ItemMeshDefinitionFixed;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.multi.ItemMulti;
 import miragefairy2019.mod.lib.multi.ItemVariant;
@@ -20,6 +21,7 @@ import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -41,6 +43,8 @@ public class ModuleFairy
 	public static ItemFairyCrystal itemFairyCrystal;
 	public static ItemMulti<ItemVariant> itemMaterialsFairy;
 	public static ItemMulti<VariantAbility> itemMirageSpheres;
+	public static ItemFairyWandCrafting itemFairyWandCrafting;
+	public static Item itemFairySword;
 
 	//public static ItemVariant variantBucketFairyWater;
 
@@ -338,6 +342,38 @@ public class ModuleFairy
 				}
 			}
 
+			// 加工のステッキ
+			ApiFairy.itemFairyWandCrafting = itemFairyWandCrafting = new ItemFairyWandCrafting();
+			itemFairyWandCrafting.setRegistryName(ModMirageFairy2019.MODID, "crafting_fairy_wand");
+			itemFairyWandCrafting.setUnlocalizedName("fairyWandCrafting");
+			itemFairyWandCrafting.setCreativeTab(ApiMain.creativeTab);
+			ForgeRegistries.ITEMS.register(itemFairyWandCrafting);
+			if (ApiMain.side.isClient()) {
+				new Object() {
+					@SideOnly(Side.CLIENT)
+					public void run()
+					{
+						ModelLoader.setCustomMeshDefinition(itemFairyWandCrafting, new ItemMeshDefinitionFixed(new ModelResourceLocation(itemFairyWandCrafting.getRegistryName(), null)));
+					}
+				}.run();
+			}
+
+			// 妖精剣
+			ApiFairy.itemFairySword = itemFairySword = new Item();
+			itemFairySword.setRegistryName(ModMirageFairy2019.MODID, "fairy_sword");
+			itemFairySword.setUnlocalizedName("swordFairy");
+			itemFairySword.setCreativeTab(ApiMain.creativeTab);
+			ForgeRegistries.ITEMS.register(itemFairySword);
+			if (ApiMain.side.isClient()) {
+				new Object() {
+					@SideOnly(Side.CLIENT)
+					public void run()
+					{
+						ModelLoader.setCustomMeshDefinition(itemFairySword, new ItemMeshDefinitionFixed(new ModelResourceLocation(itemFairySword.getRegistryName(), null)));
+					}
+				}.run();
+			}
+
 		});
 		erMod.registerItemColorHandler.register(new Runnable() {
 			@SideOnly(Side.CLIENT)
@@ -419,6 +455,8 @@ public class ModuleFairy
 			for (Tuple<Integer, VariantAbility> tuple : itemMirageSpheres.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}
+
+			OreDictionary.registerOre("fairyWandCrafting", new ItemStack(itemFairyWandCrafting, 1, OreDictionary.WILDCARD_VALUE));
 
 			// ドロップ登録
 			{
