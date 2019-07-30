@@ -4,6 +4,7 @@ import static miragefairy2019.mod.modules.fairy.EnumManaType.*;
 import static net.minecraft.util.text.TextFormatting.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -16,8 +17,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMirageFairy extends ItemMulti<VariantMirageFairy>
+public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements IItemMirageFairy
 {
+
+	@Override
+	public Optional<MirageFairyType> getMirageFairy(ItemStack itemStack)
+	{
+		VariantMirageFairy variant = getVariant(itemStack).orElse(null);
+		if (variant == null) return Optional.empty();
+		return Optional.of(variant.type);
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
