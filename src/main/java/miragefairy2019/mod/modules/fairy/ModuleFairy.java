@@ -416,6 +416,9 @@ public class ModuleFairy
 					}
 				}
 			}
+			for (Tuple<Integer, VariantAbility> tuple : itemMirageSpheres.getVariants()) {
+				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
+			}
 
 			// ドロップ登録
 			{
