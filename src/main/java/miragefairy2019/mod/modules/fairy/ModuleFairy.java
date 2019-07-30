@@ -10,7 +10,6 @@ import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairy;
 import miragefairy2019.mod.api.ApiMain;
-import miragefairy2019.mod.lib.ItemMeshDefinitionFixed;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.multi.ItemMulti;
 import miragefairy2019.mod.lib.multi.ItemVariant;
@@ -234,7 +233,7 @@ public class ModuleFairy
 				public void displayAllRelevantItems(NonNullList<ItemStack> itemStacks)
 				{
 					for (Tuple<Integer, VariantMirageFairy[]> variant : FairyTypes.variants) {
-						for (int i = 0; i < 4; i++) {
+						for (int i = 0; i <= 4; i++) {
 							itemStacks.add(variant.y[i].createItemStack());
 						}
 					}
@@ -447,7 +446,7 @@ public class ModuleFairy
 
 			// 鉱石辞書登録
 			for (Tuple<Integer, VariantMirageFairy[]> variant : FairyTypes.variants) {
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i <= 4; i++) {
 					for (Tuple<EnumAbilityType, Double> tuple : variant.y[i].type.abilitySet.tuples) {
 						if (tuple.y >= 10) {
 							OreDictionary.registerOre(
