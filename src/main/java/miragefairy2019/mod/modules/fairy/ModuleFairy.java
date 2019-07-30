@@ -366,13 +366,7 @@ public class ModuleFairy
 			itemFairyWandCrafting.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.ITEMS.register(itemFairyWandCrafting);
 			if (ApiMain.side.isClient()) {
-				new Object() {
-					@SideOnly(Side.CLIENT)
-					public void run()
-					{
-						ModelLoader.setCustomMeshDefinition(itemFairyWandCrafting, new ItemMeshDefinitionFixed(new ModelResourceLocation(itemFairyWandCrafting.getRegistryName(), null)));
-					}
-				}.run();
+				ModelLoader.setCustomModelResourceLocation(itemFairyWandCrafting, 0, new ModelResourceLocation(itemFairyWandCrafting.getRegistryName(), null));
 			}
 
 			// 妖精剣
