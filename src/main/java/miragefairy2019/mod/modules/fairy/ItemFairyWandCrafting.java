@@ -11,13 +11,19 @@ public class ItemFairyWandCrafting extends Item
 	public ItemFairyWandCrafting()
 	{
 		this.maxStackSize = 1;
-		this.setMaxDamage(4);
+		this.setMaxDamage(4 - 1);
 	}
 
 	@SideOnly(Side.CLIENT)
 	public boolean isFull3D()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean hasContainerItem(ItemStack itemStack)
+	{
+		return !(itemStack.getItemDamage() >= itemStack.getMaxDamage());
 	}
 
 	@Override
