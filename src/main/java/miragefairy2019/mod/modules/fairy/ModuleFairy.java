@@ -21,7 +21,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -45,7 +44,7 @@ public class ModuleFairy
 	public static ItemMulti<ItemVariant> itemMaterialsFairy;
 	public static ItemMulti<VariantAbility> itemMirageSpheres;
 	public static ItemFairyWandCrafting itemFairyWandCrafting;
-	public static Item itemFairySword;
+	public static ItemFairySword itemFairySword;
 
 	//public static ItemVariant variantBucketFairyWater;
 
@@ -369,9 +368,9 @@ public class ModuleFairy
 			}
 
 			// 妖精剣
-			ApiFairy.itemFairySword = itemFairySword = new Item();
+			ApiFairy.itemFairySword = itemFairySword = new ItemFairySword();
 			itemFairySword.setRegistryName(ModMirageFairy2019.MODID, "fairy_sword");
-			itemFairySword.setUnlocalizedName("swordFairy");
+			itemFairySword.setUnlocalizedName("fairySword");
 			itemFairySword.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.ITEMS.register(itemFairySword);
 			if (ApiMain.side.isClient()) {
