@@ -382,13 +382,7 @@ public class ModuleFairy
 			itemFairySword.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.ITEMS.register(itemFairySword);
 			if (ApiMain.side.isClient()) {
-				new Object() {
-					@SideOnly(Side.CLIENT)
-					public void run()
-					{
-						ModelLoader.setCustomMeshDefinition(itemFairySword, new ItemMeshDefinitionFixed(new ModelResourceLocation(itemFairySword.getRegistryName(), null)));
-					}
-				}.run();
+				ModelLoader.setCustomModelResourceLocation(itemFairySword, 0, new ModelResourceLocation(itemFairySword.getRegistryName(), null));
 			}
 
 		});
