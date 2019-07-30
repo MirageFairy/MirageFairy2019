@@ -21,9 +21,11 @@ import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -219,6 +221,26 @@ public class ModuleFairy
 
 	public static void init(EventRegistryMod erMod)
 	{
+		erMod.initCreativeTab.register(() -> {
+			ApiFairy.creativeTab = new CreativeTabs("mirageFairy2019.fairy") {
+				@Override
+				@SideOnly(Side.CLIENT)
+				public ItemStack getTabIconItem()
+				{
+					return ApiFairy.itemStackMirageFairyMain;
+				}
+
+				@SideOnly(value = Side.CLIENT)
+				public void displayAllRelevantItems(NonNullList<ItemStack> itemStacks)
+				{
+					for (Tuple<Integer, VariantMirageFairy[]> variant : FairyTypes.variants) {
+						for (int i = 0; i < 4; i++) {
+							itemStacks.add(variant.y[i].createItemStack());
+						}
+					}
+				}
+			};
+		});
 		erMod.registerItem.register(b -> {
 
 			// 妖精タイプ登録
@@ -228,7 +250,6 @@ public class ModuleFairy
 			ApiFairy.itemMirageFairyR1 = itemMirageFairyR1 = new ItemMirageFairy();
 			itemMirageFairyR1.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy");
 			itemMirageFairyR1.setUnlocalizedName("mirageFairy");
-			itemMirageFairyR1.setCreativeTab(ApiMain.creativeTab);
 			for (Tuple<Integer, VariantMirageFairy[]> tuple : FairyTypes.variants) {
 				itemMirageFairyR1.registerVariant(tuple.x, tuple.y[0]);
 			}
@@ -243,7 +264,6 @@ public class ModuleFairy
 			ApiFairy.itemMirageFairyR2 = itemMirageFairyR2 = new ItemMirageFairy();
 			itemMirageFairyR2.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r2");
 			itemMirageFairyR2.setUnlocalizedName("mirageFairy_2");
-			itemMirageFairyR2.setCreativeTab(ApiMain.creativeTab);
 			for (Tuple<Integer, VariantMirageFairy[]> tuple : FairyTypes.variants) {
 				itemMirageFairyR2.registerVariant(tuple.x, tuple.y[1]);
 			}
@@ -258,7 +278,6 @@ public class ModuleFairy
 			ApiFairy.itemMirageFairyR3 = itemMirageFairyR3 = new ItemMirageFairy();
 			itemMirageFairyR3.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r3");
 			itemMirageFairyR3.setUnlocalizedName("mirageFairy");
-			itemMirageFairyR3.setCreativeTab(ApiMain.creativeTab);
 			for (Tuple<Integer, VariantMirageFairy[]> tuple : FairyTypes.variants) {
 				itemMirageFairyR3.registerVariant(tuple.x, tuple.y[2]);
 			}
@@ -273,7 +292,6 @@ public class ModuleFairy
 			ApiFairy.itemMirageFairyR4 = itemMirageFairyR4 = new ItemMirageFairy();
 			itemMirageFairyR4.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r4");
 			itemMirageFairyR4.setUnlocalizedName("mirageFairy");
-			itemMirageFairyR4.setCreativeTab(ApiMain.creativeTab);
 			for (Tuple<Integer, VariantMirageFairy[]> tuple : FairyTypes.variants) {
 				itemMirageFairyR4.registerVariant(tuple.x, tuple.y[3]);
 			}
@@ -288,7 +306,6 @@ public class ModuleFairy
 			ApiFairy.itemMirageFairyR5 = itemMirageFairyR5 = new ItemMirageFairy();
 			itemMirageFairyR5.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r5");
 			itemMirageFairyR5.setUnlocalizedName("mirageFairy");
-			itemMirageFairyR5.setCreativeTab(ApiMain.creativeTab);
 			for (Tuple<Integer, VariantMirageFairy[]> tuple : FairyTypes.variants) {
 				itemMirageFairyR5.registerVariant(tuple.x, tuple.y[4]);
 			}

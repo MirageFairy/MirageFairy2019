@@ -1,10 +1,13 @@
 package miragefairy2019.mod.api;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ApiFairy
 {
+
+	public static CreativeTabs creativeTab;
 
 	public static Item itemMirageFairyR1;
 	public static Item itemMirageFairyR2;
