@@ -7,7 +7,7 @@
 		},
 		{
 			"type": "forge:ore_dict",
-			"ore": "fairyWandCrafting"
+			"ore": "mirageFairyWandCrafting"
 		},
 		{
 			"type": "forge:ore_dict",
