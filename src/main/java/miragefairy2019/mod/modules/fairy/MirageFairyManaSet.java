@@ -52,4 +52,14 @@ public final class MirageFairyManaSet
 		}
 	}
 
+	public double sum(double rateShine, double rateFire, double rateWind, double rateGaia, double rateAqua, double rateDark)
+	{
+		return shine * rateShine
+			+ fire * rateFire
+			+ wind * rateWind
+			+ gaia * rateGaia
+			+ aqua * rateAqua
+			+ dark * rateDark;
+	}
+
 }
