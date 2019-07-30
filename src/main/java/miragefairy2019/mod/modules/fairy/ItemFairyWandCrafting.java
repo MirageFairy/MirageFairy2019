@@ -1,23 +1,13 @@
 package miragefairy2019.mod.modules.fairy;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFairyWandCrafting extends Item
+public class ItemFairyWandCrafting extends ItemToolFairy
 {
 
 	public ItemFairyWandCrafting()
 	{
-		this.maxStackSize = 1;
-		this.setMaxDamage(4 - 1);
-	}
-
-	@SideOnly(Side.CLIENT)
-	public boolean isFull3D()
-	{
-		return true;
+		this.setMaxDamage(16 - 1);
 	}
 
 	@Override
