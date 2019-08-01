@@ -50,6 +50,10 @@ public class ModuleFairy
 
 	public static VariantAbility variantMirageSphereAttack;
 	public static VariantAbility variantMirageSphereCraft;
+	public static VariantAbility variantMirageSphereFell;
+	public static VariantAbility variantMirageSphereLight;
+	public static VariantAbility variantMirageSphereFlame;
+	public static VariantAbility variantMirageSphereWater;
 
 	public static class FairyTypes
 	{
@@ -367,6 +371,10 @@ public class ModuleFairy
 			itemMirageSpheres.setCreativeTab(ApiMain.creativeTab);
 			itemMirageSpheres.registerVariant(0, variantMirageSphereAttack = new VariantAbility("attack_mirage_sphere", "mirageSphereAttack", EnumAbilityType.ATTACK));
 			itemMirageSpheres.registerVariant(1, variantMirageSphereCraft = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.CRAFT));
+			itemMirageSpheres.registerVariant(2, variantMirageSphereFell = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.FELL));
+			itemMirageSpheres.registerVariant(3, variantMirageSphereLight = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.LIGHT));
+			itemMirageSpheres.registerVariant(4, variantMirageSphereFlame = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.FLAME));
+			itemMirageSpheres.registerVariant(5, variantMirageSphereWater = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.WATER));
 			ForgeRegistries.ITEMS.register(itemMirageSpheres);
 			if (ApiMain.side.isClient()) {
 				for (Tuple<Integer, VariantAbility> tuple : itemMirageSpheres.getVariants()) {
