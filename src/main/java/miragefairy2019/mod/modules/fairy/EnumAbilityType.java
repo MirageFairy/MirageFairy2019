@@ -2,6 +2,7 @@ package miragefairy2019.mod.modules.fairy;
 
 import static net.minecraft.util.text.TextFormatting.*;
 
+import miragefairy2019.mod.lib.UtilsMinecraft;
 import net.minecraft.util.text.TextFormatting;
 
 public enum EnumAbilityType
@@ -27,6 +28,11 @@ public enum EnumAbilityType
 		this.highlight = highlight;
 		this.background = background;
 		this.plasma = plasma;
+	}
+
+	public String getLocalizedName()
+	{
+		return UtilsMinecraft.translateToLocal("fairy.ability." + name().toLowerCase() + ".name");
 	}
 
 }
