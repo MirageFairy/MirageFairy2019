@@ -33,9 +33,9 @@ public class ItemMulti<V extends ItemVariant> extends Item
 		variant.setMetadata(metadata);
 	}
 
-	public Optional<V> getVariant(ItemStack stack)
+	public Optional<V> getVariant(ItemStack itemStack)
 	{
-		return getVariant(stack.getMetadata());
+		return getVariant(itemStack.getMetadata());
 	}
 
 	public Optional<V> getVariant(int metadata)
