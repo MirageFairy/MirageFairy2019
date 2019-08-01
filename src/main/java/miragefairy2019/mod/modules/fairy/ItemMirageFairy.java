@@ -5,10 +5,10 @@ import static net.minecraft.util.text.TextFormatting.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
+import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.multi.ItemMulti;
+import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -35,97 +35,72 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements II
 		VariantMirageFairy variant = getVariant(stack).orElse(null);
 		if (variant == null) return;
 
-		{
-			String stringRare = IntStream.range(0, variant.type.rare).mapToObj(i -> "★").collect(Collectors.joining());
-			TextFormatting colorRare = LIGHT_PURPLE;
-
-			String stringRareRank = IntStream.range(0, variant.type.rank - 1).mapToObj(i -> "★").collect(Collectors.joining());
-			TextFormatting colorRareRank;
-			switch (variant.type.rank) {
-				case 1:
-					colorRareRank = GRAY;
-					break;
-				case 2:
-					colorRareRank = RED;
-					break;
-				case 3:
-					colorRareRank = BLUE;
-					break;
-				case 4:
-					colorRareRank = GREEN;
-					break;
-				case 5:
-					colorRareRank = YELLOW;
-					break;
-				default:
-					colorRareRank = LIGHT_PURPLE;
-					break;
-			}
-
-			String stringRank;
-			int rank = variant.type.rank;
-			switch (rank) {
-				case 1:
-					stringRank = "I";
-					break;
-				case 2:
-					stringRank = "II";
-					break;
-				case 3:
-					stringRank = "III";
-					break;
-				case 4:
-					stringRank = "IV";
-					break;
-				case 5:
-					stringRank = "V";
-					break;
-				default:
-					stringRank = "" + rank;
-					break;
-			}
-			TextFormatting colorRank;
-			switch (variant.type.rank) {
-				case 1:
-					colorRank = GRAY;
-					break;
-				case 2:
-					colorRank = RED;
-					break;
-				case 3:
-					colorRank = BLUE;
-					break;
-				case 4:
-					colorRank = GREEN;
-					break;
-				case 5:
-					colorRank = YELLOW;
-					break;
-				default:
-					colorRank = LIGHT_PURPLE;
-					break;
-			}
-
-			tooltip.add("" + "Type: " + colorRare + stringRare + colorRareRank + stringRareRank + " " + WHITE + variant.type.name + " " + colorRank + stringRank);
+		if (!flag.isAdvanced()) {
+			tooltip.add("" + "Type:"
+				+ " " + variant.getMetadata()
+				+ " " + GOLD + UtilsString.repeat("★", variant.type.rare) + getRankColor(variant) + UtilsString.repeat("★", variant.type.rank - 1)
+				+ " " + WHITE + variant.type.name);
+		} else {
+			tooltip.add("" + "Type:"
+				+ " No." + variant.getMetadata()
+				+ " " + GOLD + "Rare." + variant.type.rare
+				+ " " + getRankColor(variant) + "Rank." + variant.type.rank
+				+ " " + WHITE + variant.type.name);
 		}
 
-		tooltip.add("    " + format(shine, variant.type.manaSet.shine));
-		tooltip.add("" + format(fire, variant.type.manaSet.fire) + "    " + format(wind, variant.type.manaSet.wind));
-		tooltip.add("" + format(gaia, variant.type.manaSet.gaia) + "    " + format(aqua, variant.type.manaSet.aqua));
-		tooltip.add("    " + format(dark, variant.type.manaSet.dark));
+		if (!flag.isAdvanced()) {
+			tooltip.add("    " + format1(shine, variant.type.manaSet.shine));
+			tooltip.add("" + format1(fire, variant.type.manaSet.fire) + "    " + format1(wind, variant.type.manaSet.wind));
+			tooltip.add("" + format1(gaia, variant.type.manaSet.gaia) + "    " + format1(aqua, variant.type.manaSet.aqua));
+			tooltip.add("    " + format1(dark, variant.type.manaSet.dark));
+		} else {
+			tooltip.add("    " + format2(shine, variant.type.manaSet.shine));
+			tooltip.add("" + format2(fire, variant.type.manaSet.fire) + "    " + format2(wind, variant.type.manaSet.wind));
+			tooltip.add("" + format2(gaia, variant.type.manaSet.gaia) + "    " + format2(aqua, variant.type.manaSet.aqua));
+			tooltip.add("    " + format2(dark, variant.type.manaSet.dark));
+		}
 
-		tooltip.add("" + YELLOW + "Cost: " + WHITE + String.format("%.1f", variant.type.cost));
+		if (!flag.isAdvanced()) {
+			tooltip.add("" + YELLOW + "Cost: " + WHITE + String.format("%.3f", variant.type.cost));
+		} else {
+			tooltip.add("" + YELLOW + "Cost: " + WHITE + String.format("%.1f", variant.type.cost));
+		}
 
-		{
+		if (!flag.isAdvanced()) {
 			String string = variant.type.abilitySet.tuples.suppliterator()
 				.sorted((a, b) -> -a.y.compareTo(b.y))
 				.map(tuple -> Tuple.of(tuple.x, format(tuple.y)))
 				.filter(tuple -> tuple.y >= 10)
-				.map(tuple -> "" + tuple.x.color + tuple.x + WHITE + "(" + tuple.y + ")")
+				.map(tuple -> "" + tuple.x.color + UtilsMinecraft.translateToLocal("fairy.ability." + tuple.x.name().toLowerCase() + ".name") + WHITE + "(" + tuple.y + ")")
+				.join(", ");
+			tooltip.add("" + GREEN + "Abilities: " + WHITE + string);
+		} else {
+			String string = variant.type.abilitySet.tuples.suppliterator()
+				.sorted((a, b) -> -a.y.compareTo(b.y))
+				.filter(tuple -> format(tuple.y) >= 10)
+				.map(tuple -> "" + tuple.x.color + UtilsMinecraft.translateToLocal("fairy.ability." + tuple.x.name().toLowerCase() + ".name") + WHITE + "(" + String.format("%.3f", tuple.y) + ")")
 				.join(", ");
 			tooltip.add("" + GREEN + "Abilities: " + WHITE + string);
 		}
 
+	}
+
+	private TextFormatting getRankColor(VariantMirageFairy variant)
+	{
+		switch (variant.type.rank) {
+			case 1:
+				return GRAY;
+			case 2:
+				return RED;
+			case 3:
+				return BLUE;
+			case 4:
+				return GREEN;
+			case 5:
+				return YELLOW;
+			default:
+				return LIGHT_PURPLE;
+		}
 	}
 
 	private int format(double value)
@@ -135,9 +110,14 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements II
 		return value2;
 	}
 
-	private String format(EnumManaType manaType, double value)
+	private String format1(EnumManaType manaType, double value)
 	{
 		return "" + manaType.color + String.format("%4d", format(value));
+	}
+
+	private String format2(EnumManaType manaType, double value)
+	{
+		return "" + manaType.color + String.format("%8.3f", value);
 	}
 
 }
