@@ -6,7 +6,6 @@ import static net.minecraft.util.text.TextFormatting.*;
 import java.util.List;
 import java.util.Optional;
 
-import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.multi.ItemMulti;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
@@ -71,14 +70,14 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements II
 				.sorted((a, b) -> -a.y.compareTo(b.y))
 				.map(tuple -> Tuple.of(tuple.x, format(tuple.y)))
 				.filter(tuple -> tuple.y >= 10)
-				.map(tuple -> "" + tuple.x.color + UtilsMinecraft.translateToLocal("fairy.ability." + tuple.x.name().toLowerCase() + ".name") + WHITE + "(" + tuple.y + ")")
+				.map(tuple -> "" + tuple.x.color + tuple.x.getLocalizedName() + WHITE + "(" + tuple.y + ")")
 				.join(", ");
 			tooltip.add("" + GREEN + "Abilities: " + WHITE + string);
 		} else {
 			String string = variant.type.abilitySet.tuples.suppliterator()
 				.sorted((a, b) -> -a.y.compareTo(b.y))
 				.filter(tuple -> format(tuple.y) >= 10)
-				.map(tuple -> "" + tuple.x.color + UtilsMinecraft.translateToLocal("fairy.ability." + tuple.x.name().toLowerCase() + ".name") + WHITE + "(" + String.format("%.3f", tuple.y) + ")")
+				.map(tuple -> "" + tuple.x.color + tuple.x.getLocalizedName() + WHITE + "(" + String.format("%.3f", tuple.y) + ")")
 				.join(", ");
 			tooltip.add("" + GREEN + "Abilities: " + WHITE + string);
 		}
