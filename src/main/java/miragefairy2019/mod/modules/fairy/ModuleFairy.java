@@ -180,7 +180,7 @@ public class ModuleFairy
 					manaSet.dark * sum / manaSet.sum);
 
 				MirageFairyAbilitySet abilitySetReal = new MirageFairyAbilitySet(abilitySet.tuples.suppliterator()
-					.map(tuple -> Tuple.of(tuple.x, tuple.y * rateRare * rateVariance))
+					.map(tuple -> Tuple.of(tuple.x, tuple.y * rateRare))
 					.toImmutableArray());
 
 				return new MirageFairyType(ModMirageFairy2019.MODID, name, rare, rank, cost, manaSetReal, abilitySetReal, colorSet);
