@@ -16,6 +16,13 @@ item.gemSulfur.name=Sulfur
 item.dustMiragium.name=Miragium Dust
 item.dustTinyMiragium.name=Tiny Pile of Miragium Dust
 
+fairy.ability.attack.name=ATTACK
+fairy.ability.craft.name=CRAFT
+fairy.ability.fell.name=FELL
+fairy.ability.light.name=LIGHT
+fairy.ability.flame.name=FLAME
+fairy.ability.water.name=WATER
+
 item.mirageFairy.air.name=Airia
 item.mirageFairy.water.name=Wateria
 item.mirageFairy.fire.name=Firia

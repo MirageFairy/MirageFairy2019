@@ -16,6 +16,13 @@ item.gemSulfur.name=硫黄
 item.dustMiragium.name=ミラジウムの粉
 item.dustTinyMiragium.name=ミラジウムの微粉
 
+fairy.ability.attack.name=攻撃
+fairy.ability.craft.name=加工
+fairy.ability.fell.name=伐採
+fairy.ability.light.name=発光
+fairy.ability.flame.name=火炎
+fairy.ability.water.name=水沫
+
 item.mirageFairy.air.name=アイリャ
 item.mirageFairy.water.name=ワテーリャ
 item.mirageFairy.fire.name=フィーリャ
