@@ -42,7 +42,7 @@ public class ModuleFairy
 	public static ItemMirageFairy itemMirageFairyR5;
 	public static ItemFairyCrystal itemFairyCrystal;
 	public static ItemMulti<ItemVariant> itemMaterialsFairy;
-	public static ItemMulti<VariantAbility> itemMirageSpheres;
+	public static ItemMirageSpheres itemMirageSpheres;
 	public static ItemFairyWandCrafting itemFairyWandCrafting;
 	public static ItemFairySword itemFairySword;
 
@@ -361,7 +361,7 @@ public class ModuleFairy
 			}
 
 			// スフィア
-			ApiFairy.itemMirageSpheres = itemMirageSpheres = new ItemMulti<>();
+			ApiFairy.itemMirageSpheres = itemMirageSpheres = new ItemMirageSpheres();
 			itemMirageSpheres.setRegistryName(ModMirageFairy2019.MODID, "mirage_spheres");
 			itemMirageSpheres.setUnlocalizedName("mirageSpheres");
 			itemMirageSpheres.setCreativeTab(ApiMain.creativeTab);
