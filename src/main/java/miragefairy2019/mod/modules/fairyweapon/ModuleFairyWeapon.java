@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon;
 
 import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiFairy;
+import miragefairy2019.mod.api.ApiFairyWeapon;
 import miragefairy2019.mod.api.ApiMain;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
@@ -21,23 +21,29 @@ public class ModuleFairyWeapon
 		erMod.registerItem.register(b -> {
 
 			// 加工のステッキ
-			ApiFairy.itemFairyWandCrafting = itemFairyWandCrafting = new ItemFairyWandCrafting();
-			itemFairyWandCrafting.setRegistryName(ModMirageFairy2019.MODID, "crafting_fairy_wand");
-			itemFairyWandCrafting.setUnlocalizedName("fairyWandCrafting");
-			itemFairyWandCrafting.setCreativeTab(ApiMain.creativeTab);
-			ForgeRegistries.ITEMS.register(itemFairyWandCrafting);
-			if (ApiMain.side.isClient()) {
-				ModelLoader.setCustomModelResourceLocation(itemFairyWandCrafting, 0, new ModelResourceLocation(itemFairyWandCrafting.getRegistryName(), null));
+			{
+				ItemFairyWandCrafting item = new ItemFairyWandCrafting();
+				item.setRegistryName(ModMirageFairy2019.MODID, "crafting_fairy_wand");
+				item.setUnlocalizedName("fairyWandCrafting");
+				item.setCreativeTab(ApiMain.creativeTab);
+				ForgeRegistries.ITEMS.register(item);
+				if (ApiMain.side.isClient()) {
+					ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
+				}
+				ApiFairyWeapon.itemFairyWandCrafting = itemFairyWandCrafting = item;
 			}
 
 			// 妖精剣
-			ApiFairy.itemFairySword = itemFairySword = new ItemFairySword();
-			itemFairySword.setRegistryName(ModMirageFairy2019.MODID, "fairy_sword");
-			itemFairySword.setUnlocalizedName("fairySword");
-			itemFairySword.setCreativeTab(ApiMain.creativeTab);
-			ForgeRegistries.ITEMS.register(itemFairySword);
-			if (ApiMain.side.isClient()) {
-				ModelLoader.setCustomModelResourceLocation(itemFairySword, 0, new ModelResourceLocation(itemFairySword.getRegistryName(), null));
+			{
+				ItemFairySword item = new ItemFairySword();
+				item.setRegistryName(ModMirageFairy2019.MODID, "fairy_sword");
+				item.setUnlocalizedName("fairySword");
+				item.setCreativeTab(ApiMain.creativeTab);
+				ForgeRegistries.ITEMS.register(item);
+				if (ApiMain.side.isClient()) {
+					ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
+				}
+				ApiFairyWeapon.itemFairySword = itemFairySword = item;
 			}
 
 		});

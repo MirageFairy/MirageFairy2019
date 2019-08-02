@@ -17,8 +17,6 @@ public class ApiFairy
 	public static Item itemFairyCrystal;
 	public static Item itemMaterialsFairy;
 	public static Item itemMirageSpheres;
-	public static Item itemFairyWandCrafting;
-	public static Item itemFairySword;
 
 	public static ItemStack itemStackMirageFairyMain;
 	public static ItemStack itemStackFairyCrystal;
