@@ -4,6 +4,7 @@ import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.ApiSphere;
+import miragefairy2019.mod.lib.Utils;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -33,24 +34,27 @@ public class ModuleSphere
 		erMod.registerItem.register(b -> {
 
 			// スフィアのアイテム登録
-			ApiSphere.itemSpheres = itemSpheres = new ItemSpheres();
-			itemSpheres.setRegistryName(ModMirageFairy2019.MODID, "spheres");
-			itemSpheres.setUnlocalizedName("spheres");
-			itemSpheres.setCreativeTab(ApiMain.creativeTab);
-			itemSpheres.registerVariant(0, variantSphereAttack = new VariantSphere(EnumSphere.attack));
-			itemSpheres.registerVariant(1, variantSphereCraft = new VariantSphere(EnumSphere.craft));
-			itemSpheres.registerVariant(2, variantSphereFell = new VariantSphere(EnumSphere.fell));
-			itemSpheres.registerVariant(3, variantSphereLight = new VariantSphere(EnumSphere.light));
-			itemSpheres.registerVariant(4, variantSphereFlame = new VariantSphere(EnumSphere.flame));
-			itemSpheres.registerVariant(5, variantSphereWater = new VariantSphere(EnumSphere.water));
-			ForgeRegistries.ITEMS.register(itemSpheres);
-			if (ApiMain.side.isClient()) {
-				for (Tuple<Integer, VariantSphere> tuple : itemSpheres.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(
-						itemSpheres,
-						tuple.x,
-						new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "sphere"), null));
+			{
+				ItemSpheres item = new ItemSpheres();
+				item.setRegistryName(ModMirageFairy2019.MODID, "spheres");
+				item.setUnlocalizedName("spheres");
+				item.setCreativeTab(ApiMain.creativeTab);
+				item.registerVariant(0, variantSphereAttack = new VariantSphere(EnumSphere.attack));
+				item.registerVariant(1, variantSphereCraft = new VariantSphere(EnumSphere.craft));
+				item.registerVariant(2, variantSphereFell = new VariantSphere(EnumSphere.fell));
+				item.registerVariant(3, variantSphereLight = new VariantSphere(EnumSphere.light));
+				item.registerVariant(4, variantSphereFlame = new VariantSphere(EnumSphere.flame));
+				item.registerVariant(5, variantSphereWater = new VariantSphere(EnumSphere.water));
+				ForgeRegistries.ITEMS.register(item);
+				if (ApiMain.side.isClient()) {
+					for (Tuple<Integer, VariantSphere> tuple : item.getVariants()) {
+						ModelLoader.setCustomModelResourceLocation(
+							item,
+							tuple.x,
+							new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "sphere"), null));
+					}
 				}
+				ApiSphere.itemSpheres = itemSpheres = item;
 			}
 
 		});
@@ -86,7 +90,7 @@ public class ModuleSphere
 
 			// スフィアの鉱石辞書
 			for (Tuple<Integer, VariantSphere> tuple : itemSpheres.getVariants()) {
-				OreDictionary.registerOre(tuple.y.getOreName(), tuple.y.createItemStack());
+				OreDictionary.registerOre("mirageFairy2019Sphere" + Utils.toUpperCaseHead(tuple.y.sphere.abilityType.getName()), tuple.y.createItemStack());
 			}
 
 		});
