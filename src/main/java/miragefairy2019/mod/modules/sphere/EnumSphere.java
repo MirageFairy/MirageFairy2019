@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.sphere;
 
-import miragefairy2019.mod.api.fairy.EnumAbilityType;
+import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.fairy.IMirageFairyAbilityType;
 
 public enum EnumSphere
