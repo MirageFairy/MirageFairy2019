@@ -1,8 +1,8 @@
 package miragefairy2019.mod.modules;
 
-import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.lib.EventRegistryMod;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;

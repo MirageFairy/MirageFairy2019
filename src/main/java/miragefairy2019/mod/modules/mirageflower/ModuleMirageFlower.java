@@ -3,11 +3,11 @@ package miragefairy2019.mod.modules.mirageflower;
 import java.util.ArrayList;
 import java.util.List;
 
-import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
+import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.WorldGenBush;
 import mirrg.boron.util.UtilsLambda;

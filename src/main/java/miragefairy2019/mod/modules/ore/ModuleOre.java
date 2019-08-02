@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.ApiOre;
+import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import mirrg.boron.util.struct.Tuple;

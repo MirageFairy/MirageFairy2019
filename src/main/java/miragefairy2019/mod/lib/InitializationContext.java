@@ -1,4 +1,4 @@
-package miragefairy2019.mod;
+package miragefairy2019.mod.lib;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.relauncher.Side;

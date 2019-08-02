@@ -1,4 +1,4 @@
-package miragefairy2019.mod;
+package miragefairy2019.mod.lib;
 
 import java.util.function.Consumer;
 

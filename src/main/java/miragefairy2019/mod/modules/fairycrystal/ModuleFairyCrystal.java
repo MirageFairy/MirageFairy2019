@@ -1,10 +1,10 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
-import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairy;
 import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
 import miragefairy2019.mod.modules.fairycrystal.ItemFairyCrystal.Drop;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

@@ -1,9 +1,9 @@
 package miragefairy2019.mod.modules.fairyweapon;
 
-import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairyWeapon;
 import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.lib.EventRegistryMod;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;

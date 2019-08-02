@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntFunction;
 
-import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairy;
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
@@ -14,6 +13,7 @@ import miragefairy2019.mod.api.fairy.MirageFairyAbilitySet;
 import miragefairy2019.mod.api.fairy.MirageFairyColorSet;
 import miragefairy2019.mod.api.fairy.MirageFairyManaSet;
 import miragefairy2019.mod.api.fairy.MirageFairyType;
+import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
