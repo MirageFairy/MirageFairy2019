@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.google.common.collect.Multimap;
 
-import miragefairy2019.mod.modules.fairy.MirageFairyType;
+import miragefairy2019.mod.api.fairy.MirageFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

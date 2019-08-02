@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairy;
+package miragefairy2019.mod.api.fairy;
 
 public final class MirageFairyManaSet
 {
@@ -32,7 +32,7 @@ public final class MirageFairyManaSet
 		sum = shine + fire + wind + gaia + aqua + dark;
 	}
 
-	public double get(EnumManaType manaType)
+	public double get(EnumMirageFairyManaType manaType)
 	{
 		switch (manaType) {
 			case shine:

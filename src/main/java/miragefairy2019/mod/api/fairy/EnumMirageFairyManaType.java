@@ -1,8 +1,8 @@
-package miragefairy2019.mod.modules.fairy;
+package miragefairy2019.mod.api.fairy;
 
 import net.minecraft.util.text.TextFormatting;
 
-public enum EnumManaType
+public enum EnumMirageFairyManaType
 {
 	shine(TextFormatting.WHITE),
 	fire(TextFormatting.RED),
@@ -12,11 +12,11 @@ public enum EnumManaType
 	dark(TextFormatting.DARK_GRAY),
 	;
 
-	public final TextFormatting color;
+	public final TextFormatting colorText;
 
-	private EnumManaType(TextFormatting color)
+	private EnumMirageFairyManaType(TextFormatting colorText)
 	{
-		this.color = color;
+		this.colorText = colorText;
 	}
 
 }

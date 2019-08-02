@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.fairy;
 
+import miragefairy2019.mod.api.fairy.MirageFairyType;
 import miragefairy2019.mod.lib.multi.ItemVariant;
 
 public class VariantMirageFairy extends ItemVariant

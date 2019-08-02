@@ -2,37 +2,68 @@ package miragefairy2019.mod.modules.fairy;
 
 import static net.minecraft.util.text.TextFormatting.*;
 
-import miragefairy2019.mod.lib.UtilsMinecraft;
+import miragefairy2019.mod.api.fairy.IMirageFairyAbilityType;
 import net.minecraft.util.text.TextFormatting;
 
-public enum EnumAbilityType
+public enum EnumAbilityType implements IMirageFairyAbilityType
 {
-	ATTACK(DARK_RED, 0xFFA0A0, 0xFF6B6B, 0xC70000, 0xFF0000),
-	CRAFT(GOLD, 0xADADAD, 0xFFC8A4, 0xB57919, 0xDCDCDC),
-	FELL(DARK_RED, 0x00BD00, 0xD09D74, 0x6E4219, 0x2FFF2F),
-	LIGHT(WHITE, 0xFFFFFF, 0x848484, 0x000000, 0xFFFFFF),
-	FLAME(RED, 0xFF3600, 0xFF9900, 0xCA5B25, 0xFF0000),
-	WATER(AQUA, 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF),
+	attack(DARK_RED, 0xFFA0A0, 0xFF6B6B, 0xC70000, 0xFF0000),
+	craft(GOLD, 0xADADAD, 0xFFC8A4, 0xB57919, 0xDCDCDC),
+	fell(DARK_RED, 0x00BD00, 0xD09D74, 0x6E4219, 0x2FFF2F),
+	light(WHITE, 0xFFFFFF, 0x848484, 0x000000, 0xFFFFFF),
+	flame(RED, 0xFF3600, 0xFF9900, 0xCA5B25, 0xFF0000),
+	water(AQUA, 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF),
 	;
 
-	public final TextFormatting color;
-	public final int core;
-	public final int highlight;
-	public final int background;
-	public final int plasma;
+	private final TextFormatting colorText;
+	private final int colorCore;
+	private final int colorHighlight;
+	private final int colorBackground;
+	private final int colorPlasma;
 
-	private EnumAbilityType(TextFormatting color, int core, int highlight, int background, int plasma)
+	private EnumAbilityType(TextFormatting colorText, int colorCore, int colorHighlight, int colorBackground, int colorPlasma)
 	{
-		this.color = color;
-		this.core = core;
-		this.highlight = highlight;
-		this.background = background;
-		this.plasma = plasma;
+		this.colorText = colorText;
+		this.colorCore = colorCore;
+		this.colorHighlight = colorHighlight;
+		this.colorBackground = colorBackground;
+		this.colorPlasma = colorPlasma;
 	}
 
-	public String getLocalizedName()
+	@Override
+	public String getName()
 	{
-		return UtilsMinecraft.translateToLocal("fairy.ability." + name().toLowerCase() + ".name");
+		return name();
+	}
+
+	@Override
+	public TextFormatting getTextColor()
+	{
+		return colorText;
+	}
+
+	@Override
+	public int getCoreColor()
+	{
+		return colorCore;
+	}
+
+	@Override
+	public int getHighlightColor()
+	{
+		return colorHighlight;
+	}
+
+	@Override
+	public int getBackgroundColor()
+	{
+		return colorBackground;
+	}
+
+	@Override
+	public int getPlasmaColor()
+	{
+		return colorPlasma;
 	}
 
 }

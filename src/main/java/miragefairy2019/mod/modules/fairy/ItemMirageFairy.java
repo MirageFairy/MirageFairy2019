@@ -1,11 +1,14 @@
 package miragefairy2019.mod.modules.fairy;
 
-import static miragefairy2019.mod.modules.fairy.EnumManaType.*;
+import static miragefairy2019.mod.api.fairy.EnumMirageFairyManaType.*;
 import static net.minecraft.util.text.TextFormatting.*;
 
 import java.util.List;
 import java.util.Optional;
 
+import miragefairy2019.mod.api.fairy.EnumMirageFairyManaType;
+import miragefairy2019.mod.api.fairy.IItemMirageFairy;
+import miragefairy2019.mod.api.fairy.MirageFairyType;
 import miragefairy2019.mod.lib.multi.ItemMulti;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
@@ -70,14 +73,14 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements II
 				.sorted((a, b) -> -a.y.compareTo(b.y))
 				.map(tuple -> Tuple.of(tuple.x, format(tuple.y)))
 				.filter(tuple -> tuple.y >= 10)
-				.map(tuple -> "" + tuple.x.color + tuple.x.getLocalizedName() + WHITE + "(" + tuple.y + ")")
+				.map(tuple -> "" + tuple.x.getTextColor() + tuple.x.getLocalizedName() + WHITE + "(" + tuple.y + ")")
 				.join(", ");
 			tooltip.add("" + GREEN + "Abilities: " + WHITE + string);
 		} else {
 			String string = variant.type.abilitySet.tuples.suppliterator()
 				.sorted((a, b) -> -a.y.compareTo(b.y))
 				.filter(tuple -> format(tuple.y) >= 10)
-				.map(tuple -> "" + tuple.x.color + tuple.x.getLocalizedName() + WHITE + "(" + String.format("%.3f", tuple.y) + ")")
+				.map(tuple -> "" + tuple.x.getTextColor() + tuple.x.getLocalizedName() + WHITE + "(" + String.format("%.3f", tuple.y) + ")")
 				.join(", ");
 			tooltip.add("" + GREEN + "Abilities: " + WHITE + string);
 		}
@@ -109,14 +112,14 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements II
 		return value2;
 	}
 
-	private String format1(EnumManaType manaType, double value)
+	private String format1(EnumMirageFairyManaType manaType, double value)
 	{
-		return "" + manaType.color + String.format("%4d", format(value));
+		return "" + manaType.colorText + String.format("%4d", format(value));
 	}
 
-	private String format2(EnumManaType manaType, double value)
+	private String format2(EnumMirageFairyManaType manaType, double value)
 	{
-		return "" + manaType.color + String.format("%8.3f", value);
+		return "" + manaType.colorText + String.format("%8.3f", value);
 	}
 
 }

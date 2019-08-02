@@ -1,7 +1,5 @@
 package miragefairy2019.mod.modules.fairy;
 
-import static miragefairy2019.mod.modules.fairy.EnumAbilityType.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntFunction;
@@ -10,6 +8,11 @@ import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairy;
 import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.api.fairy.IMirageFairyAbilityType;
+import miragefairy2019.mod.api.fairy.MirageFairyAbilitySet;
+import miragefairy2019.mod.api.fairy.MirageFairyColorSet;
+import miragefairy2019.mod.api.fairy.MirageFairyManaSet;
+import miragefairy2019.mod.api.fairy.MirageFairyType;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.multi.ItemMulti;
 import miragefairy2019.mod.lib.multi.ItemVariant;
@@ -226,7 +229,7 @@ public class ModuleFairy
 		}
 
 		@SafeVarargs
-		private final MirageFairyAbilitySet a(Tuple<EnumAbilityType, Double>... tuples)
+		private final MirageFairyAbilitySet a(Tuple<IMirageFairyAbilityType, Double>... tuples)
 		{
 			return new MirageFairyAbilitySet(ImmutableArray.ofObjArray(tuples));
 		}
@@ -371,12 +374,12 @@ public class ModuleFairy
 			itemMirageSpheres.setRegistryName(ModMirageFairy2019.MODID, "mirage_spheres");
 			itemMirageSpheres.setUnlocalizedName("mirageSpheres");
 			itemMirageSpheres.setCreativeTab(ApiMain.creativeTab);
-			itemMirageSpheres.registerVariant(0, variantMirageSphereAttack = new VariantAbility("attack_mirage_sphere", "mirageSphereAttack", EnumAbilityType.ATTACK));
-			itemMirageSpheres.registerVariant(1, variantMirageSphereCraft = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.CRAFT));
-			itemMirageSpheres.registerVariant(2, variantMirageSphereFell = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.FELL));
-			itemMirageSpheres.registerVariant(3, variantMirageSphereLight = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.LIGHT));
-			itemMirageSpheres.registerVariant(4, variantMirageSphereFlame = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.FLAME));
-			itemMirageSpheres.registerVariant(5, variantMirageSphereWater = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.WATER));
+			itemMirageSpheres.registerVariant(0, variantMirageSphereAttack = new VariantAbility("attack_mirage_sphere", "mirageSphereAttack", EnumAbilityType.attack));
+			itemMirageSpheres.registerVariant(1, variantMirageSphereCraft = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.craft));
+			itemMirageSpheres.registerVariant(2, variantMirageSphereFell = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.fell));
+			itemMirageSpheres.registerVariant(3, variantMirageSphereLight = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.light));
+			itemMirageSpheres.registerVariant(4, variantMirageSphereFlame = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.flame));
+			itemMirageSpheres.registerVariant(5, variantMirageSphereWater = new VariantAbility("craft_mirage_sphere", "mirageSphereCraft", EnumAbilityType.water));
 			ForgeRegistries.ITEMS.register(itemMirageSpheres);
 			if (ApiMain.side.isClient()) {
 				for (Tuple<Integer, VariantAbility> tuple : itemMirageSpheres.getVariants()) {
@@ -441,10 +444,10 @@ public class ModuleFairy
 						{
 							VariantAbility variant = itemMirageSpheres.getVariant(stack).orElse(null);
 							if (variant == null) return 0xFFFFFF;
-							if (tintIndex == 0) return variant.abilityType.background;
-							if (tintIndex == 1) return variant.abilityType.plasma;
-							if (tintIndex == 2) return variant.abilityType.core;
-							if (tintIndex == 3) return variant.abilityType.highlight;
+							if (tintIndex == 0) return variant.abilityType.getBackgroundColor();
+							if (tintIndex == 1) return variant.abilityType.getPlasmaColor();
+							if (tintIndex == 2) return variant.abilityType.getCoreColor();
+							if (tintIndex == 3) return variant.abilityType.getHighlightColor();
 							return 0xFFFFFF;
 						}
 
@@ -462,10 +465,10 @@ public class ModuleFairy
 			// 妖精の鉱石辞書
 			for (Tuple<Integer, VariantMirageFairy[]> variant : FairyTypes.variants) {
 				for (int i = 0; i <= 4; i++) {
-					for (Tuple<EnumAbilityType, Double> tuple : variant.y[i].type.abilitySet.tuples) {
+					for (Tuple<IMirageFairyAbilityType, Double> tuple : variant.y[i].type.abilitySet.tuples) {
 						if (tuple.y >= 10) {
 							OreDictionary.registerOre(
-								"mirageFairyAbility" + Utils.toUpperCaseHead(tuple.x.name().toLowerCase()),
+								"mirageFairyAbility" + Utils.toUpperCaseHead(tuple.x.getName()),
 								variant.y[i].createItemStack());
 						}
 					}

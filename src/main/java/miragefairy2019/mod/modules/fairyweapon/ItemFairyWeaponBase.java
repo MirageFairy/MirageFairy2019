@@ -2,8 +2,8 @@ package miragefairy2019.mod.modules.fairyweapon;
 
 import java.util.Optional;
 
-import miragefairy2019.mod.modules.fairy.IItemMirageFairy;
-import miragefairy2019.mod.modules.fairy.MirageFairyType;
+import miragefairy2019.mod.api.fairy.IItemMirageFairy;
+import miragefairy2019.mod.api.fairy.MirageFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
