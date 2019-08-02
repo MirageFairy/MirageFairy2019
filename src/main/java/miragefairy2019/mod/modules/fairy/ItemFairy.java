@@ -51,7 +51,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 				+ " " + GOLD + UtilsString.repeat("★", variant.type.rare) + getRankColor(variant) + UtilsString.repeat("★", variant.type.rank - 1)
 				+ " " + WHITE + variant.type.name);
 		} else {
-			tooltip.add("" + GREEN + "No: " + variant.type.modid + ":" + variant.type.id);
+			tooltip.add("" + GREEN + "No: " + variant.type.id + " (" + variant.type.modid + ")");
 			tooltip.add("" + "Type:"
 				+ " " + GOLD + "Rare." + variant.type.rare
 				+ " " + getRankColor(variant) + "Rank." + variant.type.rank
