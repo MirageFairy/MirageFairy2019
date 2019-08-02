@@ -19,10 +19,10 @@ import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFairyWeapon extends Item
+public abstract class ItemFairyWeaponBase extends Item
 {
 
-	public ItemFairyWeapon()
+	public ItemFairyWeaponBase()
 	{
 		setMaxStackSize(1);
 	}

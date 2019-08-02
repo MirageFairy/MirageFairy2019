@@ -15,7 +15,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemFairySword extends ItemFairyWeapon
+public class ItemFairySword extends ItemFairyWeaponBase
 {
 
 	public ItemFairySword()
