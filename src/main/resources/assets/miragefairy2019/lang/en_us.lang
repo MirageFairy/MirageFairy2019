@@ -1,5 +1,6 @@
 itemGroup.mirageFairy2019=MirageFairy 2019
 itemGroup.mirageFairy2019.fairy=MirageFairy 2019: Fairy
+
 fairy.mirageFairy.name=Mirage Fairy
 item.mirageFlowerSeeds.name=Mirage Flower Seeds
 item.fairyCrystal.name=Fairy Crystal
@@ -16,12 +17,12 @@ item.gemSulfur.name=Sulfur
 item.dustMiragium.name=Miragium Dust
 item.dustTinyMiragium.name=Tiny Pile of Miragium Dust
 
-fairy.ability.attack.name=ATTACK
-fairy.ability.craft.name=CRAFT
-fairy.ability.fell.name=FELL
-fairy.ability.light.name=LIGHT
-fairy.ability.flame.name=FLAME
-fairy.ability.water.name=WATER
+mirageFairy2019.ability.attack.name=ATTACK
+mirageFairy2019.ability.craft.name=CRAFT
+mirageFairy2019.ability.fell.name=FELL
+mirageFairy2019.ability.light.name=LIGHT
+mirageFairy2019.ability.flame.name=FLAME
+mirageFairy2019.ability.water.name=WATER
 
 mirageFairy2019.mirageFairy.air.name=Airia
 mirageFairy2019.mirageFairy.water.name=Wateria

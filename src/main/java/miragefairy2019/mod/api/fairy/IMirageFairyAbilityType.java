@@ -15,7 +15,7 @@ public interface IMirageFairyAbilityType
 
 	public default String getLocalizedName()
 	{
-		return UtilsMinecraft.translateToLocal("fairy.ability." + getName() + ".name");
+		return UtilsMinecraft.translateToLocal("mirageFairy2019.ability." + getName() + ".name");
 	}
 
 }
