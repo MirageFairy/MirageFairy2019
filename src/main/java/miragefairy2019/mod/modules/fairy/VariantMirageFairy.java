@@ -26,7 +26,7 @@ public class VariantMirageFairy extends ItemVariant
 
 	public String getUnlocalizedName()
 	{
-		return "fairy.mirageFairy." + type.name;
+		return "mirageFairy2019.mirageFairy." + type.name;
 	}
 
 }
