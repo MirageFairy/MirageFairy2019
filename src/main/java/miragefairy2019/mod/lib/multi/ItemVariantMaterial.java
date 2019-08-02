@@ -3,11 +3,20 @@ package miragefairy2019.mod.lib.multi;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemVariant
+public class ItemVariantMaterial extends ItemVariant
 {
+
+	public final String registryName;
+	public final String oreName;
 
 	private int metadata = 0;
 	private Item item = null;
+
+	public ItemVariantMaterial(String registryName, String oreName)
+	{
+		this.registryName = registryName;
+		this.oreName = oreName;
+	}
 
 	public int getMetadata()
 	{
@@ -37,6 +46,11 @@ public class ItemVariant
 	public ItemStack createItemStack()
 	{
 		return createItemStack(1);
+	}
+
+	public String getUnlocalizedName()
+	{
+		return "item." + oreName;
 	}
 
 }

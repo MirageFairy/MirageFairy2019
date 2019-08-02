@@ -1,16 +1,21 @@
 package miragefairy2019.mod.modules.fairy;
 
+import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.multi.ItemVariant;
 
 public class VariantAbility extends ItemVariant
 {
 
-	public final EnumAbilityType abilityType;
+	public final EnumMirageSphere mirageSphere;
 
-	public VariantAbility(String registryName, String oreName, EnumAbilityType abilityType)
+	public VariantAbility(EnumMirageSphere mirageSphere)
 	{
-		super(registryName, oreName);
-		this.abilityType = abilityType;
+		this.mirageSphere = mirageSphere;
+	}
+
+	public String getOreName()
+	{
+		return "mirageSphere" + Utils.toUpperCaseHead(mirageSphere.abilityType.getName());
 	}
 
 }

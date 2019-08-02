@@ -12,7 +12,7 @@ public class ItemMirageSpheres extends ItemMulti<VariantAbility>
 	{
 		VariantAbility variant = getVariant(itemStack).orElse(null);
 		if (variant == null) return UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".name").trim();
-		return UtilsMinecraft.translateToLocalFormatted(getUnlocalizedName() + ".format", variant.abilityType.getLocalizedName()).trim();
+		return UtilsMinecraft.translateToLocalFormatted(getUnlocalizedName() + ".format", variant.mirageSphere.abilityType.getLocalizedName()).trim();
 	}
 
 }

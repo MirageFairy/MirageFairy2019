@@ -7,19 +7,11 @@ public interface IMirageFairyAbilityType
 {
 
 	/**
-	 * @return すべて小文字で。
+	 * @return すべて小文字
 	 */
 	public String getName();
 
 	public TextFormatting getTextColor();
-
-	public int getCoreColor();
-
-	public int getHighlightColor();
-
-	public int getBackgroundColor();
-
-	public int getPlasmaColor();
 
 	public default String getLocalizedName()
 	{

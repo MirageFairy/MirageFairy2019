@@ -52,12 +52,6 @@ public class ItemMulti<V extends ItemVariant> extends Item
 	//
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
-	{
-		return getVariant(stack).map(v -> v.getUnlocalizedName()).orElse("item.null");
-	}
-
-	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
 	{
 		if (!isInCreativeTab(tab)) return;

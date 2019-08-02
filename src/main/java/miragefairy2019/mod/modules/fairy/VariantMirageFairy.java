@@ -11,8 +11,17 @@ public class VariantMirageFairy extends ItemVariant
 
 	public VariantMirageFairy(MirageFairyType type)
 	{
-		super("mirage_fairy_" + type.name, "mirageFairy" + Utils.toUpperCaseHead(type.name));
 		this.type = type;
+	}
+
+	public String getOreName()
+	{
+		return "mirageFairy" + Utils.toUpperCaseHead(type.name);
+	}
+
+	public String getRegistryName()
+	{
+		return "mirage_fairy_" + type.name;
 	}
 
 	public String getUnlocalizedName()
