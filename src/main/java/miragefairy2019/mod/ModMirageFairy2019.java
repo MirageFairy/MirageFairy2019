@@ -3,6 +3,7 @@ package miragefairy2019.mod;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.modules.ModuleMain;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
+import miragefairy2019.mod.modules.fairyweapon.ModuleFairyWeapon;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import net.minecraftforge.fml.common.Mod;
@@ -25,6 +26,7 @@ public class ModMirageFairy2019
 	{
 		ModuleMain.init(erMod);
 		ModuleFairy.init(erMod);
+		ModuleFairyWeapon.init(erMod);
 		ModuleMirageFlower.init(erMod);
 		ModuleOre.init(erMod);
 		/* TODO
