@@ -13,7 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ModuleFairyWeapon
 {
 
-	public static ItemFairyWandCrafting itemFairyWandCrafting;
+	public static ItemCraftingFairyWand itemCraftingFairyWand;
 	public static ItemFairySword itemFairySword;
 
 	public static void init(EventRegistryMod erMod)
@@ -22,13 +22,13 @@ public class ModuleFairyWeapon
 
 			// 加工のステッキ
 			{
-				ItemFairyWandCrafting item = new ItemFairyWandCrafting();
+				ItemCraftingFairyWand item = new ItemCraftingFairyWand();
 				item.setRegistryName(ModMirageFairy2019.MODID, "crafting_fairy_wand");
-				item.setUnlocalizedName("fairyWandCrafting");
+				item.setUnlocalizedName("craftingFairyWand");
 				item.setCreativeTab(ApiMain.creativeTab);
 				ForgeRegistries.ITEMS.register(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemFairyWandCrafting = itemFairyWandCrafting = item;
+				ApiFairyWeapon.itemFairyWandCrafting = itemCraftingFairyWand = item;
 			}
 
 			// 妖精剣
@@ -44,7 +44,7 @@ public class ModuleFairyWeapon
 
 		});
 		erMod.createItemStack.register(ic -> {
-			OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWandCrafting", new ItemStack(itemFairyWandCrafting, 1, OreDictionary.WILDCARD_VALUE));
+			OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWandCrafting", new ItemStack(itemCraftingFairyWand, 1, OreDictionary.WILDCARD_VALUE));
 		});
 	}
 

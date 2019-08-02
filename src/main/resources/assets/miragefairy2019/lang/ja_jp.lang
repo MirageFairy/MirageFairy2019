@@ -4,8 +4,6 @@ itemGroup.mirageFairy2019.fairy=MirageFairy 2019：妖精
 fairy.mirageFairy.name=ミラージュの妖精
 item.mirageFlowerSeeds.name=ミラージュの花の種
 item.fairyCrystal.name=妖晶
-item.fairyWandCrafting.name=細工のステッキ
-item.fairySword.name=妖精剣
 tile.oreApatite.name=燐灰石鉱石
 item.gemApatite.name=燐灰石
 tile.oreFluorite.name=蛍石鉱石
@@ -14,6 +12,9 @@ tile.oreSulfur.name=硫黄鉱石
 item.gemSulfur.name=硫黄
 item.dustMiragium.name=ミラジウムの粉
 item.dustTinyMiragium.name=ミラジウムの微粉
+
+item.craftingFairyWand.name=細工のステッキ
+item.fairySword.name=妖精剣
 
 item.spheres.name=スフィア
 item.spheres.format=≪%s≫のスフィア

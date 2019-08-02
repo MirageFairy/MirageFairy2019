@@ -2,10 +2,10 @@ package miragefairy2019.mod.modules.fairyweapon;
 
 import net.minecraft.item.ItemStack;
 
-public class ItemFairyWandCrafting extends ItemFairyWeaponBase
+public class ItemCraftingFairyWand extends ItemFairyWeaponBase
 {
 
-	public ItemFairyWandCrafting()
+	public ItemCraftingFairyWand()
 	{
 		this.setMaxDamage(16 - 1);
 	}
