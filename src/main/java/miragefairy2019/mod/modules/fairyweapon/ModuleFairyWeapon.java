@@ -44,7 +44,7 @@ public class ModuleFairyWeapon
 
 		});
 		erMod.createItemStack.register(ic -> {
-			OreDictionary.registerOre("mirageFairyWandCrafting", new ItemStack(itemFairyWandCrafting, 1, OreDictionary.WILDCARD_VALUE));
+			OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWandCrafting", new ItemStack(itemFairyWandCrafting, 1, OreDictionary.WILDCARD_VALUE));
 		});
 	}
 
