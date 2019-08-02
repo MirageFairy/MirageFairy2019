@@ -31,6 +31,14 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements II
 	}
 
 	@Override
+	public String getUnlocalizedName(ItemStack stack)
+	{
+		VariantMirageFairy variant = getVariant(stack).orElse(null);
+		if (variant == null) return "item.null";
+		return variant.getUnlocalizedName();
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag)
 	{

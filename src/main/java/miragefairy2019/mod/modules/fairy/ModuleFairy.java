@@ -188,9 +188,7 @@ public class ModuleFairy
 		private VariantMirageFairy[] v(MirageFairyType[] types)
 		{
 			return ISuppliterator.ofObjArray(types)
-				.map(type -> {
-					return new VariantMirageFairy("mirage_fairy_" + type.name, "mirageFairy" + Utils.toUpperCaseHead(type.name), "mirageFairy." + type.name, type);
-				})
+				.map(type -> new VariantMirageFairy(type))
 				.toArray(VariantMirageFairy[]::new);
 		}
 
