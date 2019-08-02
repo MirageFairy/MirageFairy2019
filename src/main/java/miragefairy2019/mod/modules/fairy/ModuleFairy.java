@@ -243,7 +243,7 @@ public class ModuleFairy
 			ForgeRegistries.ITEMS.register(itemFairyR1);
 			if (ApiMain.side.isClient()) {
 				for (Tuple<Integer, VariantFairy> tuple : itemFairyR1.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemFairyR1, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
+					ModelLoader.setCustomModelResourceLocation(itemFairyR1, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "fairy"), null));
 				}
 			}
 
@@ -257,7 +257,7 @@ public class ModuleFairy
 			ForgeRegistries.ITEMS.register(itemFairyR2);
 			if (ApiMain.side.isClient()) {
 				for (Tuple<Integer, VariantFairy> tuple : itemFairyR2.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemFairyR2, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
+					ModelLoader.setCustomModelResourceLocation(itemFairyR2, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "fairy"), null));
 				}
 			}
 
@@ -271,7 +271,7 @@ public class ModuleFairy
 			ForgeRegistries.ITEMS.register(itemFairyR3);
 			if (ApiMain.side.isClient()) {
 				for (Tuple<Integer, VariantFairy> tuple : itemFairyR3.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemFairyR3, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
+					ModelLoader.setCustomModelResourceLocation(itemFairyR3, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "fairy"), null));
 				}
 			}
 
@@ -285,7 +285,7 @@ public class ModuleFairy
 			ForgeRegistries.ITEMS.register(itemFairyR4);
 			if (ApiMain.side.isClient()) {
 				for (Tuple<Integer, VariantFairy> tuple : itemFairyR4.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemFairyR4, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
+					ModelLoader.setCustomModelResourceLocation(itemFairyR4, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "fairy"), null));
 				}
 			}
 
@@ -299,7 +299,7 @@ public class ModuleFairy
 			ForgeRegistries.ITEMS.register(itemFairyR5);
 			if (ApiMain.side.isClient()) {
 				for (Tuple<Integer, VariantFairy> tuple : itemFairyR5.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemFairyR5, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
+					ModelLoader.setCustomModelResourceLocation(itemFairyR5, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "fairy"), null));
 				}
 			}
 
