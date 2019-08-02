@@ -46,13 +46,13 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements II
 		if (variant == null) return;
 
 		if (!flag.isAdvanced()) {
+			tooltip.add("" + GREEN + "No: " + variant.type.id + " (" + variant.type.modid + ")");
 			tooltip.add("" + "Type:"
-				+ " " + variant.getMetadata()
 				+ " " + GOLD + UtilsString.repeat("★", variant.type.rare) + getRankColor(variant) + UtilsString.repeat("★", variant.type.rank - 1)
 				+ " " + WHITE + variant.type.name);
 		} else {
+			tooltip.add("" + GREEN + "No: " + variant.type.modid + ":" + variant.type.id);
 			tooltip.add("" + "Type:"
-				+ " No." + variant.getMetadata()
 				+ " " + GOLD + "Rare." + variant.type.rare
 				+ " " + getRankColor(variant) + "Rank." + variant.type.rank
 				+ " " + WHITE + variant.type.name);

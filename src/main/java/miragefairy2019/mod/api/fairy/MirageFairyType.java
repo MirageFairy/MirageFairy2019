@@ -4,6 +4,7 @@ public final class MirageFairyType
 {
 
 	public final String modid;
+	public final int id;
 	public final String name;
 	public final int rare;
 	public final int rank;
@@ -14,6 +15,7 @@ public final class MirageFairyType
 
 	public MirageFairyType(
 		String modid,
+		int id,
 		String name,
 		int rare,
 		int rank,
@@ -23,6 +25,7 @@ public final class MirageFairyType
 		MirageFairyColorSet colorSet)
 	{
 		this.modid = modid;
+		this.id = id;
 		this.name = name;
 		this.rare = rare;
 		this.rank = rank;
