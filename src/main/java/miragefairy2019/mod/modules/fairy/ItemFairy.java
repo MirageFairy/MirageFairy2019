@@ -19,13 +19,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements IItemFairy
+public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 {
 
 	@Override
 	public Optional<FairyType> getMirageFairy2019Fairy(ItemStack itemStack)
 	{
-		VariantMirageFairy variant = getVariant(itemStack).orElse(null);
+		VariantFairy variant = getVariant(itemStack).orElse(null);
 		if (variant == null) return Optional.empty();
 		return Optional.of(variant.type);
 	}
@@ -33,7 +33,7 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements II
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		VariantMirageFairy variant = getVariant(stack).orElse(null);
+		VariantFairy variant = getVariant(stack).orElse(null);
 		if (variant == null) return "item.null";
 		return variant.getUnlocalizedName();
 	}
@@ -42,7 +42,7 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements II
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
-		VariantMirageFairy variant = getVariant(stack).orElse(null);
+		VariantFairy variant = getVariant(stack).orElse(null);
 		if (variant == null) return;
 
 		if (!flag.isAdvanced()) {
@@ -95,7 +95,7 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements II
 
 	}
 
-	private TextFormatting getRankColor(VariantMirageFairy variant)
+	private TextFormatting getRankColor(VariantFairy variant)
 	{
 		switch (variant.type.rank) {
 			case 1:

@@ -13,13 +13,13 @@ public class ApiFairy
 
 	public static CreativeTabs creativeTab;
 
-	public static Item itemMirageFairyR1;
-	public static Item itemMirageFairyR2;
-	public static Item itemMirageFairyR3;
-	public static Item itemMirageFairyR4;
-	public static Item itemMirageFairyR5;
+	public static Item itemFairyR1;
+	public static Item itemFairyR2;
+	public static Item itemFairyR3;
+	public static Item itemFairyR4;
+	public static Item itemFairyR5;
 
-	public static ItemStack itemStackMirageFairyMain;
+	public static ItemStack itemStackFairyMain;
 
 	public static enum EnumAbilityType implements IAbilityType
 	{

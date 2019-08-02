@@ -36,61 +36,61 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ModuleFairy
 {
 
-	public static ItemMirageFairy itemMirageFairyR1;
-	public static ItemMirageFairy itemMirageFairyR2;
-	public static ItemMirageFairy itemMirageFairyR3;
-	public static ItemMirageFairy itemMirageFairyR4;
-	public static ItemMirageFairy itemMirageFairyR5;
+	public static ItemFairy itemFairyR1;
+	public static ItemFairy itemFairyR2;
+	public static ItemFairy itemFairyR3;
+	public static ItemFairy itemFairyR4;
+	public static ItemFairy itemFairyR5;
 
 	public static class FairyTypes
 	{
 
-		public static ImmutableArray<Tuple<Integer, VariantMirageFairy[]>> variants;
+		public static ImmutableArray<Tuple<Integer, VariantFairy[]>> variants;
 
-		public static VariantMirageFairy[] air;
-		public static VariantMirageFairy[] water;
-		public static VariantMirageFairy[] fire;
-		public static VariantMirageFairy[] sun;
-		public static VariantMirageFairy[] stone;
-		public static VariantMirageFairy[] dirt;
-		public static VariantMirageFairy[] iron;
-		public static VariantMirageFairy[] diamond;
-		public static VariantMirageFairy[] redstone;
-		public static VariantMirageFairy[] enderman;
-		public static VariantMirageFairy[] moon;
-		public static VariantMirageFairy[] sand;
-		public static VariantMirageFairy[] gold;
-		public static VariantMirageFairy[] spider;
-		public static VariantMirageFairy[] skeleton;
-		public static VariantMirageFairy[] zombie;
-		public static VariantMirageFairy[] creeper;
-		public static VariantMirageFairy[] wheat;
-		public static VariantMirageFairy[] lilac;
-		public static VariantMirageFairy[] torch;
-		public static VariantMirageFairy[] lava;
-		public static VariantMirageFairy[] star;
-		public static VariantMirageFairy[] gravel;
-		public static VariantMirageFairy[] emerald;
-		public static VariantMirageFairy[] lapislazuli;
-		public static VariantMirageFairy[] enderdragon;
-		public static VariantMirageFairy[] witherskeleton;
-		public static VariantMirageFairy[] wither;
-		public static VariantMirageFairy[] thunder;
-		public static VariantMirageFairy[] chicken;
-		public static VariantMirageFairy[] furnace;
-		public static VariantMirageFairy[] magentaglazedterracotta;
-		public static VariantMirageFairy[] bread;
-		public static VariantMirageFairy[] daytime;
-		public static VariantMirageFairy[] night;
-		public static VariantMirageFairy[] morning;
-		public static VariantMirageFairy[] fine;
-		public static VariantMirageFairy[] rain;
-		public static VariantMirageFairy[] plains;
-		public static VariantMirageFairy[] forest;
+		public static VariantFairy[] air;
+		public static VariantFairy[] water;
+		public static VariantFairy[] fire;
+		public static VariantFairy[] sun;
+		public static VariantFairy[] stone;
+		public static VariantFairy[] dirt;
+		public static VariantFairy[] iron;
+		public static VariantFairy[] diamond;
+		public static VariantFairy[] redstone;
+		public static VariantFairy[] enderman;
+		public static VariantFairy[] moon;
+		public static VariantFairy[] sand;
+		public static VariantFairy[] gold;
+		public static VariantFairy[] spider;
+		public static VariantFairy[] skeleton;
+		public static VariantFairy[] zombie;
+		public static VariantFairy[] creeper;
+		public static VariantFairy[] wheat;
+		public static VariantFairy[] lilac;
+		public static VariantFairy[] torch;
+		public static VariantFairy[] lava;
+		public static VariantFairy[] star;
+		public static VariantFairy[] gravel;
+		public static VariantFairy[] emerald;
+		public static VariantFairy[] lapislazuli;
+		public static VariantFairy[] enderdragon;
+		public static VariantFairy[] witherskeleton;
+		public static VariantFairy[] wither;
+		public static VariantFairy[] thunder;
+		public static VariantFairy[] chicken;
+		public static VariantFairy[] furnace;
+		public static VariantFairy[] magentaglazedterracotta;
+		public static VariantFairy[] bread;
+		public static VariantFairy[] daytime;
+		public static VariantFairy[] night;
+		public static VariantFairy[] morning;
+		public static VariantFairy[] fine;
+		public static VariantFairy[] rain;
+		public static VariantFairy[] plains;
+		public static VariantFairy[] forest;
 
 		//
 
-		private List<Tuple<Integer, VariantMirageFairy[]>> variants2 = new ArrayList<>();
+		private List<Tuple<Integer, VariantFairy[]>> variants2 = new ArrayList<>();
 
 		protected void init()
 		{
@@ -140,16 +140,16 @@ public class ModuleFairy
 			variants = ImmutableArray.ofList(variants2);
 		}
 
-		private void r(int id, VariantMirageFairy[] variants)
+		private void r(int id, VariantFairy[] variants)
 		{
 			variants2.add(Tuple.of(id, variants));
 		}
 
-		private VariantMirageFairy[] v(FairyType[] types)
+		private VariantFairy[] v(FairyType[] types)
 		{
 			return ISuppliterator.ofObjArray(types)
-				.map(type -> new VariantMirageFairy(type))
-				.toArray(VariantMirageFairy[]::new);
+				.map(type -> new VariantFairy(type))
+				.toArray(VariantFairy[]::new);
 		}
 
 		private FairyType[] t(int id, String name, int rare, int cost, ManaSet manaSet, AbilitySet abilitySet, ColorSet colorSet)
@@ -214,13 +214,13 @@ public class ModuleFairy
 				@SideOnly(Side.CLIENT)
 				public ItemStack getTabIconItem()
 				{
-					return ApiFairy.itemStackMirageFairyMain;
+					return ApiFairy.itemStackFairyMain;
 				}
 
 				@SideOnly(value = Side.CLIENT)
 				public void displayAllRelevantItems(NonNullList<ItemStack> itemStacks)
 				{
-					for (Tuple<Integer, VariantMirageFairy[]> variant : FairyTypes.variants) {
+					for (Tuple<Integer, VariantFairy[]> variant : FairyTypes.variants) {
 						for (int i = 0; i <= 4; i++) {
 							itemStacks.add(variant.y[i].createItemStack());
 						}
@@ -234,72 +234,72 @@ public class ModuleFairy
 			new FairyTypes().init();
 
 			// 妖精
-			ApiFairy.itemMirageFairyR1 = itemMirageFairyR1 = new ItemMirageFairy();
-			itemMirageFairyR1.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy");
-			itemMirageFairyR1.setUnlocalizedName("mirageFairy");
-			for (Tuple<Integer, VariantMirageFairy[]> tuple : FairyTypes.variants) {
-				itemMirageFairyR1.registerVariant(tuple.x, tuple.y[0]);
+			ApiFairy.itemFairyR1 = itemFairyR1 = new ItemFairy();
+			itemFairyR1.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy");
+			itemFairyR1.setUnlocalizedName("mirageFairy");
+			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
+				itemFairyR1.registerVariant(tuple.x, tuple.y[0]);
 			}
-			ForgeRegistries.ITEMS.register(itemMirageFairyR1);
+			ForgeRegistries.ITEMS.register(itemFairyR1);
 			if (ApiMain.side.isClient()) {
-				for (Tuple<Integer, VariantMirageFairy> tuple : itemMirageFairyR1.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemMirageFairyR1, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
+				for (Tuple<Integer, VariantFairy> tuple : itemFairyR1.getVariants()) {
+					ModelLoader.setCustomModelResourceLocation(itemFairyR1, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
 				}
 			}
 
 			// 妖精
-			ApiFairy.itemMirageFairyR2 = itemMirageFairyR2 = new ItemMirageFairy();
-			itemMirageFairyR2.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r2");
-			itemMirageFairyR2.setUnlocalizedName("mirageFairy_2");
-			for (Tuple<Integer, VariantMirageFairy[]> tuple : FairyTypes.variants) {
-				itemMirageFairyR2.registerVariant(tuple.x, tuple.y[1]);
+			ApiFairy.itemFairyR2 = itemFairyR2 = new ItemFairy();
+			itemFairyR2.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r2");
+			itemFairyR2.setUnlocalizedName("mirageFairyR2");
+			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
+				itemFairyR2.registerVariant(tuple.x, tuple.y[1]);
 			}
-			ForgeRegistries.ITEMS.register(itemMirageFairyR2);
+			ForgeRegistries.ITEMS.register(itemFairyR2);
 			if (ApiMain.side.isClient()) {
-				for (Tuple<Integer, VariantMirageFairy> tuple : itemMirageFairyR2.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemMirageFairyR2, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
+				for (Tuple<Integer, VariantFairy> tuple : itemFairyR2.getVariants()) {
+					ModelLoader.setCustomModelResourceLocation(itemFairyR2, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
 				}
 			}
 
 			// 妖精
-			ApiFairy.itemMirageFairyR3 = itemMirageFairyR3 = new ItemMirageFairy();
-			itemMirageFairyR3.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r3");
-			itemMirageFairyR3.setUnlocalizedName("mirageFairy");
-			for (Tuple<Integer, VariantMirageFairy[]> tuple : FairyTypes.variants) {
-				itemMirageFairyR3.registerVariant(tuple.x, tuple.y[2]);
+			ApiFairy.itemFairyR3 = itemFairyR3 = new ItemFairy();
+			itemFairyR3.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r3");
+			itemFairyR3.setUnlocalizedName("mirageFairyR3");
+			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
+				itemFairyR3.registerVariant(tuple.x, tuple.y[2]);
 			}
-			ForgeRegistries.ITEMS.register(itemMirageFairyR3);
+			ForgeRegistries.ITEMS.register(itemFairyR3);
 			if (ApiMain.side.isClient()) {
-				for (Tuple<Integer, VariantMirageFairy> tuple : itemMirageFairyR3.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemMirageFairyR3, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
+				for (Tuple<Integer, VariantFairy> tuple : itemFairyR3.getVariants()) {
+					ModelLoader.setCustomModelResourceLocation(itemFairyR3, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
 				}
 			}
 
 			// 妖精
-			ApiFairy.itemMirageFairyR4 = itemMirageFairyR4 = new ItemMirageFairy();
-			itemMirageFairyR4.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r4");
-			itemMirageFairyR4.setUnlocalizedName("mirageFairy");
-			for (Tuple<Integer, VariantMirageFairy[]> tuple : FairyTypes.variants) {
-				itemMirageFairyR4.registerVariant(tuple.x, tuple.y[3]);
+			ApiFairy.itemFairyR4 = itemFairyR4 = new ItemFairy();
+			itemFairyR4.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r4");
+			itemFairyR4.setUnlocalizedName("mirageFairyR4");
+			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
+				itemFairyR4.registerVariant(tuple.x, tuple.y[3]);
 			}
-			ForgeRegistries.ITEMS.register(itemMirageFairyR4);
+			ForgeRegistries.ITEMS.register(itemFairyR4);
 			if (ApiMain.side.isClient()) {
-				for (Tuple<Integer, VariantMirageFairy> tuple : itemMirageFairyR4.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemMirageFairyR4, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
+				for (Tuple<Integer, VariantFairy> tuple : itemFairyR4.getVariants()) {
+					ModelLoader.setCustomModelResourceLocation(itemFairyR4, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
 				}
 			}
 
 			// 妖精
-			ApiFairy.itemMirageFairyR5 = itemMirageFairyR5 = new ItemMirageFairy();
-			itemMirageFairyR5.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r5");
-			itemMirageFairyR5.setUnlocalizedName("mirageFairy");
-			for (Tuple<Integer, VariantMirageFairy[]> tuple : FairyTypes.variants) {
-				itemMirageFairyR5.registerVariant(tuple.x, tuple.y[4]);
+			ApiFairy.itemFairyR5 = itemFairyR5 = new ItemFairy();
+			itemFairyR5.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r5");
+			itemFairyR5.setUnlocalizedName("mirageFairyR5");
+			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
+				itemFairyR5.registerVariant(tuple.x, tuple.y[4]);
 			}
-			ForgeRegistries.ITEMS.register(itemMirageFairyR5);
+			ForgeRegistries.ITEMS.register(itemFairyR5);
 			if (ApiMain.side.isClient()) {
-				for (Tuple<Integer, VariantMirageFairy> tuple : itemMirageFairyR5.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemMirageFairyR5, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
+				for (Tuple<Integer, VariantFairy> tuple : itemFairyR5.getVariants()) {
+					ModelLoader.setCustomModelResourceLocation(itemFairyR5, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
 				}
 			}
 
@@ -316,10 +316,10 @@ public class ModuleFairy
 					class ItemColorImpl implements IItemColor
 					{
 
-						private final ItemMirageFairy itemMirageFairy;
+						private final ItemFairy itemMirageFairy;
 						private final int colorCloth;
 
-						public ItemColorImpl(ItemMirageFairy itemMirageFairy, int colorCloth)
+						public ItemColorImpl(ItemFairy itemMirageFairy, int colorCloth)
 						{
 							this.itemMirageFairy = itemMirageFairy;
 							this.colorCloth = colorCloth;
@@ -328,7 +328,7 @@ public class ModuleFairy
 						@Override
 						public int colorMultiplier(ItemStack stack, int tintIndex)
 						{
-							VariantMirageFairy variant = itemMirageFairy.getVariant(stack).orElse(null);
+							VariantFairy variant = itemMirageFairy.getVariant(stack).orElse(null);
 							if (variant == null) return 0xFFFFFF;
 							if (tintIndex == 0) return variant.type.colorSet.skin;
 							if (tintIndex == 1) return colorCloth;
@@ -339,26 +339,26 @@ public class ModuleFairy
 						}
 
 					}
-					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemMirageFairyR1, 0x888888), itemMirageFairyR1);
-					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemMirageFairyR2, 0xFF8888), itemMirageFairyR2);
-					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemMirageFairyR3, 0x8888FF), itemMirageFairyR3);
-					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemMirageFairyR4, 0x88FF88), itemMirageFairyR4);
-					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemMirageFairyR5, 0xFFFF88), itemMirageFairyR5);
+					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemFairyR1, 0x888888), itemFairyR1);
+					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemFairyR2, 0xFF8888), itemFairyR2);
+					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemFairyR3, 0x8888FF), itemFairyR3);
+					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemFairyR4, 0x88FF88), itemFairyR4);
+					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemFairyR5, 0xFFFF88), itemFairyR5);
 				}
 
 			}
 		});
 		erMod.createItemStack.register(ic -> {
 
-			ApiFairy.itemStackMirageFairyMain = FairyTypes.magentaglazedterracotta[0].createItemStack();
+			ApiFairy.itemStackFairyMain = FairyTypes.magentaglazedterracotta[0].createItemStack();
 
 			// 妖精の鉱石辞書
-			for (Tuple<Integer, VariantMirageFairy[]> variant : FairyTypes.variants) {
+			for (Tuple<Integer, VariantFairy[]> variant : FairyTypes.variants) {
 				for (int i = 0; i <= 4; i++) {
 					for (Tuple<IAbilityType, Double> tuple : variant.y[i].type.abilitySet.tuples) {
 						if (tuple.y >= 10) {
 							OreDictionary.registerOre(
-								"mirageFairyAbility" + Utils.toUpperCaseHead(tuple.x.getName()),
+								"mirageFairy2019FairyAbility" + Utils.toUpperCaseHead(tuple.x.getName()),
 								variant.y[i].createItemStack());
 						}
 					}
@@ -369,7 +369,7 @@ public class ModuleFairy
 		erMod.addRecipe.register(() -> {
 
 			// 凝縮・分散レシピ
-			for (Tuple<Integer, VariantMirageFairy[]> tuple : FairyTypes.variants) {
+			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
 
 				for (int i = 0; i < 4; i++) {
 
