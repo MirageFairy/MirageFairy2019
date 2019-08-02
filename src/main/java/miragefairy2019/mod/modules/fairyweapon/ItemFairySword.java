@@ -1,9 +1,10 @@
-package miragefairy2019.mod.modules.fairy;
+package miragefairy2019.mod.modules.fairyweapon;
 
 import java.util.Optional;
 
 import com.google.common.collect.Multimap;
 
+import miragefairy2019.mod.modules.fairy.MirageFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,7 +15,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemFairySword extends ItemToolFairy
+public class ItemFairySword extends ItemFairyWeapon
 {
 
 	public ItemFairySword()

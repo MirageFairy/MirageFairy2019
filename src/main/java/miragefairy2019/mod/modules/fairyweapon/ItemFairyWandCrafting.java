@@ -1,8 +1,8 @@
-package miragefairy2019.mod.modules.fairy;
+package miragefairy2019.mod.modules.fairyweapon;
 
 import net.minecraft.item.ItemStack;
 
-public class ItemFairyWandCrafting extends ItemToolFairy
+public class ItemFairyWandCrafting extends ItemFairyWeapon
 {
 
 	public ItemFairyWandCrafting()

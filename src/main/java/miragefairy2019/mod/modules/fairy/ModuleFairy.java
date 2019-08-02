@@ -14,6 +14,8 @@ import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.multi.ItemMulti;
 import miragefairy2019.mod.lib.multi.ItemVariant;
 import miragefairy2019.mod.modules.fairy.ItemFairyCrystal.Drop;
+import miragefairy2019.mod.modules.fairyweapon.ItemFairySword;
+import miragefairy2019.mod.modules.fairyweapon.ItemFairyWandCrafting;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;

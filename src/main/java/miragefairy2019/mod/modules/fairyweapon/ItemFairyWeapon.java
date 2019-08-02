@@ -1,7 +1,9 @@
-package miragefairy2019.mod.modules.fairy;
+package miragefairy2019.mod.modules.fairyweapon;
 
 import java.util.Optional;
 
+import miragefairy2019.mod.modules.fairy.IItemMirageFairy;
+import miragefairy2019.mod.modules.fairy.MirageFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
@@ -17,10 +19,10 @@ import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemToolFairy extends Item
+public class ItemFairyWeapon extends Item
 {
 
-	public ItemToolFairy()
+	public ItemFairyWeapon()
 	{
 		setMaxStackSize(1);
 	}
