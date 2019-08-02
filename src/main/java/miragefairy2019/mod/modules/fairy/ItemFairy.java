@@ -35,7 +35,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 	{
 		VariantFairy variant = getVariant(stack).orElse(null);
 		if (variant == null) return "item.null";
-		return variant.getUnlocalizedName();
+		return "mirageFairy2019.fairy." + variant.type.name;
 	}
 
 	@Override

@@ -13,14 +13,4 @@ public class VariantFairy extends ItemVariant
 		this.type = type;
 	}
 
-	public String getRegistryName()
-	{
-		return "fairy_" + type.name;
-	}
-
-	public String getUnlocalizedName()
-	{
-		return "mirageFairy2019.fairy." + type.name;
-	}
-
 }

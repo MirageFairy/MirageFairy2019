@@ -375,8 +375,8 @@ public class ModuleFairy
 
 					// 凝縮
 					GameRegistry.addShapelessRecipe(
-						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "condense_r" + i + "_" + tuple.y[i].getRegistryName()),
-						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "condense_r" + i),
+						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "condense_r" + i + "_fairy_" + tuple.y[i].type.name),
+						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "condense_r" + i + "_fairy_" + tuple.y[i].type.name),
 						tuple.y[i + 1].createItemStack(),
 						Ingredient.fromStacks(tuple.y[i].createItemStack()),
 						Ingredient.fromStacks(tuple.y[i].createItemStack()),
@@ -390,8 +390,8 @@ public class ModuleFairy
 
 					// 分散
 					GameRegistry.addShapelessRecipe(
-						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "decondense_r" + i + "_" + tuple.y[i].getRegistryName()),
-						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "decondense_r" + i),
+						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "decondense_r" + i + "_fairy_" + tuple.y[i].type.name),
+						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "decondense_r" + i + "_fairy_" + tuple.y[i].type.name),
 						tuple.y[i].createItemStack(9),
 						Ingredient.fromStacks(tuple.y[i + 1].createItemStack()));
 
