@@ -9,13 +9,17 @@ import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class ModuleSphere
 {
@@ -91,6 +95,21 @@ public class ModuleSphere
 			// スフィアの鉱石辞書
 			for (Tuple<Integer, VariantSphere> tuple : itemSpheres.getVariants()) {
 				OreDictionary.registerOre("mirageFairy2019Sphere" + Utils.toUpperCaseHead(tuple.y.sphere.abilityType.getName()), tuple.y.createItemStack());
+			}
+
+		});
+		erMod.addRecipe.register(() -> {
+
+			for (Tuple<Integer, VariantSphere> variant : itemSpheres.getVariants()) {
+				GameRegistry.addShapelessRecipe(
+					new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
+					new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
+					variant.y.createItemStack(),
+					Ingredient.fromStacks(new ItemStack(Items.WATER_BUCKET)),
+					new OreIngredient("dustMiragium"),
+					new OreIngredient("gemFluorite"),
+					new OreIngredient("mirageFairy2019FairyAbility" + Utils.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
+					variant.y.sphere.sIngredient.get());
 			}
 
 		});
