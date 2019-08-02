@@ -15,8 +15,6 @@ import miragefairy2019.mod.api.fairy.IAbilityType;
 import miragefairy2019.mod.api.fairy.ManaSet;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
-import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
-import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -43,9 +41,6 @@ public class ModuleFairy
 	public static ItemMirageFairy itemMirageFairyR3;
 	public static ItemMirageFairy itemMirageFairyR4;
 	public static ItemMirageFairy itemMirageFairyR5;
-	public static ItemMultiMaterial<ItemVariantMaterial> itemMaterialsFairy;
-
-	//public static ItemVariant variantBucketFairyWater;
 
 	public static class FairyTypes
 	{
@@ -307,15 +302,6 @@ public class ModuleFairy
 					ModelLoader.setCustomModelResourceLocation(itemMirageFairyR5, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy"), null));
 				}
 			}
-
-			// マテリアル
-			ApiFairy.itemMaterialsFairy = itemMaterialsFairy = new ItemMultiMaterial<>();
-			itemMaterialsFairy.setRegistryName(ModMirageFairy2019.MODID, "fairy_materials");
-			itemMaterialsFairy.setUnlocalizedName("materialsFairy");
-			itemMaterialsFairy.setCreativeTab(ApiMain.creativeTab);
-			//itemMaterialsFairy.registerVariant(0, variantBucketFairyWater = new ItemVariant("fairy_water_bucket", "bucketFairyWater"));
-			ForgeRegistries.ITEMS.register(itemMaterialsFairy);
-			if (ApiMain.side.isClient()) itemMaterialsFairy.setCustomModelResourceLocations();
 
 		});
 		erMod.registerItemColorHandler.register(new Runnable() {

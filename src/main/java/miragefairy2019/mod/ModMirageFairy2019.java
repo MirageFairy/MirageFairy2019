@@ -7,6 +7,7 @@ import miragefairy2019.mod.modules.ModuleMain;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.fairyweapon.ModuleFairyWeapon;
+import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import miragefairy2019.mod.modules.sphere.ModuleSphere;
@@ -32,6 +33,7 @@ public class ModMirageFairy2019
 		ModuleFairy.init(erMod);
 		ModuleFairyCrystal.init(erMod);
 		ModuleFairyWeapon.init(erMod);
+		ModuleMaterialsFairy.init(erMod);
 		ModuleMirageFlower.init(erMod);
 		ModuleOre.init(erMod);
 		ModuleSphere.init(erMod);
