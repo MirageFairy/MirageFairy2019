@@ -1,10 +1,11 @@
-package miragefairy2019.mod.modules.fairy;
+package miragefairy2019.mod.modules.fairycrystal;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import miragefairy2019.mod.lib.WeightedRandom;
+import miragefairy2019.mod.modules.fairy.ModuleFairy;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules;
 
 import miragefairy2019.mod.EventRegistryMod;
-import miragefairy2019.mod.api.ApiFairy;
+import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.ApiMain;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,7 @@ public class ModuleMain
 				@SideOnly(Side.CLIENT)
 				public ItemStack getTabIconItem()
 				{
-					return new ItemStack(ApiFairy.itemFairyCrystal);
+					return new ItemStack(ApiFairyCrystal.itemFairyCrystal);
 				}
 			};
 		});

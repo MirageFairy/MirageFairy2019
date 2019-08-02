@@ -3,6 +3,7 @@ package miragefairy2019.mod;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.modules.ModuleMain;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
+import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.fairyweapon.ModuleFairyWeapon;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import miragefairy2019.mod.modules.ore.ModuleOre;
@@ -27,10 +28,11 @@ public class ModMirageFairy2019
 	{
 		ModuleMain.init(erMod);
 		ModuleFairy.init(erMod);
+		ModuleFairyCrystal.init(erMod);
 		ModuleFairyWeapon.init(erMod);
-		ModuleSphere.init(erMod);
 		ModuleMirageFlower.init(erMod);
 		ModuleOre.init(erMod);
+		ModuleSphere.init(erMod);
 		/* TODO
 		ModuleMaterial.init(erMod);
 		ModuleTool.init(erMod);
