@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiFairy;
 import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
@@ -38,7 +37,7 @@ public class ModuleFairyCrystal
 		});
 		erMod.createItemStack.register(ic -> {
 
-			ApiFairy.itemStackFairyCrystal = new ItemStack(itemFairyCrystal);
+			ApiFairyCrystal.itemStackFairyCrystal = new ItemStack(itemFairyCrystal);
 
 			// 妖晶の鉱石辞書登録
 			OreDictionary.registerOre("mirageFairyCrystal", new ItemStack(itemFairyCrystal));

@@ -21,7 +21,6 @@ public class ApiFairy
 	public static Item itemMaterialsFairy;
 
 	public static ItemStack itemStackMirageFairyMain;
-	public static ItemStack itemStackFairyCrystal;
 
 	public static enum EnumAbilityType implements IAbilityType
 	{

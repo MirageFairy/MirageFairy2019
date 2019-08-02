@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.mirageflower;
 
 import java.util.Random;
 
-import miragefairy2019.mod.api.ApiFairy;
+import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.ApiOre;
 import miragefairy2019.mod.lib.Utils;
@@ -167,7 +167,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		{
 			int count = Utils.randomInt(random, isMaxAge(state) ? 1 + fortune * 0.5 : 0);
 			for (int i = 0; i < count; i++) {
-				drops.add(ApiFairy.itemStackFairyCrystal.copy());
+				drops.add(ApiFairyCrystal.itemStackFairyCrystal.copy());
 			}
 		}
 
