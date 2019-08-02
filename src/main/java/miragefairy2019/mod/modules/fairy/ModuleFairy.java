@@ -413,6 +413,8 @@ public class ModuleFairy
 			@Override
 			public void run()
 			{
+
+				// 妖精のカスタム色
 				{
 					@SideOnly(Side.CLIENT)
 					class ItemColorImpl implements IItemColor
@@ -447,6 +449,8 @@ public class ModuleFairy
 					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemMirageFairyR4, 0x88FF88), itemMirageFairyR4);
 					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemMirageFairyR5, 0xFFFF88), itemMirageFairyR5);
 				}
+
+				// スフィアのカスタム色
 				{
 					@SideOnly(Side.CLIENT)
 					class ItemColorImpl implements IItemColor
@@ -467,13 +471,15 @@ public class ModuleFairy
 					}
 					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(), itemMirageSpheres);
 				}
+
 			}
 		});
 		erMod.createItemStack.register(ic -> {
+
 			ApiFairy.itemStackMirageFairyMain = FairyTypes.magentaglazedterracotta[0].createItemStack();
 			ApiFairy.itemStackFairyCrystal = new ItemStack(itemFairyCrystal);
 
-			// 鉱石辞書登録
+			// 妖精の鉱石辞書
 			for (Tuple<Integer, VariantMirageFairy[]> variant : FairyTypes.variants) {
 				for (int i = 0; i <= 4; i++) {
 					for (Tuple<EnumAbilityType, Double> tuple : variant.y[i].type.abilitySet.tuples) {
@@ -485,13 +491,16 @@ public class ModuleFairy
 					}
 				}
 			}
+
+			// スフィアの鉱石辞書
 			for (Tuple<Integer, VariantAbility> tuple : itemMirageSpheres.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}
-			OreDictionary.registerOre("mirageFairyCrystal", new ItemStack(itemFairyCrystal));
-			OreDictionary.registerOre("mirageFairyWandCrafting", new ItemStack(itemFairyWandCrafting, 1, OreDictionary.WILDCARD_VALUE));
 
-			// ドロップ登録
+			// 妖晶の鉱石辞書
+			OreDictionary.registerOre("mirageFairyCrystal", new ItemStack(itemFairyCrystal));
+
+			// 妖晶ドロップ登録
 			{
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.air[0].createItemStack(), 1));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.water[0].createItemStack(), 0.5));
@@ -537,10 +546,13 @@ public class ModuleFairy
 
 		});
 		erMod.addRecipe.register(() -> {
+
+			// 凝縮・分散レシピ
 			for (Tuple<Integer, VariantMirageFairy[]> tuple : FairyTypes.variants) {
 
 				for (int i = 0; i < 4; i++) {
 
+					// 凝縮
 					GameRegistry.addShapelessRecipe(
 						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "condense_r" + i + "_" + tuple.y[i].registryName),
 						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "condense_r" + i),
@@ -554,6 +566,8 @@ public class ModuleFairy
 						Ingredient.fromStacks(tuple.y[i].createItemStack()),
 						Ingredient.fromStacks(tuple.y[i].createItemStack()),
 						Ingredient.fromStacks(tuple.y[i].createItemStack()));
+
+					// 分散
 					GameRegistry.addShapelessRecipe(
 						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "decondense_r" + i + "_" + tuple.y[i].registryName),
 						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "decondense_r" + i),
@@ -563,6 +577,7 @@ public class ModuleFairy
 				}
 
 			}
+
 		});
 	}
 
