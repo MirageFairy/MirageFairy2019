@@ -26,7 +26,7 @@ public class ApiFairy
 		attack(DARK_RED),
 		craft(GOLD),
 		fell(DARK_RED),
-		light(WHITE),
+		light(YELLOW),
 		flame(RED),
 		water(AQUA),
 		;

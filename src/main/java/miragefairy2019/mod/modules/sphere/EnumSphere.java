@@ -14,7 +14,7 @@ public enum EnumSphere
 	attack(EnumAbilityType.attack, 0xFFA0A0, 0xFF6B6B, 0xC70000, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Items.IRON_SWORD))),
 	craft(EnumAbilityType.craft, 0xADADAD, 0xFFC8A4, 0xB57919, 0xDCDCDC, () -> Ingredient.fromStacks(new ItemStack(Blocks.CRAFTING_TABLE))),
 	fell(EnumAbilityType.fell, 0x00BD00, 0xD09D74, 0x6E4219, 0x2FFF2F, () -> Ingredient.fromStacks(new ItemStack(Items.IRON_AXE))),
-	light(EnumAbilityType.light, 0xFFFFFF, 0x848484, 0x000000, 0xFFFFFF, () -> Ingredient.fromStacks(new ItemStack(Blocks.TORCH))),
+	light(EnumAbilityType.light, 0xE0F8FF, 0xFFFFE0, 0xFFFFFF, 0xFFDD3E, () -> Ingredient.fromStacks(new ItemStack(Blocks.TORCH))),
 	flame(EnumAbilityType.flame, 0xFF3600, 0xFF9900, 0xCA5B25, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Items.FLINT_AND_STEEL))),
 	water(EnumAbilityType.water, 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF, () -> Ingredient.fromStacks(new ItemStack(Items.WATER_BUCKET))),
 	;
