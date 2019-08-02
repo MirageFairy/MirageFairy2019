@@ -8,11 +8,11 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairy;
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
-import miragefairy2019.mod.api.fairy.IMirageFairyAbilityType;
-import miragefairy2019.mod.api.fairy.MirageFairyAbilitySet;
-import miragefairy2019.mod.api.fairy.MirageFairyColorSet;
-import miragefairy2019.mod.api.fairy.MirageFairyManaSet;
-import miragefairy2019.mod.api.fairy.MirageFairyType;
+import miragefairy2019.mod.api.fairy.AbilitySet;
+import miragefairy2019.mod.api.fairy.ColorSet;
+import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.fairy.IAbilityType;
+import miragefairy2019.mod.api.fairy.ManaSet;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
@@ -150,22 +150,22 @@ public class ModuleFairy
 			variants2.add(Tuple.of(id, variants));
 		}
 
-		private VariantMirageFairy[] v(MirageFairyType[] types)
+		private VariantMirageFairy[] v(FairyType[] types)
 		{
 			return ISuppliterator.ofObjArray(types)
 				.map(type -> new VariantMirageFairy(type))
 				.toArray(VariantMirageFairy[]::new);
 		}
 
-		private MirageFairyType[] t(int id, String name, int rare, int cost, MirageFairyManaSet manaSet, MirageFairyAbilitySet abilitySet, MirageFairyColorSet colorSet)
+		private FairyType[] t(int id, String name, int rare, int cost, ManaSet manaSet, AbilitySet abilitySet, ColorSet colorSet)
 		{
-			IntFunction<MirageFairyType> f = rank -> {
+			IntFunction<FairyType> f = rank -> {
 
 				double rateRare = Math.pow(2, (rare + rank - 2) / 4.0);
 				double rateVariance = Math.pow(0.5, ((manaSet.shine / manaSet.max + manaSet.fire / manaSet.max + manaSet.wind / manaSet.max
 					+ manaSet.gaia / manaSet.max + manaSet.aqua / manaSet.max + manaSet.dark / manaSet.max) - 1) / 5.0);
 				double sum = cost * rateRare * rateVariance;
-				MirageFairyManaSet manaSetReal = new MirageFairyManaSet(
+				ManaSet manaSetReal = new ManaSet(
 					manaSet.shine * sum / manaSet.sum,
 					manaSet.fire * sum / manaSet.sum,
 					manaSet.wind * sum / manaSet.sum,
@@ -173,13 +173,13 @@ public class ModuleFairy
 					manaSet.aqua * sum / manaSet.sum,
 					manaSet.dark * sum / manaSet.sum);
 
-				MirageFairyAbilitySet abilitySetReal = new MirageFairyAbilitySet(abilitySet.tuples.suppliterator()
+				AbilitySet abilitySetReal = new AbilitySet(abilitySet.tuples.suppliterator()
 					.map(tuple -> Tuple.of(tuple.x, tuple.y * rateRare))
 					.toImmutableArray());
 
-				return new MirageFairyType(ModMirageFairy2019.MODID, id, name, rare, rank, cost, manaSetReal, abilitySetReal, colorSet);
+				return new FairyType(ModMirageFairy2019.MODID, id, name, rare, rank, cost, manaSetReal, abilitySetReal, colorSet);
 			};
-			return new MirageFairyType[] {
+			return new FairyType[] {
 				f.apply(1),
 				f.apply(2),
 				f.apply(3),
@@ -188,14 +188,14 @@ public class ModuleFairy
 			};
 		}
 
-		private MirageFairyManaSet m(double shine, double fire, double wind, double gaia, double aqua, double dark)
+		private ManaSet m(double shine, double fire, double wind, double gaia, double aqua, double dark)
 		{
-			return new MirageFairyManaSet(shine, fire, wind, gaia, aqua, dark);
+			return new ManaSet(shine, fire, wind, gaia, aqua, dark);
 		}
 
-		private final MirageFairyAbilitySet a(double... abilities)
+		private final AbilitySet a(double... abilities)
 		{
-			return new MirageFairyAbilitySet(ImmutableArray.of(
+			return new AbilitySet(ImmutableArray.of(
 				Tuple.of(EnumAbilityType.attack, abilities[0]),
 				Tuple.of(EnumAbilityType.craft, abilities[1]),
 				Tuple.of(EnumAbilityType.fell, abilities[2]),
@@ -204,9 +204,9 @@ public class ModuleFairy
 				Tuple.of(EnumAbilityType.water, abilities[5])));
 		}
 
-		private MirageFairyColorSet c(int skin, int bright, int dark, int hair)
+		private ColorSet c(int skin, int bright, int dark, int hair)
 		{
-			return new MirageFairyColorSet(skin, bright, dark, hair);
+			return new ColorSet(skin, bright, dark, hair);
 		}
 
 	}
@@ -369,7 +369,7 @@ public class ModuleFairy
 			// 妖精の鉱石辞書
 			for (Tuple<Integer, VariantMirageFairy[]> variant : FairyTypes.variants) {
 				for (int i = 0; i <= 4; i++) {
-					for (Tuple<IMirageFairyAbilityType, Double> tuple : variant.y[i].type.abilitySet.tuples) {
+					for (Tuple<IAbilityType, Double> tuple : variant.y[i].type.abilitySet.tuples) {
 						if (tuple.y >= 10) {
 							OreDictionary.registerOre(
 								"mirageFairyAbility" + Utils.toUpperCaseHead(tuple.x.getName()),

@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import net.minecraft.item.ItemStack;
 
-public interface IItemMirageFairy
+public interface IItemFairy
 {
 
-	public Optional<MirageFairyType> getMirageFairy(ItemStack itemStack);
+	public Optional<FairyType> getMirageFairy2019Fairy(ItemStack itemStack);
 
 }

@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.google.common.collect.Multimap;
 
-import miragefairy2019.mod.api.fairy.MirageFairyType;
+import miragefairy2019.mod.api.fairy.FairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -63,7 +63,7 @@ public class ItemFairySword extends ItemFairyWeaponBase
 		if (!(entity instanceof EntityLivingBase)) return;
 		EntityPlayer player = (EntityPlayer) entity;
 
-		Optional<Tuple<ItemStack, MirageFairyType>> oTuple = findFairy(player);
+		Optional<Tuple<ItemStack, FairyType>> oTuple = findFairy(player);
 		if (oTuple.isPresent()) {
 			double a = oTuple.get().y.manaSet.sum(1, 1, 1, 1, 1, 1);
 			double b = oTuple.get().y.cost / 100.0;

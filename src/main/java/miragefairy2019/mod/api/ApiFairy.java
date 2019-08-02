@@ -2,7 +2,7 @@ package miragefairy2019.mod.api;
 
 import static net.minecraft.util.text.TextFormatting.*;
 
-import miragefairy2019.mod.api.fairy.IMirageFairyAbilityType;
+import miragefairy2019.mod.api.fairy.IAbilityType;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ public class ApiFairy
 	public static ItemStack itemStackMirageFairyMain;
 	public static ItemStack itemStackFairyCrystal;
 
-	public static enum EnumAbilityType implements IMirageFairyAbilityType
+	public static enum EnumAbilityType implements IAbilityType
 	{
 		attack(DARK_RED),
 		craft(GOLD),

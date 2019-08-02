@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.sphere;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.fairy.IMirageFairyAbilityType;
+import miragefairy2019.mod.api.fairy.IAbilityType;
 
 public enum EnumSphere
 {
@@ -13,13 +13,13 @@ public enum EnumSphere
 	water(EnumAbilityType.water, 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF),
 	;
 
-	public final IMirageFairyAbilityType abilityType;
+	public final IAbilityType abilityType;
 	public final int colorCore;
 	public final int colorHighlight;
 	public final int colorBackground;
 	public final int colorPlasma;
 
-	private EnumSphere(IMirageFairyAbilityType abilityType, int colorCore, int colorHighlight, int colorBackground, int colorPlasma)
+	private EnumSphere(IAbilityType abilityType, int colorCore, int colorHighlight, int colorBackground, int colorPlasma)
 	{
 		this.abilityType = abilityType;
 		this.colorCore = colorCore;

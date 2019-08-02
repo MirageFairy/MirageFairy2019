@@ -2,8 +2,8 @@ package miragefairy2019.mod.modules.fairyweapon;
 
 import java.util.Optional;
 
-import miragefairy2019.mod.api.fairy.IItemMirageFairy;
-import miragefairy2019.mod.api.fairy.MirageFairyType;
+import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.fairy.IItemFairy;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
@@ -95,9 +95,9 @@ public abstract class ItemFairyWeaponBase extends Item
 		itemStack.setTagCompound(nbt);
 	}
 
-	protected Optional<Tuple<ItemStack, MirageFairyType>> findFairy(EntityPlayer player)
+	protected Optional<Tuple<ItemStack, FairyType>> findFairy(EntityPlayer player)
 	{
-		Optional<MirageFairyType> oFairy;
+		Optional<FairyType> oFairy;
 		ItemStack itemStack;
 
 		itemStack = player.getHeldItem(EnumHand.OFF_HAND);
@@ -119,11 +119,11 @@ public abstract class ItemFairyWeaponBase extends Item
 		return Optional.empty();
 	}
 
-	protected Optional<MirageFairyType> getFairy(ItemStack itemStack)
+	protected Optional<FairyType> getFairy(ItemStack itemStack)
 	{
 		Item item = itemStack.getItem();
-		if (!(item instanceof IItemMirageFairy)) return Optional.empty();
-		return ((IItemMirageFairy) item).getMirageFairy(itemStack);
+		if (!(item instanceof IItemFairy)) return Optional.empty();
+		return ((IItemFairy) item).getMirageFairy2019Fairy(itemStack);
 	}
 
 }

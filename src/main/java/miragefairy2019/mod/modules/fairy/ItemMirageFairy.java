@@ -1,14 +1,14 @@
 package miragefairy2019.mod.modules.fairy;
 
-import static miragefairy2019.mod.api.fairy.EnumMirageFairyManaType.*;
+import static miragefairy2019.mod.api.fairy.EnumManaType.*;
 import static net.minecraft.util.text.TextFormatting.*;
 
 import java.util.List;
 import java.util.Optional;
 
-import miragefairy2019.mod.api.fairy.EnumMirageFairyManaType;
-import miragefairy2019.mod.api.fairy.IItemMirageFairy;
-import miragefairy2019.mod.api.fairy.MirageFairyType;
+import miragefairy2019.mod.api.fairy.EnumManaType;
+import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.lib.multi.ItemMulti;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
@@ -19,11 +19,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements IItemMirageFairy
+public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements IItemFairy
 {
 
 	@Override
-	public Optional<MirageFairyType> getMirageFairy(ItemStack itemStack)
+	public Optional<FairyType> getMirageFairy2019Fairy(ItemStack itemStack)
 	{
 		VariantMirageFairy variant = getVariant(itemStack).orElse(null);
 		if (variant == null) return Optional.empty();
@@ -120,12 +120,12 @@ public class ItemMirageFairy extends ItemMulti<VariantMirageFairy> implements II
 		return value2;
 	}
 
-	private String format1(EnumMirageFairyManaType manaType, double value)
+	private String format1(EnumManaType manaType, double value)
 	{
 		return "" + manaType.colorText + String.format("%4d", format(value));
 	}
 
-	private String format2(EnumMirageFairyManaType manaType, double value)
+	private String format2(EnumManaType manaType, double value)
 	{
 		return "" + manaType.colorText + String.format("%8.3f", value);
 	}

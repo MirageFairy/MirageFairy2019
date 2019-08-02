@@ -1,6 +1,6 @@
 package miragefairy2019.mod.api.fairy;
 
-public final class MirageFairyType
+public final class FairyType
 {
 
 	public final String modid;
@@ -9,20 +9,20 @@ public final class MirageFairyType
 	public final int rare;
 	public final int rank;
 	public final double cost;
-	public final MirageFairyManaSet manaSet;
-	public final MirageFairyAbilitySet abilitySet;
-	public final MirageFairyColorSet colorSet;
+	public final ManaSet manaSet;
+	public final AbilitySet abilitySet;
+	public final ColorSet colorSet;
 
-	public MirageFairyType(
+	public FairyType(
 		String modid,
 		int id,
 		String name,
 		int rare,
 		int rank,
 		double cost,
-		MirageFairyManaSet manaSet,
-		MirageFairyAbilitySet abilitySet,
-		MirageFairyColorSet colorSet)
+		ManaSet manaSet,
+		AbilitySet abilitySet,
+		ColorSet colorSet)
 	{
 		this.modid = modid;
 		this.id = id;

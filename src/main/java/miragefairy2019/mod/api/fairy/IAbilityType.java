@@ -3,7 +3,7 @@ package miragefairy2019.mod.api.fairy;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import net.minecraft.util.text.TextFormatting;
 
-public interface IMirageFairyAbilityType
+public interface IAbilityType
 {
 
 	/**
