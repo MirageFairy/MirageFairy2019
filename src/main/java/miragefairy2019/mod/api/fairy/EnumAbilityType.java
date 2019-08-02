@@ -1,8 +1,7 @@
-package miragefairy2019.mod.modules.fairy;
+package miragefairy2019.mod.api.fairy;
 
 import static net.minecraft.util.text.TextFormatting.*;
 
-import miragefairy2019.mod.api.fairy.IMirageFairyAbilityType;
 import net.minecraft.util.text.TextFormatting;
 
 public enum EnumAbilityType implements IMirageFairyAbilityType

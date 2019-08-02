@@ -8,6 +8,7 @@ import miragefairy2019.mod.EventRegistryMod;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairy;
 import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.api.fairy.EnumAbilityType;
 import miragefairy2019.mod.api.fairy.IMirageFairyAbilityType;
 import miragefairy2019.mod.api.fairy.MirageFairyAbilitySet;
 import miragefairy2019.mod.api.fairy.MirageFairyColorSet;
@@ -17,8 +18,6 @@ import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import miragefairy2019.mod.modules.fairy.ItemFairyCrystal.Drop;
-import miragefairy2019.mod.modules.fairyweapon.ItemFairySword;
-import miragefairy2019.mod.modules.fairyweapon.ItemFairyWandCrafting;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -47,18 +46,8 @@ public class ModuleFairy
 	public static ItemMirageFairy itemMirageFairyR5;
 	public static ItemFairyCrystal itemFairyCrystal;
 	public static ItemMultiMaterial<ItemVariantMaterial> itemMaterialsFairy;
-	public static ItemMirageSpheres itemMirageSpheres;
-	public static ItemFairyWandCrafting itemFairyWandCrafting;
-	public static ItemFairySword itemFairySword;
 
 	//public static ItemVariant variantBucketFairyWater;
-
-	public static VariantAbility variantMirageSphereAttack;
-	public static VariantAbility variantMirageSphereCraft;
-	public static VariantAbility variantMirageSphereFell;
-	public static VariantAbility variantMirageSphereLight;
-	public static VariantAbility variantMirageSphereFlame;
-	public static VariantAbility variantMirageSphereWater;
 
 	public static class FairyTypes
 	{
@@ -340,27 +329,6 @@ public class ModuleFairy
 			ForgeRegistries.ITEMS.register(itemMaterialsFairy);
 			if (ApiMain.side.isClient()) itemMaterialsFairy.setCustomModelResourceLocations();
 
-			// スフィア
-			ApiFairy.itemMirageSpheres = itemMirageSpheres = new ItemMirageSpheres();
-			itemMirageSpheres.setRegistryName(ModMirageFairy2019.MODID, "mirage_spheres");
-			itemMirageSpheres.setUnlocalizedName("mirageSpheres");
-			itemMirageSpheres.setCreativeTab(ApiMain.creativeTab);
-			itemMirageSpheres.registerVariant(0, variantMirageSphereAttack = new VariantAbility(EnumMirageSphere.attack));
-			itemMirageSpheres.registerVariant(1, variantMirageSphereCraft = new VariantAbility(EnumMirageSphere.craft));
-			itemMirageSpheres.registerVariant(2, variantMirageSphereFell = new VariantAbility(EnumMirageSphere.fell));
-			itemMirageSpheres.registerVariant(3, variantMirageSphereLight = new VariantAbility(EnumMirageSphere.light));
-			itemMirageSpheres.registerVariant(4, variantMirageSphereFlame = new VariantAbility(EnumMirageSphere.flame));
-			itemMirageSpheres.registerVariant(5, variantMirageSphereWater = new VariantAbility(EnumMirageSphere.water));
-			ForgeRegistries.ITEMS.register(itemMirageSpheres);
-			if (ApiMain.side.isClient()) {
-				for (Tuple<Integer, VariantAbility> tuple : itemMirageSpheres.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(
-						itemMirageSpheres,
-						tuple.x,
-						new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_sphere"), null));
-				}
-			}
-
 		});
 		erMod.registerItemColorHandler.register(new Runnable() {
 			@SideOnly(Side.CLIENT)
@@ -404,28 +372,6 @@ public class ModuleFairy
 					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemMirageFairyR5, 0xFFFF88), itemMirageFairyR5);
 				}
 
-				// スフィアのカスタム色
-				{
-					@SideOnly(Side.CLIENT)
-					class ItemColorImpl implements IItemColor
-					{
-
-						@Override
-						public int colorMultiplier(ItemStack stack, int tintIndex)
-						{
-							VariantAbility variant = itemMirageSpheres.getVariant(stack).orElse(null);
-							if (variant == null) return 0xFFFFFF;
-							if (tintIndex == 0) return variant.mirageSphere.colorBackground;
-							if (tintIndex == 1) return variant.mirageSphere.colorPlasma;
-							if (tintIndex == 2) return variant.mirageSphere.colorCore;
-							if (tintIndex == 3) return variant.mirageSphere.colorHighlight;
-							return 0xFFFFFF;
-						}
-
-					}
-					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(), itemMirageSpheres);
-				}
-
 			}
 		});
 		erMod.createItemStack.register(ic -> {
@@ -444,11 +390,6 @@ public class ModuleFairy
 						}
 					}
 				}
-			}
-
-			// スフィアの鉱石辞書
-			for (Tuple<Integer, VariantAbility> tuple : itemMirageSpheres.getVariants()) {
-				OreDictionary.registerOre(tuple.y.getOreName(), tuple.y.createItemStack());
 			}
 
 			// 妖晶の鉱石辞書

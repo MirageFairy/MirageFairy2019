@@ -1,8 +1,9 @@
-package miragefairy2019.mod.modules.fairy;
+package miragefairy2019.mod.modules.sphere;
 
+import miragefairy2019.mod.api.fairy.EnumAbilityType;
 import miragefairy2019.mod.api.fairy.IMirageFairyAbilityType;
 
-public enum EnumMirageSphere
+public enum EnumSphere
 {
 	attack(EnumAbilityType.attack, 0xFFA0A0, 0xFF6B6B, 0xC70000, 0xFF0000),
 	craft(EnumAbilityType.craft, 0xADADAD, 0xFFC8A4, 0xB57919, 0xDCDCDC),
@@ -18,7 +19,7 @@ public enum EnumMirageSphere
 	public final int colorBackground;
 	public final int colorPlasma;
 
-	private EnumMirageSphere(IMirageFairyAbilityType abilityType, int colorCore, int colorHighlight, int colorBackground, int colorPlasma)
+	private EnumSphere(IMirageFairyAbilityType abilityType, int colorCore, int colorHighlight, int colorBackground, int colorPlasma)
 	{
 		this.abilityType = abilityType;
 		this.colorCore = colorCore;

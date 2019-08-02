@@ -4,8 +4,6 @@ itemGroup.mirageFairy2019.fairy=MirageFairy 2019: Fairy
 fairy.mirageFairy.name=Mirage Fairy
 item.mirageFlowerSeeds.name=Mirage Flower Seeds
 item.fairyCrystal.name=Fairy Crystal
-item.mirageSpheres.name=Sphere
-item.mirageSpheres.format=Sphere of "%s"
 item.fairyWandCrafting.name=Fairy Wand of Crafting
 item.fairySword.name=Fairy Sword
 tile.oreApatite.name=Apatite Ore
@@ -16,6 +14,9 @@ tile.oreSulfur.name=Sulfur Ore
 item.gemSulfur.name=Sulfur
 item.dustMiragium.name=Miragium Dust
 item.dustTinyMiragium.name=Tiny Pile of Miragium Dust
+
+item.spheres.name=Sphere
+item.spheres.format=Sphere of "%s"
 
 mirageFairy2019.ability.attack.name=ATTACK
 mirageFairy2019.ability.craft.name=CRAFT

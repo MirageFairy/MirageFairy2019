@@ -1,6 +1,6 @@
 {
 	"type": "forge:ore_shapeless",
-	"group": "craft_mirage_sphere",
+	"group": "attack_sphere",
 	"ingredients": [
 		{
 			"item": "minecraft:water_bucket"
@@ -15,15 +15,15 @@
 		},
 		{
 			"type": "forge:ore_dict",
-			"ore": "mirageFairyAbilityCraft"
+			"ore": "mirageFairyAbilityAttack"
 		},
 		{
-			"item": "minecraft:crafting_table"
+			"item": "minecraft:iron_sword"
 		}
 	],
 	"result": {
-		"item": "miragefairy2019:mirage_spheres",
-		"data": 1,
+		"item": "miragefairy2019:spheres",
+		"data": 0,
 		"count": 1
 	}
 }
