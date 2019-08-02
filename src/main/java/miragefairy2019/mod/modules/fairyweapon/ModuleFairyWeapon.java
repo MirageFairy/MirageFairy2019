@@ -27,9 +27,7 @@ public class ModuleFairyWeapon
 				item.setUnlocalizedName("fairyWandCrafting");
 				item.setCreativeTab(ApiMain.creativeTab);
 				ForgeRegistries.ITEMS.register(item);
-				if (ApiMain.side.isClient()) {
-					ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				}
+				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
 				ApiFairyWeapon.itemFairyWandCrafting = itemFairyWandCrafting = item;
 			}
 
@@ -40,9 +38,7 @@ public class ModuleFairyWeapon
 				item.setUnlocalizedName("fairySword");
 				item.setCreativeTab(ApiMain.creativeTab);
 				ForgeRegistries.ITEMS.register(item);
-				if (ApiMain.side.isClient()) {
-					ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				}
+				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
 				ApiFairyWeapon.itemFairySword = itemFairySword = item;
 			}
 
