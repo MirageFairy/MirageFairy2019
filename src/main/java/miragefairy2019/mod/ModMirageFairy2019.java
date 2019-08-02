@@ -37,11 +37,6 @@ public class ModMirageFairy2019
 		ModuleMirageFlower.init(erMod);
 		ModuleOre.init(erMod);
 		ModuleSphere.init(erMod);
-		/* TODO
-		ModuleMaterial.init(erMod);
-		ModuleTool.init(erMod);
-		ModuleCity.init(erMod);
-		*/
 
 		erMod.initCreativeTab.trigger().run();
 
