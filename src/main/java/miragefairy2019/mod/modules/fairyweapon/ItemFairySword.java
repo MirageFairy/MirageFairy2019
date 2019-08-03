@@ -1,11 +1,13 @@
 package miragefairy2019.mod.modules.fairyweapon;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.google.common.collect.Multimap;
 
 import miragefairy2019.mod.api.fairy.FairyType;
 import mirrg.boron.util.struct.Tuple;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -13,14 +15,17 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemFairySword extends ItemFairyWeaponBase
 {
 
 	public ItemFairySword()
 	{
-		setMaxDamage(64);
+		setMaxDamage(64 - 1);
 	}
 
 	public double getAdditionalAttackDamage(ItemStack itemStack)
@@ -78,6 +83,18 @@ public class ItemFairySword extends ItemFairyWeaponBase
 			setAdditionalAttackDamage(itemStack, 0);
 			setAdditionalAttackSpeed(itemStack, 0);
 		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
+	{
+		tooltip.add("デザインコンテスト武器");
+		tooltip.add(TextFormatting.LIGHT_PURPLE + "Author: たぬん三世");
+		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
+		tooltip.add(TextFormatting.BLUE + "Damage: Shine, Fire, Wind, Gaia, Aqua, Dark");
+		tooltip.add(TextFormatting.BLUE + "Speed: Cost");
+		tooltip.add(TextFormatting.YELLOW + "Contains: Iron(2.000), Wood(0.500), Sphere of \"ATTACK\"");
 	}
 
 }
