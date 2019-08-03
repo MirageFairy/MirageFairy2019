@@ -237,6 +237,7 @@ public class ModuleFairy
 			ApiFairy.itemFairyR1 = itemFairyR1 = new ItemFairy();
 			itemFairyR1.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy");
 			itemFairyR1.setUnlocalizedName("mirageFairy");
+			itemFairyR1.setCreativeTab(ApiFairy.creativeTab);
 			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
 				itemFairyR1.registerVariant(tuple.x, tuple.y[0]);
 			}
@@ -251,6 +252,7 @@ public class ModuleFairy
 			ApiFairy.itemFairyR2 = itemFairyR2 = new ItemFairy();
 			itemFairyR2.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r2");
 			itemFairyR2.setUnlocalizedName("mirageFairyR2");
+			itemFairyR2.setCreativeTab(ApiFairy.creativeTab);
 			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
 				itemFairyR2.registerVariant(tuple.x, tuple.y[1]);
 			}
@@ -265,6 +267,7 @@ public class ModuleFairy
 			ApiFairy.itemFairyR3 = itemFairyR3 = new ItemFairy();
 			itemFairyR3.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r3");
 			itemFairyR3.setUnlocalizedName("mirageFairyR3");
+			itemFairyR3.setCreativeTab(ApiFairy.creativeTab);
 			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
 				itemFairyR3.registerVariant(tuple.x, tuple.y[2]);
 			}
@@ -279,6 +282,7 @@ public class ModuleFairy
 			ApiFairy.itemFairyR4 = itemFairyR4 = new ItemFairy();
 			itemFairyR4.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r4");
 			itemFairyR4.setUnlocalizedName("mirageFairyR4");
+			itemFairyR4.setCreativeTab(ApiFairy.creativeTab);
 			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
 				itemFairyR4.registerVariant(tuple.x, tuple.y[3]);
 			}
@@ -293,6 +297,7 @@ public class ModuleFairy
 			ApiFairy.itemFairyR5 = itemFairyR5 = new ItemFairy();
 			itemFairyR5.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r5");
 			itemFairyR5.setUnlocalizedName("mirageFairyR5");
+			itemFairyR5.setCreativeTab(ApiFairy.creativeTab);
 			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
 				itemFairyR5.registerVariant(tuple.x, tuple.y[4]);
 			}

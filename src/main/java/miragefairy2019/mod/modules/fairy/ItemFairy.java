@@ -64,10 +64,10 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 			tooltip.add("" + format1(gaia, variant.type.manaSet.gaia) + "    " + format1(aqua, variant.type.manaSet.aqua));
 			tooltip.add("    " + format1(dark, variant.type.manaSet.dark));
 		} else {
-			tooltip.add("    " + format2(shine, variant.type.manaSet.shine));
-			tooltip.add("" + format2(fire, variant.type.manaSet.fire) + "    " + format2(wind, variant.type.manaSet.wind));
-			tooltip.add("" + format2(gaia, variant.type.manaSet.gaia) + "    " + format2(aqua, variant.type.manaSet.aqua));
-			tooltip.add("    " + format2(dark, variant.type.manaSet.dark));
+			tooltip.add("        " + shine.colorText + "Shine:" + format2(shine, variant.type.manaSet.shine));
+			tooltip.add(fire.colorText + "Fire:" + format2(fire, variant.type.manaSet.fire) + "    " + wind.colorText + "Wind:" + format2(wind, variant.type.manaSet.wind));
+			tooltip.add(gaia.colorText + "Gaia:" + format2(gaia, variant.type.manaSet.gaia) + "    " + aqua.colorText + "Aqua:" + format2(aqua, variant.type.manaSet.aqua));
+			tooltip.add("        " + dark.colorText + "Dark:" + format2(dark, variant.type.manaSet.dark));
 		}
 
 		if (!flag.isAdvanced()) {
@@ -127,7 +127,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 
 	private String format2(EnumManaType manaType, double value)
 	{
-		return "" + manaType.colorText + String.format("%8.3f", value);
+		return "" + manaType.colorText + String.format("%.3f", value);
 	}
 
 }
