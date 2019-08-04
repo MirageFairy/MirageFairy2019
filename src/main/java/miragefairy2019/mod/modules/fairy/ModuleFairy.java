@@ -236,7 +236,7 @@ public class ModuleFairy
 			// 妖精
 			ApiFairy.itemFairyR1 = itemFairyR1 = new ItemFairy();
 			itemFairyR1.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy");
-			itemFairyR1.setUnlocalizedName("mirageFairy");
+			itemFairyR1.setUnlocalizedName("mirageFairyR1");
 			itemFairyR1.setCreativeTab(ApiFairy.creativeTab);
 			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
 				itemFairyR1.registerVariant(tuple.x, tuple.y[0]);

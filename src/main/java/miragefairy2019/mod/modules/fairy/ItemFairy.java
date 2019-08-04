@@ -9,6 +9,7 @@ import java.util.Optional;
 import miragefairy2019.mod.api.fairy.EnumManaType;
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
+import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.multi.ItemMulti;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
@@ -31,11 +32,11 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getItemStackDisplayName(ItemStack itemStack)
 	{
-		VariantFairy variant = getVariant(stack).orElse(null);
-		if (variant == null) return "item.null";
-		return "mirageFairy2019.fairy." + variant.type.name;
+		VariantFairy variant = getVariant(itemStack).orElse(null);
+		if (variant == null) return UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".name").trim();
+		return UtilsMinecraft.translateToLocalFormatted(getUnlocalizedName() + ".format", variant.type.getLocalizedName()).trim();
 	}
 
 	@Override
