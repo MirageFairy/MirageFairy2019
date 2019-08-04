@@ -5,7 +5,7 @@ import net.minecraft.item.Item;
 public class ApiFairyWeapon
 {
 
-	public static Item itemFairyWandCrafting;
+	public static Item itemCraftingFairyWand;
 	public static Item itemMeltingFairyWand;
 	public static Item itemFairySword;
 

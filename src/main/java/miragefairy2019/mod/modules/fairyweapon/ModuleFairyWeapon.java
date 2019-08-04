@@ -29,7 +29,8 @@ public class ModuleFairyWeapon
 				item.setCreativeTab(ApiMain.creativeTab);
 				ForgeRegistries.ITEMS.register(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemFairyWandCrafting = itemCraftingFairyWand = item;
+				ApiFairyWeapon.itemCraftingFairyWand = itemCraftingFairyWand = item;
+			}
 
 			// 融解のステッキ
 			{
