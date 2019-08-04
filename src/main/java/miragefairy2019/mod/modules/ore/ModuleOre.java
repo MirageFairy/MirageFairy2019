@@ -25,6 +25,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleOre
@@ -41,6 +42,7 @@ public class ModuleOre
 	public static ItemVariantMaterial variantGemSulfur;
 	public static ItemVariantMaterial variantDustMiragium;
 	public static ItemVariantMaterial variantDustTinyMiragium;
+	public static ItemVariantMaterial variantIngotMiragium;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -86,6 +88,7 @@ public class ModuleOre
 			itemMaterials.registerVariant(2, variantGemSulfur = new ItemVariantMaterial("sulfur_gem", "gemSulfur"));
 			itemMaterials.registerVariant(3, variantDustMiragium = new ItemVariantMaterial("miragium_dust", "dustMiragium"));
 			itemMaterials.registerVariant(4, variantDustTinyMiragium = new ItemVariantMaterial("miragium_tiny_dust", "dustTinyMiragium"));
+			itemMaterials.registerVariant(5, variantIngotMiragium = new ItemVariantMaterial("miragium_ingot", "ingotMiragium"));
 			ForgeRegistries.ITEMS.register(itemMaterials);
 			if (ApiMain.side.isClient()) itemMaterials.setCustomModelResourceLocations();
 
@@ -96,6 +99,7 @@ public class ModuleOre
 			ApiOre.itemStackGemSulfur = variantGemSulfur.createItemStack();
 			ApiOre.itemStackDustMiragium = variantDustMiragium.createItemStack();
 			ApiOre.itemStackDustTinyMiragium = variantDustTinyMiragium.createItemStack();
+			ApiOre.itemStackIngotMiragium = variantIngotMiragium.createItemStack();
 			for (Tuple<Integer, ItemVariantMaterial> tuple : itemMaterials.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}

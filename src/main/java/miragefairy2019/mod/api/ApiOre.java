@@ -19,5 +19,6 @@ public class ApiOre
 	public static ItemStack itemStackGemSulfur;
 	public static ItemStack itemStackDustMiragium;
 	public static ItemStack itemStackDustTinyMiragium;
+	public static ItemStack itemStackIngotMiragium;
 
 }

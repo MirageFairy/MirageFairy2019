@@ -11,6 +11,7 @@ tile.oreSulfur.name=硫黄鉱石
 item.gemSulfur.name=硫黄
 item.dustMiragium.name=ミラジウムの粉
 item.dustTinyMiragium.name=ミラジウムの微粉
+item.ingotMiragium.name=ミラジウムインゴット
 
 item.mirageFairyR1.name=ミラージュ妖精
 item.mirageFairyR1.format=%s

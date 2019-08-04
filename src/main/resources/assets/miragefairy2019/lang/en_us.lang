@@ -11,6 +11,7 @@ tile.oreSulfur.name=Sulfur Ore
 item.gemSulfur.name=Sulfur
 item.dustMiragium.name=Miragium Dust
 item.dustTinyMiragium.name=Tiny Pile of Miragium Dust
+item.ingotMiragium.name=Miragium Ingot
 
 item.mirageFairyR1.name=Fairy
 item.mirageFairyR1.format=%s
