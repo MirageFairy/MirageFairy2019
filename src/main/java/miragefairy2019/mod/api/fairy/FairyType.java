@@ -1,5 +1,7 @@
 package miragefairy2019.mod.api.fairy;
 
+import miragefairy2019.mod.lib.UtilsMinecraft;
+
 public final class FairyType
 {
 
@@ -33,6 +35,11 @@ public final class FairyType
 		this.manaSet = manaSet;
 		this.abilitySet = abilitySet;
 		this.colorSet = colorSet;
+	}
+
+	public String getLocalizedName()
+	{
+		return UtilsMinecraft.translateToLocal("mirageFairy2019.fairy." + name + ".name");
 	}
 
 }
