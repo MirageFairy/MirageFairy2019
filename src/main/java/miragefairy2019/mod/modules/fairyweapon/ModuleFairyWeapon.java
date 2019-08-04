@@ -14,6 +14,7 @@ public class ModuleFairyWeapon
 {
 
 	public static ItemCraftingFairyWand itemCraftingFairyWand;
+	public static ItemMeltingFairyWand itemMeltingFairyWand;
 	public static ItemFairySword itemFairySword;
 
 	public static void init(EventRegistryMod erMod)
@@ -29,6 +30,16 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
 				ApiFairyWeapon.itemFairyWandCrafting = itemCraftingFairyWand = item;
+
+			// 融解のステッキ
+			{
+				ItemMeltingFairyWand item = new ItemMeltingFairyWand();
+				item.setRegistryName(ModMirageFairy2019.MODID, "melting_fairy_wand");
+				item.setUnlocalizedName("meltingFairyWand");
+				item.setCreativeTab(ApiMain.creativeTab);
+				ForgeRegistries.ITEMS.register(item);
+				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
+				ApiFairyWeapon.itemMeltingFairyWand = itemMeltingFairyWand = item;
 			}
 
 			// 妖精剣
@@ -45,6 +56,7 @@ public class ModuleFairyWeapon
 		});
 		erMod.createItemStack.register(ic -> {
 			OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWandCrafting", new ItemStack(itemCraftingFairyWand, 1, OreDictionary.WILDCARD_VALUE));
+			OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWandMelting", new ItemStack(itemMeltingFairyWand, 1, OreDictionary.WILDCARD_VALUE));
 		});
 	}
 

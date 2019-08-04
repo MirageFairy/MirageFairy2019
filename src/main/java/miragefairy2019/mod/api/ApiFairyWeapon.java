@@ -6,6 +6,7 @@ public class ApiFairyWeapon
 {
 
 	public static Item itemFairyWandCrafting;
+	public static Item itemMeltingFairyWand;
 	public static Item itemFairySword;
 
 }
