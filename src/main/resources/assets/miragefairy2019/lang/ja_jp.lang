@@ -26,6 +26,7 @@ item.mirageFairyR5.format=%s V
 item.craftingFairyWand.name=細工のステッキ
 item.meltingFairyWand.name=融解のステッキ
 item.fairySword.name=妖精剣
+item.miragiumAxe.name=ミラジウムの斧
 
 item.spheres.name=スフィア
 item.spheres.format=≪%s≫のスフィア

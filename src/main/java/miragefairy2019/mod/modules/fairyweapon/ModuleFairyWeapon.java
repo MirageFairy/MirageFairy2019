@@ -16,6 +16,7 @@ public class ModuleFairyWeapon
 	public static ItemCraftingFairyWand itemCraftingFairyWand;
 	public static ItemMeltingFairyWand itemMeltingFairyWand;
 	public static ItemFairySword itemFairySword;
+	public static ItemMiragiumAxe itemMiragiumAxe;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -52,6 +53,17 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
 				ApiFairyWeapon.itemFairySword = itemFairySword = item;
+			}
+
+			// ミラジウムの斧
+			{
+				ItemMiragiumAxe item = new ItemMiragiumAxe();
+				item.setRegistryName(ModMirageFairy2019.MODID, "miragium_axe");
+				item.setUnlocalizedName("miragiumAxe");
+				item.setCreativeTab(ApiMain.creativeTab);
+				ForgeRegistries.ITEMS.register(item);
+				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
+				ApiFairyWeapon.itemMiragiumAxe = itemMiragiumAxe = item;
 			}
 
 		});

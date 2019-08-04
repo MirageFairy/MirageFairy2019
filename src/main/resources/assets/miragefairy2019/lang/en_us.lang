@@ -26,6 +26,7 @@ item.mirageFairyR5.format=%s V
 item.craftingFairyWand.name=Fairy Wand of Crafting
 item.meltingFairyWand.name=Fairy Wand of Melting
 item.fairySword.name=Fairy Sword
+item.miragiumAxe.name=Miragium Axe
 
 item.spheres.name=Sphere
 item.spheres.format=Sphere of "%s"
