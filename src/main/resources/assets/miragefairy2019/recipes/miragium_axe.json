@@ -2,8 +2,8 @@
 	"type": "forge:ore_shaped",
 	"group": "crafting_fairy_wand",
 	"pattern": [
-		"IIS",
-		"IRm",
+		"IIm",
+		"IRS",
 		"cR "
 	],
 	"key": {
@@ -13,7 +13,7 @@
 		},
 		"I": {
 			"type": "forge:ore_dict",
-			"ore": "dustMiragium"
+			"ore": "ingotMiragium"
 		},
 		"S": {
 			"type": "forge:ore_dict",
