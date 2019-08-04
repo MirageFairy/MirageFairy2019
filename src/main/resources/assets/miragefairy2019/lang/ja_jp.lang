@@ -2,7 +2,6 @@ itemGroup.mirageFairy2019=MirageFairy 2019
 itemGroup.mirageFairy2019.fairy=MirageFairy 2019：妖精
 
 item.mirageFlowerSeeds.name=ミラージュの花の種
-item.fairyCrystal.name=妖晶
 tile.oreApatite.name=燐灰石鉱石
 item.gemApatite.name=燐灰石
 tile.oreFluorite.name=蛍石鉱石
@@ -23,6 +22,8 @@ item.mirageFairyR4.name=Fairy IV
 item.mirageFairyR4.format=%s IV
 item.mirageFairyR5.name=Fairy V
 item.mirageFairyR5.format=%s V
+
+item.fairyCrystal.name=妖晶
 
 item.craftingFairyWand.name=技巧のステッキ
 item.meltingFairyWand.name=紅蓮のステッキ
