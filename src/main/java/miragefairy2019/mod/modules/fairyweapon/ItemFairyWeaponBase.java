@@ -1,11 +1,13 @@
 package miragefairy2019.mod.modules.fairyweapon;
 
+import java.util.List;
 import java.util.Optional;
 
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
@@ -124,6 +127,12 @@ public abstract class ItemFairyWeaponBase extends Item
 		Item item = itemStack.getItem();
 		if (!(item instanceof IItemFairy)) return Optional.empty();
 		return ((IItemFairy) item).getMirageFairy2019Fairy(itemStack);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
+	{
+		tooltip.add(TextFormatting.BLUE + "Fairy: " + itemStackFairy.getDisplayName());
 	}
 
 }
