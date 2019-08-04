@@ -29,6 +29,8 @@ item.meltingFairyWand.name=Fairy Wand of Melting
 item.fairySword.name=Fairy Sword
 item.miragiumAxe.name=Miragium Axe
 
+item.fertilizer.name=Fertilizer
+
 item.spheres.name=Sphere
 item.spheres.format=Sphere of "%s"
 
