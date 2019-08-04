@@ -104,6 +104,12 @@ public class ModuleOre
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}
 		});
+		erMod.addRecipe.register(() -> {
+
+			// 製錬
+			GameRegistry.addSmelting(ApiOre.itemStackDustMiragium, ApiOre.itemStackIngotMiragium, 0);
+
+		});
 		erMod.hookDecorator.register(() -> {
 
 			// 地形生成
