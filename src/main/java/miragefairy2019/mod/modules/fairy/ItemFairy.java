@@ -41,9 +41,9 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag)
+	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
-		VariantFairy variant = getVariant(stack).orElse(null);
+		VariantFairy variant = getVariant(itemStack).orElse(null);
 		if (variant == null) return;
 
 		if (!flag.isAdvanced()) {
