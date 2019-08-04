@@ -11,10 +11,14 @@ import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.multi.ItemMulti;
+import miragefairy2019.mod.modules.fairyweapon.ItemFairyWeaponBase;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -92,6 +96,21 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 				.map(tuple -> "" + tuple.x.getTextColor() + tuple.x.getLocalizedName() + WHITE + "(" + String.format("%.3f", tuple.y) + ")")
 				.join(", ");
 			tooltip.add("" + GREEN + "Abilities: " + WHITE + string);
+		}
+
+		// 妖精武器のステータス
+		EntityPlayer player = Minecraft.getMinecraft().player;
+		if (player != null) {
+			ItemStack itemStackFairyWeapon;
+			itemStackFairyWeapon = player.getHeldItem(EnumHand.MAIN_HAND);
+			if (itemStackFairyWeapon.getItem() instanceof ItemFairyWeaponBase) {
+				tooltip.add("" + BLUE + BOLD + "--- Status of " + itemStackFairyWeapon.getDisplayName() + " ---");
+				((ItemFairyWeaponBase) itemStackFairyWeapon.getItem()).addInformation(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag);
+			}
+			itemStackFairyWeapon = player.getHeldItem(EnumHand.OFF_HAND);
+			if (itemStackFairyWeapon.getItem() instanceof ItemFairyWeaponBase) {
+				((ItemFairyWeaponBase) itemStackFairyWeapon.getItem()).addInformation(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag);
+			}
 		}
 
 	}
