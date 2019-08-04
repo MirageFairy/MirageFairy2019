@@ -21,9 +21,20 @@ public class ItemMeltingFairyWand extends ItemFairyCraftingToolBase
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
+
+		// ポエム
 		tooltip.add("金属を溶かすほどの情熱");
+
+		// アイテムステータス
 		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
+
+		// 素材
 		tooltip.add(TextFormatting.YELLOW + "Contains: Wood(2.000), Sphere of \"FLAME\"");
+
+		// 機能
+
+		super.addInformation(itemStack, world, tooltip, flag);
+
 	}
 
 }

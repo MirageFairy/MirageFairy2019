@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.google.common.collect.Multimap;
 
@@ -50,6 +49,79 @@ public class ItemFairySword extends ItemFairyWeaponBase
 
 	//
 
+	protected static class Status
+	{
+
+		public final double additionalAttackDamage;
+		public final double additionalAttackSpeed;
+
+		public Status(FairyType fairyType)
+		{
+
+			additionalAttackDamage = 6 * fairyType.manaSet.sum(1, 1, 1, 1, 1, 1) / 50.0; // 3~6程度
+
+			double a = fairyType.cost / 100.0;
+			additionalAttackSpeed = -4 + Math.min(0.25 / (a * a), 8); // -3.2~-2.4
+			// コスト50のときに斧より少し早い程度（-3.0）
+			// コスト0のときに+3
+
+		}
+
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
+	{
+
+		// ポエム
+		tooltip.add("デザインコンテスト武器");
+		tooltip.add(TextFormatting.LIGHT_PURPLE + "Author: たぬん三世");
+
+		// アイテムステータス
+		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
+
+		// 素材
+		tooltip.add(TextFormatting.YELLOW + "Contains: Iron(2.000), Wood(0.500), Sphere of \"ATTACK\"");
+
+		// 機能
+		tooltip.add(TextFormatting.RED + "Great damage when attacking");
+
+		super.addInformation(itemStack, world, tooltip, flag);
+
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
+	{
+		super.addInformationFairyWeapon(itemStackFairyWeapon, itemStackFairy, fairyType, world, tooltip, flag);
+
+		Status status = new Status(fairyType);
+		tooltip.add(TextFormatting.BLUE + "Additional Attack Damage: " + String.format("%.1f", status.additionalAttackDamage) + " (Shine, Fire, Wind, Gaia, Aqua, Dark)");
+		tooltip.add(TextFormatting.BLUE + "Additional Attack Speed: " + String.format("%.1f", status.additionalAttackSpeed) + " (Cost)");
+	}
+
+	//
+
+	@Override
+	public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
+	{
+		if (world.getTotalWorldTime() % 20 != 0) return;
+		if (!(entity instanceof EntityLivingBase)) return;
+		EntityPlayer player = (EntityPlayer) entity;
+
+		Tuple<ItemStack, FairyType> fairy = findFairy(player).orElse(null);
+		if (fairy != null) {
+			Status status = new Status(fairy.y);
+			setAdditionalAttackDamage(itemStack, status.additionalAttackDamage);
+			setAdditionalAttackSpeed(itemStack, status.additionalAttackSpeed);
+		} else {
+			setAdditionalAttackDamage(itemStack, 0);
+			setAdditionalAttackSpeed(itemStack, 0);
+		}
+	}
+
 	@Override
 	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot equipmentSlot, ItemStack itemStack)
 	{
@@ -59,42 +131,6 @@ public class ItemFairySword extends ItemFairyWeaponBase
 			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", getAdditionalAttackSpeed(itemStack), 0));
 		}
 		return multimap;
-	}
-
-	@Override
-	public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
-	{
-		if (world.getTotalWorldTime() % 20 != 0) return;
-		if (!(entity instanceof EntityLivingBase)) return;
-		EntityPlayer player = (EntityPlayer) entity;
-
-		Optional<Tuple<ItemStack, FairyType>> oTuple = findFairy(player);
-		if (oTuple.isPresent()) {
-			double a = oTuple.get().y.manaSet.sum(1, 1, 1, 1, 1, 1);
-			double b = oTuple.get().y.cost / 100.0;
-
-			double c = b * b;
-
-			setAdditionalAttackDamage(itemStack, 6 * a / 50.0); // 3~6程度
-			setAdditionalAttackSpeed(itemStack, -4 + Math.min(0.25 / c, 8)); // -3.2~-2.4
-			// コスト50のときに斧より少し早い程度（-3.0）
-			// コスト0のときに+3
-		} else {
-			setAdditionalAttackDamage(itemStack, 0);
-			setAdditionalAttackSpeed(itemStack, 0);
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-		tooltip.add("デザインコンテスト武器");
-		tooltip.add(TextFormatting.LIGHT_PURPLE + "Author: たぬん三世");
-		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
-		tooltip.add(TextFormatting.BLUE + "Damage: Shine, Fire, Wind, Gaia, Aqua, Dark");
-		tooltip.add(TextFormatting.BLUE + "Speed: Cost");
-		tooltip.add(TextFormatting.YELLOW + "Contains: Iron(2.000), Wood(0.500), Sphere of \"ATTACK\"");
 	}
 
 }

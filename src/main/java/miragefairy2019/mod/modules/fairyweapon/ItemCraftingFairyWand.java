@@ -21,9 +21,20 @@ public class ItemCraftingFairyWand extends ItemFairyCraftingToolBase
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
+
+		// ポエム
 		tooltip.add("スフィアから聞こえる、妖精の声");
+
+		// アイテムステータス
 		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
+
+		// 素材
 		tooltip.add(TextFormatting.YELLOW + "Contains: Wood(2.000), Sphere of \"CRAFT\"");
+
+		// 機能
+
+		super.addInformation(itemStack, world, tooltip, flag);
+
 	}
 
 }

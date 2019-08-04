@@ -49,7 +49,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		public Status(FairyType fairyType)
 		{
 			maxHeight = Math.min((int) (fairyType.manaSet.gaia / 2 + 2), 100);
-			power = fairyType.manaSet.aqua / 2 + fairyType.abilitySet.get(EnumAbilityType.fell) / 2;
+			power = fairyType.manaSet.aqua / 2 + fairyType.abilitySet.get(EnumAbilityType.fell) / 4;
 			fortune = Math.min((int) (fairyType.manaSet.shine / 5), 3);
 			coolTime = (int) (fairyType.cost * 2 * Math.pow(0.5, fairyType.manaSet.dark / 50));
 			wear = Math.pow(0.5, fairyType.manaSet.fire / 50);
@@ -69,11 +69,11 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		// アイテムステータス
 		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
 
-		// 機能
-		tooltip.add(TextFormatting.RED + "Right click to cut whole tree");
-
 		// 素材
 		tooltip.add(TextFormatting.YELLOW + "Contains: Miragium(3.000), Wood(1.000), Sphere of \"FELL\"");
+
+		// 機能
+		tooltip.add(TextFormatting.RED + "Right click to cut whole tree");
 
 		super.addInformation(itemStack, world, tooltip, flag);
 
