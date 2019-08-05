@@ -9,5 +9,6 @@ public class ApiFairyWeapon
 	public static Item itemMeltingFairyWand;
 	public static Item itemFairySword;
 	public static Item itemMiragiumAxe;
+	public static Item itemLightMagicWand;
 
 }

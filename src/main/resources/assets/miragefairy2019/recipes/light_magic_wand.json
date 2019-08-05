@@ -1,0 +1,34 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "light_magic_wand",
+	"pattern": [
+		"cGS",
+		"GIG",
+		"IGm"
+	],
+	"key": {
+		"c": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
+		"m": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotMiragium"
+		},
+		"G": {
+			"type": "forge:ore_dict",
+			"ore": "gemApatite"
+		},
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019SphereLight"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:light_magic_wand"
+	}
+}
