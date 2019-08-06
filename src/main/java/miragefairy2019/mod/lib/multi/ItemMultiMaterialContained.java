@@ -1,8 +1,7 @@
-package miragefairy2019.mod.modules.ore;
+package miragefairy2019.mod.lib.multi;
 
 import java.util.List;
 
-import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;

@@ -8,6 +8,8 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.ApiOre;
 import miragefairy2019.mod.lib.EventRegistryMod;
+import miragefairy2019.mod.lib.multi.ItemMultiMaterialContained;
+import miragefairy2019.mod.lib.multi.ItemVariantMaterialContained;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;

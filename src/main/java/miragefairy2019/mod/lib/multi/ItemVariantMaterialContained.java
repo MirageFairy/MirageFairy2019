@@ -1,6 +1,4 @@
-package miragefairy2019.mod.modules.ore;
-
-import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
+package miragefairy2019.mod.lib.multi;
 
 public class ItemVariantMaterialContained extends ItemVariantMaterial
 {

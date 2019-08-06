@@ -4,8 +4,8 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.ApiMaterialsFairy;
 import miragefairy2019.mod.lib.EventRegistryMod;
-import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
-import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
+import miragefairy2019.mod.lib.multi.ItemMultiMaterialContained;
+import miragefairy2019.mod.lib.multi.ItemVariantMaterialContained;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
@@ -13,30 +13,30 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ModuleMaterialsFairy
 {
 
-	public static ItemMultiMaterial<ItemVariantMaterial> itemMaterialsFairy;
+	public static ItemMultiMaterialContained<ItemVariantMaterialContained> itemMaterialsFairy;
 
-	public static ItemVariantMaterial variantManaRodShine;
-	public static ItemVariantMaterial variantManaRodFire;
-	public static ItemVariantMaterial variantManaRodWind;
-	public static ItemVariantMaterial variantManaRodGaia;
-	public static ItemVariantMaterial variantManaRodAqua;
-	public static ItemVariantMaterial variantManaRodDark;
+	public static ItemVariantMaterialContained variantManaRodShine;
+	public static ItemVariantMaterialContained variantManaRodFire;
+	public static ItemVariantMaterialContained variantManaRodWind;
+	public static ItemVariantMaterialContained variantManaRodGaia;
+	public static ItemVariantMaterialContained variantManaRodAqua;
+	public static ItemVariantMaterialContained variantManaRodDark;
 
 	public static void init(EventRegistryMod erMod)
 	{
 		erMod.registerItem.register(b -> {
 
 			// マテリアル
-			ApiMaterialsFairy.itemMaterialsFairy = itemMaterialsFairy = new ItemMultiMaterial<>();
+			ApiMaterialsFairy.itemMaterialsFairy = itemMaterialsFairy = new ItemMultiMaterialContained<>();
 			itemMaterialsFairy.setRegistryName(ModMirageFairy2019.MODID, "fairy_materials");
 			itemMaterialsFairy.setUnlocalizedName("materialsFairy");
 			itemMaterialsFairy.setCreativeTab(ApiMain.creativeTab);
-			itemMaterialsFairy.registerVariant(0, variantManaRodShine = new ItemVariantMaterial("shine_mana_rod", "manaRodShine", "mirageFairy2019ManaRodShine"));
-			itemMaterialsFairy.registerVariant(1, variantManaRodFire = new ItemVariantMaterial("fire_mana_rod", "manaRodFire", "mirageFairy2019ManaRodFire"));
-			itemMaterialsFairy.registerVariant(2, variantManaRodWind = new ItemVariantMaterial("wind_mana_rod", "manaRodWind", "mirageFairy2019ManaRodWind"));
-			itemMaterialsFairy.registerVariant(3, variantManaRodGaia = new ItemVariantMaterial("gaia_mana_rod", "manaRodGaia", "mirageFairy2019ManaRodGaia"));
-			itemMaterialsFairy.registerVariant(4, variantManaRodAqua = new ItemVariantMaterial("aqua_mana_rod", "manaRodAqua", "mirageFairy2019ManaRodAqua"));
-			itemMaterialsFairy.registerVariant(5, variantManaRodDark = new ItemVariantMaterial("dark_mana_rod", "manaRodDark", "mirageFairy2019ManaRodDark"));
+			itemMaterialsFairy.registerVariant(0, variantManaRodShine = new ItemVariantMaterialContained("shine_mana_rod", "manaRodShine", "mirageFairy2019ManaRodShine", "Miragium(1.000), Diamond(1.000)"));
+			itemMaterialsFairy.registerVariant(1, variantManaRodFire = new ItemVariantMaterialContained("fire_mana_rod", "manaRodFire", "mirageFairy2019ManaRodFire", "Miragium(1.000), Cinnabar(1.000)"));
+			itemMaterialsFairy.registerVariant(2, variantManaRodWind = new ItemVariantMaterialContained("wind_mana_rod", "manaRodWind", "mirageFairy2019ManaRodWind", "Miragium(1.000), Fluorite(1.000)"));
+			itemMaterialsFairy.registerVariant(3, variantManaRodGaia = new ItemVariantMaterialContained("gaia_mana_rod", "manaRodGaia", "mirageFairy2019ManaRodGaia", "Miragium(1.000), Sulfur(1.000)"));
+			itemMaterialsFairy.registerVariant(4, variantManaRodAqua = new ItemVariantMaterialContained("aqua_mana_rod", "manaRodAqua", "mirageFairy2019ManaRodAqua", "Miragium(1.000), Apatite(1.000)"));
+			itemMaterialsFairy.registerVariant(5, variantManaRodDark = new ItemVariantMaterialContained("dark_mana_rod", "manaRodDark", "mirageFairy2019ManaRodDark", "Miragium(1.000), Coal(1.000)"));
 			ForgeRegistries.ITEMS.register(itemMaterialsFairy);
 			if (ApiMain.side.isClient()) itemMaterialsFairy.setCustomModelResourceLocations();
 
@@ -48,7 +48,7 @@ public class ModuleMaterialsFairy
 			ApiMaterialsFairy.itemStackManaRodGaia = variantManaRodGaia.createItemStack();
 			ApiMaterialsFairy.itemStackManaRodAqua = variantManaRodAqua.createItemStack();
 			ApiMaterialsFairy.itemStackManaRodDark = variantManaRodDark.createItemStack();
-			for (Tuple<Integer, ItemVariantMaterial> tuple : itemMaterialsFairy.getVariants()) {
+			for (Tuple<Integer, ItemVariantMaterialContained> tuple : itemMaterialsFairy.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}
 		});
