@@ -3,21 +3,17 @@
 	"group": "light_magic_wand",
 	"pattern": [
 		"cGS",
-		"GIG",
-		"IGm"
+		" RG",
+		"R  "
 	],
 	"key": {
 		"c": {
 			"type": "forge:ore_dict",
 			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
 		},
-		"m": {
+		"R": {
 			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
-		},
-		"I": {
-			"type": "forge:ore_dict",
-			"ore": "ingotMiragium"
+			"ore": "mirageFairy2019ManaRodAqua"
 		},
 		"G": {
 			"type": "forge:ore_dict",
