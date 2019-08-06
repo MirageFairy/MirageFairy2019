@@ -7,15 +7,22 @@ public class ItemVariantMaterial extends ItemVariant
 {
 
 	public final String registryName;
+	public final String unlocalizedName;
 	public final String oreName;
 
 	private int metadata = 0;
 	private Item item = null;
 
-	public ItemVariantMaterial(String registryName, String oreName)
+	public ItemVariantMaterial(String registryName, String unlocalizedName, String oreName)
 	{
 		this.registryName = registryName;
+		this.unlocalizedName = unlocalizedName;
 		this.oreName = oreName;
+	}
+
+	public ItemVariantMaterial(String registryName, String unlocalizedName)
+	{
+		this(registryName, unlocalizedName, unlocalizedName);
 	}
 
 	public int getMetadata()
@@ -50,7 +57,7 @@ public class ItemVariantMaterial extends ItemVariant
 
 	public String getUnlocalizedName()
 	{
-		return "item." + oreName;
+		return "item." + unlocalizedName;
 	}
 
 }
