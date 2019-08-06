@@ -8,8 +8,6 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.ApiOre;
 import miragefairy2019.mod.lib.EventRegistryMod;
-import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
-import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
@@ -35,15 +33,15 @@ public class ModuleOre
 	public static BlockOre<EnumVariantOre1> blockOre1;
 
 	public static ItemOre<EnumVariantOre1> itemOre1;
-	public static ItemMultiMaterial<ItemVariantMaterial> itemMaterials;
+	public static ItemMultiMaterialContained<ItemVariantMaterialContained> itemMaterials;
 
-	public static ItemVariantMaterial variantGemFluorite;
-	public static ItemVariantMaterial variantGemApatite;
-	public static ItemVariantMaterial variantGemSulfur;
-	public static ItemVariantMaterial variantDustMiragium;
-	public static ItemVariantMaterial variantDustTinyMiragium;
-	public static ItemVariantMaterial variantIngotMiragium;
-	public static ItemVariantMaterial variantGemCinnabar;
+	public static ItemVariantMaterialContained variantGemFluorite;
+	public static ItemVariantMaterialContained variantGemApatite;
+	public static ItemVariantMaterialContained variantGemSulfur;
+	public static ItemVariantMaterialContained variantDustMiragium;
+	public static ItemVariantMaterialContained variantDustTinyMiragium;
+	public static ItemVariantMaterialContained variantIngotMiragium;
+	public static ItemVariantMaterialContained variantGemCinnabar;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -80,17 +78,17 @@ public class ModuleOre
 			}
 
 			// マテリアル
-			ApiOre.itemMaterials = itemMaterials = new ItemMultiMaterial<>();
+			ApiOre.itemMaterials = itemMaterials = new ItemMultiMaterialContained<>();
 			itemMaterials.setRegistryName(ModMirageFairy2019.MODID, "materials");
 			itemMaterials.setUnlocalizedName("materials");
 			itemMaterials.setCreativeTab(ApiMain.creativeTab);
-			itemMaterials.registerVariant(0, variantGemApatite = new ItemVariantMaterial("apatite_gem", "gemApatite"));
-			itemMaterials.registerVariant(1, variantGemFluorite = new ItemVariantMaterial("fluorite_gem", "gemFluorite"));
-			itemMaterials.registerVariant(2, variantGemSulfur = new ItemVariantMaterial("sulfur_gem", "gemSulfur"));
-			itemMaterials.registerVariant(3, variantDustMiragium = new ItemVariantMaterial("miragium_dust", "dustMiragium"));
-			itemMaterials.registerVariant(4, variantDustTinyMiragium = new ItemVariantMaterial("miragium_tiny_dust", "dustTinyMiragium"));
-			itemMaterials.registerVariant(5, variantIngotMiragium = new ItemVariantMaterial("miragium_ingot", "ingotMiragium"));
-			itemMaterials.registerVariant(6, variantGemCinnabar = new ItemVariantMaterial("cinnabar_gem", "gemCinnabar"));
+			itemMaterials.registerVariant(0, variantGemApatite = new ItemVariantMaterialContained("apatite_gem", "gemApatite", "Apatite(1.000)"));
+			itemMaterials.registerVariant(1, variantGemFluorite = new ItemVariantMaterialContained("fluorite_gem", "gemFluorite", "Fluorite(1.000)"));
+			itemMaterials.registerVariant(2, variantGemSulfur = new ItemVariantMaterialContained("sulfur_gem", "gemSulfur", "Sulfur(1.000)"));
+			itemMaterials.registerVariant(3, variantDustMiragium = new ItemVariantMaterialContained("miragium_dust", "dustMiragium", "Miragium(1.000)"));
+			itemMaterials.registerVariant(4, variantDustTinyMiragium = new ItemVariantMaterialContained("miragium_tiny_dust", "dustTinyMiragium", "Miragium(0.111)"));
+			itemMaterials.registerVariant(5, variantIngotMiragium = new ItemVariantMaterialContained("miragium_ingot", "ingotMiragium", "Miragium(1.000)"));
+			itemMaterials.registerVariant(6, variantGemCinnabar = new ItemVariantMaterialContained("cinnabar_gem", "gemCinnabar", "Cinnabar(1.000)"));
 			ForgeRegistries.ITEMS.register(itemMaterials);
 			if (ApiMain.side.isClient()) itemMaterials.setCustomModelResourceLocations();
 
@@ -103,7 +101,7 @@ public class ModuleOre
 			ApiOre.itemStackDustTinyMiragium = variantDustTinyMiragium.createItemStack();
 			ApiOre.itemStackIngotMiragium = variantIngotMiragium.createItemStack();
 			ApiOre.itemStackGemCinnabar = variantGemCinnabar.createItemStack();
-			for (Tuple<Integer, ItemVariantMaterial> tuple : itemMaterials.getVariants()) {
+			for (Tuple<Integer, ItemVariantMaterialContained> tuple : itemMaterials.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}
 		});
