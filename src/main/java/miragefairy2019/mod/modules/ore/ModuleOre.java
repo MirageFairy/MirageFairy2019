@@ -43,6 +43,12 @@ public class ModuleOre
 	public static ItemVariantMaterial variantDustMiragium;
 	public static ItemVariantMaterial variantDustTinyMiragium;
 	public static ItemVariantMaterial variantIngotMiragium;
+	public static ItemVariantMaterial variantManaRodShine;
+	public static ItemVariantMaterial variantManaRodFire;
+	public static ItemVariantMaterial variantManaRodWind;
+	public static ItemVariantMaterial variantManaRodGaia;
+	public static ItemVariantMaterial variantManaRodAqua;
+	public static ItemVariantMaterial variantManaRodDark;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -89,6 +95,12 @@ public class ModuleOre
 			itemMaterials.registerVariant(3, variantDustMiragium = new ItemVariantMaterial("miragium_dust", "dustMiragium"));
 			itemMaterials.registerVariant(4, variantDustTinyMiragium = new ItemVariantMaterial("miragium_tiny_dust", "dustTinyMiragium"));
 			itemMaterials.registerVariant(5, variantIngotMiragium = new ItemVariantMaterial("miragium_ingot", "ingotMiragium"));
+			itemMaterials.registerVariant(6, variantManaRodShine = new ItemVariantMaterial("shine_mana_rod", "manaRodShine", "mirageFairy2019ManaRodShine"));
+			itemMaterials.registerVariant(7, variantManaRodFire = new ItemVariantMaterial("fire_mana_rod", "manaRodFire", "mirageFairy2019ManaRodFire"));
+			itemMaterials.registerVariant(8, variantManaRodWind = new ItemVariantMaterial("wind_mana_rod", "manaRodWind", "mirageFairy2019ManaRodWind"));
+			itemMaterials.registerVariant(9, variantManaRodGaia = new ItemVariantMaterial("gaia_mana_rod", "manaRodGaia", "mirageFairy2019ManaRodGaia"));
+			itemMaterials.registerVariant(10, variantManaRodAqua = new ItemVariantMaterial("aqua_mana_rod", "manaRodAqua", "mirageFairy2019ManaRodAqua"));
+			itemMaterials.registerVariant(11, variantManaRodDark = new ItemVariantMaterial("dark_mana_rod", "manaRodDark", "mirageFairy2019ManaRodDark"));
 			ForgeRegistries.ITEMS.register(itemMaterials);
 			if (ApiMain.side.isClient()) itemMaterials.setCustomModelResourceLocations();
 
@@ -100,6 +112,12 @@ public class ModuleOre
 			ApiOre.itemStackDustMiragium = variantDustMiragium.createItemStack();
 			ApiOre.itemStackDustTinyMiragium = variantDustTinyMiragium.createItemStack();
 			ApiOre.itemStackIngotMiragium = variantIngotMiragium.createItemStack();
+			ApiOre.itemStackManaRodShine = variantManaRodShine.createItemStack();
+			ApiOre.itemStackManaRodFire = variantManaRodFire.createItemStack();
+			ApiOre.itemStackManaRodWind = variantManaRodWind.createItemStack();
+			ApiOre.itemStackManaRodGaia = variantManaRodGaia.createItemStack();
+			ApiOre.itemStackManaRodAqua = variantManaRodAqua.createItemStack();
+			ApiOre.itemStackManaRodDark = variantManaRodDark.createItemStack();
 			for (Tuple<Integer, ItemVariantMaterial> tuple : itemMaterials.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}

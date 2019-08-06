@@ -11,6 +11,12 @@ item.gemSulfur.name=硫黄
 item.dustMiragium.name=ミラジウムの粉
 item.dustTinyMiragium.name=ミラジウムの微粉
 item.ingotMiragium.name=ミラジウムインゴット
+item.manaRodShine.name=光の心の棒
+item.manaRodFire.name=火の心の棒
+item.manaRodWind.name=風の心の棒
+item.manaRodGaia.name=土の心の棒
+item.manaRodAqua.name=水の心の棒
+item.manaRodDark.name=闇の心の棒
 
 item.mirageFairyR1.name=ミラージュ妖精
 item.mirageFairyR1.format=%s

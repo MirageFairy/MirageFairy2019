@@ -11,6 +11,12 @@ item.gemSulfur.name=Sulfur
 item.dustMiragium.name=Miragium Dust
 item.dustTinyMiragium.name=Tiny Pile of Miragium Dust
 item.ingotMiragium.name=Miragium Ingot
+item.manaRodShine.name=Shine Mana Rod
+item.manaRodFire.name=Fire Mana Rod
+item.manaRodWind.name=Wind Mana Rod
+item.manaRodGaia.name=Gaia Mana Rod
+item.manaRodAqua.name=Aqua Mana Rod
+item.manaRodDark.name=Dark Mana Rod
 
 item.mirageFairyR1.name=Fairy
 item.mirageFairyR1.format=%s

@@ -1,0 +1,31 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "aqua_mana_rod",
+	"pattern": [
+		"cGI",
+		"GIG",
+		"IGm"
+	],
+	"key": {
+		"c": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
+		"m": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotMiragium"
+		},
+		"G": {
+			"type": "forge:ore_dict",
+			"ore": "gemApatite"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:materials",
+		"data": 10
+	}
+}

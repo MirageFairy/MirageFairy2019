@@ -20,5 +20,11 @@ public class ApiOre
 	public static ItemStack itemStackDustMiragium;
 	public static ItemStack itemStackDustTinyMiragium;
 	public static ItemStack itemStackIngotMiragium;
+	public static ItemStack itemStackManaRodShine;
+	public static ItemStack itemStackManaRodFire;
+	public static ItemStack itemStackManaRodWind;
+	public static ItemStack itemStackManaRodGaia;
+	public static ItemStack itemStackManaRodAqua;
+	public static ItemStack itemStackManaRodDark;
 
 }
