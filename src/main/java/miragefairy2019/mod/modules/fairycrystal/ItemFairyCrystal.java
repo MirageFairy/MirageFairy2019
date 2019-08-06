@@ -55,9 +55,8 @@ public class ItemFairyCrystal extends Item
 			.filter(d -> d.canDrop(player, worldIn, pos, hand, facing, hitX, hitY, hitZ))
 			.map(d -> new WeightedRandom.Item<>(d.itemStack, d.weight))
 			.toList();
-		if (WeightedRandom.getTotalWeight(list) < 1) {
-			list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.air[0].createItemStack(), 1 - WeightedRandom.getTotalWeight(list)));
-		}
+		double totalWeight = WeightedRandom.getTotalWeight(list);
+		if (totalWeight < 1) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.air[0].createItemStack(), 1 - totalWeight));
 		Optional<ItemStack> oItemStack = WeightedRandom.getRandomItem(worldIn.rand, list);
 
 		// ガチャが成功した場合、
