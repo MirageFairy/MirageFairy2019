@@ -51,6 +51,7 @@ public class ModuleFairyCrystal
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.thunder[0].createItemStack(), 0.0045));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.sun[0].createItemStack(), 0.000081));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.moon[0].createItemStack(), 0.000081));
+
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.star[0].createItemStack(), 0.00027));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.stone[0].createItemStack(), 0.5));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.dirt[0].createItemStack(), 0.5));
@@ -62,6 +63,7 @@ public class ModuleFairyCrystal
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.emerald[0].createItemStack(), 0.0054));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.redstone[0].createItemStack(), 0.018));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.lapislazuli[0].createItemStack(), 0.0054));
+
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.enderman[0].createItemStack(), 0.0027));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.spider[0].createItemStack(), 0.03));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.enderdragon[0].createItemStack(), 0.00081));
@@ -73,10 +75,12 @@ public class ModuleFairyCrystal
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.creeper[0].createItemStack(), 0.03));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.wheat[0].createItemStack(), 0.03));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.lilac[0].createItemStack(), 0.009));
+
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.torch[0].createItemStack(), 0.1));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.furnace[0].createItemStack(), 0.03));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.magentaglazedterracotta[0].createItemStack(), 0.009));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.bread[0].createItemStack(), 0.03));
+
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.daytime[0].createItemStack(), 0.02));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.night[0].createItemStack(), 0.02));
 				ItemFairyCrystal.drops.add(new Drop(ModuleFairy.FairyTypes.morning[0].createItemStack(), 0.006));
