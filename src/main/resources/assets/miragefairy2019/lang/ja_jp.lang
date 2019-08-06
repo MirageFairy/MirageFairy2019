@@ -2,15 +2,6 @@ itemGroup.mirageFairy2019=MirageFairy 2019
 itemGroup.mirageFairy2019.fairy=MirageFairy 2019：妖精
 
 item.mirageFlowerSeeds.name=ミラージュの花の種
-tile.oreApatite.name=燐灰石鉱石
-item.gemApatite.name=燐灰石
-tile.oreFluorite.name=蛍石鉱石
-item.gemFluorite.name=蛍石
-tile.oreSulfur.name=硫黄鉱石
-item.gemSulfur.name=硫黄
-item.dustMiragium.name=ミラジウムの粉
-item.dustTinyMiragium.name=ミラジウムの微粉
-item.ingotMiragium.name=ミラジウムインゴット
 item.manaRodShine.name=光の心の棒
 item.manaRodFire.name=火の心の棒
 item.manaRodWind.name=風の心の棒
@@ -38,6 +29,16 @@ item.miragiumAxe.name=ミラジウムの斧
 item.lightMagicWand.name=光のロッド
 
 item.fertilizer.name=肥料
+
+tile.oreApatite.name=燐灰石鉱石
+item.gemApatite.name=燐灰石
+tile.oreFluorite.name=蛍石鉱石
+item.gemFluorite.name=蛍石
+tile.oreSulfur.name=硫黄鉱石
+item.gemSulfur.name=硫黄
+item.dustMiragium.name=ミラジウムの粉
+item.dustTinyMiragium.name=ミラジウムの微粉
+item.ingotMiragium.name=ミラジウムインゴット
 
 item.spheres.name=スフィア
 item.spheres.format=≪%s≫のスフィア
