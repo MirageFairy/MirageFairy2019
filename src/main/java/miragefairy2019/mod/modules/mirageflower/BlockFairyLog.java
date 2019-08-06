@@ -163,13 +163,19 @@ public class BlockFairyLog extends Block
 			List<WeightedRandom.Item<VariantFairy>> list = new ArrayList<>();
 			{
 
-				list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.daytime[0], 0.1));
-				list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.night[0], 0.1));
-				list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.morning[0], 0.1));
+				if (!BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.NETHER)) {
+					if (!BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.END)) {
 
-				list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.fine[0], 0.1));
-				if (world.getBiome(pos).canRain()) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.rain[0], 0.1));
-				if (world.getBiome(pos).canRain()) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.thunder[0], 0.02));
+						list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.daytime[0], 0.1));
+						list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.night[0], 0.1));
+						list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.morning[0], 0.1));
+
+						list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.fine[0], 0.1));
+						if (world.getBiome(pos).canRain()) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.rain[0], 0.1));
+						if (world.getBiome(pos).canRain()) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.thunder[0], 0.02));
+
+					}
+				}
 
 				if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.PLAINS)) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.plains[0], 1));
 				if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.FOREST)) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.forest[0], 1));
