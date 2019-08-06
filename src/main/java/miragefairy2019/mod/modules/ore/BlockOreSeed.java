@@ -142,6 +142,12 @@ public class BlockOreSeed extends Block
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 				}
+			} else if (variant == EnumVariant.POINT) {
+				if (pos.getY() <= 15 && s < 0.20) {
+					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.CINNABAR_ORE);
+				} else {
+					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
+				}
 			} else {
 				blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 			}

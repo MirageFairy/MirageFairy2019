@@ -43,6 +43,7 @@ public class ModuleOre
 	public static ItemVariantMaterial variantDustMiragium;
 	public static ItemVariantMaterial variantDustTinyMiragium;
 	public static ItemVariantMaterial variantIngotMiragium;
+	public static ItemVariantMaterial variantGemCinnabar;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -89,6 +90,7 @@ public class ModuleOre
 			itemMaterials.registerVariant(3, variantDustMiragium = new ItemVariantMaterial("miragium_dust", "dustMiragium"));
 			itemMaterials.registerVariant(4, variantDustTinyMiragium = new ItemVariantMaterial("miragium_tiny_dust", "dustTinyMiragium"));
 			itemMaterials.registerVariant(5, variantIngotMiragium = new ItemVariantMaterial("miragium_ingot", "ingotMiragium"));
+			itemMaterials.registerVariant(6, variantGemCinnabar = new ItemVariantMaterial("cinnabar_gem", "gemCinnabar"));
 			ForgeRegistries.ITEMS.register(itemMaterials);
 			if (ApiMain.side.isClient()) itemMaterials.setCustomModelResourceLocations();
 
@@ -100,6 +102,7 @@ public class ModuleOre
 			ApiOre.itemStackDustMiragium = variantDustMiragium.createItemStack();
 			ApiOre.itemStackDustTinyMiragium = variantDustTinyMiragium.createItemStack();
 			ApiOre.itemStackIngotMiragium = variantIngotMiragium.createItemStack();
+			ApiOre.itemStackGemCinnabar = variantGemCinnabar.createItemStack();
 			for (Tuple<Integer, ItemVariantMaterial> tuple : itemMaterials.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}
