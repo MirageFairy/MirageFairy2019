@@ -7,6 +7,10 @@
 			"ore": "mirageFairyCrystal"
 		},
 		{
+			"type": "forge:ore_dict",
+			"ore": "gemDiamond"
+		},
+		{
 			"item": "minecraft:torch"
 		}
 	],
