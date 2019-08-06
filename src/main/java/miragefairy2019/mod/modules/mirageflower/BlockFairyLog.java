@@ -1,8 +1,13 @@
 package miragefairy2019.mod.modules.mirageflower;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
+import miragefairy2019.mod.lib.WeightedRandom;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
+import miragefairy2019.mod.modules.fairy.VariantFairy;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
@@ -23,6 +28,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -146,20 +152,39 @@ public class BlockFairyLog extends Block
 		return ItemStack.EMPTY;
 	}
 
-	/**
-	 * Ageが最大のとき、種を1個ドロップする。
-	 * 幸運Lv1につき種のドロップ数が1%増える。
-	 * 地面破壊ドロップでも適用される。
-	 */
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		@SuppressWarnings("unused")
 		Random random = world instanceof World ? ((World) world).rand : new Random();
 
-		ItemStack itemStack = ModuleFairy.FairyTypes.forest[0].createItemStack();
+		for (int i = 0; i < 3 + fortune; i++) {
 
-		drops.add(itemStack);
+			// ドロップリスト作成
+			List<WeightedRandom.Item<VariantFairy>> list = new ArrayList<>();
+			{
+
+				list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.daytime[0], 0.1));
+				list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.night[0], 0.1));
+				list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.morning[0], 0.1));
+
+				list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.fine[0], 0.1));
+				if (world.getBiome(pos).canRain()) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.rain[0], 0.1));
+				if (world.getBiome(pos).canRain()) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.thunder[0], 0.02));
+
+				if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.PLAINS)) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.plains[0], 1));
+				if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.FOREST)) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.forest[0], 1));
+
+			}
+
+			// 抽選
+			double totalWeight = WeightedRandom.getTotalWeight(list);
+			if (totalWeight < 1) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.air[0], 1 - totalWeight));
+			Optional<VariantFairy> oVariantFairy = WeightedRandom.getRandomItem(random, list);
+
+			// 排出
+			if (oVariantFairy.isPresent()) drops.add(oVariantFairy.get().createItemStack());
+
+		}
 
 	}
 
