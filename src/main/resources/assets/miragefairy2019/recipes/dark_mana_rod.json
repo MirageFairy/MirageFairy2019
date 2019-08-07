@@ -20,8 +20,8 @@
 			"ore": "ingotMiragium"
 		},
 		"G": {
-			"type": "forge:ore_dict",
-			"ore": "gemCoal"
+			"item": "minecraft:coal",
+			"data": 0
 		}
 	},
 	"result": {
