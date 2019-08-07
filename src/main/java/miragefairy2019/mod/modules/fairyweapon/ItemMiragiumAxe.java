@@ -42,7 +42,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		public final int maxHeight;
 		public final double power;
 		public final int fortune;
-		public final int coolTime;
+		public final double coolTime;
 		public final double wear;
 		public final double additionalReach;
 
@@ -51,7 +51,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 			maxHeight = Math.min((int) (fairyType.manaSet.gaia / 2 + 2), 100);
 			power = fairyType.manaSet.aqua / 2 + fairyType.abilitySet.get(EnumAbilityType.fell) / 4;
 			fortune = Math.min((int) (fairyType.manaSet.shine / 5), 3);
-			coolTime = (int) (fairyType.cost * 2 * Math.pow(0.5, fairyType.manaSet.dark / 50));
+			coolTime = fairyType.cost * 2 * Math.pow(0.5, fairyType.manaSet.dark / 50);
 			wear = Math.pow(0.5, fairyType.manaSet.fire / 50);
 			additionalReach = Math.min(fairyType.manaSet.wind / 5, 20);
 		}
@@ -89,7 +89,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		tooltip.add(TextFormatting.BLUE + "Max Height: " + status.maxHeight + " (Gaia)");
 		tooltip.add(TextFormatting.BLUE + "Power: " + String.format("%.1f", status.power) + " (Aqua, " + EnumAbilityType.fell.getLocalizedName() + ")");
 		tooltip.add(TextFormatting.BLUE + "Fortune: " + status.fortune + " (Shine)");
-		tooltip.add(TextFormatting.BLUE + "Cool Time: " + status.coolTime + "t (Dark, Cost) (" + String.format("%.1f", status.coolTime / status.power) + "t per 1.0 power)");
+		tooltip.add(TextFormatting.BLUE + "Cool Time: " + ((int) status.coolTime) + "t (Dark, Cost) (" + String.format("%.1f", status.coolTime / status.power) + "t per 1.0 power)");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
 	}
@@ -208,7 +208,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 					Status status = new Status(fairy.y);
 
 					// 耐久がない場合は赤
-					// 対象が原木でない場合は緑
+					// 対象が発動対象でない場合は緑
 					// クールタイムの場合は黄色
 					RayTraceResult rayTraceResult = rayTrace(world, player, false, status.additionalReach);
 					if (rayTraceResult == null) {
@@ -218,7 +218,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 							itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
 						return;
 					}
-					if (!(rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK && isLog(world, rayTraceResult.getBlockPos()))) {
+					if (!canExecute(world, rayTraceResult)) {
 						spawnParticle(
 							world,
 							rayTraceResult.hitVec,
@@ -236,6 +236,11 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 			}
 
 		}
+	}
+
+	protected boolean canExecute(World world, RayTraceResult rayTraceResult)
+	{
+		return rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK && isLog(world, rayTraceResult.getBlockPos());
 	}
 
 }
