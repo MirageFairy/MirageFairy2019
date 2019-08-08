@@ -200,7 +200,7 @@ public class BlockFairyLog extends Block
 	@Override
 	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
-		return true;
+		return false;
 	}
 
 	//
