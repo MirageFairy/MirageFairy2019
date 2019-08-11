@@ -48,11 +48,11 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 
 		public Status(FairyType fairyType)
 		{
-			maxHeight = Math.min((int) (fairyType.manaSet.gaia / 2 + 2), 100);
-			power = fairyType.manaSet.aqua / 2 + fairyType.abilitySet.get(EnumAbilityType.fell) / 4;
+			maxHeight = 1 + Math.min((int) (fairyType.manaSet.gaia / 2), 100);
+			power = 2 + fairyType.manaSet.aqua / 2 + fairyType.abilitySet.get(EnumAbilityType.fell) / 4;
 			fortune = Math.min((int) (fairyType.manaSet.shine / 5), 3);
-			coolTime = fairyType.cost * 2 * Math.pow(0.5, fairyType.manaSet.dark / 50);
-			wear = Math.pow(0.5, fairyType.manaSet.fire / 50);
+			coolTime = fairyType.cost * 2 * Math.pow(0.5, fairyType.manaSet.dark / 20);
+			wear = Math.pow(0.5, fairyType.manaSet.fire / 20);
 			additionalReach = Math.min(fairyType.manaSet.wind / 5, 20);
 		}
 
