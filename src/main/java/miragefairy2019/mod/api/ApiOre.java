@@ -21,5 +21,7 @@ public class ApiOre
 	public static ItemStack itemStackDustTinyMiragium;
 	public static ItemStack itemStackIngotMiragium;
 	public static ItemStack itemStackGemCinnabar;
+	public static ItemStack itemStackGemMoonstone;
+	public static ItemStack itemStackGemMagnetite;
 
 }

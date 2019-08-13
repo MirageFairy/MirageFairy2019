@@ -21,6 +21,8 @@ public enum EnumVariantOre1 implements IStringSerializable, IOreVariant
 	FLUORITE_ORE(1, "fluorite_ore", "oreFluorite", 2, new GemProvider(() -> ApiOre.itemStackGemFluorite.copy(), 1, 1, 15, 30)),
 	SULFUR_ORE(2, "sulfur_ore", "oreSulfur", 1, new GemProvider(() -> ApiOre.itemStackGemSulfur.copy(), 1, 1.5, 1, 3)),
 	CINNABAR_ORE(3, "cinnabar_ore", "oreCinnabar", 2, new GemProvider(() -> ApiOre.itemStackGemCinnabar.copy(), 1, 1, 1, 3)),
+	MOONSTONE_ORE(4, "moonstone_ore", "oreMoonstone", 3, new GemProvider(() -> ApiOre.itemStackGemMoonstone.copy(), 1, 0.5, 20, 40)),
+	MAGNETITE_ORE(5, "magnetite_ore", "oreMagnetite", 1, new GemProvider(() -> ApiOre.itemStackGemMagnetite.copy(), 1, 2, 1, 2)),
 	;
 
 	//

@@ -44,6 +44,8 @@ public class ModuleOre
 	public static ItemVariantMaterialContained variantDustTinyMiragium;
 	public static ItemVariantMaterialContained variantIngotMiragium;
 	public static ItemVariantMaterialContained variantGemCinnabar;
+	public static ItemVariantMaterialContained variantGemMoonstone;
+	public static ItemVariantMaterialContained variantGemMagnetite;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -91,6 +93,8 @@ public class ModuleOre
 			itemMaterials.registerVariant(4, variantDustTinyMiragium = new ItemVariantMaterialContained("miragium_tiny_dust", "dustTinyMiragium", "Miragium(0.111)"));
 			itemMaterials.registerVariant(5, variantIngotMiragium = new ItemVariantMaterialContained("miragium_ingot", "ingotMiragium", "Miragium(1.000)"));
 			itemMaterials.registerVariant(6, variantGemCinnabar = new ItemVariantMaterialContained("cinnabar_gem", "gemCinnabar", "Cinnabar(1.000)"));
+			itemMaterials.registerVariant(7, variantGemMoonstone = new ItemVariantMaterialContained("moonstone_gem", "gemMoonstone", "Moonstone(1.000)"));
+			itemMaterials.registerVariant(8, variantGemMagnetite = new ItemVariantMaterialContained("magnetite_gem", "gemMagnetite", "Magnetite(1.000)"));
 			ForgeRegistries.ITEMS.register(itemMaterials);
 			if (ApiMain.side.isClient()) itemMaterials.setCustomModelResourceLocations();
 
@@ -103,6 +107,8 @@ public class ModuleOre
 			ApiOre.itemStackDustTinyMiragium = variantDustTinyMiragium.createItemStack();
 			ApiOre.itemStackIngotMiragium = variantIngotMiragium.createItemStack();
 			ApiOre.itemStackGemCinnabar = variantGemCinnabar.createItemStack();
+			ApiOre.itemStackGemMoonstone = variantGemMoonstone.createItemStack();
+			ApiOre.itemStackGemMagnetite = variantGemMagnetite.createItemStack();
 			for (Tuple<Integer, ItemVariantMaterialContained> tuple : itemMaterials.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}
