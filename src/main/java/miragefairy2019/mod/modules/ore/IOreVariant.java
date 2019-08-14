@@ -7,21 +7,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public interface IOreVariant
+public interface IOreVariant extends IBlockVariant
 {
-
-	public int getMetadata();
-
-	public String getResourceName();
-
-	public String getUnlocalizedName();
-
-	public default String getHarvestTool()
-	{
-		return "pickaxe";
-	}
-
-	public int getHarvestLevel();
 
 	public default void getDrops(NonNullList<ItemStack> drops, Random random, Block block, int metadata, int fortune)
 	{
