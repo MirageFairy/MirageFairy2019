@@ -34,8 +34,8 @@ public class ModuleOre
 	public static BlockOreSeed blockOreSeed;
 	public static BlockOre<EnumVariantOre1> blockOre1;
 
-	public static ItemOre<EnumVariantOre1> itemOre1;
 	public static ItemMultiMaterialContained<ItemVariantMaterialContained> itemMaterials;
+	public static ItemBlockOre<EnumVariantOre1> itemBlockOre1;
 
 	public static ItemVariantMaterialContained variantGemFluorite;
 	public static ItemVariantMaterialContained variantGemApatite;
@@ -67,17 +67,17 @@ public class ModuleOre
 		erMod.registerItem.register(b -> {
 
 			// 鉱石
-			ApiOre.itemOre1 = itemOre1 = new ItemOre<>(blockOre1);
-			itemOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
-			itemOre1.setUnlocalizedName("ore1");
-			itemOre1.setCreativeTab(ApiMain.creativeTab);
-			ForgeRegistries.ITEMS.register(itemOre1);
+			ApiOre.itemBlockOre1 = itemBlockOre1 = new ItemBlockOre<>(blockOre1);
+			itemBlockOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
+			itemBlockOre1.setUnlocalizedName("ore1");
+			itemBlockOre1.setCreativeTab(ApiMain.creativeTab);
+			ForgeRegistries.ITEMS.register(itemBlockOre1);
 			if (ApiMain.side.isClient()) {
 				for (IOreVariant variant : blockOre1.variantList) {
 					ModelLoader.setCustomModelResourceLocation(
-						itemOre1,
+						itemBlockOre1,
 						variant.getMetadata(),
-						new ModelResourceLocation(new ResourceLocation(itemOre1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
+						new ModelResourceLocation(new ResourceLocation(itemBlockOre1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
 				}
 			}
 

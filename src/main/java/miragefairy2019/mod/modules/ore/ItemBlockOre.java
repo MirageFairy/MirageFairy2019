@@ -3,12 +3,12 @@ package miragefairy2019.mod.modules.ore;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemOre<V extends IOreVariant> extends ItemBlock
+public class ItemBlockOre<V extends IOreVariant> extends ItemBlock
 {
 
 	private BlockOre<V> block2;
 
-	public ItemOre(BlockOre<V> block)
+	public ItemBlockOre(BlockOre<V> block)
 	{
 		super(block);
 		this.block2 = block;

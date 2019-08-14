@@ -11,7 +11,7 @@ public class ApiOre
 	public static Block blockOreSeed;
 	public static Block blockOre1;
 
-	public static ItemBlock itemOre1;
+	public static ItemBlock itemBlockOre1;
 	public static Item itemMaterials;
 
 	public static ItemStack itemStackGemApatite;
