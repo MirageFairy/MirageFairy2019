@@ -34,8 +34,8 @@ public class ModuleOre
 	public static BlockOreSeed blockOreSeed;
 	public static BlockOre<EnumVariantOre1> blockOre1;
 
-	public static ItemMultiMaterialContained<ItemVariantMaterialContained> itemMaterials;
 	public static ItemBlockOre<EnumVariantOre1> itemBlockOre1;
+	public static ItemMultiMaterialContained<ItemVariantMaterialContained> itemMaterials;
 
 	public static ItemVariantMaterialContained variantGemFluorite;
 	public static ItemVariantMaterialContained variantGemApatite;
