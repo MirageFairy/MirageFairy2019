@@ -1,0 +1,20 @@
+{
+	"variants": {
+		"variant=0": { "model": "miragefairy2019:apatite_block" },
+		"variant=1": { "model": "miragefairy2019:fluorite_block" },
+		"variant=2": { "model": "miragefairy2019:sulfur_block" },
+		"variant=3": { "model": "miragefairy2019:cinnabar_block" },
+		"variant=4": { "model": "miragefairy2019:moonstone_block" },
+		"variant=5": { "model": "miragefairy2019:magnetite_block" },
+		"variant=6": { "model": "minecraft:stone" },
+		"variant=7": { "model": "minecraft:stone" },
+		"variant=8": { "model": "minecraft:stone" },
+		"variant=9": { "model": "minecraft:stone" },
+		"variant=10": { "model": "minecraft:stone" },
+		"variant=11": { "model": "minecraft:stone" },
+		"variant=12": { "model": "minecraft:stone" },
+		"variant=13": { "model": "minecraft:stone" },
+		"variant=14": { "model": "minecraft:stone" },
+		"variant=15": { "model": "minecraft:stone" }
+	}
+}

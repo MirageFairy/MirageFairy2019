@@ -33,8 +33,10 @@ public class ModuleOre
 
 	public static BlockOreSeed blockOreSeed;
 	public static BlockOre<EnumVariantOre1> blockOre1;
+	public static BlockMaterials<EnumVariantMaterials1> blockMaterials1;
 
 	public static ItemBlockOre<EnumVariantOre1> itemBlockOre1;
+	public static ItemBlockMaterials<EnumVariantMaterials1> itemBlockMaterials1;
 	public static ItemMultiMaterialContained<ItemVariantMaterialContained> itemMaterials;
 
 	public static ItemVariantMaterialContained variantGemFluorite;
@@ -63,6 +65,12 @@ public class ModuleOre
 			blockOre1.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.BLOCKS.register(blockOre1);
 
+			// ブロック
+			ApiOre.blockMaterials1 = blockMaterials1 = new BlockMaterials<>(EnumVariantMaterials1.variantList);
+			blockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
+			blockMaterials1.setCreativeTab(ApiMain.creativeTab);
+			ForgeRegistries.BLOCKS.register(blockMaterials1);
+
 		});
 		erMod.registerItem.register(b -> {
 
@@ -78,6 +86,21 @@ public class ModuleOre
 						itemBlockOre1,
 						variant.getMetadata(),
 						new ModelResourceLocation(new ResourceLocation(itemBlockOre1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
+				}
+			}
+
+			// ブロック
+			ApiOre.itemBlockMaterials1 = itemBlockMaterials1 = new ItemBlockMaterials<>(blockMaterials1);
+			itemBlockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
+			itemBlockMaterials1.setUnlocalizedName("materials1");
+			itemBlockMaterials1.setCreativeTab(ApiMain.creativeTab);
+			ForgeRegistries.ITEMS.register(itemBlockMaterials1);
+			if (ApiMain.side.isClient()) {
+				for (IOreVariant variant : blockOre1.variantList) {
+					ModelLoader.setCustomModelResourceLocation(
+						itemBlockMaterials1,
+						variant.getMetadata(),
+						new ModelResourceLocation(new ResourceLocation(itemBlockMaterials1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
 				}
 			}
 
