@@ -1,9 +1,9 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.lib.WeightedRandom;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -21,43 +21,22 @@ import net.minecraft.world.World;
 public class ItemFairyCrystal extends Item
 {
 
-	public static List<Drop> drops = new ArrayList<>();
-
-	public static class Drop
-	{
-
-		public final ItemStack itemStack;
-		public final double weight;
-
-		public Drop(ItemStack itemStack, double weight)
-		{
-			this.itemStack = itemStack;
-			this.weight = weight;
-		}
-
-		public boolean canDrop(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-		{
-			return true;
-		}
-
-	}
-
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		ItemStack itemStackCrystal = player.getHeldItem(hand);
 		if (itemStackCrystal.isEmpty()) return EnumActionResult.PASS;
 
-		if (worldIn.isRemote) return EnumActionResult.SUCCESS;
+		if (world.isRemote) return EnumActionResult.SUCCESS;
 
 		// ガチャを引く
-		List<WeightedRandom.Item<ItemStack>> list = ISuppliterator.ofIterable(drops)
-			.filter(d -> d.canDrop(player, worldIn, pos, hand, facing, hitX, hitY, hitZ))
-			.map(d -> new WeightedRandom.Item<>(d.itemStack, d.weight))
+		List<WeightedRandom.Item<ItemStack>> list = ISuppliterator.ofIterable(ApiFairyCrystal.dropsFairyCrystal)
+			.mapIfPresent(d -> d.getDrop(player, world, pos, hand, facing, hitX, hitY, hitZ))
+			.map(d -> new WeightedRandom.Item<>(d.getItemStack(), d.getWeight()))
 			.toList();
 		double totalWeight = WeightedRandom.getTotalWeight(list);
 		if (totalWeight < 1) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.air[0].createItemStack(), 1 - totalWeight));
-		Optional<ItemStack> oItemStack = WeightedRandom.getRandomItem(worldIn.rand, list);
+		Optional<ItemStack> oItemStack = WeightedRandom.getRandomItem(world.rand, list);
 
 		// ガチャが成功した場合、
 		if (oItemStack.isPresent()) {
@@ -69,9 +48,9 @@ public class ItemFairyCrystal extends Item
 
 				// 妖精をドロップ
 				BlockPos pos2 = pos.offset(facing);
-				EntityItem entityitem = new EntityItem(worldIn, pos2.getX() + 0.5, pos2.getY() + 0.5, pos2.getZ() + 0.5, oItemStack.get().copy());
+				EntityItem entityitem = new EntityItem(world, pos2.getX() + 0.5, pos2.getY() + 0.5, pos2.getZ() + 0.5, oItemStack.get().copy());
 				entityitem.setDefaultPickupDelay();
-				worldIn.spawnEntity(entityitem);
+				world.spawnEntity(entityitem);
 
 			}
 		}
