@@ -148,6 +148,18 @@ public class BlockOreSeed extends Block
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 				}
+			} else if (variant == EnumVariant.COAL) {
+				if (s < 0.10) {
+					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.MAGNETITE_ORE);
+				} else {
+					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
+				}
+			} else if (variant == EnumVariant.TINY) {
+				if (pos.getY() <= 50 && pos.getY() >= 40 && s < 0.10) {
+					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.MOONSTONE_ORE);
+				} else {
+					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
+				}
 			} else {
 				blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 			}
