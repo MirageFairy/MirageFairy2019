@@ -14,6 +14,7 @@ import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -86,10 +87,10 @@ public class ModuleFairyCrystal
 				ApiFairyCrystal.dropsFairyCrystal.add(new RightClickDropFixed(ModuleFairy.FairyTypes.wheat[0].createItemStack(), 0.03));
 				ApiFairyCrystal.dropsFairyCrystal.add(new RightClickDropFixed(ModuleFairy.FairyTypes.lilac[0].createItemStack(), 0.009));
 
-				ApiFairyCrystal.dropsFairyCrystal.add(new RightClickDropFixed(ModuleFairy.FairyTypes.torch[0].createItemStack(), 0.1));
-				ApiFairyCrystal.dropsFairyCrystal.add(new RightClickDropFixed(ModuleFairy.FairyTypes.furnace[0].createItemStack(), 0.03));
-				ApiFairyCrystal.dropsFairyCrystal.add(new RightClickDropFixed(ModuleFairy.FairyTypes.magentaglazedterracotta[0].createItemStack(), 0.009));
-				ApiFairyCrystal.dropsFairyCrystal.add(new RightClickDropFixed(ModuleFairy.FairyTypes.bread[0].createItemStack(), 0.03));
+				ApiFairyCrystal.dropsFairyCrystal.add(new RightClickDropInventory(ModuleFairy.FairyTypes.torch[0].createItemStack(), 0.1, block(Blocks.TORCH)));
+				ApiFairyCrystal.dropsFairyCrystal.add(new RightClickDropInventory(ModuleFairy.FairyTypes.furnace[0].createItemStack(), 0.03, block(Blocks.FURNACE)));
+				ApiFairyCrystal.dropsFairyCrystal.add(new RightClickDropInventory(ModuleFairy.FairyTypes.magentaglazedterracotta[0].createItemStack(), 0.009, block(Blocks.MAGENTA_GLAZED_TERRACOTTA)));
+				ApiFairyCrystal.dropsFairyCrystal.add(new RightClickDropInventory(ModuleFairy.FairyTypes.bread[0].createItemStack(), 0.03, item(Items.BREAD)));
 
 				ApiFairyCrystal.dropsFairyCrystal.add(new RightClickDropFixed(ModuleFairy.FairyTypes.daytime[0].createItemStack(), 0.02));
 				ApiFairyCrystal.dropsFairyCrystal.add(new RightClickDropFixed(ModuleFairy.FairyTypes.night[0].createItemStack(), 0.02));
@@ -113,6 +114,11 @@ public class ModuleFairyCrystal
 			}
 			return false;
 		};
+	}
+
+	private static Predicate<ItemStack> item(Item... items)
+	{
+		return a(ISuppliterator.ofObjArray(items).map(item -> Ingredient.fromItems(item)));
 	}
 
 	private static Predicate<ItemStack> block(Block... blocks)
