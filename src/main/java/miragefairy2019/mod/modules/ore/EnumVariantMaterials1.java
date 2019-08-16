@@ -9,12 +9,12 @@ import net.minecraft.util.IStringSerializable;
 
 public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariant
 {
-	APATITE_BLOCK(0, "apatite_block", "blockApatite", 1),
-	FLUORITE_BLOCK(1, "fluorite_block", "blockFluorite", 2),
-	SULFUR_BLOCK(2, "sulfur_block", "blockSulfur", 1),
-	CINNABAR_BLOCK(3, "cinnabar_block", "blockCinnabar", 2),
-	MOONSTONE_BLOCK(4, "moonstone_block", "blockMoonstone", 3),
-	MAGNETITE_BLOCK(5, "magnetite_block", "blockMagnetite", 1),
+	APATITE_BLOCK(0, "apatite_block", "blockApatite", "blockApatite", 1),
+	FLUORITE_BLOCK(1, "fluorite_block", "blockFluorite", "blockFluorite", 2),
+	SULFUR_BLOCK(2, "sulfur_block", "blockSulfur", "blockSulfur", 1),
+	CINNABAR_BLOCK(3, "cinnabar_block", "blockCinnabar", "blockCinnabar", 2),
+	MOONSTONE_BLOCK(4, "moonstone_block", "blockMoonstone", "blockMoonstone", 3),
+	MAGNETITE_BLOCK(5, "magnetite_block", "blockMagnetite", "blockMagnetite", 1),
 	;
 
 	//
@@ -47,13 +47,15 @@ public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariant
 	public final int metadata;
 	public final String resourceName;
 	public final String unlocalizedName;
+	public final String oreName;
 	public final int harvestLevel;
 
-	private EnumVariantMaterials1(int metadata, String resourceName, String unlocalizedName, int harvestLevel)
+	private EnumVariantMaterials1(int metadata, String resourceName, String unlocalizedName, String oreName, int harvestLevel)
 	{
 		this.metadata = metadata;
 		this.resourceName = resourceName;
 		this.unlocalizedName = unlocalizedName;
+		this.oreName = oreName;
 		this.harvestLevel = harvestLevel;
 	}
 
