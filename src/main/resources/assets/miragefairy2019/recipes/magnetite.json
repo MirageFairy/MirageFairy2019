@@ -1,0 +1,18 @@
+{
+    "type": "forge:ore_shaped",
+    "group": "magnetite",
+    "pattern": [
+        "#"
+    ],
+    "key": {
+        "#": {
+            "type": "forge:ore_dict",
+            "ore": "blockMagnetite"
+        }
+    },
+    "result": {
+        "item": "miragefairy2019:materials",
+        "count": 9,
+        "data": 8
+    }
+}

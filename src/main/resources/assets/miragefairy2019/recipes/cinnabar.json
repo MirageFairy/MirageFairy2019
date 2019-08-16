@@ -1,0 +1,18 @@
+{
+    "type": "forge:ore_shaped",
+    "group": "cinnabar",
+    "pattern": [
+        "#"
+    ],
+    "key": {
+        "#": {
+            "type": "forge:ore_dict",
+            "ore": "blockCinnabar"
+        }
+    },
+    "result": {
+        "item": "miragefairy2019:materials",
+        "count": 9,
+        "data": 6
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "type": "forge:ore_shaped",
+    "group": "moonstone_block",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "type": "forge:ore_dict",
+            "ore": "gemMoonstone"
+        }
+    },
+    "result": {
+        "item": "miragefairy2019:materials1",
+        "data": 4
+    }
+}
