@@ -96,7 +96,7 @@ public class ModuleOre
 			itemBlockMaterials1.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.ITEMS.register(itemBlockMaterials1);
 			if (ApiMain.side.isClient()) {
-				for (IOreVariant variant : blockOre1.variantList) {
+				for (IBlockVariant variant : blockMaterials1.variantList) {
 					ModelLoader.setCustomModelResourceLocation(
 						itemBlockMaterials1,
 						variant.getMetadata(),
