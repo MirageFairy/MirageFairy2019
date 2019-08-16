@@ -15,6 +15,7 @@ import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -134,6 +135,9 @@ public class ModuleOre
 			ApiOre.itemStackGemMagnetite = variantGemMagnetite.createItemStack();
 			for (Tuple<Integer, ItemVariantMaterialContained> tuple : itemMaterials.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
+			}
+			for (EnumVariantMaterials1 variant : EnumVariantMaterials1.values()) {
+				OreDictionary.registerOre(variant.oreName, new ItemStack(itemBlockMaterials1, 1, variant.metadata));
 			}
 		});
 		erMod.addRecipe.register(() -> {
