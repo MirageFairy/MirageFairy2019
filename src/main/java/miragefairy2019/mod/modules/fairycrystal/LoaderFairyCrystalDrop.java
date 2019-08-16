@@ -35,12 +35,81 @@ public class LoaderFairyCrystalDrop
 
 		// コモン
 		{
+			d.add(RightClickDrops.world(r(water[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(lava[0]), (w, p) -> w.provider.isNether()));
+			d.add(RightClickDrops.world(r(fire[0]), (w, p) -> w.provider.isNether()));
 
+			d.add(RightClickDrops.world(r(stone[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(dirt[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(sand[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(gravel[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(iron[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(gold[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(diamond[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(emerald[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(redstone[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(lapislazuli[0]), (w, p) -> w.provider.isSurfaceWorld()));
+
+			d.add(RightClickDrops.world(r(spider[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(chicken[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(skeleton[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(zombie[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(creeper[0]), (w, p) -> w.provider.isSurfaceWorld()));
+
+			d.add(RightClickDrops.world(r(wheat[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(lilac[0]), (w, p) -> w.provider.isSurfaceWorld()));
 		}
 
 		// 限定高確率ドロップ
 		{
+			d.add(RightClickDrops.fixed(d(air[0], 1)));
 
+			d.add(RightClickDrops.blocks(d(water[0], 0.3), Blocks.WATER, Blocks.FLOWING_WATER));
+			d.add(RightClickDrops.blocks(d(lava[0], 0.1), Blocks.LAVA, Blocks.FLOWING_LAVA));
+			d.add(RightClickDrops.blocks(d(fire[0], 0.1), Blocks.FIRE));
+
+			d.add(RightClickDrops.world(d(thunder[0], 0.01), (w, p) -> w.provider.isSurfaceWorld() && w.canSeeSky(p) && w.isRainingAt(p) && w.isThundering()));
+			d.add(RightClickDrops.world(d(sun[0], 0.0001), (w, p) -> w.provider.isSurfaceWorld() && w.canSeeSky(p) && time(w, 6000, 18000) && !w.isRainingAt(p)));
+			d.add(RightClickDrops.world(d(moon[0], 0.0001), (w, p) -> w.provider.isSurfaceWorld() && w.canSeeSky(p) && (time(w, 19000, 24000) || time(w, 0, 5000)) && !w.isRainingAt(p)));
+			d.add(RightClickDrops.world(d(star[0], 0.0003), (w, p) -> w.provider.isSurfaceWorld() && w.canSeeSky(p) && (time(w, 19000, 24000) || time(w, 0, 5000)) && !w.isRainingAt(p)));
+
+			d.add(RightClickDrops.blocks(d(stone[0], 0.3), Blocks.STONE, Blocks.COBBLESTONE));
+			d.add(RightClickDrops.blocks(d(dirt[0], 0.3), Blocks.DIRT, Blocks.GRASS));
+			d.add(RightClickDrops.blocks(d(sand[0], 0.3), Blocks.SAND, Blocks.SANDSTONE, Blocks.RED_SANDSTONE));
+			d.add(RightClickDrops.blocks(d(gravel[0], 0.1), Blocks.GRAVEL));
+			d.add(RightClickDrops.ores(d(iron[0], 0.1), "ingotIron", "blockIron"));
+			d.add(RightClickDrops.ores(d(gold[0], 0.03), "ingotGold", "blockGold"));
+			d.add(RightClickDrops.ores(d(diamond[0], 0.01), "gemDiamond", "blockDiamond"));
+			d.add(RightClickDrops.ores(d(emerald[0], 0.03), "gemEmerald", "blockEmerald"));
+			d.add(RightClickDrops.ores(d(redstone[0], 0.1), "dustRedstone", "blockRedstone"));
+			d.add(RightClickDrops.ores(d(lapislazuli[0], 0.1), "gemLapis", "blockLapis"));
+
+			d.add(RightClickDrops.classEntities(d(enderman[0], 0.03), EntityEnderman.class));
+			d.add(RightClickDrops.classEntities(d(spider[0], 0.1), EntitySpider.class));
+			d.add(RightClickDrops.classEntities(d(enderdragon[0], 0.1), EntityDragon.class));
+			d.add(RightClickDrops.classEntities(d(chicken[0], 0.1), EntityChicken.class));
+			d.add(RightClickDrops.classEntities(d(skeleton[0], 0.3), EntitySkeleton.class));
+			d.add(RightClickDrops.classEntities(d(zombie[0], 0.3), EntityZombie.class));
+			d.add(RightClickDrops.classEntities(d(witherskeleton[0], 0.03), EntityWitherSkeleton.class));
+			d.add(RightClickDrops.classEntities(d(wither[0], 0.01), EntityWither.class));
+			d.add(RightClickDrops.classEntities(d(creeper[0], 0.1), EntityCreeper.class));
+
+			d.add(RightClickDrops.blocks(d(wheat[0], 0.1), Blocks.WHEAT));
+			d.add(RightClickDrops.blockStates(d(lilac[0], 0.03), Blocks.DOUBLE_PLANT.getDefaultState().withProperty(BlockDoublePlant.VARIANT, EnumPlantType.SYRINGA)));
+
+			d.add(RightClickDrops.blocks(d(torch[0], 0.3), Blocks.TORCH));
+			d.add(RightClickDrops.blocks(d(furnace[0], 0.1), Blocks.FURNACE));
+			d.add(RightClickDrops.blocks(d(magentaglazedterracotta[0], 0.03), Blocks.MAGENTA_GLAZED_TERRACOTTA));
+			d.add(RightClickDrops.items(d(bread[0], 0.1), Items.BREAD));
+
+			d.add(RightClickDrops.world(d(daytime[0], 0.001), (w, p) -> time(w, 6000, 18000)));
+			d.add(RightClickDrops.world(d(night[0], 0.001), (w, p) -> time(w, 19000, 24000) || time(w, 0, 5000)));
+			d.add(RightClickDrops.world(d(morning[0], 0.001), (w, p) -> time(w, 5000, 9000)));
+			d.add(RightClickDrops.world(d(fine[0], 0.01), (w, p) -> w.provider.isSurfaceWorld() && w.canSeeSky(p) && !w.isRainingAt(p)));
+			d.add(RightClickDrops.world(d(rain[0], 0.01), (w, p) -> w.provider.isSurfaceWorld() && w.canSeeSky(p) && w.isRainingAt(p)));
+
+			d.add(RightClickDrops.biomeTypes(d(plains[0], 0.01), BiomeDictionary.Type.PLAINS));
+			d.add(RightClickDrops.biomeTypes(d(forest[0], 0.01), BiomeDictionary.Type.FOREST));
 		}
 
 	}
