@@ -84,11 +84,9 @@ public class MainAssetsTemplate
 			}));
 			put(new File(base, "models/block/" + material + "_block.json"), String.join("\r\n", new String[] {
 				"{",
-				"    \"parent\": \"miragefairy2019:block/overlay_block\",",
+				"    \"parent\": \"block/cube_all\",",
 				"    \"textures\": {",
-				"        \"particle\": \"blocks/stone\",",
-				"        \"base\": \"blocks/stone\",",
-				"        \"overlay\": \"miragefairy2019:blocks/" + material + "_block\"",
+				"        \"all\": \"miragefairy2019:blocks/" + material + "_block\"",
 				"    }",
 				"}",
 				"",
