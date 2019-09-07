@@ -77,9 +77,9 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 		}
 
 		if (!flag.isAdvanced()) {
-			tooltip.add("" + YELLOW + "Cost: " + WHITE + String.format("%.3f", variant.type.cost));
-		} else {
 			tooltip.add("" + YELLOW + "Cost: " + WHITE + String.format("%.1f", variant.type.cost));
+		} else {
+			tooltip.add("" + YELLOW + "Cost: " + WHITE + String.format("%.3f", variant.type.cost));
 		}
 
 		if (!flag.isAdvanced()) {
