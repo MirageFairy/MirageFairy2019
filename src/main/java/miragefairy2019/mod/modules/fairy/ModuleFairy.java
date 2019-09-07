@@ -22,6 +22,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -36,14 +37,19 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ModuleFairy
 {
 
-	public static ItemFairy itemFairyR1;
-	public static ItemFairy itemFairyR2;
-	public static ItemFairy itemFairyR3;
-	public static ItemFairy itemFairyR4;
-	public static ItemFairy itemFairyR5;
+	public static ItemFairy[] itemFairyList;
 
 	public static class FairyTypes
 	{
+
+		private final int count;
+
+		public FairyTypes(int count)
+		{
+			this.count = count;
+		}
+
+		//
 
 		public static ImmutableArray<Tuple<Integer, VariantFairy[]>> variants;
 
@@ -174,13 +180,9 @@ public class ModuleFairy
 
 				return new FairyType(ModMirageFairy2019.MODID, id, name, rare, rank, cost, manaSetReal, abilitySetReal, colorSet);
 			};
-			return new FairyType[] {
-				f.apply(1),
-				f.apply(2),
-				f.apply(3),
-				f.apply(4),
-				f.apply(5),
-			};
+			return ISuppliterator.rangeClosed(1, count)
+				.map(i -> f.apply(i))
+				.toArray(FairyType[]::new);
 		}
 
 		private ManaSet m(double shine, double fire, double wind, double gaia, double aqua, double dark)
@@ -221,7 +223,7 @@ public class ModuleFairy
 				public void displayAllRelevantItems(NonNullList<ItemStack> itemStacks)
 				{
 					for (Tuple<Integer, VariantFairy[]> variant : FairyTypes.variants) {
-						for (int i = 0; i <= 4; i++) {
+						for (int i = 0; i < itemFairyList.length; i++) {
 							itemStacks.add(variant.y[i].createItemStack());
 						}
 					}
@@ -231,81 +233,28 @@ public class ModuleFairy
 		erMod.registerItem.register(b -> {
 
 			// 妖精タイプ登録
-			new FairyTypes().init();
+			new FairyTypes(7).init();
 
-			// 妖精
-			ApiFairy.itemFairyR1 = itemFairyR1 = new ItemFairy();
-			itemFairyR1.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy");
-			itemFairyR1.setUnlocalizedName("mirageFairyR1");
-			itemFairyR1.setCreativeTab(ApiFairy.creativeTab);
-			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
-				itemFairyR1.registerVariant(tuple.x, tuple.y[0]);
-			}
-			ForgeRegistries.ITEMS.register(itemFairyR1);
-			if (ApiMain.side.isClient()) {
-				for (Tuple<Integer, VariantFairy> tuple : itemFairyR1.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemFairyR1, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "fairy"), null));
-				}
-			}
+			itemFairyList = new ItemFairy[7];
+			ApiFairy.itemFairyList = new Item[7];
 
-			// 妖精
-			ApiFairy.itemFairyR2 = itemFairyR2 = new ItemFairy();
-			itemFairyR2.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r2");
-			itemFairyR2.setUnlocalizedName("mirageFairyR2");
-			itemFairyR2.setCreativeTab(ApiFairy.creativeTab);
-			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
-				itemFairyR2.registerVariant(tuple.x, tuple.y[1]);
-			}
-			ForgeRegistries.ITEMS.register(itemFairyR2);
-			if (ApiMain.side.isClient()) {
-				for (Tuple<Integer, VariantFairy> tuple : itemFairyR2.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemFairyR2, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "fairy"), null));
-				}
-			}
+			for (int i = 0; i < itemFairyList.length; i++) {
 
-			// 妖精
-			ApiFairy.itemFairyR3 = itemFairyR3 = new ItemFairy();
-			itemFairyR3.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r3");
-			itemFairyR3.setUnlocalizedName("mirageFairyR3");
-			itemFairyR3.setCreativeTab(ApiFairy.creativeTab);
-			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
-				itemFairyR3.registerVariant(tuple.x, tuple.y[2]);
-			}
-			ForgeRegistries.ITEMS.register(itemFairyR3);
-			if (ApiMain.side.isClient()) {
-				for (Tuple<Integer, VariantFairy> tuple : itemFairyR3.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemFairyR3, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "fairy"), null));
+				// 妖精
+				ApiFairy.itemFairyList[i] = itemFairyList[i] = new ItemFairy();
+				itemFairyList[i].setRegistryName(ModMirageFairy2019.MODID, i == 0 ? "mirage_fairy" : "mirage_fairy_r" + i);
+				itemFairyList[i].setUnlocalizedName("mirageFairyR" + i);
+				itemFairyList[i].setCreativeTab(ApiFairy.creativeTab);
+				for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
+					itemFairyList[i].registerVariant(tuple.x, tuple.y[i]);
 				}
-			}
+				ForgeRegistries.ITEMS.register(itemFairyList[i]);
+				if (ApiMain.side.isClient()) {
+					for (Tuple<Integer, VariantFairy> tuple : itemFairyList[i].getVariants()) {
+						ModelLoader.setCustomModelResourceLocation(itemFairyList[i], tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "fairy"), null));
+					}
+				}
 
-			// 妖精
-			ApiFairy.itemFairyR4 = itemFairyR4 = new ItemFairy();
-			itemFairyR4.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r4");
-			itemFairyR4.setUnlocalizedName("mirageFairyR4");
-			itemFairyR4.setCreativeTab(ApiFairy.creativeTab);
-			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
-				itemFairyR4.registerVariant(tuple.x, tuple.y[3]);
-			}
-			ForgeRegistries.ITEMS.register(itemFairyR4);
-			if (ApiMain.side.isClient()) {
-				for (Tuple<Integer, VariantFairy> tuple : itemFairyR4.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemFairyR4, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "fairy"), null));
-				}
-			}
-
-			// 妖精
-			ApiFairy.itemFairyR5 = itemFairyR5 = new ItemFairy();
-			itemFairyR5.setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_r5");
-			itemFairyR5.setUnlocalizedName("mirageFairyR5");
-			itemFairyR5.setCreativeTab(ApiFairy.creativeTab);
-			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
-				itemFairyR5.registerVariant(tuple.x, tuple.y[4]);
-			}
-			ForgeRegistries.ITEMS.register(itemFairyR5);
-			if (ApiMain.side.isClient()) {
-				for (Tuple<Integer, VariantFairy> tuple : itemFairyR5.getVariants()) {
-					ModelLoader.setCustomModelResourceLocation(itemFairyR5, tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "fairy"), null));
-				}
 			}
 
 		});
@@ -344,11 +293,17 @@ public class ModuleFairy
 						}
 
 					}
-					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemFairyR1, 0x888888), itemFairyR1);
-					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemFairyR2, 0xFF8888), itemFairyR2);
-					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemFairyR3, 0x8888FF), itemFairyR3);
-					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemFairyR4, 0x88FF88), itemFairyR4);
-					Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemFairyR5, 0xFFFF88), itemFairyR5);
+					for (int i = 0; i < itemFairyList.length; i++) {
+						Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorImpl(itemFairyList[i], new int[] {
+							0xFF8888,
+							0x8888FF,
+							0x88FF88,
+							0xFFFF88,
+							0x111111,
+							0xFFFFFF,
+							0x88FFFF,
+						}[i]), itemFairyList[i]);
+					}
 				}
 
 			}
@@ -359,7 +314,7 @@ public class ModuleFairy
 
 			// 妖精の鉱石辞書
 			for (Tuple<Integer, VariantFairy[]> variant : FairyTypes.variants) {
-				for (int i = 0; i <= 4; i++) {
+				for (int i = 0; i <= itemFairyList.length - 1; i++) {
 					for (Tuple<IAbilityType, Double> tuple : variant.y[i].type.abilitySet.tuples) {
 						if (tuple.y >= 10) {
 							OreDictionary.registerOre(
@@ -376,7 +331,7 @@ public class ModuleFairy
 			// 凝縮・分散レシピ
 			for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
 
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < itemFairyList.length - 1; i++) {
 
 					// 凝縮
 					GameRegistry.addShapelessRecipe(
