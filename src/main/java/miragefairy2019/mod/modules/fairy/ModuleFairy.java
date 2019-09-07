@@ -390,14 +390,13 @@ public class ModuleFairy
 						Ingredient.fromStacks(tuple.y[i].createItemStack()),
 						Ingredient.fromStacks(tuple.y[i].createItemStack()),
 						Ingredient.fromStacks(tuple.y[i].createItemStack()),
-						Ingredient.fromStacks(tuple.y[i].createItemStack()),
 						Ingredient.fromStacks(tuple.y[i].createItemStack()));
 
 					// 分散
 					GameRegistry.addShapelessRecipe(
 						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "decondense_r" + i + "_fairy_" + tuple.y[i].type.name),
 						new ResourceLocation(ModMirageFairy2019.MODID + ":" + "decondense_r" + i + "_fairy_" + tuple.y[i].type.name),
-						tuple.y[i].createItemStack(9),
+						tuple.y[i].createItemStack(8),
 						Ingredient.fromStacks(tuple.y[i + 1].createItemStack()));
 
 				}
