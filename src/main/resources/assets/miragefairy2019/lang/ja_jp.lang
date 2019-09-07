@@ -19,6 +19,10 @@ item.mirageFairyR4.name=Fairy IV
 item.mirageFairyR4.format=%s IV
 item.mirageFairyR5.name=Fairy V
 item.mirageFairyR5.format=%s V
+item.mirageFairyR6.name=Fairy VI
+item.mirageFairyR6.format=%s VI
+item.mirageFairyR7.name=Fairy VII
+item.mirageFairyR7.format=%s VII
 
 item.fairyCrystal.name=妖晶
 

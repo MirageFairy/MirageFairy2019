@@ -242,8 +242,8 @@ public class ModuleFairy
 
 				// 妖精
 				ApiFairy.itemFairyList[i] = itemFairyList[i] = new ItemFairy();
-				itemFairyList[i].setRegistryName(ModMirageFairy2019.MODID, i == 0 ? "mirage_fairy" : "mirage_fairy_r" + i);
-				itemFairyList[i].setUnlocalizedName("mirageFairyR" + i);
+				itemFairyList[i].setRegistryName(ModMirageFairy2019.MODID, i == 0 ? "mirage_fairy" : "mirage_fairy_r" + (i + 1));
+				itemFairyList[i].setUnlocalizedName("mirageFairyR" + (i + 1));
 				itemFairyList[i].setCreativeTab(ApiFairy.creativeTab);
 				for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
 					itemFairyList[i].registerVariant(tuple.x, tuple.y[i]);
