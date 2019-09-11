@@ -120,15 +120,19 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 	{
 		switch (variant.type.rank) {
 			case 1:
-				return GRAY;
-			case 2:
 				return RED;
-			case 3:
+			case 2:
 				return BLUE;
-			case 4:
+			case 3:
 				return GREEN;
-			case 5:
+			case 4:
 				return YELLOW;
+			case 5:
+				return DARK_GRAY;
+			case 6:
+				return WHITE;
+			case 7:
+				return AQUA;
 			default:
 				return LIGHT_PURPLE;
 		}
