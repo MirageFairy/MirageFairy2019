@@ -23,11 +23,11 @@ public class MainColorMaker
 
 			ImmutableArray.of(
 
-				new ImageLayer(imageLoader.loadItemImage("mirage_fairy_layer0"), new ColorIdentifier("@skin")),
-				new ImageLayer(imageLoader.loadItemImage("mirage_fairy_layer1"), new ColorIdentifier("#00BE00")),
-				new ImageLayer(imageLoader.loadItemImage("mirage_fairy_layer2"), new ColorIdentifier("@darker")),
-				new ImageLayer(imageLoader.loadItemImage("mirage_fairy_layer3"), new ColorIdentifier("@brighter")),
-				new ImageLayer(imageLoader.loadItemImage("mirage_fairy_layer4"), new ColorIdentifier("@hair"))
+				new ImageLayer(imageLoader.loadItemImage("fairy_layer0"), new ColorIdentifier("@skin")),
+				new ImageLayer(imageLoader.loadItemImage("fairy_layer1"), new ColorIdentifier("#00BE00")),
+				new ImageLayer(imageLoader.loadItemImage("fairy_layer2"), new ColorIdentifier("@darker")),
+				new ImageLayer(imageLoader.loadItemImage("fairy_layer3"), new ColorIdentifier("@brighter")),
+				new ImageLayer(imageLoader.loadItemImage("fairy_layer4"), new ColorIdentifier("@hair"))
 
 			),
 			ImmutableArray.of(
@@ -40,10 +40,10 @@ public class MainColorMaker
 			),
 			ImmutableArray.of(
 
-				new ImageLayer(imageLoader.loadItemImage("magic_sphere_layer0"), new ColorIdentifier("@darker")),
-				new ImageLayer(imageLoader.loadItemImage("magic_sphere_layer1"), new ColorIdentifier("@hair")),
-				new ImageLayer(imageLoader.loadItemImage("magic_sphere_layer2"), new ColorIdentifier("@skin")),
-				new ImageLayer(imageLoader.loadItemImage("magic_sphere_layer3"), new ColorIdentifier("@brighter"))
+				new ImageLayer(imageLoader.loadItemImage("sphere_layer0"), new ColorIdentifier("@darker")),
+				new ImageLayer(imageLoader.loadItemImage("sphere_layer1"), new ColorIdentifier("@hair")),
+				new ImageLayer(imageLoader.loadItemImage("sphere_layer2"), new ColorIdentifier("@skin")),
+				new ImageLayer(imageLoader.loadItemImage("sphere_layer3"), new ColorIdentifier("@brighter"))
 
 			)
 
