@@ -25,6 +25,8 @@ public class ApiFairy
 		light(YELLOW),
 		flame(RED),
 		water(AQUA),
+		crystal(AQUA),
+		art(YELLOW),
 		;
 
 		private final TextFormatting colorText;
