@@ -17,6 +17,8 @@ public enum EnumSphere
 	light(EnumAbilityType.light, 0xE0F8FF, 0xFFFFE0, 0xFFFFFF, 0xFFDD3E, () -> Ingredient.fromStacks(new ItemStack(Blocks.TORCH))),
 	flame(EnumAbilityType.flame, 0xFF3600, 0xFF9900, 0xCA5B25, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Items.FLINT_AND_STEEL))),
 	water(EnumAbilityType.water, 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF, () -> Ingredient.fromStacks(new ItemStack(Items.WATER_BUCKET))),
+	crystal(EnumAbilityType.crystal, 0xFF3600, 0xFF9900, 0xCA5B25, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Items.DIAMOND))),
+	art(EnumAbilityType.art, 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF, () -> Ingredient.fromStacks(new ItemStack(Items.PAINTING))),
 	;
 
 	public final IAbilityType abilityType;

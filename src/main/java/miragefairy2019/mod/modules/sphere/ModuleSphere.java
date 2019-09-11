@@ -32,6 +32,8 @@ public class ModuleSphere
 	public static VariantSphere variantSphereLight;
 	public static VariantSphere variantSphereFlame;
 	public static VariantSphere variantSphereWater;
+	public static VariantSphere variantSphereCrystal;
+	public static VariantSphere variantSphereArt;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -49,6 +51,8 @@ public class ModuleSphere
 				item.registerVariant(3, variantSphereLight = new VariantSphere(EnumSphere.light));
 				item.registerVariant(4, variantSphereFlame = new VariantSphere(EnumSphere.flame));
 				item.registerVariant(5, variantSphereWater = new VariantSphere(EnumSphere.water));
+				item.registerVariant(6, variantSphereCrystal = new VariantSphere(EnumSphere.crystal));
+				item.registerVariant(7, variantSphereArt = new VariantSphere(EnumSphere.art));
 				ForgeRegistries.ITEMS.register(item);
 				if (ApiMain.side.isClient()) {
 					for (Tuple<Integer, VariantSphere> tuple : item.getVariants()) {
