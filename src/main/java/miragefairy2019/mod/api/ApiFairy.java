@@ -21,12 +21,12 @@ public class ApiFairy
 	{
 		attack(DARK_RED),
 		craft(GOLD),
-		fell(DARK_RED),
+		fell(DARK_GREEN),
 		light(YELLOW),
 		flame(RED),
-		water(AQUA),
+		water(BLUE),
 		crystal(AQUA),
-		art(YELLOW),
+		art(GREEN),
 		;
 
 		private final TextFormatting colorText;
