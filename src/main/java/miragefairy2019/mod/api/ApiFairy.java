@@ -27,6 +27,8 @@ public class ApiFairy
 		water(BLUE),
 		crystal(AQUA),
 		art(GREEN),
+		store(GOLD),
+		warp(DARK_PURPLE),
 		;
 
 		private final TextFormatting colorText;
