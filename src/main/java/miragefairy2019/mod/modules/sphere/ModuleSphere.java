@@ -1,5 +1,8 @@
 package miragefairy2019.mod.modules.sphere;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.ApiSphere;
@@ -26,6 +29,8 @@ public class ModuleSphere
 
 	public static ItemSpheres itemSpheres;
 
+	public static Map<EnumSphere, VariantSphere> variantSpheres = new HashMap<>();
+
 	public static VariantSphere variantSphereAttack;
 	public static VariantSphere variantSphereCraft;
 	public static VariantSphere variantSphereFell;
@@ -34,6 +39,9 @@ public class ModuleSphere
 	public static VariantSphere variantSphereWater;
 	public static VariantSphere variantSphereCrystal;
 	public static VariantSphere variantSphereArt;
+	public static VariantSphere variantSphereStore;
+	public static VariantSphere variantSphereWarp;
+	public static VariantSphere variantSphereShoot;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -45,14 +53,15 @@ public class ModuleSphere
 				item.setRegistryName(ModMirageFairy2019.MODID, "spheres");
 				item.setUnlocalizedName("spheres");
 				item.setCreativeTab(ApiMain.creativeTab);
-				item.registerVariant(0, variantSphereAttack = new VariantSphere(EnumSphere.attack));
-				item.registerVariant(1, variantSphereCraft = new VariantSphere(EnumSphere.craft));
-				item.registerVariant(2, variantSphereFell = new VariantSphere(EnumSphere.fell));
-				item.registerVariant(3, variantSphereLight = new VariantSphere(EnumSphere.light));
-				item.registerVariant(4, variantSphereFlame = new VariantSphere(EnumSphere.flame));
-				item.registerVariant(5, variantSphereWater = new VariantSphere(EnumSphere.water));
-				item.registerVariant(6, variantSphereCrystal = new VariantSphere(EnumSphere.crystal));
-				item.registerVariant(7, variantSphereArt = new VariantSphere(EnumSphere.art));
+				EnumSphere[] spheres = EnumSphere.values();
+				for (int i = 0; i < spheres.length; i++) {
+					EnumSphere sphere = spheres[i];
+
+					VariantSphere variantSphere = new VariantSphere(sphere);
+					item.registerVariant(i, variantSphere);
+					variantSpheres.put(sphere, variantSphere);
+
+				}
 				ForgeRegistries.ITEMS.register(item);
 				if (ApiMain.side.isClient()) {
 					for (Tuple<Integer, VariantSphere> tuple : item.getVariants()) {

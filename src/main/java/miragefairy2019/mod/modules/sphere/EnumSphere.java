@@ -19,6 +19,9 @@ public enum EnumSphere
 	water(EnumAbilityType.water, 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF, () -> Ingredient.fromStacks(new ItemStack(Items.WATER_BUCKET))),
 	crystal(EnumAbilityType.crystal, 0xA2FFFF, 0xB6FFFF, 0x36CECE, 0xEBFFFF, () -> Ingredient.fromStacks(new ItemStack(Items.DIAMOND))),
 	art(EnumAbilityType.art, 0xFF5353, 0x41C6FF, 0xFFFF84, 0x00C800, () -> Ingredient.fromStacks(new ItemStack(Items.PAINTING))),
+	store(EnumAbilityType.store, 0xDCDCDC, 0xEBA242, 0xC47F25, 0x404040, () -> Ingredient.fromStacks(new ItemStack(Blocks.CHEST))),
+	warp(EnumAbilityType.warp, 0x3A00D3, 0x8CF4E2, 0x349988, 0xD004FB, () -> Ingredient.fromStacks(new ItemStack(Items.ENDER_PEARL))),
+	shoot(EnumAbilityType.shoot, 0x969696, 0x896727, 0x896727, 0xD8D8D8, () -> Ingredient.fromStacks(new ItemStack(Items.BOW))),
 	;
 
 	public final IAbilityType abilityType;
