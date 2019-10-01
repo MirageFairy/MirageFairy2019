@@ -119,8 +119,8 @@ public class RightClickDrops
 
 	public static IRightClickDrop ores(IDrop drop, String... ores)
 	{
-		List<OreIngredient> ingredients = ISuppliterator.ofObjArray(ores)
-			.map(o -> new OreIngredient(o))
+		List<Predicate<ItemStack>> ingredients = ISuppliterator.ofObjArray(ores)
+			.<Predicate<ItemStack>> map(o -> new OreIngredient(o))
 			.toList();
 		return new IRightClickDrop() {
 			@Override
@@ -132,7 +132,7 @@ public class RightClickDrops
 			@Override
 			public boolean testItemStack(ItemStack itemStack)
 			{
-				for (OreIngredient ingredient : ingredients) {
+				for (Predicate<ItemStack> ingredient : ingredients) {
 					if (ingredient.test(itemStack)) return true;
 				}
 				return false;
