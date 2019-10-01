@@ -2,6 +2,7 @@ package miragefairy2019.mod.api.fairycrystal;
 
 import java.util.List;
 import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
@@ -132,6 +133,27 @@ public class RightClickDrops
 			public boolean testItemStack(ItemStack itemStack)
 			{
 				for (OreIngredient ingredient : ingredients) {
+					if (ingredient.test(itemStack)) return true;
+				}
+				return false;
+			}
+		};
+	}
+
+	@SafeVarargs
+	public static IRightClickDrop ingredients(IDrop drop, Predicate<ItemStack>... ingredients)
+	{
+		return new IRightClickDrop() {
+			@Override
+			public IDrop getDrop()
+			{
+				return drop;
+			}
+
+			@Override
+			public boolean testItemStack(ItemStack itemStack)
+			{
+				for (Predicate<ItemStack> ingredient : ingredients) {
 					if (ingredient.test(itemStack)) return true;
 				}
 				return false;
