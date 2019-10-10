@@ -31,18 +31,6 @@ public class ModuleSphere
 
 	public static Map<EnumSphere, VariantSphere> variantSpheres = new HashMap<>();
 
-	public static VariantSphere variantSphereAttack;
-	public static VariantSphere variantSphereCraft;
-	public static VariantSphere variantSphereFell;
-	public static VariantSphere variantSphereLight;
-	public static VariantSphere variantSphereFlame;
-	public static VariantSphere variantSphereWater;
-	public static VariantSphere variantSphereCrystal;
-	public static VariantSphere variantSphereArt;
-	public static VariantSphere variantSphereStore;
-	public static VariantSphere variantSphereWarp;
-	public static VariantSphere variantSphereShoot;
-
 	public static void init(EventRegistryMod erMod)
 	{
 		erMod.registerItem.register(b -> {
