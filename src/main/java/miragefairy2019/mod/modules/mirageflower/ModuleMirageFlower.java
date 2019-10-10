@@ -71,54 +71,57 @@ public class ModuleMirageFlower
 			ApiMirageFlower.itemStackMirageFlowerSeeds = new ItemStack(itemMirageFlowerSeeds);
 
 		});
+
+		// 地形生成
 		erMod.hookDecorator.register(() -> {
 
-			// 地形生成
-			List<BiomeDecoratorFlowers> biomeDecorators = new ArrayList<>();
-
-			biomeDecorators.add(new BiomeDecoratorFlowers(
-				UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
-					wg.blockCountMin = 1;
-					wg.blockCountMax = 3;
-				}),
-				0.01));
-
-			biomeDecorators.add(new BiomeDecoratorFlowers(
-				UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
-					wg.blockCountMin = 1;
-					wg.blockCountMax = 10;
-				}),
-				0.1) {
-				@Override
-				protected boolean canGenerate(Biome biome)
-				{
-					return super.canGenerate(biome) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN);
-				}
-			});
-
-			biomeDecorators.add(new BiomeDecoratorFlowers(
-				UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
-					wg.blockCountMin = 1;
-					wg.blockCountMax = 10;
-				}),
-				0.5) {
-				@Override
-				protected boolean canGenerate(Biome biome)
-				{
-					return super.canGenerate(biome) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST);
-				}
-			});
-
 			// ミラージュの花
-			MinecraftForge.EVENT_BUS.register(new Object() {
-				@SubscribeEvent
-				public void accept(DecorateBiomeEvent.Post event)
-				{
-					for (BiomeDecoratorFlowers biomeDecorator : biomeDecorators) {
-						biomeDecorator.decorate(event);
+			{
+				List<BiomeDecoratorFlowers> biomeDecorators = new ArrayList<>();
+
+				biomeDecorators.add(new BiomeDecoratorFlowers(
+					UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
+						wg.blockCountMin = 1;
+						wg.blockCountMax = 3;
+					}),
+					0.01));
+
+				biomeDecorators.add(new BiomeDecoratorFlowers(
+					UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
+						wg.blockCountMin = 1;
+						wg.blockCountMax = 10;
+					}),
+					0.1) {
+					@Override
+					protected boolean canGenerate(Biome biome)
+					{
+						return super.canGenerate(biome) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN);
 					}
-				}
-			});
+				});
+
+				biomeDecorators.add(new BiomeDecoratorFlowers(
+					UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
+						wg.blockCountMin = 1;
+						wg.blockCountMax = 10;
+					}),
+					0.5) {
+					@Override
+					protected boolean canGenerate(Biome biome)
+					{
+						return super.canGenerate(biome) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST);
+					}
+				});
+
+				MinecraftForge.EVENT_BUS.register(new Object() {
+					@SubscribeEvent
+					public void accept(DecorateBiomeEvent.Post event)
+					{
+						for (BiomeDecoratorFlowers biomeDecorator : biomeDecorators) {
+							biomeDecorator.decorate(event);
+						}
+					}
+				});
+			}
 
 			// 妖精の洞穴
 			MinecraftForge.EVENT_BUS.register(new Object() {
@@ -156,6 +159,7 @@ public class ModuleMirageFlower
 			});
 
 		});
+
 	}
 
 }
