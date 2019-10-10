@@ -31,7 +31,7 @@ public class ItemMirageFlowerSeeds extends Item implements IPlantable
 		IBlockState blockState = world.getBlockState(pos);
 		if (facing == EnumFacing.UP
 			&& player.canPlayerEdit(pos.offset(facing), facing, itemStack)
-			&& blockState.getBlock().canSustainPlant(blockState, world, pos, EnumFacing.UP, this)
+			&& blockState.getBlock().canSustainPlant(blockState, world, pos, EnumFacing.UP, ModuleMirageFlower.blockMirageFlower)
 			&& world.isAirBlock(pos.up())) {
 
 			world.setBlockState(pos.up(), getPlant(world, pos));

@@ -6,6 +6,8 @@ import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.ApiOre;
 import miragefairy2019.mod.lib.Utils;
+import miragefairy2019.mod.modules.ore.EnumVariantMaterials1;
+import miragefairy2019.mod.modules.ore.ModuleOre;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockFarmland;
@@ -31,7 +33,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 	public BlockMirageFlower()
 	{
-		super(Material.GLASS);
+		super(Material.PLANTS); // Solidでないマテリアルでなければ耕土の上に置けない
 
 		// meta
 		setDefaultState(blockState.getBaseState()
@@ -89,6 +91,12 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 	// 動作
 
+	@Override
+	protected boolean canSustainBush(IBlockState state)
+	{
+		return state.isFullBlock() || state.getBlock() == Blocks.FARMLAND;
+	}
+
 	protected boolean isMaxAge(IBlockState state)
 	{
 		return state.getValue(AGE) == 3;
@@ -97,7 +105,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	protected void grow(World worldIn, BlockPos pos, IBlockState state, Random rand, double rate)
 	{
 		if (!isMaxAge(state)) {
-			int t = Utils.randomInt(rand, 0.05);
+			int t = Utils.randomInt(rand, 0.04 * rate);
 			for (int i = 0; i < t; i++) {
 				worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, state.getValue(AGE) + 1), 2);
 			}
@@ -116,31 +124,55 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 			double rate = 1;
 
 			// 人工光が当たっているなら加点
-			if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) >= 14) rate *= 1.1;
-			else if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) >= 9) rate *= 1.05;
+			if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) >= 13) rate *= 1.2;
+			else if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) >= 9) rate *= 1.1;
 
 			// 太陽光が当たっているなら加点
-			if (worldIn.getLightFor(EnumSkyBlock.SKY, pos) >= 14) rate *= 1.2;
-			else if (worldIn.getLightFor(EnumSkyBlock.SKY, pos) >= 9) rate *= 1.1;
-			else if (worldIn.getLightFor(EnumSkyBlock.SKY, pos) >= 1) rate *= 1.05;
+			if (worldIn.getLightFor(EnumSkyBlock.SKY, pos) >= 15) rate *= 1.1;
+			else if (worldIn.getLightFor(EnumSkyBlock.SKY, pos) >= 9) rate *= 1.05;
 
 			// 空が見えるなら加点
 			if (worldIn.canSeeSky(pos)) rate *= 1.1;
 
-			// 地面が土なら加点
-			if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.DIRT) rate *= 1.05;
+			// 地面加点
+			{
+				double bonus = 0.5;
 
-			// 地面が耕土なら加点
-			if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.FARMLAND) {
-				rate *= 1.1;
+				if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.GRASS) bonus = Math.max(bonus, 1);
 
-				// 耕土が湿っているなら加点
-				if (worldIn.getBlockState(pos.down()).getValue(BlockFarmland.MOISTURE) > 0) rate *= 1.1;
+				if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.DIRT) bonus = Math.max(bonus, 1.1);
 
+				if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.FARMLAND) {
+					bonus = Math.max(bonus, 1.2);
+
+					// 耕土が湿っているなら加点
+					if (worldIn.getBlockState(pos.down()).getValue(BlockFarmland.MOISTURE) > 0) bonus = Math.max(bonus, 1.3);
+
+				}
+
+				if (worldIn.getBlockState(pos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.APATITE_BLOCK)) bonus = Math.max(bonus, 1.5);
+				if (worldIn.getBlockState(pos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.FLUORITE_BLOCK)) bonus = Math.max(bonus, 2);
+				if (worldIn.getBlockState(pos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.SULFUR_BLOCK)) bonus = Math.max(bonus, 1.5);
+				if (worldIn.getBlockState(pos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.CINNABAR_BLOCK)) bonus = Math.max(bonus, 2);
+				if (worldIn.getBlockState(pos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.MOONSTONE_BLOCK)) bonus = Math.max(bonus, 3);
+				if (worldIn.getBlockState(pos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.MAGNETITE_BLOCK)) bonus = Math.max(bonus, 1.2);
+
+				rate *= bonus;
 			}
 
-			// 森林系バイオームなら加点
-			if (BiomeDictionary.hasType(worldIn.getBiome(pos), BiomeDictionary.Type.FOREST)) rate *= 1.1;
+			// バイオーム加点
+			{
+				double bonus = 1;
+
+				if (BiomeDictionary.hasType(worldIn.getBiome(pos), BiomeDictionary.Type.PLAINS)) bonus = Math.max(bonus, 1.1);
+				if (BiomeDictionary.hasType(worldIn.getBiome(pos), BiomeDictionary.Type.SWAMP)) bonus = Math.max(bonus, 1.1);
+				if (BiomeDictionary.hasType(worldIn.getBiome(pos), BiomeDictionary.Type.MOUNTAIN)) bonus = Math.max(bonus, 1.2);
+				if (BiomeDictionary.hasType(worldIn.getBiome(pos), BiomeDictionary.Type.JUNGLE)) bonus = Math.max(bonus, 1.2);
+				if (BiomeDictionary.hasType(worldIn.getBiome(pos), BiomeDictionary.Type.FOREST)) bonus = Math.max(bonus, 1.3);
+				if (BiomeDictionary.hasType(worldIn.getBiome(pos), BiomeDictionary.Type.MAGICAL)) bonus = Math.max(bonus, 1.3);
+
+				rate *= bonus;
+			}
 
 			grow(worldIn, pos, state, rand, rate);
 		}
