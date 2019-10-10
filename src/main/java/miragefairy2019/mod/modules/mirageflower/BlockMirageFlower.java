@@ -8,6 +8,7 @@ import miragefairy2019.mod.api.ApiOre;
 import miragefairy2019.mod.lib.Utils;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -15,12 +16,15 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
 
 public class BlockMirageFlower extends BlockBush implements IGrowable
 {
@@ -90,10 +94,11 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		return state.getValue(AGE) == 3;
 	}
 
-	protected void grow(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	protected void grow(World worldIn, BlockPos pos, IBlockState state, Random rand, double rate)
 	{
 		if (!isMaxAge(state)) {
-			if (rand.nextInt(20) == 0) {
+			int t = Utils.randomInt(rand, 0.05);
+			for (int i = 0; i < t; i++) {
 				worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, state.getValue(AGE) + 1), 2);
 			}
 		}
@@ -107,7 +112,38 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	{
 		super.updateTick(worldIn, pos, state, rand);
 		if (!worldIn.isAreaLoaded(pos, 1)) return;
-		grow(worldIn, pos, state, rand);
+		{
+			double rate = 1;
+
+			// 人工光が当たっているなら加点
+			if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) >= 14) rate *= 1.1;
+			else if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) >= 9) rate *= 1.05;
+
+			// 太陽光が当たっているなら加点
+			if (worldIn.getLightFor(EnumSkyBlock.SKY, pos) >= 14) rate *= 1.2;
+			else if (worldIn.getLightFor(EnumSkyBlock.SKY, pos) >= 9) rate *= 1.1;
+			else if (worldIn.getLightFor(EnumSkyBlock.SKY, pos) >= 1) rate *= 1.05;
+
+			// 空が見えるなら加点
+			if (worldIn.canSeeSky(pos)) rate *= 1.1;
+
+			// 地面が土なら加点
+			if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.DIRT) rate *= 1.05;
+
+			// 地面が耕土なら加点
+			if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.FARMLAND) {
+				rate *= 1.1;
+
+				// 耕土が湿っているなら加点
+				if (worldIn.getBlockState(pos.down()).getValue(BlockFarmland.MOISTURE) > 0) rate *= 1.1;
+
+			}
+
+			// 森林系バイオームなら加点
+			if (BiomeDictionary.hasType(worldIn.getBiome(pos), BiomeDictionary.Type.FOREST)) rate *= 1.1;
+
+			grow(worldIn, pos, state, rand, rate);
+		}
 	}
 
 	/**
@@ -116,7 +152,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
 	{
-		grow(worldIn, pos, state, rand);
+		grow(worldIn, pos, state, rand, 1);
 	}
 
 	@Override
