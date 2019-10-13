@@ -95,7 +95,7 @@ public class ModuleSphere
 
 			// スフィアの鉱石辞書
 			for (Tuple<Integer, VariantSphere> tuple : itemSpheres.getVariants()) {
-				OreDictionary.registerOre("mirageFairy2019Sphere" + Utils.toUpperCaseHead(tuple.y.sphere.abilityType.getName()), tuple.y.createItemStack());
+				OreDictionary.registerOre(tuple.y.sphere.getOreName(), tuple.y.createItemStack());
 			}
 
 		});

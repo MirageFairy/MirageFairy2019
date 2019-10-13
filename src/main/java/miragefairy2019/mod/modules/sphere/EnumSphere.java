@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.fairy.IAbilityType;
+import miragefairy2019.mod.lib.Utils;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -40,6 +41,11 @@ public enum EnumSphere
 		this.colorBackground = colorBackground;
 		this.colorPlasma = colorPlasma;
 		this.sIngredient = sIngredient;
+	}
+
+	public String getOreName()
+	{
+		return "mirageFairy2019Sphere" + Utils.toUpperCaseHead(abilityType.getName());
 	}
 
 }
