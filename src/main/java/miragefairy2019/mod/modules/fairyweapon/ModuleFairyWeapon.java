@@ -6,8 +6,10 @@ import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleFairyWeapon
@@ -82,6 +84,12 @@ public class ModuleFairyWeapon
 		erMod.createItemStack.register(ic -> {
 			OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWandCrafting", new ItemStack(itemCraftingFairyWand, 1, OreDictionary.WILDCARD_VALUE));
 			OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWandMelting", new ItemStack(itemMeltingFairyWand, 1, OreDictionary.WILDCARD_VALUE));
+		});
+		erMod.addRecipe.register(() -> {
+
+			// 修理レシピ
+			GameRegistry.findRegistry(IRecipe.class).register(new RecipesSphereReplacement());
+
 		});
 	}
 
