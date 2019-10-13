@@ -200,7 +200,7 @@ public abstract class ItemFairyWeaponBase extends Item
 		IBlockState blockState = world.getBlockState(blockPos);
 		Block block = blockState.getBlock();
 		block.dropBlockAsItem(world, blockPos, blockState, fortune);
-		world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 2);
+		world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
 
 		return true;
 	}
