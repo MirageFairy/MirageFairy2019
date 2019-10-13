@@ -42,11 +42,8 @@ public class ItemFairyCrystal extends Item
 		if (!player.isSneaking()) {
 			if (world.isRemote) return EnumActionResult.SUCCESS;
 
-			// ガチャリスト取得
-			List<WeightedRandom.Item<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ);
-
 			// ガチャを引く
-			Optional<ItemStack> oItemStack = WeightedRandom.getRandomItem(world.rand, dropTable);
+			Optional<ItemStack> oItemStack = drop(player, world, pos, hand, facing, hitX, hitY, hitZ);
 
 			// ガチャが成功した場合、
 			if (oItemStack.isPresent()) {
@@ -89,7 +86,19 @@ public class ItemFairyCrystal extends Item
 
 	}
 
-	private List<WeightedRandom.Item<ItemStack>> getDropTable(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public static Optional<ItemStack> drop(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+
+		// ガチャリスト取得
+		List<WeightedRandom.Item<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ);
+
+		// ガチャを引く
+		Optional<ItemStack> oItemStack = WeightedRandom.getRandomItem(world.rand, dropTable);
+
+		return oItemStack;
+	}
+
+	private static List<WeightedRandom.Item<ItemStack>> getDropTable(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		BlockPos pos2 = world.getBlockState(pos).isFullBlock() ? pos.offset(facing) : pos;
 
