@@ -12,6 +12,7 @@ import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
 import miragefairy2019.mod.modules.fairy.VariantFairy;
 import mirrg.boron.util.struct.Tuple3;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockDoublePlant.EnumPlantType;
 import net.minecraft.block.BlockOldLeaf;
@@ -28,10 +29,12 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class LoaderFairyCrystalDrop
 {
@@ -174,7 +177,81 @@ public class LoaderFairyCrystalDrop
 
 	public static void loadFairyRecipe(Consumer<Tuple3<Ingredient, ItemStack, String>> consumerRecipe)
 	{
+		new Object() {
+			public void run()
+			{
+				r(stone, b(Blocks.STONE, 0));
+				r(dirt, b(Blocks.DIRT, 0));
+				r(iron, o("ingotIron"));
+				r(diamond, o("gemDiamond"));
+				r(redstone, o("dustRedstone"));
+				r(sand, b(Blocks.SAND));
+				r(gold, o("ingotGold"));
+				r(wheat, i(Items.WHEAT));
+				r(lilac, b(Blocks.DOUBLE_PLANT, 1));
+				r(torch, b(Blocks.TORCH));
+				r(gravel, b(Blocks.GRAVEL));
+				r(emerald, o("gemEmerald"));
+				r(lapislazuli, o("gemLapislazuli"));
+				r(furnace, b(Blocks.FURNACE));
+				r(magentaglazedterracotta, b(Blocks.MAGENTA_GLAZED_TERRACOTTA));
+				r(bread, i(Items.BREAD));
+				r(apple, i(Items.APPLE));
+				r(carrot, i(Items.CARROT));
+				r(cactus, b(Blocks.CACTUS));
+				r(axe, i(Items.IRON_AXE));
+				r(chest, b(Blocks.CHEST));
+				r(craftingtable, b(Blocks.CRAFTING_TABLE));
+				r(potion, i(Items.POTIONITEM));
+				r(sword, i(Items.IRON_SWORD));
+				r(dispenser, b(Blocks.DISPENSER));
+				r(cod, i(Items.FISH, 0));
+				r(salmon, i(Items.FISH, 1));
+				r(pufferfish, i(Items.FISH, 3));
+				r(clownfish, i(Items.FISH, 2));
+				r(spruce, b(Blocks.LOG, 3));
+				r(anvil, b(Blocks.ANVIL));
+				r(obsidian, b(Blocks.OBSIDIAN));
+				r(seed, i(Items.WHEAT_SEEDS));
+			}
 
+			private void r(VariantFairy[] variantFairies, Ingredient... ingredients)
+			{
+				for (Ingredient ingredient : ingredients) {
+					consumerRecipe.accept(Tuple3.of(ingredient, variantFairies[0].createItemStack(), variantFairies[0].type.name));
+				}
+			}
+
+			private Ingredient i(Item item)
+			{
+				return i(item, 32767);
+			}
+
+			private Ingredient i(Item item, int meta)
+			{
+				return Ingredient.fromStacks(new ItemStack(item, 1, meta));
+			}
+
+			private Ingredient b(Block block)
+			{
+				return b(block, 32767);
+			}
+
+			private Ingredient b(Block block, int meta)
+			{
+				return Ingredient.fromStacks(new ItemStack(Item.getItemFromBlock(block), 1, meta));
+			}
+
+			private Ingredient s(ItemStack itemStack)
+			{
+				return Ingredient.fromStacks(itemStack);
+			}
+
+			private Ingredient o(String ore)
+			{
+				return new OreIngredient(ore);
+			}
+		}.run();
 	}
 
 }
