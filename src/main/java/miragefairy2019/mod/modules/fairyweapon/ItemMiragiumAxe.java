@@ -45,6 +45,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		public final double coolTime;
 		public final double wear;
 		public final double additionalReach;
+		public final boolean collection;
 
 		public Status(FairyType fairyType)
 		{
@@ -54,6 +55,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 			coolTime = fairyType.cost * 2 * Math.pow(0.5, fairyType.manaSet.dark / 20);
 			wear = Math.pow(0.5, fairyType.manaSet.fire / 20);
 			additionalReach = Math.min(fairyType.manaSet.wind / 5, 20);
+			collection = fairyType.abilitySet.get(EnumAbilityType.warp) >= 10;
 		}
 
 	}
@@ -92,6 +94,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + ((int) status.coolTime) + "t (Dark, Cost) (" + String.format("%.1f", status.coolTime / status.power) + "t per 1.0 power)");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
+		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + EnumAbilityType.warp.getLocalizedName() + ")");
 	}
 
 	//
@@ -156,7 +159,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 
 				if (world.rand.nextDouble() < status.wear) itemStack.damageItem(1, player);
 				power2 -= blockHardness;
-				breakBlock(world, player, rayTraceResult.sideHit, itemStack, blockPos2, status.fortune);
+				breakBlock(world, player, rayTraceResult.sideHit, itemStack, blockPos2, status.fortune, status.collection);
 				successed++;
 
 			}

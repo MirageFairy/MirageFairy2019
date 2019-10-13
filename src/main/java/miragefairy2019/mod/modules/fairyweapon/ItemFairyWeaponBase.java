@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -20,6 +21,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -192,7 +194,7 @@ public abstract class ItemFairyWeaponBase extends Item
 		return vec2;
 	}
 
-	protected boolean breakBlock(World world, EntityPlayer player, EnumFacing facing, ItemStack itemStack, BlockPos blockPos, int fortune)
+	protected boolean breakBlock(World world, EntityPlayer player, EnumFacing facing, ItemStack itemStack, BlockPos blockPos, int fortune, boolean collection)
 	{
 		if (!world.isBlockModifiable(player, blockPos)) return false;
 		if (!player.canPlayerEdit(blockPos, facing, itemStack)) return false;
@@ -201,6 +203,12 @@ public abstract class ItemFairyWeaponBase extends Item
 		Block block = blockState.getBlock();
 		block.dropBlockAsItem(world, blockPos, blockState, fortune);
 		world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
+		if (collection) {
+			for (EntityItem entityItem : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(blockPos))) {
+				entityItem.setPosition(player.posX, player.posY, player.posZ);
+				entityItem.setNoPickupDelay();
+			}
+		}
 
 		return true;
 	}
