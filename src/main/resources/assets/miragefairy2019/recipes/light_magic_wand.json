@@ -13,7 +13,7 @@
 		},
 		"R": {
 			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019ManaRodAqua"
+			"ore": "mirageFairy2019ManaRodWind"
 		},
 		"G": {
 			"type": "forge:ore_dict",
