@@ -1,0 +1,30 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "fertilizer",
+	"pattern": [
+		"cC",
+		"SN"
+	],
+	"key": {
+		"c": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
+		"C": {
+			"item": "minecraft:coal",
+			"data": 1
+		},
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "gemSulfur"
+		},
+		"N": {
+			"type": "forge:ore_dict",
+			"ore": "gemSaltpeter"
+		}
+	},
+	"result": {
+		"item": "minecraft:gunpowder",
+		"count": 3
+	}
+}
