@@ -12,6 +12,9 @@ import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
 import miragefairy2019.mod.modules.fairy.VariantFairy;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockDoublePlant.EnumPlantType;
+import net.minecraft.block.BlockOldLeaf;
+import net.minecraft.block.BlockOldLog;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -23,6 +26,8 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 
@@ -49,18 +54,26 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.world(r(emerald[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(redstone[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(lapislazuli[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(obsidian[0]), (w, p) -> w.provider.isSurfaceWorld()));
 
 			d.add(RightClickDrops.world(r(spider[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(chicken[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(skeleton[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(zombie[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(creeper[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(fish[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(cod[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(salmon[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(pufferfish[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(clownfish[0]), (w, p) -> w.provider.isSurfaceWorld()));
 
 			d.add(RightClickDrops.world(r(wheat[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(lilac[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(apple[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(carrot[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(cactus[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(spruce[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(seed[0]), (w, p) -> w.provider.isSurfaceWorld()));
 		}
 
 		// 限定高確率ドロップ
@@ -86,6 +99,7 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.ores(d(emerald[0], 0.03), "gemEmerald", "blockEmerald"));
 			d.add(RightClickDrops.ores(d(redstone[0], 0.1), "dustRedstone", "blockRedstone"));
 			d.add(RightClickDrops.ores(d(lapislazuli[0], 0.1), "gemLapis", "blockLapis"));
+			d.add(RightClickDrops.blocks(d(obsidian[0], 0.1), Blocks.OBSIDIAN));
 
 			d.add(RightClickDrops.classEntities(d(enderman[0], 0.03), EntityEnderman.class));
 			d.add(RightClickDrops.classEntities(d(spider[0], 0.1), EntitySpider.class));
@@ -96,12 +110,22 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.classEntities(d(witherskeleton[0], 0.03), EntityWitherSkeleton.class));
 			d.add(RightClickDrops.classEntities(d(wither[0], 0.01), EntityWither.class));
 			d.add(RightClickDrops.classEntities(d(creeper[0], 0.1), EntityCreeper.class));
+			d.add(RightClickDrops.items(d(fish[0], 0.3), Items.FISH));
+			d.add(RightClickDrops.ingredients(d(cod[0], 0.1), Ingredient.fromStacks(new ItemStack(Items.FISH, 1, 0))));
+			d.add(RightClickDrops.ingredients(d(salmon[0], 0.1), Ingredient.fromStacks(new ItemStack(Items.FISH, 1, 1))));
+			d.add(RightClickDrops.ingredients(d(pufferfish[0], 0.03), Ingredient.fromStacks(new ItemStack(Items.FISH, 1, 3))));
+			d.add(RightClickDrops.ingredients(d(clownfish[0], 0.03), Ingredient.fromStacks(new ItemStack(Items.FISH, 1, 2))));
 
 			d.add(RightClickDrops.blocks(d(wheat[0], 0.1), Blocks.WHEAT));
 			d.add(RightClickDrops.blockStates(d(lilac[0], 0.03), Blocks.DOUBLE_PLANT.getDefaultState().withProperty(BlockDoublePlant.VARIANT, EnumPlantType.SYRINGA)));
 			d.add(RightClickDrops.items(d(apple[0], 0.1), Items.APPLE, Items.GOLDEN_APPLE));
 			d.add(RightClickDrops.items(d(carrot[0], 0.03), Items.CARROT, Items.CARROT_ON_A_STICK, Items.GOLDEN_CARROT));
 			d.add(RightClickDrops.blocks(d(cactus[0], 0.1), Blocks.CACTUS));
+			d.add(RightClickDrops.blockStates(d(spruce[0], 0.1),
+				Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE),
+				Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE),
+				Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.SPRUCE)));
+			d.add(RightClickDrops.items(d(seed[0], 0.1), Items.WHEAT_SEEDS));
 
 			d.add(RightClickDrops.blocks(d(torch[0], 0.3), Blocks.TORCH));
 			d.add(RightClickDrops.blocks(d(furnace[0], 0.1), Blocks.FURNACE));
@@ -113,6 +137,10 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.items(d(potion[0], 0.1), Items.POTIONITEM, Items.LINGERING_POTION, Items.SPLASH_POTION));
 			d.add(RightClickDrops.items(d(sword[0], 0.1), Items.WOODEN_SWORD, Items.STONE_SWORD, Items.IRON_SWORD, Items.GOLDEN_SWORD, Items.DIAMOND_SWORD));
 			d.add(RightClickDrops.blocks(d(dispenser[0], 0.1), Blocks.DISPENSER));
+			d.add(RightClickDrops.blocks(d(anvil[0], 0.1), Blocks.ANVIL));
+			d.add(RightClickDrops.blocks(d(enchant[0], 0.03), Blocks.ENCHANTING_TABLE));
+			d.add(RightClickDrops.items(d(enchant[0], 0.03), Items.ENCHANTED_BOOK));
+			d.add(RightClickDrops.ingredients(d(enchant[0], 0.03), itemStack -> itemStack.isItemEnchanted()));
 
 			d.add(RightClickDrops.world(d(daytime[0], 0.001), (w, p) -> time(w, 6000, 18000)));
 			d.add(RightClickDrops.world(d(night[0], 0.001), (w, p) -> time(w, 19000, 24000) || time(w, 0, 5000)));

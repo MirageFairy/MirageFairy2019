@@ -22,6 +22,7 @@ public enum EnumSphere
 	store(EnumAbilityType.store, 0xDCDCDC, 0xEBA242, 0xC47F25, 0x404040, () -> Ingredient.fromStacks(new ItemStack(Blocks.CHEST))),
 	warp(EnumAbilityType.warp, 0x3A00D3, 0x8CF4E2, 0x349988, 0xD004FB, () -> Ingredient.fromStacks(new ItemStack(Items.ENDER_PEARL))),
 	shoot(EnumAbilityType.shoot, 0x969696, 0x896727, 0x896727, 0xD8D8D8, () -> Ingredient.fromStacks(new ItemStack(Items.BOW))),
+	breaking(EnumAbilityType.breaking, 0xFFFFFF, 0xFF5A35, 0xFF4800, 0x000000, () -> Ingredient.fromStacks(new ItemStack(Blocks.TNT))),
 	;
 
 	public final IAbilityType abilityType;

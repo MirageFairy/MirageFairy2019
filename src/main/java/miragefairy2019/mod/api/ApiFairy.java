@@ -30,6 +30,7 @@ public class ApiFairy
 		store(GOLD),
 		warp(DARK_PURPLE),
 		shoot(GREEN),
+		breaking(DARK_RED),
 		;
 
 		private final TextFormatting colorText;
