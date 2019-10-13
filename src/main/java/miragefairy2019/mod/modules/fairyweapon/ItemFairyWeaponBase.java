@@ -2,6 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
@@ -163,22 +164,24 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 
 	protected Optional<Tuple<ItemStack, FairyType>> findFairy(EntityPlayer player)
 	{
-		Optional<FairyType> oFairy;
+		return findItem(player, itemStack -> getFairy(itemStack).isPresent())
+			.map(itemStack -> Tuple.of(itemStack, getFairy(itemStack).get()));
+	}
+
+	protected Optional<ItemStack> findItem(EntityPlayer player, Predicate<ItemStack> predicate)
+	{
 		ItemStack itemStack;
 
 		itemStack = player.getHeldItem(EnumHand.OFF_HAND);
-		oFairy = getFairy(itemStack);
-		if (oFairy.isPresent()) return Optional.of(Tuple.of(itemStack, oFairy.get()));
+		if (predicate.test(itemStack)) return Optional.of(itemStack);
 
 		itemStack = player.getHeldItem(EnumHand.MAIN_HAND);
-		oFairy = getFairy(itemStack);
-		if (oFairy.isPresent()) return Optional.of(Tuple.of(itemStack, oFairy.get()));
+		if (predicate.test(itemStack)) return Optional.of(itemStack);
 
 		for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
 
 			itemStack = player.inventory.getStackInSlot(i);
-			oFairy = getFairy(itemStack);
-			if (oFairy.isPresent()) return Optional.of(Tuple.of(itemStack, oFairy.get()));
+			if (predicate.test(itemStack)) return Optional.of(itemStack);
 
 		}
 
