@@ -3,6 +3,7 @@ package miragefairy2019.mod.modules.fairycrystal;
 import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.fairycrystal.DropFixed;
@@ -10,6 +11,7 @@ import miragefairy2019.mod.api.fairycrystal.IDrop;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
 import miragefairy2019.mod.modules.fairy.VariantFairy;
+import mirrg.boron.util.struct.Tuple3;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockDoublePlant.EnumPlantType;
 import net.minecraft.block.BlockOldLeaf;
@@ -168,6 +170,11 @@ public class LoaderFairyCrystalDrop
 	private static boolean time(World world, int min, int max)
 	{
 		return world.provider.isSurfaceWorld() && min <= (world.getWorldTime() + 6000) % 24000 && (world.getWorldTime() + 6000) % 24000 <= max;
+	}
+
+	public static void loadFairyRecipe(Consumer<Tuple3<Ingredient, ItemStack, String>> consumerRecipe)
+	{
+
 	}
 
 }

@@ -4,11 +4,18 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
+import miragefairy2019.mod.lib.OreIngredientComplex;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreIngredient;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ModuleFairyCrystal
 {
@@ -42,6 +49,31 @@ public class ModuleFairyCrystal
 
 			// 妖晶ドロップ登録
 			LoaderFairyCrystalDrop.loadFairyCrystalDrop();
+
+		});
+		erMod.addRecipe.register(() -> {
+
+			// 妖精の確定レシピ
+			LoaderFairyCrystalDrop.loadFairyRecipe(t -> {
+				Ingredient in = t.x;
+				ItemStack out = t.y;
+				String name = t.z;
+
+				GameRegistry.findRegistry(IRecipe.class).register(new ShapelessOreRecipe(
+					new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_" + name),
+					out,
+					new OreIngredientComplex("mirageFairy2019CraftingToolFairyWandSummoning"),
+					new OreIngredient("mirageFairyCrystal"),
+					in).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_" + name + "_from_fairy_wand_summoning"));
+
+				GameRegistry.findRegistry(IRecipe.class).register(new ShapelessOreRecipe(
+					new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_" + name),
+					out,
+					new OreIngredient("gemDiamond"),
+					new OreIngredient("mirageFairyCrystal"),
+					in).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_" + name + "_from_diamond_gem"));
+
+			});
 
 		});
 	}
