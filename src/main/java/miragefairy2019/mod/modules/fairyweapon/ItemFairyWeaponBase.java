@@ -32,7 +32,7 @@ import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class ItemFairyWeaponBase extends Item
+public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem
 {
 
 	public ItemFairyWeaponBase()
@@ -121,6 +121,22 @@ public abstract class ItemFairyWeaponBase extends Item
 			}
 		}
 		return 1;
+	}
+
+	//
+
+	@Override
+	public boolean canRepair(ItemStack itemStack)
+	{
+		return true;
+	}
+
+	@Override
+	public ItemStack getRepairedItem(ItemStack itemStack)
+	{
+		itemStack = itemStack.copy();
+		itemStack.setItemDamage(0);
+		return itemStack;
 	}
 
 	//
