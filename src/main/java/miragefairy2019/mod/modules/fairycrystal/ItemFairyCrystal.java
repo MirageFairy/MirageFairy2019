@@ -56,7 +56,7 @@ public class ItemFairyCrystal extends Item
 					// 妖精をドロップ
 					BlockPos pos2 = pos.offset(facing);
 					EntityItem entityitem = new EntityItem(world, pos2.getX() + 0.5, pos2.getY() + 0.5, pos2.getZ() + 0.5, oItemStack.get().copy());
-					entityitem.setDefaultPickupDelay();
+					entityitem.setNoPickupDelay();
 					world.spawnEntity(entityitem);
 
 				}
