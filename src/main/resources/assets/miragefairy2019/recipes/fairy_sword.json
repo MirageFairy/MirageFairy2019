@@ -6,7 +6,7 @@
 			"item": "minecraft:iron_sword"
 		},
 		{
-			"type": "forge:ore_dict",
+			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
 		},
 		{

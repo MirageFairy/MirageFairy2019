@@ -20,11 +20,11 @@
 			"ore": "mirageFairy2019SphereFell"
 		},
 		"c": {
-			"type": "forge:ore_dict",
+			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
 		},
 		"m": {
-			"type": "forge:ore_dict",
+			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
 		}
 	},
