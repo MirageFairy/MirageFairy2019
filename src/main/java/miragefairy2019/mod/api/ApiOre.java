@@ -25,5 +25,6 @@ public class ApiOre
 	public static ItemStack itemStackGemCinnabar;
 	public static ItemStack itemStackGemMoonstone;
 	public static ItemStack itemStackGemMagnetite;
+	public static ItemStack itemStackGemSaltpeter;
 
 }
