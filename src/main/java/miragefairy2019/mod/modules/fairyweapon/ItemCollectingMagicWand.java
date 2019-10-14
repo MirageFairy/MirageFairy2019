@@ -168,8 +168,12 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 	private List<EntityItem> getEntityItems(Status status, World world, EntityPlayer player, Vec3d position)
 	{
 		return world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(
-			position.addVector(-status.radius, -status.radius, -status.radius),
-			position.addVector(status.radius, status.radius, status.radius)),
+			position.x - status.radius,
+			position.y - status.radius,
+			position.z - status.radius,
+			position.x + status.radius,
+			position.y + status.radius,
+			position.z + status.radius),
 			e -> {
 				if (e.getDistanceSq(position.x, position.y, position.z) > status.radius * status.radius) return false;
 				if (e.getDistanceSq(player) < 0.1) return false;
