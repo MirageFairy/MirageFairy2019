@@ -11,5 +11,6 @@ public class ApiFairyWeapon
 	public static Item itemMiragiumAxe;
 	public static Item itemLightMagicWand;
 	public static Item itemSummoningFairyWand;
+	public static Item itemCollectingMagicWand;
 
 }

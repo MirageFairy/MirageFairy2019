@@ -30,8 +30,9 @@ item.craftingFairyWand.name=Fairy Wand of Crafting
 item.meltingFairyWand.name=Fairy Wand of Melting
 item.fairySword.name=Fairy Sword
 item.miragiumAxe.name=Miragium Axe
-item.lightMagicWand.name=Light Magic Wand
+item.lightMagicWand.name=Magic Wand of Light
 item.summoningFairyWand.name=Fairy Wand of Summoning
+item.collectingMagicWand.name=Magic Wand of Collecting
 
 item.fertilizer.name=Fertilizer
 
