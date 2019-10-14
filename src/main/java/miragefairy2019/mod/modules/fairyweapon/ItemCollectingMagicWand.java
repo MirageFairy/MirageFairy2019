@@ -52,11 +52,11 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 
 		public Status(FairyType fairyType)
 		{
-			additionalReach = Math.min(fairyType.manaSet.wind / 2.0, 40);
-			radius = 2 + Math.min(fairyType.manaSet.fire / 5.0 + fairyType.abilitySet.get(EnumAbilityType.warp) / 5.0, 30);
-			maxStacks = (int) (1 + Math.min(fairyType.manaSet.gaia / 1.0 + fairyType.abilitySet.get(EnumAbilityType.store) / 1.0, 200));
-			wear = Math.pow(0.5, fairyType.manaSet.aqua / 20);
-			coolTime = fairyType.cost * 3 * Math.pow(0.5, fairyType.manaSet.dark / 20);
+			additionalReach = Math.min(fairyType.manaSet.wind / 5.0, 8);
+			radius = Math.min(2 + fairyType.manaSet.fire / 10.0 + fairyType.abilitySet.get(EnumAbilityType.warp) / 10.0, 7);
+			maxStacks = (int) (Math.min(1 + fairyType.manaSet.gaia / 2.0 + fairyType.abilitySet.get(EnumAbilityType.store) / 2.0, 20));
+			wear = Math.pow(0.5, fairyType.manaSet.aqua / 30);
+			coolTime = fairyType.cost * 3 * Math.pow(0.5, fairyType.manaSet.dark / 40);
 		}
 
 	}
@@ -91,7 +91,7 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 
 		Status status = new Status(fairyType);
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
-		tooltip.add(TextFormatting.BLUE + "Radius: " + ((int) status.radius) + " (Fire, " + EnumAbilityType.warp.getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Fire, " + EnumAbilityType.warp.getLocalizedName() + ")");
 		tooltip.add(TextFormatting.BLUE + "Max Stacks: " + status.maxStacks + " (Gaia, " + EnumAbilityType.store.getLocalizedName() + ")");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Aqua)");
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + ((int) status.coolTime) + "t (Dark, Cost)");
