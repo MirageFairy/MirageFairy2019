@@ -265,37 +265,47 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 		{
 
 			// 角度アニメーション更新
-			rotateY += 0.02;
+			rotateY += 4.9 / 180.0 * Math.PI;
 			if (rotateY > 2 * Math.PI) rotateY -= 2 * Math.PI;
 
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < 8; i++) {
 
 				// 横角度
-				double a = rotateY + i * 0.5 * Math.PI;
+				double yaw = rotateY + i * 0.25 * Math.PI;
 
 				a:
 				for (int j = 0; j < 100; j++) {
 
-					// パーティクル出現点
-					double b = (-0.5 + Math.random()) * Math.PI;
-					double x = Math.cos(a) * Math.cos(b);
-					double z = Math.sin(a) * Math.cos(b);
-					double y = Math.sin(b);
-					Vec3d positionParticle = result.positionTarget.addVector(
-						x * result.status.radius,
-						y * result.status.radius,
-						z * result.status.radius);
+					// パーティクル仮出現点
+					double pitch = (-0.5 + Math.random()) * Math.PI;
+					Vec3d offset = new Vec3d(
+						Math.cos(pitch) * Math.cos(yaw),
+						Math.sin(pitch),
+						Math.cos(pitch) * Math.sin(yaw)).scale(result.status.radius);
+					Vec3d positionParticle = result.positionTarget.add(offset);
 
-					if (!world.getBlockState(new BlockPos(positionParticle)).isOpaqueCube()) {
-						if (world.getBlockState(new BlockPos(positionParticle).down()).isOpaqueCube()) {
+					// 仮出現点が、真下がブロックな空洞だった場合のみ受理
+					if (!world.getBlockState(new BlockPos(positionParticle)).isFullBlock()) {
+						if (world.getBlockState(new BlockPos(positionParticle).down()).isFullBlock()) {
+
+							// パーティクル出現点2
+							// 高さを地面にくっつけるために、高さを地面の高さに固定した状態で横位置を調整する
+							double y = Math.floor(positionParticle.y) + 0.15;
+							double offsetY = y - result.positionTarget.y;
+							double r1 = Math.sqrt(offset.x * offset.x + offset.z * offset.z);
+							if (Double.isNaN(r1)) break a;
+							double r2 = Math.sqrt(result.status.radius * result.status.radius - offsetY * offsetY);
+							if (Double.isNaN(r2)) break a;
+							double offsetX = offset.x / r1 * r2;
+							double offsetZ = offset.z / r1 * r2;
 
 							world.spawnParticle(
 								EnumParticleTypes.END_ROD,
-								positionParticle.x,
-								Math.floor(positionParticle.y),
-								positionParticle.z,
+								result.positionTarget.x + offsetX,
+								Math.floor(positionParticle.y) + 0.15,
+								result.positionTarget.z + offsetZ,
 								0,
-								0.03,
+								-0.08,
 								0);
 
 							break a;
