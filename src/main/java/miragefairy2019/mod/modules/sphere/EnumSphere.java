@@ -1,5 +1,8 @@
 package miragefairy2019.mod.modules.sphere;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
@@ -41,11 +44,24 @@ public enum EnumSphere
 		this.colorBackground = colorBackground;
 		this.colorPlasma = colorPlasma;
 		this.sIngredient = sIngredient;
+		A.map.put(abilityType, this);
 	}
 
 	public String getOreName()
 	{
 		return "mirageFairy2019Sphere" + Utils.toUpperCaseHead(abilityType.getName());
+	}
+
+	private static class A
+	{
+
+		private static Map<IAbilityType, EnumSphere> map = new HashMap<>();
+
+	}
+
+	public static Optional<EnumSphere> of(EnumAbilityType abilityType)
+	{
+		return Optional.ofNullable(A.map.get(abilityType));
 	}
 
 }
