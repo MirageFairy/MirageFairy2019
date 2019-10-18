@@ -43,7 +43,7 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 			.add(Components.MIRAGIUM, 2)
 			.add(Components.OBSIDIAN, 2)
 			.add(Components.fairyAbilityType(EnumAbilityType.warp), 1));
-		setMaxDamage(256 - 1);
+		setMaxDamage(64 - 1);
 	}
 
 	//
@@ -62,7 +62,7 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 			additionalReach = Math.min(fairyType.manaSet.wind / 5.0, 8);
 			radius = Math.min(2 + fairyType.manaSet.fire / 10.0 + fairyType.abilitySet.get(EnumAbilityType.warp) / 10.0, 7);
 			maxStacks = (int) (Math.min(1 + fairyType.manaSet.gaia / 2.0 + fairyType.abilitySet.get(EnumAbilityType.store) / 2.0, 20));
-			wear = Math.pow(0.5, fairyType.manaSet.aqua / 30);
+			wear = 0.25 * Math.pow(0.5, fairyType.manaSet.aqua / 30);
 			coolTime = fairyType.cost * 3 * Math.pow(0.5, fairyType.manaSet.dark / 40);
 		}
 

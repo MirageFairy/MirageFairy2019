@@ -40,7 +40,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 			.add(Components.MIRAGIUM, 3)
 			.add(Components.WOOD, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.fell), 1));
-		setMaxDamage(256 - 1);
+		setMaxDamage(64 - 1);
 		setHarvestLevel("axe", 1);
 		destroySpeed = 6;
 	}
@@ -64,7 +64,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 			power = 2 + fairyType.manaSet.aqua / 2 + fairyType.abilitySet.get(EnumAbilityType.fell) / 4;
 			fortune = Math.min((int) (fairyType.manaSet.shine / 5), 3);
 			coolTime = fairyType.cost * 2 * Math.pow(0.5, fairyType.manaSet.dark / 20);
-			wear = Math.pow(0.5, fairyType.manaSet.fire / 20);
+			wear = 0.25 * Math.pow(0.5, fairyType.manaSet.fire / 20);
 			additionalReach = Math.min(fairyType.manaSet.wind / 5, 20);
 			collection = fairyType.abilitySet.get(EnumAbilityType.warp) >= 10;
 		}
