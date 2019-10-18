@@ -139,7 +139,7 @@ public class ItemSummoningFairyWand extends ItemFairyCraftingToolBase
 	//
 
 	@Override
-	public NonNullList<Predicate<ItemStack>> getSpheres(ItemStack itemStack)
+	public NonNullList<Predicate<ItemStack>> getRepaitmentSpheres(ItemStack itemStack)
 	{
 		return ISuppliterator.of(
 			new OreIngredient(EnumSphere.crystal.getOreName()))

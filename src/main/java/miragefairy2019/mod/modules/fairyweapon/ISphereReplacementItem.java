@@ -10,7 +10,7 @@ public interface ISphereReplacementItem
 
 	public boolean canRepair(ItemStack itemStack);
 
-	public NonNullList<Predicate<ItemStack>> getSpheres(ItemStack itemStack);
+	public NonNullList<Predicate<ItemStack>> getRepaitmentSpheres(ItemStack itemStack);
 
 	public ItemStack getRepairedItem(ItemStack itemStack);
 

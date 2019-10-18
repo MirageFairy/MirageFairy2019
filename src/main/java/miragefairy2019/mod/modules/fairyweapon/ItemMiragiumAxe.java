@@ -255,7 +255,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 	//
 
 	@Override
-	public NonNullList<Predicate<ItemStack>> getSpheres(ItemStack itemStack)
+	public NonNullList<Predicate<ItemStack>> getRepaitmentSpheres(ItemStack itemStack)
 	{
 		return ISuppliterator.of(
 			new OreIngredient(EnumSphere.fell.getOreName()))
