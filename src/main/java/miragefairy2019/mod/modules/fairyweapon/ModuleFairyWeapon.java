@@ -112,7 +112,7 @@ public class ModuleFairyWeapon
 		});
 		erMod.addRecipe.register(() -> {
 
-			// 修理レシピ
+			// スフィア交換レシピ
 			GameRegistry.findRegistry(IRecipe.class).register(new RecipesSphereReplacement());
 
 		});
