@@ -28,8 +28,8 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 	{
 
 		public ISphereReplacementItem sphereReplacementItem;
-		public ItemStack sphereReplacementItemStack;
-		public NonNullList<Predicate<ItemStack>> spheres;
+		public ItemStack itemStackSphereReplacement;
+		public NonNullList<Predicate<ItemStack>> repairmentSpheres;
 
 	}
 
@@ -50,7 +50,7 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 					if (item instanceof ISphereReplacementItem) {
 						if (((ISphereReplacementItem) item).canRepair(itemStack)) {
 
-							result.sphereReplacementItemStack = itemStack;
+							result.itemStackSphereReplacement = itemStack;
 							result.sphereReplacementItem = (ISphereReplacementItem) item;
 							used[i] = true;
 							break a;
@@ -64,8 +64,8 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 		}
 
 		// スフィア探索
-		result.spheres = result.sphereReplacementItem.getRepaitmentSpheres(result.sphereReplacementItemStack);
-		for (Predicate<ItemStack> sphere : result.spheres) {
+		result.repairmentSpheres = result.sphereReplacementItem.getRepaitmentSpheres(result.itemStackSphereReplacement);
+		for (Predicate<ItemStack> sphere : result.repairmentSpheres) {
 
 			a:
 			{
@@ -112,7 +112,7 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 	{
 		MatchResult nResult = match(inventoryCrafting).orElse(null);
 		if (nResult == null) return ItemStack.EMPTY;
-		return nResult.sphereReplacementItem.getRepairedItem(nResult.sphereReplacementItemStack);
+		return nResult.sphereReplacementItem.getRepairedItem(nResult.itemStackSphereReplacement);
 	}
 
 	@Override
@@ -132,8 +132,8 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 		for (int i = 0; i < list.size(); ++i) {
 			ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
 
-			if (itemStack == nResult.sphereReplacementItemStack) {
-				// ステッキを修繕してもステッキは消費される
+			if (itemStack == nResult.itemStackSphereReplacement) {
+				// ステッキを使用してもステッキは消費される
 			} else {
 				list.set(i, ForgeHooks.getContainerItem(itemStack));
 			}
