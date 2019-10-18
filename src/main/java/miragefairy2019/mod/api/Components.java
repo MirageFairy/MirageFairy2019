@@ -22,4 +22,11 @@ public class Components
 	public static Component STONE = new Component("stone");
 	public static Component OBSIDIAN = new Component("obsidian");
 
+	private static Map<EnumAbilityType, Component> fairyAbilityTypes = new HashMap<>();
+
+	public static Component fairyAbilityType(EnumAbilityType abilityType)
+	{
+		return fairyAbilityTypes.computeIfAbsent(abilityType, k -> new ComponentFairyAbilityType(abilityType));
+	}
+
 }
