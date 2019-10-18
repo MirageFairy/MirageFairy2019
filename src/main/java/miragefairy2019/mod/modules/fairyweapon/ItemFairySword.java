@@ -5,7 +5,10 @@ import java.util.function.Predicate;
 
 import com.google.common.collect.Multimap;
 
+import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
+import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.sphere.EnumSphere;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -29,6 +32,10 @@ public class ItemFairySword extends ItemFairyWeaponBase
 
 	public ItemFairySword()
 	{
+		super(Composite.empty()
+			.add(Components.IRON, 2)
+			.add(Components.WOOD, 0.5)
+			.add(Components.fairyAbilityType(EnumAbilityType.attack), 1));
 		setMaxDamage(64 - 1);
 	}
 

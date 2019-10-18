@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.sphere.EnumSphere;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -36,6 +38,11 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 
 	public ItemCollectingMagicWand()
 	{
+		super(Composite.empty()
+			.add(Components.FLUORITE, 3)
+			.add(Components.MIRAGIUM, 2)
+			.add(Components.OBSIDIAN, 2)
+			.add(Components.fairyAbilityType(EnumAbilityType.warp), 1));
 		setMaxDamage(256 - 1);
 	}
 

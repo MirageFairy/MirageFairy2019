@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
+import miragefairy2019.mod.lib.component.Composite;
+import miragefairy2019.mod.lib.component.ICompositeProvider;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -33,11 +35,14 @@ import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem
+public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, ICompositeProvider
 {
 
-	public ItemFairyWeaponBase()
+	protected Composite composite;
+
+	public ItemFairyWeaponBase(Composite composite)
 	{
+		this.composite = composite;
 		setMaxStackSize(1);
 	}
 
@@ -261,6 +266,14 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 			((color >> 16) & 0xFF) / 255.0,
 			((color >> 8) & 0xFF) / 255.0,
 			((color >> 0) & 0xFF) / 255.0);
+	}
+
+	//
+
+	@Override
+	public Composite getComposite(ItemStack itemStack)
+	{
+		return composite;
 	}
 
 }

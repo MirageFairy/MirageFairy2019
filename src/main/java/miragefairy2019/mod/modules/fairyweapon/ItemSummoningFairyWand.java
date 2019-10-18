@@ -3,6 +3,9 @@ package miragefairy2019.mod.modules.fairyweapon;
 import java.util.List;
 import java.util.function.Predicate;
 
+import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
+import miragefairy2019.mod.api.Components;
+import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.fairycrystal.ItemFairyCrystal;
 import miragefairy2019.mod.modules.sphere.EnumSphere;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -31,6 +34,9 @@ public class ItemSummoningFairyWand extends ItemFairyCraftingToolBase
 
 	public ItemSummoningFairyWand()
 	{
+		super(Composite.empty()
+			.add(Components.WOOD, 2)
+			.add(Components.fairyAbilityType(EnumAbilityType.crystal), 1));
 		this.setMaxDamage(16 - 1);
 	}
 
