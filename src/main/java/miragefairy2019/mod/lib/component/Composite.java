@@ -55,7 +55,7 @@ public final class Composite
 			ISuppliterator.of(Tuple.of(component, amount))));
 	}
 
-	public String getComponentsString()
+	public String getLocalizedString()
 	{
 		return components.suppliterator()
 			.map(t -> {
