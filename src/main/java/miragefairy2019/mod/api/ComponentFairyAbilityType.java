@@ -14,14 +14,14 @@ public class ComponentFairyAbilityType extends Component
 
 	public ComponentFairyAbilityType(EnumAbilityType abilityType)
 	{
-		super(new ResourceLocation(ModMirageFairy2019.MODID, "fairyCuticle" + Utils.toUpperCaseHead(abilityType.getName())));
+		super(new ResourceLocation(ModMirageFairy2019.MODID, "cuticle" + Utils.toUpperCaseHead(abilityType.getName())));
 		this.abilityType = abilityType;
 	}
 
 	@Override
 	public String getLocalizedName()
 	{
-		return UtilsMinecraft.translateToLocalFormatted("mirageFairy2019.component.fairyCuticle", abilityType.getLocalizedName());
+		return UtilsMinecraft.translateToLocalFormatted("mirageFairy2019.component.cuticle.format", abilityType.getLocalizedName());
 	}
 
 }
