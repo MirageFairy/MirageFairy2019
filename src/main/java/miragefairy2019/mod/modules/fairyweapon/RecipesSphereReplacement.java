@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import miragefairy2019.mod.ModMirageFairy2019;
@@ -23,12 +24,19 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 
 	//
 
-	protected ISphereReplacementItem sphereReplacementItem;
-	protected ItemStack sphereReplacementItemStack;
-	protected NonNullList<Predicate<ItemStack>> spheres;
-
-	protected boolean match(InventoryCrafting inventoryCrafting)
+	protected static class MatchResult
 	{
+
+		public ISphereReplacementItem sphereReplacementItem;
+		public ItemStack sphereReplacementItemStack;
+		public NonNullList<Predicate<ItemStack>> spheres;
+
+	}
+
+	protected Optional<MatchResult> match(InventoryCrafting inventoryCrafting)
+	{
+		MatchResult result = new MatchResult();
+
 		boolean[] used = new boolean[inventoryCrafting.getSizeInventory()];
 
 		// 妖精武器探索
@@ -42,8 +50,8 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 					if (item instanceof ISphereReplacementItem) {
 						if (((ISphereReplacementItem) item).canRepair(itemStack)) {
 
-							sphereReplacementItemStack = itemStack;
-							sphereReplacementItem = (ISphereReplacementItem) item;
+							result.sphereReplacementItemStack = itemStack;
+							result.sphereReplacementItem = (ISphereReplacementItem) item;
 							used[i] = true;
 							break a;
 
@@ -52,12 +60,12 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 
 				}
 			}
-			return false;
+			return Optional.empty();
 		}
 
 		// スフィア探索
-		spheres = sphereReplacementItem.getSpheres(sphereReplacementItemStack);
-		for (Predicate<ItemStack> sphere : spheres) {
+		result.spheres = result.sphereReplacementItem.getSpheres(result.sphereReplacementItemStack);
+		for (Predicate<ItemStack> sphere : result.spheres) {
 
 			a:
 			{
@@ -74,7 +82,7 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 
 					}
 				}
-				return false;
+				return Optional.empty();
 			}
 
 		}
@@ -83,12 +91,12 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 		for (int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
 			if (!used[i]) {
 				if (!inventoryCrafting.getStackInSlot(i).isEmpty()) {
-					return false;
+					return Optional.empty();
 				}
 			}
 		}
 
-		return true;
+		return Optional.of(result);
 	}
 
 	//
@@ -96,14 +104,15 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 	@Override
 	public boolean matches(InventoryCrafting inventoryCrafting, World world)
 	{
-		return match(inventoryCrafting);
+		return match(inventoryCrafting).isPresent();
 	}
 
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting)
 	{
-		if (!match(inventoryCrafting)) return ItemStack.EMPTY;
-		return sphereReplacementItem.getRepairedItem(sphereReplacementItemStack);
+		MatchResult nResult = match(inventoryCrafting).orElse(null);
+		if (nResult == null) return ItemStack.EMPTY;
+		return nResult.sphereReplacementItem.getRepairedItem(nResult.sphereReplacementItemStack);
 	}
 
 	@Override
@@ -115,14 +124,15 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 	@Override
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inventoryCrafting)
 	{
-		if (!match(inventoryCrafting)) return NonNullList.create();
+		MatchResult nResult = match(inventoryCrafting).orElse(null);
+		if (nResult == null) return NonNullList.create();
 
 		NonNullList<ItemStack> list = NonNullList.withSize(inventoryCrafting.getSizeInventory(), ItemStack.EMPTY);
 
 		for (int i = 0; i < list.size(); ++i) {
 			ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
 
-			if (itemStack == sphereReplacementItemStack) {
+			if (itemStack == nResult.sphereReplacementItemStack) {
 				// ステッキを修繕してもステッキは消費される
 			} else {
 				list.set(i, ForgeHooks.getContainerItem(itemStack));
