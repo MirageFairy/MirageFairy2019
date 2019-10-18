@@ -59,7 +59,7 @@ public enum EnumSphere
 
 	}
 
-	public static Optional<EnumSphere> of(EnumAbilityType abilityType)
+	public static Optional<EnumSphere> of(IAbilityType abilityType)
 	{
 		return Optional.ofNullable(A.map.get(abilityType));
 	}
