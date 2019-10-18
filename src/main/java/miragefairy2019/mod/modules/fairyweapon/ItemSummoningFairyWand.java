@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
@@ -15,6 +14,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -145,7 +145,7 @@ public class ItemSummoningFairyWand extends ItemFairyCraftingToolBase
 	//
 
 	@Override
-	public NonNullList<Predicate<ItemStack>> getRepaitmentSpheres(ItemStack itemStack)
+	public NonNullList<Ingredient> getRepaitmentSpheres(ItemStack itemStack)
 	{
 		return ISuppliterator.of(
 			new OreIngredient(EnumSphere.crystal.getOreName()))

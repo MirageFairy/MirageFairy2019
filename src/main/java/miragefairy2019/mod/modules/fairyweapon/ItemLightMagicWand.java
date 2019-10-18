@@ -2,7 +2,6 @@ package miragefairy2019.mod.modules.fairyweapon;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
@@ -21,6 +20,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -257,7 +257,7 @@ public class ItemLightMagicWand extends ItemFairyWeaponBase
 	//
 
 	@Override
-	public NonNullList<Predicate<ItemStack>> getRepaitmentSpheres(ItemStack itemStack)
+	public NonNullList<Ingredient> getRepaitmentSpheres(ItemStack itemStack)
 	{
 		return ISuppliterator.of(
 			new OreIngredient(EnumSphere.light.getOreName()))

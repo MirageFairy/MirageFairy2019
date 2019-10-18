@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import com.google.common.collect.Multimap;
 
@@ -20,6 +19,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -149,7 +149,7 @@ public class ItemFairySword extends ItemFairyWeaponBase
 	//
 
 	@Override
-	public NonNullList<Predicate<ItemStack>> getRepaitmentSpheres(ItemStack itemStack)
+	public NonNullList<Ingredient> getRepaitmentSpheres(ItemStack itemStack)
 	{
 		return ISuppliterator.of(
 			new OreIngredient(EnumSphere.attack.getOreName()))

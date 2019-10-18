@@ -1,13 +1,13 @@
 package miragefairy2019.mod.modules.fairyweapon;
 
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -29,7 +29,7 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 
 		public ISphereReplacementItem sphereReplacementItem;
 		public ItemStack itemStackSphereReplacement;
-		public NonNullList<Predicate<ItemStack>> repairmentSpheres;
+		public NonNullList<Ingredient> repairmentSpheres;
 
 	}
 
@@ -65,7 +65,7 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 
 		// スフィア探索
 		result.repairmentSpheres = result.sphereReplacementItem.getRepaitmentSpheres(result.itemStackSphereReplacement);
-		for (Predicate<ItemStack> sphere : result.repairmentSpheres) {
+		for (Ingredient sphere : result.repairmentSpheres) {
 
 			a:
 			{
