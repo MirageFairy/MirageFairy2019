@@ -11,6 +11,7 @@ import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.lib.component.ICompositeProvider;
 import miragefairy2019.mod.modules.sphere.EnumSphere;
 import mirrg.boron.util.struct.Tuple;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -279,9 +280,15 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	public final NonNullList<Ingredient> getRepaitmentSpheres(ItemStack itemStack)
 	{
 		return getComposite(itemStack).components.suppliterator()
-			.filterInstance(ComponentFairyAbilityType.class)
-			.mapIfPresent(c -> EnumSphere.of(c.abilityType))
-			.map(s -> new OreIngredient(s.getOreName()))
+			.filter(e -> e.x instanceof ComponentFairyAbilityType)
+			.map(e -> Tuple.of((ComponentFairyAbilityType) e.x, e.y))
+			.mapIfPresent(e -> EnumSphere.of(e.x.abilityType).map(s -> Tuple.of(s, e.y)))
+			.flatMap(e -> {
+				long amount = e.y;
+				int count = (int) (amount / 1_000_000_000L) + amount % 1_000_000_000L != 0 ? 1 : 0;
+				return ISuppliterator.range(count)
+					.map(i -> new OreIngredient(e.x.getOreName()));
+			})
 			.toCollection(NonNullList::create);
 	}
 
