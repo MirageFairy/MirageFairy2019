@@ -11,11 +11,14 @@ import mirrg.boron.util.suppliterator.ISuppliterator;
 public final class Composite
 {
 
-	public final ImmutableArray<Tuple<Component, Double>> components;
+	/**
+	 * Longはナノ個単位で表されます。
+	 */
+	public final ImmutableArray<Tuple<Component, Long>> components;
 
-	public Composite(ISuppliterator<Tuple<Component, Double>> components)
+	public Composite(ISuppliterator<Tuple<Component, Long>> components)
 	{
-		Map<Component, Double> map = new HashMap<>();
+		Map<Component, Long> map = new HashMap<>();
 		components.forEach(e -> map.compute(e.x, (k, v) -> v != null ? v + e.y : e.y));
 		this.components = ISuppliterator.ofIterable(map.entrySet())
 			.map(e -> Tuple.of(e.getKey(), e.getValue()))
@@ -40,29 +43,43 @@ public final class Composite
 
 	//
 
-	public Optional<Tuple<Component, Double>> getEntry(Component component)
+	public Optional<Tuple<Component, Long>> getEntry(Component component)
 	{
-		for (Tuple<Component, Double> entry : components) {
+		for (Tuple<Component, Long> entry : components) {
 			if (entry.x == component) return Optional.of(entry);
 		}
 		return Optional.empty();
+	}
+
+	public Composite add(Component component)
+	{
+		return new Composite(ISuppliterator.concat(
+			components.suppliterator(),
+			ISuppliterator.of(Tuple.of(component, 1_000_000_000L))));
+	}
+
+	public Composite add(Component component, int amount)
+	{
+		return new Composite(ISuppliterator.concat(
+			components.suppliterator(),
+			ISuppliterator.of(Tuple.of(component, amount * 1_000_000_000L))));
 	}
 
 	public Composite add(Component component, double amount)
 	{
 		return new Composite(ISuppliterator.concat(
 			components.suppliterator(),
-			ISuppliterator.of(Tuple.of(component, amount))));
+			ISuppliterator.of(Tuple.of(component, (long) (amount * 1_000_000_000.0)))));
 	}
 
 	public String getLocalizedString()
 	{
 		return components.suppliterator()
 			.map(t -> {
-				if (t.y == 1.0) {
+				if (t.y == 1_000_000_000L) {
 					return t.x.getLocalizedName();
 				} else {
-					return t.x.getLocalizedName() + "(" + String.format("%.3f", t.y) + ")";
+					return t.x.getLocalizedName() + "(" + String.format("%.3f", (t.y / 1_000_000L) * 0.001) + ")";
 				}
 			})
 			.join(", ");
