@@ -7,21 +7,17 @@ import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.lib.component.Composite;
-import miragefairy2019.mod.modules.sphere.EnumSphere;
 import mirrg.boron.util.struct.Tuple;
-import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +27,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreIngredient;
 
 public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 {
@@ -342,16 +337,6 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 			}
 		}
 
-	}
-
-	//
-
-	@Override
-	public NonNullList<Ingredient> getRepaitmentSpheres(ItemStack itemStack)
-	{
-		return ISuppliterator.of(
-			new OreIngredient(EnumSphere.warp.getOreName()))
-			.toCollection(NonNullList::create);
 	}
 
 }

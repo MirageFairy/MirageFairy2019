@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import miragefairy2019.mod.api.ComponentFairyAbilityType;
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.lib.component.ICompositeProvider;
+import miragefairy2019.mod.modules.sphere.EnumSphere;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -20,10 +22,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -34,6 +38,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreIngredient;
 
 public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, ICompositeProvider
 {
@@ -266,6 +271,18 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 			((color >> 16) & 0xFF) / 255.0,
 			((color >> 8) & 0xFF) / 255.0,
 			((color >> 0) & 0xFF) / 255.0);
+	}
+
+	//
+
+	@Override
+	public final NonNullList<Ingredient> getRepaitmentSpheres(ItemStack itemStack)
+	{
+		return getComposite(itemStack).components.suppliterator()
+			.filterInstance(ComponentFairyAbilityType.class)
+			.mapIfPresent(c -> EnumSphere.of(c.abilityType))
+			.map(s -> new OreIngredient(s.getOreName()))
+			.toCollection(NonNullList::create);
 	}
 
 	//

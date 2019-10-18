@@ -5,17 +5,12 @@ import java.util.List;
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.lib.component.Composite;
-import miragefairy2019.mod.modules.sphere.EnumSphere;
-import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreIngredient;
 
 public class ItemMeltingFairyWand extends ItemFairyCraftingToolBase
 {
@@ -47,16 +42,6 @@ public class ItemMeltingFairyWand extends ItemFairyCraftingToolBase
 
 		super.addInformation(itemStack, world, tooltip, flag);
 
-	}
-
-	//
-
-	@Override
-	public NonNullList<Ingredient> getRepaitmentSpheres(ItemStack itemStack)
-	{
-		return ISuppliterator.of(
-			new OreIngredient(EnumSphere.flame.getOreName()))
-			.toCollection(NonNullList::create);
 	}
 
 }

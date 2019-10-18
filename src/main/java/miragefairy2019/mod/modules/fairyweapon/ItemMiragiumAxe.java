@@ -7,9 +7,7 @@ import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.lib.component.Composite;
-import miragefairy2019.mod.modules.sphere.EnumSphere;
 import mirrg.boron.util.struct.Tuple;
-import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
@@ -17,11 +15,9 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -29,7 +25,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreIngredient;
 
 public class ItemMiragiumAxe extends ItemFairyWeaponBase
 {
@@ -256,16 +251,6 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 	protected boolean canExecute(World world, RayTraceResult rayTraceResult)
 	{
 		return rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK && isLog(world, rayTraceResult.getBlockPos());
-	}
-
-	//
-
-	@Override
-	public NonNullList<Ingredient> getRepaitmentSpheres(ItemStack itemStack)
-	{
-		return ISuppliterator.of(
-			new OreIngredient(EnumSphere.fell.getOreName()))
-			.toCollection(NonNullList::create);
 	}
 
 }

@@ -6,20 +6,16 @@ import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.fairycrystal.ItemFairyCrystal;
-import miragefairy2019.mod.modules.sphere.EnumSphere;
-import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
@@ -27,7 +23,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreIngredient;
 
 public class ItemSummoningFairyWand extends ItemFairyCraftingToolBase
 {
@@ -140,16 +135,6 @@ public class ItemSummoningFairyWand extends ItemFairyCraftingToolBase
 		if (count >= 5) return count % 5 == 0;
 		if (count == 1) return true;
 		return false;
-	}
-
-	//
-
-	@Override
-	public NonNullList<Ingredient> getRepaitmentSpheres(ItemStack itemStack)
-	{
-		return ISuppliterator.of(
-			new OreIngredient(EnumSphere.crystal.getOreName()))
-			.toCollection(NonNullList::create);
 	}
 
 }
