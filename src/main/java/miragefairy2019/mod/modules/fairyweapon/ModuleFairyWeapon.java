@@ -115,6 +115,9 @@ public class ModuleFairyWeapon
 			// スフィア交換レシピ
 			GameRegistry.findRegistry(IRecipe.class).register(new RecipesSphereReplacement());
 
+			// 妖精搭乗レシピ
+			GameRegistry.findRegistry(IRecipe.class).register(new RecipesFairyCombining());
+
 		});
 	}
 
