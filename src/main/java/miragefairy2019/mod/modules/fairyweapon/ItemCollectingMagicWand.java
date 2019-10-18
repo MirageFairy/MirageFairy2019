@@ -80,7 +80,7 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
 
 		// 素材
-		tooltip.add(TextFormatting.YELLOW + "Contains: Fluorite(3.000), Miragium(2.000), Obsidian(2.000), Sphere of \"WARP\"");
+		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
 
 		// 機能
 		tooltip.add(TextFormatting.RED + "Right click to use magic");

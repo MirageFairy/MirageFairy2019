@@ -52,7 +52,7 @@ public class ItemSummoningFairyWand extends ItemFairyCraftingToolBase
 		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
 
 		// 素材
-		tooltip.add(TextFormatting.YELLOW + "Contains: Wood(2.000), Sphere of \"CRYSTAL\"");
+		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
 
 		// 機能
 		tooltip.add(TextFormatting.RED + "Hold right mouse button to use fairy crystals quickly");

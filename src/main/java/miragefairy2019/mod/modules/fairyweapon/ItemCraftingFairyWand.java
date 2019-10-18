@@ -40,10 +40,10 @@ public class ItemCraftingFairyWand extends ItemFairyCraftingToolBase
 		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
 
 		// 素材
-		tooltip.add(TextFormatting.YELLOW + "Contains: Wood(2.000), Sphere of \"CRAFT\"");
-		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");
+		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
 
 		// 機能
+		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");
 
 		super.addInformation(itemStack, world, tooltip, flag);
 

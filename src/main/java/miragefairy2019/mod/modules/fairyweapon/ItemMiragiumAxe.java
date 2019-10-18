@@ -83,7 +83,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
 
 		// 素材
-		tooltip.add(TextFormatting.YELLOW + "Contains: Miragium(3.000), Wood(1.000), Sphere of \"FELL\"");
+		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
 
 		// 機能
 		tooltip.add(TextFormatting.RED + "Right click to cut whole tree");

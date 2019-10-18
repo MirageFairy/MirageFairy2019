@@ -74,7 +74,7 @@ public class ItemLightMagicWand extends ItemFairyWeaponBase
 		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
 
 		// 素材
-		tooltip.add(TextFormatting.YELLOW + "Contains: Apatite(4.000), Miragium(2.000), Sphere of \"LIGHT\"");
+		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
 
 		// 機能
 		tooltip.add(TextFormatting.RED + "Right click to use magic");

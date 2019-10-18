@@ -94,7 +94,7 @@ public class ItemFairySword extends ItemFairyWeaponBase
 		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
 
 		// 素材
-		tooltip.add(TextFormatting.YELLOW + "Contains: Iron(2.000), Wood(0.500), Sphere of \"ATTACK\"");
+		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
 
 		// 機能
 		tooltip.add(TextFormatting.RED + "Great damage when attacking");
