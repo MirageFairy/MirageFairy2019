@@ -22,7 +22,7 @@ public final class Composite
 			.sorted((a, b) -> {
 				int i;
 
-				i = Double.compare(a.y, b.y);
+				i = -Double.compare(a.y, b.y);
 				if (i != 0) return i;
 
 				i = a.x.compareTo(b.x);
