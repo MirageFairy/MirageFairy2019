@@ -62,6 +62,20 @@ item.gemSaltpeter.name=Saltpeter
 item.spheres.name=Sphere
 item.spheres.format=Sphere of "%s"
 
+mirageFairy2019.component.cuticle.format=Cuticle of "%s"
+mirageFairy2019.component.apatite.name=Apatite
+mirageFairy2019.component.fluorite.name=Fluorite
+mirageFairy2019.component.sulfur.name=Sulfur
+mirageFairy2019.component.cinnabar.name=Connabar
+mirageFairy2019.component.moonstone.name=Moonstone
+mirageFairy2019.component.magnetite.name=Magnetite
+mirageFairy2019.component.miragium.name=Miragium
+mirageFairy2019.component.iron.name=Iron
+mirageFairy2019.component.gold.name=Gold
+mirageFairy2019.component.wood.name=Wood
+mirageFairy2019.component.stone.name=Stone
+mirageFairy2019.component.obsidian.name=Obsidian
+
 mirageFairy2019.ability.attack.name=ATTACK
 mirageFairy2019.ability.craft.name=CRAFT
 mirageFairy2019.ability.fell.name=FELL
