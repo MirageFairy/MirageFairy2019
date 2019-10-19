@@ -111,6 +111,10 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		// アイテムステータス
 		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
 
+		// 搭乗中の妖精
+		ItemStack itemStackFairy = getCombinedFairy(itemStack);
+		if (!itemStackFairy.isEmpty()) tooltip.add(TextFormatting.AQUA + "Combined: " + itemStackFairy.getDisplayName());
+
 		// 素材
 		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
 
