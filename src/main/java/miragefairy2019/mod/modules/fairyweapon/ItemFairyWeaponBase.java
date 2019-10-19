@@ -85,7 +85,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 	{
-		stack.damageItem(1, attacker);
+		damageItem(stack, attacker);
 		return true;
 	}
 
@@ -93,7 +93,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
 	{
 		if (!worldIn.isRemote && state.getBlockHardness(worldIn, pos) != 0.0) {
-			stack.damageItem(1, entityLiving);
+			damageItem(stack, entityLiving);
 		}
 		return true;
 	}
@@ -152,6 +152,20 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	}
 
 	//
+
+	protected void damageItem(ItemStack itemStack, EntityLivingBase entityLivingBase)
+	{
+		ItemStack itemStackFairy = getCombinedFairy(itemStack);
+		itemStack.damageItem(1, entityLivingBase);
+		if (itemStack.isEmpty()) {
+
+			// 妖精をドロップ
+			EntityItem entityItem = new EntityItem(entityLivingBase.world, entityLivingBase.posX, entityLivingBase.posY, entityLivingBase.posZ, itemStackFairy.copy());
+			entityItem.setNoPickupDelay();
+			entityLivingBase.world.spawnEntity(entityItem);
+
+		}
+	}
 
 	protected double getFairyAttribute(String attributeName, ItemStack itemStack)
 	{
