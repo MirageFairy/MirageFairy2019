@@ -13,12 +13,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class RecipesFairyCombining extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
+public class RecipesUncombining extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
 
-	public RecipesFairyCombining()
+	public RecipesUncombining()
 	{
-		setRegistryName(new ResourceLocation(ModMirageFairy2019.MODID, "fairy_combining"));
+		setRegistryName(new ResourceLocation(ModMirageFairy2019.MODID, "uncombining"));
 	}
 
 	//
@@ -26,9 +26,8 @@ public class RecipesFairyCombining extends IForgeRegistryEntry.Impl<IRecipe> imp
 	protected static class MatchResult
 	{
 
-		public IFairyCombiningItem fairyCombiningItem;
-		public ItemStack itemStackFairyWeapon;
-		public ItemStack itemStackFairy;
+		public ICombiningItem combiningItem;
+		public ItemStack itemStack;
 
 	}
 
@@ -46,35 +45,15 @@ public class RecipesFairyCombining extends IForgeRegistryEntry.Impl<IRecipe> imp
 
 					ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
 					Item item = itemStack.getItem();
-					if (item instanceof IFairyCombiningItem) {
-						if (((IFairyCombiningItem) item).canCombine(itemStack)) {
+					if (item instanceof ICombiningItem) {
+						if (((ICombiningItem) item).canUncombine(itemStack)) {
 
-							result.itemStackFairyWeapon = itemStack;
-							result.fairyCombiningItem = (IFairyCombiningItem) item;
+							result.itemStack = itemStack;
+							result.combiningItem = (ICombiningItem) item;
 							used[i] = true;
 							break a;
 
 						}
-					}
-
-				}
-			}
-			return Optional.empty();
-		}
-
-		// 妖精探索
-		a:
-		{
-			for (int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
-				if (!used[i]) {
-
-					ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
-					if (result.fairyCombiningItem.canCombine(result.itemStackFairyWeapon, itemStack)) {
-
-						result.itemStackFairy = itemStack;
-						used[i] = true;
-						break a;
-
 					}
 
 				}
@@ -107,7 +86,10 @@ public class RecipesFairyCombining extends IForgeRegistryEntry.Impl<IRecipe> imp
 	{
 		MatchResult nResult = match(inventoryCrafting).orElse(null);
 		if (nResult == null) return ItemStack.EMPTY;
-		return nResult.fairyCombiningItem.getCombinedItemStack(nResult.itemStackFairyWeapon, nResult.itemStackFairy);
+
+		ItemStack itemStack = nResult.itemStack.copy();
+		nResult.combiningItem.setCombinedPart(itemStack, ItemStack.EMPTY);
+		return itemStack;
 	}
 
 	@Override
@@ -127,8 +109,10 @@ public class RecipesFairyCombining extends IForgeRegistryEntry.Impl<IRecipe> imp
 		for (int i = 0; i < list.size(); ++i) {
 			ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
 
-			if (itemStack == nResult.itemStackFairyWeapon) {
-				// ステッキを使用してもステッキは消費される
+			if (itemStack == nResult.itemStack) {
+				// クラフティングアイテムを使用しても耐久が減ったものは残らない
+				// 代わりにそれまで合成されていたパーツが出てくる
+				list.set(i, nResult.combiningItem.getCombinedPart(nResult.itemStack));
 			} else {
 				list.set(i, ForgeHooks.getContainerItem(itemStack));
 			}
@@ -147,7 +131,7 @@ public class RecipesFairyCombining extends IForgeRegistryEntry.Impl<IRecipe> imp
 	@Override
 	public boolean canFit(int width, int height)
 	{
-		return width * height >= 2;
+		return width * height >= 1;
 	}
 
 }
