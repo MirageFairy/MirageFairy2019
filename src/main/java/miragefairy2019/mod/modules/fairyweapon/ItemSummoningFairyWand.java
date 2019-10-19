@@ -113,10 +113,10 @@ public class ItemSummoningFairyWand extends ItemFairyCraftingToolBase
 			player.addStat(StatList.getObjectUseStats(nItemStackFairyCrystal.getItem()));
 
 			// 妖精をドロップ
-			BlockPos pos2 = rayTraceResult.getBlockPos().offset(rayTraceResult.sideHit);
-			EntityItem entityitem = new EntityItem(player.world, pos2.getX() + 0.5, pos2.getY() + 0.5, pos2.getZ() + 0.5, nItemStackDrop.copy());
-			entityitem.setNoPickupDelay();
-			player.world.spawnEntity(entityitem);
+			BlockPos blockPos = rayTraceResult.getBlockPos().offset(rayTraceResult.sideHit);
+			EntityItem entityItem = new EntityItem(player.world, blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5, nItemStackDrop.copy());
+			entityItem.setNoPickupDelay();
+			player.world.spawnEntity(entityItem);
 
 		}
 	}
