@@ -106,6 +106,9 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	{
 
 		// アイテムステータス
+		tooltip.add(TextFormatting.RED + "Can combine with fairy by crafting");
+
+		// アイテムステータス
 		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
 
 		// 素材
