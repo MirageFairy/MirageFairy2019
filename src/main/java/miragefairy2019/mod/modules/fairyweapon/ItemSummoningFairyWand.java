@@ -43,12 +43,6 @@ public class ItemSummoningFairyWand extends ItemFairyCraftingToolBase
 		// ポエム
 		tooltip.add("餌付けのステッキ");
 
-		// アイテムステータス
-		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
-
-		// 素材
-		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
-
 		// 機能
 		tooltip.add(TextFormatting.RED + "Hold right mouse button to use fairy crystals quickly");
 		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");

@@ -105,6 +105,12 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 
+		// アイテムステータス
+		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
+
+		// 素材
+		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
+
 		// 妖精魔法ステータス
 		Tuple<ItemStack, FairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player).flatMap(p -> findFairy(itemStack, p)).orElse(null);
 		if (fairy != null) {

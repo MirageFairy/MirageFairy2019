@@ -74,12 +74,6 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		// ポエム
 		tooltip.add("飛べるって素敵");
 
-		// アイテムステータス
-		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
-
-		// 素材
-		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
-
 		// 機能
 		tooltip.add(TextFormatting.RED + "Right click to cut whole tree");
 		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");

@@ -31,12 +31,6 @@ public class ItemMeltingFairyWand extends ItemFairyCraftingToolBase
 		// ポエム
 		tooltip.add("金属を溶かすほどの情熱");
 
-		// アイテムステータス
-		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
-
-		// 素材
-		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
-
 		// 機能
 		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");
 

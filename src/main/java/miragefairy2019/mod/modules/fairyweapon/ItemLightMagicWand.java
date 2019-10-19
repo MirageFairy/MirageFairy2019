@@ -65,12 +65,6 @@ public class ItemLightMagicWand extends ItemFairyWeaponBase
 		// ポエム
 		tooltip.add("優しい光が洞窟を照らす");
 
-		// アイテムステータス
-		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
-
-		// 素材
-		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
-
 		// 機能
 		tooltip.add(TextFormatting.RED + "Right click to use magic");
 		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");

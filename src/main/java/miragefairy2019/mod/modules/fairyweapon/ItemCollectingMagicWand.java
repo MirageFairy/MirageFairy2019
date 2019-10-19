@@ -71,12 +71,6 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 		// ポエム
 		tooltip.add("魔法のマジックハンド");
 
-		// アイテムステータス
-		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
-
-		// 素材
-		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
-
 		// 機能
 		tooltip.add(TextFormatting.RED + "Right click to use magic");
 		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");
