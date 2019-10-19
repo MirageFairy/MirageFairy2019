@@ -173,10 +173,39 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		itemStack.setTagCompound(nbt);
 	}
 
-	protected Optional<Tuple<ItemStack, FairyType>> findFairy(EntityPlayer player)
+	public ItemStack getCombinedFairy(ItemStack itemStack)
 	{
-		return findItem(player, itemStack -> getFairy(itemStack).isPresent())
-			.map(itemStack -> Tuple.of(itemStack, getFairy(itemStack).get()));
+		if (!itemStack.hasTagCompound()) return ItemStack.EMPTY;
+		NBTTagCompound nbt = itemStack.getTagCompound();
+		if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) return ItemStack.EMPTY;
+		NBTTagCompound fairy = nbt.getCompoundTag("Fairy");
+		if (!fairy.hasKey("CombinedFairy", NBT.TAG_COMPOUND)) return ItemStack.EMPTY;
+		return new ItemStack(fairy.getCompoundTag("CombinedFairy"));
+	}
+
+	public void setCombinedFairy(ItemStack itemStack, ItemStack itemStackFairy)
+	{
+		if (!itemStack.hasTagCompound()) itemStack.setTagCompound(new NBTTagCompound());
+		NBTTagCompound nbt = itemStack.getTagCompound();
+		if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) nbt.setTag("Fairy", new NBTTagCompound());
+		NBTTagCompound fairy = nbt.getCompoundTag("Fairy");
+		fairy.setTag("CombinedFairy", itemStackFairy.writeToNBT(new NBTTagCompound()));
+		itemStack.setTagCompound(nbt);
+	}
+
+	protected Optional<Tuple<ItemStack, FairyType>> findFairy(ItemStack itemStack, EntityPlayer player)
+	{
+
+		// 搭乗中の妖精を優先
+		{
+			ItemStack itemStackFairy = getCombinedFairy(itemStack);
+			if (getFairy(itemStackFairy).isPresent()) {
+				return Optional.of(Tuple.of(itemStackFairy, getFairy(itemStackFairy).get()));
+			}
+		}
+
+		return findItem(player, itemStackFairy -> getFairy(itemStackFairy).isPresent())
+			.map(itemStackFairy -> Tuple.of(itemStackFairy, getFairy(itemStackFairy).get()));
 	}
 
 	protected Optional<ItemStack> findItem(EntityPlayer player, Predicate<ItemStack> predicate)
