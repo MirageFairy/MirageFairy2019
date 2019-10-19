@@ -41,7 +41,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreIngredient;
 
-public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, ICompositeProvider
+public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, ICompositeProvider, ICombiningItem
 {
 
 	protected Composite composite;
@@ -298,6 +298,38 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	public Composite getComposite(ItemStack itemStack)
 	{
 		return composite;
+	}
+
+	//
+
+	@Override
+	public boolean canCombine(ItemStack itemStack)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean canCombineWith(ItemStack itemStack, ItemStack itemStackPart)
+	{
+		return itemStackPart.getItem() instanceof IItemFairy;
+	}
+
+	@Override
+	public boolean canUncombine(ItemStack itemStack)
+	{
+		return !getCombinedFairy(itemStack).isEmpty();
+	}
+
+	@Override
+	public ItemStack getCombinedPart(ItemStack itemStack)
+	{
+		return getCombinedFairy(itemStack);
+	}
+
+	@Override
+	public void setCombinedPart(ItemStack itemStack, ItemStack itemStackPart)
+	{
+		setCombinedFairy(itemStack, itemStackPart);
 	}
 
 }
