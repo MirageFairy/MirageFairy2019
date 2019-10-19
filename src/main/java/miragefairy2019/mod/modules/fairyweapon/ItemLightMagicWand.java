@@ -100,7 +100,7 @@ public class ItemLightMagicWand extends ItemFairyWeaponBase
 		if (world.isRemote) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
 		// 妖精を取得
-		Tuple<ItemStack, FairyType> fairy = findFairy(player).orElse(null);
+		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy == null) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
 		// ステータスを評価
@@ -191,7 +191,7 @@ public class ItemLightMagicWand extends ItemFairyWeaponBase
 				if (ApiMain.side.isClient()) {
 
 					// 妖精がない場合はマゼンタ
-					Tuple<ItemStack, FairyType> fairy = findFairy(player).orElse(null);
+					Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
 					if (fairy == null) {
 						spawnParticle(
 							world,

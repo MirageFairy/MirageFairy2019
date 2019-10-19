@@ -136,7 +136,7 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 		Result result = new Result();
 
 		// 妖精取得
-		Tuple<ItemStack, FairyType> fairy = findFairy(player).orElse(null);
+		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy == null) {
 			result.executability = EnumExecutability.NO_FAIRY;
 			result.positionTarget = getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());

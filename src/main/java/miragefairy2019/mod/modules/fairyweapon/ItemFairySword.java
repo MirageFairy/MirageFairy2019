@@ -119,7 +119,7 @@ public class ItemFairySword extends ItemFairyWeaponBase
 		if (!(entity instanceof EntityLivingBase)) return;
 		EntityPlayer player = (EntityPlayer) entity;
 
-		Tuple<ItemStack, FairyType> fairy = findFairy(player).orElse(null);
+		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy != null) {
 			Status status = new Status(fairy.y);
 			setAdditionalAttackDamage(itemStack, status.additionalAttackDamage);

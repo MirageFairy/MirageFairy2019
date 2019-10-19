@@ -112,7 +112,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		ItemStack itemStack = player.getHeldItem(hand);
 
 		// 妖精を取得
-		Tuple<ItemStack, FairyType> fairy = findFairy(player).orElse(null);
+		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy == null) return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStack);
 
 		// ステータスを評価
@@ -205,7 +205,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 				if (ApiMain.side.isClient()) {
 
 					// 妖精がない場合はマゼンタ
-					Tuple<ItemStack, FairyType> fairy = findFairy(player).orElse(null);
+					Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
 					if (fairy == null) {
 						spawnParticle(
 							world,
