@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.ComponentFairyAbilityType;
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
@@ -15,6 +16,9 @@ import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
@@ -50,6 +54,55 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	{
 		this.composite = composite;
 		setMaxStackSize(1);
+		if (ApiMain.side.isClient()) {
+			setTileEntityItemStackRenderer(new TileEntityItemStackRenderer() {
+				@Override
+				public void renderByItem(ItemStack itemStack, float partialTicks)
+				{
+
+					GlStateManager.disableRescaleNormal();
+
+					// 本体描画
+					{
+						IBakedModel bakedModel = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(itemStack, null, null);
+						if (bakedModel instanceof BakedModelBuiltinWrapper) {
+
+							GlStateManager.pushMatrix();
+							try {
+								GlStateManager.translate(0.5F, 0.5F, 0.5F);
+
+								Minecraft.getMinecraft().getRenderItem().renderItem(itemStack, ((BakedModelBuiltinWrapper) bakedModel).bakedModel);
+
+							} finally {
+								GlStateManager.popMatrix();
+							}
+
+						}
+					}
+
+					GlStateManager.disableRescaleNormal();
+
+					// 搭乗妖精描画
+					ItemStack itemStackFairy = getCombinedFairy(itemStack);
+					if (!itemStackFairy.isEmpty()) {
+						IBakedModel bakedModel = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(itemStackFairy, null, null);
+
+						GlStateManager.pushMatrix();
+						try {
+							GlStateManager.translate(0.75F, 0.25F, 0.51F);
+							GlStateManager.scale(0.5F, 0.5F, 1.0F);
+
+							Minecraft.getMinecraft().getRenderItem().renderItem(itemStackFairy, bakedModel);
+
+						} finally {
+							GlStateManager.popMatrix();
+						}
+
+					}
+
+				}
+			});
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
