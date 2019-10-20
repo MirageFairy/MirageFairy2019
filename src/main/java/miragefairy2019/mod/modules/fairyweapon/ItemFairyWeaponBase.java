@@ -386,6 +386,20 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	//
 
 	@Override
+	public boolean hasContainerItem(ItemStack itemStack)
+	{
+		return !getContainerItem(itemStack).isEmpty();
+	}
+
+	@Override
+	public ItemStack getContainerItem(ItemStack itemStack)
+	{
+		return getCombinedFairy(itemStack);
+	}
+
+	//
+
+	@Override
 	public final NonNullList<Ingredient> getRepairmentSpheres(ItemStack itemStack)
 	{
 		return getComposite(itemStack).components.suppliterator()
