@@ -64,7 +64,7 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 		}
 
 		// スフィア探索
-		result.repairmentSpheres = result.sphereReplacementItem.getRepaitmentSpheres(result.itemStackSphereReplacement);
+		result.repairmentSpheres = result.sphereReplacementItem.getRepairmentSpheres(result.itemStackSphereReplacement);
 		if (result.repairmentSpheres.size() == 0) return Optional.empty();
 		for (Ingredient sphere : result.repairmentSpheres) {
 

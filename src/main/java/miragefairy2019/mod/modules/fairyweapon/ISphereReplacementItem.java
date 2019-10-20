@@ -9,7 +9,7 @@ public interface ISphereReplacementItem
 
 	public boolean canRepair(ItemStack itemStack);
 
-	public NonNullList<Ingredient> getRepaitmentSpheres(ItemStack itemStack);
+	public NonNullList<Ingredient> getRepairmentSpheres(ItemStack itemStack);
 
 	public ItemStack getRepairedItem(ItemStack itemStack);
 
