@@ -66,11 +66,18 @@ public class ItemLightMagicWand extends ItemFairyWeaponBase
 		// ポエム
 		tooltip.add("優しい光が洞窟を照らす");
 
-		// 機能
-		tooltip.add(TextFormatting.RED + "Right click to use magic");
-		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");
-
 		super.addInformation(itemStack, world, tooltip, flag);
+
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
+	{
+
+		tooltip.add(TextFormatting.RED + "Right click to use magic");
+
+		super.addInformationFunctions(itemStack, world, tooltip, flag);
 
 	}
 

@@ -86,11 +86,18 @@ public class ItemFairySword extends ItemFairyWeaponBase
 		tooltip.add("デザインコンテスト武器");
 		tooltip.add(TextFormatting.LIGHT_PURPLE + "Author: たぬん三世");
 
-		// 機能
-		tooltip.add(TextFormatting.RED + "Great damage when attacking");
-		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");
-
 		super.addInformation(itemStack, world, tooltip, flag);
+
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
+	{
+
+		tooltip.add(TextFormatting.RED + "Great damage when attacking");
+
+		super.addInformationFunctions(itemStack, world, tooltip, flag);
 
 	}
 

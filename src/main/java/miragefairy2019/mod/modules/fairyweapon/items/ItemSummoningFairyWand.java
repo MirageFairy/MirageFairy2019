@@ -44,11 +44,18 @@ public class ItemSummoningFairyWand extends ItemFairyCraftingToolBase
 		// ポエム
 		tooltip.add("餌付けのステッキ");
 
-		// 機能
-		tooltip.add(TextFormatting.RED + "Hold right mouse button to use fairy crystals quickly");
-		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");
-
 		super.addInformation(itemStack, world, tooltip, flag);
+
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
+	{
+
+		tooltip.add(TextFormatting.RED + "Hold right mouse button to use fairy crystals quickly");
+
+		super.addInformationFunctions(itemStack, world, tooltip, flag);
 
 	}
 

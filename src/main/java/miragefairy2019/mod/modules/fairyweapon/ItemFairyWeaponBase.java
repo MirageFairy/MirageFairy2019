@@ -158,8 +158,8 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 
-		// アイテムステータス
-		tooltip.add(TextFormatting.RED + "Can combine with fairy by crafting");
+		// 機能
+		addInformationFunctions(itemStack, world, tooltip, flag);
 
 		// アイテムステータス
 		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
@@ -178,6 +178,16 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		} else {
 			tooltip.add(TextFormatting.BLUE + "No fairy is supplied");
 		}
+
+	}
+
+	@SideOnly(Side.CLIENT)
+	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
+	{
+
+		tooltip.add(TextFormatting.RED + "Can combine with fairy by crafting");
+
+		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");
 
 	}
 

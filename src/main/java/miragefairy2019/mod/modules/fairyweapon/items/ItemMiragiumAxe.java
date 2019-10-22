@@ -75,11 +75,18 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		// ポエム
 		tooltip.add("飛べるって素敵");
 
-		// 機能
-		tooltip.add(TextFormatting.RED + "Right click to cut whole tree");
-		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");
-
 		super.addInformation(itemStack, world, tooltip, flag);
+
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
+	{
+
+		tooltip.add(TextFormatting.RED + "Right click to cut whole tree");
+
+		super.addInformationFunctions(itemStack, world, tooltip, flag);
 
 	}
 
