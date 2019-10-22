@@ -185,7 +185,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 
-		tooltip.add(TextFormatting.RED + "Can combine with fairy by crafting");
+		tooltip.add(TextFormatting.RED + "Can be combined with fairy by crafting");
 
 		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");
 
