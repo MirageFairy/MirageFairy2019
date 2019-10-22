@@ -4,6 +4,7 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairyWeapon;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
+import miragefairy2019.mod.modules.fairyweapon.items.ItemBreakingFairyWand;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemCollectingMagicWand;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemCraftingFairyWand;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemFairySword;
@@ -34,6 +35,7 @@ public class ModuleFairyWeapon
 	public static ItemLightMagicWand itemLightMagicWand;
 	public static ItemSummoningFairyWand itemSummoningFairyWand;
 	public static ItemCollectingMagicWand itemCollectingMagicWand;
+	public static ItemBreakingFairyWand itemBreakingFairyWand;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -123,11 +125,24 @@ public class ModuleFairyWeapon
 				ApiFairyWeapon.itemCollectingMagicWand = itemCollectingMagicWand = item;
 			}
 
+			// 破壊のステッキ
+			{
+				ItemBreakingFairyWand item = new ItemBreakingFairyWand();
+				item.setRegistryName(ModMirageFairy2019.MODID, "breaking_fairy_wand");
+				item.setUnlocalizedName("breakingFairyWand");
+				item.setCreativeTab(ApiMain.creativeTab);
+				ForgeRegistries.ITEMS.register(item);
+				hookBakedModelWrapper(item);
+				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
+				ApiFairyWeapon.itemBreakingFairyWand = itemBreakingFairyWand = item;
+			}
+
 		});
 		erMod.createItemStack.register(ic -> {
 			OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWandCrafting", new ItemStack(itemCraftingFairyWand, 1, OreDictionary.WILDCARD_VALUE));
 			OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWandMelting", new ItemStack(itemMeltingFairyWand, 1, OreDictionary.WILDCARD_VALUE));
 			OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWandSummoning", new ItemStack(itemSummoningFairyWand, 1, OreDictionary.WILDCARD_VALUE));
+			OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWandBreaking", new ItemStack(itemBreakingFairyWand, 1, OreDictionary.WILDCARD_VALUE));
 		});
 		erMod.addRecipe.register(() -> {
 
