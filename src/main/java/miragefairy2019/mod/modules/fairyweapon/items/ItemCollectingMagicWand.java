@@ -125,48 +125,87 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 	private static class Result
 	{
 
-		public EnumExecutability executability = null;
-		public Status status = null;
-		public RayTraceResult rayTraceResult = null;
-		public Vec3d positionTarget = null;
-		public List<EntityItem> entityItems = null;
+		public final EnumExecutability executability;
+		public final Vec3d positionTarget;
+
+		public Result(
+			EnumExecutability executability,
+			Vec3d positionTarget)
+		{
+			this.executability = executability;
+			this.positionTarget = positionTarget;
+		}
+
+	}
+
+	private static class ResultWithFairy extends Result
+	{
+
+		public final Status status;
+		public final RayTraceResult rayTraceResult;
+		public final List<EntityItem> entityItems;
+
+		public ResultWithFairy(
+			EnumExecutability executability,
+			Vec3d positionTarget,
+			Status status,
+			RayTraceResult rayTraceResult,
+			List<EntityItem> entityItems)
+		{
+			super(executability, positionTarget);
+			this.status = status;
+			this.rayTraceResult = rayTraceResult;
+			this.entityItems = entityItems;
+		}
+
+	}
+
+	private static class ResultOk extends ResultWithFairy
+	{
+
+		public ResultOk(
+			EnumExecutability executability,
+			Vec3d positionTarget,
+			Status status,
+			RayTraceResult rayTraceResult,
+			List<EntityItem> entityItems)
+		{
+			super(executability, positionTarget, status, rayTraceResult, entityItems);
+		}
 
 	}
 
 	private Result getExecutability(World world, ItemStack itemStack, EntityPlayer player)
 	{
-		Result result = new Result();
 
 		// 妖精取得
 		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy == null) {
-			result.executability = EnumExecutability.NO_FAIRY;
-			result.positionTarget = getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
-			return result;
+			return new Result(EnumExecutability.NO_FAIRY, getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()));
 		}
 
 		// ステータスを評価
-		result.status = new Status(fairy.y);
+		Status status = new Status(fairy.y);
 
 		// 発動座標
-		result.rayTraceResult = rayTrace(world, player, false, result.status.additionalReach);
-		result.positionTarget = result.rayTraceResult != null
-			? result.rayTraceResult.hitVec
-			: getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + result.status.additionalReach);
+		RayTraceResult rayTraceResult = rayTrace(world, player, false, status.additionalReach);
+		Vec3d positionTarget = rayTraceResult != null
+			? rayTraceResult.hitVec
+			: getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach);
 
 		// 対象を取得
-		result.entityItems = getEntityItems(result.status, world, player, result.positionTarget);
+		List<EntityItem> entityItems = getEntityItems(status, world, player, positionTarget);
 
 		// 実行可能性を計算
-		result.executability = itemStack.getItemDamage() >= itemStack.getMaxDamage()
+		EnumExecutability executability = itemStack.getItemDamage() >= itemStack.getMaxDamage()
 			? EnumExecutability.NO_DURABILITY
-			: result.entityItems.isEmpty()
+			: entityItems.isEmpty()
 				? EnumExecutability.NO_TARGET
 				: player.getCooldownTracker().hasCooldown(this)
 					? EnumExecutability.COOLTIME
 					: EnumExecutability.OK;
 
-		return result;
+		return new ResultWithFairy(executability, positionTarget, status, rayTraceResult, entityItems);
 	}
 
 	private List<EntityItem> getEntityItems(Status status, World world, EntityPlayer player, Vec3d position)
@@ -203,13 +242,14 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 		Result result = getExecutability(world, itemStack, player);
 
 		// 判定がだめだったらスルー
-		if (result.executability != EnumExecutability.OK) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
+		if (!(result instanceof ResultOk)) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
+		ResultOk resultOk = (ResultOk) result;
 
 		// 魔法成立
 
 		int successed = 0;
-		double maxStacks2 = result.status.maxStacks;
-		for (EntityItem entityItem : result.entityItems) {
+		double maxStacks2 = resultOk.status.maxStacks;
+		for (EntityItem entityItem : resultOk.entityItems) {
 
 			// 耐久が0のときは破壊をやめる
 			if (itemStack.getItemDamage() >= itemStack.getMaxDamage()) break;
@@ -218,7 +258,7 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 			if (maxStacks2 < 1) break;
 
 			//消費
-			if (world.rand.nextDouble() < result.status.wear) itemStack.damageItem(1, player);
+			if (world.rand.nextDouble() < resultOk.status.wear) itemStack.damageItem(1, player);
 			maxStacks2--;
 			successed++;
 
@@ -234,7 +274,7 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 			world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
 			// クールタイム
-			player.getCooldownTracker().setCooldown(this, (int) (result.status.coolTime * (1 - maxStacks2 / (double) result.status.maxStacks)));
+			player.getCooldownTracker().setCooldown(this, (int) (resultOk.status.coolTime * (1 - maxStacks2 / (double) resultOk.status.maxStacks)));
 
 		}
 
@@ -266,7 +306,8 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 		spawnParticle(world, result.positionTarget, result.executability.color);
 
 		// 発動範囲にパーティクルを表示
-		{
+		if (result instanceof ResultWithFairy) {
+			ResultWithFairy resultWithFairy = (ResultWithFairy) result;
 
 			// 角度アニメーション更新
 			rotateY += 4.9 / 180.0 * Math.PI;
@@ -285,7 +326,7 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 					Vec3d offset = new Vec3d(
 						Math.cos(pitch) * Math.cos(yaw),
 						Math.sin(pitch),
-						Math.cos(pitch) * Math.sin(yaw)).scale(result.status.radius);
+						Math.cos(pitch) * Math.sin(yaw)).scale(resultWithFairy.status.radius);
 					Vec3d positionParticle = result.positionTarget.add(offset);
 
 					// 仮出現点が、真下がブロックな空洞だった場合のみ受理
@@ -298,7 +339,7 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 							double offsetY = y - result.positionTarget.y;
 							double r1 = Math.sqrt(offset.x * offset.x + offset.z * offset.z);
 							if (Double.isNaN(r1)) break a;
-							double r2 = Math.sqrt(result.status.radius * result.status.radius - offsetY * offsetY);
+							double r2 = Math.sqrt(resultWithFairy.status.radius * resultWithFairy.status.radius - offsetY * offsetY);
 							if (Double.isNaN(r2)) break a;
 							double offsetX = offset.x / r1 * r2;
 							double offsetZ = offset.z / r1 * r2;
@@ -323,9 +364,11 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 		}
 
 		// 対象のアイテムにパーティクルを表示
-		{
-			int maxStacks2 = result.status.maxStacks;
-			for (EntityItem entityItem : result.entityItems) {
+		if (result instanceof ResultWithFairy) {
+			ResultWithFairy resultWithFairy = (ResultWithFairy) result;
+
+			int maxStacks2 = resultWithFairy.status.maxStacks;
+			for (EntityItem entityItem : resultWithFairy.entityItems) {
 
 				int color = 0x00FF00;
 
