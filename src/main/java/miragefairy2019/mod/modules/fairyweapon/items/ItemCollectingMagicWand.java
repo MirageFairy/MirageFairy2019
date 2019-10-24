@@ -205,7 +205,9 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 					? EnumExecutability.COOLTIME
 					: EnumExecutability.OK;
 
-		return new ResultWithFairy(executability, positionTarget, status, rayTraceResult, entityItems);
+		return executability == EnumExecutability.OK
+			? new ResultOk(executability, positionTarget, status, rayTraceResult, entityItems)
+			: new ResultWithFairy(executability, positionTarget, status, rayTraceResult, entityItems);
 	}
 
 	private List<EntityItem> getEntityItems(Status status, World world, EntityPlayer player, Vec3d position)
