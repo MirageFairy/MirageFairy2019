@@ -60,7 +60,9 @@ item.dustTinyMiragium.name=Tiny Pile of Miragium Dust
 item.ingotMiragium.name=Miragium Ingot
 item.gemSaltpeter.name=Saltpeter
 tile.orePyrope.name=Pyrope Ore
+item.gemPyrope.name=Pyrope
 tile.oreSmithsonite.name=Smithsonite Ore
+item.gemSmithsonite.name=Smithsonite
 
 item.spheres.name=Sphere
 item.spheres.format=Sphere of "%s"

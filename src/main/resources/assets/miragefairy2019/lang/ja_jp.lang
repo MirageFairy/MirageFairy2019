@@ -60,7 +60,9 @@ item.dustTinyMiragium.name=ミラジウムの微粉
 item.ingotMiragium.name=ミラジウムインゴット
 item.gemSaltpeter.name=硝石
 tile.orePyrope.name=パイロープ鉱石
+item.gemPyrope.name=パイロープ
 tile.oreSmithsonite.name=菱亜鉛鉱鉱石
+item.gemSmithsonite.name=菱亜鉛鉱
 
 item.spheres.name=スフィア
 item.spheres.format=≪%s≫のスフィア
