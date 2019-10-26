@@ -1,0 +1,19 @@
+{
+    "type": "forge:ore_shaped",
+    "group": "smithsonite_block",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "type": "forge:ore_dict",
+            "ore": "gemSmithsonite"
+        }
+    },
+    "result": {
+        "item": "miragefairy2019:materials1",
+        "data": 7
+    }
+}

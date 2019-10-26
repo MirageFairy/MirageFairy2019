@@ -121,41 +121,43 @@ public class BlockOreSeed extends Block
 		if (canMutate(world, pos)) {
 			Random random = new Random(pos.getX() * 15946848L + pos.getY() * 29135678L + pos.getZ() * 65726816L);
 			EnumVariant variant = getVariant(state);
-			double s = random.nextDouble();
-
 			IBlockState blockStateAfter;
 			if (variant == EnumVariant.LARGE) {
-				if (s < 0.10) {
+				if (random.nextDouble() < 0.10) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.APATITE_ORE);
+				} else if (30 <= pos.getY() && random.nextDouble() < 0.08) {
+					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.SMITHSONITE_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 				}
 			} else if (variant == EnumVariant.PYRAMID) {
-				if (s < 0.10) {
+				if (random.nextDouble() < 0.10) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.FLUORITE_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 				}
 			} else if (variant == EnumVariant.STAR) {
-				if (pos.getY() <= 15 && s < 0.15) {
+				if (pos.getY() <= 15 && random.nextDouble() < 0.15) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.SULFUR_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 				}
 			} else if (variant == EnumVariant.POINT) {
-				if (pos.getY() <= 15 && s < 0.15) {
+				if (pos.getY() <= 15 && random.nextDouble() < 0.15) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.CINNABAR_ORE);
+				} else if (40 <= pos.getY() && pos.getY() <= 50 && random.nextDouble() < 0.05) {
+					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.PYROPE_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 				}
 			} else if (variant == EnumVariant.COAL) {
-				if (s < 0.10) {
+				if (random.nextDouble() < 0.10) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.MAGNETITE_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
 				}
 			} else if (variant == EnumVariant.TINY) {
-				if (pos.getY() <= 50 && pos.getY() >= 40 && s < 0.10) {
+				if (40 <= pos.getY() && pos.getY() <= 50 && random.nextDouble() < 0.10) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.MOONSTONE_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
