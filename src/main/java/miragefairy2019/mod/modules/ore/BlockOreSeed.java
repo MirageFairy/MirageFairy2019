@@ -145,7 +145,7 @@ public class BlockOreSeed extends Block
 			} else if (variant == EnumVariant.POINT) {
 				if (pos.getY() <= 15 && random.nextDouble() < 0.15) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.CINNABAR_ORE);
-				} else if (40 <= pos.getY() && pos.getY() <= 50 && random.nextDouble() < 0.05) {
+				} else if (pos.getY() <= 50 && random.nextDouble() < 0.05) {
 					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.PYROPE_ORE);
 				} else {
 					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
