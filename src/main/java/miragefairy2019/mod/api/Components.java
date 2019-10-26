@@ -21,6 +21,8 @@ public class Components
 	public static Component WOOD = new Component("wood");
 	public static Component STONE = new Component("stone");
 	public static Component OBSIDIAN = new Component("obsidian");
+	public static Component PYROPE = new Component("pyrope");
+	public static Component SMITHSONITE = new Component("smithsonite");
 
 	private static Map<EnumAbilityType, Component> fairyAbilityTypes = new HashMap<>();
 
