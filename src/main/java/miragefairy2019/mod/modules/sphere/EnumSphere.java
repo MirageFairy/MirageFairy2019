@@ -27,6 +27,11 @@ public enum EnumSphere
 	warp(EnumAbilityType.warp, 0x3A00D3, 0x8CF4E2, 0x349988, 0xD004FB, () -> Ingredient.fromStacks(new ItemStack(Items.ENDER_PEARL))),
 	shoot(EnumAbilityType.shoot, 0x969696, 0x896727, 0x896727, 0xD8D8D8, () -> Ingredient.fromStacks(new ItemStack(Items.BOW))),
 	breaking(EnumAbilityType.breaking, 0xFFFFFF, 0xFF5A35, 0xFF4800, 0x000000, () -> Ingredient.fromStacks(new ItemStack(Blocks.TNT))),
+	chemical(EnumAbilityType.chemical, 0x0067FF, 0xC9DFEF, 0xB0C4D7, 0x0755FF, () -> Ingredient.fromStacks(new ItemStack(Items.FERMENTED_SPIDER_EYE))),
+	slash(EnumAbilityType.slash, 0xAAAAAA, 0xFFC9B2, 0xD20000, 0xFFFFFF, () -> Ingredient.fromStacks(new ItemStack(Items.IRON_SWORD))),
+	food(EnumAbilityType.food, 0xC66000, 0xFFCF86, 0xCB6E00, 0xFFC261, () -> Ingredient.fromStacks(new ItemStack(Items.BREAD))),
+	knowledge(EnumAbilityType.knowledge, 0xFFFF00, 0x006200, 0x00A000, 0x50DD00, () -> Ingredient.fromStacks(new ItemStack(Items.BOOK))),
+	energy(EnumAbilityType.energy, 0xFFED30, 0xFFF472, 0xFFE84C, 0xBFE7FF, () -> Ingredient.fromStacks(new ItemStack(Items.COAL))),
 	;
 
 	public final IAbilityType abilityType;

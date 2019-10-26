@@ -31,6 +31,11 @@ public class ApiFairy
 		warp(DARK_PURPLE),
 		shoot(GREEN),
 		breaking(DARK_RED),
+		chemical(DARK_AQUA),
+		slash(DARK_RED),
+		food(YELLOW),
+		knowledge(DARK_GREEN),
+		energy(GOLD),
 		;
 
 		private final TextFormatting colorText;

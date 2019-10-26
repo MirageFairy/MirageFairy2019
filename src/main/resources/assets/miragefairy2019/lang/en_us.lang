@@ -95,6 +95,11 @@ mirageFairy2019.ability.store.name=STORE
 mirageFairy2019.ability.warp.name=WARP
 mirageFairy2019.ability.shoot.name=SHOOT
 mirageFairy2019.ability.breaking.name=BREAK
+mirageFairy2019.ability.chemical.name=CHEMICAL
+mirageFairy2019.ability.slash.name=SLASH
+mirageFairy2019.ability.food.name=FOOD
+mirageFairy2019.ability.knowledge.name=KNOWLEDGE
+mirageFairy2019.ability.energy.name=ENERGY
 
 mirageFairy2019.fairy.air.name=Airia
 mirageFairy2019.fairy.water.name=Wateria
