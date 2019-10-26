@@ -62,9 +62,9 @@ item.gemSaltpeter.name=硝石
 tile.orePyrope.name=パイロープ鉱石
 tile.blockPyrope.name=パイロープブロック
 item.gemPyrope.name=パイロープ
-tile.oreSmithsonite.name=菱亜鉛鉱鉱石
-tile.blockSmithsonite.name=菱亜鉛鉱ブロック
-item.gemSmithsonite.name=菱亜鉛鉱
+tile.oreSmithsonite.name=スミソナイト鉱石
+tile.blockSmithsonite.name=スミソナイトブロック
+item.gemSmithsonite.name=スミソナイト
 
 item.spheres.name=スフィア
 item.spheres.format=≪%s≫のスフィア
