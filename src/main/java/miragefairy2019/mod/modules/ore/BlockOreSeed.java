@@ -1,9 +1,20 @@
 package miragefairy2019.mod.modules.ore;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
+import miragefairy2019.mod.lib.WeightedRandom;
+import mirrg.boron.util.struct.Tuple;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.SoundType;
@@ -116,56 +127,78 @@ public class BlockOreSeed extends Block
 		worldIn.scheduleUpdate(pos, this, 2);
 	}
 
+	//
+
+	private static Map<EnumVariant, List<Function<Tuple<World, BlockPos>, Optional<WeightedRandom.Item<Supplier<IBlockState>>>>>> registry = new HashMap<>();
+
+	static {
+		register(EnumVariant.LARGE, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.APATITE_ORE));
+		register(EnumVariant.LARGE, 0.08, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.SMITHSONITE_ORE), minY(30));
+		register(EnumVariant.PYRAMID, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.FLUORITE_ORE));
+		register(EnumVariant.STAR, 0.15, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.SULFUR_ORE), maxY(15));
+		register(EnumVariant.POINT, 0.15, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.CINNABAR_ORE), maxY(15));
+		register(EnumVariant.POINT, 0.05, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.PYROPE_ORE), maxY(50));
+		register(EnumVariant.COAL, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.MAGNETITE_ORE));
+		register(EnumVariant.TINY, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.MOONSTONE_ORE), minY(40), maxY(50));
+	}
+
+	private static interface IGenerationCondition extends Predicate<Tuple<World, BlockPos>>
+	{
+
+	}
+
+	private static IGenerationCondition minY(int minY)
+	{
+		return t -> t.y.getY() >= minY;
+	}
+
+	private static IGenerationCondition maxY(int maxY)
+	{
+		return t -> t.y.getY() <= maxY;
+	}
+
+	private static void register(EnumVariant variant, double weight, Supplier<IBlockState> block, IGenerationCondition... generationConditions)
+	{
+		registry.compute(variant, (v, l) -> {
+			if (l == null) l = new ArrayList<>();
+			l.add(t -> {
+				for (IGenerationCondition generationCondition : generationConditions) {
+					if (!generationCondition.test(t)) return Optional.empty();
+				}
+				return Optional.of(new WeightedRandom.Item<>(block, weight));
+			});
+			return l;
+		});
+	}
+
+	public static List<WeightedRandom.Item<Supplier<IBlockState>>> getList(World world, BlockPos pos, EnumVariant variant)
+	{
+		List<Function<Tuple<World, BlockPos>, Optional<WeightedRandom.Item<Supplier<IBlockState>>>>> list = registry.get(variant);
+		if (list == null) return new ArrayList<>();
+		List<WeightedRandom.Item<Supplier<IBlockState>>> list2 = ISuppliterator.ofIterable(list)
+			.mapIfPresent(f -> f.apply(Tuple.of(world, pos)))
+			.toList();
+		return list2;
+	}
+
+	public static Optional<IBlockState> get(World world, BlockPos pos, EnumVariant variant, Random random)
+	{
+		List<WeightedRandom.Item<Supplier<IBlockState>>> list2 = getList(world, pos, variant);
+		if (random.nextDouble() < Math.max(1 - WeightedRandom.getTotalWeight(list2), 0)) return Optional.empty();
+		return WeightedRandom.getRandomItem(
+			random,
+			list2).map(s -> s.get());
+	}
+
 	protected void update(World world, BlockPos pos, IBlockState state)
 	{
 		if (canMutate(world, pos)) {
 			Random random = new Random(pos.getX() * 15946848L + pos.getY() * 29135678L + pos.getZ() * 65726816L);
-			EnumVariant variant = getVariant(state);
-			IBlockState blockStateAfter;
-			if (variant == EnumVariant.LARGE) {
-				if (random.nextDouble() < 0.10) {
-					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.APATITE_ORE);
-				} else if (30 <= pos.getY() && random.nextDouble() < 0.08) {
-					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.SMITHSONITE_ORE);
-				} else {
-					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
-				}
-			} else if (variant == EnumVariant.PYRAMID) {
-				if (random.nextDouble() < 0.10) {
-					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.FLUORITE_ORE);
-				} else {
-					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
-				}
-			} else if (variant == EnumVariant.STAR) {
-				if (pos.getY() <= 15 && random.nextDouble() < 0.15) {
-					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.SULFUR_ORE);
-				} else {
-					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
-				}
-			} else if (variant == EnumVariant.POINT) {
-				if (pos.getY() <= 15 && random.nextDouble() < 0.15) {
-					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.CINNABAR_ORE);
-				} else if (pos.getY() <= 50 && random.nextDouble() < 0.05) {
-					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.PYROPE_ORE);
-				} else {
-					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
-				}
-			} else if (variant == EnumVariant.COAL) {
-				if (random.nextDouble() < 0.10) {
-					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.MAGNETITE_ORE);
-				} else {
-					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
-				}
-			} else if (variant == EnumVariant.TINY) {
-				if (40 <= pos.getY() && pos.getY() <= 50 && random.nextDouble() < 0.10) {
-					blockStateAfter = ModuleOre.blockOre1.getState(EnumVariantOre1.MOONSTONE_ORE);
-				} else {
-					blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
-				}
-			} else {
-				blockStateAfter = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);
-			}
-			//blockStateAfter = ((BlockColored) Blocks.WOOL).getStateFromMeta(getMetaFromState(state));
+			IBlockState blockStateAfter = get(
+				world,
+				pos,
+				getVariant(state),
+				random).orElseGet(() -> Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE));
 
 			Deque<BlockPos> poses = new ArrayDeque<>();
 			poses.addLast(pos);
