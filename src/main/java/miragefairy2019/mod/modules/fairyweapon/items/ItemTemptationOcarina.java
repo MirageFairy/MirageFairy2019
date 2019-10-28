@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
+import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.lib.component.Composite;
@@ -22,7 +23,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
@@ -49,7 +49,7 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 	{
 
 		public final double radius;
-		public final int maxEntities;
+		public final int maxTargets;
 		public final double wear;
 		public final double experienceCost;
 		public final double coolTime;
@@ -57,7 +57,7 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 		public Status(FairyType fairyType)
 		{
 			radius = UtilsMath.trim(5 + fairyType.manaSet.wind / 5.0, 5, 10);
-			maxEntities = UtilsMath.trim(1 + (int) (fairyType.manaSet.aqua / 7.0), 1, 8);
+			maxTargets = UtilsMath.trim(1 + (int) (fairyType.manaSet.aqua / 7.0), 1, 8);
 			wear = UtilsMath.trim(0.25 * Math.pow(0.5, fairyType.manaSet.fire / 50.0), 0.025, 0.25);
 			experienceCost = UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.gaia / 50.0 + fairyType.abilitySet.get(EnumAbilityType.food) / 10.0), 0.1, 1);
 			coolTime = fairyType.cost * UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.dark / 50.0), 0.1, 1);
@@ -96,7 +96,7 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 
 		Status status = new Status(fairyType);
 		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Wind)");
-		tooltip.add(TextFormatting.BLUE + "Max Entities: " + String.format("%d", status.maxEntities) + " (Aqua)");
+		tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargets) + " (Aqua)");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
 		tooltip.add(TextFormatting.BLUE + "Experience Cost: " + String.format("%.1f", status.experienceCost * 100) + "% (Gaia, " + EnumAbilityType.food.getLocalizedName() + ")");
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + String.format("%d", status.coolTime) + "t (Dark, Cost)");
@@ -107,17 +107,19 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 
 	private static enum EnumExecutability
 	{
-		OK(0xFFFFFF),
-		COOLTIME(0xFFFF00),
-		NO_TARGET(0x00FFFF),
-		NO_FAIRY(0xFF00FF),
-		NO_RESOURCE(0xFF0000),
+		OK(4, 0xFFFFFF),
+		COOLTIME(3, 0xFFFF00),
+		NO_TARGET(2, 0x00FFFF),
+		NO_RESOURCE(1, 0xFF0000),
+		NO_FAIRY(0, 0xFF00FF),
 		;
 
+		public final int health;
 		public final int color;
 
-		private EnumExecutability(int color)
+		private EnumExecutability(int health, int color)
 		{
+			this.health = health;
 			this.color = color;
 		}
 
@@ -145,7 +147,7 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 		public final Status status;
 		public final RayTraceResult rayTraceResult;
 		public final boolean isEntity;
-		public final List<EntityVillager> entities;
+		public final List<Tuple<EntityVillager, Boolean>> targets;
 
 		public ResultWithFairy(
 			EnumExecutability executability,
@@ -153,29 +155,13 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 			Status status,
 			RayTraceResult rayTraceResult,
 			boolean isEntity,
-			List<EntityVillager> entities)
+			List<Tuple<EntityVillager, Boolean>> targets)
 		{
 			super(executability, positionTarget);
 			this.status = status;
 			this.rayTraceResult = rayTraceResult;
 			this.isEntity = isEntity;
-			this.entities = entities;
-		}
-
-	}
-
-	private static class ResultOk extends ResultWithFairy
-	{
-
-		public ResultOk(
-			EnumExecutability executability,
-			Vec3d positionTarget,
-			Status status,
-			RayTraceResult rayTraceResult,
-			boolean isEntity,
-			List<EntityVillager> entities)
-		{
-			super(executability, positionTarget, status, rayTraceResult, isEntity, entities);
+			this.targets = targets;
 		}
 
 	}
@@ -203,51 +189,34 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 			? rayTraceResult.hitVec
 			: getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
 		boolean isEntity;
-		List<EntityVillager> entities;
+		List<Tuple<EntityVillager, Boolean>> entityTargets;
 		if (rayTraceResult != null && rayTraceResult.typeOfHit == Type.ENTITY) {
 			// エンティティ
 
 			isEntity = true;
-			entities = new ArrayList<>();
+			entityTargets = new ArrayList<>();
 			if (rayTraceResult.entityHit instanceof EntityVillager) {
-				entities.add((EntityVillager) rayTraceResult.entityHit);
+				entityTargets.add((EntityVillager) rayTraceResult.entityHit);
 			}
 
 		} else {
 			// 範囲
 
 			isEntity = false;
-			entities = getEntities(status, world, player, player.getPositionVector());
+			entityTargets = ItemCollectingMagicWand.getEntities(EntityVillager.class, world, player.getPositionVector(), status.radius);
 
 		}
 
 		// 実行可能性を計算
 		EnumExecutability executability = itemStack.getItemDamage() >= itemStack.getMaxDamage()
 			? EnumExecutability.NO_RESOURCE
-			: entities.isEmpty()
+			: entityTargets.isEmpty()
 				? EnumExecutability.NO_TARGET
 				: player.getCooldownTracker().hasCooldown(this)
 					? EnumExecutability.COOLTIME
 					: EnumExecutability.OK;
 
-		return executability == EnumExecutability.OK
-			? new ResultOk(executability, positionTarget, status, rayTraceResult, isEntity, entities)
-			: new ResultWithFairy(executability, positionTarget, status, rayTraceResult, isEntity, entities);
-	}
-
-	private List<EntityVillager> getEntities(Status status, World world, EntityPlayer player, Vec3d position)
-	{
-		return world.getEntitiesWithinAABB(EntityVillager.class, new AxisAlignedBB(
-			position.x - status.radius,
-			position.y - status.radius,
-			position.z - status.radius,
-			position.x + status.radius,
-			position.y + status.radius,
-			position.z + status.radius),
-			e -> {
-				if (e.getDistanceSq(position.x, position.y, position.z) > status.radius * status.radius) return false;
-				return true;
-			});
+		return new ResultWithFairy(executability, positionTarget, status, rayTraceResult, isEntity, entityTargets);
 	}
 
 	//
@@ -308,6 +277,57 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 		}
 
 		return new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
+	}
+
+	@Override
+	public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
+	{
+
+		// クライアントのみ
+		if (!ApiMain.side.isClient()) return;
+
+		// プレイヤー取得
+		if (!(entity instanceof EntityPlayer)) return;
+		EntityPlayer player = (EntityPlayer) entity;
+
+		// アイテム取得
+		if (!isSelected && player.getHeldItemOffhand() != itemStack) return;
+
+		//
+
+		// 判定
+		Result result = getExecutability(world, itemStack, player);
+
+		//
+
+		// 発動中心点にパーティクルを表示
+		spawnParticle(world, result.positionTarget, result.executability.color);
+
+		if (result instanceof ResultWithFairy && result.executability.health >= EnumExecutability.NO_TARGET.health) {
+			ResultWithFairy resultWithFairy = (ResultWithFairy) result;
+
+			// 発動範囲にパーティクルを表示
+			if (!resultWithFairy.isEntity) {
+				ItemCollectingMagicWand.spawnParticleSphericalRange(
+					world,
+					player.getPositionVector(),
+					resultWithFairy.status.radius);
+			}
+
+			// 対象にパーティクルを表示
+			ItemCollectingMagicWand.spawnParticleTargets(
+				world,
+				resultWithFairy.targets,
+				entityTarget -> {
+					if (entityTarget.getGrowingAge() < 0) return false;
+					if (entityTarget.getIsWillingToMate(false)) return false;
+					return true;
+				},
+				entityTarget -> entityTarget.getPositionVector(),
+				resultWithFairy.status.maxTargets);
+
+		}
+
 	}
 
 }
