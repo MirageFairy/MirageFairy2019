@@ -366,6 +366,17 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 
 	protected RayTraceResult rayTrace(World world, EntityPlayer player, boolean useLiquids, double additionalReach)
 	{
+		return rayTrace(world, player, useLiquids, additionalReach, Entity.class, e -> true);
+	}
+
+	protected <E extends Entity> RayTraceResult rayTrace(
+		World world,
+		EntityPlayer player,
+		boolean useLiquids,
+		double additionalReach,
+		Class<? extends E> classEntity,
+		Predicate<? super E> filterEntity)
+	{
 		float rotationPitch = player.rotationPitch;
 		float rotationYaw = player.rotationYaw;
 		double x = player.posX;
@@ -391,7 +402,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		RayTraceResult rayTraceResultEntity = null;
 		double squareDistanceEntity = 0;
 		{
-			List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(vec3d, vec3d1));
+			List<E> entities = world.getEntitiesWithinAABB(classEntity, new AxisAlignedBB(vec3d, vec3d1), filterEntity);
 
 			Tuple<Double, RayTraceResult> nTuple = ISuppliterator.ofIterable(entities)
 				.mapIfPresent(entity -> {
