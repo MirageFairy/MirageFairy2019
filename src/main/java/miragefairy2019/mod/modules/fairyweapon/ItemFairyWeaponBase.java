@@ -2,7 +2,8 @@ package miragefairy2019.mod.modules.fairyweapon;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
+
+import com.google.common.base.Predicate;
 
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.ComponentFairyAbilityType;
@@ -21,6 +22,7 @@ import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -378,7 +380,47 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		float f7 = f2 * f4;
 		double d3 = player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + additionalReach;
 		Vec3d vec3d1 = vec3d.addVector((double) f6 * d3, (double) f5 * d3, (double) f7 * d3);
-		return world.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
+
+		// ブロックのレイトレース
+		RayTraceResult rayTraceResultBlock = world.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
+		double squareDistanceBlock = rayTraceResultBlock != null
+			? vec3d.squareDistanceTo(rayTraceResultBlock.hitVec)
+			: 0;
+
+		// エンティティのレイトレース
+		RayTraceResult rayTraceResultEntity = null;
+		double squareDistanceEntity = 0;
+		{
+			List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(vec3d, vec3d1));
+
+			Tuple<Double, RayTraceResult> nTuple = ISuppliterator.ofIterable(entities)
+				.mapIfPresent(entity -> {
+					if (entity == player) return Optional.empty();
+					AxisAlignedBB aabb = entity.getEntityBoundingBox();
+					RayTraceResult rayTraceResult = aabb.calculateIntercept(vec3d, vec3d1);
+					if (rayTraceResult == null) return Optional.empty();
+					return Optional.of(Tuple.of(vec3d.squareDistanceTo(rayTraceResult.hitVec), new RayTraceResult(entity, rayTraceResult.hitVec)));
+				})
+				.min((a, b) -> a.x.compareTo(b.x)).orElse(null);
+			if (nTuple != null) {
+				rayTraceResultEntity = nTuple.y;
+				squareDistanceEntity = nTuple.x;
+			}
+		}
+
+		if (rayTraceResultBlock != null && rayTraceResultEntity != null) {
+			if (squareDistanceBlock < squareDistanceEntity) {
+				return rayTraceResultBlock;
+			} else {
+				return rayTraceResultEntity;
+			}
+		} else if (rayTraceResultBlock != null) {
+			return rayTraceResultBlock;
+		} else if (rayTraceResultEntity != null) {
+			return rayTraceResultEntity;
+		} else {
+			return null;
+		}
 	}
 
 	protected void spawnParticle(World world, Vec3d sight, int color)
