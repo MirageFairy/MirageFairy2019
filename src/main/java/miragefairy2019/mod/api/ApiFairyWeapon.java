@@ -13,5 +13,6 @@ public class ApiFairyWeapon
 	public static Item itemSummoningFairyWand;
 	public static Item itemCollectingMagicWand;
 	public static Item itemBreakingFairyWand;
+	public static Item itemTemptationOcarina;
 
 }

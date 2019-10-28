@@ -12,6 +12,7 @@ import miragefairy2019.mod.modules.fairyweapon.items.ItemLightMagicWand;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemMeltingFairyWand;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemMiragiumAxe;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemSummoningFairyWand;
+import miragefairy2019.mod.modules.fairyweapon.items.ItemTemptationOcarina;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -36,6 +37,7 @@ public class ModuleFairyWeapon
 	public static ItemSummoningFairyWand itemSummoningFairyWand;
 	public static ItemCollectingMagicWand itemCollectingMagicWand;
 	public static ItemBreakingFairyWand itemBreakingFairyWand;
+	public static ItemTemptationOcarina itemTemptationOcarina;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -135,6 +137,18 @@ public class ModuleFairyWeapon
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
 				ApiFairyWeapon.itemBreakingFairyWand = itemBreakingFairyWand = item;
+			}
+
+			// 魅惑のオカリナ
+			{
+				ItemTemptationOcarina item = new ItemTemptationOcarina();
+				item.setRegistryName(ModMirageFairy2019.MODID, "temptation_ocarina");
+				item.setUnlocalizedName("temptationOcarina");
+				item.setCreativeTab(ApiMain.creativeTab);
+				ForgeRegistries.ITEMS.register(item);
+				hookBakedModelWrapper(item);
+				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
+				ApiFairyWeapon.itemTemptationOcarina = itemTemptationOcarina = item;
 			}
 
 		});
