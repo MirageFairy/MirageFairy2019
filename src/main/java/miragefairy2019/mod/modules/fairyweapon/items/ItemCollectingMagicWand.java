@@ -320,7 +320,7 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 	{
 
 		// 角度アニメーション更新
-		rotateY += 4.9 / 180.0 * Math.PI;
+		rotateY += 7.4 / 180.0 * Math.PI;
 		if (rotateY > 2 * Math.PI) rotateY -= 2 * Math.PI;
 
 		for (int i = 0; i < 8; i++) {
