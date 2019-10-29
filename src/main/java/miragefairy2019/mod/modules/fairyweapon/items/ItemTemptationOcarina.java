@@ -71,7 +71,7 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 	{
 
 		// ポエム
-		tooltip.add("聞くだけで腹が膨れる音色とは");
+		tooltip.add("その音は人の腹を満たし、淫靡な気分にさせる");
 
 		super.addInformation(itemStack, world, tooltip, flag);
 
