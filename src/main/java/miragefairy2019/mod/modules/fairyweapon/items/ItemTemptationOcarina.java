@@ -182,7 +182,7 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 		Status status = new Status(fairy.y);
 
 		// 発動対象
-		RayTraceResult rayTraceResult = rayTrace(world, player, false, 0);
+		RayTraceResult rayTraceResult = rayTrace(world, player, false, 0, EntityVillager.class, e -> true);
 		Vec3d positionTarget = rayTraceResult != null
 			? rayTraceResult.hitVec
 			: getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
