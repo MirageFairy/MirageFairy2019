@@ -206,7 +206,7 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 			.toList();
 
 		// 実行可能性を計算
-		EnumExecutability executability = itemStack.getItemDamage() >= itemStack.getMaxDamage()
+		EnumExecutability executability = itemStack.getItemDamage() >= itemStack.getMaxDamage() || (!player.isCreative() && player.experienceLevel < 30)
 			? EnumExecutability.NO_RESOURCE
 			: !targets.stream().anyMatch(t -> t.y)
 				? EnumExecutability.NO_TARGET
