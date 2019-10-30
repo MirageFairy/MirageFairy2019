@@ -17,9 +17,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -116,6 +118,16 @@ public class ItemFairyCrystal extends Item
 					IBlockState blockState = world.getBlockState(pos.add(xi, yi, zi));
 					blockStates.add(blockState);
 					blocks.add(blockState.getBlock());
+					TileEntity tileEntity = world.getTileEntity(pos.add(xi, yi, zi));
+					if (tileEntity instanceof IInventory) {
+						for (int i = 0; i < ((IInventory) tileEntity).getSizeInventory(); i++) {
+							ItemStack itemStack = ((IInventory) tileEntity).getStackInSlot(i);
+							itemStacks.add(itemStack);
+							items.add(itemStack.getItem());
+							Block block = Block.getBlockFromItem(itemStack.getItem());
+							if (block != Blocks.AIR) blocks.add(block);
+						}
+					}
 				}
 			}
 		}
