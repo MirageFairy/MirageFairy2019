@@ -86,7 +86,9 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.fixed(d(air[0], 1)));
 
 			d.add(RightClickDrops.blocks(d(water[0], 0.3), Blocks.WATER, Blocks.FLOWING_WATER));
+			d.add(RightClickDrops.items(d(water[0], 0.3), Items.WATER_BUCKET));
 			d.add(RightClickDrops.blocks(d(lava[0], 0.1), Blocks.LAVA, Blocks.FLOWING_LAVA));
+			d.add(RightClickDrops.items(d(lava[0], 0.3), Items.LAVA_BUCKET));
 			d.add(RightClickDrops.blocks(d(fire[0], 0.1), Blocks.FIRE));
 
 			d.add(RightClickDrops.world(d(thunder[0], 0.01), (w, p) -> w.provider.isSurfaceWorld() && w.canSeeSky(p) && w.isRainingAt(p) && w.isThundering()));
@@ -98,8 +100,8 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.blocks(d(dirt[0], 0.3), Blocks.DIRT, Blocks.GRASS));
 			d.add(RightClickDrops.blocks(d(sand[0], 0.3), Blocks.SAND, Blocks.SANDSTONE, Blocks.RED_SANDSTONE));
 			d.add(RightClickDrops.blocks(d(gravel[0], 0.1), Blocks.GRAVEL));
-			d.add(RightClickDrops.ores(d(iron[0], 0.1), "ingotIron", "blockIron"));
-			d.add(RightClickDrops.ores(d(gold[0], 0.03), "ingotGold", "blockGold"));
+			d.add(RightClickDrops.ores(d(iron[0], 0.1), "ingotIron", "blockIron", "nuggetIron"));
+			d.add(RightClickDrops.ores(d(gold[0], 0.03), "ingotGold", "blockGold", "nuggetGold"));
 			d.add(RightClickDrops.ores(d(diamond[0], 0.01), "gemDiamond", "blockDiamond"));
 			d.add(RightClickDrops.ores(d(emerald[0], 0.03), "gemEmerald", "blockEmerald"));
 			d.add(RightClickDrops.ores(d(redstone[0], 0.1), "dustRedstone", "blockRedstone"));
@@ -121,7 +123,7 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.ingredients(d(pufferfish[0], 0.03), Ingredient.fromStacks(new ItemStack(Items.FISH, 1, 3))));
 			d.add(RightClickDrops.ingredients(d(clownfish[0], 0.03), Ingredient.fromStacks(new ItemStack(Items.FISH, 1, 2))));
 
-			d.add(RightClickDrops.blocks(d(wheat[0], 0.1), Blocks.WHEAT));
+			d.add(RightClickDrops.blocks(d(wheat[0], 0.1), Blocks.WHEAT, Blocks.HAY_BLOCK));
 			d.add(RightClickDrops.blockStates(d(lilac[0], 0.03), Blocks.DOUBLE_PLANT.getDefaultState().withProperty(BlockDoublePlant.VARIANT, EnumPlantType.SYRINGA)));
 			d.add(RightClickDrops.items(d(apple[0], 0.1), Items.APPLE, Items.GOLDEN_APPLE));
 			d.add(RightClickDrops.items(d(carrot[0], 0.03), Items.CARROT, Items.CARROT_ON_A_STICK, Items.GOLDEN_CARROT));
