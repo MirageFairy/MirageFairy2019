@@ -137,6 +137,16 @@ public class RightClickDrops
 				}
 				return false;
 			}
+
+			@SuppressWarnings("deprecation")
+			@Override
+			public boolean testBlockState(World world, BlockPos blockPos, IBlockState blockState)
+			{
+				for (Predicate<ItemStack> ingredient : ingredients) {
+					if (ingredient.test(blockState.getBlock().getItem(world, blockPos, blockState))) return true;
+				}
+				return false;
+			}
 		};
 	}
 
