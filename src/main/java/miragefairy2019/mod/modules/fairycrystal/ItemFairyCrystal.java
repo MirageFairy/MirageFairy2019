@@ -122,10 +122,12 @@ public class ItemFairyCrystal extends Item
 					if (tileEntity instanceof IInventory) {
 						for (int i = 0; i < ((IInventory) tileEntity).getSizeInventory(); i++) {
 							ItemStack itemStack = ((IInventory) tileEntity).getStackInSlot(i);
-							itemStacks.add(itemStack);
-							items.add(itemStack.getItem());
-							Block block = Block.getBlockFromItem(itemStack.getItem());
-							if (block != Blocks.AIR) blocks.add(block);
+							if (!itemStack.isEmpty()) {
+								itemStacks.add(itemStack);
+								items.add(itemStack.getItem());
+								Block block = Block.getBlockFromItem(itemStack.getItem());
+								if (block != Blocks.AIR) blocks.add(block);
+							}
 						}
 					}
 				}
@@ -134,22 +136,28 @@ public class ItemFairyCrystal extends Item
 
 		// インベントリ
 		for (ItemStack itemStack : player.inventory.mainInventory) {
-			itemStacks.add(itemStack);
-			items.add(itemStack.getItem());
-			Block block = Block.getBlockFromItem(itemStack.getItem());
-			if (block != Blocks.AIR) blocks.add(block);
+			if (!itemStack.isEmpty()) {
+				itemStacks.add(itemStack);
+				items.add(itemStack.getItem());
+				Block block = Block.getBlockFromItem(itemStack.getItem());
+				if (block != Blocks.AIR) blocks.add(block);
+			}
 		}
 		for (ItemStack itemStack : player.inventory.armorInventory) {
-			itemStacks.add(itemStack);
-			items.add(itemStack.getItem());
-			Block block = Block.getBlockFromItem(itemStack.getItem());
-			if (block != Blocks.AIR) blocks.add(block);
+			if (!itemStack.isEmpty()) {
+				itemStacks.add(itemStack);
+				items.add(itemStack.getItem());
+				Block block = Block.getBlockFromItem(itemStack.getItem());
+				if (block != Blocks.AIR) blocks.add(block);
+			}
 		}
 		for (ItemStack itemStack : player.inventory.offHandInventory) {
-			itemStacks.add(itemStack);
-			items.add(itemStack.getItem());
-			Block block = Block.getBlockFromItem(itemStack.getItem());
-			if (block != Blocks.AIR) blocks.add(block);
+			if (!itemStack.isEmpty()) {
+				itemStacks.add(itemStack);
+				items.add(itemStack.getItem());
+				Block block = Block.getBlockFromItem(itemStack.getItem());
+				if (block != Blocks.AIR) blocks.add(block);
+			}
 		}
 
 		// バイオーム
