@@ -87,7 +87,7 @@ public class RightClickDrops
 			}
 
 			@Override
-			public boolean testBlockState(IBlockState blockState)
+			public boolean testBlockState(World world, BlockPos blockPos, IBlockState blockState)
 			{
 				for (IBlockState blockState2 : blockStates) {
 					if (blockState.equals(blockState2)) return true;

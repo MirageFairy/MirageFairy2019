@@ -33,7 +33,7 @@ public interface IRightClickDrop
 		return false;
 	}
 
-	public default boolean testBlockState(IBlockState blockState)
+	public default boolean testBlockState(World world, BlockPos blockPos, IBlockState blockState)
 	{
 		return false;
 	}

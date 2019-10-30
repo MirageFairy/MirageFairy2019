@@ -172,7 +172,7 @@ public class ItemFairyCrystal extends Item
 					if (d.testBlock(block)) return drop;
 				}
 				for (IBlockState blockState : blockStates) {
-					if (d.testBlockState(blockState)) return drop;
+					if (d.testBlockState(world, pos, blockState)) return drop;
 				}
 				for (Item item : items) {
 					if (d.testItem(item)) return drop;
