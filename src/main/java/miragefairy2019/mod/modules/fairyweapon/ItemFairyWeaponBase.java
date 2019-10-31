@@ -170,7 +170,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		addInformationFunctions(itemStack, world, tooltip, flag);
 
 		// アイテムステータス
-		tooltip.add(TextFormatting.GREEN + "Durability: " + (getMaxDamage(itemStack) - getDamage(itemStack)) + " / " + getMaxDamage(itemStack));
+		tooltip.add(TextFormatting.GREEN + "Durability: " + Math.max(getMaxDamage(itemStack) - getDamage(itemStack), 0) + " / " + getMaxDamage(itemStack));
 
 		// 搭乗中の妖精
 		ItemStack itemStackFairy = getCombinedFairy(itemStack);
