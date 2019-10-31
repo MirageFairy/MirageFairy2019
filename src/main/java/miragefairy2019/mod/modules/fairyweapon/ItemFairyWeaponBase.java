@@ -221,22 +221,6 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 
 	//
 
-	@Override
-	public boolean canRepair(ItemStack itemStack)
-	{
-		return true;
-	}
-
-	@Override
-	public ItemStack getRepairedItem(ItemStack itemStack)
-	{
-		itemStack = itemStack.copy();
-		itemStack.setItemDamage(0);
-		return itemStack;
-	}
-
-	//
-
 	protected void damageItem(ItemStack itemStack, EntityLivingBase entityLivingBase)
 	{
 		ItemStack itemStackFairy = getCombinedFairy(itemStack);
@@ -475,6 +459,12 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	//
 
 	@Override
+	public boolean canRepair(ItemStack itemStack)
+	{
+		return true;
+	}
+
+	@Override
 	public NonNullList<Ingredient> getRepairmentSpheres(ItemStack itemStack)
 	{
 		return getComposite(itemStack).components.suppliterator()
@@ -488,6 +478,14 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 					.map(i -> new OreIngredient(e.x.getOreName()));
 			})
 			.toCollection(NonNullList::create);
+	}
+
+	@Override
+	public ItemStack getRepairedItem(ItemStack itemStack)
+	{
+		itemStack = itemStack.copy();
+		itemStack.setItemDamage(0);
+		return itemStack;
 	}
 
 	//
