@@ -11,6 +11,7 @@ import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.fairyweapon.ItemFairyWeaponBase;
 import mirrg.boron.util.struct.Tuple;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -377,22 +378,24 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 
 	public static <T> void spawnParticleTargets(World world, Iterable<? extends T> targets, Predicate<? super T> filter, Function<? super T, ? extends Vec3d> fPosition, int maxCount)
 	{
-		for (T target : targets) {
+		List<? extends T> listTargets = ISuppliterator.ofIterable(targets)
+			.toList();
+		double rate = 5 / (double) Math.max(listTargets.size(), 5);
+		for (T target : listTargets) {
 
 			int color;
-
 			if (filter.test(target)) {
 				if (maxCount > 0) {
 					maxCount--;
-					color = 0x00FF00;
+					color = 0xFFFFFF;
 				} else {
-					color = 0xFFFF00;
+					color = 0x00FFFF;
 				}
 			} else {
 				color = 0xFF0000;
 			}
 
-			if (Math.random() < 0.2) {
+			if (Math.random() < 0.2 * rate) {
 				Vec3d position = fPosition.apply(target);
 				world.spawnParticle(
 					EnumParticleTypes.SPELL_MOB,
