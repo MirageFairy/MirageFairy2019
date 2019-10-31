@@ -298,7 +298,7 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 			world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
 			// クールタイム
-			player.getCooldownTracker().setCooldown(this, (int) (resultWithFairy.status.coolTime * (1 - targetCount / (double) resultWithFairy.status.maxTargetCount)));
+			player.getCooldownTracker().setCooldown(this, (int) (resultWithFairy.status.coolTime * (targetCount / (double) resultWithFairy.status.maxTargetCount)));
 
 		}
 
