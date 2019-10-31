@@ -7,6 +7,7 @@ import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.fairyweapon.ItemFairyWeaponBase;
 import mirrg.boron.util.UtilsMath;
@@ -58,7 +59,7 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 		{
 			radius = UtilsMath.trim(5 + fairyType.manaSet.wind / 5.0, 5, 10);
 			maxTargetCount = UtilsMath.trim(1 + (int) (fairyType.manaSet.aqua / 7.0), 1, 8);
-			wear = UtilsMath.trim(1 * Math.pow(0.5, fairyType.manaSet.fire / 50.0), 0.1, 1);
+			wear = UtilsMath.trim(4 * Math.pow(0.5, fairyType.manaSet.fire / 50.0), 0.4, 4);
 			experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.manaSet.gaia / 50.0 + fairyType.abilitySet.get(EnumAbilityType.food) / 10.0), 0.1, 1);
 			coolTime = fairyType.cost * UtilsMath.trim(1 * Math.pow(0.5, fairyType.manaSet.dark / 50.0), 0.1, 1);
 		}
@@ -259,8 +260,12 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 				if (!player.isCreative()) if (player.experienceLevel < 30) break;
 
 				// 行使
-				for (int i = 0; i < 4; i++) {
-					if (world.rand.nextDouble() < resultWithFairy.status.wear) itemStack.damageItem(1, player);
+				{
+					int damage = Utils.randomInt(world.rand, resultWithFairy.status.wear);
+					System.out.println(damage);
+					for (int i = 0; i < damage; i++) {
+						itemStack.damageItem(1, player);
+					}
 				}
 				targetCount++;
 				if (!player.isCreative()) if (world.rand.nextDouble() < resultWithFairy.status.experienceCost) {
