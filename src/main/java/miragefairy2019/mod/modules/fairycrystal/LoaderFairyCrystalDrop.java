@@ -46,8 +46,6 @@ public class LoaderFairyCrystalDrop
 		// コモン
 		{
 			d.add(RightClickDrops.world(r(water[0]), (w, p) -> w.provider.isSurfaceWorld()));
-			d.add(RightClickDrops.world(r(lava[0]), (w, p) -> w.provider.isNether()));
-			d.add(RightClickDrops.world(r(fire[0]), (w, p) -> w.provider.isNether()));
 
 			d.add(RightClickDrops.world(r(stone[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(dirt[0]), (w, p) -> w.provider.isSurfaceWorld()));
@@ -79,6 +77,10 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.world(r(cactus[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(spruce[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(seed[0]), (w, p) -> w.provider.isSurfaceWorld()));
+		}
+		{
+			d.add(RightClickDrops.biomeTypes(r(lava[0]), BiomeDictionary.Type.NETHER));
+			d.add(RightClickDrops.biomeTypes(r(fire[0]), BiomeDictionary.Type.NETHER));
 		}
 
 		// 限定高確率ドロップ
