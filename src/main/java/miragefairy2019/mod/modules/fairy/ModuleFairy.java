@@ -113,6 +113,16 @@ public class ModuleFairy
 		public static VariantFairy[] obsidian;
 		public static VariantFairy[] seed;
 		public static VariantFairy[] enchant;
+		public static VariantFairy[] glowstone;
+		public static VariantFairy[] coal;
+		public static VariantFairy[] villager;
+		public static VariantFairy[] librarian;
+		public static VariantFairy[] netherstar;
+		public static VariantFairy[] brewingstand;
+		public static VariantFairy[] hoe;
+		public static VariantFairy[] shield;
+		public static VariantFairy[] hopper;
+		public static VariantFairy[] mina;
 
 		//
 
@@ -182,6 +192,16 @@ public class ModuleFairy
 				r(57, obsidian = v(t(57, "obsidian", 3, 78, m(1, 2, 3, 10, 0, 0), a(3, 0, 0, 0, 0, 0, 10, 7, 0, 0, 0, 10, 0, 4, 0, 0, 0), c(0x775599, 0x6029B3, 0x2E095E, 0x0F0033))));
 				r(58, seed = v(t(58, "seed", 1, 17, m(0, 0, 0, 0, 10, 3), a(0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 5, 0, 2), c(0x03B50A, 0x03FF14, 0x037B0A, 0xAAAE36))));
 				r(59, enchant = v(t(59, "enchant", 3, 13, m(2, 0, 10, 0, 2, 0), a(0, 6, 0, 5, 0, 0, 0, 7, 0, 0, 1, 0, 0, 0, 0, 12, 2), c(0xD0C2FF, 0xF055FF, 0xC381E3, 0xBE00FF))));
+				r(60, glowstone = v(t(60, "glowstone", 3, 39, m(2, 0, 7, 10, 0, 0), a(0, 0, 0, 14, 0, 0, 7, 9, 0, 0, 0, 0, 2, 0, 0, 0, 4), c(0xFFFFB8, 0xFFD15E, 0xFFD244, 0xFFFF00))));
+				r(61, coal = v(t(61, "coal", 1, 61, m(0, 9, 0, 10, 0, 7), a(0, 0, 0, 0, 3, 0, 6, 2, 0, 0, 0, 0, 3, 0, 0, 2, 10), c(0x4C2510, 0x52504C, 0x39352E, 0x150B00))));
+				r(62, villager = v(t(62, "villager", 3, 50, m(1, 5, 5, 10, 10, 15), a(4, 8, 5, 0, 0, 2, 0, 6, 4, 0, 2, 5, 3, 4, 2, 7, 3), c(0xB58D63, 0x608C57, 0x608C57, 0x009800))));
+				r(63, librarian = v(t(63, "librarian", 4, 42, m(3, 15, 15, 1, 10, 1), a(2, 4, 3, 0, 0, 2, 0, 8, 4, 0, 1, 2, 6, 2, 2, 15, 3), c(0xB58D63, 0xEBEBEB, 0xEBEBEB, 0x009800))));
+				r(64, netherstar = v(t(64, "netherstar", 5, 41, m(2, 8, 10, 0, 0, 0), a(0, 0, 0, 5, 0, 0, 15, 9, 0, 0, 0, 0, 0, 0, 0, 10, 9), c(0xD8D8FF, 0xF2E3FF, 0xD9E7FF, 0xFFFF68))));
+				r(65, brewingstand = v(t(65, "brewingstand", 3, 26, m(1, 10, 5, 7, 2, 0), a(0, 10, 0, 4, 9, 4, 0, 2, 4, 0, 0, 4, 15, 0, 1, 11, 4), c(0xFFFFFF, 0xAE5B5B, 0x7E7E7E, 0xFFDF55))));
+				r(66, hoe = v(t(66, "hoe", 2, 74, m(0, 0, 0, 10, 8, 6), a(5, 3, 1, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 8, 0, 2, 0), c(0xFFFFFF, 0xFFC48E, 0x47FF00, 0xFFFFFF))));
+				r(67, shield = v(t(67, "shield", 2, 81, m(0.1, 0, 0, 10, 4, 2), a(1, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 0), c(0xFFFFFF, 0xFFC48E, 0x5A5A8E, 0xFFFFFF))));
+				r(68, hopper = v(t(68, "hopper", 3, 63, m(0, 3, 0, 10, 0, 2), a(0, 1, 0, 0, 0, 0, 0, 1, 9, 1, 0, 0, 0, 0, 0, 3, 1), c(0xFFFFFF, 0x797979, 0x646464, 0x5A5A5A))));
+				r(69, mina = v(t(69, "mina", 1, 50, m(0, 0, 0, 0, 0, 10), a(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0), c(0xFFFF84, 0xFFFF00, 0xFFFF00, 0xFFC800))));
 			}
 
 			variants = ImmutableArray.ofList(variants2);
