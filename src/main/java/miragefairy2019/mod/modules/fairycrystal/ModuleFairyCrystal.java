@@ -1,10 +1,15 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
+
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.OreIngredientComplex;
+import mirrg.boron.util.struct.Tuple3;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -54,25 +59,37 @@ public class ModuleFairyCrystal
 		erMod.addRecipe.register(() -> {
 
 			// 妖精の確定レシピ
-			LoaderFairyCrystalDrop.loadFairyRecipe(t -> {
-				Ingredient in = t.x;
-				ItemStack out = t.y;
-				String name = t.z;
+			LoaderFairyCrystalDrop.loadFairyRecipe(new Consumer<Tuple3<Ingredient, ItemStack, String>>() {
+				@Override
+				public void accept(Tuple3<Ingredient, ItemStack, String> t)
+				{
+					Ingredient in = t.x;
+					ItemStack out = t.y;
+					String name = t.z;
 
-				GameRegistry.findRegistry(IRecipe.class).register(new ShapelessOreRecipe(
-					new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_" + name),
-					out,
-					new OreIngredientComplex("mirageFairy2019CraftingToolFairyWandSummoning"),
-					new OreIngredient("mirageFairyCrystal"),
-					in).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_" + name + "_from_fairy_wand_summoning"));
+					GameRegistry.findRegistry(IRecipe.class).register(new ShapelessOreRecipe(
+						new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_" + name),
+						out,
+						new OreIngredientComplex("mirageFairy2019CraftingToolFairyWandSummoning"),
+						new OreIngredient("mirageFairyCrystal"),
+						in).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_" + name + "_from_fairy_wand_summoning" + suffix(name)));
 
-				GameRegistry.findRegistry(IRecipe.class).register(new ShapelessOreRecipe(
-					new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_" + name),
-					out,
-					new OreIngredient("gemDiamond"),
-					new OreIngredient("mirageFairyCrystal"),
-					in).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_" + name + "_from_diamond_gem"));
+					GameRegistry.findRegistry(IRecipe.class).register(new ShapelessOreRecipe(
+						new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_" + name),
+						out,
+						new OreIngredient("gemDiamond"),
+						new OreIngredient("mirageFairyCrystal"),
+						in).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_" + name + "_from_diamond_gem" + suffix(name)));
 
+				}
+
+				private Map<String, Integer> counter = new HashMap<>();
+
+				private String suffix(String name)
+				{
+					int i = counter.compute(name, (k, v) -> v != null ? v + 1 : 1);
+					return i > 1 ? "_" + i : "";
+				}
 			});
 
 		});
