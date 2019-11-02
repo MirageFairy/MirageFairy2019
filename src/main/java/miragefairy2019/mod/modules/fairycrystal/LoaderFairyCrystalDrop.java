@@ -82,6 +82,10 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.biomeTypes(r(lava[0]), BiomeDictionary.Type.NETHER));
 			d.add(RightClickDrops.biomeTypes(r(fire[0]), BiomeDictionary.Type.NETHER));
 		}
+		{
+			d.add(RightClickDrops.biomeTypes(r(enderman[0]), BiomeDictionary.Type.END));
+			d.add(RightClickDrops.biomeTypes(r(enderdragon[0]), BiomeDictionary.Type.END));
+		}
 
 		// 限定高確率ドロップ
 		{
