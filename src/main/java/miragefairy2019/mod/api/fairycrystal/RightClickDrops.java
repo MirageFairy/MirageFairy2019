@@ -232,4 +232,24 @@ public class RightClickDrops
 		};
 	}
 
+	public static <E extends Entity> IRightClickDrop entity(IDrop drop, Class<? extends E> classEntity, Predicate<? super E> predicate)
+	{
+		return new IRightClickDrop() {
+			@Override
+			public IDrop getDrop()
+			{
+				return drop;
+			}
+
+			@Override
+			public boolean testEntity(Entity entity)
+			{
+				if (classEntity.isInstance(entity)) {
+					return predicate.test(classEntity.cast(entity));
+				}
+				return false;
+			}
+		};
+	}
+
 }
