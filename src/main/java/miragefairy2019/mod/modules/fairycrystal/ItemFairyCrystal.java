@@ -10,6 +10,7 @@ import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.fairycrystal.IDrop;
 import miragefairy2019.mod.lib.WeightedRandom;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
+import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -105,7 +106,7 @@ public class ItemFairyCrystal extends Item
 		BlockPos pos2 = world.getBlockState(pos).isFullBlock() ? pos.offset(facing) : pos;
 
 		Set<Block> blocks = new HashSet<>();
-		Set<IBlockState> blockStates = new HashSet<>();
+		Set<Tuple<IBlockState, BlockPos>> blockStates = new HashSet<>();
 		Set<Item> items = new HashSet<>();
 		Set<ItemStack> itemStacks = new HashSet<>();
 		Set<Biome> biomes = new HashSet<>();
@@ -115,10 +116,11 @@ public class ItemFairyCrystal extends Item
 		for (int xi = -2; xi <= 2; xi++) {
 			for (int yi = -2; yi <= 2; yi++) {
 				for (int zi = -2; zi <= 2; zi++) {
-					IBlockState blockState = world.getBlockState(pos.add(xi, yi, zi));
-					blockStates.add(blockState);
+					BlockPos pos3 = pos.add(xi, yi, zi);
+					IBlockState blockState = world.getBlockState(pos3);
+					blockStates.add(Tuple.of(blockState, pos3));
 					blocks.add(blockState.getBlock());
-					TileEntity tileEntity = world.getTileEntity(pos.add(xi, yi, zi));
+					TileEntity tileEntity = world.getTileEntity(pos3);
 					if (tileEntity instanceof IInventory) {
 						for (int i = 0; i < ((IInventory) tileEntity).getSizeInventory(); i++) {
 							ItemStack itemStack = ((IInventory) tileEntity).getStackInSlot(i);
@@ -191,8 +193,8 @@ public class ItemFairyCrystal extends Item
 				for (Block block : blocks) {
 					if (d.testBlock(block)) return drop;
 				}
-				for (IBlockState blockState : blockStates) {
-					if (d.testBlockState(world, pos, blockState)) return drop;
+				for (Tuple<IBlockState, BlockPos> blockState : blockStates) {
+					if (d.testBlockState(world, blockState.y, blockState.x)) return drop;
 				}
 				for (Item item : items) {
 					if (d.testItem(item)) return drop;
