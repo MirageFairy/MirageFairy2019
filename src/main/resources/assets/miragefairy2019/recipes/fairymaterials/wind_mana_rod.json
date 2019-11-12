@@ -2,9 +2,9 @@
 	"type": "forge:ore_shaped",
 	"group": "wind_mana_rod",
 	"pattern": [
-		"cGI",
-		"GIG",
-		"IGm"
+		"cG ",
+		"GRG",
+		" Gm"
 	],
 	"key": {
 		"c": {
@@ -15,9 +15,9 @@
 			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
 		},
-		"I": {
+		"R": {
 			"type": "forge:ore_dict",
-			"ore": "ingotMiragium"
+			"ore": "rodMiragium"
 		},
 		"G": {
 			"type": "forge:ore_dict",
