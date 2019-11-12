@@ -1,0 +1,19 @@
+{
+    "type": "forge:ore_shaped",
+    "group": "miragium_ingot",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "type": "forge:ore_dict",
+            "ore": "nuggetMiragium"
+        }
+    },
+    "result": {
+        "item": "miragefairy2019:materials",
+        "data": 5
+    }
+}
