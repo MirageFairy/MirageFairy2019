@@ -66,6 +66,7 @@ item.gemPyrope.name=パイロープ
 tile.oreSmithsonite.name=スミソナイト鉱石
 tile.blockSmithsonite.name=スミソナイトブロック
 item.gemSmithsonite.name=スミソナイト
+item.rodMiragium.name=ミラジウムの棒
 
 item.spheres.name=スフィア
 item.spheres.format=≪%s≫のスフィア
