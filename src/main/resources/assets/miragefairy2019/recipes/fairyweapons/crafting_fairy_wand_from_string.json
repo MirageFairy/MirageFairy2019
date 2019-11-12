@@ -8,8 +8,7 @@
 	],
 	"key": {
 		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+			"item": "minecraft:string"
 		},
 		"R": {
 			"type": "forge:ore_dict",
