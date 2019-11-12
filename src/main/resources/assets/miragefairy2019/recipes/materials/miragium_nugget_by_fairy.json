@@ -10,16 +10,10 @@
 			"type": "forge:ore_dict",
 			"ore": "dustMiragium"
 		},
-		[
-			{
-				"type": "forge:ore_dict",
-				"ore": "gemSmithsonite"
-			},
-			{
-				"type": "forge:ore_dict",
-				"ore": "gemSulfur"
-			}
-		],
+		{
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyCrystal"
+		},
 		{
 			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019FairyAbilityFlame"
