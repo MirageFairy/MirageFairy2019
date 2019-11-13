@@ -67,6 +67,7 @@ tile.oreSmithsonite.name=Smithsonite Ore
 tile.blockSmithsonite.name=Smithsonite Block
 item.gemSmithsonite.name=Smithsonite
 item.rodMiragium.name=Miragium Rod
+item.nuggetMiragium.name=Miragium Nugget
 
 item.spheres.name=Sphere
 item.spheres.format=Sphere of "%s"
