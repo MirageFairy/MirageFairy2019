@@ -1,0 +1,26 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "crafting_fairy_wand_3",
+	"pattern": [
+		" cS",
+		" R ",
+		"R  "
+	],
+	"key": {
+		"c": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
+		"R": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019ManaRodDark"
+		},
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019SphereCraft"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:crafting_fairy_wand_3"
+	}
+}
