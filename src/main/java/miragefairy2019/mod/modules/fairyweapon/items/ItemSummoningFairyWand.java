@@ -31,9 +31,10 @@ public class ItemSummoningFairyWand extends ItemFairyCraftingToolBase
 	public ItemSummoningFairyWand()
 	{
 		super(Composite.empty()
-			.add(Components.WOOD, 2)
+			.add(Components.MIRAGIUM, 1)
+			.add(Components.MOONSTONE, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.crystal), 1));
-		this.setMaxDamage(16 - 1);
+		this.setMaxDamage(64 - 1);
 	}
 
 	@Override

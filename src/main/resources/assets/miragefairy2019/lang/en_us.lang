@@ -27,13 +27,17 @@ item.mirageFairyR7.format=%s VII
 item.fairyCrystal.name=Fairy Crystal
 
 item.craftingFairyWand.name=Fairy Wand of Crafting
+item.craftingFairyWand2.name=Fairy Wand of Crafting II
+item.craftingFairyWand3.name=Fairy Wand of Crafting III
 item.meltingFairyWand.name=Fairy Wand of Melting
+item.meltingFairyWand2.name=Fairy Wand of Melting II
 item.fairySword.name=Fairy Sword
 item.miragiumAxe.name=Miragium Axe
 item.lightMagicWand.name=Magic Wand of Light
 item.summoningFairyWand.name=Fairy Wand of Summoning
 item.collectingMagicWand.name=Magic Wand of Collecting
 item.breakingFairyWand.name=Fairy Wand of Breaking
+item.breakingFairyWand2.name=Fairy Wand of Breaking II
 item.temptationOcarina.name=Ocarina of Temptation
 
 item.fertilizer.name=Fertilizer

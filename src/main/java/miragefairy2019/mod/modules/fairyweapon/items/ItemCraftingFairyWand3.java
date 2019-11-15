@@ -23,15 +23,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemCraftingFairyWand extends ItemFairyCraftingToolBase
+public class ItemCraftingFairyWand3 extends ItemFairyCraftingToolBase
 {
 
-	public ItemCraftingFairyWand()
+	public ItemCraftingFairyWand3()
 	{
 		super(Composite.empty()
-			.add(Components.WOOD, 1)
+			.add(Components.MIRAGIUM, 1)
+			.add(Components.MAGNETITE, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.craft), 1));
-		this.setMaxDamage(16 - 1);
+		this.setMaxDamage(64 - 1);
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class ItemCraftingFairyWand extends ItemFairyCraftingToolBase
 	{
 
 		// ポエム
-		tooltip.add("靴を作ってくれる妖精さん");
+		tooltip.add("スフィアから聞こえる、妖精の声");
 
 		super.addInformation(itemStack, world, tooltip, flag);
 

@@ -12,15 +12,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBreakingFairyWand extends ItemFairyCraftingToolBase
+public class ItemBreakingFairyWand2 extends ItemFairyCraftingToolBase
 {
 
-	public ItemBreakingFairyWand()
+	public ItemBreakingFairyWand2()
 	{
 		super(Composite.empty()
 			.add(Components.MIRAGIUM, 1)
+			.add(Components.SULFUR, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.breaking), 1));
-		this.setMaxDamage(32 - 1);
+		this.setMaxDamage(64 - 1);
 	}
 
 	@Override
@@ -29,7 +30,7 @@ public class ItemBreakingFairyWand extends ItemFairyCraftingToolBase
 	{
 
 		// ポエム
-		tooltip.add("振ると衝撃波が迸る");
+		tooltip.add("実はガラスより脆い");
 
 		super.addInformation(itemStack, world, tooltip, flag);
 

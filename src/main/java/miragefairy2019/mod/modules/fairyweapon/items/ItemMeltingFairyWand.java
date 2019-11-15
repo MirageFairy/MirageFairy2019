@@ -18,9 +18,9 @@ public class ItemMeltingFairyWand extends ItemFairyCraftingToolBase
 	public ItemMeltingFairyWand()
 	{
 		super(Composite.empty()
-			.add(Components.WOOD, 2)
+			.add(Components.MIRAGIUM, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.flame), 1));
-		this.setMaxDamage(16 - 1);
+		this.setMaxDamage(32 - 1);
 	}
 
 	@Override
