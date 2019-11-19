@@ -1,13 +1,23 @@
 package miragefairy2019.mod.modules.fairyweapon.items;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
+import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.fairyweapon.ItemFairyCraftingToolBase;
+import miragefairy2019.mod.modules.ore.ModuleOre;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -33,6 +43,39 @@ public class ItemBreakingFairyWand extends ItemFairyCraftingToolBase
 
 		super.addInformation(itemStack, world, tooltip, flag);
 
+	}
+
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+
+		if (ApiMain.side.isClient()) {
+			if (player.isSneaking()) {
+
+				Map<IBlockState, Integer> map = new HashMap<>();
+				int x = Math.floorDiv(pos.getX(), 16);
+				int z = Math.floorDiv(pos.getZ(), 16);
+
+				for (int xi = 0; xi < 16; xi++) {
+					for (int zi = 0; zi < 16; zi++) {
+						for (int yi = 0; yi < 256; yi++) {
+							IBlockState blockState = world.getBlockState(new BlockPos(x + xi, yi, z + zi));
+							if (blockState.getBlock().equals(ModuleOre.blockOreSeed)) {
+								map.put(blockState, map.getOrDefault(blockState, 0) + 1);
+							}
+						}
+					}
+				}
+
+				System.out.println("------");
+				map.entrySet().stream().forEach(e -> {
+					System.out.println(e.getKey() + "\t" + e.getValue());
+				});
+
+			}
+		}
+
+		return EnumActionResult.SUCCESS;
 	}
 
 }
