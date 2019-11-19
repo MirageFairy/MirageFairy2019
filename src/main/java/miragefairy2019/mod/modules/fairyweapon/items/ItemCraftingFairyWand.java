@@ -52,19 +52,21 @@ public class ItemCraftingFairyWand extends ItemFairyCraftingToolBase
 	{
 
 		if (ApiMain.side.isClient()) {
+			if (player.isSneaking()) {
 
-			// 鉱石生成確率表示
-			List<String> lines = new ArrayList<>();
-			lines.add("===== Ore List =====");
-			for (EnumVariant variant : EnumVariant.values()) {
-				lines.add("----- " + variant.name());
-				BlockOreSeed.getList(world, player.getPosition(), variant).stream()
-					.forEach(t -> lines.add(String.format("%.2f", t.weight) + ": " + t.item.get().getBlock().getItem(world, pos, t.item.get()).getDisplayName()));
+				// 鉱石生成確率表示
+				List<String> lines = new ArrayList<>();
+				lines.add("===== Ore List =====");
+				for (EnumVariant variant : EnumVariant.values()) {
+					lines.add("----- " + variant.name());
+					BlockOreSeed.getList(world, player.getPosition(), variant).stream()
+						.forEach(t -> lines.add(String.format("%.2f", t.weight) + ": " + t.item.get().getBlock().getItem(world, pos, t.item.get()).getDisplayName()));
+				}
+				lines.add("====================");
+				player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)
+					.join("\n")), false);
+
 			}
-			lines.add("====================");
-			player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)
-				.join("\n")), false);
-
 		}
 
 		return EnumActionResult.SUCCESS;
