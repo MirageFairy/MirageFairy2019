@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiFairyWeapon;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemBreakingFairyWand;
@@ -60,7 +59,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemCraftingFairyWand = itemCraftingFairyWand = item;
+				itemCraftingFairyWand = item;
 			}
 
 			// 加工のステッキ2
@@ -72,7 +71,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemCraftingFairyWand2 = itemCraftingFairyWand2 = item;
+				itemCraftingFairyWand2 = item;
 			}
 
 			// 加工のステッキ3
@@ -84,7 +83,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemCraftingFairyWand3 = itemCraftingFairyWand3 = item;
+				itemCraftingFairyWand3 = item;
 			}
 
 			// 紅蓮のステッキ
@@ -96,7 +95,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemMeltingFairyWand = itemMeltingFairyWand = item;
+				itemMeltingFairyWand = item;
 			}
 
 			// 紅蓮のステッキ
@@ -108,7 +107,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemMeltingFairyWand2 = itemMeltingFairyWand2 = item;
+				itemMeltingFairyWand2 = item;
 			}
 
 			// 妖精剣
@@ -120,7 +119,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemFairySword = itemFairySword = item;
+				itemFairySword = item;
 			}
 
 			// ミラジウムの斧
@@ -132,7 +131,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemMiragiumAxe = itemMiragiumAxe = item;
+				itemMiragiumAxe = item;
 			}
 
 			// 光のロッド
@@ -144,7 +143,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemLightMagicWand = itemLightMagicWand = item;
+				itemLightMagicWand = item;
 			}
 
 			// 召喚のステッキ
@@ -156,7 +155,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemSummoningFairyWand = itemSummoningFairyWand = item;
+				itemSummoningFairyWand = item;
 			}
 
 			// 収集のロッド
@@ -168,7 +167,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemCollectingMagicWand = itemCollectingMagicWand = item;
+				itemCollectingMagicWand = item;
 			}
 
 			// 破壊のステッキ
@@ -180,7 +179,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemBreakingFairyWand = itemBreakingFairyWand = item;
+				itemBreakingFairyWand = item;
 			}
 
 			// 破壊のステッキ2
@@ -192,7 +191,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemBreakingFairyWand2 = itemBreakingFairyWand2 = item;
+				itemBreakingFairyWand2 = item;
 			}
 
 			// 魅惑のオカリナ
@@ -204,7 +203,7 @@ public class ModuleFairyWeapon
 				ForgeRegistries.ITEMS.register(item);
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-				ApiFairyWeapon.itemTemptationOcarina = itemTemptationOcarina = item;
+				itemTemptationOcarina = item;
 			}
 
 		});

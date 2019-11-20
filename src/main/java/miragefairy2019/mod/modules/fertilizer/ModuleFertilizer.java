@@ -1,11 +1,9 @@
 package miragefairy2019.mod.modules.fertilizer;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiFertilizer;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -28,12 +26,9 @@ public class ModuleFertilizer
 				if (ApiMain.side.isClient()) {
 					ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
 				}
-				ApiFertilizer.itemFertilizer = itemFertilizer = item;
+				itemFertilizer = item;
 			}
 
-		});
-		erMod.createItemStack.register(ic -> {
-			ApiFertilizer.itemStackFertilizer = new ItemStack(itemFertilizer);
 		});
 	}
 

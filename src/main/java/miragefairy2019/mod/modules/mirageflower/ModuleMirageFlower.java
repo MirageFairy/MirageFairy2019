@@ -5,7 +5,6 @@ import java.util.List;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
-import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
@@ -17,7 +16,6 @@ import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -40,7 +38,7 @@ public class ModuleMirageFlower
 		erMod.registerItem.register(b -> {
 
 			// 種
-			ApiMirageFlower.itemMirageFlowerSeeds = itemMirageFlowerSeeds = new ItemMirageFlowerSeeds();
+			itemMirageFlowerSeeds = new ItemMirageFlowerSeeds();
 			itemMirageFlowerSeeds.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_seeds");
 			itemMirageFlowerSeeds.setUnlocalizedName("mirageFlowerSeeds");
 			itemMirageFlowerSeeds.setCreativeTab(ApiMain.creativeTab);
@@ -53,22 +51,16 @@ public class ModuleMirageFlower
 		erMod.registerBlock.register(b -> {
 
 			// ブロック
-			ApiMirageFlower.blockMirageFlower = blockMirageFlower = new BlockMirageFlower();
+			blockMirageFlower = new BlockMirageFlower();
 			blockMirageFlower.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower");
 			blockMirageFlower.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.BLOCKS.register(blockMirageFlower);
 
 			// ブロック
-			ApiMirageFlower.blockFairyLog = blockFairyLog = new BlockFairyLog();
+			blockFairyLog = new BlockFairyLog();
 			blockFairyLog.setRegistryName(ModMirageFairy2019.MODID, "fairy_log");
 			blockFairyLog.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.BLOCKS.register(blockFairyLog);
-
-		});
-		erMod.createItemStack.register(b -> {
-
-			// 種
-			ApiMirageFlower.itemStackMirageFlowerSeeds = new ItemStack(itemMirageFlowerSeeds);
 
 		});
 

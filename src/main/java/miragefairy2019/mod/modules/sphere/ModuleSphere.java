@@ -5,7 +5,6 @@ import java.util.Map;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
-import miragefairy2019.mod.api.ApiSphere;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
 import mirrg.boron.util.struct.Tuple;
@@ -59,7 +58,7 @@ public class ModuleSphere
 							new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "sphere"), null));
 					}
 				}
-				ApiSphere.itemSpheres = itemSpheres = item;
+				itemSpheres = item;
 			}
 
 		});

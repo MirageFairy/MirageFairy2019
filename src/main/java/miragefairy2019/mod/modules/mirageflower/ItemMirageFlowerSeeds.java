@@ -1,6 +1,5 @@
 package miragefairy2019.mod.modules.mirageflower;
 
-import miragefairy2019.mod.api.ApiMirageFlower;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -63,7 +62,7 @@ public class ItemMirageFlowerSeeds extends Item implements IPlantable
 	@Override
 	public IBlockState getPlant(IBlockAccess world, BlockPos pos)
 	{
-		return ApiMirageFlower.blockMirageFlower.getDefaultState();
+		return ModuleMirageFlower.blockMirageFlower.getDefaultState();
 	}
 
 }

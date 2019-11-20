@@ -2,7 +2,6 @@ package miragefairy2019.mod.modules.materialsfairy;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
-import miragefairy2019.mod.api.ApiMaterialsFairy;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.multi.ItemMultiMaterialContained;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterialContained;
@@ -27,7 +26,7 @@ public class ModuleMaterialsFairy
 		erMod.registerItem.register(b -> {
 
 			// マテリアル
-			ApiMaterialsFairy.itemMaterialsFairy = itemMaterialsFairy = new ItemMultiMaterialContained<>();
+			itemMaterialsFairy = new ItemMultiMaterialContained<>();
 			itemMaterialsFairy.setRegistryName(ModMirageFairy2019.MODID, "fairy_materials");
 			itemMaterialsFairy.setUnlocalizedName("materialsFairy");
 			itemMaterialsFairy.setCreativeTab(ApiMain.creativeTab);
@@ -48,12 +47,6 @@ public class ModuleMaterialsFairy
 
 		});
 		erMod.createItemStack.register(ic -> {
-			ApiMaterialsFairy.itemStackManaRodShine = variantManaRodShine.createItemStack();
-			ApiMaterialsFairy.itemStackManaRodFire = variantManaRodFire.createItemStack();
-			ApiMaterialsFairy.itemStackManaRodWind = variantManaRodWind.createItemStack();
-			ApiMaterialsFairy.itemStackManaRodGaia = variantManaRodGaia.createItemStack();
-			ApiMaterialsFairy.itemStackManaRodAqua = variantManaRodAqua.createItemStack();
-			ApiMaterialsFairy.itemStackManaRodDark = variantManaRodDark.createItemStack();
 			for (Tuple<Integer, ItemVariantMaterialContained> tuple : itemMaterialsFairy.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}

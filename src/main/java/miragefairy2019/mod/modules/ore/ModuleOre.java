@@ -6,7 +6,6 @@ import java.util.Set;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
-import miragefairy2019.mod.api.ApiOre;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.multi.ItemMultiMaterialContained;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterialContained;
@@ -59,19 +58,19 @@ public class ModuleOre
 		erMod.registerBlock.register(b -> {
 
 			// 鉱石の種
-			ApiOre.blockOreSeed = blockOreSeed = new BlockOreSeed();
+			blockOreSeed = new BlockOreSeed();
 			blockOreSeed.setRegistryName(ModMirageFairy2019.MODID, "ore_seed");
 			blockOreSeed.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.BLOCKS.register(blockOreSeed);
 
 			// 鉱石
-			ApiOre.blockOre1 = blockOre1 = new BlockOre<>(EnumVariantOre1.variantList);
+			blockOre1 = new BlockOre<>(EnumVariantOre1.variantList);
 			blockOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
 			blockOre1.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.BLOCKS.register(blockOre1);
 
 			// ブロック
-			ApiOre.blockMaterials1 = blockMaterials1 = new BlockMaterials<>(EnumVariantMaterials1.variantList);
+			blockMaterials1 = new BlockMaterials<>(EnumVariantMaterials1.variantList);
 			blockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
 			blockMaterials1.setCreativeTab(ApiMain.creativeTab);
 			ForgeRegistries.BLOCKS.register(blockMaterials1);
@@ -80,7 +79,7 @@ public class ModuleOre
 		erMod.registerItem.register(b -> {
 
 			// 鉱石
-			ApiOre.itemBlockOre1 = itemBlockOre1 = new ItemBlockOre<>(blockOre1);
+			itemBlockOre1 = new ItemBlockOre<>(blockOre1);
 			itemBlockOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
 			itemBlockOre1.setUnlocalizedName("ore1");
 			itemBlockOre1.setCreativeTab(ApiMain.creativeTab);
@@ -95,7 +94,7 @@ public class ModuleOre
 			}
 
 			// ブロック
-			ApiOre.itemBlockMaterials1 = itemBlockMaterials1 = new ItemBlockMaterials<>(blockMaterials1);
+			itemBlockMaterials1 = new ItemBlockMaterials<>(blockMaterials1);
 			itemBlockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
 			itemBlockMaterials1.setUnlocalizedName("materials1");
 			itemBlockMaterials1.setCreativeTab(ApiMain.creativeTab);
@@ -110,7 +109,7 @@ public class ModuleOre
 			}
 
 			// マテリアル
-			ApiOre.itemMaterials = itemMaterials = new ItemMultiMaterialContained<>();
+			itemMaterials = new ItemMultiMaterialContained<>();
 			itemMaterials.setRegistryName(ModMirageFairy2019.MODID, "materials");
 			itemMaterials.setUnlocalizedName("materials");
 			itemMaterials.setCreativeTab(ApiMain.creativeTab);
@@ -134,20 +133,6 @@ public class ModuleOre
 
 		});
 		erMod.createItemStack.register(ic -> {
-			ApiOre.itemStackGemApatite = variantGemApatite.createItemStack();
-			ApiOre.itemStackGemFluorite = variantGemFluorite.createItemStack();
-			ApiOre.itemStackGemSulfur = variantGemSulfur.createItemStack();
-			ApiOre.itemStackDustMiragium = variantDustMiragium.createItemStack();
-			ApiOre.itemStackDustTinyMiragium = variantDustTinyMiragium.createItemStack();
-			ApiOre.itemStackIngotMiragium = variantIngotMiragium.createItemStack();
-			ApiOre.itemStackGemCinnabar = variantGemCinnabar.createItemStack();
-			ApiOre.itemStackGemMoonstone = variantGemMoonstone.createItemStack();
-			ApiOre.itemStackGemMagnetite = variantGemMagnetite.createItemStack();
-			ApiOre.itemStackGemSaltpeter = variantGemSaltpeter.createItemStack();
-			ApiOre.itemStackGemPyrope = variantGemPyrope.createItemStack();
-			ApiOre.itemStackGemSmithsonite = variantGemSmithsonite.createItemStack();
-			ApiOre.itemStackRodMiragium = variantRodMiragium.createItemStack();
-			ApiOre.itemStackNuggetMiragium = variantNuggetMiragium.createItemStack();
 			for (Tuple<Integer, ItemVariantMaterialContained> tuple : itemMaterials.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}

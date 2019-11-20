@@ -3,9 +3,8 @@ package miragefairy2019.mod.modules.mirageflower;
 import java.util.Random;
 
 import miragefairy2019.mod.api.ApiFairyCrystal;
-import miragefairy2019.mod.api.ApiMirageFlower;
-import miragefairy2019.mod.api.ApiOre;
 import miragefairy2019.mod.lib.Utils;
+import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.modules.ore.EnumVariantMaterials1;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import mirrg.boron.util.UtilsMath;
@@ -207,7 +206,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	@Override
 	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
 	{
-		return ApiMirageFlower.itemStackMirageFlowerSeeds.copy();
+		return new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds);
 	}
 
 	/**
@@ -221,13 +220,13 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		Random random = world instanceof World ? ((World) world).rand : new Random();
 
 		// 種1個は確定でドロップ
-		drops.add(ApiMirageFlower.itemStackMirageFlowerSeeds.copy());
+		drops.add(new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds));
 
 		// 追加の種
 		{
 			int count = Utils.randomInt(random, isMaxAge(state) ? fortune * 0.01 : 0);
 			for (int i = 0; i < count; i++) {
-				drops.add(ApiMirageFlower.itemStackMirageFlowerSeeds.copy());
+				drops.add(new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds));
 			}
 		}
 
@@ -243,7 +242,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		{
 			int count = Utils.randomInt(random, isMaxAge(state) ? 1 + fortune * 0.5 : 0);
 			for (int i = 0; i < count; i++) {
-				drops.add(ApiOre.itemStackDustTinyMiragium.copy());
+				drops.add(UtilsMinecraft.getItemStack("dustTinyMiragium"));
 			}
 		}
 
