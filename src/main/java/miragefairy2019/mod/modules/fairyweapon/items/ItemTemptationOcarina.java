@@ -38,7 +38,7 @@ public class ItemTemptationOcarina extends ItemOcarinaBase
 		composite = composite
 			.add(Components.PYROPE, 4)
 			.add(Components.fairyAbilityType(EnumAbilityType.food));
-		setMaxDamage(64 - 1);
+		setMaxDamage(128 - 1);
 	}
 
 	//

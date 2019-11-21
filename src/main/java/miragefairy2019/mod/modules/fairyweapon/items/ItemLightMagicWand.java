@@ -38,7 +38,7 @@ public class ItemLightMagicWand extends ItemFairyWeaponBase
 			.add(Components.APATITE, 4)
 			.add(Components.MIRAGIUM, 2)
 			.add(Components.fairyAbilityType(EnumAbilityType.light));
-		setMaxDamage(64 - 1);
+		setMaxDamage(128 - 1);
 	}
 
 	//

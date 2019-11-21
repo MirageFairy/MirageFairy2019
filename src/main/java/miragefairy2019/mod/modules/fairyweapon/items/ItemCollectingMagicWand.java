@@ -41,7 +41,7 @@ public class ItemCollectingMagicWand extends ItemFairyWeaponBase
 			.add(Components.MIRAGIUM, 2)
 			.add(Components.OBSIDIAN, 2)
 			.add(Components.fairyAbilityType(EnumAbilityType.warp));
-		setMaxDamage(64 - 1);
+		setMaxDamage(128 - 1);
 	}
 
 	//

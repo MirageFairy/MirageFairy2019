@@ -34,7 +34,7 @@ public class ItemFairySword extends ItemMiragiumSword
 			.add(Components.MAGNETITE, 1)
 			.add(Components.MOONSTONE, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.attack));
-		setMaxDamage(64 - 1);
+		setMaxDamage(128 - 1);
 	}
 
 	public double getAdditionalAttackDamage(ItemStack itemStack)
