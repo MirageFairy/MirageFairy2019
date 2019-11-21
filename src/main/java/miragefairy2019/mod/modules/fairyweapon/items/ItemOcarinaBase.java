@@ -4,7 +4,6 @@ import java.util.List;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.fairyweapon.ItemFairyWeaponBase;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -17,11 +16,11 @@ public class ItemOcarinaBase extends ItemFairyWeaponBase
 
 	public ItemOcarinaBase()
 	{
-		super(Composite.empty()
+		composite = composite
 			.add(Components.MIRAGIUM, 1)
 			.add(Components.APATITE, 4)
-			.add(Components.fairyAbilityType(EnumAbilityType.art), 1));
-		this.setMaxDamage(128 - 1);
+			.add(Components.fairyAbilityType(EnumAbilityType.art));
+		setMaxDamage(128 - 1);
 	}
 
 	@Override

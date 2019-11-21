@@ -7,7 +7,6 @@ import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
-import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.fairyweapon.ItemFairyWeaponBase;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.Block;
@@ -35,10 +34,10 @@ public class ItemLightMagicWand extends ItemFairyWeaponBase
 
 	public ItemLightMagicWand()
 	{
-		super(Composite.empty()
+		composite = composite
 			.add(Components.APATITE, 4)
 			.add(Components.MIRAGIUM, 2)
-			.add(Components.fairyAbilityType(EnumAbilityType.light), 1));
+			.add(Components.fairyAbilityType(EnumAbilityType.light));
 		setMaxDamage(64 - 1);
 	}
 

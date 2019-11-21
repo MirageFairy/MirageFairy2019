@@ -6,7 +6,6 @@ import java.util.List;
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.fairyweapon.ItemFairyCraftingToolBase;
 import miragefairy2019.mod.modules.ore.BlockOreSeed;
 import miragefairy2019.mod.modules.ore.BlockOreSeed.EnumVariant;
@@ -28,10 +27,10 @@ public class ItemCraftingFairyWand extends ItemFairyCraftingToolBase
 
 	public ItemCraftingFairyWand()
 	{
-		super(Composite.empty()
+		composite = composite
 			.add(Components.WOOD, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.craft), 1));
-		this.setMaxDamage(16 - 1);
+			.add(Components.fairyAbilityType(EnumAbilityType.craft));
+		setMaxDamage(16 - 1);
 	}
 
 	@Override

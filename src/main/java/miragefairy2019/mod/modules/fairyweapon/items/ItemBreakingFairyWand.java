@@ -7,7 +7,6 @@ import java.util.Map;
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.fairyweapon.ItemFairyCraftingToolBase;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import net.minecraft.block.state.IBlockState;
@@ -27,10 +26,10 @@ public class ItemBreakingFairyWand extends ItemFairyCraftingToolBase
 
 	public ItemBreakingFairyWand()
 	{
-		super(Composite.empty()
+		composite = composite
 			.add(Components.MIRAGIUM, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.breaking), 1));
-		this.setMaxDamage(32 - 1);
+			.add(Components.fairyAbilityType(EnumAbilityType.breaking));
+		setMaxDamage(32 - 1);
 	}
 
 	@Override

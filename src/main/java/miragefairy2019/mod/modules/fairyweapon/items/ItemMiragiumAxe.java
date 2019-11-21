@@ -6,7 +6,6 @@ import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
-import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.fairyweapon.ItemFairyWeaponBase;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.BlockLeaves;
@@ -32,10 +31,10 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 
 	public ItemMiragiumAxe()
 	{
-		super(Composite.empty()
+		composite = composite
 			.add(Components.MIRAGIUM, 3)
 			.add(Components.WOOD, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.fell), 1));
+			.add(Components.fairyAbilityType(EnumAbilityType.fell));
 		setMaxDamage(64 - 1);
 		setHarvestLevel("axe", 1);
 		destroySpeed = 6;

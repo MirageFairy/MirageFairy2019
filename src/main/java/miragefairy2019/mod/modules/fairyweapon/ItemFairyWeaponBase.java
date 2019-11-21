@@ -50,11 +50,10 @@ import net.minecraftforge.oredict.OreIngredient;
 public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, ICompositeProvider, ICombiningItem
 {
 
-	protected Composite composite;
+	protected Composite composite = Composite.empty();
 
-	public ItemFairyWeaponBase(Composite composite)
+	public ItemFairyWeaponBase()
 	{
-		this.composite = composite;
 		setMaxStackSize(1);
 		if (ApiMain.side.isClient()) {
 			new Object() {

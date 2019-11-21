@@ -4,7 +4,6 @@ import java.util.List;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.modules.fairyweapon.ItemFairyCraftingToolBase;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -17,10 +16,10 @@ public class ItemCraftingFairyWand2 extends ItemFairyCraftingToolBase
 
 	public ItemCraftingFairyWand2()
 	{
-		super(Composite.empty()
+		composite = composite
 			.add(Components.MIRAGIUM, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.craft), 1));
-		this.setMaxDamage(32 - 1);
+			.add(Components.fairyAbilityType(EnumAbilityType.craft));
+		setMaxDamage(32 - 1);
 	}
 
 	@Override

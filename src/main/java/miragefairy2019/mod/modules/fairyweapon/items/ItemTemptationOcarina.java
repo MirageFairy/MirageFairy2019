@@ -8,8 +8,6 @@ import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.lib.Utils;
-import miragefairy2019.mod.lib.component.Composite;
-import miragefairy2019.mod.modules.fairyweapon.ItemFairyWeaponBase;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -32,17 +30,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemTemptationOcarina extends ItemFairyWeaponBase
+public class ItemTemptationOcarina extends ItemOcarinaBase
 {
 
 	public ItemTemptationOcarina()
 	{
-		super(Composite.empty()
-			.add(Components.MIRAGIUM, 1)
-			.add(Components.APATITE, 4)
+		composite = composite
 			.add(Components.PYROPE, 4)
-			.add(Components.fairyAbilityType(EnumAbilityType.art), 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.food), 1));
+			.add(Components.fairyAbilityType(EnumAbilityType.food));
 		setMaxDamage(64 - 1);
 	}
 
