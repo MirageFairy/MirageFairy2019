@@ -38,8 +38,10 @@ public class ItemTemptationOcarina extends ItemFairyWeaponBase
 	public ItemTemptationOcarina()
 	{
 		super(Composite.empty()
-			.add(Components.PYROPE, 4)
 			.add(Components.MIRAGIUM, 1)
+			.add(Components.APATITE, 4)
+			.add(Components.PYROPE, 4)
+			.add(Components.fairyAbilityType(EnumAbilityType.art), 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.food), 1));
 		setMaxDamage(64 - 1);
 	}

@@ -14,6 +14,7 @@ import miragefairy2019.mod.modules.fairyweapon.items.ItemLightMagicWand;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemMeltingFairyWand;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemMeltingFairyWand2;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemMiragiumAxe;
+import miragefairy2019.mod.modules.fairyweapon.items.ItemOcarinaBase;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemSummoningFairyWand;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemTemptationOcarina;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -45,12 +46,13 @@ public class ModuleFairyWeapon
 	public static ItemBreakingFairyWand itemBreakingFairyWand;
 	public static ItemBreakingFairyWand2 itemBreakingFairyWand2;
 	public static ItemTemptationOcarina itemTemptationOcarina;
+	public static ItemOcarinaBase itemOcarinaBase;
 
 	public static void init(EventRegistryMod erMod)
 	{
 		erMod.registerItem.register(b -> {
 
-			// 加工のステッキ
+			// 技巧のステッキ
 			{
 				ItemCraftingFairyWand item = new ItemCraftingFairyWand();
 				item.setRegistryName(ModMirageFairy2019.MODID, "crafting_fairy_wand");
@@ -62,7 +64,7 @@ public class ModuleFairyWeapon
 				itemCraftingFairyWand = item;
 			}
 
-			// 加工のステッキ2
+			// 技巧のステッキ2
 			{
 				ItemCraftingFairyWand2 item = new ItemCraftingFairyWand2();
 				item.setRegistryName(ModMirageFairy2019.MODID, "crafting_fairy_wand_2");
@@ -74,7 +76,7 @@ public class ModuleFairyWeapon
 				itemCraftingFairyWand2 = item;
 			}
 
-			// 加工のステッキ3
+			// 技巧のステッキ3
 			{
 				ItemCraftingFairyWand3 item = new ItemCraftingFairyWand3();
 				item.setRegistryName(ModMirageFairy2019.MODID, "crafting_fairy_wand_3");
@@ -204,6 +206,18 @@ public class ModuleFairyWeapon
 				hookBakedModelWrapper(item);
 				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
 				itemTemptationOcarina = item;
+			}
+
+			// オカリナベース
+			{
+				ItemOcarinaBase item = new ItemOcarinaBase();
+				item.setRegistryName(ModMirageFairy2019.MODID, "ocarina_base");
+				item.setUnlocalizedName("ocarinaBase");
+				item.setCreativeTab(ApiMain.creativeTab);
+				ForgeRegistries.ITEMS.register(item);
+				hookBakedModelWrapper(item);
+				if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
+				itemOcarinaBase = item;
 			}
 
 		});

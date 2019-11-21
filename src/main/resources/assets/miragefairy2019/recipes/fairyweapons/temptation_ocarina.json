@@ -2,30 +2,25 @@
 	"type": "forge:ore_shaped",
 	"group": "temptation_ocarina",
 	"pattern": [
-		" Gm",
-		"GFG",
-		"cGI"
+		" GS",
+		"G#G",
+		"cG "
 	],
 	"key": {
+		"#": {
+			"item": "miragefairy2019:ocarina_base"
+		},
 		"G": {
 			"type": "forge:ore_dict",
 			"ore": "gemPyrope"
 		},
-		"F": {
+		"S": {
 			"type": "forge:ore_dict",
 			"ore": "mirageFairy2019SphereFood"
-		},
-		"I": {
-			"type": "forge:ore_dict",
-			"ore": "ingotMiragium"
 		},
 		"c": {
 			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"m": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
 		}
 	},
 	"result": {
