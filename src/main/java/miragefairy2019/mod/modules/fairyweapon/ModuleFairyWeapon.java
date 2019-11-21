@@ -14,6 +14,7 @@ import miragefairy2019.mod.modules.fairyweapon.items.ItemLightMagicWand;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemMeltingFairyWand;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemMeltingFairyWand2;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemMiragiumAxe;
+import miragefairy2019.mod.modules.fairyweapon.items.ItemMiragiumSword;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemOcarinaBase;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemSummoningFairyWand;
 import miragefairy2019.mod.modules.fairyweapon.items.ItemTemptationOcarina;
@@ -47,6 +48,7 @@ public class ModuleFairyWeapon
 	public static ItemBreakingFairyWand2 itemBreakingFairyWand2;
 	public static ItemTemptationOcarina itemTemptationOcarina;
 	public static ItemOcarinaBase itemOcarinaBase;
+	public static ItemMiragiumSword itemMiragiumSword;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -65,6 +67,7 @@ public class ModuleFairyWeapon
 			itemBreakingFairyWand2 = item(new ItemBreakingFairyWand2(), "breaking_fairy_wand_2", "breakingFairyWand2"); // 破壊のステッキ2
 			itemTemptationOcarina = item(new ItemTemptationOcarina(), "temptation_ocarina", "temptationOcarina"); // 魅惑のオカリナ
 			itemOcarinaBase = item(new ItemOcarinaBase(), "ocarina_base", "ocarinaBase"); // オカリナベース
+			itemMiragiumSword = item(new ItemMiragiumSword(), "miragium_sword", "miragiumSword"); // ミラジウムの剣
 		});
 		erMod.createItemStack.register(ic -> {
 			OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWandCrafting", new ItemStack(itemCraftingFairyWand, 1, OreDictionary.WILDCARD_VALUE));
