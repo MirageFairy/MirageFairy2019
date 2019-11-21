@@ -1,22 +1,49 @@
 {
-	"type": "forge:ore_shapeless",
+	"type": "forge:ore_shaped",
 	"group": "fairy_sword",
-	"ingredients": [
-		{
-			"item": "minecraft:iron_sword"
+	"pattern": [
+		"CaF",
+		"S#A",
+		"McO"
+	],
+	"key": {
+		"#": {
+			"item": "miragefairy2019:miragium_sword"
 		},
-		{
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		"C": {
+			"type": "forge:ore_dict",
+			"ore": "gemCinnabar"
 		},
-		{
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "gemSulfur"
+		},
+		"M": {
+			"type": "forge:ore_dict",
+			"ore": "gemMagnetite"
+		},
+		"F": {
+			"type": "forge:ore_dict",
+			"ore": "gemFluorite"
+		},
+		"A": {
+			"type": "forge:ore_dict",
+			"ore": "gemApatite"
+		},
+		"O": {
+			"type": "forge:ore_dict",
+			"ore": "gemMoonstone"
+		},
+		"a": {
 			"type": "forge:ore_dict",
 			"ore": "mirageFairy2019SphereAttack"
+		},
+		"c": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
 		}
-	],
+	},
 	"result": {
-		"item": "miragefairy2019:fairy_sword",
-		"data": 0,
-		"count": 1
+		"item": "miragefairy2019:fairy_sword"
 	}
 }

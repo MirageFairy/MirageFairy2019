@@ -7,7 +7,6 @@ import com.google.common.collect.Multimap;
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
-import miragefairy2019.mod.modules.fairyweapon.ItemFairyWeaponBase;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -22,14 +21,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFairySword extends ItemFairyWeaponBase
+public class ItemFairySword extends ItemMiragiumSword
 {
 
 	public ItemFairySword()
 	{
 		composite = composite
-			.add(Components.IRON, 2)
-			.add(Components.WOOD, 0.5)
+			.add(Components.APATITE, 1)
+			.add(Components.FLUORITE, 1)
+			.add(Components.SULFUR, 1)
+			.add(Components.CINNABAR, 1)
+			.add(Components.MAGNETITE, 1)
+			.add(Components.MOONSTONE, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.attack));
 		setMaxDamage(64 - 1);
 	}
