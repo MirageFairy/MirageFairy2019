@@ -472,7 +472,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 			.mapIfPresent(e -> EnumSphere.of(e.x.abilityType).map(s -> Tuple.of(s, e.y)))
 			.flatMap(e -> {
 				long amount = e.y;
-				int count = (int) (amount / 1_000_000_000L) + amount % 1_000_000_000L != 0 ? 1 : 0;
+				int count = (int) (amount / 1_000_000_000L) + (amount % 1_000_000_000L != 0 ? 1 : 0);
 				return ISuppliterator.range(count)
 					.map(i -> new OreIngredient(e.x.getOreName()));
 			})
