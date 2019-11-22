@@ -44,22 +44,22 @@ public class ModuleFairyWeapon
 	public static class Items
 	{
 
-		public Provider<ItemFairyWandCrafting> fairyWandCrafting = item(ItemFairyWandCrafting::new, "crafting_fairy_wand", "craftingFairyWand").ore("mirageFairy2019CraftingToolFairyWandCrafting"); // 技巧のステッキ
-		public Provider<ItemFairyWandCrafting2> fairyWandCrafting2 = item(ItemFairyWandCrafting2::new, "crafting_fairy_wand_2", "craftingFairyWand2").ore("mirageFairy2019CraftingToolFairyWandCrafting"); // 技巧のステッキ2
-		public Provider<ItemFairyWandCrafting3> fairyWandCrafting3 = item(ItemFairyWandCrafting3::new, "crafting_fairy_wand_3", "craftingFairyWand3").ore("mirageFairy2019CraftingToolFairyWandCrafting"); // 技巧のステッキ3
-		public Provider<ItemFairyWandMelting> fairyWandMelting = item(ItemFairyWandMelting::new, "melting_fairy_wand", "meltingFairyWand").ore("mirageFairy2019CraftingToolFairyWandMelting"); // 紅蓮のステッキ
-		public Provider<ItemFairyWandMelting2> fairyWandMelting2 = item(ItemFairyWandMelting2::new, "melting_fairy_wand_2", "meltingFairyWand2").ore("mirageFairy2019CraftingToolFairyWandMelting"); // 紅蓮のステッキ
-		public Provider<ItemFairyWandBreaking> fairyWandBreaking = item(ItemFairyWandBreaking::new, "breaking_fairy_wand", "breakingFairyWand").ore("mirageFairy2019CraftingToolFairyWandBreaking"); // 破壊のステッキ
-		public Provider<ItemFairyWandBreaking2> fairyWandBreaking2 = item(ItemFairyWandBreaking2::new, "breaking_fairy_wand_2", "breakingFairyWand2").ore("mirageFairy2019CraftingToolFairyWandBreaking"); // 破壊のステッキ2
-		public Provider<ItemFairyWandSummoning> fairyWandSummoning = item(ItemFairyWandSummoning::new, "summoning_fairy_wand", "summoningFairyWand").ore("mirageFairy2019CraftingToolFairyWandSummoning"); // 召喚のステッキ
+		public Provider<ItemFairyWandCrafting> fairyWandCrafting = item(ItemFairyWandCrafting::new, "crafting_fairy_wand", "fairyWandCrafting").ore("mirageFairy2019CraftingToolFairyWandCrafting"); // 技巧のステッキ
+		public Provider<ItemFairyWandCrafting2> fairyWandCrafting2 = item(ItemFairyWandCrafting2::new, "crafting_fairy_wand_2", "fairyWandCrafting2").ore("mirageFairy2019CraftingToolFairyWandCrafting"); // 技巧のステッキ2
+		public Provider<ItemFairyWandCrafting3> fairyWandCrafting3 = item(ItemFairyWandCrafting3::new, "crafting_fairy_wand_3", "fairyWandCrafting3").ore("mirageFairy2019CraftingToolFairyWandCrafting"); // 技巧のステッキ3
+		public Provider<ItemFairyWandMelting> fairyWandMelting = item(ItemFairyWandMelting::new, "melting_fairy_wand", "fairyWandMelting").ore("mirageFairy2019CraftingToolFairyWandMelting"); // 紅蓮のステッキ
+		public Provider<ItemFairyWandMelting2> fairyWandMelting2 = item(ItemFairyWandMelting2::new, "melting_fairy_wand_2", "fairyWandMelting2").ore("mirageFairy2019CraftingToolFairyWandMelting"); // 紅蓮のステッキ
+		public Provider<ItemFairyWandBreaking> fairyWandBreaking = item(ItemFairyWandBreaking::new, "breaking_fairy_wand", "fairyWandBreaking").ore("mirageFairy2019CraftingToolFairyWandBreaking"); // 破壊のステッキ
+		public Provider<ItemFairyWandBreaking2> fairyWandBreaking2 = item(ItemFairyWandBreaking2::new, "breaking_fairy_wand_2", "fairyWandBreaking2").ore("mirageFairy2019CraftingToolFairyWandBreaking"); // 破壊のステッキ2
+		public Provider<ItemFairyWandSummoning> fairyWandSummoning = item(ItemFairyWandSummoning::new, "summoning_fairy_wand", "fairyWandSummoning").ore("mirageFairy2019CraftingToolFairyWandSummoning"); // 召喚のステッキ
 
 		public Provider<ItemMiragiumSword> miragiumSword = item(ItemMiragiumSword::new, "miragium_sword", "miragiumSword"); // ミラジウムの剣
 		public Provider<ItemFairySword> fairySword = item(ItemFairySword::new, "fairy_sword", "fairySword"); // 妖精剣
 		public Provider<ItemMiragiumAxe> miragiumAxe = item(ItemMiragiumAxe::new, "miragium_axe", "miragiumAxe"); // ミラジウムの斧
-		public Provider<ItemMagicWandLight> magicWandLight = item(ItemMagicWandLight::new, "light_magic_wand", "lightMagicWand"); // 光のロッド
-		public Provider<ItemMagicWandCollecting> magicWandCollecting = item(ItemMagicWandCollecting::new, "collecting_magic_wand", "collectingMagicWand"); // 収集のロッド
+		public Provider<ItemMagicWandLight> magicWandLight = item(ItemMagicWandLight::new, "light_magic_wand", "magicWandLight"); // 光のロッド
+		public Provider<ItemMagicWandCollecting> magicWandCollecting = item(ItemMagicWandCollecting::new, "collecting_magic_wand", "magicWandCollecting"); // 収集のロッド
 		public Provider<ItemOcarinaBase> ocarinaBase = item(ItemOcarinaBase::new, "ocarina_base", "ocarinaBase"); // オカリナベース
-		public Provider<ItemOcarinaTemptation> ocarinaTemptation = item(ItemOcarinaTemptation::new, "temptation_ocarina", "temptationOcarina"); // 魅惑のオカリナ
+		public Provider<ItemOcarinaTemptation> ocarinaTemptation = item(ItemOcarinaTemptation::new, "temptation_ocarina", "ocarinaTemptation"); // 魅惑のオカリナ
 
 		//
 

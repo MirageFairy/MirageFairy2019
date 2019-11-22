@@ -26,21 +26,22 @@ item.mirageFairyR7.format=%s VII
 
 item.fairyCrystal.name=妖晶
 
-item.craftingFairyWand.name=技巧のステッキ
-item.craftingFairyWand2.name=技巧のステッキ II
-item.craftingFairyWand3.name=技巧のステッキ III
-item.meltingFairyWand.name=紅蓮のステッキ
-item.meltingFairyWand2.name=紅蓮のステッキ II
+item.fairyWandCrafting.name=技巧のステッキ
+item.fairyWandCrafting2.name=技巧のステッキ II
+item.fairyWandCrafting3.name=技巧のステッキ III
+item.fairyWandMelting.name=紅蓮のステッキ
+item.fairyWandMelting2.name=紅蓮のステッキ II
+item.fairyWandBreaking.name=破砕のステッキ
+item.fairyWandBreaking2.name=破砕のステッキ II
+item.fairyWandSummoning.name=召喚のステッキ
+
+item.miragiumSword.name=ミラジウムの剣
 item.fairySword.name=妖精剣
 item.miragiumAxe.name=ミラジウムの斧
-item.lightMagicWand.name=光のロッド
-item.summoningFairyWand.name=召喚のステッキ
-item.collectingMagicWand.name=収集のロッド
-item.breakingFairyWand.name=破砕のステッキ
-item.breakingFairyWand2.name=破砕のステッキ II
-item.temptationOcarina.name=魅惑のオカリナ
+item.magicWandLight.name=光のロッド
+item.magicWandCollecting.name=収集のロッド
 item.ocarinaBase.name=オカリナベース
-item.miragiumSword.name=ミラジウムの剣
+item.ocarinaTemptation.name=魅惑のオカリナ
 
 item.fertilizer.name=肥料
 
