@@ -17,6 +17,7 @@ public class ItemFairyWandPolishing extends ItemFairyWeaponCraftingToolBase
 	{
 		composite = composite
 			.add(Components.MIRAGIUM, 1)
+			.add(Components.MOONSTONE, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.crystal));
 		setMaxDamage(64 - 1);
 	}
