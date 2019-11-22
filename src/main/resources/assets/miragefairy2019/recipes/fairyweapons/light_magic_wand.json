@@ -2,26 +2,25 @@
 	"type": "forge:ore_shaped",
 	"group": "light_magic_wand",
 	"pattern": [
-		"cGS",
-		" RG",
-		"R  "
+		"cal",
+		" #a",
+		"a  "
 	],
 	"key": {
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		"#": {
+			"item": "miragefairy2019:magic_wand_base"
 		},
-		"R": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019ManaRodWind"
-		},
-		"G": {
+		"a": {
 			"type": "forge:ore_dict",
 			"ore": "gemApatite"
 		},
-		"S": {
+		"l": {
 			"type": "forge:ore_dict",
 			"ore": "mirageFairy2019SphereLight"
+		},
+		"c": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
 		}
 	},
 	"result": {

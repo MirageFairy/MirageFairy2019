@@ -18,6 +18,7 @@ import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandCrafting3;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandMelting;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandMelting2;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandSummoning;
+import miragefairy2019.mod.modules.fairyweapon.item.ItemMagicWandBase;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemMagicWandCollecting;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemMagicWandLight;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemMiragiumAxe;
@@ -60,6 +61,7 @@ public class ModuleFairyWeapon
 		public Provider<ItemMiragiumSword> miragiumSword = item(ItemMiragiumSword::new, "miragium_sword", "miragiumSword"); // ミラジウムの剣
 		public Provider<ItemFairySword> fairySword = item(ItemFairySword::new, "fairy_sword", "fairySword"); // 妖精剣
 		public Provider<ItemMiragiumAxe> miragiumAxe = item(ItemMiragiumAxe::new, "miragium_axe", "miragiumAxe"); // ミラジウムの斧
+		public Provider<ItemMagicWandBase> magicWandBase = item(ItemMagicWandBase::new, "magic_wand_base", "magicWandBase"); // ロッドベース
 		public Provider<ItemMagicWandLight> magicWandLight = item(ItemMagicWandLight::new, "light_magic_wand", "magicWandLight"); // 光のロッド
 		public Provider<ItemMagicWandCollecting> magicWandCollecting = item(ItemMagicWandCollecting::new, "collecting_magic_wand", "magicWandCollecting"); // 収集のロッド
 		public Provider<ItemOcarinaBase> ocarinaBase = item(ItemOcarinaBase::new, "ocarina_base", "ocarinaBase"); // オカリナベース

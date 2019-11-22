@@ -28,14 +28,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMagicWandLight extends ItemFairyWeaponBase
+public class ItemMagicWandLight extends ItemMagicWandBase
 {
 
 	public ItemMagicWandLight()
 	{
 		composite = composite
-			.add(Components.APATITE, 4)
-			.add(Components.MIRAGIUM, 2)
+			.add(Components.APATITE, 3)
 			.add(Components.fairyAbilityType(EnumAbilityType.light));
 		setMaxDamage(128 - 1);
 	}

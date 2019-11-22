@@ -30,15 +30,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMagicWandCollecting extends ItemFairyWeaponBase
+public class ItemMagicWandCollecting extends ItemMagicWandBase
 {
 
 	public ItemMagicWandCollecting()
 	{
 		composite = composite
-			.add(Components.FLUORITE, 3)
-			.add(Components.MIRAGIUM, 2)
 			.add(Components.OBSIDIAN, 2)
+			.add(Components.FLUORITE, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.warp));
 		setMaxDamage(128 - 1);
 	}
