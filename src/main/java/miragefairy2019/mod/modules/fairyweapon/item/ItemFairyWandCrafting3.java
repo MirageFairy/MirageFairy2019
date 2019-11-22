@@ -1,26 +1,24 @@
-package miragefairy2019.mod.modules.fairyweapon.items;
+package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.modules.fairyweapon.ItemFairyWeaponBase;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMiragiumSword extends ItemFairyWeaponBase
+public class ItemFairyWandCrafting3 extends ItemFairyWeaponCraftingToolBase
 {
 
-	public ItemMiragiumSword()
+	public ItemFairyWandCrafting3()
 	{
 		composite = composite
-			.add(Components.MIRAGIUM, 2)
-			.add(Components.WOOD, 0.5)
-			.add(Components.fairyAbilityType(EnumAbilityType.attack))
-			.add(Components.fairyAbilityType(EnumAbilityType.slash));
+			.add(Components.MIRAGIUM, 1)
+			.add(Components.MAGNETITE, 1)
+			.add(Components.fairyAbilityType(EnumAbilityType.craft));
 		setMaxDamage(64 - 1);
 	}
 
@@ -30,7 +28,7 @@ public class ItemMiragiumSword extends ItemFairyWeaponBase
 	{
 
 		// ポエム
-		tooltip.add("切断の力を何に使うかはあなた次第");
+		tooltip.add("スフィアから聞こえる、妖精の声");
 
 		super.addInformation(itemStack, world, tooltip, flag);
 

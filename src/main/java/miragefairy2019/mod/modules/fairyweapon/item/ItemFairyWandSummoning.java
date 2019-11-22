@@ -1,11 +1,10 @@
-package miragefairy2019.mod.modules.fairyweapon.items;
+package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.modules.fairycrystal.ItemFairyCrystal;
-import miragefairy2019.mod.modules.fairyweapon.ItemFairyCraftingToolBase;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -24,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFairyWandSummoning extends ItemFairyCraftingToolBase
+public class ItemFairyWandSummoning extends ItemFairyWeaponCraftingToolBase
 {
 
 	public ItemFairyWandSummoning()

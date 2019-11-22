@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.items;
+package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +7,6 @@ import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
-import miragefairy2019.mod.modules.fairyweapon.ItemFairyWeaponBase;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

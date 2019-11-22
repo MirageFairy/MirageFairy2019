@@ -1,25 +1,25 @@
-package miragefairy2019.mod.modules.fairyweapon.items;
+package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.modules.fairyweapon.ItemFairyCraftingToolBase;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFairyWandBreaking2 extends ItemFairyCraftingToolBase
+public class ItemMiragiumSword extends ItemFairyWeaponBase
 {
 
-	public ItemFairyWandBreaking2()
+	public ItemMiragiumSword()
 	{
 		composite = composite
-			.add(Components.MIRAGIUM, 1)
-			.add(Components.SULFUR, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.breaking));
+			.add(Components.MIRAGIUM, 2)
+			.add(Components.WOOD, 0.5)
+			.add(Components.fairyAbilityType(EnumAbilityType.attack))
+			.add(Components.fairyAbilityType(EnumAbilityType.slash));
 		setMaxDamage(64 - 1);
 	}
 
@@ -29,7 +29,7 @@ public class ItemFairyWandBreaking2 extends ItemFairyCraftingToolBase
 	{
 
 		// ポエム
-		tooltip.add("実はガラスより脆い");
+		tooltip.add("切断の力を何に使うかはあなた次第");
 
 		super.addInformation(itemStack, world, tooltip, flag);
 

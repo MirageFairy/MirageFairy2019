@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon;
+package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +11,7 @@ import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.lib.component.ICompositeProvider;
+import miragefairy2019.mod.modules.fairyweapon.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.modules.fairyweapon.recipe.ICombiningItem;
 import miragefairy2019.mod.modules.fairyweapon.recipe.ISphereReplacementItem;
 import miragefairy2019.mod.modules.sphere.EnumSphere;

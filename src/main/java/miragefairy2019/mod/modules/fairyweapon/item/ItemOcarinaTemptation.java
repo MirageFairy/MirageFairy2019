@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.items;
+package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 import java.util.Random;

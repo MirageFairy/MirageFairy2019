@@ -1,17 +1,16 @@
-package miragefairy2019.mod.modules.fairyweapon.items;
+package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.modules.fairyweapon.ItemFairyCraftingToolBase;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFairyWandMelting2 extends ItemFairyCraftingToolBase
+public class ItemFairyWandMelting2 extends ItemFairyWeaponCraftingToolBase
 {
 
 	public ItemFairyWandMelting2()

@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.items;
+package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.List;
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.modules.fairyweapon.ItemFairyCraftingToolBase;
 import miragefairy2019.mod.modules.ore.BlockOreSeed;
 import miragefairy2019.mod.modules.ore.BlockOreSeed.EnumVariant;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -22,7 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFairyWandCrafting extends ItemFairyCraftingToolBase
+public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingToolBase
 {
 
 	public ItemFairyWandCrafting()

@@ -1,24 +1,23 @@
-package miragefairy2019.mod.modules.fairyweapon.items;
+package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.modules.fairyweapon.ItemFairyCraftingToolBase;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFairyWandCrafting2 extends ItemFairyCraftingToolBase
+public class ItemFairyWandMelting extends ItemFairyWeaponCraftingToolBase
 {
 
-	public ItemFairyWandCrafting2()
+	public ItemFairyWandMelting()
 	{
 		composite = composite
 			.add(Components.MIRAGIUM, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.craft));
+			.add(Components.fairyAbilityType(EnumAbilityType.flame));
 		setMaxDamage(32 - 1);
 	}
 
@@ -28,7 +27,7 @@ public class ItemFairyWandCrafting2 extends ItemFairyCraftingToolBase
 	{
 
 		// ポエム
-		tooltip.add("腕が4本欲しくなったときにどうぞ");
+		tooltip.add("金属を溶かすほどの情熱");
 
 		super.addInformation(itemStack, world, tooltip, flag);
 

@@ -11,7 +11,7 @@ import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.multi.ItemMulti;
-import miragefairy2019.mod.modules.fairyweapon.ItemFairyWeaponBase;
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.Minecraft;
