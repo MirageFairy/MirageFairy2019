@@ -4,7 +4,7 @@
 	"pattern": [
 		"CaF",
 		"S#A",
-		"McO"
+		"MpO"
 	],
 	"key": {
 		"#": {
@@ -38,9 +38,9 @@
 			"type": "forge:ore_dict",
 			"ore": "mirageFairy2019SphereAttack"
 		},
-		"c": {
+		"p": {
 			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
 		}
 	},
 	"result": {

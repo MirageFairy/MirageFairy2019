@@ -4,7 +4,7 @@
 	"pattern": [
 		"cal",
 		" #a",
-		"a  "
+		"a p"
 	],
 	"key": {
 		"#": {
@@ -21,6 +21,10 @@
 		"c": {
 			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
+		"p": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
 		}
 	},
 	"result": {

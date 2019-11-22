@@ -2,9 +2,9 @@
 	"type": "forge:ore_shaped",
 	"group": "dark_mana_rod",
 	"pattern": [
-		"cG ",
+		"pGm",
 		"GRG",
-		" Gm"
+		"cG "
 	],
 	"key": {
 		"c": {
@@ -22,6 +22,10 @@
 		"G": {
 			"type": "forge:ore_dict",
 			"ore": "gemMagnetite"
+		},
+		"p": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
 		}
 	},
 	"result": {

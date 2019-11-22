@@ -2,7 +2,7 @@
 	"type": "forge:ore_shaped",
 	"group": "ocarina_base",
 	"pattern": [
-		" Gm",
+		"pGm",
 		"GSG",
 		"cGI"
 	],
@@ -26,6 +26,10 @@
 		"m": {
 			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
+		},
+		"p": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
 		}
 	},
 	"result": {
