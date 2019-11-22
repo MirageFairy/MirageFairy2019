@@ -17,6 +17,7 @@ import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandCrafting2;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandCrafting3;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandMelting;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandMelting2;
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandPolishing;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandSummoning;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemMagicWandBase;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemMagicWandCollecting;
@@ -56,6 +57,7 @@ public class ModuleFairyWeapon
 		public Provider<ItemFairyWandMelting2> fairyWandMelting2 = item(ItemFairyWandMelting2::new, "melting_fairy_wand_2", "fairyWandMelting2").ore("mirageFairy2019CraftingToolFairyWandMelting"); // 紅蓮のステッキ
 		public Provider<ItemFairyWandBreaking> fairyWandBreaking = item(ItemFairyWandBreaking::new, "breaking_fairy_wand", "fairyWandBreaking").ore("mirageFairy2019CraftingToolFairyWandBreaking"); // 破壊のステッキ
 		public Provider<ItemFairyWandBreaking2> fairyWandBreaking2 = item(ItemFairyWandBreaking2::new, "breaking_fairy_wand_2", "fairyWandBreaking2").ore("mirageFairy2019CraftingToolFairyWandBreaking"); // 破壊のステッキ2
+		public Provider<ItemFairyWandPolishing> fairyWandPolishing = item(ItemFairyWandPolishing::new, "polishing_fairy_wand", "fairyWandPolishing").ore("mirageFairy2019CraftingToolFairyWandPolishing"); // 珠玉のステッキ
 		public Provider<ItemFairyWandSummoning> fairyWandSummoning = item(ItemFairyWandSummoning::new, "summoning_fairy_wand", "fairyWandSummoning").ore("mirageFairy2019CraftingToolFairyWandSummoning"); // 召喚のステッキ
 
 		public Provider<ItemMiragiumSword> miragiumSword = item(ItemMiragiumSword::new, "miragium_sword", "miragiumSword"); // ミラジウムの剣

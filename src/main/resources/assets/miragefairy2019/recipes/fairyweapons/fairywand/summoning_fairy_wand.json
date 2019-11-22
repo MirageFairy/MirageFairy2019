@@ -3,14 +3,10 @@
 	"group": "summoning_fairy_wand",
 	"pattern": [
 		" cS",
-		" R ",
+		" Rp",
 		"R  "
 	],
 	"key": {
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
 		"R": {
 			"type": "forge:ore_dict",
 			"ore": "mirageFairy2019ManaRodShine"
@@ -18,6 +14,14 @@
 		"S": {
 			"type": "forge:ore_dict",
 			"ore": "mirageFairy2019SphereCrystal"
+		},
+		"c": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
+		"p": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
 		}
 	},
 	"result": {
