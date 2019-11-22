@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon;
+package miragefairy2019.mod.lib;
 
 import java.util.List;
 
@@ -15,6 +15,9 @@ import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
 
+/**
+ * {@link #isBuiltInRenderer()}が常に真を返すだけのラッパーです。
+ */
 public class BakedModelBuiltinWrapper implements IBakedModel
 {
 
@@ -43,6 +46,9 @@ public class BakedModelBuiltinWrapper implements IBakedModel
 		return bakedModel.isGui3d();
 	}
 
+	/**
+	 * 常に真を返します。
+	 */
 	@Override
 	public boolean isBuiltInRenderer()
 	{

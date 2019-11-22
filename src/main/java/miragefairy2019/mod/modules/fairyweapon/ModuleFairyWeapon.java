@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Provider;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairySword;
