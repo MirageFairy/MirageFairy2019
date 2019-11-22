@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon;
+package miragefairy2019.mod.modules.fairyweapon.recipe;
 
 import java.util.Optional;
 
@@ -13,12 +13,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class RecipesCombining extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
+public class RecipesUncombining extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
 
-	public RecipesCombining()
+	public RecipesUncombining()
 	{
-		setRegistryName(new ResourceLocation(ModMirageFairy2019.MODID, "combining"));
+		setRegistryName(new ResourceLocation(ModMirageFairy2019.MODID, "uncombining"));
 	}
 
 	//
@@ -28,7 +28,6 @@ public class RecipesCombining extends IForgeRegistryEntry.Impl<IRecipe> implemen
 
 		public ICombiningItem combiningItem;
 		public ItemStack itemStack;
-		public ItemStack itemStackPart;
 
 	}
 
@@ -38,7 +37,7 @@ public class RecipesCombining extends IForgeRegistryEntry.Impl<IRecipe> implemen
 
 		boolean[] used = new boolean[inventoryCrafting.getSizeInventory()];
 
-		// CombiningItem探索
+		// 妖精武器探索
 		a:
 		{
 			for (int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
@@ -47,32 +46,10 @@ public class RecipesCombining extends IForgeRegistryEntry.Impl<IRecipe> implemen
 					ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
 					Item item = itemStack.getItem();
 					if (item instanceof ICombiningItem) {
-						if (((ICombiningItem) item).canCombine(itemStack)) {
+						if (((ICombiningItem) item).canUncombine(itemStack)) {
 
 							result.itemStack = itemStack;
 							result.combiningItem = (ICombiningItem) item;
-							used[i] = true;
-							break a;
-
-						}
-					}
-
-				}
-			}
-			return Optional.empty();
-		}
-
-		// Part探索
-		a:
-		{
-			for (int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
-				if (!used[i]) {
-
-					ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
-					if (!itemStack.isEmpty()) {
-						if (result.combiningItem.canCombineWith(result.itemStack, itemStack)) {
-
-							result.itemStackPart = itemStack;
 							used[i] = true;
 							break a;
 
@@ -111,7 +88,7 @@ public class RecipesCombining extends IForgeRegistryEntry.Impl<IRecipe> implemen
 		if (nResult == null) return ItemStack.EMPTY;
 
 		ItemStack itemStack = nResult.itemStack.copy();
-		nResult.combiningItem.setCombinedPart(itemStack, nResult.itemStackPart);
+		nResult.combiningItem.setCombinedPart(itemStack, ItemStack.EMPTY);
 		return itemStack;
 	}
 
@@ -154,7 +131,7 @@ public class RecipesCombining extends IForgeRegistryEntry.Impl<IRecipe> implemen
 	@Override
 	public boolean canFit(int width, int height)
 	{
-		return width * height >= 2;
+		return width * height >= 1;
 	}
 
 }

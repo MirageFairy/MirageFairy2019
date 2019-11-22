@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon;
+package miragefairy2019.mod.modules.fairyweapon.recipe;
 
 import java.util.Optional;
 
@@ -7,18 +7,19 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class RecipesUncombining extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
+public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
 
-	public RecipesUncombining()
+	public RecipesSphereReplacement()
 	{
-		setRegistryName(new ResourceLocation(ModMirageFairy2019.MODID, "uncombining"));
+		setRegistryName(new ResourceLocation(ModMirageFairy2019.MODID, "sphere_replacement"));
 	}
 
 	//
@@ -26,8 +27,9 @@ public class RecipesUncombining extends IForgeRegistryEntry.Impl<IRecipe> implem
 	protected static class MatchResult
 	{
 
-		public ICombiningItem combiningItem;
-		public ItemStack itemStack;
+		public ISphereReplacementItem sphereReplacementItem;
+		public ItemStack itemStackSphereReplacement;
+		public NonNullList<Ingredient> repairmentSpheres;
 
 	}
 
@@ -45,11 +47,11 @@ public class RecipesUncombining extends IForgeRegistryEntry.Impl<IRecipe> implem
 
 					ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
 					Item item = itemStack.getItem();
-					if (item instanceof ICombiningItem) {
-						if (((ICombiningItem) item).canUncombine(itemStack)) {
+					if (item instanceof ISphereReplacementItem) {
+						if (((ISphereReplacementItem) item).canRepair(itemStack)) {
 
-							result.itemStack = itemStack;
-							result.combiningItem = (ICombiningItem) item;
+							result.itemStackSphereReplacement = itemStack;
+							result.sphereReplacementItem = (ISphereReplacementItem) item;
 							used[i] = true;
 							break a;
 
@@ -59,6 +61,31 @@ public class RecipesUncombining extends IForgeRegistryEntry.Impl<IRecipe> implem
 				}
 			}
 			return Optional.empty();
+		}
+
+		// スフィア探索
+		result.repairmentSpheres = result.sphereReplacementItem.getRepairmentSpheres(result.itemStackSphereReplacement);
+		if (result.repairmentSpheres.size() == 0) return Optional.empty();
+		for (Ingredient sphere : result.repairmentSpheres) {
+
+			a:
+			{
+				for (int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
+					if (!used[i]) {
+
+						ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
+						if (sphere.test(itemStack)) {
+
+							used[i] = true;
+							break a;
+
+						}
+
+					}
+				}
+				return Optional.empty();
+			}
+
 		}
 
 		// 余りがあってはならない
@@ -86,10 +113,7 @@ public class RecipesUncombining extends IForgeRegistryEntry.Impl<IRecipe> implem
 	{
 		MatchResult nResult = match(inventoryCrafting).orElse(null);
 		if (nResult == null) return ItemStack.EMPTY;
-
-		ItemStack itemStack = nResult.itemStack.copy();
-		nResult.combiningItem.setCombinedPart(itemStack, ItemStack.EMPTY);
-		return itemStack;
+		return nResult.sphereReplacementItem.getRepairedItem(nResult.itemStackSphereReplacement);
 	}
 
 	@Override
@@ -109,10 +133,8 @@ public class RecipesUncombining extends IForgeRegistryEntry.Impl<IRecipe> implem
 		for (int i = 0; i < list.size(); ++i) {
 			ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
 
-			if (itemStack == nResult.itemStack) {
-				// クラフティングアイテムを使用しても耐久が減ったものは残らない
-				// 代わりにそれまで合成されていたパーツが出てくる
-				list.set(i, nResult.combiningItem.getCombinedPart(nResult.itemStack));
+			if (itemStack == nResult.itemStackSphereReplacement) {
+				// ステッキを使用してもステッキは消費される
 			} else {
 				list.set(i, ForgeHooks.getContainerItem(itemStack));
 			}
