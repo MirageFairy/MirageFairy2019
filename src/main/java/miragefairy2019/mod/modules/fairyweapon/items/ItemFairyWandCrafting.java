@@ -1,15 +1,15 @@
 package miragefairy2019.mod.modules.fairyweapon.items;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.modules.fairyweapon.ItemFairyCraftingToolBase;
-import miragefairy2019.mod.modules.ore.ModuleOre;
-import net.minecraft.block.state.IBlockState;
+import miragefairy2019.mod.modules.ore.BlockOreSeed;
+import miragefairy2019.mod.modules.ore.BlockOreSeed.EnumVariant;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,19 +17,20 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBreakingFairyWand extends ItemFairyCraftingToolBase
+public class ItemFairyWandCrafting extends ItemFairyCraftingToolBase
 {
 
-	public ItemBreakingFairyWand()
+	public ItemFairyWandCrafting()
 	{
 		composite = composite
-			.add(Components.MIRAGIUM, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.breaking));
-		setMaxDamage(32 - 1);
+			.add(Components.WOOD, 1)
+			.add(Components.fairyAbilityType(EnumAbilityType.craft));
+		setMaxDamage(16 - 1);
 	}
 
 	@Override
@@ -38,12 +39,13 @@ public class ItemBreakingFairyWand extends ItemFairyCraftingToolBase
 	{
 
 		// ポエム
-		tooltip.add("振ると衝撃波が迸る");
+		tooltip.add("靴を作ってくれる妖精さん");
 
 		super.addInformation(itemStack, world, tooltip, flag);
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
@@ -51,25 +53,17 @@ public class ItemBreakingFairyWand extends ItemFairyCraftingToolBase
 		if (ApiMain.side.isClient()) {
 			if (player.isSneaking()) {
 
-				Map<IBlockState, Integer> map = new HashMap<>();
-				int x = Math.floorDiv(pos.getX(), 16);
-				int z = Math.floorDiv(pos.getZ(), 16);
-
-				for (int xi = 0; xi < 16; xi++) {
-					for (int zi = 0; zi < 16; zi++) {
-						for (int yi = 0; yi < 256; yi++) {
-							IBlockState blockState = world.getBlockState(new BlockPos(x + xi, yi, z + zi));
-							if (blockState.getBlock().equals(ModuleOre.blockOreSeed)) {
-								map.put(blockState, map.getOrDefault(blockState, 0) + 1);
-							}
-						}
-					}
+				// 鉱石生成確率表示
+				List<String> lines = new ArrayList<>();
+				lines.add("===== Ore List =====");
+				for (EnumVariant variant : EnumVariant.values()) {
+					lines.add("----- " + variant.name());
+					BlockOreSeed.getList(world, player.getPosition(), variant).stream()
+						.forEach(t -> lines.add(String.format("%.2f", t.weight) + ": " + t.item.get().getBlock().getItem(world, pos, t.item.get()).getDisplayName()));
 				}
-
-				System.out.println("------");
-				map.entrySet().stream().forEach(e -> {
-					System.out.println(e.getKey() + "\t" + e.getValue());
-				});
+				lines.add("====================");
+				player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)
+					.join("\n")), false);
 
 			}
 		}

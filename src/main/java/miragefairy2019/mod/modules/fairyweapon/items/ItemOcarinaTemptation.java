@@ -30,10 +30,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemTemptationOcarina extends ItemOcarinaBase
+public class ItemOcarinaTemptation extends ItemOcarinaBase
 {
 
-	public ItemTemptationOcarina()
+	public ItemOcarinaTemptation()
 	{
 		composite = composite
 			.add(Components.PYROPE, 4)
@@ -196,7 +196,7 @@ public class ItemTemptationOcarina extends ItemOcarinaBase
 			// 範囲
 
 			isEntity = false;
-			targetEntities = ItemCollectingMagicWand.getEntities(EntityVillager.class, world, player.getPositionVector(), status.radius);
+			targetEntities = ItemMagicWandCollecting.getEntities(EntityVillager.class, world, player.getPositionVector(), status.radius);
 
 		}
 		List<Tuple<EntityVillager, Boolean>> targets = ISuppliterator.ofIterable(targetEntities)
@@ -331,14 +331,14 @@ public class ItemTemptationOcarina extends ItemOcarinaBase
 
 			// 発動範囲にパーティクルを表示
 			if (!resultWithFairy.isEntity) {
-				ItemCollectingMagicWand.spawnParticleSphericalRange(
+				ItemMagicWandCollecting.spawnParticleSphericalRange(
 					world,
 					player.getPositionVector(),
 					resultWithFairy.status.radius);
 			}
 
 			// 対象にパーティクルを表示
-			ItemCollectingMagicWand.spawnParticleTargets(
+			ItemMagicWandCollecting.spawnParticleTargets(
 				world,
 				resultWithFairy.targets,
 				target -> target.y,

@@ -31,10 +31,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemCollectingMagicWand extends ItemFairyWeaponBase
+public class ItemMagicWandCollecting extends ItemFairyWeaponBase
 {
 
-	public ItemCollectingMagicWand()
+	public ItemMagicWandCollecting()
 	{
 		composite = composite
 			.add(Components.FLUORITE, 3)

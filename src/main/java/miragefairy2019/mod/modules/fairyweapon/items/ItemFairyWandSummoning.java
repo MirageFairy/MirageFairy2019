@@ -24,10 +24,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemSummoningFairyWand extends ItemFairyCraftingToolBase
+public class ItemFairyWandSummoning extends ItemFairyCraftingToolBase
 {
 
-	public ItemSummoningFairyWand()
+	public ItemFairyWandSummoning()
 	{
 		composite = composite
 			.add(Components.MIRAGIUM, 1)

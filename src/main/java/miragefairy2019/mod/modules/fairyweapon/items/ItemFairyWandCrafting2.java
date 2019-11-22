@@ -11,14 +11,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMeltingFairyWand extends ItemFairyCraftingToolBase
+public class ItemFairyWandCrafting2 extends ItemFairyCraftingToolBase
 {
 
-	public ItemMeltingFairyWand()
+	public ItemFairyWandCrafting2()
 	{
 		composite = composite
 			.add(Components.MIRAGIUM, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.flame));
+			.add(Components.fairyAbilityType(EnumAbilityType.craft));
 		setMaxDamage(32 - 1);
 	}
 
@@ -28,7 +28,7 @@ public class ItemMeltingFairyWand extends ItemFairyCraftingToolBase
 	{
 
 		// ポエム
-		tooltip.add("金属を溶かすほどの情熱");
+		tooltip.add("腕が4本欲しくなったときにどうぞ");
 
 		super.addInformation(itemStack, world, tooltip, flag);
 

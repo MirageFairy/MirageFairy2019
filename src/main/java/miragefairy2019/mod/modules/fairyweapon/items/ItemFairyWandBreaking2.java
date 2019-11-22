@@ -11,15 +11,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMeltingFairyWand2 extends ItemFairyCraftingToolBase
+public class ItemFairyWandBreaking2 extends ItemFairyCraftingToolBase
 {
 
-	public ItemMeltingFairyWand2()
+	public ItemFairyWandBreaking2()
 	{
 		composite = composite
 			.add(Components.MIRAGIUM, 1)
-			.add(Components.FLUORITE, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.flame));
+			.add(Components.SULFUR, 1)
+			.add(Components.fairyAbilityType(EnumAbilityType.breaking));
 		setMaxDamage(64 - 1);
 	}
 
@@ -29,7 +29,7 @@ public class ItemMeltingFairyWand2 extends ItemFairyCraftingToolBase
 	{
 
 		// ポエム
-		tooltip.add("高温注意！");
+		tooltip.add("実はガラスより脆い");
 
 		super.addInformation(itemStack, world, tooltip, flag);
 
