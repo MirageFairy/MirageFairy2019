@@ -22,9 +22,8 @@ public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingToolBase
 
 	public ItemFairyWandCrafting()
 	{
-		composite = composite
-			.add(Components.WOOD, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.craft));
+		addComponent(Components.WOOD, 1);
+		addComponent(Components.fairyAbilityType(EnumAbilityType.craft));
 		setMaxDamage(16 - 1);
 		setDescription("スフィアから聞こえる、妖精の声");
 	}

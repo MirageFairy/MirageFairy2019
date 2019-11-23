@@ -8,10 +8,9 @@ public class ItemFairyWandCrafting3 extends ItemFairyWeaponCraftingToolBase
 
 	public ItemFairyWandCrafting3()
 	{
-		composite = composite
-			.add(Components.MIRAGIUM, 1)
-			.add(Components.MAGNETITE, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.craft));
+		addComponent(Components.MIRAGIUM, 1);
+		addComponent(Components.MAGNETITE, 1);
+		addComponent(Components.fairyAbilityType(EnumAbilityType.craft));
 		setMaxDamage(64 - 1);
 		setDescription("腕が4本欲しくなったときにどうぞ");
 	}

@@ -30,10 +30,9 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 
 	public ItemMiragiumAxe()
 	{
-		composite = composite
-			.add(Components.MIRAGIUM, 3)
-			.add(Components.WOOD, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.fell));
+		addComponent(Components.MIRAGIUM, 3);
+		addComponent(Components.WOOD, 1);
+		addComponent(Components.fairyAbilityType(EnumAbilityType.fell));
 		setMaxDamage(64 - 1);
 		setDescription("飛べるって素敵");
 		setHarvestLevel("axe", 1);

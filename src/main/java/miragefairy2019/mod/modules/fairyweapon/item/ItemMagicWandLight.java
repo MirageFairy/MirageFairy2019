@@ -33,9 +33,8 @@ public class ItemMagicWandLight extends ItemMagicWandBase
 
 	public ItemMagicWandLight()
 	{
-		composite = composite
-			.add(Components.APATITE, 3)
-			.add(Components.fairyAbilityType(EnumAbilityType.light));
+		addComponent(Components.APATITE, 3);
+		addComponent(Components.fairyAbilityType(EnumAbilityType.light));
 		setMaxDamage(128 - 1);
 		setDescription("優しい光が洞窟を照らす");
 	}

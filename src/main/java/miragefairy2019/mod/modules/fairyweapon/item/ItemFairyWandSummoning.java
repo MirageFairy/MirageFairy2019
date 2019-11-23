@@ -28,10 +28,9 @@ public class ItemFairyWandSummoning extends ItemFairyWeaponCraftingToolBase
 
 	public ItemFairyWandSummoning()
 	{
-		composite = composite
-			.add(Components.MIRAGIUM, 1)
-			.add(Components.MOONSTONE, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.crystal));
+		addComponent(Components.MIRAGIUM, 1);
+		addComponent(Components.MOONSTONE, 1);
+		addComponent(Components.fairyAbilityType(EnumAbilityType.crystal));
 		setMaxDamage(64 - 1);
 		setDescription("餌付けのステッキ");
 	}

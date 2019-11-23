@@ -35,10 +35,9 @@ public class ItemMagicWandCollecting extends ItemMagicWandBase
 
 	public ItemMagicWandCollecting()
 	{
-		composite = composite
-			.add(Components.OBSIDIAN, 2)
-			.add(Components.FLUORITE, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.warp));
+		addComponent(Components.OBSIDIAN, 2);
+		addComponent(Components.FLUORITE, 1);
+		addComponent(Components.fairyAbilityType(EnumAbilityType.warp));
 		setMaxDamage(128 - 1);
 		setDescription("魔法のマジックハンド");
 	}

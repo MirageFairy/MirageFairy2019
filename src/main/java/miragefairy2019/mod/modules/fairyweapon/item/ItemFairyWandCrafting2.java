@@ -8,9 +8,8 @@ public class ItemFairyWandCrafting2 extends ItemFairyWeaponCraftingToolBase
 
 	public ItemFairyWandCrafting2()
 	{
-		composite = composite
-			.add(Components.MIRAGIUM, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.craft));
+		addComponent(Components.MIRAGIUM, 1);
+		addComponent(Components.fairyAbilityType(EnumAbilityType.craft));
 		setMaxDamage(32 - 1);
 		setDescription("靴を作ってくれる妖精さん");
 	}

@@ -8,10 +8,9 @@ public class ItemFairyWandMelting2 extends ItemFairyWeaponCraftingToolBase
 
 	public ItemFairyWandMelting2()
 	{
-		composite = composite
-			.add(Components.MIRAGIUM, 1)
-			.add(Components.FLUORITE, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.flame));
+		addComponent(Components.MIRAGIUM, 1);
+		addComponent(Components.FLUORITE, 1);
+		addComponent(Components.fairyAbilityType(EnumAbilityType.flame));
 		setMaxDamage(64 - 1);
 		setDescription("高温注意！");
 	}

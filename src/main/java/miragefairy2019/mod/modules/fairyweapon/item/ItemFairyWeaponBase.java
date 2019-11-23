@@ -10,6 +10,7 @@ import miragefairy2019.mod.api.ComponentFairyAbilityType;
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
+import miragefairy2019.mod.lib.component.Component;
 import miragefairy2019.mod.lib.component.Composite;
 import miragefairy2019.mod.lib.component.ICompositeProvider;
 import miragefairy2019.mod.modules.fairyweapon.recipe.ICombiningItem;
@@ -55,7 +56,6 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 
 	protected String poem = null;
 	protected String author = null;
-	protected Composite composite = Composite.empty();
 
 	protected void setDescription(String poem)
 	{
@@ -66,6 +66,23 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	{
 		this.poem = poem;
 		this.author = author;
+	}
+
+	protected Composite composite = Composite.empty();
+
+	protected void addComponent(Component component)
+	{
+		composite = composite.add(component);
+	}
+
+	protected void addComponent(Component component, int amount)
+	{
+		composite = composite.add(component, amount);
+	}
+
+	protected void addComponent(Component component, double amount)
+	{
+		composite = composite.add(component, amount);
 	}
 
 	//

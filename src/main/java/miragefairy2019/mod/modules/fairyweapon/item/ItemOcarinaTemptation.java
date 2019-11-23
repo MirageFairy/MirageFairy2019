@@ -35,9 +35,8 @@ public class ItemOcarinaTemptation extends ItemOcarinaBase
 
 	public ItemOcarinaTemptation()
 	{
-		composite = composite
-			.add(Components.PYROPE, 4)
-			.add(Components.fairyAbilityType(EnumAbilityType.food));
+		addComponent(Components.PYROPE, 4);
+		addComponent(Components.fairyAbilityType(EnumAbilityType.food));
 		setMaxDamage(128 - 1);
 		setDescription("その音は人の腹を満たし、淫靡な気分にさせる");
 	}

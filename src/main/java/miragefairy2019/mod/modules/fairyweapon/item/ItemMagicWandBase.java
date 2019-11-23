@@ -8,11 +8,10 @@ public class ItemMagicWandBase extends ItemFairyWeaponBase
 
 	public ItemMagicWandBase()
 	{
-		composite = composite
-			.add(Components.MIRAGIUM, 1)
-			.add(Components.FLUORITE, 1)
-			.add(Components.MIRAGIUM, 4)
-			.add(Components.fairyAbilityType(EnumAbilityType.knowledge));
+		addComponent(Components.MIRAGIUM, 1);
+		addComponent(Components.FLUORITE, 1);
+		addComponent(Components.MIRAGIUM, 4);
+		addComponent(Components.fairyAbilityType(EnumAbilityType.knowledge));
 		setMaxDamage(128 - 1);
 		setDescription("風の心、探求");
 	}

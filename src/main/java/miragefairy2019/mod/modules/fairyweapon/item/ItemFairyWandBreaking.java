@@ -20,9 +20,8 @@ public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingToolBase
 
 	public ItemFairyWandBreaking()
 	{
-		composite = composite
-			.add(Components.MIRAGIUM, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.breaking));
+		addComponent(Components.MIRAGIUM, 1);
+		addComponent(Components.fairyAbilityType(EnumAbilityType.breaking));
 		setMaxDamage(32 - 1);
 		setDescription("振ると衝撃波が迸る");
 	}

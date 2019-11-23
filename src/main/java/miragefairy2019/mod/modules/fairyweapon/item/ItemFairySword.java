@@ -26,14 +26,13 @@ public class ItemFairySword extends ItemMiragiumSword
 
 	public ItemFairySword()
 	{
-		composite = composite
-			.add(Components.APATITE, 1)
-			.add(Components.FLUORITE, 1)
-			.add(Components.SULFUR, 1)
-			.add(Components.CINNABAR, 1)
-			.add(Components.MAGNETITE, 1)
-			.add(Components.MOONSTONE, 1)
-			.add(Components.fairyAbilityType(EnumAbilityType.attack));
+		addComponent(Components.APATITE, 1);
+		addComponent(Components.FLUORITE, 1);
+		addComponent(Components.SULFUR, 1);
+		addComponent(Components.CINNABAR, 1);
+		addComponent(Components.MAGNETITE, 1);
+		addComponent(Components.MOONSTONE, 1);
+		addComponent(Components.fairyAbilityType(EnumAbilityType.attack));
 		setMaxDamage(128 - 1);
 		setDescription("デザインコンテスト武器", "たぬん三世");
 	}
