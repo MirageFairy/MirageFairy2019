@@ -53,7 +53,22 @@ import net.minecraftforge.oredict.OreIngredient;
 public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, ICompositeProvider, ICombiningItem
 {
 
+	protected String poem = null;
+	protected String author = null;
 	protected Composite composite = Composite.empty();
+
+	protected void setDescription(String poem)
+	{
+		setDescription(poem, null);
+	}
+
+	protected void setDescription(String poem, String author)
+	{
+		this.poem = poem;
+		this.author = author;
+	}
+
+	//
 
 	public ItemFairyWeaponBase()
 	{
@@ -165,8 +180,12 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
+	public final void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
+
+		// ポエム
+		if (poem != null) tooltip.add(poem);
+		if (author != null) tooltip.add(TextFormatting.LIGHT_PURPLE + "Author: " + author);
 
 		// 機能
 		addInformationFunctions(itemStack, world, tooltip, flag);

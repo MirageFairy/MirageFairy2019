@@ -9,17 +9,13 @@ import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.modules.ore.BlockOreSeed;
 import miragefairy2019.mod.modules.ore.BlockOreSeed.EnumVariant;
 import mirrg.boron.util.suppliterator.ISuppliterator;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingToolBase
 {
@@ -30,18 +26,7 @@ public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingToolBase
 			.add(Components.WOOD, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.craft));
 		setMaxDamage(16 - 1);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-
-		// ポエム
-		tooltip.add("靴を作ってくれる妖精さん");
-
-		super.addInformation(itemStack, world, tooltip, flag);
-
+		setDescription("スフィアから聞こえる、妖精の声");
 	}
 
 	@SuppressWarnings("deprecation")

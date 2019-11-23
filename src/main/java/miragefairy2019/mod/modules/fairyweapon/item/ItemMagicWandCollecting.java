@@ -40,6 +40,7 @@ public class ItemMagicWandCollecting extends ItemMagicWandBase
 			.add(Components.FLUORITE, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.warp));
 		setMaxDamage(128 - 1);
+		setDescription("魔法のマジックハンド");
 	}
 
 	//
@@ -61,18 +62,6 @@ public class ItemMagicWandCollecting extends ItemMagicWandBase
 			wear = 0.25 * Math.pow(0.5, fairyType.manaSet.aqua / 30);
 			coolTime = fairyType.cost * 3 * Math.pow(0.5, fairyType.manaSet.dark / 40);
 		}
-
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-
-		// ポエム
-		tooltip.add("魔法のマジックハンド");
-
-		super.addInformation(itemStack, world, tooltip, flag);
 
 	}
 

@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
@@ -9,16 +8,12 @@ import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingToolBase
 {
@@ -29,18 +24,7 @@ public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingToolBase
 			.add(Components.MIRAGIUM, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.breaking));
 		setMaxDamage(32 - 1);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-
-		// ポエム
-		tooltip.add("振ると衝撃波が迸る");
-
-		super.addInformation(itemStack, world, tooltip, flag);
-
+		setDescription("振ると衝撃波が迸る");
 	}
 
 	@Override

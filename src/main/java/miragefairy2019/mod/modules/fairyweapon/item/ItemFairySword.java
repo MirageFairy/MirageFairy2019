@@ -35,6 +35,7 @@ public class ItemFairySword extends ItemMiragiumSword
 			.add(Components.MOONSTONE, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.attack));
 		setMaxDamage(128 - 1);
+		setDescription("デザインコンテスト武器", "たぬん三世");
 	}
 
 	public double getAdditionalAttackDamage(ItemStack itemStack)
@@ -76,19 +77,6 @@ public class ItemFairySword extends ItemMiragiumSword
 			// コスト0のときに+3
 
 		}
-
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-
-		// ポエム
-		tooltip.add("デザインコンテスト武器");
-		tooltip.add(TextFormatting.LIGHT_PURPLE + "Author: たぬん三世");
-
-		super.addInformation(itemStack, world, tooltip, flag);
 
 	}
 

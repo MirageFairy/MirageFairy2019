@@ -35,6 +35,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 			.add(Components.WOOD, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.fell));
 		setMaxDamage(64 - 1);
+		setDescription("飛べるって素敵");
 		setHarvestLevel("axe", 1);
 		destroySpeed = 6;
 	}
@@ -62,18 +63,6 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 			additionalReach = Math.min(fairyType.manaSet.wind / 5, 20);
 			collection = fairyType.abilitySet.get(EnumAbilityType.warp) >= 10;
 		}
-
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-
-		// ポエム
-		tooltip.add("飛べるって素敵");
-
-		super.addInformation(itemStack, world, tooltip, flag);
 
 	}
 

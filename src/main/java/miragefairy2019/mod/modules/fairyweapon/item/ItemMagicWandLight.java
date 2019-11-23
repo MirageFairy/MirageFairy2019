@@ -37,6 +37,7 @@ public class ItemMagicWandLight extends ItemMagicWandBase
 			.add(Components.APATITE, 3)
 			.add(Components.fairyAbilityType(EnumAbilityType.light));
 		setMaxDamage(128 - 1);
+		setDescription("優しい光が洞窟を照らす");
 	}
 
 	//
@@ -52,18 +53,6 @@ public class ItemMagicWandLight extends ItemMagicWandBase
 			additionalReach = Math.min(fairyType.manaSet.aqua / 50.0 * 20, 40);
 			coolTime = fairyType.cost * 2 * Math.pow(0.5, fairyType.manaSet.gaia / 30);
 		}
-
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-
-		// ポエム
-		tooltip.add("優しい光が洞窟を照らす");
-
-		super.addInformation(itemStack, world, tooltip, flag);
 
 	}
 

@@ -39,6 +39,7 @@ public class ItemOcarinaTemptation extends ItemOcarinaBase
 			.add(Components.PYROPE, 4)
 			.add(Components.fairyAbilityType(EnumAbilityType.food));
 		setMaxDamage(128 - 1);
+		setDescription("その音は人の腹を満たし、淫靡な気分にさせる");
 	}
 
 	//
@@ -60,18 +61,6 @@ public class ItemOcarinaTemptation extends ItemOcarinaBase
 			experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.manaSet.gaia / 50.0 + fairyType.abilitySet.get(EnumAbilityType.food) / 10.0), 0.1, 1);
 			coolTime = fairyType.cost * UtilsMath.trim(1 * Math.pow(0.5, fairyType.manaSet.dark / 50.0), 0.1, 1);
 		}
-
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-
-		// ポエム
-		tooltip.add("その音は人の腹を満たし、淫靡な気分にさせる");
-
-		super.addInformation(itemStack, world, tooltip, flag);
 
 	}
 

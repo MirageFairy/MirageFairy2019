@@ -33,18 +33,7 @@ public class ItemFairyWandSummoning extends ItemFairyWeaponCraftingToolBase
 			.add(Components.MOONSTONE, 1)
 			.add(Components.fairyAbilityType(EnumAbilityType.crystal));
 		setMaxDamage(64 - 1);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-
-		// ポエム
-		tooltip.add("餌付けのステッキ");
-
-		super.addInformation(itemStack, world, tooltip, flag);
-
+		setDescription("餌付けのステッキ");
 	}
 
 	@Override
