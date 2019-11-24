@@ -2,20 +2,24 @@
 	"type": "forge:ore_shaped",
 	"group": "crafting_fairy_wand",
 	"pattern": [
-		"IIm",
-		"IRS",
-		"cR "
+		"sII",
+		"fIR",
+		"cmR"
 	],
 	"key": {
 		"R": {
 			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019ManaRodAqua"
+			"ore": "stickWood"
 		},
 		"I": {
 			"type": "forge:ore_dict",
 			"ore": "ingotMiragium"
 		},
-		"S": {
+		"s": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019SphereSlash"
+		},
+		"f": {
 			"type": "forge:ore_dict",
 			"ore": "mirageFairy2019SphereFell"
 		},
