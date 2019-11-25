@@ -123,6 +123,16 @@ public class ModuleFairy
 		public static VariantFairy[] shield;
 		public static VariantFairy[] hopper;
 		public static VariantFairy[] mina;
+		public static VariantFairy[] magnetite;
+		public static VariantFairy[] sulfur;
+		public static VariantFairy[] apatite;
+		public static VariantFairy[] cinnabar;
+		public static VariantFairy[] fluorite;
+		public static VariantFairy[] moonstone;
+		public static VariantFairy[] pyrope;
+		public static VariantFairy[] smithsonite;
+		public static VariantFairy[] christmas;
+		public static VariantFairy[] santaclaus;
 
 		//
 
@@ -162,8 +172,7 @@ public class ModuleFairy
 				r(28, thunder = v(t(28, "thunder", 3, 18, 1, m(2, 9, 3, 2, 0, 10), a(9, 0, 1, 8, 11, 0, 0, 6, 0, 4, 5, 11, 11, 0, 0, 0, 12), c(0xB4FFFF, 0x4D5670, 0x4D5670, 0xFFEB00))));
 				r(29, chicken = v(t(29, "chicken", 1, 39, 1, m(0, 0, 1, 0, 10, 7), a(1, 0, 0, 0, 0, 3, 0, 1, 0, 0, 2, 0, 1, 0, 14, 3, 2), c(0xFFDFA3, 0xFFFFFF, 0xFFFFFF, 0xD93117))));
 				r(30, furnace = v(t(30, "furnace", 2, 72, 1, m(0, 2, 0, 10, 2, 0), a(1, 10, 0, 6, 10, 0, 0, 1, 8, 0, 0, 1, 4, 0, 0, 3, 3), c(0xFFFFFF, 0xFF7F19, 0x8E8E8E, 0x383838))));
-				r(31, magentaglazedterracotta = v(t(31, "magentaglazedterracotta", 3, 60, 1, m(0, 1, 0, 10, 11, 0), a(0, 2, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 0), c(0xFFFFFF, 0xF4B5CB,
-					0xCB58C2, 0x9D2D95))));
+				r(31, magentaglazedterracotta = v(t(31, "magentaglazedterracotta", 3, 60, 1, m(0, 1, 0, 10, 11, 0), a(0, 2, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 0), c(0xFFFFFF, 0xF4B5CB, 0xCB58C2, 0x9D2D95))));
 				r(32, bread = v(t(32, "bread", 2, 35, 1, m(0, 0, 0, 5, 10, 0), a(0, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 14, 0, 5), c(0xCC850C, 0x9E7325, 0x654B17, 0x3F2E0E))));
 				r(33, daytime = v(t(33, "daytime", 1, 88, 1, m(1, 0, 10, 3, 7, 24), a(0, 0, 0, 11, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3), c(0xFFE260, 0xAACAEF, 0x84B5EF, 0xFFE7B2))));
 				r(34, night = v(t(34, "night", 1, 83, 1, m(0, 7, 10, 0, 7, 24), a(0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 1), c(0xFFE260, 0x2C2C2E, 0x0E0E10, 0x2D4272))));
@@ -202,6 +211,16 @@ public class ModuleFairy
 				r(67, shield = v(t(67, "shield", 2, 81, 1, m(0.1, 0, 0, 10, 4, 2), a(1, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 0), c(0xFFFFFF, 0xFFC48E, 0x5A5A8E, 0xFFFFFF))));
 				r(68, hopper = v(t(68, "hopper", 3, 63, 1, m(0, 3, 0, 10, 0, 2), a(0, 1, 0, 0, 0, 0, 0, 1, 9, 1, 0, 0, 0, 0, 0, 3, 1), c(0xFFFFFF, 0x797979, 0x646464, 0x5A5A5A))));
 				r(69, mina = v(t(69, "mina", 1, 50, 0.1, m(0, 0, 0, 0, 0, 10), a(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0), c(0xFFFF84, 0xFFFF00, 0xFFFF00, 0xFFC800))));
+				r(70, magnetite = v(t(70, "magnetite", 2, 62, 1, m(10, 18, 0, 18, 0, 95), a(0, 2, 4, 0, 0, 0, 8, 1, 0, 0, 2, 3, 3, 0, 0, 1, 0), c(0x72736D, 0x2A2A26, 0x1F201C, 0x1F201C))));
+				r(71, sulfur = v(t(71, "sulfur", 3, 44, 1, m(10, 14, 0, 67, 0, 83), a(4, 3, 0, 3, 8, 0, 6, 2, 0, 0, 0, 5, 11, 0, 0, 3, 6), c(0xFFF4AA, 0xFFE82C, 0xD6C00E, 0xEAD20F))));
+				r(72, apatite = v(t(72, "apatite", 3, 60, 1, m(10, 0, 0, 11, 41, 63), a(0, 2, 6, 2, 3, 7, 12, 4, 0, 0, 0, 5, 4, 0, 4, 2, 0), c(0xCAE6FF, 0x76C1FF, 0x2993EA, 0x80C2FF))));
+				r(73, cinnabar = v(t(73, "cinnabar", 3, 61, 1, m(10, 61, 26, 0, 0, 70), a(8, 0, 0, 0, 0, 0, 10, 5, 0, 0, 0, 3, 6, 0, 0, 5, 0), c(0xFEC0C0, 0xD41818, 0xBC1C1C, 0xDD2E2E))));
+				r(74, fluorite = v(t(74, "fluorite", 3, 59, 1, m(10, 26, 53, 5, 0, 64), a(0, 4, 0, 7, 4, 0, 14, 6, 0, 0, 0, 4, 3, 0, 0, 5, 0), c(0xC0FEF3, 0x28E1C7, 0xAE91E9, 0x66CDEB))));
+				r(75, moonstone = v(t(75, "moonstone", 4, 68, 1, m(10, 3, 38, 0, 15, 43), a(0, 0, 0, 9, 2, 2, 13, 7, 0, 4, 0, 6, 0, 0, 0, 5, 0), c(0xEDEFFF, 0xDBF7FE, 0xCCE7FE, 0xE0EEFE))));
+				r(76, pyrope = v(t(76, "pyrope", 4, 71, 1, m(10, 0, 18, 0, 31, 75), a(2, 0, 0, 2, 4, 0, 14, 7, 0, 0, 0, 6, 0, 5, 0, 3, 0), c(0xF4CDDE, 0xEC97BC, 0xCE1860, 0xD41E6E))));
+				r(77, smithsonite = v(t(77, "smithsonite", 3, 63, 1, m(10, 13, 0, 36, 0, 85), a(0, 4, 2, 0, 0, 0, 5, 2, 0, 0, 1, 4, 0, 0, 0, 2, 0), c(0xC1F0E6, 0x95DFD0, 0x33917E, 0x52C6B5))));
+				r(78, christmas = v(t(78, "christmas", 5, 25, 1.2, m(2, 3, 10, 0, 7, 7), a(0, 0, 0, 4, 3, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0), c(0xD2E6F6, 0xF1150F, 0xB20000, 0x248541))));
+				r(79, santaclaus = v(t(79, "santaclaus", 4, 12, 1.2, m(4, 10, 20, 5, 10, 5), a(3, 6, 5, 3, 0, 2, 0, 10, 14, 7, 4, 1, 1, 1, 4, 9, 5), c(0xCDBBAD, 0xD61728, 0xDA0117, 0xDAD8D4))));
 			}
 
 			variants = ImmutableArray.ofList(variants2);
