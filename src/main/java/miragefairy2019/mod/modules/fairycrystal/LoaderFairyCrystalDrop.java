@@ -12,6 +12,7 @@ import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
 import miragefairy2019.mod.modules.fairy.VariantFairy;
 import mirrg.boron.util.struct.Tuple3;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockDoublePlant.EnumPlantType;
@@ -57,6 +58,14 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.world(r(gold[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(diamond[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(emerald[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(magnetite[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(apatite[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(fluorite[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(sulfur[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(cinnabar[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(moonstone[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(pyrope[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(smithsonite[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(redstone[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(lapislazuli[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(obsidian[0]), (w, p) -> w.provider.isSurfaceWorld()));
@@ -112,16 +121,25 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.blocks(d(dirt[0], 0.3), Blocks.DIRT, Blocks.GRASS));
 			d.add(RightClickDrops.blocks(d(sand[0], 0.3), Blocks.SAND, Blocks.SANDSTONE, Blocks.RED_SANDSTONE));
 			d.add(RightClickDrops.blocks(d(gravel[0], 0.1), Blocks.GRAVEL));
-			d.add(RightClickDrops.ores(d(iron[0], 0.1), "ingotIron", "blockIron", "nuggetIron"));
-			d.add(RightClickDrops.ores(d(gold[0], 0.03), "ingotGold", "blockGold", "nuggetGold"));
-			d.add(RightClickDrops.ores(d(diamond[0], 0.01), "gemDiamond", "blockDiamond"));
-			d.add(RightClickDrops.ores(d(emerald[0], 0.03), "gemEmerald", "blockEmerald"));
-			d.add(RightClickDrops.ores(d(redstone[0], 0.1), "dustRedstone", "blockRedstone"));
-			d.add(RightClickDrops.ores(d(lapislazuli[0], 0.1), "gemLapis", "blockLapis"));
+			d.add(RightClickDrops.ores(d(iron[0], 0.1), m("Iron")));
+			d.add(RightClickDrops.ores(d(gold[0], 0.03), m("Gold")));
+			d.add(RightClickDrops.ores(d(diamond[0], 0.01), m("Diamond")));
+			d.add(RightClickDrops.ores(d(emerald[0], 0.03), m("Emerald")));
+			d.add(RightClickDrops.ores(d(magnetite[0], 0.1), m("Magnetite")));
+			d.add(RightClickDrops.ores(d(apatite[0], 0.03), m("Apatite")));
+			d.add(RightClickDrops.ores(d(fluorite[0], 0.01), m("Fluorite")));
+			d.add(RightClickDrops.ores(d(sulfur[0], 0.03), m("Sulfur")));
+			d.add(RightClickDrops.ores(d(cinnabar[0], 0.01), m("Cinnabar")));
+			d.add(RightClickDrops.ores(d(moonstone[0], 0.003), m("Moonstone")));
+			d.add(RightClickDrops.ores(d(pyrope[0], 0.01), m("Pyrope")));
+			d.add(RightClickDrops.ores(d(smithsonite[0], 0.1), m("Smithsonite")));
+			d.add(RightClickDrops.ores(d(redstone[0], 0.1), m("Redstone")));
+			d.add(RightClickDrops.ores(d(lapislazuli[0], 0.1), m("Lapis")));
 			d.add(RightClickDrops.blocks(d(obsidian[0], 0.1), Blocks.OBSIDIAN));
-			d.add(RightClickDrops.ores(d(glowstone[0], 0.1), "dustGlowstone", "glowstone"));
+			d.add(RightClickDrops.ores(d(glowstone[0], 0.1), m("Glowstone")));
+			d.add(RightClickDrops.ores(d(glowstone[0], 0.1), "glowstone"));
 			d.add(RightClickDrops.ingredients(d(coal[0], 0.1), Ingredient.fromStacks(new ItemStack(Items.COAL))));
-			d.add(RightClickDrops.ores(d(coal[0], 0.1), "blockCoal"));
+			d.add(RightClickDrops.ores(d(coal[0], 0.1), m("Coal")));
 
 			d.add(RightClickDrops.classEntities(d(enderman[0], 0.03), EntityEnderman.class));
 			d.add(RightClickDrops.classEntities(d(spider[0], 0.1), EntitySpider.class));
@@ -185,6 +203,13 @@ public class LoaderFairyCrystalDrop
 
 	}
 
+	private static String[] m(String material)
+	{
+		return ISuppliterator.of("ingot", "nugget", "gem", "dust", "dustTiny", "block", "rod", "plate", "ore")
+			.map(s -> s + material)
+			.toArray(String[]::new);
+	}
+
 	private static IDrop r(VariantFairy variantFairy)
 	{
 		return new DropFixed(variantFairy.createItemStack(), 0.1 * Math.pow(0.1, variantFairy.type.rare - 1));
@@ -209,6 +234,14 @@ public class LoaderFairyCrystalDrop
 				r(dirt, b(Blocks.DIRT, 0));
 				r(iron, o("ingotIron"));
 				r(diamond, o("gemDiamond"));
+				r(magnetite, o("gemMagnetite"));
+				r(apatite, o("gemApatite"));
+				r(fluorite, o("gemFluorite"));
+				r(sulfur, o("gemSulfur"));
+				r(cinnabar, o("gemCinnabar"));
+				r(moonstone, o("gemMoonstone"));
+				r(pyrope, o("gemPyrope"));
+				r(smithsonite, o("gemSmithsonite"));
 				r(redstone, o("dustRedstone"));
 				r(sand, b(Blocks.SAND));
 				r(gold, o("ingotGold"));
