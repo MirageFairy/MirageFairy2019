@@ -10,6 +10,7 @@ import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Provider;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemBellBase;
+import miragefairy2019.mod.modules.fairyweapon.item.ItemBellFlowerPicking;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairySword;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandBreaking;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandBreaking2;
@@ -70,6 +71,7 @@ public class ModuleFairyWeapon
 		public Provider<ItemOcarinaBase> ocarinaBase = item(ItemOcarinaBase::new, "ocarina_base", "ocarinaBase"); // オカリナベース
 		public Provider<ItemOcarinaTemptation> ocarinaTemptation = item(ItemOcarinaTemptation::new, "temptation_ocarina", "ocarinaTemptation"); // 魅惑のオカリナ
 		public Provider<ItemBellBase> bellBase = item(ItemBellBase::new, "bell_base", "bellBase"); // 鐘ベース
+		public Provider<ItemBellFlowerPicking> bellFlowerPicking = item(ItemBellFlowerPicking::new, "flower_picking_bell", "bellFlowerPicking"); // 鐘ベース
 
 		//
 
