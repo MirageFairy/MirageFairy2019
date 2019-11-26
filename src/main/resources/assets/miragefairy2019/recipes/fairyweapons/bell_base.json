@@ -2,18 +2,14 @@
 	"type": "forge:ore_shaped",
 	"group": "bell_base",
 	"pattern": [
-		"cGS",
-		" RG",
-		"Imp"
+		"cIS",
+		" RI",
+		"I m"
 	],
 	"key": {
 		"R": {
 			"type": "forge:ore_dict",
 			"ore": "rodMiragium"
-		},
-		"G": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairyCrystal"
 		},
 		"I": {
 			"type": "forge:ore_dict",
@@ -30,10 +26,6 @@
 		"m": {
 			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
-		},
-		"p": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
 		}
 	},
 	"result": {
