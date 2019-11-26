@@ -36,6 +36,7 @@ public class ApiFairy
 		food(YELLOW),
 		knowledge(DARK_GREEN),
 		energy(GOLD),
+		submission(BLACK),
 		;
 
 		private final TextFormatting colorText;

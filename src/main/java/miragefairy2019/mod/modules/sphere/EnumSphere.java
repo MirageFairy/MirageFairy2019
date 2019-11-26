@@ -32,6 +32,7 @@ public enum EnumSphere
 	food(EnumAbilityType.food, 0xC66000, 0xFFCF86, 0xCB6E00, 0xFFC261, () -> Ingredient.fromStacks(new ItemStack(Items.BREAD))),
 	knowledge(EnumAbilityType.knowledge, 0xFFFF00, 0x006200, 0x00A000, 0x50DD00, () -> Ingredient.fromStacks(new ItemStack(Items.BOOK))),
 	energy(EnumAbilityType.energy, 0xFFED30, 0xFFF472, 0xFFE84C, 0xBFE7FF, () -> Ingredient.fromStacks(new ItemStack(Items.COAL))),
+	submission(EnumAbilityType.submission, 0xFF0000, 0x593232, 0x1E1E1E, 0xA90000, () -> Ingredient.fromStacks(new ItemStack(Blocks.IRON_BARS))),
 	;
 
 	public final IAbilityType abilityType;
