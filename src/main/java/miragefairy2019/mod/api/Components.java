@@ -21,6 +21,7 @@ public class Components
 	public static Component WOOD = new Component("wood");
 	public static Component STONE = new Component("stone");
 	public static Component OBSIDIAN = new Component("obsidian");
+	public static Component EMERALD = new Component("emerald");
 	public static Component PYROPE = new Component("pyrope");
 	public static Component SMITHSONITE = new Component("smithsonite");
 
