@@ -1,0 +1,42 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "bell_base",
+	"pattern": [
+		"cGS",
+		" RG",
+		"Imp"
+	],
+	"key": {
+		"R": {
+			"type": "forge:ore_dict",
+			"ore": "rodMiragium"
+		},
+		"G": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyCrystal"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotMiragium"
+		},
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019SphereSubmission"
+		},
+		"c": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
+		"m": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
+		},
+		"p": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:bell_base"
+	}
+}
