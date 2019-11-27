@@ -96,7 +96,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		return state.isFullBlock() || state.getBlock() == Blocks.FARMLAND;
 	}
 
-	protected boolean isMaxAge(IBlockState state)
+	public boolean isMaxAge(IBlockState state)
 	{
 		return state.getValue(AGE) == 3;
 	}
