@@ -1,17 +1,21 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.modules.ore.ModuleOre;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingToolBase
@@ -47,10 +51,16 @@ public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingToolBase
 					}
 				}
 
-				System.out.println("------");
+				// 鉱石生成確率表示
+				List<String> lines = new ArrayList<>();
+				lines.add("===== Ore Seed =====");
+				lines.add("------");
 				map.entrySet().stream().forEach(e -> {
-					System.out.println(e.getKey() + "\t" + e.getValue());
+					lines.add(e.getKey() + ": " + e.getValue());
 				});
+				lines.add("====================");
+				player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)
+					.join("\n")), false);
 
 			}
 		}
