@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.OreIngredientComplex;
@@ -41,13 +40,11 @@ public class ModuleFairyCrystal
 				if (ApiMain.side.isClient()) {
 					ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
 				}
-				ApiFairyCrystal.itemFairyCrystal = itemFairyCrystal = item;
+				itemFairyCrystal = item;
 			}
 
 		});
 		erMod.createItemStack.register(ic -> {
-
-			ApiFairyCrystal.itemStackFairyCrystal = new ItemStack(itemFairyCrystal);
 
 			// 妖晶の鉱石辞書登録
 			OreDictionary.registerOre("mirageFairyCrystal", new ItemStack(itemFairyCrystal));
