@@ -2,8 +2,10 @@ package miragefairy2019.mod.modules.mirageflower;
 
 import java.util.Random;
 
+import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.UtilsMinecraft;
+import miragefairy2019.mod.modules.fairy.FairyRegistry;
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.ore.EnumVariantMaterials1;
 import miragefairy2019.mod.modules.ore.ModuleOre;
@@ -123,6 +125,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		grow(worldIn, pos, state, rand, getGrowRate(worldIn, pos));
 	}
 
+	@SuppressWarnings("deprecation")
 	public double getGrowRate(World world, BlockPos blockPos)
 	{
 		double rate = 0.04;
@@ -152,6 +155,18 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 				// 耕土が湿っているなら加点
 				if (world.getBlockState(blockPos.down()).getValue(BlockFarmland.MOISTURE) > 0) bonus = Math.max(bonus, 1.3);
 
+			}
+
+			// 妖精による判定
+			{
+				IBlockState blockState = world.getBlockState(blockPos.down());
+				ItemStack itemStack = blockState.getBlock().getItem(world, blockPos, blockState);
+				Double value = FairyRegistry.getFairies(itemStack)
+					.map(f -> f.type.manaSet.shine * f.type.abilitySet.get(EnumAbilityType.crystal))
+					.max(Double::compare).orElse(null);
+				if (value != null) {
+					bonus = Math.max(bonus, value / 100 * 3);
+				}
 			}
 
 			if (world.getBlockState(blockPos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.APATITE_BLOCK)) bonus = Math.max(bonus, 1.5);
