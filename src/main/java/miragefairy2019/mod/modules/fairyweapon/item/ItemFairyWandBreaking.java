@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import net.minecraft.block.state.IBlockState;
@@ -30,7 +29,7 @@ public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingToolBase
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 
-		if (ApiMain.side.isClient()) {
+		if (!world.isRemote) {
 			if (player.isSneaking()) {
 
 				Map<IBlockState, Integer> map = new HashMap<>();

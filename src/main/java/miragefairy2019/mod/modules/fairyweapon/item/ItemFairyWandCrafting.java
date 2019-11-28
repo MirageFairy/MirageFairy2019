@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.modules.ore.BlockOreSeed;
 import miragefairy2019.mod.modules.ore.BlockOreSeed.EnumVariant;
@@ -33,7 +32,7 @@ public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingToolBase
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 
-		if (ApiMain.side.isClient()) {
+		if (!world.isRemote) {
 			if (player.isSneaking()) {
 
 				// 鉱石生成確率表示
