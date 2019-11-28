@@ -1,5 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
+import static net.minecraft.util.text.TextFormatting.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +46,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
@@ -202,28 +203,28 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 
 		// ポエム
 		if (poem != null) tooltip.add(poem);
-		if (author != null) tooltip.add(TextFormatting.LIGHT_PURPLE + "Author: " + author);
+		if (author != null) tooltip.add(LIGHT_PURPLE + "Author: " + author);
 
 		// 機能
 		addInformationFunctions(itemStack, world, tooltip, flag);
 
 		// アイテムステータス
-		tooltip.add(TextFormatting.GREEN + "Durability: " + Math.max(getMaxDamage(itemStack) - getDamage(itemStack), 0) + " / " + getMaxDamage(itemStack));
+		tooltip.add(GREEN + "Durability: " + Math.max(getMaxDamage(itemStack) - getDamage(itemStack), 0) + " / " + getMaxDamage(itemStack));
 
 		// 搭乗中の妖精
 		ItemStack itemStackFairy = getCombinedFairy(itemStack);
-		if (!itemStackFairy.isEmpty()) tooltip.add(TextFormatting.AQUA + "Combined: " + itemStackFairy.getDisplayName());
+		if (!itemStackFairy.isEmpty()) tooltip.add(AQUA + "Combined: " + itemStackFairy.getDisplayName());
 
 		// 素材
-		tooltip.add(TextFormatting.YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
+		tooltip.add(YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
 
 		// 妖精魔法ステータス
 		Tuple<ItemStack, FairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player).flatMap(p -> findFairy(itemStack, p)).orElse(null);
 		if (fairy != null) {
-			tooltip.add(TextFormatting.BLUE + "Fairy: " + itemStackFairy.getDisplayName());
+			tooltip.add("" + BLUE + BOLD + "--- Fairy: " + fairy.x.getDisplayName() + " ---");
 			addInformationFairyWeapon(itemStack, fairy.x, fairy.y, world, tooltip, flag);
 		} else {
-			tooltip.add(TextFormatting.BLUE + "No fairy is supplied");
+			tooltip.add(BLUE + "No fairy is supplied");
 		}
 
 	}
@@ -232,9 +233,9 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 
-		tooltip.add(TextFormatting.RED + "Can be combined with fairy by crafting");
+		tooltip.add(RED + "Can be combined with fairy by crafting");
 
-		tooltip.add(TextFormatting.RED + "Can be repaired by crafting with contained sphere");
+		tooltip.add(RED + "Can be repaired by crafting with contained sphere");
 
 	}
 
