@@ -74,13 +74,14 @@ public class ItemFairyCrystal extends Item
 
 			// 表示
 			List<String> lines = new ArrayList<>();
-			lines.add("---- " + itemStackCrystal.getDisplayName() + " ----");
+			lines.add("===== " + itemStackCrystal.getDisplayName() + " (" + (world.isRemote ? "Server" : "Client") + ") =====");
 			double totalWeight = WeightedRandom.getTotalWeight(dropTable);
 			for (WeightedRandom.Item<ItemStack> item : ISuppliterator.ofIterable(dropTable)
 				.sortedObj(i -> i.item.getDisplayName())
 				.sortedDouble(i -> i.weight)) {
 				lines.add("" + String.format("%f%%", 100 * item.weight / totalWeight) + ": " + item.item.getDisplayName());
 			}
+			lines.add("====================");
 			player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)
 				.join("\n")), false);
 
