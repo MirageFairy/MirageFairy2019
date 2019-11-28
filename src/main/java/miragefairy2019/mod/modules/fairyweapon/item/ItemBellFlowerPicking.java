@@ -16,7 +16,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -24,6 +23,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -51,6 +51,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 	protected static class Status
 	{
 
+		public final double pitch;
 		public final double additionalReach;
 		public final double radius;
 		public final int maxTargetCount;
@@ -60,6 +61,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 
 		public Status(FairyType fairyType)
 		{
+			pitch = 1.0 * Math.pow(0.5, fairyType.cost / 50.0 - 1);
 			additionalReach = 0 + Math.min(fairyType.manaSet.wind / 10.0, 5);
 			radius = 3 + UtilsMath.trim(fairyType.manaSet.gaia / 10.0, 0, 5);
 			maxTargetCount = 1 + (int) (Math.min(fairyType.manaSet.dark, 100));
@@ -98,6 +100,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		super.addInformationFairyWeapon(itemStackFairyWeapon, itemStackFairy, fairyType, world, tooltip, flag);
 
 		Status status = new Status(fairyType);
+		tooltip.add(TextFormatting.BLUE + "Pitch: " + String.format("%.2f", Math.log(status.pitch) / Math.log(2) / 12.0) + " (Cost)");
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
 		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Gaia)");
 		tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Dark)");
@@ -254,10 +257,12 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		Result result = getExecutability(world, itemStack, player);
 
 		// 判定がだめだったらスルー
-		if (result.executability.health < EnumExecutability.OK.health) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
+		if (result.executability.health < EnumExecutability.OK.health) return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStack);
 		ResultWithFairy resultWithFairy = (ResultWithFairy) result;
 
 		// 魔法成立
+
+		SoundEvent breakSound = null;
 
 		int targetCount = 0;
 		for (Tuple<BlockPos, Boolean> tuple : resultWithFairy.targets) {
@@ -272,6 +277,10 @@ public class ItemBellFlowerPicking extends ItemBellBase
 				// 行使
 				itemStack.damageItem(Utils.randomInt(world.rand, resultWithFairy.status.wear), player);
 				targetCount++;
+				{
+					IBlockState blockState = world.getBlockState(tuple.x);
+					breakSound = blockState.getBlock().getSoundType(blockState, world, tuple.x, player).getBreakSound();
+				}
 				{
 					breakBlock(world, player, EnumFacing.UP, itemStack, tuple.x, resultWithFairy.status.fortune, false);
 				}
@@ -293,8 +302,8 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		if (targetCount >= 1) {
 
 			// エフェクト
-			world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0F, 0.9F);
-			world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0F, 0.6F);
+			ItemBellBase.playSound(world, player, resultWithFairy.status.pitch);
+			world.playSound(player, player.posX, player.posY, player.posZ, breakSound, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
 			// クールタイム
 			player.getCooldownTracker().setCooldown(this, (int) (resultWithFairy.status.coolTime * (targetCount / (double) resultWithFairy.status.maxTargetCount)));
