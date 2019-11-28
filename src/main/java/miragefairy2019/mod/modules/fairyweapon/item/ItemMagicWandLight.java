@@ -70,12 +70,9 @@ public class ItemMagicWandLight extends ItemMagicWandBase
 	@SideOnly(Side.CLIENT)
 	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
-		super.addInformationFairyWeapon(itemStackFairyWeapon, itemStackFairy, fairyType, world, tooltip, flag);
-
 		Status status = new Status(fairyType);
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Aqua)");
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + ((int) status.coolTime) + "t (Gaia, Cost)");
-
 	}
 
 	//

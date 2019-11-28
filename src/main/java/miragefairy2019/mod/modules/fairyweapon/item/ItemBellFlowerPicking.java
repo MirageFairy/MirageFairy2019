@@ -97,8 +97,6 @@ public class ItemBellFlowerPicking extends ItemBellBase
 	@SideOnly(Side.CLIENT)
 	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
-		super.addInformationFairyWeapon(itemStackFairyWeapon, itemStackFairy, fairyType, world, tooltip, flag);
-
 		Status status = new Status(fairyType);
 		tooltip.add(TextFormatting.BLUE + "Pitch: " + String.format("%.2f", Math.log(status.pitch) / Math.log(2) / 12.0) + " (Cost)");
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
@@ -107,7 +105,6 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		tooltip.add(TextFormatting.BLUE + "Fortune: " + String.format("%d", status.fortune) + " (Shine)");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + String.format("%.0f", status.coolTime) + "t (Aqua, Cost)");
-
 	}
 
 	//

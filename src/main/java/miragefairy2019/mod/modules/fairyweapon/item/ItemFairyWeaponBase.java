@@ -220,6 +220,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		// 妖精魔法ステータス
 		Tuple<ItemStack, FairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player).flatMap(p -> findFairy(itemStack, p)).orElse(null);
 		if (fairy != null) {
+			tooltip.add(TextFormatting.BLUE + "Fairy: " + itemStackFairy.getDisplayName());
 			addInformationFairyWeapon(itemStack, fairy.x, fairy.y, world, tooltip, flag);
 		} else {
 			tooltip.add(TextFormatting.BLUE + "No fairy is supplied");
@@ -240,7 +241,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	@SideOnly(Side.CLIENT)
 	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
-		tooltip.add(TextFormatting.BLUE + "Fairy: " + itemStackFairy.getDisplayName());
+
 	}
 
 	//
