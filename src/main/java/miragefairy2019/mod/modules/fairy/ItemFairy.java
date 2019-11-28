@@ -110,6 +110,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 			}
 			itemStackFairyWeapon = player.getHeldItem(EnumHand.OFF_HAND);
 			if (itemStackFairyWeapon.getItem() instanceof ItemFairyWeaponBase) {
+				tooltip.add("" + BLUE + BOLD + "--- Status of " + itemStackFairyWeapon.getDisplayName() + " ---");
 				((ItemFairyWeaponBase) itemStackFairyWeapon.getItem()).addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag);
 			}
 		}
