@@ -67,7 +67,7 @@ public class ItemFairyCrystal extends Item
 
 			return EnumActionResult.SUCCESS;
 		} else {
-			if (!world.isRemote) return EnumActionResult.SUCCESS;
+			if (world.isRemote) return EnumActionResult.SUCCESS;
 
 			// ガチャリスト取得
 			List<WeightedRandom.Item<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ);
