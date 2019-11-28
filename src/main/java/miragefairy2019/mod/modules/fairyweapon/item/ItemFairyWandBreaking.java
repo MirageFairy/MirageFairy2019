@@ -38,7 +38,7 @@ public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingToolBase
 		// 指定の妖精を持っていない場合、抜ける
 		a:
 		{
-			ItemStack itemStackFairy = getCombinedFairy(getCombinedFairy(player.getHeldItem(hand)));
+		ItemStack itemStackFairy = getCombinedFairy(player.getHeldItem(hand));
 			if (getFairy(itemStackFairy).isPresent()) {
 				if (getFairy(itemStackFairy).get().modid.equals(ModuleFairy.FairyTypes.mina[0].type.modid)) {
 					if (getFairy(itemStackFairy).get().name.equals(ModuleFairy.FairyTypes.mina[0].type.name)) {

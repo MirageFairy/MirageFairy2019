@@ -35,7 +35,7 @@ public class ItemFairyWandMelting extends ItemFairyWeaponCraftingToolBase
 		// 指定の妖精を持っていない場合、抜ける
 		a:
 		{
-			ItemStack itemStackFairy = getCombinedFairy(getCombinedFairy(player.getHeldItem(hand)));
+			ItemStack itemStackFairy = getCombinedFairy(player.getHeldItem(hand));
 			if (getFairy(itemStackFairy).isPresent()) {
 				if (getFairy(itemStackFairy).get().modid.equals(ModuleFairy.FairyTypes.mina[0].type.modid)) {
 					if (getFairy(itemStackFairy).get().name.equals(ModuleFairy.FairyTypes.mina[0].type.name)) {
@@ -48,10 +48,15 @@ public class ItemFairyWandMelting extends ItemFairyWeaponCraftingToolBase
 
 		if (!world.isRemote) {
 
+			BlockPos pos2 = pos.offset(facing);
+
 			// 鉱石生成確率表示
 			List<String> lines = new ArrayList<>();
 			lines.add("===== Mirage Flower Grow Rate =====");
-			lines.add(String.format("%.2f%%", ModuleMirageFlower.blockMirageFlower.getGrowRate(world, pos) * 100));
+			lines.add(String.format("Pos: %d %d %d", pos2.getX(), pos2.getY(), pos2.getZ()));
+			lines.add(String.format("Block: %s", world.getBlockState(pos2)));
+			lines.add(String.format("Floor: %s", world.getBlockState(pos2.down())));
+			lines.add(String.format("%.2f%%", ModuleMirageFlower.blockMirageFlower.getGrowRate(world, pos2) * 100));
 			lines.add("====================");
 			player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)
 				.join("\n")), false);
