@@ -103,9 +103,9 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 	protected void grow(World worldIn, BlockPos pos, IBlockState state, Random rand, double rate)
 	{
-		if (!isMaxAge(state)) {
-			int t = Utils.randomInt(rand, 0.04 * rate);
-			for (int i = 0; i < t; i++) {
+		int t = Utils.randomInt(rand, 0.04 * rate);
+		for (int i = 0; i < t; i++) {
+			if (!isMaxAge(state)) {
 				worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, state.getValue(AGE) + 1), 2);
 			}
 		}
