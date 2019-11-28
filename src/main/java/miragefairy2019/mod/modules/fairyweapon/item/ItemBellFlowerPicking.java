@@ -17,6 +17,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -265,7 +266,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		// 魔法成立
 
 		SoundEvent breakSound = null;
-
+		boolean collected = false;
 		int targetCount = 0;
 		for (Tuple<BlockPos, Boolean> tuple : resultWithFairy.targets) {
 			if (tuple.y) {
@@ -315,6 +316,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 
 						// 破壊したばかりのブロックの周辺のアイテムを得る
 						for (EntityItem entityItem : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(tuple.x))) {
+							collected = true;
 							entityItem.setPosition(player.posX, player.posY, player.posZ);
 							entityItem.setNoPickupDelay();
 						}
@@ -341,10 +343,16 @@ public class ItemBellFlowerPicking extends ItemBellBase
 
 			// エフェクト
 			ItemBellBase.playSound(world, player, resultWithFairy.status.pitch);
-			world.playSound(player, player.posX, player.posY, player.posZ, breakSound, SoundCategory.PLAYERS, 1.0F, 1.0F);
+			world.playSound(null, player.posX, player.posY, player.posZ, breakSound, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
 			// クールタイム
 			player.getCooldownTracker().setCooldown(this, (int) (resultWithFairy.status.coolTime * (targetCount / (double) resultWithFairy.status.maxTargetCount)));
+
+		}
+		if (collected) {
+
+			// エフェクト
+			world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
 		}
 
