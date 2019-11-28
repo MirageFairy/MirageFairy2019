@@ -261,7 +261,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		{
 			int count = Utils.randomInt(random, isMaxAge(state) ? 1 + fortune * 0.5 : 0);
 			for (int i = 0; i < count; i++) {
-				drops.add(UtilsMinecraft.getItemStack("dustTinyMiragium"));
+				drops.add(UtilsMinecraft.getItemStack("dustTinyMiragium").copy());
 			}
 		}
 
