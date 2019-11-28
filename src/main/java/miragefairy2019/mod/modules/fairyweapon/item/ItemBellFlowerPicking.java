@@ -15,6 +15,7 @@ import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -24,6 +25,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -56,28 +58,30 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		public final double radius;
 		public final int maxTargetCount;
 		public final int fortune;
+		public final boolean seeding;
+		public final boolean collection;
 		public final double wear;
 		public final double coolTime;
 
 		public Status(FairyType fairyType)
 		{
 			pitch = 1.0 * Math.pow(0.5, fairyType.cost / 50.0 - 1);
-			additionalReach = 0 + Math.min(fairyType.manaSet.wind / 10.0, 5);
-			radius = 3 + UtilsMath.trim(fairyType.manaSet.gaia / 10.0, 0, 5);
-			maxTargetCount = 1 + (int) (Math.min(fairyType.manaSet.dark, 100));
+			additionalReach = 0 + Math.min(fairyType.manaSet.wind / 10.0, 3);
+			radius = 2 + UtilsMath.trim(fairyType.manaSet.gaia / 10.0, 0, 3);
+			maxTargetCount = 1 + (int) (Math.min(fairyType.manaSet.dark + fairyType.abilitySet.get(EnumAbilityType.submission) / (fairyType.cost / 50.0) + fairyType.abilitySet.get(EnumAbilityType.slash) / (fairyType.cost / 50.0), 50));
 			fortune = fairyType.manaSet.shine >= 10
-				? 5
+				? 4
 				: fairyType.manaSet.shine >= 5
-					? 4
-					: fairyType.manaSet.shine >= 3
-						? 3
-						: fairyType.manaSet.shine >= 2
-							? 2
-							: fairyType.manaSet.shine >= 1
-								? 1
-								: 0;
-			wear = 0.25 * UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.fire / 25.0), 0.25, 1.0);
-			coolTime = fairyType.cost * 4 * UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.aqua / 50.0), 0.5, 1.0);
+					? 3
+					: fairyType.manaSet.shine >= 2
+						? 2
+						: fairyType.manaSet.shine >= 1
+							? 1
+							: 0;
+			seeding = fairyType.abilitySet.get(EnumAbilityType.knowledge) >= 10;
+			collection = fairyType.abilitySet.get(EnumAbilityType.warp) >= 10;
+			wear = 0.25 * UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.fire / 30.0), 0.5, 1.0);
+			coolTime = fairyType.cost * 4 * UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.aqua / 30.0), 0.5, 1.0);
 		}
 
 	}
@@ -101,8 +105,10 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		tooltip.add(TextFormatting.BLUE + "Pitch: " + String.format("%.2f", Math.log(status.pitch) / Math.log(2) * 12) + " (Cost)");
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
 		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Gaia)");
-		tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Dark)");
+		tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Dark, " + EnumAbilityType.submission.getLocalizedName() + ", " + EnumAbilityType.slash.getLocalizedName() + ")");
 		tooltip.add(TextFormatting.BLUE + "Fortune: " + String.format("%d", status.fortune) + " (Shine)");
+		tooltip.add(TextFormatting.BLUE + "Seeding: " + (status.seeding ? "Yes" : "No") + " (" + EnumAbilityType.knowledge.getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + EnumAbilityType.warp.getLocalizedName() + ")");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + String.format("%.0f", status.coolTime) + "t (Aqua, Cost)");
 	}
@@ -115,8 +121,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		COOLTIME(3, 0xFFFF00),
 		NO_TARGET(2, 0x00FFFF),
 		NO_RESOURCE(1, 0xFF0000),
-		NO_FAIRY(0, 0xFF00FF),
-		;
+		NO_FAIRY(0, 0xFF00FF),;
 
 		public final int health;
 		public final int color;
@@ -279,7 +284,43 @@ public class ItemBellFlowerPicking extends ItemBellBase
 					breakSound = blockState.getBlock().getSoundType(blockState, world, tuple.x, player).getBreakSound();
 				}
 				{
+
+					// 破壊
 					breakBlock(world, player, EnumFacing.UP, itemStack, tuple.x, resultWithFairy.status.fortune, false);
+
+					// 種まき
+					if (resultWithFairy.status.seeding) {
+
+						// 破壊したばかりのブロックの周辺のアイテムを得る
+						List<EntityItem> entityItems = world.getEntitiesWithinAABB(
+							EntityItem.class,
+							new AxisAlignedBB(tuple.x),
+							e -> e.getItem().isItemEqual(new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds)) && e.getItem().getCount() > 0);
+						if (!entityItems.isEmpty()) {
+							EntityItem entityItem = entityItems.get(0);
+
+							// 種を削る
+							entityItem.getItem().shrink(1);
+							if (entityItem.getItem().isEmpty()) entityItem.setDead();
+
+							// 植える
+							world.setBlockState(tuple.x, ModuleMirageFlower.blockMirageFlower.getState(0));
+
+						}
+
+					}
+
+					// 収集
+					if (resultWithFairy.status.collection) {
+
+						// 破壊したばかりのブロックの周辺のアイテムを得る
+						for (EntityItem entityItem : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(tuple.x))) {
+							entityItem.setPosition(player.posX, player.posY, player.posZ);
+							entityItem.setNoPickupDelay();
+						}
+
+					}
+
 				}
 
 				// エフェクト
