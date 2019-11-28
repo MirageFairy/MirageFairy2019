@@ -80,7 +80,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 							: 0;
 			seeding = fairyType.abilitySet.get(EnumAbilityType.knowledge) >= 10;
 			collection = fairyType.abilitySet.get(EnumAbilityType.warp) >= 10;
-			wear = 0.25 * UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.fire / 30.0), 0.5, 1.0);
+			wear = 0.5 * UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.fire / 30.0), 0.5, 1.0);
 			coolTime = fairyType.cost * 4 * UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.aqua / 30.0), 0.5, 1.0);
 		}
 
