@@ -8,7 +8,7 @@
 		"variant=5": { "model": "miragefairy2019:magnetite_block" },
 		"variant=6": { "model": "miragefairy2019:pyrope_block" },
 		"variant=7": { "model": "miragefairy2019:smithsonite_block" },
-		"variant=8": { "model": "minecraft:stone" },
+		"variant=8": { "model": "miragefairy2019:charcoal_block" },
 		"variant=9": { "model": "minecraft:stone" },
 		"variant=10": { "model": "minecraft:stone" },
 		"variant=11": { "model": "minecraft:stone" },

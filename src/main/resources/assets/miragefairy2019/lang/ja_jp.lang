@@ -79,6 +79,7 @@ tile.blockSmithsonite.name=スミソナイトブロック
 item.gemSmithsonite.name=スミソナイト
 item.rodMiragium.name=ミラジウムの棒
 item.nuggetMiragium.name=ミラジウムの塊
+tile.blockCharcoal.name=木炭ブロック
 
 item.spheres.name=スフィア
 item.spheres.format=≪%s≫のスフィア

@@ -17,6 +17,7 @@ public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariant
 	MAGNETITE_BLOCK(5, "magnetite_block", "blockMagnetite", "blockMagnetite", 1),
 	PYROPE_BLOCK(6, "pyrope_block", "blockPyrope", "blockPyrope", 2),
 	SMITHSONITE_BLOCK(7, "smithsonite_block", "blockSmithsonite", "blockSmithsonite", 1),
+	CHARCOAL_BLOCK(8, "charcoal_block", "blockCharcoal", "blockCharcoal", 0),
 	;
 
 	//
