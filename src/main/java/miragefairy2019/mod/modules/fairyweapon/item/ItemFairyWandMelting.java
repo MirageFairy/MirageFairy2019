@@ -5,8 +5,10 @@ import java.util.List;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
+import miragefairy2019.mod.modules.fairy.FairyRegistry;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
+import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -48,18 +50,36 @@ public class ItemFairyWandMelting extends ItemFairyWeaponCraftingToolBase
 
 		if (!world.isRemote) {
 
-			BlockPos pos2 = pos.offset(facing);
+			if (player.isSneaking()) {
 
-			// 鉱石生成確率表示
-			List<String> lines = new ArrayList<>();
-			lines.add("===== Mirage Flower Grow Rate =====");
-			lines.add(String.format("Pos: %d %d %d", pos2.getX(), pos2.getY(), pos2.getZ()));
-			lines.add(String.format("Block: %s", world.getBlockState(pos2)));
-			lines.add(String.format("Floor: %s", world.getBlockState(pos2.down())));
-			lines.add(String.format("%.2f%%", ModuleMirageFlower.blockMirageFlower.getGrowRate(world, pos2) * 100));
-			lines.add("====================");
-			player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)
-				.join("\n")), false);
+				List<String> lines = new ArrayList<>();
+				lines.add("===== Mirage Flower Grow Rate Table =====");
+				FairyRegistry.getKeyItemStacks()
+					.flatMap(i -> FairyRegistry.getFairies(i))
+					.distinct()
+					.map(f -> Tuple.of(f, (f.type.manaSet.shine * f.type.abilitySet.get(EnumAbilityType.crystal) / 100.0 * 3) * 100))
+					.sortedDouble(Tuple::getY)
+					.map(t -> String.format("%s: %.2f%%", t.x, t.y))
+					.forEach(lines::add);
+				lines.add("====================");
+				player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)
+					.join("\n")), false);
+
+			} else {
+
+				BlockPos pos2 = pos.offset(facing);
+
+				List<String> lines = new ArrayList<>();
+				lines.add("===== Mirage Flower Grow Rate =====");
+				lines.add(String.format("Pos: %d %d %d", pos2.getX(), pos2.getY(), pos2.getZ()));
+				lines.add(String.format("Block: %s", world.getBlockState(pos2)));
+				lines.add(String.format("Floor: %s", world.getBlockState(pos2.down())));
+				lines.add(String.format("%.2f%%", ModuleMirageFlower.blockMirageFlower.getGrowRate(world, pos2) * 100));
+				lines.add("====================");
+				player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)
+					.join("\n")), false);
+
+			}
 
 		}
 
