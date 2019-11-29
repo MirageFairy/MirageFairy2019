@@ -162,10 +162,10 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 				IBlockState blockState = world.getBlockState(blockPos.down());
 				ItemStack itemStack = blockState.getBlock().getItem(world, blockPos, blockState);
 				Double value = FairyRegistry.getFairies(itemStack)
-					.map(f -> f.type.manaSet.shine * f.type.abilitySet.get(EnumAbilityType.crystal))
+					.map(f -> f.type.manaSet.shine * f.type.abilitySet.get(EnumAbilityType.crystal) / 100.0 * 3)
 					.max(Double::compare).orElse(null);
 				if (value != null) {
-					bonus = Math.max(bonus, value / 100 * 3);
+					bonus = Math.max(bonus, value);
 				}
 			}
 
