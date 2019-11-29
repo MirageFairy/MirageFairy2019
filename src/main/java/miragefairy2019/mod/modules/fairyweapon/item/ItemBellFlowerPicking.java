@@ -397,7 +397,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 				world,
 				resultWithFairy.targets,
 				target -> target.y,
-				target -> new Vec3d(target.x),
+				target -> new Vec3d(target.x).addVector(0.5, 0.5, 0.5),
 				resultWithFairy.status.maxTargetCount);
 
 		}
