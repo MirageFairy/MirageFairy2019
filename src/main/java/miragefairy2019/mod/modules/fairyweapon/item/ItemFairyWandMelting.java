@@ -60,7 +60,7 @@ public class ItemFairyWandMelting extends ItemFairyWeaponCraftingToolBase
 					.map(f -> Tuple.of(f, (f.type.manaSet.shine * f.type.abilitySet.get(EnumAbilityType.crystal) / 100.0 * 3) * 100))
 					.sortedDouble(Tuple::getY)
 					.map(t -> String.format("%s: %.2f%%", t.x.type.getLocalizedName(), t.y))
-					.forEach(lines::add);
+					.forEach(t -> lines.add(t));
 				lines.add("====================");
 				player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)
 					.join("\n")), false);
