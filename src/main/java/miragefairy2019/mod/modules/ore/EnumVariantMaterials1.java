@@ -7,17 +7,17 @@ import java.util.Map;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.util.IStringSerializable;
 
-public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariant
+public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariantMaterials
 {
-	APATITE_BLOCK(0, "apatite_block", "blockApatite", "blockApatite", 1),
-	FLUORITE_BLOCK(1, "fluorite_block", "blockFluorite", "blockFluorite", 2),
-	SULFUR_BLOCK(2, "sulfur_block", "blockSulfur", "blockSulfur", 1),
-	CINNABAR_BLOCK(3, "cinnabar_block", "blockCinnabar", "blockCinnabar", 2),
-	MOONSTONE_BLOCK(4, "moonstone_block", "blockMoonstone", "blockMoonstone", 3),
-	MAGNETITE_BLOCK(5, "magnetite_block", "blockMagnetite", "blockMagnetite", 1),
-	PYROPE_BLOCK(6, "pyrope_block", "blockPyrope", "blockPyrope", 2),
-	SMITHSONITE_BLOCK(7, "smithsonite_block", "blockSmithsonite", "blockSmithsonite", 1),
-	CHARCOAL_BLOCK(8, "charcoal_block", "blockCharcoal", "blockCharcoal", 0),
+	APATITE_BLOCK(0, "apatite_block", "blockApatite", "blockApatite", 1, 0),
+	FLUORITE_BLOCK(1, "fluorite_block", "blockFluorite", "blockFluorite", 2, 0),
+	SULFUR_BLOCK(2, "sulfur_block", "blockSulfur", "blockSulfur", 1, 0),
+	CINNABAR_BLOCK(3, "cinnabar_block", "blockCinnabar", "blockCinnabar", 2, 0),
+	MOONSTONE_BLOCK(4, "moonstone_block", "blockMoonstone", "blockMoonstone", 3, 0),
+	MAGNETITE_BLOCK(5, "magnetite_block", "blockMagnetite", "blockMagnetite", 1, 0),
+	PYROPE_BLOCK(6, "pyrope_block", "blockPyrope", "blockPyrope", 2, 0),
+	SMITHSONITE_BLOCK(7, "smithsonite_block", "blockSmithsonite", "blockSmithsonite", 1, 0),
+	CHARCOAL_BLOCK(8, "charcoal_block", "blockCharcoal", "blockCharcoal", 0, 20 * 10 * 8 * 9),
 	;
 
 	//
@@ -52,14 +52,16 @@ public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariant
 	public final String unlocalizedName;
 	public final String oreName;
 	public final int harvestLevel;
+	public final int burnTime;
 
-	private EnumVariantMaterials1(int metadata, String resourceName, String unlocalizedName, String oreName, int harvestLevel)
+	private EnumVariantMaterials1(int metadata, String resourceName, String unlocalizedName, String oreName, int harvestLevel, int burnTime)
 	{
 		this.metadata = metadata;
 		this.resourceName = resourceName;
 		this.unlocalizedName = unlocalizedName;
 		this.oreName = oreName;
 		this.harvestLevel = harvestLevel;
+		this.burnTime = burnTime;
 	}
 
 	public String toString()
@@ -94,6 +96,12 @@ public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariant
 	public int getHarvestLevel()
 	{
 		return harvestLevel;
+	}
+
+	@Override
+	public int getBurnTime()
+	{
+		return burnTime;
 	}
 
 }

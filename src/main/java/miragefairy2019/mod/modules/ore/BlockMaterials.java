@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockMaterials<V extends IBlockVariant> extends Block
+public class BlockMaterials<V extends IBlockVariantMaterials> extends Block
 {
 
 	public final IOreVariantList<V> variantList;

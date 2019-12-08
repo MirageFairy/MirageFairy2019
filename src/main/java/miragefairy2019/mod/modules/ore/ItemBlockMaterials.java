@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.ore;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockMaterials<V extends IBlockVariant> extends ItemBlock
+public class ItemBlockMaterials<V extends IBlockVariantMaterials> extends ItemBlock
 {
 
 	private BlockMaterials<V> block2;
@@ -26,6 +26,12 @@ public class ItemBlockMaterials<V extends IBlockVariant> extends ItemBlock
 	public String getUnlocalizedName(ItemStack itemStack)
 	{
 		return "tile." + block2.variantList.byMetadata(itemStack.getMetadata()).getUnlocalizedName();
+	}
+
+	@Override
+	public int getItemBurnTime(ItemStack itemStack)
+	{
+		return block2.variantList.byMetadata(itemStack.getMetadata()).getBurnTime();
 	}
 
 }
