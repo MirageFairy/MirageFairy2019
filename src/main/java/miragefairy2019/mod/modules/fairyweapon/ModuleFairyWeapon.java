@@ -71,7 +71,7 @@ public class ModuleFairyWeapon
 		public Provider<ItemOcarinaBase> ocarinaBase = item(ItemOcarinaBase::new, "ocarina_base", "ocarinaBase"); // オカリナベース
 		public Provider<ItemOcarinaTemptation> ocarinaTemptation = item(ItemOcarinaTemptation::new, "temptation_ocarina", "ocarinaTemptation"); // 魅惑のオカリナ
 		public Provider<ItemBellBase> bellBase = item(ItemBellBase::new, "bell_base", "bellBase"); // 鐘ベース
-		public Provider<ItemBellFlowerPicking> bellFlowerPicking = item(ItemBellFlowerPicking::new, "flower_picking_bell", "bellFlowerPicking"); // 鐘ベース
+		public Provider<ItemBellFlowerPicking> bellFlowerPicking = item(ItemBellFlowerPicking::new, "flower_picking_bell", "bellFlowerPicking"); // 花摘みの鐘
 
 		//
 
