@@ -127,7 +127,6 @@ public class ModuleOre
 			itemMaterials.registerVariant(11, variantGemSmithsonite = new ItemVariantMaterialContained("smithsonite_gem", "gemSmithsonite", "Smithsonite(1.000)"));
 			itemMaterials.registerVariant(12, variantRodMiragium = new ItemVariantMaterialContained("miragium_rod", "rodMiragium", "Miragium(0.500)"));
 			itemMaterials.registerVariant(13, variantNuggetMiragium = new ItemVariantMaterialContained("miragium_nugget", "nuggetMiragium", "Miragium(0.111)"));
-
 			ForgeRegistries.ITEMS.register(itemMaterials);
 			if (ApiMain.side.isClient()) itemMaterials.setCustomModelResourceLocations();
 
