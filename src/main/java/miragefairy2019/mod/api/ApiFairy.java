@@ -37,6 +37,7 @@ public class ApiFairy
 		knowledge(DARK_GREEN),
 		energy(GOLD),
 		submission(DARK_GRAY),
+		christmas(DARK_GREEN),
 		;
 
 		private final TextFormatting colorText;
