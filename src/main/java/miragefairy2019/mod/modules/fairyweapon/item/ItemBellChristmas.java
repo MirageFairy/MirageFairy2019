@@ -1,14 +1,18 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
+import static miragefairy2019.mod.api.fairy.EnumManaType.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
+import miragefairy2019.mod.api.fairy.EnumManaType;
 import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.modules.fairyweapon.status.IFairyWeaponStatusHelper;
+import miragefairy2019.mod.modules.fairyweapon.status.IFairyWeaponStatusProperty;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
-import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;
@@ -43,10 +47,16 @@ public class ItemBellChristmas extends ItemBellBase
 
 	//
 
-	protected static class Status
+	protected static class Status implements IFairyWeaponStatusHelper
 	{
 
-		public final double pitch;
+		// TODO localize
+		public final IFairyWeaponStatusProperty<Double> pitch = formula(1).mul(cost().apply(v -> Math.pow(0.5, v / 50.0 - 1))).asDouble("Pitch", pitch());
+
+		// TODO delete
+		private final FairyType fairyType;
+
+		// TODO convert
 		public final double damage;
 		public final double additionalReach;
 		public final double radius;
@@ -57,22 +67,48 @@ public class ItemBellChristmas extends ItemBellBase
 
 		public Status(FairyType fairyType)
 		{
-			pitch = 1.0 * Math.pow(0.5, fairyType.cost / 50.0 - 1);
-			damage = 1 + Math.min(fairyType.manaSet.dark / 5.0, 10) + Math.min(fairyType.abilitySet.get(EnumAbilityType.christmas) * (fairyType.cost / 50.0) / 1.0, 10);
-			additionalReach = 12 - 4 + Math.min(fairyType.manaSet.wind / 10.0, 3);
-			radius = 3 + UtilsMath.trim(fairyType.manaSet.gaia / 10.0, 0, 3);
-			maxTargetCount = 4 + (int) (Math.min(fairyType.abilitySet.get(EnumAbilityType.attack) * (fairyType.cost / 50.0), 3));
-			looting = fairyType.manaSet.shine >= 10
+			this.fairyType = fairyType;
+
+			// TODO delete
+			damage = 1 + get(dark, 50, 5) + get(EnumAbilityType.christmas, 10, 1);
+			additionalReach = (12 - 4) + get(wind, 30, 5);
+			radius = 3 + get(gaia, 30, 10);
+			maxTargetCount = 4 + (int) get(EnumAbilityType.attack, 10, 3);
+			looting = get(shine) >= 10
 				? 4
-				: fairyType.manaSet.shine >= 5
+				: get(shine) >= 5
 					? 3
-					: fairyType.manaSet.shine >= 2
+					: get(shine) >= 2
 						? 2
-						: fairyType.manaSet.shine >= 1
+						: get(shine) >= 1
 							? 1
 							: 0;
-			wear = 1.0 * UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.fire / 30.0), 0.5, 1.0);
-			coolTime = fairyType.cost * 1 * UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.aqua / 30.0), 0.5, 1.0);
+			wear = 1.0 * Math.pow(0.5, get(fire, 30, 30));
+			coolTime = cost2() * 1 * Math.pow(0.5, get(aqua, 30, 30));
+		}
+
+		// TODO delete
+		private double cost2()
+		{
+			return fairyType.cost;
+		}
+
+		// TODO delete
+		private double get(EnumManaType manaType)
+		{
+			return fairyType.manaSet.get(manaType);
+		}
+
+		// TODO delete
+		private double get(EnumManaType manaType, int max, int div)
+		{
+			return Math.min(fairyType.manaSet.get(manaType), max) / div;
+		}
+
+		// TODO delete
+		private double get(EnumAbilityType abilityType, int max, int div)
+		{
+			return Math.min(fairyType.abilitySet.get(abilityType) * (fairyType.cost / 50.0), max) / div;
 		}
 
 	}
@@ -93,7 +129,17 @@ public class ItemBellChristmas extends ItemBellBase
 	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 		Status status = new Status(fairyType);
-		tooltip.add(TextFormatting.BLUE + "Pitch: " + String.format("%.2f", Math.log(status.pitch) / Math.log(2) * 12) + " (Cost)");
+
+		IFairyWeaponStatusProperty<?> proterty = status.pitch;
+
+		// TODO list
+		String localizedSourceListString = proterty.getLocalizedSourceListString();
+		tooltip.add(String.format(TextFormatting.BLUE + "%s: %s%s",
+			proterty.getLocalizedName(),
+			proterty.getString(fairyType),
+			localizedSourceListString.isEmpty() ? "" : " (" + localizedSourceListString + ")"));
+
+		// TODO convert
 		tooltip.add(TextFormatting.BLUE + "Damage: " + String.format("%.1f", status.damage) + " (Dark, " + EnumAbilityType.christmas.getLocalizedName() + ")");
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
 		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Gaia)");
