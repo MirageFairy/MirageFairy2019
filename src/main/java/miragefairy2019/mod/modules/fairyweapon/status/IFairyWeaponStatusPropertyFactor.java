@@ -18,7 +18,7 @@ public interface IFairyWeaponStatusPropertyFactor
 			@Override
 			public double get(FairyType fairyType)
 			{
-				return Math.max(super.get(fairyType), max);
+				return Math.min(super.get(fairyType), max);
 			}
 		};
 	}
