@@ -67,6 +67,28 @@ public interface IFairyWeaponStatusPropertyFactor
 		};
 	}
 
+	public default IFairyWeaponStatusPropertyFactor xp(double a)
+	{
+		return new FairyWeaponStatusPropertyFactorWrapper(this) {
+			@Override
+			public double get(FairyType fairyType)
+			{
+				return Math.pow(a, super.get(fairyType));
+			}
+		};
+	}
+
+	public default IFairyWeaponStatusPropertyFactor pow(double a)
+	{
+		return new FairyWeaponStatusPropertyFactorWrapper(this) {
+			@Override
+			public double get(FairyType fairyType)
+			{
+				return Math.pow(super.get(fairyType), a);
+			}
+		};
+	}
+
 	public default IFairyWeaponStatusPropertyFactor apply(DoubleUnaryOperator function)
 	{
 		return new FairyWeaponStatusPropertyFactorWrapper(this) {
