@@ -48,4 +48,49 @@ public interface IFairyWeaponStatusHelper
 		return value -> String.format("%.2f", Math.log(value) / Math.log(2) * 12);
 	}
 
+	public default IFairyWeaponStatusPropertyView<Double> float0()
+	{
+		return value -> String.format("%.0f", value);
+	}
+
+	public default IFairyWeaponStatusPropertyView<Double> float1()
+	{
+		return value -> String.format("%.1f", value);
+	}
+
+	public default IFairyWeaponStatusPropertyView<Double> float2()
+	{
+		return value -> String.format("%.2f", value);
+	}
+
+	public default IFairyWeaponStatusPropertyView<Double> float3()
+	{
+		return value -> String.format("%.3f", value);
+	}
+
+	public default IFairyWeaponStatusPropertyView<Double> percent0()
+	{
+		return value -> String.format("%.0f%%", value * 100);
+	}
+
+	public default IFairyWeaponStatusPropertyView<Double> percent1()
+	{
+		return value -> String.format("%.1f%%", value * 100);
+	}
+
+	public default IFairyWeaponStatusPropertyView<Double> percent2()
+	{
+		return value -> String.format("%.2f%%", value * 100);
+	}
+
+	public default IFairyWeaponStatusPropertyView<Double> percent3()
+	{
+		return value -> String.format("%.3f%%", value * 100);
+	}
+
+	public default IFairyWeaponStatusPropertyView<Integer> integer()
+	{
+		return value -> "" + value;
+	}
+
 }
