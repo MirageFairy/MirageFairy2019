@@ -58,6 +58,22 @@ public class FairyWeaponStatusPropertyCalculator
 		return this;
 	}
 
+	/**
+	 * {@code threshold(1, 2, 5, 10)} のように呼び出すと、10以上のときに4、5以上のときに3、2以上のときに2、1以上のときに1、どれでもない場合に0が返ります。
+	 */
+	public FairyWeaponStatusPropertyCalculator threshold(double... thresholds)
+	{
+		configurators.add((v, ft) -> {
+			for (int i = thresholds.length - 1; i >= 0; i--) {
+				if (v >= thresholds[i] - 0.0005) {
+					return i + 1;
+				}
+			}
+			return 0;
+		});
+		return this;
+	}
+
 	//
 
 	public IFairyWeaponStatusProperty<Double> asDouble(String unlocalizedName, IFairyWeaponStatusPropertyView<Double> view)
