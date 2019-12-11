@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
+import static miragefairy2019.mod.api.ApiFairy.EnumAbilityType.*;
 import static miragefairy2019.mod.api.fairy.EnumManaType.*;
 
 import java.util.ArrayList;
@@ -8,9 +9,8 @@ import java.util.List;
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.api.fairy.EnumManaType;
 import miragefairy2019.mod.api.fairy.FairyType;
-import miragefairy2019.mod.modules.fairyweapon.status.IFairyWeaponStatusHelper;
+import miragefairy2019.mod.modules.fairyweapon.status.FairyWeaponStatusBase;
 import miragefairy2019.mod.modules.fairyweapon.status.IFairyWeaponStatusProperty;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import mirrg.boron.util.struct.Tuple;
@@ -47,69 +47,18 @@ public class ItemBellChristmas extends ItemBellBase
 
 	//
 
-	protected static class Status implements IFairyWeaponStatusHelper
+	protected static class Status extends FairyWeaponStatusBase
 	{
 
 		// TODO localize
-		public final IFairyWeaponStatusProperty<Double> pitch = formula(1).mul(cost().apply(v -> Math.pow(0.5, v / 50.0 - 1))).asDouble("Pitch", pitch());
-
-		// TODO delete
-		private final FairyType fairyType;
-
-		// TODO convert
-		public final double damage;
-		public final double additionalReach;
-		public final double radius;
-		public final int maxTargetCount;
-		public final int looting;
-		public final double wear;
-		public final double coolTime;
-
-		public Status(FairyType fairyType)
-		{
-			this.fairyType = fairyType;
-
-			// TODO delete
-			damage = 1 + get(dark, 50, 5) + get(EnumAbilityType.christmas, 10, 1);
-			additionalReach = (12 - 4) + get(wind, 30, 5);
-			radius = 3 + get(gaia, 30, 10);
-			maxTargetCount = 4 + (int) get(EnumAbilityType.attack, 10, 3);
-			looting = get(shine) >= 10
-				? 4
-				: get(shine) >= 5
-					? 3
-					: get(shine) >= 2
-						? 2
-						: get(shine) >= 1
-							? 1
-							: 0;
-			wear = 1.0 * Math.pow(0.5, get(fire, 30, 30));
-			coolTime = cost2() * 1 * Math.pow(0.5, get(aqua, 30, 30));
-		}
-
-		// TODO delete
-		private double cost2()
-		{
-			return fairyType.cost;
-		}
-
-		// TODO delete
-		private double get(EnumManaType manaType)
-		{
-			return fairyType.manaSet.get(manaType);
-		}
-
-		// TODO delete
-		private double get(EnumManaType manaType, int max, int div)
-		{
-			return Math.min(fairyType.manaSet.get(manaType), max) / div;
-		}
-
-		// TODO delete
-		private double get(EnumAbilityType abilityType, int max, int div)
-		{
-			return Math.min(fairyType.abilitySet.get(abilityType) * (fairyType.cost / 50.0), max) / div;
-		}
+		public IFairyWeaponStatusProperty<Double> pitch = property(formula(1).mul(cost().apply(v -> Math.pow(0.5, v / 50.0 - 1))).asDouble("Pitch", pitch()));
+		public IFairyWeaponStatusProperty<Double> damage = property(formula(1).add(value(dark).max(50).div(5)).add(value(christmas).max(10).div(1)).asDouble("Damage", float1()));
+		public IFairyWeaponStatusProperty<Double> additionalReach = property(formula(12 - 4).add(value(wind).max(30).div(5)).asDouble("Additional Reach", float1()));
+		public IFairyWeaponStatusProperty<Double> radius = property(formula(3).add(value(gaia).max(30).div(10)).asDouble("Radius", float1()));
+		public IFairyWeaponStatusProperty<Integer> maxTargetCount = property(formula(4).add(value(attack).max(10).div(3)).asInt("Max Target Count", integer()));
+		public IFairyWeaponStatusProperty<Integer> looting = property(formula(0).add(value(shine)).threshold(1, 2, 5, 10).asInt("Looting", integer()));
+		public IFairyWeaponStatusProperty<Double> wear = property(formula(1).mul(value(fire).max(30).div(30).xp(0.5)).asDouble("Wear", percent1()));
+		public IFairyWeaponStatusProperty<Double> coolTime = property(formula(0).add(cost()).mul(value(1)).mul(value(aqua).max(30).div(30).xp(0.5)).asDouble("Cool Time", percent0()));
 
 	}
 
@@ -128,25 +77,7 @@ public class ItemBellChristmas extends ItemBellBase
 	@SideOnly(Side.CLIENT)
 	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
-		Status status = new Status(fairyType);
-
-		IFairyWeaponStatusProperty<?> proterty = status.pitch;
-
-		// TODO list
-		String localizedSourceListString = proterty.getLocalizedSourceListString();
-		tooltip.add(String.format(TextFormatting.BLUE + "%s: %s%s",
-			proterty.getLocalizedName(),
-			proterty.getString(fairyType),
-			localizedSourceListString.isEmpty() ? "" : " (" + localizedSourceListString + ")"));
-
-		// TODO convert
-		tooltip.add(TextFormatting.BLUE + "Damage: " + String.format("%.1f", status.damage) + " (Dark, " + EnumAbilityType.christmas.getLocalizedName() + ")");
-		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
-		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Gaia)");
-		tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (" + EnumAbilityType.attack.getLocalizedName() + ")");
-		tooltip.add(TextFormatting.BLUE + "Looting: " + String.format("%d", status.looting) + " (Shine)");
-		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
-		tooltip.add(TextFormatting.BLUE + "Cool Time: " + String.format("%.0f", status.coolTime) + "t (Aqua, Cost)");
+		new Status().addInformation(tooltip, fairyType);
 	}
 
 	//
@@ -225,21 +156,21 @@ public class ItemBellChristmas extends ItemBellBase
 		}
 
 		// ステータスを評価
-		Status status = new Status(fairy.y);
+		Status status = new Status();
 
 		// 発動対象
-		RayTraceResult rayTraceResult = rayTrace(world, player, false, status.additionalReach);
+		RayTraceResult rayTraceResult = rayTrace(world, player, false, status.additionalReach.get(fairy.y));
 		Vec3d positionTarget = rayTraceResult != null
 			? rayTraceResult.hitVec
-			: getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach);
+			: getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach.get(fairy.y));
 		List<Tuple<BlockPos, Boolean>> targets = new ArrayList<>();
 		{
 			List<Tuple<BlockPos, Double>> targets2 = new ArrayList<>();
 
-			int xMin = (int) Math.floor(positionTarget.x - status.radius);
-			int xMax = (int) Math.ceil(positionTarget.x + status.radius);
-			int zMin = (int) Math.floor(positionTarget.z - status.radius);
-			int zMax = (int) Math.ceil(positionTarget.z + status.radius);
+			int xMin = (int) Math.floor(positionTarget.x - status.radius.get(fairy.y));
+			int xMax = (int) Math.ceil(positionTarget.x + status.radius.get(fairy.y));
+			int zMin = (int) Math.floor(positionTarget.z - status.radius.get(fairy.y));
+			int zMax = (int) Math.ceil(positionTarget.z + status.radius.get(fairy.y));
 			for (int x = xMin; x <= xMax; x++) {
 				int y = (int) positionTarget.y;
 				for (int z = zMin; z <= zMax; z++) {
@@ -248,7 +179,7 @@ public class ItemBellChristmas extends ItemBellBase
 					double dx = (x + 0.5) - positionTarget.x;
 					double dz = (z + 0.5) - positionTarget.z;
 					double distance2 = dx * dx + dz * dz;
-					if (distance2 <= status.radius * status.radius) {
+					if (distance2 <= status.radius.get(fairy.y) * status.radius.get(fairy.y)) {
 
 						IBlockState blockState = world.getBlockState(blockPos);
 						if (blockState.getBlock() == ModuleMirageFlower.blockMirageFlower) {
@@ -264,12 +195,12 @@ public class ItemBellChristmas extends ItemBellBase
 
 			targets = ISuppliterator.ofIterable(targets2)
 				.sortedDouble(Tuple::getY)
-				.map((t, i) -> Tuple.of(t.x, i < status.maxTargetCount))
+				.map((t, i) -> Tuple.of(t.x, i < status.maxTargetCount.get(fairy.y)))
 				.toList();
 		}
 
 		// 実行可能性を計算
-		EnumExecutability executability = itemStack.getItemDamage() + (int) Math.ceil(status.wear) > itemStack.getMaxDamage()
+		EnumExecutability executability = itemStack.getItemDamage() + (int) Math.ceil(status.wear.get(fairy.y)) > itemStack.getMaxDamage()
 			? EnumExecutability.NO_RESOURCE
 			: !targets.stream().anyMatch(t -> t.y)
 				? EnumExecutability.NO_TARGET
@@ -334,7 +265,7 @@ public class ItemBellChristmas extends ItemBellBase
 			ItemMagicWandCollecting.spawnParticleSphericalRange(
 				world,
 				resultWithFairy.positionTarget,
-				resultWithFairy.status.radius);
+				resultWithFairy.status.radius.get(resultWithFairy.fairyType));
 
 			// 対象にパーティクルを表示
 			ItemMagicWandCollecting.spawnParticleTargets(
@@ -342,7 +273,7 @@ public class ItemBellChristmas extends ItemBellBase
 				resultWithFairy.targets,
 				target -> target.y,
 				target -> new Vec3d(target.x).addVector(0.5, 0.5, 0.5),
-				resultWithFairy.status.maxTargetCount);
+				resultWithFairy.status.maxTargetCount.get(resultWithFairy.fairyType));
 
 		}
 

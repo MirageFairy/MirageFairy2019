@@ -28,12 +28,12 @@ public interface IFairyWeaponStatusHelper
 		return new FairyWeaponStatusPropertyFactorSourceGet(new FairyWeaponStatusPropertySourceCost());
 	}
 
-	public default IFairyWeaponStatusPropertyFactor mana(EnumManaType manaType)
+	public default IFairyWeaponStatusPropertyFactor value(EnumManaType manaType)
 	{
 		return new FairyWeaponStatusPropertyFactorSourceGet(new FairyWeaponStatusPropertySourceMana(manaType));
 	}
 
-	public default IFairyWeaponStatusPropertyFactor ability(EnumAbilityType abilityType)
+	public default IFairyWeaponStatusPropertyFactor value(EnumAbilityType abilityType)
 	{
 		return new FairyWeaponStatusPropertyFactorSourceGet(new FairyWeaponStatusPropertySourceAbility(abilityType));
 	}
