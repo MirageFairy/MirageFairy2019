@@ -70,4 +70,16 @@ public class FairyWeaponStatusPropertyCalculator
 			}
 		};
 	}
+
+	public IFairyWeaponStatusProperty<Integer> asInt(String unlocalizedName, IFairyWeaponStatusPropertyView<Integer> view)
+	{
+		return new FairyWeaponStatusPropertyBase<Integer>(unlocalizedName, sources, view) {
+			@Override
+			public Integer get(FairyType fairyType)
+			{
+				return (int) (Math.round(calculate(fairyType) * 1000) / 1000);
+			}
+		};
+	}
+
 }
