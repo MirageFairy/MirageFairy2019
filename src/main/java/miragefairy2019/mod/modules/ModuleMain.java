@@ -19,7 +19,7 @@ public class ModuleMain
 				@SideOnly(Side.CLIENT)
 				public ItemStack getTabIconItem()
 				{
-					return new ItemStack(ModuleFairyCrystal.itemFairyCrystal);
+					return ModuleFairyCrystal.variantFairyCrystal.createItemStack();
 				}
 			};
 		});
