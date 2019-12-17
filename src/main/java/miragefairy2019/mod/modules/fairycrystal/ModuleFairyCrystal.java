@@ -8,6 +8,7 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.OreIngredientComplex;
+import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.struct.Tuple3;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
@@ -36,9 +37,16 @@ public class ModuleFairyCrystal
 				item.setRegistryName(ModMirageFairy2019.MODID, "fairy_crystal");
 				item.setUnlocalizedName("fairyCrystal");
 				item.setCreativeTab(ApiMain.creativeTab);
+				item.registerVariant(0, new VariantFairyCrystal("fairy_crystal", "fairyCrystal"));
+				item.registerVariant(1, new VariantFairyCrystal("christmas_fairy_crystal", "fairyCrystalChristmas"));
 				ForgeRegistries.ITEMS.register(item);
 				if (ApiMain.side.isClient()) {
-					ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
+					for (Tuple<Integer, VariantFairyCrystal> tuple : item.getVariants()) {
+						ModelLoader.setCustomModelResourceLocation(
+							item,
+							tuple.x,
+							new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, tuple.y.registryName), null));
+					}
 				}
 				itemFairyCrystal = item;
 			}

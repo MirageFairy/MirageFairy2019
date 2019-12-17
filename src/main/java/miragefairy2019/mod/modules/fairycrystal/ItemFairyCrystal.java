@@ -8,7 +8,9 @@ import java.util.Set;
 
 import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.fairycrystal.IDrop;
+import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.WeightedRandom;
+import miragefairy2019.mod.lib.multi.ItemMulti;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -33,7 +35,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
-public class ItemFairyCrystal extends Item
+public class ItemFairyCrystal extends ItemMulti<VariantFairyCrystal>
 {
 
 	@Override
@@ -42,11 +44,14 @@ public class ItemFairyCrystal extends Item
 		ItemStack itemStackCrystal = player.getHeldItem(hand);
 		if (itemStackCrystal.isEmpty()) return EnumActionResult.PASS;
 
+		VariantFairyCrystal variant = getVariant(itemStackCrystal).orElse(null);
+		if (variant == null) return EnumActionResult.PASS;
+
 		if (!player.isSneaking()) {
 			if (world.isRemote) return EnumActionResult.SUCCESS;
 
 			// ガチャを引く
-			Optional<ItemStack> oItemStack = drop(player, world, pos, hand, facing, hitX, hitY, hitZ);
+			Optional<ItemStack> oItemStack = variant.drop(player, world, pos, hand, facing, hitX, hitY, hitZ);
 
 			// ガチャが成功した場合、
 			if (oItemStack.isPresent()) {
@@ -70,7 +75,7 @@ public class ItemFairyCrystal extends Item
 			if (world.isRemote) return EnumActionResult.SUCCESS;
 
 			// ガチャリスト取得
-			List<WeightedRandom.Item<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ);
+			List<WeightedRandom.Item<ItemStack>> dropTable = variant.getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ);
 
 			// 表示
 			List<String> lines = new ArrayList<>();
@@ -102,7 +107,7 @@ public class ItemFairyCrystal extends Item
 		return oItemStack;
 	}
 
-	private static List<WeightedRandom.Item<ItemStack>> getDropTable(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public static List<WeightedRandom.Item<ItemStack>> getDropTable(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		BlockPos pos2 = world.getBlockState(pos).isFullBlock() ? pos.offset(facing) : pos;
 
@@ -227,6 +232,14 @@ public class ItemFairyCrystal extends Item
 		if (totalWeight < 1) dropTable.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.air[0].createItemStack(), 1 - totalWeight));
 
 		return dropTable;
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack itemStack)
+	{
+		VariantFairyCrystal variant = getVariant(itemStack).orElse(null);
+		if (variant == null) return UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".name").trim();
+		return UtilsMinecraft.translateToLocalFormatted("item." + variant.unlocalizedName + ".format").trim();
 	}
 
 }
