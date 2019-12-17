@@ -27,6 +27,9 @@ public class ModuleFairyCrystal
 
 	public static ItemFairyCrystal itemFairyCrystal;
 
+	public static VariantFairyCrystal variantFairyCrystal;
+	public static VariantFairyCrystal variantFairyCrystalChristmas;
+
 	public static void init(EventRegistryMod erMod)
 	{
 		erMod.registerItem.register(b -> {
@@ -37,8 +40,8 @@ public class ModuleFairyCrystal
 				item.setRegistryName(ModMirageFairy2019.MODID, "fairy_crystal");
 				item.setUnlocalizedName("fairyCrystal");
 				item.setCreativeTab(ApiMain.creativeTab);
-				item.registerVariant(0, new VariantFairyCrystal("fairy_crystal", "fairyCrystal"));
-				item.registerVariant(1, new VariantFairyCrystal("christmas_fairy_crystal", "fairyCrystalChristmas"));
+				item.registerVariant(0, variantFairyCrystal = new VariantFairyCrystal("fairy_crystal", "fairyCrystal", "fairyCrystal"));
+				item.registerVariant(1, variantFairyCrystalChristmas = new VariantFairyCrystal("christmas_fairy_crystal", "fairyCrystalChristmas", "fairyCrystalChristmas"));
 				ForgeRegistries.ITEMS.register(item);
 				if (ApiMain.side.isClient()) {
 					for (Tuple<Integer, VariantFairyCrystal> tuple : item.getVariants()) {
@@ -54,8 +57,10 @@ public class ModuleFairyCrystal
 		});
 		erMod.createItemStack.register(ic -> {
 
-			// 妖晶の鉱石辞書登録
-			OreDictionary.registerOre("mirageFairyCrystal", new ItemStack(itemFairyCrystal));
+			// スフィアの鉱石辞書
+			for (Tuple<Integer, VariantFairyCrystal> tuple : itemFairyCrystal.getVariants()) {
+				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
+			}
 
 			// 妖晶ドロップ登録
 			LoaderFairyCrystalDrop.loadFairyCrystalDrop();

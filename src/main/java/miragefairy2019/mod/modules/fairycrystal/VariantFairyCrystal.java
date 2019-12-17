@@ -15,13 +15,15 @@ import net.minecraft.world.World;
 public class VariantFairyCrystal extends ItemVariant
 {
 
-	public String registryName;
-	public String unlocalizedName;
+	public final String registryName;
+	public final String unlocalizedName;
+	public final String oreName;
 
-	public VariantFairyCrystal(String registryName, String unlocalizedName)
+	public VariantFairyCrystal(String registryName, String unlocalizedName, String oreName)
 	{
 		this.registryName = registryName;
 		this.unlocalizedName = unlocalizedName;
+		this.oreName = oreName;
 	}
 
 	public Optional<ItemStack> drop(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
