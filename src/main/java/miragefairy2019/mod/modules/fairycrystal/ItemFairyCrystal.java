@@ -239,7 +239,7 @@ public class ItemFairyCrystal extends ItemMulti<VariantFairyCrystal>
 	{
 		VariantFairyCrystal variant = getVariant(itemStack).orElse(null);
 		if (variant == null) return UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".name").trim();
-		return UtilsMinecraft.translateToLocalFormatted("item." + variant.unlocalizedName + ".format").trim();
+		return UtilsMinecraft.translateToLocalFormatted("item." + variant.unlocalizedName + ".name").trim();
 	}
 
 }
