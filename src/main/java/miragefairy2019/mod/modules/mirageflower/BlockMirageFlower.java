@@ -253,7 +253,11 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		{
 			int count = Utils.randomInt(random, isMaxAge(state) ? 1 + fortune * 0.5 : 0);
 			for (int i = 0; i < count; i++) {
-				drops.add(ModuleFairyCrystal.variantFairyCrystal.createItemStack());
+				if (random.nextDouble() < 0.01) {
+					drops.add(ModuleFairyCrystal.variantFairyCrystalChristmas.createItemStack());
+				} else {
+					drops.add(ModuleFairyCrystal.variantFairyCrystal.createItemStack());
+				}
 			}
 		}
 
