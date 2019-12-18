@@ -60,6 +60,7 @@ public class ModuleFairyCrystal
 			// 鉱石辞書
 			for (Tuple<Integer, VariantFairyCrystal> tuple : itemFairyCrystal.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
+				OreDictionary.registerOre("mirageFairyCrystalAny", tuple.y.createItemStack());
 			}
 
 			// 妖晶ドロップ登録
