@@ -1,16 +1,9 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
-import java.util.List;
-import java.util.Optional;
-
-import miragefairy2019.mod.lib.WeightedRandom;
+import miragefairy2019.mod.api.ApiFairyCrystal;
+import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.lib.multi.ItemVariant;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 
 public class VariantFairyCrystal extends ItemVariant
 {
@@ -26,14 +19,15 @@ public class VariantFairyCrystal extends ItemVariant
 		this.oreName = oreName;
 	}
 
-	public Optional<ItemStack> drop(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public FairyCrystalDropper getDropper()
 	{
-		return ItemFairyCrystal.drop(player, world, pos, hand, facing, hitX, hitY, hitZ);
-	}
-
-	public List<WeightedRandom.Item<ItemStack>> getDropTable(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		return ItemFairyCrystal.getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ);
+		return new FairyCrystalDropper() {
+			@Override
+			public ISuppliterator<IRightClickDrop> getDropList()
+			{
+				return ISuppliterator.ofIterable(ApiFairyCrystal.dropsFairyCrystal);
+			}
+		};
 	}
 
 }

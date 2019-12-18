@@ -5,6 +5,7 @@ import java.util.List;
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.modules.fairycrystal.ItemFairyCrystal;
+import miragefairy2019.mod.modules.fairycrystal.VariantFairyCrystal;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -80,8 +81,10 @@ public class ItemFairyWandSummoning extends ItemFairyWeaponCraftingToolBase
 			if (!isUsingTick(count)) return;
 
 			// 妖晶を得る
-			ItemStack nItemStackFairyCrystal = findItem(player, itemStack -> itemStack.getItem() instanceof ItemFairyCrystal).orElse(null);
-			if (nItemStackFairyCrystal == null) return;
+			ItemStack itemStackFairyCrystal = findItem(player, itemStack -> itemStack.getItem() instanceof ItemFairyCrystal).orElse(null);
+			if (itemStackFairyCrystal == null) return;
+			VariantFairyCrystal variantFairyCrystal = ((ItemFairyCrystal) itemStackFairyCrystal.getItem()).getVariant(itemStackFairyCrystal).orElse(null);
+			if (variantFairyCrystal == null) return;
 
 			// プレイヤー視点判定
 			RayTraceResult rayTraceResult = rayTrace(player.world, player, false);
@@ -89,7 +92,7 @@ public class ItemFairyWandSummoning extends ItemFairyWeaponCraftingToolBase
 			if (rayTraceResult.typeOfHit != Type.BLOCK) return; // ブロックに当たらなかった場合は無視
 
 			// ガチャを引く
-			ItemStack nItemStackDrop = ItemFairyCrystal.drop(
+			ItemStack nItemStackDrop = variantFairyCrystal.getDropper().drop(
 				player,
 				player.world,
 				rayTraceResult.getBlockPos(),
@@ -104,8 +107,8 @@ public class ItemFairyWandSummoning extends ItemFairyWeaponCraftingToolBase
 			// 成立
 
 			// ガチャアイテムを消費
-			nItemStackFairyCrystal.shrink(1);
-			player.addStat(StatList.getObjectUseStats(nItemStackFairyCrystal.getItem()));
+			itemStackFairyCrystal.shrink(1);
+			player.addStat(StatList.getObjectUseStats(itemStackFairyCrystal.getItem()));
 
 			// 妖精をドロップ
 			BlockPos blockPos = rayTraceResult.getBlockPos().offset(rayTraceResult.sideHit);
