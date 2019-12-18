@@ -23,9 +23,9 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 			@Override
 			public ISuppliterator<IRightClickDrop> getDropList()
 			{
-				return ISuppliterator.<IRightClickDrop> empty()
-					.after(RightClickDrops.world(new DropFixed(santaclaus[0].createItemStack(), 0.9), (w, bp) -> bp.getDistance(207, 64, -244) < 32))
-					.after(RightClickDrops.world(new DropFixed(christmas[0].createItemStack(), 0.1), (w, bp) -> bp.getDistance(207, 64, -244) < 32));
+				return self.getDropList()
+					.after(RightClickDrops.world(new DropFixed(santaclaus[0].createItemStack(), 0.1), (w, bp) -> bp.getDistance(207, 64, -244) < 32))
+					.after(RightClickDrops.world(new DropFixed(christmas[0].createItemStack(), 0.01), (w, bp) -> bp.getDistance(207, 64, -244) < 32));
 			}
 		};
 	}
