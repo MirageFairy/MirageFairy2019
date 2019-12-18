@@ -40,8 +40,8 @@ public class ModuleFairyCrystal
 				item.setRegistryName(ModMirageFairy2019.MODID, "fairy_crystal");
 				item.setUnlocalizedName("fairyCrystal");
 				item.setCreativeTab(ApiMain.creativeTab);
-				item.registerVariant(0, variantFairyCrystal = new VariantFairyCrystal("fairy_crystal", "fairyCrystal", "fairyCrystal"));
 				item.registerVariant(1, variantFairyCrystalChristmas = new VariantFairyCrystal("christmas_fairy_crystal", "fairyCrystalChristmas", "fairyCrystalChristmas"));
+				item.registerVariant(0, variantFairyCrystal = new VariantFairyCrystal("fairy_crystal", "fairyCrystal", "mirageFairyCrystal"));
 				ForgeRegistries.ITEMS.register(item);
 				if (ApiMain.side.isClient()) {
 					for (Tuple<Integer, VariantFairyCrystal> tuple : item.getVariants()) {
