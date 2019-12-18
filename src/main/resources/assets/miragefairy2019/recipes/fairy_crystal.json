@@ -1,0 +1,14 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "fairy_crystal",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyCrystalAny"
+		}
+	],
+	"result": {
+		"item": "miragefairy2019:fairy_crystal",
+		"data": 0
+	}
+}
