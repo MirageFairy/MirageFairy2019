@@ -57,7 +57,7 @@ public class ModuleFairyCrystal
 		});
 		erMod.createItemStack.register(ic -> {
 
-			// スフィアの鉱石辞書
+			// 鉱石辞書
 			for (Tuple<Integer, VariantFairyCrystal> tuple : itemFairyCrystal.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}
