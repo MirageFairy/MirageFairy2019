@@ -22,13 +22,13 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairycrystal.DropFixed;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
-import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.WeightedRandom;
 import mirrg.boron.util.UtilsFile;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -104,8 +104,88 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 
 	//
 
-	private static final int capacityGlobal = 1000;
-	private static final int capacityPlayer = 100;
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		ItemStack itemStackCrystal = player.getHeldItem(hand);
+		if (itemStackCrystal.isEmpty()) return EnumActionResult.PASS;
+
+		super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+
+		if (player.isSneaking()) {
+
+			{
+
+				// 在庫読み込み
+				// 在庫が読み込めなかった場合は出ない
+				Map<String, Integer> capacityTable;
+				synchronized (lock) {
+					try {
+						capacityTable = loadCapacityTable(world, "santaclaus");
+					} catch (IOException e) {
+						LOGGER.error("Can not load capacity table!", e);
+						return EnumActionResult.SUCCESS;
+					}
+				}
+
+				// 在庫がない場合は出ない
+				int droppedGlobal;
+				int droppedPlayer;
+				int stockGlobal;
+				int stockPlayer;
+				{
+					droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
+					droppedPlayer = capacityTable.getOrDefault(player.getCachedUniqueIdString(), 0);
+					stockGlobal = Math.max(1000 - droppedGlobal, 0);
+					stockPlayer = Math.max(100 - droppedPlayer, 0);
+					if (stockGlobal + stockPlayer <= 0) return EnumActionResult.SUCCESS;
+				}
+
+				// 表示
+				player.sendStatusMessage(new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + santaclaus[0].createItemStack()), false);
+
+			}
+
+			{
+
+				// 在庫読み込み
+				// 在庫が読み込めなかった場合は出ない
+				Map<String, Integer> capacityTable;
+				synchronized (lock) {
+					try {
+						capacityTable = loadCapacityTable(world, "christmas");
+					} catch (IOException e) {
+						LOGGER.error("Can not load capacity table!", e);
+						return EnumActionResult.SUCCESS;
+					}
+				}
+
+				// 在庫がない場合は出ない
+				int droppedGlobal;
+				int droppedPlayer;
+				int stockGlobal;
+				int stockPlayer;
+				{
+					droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
+					droppedPlayer = capacityTable.getOrDefault(player.getCachedUniqueIdString(), 0);
+					stockGlobal = Math.max(1000 - droppedGlobal, 0);
+					stockPlayer = Math.max(100 - droppedPlayer, 0);
+					if (stockGlobal + stockPlayer <= 0) return EnumActionResult.SUCCESS;
+				}
+
+				// 表示
+				player.sendStatusMessage(new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + christmas[0].createItemStack()), false);
+
+			}
+
+		}
+
+		return EnumActionResult.SUCCESS;
+	}
+
+	//
+
+	private static final int capacityGlobal = 500;
+	private static final int capacityPlayer = 10;
 
 	@Override
 	public FairyCrystalDropper getDropper()
@@ -131,7 +211,6 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 
 					return oItemStack;
 				}
-
 			}
 
 			private void onDrop(World world, BlockPos pos, EntityPlayer player, ItemStack itemStack, ItemStack dropItem, String stringFairyType)
@@ -182,18 +261,18 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 					}
 
 					// ログ出力
-					LOGGER.info("Dropped: " + stringFairyType + " by " + player.getDisplayNameString() + " at " + pos + "@" + world.provider.getDimension());
+					LOGGER.info("Dropped: " + dropItem.getDisplayName() + " by " + player.getDisplayNameString() + " at " + pos + "@" + world.provider.getDimension());
 
 					// ドロップ本人のメッセージ欄に出力
 					if (isGlobal) {
-						player.sendStatusMessage(new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + Utils.toUpperCaseHead(stringFairyType)), true);
+						player.sendStatusMessage(new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + dropItem.getDisplayName()), true);
 					} else {
-						player.sendStatusMessage(new TextComponentString("Player Stock: " + (stockPlayer - 1) + " / " + capacityPlayer + " " + Utils.toUpperCaseHead(stringFairyType)), true);
+						player.sendStatusMessage(new TextComponentString("Player Stock: " + (stockPlayer - 1) + " / " + capacityPlayer + " " + dropItem.getDisplayName()), true);
 					}
 
 					// ワールド全体チャット
 					if (isGlobal && (stockGlobal - 1) % (capacityGlobal / 20) == 0) {
-						TextComponentString message = new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + Utils.toUpperCaseHead(stringFairyType));
+						TextComponentString message = new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + dropItem.getDisplayName());
 						message.getStyle().setColor(TextFormatting.GRAY);
 						message.getStyle().setItalic(true);
 						MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
