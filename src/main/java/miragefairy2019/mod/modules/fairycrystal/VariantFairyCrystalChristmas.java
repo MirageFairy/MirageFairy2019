@@ -2,18 +2,99 @@ package miragefairy2019.mod.modules.fairycrystal;
 
 import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.google.gson.Gson;
+
+import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairycrystal.DropFixed;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
+import miragefairy2019.mod.lib.WeightedRandom;
 import mirrg.boron.util.suppliterator.ISuppliterator;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 {
+
+	private static final Logger LOGGER = LogManager.getLogger(VariantFairyCrystalChristmas.class);
 
 	public VariantFairyCrystalChristmas(String registryName, String unlocalizedName, String oreName)
 	{
 		super(registryName, unlocalizedName, oreName);
 	}
+
+	//
+
+	private static final Object lock = new Object();
+
+	private static final String GLOBAL = "GLOBAL";
+
+	private static File getCapacityTableFile(World world, String point)
+	{
+		File directoryWorld = world.getSaveHandler().getWorldDirectory();
+		File directoryModData = new File(directoryWorld, ModMirageFairy2019.MODID);
+		File directoryDrop = new File(directoryModData, "drop");
+		File fileDrop = new File(directoryDrop, "fairyCrystalChristmas." + point + ".json");
+		return fileDrop;
+	}
+
+	// TODO キャッシュ
+	@SuppressWarnings("unchecked")
+	private static Map<String, Integer> loadCapacityTable(World world, String point) throws IOException
+	{
+		File fileDrop = getCapacityTableFile(world, point);
+
+		try {
+			Map<String, Integer> input;
+			if (fileDrop.exists()) {
+				input = new Gson().fromJson(new InputStreamReader(new FileInputStream(fileDrop)), Map.class);
+			} else {
+				input = new HashMap<>();
+			}
+			Map<String, Integer> result = new HashMap<>();
+			{
+				Map<String, Integer> data2 = (Map<String, Integer>) input;
+				for (Entry<String, Integer> entry : data2.entrySet()) {
+					result.put(entry.getKey(), entry.getValue());
+				}
+			}
+			return result;
+		} catch (Exception e) {
+			throw new IOException(e);
+		}
+	}
+
+	private static void saveCapacityTable(World world, String point, Map<String, Integer> capacityTable) throws IOException
+	{
+		File fileDrop = getCapacityTableFile(world, point);
+
+		try {
+			new Gson().toJson(capacityTable, new OutputStreamWriter(new FileOutputStream(fileDrop)));
+		} catch (Exception e) {
+			throw new IOException(e);
+		}
+	}
+
+	//
 
 	@Override
 	public FairyCrystalDropper getDropper()
@@ -21,11 +102,169 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 		FairyCrystalDropper self = super.getDropper();
 		return new FairyCrystalDropper() {
 			@Override
+			public Optional<ItemStack> drop(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+			{
+				synchronized (lock) {
+
+					// ガチャリスト取得
+					List<WeightedRandom.Item<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ);
+
+					// ガチャを引く
+					Optional<ItemStack> oItemStack = WeightedRandom.getRandomItem(world.rand, dropTable);
+
+					// ドロップしたものが限定ならカウントする
+					if (oItemStack.isPresent()) {
+						a:
+						if (ItemStack.areItemStacksEqualUsingNBTShareTag(oItemStack.get(), santaclaus[0].createItemStack())) {
+
+							// 在庫読み込み
+							// 在庫が読み込めなかった場合は何もできない
+							Map<String, Integer> capacityTable;
+							synchronized (lock) {
+								try {
+									capacityTable = loadCapacityTable(world, "santaclaus");
+								} catch (IOException e) {
+									LOGGER.error("Can not load capacity table!", e);
+									break a;
+								}
+							}
+
+							// 在庫を減らす
+							{
+								int droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
+								int droppedPlayer = capacityTable.getOrDefault(player.getCachedUniqueIdString(), 0);
+								int stockGlobal = Math.max(1000 - droppedGlobal, 0);
+								int stockPlayer = Math.max(100 - droppedPlayer, 0);
+
+								// 在庫の比に従って排出
+								if (world.rand.nextDouble() < stockGlobal / (double) (stockGlobal + stockPlayer)) {
+									capacityTable.put(GLOBAL, droppedGlobal + 1);
+								} else {
+									capacityTable.put(player.getCachedUniqueIdString(), droppedPlayer + 1);
+								}
+
+							}
+
+							// 在庫を書き込み
+							// 在庫が書き込めなかった場合は何もしない
+							try {
+								saveCapacityTable(world, "santaclaus", capacityTable);
+								LOGGER.info("Dropped: " + "santaclaus" + " by " + player.getDisplayNameString() + " at " + pos + "@" + world.provider.getDimension());
+							} catch (IOException e) {
+								LOGGER.error("Can not save capacity table!", e);
+								break a;
+							}
+
+						}
+						a:
+						if (ItemStack.areItemStacksEqualUsingNBTShareTag(oItemStack.get(), christmas[0].createItemStack())) {
+
+							// 在庫読み込み
+							// 在庫が読み込めなかった場合は何もできない
+							Map<String, Integer> capacityTable;
+							synchronized (lock) {
+								try {
+									capacityTable = loadCapacityTable(world, "christmas");
+								} catch (IOException e) {
+									LOGGER.error("Can not load capacity table!", e);
+									break a;
+								}
+							}
+
+							// 在庫を減らす
+							{
+								int droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
+								int droppedPlayer = capacityTable.getOrDefault(player.getCachedUniqueIdString(), 0);
+								int stockGlobal = Math.max(1000 - droppedGlobal, 0);
+								int stockPlayer = Math.max(100 - droppedPlayer, 0);
+
+								// 在庫の比に従って排出
+								if (world.rand.nextDouble() < stockGlobal / (double) (stockGlobal + stockPlayer)) {
+									capacityTable.put(GLOBAL, droppedGlobal + 1);
+								} else {
+									capacityTable.put(player.getCachedUniqueIdString(), droppedPlayer + 1);
+								}
+
+							}
+
+							// 在庫を書き込み
+							// 在庫が書き込めなかった場合は何もしない
+							try {
+								saveCapacityTable(world, "christmas", capacityTable);
+								LOGGER.info("Dropped: " + "christmas" + " by " + player.getDisplayNameString() + " at " + pos + "@" + world.provider.getDimension());
+							} catch (IOException e) {
+								LOGGER.error("Can not save capacity table!", e);
+								break a;
+							}
+
+						}
+					}
+
+					return oItemStack;
+				}
+
+			}
+
+			@Override
 			public ISuppliterator<IRightClickDrop> getDropList()
 			{
 				return self.getDropList()
-					.after(RightClickDrops.world(new DropFixed(santaclaus[0].createItemStack(), 0.1), (w, bp) -> bp.getDistance(207, 64, -244) < 32))
-					.after(RightClickDrops.world(new DropFixed(christmas[0].createItemStack(), 0.01), (w, bp) -> bp.getDistance(207, 64, -244) < 32));
+					.after(RightClickDrops.eventDrop(new DropFixed(santaclaus[0].createItemStack(), 0.1), t -> {
+
+						// 在庫読み込み
+						// 在庫が読み込めなかった場合は出ない
+						Map<String, Integer> capacityTable;
+						synchronized (lock) {
+							try {
+								capacityTable = loadCapacityTable(t.x, "santaclaus");
+							} catch (IOException e) {
+								LOGGER.error("Can not load capacity table!", e);
+								return false;
+							}
+						}
+
+						// 在庫がない場合は出ない
+						{
+							int droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
+							int droppedPlayer = capacityTable.getOrDefault(t.z.getCachedUniqueIdString(), 0);
+							int stockGlobal = Math.max(1000 - droppedGlobal, 0);
+							int stockPlayer = Math.max(100 - droppedPlayer, 0);
+							if (stockGlobal + stockPlayer <= 0) return false;
+						}
+
+						// 指定座標の付近でないならば出ない
+						if (t.y.getDistance(207, 64, -244) > 32) return false;
+
+						return true;
+					}))
+					.after(RightClickDrops.eventDrop(new DropFixed(christmas[0].createItemStack(), 0.01), t -> {
+
+						// 在庫読み込み
+						// 在庫が読み込めなかった場合は出ない
+						Map<String, Integer> capacityTable;
+						synchronized (lock) {
+							try {
+								capacityTable = loadCapacityTable(t.x, "christmas");
+							} catch (IOException e) {
+								LOGGER.error("Can not load capacity table!", e);
+								return false;
+							}
+						}
+
+						// 在庫がない場合は出ない
+						{
+							int droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
+							int droppedPlayer = capacityTable.getOrDefault(t.z.getCachedUniqueIdString(), 0);
+							int stockGlobal = Math.max(1000 - droppedGlobal, 0);
+							int stockPlayer = Math.max(100 - droppedPlayer, 0);
+							if (stockGlobal + stockPlayer <= 0) return false;
+						}
+
+						// 指定座標の付近でないならば出ない
+						if (t.y.getDistance(207, 64, -244) > 32) return false;
+
+						return true;
+					}));
 			}
 		};
 	}

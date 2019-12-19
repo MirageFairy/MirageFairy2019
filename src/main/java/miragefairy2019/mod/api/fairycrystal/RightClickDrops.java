@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
+import mirrg.boron.util.struct.Tuple3;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -248,6 +249,23 @@ public class RightClickDrops
 					return predicate.test(classEntity.cast(entity));
 				}
 				return false;
+			}
+		};
+	}
+
+	public static IRightClickDrop eventDrop(IDrop drop, Predicate<Tuple3<World, BlockPos, EntityPlayer>> predicate)
+	{
+		return new IRightClickDrop() {
+			@Override
+			public IDrop getDrop()
+			{
+				return drop;
+			}
+
+			@Override
+			public boolean testUseItem(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+			{
+				return predicate.test(Tuple3.of(world, pos, player));
 			}
 		};
 	}

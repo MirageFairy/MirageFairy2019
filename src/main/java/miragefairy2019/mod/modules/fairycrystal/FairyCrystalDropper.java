@@ -31,8 +31,14 @@ import net.minecraftforge.common.BiomeDictionary;
 public abstract class FairyCrystalDropper
 {
 
+	/**
+	 * このメソッドはサーバーワールドのスレッドからしか呼び出せません。
+	 */
 	public abstract ISuppliterator<IRightClickDrop> getDropList();
 
+	/**
+	 * このメソッドはサーバーワールドのスレッドからしか呼び出せません。
+	 */
 	public List<WeightedRandom.Item<ItemStack>> getDropTable(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		BlockPos pos2 = world.getBlockState(pos).isFullBlock() ? pos.offset(facing) : pos;
@@ -160,6 +166,9 @@ public abstract class FairyCrystalDropper
 		return dropTable;
 	}
 
+	/**
+	 * このメソッドはサーバーワールドのスレッドからしか呼び出せません。
+	 */
 	public Optional<ItemStack> drop(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 
