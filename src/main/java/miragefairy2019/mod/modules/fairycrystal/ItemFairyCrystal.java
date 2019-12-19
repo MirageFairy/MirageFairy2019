@@ -1,6 +1,5 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +15,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
@@ -62,17 +62,16 @@ public class ItemFairyCrystal extends ItemMulti<VariantFairyCrystal>
 			List<WeightedRandom.Item<ItemStack>> dropTable = variant.getDropper().getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ);
 
 			// 表示
-			List<String> lines = new ArrayList<>();
-			lines.add("===== " + itemStackCrystal.getDisplayName() + " (" + (world.isRemote ? "Server" : "Client") + ") =====");
+			ITextComponent string = new TextComponentString("");
+			string.appendText("===== " + itemStackCrystal.getDisplayName() + " (" + (world.isRemote ? "Server" : "Client") + ") =====");
 			double totalWeight = WeightedRandom.getTotalWeight(dropTable);
 			for (WeightedRandom.Item<ItemStack> item : ISuppliterator.ofIterable(dropTable)
 				.sortedObj(i -> i.item.getDisplayName())
 				.sortedDouble(i -> i.weight)) {
-				lines.add("" + String.format("%f%%", 100 * item.weight / totalWeight) + ": " + item.item.getDisplayName());
+				string.appendText("" + String.format("%f%%", 100 * item.weight / totalWeight) + ": " + item.item.getDisplayName());
 			}
-			lines.add("====================");
-			player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)
-				.join("\n")), false);
+			string.appendText("====================");
+			player.sendStatusMessage(string, false);
 
 			return EnumActionResult.SUCCESS;
 		}
