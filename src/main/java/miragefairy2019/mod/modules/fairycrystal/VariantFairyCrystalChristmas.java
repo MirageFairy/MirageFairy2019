@@ -313,6 +313,7 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 						}
 
 						// 指定座標の付近でないならば出ない
+						if (t.x.provider.getDimension() != 0) return false;
 						if (t.y.getDistance(207, 64, -244) > 32) return false;
 
 						return true;
@@ -341,6 +342,7 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 						}
 
 						// 指定座標の付近でないならば出ない
+						if (t.x.provider.getDimension() != 0) return false;
 						if (t.y.getDistance(207, 64, -244) > 32) return false;
 
 						return true;
