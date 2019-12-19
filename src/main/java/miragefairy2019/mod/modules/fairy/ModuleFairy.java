@@ -219,8 +219,8 @@ public class ModuleFairy
 				r(75, moonstone = v(t(75, "moonstone", 4, 68, 1, m(10, 3, 38, 0, 15, 43), a(0, 0, 0, 9, 2, 2, 13, 7, 0, 4, 0, 6, 0, 0, 0, 5, 0, 0, 0), c(0xEDEFFF, 0xDBF7FE, 0xCCE7FE, 0xE0EEFE))));
 				r(76, pyrope = v(t(76, "pyrope", 4, 71, 1, m(10, 0, 18, 0, 31, 75), a(2, 0, 0, 2, 4, 0, 14, 7, 0, 0, 0, 6, 0, 5, 0, 3, 0, 0, 0), c(0xF4CDDE, 0xEC97BC, 0xCE1860, 0xD41E6E))));
 				r(77, smithsonite = v(t(77, "smithsonite", 3, 63, 1, m(10, 13, 0, 36, 0, 85), a(0, 4, 2, 0, 0, 0, 5, 2, 0, 0, 1, 4, 0, 0, 0, 2, 0, 0, 0), c(0xC1F0E6, 0x95DFD0, 0x33917E, 0x52C6B5))));
-				r(78, christmas = v(t(78, "christmas", 5, 25, 1.2, m(2, 3, 10, 0, 7, 7), a(0, 0, 0, 4, 3, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10), c(0xD2E6F6, 0xF1150F, 0xB20000, 0x248541))));
-				r(79, santaclaus = v(t(79, "santaclaus", 4, 12, 1.2, m(4, 10, 20, 5, 10, 5), a(3, 6, 5, 3, 0, 2, 0, 10, 14, 7, 4, 1, 1, 1, 4, 9, 5, 1, 10), c(0xCDBBAD, 0xD61728, 0xDA0117, 0xDAD8D4))));
+				r(78, christmas = v(t(78, "christmas", 4, 25, 1.2, m(2, 3, 10, 0, 7, 7), a(0, 0, 0, 4, 3, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10), c(0xD2E6F6, 0xF1150F, 0xB20000, 0x248541))));
+				r(79, santaclaus = v(t(79, "santaclaus", 5, 12, 1.2, m(4, 10, 20, 5, 10, 5), a(3, 6, 5, 3, 0, 2, 0, 10, 14, 7, 4, 1, 1, 1, 4, 9, 5, 1, 10), c(0xCDBBAD, 0xD61728, 0xDA0117, 0xDAD8D4))));
 			}
 
 			variants = ImmutableArray.ofList(variants2);

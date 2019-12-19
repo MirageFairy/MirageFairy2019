@@ -210,7 +210,7 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 			public ISuppliterator<IRightClickDrop> getDropList()
 			{
 				return self.getDropList()
-					.after(RightClickDrops.eventDrop(new DropFixed(santaclaus[0].createItemStack(), 0.1), t -> {
+					.after(RightClickDrops.eventDrop(new DropFixed(santaclaus[0].createItemStack(), 0.01), t -> {
 
 						// 在庫読み込み
 						// 在庫が読み込めなかった場合は出ない
@@ -238,7 +238,7 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 
 						return true;
 					}))
-					.after(RightClickDrops.eventDrop(new DropFixed(christmas[0].createItemStack(), 0.01), t -> {
+					.after(RightClickDrops.eventDrop(new DropFixed(christmas[0].createItemStack(), 0.1), t -> {
 
 						// 在庫読み込み
 						// 在庫が読み込めなかった場合は出ない
