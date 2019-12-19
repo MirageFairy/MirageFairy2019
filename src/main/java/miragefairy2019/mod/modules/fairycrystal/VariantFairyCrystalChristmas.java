@@ -140,12 +140,11 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 					droppedPlayer = capacityTable.getOrDefault(player.getCachedUniqueIdString(), 0);
 					stockGlobal = Math.max(capacityGlobal - droppedGlobal, 0);
 					stockPlayer = Math.max(capacityPlayer - droppedPlayer, 0);
-					if (stockGlobal + stockPlayer <= 0) return EnumActionResult.SUCCESS;
 				}
 
 				// 表示
-				player.sendStatusMessage(new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + santaclaus[0].createItemStack().getDisplayName()), false);
-				player.sendStatusMessage(new TextComponentString("Player Stock: " + (stockPlayer - 1) + " / " + capacityPlayer + " " + santaclaus[0].createItemStack().getDisplayName()), false);
+				player.sendStatusMessage(new TextComponentString("Global Stock: " + stockGlobal + " / " + capacityGlobal + " " + santaclaus[0].createItemStack().getDisplayName()), false);
+				player.sendStatusMessage(new TextComponentString("Player Stock: " + stockPlayer + " / " + capacityPlayer + " " + santaclaus[0].createItemStack().getDisplayName()), false);
 
 			}
 
@@ -173,12 +172,11 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 					droppedPlayer = capacityTable.getOrDefault(player.getCachedUniqueIdString(), 0);
 					stockGlobal = Math.max(capacityGlobal - droppedGlobal, 0);
 					stockPlayer = Math.max(capacityPlayer - droppedPlayer, 0);
-					if (stockGlobal + stockPlayer <= 0) return EnumActionResult.SUCCESS;
 				}
 
 				// 表示
-				player.sendStatusMessage(new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + christmas[0].createItemStack().getDisplayName()), false);
-				player.sendStatusMessage(new TextComponentString("Player Stock: " + (stockPlayer - 1) + " / " + capacityPlayer + " " + christmas[0].createItemStack().getDisplayName()), false);
+				player.sendStatusMessage(new TextComponentString("Global Stock: " + stockGlobal + " / " + capacityGlobal + " " + christmas[0].createItemStack().getDisplayName()), false);
+				player.sendStatusMessage(new TextComponentString("Player Stock: " + stockPlayer + " / " + capacityPlayer + " " + christmas[0].createItemStack().getDisplayName()), false);
 
 			}
 
