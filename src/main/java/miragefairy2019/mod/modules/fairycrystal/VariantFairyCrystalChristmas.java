@@ -4,7 +4,6 @@ import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -25,6 +24,7 @@ import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.WeightedRandom;
+import mirrg.boron.util.UtilsFile;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -69,17 +69,18 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 		File fileDrop = getCapacityTableFile(world, point);
 
 		try {
-			Map<String, Integer> input;
+			Map<String, Number> input;
 			if (fileDrop.exists()) {
-				input = new Gson().fromJson(new InputStreamReader(new FileInputStream(fileDrop)), Map.class);
+				try (InputStreamReader in = new InputStreamReader(new FileInputStream(fileDrop))) {
+					input = new Gson().fromJson(in, Map.class);
+				}
 			} else {
 				input = new HashMap<>();
 			}
 			Map<String, Integer> result = new HashMap<>();
 			{
-				Map<String, Integer> data2 = (Map<String, Integer>) input;
-				for (Entry<String, Integer> entry : data2.entrySet()) {
-					result.put(entry.getKey(), entry.getValue());
+				for (Entry<String, Number> entry : input.entrySet()) {
+					result.put(entry.getKey(), entry.getValue().intValue());
 				}
 			}
 			return result;
@@ -93,7 +94,9 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 		File fileDrop = getCapacityTableFile(world, point);
 
 		try {
-			new Gson().toJson(capacityTable, new OutputStreamWriter(new FileOutputStream(fileDrop)));
+			try (OutputStreamWriter out = new OutputStreamWriter(UtilsFile.getOutputStreamWithMkdirs(fileDrop))) {
+				new Gson().toJson(capacityTable, out);
+			}
 		} catch (Exception e) {
 			throw new IOException(e);
 		}
