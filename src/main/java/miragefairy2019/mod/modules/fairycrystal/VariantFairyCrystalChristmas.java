@@ -104,6 +104,9 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 
 	//
 
+	private static final int capacityGlobal = 500;
+	private static final int capacityPlayer = 10;
+
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		ItemStack itemStackCrystal = player.getHeldItem(hand);
@@ -135,13 +138,14 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 				{
 					droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
 					droppedPlayer = capacityTable.getOrDefault(player.getCachedUniqueIdString(), 0);
-					stockGlobal = Math.max(1000 - droppedGlobal, 0);
-					stockPlayer = Math.max(100 - droppedPlayer, 0);
+					stockGlobal = Math.max(capacityGlobal - droppedGlobal, 0);
+					stockPlayer = Math.max(capacityPlayer - droppedPlayer, 0);
 					if (stockGlobal + stockPlayer <= 0) return EnumActionResult.SUCCESS;
 				}
 
 				// 表示
-				player.sendStatusMessage(new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + santaclaus[0].createItemStack()), false);
+				player.sendStatusMessage(new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + santaclaus[0].createItemStack().getDisplayName()), false);
+				player.sendStatusMessage(new TextComponentString("Player Stock: " + (stockPlayer - 1) + " / " + capacityPlayer + " " + santaclaus[0].createItemStack().getDisplayName()), false);
 
 			}
 
@@ -167,13 +171,14 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 				{
 					droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
 					droppedPlayer = capacityTable.getOrDefault(player.getCachedUniqueIdString(), 0);
-					stockGlobal = Math.max(1000 - droppedGlobal, 0);
-					stockPlayer = Math.max(100 - droppedPlayer, 0);
+					stockGlobal = Math.max(capacityGlobal - droppedGlobal, 0);
+					stockPlayer = Math.max(capacityPlayer - droppedPlayer, 0);
 					if (stockGlobal + stockPlayer <= 0) return EnumActionResult.SUCCESS;
 				}
 
 				// 表示
-				player.sendStatusMessage(new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + christmas[0].createItemStack()), false);
+				player.sendStatusMessage(new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + christmas[0].createItemStack().getDisplayName()), false);
+				player.sendStatusMessage(new TextComponentString("Player Stock: " + (stockPlayer - 1) + " / " + capacityPlayer + " " + christmas[0].createItemStack().getDisplayName()), false);
 
 			}
 
@@ -181,11 +186,6 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 
 		return EnumActionResult.SUCCESS;
 	}
-
-	//
-
-	private static final int capacityGlobal = 500;
-	private static final int capacityPlayer = 10;
 
 	@Override
 	public FairyCrystalDropper getDropper()
@@ -307,8 +307,8 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 						{
 							int droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
 							int droppedPlayer = capacityTable.getOrDefault(t.z.getCachedUniqueIdString(), 0);
-							int stockGlobal = Math.max(1000 - droppedGlobal, 0);
-							int stockPlayer = Math.max(100 - droppedPlayer, 0);
+							int stockGlobal = Math.max(capacityGlobal - droppedGlobal, 0);
+							int stockPlayer = Math.max(capacityPlayer - droppedPlayer, 0);
 							if (stockGlobal + stockPlayer <= 0) return false;
 						}
 
@@ -335,8 +335,8 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 						{
 							int droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
 							int droppedPlayer = capacityTable.getOrDefault(t.z.getCachedUniqueIdString(), 0);
-							int stockGlobal = Math.max(1000 - droppedGlobal, 0);
-							int stockPlayer = Math.max(100 - droppedPlayer, 0);
+							int stockGlobal = Math.max(capacityGlobal - droppedGlobal, 0);
+							int stockPlayer = Math.max(capacityPlayer - droppedPlayer, 0);
 							if (stockGlobal + stockPlayer <= 0) return false;
 						}
 
