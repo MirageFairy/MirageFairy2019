@@ -64,11 +64,13 @@ public class ItemFairyCrystal extends ItemMulti<VariantFairyCrystal>
 			// 表示
 			ITextComponent string = new TextComponentString("");
 			string.appendText("===== " + itemStackCrystal.getDisplayName() + " (" + (world.isRemote ? "Server" : "Client") + ") =====");
+			string.appendText("\n");
 			double totalWeight = WeightedRandom.getTotalWeight(dropTable);
 			for (WeightedRandom.Item<ItemStack> item : ISuppliterator.ofIterable(dropTable)
 				.sortedObj(i -> i.item.getDisplayName())
 				.sortedDouble(i -> i.weight)) {
 				string.appendText("" + String.format("%f%%", 100 * item.weight / totalWeight) + ": " + item.item.getDisplayName());
+				string.appendText("\n");
 			}
 			string.appendText("====================");
 			player.sendStatusMessage(string, false);
