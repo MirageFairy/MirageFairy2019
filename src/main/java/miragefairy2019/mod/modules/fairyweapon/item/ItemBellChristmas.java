@@ -199,9 +199,11 @@ public class ItemBellChristmas extends ItemBellBase
 						itemStack.damageItem(Utils.randomInt(world.rand, status.wear.get(fairyType)), player);
 						targetCount++;
 						{
-							target.attackEntityFrom(
-								new DamageSourceFairyMagic(player, status.looting.get(fairyType)),
-								(float) (double) status.damage.get(fairyType));
+							double damage = status.damage.get(fairyType);
+
+							if (target.isEntityUndead()) damage *= 1.5;
+
+							target.attackEntityFrom(new DamageSourceFairyMagic(player, status.looting.get(fairyType)), (float) damage);
 						}
 
 					}
