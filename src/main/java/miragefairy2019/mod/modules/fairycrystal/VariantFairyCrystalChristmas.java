@@ -23,14 +23,19 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairycrystal.DropFixed;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
+import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.WeightedRandom;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 {
@@ -96,6 +101,9 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 
 	//
 
+	private static final int capacityGlobal = 1000;
+	private static final int capacityPlayer = 100;
+
 	@Override
 	public FairyCrystalDropper getDropper()
 	{
@@ -114,95 +122,85 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 
 					// ドロップしたものが限定ならカウントする
 					if (oItemStack.isPresent()) {
-						a:
-						if (ItemStack.areItemStacksEqualUsingNBTShareTag(oItemStack.get(), santaclaus[0].createItemStack())) {
-
-							// 在庫読み込み
-							// 在庫が読み込めなかった場合は何もできない
-							Map<String, Integer> capacityTable;
-							synchronized (lock) {
-								try {
-									capacityTable = loadCapacityTable(world, "santaclaus");
-								} catch (IOException e) {
-									LOGGER.error("Can not load capacity table!", e);
-									break a;
-								}
-							}
-
-							// 在庫を減らす
-							{
-								int droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
-								int droppedPlayer = capacityTable.getOrDefault(player.getCachedUniqueIdString(), 0);
-								int stockGlobal = Math.max(1000 - droppedGlobal, 0);
-								int stockPlayer = Math.max(100 - droppedPlayer, 0);
-
-								// 在庫の比に従って排出
-								if (world.rand.nextDouble() < stockGlobal / (double) (stockGlobal + stockPlayer)) {
-									capacityTable.put(GLOBAL, droppedGlobal + 1);
-								} else {
-									capacityTable.put(player.getCachedUniqueIdString(), droppedPlayer + 1);
-								}
-
-							}
-
-							// 在庫を書き込み
-							// 在庫が書き込めなかった場合は何もしない
-							try {
-								saveCapacityTable(world, "santaclaus", capacityTable);
-								LOGGER.info("Dropped: " + "santaclaus" + " by " + player.getDisplayNameString() + " at " + pos + "@" + world.provider.getDimension());
-							} catch (IOException e) {
-								LOGGER.error("Can not save capacity table!", e);
-								break a;
-							}
-
-						}
-						a:
-						if (ItemStack.areItemStacksEqualUsingNBTShareTag(oItemStack.get(), christmas[0].createItemStack())) {
-
-							// 在庫読み込み
-							// 在庫が読み込めなかった場合は何もできない
-							Map<String, Integer> capacityTable;
-							synchronized (lock) {
-								try {
-									capacityTable = loadCapacityTable(world, "christmas");
-								} catch (IOException e) {
-									LOGGER.error("Can not load capacity table!", e);
-									break a;
-								}
-							}
-
-							// 在庫を減らす
-							{
-								int droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
-								int droppedPlayer = capacityTable.getOrDefault(player.getCachedUniqueIdString(), 0);
-								int stockGlobal = Math.max(1000 - droppedGlobal, 0);
-								int stockPlayer = Math.max(100 - droppedPlayer, 0);
-
-								// 在庫の比に従って排出
-								if (world.rand.nextDouble() < stockGlobal / (double) (stockGlobal + stockPlayer)) {
-									capacityTable.put(GLOBAL, droppedGlobal + 1);
-								} else {
-									capacityTable.put(player.getCachedUniqueIdString(), droppedPlayer + 1);
-								}
-
-							}
-
-							// 在庫を書き込み
-							// 在庫が書き込めなかった場合は何もしない
-							try {
-								saveCapacityTable(world, "christmas", capacityTable);
-								LOGGER.info("Dropped: " + "christmas" + " by " + player.getDisplayNameString() + " at " + pos + "@" + world.provider.getDimension());
-							} catch (IOException e) {
-								LOGGER.error("Can not save capacity table!", e);
-								break a;
-							}
-
-						}
+						onDrop(world, pos, player, oItemStack.get(), santaclaus[0].createItemStack(), "santaclaus");
+						onDrop(world, pos, player, oItemStack.get(), christmas[0].createItemStack(), "christmas");
 					}
 
 					return oItemStack;
 				}
 
+			}
+
+			private void onDrop(World world, BlockPos pos, EntityPlayer player, ItemStack itemStack, ItemStack dropItem, String stringFairyType)
+			{
+				if (ItemStack.areItemStacksEqualUsingNBTShareTag(itemStack, dropItem)) {
+
+					// 在庫読み込み
+					// 在庫が読み込めなかった場合は何もできない
+					Map<String, Integer> capacityTable;
+					synchronized (lock) {
+						try {
+							capacityTable = loadCapacityTable(world, stringFairyType);
+						} catch (IOException e) {
+							LOGGER.error("Can not load capacity table!", e);
+							return;
+						}
+					}
+
+					// 在庫を減らす
+					int droppedGlobal;
+					int droppedPlayer;
+					int stockGlobal;
+					int stockPlayer;
+					boolean isGlobal;
+					{
+						droppedGlobal = capacityTable.getOrDefault(GLOBAL, 0);
+						droppedPlayer = capacityTable.getOrDefault(player.getCachedUniqueIdString(), 0);
+						stockGlobal = Math.max(capacityGlobal - droppedGlobal, 0);
+						stockPlayer = Math.max(capacityPlayer - droppedPlayer, 0);
+
+						// 在庫の比に従って排出
+						isGlobal = world.rand.nextDouble() < stockGlobal / (double) (stockGlobal + stockPlayer);
+						if (isGlobal) {
+							capacityTable.put(GLOBAL, droppedGlobal + 1);
+						} else {
+							capacityTable.put(player.getCachedUniqueIdString(), droppedPlayer + 1);
+						}
+
+					}
+
+					// 在庫を書き込み
+					// 在庫が書き込めなかった場合は何もしない
+					try {
+						saveCapacityTable(world, stringFairyType, capacityTable);
+					} catch (IOException e) {
+						LOGGER.error("Can not save capacity table!", e);
+						return;
+					}
+
+					// ログ出力
+					LOGGER.info("Dropped: " + stringFairyType + " by " + player.getDisplayNameString() + " at " + pos + "@" + world.provider.getDimension());
+
+					// ドロップ本人のメッセージ欄に出力
+					if (isGlobal) {
+						player.sendStatusMessage(new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + Utils.toUpperCaseHead(stringFairyType)), true);
+					} else {
+						player.sendStatusMessage(new TextComponentString("Player Stock: " + (stockPlayer - 1) + " / " + capacityPlayer + " " + Utils.toUpperCaseHead(stringFairyType)), true);
+					}
+
+					// ワールド全体チャット
+					if (isGlobal && (stockGlobal - 1) % (capacityGlobal / 20) == 0) {
+						TextComponentString message = new TextComponentString("Global Stock: " + (stockGlobal - 1) + " / " + capacityGlobal + " " + Utils.toUpperCaseHead(stringFairyType));
+						message.getStyle().setColor(TextFormatting.GRAY);
+						message.getStyle().setItalic(true);
+						MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+						for (EntityPlayer player2 : server.getPlayerList().getPlayers()) {
+							player2.sendMessage(message);
+						}
+						server.sendMessage(message);
+					}
+
+				}
 			}
 
 			@Override
