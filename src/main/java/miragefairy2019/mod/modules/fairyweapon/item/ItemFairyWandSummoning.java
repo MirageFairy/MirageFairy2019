@@ -107,7 +107,7 @@ public class ItemFairyWandSummoning extends ItemFairyWeaponCraftingToolBase
 			// 成立
 
 			// ガチャアイテムを消費
-			itemStackFairyCrystal.shrink(1);
+			if (!player.isCreative()) itemStackFairyCrystal.shrink(1);
 			player.addStat(StatList.getObjectUseStats(itemStackFairyCrystal.getItem()));
 
 			// 妖精をドロップ
