@@ -41,7 +41,7 @@ public class FairyWeaponStatusPropertyCalculator
 	public FairyWeaponStatusPropertyCalculator add(IFairyWeaponStatusPropertyFactor factor)
 	{
 		configurators.add((v, ft) -> v + factor.get(ft));
-		factor.getSources().forEach(sources::add);
+		factor.getSources().forEach(s -> sources.add(s));
 		return this;
 	}
 
@@ -54,12 +54,13 @@ public class FairyWeaponStatusPropertyCalculator
 	public FairyWeaponStatusPropertyCalculator mul(IFairyWeaponStatusPropertyFactor factor)
 	{
 		configurators.add((v, ft) -> v * factor.get(ft));
-		factor.getSources().forEach(sources::add);
+		factor.getSources().forEach(s -> sources.add(s));
 		return this;
 	}
 
 	/**
-	 * {@code threshold(1, 2, 5, 10)} のように呼び出すと、10以上のときに4、5以上のときに3、2以上のときに2、1以上のときに1、どれでもない場合に0が返ります。
+	 * {@code threshold(1, 2, 5, 10)}
+	 * のように呼び出すと、10以上のときに4、5以上のときに3、2以上のときに2、1以上のときに1、どれでもない場合に0が返ります。
 	 */
 	public FairyWeaponStatusPropertyCalculator threshold(double... thresholds)
 	{
