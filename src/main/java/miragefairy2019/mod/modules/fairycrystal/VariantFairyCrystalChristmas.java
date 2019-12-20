@@ -4,9 +4,12 @@ import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +65,15 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 		return fileDrop;
 	}
 
+	private static File getLogFile(World world)
+	{
+		File directoryWorld = world.getSaveHandler().getWorldDirectory();
+		File directoryModData = new File(directoryWorld, ModMirageFairy2019.MODID);
+		File directoryDrop = new File(directoryModData, "drop");
+		File fileDrop = new File(directoryDrop, "fairyCrystalChristmas.log.txt");
+		return fileDrop;
+	}
+
 	// TODO キャッシュ
 	@SuppressWarnings("unchecked")
 	private static Map<String, Integer> loadCapacityTable(World world, String point) throws IOException
@@ -96,6 +108,21 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 		try {
 			try (OutputStreamWriter out = new OutputStreamWriter(UtilsFile.getOutputStreamWithMkdirs(fileDrop))) {
 				new Gson().toJson(capacityTable, out);
+			}
+		} catch (Exception e) {
+			throw new IOException(e);
+		}
+	}
+
+	private static void log(World world, String message) throws IOException
+	{
+		File file = getLogFile(world);
+
+		try {
+			file.getAbsoluteFile().getParentFile().mkdirs();
+			try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(file, true))) {
+				out.append(message);
+				out.append(System.lineSeparator());
 			}
 		} catch (Exception e) {
 			throw new IOException(e);
@@ -260,6 +287,15 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 
 					// ログ出力
 					LOGGER.info("Dropped: " + dropItem.getDisplayName() + " by " + player.getDisplayNameString() + " at " + pos + "@" + world.provider.getDimension());
+					try {
+						log(world, ""
+							+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss.SSSSSSSSS")) + "\t"
+							+ dropItem.getDisplayName() + "\t"
+							+ player.getDisplayNameString() + "\t"
+							+ pos + "@" + world.provider.getDimension());
+					} catch (IOException e) {
+						LOGGER.error("Log Error!", e);
+					}
 
 					// ドロップ本人のメッセージ欄に出力
 					if (isGlobal) {
