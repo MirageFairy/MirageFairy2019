@@ -1,6 +1,10 @@
 itemGroup.mirageFairy2019=MirageFairy 2019
 itemGroup.mirageFairy2019.fairy=MirageFairy 2019: Fairy
 
+advancements.miragefairy2019.fairy_weapon.root.title=Fairy Weapon
+advancements.miragefairy2019.fairy_weapon.root.description=Fairy Weapon
+advancements.miragefairy2019.fairy_weapon.all.description=Get a specific item
+
 item.mirageFlowerSeeds.name=Mirage Flower Seeds
 item.manaRodShine.name=Shine Mana Rod
 item.manaRodFire.name=Fire Mana Rod

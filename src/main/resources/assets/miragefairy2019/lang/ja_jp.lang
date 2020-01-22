@@ -1,6 +1,10 @@
 itemGroup.mirageFairy2019=MirageFairy 2019
 itemGroup.mirageFairy2019.fairy=MirageFairy 2019：妖精
 
+advancements.miragefairy2019.fairy_weapon.root.title=妖精武器
+advancements.miragefairy2019.fairy_weapon.root.description=妖精武器
+advancements.miragefairy2019.fairy_weapon.all.description=所定のアイテムを入手する
+
 item.mirageFlowerSeeds.name=ミラージュの花の種
 item.manaRodShine.name=光の心の棒
 item.manaRodFire.name=火の心の棒
