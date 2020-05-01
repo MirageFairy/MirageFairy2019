@@ -37,9 +37,14 @@ public final class FairyType
 		this.colorSet = colorSet;
 	}
 
+	public String getUnlocalizedName()
+	{
+		return "mirageFairy2019.fairy." + name + ".name";
+	}
+
 	public String getLocalizedName()
 	{
-		return UtilsMinecraft.translateToLocal("mirageFairy2019.fairy." + name + ".name");
+		return UtilsMinecraft.translateToLocal(getUnlocalizedName());
 	}
 
 }
