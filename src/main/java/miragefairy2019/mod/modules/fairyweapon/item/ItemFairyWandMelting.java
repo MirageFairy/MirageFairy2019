@@ -2,20 +2,14 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.modules.fairy.FairyRegistry;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
 import miragefairy2019.mod.modules.mirageflower.BlockMirageFlower;
-import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
-import mirrg.boron.util.struct.Tuple;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class ItemFairyWandMelting extends ItemFairyWeaponCraftingToolBase
@@ -48,39 +42,11 @@ public class ItemFairyWandMelting extends ItemFairyWeaponCraftingToolBase
 		}
 
 		if (!world.isRemote) {
-
 			if (player.isSneaking()) {
-
-				ITextComponent textComponent = new TextComponentString("");
-				textComponent.appendText("===== Mirage Flower Grow Rate Table =====\n");
-				FairyRegistry.getKeyItemStacks()
-					.flatMap(i -> FairyRegistry.getFairies(i))
-					.distinct()
-					.map(f -> Tuple.of(f, BlockMirageFlower.getGrowRateInFloor(f)))
-					.sortedDouble(Tuple::getY)
-					.forEach(t -> {
-						textComponent.appendText(String.format("%7.2f%%  ", t.y * 100));
-						textComponent.appendSibling(new TextComponentTranslation(t.x.type.getUnlocalizedName()));
-						textComponent.appendText("\n");
-					});
-				textComponent.appendText("====================");
-				player.sendStatusMessage(textComponent, false);
-
+				player.sendStatusMessage(BlockMirageFlower.getGrowRateTableMessage(), false);
 			} else {
-
-				BlockPos pos2 = pos.offset(facing);
-
-				ITextComponent textComponent = new TextComponentString("");
-				textComponent.appendText("===== Mirage Flower Grow Rate =====\n");
-				textComponent.appendText(String.format("Pos: %d %d %d\n", pos2.getX(), pos2.getY(), pos2.getZ()));
-				textComponent.appendText(String.format("Block: %s\n", world.getBlockState(pos2)));
-				textComponent.appendText(String.format("Floor: %s\n", world.getBlockState(pos2.down())));
-				textComponent.appendText(String.format("%.2f%%\n", ModuleMirageFlower.blockMirageFlower.getGrowRate(world, pos2) * 100));
-				textComponent.appendText("====================");
-				player.sendStatusMessage(textComponent, false);
-
+				player.sendStatusMessage(BlockMirageFlower.getGrowRateMessage(world, pos.offset(facing)), false);
 			}
-
 		}
 
 		return EnumActionResult.SUCCESS;

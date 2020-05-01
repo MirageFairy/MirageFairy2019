@@ -11,6 +11,7 @@ import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.ore.EnumVariantMaterials1;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import mirrg.boron.util.UtilsMath;
+import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.IGrowable;
@@ -25,6 +26,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -37,6 +41,36 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	{
 		double costWeight = fairy.type.cost / 50.0;
 		return (fairy.type.manaSet.shine / costWeight) * fairy.type.abilitySet.get(EnumAbilityType.crystal) / 100.0 * 3;
+	}
+
+	public static ITextComponent getGrowRateTableMessage()
+	{
+		ITextComponent textComponent = new TextComponentString("");
+		textComponent.appendText("===== Mirage Flower Grow Rate Table =====\n");
+		FairyRegistry.getKeyItemStacks()
+			.flatMap(i -> FairyRegistry.getFairies(i))
+			.distinct()
+			.map(f -> Tuple.of(f, BlockMirageFlower.getGrowRateInFloor(f)))
+			.sortedDouble(Tuple::getY)
+			.forEach(t -> {
+				textComponent.appendText(String.format("%7.2f%%  ", t.y * 100));
+				textComponent.appendSibling(new TextComponentTranslation(t.x.type.getUnlocalizedName()));
+				textComponent.appendText("\n");
+			});
+		textComponent.appendText("====================");
+		return textComponent;
+	}
+
+	public static ITextComponent getGrowRateMessage(World world, BlockPos pos)
+	{
+		ITextComponent textComponent = new TextComponentString("");
+		textComponent.appendText("===== Mirage Flower Grow Rate =====\n");
+		textComponent.appendText(String.format("Pos: %d %d %d\n", pos.getX(), pos.getY(), pos.getZ()));
+		textComponent.appendText(String.format("Block: %s\n", world.getBlockState(pos)));
+		textComponent.appendText(String.format("Floor: %s\n", world.getBlockState(pos.down())));
+		textComponent.appendText(String.format("%.2f%%\n", ModuleMirageFlower.blockMirageFlower.getGrowRate(world, pos) * 100));
+		textComponent.appendText("====================");
+		return textComponent;
 	}
 
 	//
