@@ -6,6 +6,7 @@ import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.modules.fairy.FairyRegistry;
+import miragefairy2019.mod.modules.fairy.VariantFairy;
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.ore.EnumVariantMaterials1;
 import miragefairy2019.mod.modules.ore.ModuleOre;
@@ -31,6 +32,14 @@ import net.minecraftforge.common.BiomeDictionary;
 
 public class BlockMirageFlower extends BlockBush implements IGrowable
 {
+
+	public static double getGrowRateInFloor(VariantFairy fairy)
+	{
+		double costWeight = fairy.type.cost / 50.0;
+		return (fairy.type.manaSet.shine / costWeight) * fairy.type.abilitySet.get(EnumAbilityType.crystal) / 100.0 * 3;
+	}
+
+	//
 
 	public BlockMirageFlower()
 	{
@@ -162,10 +171,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 				IBlockState blockState = world.getBlockState(blockPos.down());
 				ItemStack itemStack = blockState.getBlock().getItem(world, blockPos, blockState);
 				Double value = FairyRegistry.getFairies(itemStack)
-					.map(f -> {
-						double costWeight = f.type.cost / 50.0;
-						return (f.type.manaSet.shine / costWeight) * f.type.abilitySet.get(EnumAbilityType.crystal) / 100.0 * 3;
-					})
+					.map(f -> getGrowRateInFloor(f))
 					.max(Double::compare).orElse(null);
 				if (value != null) {
 					bonus = Math.max(bonus, value);
