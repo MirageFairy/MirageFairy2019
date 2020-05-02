@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class ModuleFertilizer
 {
 
-	public static ItemFertilizer itemFertilizer;
+	static ItemFertilizer itemFertilizer;
 
 	public static void init(EventRegistryMod erMod)
 	{

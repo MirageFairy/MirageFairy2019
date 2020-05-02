@@ -12,14 +12,14 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ModuleMaterialsFairy
 {
 
-	public static ItemMultiMaterialContained<ItemVariantMaterialContained> itemMaterialsFairy;
+	static ItemMultiMaterialContained<ItemVariantMaterialContained> itemMaterialsFairy;
 
-	public static ItemVariantMaterialContained variantManaRodShine;
-	public static ItemVariantMaterialContained variantManaRodFire;
-	public static ItemVariantMaterialContained variantManaRodWind;
-	public static ItemVariantMaterialContained variantManaRodGaia;
-	public static ItemVariantMaterialContained variantManaRodAqua;
-	public static ItemVariantMaterialContained variantManaRodDark;
+	static ItemVariantMaterialContained variantManaRodShine;
+	static ItemVariantMaterialContained variantManaRodFire;
+	static ItemVariantMaterialContained variantManaRodWind;
+	static ItemVariantMaterialContained variantManaRodGaia;
+	static ItemVariantMaterialContained variantManaRodAqua;
+	static ItemVariantMaterialContained variantManaRodDark;
 
 	public static void init(EventRegistryMod erMod)
 	{
