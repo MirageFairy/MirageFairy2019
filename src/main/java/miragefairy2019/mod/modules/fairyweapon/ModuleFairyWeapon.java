@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Provider;
@@ -98,9 +98,9 @@ public class ModuleFairyWeapon
 						T item = sItem.get();
 						item.setRegistryName(ModMirageFairy2019.MODID, registryName);
 						item.setUnlocalizedName(unlocalizedName);
-						item.setCreativeTab(ApiMain.creativeTab);
+						item.setCreativeTab(ApiMain.creativeTab());
 						ForgeRegistries.ITEMS.register(item);
-						if (ApiMain.side.isClient()) {
+						if (ApiMain.side().isClient()) {
 
 							// 搭乗妖精の描画
 							MinecraftForge.EVENT_BUS.register(new Object() {

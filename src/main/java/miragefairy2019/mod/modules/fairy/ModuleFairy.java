@@ -7,12 +7,12 @@ import java.util.function.IntFunction;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairy;
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.fairy.AbilitySet;
 import miragefairy2019.mod.api.fairy.ColorSet;
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IAbilityType;
 import miragefairy2019.mod.api.fairy.ManaSet;
+import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
 import mirrg.boron.util.struct.ImmutableArray;
@@ -327,7 +327,7 @@ public class ModuleFairy
 					itemFairyList[i].registerVariant(tuple.x, tuple.y[i]);
 				}
 				ForgeRegistries.ITEMS.register(itemFairyList[i]);
-				if (ApiMain.side.isClient()) {
+				if (ApiMain.side().isClient()) {
 					for (Tuple<Integer, VariantFairy> tuple : itemFairyList[i].getVariants()) {
 						ModelLoader.setCustomModelResourceLocation(itemFairyList[i], tuple.x, new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "fairy"), null));
 					}

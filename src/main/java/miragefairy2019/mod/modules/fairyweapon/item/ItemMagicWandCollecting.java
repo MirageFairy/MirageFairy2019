@@ -5,9 +5,9 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.main.ApiMain;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.util.ITooltipFlag;
@@ -249,7 +249,7 @@ public class ItemMagicWandCollecting extends ItemMagicWandBase
 		if (!isSelected && player.getHeldItemOffhand() != itemStack) return;
 
 		// クライアントのみ
-		if (!ApiMain.side.isClient()) return;
+		if (!ApiMain.side().isClient()) return;
 
 		//
 

@@ -7,10 +7,10 @@ import java.util.Optional;
 
 import com.google.common.base.Predicate;
 
-import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.ComponentFairyAbilityType;
 import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
+import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.component.Component;
 import miragefairy2019.mod.lib.component.Composite;
@@ -91,7 +91,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	public ItemFairyWeaponBase()
 	{
 		setMaxStackSize(1);
-		if (ApiMain.side.isClient()) {
+		if (ApiMain.side().isClient()) {
 			new Object() {
 				@SideOnly(Side.CLIENT)
 				public void run()

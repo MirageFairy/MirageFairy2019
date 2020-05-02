@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.main.ApiMain;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -172,7 +172,7 @@ public class ItemMagicWandLight extends ItemMagicWandBase
 
 			if (isSelected || player.getHeldItemOffhand() == itemStack) {
 
-				if (ApiMain.side.isClient()) {
+				if (ApiMain.side().isClient()) {
 
 					// 妖精がない場合はマゼンタ
 					Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);

@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Random;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.Utils;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
@@ -292,7 +292,7 @@ public class ItemOcarinaTemptation extends ItemOcarinaBase
 	{
 
 		// クライアントのみ
-		if (!ApiMain.side.isClient()) return;
+		if (!ApiMain.side().isClient()) return;
 
 		// プレイヤー取得
 		if (!(entity instanceof EntityPlayer)) return;

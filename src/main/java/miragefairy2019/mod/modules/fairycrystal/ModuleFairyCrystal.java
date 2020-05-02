@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.OreIngredientComplex;
 import mirrg.boron.util.struct.Tuple;
@@ -39,11 +39,11 @@ public class ModuleFairyCrystal
 				ItemFairyCrystal item = new ItemFairyCrystal();
 				item.setRegistryName(ModMirageFairy2019.MODID, "fairy_crystal");
 				item.setUnlocalizedName("fairyCrystal");
-				item.setCreativeTab(ApiMain.creativeTab);
+				item.setCreativeTab(ApiMain.creativeTab());
 				item.registerVariant(0, variantFairyCrystal = new VariantFairyCrystal("fairy_crystal", "fairyCrystal", "mirageFairyCrystal"));
 				item.registerVariant(1, variantFairyCrystalChristmas = new VariantFairyCrystalChristmas("christmas_fairy_crystal", "fairyCrystalChristmas", "mirageFairyCrystalChristmas"));
 				ForgeRegistries.ITEMS.register(item);
-				if (ApiMain.side.isClient()) {
+				if (ApiMain.side().isClient()) {
 					for (Tuple<Integer, VariantFairyCrystal> tuple : item.getVariants()) {
 						ModelLoader.setCustomModelResourceLocation(
 							item,

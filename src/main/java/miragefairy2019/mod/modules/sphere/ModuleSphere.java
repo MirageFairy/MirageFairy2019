@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
 import mirrg.boron.util.struct.Tuple;
@@ -39,7 +39,7 @@ public class ModuleSphere
 				ItemSpheres item = new ItemSpheres();
 				item.setRegistryName(ModMirageFairy2019.MODID, "spheres");
 				item.setUnlocalizedName("spheres");
-				item.setCreativeTab(ApiMain.creativeTab);
+				item.setCreativeTab(ApiMain.creativeTab());
 				EnumSphere[] spheres = EnumSphere.values();
 				for (int i = 0; i < spheres.length; i++) {
 					EnumSphere sphere = spheres[i];
@@ -50,7 +50,7 @@ public class ModuleSphere
 
 				}
 				ForgeRegistries.ITEMS.register(item);
-				if (ApiMain.side.isClient()) {
+				if (ApiMain.side().isClient()) {
 					for (Tuple<Integer, VariantSphere> tuple : item.getVariants()) {
 						ModelLoader.setCustomModelResourceLocation(
 							item,

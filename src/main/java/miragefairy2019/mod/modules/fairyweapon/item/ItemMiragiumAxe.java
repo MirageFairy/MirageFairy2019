@@ -3,9 +3,9 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 import java.util.List;
 
 import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.api.Components;
 import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.main.ApiMain;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
@@ -191,7 +191,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 
 			if (isSelected || player.getHeldItemOffhand() == itemStack) {
 
-				if (ApiMain.side.isClient()) {
+				if (ApiMain.side().isClient()) {
 
 					// 妖精がない場合はマゼンタ
 					Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);

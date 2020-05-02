@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Set;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.multi.ItemMultiMaterialContained;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterialContained;
@@ -60,19 +60,19 @@ public class ModuleOre
 			// 鉱石の種
 			blockOreSeed = new BlockOreSeed();
 			blockOreSeed.setRegistryName(ModMirageFairy2019.MODID, "ore_seed");
-			blockOreSeed.setCreativeTab(ApiMain.creativeTab);
+			blockOreSeed.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockOreSeed);
 
 			// 鉱石
 			blockOre1 = new BlockOre<>(EnumVariantOre1.variantList);
 			blockOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
-			blockOre1.setCreativeTab(ApiMain.creativeTab);
+			blockOre1.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockOre1);
 
 			// ブロック
 			blockMaterials1 = new BlockMaterials<>(EnumVariantMaterials1.variantList);
 			blockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
-			blockMaterials1.setCreativeTab(ApiMain.creativeTab);
+			blockMaterials1.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockMaterials1);
 
 		});
@@ -82,9 +82,9 @@ public class ModuleOre
 			itemBlockOre1 = new ItemBlockOre<>(blockOre1);
 			itemBlockOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
 			itemBlockOre1.setUnlocalizedName("ore1");
-			itemBlockOre1.setCreativeTab(ApiMain.creativeTab);
+			itemBlockOre1.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.ITEMS.register(itemBlockOre1);
-			if (ApiMain.side.isClient()) {
+			if (ApiMain.side().isClient()) {
 				for (IOreVariant variant : blockOre1.variantList) {
 					ModelLoader.setCustomModelResourceLocation(
 						itemBlockOre1,
@@ -97,9 +97,9 @@ public class ModuleOre
 			itemBlockMaterials1 = new ItemBlockMaterials<>(blockMaterials1);
 			itemBlockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
 			itemBlockMaterials1.setUnlocalizedName("materials1");
-			itemBlockMaterials1.setCreativeTab(ApiMain.creativeTab);
+			itemBlockMaterials1.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.ITEMS.register(itemBlockMaterials1);
-			if (ApiMain.side.isClient()) {
+			if (ApiMain.side().isClient()) {
 				for (IBlockVariant variant : blockMaterials1.variantList) {
 					ModelLoader.setCustomModelResourceLocation(
 						itemBlockMaterials1,
@@ -112,7 +112,7 @@ public class ModuleOre
 			itemMaterials = new ItemMultiMaterialContained<>();
 			itemMaterials.setRegistryName(ModMirageFairy2019.MODID, "materials");
 			itemMaterials.setUnlocalizedName("materials");
-			itemMaterials.setCreativeTab(ApiMain.creativeTab);
+			itemMaterials.setCreativeTab(ApiMain.creativeTab());
 			itemMaterials.registerVariant(0, variantGemApatite = new ItemVariantMaterialContained("apatite_gem", "gemApatite", "Apatite(1.000)"));
 			itemMaterials.registerVariant(1, variantGemFluorite = new ItemVariantMaterialContained("fluorite_gem", "gemFluorite", "Fluorite(1.000)"));
 			itemMaterials.registerVariant(2, variantGemSulfur = new ItemVariantMaterialContained("sulfur_gem", "gemSulfur", "Sulfur(1.000)"));
@@ -128,7 +128,7 @@ public class ModuleOre
 			itemMaterials.registerVariant(12, variantRodMiragium = new ItemVariantMaterialContained("miragium_rod", "rodMiragium", "Miragium(0.500)"));
 			itemMaterials.registerVariant(13, variantNuggetMiragium = new ItemVariantMaterialContained("miragium_nugget", "nuggetMiragium", "Miragium(0.111)"));
 			ForgeRegistries.ITEMS.register(itemMaterials);
-			if (ApiMain.side.isClient()) itemMaterials.setCustomModelResourceLocations();
+			if (ApiMain.side().isClient()) itemMaterials.setCustomModelResourceLocations();
 
 		});
 		erMod.createItemStack.register(ic -> {

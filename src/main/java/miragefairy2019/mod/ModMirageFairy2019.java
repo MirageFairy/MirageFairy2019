@@ -1,6 +1,6 @@
 package miragefairy2019.mod;
 
-import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.InitializationContext;
 import net.minecraftforge.fml.common.Mod;
@@ -21,7 +21,7 @@ public class ModMirageFairy2019
 
 	public ModMirageFairy2019()
 	{
-		miragefairy2019.mod.modules.ModuleMain.init(erMod);
+		ApiMain.init(erMod);
 		miragefairy2019.mod.modules.fairy.ModuleFairy.init(erMod);
 		miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal.init(erMod);
 		miragefairy2019.mod.modules.fairyweapon.ModuleFairyWeapon.init(erMod);
@@ -42,7 +42,7 @@ public class ModMirageFairy2019
 
 		erMod.preInit.trigger().accept(event);
 
-		InitializationContext initializationContext = new InitializationContext(MODID, event.getSide(), ApiMain.creativeTab);
+		InitializationContext initializationContext = new InitializationContext(MODID, event.getSide(), ApiMain.creativeTab());
 
 		erMod.registerBlock.trigger().accept(initializationContext);
 

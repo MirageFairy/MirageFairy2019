@@ -1,6 +1,7 @@
-package miragefairy2019.mod.modules;
+package miragefairy2019.mod.modules.main;
 
-import miragefairy2019.mod.api.ApiMain;
+import org.apache.logging.log4j.Logger;
+
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import net.minecraft.creativetab.CreativeTabs;
@@ -11,10 +12,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ModuleMain
 {
 
+	public static Logger logger;
+	public static Side side;
+
+	public static CreativeTabs creativeTab;
+
 	public static void init(EventRegistryMod erMod)
 	{
 		erMod.initCreativeTab.register(() -> {
-			ApiMain.creativeTab = new CreativeTabs("mirageFairy2019") {
+			creativeTab = new CreativeTabs("mirageFairy2019") {
 				@Override
 				@SideOnly(Side.CLIENT)
 				public ItemStack getTabIconItem()
@@ -24,8 +30,8 @@ public class ModuleMain
 			};
 		});
 		erMod.preInit.register(e -> {
-			ApiMain.logger = e.getModLog();
-			ApiMain.side = e.getSide();
+			logger = e.getModLog();
+			side = e.getSide();
 		});
 	}
 

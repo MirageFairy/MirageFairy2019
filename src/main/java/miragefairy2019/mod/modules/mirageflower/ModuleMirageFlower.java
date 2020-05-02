@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiMain;
+import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
@@ -41,9 +41,9 @@ public class ModuleMirageFlower
 			itemMirageFlowerSeeds = new ItemMirageFlowerSeeds();
 			itemMirageFlowerSeeds.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_seeds");
 			itemMirageFlowerSeeds.setUnlocalizedName("mirageFlowerSeeds");
-			itemMirageFlowerSeeds.setCreativeTab(ApiMain.creativeTab);
+			itemMirageFlowerSeeds.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.ITEMS.register(itemMirageFlowerSeeds);
-			if (ApiMain.side.isClient()) {
+			if (ApiMain.side().isClient()) {
 				ModelLoader.setCustomModelResourceLocation(itemMirageFlowerSeeds, 0, new ModelResourceLocation(itemMirageFlowerSeeds.getRegistryName(), null));
 			}
 
@@ -53,13 +53,13 @@ public class ModuleMirageFlower
 			// ブロック
 			blockMirageFlower = new BlockMirageFlower();
 			blockMirageFlower.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower");
-			blockMirageFlower.setCreativeTab(ApiMain.creativeTab);
+			blockMirageFlower.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockMirageFlower);
 
 			// ブロック
 			blockFairyLog = new BlockFairyLog();
 			blockFairyLog.setRegistryName(ModMirageFairy2019.MODID, "fairy_log");
-			blockFairyLog.setCreativeTab(ApiMain.creativeTab);
+			blockFairyLog.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockFairyLog);
 
 		});
