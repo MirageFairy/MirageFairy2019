@@ -3,16 +3,6 @@ package miragefairy2019.mod;
 import miragefairy2019.mod.api.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.InitializationContext;
-import miragefairy2019.mod.modules.ModuleMain;
-import miragefairy2019.mod.modules.fairy.ModuleFairy;
-import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
-import miragefairy2019.mod.modules.fairyweapon.ModuleFairyWeapon;
-import miragefairy2019.mod.modules.fertilizer.ModuleFertilizer;
-import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy;
-import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
-import miragefairy2019.mod.modules.ore.ModuleOre;
-import miragefairy2019.mod.modules.sphere.ModuleSphere;
-import miragefairy2019.mod.modules.totem.ModuleTotem;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -31,16 +21,16 @@ public class ModMirageFairy2019
 
 	public ModMirageFairy2019()
 	{
-		ModuleMain.init(erMod);
-		ModuleFairy.init(erMod);
-		ModuleFairyCrystal.init(erMod);
-		ModuleFairyWeapon.init(erMod);
-		ModuleFertilizer.init(erMod);
-		ModuleMaterialsFairy.init(erMod);
-		ModuleMirageFlower.init(erMod);
-		ModuleOre.init(erMod);
-		ModuleSphere.init(erMod);
-		ModuleTotem.init(erMod);
+		miragefairy2019.mod.modules.ModuleMain.init(erMod);
+		miragefairy2019.mod.modules.fairy.ModuleFairy.init(erMod);
+		miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal.init(erMod);
+		miragefairy2019.mod.modules.fairyweapon.ModuleFairyWeapon.init(erMod);
+		miragefairy2019.mod.modules.fertilizer.ModuleFertilizer.init(erMod);
+		miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy.init(erMod);
+		miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower.init(erMod);
+		miragefairy2019.mod.modules.ore.ModuleOre.init(erMod);
+		miragefairy2019.mod.modules.sphere.ModuleSphere.init(erMod);
+		miragefairy2019.mod.modules.totem.ModuleTotem.init(erMod);
 
 		erMod.initCreativeTab.trigger().run();
 
