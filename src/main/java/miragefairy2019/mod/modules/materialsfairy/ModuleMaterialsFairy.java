@@ -26,6 +26,7 @@ public class ModuleMaterialsFairy
 		erMod.registerItem.register(b -> {
 
 			// マテリアル
+			// TODO 素材リストにComponentを使用
 			itemMaterialsFairy = new ItemMultiMaterialContained<>();
 			itemMaterialsFairy.setRegistryName(ModMirageFairy2019.MODID, "fairy_materials");
 			itemMaterialsFairy.setUnlocalizedName("materialsFairy");
@@ -41,9 +42,12 @@ public class ModuleMaterialsFairy
 
 		});
 		erMod.createItemStack.register(ic -> {
+
+			// 鉱石辞書登録
 			for (Tuple<Integer, ItemVariantMaterialContained> tuple : itemMaterialsFairy.getVariants()) {
 				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
 			}
+
 		});
 	}
 
