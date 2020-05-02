@@ -13,9 +13,14 @@ public interface IAbilityType
 
 	public TextFormatting getTextColor();
 
+	public default String getUnlocalizedName()
+	{
+		return "mirageFairy2019.ability." + getName() + ".name";
+	}
+
 	public default String getLocalizedName()
 	{
-		return UtilsMinecraft.translateToLocal("mirageFairy2019.ability." + getName() + ".name");
+		return UtilsMinecraft.translateToLocal(getUnlocalizedName());
 	}
 
 }
