@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.status;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.fairy.EnumManaType;
+import miragefairy2019.mod.api.fairy.IAbilityType;
+import miragefairy2019.mod.api.fairy.IManaType;
 
 public interface IFairyWeaponStatusHelper
 {
@@ -28,12 +28,12 @@ public interface IFairyWeaponStatusHelper
 		return new FairyWeaponStatusPropertyFactorSourceGet(new FairyWeaponStatusPropertySourceCost());
 	}
 
-	public default IFairyWeaponStatusPropertyFactor value(EnumManaType manaType)
+	public default IFairyWeaponStatusPropertyFactor value(IManaType manaType)
 	{
 		return new FairyWeaponStatusPropertyFactorSourceGet(new FairyWeaponStatusPropertySourceMana(manaType));
 	}
 
-	public default IFairyWeaponStatusPropertyFactor value(EnumAbilityType abilityType)
+	public default IFairyWeaponStatusPropertyFactor value(IAbilityType abilityType)
 	{
 		return new FairyWeaponStatusPropertyFactorSourceGet(new FairyWeaponStatusPropertySourceAbility(abilityType));
 	}

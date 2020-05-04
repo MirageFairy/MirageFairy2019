@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.mirageflower;
 
 import java.util.Random;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
+import miragefairy2019.mod.api.fairy.AbilityTypes;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.modules.fairy.FairyRegistry;
@@ -40,7 +40,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	public static double getGrowRateInFloor(VariantFairy fairy)
 	{
 		double costWeight = fairy.type.cost / 50.0;
-		return (fairy.type.manaSet.shine / costWeight) * fairy.type.abilitySet.get(EnumAbilityType.crystal) / 100.0 * 3;
+		return (fairy.type.manaSet.shine / costWeight) * fairy.type.abilitySet.getAbilityPower(AbilityTypes.crystal.get()) / 100.0 * 3;
 	}
 
 	public static ITextComponent getGrowRateTableMessage()

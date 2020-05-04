@@ -1,15 +1,15 @@
 package miragefairy2019.mod.modules.fairyweapon.status;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.fairy.IAbilityType;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import net.minecraft.util.text.TextFormatting;
 
 public final class FairyWeaponStatusPropertySourceAbility implements IFairyWeaponStatusPropertySource
 {
 
-	public final EnumAbilityType abilityType;
+	public final IAbilityType abilityType;
 
-	public FairyWeaponStatusPropertySourceAbility(EnumAbilityType abilityType)
+	public FairyWeaponStatusPropertySourceAbility(IAbilityType abilityType)
 	{
 		this.abilityType = abilityType;
 	}
@@ -27,15 +27,15 @@ public final class FairyWeaponStatusPropertySourceAbility implements IFairyWeapo
 	}
 
 	@Override
-	public double raw(FairyType fairyType)
+	public double raw(IFairyType fairyType)
 	{
-		return fairyType.abilitySet.get(abilityType);
+		return fairyType.getAbilities().getAbilityPower(abilityType);
 	}
 
 	@Override
-	public double get(FairyType fairyType)
+	public double get(IFairyType fairyType)
 	{
-		return fairyType.abilitySet.get(abilityType) * (fairyType.cost / 50.0);
+		return fairyType.getAbilities().getAbilityPower(abilityType) * (fairyType.getCost() / 50.0);
 	}
 
 	@Override

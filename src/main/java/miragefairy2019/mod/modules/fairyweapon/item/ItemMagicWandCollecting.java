@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.composite.Components;
+import miragefairy2019.mod.api.fairy.AbilityTypes;
+import miragefairy2019.mod.api.fairy.ApiFairy;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -35,9 +36,9 @@ public class ItemMagicWandCollecting extends ItemMagicWandBase
 
 	public ItemMagicWandCollecting()
 	{
-		addComponent(Components.OBSIDIAN, 2);
-		addComponent(Components.FLUORITE, 1);
-		addComponent(Components.fairyAbilityType(EnumAbilityType.warp));
+		addComponent(Components.obsidian.get(), 2);
+		addComponent(Components.fluorite.get(), 1);
+		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.warp.get()));
 		setMaxDamage(128 - 1);
 		setDescription("魔法のマジックハンド");
 	}
@@ -53,13 +54,13 @@ public class ItemMagicWandCollecting extends ItemMagicWandBase
 		public final double wear;
 		public final double coolTime;
 
-		public Status(FairyType fairyType)
+		public Status(IFairyType fairyType)
 		{
-			additionalReach = Math.min(fairyType.manaSet.wind / 5.0, 8);
-			radius = Math.min(2 + fairyType.manaSet.fire / 10.0 + fairyType.abilitySet.get(EnumAbilityType.warp) / 10.0, 7);
-			maxTargets = (int) (Math.min(1 + fairyType.manaSet.gaia / 2.0 + fairyType.abilitySet.get(EnumAbilityType.store) / 2.0, 20));
-			wear = 0.25 * Math.pow(0.5, fairyType.manaSet.aqua / 30);
-			coolTime = fairyType.cost * 3 * Math.pow(0.5, fairyType.manaSet.dark / 40);
+			additionalReach = Math.min(fairyType.getManas().getWind() / 5.0, 8);
+			radius = Math.min(2 + fairyType.getManas().getFire() / 10.0 + fairyType.getAbilities().getAbilityPower(AbilityTypes.warp.get()) / 10.0, 7);
+			maxTargets = (int) (Math.min(1 + fairyType.getManas().getGaia() / 2.0 + fairyType.getAbilities().getAbilityPower(AbilityTypes.store.get()) / 2.0, 20));
+			wear = 0.25 * Math.pow(0.5, fairyType.getManas().getAqua() / 30);
+			coolTime = fairyType.getCost() * 3 * Math.pow(0.5, fairyType.getManas().getDark() / 40);
 		}
 
 	}
@@ -77,12 +78,12 @@ public class ItemMagicWandCollecting extends ItemMagicWandBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
+	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 		Status status = new Status(fairyType);
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
-		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Fire, " + EnumAbilityType.warp.getLocalizedName() + ")");
-		tooltip.add(TextFormatting.BLUE + "Max Targets: " + status.maxTargets + " (Gaia, " + EnumAbilityType.store.getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Fire, " + AbilityTypes.warp.get().getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Max Targets: " + status.maxTargets + " (Gaia, " + AbilityTypes.store.get().getLocalizedName() + ")");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Aqua)");
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + ((int) status.coolTime) + "t (Dark, Cost)");
 	}
@@ -129,6 +130,7 @@ public class ItemMagicWandCollecting extends ItemMagicWandBase
 	{
 
 		public final Status status;
+		@SuppressWarnings("unused")
 		public final RayTraceResult rayTraceResult;
 		public final List<EntityItem> targets;
 
@@ -151,7 +153,7 @@ public class ItemMagicWandCollecting extends ItemMagicWandBase
 	{
 
 		// 妖精取得
-		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
+		Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy == null) {
 			return new Result(EnumExecutability.NO_FAIRY, getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()));
 		}

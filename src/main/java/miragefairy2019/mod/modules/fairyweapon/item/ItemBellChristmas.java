@@ -1,13 +1,14 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import static miragefairy2019.mod.api.ApiFairy.EnumAbilityType.*;
-import static miragefairy2019.mod.api.fairy.EnumManaType.*;
+import static miragefairy2019.mod.api.fairy.AbilityTypes.*;
+import static miragefairy2019.mod.api.fairy.ManaTypes.*;
 
 import java.util.List;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.composite.Components;
+import miragefairy2019.mod.api.fairy.AbilityTypes;
+import miragefairy2019.mod.api.fairy.ApiFairy;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.modules.fairyweapon.IDamageSourceLooting;
@@ -37,11 +38,11 @@ public class ItemBellChristmas extends ItemBellBase
 
 	public ItemBellChristmas()
 	{
-		addComponent(Components.MIRAGIUM, 0.5);
-		addComponent(Components.MAGNETITE, 0.5);
-		addComponent(Components.GOLD, 10);
-		addComponent(Components.fairyAbilityType(EnumAbilityType.christmas));
-		addComponent(Components.fairyAbilityType(EnumAbilityType.attack));
+		addComponent(Components.miragium.get(), 0.5);
+		addComponent(Components.magnetite.get(), 0.5);
+		addComponent(Components.gold.get(), 10);
+		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.christmas.get()));
+		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.attack.get()));
 		setMaxDamage(128 - 1);
 		setDescription("いけない子には");
 	}
@@ -59,45 +60,45 @@ public class ItemBellChristmas extends ItemBellBase
 
 		public IFairyWeaponStatusProperty<Double> damage = property(
 			formula(1)
-				.add(value(dark).max(90).div(90).pow(1 / 3.0).mul(5))
-				.add(value(christmas).max(20).div(2))
+				.add(value(dark.get()).max(90).div(90).pow(1 / 3.0).mul(5))
+				.add(value(christmas.get()).max(20).div(2))
 				.asDouble("Damage", float1()));
 
 		public IFairyWeaponStatusProperty<Double> additionalReach = property(
 			formula(8 - 4)
-				.add(value(wind).max(30).div(5))
+				.add(value(wind.get()).max(30).div(5))
 				.asDouble("Additional Reach", float1()));
 
 		public IFairyWeaponStatusProperty<Double> radius = property(
 			formula(3)
-				.add(value(gaia).max(30).div(10))
+				.add(value(gaia.get()).max(30).div(10))
 				.asDouble("Radius", float1()));
 
 		public IFairyWeaponStatusProperty<Integer> maxTargetCount = property(
 			formula(2)
-				.add(value(dark).max(90).div(90).pow(1 / 3.0).mul(3))
-				.add(value(attack).max(10).div(3))
+				.add(value(dark.get()).max(90).div(90).pow(1 / 3.0).mul(3))
+				.add(value(attack.get()).max(10).div(3))
 				.asInt("Max Target Count", integer()));
 
 		public IFairyWeaponStatusProperty<Integer> looting = property(
 			formula(0)
-				.add(value(shine))
+				.add(value(shine.get()))
 				.threshold(1, 2, 5, 10)
 				.asInt("Looting", integer()));
 
 		public IFairyWeaponStatusProperty<Double> wear = property(
 			formula(1)
 				.mul(cost().div(50))
-				.mul(value(fire).max(30).div(30).xp(0.5))
-				.mul(value(aqua).max(30).div(30).xp(0.5))
+				.mul(value(fire.get()).max(30).div(30).xp(0.5))
+				.mul(value(aqua.get()).max(30).div(30).xp(0.5))
 				.asDouble("Wear", percent1()));
 
 		public IFairyWeaponStatusProperty<Double> coolTime = property(
 			formula(0)
 				.add(cost())
 				.mul(value(0.5))
-				.mul(value(dark).max(90).div(90).pow(1 / 3.0).xp(0.5))
-				.mul(value(submission).max(10).div(10).xp(0.5))
+				.mul(value(dark.get()).max(90).div(90).pow(1 / 3.0).xp(0.5))
+				.mul(value(submission.get()).max(10).div(10).xp(0.5))
 				.asDouble("Cool Time", float0()));
 
 	}
@@ -115,7 +116,7 @@ public class ItemBellChristmas extends ItemBellBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
+	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 		new Status().addInformation(tooltip, fairyType);
 	}
@@ -125,7 +126,7 @@ public class ItemBellChristmas extends ItemBellBase
 		Item item = this;
 
 		// 妖精取得
-		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
+		Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy == null) {
 
 			// 視線判定
@@ -146,7 +147,7 @@ public class ItemBellChristmas extends ItemBellBase
 			};
 		} else {
 
-			FairyType fairyType = fairy.y;
+			IFairyType fairyType = fairy.y;
 
 			// ステータスを評価
 			Status status = new Status();

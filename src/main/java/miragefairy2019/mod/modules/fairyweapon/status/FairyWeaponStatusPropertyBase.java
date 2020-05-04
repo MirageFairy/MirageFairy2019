@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.status;
 
 import java.util.List;
 
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
@@ -33,7 +33,7 @@ public abstract class FairyWeaponStatusPropertyBase<T> implements IFairyWeaponSt
 	}
 
 	@Override
-	public String getString(FairyType fairyType)
+	public String getString(IFairyType fairyType)
 	{
 		return view.toString(get(fairyType));
 	}

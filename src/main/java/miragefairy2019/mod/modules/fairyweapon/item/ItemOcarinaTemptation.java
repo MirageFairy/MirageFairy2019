@@ -3,9 +3,10 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 import java.util.List;
 import java.util.Random;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.composite.Components;
+import miragefairy2019.mod.api.fairy.AbilityTypes;
+import miragefairy2019.mod.api.fairy.ApiFairy;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.Utils;
 import mirrg.boron.util.UtilsMath;
@@ -35,8 +36,8 @@ public class ItemOcarinaTemptation extends ItemOcarinaBase
 
 	public ItemOcarinaTemptation()
 	{
-		addComponent(Components.PYROPE, 4);
-		addComponent(Components.fairyAbilityType(EnumAbilityType.food));
+		addComponent(Components.pyrope.get(), 4);
+		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.food.get()));
 		setMaxDamage(128 - 1);
 		setDescription("その音は人の腹を満たし、淫靡な気分にさせる");
 	}
@@ -52,13 +53,13 @@ public class ItemOcarinaTemptation extends ItemOcarinaBase
 		public final double experienceCost;
 		public final double coolTime;
 
-		public Status(FairyType fairyType)
+		public Status(IFairyType fairyType)
 		{
-			radius = UtilsMath.trim(5 + fairyType.manaSet.wind / 5.0, 5, 10);
-			maxTargetCount = UtilsMath.trim(1 + (int) (fairyType.manaSet.aqua / 7.0), 1, 8);
-			wear = UtilsMath.trim(4 * Math.pow(0.5, fairyType.manaSet.fire / 50.0), 0.4, 4);
-			experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.manaSet.gaia / 50.0 + fairyType.abilitySet.get(EnumAbilityType.food) / 10.0), 0.1, 1);
-			coolTime = fairyType.cost * UtilsMath.trim(1 * Math.pow(0.5, fairyType.manaSet.dark / 50.0), 0.1, 1);
+			radius = UtilsMath.trim(5 + fairyType.getManas().getWind() / 5.0, 5, 10);
+			maxTargetCount = UtilsMath.trim(1 + (int) (fairyType.getManas().getAqua() / 7.0), 1, 8);
+			wear = UtilsMath.trim(4 * Math.pow(0.5, fairyType.getManas().getFire() / 50.0), 0.4, 4);
+			experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManas().getGaia() / 50.0 + fairyType.getAbilities().getAbilityPower(AbilityTypes.food.get()) / 10.0), 0.1, 1);
+			coolTime = fairyType.getCost() * UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManas().getDark() / 50.0), 0.1, 1);
 		}
 
 	}
@@ -76,13 +77,13 @@ public class ItemOcarinaTemptation extends ItemOcarinaBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
+	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 		Status status = new Status(fairyType);
 		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Wind)");
 		tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Aqua)");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
-		tooltip.add(TextFormatting.BLUE + "Experience Cost: " + String.format("%.1f", status.experienceCost * 100) + "% (Gaia, " + EnumAbilityType.food.getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Experience Cost: " + String.format("%.1f", status.experienceCost * 100) + "% (Gaia, " + AbilityTypes.food.get().getLocalizedName() + ")");
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + String.format("%.0f", status.coolTime) + "t (Dark, Cost)");
 	}
 
@@ -150,7 +151,7 @@ public class ItemOcarinaTemptation extends ItemOcarinaBase
 	{
 
 		// 妖精取得
-		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
+		Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy == null) {
 			RayTraceResult rayTraceResult = rayTrace(world, player, false, 0);
 			Vec3d positionTarget = rayTraceResult != null

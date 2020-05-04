@@ -2,9 +2,10 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.composite.Components;
+import miragefairy2019.mod.api.fairy.AbilityTypes;
+import miragefairy2019.mod.api.fairy.ApiFairy;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,9 +25,9 @@ public class ItemBellBase extends ItemFairyWeaponBase
 
 	public ItemBellBase()
 	{
-		addComponent(Components.MIRAGIUM, 0.5);
-		addComponent(Components.MIRAGIUM, 3);
-		addComponent(Components.fairyAbilityType(EnumAbilityType.submission));
+		addComponent(Components.miragium.get(), 0.5);
+		addComponent(Components.miragium.get(), 3);
+		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.submission.get()));
 		setMaxDamage(64 - 1);
 		setDescription("妖精の力を解放せよ");
 	}
@@ -38,9 +39,9 @@ public class ItemBellBase extends ItemFairyWeaponBase
 
 		public final double pitch;
 
-		public Status(FairyType fairyType)
+		public Status(IFairyType fairyType)
 		{
-			pitch = 1.0 * Math.pow(0.5, fairyType.cost / 50.0 - 1);
+			pitch = 1.0 * Math.pow(0.5, fairyType.getCost() / 50.0 - 1);
 		}
 
 	}
@@ -58,7 +59,7 @@ public class ItemBellBase extends ItemFairyWeaponBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
+	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 		Status status = new Status(fairyType);
 		tooltip.add(TextFormatting.BLUE + "Pitch: " + String.format("%.2f", Math.log(status.pitch) / Math.log(2) * 12) + " (Cost)");
@@ -102,12 +103,12 @@ public class ItemBellBase extends ItemFairyWeaponBase
 	private static class ResultWithFairy extends Result
 	{
 
-		public final FairyType fairyType;
+		public final IFairyType fairyType;
 		public final Status status;
 
 		public ResultWithFairy(
 			EnumExecutability executability,
-			FairyType fairyType,
+			IFairyType fairyType,
 			Status status)
 		{
 			super(executability);
@@ -122,7 +123,7 @@ public class ItemBellBase extends ItemFairyWeaponBase
 	{
 
 		// 妖精取得
-		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
+		Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy == null) {
 			return new Result(EnumExecutability.NO_FAIRY);
 		}

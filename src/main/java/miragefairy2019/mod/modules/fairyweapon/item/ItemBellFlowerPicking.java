@@ -3,9 +3,10 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.composite.Components;
+import miragefairy2019.mod.api.fairy.AbilityTypes;
+import miragefairy2019.mod.api.fairy.ApiFairy;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
@@ -40,11 +41,11 @@ public class ItemBellFlowerPicking extends ItemBellBase
 
 	public ItemBellFlowerPicking()
 	{
-		addComponent(Components.MIRAGIUM, 0.5);
-		addComponent(Components.MAGNETITE, 0.5);
-		addComponent(Components.PYROPE, 2);
-		addComponent(Components.GOLD, 1);
-		addComponent(Components.fairyAbilityType(EnumAbilityType.slash));
+		addComponent(Components.miragium.get(), 0.5);
+		addComponent(Components.magnetite.get(), 0.5);
+		addComponent(Components.pyrope.get(), 2);
+		addComponent(Components.gold.get(), 1);
+		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.slash.get()));
 		setMaxDamage(128 - 1);
 		setDescription("ちょっとお花を摘みに");
 	}
@@ -64,25 +65,25 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		public final double wear;
 		public final double coolTime;
 
-		public Status(FairyType fairyType)
+		public Status(IFairyType fairyType)
 		{
-			pitch = 1.0 * Math.pow(0.5, fairyType.cost / 50.0 - 1);
-			additionalReach = 0 + Math.min(fairyType.manaSet.wind / 10.0, 3);
-			radius = 2 + UtilsMath.trim(fairyType.manaSet.gaia / 10.0, 0, 3);
-			maxTargetCount = 1 + (int) (Math.min(fairyType.manaSet.dark + fairyType.abilitySet.get(EnumAbilityType.submission) / (fairyType.cost / 50.0) + fairyType.abilitySet.get(EnumAbilityType.slash) / (fairyType.cost / 50.0), 50));
-			fortune = fairyType.manaSet.shine >= 10
+			pitch = 1.0 * Math.pow(0.5, fairyType.getCost() / 50.0 - 1);
+			additionalReach = 0 + Math.min(fairyType.getManas().getWind() / 10.0, 3);
+			radius = 2 + UtilsMath.trim(fairyType.getManas().getGaia() / 10.0, 0, 3);
+			maxTargetCount = 1 + (int) (Math.min(fairyType.getManas().getDark() + fairyType.getAbilities().getAbilityPower(AbilityTypes.submission.get()) / (fairyType.getCost() / 50.0) + fairyType.getAbilities().getAbilityPower(AbilityTypes.slash.get()) / (fairyType.getCost() / 50.0), 50));
+			fortune = fairyType.getManas().getShine() >= 10
 				? 4
-				: fairyType.manaSet.shine >= 5
+				: fairyType.getManas().getShine() >= 5
 					? 3
-					: fairyType.manaSet.shine >= 2
+					: fairyType.getManas().getShine() >= 2
 						? 2
-						: fairyType.manaSet.shine >= 1
+						: fairyType.getManas().getShine() >= 1
 							? 1
 							: 0;
-			seeding = fairyType.abilitySet.get(EnumAbilityType.knowledge) >= 10;
-			collection = fairyType.abilitySet.get(EnumAbilityType.warp) >= 10;
-			wear = 0.5 * UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.fire / 30.0), 0.5, 1.0);
-			coolTime = fairyType.cost * 4 * UtilsMath.trim(Math.pow(0.5, fairyType.manaSet.aqua / 30.0), 0.5, 1.0);
+			seeding = fairyType.getAbilities().getAbilityPower(AbilityTypes.knowledge.get()) >= 10;
+			collection = fairyType.getAbilities().getAbilityPower(AbilityTypes.warp.get()) >= 10;
+			wear = 0.5 * UtilsMath.trim(Math.pow(0.5, fairyType.getManas().getFire() / 30.0), 0.5, 1.0);
+			coolTime = fairyType.getCost() * 4 * UtilsMath.trim(Math.pow(0.5, fairyType.getManas().getAqua() / 30.0), 0.5, 1.0);
 		}
 
 	}
@@ -100,16 +101,16 @@ public class ItemBellFlowerPicking extends ItemBellBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
+	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 		Status status = new Status(fairyType);
 		tooltip.add(TextFormatting.BLUE + "Pitch: " + String.format("%.2f", Math.log(status.pitch) / Math.log(2) * 12) + " (Cost)");
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
 		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Gaia)");
-		tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Dark, " + EnumAbilityType.submission.getLocalizedName() + ", " + EnumAbilityType.slash.getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Dark, " + AbilityTypes.submission.get().getLocalizedName() + ", " + AbilityTypes.slash.get().getLocalizedName() + ")");
 		tooltip.add(TextFormatting.BLUE + "Fortune: " + String.format("%d", status.fortune) + " (Shine)");
-		tooltip.add(TextFormatting.BLUE + "Seeding: " + (status.seeding ? "Yes" : "No") + " (" + EnumAbilityType.knowledge.getLocalizedName() + ")");
-		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + EnumAbilityType.warp.getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Seeding: " + (status.seeding ? "Yes" : "No") + " (" + AbilityTypes.knowledge.get().getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + AbilityTypes.warp.get().getLocalizedName() + ")");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + String.format("%.0f", status.coolTime) + "t (Aqua, Cost)");
 	}
@@ -154,14 +155,14 @@ public class ItemBellFlowerPicking extends ItemBellBase
 	private static class ResultWithFairy extends Result
 	{
 
-		public final FairyType fairyType;
+		public final IFairyType fairyType;
 		public final Status status;
 		public final List<Tuple<BlockPos, Boolean>> targets;
 
 		public ResultWithFairy(
 			EnumExecutability executability,
 			Vec3d positionTarget,
-			FairyType fairyType,
+			IFairyType fairyType,
 			Status status,
 			List<Tuple<BlockPos, Boolean>> targets)
 		{
@@ -178,7 +179,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 	{
 
 		// 妖精取得
-		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
+		Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy == null) {
 			RayTraceResult rayTraceResult = rayTrace(world, player, false, 0);
 			Vec3d positionTarget = rayTraceResult != null
@@ -326,7 +327,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 				}
 
 				// エフェクト
-				int color = resultWithFairy.fairyType.colorSet.hair;
+				int color = resultWithFairy.fairyType.getColor();
 				world.spawnParticle(
 					EnumParticleTypes.SPELL_MOB,
 					tuple.x.getX() + 0.5,

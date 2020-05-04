@@ -2,13 +2,13 @@ package miragefairy2019.mod.modules.fairyweapon.status;
 
 import java.util.function.DoubleUnaryOperator;
 
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
 public interface IFairyWeaponStatusPropertyFactor
 {
 
-	public double get(FairyType fairyType);
+	public double get(IFairyType fairyType);
 
 	public ISuppliterator<IFairyWeaponStatusPropertySource> getSources();
 
@@ -16,7 +16,7 @@ public interface IFairyWeaponStatusPropertyFactor
 	{
 		return new FairyWeaponStatusPropertyFactorWrapper(this) {
 			@Override
-			public double get(FairyType fairyType)
+			public double get(IFairyType fairyType)
 			{
 				return Math.min(super.get(fairyType), max);
 			}
@@ -27,7 +27,7 @@ public interface IFairyWeaponStatusPropertyFactor
 	{
 		return new FairyWeaponStatusPropertyFactorWrapper(this) {
 			@Override
-			public double get(FairyType fairyType)
+			public double get(IFairyType fairyType)
 			{
 				return super.get(fairyType) + a;
 			}
@@ -38,7 +38,7 @@ public interface IFairyWeaponStatusPropertyFactor
 	{
 		return new FairyWeaponStatusPropertyFactorWrapper(this) {
 			@Override
-			public double get(FairyType fairyType)
+			public double get(IFairyType fairyType)
 			{
 				return super.get(fairyType) - a;
 			}
@@ -49,7 +49,7 @@ public interface IFairyWeaponStatusPropertyFactor
 	{
 		return new FairyWeaponStatusPropertyFactorWrapper(this) {
 			@Override
-			public double get(FairyType fairyType)
+			public double get(IFairyType fairyType)
 			{
 				return super.get(fairyType) * a;
 			}
@@ -60,7 +60,7 @@ public interface IFairyWeaponStatusPropertyFactor
 	{
 		return new FairyWeaponStatusPropertyFactorWrapper(this) {
 			@Override
-			public double get(FairyType fairyType)
+			public double get(IFairyType fairyType)
 			{
 				return super.get(fairyType) / a;
 			}
@@ -71,7 +71,7 @@ public interface IFairyWeaponStatusPropertyFactor
 	{
 		return new FairyWeaponStatusPropertyFactorWrapper(this) {
 			@Override
-			public double get(FairyType fairyType)
+			public double get(IFairyType fairyType)
 			{
 				return Math.pow(a, super.get(fairyType));
 			}
@@ -82,7 +82,7 @@ public interface IFairyWeaponStatusPropertyFactor
 	{
 		return new FairyWeaponStatusPropertyFactorWrapper(this) {
 			@Override
-			public double get(FairyType fairyType)
+			public double get(IFairyType fairyType)
 			{
 				return Math.pow(super.get(fairyType), a);
 			}
@@ -93,7 +93,7 @@ public interface IFairyWeaponStatusPropertyFactor
 	{
 		return new FairyWeaponStatusPropertyFactorWrapper(this) {
 			@Override
-			public double get(FairyType fairyType)
+			public double get(IFairyType fairyType)
 			{
 				return function.applyAsDouble(super.get(fairyType));
 			}

@@ -1,15 +1,15 @@
 package miragefairy2019.mod.modules.fairyweapon.status;
 
-import miragefairy2019.mod.api.fairy.EnumManaType;
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.mod.api.fairy.IManaType;
 import net.minecraft.util.text.TextFormatting;
 
 public final class FairyWeaponStatusPropertySourceMana implements IFairyWeaponStatusPropertySource
 {
 
-	public final EnumManaType manaType;
+	public final IManaType manaType;
 
-	public FairyWeaponStatusPropertySourceMana(EnumManaType manaType)
+	public FairyWeaponStatusPropertySourceMana(IManaType manaType)
 	{
 		this.manaType = manaType;
 	}
@@ -23,19 +23,19 @@ public final class FairyWeaponStatusPropertySourceMana implements IFairyWeaponSt
 	@Override
 	public TextFormatting getTextColor()
 	{
-		return manaType.colorText;
+		return manaType.getTextColor();
 	}
 
 	@Override
-	public double raw(FairyType fairyType)
+	public double raw(IFairyType fairyType)
 	{
-		return fairyType.manaSet.get(manaType) / (fairyType.cost / 50.0);
+		return fairyType.getManas().getMana(manaType) / (fairyType.getCost() / 50.0);
 	}
 
 	@Override
-	public double get(FairyType fairyType)
+	public double get(IFairyType fairyType)
 	{
-		return fairyType.manaSet.get(manaType);
+		return fairyType.getManas().getMana(manaType);
 	}
 
 	@Override

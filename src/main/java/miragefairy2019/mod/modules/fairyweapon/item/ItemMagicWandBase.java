@@ -1,17 +1,18 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.Components;
+import miragefairy2019.mod.api.composite.Components;
+import miragefairy2019.mod.api.fairy.AbilityTypes;
+import miragefairy2019.mod.api.fairy.ApiFairy;
 
 public class ItemMagicWandBase extends ItemFairyWeaponBase
 {
 
 	public ItemMagicWandBase()
 	{
-		addComponent(Components.MIRAGIUM, 1);
-		addComponent(Components.FLUORITE, 1);
-		addComponent(Components.MIRAGIUM, 4);
-		addComponent(Components.fairyAbilityType(EnumAbilityType.knowledge));
+		addComponent(Components.miragium.get(), 1);
+		addComponent(Components.fluorite.get(), 1);
+		addComponent(Components.miragium.get(), 4);
+		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.knowledge.get()));
 		setMaxDamage(128 - 1);
 		setDescription("風の心、探求");
 	}

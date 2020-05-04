@@ -2,9 +2,10 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.composite.Components;
+import miragefairy2019.mod.api.fairy.AbilityTypes;
+import miragefairy2019.mod.api.fairy.ApiFairy;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.BlockLeaves;
@@ -30,10 +31,10 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 
 	public ItemMiragiumAxe()
 	{
-		addComponent(Components.MIRAGIUM, 3);
-		addComponent(Components.WOOD, 1);
-		addComponent(Components.fairyAbilityType(EnumAbilityType.slash));
-		addComponent(Components.fairyAbilityType(EnumAbilityType.fell));
+		addComponent(Components.miragium.get(), 3);
+		addComponent(Components.wood.get(), 1);
+		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.slash.get()));
+		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.fell.get()));
 		setMaxDamage(64 - 1);
 		setDescription("飛べるって素敵");
 		setHarvestLevel("axe", 1);
@@ -53,15 +54,15 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		public final double additionalReach;
 		public final boolean collection;
 
-		public Status(FairyType fairyType)
+		public Status(IFairyType fairyType)
 		{
-			maxHeight = 1 + Math.min((int) (fairyType.manaSet.gaia / 2), 100);
-			power = 2 + fairyType.manaSet.aqua / 2 + fairyType.abilitySet.get(EnumAbilityType.fell) / 4;
-			fortune = Math.min((int) (fairyType.manaSet.shine / 5), 3);
-			coolTime = fairyType.cost * 2 * Math.pow(0.5, fairyType.manaSet.dark / 20);
-			wear = 0.25 * Math.pow(0.5, fairyType.manaSet.fire / 20);
-			additionalReach = Math.min(fairyType.manaSet.wind / 5, 20);
-			collection = fairyType.abilitySet.get(EnumAbilityType.warp) >= 10;
+			maxHeight = 1 + Math.min((int) (fairyType.getManas().getGaia() / 2), 100);
+			power = 2 + fairyType.getManas().getAqua() / 2 + fairyType.getAbilities().getAbilityPower(AbilityTypes.fell.get()) / 4;
+			fortune = Math.min((int) (fairyType.getManas().getShine() / 5), 3);
+			coolTime = fairyType.getCost() * 2 * Math.pow(0.5, fairyType.getManas().getDark() / 20);
+			wear = 0.25 * Math.pow(0.5, fairyType.getManas().getFire() / 20);
+			additionalReach = Math.min(fairyType.getManas().getWind() / 5, 20);
+			collection = fairyType.getAbilities().getAbilityPower(AbilityTypes.warp.get()) >= 10;
 		}
 
 	}
@@ -79,18 +80,18 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
+	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 		super.addInformationFairyWeapon(itemStackFairyWeapon, itemStackFairy, fairyType, world, tooltip, flag);
 
 		Status status = new Status(fairyType);
 		tooltip.add(TextFormatting.BLUE + "Max Height: " + status.maxHeight + " (Gaia)");
-		tooltip.add(TextFormatting.BLUE + "Power: " + String.format("%.1f", status.power) + " (Aqua, " + EnumAbilityType.fell.getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Power: " + String.format("%.1f", status.power) + " (Aqua, " + AbilityTypes.fell.get().getLocalizedName() + ")");
 		tooltip.add(TextFormatting.BLUE + "Fortune: " + status.fortune + " (Shine)");
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + ((int) status.coolTime) + "t (Dark, Cost) (" + String.format("%.1f", status.coolTime / status.power) + "t per 1.0 power)");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
-		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + EnumAbilityType.warp.getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + AbilityTypes.warp.get().getLocalizedName() + ")");
 	}
 
 	//
@@ -101,7 +102,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		ItemStack itemStack = player.getHeldItem(hand);
 
 		// 妖精を取得
-		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
+		Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy == null) return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStack);
 
 		// ステータスを評価
@@ -194,7 +195,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 				if (ApiMain.side().isClient()) {
 
 					// 妖精がない場合はマゼンタ
-					Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
+					Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
 					if (fairy == null) {
 						spawnParticle(
 							world,

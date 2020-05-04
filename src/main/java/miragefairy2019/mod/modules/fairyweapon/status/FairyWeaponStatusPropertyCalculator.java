@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.status;
 import java.util.ArrayList;
 import java.util.List;
 
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.fairy.IFairyType;
 
 public class FairyWeaponStatusPropertyCalculator
 {
@@ -21,7 +21,7 @@ public class FairyWeaponStatusPropertyCalculator
 		add(initialValue);
 	}
 
-	public double calculate(FairyType fairyType)
+	public double calculate(IFairyType fairyType)
 	{
 		double value = 0;
 		for (IFairyWeaponStatusPropertyConfigurator configurator : configurators) {
@@ -81,7 +81,7 @@ public class FairyWeaponStatusPropertyCalculator
 	{
 		return new FairyWeaponStatusPropertyBase<Double>(unlocalizedName, sources, view) {
 			@Override
-			public Double get(FairyType fairyType)
+			public Double get(IFairyType fairyType)
 			{
 				return calculate(fairyType);
 			}
@@ -92,7 +92,7 @@ public class FairyWeaponStatusPropertyCalculator
 	{
 		return new FairyWeaponStatusPropertyBase<Integer>(unlocalizedName, sources, view) {
 			@Override
-			public Integer get(FairyType fairyType)
+			public Integer get(IFairyType fairyType)
 			{
 				return (int) (Math.round(calculate(fairyType) * 1000) / 1000);
 			}

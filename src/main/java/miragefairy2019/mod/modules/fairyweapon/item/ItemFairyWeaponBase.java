@@ -7,14 +7,15 @@ import java.util.Optional;
 
 import com.google.common.base.Predicate;
 
-import miragefairy2019.mod.api.ComponentFairyAbilityType;
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.composite.ApiComposite;
+import miragefairy2019.mod.api.composite.IComponent;
+import miragefairy2019.mod.api.composite.IComposite;
+import miragefairy2019.mod.api.composite.IItemComposite;
+import miragefairy2019.mod.api.fairy.IComponentAbilityType;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
-import miragefairy2019.mod.lib.component.Component;
-import miragefairy2019.mod.lib.component.Composite;
-import miragefairy2019.mod.lib.component.ICompositeProvider;
 import miragefairy2019.mod.modules.fairyweapon.recipe.ICombiningItem;
 import miragefairy2019.mod.modules.fairyweapon.recipe.ISphereReplacementItem;
 import miragefairy2019.mod.modules.sphere.EnumSphere;
@@ -52,7 +53,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreIngredient;
 
-public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, ICompositeProvider, ICombiningItem
+public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, IItemComposite, ICombiningItem
 {
 
 	protected String poem = null;
@@ -69,19 +70,19 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		this.author = author;
 	}
 
-	protected Composite composite = Composite.empty();
+	protected IComposite composite = ApiComposite.createComposite();
 
-	protected void addComponent(Component component)
+	protected void addComponent(IComponent component)
 	{
 		composite = composite.add(component);
 	}
 
-	protected void addComponent(Component component, int amount)
+	protected void addComponent(IComponent component, int amount)
 	{
 		composite = composite.add(component, amount);
 	}
 
-	protected void addComponent(Component component, double amount)
+	protected void addComponent(IComponent component, double amount)
 	{
 		composite = composite.add(component, amount);
 	}
@@ -216,10 +217,10 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		if (!itemStackFairy.isEmpty()) tooltip.add(AQUA + "Combined: " + itemStackFairy.getDisplayName());
 
 		// 素材
-		tooltip.add(YELLOW + "Contains: " + getComposite(itemStack).getLocalizedString());
+		tooltip.add(YELLOW + "Contains: " + getComposite().getLocalizedString());
 
 		// 妖精魔法ステータス
-		Tuple<ItemStack, FairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player).flatMap(p -> findFairy(itemStack, p)).orElse(null);
+		Tuple<ItemStack, IFairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player).flatMap(p -> findFairy(itemStack, p)).orElse(null);
 		if (fairy != null) {
 			tooltip.add("" + BLUE + BOLD + "--- Fairy: " + fairy.x.getDisplayName() + " ---");
 			addInformationFairyWeapon(itemStack, fairy.x, fairy.y, world, tooltip, flag);
@@ -240,7 +241,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
+	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 
 	}
@@ -315,7 +316,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		itemStack.setTagCompound(nbt);
 	}
 
-	protected Optional<Tuple<ItemStack, FairyType>> findFairy(ItemStack itemStack, EntityPlayer player)
+	protected Optional<Tuple<ItemStack, IFairyType>> findFairy(ItemStack itemStack, EntityPlayer player)
 	{
 
 		// 搭乗中の妖精を優先
@@ -350,7 +351,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		return Optional.empty();
 	}
 
-	protected Optional<FairyType> getFairy(ItemStack itemStack)
+	protected Optional<IFairyType> getFairy(ItemStack itemStack)
 	{
 		Item item = itemStack.getItem();
 		if (!(item instanceof IItemFairy)) return Optional.empty();
@@ -507,10 +508,10 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	@Override
 	public NonNullList<Ingredient> getRepairmentSpheres(ItemStack itemStack)
 	{
-		return getComposite(itemStack).components.suppliterator()
-			.filter(e -> e.x instanceof ComponentFairyAbilityType)
-			.map(e -> Tuple.of((ComponentFairyAbilityType) e.x, e.y))
-			.mapIfPresent(e -> EnumSphere.of(e.x.abilityType).map(s -> Tuple.of(s, e.y)))
+		return getComposite().getComponents()
+			.filter(e -> e.x instanceof IComponentAbilityType)
+			.map(e -> Tuple.of((IComponentAbilityType) e.x, e.y))
+			.mapIfPresent(e -> EnumSphere.of(e.x.getAbilityType()).map(s -> Tuple.of(s, e.y)))
 			.flatMap(e -> {
 				long amount = e.y;
 				int count = (int) (amount / 1_000_000_000L) + (amount % 1_000_000_000L != 0 ? 1 : 0);
@@ -530,10 +531,15 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 
 	//
 
-	@Override
-	public Composite getComposite(ItemStack itemStack)
+	public IComposite getComposite()
 	{
 		return composite;
+	}
+
+	@Override
+	public Optional<IComposite> getMirageFairy2019Composite(ItemStack itemStack)
+	{
+		return Optional.of(getComposite());
 	}
 
 	//

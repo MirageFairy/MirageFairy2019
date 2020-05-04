@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.google.common.collect.Multimap;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.composite.Components;
+import miragefairy2019.mod.api.fairy.AbilityTypes;
+import miragefairy2019.mod.api.fairy.ApiFairy;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -26,13 +27,13 @@ public class ItemFairySword extends ItemMiragiumSword
 
 	public ItemFairySword()
 	{
-		addComponent(Components.APATITE, 1);
-		addComponent(Components.FLUORITE, 1);
-		addComponent(Components.SULFUR, 1);
-		addComponent(Components.CINNABAR, 1);
-		addComponent(Components.MAGNETITE, 1);
-		addComponent(Components.MOONSTONE, 1);
-		addComponent(Components.fairyAbilityType(EnumAbilityType.attack));
+		addComponent(Components.apatite.get(), 1);
+		addComponent(Components.fluorite.get(), 1);
+		addComponent(Components.sulfur.get(), 1);
+		addComponent(Components.cinnabar.get(), 1);
+		addComponent(Components.magnetite.get(), 1);
+		addComponent(Components.moonstone.get(), 1);
+		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.attack.get()));
 		setMaxDamage(128 - 1);
 		setDescription("デザインコンテスト武器", "たぬん三世");
 	}
@@ -65,12 +66,12 @@ public class ItemFairySword extends ItemMiragiumSword
 		public final double additionalAttackDamage;
 		public final double additionalAttackSpeed;
 
-		public Status(FairyType fairyType)
+		public Status(IFairyType fairyType)
 		{
 
-			additionalAttackDamage = 6 * fairyType.manaSet.sum(1, 1, 1, 1, 1, 1) / 50.0; // 3~6程度
+			additionalAttackDamage = 6 * fairyType.getManas().sum(1, 1, 1, 1, 1, 1) / 50.0; // 3~6程度
 
-			double a = fairyType.cost / 100.0;
+			double a = fairyType.getCost() / 100.0;
 			additionalAttackSpeed = -4 + Math.min(0.25 / (a * a), 8); // -3.2~-2.4
 			// コスト50のときに斧より少し早い程度（-3.0）
 			// コスト0のときに+3
@@ -92,7 +93,7 @@ public class ItemFairySword extends ItemMiragiumSword
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
+	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 		Status status = new Status(fairyType);
 		tooltip.add(TextFormatting.BLUE + "Additional Attack Damage: " + String.format("%.1f", status.additionalAttackDamage) + " (Shine, Fire, Wind, Gaia, Aqua, Dark)");
@@ -108,7 +109,7 @@ public class ItemFairySword extends ItemMiragiumSword
 		if (!(entity instanceof EntityLivingBase)) return;
 		EntityPlayer player = (EntityPlayer) entity;
 
-		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
+		Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy != null) {
 			Status status = new Status(fairy.y);
 			setAdditionalAttackDamage(itemStack, status.additionalAttackDamage);

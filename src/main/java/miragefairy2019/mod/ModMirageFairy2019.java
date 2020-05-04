@@ -1,11 +1,11 @@
 package miragefairy2019.mod;
 
+import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fertilizer.ApiFertilizer;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.materialsfairy.ApiMaterialsFairy;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.InitializationContext;
-import miragefairy2019.mod.modules.fairy.ModuleFairy;
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.fairyweapon.ModuleFairyWeapon;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
@@ -31,7 +31,7 @@ public class ModMirageFairy2019
 	public ModMirageFairy2019()
 	{
 		ApiMain.init(erMod);
-		ModuleFairy.init(erMod);
+		ApiFairy.init(erMod);
 		ModuleFairyCrystal.init(erMod);
 		ModuleFairyWeapon.init(erMod);
 		ApiFertilizer.init(erMod);

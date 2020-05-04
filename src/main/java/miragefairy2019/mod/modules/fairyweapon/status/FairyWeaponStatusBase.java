@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.status;
 import java.util.ArrayList;
 import java.util.List;
 
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import net.minecraft.util.text.TextFormatting;
 
 public abstract class FairyWeaponStatusBase implements IFairyWeaponStatusHelper
@@ -17,7 +17,7 @@ public abstract class FairyWeaponStatusBase implements IFairyWeaponStatusHelper
 		return property;
 	}
 
-	public void addInformation(List<String> tooltip, FairyType fairyType)
+	public void addInformation(List<String> tooltip, IFairyType fairyType)
 	{
 		for (IFairyWeaponStatusProperty<?> property : properties) {
 			String localizedSourceListString = property.getLocalizedSourceListString();

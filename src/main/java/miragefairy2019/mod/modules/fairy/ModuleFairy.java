@@ -5,13 +5,7 @@ import java.util.List;
 import java.util.function.IntFunction;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiFairy;
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.fairy.AbilitySet;
-import miragefairy2019.mod.api.fairy.ColorSet;
-import miragefairy2019.mod.api.fairy.FairyType;
 import miragefairy2019.mod.api.fairy.IAbilityType;
-import miragefairy2019.mod.api.fairy.ManaSet;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
@@ -22,7 +16,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -37,7 +30,11 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ModuleFairy
 {
 
+	public static CreativeTabs creativeTab;
+
 	public static ItemFairy[] itemFairyList;
+
+	public static ItemStack itemStackFairyMain;
 
 	public static class FairyTypes
 	{
@@ -243,18 +240,22 @@ public class ModuleFairy
 			IntFunction<FairyType> f = rank -> {
 
 				double rateRare = Math.pow(2, (rare + rank - 2) / 4.0);
-				double rateVariance = Math.pow(0.5, ((manaSet.shine / manaSet.max + manaSet.fire / manaSet.max + manaSet.wind / manaSet.max
-					+ manaSet.gaia / manaSet.max + manaSet.aqua / manaSet.max + manaSet.dark / manaSet.max) - 1) / 5.0);
+				double rateVariance = Math.pow(0.5, ((manaSet.shine / manaSet.getMax()
+					+ manaSet.fire / manaSet.getMax()
+					+ manaSet.wind / manaSet.getMax()
+					+ manaSet.gaia / manaSet.getMax()
+					+ manaSet.aqua / manaSet.getMax()
+					+ manaSet.dark / manaSet.getMax()) - 1) / 5.0);
 				double sum = cost * rateRare * rateVariance * rateSspecial;
 				ManaSet manaSetReal = new ManaSet(
-					manaSet.shine * sum / manaSet.sum,
-					manaSet.fire * sum / manaSet.sum,
-					manaSet.wind * sum / manaSet.sum,
-					manaSet.gaia * sum / manaSet.sum,
-					manaSet.aqua * sum / manaSet.sum,
-					manaSet.dark * sum / manaSet.sum);
+					manaSet.shine * sum / manaSet.getSum(),
+					manaSet.fire * sum / manaSet.getSum(),
+					manaSet.wind * sum / manaSet.getSum(),
+					manaSet.gaia * sum / manaSet.getSum(),
+					manaSet.aqua * sum / manaSet.getSum(),
+					manaSet.dark * sum / manaSet.getSum());
 
-				AbilitySet abilitySetReal = new AbilitySet(abilitySet.tuples.suppliterator()
+				AbilitySet abilitySetReal = new AbilitySet(abilitySet.getAbilities()
 					.map(tuple -> Tuple.of(tuple.x, tuple.y * rateRare))
 					.toImmutableArray());
 
@@ -289,12 +290,12 @@ public class ModuleFairy
 	public static void init(EventRegistryMod erMod)
 	{
 		erMod.initCreativeTab.register(() -> {
-			ApiFairy.creativeTab = new CreativeTabs("mirageFairy2019.fairy") {
+			creativeTab = new CreativeTabs("mirageFairy2019.fairy") {
 				@Override
 				@SideOnly(Side.CLIENT)
 				public ItemStack getTabIconItem()
 				{
-					return ApiFairy.itemStackFairyMain;
+					return itemStackFairyMain;
 				}
 
 				@SideOnly(value = Side.CLIENT)
@@ -314,15 +315,14 @@ public class ModuleFairy
 			new FairyTypes(7).init();
 
 			itemFairyList = new ItemFairy[7];
-			ApiFairy.itemFairyList = new Item[7];
 
 			for (int i = 0; i < itemFairyList.length; i++) {
 
 				// 妖精
-				ApiFairy.itemFairyList[i] = itemFairyList[i] = new ItemFairy();
+				itemFairyList[i] = new ItemFairy();
 				itemFairyList[i].setRegistryName(ModMirageFairy2019.MODID, i == 0 ? "mirage_fairy" : "mirage_fairy_r" + (i + 1));
 				itemFairyList[i].setUnlocalizedName("mirageFairyR" + (i + 1));
-				itemFairyList[i].setCreativeTab(ApiFairy.creativeTab);
+				itemFairyList[i].setCreativeTab(creativeTab);
 				for (Tuple<Integer, VariantFairy[]> tuple : FairyTypes.variants) {
 					itemFairyList[i].registerVariant(tuple.x, tuple.y[i]);
 				}
@@ -388,12 +388,12 @@ public class ModuleFairy
 		});
 		erMod.createItemStack.register(ic -> {
 
-			ApiFairy.itemStackFairyMain = FairyTypes.magentaglazedterracotta[0].createItemStack();
+			itemStackFairyMain = FairyTypes.magentaglazedterracotta[0].createItemStack();
 
 			// 妖精の鉱石辞書
 			for (Tuple<Integer, VariantFairy[]> variant : FairyTypes.variants) {
 				for (int i = 0; i <= itemFairyList.length - 1; i++) {
-					for (Tuple<IAbilityType, Double> tuple : variant.y[i].type.abilitySet.tuples) {
+					for (Tuple<IAbilityType, Double> tuple : variant.y[i].type.abilitySet.getAbilities()) {
 						if (tuple.y >= 10) {
 							OreDictionary.registerOre(
 								"mirageFairy2019FairyAbility" + Utils.toUpperCaseHead(tuple.x.getName()),

@@ -13,10 +13,7 @@ public interface IAbilityType
 
 	public TextFormatting getTextColor();
 
-	public default String getUnlocalizedName()
-	{
-		return "mirageFairy2019.ability." + getName() + ".name";
-	}
+	public String getUnlocalizedName();
 
 	public default String getLocalizedName()
 	{

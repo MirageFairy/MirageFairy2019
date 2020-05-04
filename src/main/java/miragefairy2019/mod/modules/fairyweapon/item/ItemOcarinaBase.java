@@ -1,16 +1,17 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.Components;
+import miragefairy2019.mod.api.composite.Components;
+import miragefairy2019.mod.api.fairy.AbilityTypes;
+import miragefairy2019.mod.api.fairy.ApiFairy;
 
 public class ItemOcarinaBase extends ItemFairyWeaponBase
 {
 
 	public ItemOcarinaBase()
 	{
-		addComponent(Components.MIRAGIUM, 1);
-		addComponent(Components.APATITE, 4);
-		addComponent(Components.fairyAbilityType(EnumAbilityType.art));
+		addComponent(Components.miragium.get(), 1);
+		addComponent(Components.apatite.get(), 4);
+		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.art.get()));
 		setMaxDamage(128 - 1);
 		setDescription("適当に吹いても音楽になる笛");
 	}

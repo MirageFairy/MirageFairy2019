@@ -7,6 +7,6 @@ import net.minecraft.item.ItemStack;
 public interface IItemFairy
 {
 
-	public Optional<FairyType> getMirageFairy2019Fairy(ItemStack itemStack);
+	public Optional<IFairyType> getMirageFairy2019Fairy(ItemStack itemStack);
 
 }

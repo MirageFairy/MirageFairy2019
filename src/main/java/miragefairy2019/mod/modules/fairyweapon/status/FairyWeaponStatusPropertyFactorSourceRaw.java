@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.status;
 
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
 public class FairyWeaponStatusPropertyFactorSourceRaw implements IFairyWeaponStatusPropertyFactor
@@ -14,7 +14,7 @@ public class FairyWeaponStatusPropertyFactorSourceRaw implements IFairyWeaponSta
 	}
 
 	@Override
-	public double get(FairyType fairyType)
+	public double get(IFairyType fairyType)
 	{
 		return source.raw(fairyType);
 	}

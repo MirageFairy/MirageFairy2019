@@ -1,13 +1,12 @@
 package miragefairy2019.mod.modules.fairy;
 
-import static miragefairy2019.mod.api.fairy.EnumManaType.*;
+import static miragefairy2019.mod.modules.fairy.EnumManaType.*;
 import static net.minecraft.util.text.TextFormatting.*;
 
 import java.util.List;
 import java.util.Optional;
 
-import miragefairy2019.mod.api.fairy.EnumManaType;
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.multi.ItemMulti;
@@ -28,7 +27,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 {
 
 	@Override
-	public Optional<FairyType> getMirageFairy2019Fairy(ItemStack itemStack)
+	public Optional<IFairyType> getMirageFairy2019Fairy(ItemStack itemStack)
 	{
 		VariantFairy variant = getVariant(itemStack).orElse(null);
 		if (variant == null) return Optional.empty();
@@ -70,10 +69,10 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 			tooltip.add("" + format1(gaia, variant.type.manaSet.gaia) + "    " + format1(aqua, variant.type.manaSet.aqua));
 			tooltip.add("    " + format1(dark, variant.type.manaSet.dark));
 		} else {
-			tooltip.add("        " + shine.colorText + "Shine:" + format2(shine, variant.type.manaSet.shine));
-			tooltip.add(fire.colorText + "Fire:" + format2(fire, variant.type.manaSet.fire) + "    " + wind.colorText + "Wind:" + format2(wind, variant.type.manaSet.wind));
-			tooltip.add(gaia.colorText + "Gaia:" + format2(gaia, variant.type.manaSet.gaia) + "    " + aqua.colorText + "Aqua:" + format2(aqua, variant.type.manaSet.aqua));
-			tooltip.add("        " + dark.colorText + "Dark:" + format2(dark, variant.type.manaSet.dark));
+			tooltip.add("        " + shine.textColor + "Shine:" + format2(shine, variant.type.manaSet.shine));
+			tooltip.add(fire.textColor + "Fire:" + format2(fire, variant.type.manaSet.fire) + "    " + wind.textColor + "Wind:" + format2(wind, variant.type.manaSet.wind));
+			tooltip.add(gaia.textColor + "Gaia:" + format2(gaia, variant.type.manaSet.gaia) + "    " + aqua.textColor + "Aqua:" + format2(aqua, variant.type.manaSet.aqua));
+			tooltip.add("        " + dark.textColor + "Dark:" + format2(dark, variant.type.manaSet.dark));
 		}
 
 		if (!flag.isAdvanced()) {
@@ -83,7 +82,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 		}
 
 		if (!flag.isAdvanced()) {
-			String string = variant.type.abilitySet.tuples.suppliterator()
+			String string = variant.type.abilitySet.getAbilities()
 				.sorted((a, b) -> -a.y.compareTo(b.y))
 				.map(tuple -> Tuple.of(tuple.x, format(tuple.y)))
 				.filter(tuple -> tuple.y >= 10)
@@ -91,7 +90,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 				.join(", ");
 			tooltip.add("" + GREEN + "Abilities: " + WHITE + string);
 		} else {
-			String string = variant.type.abilitySet.tuples.suppliterator()
+			String string = variant.type.abilitySet.getAbilities()
 				.sorted((a, b) -> -a.y.compareTo(b.y))
 				.filter(tuple -> format(tuple.y) >= 10)
 				.map(tuple -> "" + tuple.x.getTextColor() + tuple.x.getLocalizedName() + WHITE + "(" + String.format("%.3f", tuple.y) + ")")
@@ -148,12 +147,12 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 
 	private String format1(EnumManaType manaType, double value)
 	{
-		return "" + manaType.colorText + String.format("%4d", format(value));
+		return "" + manaType.textColor + String.format("%4d", format(value));
 	}
 
 	private String format2(EnumManaType manaType, double value)
 	{
-		return "" + manaType.colorText + String.format("%.3f", value);
+		return "" + manaType.textColor + String.format("%.3f", value);
 	}
 
 }

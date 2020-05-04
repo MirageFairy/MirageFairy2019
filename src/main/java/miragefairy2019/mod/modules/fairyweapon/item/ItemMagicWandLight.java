@@ -3,9 +3,10 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 import java.util.List;
 import java.util.Optional;
 
-import miragefairy2019.mod.api.ApiFairy.EnumAbilityType;
-import miragefairy2019.mod.api.Components;
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.composite.Components;
+import miragefairy2019.mod.api.fairy.AbilityTypes;
+import miragefairy2019.mod.api.fairy.ApiFairy;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.Block;
@@ -33,8 +34,8 @@ public class ItemMagicWandLight extends ItemMagicWandBase
 
 	public ItemMagicWandLight()
 	{
-		addComponent(Components.APATITE, 3);
-		addComponent(Components.fairyAbilityType(EnumAbilityType.light));
+		addComponent(Components.apatite.get(), 3);
+		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.light.get()));
 		setMaxDamage(128 - 1);
 		setDescription("優しい光が洞窟を照らす");
 	}
@@ -47,10 +48,10 @@ public class ItemMagicWandLight extends ItemMagicWandBase
 		public final double additionalReach;
 		public final double coolTime;
 
-		public Status(FairyType fairyType)
+		public Status(IFairyType fairyType)
 		{
-			additionalReach = Math.min(fairyType.manaSet.aqua / 50.0 * 20, 40);
-			coolTime = fairyType.cost * 2 * Math.pow(0.5, fairyType.manaSet.gaia / 30);
+			additionalReach = Math.min(fairyType.getManas().getAqua() / 50.0 * 20, 40);
+			coolTime = fairyType.getCost() * 2 * Math.pow(0.5, fairyType.getManas().getGaia() / 30);
 		}
 
 	}
@@ -68,7 +69,7 @@ public class ItemMagicWandLight extends ItemMagicWandBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, FairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
+	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 		Status status = new Status(fairyType);
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Aqua)");
@@ -84,7 +85,7 @@ public class ItemMagicWandLight extends ItemMagicWandBase
 		if (world.isRemote) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
 		// 妖精を取得
-		Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
+		Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy == null) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
 		// ステータスを評価
@@ -175,7 +176,7 @@ public class ItemMagicWandLight extends ItemMagicWandBase
 				if (ApiMain.side().isClient()) {
 
 					// 妖精がない場合はマゼンタ
-					Tuple<ItemStack, FairyType> fairy = findFairy(itemStack, player).orElse(null);
+					Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
 					if (fairy == null) {
 						spawnParticle(
 							world,

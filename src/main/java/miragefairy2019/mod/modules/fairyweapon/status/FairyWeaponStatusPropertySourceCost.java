@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.status;
 
-import miragefairy2019.mod.api.fairy.FairyType;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import net.minecraft.util.text.TextFormatting;
 
 public final class FairyWeaponStatusPropertySourceCost implements IFairyWeaponStatusPropertySource
@@ -19,15 +19,15 @@ public final class FairyWeaponStatusPropertySourceCost implements IFairyWeaponSt
 	}
 
 	@Override
-	public double raw(FairyType fairyType)
+	public double raw(IFairyType fairyType)
 	{
 		return 50;
 	}
 
 	@Override
-	public double get(FairyType fairyType)
+	public double get(IFairyType fairyType)
 	{
-		return fairyType.cost;
+		return fairyType.getCost();
 	}
 
 	@Override
