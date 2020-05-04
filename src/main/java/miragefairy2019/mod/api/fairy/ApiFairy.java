@@ -15,4 +15,14 @@ public class ApiFairy
 		return miragefairy2019.mod.modules.fairy.ComponentsAbilityType.getComponentAbilityType(abilityType);
 	}
 
+	public static IFairyRegistry getFairyRegistry()
+	{
+		return miragefairy2019.mod.modules.fairy.registry.FairyRegistry.instance;
+	}
+
+	public static IFairyRelationRegistry getFairyRelationRegistry()
+	{
+		return miragefairy2019.mod.modules.fairy.registry.FairyRelationRegistry.instance;
+	}
+
 }

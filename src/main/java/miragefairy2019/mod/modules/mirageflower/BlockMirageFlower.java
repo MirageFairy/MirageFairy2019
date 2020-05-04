@@ -3,10 +3,10 @@ package miragefairy2019.mod.modules.mirageflower;
 import java.util.Random;
 
 import miragefairy2019.mod.api.fairy.AbilityTypes;
+import miragefairy2019.mod.api.fairy.ApiFairy;
+import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.UtilsMinecraft;
-import miragefairy2019.mod.modules.fairy.FairyRegistry;
-import miragefairy2019.mod.modules.fairy.VariantFairy;
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.ore.EnumVariantMaterials1;
 import miragefairy2019.mod.modules.ore.ModuleOre;
@@ -37,24 +37,23 @@ import net.minecraftforge.common.BiomeDictionary;
 public class BlockMirageFlower extends BlockBush implements IGrowable
 {
 
-	public static double getGrowRateInFloor(VariantFairy fairy)
+	public static double getGrowRateInFloor(IFairyType fairyType)
 	{
-		double costWeight = fairy.type.cost / 50.0;
-		return (fairy.type.manaSet.shine / costWeight) * fairy.type.abilitySet.getAbilityPower(AbilityTypes.crystal.get()) / 100.0 * 3;
+		double costWeight = fairyType.getCost() / 50.0;
+		return (fairyType.getManas().getShine() / costWeight) * fairyType.getAbilities().getAbilityPower(AbilityTypes.crystal.get()) / 100.0 * 3;
 	}
 
 	public static ITextComponent getGrowRateTableMessage()
 	{
 		ITextComponent textComponent = new TextComponentString("");
 		textComponent.appendText("===== Mirage Flower Grow Rate Table =====\n");
-		FairyRegistry.getKeyItemStacks()
-			.flatMap(i -> FairyRegistry.getFairies(i))
-			.distinct()
-			.map(f -> Tuple.of(f, BlockMirageFlower.getGrowRateInFloor(f)))
+		ApiFairy.getFairyRegistry().getFairies()
+			.map(r -> Tuple.of(r.getFairyType(), BlockMirageFlower.getGrowRateInFloor(r.getFairyType())))
+			.filter(t -> t.y > 1)
 			.sortedDouble(Tuple::getY)
 			.forEach(t -> {
 				textComponent.appendText(String.format("%7.2f%%  ", t.y * 100));
-				textComponent.appendSibling(new TextComponentTranslation(t.x.type.getUnlocalizedName()));
+				textComponent.appendSibling(new TextComponentTranslation(t.x.getUnlocalizedName()));
 				textComponent.appendText("\n");
 			});
 		textComponent.appendText("====================");
@@ -204,9 +203,15 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 			{
 				IBlockState blockState = world.getBlockState(blockPos.down());
 				ItemStack itemStack = blockState.getBlock().getItem(world, blockPos, blockState);
-				Double value = FairyRegistry.getFairies(itemStack)
-					.map(f -> getGrowRateInFloor(f))
-					.max(Double::compare).orElse(null);
+
+				Double value = ApiFairy.getFairyRelationRegistry().fairySelector()
+					.add(blockState)
+					.add(itemStack)
+					.select()
+					.mapIfPresent(n -> ApiFairy.getFairyRegistry().getFairy(n))
+					.map(r -> getGrowRateInFloor(r.getFairyType()))
+					.max(Double::compare)
+					.orElse(null);
 				if (value != null) {
 					bonus = Math.max(bonus, value);
 				}

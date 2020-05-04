@@ -18,6 +18,8 @@ public final class FairyType implements IFairyType
 	public final AbilitySet abilitySet;
 	public final ColorSet colorSet;
 
+	public final ResourceLocation registryName;
+
 	public FairyType(
 		String modid,
 		int id,
@@ -38,6 +40,8 @@ public final class FairyType implements IFairyType
 		this.manaSet = manaSet;
 		this.abilitySet = abilitySet;
 		this.colorSet = colorSet;
+
+		this.registryName = new ResourceLocation(modid, name);
 	}
 
 	@Override
