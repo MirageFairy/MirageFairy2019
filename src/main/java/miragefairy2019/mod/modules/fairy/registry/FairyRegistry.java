@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import miragefairy2019.mod.api.fairy.IFairyRecord;
-import miragefairy2019.mod.api.fairy.IFairyRegistry;
 import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.mod.api.fairy.registry.IFairyRecord;
+import miragefairy2019.mod.api.fairy.registry.IFairyRegistry;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

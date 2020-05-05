@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import miragefairy2019.mod.api.fairy.IFairySelector;
+import miragefairy2019.mod.api.fairy.registry.IFairySelector;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;

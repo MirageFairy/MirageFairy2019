@@ -1,4 +1,4 @@
-package miragefairy2019.mod.api.fairy;
+package miragefairy2019.mod.api.fairy.registry;
 
 import java.util.function.Predicate;
 

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import miragefairy2019.mod.api.ApiFairyCrystal;
-import miragefairy2019.mod.api.fairy.ApiFairy;
+import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
 import miragefairy2019.mod.api.fairycrystal.DropFixed;
 import miragefairy2019.mod.api.fairycrystal.IDrop;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
@@ -230,22 +230,22 @@ public class LoaderFairyCrystalDrop
 	{
 
 		// 妖精レジストリー
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockDiamond"), diamond[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockEmerald"), emerald[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockPyrope"), pyrope[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockMoonstone"), moonstone[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockApatite"), apatite[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("obsidian"), obsidian[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockFluorite"), fluorite[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockCinnabar"), cinnabar[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockMagnetite"), magnetite[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("glowstone"), glowstone[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockSmithsonite"), smithsonite[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockLapis"), lapislazuli[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockSulfur"), sulfur[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockGold"), gold[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockRedstone"), redstone[0].type.registryName);
-		ApiFairy.getFairyRelationRegistry().registerFairyRelationItemStack(Ingredient.fromStacks(new ItemStack(Blocks.SAND)), sand[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockDiamond"), diamond[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockEmerald"), emerald[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockPyrope"), pyrope[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockMoonstone"), moonstone[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockApatite"), apatite[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("obsidian"), obsidian[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockFluorite"), fluorite[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockCinnabar"), cinnabar[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockMagnetite"), magnetite[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("glowstone"), glowstone[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockSmithsonite"), smithsonite[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockLapis"), lapislazuli[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockSulfur"), sulfur[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockGold"), gold[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockRedstone"), redstone[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(Ingredient.fromStacks(new ItemStack(Blocks.SAND)), sand[0].type.registryName);
 		// TODO ほとんどの妖精とアイテムの関連付けは妖精レジストリーを使う
 
 		new Object() {

@@ -1,4 +1,4 @@
-package miragefairy2019.mod.api.fairy;
+package miragefairy2019.mod.api.fairy.registry;
 
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;

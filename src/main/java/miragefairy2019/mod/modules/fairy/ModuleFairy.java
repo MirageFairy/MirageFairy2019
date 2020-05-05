@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.function.IntFunction;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IAbilityType;
+import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
@@ -227,7 +227,7 @@ public class ModuleFairy
 		private void r(int id, VariantFairy[] variants)
 		{
 			variants2.add(Tuple.of(id, variants));
-			ApiFairy.getFairyRegistry().registerFairy(variants[0].type.registryName, variants[0].type, variants[0].createItemStack());
+			ApiFairyRegistry.getFairyRegistry().registerFairy(variants[0].type.registryName, variants[0].type, variants[0].createItemStack());
 		}
 
 		private VariantFairy[] v(FairyType[] types)

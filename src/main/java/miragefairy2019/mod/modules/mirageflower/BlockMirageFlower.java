@@ -3,8 +3,8 @@ package miragefairy2019.mod.modules.mirageflower;
 import java.util.Random;
 
 import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
@@ -47,7 +47,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	{
 		ITextComponent textComponent = new TextComponentString("");
 		textComponent.appendText("===== Mirage Flower Grow Rate Table =====\n");
-		ApiFairy.getFairyRegistry().getFairies()
+		ApiFairyRegistry.getFairyRegistry().getFairies()
 			.map(r -> Tuple.of(r.getFairyType(), BlockMirageFlower.getGrowRateInFloor(r.getFairyType())))
 			.filter(t -> t.y > 1)
 			.sortedDouble(Tuple::getY)
@@ -204,11 +204,11 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 				IBlockState blockState = world.getBlockState(blockPos.down());
 				ItemStack itemStack = blockState.getBlock().getItem(world, blockPos, blockState);
 
-				Double value = ApiFairy.getFairyRelationRegistry().fairySelector()
+				Double value = ApiFairyRegistry.getFairyRelationRegistry().fairySelector()
 					.add(blockState)
 					.add(itemStack)
 					.select()
-					.mapIfPresent(n -> ApiFairy.getFairyRegistry().getFairy(n))
+					.mapIfPresent(n -> ApiFairyRegistry.getFairyRegistry().getFairy(n))
 					.map(r -> getGrowRateInFloor(r.getFairyType()))
 					.max(Double::compare)
 					.orElse(null);
