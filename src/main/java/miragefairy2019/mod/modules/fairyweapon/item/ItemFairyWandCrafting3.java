@@ -13,7 +13,6 @@ public class ItemFairyWandCrafting3 extends ItemFairyWeaponCraftingToolBase
 		addComponent(Components.magnetite.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.craft.get()));
 		setMaxDamage(64 - 1);
-		setDescription("腕が4本欲しくなったときにどうぞ");
 	}
 
 }

@@ -36,7 +36,6 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.slash.get()));
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.fell.get()));
 		setMaxDamage(64 - 1);
-		setDescription("飛べるって素敵");
 		setHarvestLevel("axe", 1);
 		destroySpeed = 6;
 	}

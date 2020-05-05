@@ -30,7 +30,6 @@ public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingToolBase
 		addComponent(Components.miragium.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.breaking.get()));
 		setMaxDamage(32 - 1);
-		setDescription("振ると衝撃波が迸る");
 	}
 
 	@Override

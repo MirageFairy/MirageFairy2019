@@ -39,7 +39,6 @@ public class ItemOcarinaTemptation extends ItemOcarinaBase
 		addComponent(Components.pyrope.get(), 4);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.food.get()));
 		setMaxDamage(128 - 1);
-		setDescription("その音は人の腹を満たし、淫靡な気分にさせる");
 	}
 
 	//

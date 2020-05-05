@@ -28,7 +28,6 @@ public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingToolBase
 		addComponent(Components.wood.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.craft.get()));
 		setMaxDamage(16 - 1);
-		setDescription("スフィアから聞こえる、妖精の声");
 	}
 
 	@SuppressWarnings("deprecation")

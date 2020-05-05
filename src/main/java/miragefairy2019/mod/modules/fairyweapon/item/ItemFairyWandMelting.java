@@ -22,7 +22,6 @@ public class ItemFairyWandMelting extends ItemFairyWeaponCraftingToolBase
 		addComponent(Components.miragium.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.flame.get()));
 		setMaxDamage(32 - 1);
-		setDescription("金属を溶かすほどの情熱");
 	}
 
 	@Override

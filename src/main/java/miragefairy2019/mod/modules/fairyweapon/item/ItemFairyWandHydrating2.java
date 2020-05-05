@@ -12,7 +12,6 @@ public class ItemFairyWandHydrating2 extends ItemFairyWeaponCraftingToolBase
 		addComponent(Components.miragium.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.water.get()));
 		setMaxDamage(32 - 1);
-		setDescription("先端のこれはぷにぷにしている");
 	}
 
 }

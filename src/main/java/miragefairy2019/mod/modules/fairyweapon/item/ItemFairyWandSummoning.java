@@ -34,7 +34,6 @@ public class ItemFairyWandSummoning extends ItemFairyWeaponCraftingToolBase
 		addComponent(Components.moonstone.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.crystal.get()));
 		setMaxDamage(64 - 1);
-		setDescription("餌付けのステッキ");
 	}
 
 	@Override

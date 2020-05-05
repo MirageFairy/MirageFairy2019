@@ -14,7 +14,6 @@ public class ItemMiragiumSword extends ItemFairyWeaponBase
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.attack.get()));
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.slash.get()));
 		setMaxDamage(64 - 1);
-		setDescription("その刃で何を切る？");
 	}
 
 }

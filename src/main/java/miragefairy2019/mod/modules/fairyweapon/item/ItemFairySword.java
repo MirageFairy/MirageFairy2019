@@ -35,7 +35,6 @@ public class ItemFairySword extends ItemMiragiumSword
 		addComponent(Components.moonstone.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.attack.get()));
 		setMaxDamage(128 - 1);
-		setDescription("デザインコンテスト武器", "たぬん三世");
 	}
 
 	public double getAdditionalAttackDamage(ItemStack itemStack)

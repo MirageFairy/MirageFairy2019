@@ -44,7 +44,6 @@ public class ItemBellChristmas extends ItemBellBase
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.christmas.get()));
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.attack.get()));
 		setMaxDamage(128 - 1);
-		setDescription("いけない子には");
 	}
 
 	//

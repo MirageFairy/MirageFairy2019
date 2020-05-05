@@ -13,7 +13,6 @@ public class ItemFairyWandMelting2 extends ItemFairyWeaponCraftingToolBase
 		addComponent(Components.fluorite.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.flame.get()));
 		setMaxDamage(64 - 1);
-		setDescription("高温注意！");
 	}
 
 }

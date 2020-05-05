@@ -13,7 +13,6 @@ public class ItemFairyWandPolishing extends ItemFairyWeaponCraftingToolBase
 		addComponent(Components.moonstone.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.crystal.get()));
 		setMaxDamage(64 - 1);
-		setDescription("究極に手先の器用な妖精さん");
 	}
 
 }

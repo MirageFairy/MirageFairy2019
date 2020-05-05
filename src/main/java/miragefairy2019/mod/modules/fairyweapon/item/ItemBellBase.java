@@ -29,7 +29,6 @@ public class ItemBellBase extends ItemFairyWeaponBase
 		addComponent(Components.miragium.get(), 3);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.submission.get()));
 		setMaxDamage(64 - 1);
-		setDescription("妖精の力を解放せよ");
 	}
 
 	//

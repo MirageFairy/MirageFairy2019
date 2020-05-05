@@ -13,7 +13,6 @@ public class ItemFairyWandBreaking2 extends ItemFairyWeaponCraftingToolBase
 		addComponent(Components.sulfur.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.breaking.get()));
 		setMaxDamage(64 - 1);
-		setDescription("実はガラスより脆い");
 	}
 
 }

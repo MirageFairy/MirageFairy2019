@@ -13,7 +13,6 @@ public class ItemFairyWandHydrating3 extends ItemFairyWeaponCraftingToolBase
 		addComponent(Components.moonstone.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.water.get()));
 		setMaxDamage(64 - 1);
-		setDescription("直射日光を避けて保管してください。");
 	}
 
 }

@@ -40,7 +40,6 @@ public class ItemMagicWandCollecting extends ItemMagicWandBase
 		addComponent(Components.fluorite.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.warp.get()));
 		setMaxDamage(128 - 1);
-		setDescription("魔法のマジックハンド");
 	}
 
 	//

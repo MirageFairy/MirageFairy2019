@@ -16,6 +16,7 @@ import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
+import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.modules.fairyweapon.recipe.ICombiningItem;
 import miragefairy2019.mod.modules.fairyweapon.recipe.ISphereReplacementItem;
 import miragefairy2019.mod.modules.sphere.EnumSphere;
@@ -55,20 +56,6 @@ import net.minecraftforge.oredict.OreIngredient;
 
 public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, IItemComposite, ICombiningItem
 {
-
-	protected String poem = null;
-	protected String author = null;
-
-	protected void setDescription(String poem)
-	{
-		setDescription(poem, null);
-	}
-
-	protected void setDescription(String poem, String author)
-	{
-		this.poem = poem;
-		this.author = author;
-	}
 
 	protected IComposite composite = ApiComposite.createComposite();
 
@@ -203,8 +190,18 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	{
 
 		// ポエム
-		if (poem != null) tooltip.add(poem);
-		if (author != null) tooltip.add(LIGHT_PURPLE + "Author: " + author);
+		if (UtilsMinecraft.canTranslate(getUnlocalizedName() + ".poem")) {
+			String string = UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".poem");
+			if (!string.isEmpty()) {
+				tooltip.add(string);
+			}
+		}
+		if (UtilsMinecraft.canTranslate(getUnlocalizedName() + ".author")) {
+			String string = UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".author");
+			if (!string.isEmpty()) {
+				tooltip.add(LIGHT_PURPLE + "Author: " + string);
+			}
+		}
 
 		// 機能
 		addInformationFunctions(itemStack, world, tooltip, flag);

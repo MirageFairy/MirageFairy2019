@@ -13,7 +13,6 @@ public class ItemOcarinaBase extends ItemFairyWeaponBase
 		addComponent(Components.apatite.get(), 4);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.art.get()));
 		setMaxDamage(128 - 1);
-		setDescription("適当に吹いても音楽になる笛");
 	}
 
 }

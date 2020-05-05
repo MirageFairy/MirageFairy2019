@@ -12,7 +12,6 @@ public class ItemFairyWandCrafting2 extends ItemFairyWeaponCraftingToolBase
 		addComponent(Components.miragium.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.craft.get()));
 		setMaxDamage(32 - 1);
-		setDescription("靴を作ってくれる妖精さん");
 	}
 
 }

@@ -12,7 +12,6 @@ public class ItemFairyWandHydrating extends ItemFairyWeaponCraftingToolBase
 		addComponent(Components.wood.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.water.get()));
 		setMaxDamage(16 - 1);
-		setDescription("物質生成の初歩");
 	}
 
 }

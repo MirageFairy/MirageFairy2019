@@ -47,7 +47,6 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		addComponent(Components.gold.get(), 1);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.slash.get()));
 		setMaxDamage(128 - 1);
-		setDescription("ちょっとお花を摘みに");
 	}
 
 	//

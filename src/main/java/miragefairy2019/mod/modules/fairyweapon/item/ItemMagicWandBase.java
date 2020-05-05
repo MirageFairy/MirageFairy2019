@@ -14,7 +14,6 @@ public class ItemMagicWandBase extends ItemFairyWeaponBase
 		addComponent(Components.miragium.get(), 4);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.knowledge.get()));
 		setMaxDamage(128 - 1);
-		setDescription("風の心、探求");
 	}
 
 }

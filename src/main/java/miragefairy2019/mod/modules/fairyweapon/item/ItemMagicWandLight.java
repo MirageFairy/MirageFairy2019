@@ -37,7 +37,6 @@ public class ItemMagicWandLight extends ItemMagicWandBase
 		addComponent(Components.apatite.get(), 3);
 		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.light.get()));
 		setMaxDamage(128 - 1);
-		setDescription("優しい光が洞窟を照らす");
 	}
 
 	//
