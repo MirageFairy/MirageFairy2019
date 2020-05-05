@@ -19,7 +19,7 @@ public final class Monad<T> implements Supplier<T>
 		this.t = t;
 	}
 
-	public <O> Monad<O> bind(Function<T, Monad<O>> function)
+	public <O> O bind(Function<T, O> function)
 	{
 		return function.apply(t);
 	}
