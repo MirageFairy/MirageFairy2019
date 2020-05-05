@@ -11,9 +11,7 @@ import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -106,7 +104,7 @@ public class ModuleSphere
 					new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
 					new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
 					variant.y.createItemStack(),
-					Ingredient.fromStacks(new ItemStack(Items.WATER_BUCKET)),
+					new OreIngredient("container1000Water"),
 					new OreIngredient("dustMiragium"),
 					new OreIngredient("gemFluorite"),
 					new OreIngredient("mirageFairy2019FairyAbility" + Utils.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
