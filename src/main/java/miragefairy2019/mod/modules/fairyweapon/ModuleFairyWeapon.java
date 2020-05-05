@@ -154,6 +154,11 @@ public class ModuleFairyWeapon
 				}
 			});
 		});
+		erMod.createItemStack.register(ic -> {
+			OreDictionary.registerOre("container1000Water", new ItemStack(items.fairyWandHydrating.get(), 1, OreDictionary.WILDCARD_VALUE));
+			OreDictionary.registerOre("container1000Water", new ItemStack(items.fairyWandHydrating2.get(), 1, OreDictionary.WILDCARD_VALUE));
+			OreDictionary.registerOre("container1000Water", new ItemStack(items.fairyWandHydrating3.get(), 1, OreDictionary.WILDCARD_VALUE));
+		});
 		erMod.addRecipe.register(() -> {
 
 			// スフィア交換レシピ
