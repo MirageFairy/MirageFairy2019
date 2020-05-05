@@ -3,9 +3,6 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 import java.util.List;
 import java.util.Optional;
 
-import miragefairy2019.mod.api.composite.Components;
-import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import mirrg.boron.util.struct.Tuple;
@@ -31,15 +28,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMagicWandLight extends ItemMagicWandBase
 {
-
-	public ItemMagicWandLight()
-	{
-		addComponent(Components.apatite.get(), 3);
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.light.get()));
-		setMaxDamage(128 - 1);
-	}
-
-	//
 
 	protected static class Status
 	{

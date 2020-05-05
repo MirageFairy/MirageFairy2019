@@ -3,9 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import miragefairy2019.mod.api.composite.Components;
 import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.Utils;
@@ -38,18 +36,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBellFlowerPicking extends ItemBellBase
 {
-
-	public ItemBellFlowerPicking()
-	{
-		addComponent(Components.miragium.get(), 0.5);
-		addComponent(Components.magnetite.get(), 0.5);
-		addComponent(Components.pyrope.get(), 2);
-		addComponent(Components.gold.get(), 1);
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.slash.get()));
-		setMaxDamage(128 - 1);
-	}
-
-	//
 
 	protected static class Status
 	{

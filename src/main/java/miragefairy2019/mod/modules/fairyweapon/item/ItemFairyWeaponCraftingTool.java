@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import net.minecraft.item.ItemStack;
 
-public abstract class ItemFairyWeaponCraftingToolBase extends ItemFairyWeaponBase
+public class ItemFairyWeaponCraftingTool extends ItemFairyWeaponBase
 {
 
 	@Override

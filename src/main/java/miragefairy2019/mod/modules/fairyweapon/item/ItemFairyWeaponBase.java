@@ -8,7 +8,7 @@ import java.util.Optional;
 import com.google.common.base.Predicate;
 
 import miragefairy2019.mod.api.composite.ApiComposite;
-import miragefairy2019.mod.api.composite.IComponent;
+import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.api.composite.IComposite;
 import miragefairy2019.mod.api.composite.IItemComposite;
 import miragefairy2019.mod.api.fairy.IComponentAbilityType;
@@ -57,21 +57,16 @@ import net.minecraftforge.oredict.OreIngredient;
 public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, IItemComposite, ICombiningItem
 {
 
-	protected IComposite composite = ApiComposite.createComposite();
+	public IComposite composite = ApiComposite.createComposite();
 
-	protected void addComponent(IComponent component)
+	public void addComponent(IComponentInstance componentInstance)
 	{
-		composite = composite.add(component);
+		composite = composite.add(componentInstance);
 	}
 
-	protected void addComponent(IComponent component, int amount)
+	public void addComponent(IComposite composite)
 	{
-		composite = composite.add(component, amount);
-	}
-
-	protected void addComponent(IComponent component, double amount)
-	{
-		composite = composite.add(component, amount);
+		this.composite = this.composite.add(composite);
 	}
 
 	//
@@ -506,8 +501,8 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	public NonNullList<Ingredient> getRepairmentSpheres(ItemStack itemStack)
 	{
 		return getComposite().getComponents()
-			.filter(e -> e.x instanceof IComponentAbilityType)
-			.map(e -> Tuple.of((IComponentAbilityType) e.x, e.y))
+			.filter(e -> e.getComponent() instanceof IComponentAbilityType)
+			.map(e -> Tuple.of((IComponentAbilityType) e.getComponent(), e.getNanoAmount()))
 			.mapIfPresent(e -> EnumSphere.of(e.x.getAbilityType()).map(s -> Tuple.of(s, e.y)))
 			.flatMap(e -> {
 				long amount = e.y;

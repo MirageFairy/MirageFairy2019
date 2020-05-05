@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class Provider<T> implements Supplier<T>
+public final class Configurator<T> implements Supplier<T>
 {
 
 	private List<Consumer<EventRegistryMod>> listeners = new ArrayList<>();
 
-	protected void hook(Consumer<EventRegistryMod> listener)
+	public void hook(Consumer<EventRegistryMod> listener)
 	{
 		listeners.add(listener);
 	}
@@ -20,9 +20,11 @@ public class Provider<T> implements Supplier<T>
 		listeners.forEach(l -> l.accept(erMod));
 	}
 
+	//
+
 	private T t;
 
-	protected void set(T t)
+	public void set(T t)
 	{
 		this.t = t;
 	}

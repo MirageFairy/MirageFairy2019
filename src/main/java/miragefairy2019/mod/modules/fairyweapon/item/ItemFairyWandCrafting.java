@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.composite.Components;
-import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.modules.ore.BlockOreSeed;
 import miragefairy2019.mod.modules.ore.BlockOreSeed.EnumVariant;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -20,15 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
-public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingToolBase
+public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingTool
 {
-
-	public ItemFairyWandCrafting()
-	{
-		addComponent(Components.wood.get(), 1);
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.craft.get()));
-		setMaxDamage(16 - 1);
-	}
 
 	@SuppressWarnings("deprecation")
 	@Override

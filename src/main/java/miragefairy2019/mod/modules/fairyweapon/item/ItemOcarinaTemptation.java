@@ -3,9 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 import java.util.List;
 import java.util.Random;
 
-import miragefairy2019.mod.api.composite.Components;
 import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.Utils;
@@ -33,15 +31,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemOcarinaTemptation extends ItemOcarinaBase
 {
-
-	public ItemOcarinaTemptation()
-	{
-		addComponent(Components.pyrope.get(), 4);
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.food.get()));
-		setMaxDamage(128 - 1);
-	}
-
-	//
 
 	protected static class Status
 	{

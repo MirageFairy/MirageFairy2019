@@ -2,9 +2,6 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 
-import miragefairy2019.mod.api.composite.Components;
-import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
@@ -22,16 +19,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBellBase extends ItemFairyWeaponBase
 {
-
-	public ItemBellBase()
-	{
-		addComponent(Components.miragium.get(), 0.5);
-		addComponent(Components.miragium.get(), 3);
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.submission.get()));
-		setMaxDamage(64 - 1);
-	}
-
-	//
 
 	protected static class Status
 	{

@@ -5,9 +5,6 @@ import static miragefairy2019.mod.api.fairy.ManaTypes.*;
 
 import java.util.List;
 
-import miragefairy2019.mod.api.composite.Components;
-import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.Utils;
@@ -35,18 +32,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBellChristmas extends ItemBellBase
 {
-
-	public ItemBellChristmas()
-	{
-		addComponent(Components.miragium.get(), 0.5);
-		addComponent(Components.magnetite.get(), 0.5);
-		addComponent(Components.gold.get(), 10);
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.christmas.get()));
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.attack.get()));
-		setMaxDamage(128 - 1);
-	}
-
-	//
 
 	// TODO localize
 	protected static class Status extends FairyWeaponStatusBase

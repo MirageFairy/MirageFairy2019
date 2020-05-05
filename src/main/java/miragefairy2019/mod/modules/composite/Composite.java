@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import miragefairy2019.mod.api.composite.IComponent;
+import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.api.composite.IComposite;
 import mirrg.boron.util.struct.ImmutableArray;
-import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
 public final class Composite implements IComposite
@@ -15,26 +15,26 @@ public final class Composite implements IComposite
 	/**
 	 * Longはナノ個単位で表されます。
 	 */
-	private final ImmutableArray<Tuple<IComponent, Long>> components;
+	private final ImmutableArray<IComponentInstance> components;
 
 	public Composite()
 	{
 		this(ISuppliterator.empty());
 	}
 
-	public Composite(ISuppliterator<Tuple<IComponent, Long>> components)
+	public Composite(ISuppliterator<IComponentInstance> components)
 	{
 		Map<IComponent, Long> map = new HashMap<>();
-		components.forEach(e -> map.compute(e.x, (k, v) -> v != null ? v + e.y : e.y));
+		components.forEach(e -> map.compute(e.getComponent(), (k, v) -> v != null ? v + e.getNanoAmount() : e.getNanoAmount()));
 		this.components = ISuppliterator.ofIterable(map.entrySet())
-			.map(e -> Tuple.of(e.getKey(), e.getValue()))
+			.<IComponentInstance> map(e -> new ComponentInstance(e.getKey(), e.getValue()))
 			.sorted((a, b) -> {
 				int i;
 
-				i = -Double.compare(a.y, b.y);
+				i = -Double.compare(a.getNanoAmount(), b.getNanoAmount());
 				if (i != 0) return i;
 
-				i = a.x.compareTo(b.x);
+				i = a.getComponent().compareTo(b.getComponent());
 				if (i != 0) return i;
 
 				return 0;
@@ -45,7 +45,7 @@ public final class Composite implements IComposite
 	//
 
 	@Override
-	public ISuppliterator<Tuple<IComponent, Long>> getComponents()
+	public ISuppliterator<IComponentInstance> getComponents()
 	{
 		return components.suppliterator();
 	}
@@ -53,18 +53,27 @@ public final class Composite implements IComposite
 	@Override
 	public long getComponentAmount(IComponent component)
 	{
-		for (Tuple<IComponent, Long> entry : components) {
-			if (entry.x.equals(component)) return entry.y;
+		for (IComponentInstance entry : components) {
+			if (entry.getComponent().equals(component)) return entry.getNanoAmount();
 		}
 		return 0;
 	}
 
 	@Override
-	public IComposite addNano(IComponent component, long nanoAmount)
+	public IComposite add(IComponentInstance componentInstance)
 	{
-		return new Composite(ISuppliterator.concat(
-			components.suppliterator(),
-			ISuppliterator.of(Tuple.of(component, nanoAmount))));
+		return new Composite(components.suppliterator()
+			.after(componentInstance));
+	}
+
+	@Override
+	public IComposite add(IComposite composite)
+	{
+		IComposite result = this;
+		for (IComponentInstance componentInstance : composite.getComponents()) {
+			result = result.add(componentInstance);
+		}
+		return result;
 	}
 
 	@Override
@@ -72,10 +81,10 @@ public final class Composite implements IComposite
 	{
 		return components.suppliterator()
 			.map(t -> {
-				if (t.y == 1_000_000_000L) {
-					return t.x.getLocalizedName();
+				if (t.getNanoAmount() == 1_000_000_000L) {
+					return t.getComponent().getLocalizedName();
 				} else {
-					return t.x.getLocalizedName() + "(" + String.format("%.3f", (t.y / 1_000_000L) * 0.001) + ")";
+					return t.getComponent().getLocalizedName() + "(" + String.format("%.3f", (t.getNanoAmount() / 1_000_000L) * 0.001) + ")";
 				}
 			})
 			.join(", ");

@@ -4,9 +4,6 @@ import java.util.List;
 
 import com.google.common.collect.Multimap;
 
-import miragefairy2019.mod.api.composite.Components;
-import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
@@ -24,18 +21,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemFairySword extends ItemMiragiumSword
 {
-
-	public ItemFairySword()
-	{
-		addComponent(Components.apatite.get(), 1);
-		addComponent(Components.fluorite.get(), 1);
-		addComponent(Components.sulfur.get(), 1);
-		addComponent(Components.cinnabar.get(), 1);
-		addComponent(Components.magnetite.get(), 1);
-		addComponent(Components.moonstone.get(), 1);
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.attack.get()));
-		setMaxDamage(128 - 1);
-	}
 
 	public double getAdditionalAttackDamage(ItemStack itemStack)
 	{

@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import miragefairy2019.mod.api.composite.Components;
 import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import mirrg.boron.util.struct.Tuple;
@@ -33,16 +31,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMagicWandCollecting extends ItemMagicWandBase
 {
-
-	public ItemMagicWandCollecting()
-	{
-		addComponent(Components.obsidian.get(), 2);
-		addComponent(Components.fluorite.get(), 1);
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.warp.get()));
-		setMaxDamage(128 - 1);
-	}
-
-	//
 
 	protected static class Status
 	{

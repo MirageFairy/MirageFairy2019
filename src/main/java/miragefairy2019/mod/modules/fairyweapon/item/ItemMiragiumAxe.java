@@ -2,9 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 
-import miragefairy2019.mod.api.composite.Components;
 import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import mirrg.boron.util.struct.Tuple;
@@ -31,11 +29,6 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 
 	public ItemMiragiumAxe()
 	{
-		addComponent(Components.miragium.get(), 3);
-		addComponent(Components.wood.get(), 1);
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.slash.get()));
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.fell.get()));
-		setMaxDamage(64 - 1);
 		setHarvestLevel("axe", 1);
 		destroySpeed = 6;
 	}

@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.composite.Components;
-import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;
@@ -22,15 +19,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
-public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingToolBase
+public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingTool
 {
-
-	public ItemFairyWandBreaking()
-	{
-		addComponent(Components.miragium.get(), 1);
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.breaking.get()));
-		setMaxDamage(32 - 1);
-	}
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)

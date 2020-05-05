@@ -1,9 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.composite.Components;
-import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.modules.mirageflower.BlockMirageFlower;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -14,15 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemFairyWandMelting extends ItemFairyWeaponCraftingToolBase
+public class ItemFairyWandMelting extends ItemFairyWeaponCraftingTool
 {
-
-	public ItemFairyWandMelting()
-	{
-		addComponent(Components.miragium.get(), 1);
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.flame.get()));
-		setMaxDamage(32 - 1);
-	}
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)

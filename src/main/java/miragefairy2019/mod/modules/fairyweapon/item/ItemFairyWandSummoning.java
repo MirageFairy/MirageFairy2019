@@ -2,9 +2,6 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.List;
 
-import miragefairy2019.mod.api.composite.Components;
-import miragefairy2019.mod.api.fairy.AbilityTypes;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.modules.fairycrystal.ItemFairyCrystal;
 import miragefairy2019.mod.modules.fairycrystal.VariantFairyCrystal;
 import net.minecraft.client.util.ITooltipFlag;
@@ -25,16 +22,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFairyWandSummoning extends ItemFairyWeaponCraftingToolBase
+public class ItemFairyWandSummoning extends ItemFairyWeaponCraftingTool
 {
-
-	public ItemFairyWandSummoning()
-	{
-		addComponent(Components.miragium.get(), 1);
-		addComponent(Components.moonstone.get(), 1);
-		addComponent(ApiFairy.getComponentAbilityType(AbilityTypes.crystal.get()));
-		setMaxDamage(64 - 1);
-	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
