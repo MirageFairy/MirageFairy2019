@@ -18,6 +18,9 @@ import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandBreaking2;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandCrafting;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandCrafting2;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandCrafting3;
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandHydrating;
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandHydrating2;
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandHydrating3;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandMelting;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandMelting2;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWandPolishing;
@@ -57,6 +60,9 @@ public class ModuleFairyWeapon
 		public Provider<ItemFairyWandCrafting> fairyWandCrafting = item(ItemFairyWandCrafting::new, "crafting_fairy_wand", "fairyWandCrafting").ore("mirageFairy2019CraftingToolFairyWandCrafting"); // 技巧のステッキ
 		public Provider<ItemFairyWandCrafting2> fairyWandCrafting2 = item(ItemFairyWandCrafting2::new, "crafting_fairy_wand_2", "fairyWandCrafting2").ore("mirageFairy2019CraftingToolFairyWandCrafting"); // 技巧のステッキ2
 		public Provider<ItemFairyWandCrafting3> fairyWandCrafting3 = item(ItemFairyWandCrafting3::new, "crafting_fairy_wand_3", "fairyWandCrafting3").ore("mirageFairy2019CraftingToolFairyWandCrafting"); // 技巧のステッキ3
+		public Provider<ItemFairyWandHydrating> fairyWandHydrating = item(ItemFairyWandHydrating::new, "hydrating_fairy_wand", "fairyWandHydrating").ore("mirageFairy2019CraftingToolFairyWandHydrating"); // 潤いのステッキ
+		public Provider<ItemFairyWandHydrating2> fairyWandHydrating2 = item(ItemFairyWandHydrating2::new, "hydrating_fairy_wand_2", "fairyWandHydrating2").ore("mirageFairy2019CraftingToolFairyWandHydrating"); // 潤いのステッキ2
+		public Provider<ItemFairyWandHydrating3> fairyWandHydrating3 = item(ItemFairyWandHydrating3::new, "hydrating_fairy_wand_3", "fairyWandHydrating3").ore("mirageFairy2019CraftingToolFairyWandHydrating"); // 潤いのステッキ3
 		public Provider<ItemFairyWandMelting> fairyWandMelting = item(ItemFairyWandMelting::new, "melting_fairy_wand", "fairyWandMelting").ore("mirageFairy2019CraftingToolFairyWandMelting"); // 紅蓮のステッキ
 		public Provider<ItemFairyWandMelting2> fairyWandMelting2 = item(ItemFairyWandMelting2::new, "melting_fairy_wand_2", "fairyWandMelting2").ore("mirageFairy2019CraftingToolFairyWandMelting"); // 紅蓮のステッキ
 		public Provider<ItemFairyWandBreaking> fairyWandBreaking = item(ItemFairyWandBreaking::new, "breaking_fairy_wand", "fairyWandBreaking").ore("mirageFairy2019CraftingToolFairyWandBreaking"); // 破壊のステッキ
