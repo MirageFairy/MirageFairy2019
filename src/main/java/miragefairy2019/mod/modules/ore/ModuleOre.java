@@ -14,6 +14,7 @@ import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -138,6 +139,7 @@ public class ModuleOre
 			for (EnumVariantMaterials1 variant : EnumVariantMaterials1.values()) {
 				OreDictionary.registerOre(variant.oreName, new ItemStack(itemBlockMaterials1, 1, variant.metadata));
 			}
+			OreDictionary.registerOre("container1000Water", Items.WATER_BUCKET);
 		});
 		erMod.addRecipe.register(() -> {
 
