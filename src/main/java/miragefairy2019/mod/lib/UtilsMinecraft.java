@@ -8,6 +8,11 @@ import net.minecraftforge.oredict.OreDictionary;
 public class UtilsMinecraft
 {
 
+	public static boolean canTranslate(String key)
+	{
+		return I18n.canTranslate(key);
+	}
+
 	public static String translateToLocal(String key)
 	{
 		return I18n.translateToLocal(key).trim();
