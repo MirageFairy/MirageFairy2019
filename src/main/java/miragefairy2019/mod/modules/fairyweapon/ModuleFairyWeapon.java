@@ -173,7 +173,7 @@ public class ModuleFairyWeapon
 			//
 
 			// ミラジウムの剣
-			Monad<Configurator<ItemMiragiumSword>> miragiumSword = fairyWeapon(ItemMiragiumSword::new, "miragium_sword", "miragiumSword")
+			Configurator<ItemMiragiumSword> miragiumSword = fairyWeapon(ItemMiragiumSword::new, "miragium_sword", "miragiumSword")
 				.bind(addComponent(createComponentInstance(Components.miragium.get(), 2)))
 				.bind(addComponent(createComponentInstance(Components.wood.get(), 0.5)))
 				.bind(addComponent(createComponentInstance(getComponentAbilityType(attack.get()))))
@@ -182,8 +182,8 @@ public class ModuleFairyWeapon
 				.bind(register(configurators));
 
 			// 妖精剣
-			Monad<Configurator<ItemFairySword>> fairySword = fairyWeapon(ItemFairySword::new, "fairy_sword", "fairySword")
-				.bind(addComponent(miragiumSword.get()))
+			Configurator<ItemFairySword> fairySword = fairyWeapon(ItemFairySword::new, "fairy_sword", "fairySword")
+				.bind(addComponent(miragiumSword))
 				.bind(addComponent(createComponentInstance(Components.apatite.get(), 1)))
 				.bind(addComponent(createComponentInstance(Components.fluorite.get(), 1)))
 				.bind(addComponent(createComponentInstance(Components.sulfur.get(), 1)))
@@ -195,7 +195,7 @@ public class ModuleFairyWeapon
 				.bind(register(configurators));
 
 			// ミラジウムの斧
-			Monad<Configurator<ItemMiragiumAxe>> miragiumAxe = fairyWeapon(ItemMiragiumAxe::new, "miragium_axe", "miragiumAxe")
+			Configurator<ItemMiragiumAxe> miragiumAxe = fairyWeapon(ItemMiragiumAxe::new, "miragium_axe", "miragiumAxe")
 				.bind(addComponent(createComponentInstance(Components.miragium.get(), 3)))
 				.bind(addComponent(createComponentInstance(Components.wood.get(), 1)))
 				.bind(addComponent(createComponentInstance(getComponentAbilityType(slash.get()))))
@@ -204,7 +204,7 @@ public class ModuleFairyWeapon
 				.bind(register(configurators));
 
 			// ロッドベース
-			Monad<Configurator<ItemMagicWandBase>> magicWandBase = fairyWeapon(ItemMagicWandBase::new, "magic_wand_base", "magicWandBase")
+			Configurator<ItemMagicWandBase> magicWandBase = fairyWeapon(ItemMagicWandBase::new, "magic_wand_base", "magicWandBase")
 				.bind(addComponent(createComponentInstance(Components.miragium.get(), 1)))
 				.bind(addComponent(createComponentInstance(Components.fluorite.get(), 1)))
 				.bind(addComponent(createComponentInstance(Components.miragium.get(), 4)))
@@ -213,16 +213,16 @@ public class ModuleFairyWeapon
 				.bind(register(configurators));
 
 			// 光のロッド
-			Monad<Configurator<ItemMagicWandLight>> magicWandLight = fairyWeapon(ItemMagicWandLight::new, "light_magic_wand", "magicWandLight")
-				.bind(addComponent(magicWandBase.get()))
+			Configurator<ItemMagicWandLight> magicWandLight = fairyWeapon(ItemMagicWandLight::new, "light_magic_wand", "magicWandLight")
+				.bind(addComponent(magicWandBase))
 				.bind(addComponent(createComponentInstance(Components.apatite.get(), 3)))
 				.bind(addComponent(createComponentInstance(getComponentAbilityType(light.get()))))
 				.bind(setWeaponStatusOfTier(3))
 				.bind(register(configurators));
 
 			// 収集のロッド
-			Monad<Configurator<ItemMagicWandCollecting>> magicWandCollecting = fairyWeapon(ItemMagicWandCollecting::new, "collecting_magic_wand", "magicWandCollecting")
-				.bind(addComponent(magicWandBase.get()))
+			Configurator<ItemMagicWandCollecting> magicWandCollecting = fairyWeapon(ItemMagicWandCollecting::new, "collecting_magic_wand", "magicWandCollecting")
+				.bind(addComponent(magicWandBase))
 				.bind(addComponent(createComponentInstance(Components.obsidian.get(), 2)))
 				.bind(addComponent(createComponentInstance(Components.fluorite.get(), 1)))
 				.bind(addComponent(createComponentInstance(getComponentAbilityType(warp.get()))))
@@ -230,7 +230,7 @@ public class ModuleFairyWeapon
 				.bind(register(configurators));
 
 			// オカリナベース
-			Monad<Configurator<ItemOcarinaBase>> ocarinaBase = fairyWeapon(ItemOcarinaBase::new, "ocarina_base", "ocarinaBase")
+			Configurator<ItemOcarinaBase> ocarinaBase = fairyWeapon(ItemOcarinaBase::new, "ocarina_base", "ocarinaBase")
 				.bind(addComponent(createComponentInstance(Components.miragium.get(), 1)))
 				.bind(addComponent(createComponentInstance(Components.apatite.get(), 4)))
 				.bind(addComponent(createComponentInstance(getComponentAbilityType(art.get()))))
@@ -238,15 +238,15 @@ public class ModuleFairyWeapon
 				.bind(register(configurators));
 
 			// 魅惑のオカリナ
-			Monad<Configurator<ItemOcarinaTemptation>> ocarinaTemptation = fairyWeapon(ItemOcarinaTemptation::new, "temptation_ocarina", "ocarinaTemptation")
-				.bind(addComponent(ocarinaBase.get()))
+			Configurator<ItemOcarinaTemptation> ocarinaTemptation = fairyWeapon(ItemOcarinaTemptation::new, "temptation_ocarina", "ocarinaTemptation")
+				.bind(addComponent(ocarinaBase))
 				.bind(addComponent(createComponentInstance(Components.pyrope.get(), 4)))
 				.bind(addComponent(createComponentInstance(getComponentAbilityType(food.get()))))
 				.bind(setWeaponStatusOfTier(3))
 				.bind(register(configurators));
 
 			// 鐘ベース
-			Monad<Configurator<ItemBellBase>> bellBase = fairyWeapon(ItemBellBase::new, "bell_base", "bellBase")
+			Configurator<ItemBellBase> bellBase = fairyWeapon(ItemBellBase::new, "bell_base", "bellBase")
 				.bind(addComponent(createComponentInstance(Components.miragium.get(), 0.5)))
 				.bind(addComponent(createComponentInstance(Components.miragium.get(), 3)))
 				.bind(addComponent(createComponentInstance(getComponentAbilityType(submission.get()))))
@@ -254,8 +254,8 @@ public class ModuleFairyWeapon
 				.bind(register(configurators));
 
 			// 花摘みの鐘
-			Monad<Configurator<ItemBellFlowerPicking>> bellFlowerPicking = fairyWeapon(ItemBellFlowerPicking::new, "flower_picking_bell", "bellFlowerPicking")
-				.bind(addComponent(bellBase.get()))
+			Configurator<ItemBellFlowerPicking> bellFlowerPicking = fairyWeapon(ItemBellFlowerPicking::new, "flower_picking_bell", "bellFlowerPicking")
+				.bind(addComponent(bellBase))
 				.bind(addComponent(createComponentInstance(Components.miragium.get(), 0.5)))
 				.bind(addComponent(createComponentInstance(Components.magnetite.get(), 0.5)))
 				.bind(addComponent(createComponentInstance(Components.pyrope.get(), 2)))
@@ -265,8 +265,8 @@ public class ModuleFairyWeapon
 				.bind(register(configurators));
 
 			// クリスマスの鐘
-			Monad<Configurator<ItemBellChristmas>> bellChristmas = fairyWeapon(ItemBellChristmas::new, "christmas_bell", "bellChristmas")
-				.bind(addComponent(bellBase.get()))
+			Configurator<ItemBellChristmas> bellChristmas = fairyWeapon(ItemBellChristmas::new, "christmas_bell", "bellChristmas")
+				.bind(addComponent(bellBase))
 				.bind(addComponent(createComponentInstance(Components.miragium.get(), 0.5)))
 				.bind(addComponent(createComponentInstance(Components.magnetite.get(), 0.5)))
 				.bind(addComponent(createComponentInstance(Components.gold.get(), 10)))
@@ -275,10 +275,6 @@ public class ModuleFairyWeapon
 				.bind(setWeaponStatusOfTier(3))
 				.bind(register(configurators));
 
-			/*
-				.bind(addComponent(createComponentInstance(Components.     .get(),       )))
-				.bind(addComponent(createComponentInstance(getComponentAbilityType(     .get()))))
-			 */
 			return configurators;
 		}
 
@@ -317,11 +313,11 @@ public class ModuleFairyWeapon
 			return Monad.of(c);
 		}
 
-		private static <I extends Item> Function<Configurator<I>, Monad<Configurator<I>>> register(List<Configurator<?>> configurators)
+		private static <I extends Item> Function<Configurator<I>, Configurator<I>> register(List<Configurator<?>> configurators)
 		{
 			return c -> {
 				configurators.add(c);
-				return Monad.of(c);
+				return c;
 			};
 		}
 
@@ -351,26 +347,14 @@ public class ModuleFairyWeapon
 
 		private static <I extends ItemFairyWeaponBase, I2 extends ItemFairyWeaponBase> Function<Configurator<I>, Monad<Configurator<I>>> addComponent(Configurator<I2> mci)
 		{
-			return c -> {
-				c.hook(erMod -> {
-					erMod.registerItem.register(b -> {
-						c.get().addComponent(mci.get().getComposite());
-					});
-				});
-				return Monad.of(c);
-			};
+			return c -> Monad.of(c)
+				.bind(onRegisterItem(i -> i.addComponent(mci.get().getComposite())));
 		}
 
 		private static <I extends ItemFairyWeaponBase> Function<Configurator<I>, Monad<Configurator<I>>> addComponent(IComponentInstance componentInstance)
 		{
-			return c -> {
-				c.hook(erMod -> {
-					erMod.registerItem.register(b -> {
-						c.get().addComponent(componentInstance);
-					});
-				});
-				return Monad.of(c);
-			};
+			return c -> Monad.of(c)
+				.bind(onRegisterItem(i -> i.addComponent(componentInstance)));
 		}
 
 		private static <I extends ItemFairyWeaponBase> Function<Configurator<I>, Monad<Configurator<I>>> setWeaponStatusOfTier(int tier)
