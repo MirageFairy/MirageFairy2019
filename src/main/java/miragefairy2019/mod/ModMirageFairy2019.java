@@ -11,7 +11,6 @@ import miragefairy2019.mod.modules.fairyweapon.ModuleFairyWeapon;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import miragefairy2019.mod.modules.sphere.ModuleSphere;
-import miragefairy2019.mod.modules.totem.ModuleTotem;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -39,7 +38,6 @@ public class ModMirageFairy2019
 		ModuleMirageFlower.init(erMod);
 		ModuleOre.init(erMod);
 		ModuleSphere.init(erMod);
-		ModuleTotem.init(erMod);
 
 		erMod.initCreativeTab.trigger().run();
 
