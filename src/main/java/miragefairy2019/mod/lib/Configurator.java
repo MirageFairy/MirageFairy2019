@@ -44,7 +44,7 @@ public final class Configurator<T> implements Supplier<T>
 		};
 	}
 
-	public static <I extends Item> Function<Configurator<I>, Monad<Configurator<I>>> onCreateItemStack(Consumer<I> consumer)
+	public static <I> Function<Configurator<I>, Monad<Configurator<I>>> onCreateItemStack(Consumer<I> consumer)
 	{
 		return c -> {
 			c.erMod.createItemStack.register(ic -> consumer.accept(c.get()));
