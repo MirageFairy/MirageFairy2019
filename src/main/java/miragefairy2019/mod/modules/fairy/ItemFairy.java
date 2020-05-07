@@ -1,13 +1,15 @@
 package miragefairy2019.mod.modules.fairy;
 
-import static miragefairy2019.mod.modules.fairy.EnumManaType.*;
+import static miragefairy2019.mod.api.fairy.ManaTypes.*;
 import static net.minecraft.util.text.TextFormatting.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
+import miragefairy2019.mod.api.fairy.IManaType;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.multi.ItemMulti;
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase;
@@ -64,15 +66,15 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 		}
 
 		if (!flag.isAdvanced()) {
-			tooltip.add("    " + format1(shine, variant.type.manaSet.shine));
-			tooltip.add("" + format1(fire, variant.type.manaSet.fire) + "    " + format1(wind, variant.type.manaSet.wind));
-			tooltip.add("" + format1(gaia, variant.type.manaSet.gaia) + "    " + format1(aqua, variant.type.manaSet.aqua));
-			tooltip.add("    " + format1(dark, variant.type.manaSet.dark));
+			tooltip.add("    " + f1(shine, variant));
+			tooltip.add("" + f1(fire, variant) + "    " + f1(wind, variant));
+			tooltip.add("" + f1(gaia, variant) + "    " + f1(aqua, variant));
+			tooltip.add("    " + f1(dark, variant));
 		} else {
-			tooltip.add("        " + shine.textColor + "Shine:" + format2(shine, variant.type.manaSet.shine));
-			tooltip.add(fire.textColor + "Fire:" + format2(fire, variant.type.manaSet.fire) + "    " + wind.textColor + "Wind:" + format2(wind, variant.type.manaSet.wind));
-			tooltip.add(gaia.textColor + "Gaia:" + format2(gaia, variant.type.manaSet.gaia) + "    " + aqua.textColor + "Aqua:" + format2(aqua, variant.type.manaSet.aqua));
-			tooltip.add("        " + dark.textColor + "Dark:" + format2(dark, variant.type.manaSet.dark));
+			tooltip.add("        " + f2(shine, variant));
+			tooltip.add("" + f2(fire, variant) + "    " + f2(wind, variant));
+			tooltip.add("" + f2(gaia, variant) + "    " + f2(aqua, variant));
+			tooltip.add("        " + f2(dark, variant));
 		}
 
 		if (!flag.isAdvanced()) {
@@ -145,14 +147,14 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 		return value2;
 	}
 
-	private String format1(EnumManaType manaType, double value)
+	private String f1(Supplier<IManaType> sManaType, VariantFairy variant)
 	{
-		return "" + manaType.textColor + String.format("%4d", format(value));
+		return "" + sManaType.get().getTextColor() + String.format("%4d", format(variant.type.manaSet.getMana(sManaType.get())));
 	}
 
-	private String format2(EnumManaType manaType, double value)
+	private String f2(Supplier<IManaType> sManaType, VariantFairy variant)
 	{
-		return "" + manaType.textColor + String.format("%.3f", value);
+		return "" + sManaType.get().getTextColor() + sManaType.get().getLocalizedName() + ":" + String.format("%.3f", variant.type.manaSet.getMana(sManaType.get()));
 	}
 
 }
