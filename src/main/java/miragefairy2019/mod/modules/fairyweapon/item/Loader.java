@@ -20,11 +20,11 @@ import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class Loader
@@ -250,33 +250,30 @@ public class Loader
 
 	private static <I extends Item> Monad<Configurator<I>> fairyWeapon(EventRegistryMod erMod, Supplier<I> sItem, String registryName, String unlocalizedName)
 	{
-		Configurator<I> c = new Configurator<>(erMod);
+		return item(erMod, sItem, new ResourceLocation(ModMirageFairy2019.MODID, registryName), unlocalizedName)
+			.bind(setCreativeTab(ApiMain.creativeTab()))
+			.bind(c -> {
 
-		c.erMod.registerItem.register(b -> {
-			I item = sItem.get();
-			item.setRegistryName(ModMirageFairy2019.MODID, registryName);
-			item.setUnlocalizedName(unlocalizedName);
-			item.setCreativeTab(ApiMain.creativeTab());
-			ForgeRegistries.ITEMS.register(item);
-			if (ApiMain.side().isClient()) {
+				c.erMod.registerItem.register(b -> {
+					if (ApiMain.side().isClient()) {
 
-				// 搭乗妖精の描画
-				MinecraftForge.EVENT_BUS.register(new Object() {
-					@SubscribeEvent
-					public void accept(ModelBakeEvent event)
-					{
-						IBakedModel bakedModel = event.getModelRegistry().getObject(new ModelResourceLocation(item.getRegistryName(), null));
-						event.getModelRegistry().putObject(new ModelResourceLocation(item.getRegistryName(), null), new BakedModelBuiltinWrapper(bakedModel));
+						// 搭乗妖精の描画
+						MinecraftForge.EVENT_BUS.register(new Object() {
+							@SubscribeEvent
+							public void accept(ModelBakeEvent event)
+							{
+								IBakedModel bakedModel = event.getModelRegistry().getObject(new ModelResourceLocation(c.get().getRegistryName(), null));
+								event.getModelRegistry().putObject(new ModelResourceLocation(c.get().getRegistryName(), null), new BakedModelBuiltinWrapper(bakedModel));
+							}
+						});
+
+						ModelLoader.setCustomModelResourceLocation(c.get(), 0, new ModelResourceLocation(c.get().getRegistryName(), null));
+
 					}
 				});
 
-				ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
-
-			}
-			c.set(item);
-		});
-
-		return Monad.of(c);
+				return Monad.of(c);
+			});
 	}
 
 	private static <I extends Item> Function<Configurator<I>, Monad<Configurator<I>>> addOreName(String oreName)
