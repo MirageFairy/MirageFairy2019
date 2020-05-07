@@ -383,6 +383,8 @@ public class ModuleFairyWeapon
 	{
 		Items.getConfigurators().forEach(p -> p.init(erMod));
 		erMod.init.register(e -> {
+
+			// LootingLevel付きのダメージソースが来たら適用するリスナ登録
 			MinecraftForge.EVENT_BUS.register(new Object() {
 				@SubscribeEvent
 				public void accept(LootingLevelEvent event)
@@ -392,6 +394,7 @@ public class ModuleFairyWeapon
 					}
 				}
 			});
+
 		});
 		erMod.addRecipe.register(() -> {
 
