@@ -140,6 +140,9 @@ public class ModuleOre
 				OreDictionary.registerOre(variant.oreName, new ItemStack(itemBlockMaterials1, 1, variant.metadata));
 			}
 			OreDictionary.registerOre("container1000Water", Items.WATER_BUCKET);
+			OreDictionary.registerOre("container1000Lava", Items.LAVA_BUCKET);
+			OreDictionary.registerOre("wool", new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
+			OreDictionary.registerOre("ice", new ItemStack(Blocks.ICE));
 		});
 		erMod.addRecipe.register(() -> {
 
