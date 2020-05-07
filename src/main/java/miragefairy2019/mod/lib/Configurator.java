@@ -1,23 +1,19 @@
 package miragefairy2019.mod.lib;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
+
+import net.minecraft.item.Item;
 
 public final class Configurator<T> implements Supplier<T>
 {
 
-	private List<Consumer<EventRegistryMod>> listeners = new ArrayList<>();
+	public final EventRegistryMod erMod;
 
-	public void hook(Consumer<EventRegistryMod> listener)
+	public Configurator(EventRegistryMod erMod)
 	{
-		listeners.add(listener);
-	}
-
-	public void init(EventRegistryMod erMod)
-	{
-		listeners.forEach(l -> l.accept(erMod));
+		this.erMod = erMod;
 	}
 
 	//
@@ -33,6 +29,24 @@ public final class Configurator<T> implements Supplier<T>
 	public T get()
 	{
 		return t;
+	}
+
+	//
+
+	public static <I> Function<Configurator<I>, Monad<Configurator<I>>> onRegisterItem(Consumer<I> consumer)
+	{
+		return c -> {
+			c.erMod.registerItem.register(ic -> consumer.accept(c.get()));
+			return Monad.of(c);
+		};
+	}
+
+	public static <I extends Item> Function<Configurator<I>, Monad<Configurator<I>>> onCreateItemStack(Consumer<I> consumer)
+	{
+		return c -> {
+			c.erMod.createItemStack.register(ic -> consumer.accept(c.get()));
+			return Monad.of(c);
+		};
 	}
 
 }
