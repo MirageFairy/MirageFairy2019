@@ -10,9 +10,9 @@ import java.util.function.Supplier;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.api.fairy.IManaType;
+import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.multi.ItemMulti;
-import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.Minecraft;
@@ -105,14 +105,14 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 		if (player != null) {
 			ItemStack itemStackFairyWeapon;
 			itemStackFairyWeapon = player.getHeldItem(EnumHand.MAIN_HAND);
-			if (itemStackFairyWeapon.getItem() instanceof ItemFairyWeaponBase) {
+			if (itemStackFairyWeapon.getItem() instanceof IItemFairyWeapon) {
 				tooltip.add("" + BLUE + BOLD + "--- Status of " + itemStackFairyWeapon.getDisplayName() + " ---");
-				((ItemFairyWeaponBase) itemStackFairyWeapon.getItem()).addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag);
+				((IItemFairyWeapon) itemStackFairyWeapon.getItem()).addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag);
 			}
 			itemStackFairyWeapon = player.getHeldItem(EnumHand.OFF_HAND);
-			if (itemStackFairyWeapon.getItem() instanceof ItemFairyWeaponBase) {
+			if (itemStackFairyWeapon.getItem() instanceof IItemFairyWeapon) {
 				tooltip.add("" + BLUE + BOLD + "--- Status of " + itemStackFairyWeapon.getDisplayName() + " ---");
-				((ItemFairyWeaponBase) itemStackFairyWeapon.getItem()).addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag);
+				((IItemFairyWeapon) itemStackFairyWeapon.getItem()).addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag);
 			}
 		}
 

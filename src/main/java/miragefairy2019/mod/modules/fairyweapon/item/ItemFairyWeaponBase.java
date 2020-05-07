@@ -14,6 +14,7 @@ import miragefairy2019.mod.api.composite.IItemComposite;
 import miragefairy2019.mod.api.fairy.IComponentAbilityType;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
+import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon;
 import miragefairy2019.mod.api.fairyweapon.recipe.ICombiningItem;
 import miragefairy2019.mod.api.fairyweapon.recipe.ISphereReplacementItem;
 import miragefairy2019.mod.api.main.ApiMain;
@@ -54,7 +55,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreIngredient;
 
-public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, IItemComposite, ICombiningItem
+public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, IItemComposite, ICombiningItem, IItemFairyWeapon
 {
 
 	public IComposite composite = ApiComposite.composite();
@@ -232,6 +233,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
