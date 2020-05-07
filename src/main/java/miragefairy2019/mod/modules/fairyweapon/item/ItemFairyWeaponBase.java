@@ -492,7 +492,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	//
 
 	@Override
-	public boolean canRepair(ItemStack itemStack)
+	public boolean canSphereReplace(ItemStack itemStack)
 	{
 		return true;
 	}
@@ -514,7 +514,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	}
 
 	@Override
-	public ItemStack getRepairedItem(ItemStack itemStack)
+	public ItemStack getSphereReplacedItem(ItemStack itemStack)
 	{
 		itemStack = itemStack.copy();
 		itemStack.setItemDamage(0);

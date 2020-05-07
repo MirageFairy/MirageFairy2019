@@ -7,10 +7,10 @@ import net.minecraft.util.NonNullList;
 public interface ISphereReplacementItem
 {
 
-	public boolean canRepair(ItemStack itemStack);
+	public boolean canSphereReplace(ItemStack itemStack);
 
 	public NonNullList<Ingredient> getRepairmentSpheres(ItemStack itemStack);
 
-	public ItemStack getRepairedItem(ItemStack itemStack);
+	public ItemStack getSphereReplacedItem(ItemStack itemStack);
 
 }

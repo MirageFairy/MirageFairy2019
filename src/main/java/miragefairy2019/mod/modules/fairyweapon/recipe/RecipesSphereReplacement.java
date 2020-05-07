@@ -48,7 +48,7 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 					ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
 					Item item = itemStack.getItem();
 					if (item instanceof ISphereReplacementItem) {
-						if (((ISphereReplacementItem) item).canRepair(itemStack)) {
+						if (((ISphereReplacementItem) item).canSphereReplace(itemStack)) {
 
 							result.itemStackSphereReplacement = itemStack;
 							result.sphereReplacementItem = (ISphereReplacementItem) item;
@@ -113,7 +113,7 @@ public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> 
 	{
 		MatchResult nResult = match(inventoryCrafting).orElse(null);
 		if (nResult == null) return ItemStack.EMPTY;
-		return nResult.sphereReplacementItem.getRepairedItem(nResult.itemStackSphereReplacement);
+		return nResult.sphereReplacementItem.getSphereReplacedItem(nResult.itemStackSphereReplacement);
 	}
 
 	@Override
