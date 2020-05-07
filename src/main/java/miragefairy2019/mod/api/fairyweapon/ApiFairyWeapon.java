@@ -7,8 +7,8 @@ public class ApiFairyWeapon
 
 	public static void init(EventRegistryMod erMod)
 	{
-		miragefairy2019.mod.modules.fairyweapon.ModuleFairyWeapon.init(erMod);
 		miragefairy2019.mod.modules.fairyweapon.item.Loader.init(erMod);
+		miragefairy2019.mod.modules.fairyweapon.damagesource.Loader.init(erMod);
 		miragefairy2019.mod.modules.fairyweapon.recipe.Loader.init(erMod);
 	}
 

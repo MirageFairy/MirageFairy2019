@@ -1,11 +1,12 @@
-package miragefairy2019.mod.modules.fairyweapon;
+package miragefairy2019.mod.modules.fairyweapon.damagesource;
 
+import miragefairy2019.mod.api.fairyweapon.damagesource.IDamageSourceLooting;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class ModuleFairyWeapon
+public class Loader
 {
 
 	public static void init(EventRegistryMod erMod)
