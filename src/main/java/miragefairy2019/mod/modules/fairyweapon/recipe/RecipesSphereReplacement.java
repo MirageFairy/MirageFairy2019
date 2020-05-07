@@ -3,6 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.recipe;
 import java.util.Optional;
 
 import miragefairy2019.mod.ModMirageFairy2019;
+import miragefairy2019.mod.api.fairyweapon.recipe.ISphereReplacementItem;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

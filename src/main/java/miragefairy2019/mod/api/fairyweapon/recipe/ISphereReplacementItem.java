@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.recipe;
+package miragefairy2019.mod.api.fairyweapon.recipe;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
