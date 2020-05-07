@@ -5,34 +5,34 @@ import mirrg.boron.util.suppliterator.ISuppliterator;
 public class ApiComposite
 {
 
-	public static IComposite createComposite()
+	public static IComposite composite()
 	{
 		return new miragefairy2019.mod.modules.composite.Composite();
 	}
 
-	public static IComposite createComposite(ISuppliterator<IComponentInstance> components)
+	public static IComposite composite(ISuppliterator<IComponentInstance> components)
 	{
 		return new miragefairy2019.mod.modules.composite.Composite(components);
 	}
 
-	public static IComponentInstance createComponentInstanceNano(IComponent component, long nanoAmount)
+	public static IComponentInstance instanceNano(IComponent component, long nanoAmount)
 	{
 		return new miragefairy2019.mod.modules.composite.ComponentInstance(component, nanoAmount);
 	}
 
-	public static IComponentInstance createComponentInstance(IComponent component)
+	public static IComponentInstance instance(IComponent component)
 	{
-		return createComponentInstanceNano(component, 1_000_000_000L);
+		return instanceNano(component, 1_000_000_000L);
 	}
 
-	public static IComponentInstance createComponentInstance(IComponent component, int amount)
+	public static IComponentInstance instance(IComponent component, int amount)
 	{
-		return createComponentInstanceNano(component, amount * 1_000_000_000L);
+		return instanceNano(component, amount * 1_000_000_000L);
 	}
 
-	public static IComponentInstance createComponentInstance(IComponent component, double amount)
+	public static IComponentInstance instance(IComponent component, double amount)
 	{
-		return createComponentInstanceNano(component, (long) (amount * 1_000_000_000.0));
+		return instanceNano(component, (long) (amount * 1_000_000_000.0));
 	}
 
 }

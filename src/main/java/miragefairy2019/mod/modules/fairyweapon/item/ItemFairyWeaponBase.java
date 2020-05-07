@@ -57,7 +57,7 @@ import net.minecraftforge.oredict.OreIngredient;
 public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, IItemComposite, ICombiningItem
 {
 
-	public IComposite composite = ApiComposite.createComposite();
+	public IComposite composite = ApiComposite.composite();
 
 	public void addComponent(IComponentInstance componentInstance)
 	{
