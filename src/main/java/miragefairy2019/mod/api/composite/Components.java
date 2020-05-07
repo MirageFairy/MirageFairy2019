@@ -20,5 +20,6 @@ public class Components
 	public static final Supplier<IComponent> emerald = () -> miragefairy2019.mod.modules.composite.Component.emerald;
 	public static final Supplier<IComponent> pyrope = () -> miragefairy2019.mod.modules.composite.Component.pyrope;
 	public static final Supplier<IComponent> smithsonite = () -> miragefairy2019.mod.modules.composite.Component.smithsonite;
+	public static final Supplier<IComponent> saltpeter = () -> miragefairy2019.mod.modules.composite.Component.saltpeter;
 
 }
