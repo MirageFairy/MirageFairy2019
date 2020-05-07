@@ -9,6 +9,7 @@ public class ApiFairyWeapon
 	{
 		miragefairy2019.mod.modules.fairyweapon.ModuleFairyWeapon.init(erMod);
 		miragefairy2019.mod.modules.fairyweapon.item.Loader.init(erMod);
+		miragefairy2019.mod.modules.fairyweapon.recipe.Loader.init(erMod);
 	}
 
 }

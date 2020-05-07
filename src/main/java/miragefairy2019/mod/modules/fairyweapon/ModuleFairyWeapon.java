@@ -1,14 +1,9 @@
 package miragefairy2019.mod.modules.fairyweapon;
 
 import miragefairy2019.mod.lib.EventRegistryMod;
-import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesCombining;
-import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesSphereReplacement;
-import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesUncombining;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModuleFairyWeapon
 {
@@ -27,16 +22,6 @@ public class ModuleFairyWeapon
 					}
 				}
 			});
-
-		});
-		erMod.addRecipe.register(() -> {
-
-			// スフィア交換レシピ
-			GameRegistry.findRegistry(IRecipe.class).register(new RecipesSphereReplacement());
-
-			// 妖精搭乗レシピ
-			GameRegistry.findRegistry(IRecipe.class).register(new RecipesCombining());
-			GameRegistry.findRegistry(IRecipe.class).register(new RecipesUncombining());
 
 		});
 	}
