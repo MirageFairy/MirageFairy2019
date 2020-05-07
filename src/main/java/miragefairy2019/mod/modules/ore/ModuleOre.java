@@ -1,5 +1,9 @@
 package miragefairy2019.mod.modules.ore;
 
+import static miragefairy2019.mod.api.composite.ApiComposite.*;
+import static miragefairy2019.mod.api.composite.Components.*;
+import static miragefairy2019.mod.lib.Configurator.*;
+
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -7,9 +11,9 @@ import java.util.Set;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
-import miragefairy2019.mod.lib.multi.ItemMultiMaterialContained;
-import miragefairy2019.mod.lib.multi.ItemVariantMaterialContained;
-import mirrg.boron.util.struct.Tuple;
+import miragefairy2019.mod.lib.Monad;
+import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
+import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -37,25 +41,78 @@ public class ModuleOre
 
 	public static ItemBlockOre<EnumVariantOre1> itemBlockOre1;
 	public static ItemBlockMaterials<EnumVariantMaterials1> itemBlockMaterials1;
-	public static ItemMultiMaterialContained<ItemVariantMaterialContained> itemMaterials;
-
-	public static ItemVariantMaterialContained variantGemFluorite;
-	public static ItemVariantMaterialContained variantGemApatite;
-	public static ItemVariantMaterialContained variantGemSulfur;
-	public static ItemVariantMaterialContained variantDustMiragium;
-	public static ItemVariantMaterialContained variantDustTinyMiragium;
-	public static ItemVariantMaterialContained variantIngotMiragium;
-	public static ItemVariantMaterialContained variantGemCinnabar;
-	public static ItemVariantMaterialContained variantGemMoonstone;
-	public static ItemVariantMaterialContained variantGemMagnetite;
-	public static ItemVariantMaterialContained variantGemSaltpeter;
-	public static ItemVariantMaterialContained variantGemPyrope;
-	public static ItemVariantMaterialContained variantGemSmithsonite;
-	public static ItemVariantMaterialContained variantRodMiragium;
-	public static ItemVariantMaterialContained variantNuggetMiragium;
 
 	public static void init(EventRegistryMod erMod)
 	{
+
+		// マテリアル
+		item(erMod, ItemMultiMaterial<ItemVariantMaterial>::new, new ResourceLocation(ModMirageFairy2019.MODID, "materials"), "materials")
+			.bind(setCreativeTab(() -> ApiMain.creativeTab()))
+			.bind(c -> {
+
+				itemVariant(c.erMod, c, 0, () -> new ItemVariantMaterial("apatite_gem", "gemApatite"))
+					.bind(addComponent(instance(apatite.get(), 1.000)))
+					.bind(addOreName("gemApatite"));
+
+				itemVariant(c.erMod, c, 1, () -> new ItemVariantMaterial("fluorite_gem", "gemFluorite"))
+					.bind(addComponent(instance(fluorite.get(), 1.000)))
+					.bind(addOreName("gemFluorite"));
+
+				itemVariant(c.erMod, c, 2, () -> new ItemVariantMaterial("sulfur_gem", "gemSulfur"))
+					.bind(addComponent(instance(sulfur.get(), 1.000)))
+					.bind(addOreName("gemSulfur"));
+
+				itemVariant(c.erMod, c, 3, () -> new ItemVariantMaterial("miragium_dust", "dustMiragium"))
+					.bind(addComponent(instance(miragium.get(), 1.000)))
+					.bind(addOreName("dustMiragium"));
+
+				itemVariant(c.erMod, c, 4, () -> new ItemVariantMaterial("miragium_tiny_dust", "dustTinyMiragium"))
+					.bind(addComponent(instance(miragium.get(), 0.111)))
+					.bind(addOreName("dustTinyMiragium"));
+
+				itemVariant(c.erMod, c, 5, () -> new ItemVariantMaterial("miragium_ingot", "ingotMiragium"))
+					.bind(addComponent(instance(miragium.get(), 1.000)))
+					.bind(addOreName("ingotMiragium"));
+
+				itemVariant(c.erMod, c, 6, () -> new ItemVariantMaterial("cinnabar_gem", "gemCinnabar"))
+					.bind(addComponent(instance(cinnabar.get(), 1.000)))
+					.bind(addOreName("gemCinnabar"));
+
+				itemVariant(c.erMod, c, 7, () -> new ItemVariantMaterial("moonstone_gem", "gemMoonstone"))
+					.bind(addComponent(instance(moonstone.get(), 1.000)))
+					.bind(addOreName("gemMoonstone"));
+
+				itemVariant(c.erMod, c, 8, () -> new ItemVariantMaterial("magnetite_gem", "gemMagnetite"))
+					.bind(addComponent(instance(magnetite.get(), 1.000)))
+					.bind(addOreName("gemMagnetite"));
+
+				itemVariant(c.erMod, c, 9, () -> new ItemVariantMaterial("saltpeter_gem", "gemSaltpeter"))
+					.bind(addComponent(instance(saltpeter.get(), 1.000)))
+					.bind(addOreName("gemSaltpeter"));
+
+				itemVariant(c.erMod, c, 10, () -> new ItemVariantMaterial("pyrope_gem", "gemPyrope"))
+					.bind(addComponent(instance(pyrope.get(), 1.000)))
+					.bind(addOreName("gemPyrope"));
+
+				itemVariant(c.erMod, c, 11, () -> new ItemVariantMaterial("smithsonite_gem", "gemSmithsonite"))
+					.bind(addComponent(instance(smithsonite.get(), 1.000)))
+					.bind(addOreName("gemSmithsonite"));
+
+				itemVariant(c.erMod, c, 12, () -> new ItemVariantMaterial("miragium_rod", "rodMiragium"))
+					.bind(addComponent(instance(miragium.get(), 0.500)))
+					.bind(addOreName("rodMiragium"));
+
+				itemVariant(c.erMod, c, 13, () -> new ItemVariantMaterial("miragium_nugget", "nuggetMiragium"))
+					.bind(addComponent(instance(miragium.get(), 0.111)))
+					.bind(addOreName("nuggetMiragium"));
+
+				erMod.registerItem.register(b -> {
+					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
+				});
+
+				return Monad.of(c);
+			});
+
 		erMod.registerBlock.register(b -> {
 
 			// 鉱石の種
@@ -109,33 +166,8 @@ public class ModuleOre
 				}
 			}
 
-			// マテリアル
-			itemMaterials = new ItemMultiMaterialContained<>();
-			itemMaterials.setRegistryName(ModMirageFairy2019.MODID, "materials");
-			itemMaterials.setUnlocalizedName("materials");
-			itemMaterials.setCreativeTab(ApiMain.creativeTab());
-			itemMaterials.registerVariant(0, variantGemApatite = new ItemVariantMaterialContained("apatite_gem", "gemApatite", "Apatite(1.000)"));
-			itemMaterials.registerVariant(1, variantGemFluorite = new ItemVariantMaterialContained("fluorite_gem", "gemFluorite", "Fluorite(1.000)"));
-			itemMaterials.registerVariant(2, variantGemSulfur = new ItemVariantMaterialContained("sulfur_gem", "gemSulfur", "Sulfur(1.000)"));
-			itemMaterials.registerVariant(3, variantDustMiragium = new ItemVariantMaterialContained("miragium_dust", "dustMiragium", "Miragium(1.000)"));
-			itemMaterials.registerVariant(4, variantDustTinyMiragium = new ItemVariantMaterialContained("miragium_tiny_dust", "dustTinyMiragium", "Miragium(0.111)"));
-			itemMaterials.registerVariant(5, variantIngotMiragium = new ItemVariantMaterialContained("miragium_ingot", "ingotMiragium", "Miragium(1.000)"));
-			itemMaterials.registerVariant(6, variantGemCinnabar = new ItemVariantMaterialContained("cinnabar_gem", "gemCinnabar", "Cinnabar(1.000)"));
-			itemMaterials.registerVariant(7, variantGemMoonstone = new ItemVariantMaterialContained("moonstone_gem", "gemMoonstone", "Moonstone(1.000)"));
-			itemMaterials.registerVariant(8, variantGemMagnetite = new ItemVariantMaterialContained("magnetite_gem", "gemMagnetite", "Magnetite(1.000)"));
-			itemMaterials.registerVariant(9, variantGemSaltpeter = new ItemVariantMaterialContained("saltpeter_gem", "gemSaltpeter", "Saltpeter(1.000)"));
-			itemMaterials.registerVariant(10, variantGemPyrope = new ItemVariantMaterialContained("pyrope_gem", "gemPyrope", "Pyrope(1.000)"));
-			itemMaterials.registerVariant(11, variantGemSmithsonite = new ItemVariantMaterialContained("smithsonite_gem", "gemSmithsonite", "Smithsonite(1.000)"));
-			itemMaterials.registerVariant(12, variantRodMiragium = new ItemVariantMaterialContained("miragium_rod", "rodMiragium", "Miragium(0.500)"));
-			itemMaterials.registerVariant(13, variantNuggetMiragium = new ItemVariantMaterialContained("miragium_nugget", "nuggetMiragium", "Miragium(0.111)"));
-			ForgeRegistries.ITEMS.register(itemMaterials);
-			if (ApiMain.side().isClient()) itemMaterials.setCustomModelResourceLocations();
-
 		});
 		erMod.createItemStack.register(ic -> {
-			for (Tuple<Integer, ItemVariantMaterialContained> tuple : itemMaterials.getVariants()) {
-				OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
-			}
 			for (EnumVariantMaterials1 variant : EnumVariantMaterials1.values()) {
 				OreDictionary.registerOre(variant.oreName, new ItemStack(itemBlockMaterials1, 1, variant.metadata));
 			}

@@ -4,10 +4,15 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import miragefairy2019.mod.api.composite.IComponentInstance;
+import miragefairy2019.mod.lib.multi.ItemMulti;
+import miragefairy2019.mod.lib.multi.ItemVariant;
+import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.oredict.OreDictionary;
 
 public final class Configurator<T> implements Supplier<T>
 {
@@ -72,6 +77,32 @@ public final class Configurator<T> implements Supplier<T>
 	{
 		return c -> Monad.of(c)
 			.bind(onRegisterItem(i -> i.setCreativeTab(sCreativeTab.get())));
+	}
+
+	//
+
+	public static <I extends ItemMulti<V>, V extends ItemVariant> Monad<Configurator<V>> itemVariant(EventRegistryMod erMod, Configurator<I> cItem, int metadata, Supplier<V> sItemVariant)
+	{
+		Configurator<V> c = new Configurator<>(erMod);
+
+		c.erMod.registerItem.register(ic -> {
+			c.set(sItemVariant.get());
+			cItem.get().registerVariant(metadata, c.get());
+		});
+
+		return Monad.of(c);
+	}
+
+	public static <V extends ItemVariantMaterial> Function<Configurator<V>, Monad<Configurator<V>>> addOreName(String oreName)
+	{
+		return c -> Monad.of(c)
+			.bind(onCreateItemStack(v -> OreDictionary.registerOre(oreName, v.createItemStack())));
+	}
+
+	public static <V extends ItemVariantMaterial> Function<Configurator<V>, Monad<Configurator<V>>> addComponent(IComponentInstance componentInstance)
+	{
+		return c -> Monad.of(c)
+			.bind(onRegisterItem(v -> v.addComponent(componentInstance)));
 	}
 
 }

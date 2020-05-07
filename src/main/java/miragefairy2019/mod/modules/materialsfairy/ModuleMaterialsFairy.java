@@ -1,17 +1,16 @@
 package miragefairy2019.mod.modules.materialsfairy;
 
+import static miragefairy2019.mod.api.composite.ApiComposite.*;
+import static miragefairy2019.mod.api.composite.Components.*;
 import static miragefairy2019.mod.lib.Configurator.*;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
-import miragefairy2019.mod.lib.multi.ItemMultiMaterialContained;
-import miragefairy2019.mod.lib.multi.ItemVariantMaterialContained;
-import mirrg.boron.util.struct.Tuple;
+import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
+import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleMaterialsFairy
 {
@@ -20,35 +19,46 @@ public class ModuleMaterialsFairy
 	{
 
 		// マテリアル
-		item(erMod, ItemMultiMaterialContained<ItemVariantMaterialContained>::new, new ResourceLocation(ModMirageFairy2019.MODID, "fairy_materials"), "materialsFairy")
-			.bind(setCreativeTab(ApiMain.creativeTab()))
+		item(erMod, ItemMultiMaterial<ItemVariantMaterial>::new, new ResourceLocation(ModMirageFairy2019.MODID, "fairy_materials"), "materialsFairy")
+			.bind(setCreativeTab(() -> ApiMain.creativeTab()))
 			.bind(c -> {
 
+				itemVariant(c.erMod, c, 0, () -> new ItemVariantMaterial("shine_mana_rod", "manaRodShine"))
+					.bind(addComponent(instance(miragium.get(), 0.5)))
+					.bind(addComponent(instance(moonstone.get(), 0.5)))
+					.bind(addOreName("mirageFairy2019ManaRodShine"));
+
+				itemVariant(c.erMod, c, 1, () -> new ItemVariantMaterial("fire_mana_rod", "manaRodFire"))
+					.bind(addComponent(instance(miragium.get(), 0.5)))
+					.bind(addComponent(instance(cinnabar.get(), 0.5)))
+					.bind(addOreName("mirageFairy2019ManaRodFire"));
+
+				itemVariant(c.erMod, c, 2, () -> new ItemVariantMaterial("wind_mana_rod", "manaRodWind"))
+					.bind(addComponent(instance(miragium.get(), 0.5)))
+					.bind(addComponent(instance(fluorite.get(), 0.5)))
+					.bind(addOreName("mirageFairy2019ManaRodWind"));
+
+				itemVariant(c.erMod, c, 3, () -> new ItemVariantMaterial("gaia_mana_rod", "manaRodGaia"))
+					.bind(addComponent(instance(miragium.get(), 0.5)))
+					.bind(addComponent(instance(sulfur.get(), 0.5)))
+					.bind(addOreName("mirageFairy2019ManaRodGaia"));
+
+				itemVariant(c.erMod, c, 4, () -> new ItemVariantMaterial("aqua_mana_rod", "manaRodAqua"))
+					.bind(addComponent(instance(miragium.get(), 0.5)))
+					.bind(addComponent(instance(apatite.get(), 0.5)))
+					.bind(addOreName("mirageFairy2019ManaRodAqua"));
+
+				itemVariant(c.erMod, c, 5, () -> new ItemVariantMaterial("dark_mana_rod", "manaRodDark"))
+					.bind(addComponent(instance(miragium.get(), 0.5)))
+					.bind(addComponent(instance(magnetite.get(), 0.5)))
+					.bind(addOreName("mirageFairy2019ManaRodDark"));
+
 				erMod.registerItem.register(b -> {
-
-					// TODO 素材リストにComponentを使用
-					c.get().registerVariant(0, new ItemVariantMaterialContained("shine_mana_rod", "manaRodShine", "mirageFairy2019ManaRodShine", "Miragium(0.500), Diamond(0.500)"));
-					c.get().registerVariant(1, new ItemVariantMaterialContained("fire_mana_rod", "manaRodFire", "mirageFairy2019ManaRodFire", "Miragium(0.500), Cinnabar(0.500)"));
-					c.get().registerVariant(2, new ItemVariantMaterialContained("wind_mana_rod", "manaRodWind", "mirageFairy2019ManaRodWind", "Miragium(0.500), Fluorite(0.500)"));
-					c.get().registerVariant(3, new ItemVariantMaterialContained("gaia_mana_rod", "manaRodGaia", "mirageFairy2019ManaRodGaia", "Miragium(0.500), Sulfur(0.500)"));
-					c.get().registerVariant(4, new ItemVariantMaterialContained("aqua_mana_rod", "manaRodAqua", "mirageFairy2019ManaRodAqua", "Miragium(0.500), Apatite(0.500)"));
-					c.get().registerVariant(5, new ItemVariantMaterialContained("dark_mana_rod", "manaRodDark", "mirageFairy2019ManaRodDark", "Miragium(0.500), Coal(0.500)"));
-					ForgeRegistries.ITEMS.register(c.get());
 					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
-
-				});
-				erMod.createItemStack.register(ic -> {
-
-					// 鉱石辞書登録
-					for (Tuple<Integer, ItemVariantMaterialContained> tuple : c.get().getVariants()) {
-						OreDictionary.registerOre(tuple.y.oreName, tuple.y.createItemStack());
-					}
-
 				});
 
 				return Monad.of(c);
-			})
-			.get();
+			});
 
 	}
 

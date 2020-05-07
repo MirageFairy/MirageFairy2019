@@ -1,63 +1,43 @@
 package miragefairy2019.mod.lib.multi;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import miragefairy2019.mod.api.composite.ApiComposite;
+import miragefairy2019.mod.api.composite.IComponentInstance;
+import miragefairy2019.mod.api.composite.IComposite;
 
 public class ItemVariantMaterial extends ItemVariant
 {
 
 	public final String registryName;
 	public final String unlocalizedName;
-	public final String oreName;
-
-	private int metadata = 0;
-	private Item item = null;
-
-	public ItemVariantMaterial(String registryName, String unlocalizedName, String oreName)
-	{
-		this.registryName = registryName;
-		this.unlocalizedName = unlocalizedName;
-		this.oreName = oreName;
-	}
 
 	public ItemVariantMaterial(String registryName, String unlocalizedName)
 	{
-		this(registryName, unlocalizedName, unlocalizedName);
-	}
-
-	public int getMetadata()
-	{
-		return metadata;
-	}
-
-	public void setMetadata(int metadata)
-	{
-		this.metadata = metadata;
-	}
-
-	public Item getItem()
-	{
-		return item;
-	}
-
-	public void setItem(Item item)
-	{
-		this.item = item;
-	}
-
-	public ItemStack createItemStack(int amount)
-	{
-		return new ItemStack(item, amount, metadata);
-	}
-
-	public ItemStack createItemStack()
-	{
-		return createItemStack(1);
+		this.registryName = registryName;
+		this.unlocalizedName = unlocalizedName;
 	}
 
 	public String getUnlocalizedName()
 	{
 		return "item." + unlocalizedName;
+	}
+
+	//
+
+	private IComposite composite = ApiComposite.composite();
+
+	public void addComponent(IComponentInstance componentInstance)
+	{
+		composite = composite.add(componentInstance);
+	}
+
+	public void addComponent(IComposite composite)
+	{
+		this.composite = this.composite.add(composite);
+	}
+
+	public IComposite getComposite()
+	{
+		return composite;
 	}
 
 }
