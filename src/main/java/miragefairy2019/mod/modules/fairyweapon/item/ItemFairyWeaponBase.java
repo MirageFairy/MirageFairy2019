@@ -58,20 +58,6 @@ import net.minecraftforge.oredict.OreIngredient;
 public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, IItemComposite, ICombiningItem, IItemFairyWeapon
 {
 
-	public IComposite composite = ApiComposite.composite();
-
-	public void addComponent(IComponentInstance componentInstance)
-	{
-		composite = composite.add(componentInstance);
-	}
-
-	public void addComponent(IComposite composite)
-	{
-		this.composite = this.composite.add(composite);
-	}
-
-	//
-
 	public ItemFairyWeaponBase()
 	{
 		setMaxStackSize(1);
@@ -524,6 +510,18 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	}
 
 	//
+
+	private IComposite composite = ApiComposite.composite();
+
+	public void addComponent(IComponentInstance componentInstance)
+	{
+		composite = composite.add(componentInstance);
+	}
+
+	public void addComponent(IComposite composite)
+	{
+		this.composite = this.composite.add(composite);
+	}
 
 	public IComposite getComposite()
 	{
