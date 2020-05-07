@@ -1,0 +1,18 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "glowstone_dust",
+	"ingredients": [
+		{
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandBreaking"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "glowstone"
+		}
+	],
+	"result": {
+		"item": "minecraft:glowstone_dust",
+		"count": 4
+	}
+}
