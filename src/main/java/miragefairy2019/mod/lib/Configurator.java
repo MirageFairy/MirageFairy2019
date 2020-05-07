@@ -68,10 +68,10 @@ public final class Configurator<T> implements Supplier<T>
 		return Monad.of(c);
 	}
 
-	public static <I extends Item> Function<Configurator<I>, Monad<Configurator<I>>> setCreativeTab(CreativeTabs creativeTab)
+	public static <I extends Item> Function<Configurator<I>, Monad<Configurator<I>>> setCreativeTab(Supplier<CreativeTabs> sCreativeTab)
 	{
 		return c -> Monad.of(c)
-			.bind(onRegisterItem(i -> i.setCreativeTab(creativeTab)));
+			.bind(onRegisterItem(i -> i.setCreativeTab(sCreativeTab.get())));
 	}
 
 }
