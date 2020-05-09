@@ -8,7 +8,6 @@ import java.util.List;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.damagesource.IDamageSourceLooting;
 import miragefairy2019.mod.api.main.ApiMain;
-import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.modules.fairyweapon.magic.IExecutorRightClick;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace;

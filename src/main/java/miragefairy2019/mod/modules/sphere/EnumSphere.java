@@ -7,7 +7,6 @@ import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.fairy.AbilityTypes;
 import miragefairy2019.mod.api.fairy.IAbilityType;
-import miragefairy2019.mod.lib.Utils;
 import mirrg.boron.util.UtilsString;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

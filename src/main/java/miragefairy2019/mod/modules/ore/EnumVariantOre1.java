@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -90,11 +89,13 @@ public enum EnumVariantOre1 implements IStringSerializable, IOreVariant
 		this.nGemProvider = nGemProvider;
 	}
 
+	@Override
 	public String toString()
 	{
 		return this.resourceName;
 	}
 
+	@Override
 	public String getName()
 	{
 		return this.resourceName;

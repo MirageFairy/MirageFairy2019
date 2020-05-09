@@ -59,6 +59,7 @@ public class BlockOreSeed extends Block
 
 	public static final PropertyEnum<EnumVariant> VARIANT = PropertyEnum.create("variant", EnumVariant.class);
 
+	@Override
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, VARIANT);
@@ -74,16 +75,19 @@ public class BlockOreSeed extends Block
 		return blockState.getValue(VARIANT);
 	}
 
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return getDefaultState().withProperty(VARIANT, EnumVariant.byMetadata(meta));
 	}
 
+	@Override
 	public int getMetaFromState(IBlockState blockState)
 	{
 		return blockState.getValue(VARIANT).metadata;
 	}
 
+	@Override
 	public void getSubBlocks(CreativeTabs creativeTab, NonNullList<ItemStack> itemStacks)
 	{
 		for (EnumVariant variant : EnumVariant.values()) {
@@ -286,11 +290,13 @@ public class BlockOreSeed extends Block
 			this.unlocalizedName = unlocalizedName;
 		}
 
+		@Override
 		public String toString()
 		{
 			return this.resourceName;
 		}
 
+		@Override
 		public String getName()
 		{
 			return this.resourceName;

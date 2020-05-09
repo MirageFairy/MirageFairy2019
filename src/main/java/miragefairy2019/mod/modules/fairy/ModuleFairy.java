@@ -9,7 +9,6 @@ import miragefairy2019.mod.api.fairy.IAbilityType;
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
-import miragefairy2019.mod.lib.Utils;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple;
@@ -301,6 +300,7 @@ public class ModuleFairy
 					return itemStackFairyMain;
 				}
 
+				@Override
 				@SideOnly(value = Side.CLIENT)
 				public void displayAllRelevantItems(NonNullList<ItemStack> itemStacks)
 				{

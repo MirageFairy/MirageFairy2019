@@ -120,6 +120,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isFull3D()
 	{
@@ -234,6 +235,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 
 	protected float destroySpeed = 1;
 
+	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state)
 	{
 		for (String type : getToolClasses(stack)) {

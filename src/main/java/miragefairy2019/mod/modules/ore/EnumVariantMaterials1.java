@@ -64,11 +64,13 @@ public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariantM
 		this.burnTime = burnTime;
 	}
 
+	@Override
 	public String toString()
 	{
 		return this.resourceName;
 	}
 
+	@Override
 	public String getName()
 	{
 		return this.resourceName;

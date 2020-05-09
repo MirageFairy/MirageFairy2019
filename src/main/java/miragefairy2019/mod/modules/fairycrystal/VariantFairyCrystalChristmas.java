@@ -134,6 +134,7 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal
 	private static final int capacityGlobal = 500;
 	private static final int capacityPlayer = 10;
 
+	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		ItemStack itemStackCrystal = player.getHeldItem(hand);

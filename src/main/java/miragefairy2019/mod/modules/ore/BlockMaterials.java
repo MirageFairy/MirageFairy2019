@@ -46,6 +46,7 @@ public class BlockMaterials<V extends IBlockVariantMaterials> extends Block
 
 	public static final PropertyInteger VARIANT = PropertyInteger.create("variant", 0, 15);
 
+	@Override
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, VARIANT);
@@ -56,16 +57,19 @@ public class BlockMaterials<V extends IBlockVariantMaterials> extends Block
 		return getDefaultState().withProperty(VARIANT, variant.getMetadata());
 	}
 
+	@Override
 	public IBlockState getStateFromMeta(int metadata)
 	{
 		return getDefaultState().withProperty(VARIANT, metadata);
 	}
 
+	@Override
 	public int getMetaFromState(IBlockState blockState)
 	{
 		return blockState.getValue(VARIANT);
 	}
 
+	@Override
 	public void getSubBlocks(CreativeTabs creativeTab, NonNullList<ItemStack> itemStacks)
 	{
 		for (V variant : variantList) {
