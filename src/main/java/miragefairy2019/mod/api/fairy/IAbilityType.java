@@ -1,6 +1,6 @@
 package miragefairy2019.mod.api.fairy;
 
-import miragefairy2019.mod.lib.UtilsMinecraft;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 
 public interface IAbilityType
@@ -13,11 +13,6 @@ public interface IAbilityType
 
 	public TextFormatting getTextColor();
 
-	public String getUnlocalizedName();
-
-	public default String getLocalizedName()
-	{
-		return UtilsMinecraft.translateToLocal(getUnlocalizedName());
-	}
+	public ITextComponent getDisplayName();
 
 }

@@ -1,6 +1,9 @@
 package miragefairy2019.mod.modules.fairy;
 
 import miragefairy2019.mod.api.fairy.IManaType;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 public enum EnumManaType implements IManaType
@@ -33,9 +36,10 @@ public enum EnumManaType implements IManaType
 	}
 
 	@Override
-	public String getUnlocalizedName()
+	public ITextComponent getDisplayName()
 	{
-		return "mirageFairy2019.mana." + getName() + ".name";
+		return new TextComponentTranslation("mirageFairy2019.mana." + getName() + ".name")
+			.setStyle(new Style().setColor(getTextColor()));
 	}
 
 }

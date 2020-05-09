@@ -17,7 +17,7 @@ public final class FairyWeaponStatusPropertySourceMana implements IFairyWeaponSt
 	@Override
 	public String getLocalizedName()
 	{
-		return manaType.getLocalizedName();
+		return manaType.getDisplayName().getFormattedText();
 	}
 
 	@Override

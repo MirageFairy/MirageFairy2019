@@ -28,7 +28,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -53,7 +52,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 			.sortedDouble(Tuple::getY)
 			.forEach(t -> {
 				textComponent.appendText(String.format("%7.2f%%  ", t.y * 100));
-				textComponent.appendSibling(new TextComponentTranslation(t.x.getUnlocalizedName()));
+				textComponent.appendSibling(t.x.getDisplayName());
 				textComponent.appendText("\n");
 			});
 		textComponent.appendText("====================");

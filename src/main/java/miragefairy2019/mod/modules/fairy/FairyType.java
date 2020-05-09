@@ -4,6 +4,8 @@ import miragefairy2019.mod.api.fairy.IAbilitySet;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IManaSet;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public final class FairyType implements IFairyType
 {
@@ -74,9 +76,10 @@ public final class FairyType implements IFairyType
 		return abilitySet;
 	}
 
-	public String getUnlocalizedName()
+	@Override
+	public ITextComponent getDisplayName()
 	{
-		return "mirageFairy2019.fairy." + name + ".name";
+		return new TextComponentTranslation("mirageFairy2019.fairy." + name + ".name");
 	}
 
 }

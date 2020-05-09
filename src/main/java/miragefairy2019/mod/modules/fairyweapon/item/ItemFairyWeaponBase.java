@@ -49,6 +49,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
@@ -196,7 +198,9 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		if (!itemStackFairy.isEmpty()) tooltip.add(AQUA + "Combined: " + itemStackFairy.getDisplayName());
 
 		// 素材
-		tooltip.add(YELLOW + "Contains: " + getComposite().getLocalizedString());
+		tooltip.add(new TextComponentString("Contains: ")
+			.setStyle(new Style().setColor(YELLOW))
+			.appendSibling(getComposite().getDisplayString()).getFormattedText());
 
 		// 妖精魔法ステータス
 		Tuple<ItemStack, IFairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player).flatMap(p -> findFairy(itemStack, p)).orElse(null);

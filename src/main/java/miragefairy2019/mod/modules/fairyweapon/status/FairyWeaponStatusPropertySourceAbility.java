@@ -17,7 +17,7 @@ public final class FairyWeaponStatusPropertySourceAbility implements IFairyWeapo
 	@Override
 	public String getLocalizedName()
 	{
-		return abilityType.getLocalizedName();
+		return abilityType.getDisplayName().getFormattedText();
 	}
 
 	@Override

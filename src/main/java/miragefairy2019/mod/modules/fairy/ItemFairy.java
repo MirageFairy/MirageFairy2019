@@ -14,12 +14,13 @@ import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.multi.ItemMulti;
 import mirrg.boron.util.UtilsString;
-import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -40,8 +41,8 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 	public String getItemStackDisplayName(ItemStack itemStack)
 	{
 		VariantFairy variant = getVariant(itemStack).orElse(null);
-		if (variant == null) return UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".name").trim();
-		return UtilsMinecraft.translateToLocalFormatted(getUnlocalizedName() + ".format", variant.type.getLocalizedName()).trim();
+		if (variant == null) return UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".name");
+		return UtilsMinecraft.translateToLocalFormatted(getUnlocalizedName() + ".format", variant.type.getDisplayName().getFormattedText());
 	}
 
 	@Override
@@ -84,20 +85,41 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 		}
 
 		if (!flag.isAdvanced()) {
-			String string = variant.type.abilitySet.getAbilities()
-				.sorted((a, b) -> -a.y.compareTo(b.y))
-				.map(tuple -> Tuple.of(tuple.x, format(tuple.y)))
-				.filter(tuple -> tuple.y >= 10)
-				.map(tuple -> "" + tuple.x.getTextColor() + tuple.x.getLocalizedName() + WHITE + "(" + tuple.y + ")")
-				.join(", ");
-			tooltip.add("" + GREEN + "Abilities: " + WHITE + string);
+			tooltip.add(new TextComponentString("")
+				.setStyle(new Style().setColor(GREEN))
+				.appendText("Abilities: ")
+				.appendSibling(variant.type.abilitySet.getAbilities()
+					.filter(tuple -> format(tuple.y) >= 10)
+					.sorted((a, b) -> -a.y.compareTo(b.y))
+					.map(t -> {
+						return new TextComponentString("")
+							.appendSibling(t.x.getDisplayName())
+							.appendText(String.format("(%s)", format(t.y)));
+					})
+					.sandwich(new TextComponentString(", "))
+					.apply(tcs -> {
+						TextComponentString textComponent = new TextComponentString("");
+						tcs.forEach(textComponent::appendSibling);
+						return textComponent;
+					})).getFormattedText());
 		} else {
-			String string = variant.type.abilitySet.getAbilities()
-				.sorted((a, b) -> -a.y.compareTo(b.y))
-				.filter(tuple -> format(tuple.y) >= 10)
-				.map(tuple -> "" + tuple.x.getTextColor() + tuple.x.getLocalizedName() + WHITE + "(" + String.format("%.3f", tuple.y) + ")")
-				.join(", ");
-			tooltip.add("" + GREEN + "Abilities: " + WHITE + string);
+			tooltip.add(new TextComponentString("")
+				.setStyle(new Style().setColor(GREEN))
+				.appendText("Abilities: ")
+				.appendSibling(variant.type.abilitySet.getAbilities()
+					.filter(tuple -> format(tuple.y) >= 10)
+					.sorted((a, b) -> -a.y.compareTo(b.y))
+					.map(t -> {
+						return new TextComponentString("")
+							.appendSibling(t.x.getDisplayName())
+							.appendText(String.format("(%.3f)", t.y));
+					})
+					.sandwich(new TextComponentString(", "))
+					.apply(tcs -> {
+						TextComponentString textComponent = new TextComponentString("");
+						tcs.forEach(textComponent::appendSibling);
+						return textComponent;
+					})).getFormattedText());
 		}
 
 		// 妖精武器のステータス
@@ -154,7 +176,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 
 	private String f2(Supplier<IManaType> sManaType, VariantFairy variant)
 	{
-		return "" + sManaType.get().getTextColor() + sManaType.get().getLocalizedName() + ":" + String.format("%.3f", variant.type.manaSet.getMana(sManaType.get()));
+		return "" + sManaType.get().getTextColor() + sManaType.get().getDisplayName().getUnformattedText() + ":" + String.format("%.3f", variant.type.manaSet.getMana(sManaType.get()));
 	}
 
 }

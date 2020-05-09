@@ -9,6 +9,8 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -41,7 +43,9 @@ public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<
 		if (variant != null) {
 
 			// 素材
-			tooltip.add(YELLOW + "Contains: " + variant.getComposite().getLocalizedString());
+			tooltip.add(new TextComponentString("Contains: ")
+				.setStyle(new Style().setColor(YELLOW))
+				.appendSibling(variant.getComposite().getDisplayString()).getFormattedText());
 
 		}
 	}

@@ -11,8 +11,8 @@ public class ItemSpheres extends ItemMulti<VariantSphere>
 	public String getItemStackDisplayName(ItemStack itemStack)
 	{
 		VariantSphere variant = getVariant(itemStack).orElse(null);
-		if (variant == null) return UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".name").trim();
-		return UtilsMinecraft.translateToLocalFormatted(getUnlocalizedName() + ".format", variant.sphere.abilityType.getLocalizedName()).trim();
+		if (variant == null) return UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".name");
+		return UtilsMinecraft.translateToLocalFormatted(getUnlocalizedName() + ".format", variant.sphere.abilityType.getDisplayName().getFormattedText());
 	}
 
 }

@@ -1,19 +1,14 @@
 package miragefairy2019.mod.api.composite;
 
-import miragefairy2019.mod.lib.UtilsMinecraft;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 
 public interface IComponent extends Comparable<IComponent>
 {
 
 	public ResourceLocation getName();
 
-	public String getUnlocalizedName();
-
-	public default String getLocalizedName()
-	{
-		return UtilsMinecraft.translateToLocal(getUnlocalizedName());
-	}
+	public ITextComponent getDisplayName();
 
 	@Override
 	public default int compareTo(IComponent other)

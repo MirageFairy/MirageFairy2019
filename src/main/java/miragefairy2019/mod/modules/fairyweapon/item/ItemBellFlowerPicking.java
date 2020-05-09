@@ -92,10 +92,10 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		tooltip.add(TextFormatting.BLUE + "Pitch: " + String.format("%.2f", Math.log(status.pitch) / Math.log(2) * 12) + " (Cost)");
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
 		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Gaia)");
-		tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Dark, " + AbilityTypes.submission.get().getLocalizedName() + ", " + AbilityTypes.slash.get().getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Dark, " + AbilityTypes.submission.get().getDisplayName().getUnformattedText() + ", " + AbilityTypes.slash.get().getDisplayName().getUnformattedText() + ")");
 		tooltip.add(TextFormatting.BLUE + "Fortune: " + String.format("%d", status.fortune) + " (Shine)");
-		tooltip.add(TextFormatting.BLUE + "Seeding: " + (status.seeding ? "Yes" : "No") + " (" + AbilityTypes.knowledge.get().getLocalizedName() + ")");
-		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + AbilityTypes.warp.get().getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Seeding: " + (status.seeding ? "Yes" : "No") + " (" + AbilityTypes.knowledge.get().getDisplayName().getUnformattedText() + ")");
+		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + AbilityTypes.warp.get().getDisplayName().getUnformattedText() + ")");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + String.format("%.0f", status.coolTime) + "t (Aqua, Cost)");
 	}

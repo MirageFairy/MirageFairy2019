@@ -1,6 +1,7 @@
 package miragefairy2019.mod.api.composite;
 
 import mirrg.boron.util.suppliterator.ISuppliterator;
+import net.minecraft.util.text.ITextComponent;
 
 public interface IComposite
 {
@@ -22,6 +23,6 @@ public interface IComposite
 	 */
 	public IComposite add(IComposite composite);
 
-	public String getLocalizedString();
+	public ITextComponent getDisplayString();
 
 }

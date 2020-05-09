@@ -78,12 +78,12 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 
 		Status status = new Status(fairyType);
 		tooltip.add(TextFormatting.BLUE + "Max Height: " + status.maxHeight + " (Gaia)");
-		tooltip.add(TextFormatting.BLUE + "Power: " + String.format("%.1f", status.power) + " (Aqua, " + AbilityTypes.fell.get().getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Power: " + String.format("%.1f", status.power) + " (Aqua, " + AbilityTypes.fell.get().getDisplayName().getUnformattedText() + ")");
 		tooltip.add(TextFormatting.BLUE + "Fortune: " + status.fortune + " (Shine)");
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + ((int) status.coolTime) + "t (Dark, Cost) (" + String.format("%.1f", status.coolTime / status.power) + "t per 1.0 power)");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
 		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
-		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + AbilityTypes.warp.get().getLocalizedName() + ")");
+		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + AbilityTypes.warp.get().getDisplayName().getUnformattedText() + ")");
 	}
 
 	//

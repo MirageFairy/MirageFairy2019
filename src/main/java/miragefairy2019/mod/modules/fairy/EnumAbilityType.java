@@ -3,6 +3,9 @@ package miragefairy2019.mod.modules.fairy;
 import static net.minecraft.util.text.TextFormatting.*;
 
 import miragefairy2019.mod.api.fairy.IAbilityType;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 public enum EnumAbilityType implements IAbilityType
@@ -48,9 +51,10 @@ public enum EnumAbilityType implements IAbilityType
 	}
 
 	@Override
-	public String getUnlocalizedName()
+	public ITextComponent getDisplayName()
 	{
-		return "mirageFairy2019.ability." + getName() + ".name";
+		return new TextComponentTranslation("mirageFairy2019.ability." + getName() + ".name")
+			.setStyle(new Style().setColor(getTextColor()));
 	}
 
 }

@@ -6,8 +6,9 @@ import java.util.Map;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairy.IAbilityType;
 import miragefairy2019.mod.api.fairy.IComponentAbilityType;
-import miragefairy2019.mod.lib.UtilsMinecraft;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class ComponentsAbilityType
 {
@@ -36,15 +37,9 @@ public class ComponentsAbilityType
 		}
 
 		@Override
-		public String getUnlocalizedName()
+		public ITextComponent getDisplayName()
 		{
-			return "mirageFairy2019.component.cuticle.format";
-		}
-
-		@Override
-		public String getLocalizedName()
-		{
-			return UtilsMinecraft.translateToLocalFormatted(getUnlocalizedName(), abilityType.getLocalizedName());
+			return new TextComponentTranslation("mirageFairy2019.component.cuticle.format", abilityType.getDisplayName());
 		}
 
 		@Override

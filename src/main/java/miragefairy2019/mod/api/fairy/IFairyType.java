@@ -1,7 +1,7 @@
 package miragefairy2019.mod.api.fairy;
 
-import miragefairy2019.mod.lib.UtilsMinecraft;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 
 public interface IFairyType
 {
@@ -16,11 +16,6 @@ public interface IFairyType
 
 	public IAbilitySet getAbilities();
 
-	public String getUnlocalizedName();
-
-	public default String getLocalizedName()
-	{
-		return UtilsMinecraft.translateToLocal(getUnlocalizedName());
-	}
+	public ITextComponent getDisplayName();
 
 }

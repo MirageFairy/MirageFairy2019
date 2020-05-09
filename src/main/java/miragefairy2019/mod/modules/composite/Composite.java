@@ -8,6 +8,8 @@ import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.api.composite.IComposite;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.suppliterator.ISuppliterator;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 
 public final class Composite implements IComposite
 {
@@ -77,17 +79,26 @@ public final class Composite implements IComposite
 	}
 
 	@Override
-	public String getLocalizedString()
+	public ITextComponent getDisplayString()
 	{
 		return components.suppliterator()
-			.map(t -> {
-				if (t.getNanoAmount() == 1_000_000_000L) {
-					return t.getComponent().getLocalizedName();
-				} else {
-					return t.getComponent().getLocalizedName() + "(" + String.format("%.3f", (t.getNanoAmount() / 1_000_000L) * 0.001) + ")";
+			.map(ci -> {
+				TextComponentString textComponent = new TextComponentString("");
+
+				textComponent.appendSibling(ci.getComponent().getDisplayName());
+
+				if (ci.getNanoAmount() != 1_000_000_000L) {
+					textComponent.appendSibling(new TextComponentString(String.format("(%.3f)", (ci.getNanoAmount() / 1_000_000L) * 0.001)));
 				}
+
+				return textComponent;
 			})
-			.join(", ");
+			.sandwich(new TextComponentString(", "))
+			.apply(tcs -> {
+				TextComponentString textComponent = new TextComponentString("");
+				tcs.forEach(textComponent::appendSibling);
+				return textComponent;
+			});
 	}
 
 }

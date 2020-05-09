@@ -3,6 +3,8 @@ package miragefairy2019.mod.modules.composite;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.composite.IComponent;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class Component implements IComponent, Comparable<IComponent>
 {
@@ -38,9 +40,9 @@ public class Component implements IComponent, Comparable<IComponent>
 	}
 
 	@Override
-	public String getUnlocalizedName()
+	public ITextComponent getDisplayName()
 	{
-		return "mirageFairy2019.component." + name + ".name";
+		return new TextComponentTranslation("mirageFairy2019.component." + name + ".name");
 	}
 
 	@Override
