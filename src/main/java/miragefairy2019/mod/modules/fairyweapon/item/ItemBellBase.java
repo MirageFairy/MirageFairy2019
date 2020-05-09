@@ -1,8 +1,11 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
+
 import java.util.List;
 
 import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,17 +23,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemBellBase extends ItemFairyWeaponBase
 {
 
-	protected static class Status
-	{
-
-		public final double pitch;
-
-		public Status(IFairyType fairyType)
-		{
-			pitch = 1.0 * Math.pow(0.5, fairyType.getCost() / 50.0 - 1);
-		}
-
-	}
+	IMagicStatus<Double> pitch = registerMagicStatus("pitch", formatterPitch(), mul(
+		val(1.0),
+		pow(0.5, add(div(cost(), 50), -1))));
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -41,14 +36,6 @@ public class ItemBellBase extends ItemFairyWeaponBase
 
 		super.addInformationFunctions(itemStack, world, tooltip, flag);
 
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-		Status status = new Status(fairyType);
-		tooltip.add(TextFormatting.BLUE + "Pitch: " + String.format("%.2f", Math.log(status.pitch) / Math.log(2) * 12) + " (Cost)");
 	}
 
 	//
@@ -90,21 +77,17 @@ public class ItemBellBase extends ItemFairyWeaponBase
 	{
 
 		public final IFairyType fairyType;
-		public final Status status;
 
 		public ResultWithFairy(
 			EnumExecutability executability,
-			IFairyType fairyType,
-			Status status)
+			IFairyType fairyType)
 		{
 			super(executability);
 			this.fairyType = fairyType;
-			this.status = status;
 		}
 
 	}
 
-	// /fill ~-10 ~ ~-10 ~10 ~ ~10 miragefairy2019:mirage_flower 3
 	private Result getExecutability(World world, ItemStack itemStack, EntityPlayer player)
 	{
 
@@ -114,13 +97,10 @@ public class ItemBellBase extends ItemFairyWeaponBase
 			return new Result(EnumExecutability.NO_FAIRY);
 		}
 
-		// ステータスを評価
-		Status status = new Status(fairy.y);
-
 		// 実行可能性を計算
 		EnumExecutability executability = EnumExecutability.OK;
 
-		return new ResultWithFairy(executability, fairy.y, status);
+		return new ResultWithFairy(executability, fairy.y);
 	}
 
 	//
@@ -144,7 +124,7 @@ public class ItemBellBase extends ItemFairyWeaponBase
 		// 魔法成立
 
 		// エフェクト
-		playSound(world, player, resultWithFairy.status.pitch);
+		playSound(world, player, pitch.get(resultWithFairy.fairyType));
 
 		return new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
 	}
