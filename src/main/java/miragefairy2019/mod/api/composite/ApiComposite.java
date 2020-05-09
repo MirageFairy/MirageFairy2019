@@ -1,5 +1,7 @@
 package miragefairy2019.mod.api.composite;
 
+import miragefairy2019.mod.modules.composite.ComponentInstance;
+import miragefairy2019.mod.modules.composite.Composite;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
 public class ApiComposite
@@ -7,17 +9,17 @@ public class ApiComposite
 
 	public static IComposite composite()
 	{
-		return new miragefairy2019.mod.modules.composite.Composite();
+		return new Composite();
 	}
 
 	public static IComposite composite(ISuppliterator<IComponentInstance> components)
 	{
-		return new miragefairy2019.mod.modules.composite.Composite(components);
+		return new Composite(components);
 	}
 
 	public static IComponentInstance instanceNano(IComponent component, long nanoAmount)
 	{
-		return new miragefairy2019.mod.modules.composite.ComponentInstance(component, nanoAmount);
+		return new ComponentInstance(component, nanoAmount);
 	}
 
 	public static IComponentInstance instance(IComponent component)
