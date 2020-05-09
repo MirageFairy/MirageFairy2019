@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 import miragefairy2019.mod.api.fairy.AbilityTypes;
 import miragefairy2019.mod.api.fairy.IAbilityType;
 import miragefairy2019.mod.lib.Utils;
+import mirrg.boron.util.UtilsString;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -56,7 +57,7 @@ public enum EnumSphere
 
 	public String getOreName()
 	{
-		return "mirageFairy2019Sphere" + Utils.toUpperCaseHead(abilityType.getName());
+		return "mirageFairy2019Sphere" + UtilsString.toUpperCaseHead(abilityType.getName());
 	}
 
 	private static class A

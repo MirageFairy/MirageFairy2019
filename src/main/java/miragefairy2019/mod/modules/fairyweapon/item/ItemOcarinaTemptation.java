@@ -232,7 +232,7 @@ public class ItemOcarinaTemptation extends ItemOcarinaBase
 
 				// 行使
 				{
-					int damage = Utils.randomInt(world.rand, resultWithFairy.status.wear);
+					int damage = UtilsMath.randomInt(world.rand, resultWithFairy.status.wear);
 					System.out.println(damage);
 					for (int i = 0; i < damage; i++) {
 						itemStack.damageItem(1, player);

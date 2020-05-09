@@ -264,7 +264,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 				if (targetCount >= resultWithFairy.status.maxTargetCount) break;
 
 				// 行使
-				itemStack.damageItem(Utils.randomInt(world.rand, resultWithFairy.status.wear), player);
+				itemStack.damageItem(UtilsMath.randomInt(world.rand, resultWithFairy.status.wear), player);
 				targetCount++;
 				{
 					IBlockState blockState = world.getBlockState(tuple.x);

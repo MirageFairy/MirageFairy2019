@@ -10,6 +10,7 @@ import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
+import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -398,7 +399,7 @@ public class ModuleFairy
 					for (Tuple<IAbilityType, Double> tuple : variant.y[i].type.abilitySet.getAbilities()) {
 						if (tuple.y >= 10) {
 							OreDictionary.registerOre(
-								"mirageFairy2019FairyAbility" + Utils.toUpperCaseHead(tuple.x.getName()),
+								"mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(tuple.x.getName()),
 								variant.y[i].createItemStack());
 						}
 					}

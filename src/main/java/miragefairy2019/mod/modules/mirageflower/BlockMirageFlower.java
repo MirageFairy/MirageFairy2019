@@ -146,7 +146,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 	protected void grow(World worldIn, BlockPos pos, IBlockState state, Random rand, double rate)
 	{
-		int t = Utils.randomInt(rand, rate);
+		int t = UtilsMath.randomInt(rand, rate);
 		for (int i = 0; i < t; i++) {
 			if (!isMaxAge(state)) {
 				worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, state.getValue(AGE) + 1), 2);
@@ -290,7 +290,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 		// 追加の種
 		{
-			int count = Utils.randomInt(random, isMaxAge(state) ? fortune * 0.01 : 0);
+			int count = UtilsMath.randomInt(random, isMaxAge(state) ? fortune * 0.01 : 0);
 			for (int i = 0; i < count; i++) {
 				drops.add(new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds));
 			}
@@ -298,7 +298,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 		// クリスタル
 		{
-			int count = Utils.randomInt(random, isMaxAge(state) ? 1 + fortune * 0.5 : 0);
+			int count = UtilsMath.randomInt(random, isMaxAge(state) ? 1 + fortune * 0.5 : 0);
 			for (int i = 0; i < count; i++) {
 				//drops.add(ModuleFairyCrystal.variantFairyCrystal.createItemStack());
 				drops.add(ModuleFairyCrystal.variantFairyCrystalChristmas.createItemStack());
@@ -307,7 +307,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 		// ミラジウム
 		{
-			int count = Utils.randomInt(random, isMaxAge(state) ? 1 + fortune * 0.5 : 0);
+			int count = UtilsMath.randomInt(random, isMaxAge(state) ? 1 + fortune * 0.5 : 0);
 			for (int i = 0; i < count; i++) {
 				drops.add(UtilsMinecraft.getItemStack("dustTinyMiragium").copy());
 			}

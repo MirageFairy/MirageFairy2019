@@ -7,6 +7,7 @@ import java.io.OutputStream;
 
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.modules.ore.EnumVariantMaterials1;
+import mirrg.boron.util.UtilsString;
 
 public class MainAssetsTemplate
 {
@@ -38,7 +39,7 @@ public class MainAssetsTemplate
 				"    \"key\": {",
 				"        \"#\": {",
 				"            \"type\": \"forge:ore_dict\",",
-				"            \"ore\": \"block" + Utils.toUpperCaseHead(material) + "\"",
+				"            \"ore\": \"block" + UtilsString.toUpperCaseHead(material) + "\"",
 				"        }",
 				"    },",
 				"    \"result\": {",
@@ -61,7 +62,7 @@ public class MainAssetsTemplate
 				"    \"key\": {",
 				"        \"#\": {",
 				"            \"type\": \"forge:ore_dict\",",
-				"            \"ore\": \"gem" + Utils.toUpperCaseHead(material) + "\"",
+				"            \"ore\": \"gem" + UtilsString.toUpperCaseHead(material) + "\"",
 				"        }",
 				"    },",
 				"    \"result\": {",

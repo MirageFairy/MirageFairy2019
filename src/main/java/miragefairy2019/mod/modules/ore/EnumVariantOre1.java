@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 
 import miragefairy2019.mod.lib.Utils;
 import miragefairy2019.mod.lib.UtilsMinecraft;
+import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -127,7 +128,7 @@ public enum EnumVariantOre1 implements IStringSerializable, IOreVariant
 	public void getDrops(NonNullList<ItemStack> drops, Random random, Block block, int metadata, int fortune)
 	{
 		if (nGemProvider != null) {
-			int count = Utils.randomInt(random, nGemProvider.amount + random.nextDouble() * nGemProvider.amountPerFortune * fortune);
+			int count = UtilsMath.randomInt(random, nGemProvider.amount + random.nextDouble() * nGemProvider.amountPerFortune * fortune);
 			for (int i = 0; i < count; i++) {
 				drops.add(nGemProvider.sItemStack.get());
 			}

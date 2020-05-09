@@ -1,5 +1,6 @@
 package miragefairy2019.mod.lib;
 
+import mirrg.boron.util.UtilsMath;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -19,7 +20,7 @@ public class BiomeDecoratorFlowers
 
 	public void decorate(DecorateBiomeEvent.Post event)
 	{
-		int trialCount = Utils.randomInt(event.getRand(), trialsPerChunk);
+		int trialCount = UtilsMath.randomInt(event.getRand(), trialsPerChunk);
 
 		for (int i = 0; i < trialCount; ++i) {
 			int offsetX = event.getRand().nextInt(16);

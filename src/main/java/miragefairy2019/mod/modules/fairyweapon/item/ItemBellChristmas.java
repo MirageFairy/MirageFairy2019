@@ -14,6 +14,7 @@ import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace;
 import miragefairy2019.mod.modules.fairyweapon.status.FairyWeaponStatusBase;
 import miragefairy2019.mod.modules.fairyweapon.status.IFairyWeaponStatusProperty;
+import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -181,7 +182,7 @@ public class ItemBellChristmas extends ItemBellBase
 						if (targetCount >= status.maxTargetCount.get(fairyType)) break;
 
 						// 行使
-						itemStack.damageItem(Utils.randomInt(world.rand, status.wear.get(fairyType)), player);
+						itemStack.damageItem(UtilsMath.randomInt(world.rand, status.wear.get(fairyType)), player);
 						targetCount++;
 						{
 							double damage = status.damage.get(fairyType);

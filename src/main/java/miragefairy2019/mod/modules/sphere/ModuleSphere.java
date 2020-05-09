@@ -7,6 +7,7 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Utils;
+import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -107,7 +108,7 @@ public class ModuleSphere
 					new OreIngredient("container1000Water"),
 					new OreIngredient("dustMiragium"),
 					new OreIngredient("gemFluorite"),
-					new OreIngredient("mirageFairy2019FairyAbility" + Utils.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
+					new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
 					variant.y.sphere.sIngredient.get());
 			}
 
