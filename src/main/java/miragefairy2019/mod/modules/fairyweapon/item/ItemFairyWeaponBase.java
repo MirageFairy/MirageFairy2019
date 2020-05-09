@@ -469,53 +469,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 			((color >> 0) & 0xFF) / 255.0);
 	}
 
-	//
-
-	@Override
-	public boolean hasContainerItem(ItemStack itemStack)
-	{
-		return !getContainerItem(itemStack).isEmpty();
-	}
-
-	@Override
-	public ItemStack getContainerItem(ItemStack itemStack)
-	{
-		return getCombinedFairy(itemStack);
-	}
-
-	//
-
-	@Override
-	public boolean canSphereReplace(ItemStack itemStack)
-	{
-		return true;
-	}
-
-	@Override
-	public NonNullList<Ingredient> getRepairmentSpheres(ItemStack itemStack)
-	{
-		return getComposite().getComponents()
-			.filter(e -> e.getComponent() instanceof IComponentAbilityType)
-			.map(e -> Tuple.of((IComponentAbilityType) e.getComponent(), e.getNanoAmount()))
-			.mapIfPresent(e -> EnumSphere.of(e.x.getAbilityType()).map(s -> Tuple.of(s, e.y)))
-			.flatMap(e -> {
-				long amount = e.y;
-				int count = (int) (amount / 1_000_000_000L) + (amount % 1_000_000_000L != 0 ? 1 : 0);
-				return ISuppliterator.range(count)
-					.map(i -> new OreIngredient(e.x.getOreName()));
-			})
-			.toCollection(NonNullList::create);
-	}
-
-	@Override
-	public ItemStack getSphereReplacedItem(ItemStack itemStack)
-	{
-		itemStack = itemStack.copy();
-		itemStack.setItemDamage(0);
-		return itemStack;
-	}
-
-	//
+	//////////////////// コンポジット関連
 
 	private IComposite composite = ApiComposite.composite();
 
@@ -540,7 +494,7 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		return Optional.of(getComposite());
 	}
 
-	//
+	//////////////////// 妖精搭乗関連
 
 	@Override
 	public boolean canCombine(ItemStack itemStack)
@@ -570,6 +524,52 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	public void setCombinedPart(ItemStack itemStack, ItemStack itemStackPart)
 	{
 		setCombinedFairy(itemStack, itemStackPart);
+	}
+
+	//
+
+	@Override
+	public boolean hasContainerItem(ItemStack itemStack)
+	{
+		return !getContainerItem(itemStack).isEmpty();
+	}
+
+	@Override
+	public ItemStack getContainerItem(ItemStack itemStack)
+	{
+		return getCombinedFairy(itemStack);
+	}
+
+	//////////////////// スフィア交換関連
+
+	@Override
+	public boolean canSphereReplace(ItemStack itemStack)
+	{
+		return true;
+	}
+
+	@Override
+	public NonNullList<Ingredient> getRepairmentSpheres(ItemStack itemStack)
+	{
+		return getComposite().getComponents()
+			.filter(e -> e.getComponent() instanceof IComponentAbilityType)
+			.map(e -> Tuple.of((IComponentAbilityType) e.getComponent(), e.getNanoAmount()))
+			.mapIfPresent(e -> EnumSphere.of(e.x.getAbilityType()).map(s -> Tuple.of(s, e.y)))
+			.flatMap(e -> {
+				long amount = e.y;
+				int count = (int) (amount / 1_000_000_000L) + (amount % 1_000_000_000L != 0 ? 1 : 0);
+				return ISuppliterator.range(count)
+					.map(i -> new OreIngredient(e.x.getOreName()));
+			})
+			.toCollection(NonNullList::create);
+	}
+
+	@Override
+	public ItemStack getSphereReplacedItem(ItemStack itemStack)
+	{
+		itemStack = itemStack.copy();
+		itemStack.setItemDamage(0);
+		return itemStack;
 	}
 
 }
