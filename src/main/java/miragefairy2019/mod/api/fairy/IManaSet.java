@@ -1,5 +1,8 @@
 package miragefairy2019.mod.api.fairy;
 
+/**
+ * すべてのマナの値は非負です。
+ */
 public interface IManaSet
 {
 
