@@ -2,8 +2,10 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import static net.minecraft.util.text.TextFormatting.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 import com.google.common.base.Predicate;
 
@@ -14,6 +16,9 @@ import miragefairy2019.mod.api.composite.IItemComposite;
 import miragefairy2019.mod.api.fairy.IComponentAbilityType;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
+import miragefairy2019.mod.api.fairyweapon.formula.ApiFormula;
+import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
+import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon;
 import miragefairy2019.mod.api.fairyweapon.recipe.ICombiningItem;
 import miragefairy2019.mod.api.fairyweapon.recipe.ISphereReplacementItem;
@@ -49,6 +54,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -228,6 +234,8 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 	@SideOnly(Side.CLIENT)
 	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
+
+		addInformationMagicStatuses(itemStackFairyWeapon, itemStackFairy, fairyType, world, tooltip, flag);
 
 	}
 
@@ -570,6 +578,31 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 		itemStack = itemStack.copy();
 		itemStack.setItemDamage(0);
 		return itemStack;
+	}
+
+	//////////////////// 妖精魔法ステータス関連
+
+	private List<IMagicStatus<?>> magicStatuses = new ArrayList<>();
+
+	protected <T> IMagicStatus<T> registerMagicStatus(String name, Function<T, ITextComponent> formatter, IFormula<T> formula)
+	{
+		IMagicStatus<T> magicStatus = ApiFormula.createMagicStatus(name, formatter, formula);
+		magicStatuses.add(magicStatus);
+		return magicStatus;
+	}
+
+	protected ISuppliterator<IMagicStatus<?>> getMagicStatuses()
+	{
+		return ISuppliterator.ofIterable(magicStatuses);
+	}
+
+	@SideOnly(Side.CLIENT)
+	protected void addInformationMagicStatuses(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
+	{
+		for (IMagicStatus<?> magicStatus : getMagicStatuses()) {
+			tooltip.add(magicStatus.getDisplayString(fairyType)
+				.setStyle(new Style().setColor(BLUE)).getFormattedText());
+		}
 	}
 
 }
