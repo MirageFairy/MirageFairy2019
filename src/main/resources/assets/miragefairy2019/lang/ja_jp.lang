@@ -165,3 +165,10 @@ mirageFairy2019.mana.dark.name=闇
 mirageFairy2019.formula.source.cost.name=コスト
 
 mirageFairy2019.magic.status.pitch.name=音程
+mirageFairy2019.magic.status.maxHeight.name=最大高さ
+mirageFairy2019.magic.status.power.name=パワー
+mirageFairy2019.magic.status.fortune.name=幸運
+mirageFairy2019.magic.status.coolTime.name=クールタイム
+mirageFairy2019.magic.status.wear.name=摩耗
+mirageFairy2019.magic.status.additionalReach.name=追加リーチ
+mirageFairy2019.magic.status.collection.name=収集

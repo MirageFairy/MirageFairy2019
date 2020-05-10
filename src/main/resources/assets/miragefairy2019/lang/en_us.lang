@@ -165,3 +165,10 @@ mirageFairy2019.mana.dark.name=Dark
 mirageFairy2019.formula.source.cost.name=Cost
 
 mirageFairy2019.magic.status.pitch.name=Pitch
+mirageFairy2019.magic.status.maxHeight.name=Max Height
+mirageFairy2019.magic.status.power.name=Power
+mirageFairy2019.magic.status.fortune.name=Fortune
+mirageFairy2019.magic.status.coolTime.name=Cool Time
+mirageFairy2019.magic.status.wear.name=Wear
+mirageFairy2019.magic.status.additionalReach.name=Additional Reach
+mirageFairy2019.magic.status.collection.name=Collection

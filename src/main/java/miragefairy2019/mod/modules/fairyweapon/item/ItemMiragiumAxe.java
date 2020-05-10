@@ -1,9 +1,13 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
+import static miragefairy2019.mod.api.fairy.AbilityTypes.*;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
+
 import java.util.List;
 
-import miragefairy2019.mod.api.fairy.AbilityTypes;
 import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
+import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.main.ApiMain;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.BlockLeaves;
@@ -27,6 +31,40 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemMiragiumAxe extends ItemFairyWeaponBase
 {
 
+	public IMagicStatus<Integer> maxHeight = registerMagicStatus("maxHeight", formatterInteger(),
+		round(add(new IFormulaDouble[] {
+			val(1.0),
+			min(div(gaia(), 2), 100),
+		})));
+
+	public IMagicStatus<Double> power = registerMagicStatus("power", formatterDouble1(),
+		add(new IFormulaDouble[] {
+			val(2.0),
+			div(aqua(), 2),
+			div(abilityRaw(fell), 4),
+		}));
+
+	public IMagicStatus<Integer> fortune = registerMagicStatus("fortune", formatterInteger(),
+		round(min(div(shine(), 5), 3)));
+
+	public IMagicStatus<Integer> coolTime = registerMagicStatus("coolTime", formatterTick(),
+		round(mul(new IFormulaDouble[] {
+			mul(cost(), 2),
+			pow(0.5, div(dark(), 20)),
+		})));
+
+	public IMagicStatus<Double> wear = registerMagicStatus("wear", formatterPercent0(),
+		mul(new IFormulaDouble[] {
+			val(0.25),
+			pow(0.5, div(fire(), 20))
+		}));
+
+	public IMagicStatus<Double> additionalReach = registerMagicStatus("additionalReach", formatterDouble1(),
+		min(div(wind(), 5), 20));
+
+	public IMagicStatus<Boolean> collection = registerMagicStatus("collection", formatterYesNo(),
+		gte(abilityRaw(warp), 10));
+
 	public ItemMiragiumAxe()
 	{
 		setHarvestLevel("axe", 1);
@@ -34,30 +72,6 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 	}
 
 	//
-
-	protected static class Status
-	{
-
-		public final int maxHeight;
-		public final double power;
-		public final int fortune;
-		public final double coolTime;
-		public final double wear;
-		public final double additionalReach;
-		public final boolean collection;
-
-		public Status(IFairyType fairyType)
-		{
-			maxHeight = 1 + Math.min((int) (fairyType.getManas().getGaia() / 2), 100);
-			power = 2 + fairyType.getManas().getAqua() / 2 + fairyType.getAbilities().getAbilityPower(AbilityTypes.fell.get()) / 4;
-			fortune = Math.min((int) (fairyType.getManas().getShine() / 5), 3);
-			coolTime = fairyType.getCost() * 2 * Math.pow(0.5, fairyType.getManas().getDark() / 20);
-			wear = 0.25 * Math.pow(0.5, fairyType.getManas().getFire() / 20);
-			additionalReach = Math.min(fairyType.getManas().getWind() / 5, 20);
-			collection = fairyType.getAbilities().getAbilityPower(AbilityTypes.warp.get()) >= 10;
-		}
-
-	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -68,22 +82,6 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 
 		super.addInformationFunctions(itemStack, world, tooltip, flag);
 
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-		super.addInformationFairyWeapon(itemStackFairyWeapon, itemStackFairy, fairyType, world, tooltip, flag);
-
-		Status status = new Status(fairyType);
-		tooltip.add(TextFormatting.BLUE + "Max Height: " + status.maxHeight + " (Gaia)");
-		tooltip.add(TextFormatting.BLUE + "Power: " + String.format("%.1f", status.power) + " (Aqua, " + AbilityTypes.fell.get().getDisplayName().getUnformattedText() + ")");
-		tooltip.add(TextFormatting.BLUE + "Fortune: " + status.fortune + " (Shine)");
-		tooltip.add(TextFormatting.BLUE + "Cool Time: " + ((int) status.coolTime) + "t (Dark, Cost) (" + String.format("%.1f", status.coolTime / status.power) + "t per 1.0 power)");
-		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
-		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
-		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + AbilityTypes.warp.get().getDisplayName().getUnformattedText() + ")");
 	}
 
 	//
@@ -97,11 +95,8 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 		Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
 		if (fairy == null) return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStack);
 
-		// ステータスを評価
-		Status status = new Status(fairy.y);
-
 		// 視線判定
-		RayTraceResult rayTraceResult = rayTrace(world, player, false, status.additionalReach);
+		RayTraceResult rayTraceResult = rayTrace(world, player, false, additionalReach.get(fairy.y));
 		if (rayTraceResult == null) return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStack);
 		if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStack);
 		BlockPos blockPos = rayTraceResult.getBlockPos();
@@ -123,7 +118,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 
 			// 基点検索
 			int yMax = blockPos.getY();
-			for (int yi = 1; yi < status.maxHeight; yi++) {
+			for (int yi = 1; yi < maxHeight.get(fairy.y); yi++) {
 				if (isLog(world, blockPos.add(0, yi, 0))) {
 					yMax = blockPos.getY() + yi;
 				} else {
@@ -133,7 +128,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 
 			// 破壊
 			int successed = 0;
-			double power2 = status.power;
+			double power2 = power.get(fairy.y);
 			for (int y = yMax; y >= yMin; y--) {
 				BlockPos blockPos2 = new BlockPos(blockPos.getX(), y, blockPos.getZ());
 
@@ -146,9 +141,9 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 				// 耐久が0のときは破壊をやめる
 				if (itemStack.getItemDamage() >= itemStack.getMaxDamage()) break;
 
-				if (world.rand.nextDouble() < status.wear) itemStack.damageItem(1, player);
+				if (world.rand.nextDouble() < wear.get(fairy.y)) itemStack.damageItem(1, player);
 				power2 -= blockHardness;
-				breakBlock(world, player, rayTraceResult.sideHit, itemStack, blockPos2, status.fortune, status.collection);
+				breakBlock(world, player, rayTraceResult.sideHit, itemStack, blockPos2, fortune.get(fairy.y), collection.get(fairy.y));
 				successed++;
 
 			}
@@ -159,7 +154,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 				player.playSound(breakSound, 1.0F, 1.0F);
 
 				// クールタイム
-				player.getCooldownTracker().setCooldown(this, (int) (status.coolTime * (1 - power2 / status.power)));
+				player.getCooldownTracker().setCooldown(this, (int) (coolTime.get(fairy.y) * (1 - power2 / power.get(fairy.y))));
 
 			}
 
@@ -196,17 +191,14 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 						return;
 					}
 
-					// ステータスを評価
-					Status status = new Status(fairy.y);
-
 					// 耐久がない場合は赤
 					// 対象が発動対象でない場合は緑
 					// クールタイムの場合は黄色
-					RayTraceResult rayTraceResult = rayTrace(world, player, false, status.additionalReach);
+					RayTraceResult rayTraceResult = rayTrace(world, player, false, additionalReach.get(fairy.y));
 					if (rayTraceResult == null) {
 						spawnParticle(
 							world,
-							getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach),
+							getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + additionalReach.get(fairy.y)),
 							itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
 						return;
 					}
