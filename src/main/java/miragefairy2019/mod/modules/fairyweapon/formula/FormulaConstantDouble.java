@@ -1,34 +1,34 @@
 package miragefairy2019.mod.modules.fairyweapon.formula;
 
 import miragefairy2019.mod.api.fairy.IFairyType;
-import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
+import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.ISource;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
-public class FormulaConstant<T> implements IFormula<T>
+public class FormulaConstantDouble implements IFormulaDouble
 {
 
-	private T value;
+	private double value;
 
-	public FormulaConstant(T value)
+	public FormulaConstantDouble(double value)
 	{
 		this.value = value;
 	}
 
 	@Override
-	public T get(IFairyType fairyType)
+	public Double get(IFairyType fairyType)
 	{
 		return value;
 	}
 
 	@Override
-	public T getMax()
+	public Double getMax()
 	{
 		return value;
 	}
 
 	@Override
-	public T getMin()
+	public Double getMin()
 	{
 		return value;
 	}

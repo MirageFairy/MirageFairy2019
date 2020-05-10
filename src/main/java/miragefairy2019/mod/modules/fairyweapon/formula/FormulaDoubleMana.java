@@ -2,11 +2,11 @@ package miragefairy2019.mod.modules.fairyweapon.formula;
 
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IManaType;
-import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
+import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.ISource;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
-public class FormulaDoubleMana implements IFormula<Double>
+public class FormulaDoubleMana implements IFormulaDouble
 {
 
 	private IManaType manaType;

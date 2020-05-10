@@ -4,7 +4,7 @@ import java.util.function.Function;
 
 import miragefairy2019.mod.api.fairy.IAbilityType;
 import miragefairy2019.mod.api.fairy.IManaType;
-import miragefairy2019.mod.modules.fairyweapon.formula.FormulaConstant;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaConstantDouble;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleAbility;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleAddFormulas;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleCost;
@@ -24,96 +24,94 @@ import net.minecraft.util.text.TextComponentString;
 public class ApiFormula
 {
 
-	public static <T> IFormula<T> val(T value)
+	public static IFormulaDouble val(double value)
 	{
-		return new FormulaConstant<>(value);
+		return new FormulaConstantDouble(value);
 	}
 
-	public static IFormula<Double> source(IManaType manaType)
+	public static IFormulaDouble source(IManaType manaType)
 	{
 		return new FormulaDoubleMana(manaType);
 	}
 
-	public static IFormula<Double> source(IManaType manaType, int max)
+	public static IFormulaDouble source(IManaType manaType, int max)
 	{
 		return min(source(manaType), max);
 	}
 
-	public static IFormula<Double> source(IManaType manaType, int max, int distribution)
+	public static IFormulaDouble source(IManaType manaType, int max, int distribution)
 	{
 		return mul(root(div(source(manaType), max), distribution), max);
 	}
 
-	public static IFormula<Double> source(IAbilityType abilityType)
+	public static IFormulaDouble source(IAbilityType abilityType)
 	{
 		return mul(new FormulaDoubleAbility(abilityType), div(cost(), 50));
 	}
 
-	public static IFormula<Double> source(IAbilityType abilityType, int max)
+	public static IFormulaDouble source(IAbilityType abilityType, int max)
 	{
 		return min(source(abilityType), max);
 	}
 
-	public static IFormula<Double> source(IAbilityType abilityType, int max, int distribution)
+	public static IFormulaDouble source(IAbilityType abilityType, int max, int distribution)
 	{
 		return mul(root(div(source(abilityType), max), distribution), max);
 	}
 
-	public static IFormula<Double> cost()
+	public static IFormulaDouble cost()
 	{
 		return new FormulaDoubleCost();
 	}
 
 	//
 
-	public static IFormula<Double> add(IFormula<Double> a, double b)
+	public static IFormulaDouble add(IFormulaDouble a, double b)
 	{
 		return new FormulaDoubleFormulaAddDouble(a, b);
 	}
 
-	@SafeVarargs
-	public static IFormula<Double> add(IFormula<Double>... formulas)
+	public static IFormulaDouble add(IFormulaDouble... formulas)
 	{
 		return new FormulaDoubleAddFormulas(ImmutableArray.ofObjArray(formulas));
 	}
 
-	public static IFormula<Double> mul(IFormula<Double> a, double b)
+	public static IFormulaDouble mul(IFormulaDouble a, double b)
 	{
 		return new FormulaDoubleFormulaMulDouble(a, b);
 	}
 
-	@SafeVarargs
-	public static IFormula<Double> mul(IFormula<Double>... formulas)
+	public static IFormulaDouble mul(IFormulaDouble... formulas)
 	{
 		return new FormulaDoubleMulFormulas(ImmutableArray.ofObjArray(formulas));
 	}
 
-	public static IFormula<Double> div(IFormula<Double> a, double b)
+	public static IFormulaDouble div(IFormulaDouble a, double b)
 	{
 		return new FormulaDoubleFormulaMulDouble(a, 1 / b);
 	}
 
-	public static IFormula<Double> pow(IFormula<Double> a, double b)
+	public static IFormulaDouble pow(IFormulaDouble a, double b)
 	{
 		return new FormulaDoubleFormulaPowDouble(a, b);
 	}
 
-	public static IFormula<Double> pow(double a, IFormula<Double> b)
+	public static IFormulaDouble pow(double a, IFormulaDouble b)
 	{
 		return new FormulaDoubleDoublePowFormula(a, b);
 	}
 
-	public static IFormula<Double> root(IFormula<Double> a, double b)
+	public static IFormulaDouble root(IFormulaDouble a, double b)
 	{
 		return new FormulaDoubleFormulaPowDouble(a, 1 / b);
 	}
 
-	public static IFormula<Double> min(IFormula<Double> a, double b)
+	public static IFormulaDouble min(IFormulaDouble a, double b)
 	{
 		return new FormulaDoubleMinFormulaDouble(a, b);
 	}
 
-	public static IFormula<Double> max(IFormula<Double> a, double b)
+	public static IFormulaDouble max(IFormulaDouble a, double b)
 	{
 		return new FormulaDoubleMaxFormulaDouble(a, b);
 	}

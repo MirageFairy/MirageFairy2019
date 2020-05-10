@@ -1,14 +1,14 @@
 package miragefairy2019.mod.modules.fairyweapon.formula;
 
 import miragefairy2019.mod.api.fairy.IFairyType;
-import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
+import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.ISource;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
-public class FormulaDoubleFormulaPowDouble implements IFormula<Double>
+public class FormulaDoubleFormulaPowDouble implements IFormulaDouble
 {
 
-	private IFormula<Double> a;
+	private IFormulaDouble a;
 	private double b;
 
 	/**
@@ -17,7 +17,7 @@ public class FormulaDoubleFormulaPowDouble implements IFormula<Double>
 	 * @param b
 	 *            非負でなければなりません。
 	 */
-	public FormulaDoubleFormulaPowDouble(IFormula<Double> a, double b)
+	public FormulaDoubleFormulaPowDouble(IFormulaDouble a, double b)
 	{
 		this.a = a;
 		this.b = b;
