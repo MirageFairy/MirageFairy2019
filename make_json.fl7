@@ -1,22 +1,146 @@
 
-f: "src/main/resources/assets/miragefairy2019/recipes/materials/blaze_powder_from_blaze_rod.json";
-
-obj: {
-	type: "forge:ore_shapeless";
-	group: "blaze_powder";
-	ingredients: [
-		{
-			type: "miragefairy2019:ore_dict_complex";
-			ore: "mirageFairy2019CraftingToolFairyWandBreaking";
-		},
-		{
-			item: "minecraft:blaze_rod";
-		},
-	];
-	result: {
-		item: "minecraft:blaze_powder";
-		count: 3;
-	};
+Writer: {
+	new: _, dir -> _{dir};
+	write: _, file, obj -> WRITE(_.dir & "/" & file; JSON(obj; "\t"));
 };
 
-WRITE(f; JSON(obj; "\t"));
+(
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials");
+
+	obj: {
+		type: "forge:ore_shapeless";
+		group: "blaze_powder";
+		ingredients: [
+			{
+				type: "miragefairy2019:ore_dict_complex";
+				ore: "mirageFairy2019CraftingToolFairyWandBreaking";
+			},
+			{
+				item: "minecraft:blaze_rod";
+			},
+		];
+		result: {
+			item: "minecraft:blaze_powder";
+			count: 3;
+		};
+	};
+
+	writer::write("blaze_powder_from_blaze_rod.json"; obj);
+);
+
+(
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/advancements/fairy_weapon");
+
+	func1: configure -> (
+		item: "miragefairy2019:\(configure.registerName)";
+		writer::write("\(configure.registerName).json"; {
+			display = (
+				_: {
+					icon = {
+						item = item;
+					};
+					title = {
+						translate = "item.\(configure.unlocalizedName).name";
+					};
+					description = {
+						translate = "advancements.miragefairy2019.fairy_weapon.all.description";
+					};
+				};
+				configure.frame !== NULL && (
+					_.frame = configure.frame;
+				);
+				_
+			);
+			parent = "miragefairy2019:\(configure.parent)";
+			criteria = {
+				main = {
+					trigger = "minecraft:inventory_changed";
+					conditions = {
+						items = [
+							{
+								item = item;
+							}
+						];
+					};
+				};
+			};
+		});
+	);
+
+	(
+
+		{
+			registerName: "miragium_axe";
+			unlocalizedName: "miragiumAxe";
+			parent: "fairy_weapon/root";
+			frame: NULL;
+		},
+
+		{
+			registerName: "miragium_sword";
+			unlocalizedName: "miragiumSword";
+			parent: "fairy_weapon/root";
+			frame: NULL;
+		},
+		{
+			registerName: "fairy_sword";
+			unlocalizedName: "fairySword";
+			parent: "fairy_weapon/miragium_sword";
+			frame: "goal";
+		},
+
+		{
+			registerName: "bell_base";
+			unlocalizedName: "bellBase";
+			parent: "fairy_weapon/root";
+			frame: NULL;
+		},
+		{
+			registerName: "flower_picking_bell";
+			unlocalizedName: "bellFlowerPicking";
+			parent: "fairy_weapon/bell_base";
+			frame: "goal";
+		},
+		{
+			registerName: "christmas_bell";
+			unlocalizedName: "bellChristmas";
+			parent: "fairy_weapon/bell_base";
+			frame: "challenge";
+		},
+
+		{
+			registerName: "ocarina_base";
+			unlocalizedName: "ocarinaBase";
+			parent: "fairy_weapon/root";
+			frame: NULL;
+		},
+		{
+			registerName: "temptation_ocarina";
+			unlocalizedName: "ocarinaTemptation";
+			parent: "fairy_weapon/ocarina_base";
+			frame: "goal";
+		},
+
+		{
+			registerName: "magic_wand_base";
+			unlocalizedName: "magicWandBase";
+			parent: "fairy_weapon/root";
+			frame: NULL;
+		},
+		{
+			registerName: "light_magic_wand";
+			unlocalizedName: "magicWandLight";
+			parent: "fairy_weapon/magic_wand_base";
+			frame: "goal";
+		},
+		{
+			registerName: "collecting_magic_wand";
+			unlocalizedName: "magicWandCollecting";
+			parent: "fairy_weapon/magic_wand_base";
+			frame: "goal";
+		},
+
+	) | *func1;
+
+);
+
