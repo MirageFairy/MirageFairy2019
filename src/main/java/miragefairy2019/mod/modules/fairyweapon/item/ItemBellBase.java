@@ -23,9 +23,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemBellBase extends ItemFairyWeaponBase
 {
 
-	IMagicStatus<Double> pitch = registerMagicStatus("pitch", formatterPitch(), mul(
-		val(1.0),
-		pow(0.5, add(div(cost(), 50), -1))));
+	public IMagicStatus<Double> pitch = registerMagicStatus("pitch", formatterPitch(),
+		mul(val(1.0), pow(0.5, add(div(cost(), 50), -1))));
 
 	@Override
 	@SideOnly(Side.CLIENT)
