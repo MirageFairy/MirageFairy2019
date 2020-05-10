@@ -29,191 +29,89 @@ Writer: {
 );
 
 (
-	writer: Writer::new("src/main/resources/assets/miragefairy2019/advancements/fairy_weapon");
-
-	func1: configure -> (
-		item: "miragefairy2019:\(configure.registerName)";
-		writer::write("\(configure.registerName).json"; {
-			display = (
-				_: {
-					icon = {
-						item = item;
-					};
-					title = {
-						translate = "item.\(configure.unlocalizedName).name";
-					};
-					description = {
-						translate = "advancements.miragefairy2019.fairy_weapon.all.description";
-					};
-				};
-				configure.frame !== NULL && (
-					_.frame = configure.frame;
-				);
-				_
-			);
-			parent = "miragefairy2019:\(configure.parent)";
-			criteria = {
-				main = {
-					trigger = "minecraft:inventory_changed";
-					conditions = {
-						items = [
-							{
-								item = item;
-							}
-						];
-					};
-				};
+	Achievement: {
+		new: _, registerName, unlocalizedName -> _{
+			configure: {
+				registerName;
+				unlocalizedName;
+				parent: NULL;
+				frame: NULL;
 			};
-		});
-	);
+		};
+		parent: _, parent -> (
+			_.configure.parent = parent;
+			_
+		);
+		frame: _, frame -> (
+			_.configure.frame = frame;
+			_
+		);
+		write: _ -> (
+			writer: Writer::new("src/main/resources/assets/miragefairy2019/advancements/fairy_weapon");
+			item: "miragefairy2019:\(_.configure.registerName)";
+			writer::write("\(_.configure.registerName).json"; {
+				display = (
+					map: {
+						icon = {
+							item = item;
+						};
+						title = {
+							translate = "item.\(_.configure.unlocalizedName).name";
+						};
+						description = {
+							translate = "advancements.miragefairy2019.fairy_weapon.all.description";
+						};
+					};
+					_.configure.frame !== NULL && (
+						map.frame = _.configure.frame;
+					);
+					map
+				);
+				parent = "miragefairy2019:\(_.configure.parent)";
+				criteria = {
+					main = {
+						trigger = "minecraft:inventory_changed";
+						conditions = {
+							items = [
+								{
+									item = item;
+								}
+							];
+						};
+					};
+				};
+			});
+		);
+	};
 
-	(
+	Achievement::new("crafting_fairy_wand"; "fairyWandCrafting")::parent("fairy_weapon/root")::write();
+	Achievement::new("crafting_fairy_wand_2"; "fairyWandCrafting2")::parent("fairy_weapon/crafting_fairy_wand")::write();
+	Achievement::new("crafting_fairy_wand_3"; "fairyWandCrafting3")::parent("fairy_weapon/crafting_fairy_wand_2")::write();
+	Achievement::new("hydrating_fairy_wand"; "fairyWandHydrating")::parent("fairy_weapon/root")::write();
+	Achievement::new("hydrating_fairy_wand_2"; "fairyWandHydrating2")::parent("fairy_weapon/hydrating_fairy_wand")::write();
+	Achievement::new("hydrating_fairy_wand_3"; "fairyWandHydrating3")::parent("fairy_weapon/hydrating_fairy_wand_2")::write();
+	Achievement::new("melting_fairy_wand"; "fairyWandMelting")::parent("fairy_weapon/root")::write();
+	Achievement::new("melting_fairy_wand_2"; "fairyWandMelting2")::parent("fairy_weapon/melting_fairy_wand")::write();
+	Achievement::new("breaking_fairy_wand"; "fairyWandBreaking")::parent("fairy_weapon/root")::write();
+	Achievement::new("breaking_fairy_wand_2"; "fairyWandBreaking2")::parent("fairy_weapon/breaking_fairy_wand")::write();
+	Achievement::new("polishing_fairy_wand"; "fairyWandPolishing")::parent("fairy_weapon/root")::write();
+	Achievement::new("summoning_fairy_wand"; "fairyWandSummoning")::parent("fairy_weapon/root")::write();
 
-		{
-			registerName: "crafting_fairy_wand";
-			unlocalizedName: "fairyWandCrafting";
-			parent: "fairy_weapon/root";
-			frame: NULL;
-		},
-		{
-			registerName: "crafting_fairy_wand_2";
-			unlocalizedName: "fairyWandCrafting2";
-			parent: "fairy_weapon/crafting_fairy_wand";
-			frame: NULL;
-		},
-		{
-			registerName: "crafting_fairy_wand_3";
-			unlocalizedName: "fairyWandCrafting3";
-			parent: "fairy_weapon/crafting_fairy_wand_2";
-			frame: NULL;
-		},
-		{
-			registerName: "hydrating_fairy_wand";
-			unlocalizedName: "fairyWandHydrating";
-			parent: "fairy_weapon/root";
-			frame: NULL;
-		},
-		{
-			registerName: "hydrating_fairy_wand_2";
-			unlocalizedName: "fairyWandHydrating2";
-			parent: "fairy_weapon/hydrating_fairy_wand";
-			frame: NULL;
-		},
-		{
-			registerName: "hydrating_fairy_wand_3";
-			unlocalizedName: "fairyWandHydrating3";
-			parent: "fairy_weapon/hydrating_fairy_wand_2";
-			frame: NULL;
-		},
-		{
-			registerName: "melting_fairy_wand";
-			unlocalizedName: "fairyWandMelting";
-			parent: "fairy_weapon/root";
-			frame: NULL;
-		},
-		{
-			registerName: "melting_fairy_wand_2";
-			unlocalizedName: "fairyWandMelting2";
-			parent: "fairy_weapon/melting_fairy_wand";
-			frame: NULL;
-		},
-		{
-			registerName: "breaking_fairy_wand";
-			unlocalizedName: "fairyWandBreaking";
-			parent: "fairy_weapon/root";
-			frame: NULL;
-		},
-		{
-			registerName: "breaking_fairy_wand_2";
-			unlocalizedName: "fairyWandBreaking2";
-			parent: "fairy_weapon/breaking_fairy_wand";
-			frame: NULL;
-		},
-		{
-			registerName: "polishing_fairy_wand";
-			unlocalizedName: "fairyWandPolishing";
-			parent: "fairy_weapon/root";
-			frame: NULL;
-		},
-		{
-			registerName: "summoning_fairy_wand";
-			unlocalizedName: "fairyWandSummoning";
-			parent: "fairy_weapon/root";
-			frame: NULL;
-		},
+	Achievement::new("miragium_axe"; "miragiumAxe")::parent("fairy_weapon/root")::write();
 
-		{
-			registerName: "miragium_axe";
-			unlocalizedName: "miragiumAxe";
-			parent: "fairy_weapon/root";
-			frame: NULL;
-		},
+	Achievement::new("miragium_sword"; "miragiumSword")::parent("fairy_weapon/root")::write();
+	Achievement::new("fairy_sword"; "fairySword")::parent("fairy_weapon/miragium_sword")::frame("goal")::write();
 
-		{
-			registerName: "miragium_sword";
-			unlocalizedName: "miragiumSword";
-			parent: "fairy_weapon/root";
-			frame: NULL;
-		},
-		{
-			registerName: "fairy_sword";
-			unlocalizedName: "fairySword";
-			parent: "fairy_weapon/miragium_sword";
-			frame: "goal";
-		},
+	Achievement::new("bell_base"; "bellBase")::parent("fairy_weapon/root")::write();
+	Achievement::new("flower_picking_bell"; "bellFlowerPicking")::parent("fairy_weapon/bell_base")::frame("goal")::write();
+	Achievement::new("christmas_bell"; "bellChristmas")::parent("fairy_weapon/bell_base")::frame("challenge")::write();
 
-		{
-			registerName: "bell_base";
-			unlocalizedName: "bellBase";
-			parent: "fairy_weapon/root";
-			frame: NULL;
-		},
-		{
-			registerName: "flower_picking_bell";
-			unlocalizedName: "bellFlowerPicking";
-			parent: "fairy_weapon/bell_base";
-			frame: "goal";
-		},
-		{
-			registerName: "christmas_bell";
-			unlocalizedName: "bellChristmas";
-			parent: "fairy_weapon/bell_base";
-			frame: "challenge";
-		},
+	Achievement::new("ocarina_base"; "ocarinaBase")::parent("fairy_weapon/root")::write();
+	Achievement::new("temptation_ocarina"; "ocarinaTemptation")::parent("fairy_weapon/ocarina_base")::frame("goal")::write();
 
-		{
-			registerName: "ocarina_base";
-			unlocalizedName: "ocarinaBase";
-			parent: "fairy_weapon/root";
-			frame: NULL;
-		},
-		{
-			registerName: "temptation_ocarina";
-			unlocalizedName: "ocarinaTemptation";
-			parent: "fairy_weapon/ocarina_base";
-			frame: "goal";
-		},
-
-		{
-			registerName: "magic_wand_base";
-			unlocalizedName: "magicWandBase";
-			parent: "fairy_weapon/root";
-			frame: NULL;
-		},
-		{
-			registerName: "light_magic_wand";
-			unlocalizedName: "magicWandLight";
-			parent: "fairy_weapon/magic_wand_base";
-			frame: "goal";
-		},
-		{
-			registerName: "collecting_magic_wand";
-			unlocalizedName: "magicWandCollecting";
-			parent: "fairy_weapon/magic_wand_base";
-			frame: "goal";
-		},
-
-	) | *func1;
+	Achievement::new("magic_wand_base"; "magicWandBase")::parent("fairy_weapon/root")::write();
+	Achievement::new("light_magic_wand"; "magicWandLight")::parent("fairy_weapon/magic_wand_base")::frame("goal")::write();
+	Achievement::new("collecting_magic_wand"; "magicWandCollecting")::parent("fairy_weapon/magic_wand_base")::frame("goal")::write();
 
 );
 
