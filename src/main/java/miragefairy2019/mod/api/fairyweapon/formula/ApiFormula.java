@@ -1,9 +1,12 @@
 package miragefairy2019.mod.api.fairyweapon.formula;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.fairy.IAbilityType;
 import miragefairy2019.mod.api.fairy.IManaType;
+import miragefairy2019.mod.api.fairy.ManaTypes;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaBooleanGreaterThanEqualFormulaDoubleDouble;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaConstantDouble;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleAbility;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleAddFormulas;
@@ -16,6 +19,7 @@ import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMana;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMaxFormulaDouble;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMinFormulaDouble;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMulFormulas;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaIntegerRoundFormulaDouble;
 import miragefairy2019.mod.modules.fairyweapon.formula.MagicStatus;
 import mirrg.boron.util.struct.ImmutableArray;
 import net.minecraft.util.text.ITextComponent;
@@ -29,34 +33,49 @@ public class ApiFormula
 		return new FormulaConstantDouble(value);
 	}
 
-	public static IFormulaDouble source(IManaType manaType)
+	public static IFormulaDouble shine()
+	{
+		return new FormulaDoubleMana(ManaTypes.shine.get());
+	}
+
+	public static IFormulaDouble fire()
+	{
+		return new FormulaDoubleMana(ManaTypes.fire.get());
+	}
+
+	public static IFormulaDouble wind()
+	{
+		return new FormulaDoubleMana(ManaTypes.wind.get());
+	}
+
+	public static IFormulaDouble gaia()
+	{
+		return new FormulaDoubleMana(ManaTypes.gaia.get());
+	}
+
+	public static IFormulaDouble aqua()
+	{
+		return new FormulaDoubleMana(ManaTypes.aqua.get());
+	}
+
+	public static IFormulaDouble dark()
+	{
+		return new FormulaDoubleMana(ManaTypes.dark.get());
+	}
+
+	public static IFormulaDouble mana(IManaType manaType)
 	{
 		return new FormulaDoubleMana(manaType);
 	}
 
-	public static IFormulaDouble source(IManaType manaType, int max)
+	public static IFormulaDouble abilityRaw(Supplier<IAbilityType> sAbilityType)
 	{
-		return min(source(manaType), max);
+		return new FormulaDoubleAbility(sAbilityType.get());
 	}
 
-	public static IFormulaDouble source(IManaType manaType, int max, int distribution)
+	public static IFormulaDouble ability(Supplier<IAbilityType> sAbilityType)
 	{
-		return mul(root(div(source(manaType), max), distribution), max);
-	}
-
-	public static IFormulaDouble source(IAbilityType abilityType)
-	{
-		return mul(new FormulaDoubleAbility(abilityType), div(cost(), 50));
-	}
-
-	public static IFormulaDouble source(IAbilityType abilityType, int max)
-	{
-		return min(source(abilityType), max);
-	}
-
-	public static IFormulaDouble source(IAbilityType abilityType, int max, int distribution)
-	{
-		return mul(root(div(source(abilityType), max), distribution), max);
+		return mul(abilityRaw(sAbilityType), div(cost(), 50));
 	}
 
 	public static IFormulaDouble cost()
