@@ -84,34 +84,34 @@ Writer: {
 		);
 	};
 
-	Achievement::new("crafting_fairy_wand"; "fairyWandCrafting")::parent("fairy_weapon/root")::write();
-	Achievement::new("crafting_fairy_wand_2"; "fairyWandCrafting2")::parent("fairy_weapon/crafting_fairy_wand")::write();
-	Achievement::new("crafting_fairy_wand_3"; "fairyWandCrafting3")::parent("fairy_weapon/crafting_fairy_wand_2")::write();
-	Achievement::new("hydrating_fairy_wand"; "fairyWandHydrating")::parent("fairy_weapon/root")::write();
-	Achievement::new("hydrating_fairy_wand_2"; "fairyWandHydrating2")::parent("fairy_weapon/hydrating_fairy_wand")::write();
-	Achievement::new("hydrating_fairy_wand_3"; "fairyWandHydrating3")::parent("fairy_weapon/hydrating_fairy_wand_2")::write();
-	Achievement::new("melting_fairy_wand"; "fairyWandMelting")::parent("fairy_weapon/root")::write();
-	Achievement::new("melting_fairy_wand_2"; "fairyWandMelting2")::parent("fairy_weapon/melting_fairy_wand")::write();
-	Achievement::new("breaking_fairy_wand"; "fairyWandBreaking")::parent("fairy_weapon/root")::write();
-	Achievement::new("breaking_fairy_wand_2"; "fairyWandBreaking2")::parent("fairy_weapon/breaking_fairy_wand")::write();
-	Achievement::new("polishing_fairy_wand"; "fairyWandPolishing")::parent("fairy_weapon/root")::write();
-	Achievement::new("summoning_fairy_wand"; "fairyWandSummoning")::parent("fairy_weapon/root")::write();
+	Achievement::new("crafting_fairy_wand"   ; "fairyWandCrafting"  )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("crafting_fairy_wand_2" ; "fairyWandCrafting2" )::parent("fairy_weapon/crafting_fairy_wand"   )                    ::write();
+	Achievement::new("crafting_fairy_wand_3" ; "fairyWandCrafting3" )::parent("fairy_weapon/crafting_fairy_wand_2" )                    ::write();
+	Achievement::new("hydrating_fairy_wand"  ; "fairyWandHydrating" )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("hydrating_fairy_wand_2"; "fairyWandHydrating2")::parent("fairy_weapon/hydrating_fairy_wand"  )                    ::write();
+	Achievement::new("hydrating_fairy_wand_3"; "fairyWandHydrating3")::parent("fairy_weapon/hydrating_fairy_wand_2")                    ::write();
+	Achievement::new("melting_fairy_wand"    ; "fairyWandMelting"   )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("melting_fairy_wand_2"  ; "fairyWandMelting2"  )::parent("fairy_weapon/melting_fairy_wand"    )                    ::write();
+	Achievement::new("breaking_fairy_wand"   ; "fairyWandBreaking"  )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("breaking_fairy_wand_2" ; "fairyWandBreaking2" )::parent("fairy_weapon/breaking_fairy_wand"   )                    ::write();
+	Achievement::new("polishing_fairy_wand"  ; "fairyWandPolishing" )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("summoning_fairy_wand"  ; "fairyWandSummoning" )::parent("fairy_weapon/root"                  )                    ::write();
 
-	Achievement::new("miragium_axe"; "miragiumAxe")::parent("fairy_weapon/root")::write();
+	Achievement::new("miragium_axe"          ; "miragiumAxe"        )::parent("fairy_weapon/root"                  )                    ::write();
 
-	Achievement::new("miragium_sword"; "miragiumSword")::parent("fairy_weapon/root")::write();
-	Achievement::new("fairy_sword"; "fairySword")::parent("fairy_weapon/miragium_sword")::frame("goal")::write();
+	Achievement::new("miragium_sword"        ; "miragiumSword"      )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("fairy_sword"           ; "fairySword"         )::parent("fairy_weapon/miragium_sword"        )::frame("goal"     )::write();
 
-	Achievement::new("bell_base"; "bellBase")::parent("fairy_weapon/root")::write();
-	Achievement::new("flower_picking_bell"; "bellFlowerPicking")::parent("fairy_weapon/bell_base")::frame("goal")::write();
-	Achievement::new("christmas_bell"; "bellChristmas")::parent("fairy_weapon/bell_base")::frame("challenge")::write();
+	Achievement::new("bell_base"             ; "bellBase"           )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("flower_picking_bell"   ; "bellFlowerPicking"  )::parent("fairy_weapon/bell_base"             )::frame("goal"     )::write();
+	Achievement::new("christmas_bell"        ; "bellChristmas"      )::parent("fairy_weapon/bell_base"             )::frame("challenge")::write();
 
-	Achievement::new("ocarina_base"; "ocarinaBase")::parent("fairy_weapon/root")::write();
-	Achievement::new("temptation_ocarina"; "ocarinaTemptation")::parent("fairy_weapon/ocarina_base")::frame("goal")::write();
+	Achievement::new("ocarina_base"          ; "ocarinaBase"        )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("temptation_ocarina"    ; "ocarinaTemptation"  )::parent("fairy_weapon/ocarina_base"          )::frame("goal"     )::write();
 
-	Achievement::new("magic_wand_base"; "magicWandBase")::parent("fairy_weapon/root")::write();
-	Achievement::new("light_magic_wand"; "magicWandLight")::parent("fairy_weapon/magic_wand_base")::frame("goal")::write();
-	Achievement::new("collecting_magic_wand"; "magicWandCollecting")::parent("fairy_weapon/magic_wand_base")::frame("goal")::write();
+	Achievement::new("magic_wand_base"       ; "magicWandBase"      )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("light_magic_wand"      ; "magicWandLight"     )::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
+	Achievement::new("collecting_magic_wand" ; "magicWandCollecting")::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
 
 );
 
