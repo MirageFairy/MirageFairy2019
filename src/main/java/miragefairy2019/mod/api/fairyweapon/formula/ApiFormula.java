@@ -66,6 +66,16 @@ public class ApiFormula
 
 	//
 
+	public static IFormulaDouble limit(IFormulaDouble formula, int max)
+	{
+		return min(formula, max);
+	}
+
+	public static IFormulaDouble limit(IFormulaDouble formula, int max, int distribution)
+	{
+		return mul(root(div(formula, max), distribution), max);
+	}
+
 	public static IFormulaDouble add(IFormulaDouble a, double b)
 	{
 		return new FormulaDoubleFormulaAddDouble(a, b);
@@ -114,6 +124,16 @@ public class ApiFormula
 	public static IFormulaDouble max(IFormulaDouble a, double b)
 	{
 		return new FormulaDoubleMaxFormulaDouble(a, b);
+	}
+
+	public static IFormulaInteger round(IFormulaDouble formula)
+	{
+		return new FormulaIntegerRoundFormulaDouble(formula);
+	}
+
+	public static IFormulaBoolean gte(IFormulaDouble formula, double b)
+	{
+		return new FormulaBooleanGreaterThanEqualFormulaDoubleDouble(formula, b);
 	}
 
 	//
