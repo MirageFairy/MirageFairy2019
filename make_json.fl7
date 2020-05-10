@@ -70,6 +70,79 @@ Writer: {
 	(
 
 		{
+			registerName: "crafting_fairy_wand";
+			unlocalizedName: "fairyWandCrafting";
+			parent: "fairy_weapon/root";
+			frame: NULL;
+		},
+		{
+			registerName: "crafting_fairy_wand_2";
+			unlocalizedName: "fairyWandCrafting2";
+			parent: "fairy_weapon/crafting_fairy_wand";
+			frame: NULL;
+		},
+		{
+			registerName: "crafting_fairy_wand_3";
+			unlocalizedName: "fairyWandCrafting3";
+			parent: "fairy_weapon/crafting_fairy_wand_2";
+			frame: NULL;
+		},
+		{
+			registerName: "hydrating_fairy_wand";
+			unlocalizedName: "fairyWandHydrating";
+			parent: "fairy_weapon/root";
+			frame: NULL;
+		},
+		{
+			registerName: "hydrating_fairy_wand_2";
+			unlocalizedName: "fairyWandHydrating2";
+			parent: "fairy_weapon/hydrating_fairy_wand";
+			frame: NULL;
+		},
+		{
+			registerName: "hydrating_fairy_wand_3";
+			unlocalizedName: "fairyWandHydrating3";
+			parent: "fairy_weapon/hydrating_fairy_wand_2";
+			frame: NULL;
+		},
+		{
+			registerName: "melting_fairy_wand";
+			unlocalizedName: "fairyWandMelting";
+			parent: "fairy_weapon/root";
+			frame: NULL;
+		},
+		{
+			registerName: "melting_fairy_wand_2";
+			unlocalizedName: "fairyWandMelting2";
+			parent: "fairy_weapon/melting_fairy_wand";
+			frame: NULL;
+		},
+		{
+			registerName: "breaking_fairy_wand";
+			unlocalizedName: "fairyWandBreaking";
+			parent: "fairy_weapon/root";
+			frame: NULL;
+		},
+		{
+			registerName: "breaking_fairy_wand_2";
+			unlocalizedName: "fairyWandBreaking2";
+			parent: "fairy_weapon/breaking_fairy_wand";
+			frame: NULL;
+		},
+		{
+			registerName: "polishing_fairy_wand";
+			unlocalizedName: "fairyWandPolishing";
+			parent: "fairy_weapon/root";
+			frame: NULL;
+		},
+		{
+			registerName: "summoning_fairy_wand";
+			unlocalizedName: "fairyWandSummoning";
+			parent: "fairy_weapon/root";
+			frame: NULL;
+		},
+
+		{
 			registerName: "miragium_axe";
 			unlocalizedName: "miragiumAxe";
 			parent: "fairy_weapon/root";
