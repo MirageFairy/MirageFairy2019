@@ -26,9 +26,9 @@ public class FormulaDoubleMulFormulas implements IFormulaDouble
 	@Override
 	public Double get(IFairyType fairyType)
 	{
-		double a = 0;
+		double a = 1;
 		for (IFormulaDouble formula : formulas) {
-			a += formula.get(fairyType);
+			a *= formula.get(fairyType);
 		}
 		return a;
 	}
@@ -36,9 +36,9 @@ public class FormulaDoubleMulFormulas implements IFormulaDouble
 	@Override
 	public Double getMax()
 	{
-		double a = 0;
+		double a = 1;
 		for (IFormulaDouble formula : formulas) {
-			a += formula.getMax();
+			a *= formula.getMax();
 		}
 		return a;
 	}
@@ -46,9 +46,9 @@ public class FormulaDoubleMulFormulas implements IFormulaDouble
 	@Override
 	public Double getMin()
 	{
-		double a = 0;
+		double a = 1;
 		for (IFormulaDouble formula : formulas) {
-			a += formula.getMin();
+			a *= formula.getMin();
 		}
 		return a;
 	}
