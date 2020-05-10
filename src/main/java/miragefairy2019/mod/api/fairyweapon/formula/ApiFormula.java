@@ -118,9 +118,64 @@ public class ApiFormula
 
 	//
 
+	public static Function<Double, ITextComponent> formatterDouble0()
+	{
+		return d -> new TextComponentString(String.format("%.0f", d));
+	}
+
+	public static Function<Double, ITextComponent> formatterDouble1()
+	{
+		return d -> new TextComponentString(String.format("%.1f", d));
+	}
+
+	public static Function<Double, ITextComponent> formatterDouble2()
+	{
+		return d -> new TextComponentString(String.format("%.2f", d));
+	}
+
+	public static Function<Double, ITextComponent> formatterDouble3()
+	{
+		return d -> new TextComponentString(String.format("%.3f", d));
+	}
+
+	public static Function<Double, ITextComponent> formatterPercent0()
+	{
+		return d -> new TextComponentString(String.format("%.0f%%", d * 100));
+	}
+
+	public static Function<Double, ITextComponent> formatterPercent1()
+	{
+		return d -> new TextComponentString(String.format("%.1f%%", d * 100));
+	}
+
+	public static Function<Double, ITextComponent> formatterPercent2()
+	{
+		return d -> new TextComponentString(String.format("%.2f%%", d * 100));
+	}
+
+	public static Function<Double, ITextComponent> formatterPercent3()
+	{
+		return d -> new TextComponentString(String.format("%.3f%%", d * 100));
+	}
+
 	public static Function<Double, ITextComponent> formatterPitch()
 	{
 		return d -> new TextComponentString(String.format("%.2f", Math.log(d) / Math.log(2) * 12));
+	}
+
+	public static Function<Integer, ITextComponent> formatterInteger()
+	{
+		return i -> new TextComponentString(Integer.toString(i));
+	}
+
+	public static Function<Integer, ITextComponent> formatterTick()
+	{
+		return i -> new TextComponentString(Integer.toString(i) + "t");
+	}
+
+	public static Function<Boolean, ITextComponent> formatterYesNo()
+	{
+		return b -> new TextComponentString(b ? "Yes" : "No"); // TODO localize
 	}
 
 	//
