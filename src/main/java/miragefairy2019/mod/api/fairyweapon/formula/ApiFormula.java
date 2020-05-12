@@ -85,12 +85,12 @@ public class ApiFormula
 
 	//
 
-	public static IFormulaDouble limit(IFormulaDouble formula, int max)
+	public static IFormulaDouble limit(IFormulaDouble formula, double max)
 	{
 		return min(formula, max);
 	}
 
-	public static IFormulaDouble limit(IFormulaDouble formula, int max, int distribution)
+	public static IFormulaDouble limit(IFormulaDouble formula, double max, int distribution)
 	{
 		return mul(root(div(formula, max), distribution), max);
 	}
