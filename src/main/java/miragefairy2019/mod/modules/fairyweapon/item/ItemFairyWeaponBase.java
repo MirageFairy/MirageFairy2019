@@ -64,7 +64,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreIngredient;
 
-public abstract class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, IItemComposite, ICombiningItem, IItemFairyWeapon
+public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, IItemComposite, ICombiningItem, IItemFairyWeapon
 {
 
 	public ItemFairyWeaponBase()

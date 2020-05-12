@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFairySword extends ItemMiragiumSword
+public class ItemFairySword extends ItemFairyWeaponBase
 {
 
 	public double getAdditionalAttackDamage(ItemStack itemStack)

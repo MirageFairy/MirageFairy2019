@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemOcarinaTemptation extends ItemOcarinaBase
+public class ItemOcarinaTemptation extends ItemFairyWeaponBase
 {
 
 	protected static class Status

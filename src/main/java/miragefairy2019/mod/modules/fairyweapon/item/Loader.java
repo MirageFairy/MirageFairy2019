@@ -60,7 +60,7 @@ public class Loader
 			.get();
 
 		// 潤いのステッキ
-		fairyWeapon(erMod, ItemFairyWandHydrating::new, "hydrating_fairy_wand", "fairyWandHydrating")
+		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "hydrating_fairy_wand", "fairyWandHydrating")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandHydrating"))
 			.bind(addOreName("container1000Water"))
 			.bind(addComponent(instance(wood.get(), 1)))
@@ -69,7 +69,7 @@ public class Loader
 			.get();
 
 		// 潤いのステッキ2
-		fairyWeapon(erMod, ItemFairyWandHydrating::new, "hydrating_fairy_wand_2", "fairyWandHydrating2")
+		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "hydrating_fairy_wand_2", "fairyWandHydrating2")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandHydrating"))
 			.bind(addOreName("container1000Water"))
 			.bind(addComponent(instance(miragium.get(), 1)))
@@ -78,7 +78,7 @@ public class Loader
 			.get();
 
 		// 潤いのステッキ3
-		fairyWeapon(erMod, ItemFairyWandHydrating::new, "hydrating_fairy_wand_3", "fairyWandHydrating3")
+		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "hydrating_fairy_wand_3", "fairyWandHydrating3")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandHydrating"))
 			.bind(addOreName("container1000Water"))
 			.bind(addComponent(instance(miragium.get(), 1)))
@@ -122,7 +122,7 @@ public class Loader
 			.get();
 
 		// 珠玉のステッキ
-		fairyWeapon(erMod, ItemFairyWandPolishing::new, "polishing_fairy_wand", "fairyWandPolishing")
+		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "polishing_fairy_wand", "fairyWandPolishing")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandPolishing"))
 			.bind(addComponent(instance(miragium.get(), 1)))
 			.bind(addComponent(instance(moonstone.get(), 1)))
@@ -142,7 +142,7 @@ public class Loader
 		//
 
 		// ミラジウムの剣
-		Configurator<ItemMiragiumSword> miragiumSword = fairyWeapon(erMod, ItemMiragiumSword::new, "miragium_sword", "miragiumSword")
+		Configurator<ItemFairyWeaponBase> miragiumSword = fairyWeapon(erMod, ItemFairyWeaponBase::new, "miragium_sword", "miragiumSword")
 			.bind(addComponent(instance(miragium.get(), 2)))
 			.bind(addComponent(instance(wood.get(), 0.5)))
 			.bind(addComponent(instance(getComponentAbilityType(attack.get()))))
@@ -173,7 +173,7 @@ public class Loader
 			.get();
 
 		// ロッドベース
-		Configurator<ItemMagicWandBase> magicWandBase = fairyWeapon(erMod, ItemMagicWandBase::new, "magic_wand_base", "magicWandBase")
+		Configurator<ItemFairyWeaponBase> magicWandBase = fairyWeapon(erMod, ItemFairyWeaponBase::new, "magic_wand_base", "magicWandBase")
 			.bind(addComponent(instance(miragium.get(), 1)))
 			.bind(addComponent(instance(fluorite.get(), 1)))
 			.bind(addComponent(instance(miragium.get(), 4)))
@@ -199,7 +199,7 @@ public class Loader
 			.get();
 
 		// オカリナベース
-		Configurator<ItemOcarinaBase> ocarinaBase = fairyWeapon(erMod, ItemOcarinaBase::new, "ocarina_base", "ocarinaBase")
+		Configurator<ItemFairyWeaponBase> ocarinaBase = fairyWeapon(erMod, ItemFairyWeaponBase::new, "ocarina_base", "ocarinaBase")
 			.bind(addComponent(instance(miragium.get(), 1)))
 			.bind(addComponent(instance(apatite.get(), 4)))
 			.bind(addComponent(instance(getComponentAbilityType(art.get()))))
