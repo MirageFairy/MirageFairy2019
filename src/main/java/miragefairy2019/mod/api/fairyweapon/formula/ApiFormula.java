@@ -20,6 +20,7 @@ import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMaxFormulaDo
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMinFormulaDouble;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMulFormulas;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaIntegerRoundFormulaDouble;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaSelectEntry;
 import miragefairy2019.mod.modules.fairyweapon.formula.MagicStatus;
 import mirrg.boron.util.struct.ImmutableArray;
 import net.minecraft.util.text.ITextComponent;
@@ -168,6 +169,16 @@ public class ApiFormula
 	public static IFormulaInteger round(IFormulaDouble formula)
 	{
 		return new FormulaIntegerRoundFormulaDouble(formula);
+	}
+
+	public static IFormulaDouble select(IFormulaDouble formula, double defaultValue, IFormulaSelectEntry... entries)
+	{
+		return new FormulaSelect(formula, defaultValue, entries);
+	}
+
+	public static IFormulaSelectEntry entry(double threshold, double value)
+	{
+		return new FormulaSelectEntry(threshold, value);
 	}
 
 	public static IFormulaBoolean gte(IFormulaDouble formula, double b)
