@@ -13,6 +13,7 @@ import miragefairy2019.mod.api.composite.ApiComposite;
 import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.api.composite.IComposite;
 import miragefairy2019.mod.api.composite.IItemComposite;
+import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IComponentAbilityType;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
@@ -210,13 +211,14 @@ public abstract class ItemFairyWeaponBase extends Item implements ISphereReplace
 			.appendSibling(getComposite().getDisplayString()).getFormattedText());
 
 		// 妖精魔法ステータス
-		Tuple<ItemStack, IFairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player).flatMap(p -> findFairy(itemStack, p)).orElse(null);
-		if (fairy != null) {
-			tooltip.add("" + BLUE + BOLD + "--- Fairy: " + fairy.x.getDisplayName() + " ---");
-			addInformationFairyWeapon(itemStack, fairy.x, fairy.y, world, tooltip, flag);
-		} else {
-			tooltip.add(BLUE + "No fairy is supplied");
-		}
+		Tuple<ItemStack, IFairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player)
+			.flatMap(p -> findFairy(itemStack, p))
+			.orElseGet(() -> Tuple.of(ItemStack.EMPTY, ApiFairy.empty()));
+		tooltip.add(new TextComponentString("--- Fairy: ")
+			.setStyle(new Style().setColor(BLUE).setBold(true))
+			.appendText(fairy.x.isEmpty() ? "None" : fairy.x.getDisplayName())
+			.appendText(" ---").getFormattedText());
+		addInformationFairyWeapon(itemStack, fairy.x, fairy.y, world, tooltip, flag);
 
 	}
 
