@@ -33,39 +33,39 @@ public class ApiFormula
 		return new FormulaConstantDouble(value);
 	}
 
+	public static IFormulaDouble mana(IManaType manaType)
+	{
+		return new FormulaDoubleMana(manaType);
+	}
+
 	public static IFormulaDouble shine()
 	{
-		return new FormulaDoubleMana(ManaTypes.shine.get());
+		return mana(ManaTypes.shine.get());
 	}
 
 	public static IFormulaDouble fire()
 	{
-		return new FormulaDoubleMana(ManaTypes.fire.get());
+		return mana(ManaTypes.fire.get());
 	}
 
 	public static IFormulaDouble wind()
 	{
-		return new FormulaDoubleMana(ManaTypes.wind.get());
+		return mana(ManaTypes.wind.get());
 	}
 
 	public static IFormulaDouble gaia()
 	{
-		return new FormulaDoubleMana(ManaTypes.gaia.get());
+		return mana(ManaTypes.gaia.get());
 	}
 
 	public static IFormulaDouble aqua()
 	{
-		return new FormulaDoubleMana(ManaTypes.aqua.get());
+		return mana(ManaTypes.aqua.get());
 	}
 
 	public static IFormulaDouble dark()
 	{
-		return new FormulaDoubleMana(ManaTypes.dark.get());
-	}
-
-	public static IFormulaDouble mana(IManaType manaType)
-	{
-		return new FormulaDoubleMana(manaType);
+		return mana(ManaTypes.dark.get());
 	}
 
 	public static IFormulaDouble abilityRaw(Supplier<IAbilityType> sAbilityType)
