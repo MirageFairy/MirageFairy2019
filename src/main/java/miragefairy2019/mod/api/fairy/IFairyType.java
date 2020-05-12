@@ -6,6 +6,8 @@ import net.minecraft.util.text.ITextComponent;
 public interface IFairyType
 {
 
+	public boolean isEmpty();
+
 	public ResourceLocation getName();
 
 	public int getColor();

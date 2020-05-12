@@ -47,6 +47,12 @@ public final class FairyType implements IFairyType
 	}
 
 	@Override
+	public boolean isEmpty()
+	{
+		return false;
+	}
+
+	@Override
 	public ResourceLocation getName()
 	{
 		return new ResourceLocation(modid, name);
