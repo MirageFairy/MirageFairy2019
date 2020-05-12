@@ -172,3 +172,7 @@ mirageFairy2019.magic.status.coolTime.name=Cool Time
 mirageFairy2019.magic.status.wear.name=Wear
 mirageFairy2019.magic.status.additionalReach.name=Additional Reach
 mirageFairy2019.magic.status.collection.name=Collection
+mirageFairy2019.magic.status.damage.name=Damage
+mirageFairy2019.magic.status.radius.name=Radius
+mirageFairy2019.magic.status.maxTargetCount.name=Max Target Count
+mirageFairy2019.magic.status.looting.name=Looting

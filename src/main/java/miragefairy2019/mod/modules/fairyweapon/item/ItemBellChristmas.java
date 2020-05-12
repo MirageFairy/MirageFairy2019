@@ -1,18 +1,18 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import static miragefairy2019.mod.api.fairy.AbilityTypes.*;
-import static miragefairy2019.mod.api.fairy.ManaTypes.*;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
 
 import java.util.List;
 
 import miragefairy2019.mod.api.fairy.IFairyType;
-import miragefairy2019.mod.api.fairyweapon.damagesource.IDamageSourceLooting;
+import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
+import miragefairy2019.mod.api.fairyweapon.formula.IFormulaSelectEntry;
+import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.modules.fairyweapon.magic.IExecutorRightClick;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace;
-import miragefairy2019.mod.modules.fairyweapon.status.FairyWeaponStatusBase;
-import miragefairy2019.mod.modules.fairyweapon.status.IFairyWeaponStatusProperty;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
@@ -22,7 +22,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
@@ -33,77 +32,53 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemBellChristmas extends ItemBellBase
 {
 
-	// TODO localize
-	protected static class Status extends FairyWeaponStatusBase
-	{
+	public IMagicStatus<Double> damage = registerMagicStatus("damage", formatterDouble1(),
+		add(new IFormulaDouble[] {
+			val(1),
+			scale(dark(), 90.0, 5.0, 3),
+			scale(ability(christmas), 20.0, 10.0),
+		}));
 
-		public IFairyWeaponStatusProperty<Double> pitch = property(
-			formula(1)
-				.mul(cost().apply(v -> Math.pow(0.5, v / 50.0 - 1)))
-				.asDouble("Pitch", pitch()));
+	public IMagicStatus<Double> additionalReach = registerMagicStatus("additionalReach", formatterDouble1(),
+		add(new IFormulaDouble[] {
+			val(8 - 4),
+			scale(wind(), 30.0, 6.0),
+		}));
 
-		public IFairyWeaponStatusProperty<Double> damage = property(
-			formula(1)
-				.add(value(dark.get()).max(90).div(90).pow(1 / 3.0).mul(5))
-				.add(value(christmas.get()).max(20).div(2))
-				.asDouble("Damage", float1()));
+	public IMagicStatus<Double> radius = registerMagicStatus("radius", formatterDouble1(),
+		add(new IFormulaDouble[] {
+			val(3),
+			scale(gaia(), 30.0, 3.0),
+		}));
 
-		public IFairyWeaponStatusProperty<Double> additionalReach = property(
-			formula(8 - 4)
-				.add(value(wind.get()).max(30).div(5))
-				.asDouble("Additional Reach", float1()));
+	public IMagicStatus<Integer> maxTargetCount = registerMagicStatus("maxTargetCount", formatterInteger(),
+		round(add(new IFormulaDouble[] {
+			val(2),
+			scale(dark(), 90.0, 3.0, 3),
+			scale(ability(attack), 10.0, 10.0 / 3.0),
+		})));
 
-		public IFairyWeaponStatusProperty<Double> radius = property(
-			formula(3)
-				.add(value(gaia.get()).max(30).div(10))
-				.asDouble("Radius", float1()));
+	public IMagicStatus<Integer> looting = registerMagicStatus("looting", formatterInteger(),
+		round(select(shine(), 0, new IFormulaSelectEntry[] {
+			entry(1, 1),
+			entry(2, 2),
+			entry(5, 3),
+			entry(10, 4),
+		})));
 
-		public IFairyWeaponStatusProperty<Integer> maxTargetCount = property(
-			formula(2)
-				.add(value(dark.get()).max(90).div(90).pow(1 / 3.0).mul(3))
-				.add(value(attack.get()).max(10).div(3))
-				.asInt("Max Target Count", integer()));
+	public IMagicStatus<Double> wear = registerMagicStatus("wear", formatterPercent0(),
+		mul(new IFormulaDouble[] {
+			div(cost(), 50),
+			pow(0.5, norm(fire(), 30.0)),
+			pow(0.5, norm(aqua(), 30.0)),
+		}));
 
-		public IFairyWeaponStatusProperty<Integer> looting = property(
-			formula(0)
-				.add(value(shine.get()))
-				.threshold(1, 2, 5, 10)
-				.asInt("Looting", integer()));
-
-		public IFairyWeaponStatusProperty<Double> wear = property(
-			formula(1)
-				.mul(cost().div(50))
-				.mul(value(fire.get()).max(30).div(30).xp(0.5))
-				.mul(value(aqua.get()).max(30).div(30).xp(0.5))
-				.asDouble("Wear", percent1()));
-
-		public IFairyWeaponStatusProperty<Double> coolTime = property(
-			formula(0)
-				.add(cost())
-				.mul(value(0.5))
-				.mul(value(dark.get()).max(90).div(90).pow(1 / 3.0).xp(0.5))
-				.mul(value(submission.get()).max(10).div(10).xp(0.5))
-				.asDouble("Cool Time", float0()));
-
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-
-		tooltip.add(TextFormatting.RED + "Right click to use magic");
-
-		super.addInformationFunctions(itemStack, world, tooltip, flag);
-
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-		new Status().addInformation(tooltip, fairyType);
-	}
+	public IMagicStatus<Double> coolTime = registerMagicStatus("coolTime", formatterTick(),
+		mul(new IFormulaDouble[] {
+			mul(cost(), 0.5),
+			pow(0.5, norm(dark(), 90.0, 3)),
+			pow(0.5, norm(ability(submission), 10.0)),
+		}));
 
 	public IExecutorRightClick getExecutor(World world, ItemStack itemStack, EntityPlayer player)
 	{
@@ -133,11 +108,8 @@ public class ItemBellChristmas extends ItemBellBase
 
 			IFairyType fairyType = fairy.y;
 
-			// ステータスを評価
-			Status status = new Status();
-
 			// 視線判定
-			SelectorRayTrace selectorRayTrace = new SelectorRayTrace(world, player, status.additionalReach.get(fairyType));
+			SelectorRayTrace selectorRayTrace = new SelectorRayTrace(world, player, additionalReach.get(fairyType));
 
 			// 対象判定
 			SelectorEntityRanged<EntityLivingBase> selectorEntityRanged = new SelectorEntityRanged<>(
@@ -145,13 +117,13 @@ public class ItemBellChristmas extends ItemBellBase
 				selectorRayTrace.getTarget(),
 				EntityLivingBase.class,
 				e -> e != player,
-				status.radius.get(fairyType),
-				status.maxTargetCount.get(fairyType));
+				radius.get(fairyType),
+				maxTargetCount.get(fairyType));
 
 			// 実行可能性を計算
 			boolean ok;
 			int color;
-			if (itemStack.getItemDamage() + (int) Math.ceil(status.wear.get(fairy.y)) > itemStack.getMaxDamage()) {
+			if (itemStack.getItemDamage() + (int) Math.ceil(wear.get(fairy.y)) > itemStack.getMaxDamage()) {
 				ok = false;
 				color = 0xFF0000;
 			} else if (selectorEntityRanged.getEffectiveEntities().count() == 0) {
@@ -175,20 +147,20 @@ public class ItemBellChristmas extends ItemBellBase
 					for (EntityLivingBase target : selectorEntityRanged.getEffectiveEntities()) {
 
 						// 耐久が足りないので中止
-						if (itemStack.getItemDamage() + (int) Math.ceil(status.wear.get(fairyType)) > itemStack.getMaxDamage()) break;
+						if (itemStack.getItemDamage() + (int) Math.ceil(wear.get(fairyType)) > itemStack.getMaxDamage()) break;
 
 						// パワーが足りないので中止
-						if (targetCount >= status.maxTargetCount.get(fairyType)) break;
+						if (targetCount >= maxTargetCount.get(fairyType)) break;
 
 						// 行使
-						itemStack.damageItem(UtilsMath.randomInt(world.rand, status.wear.get(fairyType)), player);
+						itemStack.damageItem(UtilsMath.randomInt(world.rand, wear.get(fairyType)), player);
 						targetCount++;
 						{
-							double damage = status.damage.get(fairyType);
+							double damage2 = damage.get(fairyType);
 
-							if (target.isEntityUndead()) damage *= 1.5;
+							if (target.isEntityUndead()) damage2 *= 1.5;
 
-							target.attackEntityFrom(new DamageSourceFairyMagic(player, status.looting.get(fairyType)), (float) damage);
+							target.attackEntityFrom(new DamageSourceFairyMagic(player, looting.get(fairyType)), (float) damage2);
 						}
 
 					}
@@ -196,10 +168,10 @@ public class ItemBellChristmas extends ItemBellBase
 					if (targetCount >= 1) {
 
 						// エフェクト
-						ItemBellBase.playSound(world, player, status.pitch.get(fairyType));
+						ItemBellBase.playSound(world, player, pitch.get(fairyType));
 
 						// クールタイム
-						player.getCooldownTracker().setCooldown(item, (int) (double) status.coolTime.get(fairyType));
+						player.getCooldownTracker().setCooldown(item, (int) (double) coolTime.get(fairyType));
 
 					}
 
@@ -217,24 +189,16 @@ public class ItemBellChristmas extends ItemBellBase
 
 	}
 
-	public static class DamageSourceFairyMagic extends EntityDamageSource implements IDamageSourceLooting
+	//
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 
-		private int lootingLevel;
+		super.addInformationFunctions(itemStack, world, tooltip, flag);
 
-		public DamageSourceFairyMagic(Entity damageSourceEntity, int lootingLevel)
-		{
-			super("indirectMagic", damageSourceEntity);
-			this.lootingLevel = lootingLevel;
-			setDamageBypassesArmor();
-			setMagicDamage();
-		}
-
-		@Override
-		public int getLootingLevel()
-		{
-			return lootingLevel;
-		}
+		tooltip.add(TextFormatting.RED + "Right click to use magic");
 
 	}
 
