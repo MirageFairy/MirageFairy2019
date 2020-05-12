@@ -95,6 +95,26 @@ public class ApiFormula
 		return mul(root(div(min(formula, max), max), distribution), max);
 	}
 
+	public static IFormulaDouble norm(IFormulaDouble formula, double max)
+	{
+		return div(min(formula, max), max);
+	}
+
+	public static IFormulaDouble norm(IFormulaDouble formula, double max, int distribution)
+	{
+		return root(div(min(formula, max), max), distribution);
+	}
+
+	public static IFormulaDouble scale(IFormulaDouble formula, double max, double newMax)
+	{
+		return mul(div(min(formula, max), max), newMax);
+	}
+
+	public static IFormulaDouble scale(IFormulaDouble formula, double max, double newMax, int distribution)
+	{
+		return mul(root(div(min(formula, max), max), distribution), newMax);
+	}
+
 	public static IFormulaDouble add(IFormulaDouble a, double b)
 	{
 		return new FormulaDoubleFormulaAddDouble(a, b);
