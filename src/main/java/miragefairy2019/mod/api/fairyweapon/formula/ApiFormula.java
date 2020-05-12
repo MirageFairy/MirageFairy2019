@@ -92,7 +92,7 @@ public class ApiFormula
 
 	public static IFormulaDouble limit(IFormulaDouble formula, double max, int distribution)
 	{
-		return mul(root(div(formula, max), distribution), max);
+		return mul(root(div(min(formula, max), max), distribution), max);
 	}
 
 	public static IFormulaDouble add(IFormulaDouble a, double b)
