@@ -207,9 +207,9 @@ public class ApiFormula
 		return i -> new TextComponentString(Integer.toString(i));
 	}
 
-	public static Function<Integer, ITextComponent> formatterTick()
+	public static Function<Double, ITextComponent> formatterTick()
 	{
-		return i -> new TextComponentString(Integer.toString(i) + "t");
+		return d -> new TextComponentString(String.format("%.0ft", d));
 	}
 
 	public static Function<Boolean, ITextComponent> formatterYesNo()
