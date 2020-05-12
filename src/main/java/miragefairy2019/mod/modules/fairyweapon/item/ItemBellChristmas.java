@@ -80,6 +80,8 @@ public class ItemBellChristmas extends ItemBellBase
 			pow(0.5, norm(ability(submission), 10.0)),
 		}));
 
+	//
+
 	public IExecutorRightClick getExecutor(World world, ItemStack itemStack, EntityPlayer player)
 	{
 		Item item = this;
