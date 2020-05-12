@@ -47,11 +47,11 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase
 	public IMagicStatus<Integer> fortune = registerMagicStatus("fortune", formatterInteger(),
 		round(min(div(shine(), 5), 3)));
 
-	public IMagicStatus<Integer> coolTime = registerMagicStatus("coolTime", formatterTick(),
-		round(mul(new IFormulaDouble[] {
+	public IMagicStatus<Double> coolTime = registerMagicStatus("coolTime", formatterTick(),
+		mul(new IFormulaDouble[] {
 			mul(cost(), 2),
 			pow(0.5, div(dark(), 20)),
-		})));
+		}));
 
 	public IMagicStatus<Double> wear = registerMagicStatus("wear", formatterPercent0(),
 		mul(new IFormulaDouble[] {
