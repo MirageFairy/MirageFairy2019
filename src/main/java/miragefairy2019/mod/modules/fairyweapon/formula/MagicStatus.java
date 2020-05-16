@@ -6,8 +6,10 @@ import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 
 public class MagicStatus<T> implements IMagicStatus<T>
 {
@@ -38,10 +40,28 @@ public class MagicStatus<T> implements IMagicStatus<T>
 	@Override
 	public ITextComponent getDisplayString(IFairyType fairyType)
 	{
+		T min = formula.getMin();
+		T max = formula.getMax();
+		T val = formula.get(fairyType);
+
+		TextFormatting color;
+		Boolean bold;
+		if (val.equals(max)) {
+			color = TextFormatting.DARK_GREEN;
+			bold = true;
+		} else if (val.equals(min)) {
+			color = TextFormatting.WHITE;
+			bold = null;
+		} else {
+			color = TextFormatting.GREEN;
+			bold = null;
+		}
+
 		return new TextComponentString("")
 			.appendSibling(getDisplayName())
 			.appendText(": ")
-			.appendSibling(formatter.apply(get(fairyType)))
+			.appendSibling(formatter.apply(val)
+				.setStyle(new Style().setColor(color).setBold(bold)))
 			.appendText(" (")
 			.appendSibling(getDisplaySources())
 			.appendText(")");
