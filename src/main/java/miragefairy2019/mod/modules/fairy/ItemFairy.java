@@ -128,12 +128,20 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 			ItemStack itemStackFairyWeapon;
 			itemStackFairyWeapon = player.getHeldItem(EnumHand.MAIN_HAND);
 			if (itemStackFairyWeapon.getItem() instanceof IItemFairyWeapon) {
-				tooltip.add("" + BLUE + BOLD + "--- Status of " + itemStackFairyWeapon.getDisplayName() + " ---");
+				tooltip.add(new TextComponentString("Weapon: ")
+					.setStyle(new Style().setColor(BLUE))
+					.appendSibling(new TextComponentString(itemStackFairyWeapon.getDisplayName())
+						.setStyle(new Style().setColor(WHITE)))
+					.getFormattedText());
 				((IItemFairyWeapon) itemStackFairyWeapon.getItem()).addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag);
 			}
 			itemStackFairyWeapon = player.getHeldItem(EnumHand.OFF_HAND);
 			if (itemStackFairyWeapon.getItem() instanceof IItemFairyWeapon) {
-				tooltip.add("" + BLUE + BOLD + "--- Status of " + itemStackFairyWeapon.getDisplayName() + " ---");
+				tooltip.add(new TextComponentString("Weapon: ")
+					.setStyle(new Style().setColor(BLUE))
+					.appendSibling(new TextComponentString(itemStackFairyWeapon.getDisplayName())
+						.setStyle(new Style().setColor(WHITE)))
+					.getFormattedText());
 				((IItemFairyWeapon) itemStackFairyWeapon.getItem()).addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag);
 			}
 		}

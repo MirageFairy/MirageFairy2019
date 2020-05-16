@@ -210,14 +210,31 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
 			.setStyle(new Style().setColor(YELLOW))
 			.appendSibling(getComposite().getDisplayString()).getFormattedText());
 
+		// 魔法名
+		String magicName;
+		if (UtilsMinecraft.canTranslate(getUnlocalizedName() + ".magic.name")) {
+			String string = UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".magic.name");
+			if (!string.isEmpty()) {
+				magicName = string;
+			} else {
+				magicName = getItemStackDisplayName(itemStack);
+			}
+		} else {
+			magicName = getItemStackDisplayName(itemStack);
+		}
+
 		// 妖精魔法ステータス
 		Tuple<ItemStack, IFairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player)
 			.flatMap(p -> findFairy(itemStack, p))
 			.orElseGet(() -> Tuple.of(ItemStack.EMPTY, ApiFairy.empty()));
-		tooltip.add(new TextComponentString("--- Fairy: ")
-			.setStyle(new Style().setColor(BLUE).setBold(true))
-			.appendText(fairy.x.isEmpty() ? "None" : fairy.x.getDisplayName())
-			.appendText(" ---").getFormattedText());
+		tooltip.add(new TextComponentString("Magic: ")
+			.setStyle(new Style().setColor(BLUE))
+			.appendSibling(new TextComponentString(magicName)
+				.setStyle(new Style().setColor(WHITE)))
+			.appendText(" with ")
+			.appendSibling(new TextComponentString(fairy.x.isEmpty() ? "no fairy" : fairy.x.getDisplayName())
+				.setStyle(new Style().setColor(WHITE)))
+			.getFormattedText());
 		addInformationFairyWeapon(itemStack, fairy.x, fairy.y, world, tooltip, flag);
 
 	}
