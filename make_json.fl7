@@ -14,10 +14,10 @@ Writer: {
 			{
 				type: "miragefairy2019:ore_dict_complex";
 				ore: "mirageFairy2019CraftingToolFairyWandBreaking";
-			},
+			};
 			{
 				item: "minecraft:blaze_rod";
-			},
+			};
 		];
 		result: {
 			item: "minecraft:blaze_powder";
@@ -118,7 +118,7 @@ Writer: {
 							items = [
 								{
 									item = item;
-								}
+								};
 							];
 						};
 					};
