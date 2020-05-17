@@ -29,6 +29,49 @@ Writer: {
 );
 
 (
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/item");
+
+	func: registerName -> (
+		writer::write("\(registerName).json"; {
+			parent: "item/handheld";
+			textures: {
+				layer0: "miragefairy2019:items/\(registerName)";
+			};
+		});
+	);
+
+	(
+		"crafting_fairy_wand",
+		"crafting_fairy_wand_2",
+		"crafting_fairy_wand_3",
+		"hydrating_fairy_wand",
+		"hydrating_fairy_wand_2",
+		"hydrating_fairy_wand_3",
+		"melting_fairy_wand",
+		"melting_fairy_wand_2",
+		"breaking_fairy_wand",
+		"breaking_fairy_wand_2",
+		"freezing_fairy_wand",
+		"freezing_fairy_wand_2",
+		"polishing_fairy_wand",
+		"summoning_fairy_wand",
+
+		"miragium_axe",
+		"miragium_sword",
+		"fairy_sword",
+		"bell_base",
+		"flower_picking_bell",
+		"christmas_bell",
+		"ocarina_base",
+		"temptation_ocarina",
+		"magic_wand_base",
+		"light_magic_wand",
+		"collecting_magic_wand",
+	) | *func;
+
+);
+
+(
 	Achievement: {
 		new: _, registerName, unlocalizedName -> _{
 			configure: {
@@ -94,6 +137,8 @@ Writer: {
 	Achievement::new("melting_fairy_wand_2"  ; "fairyWandMelting2"  )::parent("fairy_weapon/melting_fairy_wand"    )                    ::write();
 	Achievement::new("breaking_fairy_wand"   ; "fairyWandBreaking"  )::parent("fairy_weapon/root"                  )                    ::write();
 	Achievement::new("breaking_fairy_wand_2" ; "fairyWandBreaking2" )::parent("fairy_weapon/breaking_fairy_wand"   )                    ::write();
+	Achievement::new("freezing_fairy_wand"   ; "fairyWandFreezing"  )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("freezing_fairy_wand_2" ; "fairyWandFreezing2" )::parent("fairy_weapon/freezing_fairy_wand"   )                    ::write();
 	Achievement::new("polishing_fairy_wand"  ; "fairyWandPolishing" )::parent("fairy_weapon/root"                  )                    ::write();
 	Achievement::new("summoning_fairy_wand"  ; "fairyWandSummoning" )::parent("fairy_weapon/root"                  )                    ::write();
 
