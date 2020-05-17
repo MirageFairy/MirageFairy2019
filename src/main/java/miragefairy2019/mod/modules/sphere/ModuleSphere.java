@@ -6,6 +6,7 @@ import java.util.Map;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
+import miragefairy2019.mod.lib.OreIngredientComplex;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.Minecraft;
@@ -104,7 +105,7 @@ public class ModuleSphere
 					new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
 					new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
 					variant.y.createItemStack(),
-					new OreIngredient("container1000Water"),
+					new OreIngredientComplex("container1000Water"),
 					new OreIngredient("dustMiragium"),
 					new OreIngredient("gemFluorite"),
 					new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
