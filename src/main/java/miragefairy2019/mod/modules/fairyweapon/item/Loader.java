@@ -121,6 +121,23 @@ public class Loader
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
 
+		// 氷晶のステッキ
+		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "freezing_fairy_wand", "fairyWandFreezing")
+			.bind(addOreName("mirageFairy2019CraftingToolFairyWandFreezing"))
+			.bind(addComponent(instance(miragium.get(), 1)))
+			.bind(addComponent(instance(getComponentAbilityType(freeze.get()))))
+			.bind(setFairyWandStatusOfTier(2))
+			.get();
+
+		// 氷晶のステッキ2
+		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "freezing_fairy_wand_2", "fairyWandFreezing2")
+			.bind(addOreName("mirageFairy2019CraftingToolFairyWandFreezing"))
+			.bind(addComponent(instance(miragium.get(), 1)))
+			.bind(addComponent(instance(fluorite.get(), 1)))
+			.bind(addComponent(instance(getComponentAbilityType(freeze.get()))))
+			.bind(setFairyWandStatusOfTier(3))
+			.get();
+
 		// 珠玉のステッキ
 		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "polishing_fairy_wand", "fairyWandPolishing")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandPolishing"))
