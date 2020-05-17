@@ -217,7 +217,7 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
 		tooltip.add(new TextComponentString("Magic: ")
 			.setStyle(new Style().setColor(BLUE))
 			.appendSibling(getFairyMagicDisplayName(itemStack)
-				.setStyle(new Style().setColor(WHITE).setBold(true)))
+				.setStyle(new Style().setColor(AQUA).setBold(true)))
 			.appendText(" with ")
 			.appendSibling(new TextComponentString(fairy.x.isEmpty() ? "no fairy" : fairy.x.getDisplayName())
 				.setStyle(new Style().setColor(WHITE)))
