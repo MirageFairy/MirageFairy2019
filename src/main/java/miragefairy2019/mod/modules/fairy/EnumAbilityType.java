@@ -29,6 +29,8 @@ public enum EnumAbilityType implements IAbilityType
 	energy(GOLD),
 	submission(DARK_GRAY),
 	christmas(DARK_GREEN),
+	freeze(AQUA),
+	thunder(YELLOW),
 	;
 
 	public final TextFormatting textColor;

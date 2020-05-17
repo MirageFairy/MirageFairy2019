@@ -26,5 +26,7 @@ public class AbilityTypes
 	public static final Supplier<IAbilityType> energy = () -> EnumAbilityType.energy;
 	public static final Supplier<IAbilityType> submission = () -> EnumAbilityType.submission;
 	public static final Supplier<IAbilityType> christmas = () -> EnumAbilityType.christmas;
+	public static final Supplier<IAbilityType> freeze = () -> EnumAbilityType.freeze;
+	public static final Supplier<IAbilityType> thunder = () -> EnumAbilityType.thunder;
 
 }

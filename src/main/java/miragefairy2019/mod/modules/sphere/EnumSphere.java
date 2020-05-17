@@ -34,6 +34,8 @@ public enum EnumSphere
 	energy(AbilityTypes.energy.get(), 0xFFED30, 0xFFF472, 0xFFE84C, 0xBFE7FF, () -> Ingredient.fromStacks(new ItemStack(Items.COAL))),
 	submission(AbilityTypes.submission.get(), 0xFF0000, 0x593232, 0x1E1E1E, 0xA90000, () -> Ingredient.fromStacks(new ItemStack(Blocks.IRON_BARS))),
 	christmas(AbilityTypes.christmas.get(), 0xFF0000, 0xFFD723, 0x00B900, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 1))),
+	freeze(AbilityTypes.freeze.get(), 0x5AFFFF, 0xFFFFFF, 0xF6FFFF, 0xACFFFF, () -> Ingredient.fromStacks(new ItemStack(Blocks.ICE))),
+	thunder(AbilityTypes.thunder.get(), 0xEAFFFF, 0x2B2BFF, 0x000076, 0xFFFF00, () -> Ingredient.fromStacks(new ItemStack(Items.GOLDEN_SWORD))),
 	;
 
 	public final IAbilityType abilityType;
