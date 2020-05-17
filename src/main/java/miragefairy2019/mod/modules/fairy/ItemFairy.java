@@ -128,8 +128,11 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 			ItemStack itemStackFairyWeapon;
 			itemStackFairyWeapon = player.getHeldItem(EnumHand.MAIN_HAND);
 			if (itemStackFairyWeapon.getItem() instanceof IItemFairyWeapon) {
-				tooltip.add(new TextComponentString("Weapon: ")
+				tooltip.add(new TextComponentString("Magic: ")
 					.setStyle(new Style().setColor(BLUE))
+					.appendSibling(((IItemFairyWeapon) itemStackFairyWeapon.getItem()).getFairyMagicDisplayName(itemStackFairyWeapon)
+						.setStyle(new Style().setColor(WHITE).setBold(true)))
+					.appendText(" of ")
 					.appendSibling(new TextComponentString(itemStackFairyWeapon.getDisplayName())
 						.setStyle(new Style().setColor(WHITE)))
 					.getFormattedText());
@@ -137,8 +140,11 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 			}
 			itemStackFairyWeapon = player.getHeldItem(EnumHand.OFF_HAND);
 			if (itemStackFairyWeapon.getItem() instanceof IItemFairyWeapon) {
-				tooltip.add(new TextComponentString("Weapon: ")
+				tooltip.add(new TextComponentString("Magic: ")
 					.setStyle(new Style().setColor(BLUE))
+					.appendSibling(((IItemFairyWeapon) itemStackFairyWeapon.getItem()).getFairyMagicDisplayName(itemStackFairyWeapon)
+						.setStyle(new Style().setColor(WHITE).setBold(true)))
+					.appendText(" of ")
 					.appendSibling(new TextComponentString(itemStackFairyWeapon.getDisplayName())
 						.setStyle(new Style().setColor(WHITE)))
 					.getFormattedText());
