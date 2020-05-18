@@ -31,43 +31,119 @@ Writer: {
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/item");
 
-	func: registerName -> (
-		writer::write("\(registerName).json"; {
-			parent: "item/handheld";
-			textures: {
-				layer0: "miragefairy2019:items/\(registerName)";
-			};
-		});
-	);
+	item: registerName -> writer::write("\(registerName).json"; {
+		parent: "item/generated";
+		textures: {
+			layer0: "miragefairy2019:items/\(registerName)";
+		};
+	});
+	handheld: registerName -> writer::write("\(registerName).json"; {
+		parent: "item/handheld";
+		textures: {
+			layer0: "miragefairy2019:items/\(registerName)";
+		};
+	});
+	layered: registerName, layers -> writer::write("\(registerName).json"; {
+		parent: "item/generated";
+		textures: {[
+			layerList: [layers] |
+			i: 0 ~ $#layerList |
+			{
+				key: "layer" & i;
+				value: "miragefairy2019:items/" & layerList[i];
+			}
+		]};
+	});
+	block: registerName -> writer::write("\(registerName).json"; {
+		parent: "miragefairy2019:block/\(registerName)";
+	});
+	fairyWeapon: registerName -> writer::write("\(registerName).json"; {
+		parent: "item/handheld";
+		textures: {
+			layer0: "miragefairy2019:items/\(registerName)";
+		};
+	});
 
-	(
-		"crafting_fairy_wand",
-		"crafting_fairy_wand_2",
-		"crafting_fairy_wand_3",
-		"hydrating_fairy_wand",
-		"hydrating_fairy_wand_2",
-		"hydrating_fairy_wand_3",
-		"melting_fairy_wand",
-		"melting_fairy_wand_2",
-		"breaking_fairy_wand",
-		"breaking_fairy_wand_2",
-		"freezing_fairy_wand",
-		"freezing_fairy_wand_2",
-		"polishing_fairy_wand",
-		"summoning_fairy_wand",
+	item("apatite_gem");
+	item("fluorite_gem");
+	item("sulfur_gem");
+	item("cinnabar_gem");
+	item("moonstone_gem");
+	item("magnetite_gem");
+	item("pyrope_gem");
+	item("smithsonite_gem");
 
-		"miragium_axe",
-		"miragium_sword",
-		"fairy_sword",
-		"bell_base",
-		"flower_picking_bell",
-		"christmas_bell",
-		"ocarina_base",
-		"temptation_ocarina",
-		"magic_wand_base",
-		"light_magic_wand",
-		"collecting_magic_wand",
-	) | *func;
+	item("saltpeter_gem");
+
+	item("miragium_ingot");
+	item("miragium_dust");
+	item("miragium_tiny_dust");
+	item("miragium_nugget");
+	handheld("miragium_rod");
+
+	item("fertilizer");
+
+	item("mirage_flower_seeds");
+
+	item("fairy_crystal");
+	item("christmas_fairy_crystal");
+
+	handheld("aqua_mana_rod");
+	handheld("wind_mana_rod");
+	handheld("gaia_mana_rod");
+	handheld("fire_mana_rod");
+	handheld("shine_mana_rod");
+	handheld("dark_mana_rod");
+
+	block("apatite_block");
+	block("fluorite_block");
+	block("sulfur_block");
+	block("cinnabar_block");
+	block("moonstone_block");
+	block("magnetite_block");
+	block("pyrope_block");
+	block("smithsonite_block");
+
+	block("charcoal_block");
+
+	block("apatite_ore");
+	block("fluorite_ore");
+	block("sulfur_ore");
+	block("cinnabar_ore");
+	block("moonstone_ore");
+	block("magnetite_ore");
+	block("pyrope_ore");
+	block("smithsonite_ore");
+
+	fairyWeapon("crafting_fairy_wand");
+	fairyWeapon("crafting_fairy_wand_2");
+	fairyWeapon("crafting_fairy_wand_3");
+	fairyWeapon("hydrating_fairy_wand");
+	fairyWeapon("hydrating_fairy_wand_2");
+	fairyWeapon("hydrating_fairy_wand_3");
+	fairyWeapon("melting_fairy_wand");
+	fairyWeapon("melting_fairy_wand_2");
+	fairyWeapon("breaking_fairy_wand");
+	fairyWeapon("breaking_fairy_wand_2");
+	fairyWeapon("freezing_fairy_wand");
+	fairyWeapon("freezing_fairy_wand_2");
+	fairyWeapon("polishing_fairy_wand");
+	fairyWeapon("summoning_fairy_wand");
+
+	fairyWeapon("miragium_axe");
+	fairyWeapon("miragium_sword");
+	fairyWeapon("fairy_sword");
+	fairyWeapon("bell_base");
+	fairyWeapon("flower_picking_bell");
+	fairyWeapon("christmas_bell");
+	fairyWeapon("ocarina_base");
+	fairyWeapon("temptation_ocarina");
+	fairyWeapon("magic_wand_base");
+	fairyWeapon("light_magic_wand");
+	fairyWeapon("collecting_magic_wand");
+
+	layered("fairy"; 0 .. 4 | "fairy_layer" & _);
+	layered("sphere"; 0 .. 3 | "sphere_layer" & _);
 
 );
 
