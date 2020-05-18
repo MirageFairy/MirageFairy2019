@@ -131,6 +131,16 @@ public class ModuleFairy
 		public static VariantFairy[] smithsonite;
 		public static VariantFairy[] christmas;
 		public static VariantFairy[] santaclaus;
+		public static VariantFairy[] ice;
+		public static VariantFairy[] packedice;
+		public static VariantFairy[] golem;
+		public static VariantFairy[] glass;
+		public static VariantFairy[] activatorrail;
+		public static VariantFairy[] ironbars;
+		public static VariantFairy[] taiga;
+		public static VariantFairy[] desert;
+		public static VariantFairy[] mountain;
+		public static VariantFairy[] time;
 
 		//
 
@@ -219,6 +229,16 @@ public class ModuleFairy
 				r(77, smithsonite = v(t(77, "smithsonite", 3, 63, 1, m(10, 13, 0, 36, 0, 85), a(0, 4, 2, 0, 0, 0, 5, 2, 0, 0, 1, 4, 0, 0, 0, 2, 0, 0, 0, 1, 0), c(0xC1F0E6, 0x95DFD0, 0x33917E, 0x52C6B5))));
 				r(78, christmas = v(t(78, "christmas", 4, 25, 1.2, m(2, 3, 10, 0, 7, 7), a(0, 0, 0, 4, 3, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 14, 0), c(0xD2E6F6, 0xF1150F, 0xB20000, 0x248541))));
 				r(79, santaclaus = v(t(79, "santaclaus", 5, 12, 1.2, m(4, 10, 20, 5, 10, 5), a(3, 6, 5, 3, 0, 2, 0, 10, 14, 7, 4, 1, 1, 1, 4, 9, 5, 1, 10, 6, 0), c(0xCDBBAD, 0xD61728, 0xDA0117, 0xDAD8D4))));
+				r(80, ice = v(t(80, "ice", 1, 45, 1, m(10, 22, 0, 63, 95, 98), a(3, 0, 0, 0, 0, 7, 8, 5, 0, 0, 0, 1, 3, 0, 3, 1, 0, 0, 0, 10, 0), c(0xCBDBF8, 0xB6CBE3, 0xA1B6DA, 0xA1C0F5))));
+				r(81, packedice = v(t(81, "packedice", 4, 75, 1, m(10, 22, 0, 85, 63, 0), a(4, 0, 0, 0, 0, 8, 12, 5, 0, 0, 0, 2, 3, 0, 2, 1, 0, 0, 0, 16, 0), c(0xACC8F0, 0x9EB2D6, 0x809DCC, 0x5D86CC))));
+				r(82, golem = v(t(82, "golem", 3, 92, 1, m(0, 12, 10, 10, 0, 1), a(21, 2, 7, 0, 0, 0, 0, 7, 1, 0, 0, 12, 0, 1, 0, 4, 0, 15, 0, 0, 0), c(0xC1AB9E, 0xB5ADA8, 0xABA39D, 0x557725))));
+				r(83, glass = v(t(83, "glass", 2, 53, 1, m(1, 2, 0, 10, 5, 3), a(2, 2, 1, 0, 1, 0, 8, 7, 0, 0, 0, 1, 8, 6, 0, 1, 0, 3, 0, 2, 0), c(0xFFFFFF, 0xEFF5FF, 0xE8EDF5, 0xADE0E9))));
+				r(84, activatorrail = v(t(84, "activatorrail", 3, 77, 1, m(0, 10, 0, 7, 0, 0), a(0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 2), c(0xFFFFFF, 0xAC8852, 0x686868, 0xD40102))));
+				r(85, ironbars = v(t(85, "ironbars", 2, 64, 1, m(0.1, 4, 0, 10, 0, 12), a(0, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 16, 0, 0, 0), c(0xFFFFFF, 0xA1A1A3, 0x404040, 0x404040))));
+				r(86, taiga = v(t(86, "taiga", 2, 88, 1, m(0, 2, 0, 19, 28, 10), a(3, 0, 12, 0, 0, 2, 0, 3, 0, 0, 1, 0, 0, 3, 1, 2, 4, 0, 0, 7, 1), c(0x80FF00, 0x476545, 0x223325, 0x5A3711))));
+				r(87, desert = v(t(87, "desert", 2, 76, 1, m(1, 15, 0, 15, 3, 10), a(5, 0, 0, 8, 4, 0, 4, 3, 0, 0, 0, 1, 0, 0, 0, 0, 2, 3, 0, 0, 0), c(0x80FF00, 0xDDD6A5, 0xD6CE9D, 0x0F6C1C))));
+				r(88, mountain = v(t(88, "mountain", 2, 92, 1, m(0, 3, 0, 35, 12, 10), a(4, 1, 4, 0, 0, 1, 2, 4, 0, 0, 0, 0, 0, 0, 0, 1, 4, 2, 0, 5, 1), c(0x80FF00, 0xB1B0B1, 0x717173, 0x4B794A))));
+				r(89, time = v(t(89, "time", 5, 26, 1, m(10, 5, 5, 5, 5, 10), a(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), c(0x89D585, 0xD5DEBC, 0xD8DEA7, 0x8DD586))));
 			}
 
 			variants = ImmutableArray.ofList(variants2);
