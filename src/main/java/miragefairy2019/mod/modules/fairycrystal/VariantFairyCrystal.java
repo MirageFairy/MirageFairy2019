@@ -77,7 +77,8 @@ public class VariantFairyCrystal extends ItemVariant
 			for (WeightedRandom.Item<ItemStack> item : ISuppliterator.ofIterable(dropTable)
 				.sortedObj(i -> i.item.getDisplayName())
 				.sortedDouble(i -> i.weight)) {
-				string.appendText("" + String.format("%f%%", 100 * item.weight / totalWeight) + ": " + item.item.getDisplayName());
+				string.appendText(String.format("%f%%", 100 * item.weight / totalWeight) + ": ");
+				string.appendText(item.item.getDisplayName());
 				string.appendText("\n");
 			}
 			string.appendText("====================");
