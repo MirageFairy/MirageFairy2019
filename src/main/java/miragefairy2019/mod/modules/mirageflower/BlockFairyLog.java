@@ -182,6 +182,9 @@ public class BlockFairyLog extends Block
 
 					if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.PLAINS)) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.plains[0], 1));
 					if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.FOREST)) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.forest[0], 1));
+					if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.CONIFEROUS)) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.taiga[0], 1));
+					if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.SANDY)) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.desert[0], 1));
+					if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.MOUNTAIN)) list.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.mountain[0], 1));
 
 				}
 

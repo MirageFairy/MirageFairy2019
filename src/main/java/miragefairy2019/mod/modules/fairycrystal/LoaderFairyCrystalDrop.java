@@ -24,6 +24,7 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
@@ -71,6 +72,7 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.world(r(lapislazuli[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(obsidian[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(coal[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(ice[0]), (w, p) -> w.provider.isSurfaceWorld()));
 
 			d.add(RightClickDrops.world(r(spider[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(chicken[0]), (w, p) -> w.provider.isSurfaceWorld()));
@@ -141,6 +143,8 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.ores(d(glowstone[0], 0.1), "glowstone"));
 			d.add(RightClickDrops.ingredients(d(coal[0], 0.1), Ingredient.fromStacks(new ItemStack(Items.COAL))));
 			d.add(RightClickDrops.ores(d(coal[0], 0.1), m("Coal")));
+			d.add(RightClickDrops.blocks(d(ice[0], 0.3), Blocks.ICE));
+			d.add(RightClickDrops.blocks(d(packedice[0], 0.01), Blocks.PACKED_ICE));
 
 			d.add(RightClickDrops.classEntities(d(enderman[0], 0.03), EntityEnderman.class));
 			d.add(RightClickDrops.classEntities(d(spider[0], 0.1), EntitySpider.class));
@@ -159,6 +163,7 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.entity(d(villager[0], 0.3), EntityVillager.class, e -> true));
 			d.add(RightClickDrops.entity(d(librarian[0], 0.1), EntityVillager.class, e -> e.getProfessionForge().getRegistryName().equals(new ResourceLocation("minecraft:librarian"))));
 			d.add(RightClickDrops.items(d(netherstar[0], 0.01), Items.NETHER_STAR));
+			d.add(RightClickDrops.classEntities(d(golem[0], 0.1), EntityGolem.class));
 
 			d.add(RightClickDrops.blocks(d(wheat[0], 0.1), Blocks.WHEAT, Blocks.HAY_BLOCK));
 			d.add(RightClickDrops.blockStates(d(lilac[0], 0.03), Blocks.DOUBLE_PLANT.getDefaultState().withProperty(BlockDoublePlant.VARIANT, EnumPlantType.SYRINGA)));
@@ -190,6 +195,9 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.items(d(hoe[0], 0.3), Items.WOODEN_HOE, Items.STONE_HOE, Items.IRON_HOE, Items.GOLDEN_HOE, Items.DIAMOND_HOE));
 			d.add(RightClickDrops.items(d(shield[0], 0.1), Items.SHIELD));
 			d.add(RightClickDrops.blocks(d(hopper[0], 0.1), Blocks.HOPPER));
+			d.add(RightClickDrops.ores(d(glass[0], 0.1), "blockGlass"));
+			d.add(RightClickDrops.blocks(d(activatorrail[0], 0.03), Blocks.ACTIVATOR_RAIL));
+			d.add(RightClickDrops.blocks(d(ironbars[0], 0.1), Blocks.IRON_BARS));
 
 			d.add(RightClickDrops.world(d(daytime[0], 0.001), (w, p) -> time(w, 6000, 18000)));
 			d.add(RightClickDrops.world(d(night[0], 0.001), (w, p) -> time(w, 19000, 24000) || time(w, 0, 5000)));
@@ -200,6 +208,11 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.biomeTypes(d(plains[0], 0.01), BiomeDictionary.Type.PLAINS));
 			d.add(RightClickDrops.biomeTypes(d(forest[0], 0.01), BiomeDictionary.Type.FOREST));
 			d.add(RightClickDrops.biomeTypes(d(ocean[0], 0.01), BiomeDictionary.Type.OCEAN));
+			d.add(RightClickDrops.biomeTypes(d(taiga[0], 0.01), BiomeDictionary.Type.CONIFEROUS));
+			d.add(RightClickDrops.biomeTypes(d(desert[0], 0.01), BiomeDictionary.Type.SANDY));
+			d.add(RightClickDrops.biomeTypes(d(mountain[0], 0.01), BiomeDictionary.Type.MOUNTAIN));
+
+			d.add(RightClickDrops.fixed(d(time[0], 0.0001)));
 		}
 
 	}
