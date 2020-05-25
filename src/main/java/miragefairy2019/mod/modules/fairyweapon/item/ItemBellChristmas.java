@@ -11,7 +11,7 @@ import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaSelectEntry;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.main.ApiMain;
-import miragefairy2019.mod.modules.fairyweapon.magic.IExecutorRightClick;
+import miragefairy2019.mod.modules.fairyweapon.magic.MagicExecutor;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace;
 import mirrg.boron.util.UtilsMath;
@@ -81,7 +81,7 @@ public class ItemBellChristmas extends ItemBellBase
 
 	//
 
-	public IExecutorRightClick getExecutor(ItemFairyWeaponBase item, World world, ItemStack itemStack, EntityPlayer player)
+	public MagicExecutor getExecutor(ItemFairyWeaponBase item, World world, ItemStack itemStack, EntityPlayer player)
 	{
 
 		// 妖精取得
@@ -119,7 +119,7 @@ public class ItemBellChristmas extends ItemBellBase
 			color = 0xFFFFFF;
 		}
 
-		return new IExecutorRightClick() {
+		return new MagicExecutor() {
 			@Override
 			public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
 			{
