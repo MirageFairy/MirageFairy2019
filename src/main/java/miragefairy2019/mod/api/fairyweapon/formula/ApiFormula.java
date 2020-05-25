@@ -8,6 +8,7 @@ import miragefairy2019.mod.api.fairy.IManaType;
 import miragefairy2019.mod.api.fairy.ManaTypes;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaBooleanGreaterThanEqualFormulaDoubleDouble;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaConstantDouble;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaConstantObject;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleAbility;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleAddFormulas;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleCost;
@@ -32,6 +33,11 @@ public class ApiFormula
 	public static IFormulaDouble val(double value)
 	{
 		return new FormulaConstantDouble(value);
+	}
+
+	public static <T> IFormula<T> val(T value)
+	{
+		return new FormulaConstantObject<>(value);
 	}
 
 	public static IFormulaDouble mana(IManaType manaType)
