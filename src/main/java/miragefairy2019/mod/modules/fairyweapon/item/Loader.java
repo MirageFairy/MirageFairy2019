@@ -215,6 +215,14 @@ public class Loader
 			.bind(setWeaponStatusOfTier(3))
 			.get();
 
+		// ライトニングロッド
+		Configurator<ItemMagicWandLightning> magicWandLightning = fairyWeapon(erMod, ItemMagicWandLightning::new, "lightning_magic_wand", "magicWandLightning")
+			.bind(addComponent(magicWandBase))
+			.bind(addComponent(instance(gold.get(), 5)))
+			.bind(addComponent(instance(getComponentAbilityType(thunder.get()))))
+			.bind(setWeaponStatusOfTier(3))
+			.get();
+
 		// オカリナベース
 		Configurator<ItemFairyWeaponBase> ocarinaBase = fairyWeapon(erMod, ItemFairyWeaponBase::new, "ocarina_base", "ocarinaBase")
 			.bind(addComponent(instance(miragium.get(), 1)))
