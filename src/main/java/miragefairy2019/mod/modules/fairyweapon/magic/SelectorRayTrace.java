@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -39,6 +40,16 @@ public class SelectorRayTrace
 	public Vec3d getTarget()
 	{
 		return position;
+	}
+
+	public Optional<Entity> getTargetEntity()
+	{
+		if (oRayTraceResult.isPresent()) {
+			if (oRayTraceResult.get().typeOfHit == Type.ENTITY) {
+				return Optional.of(oRayTraceResult.get().entityHit);
+			}
+		}
+		return Optional.empty();
 	}
 
 	public void effect(int color)
