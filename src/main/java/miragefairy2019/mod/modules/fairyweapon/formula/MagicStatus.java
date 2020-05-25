@@ -46,7 +46,10 @@ public class MagicStatus<T> implements IMagicStatus<T>
 
 		TextFormatting color;
 		Boolean bold;
-		if (val.equals(max)) {
+		if (min.equals(max)) {
+			color = TextFormatting.WHITE;
+			bold = null;
+		} else if (val.equals(max)) {
 			color = TextFormatting.DARK_GREEN;
 			bold = true;
 		} else if (val.equals(min)) {
