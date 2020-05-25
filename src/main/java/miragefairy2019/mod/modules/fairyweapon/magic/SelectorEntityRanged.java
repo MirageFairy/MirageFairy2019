@@ -38,9 +38,27 @@ public class SelectorEntityRanged<E extends Entity>
 			position.x + radius,
 			position.y + radius,
 			position.z + radius),
-			e -> {
-				if (e.getDistanceSq(position.x, position.y, position.z) > radius * radius) return false;
-				return true;
+			new com.google.common.base.Predicate<E>() {
+				private double d(double value, double min, double max)
+				{
+					if (value < min) {
+						return min - value;
+					} else if (value < max) {
+						return 0;
+					} else {
+						return value - max;
+					}
+				}
+
+				@Override
+				public boolean apply(E e)
+				{
+					double dx = d(position.x, e.posX - e.width / 2.0, e.posX + e.width / 2.0);
+					double dy = d(position.y, e.posY, e.posY + e.width);
+					double dz = d(position.z, e.posZ - e.width / 2.0, e.posZ + e.width / 2.0);
+					if (dx * dx + dy * dy + dz * dz > radius * radius) return false;
+					return true;
+				}
 			});
 
 		// 振り分け
