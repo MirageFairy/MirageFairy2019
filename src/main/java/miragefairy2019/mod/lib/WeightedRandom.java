@@ -9,13 +9,23 @@ import java.util.function.BiPredicate;
 
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
+// TODO mirrg.boron
 public class WeightedRandom
 {
 
 	public static <T> Optional<T> getRandomItem(Random random, List<Item<T>> items)
 	{
+		return getItem(random.nextDouble(), items);
+	}
+
+	/**
+	 * @param d
+	 *            0以上1未満の値
+	 */
+	public static <T> Optional<T> getItem(double d, List<Item<T>> items)
+	{
 		if (items.size() <= 0) return Optional.empty();
-		return Optional.of(getRandomItem(items, random.nextDouble() * getTotalWeight(items)));
+		return Optional.of(getRandomItem(items, d * getTotalWeight(items)));
 	}
 
 	public static double getTotalWeight(List<? extends Item<?>> items)
