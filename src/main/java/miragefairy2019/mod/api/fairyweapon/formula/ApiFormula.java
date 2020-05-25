@@ -23,8 +23,11 @@ import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMulFormulas;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaIntegerRoundFormulaDouble;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaSelectEntry;
 import miragefairy2019.mod.modules.fairyweapon.formula.MagicStatus;
+import miragefairy2019.mod.modules.fairyweapon.item.CriticalRate;
 import mirrg.boron.util.struct.ImmutableArray;
+import mirrg.boron.util.struct.Struct1;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 
 public class ApiFormula
@@ -252,6 +255,19 @@ public class ApiFormula
 	public static Function<Boolean, ITextComponent> formatterYesNo()
 	{
 		return b -> new TextComponentString(b ? "Yes" : "No"); // TODO localize
+	}
+
+	public static Function<CriticalRate, ITextComponent> formatterCriticalRate()
+	{
+		return cr -> {
+			Struct1<ITextComponent> sTtextComponent = new Struct1<>(new TextComponentString(""));
+			cr.getBar().forEach(cf -> {
+				sTtextComponent.x = sTtextComponent.x.appendSibling(new TextComponentString("|")
+					.setStyle(new Style().setColor(cf.color)));
+			});
+			sTtextComponent.x = sTtextComponent.x.appendText(String.format(" (%.2f)", cr.getMean()));
+			return sTtextComponent.x;
+		};
 	}
 
 	//
