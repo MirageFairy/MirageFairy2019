@@ -30,6 +30,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -142,18 +143,47 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase
 						target.attackEntityFrom(new DamageSourceFairyMagic(player, 0), (float) damage2);
 
 						// エフェクト
-						if (factor.coefficient > 1) {
-							for (int i = 0; i < 16; i++) {
-								double dx = world.rand.nextDouble() * 2 - 1;
-								double dy = world.rand.nextDouble() * 2 - 1;
-								double dz = world.rand.nextDouble() * 2 - 1;
-								if (dx * dx + dy * dy + dz * dz <= 1) {
-									double x = target.posX + dx * target.width / 4.0;
-									double y = target.getEntityBoundingBox().minY + target.height / 2.0 + dy * target.height / 4.0;
-									double z = target.posZ + dz * target.width / 4.0;
-									world.spawnParticle(EnumParticleTypes.CRIT, x, y, z, dx, dy + 0.2, dz); // TODO 色
+						{
+
+							if (world instanceof WorldServer) {
+								Vec3d start = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ)
+									.add(player.getLookVec().scale(2));
+								Vec3d end = target.getPositionVector().addVector(0, target.height / 2, 0);
+								Vec3d delta = end.subtract(start);
+
+								double distance = start.distanceTo(end);
+
+								for (int i = 0; i < distance * 4; i++) {
+									Vec3d pos = start.add(delta.scale(i / (distance * 4)));
+
+									((WorldServer) world).spawnParticle(
+										EnumParticleTypes.ENCHANTMENT_TABLE,
+										pos.x + (world.rand.nextDouble() - 0.5) * 0.2,
+										pos.y + (world.rand.nextDouble() - 0.5) * 0.2,
+										pos.z + (world.rand.nextDouble() - 0.5) * 0.2,
+										0,
+										0,
+										0,
+										0,
+										0.0);
+								}
+
+							}
+
+							if (factor.coefficient > 1) {
+								for (int i = 0; i < 16; i++) {
+									double dx = world.rand.nextDouble() * 2 - 1;
+									double dy = world.rand.nextDouble() * 2 - 1;
+									double dz = world.rand.nextDouble() * 2 - 1;
+									if (dx * dx + dy * dy + dz * dz <= 1) {
+										double x = target.posX + dx * target.width / 4.0;
+										double y = target.getEntityBoundingBox().minY + target.height / 2.0 + dy * target.height / 4.0;
+										double z = target.posZ + dz * target.width / 4.0;
+										world.spawnParticle(EnumParticleTypes.CRIT, x, y, z, dx, dy + 0.2, dz); // TODO 色
+									}
 								}
 							}
+
 						}
 
 						if (world instanceof WorldServer) {
@@ -183,6 +213,9 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase
 
 					// クールタイム
 					player.getCooldownTracker().setCooldown(item, (int) (double) coolTime.get(fairyType));
+
+					// 腕を振る
+					player.swingArm(hand);
 
 				}
 
