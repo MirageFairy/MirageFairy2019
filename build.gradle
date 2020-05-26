@@ -50,6 +50,9 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.k-4u.nl"
     }
+    maven {
+        url = "http://files.minecraftforge.net/maven"
+    }
 }
 
 dependencies {
@@ -79,6 +82,9 @@ dependencies {
 	adder group: 'mirrg.boron', name: 'mirrg.boron.util', version: '[3.17,4['
 	deobfProvided "mezz.jei:jei_1.12.2:4.15.0.268:api"
 	runtime "mezz.jei:jei_1.12.2:4.15.0.268"
+    compile ("appeng:appliedenergistics2:rv6-stable-6:api") {
+        transitive = false
+    }
 }
 
 processResources {
