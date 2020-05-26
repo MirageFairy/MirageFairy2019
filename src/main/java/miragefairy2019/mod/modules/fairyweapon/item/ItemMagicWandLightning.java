@@ -5,6 +5,9 @@ import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
 
 import java.util.List;
 
+import appeng.api.config.Actionable;
+import appeng.api.networking.energy.IAEPowerStorage;
+import appeng.api.networking.security.IActionHost;
 import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
@@ -20,11 +23,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -216,9 +221,50 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase
 		return getExecutor(this, world, itemStack, player).onItemRightClick(world, player, hand);
 	}
 
+	// TODO 整理
+	private static boolean aeflag;
+	static {
+		try {
+			aeflag = IAEPowerStorage.class != null;
+		} catch (NoClassDefFoundError e) {
+			aeflag = false;
+		}
+		ApiMain.logger().debug("Appeng IAEPowerStorage state: " + aeflag);
+	}
+
+	// TODO 削除
+	private void aeInjectEnergy(ItemStack itemStack, World world, Entity entity)
+	{
+		if (entity instanceof EntityPlayer) {
+			if (((EntityPlayer) entity).getHeldItemOffhand() == itemStack) {
+
+				BlockPos blockPos = new BlockPos(
+					(int) Math.floor(entity.posX),
+					(int) Math.floor(entity.posY) - 1,
+					(int) Math.floor(entity.posZ));
+				TileEntity tileEntity = world.getTileEntity(blockPos);
+				if (tileEntity instanceof IActionHost) {
+					if (((IActionHost) tileEntity).getActionableNode() != null) {
+						if (tileEntity instanceof IAEPowerStorage) {
+							((IAEPowerStorage) tileEntity).injectAEPower(20, Actionable.MODULATE);
+						}
+					}
+				}
+
+			}
+		}
+	}
+
 	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
 	{
+
+		// TODO 削除
+		if (!world.isRemote) {
+			if (aeflag) {
+				aeInjectEnergy(itemStack, world, entity);
+			}
+		}
 
 		// クライアントのみ
 		if (!ApiMain.side().isClient()) return;
