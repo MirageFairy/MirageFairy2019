@@ -24,7 +24,7 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
@@ -163,7 +163,7 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.entity(d(villager[0], 0.3), EntityVillager.class, e -> true));
 			d.add(RightClickDrops.entity(d(librarian[0], 0.1), EntityVillager.class, e -> e.getProfessionForge().getRegistryName().equals(new ResourceLocation("minecraft:librarian"))));
 			d.add(RightClickDrops.items(d(netherstar[0], 0.01), Items.NETHER_STAR));
-			d.add(RightClickDrops.classEntities(d(golem[0], 0.1), EntityGolem.class));
+			d.add(RightClickDrops.classEntities(d(golem[0], 0.1), EntityIronGolem.class));
 
 			d.add(RightClickDrops.blocks(d(wheat[0], 0.1), Blocks.WHEAT, Blocks.HAY_BLOCK));
 			d.add(RightClickDrops.blockStates(d(lilac[0], 0.03), Blocks.DOUBLE_PLANT.getDefaultState().withProperty(BlockDoublePlant.VARIANT, EnumPlantType.SYRINGA)));
