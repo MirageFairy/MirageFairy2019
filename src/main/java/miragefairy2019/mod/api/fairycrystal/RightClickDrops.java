@@ -226,7 +226,7 @@ public class RightClickDrops
 			public boolean testClassEntity(Class<? extends Entity> classEntity)
 			{
 				for (Class<? extends Entity> classEntity2 : classEntities) {
-					if (classEntity.isAssignableFrom(classEntity2)) return true;
+					if (classEntity2.isAssignableFrom(classEntity)) return true;
 				}
 				return false;
 			}
