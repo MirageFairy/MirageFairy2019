@@ -271,56 +271,16 @@ Writer: {
 );
 
 (
-	writer1: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
-	writer1.indent = "    ";
-	writer2: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
-	writer2.indent = "\t";
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
 
 	block: name -> (
-		writer1::write("\(name).json"; {
+		writer::write("\(name).json"; {
 			parent: "block/cube_all";
 			textures: {
 				all: "miragefairy2019:blocks/\(name)";
 			};
 		});
 	);
-	ore: name -> (
-		writer1::write("\(name).json"; {
-			parent: "miragefairy2019:block/overlay_block";
-			textures: {
-				particle: "blocks/stone";
-				base: "blocks/stone";
-				overlay: "miragefairy2019:blocks/\(name)";
-			};
-		});
-	);
-	plant: name -> (
-		writer2::write("\(name).json"; {
-			parent: "block/cross";
-			textures: {
-				particle: "miragefairy2019:blocks/\(name)";
-				cross: "miragefairy2019:blocks/\(name)";
-			};
-		});
-	);
-	fairy_log: name, variant -> (
-		writer1::write("\(name).json"; {
-			parent: "miragefairy2019:block/fairy_log";
-			textures: {
-				end: "blocks/log_\(variant)_top";
-				side: "blocks/log_\(variant)";
-			};
-		});
-	);
-	a: name -> (
-		writer1::write("\(name).json"; {
-			parent: "block/cube_all";
-			textures: {
-				all: "miragefairy2019:blocks/\(name)";
-			};
-		});
-	);
-
 	block("apatite_block");
 	block("charcoal_block");
 	block("cinnabar_block");
@@ -331,6 +291,16 @@ Writer: {
 	block("smithsonite_block");
 	block("sulfur_block");
 
+	ore: name -> (
+		writer::write("\(name).json"; {
+			parent: "miragefairy2019:block/overlay_block";
+			textures: {
+				particle: "blocks/stone";
+				base: "blocks/stone";
+				overlay: "miragefairy2019:blocks/\(name)";
+			};
+		});
+	);
 	ore("apatite_ore");
 	ore("cinnabar_ore");
 	ore("fluorite_ore");
@@ -340,11 +310,29 @@ Writer: {
 	ore("smithsonite_ore");
 	ore("sulfur_ore");
 
+	plant: name -> (
+		writer::write("\(name).json"; {
+			parent: "block/cross";
+			textures: {
+				particle: "miragefairy2019:blocks/\(name)";
+				cross: "miragefairy2019:blocks/\(name)";
+			};
+		});
+	);
 	plant("mirage_flower_age0");
 	plant("mirage_flower_age1");
 	plant("mirage_flower_age2");
 	plant("mirage_flower_age3");
 
+	fairy_log: name, variant -> (
+		writer::write("\(name).json"; {
+			parent: "miragefairy2019:block/fairy_log";
+			textures: {
+				end: "blocks/log_\(variant)_top";
+				side: "blocks/log_\(variant)";
+			};
+		});
+	);
 	fairy_log("acacia_fairy_log"; "acacia");
 	fairy_log("birch_fairy_log"; "birch");
 	fairy_log("dark_oak_fairy_log"; "big_oak");
