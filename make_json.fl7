@@ -149,6 +149,37 @@ Writer: {
 );
 
 (
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/advancements/fairy_weapon");
+	writer::write("root.json"; {
+		display: {
+			icon: {
+				item: "miragefairy2019:miragium_sword";
+			};
+			title: {
+				translate: "advancements.miragefairy2019.fairy_weapon.root.title";
+			};
+			description: {
+				translate: "advancements.miragefairy2019.fairy_weapon.root.description";
+			};
+			background: "miragefairy2019:textures/blocks/magnetite_block.png";
+		};
+		criteria: {
+			main: {
+				trigger: "minecraft:inventory_changed";
+				conditions: {
+					items: [
+						{
+							type: "forge:ore_dict";
+							ore: "mirageFairy2019SphereAny";
+						};
+					];
+				};
+			};
+		};
+	});
+);
+
+(
 	Achievement: {
 		new: _, registerName, unlocalizedName -> _{
 			configure: {
