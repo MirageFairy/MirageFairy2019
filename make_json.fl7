@@ -1,7 +1,8 @@
 
 Writer: {
 	new: _, dir -> _{dir};
-	write: _, file, obj -> WRITE(_.dir & "/" & file; JSON(obj; "\t"));
+	indent: "\t";
+	write: _, file, obj -> WRITE(_.dir & "/" & file; JSON(obj; _.indent));
 };
 
 (
@@ -269,3 +270,86 @@ Writer: {
 
 );
 
+(
+	writer1: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
+	writer1.indent = "    ";
+	writer2: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
+	writer2.indent = "\t";
+
+	block: name -> (
+		writer1::write("\(name).json"; {
+			parent: "block/cube_all";
+			textures: {
+				all: "miragefairy2019:blocks/\(name)";
+			};
+		});
+	);
+	ore: name -> (
+		writer1::write("\(name).json"; {
+			parent: "miragefairy2019:block/overlay_block";
+			textures: {
+				particle: "blocks/stone";
+				base: "blocks/stone";
+				overlay: "miragefairy2019:blocks/\(name)";
+			};
+		});
+	);
+	plant: name -> (
+		writer2::write("\(name).json"; {
+			parent: "block/cross";
+			textures: {
+				particle: "miragefairy2019:blocks/\(name)";
+				cross: "miragefairy2019:blocks/\(name)";
+			};
+		});
+	);
+	fairy_log: name, variant -> (
+		writer1::write("\(name).json"; {
+			parent: "miragefairy2019:block/fairy_log";
+			textures: {
+				end: "blocks/log_\(variant)_top";
+				side: "blocks/log_\(variant)";
+			};
+		});
+	);
+	a: name -> (
+		writer1::write("\(name).json"; {
+			parent: "block/cube_all";
+			textures: {
+				all: "miragefairy2019:blocks/\(name)";
+			};
+		});
+	);
+
+	block("apatite_block");
+	block("charcoal_block");
+	block("cinnabar_block");
+	block("fluorite_block");
+	block("magnetite_block");
+	block("moonstone_block");
+	block("pyrope_block");
+	block("smithsonite_block");
+	block("sulfur_block");
+
+	ore("apatite_ore");
+	ore("cinnabar_ore");
+	ore("fluorite_ore");
+	ore("magnetite_ore");
+	ore("moonstone_ore");
+	ore("pyrope_ore");
+	ore("smithsonite_ore");
+	ore("sulfur_ore");
+
+	plant("mirage_flower_age0");
+	plant("mirage_flower_age1");
+	plant("mirage_flower_age2");
+	plant("mirage_flower_age3");
+
+	fairy_log("acacia_fairy_log"; "acacia");
+	fairy_log("birch_fairy_log"; "birch");
+	fairy_log("dark_oak_fairy_log"; "big_oak");
+	fairy_log("jungle_fairy_log"; "jungle");
+	fairy_log("oak_fairy_log"; "oak");
+	fairy_log("spruce_fairy_log"; "spruce");
+
+);
