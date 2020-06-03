@@ -1,19 +1,19 @@
 {
-    "type": "forge:ore_shaped",
-    "group": "pyrope_block",
-    "pattern": [
-        "###",
-        "###",
-        "###"
-    ],
-    "key": {
-        "#": {
-            "type": "forge:ore_dict",
-            "ore": "gemPyrope"
-        }
-    },
-    "result": {
-        "item": "miragefairy2019:materials1",
-        "data": 6
-    }
+	"type": "forge:ore_shaped",
+	"group": "pyrope_block",
+	"pattern": [
+		"###",
+		"###",
+		"###"
+	],
+	"key": {
+		"#": {
+			"type": "forge:ore_dict",
+			"ore": "gemPyrope"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:materials1",
+		"data": 6
+	}
 }

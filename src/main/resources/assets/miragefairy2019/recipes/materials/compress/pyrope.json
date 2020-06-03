@@ -1,18 +1,18 @@
 {
-    "type": "forge:ore_shaped",
-    "group": "pyrope",
-    "pattern": [
-        "#"
-    ],
-    "key": {
-        "#": {
-            "type": "forge:ore_dict",
-            "ore": "blockPyrope"
-        }
-    },
-    "result": {
-        "item": "miragefairy2019:materials",
-        "count": 9,
-        "data": 10
-    }
+	"type": "forge:ore_shaped",
+	"group": "pyrope",
+	"pattern": [
+		"#"
+	],
+	"key": {
+		"#": {
+			"type": "forge:ore_dict",
+			"ore": "blockPyrope"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:materials",
+		"count": 9,
+		"data": 10
+	}
 }
