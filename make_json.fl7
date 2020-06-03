@@ -5,30 +5,203 @@ Writer: {
 	write: _, file, obj -> WRITE(_.dir & "/" & file; JSON(obj; _.indent));
 };
 
+//////////////////// 進捗ルート ////////////////////
 (
-	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials");
-
-	obj: {
-		type: "forge:ore_shapeless";
-		group: "blaze_powder";
-		ingredients: [
-			{
-				type: "miragefairy2019:ore_dict_complex";
-				ore: "mirageFairy2019CraftingToolFairyWandBreaking";
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/advancements/fairy_weapon");
+	writer::write("root.json"; {
+		display: {
+			icon: {
+				item: "miragefairy2019:miragium_sword";
 			};
-			{
-				item: "minecraft:blaze_rod";
+			title: {
+				translate: "advancements.miragefairy2019.fairy_weapon.root.title";
 			};
-		];
-		result: {
-			item: "minecraft:blaze_powder";
-			count: 3;
+			description: {
+				translate: "advancements.miragefairy2019.fairy_weapon.root.description";
+			};
+			background: "miragefairy2019:textures/blocks/magnetite_block.png";
 		};
-	};
-
-	writer::write("blaze_powder_from_blaze_rod.json"; obj);
+		criteria: {
+			main: {
+				trigger: "minecraft:inventory_changed";
+				conditions: {
+					items: [
+						{
+							type: "forge:ore_dict";
+							ore: "mirageFairy2019SphereAny";
+						};
+					];
+				};
+			};
+		};
+	});
 );
 
+//////////////////// 進捗 ////////////////////
+(
+	Achievement: {
+		new: _, registerName, unlocalizedName -> _{
+			configure: {
+				registerName;
+				unlocalizedName;
+				parent: NULL;
+				frame: NULL;
+			};
+		};
+		parent: _, parent -> (
+			_.configure.parent = parent;
+			_
+		);
+		frame: _, frame -> (
+			_.configure.frame = frame;
+			_
+		);
+		write: _ -> (
+			writer: Writer::new("src/main/resources/assets/miragefairy2019/advancements/fairy_weapon");
+			item: "miragefairy2019:\(_.configure.registerName)";
+			writer::write("\(_.configure.registerName).json"; {
+				display = (
+					map: {
+						icon = {
+							item = item;
+						};
+						title = {
+							translate = "item.\(_.configure.unlocalizedName).name";
+						};
+						description = {
+							translate = "advancements.miragefairy2019.fairy_weapon.all.description";
+						};
+					};
+					_.configure.frame !== NULL && (
+						map.frame = _.configure.frame;
+					);
+					map
+				);
+				parent = "miragefairy2019:\(_.configure.parent)";
+				criteria = {
+					main = {
+						trigger = "minecraft:inventory_changed";
+						conditions = {
+							items = [
+								{
+									item = item;
+								};
+							];
+						};
+					};
+				};
+			});
+		);
+	};
+
+	Achievement::new("crafting_fairy_wand"   ; "fairyWandCrafting"  )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("crafting_fairy_wand_2" ; "fairyWandCrafting2" )::parent("fairy_weapon/crafting_fairy_wand"   )                    ::write();
+	Achievement::new("crafting_fairy_wand_3" ; "fairyWandCrafting3" )::parent("fairy_weapon/crafting_fairy_wand_2" )                    ::write();
+	Achievement::new("hydrating_fairy_wand"  ; "fairyWandHydrating" )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("hydrating_fairy_wand_2"; "fairyWandHydrating2")::parent("fairy_weapon/hydrating_fairy_wand"  )                    ::write();
+	Achievement::new("hydrating_fairy_wand_3"; "fairyWandHydrating3")::parent("fairy_weapon/hydrating_fairy_wand_2")                    ::write();
+	Achievement::new("melting_fairy_wand"    ; "fairyWandMelting"   )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("melting_fairy_wand_2"  ; "fairyWandMelting2"  )::parent("fairy_weapon/melting_fairy_wand"    )                    ::write();
+	Achievement::new("breaking_fairy_wand"   ; "fairyWandBreaking"  )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("breaking_fairy_wand_2" ; "fairyWandBreaking2" )::parent("fairy_weapon/breaking_fairy_wand"   )                    ::write();
+	Achievement::new("freezing_fairy_wand"   ; "fairyWandFreezing"  )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("freezing_fairy_wand_2" ; "fairyWandFreezing2" )::parent("fairy_weapon/freezing_fairy_wand"   )                    ::write();
+	Achievement::new("polishing_fairy_wand"  ; "fairyWandPolishing" )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("summoning_fairy_wand"  ; "fairyWandSummoning" )::parent("fairy_weapon/root"                  )                    ::write();
+
+	Achievement::new("miragium_axe"          ; "miragiumAxe"        )::parent("fairy_weapon/root"                  )                    ::write();
+
+	Achievement::new("miragium_sword"        ; "miragiumSword"      )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("fairy_sword"           ; "fairySword"         )::parent("fairy_weapon/miragium_sword"        )::frame("goal"     )::write();
+
+	Achievement::new("bell_base"             ; "bellBase"           )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("flower_picking_bell"   ; "bellFlowerPicking"  )::parent("fairy_weapon/bell_base"             )::frame("goal"     )::write();
+	Achievement::new("christmas_bell"        ; "bellChristmas"      )::parent("fairy_weapon/bell_base"             )::frame("challenge")::write();
+
+	Achievement::new("ocarina_base"          ; "ocarinaBase"        )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("temptation_ocarina"    ; "ocarinaTemptation"  )::parent("fairy_weapon/ocarina_base"          )::frame("goal"     )::write();
+
+	Achievement::new("magic_wand_base"       ; "magicWandBase"      )::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("light_magic_wand"      ; "magicWandLight"     )::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
+	Achievement::new("collecting_magic_wand" ; "magicWandCollecting")::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
+	Achievement::new("lightning_magic_wand"  ; "magicWandLightning" )::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
+
+);
+
+//////////////////// ブロックモデル ////////////////////
+(
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
+
+	block: name -> (
+		writer::write("\(name).json"; {
+			parent: "block/cube_all";
+			textures: {
+				all: "miragefairy2019:blocks/\(name)";
+			};
+		});
+	);
+	block("apatite_block");
+	block("charcoal_block");
+	block("cinnabar_block");
+	block("fluorite_block");
+	block("magnetite_block");
+	block("moonstone_block");
+	block("pyrope_block");
+	block("smithsonite_block");
+	block("sulfur_block");
+
+	ore: name -> (
+		writer::write("\(name).json"; {
+			parent: "miragefairy2019:block/overlay_block";
+			textures: {
+				particle: "blocks/stone";
+				base: "blocks/stone";
+				overlay: "miragefairy2019:blocks/\(name)";
+			};
+		});
+	);
+	ore("apatite_ore");
+	ore("cinnabar_ore");
+	ore("fluorite_ore");
+	ore("magnetite_ore");
+	ore("moonstone_ore");
+	ore("pyrope_ore");
+	ore("smithsonite_ore");
+	ore("sulfur_ore");
+
+	plant: name -> (
+		writer::write("\(name).json"; {
+			parent: "block/cross";
+			textures: {
+				particle: "miragefairy2019:blocks/\(name)";
+				cross: "miragefairy2019:blocks/\(name)";
+			};
+		});
+	);
+	plant("mirage_flower_age0");
+	plant("mirage_flower_age1");
+	plant("mirage_flower_age2");
+	plant("mirage_flower_age3");
+
+	fairy_log: name, variant -> (
+		writer::write("\(name).json"; {
+			parent: "miragefairy2019:block/fairy_log";
+			textures: {
+				end: "blocks/log_\(variant)_top";
+				side: "blocks/log_\(variant)";
+			};
+		});
+	);
+	fairy_log("acacia_fairy_log"; "acacia");
+	fairy_log("birch_fairy_log"; "birch");
+	fairy_log("dark_oak_fairy_log"; "big_oak");
+	fairy_log("jungle_fairy_log"; "jungle");
+	fairy_log("oak_fairy_log"; "oak");
+	fairy_log("spruce_fairy_log"; "spruce");
+
+);
+
+//////////////////// アイテムモデル ////////////////////
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/item");
 
@@ -149,195 +322,27 @@ Writer: {
 
 );
 
+//////////////////// 素材レシピ ////////////////////
 (
-	writer: Writer::new("src/main/resources/assets/miragefairy2019/advancements/fairy_weapon");
-	writer::write("root.json"; {
-		display: {
-			icon: {
-				item: "miragefairy2019:miragium_sword";
-			};
-			title: {
-				translate: "advancements.miragefairy2019.fairy_weapon.root.title";
-			};
-			description: {
-				translate: "advancements.miragefairy2019.fairy_weapon.root.description";
-			};
-			background: "miragefairy2019:textures/blocks/magnetite_block.png";
-		};
-		criteria: {
-			main: {
-				trigger: "minecraft:inventory_changed";
-				conditions: {
-					items: [
-						{
-							type: "forge:ore_dict";
-							ore: "mirageFairy2019SphereAny";
-						};
-					];
-				};
-			};
-		};
-	});
-);
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials");
 
-(
-	Achievement: {
-		new: _, registerName, unlocalizedName -> _{
-			configure: {
-				registerName;
-				unlocalizedName;
-				parent: NULL;
-				frame: NULL;
+	obj: {
+		type: "forge:ore_shapeless";
+		group: "blaze_powder";
+		ingredients: [
+			{
+				type: "miragefairy2019:ore_dict_complex";
+				ore: "mirageFairy2019CraftingToolFairyWandBreaking";
 			};
+			{
+				item: "minecraft:blaze_rod";
+			};
+		];
+		result: {
+			item: "minecraft:blaze_powder";
+			count: 3;
 		};
-		parent: _, parent -> (
-			_.configure.parent = parent;
-			_
-		);
-		frame: _, frame -> (
-			_.configure.frame = frame;
-			_
-		);
-		write: _ -> (
-			writer: Writer::new("src/main/resources/assets/miragefairy2019/advancements/fairy_weapon");
-			item: "miragefairy2019:\(_.configure.registerName)";
-			writer::write("\(_.configure.registerName).json"; {
-				display = (
-					map: {
-						icon = {
-							item = item;
-						};
-						title = {
-							translate = "item.\(_.configure.unlocalizedName).name";
-						};
-						description = {
-							translate = "advancements.miragefairy2019.fairy_weapon.all.description";
-						};
-					};
-					_.configure.frame !== NULL && (
-						map.frame = _.configure.frame;
-					);
-					map
-				);
-				parent = "miragefairy2019:\(_.configure.parent)";
-				criteria = {
-					main = {
-						trigger = "minecraft:inventory_changed";
-						conditions = {
-							items = [
-								{
-									item = item;
-								};
-							];
-						};
-					};
-				};
-			});
-		);
 	};
 
-	Achievement::new("crafting_fairy_wand"   ; "fairyWandCrafting"  )::parent("fairy_weapon/root"                  )                    ::write();
-	Achievement::new("crafting_fairy_wand_2" ; "fairyWandCrafting2" )::parent("fairy_weapon/crafting_fairy_wand"   )                    ::write();
-	Achievement::new("crafting_fairy_wand_3" ; "fairyWandCrafting3" )::parent("fairy_weapon/crafting_fairy_wand_2" )                    ::write();
-	Achievement::new("hydrating_fairy_wand"  ; "fairyWandHydrating" )::parent("fairy_weapon/root"                  )                    ::write();
-	Achievement::new("hydrating_fairy_wand_2"; "fairyWandHydrating2")::parent("fairy_weapon/hydrating_fairy_wand"  )                    ::write();
-	Achievement::new("hydrating_fairy_wand_3"; "fairyWandHydrating3")::parent("fairy_weapon/hydrating_fairy_wand_2")                    ::write();
-	Achievement::new("melting_fairy_wand"    ; "fairyWandMelting"   )::parent("fairy_weapon/root"                  )                    ::write();
-	Achievement::new("melting_fairy_wand_2"  ; "fairyWandMelting2"  )::parent("fairy_weapon/melting_fairy_wand"    )                    ::write();
-	Achievement::new("breaking_fairy_wand"   ; "fairyWandBreaking"  )::parent("fairy_weapon/root"                  )                    ::write();
-	Achievement::new("breaking_fairy_wand_2" ; "fairyWandBreaking2" )::parent("fairy_weapon/breaking_fairy_wand"   )                    ::write();
-	Achievement::new("freezing_fairy_wand"   ; "fairyWandFreezing"  )::parent("fairy_weapon/root"                  )                    ::write();
-	Achievement::new("freezing_fairy_wand_2" ; "fairyWandFreezing2" )::parent("fairy_weapon/freezing_fairy_wand"   )                    ::write();
-	Achievement::new("polishing_fairy_wand"  ; "fairyWandPolishing" )::parent("fairy_weapon/root"                  )                    ::write();
-	Achievement::new("summoning_fairy_wand"  ; "fairyWandSummoning" )::parent("fairy_weapon/root"                  )                    ::write();
-
-	Achievement::new("miragium_axe"          ; "miragiumAxe"        )::parent("fairy_weapon/root"                  )                    ::write();
-
-	Achievement::new("miragium_sword"        ; "miragiumSword"      )::parent("fairy_weapon/root"                  )                    ::write();
-	Achievement::new("fairy_sword"           ; "fairySword"         )::parent("fairy_weapon/miragium_sword"        )::frame("goal"     )::write();
-
-	Achievement::new("bell_base"             ; "bellBase"           )::parent("fairy_weapon/root"                  )                    ::write();
-	Achievement::new("flower_picking_bell"   ; "bellFlowerPicking"  )::parent("fairy_weapon/bell_base"             )::frame("goal"     )::write();
-	Achievement::new("christmas_bell"        ; "bellChristmas"      )::parent("fairy_weapon/bell_base"             )::frame("challenge")::write();
-
-	Achievement::new("ocarina_base"          ; "ocarinaBase"        )::parent("fairy_weapon/root"                  )                    ::write();
-	Achievement::new("temptation_ocarina"    ; "ocarinaTemptation"  )::parent("fairy_weapon/ocarina_base"          )::frame("goal"     )::write();
-
-	Achievement::new("magic_wand_base"       ; "magicWandBase"      )::parent("fairy_weapon/root"                  )                    ::write();
-	Achievement::new("light_magic_wand"      ; "magicWandLight"     )::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
-	Achievement::new("collecting_magic_wand" ; "magicWandCollecting")::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
-	Achievement::new("lightning_magic_wand"  ; "magicWandLightning" )::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
-
-);
-
-(
-	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
-
-	block: name -> (
-		writer::write("\(name).json"; {
-			parent: "block/cube_all";
-			textures: {
-				all: "miragefairy2019:blocks/\(name)";
-			};
-		});
-	);
-	block("apatite_block");
-	block("charcoal_block");
-	block("cinnabar_block");
-	block("fluorite_block");
-	block("magnetite_block");
-	block("moonstone_block");
-	block("pyrope_block");
-	block("smithsonite_block");
-	block("sulfur_block");
-
-	ore: name -> (
-		writer::write("\(name).json"; {
-			parent: "miragefairy2019:block/overlay_block";
-			textures: {
-				particle: "blocks/stone";
-				base: "blocks/stone";
-				overlay: "miragefairy2019:blocks/\(name)";
-			};
-		});
-	);
-	ore("apatite_ore");
-	ore("cinnabar_ore");
-	ore("fluorite_ore");
-	ore("magnetite_ore");
-	ore("moonstone_ore");
-	ore("pyrope_ore");
-	ore("smithsonite_ore");
-	ore("sulfur_ore");
-
-	plant: name -> (
-		writer::write("\(name).json"; {
-			parent: "block/cross";
-			textures: {
-				particle: "miragefairy2019:blocks/\(name)";
-				cross: "miragefairy2019:blocks/\(name)";
-			};
-		});
-	);
-	plant("mirage_flower_age0");
-	plant("mirage_flower_age1");
-	plant("mirage_flower_age2");
-	plant("mirage_flower_age3");
-
-	fairy_log: name, variant -> (
-		writer::write("\(name).json"; {
-			parent: "miragefairy2019:block/fairy_log";
-			textures: {
-				end: "blocks/log_\(variant)_top";
-				side: "blocks/log_\(variant)";
-			};
-		});
-	);
-	fairy_log("acacia_fairy_log"; "acacia");
-	fairy_log("birch_fairy_log"; "birch");
-	fairy_log("dark_oak_fairy_log"; "big_oak");
-	fairy_log("jungle_fairy_log"; "jungle");
-	fairy_log("oak_fairy_log"; "oak");
-	fairy_log("spruce_fairy_log"; "spruce");
-
+	writer::write("blaze_powder_from_blaze_rod.json"; obj);
 );
