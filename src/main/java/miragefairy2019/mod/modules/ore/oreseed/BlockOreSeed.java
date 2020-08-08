@@ -13,8 +13,8 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import miragefairy2019.mod.lib.WeightedRandom;
-import miragefairy2019.mod.modules.ore.EnumVariantOre1;
 import miragefairy2019.mod.modules.ore.ModuleOre;
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;

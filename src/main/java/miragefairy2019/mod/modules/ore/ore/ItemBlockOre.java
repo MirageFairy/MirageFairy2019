@@ -1,5 +1,6 @@
-package miragefairy2019.mod.modules.ore;
+package miragefairy2019.mod.modules.ore.ore;
 
+import miragefairy2019.mod.modules.ore.IOreVariant;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 

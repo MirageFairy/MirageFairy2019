@@ -1,9 +1,10 @@
-package miragefairy2019.mod.modules.ore;
+package miragefairy2019.mod.modules.ore.material;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import miragefairy2019.mod.modules.ore.IOreVariantList;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.util.IStringSerializable;
 

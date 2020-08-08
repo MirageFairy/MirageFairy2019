@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.ore;
+package miragefairy2019.mod.modules.ore.ore;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -7,6 +7,8 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 import miragefairy2019.mod.lib.UtilsMinecraft;
+import miragefairy2019.mod.modules.ore.IOreVariant;
+import miragefairy2019.mod.modules.ore.IOreVariantList;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;

@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.ore;
+package miragefairy2019.mod.modules.ore.material;
 
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

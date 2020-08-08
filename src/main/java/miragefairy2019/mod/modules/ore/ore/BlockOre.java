@@ -1,5 +1,9 @@
-package miragefairy2019.mod.modules.ore;
+package miragefairy2019.mod.modules.ore.ore;
 
+import java.util.Random;
+
+import miragefairy2019.mod.modules.ore.IOreVariant;
+import miragefairy2019.mod.modules.ore.IOreVariantList;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -10,19 +14,22 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockMaterials<V extends IBlockVariantMaterials> extends Block
+public class BlockOre<V extends IOreVariant> extends Block
 {
 
 	public final IOreVariantList<V> variantList;
 
-	public BlockMaterials(IOreVariantList<V> variantList)
+	public BlockOre(IOreVariantList<V> variantList)
 	{
-		super(Material.IRON);
+		super(Material.ROCK);
 		this.variantList = variantList;
 
 		// meta
@@ -88,13 +95,30 @@ public class BlockMaterials<V extends IBlockVariantMaterials> extends Block
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		drops.add(new ItemStack(Item.getItemFromBlock(this), 1, getMetaFromState(state)));
+		Random random = world instanceof World ? ((World) world).rand : RANDOM;
+		variantList.byMetadata(getMetaFromState(state)).getDrops(drops, random, this, getMetaFromState(state), fortune);
 	}
 
 	@Override
 	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
 		return true;
+	}
+
+	@Override
+	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune)
+	{
+		Random random = world instanceof World ? ((World) world).rand : new Random();
+		return variantList.byMetadata(getMetaFromState(state)).getExpDrop(random, fortune);
+	}
+
+	//
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer()
+	{
+		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
 }
