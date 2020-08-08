@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.modules.ore.BlockOreSeed;
-import miragefairy2019.mod.modules.ore.BlockOreSeed.EnumVariant;
+import miragefairy2019.mod.modules.ore.oreseed.BlockOreSeed;
+import miragefairy2019.mod.modules.ore.oreseed.EnumVariantOreSeed;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -42,7 +42,7 @@ public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingTool
 			// 鉱石生成確率表示
 			List<String> lines = new ArrayList<>();
 			lines.add("===== Ore List =====");
-			for (EnumVariant variant : EnumVariant.values()) {
+			for (EnumVariantOreSeed variant : EnumVariantOreSeed.values()) {
 				lines.add("----- " + variant.name());
 				BlockOreSeed.getList(world, player.getPosition(), variant).stream()
 					.forEach(t -> lines.add(String.format("%.2f", t.weight) + ": " + t.item.get().getBlock().getItem(world, pos, t.item.get()).getDisplayName()));

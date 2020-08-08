@@ -14,6 +14,8 @@ import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
+import miragefairy2019.mod.modules.ore.oreseed.BlockOreSeed;
+import miragefairy2019.mod.modules.ore.oreseed.EnumVariantOreSeed;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -187,23 +189,23 @@ public class ModuleOre
 			// 地形生成
 			MinecraftForge.ORE_GEN_BUS.register(new Object() {
 
-				private WorldGenerator worldGenOreSeed1 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.TINY), 5);
-				private WorldGenerator worldGenOreSeed2 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.LAPIS), 7);
-				private WorldGenerator worldGenOreSeed3 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.DIAMOND), 8);
-				private WorldGenerator worldGenOreSeed4 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.IRON), 9);
-				private WorldGenerator worldGenOreSeed5 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.MEDIUM), 12);
-				private WorldGenerator worldGenOreSeed6 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.LARGE), 15);
-				private WorldGenerator worldGenOreSeed7 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.COAL), 17);
-				private WorldGenerator worldGenOreSeed8 = new WorldGenMinable(blockOreSeed.getState(BlockOreSeed.EnumVariant.HUGE), 20);
+				private WorldGenerator worldGenOreSeed1 = new WorldGenMinable(blockOreSeed.getState(EnumVariantOreSeed.TINY), 5);
+				private WorldGenerator worldGenOreSeed2 = new WorldGenMinable(blockOreSeed.getState(EnumVariantOreSeed.LAPIS), 7);
+				private WorldGenerator worldGenOreSeed3 = new WorldGenMinable(blockOreSeed.getState(EnumVariantOreSeed.DIAMOND), 8);
+				private WorldGenerator worldGenOreSeed4 = new WorldGenMinable(blockOreSeed.getState(EnumVariantOreSeed.IRON), 9);
+				private WorldGenerator worldGenOreSeed5 = new WorldGenMinable(blockOreSeed.getState(EnumVariantOreSeed.MEDIUM), 12);
+				private WorldGenerator worldGenOreSeed6 = new WorldGenMinable(blockOreSeed.getState(EnumVariantOreSeed.LARGE), 15);
+				private WorldGenerator worldGenOreSeed7 = new WorldGenMinable(blockOreSeed.getState(EnumVariantOreSeed.COAL), 17);
+				private WorldGenerator worldGenOreSeed8 = new WorldGenMinable(blockOreSeed.getState(EnumVariantOreSeed.HUGE), 20);
 
-				private WorldGenerator worldGenOreSeed15 = new WorldGenOreSeedString(blockOreSeed.getState(BlockOreSeed.EnumVariant.STRING));
-				private WorldGenerator worldGenOreSeed16 = new WorldGenOreSeedHorizontal(blockOreSeed.getState(BlockOreSeed.EnumVariant.HORIZONTAL));
-				private WorldGenerator worldGenOreSeed12 = new WorldGenOreSeedVertical(blockOreSeed.getState(BlockOreSeed.EnumVariant.VERTICAL));
-				private WorldGenerator worldGenOreSeed9 = new WorldGenOreSeedPoint(blockOreSeed.getState(BlockOreSeed.EnumVariant.POINT));
-				private WorldGenerator worldGenOreSeed14 = new WorldGenOreSeedStar(blockOreSeed.getState(BlockOreSeed.EnumVariant.STAR));
-				private WorldGenerator worldGenOreSeed11 = new WorldGenOreSeedRing(blockOreSeed.getState(BlockOreSeed.EnumVariant.RING));
-				private WorldGenerator worldGenOreSeed13 = new WorldGenOreSeedPyramid(blockOreSeed.getState(BlockOreSeed.EnumVariant.PYRAMID));
-				private WorldGenerator worldGenOreSeed10 = new WorldGenOreSeedCube(blockOreSeed.getState(BlockOreSeed.EnumVariant.CUBE));
+				private WorldGenerator worldGenOreSeed15 = new WorldGenOreSeedString(blockOreSeed.getState(EnumVariantOreSeed.STRING));
+				private WorldGenerator worldGenOreSeed16 = new WorldGenOreSeedHorizontal(blockOreSeed.getState(EnumVariantOreSeed.HORIZONTAL));
+				private WorldGenerator worldGenOreSeed12 = new WorldGenOreSeedVertical(blockOreSeed.getState(EnumVariantOreSeed.VERTICAL));
+				private WorldGenerator worldGenOreSeed9 = new WorldGenOreSeedPoint(blockOreSeed.getState(EnumVariantOreSeed.POINT));
+				private WorldGenerator worldGenOreSeed14 = new WorldGenOreSeedStar(blockOreSeed.getState(EnumVariantOreSeed.STAR));
+				private WorldGenerator worldGenOreSeed11 = new WorldGenOreSeedRing(blockOreSeed.getState(EnumVariantOreSeed.RING));
+				private WorldGenerator worldGenOreSeed13 = new WorldGenOreSeedPyramid(blockOreSeed.getState(EnumVariantOreSeed.PYRAMID));
+				private WorldGenerator worldGenOreSeed10 = new WorldGenOreSeedCube(blockOreSeed.getState(EnumVariantOreSeed.CUBE));
 
 				@SubscribeEvent
 				public void accept(OreGenEvent.Post event)

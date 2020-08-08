@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.ore;
+package miragefairy2019.mod.modules.ore.oreseed;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -13,6 +13,8 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import miragefairy2019.mod.lib.WeightedRandom;
+import miragefairy2019.mod.modules.ore.EnumVariantOre1;
+import miragefairy2019.mod.modules.ore.ModuleOre;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
@@ -28,7 +30,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -43,7 +44,7 @@ public class BlockOreSeed extends Block
 
 		// meta
 		setDefaultState(blockState.getBaseState()
-			.withProperty(VARIANT, EnumVariant.TINY));
+			.withProperty(VARIANT, EnumVariantOreSeed.TINY));
 
 		// style
 		setSoundType(SoundType.STONE);
@@ -57,7 +58,7 @@ public class BlockOreSeed extends Block
 
 	//
 
-	public static final PropertyEnum<EnumVariant> VARIANT = PropertyEnum.create("variant", EnumVariant.class);
+	public static final PropertyEnum<EnumVariantOreSeed> VARIANT = PropertyEnum.create("variant", EnumVariantOreSeed.class);
 
 	@Override
 	protected BlockStateContainer createBlockState()
@@ -65,12 +66,12 @@ public class BlockOreSeed extends Block
 		return new BlockStateContainer(this, VARIANT);
 	}
 
-	public IBlockState getState(EnumVariant variant)
+	public IBlockState getState(EnumVariantOreSeed variant)
 	{
 		return getDefaultState().withProperty(VARIANT, variant);
 	}
 
-	public EnumVariant getVariant(IBlockState blockState)
+	public EnumVariantOreSeed getVariant(IBlockState blockState)
 	{
 		return blockState.getValue(VARIANT);
 	}
@@ -78,7 +79,7 @@ public class BlockOreSeed extends Block
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(VARIANT, EnumVariant.byMetadata(meta));
+		return getDefaultState().withProperty(VARIANT, EnumVariantOreSeed.byMetadata(meta));
 	}
 
 	@Override
@@ -90,7 +91,7 @@ public class BlockOreSeed extends Block
 	@Override
 	public void getSubBlocks(CreativeTabs creativeTab, NonNullList<ItemStack> itemStacks)
 	{
-		for (EnumVariant variant : EnumVariant.values()) {
+		for (EnumVariantOreSeed variant : EnumVariantOreSeed.values()) {
 			itemStacks.add(new ItemStack(this, 1, variant.metadata));
 		}
 	}
@@ -133,17 +134,17 @@ public class BlockOreSeed extends Block
 
 	//
 
-	private static Map<EnumVariant, List<Function<Tuple<World, BlockPos>, Optional<WeightedRandom.Item<Supplier<IBlockState>>>>>> registry = new HashMap<>();
+	private static Map<EnumVariantOreSeed, List<Function<Tuple<World, BlockPos>, Optional<WeightedRandom.Item<Supplier<IBlockState>>>>>> registry = new HashMap<>();
 
 	static {
-		register(EnumVariant.LARGE, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.APATITE_ORE));
-		register(EnumVariant.LARGE, 0.08, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.SMITHSONITE_ORE), minY(30));
-		register(EnumVariant.PYRAMID, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.FLUORITE_ORE));
-		register(EnumVariant.STAR, 0.15, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.SULFUR_ORE), maxY(15));
-		register(EnumVariant.POINT, 0.15, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.CINNABAR_ORE), maxY(15));
-		register(EnumVariant.POINT, 0.05, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.PYROPE_ORE), maxY(50));
-		register(EnumVariant.COAL, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.MAGNETITE_ORE));
-		register(EnumVariant.TINY, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.MOONSTONE_ORE), minY(40), maxY(50));
+		register(EnumVariantOreSeed.LARGE, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.APATITE_ORE));
+		register(EnumVariantOreSeed.LARGE, 0.08, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.SMITHSONITE_ORE), minY(30));
+		register(EnumVariantOreSeed.PYRAMID, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.FLUORITE_ORE));
+		register(EnumVariantOreSeed.STAR, 0.15, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.SULFUR_ORE), maxY(15));
+		register(EnumVariantOreSeed.POINT, 0.15, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.CINNABAR_ORE), maxY(15));
+		register(EnumVariantOreSeed.POINT, 0.05, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.PYROPE_ORE), maxY(50));
+		register(EnumVariantOreSeed.COAL, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.MAGNETITE_ORE));
+		register(EnumVariantOreSeed.TINY, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.MOONSTONE_ORE), minY(40), maxY(50));
 	}
 
 	private static interface IGenerationCondition extends Predicate<Tuple<World, BlockPos>>
@@ -161,7 +162,7 @@ public class BlockOreSeed extends Block
 		return t -> t.y.getY() <= maxY;
 	}
 
-	private static void register(EnumVariant variant, double weight, Supplier<IBlockState> block, IGenerationCondition... generationConditions)
+	private static void register(EnumVariantOreSeed variant, double weight, Supplier<IBlockState> block, IGenerationCondition... generationConditions)
 	{
 		registry.compute(variant, (v, l) -> {
 			if (l == null) l = new ArrayList<>();
@@ -175,7 +176,7 @@ public class BlockOreSeed extends Block
 		});
 	}
 
-	public static List<WeightedRandom.Item<Supplier<IBlockState>>> getList(World world, BlockPos pos, EnumVariant variant)
+	public static List<WeightedRandom.Item<Supplier<IBlockState>>> getList(World world, BlockPos pos, EnumVariantOreSeed variant)
 	{
 		List<Function<Tuple<World, BlockPos>, Optional<WeightedRandom.Item<Supplier<IBlockState>>>>> list = registry.get(variant);
 		if (list == null) return new ArrayList<>();
@@ -185,7 +186,7 @@ public class BlockOreSeed extends Block
 		return list2;
 	}
 
-	public static Optional<IBlockState> get(World world, BlockPos pos, EnumVariant variant, Random random)
+	public static Optional<IBlockState> get(World world, BlockPos pos, EnumVariantOreSeed variant, Random random)
 	{
 		List<WeightedRandom.Item<Supplier<IBlockState>>> list2 = getList(world, pos, variant);
 		if (random.nextDouble() < Math.max(1 - WeightedRandom.getTotalWeight(list2), 0)) return Optional.empty();
@@ -234,74 +235,6 @@ public class BlockOreSeed extends Block
 		if (!world.getBlockState(pos.north()).isSideSolid(world, pos.north(), EnumFacing.SOUTH)) return true;
 		if (!world.getBlockState(pos.south()).isSideSolid(world, pos.south(), EnumFacing.NORTH)) return true;
 		return false;
-	}
-
-	//
-
-	public static enum EnumVariant implements IStringSerializable
-	{
-		TINY(0, "tiny", "tiny"),
-		LAPIS(1, "lapis", "lapis"),
-		DIAMOND(2, "diamond", "diamond"),
-		IRON(3, "iron", "iron"),
-		MEDIUM(4, "medium", "medium"),
-		LARGE(5, "large", "large"),
-		COAL(6, "coal", "coal"),
-		HUGE(7, "huge", "huge"),
-
-		STRING(8, "string", "string"),
-		HORIZONTAL(9, "horizontal", "horizontal"),
-		VERTICAL(10, "vertical", "vertical"),
-		POINT(11, "point", "point"),
-		STAR(12, "star", "star"),
-		RING(13, "ring", "ring"),
-		PYRAMID(14, "pyramid", "pyramid"),
-		CUBE(15, "cube", "cube"),
-
-		;
-
-		//
-
-		private static final EnumVariant[] META_LOOKUP;
-		static {
-			META_LOOKUP = new EnumVariant[EnumVariant.values().length];
-			EnumVariant[] types = EnumVariant.values();
-			for (int i = 0; i < types.length; i++) {
-				EnumVariant.META_LOOKUP[types[i].metadata] = types[i];
-			}
-		}
-
-		public static EnumVariant byMetadata(int metadata)
-		{
-			if (metadata < 0 || metadata >= META_LOOKUP.length) metadata = 0;
-			return META_LOOKUP[metadata];
-		}
-
-		//
-
-		public final int metadata;
-		public final String resourceName;
-		public final String unlocalizedName;
-
-		private EnumVariant(int metadata, String resourceName, String unlocalizedName)
-		{
-			this.metadata = metadata;
-			this.resourceName = resourceName;
-			this.unlocalizedName = unlocalizedName;
-		}
-
-		@Override
-		public String toString()
-		{
-			return this.resourceName;
-		}
-
-		@Override
-		public String getName()
-		{
-			return this.resourceName;
-		}
-
 	}
 
 }
