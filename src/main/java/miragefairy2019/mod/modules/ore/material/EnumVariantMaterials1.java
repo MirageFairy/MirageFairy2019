@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import miragefairy2019.mod.modules.ore.IOreVariantList;
+import miragefairy2019.mod.lib.multi.IListBlockVariant;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.util.IStringSerializable;
 
@@ -23,7 +23,7 @@ public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariantM
 
 	//
 
-	public static final IOreVariantList<EnumVariantMaterials1> variantList = new IOreVariantList<EnumVariantMaterials1>() {
+	public static final IListBlockVariant<EnumVariantMaterials1> variantList = new IListBlockVariant<EnumVariantMaterials1>() {
 		private final EnumVariantMaterials1[] values = EnumVariantMaterials1.values();
 		private final Map<Integer, EnumVariantMaterials1> metaLookup = new HashMap<>();
 		{

@@ -2,8 +2,7 @@ package miragefairy2019.mod.modules.ore.ore;
 
 import java.util.Random;
 
-import miragefairy2019.mod.modules.ore.IOreVariant;
-import miragefairy2019.mod.modules.ore.IOreVariantList;
+import miragefairy2019.mod.lib.multi.IListBlockVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,12 +21,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockOre<V extends IOreVariant> extends Block
+public class BlockOre<V extends IBlockVariantOre> extends Block
 {
 
-	public final IOreVariantList<V> variantList;
+	public final IListBlockVariant<V> variantList;
 
-	public BlockOre(IOreVariantList<V> variantList)
+	public BlockOre(IListBlockVariant<V> variantList)
 	{
 		super(Material.ROCK);
 		this.variantList = variantList;

@@ -7,8 +7,7 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 import miragefairy2019.mod.lib.UtilsMinecraft;
-import miragefairy2019.mod.modules.ore.IOreVariant;
-import miragefairy2019.mod.modules.ore.IOreVariantList;
+import miragefairy2019.mod.lib.multi.IListBlockVariant;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
@@ -17,7 +16,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 
-public enum EnumVariantOre1 implements IStringSerializable, IOreVariant
+public enum EnumVariantOre1 implements IStringSerializable, IBlockVariantOre
 {
 	APATITE_ORE(0, "apatite_ore", "oreApatite", 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemApatite").copy(), 1, 1.5, 1, 3)),
 	FLUORITE_ORE(1, "fluorite_ore", "oreFluorite", 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemFluorite").copy(), 1, 1, 15, 30)),
@@ -31,7 +30,7 @@ public enum EnumVariantOre1 implements IStringSerializable, IOreVariant
 
 	//
 
-	public static final IOreVariantList<EnumVariantOre1> variantList = new IOreVariantList<EnumVariantOre1>() {
+	public static final IListBlockVariant<EnumVariantOre1> variantList = new IListBlockVariant<EnumVariantOre1>() {
 		private final EnumVariantOre1[] values = EnumVariantOre1.values();
 		private final Map<Integer, EnumVariantOre1> metaLookup = new HashMap<>();
 		{
@@ -136,7 +135,7 @@ public enum EnumVariantOre1 implements IStringSerializable, IOreVariant
 				drops.add(nGemProvider.sItemStack.get());
 			}
 		} else {
-			IOreVariant.super.getDrops(drops, random, block, metadata, fortune);
+			IBlockVariantOre.super.getDrops(drops, random, block, metadata, fortune);
 		}
 	}
 
@@ -146,7 +145,7 @@ public enum EnumVariantOre1 implements IStringSerializable, IOreVariant
 		if (nGemProvider != null) {
 			return MathHelper.getInt(random, nGemProvider.expMin, nGemProvider.expMax);
 		} else {
-			return IOreVariant.super.getExpDrop(random, fortune);
+			return IBlockVariantOre.super.getExpDrop(random, fortune);
 		}
 	}
 

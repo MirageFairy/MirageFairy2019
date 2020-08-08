@@ -1,6 +1,6 @@
-package miragefairy2019.mod.modules.ore;
+package miragefairy2019.mod.lib.multi;
 
-public interface IOreVariantList<V> extends Iterable<V>
+public interface IListBlockVariant<V> extends Iterable<V>
 {
 
 	public default int getDefaultMetadata()

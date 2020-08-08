@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.ore;
+package miragefairy2019.mod.lib.multi;
 
 public interface IBlockVariant
 {

@@ -12,6 +12,7 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
+import miragefairy2019.mod.lib.multi.IBlockVariant;
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import miragefairy2019.mod.modules.ore.material.BlockMaterials;
@@ -19,6 +20,7 @@ import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1;
 import miragefairy2019.mod.modules.ore.material.ItemBlockMaterials;
 import miragefairy2019.mod.modules.ore.ore.BlockOre;
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1;
+import miragefairy2019.mod.modules.ore.ore.IBlockVariantOre;
 import miragefairy2019.mod.modules.ore.ore.ItemBlockOre;
 import miragefairy2019.mod.modules.ore.oreseed.BlockOreSeed;
 import miragefairy2019.mod.modules.ore.oreseed.EnumVariantOreSeed;
@@ -151,7 +153,7 @@ public class ModuleOre
 			itemBlockOre1.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.ITEMS.register(itemBlockOre1);
 			if (ApiMain.side().isClient()) {
-				for (IOreVariant variant : blockOre1.variantList) {
+				for (IBlockVariantOre variant : blockOre1.variantList) {
 					ModelLoader.setCustomModelResourceLocation(
 						itemBlockOre1,
 						variant.getMetadata(),

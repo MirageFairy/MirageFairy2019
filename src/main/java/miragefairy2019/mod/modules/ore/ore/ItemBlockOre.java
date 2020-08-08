@@ -1,10 +1,9 @@
 package miragefairy2019.mod.modules.ore.ore;
 
-import miragefairy2019.mod.modules.ore.IOreVariant;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockOre<V extends IOreVariant> extends ItemBlock
+public class ItemBlockOre<V extends IBlockVariantOre> extends ItemBlock
 {
 
 	private BlockOre<V> block2;

@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.ore.material;
 
-import miragefairy2019.mod.modules.ore.IOreVariantList;
+import miragefairy2019.mod.lib.multi.IListBlockVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,9 +19,9 @@ import net.minecraft.world.World;
 public class BlockMaterials<V extends IBlockVariantMaterials> extends Block
 {
 
-	public final IOreVariantList<V> variantList;
+	public final IListBlockVariant<V> variantList;
 
-	public BlockMaterials(IOreVariantList<V> variantList)
+	public BlockMaterials(IListBlockVariant<V> variantList)
 	{
 		super(Material.IRON);
 		this.variantList = variantList;
