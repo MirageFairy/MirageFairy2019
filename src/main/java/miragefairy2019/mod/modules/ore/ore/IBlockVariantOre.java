@@ -2,13 +2,13 @@ package miragefairy2019.mod.modules.ore.ore;
 
 import java.util.Random;
 
-import miragefairy2019.mod.lib.multi.IBlockVariant;
+import miragefairy2019.mod.api.ore.IBlockVariantHarvestable;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public interface IBlockVariantOre extends IBlockVariant
+public interface IBlockVariantOre extends IBlockVariantHarvestable
 {
 
 	public default void getDrops(NonNullList<ItemStack> drops, Random random, Block block, int metadata, int fortune)

@@ -9,11 +9,4 @@ public interface IBlockVariant
 
 	public String getUnlocalizedName();
 
-	public default String getHarvestTool()
-	{
-		return "pickaxe";
-	}
-
-	public int getHarvestLevel();
-
 }
