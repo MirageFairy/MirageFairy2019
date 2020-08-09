@@ -35,7 +35,7 @@ public class RegisterOreSeedDrop
 		});
 	}
 
-	private static List<WeightedRandom.Item<Supplier<IBlockState>>> getList(EnumOreSeedShape shape, World world, BlockPos pos)
+	public static List<WeightedRandom.Item<Supplier<IBlockState>>> getList(EnumOreSeedShape shape, World world, BlockPos pos)
 	{
 		List<Function<Tuple<World, BlockPos>, Optional<WeightedRandom.Item<Supplier<IBlockState>>>>> list = RegisterOreSeedDrop.registry.get(shape);
 		if (list == null) return new ArrayList<>();

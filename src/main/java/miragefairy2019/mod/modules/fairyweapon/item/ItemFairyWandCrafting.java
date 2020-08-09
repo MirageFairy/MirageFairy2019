@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.modules.oreseed.BlockOreSeed;
+import miragefairy2019.mod.api.oreseed.RegisterOreSeedDrop;
 import miragefairy2019.mod.modules.oreseed.EnumVariantOreSeed;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +44,7 @@ public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingTool
 			lines.add("===== Ore List =====");
 			for (EnumVariantOreSeed variant : EnumVariantOreSeed.values()) {
 				lines.add("----- " + variant.name());
-				BlockOreSeed.getList(world, player.getPosition(), variant).stream()
+				RegisterOreSeedDrop.getList(variant.shape, world, player.getPosition()).stream()
 					.forEach(t -> lines.add(String.format("%.2f", t.weight) + ": " + t.item.get().getBlock().getItem(world, pos, t.item.get()).getDisplayName()));
 			}
 			lines.add("====================");
