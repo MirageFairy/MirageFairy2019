@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.modules.ore.ModuleOre;
+import miragefairy2019.mod.modules.oreseed.ModuleOreSeed;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,7 +48,7 @@ public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingTool
 				for (int zi = 0; zi < 16; zi++) {
 					for (int yi = 0; yi < 256; yi++) {
 						IBlockState blockState = world.getBlockState(new BlockPos(x + xi, yi, z + zi));
-						if (blockState.getBlock().equals(ModuleOre.blockOreSeed)) {
+						if (blockState.getBlock().equals(ModuleOreSeed.blockOreSeed)) {
 							map.put(blockState, map.getOrDefault(blockState, 0) + 1);
 						}
 					}
