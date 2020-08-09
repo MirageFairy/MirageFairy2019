@@ -3,18 +3,13 @@ package miragefairy2019.mod.modules.oreseed;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import miragefairy2019.mod.lib.WeightedRandom;
-import miragefairy2019.mod.modules.ore.ModuleOre;
-import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
@@ -134,51 +129,9 @@ public class BlockOreSeed extends Block
 
 	//
 
-	private static Map<EnumVariantOreSeed, List<Function<Tuple<World, BlockPos>, Optional<WeightedRandom.Item<Supplier<IBlockState>>>>>> registry = new HashMap<>();
-
-	static {
-		register(EnumVariantOreSeed.LARGE, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.APATITE_ORE));
-		register(EnumVariantOreSeed.LARGE, 0.08, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.SMITHSONITE_ORE), minY(30));
-		register(EnumVariantOreSeed.PYRAMID, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.FLUORITE_ORE));
-		register(EnumVariantOreSeed.STAR, 0.15, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.SULFUR_ORE), maxY(15));
-		register(EnumVariantOreSeed.POINT, 0.15, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.CINNABAR_ORE), maxY(15));
-		register(EnumVariantOreSeed.POINT, 0.05, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.PYROPE_ORE), maxY(50));
-		register(EnumVariantOreSeed.COAL, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.MAGNETITE_ORE));
-		register(EnumVariantOreSeed.TINY, 0.10, () -> ModuleOre.blockOre1.getState(EnumVariantOre1.MOONSTONE_ORE), minY(40), maxY(50));
-	}
-
-	private static interface IGenerationCondition extends Predicate<Tuple<World, BlockPos>>
-	{
-
-	}
-
-	private static IGenerationCondition minY(int minY)
-	{
-		return t -> t.y.getY() >= minY;
-	}
-
-	private static IGenerationCondition maxY(int maxY)
-	{
-		return t -> t.y.getY() <= maxY;
-	}
-
-	private static void register(EnumVariantOreSeed variant, double weight, Supplier<IBlockState> block, IGenerationCondition... generationConditions)
-	{
-		registry.compute(variant, (v, l) -> {
-			if (l == null) l = new ArrayList<>();
-			l.add(t -> {
-				for (IGenerationCondition generationCondition : generationConditions) {
-					if (!generationCondition.test(t)) return Optional.empty();
-				}
-				return Optional.of(new WeightedRandom.Item<>(block, weight));
-			});
-			return l;
-		});
-	}
-
 	public static List<WeightedRandom.Item<Supplier<IBlockState>>> getList(World world, BlockPos pos, EnumVariantOreSeed variant)
 	{
-		List<Function<Tuple<World, BlockPos>, Optional<WeightedRandom.Item<Supplier<IBlockState>>>>> list = registry.get(variant);
+		List<Function<Tuple<World, BlockPos>, Optional<WeightedRandom.Item<Supplier<IBlockState>>>>> list = RegisterOreSeedDrop.registry.get(variant);
 		if (list == null) return new ArrayList<>();
 		List<WeightedRandom.Item<Supplier<IBlockState>>> list2 = ISuppliterator.ofIterable(list)
 			.mapIfPresent(f -> f.apply(Tuple.of(world, pos)))

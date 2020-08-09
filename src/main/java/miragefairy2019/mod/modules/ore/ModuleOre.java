@@ -39,6 +39,8 @@ public class ModuleOre
 	public static void init(EventRegistryMod erMod)
 	{
 
+		LoaderOreSeedDrop.loadOreSeedDrop();
+
 		// マテリアル
 		item(erMod, ItemMultiMaterial<ItemVariantMaterial>::new, new ResourceLocation(ModMirageFairy2019.MODID, "materials"), "materials")
 			.bind(setCreativeTab(() -> ApiMain.creativeTab()))
