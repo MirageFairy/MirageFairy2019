@@ -1,10 +1,10 @@
 package miragefairy2019.mod.modules.ore;
 
+import static miragefairy2019.mod.api.oreseed.EnumOreSeedShape.*;
 import static miragefairy2019.mod.api.oreseed.GenerationConditions.*;
-import static miragefairy2019.mod.modules.oreseed.EnumVariantOreSeed.*;
 
+import miragefairy2019.mod.api.oreseed.RegisterOreSeedDrop;
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1;
-import miragefairy2019.mod.modules.oreseed.RegisterOreSeedDrop;
 
 public class LoaderOreSeedDrop
 {

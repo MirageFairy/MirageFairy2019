@@ -1,17 +1,10 @@
 package miragefairy2019.mod.modules.oreseed;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
-import java.util.List;
-import java.util.Optional;
 import java.util.Random;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
-import miragefairy2019.mod.lib.WeightedRandom;
-import mirrg.boron.util.struct.Tuple;
-import mirrg.boron.util.suppliterator.ISuppliterator;
+import miragefairy2019.mod.api.oreseed.RegisterOreSeedDrop;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.SoundType;
@@ -129,33 +122,14 @@ public class BlockOreSeed extends Block
 
 	//
 
-	public static List<WeightedRandom.Item<Supplier<IBlockState>>> getList(World world, BlockPos pos, EnumVariantOreSeed variant)
-	{
-		List<Function<Tuple<World, BlockPos>, Optional<WeightedRandom.Item<Supplier<IBlockState>>>>> list = RegisterOreSeedDrop.registry.get(variant);
-		if (list == null) return new ArrayList<>();
-		List<WeightedRandom.Item<Supplier<IBlockState>>> list2 = ISuppliterator.ofIterable(list)
-			.mapIfPresent(f -> f.apply(Tuple.of(world, pos)))
-			.toList();
-		return list2;
-	}
-
-	public static Optional<IBlockState> get(World world, BlockPos pos, EnumVariantOreSeed variant, Random random)
-	{
-		List<WeightedRandom.Item<Supplier<IBlockState>>> list2 = getList(world, pos, variant);
-		if (random.nextDouble() < Math.max(1 - WeightedRandom.getTotalWeight(list2), 0)) return Optional.empty();
-		return WeightedRandom.getRandomItem(
-			random,
-			list2).map(s -> s.get());
-	}
-
 	protected void update(World world, BlockPos pos, IBlockState state)
 	{
 		if (canMutate(world, pos)) {
 			Random random = new Random(pos.getX() * 15946848L + pos.getY() * 29135678L + pos.getZ() * 65726816L);
-			IBlockState blockStateAfter = get(
+			IBlockState blockStateAfter = RegisterOreSeedDrop.drop(
+				getVariant(state).shape,
 				world,
 				pos,
-				getVariant(state),
 				random).orElseGet(() -> Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE));
 
 			Deque<BlockPos> poses = new ArrayDeque<>();
