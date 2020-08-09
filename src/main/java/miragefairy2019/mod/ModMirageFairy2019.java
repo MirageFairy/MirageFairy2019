@@ -10,6 +10,7 @@ import miragefairy2019.mod.lib.InitializationContext;
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import miragefairy2019.mod.modules.ore.ModuleOre;
+import miragefairy2019.mod.modules.oreseed.ModuleOreSeed;
 import miragefairy2019.mod.modules.sphere.ModuleSphere;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -36,6 +37,7 @@ public class ModMirageFairy2019
 		ApiFertilizer.init(erMod);
 		ApiMaterialsFairy.init(erMod);
 		ModuleMirageFlower.init(erMod);
+		ModuleOreSeed.init(erMod);
 		ModuleOre.init(erMod);
 		ModuleSphere.init(erMod);
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.modules.ore.oreseed.BlockOreSeed;
-import miragefairy2019.mod.modules.ore.oreseed.EnumVariantOreSeed;
+import miragefairy2019.mod.modules.oreseed.BlockOreSeed;
+import miragefairy2019.mod.modules.oreseed.EnumVariantOreSeed;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

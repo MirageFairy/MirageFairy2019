@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.ore.oreseed;
+package miragefairy2019.mod.modules.oreseed;
 
 import net.minecraft.util.IStringSerializable;
 
