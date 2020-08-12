@@ -3,10 +3,10 @@ package miragefairy2019.mod.modules.oreseed;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Random;
+import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.oreseed.RegisterOreSeedDrop;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockStone;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -14,8 +14,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
@@ -26,9 +24,12 @@ import net.minecraft.world.World;
 public class BlockOreSeed extends Block
 {
 
-	public BlockOreSeed()
+	private Supplier<IBlockState> sBlockStateDefault;
+
+	public BlockOreSeed(Supplier<IBlockState> sBlockStateDefault)
 	{
 		super(Material.ROCK);
+		this.sBlockStateDefault = sBlockStateDefault;
 
 		// meta
 		setDefaultState(blockState.getBaseState()
@@ -89,13 +90,13 @@ public class BlockOreSeed extends Block
 	@Override
 	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
 	{
-		return new ItemStack(Item.getItemFromBlock(Blocks.STONE));
+		return ItemStack.EMPTY;
 	}
 
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		drops.add(new ItemStack(Item.getItemFromBlock(Blocks.STONE)));
+
 	}
 
 	@Override
@@ -130,7 +131,7 @@ public class BlockOreSeed extends Block
 				getVariant(state).shape,
 				world,
 				pos,
-				random).orElseGet(() -> Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE));
+				random).orElseGet(() -> sBlockStateDefault.get());
 
 			Deque<BlockPos> poses = new ArrayDeque<>();
 			poses.addLast(pos);

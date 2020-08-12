@@ -1,5 +1,8 @@
 package miragefairy2019.mod.modules.oreseed;
 
+import java.util.Random;
+import java.util.function.Predicate;
+
 import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedCube;
 import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedHorizontal;
 import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedPoint;
@@ -8,9 +11,11 @@ import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedRing;
 import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedStar;
 import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedString;
 import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedVertical;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.event.terraingen.OreGenEvent;
 
 public class WorldGenCompoundOreSeed
 {
@@ -33,55 +38,55 @@ public class WorldGenCompoundOreSeed
 	private WorldGenerator worldGenOreSeed13;
 	private WorldGenerator worldGenOreSeed10;
 
-	public WorldGenCompoundOreSeed()
+	public WorldGenCompoundOreSeed(BlockOreSeed block, Predicate<IBlockState> pReplaceable)
 	{
-		worldGenOreSeed1 = new WorldGenMinable(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.TINY), 5);
-		worldGenOreSeed2 = new WorldGenMinable(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.LAPIS), 7);
-		worldGenOreSeed3 = new WorldGenMinable(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.DIAMOND), 8);
-		worldGenOreSeed4 = new WorldGenMinable(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.IRON), 9);
-		worldGenOreSeed5 = new WorldGenMinable(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.MEDIUM), 12);
-		worldGenOreSeed6 = new WorldGenMinable(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.LARGE), 15);
-		worldGenOreSeed7 = new WorldGenMinable(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.COAL), 17);
-		worldGenOreSeed8 = new WorldGenMinable(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.HUGE), 20);
+		worldGenOreSeed1 = new WorldGenMinable(block.getState(EnumVariantOreSeed.TINY), 5, blockState -> pReplaceable.test(blockState));
+		worldGenOreSeed2 = new WorldGenMinable(block.getState(EnumVariantOreSeed.LAPIS), 7, blockState -> pReplaceable.test(blockState));
+		worldGenOreSeed3 = new WorldGenMinable(block.getState(EnumVariantOreSeed.DIAMOND), 8, blockState -> pReplaceable.test(blockState));
+		worldGenOreSeed4 = new WorldGenMinable(block.getState(EnumVariantOreSeed.IRON), 9, blockState -> pReplaceable.test(blockState));
+		worldGenOreSeed5 = new WorldGenMinable(block.getState(EnumVariantOreSeed.MEDIUM), 12, blockState -> pReplaceable.test(blockState));
+		worldGenOreSeed6 = new WorldGenMinable(block.getState(EnumVariantOreSeed.LARGE), 15, blockState -> pReplaceable.test(blockState));
+		worldGenOreSeed7 = new WorldGenMinable(block.getState(EnumVariantOreSeed.COAL), 17, blockState -> pReplaceable.test(blockState));
+		worldGenOreSeed8 = new WorldGenMinable(block.getState(EnumVariantOreSeed.HUGE), 20, blockState -> pReplaceable.test(blockState));
 
-		worldGenOreSeed15 = new WorldGenOreSeedString(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.STRING));
-		worldGenOreSeed16 = new WorldGenOreSeedHorizontal(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.HORIZONTAL));
-		worldGenOreSeed12 = new WorldGenOreSeedVertical(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.VERTICAL));
-		worldGenOreSeed9 = new WorldGenOreSeedPoint(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.POINT));
-		worldGenOreSeed14 = new WorldGenOreSeedStar(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.STAR));
-		worldGenOreSeed11 = new WorldGenOreSeedRing(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.RING));
-		worldGenOreSeed13 = new WorldGenOreSeedPyramid(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.PYRAMID));
-		worldGenOreSeed10 = new WorldGenOreSeedCube(ModuleOreSeed.blockOreSeed.getState(EnumVariantOreSeed.CUBE));
+		worldGenOreSeed15 = new WorldGenOreSeedString(block.getState(EnumVariantOreSeed.STRING), pReplaceable);
+		worldGenOreSeed16 = new WorldGenOreSeedHorizontal(block.getState(EnumVariantOreSeed.HORIZONTAL), pReplaceable);
+		worldGenOreSeed12 = new WorldGenOreSeedVertical(block.getState(EnumVariantOreSeed.VERTICAL), pReplaceable);
+		worldGenOreSeed9 = new WorldGenOreSeedPoint(block.getState(EnumVariantOreSeed.POINT), pReplaceable);
+		worldGenOreSeed14 = new WorldGenOreSeedStar(block.getState(EnumVariantOreSeed.STAR), pReplaceable);
+		worldGenOreSeed11 = new WorldGenOreSeedRing(block.getState(EnumVariantOreSeed.RING), pReplaceable);
+		worldGenOreSeed13 = new WorldGenOreSeedPyramid(block.getState(EnumVariantOreSeed.PYRAMID), pReplaceable);
+		worldGenOreSeed10 = new WorldGenOreSeedCube(block.getState(EnumVariantOreSeed.CUBE), pReplaceable);
 	}
 
-	public void accept(OreGenEvent.Post event)
+	public void accept(World world, Random random, BlockPos pos)
 	{
-		genStandardOre(event, 325 * 7 / 8 / 2 / 4, worldGenOreSeed15, 0, 255);
-		genStandardOre(event, 263 * 7 / 9 / 2, worldGenOreSeed16, 0, 255);
-		genStandardOre(event, 263 * 7 / 8 / 2, worldGenOreSeed12, 0, 255);
-		genStandardOre(event, 263 * 7 / 1 / 2, worldGenOreSeed9, 0, 255);
-		genStandardOre(event, 263 * 7 / 13 / 2, worldGenOreSeed14, 0, 255);
-		genStandardOre(event, 263 * 7 / 8 / 2, worldGenOreSeed11, 0, 255);
-		genStandardOre(event, 263 * 7 / 7 / 2, worldGenOreSeed13, 0, 255);
-		genStandardOre(event, 263 * 7 / 8 / 2, worldGenOreSeed10, 0, 255);
+		genStandardOre(world, random, pos, 325 * 7 / 8 / 2 / 4, worldGenOreSeed15, 0, 255); // TODO world heightを取得
+		genStandardOre(world, random, pos, 263 * 7 / 9 / 2, worldGenOreSeed16, 0, 255);
+		genStandardOre(world, random, pos, 263 * 7 / 8 / 2, worldGenOreSeed12, 0, 255);
+		genStandardOre(world, random, pos, 263 * 7 / 1 / 2, worldGenOreSeed9, 0, 255);
+		genStandardOre(world, random, pos, 263 * 7 / 13 / 2, worldGenOreSeed14, 0, 255);
+		genStandardOre(world, random, pos, 263 * 7 / 8 / 2, worldGenOreSeed11, 0, 255);
+		genStandardOre(world, random, pos, 263 * 7 / 7 / 2, worldGenOreSeed13, 0, 255);
+		genStandardOre(world, random, pos, 263 * 7 / 8 / 2, worldGenOreSeed10, 0, 255);
 
-		genStandardOre(event, 474 / 2, worldGenOreSeed1, 0, 255);
-		genStandardOre(event, 293 / 2, worldGenOreSeed2, 0, 255);
-		genStandardOre(event, 272 / 2, worldGenOreSeed3, 0, 255);
-		genStandardOre(event, 263 / 2, worldGenOreSeed4, 0, 255);
-		genStandardOre(event, 144 / 2, worldGenOreSeed5, 0, 255);
-		genStandardOre(event, 120 / 2, worldGenOreSeed6, 0, 255);
-		genStandardOre(event, 90 / 2, worldGenOreSeed7, 0, 255);
-		genStandardOre(event, 45 / 2, worldGenOreSeed8, 0, 255);
+		genStandardOre(world, random, pos, 474 / 2, worldGenOreSeed1, 0, 255);
+		genStandardOre(world, random, pos, 293 / 2, worldGenOreSeed2, 0, 255);
+		genStandardOre(world, random, pos, 272 / 2, worldGenOreSeed3, 0, 255);
+		genStandardOre(world, random, pos, 263 / 2, worldGenOreSeed4, 0, 255);
+		genStandardOre(world, random, pos, 144 / 2, worldGenOreSeed5, 0, 255);
+		genStandardOre(world, random, pos, 120 / 2, worldGenOreSeed6, 0, 255);
+		genStandardOre(world, random, pos, 90 / 2, worldGenOreSeed7, 0, 255);
+		genStandardOre(world, random, pos, 45 / 2, worldGenOreSeed8, 0, 255);
 	}
 
-	private void genStandardOre(OreGenEvent.Post event, int count, WorldGenerator generator, int minHeightInclusive, int maxHeightExclusive)
+	private void genStandardOre(World world, Random random, BlockPos pos, int count, WorldGenerator generator, int minHeightInclusive, int maxHeightExclusive)
 	{
 		for (int j = 0; j < count; ++j) {
-			generator.generate(event.getWorld(), event.getRand(), event.getPos().add(
-				event.getRand().nextInt(16),
-				event.getRand().nextInt(maxHeightExclusive - minHeightInclusive) + minHeightInclusive,
-				event.getRand().nextInt(16)));
+			generator.generate(world, random, pos.add(
+				random.nextInt(16),
+				random.nextInt(maxHeightExclusive - minHeightInclusive) + minHeightInclusive,
+				random.nextInt(16)));
 		}
 	}
 
