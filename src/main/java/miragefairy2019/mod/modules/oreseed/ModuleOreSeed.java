@@ -56,7 +56,7 @@ public class ModuleOreSeed
 				}
 			});
 
-			// 地形生成
+			// 地形生成：ネザー
 			MinecraftForge.EVENT_BUS.register(new Object() {
 				private WorldGenCompoundOreSeed worldGenCompound = new WorldGenCompoundOreSeed(blockOreSeedNether, blockState -> {
 					if (blockState == null) return false;
