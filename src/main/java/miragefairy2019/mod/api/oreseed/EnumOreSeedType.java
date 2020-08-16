@@ -4,4 +4,5 @@ public enum EnumOreSeedType
 {
 	STONE,
 	NETHERRACK,
+	END_STONE,
 }
