@@ -5,12 +5,12 @@ public class GenerationConditions
 
 	public static IGenerationCondition minY(int minY)
 	{
-		return t -> t.y.getY() >= minY;
+		return (type, shape, world, pos) -> pos.getY() >= minY;
 	}
 
 	public static IGenerationCondition maxY(int maxY)
 	{
-		return t -> t.y.getY() <= maxY;
+		return (type, shape, world, pos) -> pos.getY() <= maxY;
 	}
 
 }

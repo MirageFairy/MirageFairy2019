@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.oreseed.RegisterOreSeedDrop;
+import miragefairy2019.mod.api.oreseed.EnumOreSeedType;
+import miragefairy2019.mod.api.oreseed.RegistryOreSeedDrop;
 import miragefairy2019.mod.modules.oreseed.EnumVariantOreSeed;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
 
 public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingTool
 {
@@ -39,12 +41,15 @@ public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingTool
 
 		if (!world.isRemote) {
 
+			EnumOreSeedType type = EnumOreSeedType.STONE;
+			if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.NETHER)) type = EnumOreSeedType.NETHERRACK;
+
 			// 鉱石生成確率表示
 			List<String> lines = new ArrayList<>();
-			lines.add("===== Ore List =====");
+			lines.add("===== Ore List (" + type + ") =====");
 			for (EnumVariantOreSeed variant : EnumVariantOreSeed.values()) {
 				lines.add("----- " + variant.name());
-				RegisterOreSeedDrop.getList(variant.shape, world, player.getPosition()).stream()
+				RegistryOreSeedDrop.getList(type, variant.shape, world, pos).stream()
 					.forEach(t -> lines.add(String.format("%.2f", t.weight) + ": " + t.item.get().getBlock().getItem(world, pos, t.item.get()).getDisplayName()));
 			}
 			lines.add("====================");

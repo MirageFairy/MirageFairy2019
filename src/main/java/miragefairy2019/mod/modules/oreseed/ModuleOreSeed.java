@@ -2,6 +2,7 @@ package miragefairy2019.mod.modules.oreseed;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.mod.api.oreseed.EnumOreSeedType;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import net.minecraft.block.BlockStone;
 import net.minecraft.init.Blocks;
@@ -23,13 +24,13 @@ public class ModuleOreSeed
 		erMod.registerBlock.register(b -> {
 
 			// 鉱石の種
-			blockOreSeed = new BlockOreSeed(() -> Blocks.STONE.getDefaultState());
+			blockOreSeed = new BlockOreSeed(EnumOreSeedType.STONE, () -> Blocks.STONE.getDefaultState());
 			blockOreSeed.setRegistryName(ModMirageFairy2019.MODID, "ore_seed");
 			blockOreSeed.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockOreSeed);
 
-			blockOreSeedNether = new BlockOreSeed(() -> Blocks.NETHERRACK.getDefaultState());
 			// 鉱石の種：ネザー
+			blockOreSeedNether = new BlockOreSeed(EnumOreSeedType.NETHERRACK, () -> Blocks.NETHERRACK.getDefaultState());
 			blockOreSeedNether.setRegistryName(ModMirageFairy2019.MODID, "ore_seed_nether");
 			blockOreSeedNether.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockOreSeedNether);

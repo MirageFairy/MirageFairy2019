@@ -5,7 +5,8 @@ import java.util.Deque;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import miragefairy2019.mod.api.oreseed.RegisterOreSeedDrop;
+import miragefairy2019.mod.api.oreseed.EnumOreSeedType;
+import miragefairy2019.mod.api.oreseed.RegistryOreSeedDrop;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,11 +26,13 @@ import net.minecraft.world.World;
 public class BlockOreSeed extends Block
 {
 
+	private EnumOreSeedType type;
 	private Supplier<IBlockState> sBlockStateDefault;
 
-	public BlockOreSeed(Supplier<IBlockState> sBlockStateDefault)
+	public BlockOreSeed(EnumOreSeedType type, Supplier<IBlockState> sBlockStateDefault)
 	{
 		super(Material.ROCK);
+		this.type = type;
 		this.sBlockStateDefault = sBlockStateDefault;
 
 		// meta
@@ -158,7 +161,8 @@ public class BlockOreSeed extends Block
 	{
 		IBlockState state = world.getBlockState(pos);
 		Random random = new Random(pos.getX() * 15946848L + pos.getY() * 29135678L + pos.getZ() * 65726816L);
-		IBlockState blockStateAfter = RegisterOreSeedDrop.drop(
+		IBlockState blockStateAfter = RegistryOreSeedDrop.drop(
+			type,
 			getVariant(state).shape,
 			world,
 			pos,
