@@ -416,6 +416,9 @@ public class ModuleFairy
 			// 妖精の鉱石辞書
 			for (Tuple<Integer, VariantFairy[]> variant : FairyTypes.variants) {
 				for (int i = 0; i <= itemFairyList.length - 1; i++) {
+					OreDictionary.registerOre(
+						"mirageFairy2019Fairy" + UtilsString.toUpperCaseHead(variant.y[i].type.getName().getResourcePath()) + "Rank" + (i + 1),
+						variant.y[i].createItemStack());
 					for (Tuple<IAbilityType, Double> tuple : variant.y[i].type.abilitySet.getAbilities()) {
 						if (tuple.y >= 10) {
 							OreDictionary.registerOre(
