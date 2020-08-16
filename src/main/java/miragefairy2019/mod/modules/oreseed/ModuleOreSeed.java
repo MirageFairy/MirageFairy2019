@@ -28,8 +28,8 @@ public class ModuleOreSeed
 			blockOreSeed.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockOreSeed);
 
-			// 鉱石の種
 			blockOreSeedNether = new BlockOreSeed(() -> Blocks.NETHERRACK.getDefaultState());
+			// 鉱石の種：ネザー
 			blockOreSeedNether.setRegistryName(ModMirageFairy2019.MODID, "ore_seed_nether");
 			blockOreSeedNether.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockOreSeedNether);
