@@ -4,6 +4,10 @@
 	"ingredients": [
 		{
 			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019FairyStick"
+		},
+		{
+			"type": "forge:ore_dict",
 			"ore": "mirageFairyCrystal"
 		},
 		{

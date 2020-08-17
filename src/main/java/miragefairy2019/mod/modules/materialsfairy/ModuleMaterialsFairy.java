@@ -11,8 +11,10 @@ import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleMaterialsFairy
 {
@@ -26,7 +28,8 @@ public class ModuleMaterialsFairy
 			.bind(setCreativeTab(() -> ApiMain.creativeTab()))
 			.bind(onRegisterItem(i -> {
 				if (ApiMain.side().isClient()) ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), null));
-			}));
+			}))
+			.bind(onCreateItemStack(i -> OreDictionary.registerOre("mirageFairy2019FairyStick", new ItemStack(i))));
 
 		// マテリアル
 		item(erMod, ItemMultiMaterial<ItemVariantMaterial>::new, new ResourceLocation(ModMirageFairy2019.MODID, "fairy_materials"), "materialsFairy")

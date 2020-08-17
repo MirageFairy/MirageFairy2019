@@ -62,4 +62,18 @@ public class ItemFairyStick extends Item
 		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
 
+	//
+
+	@Override
+	public boolean hasContainerItem(ItemStack itemStack)
+	{
+		return true;
+	}
+
+	@Override
+	public ItemStack getContainerItem(ItemStack itemStack)
+	{
+		return itemStack.copy();
+	}
+
 }
