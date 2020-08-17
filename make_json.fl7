@@ -289,6 +289,8 @@ Writer: {
 	block("pyrope_ore");
 	block("smithsonite_ore");
 
+	handheld("fairy_stick");
+
 	fairyWeapon("crafting_fairy_wand");
 	fairyWeapon("crafting_fairy_wand_2");
 	fairyWeapon("crafting_fairy_wand_3");
