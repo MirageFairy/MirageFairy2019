@@ -23,7 +23,6 @@ public class ModuleMaterialsFairy
 	{
 
 		// 妖精のステッキ
-
 		item(erMod, ItemFairyStick::new, new ResourceLocation(ModMirageFairy2019.MODID, "fairy_stick"), "fairyStick")
 			.bind(setCreativeTab(() -> ApiMain.creativeTab()))
 			.bind(onRegisterItem(i -> {
