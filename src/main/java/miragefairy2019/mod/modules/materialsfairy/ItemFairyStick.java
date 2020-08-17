@@ -24,12 +24,16 @@ public class ItemFairyStick extends Item
 		setMaxStackSize(1);
 	}
 
+	//
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isFull3D()
 	{
 		return true;
 	}
+
+	//
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -48,6 +52,8 @@ public class ItemFairyStick extends Item
 		tooltip.add(TextFormatting.RED + "Right Click: World Craft");
 
 	}
+
+	//
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
