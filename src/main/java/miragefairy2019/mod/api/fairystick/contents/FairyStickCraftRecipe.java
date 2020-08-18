@@ -11,6 +11,18 @@ public class FairyStickCraftRecipe implements IFairyStickCraftRecipe
 
 	private List<IFairyStickCraftCondition> conditions = new ArrayList<>();
 
+	public FairyStickCraftRecipe()
+	{
+
+	}
+
+	public FairyStickCraftRecipe(IFairyStickCraftCondition... conditions)
+	{
+		for (IFairyStickCraftCondition condition : conditions) {
+			add(condition);
+		}
+	}
+
 	public FairyStickCraftRecipe add(IFairyStickCraftCondition condition)
 	{
 		conditions.add(condition);
