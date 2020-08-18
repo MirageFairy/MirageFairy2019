@@ -38,7 +38,8 @@ public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondi
 		fairyStickCraft.hookOnCraft(() -> {
 
 			world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
-			world.setBlockState(pos, Blocks.WATER.getDefaultState(), 2);
+			world.setBlockState(pos, blockState, 3);
+			world.neighborChanged(pos, blockState.getBlock(), pos.up());
 
 			world.playSound(null, pos, SoundEvents.BLOCK_NOTE_BELL, SoundCategory.PLAYERS, 0.2F, 1.0F);
 			for (int i = 0; i < 10; i++) {
