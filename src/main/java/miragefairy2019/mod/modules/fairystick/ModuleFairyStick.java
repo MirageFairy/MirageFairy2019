@@ -56,6 +56,12 @@ public class ModuleFairyStick
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairyCrystal")),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyLavaRank1"))));
 
+			// 蜘蛛精→糸ブロック
+			ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+				new FairyStickCraftConditionSpawnBlock(() -> Blocks.WEB.getDefaultState()),
+				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairyCrystal")),
+				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairySpiderRank1"))));
+
 		}
 
 	}
