@@ -2,24 +2,19 @@ package miragefairy2019.mod.modules.fairystick;
 
 import static miragefairy2019.mod.lib.Configurator.*;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.function.Predicate;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairystick.ApiFairyStick;
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeItem;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -93,42 +88,8 @@ public class ModuleFairyStick
 				})
 
 				// アイテム
-				.add(fairyStickCraft -> {
-					World world = fairyStickCraft.getWorld();
-					BlockPos pos = fairyStickCraft.getPos();
-					List<EntityItem> entities = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos));
-
-					Predicate<Predicate<ItemStack>> pPuller = ingredient -> {
-
-						Iterator<EntityItem> iterator = entities.iterator();
-						while (iterator.hasNext()) {
-							EntityItem entity = iterator.next();
-							ItemStack itemStack = entity.getItem();
-
-							if (ingredient.test(itemStack)) {
-
-								fairyStickCraft.hookOnCraft(() -> {
-									itemStack.shrink(1);
-									if (itemStack.isEmpty()) world.removeEntity(entity);
-								});
-								fairyStickCraft.hookOnUpdate(() -> {
-									world.spawnParticle(EnumParticleTypes.SPELL_MOB, entity.posX, entity.posY, entity.posZ, 0, 1, 0);
-								});
-
-								iterator.remove();
-								return true;
-							}
-
-						}
-
-						return false;
-					};
-
-					if (!pPuller.test(new OreIngredient("mirageFairyCrystal"))) return false;
-					if (!pPuller.test(new OreIngredient("mirageFairy2019FairyWaterRank1"))) return false;
-
-					return true;
-				})
+				.add(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairyCrystal")))
+				.add(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyWaterRank1")))
 
 			);
 

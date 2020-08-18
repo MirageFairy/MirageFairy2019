@@ -1,12 +1,15 @@
 package miragefairy2019.mod.api.fairystick.contents;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftResult;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -20,16 +23,21 @@ public class FairyStickCraft implements IFairyStickCraft, IFairyStickCraftResult
 	private final IBlockState blockState;
 	private final ItemStack itemStackFairyStick;
 	private final World world;
+
+	private List<EntityItem> entitiesItemRemaining = new ArrayList<>();
+
 	private List<Runnable> listenersOnCraft = new ArrayList<>();
 	private List<Runnable> listenersOnUpdate = new ArrayList<>();
 
-	public FairyStickCraft(Optional<EntityPlayer> oPlayer, BlockPos pos, IBlockState blockState, ItemStack itemStackFairyStick, World world)
+	public FairyStickCraft(Optional<EntityPlayer> oPlayer, BlockPos pos, IBlockState blockState, ItemStack itemStackFairyStick, World world, List<EntityItem> entitiesItem)
 	{
 		this.oPlayer = oPlayer;
 		this.pos = pos;
 		this.blockState = blockState;
 		this.itemStackFairyStick = itemStackFairyStick;
 		this.world = world;
+
+		this.entitiesItemRemaining.addAll(entitiesItem);
 	}
 
 	@Override
@@ -60,6 +68,22 @@ public class FairyStickCraft implements IFairyStickCraft, IFairyStickCraftResult
 	public ItemStack getItemStackFairyStick()
 	{
 		return itemStackFairyStick;
+	}
+
+	@Override
+	public Optional<EntityItem> pullItem(Predicate<ItemStack> ingredient)
+	{
+		Iterator<EntityItem> iterator = entitiesItemRemaining.iterator();
+		while (iterator.hasNext()) {
+			EntityItem entity = iterator.next();
+
+			if (ingredient.test(entity.getItem())) {
+				iterator.remove();
+				return Optional.of(entity);
+			}
+
+		}
+		return Optional.empty();
 	}
 
 	@Override
