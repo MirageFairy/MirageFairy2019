@@ -55,11 +55,27 @@ public class ModuleFairyStick
 					if (!fairyStickCraft.getBlockState().getBlock().isReplaceable(world, pos)) return false;
 					if (!Blocks.WATER.getDefaultState().getBlock().canPlaceBlockAt(world, pos)) return false;
 					if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.NETHER)) return false;
+
 					fairyStickCraft.hookOnCraft(() -> {
+
 						world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
 						world.setBlockState(pos, Blocks.WATER.getDefaultState(), 2);
+
+						world.playSound(null, pos, SoundEvents.BLOCK_NOTE_BELL, SoundCategory.PLAYERS, 0.2F, 1.0F);
+						for (int i = 0; i < 10; i++) {
+							world.spawnParticle(
+								EnumParticleTypes.SPELL_MOB,
+								pos.getX() + world.rand.nextDouble(),
+								pos.getY() + world.rand.nextDouble(),
+								pos.getZ() + world.rand.nextDouble(),
+								0.5 + world.rand.nextDouble() * 0.5,
+								0.5 + world.rand.nextDouble() * 0.5,
+								0.5 + world.rand.nextDouble() * 0.5);
+						}
+
 					});
 					fairyStickCraft.hookOnUpdate(() -> {
+
 						for (int i = 0; i < 5; i++) {
 							world.spawnParticle(
 								EnumParticleTypes.SPELL_MOB,
@@ -70,6 +86,7 @@ public class ModuleFairyStick
 								0.5 + world.rand.nextDouble() * 0.5,
 								0.5 + world.rand.nextDouble() * 0.5);
 						}
+
 					});
 
 					return true;
@@ -89,6 +106,7 @@ public class ModuleFairyStick
 							ItemStack itemStack = entity.getItem();
 
 							if (ingredient.test(itemStack)) {
+
 								fairyStickCraft.hookOnCraft(() -> {
 									itemStack.shrink(1);
 									if (itemStack.isEmpty()) world.removeEntity(entity);
@@ -96,6 +114,7 @@ public class ModuleFairyStick
 								fairyStickCraft.hookOnUpdate(() -> {
 									world.spawnParticle(EnumParticleTypes.SPELL_MOB, entity.posX, entity.posY, entity.posZ, 0, 1, 0);
 								});
+
 								iterator.remove();
 								return true;
 							}
@@ -108,27 +127,6 @@ public class ModuleFairyStick
 					if (!pPuller.test(new OreIngredient("mirageFairyCrystal"))) return false;
 					if (!pPuller.test(new OreIngredient("mirageFairy2019FairyWaterRank1"))) return false;
 
-					return true;
-				})
-
-				// エフェクト
-				.add(fairyStickCraft -> {
-					World world = fairyStickCraft.getWorld();
-					BlockPos pos = fairyStickCraft.getPos();
-
-					fairyStickCraft.hookOnCraft(() -> {
-						world.playSound(null, pos, SoundEvents.BLOCK_NOTE_BELL, SoundCategory.PLAYERS, 0.2F, 1.0F);
-						for (int i = 0; i < 10; i++) {
-							world.spawnParticle(
-								EnumParticleTypes.SPELL_MOB,
-								pos.getX() + world.rand.nextDouble(),
-								pos.getY() + world.rand.nextDouble(),
-								pos.getZ() + world.rand.nextDouble(),
-								0.5 + world.rand.nextDouble() * 0.5,
-								0.5 + world.rand.nextDouble() * 0.5,
-								0.5 + world.rand.nextDouble() * 0.5);
-						}
-					});
 					return true;
 				})
 
