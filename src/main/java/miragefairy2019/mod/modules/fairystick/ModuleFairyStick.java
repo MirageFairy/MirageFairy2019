@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.fairystick.FairyStickCraftRecipe;
 import miragefairy2019.mod.api.fairystick.FairyStickCraftRegistry;
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

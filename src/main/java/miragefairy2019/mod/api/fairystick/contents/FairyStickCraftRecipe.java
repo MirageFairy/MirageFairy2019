@@ -1,7 +1,10 @@
-package miragefairy2019.mod.api.fairystick;
+package miragefairy2019.mod.api.fairystick.contents;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftRecipe;
 
 public class FairyStickCraftRecipe implements IFairyStickCraftRecipe
 {

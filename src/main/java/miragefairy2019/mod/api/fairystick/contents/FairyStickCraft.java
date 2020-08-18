@@ -1,9 +1,11 @@
-package miragefairy2019.mod.api.fairystick;
+package miragefairy2019.mod.api.fairystick.contents;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftResult;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,7 +23,7 @@ public class FairyStickCraft implements IFairyStickCraft, IFairyStickCraftResult
 	private List<Runnable> listenersOnCraft = new ArrayList<>();
 	private List<Runnable> listenersOnUpdate = new ArrayList<>();
 
-	FairyStickCraft(Optional<EntityPlayer> oPlayer, BlockPos pos, IBlockState blockState, ItemStack itemStackFairyStick, World world)
+	public FairyStickCraft(Optional<EntityPlayer> oPlayer, BlockPos pos, IBlockState blockState, ItemStack itemStackFairyStick, World world)
 	{
 		this.oPlayer = oPlayer;
 		this.pos = pos;

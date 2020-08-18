@@ -3,6 +3,7 @@ package miragefairy2019.mod.api.fairystick;
 import java.util.List;
 import java.util.Optional;
 
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraft;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
