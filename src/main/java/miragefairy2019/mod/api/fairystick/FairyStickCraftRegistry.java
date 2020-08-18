@@ -43,6 +43,18 @@ public class FairyStickCraftRegistry
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
 				world.setBlockState(pos, Blocks.WATER.getDefaultState(), 2);
 			});
+			listOnUpdate.add(() -> {
+				for (int i = 0; i < 5; i++) {
+					world.spawnParticle(
+						EnumParticleTypes.SPELL_MOB,
+						pos.getX() + world.rand.nextDouble(),
+						pos.getY() + world.rand.nextDouble(),
+						pos.getZ() + world.rand.nextDouble(),
+						0.5 + world.rand.nextDouble() * 0.5,
+						0.5 + world.rand.nextDouble() * 0.5,
+						0.5 + world.rand.nextDouble() * 0.5);
+				}
+			});
 
 			// アイテム
 			{
@@ -53,12 +65,15 @@ public class FairyStickCraftRegistry
 					Iterator<EntityItem> iterator = entities.iterator();
 					while (iterator.hasNext()) {
 						EntityItem entity = iterator.next();
+						ItemStack itemStack = entity.getItem();
 
-						if (ingredient.test(entity.getItem())) {
+						if (ingredient.test(itemStack)) {
 							listOnCraft.add(() -> {
-								ItemStack itemStack = entity.getItem();
 								itemStack.shrink(1);
 								if (itemStack.isEmpty()) world.removeEntity(entity);
+							});
+							listOnUpdate.add(() -> {
+								world.spawnParticle(EnumParticleTypes.SPELL_MOB, entity.posX, entity.posY, entity.posZ, 0, 1, 0);
 							});
 							iterator.remove();
 							return true;
