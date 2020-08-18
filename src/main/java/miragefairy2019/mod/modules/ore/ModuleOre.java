@@ -165,6 +165,7 @@ public class ModuleOre
 			OreDictionary.registerOre("container1000Lava", Items.LAVA_BUCKET);
 			OreDictionary.registerOre("wool", new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
 			OreDictionary.registerOre("ice", new ItemStack(Blocks.ICE));
+			OreDictionary.registerOre("gemCoal", new ItemStack(Items.COAL, 1, 0));
 		});
 		erMod.addRecipe.register(() -> {
 
