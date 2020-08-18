@@ -65,18 +65,16 @@ public class ItemFairyStick extends Item
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		Optional<IFairyStickCraftResult> result = FairyStickCraftRegistry.getResult(
-			Optional.of(player),
-			worldIn,
-			pos,
-			player.getHeldItem(hand));
 
-		if (result.isPresent()) {
-			result.get().onCraft();
-			return EnumActionResult.SUCCESS;
-		}
+		// レシピ判定
+		IFairyStickCraftResult result = FairyStickCraftRegistry.getResult(Optional.of(player), worldIn, pos, player.getHeldItem(hand)).orElse(null);
+		if (result == null) return EnumActionResult.PASS;
 
-		return EnumActionResult.PASS;
+		//
+
+		result.onCraft();
+
+		return EnumActionResult.SUCCESS;
 	}
 
 	@Override
@@ -102,12 +100,10 @@ public class ItemFairyStick extends Item
 		if (rayTraceResult.typeOfHit != Type.BLOCK) return; // ブロックに当たらなかった場合は無視
 
 		// レシピ判定
-		IFairyStickCraftResult result = FairyStickCraftRegistry.getResult(
-			Optional.of(player),
-			world,
-			rayTraceResult.getBlockPos(),
-			itemStack).orElse(null);
+		IFairyStickCraftResult result = FairyStickCraftRegistry.getResult(Optional.of(player), world, rayTraceResult.getBlockPos(), itemStack).orElse(null);
 		if (result == null) return;
+
+		//
 
 		result.onUpdate();
 
