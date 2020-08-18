@@ -1,32 +1,27 @@
 package miragefairy2019.mod.modules.materialsfairy;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.Optional;
 
+import miragefairy2019.mod.api.fairystick.FairyStickCraftRegistry;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftResult;
+import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.UtilsMinecraft;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreIngredient;
 
 public class ItemFairyStick extends Item
 {
@@ -70,75 +65,52 @@ public class ItemFairyStick extends Item
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		// TODO レシピシステムの設置
+		Optional<IFairyStickCraftResult> result = FairyStickCraftRegistry.getResult(
+			Optional.of(player),
+			worldIn,
+			pos,
+			player.getHeldItem(hand));
 
-		BlockPos pos2 = pos.offset(facing);
-		IBlockState blockState = worldIn.getBlockState(pos2);
-
-		List<Runnable> onCrafts = new ArrayList<>();
-
-		// 材料の判定
-		{
-
-			// ブロック
-			if (!blockState.getBlock().isReplaceable(worldIn, pos2)) return EnumActionResult.PASS;
-			if (!Blocks.WATER.getDefaultState().getBlock().canPlaceBlockAt(worldIn, pos2)) return EnumActionResult.PASS;
-			if (BiomeDictionary.hasType(worldIn.getBiome(pos2), BiomeDictionary.Type.NETHER)) return EnumActionResult.PASS;
-			onCrafts.add(() -> {
-				worldIn.setBlockState(pos2, Blocks.AIR.getDefaultState(), 2);
-				worldIn.setBlockState(pos2, Blocks.WATER.getDefaultState(), 2);
-			});
-
-			// アイテム
-			{
-				List<EntityItem> entities = worldIn.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos2));
-
-				Predicate<Predicate<ItemStack>> pPuller = ingredient -> {
-
-					Iterator<EntityItem> iterator = entities.iterator();
-					while (iterator.hasNext()) {
-						EntityItem entity = iterator.next();
-
-						if (ingredient.test(entity.getItem())) {
-							onCrafts.add(() -> {
-								ItemStack itemStack = entity.getItem();
-								itemStack.shrink(1);
-								if (itemStack.isEmpty()) worldIn.removeEntity(entity);
-							});
-							iterator.remove();
-							return true;
-						}
-
-					}
-
-					return false;
-				};
-
-				if (!pPuller.test(new OreIngredient("mirageFairyCrystal"))) return EnumActionResult.PASS;
-				if (!pPuller.test(new OreIngredient("mirageFairy2019FairyWaterRank1"))) return EnumActionResult.PASS;
-			}
-
-			// エフェクト
-			onCrafts.add(() -> {
-				worldIn.playSound(null, pos2, SoundEvents.BLOCK_NOTE_BELL, SoundCategory.PLAYERS, 0.2F, 1.0F);
-				for (int i = 0; i < 10; i++) {
-					worldIn.spawnParticle(
-						EnumParticleTypes.SPELL_MOB,
-						pos2.getX() + worldIn.rand.nextDouble(),
-						pos2.getY() + worldIn.rand.nextDouble(),
-						pos2.getZ() + worldIn.rand.nextDouble(),
-						0.5 + worldIn.rand.nextDouble() * 0.5,
-						0.5 + worldIn.rand.nextDouble() * 0.5,
-						0.5 + worldIn.rand.nextDouble() * 0.5);
-				}
-			});
-
+		if (result.isPresent()) {
+			result.get().onCraft();
+			return EnumActionResult.SUCCESS;
 		}
 
-		// 成功
-		onCrafts.forEach(Runnable::run);
+		return EnumActionResult.PASS;
+	}
 
-		return EnumActionResult.SUCCESS;
+	@Override
+	public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
+	{
+
+		// クライアントのみ
+		if (!ApiMain.side().isClient()) return;
+
+		// 使用tick判定
+		if (!(world.rand.nextDouble() < 0.1)) return;
+
+		// プレイヤー取得
+		if (!(entity instanceof EntityPlayer)) return;
+		EntityPlayer player = (EntityPlayer) entity;
+
+		// アイテム取得
+		if (!isSelected && player.getHeldItemOffhand() != itemStack) return;
+
+		// プレイヤー視線判定
+		RayTraceResult rayTraceResult = rayTrace(world, player, false);
+		if (rayTraceResult == null) return; // ブロックに当たらなかった場合は無視
+		if (rayTraceResult.typeOfHit != Type.BLOCK) return; // ブロックに当たらなかった場合は無視
+
+		// レシピ判定
+		IFairyStickCraftResult result = FairyStickCraftRegistry.getResult(
+			Optional.of(player),
+			world,
+			rayTraceResult.getBlockPos(),
+			itemStack).orElse(null);
+		if (result == null) return;
+
+		result.onUpdate();
+
 	}
 
 	//
