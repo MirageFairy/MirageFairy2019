@@ -8,6 +8,7 @@ import miragefairy2019.mod.api.materialsfairy.ApiMaterialsFairy;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.InitializationContext;
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
+import miragefairy2019.mod.modules.fairystick.ModuleFairyStick;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed;
@@ -40,6 +41,7 @@ public class ModMirageFairy2019
 		ModuleOreSeed.init(erMod);
 		ModuleOre.init(erMod);
 		ModuleSphere.init(erMod);
+		ModuleFairyStick.init(erMod);
 
 		erMod.initCreativeTab.trigger().run();
 

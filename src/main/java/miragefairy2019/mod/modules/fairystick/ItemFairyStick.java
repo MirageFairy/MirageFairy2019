@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.materialsfairy;
+package miragefairy2019.mod.modules.fairystick;
 
 import java.util.List;
 import java.util.Optional;
