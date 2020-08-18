@@ -52,7 +52,7 @@ public class ModuleFairyStick
 
 			// 溶岩精→溶岩流
 			ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
-				new FairyStickCraftConditionSpawnBlock(() -> Blocks.FLOWING_LAVA.getDefaultState().withProperty(BlockDynamicLiquid.LEVEL, 3)),
+				new FairyStickCraftConditionSpawnBlock(() -> Blocks.FLOWING_LAVA.getDefaultState().withProperty(BlockDynamicLiquid.LEVEL, 15)),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairyCrystal")),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyLavaRank1"))));
 
