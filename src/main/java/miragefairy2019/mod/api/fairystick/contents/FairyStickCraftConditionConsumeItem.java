@@ -30,11 +30,19 @@ public class FairyStickCraftConditionConsumeItem implements IFairyStickCraftCond
 		//
 
 		fairyStickCraft.hookOnCraft(() -> {
+
 			entity.getItem().shrink(1);
 			if (entity.getItem().isEmpty()) fairyStickCraft.getWorld().removeEntity(entity);
+
+			fairyStickCraft.getWorld().spawnParticle(EnumParticleTypes.SPELL_MOB, entity.posX, entity.posY, entity.posZ, 1, 0, 0);
+
 		});
 		fairyStickCraft.hookOnUpdate(() -> {
-			fairyStickCraft.getWorld().spawnParticle(EnumParticleTypes.SPELL_MOB, entity.posX, entity.posY, entity.posZ, 0, 1, 0);
+
+			for (int i = 0; i < 2; i++) {
+				fairyStickCraft.getWorld().spawnParticle(EnumParticleTypes.SPELL_MOB, entity.posX, entity.posY, entity.posZ, 0, 1, 0);
+			}
+
 		});
 		return true;
 	}

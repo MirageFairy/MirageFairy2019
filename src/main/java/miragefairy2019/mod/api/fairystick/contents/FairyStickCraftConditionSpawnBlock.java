@@ -42,29 +42,29 @@ public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondi
 			world.neighborChanged(pos, blockState.getBlock(), pos.up());
 
 			world.playSound(null, pos, SoundEvents.BLOCK_NOTE_BELL, SoundCategory.PLAYERS, 0.2F, 1.0F);
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 20; i++) {
 				world.spawnParticle(
-					EnumParticleTypes.SPELL_MOB,
+					EnumParticleTypes.VILLAGER_HAPPY,
 					pos.getX() + world.rand.nextDouble(),
 					pos.getY() + world.rand.nextDouble(),
 					pos.getZ() + world.rand.nextDouble(),
-					0.5 + world.rand.nextDouble() * 0.5,
-					0.5 + world.rand.nextDouble() * 0.5,
-					0.5 + world.rand.nextDouble() * 0.5);
+					0,
+					0,
+					0);
 			}
 
 		});
 		fairyStickCraft.hookOnUpdate(() -> {
 
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 3; i++) {
 				world.spawnParticle(
-					EnumParticleTypes.SPELL_MOB,
+					EnumParticleTypes.END_ROD,
 					pos.getX() + world.rand.nextDouble(),
 					pos.getY() + world.rand.nextDouble(),
 					pos.getZ() + world.rand.nextDouble(),
-					0.5 + world.rand.nextDouble() * 0.5,
-					0.5 + world.rand.nextDouble() * 0.5,
-					0.5 + world.rand.nextDouble() * 0.5);
+					0,
+					0,
+					0);
 			}
 
 		});
