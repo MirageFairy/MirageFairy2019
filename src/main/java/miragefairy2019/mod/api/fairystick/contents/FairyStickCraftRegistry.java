@@ -1,26 +1,32 @@
-package miragefairy2019.mod.api.fairystick;
+package miragefairy2019.mod.api.fairystick.contents;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import miragefairy2019.mod.api.fairystick.contents.FairyStickCraft;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftRecipe;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftRegistry;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftResult;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class FairyStickCraftRegistry
+public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 {
 
-	private static List<IFairyStickCraftRecipe> recipes;
+	private List<IFairyStickCraftRecipe> recipes = new ArrayList<>();
 
-	public static void registerRecipe(IFairyStickCraftRecipe recipe)
+	@Override
+	public void registerRecipe(IFairyStickCraftRecipe recipe)
 	{
 		recipes.add(recipe);
 	}
 
-	public static Optional<IFairyStickCraftResult> getResult(Optional<EntityPlayer> oPlayer, World world, BlockPos pos, ItemStack itemStackFairyStick)
+	@Override
+	public Optional<IFairyStickCraftResult> getResult(Optional<EntityPlayer> oPlayer, World world, BlockPos pos, ItemStack itemStackFairyStick)
 	{
 		IBlockState blockState = world.getBlockState(pos);
 

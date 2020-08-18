@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairystick;
 import java.util.List;
 import java.util.Optional;
 
-import miragefairy2019.mod.api.fairystick.FairyStickCraftRegistry;
+import miragefairy2019.mod.api.fairystick.ApiFairyStick;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftResult;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.UtilsMinecraft;
@@ -67,7 +67,7 @@ public class ItemFairyStick extends Item
 	{
 
 		// レシピ判定
-		IFairyStickCraftResult result = FairyStickCraftRegistry.getResult(Optional.of(player), worldIn, pos, player.getHeldItem(hand)).orElse(null);
+		IFairyStickCraftResult result = ApiFairyStick.fairyStickCraftRegistry.getResult(Optional.of(player), worldIn, pos, player.getHeldItem(hand)).orElse(null);
 		if (result == null) return EnumActionResult.PASS;
 
 		//
@@ -100,7 +100,7 @@ public class ItemFairyStick extends Item
 		if (rayTraceResult.typeOfHit != Type.BLOCK) return; // ブロックに当たらなかった場合は無視
 
 		// レシピ判定
-		IFairyStickCraftResult result = FairyStickCraftRegistry.getResult(Optional.of(player), world, rayTraceResult.getBlockPos(), itemStack).orElse(null);
+		IFairyStickCraftResult result = ApiFairyStick.fairyStickCraftRegistry.getResult(Optional.of(player), world, rayTraceResult.getBlockPos(), itemStack).orElse(null);
 		if (result == null) return;
 
 		//

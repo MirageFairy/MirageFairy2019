@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.fairystick.FairyStickCraftRegistry;
+import miragefairy2019.mod.api.fairystick.ApiFairyStick;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
@@ -45,7 +45,7 @@ public class ModuleFairyStick
 		{
 
 			// 水精→水源
-			FairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe()
+			ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe()
 
 				// ブロック
 				.add(fairyStickCraft -> {
