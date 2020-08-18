@@ -10,6 +10,7 @@ import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionSpawn
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
+import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -48,6 +49,12 @@ public class ModuleFairyStick
 				},
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairyCrystal")),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyWaterRank1"))));
+
+			// 溶岩精→溶岩流
+			ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+				new FairyStickCraftConditionSpawnBlock(() -> Blocks.FLOWING_LAVA.getDefaultState().withProperty(BlockDynamicLiquid.LEVEL, 3)),
+				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairyCrystal")),
+				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyLavaRank1"))));
 
 		}
 
