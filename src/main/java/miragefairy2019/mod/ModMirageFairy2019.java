@@ -31,6 +31,8 @@ public class ModMirageFairy2019
 
 	public ModMirageFairy2019()
 	{
+		ModuleFairyStick.init(erMod);
+
 		ApiMain.init(erMod);
 		ApiFairy.init(erMod);
 		ModuleFairyCrystal.init(erMod);
@@ -41,7 +43,6 @@ public class ModMirageFairy2019
 		ModuleOreSeed.init(erMod);
 		ModuleOre.init(erMod);
 		ModuleSphere.init(erMod);
-		ModuleFairyStick.init(erMod);
 
 		erMod.initCreativeTab.trigger().run();
 
