@@ -150,24 +150,32 @@ Writer: {
 	block("smithsonite_block");
 	block("sulfur_block");
 
-	ore: name -> (
-		writer::write("\(name).json"; {
-			parent: "miragefairy2019:block/overlay_block";
-			textures: {
-				particle: "blocks/stone";
-				base: "blocks/stone";
-				overlay: "miragefairy2019:blocks/\(name)";
-			};
-		});
+	(
+		ore: name, base, overlay -> (
+			writer::write("$name.json"; {
+				parent = "miragefairy2019:block/overlay_block";
+				textures = {
+					particle = "blocks/stone";
+					base = base;
+					overlay = "miragefairy2019:$overlay";
+				};
+			});
+		);
+		ore("apatite_ore"; "blocks/stone"; "blocks/apatite_ore");
+		ore("fluorite_ore"; "blocks/stone"; "blocks/fluorite_ore");
+		ore("sulfur_ore"; "blocks/stone"; "blocks/sulfur_ore");
+		ore("cinnabar_ore"; "blocks/stone"; "blocks/cinnabar_ore");
+		ore("magnetite_ore"; "blocks/stone"; "blocks/magnetite_ore");
+		ore("moonstone_ore"; "blocks/stone"; "blocks/moonstone_ore");
+		ore("netherrack_apatite_ore"; "blocks/netherrack"; "blocks/apatite_ore");
+		ore("netherrack_fluorite_ore"; "blocks/netherrack"; "blocks/fluorite_ore");
+		ore("netherrack_sulfur_ore"; "blocks/netherrack"; "blocks/sulfur_ore");
+		ore("netherrack_cinnabar_ore"; "blocks/netherrack"; "blocks/cinnabar_ore");
+		ore("netherrack_magnetite_ore"; "blocks/netherrack"; "blocks/magnetite_ore");
+		ore("netherrack_moonstone_ore"; "blocks/netherrack"; "blocks/moonstone_ore");
+		ore("pyrope_ore"; "blocks/stone"; "blocks/pyrope_ore");
+		ore("smithsonite_ore"; "blocks/stone"; "blocks/smithsonite_ore");
 	);
-	ore("apatite_ore");
-	ore("cinnabar_ore");
-	ore("fluorite_ore");
-	ore("magnetite_ore");
-	ore("moonstone_ore");
-	ore("pyrope_ore");
-	ore("smithsonite_ore");
-	ore("sulfur_ore");
 
 	plant: name -> (
 		writer::write("\(name).json"; {
@@ -288,6 +296,12 @@ Writer: {
 	block("magnetite_ore");
 	block("pyrope_ore");
 	block("smithsonite_ore");
+	block("netherrack_apatite_ore");
+	block("netherrack_fluorite_ore");
+	block("netherrack_sulfur_ore");
+	block("netherrack_cinnabar_ore");
+	block("netherrack_moonstone_ore");
+	block("netherrack_magnetite_ore");
 
 	handheld("fairy_stick");
 

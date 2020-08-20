@@ -8,12 +8,12 @@
 		"variant=5": { "model": "miragefairy2019:magnetite_ore" },
 		"variant=6": { "model": "miragefairy2019:pyrope_ore" },
 		"variant=7": { "model": "miragefairy2019:smithsonite_ore" },
-		"variant=8": { "model": "minecraft:stone" },
-		"variant=9": { "model": "minecraft:stone" },
-		"variant=10": { "model": "minecraft:stone" },
-		"variant=11": { "model": "minecraft:stone" },
-		"variant=12": { "model": "minecraft:stone" },
-		"variant=13": { "model": "minecraft:stone" },
+		"variant=8": { "model": "miragefairy2019:netherrack_apatite_ore" },
+		"variant=9": { "model": "miragefairy2019:netherrack_fluorite_ore" },
+		"variant=10": { "model": "miragefairy2019:netherrack_sulfur_ore" },
+		"variant=11": { "model": "miragefairy2019:netherrack_cinnabar_ore" },
+		"variant=12": { "model": "miragefairy2019:netherrack_moonstone_ore" },
+		"variant=13": { "model": "miragefairy2019:netherrack_magnetite_ore" },
 		"variant=14": { "model": "minecraft:stone" },
 		"variant=15": { "model": "minecraft:stone" }
 	}
