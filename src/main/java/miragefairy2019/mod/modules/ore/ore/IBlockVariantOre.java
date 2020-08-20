@@ -53,4 +53,8 @@ public interface IBlockVariantOre extends IBlockVariantHarvestable
 		return 0;
 	}
 
+	public float getHardness();
+
+	public float getResistance();
+
 }

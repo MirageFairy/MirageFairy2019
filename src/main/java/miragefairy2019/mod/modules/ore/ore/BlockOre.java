@@ -7,12 +7,14 @@ import miragefairy2019.mod.lib.multi.IListBlockVariant;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -36,6 +38,20 @@ public class BlockOre<V extends IBlockVariantOre> extends BlockMulti<V>
 			setHarvestLevel(variant.getHarvestTool(), variant.getHarvestLevel(), getState(variant));
 		}
 
+	}
+
+	//
+
+	@Override
+	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
+	{
+		return variantList.byMetadata(getMetaFromState(blockState)).getHardness();
+	}
+
+	@Override
+	public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion)
+	{
+		return variantList.byMetadata(getMetaFromState(world.getBlockState(pos))).getResistance();
 	}
 
 	//
