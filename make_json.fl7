@@ -167,14 +167,14 @@ Writer: {
 		ore("cinnabar_ore"; "blocks/stone"; "blocks/cinnabar_ore");
 		ore("magnetite_ore"; "blocks/stone"; "blocks/magnetite_ore");
 		ore("moonstone_ore"; "blocks/stone"; "blocks/moonstone_ore");
+		ore("pyrope_ore"; "blocks/stone"; "blocks/pyrope_ore");
+		ore("smithsonite_ore"; "blocks/stone"; "blocks/smithsonite_ore");
 		ore("netherrack_apatite_ore"; "blocks/netherrack"; "blocks/apatite_ore");
 		ore("netherrack_fluorite_ore"; "blocks/netherrack"; "blocks/fluorite_ore");
 		ore("netherrack_sulfur_ore"; "blocks/netherrack"; "blocks/sulfur_ore");
 		ore("netherrack_cinnabar_ore"; "blocks/netherrack"; "blocks/cinnabar_ore");
 		ore("netherrack_magnetite_ore"; "blocks/netherrack"; "blocks/magnetite_ore");
 		ore("netherrack_moonstone_ore"; "blocks/netherrack"; "blocks/moonstone_ore");
-		ore("pyrope_ore"; "blocks/stone"; "blocks/pyrope_ore");
-		ore("smithsonite_ore"; "blocks/stone"; "blocks/smithsonite_ore");
 	);
 
 	plant: name -> (
