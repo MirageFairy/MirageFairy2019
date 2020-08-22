@@ -13,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -101,15 +102,19 @@ public class ModuleSphere
 		erMod.addRecipe.register(() -> {
 
 			for (Tuple<Integer, VariantSphere> variant : itemSpheres.getVariants()) {
-				GameRegistry.addShapelessRecipe(
-					new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
-					new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
-					variant.y.createItemStack(),
-					new OreIngredientComplex("container1000Water"),
-					new OreIngredient("dustMiragium"),
-					new OreIngredient("gemFluorite"),
-					new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
-					variant.y.sphere.sIngredient.get());
+				int t = 0;
+				for (Ingredient ingredient : variant.y.sphere.sIngredients.get()) {
+					GameRegistry.addShapelessRecipe(
+						new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere_" + t),
+						new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
+						variant.y.createItemStack(),
+						new OreIngredientComplex("container1000Water"),
+						new OreIngredient("dustMiragium"),
+						new OreIngredient("gemFluorite"),
+						new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
+						ingredient);
+					t++;
+				}
 			}
 
 		});
