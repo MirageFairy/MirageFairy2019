@@ -102,6 +102,10 @@ public class ModuleOre
 					.bind(addComponent(instance(miragium.get(), 0.111)))
 					.bind(addOreName("nuggetMiragium"));
 
+				itemVariant(c.erMod, c, 14, () -> new ItemVariantMaterial("nephrite_gem", "gemNephrite"))
+					.bind(addComponent(instance(nephrite.get(), 1.000)))
+					.bind(addOreName("gemNephrite"));
+
 				erMod.registerItem.register(b -> {
 					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
 				});

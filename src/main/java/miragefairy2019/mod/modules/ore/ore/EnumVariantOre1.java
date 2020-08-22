@@ -34,6 +34,9 @@ public enum EnumVariantOre1 implements IStringSerializable, IBlockVariantOre
 	NETHERRACK_CINNABAR_ORE(11, "netherrack_cinnabar_ore", "oreCinnabar", 0.4F, 0.4F, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemCinnabar").copy(), 1, 1, 1, 3)),
 	NETHERRACK_MOONSTONE_ORE(12, "netherrack_moonstone_ore", "oreMoonstone", 0.4F, 0.4F, 3, new GemProvider(() -> UtilsMinecraft.getItemStack("gemMoonstone").copy(), 1, 0.5, 20, 40)),
 	NETHERRACK_MAGNETITE_ORE(13, "netherrack_magnetite_ore", "oreMagnetite", 0.4F, 0.4F, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemMagnetite").copy(), 1, 2, 1, 2)),
+
+	NEPHRITE_ORE(14, "nephrite_ore", "oreNephrite", 3, 5, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemNephrite").copy(), 1, 2, 1, 3)),
+
 	;
 
 	//
