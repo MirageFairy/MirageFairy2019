@@ -18,23 +18,35 @@ import miragefairy2019.mod.modules.ore.ore.BlockOre;
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1;
 import miragefairy2019.mod.modules.ore.ore.IBlockVariantOre;
 import miragefairy2019.mod.modules.ore.ore.ItemBlockOre;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleOre
 {
 
+	public static Fluid fluidMiragiumWater;
+
 	public static BlockOre<EnumVariantOre1> blockOre1;
 	public static BlockMaterials<EnumVariantMaterials1> blockMaterials1;
+	public static BlockFluidMiragiumWater blockFluidMiragiumWater;
 
 	public static ItemBlockOre<EnumVariantOre1> itemBlockOre1;
 	public static ItemBlockMaterials<EnumVariantMaterials1> itemBlockMaterials1;
+	public static ItemBlock itemFluidMiragiumWater;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -115,6 +127,18 @@ public class ModuleOre
 
 		erMod.registerBlock.register(b -> {
 
+			// 妖水フルイド
+			fluidMiragiumWater = new Fluid(
+				"miragium_water",
+				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_still"),
+				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_flow"),
+				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_overlay"));
+			fluidMiragiumWater.setViscosity(500);
+			FluidRegistry.registerFluid(fluidMiragiumWater);
+			FluidRegistry.addBucketForFluid(fluidMiragiumWater);
+
+			//
+
 			// 鉱石
 			blockOre1 = new BlockOre<>(EnumVariantOre1.variantList);
 			blockOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
@@ -126,6 +150,22 @@ public class ModuleOre
 			blockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
 			blockMaterials1.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockMaterials1);
+
+			// 妖水ブロック
+			blockFluidMiragiumWater = new BlockFluidMiragiumWater(fluidMiragiumWater);
+			blockFluidMiragiumWater.setRegistryName(ModMirageFairy2019.MODID, "miragium_water");
+			blockFluidMiragiumWater.setUnlocalizedName("miragiumWater");
+			blockFluidMiragiumWater.setCreativeTab(ApiMain.creativeTab());
+			ForgeRegistries.BLOCKS.register(blockFluidMiragiumWater);
+			if (ApiMain.side().isClient()) {
+				ModelLoader.setCustomStateMapper(blockFluidMiragiumWater, new StateMapperBase() {
+					@Override
+					protected ModelResourceLocation getModelResourceLocation(IBlockState var1)
+					{
+						return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "miragium_water"), "fluid");
+					}
+				});
+			}
 
 		});
 		erMod.registerItem.register(b -> {
@@ -158,6 +198,29 @@ public class ModuleOre
 						variant.getMetadata(),
 						new ModelResourceLocation(new ResourceLocation(itemBlockMaterials1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
 				}
+			}
+
+			// 妖水アイテム
+			itemFluidMiragiumWater = new ItemBlock(blockFluidMiragiumWater) {
+				public void getSubItems(CreativeTabs p_getSubItems_1_, NonNullList<ItemStack> p_getSubItems_2_)
+				{
+					if (this.isInCreativeTab(p_getSubItems_1_)) {
+						this.block.getSubBlocks(p_getSubItems_1_, p_getSubItems_2_);
+					}
+				}
+			};
+			itemFluidMiragiumWater.setRegistryName(ModMirageFairy2019.MODID, "miragium_water");
+			itemFluidMiragiumWater.setUnlocalizedName("miragiumWater");
+			itemFluidMiragiumWater.setCreativeTab(ApiMain.creativeTab());
+			ForgeRegistries.ITEMS.register(itemFluidMiragiumWater);
+			if (ApiMain.side().isClient()) {
+				ModelLoader.setCustomMeshDefinition(itemFluidMiragiumWater, new ItemMeshDefinition() {
+					@Override
+					public ModelResourceLocation getModelLocation(ItemStack var1)
+					{
+						return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "miragium_water"), "fluid");
+					}
+				});
 			}
 
 		});

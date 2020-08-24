@@ -154,6 +154,9 @@ item.gemNephrite.name=Nephrite
 item.spheres.name=Sphere
 item.spheres.format=Sphere of "%s"
 
+fluid.miragium_water=Miragium Water
+tile.miragiumWater.name=Miragium Water
+
 mirageFairy2019.component.cuticle.format=Cuticle of "%s"
 mirageFairy2019.component.apatite.name=Apatite
 mirageFairy2019.component.fluorite.name=Fluorite

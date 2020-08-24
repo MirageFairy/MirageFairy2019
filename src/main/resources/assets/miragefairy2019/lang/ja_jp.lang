@@ -154,6 +154,9 @@ item.gemNephrite.name=軟玉
 item.spheres.name=スフィア
 item.spheres.format=≪%s≫のスフィア
 
+fluid.miragium_water=妖水
+tile.miragiumWater.name=妖水
+
 mirageFairy2019.component.cuticle.format=≪%s≫のキューティクル
 mirageFairy2019.component.apatite.name=燐灰石
 mirageFairy2019.component.fluorite.name=蛍石
