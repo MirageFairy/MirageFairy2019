@@ -10,8 +10,8 @@ import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionRepla
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionSpawnBlock;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.lib.EventRegistryMod;
-import miragefairy2019.mod.modules.ore.ModuleOre;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -68,7 +68,7 @@ public class ModuleFairyStick
 			ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
 				new FairyStickCraftConditionReplaceBlock(
 					blockState -> blockState.equals(Blocks.WATER.getDefaultState()),
-					() -> ModuleOre.blockFluidMiragiumWater.getDefaultState()),
+					() -> ApiOre.blockFluidMiragiumWater.getDefaultState()),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("dustMiragium"))));
 
 		}
