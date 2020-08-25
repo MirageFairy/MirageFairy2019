@@ -5,7 +5,6 @@ import java.util.function.Supplier;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
@@ -37,7 +36,6 @@ public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondi
 
 		fairyStickCraft.hookOnCraft(() -> {
 
-			world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
 			world.setBlockState(pos, blockState, 3);
 			world.neighborChanged(pos, blockState.getBlock(), pos.up());
 
