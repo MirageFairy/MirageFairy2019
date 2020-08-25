@@ -6,6 +6,7 @@ import static miragefairy2019.mod.lib.Configurator.*;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.lib.multi.IBlockVariant;
@@ -44,6 +45,7 @@ public class ModuleOre
 	public static BlockMaterials<EnumVariantMaterials1> blockMaterials1;
 	public static BlockFluidMiragiumWater blockFluidMiragiumWater;
 
+	public static ItemMultiMaterial<ItemVariantMaterial> itemMaterials;
 	public static ItemBlockOre<EnumVariantOre1> itemBlockOre1;
 	public static ItemBlockMaterials<EnumVariantMaterials1> itemBlockMaterials1;
 	public static ItemBlock itemFluidMiragiumWater;
@@ -55,6 +57,7 @@ public class ModuleOre
 
 		// マテリアル
 		item(erMod, ItemMultiMaterial<ItemVariantMaterial>::new, new ResourceLocation(ModMirageFairy2019.MODID, "materials"), "materials")
+			.bind(onRegisterItem(item -> ApiOre.itemMaterials1 = itemMaterials = item))
 			.bind(setCreativeTab(() -> ApiMain.creativeTab()))
 			.bind(c -> {
 
@@ -128,7 +131,7 @@ public class ModuleOre
 		erMod.registerBlock.register(b -> {
 
 			// 妖水フルイド
-			fluidMiragiumWater = new Fluid(
+			ApiOre.fluidMiragiumWater = fluidMiragiumWater = new Fluid(
 				"miragium_water",
 				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_still"),
 				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_flow"),
@@ -140,19 +143,19 @@ public class ModuleOre
 			//
 
 			// 鉱石
-			blockOre1 = new BlockOre<>(EnumVariantOre1.variantList);
+			ApiOre.blockOre1 = blockOre1 = new BlockOre<>(EnumVariantOre1.variantList);
 			blockOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
 			blockOre1.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockOre1);
 
 			// ブロック
-			blockMaterials1 = new BlockMaterials<>(EnumVariantMaterials1.variantList);
+			ApiOre.blockMaterials1 = blockMaterials1 = new BlockMaterials<>(EnumVariantMaterials1.variantList);
 			blockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
 			blockMaterials1.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockMaterials1);
 
 			// 妖水ブロック
-			blockFluidMiragiumWater = new BlockFluidMiragiumWater(fluidMiragiumWater);
+			ApiOre.blockFluidMiragiumWater = blockFluidMiragiumWater = new BlockFluidMiragiumWater(fluidMiragiumWater);
 			blockFluidMiragiumWater.setRegistryName(ModMirageFairy2019.MODID, "miragium_water");
 			blockFluidMiragiumWater.setUnlocalizedName("miragiumWater");
 			blockFluidMiragiumWater.setCreativeTab(ApiMain.creativeTab());
@@ -171,7 +174,7 @@ public class ModuleOre
 		erMod.registerItem.register(b -> {
 
 			// 鉱石
-			itemBlockOre1 = new ItemBlockOre<>(blockOre1);
+			ApiOre.itemBlockOre1 = itemBlockOre1 = new ItemBlockOre<>(blockOre1);
 			itemBlockOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
 			itemBlockOre1.setUnlocalizedName("ore1");
 			itemBlockOre1.setCreativeTab(ApiMain.creativeTab());
@@ -186,7 +189,7 @@ public class ModuleOre
 			}
 
 			// ブロック
-			itemBlockMaterials1 = new ItemBlockMaterials<>(blockMaterials1);
+			ApiOre.itemBlockMaterials1 = itemBlockMaterials1 = new ItemBlockMaterials<>(blockMaterials1);
 			itemBlockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
 			itemBlockMaterials1.setUnlocalizedName("materials1");
 			itemBlockMaterials1.setCreativeTab(ApiMain.creativeTab());
@@ -201,7 +204,7 @@ public class ModuleOre
 			}
 
 			// 妖水アイテム
-			itemFluidMiragiumWater = new ItemBlock(blockFluidMiragiumWater) {
+			ApiOre.itemFluidMiragiumWater = itemFluidMiragiumWater = new ItemBlock(blockFluidMiragiumWater) {
 				public void getSubItems(CreativeTabs p_getSubItems_1_, NonNullList<ItemStack> p_getSubItems_2_)
 				{
 					if (this.isInCreativeTab(p_getSubItems_1_)) {
