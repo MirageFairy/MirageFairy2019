@@ -6,10 +6,12 @@ import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairystick.ApiFairyStick;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeItem;
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionReplaceBlock;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionSpawnBlock;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
+import miragefairy2019.mod.modules.ore.ModuleOre;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -61,6 +63,13 @@ public class ModuleFairyStick
 				new FairyStickCraftConditionSpawnBlock(() -> Blocks.WEB.getDefaultState()),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairyCrystal")),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairySpiderRank1"))));
+
+			// 水＋ミラジウムの粉→妖水
+			ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+				new FairyStickCraftConditionReplaceBlock(
+					blockState -> blockState.equals(Blocks.WATER.getDefaultState()),
+					() -> ModuleOre.blockFluidMiragiumWater.getDefaultState()),
+				new FairyStickCraftConditionConsumeItem(new OreIngredient("dustMiragium"))));
 
 		}
 
