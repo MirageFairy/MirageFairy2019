@@ -4,7 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import miragefairy2019.mod.ModMirageFairy2019;
+import miragefairy2019.mod.api.fairystick.ApiFairyStick;
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeBlock;
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeItem;
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionSpawnItem;
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.OreIngredientComplex;
 import mirrg.boron.util.UtilsString;
@@ -102,19 +108,57 @@ public class ModuleSphere
 		erMod.addRecipe.register(() -> {
 
 			for (Tuple<Integer, VariantSphere> variant : itemSpheres.getVariants()) {
-				int t = 0;
-				for (Ingredient ingredient : variant.y.sphere.sIngredients.get()) {
-					GameRegistry.addShapelessRecipe(
-						new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere_" + t),
-						new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
-						variant.y.createItemStack(),
-						new OreIngredientComplex("container1000Water"),
-						new OreIngredient("dustMiragium"),
-						new OreIngredient("gemFluorite"),
-						new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
-						ingredient);
-					t++;
+
+				{
+					Ingredient ingredient = variant.y.sphere.sIngredientWithFluorite.get();
+					if (ingredient != null) {
+
+						// クラフトレシピ
+						GameRegistry.addShapelessRecipe(
+							new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere_with_fluorite"),
+							new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
+							variant.y.createItemStack(),
+							new OreIngredientComplex("container1000Water"),
+							new OreIngredient("dustMiragium"),
+							new OreIngredient("gemFluorite"),
+							new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
+							ingredient);
+
+						// 妖精のステッキレシピ
+						ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+							new FairyStickCraftConditionConsumeBlock(blockState -> blockState.equals(ApiOre.blockFluidMiragiumWater.getDefaultState())),
+							new FairyStickCraftConditionConsumeItem(new OreIngredient("gemFluorite")),
+							new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName()))),
+							new FairyStickCraftConditionConsumeItem(ingredient),
+							new FairyStickCraftConditionSpawnItem(() -> variant.y.createItemStack())));
+
+					}
 				}
+
+				{
+					Ingredient ingredient = variant.y.sphere.sIngredientGem.get();
+					if (ingredient != null) {
+
+						// クラフトレシピ
+						GameRegistry.addShapelessRecipe(
+							new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere_from_gem"),
+							new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
+							variant.y.createItemStack(),
+							new OreIngredientComplex("container1000Water"),
+							new OreIngredient("dustMiragium"),
+							new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
+							ingredient);
+
+						// 妖精のステッキレシピ
+						ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+							new FairyStickCraftConditionConsumeBlock(blockState -> blockState.equals(ApiOre.blockFluidMiragiumWater.getDefaultState())),
+							new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName()))),
+							new FairyStickCraftConditionConsumeItem(ingredient),
+							new FairyStickCraftConditionSpawnItem(() -> variant.y.createItemStack())));
+
+					}
+				}
+
 			}
 
 		});

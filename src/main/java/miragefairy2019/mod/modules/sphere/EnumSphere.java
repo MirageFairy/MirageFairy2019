@@ -16,33 +16,28 @@ import net.minecraftforge.oredict.OreIngredient;
 
 public enum EnumSphere
 {
-	attack(AbilityTypes.attack.get(), 0xFFA0A0, 0xFF6B6B, 0xC70000, 0xFF0000, () -> is(Ingredient.fromStacks(new ItemStack(Items.IRON_SWORD)))),
-	craft(AbilityTypes.craft.get(), 0xADADAD, 0xFFC8A4, 0xB57919, 0xDCDCDC, () -> is(new OreIngredient("workbench"), new OreIngredient("gemNephrite"))),
-	fell(AbilityTypes.fell.get(), 0x00BD00, 0xD09D74, 0x6E4219, 0x2FFF2F, () -> is(Ingredient.fromStacks(new ItemStack(Items.IRON_AXE)))),
-	light(AbilityTypes.light.get(), 0xE0F8FF, 0xFFFFE0, 0xFFFFFF, 0xFFDD3E, () -> is(new OreIngredient("torch"))),
-	flame(AbilityTypes.flame.get(), 0xFF3600, 0xFF9900, 0xCA5B25, 0xFF0000, () -> is(Ingredient.fromStacks(new ItemStack(Items.FLINT_AND_STEEL)))),
-	water(AbilityTypes.water.get(), 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF, () -> is(Ingredient.fromStacks(new ItemStack(Items.WATER_BUCKET)))),
-	crystal(AbilityTypes.crystal.get(), 0xA2FFFF, 0xB6FFFF, 0x36CECE, 0xEBFFFF, () -> is(new OreIngredient("gemDiamond"))),
-	art(AbilityTypes.art.get(), 0xFF5353, 0x41C6FF, 0xFFFF84, 0x00C800, () -> is(Ingredient.fromStacks(new ItemStack(Items.PAINTING)))),
-	store(AbilityTypes.store.get(), 0xDCDCDC, 0xEBA242, 0xC47F25, 0x404040, () -> is(Ingredient.fromStacks(new ItemStack(Blocks.CHEST)))),
-	warp(AbilityTypes.warp.get(), 0x3A00D3, 0x8CF4E2, 0x349988, 0xD004FB, () -> is(new OreIngredient("enderpearl"))),
-	shoot(AbilityTypes.shoot.get(), 0x969696, 0x896727, 0x896727, 0xD8D8D8, () -> is(Ingredient.fromStacks(new ItemStack(Items.BOW)))),
-	breaking(AbilityTypes.breaking.get(), 0xFFFFFF, 0xFF5A35, 0xFF4800, 0x000000, () -> is(Ingredient.fromStacks(new ItemStack(Blocks.TNT)))),
-	chemical(AbilityTypes.chemical.get(), 0x0067FF, 0xC9DFEF, 0xB0C4D7, 0x0755FF, () -> is(Ingredient.fromStacks(new ItemStack(Items.FERMENTED_SPIDER_EYE)))),
-	slash(AbilityTypes.slash.get(), 0xAAAAAA, 0xFFC9B2, 0xD20000, 0xFFFFFF, () -> is(Ingredient.fromStacks(new ItemStack(Items.SHEARS)))),
-	food(AbilityTypes.food.get(), 0xC66000, 0xFFCF86, 0xCB6E00, 0xFFC261, () -> is(Ingredient.fromStacks(new ItemStack(Items.BREAD)))),
-	knowledge(AbilityTypes.knowledge.get(), 0xFFFF00, 0x006200, 0x00A000, 0x50DD00, () -> is(Ingredient.fromStacks(new ItemStack(Items.BOOK)))),
-	energy(AbilityTypes.energy.get(), 0xFFED30, 0xFFF472, 0xFFE84C, 0xBFE7FF, () -> is(new OreIngredient("gemCoal"))),
-	submission(AbilityTypes.submission.get(), 0xFF0000, 0x593232, 0x1E1E1E, 0xA90000, () -> is(Ingredient.fromStacks(new ItemStack(Blocks.IRON_BARS)))),
-	christmas(AbilityTypes.christmas.get(), 0xFF0000, 0xFFD723, 0x00B900, 0xFF0000, () -> is(Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 1)))),
-	freeze(AbilityTypes.freeze.get(), 0x5AFFFF, 0xFFFFFF, 0xF6FFFF, 0xACFFFF, () -> is(new OreIngredient("ice"))),
-	thunder(AbilityTypes.thunder.get(), 0xEAFFFF, 0x2B2BFF, 0x000076, 0xFFFF00, () -> is(Ingredient.fromStacks(new ItemStack(Items.GOLDEN_SWORD)))),
+	attack(AbilityTypes.attack.get(), 0xFFA0A0, 0xFF6B6B, 0xC70000, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Items.IRON_SWORD)), () -> null),
+	craft(AbilityTypes.craft.get(), 0xADADAD, 0xFFC8A4, 0xB57919, 0xDCDCDC, () -> new OreIngredient("workbench"), () -> new OreIngredient("gemNephrite")),
+	fell(AbilityTypes.fell.get(), 0x00BD00, 0xD09D74, 0x6E4219, 0x2FFF2F, () -> Ingredient.fromStacks(new ItemStack(Items.IRON_AXE)), () -> null),
+	light(AbilityTypes.light.get(), 0xE0F8FF, 0xFFFFE0, 0xFFFFFF, 0xFFDD3E, () -> new OreIngredient("torch"), () -> null),
+	flame(AbilityTypes.flame.get(), 0xFF3600, 0xFF9900, 0xCA5B25, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Items.FLINT_AND_STEEL)), () -> null),
+	water(AbilityTypes.water.get(), 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF, () -> Ingredient.fromStacks(new ItemStack(Items.WATER_BUCKET)), () -> null),
+	crystal(AbilityTypes.crystal.get(), 0xA2FFFF, 0xB6FFFF, 0x36CECE, 0xEBFFFF, () -> new OreIngredient("gemDiamond"), () -> null),
+	art(AbilityTypes.art.get(), 0xFF5353, 0x41C6FF, 0xFFFF84, 0x00C800, () -> Ingredient.fromStacks(new ItemStack(Items.PAINTING)), () -> null),
+	store(AbilityTypes.store.get(), 0xDCDCDC, 0xEBA242, 0xC47F25, 0x404040, () -> Ingredient.fromStacks(new ItemStack(Blocks.CHEST)), () -> null),
+	warp(AbilityTypes.warp.get(), 0x3A00D3, 0x8CF4E2, 0x349988, 0xD004FB, () -> new OreIngredient("enderpearl"), () -> null),
+	shoot(AbilityTypes.shoot.get(), 0x969696, 0x896727, 0x896727, 0xD8D8D8, () -> Ingredient.fromStacks(new ItemStack(Items.BOW)), () -> null),
+	breaking(AbilityTypes.breaking.get(), 0xFFFFFF, 0xFF5A35, 0xFF4800, 0x000000, () -> Ingredient.fromStacks(new ItemStack(Blocks.TNT)), () -> null),
+	chemical(AbilityTypes.chemical.get(), 0x0067FF, 0xC9DFEF, 0xB0C4D7, 0x0755FF, () -> Ingredient.fromStacks(new ItemStack(Items.FERMENTED_SPIDER_EYE)), () -> null),
+	slash(AbilityTypes.slash.get(), 0xAAAAAA, 0xFFC9B2, 0xD20000, 0xFFFFFF, () -> Ingredient.fromStacks(new ItemStack(Items.SHEARS)), () -> null),
+	food(AbilityTypes.food.get(), 0xC66000, 0xFFCF86, 0xCB6E00, 0xFFC261, () -> Ingredient.fromStacks(new ItemStack(Items.BREAD)), () -> null),
+	knowledge(AbilityTypes.knowledge.get(), 0xFFFF00, 0x006200, 0x00A000, 0x50DD00, () -> Ingredient.fromStacks(new ItemStack(Items.BOOK)), () -> null),
+	energy(AbilityTypes.energy.get(), 0xFFED30, 0xFFF472, 0xFFE84C, 0xBFE7FF, () -> new OreIngredient("gemCoal"), () -> null),
+	submission(AbilityTypes.submission.get(), 0xFF0000, 0x593232, 0x1E1E1E, 0xA90000, () -> Ingredient.fromStacks(new ItemStack(Blocks.IRON_BARS)), () -> null),
+	christmas(AbilityTypes.christmas.get(), 0xFF0000, 0xFFD723, 0x00B900, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 1)), () -> null),
+	freeze(AbilityTypes.freeze.get(), 0x5AFFFF, 0xFFFFFF, 0xF6FFFF, 0xACFFFF, () -> new OreIngredient("ice"), () -> null),
+	thunder(AbilityTypes.thunder.get(), 0xEAFFFF, 0x2B2BFF, 0x000076, 0xFFFF00, () -> Ingredient.fromStacks(new ItemStack(Items.GOLDEN_SWORD)), () -> null),
 	;
-
-	private static Ingredient[] is(Ingredient... ingredients)
-	{
-		return ingredients;
-	}
 
 	//
 
@@ -51,16 +46,25 @@ public enum EnumSphere
 	public final int colorHighlight;
 	public final int colorBackground;
 	public final int colorPlasma;
-	public final Supplier<Ingredient[]> sIngredients;
+	public final Supplier<Ingredient> sIngredientWithFluorite;
+	public final Supplier<Ingredient> sIngredientGem;
 
-	private EnumSphere(IAbilityType abilityType, int colorCore, int colorHighlight, int colorBackground, int colorPlasma, Supplier<Ingredient[]> sIngredients)
+	private EnumSphere(
+		IAbilityType abilityType,
+		int colorCore,
+		int colorHighlight,
+		int colorBackground,
+		int colorPlasma,
+		Supplier<Ingredient> sIngredientWithFluorite,
+		Supplier<Ingredient> sIngredientGem)
 	{
 		this.abilityType = abilityType;
 		this.colorCore = colorCore;
 		this.colorHighlight = colorHighlight;
 		this.colorBackground = colorBackground;
 		this.colorPlasma = colorPlasma;
-		this.sIngredients = sIngredients;
+		this.sIngredientWithFluorite = sIngredientWithFluorite;
+		this.sIngredientGem = sIngredientGem;
 		A.map.put(abilityType, this);
 	}
 
