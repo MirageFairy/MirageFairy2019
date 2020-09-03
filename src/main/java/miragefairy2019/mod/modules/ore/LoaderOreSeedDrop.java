@@ -46,8 +46,8 @@ public class LoaderOreSeedDrop
 
 		// 鉱脈宝石
 		r2(STONE, POINT, 0.25, () -> ModuleOre.blockOre1.getState(PYROPE_ORE), vein(39250117, 16, 4, 0.02, MAGNESIUM, ALUMINIUM), maxY(50));
-		r2(STONE, LARGE, 0.25, () -> ModuleOre.blockOre1.getState(SMITHSONITE_ORE), vein(32379601, 32, 8, 0.03, ZINC, CARBON), minY(30));
-		r2(STONE, MEDIUM, 0.25, () -> ModuleOre.blockOre1.getState(NEPHRITE_ORE), vein(50393467, 64, 16, 0.04, CALCIUM, MAGNESIUM, FERRUM));
+		r2(STONE, LARGE, 0.5, () -> ModuleOre.blockOre1.getState(SMITHSONITE_ORE), vein(32379601, 32, 8, 0.03, ZINC, CARBON), minY(30));
+		r2(STONE, MEDIUM, 0.5, () -> ModuleOre.blockOre1.getState(NEPHRITE_ORE), vein(50393467, 64, 16, 0.04, CALCIUM, MAGNESIUM, FERRUM));
 
 		// ネザー鉱石
 		r(NETHERRACK, LARGE, 0.10, () -> ModuleOre.blockOre1.getState(NETHERRACK_APATITE_ORE), minY(90));
