@@ -37,17 +37,17 @@ public class LoaderOreSeedDrop
 		r(STONE, POINT, 0.01, () -> ModuleOre.blockOre1.getState(MOONSTONE_ORE), minY(40), maxY(50));
 
 		// 鉱脈天然石
-		r2(STONE, LARGE, 1, () -> ModuleOre.blockOre1.getState(APATITE_ORE), vein(97063327, 32, 8, 0.05, FLUORINE, CALCIUM, PHOSPHORUS));
-		r2(STONE, PYRAMID, 1, () -> ModuleOre.blockOre1.getState(FLUORITE_ORE), vein(63503821, 32, 8, 0.05, FLUORINE, CALCIUM));
-		r2(STONE, STAR, 1, () -> ModuleOre.blockOre1.getState(SULFUR_ORE), vein(34153177, 32, 8, 0.075, SULFUR), maxY(15));
-		r2(STONE, POINT, 1, () -> ModuleOre.blockOre1.getState(CINNABAR_ORE), vein(27826567, 32, 8, 0.075, SULFUR, MERCURY), maxY(15));
-		r2(STONE, COAL, 1, () -> ModuleOre.blockOre1.getState(MAGNETITE_ORE), vein(16287001, 32, 8, 0.05, FERRUM));
-		r2(STONE, TINY, 1, () -> ModuleOre.blockOre1.getState(MOONSTONE_ORE), vein(78750461, 16, 4, 0.05, KALIUM, ALUMINIUM), minY(40), maxY(50));
+		r2(STONE, LARGE, 1, () -> ModuleOre.blockOre1.getState(APATITE_ORE), vein(97063327, 32, 8, 0.02, FLUORINE, CALCIUM, PHOSPHORUS));
+		r2(STONE, PYRAMID, 1, () -> ModuleOre.blockOre1.getState(FLUORITE_ORE), vein(63503821, 32, 8, 0.02, FLUORINE, CALCIUM));
+		r2(STONE, STAR, 1, () -> ModuleOre.blockOre1.getState(SULFUR_ORE), vein(34153177, 32, 8, 0.02, SULFUR), maxY(15));
+		r2(STONE, POINT, 1, () -> ModuleOre.blockOre1.getState(CINNABAR_ORE), vein(27826567, 32, 8, 0.02, SULFUR, MERCURY), maxY(15));
+		r2(STONE, COAL, 1, () -> ModuleOre.blockOre1.getState(MAGNETITE_ORE), vein(16287001, 64, 16, 0.02, FERRUM));
+		r2(STONE, TINY, 1, () -> ModuleOre.blockOre1.getState(MOONSTONE_ORE), vein(78750461, 16, 4, 0.02, KALIUM, ALUMINIUM), minY(40), maxY(50));
 
 		// 鉱脈宝石
-		r2(STONE, POINT, 0.25, () -> ModuleOre.blockOre1.getState(PYROPE_ORE), vein(39250117, 16, 4, 0.02, MAGNESIUM, ALUMINIUM), maxY(50));
-		r2(STONE, LARGE, 0.5, () -> ModuleOre.blockOre1.getState(SMITHSONITE_ORE), vein(32379601, 32, 8, 0.03, ZINC, CARBON), minY(30));
-		r2(STONE, MEDIUM, 0.5, () -> ModuleOre.blockOre1.getState(NEPHRITE_ORE), vein(50393467, 64, 16, 0.04, CALCIUM, MAGNESIUM, FERRUM));
+		r2(STONE, POINT, 0.5, () -> ModuleOre.blockOre1.getState(PYROPE_ORE), vein(39250117, 16, 4, 0.01, MAGNESIUM, ALUMINIUM), maxY(50));
+		r2(STONE, LARGE, 0.75, () -> ModuleOre.blockOre1.getState(SMITHSONITE_ORE), vein(32379601, 32, 8, 0.01, ZINC, CARBON), minY(30));
+		r2(STONE, MEDIUM, 0.75, () -> ModuleOre.blockOre1.getState(NEPHRITE_ORE), vein(50393467, 64, 16, 0.01, CALCIUM, MAGNESIUM, FERRUM));
 
 		// ネザー鉱石
 		r(NETHERRACK, LARGE, 0.10, () -> ModuleOre.blockOre1.getState(NETHERRACK_APATITE_ORE), minY(90));
