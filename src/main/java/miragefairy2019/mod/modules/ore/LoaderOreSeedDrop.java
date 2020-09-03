@@ -18,7 +18,7 @@ import scala.util.Random;
 public class LoaderOreSeedDrop
 {
 
-	// /effect mi_riana minecraft:night_vision 99999 1
+	// /effect @p minecraft:night_vision 99999 1
 	// /fill ~-120 10 ~ ~120 80 ~ minecraft:air
 	// /fill ~-60 ~ ~-60 ~60 ~1 ~60 minecraft:air
 	// /fill ~-90 ~ ~-90 ~90 ~ ~90 minecraft:air
