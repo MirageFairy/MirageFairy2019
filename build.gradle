@@ -78,13 +78,17 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
 	compile group: 'mirrg.boron', name: 'mirrg.boron.util', version: '[3.19,4['
+	adder group: 'mirrg.boron', name: 'mirrg.boron.util', version: '[3.19,4['
+
 	compile group: 'mirrg.boron', name: 'mirrg.boron.swing', version: '0.1+'
-	adder group: 'mirrg.boron', name: 'mirrg.boron.util', version: '[3.17,4['
+
 	deobfProvided "mezz.jei:jei_1.12.2:4.15.0.268:api"
 	runtime "mezz.jei:jei_1.12.2:4.13.0.219"
+
     compile ("appeng:appliedenergistics2:rv6-stable-6:api") {
         transitive = false
     }
+
 }
 
 processResources {
