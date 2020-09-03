@@ -29,12 +29,12 @@ public class LoaderOreSeedDrop
 	{
 
 		// まばら天然石
-		r(STONE, POINT, 0.01, () -> ModuleOre.blockOre1.getState(APATITE_ORE));
-		r(STONE, POINT, 0.01, () -> ModuleOre.blockOre1.getState(FLUORITE_ORE));
-		r(STONE, POINT, 0.01, () -> ModuleOre.blockOre1.getState(SULFUR_ORE), maxY(15));
-		r(STONE, POINT, 0.01, () -> ModuleOre.blockOre1.getState(CINNABAR_ORE), maxY(15));
-		r(STONE, POINT, 0.01, () -> ModuleOre.blockOre1.getState(MAGNETITE_ORE));
-		r(STONE, POINT, 0.01, () -> ModuleOre.blockOre1.getState(MOONSTONE_ORE), minY(40), maxY(50));
+		r(STONE, POINT, 0.03, () -> ModuleOre.blockOre1.getState(APATITE_ORE));
+		r(STONE, POINT, 0.03, () -> ModuleOre.blockOre1.getState(FLUORITE_ORE));
+		r(STONE, POINT, 0.03, () -> ModuleOre.blockOre1.getState(SULFUR_ORE), maxY(15));
+		r(STONE, POINT, 0.03, () -> ModuleOre.blockOre1.getState(CINNABAR_ORE), maxY(15));
+		r(STONE, POINT, 0.03, () -> ModuleOre.blockOre1.getState(MAGNETITE_ORE));
+		r(STONE, POINT, 0.03, () -> ModuleOre.blockOre1.getState(MOONSTONE_ORE), minY(40), maxY(50));
 
 		// 鉱脈天然石
 		r2(STONE, LARGE, 1, () -> ModuleOre.blockOre1.getState(APATITE_ORE), vein(97063327, 32, 8, 0.02, FLUORINE, CALCIUM, PHOSPHORUS));
