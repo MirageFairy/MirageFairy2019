@@ -12,6 +12,8 @@ import miragefairy2019.mod.api.oreseed.EnumOreSeedShape;
 import miragefairy2019.mod.api.oreseed.EnumOreSeedType;
 import miragefairy2019.mod.api.oreseed.IGenerationCondition;
 import miragefairy2019.mod.api.oreseed.RegistryOreSeedDrop;
+import mirrg.boron.util.UtilsMath;
+import mirrg.boron.util.UtilsString;
 import net.minecraft.block.state.IBlockState;
 import scala.util.Random;
 
@@ -83,6 +85,41 @@ public class LoaderOreSeedDrop
 		r(type, IRON, weight / 2, block, generationConditions);
 		r(type, MEDIUM, weight / 2, block, generationConditions);
 		r(type, shape, weight, block, generationConditions);
+	}
+
+	@SuppressWarnings("unused")
+	public static void main(String[] args)
+	{
+		int countAll = 0;
+		int[] count = new int[101];
+
+		for (int i = 0; i < 1000000; i++) {
+			int tileX = UtilsMath.randomBetween(-10000, 10000);
+			int tileY = UtilsMath.randomBetween(-10000, 10000);
+			int tileZ = UtilsMath.randomBetween(-10000, 10000);
+			double r1 = randomElement(2456 * 17566883L + ALUMINIUM.seed * 16227457L, ALUMINIUM.size, tileX * 16, tileZ * 16);
+			double r2 = randomElement(2456 * 17566883L + MAGNESIUM.seed * 16227457L, MAGNESIUM.size, tileX * 16, tileZ * 16);
+			double r3 = randomElement(2456 * 17566883L + FLUORINE.seed * 16227457L, FLUORINE.size, tileX * 16, tileZ * 16);
+			double a = multiplyElement(r1, r2, r3);
+			double b = rand(13788169L + 2456 * 68640023L + 2486 * 86802673L + tileX * 84663211L + tileY * 34193609L + tileZ * 79500227L);
+			double c = multiplyElement(a, b);
+			double d1 = multiplyElement(Math.random());
+			double d2 = multiplyElement(Math.random(), Math.random());
+			double d3 = multiplyElement(Math.random(), Math.random(), Math.random());
+			double d4 = multiplyElement(Math.random(), Math.random(), Math.random(), Math.random());
+
+			countAll++;
+			count[(int) (c * 100)]++;
+		}
+
+		for (int i = 0; i < count.length; i++) {
+			double a = count[i] / (double) countAll;
+			System.out.println(String.format("%3d %7.5f %s",
+				i,
+				a * 100,
+				UtilsString.repeat('|', (int) (100 * a * 100))));
+		}
+
 	}
 
 	private static IGenerationCondition vein(long seed, int horizontalSize, int verticalSize, double rate, Element... elements)
