@@ -1,6 +1,7 @@
 package miragefairy2019.mod.modules.sphere;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import miragefairy2019.mod.ModMirageFairy2019;
@@ -46,9 +47,9 @@ public class ModuleSphere
 				item.setRegistryName(ModMirageFairy2019.MODID, "spheres");
 				item.setUnlocalizedName("spheres");
 				item.setCreativeTab(ApiMain.creativeTab());
-				EnumSphere[] spheres = EnumSphere.values();
-				for (int i = 0; i < spheres.length; i++) {
-					EnumSphere sphere = spheres[i];
+				List<EnumSphere> spheres = EnumSphere.values().toList();
+				for (int i = 0; i < spheres.size(); i++) {
+					EnumSphere sphere = spheres.get(i);
 
 					VariantSphere variantSphere = new VariantSphere(sphere);
 					item.registerVariant(i, variantSphere);
