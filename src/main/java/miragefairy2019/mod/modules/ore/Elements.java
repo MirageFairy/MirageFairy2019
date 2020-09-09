@@ -7,6 +7,7 @@ public class Elements
 	public static Element FERRUM = new Element(12827461, 16 * 2);
 
 	public static Element CALCIUM = new Element(30190627, 16 * 4);
+	public static Element NATRIUM = new Element(36621469, 16 * 4);
 	public static Element KALIUM = new Element(93091841, 16 * 4);
 	public static Element MAGNESIUM = new Element(22693171, 16 * 4);
 
@@ -16,7 +17,9 @@ public class Elements
 
 	public static Element SULFUR = new Element(52516049, 16 * 16);
 
+	public static Element LITHIUM = new Element(47876821, 16 * 32);
 	public static Element ZINC = new Element(89828281, 16 * 32);
+	public static Element BORON = new Element(51617299, 16 * 32);
 
 	public static Element MERCURY = new Element(45121997, 16 * 64);
 

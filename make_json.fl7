@@ -176,6 +176,8 @@ Writer: {
 		ore("netherrack_magnetite_ore"; "blocks/netherrack"; "blocks/magnetite_ore");
 		ore("netherrack_moonstone_ore"; "blocks/netherrack"; "blocks/moonstone_ore");
 		ore("nephrite_ore"; "blocks/stone"; "blocks/nephrite_ore");
+		ore("topaz_ore"; "blocks/stone"; "blocks/topaz_ore");
+		ore("tourmaline_ore"; "blocks/stone"; "blocks/tourmaline_ore");
 	);
 
 	plant: name -> (
@@ -256,6 +258,8 @@ Writer: {
 	item("pyrope_gem");
 	item("smithsonite_gem");
 	item("nephrite_gem");
+	item("topaz_gem");
+	item("tourmaline_gem");
 
 	item("saltpeter_gem");
 
@@ -305,6 +309,8 @@ Writer: {
 	block("netherrack_moonstone_ore");
 	block("netherrack_magnetite_ore");
 	block("nephrite_ore");
+	block("topaz_ore");
+	block("tourmaline_ore");
 
 	handheld("fairy_stick");
 

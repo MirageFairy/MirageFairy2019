@@ -150,6 +150,10 @@ item.nuggetMiragium.name=Miragium Nugget
 tile.blockCharcoal.name=Charcoal Block
 tile.oreNephrite.name=Nephrite Ore
 item.gemNephrite.name=Nephrite
+tile.oreTopaz.name=Topaz Ore
+item.gemTopaz.name=Topaz
+tile.oreTourmaline.name=Tourmaline Ore
+item.gemTourmaline.name=Tourmaline
 
 item.spheres.name=Sphere
 item.spheres.format=Sphere of "%s"
@@ -175,6 +179,8 @@ mirageFairy2019.component.smithsonite.name=Smithsonite
 mirageFairy2019.component.emerald.name=Emerald
 mirageFairy2019.component.saltpeter.name=Saltpeter
 mirageFairy2019.component.nephrite.name=Nephrite
+mirageFairy2019.component.topaz.name=Topaz
+mirageFairy2019.component.tourmaline.name=Tourmaline
 
 mirageFairy2019.ability.attack.name=ATTACK
 mirageFairy2019.ability.craft.name=CRAFT

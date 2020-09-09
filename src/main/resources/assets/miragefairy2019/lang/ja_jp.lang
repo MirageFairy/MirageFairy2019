@@ -150,6 +150,10 @@ item.nuggetMiragium.name=ミラジウムの塊
 tile.blockCharcoal.name=木炭ブロック
 tile.oreNephrite.name=ネフライト鉱石
 item.gemNephrite.name=ネフライト
+tile.oreTopaz.name=トパーズ鉱石
+item.gemTopaz.name=トパーズ
+tile.oreTourmaline.name=トルマリン鉱石
+item.gemTourmaline.name=トルマリン
 
 item.spheres.name=スフィア
 item.spheres.format=≪%s≫のスフィア
@@ -175,6 +179,8 @@ mirageFairy2019.component.smithsonite.name=スミソナイト
 mirageFairy2019.component.emerald.name=エメラルド
 mirageFairy2019.component.saltpeter.name=硝石
 mirageFairy2019.component.nephrite.name=ネフライト
+mirageFairy2019.component.topaz.name=トパーズ
+mirageFairy2019.component.tourmaline.name=トルマリン
 
 mirageFairy2019.ability.attack.name=攻撃
 mirageFairy2019.ability.craft.name=加工

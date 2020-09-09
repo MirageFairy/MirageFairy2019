@@ -16,50 +16,32 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 
-public enum EnumVariantOre1 implements IStringSerializable, IBlockVariantOre
+public enum EnumVariantOre2 implements IStringSerializable, IBlockVariantOre
 {
-	APATITE_ORE(0, "apatite_ore", "oreApatite", 3, 5, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemApatite").copy(), 1, 1.5, 1, 3)),
-	FLUORITE_ORE(1, "fluorite_ore", "oreFluorite", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemFluorite").copy(), 1, 1, 15, 30)),
-	SULFUR_ORE(2, "sulfur_ore", "oreSulfur", 3, 5, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemSulfur").copy(), 1, 1.5, 1, 3)),
-	CINNABAR_ORE(3, "cinnabar_ore", "oreCinnabar", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemCinnabar").copy(), 1, 1, 1, 3)),
-	MOONSTONE_ORE(4, "moonstone_ore", "oreMoonstone", 3, 5, 3, new GemProvider(() -> UtilsMinecraft.getItemStack("gemMoonstone").copy(), 1, 0.5, 20, 40)),
-	MAGNETITE_ORE(5, "magnetite_ore", "oreMagnetite", 3, 5, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemMagnetite").copy(), 1, 2, 1, 2)),
-
-	PYROPE_ORE(6, "pyrope_ore", "orePyrope", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemPyrope").copy(), 1, 0.5, 1, 5)),
-	SMITHSONITE_ORE(7, "smithsonite_ore", "oreSmithsonite", 3, 5, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemSmithsonite").copy(), 1, 1, 1, 3)),
-
-	NETHERRACK_APATITE_ORE(8, "netherrack_apatite_ore", "oreApatite", 0.4F, 0.4F, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemApatite").copy(), 1, 1.5, 1, 3)),
-	NETHERRACK_FLUORITE_ORE(9, "netherrack_fluorite_ore", "oreFluorite", 0.4F, 0.4F, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemFluorite").copy(), 1, 1, 15, 30)),
-	NETHERRACK_SULFUR_ORE(10, "netherrack_sulfur_ore", "oreSulfur", 0.4F, 0.4F, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemSulfur").copy(), 1, 1.5, 1, 3)),
-	NETHERRACK_CINNABAR_ORE(11, "netherrack_cinnabar_ore", "oreCinnabar", 0.4F, 0.4F, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemCinnabar").copy(), 1, 1, 1, 3)),
-	NETHERRACK_MOONSTONE_ORE(12, "netherrack_moonstone_ore", "oreMoonstone", 0.4F, 0.4F, 3, new GemProvider(() -> UtilsMinecraft.getItemStack("gemMoonstone").copy(), 1, 0.5, 20, 40)),
-	NETHERRACK_MAGNETITE_ORE(13, "netherrack_magnetite_ore", "oreMagnetite", 0.4F, 0.4F, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemMagnetite").copy(), 1, 2, 1, 2)),
-
-	NEPHRITE_ORE(14, "nephrite_ore", "oreNephrite", 3, 5, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemNephrite").copy(), 1, 2, 1, 3)),
-	TOPAZ_ORE(15, "topaz_ore", "oreTopaz", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemTopaz").copy(), 1, 0.5, 1, 5)),
+	TOURMALINE_ORE(0, "tourmaline_ore", "oreTourmaline", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemTourmaline").copy(), 1, 0.5, 1, 5)),
 
 	;
 
 	//
 
-	public static final IListBlockVariant<EnumVariantOre1> variantList = new IListBlockVariant<EnumVariantOre1>() {
-		private final EnumVariantOre1[] values = EnumVariantOre1.values();
-		private final Map<Integer, EnumVariantOre1> metaLookup = new HashMap<>();
+	public static final IListBlockVariant<EnumVariantOre2> variantList = new IListBlockVariant<EnumVariantOre2>() {
+		private final EnumVariantOre2[] values = EnumVariantOre2.values();
+		private final Map<Integer, EnumVariantOre2> metaLookup = new HashMap<>();
 		{
-			for (EnumVariantOre1 variant : EnumVariantOre1.values()) {
+			for (EnumVariantOre2 variant : EnumVariantOre2.values()) {
 				if (metaLookup.containsKey(variant.metadata)) throw new IllegalArgumentException();
 				metaLookup.put(variant.metadata, variant);
 			}
 		}
 
 		@Override
-		public EnumVariantOre1 byMetadata(int metadata)
+		public EnumVariantOre2 byMetadata(int metadata)
 		{
 			return metaLookup.getOrDefault(metadata, values[0]);
 		}
 
 		@Override
-		public Iterator<EnumVariantOre1> iterator()
+		public Iterator<EnumVariantOre2> iterator()
 		{
 			return ISuppliterator.ofObjArray(values).iterator();
 		}
@@ -95,7 +77,7 @@ public enum EnumVariantOre1 implements IStringSerializable, IBlockVariantOre
 
 	}
 
-	private EnumVariantOre1(int metadata, String resourceName, String unlocalizedName, float hardness, float resistance, int harvestLevel, GemProvider nGemProvider)
+	private EnumVariantOre2(int metadata, String resourceName, String unlocalizedName, float hardness, float resistance, int harvestLevel, GemProvider nGemProvider)
 	{
 		this.metadata = metadata;
 		this.resourceName = resourceName;

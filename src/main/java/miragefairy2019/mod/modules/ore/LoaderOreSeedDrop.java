@@ -5,6 +5,7 @@ import static miragefairy2019.mod.api.oreseed.EnumOreSeedType.*;
 import static miragefairy2019.mod.api.oreseed.GenerationConditions.*;
 import static miragefairy2019.mod.modules.ore.Elements.*;
 import static miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.*;
+import static miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.*;
 
 import java.util.function.Supplier;
 
@@ -50,6 +51,8 @@ public class LoaderOreSeedDrop
 		r2(STONE, POINT, 0.5, () -> ModuleOre.blockOre1.getState(PYROPE_ORE), vein(39250117, 16, 4, 0.01, MAGNESIUM, ALUMINIUM), maxY(50));
 		r2(STONE, LARGE, 0.75, () -> ModuleOre.blockOre1.getState(SMITHSONITE_ORE), vein(32379601, 32, 8, 0.01, ZINC, CARBON), minY(30));
 		r2(STONE, MEDIUM, 0.75, () -> ModuleOre.blockOre1.getState(NEPHRITE_ORE), vein(50393467, 64, 16, 0.01, CALCIUM, MAGNESIUM, FERRUM));
+		r2(STONE, HORIZONTAL, 0.5, () -> ModuleOre.blockOre1.getState(TOPAZ_ORE), vein(58068649, 16, 4, 0.01, ALUMINIUM, FLUORINE));
+		r2(STONE, HORIZONTAL, 0.5, () -> ModuleOre.blockOre2.getState(TOURMALINE_ORE), vein(25988519, 16, 4, 0.01, NATRIUM, LITHIUM, ALUMINIUM, BORON));
 
 		// ネザー鉱石
 		r(NETHERRACK, LARGE, 0.10, () -> ModuleOre.blockOre1.getState(NETHERRACK_APATITE_ORE), minY(90));

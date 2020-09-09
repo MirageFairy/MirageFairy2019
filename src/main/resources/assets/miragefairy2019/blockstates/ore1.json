@@ -15,6 +15,6 @@
 		"variant=12": { "model": "miragefairy2019:netherrack_moonstone_ore" },
 		"variant=13": { "model": "miragefairy2019:netherrack_magnetite_ore" },
 		"variant=14": { "model": "miragefairy2019:nephrite_ore" },
-		"variant=15": { "model": "minecraft:stone" }
+		"variant=15": { "model": "miragefairy2019:topaz_ore" }
 	}
 }
