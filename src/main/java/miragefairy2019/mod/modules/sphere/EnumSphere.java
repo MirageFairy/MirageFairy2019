@@ -45,7 +45,7 @@ public class EnumSphere
 	public static final EnumSphere submission = new EnumSphere(AbilityTypes.submission.get(), 0xFF0000, 0x593232, 0x1E1E1E, 0xA90000, () -> Ingredient.fromStacks(new ItemStack(Blocks.IRON_BARS)), () -> null);
 	public static final EnumSphere christmas = new EnumSphere(AbilityTypes.christmas.get(), 0xFF0000, 0xFFD723, 0x00B900, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 1)), () -> null);
 	public static final EnumSphere freeze = new EnumSphere(AbilityTypes.freeze.get(), 0x5AFFFF, 0xFFFFFF, 0xF6FFFF, 0xACFFFF, () -> new OreIngredient("ice"), () -> null);
-	public static final EnumSphere thunder = new EnumSphere(AbilityTypes.thunder.get(), 0xEAFFFF, 0x2B2BFF, 0x000076, 0xFFFF00, () -> Ingredient.fromStacks(new ItemStack(Items.GOLDEN_SWORD)), () -> null);
+	public static final EnumSphere thunder = new EnumSphere(AbilityTypes.thunder.get(), 0xEAFFFF, 0x2B2BFF, 0x000076, 0xFFFF00, () -> Ingredient.fromStacks(new ItemStack(Items.GOLDEN_SWORD)), () -> new OreIngredient("gemTourmaline"));
 
 	//
 
