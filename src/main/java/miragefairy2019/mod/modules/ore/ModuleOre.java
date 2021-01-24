@@ -35,6 +35,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleOre
@@ -178,13 +180,19 @@ public class ModuleOre
 			blockFluidMiragiumWater.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockFluidMiragiumWater);
 			if (ApiMain.side().isClient()) {
-				ModelLoader.setCustomStateMapper(blockFluidMiragiumWater, new StateMapperBase() {
-					@Override
-					protected ModelResourceLocation getModelResourceLocation(IBlockState var1)
+				new Object() {
+					@SideOnly(Side.CLIENT)
+					public void run()
 					{
-						return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "miragium_water"), "fluid");
+						ModelLoader.setCustomStateMapper(blockFluidMiragiumWater, new StateMapperBase() {
+							@Override
+							protected ModelResourceLocation getModelResourceLocation(IBlockState var1)
+							{
+								return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "miragium_water"), "fluid");
+							}
+						});
 					}
-				});
+				}.run();
 			}
 
 		});
@@ -249,13 +257,19 @@ public class ModuleOre
 			itemFluidMiragiumWater.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.ITEMS.register(itemFluidMiragiumWater);
 			if (ApiMain.side().isClient()) {
-				ModelLoader.setCustomMeshDefinition(itemFluidMiragiumWater, new ItemMeshDefinition() {
-					@Override
-					public ModelResourceLocation getModelLocation(ItemStack var1)
+				new Object() {
+					@SideOnly(Side.CLIENT)
+					public void run()
 					{
-						return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "miragium_water"), "fluid");
+						ModelLoader.setCustomMeshDefinition(itemFluidMiragiumWater, new ItemMeshDefinition() {
+							@Override
+							public ModelResourceLocation getModelLocation(ItemStack var1)
+							{
+								return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "miragium_water"), "fluid");
+							}
+						});
 					}
-				});
+				}.run();
 			}
 
 		});
