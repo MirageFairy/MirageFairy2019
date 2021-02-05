@@ -26,9 +26,9 @@ public class EnumSphere
 	//
 
 	public static final EnumSphere attack = new EnumSphere(AbilityTypes.attack.get(), 0xFFA0A0, 0xFF6B6B, 0xC70000, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Items.IRON_SWORD)), () -> null);
-	public static final EnumSphere craft = new EnumSphere(AbilityTypes.craft.get(), 0xADADAD, 0xFFC8A4, 0xB57919, 0xDCDCDC, () -> new OreIngredient("workbench"), () -> new OreIngredient("gemNephrite"));
+	public static final EnumSphere craft = new EnumSphere(AbilityTypes.craft.get(), 0xF1B772, 0xD3FDCC, 0x92B56A, 0xFFFFFF, () -> new OreIngredient("workbench"), () -> new OreIngredient("gemNephrite"));
 	public static final EnumSphere fell = new EnumSphere(AbilityTypes.fell.get(), 0x00BD00, 0xD09D74, 0x6E4219, 0x2FFF2F, () -> Ingredient.fromStacks(new ItemStack(Items.IRON_AXE)), () -> null);
-	public static final EnumSphere light = new EnumSphere(AbilityTypes.light.get(), 0xE0F8FF, 0xFFFFE0, 0xFFFFFF, 0xFFDD3E, () -> new OreIngredient("torch"), () -> null);
+	public static final EnumSphere light = new EnumSphere(AbilityTypes.light.get(), 0xFF8300, 0xFFC9BC, 0xF1C483, 0xFFFF25, () -> new OreIngredient("torch"), () -> new OreIngredient("gemTopaz"));
 	public static final EnumSphere flame = new EnumSphere(AbilityTypes.flame.get(), 0xFF3600, 0xFF9900, 0xCA5B25, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Items.FLINT_AND_STEEL)), () -> null);
 	public static final EnumSphere water = new EnumSphere(AbilityTypes.water.get(), 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF, () -> Ingredient.fromStacks(new ItemStack(Items.WATER_BUCKET)), () -> null);
 	public static final EnumSphere crystal = new EnumSphere(AbilityTypes.crystal.get(), 0xA2FFFF, 0xB6FFFF, 0x36CECE, 0xEBFFFF, () -> new OreIngredient("gemDiamond"), () -> null);
@@ -45,7 +45,7 @@ public class EnumSphere
 	public static final EnumSphere submission = new EnumSphere(AbilityTypes.submission.get(), 0xFF0000, 0x593232, 0x1E1E1E, 0xA90000, () -> Ingredient.fromStacks(new ItemStack(Blocks.IRON_BARS)), () -> null);
 	public static final EnumSphere christmas = new EnumSphere(AbilityTypes.christmas.get(), 0xFF0000, 0xFFD723, 0x00B900, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Blocks.SAPLING, 1, 1)), () -> null);
 	public static final EnumSphere freeze = new EnumSphere(AbilityTypes.freeze.get(), 0x5AFFFF, 0xFFFFFF, 0xF6FFFF, 0xACFFFF, () -> new OreIngredient("ice"), () -> null);
-	public static final EnumSphere thunder = new EnumSphere(AbilityTypes.thunder.get(), 0xEAFFFF, 0x2B2BFF, 0x000076, 0xFFFF00, () -> Ingredient.fromStacks(new ItemStack(Items.GOLDEN_SWORD)), () -> new OreIngredient("gemTourmaline"));
+	public static final EnumSphere thunder = new EnumSphere(AbilityTypes.thunder.get(), 0xFFFFB2, 0x359C00, 0xC370A7, 0xFFFF00, () -> Ingredient.fromStacks(new ItemStack(Items.GOLDEN_SWORD)), () -> new OreIngredient("gemTourmaline"));
 
 	//
 
