@@ -133,6 +133,21 @@ Writer : {
 
 );
 
+//////////////////// ブロックステート ////////////////////
+(
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/blockstates");
+
+	# トゥインクルストーン
+	writer::write("twinkle_stone.json"; {
+		variants = {[meta, color : ${white orange magenta light_blue yellow lime pink gray silver cyan purple blue brown green red black} | {
+			"variant=$meta" = {
+				model = "miragefairy2019:$(color)_twinkle_stone";
+			};
+		}[]]};
+	});
+
+);
+
 //////////////////// ブロックモデル ////////////////////
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
@@ -154,6 +169,15 @@ Writer : {
 	block("pyrope_block");
 	block("smithsonite_block");
 	block("sulfur_block");
+
+	${white orange magenta light_blue yellow lime pink gray silver cyan purple blue brown green red black} | (
+		writer::write("$(_)_twinkle_stone.json"; {
+			parent = "block/cube_all";
+			textures = {
+				all = "miragefairy2019:blocks/$(_)_twinkle_stone";
+			};
+		});
+	);
 
 	(
 		ore: name, base, overlay -> (
@@ -275,6 +299,7 @@ Writer : {
 	handheld("miragium_rod");
 
 	item("fertilizer");
+	${white orange magenta light_blue yellow lime pink gray silver cyan purple blue brown green red black} | block("$(_)_twinkle_stone");
 
 	item("mirage_flower_seeds");
 
@@ -433,5 +458,84 @@ Writer : {
 
 	x9("miragium_tiny_dust"; "miragium_dust"    ; iOre    ("dustTinyMiragium" ); iOre("dustMiragium"    ); iSubItem("miragefairy2019:materials";  4); iSubItem("miragefairy2019:materials" ;  3));
 	x9("miragium_nugget"   ; "miragium_ingot"   ; iOre    ("nuggetMiragium"   ); iOre("ingotMiragium"   ); iSubItem("miragefairy2019:materials"; 13); iSubItem("miragefairy2019:materials" ;  5));
+
+);
+
+//////////////////// その他レシピ ////////////////////
+(
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/fairymaterials");
+
+	// トゥインクルストーン
+	writer::write("twinkle_stone.json"; {
+		type = "forge:ore_shaped";
+		group = "twinkle_stone";
+		pattern = [
+			"ScS";
+			"IlI";
+			"SmS";
+		];
+		key = {
+			S = {
+				item = "minecraft:stone";
+				data = 0;
+			};
+			I = {
+				type = "forge:ore_dict";
+				ore = "ingotMiragium";
+			};
+			c = {
+				type = "miragefairy2019:ore_dict_complex";
+				ore = "mirageFairy2019CraftingToolFairyWandCrafting";
+			};
+			m = {
+				type = "miragefairy2019:ore_dict_complex";
+				ore = "mirageFairy2019CraftingToolFairyWandMelting";
+			};
+			l = {
+				type = "forge:ore_dict";
+				ore = "mirageFairy2019SphereLight";
+			};
+		};
+		result = {
+			item = "miragefairy2019:twinkle_stone";
+			data = 3;
+			count = 4;
+		};
+	});
+	entry : (
+		[0 , "white"     , "White"    ],
+		[1 , "orange"    , "Orange"   ],
+		[2 , "magenta"   , "Magenta"  ],
+		[3 , "light_blue", "LightBlue"],
+		[4 , "yellow"    , "Yellow"   ],
+		[5 , "lime"      , "Lime"     ],
+		[6 , "pink"      , "Pink"     ],
+		[7 , "gray"      , "Gray"     ],
+		[8 , "silver"    , "Silver"   ],
+		[9 , "cyan"      , "Cyan"     ],
+		[10, "purple"    , "Purple"   ],
+		[11, "blue"      , "Blue"     ],
+		[12, "brown"     , "Brown"    ],
+		[13, "green"     , "Green"    ],
+		[14, "red"       , "Red"      ],
+		[15, "black"     , "Black"    ],
+	) | writer::write("$(entry.1)_twinkle_stone.json"; {
+		type = "forge:ore_shapeless";
+		group = "$(entry.1)_twinkle_stone";
+		ingredients = [
+			{
+				type = "forge:ore_dict";
+				ore = "mirageFairy2019TwinkleStone";
+			};
+			{
+				type = "forge:ore_dict";
+				ore = "dye$(entry.2)";
+			};
+		];
+		result = {
+			item = "miragefairy2019:twinkle_stone";
+			data = entry.0;
+		};
+	});
 
 );

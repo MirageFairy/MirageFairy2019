@@ -6,14 +6,24 @@ import static miragefairy2019.mod.lib.Configurator.*;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.mod.api.materialsfairy.ApiMaterialsFairy;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
+import miragefairy2019.mod.lib.multi.ItemBlockMulti;
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleMaterialsFairy
 {
+
+	public static BlockTwinkleStone blockTwinkleStone;
+	public static ItemBlockMulti<BlockTwinkleStone, EnumVariantTwinkleStone> itemBlockTwinkleStone;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -59,6 +69,41 @@ public class ModuleMaterialsFairy
 
 				return Monad.of(c);
 			});
+
+		erMod.registerBlock.register(b -> {
+
+			// トゥインクルストーン
+			ApiMaterialsFairy.blockTwinkleStone = blockTwinkleStone = new BlockTwinkleStone();
+			blockTwinkleStone.setRegistryName(ModMirageFairy2019.MODID, "twinkle_stone");
+			blockTwinkleStone.setCreativeTab(ApiMain.creativeTab());
+			ForgeRegistries.BLOCKS.register(blockTwinkleStone);
+
+		});
+		erMod.registerItem.register(b -> {
+
+			// トゥインクルストーン
+			ApiMaterialsFairy.itemBlockTwinkleStone = itemBlockTwinkleStone = new ItemBlockMulti<>(blockTwinkleStone);
+			itemBlockTwinkleStone.setRegistryName(ModMirageFairy2019.MODID, "twinkle_stone");
+			itemBlockTwinkleStone.setUnlocalizedName("twinkle_stone");
+			itemBlockTwinkleStone.setCreativeTab(ApiMain.creativeTab());
+			ForgeRegistries.ITEMS.register(itemBlockTwinkleStone);
+			if (ApiMain.side().isClient()) {
+				for (EnumVariantTwinkleStone variant : blockTwinkleStone.variantList) {
+					ModelLoader.setCustomModelResourceLocation(
+						itemBlockTwinkleStone,
+						variant.getMetadata(),
+						new ModelResourceLocation(new ResourceLocation(itemBlockTwinkleStone.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
+				}
+			}
+
+		});
+		erMod.createItemStack.register(ic -> {
+			for (EnumVariantTwinkleStone variant : EnumVariantTwinkleStone.values()) {
+				for (String oreName : variant.oreNames) {
+					OreDictionary.registerOre(oreName, new ItemStack(itemBlockTwinkleStone, 1, variant.metadata));
+				}
+			}
+		});
 
 	}
 
