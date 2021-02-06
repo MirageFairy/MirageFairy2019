@@ -1,8 +1,13 @@
 
-Writer: {
-	new: _, dir -> _{dir};
-	indent: "\t";
-	write: _, file, obj -> WRITE(_.dir & "/" & file; JSON(obj; _.indent));
+Writer : {
+	new : class, dir       -> class {
+		dir;
+		indent = "\t";
+	};
+	write : this, file, data -> (
+		EXEC("mkdir"; "-p", RESOLVE("$(this.dir)/$file", ".."));
+		WRITE("$(this.dir)/$file"; JSON(data; this.indent));
+	);
 };
 
 //////////////////// 進捗ルート ////////////////////
