@@ -57,15 +57,10 @@ public class ItemMiragiumScythe extends ItemFairyWeaponBase
 
 		// 対象判定
 		List<BlockPos> blockPoses;
-		{
-			List<BlockPos> blockPoses2;
-			blockPoses2 = getTargets(world, selectorRayTrace.getBlockPos());
-			if (blockPoses2.size() == 0) {
-				if (selectorRayTrace.getSideHit().isPresent()) {
-					blockPoses2 = getTargets(world, selectorRayTrace.getBlockPos().offset(selectorRayTrace.getSideHit().get()));
-				}
-			}
-			blockPoses = blockPoses2;
+		if (selectorRayTrace.getSideHit().isPresent()) {
+			blockPoses = getTargets(world, selectorRayTrace.getBlockPos().offset(selectorRayTrace.getSideHit().get()));
+		} else {
+			blockPoses = getTargets(world, selectorRayTrace.getBlockPos());
 		}
 
 		// 妖精なし判定
