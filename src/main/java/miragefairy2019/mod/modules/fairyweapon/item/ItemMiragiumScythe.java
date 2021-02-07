@@ -117,42 +117,51 @@ public class ItemMiragiumScythe extends ItemFairyWeaponBase
 			@Override
 			public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
 			{
-				if (world.isRemote) return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
 
-				// 音取得
-				SoundEvent breakSound;
-				{
-					BlockPos blockPos = blockPoses.get(0);
-					IBlockState blockState = world.getBlockState(blockPos);
-					breakSound = blockState.getBlock().getSoundType(blockState, world, blockPos, player).getBreakSound();
-				}
+				if (!world.isRemote) {
 
-				int count = 0;
-				for (BlockPos blockPos : blockPoses) {
+					// 音取得
+					SoundEvent breakSound;
+					{
+						BlockPos blockPos = blockPoses.get(0);
+						IBlockState blockState = world.getBlockState(blockPos);
+						breakSound = blockState.getBlock().getSoundType(blockState, world, blockPos, player).getBreakSound();
+					}
 
-					// 耐久コスト
-					int damage = UtilsMath.randomInt(world.rand, wear.get(fairyType));
+					int count = 0;
+					for (BlockPos blockPos : blockPoses) {
 
-					// 耐久不足
-					if (itemStack.getItemDamage() + damage > itemStack.getMaxDamage()) break;
+						// 耐久コスト
+						int damage = UtilsMath.randomInt(world.rand, wear.get(fairyType));
 
-					// 発動
-					itemStack.damageItem(damage, player);
-					breakBlock(world, player, EnumFacing.UP, itemStack, blockPos, 0, false);
-					count++;
+						// 耐久不足
+						if (itemStack.getItemDamage() + damage > itemStack.getMaxDamage()) break;
 
-				}
+						// 発動
+						itemStack.damageItem(damage, player);
+						breakBlock(world, player, EnumFacing.UP, itemStack, blockPos, 0, false);
+						count++;
 
-				if (count > 0) {
+					}
+
+					if (count > 0) {
+
+						// エフェクト
+						world.playSound(null, player.posX, player.posY, player.posZ, breakSound, player.getSoundCategory(), 1.0F, 1.0F);
+
+						// クールタイム
+						player.getCooldownTracker().setCooldown(item, (int) (double) coolTime.get(fairyType));
+
+					}
 
 					// エフェクト
-					world.playSound(null, player.posX, player.posY, player.posZ, breakSound, player.getSoundCategory(), 1.0F, 1.0F);
 					world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, player.getSoundCategory(), 1.0F, 1.0F);
 					player.spawnSweepParticles();
-					player.swingArm(hand);
 
-					// クールタイム
-					player.getCooldownTracker().setCooldown(item, (int) (double) coolTime.get(fairyType));
+				} else {
+
+					// エフェクト
+					player.swingArm(hand);
 
 				}
 
