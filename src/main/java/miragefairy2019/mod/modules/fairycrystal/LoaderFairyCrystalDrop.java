@@ -2,6 +2,9 @@ package miragefairy2019.mod.modules.fairycrystal;
 
 import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -11,6 +14,7 @@ import miragefairy2019.mod.api.fairycrystal.DropFixed;
 import miragefairy2019.mod.api.fairycrystal.IDrop;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
+import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.modules.fairy.VariantFairy;
 import mirrg.boron.util.struct.Tuple3;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -215,8 +219,16 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.items(d(cake[0], 0.03), Items.CAKE));
 			d.add(RightClickDrops.ingredients(d(enchantedgoldenapple[0], 0.003), Ingredient.fromStacks(new ItemStack(Items.GOLDEN_APPLE, 1, 1))));
 			d.add(RightClickDrops.items(d(sugar[0], 0.3), Items.SUGAR));
-			d.add(RightClickDrops.items(d(chocolate[0], 0.001), Items.COOKIE));
-			d.add(RightClickDrops.ingredients(d(chocolate[0], 0.001), Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 3))));
+			if (!"".equals(1)) {
+				long epochSecond = Instant.now().getEpochSecond();
+				long epochSecond2 = LocalDateTime.of(2021, 3, 1, 0, 0, 0).toInstant(ZoneOffset.ofHours(9)).getEpochSecond();
+				ApiMain.logger().info("Now  : " + epochSecond);
+				ApiMain.logger().info("Limit: " + epochSecond2);
+				if (epochSecond < epochSecond2) {
+					d.add(RightClickDrops.items(d(darkchocolate[0], 0.001), Items.COOKIE));
+					d.add(RightClickDrops.ingredients(d(darkchocolate[0], 0.001), Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 3))));
+				}
+			}
 
 			d.add(RightClickDrops.world(d(daytime[0], 0.001), (w, p) -> time(w, 6000, 18000)));
 			d.add(RightClickDrops.world(d(night[0], 0.001), (w, p) -> time(w, 19000, 24000) || time(w, 0, 5000)));
