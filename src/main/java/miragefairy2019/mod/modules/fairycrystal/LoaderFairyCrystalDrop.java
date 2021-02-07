@@ -30,6 +30,8 @@ import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -73,6 +75,9 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.world(r(obsidian[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(coal[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(ice[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(nephrite[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(tourmaline[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(topaz[0]), (w, p) -> w.provider.isSurfaceWorld()));
 
 			d.add(RightClickDrops.world(r(spider[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(chicken[0]), (w, p) -> w.provider.isSurfaceWorld()));
@@ -85,6 +90,8 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.world(r(pufferfish[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(clownfish[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(villager[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(cow[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(pig[0]), (w, p) -> w.provider.isSurfaceWorld()));
 
 			d.add(RightClickDrops.world(r(wheat[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(lilac[0]), (w, p) -> w.provider.isSurfaceWorld()));
@@ -145,6 +152,9 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.ores(d(coal[0], 0.1), m("Coal")));
 			d.add(RightClickDrops.blocks(d(ice[0], 0.3), Blocks.ICE));
 			d.add(RightClickDrops.blocks(d(packedice[0], 0.01), Blocks.PACKED_ICE));
+			d.add(RightClickDrops.ores(d(nephrite[0], 0.03), m("Nephrite")));
+			d.add(RightClickDrops.ores(d(tourmaline[0], 0.01), m("Tourmaline")));
+			d.add(RightClickDrops.ores(d(topaz[0], 0.01), m("Topaz")));
 
 			d.add(RightClickDrops.classEntities(d(enderman[0], 0.03), EntityEnderman.class));
 			d.add(RightClickDrops.classEntities(d(spider[0], 0.1), EntitySpider.class));
@@ -164,6 +174,8 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.entity(d(librarian[0], 0.1), EntityVillager.class, e -> e.getProfessionForge().getRegistryName().equals(new ResourceLocation("minecraft:librarian"))));
 			d.add(RightClickDrops.items(d(netherstar[0], 0.01), Items.NETHER_STAR));
 			d.add(RightClickDrops.classEntities(d(golem[0], 0.1), EntityIronGolem.class));
+			d.add(RightClickDrops.classEntities(d(cow[0], 0.1), EntityCow.class));
+			d.add(RightClickDrops.classEntities(d(pig[0], 0.1), EntityPig.class));
 
 			d.add(RightClickDrops.blocks(d(wheat[0], 0.1), Blocks.WHEAT, Blocks.HAY_BLOCK));
 			d.add(RightClickDrops.blockStates(d(lilac[0], 0.03), Blocks.DOUBLE_PLANT.getDefaultState().withProperty(BlockDoublePlant.VARIANT, EnumPlantType.SYRINGA)));
@@ -179,7 +191,6 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.blocks(d(torch[0], 0.3), Blocks.TORCH));
 			d.add(RightClickDrops.blocks(d(furnace[0], 0.1), Blocks.FURNACE));
 			d.add(RightClickDrops.blocks(d(magentaglazedterracotta[0], 0.03), Blocks.MAGENTA_GLAZED_TERRACOTTA));
-			d.add(RightClickDrops.items(d(bread[0], 0.1), Items.BREAD));
 			d.add(RightClickDrops.items(d(axe[0], 0.1), Items.WOODEN_AXE, Items.STONE_AXE, Items.IRON_AXE, Items.GOLDEN_AXE, Items.DIAMOND_AXE));
 			d.add(RightClickDrops.blocks(d(chest[0], 0.1), Blocks.CHEST));
 			d.add(RightClickDrops.blocks(d(craftingtable[0], 0.1), Blocks.CRAFTING_TABLE));
@@ -198,6 +209,14 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.ores(d(glass[0], 0.1), "blockGlass"));
 			d.add(RightClickDrops.blocks(d(activatorrail[0], 0.03), Blocks.ACTIVATOR_RAIL));
 			d.add(RightClickDrops.blocks(d(ironbars[0], 0.1), Blocks.IRON_BARS));
+
+			d.add(RightClickDrops.items(d(bread[0], 0.1), Items.BREAD));
+			d.add(RightClickDrops.items(d(cookie[0], 0.1), Items.COOKIE));
+			d.add(RightClickDrops.items(d(cake[0], 0.03), Items.CAKE));
+			d.add(RightClickDrops.ingredients(d(enchantedgoldenapple[0], 0.003), Ingredient.fromStacks(new ItemStack(Items.GOLDEN_APPLE, 1, 1))));
+			d.add(RightClickDrops.items(d(sugar[0], 0.3), Items.SUGAR));
+			d.add(RightClickDrops.items(d(chocolate[0], 0.001), Items.COOKIE));
+			d.add(RightClickDrops.ingredients(d(chocolate[0], 0.001), Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 3))));
 
 			d.add(RightClickDrops.world(d(daytime[0], 0.001), (w, p) -> time(w, 6000, 18000)));
 			d.add(RightClickDrops.world(d(night[0], 0.001), (w, p) -> time(w, 19000, 24000) || time(w, 0, 5000)));
@@ -259,6 +278,9 @@ public class LoaderFairyCrystalDrop
 		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockGold"), gold[0].type.registryName);
 		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockRedstone"), redstone[0].type.registryName);
 		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(Ingredient.fromStacks(new ItemStack(Blocks.SAND)), sand[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockNephrite"), nephrite[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockTourmaline"), tourmaline[0].type.registryName);
+		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockTopaz"), topaz[0].type.registryName);
 		// TODO ほとんどの妖精とアイテムの関連付けは妖精レジストリーを使う
 
 		new Object() {
@@ -312,6 +334,13 @@ public class LoaderFairyCrystalDrop
 				r(hoe, i(Items.IRON_HOE));
 				r(shield, i(Items.SHIELD));
 				r(hopper, b(Blocks.HOPPER));
+				r(nephrite, o("gemNephrite"));
+				r(tourmaline, o("gemTourmaline"));
+				r(topaz, o("gemTopaz"));
+				r(cookie, i(Items.COOKIE));
+				r(cake, i(Items.CAKE));
+				r(enchantedgoldenapple, s(new ItemStack(Items.GOLDEN_APPLE, 1, 1)));
+				r(sugar, i(Items.SUGAR));
 			}
 
 			private void r(VariantFairy[] variantFairies, Ingredient... ingredients)
