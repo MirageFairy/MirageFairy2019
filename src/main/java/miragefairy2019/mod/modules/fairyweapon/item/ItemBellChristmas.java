@@ -93,7 +93,7 @@ public class ItemBellChristmas extends ItemBellBase
 		// 対象判定
 		SelectorEntityRanged<EntityLivingBase> selectorEntityRanged = new SelectorEntityRanged<>(
 			world,
-			selectorRayTrace.getTarget(),
+			selectorRayTrace.getPosition(),
 			EntityLivingBase.class,
 			e -> e != player,
 			radius.get(fairyType),
@@ -163,7 +163,7 @@ public class ItemBellChristmas extends ItemBellBase
 			@Override
 			public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
 			{
-				selectorRayTrace.effect(color);
+				selectorRayTrace.doEffect(color);
 				selectorEntityRanged.effect();
 			}
 		};

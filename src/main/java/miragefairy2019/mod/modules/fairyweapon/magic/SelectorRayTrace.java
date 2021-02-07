@@ -37,7 +37,7 @@ public class SelectorRayTrace
 
 	//
 
-	public Vec3d getTarget()
+	public Vec3d getPosition()
 	{
 		return position;
 	}
@@ -52,7 +52,7 @@ public class SelectorRayTrace
 		return Optional.empty();
 	}
 
-	public void effect(int color)
+	public void doEffect(int color)
 	{
 		UtilsMagic.spawnParticle(world, position, color);
 	}

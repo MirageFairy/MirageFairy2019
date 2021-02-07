@@ -90,7 +90,7 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase
 		// 対象判定
 		SelectorEntityRanged<EntityLivingBase> selectorEntityRanged = new SelectorEntityRanged<>(
 			world,
-			selectorRayTrace.getTarget(),
+			selectorRayTrace.getPosition(),
 			EntityLivingBase.class,
 			e -> e != player,
 			radius.get(fairyType),
@@ -225,7 +225,7 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase
 			@Override
 			public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
 			{
-				selectorRayTrace.effect(color);
+				selectorRayTrace.doEffect(color);
 				selectorEntityRanged.effect();
 			}
 		};
