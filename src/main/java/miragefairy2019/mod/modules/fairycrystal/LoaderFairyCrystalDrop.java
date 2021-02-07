@@ -286,96 +286,97 @@ public class LoaderFairyCrystalDrop
 		new Object() {
 			public void run()
 			{
-				r(stone, b(Blocks.STONE, 0));
-				r(dirt, b(Blocks.DIRT, 0));
-				r(iron, o("ingotIron"));
-				r(diamond, o("gemDiamond"));
-				r(magnetite, o("gemMagnetite"));
-				r(apatite, o("gemApatite"));
-				r(fluorite, o("gemFluorite"));
-				r(sulfur, o("gemSulfur"));
-				r(cinnabar, o("gemCinnabar"));
-				r(moonstone, o("gemMoonstone"));
-				r(pyrope, o("gemPyrope"));
-				r(smithsonite, o("gemSmithsonite"));
-				r(redstone, o("dustRedstone"));
-				r(sand, b(Blocks.SAND));
-				r(gold, o("ingotGold"));
-				r(wheat, i(Items.WHEAT));
-				r(lilac, b(Blocks.DOUBLE_PLANT, 1));
-				r(torch, b(Blocks.TORCH));
-				r(gravel, b(Blocks.GRAVEL));
-				r(emerald, o("gemEmerald"));
-				r(lapislazuli, o("gemLapislazuli"));
-				r(furnace, b(Blocks.FURNACE));
-				r(magentaglazedterracotta, b(Blocks.MAGENTA_GLAZED_TERRACOTTA));
-				r(bread, i(Items.BREAD));
-				r(apple, i(Items.APPLE));
-				r(carrot, i(Items.CARROT));
-				r(cactus, b(Blocks.CACTUS));
-				r(axe, i(Items.IRON_AXE));
-				r(chest, b(Blocks.CHEST));
-				r(craftingtable, b(Blocks.CRAFTING_TABLE));
-				r(potion, i(Items.POTIONITEM));
-				r(sword, i(Items.IRON_SWORD));
-				r(dispenser, b(Blocks.DISPENSER));
-				r(cod, i(Items.FISH, 0));
-				r(salmon, i(Items.FISH, 1));
-				r(pufferfish, i(Items.FISH, 3));
-				r(clownfish, i(Items.FISH, 2));
-				r(spruce, b(Blocks.LOG, 1), b(Blocks.SAPLING, 1));
-				r(anvil, b(Blocks.ANVIL));
-				r(obsidian, b(Blocks.OBSIDIAN));
-				r(seed, i(Items.WHEAT_SEEDS));
-				r(glowstone, i(Items.GLOWSTONE_DUST), b(Blocks.GLOWSTONE));
-				r(coal, i(Items.COAL, 0));
-				r(netherstar, i(Items.NETHER_STAR));
-				r(brewingstand, i(Items.BREWING_STAND));
-				r(hoe, i(Items.IRON_HOE));
-				r(shield, i(Items.SHIELD));
-				r(hopper, b(Blocks.HOPPER));
-				r(nephrite, o("gemNephrite"));
-				r(tourmaline, o("gemTourmaline"));
-				r(topaz, o("gemTopaz"));
-				r(cookie, i(Items.COOKIE));
-				r(cake, i(Items.CAKE));
-				r(enchantedgoldenapple, s(new ItemStack(Items.GOLDEN_APPLE, 1, 1)));
-				r(sugar, i(Items.SUGAR));
+				register(stone, ingredient(Blocks.STONE, 0));
+				register(dirt, ingredient(Blocks.DIRT, 0));
+				register(iron, ingredient("ingotIron"));
+				register(diamond, ingredient("gemDiamond"));
+				register(magnetite, ingredient("gemMagnetite"));
+				register(apatite, ingredient("gemApatite"));
+				register(fluorite, ingredient("gemFluorite"));
+				register(sulfur, ingredient("gemSulfur"));
+				register(cinnabar, ingredient("gemCinnabar"));
+				register(moonstone, ingredient("gemMoonstone"));
+				register(pyrope, ingredient("gemPyrope"));
+				register(smithsonite, ingredient("gemSmithsonite"));
+				register(redstone, ingredient("dustRedstone"));
+				register(sand, ingredient(Blocks.SAND));
+				register(gold, ingredient("ingotGold"));
+				register(wheat, ingredient(Items.WHEAT));
+				register(lilac, ingredient(Blocks.DOUBLE_PLANT, 1));
+				register(torch, ingredient(Blocks.TORCH));
+				register(gravel, ingredient(Blocks.GRAVEL));
+				register(emerald, ingredient("gemEmerald"));
+				register(lapislazuli, ingredient("gemLapislazuli"));
+				register(furnace, ingredient(Blocks.FURNACE));
+				register(magentaglazedterracotta, ingredient(Blocks.MAGENTA_GLAZED_TERRACOTTA));
+				register(bread, ingredient(Items.BREAD));
+				register(apple, ingredient(Items.APPLE));
+				register(carrot, ingredient(Items.CARROT));
+				register(cactus, ingredient(Blocks.CACTUS));
+				register(axe, ingredient(Items.IRON_AXE));
+				register(chest, ingredient(Blocks.CHEST));
+				register(craftingtable, ingredient(Blocks.CRAFTING_TABLE));
+				register(potion, ingredient(Items.POTIONITEM));
+				register(sword, ingredient(Items.IRON_SWORD));
+				register(dispenser, ingredient(Blocks.DISPENSER));
+				register(cod, ingredient(Items.FISH, 0));
+				register(salmon, ingredient(Items.FISH, 1));
+				register(pufferfish, ingredient(Items.FISH, 3));
+				register(clownfish, ingredient(Items.FISH, 2));
+				register(spruce, ingredient(Blocks.LOG, 1), ingredient(Blocks.SAPLING, 1));
+				register(anvil, ingredient(Blocks.ANVIL));
+				register(obsidian, ingredient(Blocks.OBSIDIAN));
+				register(seed, ingredient(Items.WHEAT_SEEDS));
+				register(glowstone, ingredient(Items.GLOWSTONE_DUST), ingredient(Blocks.GLOWSTONE));
+				register(coal, ingredient(Items.COAL, 0));
+				register(netherstar, ingredient(Items.NETHER_STAR));
+				register(brewingstand, ingredient(Items.BREWING_STAND));
+				register(hoe, ingredient(Items.IRON_HOE));
+				register(shield, ingredient(Items.SHIELD));
+				register(hopper, ingredient(Blocks.HOPPER));
+				register(nephrite, ingredient("gemNephrite"));
+				register(tourmaline, ingredient("gemTourmaline"));
+				register(topaz, ingredient("gemTopaz"));
+				register(cookie, ingredient(Items.COOKIE));
+				register(cake, ingredient(Items.CAKE));
+				register(enchantedgoldenapple, ingredient(Items.GOLDEN_APPLE, 1));
+				register(sugar, ingredient(Items.SUGAR));
 			}
 
-			private void r(VariantFairy[] variantFairies, Ingredient... ingredients)
+			private void register(VariantFairy[] variantFairies, Ingredient... ingredients)
 			{
 				for (Ingredient ingredient : ingredients) {
 					consumerRecipe.accept(Tuple3.of(ingredient, variantFairies[0].createItemStack(), variantFairies[0].type.name));
 				}
 			}
 
-			private Ingredient i(Item item)
+			private Ingredient ingredient(Item item)
 			{
-				return i(item, 32767);
+				return ingredient(item, 32767);
 			}
 
-			private Ingredient i(Item item, int meta)
+			private Ingredient ingredient(Item item, int meta)
 			{
 				return Ingredient.fromStacks(new ItemStack(item, 1, meta));
 			}
 
-			private Ingredient b(Block block)
+			private Ingredient ingredient(Block block)
 			{
-				return b(block, 32767);
+				return ingredient(block, 32767);
 			}
 
-			private Ingredient b(Block block, int meta)
+			private Ingredient ingredient(Block block, int meta)
 			{
 				return Ingredient.fromStacks(new ItemStack(Item.getItemFromBlock(block), 1, meta));
 			}
 
-			private Ingredient s(ItemStack itemStack)
+			@SuppressWarnings("unused")
+			private Ingredient ingredient(ItemStack itemStack)
 			{
 				return Ingredient.fromStacks(itemStack);
 			}
 
-			private Ingredient o(String ore)
+			private Ingredient ingredient(String ore)
 			{
 				return new OreIngredient(ore);
 			}
