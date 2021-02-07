@@ -269,6 +269,15 @@ public class Loader
 			.bind(setWeaponStatusOfTier(3))
 			.get();
 
+		// ミラジウムの大鎌
+		Configurator<ItemMiragiumScythe> miragiumScythe = fairyWeapon(erMod, ItemMiragiumScythe::new, "miragium_scythe", "miragiumScythe")
+			.bind(addComponent(instance(miragium.get(), 3)))
+			.bind(addComponent(instance(wood.get(), 1)))
+			.bind(addComponent(instance(getComponentAbilityType(slash.get()))))
+			.bind(addComponent(instance(getComponentAbilityType(fell.get()))))
+			.bind(setWeaponStatusOfTier(2))
+			.get();
+
 	}
 
 	//

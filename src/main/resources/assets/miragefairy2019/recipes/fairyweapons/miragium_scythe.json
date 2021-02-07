@@ -1,0 +1,38 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "miragium_scythe",
+	"pattern": [
+		"fII",
+		"IsR",
+		"mcR"
+	],
+	"key": {
+		"R": {
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotMiragium"
+		},
+		"s": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019SphereSlash"
+		},
+		"f": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019SphereFell"
+		},
+		"c": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
+		"m": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:miragium_scythe"
+	}
+}

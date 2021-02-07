@@ -119,6 +119,8 @@ Writer : {
 	Achievement::new("miragium_sword"        ; "miragiumSword"      )::parent("fairy_weapon/root"                  )                    ::write();
 	Achievement::new("fairy_sword"           ; "fairySword"         )::parent("fairy_weapon/miragium_sword"        )::frame("goal"     )::write();
 
+	Achievement::new("miragium_scythe"       ; "miragiumScythe"     )::parent("fairy_weapon/root"                  )                    ::write();
+
 	Achievement::new("bell_base"             ; "bellBase"           )::parent("fairy_weapon/root"                  )                    ::write();
 	Achievement::new("flower_picking_bell"   ; "bellFlowerPicking"  )::parent("fairy_weapon/bell_base"             )::frame("goal"     )::write();
 	Achievement::new("christmas_bell"        ; "bellChristmas"      )::parent("fairy_weapon/bell_base"             )::frame("challenge")::write();
@@ -360,6 +362,7 @@ Writer : {
 	fairyWeapon("summoning_fairy_wand");
 
 	fairyWeapon("miragium_axe");
+	fairyWeapon("miragium_scythe");
 	fairyWeapon("miragium_sword");
 	fairyWeapon("fairy_sword");
 	fairyWeapon("bell_base");
