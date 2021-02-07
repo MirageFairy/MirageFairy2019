@@ -141,6 +141,16 @@ public class ModuleFairy
 		public static VariantFairy[] desert;
 		public static VariantFairy[] mountain;
 		public static VariantFairy[] time;
+		public static VariantFairy[] nephrite;
+		public static VariantFairy[] tourmaline;
+		public static VariantFairy[] topaz;
+		public static VariantFairy[] cow;
+		public static VariantFairy[] pig;
+		public static VariantFairy[] sugar;
+		public static VariantFairy[] cake;
+		public static VariantFairy[] cookie;
+		public static VariantFairy[] chocolate;
+		public static VariantFairy[] enchantedgoldenapple;
 
 		//
 
@@ -239,6 +249,16 @@ public class ModuleFairy
 				r(87, desert = v(t(87, "desert", 2, 76, 1, m(1, 15, 0, 15, 3, 10), a(5, 0, 0, 8, 4, 0, 4, 3, 0, 0, 0, 1, 0, 0, 0, 0, 2, 3, 0, 0, 0), c(0x80FF00, 0xDDD6A5, 0xD6CE9D, 0x0F6C1C))));
 				r(88, mountain = v(t(88, "mountain", 2, 92, 1, m(0, 3, 0, 35, 12, 10), a(4, 1, 4, 0, 0, 1, 2, 4, 0, 0, 0, 0, 0, 0, 0, 1, 4, 2, 0, 5, 1), c(0x80FF00, 0xB1B0B1, 0x717173, 0x4B794A))));
 				r(89, time = v(t(89, "time", 5, 26, 1, m(10, 5, 5, 5, 5, 10), a(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), c(0x89D585, 0xD5DEBC, 0xD8DEA7, 0x8DD586))));
+				r(90, nephrite = v(t(90, "nephrite", 3, 59, 1, m(1, 0, 12, 10, 3, 17), a(0, 13, 5, 0, 0, 0, 7, 9, 0, 1, 0, 2, 0, 0, 0, 7, 0, 0, 0, 1, 0), c(0x94D084, 0xA7D398, 0x88C698, 0x5EA15D))));
+				r(91, tourmaline = v(t(91, "tourmaline", 4, 66, 1, m(10, 51, 0, 19, 0, 42), a(0, 6, 0, 1, 0, 0, 11, 8, 0, 4, 0, 5, 5, 5, 0, 6, 5, 5, 0, 1, 14), c(0xF3F3F2, 0x3CCB5D, 0xB15498, 0xD7F5FF))));
+				r(92, topaz = v(t(92, "topaz", 4, 72, 1, m(10, 38, 40, 0, 0, 35), a(2, 0, 0, 16, 11, 0, 15, 10, 0, 0, 0, 6, 0, 6, 0, 3, 8, 0, 0, 1, 0), c(0xEED891, 0xEEAF2D, 0xCD7102, 0xFF9800))));
+				r(93, cow = v(t(93, "cow", 1, 54, 1, m(0, 0, 0, 2, 10, 5), a(2, 0, 0, 0, 0, 3, 0, 2, 1, 0, 0, 3, 2, 1, 17, 3, 4, 4, 0, 0, 0), c(0x433626, 0x644B37, 0x4A3828, 0xADADAD))));
+				r(94, pig = v(t(94, "pig", 1, 53, 1, m(0, 0, 0, 0, 10, 6), a(1, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1, 0, 16, 3, 4, 2, 0, 0, 0), c(0xDB98A2, 0xF68C87, 0xC76B73, 0xDC94A1))));
+				r(95, sugar = v(t(95, "sugar", 1, 21, 1, m(0.1, 2, 0, 2, 10, 0), a(0, 1, 0, 0, 0, 0, 6, 3, 0, 0, 0, 0, 2, 1, 7, 7, 7, 0, 0, 0, 0), c(0xE3E3E3, 0xE3E3E3, 0xCECED8, 0xF7F7F7))));
+				r(96, cake = v(t(96, "cake", 3, 47, 1, m(0, 0, 5, 1, 10, 0), a(0, 2, 0, 0, 0, 1, 0, 9, 2, 0, 0, 0, 0, 0, 16, 5, 8, 0, 0, 1, 0), c(0xCC850C, 0xF5F0DC, 0xD3D0BF, 0xDE3334))));
+				r(97, cookie = v(t(97, "cookie", 3, 28, 1, m(0, 0, 0, 3, 10, 0), a(0, 1, 0, 0, 0, 0, 0, 4, 1, 0, 0, 0, 0, 0, 12, 3, 4, 0, 0, 0, 0), c(0xCC850C, 0xE9994F, 0xDA843C, 0x882500))));
+				r(98, chocolate = v(t(98, "chocolate", 3, 19, 1.2, m(0, 0, 2, 2, 10, 0), a(0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 9, 6, 7, 0, 0, 1, 0), c(0x882500, 0x882500, 0x882500, 0x882500))));
+				r(99, enchantedgoldenapple = v(t(99, "enchantedgoldenapple", 5, 90, 1, m(3, 0, 8, 1, 10, 21), a(0, 3, 0, 5, 0, 2, 0, 15, 0, 0, 0, 0, 0, 0, 13, 10, 6, 0, 0, 0, 0), c(0xFF755D, 0xDEDE00, 0xDEDE00, 0xDE4FD7))));
 			}
 
 			variants = ImmutableArray.ofList(variants2);
