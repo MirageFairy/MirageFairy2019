@@ -169,7 +169,7 @@ public class ItemMiragiumScythe extends ItemFairyWeaponBase2
 			{
 				selectorRayTrace.doEffect(0xFFFFFF);
 				UtilsMagic.spawnParticleTargets(world, ISuppliterator.ofIterable(blockPoses)
-					.map(t -> Tuple.of(new Vec3d(t), EnumTargetExecutability.EFFECTIVE)));
+					.map(t -> Tuple.of(new Vec3d(t).addVector(0.5, 0.5, 0.5), EnumTargetExecutability.EFFECTIVE)));
 			}
 		};
 	}
