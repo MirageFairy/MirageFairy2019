@@ -8,7 +8,6 @@ import java.util.List;
 import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
-import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.modules.fairyweapon.magic.EnumTargetExecutability;
 import miragefairy2019.mod.modules.fairyweapon.magic.MagicExecutor;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace;
@@ -18,7 +17,6 @@ import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -30,12 +28,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMiragiumScythe extends ItemFairyWeaponBase
+public class ItemMiragiumScythe extends ItemFairyWeaponBase2
 {
 
 	public IMagicStatus<Double> wear = registerMagicStatus("wear", formatterPercent1(),
@@ -46,7 +41,13 @@ public class ItemMiragiumScythe extends ItemFairyWeaponBase
 
 	//
 
-	public MagicExecutor getExecutor(ItemFairyWeaponBase item, World world, ItemStack itemStack, EntityPlayer player)
+	public ItemMiragiumScythe()
+	{
+		addInformationHandlerFunctions("Right click: use magic");
+	}
+
+	@Override
+	protected MagicExecutor getExecutor(World world, ItemStack itemStack, EntityPlayer player)
 	{
 
 		// 妖精取得
@@ -97,7 +98,7 @@ public class ItemMiragiumScythe extends ItemFairyWeaponBase
 		}
 
 		// クールダウン判定
-		if (player.getCooldownTracker().hasCooldown(item)) {
+		if (player.getCooldownTracker().hasCooldown(this)) {
 			return new MagicExecutor() {
 				@Override
 				public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
@@ -145,7 +146,7 @@ public class ItemMiragiumScythe extends ItemFairyWeaponBase
 						world.playSound(null, player.posX, player.posY, player.posZ, breakSound, player.getSoundCategory(), 1.0F, 1.0F);
 
 						// クールタイム
-						player.getCooldownTracker().setCooldown(item, (int) (double) coolTime.get(fairyType));
+						player.getCooldownTracker().setCooldown(ItemMiragiumScythe.this, (int) (double) coolTime.get(fairyType));
 
 					}
 
@@ -173,7 +174,7 @@ public class ItemMiragiumScythe extends ItemFairyWeaponBase
 		};
 	}
 
-	private List<BlockPos> getTargets(World world, BlockPos blockPos)
+	protected List<BlockPos> getTargets(World world, BlockPos blockPos)
 	{
 		List<Tuple<BlockPos, Double>> tuples = new ArrayList<>();
 		for (int xi = -2; xi <= 2; xi++) {
@@ -197,47 +198,6 @@ public class ItemMiragiumScythe extends ItemFairyWeaponBase
 			.sortedDouble(Tuple::getY)
 			.map(Tuple::getX)
 			.toList();
-	}
-
-	//
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-
-		super.addInformationFunctions(itemStack, world, tooltip, flag);
-
-		tooltip.add(TextFormatting.RED + "Right click: use magic");
-
-	}
-
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-	{
-
-		// アイテム取得
-		ItemStack itemStack = player.getHeldItem(hand);
-
-		return getExecutor(this, world, itemStack, player).onItemRightClick(world, player, hand);
-	}
-
-	@Override
-	public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
-	{
-
-		// クライアントのみ
-		if (!ApiMain.side().isClient()) return;
-
-		// プレイヤー取得
-		if (!(entity instanceof EntityPlayer)) return;
-		EntityPlayer player = (EntityPlayer) entity;
-
-		// アイテム取得
-		if (!isSelected && player.getHeldItemOffhand() != itemStack) return;
-
-		getExecutor(this, world, itemStack, player).onUpdate(itemStack, world, entity, itemSlot, isSelected);
-
 	}
 
 }
