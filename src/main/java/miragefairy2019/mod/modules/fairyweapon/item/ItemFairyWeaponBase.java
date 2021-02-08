@@ -226,6 +226,35 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
 
 	}
 
+	//
+
+	protected interface IInformationHandler
+	{
+
+		@SideOnly(Side.CLIENT)
+		public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag);
+
+	}
+
+	private List<IInformationHandler> informationHandlersFunctions = new ArrayList<>();
+
+	protected void addInformationHandlerFunctions(IInformationHandler informationHandler)
+	{
+		informationHandlersFunctions.add(informationHandler);
+	}
+
+	protected void addInformationHandlerFunctions(String information)
+	{
+		addInformationHandlerFunctions(new IInformationHandler() {
+			@Override
+			@SideOnly(Side.CLIENT)
+			public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
+			{
+				tooltip.add(RED + information);
+			}
+		});
+	}
+
 	@SideOnly(Side.CLIENT)
 	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
@@ -234,7 +263,13 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
 
 		tooltip.add(RED + "Can be repaired by crafting with contained sphere");
 
+		for (IInformationHandler informationHandler : informationHandlersFunctions) {
+			informationHandler.addInformation(itemStack, world, tooltip, flag);
+		}
+
 	}
+
+	//
 
 	@Override
 	@SideOnly(Side.CLIENT)
