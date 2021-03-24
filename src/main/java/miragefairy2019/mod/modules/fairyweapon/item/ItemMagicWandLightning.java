@@ -13,6 +13,8 @@ import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.mod.modules.fairyweapon.critical.CriticalRate;
+import miragefairy2019.mod.modules.fairyweapon.critical.EnumCriticalFactor;
 import miragefairy2019.mod.modules.fairyweapon.magic.MagicExecutor;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace;
