@@ -2,17 +2,21 @@
 	"type": "forge:ore_shaped",
 	"group": "lightning_magic_wand",
 	"pattern": [
-		"caS",
+		"caE",
 		"a#a",
-		"aap"
+		"Tap"
 	],
 	"key": {
 		"#": {
 			"item": "miragefairy2019:magic_wand_base"
 		},
-		"S": {
+		"T": {
 			"type": "forge:ore_dict",
 			"ore": "mirageFairy2019SphereThunder"
+		},
+		"E": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019SphereEnergy"
 		},
 		"a": {
 			"type": "forge:ore_dict",
