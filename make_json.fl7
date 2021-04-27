@@ -10,7 +10,7 @@ Writer : {
 	);
 };
 
-//////////////////// 進捗ルート ////////////////////
+#################### 進捗ルート ####################
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/advancements/fairy_weapon");
 	writer::write("root.json"; {
@@ -42,7 +42,7 @@ Writer : {
 	});
 );
 
-//////////////////// 進捗 ////////////////////
+#################### 進捗 ####################
 (
 	Achievement: {
 		new: _, registerName, unlocalizedName -> _{
@@ -135,7 +135,7 @@ Writer : {
 
 );
 
-//////////////////// ブロックステート ////////////////////
+#################### ブロックステート ####################
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/blockstates");
 
@@ -150,7 +150,7 @@ Writer : {
 
 );
 
-//////////////////// ブロックモデル ////////////////////
+#################### ブロックモデル ####################
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
 
@@ -243,7 +243,7 @@ Writer : {
 
 );
 
-//////////////////// アイテムモデル ////////////////////
+#################### アイテムモデル ####################
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/item");
 
@@ -380,7 +380,7 @@ Writer : {
 
 );
 
-//////////////////// 素材レシピ ////////////////////
+#################### 素材レシピ ####################
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials");
 
@@ -405,7 +405,7 @@ Writer : {
 	writer::write("blaze_powder_from_blaze_rod.json"; obj);
 );
 
-//////////////////// 圧縮レシピ ////////////////////
+#################### 圧縮レシピ ####################
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials/compress");
 
@@ -464,7 +464,7 @@ Writer : {
 
 );
 
-//////////////////// その他レシピ ////////////////////
+#################### その他レシピ ####################
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/fairymaterials");
 
