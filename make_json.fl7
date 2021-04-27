@@ -259,16 +259,9 @@ Writer : {
 			layer0: "miragefairy2019:items/\(registerName)";
 		};
 	});
-	layered: registerName, layers -> writer::write("\(registerName).json"; {
-		parent: "item/generated";
-		textures: {[
-			layerList: [layers] |
-			i: 0 ~ $#layerList |
-			{
-				key: "layer" & i;
-				value: "miragefairy2019:items/" & layerList[i];
-			}
-		]};
+	layered : registerName, list_layer -> writer::write("$(registerName).json"; {
+		parent = "item/generated";
+		textures = {[i, layer : list_layer[] | {"layer$i" = "miragefairy2019:items/$layer"}[]]};
 	});
 	block: registerName -> writer::write("\(registerName).json"; {
 		parent: "miragefairy2019:block/\(registerName)";
@@ -301,7 +294,9 @@ Writer : {
 	handheld("miragium_rod");
 
 	item("fertilizer");
-	${white orange magenta light_blue yellow lime pink gray silver cyan purple blue brown green red black} | block("$(_)_twinkle_stone");
+	${white orange magenta light_blue yellow lime pink gray silver cyan purple blue brown green red black} | (
+	  block("$(_)_twinkle_stone");
+	);
 
 	item("mirage_flower_seeds");
 
@@ -375,8 +370,8 @@ Writer : {
 	fairyWeapon("collecting_magic_wand");
 	fairyWeapon("lightning_magic_wand");
 
-	layered("fairy"; 0 .. 4 | "fairy_layer" & _);
-	layered("sphere"; 0 .. 3 | "sphere_layer" & _);
+	layered("fairy"; [0 .. 4 | "fairy_layer$_"]);
+	layered("sphere"; [0 .. 3 | "sphere_layer$_"]);
 
 );
 
