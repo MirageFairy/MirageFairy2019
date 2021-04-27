@@ -261,7 +261,9 @@ Writer : {
 	});
 	layered : registerName, list_layer -> writer::write("$(registerName).json"; {
 		parent = "item/generated";
-		textures = {[i, layer : list_layer[] | {"layer$i" = "miragefairy2019:items/$layer"}[]]};
+		textures = {[i, layer : list_layer[] | {
+			"layer$i" = "miragefairy2019:items/$layer";
+		}[]]};
 	});
 	block: registerName -> writer::write("\(registerName).json"; {
 		parent: "miragefairy2019:block/\(registerName)";
