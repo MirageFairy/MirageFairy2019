@@ -63,6 +63,11 @@ public class ModuleMaterialsFairy
 					.bind(addComponent(instance(magnetite.get(), 0.5)))
 					.bind(addOreName("mirageFairy2019ManaRodDark"));
 
+				itemVariant(c.erMod, c, 6, () -> new ItemVariantMaterial("quartz_mana_rod", "manaRodQuartz"))
+					.bind(addComponent(instance(miragium.get(), 0.5)))
+					.bind(addComponent(instance(quartz.get(), 0.5)))
+					.bind(addOreName("mirageFairy2019ManaRodQuartz"));
+
 				erMod.registerItem.register(b -> {
 					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
 				});

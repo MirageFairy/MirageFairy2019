@@ -12,6 +12,7 @@ item.manaRodWind.name=蛍石の魔導芯棒
 item.manaRodGaia.name=硫黄の魔導芯棒
 item.manaRodAqua.name=燐灰石の魔導芯棒
 item.manaRodDark.name=磁鉄鉱の魔導芯棒
+item.manaRodQuartz.name=ネザークォーツの魔導芯棒
 
 item.mirageFairyR1.name=ミラージュ妖精
 item.mirageFairyR1.format=%s
@@ -200,6 +201,7 @@ mirageFairy2019.component.saltpeter.name=硝石
 mirageFairy2019.component.nephrite.name=ネフライト
 mirageFairy2019.component.topaz.name=トパーズ
 mirageFairy2019.component.tourmaline.name=トルマリン
+mirageFairy2019.component.quartz.name=ネザークォーツ
 
 mirageFairy2019.ability.attack.name=攻撃
 mirageFairy2019.ability.craft.name=加工

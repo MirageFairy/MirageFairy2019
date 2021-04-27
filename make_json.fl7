@@ -311,6 +311,7 @@ Writer : {
 	handheld("fire_mana_rod");
 	handheld("shine_mana_rod");
 	handheld("dark_mana_rod");
+	handheld("quartz_mana_rod");
 
 	block("apatite_block");
 	block("fluorite_block");

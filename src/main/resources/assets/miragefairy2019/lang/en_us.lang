@@ -12,6 +12,7 @@ item.manaRodWind.name=Wind Mana Rod
 item.manaRodGaia.name=Gaia Mana Rod
 item.manaRodAqua.name=Aqua Mana Rod
 item.manaRodDark.name=Dark Mana Rod
+item.manaRodQuartz.name=Nether Quartz Mana Rod
 
 item.mirageFairyR1.name=Fairy
 item.mirageFairyR1.format=%s
@@ -200,6 +201,7 @@ mirageFairy2019.component.saltpeter.name=Saltpeter
 mirageFairy2019.component.nephrite.name=Nephrite
 mirageFairy2019.component.topaz.name=Topaz
 mirageFairy2019.component.tourmaline.name=Tourmaline
+mirageFairy2019.component.quartz.name=Quartz
 
 mirageFairy2019.ability.attack.name=ATTACK
 mirageFairy2019.ability.craft.name=CRAFT

@@ -28,6 +28,7 @@ public class Component implements IComponent, Comparable<IComponent>
 	public static final Component nephrite = new Component("nephrite");
 	public static final Component topaz = new Component("topaz");
 	public static final Component tourmaline = new Component("tourmaline");
+	public static final Component quartz = new Component("quartz");
 
 	private String name;
 
