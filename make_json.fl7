@@ -466,7 +466,7 @@ Writer : {
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/fairymaterials");
 
-	// トゥインクルストーン
+	# トゥインクルストーン
 	writer::write("twinkle_stone.json"; {
 		type = "forge:ore_shaped";
 		group = "twinkle_stone";
