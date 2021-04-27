@@ -6,12 +6,12 @@ advancements.miragefairy2019.fairy_weapon.root.description=妖精武器
 advancements.miragefairy2019.fairy_weapon.all.description=所定のアイテムを入手する
 
 item.mirageFlowerSeeds.name=ミラージュの花の種
-item.manaRodShine.name=光の心の棒
-item.manaRodFire.name=火の心の棒
-item.manaRodWind.name=風の心の棒
-item.manaRodGaia.name=土の心の棒
-item.manaRodAqua.name=水の心の棒
-item.manaRodDark.name=闇の心の棒
+item.manaRodShine.name=月長石の魔導芯棒
+item.manaRodFire.name=辰砂の魔導芯棒
+item.manaRodWind.name=蛍石の魔導芯棒
+item.manaRodGaia.name=硫黄の魔導芯棒
+item.manaRodAqua.name=燐灰石の魔導芯棒
+item.manaRodDark.name=磁鉄鉱の魔導芯棒
 
 item.mirageFairyR1.name=ミラージュ妖精
 item.mirageFairyR1.format=%s
