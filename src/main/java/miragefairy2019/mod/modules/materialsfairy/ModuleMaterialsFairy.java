@@ -5,8 +5,14 @@ import static miragefairy2019.mod.api.composite.Components.*;
 import static miragefairy2019.mod.lib.Configurator.*;
 
 import miragefairy2019.mod.ModMirageFairy2019;
+import miragefairy2019.mod.api.fairystick.ApiFairyStick;
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeBlock;
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeItem;
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionSpawnItem;
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.materialsfairy.ApiMaterialsFairy;
+import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.lib.multi.ItemBlockMulti;
@@ -18,6 +24,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class ModuleMaterialsFairy
 {
@@ -86,7 +93,18 @@ public class ModuleMaterialsFairy
 
 				itemVariant(c.erMod, c, 7, () -> new ItemVariantMaterial("mirage_flower_stick", "stickMirageFlower"))
 					.bind(addOreName("stickMirageFlower"))
-					.bind(onCreateItemStack(v -> itemStackStickMirageFlower = v.createItemStack()));
+					.bind(onCreateItemStack(v -> itemStackStickMirageFlower = v.createItemStack()))
+					.bind(onCreateItemStack(v -> {
+
+						// フェアリーステッキクラフト
+						ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+							new FairyStickCraftConditionConsumeBlock(blockState -> blockState.equals(ApiOre.blockFluidMiragiumWater.getDefaultState())),
+							new FairyStickCraftConditionConsumeItem(new OreIngredient("leafMirageFlower")),
+							new FairyStickCraftConditionConsumeItem(new OreIngredient("bone")),
+							new FairyStickCraftConditionConsumeItem(new OreIngredient("gemApatite")),
+							new FairyStickCraftConditionSpawnItem(() -> v.createItemStack())));
+
+					}));
 
 				itemVariant(c.erMod, c, 8, () -> new ItemVariantMaterial("mirage_flower_leaf", "leafMirageFlower"))
 					.bind(addOreName("leafMirageFlower"))

@@ -1,0 +1,34 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "mirage_flower_stick",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "leafMirageFlower"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "bone"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "gemApatite"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "container1000Water"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustMiragium"
+		},
+		{
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		}
+	],
+	"result": {
+		"item": "miragefairy2019:fairy_materials",
+		"data": 7
+	}
+}
