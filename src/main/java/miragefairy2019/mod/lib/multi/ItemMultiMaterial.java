@@ -4,6 +4,7 @@ import static net.minecraft.util.text.TextFormatting.*;
 
 import java.util.List;
 
+import miragefairy2019.mod.lib.UtilsMinecraft;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
@@ -41,6 +42,14 @@ public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<
 	{
 		V variant = getVariant(itemStack).orElse(null);
 		if (variant != null) {
+
+			// ポエム
+			if (UtilsMinecraft.canTranslate(getUnlocalizedName(itemStack) + ".poem")) {
+				String string = UtilsMinecraft.translateToLocal(getUnlocalizedName(itemStack) + ".poem");
+				if (!string.isEmpty()) {
+					tooltip.add(string);
+				}
+			}
 
 			// 素材
 			tooltip.add(new TextComponentString("Contains: ")

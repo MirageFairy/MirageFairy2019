@@ -8,13 +8,21 @@ advancements.miragefairy2019.fairy_weapon.all.description=所定のアイテム�
 item.mirageFlowerSeeds.name=ミラージュの花の種
 
 item.manaRodShine.name=月長石の魔導芯棒
+item.manaRodShine.poem=真実を伝心させる
 item.manaRodFire.name=辰砂の魔導芯棒
+item.manaRodFire.poem=閃きを伝心させる
 item.manaRodWind.name=蛍石の魔導芯棒
+item.manaRodWind.poem=第六感を伝心させる
 item.manaRodGaia.name=硫黄の魔導芯棒
+item.manaRodGaia.poem=工夫を伝心させる
 item.manaRodAqua.name=燐灰石の魔導芯棒
+item.manaRodAqua.poem=優しさを伝心させる
 item.manaRodDark.name=磁鉄鉱の魔導芯棒
+item.manaRodDark.poem=カリスマを伝心させる
 item.manaRodQuartz.name=ネザークォーツの魔導芯棒
+item.manaRodQuartz.poem=魔力を導通させる芯の入った棒材
 item.stickMirageFlower.name=ミラージュの花の茎
+item.stickMirageFlower.poem=叩くとコツコツと鳴る
 
 item.mirageFairyR1.name=ミラージュ妖精
 item.mirageFairyR1.format=%s

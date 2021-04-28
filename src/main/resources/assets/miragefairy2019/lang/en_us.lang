@@ -8,13 +8,21 @@ advancements.miragefairy2019.fairy_weapon.all.description=Get a specific item
 item.mirageFlowerSeeds.name=Mirage Flower Seeds
 
 item.manaRodShine.name=Shine Mana Rod
+item.manaRodShine.poem=
 item.manaRodFire.name=Fire Mana Rod
+item.manaRodFire.poem=
 item.manaRodWind.name=Wind Mana Rod
+item.manaRodWind.poem=
 item.manaRodGaia.name=Gaia Mana Rod
+item.manaRodGaia.poem=
 item.manaRodAqua.name=Aqua Mana Rod
+item.manaRodAqua.poem=
 item.manaRodDark.name=Dark Mana Rod
+item.manaRodDark.poem=
 item.manaRodQuartz.name=Nether Quartz Mana Rod
+item.manaRodQuartz.poem=
 item.stickMirageFlower.name=Mirage Flower Stem
+item.stickMirageFlower.poem=
 
 item.mirageFairyR1.name=Fairy
 item.mirageFairyR1.format=%s
