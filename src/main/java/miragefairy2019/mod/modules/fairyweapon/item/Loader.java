@@ -59,6 +59,13 @@ public class Loader
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
 
+		// 技巧のステッキ4
+		fairyWeapon(erMod, ItemFairyWandCrafting::new, "crafting_fairy_wand_4", "fairyWandCrafting4")
+			.bind(addOreName("mirageFairy2019CraftingToolFairyWandCrafting"))
+			.bind(addComponent(instance(getComponentAbilityType(craft.get()))))
+			.bind(setFairyWandStatusOfTier(4))
+			.get();
+
 		// 潤いのステッキ
 		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "hydrating_fairy_wand", "fairyWandHydrating")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandHydrating"))
@@ -87,6 +94,14 @@ public class Loader
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
 
+		// 潤いのステッキ4
+		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "hydrating_fairy_wand_4", "fairyWandHydrating4")
+			.bind(addOreName("mirageFairy2019CraftingToolFairyWandHydrating"))
+			.bind(addOreName("container1000Water"))
+			.bind(addComponent(instance(getComponentAbilityType(water.get()))))
+			.bind(setFairyWandStatusOfTier(4))
+			.get();
+
 		// 紅蓮のステッキ
 		fairyWeapon(erMod, ItemFairyWandMelting::new, "melting_fairy_wand", "fairyWandMelting")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandMelting"))
@@ -102,6 +117,13 @@ public class Loader
 			.bind(addComponent(instance(quartz.get(), 1)))
 			.bind(addComponent(instance(getComponentAbilityType(flame.get()))))
 			.bind(setFairyWandStatusOfTier(3))
+			.get();
+
+		// 紅蓮のステッキ3
+		fairyWeapon(erMod, ItemFairyWandMelting::new, "melting_fairy_wand_3", "fairyWandMelting3")
+			.bind(addOreName("mirageFairy2019CraftingToolFairyWandMelting"))
+			.bind(addComponent(instance(getComponentAbilityType(flame.get()))))
+			.bind(setFairyWandStatusOfTier(4))
 			.get();
 
 		// 破壊のステッキ
@@ -121,6 +143,13 @@ public class Loader
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
 
+		// 破壊のステッキ3
+		fairyWeapon(erMod, ItemFairyWandBreaking::new, "breaking_fairy_wand_3", "fairyWandBreaking3")
+			.bind(addOreName("mirageFairy2019CraftingToolFairyWandBreaking"))
+			.bind(addComponent(instance(getComponentAbilityType(breaking.get()))))
+			.bind(setFairyWandStatusOfTier(4))
+			.get();
+
 		// 氷晶のステッキ
 		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "freezing_fairy_wand", "fairyWandFreezing")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandFreezing"))
@@ -138,6 +167,13 @@ public class Loader
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
 
+		// 氷晶のステッキ3
+		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "freezing_fairy_wand_3", "fairyWandFreezing3")
+			.bind(addOreName("mirageFairy2019CraftingToolFairyWandFreezing"))
+			.bind(addComponent(instance(getComponentAbilityType(freeze.get()))))
+			.bind(setFairyWandStatusOfTier(4))
+			.get();
+
 		// 珠玉のステッキ
 		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "polishing_fairy_wand", "fairyWandPolishing")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandPolishing"))
@@ -147,6 +183,13 @@ public class Loader
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
 
+		// 珠玉のステッキ2
+		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "polishing_fairy_wand_2", "fairyWandPolishing2")
+			.bind(addOreName("mirageFairy2019CraftingToolFairyWandPolishing"))
+			.bind(addComponent(instance(getComponentAbilityType(crystal.get()))))
+			.bind(setFairyWandStatusOfTier(4))
+			.get();
+
 		// 召喚のステッキ
 		fairyWeapon(erMod, ItemFairyWandSummoning::new, "summoning_fairy_wand", "fairyWandSummoning")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandSummoning"))
@@ -154,6 +197,13 @@ public class Loader
 			.bind(addComponent(instance(quartz.get(), 1)))
 			.bind(addComponent(instance(getComponentAbilityType(crystal.get()))))
 			.bind(setFairyWandStatusOfTier(3))
+			.get();
+
+		// 召喚のステッキ2
+		fairyWeapon(erMod, ItemFairyWandSummoning::new, "summoning_fairy_wand_2", "fairyWandSummoning2")
+			.bind(addOreName("mirageFairy2019CraftingToolFairyWandSummoning"))
+			.bind(addComponent(instance(getComponentAbilityType(crystal.get()))))
+			.bind(setFairyWandStatusOfTier(4))
 			.get();
 
 		//
@@ -347,6 +397,7 @@ public class Loader
 		if (tier == 1) return 32;
 		if (tier == 2) return 64;
 		if (tier == 3) return 128;
+		if (tier == 4) return 256;
 		throw new IllegalArgumentException("Illegal tier: " + tier);
 	}
 
