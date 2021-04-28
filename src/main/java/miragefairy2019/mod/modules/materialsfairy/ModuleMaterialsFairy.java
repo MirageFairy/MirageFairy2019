@@ -24,6 +24,7 @@ public class ModuleMaterialsFairy
 
 	public static BlockTwinkleStone blockTwinkleStone;
 	public static ItemBlockMulti<BlockTwinkleStone, EnumVariantTwinkleStone> itemBlockTwinkleStone;
+	public static ItemStack itemStackLeafMirageFlower;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -70,6 +71,10 @@ public class ModuleMaterialsFairy
 
 				itemVariant(c.erMod, c, 7, () -> new ItemVariantMaterial("mirage_flower_stick", "stickMirageFlower"))
 					.bind(addOreName("stickMirageFlower"));
+
+				itemVariant(c.erMod, c, 8, () -> new ItemVariantMaterial("mirage_flower_leaf", "leafMirageFlower"))
+					.bind(addOreName("leafMirageFlower"))
+					.bind(onCreateItemStack(v -> itemStackLeafMirageFlower = v.createItemStack()));
 
 				erMod.registerItem.register(b -> {
 					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
