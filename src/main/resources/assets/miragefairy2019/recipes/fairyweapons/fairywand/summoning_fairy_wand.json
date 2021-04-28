@@ -3,25 +3,21 @@
 	"group": "summoning_fairy_wand",
 	"pattern": [
 		" cS",
-		" Rp",
+		" R ",
 		"R  "
 	],
 	"key": {
+		"c": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
 		"R": {
 			"type": "forge:ore_dict",
 			"ore": "mirageFairy2019ManaRodQuartz"
 		},
 		"S": {
 			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereCrystal"
-		},
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"p": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+			"ore": "mirageFairy2019SphereSubmission"
 		}
 	},
 	"result": {

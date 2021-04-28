@@ -195,14 +195,14 @@ public class Loader
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandSummoning"))
 			.bind(addComponent(instance(miragium.get(), 1)))
 			.bind(addComponent(instance(quartz.get(), 1)))
-			.bind(addComponent(instance(getComponentAbilityType(crystal.get()))))
+			.bind(addComponent(instance(getComponentAbilityType(submission.get()))))
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
 
 		// 召喚のステッキ2
 		fairyWeapon(erMod, ItemFairyWandSummoning::new, "summoning_fairy_wand_2", "fairyWandSummoning2")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandSummoning"))
-			.bind(addComponent(instance(getComponentAbilityType(crystal.get()))))
+			.bind(addComponent(instance(getComponentAbilityType(submission.get()))))
 			.bind(setFairyWandStatusOfTier(4))
 			.get();
 
