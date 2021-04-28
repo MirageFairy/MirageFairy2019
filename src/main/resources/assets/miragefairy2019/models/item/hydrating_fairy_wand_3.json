@@ -1,6 +1,7 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "miragefairy2019:items/hydrating_fairy_wand_3"
+		"layer0": "miragefairy2019:items/fairy_wand_rod_3",
+		"layer1": "miragefairy2019:items/hydrating_fairy_wand"
 	}
 }

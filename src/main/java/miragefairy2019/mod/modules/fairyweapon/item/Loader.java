@@ -54,7 +54,7 @@ public class Loader
 		fairyWeapon(erMod, ItemFairyWandCrafting::new, "crafting_fairy_wand_3", "fairyWandCrafting3")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandCrafting"))
 			.bind(addComponent(instance(miragium.get(), 1)))
-			.bind(addComponent(instance(magnetite.get(), 1)))
+			.bind(addComponent(instance(quartz.get(), 1)))
 			.bind(addComponent(instance(getComponentAbilityType(craft.get()))))
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
@@ -82,7 +82,7 @@ public class Loader
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandHydrating"))
 			.bind(addOreName("container1000Water"))
 			.bind(addComponent(instance(miragium.get(), 1)))
-			.bind(addComponent(instance(moonstone.get(), 1)))
+			.bind(addComponent(instance(quartz.get(), 1)))
 			.bind(addComponent(instance(getComponentAbilityType(water.get()))))
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
@@ -99,7 +99,7 @@ public class Loader
 		fairyWeapon(erMod, ItemFairyWandMelting::new, "melting_fairy_wand_2", "fairyWandMelting2")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandMelting"))
 			.bind(addComponent(instance(miragium.get(), 1)))
-			.bind(addComponent(instance(fluorite.get(), 1)))
+			.bind(addComponent(instance(quartz.get(), 1)))
 			.bind(addComponent(instance(getComponentAbilityType(flame.get()))))
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
@@ -116,7 +116,7 @@ public class Loader
 		fairyWeapon(erMod, ItemFairyWandBreaking::new, "breaking_fairy_wand_2", "fairyWandBreaking2")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandBreaking"))
 			.bind(addComponent(instance(miragium.get(), 1)))
-			.bind(addComponent(instance(sulfur.get(), 1)))
+			.bind(addComponent(instance(quartz.get(), 1)))
 			.bind(addComponent(instance(getComponentAbilityType(breaking.get()))))
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
@@ -133,7 +133,7 @@ public class Loader
 		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "freezing_fairy_wand_2", "fairyWandFreezing2")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandFreezing"))
 			.bind(addComponent(instance(miragium.get(), 1)))
-			.bind(addComponent(instance(fluorite.get(), 1)))
+			.bind(addComponent(instance(quartz.get(), 1)))
 			.bind(addComponent(instance(getComponentAbilityType(freeze.get()))))
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
@@ -142,7 +142,7 @@ public class Loader
 		fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "polishing_fairy_wand", "fairyWandPolishing")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandPolishing"))
 			.bind(addComponent(instance(miragium.get(), 1)))
-			.bind(addComponent(instance(moonstone.get(), 1)))
+			.bind(addComponent(instance(quartz.get(), 1)))
 			.bind(addComponent(instance(getComponentAbilityType(crystal.get()))))
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
@@ -151,7 +151,7 @@ public class Loader
 		fairyWeapon(erMod, ItemFairyWandSummoning::new, "summoning_fairy_wand", "fairyWandSummoning")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandSummoning"))
 			.bind(addComponent(instance(miragium.get(), 1)))
-			.bind(addComponent(instance(moonstone.get(), 1)))
+			.bind(addComponent(instance(quartz.get(), 1)))
 			.bind(addComponent(instance(getComponentAbilityType(crystal.get()))))
 			.bind(setFairyWandStatusOfTier(3))
 			.get();
