@@ -122,11 +122,11 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		int stage = state.getValue(AGE);
-		if (stage == 0) return AABB_STAGE0;
-		if (stage == 1) return AABB_STAGE1;
-		if (stage == 2) return AABB_STAGE2;
-		if (stage == 3) return AABB_STAGE3;
+		int age = getAge(state);
+		if (age == 0) return AABB_STAGE0;
+		if (age == 1) return AABB_STAGE1;
+		if (age == 2) return AABB_STAGE2;
+		if (age == 3) return AABB_STAGE3;
 		return AABB_STAGE3;
 	}
 
@@ -138,9 +138,14 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		return state.isFullBlock() || state.getBlock() == Blocks.FARMLAND;
 	}
 
+	public int getAge(IBlockState state)
+	{
+		return state.getValue(AGE);
+	}
+
 	public boolean isMaxAge(IBlockState state)
 	{
-		return state.getValue(AGE) == 3;
+		return getAge(state) == 3;
 	}
 
 	protected void grow(World worldIn, BlockPos pos, IBlockState state, Random rand, double rate)
@@ -148,7 +153,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		int t = UtilsMath.randomInt(rand, rate);
 		for (int i = 0; i < t; i++) {
 			if (!isMaxAge(state)) {
-				worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, state.getValue(AGE) + 1), 2);
+				worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, getAge(state) + 1), 2);
 			}
 		}
 	}
@@ -288,24 +293,24 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		drops.add(new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds));
 
 		// 追加の種
-		{
-			int count = UtilsMath.randomInt(random, isMaxAge(state) ? fortune * 0.01 : 0);
+		if (getAge(state) >= 3) {
+			int count = UtilsMath.randomInt(random, fortune * 0.01);
 			for (int i = 0; i < count; i++) {
 				drops.add(new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds));
 			}
 		}
 
 		// クリスタル
-		{
-			int count = UtilsMath.randomInt(random, isMaxAge(state) ? 1 + fortune * 0.5 : 0);
+		if (getAge(state) >= 3) {
+			int count = UtilsMath.randomInt(random, 1 + fortune * 0.5);
 			for (int i = 0; i < count; i++) {
 				drops.add(ModuleFairyCrystal.variantFairyCrystal.createItemStack());
 			}
 		}
 
 		// ミラジウム
-		{
-			int count = UtilsMath.randomInt(random, isMaxAge(state) ? 1 + fortune * 0.5 : 0);
+		if (getAge(state) >= 3) {
+			int count = UtilsMath.randomInt(random, 1 + fortune * 0.5);
 			for (int i = 0; i < count; i++) {
 				drops.add(UtilsMinecraft.getItemStack("dustTinyMiragium").copy());
 			}
