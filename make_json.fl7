@@ -513,10 +513,10 @@ Writer : {
 		});
 
 		rs : [
-			"stickWood",
+			"stickMirageFlower",
 			"rodMiragium",
 			"mirageFairy2019ManaRodQuartz",
-			"stickMirageFlower",
+			"stickWood",
 		];
 
 		fairyWand("crafting_fairy_wand"   ; rs[0]; "Craft");
@@ -557,7 +557,7 @@ Writer : {
 			};
 			R = {
 				type = "forge:ore_dict";
-				ore = "stickWood";
+				ore = "stickMirageFlower";
 			};
 			S = {
 				type = "forge:ore_dict";
