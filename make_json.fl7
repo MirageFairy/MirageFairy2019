@@ -481,9 +481,69 @@ Writer : {
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/fairyweapons/fairywand");
 
-	fairyWand : registerName, rod, erg -> writer::write("$registerName.json"; {
+	# 普通のワンド
+	(
+		fairyWand : registerName, rod, erg -> writer::write("$registerName.json"; {
+			type = "forge:ore_shaped";
+			group = registerName;
+			pattern = [
+				" cS",
+				" R ",
+				"R  ",
+			];
+			key = {
+				c = {
+					type = "miragefairy2019:ore_dict_complex";
+					ore = "mirageFairy2019CraftingToolFairyWandCrafting";
+				};
+				R = {
+					type = "forge:ore_dict";
+					ore = rod;
+				};
+				S = {
+					type = "forge:ore_dict";
+					ore = "mirageFairy2019Sphere$erg";
+				};
+			};
+			result = {
+				item = "miragefairy2019:$registerName";
+			};
+		});
+
+		rs : [
+			"stickWood",
+			"rodMiragium",
+			"mirageFairy2019ManaRodQuartz",
+			"stickMirageFlower",
+		];
+
+		fairyWand("crafting_fairy_wand"   ; rs[0]; "Craft");
+		fairyWand("crafting_fairy_wand_2" ; rs[1]; "Craft");
+		fairyWand("crafting_fairy_wand_3" ; rs[2]; "Craft");
+		fairyWand("crafting_fairy_wand_4" ; rs[3]; "Craft");
+		fairyWand("hydrating_fairy_wand"  ; rs[0]; "Water");
+		fairyWand("hydrating_fairy_wand_2"; rs[1]; "Water");
+		fairyWand("hydrating_fairy_wand_3"; rs[2]; "Water");
+		fairyWand("hydrating_fairy_wand_4"; rs[3]; "Water");
+		fairyWand("melting_fairy_wand"    ; rs[1]; "Flame");
+		fairyWand("melting_fairy_wand_2"  ; rs[2]; "Flame");
+		fairyWand("melting_fairy_wand_3"  ; rs[3]; "Flame");
+		fairyWand("breaking_fairy_wand"   ; rs[1]; "Breaking");
+		fairyWand("breaking_fairy_wand_2" ; rs[2]; "Breaking");
+		fairyWand("breaking_fairy_wand_3" ; rs[3]; "Breaking");
+		fairyWand("freezing_fairy_wand"   ; rs[1]; "Freeze");
+		fairyWand("freezing_fairy_wand_2" ; rs[2]; "Freeze");
+		fairyWand("freezing_fairy_wand_3" ; rs[3]; "Freeze");
+		fairyWand("polishing_fairy_wand"  ; rs[2]; "Crystal");
+		fairyWand("polishing_fairy_wand_2"; rs[3]; "Crystal");
+		fairyWand("summoning_fairy_wand"  ; rs[2]; "Submission");
+		fairyWand("summoning_fairy_wand_2"; rs[3]; "Submission");
+	);
+
+	# 糸から技巧杖
+	writer::write("crafting_fairy_wand_from_string.json"; {
 		type = "forge:ore_shaped";
-		group = registerName;
+		group = "crafting_fairy_wand";
 		pattern = [
 			" cS",
 			" R ",
@@ -491,51 +551,21 @@ Writer : {
 		];
 		key = {
 			c = {
-				type = "miragefairy2019:ore_dict_complex";
-				ore = "mirageFairy2019CraftingToolFairyWandCrafting";
+				item = "minecraft:string";
 			};
 			R = {
 				type = "forge:ore_dict";
-				ore = rod;
+				ore = "stickWood";
 			};
 			S = {
 				type = "forge:ore_dict";
-				ore = "mirageFairy2019Sphere$erg";
+				ore = "mirageFairy2019SphereCraft";
 			};
 		};
 		result = {
-			item = "miragefairy2019:$registerName";
+			item = "miragefairy2019:crafting_fairy_wand";
 		};
 	});
-
-	rs : [
-		"stickWood",
-		"rodMiragium",
-		"mirageFairy2019ManaRodQuartz",
-		"stickMirageFlower",
-	];
-
-	fairyWand("crafting_fairy_wand"   ; rs[0]; "Craft");
-	fairyWand("crafting_fairy_wand_2" ; rs[1]; "Craft");
-	fairyWand("crafting_fairy_wand_3" ; rs[2]; "Craft");
-	fairyWand("crafting_fairy_wand_4" ; rs[3]; "Craft");
-	fairyWand("hydrating_fairy_wand"  ; rs[0]; "Water");
-	fairyWand("hydrating_fairy_wand_2"; rs[1]; "Water");
-	fairyWand("hydrating_fairy_wand_3"; rs[2]; "Water");
-	fairyWand("hydrating_fairy_wand_4"; rs[3]; "Water");
-	fairyWand("melting_fairy_wand"    ; rs[1]; "Flame");
-	fairyWand("melting_fairy_wand_2"  ; rs[2]; "Flame");
-	fairyWand("melting_fairy_wand_3"  ; rs[3]; "Flame");
-	fairyWand("breaking_fairy_wand"   ; rs[1]; "Breaking");
-	fairyWand("breaking_fairy_wand_2" ; rs[2]; "Breaking");
-	fairyWand("breaking_fairy_wand_3" ; rs[3]; "Breaking");
-	fairyWand("freezing_fairy_wand"   ; rs[1]; "Freeze");
-	fairyWand("freezing_fairy_wand_2" ; rs[2]; "Freeze");
-	fairyWand("freezing_fairy_wand_3" ; rs[3]; "Freeze");
-	fairyWand("polishing_fairy_wand"  ; rs[2]; "Crystal");
-	fairyWand("polishing_fairy_wand_2"; rs[3]; "Crystal");
-	fairyWand("summoning_fairy_wand"  ; rs[2]; "Submission");
-	fairyWand("summoning_fairy_wand_2"; rs[3]; "Submission");
 
 );
 
