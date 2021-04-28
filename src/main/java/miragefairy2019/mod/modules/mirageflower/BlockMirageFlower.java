@@ -12,6 +12,7 @@ import miragefairy2019.mod.modules.ore.ModuleOre;
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.IGrowable;
@@ -23,6 +24,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -288,16 +291,25 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
+		getDrops(drops, world, pos, state, fortune, true);
+	}
+
+	private void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune, boolean isBreaking)
+	{
 		Random random = world instanceof World ? ((World) world).rand : new Random();
 
 		// 種1個は確定でドロップ
-		drops.add(new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds));
+		if (isBreaking) {
+			drops.add(new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds));
+		}
 
 		// サイズが2以上なら確定で茎をドロップ
-		if (getAge(state) >= 2) {
-			int count = UtilsMath.randomInt(random, 1 + fortune * 0.2);
-			for (int i = 0; i < count; i++) {
-				drops.add(ModuleMaterialsFairy.itemStackLeafMirageFlower.copy());
+		if (isBreaking) {
+			if (getAge(state) >= 2) {
+				int count = UtilsMath.randomInt(random, 1 + fortune * 0.2);
+				for (int i = 0; i < count; i++) {
+					drops.add(ModuleMaterialsFairy.itemStackLeafMirageFlower.copy());
+				}
 			}
 		}
 
@@ -333,6 +345,24 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	@Override
 	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
+		return false;
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		if (getAge(state) >= 3) {
+
+			NonNullList<ItemStack> drops = NonNullList.create();
+			getDrops(drops, worldIn, pos, state, 0, false);
+			for (ItemStack drop : drops) {
+				Block.spawnAsEntity(worldIn, pos, drop);
+			}
+
+			worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, 0), 2);
+
+			return true;
+		}
 		return false;
 	}
 
