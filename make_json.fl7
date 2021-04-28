@@ -312,6 +312,7 @@ Writer : {
 	item("fairy_crystal");
 	item("christmas_fairy_crystal");
 
+	# 魔導素材
 	handheld("aqua_mana_rod");
 	handheld("wind_mana_rod");
 	handheld("gaia_mana_rod");
