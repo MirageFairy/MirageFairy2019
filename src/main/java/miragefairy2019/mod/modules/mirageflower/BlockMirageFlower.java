@@ -7,6 +7,7 @@ import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
+import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1;
 import mirrg.boron.util.UtilsMath;
@@ -291,6 +292,14 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 		// 種1個は確定でドロップ
 		drops.add(new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds));
+
+		// サイズが2以上なら確定で茎をドロップ
+		if (getAge(state) >= 2) {
+			int count = UtilsMath.randomInt(random, 1 + fortune * 0.2);
+			for (int i = 0; i < count; i++) {
+				drops.add(ModuleMaterialsFairy.itemStackLeafMirageFlower.copy());
+			}
+		}
 
 		// 追加の種
 		if (getAge(state) >= 3) {
