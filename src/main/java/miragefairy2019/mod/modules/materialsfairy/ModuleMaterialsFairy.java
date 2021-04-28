@@ -68,6 +68,9 @@ public class ModuleMaterialsFairy
 					.bind(addComponent(instance(quartz.get(), 0.5)))
 					.bind(addOreName("mirageFairy2019ManaRodQuartz"));
 
+				itemVariant(c.erMod, c, 7, () -> new ItemVariantMaterial("mirage_flower_stick", "stickMirageFlower"))
+					.bind(addOreName("stickMirageFlower"));
+
 				erMod.registerItem.register(b -> {
 					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
 				});

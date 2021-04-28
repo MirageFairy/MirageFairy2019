@@ -14,6 +14,7 @@ item.manaRodGaia.name=Gaia Mana Rod
 item.manaRodAqua.name=Aqua Mana Rod
 item.manaRodDark.name=Dark Mana Rod
 item.manaRodQuartz.name=Nether Quartz Mana Rod
+item.stickMirageFlower.name=Mirage Flower Stem
 
 item.mirageFairyR1.name=Fairy
 item.mirageFairyR1.format=%s
