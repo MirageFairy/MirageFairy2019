@@ -95,7 +95,7 @@ public class Loader
 			.bind(setFairyWandStatusOfTier(2))
 			.get();
 
-		// 紅蓮のステッキ
+		// 紅蓮のステッキ2
 		fairyWeapon(erMod, ItemFairyWandMelting::new, "melting_fairy_wand_2", "fairyWandMelting2")
 			.bind(addOreName("mirageFairy2019CraftingToolFairyWandMelting"))
 			.bind(addComponent(instance(miragium.get(), 1)))
