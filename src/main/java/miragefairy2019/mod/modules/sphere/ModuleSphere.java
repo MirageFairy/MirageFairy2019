@@ -122,6 +122,7 @@ public class ModuleSphere
 							new OreIngredientComplex("container1000Water"),
 							new OreIngredient("dustMiragium"),
 							new OreIngredient("gemFluorite"),
+							new OreIngredientComplex("mirageFairy2019CraftingToolFairyWandCrafting"),
 							new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
 							ingredient);
 
@@ -147,6 +148,7 @@ public class ModuleSphere
 							variant.y.createItemStack(),
 							new OreIngredientComplex("container1000Water"),
 							new OreIngredient("dustMiragium"),
+							new OreIngredientComplex("mirageFairy2019CraftingToolFairyWandCrafting"),
 							new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
 							ingredient);
 
