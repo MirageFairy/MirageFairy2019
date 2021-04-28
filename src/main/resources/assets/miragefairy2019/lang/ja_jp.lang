@@ -23,6 +23,8 @@ item.manaRodQuartz.name=ネザークォーツの魔導芯棒
 item.manaRodQuartz.poem=魔力を導通させる芯の入った棒材
 item.stickMirageFlower.name=ミラージュの花の茎
 item.stickMirageFlower.poem=叩くとコツコツと鳴る
+item.leafMirageFlower.name=ミラージュの花の葉
+item.leafMirageFlower.poem=触れると虹色の粉が付く
 
 item.mirageFairyR1.name=ミラージュ妖精
 item.mirageFairyR1.format=%s

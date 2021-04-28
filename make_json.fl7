@@ -320,6 +320,7 @@ Writer : {
 	handheld("dark_mana_rod");
 	handheld("quartz_mana_rod");
 	handheld("mirage_flower_stick");
+	handheld("mirage_flower_leaf");
 
 	block("apatite_block");
 	block("fluorite_block");

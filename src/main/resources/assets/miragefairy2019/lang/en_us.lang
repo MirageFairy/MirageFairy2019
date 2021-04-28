@@ -23,6 +23,8 @@ item.manaRodQuartz.name=Nether Quartz Mana Rod
 item.manaRodQuartz.poem=
 item.stickMirageFlower.name=Mirage Flower Stem
 item.stickMirageFlower.poem=
+item.leafMirageFlower.name=Mirage Flower Leaf
+item.leafMirageFlower.poem=
 
 item.mirageFairyR1.name=Fairy
 item.mirageFairyR1.format=%s
