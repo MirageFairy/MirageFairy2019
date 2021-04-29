@@ -40,6 +40,7 @@ public class ModuleMaterialsFairy
 	public static ItemStack itemStackManaRodQuartz;
 	public static ItemStack itemStackStickMirageFlower;
 	public static ItemStack itemStackLeafMirageFlower;
+	public static ItemStack itemStackStickMirageFairyWood;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -109,6 +110,10 @@ public class ModuleMaterialsFairy
 				itemVariant(c.erMod, c, 8, () -> new ItemVariantMaterial("mirage_flower_leaf", "leafMirageFlower"))
 					.bind(addOreName("leafMirageFlower"))
 					.bind(onCreateItemStack(v -> itemStackLeafMirageFlower = v.createItemStack()));
+
+				itemVariant(c.erMod, c, 9, () -> new ItemVariantMaterial("mirage_fairy_wood_stick", "stickMirageFairyWood"))
+					.bind(addOreName("stickMirageFairyWood"))
+					.bind(onCreateItemStack(v -> itemStackStickMirageFairyWood = v.createItemStack()));
 
 				erMod.registerItem.register(b -> {
 					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();

@@ -25,6 +25,8 @@ item.stickMirageFlower.name=ミラージュの花の茎
 item.stickMirageFlower.poem=叩くとコツコツと鳴る
 item.leafMirageFlower.name=ミラージュの花の葉
 item.leafMirageFlower.poem=触れると虹色の粉が付く
+item.stickMirageFairyWood.name=妖精の木の棒
+item.stickMirageFairyWood.poem=吸い込まれるようだ
 
 item.mirageFairyR1.name=ミラージュ妖精
 item.mirageFairyR1.format=%s
