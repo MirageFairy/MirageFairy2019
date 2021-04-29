@@ -517,7 +517,7 @@ Writer : {
 			"stickMirageFlower",
 			"rodMiragium",
 			"mirageFairy2019ManaRodQuartz",
-			"stickWood",
+			"stickMirageFairyWood",
 		];
 
 		fairyWand("crafting_fairy_wand"   ; rs[0]; "Craft");

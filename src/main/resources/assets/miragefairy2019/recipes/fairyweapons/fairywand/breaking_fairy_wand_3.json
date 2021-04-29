@@ -13,7 +13,7 @@
 		},
 		"R": {
 			"type": "forge:ore_dict",
-			"ore": "stickWood"
+			"ore": "stickMirageFairyWood"
 		},
 		"S": {
 			"type": "forge:ore_dict",
