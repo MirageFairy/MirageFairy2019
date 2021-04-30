@@ -21,8 +21,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -353,8 +355,12 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	{
 		if (getAge(state) >= 3) {
 
+			ItemStack itemStack = playerIn.getHeldItemMainhand();
+			itemStack = itemStack.isEmpty() ? ItemStack.EMPTY : itemStack.copy();
+			int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemStack);
+
 			NonNullList<ItemStack> drops = NonNullList.create();
-			getDrops(drops, worldIn, pos, state, 0, false);
+			getDrops(drops, worldIn, pos, state, fortune, false);
 			for (ItemStack drop : drops) {
 				Block.spawnAsEntity(worldIn, pos, drop);
 			}
