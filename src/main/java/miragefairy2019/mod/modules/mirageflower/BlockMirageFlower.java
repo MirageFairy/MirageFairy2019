@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.mirageflower;
 
+import java.util.Optional;
 import java.util.Random;
 
 import miragefairy2019.mod.api.fairy.AbilityTypes;
@@ -353,19 +354,25 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (getAge(state) >= 3) {
+		ItemStack itemStack = playerIn.getHeldItemMainhand();
+		itemStack = itemStack.isEmpty() ? ItemStack.EMPTY : itemStack.copy();
+		int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemStack);
 
-			ItemStack itemStack = playerIn.getHeldItemMainhand();
-			itemStack = itemStack.isEmpty() ? ItemStack.EMPTY : itemStack.copy();
-			int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemStack);
+		return pick(worldIn, pos, state, Optional.of(playerIn), fortune);
+	}
+
+	public boolean pick(World worldIn, BlockPos pos, IBlockState state, Optional<EntityPlayer> oPlayerIn, int fortune)
+	{
+		if (getAge(state) >= 3) {
 
 			NonNullList<ItemStack> drops = NonNullList.create();
 			getDrops(drops, worldIn, pos, state, fortune, false);
+
 			for (ItemStack drop : drops) {
 				Block.spawnAsEntity(worldIn, pos, drop);
 			}
 
-			worldIn.playEvent(playerIn, 2001, pos, Block.getStateId(state));
+			worldIn.playEvent(oPlayerIn.orElse(null), 2001, pos, Block.getStateId(state));
 
 			worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, 1), 2);
 
