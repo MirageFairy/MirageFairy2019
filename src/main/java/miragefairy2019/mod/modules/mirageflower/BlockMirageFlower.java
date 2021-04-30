@@ -365,6 +365,8 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 				Block.spawnAsEntity(worldIn, pos, drop);
 			}
 
+			worldIn.playEvent(playerIn, 2001, pos, Block.getStateId(state));
+
 			worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, 1), 2);
 
 			return true;
