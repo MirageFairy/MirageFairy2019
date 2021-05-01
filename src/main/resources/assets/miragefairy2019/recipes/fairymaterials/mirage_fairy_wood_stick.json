@@ -1,0 +1,18 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "mirage_fairy_wood_stick",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "container250MirageFlowerOil"
+		}
+	],
+	"result": {
+		"item": "miragefairy2019:fairy_materials",
+		"data": 9
+	}
+}
