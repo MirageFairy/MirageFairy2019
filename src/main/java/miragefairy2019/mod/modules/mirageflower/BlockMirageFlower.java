@@ -342,6 +342,24 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 	}
 
+	@Override
+	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune)
+	{
+		return getExpDrop(state, world, pos, fortune, true);
+	}
+
+	private int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune, boolean isBreaking)
+	{
+		if (isBreaking) {
+			if (getAge(state) >= 3) return 2;
+			if (getAge(state) >= 2) return 1;
+			return 0;
+		} else {
+			if (getAge(state) >= 3) return 1;
+			return 0;
+		}
+	}
+
 	/**
 	 * シルクタッチ無効。
 	 */
@@ -371,6 +389,8 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 			for (ItemStack drop : drops) {
 				Block.spawnAsEntity(worldIn, pos, drop);
 			}
+
+			state.getBlock().dropXpOnBlockBreak(worldIn, pos, getExpDrop(state, worldIn, pos, fortune, false));
 
 			worldIn.playEvent(oPlayerIn.orElse(null), 2001, pos, Block.getStateId(state));
 
