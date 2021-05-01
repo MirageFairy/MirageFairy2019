@@ -41,6 +41,9 @@ public class ModuleMaterialsFairy
 	public static ItemStack itemStackStickMirageFlower;
 	public static ItemStack itemStackLeafMirageFlower;
 	public static ItemStack itemStackStickMirageFairyWood;
+	public static ItemStack itemStackBottleMiragiumWater;
+	public static ItemStack itemStackBottleMirageFlowerExtract;
+	public static ItemStack itemStackBottleMirageFlowerOil;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -114,6 +117,21 @@ public class ModuleMaterialsFairy
 				itemVariant(c.erMod, c, 9, () -> new ItemVariantMaterial("mirage_fairy_wood_stick", "stickMirageFairyWood"))
 					.bind(addOreName("stickMirageFairyWood"))
 					.bind(onCreateItemStack(v -> itemStackStickMirageFairyWood = v.createItemStack()));
+
+				itemVariant(c.erMod, c, 10, () -> new ItemVariantMaterial("miragium_water_bottle", "bottleMiragiumWater"))
+					.bind(addOreName("bottleMiragiumWater"))
+					.bind(addOreName("container250MiragiumWater"))
+					.bind(onCreateItemStack(v -> itemStackBottleMiragiumWater = v.createItemStack()));
+
+				itemVariant(c.erMod, c, 11, () -> new ItemVariantMaterial("mirage_flower_extract_bottle", "bottleMirageFlowerExtract"))
+					.bind(addOreName("bottleMirageFlowerExtract"))
+					.bind(addOreName("container250MirageFlowerExtract"))
+					.bind(onCreateItemStack(v -> itemStackBottleMirageFlowerExtract = v.createItemStack()));
+
+				itemVariant(c.erMod, c, 12, () -> new ItemVariantMaterial("mirage_flower_oil_bottle", "bottleMirageFlowerOil"))
+					.bind(addOreName("bottleMirageFlowerOil"))
+					.bind(addOreName("container250MirageFlowerOil"))
+					.bind(onCreateItemStack(v -> itemStackBottleMirageFlowerOil = v.createItemStack()));
 
 				erMod.registerItem.register(b -> {
 					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();

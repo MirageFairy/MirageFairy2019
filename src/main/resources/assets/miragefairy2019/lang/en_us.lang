@@ -27,6 +27,12 @@ item.leafMirageFlower.name=Mirage Flower Leaf
 item.leafMirageFlower.poem=
 item.stickMirageFairyWood.name=Fairy Wood Stick
 item.stickMirageFairyWood.poem=
+item.bottleMiragiumWater.name=Miragium Water Bottle
+item.bottleMiragiumWater.poem=
+item.bottleMirageFlowerExtract.name=Mirage Extract Bottle
+item.bottleMirageFlowerExtract.poem=
+item.bottleMirageFlowerOil.name=Mirage Oil Bottle
+item.bottleMirageFlowerOil.poem=
 
 item.mirageFairyR1.name=Fairy
 item.mirageFairyR1.format=%s

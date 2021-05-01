@@ -27,6 +27,12 @@ item.leafMirageFlower.name=ミラージュの花の葉
 item.leafMirageFlower.poem=触れると虹色の粉が付く
 item.stickMirageFairyWood.name=妖精の木の棒
 item.stickMirageFairyWood.poem=吸い込まれるようだ
+item.bottleMiragiumWater.name=ミラジウムウォーター入り瓶
+item.bottleMiragiumWater.poem=妖精の血と同じ成分
+item.bottleMirageFlowerExtract.name=ミラージュエキス入り瓶
+item.bottleMirageFlowerExtract.poem=飲めそうにはない
+item.bottleMirageFlowerOil.name=ミラージュオイル入り瓶
+item.bottleMirageFlowerOil.poem=皮膚に付くとなかなか落ちない
 
 item.mirageFairyR1.name=ミラージュ妖精
 item.mirageFairyR1.format=%s

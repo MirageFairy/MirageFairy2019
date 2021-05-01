@@ -323,6 +323,9 @@ Writer : {
 	handheld("mirage_flower_stick");
 	handheld("mirage_flower_leaf");
 	handheld("mirage_fairy_wood_stick");
+	handheld("miragium_water_bottle");
+	handheld("mirage_flower_extract_bottle");
+	handheld("mirage_flower_oil_bottle");
 
 	block("apatite_block");
 	block("fluorite_block");
