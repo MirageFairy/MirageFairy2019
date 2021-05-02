@@ -4,7 +4,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.lib.multi.ItemMulti;
 import miragefairy2019.mod.lib.multi.ItemVariant;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
@@ -97,12 +96,6 @@ public final class Configurator<T> implements Supplier<T>
 	{
 		return c -> Monad.of(c)
 			.bind(onCreateItemStack(v -> OreDictionary.registerOre(oreName, v.createItemStack())));
-	}
-
-	public static <V extends ItemVariantMaterial> Function<Configurator<V>, Monad<Configurator<V>>> addComponent(IComponentInstance componentInstance)
-	{
-		return c -> Monad.of(c)
-			.bind(onRegisterItem(v -> v.addComponent(componentInstance)));
 	}
 
 }
