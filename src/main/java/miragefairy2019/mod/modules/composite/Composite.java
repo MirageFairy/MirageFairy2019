@@ -53,6 +53,12 @@ public final class Composite implements IComposite
 	}
 
 	@Override
+	public boolean isEmpty()
+	{
+		return getComponents().isEmpty();
+	}
+
+	@Override
 	public long getComponentAmount(IComponent component)
 	{
 		for (IComponentInstance entry : components) {

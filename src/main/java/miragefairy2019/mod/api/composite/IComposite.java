@@ -11,6 +11,8 @@ public interface IComposite
 	 */
 	public ISuppliterator<IComponentInstance> getComponents();
 
+	public boolean isEmpty();
+
 	public long getComponentAmount(IComponent component);
 
 	/**
