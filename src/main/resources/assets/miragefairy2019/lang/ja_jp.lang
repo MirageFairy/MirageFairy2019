@@ -5,7 +5,7 @@ advancements.miragefairy2019.fairy_weapon.root.title=妖精武器
 advancements.miragefairy2019.fairy_weapon.root.description=妖精武器
 advancements.miragefairy2019.fairy_weapon.all.description=所定のアイテムを入手する
 
-item.mirageFlowerSeeds.name=ミラージュの花の種
+item.mirageFlowerSeeds.name=ミラージュフラワーの種
 
 item.manaRodShine.name=月長石の魔導芯棒
 item.manaRodShine.poem=真実の心を伝える
@@ -21,10 +21,10 @@ item.manaRodDark.name=磁鉄鉱の魔導芯棒
 item.manaRodDark.poem=カリスマの心を伝える
 item.manaRodQuartz.name=ネザークォーツの魔導芯棒
 item.manaRodQuartz.poem=魔力を導通させる芯の入った棒材
-item.stickMirageFlower.name=ミラージュの花の茎
+item.stickMirageFlower.name=ミラージュフラワーの茎
 item.stickMirageFlower.poem=叩くとコツコツと鳴る
-item.leafMirageFlower.name=ミラージュの花の葉
 item.leafMirageFlower.poem=虹色の粉が舞う
+item.leafMirageFlower.name=ミラージュフラワーの葉
 item.stickMirageFairyWood.name=妖精の木の棒
 item.stickMirageFairyWood.poem=吸い込まれるようだ
 item.bottleMiragiumWater.name=ミラジウムウォーター入り瓶
