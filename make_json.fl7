@@ -154,33 +154,28 @@ Writer : {
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
 
-	block: name -> (
-		writer::write("\(name).json"; {
-			parent: "block/cube_all";
-			textures: {
-				all: "miragefairy2019:blocks/\(name)";
-			};
-		});
-	);
-	block("apatite_block");
-	block("charcoal_block");
-	block("cinnabar_block");
-	block("fluorite_block");
-	block("magnetite_block");
-	block("moonstone_block");
-	block("pyrope_block");
-	block("smithsonite_block");
-	block("sulfur_block");
-
-	${white orange magenta light_blue yellow lime pink gray silver cyan purple blue brown green red black} | (
-		writer::write("$(_)_twinkle_stone.json"; {
-			parent = "block/cube_all";
-			textures = {
-				all = "miragefairy2019:blocks/$(_)_twinkle_stone";
-			};
-		});
+	# 汎用素材ブロック
+	(
+		block: name -> (
+			writer::write("\(name).json"; {
+				parent: "block/cube_all";
+				textures: {
+					all: "miragefairy2019:blocks/\(name)";
+				};
+			});
+		);
+		block("apatite_block");
+		block("fluorite_block");
+		block("sulfur_block");
+		block("cinnabar_block");
+		block("moonstone_block");
+		block("magnetite_block");
+		block("pyrope_block");
+		block("smithsonite_block");
+		block("charcoal_block");
 	);
 
+	# 鉱石ブロック
 	(
 		ore: name, base, overlay -> (
 			writer::write("$name.json"; {
@@ -211,35 +206,53 @@ Writer : {
 		ore("tourmaline_ore"; "blocks/stone"; "blocks/tourmaline_ore");
 	);
 
-	plant: name -> (
-		writer::write("\(name).json"; {
-			parent: "block/cross";
-			textures: {
-				particle: "miragefairy2019:blocks/\(name)";
-				cross: "miragefairy2019:blocks/\(name)";
-			};
-		});
+	# ミラージュの花
+	(
+		plant: name -> (
+			writer::write("\(name).json"; {
+				parent: "block/cross";
+				textures: {
+					particle: "miragefairy2019:blocks/\(name)";
+					cross: "miragefairy2019:blocks/\(name)";
+				};
+			});
+		);
+		plant("mirage_flower_age0");
+		plant("mirage_flower_age1");
+		plant("mirage_flower_age2");
+		plant("mirage_flower_age3");
 	);
-	plant("mirage_flower_age0");
-	plant("mirage_flower_age1");
-	plant("mirage_flower_age2");
-	plant("mirage_flower_age3");
 
-	fairy_log: name, variant -> (
-		writer::write("\(name).json"; {
-			parent: "miragefairy2019:block/fairy_log";
-			textures: {
-				end: "blocks/log_\(variant)_top";
-				side: "blocks/log_\(variant)";
-			};
-		});
+	# 妖精の樹洞
+	(
+		fairy_log: name, variant -> (
+			writer::write("\(name).json"; {
+				parent: "miragefairy2019:block/fairy_log";
+				textures: {
+					end: "blocks/log_\(variant)_top";
+					side: "blocks/log_\(variant)";
+				};
+			});
+		);
+		fairy_log("acacia_fairy_log"; "acacia");
+		fairy_log("birch_fairy_log"; "birch");
+		fairy_log("dark_oak_fairy_log"; "big_oak");
+		fairy_log("jungle_fairy_log"; "jungle");
+		fairy_log("oak_fairy_log"; "oak");
+		fairy_log("spruce_fairy_log"; "spruce");
 	);
-	fairy_log("acacia_fairy_log"; "acacia");
-	fairy_log("birch_fairy_log"; "birch");
-	fairy_log("dark_oak_fairy_log"; "big_oak");
-	fairy_log("jungle_fairy_log"; "jungle");
-	fairy_log("oak_fairy_log"; "oak");
-	fairy_log("spruce_fairy_log"; "spruce");
+
+	# トゥインクルストーン
+	(
+		${white orange magenta light_blue yellow lime pink gray silver cyan purple blue brown green red black} | (
+			writer::write("$(_)_twinkle_stone.json"; {
+				parent = "block/cube_all";
+				textures = {
+					all = "miragefairy2019:blocks/$(_)_twinkle_stone";
+				};
+			});
+		);
+	);
 
 );
 
@@ -327,6 +340,7 @@ Writer : {
 	handheld("mirage_flower_extract_bottle");
 	handheld("mirage_flower_oil_bottle");
 
+	# 汎用素材ブロック
 	block("apatite_block");
 	block("fluorite_block");
 	block("sulfur_block");
@@ -335,9 +349,9 @@ Writer : {
 	block("magnetite_block");
 	block("pyrope_block");
 	block("smithsonite_block");
-
 	block("charcoal_block");
 
+	# 鉱石ブロック
 	block("apatite_ore");
 	block("fluorite_ore");
 	block("sulfur_ore");
