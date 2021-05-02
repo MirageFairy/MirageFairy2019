@@ -173,6 +173,7 @@ Writer : {
 		block("pyrope_block");
 		block("smithsonite_block");
 		block("charcoal_block");
+		block("mirage_flower_leaf_block");
 	);
 
 	# 鉱石ブロック
@@ -350,6 +351,7 @@ Writer : {
 	block("pyrope_block");
 	block("smithsonite_block");
 	block("charcoal_block");
+	block("mirage_flower_leaf_block");
 
 	# 鉱石ブロック
 	block("apatite_ore");

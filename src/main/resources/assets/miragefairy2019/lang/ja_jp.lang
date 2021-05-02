@@ -215,6 +215,7 @@ tile.oreTopaz.name=トパーズ鉱石
 item.gemTopaz.name=トパーズ
 tile.oreTourmaline.name=トルマリン鉱石
 item.gemTourmaline.name=トルマリン
+tile.blockLeafMirageFlower.name=ミラージュフラワーの葉ブロック
 
 item.spheres.name=スフィア
 item.spheres.format=≪%s≫のスフィア

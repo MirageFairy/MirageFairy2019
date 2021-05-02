@@ -215,6 +215,7 @@ tile.oreTopaz.name=Topaz Ore
 item.gemTopaz.name=Topaz
 tile.oreTourmaline.name=Tourmaline Ore
 item.gemTourmaline.name=Tourmaline
+tile.blockLeafMirageFlower.name=Mirage Flower Leaf Block
 
 item.spheres.name=Sphere
 item.spheres.format=Sphere of "%s"
