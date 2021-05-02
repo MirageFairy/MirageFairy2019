@@ -208,7 +208,8 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
 		// 素材
 		tooltip.add(new TextComponentString("Contains: ")
 			.setStyle(new Style().setColor(YELLOW))
-			.appendSibling(getComposite().getDisplayString()).getFormattedText());
+			.appendSibling(getComposite().getDisplayString())
+			.getFormattedText());
 
 		// 妖精魔法ステータス
 		Tuple<ItemStack, IFairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player)
@@ -659,7 +660,8 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
 	{
 		for (IMagicStatus<?> magicStatus : getMagicStatuses()) {
 			tooltip.add(magicStatus.getDisplayString(fairyType)
-				.setStyle(new Style().setColor(BLUE)).getFormattedText());
+				.setStyle(new Style().setColor(BLUE))
+				.getFormattedText());
 		}
 	}
 

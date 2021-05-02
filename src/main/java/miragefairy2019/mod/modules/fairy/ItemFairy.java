@@ -101,7 +101,8 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 						TextComponentString textComponent = new TextComponentString("");
 						tcs.forEach(textComponent::appendSibling);
 						return textComponent;
-					})).getFormattedText());
+					}))
+				.getFormattedText());
 		} else {
 			tooltip.add(new TextComponentString("")
 				.setStyle(new Style().setColor(GREEN))
@@ -119,7 +120,8 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy
 						TextComponentString textComponent = new TextComponentString("");
 						tcs.forEach(textComponent::appendSibling);
 						return textComponent;
-					})).getFormattedText());
+					}))
+				.getFormattedText());
 		}
 
 		// 妖精武器のステータス
