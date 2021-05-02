@@ -1,7 +1,5 @@
 package miragefairy2019.mod.modules.ore;
 
-import static miragefairy2019.mod.api.composite.ApiComposite.*;
-import static miragefairy2019.mod.api.composite.Components.*;
 import static miragefairy2019.mod.lib.Configurator.*;
 
 import miragefairy2019.mod.ModMirageFairy2019;
@@ -66,73 +64,23 @@ public class ModuleOre
 			.bind(setCreativeTab(() -> ApiMain.creativeTab()))
 			.bind(c -> {
 
-				itemVariant(c.erMod, c, 0, () -> new ItemVariantMaterial("apatite_gem", "gemApatite"))
-					.bind(addComponent(instance(apatite.get(), 1.000)))
-					.bind(addOreName("gemApatite"));
-
-				itemVariant(c.erMod, c, 1, () -> new ItemVariantMaterial("fluorite_gem", "gemFluorite"))
-					.bind(addComponent(instance(fluorite.get(), 1.000)))
-					.bind(addOreName("gemFluorite"));
-
-				itemVariant(c.erMod, c, 2, () -> new ItemVariantMaterial("sulfur_gem", "gemSulfur"))
-					.bind(addComponent(instance(sulfur.get(), 1.000)))
-					.bind(addOreName("gemSulfur"));
-
-				itemVariant(c.erMod, c, 3, () -> new ItemVariantMaterial("miragium_dust", "dustMiragium"))
-					.bind(addComponent(instance(miragium.get(), 1.000)))
-					.bind(addOreName("dustMiragium"));
-
-				itemVariant(c.erMod, c, 4, () -> new ItemVariantMaterial("miragium_tiny_dust", "dustTinyMiragium"))
-					.bind(addComponent(instance(miragium.get(), 0.111)))
-					.bind(addOreName("dustTinyMiragium"));
-
-				itemVariant(c.erMod, c, 5, () -> new ItemVariantMaterial("miragium_ingot", "ingotMiragium"))
-					.bind(addComponent(instance(miragium.get(), 1.000)))
-					.bind(addOreName("ingotMiragium"));
-
-				itemVariant(c.erMod, c, 6, () -> new ItemVariantMaterial("cinnabar_gem", "gemCinnabar"))
-					.bind(addComponent(instance(cinnabar.get(), 1.000)))
-					.bind(addOreName("gemCinnabar"));
-
-				itemVariant(c.erMod, c, 7, () -> new ItemVariantMaterial("moonstone_gem", "gemMoonstone"))
-					.bind(addComponent(instance(moonstone.get(), 1.000)))
-					.bind(addOreName("gemMoonstone"));
-
-				itemVariant(c.erMod, c, 8, () -> new ItemVariantMaterial("magnetite_gem", "gemMagnetite"))
-					.bind(addComponent(instance(magnetite.get(), 1.000)))
-					.bind(addOreName("gemMagnetite"));
-
-				itemVariant(c.erMod, c, 9, () -> new ItemVariantMaterial("saltpeter_gem", "gemSaltpeter"))
-					.bind(addComponent(instance(saltpeter.get(), 1.000)))
-					.bind(addOreName("gemSaltpeter"));
-
-				itemVariant(c.erMod, c, 10, () -> new ItemVariantMaterial("pyrope_gem", "gemPyrope"))
-					.bind(addComponent(instance(pyrope.get(), 1.000)))
-					.bind(addOreName("gemPyrope"));
-
-				itemVariant(c.erMod, c, 11, () -> new ItemVariantMaterial("smithsonite_gem", "gemSmithsonite"))
-					.bind(addComponent(instance(smithsonite.get(), 1.000)))
-					.bind(addOreName("gemSmithsonite"));
-
-				itemVariant(c.erMod, c, 12, () -> new ItemVariantMaterial("miragium_rod", "rodMiragium"))
-					.bind(addComponent(instance(miragium.get(), 0.500)))
-					.bind(addOreName("rodMiragium"));
-
-				itemVariant(c.erMod, c, 13, () -> new ItemVariantMaterial("miragium_nugget", "nuggetMiragium"))
-					.bind(addComponent(instance(miragium.get(), 0.111)))
-					.bind(addOreName("nuggetMiragium"));
-
-				itemVariant(c.erMod, c, 14, () -> new ItemVariantMaterial("nephrite_gem", "gemNephrite"))
-					.bind(addComponent(instance(nephrite.get(), 1.000)))
-					.bind(addOreName("gemNephrite"));
-
-				itemVariant(c.erMod, c, 15, () -> new ItemVariantMaterial("topaz_gem", "gemTopaz"))
-					.bind(addComponent(instance(topaz.get(), 1.000)))
-					.bind(addOreName("gemTopaz"));
-
-				itemVariant(c.erMod, c, 16, () -> new ItemVariantMaterial("tourmaline_gem", "gemTourmaline"))
-					.bind(addComponent(instance(tourmaline.get(), 1.000)))
-					.bind(addOreName("gemTourmaline"));
+				itemVariant(c.erMod, c, 0, () -> new ItemVariantMaterial("apatite_gem", "gemApatite")).bind(addOreName("gemApatite"));
+				itemVariant(c.erMod, c, 1, () -> new ItemVariantMaterial("fluorite_gem", "gemFluorite")).bind(addOreName("gemFluorite"));
+				itemVariant(c.erMod, c, 2, () -> new ItemVariantMaterial("sulfur_gem", "gemSulfur")).bind(addOreName("gemSulfur"));
+				itemVariant(c.erMod, c, 3, () -> new ItemVariantMaterial("miragium_dust", "dustMiragium")).bind(addOreName("dustMiragium"));
+				itemVariant(c.erMod, c, 4, () -> new ItemVariantMaterial("miragium_tiny_dust", "dustTinyMiragium")).bind(addOreName("dustTinyMiragium"));
+				itemVariant(c.erMod, c, 5, () -> new ItemVariantMaterial("miragium_ingot", "ingotMiragium")).bind(addOreName("ingotMiragium"));
+				itemVariant(c.erMod, c, 6, () -> new ItemVariantMaterial("cinnabar_gem", "gemCinnabar")).bind(addOreName("gemCinnabar"));
+				itemVariant(c.erMod, c, 7, () -> new ItemVariantMaterial("moonstone_gem", "gemMoonstone")).bind(addOreName("gemMoonstone"));
+				itemVariant(c.erMod, c, 8, () -> new ItemVariantMaterial("magnetite_gem", "gemMagnetite")).bind(addOreName("gemMagnetite"));
+				itemVariant(c.erMod, c, 9, () -> new ItemVariantMaterial("saltpeter_gem", "gemSaltpeter")).bind(addOreName("gemSaltpeter"));
+				itemVariant(c.erMod, c, 10, () -> new ItemVariantMaterial("pyrope_gem", "gemPyrope")).bind(addOreName("gemPyrope"));
+				itemVariant(c.erMod, c, 11, () -> new ItemVariantMaterial("smithsonite_gem", "gemSmithsonite")).bind(addOreName("gemSmithsonite"));
+				itemVariant(c.erMod, c, 12, () -> new ItemVariantMaterial("miragium_rod", "rodMiragium")).bind(addOreName("rodMiragium"));
+				itemVariant(c.erMod, c, 13, () -> new ItemVariantMaterial("miragium_nugget", "nuggetMiragium")).bind(addOreName("nuggetMiragium"));
+				itemVariant(c.erMod, c, 14, () -> new ItemVariantMaterial("nephrite_gem", "gemNephrite")).bind(addOreName("gemNephrite"));
+				itemVariant(c.erMod, c, 15, () -> new ItemVariantMaterial("topaz_gem", "gemTopaz")).bind(addOreName("gemTopaz"));
+				itemVariant(c.erMod, c, 16, () -> new ItemVariantMaterial("tourmaline_gem", "gemTourmaline")).bind(addOreName("gemTourmaline"));
 
 				erMod.registerItem.register(b -> {
 					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
