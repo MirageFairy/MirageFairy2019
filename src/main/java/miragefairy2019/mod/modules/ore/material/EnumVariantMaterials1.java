@@ -6,22 +6,23 @@ import java.util.Map;
 
 import miragefairy2019.mod.lib.multi.IListBlockVariant;
 import mirrg.boron.util.suppliterator.ISuppliterator;
+import net.minecraft.block.SoundType;
 import net.minecraft.util.IStringSerializable;
 
 public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariantMaterials
 {
-	APATITE_BLOCK(0, "apatite_block", "blockApatite", "blockApatite", 1, 0),
-	FLUORITE_BLOCK(1, "fluorite_block", "blockFluorite", "blockFluorite", 2, 0),
-	SULFUR_BLOCK(2, "sulfur_block", "blockSulfur", "blockSulfur", 1, 0),
-	CINNABAR_BLOCK(3, "cinnabar_block", "blockCinnabar", "blockCinnabar", 2, 0),
-	MOONSTONE_BLOCK(4, "moonstone_block", "blockMoonstone", "blockMoonstone", 3, 0),
-	MAGNETITE_BLOCK(5, "magnetite_block", "blockMagnetite", "blockMagnetite", 1, 0),
-	PYROPE_BLOCK(6, "pyrope_block", "blockPyrope", "blockPyrope", 2, 0),
-	SMITHSONITE_BLOCK(7, "smithsonite_block", "blockSmithsonite", "blockSmithsonite", 1, 0),
-	CHARCOAL_BLOCK(8, "charcoal_block", "blockCharcoal", "blockCharcoal", 0, 20 * 10 * 8 * 9),
-	MIRAGE_FLOWER_LEAF_BLOCK(9, "mirage_flower_leaf_block", "blockLeafMirageFlower", "blockLeafMirageFlower", 0, 0),
-	MIRAGIUM_INGOT_BLOCK(10, "miragium_ingot_block", "blockMiragium", "blockMiragium", 1, 0),
-	MIRAGIUM_DUST_BLOCK(11, "miragium_dust_block", "blockDustMiragium", "blockDustMiragium", 0, 0),
+	APATITE_BLOCK(0, "apatite_block", "blockApatite", "blockApatite", 1, 0, SoundType.STONE),
+	FLUORITE_BLOCK(1, "fluorite_block", "blockFluorite", "blockFluorite", 2, 0, SoundType.STONE),
+	SULFUR_BLOCK(2, "sulfur_block", "blockSulfur", "blockSulfur", 1, 0, SoundType.STONE),
+	CINNABAR_BLOCK(3, "cinnabar_block", "blockCinnabar", "blockCinnabar", 2, 0, SoundType.STONE),
+	MOONSTONE_BLOCK(4, "moonstone_block", "blockMoonstone", "blockMoonstone", 3, 0, SoundType.STONE),
+	MAGNETITE_BLOCK(5, "magnetite_block", "blockMagnetite", "blockMagnetite", 1, 0, SoundType.STONE),
+	PYROPE_BLOCK(6, "pyrope_block", "blockPyrope", "blockPyrope", 2, 0, SoundType.STONE),
+	SMITHSONITE_BLOCK(7, "smithsonite_block", "blockSmithsonite", "blockSmithsonite", 1, 0, SoundType.STONE),
+	CHARCOAL_BLOCK(8, "charcoal_block", "blockCharcoal", "blockCharcoal", 0, 20 * 10 * 8 * 9, SoundType.STONE),
+	MIRAGE_FLOWER_LEAF_BLOCK(9, "mirage_flower_leaf_block", "blockLeafMirageFlower", "blockLeafMirageFlower", 0, 0, SoundType.GLASS),
+	MIRAGIUM_INGOT_BLOCK(10, "miragium_ingot_block", "blockMiragium", "blockMiragium", 1, 0, SoundType.METAL),
+	MIRAGIUM_DUST_BLOCK(11, "miragium_dust_block", "blockDustMiragium", "blockDustMiragium", 0, 0, SoundType.SNOW),
 	;
 
 	//
@@ -57,8 +58,9 @@ public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariantM
 	public final String oreName;
 	public final int harvestLevel;
 	public final int burnTime;
+	public final SoundType soundType;
 
-	private EnumVariantMaterials1(int metadata, String resourceName, String unlocalizedName, String oreName, int harvestLevel, int burnTime)
+	private EnumVariantMaterials1(int metadata, String resourceName, String unlocalizedName, String oreName, int harvestLevel, int burnTime, SoundType soundType)
 	{
 		this.metadata = metadata;
 		this.resourceName = resourceName;
@@ -66,6 +68,7 @@ public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariantM
 		this.oreName = oreName;
 		this.harvestLevel = harvestLevel;
 		this.burnTime = burnTime;
+		this.soundType = soundType;
 	}
 
 	@Override
@@ -108,6 +111,12 @@ public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariantM
 	public int getBurnTime()
 	{
 		return burnTime;
+	}
+
+	@Override
+	public SoundType getSoundType()
+	{
+		return soundType;
 	}
 
 }

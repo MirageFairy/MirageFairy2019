@@ -1,10 +1,13 @@
 package miragefairy2019.mod.modules.ore.material;
 
+import javax.annotation.Nullable;
+
 import miragefairy2019.mod.lib.multi.BlockMulti;
 import miragefairy2019.mod.lib.multi.IListBlockVariant;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,6 +34,13 @@ public class BlockMaterials<V extends IBlockVariantMaterials> extends BlockMulti
 			setHarvestLevel(variant.getHarvestTool(), variant.getHarvestLevel(), getState(variant));
 		}
 
+	}
+
+	//
+
+	public SoundType getSoundType(IBlockState state, World world, BlockPos pos, @Nullable Entity entity)
+	{
+		return getVariant(state).getSoundType();
 	}
 
 	//

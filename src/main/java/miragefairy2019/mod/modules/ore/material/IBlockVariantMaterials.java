@@ -15,4 +15,6 @@ public interface IBlockVariantMaterials extends IBlockVariant
 
 	public int getBurnTime();
 
+	public SoundType getSoundType();
+
 }
