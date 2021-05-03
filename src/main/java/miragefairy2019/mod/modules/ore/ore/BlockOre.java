@@ -45,13 +45,13 @@ public class BlockOre<V extends IBlockVariantOre> extends BlockMulti<V>
 	@Override
 	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
 	{
-		return variantList.byMetadata(getMetaFromState(blockState)).getHardness();
+		return getVariant(blockState).getHardness();
 	}
 
 	@Override
 	public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion)
 	{
-		return variantList.byMetadata(getMetaFromState(world.getBlockState(pos))).getResistance();
+		return getVariant(world.getBlockState(pos)).getResistance();
 	}
 
 	//
@@ -66,7 +66,7 @@ public class BlockOre<V extends IBlockVariantOre> extends BlockMulti<V>
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		Random random = world instanceof World ? ((World) world).rand : RANDOM;
-		variantList.byMetadata(getMetaFromState(state)).getDrops(drops, random, this, getMetaFromState(state), fortune);
+		getVariant(state).getDrops(drops, random, this, getMetaFromState(state), fortune);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class BlockOre<V extends IBlockVariantOre> extends BlockMulti<V>
 	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune)
 	{
 		Random random = world instanceof World ? ((World) world).rand : new Random();
-		return variantList.byMetadata(getMetaFromState(state)).getExpDrop(random, fortune);
+		return getVariant(state).getExpDrop(random, fortune);
 	}
 
 	//

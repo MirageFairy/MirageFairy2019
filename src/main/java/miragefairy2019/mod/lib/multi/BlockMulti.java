@@ -52,6 +52,16 @@ public class BlockMulti<V extends IBlockVariant> extends Block
 		return blockState.getValue(VARIANT);
 	}
 
+	public V getVariant(IBlockState state)
+	{
+		return getVariant(getMetaFromState(state));
+	}
+
+	public V getVariant(int metadata)
+	{
+		return variantList.byMetadata(metadata);
+	}
+
 	@Override
 	public void getSubBlocks(CreativeTabs creativeTab, NonNullList<ItemStack> itemStacks)
 	{

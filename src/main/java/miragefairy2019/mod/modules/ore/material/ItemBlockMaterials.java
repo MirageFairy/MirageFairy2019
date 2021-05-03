@@ -14,7 +14,7 @@ public class ItemBlockMaterials<V extends IBlockVariantMaterials> extends ItemBl
 	@Override
 	public int getItemBurnTime(ItemStack itemStack)
 	{
-		return block2.variantList.byMetadata(itemStack.getMetadata()).getBurnTime();
+		return block2.getVariant(itemStack.getMetadata()).getBurnTime();
 	}
 
 }

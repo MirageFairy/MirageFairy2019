@@ -57,7 +57,7 @@ public class BlockTwinkleStone extends BlockMulti<EnumVariantTwinkleStone>
 	@Override
 	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		return variantList.byMetadata(getMetaFromState(state)).lightValue;
+		return getVariant(state).lightValue;
 	}
 
 	@Override

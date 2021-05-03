@@ -25,7 +25,7 @@ public class ItemBlockMulti<B extends BlockMulti<V>, V extends IBlockVariant> ex
 	@Override
 	public String getUnlocalizedName(ItemStack itemStack)
 	{
-		return "tile." + block2.variantList.byMetadata(itemStack.getMetadata()).getUnlocalizedName();
+		return "tile." + block2.getVariant(itemStack.getMetadata()).getUnlocalizedName();
 	}
 
 }
