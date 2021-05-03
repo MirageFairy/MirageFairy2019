@@ -442,56 +442,56 @@ Writer : {
 
 #################### 圧縮レシピ ####################
 (
-	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials/compress");
+	writer : Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials/compress");
 
-	iOre: oreName -> {
-		type: "forge:ore_dict";
-		ore: oreName;
+	iOre : oreName -> {
+		type = "forge:ore_dict";
+		ore = oreName;
 	};
-	iSubItem: item, data -> {
+	iSubItem : item, data -> {
 		item;
 		data;
 	};
 
-	x9: ingot, block, ingredientIngot, ingredientBlock, resultIngot, resultBlock -> (
-		writer::write("\(ingot).json"; {
-			type: "forge:ore_shaped";
-			group: "\(ingot)";
-			pattern: [
+	x9 : ingot, block, ingredientIngot, ingredientBlock, resultIngot, resultBlock -> (
+		writer::write("$(ingot)_from_$(block).json"; {
+			type = "forge:ore_shaped";
+			group = ingot;
+			pattern = [
 				"#";
 			];
-			key: {
-				"#": ingredientBlock;
+			key = {
+				"#" = ingredientBlock;
 			};
-			result: {
-				item: resultIngot.item;
-				count: 9;
-				data: resultIngot.data;
+			result = {
+				item = resultIngot.item;
+				count = 9;
+				data = resultIngot.data;
 			};
 		});
-		writer::write("\(block).json"; {
-			type: "forge:ore_shaped";
-			group: "\(block)";
-			pattern: [
+		writer::write("$(block).json"; {
+			type = "forge:ore_shaped";
+			group = block;
+			pattern = [
 				"###";
 				"###";
 				"###";
 			];
-			key: {
-				"#": ingredientIngot;
+			key = {
+				"#" = ingredientIngot;
 			};
-			result: resultBlock;
+			result = resultBlock;
 		});
 	);
 
-	x9("apatite"           ; "apatite_block"           ; iOre    ("gemApatite"       ); iOre("blockApatite"         ); iSubItem("miragefairy2019:materials"      ;  0); iSubItem("miragefairy2019:materials1";  0));
-	x9("fluorite"          ; "fluorite_block"          ; iOre    ("gemFluorite"      ); iOre("blockFluorite"        ); iSubItem("miragefairy2019:materials"      ;  1); iSubItem("miragefairy2019:materials1";  1));
-	x9("sulfur"            ; "sulfur_block"            ; iOre    ("gemSulfur"        ); iOre("blockSulfur"          ); iSubItem("miragefairy2019:materials"      ;  2); iSubItem("miragefairy2019:materials1";  2));
-	x9("cinnabar"          ; "cinnabar_block"          ; iOre    ("gemCinnabar"      ); iOre("blockCinnabar"        ); iSubItem("miragefairy2019:materials"      ;  6); iSubItem("miragefairy2019:materials1";  3));
-	x9("moonstone"         ; "moonstone_block"         ; iOre    ("gemMoonstone"     ); iOre("blockMoonstone"       ); iSubItem("miragefairy2019:materials"      ;  7); iSubItem("miragefairy2019:materials1";  4));
-	x9("magnetite"         ; "magnetite_block"         ; iOre    ("gemMagnetite"     ); iOre("blockMagnetite"       ); iSubItem("miragefairy2019:materials"      ;  8); iSubItem("miragefairy2019:materials1";  5));
-	x9("pyrope"            ; "pyrope_block"            ; iOre    ("gemPyrope"        ); iOre("blockPyrope"          ); iSubItem("miragefairy2019:materials"      ; 10); iSubItem("miragefairy2019:materials1";  6));
-	x9("smithsonite"       ; "smithsonite_block"       ; iOre    ("gemSmithsonite"   ); iOre("blockSmithsonite"     ); iSubItem("miragefairy2019:materials"      ; 11); iSubItem("miragefairy2019:materials1";  7));
+	x9("apatite_gem"       ; "apatite_block"           ; iOre    ("gemApatite"       ); iOre("blockApatite"         ); iSubItem("miragefairy2019:materials"      ;  0); iSubItem("miragefairy2019:materials1";  0));
+	x9("fluorite_gem"      ; "fluorite_block"          ; iOre    ("gemFluorite"      ); iOre("blockFluorite"        ); iSubItem("miragefairy2019:materials"      ;  1); iSubItem("miragefairy2019:materials1";  1));
+	x9("sulfur_gem"        ; "sulfur_block"            ; iOre    ("gemSulfur"        ); iOre("blockSulfur"          ); iSubItem("miragefairy2019:materials"      ;  2); iSubItem("miragefairy2019:materials1";  2));
+	x9("cinnabar_gem"      ; "cinnabar_block"          ; iOre    ("gemCinnabar"      ); iOre("blockCinnabar"        ); iSubItem("miragefairy2019:materials"      ;  6); iSubItem("miragefairy2019:materials1";  3));
+	x9("moonstone_gem"     ; "moonstone_block"         ; iOre    ("gemMoonstone"     ); iOre("blockMoonstone"       ); iSubItem("miragefairy2019:materials"      ;  7); iSubItem("miragefairy2019:materials1";  4));
+	x9("magnetite_gem"     ; "magnetite_block"         ; iOre    ("gemMagnetite"     ); iOre("blockMagnetite"       ); iSubItem("miragefairy2019:materials"      ;  8); iSubItem("miragefairy2019:materials1";  5));
+	x9("pyrope_gem"        ; "pyrope_block"            ; iOre    ("gemPyrope"        ); iOre("blockPyrope"          ); iSubItem("miragefairy2019:materials"      ; 10); iSubItem("miragefairy2019:materials1";  6));
+	x9("smithsonite_gem"   ; "smithsonite_block"       ; iOre    ("gemSmithsonite"   ); iOre("blockSmithsonite"     ); iSubItem("miragefairy2019:materials"      ; 11); iSubItem("miragefairy2019:materials1";  7));
 	x9("charcoal"          ; "charcoal_block"          ; iSubItem("minecraft:coal"; 1); iOre("blockCharcoal"        ); iSubItem("minecraft:coal"                 ;  1); iSubItem("miragefairy2019:materials1";  8));
 	x9("mirage_flower_leaf"; "mirage_flower_leaf_block"; iOre    ("leafMirageFlower" ); iOre("blockLeafMirageFlower"); iSubItem("miragefairy2019:fairy_materials";  8); iSubItem("miragefairy2019:materials1";  9));
 

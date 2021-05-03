@@ -1,18 +1,18 @@
 {
 	"type": "forge:ore_shaped",
-	"group": "moonstone",
+	"group": "apatite_gem",
 	"pattern": [
 		"#"
 	],
 	"key": {
 		"#": {
 			"type": "forge:ore_dict",
-			"ore": "blockMoonstone"
+			"ore": "blockApatite"
 		}
 	},
 	"result": {
 		"item": "miragefairy2019:materials",
 		"count": 9,
-		"data": 7
+		"data": 0
 	}
 }

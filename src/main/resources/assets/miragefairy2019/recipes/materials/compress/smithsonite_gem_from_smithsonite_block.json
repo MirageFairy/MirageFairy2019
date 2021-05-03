@@ -1,18 +1,18 @@
 {
 	"type": "forge:ore_shaped",
-	"group": "sulfur",
+	"group": "smithsonite_gem",
 	"pattern": [
 		"#"
 	],
 	"key": {
 		"#": {
 			"type": "forge:ore_dict",
-			"ore": "blockSulfur"
+			"ore": "blockSmithsonite"
 		}
 	},
 	"result": {
 		"item": "miragefairy2019:materials",
 		"count": 9,
-		"data": 2
+		"data": 11
 	}
 }

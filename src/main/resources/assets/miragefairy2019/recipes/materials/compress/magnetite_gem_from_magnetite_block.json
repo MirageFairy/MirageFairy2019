@@ -1,18 +1,18 @@
 {
 	"type": "forge:ore_shaped",
-	"group": "smithsonite",
+	"group": "magnetite_gem",
 	"pattern": [
 		"#"
 	],
 	"key": {
 		"#": {
 			"type": "forge:ore_dict",
-			"ore": "blockSmithsonite"
+			"ore": "blockMagnetite"
 		}
 	},
 	"result": {
 		"item": "miragefairy2019:materials",
 		"count": 9,
-		"data": 11
+		"data": 8
 	}
 }
