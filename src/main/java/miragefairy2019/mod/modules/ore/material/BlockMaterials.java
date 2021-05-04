@@ -28,13 +28,6 @@ public class BlockMaterials<V extends IBlockVariantMaterials> extends BlockMulti
 	{
 		super(Material.IRON, variantList);
 
-		// style
-		setSoundType(SoundType.STONE);
-
-		// 挙動
-		setHardness(3.0F);
-		setResistance(5.0F);
-
 		for (V variant : variantList) {
 			setHarvestLevel(variant.getHarvestTool(), variant.getHarvestLevel(), getState(variant));
 		}
