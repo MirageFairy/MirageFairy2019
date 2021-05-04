@@ -16,6 +16,7 @@ import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -40,6 +41,22 @@ public class BlockMaterials<V extends IBlockVariantMaterials> extends BlockMulti
 
 	}
 
+	@Override
+	public Material getMaterial(IBlockState state)
+	{
+		return getVariant(state).getMaterial();
+	}
+
+	@Deprecated
+	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
+	{
+		return getVariant(blockState).getBlockHardness();
+	}
+
+	public float getExplosionResistance(World world, BlockPos pos, @Nullable Entity exploder, Explosion explosion)
+	{
+		return getVariant(world.getBlockState(pos)).getBlockHardness() * 5;
+	}
 	//
 
 	public SoundType getSoundType(IBlockState state, World world, BlockPos pos, @Nullable Entity entity)
