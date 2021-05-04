@@ -17,4 +17,6 @@ public interface IBlockVariantMaterials extends IBlockVariant
 
 	public SoundType getSoundType();
 
+	public boolean isFallable();
+
 }
