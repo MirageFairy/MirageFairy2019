@@ -6,8 +6,12 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockMulti<V extends IBlockVariant> extends Block
 {
@@ -68,6 +72,31 @@ public class BlockMulti<V extends IBlockVariant> extends Block
 		for (V variant : variantList) {
 			itemStacks.add(new ItemStack(this, 1, variant.getMetadata()));
 		}
+	}
+
+	//
+
+	protected ItemStack getItem(IBlockAccess world, BlockPos pos, IBlockState state)
+	{
+		return new ItemStack(Item.getItemFromBlock(this), 1, damageDropped(state));
+	}
+
+	@Override
+	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
+	{
+		return getItem((IBlockAccess) world, pos, state);
+	}
+
+	@Override
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	{
+		drops.add(getItem(world, pos, state));
+	}
+
+	@Override
+	public int damageDropped(IBlockState state)
+	{
+		return getMetaFromState(state);
 	}
 
 }
