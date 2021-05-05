@@ -1,5 +1,6 @@
 package miragefairy2019.mod.lib;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -22,6 +23,17 @@ public final class Monad<T> implements Supplier<T>
 	public <O> O bind(Function<T, O> function)
 	{
 		return function.apply(t);
+	}
+
+	public <O> Monad<O> map(Function<T, O> function)
+	{
+		return Monad.of(function.apply(t));
+	}
+
+	public Monad<T> peek(Consumer<T> consumer)
+	{
+		consumer.accept(t);
+		return this;
 	}
 
 	@Override
