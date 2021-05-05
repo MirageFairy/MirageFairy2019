@@ -337,11 +337,11 @@ Writer : {
 	handheld("dark_mana_rod");
 	handheld("quartz_mana_rod");
 	handheld("mirage_flower_stick");
-	handheld("mirage_flower_leaf");
+	item("mirage_flower_leaf");
 	handheld("mirage_fairy_wood_stick");
-	handheld("miragium_water_bottle");
-	handheld("mirage_flower_extract_bottle");
-	handheld("mirage_flower_oil_bottle");
+	item("miragium_water_bottle");
+	item("mirage_flower_extract_bottle");
+	item("mirage_flower_oil_bottle");
 
 	# 汎用素材ブロック
 	block("apatite_block");
