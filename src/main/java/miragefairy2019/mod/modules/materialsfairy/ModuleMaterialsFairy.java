@@ -4,6 +4,7 @@ import static miragefairy2019.mod.api.composite.ApiComposite.*;
 import static miragefairy2019.mod.api.composite.Components.*;
 import static miragefairy2019.mod.lib.Configurator.*;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 import miragefairy2019.mod.ModMirageFairy2019;
@@ -21,6 +22,7 @@ import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.lib.multi.ItemBlockMulti;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
@@ -123,16 +125,19 @@ public class ModuleMaterialsFairy
 				itemVariant(c.erMod, c, 10, () -> new ItemVariantFairyMaterial("miragium_water_bottle", "bottleMiragiumWater", 0))
 					.bind(addOreName("bottleMiragiumWater"))
 					.bind(addOreName("container250MiragiumWater"))
+					.bind(ItemVariantFairyMaterial.setterContainerItem(Optional.of(() -> new ItemStack(Items.GLASS_BOTTLE))))
 					.bind(onCreateItemStack(v -> itemStackBottleMiragiumWater = v.createItemStack()));
 
 				itemVariant(c.erMod, c, 11, () -> new ItemVariantFairyMaterial("mirage_flower_extract_bottle", "bottleMirageFlowerExtract", 2))
 					.bind(addOreName("bottleMirageFlowerExtract"))
 					.bind(addOreName("container250MirageFlowerExtract"))
+					.bind(ItemVariantFairyMaterial.setterContainerItem(Optional.of(() -> new ItemStack(Items.GLASS_BOTTLE))))
 					.bind(onCreateItemStack(v -> itemStackBottleMirageFlowerExtract = v.createItemStack()));
 
 				itemVariant(c.erMod, c, 12, () -> new ItemVariantFairyMaterial("mirage_flower_oil_bottle", "bottleMirageFlowerOil", 4))
 					.bind(addOreName("bottleMirageFlowerOil"))
 					.bind(addOreName("container250MirageFlowerOil"))
+					.bind(ItemVariantFairyMaterial.setterContainerItem(Optional.of(() -> new ItemStack(Items.GLASS_BOTTLE))))
 					.bind(onCreateItemStack(v -> itemStackBottleMirageFlowerOil = v.createItemStack()));
 
 				erMod.registerItem.register(b -> {

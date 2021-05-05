@@ -47,4 +47,16 @@ public class ItemMultiFairyMaterial<V extends ItemVariantFairyMaterial> extends 
 		}
 	}
 
+	@Override
+	public boolean hasContainerItem(ItemStack itemStack)
+	{
+		return !getContainerItem(itemStack).isEmpty();
+	}
+
+	@Override
+	public ItemStack getContainerItem(ItemStack itemStack)
+	{
+		return getVariant(itemStack).map(V::getContainerItem).orElse(ItemStack.EMPTY);
+	}
+
 }
