@@ -607,62 +607,46 @@ Writer : {
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials");
 
-	writer::write("miragium_water_bucket_from_miragium_water_bottle.json"; {
-		type = "forge:ore_shapeless";
-		group = "miragium_water_bucket";
-		ingredients = [
-			{
-				item = "minecraft:bucket";
+	func : registerName, oreName, metadata_bucket, metadata_bottle -> (
+		writer::write("$(registerName)_bucket_from_$(registerName)_bottle.json"; {
+			type = "forge:ore_shapeless";
+			group = "$(registerName)_bucket";
+			ingredients = [
+				{
+					item = "minecraft:bucket";
+				};
+				1 .. 4 | {
+					type = "forge:ore_dict";
+					ore = "container250$(oreName)";
+				};
+			];
+			result = {
+				item = "miragefairy2019:filled_bucket";
+				data = metadata_bucket;
 			};
-			{
-				type = "forge:ore_dict";
-				ore = "container250MiragiumWater";
+		});
+		writer::write("$(registerName)_bottle_from_$(registerName)_bucket.json"; {
+			type = "forge:ore_shapeless";
+			group = "$(registerName)_bottle";
+			ingredients = [
+				1 .. 4 | {
+					item = "minecraft:glass_bottle";
+				};
+				{
+					type = "forge:ore_dict";
+					ore = "container1000$(oreName)";
+				};
+			];
+			result = {
+				item = "miragefairy2019:fairy_materials";
+				data = metadata_bottle;
+				count = 4;
 			};
-			{
-				type = "forge:ore_dict";
-				ore = "container250MiragiumWater";
-			};
-			{
-				type = "forge:ore_dict";
-				ore = "container250MiragiumWater";
-			};
-			{
-				type = "forge:ore_dict";
-				ore = "container250MiragiumWater";
-			};
-		];
-		result = {
-			item = "miragefairy2019:filled_bucket";
-			data = 0;
-		};
-	});
-	writer::write("miragium_water_bottle_from_miragium_water_bucket.json"; {
-		type = "forge:ore_shapeless";
-		group = "miragium_water_bucket";
-		ingredients = [
-			{
-				type = "forge:ore_dict";
-				ore = "container1000MiragiumWater";
-			};
-			{
-				item = "minecraft:glass_bottle";
-			};
-			{
-				item = "minecraft:glass_bottle";
-			};
-			{
-				item = "minecraft:glass_bottle";
-			};
-			{
-				item = "minecraft:glass_bottle";
-			};
-		];
-		result = {
-			item = "miragefairy2019:fairy_materials";
-			data = 10;
-			count = 4;
-		};
-	});
+		});
+	);
+	func("miragium_water"       ; "MiragiumWater"      ; 0; 10);
+	func("mirage_flower_extract"; "MirageFlowerExtract"; 1; 11);
+	func("mirage_flower_oil"    ; "MirageFlowerOil"    ; 2; 12);
 
 );
 
