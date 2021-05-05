@@ -272,6 +272,7 @@ public class ModuleOre
 			.bind(setCreativeTab(() -> ApiMain.creativeTab()))
 			.peek(c -> {
 
+				// TODO 流体2個追加　ビンにcontainer追加
 				itemVariant(c.erMod, c, 0, () -> new ItemVariantFilledBucket("miragium_water_bucket", "bucketMiragiumWater", true, () -> Optional.of(blockFluidMiragiumWater.getDefaultState())))
 					.bind(addOreName("bucketMiragiumWater"))
 					.bind(addOreName("container1000MiragiumWater"))
@@ -329,9 +330,11 @@ public class ModuleOre
 				itemVariant(c.erMod, c, 2, () -> new ItemVariantFilledBucket("mirage_flower_oil_bucket", "bucketMirageFlowerOil", true, () -> Optional.empty()))
 					.bind(addOreName("bucketMirageFlowerOil"))
 					.bind(addOreName("container1000MirageFlowerOil"));
+				/*
 				itemVariant(c.erMod, c, 3, () -> new ItemVariantFilledBucket("water_bucket", "bucketWater", true, () -> Optional.empty()))
 					.bind(addOreName("bucketWater"))
 					.bind(addOreName("container1000Water"));
+					*/
 
 				erMod.registerItem.register(b -> {
 					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
