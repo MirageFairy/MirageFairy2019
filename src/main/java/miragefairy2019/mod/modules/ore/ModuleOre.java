@@ -114,11 +114,6 @@ public class ModuleOre
 				itemVariant(c.erMod, c, 2, () -> new ItemVariantFilledBucket("mirage_flower_oil_bucket", "bucketMirageFlowerOil", true, () -> Optional.empty()))
 					.bind(addOreName("bucketMirageFlowerOil"))
 					.bind(addOreName("container1000MirageFlowerOil"));
-				/*
-				itemVariant(c.erMod, c, 3, () -> new ItemVariantFilledBucket("water_bucket", "bucketWater", true, () -> Optional.empty()))
-					.bind(addOreName("bucketWater"))
-					.bind(addOreName("container1000Water"));
-					*/
 
 				erMod.registerItem.register(b -> {
 					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
