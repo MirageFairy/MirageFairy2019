@@ -343,6 +343,11 @@ Writer : {
 	item("mirage_flower_extract_bottle");
 	item("mirage_flower_oil_bottle");
 
+	# バケツ
+	item("miragium_water_bucket");
+	item("mirage_flower_extract_bucket");
+	item("mirage_flower_oil_bucket");
+
 	# 汎用素材ブロック
 	block("apatite_block");
 	block("fluorite_block");

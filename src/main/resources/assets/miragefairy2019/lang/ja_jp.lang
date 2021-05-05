@@ -34,6 +34,10 @@ item.bottleMirageFlowerExtract.poem=飲めそうにはない
 item.bottleMirageFlowerOil.name=ミラージュオイル入り瓶
 item.bottleMirageFlowerOil.poem=皮膚に付くとなかなか落ちない
 
+item.bucketMiragiumWater.name=ミラジウムウォーター入りバケツ
+item.bucketMirageFlowerExtract.name=ミラージュエキス入りバケツ
+item.bucketMirageFlowerOil.name=ミラージュオイル入りバケツ
+
 item.mirageFairyR1.name=ミラージュ妖精
 item.mirageFairyR1.format=%s
 item.mirageFairyR2.name=ミラージュ妖精 II
