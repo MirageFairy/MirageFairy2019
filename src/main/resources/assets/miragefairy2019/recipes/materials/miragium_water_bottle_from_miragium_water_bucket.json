@@ -3,20 +3,20 @@
 	"group": "miragium_water_bottle",
 	"ingredients": [
 		{
+			"item": "minecraft:glass_bottle"
+		},
+		{
+			"item": "minecraft:glass_bottle"
+		},
+		{
+			"item": "minecraft:glass_bottle"
+		},
+		{
+			"item": "minecraft:glass_bottle"
+		},
+		{
 			"type": "forge:ore_dict",
 			"ore": "container1000MiragiumWater"
-		},
-		{
-			"item": "minecraft:glass_bottle"
-		},
-		{
-			"item": "minecraft:glass_bottle"
-		},
-		{
-			"item": "minecraft:glass_bottle"
-		},
-		{
-			"item": "minecraft:glass_bottle"
 		}
 	],
 	"result": {
