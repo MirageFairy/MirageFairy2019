@@ -16,11 +16,7 @@
 		},
 		{
 			"type": "forge:ore_dict",
-			"ore": "container1000Water"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "dustMiragium"
+			"ore": "container1000MiragiumWater"
 		},
 		{
 			"type": "miragefairy2019:ore_dict_complex",
