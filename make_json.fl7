@@ -605,6 +605,69 @@ Writer : {
 
 #################### その他レシピ ####################
 (
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials");
+
+	writer::write("miragium_water_bucket_from_miragium_water_bottle.json"; {
+		type = "forge:ore_shapeless";
+		group = "miragium_water_bucket";
+		ingredients = [
+			{
+				item = "minecraft:bucket";
+			};
+			{
+				type = "forge:ore_dict";
+				ore = "container250MiragiumWater";
+			};
+			{
+				type = "forge:ore_dict";
+				ore = "container250MiragiumWater";
+			};
+			{
+				type = "forge:ore_dict";
+				ore = "container250MiragiumWater";
+			};
+			{
+				type = "forge:ore_dict";
+				ore = "container250MiragiumWater";
+			};
+		];
+		result = {
+			item = "miragefairy2019:filled_bucket";
+			data = 0;
+		};
+	});
+	writer::write("miragium_water_bottle_from_miragium_water_bucket.json"; {
+		type = "forge:ore_shapeless";
+		group = "miragium_water_bucket";
+		ingredients = [
+			{
+				type = "forge:ore_dict";
+				ore = "container1000MiragiumWater";
+			};
+			{
+				item = "minecraft:glass_bottle";
+			};
+			{
+				item = "minecraft:glass_bottle";
+			};
+			{
+				item = "minecraft:glass_bottle";
+			};
+			{
+				item = "minecraft:glass_bottle";
+			};
+		];
+		result = {
+			item = "miragefairy2019:fairy_materials";
+			data = 10;
+			count = 4;
+		};
+	});
+
+);
+
+#################### その他レシピ ####################
+(
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/fairymaterials");
 
 	# トゥインクルストーン
