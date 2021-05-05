@@ -244,7 +244,7 @@ public class ModuleOre
 
 					// 設置
 					if (!worldIn.isRemote) {
-						if (!solid || replaceable && !blockStateTarget.getMaterial().isLiquid()) worldIn.destroyBlock(posIn, true);
+						if ((!solid || replaceable) && !blockStateTarget.getMaterial().isLiquid()) worldIn.destroyBlock(posIn, true);
 					}
 					worldIn.setBlockState(posIn, blockStateFluid, 11);
 
