@@ -50,17 +50,19 @@ public class ModuleOre
 {
 
 	public static Fluid fluidMiragiumWater;
+	public static BlockFluidMiragiumWater blockFluidMiragiumWater;
+	public static ItemBlock itemFluidMiragiumWater;
+
+	//
 
 	public static BlockOre<EnumVariantOre1> blockOre1;
 	public static BlockOre<EnumVariantOre2> blockOre2;
 	public static BlockMaterials<EnumVariantMaterials1> blockMaterials1;
-	public static BlockFluidMiragiumWater blockFluidMiragiumWater;
 
 	public static ItemMultiMaterial<ItemVariantMaterial> itemMaterials;
 	public static ItemBlockOre<EnumVariantOre1> itemBlockOre1;
 	public static ItemBlockOre<EnumVariantOre2> itemBlockOre2;
 	public static ItemBlockMaterials<EnumVariantMaterials1> itemBlockMaterials1;
-	public static ItemBlock itemFluidMiragiumWater;
 
 	public static void init(EventRegistryMod erMod)
 	{
