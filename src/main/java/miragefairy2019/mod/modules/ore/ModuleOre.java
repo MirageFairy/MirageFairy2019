@@ -141,7 +141,7 @@ public class ModuleOre
 				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_still"),
 				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_flow"),
 				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_overlay"));
-			fluidMiragiumWater.setViscosity(500);
+			fluidMiragiumWater.setViscosity(600);
 			FluidRegistry.registerFluid(fluidMiragiumWater);
 			FluidRegistry.addBucketForFluid(fluidMiragiumWater);
 
