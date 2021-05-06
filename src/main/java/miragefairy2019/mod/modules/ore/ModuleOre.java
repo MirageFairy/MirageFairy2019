@@ -50,8 +50,16 @@ public class ModuleOre
 {
 
 	public static Fluid fluidMiragiumWater;
+	public static Fluid fluidMirageFlowerExtract;
+	public static Fluid fluidMirageFlowerOil;
+
 	public static BlockFluidMiragiumWater blockFluidMiragiumWater;
+	public static BlockFluidMiragiumWater blockFluidMirageFlowerExtract;
+	public static BlockFluidMiragiumWater blockFluidMirageFlowerOil;
+
 	public static ItemBlock itemFluidMiragiumWater;
+	public static ItemBlock itemFluidMirageFlowerExtract;
+	public static ItemBlock itemFluidMirageFlowerOil;
 
 	//
 
@@ -110,12 +118,14 @@ public class ModuleOre
 					.bind(addOreName("bucketMiragiumWater"))
 					.bind(addOreName("container1000MiragiumWater"))
 					.bind(registererEmptyBucketFiller(() -> blockFluidMiragiumWater.getDefaultState()));
-				itemVariant(c.erMod, c, 1, () -> new ItemVariantFilledBucket("mirage_flower_extract_bucket", "bucketMirageFlowerExtract", true, () -> Optional.empty()))
+				itemVariant(c.erMod, c, 1, () -> new ItemVariantFilledBucket("mirage_flower_extract_bucket", "bucketMirageFlowerExtract", true, () -> Optional.of(blockFluidMirageFlowerExtract.getDefaultState())))
 					.bind(addOreName("bucketMirageFlowerExtract"))
-					.bind(addOreName("container1000MirageFlowerExtract"));
-				itemVariant(c.erMod, c, 2, () -> new ItemVariantFilledBucket("mirage_flower_oil_bucket", "bucketMirageFlowerOil", true, () -> Optional.empty()))
+					.bind(addOreName("container1000MirageFlowerExtract"))
+					.bind(registererEmptyBucketFiller(() -> blockFluidMirageFlowerExtract.getDefaultState()));
+				itemVariant(c.erMod, c, 2, () -> new ItemVariantFilledBucket("mirage_flower_oil_bucket", "bucketMirageFlowerOil", true, () -> Optional.of(blockFluidMirageFlowerOil.getDefaultState())))
 					.bind(addOreName("bucketMirageFlowerOil"))
-					.bind(addOreName("container1000MirageFlowerOil"));
+					.bind(addOreName("container1000MirageFlowerOil"))
+					.bind(registererEmptyBucketFiller(() -> blockFluidMirageFlowerOil.getDefaultState()));
 
 				erMod.registerItem.register(b -> {
 					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
@@ -134,6 +144,26 @@ public class ModuleOre
 			fluidMiragiumWater.setViscosity(500);
 			FluidRegistry.registerFluid(fluidMiragiumWater);
 			FluidRegistry.addBucketForFluid(fluidMiragiumWater);
+
+			// 妖水フルイド
+			ApiOre.fluidMirageFlowerExtract = fluidMirageFlowerExtract = new Fluid(
+				"mirage_flower_extract",
+				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_extract_still"),
+				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_extract_flow"),
+				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_extract_overlay"));
+			fluidMirageFlowerExtract.setViscosity(1000);
+			FluidRegistry.registerFluid(fluidMirageFlowerExtract);
+			FluidRegistry.addBucketForFluid(fluidMirageFlowerExtract);
+
+			// 妖水フルイド
+			ApiOre.fluidMirageFlowerOil = fluidMirageFlowerOil = new Fluid(
+				"mirage_flower_oil",
+				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_oil_still"),
+				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_oil_flow"),
+				new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_oil_overlay"));
+			fluidMirageFlowerOil.setViscosity(1500);
+			FluidRegistry.registerFluid(fluidMirageFlowerOil);
+			FluidRegistry.addBucketForFluid(fluidMirageFlowerOil);
 
 			//
 
@@ -171,6 +201,50 @@ public class ModuleOre
 							protected ModelResourceLocation getModelResourceLocation(IBlockState var1)
 							{
 								return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "miragium_water"), "fluid");
+							}
+						});
+					}
+				}.run();
+			}
+
+			// 妖水ブロック
+			ApiOre.blockFluidMirageFlowerExtract = blockFluidMirageFlowerExtract = new BlockFluidMiragiumWater(fluidMirageFlowerExtract);
+			blockFluidMirageFlowerExtract.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_extract");
+			blockFluidMirageFlowerExtract.setUnlocalizedName("mirageFlowerExtract");
+			blockFluidMirageFlowerExtract.setCreativeTab(ApiMain.creativeTab());
+			ForgeRegistries.BLOCKS.register(blockFluidMirageFlowerExtract);
+			if (ApiMain.side().isClient()) {
+				new Object() {
+					@SideOnly(Side.CLIENT)
+					public void run()
+					{
+						ModelLoader.setCustomStateMapper(blockFluidMirageFlowerExtract, new StateMapperBase() {
+							@Override
+							protected ModelResourceLocation getModelResourceLocation(IBlockState var1)
+							{
+								return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_flower_extract"), "fluid");
+							}
+						});
+					}
+				}.run();
+			}
+
+			// 妖水ブロック
+			ApiOre.blockFluidMirageFlowerOil = blockFluidMirageFlowerOil = new BlockFluidMiragiumWater(fluidMirageFlowerOil);
+			blockFluidMirageFlowerOil.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_oil");
+			blockFluidMirageFlowerOil.setUnlocalizedName("mirageFlowerOil");
+			blockFluidMirageFlowerOil.setCreativeTab(ApiMain.creativeTab());
+			ForgeRegistries.BLOCKS.register(blockFluidMirageFlowerOil);
+			if (ApiMain.side().isClient()) {
+				new Object() {
+					@SideOnly(Side.CLIENT)
+					public void run()
+					{
+						ModelLoader.setCustomStateMapper(blockFluidMirageFlowerOil, new StateMapperBase() {
+							@Override
+							protected ModelResourceLocation getModelResourceLocation(IBlockState var1)
+							{
+								return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_flower_oil"), "fluid");
 							}
 						});
 					}
@@ -248,6 +322,64 @@ public class ModuleOre
 							public ModelResourceLocation getModelLocation(ItemStack var1)
 							{
 								return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "miragium_water"), "fluid");
+							}
+						});
+					}
+				}.run();
+			}
+
+			// 妖水アイテム
+			ApiOre.itemFluidMirageFlowerExtract = itemFluidMirageFlowerExtract = new ItemBlock(blockFluidMirageFlowerExtract) {
+				public void getSubItems(CreativeTabs p_getSubItems_1_, NonNullList<ItemStack> p_getSubItems_2_)
+				{
+					if (this.isInCreativeTab(p_getSubItems_1_)) {
+						this.block.getSubBlocks(p_getSubItems_1_, p_getSubItems_2_);
+					}
+				}
+			};
+			itemFluidMirageFlowerExtract.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_extract");
+			itemFluidMirageFlowerExtract.setUnlocalizedName("mirageFlowerExtract");
+			itemFluidMirageFlowerExtract.setCreativeTab(ApiMain.creativeTab());
+			ForgeRegistries.ITEMS.register(itemFluidMirageFlowerExtract);
+			if (ApiMain.side().isClient()) {
+				new Object() {
+					@SideOnly(Side.CLIENT)
+					public void run()
+					{
+						ModelLoader.setCustomMeshDefinition(itemFluidMirageFlowerExtract, new ItemMeshDefinition() {
+							@Override
+							public ModelResourceLocation getModelLocation(ItemStack var1)
+							{
+								return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_flower_extract"), "fluid");
+							}
+						});
+					}
+				}.run();
+			}
+
+			// 妖水アイテム
+			ApiOre.itemFluidMirageFlowerOil = itemFluidMirageFlowerOil = new ItemBlock(blockFluidMirageFlowerOil) {
+				public void getSubItems(CreativeTabs p_getSubItems_1_, NonNullList<ItemStack> p_getSubItems_2_)
+				{
+					if (this.isInCreativeTab(p_getSubItems_1_)) {
+						this.block.getSubBlocks(p_getSubItems_1_, p_getSubItems_2_);
+					}
+				}
+			};
+			itemFluidMirageFlowerOil.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_oil");
+			itemFluidMirageFlowerOil.setUnlocalizedName("mirageFlowerOil");
+			itemFluidMirageFlowerOil.setCreativeTab(ApiMain.creativeTab());
+			ForgeRegistries.ITEMS.register(itemFluidMirageFlowerOil);
+			if (ApiMain.side().isClient()) {
+				new Object() {
+					@SideOnly(Side.CLIENT)
+					public void run()
+					{
+						ModelLoader.setCustomMeshDefinition(itemFluidMirageFlowerOil, new ItemMeshDefinition() {
+							@Override
+							public ModelResourceLocation getModelLocation(ItemStack var1)
+							{
+								return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_flower_oil"), "fluid");
 							}
 						});
 					}

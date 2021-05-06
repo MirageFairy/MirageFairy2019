@@ -228,6 +228,10 @@ item.spheres.format=≪%s≫のスフィア
 
 fluid.miragium_water=ミラジウムウォーター
 tile.miragiumWater.name=ミラジウムウォーター
+fluid.mirage_flower_extract=ミラージュエキス
+tile.mirageFlowerExtract.name=ミラージュエキス
+fluid.mirage_flower_oil=ミラージュオイル
+tile.mirageFlowerOil.name=ミラージュオイル
 
 mirageFairy2019.component.cuticle.format=≪%s≫のキューティクル
 mirageFairy2019.component.apatite.name=燐灰石

@@ -9,8 +9,16 @@ public class ApiOre
 {
 
 	public static Fluid fluidMiragiumWater;
+	public static Fluid fluidMirageFlowerExtract;
+	public static Fluid fluidMirageFlowerOil;
+
 	public static Block blockFluidMiragiumWater;
+	public static Block blockFluidMirageFlowerExtract;
+	public static Block blockFluidMirageFlowerOil;
+
 	public static ItemBlock itemFluidMiragiumWater;
+	public static ItemBlock itemFluidMirageFlowerExtract;
+	public static ItemBlock itemFluidMirageFlowerOil;
 
 	//
 

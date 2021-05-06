@@ -228,6 +228,10 @@ item.spheres.format=Sphere of "%s"
 
 fluid.miragium_water=Miragium Water
 tile.miragiumWater.name=Miragium Water
+fluid.mirage_flower_extract=Mirage Extract
+tile.mirageFlowerExtract.name=Mirage Extract
+fluid.mirage_flower_oil=Mirage Oil
+tile.mirageFlowerOil.name=Mirage Oil
 
 mirageFairy2019.component.cuticle.format=Cuticle of "%s"
 mirageFairy2019.component.apatite.name=Apatite
