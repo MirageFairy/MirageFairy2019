@@ -48,6 +48,7 @@ public class ModuleMaterialsFairy
 	public static ItemStack itemStackBottleMiragiumWater;
 	public static ItemStack itemStackBottleMirageFlowerExtract;
 	public static ItemStack itemStackBottleMirageFlowerOil;
+	public static ItemStack itemStackManaRodGlass;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -139,6 +140,12 @@ public class ModuleMaterialsFairy
 					.bind(addOreName("container250MirageFlowerOil"))
 					.bind(ItemVariantFairyMaterial.setterContainerItem(Optional.of(() -> new ItemStack(Items.GLASS_BOTTLE))))
 					.bind(onCreateItemStack(v -> itemStackBottleMirageFlowerOil = v.createItemStack()));
+
+				itemVariant(c.erMod, c, 13, () -> new ItemVariantFairyMaterial("glass_mana_rod", "manaRodGlass", 2))
+					.bind(addComponent(instance(miragium.get(), 0.5)))
+					.bind(addComponent(instance(glass.get(), 0.5)))
+					.bind(addOreName("mirageFairy2019ManaRodGlass"))
+					.bind(onCreateItemStack(v -> itemStackManaRodGlass = v.createItemStack()));
 
 				erMod.registerItem.register(b -> {
 					if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();

@@ -342,6 +342,7 @@ Writer : {
 	item("miragium_water_bottle");
 	item("mirage_flower_extract_bottle");
 	item("mirage_flower_oil_bottle");
+	handheld("glass_mana_rod");
 
 	# バケツ
 	item("miragium_water_bucket");

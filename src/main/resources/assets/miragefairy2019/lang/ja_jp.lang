@@ -33,6 +33,8 @@ item.bottleMirageFlowerExtract.name=ミラージュエキス入り瓶
 item.bottleMirageFlowerExtract.poem=飲めそうにはない
 item.bottleMirageFlowerOil.name=ミラージュオイル入り瓶
 item.bottleMirageFlowerOil.poem=皮膚に付くとなかなか落ちない
+item.manaRodGlass.name=ガラスの魔導芯棒
+item.manaRodGlass.poem=非晶質はだめなのか？
 
 item.bucketMiragiumWater.name=ミラジウムウォーター入りバケツ
 item.bucketMirageFlowerExtract.name=ミラージュエキス入りバケツ
@@ -254,6 +256,7 @@ mirageFairy2019.component.nephrite.name=ネフライト
 mirageFairy2019.component.topaz.name=トパーズ
 mirageFairy2019.component.tourmaline.name=トルマリン
 mirageFairy2019.component.quartz.name=ネザークォーツ
+mirageFairy2019.component.glass.name=ガラス
 
 mirageFairy2019.ability.attack.name=攻撃
 mirageFairy2019.ability.craft.name=加工

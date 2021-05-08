@@ -25,5 +25,6 @@ public class Components
 	public static final Supplier<IComponent> topaz = () -> miragefairy2019.mod.modules.composite.Component.topaz;
 	public static final Supplier<IComponent> tourmaline = () -> miragefairy2019.mod.modules.composite.Component.tourmaline;
 	public static final Supplier<IComponent> quartz = () -> miragefairy2019.mod.modules.composite.Component.quartz;
+	public static final Supplier<IComponent> glass = () -> miragefairy2019.mod.modules.composite.Component.glass;
 
 }

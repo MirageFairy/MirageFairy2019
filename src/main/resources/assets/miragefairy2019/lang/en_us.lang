@@ -33,6 +33,8 @@ item.bottleMirageFlowerExtract.name=Mirage Extract Bottle
 item.bottleMirageFlowerExtract.poem=
 item.bottleMirageFlowerOil.name=Mirage Oil Bottle
 item.bottleMirageFlowerOil.poem=
+item.manaRodGlass.name=Glass Mana Rod
+item.manaRodGlass.poem=
 
 item.bucketMiragiumWater.name=Miragium Water Bucket
 item.bucketMirageFlowerExtract.name=Mirage Extract Bucket
@@ -254,6 +256,7 @@ mirageFairy2019.component.nephrite.name=Nephrite
 mirageFairy2019.component.topaz.name=Topaz
 mirageFairy2019.component.tourmaline.name=Tourmaline
 mirageFairy2019.component.quartz.name=Quartz
+mirageFairy2019.component.glass.name=Glass
 
 mirageFairy2019.ability.attack.name=ATTACK
 mirageFairy2019.ability.craft.name=CRAFT
