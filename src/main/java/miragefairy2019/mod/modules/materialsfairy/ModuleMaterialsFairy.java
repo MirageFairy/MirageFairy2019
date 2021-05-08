@@ -98,7 +98,17 @@ public class ModuleMaterialsFairy
 					.bind(addComponent(instance(miragium.get(), 0.5)))
 					.bind(addComponent(instance(quartz.get(), 0.5)))
 					.bind(addOreName("mirageFairy2019ManaRodQuartz"))
-					.bind(onCreateItemStack(v -> itemStackManaRodQuartz = v.createItemStack()));
+					.bind(onCreateItemStack(v -> itemStackManaRodQuartz = v.createItemStack()))
+					.bind(onCreateItemStack(v -> {
+
+						// フェアリーステッキクラフト
+						ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+							new FairyStickCraftConditionConsumeBlock(blockState -> blockState.equals(ApiOre.blockFluidMirageFlowerExtract.getDefaultState())),
+							new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019ManaRodGlass")),
+							new FairyStickCraftConditionConsumeItem(new OreIngredient("blockQuartz")),
+							new FairyStickCraftConditionSpawnItem(() -> v.createItemStack())));
+
+					}));
 
 				itemVariant(c.erMod, c, 7, () -> new ItemVariantFairyMaterial("mirage_flower_stick", "stickMirageFlower", 1))
 					.bind(addOreName("stickMirageFlower"))
