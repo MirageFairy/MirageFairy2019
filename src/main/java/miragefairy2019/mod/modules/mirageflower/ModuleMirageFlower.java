@@ -30,14 +30,24 @@ public class ModuleMirageFlower
 {
 
 	public static BlockMirageFlower blockMirageFlower;
-	public static BlockFairyLog blockFairyLog;
 	public static ItemMirageFlowerSeeds itemMirageFlowerSeeds;
+
+	public static BlockFairyLog blockFairyLog;
 
 	public static void init(EventRegistryMod erMod)
 	{
+		erMod.registerBlock.register(b -> {
+
+			// ミラージュフラワーブロック
+			blockMirageFlower = new BlockMirageFlower();
+			blockMirageFlower.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower");
+			blockMirageFlower.setCreativeTab(ApiMain.creativeTab());
+			ForgeRegistries.BLOCKS.register(blockMirageFlower);
+
+		});
 		erMod.registerItem.register(b -> {
 
-			// 種
+			// ミラージュフラワーの種
 			itemMirageFlowerSeeds = new ItemMirageFlowerSeeds();
 			itemMirageFlowerSeeds.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_seeds");
 			itemMirageFlowerSeeds.setUnlocalizedName("mirageFlowerSeeds");
@@ -48,15 +58,10 @@ public class ModuleMirageFlower
 			}
 
 		});
+
 		erMod.registerBlock.register(b -> {
 
-			// ブロック
-			blockMirageFlower = new BlockMirageFlower();
-			blockMirageFlower.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower");
-			blockMirageFlower.setCreativeTab(ApiMain.creativeTab());
-			ForgeRegistries.BLOCKS.register(blockMirageFlower);
-
-			// ブロック
+			// 妖精の樹洞ブロック
 			blockFairyLog = new BlockFairyLog();
 			blockFairyLog.setRegistryName(ModMirageFairy2019.MODID, "fairy_log");
 			blockFairyLog.setCreativeTab(ApiMain.creativeTab());
