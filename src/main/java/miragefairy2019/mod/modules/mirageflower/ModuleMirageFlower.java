@@ -41,6 +41,7 @@ public class ModuleMirageFlower
 			// ミラージュフラワーブロック
 			blockMirageFlower = new BlockMirageFlower();
 			blockMirageFlower.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower");
+			blockMirageFlower.setUnlocalizedName("mirageFlower");
 			blockMirageFlower.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockMirageFlower);
 
@@ -64,6 +65,7 @@ public class ModuleMirageFlower
 			// 妖精の樹洞ブロック
 			blockFairyLog = new BlockFairyLog();
 			blockFairyLog.setRegistryName(ModMirageFairy2019.MODID, "fairy_log");
+			blockFairyLog.setUnlocalizedName("fairyLog");
 			blockFairyLog.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockFairyLog);
 
