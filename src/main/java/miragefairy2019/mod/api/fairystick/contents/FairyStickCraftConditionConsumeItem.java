@@ -1,19 +1,17 @@
 package miragefairy2019.mod.api.fairystick.contents;
 
-import java.util.function.Predicate;
-
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumParticleTypes;
 
 public class FairyStickCraftConditionConsumeItem implements IFairyStickCraftCondition
 {
 
-	private Predicate<ItemStack> ingredient;
+	private Ingredient ingredient;
 
-	public FairyStickCraftConditionConsumeItem(Predicate<ItemStack> ingredient)
+	public FairyStickCraftConditionConsumeItem(Ingredient ingredient)
 	{
 		this.ingredient = ingredient;
 	}

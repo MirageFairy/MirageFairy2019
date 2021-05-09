@@ -1,6 +1,6 @@
 package miragefairy2019.mod.api.fairystick.contents;
 
-import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
@@ -15,11 +15,11 @@ import net.minecraft.world.World;
 public class FairyStickCraftConditionConsumeBlock implements IFairyStickCraftCondition
 {
 
-	private Predicate<IBlockState> predicateInput;
+	private Supplier<IBlockState> sBlockStateInput;
 
-	public FairyStickCraftConditionConsumeBlock(Predicate<IBlockState> predicateInput)
+	public FairyStickCraftConditionConsumeBlock(Supplier<IBlockState> sBlockStateInput)
 	{
-		this.predicateInput = predicateInput;
+		this.sBlockStateInput = sBlockStateInput;
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class FairyStickCraftConditionConsumeBlock implements IFairyStickCraftCon
 		IBlockState blockState = Blocks.AIR.getDefaultState();
 
 		// 設置先は指定されたブロックでなければならない
-		if (!predicateInput.test(fairyStickCraft.getBlockState())) return false;
+		if (!fairyStickCraft.getBlockState().equals(sBlockStateInput.get())) return false;
 
 		fairyStickCraft.hookOnCraft(() -> {
 

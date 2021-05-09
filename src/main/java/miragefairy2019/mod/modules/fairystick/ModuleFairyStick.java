@@ -68,7 +68,7 @@ public class ModuleFairyStick
 			// 水＋ミラジウムの粉→妖水
 			ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
 				new FairyStickCraftConditionReplaceBlock(
-					blockState -> blockState.equals(Blocks.WATER.getDefaultState()),
+					() -> Blocks.WATER.getDefaultState(),
 					() -> ApiOre.blockFluidMiragiumWater.getDefaultState()),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("dustMiragium"))));
 

@@ -103,7 +103,7 @@ public class ModuleMaterialsFairy
 
 						// フェアリーステッキクラフト
 						ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
-							new FairyStickCraftConditionConsumeBlock(blockState -> blockState.equals(ApiOre.blockFluidMirageFlowerExtract.getDefaultState())),
+							new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMirageFlowerExtract.getDefaultState()),
 							new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019ManaRodGlass")),
 							new FairyStickCraftConditionConsumeItem(new OreIngredient("blockQuartz")),
 							new FairyStickCraftConditionSpawnItem(() -> v.createItemStack())));
@@ -117,7 +117,7 @@ public class ModuleMaterialsFairy
 
 						// フェアリーステッキクラフト
 						ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
-							new FairyStickCraftConditionConsumeBlock(blockState -> blockState.equals(ApiOre.blockFluidMiragiumWater.getDefaultState())),
+							new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState()),
 							new FairyStickCraftConditionConsumeItem(new OreIngredient("leafMirageFlower")),
 							new FairyStickCraftConditionConsumeItem(new OreIngredient("bone")),
 							new FairyStickCraftConditionConsumeItem(new OreIngredient("gemApatite")),

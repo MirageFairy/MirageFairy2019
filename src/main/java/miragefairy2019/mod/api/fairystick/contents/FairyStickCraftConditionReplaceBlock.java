@@ -1,6 +1,5 @@
 package miragefairy2019.mod.api.fairystick.contents;
 
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
@@ -15,13 +14,13 @@ import net.minecraft.world.World;
 public class FairyStickCraftConditionReplaceBlock implements IFairyStickCraftCondition
 {
 
-	private Predicate<IBlockState> predicateInput;
-	private Supplier<IBlockState> sBlockState;
+	private Supplier<IBlockState> sBlockStateInput;
+	private Supplier<IBlockState> sBlockStateOutput;
 
-	public FairyStickCraftConditionReplaceBlock(Predicate<IBlockState> predicateInput, Supplier<IBlockState> sBlockState)
+	public FairyStickCraftConditionReplaceBlock(Supplier<IBlockState> sBlockStateInput, Supplier<IBlockState> sBlockState)
 	{
-		this.predicateInput = predicateInput;
-		this.sBlockState = sBlockState;
+		this.sBlockStateInput = sBlockStateInput;
+		this.sBlockStateOutput = sBlockState;
 	}
 
 	@Override
@@ -29,10 +28,10 @@ public class FairyStickCraftConditionReplaceBlock implements IFairyStickCraftCon
 	{
 		World world = fairyStickCraft.getWorld();
 		BlockPos pos = fairyStickCraft.getPos();
-		IBlockState blockState = sBlockState.get();
+		IBlockState blockState = sBlockStateOutput.get();
 
 		// 設置先は指定されたブロックでなければならない
-		if (!predicateInput.test(fairyStickCraft.getBlockState())) return false;
+		if (!fairyStickCraft.getBlockState().equals(sBlockStateInput.get())) return false;
 
 		// 設置物は召喚先に設置可能でなければならない
 		if (!blockState.getBlock().canPlaceBlockAt(world, pos)) return false;
