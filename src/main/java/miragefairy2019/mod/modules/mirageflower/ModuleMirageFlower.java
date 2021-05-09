@@ -16,6 +16,7 @@ import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -33,6 +34,7 @@ public class ModuleMirageFlower
 	public static ItemMirageFlowerSeeds itemMirageFlowerSeeds;
 
 	public static BlockFairyLog blockFairyLog;
+	public static ItemBlock itemBlockFairyLog;
 
 	public static void init(EventRegistryMod erMod)
 	{
@@ -68,6 +70,19 @@ public class ModuleMirageFlower
 			blockFairyLog.setUnlocalizedName("fairyLog");
 			blockFairyLog.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockFairyLog);
+
+		});
+		erMod.registerItem.register(b -> {
+
+			// 妖精の樹洞アイテム
+			itemBlockFairyLog = new ItemBlock(blockFairyLog);
+			itemBlockFairyLog.setRegistryName(ModMirageFairy2019.MODID, "fairy_log");
+			itemBlockFairyLog.setUnlocalizedName("fairyLog");
+			itemBlockFairyLog.setCreativeTab(ApiMain.creativeTab());
+			ForgeRegistries.ITEMS.register(itemBlockFairyLog);
+			if (ApiMain.side().isClient()) {
+				ModelLoader.setCustomModelResourceLocation(itemBlockFairyLog, 0, new ModelResourceLocation(itemBlockFairyLog.getRegistryName(), "facing=north,variant=oak"));
+			}
 
 		});
 

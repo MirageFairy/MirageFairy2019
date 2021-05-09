@@ -382,6 +382,9 @@ Writer : {
 	block("topaz_ore");
 	block("tourmaline_ore");
 
+	# 妖精の樹洞
+	block("fairy_log");
+
 	handheld("fairy_stick");
 
 	fairyWand("crafting_fairy_wand"   ; "crafting_fairy_wand" ; 1);
