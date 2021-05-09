@@ -8,6 +8,7 @@ import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftRecipe;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftRegistry;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftResult;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -50,6 +51,12 @@ public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 		}
 
 		return Optional.empty();
+	}
+
+	@Override
+	public ISuppliterator<IFairyStickCraftRecipe> getRecipes()
+	{
+		return ISuppliterator.ofIterable(recipes);
 	}
 
 }
