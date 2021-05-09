@@ -26,6 +26,8 @@ import net.minecraftforge.oredict.OreIngredient;
 public class ModuleFairyStick
 {
 
+	public static ItemStack itemStackFairyStick;
+
 	public static void init(EventRegistryMod erMod)
 	{
 
@@ -35,7 +37,8 @@ public class ModuleFairyStick
 			.bind(onRegisterItem(i -> {
 				if (ApiMain.side().isClient()) ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), null));
 			}))
-			.bind(onCreateItemStack(i -> OreDictionary.registerOre("mirageFairy2019FairyStick", new ItemStack(i))));
+			.bind(onCreateItemStack(i -> OreDictionary.registerOre("mirageFairy2019FairyStick", new ItemStack(i))))
+			.bind(onCreateItemStack(i -> itemStackFairyStick = new ItemStack(i)));
 
 		// レシピ登録
 		{
