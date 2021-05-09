@@ -6,7 +6,7 @@ import java.util.List;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftRecipe;
 
-public class FairyStickCraftRecipe implements IFairyStickCraftRecipe
+public final class FairyStickCraftRecipe implements IFairyStickCraftRecipe
 {
 
 	private List<IFairyStickCraftCondition> conditions = new ArrayList<>();
