@@ -5,6 +5,7 @@ import static miragefairy2019.mod.lib.Configurator.*;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairystick.ApiFairyStick;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeItem;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionReplaceBlock;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionSpawnBlock;
@@ -41,14 +42,14 @@ public class ModuleFairyStick
 
 			// 水精→水源
 			ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
-				new FairyStickCraftConditionSpawnBlock(() -> Blocks.WATER.getDefaultState()) {
+				new IFairyStickCraftCondition() {
 					@Override
 					public boolean test(IFairyStickCraft fairyStickCraft)
 					{
-						if (BiomeDictionary.hasType(fairyStickCraft.getWorld().getBiome(fairyStickCraft.getPos()), BiomeDictionary.Type.NETHER)) return false;
-						return super.test(fairyStickCraft);
+						return !BiomeDictionary.hasType(fairyStickCraft.getWorld().getBiome(fairyStickCraft.getPos()), BiomeDictionary.Type.NETHER);
 					}
 				},
+				new FairyStickCraftConditionSpawnBlock(() -> Blocks.WATER.getDefaultState()),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairyCrystal")),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyWaterRank1"))));
 
