@@ -8,6 +8,8 @@ import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.WorldGenBush;
+import miragefairy2019.mod.modules.mirageflower.fairylogdrop.FairyLogDropRegistry;
+import miragefairy2019.mod.modules.mirageflower.fairylogdrop.api.IFairyLogDropRegistry;
 import mirrg.boron.util.UtilsLambda;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.block.BlockNewLog;
@@ -30,6 +32,8 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class ModuleMirageFlower
 {
 
+	public static IFairyLogDropRegistry fairyLogDropRegistry = new FairyLogDropRegistry();
+
 	public static BlockMirageFlower blockMirageFlower;
 	public static ItemMirageFlowerSeeds itemMirageFlowerSeeds;
 
@@ -38,6 +42,8 @@ public class ModuleMirageFlower
 
 	public static void init(EventRegistryMod erMod)
 	{
+		new FairyLogDropLoader(fairyLogDropRegistry).init();
+
 		erMod.registerBlock.register(b -> {
 
 			// ミラージュフラワーブロック
