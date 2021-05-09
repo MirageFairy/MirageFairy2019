@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -65,6 +66,12 @@ public class FairyStickCraftConditionConsumeBlock implements IFairyStickCraftCon
 
 		});
 		return true;
+	}
+
+	@Override
+	public ISuppliterator<String> getStringsInput()
+	{
+		return ISuppliterator.of(sBlockStateInput.get().getBlock().getLocalizedName());
 	}
 
 }

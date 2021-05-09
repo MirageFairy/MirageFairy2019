@@ -2,6 +2,7 @@ package miragefairy2019.mod.api.fairystick.contents;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumParticleTypes;
@@ -43,6 +44,12 @@ public class FairyStickCraftConditionConsumeItem implements IFairyStickCraftCond
 
 		});
 		return true;
+	}
+
+	@Override
+	public ISuppliterator<Ingredient> getIngredientsInput()
+	{
+		return ISuppliterator.of(ingredient);
 	}
 
 }

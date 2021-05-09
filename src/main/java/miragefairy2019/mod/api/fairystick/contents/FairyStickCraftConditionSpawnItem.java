@@ -4,8 +4,10 @@ import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 
 public class FairyStickCraftConditionSpawnItem implements IFairyStickCraftCondition
 {
@@ -35,6 +37,12 @@ public class FairyStickCraftConditionSpawnItem implements IFairyStickCraftCondit
 
 		});
 		return true;
+	}
+
+	@Override
+	public ISuppliterator<Ingredient> getIngredientsOutput()
+	{
+		return ISuppliterator.of(Ingredient.fromStacks(sItemStack.get()));
 	}
 
 }

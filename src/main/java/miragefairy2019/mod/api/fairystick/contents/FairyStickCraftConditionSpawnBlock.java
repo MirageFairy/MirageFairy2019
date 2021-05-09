@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumParticleTypes;
@@ -67,6 +68,12 @@ public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondi
 
 		});
 		return true;
+	}
+
+	@Override
+	public ISuppliterator<String> getStringsOutput()
+	{
+		return ISuppliterator.of(sBlockStateInput.get().getBlock().getLocalizedName());
 	}
 
 }

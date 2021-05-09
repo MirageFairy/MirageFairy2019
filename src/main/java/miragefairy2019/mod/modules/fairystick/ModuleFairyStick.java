@@ -13,6 +13,7 @@ import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.lib.EventRegistryMod;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -50,6 +51,12 @@ public class ModuleFairyStick
 					public boolean test(IFairyStickCraft fairyStickCraft)
 					{
 						return !BiomeDictionary.hasType(fairyStickCraft.getWorld().getBiome(fairyStickCraft.getPos()), BiomeDictionary.Type.NETHER);
+					}
+
+					@Override
+					public ISuppliterator<String> getStringsInput()
+					{
+						return ISuppliterator.of("Not Nether");
 					}
 				},
 				new FairyStickCraftConditionSpawnBlock(() -> Blocks.WATER.getDefaultState()),
