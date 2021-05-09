@@ -14,11 +14,11 @@ import net.minecraft.world.World;
 public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondition
 {
 
-	private Supplier<IBlockState> sBlockState;
+	private Supplier<IBlockState> sBlockStateInput;
 
 	public FairyStickCraftConditionSpawnBlock(Supplier<IBlockState> sBlockState)
 	{
-		this.sBlockState = sBlockState;
+		this.sBlockStateInput = sBlockState;
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondi
 	{
 		World world = fairyStickCraft.getWorld();
 		BlockPos pos = fairyStickCraft.getPos();
-		IBlockState blockState = sBlockState.get();
+		IBlockState blockState = sBlockStateInput.get();
 
 		// 設置先は空気でなければならない
 		if (!fairyStickCraft.getBlockState().getBlock().isReplaceable(world, pos)) return false;
