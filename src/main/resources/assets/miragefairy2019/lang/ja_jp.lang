@@ -5,6 +5,8 @@ advancements.miragefairy2019.fairy_weapon.root.title=妖精武器
 advancements.miragefairy2019.fairy_weapon.root.description=妖精武器
 advancements.miragefairy2019.fairy_weapon.all.description=所定のアイテムを入手する
 
+tile.fairyLog.name=妖精の樹洞
+
 item.mirageFlowerSeeds.name=ミラージュフラワーの種
 
 item.manaRodShine.name=月長石の魔導芯棒

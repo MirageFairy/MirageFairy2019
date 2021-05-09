@@ -5,6 +5,8 @@ advancements.miragefairy2019.fairy_weapon.root.title=Fairy Weapon
 advancements.miragefairy2019.fairy_weapon.root.description=Fairy Weapon
 advancements.miragefairy2019.fairy_weapon.all.description=Get a specific item
 
+tile.fairyLog.name=Fairy Log
+
 item.mirageFlowerSeeds.name=Mirage Flower Seeds
 
 item.manaRodShine.name=Shine Mana Rod
