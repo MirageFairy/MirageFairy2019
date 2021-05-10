@@ -228,7 +228,7 @@ tile.blockMiragium.name=Block of Miragium
 tile.blockDustMiragium.name=Block of Miragium Dust
 
 item.spheres.name=Sphere
-item.spheres.format=Sphere of "%s"
+item.spheres.format=Sphere of %s
 
 fluid.miragium_water=Miragium Water
 tile.miragiumWater.name=Miragium Water
@@ -237,7 +237,7 @@ tile.mirageFlowerExtract.name=Mirage Extract
 fluid.mirage_flower_oil=Mirage Oil
 tile.mirageFlowerOil.name=Mirage Oil
 
-mirageFairy2019.component.cuticle.format=Cuticle of "%s"
+mirageFairy2019.component.cuticle.format=Cuticle of %s
 mirageFairy2019.component.apatite.name=Apatite
 mirageFairy2019.component.fluorite.name=Fluorite
 mirageFairy2019.component.sulfur.name=Sulfur

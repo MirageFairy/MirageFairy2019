@@ -228,7 +228,7 @@ tile.blockMiragium.name=ミラジウムブロック
 tile.blockDustMiragium.name=ミラジウムの粉ブロック
 
 item.spheres.name=スフィア
-item.spheres.format=≪%s≫のスフィア
+item.spheres.format=%sのスフィア
 
 fluid.miragium_water=ミラジウムウォーター
 tile.miragiumWater.name=ミラジウムウォーター
@@ -237,7 +237,7 @@ tile.mirageFlowerExtract.name=ミラージュエキス
 fluid.mirage_flower_oil=ミラージュオイル
 tile.mirageFlowerOil.name=ミラージュオイル
 
-mirageFairy2019.component.cuticle.format=≪%s≫のキューティクル
+mirageFairy2019.component.cuticle.format=%sのキューティクル
 mirageFairy2019.component.apatite.name=燐灰石
 mirageFairy2019.component.fluorite.name=蛍石
 mirageFairy2019.component.sulfur.name=硫黄
