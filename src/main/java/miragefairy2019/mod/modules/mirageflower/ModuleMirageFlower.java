@@ -8,6 +8,7 @@ import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropRegistry;
 import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRegistry;
+import miragefairy2019.mod.common.pickable.PickableRegistry;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.WorldGenBush;
@@ -44,6 +45,7 @@ public class ModuleMirageFlower
 
 		erMod.initRegistry.register(() -> {
 			ApiMirageFlower.fairyLogDropRegistry = new FairyLogDropRegistry();
+			ApiMirageFlower.pickableRegistry = new PickableRegistry();
 		});
 
 		erMod.addRecipe.register(() -> {
