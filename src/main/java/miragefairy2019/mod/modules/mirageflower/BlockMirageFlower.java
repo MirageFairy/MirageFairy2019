@@ -73,7 +73,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		textComponent.appendText(String.format("Pos: %d %d %d\n", pos.getX(), pos.getY(), pos.getZ()));
 		textComponent.appendText(String.format("Block: %s\n", world.getBlockState(pos)));
 		textComponent.appendText(String.format("Floor: %s\n", world.getBlockState(pos.down())));
-		textComponent.appendText(String.format("%.2f%%\n", ModuleMirageFlower.blockMirageFlower.getGrowRate(world, pos) * 100));
+		textComponent.appendText(String.format("%.2f%%\n", getGrowRate(world, pos) * 100));
 		textComponent.appendText("====================");
 		return textComponent;
 	}
@@ -179,7 +179,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	}
 
 	@SuppressWarnings("deprecation")
-	public double getGrowRate(World world, BlockPos blockPos)
+	public static double getGrowRate(World world, BlockPos blockPos)
 	{
 		double rate = 0.04;
 
