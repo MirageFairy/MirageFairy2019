@@ -2,12 +2,13 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.fairy.AbilityTypes;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.pickable.IPickable;
-import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.struct.Tuple3;
@@ -21,7 +22,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
@@ -200,9 +200,10 @@ public class ItemBellFlowerPicking extends ItemBellBase
 					if (distance2 <= status.radius * status.radius) {
 
 						IBlockState blockState = world.getBlockState(blockPos);
-						if (blockState.getBlock() == ModuleMirageFlower.blockMirageFlower) {
-							if (ModuleMirageFlower.blockMirageFlower.isMaxAge(blockState)) {
-								targets2.add(Tuple3.of(blockPos, distance2, null));
+						IPickable pickable = ApiMirageFlower.pickableRegistry.get(blockState.getBlock()).orElse(null);
+						if (pickable != null) {
+							if (pickable.isPickableAge(blockState)) {
+								targets2.add(Tuple3.of(blockPos, distance2, pickable));
 							}
 						}
 
@@ -270,8 +271,11 @@ public class ItemBellFlowerPicking extends ItemBellBase
 				}
 				{
 
-					// 破壊
-					breakBlock(world, player, EnumFacing.UP, itemStack, tuple.x, resultWithFairy.status.fortune, false);
+					// 収穫
+					boolean result2 = tuple.z.tryPick(world, tuple.x, Optional.of(player), resultWithFairy.status.fortune);
+
+					// 収穫できなかった場合は飛ばす
+					if (!result2) continue;
 
 					// 収集
 					if (resultWithFairy.status.collection) {
