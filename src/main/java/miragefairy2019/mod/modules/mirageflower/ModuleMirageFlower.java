@@ -5,6 +5,7 @@ import java.util.List;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropRegistry;
+import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRegistry;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
@@ -32,8 +33,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class ModuleMirageFlower
 {
 
-	public static IFairyLogDropRegistry fairyLogDropRegistry = new FairyLogDropRegistry();
-
 	public static BlockMirageFlower blockMirageFlower;
 	public static ItemMirageFlowerSeeds itemMirageFlowerSeeds;
 
@@ -42,7 +41,14 @@ public class ModuleMirageFlower
 
 	public static void init(EventRegistryMod erMod)
 	{
-		new FairyLogDropLoader(fairyLogDropRegistry).init();
+
+		erMod.initRegistry.register(() -> {
+			ApiMirageFlower.fairyLogDropRegistry = new FairyLogDropRegistry();
+		});
+
+		erMod.addRecipe.register(() -> {
+			new FairyLogDropLoader(ApiMirageFlower.fairyLogDropRegistry).init();
+		});
 
 		erMod.registerBlock.register(b -> {
 

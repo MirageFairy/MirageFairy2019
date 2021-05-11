@@ -4,8 +4,8 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRecipe;
-import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import net.minecraft.item.ItemStack;
 
 @JEIPlugin
@@ -25,7 +25,7 @@ public class PluginFairyLogDrop implements IModPlugin
 	@Override
 	public void register(IModRegistry registry)
 	{
-		registry.addRecipes(ModuleMirageFlower.fairyLogDropRegistry.getRecipes().toCollection(), uid);
+		registry.addRecipes(ApiMirageFlower.fairyLogDropRegistry.getRecipes().toCollection(), uid);
 		registry.handleRecipes(FairyLogDropRecipe.class, recipe -> new RecipeWrapperFairyLogDrop(registry, recipe), uid);
 	}
 
