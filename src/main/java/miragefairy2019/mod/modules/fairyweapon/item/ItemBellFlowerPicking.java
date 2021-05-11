@@ -9,6 +9,7 @@ import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
+import mirrg.boron.util.struct.Tuple3;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -138,14 +139,14 @@ public class ItemBellFlowerPicking extends ItemBellBase
 
 		public final IFairyType fairyType;
 		public final Status status;
-		public final List<Tuple<BlockPos, Boolean>> targets;
+		public final List<Tuple3<BlockPos, Boolean, Void>> targets;
 
 		public ResultWithFairy(
 			EnumExecutability executability,
 			Vec3d positionTarget,
 			IFairyType fairyType,
 			Status status,
-			List<Tuple<BlockPos, Boolean>> targets)
+			List<Tuple3<BlockPos, Boolean, Void>> targets)
 		{
 			super(executability, positionTarget);
 			this.fairyType = fairyType;
@@ -179,9 +180,9 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		Vec3d positionTarget = rayTraceResult != null
 			? rayTraceResult.hitVec
 			: getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach);
-		List<Tuple<BlockPos, Boolean>> targets = new ArrayList<>();
+		List<Tuple3<BlockPos, Boolean, Void>> targets = new ArrayList<>();
 		{
-			List<Tuple<BlockPos, Double>> targets2 = new ArrayList<>();
+			List<Tuple3<BlockPos, Double, Void>> targets2 = new ArrayList<>();
 
 			int xMin = (int) Math.floor(positionTarget.x - status.radius);
 			int xMax = (int) Math.ceil(positionTarget.x + status.radius);
@@ -200,7 +201,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 						IBlockState blockState = world.getBlockState(blockPos);
 						if (blockState.getBlock() == ModuleMirageFlower.blockMirageFlower) {
 							if (ModuleMirageFlower.blockMirageFlower.isMaxAge(blockState)) {
-								targets2.add(Tuple.of(blockPos, distance2));
+								targets2.add(Tuple3.of(blockPos, distance2, null));
 							}
 						}
 
@@ -210,8 +211,8 @@ public class ItemBellFlowerPicking extends ItemBellBase
 			}
 
 			targets = ISuppliterator.ofIterable(targets2)
-				.sortedDouble(Tuple::getY)
-				.map((t, i) -> Tuple.of(t.x, i < status.maxTargetCount))
+				.sortedDouble(Tuple3::getY)
+				.map((t, i) -> Tuple3.of(t.x, i < status.maxTargetCount, (Void) null))
 				.toList();
 		}
 
@@ -250,7 +251,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		SoundEvent breakSound = null;
 		boolean collected = false;
 		int targetCount = 0;
-		for (Tuple<BlockPos, Boolean> tuple : resultWithFairy.targets) {
+		for (Tuple3<BlockPos, Boolean, Void> tuple : resultWithFairy.targets) {
 			if (tuple.y) {
 
 				// 耐久が足りないので中止
