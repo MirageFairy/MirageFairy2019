@@ -3,6 +3,7 @@ package miragefairy2019.mod.modules.mirageflower;
 import java.util.Optional;
 import java.util.Random;
 
+import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.fairy.AbilityTypes;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
@@ -283,7 +284,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 	@Override
 	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
 	{
-		return new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds);
+		return new ItemStack(ApiMirageFlower.itemMirageFlowerSeeds);
 	}
 
 	/**
@@ -303,7 +304,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 		// 種1個は確定でドロップ
 		if (isBreaking) {
-			drops.add(new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds));
+			drops.add(new ItemStack(ApiMirageFlower.itemMirageFlowerSeeds));
 		}
 
 		// サイズが2以上なら確定で茎をドロップ
@@ -320,7 +321,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		if (getAge(state) >= 3) {
 			int count = UtilsMath.randomInt(random, fortune * 0.01);
 			for (int i = 0; i < count; i++) {
-				drops.add(new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds));
+				drops.add(new ItemStack(ApiMirageFlower.itemMirageFlowerSeeds));
 			}
 		}
 

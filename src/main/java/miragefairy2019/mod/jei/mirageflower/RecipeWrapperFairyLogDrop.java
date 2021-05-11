@@ -6,8 +6,8 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRecipe;
-import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
@@ -24,7 +24,7 @@ public class RecipeWrapperFairyLogDrop implements IRecipeWrapper
 	@Override
 	public void getIngredients(IIngredients ingredients)
 	{
-		ingredients.setInput(VanillaTypes.ITEM, new ItemStack(ModuleMirageFlower.itemBlockFairyLog));
+		ingredients.setInput(VanillaTypes.ITEM, new ItemStack(ApiMirageFlower.itemBlockFairyLog));
 		ingredients.setOutput(VanillaTypes.ITEM, recipe.getItemStackOutput());
 	}
 

@@ -59,6 +59,7 @@ public class ModuleMirageFlower
 			blockMirageFlower.setUnlocalizedName("mirageFlower");
 			blockMirageFlower.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockMirageFlower);
+			ApiMirageFlower.blockMirageFlower = blockMirageFlower;
 
 		});
 		erMod.registerItem.register(b -> {
@@ -69,6 +70,7 @@ public class ModuleMirageFlower
 			itemMirageFlowerSeeds.setUnlocalizedName("mirageFlowerSeeds");
 			itemMirageFlowerSeeds.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.ITEMS.register(itemMirageFlowerSeeds);
+			ApiMirageFlower.itemMirageFlowerSeeds = itemMirageFlowerSeeds;
 			if (ApiMain.side().isClient()) {
 				ModelLoader.setCustomModelResourceLocation(itemMirageFlowerSeeds, 0, new ModelResourceLocation(itemMirageFlowerSeeds.getRegistryName(), null));
 			}
@@ -83,6 +85,7 @@ public class ModuleMirageFlower
 			blockFairyLog.setUnlocalizedName("fairyLog");
 			blockFairyLog.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockFairyLog);
+			ApiMirageFlower.blockFairyLog = blockFairyLog;
 
 		});
 		erMod.registerItem.register(b -> {
@@ -93,6 +96,7 @@ public class ModuleMirageFlower
 			itemBlockFairyLog.setUnlocalizedName("fairyLog");
 			itemBlockFairyLog.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.ITEMS.register(itemBlockFairyLog);
+			ApiMirageFlower.itemBlockFairyLog = itemBlockFairyLog;
 			if (ApiMain.side().isClient()) {
 				ModelLoader.setCustomModelResourceLocation(itemBlockFairyLog, 0, new ModelResourceLocation(itemBlockFairyLog.getRegistryName(), "facing=north,variant=oak"));
 			}

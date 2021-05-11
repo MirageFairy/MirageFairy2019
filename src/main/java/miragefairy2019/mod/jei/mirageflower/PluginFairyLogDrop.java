@@ -19,7 +19,7 @@ public class PluginFairyLogDrop implements IModPlugin
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry)
 	{
-		registry.addRecipeCategories(new RecipeCategoryFairyLogDrop(uid, title, modName, registry, () -> new ItemStack(ModuleMirageFlower.itemBlockFairyLog)));
+		registry.addRecipeCategories(new RecipeCategoryFairyLogDrop(uid, title, modName, registry, () -> new ItemStack(ApiMirageFlower.itemBlockFairyLog)));
 	}
 
 	@Override

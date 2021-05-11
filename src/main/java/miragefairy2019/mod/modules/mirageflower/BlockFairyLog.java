@@ -144,7 +144,7 @@ public class BlockFairyLog extends Block
 	@Override
 	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
 	{
-		return new ItemStack(ModuleMirageFlower.itemBlockFairyLog);
+		return new ItemStack(ApiMirageFlower.itemBlockFairyLog);
 	}
 
 	@Override
