@@ -44,7 +44,6 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		public final double radius;
 		public final int maxTargetCount;
 		public final int fortune;
-		public final boolean seeding;
 		public final boolean collection;
 		public final double wear;
 		public final double coolTime;
@@ -64,7 +63,6 @@ public class ItemBellFlowerPicking extends ItemBellBase
 						: fairyType.getManas().getShine() >= 1
 							? 1
 							: 0;
-			seeding = fairyType.getAbilities().getAbilityPower(AbilityTypes.knowledge.get()) >= 10;
 			collection = fairyType.getAbilities().getAbilityPower(AbilityTypes.warp.get()) >= 10;
 			wear = 0.5 * UtilsMath.trim(Math.pow(0.5, fairyType.getManas().getFire() / 30.0), 0.5, 1.0);
 			coolTime = fairyType.getCost() * 4 * UtilsMath.trim(Math.pow(0.5, fairyType.getManas().getAqua() / 30.0), 0.5, 1.0);
@@ -93,7 +91,6 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Gaia)");
 		tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Dark, " + AbilityTypes.submission.get().getDisplayName().getUnformattedText() + ", " + AbilityTypes.slash.get().getDisplayName().getUnformattedText() + ")");
 		tooltip.add(TextFormatting.BLUE + "Fortune: " + String.format("%d", status.fortune) + " (Shine)");
-		tooltip.add(TextFormatting.BLUE + "Seeding: " + (status.seeding ? "Yes" : "No") + " (" + AbilityTypes.knowledge.get().getDisplayName().getUnformattedText() + ")");
 		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + AbilityTypes.warp.get().getDisplayName().getUnformattedText() + ")");
 		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
 		tooltip.add(TextFormatting.BLUE + "Cool Time: " + String.format("%.0f", status.coolTime) + "t (Aqua, Cost)");
@@ -273,28 +270,6 @@ public class ItemBellFlowerPicking extends ItemBellBase
 
 					// 破壊
 					breakBlock(world, player, EnumFacing.UP, itemStack, tuple.x, resultWithFairy.status.fortune, false);
-
-					// 種まき
-					if (resultWithFairy.status.seeding) {
-
-						// 破壊したばかりのブロックの周辺のアイテムを得る
-						List<EntityItem> entityItems = world.getEntitiesWithinAABB(
-							EntityItem.class,
-							new AxisAlignedBB(tuple.x),
-							e -> e.getItem().isItemEqual(new ItemStack(ModuleMirageFlower.itemMirageFlowerSeeds)) && e.getItem().getCount() > 0);
-						if (!entityItems.isEmpty()) {
-							EntityItem entityItem = entityItems.get(0);
-
-							// 種を削る
-							entityItem.getItem().shrink(1);
-							if (entityItem.getItem().isEmpty()) entityItem.setDead();
-
-							// 植える
-							world.setBlockState(tuple.x, ModuleMirageFlower.blockMirageFlower.getState(0));
-
-						}
-
-					}
 
 					// 収集
 					if (resultWithFairy.status.collection) {
