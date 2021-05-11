@@ -33,11 +33,11 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class ModuleMirageFlower
 {
 
-	public static BlockMirageFlower blockMirageFlower;
-	public static ItemMirageFlowerSeeds itemMirageFlowerSeeds;
+	static BlockMirageFlower blockMirageFlower;
+	static ItemMirageFlowerSeeds itemMirageFlowerSeeds;
 
-	public static BlockFairyLog blockFairyLog;
-	public static ItemBlock itemBlockFairyLog;
+	static BlockFairyLog blockFairyLog;
+	static ItemBlock itemBlockFairyLog;
 
 	public static void init(EventRegistryMod erMod)
 	{
