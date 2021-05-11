@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import miragefairy2019.mod.ModMirageFairy2019;
+import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropRegistry;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.WorldGenBush;
 import miragefairy2019.mod.modules.mirageflower.fairylogdrop.FairyLogDropRegistry;
-import miragefairy2019.mod.modules.mirageflower.fairylogdrop.api.IFairyLogDropRegistry;
 import mirrg.boron.util.UtilsLambda;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.block.BlockNewLog;

@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropRecipe;
+import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropRegistry;
 import miragefairy2019.mod.lib.WeightedRandom;
-import miragefairy2019.mod.modules.mirageflower.fairylogdrop.api.IFairyLogDropRecipe;
-import miragefairy2019.mod.modules.mirageflower.fairylogdrop.api.IFairyLogDropRegistry;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
