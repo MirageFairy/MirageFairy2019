@@ -6,6 +6,7 @@ import java.util.List;
 import miragefairy2019.mod.api.fairy.AbilityTypes;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.mod.api.pickable.IPickable;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
@@ -139,14 +140,14 @@ public class ItemBellFlowerPicking extends ItemBellBase
 
 		public final IFairyType fairyType;
 		public final Status status;
-		public final List<Tuple3<BlockPos, Boolean, Void>> targets;
+		public final List<Tuple3<BlockPos, Boolean, IPickable>> targets;
 
 		public ResultWithFairy(
 			EnumExecutability executability,
 			Vec3d positionTarget,
 			IFairyType fairyType,
 			Status status,
-			List<Tuple3<BlockPos, Boolean, Void>> targets)
+			List<Tuple3<BlockPos, Boolean, IPickable>> targets)
 		{
 			super(executability, positionTarget);
 			this.fairyType = fairyType;
@@ -180,9 +181,9 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		Vec3d positionTarget = rayTraceResult != null
 			? rayTraceResult.hitVec
 			: getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach);
-		List<Tuple3<BlockPos, Boolean, Void>> targets = new ArrayList<>();
+		List<Tuple3<BlockPos, Boolean, IPickable>> targets = new ArrayList<>();
 		{
-			List<Tuple3<BlockPos, Double, Void>> targets2 = new ArrayList<>();
+			List<Tuple3<BlockPos, Double, IPickable>> targets2 = new ArrayList<>();
 
 			int xMin = (int) Math.floor(positionTarget.x - status.radius);
 			int xMax = (int) Math.ceil(positionTarget.x + status.radius);
@@ -212,7 +213,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 
 			targets = ISuppliterator.ofIterable(targets2)
 				.sortedDouble(Tuple3::getY)
-				.map((t, i) -> Tuple3.of(t.x, i < status.maxTargetCount, (Void) null))
+				.map((t, i) -> t.deriveY(i < status.maxTargetCount))
 				.toList();
 		}
 
@@ -251,7 +252,7 @@ public class ItemBellFlowerPicking extends ItemBellBase
 		SoundEvent breakSound = null;
 		boolean collected = false;
 		int targetCount = 0;
-		for (Tuple3<BlockPos, Boolean, Void> tuple : resultWithFairy.targets) {
+		for (Tuple3<BlockPos, Boolean, IPickable> tuple : resultWithFairy.targets) {
 			if (tuple.y) {
 
 				// 耐久が足りないので中止
