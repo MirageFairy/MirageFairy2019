@@ -382,24 +382,26 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 	public boolean pick(World worldIn, BlockPos pos, IBlockState state, Optional<EntityPlayer> oPlayerIn, int fortune)
 	{
-		if (getAge(state) >= 3) {
+		{
+			if (getAge(state) >= 3) {
 
-			NonNullList<ItemStack> drops = NonNullList.create();
-			getDrops(drops, worldIn, pos, state, fortune, false);
+				NonNullList<ItemStack> drops = NonNullList.create();
+				getDrops(drops, worldIn, pos, state, fortune, false);
 
-			for (ItemStack drop : drops) {
-				Block.spawnAsEntity(worldIn, pos, drop);
+				for (ItemStack drop : drops) {
+					Block.spawnAsEntity(worldIn, pos, drop);
+				}
+
+				state.getBlock().dropXpOnBlockBreak(worldIn, pos, getExpDrop(state, worldIn, pos, fortune, false));
+
+				worldIn.playEvent(oPlayerIn.orElse(null), 2001, pos, Block.getStateId(state));
+
+				worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, 1), 2);
+
+				return true;
 			}
-
-			state.getBlock().dropXpOnBlockBreak(worldIn, pos, getExpDrop(state, worldIn, pos, fortune, false));
-
-			worldIn.playEvent(oPlayerIn.orElse(null), 2001, pos, Block.getStateId(state));
-
-			worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, 1), 2);
-
-			return true;
+			return false;
 		}
-		return false;
 	}
 
 }
