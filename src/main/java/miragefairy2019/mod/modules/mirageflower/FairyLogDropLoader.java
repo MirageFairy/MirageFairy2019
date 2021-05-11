@@ -7,12 +7,12 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropRegistry;
+import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionCanRain;
+import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionHasBiomeType;
+import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionOverworld;
+import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRecipe;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.modules.fairy.VariantFairy;
-import miragefairy2019.mod.modules.mirageflower.fairylogdrop.FairyLogDropConditionCanRain;
-import miragefairy2019.mod.modules.mirageflower.fairylogdrop.FairyLogDropConditionHasBiomeType;
-import miragefairy2019.mod.modules.mirageflower.fairylogdrop.FairyLogDropConditionOverworld;
-import miragefairy2019.mod.modules.mirageflower.fairylogdrop.FairyLogDropRecipe;
 import net.minecraftforge.common.BiomeDictionary;
 
 public class FairyLogDropLoader

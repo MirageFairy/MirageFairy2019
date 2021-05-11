@@ -4,8 +4,8 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRecipe;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
-import miragefairy2019.mod.modules.mirageflower.fairylogdrop.FairyLogDropRecipe;
 import net.minecraft.item.ItemStack;
 
 @JEIPlugin

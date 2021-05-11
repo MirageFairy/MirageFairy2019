@@ -6,8 +6,8 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRecipe;
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
-import miragefairy2019.mod.modules.mirageflower.fairylogdrop.FairyLogDropRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 

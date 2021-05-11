@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.mirageflower.fairylogdrop;
+package miragefairy2019.mod.common.fairylogdrop;
 
 import java.util.ArrayList;
 import java.util.List;
