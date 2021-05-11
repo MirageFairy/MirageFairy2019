@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class EventRegistryMod
 {
 
+	public final IEventProvider<Runnable> initRegistry = EventProviders.runnable();
+
 	public final IEventProvider<Runnable> initCreativeTab = EventProviders.runnable();
 
 	//

@@ -45,6 +45,8 @@ public class ModMirageFairy2019
 		ModuleOre.init(erMod);
 		ModuleSphere.init(erMod);
 
+		erMod.initRegistry.trigger().run();
+
 		erMod.initCreativeTab.trigger().run();
 
 	}
