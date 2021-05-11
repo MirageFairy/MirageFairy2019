@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairystick.jei;
+package miragefairy2019.mod.jei.fairystick;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;

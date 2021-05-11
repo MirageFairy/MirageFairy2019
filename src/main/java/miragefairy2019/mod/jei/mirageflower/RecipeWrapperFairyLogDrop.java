@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.mirageflower.jei;
+package miragefairy2019.mod.jei.mirageflower;
 
 import java.util.List;
 

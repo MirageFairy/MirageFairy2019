@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.mirageflower.jei;
+package miragefairy2019.mod.jei.mirageflower;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -19,12 +19,7 @@ public class PluginFairyLogDrop implements IModPlugin
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry)
 	{
-		registry.addRecipeCategories(new RecipeCategoryFairyLogDrop(
-			uid,
-			title,
-			modName,
-			registry,
-			() -> new ItemStack(ModuleMirageFlower.itemBlockFairyLog)));
+		registry.addRecipeCategories(new RecipeCategoryFairyLogDrop(uid, title, modName, registry, () -> new ItemStack(ModuleMirageFlower.itemBlockFairyLog)));
 	}
 
 	@Override
