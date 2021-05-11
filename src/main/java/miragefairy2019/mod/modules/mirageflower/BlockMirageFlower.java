@@ -377,30 +377,30 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		itemStack = itemStack.isEmpty() ? ItemStack.EMPTY : itemStack.copy();
 		int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemStack);
 
-		return pick(worldIn, pos, state, Optional.of(playerIn), fortune);
+		return tryPick(worldIn, pos, Optional.of(playerIn), fortune);
 	}
 
-	public boolean pick(World world, BlockPos blockPos, IBlockState blockState, Optional<EntityPlayer> oPlayer, int fortune)
+	public boolean tryPick(World world, BlockPos blockPos, Optional<EntityPlayer> oPlayer, int fortune)
 	{
 		{
-			if (getAge(blockState) >= 3) {
+			IBlockState blockState = world.getBlockState(blockPos);
 
-				NonNullList<ItemStack> drops = NonNullList.create();
-				getDrops(drops, world, blockPos, blockState, fortune, false);
+			if (getAge(blockState) < 3) return false;
 
-				for (ItemStack drop : drops) {
-					Block.spawnAsEntity(world, blockPos, drop);
-				}
+			NonNullList<ItemStack> drops = NonNullList.create();
+			getDrops(drops, world, blockPos, blockState, fortune, false);
 
-				blockState.getBlock().dropXpOnBlockBreak(world, blockPos, getExpDrop(blockState, world, blockPos, fortune, false));
-
-				world.playEvent(oPlayer.orElse(null), 2001, blockPos, Block.getStateId(blockState));
-
-				world.setBlockState(blockPos, getDefaultState().withProperty(AGE, 1), 2);
-
-				return true;
+			for (ItemStack drop : drops) {
+				Block.spawnAsEntity(world, blockPos, drop);
 			}
-			return false;
+
+			blockState.getBlock().dropXpOnBlockBreak(world, blockPos, getExpDrop(blockState, world, blockPos, fortune, false));
+
+			world.playEvent(oPlayer.orElse(null), 2001, blockPos, Block.getStateId(blockState));
+
+			world.setBlockState(blockPos, getDefaultState().withProperty(AGE, 1), 2);
+
+			return true;
 		}
 	}
 
