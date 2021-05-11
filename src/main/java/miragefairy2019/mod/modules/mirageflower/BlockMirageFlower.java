@@ -7,6 +7,7 @@ import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.fairy.AbilityTypes;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
+import miragefairy2019.mod.api.pickable.IPickable;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy;
@@ -377,17 +378,31 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		itemStack = itemStack.isEmpty() ? ItemStack.EMPTY : itemStack.copy();
 		int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemStack);
 
-		return tryPick(worldIn, pos, Optional.of(playerIn), fortune);
+		return getPickable().tryPick(worldIn, pos, Optional.of(playerIn), fortune);
 	}
 
-	public boolean tryPick(World world, BlockPos blockPos, Optional<EntityPlayer> oPlayer, int fortune)
+	public IPickable getPickable()
 	{
-		{
+		return new IPickable() {
+			@Override
+			public Block getBlock()
+			{
+				return BlockMirageFlower.this;
+			}
+
+			@Override
+			public boolean isPickableAge(IBlockState blockState)
+			{
+				return getAge(blockState) == 3;
+			}
+
+			@Override
+			public boolean tryPick(World world, BlockPos blockPos, Optional<EntityPlayer> oPlayer, int fortune)
 			{
 				IBlockState blockState = world.getBlockState(blockPos);
 
-				if (getAge(blockState) < 3) return false;
 				// 最大サイズでないなら失敗
+				if (!isPickableAge(blockState)) return false;
 
 				// 収穫物計算
 				NonNullList<ItemStack> drops = NonNullList.create();
@@ -409,7 +424,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 				return true;
 			}
-		}
+		};
 	}
 
 }
