@@ -113,7 +113,6 @@ public class ModuleOre
 			.bind(setCreativeTab(() -> ApiMain.creativeTab()))
 			.peek(c -> {
 
-				// TODO 流体2個追加　ビンにcontainer追加
 				itemVariant(c.erMod, c, 0, () -> new ItemVariantFilledBucket("miragium_water_bucket", "bucketMiragiumWater", true, () -> Optional.of(blockFluidMiragiumWater.getDefaultState())))
 					.bind(addOreName("bucketMiragiumWater"))
 					.bind(addOreName("container1000MiragiumWater"))
