@@ -60,6 +60,7 @@ public class ModuleMirageFlower
 			blockMirageFlower.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockMirageFlower);
 			ApiMirageFlower.blockMirageFlower = blockMirageFlower;
+			ApiMirageFlower.pickableRegistry.register(blockMirageFlower, blockMirageFlower.getPickable());
 
 		});
 		erMod.registerItem.register(b -> {
