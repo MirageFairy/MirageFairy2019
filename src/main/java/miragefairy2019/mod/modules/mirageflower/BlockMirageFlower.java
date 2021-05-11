@@ -387,18 +387,24 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 				IBlockState blockState = world.getBlockState(blockPos);
 
 				if (getAge(blockState) < 3) return false;
+				// 最大サイズでないなら失敗
 
+				// 収穫物計算
 				NonNullList<ItemStack> drops = NonNullList.create();
 				getDrops(drops, world, blockPos, blockState, fortune, false);
 
+				// 収穫物生成
 				for (ItemStack drop : drops) {
 					Block.spawnAsEntity(world, blockPos, drop);
 				}
 
+				// 経験値生成
 				blockState.getBlock().dropXpOnBlockBreak(world, blockPos, getExpDrop(blockState, world, blockPos, fortune, false));
 
+				// エフェクト
 				world.playEvent(oPlayer.orElse(null), 2001, blockPos, Block.getStateId(blockState));
 
+				// ブロックの置換
 				world.setBlockState(blockPos, getDefaultState().withProperty(AGE, 1), 2);
 
 				return true;
