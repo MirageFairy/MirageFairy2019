@@ -33,65 +33,40 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class ModuleMirageFlower
 {
 
-	static BlockMirageFlower blockMirageFlower;
-	static ItemMirageFlowerSeeds itemMirageFlowerSeeds;
-
-	static BlockFairyLog blockFairyLog;
-	static ItemBlock itemBlockFairyLog;
-
 	public static void init(EventRegistryMod erMod)
 	{
+		initFairyLog(erMod);
+		initMirageFlower(erMod);
+	}
 
+	private static BlockFairyLog blockFairyLog;
+	private static ItemBlock itemBlockFairyLog;
+
+	private static void initFairyLog(EventRegistryMod erMod)
+	{
+
+		// レジストリ
 		erMod.initRegistry.register(() -> {
 			ApiMirageFlower.fairyLogDropRegistry = new FairyLogDropRegistry();
-			ApiMirageFlower.pickableRegistry = new PickableRegistry();
 		});
 
+		// デフォルトレシピ
 		erMod.addRecipe.register(() -> {
 			new FairyLogDropLoader(ApiMirageFlower.fairyLogDropRegistry).init();
 		});
 
+		// ブロック
 		erMod.registerBlock.register(b -> {
-
-			// ミラージュフラワーブロック
-			blockMirageFlower = new BlockMirageFlower();
-			blockMirageFlower.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower");
-			blockMirageFlower.setUnlocalizedName("mirageFlower");
-			blockMirageFlower.setCreativeTab(ApiMain.creativeTab());
-			ForgeRegistries.BLOCKS.register(blockMirageFlower);
-			ApiMirageFlower.blockMirageFlower = blockMirageFlower;
-			ApiMirageFlower.pickableRegistry.register(blockMirageFlower, blockMirageFlower.getPickable());
-
-		});
-		erMod.registerItem.register(b -> {
-
-			// ミラージュフラワーの種
-			itemMirageFlowerSeeds = new ItemMirageFlowerSeeds();
-			itemMirageFlowerSeeds.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_seeds");
-			itemMirageFlowerSeeds.setUnlocalizedName("mirageFlowerSeeds");
-			itemMirageFlowerSeeds.setCreativeTab(ApiMain.creativeTab());
-			ForgeRegistries.ITEMS.register(itemMirageFlowerSeeds);
-			ApiMirageFlower.itemMirageFlowerSeeds = itemMirageFlowerSeeds;
-			if (ApiMain.side().isClient()) {
-				ModelLoader.setCustomModelResourceLocation(itemMirageFlowerSeeds, 0, new ModelResourceLocation(itemMirageFlowerSeeds.getRegistryName(), null));
-			}
-
-		});
-
-		erMod.registerBlock.register(b -> {
-
-			// 妖精の樹洞ブロック
 			blockFairyLog = new BlockFairyLog();
 			blockFairyLog.setRegistryName(ModMirageFairy2019.MODID, "fairy_log");
 			blockFairyLog.setUnlocalizedName("fairyLog");
 			blockFairyLog.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.BLOCKS.register(blockFairyLog);
 			ApiMirageFlower.blockFairyLog = blockFairyLog;
-
 		});
-		erMod.registerItem.register(b -> {
 
-			// 妖精の樹洞アイテム
+		// アイテム
+		erMod.registerItem.register(b -> {
 			itemBlockFairyLog = new ItemBlock(blockFairyLog);
 			itemBlockFairyLog.setRegistryName(ModMirageFairy2019.MODID, "fairy_log");
 			itemBlockFairyLog.setUnlocalizedName("fairyLog");
@@ -101,61 +76,10 @@ public class ModuleMirageFlower
 			if (ApiMain.side().isClient()) {
 				ModelLoader.setCustomModelResourceLocation(itemBlockFairyLog, 0, new ModelResourceLocation(itemBlockFairyLog.getRegistryName(), "facing=north,variant=oak"));
 			}
-
 		});
 
 		// 地形生成
 		erMod.hookDecorator.register(() -> {
-
-			// ミラージュの花
-			{
-				List<BiomeDecoratorFlowers> biomeDecorators = new ArrayList<>();
-
-				biomeDecorators.add(new BiomeDecoratorFlowers(
-					UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
-						wg.blockCountMin = 1;
-						wg.blockCountMax = 3;
-					}),
-					0.01));
-
-				biomeDecorators.add(new BiomeDecoratorFlowers(
-					UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
-						wg.blockCountMin = 1;
-						wg.blockCountMax = 10;
-					}),
-					0.1) {
-					@Override
-					protected boolean canGenerate(Biome biome)
-					{
-						return super.canGenerate(biome) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN);
-					}
-				});
-
-				biomeDecorators.add(new BiomeDecoratorFlowers(
-					UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
-						wg.blockCountMin = 1;
-						wg.blockCountMax = 10;
-					}),
-					0.5) {
-					@Override
-					protected boolean canGenerate(Biome biome)
-					{
-						return super.canGenerate(biome) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST);
-					}
-				});
-
-				MinecraftForge.EVENT_BUS.register(new Object() {
-					@SubscribeEvent
-					public void accept(DecorateBiomeEvent.Post event)
-					{
-						for (BiomeDecoratorFlowers biomeDecorator : biomeDecorators) {
-							biomeDecorator.decorate(event);
-						}
-					}
-				});
-			}
-
-			// 妖精の洞穴
 			MinecraftForge.EVENT_BUS.register(new Object() {
 				@SubscribeEvent
 				public void init(DecorateBiomeEvent.Post event)
@@ -189,7 +113,91 @@ public class ModuleMirageFlower
 					}
 				}
 			});
+		});
 
+	}
+
+	private static BlockMirageFlower blockMirageFlower;
+	private static ItemMirageFlowerSeeds<BlockMirageFlower> itemMirageFlowerSeeds;
+
+	private static void initMirageFlower(EventRegistryMod erMod)
+	{
+
+		// レジストリ
+		erMod.initRegistry.register(() -> {
+			ApiMirageFlower.pickableRegistry = new PickableRegistry();
+		});
+
+		// ブロック
+		erMod.registerBlock.register(b -> {
+			blockMirageFlower = new BlockMirageFlower();
+			blockMirageFlower.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower");
+			blockMirageFlower.setUnlocalizedName("mirageFlower");
+			blockMirageFlower.setCreativeTab(ApiMain.creativeTab());
+			ForgeRegistries.BLOCKS.register(blockMirageFlower);
+			ApiMirageFlower.blockMirageFlower = blockMirageFlower;
+			ApiMirageFlower.pickableRegistry.register(blockMirageFlower, blockMirageFlower.getPickable());
+		});
+
+		// 種アイテム
+		erMod.registerItem.register(b -> {
+			itemMirageFlowerSeeds = new ItemMirageFlowerSeeds<>(blockMirageFlower);
+			itemMirageFlowerSeeds.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_seeds");
+			itemMirageFlowerSeeds.setUnlocalizedName("mirageFlowerSeeds");
+			itemMirageFlowerSeeds.setCreativeTab(ApiMain.creativeTab());
+			ForgeRegistries.ITEMS.register(itemMirageFlowerSeeds);
+			ApiMirageFlower.itemMirageFlowerSeeds = itemMirageFlowerSeeds;
+			if (ApiMain.side().isClient()) {
+				ModelLoader.setCustomModelResourceLocation(itemMirageFlowerSeeds, 0, new ModelResourceLocation(itemMirageFlowerSeeds.getRegistryName(), null));
+			}
+		});
+
+		// 地形生成
+		erMod.hookDecorator.register(() -> {
+			List<BiomeDecoratorFlowers> biomeDecorators = new ArrayList<>();
+			{
+				biomeDecorators.add(new BiomeDecoratorFlowers(
+					UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
+						wg.blockCountMin = 1;
+						wg.blockCountMax = 3;
+					}),
+					0.01));
+
+				biomeDecorators.add(new BiomeDecoratorFlowers(
+					UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
+						wg.blockCountMin = 1;
+						wg.blockCountMax = 10;
+					}),
+					0.1) {
+					@Override
+					protected boolean canGenerate(Biome biome)
+					{
+						return super.canGenerate(biome) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN);
+					}
+				});
+
+				biomeDecorators.add(new BiomeDecoratorFlowers(
+					UtilsLambda.get(new WorldGenBush(blockMirageFlower, blockMirageFlower.getState(3)), wg -> {
+						wg.blockCountMin = 1;
+						wg.blockCountMax = 10;
+					}),
+					0.5) {
+					@Override
+					protected boolean canGenerate(Biome biome)
+					{
+						return super.canGenerate(biome) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST);
+					}
+				});
+			}
+			MinecraftForge.EVENT_BUS.register(new Object() {
+				@SubscribeEvent
+				public void accept(DecorateBiomeEvent.Post event)
+				{
+					for (BiomeDecoratorFlowers biomeDecorator : biomeDecorators) {
+						biomeDecorator.decorate(event);
+					}
+				}
+			});
 		});
 
 	}

@@ -2,6 +2,7 @@ package miragefairy2019.mod.modules.mirageflower;
 
 import miragefairy2019.mod.api.ApiMirageFlower;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -16,8 +17,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
-public class ItemMirageFlowerSeeds extends Item implements IPlantable
+public class ItemMirageFlowerSeeds<T extends Block & IPlantable> extends Item implements IPlantable
 {
+
+	private T block;
+
+	public ItemMirageFlowerSeeds(T block)
+	{
+		this.block = block;
+	}
 
 	// 動作
 
@@ -31,7 +39,7 @@ public class ItemMirageFlowerSeeds extends Item implements IPlantable
 		IBlockState blockState = world.getBlockState(pos);
 		if (facing == EnumFacing.UP
 			&& player.canPlayerEdit(pos.offset(facing), facing, itemStack)
-			&& blockState.getBlock().canSustainPlant(blockState, world, pos, EnumFacing.UP, ModuleMirageFlower.blockMirageFlower)
+			&& blockState.getBlock().canSustainPlant(blockState, world, pos, EnumFacing.UP, block)
 			&& world.isAirBlock(pos.up())) {
 
 			world.setBlockState(pos.up(), getPlant(world, pos));
