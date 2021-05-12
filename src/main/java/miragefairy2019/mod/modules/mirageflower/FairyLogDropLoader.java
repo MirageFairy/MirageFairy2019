@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.mirageflower;
 import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
 import static net.minecraftforge.common.BiomeDictionary.Type.*;
 
-import java.util.function.Function;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropRegistry;
@@ -29,53 +29,43 @@ public class FairyLogDropLoader
 	{
 
 		// 時間帯
-		mrfld(0.1, () -> daytime).bind(o());
-		mrfld(0.1, () -> night).bind(o());
-		mrfld(0.1, () -> morning).bind(o());
+		mrfld(0.1, () -> daytime).peek(o());
+		mrfld(0.1, () -> night).peek(o());
+		mrfld(0.1, () -> morning).peek(o());
 
 		// 天候
-		mrfld(0.1, () -> fine).bind(o());
-		mrfld(0.1, () -> rain).bind(o()).bind(r());
-		mrfld(0.02, () -> thunder).bind(o()).bind(r());
+		mrfld(0.1, () -> fine).peek(o());
+		mrfld(0.1, () -> rain).peek(o()).peek(r());
+		mrfld(0.02, () -> thunder).peek(o()).peek(r());
 
 		// バイオーム
-		mrfld(1, () -> plains).bind(b(PLAINS));
-		mrfld(1, () -> forest).bind(b(FOREST));
-		mrfld(1, () -> taiga).bind(b(CONIFEROUS));
-		mrfld(1, () -> desert).bind(b(SANDY));
-		mrfld(1, () -> mountain).bind(b(MOUNTAIN));
+		mrfld(1, () -> plains).peek(b(PLAINS));
+		mrfld(1, () -> forest).peek(b(FOREST));
+		mrfld(1, () -> taiga).peek(b(CONIFEROUS));
+		mrfld(1, () -> desert).peek(b(SANDY));
+		mrfld(1, () -> mountain).peek(b(MOUNTAIN));
 
 	}
 
 	private Monad<FairyLogDropRecipe> mrfld(double rate, Supplier<VariantFairy[]> sArrayVariantFairy)
 	{
-		FairyLogDropRecipe recipe = new FairyLogDropRecipe(rate, () -> sArrayVariantFairy.get()[0].createItemStack());
-		registry.addRecipe(recipe);
-		return Monad.of(recipe);
+		return Monad.of(new FairyLogDropRecipe(rate, () -> sArrayVariantFairy.get()[0].createItemStack()))
+			.peek(recipe -> registry.addRecipe(recipe));
 	}
 
-	private Function<FairyLogDropRecipe, Monad<FairyLogDropRecipe>> b(BiomeDictionary.Type biome)
+	private Consumer<FairyLogDropRecipe> b(BiomeDictionary.Type biome)
 	{
-		return recipe -> {
-			recipe.addCondition(new FairyLogDropConditionHasBiomeType(biome));
-			return Monad.of(recipe);
-		};
+		return recipe -> recipe.addCondition(new FairyLogDropConditionHasBiomeType(biome));
 	}
 
-	private Function<FairyLogDropRecipe, Monad<FairyLogDropRecipe>> o()
+	private Consumer<FairyLogDropRecipe> o()
 	{
-		return recipe -> {
-			recipe.addCondition(new FairyLogDropConditionOverworld());
-			return Monad.of(recipe);
-		};
+		return recipe -> recipe.addCondition(new FairyLogDropConditionOverworld());
 	}
 
-	private Function<FairyLogDropRecipe, Monad<FairyLogDropRecipe>> r()
+	private Consumer<FairyLogDropRecipe> r()
 	{
-		return recipe -> {
-			recipe.addCondition(new FairyLogDropConditionCanRain());
-			return Monad.of(recipe);
-		};
+		return recipe -> recipe.addCondition(new FairyLogDropConditionCanRain());
 	}
 
 }
