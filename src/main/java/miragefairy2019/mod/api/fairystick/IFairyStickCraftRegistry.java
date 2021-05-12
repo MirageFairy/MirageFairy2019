@@ -13,8 +13,8 @@ public interface IFairyStickCraftRegistry
 
 	public void addRecipe(IFairyStickCraftRecipe recipe);
 
-	public Optional<IFairyStickCraftResult> getResult(Optional<EntityPlayer> oPlayer, World world, BlockPos pos, ItemStack itemStackFairyStick);
-
 	public ISuppliterator<IFairyStickCraftRecipe> getRecipes();
+
+	public Optional<IFairyStickCraftResult> getResult(Optional<EntityPlayer> oPlayer, World world, BlockPos pos, ItemStack itemStackFairyStick);
 
 }
