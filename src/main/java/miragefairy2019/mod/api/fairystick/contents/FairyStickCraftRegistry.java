@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftExecutor;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftRecipe;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftRegistry;
-import miragefairy2019.mod.api.fairystick.IFairyStickCraftResult;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -29,7 +29,7 @@ public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 	}
 
 	@Override
-	public Optional<IFairyStickCraftResult> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos pos, ItemStack itemStackFairyStick)
+	public Optional<IFairyStickCraftExecutor> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos pos, ItemStack itemStackFairyStick)
 	{
 		IBlockState blockState = world.getBlockState(pos);
 

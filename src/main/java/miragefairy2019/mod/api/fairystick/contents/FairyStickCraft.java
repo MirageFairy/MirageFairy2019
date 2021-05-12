@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
-import miragefairy2019.mod.api.fairystick.IFairyStickCraftResult;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftExecutor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class FairyStickCraft implements IFairyStickCraft, IFairyStickCraftResult
+public class FairyStickCraft implements IFairyStickCraft, IFairyStickCraftExecutor
 {
 
 	private final Optional<EntityPlayer> oPlayer;

@@ -15,6 +15,6 @@ public interface IFairyStickCraftRegistry
 
 	public ISuppliterator<IFairyStickCraftRecipe> getRecipes();
 
-	public Optional<IFairyStickCraftResult> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos pos, ItemStack itemStackFairyStick);
+	public Optional<IFairyStickCraftExecutor> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos pos, ItemStack itemStackFairyStick);
 
 }

@@ -1,6 +1,6 @@
 package miragefairy2019.mod.api.fairystick;
 
-public interface IFairyStickCraftResult
+public interface IFairyStickCraftExecutor
 {
 
 	public void onCraft();

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import miragefairy2019.mod.api.fairystick.ApiFairyStick;
-import miragefairy2019.mod.api.fairystick.IFairyStickCraftResult;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftExecutor;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import net.minecraft.client.util.ITooltipFlag;
@@ -67,19 +67,19 @@ public class ItemFairyStick extends Item
 	{
 
 		// レシピ判定
-		IFairyStickCraftResult result;
+		IFairyStickCraftExecutor executor;
 		a:
 		{
-			result = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), worldIn, pos, player.getHeldItem(hand)).orElse(null);
-			if (result != null) break a;
-			result = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), worldIn, pos.offset(facing), player.getHeldItem(hand)).orElse(null);
-			if (result != null) break a;
+			executor = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), worldIn, pos, player.getHeldItem(hand)).orElse(null);
+			if (executor != null) break a;
+			executor = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), worldIn, pos.offset(facing), player.getHeldItem(hand)).orElse(null);
+			if (executor != null) break a;
 			return EnumActionResult.PASS;
 		}
 
 		//
 
-		result.onCraft();
+		executor.onCraft();
 
 		return EnumActionResult.SUCCESS;
 	}
@@ -107,19 +107,19 @@ public class ItemFairyStick extends Item
 		if (rayTraceResult.typeOfHit != Type.BLOCK) return; // ブロックに当たらなかった場合は無視
 
 		// レシピ判定
-		IFairyStickCraftResult result;
+		IFairyStickCraftExecutor executor;
 		a:
 		{
-			result = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), world, rayTraceResult.getBlockPos(), itemStack).orElse(null);
-			if (result != null) break a;
-			result = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), world, rayTraceResult.getBlockPos().offset(rayTraceResult.sideHit), itemStack).orElse(null);
-			if (result != null) break a;
+			executor = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), world, rayTraceResult.getBlockPos(), itemStack).orElse(null);
+			if (executor != null) break a;
+			executor = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), world, rayTraceResult.getBlockPos().offset(rayTraceResult.sideHit), itemStack).orElse(null);
+			if (executor != null) break a;
 			return;
 		}
 
 		//
 
-		result.onUpdate();
+		executor.onUpdate();
 
 	}
 
