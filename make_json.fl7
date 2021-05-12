@@ -1,3 +1,4 @@
+@STRICT;
 
 Writer : {
 	new : class, dir -> class {
@@ -733,4 +734,6 @@ Writer : {
 
 );
 
-"Finished" => OUT;
+REQUIRE("src/fl7/lang.fl7");
+
+"[main] OK" => OUT;
