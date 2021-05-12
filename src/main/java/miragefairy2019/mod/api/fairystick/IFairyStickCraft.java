@@ -29,8 +29,4 @@ public interface IFairyStickCraft
 
 	public void hookOnUpdate(Runnable listener);
 
-	public void onCraft();
-
-	public void onUpdate();
-
 }
