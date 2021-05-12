@@ -29,7 +29,7 @@ public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 	}
 
 	@Override
-	public Optional<IFairyStickCraftResult> getResult(Optional<EntityPlayer> oPlayer, World world, BlockPos pos, ItemStack itemStackFairyStick)
+	public Optional<IFairyStickCraftResult> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos pos, ItemStack itemStackFairyStick)
 	{
 		IBlockState blockState = world.getBlockState(pos);
 
