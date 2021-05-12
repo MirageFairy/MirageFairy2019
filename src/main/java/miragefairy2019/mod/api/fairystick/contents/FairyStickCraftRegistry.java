@@ -23,7 +23,7 @@ public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 	private List<IFairyStickCraftRecipe> recipes = new ArrayList<>();
 
 	@Override
-	public void registerRecipe(IFairyStickCraftRecipe recipe)
+	public void addRecipe(IFairyStickCraftRecipe recipe)
 	{
 		recipes.add(recipe);
 	}

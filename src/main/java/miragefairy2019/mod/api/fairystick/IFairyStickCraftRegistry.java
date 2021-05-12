@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 public interface IFairyStickCraftRegistry
 {
 
-	public void registerRecipe(IFairyStickCraftRecipe recipe);
+	public void addRecipe(IFairyStickCraftRecipe recipe);
 
 	public Optional<IFairyStickCraftResult> getResult(Optional<EntityPlayer> oPlayer, World world, BlockPos pos, ItemStack itemStackFairyStick);
 

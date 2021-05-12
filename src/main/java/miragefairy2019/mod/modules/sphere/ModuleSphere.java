@@ -126,7 +126,7 @@ public class ModuleSphere
 							ingredient);
 
 						// 妖精のステッキレシピ
-						ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+						ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
 							new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState()),
 							new FairyStickCraftConditionConsumeItem(new OreIngredient("gemFluorite")),
 							new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName()))),
@@ -151,7 +151,7 @@ public class ModuleSphere
 							ingredient);
 
 						// 妖精のステッキレシピ
-						ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+						ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
 							new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState()),
 							new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName()))),
 							new FairyStickCraftConditionConsumeItem(ingredient),

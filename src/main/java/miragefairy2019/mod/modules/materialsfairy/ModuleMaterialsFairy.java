@@ -102,7 +102,7 @@ public class ModuleMaterialsFairy
 					.bind(onCreateItemStack(v -> {
 
 						// フェアリーステッキクラフト
-						ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+						ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
 							new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMirageFlowerExtract.getDefaultState()),
 							new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019ManaRodGlass")),
 							new FairyStickCraftConditionConsumeItem(new OreIngredient("blockQuartz")),
@@ -116,7 +116,7 @@ public class ModuleMaterialsFairy
 					.bind(onCreateItemStack(v -> {
 
 						// フェアリーステッキクラフト
-						ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+						ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
 							new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState()),
 							new FairyStickCraftConditionConsumeItem(new OreIngredient("leafMirageFlower")),
 							new FairyStickCraftConditionConsumeItem(new OreIngredient("bone")),

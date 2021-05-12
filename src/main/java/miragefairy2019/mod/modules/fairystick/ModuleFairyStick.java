@@ -45,7 +45,7 @@ public class ModuleFairyStick
 		{
 
 			// 水精→水源
-			ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+			ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
 				new IFairyStickCraftCondition() {
 					@Override
 					public boolean test(IFairyStickCraft fairyStickCraft)
@@ -64,19 +64,19 @@ public class ModuleFairyStick
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyWaterRank1"))));
 
 			// 溶岩精→溶岩流
-			ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+			ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
 				new FairyStickCraftConditionSpawnBlock(() -> Blocks.FLOWING_LAVA.getDefaultState().withProperty(BlockDynamicLiquid.LEVEL, 15)),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairyCrystal")),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyLavaRank1"))));
 
 			// 蜘蛛精→糸ブロック
-			ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+			ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
 				new FairyStickCraftConditionSpawnBlock(() -> Blocks.WEB.getDefaultState()),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairyCrystal")),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairySpiderRank1"))));
 
 			// 水＋ミラジウムの粉→妖水
-			ApiFairyStick.fairyStickCraftRegistry.registerRecipe(new FairyStickCraftRecipe(
+			ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
 				new FairyStickCraftConditionReplaceBlock(
 					() -> Blocks.WATER.getDefaultState(),
 					() -> ApiOre.blockFluidMiragiumWater.getDefaultState()),
