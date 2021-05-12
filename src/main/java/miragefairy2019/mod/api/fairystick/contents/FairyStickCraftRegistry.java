@@ -29,19 +29,19 @@ public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 	}
 
 	@Override
-	public Optional<IFairyStickCraftExecutor> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos pos, ItemStack itemStackFairyStick)
+	public Optional<IFairyStickCraftExecutor> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos blockPos, ItemStack itemStackFairyStick)
 	{
-		IBlockState blockState = world.getBlockState(pos);
+		IBlockState blockState = world.getBlockState(blockPos);
 
 		recipe:
 		for (IFairyStickCraftRecipe recipe : recipes) {
 			FairyStickCraft fairyStickCraft = new FairyStickCraft(
 				oPlayer,
-				pos,
+				blockPos,
 				blockState,
 				itemStackFairyStick,
 				world,
-				world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos).grow(1)));
+				world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(blockPos).grow(1)));
 
 			for (IFairyStickCraftCondition condition : recipe.getConditions()) {
 				if (!condition.test(fairyStickCraft)) continue recipe;
