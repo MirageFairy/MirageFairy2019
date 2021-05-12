@@ -27,7 +27,7 @@ public class FairyStickCraftConditionConsumeBlock implements IFairyStickCraftCon
 	public boolean test(IFairyStickCraft fairyStickCraft)
 	{
 		World world = fairyStickCraft.getWorld();
-		BlockPos pos = fairyStickCraft.getPos();
+		BlockPos pos = fairyStickCraft.getBlockPos();
 		IBlockState blockState = Blocks.AIR.getDefaultState();
 
 		// 設置先は指定されたブロックでなければならない

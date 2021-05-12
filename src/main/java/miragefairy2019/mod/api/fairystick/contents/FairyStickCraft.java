@@ -53,7 +53,7 @@ public class FairyStickCraft implements IFairyStickCraft, IFairyStickCraftExecut
 	}
 
 	@Override
-	public BlockPos getPos()
+	public BlockPos getBlockPos()
 	{
 		return pos;
 	}

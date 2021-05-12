@@ -50,7 +50,7 @@ public class ModuleFairyStick
 					@Override
 					public boolean test(IFairyStickCraft fairyStickCraft)
 					{
-						return !BiomeDictionary.hasType(fairyStickCraft.getWorld().getBiome(fairyStickCraft.getPos()), BiomeDictionary.Type.NETHER);
+						return !BiomeDictionary.hasType(fairyStickCraft.getWorld().getBiome(fairyStickCraft.getBlockPos()), BiomeDictionary.Type.NETHER);
 					}
 
 					@Override

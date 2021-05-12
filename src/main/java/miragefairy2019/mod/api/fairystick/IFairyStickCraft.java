@@ -19,7 +19,7 @@ public interface IFairyStickCraft
 
 	public IBlockState getBlockState();
 
-	public BlockPos getPos();
+	public BlockPos getBlockPos();
 
 	public ItemStack getItemStackFairyStick();
 

@@ -26,7 +26,7 @@ public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondi
 	public boolean test(IFairyStickCraft fairyStickCraft)
 	{
 		World world = fairyStickCraft.getWorld();
-		BlockPos pos = fairyStickCraft.getPos();
+		BlockPos pos = fairyStickCraft.getBlockPos();
 		IBlockState blockState = sBlockStateInput.get();
 
 		// 設置先は空気でなければならない

@@ -28,7 +28,7 @@ public class FairyStickCraftConditionReplaceBlock implements IFairyStickCraftCon
 	public boolean test(IFairyStickCraft fairyStickCraft)
 	{
 		World world = fairyStickCraft.getWorld();
-		BlockPos pos = fairyStickCraft.getPos();
+		BlockPos pos = fairyStickCraft.getBlockPos();
 		IBlockState blockState = sBlockStateOutput.get();
 
 		// 設置先は指定されたブロックでなければならない

@@ -27,9 +27,9 @@ public class FairyStickCraftConditionSpawnItem implements IFairyStickCraftCondit
 			if (!fairyStickCraft.getWorld().isRemote) {
 				EntityItem entityitem = new EntityItem(
 					fairyStickCraft.getWorld(),
-					fairyStickCraft.getPos().getX() + 0.5,
-					fairyStickCraft.getPos().getY() + 0.5,
-					fairyStickCraft.getPos().getZ() + 0.5,
+					fairyStickCraft.getBlockPos().getX() + 0.5,
+					fairyStickCraft.getBlockPos().getY() + 0.5,
+					fairyStickCraft.getBlockPos().getZ() + 0.5,
 					sItemStack.get().copy());
 				entityitem.setNoPickupDelay();
 				fairyStickCraft.getWorld().spawnEntity(entityitem);
