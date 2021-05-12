@@ -8,8 +8,8 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import miragefairy2019.mod.ModMirageFairy2019;
+import miragefairy2019.mod.api.ApiFairyStick;
 import miragefairy2019.mod.api.composite.IComponentInstance;
-import miragefairy2019.mod.api.fairystick.ApiFairyStick;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeBlock;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeItem;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionSpawnItem;
@@ -99,7 +99,7 @@ public class ModuleMaterialsFairy
 					.bind(addComponent(instance(quartz.get(), 0.5)))
 					.bind(addOreName("mirageFairy2019ManaRodQuartz"))
 					.bind(onCreateItemStack(v -> itemStackManaRodQuartz = v.createItemStack()))
-					.bind(onCreateItemStack(v -> {
+					.bind(onAddRecipe(v -> {
 
 						// フェアリーステッキクラフト
 						ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
@@ -113,7 +113,7 @@ public class ModuleMaterialsFairy
 				itemVariant(c.erMod, c, 7, () -> new ItemVariantFairyMaterial("mirage_flower_stick", "stickMirageFlower", 1))
 					.bind(addOreName("stickMirageFlower"))
 					.bind(onCreateItemStack(v -> itemStackStickMirageFlower = v.createItemStack()))
-					.bind(onCreateItemStack(v -> {
+					.bind(onAddRecipe(v -> {
 
 						// フェアリーステッキクラフト
 						ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(

@@ -3,13 +3,14 @@ package miragefairy2019.mod.modules.fairystick;
 import static miragefairy2019.mod.lib.Configurator.*;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.fairystick.ApiFairyStick;
+import miragefairy2019.mod.api.ApiFairyStick;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeItem;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionReplaceBlock;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionSpawnBlock;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
+import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRegistry;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.lib.EventRegistryMod;
@@ -32,6 +33,10 @@ public class ModuleFairyStick
 	public static void init(EventRegistryMod erMod)
 	{
 
+		erMod.initRegistry.register(() -> {
+			ApiFairyStick.fairyStickCraftRegistry = new FairyStickCraftRegistry();
+		});
+
 		// 妖精のステッキ
 		item(erMod, ItemFairyStick::new, new ResourceLocation(ModMirageFairy2019.MODID, "fairy_stick"), "fairyStick")
 			.bind(setCreativeTab(() -> ApiMain.creativeTab()))
@@ -42,7 +47,7 @@ public class ModuleFairyStick
 			.bind(onCreateItemStack(i -> itemStackFairyStick = new ItemStack(i)));
 
 		// レシピ登録
-		{
+		erMod.addRecipe.register(() -> {
 
 			// 水精→水源
 			ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
@@ -82,7 +87,7 @@ public class ModuleFairyStick
 					() -> ApiOre.blockFluidMiragiumWater.getDefaultState()),
 				new FairyStickCraftConditionConsumeItem(new OreIngredient("dustMiragium"))));
 
-		}
+		});
 
 	}
 

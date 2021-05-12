@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairystick;
 import java.util.List;
 import java.util.Optional;
 
-import miragefairy2019.mod.api.fairystick.ApiFairyStick;
+import miragefairy2019.mod.api.ApiFairyStick;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftExecutor;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.UtilsMinecraft;

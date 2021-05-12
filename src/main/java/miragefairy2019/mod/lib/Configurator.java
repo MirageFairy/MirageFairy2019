@@ -56,6 +56,14 @@ public final class Configurator<T> implements Supplier<T>
 		};
 	}
 
+	public static <I> Function<Configurator<I>, Monad<Configurator<I>>> onAddRecipe(Consumer<I> consumer)
+	{
+		return c -> {
+			c.erMod.addRecipe.register(() -> consumer.accept(c.get()));
+			return Monad.of(c);
+		};
+	}
+
 	//
 
 	public static <I extends Item> Monad<Configurator<I>> item(EventRegistryMod erMod, Supplier<I> sItem, ResourceLocation registryName, String unlocalizedName)
