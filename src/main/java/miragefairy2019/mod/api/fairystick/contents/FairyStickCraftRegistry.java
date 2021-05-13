@@ -29,6 +29,12 @@ public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 	}
 
 	@Override
+	public ISuppliterator<IFairyStickCraftRecipe> getRecipes()
+	{
+		return ISuppliterator.ofIterable(recipes);
+	}
+
+	@Override
 	public Optional<IFairyStickCraftExecutor> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos blockPos, ItemStack itemStackFairyStick)
 	{
 		IBlockState blockState = world.getBlockState(blockPos);
@@ -51,12 +57,6 @@ public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 		}
 
 		return Optional.empty();
-	}
-
-	@Override
-	public ISuppliterator<IFairyStickCraftRecipe> getRecipes()
-	{
-		return ISuppliterator.ofIterable(recipes);
 	}
 
 }
