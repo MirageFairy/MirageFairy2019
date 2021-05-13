@@ -36,7 +36,7 @@ public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingTool
 					break a;
 				}
 			}
-			return EnumActionResult.PASS;
+			return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
 		}
 
 		if (!world.isRemote) {
