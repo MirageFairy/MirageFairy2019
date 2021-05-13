@@ -123,18 +123,4 @@ public class ItemFairyStick extends Item
 
 	}
 
-	//
-
-	@Override
-	public boolean hasContainerItem(ItemStack itemStack)
-	{
-		return true;
-	}
-
-	@Override
-	public ItemStack getContainerItem(ItemStack itemStack)
-	{
-		return itemStack.copy();
-	}
-
 }
