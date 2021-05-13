@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftEnvironment;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftEventBus;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftExecutor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -15,7 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class FairyStickCraft implements IFairyStickCraft, IFairyStickCraftExecutor
+public class FairyStickCraft
 {
 
 	private final Optional<EntityPlayer> oPlayer;
@@ -40,74 +41,89 @@ public class FairyStickCraft implements IFairyStickCraft, IFairyStickCraftExecut
 		this.entitiesItemRemaining.addAll(entitiesItem);
 	}
 
-	@Override
-	public Optional<EntityPlayer> getPlayer()
+	public IFairyStickCraftEnvironment getEnvironment()
 	{
-		return oPlayer;
-	}
-
-	@Override
-	public World getWorld()
-	{
-		return world;
-	}
-
-	@Override
-	public BlockPos getBlockPos()
-	{
-		return pos;
-	}
-
-	@Override
-	public IBlockState getBlockState()
-	{
-		return blockState;
-	}
-
-	@Override
-	public ItemStack getItemStackFairyStick()
-	{
-		return itemStackFairyStick;
-	}
-
-	@Override
-	public Optional<EntityItem> pullItem(Predicate<ItemStack> ingredient)
-	{
-		Iterator<EntityItem> iterator = entitiesItemRemaining.iterator();
-		while (iterator.hasNext()) {
-			EntityItem entity = iterator.next();
-
-			if (ingredient.test(entity.getItem())) {
-				iterator.remove();
-				return Optional.of(entity);
+		return new IFairyStickCraftEnvironment() {
+			@Override
+			public Optional<EntityPlayer> getPlayer()
+			{
+				return oPlayer;
 			}
 
-		}
-		return Optional.empty();
+			@Override
+			public World getWorld()
+			{
+				return world;
+			}
+
+			@Override
+			public BlockPos getBlockPos()
+			{
+				return pos;
+			}
+
+			@Override
+			public IBlockState getBlockState()
+			{
+				return blockState;
+			}
+
+			@Override
+			public ItemStack getItemStackFairyStick()
+			{
+				return itemStackFairyStick;
+			}
+
+			@Override
+			public Optional<EntityItem> pullItem(Predicate<ItemStack> ingredient)
+			{
+				Iterator<EntityItem> iterator = entitiesItemRemaining.iterator();
+				while (iterator.hasNext()) {
+					EntityItem entity = iterator.next();
+
+					if (ingredient.test(entity.getItem())) {
+						iterator.remove();
+						return Optional.of(entity);
+					}
+
+				}
+				return Optional.empty();
+			}
+		};
 	}
 
-	@Override
-	public void hookOnCraft(Runnable listener)
+	public IFairyStickCraftEventBus getEventBus()
 	{
-		listenersOnCraft.add(listener);
+		return new IFairyStickCraftEventBus() {
+			@Override
+			public void hookOnCraft(Runnable listener)
+			{
+				listenersOnCraft.add(listener);
+			}
+
+			@Override
+			public void hookOnUpdate(Runnable listener)
+			{
+				listenersOnUpdate.add(listener);
+			}
+		};
 	}
 
-	@Override
-	public void hookOnUpdate(Runnable listener)
+	public IFairyStickCraftExecutor getExecutor()
 	{
-		listenersOnUpdate.add(listener);
-	}
+		return new IFairyStickCraftExecutor() {
+			@Override
+			public void onCraft()
+			{
+				listenersOnCraft.forEach(Runnable::run);
+			}
 
-	@Override
-	public void onCraft()
-	{
-		listenersOnCraft.forEach(Runnable::run);
-	}
-
-	@Override
-	public void onUpdate()
-	{
-		listenersOnUpdate.forEach(Runnable::run);
+			@Override
+			public void onUpdate()
+			{
+				listenersOnUpdate.forEach(Runnable::run);
+			}
+		};
 	}
 
 }

@@ -2,8 +2,9 @@ package miragefairy2019.mod.api.fairystick.contents;
 
 import java.util.function.Supplier;
 
-import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftEnvironment;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftEventBus;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -20,19 +21,19 @@ public class FairyStickCraftConditionSpawnItem implements IFairyStickCraftCondit
 	}
 
 	@Override
-	public boolean test(IFairyStickCraft fairyStickCraft)
+	public boolean test(IFairyStickCraftEnvironment environment, IFairyStickCraftEventBus eventBus)
 	{
-		fairyStickCraft.hookOnCraft(() -> {
+		eventBus.hookOnCraft(() -> {
 
-			if (!fairyStickCraft.getWorld().isRemote) {
+			if (!environment.getWorld().isRemote) {
 				EntityItem entityitem = new EntityItem(
-					fairyStickCraft.getWorld(),
-					fairyStickCraft.getBlockPos().getX() + 0.5,
-					fairyStickCraft.getBlockPos().getY() + 0.5,
-					fairyStickCraft.getBlockPos().getZ() + 0.5,
+					environment.getWorld(),
+					environment.getBlockPos().getX() + 0.5,
+					environment.getBlockPos().getY() + 0.5,
+					environment.getBlockPos().getZ() + 0.5,
 					sItemStack.get().copy());
 				entityitem.setNoPickupDelay();
-				fairyStickCraft.getWorld().spawnEntity(entityitem);
+				environment.getWorld().spawnEntity(entityitem);
 			}
 
 		});

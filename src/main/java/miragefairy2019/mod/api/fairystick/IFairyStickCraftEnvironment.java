@@ -10,23 +10,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public interface IFairyStickCraft
+public interface IFairyStickCraftEnvironment
 {
 
 	public Optional<EntityPlayer> getPlayer();
 
 	public World getWorld();
 
-	public IBlockState getBlockState();
-
 	public BlockPos getBlockPos();
+
+	public IBlockState getBlockState();
 
 	public ItemStack getItemStackFairyStick();
 
 	public Optional<EntityItem> pullItem(Predicate<ItemStack> ingredient);
-
-	public void hookOnCraft(Runnable listener);
-
-	public void hookOnUpdate(Runnable listener);
 
 }

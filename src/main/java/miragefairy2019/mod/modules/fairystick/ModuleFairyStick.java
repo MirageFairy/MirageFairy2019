@@ -4,8 +4,9 @@ import static miragefairy2019.mod.lib.Configurator.*;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairyStick;
-import miragefairy2019.mod.api.fairystick.IFairyStickCraft;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftEnvironment;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftEventBus;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeItem;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionReplaceBlock;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionSpawnBlock;
@@ -53,9 +54,9 @@ public class ModuleFairyStick
 			ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
 				new IFairyStickCraftCondition() {
 					@Override
-					public boolean test(IFairyStickCraft fairyStickCraft)
+					public boolean test(IFairyStickCraftEnvironment environment, IFairyStickCraftEventBus eventBus)
 					{
-						return !BiomeDictionary.hasType(fairyStickCraft.getWorld().getBiome(fairyStickCraft.getBlockPos()), BiomeDictionary.Type.NETHER);
+						return !BiomeDictionary.hasType(environment.getWorld().getBiome(environment.getBlockPos()), BiomeDictionary.Type.NETHER);
 					}
 
 					@Override
