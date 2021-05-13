@@ -3,7 +3,6 @@ package miragefairy2019.mod.api.fairystick;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -18,8 +17,6 @@ public interface IFairyStickCraftEnvironment
 	public World getWorld();
 
 	public BlockPos getBlockPos();
-
-	public IBlockState getBlockState();
 
 	public ItemStack getItemStackFairyStick();
 

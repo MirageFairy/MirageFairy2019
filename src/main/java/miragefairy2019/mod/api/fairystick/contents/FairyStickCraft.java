@@ -21,7 +21,6 @@ public class FairyStickCraft
 
 	private final Optional<EntityPlayer> oPlayer;
 	private final BlockPos pos;
-	private final IBlockState blockState;
 	private final ItemStack itemStackFairyStick;
 	private final World world;
 
@@ -30,11 +29,10 @@ public class FairyStickCraft
 	private List<Runnable> listenersOnCraft = new ArrayList<>();
 	private List<Runnable> listenersOnUpdate = new ArrayList<>();
 
-	public FairyStickCraft(Optional<EntityPlayer> oPlayer, BlockPos pos, IBlockState blockState, ItemStack itemStackFairyStick, World world, List<EntityItem> entitiesItem)
+	public FairyStickCraft(Optional<EntityPlayer> oPlayer, BlockPos pos, ItemStack itemStackFairyStick, World world, List<EntityItem> entitiesItem)
 	{
 		this.oPlayer = oPlayer;
 		this.pos = pos;
-		this.blockState = blockState;
 		this.itemStackFairyStick = itemStackFairyStick;
 		this.world = world;
 
@@ -60,12 +58,6 @@ public class FairyStickCraft
 			public BlockPos getBlockPos()
 			{
 				return pos;
-			}
-
-			@Override
-			public IBlockState getBlockState()
-			{
-				return blockState;
 			}
 
 			@Override

@@ -32,7 +32,7 @@ public class FairyStickCraftConditionConsumeBlock implements IFairyStickCraftCon
 		IBlockState blockState = Blocks.AIR.getDefaultState();
 
 		// 設置先は指定されたブロックでなければならない
-		if (!environment.getBlockState().equals(sBlockStateInput.get())) return false;
+		if (!environment.getWorld().getBlockState(environment.getBlockPos()).equals(sBlockStateInput.get())) return false;
 
 		eventBus.hookOnCraft(() -> {
 

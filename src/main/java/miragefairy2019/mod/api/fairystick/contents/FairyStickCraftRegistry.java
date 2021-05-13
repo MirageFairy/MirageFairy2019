@@ -9,7 +9,6 @@ import miragefairy2019.mod.api.fairystick.IFairyStickCraftExecutor;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftRecipe;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftRegistry;
 import mirrg.boron.util.suppliterator.ISuppliterator;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -37,14 +36,12 @@ public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 	@Override
 	public Optional<IFairyStickCraftExecutor> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos blockPos, ItemStack itemStackFairyStick)
 	{
-		IBlockState blockState = world.getBlockState(blockPos);
 
 		recipe:
 		for (IFairyStickCraftRecipe recipe : recipes) {
 			FairyStickCraft fairyStickCraft = new FairyStickCraft(
 				oPlayer,
 				blockPos,
-				blockState,
 				itemStackFairyStick,
 				world,
 				world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(blockPos).grow(1)));

@@ -31,7 +31,7 @@ public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondi
 		IBlockState blockState = sBlockStateInput.get();
 
 		// 設置先は空気でなければならない
-		if (!environment.getBlockState().getBlock().isReplaceable(world, pos)) return false;
+		if (!environment.getWorld().getBlockState(environment.getBlockPos()).getBlock().isReplaceable(world, pos)) return false;
 
 		// 設置物は召喚先に設置可能でなければならない
 		if (!blockState.getBlock().canPlaceBlockAt(world, pos)) return false;
