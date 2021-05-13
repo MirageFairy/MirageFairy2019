@@ -5,14 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftEnvironment;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftExecutor;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftRecipe;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftRegistry;
 import mirrg.boron.util.suppliterator.ISuppliterator;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -39,16 +38,11 @@ public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 
 		recipe:
 		for (IFairyStickCraftRecipe recipe : recipes) {
-			FairyStickCraft fairyStickCraft = new FairyStickCraft(
-				oPlayer,
-				world,
-				blockPos,
-				itemStackFairyStick,
-				world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(blockPos).grow(1)));
+			IFairyStickCraftEnvironment environment = new FairyStickCraftEnvironment(oPlayer, world, blockPos, itemStackFairyStick);
 			IFairyStickCraftExecutor executor = new FairyStickCraftExecutor();
 
 			for (IFairyStickCraftCondition condition : recipe.getConditions()) {
-				if (!condition.test(fairyStickCraft.getEnvironment(), executor)) continue recipe;
+				if (!condition.test(environment, executor)) continue recipe;
 			}
 
 			return Optional.of(executor);
