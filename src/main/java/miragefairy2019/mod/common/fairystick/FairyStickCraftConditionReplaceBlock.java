@@ -35,9 +35,6 @@ public class FairyStickCraftConditionReplaceBlock implements IFairyStickCraftCon
 		// 設置先は指定されたブロックでなければならない
 		if (!environment.getWorld().getBlockState(environment.getBlockPos()).equals(sBlockStateInput.get())) return false;
 
-		// 設置物は召喚先に設置可能でなければならない
-		if (!blockState.getBlock().canPlaceBlockAt(world, pos)) return false;
-
 		executor.hookOnCraft(() -> {
 
 			world.setBlockState(pos, blockState, 3);
