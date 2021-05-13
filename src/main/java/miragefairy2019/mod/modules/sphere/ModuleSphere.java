@@ -13,6 +13,7 @@ import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionSpawnItem;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftRecipe;
 import miragefairy2019.mod.lib.EventRegistryMod;
+import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.lib.OreIngredientComplex;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
@@ -126,12 +127,13 @@ public class ModuleSphere
 							ingredient);
 
 						// 妖精のステッキレシピ
-						ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
-							new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState()),
-							new FairyStickCraftConditionConsumeItem(new OreIngredient("gemFluorite")),
-							new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName()))),
-							new FairyStickCraftConditionConsumeItem(ingredient),
-							new FairyStickCraftConditionSpawnItem(() -> variant.y.createItemStack())));
+						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState())))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("gemFluorite"))))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())))))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(ingredient)))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionSpawnItem(() -> variant.y.createItemStack())))
+							.get());
 
 					}
 				}
@@ -151,11 +153,12 @@ public class ModuleSphere
 							ingredient);
 
 						// 妖精のステッキレシピ
-						ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
-							new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState()),
-							new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName()))),
-							new FairyStickCraftConditionConsumeItem(ingredient),
-							new FairyStickCraftConditionSpawnItem(() -> variant.y.createItemStack())));
+						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState())))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())))))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(ingredient)))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionSpawnItem(() -> variant.y.createItemStack())))
+							.get());
 
 					}
 				}

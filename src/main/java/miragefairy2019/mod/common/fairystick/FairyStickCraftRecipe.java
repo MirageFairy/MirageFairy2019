@@ -2,6 +2,7 @@ package miragefairy2019.mod.common.fairystick;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftRecipe;
@@ -12,28 +13,15 @@ public final class FairyStickCraftRecipe implements IFairyStickCraftRecipe
 
 	private List<IFairyStickCraftCondition> conditions = new ArrayList<>();
 
-	public FairyStickCraftRecipe()
-	{
-
-	}
-
-	public FairyStickCraftRecipe(IFairyStickCraftCondition... conditions)
-	{
-		for (IFairyStickCraftCondition condition : conditions) {
-			add(condition);
-		}
-	}
-
-	public FairyStickCraftRecipe add(IFairyStickCraftCondition condition)
-	{
-		conditions.add(condition);
-		return this;
-	}
-
 	@Override
 	public ISuppliterator<IFairyStickCraftCondition> getConditions()
 	{
 		return ISuppliterator.ofIterable(conditions);
+	}
+
+	public static Consumer<FairyStickCraftRecipe> adderCondition(IFairyStickCraftCondition condition)
+	{
+		return recipe -> recipe.conditions.add(condition);
 	}
 
 }

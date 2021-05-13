@@ -102,11 +102,12 @@ public class ModuleMaterialsFairy
 					.bind(onAddRecipe(v -> {
 
 						// フェアリーステッキクラフト
-						ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
-							new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMirageFlowerExtract.getDefaultState()),
-							new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019ManaRodGlass")),
-							new FairyStickCraftConditionConsumeItem(new OreIngredient("blockQuartz")),
-							new FairyStickCraftConditionSpawnItem(() -> v.createItemStack())));
+						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMirageFlowerExtract.getDefaultState())))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019ManaRodGlass"))))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("blockQuartz"))))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionSpawnItem(() -> v.createItemStack())))
+							.get());
 
 					}));
 
@@ -116,12 +117,13 @@ public class ModuleMaterialsFairy
 					.bind(onAddRecipe(v -> {
 
 						// フェアリーステッキクラフト
-						ApiFairyStick.fairyStickCraftRegistry.addRecipe(new FairyStickCraftRecipe(
-							new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState()),
-							new FairyStickCraftConditionConsumeItem(new OreIngredient("leafMirageFlower")),
-							new FairyStickCraftConditionConsumeItem(new OreIngredient("bone")),
-							new FairyStickCraftConditionConsumeItem(new OreIngredient("gemApatite")),
-							new FairyStickCraftConditionSpawnItem(() -> v.createItemStack())));
+						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState())))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("leafMirageFlower"))))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("bone"))))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("gemApatite"))))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionSpawnItem(() -> v.createItemStack())))
+							.get());
 
 					}));
 
