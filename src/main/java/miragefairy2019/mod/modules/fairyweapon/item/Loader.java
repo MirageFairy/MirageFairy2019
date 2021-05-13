@@ -10,14 +10,19 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import miragefairy2019.mod.ModMirageFairy2019;
+import miragefairy2019.mod.api.ApiFairyStick;
 import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionReplaceBlock;
+import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionUseItem;
+import miragefairy2019.mod.common.fairystick.FairyStickCraftRecipe;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.Configurator;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -26,6 +31,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class Loader
 {
@@ -332,6 +338,19 @@ public class Loader
 			.bind(addComponent(instance(getComponentAbilityType(fell.get()))))
 			.bind(setWeaponStatusOfTier(2))
 			.get();
+
+		// レシピ登録
+		erMod.addRecipe.register(() -> {
+
+			// 丸石＞紅蓮→焼き石
+			ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019CraftingToolFairyWandMelting"))))
+				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionReplaceBlock(
+					() -> Blocks.COBBLESTONE.getDefaultState(),
+					() -> Blocks.STONE.getDefaultState())))
+				.get());
+
+		});
 
 	}
 
