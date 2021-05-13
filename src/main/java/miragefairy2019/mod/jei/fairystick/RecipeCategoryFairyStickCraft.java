@@ -128,16 +128,16 @@ public class RecipeCategoryFairyStickCraft implements IRecipeCategory<RecipeWrap
 			guiItemStackGroup.init(
 				i,
 				true,
-				18 * (i % 3),
-				18 * (i / 3));
+				18 * i,
+				0);
 		}
 
 		for (int i = 0; i < recipeWrapper.listListItemStackInput.size(); i++) {
 			guiItemStackGroup.init(
 				recipeWrapper.listListItemStackInput.size() + i,
 				false,
-				18 * (i % 3),
-				50 + 20 + 18 * (i / 3));
+				18 * i,
+				50 + 20);
 		}
 
 		guiItemStackGroup.set(ingredients);
