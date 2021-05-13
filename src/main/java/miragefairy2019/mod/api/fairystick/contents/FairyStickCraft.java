@@ -9,7 +9,6 @@ import java.util.function.Predicate;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftEnvironment;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftEventBus;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftExecutor;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,21 +19,18 @@ public class FairyStickCraft
 {
 
 	private final Optional<EntityPlayer> oPlayer;
-	private final BlockPos pos;
-	private final ItemStack itemStackFairyStick;
 	private final World world;
+	private final BlockPos blockPos;
+	private final ItemStack itemStackFairyStick;
 
 	private List<EntityItem> entitiesItemRemaining = new ArrayList<>();
 
-	private List<Runnable> listenersOnCraft = new ArrayList<>();
-	private List<Runnable> listenersOnUpdate = new ArrayList<>();
-
-	public FairyStickCraft(Optional<EntityPlayer> oPlayer, BlockPos pos, ItemStack itemStackFairyStick, World world, List<EntityItem> entitiesItem)
+	public FairyStickCraft(Optional<EntityPlayer> oPlayer, World world, BlockPos blockPos, ItemStack itemStackFairyStick, List<EntityItem> entitiesItem)
 	{
 		this.oPlayer = oPlayer;
-		this.pos = pos;
-		this.itemStackFairyStick = itemStackFairyStick;
 		this.world = world;
+		this.blockPos = blockPos;
+		this.itemStackFairyStick = itemStackFairyStick;
 
 		this.entitiesItemRemaining.addAll(entitiesItem);
 	}
@@ -57,7 +53,7 @@ public class FairyStickCraft
 			@Override
 			public BlockPos getBlockPos()
 			{
-				return pos;
+				return blockPos;
 			}
 
 			@Override
@@ -83,6 +79,11 @@ public class FairyStickCraft
 			}
 		};
 	}
+
+	//
+
+	private List<Runnable> listenersOnCraft = new ArrayList<>();
+	private List<Runnable> listenersOnUpdate = new ArrayList<>();
 
 	public IFairyStickCraftEventBus getEventBus()
 	{

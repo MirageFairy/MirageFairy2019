@@ -41,9 +41,9 @@ public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 		for (IFairyStickCraftRecipe recipe : recipes) {
 			FairyStickCraft fairyStickCraft = new FairyStickCraft(
 				oPlayer,
+				world,
 				blockPos,
 				itemStackFairyStick,
-				world,
 				world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(blockPos).grow(1)));
 
 			for (IFairyStickCraftCondition condition : recipe.getConditions()) {
