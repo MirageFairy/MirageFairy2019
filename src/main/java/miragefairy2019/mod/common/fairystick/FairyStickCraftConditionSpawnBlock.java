@@ -1,4 +1,4 @@
-package miragefairy2019.mod.api.fairystick.contents;
+package miragefairy2019.mod.common.fairystick;
 
 import java.util.function.Supplier;
 
@@ -13,16 +13,14 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class FairyStickCraftConditionReplaceBlock implements IFairyStickCraftCondition
+public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondition
 {
 
 	private Supplier<IBlockState> sBlockStateInput;
-	private Supplier<IBlockState> sBlockStateOutput;
 
-	public FairyStickCraftConditionReplaceBlock(Supplier<IBlockState> sBlockStateInput, Supplier<IBlockState> sBlockState)
+	public FairyStickCraftConditionSpawnBlock(Supplier<IBlockState> sBlockState)
 	{
-		this.sBlockStateInput = sBlockStateInput;
-		this.sBlockStateOutput = sBlockState;
+		this.sBlockStateInput = sBlockState;
 	}
 
 	@Override
@@ -30,10 +28,10 @@ public class FairyStickCraftConditionReplaceBlock implements IFairyStickCraftCon
 	{
 		World world = environment.getWorld();
 		BlockPos pos = environment.getBlockPos();
-		IBlockState blockState = sBlockStateOutput.get();
+		IBlockState blockState = sBlockStateInput.get();
 
-		// 設置先は指定されたブロックでなければならない
-		if (!environment.getWorld().getBlockState(environment.getBlockPos()).equals(sBlockStateInput.get())) return false;
+		// 設置先は空気でなければならない
+		if (!environment.getWorld().getBlockState(environment.getBlockPos()).getBlock().isReplaceable(world, pos)) return false;
 
 		// 設置物は召喚先に設置可能でなければならない
 		if (!blockState.getBlock().canPlaceBlockAt(world, pos)) return false;
@@ -74,15 +72,9 @@ public class FairyStickCraftConditionReplaceBlock implements IFairyStickCraftCon
 	}
 
 	@Override
-	public ISuppliterator<String> getStringsInput()
-	{
-		return ISuppliterator.of(sBlockStateInput.get().getBlock().getLocalizedName());
-	}
-
-	@Override
 	public ISuppliterator<String> getStringsOutput()
 	{
-		return ISuppliterator.of(sBlockStateOutput.get().getBlock().getLocalizedName());
+		return ISuppliterator.of(sBlockStateInput.get().getBlock().getLocalizedName());
 	}
 
 }

@@ -5,7 +5,7 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import miragefairy2019.mod.api.ApiFairyStick;
-import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
+import miragefairy2019.mod.common.fairystick.FairyStickCraftRecipe;
 import miragefairy2019.mod.modules.fairystick.ModuleFairyStick;
 
 @JEIPlugin

@@ -1,4 +1,4 @@
-package miragefairy2019.mod.api.fairystick.contents;
+package miragefairy2019.mod.common.fairystick;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftEnvironment;

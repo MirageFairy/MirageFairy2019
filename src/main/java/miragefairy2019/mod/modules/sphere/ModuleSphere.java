@@ -6,12 +6,12 @@ import java.util.Map;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairyStick;
-import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeBlock;
-import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionConsumeItem;
-import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftConditionSpawnItem;
-import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.ore.ApiOre;
+import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionConsumeBlock;
+import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionConsumeItem;
+import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionSpawnItem;
+import miragefairy2019.mod.common.fairystick.FairyStickCraftRecipe;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.OreIngredientComplex;
 import mirrg.boron.util.UtilsString;

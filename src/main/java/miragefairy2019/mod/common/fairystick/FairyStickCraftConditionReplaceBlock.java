@@ -1,4 +1,4 @@
-package miragefairy2019.mod.api.fairystick.contents;
+package miragefairy2019.mod.common.fairystick;
 
 import java.util.function.Supplier;
 
@@ -13,14 +13,16 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondition
+public class FairyStickCraftConditionReplaceBlock implements IFairyStickCraftCondition
 {
 
 	private Supplier<IBlockState> sBlockStateInput;
+	private Supplier<IBlockState> sBlockStateOutput;
 
-	public FairyStickCraftConditionSpawnBlock(Supplier<IBlockState> sBlockState)
+	public FairyStickCraftConditionReplaceBlock(Supplier<IBlockState> sBlockStateInput, Supplier<IBlockState> sBlockState)
 	{
-		this.sBlockStateInput = sBlockState;
+		this.sBlockStateInput = sBlockStateInput;
+		this.sBlockStateOutput = sBlockState;
 	}
 
 	@Override
@@ -28,10 +30,10 @@ public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondi
 	{
 		World world = environment.getWorld();
 		BlockPos pos = environment.getBlockPos();
-		IBlockState blockState = sBlockStateInput.get();
+		IBlockState blockState = sBlockStateOutput.get();
 
-		// 設置先は空気でなければならない
-		if (!environment.getWorld().getBlockState(environment.getBlockPos()).getBlock().isReplaceable(world, pos)) return false;
+		// 設置先は指定されたブロックでなければならない
+		if (!environment.getWorld().getBlockState(environment.getBlockPos()).equals(sBlockStateInput.get())) return false;
 
 		// 設置物は召喚先に設置可能でなければならない
 		if (!blockState.getBlock().canPlaceBlockAt(world, pos)) return false;
@@ -72,9 +74,15 @@ public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondi
 	}
 
 	@Override
-	public ISuppliterator<String> getStringsOutput()
+	public ISuppliterator<String> getStringsInput()
 	{
 		return ISuppliterator.of(sBlockStateInput.get().getBlock().getLocalizedName());
+	}
+
+	@Override
+	public ISuppliterator<String> getStringsOutput()
+	{
+		return ISuppliterator.of(sBlockStateOutput.get().getBlock().getLocalizedName());
 	}
 
 }

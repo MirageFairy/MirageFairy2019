@@ -1,4 +1,4 @@
-package miragefairy2019.mod.api.fairystick.contents;
+package miragefairy2019.mod.common.fairystick;
 
 import java.util.function.Supplier;
 

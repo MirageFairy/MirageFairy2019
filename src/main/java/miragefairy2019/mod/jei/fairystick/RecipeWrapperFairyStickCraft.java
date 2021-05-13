@@ -6,7 +6,7 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
+import miragefairy2019.mod.common.fairystick.FairyStickCraftRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
