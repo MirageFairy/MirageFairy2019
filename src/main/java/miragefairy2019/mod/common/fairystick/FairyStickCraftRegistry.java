@@ -45,12 +45,13 @@ public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 				blockPos,
 				itemStackFairyStick,
 				world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(blockPos).grow(1)));
+			IFairyStickCraftExecutor executor = new FairyStickCraftExecutor();
 
 			for (IFairyStickCraftCondition condition : recipe.getConditions()) {
-				if (!condition.test(fairyStickCraft.getEnvironment(), fairyStickCraft.getEventBus())) continue recipe;
+				if (!condition.test(fairyStickCraft.getEnvironment(), executor)) continue recipe;
 			}
 
-			return Optional.of(fairyStickCraft.getExecutor());
+			return Optional.of(executor);
 		}
 
 		return Optional.empty();

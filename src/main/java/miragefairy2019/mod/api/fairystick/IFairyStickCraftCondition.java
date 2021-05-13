@@ -6,7 +6,7 @@ import net.minecraft.item.crafting.Ingredient;
 public interface IFairyStickCraftCondition
 {
 
-	public boolean test(IFairyStickCraftEnvironment environment, IFairyStickCraftEventBus eventBus);
+	public boolean test(IFairyStickCraftEnvironment environment, IFairyStickCraftExecutor executor);
 
 	public default ISuppliterator<Ingredient> getIngredientsInput()
 	{

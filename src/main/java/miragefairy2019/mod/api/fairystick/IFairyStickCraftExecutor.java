@@ -7,4 +7,8 @@ public interface IFairyStickCraftExecutor
 
 	public void onUpdate();
 
+	public void hookOnCraft(Runnable listener);
+
+	public void hookOnUpdate(Runnable listener);
+
 }

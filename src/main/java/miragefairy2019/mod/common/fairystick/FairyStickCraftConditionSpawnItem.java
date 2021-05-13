@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftEnvironment;
-import miragefairy2019.mod.api.fairystick.IFairyStickCraftEventBus;
+import miragefairy2019.mod.api.fairystick.IFairyStickCraftExecutor;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -21,9 +21,9 @@ public class FairyStickCraftConditionSpawnItem implements IFairyStickCraftCondit
 	}
 
 	@Override
-	public boolean test(IFairyStickCraftEnvironment environment, IFairyStickCraftEventBus eventBus)
+	public boolean test(IFairyStickCraftEnvironment environment, IFairyStickCraftExecutor executor)
 	{
-		eventBus.hookOnCraft(() -> {
+		executor.hookOnCraft(() -> {
 
 			if (!environment.getWorld().isRemote) {
 				EntityItem entityitem = new EntityItem(
