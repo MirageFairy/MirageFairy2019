@@ -70,16 +70,16 @@ public class ItemFairyStick extends Item
 		IFairyStickCraftExecutor executor;
 		a:
 		{
-			executor = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), worldIn, pos, player.getHeldItem(hand)).orElse(null);
+			executor = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), worldIn, pos, () -> player.getHeldItem(hand)).orElse(null);
 			if (executor != null) break a;
-			executor = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), worldIn, pos.offset(facing), player.getHeldItem(hand)).orElse(null);
+			executor = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), worldIn, pos.offset(facing), () -> player.getHeldItem(hand)).orElse(null);
 			if (executor != null) break a;
 			return EnumActionResult.PASS;
 		}
 
 		//
 
-		executor.onCraft();
+		executor.onCraft(itemStackFairyStick -> player.setHeldItem(hand, itemStackFairyStick));
 
 		return EnumActionResult.SUCCESS;
 	}
@@ -110,9 +110,9 @@ public class ItemFairyStick extends Item
 		IFairyStickCraftExecutor executor;
 		a:
 		{
-			executor = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), world, rayTraceResult.getBlockPos(), itemStack).orElse(null);
+			executor = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), world, rayTraceResult.getBlockPos(), () -> itemStack).orElse(null);
 			if (executor != null) break a;
-			executor = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), world, rayTraceResult.getBlockPos().offset(rayTraceResult.sideHit), itemStack).orElse(null);
+			executor = ApiFairyStick.fairyStickCraftRegistry.getExecutor(Optional.of(player), world, rayTraceResult.getBlockPos().offset(rayTraceResult.sideHit), () -> itemStack).orElse(null);
 			if (executor != null) break a;
 			return;
 		}

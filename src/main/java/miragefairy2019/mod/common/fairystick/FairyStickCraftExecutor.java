@@ -2,13 +2,15 @@ package miragefairy2019.mod.common.fairystick;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftExecutor;
+import net.minecraft.item.ItemStack;
 
 public class FairyStickCraftExecutor implements IFairyStickCraftExecutor
 {
 
-	private List<Runnable> listenersOnCraft = new ArrayList<>();
+	private List<Consumer<Consumer<ItemStack>>> listenersOnCraft = new ArrayList<>();
 
 	@Override
 	public void onUpdate()
@@ -27,15 +29,15 @@ public class FairyStickCraftExecutor implements IFairyStickCraftExecutor
 	private List<Runnable> listenersOnUpdate = new ArrayList<>();
 
 	@Override
-	public void hookOnCraft(Runnable listener)
+	public void hookOnCraft(Consumer<Consumer<ItemStack>> listener)
 	{
 		listenersOnCraft.add(listener);
 	}
 
 	@Override
-	public void onCraft()
+	public void onCraft(Consumer<ItemStack> setterItemStackFairyStick)
 	{
-		listenersOnCraft.forEach(Runnable::run);
+		listenersOnCraft.forEach(t -> t.accept(setterItemStackFairyStick));
 	}
 
 }

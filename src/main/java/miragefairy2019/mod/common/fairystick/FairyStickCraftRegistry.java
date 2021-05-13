@@ -3,6 +3,7 @@ package miragefairy2019.mod.common.fairystick;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftEnvironment;
@@ -33,12 +34,12 @@ public class FairyStickCraftRegistry implements IFairyStickCraftRegistry
 	}
 
 	@Override
-	public Optional<IFairyStickCraftExecutor> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos blockPos, ItemStack itemStackFairyStick)
+	public Optional<IFairyStickCraftExecutor> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos blockPos, Supplier<ItemStack> getterItemStackFairyStick)
 	{
 
 		recipe:
 		for (IFairyStickCraftRecipe recipe : recipes) {
-			IFairyStickCraftEnvironment environment = new FairyStickCraftEnvironment(oPlayer, world, blockPos, itemStackFairyStick);
+			IFairyStickCraftEnvironment environment = new FairyStickCraftEnvironment(oPlayer, world, blockPos, getterItemStackFairyStick);
 			IFairyStickCraftExecutor executor = new FairyStickCraftExecutor();
 
 			for (IFairyStickCraftCondition condition : recipe.getConditions()) {

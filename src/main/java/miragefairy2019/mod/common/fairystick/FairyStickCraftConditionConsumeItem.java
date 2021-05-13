@@ -29,7 +29,7 @@ public class FairyStickCraftConditionConsumeItem implements IFairyStickCraftCond
 
 		//
 
-		executor.hookOnCraft(() -> {
+		executor.hookOnCraft(setterItemStackFairyStick -> {
 
 			entity.getItem().shrink(1);
 			if (entity.getItem().isEmpty()) environment.getWorld().removeEntity(entity);

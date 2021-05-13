@@ -1,6 +1,7 @@
 package miragefairy2019.mod.api.fairystick;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +16,6 @@ public interface IFairyStickCraftRegistry
 
 	public ISuppliterator<IFairyStickCraftRecipe> getRecipes();
 
-	public Optional<IFairyStickCraftExecutor> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos blockPos, ItemStack itemStackFairyStick);
+	public Optional<IFairyStickCraftExecutor> getExecutor(Optional<EntityPlayer> oPlayer, World world, BlockPos blockPos, Supplier<ItemStack> getterItemStackFairyStick);
 
 }

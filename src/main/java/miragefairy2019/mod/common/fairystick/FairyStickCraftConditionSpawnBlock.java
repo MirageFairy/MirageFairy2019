@@ -36,7 +36,7 @@ public class FairyStickCraftConditionSpawnBlock implements IFairyStickCraftCondi
 		// 設置物は召喚先に設置可能でなければならない
 		if (!blockState.getBlock().canPlaceBlockAt(world, pos)) return false;
 
-		executor.hookOnCraft(() -> {
+		executor.hookOnCraft(setterItemStackFairyStick -> {
 
 			world.setBlockState(pos, blockState, 3);
 			world.neighborChanged(pos, blockState.getBlock(), pos.up());

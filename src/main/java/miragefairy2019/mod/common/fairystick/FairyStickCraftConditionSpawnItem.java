@@ -23,7 +23,7 @@ public class FairyStickCraftConditionSpawnItem implements IFairyStickCraftCondit
 	@Override
 	public boolean test(IFairyStickCraftEnvironment environment, IFairyStickCraftExecutor executor)
 	{
-		executor.hookOnCraft(() -> {
+		executor.hookOnCraft(setterItemStackFairyStick -> {
 
 			if (!environment.getWorld().isRemote) {
 				EntityItem entityitem = new EntityItem(
