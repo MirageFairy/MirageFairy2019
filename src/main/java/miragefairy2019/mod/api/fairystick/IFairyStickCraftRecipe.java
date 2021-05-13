@@ -1,10 +1,10 @@
 package miragefairy2019.mod.api.fairystick;
 
-import java.util.List;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 
 public interface IFairyStickCraftRecipe
 {
 
-	public List<IFairyStickCraftCondition> getConditions();
+	public ISuppliterator<IFairyStickCraftCondition> getConditions();
 
 }

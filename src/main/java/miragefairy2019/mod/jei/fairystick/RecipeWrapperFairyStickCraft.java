@@ -7,7 +7,6 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import miragefairy2019.mod.api.fairystick.contents.FairyStickCraftRecipe;
-import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
@@ -21,16 +20,16 @@ public class RecipeWrapperFairyStickCraft implements IRecipeWrapper
 
 	public RecipeWrapperFairyStickCraft(IModRegistry registry, FairyStickCraftRecipe recipe)
 	{
-		listListItemStackInput = registry.getJeiHelpers().getStackHelper().expandRecipeItemStackInputs(ISuppliterator.ofIterable(recipe.getConditions())
+		listListItemStackInput = registry.getJeiHelpers().getStackHelper().expandRecipeItemStackInputs(recipe.getConditions()
 			.flatMap(condition -> condition.getIngredientsInput())
 			.toList());
-		listListItemStackOutput = registry.getJeiHelpers().getStackHelper().expandRecipeItemStackInputs(ISuppliterator.ofIterable(recipe.getConditions())
+		listListItemStackOutput = registry.getJeiHelpers().getStackHelper().expandRecipeItemStackInputs(recipe.getConditions()
 			.flatMap(condition -> condition.getIngredientsOutput())
 			.toList());
-		listStringInput = ISuppliterator.ofIterable(recipe.getConditions())
+		listStringInput = recipe.getConditions()
 			.flatMap(condition -> condition.getStringsInput())
 			.toList();
-		listStringOutput = ISuppliterator.ofIterable(recipe.getConditions())
+		listStringOutput = recipe.getConditions()
 			.flatMap(condition -> condition.getStringsOutput())
 			.toList();
 	}

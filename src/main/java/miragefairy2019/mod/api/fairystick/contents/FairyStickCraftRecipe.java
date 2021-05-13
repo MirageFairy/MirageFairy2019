@@ -5,6 +5,7 @@ import java.util.List;
 
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftCondition;
 import miragefairy2019.mod.api.fairystick.IFairyStickCraftRecipe;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 
 public final class FairyStickCraftRecipe implements IFairyStickCraftRecipe
 {
@@ -30,9 +31,9 @@ public final class FairyStickCraftRecipe implements IFairyStickCraftRecipe
 	}
 
 	@Override
-	public List<IFairyStickCraftCondition> getConditions()
+	public ISuppliterator<IFairyStickCraftCondition> getConditions()
 	{
-		return conditions;
+		return ISuppliterator.ofIterable(conditions);
 	}
 
 }
