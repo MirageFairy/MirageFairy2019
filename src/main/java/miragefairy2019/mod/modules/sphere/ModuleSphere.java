@@ -11,6 +11,7 @@ import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionConsumeBlock;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionConsumeItem;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionSpawnItem;
+import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionUseItem;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftRecipe;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
@@ -128,6 +129,7 @@ public class ModuleSphere
 
 						// 妖精のステッキレシピ
 						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState())))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("gemFluorite"))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())))))
@@ -154,6 +156,7 @@ public class ModuleSphere
 
 						// 妖精のステッキレシピ
 						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState())))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(ingredient)))

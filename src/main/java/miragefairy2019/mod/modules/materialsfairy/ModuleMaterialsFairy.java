@@ -16,6 +16,7 @@ import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionConsumeBlock;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionConsumeItem;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionSpawnItem;
+import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionUseItem;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftRecipe;
 import miragefairy2019.mod.lib.Configurator;
 import miragefairy2019.mod.lib.EventRegistryMod;
@@ -103,6 +104,7 @@ public class ModuleMaterialsFairy
 
 						// フェアリーステッキクラフト
 						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMirageFlowerExtract.getDefaultState())))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019ManaRodGlass"))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("blockQuartz"))))
@@ -118,6 +120,7 @@ public class ModuleMaterialsFairy
 
 						// フェアリーステッキクラフト
 						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState())))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("leafMirageFlower"))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("bone"))))

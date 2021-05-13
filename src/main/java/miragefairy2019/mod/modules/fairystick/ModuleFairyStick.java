@@ -12,6 +12,7 @@ import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionConsumeItem;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionReplaceBlock;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionSpawnBlock;
+import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionUseItem;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftRecipe;
 import miragefairy2019.mod.common.fairystick.FairyStickCraftRegistry;
 import miragefairy2019.mod.lib.EventRegistryMod;
@@ -53,6 +54,7 @@ public class ModuleFairyStick
 
 			// 水精→水源
 			ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
 				.peek(FairyStickCraftRecipe.adderCondition(new IFairyStickCraftCondition() {
 					@Override
 					public boolean test(IFairyStickCraftEnvironment environment, IFairyStickCraftExecutor eventBus)
@@ -73,6 +75,7 @@ public class ModuleFairyStick
 
 			// 溶岩精→溶岩流
 			ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
 				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionSpawnBlock(() -> Blocks.FLOWING_LAVA.getDefaultState().withProperty(BlockDynamicLiquid.LEVEL, 15))))
 				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairyCrystal"))))
 				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyLavaRank1"))))
@@ -80,6 +83,7 @@ public class ModuleFairyStick
 
 			// 蜘蛛精→糸ブロック
 			ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
 				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionSpawnBlock(() -> Blocks.WEB.getDefaultState())))
 				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairyCrystal"))))
 				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairySpiderRank1"))))
@@ -87,6 +91,7 @@ public class ModuleFairyStick
 
 			// 水＋ミラジウムの粉→妖水
 			ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
 				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionReplaceBlock(
 					() -> Blocks.WATER.getDefaultState(),
 					() -> ApiOre.blockFluidMiragiumWater.getDefaultState())))
