@@ -344,6 +344,17 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 
 	}
 
+	/**
+	 * シルクタッチ無効。
+	 */
+	@Override
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
+	{
+		return false;
+	}
+
+	// 経験値ドロップ
+
 	@Override
 	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune)
 	{
@@ -362,14 +373,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable
 		}
 	}
 
-	/**
-	 * シルクタッチ無効。
-	 */
-	@Override
-	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
-	{
-		return false;
-	}
+	// Pickable関連
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
