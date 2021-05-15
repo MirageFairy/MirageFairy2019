@@ -49,8 +49,6 @@ public class ModMirageFairy2019
 
 		erMod.initCreativeTab.trigger().run();
 
-		erMod.initKeyBinding.trigger().run();
-
 	}
 
 	@EventHandler
@@ -68,6 +66,8 @@ public class ModMirageFairy2019
 		erMod.createItemStack.trigger().accept(initializationContext);
 
 		erMod.hookDecorator.trigger().run();
+
+		erMod.initKeyBinding.trigger().run();
 
 	}
 
