@@ -264,10 +264,16 @@ Writer : {
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/item");
 
-	item: registerName -> writer::write("\(registerName).json"; {
-		parent: "item/generated";
-		textures: {
-			layer0: "miragefairy2019:items/\(registerName)";
+	item: registerName -> writer::write("$registerName.json"; {
+		parent = "item/generated";
+		textures = {
+			layer0 = "miragefairy2019:items/$registerName";
+		};
+	});
+	fluid: registerName -> writer::write("$registerName.json"; {
+		parent = "item/generated";
+		textures = {
+			layer0 = "miragefairy2019:blocks/$(registerName)_still";
 		};
 	});
 	handheld: registerName -> writer::write("\(registerName).json"; {
@@ -328,6 +334,11 @@ Writer : {
 
 	item("fairy_crystal");
 	item("christmas_fairy_crystal");
+
+	# 液体
+	fluid("miragium_water");
+	fluid("mirage_flower_extract");
+	fluid("mirage_flower_oil");
 
 	# 魔導素材
 	handheld("aqua_mana_rod");

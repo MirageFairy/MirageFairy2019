@@ -24,7 +24,6 @@ import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2;
 import miragefairy2019.mod.modules.ore.ore.IBlockVariantOre;
 import miragefairy2019.mod.modules.ore.ore.ItemBlockOre;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.creativetab.CreativeTabs;
@@ -312,19 +311,9 @@ public class ModuleOre
 			itemFluidMiragiumWater.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.ITEMS.register(itemFluidMiragiumWater);
 			if (ApiMain.side().isClient()) {
-				new Object() {
-					@SideOnly(Side.CLIENT)
-					public void run()
-					{
-						ModelLoader.setCustomMeshDefinition(itemFluidMiragiumWater, new ItemMeshDefinition() {
-							@Override
-							public ModelResourceLocation getModelLocation(ItemStack var1)
-							{
-								return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "miragium_water"), "fluid");
-							}
-						});
-					}
-				}.run();
+				ModelLoader.setCustomModelResourceLocation(itemFluidMiragiumWater,
+					0,
+					new ModelResourceLocation(itemFluidMiragiumWater.getRegistryName(), null));
 			}
 
 			// 妖水アイテム
@@ -341,19 +330,9 @@ public class ModuleOre
 			itemFluidMirageFlowerExtract.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.ITEMS.register(itemFluidMirageFlowerExtract);
 			if (ApiMain.side().isClient()) {
-				new Object() {
-					@SideOnly(Side.CLIENT)
-					public void run()
-					{
-						ModelLoader.setCustomMeshDefinition(itemFluidMirageFlowerExtract, new ItemMeshDefinition() {
-							@Override
-							public ModelResourceLocation getModelLocation(ItemStack var1)
-							{
-								return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_flower_extract"), "fluid");
-							}
-						});
-					}
-				}.run();
+				ModelLoader.setCustomModelResourceLocation(itemFluidMirageFlowerExtract,
+					0,
+					new ModelResourceLocation(itemFluidMirageFlowerExtract.getRegistryName(), null));
 			}
 
 			// 妖水アイテム
@@ -370,19 +349,9 @@ public class ModuleOre
 			itemFluidMirageFlowerOil.setCreativeTab(ApiMain.creativeTab());
 			ForgeRegistries.ITEMS.register(itemFluidMirageFlowerOil);
 			if (ApiMain.side().isClient()) {
-				new Object() {
-					@SideOnly(Side.CLIENT)
-					public void run()
-					{
-						ModelLoader.setCustomMeshDefinition(itemFluidMirageFlowerOil, new ItemMeshDefinition() {
-							@Override
-							public ModelResourceLocation getModelLocation(ItemStack var1)
-							{
-								return new ModelResourceLocation(new ResourceLocation(ModMirageFairy2019.MODID, "mirage_flower_oil"), "fluid");
-							}
-						});
-					}
-				}.run();
+				ModelLoader.setCustomModelResourceLocation(itemFluidMirageFlowerOil,
+					0,
+					new ModelResourceLocation(itemFluidMirageFlowerOil.getRegistryName(), null));
 			}
 
 		});
