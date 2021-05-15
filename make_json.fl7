@@ -149,6 +149,15 @@ Writer : {
 		}[]]};
 	});
 
+	# 置かれたアイテム
+	writer::write("placed_item.json"; {
+		variants = {
+			normal = {
+				model = "miragefairy2019:placed_item";
+			};
+		};
+	});
+
 );
 
 #################### ブロックモデル ####################
@@ -257,6 +266,15 @@ Writer : {
 			});
 		);
 	);
+
+	# 置かれたアイテム
+	writer::write("placed_item.json"; {
+		ambientocclusion = FALSE;
+		textures = {
+			particle = "minecraft:blocks/glass";
+		};
+		elements = [];
+	});
 
 );
 

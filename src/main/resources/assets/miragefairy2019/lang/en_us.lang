@@ -396,6 +396,8 @@ mirageFairy2019.magic.status.maxTargetCount.name=Max Target Count
 mirageFairy2019.magic.status.looting.name=Looting
 mirageFairy2019.magic.status.criticalRate.name=Critical Rate
 mirageFairy2019.magic.status.chargeTime.name=Charge Time
+
+miragefairy2019.placeItem=Place Item
 mirageFairy2019.mana.shine.name=Shine
 mirageFairy2019.mana.fire.name=Fire
 mirageFairy2019.mana.wind.name=Wind

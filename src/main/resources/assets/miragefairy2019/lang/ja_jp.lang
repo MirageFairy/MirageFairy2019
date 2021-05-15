@@ -396,6 +396,8 @@ mirageFairy2019.magic.status.maxTargetCount.name=最大ターゲット数
 mirageFairy2019.magic.status.looting.name=ドロップ増加
 mirageFairy2019.magic.status.criticalRate.name=クリティカル率
 mirageFairy2019.magic.status.chargeTime.name=チャージタイム
+
+miragefairy2019.placeItem=アイテムを置く
 mirageFairy2019.mana.shine.name=光
 mirageFairy2019.mana.fire.name=火
 mirageFairy2019.mana.wind.name=風
