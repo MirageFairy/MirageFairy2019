@@ -20,6 +20,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -154,6 +155,11 @@ public class ModuleMirageFlower
 			if (ApiMain.side().isClient()) {
 				ModelLoader.setCustomModelResourceLocation(itemMirageFlowerSeeds, 0, new ModelResourceLocation(itemMirageFlowerSeeds.getRegistryName(), null));
 			}
+		});
+
+		// 雑草が種をドロップ
+		erMod.addRecipe.register(() -> {
+			MinecraftForge.addGrassSeed(new ItemStack(ApiMirageFlower.itemMirageFlowerSeeds), 1);
 		});
 
 		// 地形生成
