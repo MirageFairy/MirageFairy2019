@@ -11,7 +11,7 @@ import miragefairy2019.mod.lib.WeightedRandom;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IBlockAccess;
 
 public class FairyLogDropRegistry implements IFairyLogDropRegistry
 {
@@ -31,11 +31,11 @@ public class FairyLogDropRegistry implements IFairyLogDropRegistry
 	}
 
 	@Override
-	public Optional<ItemStack> drop(World world, BlockPos blockPos, Random random)
+	public Optional<ItemStack> drop(IBlockAccess blockAccess, BlockPos blockPos, Random random)
 	{
 		return WeightedRandom.getRandomItem(random, getRecipes()
 			.filter(r -> r.getConditions()
-				.filter(c -> !c.test(world, blockPos))
+				.filter(c -> !c.test(blockAccess, blockPos))
 				.isEmpty())
 			.map(r -> new WeightedRandom.Item<>(r, r.getRate()))
 			.toList())

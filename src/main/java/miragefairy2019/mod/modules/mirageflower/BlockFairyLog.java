@@ -150,17 +150,13 @@ public class BlockFairyLog extends Block
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess blockAccess, BlockPos pos, IBlockState state, int fortune)
 	{
-		World world = (World) blockAccess;
-		Random random = blockAccess instanceof World ? world.rand : new Random();
+		Random random = blockAccess instanceof World ? ((World) blockAccess).rand : new Random();
 
-		if (blockAccess instanceof World) {
-			for (int i = 0; i < 3 + fortune; i++) {
-				ItemStack drop = ApiMirageFlower.fairyLogDropRegistry.drop(world, pos, random).orElse(null);
-				if (drop == null) drop = ModuleFairy.FairyTypes.air[0].createItemStack();
-				drops.add(drop);
-			}
+		for (int i = 0; i < 3 + fortune; i++) {
+			ItemStack drop = ApiMirageFlower.fairyLogDropRegistry.drop(blockAccess, pos, random).orElse(null);
+			if (drop == null) drop = ModuleFairy.FairyTypes.air[0].createItemStack();
+			drops.add(drop);
 		}
-
 	}
 
 	/**
