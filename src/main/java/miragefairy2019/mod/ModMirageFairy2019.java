@@ -85,6 +85,10 @@ public class ModMirageFairy2019
 
 		erMod.registerTileEntity.trigger().run();
 
+		erMod.initNetworkChannel.trigger().run();
+
+		erMod.registerNetworkMessage.trigger().run();
+
 	}
 
 	@EventHandler

@@ -39,6 +39,10 @@ public class EventRegistryMod
 
 	public final IEventProvider<Runnable> registerTileEntity = EventProviders.runnable();
 
+	public final IEventProvider<Runnable> initNetworkChannel = EventProviders.runnable();
+
+	public final IEventProvider<Runnable> registerNetworkMessage = EventProviders.runnable();
+
 	//
 
 	public final IEventProvider<Consumer<FMLPostInitializationEvent>> postInit = EventProviders.consumer();

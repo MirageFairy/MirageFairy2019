@@ -69,9 +69,13 @@ public class ModulePlacedItem
 			}
 		});
 
-		// ネットワークラッパー
-		erMod.init.register(e -> {
+		// ネットワークラッパー初期化
+		erMod.initNetworkChannel.register(() -> {
 			ApiPlacedItem.simpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(ModMirageFairy2019.MODID);
+		});
+
+		// ネットワークメッセージ登録
+		erMod.registerNetworkMessage.register(() -> {
 			ApiPlacedItem.simpleNetworkWrapper.registerMessage(PacketPlaceItem.class, PacketPlaceItem.Message.class, 0, Side.SERVER);
 		});
 
