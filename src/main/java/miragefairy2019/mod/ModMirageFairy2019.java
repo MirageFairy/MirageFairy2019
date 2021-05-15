@@ -49,6 +49,8 @@ public class ModMirageFairy2019
 
 		erMod.initCreativeTab.trigger().run();
 
+		erMod.initKeyBinding.trigger().run();
+
 	}
 
 	@EventHandler

@@ -15,6 +15,8 @@ public class EventRegistryMod
 
 	public final IEventProvider<Runnable> initCreativeTab = EventProviders.runnable();
 
+	public final IEventProvider<Runnable> initKeyBinding = EventProviders.runnable();
+
 	//
 
 	public final IEventProvider<Consumer<FMLPreInitializationEvent>> preInit = EventProviders.consumer();
