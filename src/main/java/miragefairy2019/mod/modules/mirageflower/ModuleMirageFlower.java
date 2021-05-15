@@ -39,6 +39,8 @@ public class ModuleMirageFlower
 		initMirageFlower(erMod);
 	}
 
+	//
+
 	private static BlockFairyLog blockFairyLog;
 	private static ItemBlock itemBlockFairyLog;
 
@@ -116,6 +118,8 @@ public class ModuleMirageFlower
 		});
 
 	}
+
+	//
 
 	private static BlockMirageFlower blockMirageFlower;
 	private static ItemMirageFlowerSeeds<BlockMirageFlower> itemMirageFlowerSeeds;
