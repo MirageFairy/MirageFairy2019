@@ -178,7 +178,11 @@ public class BlockPlacedItem extends BlockContainer
 
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof TileEntityPlacedItem) {
-			((TileEntityPlacedItem) tileEntity).action();
+			if (playerIn.isSneaking()) {
+				((TileEntityPlacedItem) tileEntity).rotation = playerIn.rotationYawHead;
+			} else {
+				((TileEntityPlacedItem) tileEntity).action();
+			}
 			tileEntity.markDirty();
 			((TileEntityPlacedItem) tileEntity).sendUpdatePacket();
 		}
