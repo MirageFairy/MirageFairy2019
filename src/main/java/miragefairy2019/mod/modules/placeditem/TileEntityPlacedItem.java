@@ -2,6 +2,8 @@ package miragefairy2019.mod.modules.placeditem;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,13 +15,17 @@ import net.minecraft.util.NonNullList;
 public class TileEntityPlacedItem extends TileEntity
 {
 
-	private NonNullList<ItemStack> itemStacks = NonNullList.withSize(1, ItemStack.EMPTY);
+	public NonNullList<ItemStack> itemStacks = NonNullList.withSize(1, ItemStack.EMPTY);
+	public double rotation;
+	public boolean standing;
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
 		ItemStackHelper.saveAllItems(nbt, itemStacks);
+		nbt.setDouble("rotation", rotation);
+		nbt.setBoolean("standing", standing);
 		return nbt;
 	}
 
@@ -28,6 +34,8 @@ public class TileEntityPlacedItem extends TileEntity
 	{
 		super.readFromNBT(nbt);
 		ItemStackHelper.loadAllItems(nbt, itemStacks);
+		rotation = nbt.getDouble("rotation");
+		standing = nbt.getBoolean("standing");
 	}
 
 	@Nullable
@@ -48,6 +56,15 @@ public class TileEntityPlacedItem extends TileEntity
 		super.onDataPacket(net, pkt);
 	}
 
+	public void sendUpdatePacket()
+	{
+		for (EntityPlayer entityPlayer : world.playerEntities) {
+			if (entityPlayer instanceof EntityPlayerMP) {
+				((EntityPlayerMP) entityPlayer).connection.sendPacket(getUpdatePacket());
+			}
+		}
+	}
+
 	//
 
 	public void setItemStack(ItemStack itemStack)
@@ -58,6 +75,17 @@ public class TileEntityPlacedItem extends TileEntity
 	public ItemStack getItemStack()
 	{
 		return itemStacks.get(0);
+	}
+
+	//
+
+	public void action()
+	{
+		rotation += 45;
+		if (rotation >= 360) {
+			rotation -= 360;
+			standing = !standing;
+		}
 	}
 
 }

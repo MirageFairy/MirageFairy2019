@@ -20,7 +20,12 @@ public class TileEntityRendererPlacedItem extends TileEntitySpecialRenderer<Tile
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y, z);
 		GlStateManager.translate(0.5, 1 / 64.0, 0.5);
-		GlStateManager.rotate(90, 1, 0, 0);
+		GlStateManager.rotate((float) -tileEntity.rotation, 0, 1, 0);
+		if (tileEntity.standing) {
+			GlStateManager.translate(0, 0.25, 0);
+		} else {
+			GlStateManager.rotate(90, 1, 0, 0);
+		}
 		ItemStack itemStack = tileEntity.getItemStack();
 		renderItem(itemStack.isEmpty() ? new ItemStack(Blocks.BARRIER) : itemStack);
 		GlStateManager.popMatrix();
