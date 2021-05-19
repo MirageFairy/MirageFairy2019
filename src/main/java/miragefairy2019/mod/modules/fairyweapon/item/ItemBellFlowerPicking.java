@@ -1,26 +1,31 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
+import static miragefairy2019.mod.modules.fairy.EnumAbilityType.*;
+import static miragefairy2019.mod.modules.fairy.EnumManaType.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 import miragefairy2019.mod.api.ApiMirageFlower;
-import miragefairy2019.mod.api.fairy.AbilityTypes;
 import miragefairy2019.mod.api.fairy.IFairyType;
-import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.mod.api.magic.IMagicExecutor;
+import miragefairy2019.mod.api.magic.IMagicHandler;
+import miragefairy2019.mod.api.magic.IMagicStatus;
 import miragefairy2019.mod.api.pickable.IPickable;
+import miragefairy2019.mod.common.magic.MagicSelectorCircle;
+import miragefairy2019.mod.common.magic.MagicSelectorPosition;
+import miragefairy2019.mod.common.magic.MagicSelectorRayTrace;
+import miragefairy2019.mod.common.magic.MagicStatusHelper;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
-import mirrg.boron.util.struct.Tuple3;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -28,346 +33,316 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBellFlowerPicking extends ItemBellBase
+public class ItemBellFlowerPicking extends ItemFairyWeaponBase3
 {
 
-	protected static class Status
-	{
-
-		public final double pitch;
-		public final double additionalReach;
-		public final double radius;
-		public final int maxTargetCount;
-		public final int fortune;
-		public final boolean collection;
-		public final double wear;
-		public final double coolTime;
-
-		public Status(IFairyType fairyType)
-		{
-			pitch = 1.0 * Math.pow(0.5, fairyType.getCost() / 50.0 - 1);
-			additionalReach = 0 + Math.min(fairyType.getManas().getWind() / 10.0, 3);
-			radius = 2 + UtilsMath.trim(fairyType.getManas().getGaia() / 10.0, 0, 3);
-			maxTargetCount = 1 + (int) (Math.min(fairyType.getManas().getDark() + fairyType.getAbilities().getAbilityPower(AbilityTypes.submission.get()) / (fairyType.getCost() / 50.0) + fairyType.getAbilities().getAbilityPower(AbilityTypes.slash.get()) / (fairyType.getCost() / 50.0), 50));
-			fortune = fairyType.getManas().getShine() >= 10
-				? 4
-				: fairyType.getManas().getShine() >= 5
-					? 3
-					: fairyType.getManas().getShine() >= 2
-						? 2
-						: fairyType.getManas().getShine() >= 1
-							? 1
-							: 0;
-			collection = fairyType.getAbilities().getAbilityPower(AbilityTypes.warp.get()) >= 10;
-			wear = 0.5 * UtilsMath.trim(Math.pow(0.5, fairyType.getManas().getFire() / 30.0), 0.5, 1.0);
-			coolTime = fairyType.getCost() * 4 * UtilsMath.trim(Math.pow(0.5, fairyType.getManas().getAqua() / 30.0), 0.5, 1.0);
-		}
-
-	}
-
 	@Override
-	@SideOnly(Side.CLIENT)
-	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
+	public IMagicHandler getMagicHandler(IFairyType fairyType)
 	{
+		IMagicStatus<Double> pitch = MagicStatusHelper.getMagicStatusPitch(
+			() -> -(fairyType.getCost() / 50.0 - 1) * 12,
+			f -> new TextComponentString("").appendSibling(f.cost()),
+			-12, 0, 12);
+		IMagicStatus<Integer> maxTargetCount = MagicStatusHelper.getMagicStatusMaxTargetCount(
+			() -> (int) Math.floor(2 + fairyType.getManas().getDark() * 0.1 + fairyType.getAbilities().getAbilityPower(fell) * 0.1),
+			f -> new TextComponentString("")
+				.appendText("2")
+				.appendText("+")
+				.appendSibling(f.mana(dark)).appendText("*0.1")
+				.appendText("+")
+				.appendSibling(f.ability(fell)).appendText("*0.1"),
+			2, 10000);
+		IMagicStatus<Double> fortune = MagicStatusHelper.getMagicStatusFortune(
+			() -> 3 + fairyType.getManas().getShine() * 0.1 + fairyType.getAbilities().getAbilityPower(knowledge) * 0.1,
+			f -> new TextComponentString("")
+				.appendText("3")
+				.appendText("+")
+				.appendSibling(f.mana(shine)).appendText("*0.1")
+				.appendText("+")
+				.appendSibling(f.ability(knowledge)).appendText("*0.1"),
+			3, 10000);
+		IMagicStatus<Double> additionalReach = MagicStatusHelper.getMagicStatusAdditionalReach(
+			() -> 0 + fairyType.getManas().getWind() * 0.1,
+			f -> new TextComponentString("")
+				.appendSibling(f.mana(wind)).appendText("*0.1"),
+			0, 10);
+		IMagicStatus<Double> radius = MagicStatusHelper.getMagicStatusRadius(
+			() -> 4 + fairyType.getManas().getGaia() * 0.05,
+			f -> new TextComponentString("")
+				.appendText("4")
+				.appendText("+")
+				.appendSibling(f.mana(gaia)).appendText("*0.05"),
+			4, 10);
+		IMagicStatus<Double> wear = MagicStatusHelper.getMagicStatusWear(
+			() -> 0.2 / (1 + fairyType.getManas().getFire() * 0.03),
+			f -> new TextComponentString("")
+				.appendText("0.2/(1+")
+				.appendSibling(f.mana(fire)).appendText("*0.03")
+				.appendText(")"),
+			0.0001, 0.2);
+		IMagicStatus<Double> coolTime = MagicStatusHelper.getMagicStatusCoolTime(
+			() -> fairyType.getCost() * 0.5 / (1 + fairyType.getManas().getAqua() * 0.03),
+			f -> new TextComponentString("")
+				.appendSibling(f.cost()).appendText("*0.5")
+				.appendText("/(1+")
+				.appendSibling(f.mana(aqua)).appendText("*0.03")
+				.appendText(")"),
+			0.0001, 100);
+		IMagicStatus<Boolean> collection = MagicStatusHelper.getMagicStatusCollection(
+			() -> fairyType.getAbilities().getAbilityPower(warp) >= 10,
+			f -> new TextComponentString("")
+				.appendSibling(f.ability(warp)).appendText(">=10"));
 
-		tooltip.add(TextFormatting.RED + "Right click to use magic");
+		return new IMagicHandler() {
+			@Override
+			public ISuppliterator<IMagicStatus<?>> getMagicStatusList()
+			{
+				return ISuppliterator.of(
+					pitch,
+					maxTargetCount,
+					fortune,
+					additionalReach,
+					radius,
+					wear,
+					coolTime,
+					collection);
+			}
 
-		super.addInformationFunctions(itemStack, world, tooltip, flag);
+			@Override
+			public IMagicExecutor getMagicExecutor(World world, EntityPlayer player, ItemStack itemStack)
+			{
 
-	}
+				// 視線判定
+				MagicSelectorRayTrace magicSelectorRayTrace = new MagicSelectorRayTrace(world, player, additionalReach.get());
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-		Status status = new Status(fairyType);
-		tooltip.add(TextFormatting.BLUE + "Pitch: " + String.format("%.2f", Math.log(status.pitch) / Math.log(2) * 12) + " (Cost)");
-		tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
-		tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Gaia)");
-		tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Dark, " + AbilityTypes.submission.get().getDisplayName().getUnformattedText() + ", " + AbilityTypes.slash.get().getDisplayName().getUnformattedText() + ")");
-		tooltip.add(TextFormatting.BLUE + "Fortune: " + String.format("%d", status.fortune) + " (Shine)");
-		tooltip.add(TextFormatting.BLUE + "Collection: " + (status.collection ? "Yes" : "No") + " (" + AbilityTypes.warp.get().getDisplayName().getUnformattedText() + ")");
-		tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
-		tooltip.add(TextFormatting.BLUE + "Cool Time: " + String.format("%.0f", status.coolTime) + "t (Aqua, Cost)");
-	}
+				// 視点判定
+				MagicSelectorPosition magicSelectorPosition = magicSelectorRayTrace.getMagicSelectorPosition();
 
-	//
+				// 妖精を持っていない場合、中止
+				if (fairyType.isEmpty()) return new IMagicExecutor() {
+					@Override
+					public void onUpdate(int itemSlot, boolean isSelected)
+					{
+						magicSelectorPosition.doEffect(0xFF00FF);
+					}
+				};
 
-	private static enum EnumExecutability
-	{
-		OK(4, 0xFFFFFF),
-		COOLTIME(3, 0xFFFF00),
-		NO_TARGET(2, 0x00FFFF),
-		NO_RESOURCE(1, 0xFF0000),
-		NO_FAIRY(0, 0xFF00FF),;
+				// 範囲判定
+				MagicSelectorCircle magicSelectorCircle = magicSelectorPosition.getMagicSelectorCircle(radius.get());
 
-		public final int health;
-		public final int color;
-
-		private EnumExecutability(int health, int color)
-		{
-			this.health = health;
-			this.color = color;
-		}
-
-	}
-
-	private static class Result
-	{
-
-		public final EnumExecutability executability;
-		public final Vec3d positionTarget;
-
-		public Result(
-			EnumExecutability executability,
-			Vec3d positionTarget)
-		{
-			this.executability = executability;
-			this.positionTarget = positionTarget;
-		}
-
-	}
-
-	private static class ResultWithFairy extends Result
-	{
-
-		public final IFairyType fairyType;
-		public final Status status;
-		public final List<Tuple3<BlockPos, Boolean, IPickable>> targets;
-
-		public ResultWithFairy(
-			EnumExecutability executability,
-			Vec3d positionTarget,
-			IFairyType fairyType,
-			Status status,
-			List<Tuple3<BlockPos, Boolean, IPickable>> targets)
-		{
-			super(executability, positionTarget);
-			this.fairyType = fairyType;
-			this.status = status;
-			this.targets = targets;
-		}
-
-	}
-
-	// /fill ~-10 ~ ~-10 ~10 ~ ~10 miragefairy2019:mirage_flower 3
-	private Result getExecutability(World world, ItemStack itemStack, EntityPlayer player)
-	{
-
-		// 妖精取得
-		Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
-		if (fairy == null) {
-			RayTraceResult rayTraceResult = rayTrace(world, player, false, 0);
-			Vec3d positionTarget = rayTraceResult != null
-				? rayTraceResult.hitVec
-				: getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
-			return new Result(
-				EnumExecutability.NO_FAIRY,
-				positionTarget);
-		}
-
-		// ステータスを評価
-		Status status = new Status(fairy.y);
-
-		// 発動対象
-		RayTraceResult rayTraceResult = rayTrace(world, player, false, status.additionalReach);
-		Vec3d positionTarget = rayTraceResult != null
-			? rayTraceResult.hitVec
-			: getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach);
-		List<Tuple3<BlockPos, Boolean, IPickable>> targets = new ArrayList<>();
-		{
-			List<Tuple3<BlockPos, Double, IPickable>> targets2 = new ArrayList<>();
-
-			int xMin = (int) Math.floor(positionTarget.x - status.radius);
-			int xMax = (int) Math.ceil(positionTarget.x + status.radius);
-			int zMin = (int) Math.floor(positionTarget.z - status.radius);
-			int zMax = (int) Math.ceil(positionTarget.z + status.radius);
-			for (int x = xMin; x <= xMax; x++) {
-				int y = (int) positionTarget.y;
-				for (int z = zMin; z <= zMax; z++) {
-					BlockPos blockPos = new BlockPos(x, y, z);
-
-					double dx = (x + 0.5) - positionTarget.x;
-					double dz = (z + 0.5) - positionTarget.z;
-					double distance2 = dx * dx + dz * dz;
-					if (distance2 <= status.radius * status.radius) {
-
-						IBlockState blockState = world.getBlockState(blockPos);
+				// 対象計算
+				List<Tuple<BlockPos, IPickable>> listTarget = new ArrayList<>();
+				magicSelectorCircle.getBlockPosList()
+					.mapIfPresent(e -> {
+						IBlockState blockState = world.getBlockState(e.blockPos);
 						IPickable pickable = ApiMirageFlower.pickableRegistry.get(blockState.getBlock()).orElse(null);
 						if (pickable != null) {
 							if (pickable.isPickableAge(blockState)) {
-								targets2.add(Tuple3.of(blockPos, distance2, pickable));
+								return Optional.of(Tuple.of(e, pickable));
 							}
 						}
+						return Optional.empty();
+					})
+					.sortedDouble(t -> t.x.distanceSquared)
+					.limit(maxTargetCount.get())
+					.forEach(t -> {
+						listTarget.add(Tuple.of(t.x.blockPos, t.y));
+					});
+
+				// 資源がない場合、中止
+				if (itemStack.getItemDamage() + (int) Math.ceil(wear.get()) > itemStack.getMaxDamage()) return new IMagicExecutor() {
+					@Override
+					public void onUpdate(int itemSlot, boolean isSelected)
+					{
+
+						// 視点
+						magicSelectorPosition.doEffect(0xFF0000);
+
+						// 範囲
+						magicSelectorCircle.doEffect();
+
+					}
+				};
+
+				// 発動対象がない場合、中止
+				if (listTarget.isEmpty()) return new IMagicExecutor() {
+					@Override
+					public void onUpdate(int itemSlot, boolean isSelected)
+					{
+
+						// 視点
+						magicSelectorPosition.doEffect(0x00FFFF);
+
+						// 範囲
+						magicSelectorCircle.doEffect();
+
+					}
+				};
+
+				// クールタイムが残っている場合、中止
+				if (player.getCooldownTracker().hasCooldown(ItemBellFlowerPicking.this)) return new IMagicExecutor() {
+					@Override
+					public void onUpdate(int itemSlot, boolean isSelected)
+					{
+
+						// 視点
+						magicSelectorPosition.doEffect(0xFFFF00);
+
+						// 範囲
+						magicSelectorCircle.doEffect();
+
+						// 対象
+						spawnParticleTargets(
+							world,
+							listTarget,
+							target -> new Vec3d(target.x).addVector(0.5, 0.5, 0.5),
+							target -> 0xFFFF00);
+
+					}
+				};
+
+				// 魔法成立
+				return new IMagicExecutor() {
+					@Override
+					public void onUpdate(int itemSlot, boolean isSelected)
+					{
+
+						// 視点
+						magicSelectorPosition.doEffect(0x00FF00);
+
+						// 範囲
+						magicSelectorCircle.doEffect();
+
+						// 対象
+						spawnParticleTargets(
+							world,
+							listTarget,
+							target -> new Vec3d(target.x).addVector(0.5, 0.5, 0.5),
+							target -> 0x00FF00);
 
 					}
 
-				}
-			}
+					@Override
+					public EnumActionResult onItemRightClick(EnumHand hand)
+					{
 
-			targets = ISuppliterator.ofIterable(targets2)
-				.sortedDouble(Tuple3::getY)
-				.map((t, i) -> t.deriveY(i < status.maxTargetCount))
-				.toList();
-		}
+						SoundEvent breakSound = null;
+						boolean collected = false;
+						int targetCount = 0;
+						for (Tuple<BlockPos, IPickable> tuple : listTarget) {
 
-		// 実行可能性を計算
-		EnumExecutability executability = itemStack.getItemDamage() + (int) Math.ceil(status.wear) > itemStack.getMaxDamage()
-			? EnumExecutability.NO_RESOURCE
-			: !targets.stream().anyMatch(t -> t.y)
-				? EnumExecutability.NO_TARGET
-				: player.getCooldownTracker().hasCooldown(this)
-					? EnumExecutability.COOLTIME
-					: EnumExecutability.OK;
+							// 耐久が足りないので中止
+							if (itemStack.getItemDamage() + (int) Math.ceil(wear.get()) > itemStack.getMaxDamage()) break;
 
-		return new ResultWithFairy(executability, positionTarget, fairy.y, status, targets);
-	}
+							// パワーが足りないので中止
+							if (targetCount + 1 > maxTargetCount.get()) break;
 
-	//
+							// 成立
 
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-	{
+							// 資源消費
+							itemStack.damageItem(UtilsMath.randomInt(world.rand, wear.get()), player);
 
-		// アイテム取得
-		ItemStack itemStack = player.getHeldItem(hand);
+							targetCount++;
 
-		//
+							// 音取得
+							{
+								IBlockState blockState = world.getBlockState(tuple.x);
+								breakSound = blockState.getBlock().getSoundType(blockState, world, tuple.x, player).getBreakSound();
+							}
 
-		// 判定
-		Result result = getExecutability(world, itemStack, player);
+							// 収穫
+							{
 
-		// 判定がだめだったらスルー
-		if (result.executability.health < EnumExecutability.OK.health) return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStack);
-		ResultWithFairy resultWithFairy = (ResultWithFairy) result;
+								// 収穫試行
+								boolean result = tuple.y.tryPick(world, tuple.x, Optional.of(player), UtilsMath.randomInt(world.rand, fortune.get()));
+								if (!result) continue;
 
-		// 魔法成立
+								// 収集
+								if (collection.get()) {
 
-		SoundEvent breakSound = null;
-		boolean collected = false;
-		int targetCount = 0;
-		for (Tuple3<BlockPos, Boolean, IPickable> tuple : resultWithFairy.targets) {
-			if (tuple.y) {
+									// 破壊したばかりのブロックの周辺のアイテムを集める
+									for (EntityItem entityItem : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(tuple.x))) {
+										collected = true;
+										entityItem.setPosition(player.posX, player.posY, player.posZ);
+										entityItem.setNoPickupDelay();
+									}
 
-				// 耐久が足りないので中止
-				if (itemStack.getItemDamage() + (int) Math.ceil(resultWithFairy.status.wear) > itemStack.getMaxDamage()) break;
+								}
 
-				// パワーが足りないので中止
-				if (targetCount >= resultWithFairy.status.maxTargetCount) break;
+							}
 
-				// 行使
-				itemStack.damageItem(UtilsMath.randomInt(world.rand, resultWithFairy.status.wear), player);
-				targetCount++;
-				{
-					IBlockState blockState = world.getBlockState(tuple.x);
-					breakSound = blockState.getBlock().getSoundType(blockState, world, tuple.x, player).getBreakSound();
-				}
-				{
+							// エフェクト
+							int color = fairyType.getColor();
+							world.spawnParticle(
+								EnumParticleTypes.SPELL_MOB,
+								tuple.x.getX() + 0.5,
+								tuple.x.getY() + 0.5,
+								tuple.x.getZ() + 0.5,
+								((color >> 16) & 0xFF) / 255.0,
+								((color >> 8) & 0xFF) / 255.0,
+								((color >> 0) & 0xFF) / 255.0);
 
-					// 収穫
-					boolean result2 = tuple.z.tryPick(world, tuple.x, Optional.of(player), resultWithFairy.status.fortune);
-
-					// 収穫できなかった場合は飛ばす
-					if (!result2) continue;
-
-					// 収集
-					if (resultWithFairy.status.collection) {
-
-						// 破壊したばかりのブロックの周辺のアイテムを得る
-						for (EntityItem entityItem : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(tuple.x))) {
-							collected = true;
-							entityItem.setPosition(player.posX, player.posY, player.posZ);
-							entityItem.setNoPickupDelay();
 						}
 
+						if (targetCount >= 1) {
+
+							// エフェクト
+							playSound(world, player, Math.pow(2, pitch.get() / 12.0));
+							world.playSound(null, player.posX, player.posY, player.posZ, breakSound, SoundCategory.PLAYERS, 1.0F, 1.0F);
+
+							// クールタイム
+							double ratio = targetCount / (double) maxTargetCount.get();
+							player.getCooldownTracker().setCooldown(ItemBellFlowerPicking.this, (int) (coolTime.get() * Math.pow(ratio, 0.5)));
+
+						}
+						if (collected) {
+
+							// エフェクト
+							world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+
+						}
+
+						return EnumActionResult.SUCCESS;
 					}
+				};
+			}
+		};
+	}
 
-				}
+	public static void playSound(World world, EntityPlayer player, double pitch)
+	{
+		world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0F, (float) pitch);
+	}
 
-				// エフェクト
-				int color = resultWithFairy.fairyType.getColor();
+	public static <T> void spawnParticleTargets(
+		World world,
+		Iterable<? extends T> targets,
+		Function<? super T, ? extends Vec3d> fPosition,
+		Function<? super T, ? extends Integer> fColor)
+	{
+		List<? extends T> listTargets = ISuppliterator.ofIterable(targets).toList();
+		double rate = 5 / (double) Math.max(listTargets.size(), 5);
+		for (T target : listTargets) {
+
+			int color = fColor.apply(target);
+
+			if (Math.random() < 0.2 * rate) {
+				Vec3d position = fPosition.apply(target);
 				world.spawnParticle(
 					EnumParticleTypes.SPELL_MOB,
-					tuple.x.getX() + 0.5,
-					tuple.x.getY() + 0.5,
-					tuple.x.getZ() + 0.5,
+					position.x,
+					position.y,
+					position.z,
 					((color >> 16) & 0xFF) / 255.0,
 					((color >> 8) & 0xFF) / 255.0,
 					((color >> 0) & 0xFF) / 255.0);
-
 			}
-		}
-
-		if (targetCount >= 1) {
-
-			// エフェクト
-			ItemBellBase.playSound(world, player, resultWithFairy.status.pitch);
-			world.playSound(null, player.posX, player.posY, player.posZ, breakSound, SoundCategory.PLAYERS, 1.0F, 1.0F);
-
-			// クールタイム
-			player.getCooldownTracker().setCooldown(this, (int) (resultWithFairy.status.coolTime * (targetCount / (double) resultWithFairy.status.maxTargetCount)));
 
 		}
-		if (collected) {
-
-			// エフェクト
-			world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-
-		}
-
-		return new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
-	}
-
-	@Override
-	public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
-	{
-
-		// クライアントのみ
-		if (!ApiMain.side().isClient()) return;
-
-		// プレイヤー取得
-		if (!(entity instanceof EntityPlayer)) return;
-		EntityPlayer player = (EntityPlayer) entity;
-
-		// アイテム取得
-		if (!isSelected && player.getHeldItemOffhand() != itemStack) return;
-
-		//
-
-		// 判定
-		Result result = getExecutability(world, itemStack, player);
-
-		//
-
-		// 発動中心点にパーティクルを表示
-		spawnParticle(world, result.positionTarget, result.executability.color);
-
-		if (result instanceof ResultWithFairy && result.executability.health >= EnumExecutability.NO_TARGET.health) {
-			ResultWithFairy resultWithFairy = (ResultWithFairy) result;
-
-			// 発動範囲にパーティクルを表示
-			ItemMagicWandCollecting.spawnParticleSphericalRange(
-				world,
-				resultWithFairy.positionTarget,
-				resultWithFairy.status.radius);
-
-			// 対象にパーティクルを表示
-			ItemMagicWandCollecting.spawnParticleTargets(
-				world,
-				resultWithFairy.targets,
-				target -> target.y,
-				target -> new Vec3d(target.x).addVector(0.5, 0.5, 0.5),
-				resultWithFairy.status.maxTargetCount);
-
-		}
-
 	}
 
 }
