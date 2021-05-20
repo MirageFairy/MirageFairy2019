@@ -9,6 +9,7 @@ import java.util.function.Function;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiFairyStick;
+import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.materialsfairy.ApiMaterialsFairy;
@@ -25,6 +26,7 @@ import miragefairy2019.mod.lib.multi.ItemBlockMulti;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -154,7 +156,18 @@ public class ModuleMaterialsFairy
 					.bind(addOreName("bottleMirageFlowerOil"))
 					.bind(addOreName("container250MirageFlowerOil"))
 					.bind(ItemVariantFairyMaterial.setterContainerItem(Optional.of(() -> new ItemStack(Items.GLASS_BOTTLE))))
-					.bind(onCreateItemStack(v -> itemStackBottleMirageFlowerOil = v.createItemStack()));
+					.bind(onCreateItemStack(v -> itemStackBottleMirageFlowerOil = v.createItemStack()))
+					.bind(onAddRecipe(v -> {
+
+						// 空き瓶＋ミラ種50個＞珠玉→ミラオイル瓶
+						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019CraftingToolFairyWandPolishing"))))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(Ingredient.fromItem(ApiMirageFlower.itemMirageFlowerSeeds), 50)))
+							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionSpawnItem(() -> v.createItemStack())))
+							.get());
+
+					}));
 
 				itemVariant(c.erMod, c, 13, () -> new ItemVariantFairyMaterial("glass_mana_rod", "manaRodGlass", 2))
 					.bind(addComponent(instance(miragium.get(), 0.5)))
