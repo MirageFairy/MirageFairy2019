@@ -315,7 +315,7 @@ public class Loader
 			.bind(addComponent(instance(magnetite.get(), 0.5)))
 			.bind(addComponent(instance(pyrope.get(), 2)))
 			.bind(addComponent(instance(gold.get(), 1)))
-			.bind(addComponent(instance(getComponentAbilityType(slash.get()))))
+			.bind(addComponent(instance(getComponentAbilityType(fell.get()))))
 			.bind(setWeaponStatusOfTier(3))
 			.get();
 
