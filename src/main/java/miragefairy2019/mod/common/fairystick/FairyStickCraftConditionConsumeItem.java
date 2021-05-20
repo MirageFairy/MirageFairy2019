@@ -13,10 +13,17 @@ public class FairyStickCraftConditionConsumeItem implements IFairyStickCraftCond
 {
 
 	private Ingredient ingredient;
+	private int count;
+
+	public FairyStickCraftConditionConsumeItem(Ingredient ingredient, int count)
+	{
+		this.ingredient = ingredient;
+		this.count = count;
+	}
 
 	public FairyStickCraftConditionConsumeItem(Ingredient ingredient)
 	{
-		this.ingredient = ingredient;
+		this(ingredient, 1);
 	}
 
 	@Override
@@ -25,14 +32,14 @@ public class FairyStickCraftConditionConsumeItem implements IFairyStickCraftCond
 		// TODO 同種のアイテムを登録したとき、スタックされていると反応しない
 
 		// アイテムを抽出する
-		EntityItem entity = environment.pullItem(ingredient).orElse(null);
+		EntityItem entity = environment.pullItem(itemStack -> ingredient.apply(itemStack) && itemStack.getCount() >= count).orElse(null);
 		if (entity == null) return false;
 
 		//
 
 		executor.hookOnCraft(setterItemStackFairyStick -> {
 
-			entity.getItem().shrink(1);
+			entity.getItem().shrink(count);
 			if (entity.getItem().isEmpty()) environment.getWorld().removeEntity(entity);
 
 			environment.getWorld().spawnParticle(EnumParticleTypes.SPELL_MOB, entity.posX, entity.posY, entity.posZ, 1, 0, 0);
@@ -51,7 +58,12 @@ public class FairyStickCraftConditionConsumeItem implements IFairyStickCraftCond
 	@Override
 	public ISuppliterator<Iterable<ItemStack>> getIngredientsInput()
 	{
-		return ISuppliterator.of(ISuppliterator.ofObjArray(ingredient.getMatchingStacks()));
+		return ISuppliterator.of(ISuppliterator.ofObjArray(ingredient.getMatchingStacks())
+			.map(itemStack -> {
+				itemStack = itemStack.copy();
+				itemStack.setCount(count);
+				return itemStack;
+			}));
 	}
 
 }
