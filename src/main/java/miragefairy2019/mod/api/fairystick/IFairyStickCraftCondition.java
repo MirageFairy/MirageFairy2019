@@ -1,14 +1,14 @@
 package miragefairy2019.mod.api.fairystick;
 
 import mirrg.boron.util.suppliterator.ISuppliterator;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.ItemStack;
 
 public interface IFairyStickCraftCondition
 {
 
 	public boolean test(IFairyStickCraftEnvironment environment, IFairyStickCraftExecutor executor);
 
-	public default ISuppliterator<Ingredient> getIngredientsInput()
+	public default ISuppliterator<Iterable<ItemStack>> getIngredientsInput()
 	{
 		return ISuppliterator.empty();
 	}
@@ -18,7 +18,7 @@ public interface IFairyStickCraftCondition
 		return ISuppliterator.empty();
 	}
 
-	public default ISuppliterator<Ingredient> getIngredientsOutput()
+	public default ISuppliterator<Iterable<ItemStack>> getIngredientsOutput()
 	{
 		return ISuppliterator.empty();
 	}

@@ -50,9 +50,9 @@ public class FairyStickCraftConditionUseItem implements IFairyStickCraftConditio
 	}
 
 	@Override
-	public ISuppliterator<Ingredient> getIngredientsInput()
+	public ISuppliterator<Iterable<ItemStack>> getIngredientsInput()
 	{
-		return ISuppliterator.of(ingredient);
+		return ISuppliterator.of(ISuppliterator.ofObjArray(ingredient.getMatchingStacks()));
 	}
 
 }
