@@ -123,7 +123,8 @@ Writer : {
 	Achievement::new("miragium_scythe"       ; "miragiumScythe"     )::parent("fairy_weapon/root"                  )                    ::write();
 
 	Achievement::new("bell_base"             ; "bellBase"           )::parent("fairy_weapon/root"                  )                    ::write();
-	Achievement::new("flower_picking_bell"   ; "bellFlowerPicking"  )::parent("fairy_weapon/bell_base"             )::frame("goal"     )::write();
+	Achievement::new("flower_picking_bell"   ; "bellFlowerPicking"  )::parent("fairy_weapon/bell_base"             )                    ::write();
+	Achievement::new("flower_picking_bell_2" ; "bellFlowerPicking2" )::parent("fairy_weapon/flower_picking_bell"   )::frame("goal"     )::write();
 	Achievement::new("christmas_bell"        ; "bellChristmas"      )::parent("fairy_weapon/bell_base"             )::frame("challenge")::write();
 
 	Achievement::new("ocarina_base"          ; "ocarinaBase"        )::parent("fairy_weapon/root"                  )                    ::write();
@@ -445,6 +446,7 @@ Writer : {
 	fairyWeapon("fairy_sword");
 	fairyWeapon("bell_base");
 	fairyWeapon("flower_picking_bell");
+	fairyWeapon("flower_picking_bell_2");
 	fairyWeapon("christmas_bell");
 	fairyWeapon("ocarina_base");
 	fairyWeapon("temptation_ocarina");

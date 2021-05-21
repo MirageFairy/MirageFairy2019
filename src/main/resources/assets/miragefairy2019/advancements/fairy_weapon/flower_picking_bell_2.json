@@ -1,23 +1,24 @@
 {
 	"display": {
 		"icon": {
-			"item": "miragefairy2019:flower_picking_bell"
+			"item": "miragefairy2019:flower_picking_bell_2"
 		},
 		"title": {
-			"translate": "item.bellFlowerPicking.name"
+			"translate": "item.bellFlowerPicking2.name"
 		},
 		"description": {
 			"translate": "advancements.miragefairy2019.fairy_weapon.all.description"
-		}
+		},
+		"frame": "goal"
 	},
-	"parent": "miragefairy2019:fairy_weapon/bell_base",
+	"parent": "miragefairy2019:fairy_weapon/flower_picking_bell",
 	"criteria": {
 		"main": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions": {
 				"items": [
 					{
-						"item": "miragefairy2019:flower_picking_bell"
+						"item": "miragefairy2019:flower_picking_bell_2"
 					}
 				]
 			}

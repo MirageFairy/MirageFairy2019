@@ -319,6 +319,14 @@ public class Loader
 			.bind(setWeaponStatusOfTier(3))
 			.get();
 
+		// 花摘みの鐘 II
+		Configurator<ItemBellFlowerPicking> bellFlowerPicking2 = fairyWeapon(erMod, () -> new ItemBellFlowerPicking(0.2, 0.2, 0.1), "flower_picking_bell_2", "bellFlowerPicking2")
+			.bind(addComponent(bellFlowerPicking))
+			.bind(addComponent(instance(miragium.get(), 4)))
+			.bind(addComponent(instance(getComponentAbilityType(fell.get()))))
+			.bind(setWeaponStatusOfTier(4))
+			.get();
+
 		// クリスマスの鐘
 		Configurator<ItemBellChristmas> bellChristmas = fairyWeapon(erMod, ItemBellChristmas::new, "christmas_bell", "bellChristmas")
 			.bind(addComponent(bellBase))
