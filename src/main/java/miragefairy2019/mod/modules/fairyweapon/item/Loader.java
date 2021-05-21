@@ -309,7 +309,7 @@ public class Loader
 			.get();
 
 		// 花摘みの鐘
-		Configurator<ItemBellFlowerPicking> bellFlowerPicking = fairyWeapon(erMod, ItemBellFlowerPicking::new, "flower_picking_bell", "bellFlowerPicking")
+		Configurator<ItemBellFlowerPicking> bellFlowerPicking = fairyWeapon(erMod, () -> new ItemBellFlowerPicking(0.1, 0.1, 0.05), "flower_picking_bell", "bellFlowerPicking")
 			.bind(addComponent(bellBase))
 			.bind(addComponent(instance(miragium.get(), 0.5)))
 			.bind(addComponent(instance(magnetite.get(), 0.5)))

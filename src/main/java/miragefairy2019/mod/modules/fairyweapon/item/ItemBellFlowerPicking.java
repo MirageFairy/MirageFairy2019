@@ -40,6 +40,17 @@ import net.minecraft.world.World;
 public class ItemBellFlowerPicking extends ItemFairyWeaponBase3
 {
 
+	private double maxTargetCountFactor;
+	private double fortuneFactor;
+	private double radiusFactor;
+
+	public ItemBellFlowerPicking(double maxTargetCountFactor, double fortuneFactor, double radiusFactor)
+	{
+		this.maxTargetCountFactor = maxTargetCountFactor;
+		this.fortuneFactor = fortuneFactor;
+		this.radiusFactor = radiusFactor;
+	}
+
 	@Override
 	public IMagicHandler getMagicHandler(IFairyType fairyType)
 	{
@@ -48,20 +59,20 @@ public class ItemBellFlowerPicking extends ItemFairyWeaponBase3
 			f -> new TextComponentString("").appendSibling(f.cost()),
 			-12, 0, 12);
 		IMagicStatus<Integer> maxTargetCount = MagicStatusHelper.getMagicStatusMaxTargetCount(
-			() -> (int) Math.floor(2 + fairyType.getManas().getDark() * 0.1 + fairyType.getAbilities().getAbilityPower(fell) * 0.1),
+			() -> (int) Math.floor(2 + fairyType.getManas().getDark() * maxTargetCountFactor + fairyType.getAbilities().getAbilityPower(fell) * 0.1),
 			f -> new TextComponentString("")
 				.appendText("2")
 				.appendText("+")
-				.appendSibling(f.mana(dark)).appendText("*0.1")
+				.appendSibling(f.mana(dark)).appendText("*" + String.format("%.2f", maxTargetCountFactor))
 				.appendText("+")
 				.appendSibling(f.ability(fell)).appendText("*0.1"),
 			2, 10000);
 		IMagicStatus<Double> fortune = MagicStatusHelper.getMagicStatusFortune(
-			() -> 3 + fairyType.getManas().getShine() * 0.1 + fairyType.getAbilities().getAbilityPower(knowledge) * 0.1,
+			() -> 3 + fairyType.getManas().getShine() * fortuneFactor + fairyType.getAbilities().getAbilityPower(knowledge) * 0.1,
 			f -> new TextComponentString("")
 				.appendText("3")
 				.appendText("+")
-				.appendSibling(f.mana(shine)).appendText("*0.1")
+				.appendSibling(f.mana(shine)).appendText("*" + String.format("%.2f", fortuneFactor))
 				.appendText("+")
 				.appendSibling(f.ability(knowledge)).appendText("*0.1"),
 			3, 10000);
@@ -71,11 +82,11 @@ public class ItemBellFlowerPicking extends ItemFairyWeaponBase3
 				.appendSibling(f.mana(wind)).appendText("*0.1"),
 			0, 10);
 		IMagicStatus<Double> radius = MagicStatusHelper.getMagicStatusRadius(
-			() -> 4 + fairyType.getManas().getGaia() * 0.05,
+			() -> 4 + fairyType.getManas().getGaia() * radiusFactor,
 			f -> new TextComponentString("")
 				.appendText("4")
 				.appendText("+")
-				.appendSibling(f.mana(gaia)).appendText("*0.05"),
+				.appendSibling(f.mana(gaia)).appendText("*" + String.format("%.2f", radiusFactor)),
 			4, 10);
 		IMagicStatus<Double> wear = MagicStatusHelper.getMagicStatusWear(
 			() -> 0.2 / (1 + fairyType.getManas().getFire() * 0.03),
