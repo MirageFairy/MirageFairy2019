@@ -1,56 +1,24 @@
 package miragefairy2019.mod.modules.placeditem;
 
-import io.netty.buffer.ByteBuf;
 import miragefairy2019.mod.api.ApiPlacedItem;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PacketPlaceItem implements IMessageHandler<PacketPlaceItem.Message, IMessage>
+public class PacketPlaceItem implements IMessageHandler<MessagePlaceItem, IMessage>
 {
 
-	public static class Message implements IMessage
-	{
-
-		private BlockPos blockPos;
-
-		public Message()
-		{
-
-		}
-
-		public Message(BlockPos blockPos)
-		{
-			this.blockPos = blockPos;
-		}
-
-		@Override
-		public void fromBytes(ByteBuf buf)
-		{
-			blockPos = new PacketBuffer(buf).readBlockPos();
-		}
-
-		@Override
-		public void toBytes(ByteBuf buf)
-		{
-			new PacketBuffer(buf).writeBlockPos(blockPos);
-		}
-
-	}
-
 	@Override
-	public IMessage onMessage(Message message, MessageContext ctx)
+	public IMessage onMessage(MessagePlaceItem message, MessageContext ctx)
 	{
 		if (ctx.side == Side.SERVER) {
 			if (ctx.netHandler instanceof NetHandlerPlayServer) {

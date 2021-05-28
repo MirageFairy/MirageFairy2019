@@ -76,7 +76,7 @@ public class ModulePlacedItem
 
 		// ネットワークメッセージ登録
 		erMod.registerNetworkMessage.register(() -> {
-			ApiPlacedItem.simpleNetworkWrapper.registerMessage(PacketPlaceItem.class, PacketPlaceItem.Message.class, 0, Side.SERVER);
+			ApiPlacedItem.simpleNetworkWrapper.registerMessage(PacketPlaceItem.class, MessagePlaceItem.class, 0, Side.SERVER);
 		});
 
 		// キーリスナー
@@ -97,7 +97,7 @@ public class ModulePlacedItem
 										if (player instanceof EntityPlayerSP) {
 											RayTraceResult result = player.rayTrace(player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), 0);
 											if (result.typeOfHit == Type.BLOCK) {
-												ApiPlacedItem.simpleNetworkWrapper.sendToServer(new PacketPlaceItem.Message(
+												ApiPlacedItem.simpleNetworkWrapper.sendToServer(new MessagePlaceItem(
 													player.world.getBlockState(result.getBlockPos()).getBlock().isReplaceable(player.world, result.getBlockPos())
 														? result.getBlockPos()
 														: result.getBlockPos().offset(result.sideHit)));
