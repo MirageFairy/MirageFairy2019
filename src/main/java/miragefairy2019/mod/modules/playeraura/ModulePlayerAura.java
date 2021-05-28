@@ -100,11 +100,12 @@ public class ModulePlayerAura
 							.appendText(": ")
 							.appendText(String.format("%3d", format(before)))
 							.appendText(" → ")
-							.appendText(String.format("%3d", format(after)))
+							.appendSibling(new TextComponentString(String.format("%3d", format(after)))
+								.setStyle(new Style().setBold(true)))
 							.appendText(" (")
 							.appendSibling(new TextComponentString("")
 								.appendText(String.format("%4d", format(difference)))
-								.setStyle(new Style().setBold(true).setColor(difference > 0
+								.setStyle(new Style().setColor(difference > 0
 									? TextFormatting.GREEN
 									: difference < 0
 										? TextFormatting.RED
