@@ -1,23 +1,36 @@
 package miragefairy2019.mod.modules.fairy;
 
+import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.IntFunction;
 
 import miragefairy2019.mod.ModMirageFairy2019;
+import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IAbilityType;
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
+import miragefairy2019.mod.api.fairy.relation.IIngredientFairyRelation;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.mod.common.fairy.relation.FairyRelationRegistry;
 import miragefairy2019.mod.lib.EventRegistryMod;
+import miragefairy2019.mod.lib.InitializationContext;
+import miragefairy2019.mod.lib.OreIngredientComplex;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -27,6 +40,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreIngredient;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ModuleFairy
 {
@@ -331,6 +346,11 @@ public class ModuleFairy
 
 	public static void init(EventRegistryMod erMod)
 	{
+
+		erMod.initRegistry.register(() -> {
+			ApiFairy.fairyRelationRegistry = new FairyRelationRegistry();
+		});
+
 		erMod.initCreativeTab.register(() -> {
 			creativeTab = new CreativeTabs("mirageFairy2019.fairy") {
 				@Override
@@ -483,6 +503,160 @@ public class ModuleFairy
 			}
 
 		});
+
+		// 妖精関係レジストリー
+		erMod.createItemStack.register(ic -> {
+
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockDiamond"), diamond[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockEmerald"), emerald[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockPyrope"), pyrope[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockMoonstone"), moonstone[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockApatite"), apatite[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("obsidian"), obsidian[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockFluorite"), fluorite[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockCinnabar"), cinnabar[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockMagnetite"), magnetite[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("glowstone"), glowstone[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockSmithsonite"), smithsonite[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockLapis"), lapislazuli[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockSulfur"), sulfur[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockGold"), gold[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockRedstone"), redstone[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(Ingredient.fromStacks(new ItemStack(Blocks.SAND)), sand[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockNephrite"), nephrite[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockTourmaline"), tourmaline[0].type.registryName);
+			ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockTopaz"), topaz[0].type.registryName);
+			// TODO ほとんどの妖精とアイテムの関連付けは妖精レジストリーを使う
+
+		});
+
+		// 妖精の関係を登録
+		erMod.createItemStack.register(new Consumer<InitializationContext>() {
+			@Override
+			public void accept(InitializationContext ic)
+			{
+				r(1, stone, i(Blocks.STONE, 0));
+				r(1, dirt, i(Blocks.DIRT, 0));
+				r(1, iron, i("ingotIron"));
+				r(1, diamond, i("gemDiamond"));
+				r(1, magnetite, i("gemMagnetite"));
+				r(1, apatite, i("gemApatite"));
+				r(1, fluorite, i("gemFluorite"));
+				r(1, sulfur, i("gemSulfur"));
+				r(1, cinnabar, i("gemCinnabar"));
+				r(1, moonstone, i("gemMoonstone"));
+				r(1, pyrope, i("gemPyrope"));
+				r(1, smithsonite, i("gemSmithsonite"));
+				r(1, redstone, i("dustRedstone"));
+				r(1, sand, i(Blocks.SAND));
+				r(1, gold, i("ingotGold"));
+				r(1, wheat, i(Items.WHEAT));
+				r(1, lilac, i(Blocks.DOUBLE_PLANT, 1));
+				r(1, torch, i(Blocks.TORCH));
+				r(1, gravel, i(Blocks.GRAVEL));
+				r(1, emerald, i("gemEmerald"));
+				r(1, lapislazuli, i("gemLapislazuli"));
+				r(1, furnace, i(Blocks.FURNACE));
+				r(1, magentaglazedterracotta, i(Blocks.MAGENTA_GLAZED_TERRACOTTA));
+				r(1, bread, i(Items.BREAD));
+				r(1, apple, i(Items.APPLE));
+				r(1, carrot, i(Items.CARROT));
+				r(1, cactus, i(Blocks.CACTUS));
+				r(1, axe, i(Items.IRON_AXE));
+				r(1, chest, i(Blocks.CHEST));
+				r(1, craftingtable, i(Blocks.CRAFTING_TABLE));
+				r(1, potion, i(Items.POTIONITEM));
+				r(1, sword, i(Items.IRON_SWORD));
+				r(1, dispenser, i(Blocks.DISPENSER));
+				r(1, cod, i(Items.FISH, 0));
+				r(1, salmon, i(Items.FISH, 1));
+				r(1, pufferfish, i(Items.FISH, 3));
+				r(1, clownfish, i(Items.FISH, 2));
+				r(1, spruce, i(Blocks.LOG, 1), i(Blocks.SAPLING, 1));
+				r(1, anvil, i(Blocks.ANVIL));
+				r(1, obsidian, i(Blocks.OBSIDIAN));
+				r(1, seed, i(Items.WHEAT_SEEDS));
+				r(1, glowstone, i(Items.GLOWSTONE_DUST), i(Blocks.GLOWSTONE));
+				r(1, coal, i(Items.COAL, 0));
+				r(1, netherstar, i(Items.NETHER_STAR));
+				r(1, brewingstand, i(Items.BREWING_STAND));
+				r(1, hoe, i(Items.IRON_HOE));
+				r(1, shield, i(Items.SHIELD));
+				r(1, hopper, i(Blocks.HOPPER));
+				r(1, nephrite, i("gemNephrite"));
+				r(1, tourmaline, i("gemTourmaline"));
+				r(1, topaz, i("gemTopaz"));
+				r(1, cookie, i(Items.COOKIE));
+				r(1, cake, i(Items.CAKE));
+				r(1, enchantedgoldenapple, i(Items.GOLDEN_APPLE, 1));
+				r(1, sugar, i(Items.SUGAR));
+			}
+
+			private Ingredient i(Item item)
+			{
+				return i(item, 32767);
+			}
+
+			private Ingredient i(Item item, int meta)
+			{
+				return Ingredient.fromStacks(new ItemStack(item, 1, meta));
+			}
+
+			private Ingredient i(Block block)
+			{
+				return i(block, 32767);
+			}
+
+			private Ingredient i(Block block, int meta)
+			{
+				return Ingredient.fromStacks(new ItemStack(Item.getItemFromBlock(block), 1, meta));
+			}
+
+			@SuppressWarnings("unused")
+			private Ingredient i(ItemStack itemStack)
+			{
+				return Ingredient.fromStacks(itemStack);
+			}
+
+			private Ingredient i(String ore)
+			{
+				return new OreIngredient(ore);
+			}
+
+			private void r(double relevance, VariantFairy[] variantFairies, Ingredient... ingredients)
+			{
+				for (Ingredient ingredient : ingredients) {
+					ApiFairy.fairyRelationRegistry.registerIngredientFairyRelation(relevance, variantFairies[0].createItemStack(), ingredient);
+				}
+			}
+		});
+
+		// 妖精の確定レシピ
+		erMod.addRecipe.register(() -> {
+			int counter = 0;
+			for (IIngredientFairyRelation relation : ApiFairy.fairyRelationRegistry.getIngredientFairyRelations()) {
+				if (relation.getRelevance() >= 1) {
+
+					GameRegistry.findRegistry(IRecipe.class).register(new ShapelessOreRecipe(
+						new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_from_item_" + counter),
+						relation.getItemStackFairy(),
+						new OreIngredientComplex("mirageFairy2019CraftingToolFairyWandSummoning"),
+						new OreIngredient("mirageFairyCrystal"),
+						relation.getIngredient()).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_from_item_" + counter));
+					counter++;
+
+					GameRegistry.findRegistry(IRecipe.class).register(new ShapelessOreRecipe(
+						new ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_from_summoning_fairy_wand_" + counter),
+						relation.getItemStackFairy(),
+						new OreIngredient("gemDiamond"),
+						new OreIngredient("mirageFairyCrystal"),
+						relation.getIngredient()).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_from_summoning_fairy_wand_" + counter));
+					counter++;
+
+				}
+			}
+		});
+
 	}
 
 }

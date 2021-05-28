@@ -6,19 +6,15 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
-import java.util.function.Consumer;
 
 import miragefairy2019.mod.api.ApiFairyCrystal;
-import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
 import miragefairy2019.mod.api.fairycrystal.DropFixed;
 import miragefairy2019.mod.api.fairycrystal.IDrop;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.modules.fairy.VariantFairy;
-import mirrg.boron.util.struct.Tuple3;
 import mirrg.boron.util.suppliterator.ISuppliterator;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockDoublePlant.EnumPlantType;
 import net.minecraft.block.BlockOldLeaf;
@@ -39,13 +35,11 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.oredict.OreIngredient;
 
 public class LoaderFairyCrystalDrop
 {
@@ -268,131 +262,6 @@ public class LoaderFairyCrystalDrop
 	private static boolean time(World world, int min, int max)
 	{
 		return world.provider.isSurfaceWorld() && min <= (world.getWorldTime() + 6000) % 24000 && (world.getWorldTime() + 6000) % 24000 <= max;
-	}
-
-	public static void loadFairyRecipe(Consumer<Tuple3<Ingredient, ItemStack, String>> consumerRecipe)
-	{
-
-		// 妖精レジストリー
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockDiamond"), diamond[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockEmerald"), emerald[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockPyrope"), pyrope[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockMoonstone"), moonstone[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockApatite"), apatite[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("obsidian"), obsidian[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockFluorite"), fluorite[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockCinnabar"), cinnabar[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockMagnetite"), magnetite[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("glowstone"), glowstone[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockSmithsonite"), smithsonite[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockLapis"), lapislazuli[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockSulfur"), sulfur[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockGold"), gold[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockRedstone"), redstone[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(Ingredient.fromStacks(new ItemStack(Blocks.SAND)), sand[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockNephrite"), nephrite[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockTourmaline"), tourmaline[0].type.registryName);
-		ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockTopaz"), topaz[0].type.registryName);
-		// TODO ほとんどの妖精とアイテムの関連付けは妖精レジストリーを使う
-
-		new Object() {
-			public void run()
-			{
-				register(stone, ingredient(Blocks.STONE, 0));
-				register(dirt, ingredient(Blocks.DIRT, 0));
-				register(iron, ingredient("ingotIron"));
-				register(diamond, ingredient("gemDiamond"));
-				register(magnetite, ingredient("gemMagnetite"));
-				register(apatite, ingredient("gemApatite"));
-				register(fluorite, ingredient("gemFluorite"));
-				register(sulfur, ingredient("gemSulfur"));
-				register(cinnabar, ingredient("gemCinnabar"));
-				register(moonstone, ingredient("gemMoonstone"));
-				register(pyrope, ingredient("gemPyrope"));
-				register(smithsonite, ingredient("gemSmithsonite"));
-				register(redstone, ingredient("dustRedstone"));
-				register(sand, ingredient(Blocks.SAND));
-				register(gold, ingredient("ingotGold"));
-				register(wheat, ingredient(Items.WHEAT));
-				register(lilac, ingredient(Blocks.DOUBLE_PLANT, 1));
-				register(torch, ingredient(Blocks.TORCH));
-				register(gravel, ingredient(Blocks.GRAVEL));
-				register(emerald, ingredient("gemEmerald"));
-				register(lapislazuli, ingredient("gemLapislazuli"));
-				register(furnace, ingredient(Blocks.FURNACE));
-				register(magentaglazedterracotta, ingredient(Blocks.MAGENTA_GLAZED_TERRACOTTA));
-				register(bread, ingredient(Items.BREAD));
-				register(apple, ingredient(Items.APPLE));
-				register(carrot, ingredient(Items.CARROT));
-				register(cactus, ingredient(Blocks.CACTUS));
-				register(axe, ingredient(Items.IRON_AXE));
-				register(chest, ingredient(Blocks.CHEST));
-				register(craftingtable, ingredient(Blocks.CRAFTING_TABLE));
-				register(potion, ingredient(Items.POTIONITEM));
-				register(sword, ingredient(Items.IRON_SWORD));
-				register(dispenser, ingredient(Blocks.DISPENSER));
-				register(cod, ingredient(Items.FISH, 0));
-				register(salmon, ingredient(Items.FISH, 1));
-				register(pufferfish, ingredient(Items.FISH, 3));
-				register(clownfish, ingredient(Items.FISH, 2));
-				register(spruce, ingredient(Blocks.LOG, 1), ingredient(Blocks.SAPLING, 1));
-				register(anvil, ingredient(Blocks.ANVIL));
-				register(obsidian, ingredient(Blocks.OBSIDIAN));
-				register(seed, ingredient(Items.WHEAT_SEEDS));
-				register(glowstone, ingredient(Items.GLOWSTONE_DUST), ingredient(Blocks.GLOWSTONE));
-				register(coal, ingredient(Items.COAL, 0));
-				register(netherstar, ingredient(Items.NETHER_STAR));
-				register(brewingstand, ingredient(Items.BREWING_STAND));
-				register(hoe, ingredient(Items.IRON_HOE));
-				register(shield, ingredient(Items.SHIELD));
-				register(hopper, ingredient(Blocks.HOPPER));
-				register(nephrite, ingredient("gemNephrite"));
-				register(tourmaline, ingredient("gemTourmaline"));
-				register(topaz, ingredient("gemTopaz"));
-				register(cookie, ingredient(Items.COOKIE));
-				register(cake, ingredient(Items.CAKE));
-				register(enchantedgoldenapple, ingredient(Items.GOLDEN_APPLE, 1));
-				register(sugar, ingredient(Items.SUGAR));
-			}
-
-			private void register(VariantFairy[] variantFairies, Ingredient... ingredients)
-			{
-				for (Ingredient ingredient : ingredients) {
-					consumerRecipe.accept(Tuple3.of(ingredient, variantFairies[0].createItemStack(), variantFairies[0].type.name));
-				}
-			}
-
-			private Ingredient ingredient(Item item)
-			{
-				return ingredient(item, 32767);
-			}
-
-			private Ingredient ingredient(Item item, int meta)
-			{
-				return Ingredient.fromStacks(new ItemStack(item, 1, meta));
-			}
-
-			private Ingredient ingredient(Block block)
-			{
-				return ingredient(block, 32767);
-			}
-
-			private Ingredient ingredient(Block block, int meta)
-			{
-				return Ingredient.fromStacks(new ItemStack(Item.getItemFromBlock(block), 1, meta));
-			}
-
-			@SuppressWarnings("unused")
-			private Ingredient ingredient(ItemStack itemStack)
-			{
-				return Ingredient.fromStacks(itemStack);
-			}
-
-			private Ingredient ingredient(String ore)
-			{
-				return new OreIngredient(ore);
-			}
-		}.run();
 	}
 
 }
