@@ -46,35 +46,44 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase
 	@SideOnly(Side.CLIENT)
 	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
-		getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAura(), fairyType).getMagicStatusList()
-			.forEach(magicStatus -> tooltip.add(magicStatus.getLocalizedName()
-				.appendText(": ")
-				.appendSibling(magicStatus.getDisplayValue())
-				.appendText(" (")
-				.appendSibling(magicStatus.getFormula(new IMagicFactorProvider() {
-					@Override
-					public ITextComponent mana(EnumManaType manaType)
-					{
-						return manaType.getDisplayName();
-					}
+		if (flag.isAdvanced()) {
+			getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAura(), fairyType).getMagicStatusList()
+				.forEach(magicStatus -> tooltip.add(magicStatus.getLocalizedName()
+					.appendText(": ")
+					.appendSibling(magicStatus.getDisplayValue())
+					.appendText(" (")
+					.appendSibling(magicStatus.getFormula(new IMagicFactorProvider() {
+						@Override
+						public ITextComponent mana(EnumManaType manaType)
+						{
+							return manaType.getDisplayName();
+						}
 
-					@Override
-					public ITextComponent ability(EnumAbilityType abilityType)
-					{
-						return abilityType.getDisplayName();
-					}
+						@Override
+						public ITextComponent ability(EnumAbilityType abilityType)
+						{
+							return abilityType.getDisplayName();
+						}
 
-					@Override
-					public ITextComponent cost()
-					{
-						return new TextComponentString("")
-							.appendSibling(new TextComponentTranslation("mirageFairy2019.formula.source.cost.name")
-								.setStyle(new Style().setColor(DARK_PURPLE)));
-					}
-				}))
-				.appendText(")")
-				.setStyle(new Style().setColor(BLUE))
-				.getFormattedText()));
+						@Override
+						public ITextComponent cost()
+						{
+							return new TextComponentString("")
+								.appendSibling(new TextComponentTranslation("mirageFairy2019.formula.source.cost.name")
+									.setStyle(new Style().setColor(DARK_PURPLE)));
+						}
+					}))
+					.appendText(")")
+					.setStyle(new Style().setColor(BLUE))
+					.getFormattedText()));
+		} else {
+			getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAura(), fairyType).getMagicStatusList()
+				.forEach(magicStatus -> tooltip.add(magicStatus.getLocalizedName()
+					.appendText(": ")
+					.appendSibling(magicStatus.getDisplayValue())
+					.setStyle(new Style().setColor(BLUE))
+					.getFormattedText()));
+		}
 	}
 
 	@Override
