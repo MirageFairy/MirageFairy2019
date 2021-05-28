@@ -4,11 +4,13 @@ import static net.minecraft.util.text.TextFormatting.*;
 
 import java.util.List;
 
+import miragefairy2019.mod.api.ApiPlayerAura;
 import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.magic.IMagicFactorProvider;
 import miragefairy2019.mod.api.magic.IMagicHandler;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.mod.api.playeraura.IPlayerAura;
 import miragefairy2019.mod.modules.fairy.EnumAbilityType;
 import miragefairy2019.mod.modules.fairy.EnumManaType;
 import net.minecraft.client.util.ITooltipFlag;
@@ -28,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase
 {
 
-	public abstract IMagicHandler getMagicHandler(IFairyType fairyType);
+	public abstract IMagicHandler getMagicHandler(IPlayerAura playerAura, IFairyType fairyType);
 
 	//
 
@@ -44,7 +46,7 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase
 	@SideOnly(Side.CLIENT)
 	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
 	{
-		getMagicHandler(fairyType).getMagicStatusList()
+		getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAura(), fairyType).getMagicStatusList()
 			.forEach(magicStatus -> tooltip.add(magicStatus.getLocalizedName()
 				.appendText(": ")
 				.appendSibling(magicStatus.getDisplayValue())
@@ -85,7 +87,7 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase
 		// 妖精取得
 		IFairyType fairyType = findFairy(itemStack, player).map(t -> t.y).orElseGet(ApiFairy::empty);
 
-		return new ActionResult<>(getMagicHandler(fairyType).getMagicExecutor(world, player, itemStack).onItemRightClick(hand), itemStack);
+		return new ActionResult<>(getMagicHandler(ApiPlayerAura.playerAuraManager.getServerPlayerAura(player), fairyType).getMagicExecutor(world, player, itemStack).onItemRightClick(hand), itemStack);
 	}
 
 	@Override
@@ -105,7 +107,7 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase
 		// 妖精取得
 		IFairyType fairyType = findFairy(itemStack, player).map(t -> t.y).orElseGet(ApiFairy::empty);
 
-		getMagicHandler(fairyType).getMagicExecutor(world, player, itemStack).onUpdate(itemSlot, isSelected);
+		getMagicHandler(ApiPlayerAura.playerAuraManager.getServerPlayerAura(player), fairyType).getMagicExecutor(world, player, itemStack).onUpdate(itemSlot, isSelected);
 
 	}
 
