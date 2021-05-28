@@ -12,6 +12,7 @@ import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed;
 import miragefairy2019.mod.modules.placeditem.ModulePlacedItem;
+import miragefairy2019.mod.modules.playeraura.ModulePlayerAura;
 import miragefairy2019.mod.modules.sphere.ModuleSphere;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -46,6 +47,7 @@ public class ModMirageFairy2019
 		ModuleOre.init(erMod);
 		ModuleSphere.init(erMod);
 		ModulePlacedItem.init(erMod);
+		ModulePlayerAura.init(erMod);
 
 		erMod.initRegistry.trigger().run();
 
