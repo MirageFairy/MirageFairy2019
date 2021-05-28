@@ -17,7 +17,6 @@ import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -69,14 +68,9 @@ public class ModulePlacedItem
 			}
 		});
 
-		// ネットワークラッパー初期化
-		erMod.initNetworkChannel.register(() -> {
-			ApiPlacedItem.simpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(ModMirageFairy2019.MODID);
-		});
-
 		// ネットワークメッセージ登録
 		erMod.registerNetworkMessage.register(() -> {
-			ApiPlacedItem.simpleNetworkWrapper.registerMessage(PacketPlaceItem.class, MessagePlaceItem.class, 0, Side.SERVER);
+			ApiMain.simpleNetworkWrapper.registerMessage(PacketPlaceItem.class, MessagePlaceItem.class, 0, Side.SERVER);
 		});
 
 		// キーリスナー
@@ -97,7 +91,7 @@ public class ModulePlacedItem
 										if (player instanceof EntityPlayerSP) {
 											RayTraceResult result = player.rayTrace(player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), 0);
 											if (result.typeOfHit == Type.BLOCK) {
-												ApiPlacedItem.simpleNetworkWrapper.sendToServer(new MessagePlaceItem(
+												ApiMain.simpleNetworkWrapper.sendToServer(new MessagePlaceItem(
 													player.world.getBlockState(result.getBlockPos()).getBlock().isReplaceable(player.world, result.getBlockPos())
 														? result.getBlockPos()
 														: result.getBlockPos().offset(result.sideHit)));
