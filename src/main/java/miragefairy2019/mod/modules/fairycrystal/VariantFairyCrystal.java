@@ -71,7 +71,7 @@ public class VariantFairyCrystal extends ItemVariant
 
 			// 表示
 			ITextComponent string = new TextComponentString("");
-			string.appendText("===== " + itemStackCrystal.getDisplayName() + " (" + (world.isRemote ? "Server" : "Client") + ") =====");
+			string.appendText("===== " + itemStackCrystal.getDisplayName() + " (" + (world.isRemote ? "Client" : "Server") + ") =====");
 			string.appendText("\n");
 			double totalWeight = WeightedRandom.getTotalWeight(dropTable);
 			for (WeightedRandom.Item<ItemStack> item : ISuppliterator.ofIterable(dropTable)
