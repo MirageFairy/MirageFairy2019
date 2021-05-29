@@ -20,6 +20,7 @@ import net.minecraft.block.BlockDoublePlant.EnumPlantType;
 import net.minecraft.block.BlockOldLeaf;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -34,6 +35,7 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -98,6 +100,8 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.world(r(cactus[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(spruce[0]), (w, p) -> w.provider.isSurfaceWorld()));
 			d.add(RightClickDrops.world(r(seed[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(poisonouspotato[0]), (w, p) -> w.provider.isSurfaceWorld()));
+			d.add(RightClickDrops.world(r(melon[0]), (w, p) -> w.provider.isSurfaceWorld()));
 		}
 		{
 			d.add(RightClickDrops.biomeTypes(r(lava[0]), BiomeDictionary.Type.NETHER));
@@ -185,6 +189,8 @@ public class LoaderFairyCrystalDrop
 				Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE),
 				Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.SPRUCE)));
 			d.add(RightClickDrops.items(d(seed[0], 0.1), Items.WHEAT_SEEDS));
+			d.add(RightClickDrops.items(d(poisonouspotato[0], 0.01), Items.POISONOUS_POTATO));
+			d.add(RightClickDrops.items(d(melon[0], 0.03), Items.MELON));
 
 			d.add(RightClickDrops.blocks(d(torch[0], 0.3), Blocks.TORCH));
 			d.add(RightClickDrops.blocks(d(furnace[0], 0.1), Blocks.FURNACE));
@@ -213,7 +219,16 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.items(d(cake[0], 0.03), Items.CAKE));
 			d.add(RightClickDrops.ingredients(d(enchantedgoldenapple[0], 0.003), Ingredient.fromStacks(new ItemStack(Items.GOLDEN_APPLE, 1, 1))));
 			d.add(RightClickDrops.items(d(sugar[0], 0.3), Items.SUGAR));
+			if ("".equals(1)) {
+				d.add(RightClickDrops.items(d(darkchocolate[0], 0.001), Items.COOKIE));
+				d.add(RightClickDrops.ingredients(d(darkchocolate[0], 0.001), Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 3))));
 			}
+			d.add(RightClickDrops.items(d(rottenflesh[0], 0.1), Items.ROTTEN_FLESH));
+			d.add(RightClickDrops.items(d(bakedpotato[0], 0.03), Items.BAKED_POTATO));
+			d.add(RightClickDrops.items(d(cookedchicken[0], 0.1), Items.COOKED_CHICKEN));
+			d.add(RightClickDrops.ingredients(d(cookedsalmon[0], 0.03), Ingredient.fromStacks(new ItemStack(Items.COOKED_FISH, 1, 1))));
+			d.add(RightClickDrops.items(d(steak[0], 0.1), Items.COOKED_BEEF));
+			d.add(RightClickDrops.ingredients(d(goldenapple[0], 0.03), Ingredient.fromStacks(new ItemStack(Items.GOLDEN_APPLE, 1, 0))));
 
 			d.add(RightClickDrops.world(d(daytime[0], 0.001), (w, p) -> time(w, 6000, 18000)));
 			d.add(RightClickDrops.world(d(night[0], 0.001), (w, p) -> time(w, 19000, 24000) || time(w, 0, 5000)));
@@ -228,7 +243,20 @@ public class LoaderFairyCrystalDrop
 			d.add(RightClickDrops.biomeTypes(d(desert[0], 0.01), BiomeDictionary.Type.SANDY));
 			d.add(RightClickDrops.biomeTypes(d(mountain[0], 0.01), BiomeDictionary.Type.MOUNTAIN));
 
+			d.add(RightClickDrops.ingredients(d(fortune[0], 0.01), itemStack -> EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemStack) > 0));
+
 			d.add(RightClickDrops.fixed(d(time[0], 0.0001)));
+			if (!"".equals(1)) {
+				ApiMain.logger().info("Limited Fairy: cupid");
+				long epochSecondNow = Instant.now().getEpochSecond();
+				long epochSecondLimit = LocalDateTime.of(2021, 7, 1, 0, 0, 0).toInstant(ZoneOffset.ofHours(9)).getEpochSecond();
+				ApiMain.logger().info("Now  : " + epochSecondNow);
+				ApiMain.logger().info("Limit: " + epochSecondLimit);
+				if (epochSecondNow < epochSecondLimit) {
+					d.add(RightClickDrops.fixed(d(cupid[0], 0.001)));
+				}
+			}
+
 		}
 
 	}
