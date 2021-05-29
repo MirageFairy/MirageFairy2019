@@ -166,6 +166,7 @@ public class ModuleFairy
 		public static VariantFairy[] cookie;
 		public static VariantFairy[] darkchocolate;
 		public static VariantFairy[] enchantedgoldenapple;
+		public static VariantFairy[] fortune;
 		public static VariantFairy[] rottenflesh;
 		public static VariantFairy[] poisonouspotato;
 		public static VariantFairy[] melon;
@@ -174,7 +175,6 @@ public class ModuleFairy
 		public static VariantFairy[] cookedsalmon;
 		public static VariantFairy[] steak;
 		public static VariantFairy[] goldenapple;
-		public static VariantFairy[] fortune;
 		public static VariantFairy[] cupid;
 
 		//
@@ -284,15 +284,15 @@ public class ModuleFairy
 				r(97, cookie = v(t(97, "cookie", 3, 28, 1, m(0, 0, 0, 3, 10, 0), a(0, 1, 0, 0, 0, 0, 0, 4, 1, 0, 0, 0, 0, 0, 12, 3, 4, 0, 0, 0, 0), c(0xCC850C, 0xE9994F, 0xDA843C, 0x882500))));
 				r(98, darkchocolate = v(t(98, "darkchocolate", 4, 26, 1.5, m(0.1, 0, 2, 2, 10, 8), a(0, 1, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 3, 0, 12, 9, 8, 0, 0, 1, 0), c(0x882500, 0x882500, 0x882500, 0x882500))));
 				r(99, enchantedgoldenapple = v(t(99, "enchantedgoldenapple", 5, 90, 1, m(3, 0, 8, 1, 10, 21), a(0, 3, 0, 5, 0, 2, 0, 15, 0, 0, 0, 0, 0, 0, 13, 10, 6, 0, 0, 0, 0), c(0xFF755D, 0xDEDE00, 0xDEDE00, 0xDE4FD7))));
-				r(100, rottenflesh = v(t(100, "rottenflesh", 2, 41, 1, m(0, 11, 8, 0, 10, 12), a(3, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 6, 0, 3, 3, 0, 0, 0), c(0x846129, 0xBD5B2D, 0xBD5B2D, 0xBD422D))));
-				r(101, poisonouspotato = v(t(101, "poisonouspotato", 4, 40, 1, m(0, 9, 0, 3, 10, 0), a(4, 0, 1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 5, 0, 2, 1, 3, 0, 0, 0, 0), c(0xFFE861, 0xC1D245, 0xB7C035, 0x01A900))));
-				r(102, melon = v(t(102, "melon", 3, 56, 1, m(0.1, 0, 1, 2, 10, 1), a(0, 0, 1, 0, 0, 6, 0, 3, 1, 0, 0, 0, 1, 0, 8, 0, 1, 0, 0, 0, 0), c(0xFF5440, 0xA6EE63, 0x195612, 0x01A900))));
-				r(103, bakedpotato = v(t(103, "bakedpotato", 3, 36, 1, m(0, 0, 0, 2, 10, 7), a(0, 1, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 13, 0, 6, 0, 0, 0, 0), c(0xC87847, 0xFFFF9A, 0xFFFF9A, 0xDEA73A))));
-				r(104, cookedchicken = v(t(104, "cookedchicken", 2, 31, 1, m(0, 0, 0, 2, 10, 9), a(0, 1, 0, 0, 0, 1, 0, 4, 0, 0, 0, 0, 0, 0, 14, 0, 5, 0, 0, 0, 0), c(0xC87847, 0xDA9F7A, 0xDA9F7A, 0x9C5321))));
-				r(105, cookedsalmon = v(t(105, "cookedsalmon", 3, 25, 1, m(0, 0, 0, 2, 10, 3), a(0, 1, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 13, 0, 4, 0, 0, 0, 0), c(0xC87847, 0xFF7E3B, 0xFF7D41, 0xBA4F23))));
-				r(106, steak = v(t(106, "steak", 2, 43, 1, m(0, 0, 0, 2, 10, 5), a(0, 1, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 0, 15, 0, 5, 0, 0, 0, 0), c(0xC87847, 0xAA573F, 0xA4573F, 0x7A3A2A))));
-				r(107, goldenapple = v(t(107, "goldenapple", 3, 72, 1, m(1, 0, 18, 4, 10, 0), a(0, 2, 0, 0, 0, 1, 0, 8, 0, 0, 0, 0, 0, 0, 12, 5, 4, 0, 0, 0, 0), c(0xFF755D, 0xDEDE00, 0xDEDE00, 0x01A900))));
-				r(108, fortune = v(t(108, "fortune", 4, 28, 1, m(3, 0, 10, 0, 0, 0), a(0, 4, 11, 3, 0, 0, 0, 4, 0, 0, 0, 2, 0, 0, 0, 9, 0, 0, 0, 0, 0), c(0xD0C2FF, 0xD0F5FF, 0xDBF7FF, 0xE2BBFF))));
+				r(100, fortune = v(t(100, "fortune", 4, 28, 1, m(3, 0, 10, 0, 0, 0), a(0, 4, 11, 3, 0, 0, 0, 4, 0, 0, 0, 2, 0, 0, 0, 9, 0, 0, 0, 0, 0), c(0xD0C2FF, 0xD0F5FF, 0xDBF7FF, 0xE2BBFF))));
+				r(101, rottenflesh = v(t(101, "rottenflesh", 2, 41, 1, m(0, 11, 8, 0, 10, 12), a(3, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 6, 0, 3, 3, 0, 0, 0), c(0x846129, 0xBD5B2D, 0xBD5B2D, 0xBD422D))));
+				r(102, poisonouspotato = v(t(102, "poisonouspotato", 4, 40, 1, m(0, 9, 0, 3, 10, 0), a(4, 0, 1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 5, 0, 2, 1, 3, 0, 0, 0, 0), c(0xFFE861, 0xC1D245, 0xB7C035, 0x01A900))));
+				r(103, melon = v(t(103, "melon", 3, 56, 1, m(0.1, 0, 1, 2, 10, 1), a(0, 0, 1, 0, 0, 6, 0, 3, 1, 0, 0, 0, 1, 0, 8, 0, 1, 0, 0, 0, 0), c(0xFF5440, 0xA6EE63, 0x195612, 0x01A900))));
+				r(104, bakedpotato = v(t(104, "bakedpotato", 3, 36, 1, m(0, 0, 0, 2, 10, 7), a(0, 1, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 13, 0, 6, 0, 0, 0, 0), c(0xC87847, 0xFFFF9A, 0xFFFF9A, 0xDEA73A))));
+				r(105, cookedchicken = v(t(105, "cookedchicken", 2, 31, 1, m(0, 0, 0, 2, 10, 9), a(0, 1, 0, 0, 0, 1, 0, 4, 0, 0, 0, 0, 0, 0, 14, 0, 5, 0, 0, 0, 0), c(0xC87847, 0xDA9F7A, 0xDA9F7A, 0x9C5321))));
+				r(106, cookedsalmon = v(t(106, "cookedsalmon", 3, 25, 1, m(0, 0, 0, 2, 10, 3), a(0, 1, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 13, 0, 4, 0, 0, 0, 0), c(0xC87847, 0xFF7E3B, 0xFF7D41, 0xBA4F23))));
+				r(107, steak = v(t(107, "steak", 2, 43, 1, m(0, 0, 0, 2, 10, 5), a(0, 1, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 0, 15, 0, 5, 0, 0, 0, 0), c(0xC87847, 0xAA573F, 0xA4573F, 0x7A3A2A))));
+				r(108, goldenapple = v(t(108, "goldenapple", 3, 72, 1, m(1, 0, 18, 4, 10, 0), a(0, 2, 0, 0, 0, 1, 0, 8, 0, 0, 0, 0, 0, 0, 12, 5, 4, 0, 0, 0, 0), c(0xFF755D, 0xDEDE00, 0xDEDE00, 0x01A900))));
 				r(109, cupid = v(t(109, "cupid", 5, 33, 1.2, m(10, 0, 24, 11, 41, 0), a(6, 3, 2, 6, 0, 1, 0, 16, 3, 8, 14, 7, 2, 0, 0, 11, 2, 10, 0, 0, 0), c(0xCDBBAD, 0xE4F4FF, 0xDDEEFF, 0x893F1E))));
 			}
 
@@ -610,6 +610,15 @@ public class ModuleFairy
 				r(1, cake, i(Items.CAKE));
 				r(1, enchantedgoldenapple, i(Items.GOLDEN_APPLE, 1));
 				r(1, sugar, i(Items.SUGAR));
+				r(1, rottenflesh, i(Items.ROTTEN_FLESH));
+				r(1, poisonouspotato, i(Items.POISONOUS_POTATO));
+				r(1, melon, i(Items.MELON));
+				r(1, bakedpotato, i(Items.BAKED_POTATO));
+				r(1, cookedchicken, i(Items.COOKED_CHICKEN));
+				r(1, cookedsalmon, i(Items.COOKED_FISH, 1));
+				r(1, steak, i(Items.COOKED_BEEF));
+				r(1, goldenapple, i(Items.GOLDEN_APPLE, 0));
+
 			}
 
 			private Ingredient i(Item item)
