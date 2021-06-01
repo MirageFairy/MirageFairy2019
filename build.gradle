@@ -55,9 +55,6 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.k-4u.nl"
     }
-    maven {
-        url = "https://files.minecraftforge.net/maven"
-    }
 }
 
 dependencies {
@@ -90,9 +87,7 @@ dependencies {
 	deobfProvided "mezz.jei:jei_1.12.2:4.15.0.268:api"
 	runtime "mezz.jei:jei_1.12.2:4.13.0.219"
 
-    compile ("appeng:appliedenergistics2:rv6-stable-6:api") {
-        transitive = false
-    }
+    compile files("lib/appliedenergistics2/appliedenergistics2-rv6-stable-6-api.jar")
 
 }
 
