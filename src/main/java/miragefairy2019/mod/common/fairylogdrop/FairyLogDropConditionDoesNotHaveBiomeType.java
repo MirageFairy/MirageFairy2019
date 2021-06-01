@@ -2,7 +2,7 @@ package miragefairy2019.mod.common.fairylogdrop;
 
 import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropCondition;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
@@ -17,9 +17,9 @@ public class FairyLogDropConditionDoesNotHaveBiomeType implements IFairyLogDropC
 	}
 
 	@Override
-	public boolean test(IBlockAccess blockAccess, BlockPos blockPos)
+	public boolean test(World world, BlockPos blockPos)
 	{
-		return !BiomeDictionary.hasType(blockAccess.getBiome(blockPos), biome);
+		return !BiomeDictionary.hasType(world.getBiome(blockPos), biome);
 	}
 
 	@Override

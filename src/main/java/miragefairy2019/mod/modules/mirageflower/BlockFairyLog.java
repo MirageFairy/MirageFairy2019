@@ -1,7 +1,5 @@
 package miragefairy2019.mod.modules.mirageflower;
 
-import java.util.Random;
-
 import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
 import net.minecraft.block.Block;
@@ -150,10 +148,11 @@ public class BlockFairyLog extends Block
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess blockAccess, BlockPos pos, IBlockState state, int fortune)
 	{
-		Random random = blockAccess instanceof World ? ((World) blockAccess).rand : new Random();
+		if (!(blockAccess instanceof World)) return;
+		World world = (World) blockAccess;
 
 		for (int i = 0; i < 3 + fortune; i++) {
-			ItemStack drop = ApiMirageFlower.fairyLogDropRegistry.drop(blockAccess, pos, random).orElse(null);
+			ItemStack drop = ApiMirageFlower.fairyLogDropRegistry.drop(world, pos, world.rand).orElse(null);
 			if (drop == null) drop = ModuleFairy.FairyTypes.air[0].createItemStack();
 			drops.add(drop);
 		}

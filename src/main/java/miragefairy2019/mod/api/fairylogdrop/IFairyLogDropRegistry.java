@@ -6,7 +6,7 @@ import java.util.Random;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public interface IFairyLogDropRegistry
 {
@@ -15,6 +15,6 @@ public interface IFairyLogDropRegistry
 
 	public ISuppliterator<IFairyLogDropRecipe> getRecipes();
 
-	public Optional<ItemStack> drop(IBlockAccess blockAccess, BlockPos blockPos, Random random);
+	public Optional<ItemStack> drop(World world, BlockPos blockPos, Random random);
 
 }
