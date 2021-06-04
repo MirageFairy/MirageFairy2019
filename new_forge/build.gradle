@@ -8,26 +8,17 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
     }
 }
-
-plugins {
-    id 'com.github.johnrengelman.shadow' version '2.0.4'
-}
-
+        
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-// 正式版でないので常に0
-// Forge対応バージョンの区別
-// クライアント互換性の区別
-// ビルドバージョンの区別
-version = "0.1.13.17"
-group = "miragefairy2019" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "MirageFairy2019"
+version = '1.0'
+group = 'com.yourname.modid' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'modid'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-tasks.withType(AbstractCompile)*.options*.encoding = tasks.withType(GroovyCompile)*.groovyOptions*.encoding = 'UTF-8'
 
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
@@ -38,7 +29,7 @@ minecraft {
     //mappings channel: 'snapshot', version: '20171003-1.12'
     mappings channel: 'snapshot', version: '20171003-1.12'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-
+    
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations.
@@ -65,31 +56,11 @@ minecraft {
     }
 }
 
-configurations {
-    adder
-}
-
-repositories {
-    mavenCentral()
-    maven { url = "https://mirrgieriana.github.io/mirrg.boron/maven" }
-    maven {
-        // location of the maven that hosts JEI files
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.k-4u.nl"
-    }
-}
-
 dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft "net.minecraftforge:forge:1.12.2-14.23.5.2855"
-    // !!gitHubAction-minecraftVersion="1.12.2-14.23.5.2855"
+    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2855'
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
@@ -109,16 +80,6 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    compile group: 'mirrg.boron', name: 'mirrg.boron.util', version: '[3.19,4['
-    adder group: 'mirrg.boron', name: 'mirrg.boron.util', version: '[3.19,4['
-
-    compile group: 'mirrg.boron', name: 'mirrg.boron.swing', version: '0.1+'
-
-    compile "mezz.jei:jei_1.12.2:4.16.1.302:api"
-    runtime "mezz.jei:jei_1.12.2:4.16.1.302"
-
-    compile files("lib/appliedenergistics2/appliedenergistics2-rv6-stable-7-api.jar")
-
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -136,23 +97,9 @@ jar {
     }
 }
 
-def packagePrefix = "miragefairy2019"
-
-shadowJar {
-    configurations = [project.configurations.adder]
-    relocate('mirrg.boron', "${packagePrefix}.mirrg.boron")
-}
-
-tasks.jar.classifier = "original"
-tasks.shadowJar.classifier = ""
-
-artifacts {
-    archives shadowJar
-}
-
 // Example configuration to allow publishing using the maven-publish task
 // This is the preferred method to reobfuscate your jar file
-jar.finalizedBy('reobfJar')
+jar.finalizedBy('reobfJar') 
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 //publish.dependsOn('reobfJar')
 

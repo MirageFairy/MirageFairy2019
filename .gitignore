@@ -20,5 +20,10 @@ build
 # other
 eclipse
 run
-~$FairyList.xlsx
-/fluorite-7
+
+# Files from Forge MDK
+forge*changelog.txt
+
+# 追加分
+~$*.xlsx
+fluorite-7
