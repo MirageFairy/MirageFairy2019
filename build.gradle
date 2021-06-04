@@ -115,7 +115,7 @@ dependencies {
     compile group: 'mirrg.boron', name: 'mirrg.boron.swing', version: '0.1+'
 
     compile "mezz.jei:jei_1.12.2:4.16.1.302:api"
-    runtime "mezz.jei:jei_1.12.2:4.16.1.302"
+    //runtime "mezz.jei:jei_1.12.2:4.16.1.302"
 
     compile files("lib/appliedenergistics2/appliedenergistics2-rv6-stable-7-api.jar")
 
