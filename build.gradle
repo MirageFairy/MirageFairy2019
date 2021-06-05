@@ -22,7 +22,7 @@ apply plugin: 'maven-publish'
 // Forge対応バージョンの区別
 // クライアント互換性の区別
 // ビルドバージョンの区別
-version = "0.1.13.17"
+version = "0.1.13.18"
 group = "miragefairy2019" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "MirageFairy2019"
 
