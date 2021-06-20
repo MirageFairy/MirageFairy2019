@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.playeraura;
 
 import miragefairy2019.mod.api.ApiPlayerAura;
-import miragefairy2019.mod.api.playeraura.IPlayerAura;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
