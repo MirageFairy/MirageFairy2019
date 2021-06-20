@@ -6,6 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:3.10.0"
     }
 }
 
@@ -17,6 +18,7 @@ apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: "com.diffplug.gradle.spotless"
 
 // 正式版でないので常に0
 // Forge対応バージョンの区別
@@ -174,5 +176,14 @@ publishing {
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
+    }
+}
+
+spotless {
+    java {
+        eclipse().configFile project.file("formatter.xml")
+        trimTrailingWhitespace()
+        endWithNewline()
+        removeUnusedImports()
     }
 }
