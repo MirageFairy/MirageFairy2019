@@ -65,24 +65,28 @@ dependencies {
     compile(files("lib/appliedenergistics2/appliedenergistics2-rv6-stable-7-api.jar"))
 }
 
-(tasks["processResources"] as ProcessResources).run {
-    inputs.property("version", project.version)
-    inputs.property("mcversion", project.minecraft.version)
-    from(sourceSets["main"].resources.srcDirs) {
-        include("mcmod.info")
-        expand(
-            mapOf(
-                "version" to project.version,
-                "mcversion" to project.minecraft.version
-            )
-        )
-    }
-    from(sourceSets["main"].resources.srcDirs) {
-        exclude("mcmod.info")
-    }
-}
+tasks {
 
-task<Exec>("makeJson") {
-    executable = "bash"
-    args("make_json.sh")
+    register<Exec>("makeJson") {
+        executable = "bash"
+        args("make_json.sh")
+    }
+
+    named<ProcessResources>("processResources") {
+        inputs.property("version", project.version)
+        inputs.property("mcversion", project.minecraft.version)
+        from(sourceSets["main"].resources.srcDirs) {
+            include("mcmod.info")
+            expand(
+                mapOf(
+                    "version" to project.version,
+                    "mcversion" to project.minecraft.version
+                )
+            )
+        }
+        from(sourceSets["main"].resources.srcDirs) {
+            exclude("mcmod.info")
+        }
+    }
+
 }
