@@ -2,6 +2,7 @@ rootProject.name = "MirageFairy2019"
 pluginManagement {
     repositories {
         mavenCentral()
+        // for plugin: net.minecraftforge.gradle.forge
         maven("https://files.minecraftforge.net/maven")
     }
     resolutionStrategy {
