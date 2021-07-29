@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
@@ -10,6 +12,7 @@ plugins {
     application
     kotlin("jvm")
     id("net.minecraftforge.gradle.forge")
+    id("com.github.johnrengelman.shadow")
 }
 
 // 正式版でないので常に0
@@ -36,6 +39,8 @@ minecraft {
     runDir = "run"
     mappings = "snapshot_20171003"
 }
+
+application.mainClassName = "dummy" // shadowJarの例外を抑制するため
 
 lateinit var adder: Configuration
 configurations {
@@ -90,4 +95,31 @@ tasks {
         }
     }
 
+    named<Jar>("jar") {
+        finalizedBy("reobfJar")
+        classifier = "original"
+    }
+
+    named<ShadowJar>("shadowJar") {
+        finalizedBy("reobfShadowJar")
+        classifier = ""
+        configurations = listOf(adder)
+        listOf(
+            "kotlin",
+            "org.intellij.lang.annotations",
+            "org.jetbrains.annotations",
+            "mirrg.boron"
+        ).forEach {
+            relocate(it, "${project.group}.$it")
+        }
+    }
+
+}
+
+reobf {
+    create("shadowJar")
+}
+
+artifacts {
+    add("archives", tasks["shadowJar"])
 }
