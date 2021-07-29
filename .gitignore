@@ -1,8 +1,29 @@
+
+# gradle
 .gradle
 build
 
-.idea
+# eclipse
+.project
+.classpath
+.settings
+.metadata
+bin
 *.launch
 
+# idea
+.idea
+*.ipr
+*.iws
+*.iml
+out
+
+# Files from Forge MDK
+forge*changelog.txt
+
+# other
+local.properties
 run
+eclipse
 fluorite-7
+~$*.xlsx
