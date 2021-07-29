@@ -2,6 +2,7 @@
 build
 
 .idea
+*.launch
 
 run
 fluorite-7
