@@ -12,9 +12,14 @@ plugins {
     id("net.minecraftforge.gradle.forge")
 }
 
-version = "1.0"
-group = "com.yourname.modid"
-base.archivesBaseName = "modid"
+// 正式版でないので常に0
+// Forge対応バージョンの区別
+// クライアント互換性の区別
+// ビルドバージョンの区別
+// 各数字は上位のバージョンが増えてもリセットしない
+version = "0.1.13.19"
+group = "miragefairy2019"
+base.archivesBaseName = "MirageFairy2019"
 
 tasks.withType<JavaCompile> {
     sourceCompatibility = "1.8"

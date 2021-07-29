@@ -1,4 +1,4 @@
-rootProject.name = "modid"
+rootProject.name = "MirageFairy2019"
 pluginManagement {
     repositories {
         mavenCentral()
