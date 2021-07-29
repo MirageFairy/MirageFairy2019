@@ -26,7 +26,7 @@ public class ModMirageFairy2019
 
 	public static final String MODID = "miragefairy2019";
 	public static final String NAME = "MirageFairy2019";
-	public static final String VERSION = "0.0.1";
+	public static final String VERSION = "{version}";
 
 	public EventRegistryMod erMod = new EventRegistryMod();
 

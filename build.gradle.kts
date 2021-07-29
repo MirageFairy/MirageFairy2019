@@ -1,4 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import net.minecraftforge.gradle.user.TaskSourceCopy
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -72,6 +73,11 @@ dependencies {
 }
 
 tasks {
+
+    named<TaskSourceCopy>("sourceMainJava") {
+        include("ModMirageFairy2019.java")
+        replace("{version}", project.version)
+    }
 
     register<Exec>("makeJson") {
         executable = "bash"
