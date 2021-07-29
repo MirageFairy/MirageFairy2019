@@ -27,6 +27,7 @@ tasks.withType<KotlinCompile> {
 
 minecraft {
     version = "1.12.2-14.23.5.2847"
+    // !!gitHubAction-minecraftVersion="1.12.2-14.23.5.2847"
     runDir = "run"
     mappings = "snapshot_20171003"
 }
