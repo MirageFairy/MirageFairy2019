@@ -1,0 +1,45 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "flower_picking_bell",
+	"pattern": [
+		"pGS",
+		"c#G",
+		"Rgm"
+	],
+	"key": {
+		"#": {
+			"item": "miragefairy2019:bell_base"
+		},
+		"R": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019ManaRodDark"
+		},
+		"g": {
+			"type": "forge:ore_dict",
+			"ore": "ingotGold"
+		},
+		"G": {
+			"type": "forge:ore_dict",
+			"ore": "gemPyrope"
+		},
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019SphereFell"
+		},
+		"c": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
+		"m": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
+		},
+		"p": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:flower_picking_bell"
+	}
+}

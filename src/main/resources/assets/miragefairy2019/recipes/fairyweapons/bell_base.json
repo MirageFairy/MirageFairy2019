@@ -1,0 +1,34 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "bell_base",
+	"pattern": [
+		"cIS",
+		" RI",
+		"I m"
+	],
+	"key": {
+		"R": {
+			"type": "forge:ore_dict",
+			"ore": "rodMiragium"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotMiragium"
+		},
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019SphereSubmission"
+		},
+		"c": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
+		"m": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:bell_base"
+	}
+}

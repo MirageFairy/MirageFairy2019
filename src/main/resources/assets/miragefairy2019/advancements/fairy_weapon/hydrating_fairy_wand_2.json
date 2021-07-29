@@ -1,0 +1,26 @@
+{
+	"display": {
+		"icon": {
+			"item": "miragefairy2019:hydrating_fairy_wand_2"
+		},
+		"title": {
+			"translate": "item.fairyWandHydrating2.name"
+		},
+		"description": {
+			"translate": "advancements.miragefairy2019.fairy_weapon.all.description"
+		}
+	},
+	"parent": "miragefairy2019:fairy_weapon/hydrating_fairy_wand",
+	"criteria": {
+		"main": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "miragefairy2019:hydrating_fairy_wand_2"
+					}
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "cobblestone",
+	"ingredients": [
+		{
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandBreaking"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "stone"
+		}
+	],
+	"result": {
+		"item": "minecraft:cobblestone",
+		"count": 1
+	}
+}

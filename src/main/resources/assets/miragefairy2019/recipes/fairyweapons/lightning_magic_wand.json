@@ -1,0 +1,37 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "lightning_magic_wand",
+	"pattern": [
+		"caE",
+		"a#a",
+		"Tap"
+	],
+	"key": {
+		"#": {
+			"item": "miragefairy2019:magic_wand_base"
+		},
+		"T": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019SphereThunder"
+		},
+		"E": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019SphereEnergy"
+		},
+		"a": {
+			"type": "forge:ore_dict",
+			"ore": "ingotGold"
+		},
+		"c": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
+		"p": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:lightning_magic_wand"
+	}
+}

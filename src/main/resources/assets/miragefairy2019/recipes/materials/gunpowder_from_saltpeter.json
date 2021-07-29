@@ -1,0 +1,26 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "minecraft:gunpowder",
+	"ingredients": [
+		{
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandBreaking"
+		},
+		{
+			"item": "minecraft:coal",
+			"data": 1
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "gemSulfur"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "gemSaltpeter"
+		}
+	],
+	"result": {
+		"item": "minecraft:gunpowder",
+		"count": 3
+	}
+}

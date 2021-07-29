@@ -1,0 +1,25 @@
+itemGroup.mirageFairy2019=MirageFairy 2019
+itemGroup.mirageFairy2019.fairy=MirageFairy 2019: Fairy
+
+advancements.miragefairy2019.fairy_weapon.root.title=Fairy Weapon
+advancements.miragefairy2019.fairy_weapon.root.description=Fairy Weapon
+advancements.miragefairy2019.fairy_weapon.all.description=Get a specific item
+
+mirageFairy2019.formula.source.cost.name=Cost
+
+mirageFairy2019.magic.status.pitch.name=Pitch
+mirageFairy2019.magic.status.maxHeight.name=Max Height
+mirageFairy2019.magic.status.power.name=Power
+mirageFairy2019.magic.status.fortune.name=Fortune
+mirageFairy2019.magic.status.coolTime.name=Cool Time
+mirageFairy2019.magic.status.wear.name=Wear
+mirageFairy2019.magic.status.additionalReach.name=Additional Reach
+mirageFairy2019.magic.status.collection.name=Collection
+mirageFairy2019.magic.status.damage.name=Damage
+mirageFairy2019.magic.status.radius.name=Radius
+mirageFairy2019.magic.status.maxTargetCount.name=Max Target Count
+mirageFairy2019.magic.status.looting.name=Looting
+mirageFairy2019.magic.status.criticalRate.name=Critical Rate
+mirageFairy2019.magic.status.chargeTime.name=Charge Time
+
+miragefairy2019.placeItem=Place Item

@@ -1,0 +1,36 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "twinkle_stone",
+	"pattern": [
+		"ScS",
+		"IlI",
+		"SmS"
+	],
+	"key": {
+		"S": {
+			"item": "minecraft:stone",
+			"data": 0
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotMiragium"
+		},
+		"c": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+		},
+		"m": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
+		},
+		"l": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019SphereLight"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:twinkle_stone",
+		"data": 3,
+		"count": 4
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "water_generation_bucket",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019FairyStick"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyCrystal"
+		},
+		{
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019FairyCowRank1"
+		},
+		{
+			"item": "minecraft:bucket"
+		}
+	],
+	"result": {
+		"item": "minecraft:milk_bucket"
+	}
+}

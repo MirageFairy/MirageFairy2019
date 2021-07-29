@@ -1,0 +1,21 @@
+{
+	"variants": {
+		"variant=tiny": { "model": "minecraft:stone" },
+		"variant=lapis": { "model": "minecraft:stone" },
+		"variant=diamond": { "model": "minecraft:stone" },
+		"variant=iron": { "model": "minecraft:stone" },
+		"variant=medium": { "model": "minecraft:stone" },
+		"variant=large": { "model": "minecraft:stone" },
+		"variant=coal": { "model": "minecraft:stone" },
+		"variant=huge": { "model": "minecraft:stone" },
+
+		"variant=string": { "model": "minecraft:stone" },
+		"variant=horizontal": { "model": "minecraft:stone" },
+		"variant=vertical": { "model": "minecraft:stone" },
+		"variant=point": { "model": "minecraft:stone" },
+		"variant=star": { "model": "minecraft:stone" },
+		"variant=ring": { "model": "minecraft:stone" },
+		"variant=pyramid": { "model": "minecraft:stone" },
+		"variant=cube": { "model": "minecraft:stone" }
+	}
+}

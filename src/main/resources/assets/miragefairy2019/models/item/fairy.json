@@ -1,0 +1,10 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "miragefairy2019:items/fairy_layer0",
+		"layer1": "miragefairy2019:items/fairy_layer1",
+		"layer2": "miragefairy2019:items/fairy_layer2",
+		"layer3": "miragefairy2019:items/fairy_layer3",
+		"layer4": "miragefairy2019:items/fairy_layer4"
+	}
+}

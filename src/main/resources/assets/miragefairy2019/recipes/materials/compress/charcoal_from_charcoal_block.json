@@ -1,0 +1,18 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "charcoal",
+	"pattern": [
+		"#"
+	],
+	"key": {
+		"#": {
+			"type": "forge:ore_dict",
+			"ore": "blockCharcoal"
+		}
+	},
+	"result": {
+		"item": "minecraft:coal",
+		"count": 9,
+		"data": 1
+	}
+}

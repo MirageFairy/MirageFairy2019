@@ -1,0 +1,6 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "miragefairy2019:items/flower_picking_bell_2"
+	}
+}
