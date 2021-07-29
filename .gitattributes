@@ -1,0 +1,22 @@
+*                text eol=lf
+*.bat            text eol=crlf
+*.checkstyle     text eol=lf
+*.fl7            text eol=lf
+*.gitattributes  text eol=lf
+*.gitignore      text eol=lf
+*.gradle         text eol=lf
+*.info           text eol=lf
+*.jar           -text
+*.java           text eol=lf
+*.json           text eol=lf
+*.lang           text eol=lf
+*.launch         text eol=lf
+*.mcmeta         text eol=lf
+*.pdn           -text
+*.png           -text
+*.properties     text eol=lf
+*.sh             text eol=lf
+*.txt            text eol=lf
+*.xlsx          -text
+*.xml            text eol=lf
+*.yml            text eol=lf
