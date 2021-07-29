@@ -25,7 +25,7 @@ jobs:
         version=$(echo ${{ github.ref }} | perl -lpE 's|^refs/tags/v||')
         echo "$version"
         echo "::set-output name=version::$version"
-        minecraft_version=$(cat build.gradle | perl -E 'join("", <>) =~ /!!gitHubAction-minecraftVersion="([^"]*)"/ ? say $1 : exit 1') || exit
+        minecraft_version=$(cat build.gradle.kts | perl -E 'join("", <>) =~ /!!gitHubAction-minecraftVersion="([^"]*)"/ ? say $1 : exit 1') || exit
         echo "$minecraft_version"
         echo "::set-output name=minecraft_version::$minecraft_version"
     - name: 'Build'
