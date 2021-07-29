@@ -53,6 +53,7 @@ repositories {
 
 dependencies {
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72")
+    adder("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72")
 
     compile("mirrg.boron:mirrg.boron.util:[3.19,4[")
     adder("mirrg.boron:mirrg.boron.util:[3.19,4[")
