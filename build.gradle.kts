@@ -30,6 +30,13 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+minecraft {
+    version = "1.12.2-14.23.5.2847"
+    // !!gitHubAction-minecraftVersion="1.12.2-14.23.5.2847"
+    runDir = "run"
+    mappings = "snapshot_20171003"
+}
+
 lateinit var adder: Configuration
 configurations {
     adder = create("adder")
@@ -42,13 +49,6 @@ repositories {
     maven("https://dvs1.progwml6.com/files/maven/")
     // ModMaven: location of a maven mirror for JEI files, as a fallback
     maven("https://modmaven.k-4u.nl")
-}
-
-minecraft {
-    version = "1.12.2-14.23.5.2847"
-    // !!gitHubAction-minecraftVersion="1.12.2-14.23.5.2847"
-    runDir = "run"
-    mappings = "snapshot_20171003"
 }
 
 dependencies {
