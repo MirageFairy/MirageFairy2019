@@ -21,7 +21,7 @@ plugins {
 // クライアント互換性の区別
 // ビルドバージョンの区別
 // 各数字は上位のバージョンが増えてもリセットしない
-version = "0.1.13.19"
+version = "0.1.13.20"
 group = "miragefairy2019"
 base.archivesBaseName = "MirageFairy2019"
 
