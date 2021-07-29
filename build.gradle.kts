@@ -52,3 +52,8 @@ dependencies {
         exclude("mcmod.info")
     }
 }
+
+task<Exec>("makeJson") {
+    executable = "bash"
+    args("make_json.sh")
+}
