@@ -8,21 +8,17 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiFairyStick;
 import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.materialsfairy.ApiMaterialsFairy;
 import miragefairy2019.mod.api.ore.ApiOre;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionConsumeBlock;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionConsumeItem;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionSpawnItem;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionUseItem;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftRecipe;
 import miragefairy2019.mod.lib.Configurator;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.lib.multi.ItemBlockMulti;
+import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft;
+import miragefairy2019.modkt.impl.fairystickcraft.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -105,7 +101,7 @@ public class ModuleMaterialsFairy
 					.bind(onAddRecipe(v -> {
 
 						// フェアリーステッキクラフト
-						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+						ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMirageFlowerExtract.getDefaultState())))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019ManaRodGlass"))))
@@ -121,7 +117,7 @@ public class ModuleMaterialsFairy
 					.bind(onAddRecipe(v -> {
 
 						// フェアリーステッキクラフト
-						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+						ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState())))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("leafMirageFlower"))))
@@ -160,7 +156,7 @@ public class ModuleMaterialsFairy
 					.bind(onAddRecipe(v -> {
 
 						// 空き瓶＋ミラ種50個＋クォーツ16個＞珠玉→ミラオイル瓶
-						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+						ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019CraftingToolFairyWandPolishing"))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(Ingredient.fromItem(ApiMirageFlower.itemMirageFlowerSeeds), 50)))

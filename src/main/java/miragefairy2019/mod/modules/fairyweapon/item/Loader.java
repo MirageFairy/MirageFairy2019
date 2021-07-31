@@ -10,16 +10,16 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiFairyStick;
 import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.api.main.ApiMain;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionReplaceBlock;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionUseItem;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftRecipe;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.Configurator;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
+import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft;
+import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftConditionReplaceBlock;
+import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftConditionUseItem;
+import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftRecipe;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -351,7 +351,7 @@ public class Loader
 		erMod.addRecipe.register(() -> {
 
 			// 丸石＞紅蓮→焼き石
-			ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+			ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
 				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019CraftingToolFairyWandMelting"))))
 				.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionReplaceBlock(
 					() -> Blocks.COBBLESTONE.getDefaultState(),

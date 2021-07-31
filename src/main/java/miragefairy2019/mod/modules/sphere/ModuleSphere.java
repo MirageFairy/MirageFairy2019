@@ -5,17 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiFairyStick;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.ore.ApiOre;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionConsumeBlock;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionConsumeItem;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionSpawnItem;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftConditionUseItem;
-import miragefairy2019.mod.common.fairystick.FairyStickCraftRecipe;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.lib.OreIngredientComplex;
+import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft;
+import miragefairy2019.modkt.impl.fairystickcraft.*;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.Minecraft;
@@ -128,7 +124,7 @@ public class ModuleSphere
 							ingredient);
 
 						// 妖精のステッキレシピ
-						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+						ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState())))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("gemFluorite"))))
@@ -155,7 +151,7 @@ public class ModuleSphere
 							ingredient);
 
 						// 妖精のステッキレシピ
-						ApiFairyStick.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
+						ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState())))
 							.peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())))))
