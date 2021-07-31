@@ -59,6 +59,9 @@ public class ModulePlayerAura {
                     public void hook(ItemTooltipEvent event) {
                         if (event.getEntityPlayer() == null) return; // なぜかクライアント起動時に呼び出される
 
+                        // 食べ物以外には反応しない
+                        if (!(event.getItemStack().getItem() instanceof ItemFood)) return;
+
                         // 現在オーラ
                         IPlayerAura playerAura = ApiPlayerAura.playerAuraManager.getClientPlayerAura();
 
