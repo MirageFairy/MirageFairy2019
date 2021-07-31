@@ -1,53 +1,33 @@
 package miragefairy2019.mod.modules.ore;
 
-import miragefairy2019.modkt.api.oreseeddrop.IOreSeedDropRequirement;
 import miragefairy2019.modkt.api.oreseeddrop.OreSeedDropEnvironment;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.UtilsString;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import scala.util.Random;
 
 import static miragefairy2019.mod.modules.ore.Elements.*;
 
-class Vein implements IOreSeedDropRequirement {
+class VeinHelper {
 
-    private final long seed;
-    private final int horizontalSize;
-    private final int verticalSize;
-    private final double rate;
-    private final Element[] elements;
-
-    public Vein(long seed, int horizontalSize, int verticalSize, double rate, Element... elements) {
-        this.seed = seed;
-        this.horizontalSize = horizontalSize;
-        this.verticalSize = verticalSize;
-        this.rate = rate;
-        this.elements = elements;
-    }
-
-    @Override
-    public boolean test(@NotNull OreSeedDropEnvironment envoronment) {
-        World world = envoronment.getWorld();
-        BlockPos pos = envoronment.getBlockPos();
+    public static boolean test(long seed, int horizontalSize, int verticalSize, double rate, Element[] elements, @NotNull OreSeedDropEnvironment environment) {
 
         // タイル位置の特定
-        int tileX = getTileCoordinate(pos.getX(), horizontalSize);
-        int tileY = getTileCoordinate(pos.getY(), verticalSize);
-        int tileZ = getTileCoordinate(pos.getZ(), horizontalSize);
+        int tileX = getTileCoordinate(environment.getBlockPos().getX(), horizontalSize);
+        int tileY = getTileCoordinate(environment.getBlockPos().getY(), verticalSize);
+        int tileZ = getTileCoordinate(environment.getBlockPos().getZ(), horizontalSize);
 
         // 成分倍率
         double[] as = new double[elements.length];
         for (int i = 0; i < elements.length; i++) {
-            as[i] = randomElement(world.getSeed() * 17566883L + elements[i].seed * 16227457L, elements[i].size, tileX * horizontalSize, tileZ * horizontalSize);
+            as[i] = randomElement(environment.getWorld().getSeed() * 17566883L + elements[i].seed * 16227457L, elements[i].size, tileX * horizontalSize, tileZ * horizontalSize);
         }
 
         // 成分倍率の合成
         double a = multiplyElement(as);
 
         // 鉱石ごとの固有乱数を合成
-        double b = rand(13788169L + world.getSeed() * 68640023L + seed * 86802673L + tileX * 84663211L + tileY * 34193609L + tileZ * 79500227L);
+        double b = rand(13788169L + environment.getWorld().getSeed() * 68640023L + seed * 86802673L + tileX * 84663211L + tileY * 34193609L + tileZ * 79500227L);
 
         // 出現判定
         return multiplyElement(a, b) < rate;
