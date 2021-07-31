@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.ore;
+package miragefairy2019.modkt.impl.oreseeddrop;
 
 import miragefairy2019.modkt.api.oreseeddrop.OreSeedDropEnvironment;
 import mirrg.boron.util.UtilsMath;
@@ -6,9 +6,8 @@ import mirrg.boron.util.UtilsString;
 import org.jetbrains.annotations.NotNull;
 import scala.util.Random;
 
-import static miragefairy2019.mod.modules.ore.Elements.*;
 
-class VeinHelper {
+public class VeinHelper {
 
     public static boolean test(long seed, int horizontalSize, int verticalSize, double rate, Element[] elements, @NotNull OreSeedDropEnvironment environment) {
 
@@ -20,7 +19,7 @@ class VeinHelper {
         // 成分倍率
         double[] as = new double[elements.length];
         for (int i = 0; i < elements.length; i++) {
-            as[i] = randomElement(environment.getWorld().getSeed() * 17566883L + elements[i].seed * 16227457L, elements[i].size, tileX * horizontalSize, tileZ * horizontalSize);
+            as[i] = randomElement(environment.getWorld().getSeed() * 17566883L + elements[i].getSeed() * 16227457L, elements[i].getSize(), tileX * horizontalSize, tileZ * horizontalSize);
         }
 
         // 成分倍率の合成
@@ -142,9 +141,9 @@ class VeinHelper {
             int tileX = UtilsMath.randomBetween(-10000, 10000);
             int tileY = UtilsMath.randomBetween(-10000, 10000);
             int tileZ = UtilsMath.randomBetween(-10000, 10000);
-            double r1 = randomElement(2456 * 17566883L + ALUMINIUM.seed * 16227457L, ALUMINIUM.size, tileX * 16, tileZ * 16);
-            double r2 = randomElement(2456 * 17566883L + MAGNESIUM.seed * 16227457L, MAGNESIUM.size, tileX * 16, tileZ * 16);
-            double r3 = randomElement(2456 * 17566883L + FLUORINE.seed * 16227457L, FLUORINE.size, tileX * 16, tileZ * 16);
+            double r1 = randomElement(2456 * 17566883L + Elements.getALUMINIUM().getSeed() * 16227457L, Elements.getALUMINIUM().getSeed(), tileX * 16, tileZ * 16);
+            double r2 = randomElement(2456 * 17566883L + Elements.getMAGNESIUM().getSeed() * 16227457L, Elements.getMAGNESIUM().getSeed(), tileX * 16, tileZ * 16);
+            double r3 = randomElement(2456 * 17566883L + Elements.getFLUORINE().getSeed() * 16227457L, Elements.getFLUORINE().getSeed(), tileX * 16, tileZ * 16);
             double a = multiplyElement(r1, r2, r3);
             double b = rand(13788169L + 2456 * 68640023L + 2486 * 86802673L + tileX * 84663211L + tileY * 34193609L + tileZ * 79500227L);
             double c = multiplyElement(a, b);
@@ -165,14 +164,6 @@ class VeinHelper {
                     UtilsString.repeat('|', (int) (100 * a * 100))));
         }
 
-    }
-
-}
-
-public class LoaderOreSeedDrop {
-
-    public static void loadOreSeedDrop() {
-        LoaderOreSeedDropKt.load();
     }
 
 }
