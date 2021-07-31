@@ -6,11 +6,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-class ApiFairyStickCraft {
-    companion object {
-        @JvmStatic // TODO remove jvm annotation
-        lateinit var fairyStickCraftRegistry: IFairyStickCraftRegistry
-    }
+object ApiFairyStickCraft {
+    lateinit var fairyStickCraftRegistry: IFairyStickCraftRegistry
 }
 
 interface IFairyStickCraftRegistry {
