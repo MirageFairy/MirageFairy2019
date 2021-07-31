@@ -44,6 +44,7 @@ minecraft {
     // !!gitHubAction-minecraftVersion="1.12.2-14.23.5.2847"
     runDir = "run"
     mappings = "snapshot_20171003"
+    clientRunArgs = listOf("--username", "Player1")
 }
 
 application.mainClassName = "dummy" // shadowJarの例外を抑制するため
