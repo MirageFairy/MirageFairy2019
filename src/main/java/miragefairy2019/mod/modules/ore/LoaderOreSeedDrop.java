@@ -29,30 +29,28 @@ class Vein implements IOreSeedDropRequirement {
 
     @Override
     public boolean test(@NotNull OreSeedDropEnvironment envoronment) {
-        {
-            World world = envoronment.getWorld();
-            BlockPos pos = envoronment.getBlockPos();
+        World world = envoronment.getWorld();
+        BlockPos pos = envoronment.getBlockPos();
 
-            // タイル位置の特定
-            int tileX = getTileCoordinate(pos.getX(), horizontalSize);
-            int tileY = getTileCoordinate(pos.getY(), verticalSize);
-            int tileZ = getTileCoordinate(pos.getZ(), horizontalSize);
+        // タイル位置の特定
+        int tileX = getTileCoordinate(pos.getX(), horizontalSize);
+        int tileY = getTileCoordinate(pos.getY(), verticalSize);
+        int tileZ = getTileCoordinate(pos.getZ(), horizontalSize);
 
-            // 成分倍率
-            double[] as = new double[elements.length];
-            for (int i = 0; i < elements.length; i++) {
-                as[i] = randomElement(world.getSeed() * 17566883L + elements[i].seed * 16227457L, elements[i].size, tileX * horizontalSize, tileZ * horizontalSize);
-            }
-
-            // 成分倍率の合成
-            double a = multiplyElement(as);
-
-            // 鉱石ごとの固有乱数を合成
-            double b = rand(13788169L + world.getSeed() * 68640023L + seed * 86802673L + tileX * 84663211L + tileY * 34193609L + tileZ * 79500227L);
-
-            // 出現判定
-            return multiplyElement(a, b) < rate;
+        // 成分倍率
+        double[] as = new double[elements.length];
+        for (int i = 0; i < elements.length; i++) {
+            as[i] = randomElement(world.getSeed() * 17566883L + elements[i].seed * 16227457L, elements[i].size, tileX * horizontalSize, tileZ * horizontalSize);
         }
+
+        // 成分倍率の合成
+        double a = multiplyElement(as);
+
+        // 鉱石ごとの固有乱数を合成
+        double b = rand(13788169L + world.getSeed() * 68640023L + seed * 86802673L + tileX * 84663211L + tileY * 34193609L + tileZ * 79500227L);
+
+        // 出現判定
+        return multiplyElement(a, b) < rate;
     }
 
     /**
