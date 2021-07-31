@@ -13,42 +13,6 @@ import static miragefairy2019.mod.modules.ore.Elements.*;
 
 class Vein implements IOreSeedDropRequirement {
 
-    // テスト
-
-    @SuppressWarnings("unused")
-    public static void main(String[] args) {
-        int countAll = 0;
-        int[] count = new int[101];
-
-        for (int i = 0; i < 1000000; i++) {
-            int tileX = UtilsMath.randomBetween(-10000, 10000);
-            int tileY = UtilsMath.randomBetween(-10000, 10000);
-            int tileZ = UtilsMath.randomBetween(-10000, 10000);
-            double r1 = randomElement(2456 * 17566883L + ALUMINIUM.seed * 16227457L, ALUMINIUM.size, tileX * 16, tileZ * 16);
-            double r2 = randomElement(2456 * 17566883L + MAGNESIUM.seed * 16227457L, MAGNESIUM.size, tileX * 16, tileZ * 16);
-            double r3 = randomElement(2456 * 17566883L + FLUORINE.seed * 16227457L, FLUORINE.size, tileX * 16, tileZ * 16);
-            double a = multiplyElement(r1, r2, r3);
-            double b = rand(13788169L + 2456 * 68640023L + 2486 * 86802673L + tileX * 84663211L + tileY * 34193609L + tileZ * 79500227L);
-            double c = multiplyElement(a, b);
-            double d1 = multiplyElement(Math.random());
-            double d2 = multiplyElement(Math.random(), Math.random());
-            double d3 = multiplyElement(Math.random(), Math.random(), Math.random());
-            double d4 = multiplyElement(Math.random(), Math.random(), Math.random(), Math.random());
-
-            countAll++;
-            count[(int) (c * 100)]++;
-        }
-
-        for (int i = 0; i < count.length; i++) {
-            double a = count[i] / (double) countAll;
-            System.out.println(String.format("%3d %7.5f %s",
-                    i,
-                    a * 100,
-                    UtilsString.repeat('|', (int) (100 * a * 100))));
-        }
-
-    }
-
     private final long seed;
     private final int horizontalSize;
     private final int verticalSize;
@@ -92,6 +56,56 @@ class Vein implements IOreSeedDropRequirement {
     }
 
     /**
+     * ブロック座標が所属するタイル位置を求める
+     */
+    private static int getTileCoordinate(int a, int b) {
+        if (a < 0) a -= b - 1;
+        return a / b;
+    }
+
+    // 元素密度計算
+
+    /**
+     * 元素の密度を得る
+     *
+     * @return 引数の変動に対して戻り値は一様分布に従います。
+     */
+    private static double randomElement(long seed, int size, int x, int z) {
+        int tileX = getTileCoordinate(x, size);
+        int tileZ = getTileCoordinate(z, size);
+        double b00 = randomElementCrossPoint(seed, tileX + 0, tileZ + 0);
+        double b01 = randomElementCrossPoint(seed, tileX + 0, tileZ + 1);
+        double b10 = randomElementCrossPoint(seed, tileX + 1, tileZ + 0);
+        double b11 = randomElementCrossPoint(seed, tileX + 1, tileZ + 1);
+        double rateX = (x - tileX * size) / (double) size;
+        double rateZ = (z - tileZ * size) / (double) size;
+        return k(rateZ, k(rateX, b00 * (1 - rateX) + b10 * rateX) * (1 - rateZ) + k(rateX, b01 * (1 - rateX) + b11 * rateX) * rateZ);
+    }
+
+    /**
+     * 元素のタイル交点における密度を得る
+     */
+    private static double randomElementCrossPoint(long seed, int tileX, int tileZ) {
+        return rand(49984939L + seed * 15158987L + tileX * 33835717L + tileZ * 46560797L);
+    }
+
+    /**
+     * 2個の一様乱数の間のrateに対応する点における分布を一様分布に補正する関数
+     */
+    private static double k(double rate, double x) {
+        if (rate >= 0.5) rate = 1 - rate;
+        return x < 0.5 ? k2(rate, x) : 1 - k2(rate, 1 - x);
+    }
+
+    private static double k2(double rate, double x) {
+        return x < rate
+                ? (1 / (2 - 2 * rate)) * (x * x / rate)
+                : (1 / (2 - 2 * rate)) * (2 * x - rate);
+    }
+
+    // 乱数合成
+
+    /**
      * 一様分布に従う値を乗算し、更に一様分布になるように補正をかける
      *
      * @param as 要素は1から4まで。
@@ -126,37 +140,7 @@ class Vein implements IOreSeedDropRequirement {
         return a * a * a;
     }
 
-    /**
-     * 元素の密度を得る
-     *
-     * @return 引数の変動に対して戻り値は一様分布に従います。
-     */
-    private static double randomElement(long seed, int size, int x, int z) {
-        int tileX = getTileCoordinate(x, size);
-        int tileZ = getTileCoordinate(z, size);
-        double b00 = randomElementCrossPoint(seed, tileX + 0, tileZ + 0);
-        double b01 = randomElementCrossPoint(seed, tileX + 0, tileZ + 1);
-        double b10 = randomElementCrossPoint(seed, tileX + 1, tileZ + 0);
-        double b11 = randomElementCrossPoint(seed, tileX + 1, tileZ + 1);
-        double rateX = (x - tileX * size) / (double) size;
-        double rateZ = (z - tileZ * size) / (double) size;
-        return k(rateZ, k(rateX, b00 * (1 - rateX) + b10 * rateX) * (1 - rateZ) + k(rateX, b01 * (1 - rateX) + b11 * rateX) * rateZ);
-    }
-
-    /**
-     * ブロック座標が所属するタイル位置を求める
-     */
-    private static int getTileCoordinate(int a, int b) {
-        if (a < 0) a -= b - 1;
-        return a / b;
-    }
-
-    /**
-     * 元素のタイル交点における密度を得る
-     */
-    private static double randomElementCrossPoint(long seed, int tileX, int tileZ) {
-        return rand(49984939L + seed * 15158987L + tileX * 33835717L + tileZ * 46560797L);
-    }
+    // 乱数生成
 
     /**
      * シード付き乱数
@@ -169,18 +153,40 @@ class Vein implements IOreSeedDropRequirement {
         return random.nextDouble();
     }
 
-    /**
-     * 2個の一様乱数の間のrateに対応する点における分布を一様分布に補正する関数
-     */
-    private static double k(double rate, double x) {
-        if (rate >= 0.5) rate = 1 - rate;
-        return x < 0.5 ? k2(rate, x) : 1 - k2(rate, 1 - x);
-    }
+    // テスト
 
-    private static double k2(double rate, double x) {
-        return x < rate
-                ? (1 / (2 - 2 * rate)) * (x * x / rate)
-                : (1 / (2 - 2 * rate)) * (2 * x - rate);
+    @SuppressWarnings("unused")
+    public static void main(String[] args) {
+        int countAll = 0;
+        int[] count = new int[101];
+
+        for (int i = 0; i < 1000000; i++) {
+            int tileX = UtilsMath.randomBetween(-10000, 10000);
+            int tileY = UtilsMath.randomBetween(-10000, 10000);
+            int tileZ = UtilsMath.randomBetween(-10000, 10000);
+            double r1 = randomElement(2456 * 17566883L + ALUMINIUM.seed * 16227457L, ALUMINIUM.size, tileX * 16, tileZ * 16);
+            double r2 = randomElement(2456 * 17566883L + MAGNESIUM.seed * 16227457L, MAGNESIUM.size, tileX * 16, tileZ * 16);
+            double r3 = randomElement(2456 * 17566883L + FLUORINE.seed * 16227457L, FLUORINE.size, tileX * 16, tileZ * 16);
+            double a = multiplyElement(r1, r2, r3);
+            double b = rand(13788169L + 2456 * 68640023L + 2486 * 86802673L + tileX * 84663211L + tileY * 34193609L + tileZ * 79500227L);
+            double c = multiplyElement(a, b);
+            double d1 = multiplyElement(Math.random());
+            double d2 = multiplyElement(Math.random(), Math.random());
+            double d3 = multiplyElement(Math.random(), Math.random(), Math.random());
+            double d4 = multiplyElement(Math.random(), Math.random(), Math.random(), Math.random());
+
+            countAll++;
+            count[(int) (c * 100)]++;
+        }
+
+        for (int i = 0; i < count.length; i++) {
+            double a = count[i] / (double) countAll;
+            System.out.println(String.format("%3d %7.5f %s",
+                    i,
+                    a * 100,
+                    UtilsString.repeat('|', (int) (100 * a * 100))));
+        }
+
     }
 
 }
