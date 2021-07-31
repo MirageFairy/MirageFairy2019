@@ -11,7 +11,7 @@ import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.mod.api.ApiMirageFlower
-import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRecipe
+import miragefairy2019.modkt.jei.JeiUtilities.Companion.drawStringRightAligned
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 
@@ -22,7 +22,7 @@ class PluginFairyLogDrop : IModPlugin {
     }
 
     override fun registerCategories(registry: IRecipeCategoryRegistration) {
-        registry.addRecipeCategories(object : IRecipeCategory<RecipeWrapperFairyLogDrop> {
+        registry.addRecipeCategories(object : IRecipeCategory<IRecipeWrapper> {
             override fun getUid() = Companion.uid
             override fun getTitle() = "Fairy Log Drop"
             override fun getModName() = "MirageFairy2019"
@@ -36,32 +36,30 @@ class PluginFairyLogDrop : IModPlugin {
             }
 
             override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(ApiMirageFlower.itemBlockFairyLog))
-            override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: RecipeWrapperFairyLogDrop, ingredients: IIngredients) {
-                val guiItemStackGroup = recipeLayout.itemStacks
-                guiItemStackGroup.init(0, true, 0, 0)
-                guiItemStackGroup.init(1, false, 45, 0)
-                guiItemStackGroup.set(ingredients)
+            override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
+                recipeLayout.itemStacks.init(0, true, 0, 0)
+                recipeLayout.itemStacks.init(1, false, 45, 0)
+                recipeLayout.itemStacks.set(ingredients)
             }
         })
     }
 
     override fun register(registry: IModRegistry) {
-        registry.addRecipes(ApiMirageFlower.fairyLogDropRegistry.recipes.toList(), uid)
-        registry.handleRecipes(FairyLogDropRecipe::class.java, { RecipeWrapperFairyLogDrop(registry, it) }, uid)
+        registry.addRecipes(ApiMirageFlower.fairyLogDropRegistry.recipes.toList().map { recipe ->
+            object : IRecipeWrapper {
+                override fun getIngredients(ingredients: IIngredients) {
+                    ingredients.setInput(VanillaTypes.ITEM, ItemStack(ApiMirageFlower.itemBlockFairyLog))
+                    ingredients.setOutput(VanillaTypes.ITEM, recipe.itemStackOutput)
+                }
+
+                override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {
+                    val descriptions = recipe.conditions.toList().chunked(2).map { it.joinToString(", ") { condition -> condition.localizedDescription } }
+                    minecraft.fontRenderer.drawStringRightAligned(String.format("%.0f%%", recipe.rate * 100), 45 - 2, 4, 0x444444)
+                    minecraft.fontRenderer.drawString(recipe.itemStackOutput.displayName, 65, 0, 0x444444)
+                    descriptions.forEachIndexed { i, it -> minecraft.fontRenderer.drawString(it, 65, 10 + 10 * i, 0x444444) }
+                }
+            }
+        }, uid)
     }
 
-    class RecipeWrapperFairyLogDrop(registry: IModRegistry, private val recipe: FairyLogDropRecipe) : IRecipeWrapper {
-        override fun getIngredients(ingredients: IIngredients) {
-            ingredients.setInput(VanillaTypes.ITEM, ItemStack(ApiMirageFlower.itemBlockFairyLog))
-            ingredients.setOutput(VanillaTypes.ITEM, recipe.itemStackOutput)
-        }
-
-        override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {
-            val descriptions = recipe.conditions.toList().chunked(2).map { it.joinToString(", ") { condition -> condition.localizedDescription } }
-            val string = String.format("%.0f%%", recipe.rate * 100)
-            minecraft.fontRenderer.drawString(string, 45 - 2 - minecraft.fontRenderer.getStringWidth(string), 4, 0x444444)
-            minecraft.fontRenderer.drawString(recipe.itemStackOutput.displayName, 65, 0, 0x444444)
-            descriptions.forEachIndexed { i, it -> minecraft.fontRenderer.drawString(it, 65, 10 + 10 * i, 0x444444) }
-        }
-    }
 }

@@ -57,9 +57,7 @@ class PluginOreSeedDrop : IModPlugin {
                 override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {
                     minecraft.fontRenderer.drawStringCentered(String.format("%.0f%%", recipe.getWeight() * 100), 80, 0, 0x444444)
                     minecraft.fontRenderer.drawStringCentered(recipe.getShape().name, 80, 10, 0x444444)
-                    recipe.getRequirements().forEachIndexed { i, it ->
-                        minecraft.fontRenderer.drawString(it, 0, 20 + 10 * i, 0x444444)
-                    }
+                    recipe.getRequirements().forEachIndexed { i, it -> minecraft.fontRenderer.drawString(it, 0, 20 + 10 * i, 0x444444) }
                 }
             }
         }.toList(), uid)
