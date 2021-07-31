@@ -1,4 +1,4 @@
-package miragefairy2019.mod.jei
+package miragefairy2019.modkt.jei
 
 import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.Gui

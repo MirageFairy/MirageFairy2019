@@ -1,4 +1,4 @@
-package miragefairy2019.mod.jei.mirageflower;
+package miragefairy2019.modkt.jei.mirageflower;
 
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;

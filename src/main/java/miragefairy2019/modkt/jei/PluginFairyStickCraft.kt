@@ -1,4 +1,4 @@
-package miragefairy2019.mod.jei.fairystick
+package miragefairy2019.modkt.jei
 
 import mezz.jei.api.IModPlugin
 import mezz.jei.api.IModRegistry
@@ -10,8 +10,7 @@ import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
-import miragefairy2019.mod.jei.JeiUtilities
-import miragefairy2019.mod.jei.JeiUtilities.Companion.drawStringCentered
+import miragefairy2019.modkt.jei.JeiUtilities.Companion.drawStringCentered
 import miragefairy2019.mod.modules.fairystick.ModuleFairyStick
 import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.modkt.api.fairystickcraft.IFairyStickCraftRecipe
@@ -27,7 +26,7 @@ class PluginFairyStickCraft : IModPlugin {
 
     override fun registerCategories(registry: IRecipeCategoryRegistration) {
         registry.addRecipeCategories(object : IRecipeCategory<RecipeWrapperFairyStickCraft> {
-            override fun getUid() = PluginFairyStickCraft.uid
+            override fun getUid() = Companion.uid
             override fun getTitle() = "Fairy Stick Craft"
             override fun getModName() = "MirageFairy2019"
             override fun getBackground() = object : IDrawable {

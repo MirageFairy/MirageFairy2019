@@ -1,4 +1,4 @@
-package miragefairy2019.mod.jei.mirageflower;
+package miragefairy2019.modkt.jei.mirageflower;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
