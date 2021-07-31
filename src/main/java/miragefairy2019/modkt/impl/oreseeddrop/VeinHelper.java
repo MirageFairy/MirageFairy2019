@@ -141,9 +141,9 @@ public class VeinHelper {
             int tileX = UtilsMath.randomBetween(-10000, 10000);
             int tileY = UtilsMath.randomBetween(-10000, 10000);
             int tileZ = UtilsMath.randomBetween(-10000, 10000);
-            double r1 = randomElement(2456 * 17566883L + Elements.getALUMINIUM().getSeed() * 16227457L, Elements.getALUMINIUM().getSeed(), tileX * 16, tileZ * 16);
-            double r2 = randomElement(2456 * 17566883L + Elements.getMAGNESIUM().getSeed() * 16227457L, Elements.getMAGNESIUM().getSeed(), tileX * 16, tileZ * 16);
-            double r3 = randomElement(2456 * 17566883L + Elements.getFLUORINE().getSeed() * 16227457L, Elements.getFLUORINE().getSeed(), tileX * 16, tileZ * 16);
+            double r1 = randomElement(2456 * 17566883L + Elements.INSTANCE.getALUMINIUM().getSeed() * 16227457L, Elements.INSTANCE.getALUMINIUM().getSeed(), tileX * 16, tileZ * 16);
+            double r2 = randomElement(2456 * 17566883L + Elements.INSTANCE.getMAGNESIUM().getSeed() * 16227457L, Elements.INSTANCE.getMAGNESIUM().getSeed(), tileX * 16, tileZ * 16);
+            double r3 = randomElement(2456 * 17566883L + Elements.INSTANCE.getFLUORINE().getSeed() * 16227457L, Elements.INSTANCE.getFLUORINE().getSeed(), tileX * 16, tileZ * 16);
             double a = multiplyElement(r1, r2, r3);
             double b = rand(13788169L + 2456 * 68640023L + 2486 * 86802673L + tileX * 84663211L + tileY * 34193609L + tileZ * 79500227L);
             double c = multiplyElement(a, b);
