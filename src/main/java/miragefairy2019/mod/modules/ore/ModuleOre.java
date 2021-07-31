@@ -13,6 +13,8 @@ import miragefairy2019.mod.modules.ore.material.BlockMaterials;
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1;
 import miragefairy2019.mod.modules.ore.material.ItemBlockMaterials;
 import miragefairy2019.mod.modules.ore.ore.*;
+import miragefairy2019.modkt.api.oreseeddrop.ApiOreSeedDrop;
+import miragefairy2019.modkt.impl.oreseeddrop.OreSeedDropRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
@@ -68,7 +70,10 @@ public class ModuleOre {
 
     public static void init(EventRegistryMod erMod) {
 
-        LoaderOreSeedDrop.loadOreSeedDrop();
+        erMod.initRegistry.register(() -> {
+            ApiOreSeedDrop.oreSeedDropRegistry = new OreSeedDropRegistry();
+            LoaderOreSeedDrop.loadOreSeedDrop();
+        });
 
         // マテリアル
         item(erMod, ItemMultiMaterial<ItemVariantMaterial>::new, new ResourceLocation(ModMirageFairy2019.MODID, "materials"), "materials")

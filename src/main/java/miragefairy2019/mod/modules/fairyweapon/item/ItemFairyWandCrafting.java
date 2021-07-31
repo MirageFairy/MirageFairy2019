@@ -1,9 +1,10 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.oreseed.EnumOreSeedType;
-import miragefairy2019.mod.api.oreseed.RegistryOreSeedDrop;
 import miragefairy2019.mod.modules.oreseed.EnumVariantOreSeed;
+import miragefairy2019.modkt.api.oreseeddrop.ApiOreSeedDrop;
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedType;
+import miragefairy2019.modkt.api.oreseeddrop.OreSeedDropEnvironment;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -40,15 +41,16 @@ public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingTool {
         if (!world.isRemote) {
 
             EnumOreSeedType type = EnumOreSeedType.STONE;
-            if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.NETHER)) type = EnumOreSeedType.NETHERRACK;
+            if (BiomeDictionary.hasType(world.getBiome(pos), BiomeDictionary.Type.NETHER))
+                type = EnumOreSeedType.NETHERRACK;
 
             // 鉱石生成確率表示
             List<String> lines = new ArrayList<>();
             lines.add("===== Ore List (" + type + ") =====");
             for (EnumVariantOreSeed variant : EnumVariantOreSeed.values()) {
                 lines.add("----- " + variant.name());
-                RegistryOreSeedDrop.getList(type, variant.shape, world, pos).stream()
-                        .forEach(t -> lines.add(String.format("%.2f", t.weight) + ": " + t.item.get().getBlock().getItem(world, pos, t.item.get()).getDisplayName()));
+                ApiOreSeedDrop.oreSeedDropRegistry.getDropList(new OreSeedDropEnvironment(type, variant.shape, world, pos)).stream()
+                        .forEach(t -> lines.add(String.format("%.2f", t.weight) + ": " + t.item.invoke().getBlock().getItem(world, pos, t.item.invoke()).getDisplayName()));
             }
             lines.add("====================");
             player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)

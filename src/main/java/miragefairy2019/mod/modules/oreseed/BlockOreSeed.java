@@ -1,7 +1,8 @@
 package miragefairy2019.mod.modules.oreseed;
 
-import miragefairy2019.mod.api.oreseed.EnumOreSeedType;
-import miragefairy2019.mod.api.oreseed.RegistryOreSeedDrop;
+import miragefairy2019.modkt.api.oreseeddrop.ApiOreSeedDrop;
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedType;
+import miragefairy2019.modkt.api.oreseeddrop.OreSeedDropEnvironment;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,6 +21,7 @@ import net.minecraft.world.World;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Optional;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -143,12 +145,12 @@ public class BlockOreSeed extends Block {
     protected void mutate(World world, BlockPos pos) {
         IBlockState state = world.getBlockState(pos);
         Random random = new Random(pos.getX() * 15946848L + pos.getY() * 29135678L + pos.getZ() * 65726816L);
-        IBlockState blockStateAfter = RegistryOreSeedDrop.drop(
-                type,
-                getVariant(state).shape,
-                world,
-                pos,
-                random).orElseGet(() -> sBlockStateDefault.get());
+        IBlockState blockStateAfter = Optional.ofNullable(ApiOreSeedDrop.oreSeedDropRegistry.drop(
+                new OreSeedDropEnvironment(type,
+                        getVariant(state).shape,
+                        world,
+                        pos),
+                random)).orElseGet(() -> sBlockStateDefault.get());
 
         Deque<BlockPos> poses = new ArrayDeque<>();
         poses.addLast(pos);
