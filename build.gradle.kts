@@ -16,12 +16,17 @@ plugins {
     id("com.github.johnrengelman.shadow")
 }
 
-// 正式版でないので常に0
-// Forge対応バージョンの区別
-// クライアント互換性の区別
-// ビルドバージョンの区別
 // 各数字は上位のバージョンが増えてもリセットしない
-version = "0.1.13.20"
+// 正式版でないので常に0
+val versionZero = 0
+// Forge対応バージョンの区別
+val versionForge = 1
+// クライアント互換性の区別
+val versionCompatibility = 13
+// ビルドバージョンの区別
+val versionBuild = 20
+
+version = "${versionZero}.${versionForge}.${versionCompatibility}.${versionBuild}"
 group = "miragefairy2019"
 base.archivesBaseName = "MirageFairy2019"
 
@@ -77,6 +82,7 @@ tasks {
     named<TaskSourceCopy>("sourceMainJava") {
         include("ModMirageFairy2019.java")
         replace("{version}", project.version)
+        replace("{acceptableRemoteVersions}", "[${versionZero}.${versionForge}.${versionCompatibility}.0,${versionZero}.${versionForge}.${versionCompatibility + 1}.0)")
     }
 
     register<Exec>("makeJson") {

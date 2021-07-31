@@ -20,13 +20,14 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = ModMirageFairy2019.MODID, name = ModMirageFairy2019.NAME, version = ModMirageFairy2019.VERSION)
+@Mod(modid = ModMirageFairy2019.MODID, name = ModMirageFairy2019.NAME, version = ModMirageFairy2019.VERSION, acceptableRemoteVersions = ModMirageFairy2019.ACCEPTABLE_REMOTE_VERSIONS)
 public class ModMirageFairy2019
 {
 
 	public static final String MODID = "miragefairy2019";
 	public static final String NAME = "MirageFairy2019";
 	public static final String VERSION = "{version}";
+	public static final String ACCEPTABLE_REMOTE_VERSIONS = "{acceptableRemoteVersions}";
 
 	public EventRegistryMod erMod = new EventRegistryMod();
 
