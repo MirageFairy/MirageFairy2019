@@ -124,6 +124,7 @@ public class LoaderOreSeedDrop {
 
     private static IGenerationCondition vein(long seed, int horizontalSize, int verticalSize, double rate, Element... elements) {
         return (type, shape, world, pos) -> {
+            // タイル位置の特定
             int tileX = div(pos.getX(), horizontalSize);
             int tileY = div(pos.getY(), verticalSize);
             int tileZ = div(pos.getZ(), horizontalSize);
