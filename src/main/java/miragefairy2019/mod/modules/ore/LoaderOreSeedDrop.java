@@ -198,7 +198,7 @@ public class LoaderOreSeedDrop {
     }
 
     /**
-     * ブロック座標が所属するチャンク座標を求める
+     * ブロック座標が所属するタイル位置を求める
      */
     private static int div(int a, int b) {
         if (a < 0) a -= b - 1;
