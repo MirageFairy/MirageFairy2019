@@ -3,10 +3,16 @@ import net.minecraftforge.gradle.user.TaskSourceCopy
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+    dependencies {
+        // for bug: ClassNotFoundException: kotlin.coroutines.Continuation
+        classpath(files("lib/kotlin-stdlib-1.3.72.jar"))
+    }
+}
+
 plugins {
     application
     kotlin("jvm")
-    id("org.jetbrains.kotlin.plugin.serialization")
     id("net.minecraftforge.gradle.forge")
     id("com.github.johnrengelman.shadow")
 }

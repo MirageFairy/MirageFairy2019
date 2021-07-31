@@ -11,7 +11,6 @@ pluginManagement {
         eachPlugin {
             when (requested.id.id) {
                 "org.jetbrains.kotlin.jvm" -> useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72")
-                "org.jetbrains.kotlin.plugin.serialization" -> useModule("org.jetbrains.kotlin:kotlin-serialization:1.3.72")
                 "net.minecraftforge.gradle.forge" -> useModule("net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT")
                 "com.github.johnrengelman.shadow" -> useModule("com.github.jengelman.gradle.plugins:shadow:4.0.4")
             }
