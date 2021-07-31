@@ -4,9 +4,8 @@ import java.util.Optional;
 
 import net.minecraft.item.ItemStack;
 
-public interface IItemComposite
-{
+public interface IItemComposite {
 
-	public Optional<IComposite> getMirageFairy2019Composite(ItemStack itemStack);
+    public Optional<IComposite> getMirageFairy2019Composite(ItemStack itemStack);
 
 }

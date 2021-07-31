@@ -9,19 +9,17 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class ModuleFertilizer
-{
+public class ModuleFertilizer {
 
-	public static void init(EventRegistryMod erMod)
-	{
+    public static void init(EventRegistryMod erMod) {
 
-		// 肥料
-		item(erMod, ItemFertilizer::new, new ResourceLocation(ModMirageFairy2019.MODID, "fertilizer"), "fertilizer")
-			.bind(setCreativeTab(() -> ApiMain.creativeTab()))
-			.bind(onRegisterItem(i -> {
-				if (ApiMain.side().isClient()) ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), null));
-			}));
+        // 肥料
+        item(erMod, ItemFertilizer::new, new ResourceLocation(ModMirageFairy2019.MODID, "fertilizer"), "fertilizer")
+                .bind(setCreativeTab(() -> ApiMain.creativeTab()))
+                .bind(onRegisterItem(i -> {
+                    if (ApiMain.side().isClient()) ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), null));
+                }));
 
-	}
+    }
 
 }

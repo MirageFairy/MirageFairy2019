@@ -21,253 +21,215 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.oredict.OreIngredient;
 
-public class RightClickDrops
-{
+public class RightClickDrops {
 
-	public static IRightClickDrop fixed(IDrop drop)
-	{
-		return new IRightClickDrop() {
-			@Override
-			public IDrop getDrop()
-			{
-				return drop;
-			}
+    public static IRightClickDrop fixed(IDrop drop) {
+        return new IRightClickDrop() {
+            @Override
+            public IDrop getDrop() {
+                return drop;
+            }
 
-			@Override
-			public boolean testUseItem(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-			{
-				return true;
-			}
-		};
-	}
+            @Override
+            public boolean testUseItem(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+                return true;
+            }
+        };
+    }
 
-	public static IRightClickDrop world(IDrop drop, BiPredicate<World, BlockPos> predicate)
-	{
-		return new IRightClickDrop() {
-			@Override
-			public IDrop getDrop()
-			{
-				return drop;
-			}
+    public static IRightClickDrop world(IDrop drop, BiPredicate<World, BlockPos> predicate) {
+        return new IRightClickDrop() {
+            @Override
+            public IDrop getDrop() {
+                return drop;
+            }
 
-			@Override
-			public boolean testWorld(World world, BlockPos pos)
-			{
-				return predicate.test(world, pos);
-			}
-		};
-	}
+            @Override
+            public boolean testWorld(World world, BlockPos pos) {
+                return predicate.test(world, pos);
+            }
+        };
+    }
 
-	public static IRightClickDrop blocks(IDrop drop, Block... blocks)
-	{
-		return new IRightClickDrop() {
-			@Override
-			public IDrop getDrop()
-			{
-				return drop;
-			}
+    public static IRightClickDrop blocks(IDrop drop, Block... blocks) {
+        return new IRightClickDrop() {
+            @Override
+            public IDrop getDrop() {
+                return drop;
+            }
 
-			@Override
-			public boolean testBlock(Block block)
-			{
-				for (Block block2 : blocks) {
-					if (block.equals(block2)) return true;
-				}
-				return false;
-			}
-		};
-	}
+            @Override
+            public boolean testBlock(Block block) {
+                for (Block block2 : blocks) {
+                    if (block.equals(block2)) return true;
+                }
+                return false;
+            }
+        };
+    }
 
-	public static IRightClickDrop blockStates(IDrop drop, IBlockState... blockStates)
-	{
-		return new IRightClickDrop() {
-			@Override
-			public IDrop getDrop()
-			{
-				return drop;
-			}
+    public static IRightClickDrop blockStates(IDrop drop, IBlockState... blockStates) {
+        return new IRightClickDrop() {
+            @Override
+            public IDrop getDrop() {
+                return drop;
+            }
 
-			@Override
-			public boolean testBlockState(World world, BlockPos blockPos, IBlockState blockState)
-			{
-				for (IBlockState blockState2 : blockStates) {
-					if (blockState.equals(blockState2)) return true;
-				}
-				return false;
-			}
-		};
-	}
+            @Override
+            public boolean testBlockState(World world, BlockPos blockPos, IBlockState blockState) {
+                for (IBlockState blockState2 : blockStates) {
+                    if (blockState.equals(blockState2)) return true;
+                }
+                return false;
+            }
+        };
+    }
 
-	public static IRightClickDrop items(IDrop drop, Item... items)
-	{
-		return new IRightClickDrop() {
-			@Override
-			public IDrop getDrop()
-			{
-				return drop;
-			}
+    public static IRightClickDrop items(IDrop drop, Item... items) {
+        return new IRightClickDrop() {
+            @Override
+            public IDrop getDrop() {
+                return drop;
+            }
 
-			@Override
-			public boolean testItem(Item item)
-			{
-				for (Item item2 : items) {
-					if (item.equals(item2)) return true;
-				}
-				return false;
-			}
-		};
-	}
+            @Override
+            public boolean testItem(Item item) {
+                for (Item item2 : items) {
+                    if (item.equals(item2)) return true;
+                }
+                return false;
+            }
+        };
+    }
 
-	public static IRightClickDrop ores(IDrop drop, String... ores)
-	{
-		List<Predicate<ItemStack>> ingredients = ISuppliterator.ofObjArray(ores)
-			.<Predicate<ItemStack>> map(o -> new OreIngredient(o))
-			.toList();
-		return new IRightClickDrop() {
-			@Override
-			public IDrop getDrop()
-			{
-				return drop;
-			}
+    public static IRightClickDrop ores(IDrop drop, String... ores) {
+        List<Predicate<ItemStack>> ingredients = ISuppliterator.ofObjArray(ores)
+                .<Predicate<ItemStack>>map(o -> new OreIngredient(o))
+                .toList();
+        return new IRightClickDrop() {
+            @Override
+            public IDrop getDrop() {
+                return drop;
+            }
 
-			@Override
-			public boolean testItemStack(ItemStack itemStack)
-			{
-				for (Predicate<ItemStack> ingredient : ingredients) {
-					if (ingredient.test(itemStack)) return true;
-				}
-				return false;
-			}
+            @Override
+            public boolean testItemStack(ItemStack itemStack) {
+                for (Predicate<ItemStack> ingredient : ingredients) {
+                    if (ingredient.test(itemStack)) return true;
+                }
+                return false;
+            }
 
-			@SuppressWarnings("deprecation")
-			@Override
-			public boolean testBlockState(World world, BlockPos blockPos, IBlockState blockState)
-			{
-				for (Predicate<ItemStack> ingredient : ingredients) {
-					if (ingredient.test(blockState.getBlock().getItem(world, blockPos, blockState))) return true;
-				}
-				return false;
-			}
-		};
-	}
+            @SuppressWarnings("deprecation")
+            @Override
+            public boolean testBlockState(World world, BlockPos blockPos, IBlockState blockState) {
+                for (Predicate<ItemStack> ingredient : ingredients) {
+                    if (ingredient.test(blockState.getBlock().getItem(world, blockPos, blockState))) return true;
+                }
+                return false;
+            }
+        };
+    }
 
-	@SafeVarargs
-	public static IRightClickDrop ingredients(IDrop drop, Predicate<ItemStack>... ingredients)
-	{
-		return new IRightClickDrop() {
-			@Override
-			public IDrop getDrop()
-			{
-				return drop;
-			}
+    @SafeVarargs
+    public static IRightClickDrop ingredients(IDrop drop, Predicate<ItemStack>... ingredients) {
+        return new IRightClickDrop() {
+            @Override
+            public IDrop getDrop() {
+                return drop;
+            }
 
-			@Override
-			public boolean testItemStack(ItemStack itemStack)
-			{
-				for (Predicate<ItemStack> ingredient : ingredients) {
-					if (ingredient.test(itemStack)) return true;
-				}
-				return false;
-			}
-		};
-	}
+            @Override
+            public boolean testItemStack(ItemStack itemStack) {
+                for (Predicate<ItemStack> ingredient : ingredients) {
+                    if (ingredient.test(itemStack)) return true;
+                }
+                return false;
+            }
+        };
+    }
 
-	public static IRightClickDrop biomeTypes(IDrop drop, BiomeDictionary.Type... biomeTypes)
-	{
-		return new IRightClickDrop() {
-			@Override
-			public IDrop getDrop()
-			{
-				return drop;
-			}
+    public static IRightClickDrop biomeTypes(IDrop drop, BiomeDictionary.Type... biomeTypes) {
+        return new IRightClickDrop() {
+            @Override
+            public IDrop getDrop() {
+                return drop;
+            }
 
-			@Override
-			public boolean testBiomeType(Type biomeType)
-			{
-				for (BiomeDictionary.Type biomeType2 : biomeTypes) {
-					if (biomeType.equals(biomeType2)) return true;
-				}
-				return false;
-			}
-		};
-	}
+            @Override
+            public boolean testBiomeType(Type biomeType) {
+                for (BiomeDictionary.Type biomeType2 : biomeTypes) {
+                    if (biomeType.equals(biomeType2)) return true;
+                }
+                return false;
+            }
+        };
+    }
 
-	public static IRightClickDrop biomes(IDrop drop, Biome... biomes)
-	{
-		return new IRightClickDrop() {
-			@Override
-			public IDrop getDrop()
-			{
-				return drop;
-			}
+    public static IRightClickDrop biomes(IDrop drop, Biome... biomes) {
+        return new IRightClickDrop() {
+            @Override
+            public IDrop getDrop() {
+                return drop;
+            }
 
-			@Override
-			public boolean testBiome(Biome biome)
-			{
-				for (Biome biome2 : biomes) {
-					if (biome.equals(biome2)) return true;
-				}
-				return false;
-			}
-		};
-	}
+            @Override
+            public boolean testBiome(Biome biome) {
+                for (Biome biome2 : biomes) {
+                    if (biome.equals(biome2)) return true;
+                }
+                return false;
+            }
+        };
+    }
 
-	@SafeVarargs
-	public static IRightClickDrop classEntities(IDrop drop, Class<? extends Entity>... classEntities)
-	{
-		return new IRightClickDrop() {
-			@Override
-			public IDrop getDrop()
-			{
-				return drop;
-			}
+    @SafeVarargs
+    public static IRightClickDrop classEntities(IDrop drop, Class<? extends Entity>... classEntities) {
+        return new IRightClickDrop() {
+            @Override
+            public IDrop getDrop() {
+                return drop;
+            }
 
-			@Override
-			public boolean testClassEntity(Class<? extends Entity> classEntity)
-			{
-				for (Class<? extends Entity> classEntity2 : classEntities) {
-					if (classEntity2.isAssignableFrom(classEntity)) return true;
-				}
-				return false;
-			}
-		};
-	}
+            @Override
+            public boolean testClassEntity(Class<? extends Entity> classEntity) {
+                for (Class<? extends Entity> classEntity2 : classEntities) {
+                    if (classEntity2.isAssignableFrom(classEntity)) return true;
+                }
+                return false;
+            }
+        };
+    }
 
-	public static <E extends Entity> IRightClickDrop entity(IDrop drop, Class<? extends E> classEntity, Predicate<? super E> predicate)
-	{
-		return new IRightClickDrop() {
-			@Override
-			public IDrop getDrop()
-			{
-				return drop;
-			}
+    public static <E extends Entity> IRightClickDrop entity(IDrop drop, Class<? extends E> classEntity, Predicate<? super E> predicate) {
+        return new IRightClickDrop() {
+            @Override
+            public IDrop getDrop() {
+                return drop;
+            }
 
-			@Override
-			public boolean testEntity(Entity entity)
-			{
-				if (classEntity.isInstance(entity)) {
-					return predicate.test(classEntity.cast(entity));
-				}
-				return false;
-			}
-		};
-	}
+            @Override
+            public boolean testEntity(Entity entity) {
+                if (classEntity.isInstance(entity)) {
+                    return predicate.test(classEntity.cast(entity));
+                }
+                return false;
+            }
+        };
+    }
 
-	public static IRightClickDrop eventDrop(IDrop drop, Predicate<Tuple3<World, BlockPos, EntityPlayer>> predicate)
-	{
-		return new IRightClickDrop() {
-			@Override
-			public IDrop getDrop()
-			{
-				return drop;
-			}
+    public static IRightClickDrop eventDrop(IDrop drop, Predicate<Tuple3<World, BlockPos, EntityPlayer>> predicate) {
+        return new IRightClickDrop() {
+            @Override
+            public IDrop getDrop() {
+                return drop;
+            }
 
-			@Override
-			public boolean testUseItem(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-			{
-				return predicate.test(Tuple3.of(world, pos, player));
-			}
-		};
-	}
+            @Override
+            public boolean testUseItem(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+                return predicate.test(Tuple3.of(world, pos, player));
+            }
+        };
+    }
 
 }

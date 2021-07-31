@@ -22,90 +22,84 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModulePlacedItem
-{
+public class ModulePlacedItem {
 
-	public static void init(EventRegistryMod erMod)
-	{
+    public static void init(EventRegistryMod erMod) {
 
-		// ブロック
-		erMod.registerBlock.register(b -> {
-			BlockPlacedItem blockPlacedItem = new BlockPlacedItem();
-			blockPlacedItem.setRegistryName(ModMirageFairy2019.MODID, "placed_item");
-			blockPlacedItem.setUnlocalizedName("placedItem");
-			ForgeRegistries.BLOCKS.register(blockPlacedItem);
-			ApiPlacedItem.blockPlacedItem = blockPlacedItem;
-		});
+        // ブロック
+        erMod.registerBlock.register(b -> {
+            BlockPlacedItem blockPlacedItem = new BlockPlacedItem();
+            blockPlacedItem.setRegistryName(ModMirageFairy2019.MODID, "placed_item");
+            blockPlacedItem.setUnlocalizedName("placedItem");
+            ForgeRegistries.BLOCKS.register(blockPlacedItem);
+            ApiPlacedItem.blockPlacedItem = blockPlacedItem;
+        });
 
-		// タイルエンティティ
-		erMod.init.register(e -> {
-			GameRegistry.registerTileEntity(TileEntityPlacedItem.class, new ResourceLocation(ModMirageFairy2019.MODID, "placed_item"));
-		});
+        // タイルエンティティ
+        erMod.init.register(e -> {
+            GameRegistry.registerTileEntity(TileEntityPlacedItem.class, new ResourceLocation(ModMirageFairy2019.MODID, "placed_item"));
+        });
 
-		// タイルエンティティレンダラー
-		erMod.init.register(e -> {
-			if (ApiMain.side().isClient()) {
-				new Object() {
-					@SideOnly(Side.CLIENT)
-					public void run()
-					{
-						ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlacedItem.class, new TileEntityRendererPlacedItem());
-					}
-				}.run();
-			}
-		});
+        // タイルエンティティレンダラー
+        erMod.init.register(e -> {
+            if (ApiMain.side().isClient()) {
+                new Object() {
+                    @SideOnly(Side.CLIENT)
+                    public void run() {
+                        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlacedItem.class, new TileEntityRendererPlacedItem());
+                    }
+                }.run();
+            }
+        });
 
-		// キーバインディング
-		erMod.initKeyBinding.register(() -> {
-			if (ApiMain.side().isClient()) {
-				new Object() {
-					@SideOnly(Side.CLIENT)
-					public void run()
-					{
-						ApiPlacedItem.keyBindingPlaceItem = new KeyBinding("miragefairy2019.placeItem", KeyConflictContext.IN_GAME, Keyboard.KEY_P, "miragefairy2019 (MirageFairy2019)");
-					}
-				}.run();
-			}
-		});
+        // キーバインディング
+        erMod.initKeyBinding.register(() -> {
+            if (ApiMain.side().isClient()) {
+                new Object() {
+                    @SideOnly(Side.CLIENT)
+                    public void run() {
+                        ApiPlacedItem.keyBindingPlaceItem = new KeyBinding("miragefairy2019.placeItem", KeyConflictContext.IN_GAME, Keyboard.KEY_P, "miragefairy2019 (MirageFairy2019)");
+                    }
+                }.run();
+            }
+        });
 
-		// ネットワークメッセージ登録
-		erMod.registerNetworkMessage.register(() -> {
-			ApiMain.simpleNetworkWrapper.registerMessage(PacketPlaceItem.class, MessagePlaceItem.class, 0, Side.SERVER);
-		});
+        // ネットワークメッセージ登録
+        erMod.registerNetworkMessage.register(() -> {
+            ApiMain.simpleNetworkWrapper.registerMessage(PacketPlaceItem.class, MessagePlaceItem.class, 0, Side.SERVER);
+        });
 
-		// キーリスナー
-		erMod.init.register(e -> {
-			if (ApiMain.side().isClient()) {
-				new Object() {
-					@SideOnly(Side.CLIENT)
-					public void run()
-					{
-						ClientRegistry.registerKeyBinding(ApiPlacedItem.keyBindingPlaceItem);
-						MinecraftForge.EVENT_BUS.register(new Object() {
-							@SubscribeEvent
-							public void accept(InputUpdateEvent event)
-							{
-								while (ApiPlacedItem.keyBindingPlaceItem.isPressed()) {
-									EntityPlayer player = event.getEntityPlayer();
-									if (!player.isSpectator()) {
-										if (player instanceof EntityPlayerSP) {
-											RayTraceResult result = player.rayTrace(player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), 0);
-											if (result.typeOfHit == Type.BLOCK) {
-												ApiMain.simpleNetworkWrapper.sendToServer(new MessagePlaceItem(
-													player.world.getBlockState(result.getBlockPos()).getBlock().isReplaceable(player.world, result.getBlockPos())
-														? result.getBlockPos()
-														: result.getBlockPos().offset(result.sideHit)));
-											}
-										}
-									}
-								}
-							}
-						});
-					}
-				}.run();
-			}
-		});
+        // キーリスナー
+        erMod.init.register(e -> {
+            if (ApiMain.side().isClient()) {
+                new Object() {
+                    @SideOnly(Side.CLIENT)
+                    public void run() {
+                        ClientRegistry.registerKeyBinding(ApiPlacedItem.keyBindingPlaceItem);
+                        MinecraftForge.EVENT_BUS.register(new Object() {
+                            @SubscribeEvent
+                            public void accept(InputUpdateEvent event) {
+                                while (ApiPlacedItem.keyBindingPlaceItem.isPressed()) {
+                                    EntityPlayer player = event.getEntityPlayer();
+                                    if (!player.isSpectator()) {
+                                        if (player instanceof EntityPlayerSP) {
+                                            RayTraceResult result = player.rayTrace(player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue(), 0);
+                                            if (result.typeOfHit == Type.BLOCK) {
+                                                ApiMain.simpleNetworkWrapper.sendToServer(new MessagePlaceItem(
+                                                        player.world.getBlockState(result.getBlockPos()).getBlock().isReplaceable(player.world, result.getBlockPos())
+                                                                ? result.getBlockPos()
+                                                                : result.getBlockPos().offset(result.sideHit)));
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }.run();
+            }
+        });
 
-	}
+    }
 
 }

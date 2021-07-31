@@ -10,13 +10,11 @@ import net.minecraftforge.common.crafting.JsonContext;
 /**
  * 耐久が削れたクラフティングツールを鉱石辞書名にマッチさせるためのIngredient
  */
-public class IngredientFactoryOreIngredientComplex implements IIngredientFactory
-{
+public class IngredientFactoryOreIngredientComplex implements IIngredientFactory {
 
-	@Override
-	public Ingredient parse(JsonContext context, JsonObject json)
-	{
-		return new OreIngredientComplex(JsonUtils.getString(json, "ore"));
-	}
+    @Override
+    public Ingredient parse(JsonContext context, JsonObject json) {
+        return new OreIngredientComplex(JsonUtils.getString(json, "ore"));
+    }
 
 }

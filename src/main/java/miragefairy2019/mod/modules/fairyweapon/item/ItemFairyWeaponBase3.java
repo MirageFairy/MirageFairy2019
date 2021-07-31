@@ -27,97 +27,89 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase
-{
+public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
 
-	public abstract IMagicHandler getMagicHandler(IPlayerAura playerAura, IFairyType fairyType);
+    public abstract IMagicHandler getMagicHandler(IPlayerAura playerAura, IFairyType fairyType);
 
-	//
+    //
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-		tooltip.add(RED + "Right click to use magic");
-		super.addInformationFunctions(itemStack, world, tooltip, flag);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag) {
+        tooltip.add(RED + "Right click to use magic");
+        super.addInformationFunctions(itemStack, world, tooltip, flag);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-		if (flag.isAdvanced()) {
-			getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAura(), fairyType).getMagicStatusList()
-				.forEach(magicStatus -> tooltip.add(magicStatus.getLocalizedName()
-					.appendText(": ")
-					.appendSibling(magicStatus.getDisplayValue())
-					.appendText(" (")
-					.appendSibling(magicStatus.getFormula(new IMagicFactorProvider() {
-						@Override
-						public ITextComponent mana(EnumManaType manaType)
-						{
-							return manaType.getDisplayName();
-						}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag) {
+        if (flag.isAdvanced()) {
+            getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAura(), fairyType).getMagicStatusList()
+                    .forEach(magicStatus -> tooltip.add(magicStatus.getLocalizedName()
+                            .appendText(": ")
+                            .appendSibling(magicStatus.getDisplayValue())
+                            .appendText(" (")
+                            .appendSibling(magicStatus.getFormula(new IMagicFactorProvider() {
+                                @Override
+                                public ITextComponent mana(EnumManaType manaType) {
+                                    return manaType.getDisplayName();
+                                }
 
-						@Override
-						public ITextComponent ability(EnumAbilityType abilityType)
-						{
-							return abilityType.getDisplayName();
-						}
+                                @Override
+                                public ITextComponent ability(EnumAbilityType abilityType) {
+                                    return abilityType.getDisplayName();
+                                }
 
-						@Override
-						public ITextComponent cost()
-						{
-							return new TextComponentString("")
-								.appendSibling(new TextComponentTranslation("mirageFairy2019.formula.source.cost.name")
-									.setStyle(new Style().setColor(DARK_PURPLE)));
-						}
-					}))
-					.appendText(")")
-					.setStyle(new Style().setColor(BLUE))
-					.getFormattedText()));
-		} else {
-			getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAura(), fairyType).getMagicStatusList()
-				.forEach(magicStatus -> tooltip.add(magicStatus.getLocalizedName()
-					.appendText(": ")
-					.appendSibling(magicStatus.getDisplayValue())
-					.setStyle(new Style().setColor(BLUE))
-					.getFormattedText()));
-		}
-	}
+                                @Override
+                                public ITextComponent cost() {
+                                    return new TextComponentString("")
+                                            .appendSibling(new TextComponentTranslation("mirageFairy2019.formula.source.cost.name")
+                                                    .setStyle(new Style().setColor(DARK_PURPLE)));
+                                }
+                            }))
+                            .appendText(")")
+                            .setStyle(new Style().setColor(BLUE))
+                            .getFormattedText()));
+        } else {
+            getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAura(), fairyType).getMagicStatusList()
+                    .forEach(magicStatus -> tooltip.add(magicStatus.getLocalizedName()
+                            .appendText(": ")
+                            .appendSibling(magicStatus.getDisplayValue())
+                            .setStyle(new Style().setColor(BLUE))
+                            .getFormattedText()));
+        }
+    }
 
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-	{
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 
-		// アイテム取得
-		ItemStack itemStack = player.getHeldItem(hand);
+        // アイテム取得
+        ItemStack itemStack = player.getHeldItem(hand);
 
-		// 妖精取得
-		IFairyType fairyType = findFairy(itemStack, player).map(t -> t.y).orElseGet(ApiFairy::empty);
+        // 妖精取得
+        IFairyType fairyType = findFairy(itemStack, player).map(t -> t.y).orElseGet(ApiFairy::empty);
 
-		return new ActionResult<>(getMagicHandler(ApiPlayerAura.playerAuraManager.getServerPlayerAura(player), fairyType).getMagicExecutor(world, player, itemStack).onItemRightClick(hand), itemStack);
-	}
+        return new ActionResult<>(getMagicHandler(ApiPlayerAura.playerAuraManager.getServerPlayerAura(player), fairyType).getMagicExecutor(world, player, itemStack).onItemRightClick(hand), itemStack);
+    }
 
-	@Override
-	public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
-	{
+    @Override
+    public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected) {
 
-		// クライアントサイドでなければ中止
-		if (!ApiMain.side().isClient()) return;
+        // クライアントサイドでなければ中止
+        if (!ApiMain.side().isClient()) return;
 
-		// プレイヤー取得
-		if (!(entity instanceof EntityPlayer)) return;
-		EntityPlayer player = (EntityPlayer) entity;
+        // プレイヤー取得
+        if (!(entity instanceof EntityPlayer)) return;
+        EntityPlayer player = (EntityPlayer) entity;
 
-		// アイテム取得
-		if (!isSelected && player.getHeldItemOffhand() != itemStack) return;
+        // アイテム取得
+        if (!isSelected && player.getHeldItemOffhand() != itemStack) return;
 
-		// 妖精取得
-		IFairyType fairyType = findFairy(itemStack, player).map(t -> t.y).orElseGet(ApiFairy::empty);
+        // 妖精取得
+        IFairyType fairyType = findFairy(itemStack, player).map(t -> t.y).orElseGet(ApiFairy::empty);
 
-		getMagicHandler(ApiPlayerAura.playerAuraManager.getServerPlayerAura(player), fairyType).getMagicExecutor(world, player, itemStack).onUpdate(itemSlot, isSelected);
+        getMagicHandler(ApiPlayerAura.playerAuraManager.getServerPlayerAura(player), fairyType).getMagicExecutor(world, player, itemStack).onUpdate(itemSlot, isSelected);
 
-	}
+    }
 
 }

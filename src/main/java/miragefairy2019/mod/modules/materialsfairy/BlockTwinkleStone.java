@@ -9,46 +9,41 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockTwinkleStone extends BlockMulti<EnumVariantTwinkleStone>
-{
+public class BlockTwinkleStone extends BlockMulti<EnumVariantTwinkleStone> {
 
-	public BlockTwinkleStone()
-	{
-		super(Material.ROCK, EnumVariantTwinkleStone.variantList);
+    public BlockTwinkleStone() {
+        super(Material.ROCK, EnumVariantTwinkleStone.variantList);
 
-		// style
-		setSoundType(SoundType.STONE);
+        // style
+        setSoundType(SoundType.STONE);
 
-		// 挙動
-		setHardness(3.0F);
-		setResistance(5.0F);
+        // 挙動
+        setHardness(3.0F);
+        setResistance(5.0F);
 
-		for (EnumVariantTwinkleStone variant : variantList) {
-			setHarvestLevel("pickaxe", 0, getState(variant));
-		}
+        for (EnumVariantTwinkleStone variant : variantList) {
+            setHarvestLevel("pickaxe", 0, getState(variant));
+        }
 
-	}
+    }
 
-	//
+    //
 
-	@Override
-	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
-	{
-		return true;
-	}
+    @Override
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+        return true;
+    }
 
-	//
+    //
 
-	@Override
-	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		return getVariant(state).lightValue;
-	}
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return getVariant(state).lightValue;
+    }
 
-	@Override
-	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type)
-	{
-		return false;
-	}
+    @Override
+    public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type) {
+        return false;
+    }
 
 }

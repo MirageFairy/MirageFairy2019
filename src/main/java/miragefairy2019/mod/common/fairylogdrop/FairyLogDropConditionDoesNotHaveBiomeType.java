@@ -6,26 +6,22 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
-public class FairyLogDropConditionDoesNotHaveBiomeType implements IFairyLogDropCondition
-{
+public class FairyLogDropConditionDoesNotHaveBiomeType implements IFairyLogDropCondition {
 
-	private final Type biome;
+    private final Type biome;
 
-	public FairyLogDropConditionDoesNotHaveBiomeType(Type biome)
-	{
-		this.biome = biome;
-	}
+    public FairyLogDropConditionDoesNotHaveBiomeType(Type biome) {
+        this.biome = biome;
+    }
 
-	@Override
-	public boolean test(World world, BlockPos blockPos)
-	{
-		return !BiomeDictionary.hasType(world.getBiome(blockPos), biome);
-	}
+    @Override
+    public boolean test(World world, BlockPos blockPos) {
+        return !BiomeDictionary.hasType(world.getBiome(blockPos), biome);
+    }
 
-	@Override
-	public String getLocalizedDescription()
-	{
-		return "NOT(" + biome.getName() + ")";
-	}
+    @Override
+    public String getLocalizedDescription() {
+        return "NOT(" + biome.getName() + ")";
+    }
 
 }

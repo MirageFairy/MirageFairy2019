@@ -8,17 +8,14 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-public class MagicExecutor
-{
+public class MagicExecutor {
 
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-	{
-		return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
-	}
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+        return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
+    }
 
-	public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
-	{
+    public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected) {
 
-	}
+    }
 
 }

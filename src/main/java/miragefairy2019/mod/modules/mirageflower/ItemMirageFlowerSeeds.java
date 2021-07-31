@@ -17,61 +17,56 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
-public class ItemMirageFlowerSeeds<T extends Block & IPlantable> extends Item implements IPlantable
-{
+public class ItemMirageFlowerSeeds<T extends Block & IPlantable> extends Item implements IPlantable {
 
-	private T block;
+    private T block;
 
-	public ItemMirageFlowerSeeds(T block)
-	{
-		this.block = block;
-	}
+    public ItemMirageFlowerSeeds(T block) {
+        this.block = block;
+    }
 
-	// 動作
+    // 動作
 
-	/**
-	 * 使われるとその場に植物を設置する。
-	 */
-	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		ItemStack itemStack = player.getHeldItem(hand);
-		IBlockState blockState = world.getBlockState(pos);
-		if (facing == EnumFacing.UP
-			&& player.canPlayerEdit(pos.offset(facing), facing, itemStack)
-			&& blockState.getBlock().canSustainPlant(blockState, world, pos, EnumFacing.UP, block)
-			&& world.isAirBlock(pos.up())) {
+    /**
+     * 使われるとその場に植物を設置する。
+     */
+    @Override
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        ItemStack itemStack = player.getHeldItem(hand);
+        IBlockState blockState = world.getBlockState(pos);
+        if (facing == EnumFacing.UP
+                && player.canPlayerEdit(pos.offset(facing), facing, itemStack)
+                && blockState.getBlock().canSustainPlant(blockState, world, pos, EnumFacing.UP, block)
+                && world.isAirBlock(pos.up())) {
 
-			world.setBlockState(pos.up(), getPlant(world, pos));
+            world.setBlockState(pos.up(), getPlant(world, pos));
 
-			if (player instanceof EntityPlayerMP) {
-				CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, pos.up(), itemStack);
-			}
+            if (player instanceof EntityPlayerMP) {
+                CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, pos.up(), itemStack);
+            }
 
-			itemStack.shrink(1);
+            itemStack.shrink(1);
 
-			return EnumActionResult.SUCCESS;
-		} else {
-			return EnumActionResult.FAIL;
-		}
-	}
+            return EnumActionResult.SUCCESS;
+        } else {
+            return EnumActionResult.FAIL;
+        }
+    }
 
-	/**
-	 * 常に草の上に蒔ける。
-	 */
-	@Override
-	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos)
-	{
-		return EnumPlantType.Plains;
-	}
+    /**
+     * 常に草の上に蒔ける。
+     */
+    @Override
+    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+        return EnumPlantType.Plains;
+    }
 
-	/**
-	 * 常にAge0のミラ花を与える。
-	 */
-	@Override
-	public IBlockState getPlant(IBlockAccess world, BlockPos pos)
-	{
-		return ApiMirageFlower.blockMirageFlower.getDefaultState();
-	}
+    /**
+     * 常にAge0のミラ花を与える。
+     */
+    @Override
+    public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
+        return ApiMirageFlower.blockMirageFlower.getDefaultState();
+    }
 
 }

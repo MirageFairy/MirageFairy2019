@@ -8,13 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public interface IFairyLogDropRegistry
-{
+public interface IFairyLogDropRegistry {
 
-	public void addRecipe(IFairyLogDropRecipe recipe);
+    public void addRecipe(IFairyLogDropRecipe recipe);
 
-	public ISuppliterator<IFairyLogDropRecipe> getRecipes();
+    public ISuppliterator<IFairyLogDropRecipe> getRecipes();
 
-	public Optional<ItemStack> drop(World world, BlockPos blockPos, Random random);
+    public Optional<ItemStack> drop(World world, BlockPos blockPos, Random random);
 
 }

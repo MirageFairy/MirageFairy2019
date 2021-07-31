@@ -4,21 +4,20 @@ import miragefairy2019.mod.lib.multi.IBlockVariant;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public interface IBlockVariantMaterials extends IBlockVariant
-{
+public interface IBlockVariantMaterials extends IBlockVariant {
 
-	public float getBlockHardness();
+    public float getBlockHardness();
 
-	public String getHarvestTool();
+    public String getHarvestTool();
 
-	public int getHarvestLevel();
+    public int getHarvestLevel();
 
-	public int getBurnTime();
+    public int getBurnTime();
 
-	public SoundType getSoundType();
+    public SoundType getSoundType();
 
-	public boolean isFallable();
+    public boolean isFallable();
 
-	public Material getMaterial();
+    public Material getMaterial();
 
 }

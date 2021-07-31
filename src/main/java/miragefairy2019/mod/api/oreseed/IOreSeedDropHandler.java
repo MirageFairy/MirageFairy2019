@@ -8,9 +8,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public interface IOreSeedDropHandler
-{
+public interface IOreSeedDropHandler {
 
-	public Optional<WeightedRandom.Item<Supplier<IBlockState>>> getDrop(EnumOreSeedType type, EnumOreSeedShape shape, World world, BlockPos pos);
+    public Optional<WeightedRandom.Item<Supplier<IBlockState>>> getDrop(EnumOreSeedType type, EnumOreSeedShape shape, World world, BlockPos pos);
 
 }

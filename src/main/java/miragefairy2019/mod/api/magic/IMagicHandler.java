@@ -5,11 +5,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public interface IMagicHandler
-{
+public interface IMagicHandler {
 
-	public ISuppliterator<IMagicStatus<?>> getMagicStatusList();
+    public ISuppliterator<IMagicStatus<?>> getMagicStatusList();
 
-	public IMagicExecutor getMagicExecutor(World world, EntityPlayer player, ItemStack itemStack);
+    public IMagicExecutor getMagicExecutor(World world, EntityPlayer player, ItemStack itemStack);
 
 }

@@ -3,21 +3,20 @@ package miragefairy2019.mod.api.fairy;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public interface IFairyType
-{
+public interface IFairyType {
 
-	public boolean isEmpty();
+    public boolean isEmpty();
 
-	public ResourceLocation getName();
+    public ResourceLocation getName();
 
-	public int getColor();
+    public int getColor();
 
-	public double getCost();
+    public double getCost();
 
-	public IManaSet getManas();
+    public IManaSet getManas();
 
-	public IAbilitySet getAbilities();
+    public IAbilitySet getAbilities();
 
-	public ITextComponent getDisplayName();
+    public ITextComponent getDisplayName();
 
 }

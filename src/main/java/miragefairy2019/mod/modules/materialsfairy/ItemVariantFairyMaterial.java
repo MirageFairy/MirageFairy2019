@@ -12,49 +12,42 @@ import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import net.minecraft.item.ItemStack;
 
-public class ItemVariantFairyMaterial extends ItemVariantMaterial
-{
+public class ItemVariantFairyMaterial extends ItemVariantMaterial {
 
-	public final int tier;
+    public final int tier;
 
-	public ItemVariantFairyMaterial(String registryName, String unlocalizedName, int tier)
-	{
-		super(registryName, unlocalizedName);
-		this.tier = tier;
-	}
+    public ItemVariantFairyMaterial(String registryName, String unlocalizedName, int tier) {
+        super(registryName, unlocalizedName);
+        this.tier = tier;
+    }
 
-	//
+    //
 
-	private IComposite composite = ApiComposite.composite();
+    private IComposite composite = ApiComposite.composite();
 
-	public void addComponent(IComponentInstance componentInstance)
-	{
-		composite = composite.add(componentInstance);
-	}
+    public void addComponent(IComponentInstance componentInstance) {
+        composite = composite.add(componentInstance);
+    }
 
-	public void addComponent(IComposite composite)
-	{
-		this.composite = this.composite.add(composite);
-	}
+    public void addComponent(IComposite composite) {
+        this.composite = this.composite.add(composite);
+    }
 
-	public IComposite getComposite()
-	{
-		return composite;
-	}
+    public IComposite getComposite() {
+        return composite;
+    }
 
-	//
+    //
 
-	public Optional<Supplier<ItemStack>> osContainerItem = Optional.empty();
+    public Optional<Supplier<ItemStack>> osContainerItem = Optional.empty();
 
-	public ItemStack getContainerItem()
-	{
-		return osContainerItem.map(Supplier<ItemStack>::get).orElse(ItemStack.EMPTY);
-	}
+    public ItemStack getContainerItem() {
+        return osContainerItem.map(Supplier<ItemStack>::get).orElse(ItemStack.EMPTY);
+    }
 
-	public static <V extends ItemVariantFairyMaterial> Function<Configurator<V>, Monad<Configurator<V>>> setterContainerItem(Optional<Supplier<ItemStack>> osContainerItem)
-	{
-		return c -> Monad.of(c)
-			.peek(c2 -> c2.erMod.registerItem.register(ic -> c2.get().osContainerItem = osContainerItem));
-	}
+    public static <V extends ItemVariantFairyMaterial> Function<Configurator<V>, Monad<Configurator<V>>> setterContainerItem(Optional<Supplier<ItemStack>> osContainerItem) {
+        return c -> Monad.of(c)
+                .peek(c2 -> c2.erMod.registerItem.register(ic -> c2.get().osContainerItem = osContainerItem));
+    }
 
 }

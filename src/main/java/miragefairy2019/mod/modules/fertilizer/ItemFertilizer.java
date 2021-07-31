@@ -10,26 +10,24 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-class ItemFertilizer extends Item
-{
+class ItemFertilizer extends Item {
 
-	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos blockPos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		ItemStack itemStack = player.getHeldItem(hand);
+    @Override
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos blockPos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        ItemStack itemStack = player.getHeldItem(hand);
 
-		if (!player.canPlayerEdit(blockPos.offset(facing), facing, itemStack)) {
-			return EnumActionResult.FAIL;
-		}
+        if (!player.canPlayerEdit(blockPos.offset(facing), facing, itemStack)) {
+            return EnumActionResult.FAIL;
+        }
 
-		if (ItemDye.applyBonemeal(itemStack, world, blockPos, player, hand)) {
-			if (!world.isRemote) {
-				world.playEvent(2005, blockPos, 0);
-			}
-			return EnumActionResult.SUCCESS;
-		}
+        if (ItemDye.applyBonemeal(itemStack, world, blockPos, player, hand)) {
+            if (!world.isRemote) {
+                world.playEvent(2005, blockPos, 0);
+            }
+            return EnumActionResult.SUCCESS;
+        }
 
-		return EnumActionResult.PASS;
-	}
+        return EnumActionResult.PASS;
+    }
 
 }

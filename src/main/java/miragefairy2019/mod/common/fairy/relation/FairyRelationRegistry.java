@@ -9,21 +9,18 @@ import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
-public class FairyRelationRegistry implements IFairyRelationRegistry
-{
+public class FairyRelationRegistry implements IFairyRelationRegistry {
 
-	private List<IIngredientFairyRelation> list = new ArrayList<>();
+    private List<IIngredientFairyRelation> list = new ArrayList<>();
 
-	@Override
-	public void registerIngredientFairyRelation(double relevance, ItemStack itemStackFairy, Ingredient ingredient)
-	{
-		list.add(new IngredientFairyRelation(itemStackFairy, ingredient, relevance));
-	}
+    @Override
+    public void registerIngredientFairyRelation(double relevance, ItemStack itemStackFairy, Ingredient ingredient) {
+        list.add(new IngredientFairyRelation(itemStackFairy, ingredient, relevance));
+    }
 
-	@Override
-	public ISuppliterator<IIngredientFairyRelation> getIngredientFairyRelations()
-	{
-		return ISuppliterator.ofIterable(list);
-	}
+    @Override
+    public ISuppliterator<IIngredientFairyRelation> getIngredientFairyRelations() {
+        return ISuppliterator.ofIterable(list);
+    }
 
 }

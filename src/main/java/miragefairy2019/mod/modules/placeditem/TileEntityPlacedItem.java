@@ -12,80 +12,70 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 
-public class TileEntityPlacedItem extends TileEntity
-{
+public class TileEntityPlacedItem extends TileEntity {
 
-	public NonNullList<ItemStack> itemStacks = NonNullList.withSize(1, ItemStack.EMPTY);
-	public double rotation;
-	public boolean standing;
+    public NonNullList<ItemStack> itemStacks = NonNullList.withSize(1, ItemStack.EMPTY);
+    public double rotation;
+    public boolean standing;
 
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-	{
-		super.writeToNBT(nbt);
-		ItemStackHelper.saveAllItems(nbt, itemStacks);
-		nbt.setDouble("rotation", rotation);
-		nbt.setBoolean("standing", standing);
-		return nbt;
-	}
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+        ItemStackHelper.saveAllItems(nbt, itemStacks);
+        nbt.setDouble("rotation", rotation);
+        nbt.setBoolean("standing", standing);
+        return nbt;
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		super.readFromNBT(nbt);
-		ItemStackHelper.loadAllItems(nbt, itemStacks);
-		rotation = nbt.getDouble("rotation");
-		standing = nbt.getBoolean("standing");
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+        ItemStackHelper.loadAllItems(nbt, itemStacks);
+        rotation = nbt.getDouble("rotation");
+        standing = nbt.getBoolean("standing");
+    }
 
-	@Nullable
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		return new SPacketUpdateTileEntity(pos, 9, getUpdateTag());
-	}
+    @Nullable
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(pos, 9, getUpdateTag());
+    }
 
-	public NBTTagCompound getUpdateTag()
-	{
-		return writeToNBT(new NBTTagCompound());
-	}
+    public NBTTagCompound getUpdateTag() {
+        return writeToNBT(new NBTTagCompound());
+    }
 
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.getNbtCompound());
-		super.onDataPacket(net, pkt);
-	}
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        readFromNBT(pkt.getNbtCompound());
+        super.onDataPacket(net, pkt);
+    }
 
-	public void sendUpdatePacket()
-	{
-		for (EntityPlayer entityPlayer : world.playerEntities) {
-			if (entityPlayer instanceof EntityPlayerMP) {
-				((EntityPlayerMP) entityPlayer).connection.sendPacket(getUpdatePacket());
-			}
-		}
-	}
+    public void sendUpdatePacket() {
+        for (EntityPlayer entityPlayer : world.playerEntities) {
+            if (entityPlayer instanceof EntityPlayerMP) {
+                ((EntityPlayerMP) entityPlayer).connection.sendPacket(getUpdatePacket());
+            }
+        }
+    }
 
-	//
+    //
 
-	public void setItemStack(ItemStack itemStack)
-	{
-		itemStacks.set(0, itemStack);
-	}
+    public void setItemStack(ItemStack itemStack) {
+        itemStacks.set(0, itemStack);
+    }
 
-	public ItemStack getItemStack()
-	{
-		return itemStacks.get(0);
-	}
+    public ItemStack getItemStack() {
+        return itemStacks.get(0);
+    }
 
-	//
+    //
 
-	public void action()
-	{
-		rotation += 45;
-		if (rotation >= 360) {
-			rotation -= 360;
-			standing = !standing;
-		}
-	}
+    public void action() {
+        rotation += 45;
+        if (rotation >= 360) {
+            rotation -= 360;
+            standing = !standing;
+        }
+    }
 
 }

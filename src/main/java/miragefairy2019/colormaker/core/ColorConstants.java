@@ -5,21 +5,18 @@ import java.util.Hashtable;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public class ColorConstants
-{
+public class ColorConstants {
 
-	private Hashtable<String, Supplier<Color>> table = new Hashtable<>();
+    private Hashtable<String, Supplier<Color>> table = new Hashtable<>();
 
-	public void addConstant(String colorName, Supplier<Color> sColor)
-	{
-		table.put(colorName, sColor);
-	}
+    public void addConstant(String colorName, Supplier<Color> sColor) {
+        table.put(colorName, sColor);
+    }
 
-	public Color getColor(ColorIdentifier colorIdentifier)
-	{
-		return Optional.ofNullable(table.get(colorIdentifier.string))
-			.map(Supplier::get)
-			.orElseGet(() -> colorIdentifier.decode());
-	}
+    public Color getColor(ColorIdentifier colorIdentifier) {
+        return Optional.ofNullable(table.get(colorIdentifier.string))
+                .map(Supplier::get)
+                .orElseGet(() -> colorIdentifier.decode());
+    }
 
 }

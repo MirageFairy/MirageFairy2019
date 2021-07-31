@@ -1,17 +1,15 @@
 package miragefairy2019.mod.modules.fairyweapon.magic;
 
-public enum EnumTargetExecutability
-{
-	EFFECTIVE(0x00FF00),
-	OVERFLOWED(0xFF8800),
-	INVALID(0xFF0000),
-	;
+public enum EnumTargetExecutability {
+    EFFECTIVE(0x00FF00),
+    OVERFLOWED(0xFF8800),
+    INVALID(0xFF0000),
+    ;
 
-	public final int color;
+    public final int color;
 
-	private EnumTargetExecutability(int color)
-	{
-		this.color = color;
-	}
+    private EnumTargetExecutability(int color) {
+        this.color = color;
+    }
 
 }

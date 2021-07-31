@@ -6,11 +6,10 @@ import mirrg.boron.util.suppliterator.ISuppliterator;
 /**
  * すべてのアビリティの値は非負です。
  */
-public interface IAbilitySet
-{
+public interface IAbilitySet {
 
-	public ISuppliterator<Tuple<IAbilityType, Double>> getAbilities();
+    public ISuppliterator<Tuple<IAbilityType, Double>> getAbilities();
 
-	public double getAbilityPower(IAbilityType abilityType);
+    public double getAbilityPower(IAbilityType abilityType);
 
 }

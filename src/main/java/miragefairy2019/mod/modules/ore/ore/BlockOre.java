@@ -19,69 +19,61 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockOre<V extends IBlockVariantOre> extends BlockMulti<V>
-{
+public class BlockOre<V extends IBlockVariantOre> extends BlockMulti<V> {
 
-	public BlockOre(IListBlockVariant<V> variantList)
-	{
-		super(Material.ROCK, variantList);
+    public BlockOre(IListBlockVariant<V> variantList) {
+        super(Material.ROCK, variantList);
 
-		// style
-		setSoundType(SoundType.STONE);
+        // style
+        setSoundType(SoundType.STONE);
 
-		// 挙動
-		setHardness(3.0F);
-		setResistance(5.0F);
+        // 挙動
+        setHardness(3.0F);
+        setResistance(5.0F);
 
-		for (V variant : variantList) {
-			setHarvestLevel(variant.getHarvestTool(), variant.getHarvestLevel(), getState(variant));
-		}
+        for (V variant : variantList) {
+            setHarvestLevel(variant.getHarvestTool(), variant.getHarvestLevel(), getState(variant));
+        }
 
-	}
+    }
 
-	//
+    //
 
-	@Override
-	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
-	{
-		return getVariant(blockState).getHardness();
-	}
+    @Override
+    public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+        return getVariant(blockState).getHardness();
+    }
 
-	@Override
-	public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion)
-	{
-		return getVariant(world.getBlockState(pos)).getResistance();
-	}
+    @Override
+    public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion) {
+        return getVariant(world.getBlockState(pos)).getResistance();
+    }
 
-	//
+    //
 
-	@Override
-	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-	{
-		Random random = world instanceof World ? ((World) world).rand : RANDOM;
-		getVariant(state).getDrops(drops, random, this, getMetaFromState(state), fortune);
-	}
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        Random random = world instanceof World ? ((World) world).rand : RANDOM;
+        getVariant(state).getDrops(drops, random, this, getMetaFromState(state), fortune);
+    }
 
-	@Override
-	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
-	{
-		return true;
-	}
+    @Override
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+        return true;
+    }
 
-	@Override
-	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune)
-	{
-		Random random = world instanceof World ? ((World) world).rand : new Random();
-		return getVariant(state).getExpDrop(random, fortune);
-	}
+    @Override
+    public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
+        Random random = world instanceof World ? ((World) world).rand : new Random();
+        return getVariant(state).getExpDrop(random, fortune);
+    }
 
-	//
+    //
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
-	{
-		return BlockRenderLayer.CUTOUT_MIPPED;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
 
 }

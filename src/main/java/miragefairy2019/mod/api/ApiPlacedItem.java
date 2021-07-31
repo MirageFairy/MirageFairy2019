@@ -5,12 +5,11 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ApiPlacedItem
-{
+public class ApiPlacedItem {
 
-	@SideOnly(Side.CLIENT)
-	public static KeyBinding keyBindingPlaceItem;
+    @SideOnly(Side.CLIENT)
+    public static KeyBinding keyBindingPlaceItem;
 
-	public static Block blockPlacedItem;
+    public static Block blockPlacedItem;
 
 }

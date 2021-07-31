@@ -10,12 +10,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public interface IItemFairyWeapon
-{
+public interface IItemFairyWeapon {
 
-	@SideOnly(Side.CLIENT)
-	public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag);
+    @SideOnly(Side.CLIENT)
+    public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag);
 
-	public ITextComponent getFairyMagicDisplayName(ItemStack itemStack);
+    public ITextComponent getFairyMagicDisplayName(ItemStack itemStack);
 
 }

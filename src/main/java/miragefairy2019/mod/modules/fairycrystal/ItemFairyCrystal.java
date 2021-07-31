@@ -10,27 +10,24 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemFairyCrystal extends ItemMulti<VariantFairyCrystal>
-{
+public class ItemFairyCrystal extends ItemMulti<VariantFairyCrystal> {
 
-	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		ItemStack itemStackCrystal = player.getHeldItem(hand);
-		if (itemStackCrystal.isEmpty()) return EnumActionResult.PASS;
+    @Override
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        ItemStack itemStackCrystal = player.getHeldItem(hand);
+        if (itemStackCrystal.isEmpty()) return EnumActionResult.PASS;
 
-		VariantFairyCrystal variant = getVariant(itemStackCrystal).orElse(null);
-		if (variant == null) return EnumActionResult.PASS;
+        VariantFairyCrystal variant = getVariant(itemStackCrystal).orElse(null);
+        if (variant == null) return EnumActionResult.PASS;
 
-		return variant.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
-	}
+        return variant.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+    }
 
-	@Override
-	public String getItemStackDisplayName(ItemStack itemStack)
-	{
-		VariantFairyCrystal variant = getVariant(itemStack).orElse(null);
-		if (variant == null) return UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".name");
-		return UtilsMinecraft.translateToLocalFormatted("item." + variant.unlocalizedName + ".name");
-	}
+    @Override
+    public String getItemStackDisplayName(ItemStack itemStack) {
+        VariantFairyCrystal variant = getVariant(itemStack).orElse(null);
+        if (variant == null) return UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".name");
+        return UtilsMinecraft.translateToLocalFormatted("item." + variant.unlocalizedName + ".name");
+    }
 
 }

@@ -11,62 +11,57 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class FairySelector implements IFairySelector
-{
+public class FairySelector implements IFairySelector {
 
-	private FairyRelationRegistry fairyRelationRegistry;
+    private FairyRelationRegistry fairyRelationRegistry;
 
-	public FairySelector(FairyRelationRegistry fairyRelationRegistry)
-	{
-		this.fairyRelationRegistry = fairyRelationRegistry;
-	}
+    public FairySelector(FairyRelationRegistry fairyRelationRegistry) {
+        this.fairyRelationRegistry = fairyRelationRegistry;
+    }
 
-	//
+    //
 
-	private Set<ItemStack> itemStacks = new HashSet<>();
+    private Set<ItemStack> itemStacks = new HashSet<>();
 
-	@Override
-	public IFairySelector add(ItemStack... itemStacks)
-	{
-		ISuppliterator.ofObjArray(itemStacks)
-			.forEach(this.itemStacks::add);
-		return this;
-	}
+    @Override
+    public IFairySelector add(ItemStack... itemStacks) {
+        ISuppliterator.ofObjArray(itemStacks)
+                .forEach(this.itemStacks::add);
+        return this;
+    }
 
-	private Set<IBlockState> blockStates = new HashSet<>();
+    private Set<IBlockState> blockStates = new HashSet<>();
 
-	@Override
-	public IFairySelector add(IBlockState... blockStates)
-	{
-		ISuppliterator.ofObjArray(blockStates)
-			.forEach(this.blockStates::add);
-		return this;
-	}
+    @Override
+    public IFairySelector add(IBlockState... blockStates) {
+        ISuppliterator.ofObjArray(blockStates)
+                .forEach(this.blockStates::add);
+        return this;
+    }
 
-	//
+    //
 
-	@Override
-	public ISuppliterator<ResourceLocation> select()
-	{
-		return ISuppliterator.ofIterable(fairyRelationRegistry.map.entrySet())
-			.filter(e -> {
-				FairyRelation fairyRelation = e.getValue();
+    @Override
+    public ISuppliterator<ResourceLocation> select() {
+        return ISuppliterator.ofIterable(fairyRelationRegistry.map.entrySet())
+                .filter(e -> {
+                    FairyRelation fairyRelation = e.getValue();
 
-				for (Predicate<ItemStack> predicate : fairyRelation.predicatesItemStack) {
-					for (ItemStack itemStack : itemStacks) {
-						if (predicate.test(itemStack)) return true;
-					}
-				}
+                    for (Predicate<ItemStack> predicate : fairyRelation.predicatesItemStack) {
+                        for (ItemStack itemStack : itemStacks) {
+                            if (predicate.test(itemStack)) return true;
+                        }
+                    }
 
-				for (Predicate<IBlockState> predicate : fairyRelation.predicatesBlockState) {
-					for (IBlockState blockState : blockStates) {
-						if (predicate.test(blockState)) return true;
-					}
-				}
+                    for (Predicate<IBlockState> predicate : fairyRelation.predicatesBlockState) {
+                        for (IBlockState blockState : blockStates) {
+                            if (predicate.test(blockState)) return true;
+                        }
+                    }
 
-				return false;
-			})
-			.map(Entry::getKey);
-	}
+                    return false;
+                })
+                .map(Entry::getKey);
+    }
 
 }

@@ -1,10 +1,9 @@
 package miragefairy2019.mod.api.composite;
 
-public interface IComponentInstance
-{
+public interface IComponentInstance {
 
-	public IComponent getComponent();
+    public IComponent getComponent();
 
-	public long getNanoAmount();
+    public long getNanoAmount();
 
 }

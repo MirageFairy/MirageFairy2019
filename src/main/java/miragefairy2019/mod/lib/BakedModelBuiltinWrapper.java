@@ -18,73 +18,62 @@ import net.minecraft.util.EnumFacing;
 /**
  * {@link #isBuiltInRenderer()}が常に真を返すだけのラッパーです。
  */
-public class BakedModelBuiltinWrapper implements IBakedModel
-{
+public class BakedModelBuiltinWrapper implements IBakedModel {
 
-	public final IBakedModel bakedModel;
+    public final IBakedModel bakedModel;
 
-	public BakedModelBuiltinWrapper(IBakedModel bakedModel)
-	{
-		this.bakedModel = bakedModel;
-	}
+    public BakedModelBuiltinWrapper(IBakedModel bakedModel) {
+        this.bakedModel = bakedModel;
+    }
 
-	@Override
-	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand)
-	{
-		return bakedModel.getQuads(state, side, rand);
-	}
+    @Override
+    public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
+        return bakedModel.getQuads(state, side, rand);
+    }
 
-	@Override
-	public boolean isAmbientOcclusion()
-	{
-		return bakedModel.isAmbientOcclusion();
-	}
+    @Override
+    public boolean isAmbientOcclusion() {
+        return bakedModel.isAmbientOcclusion();
+    }
 
-	@Override
-	public boolean isGui3d()
-	{
-		return bakedModel.isGui3d();
-	}
+    @Override
+    public boolean isGui3d() {
+        return bakedModel.isGui3d();
+    }
 
-	/**
-	 * 常に真を返します。
-	 */
-	@Override
-	public boolean isBuiltInRenderer()
-	{
-		return true;
-	}
+    /**
+     * 常に真を返します。
+     */
+    @Override
+    public boolean isBuiltInRenderer() {
+        return true;
+    }
 
-	@Override
-	public TextureAtlasSprite getParticleTexture()
-	{
-		return bakedModel.getParticleTexture();
-	}
+    @Override
+    public TextureAtlasSprite getParticleTexture() {
+        return bakedModel.getParticleTexture();
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public ItemCameraTransforms getItemCameraTransforms()
-	{
-		return bakedModel.getItemCameraTransforms();
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public ItemCameraTransforms getItemCameraTransforms() {
+        return bakedModel.getItemCameraTransforms();
+    }
 
-	@Override
-	public ItemOverrideList getOverrides()
-	{
-		return bakedModel.getOverrides();
-	}
+    @Override
+    public ItemOverrideList getOverrides() {
+        return bakedModel.getOverrides();
+    }
 
-	@Override
-	public boolean isAmbientOcclusion(IBlockState state)
-	{
-		return bakedModel.isAmbientOcclusion(state);
-	}
+    @Override
+    public boolean isAmbientOcclusion(IBlockState state) {
+        return bakedModel.isAmbientOcclusion(state);
+    }
 
-	@Override
-	public Pair<? extends IBakedModel, Matrix4f> handlePerspective(TransformType cameraTransformType)
-	{
-		Pair<? extends IBakedModel, Matrix4f> pair = bakedModel.handlePerspective(cameraTransformType);
-		return Pair.of(new BakedModelBuiltinWrapper(pair.getLeft()), pair.getRight());
-	}
+    @Override
+    public Pair<? extends IBakedModel, Matrix4f> handlePerspective(TransformType cameraTransformType) {
+        Pair<? extends IBakedModel, Matrix4f> pair = bakedModel.handlePerspective(cameraTransformType);
+        return Pair.of(new BakedModelBuiltinWrapper(pair.getLeft()), pair.getRight());
+    }
 
 }

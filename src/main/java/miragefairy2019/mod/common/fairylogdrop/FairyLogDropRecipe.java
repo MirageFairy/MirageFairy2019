@@ -9,40 +9,34 @@ import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropRecipe;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.item.ItemStack;
 
-public final class FairyLogDropRecipe implements IFairyLogDropRecipe
-{
+public final class FairyLogDropRecipe implements IFairyLogDropRecipe {
 
-	private double rate;
-	private Supplier<ItemStack> sItemStackOutput;
-	private List<IFairyLogDropCondition> conditions = new ArrayList<>();
+    private double rate;
+    private Supplier<ItemStack> sItemStackOutput;
+    private List<IFairyLogDropCondition> conditions = new ArrayList<>();
 
-	public FairyLogDropRecipe(double rate, Supplier<ItemStack> sItemStackOutput)
-	{
-		this.rate = rate;
-		this.sItemStackOutput = sItemStackOutput;
-	}
+    public FairyLogDropRecipe(double rate, Supplier<ItemStack> sItemStackOutput) {
+        this.rate = rate;
+        this.sItemStackOutput = sItemStackOutput;
+    }
 
-	@Override
-	public double getRate()
-	{
-		return rate;
-	}
+    @Override
+    public double getRate() {
+        return rate;
+    }
 
-	@Override
-	public ItemStack getItemStackOutput()
-	{
-		return sItemStackOutput.get();
-	}
+    @Override
+    public ItemStack getItemStackOutput() {
+        return sItemStackOutput.get();
+    }
 
-	public void addCondition(IFairyLogDropCondition condition)
-	{
-		conditions.add(condition);
-	}
+    public void addCondition(IFairyLogDropCondition condition) {
+        conditions.add(condition);
+    }
 
-	@Override
-	public ISuppliterator<IFairyLogDropCondition> getConditions()
-	{
-		return ISuppliterator.ofIterable(conditions);
-	}
+    @Override
+    public ISuppliterator<IFairyLogDropCondition> getConditions() {
+        return ISuppliterator.ofIterable(conditions);
+    }
 
 }

@@ -11,38 +11,35 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityRendererPlacedItem extends TileEntitySpecialRenderer<TileEntityPlacedItem>
-{
+public class TileEntityRendererPlacedItem extends TileEntitySpecialRenderer<TileEntityPlacedItem> {
 
-	@Override
-	public void render(TileEntityPlacedItem tileEntity, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-	{
-		GlStateManager.pushMatrix();
-		GlStateManager.translate(x, y, z);
-		GlStateManager.translate(0.5, 1 / 64.0, 0.5);
-		GlStateManager.rotate((float) -tileEntity.rotation, 0, 1, 0);
-		if (tileEntity.standing) {
-			GlStateManager.translate(0, 0.25, 0);
-		} else {
-			GlStateManager.rotate(90, 1, 0, 0);
-		}
-		ItemStack itemStack = tileEntity.getItemStack();
-		renderItem(itemStack.isEmpty() ? new ItemStack(Blocks.BARRIER) : itemStack);
-		GlStateManager.popMatrix();
-	}
+    @Override
+    public void render(TileEntityPlacedItem tileEntity, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x, y, z);
+        GlStateManager.translate(0.5, 1 / 64.0, 0.5);
+        GlStateManager.rotate((float) -tileEntity.rotation, 0, 1, 0);
+        if (tileEntity.standing) {
+            GlStateManager.translate(0, 0.25, 0);
+        } else {
+            GlStateManager.rotate(90, 1, 0, 0);
+        }
+        ItemStack itemStack = tileEntity.getItemStack();
+        renderItem(itemStack.isEmpty() ? new ItemStack(Blocks.BARRIER) : itemStack);
+        GlStateManager.popMatrix();
+    }
 
-	private void renderItem(ItemStack itemStack)
-	{
-		if (itemStack.isEmpty()) return;
+    private void renderItem(ItemStack itemStack) {
+        if (itemStack.isEmpty()) return;
 
-		GlStateManager.disableLighting();
-		GlStateManager.scale(0.5F, 0.5F, 0.5F);
-		GlStateManager.pushAttrib();
-		RenderHelper.enableStandardItemLighting();
-		Minecraft.getMinecraft().getRenderItem().renderItem(itemStack, ItemCameraTransforms.TransformType.FIXED);
-		RenderHelper.disableStandardItemLighting();
-		GlStateManager.popAttrib();
-		GlStateManager.enableLighting();
-	}
+        GlStateManager.disableLighting();
+        GlStateManager.scale(0.5F, 0.5F, 0.5F);
+        GlStateManager.pushAttrib();
+        RenderHelper.enableStandardItemLighting();
+        Minecraft.getMinecraft().getRenderItem().renderItem(itemStack, ItemCameraTransforms.TransformType.FIXED);
+        RenderHelper.disableStandardItemLighting();
+        GlStateManager.popAttrib();
+        GlStateManager.enableLighting();
+    }
 
 }

@@ -15,146 +15,136 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
-{
+public class RecipesSphereReplacement extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
-	public RecipesSphereReplacement()
-	{
-		setRegistryName(new ResourceLocation(ModMirageFairy2019.MODID, "sphere_replacement"));
-	}
+    public RecipesSphereReplacement() {
+        setRegistryName(new ResourceLocation(ModMirageFairy2019.MODID, "sphere_replacement"));
+    }
 
-	//
+    //
 
-	protected static class MatchResult
-	{
+    protected static class MatchResult {
 
-		public ISphereReplacementItem sphereReplacementItem;
-		public ItemStack itemStackSphereReplacement;
-		public NonNullList<Ingredient> repairmentSpheres;
+        public ISphereReplacementItem sphereReplacementItem;
+        public ItemStack itemStackSphereReplacement;
+        public NonNullList<Ingredient> repairmentSpheres;
 
-	}
+    }
 
-	protected Optional<MatchResult> match(InventoryCrafting inventoryCrafting)
-	{
-		MatchResult result = new MatchResult();
+    protected Optional<MatchResult> match(InventoryCrafting inventoryCrafting) {
+        MatchResult result = new MatchResult();
 
-		boolean[] used = new boolean[inventoryCrafting.getSizeInventory()];
+        boolean[] used = new boolean[inventoryCrafting.getSizeInventory()];
 
-		// 妖精武器探索
-		a:
-		{
-			for (int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
-				if (!used[i]) {
+        // 妖精武器探索
+        a:
+        {
+            for (int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
+                if (!used[i]) {
 
-					ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
-					Item item = itemStack.getItem();
-					if (item instanceof ISphereReplacementItem) {
-						if (((ISphereReplacementItem) item).canSphereReplace(itemStack)) {
+                    ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
+                    Item item = itemStack.getItem();
+                    if (item instanceof ISphereReplacementItem) {
+                        if (((ISphereReplacementItem) item).canSphereReplace(itemStack)) {
 
-							result.itemStackSphereReplacement = itemStack;
-							result.sphereReplacementItem = (ISphereReplacementItem) item;
-							used[i] = true;
-							break a;
+                            result.itemStackSphereReplacement = itemStack;
+                            result.sphereReplacementItem = (ISphereReplacementItem) item;
+                            used[i] = true;
+                            break a;
 
-						}
-					}
+                        }
+                    }
 
-				}
-			}
-			return Optional.empty();
-		}
+                }
+            }
+            return Optional.empty();
+        }
 
-		// スフィア探索
-		result.repairmentSpheres = result.sphereReplacementItem.getRepairmentSpheres(result.itemStackSphereReplacement);
-		if (result.repairmentSpheres.size() == 0) return Optional.empty();
-		for (Ingredient sphere : result.repairmentSpheres) {
+        // スフィア探索
+        result.repairmentSpheres = result.sphereReplacementItem.getRepairmentSpheres(result.itemStackSphereReplacement);
+        if (result.repairmentSpheres.size() == 0) return Optional.empty();
+        for (Ingredient sphere : result.repairmentSpheres) {
 
-			a:
-			{
-				for (int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
-					if (!used[i]) {
+            a:
+            {
+                for (int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
+                    if (!used[i]) {
 
-						ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
-						if (sphere.test(itemStack)) {
+                        ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
+                        if (sphere.test(itemStack)) {
 
-							used[i] = true;
-							break a;
+                            used[i] = true;
+                            break a;
 
-						}
+                        }
 
-					}
-				}
-				return Optional.empty();
-			}
+                    }
+                }
+                return Optional.empty();
+            }
 
-		}
+        }
 
-		// 余りがあってはならない
-		for (int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
-			if (!used[i]) {
-				if (!inventoryCrafting.getStackInSlot(i).isEmpty()) {
-					return Optional.empty();
-				}
-			}
-		}
+        // 余りがあってはならない
+        for (int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
+            if (!used[i]) {
+                if (!inventoryCrafting.getStackInSlot(i).isEmpty()) {
+                    return Optional.empty();
+                }
+            }
+        }
 
-		return Optional.of(result);
-	}
+        return Optional.of(result);
+    }
 
-	//
+    //
 
-	@Override
-	public boolean matches(InventoryCrafting inventoryCrafting, World world)
-	{
-		return match(inventoryCrafting).isPresent();
-	}
+    @Override
+    public boolean matches(InventoryCrafting inventoryCrafting, World world) {
+        return match(inventoryCrafting).isPresent();
+    }
 
-	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting)
-	{
-		MatchResult nResult = match(inventoryCrafting).orElse(null);
-		if (nResult == null) return ItemStack.EMPTY;
-		return nResult.sphereReplacementItem.getSphereReplacedItem(nResult.itemStackSphereReplacement);
-	}
+    @Override
+    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
+        MatchResult nResult = match(inventoryCrafting).orElse(null);
+        if (nResult == null) return ItemStack.EMPTY;
+        return nResult.sphereReplacementItem.getSphereReplacedItem(nResult.itemStackSphereReplacement);
+    }
 
-	@Override
-	public ItemStack getRecipeOutput()
-	{
-		return ItemStack.EMPTY;
-	}
+    @Override
+    public ItemStack getRecipeOutput() {
+        return ItemStack.EMPTY;
+    }
 
-	@Override
-	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inventoryCrafting)
-	{
-		MatchResult nResult = match(inventoryCrafting).orElse(null);
-		if (nResult == null) return NonNullList.create();
+    @Override
+    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inventoryCrafting) {
+        MatchResult nResult = match(inventoryCrafting).orElse(null);
+        if (nResult == null) return NonNullList.create();
 
-		NonNullList<ItemStack> list = NonNullList.withSize(inventoryCrafting.getSizeInventory(), ItemStack.EMPTY);
+        NonNullList<ItemStack> list = NonNullList.withSize(inventoryCrafting.getSizeInventory(), ItemStack.EMPTY);
 
-		for (int i = 0; i < list.size(); ++i) {
-			ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
+        for (int i = 0; i < list.size(); ++i) {
+            ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
 
-			if (itemStack == nResult.itemStackSphereReplacement) {
-				// ステッキを使用してもステッキは消費される
-			} else {
-				list.set(i, ForgeHooks.getContainerItem(itemStack));
-			}
+            if (itemStack == nResult.itemStackSphereReplacement) {
+                // ステッキを使用してもステッキは消費される
+            } else {
+                list.set(i, ForgeHooks.getContainerItem(itemStack));
+            }
 
-		}
+        }
 
-		return list;
-	}
+        return list;
+    }
 
-	@Override
-	public boolean isDynamic()
-	{
-		return true;
-	}
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
 
-	@Override
-	public boolean canFit(int width, int height)
-	{
-		return width * height >= 1;
-	}
+    @Override
+    public boolean canFit(int width, int height) {
+        return width * height >= 1;
+    }
 
 }

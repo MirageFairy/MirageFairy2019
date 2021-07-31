@@ -1,20 +1,17 @@
 package miragefairy2019.mod.lib.multi;
 
-public class ItemVariantMaterial extends ItemVariant
-{
+public class ItemVariantMaterial extends ItemVariant {
 
-	public final String registryName;
-	public final String unlocalizedName;
+    public final String registryName;
+    public final String unlocalizedName;
 
-	public ItemVariantMaterial(String registryName, String unlocalizedName)
-	{
-		this.registryName = registryName;
-		this.unlocalizedName = unlocalizedName;
-	}
+    public ItemVariantMaterial(String registryName, String unlocalizedName) {
+        this.registryName = registryName;
+        this.unlocalizedName = unlocalizedName;
+    }
 
-	public String getUnlocalizedName()
-	{
-		return "item." + unlocalizedName;
-	}
+    public String getUnlocalizedName() {
+        return "item." + unlocalizedName;
+    }
 
 }

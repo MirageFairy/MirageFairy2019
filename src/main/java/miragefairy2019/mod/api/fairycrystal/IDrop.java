@@ -2,11 +2,10 @@ package miragefairy2019.mod.api.fairycrystal;
 
 import net.minecraft.item.ItemStack;
 
-public interface IDrop
-{
+public interface IDrop {
 
-	public ItemStack getItemStack();
+    public ItemStack getItemStack();
 
-	public double getWeight();
+    public double getWeight();
 
 }

@@ -6,24 +6,20 @@ import miragefairy2019.mod.modules.fairy.ComponentsAbilityType;
 import miragefairy2019.mod.modules.fairy.FairyTypeEmpty;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
 
-public class ApiFairy
-{
+public class ApiFairy {
 
-	public static IFairyRelationRegistry fairyRelationRegistry;
+    public static IFairyRelationRegistry fairyRelationRegistry;
 
-	public static void init(EventRegistryMod erMod)
-	{
-		ModuleFairy.init(erMod);
-	}
+    public static void init(EventRegistryMod erMod) {
+        ModuleFairy.init(erMod);
+    }
 
-	public static IComponentAbilityType getComponentAbilityType(IAbilityType abilityType)
-	{
-		return ComponentsAbilityType.getComponentAbilityType(abilityType);
-	}
+    public static IComponentAbilityType getComponentAbilityType(IAbilityType abilityType) {
+        return ComponentsAbilityType.getComponentAbilityType(abilityType);
+    }
 
-	public static IFairyType empty()
-	{
-		return new FairyTypeEmpty();
-	}
+    public static IFairyType empty() {
+        return new FairyTypeEmpty();
+    }
 
 }

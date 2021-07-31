@@ -5,38 +5,32 @@ import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.ISource;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
-public class FormulaConstantObject<T> implements IFormula<T>
-{
+public class FormulaConstantObject<T> implements IFormula<T> {
 
-	private T value;
+    private T value;
 
-	public FormulaConstantObject(T value)
-	{
-		this.value = value;
-	}
+    public FormulaConstantObject(T value) {
+        this.value = value;
+    }
 
-	@Override
-	public T get(IFairyType fairyType)
-	{
-		return value;
-	}
+    @Override
+    public T get(IFairyType fairyType) {
+        return value;
+    }
 
-	@Override
-	public T getMax()
-	{
-		return value;
-	}
+    @Override
+    public T getMax() {
+        return value;
+    }
 
-	@Override
-	public T getMin()
-	{
-		return value;
-	}
+    @Override
+    public T getMin() {
+        return value;
+    }
 
-	@Override
-	public ISuppliterator<ISource> getSources()
-	{
-		return ISuppliterator.empty();
-	}
+    @Override
+    public ISuppliterator<ISource> getSources() {
+        return ISuppliterator.empty();
+    }
 
 }

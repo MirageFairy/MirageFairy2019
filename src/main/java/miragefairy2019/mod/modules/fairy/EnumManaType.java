@@ -7,41 +7,36 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
-public enum EnumManaType implements IManaType
-{
-	shine(TextFormatting.WHITE),
-	fire(TextFormatting.RED),
-	wind(TextFormatting.GREEN),
-	gaia(TextFormatting.YELLOW),
-	aqua(TextFormatting.BLUE),
-	dark(TextFormatting.DARK_GRAY),
-	;
+public enum EnumManaType implements IManaType {
+    shine(TextFormatting.WHITE),
+    fire(TextFormatting.RED),
+    wind(TextFormatting.GREEN),
+    gaia(TextFormatting.YELLOW),
+    aqua(TextFormatting.BLUE),
+    dark(TextFormatting.DARK_GRAY),
+    ;
 
-	public final TextFormatting textColor;
+    public final TextFormatting textColor;
 
-	private EnumManaType(TextFormatting textColor)
-	{
-		this.textColor = textColor;
-	}
+    private EnumManaType(TextFormatting textColor) {
+        this.textColor = textColor;
+    }
 
-	@Override
-	public String getName()
-	{
-		return name();
-	}
+    @Override
+    public String getName() {
+        return name();
+    }
 
-	@Override
-	public TextFormatting getTextColor()
-	{
-		return textColor;
-	}
+    @Override
+    public TextFormatting getTextColor() {
+        return textColor;
+    }
 
-	@Override
-	public ITextComponent getDisplayName()
-	{
-		return new TextComponentString("")
-			.appendSibling(new TextComponentTranslation("mirageFairy2019.mana." + getName() + ".name")
-				.setStyle(new Style().setColor(getTextColor())));
-	}
+    @Override
+    public ITextComponent getDisplayName() {
+        return new TextComponentString("")
+                .appendSibling(new TextComponentTranslation("mirageFairy2019.mana." + getName() + ".name")
+                        .setStyle(new Style().setColor(getTextColor())));
+    }
 
 }

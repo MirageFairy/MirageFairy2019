@@ -5,13 +5,12 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public interface IFairySelector
-{
+public interface IFairySelector {
 
-	public IFairySelector add(ItemStack... itemStacks);
+    public IFairySelector add(ItemStack... itemStacks);
 
-	public IFairySelector add(IBlockState... blockStates);
+    public IFairySelector add(IBlockState... blockStates);
 
-	public ISuppliterator<ResourceLocation> select();
+    public ISuppliterator<ResourceLocation> select();
 
 }

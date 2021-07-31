@@ -9,40 +9,36 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-public class ItemFairyWeaponBase2 extends ItemFairyWeaponBase
-{
+public class ItemFairyWeaponBase2 extends ItemFairyWeaponBase {
 
-	protected MagicExecutor getExecutor(World world, ItemStack itemStack, EntityPlayer player)
-	{
-		return new MagicExecutor();
-	}
+    protected MagicExecutor getExecutor(World world, ItemStack itemStack, EntityPlayer player) {
+        return new MagicExecutor();
+    }
 
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-	{
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 
-		// アイテム取得
-		ItemStack itemStack = player.getHeldItem(hand);
+        // アイテム取得
+        ItemStack itemStack = player.getHeldItem(hand);
 
-		return getExecutor(world, itemStack, player).onItemRightClick(world, player, hand);
-	}
+        return getExecutor(world, itemStack, player).onItemRightClick(world, player, hand);
+    }
 
-	@Override
-	public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
-	{
+    @Override
+    public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected) {
 
-		// クライアントのみ
-		if (!ApiMain.side().isClient()) return;
+        // クライアントのみ
+        if (!ApiMain.side().isClient()) return;
 
-		// プレイヤー取得
-		if (!(entity instanceof EntityPlayer)) return;
-		EntityPlayer player = (EntityPlayer) entity;
+        // プレイヤー取得
+        if (!(entity instanceof EntityPlayer)) return;
+        EntityPlayer player = (EntityPlayer) entity;
 
-		// アイテム取得
-		if (!isSelected && player.getHeldItemOffhand() != itemStack) return;
+        // アイテム取得
+        if (!isSelected && player.getHeldItemOffhand() != itemStack) return;
 
-		getExecutor(world, itemStack, player).onUpdate(itemStack, world, entity, itemSlot, isSelected);
+        getExecutor(world, itemStack, player).onUpdate(itemStack, world, entity, itemSlot, isSelected);
 
-	}
+    }
 
 }

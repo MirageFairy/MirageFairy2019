@@ -4,11 +4,10 @@ import java.util.Optional;
 
 import net.minecraft.block.Block;
 
-public interface IPickableRegistry
-{
+public interface IPickableRegistry {
 
-	public void register(Block block, IPickable pickable);
+    public void register(Block block, IPickable pickable);
 
-	public Optional<IPickable> get(Block block);
+    public Optional<IPickable> get(Block block);
 
 }

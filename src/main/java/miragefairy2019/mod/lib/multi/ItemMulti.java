@@ -11,53 +11,46 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public class ItemMulti<V extends ItemVariant> extends Item
-{
+public class ItemMulti<V extends ItemVariant> extends Item {
 
-	public ItemMulti()
-	{
-		this.setHasSubtypes(true);
-		this.setMaxDamage(0);
-	}
+    public ItemMulti() {
+        this.setHasSubtypes(true);
+        this.setMaxDamage(0);
+    }
 
-	//
+    //
 
-	private Map<Integer, V> map = new HashMap<>();
+    private Map<Integer, V> map = new HashMap<>();
 
-	public void registerVariant(int metadata, V variant)
-	{
-		if (map.containsKey(metadata)) throw new IllegalArgumentException("Illegal metadata: " + metadata);
-		map.put(metadata, variant);
+    public void registerVariant(int metadata, V variant) {
+        if (map.containsKey(metadata)) throw new IllegalArgumentException("Illegal metadata: " + metadata);
+        map.put(metadata, variant);
 
-		variant.setItem(this);
-		variant.setMetadata(metadata);
-	}
+        variant.setItem(this);
+        variant.setMetadata(metadata);
+    }
 
-	public Optional<V> getVariant(ItemStack itemStack)
-	{
-		return getVariant(itemStack.getMetadata());
-	}
+    public Optional<V> getVariant(ItemStack itemStack) {
+        return getVariant(itemStack.getMetadata());
+    }
 
-	public Optional<V> getVariant(int metadata)
-	{
-		return Optional.ofNullable(map.get(metadata));
-	}
+    public Optional<V> getVariant(int metadata) {
+        return Optional.ofNullable(map.get(metadata));
+    }
 
-	public Iterable<Tuple<Integer, V>> getVariants()
-	{
-		return ISuppliterator.ofIterable(map.entrySet())
-			.map(e -> Tuple.of(e.getKey(), e.getValue()));
-	}
+    public Iterable<Tuple<Integer, V>> getVariants() {
+        return ISuppliterator.ofIterable(map.entrySet())
+                .map(e -> Tuple.of(e.getKey(), e.getValue()));
+    }
 
-	//
+    //
 
-	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
-	{
-		if (!isInCreativeTab(tab)) return;
-		map.keySet().forEach(metadata -> {
-			items.add(new ItemStack(this, 1, metadata));
-		});
-	}
+    @Override
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) return;
+        map.keySet().forEach(metadata -> {
+            items.add(new ItemStack(this, 1, metadata));
+        });
+    }
 
 }

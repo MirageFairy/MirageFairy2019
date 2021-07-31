@@ -21,85 +21,80 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = ModMirageFairy2019.MODID, name = ModMirageFairy2019.NAME, version = ModMirageFairy2019.VERSION, acceptableRemoteVersions = ModMirageFairy2019.ACCEPTABLE_REMOTE_VERSIONS)
-public class ModMirageFairy2019
-{
+public class ModMirageFairy2019 {
 
-	public static final String MODID = "miragefairy2019";
-	public static final String NAME = "MirageFairy2019";
-	public static final String VERSION = "{version}";
-	public static final String ACCEPTABLE_REMOTE_VERSIONS = "{acceptableRemoteVersions}";
+    public static final String MODID = "miragefairy2019";
+    public static final String NAME = "MirageFairy2019";
+    public static final String VERSION = "{version}";
+    public static final String ACCEPTABLE_REMOTE_VERSIONS = "{acceptableRemoteVersions}";
 
-	public EventRegistryMod erMod = new EventRegistryMod();
+    public EventRegistryMod erMod = new EventRegistryMod();
 
-	public ModMirageFairy2019()
-	{
-		ModuleFairyStick.init(erMod);
+    public ModMirageFairy2019() {
+        ModuleFairyStick.init(erMod);
 
-		ApiMain.init(erMod);
-		ApiFairy.init(erMod);
-		ModuleFairyCrystal.init(erMod);
-		miragefairy2019.mod.modules.fairyweapon.item.Loader.init(erMod);
-		miragefairy2019.mod.modules.fairyweapon.damagesource.Loader.init(erMod);
-		miragefairy2019.mod.modules.fairyweapon.recipe.Loader.init(erMod);
-		ApiFertilizer.init(erMod);
-		ApiMaterialsFairy.init(erMod);
-		ModuleMirageFlower.init(erMod);
-		ModuleOreSeed.init(erMod);
-		ModuleOre.init(erMod);
-		ModuleSphere.init(erMod);
-		ModulePlacedItem.init(erMod);
-		ModulePlayerAura.init(erMod);
+        ApiMain.init(erMod);
+        ApiFairy.init(erMod);
+        ModuleFairyCrystal.init(erMod);
+        miragefairy2019.mod.modules.fairyweapon.item.Loader.init(erMod);
+        miragefairy2019.mod.modules.fairyweapon.damagesource.Loader.init(erMod);
+        miragefairy2019.mod.modules.fairyweapon.recipe.Loader.init(erMod);
+        ApiFertilizer.init(erMod);
+        ApiMaterialsFairy.init(erMod);
+        ModuleMirageFlower.init(erMod);
+        ModuleOreSeed.init(erMod);
+        ModuleOre.init(erMod);
+        ModuleSphere.init(erMod);
+        ModulePlacedItem.init(erMod);
+        ModulePlayerAura.init(erMod);
 
-		erMod.initRegistry.trigger().run();
+        erMod.initRegistry.trigger().run();
 
-		erMod.initCreativeTab.trigger().run();
+        erMod.initCreativeTab.trigger().run();
 
-	}
+    }
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
 
-		erMod.preInit.trigger().accept(event);
+        erMod.preInit.trigger().accept(event);
 
-		InitializationContext initializationContext = new InitializationContext(MODID, event.getSide(), ApiMain.creativeTab());
+        InitializationContext initializationContext = new InitializationContext(MODID, event.getSide(), ApiMain.creativeTab());
 
-		erMod.registerBlock.trigger().accept(initializationContext);
+        erMod.registerBlock.trigger().accept(initializationContext);
 
-		erMod.registerItem.trigger().accept(initializationContext);
+        erMod.registerItem.trigger().accept(initializationContext);
 
-		erMod.createItemStack.trigger().accept(initializationContext);
+        erMod.createItemStack.trigger().accept(initializationContext);
 
-		erMod.hookDecorator.trigger().run();
+        erMod.hookDecorator.trigger().run();
 
-		erMod.initKeyBinding.trigger().run();
+        erMod.initKeyBinding.trigger().run();
 
-	}
+    }
 
-	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
 
-		erMod.init.trigger().accept(event);
+        erMod.init.trigger().accept(event);
 
-		erMod.addRecipe.trigger().run();
+        erMod.addRecipe.trigger().run();
 
-		if (event.getSide().isClient()) erMod.registerItemColorHandler.trigger().run();
+        if (event.getSide().isClient()) erMod.registerItemColorHandler.trigger().run();
 
-		erMod.registerTileEntity.trigger().run();
+        erMod.registerTileEntity.trigger().run();
 
-		erMod.initNetworkChannel.trigger().run();
+        erMod.initNetworkChannel.trigger().run();
 
-		erMod.registerNetworkMessage.trigger().run();
+        erMod.registerNetworkMessage.trigger().run();
 
-	}
+    }
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event)
-	{
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
 
-		erMod.postInit.trigger().accept(event);
+        erMod.postInit.trigger().accept(event);
 
-	}
+    }
 
 }

@@ -4,19 +4,16 @@ import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropCondition;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class FairyLogDropConditionCanRain implements IFairyLogDropCondition
-{
+public class FairyLogDropConditionCanRain implements IFairyLogDropCondition {
 
-	@Override
-	public boolean test(World world, BlockPos blockPos)
-	{
-		return world.getBiome(blockPos).canRain();
-	}
+    @Override
+    public boolean test(World world, BlockPos blockPos) {
+        return world.getBiome(blockPos).canRain();
+    }
 
-	@Override
-	public String getLocalizedDescription()
-	{
-		return "RAINY";
-	}
+    @Override
+    public String getLocalizedDescription() {
+        return "RAINY";
+    }
 
 }

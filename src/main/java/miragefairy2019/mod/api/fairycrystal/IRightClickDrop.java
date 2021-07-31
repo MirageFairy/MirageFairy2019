@@ -13,59 +13,48 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
-public interface IRightClickDrop
-{
+public interface IRightClickDrop {
 
-	public IDrop getDrop();
+    public IDrop getDrop();
 
-	public default boolean testUseItem(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		return false;
-	}
+    public default boolean testUseItem(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        return false;
+    }
 
-	public default boolean testWorld(World world, BlockPos pos)
-	{
-		return false;
-	}
+    public default boolean testWorld(World world, BlockPos pos) {
+        return false;
+    }
 
-	public default boolean testBlock(Block block)
-	{
-		return false;
-	}
+    public default boolean testBlock(Block block) {
+        return false;
+    }
 
-	public default boolean testBlockState(World world, BlockPos blockPos, IBlockState blockState)
-	{
-		return false;
-	}
+    public default boolean testBlockState(World world, BlockPos blockPos, IBlockState blockState) {
+        return false;
+    }
 
-	public default boolean testItem(Item item)
-	{
-		return false;
-	}
+    public default boolean testItem(Item item) {
+        return false;
+    }
 
-	public default boolean testItemStack(ItemStack itemStack)
-	{
-		return false;
-	}
+    public default boolean testItemStack(ItemStack itemStack) {
+        return false;
+    }
 
-	public default boolean testBiome(Biome biome)
-	{
-		return false;
-	}
+    public default boolean testBiome(Biome biome) {
+        return false;
+    }
 
-	public default boolean testBiomeType(BiomeDictionary.Type biomeType)
-	{
-		return false;
-	}
+    public default boolean testBiomeType(BiomeDictionary.Type biomeType) {
+        return false;
+    }
 
-	public default boolean testClassEntity(Class<? extends Entity> classEntity)
-	{
-		return false;
-	}
+    public default boolean testClassEntity(Class<? extends Entity> classEntity) {
+        return false;
+    }
 
-	public default boolean testEntity(Entity entity)
-	{
-		return false;
-	}
+    public default boolean testEntity(Entity entity) {
+        return false;
+    }
 
 }
