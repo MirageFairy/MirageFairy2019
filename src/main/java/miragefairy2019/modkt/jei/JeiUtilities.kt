@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.GlStateManager
 
 class JeiUtilities {
     companion object {
+        fun FontRenderer.drawStringRightAligned(text: String, x: Int, y: Int, color: Int) = drawString(text, x - getStringWidth(text), y, color)
         fun FontRenderer.drawStringCentered(text: String, x: Int, y: Int, color: Int) = drawString(text, x - getStringWidth(text) / 2, y, color)
         fun drawSlot(x: Float, y: Float) {
             GlStateManager.pushMatrix()

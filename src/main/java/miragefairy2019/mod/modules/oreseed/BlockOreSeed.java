@@ -23,17 +23,14 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Optional;
 import java.util.Random;
-import java.util.function.Supplier;
 
 public class BlockOreSeed extends Block {
 
     private EnumOreSeedType type;
-    private Supplier<IBlockState> sBlockStateDefault;
 
-    public BlockOreSeed(EnumOreSeedType type, Supplier<IBlockState> sBlockStateDefault) {
+    public BlockOreSeed(EnumOreSeedType type) {
         super(Material.ROCK);
         this.type = type;
-        this.sBlockStateDefault = sBlockStateDefault;
 
         // meta
         setDefaultState(blockState.getBaseState()
@@ -150,7 +147,7 @@ public class BlockOreSeed extends Block {
                         getVariant(state).shape,
                         world,
                         pos),
-                random)).orElseGet(() -> sBlockStateDefault.get());
+                random)).orElseGet(() -> type.getBlockState());
 
         Deque<BlockPos> poses = new ArrayDeque<>();
         poses.addLast(pos);

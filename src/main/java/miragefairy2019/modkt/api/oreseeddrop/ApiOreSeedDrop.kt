@@ -2,6 +2,8 @@ package miragefairy2019.modkt.api.oreseeddrop
 
 import miragefairy2019.mod.lib.WeightedRandom
 import net.minecraft.block.state.IBlockState
+import net.minecraft.init.Blocks
+import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.*
@@ -12,6 +14,7 @@ object ApiOreSeedDrop {
 
 interface IOreSeedDropRegistry {
     fun register(handler: IOreSeedDropHandler)
+    val recipes: Iterable<IOreSeedDropHandler>
     fun getDropList(environment: OreSeedDropEnvironment): List<OreSeedDrop>
     fun drop(environment: OreSeedDropEnvironment, random: Random): IBlockState? {
         val dropList = getDropList(environment)
@@ -20,12 +23,28 @@ interface IOreSeedDropRegistry {
     }
 }
 
-typealias IOreSeedDropHandler = (OreSeedDropEnvironment) -> OreSeedDrop?
+interface IOreSeedDropHandler {
+    fun getDrop(environment: OreSeedDropEnvironment): OreSeedDrop?
+    fun getType(): EnumOreSeedType
+    fun getShape(): EnumOreSeedShape
+    fun getWeight(): Double
+    fun getRequirements(): Iterable<String>
+    fun getOutputItemStacks(): Iterable<ItemStack>
+}
 
 data class OreSeedDropEnvironment(val type: EnumOreSeedType, val shape: EnumOreSeedShape, val world: World, val blockPos: BlockPos)
 
-enum class EnumOreSeedType {
-    STONE, NETHERRACK, END_STONE,
+enum class EnumOreSeedType(
+        private val sBlockState: () -> IBlockState,
+        private val sItemStack: () -> ItemStack
+) {
+    STONE({ Blocks.STONE.defaultState }, { ItemStack(Blocks.STONE) }),
+    NETHERRACK({ Blocks.NETHERRACK.defaultState }, { ItemStack(Blocks.NETHERRACK) }),
+    END_STONE({ Blocks.END_STONE.defaultState }, { ItemStack(Blocks.END_STONE) }),
+    ;
+
+    fun getBlockState() = sBlockState()
+    fun getItemStack() = sItemStack()
 }
 
 enum class EnumOreSeedShape {
@@ -35,7 +54,7 @@ enum class EnumOreSeedShape {
 
 typealias OreSeedDrop = WeightedRandom.Item<() -> IBlockState>
 
-// TODO to typealias
 interface IOreSeedDropRequirement {
     fun test(environment: OreSeedDropEnvironment): Boolean
+    fun getDescriptions(): Iterable<String>
 }

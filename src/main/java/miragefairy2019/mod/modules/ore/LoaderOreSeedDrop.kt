@@ -1,6 +1,8 @@
 package miragefairy2019.mod.modules.ore
 
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.*
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.TOURMALINE_ORE
 import miragefairy2019.modkt.api.oreseeddrop.ApiOreSeedDrop
 import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape
@@ -15,6 +17,7 @@ import miragefairy2019.modkt.impl.oreseeddrop.Vein
 import miragefairy2019.modkt.impl.oreseeddrop.invoke
 import miragefairy2019.modkt.impl.oreseeddrop.register
 import net.minecraft.block.state.IBlockState
+import net.minecraft.item.ItemStack
 import miragefairy2019.modkt.impl.oreseeddrop.Elements as el
 
 /*
@@ -37,55 +40,58 @@ object LoaderOreSeedDrop {
     fun loadOreSeedDrop() {
         ApiOreSeedDrop.oreSeedDropRegistry {
 
-            fun OreSeedDropRegistryScope.TypedOreSeedDropRegistryScope.vein(shape: EnumOreSeedShape, weight: Double, block: () -> IBlockState, vararg generationConditions: IOreSeedDropRequirement) {
-                registry.register(type, POINT, weight / 2, block, *generationConditions)
-                registry.register(type, TINY, weight / 2, block, *generationConditions)
-                registry.register(type, LAPIS, weight / 2, block, *generationConditions)
-                registry.register(type, DIAMOND, weight / 2, block, *generationConditions)
-                registry.register(type, IRON, weight / 2, block, *generationConditions)
-                registry.register(type, MEDIUM, weight / 2, block, *generationConditions)
-                registry.register(type, shape, weight, block, *generationConditions)
+            fun ore1(variant: EnumVariantOre1) = Pair({ ModuleOre.blockOre1.getState(variant) }, { ItemStack(ModuleOre.blockOre1, 1, variant.metadata) })
+            fun ore2(variant: EnumVariantOre2) = Pair({ ModuleOre.blockOre2.getState(variant) }, { ItemStack(ModuleOre.blockOre2, 1, variant.metadata) })
+
+            fun OreSeedDropRegistryScope.TypedOreSeedDropRegistryScope.vein(shape: EnumOreSeedShape, weight: Double, output: Pair<() -> IBlockState, () -> ItemStack>, vararg generationConditions: IOreSeedDropRequirement) {
+                registry.register(type, POINT, weight / 2, output, *generationConditions)
+                registry.register(type, TINY, weight / 2, output, *generationConditions)
+                registry.register(type, LAPIS, weight / 2, output, *generationConditions)
+                registry.register(type, DIAMOND, weight / 2, output, *generationConditions)
+                registry.register(type, IRON, weight / 2, output, *generationConditions)
+                registry.register(type, MEDIUM, weight / 2, output, *generationConditions)
+                registry.register(type, shape, weight, output, *generationConditions)
             }
 
             //
 
             // まばら天然石
             STONE {
-                register(POINT, 0.03, { ModuleOre.blockOre1.getState(APATITE_ORE) })
-                register(POINT, 0.03, { ModuleOre.blockOre1.getState(FLUORITE_ORE) })
-                register(POINT, 0.03, { ModuleOre.blockOre1.getState(SULFUR_ORE) }, maxY(15))
-                register(POINT, 0.03, { ModuleOre.blockOre1.getState(CINNABAR_ORE) }, maxY(15))
-                register(POINT, 0.03, { ModuleOre.blockOre1.getState(MAGNETITE_ORE) })
-                register(POINT, 0.03, { ModuleOre.blockOre1.getState(MOONSTONE_ORE) }, minY(40), maxY(50))
+                register(POINT, 0.03, ore1(APATITE_ORE))
+                register(POINT, 0.03, ore1(FLUORITE_ORE))
+                register(POINT, 0.03, ore1(SULFUR_ORE), maxY(15))
+                register(POINT, 0.03, ore1(CINNABAR_ORE), maxY(15))
+                register(POINT, 0.03, ore1(MAGNETITE_ORE))
+                register(POINT, 0.03, ore1(MOONSTONE_ORE), minY(40), maxY(50))
             }
 
             // 鉱脈天然石
             STONE {
-                vein(LARGE, 1.00, { ModuleOre.blockOre1.getState(APATITE_ORE) }, Vein(97063327, 32, 8, 0.02, el.FLUORINE, el.CALCIUM, el.PHOSPHORUS))
-                vein(PYRAMID, 1.00, { ModuleOre.blockOre1.getState(FLUORITE_ORE) }, Vein(63503821, 32, 8, 0.02, el.FLUORINE, el.CALCIUM))
-                vein(STAR, 1.00, { ModuleOre.blockOre1.getState(SULFUR_ORE) }, Vein(34153177, 32, 8, 0.02, el.SULFUR), maxY(15))
-                vein(POINT, 1.00, { ModuleOre.blockOre1.getState(CINNABAR_ORE) }, Vein(27826567, 32, 8, 0.02, el.SULFUR, el.MERCURY), maxY(15))
-                vein(COAL, 1.00, { ModuleOre.blockOre1.getState(MAGNETITE_ORE) }, Vein(16287001, 64, 16, 0.02, el.FERRUM))
-                vein(TINY, 1.00, { ModuleOre.blockOre1.getState(MOONSTONE_ORE) }, Vein(78750461, 16, 4, 0.02, el.KALIUM, el.ALUMINIUM), minY(40), maxY(50))
+                vein(LARGE, 1.00, ore1(APATITE_ORE), Vein(97063327, 32, 8, 0.02, el.FLUORINE, el.CALCIUM, el.PHOSPHORUS))
+                vein(PYRAMID, 1.00, ore1(FLUORITE_ORE), Vein(63503821, 32, 8, 0.02, el.FLUORINE, el.CALCIUM))
+                vein(STAR, 1.00, ore1(SULFUR_ORE), Vein(34153177, 32, 8, 0.02, el.SULFUR), maxY(15))
+                vein(POINT, 1.00, ore1(CINNABAR_ORE), Vein(27826567, 32, 8, 0.02, el.SULFUR, el.MERCURY), maxY(15))
+                vein(COAL, 1.00, ore1(MAGNETITE_ORE), Vein(16287001, 64, 16, 0.02, el.FERRUM))
+                vein(TINY, 1.00, ore1(MOONSTONE_ORE), Vein(78750461, 16, 4, 0.02, el.KALIUM, el.ALUMINIUM), minY(40), maxY(50))
             }
 
             // 鉱脈宝石
             STONE {
-                vein(POINT, 0.50, { ModuleOre.blockOre1.getState(PYROPE_ORE) }, Vein(39250117, 16, 4, 0.01, el.MAGNESIUM, el.ALUMINIUM), maxY(50))
-                vein(LARGE, 0.75, { ModuleOre.blockOre1.getState(SMITHSONITE_ORE) }, Vein(32379601, 32, 8, 0.01, el.ZINC, el.CARBON), minY(30))
-                vein(MEDIUM, 0.75, { ModuleOre.blockOre1.getState(NEPHRITE_ORE) }, Vein(50393467, 64, 16, 0.01, el.CALCIUM, el.MAGNESIUM, el.FERRUM))
-                vein(HORIZONTAL, 0.50, { ModuleOre.blockOre1.getState(TOPAZ_ORE) }, Vein(58068649, 16, 4, 0.01, el.ALUMINIUM, el.FLUORINE))
-                vein(HORIZONTAL, 0.50, { ModuleOre.blockOre2.getState(TOURMALINE_ORE) }, Vein(25988519, 16, 4, 0.01, el.NATRIUM, el.LITHIUM, el.ALUMINIUM, el.BORON))
+                vein(POINT, 0.50, ore1(PYROPE_ORE), Vein(39250117, 16, 4, 0.01, el.MAGNESIUM, el.ALUMINIUM), maxY(50))
+                vein(LARGE, 0.75, ore1(SMITHSONITE_ORE), Vein(32379601, 32, 8, 0.01, el.ZINC, el.CARBON), minY(30))
+                vein(MEDIUM, 0.75, ore1(NEPHRITE_ORE), Vein(50393467, 64, 16, 0.01, el.CALCIUM, el.MAGNESIUM, el.FERRUM))
+                vein(HORIZONTAL, 0.50, ore1(TOPAZ_ORE), Vein(58068649, 16, 4, 0.01, el.ALUMINIUM, el.FLUORINE))
+                vein(HORIZONTAL, 0.50, ore2(TOURMALINE_ORE), Vein(25988519, 16, 4, 0.01, el.NATRIUM, el.LITHIUM, el.ALUMINIUM, el.BORON))
             }
 
             // ネザー鉱石
             NETHERRACK {
-                register(LARGE, 0.10, { ModuleOre.blockOre1.getState(NETHERRACK_APATITE_ORE) }, minY(90))
-                register(PYRAMID, 0.10, { ModuleOre.blockOre1.getState(NETHERRACK_FLUORITE_ORE) }, minY(90))
-                register(TINY, 0.30, { ModuleOre.blockOre1.getState(NETHERRACK_SULFUR_ORE) }, minY(20), maxY(40))
-                register(IRON, 0.10, { ModuleOre.blockOre1.getState(NETHERRACK_CINNABAR_ORE) })
-                register(COAL, 0.10, { ModuleOre.blockOre1.getState(NETHERRACK_MAGNETITE_ORE) })
-                register(TINY, 0.10, { ModuleOre.blockOre1.getState(NETHERRACK_MOONSTONE_ORE) }, maxY(32))
+                register(LARGE, 0.10, ore1(NETHERRACK_APATITE_ORE), minY(90))
+                register(PYRAMID, 0.10, ore1(NETHERRACK_FLUORITE_ORE), minY(90))
+                register(TINY, 0.30, ore1(NETHERRACK_SULFUR_ORE), minY(20), maxY(40))
+                register(IRON, 0.10, ore1(NETHERRACK_CINNABAR_ORE))
+                register(COAL, 0.10, ore1(NETHERRACK_MAGNETITE_ORE))
+                register(TINY, 0.10, ore1(NETHERRACK_MOONSTONE_ORE), maxY(32))
             }
 
         }

@@ -9,7 +9,7 @@ import scala.util.Random;
 
 public class VeinHelper {
 
-    public static boolean test(long seed, int horizontalSize, int verticalSize, double rate, Element[] elements, @NotNull OreSeedDropEnvironment environment) {
+    public static boolean test(long seed, int horizontalSize, int verticalSize, double chance, Element[] elements, @NotNull OreSeedDropEnvironment environment) {
 
         // タイル位置の特定
         int tileX = getTileCoordinate(environment.getBlockPos().getX(), horizontalSize);
@@ -29,7 +29,7 @@ public class VeinHelper {
         double b = rand(13788169L + environment.getWorld().getSeed() * 68640023L + seed * 86802673L + tileX * 84663211L + tileY * 34193609L + tileZ * 79500227L);
 
         // 出現判定
-        return multiplyElement(a, b) < rate;
+        return multiplyElement(a, b) < chance;
     }
 
     /**

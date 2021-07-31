@@ -25,19 +25,19 @@ public class ModuleOreSeed {
         erMod.registerBlock.register(b -> {
 
             // 鉱石の種
-            blockOreSeed = new BlockOreSeed(EnumOreSeedType.STONE, () -> Blocks.STONE.getDefaultState());
+            blockOreSeed = new BlockOreSeed(EnumOreSeedType.STONE);
             blockOreSeed.setRegistryName(ModMirageFairy2019.MODID, "ore_seed");
             blockOreSeed.setCreativeTab(ApiMain.creativeTab());
             ForgeRegistries.BLOCKS.register(blockOreSeed);
 
             // 鉱石の種：ネザー
-            blockOreSeedNether = new BlockOreSeed(EnumOreSeedType.NETHERRACK, () -> Blocks.NETHERRACK.getDefaultState());
+            blockOreSeedNether = new BlockOreSeed(EnumOreSeedType.NETHERRACK);
             blockOreSeedNether.setRegistryName(ModMirageFairy2019.MODID, "ore_seed_nether");
             blockOreSeedNether.setCreativeTab(ApiMain.creativeTab());
             ForgeRegistries.BLOCKS.register(blockOreSeedNether);
 
             // 鉱石の種：エンド
-            blockOreSeedEnd = new BlockOreSeed(EnumOreSeedType.END_STONE, () -> Blocks.END_STONE.getDefaultState());
+            blockOreSeedEnd = new BlockOreSeed(EnumOreSeedType.END_STONE);
             blockOreSeedEnd.setRegistryName(ModMirageFairy2019.MODID, "ore_seed_end");
             blockOreSeedEnd.setCreativeTab(ApiMain.creativeTab());
             ForgeRegistries.BLOCKS.register(blockOreSeedEnd);
