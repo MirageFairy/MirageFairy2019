@@ -3,15 +3,10 @@ import net.minecraftforge.gradle.user.TaskSourceCopy
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-buildscript {
-    dependencies {
-        classpath("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
-    }
-}
-
 plugins {
     application
     kotlin("jvm")
+    id("org.jetbrains.kotlin.plugin.serialization")
     id("net.minecraftforge.gradle.forge")
     id("com.github.johnrengelman.shadow")
 }
