@@ -19,7 +19,7 @@ val versionForge = 1
 // クライアント互換性の区別
 val versionCompatibility = 13
 // ビルドバージョンの区別
-val versionBuild = 20
+val versionBuild = 21
 
 version = "${versionZero}.${versionForge}.${versionCompatibility}.${versionBuild}"
 group = "miragefairy2019"
