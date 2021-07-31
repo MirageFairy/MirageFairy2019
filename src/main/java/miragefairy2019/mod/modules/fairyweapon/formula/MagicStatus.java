@@ -1,15 +1,11 @@
 package miragefairy2019.mod.modules.fairyweapon.formula;
 
-import java.util.function.Function;
-
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.*;
+
+import java.util.function.Function;
 
 public class MagicStatus<T> implements IMagicStatus<T> {
 

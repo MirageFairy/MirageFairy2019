@@ -1,12 +1,12 @@
 package miragefairy2019.mod.lib;
 
-import java.util.function.Consumer;
-
 import mirrg.boron.util.event.EventProviders;
 import mirrg.boron.util.event.IEventProvider;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
+import java.util.function.Consumer;
 
 public class EventRegistryMod {
 

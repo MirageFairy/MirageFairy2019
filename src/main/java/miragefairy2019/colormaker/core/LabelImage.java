@@ -1,12 +1,10 @@
 package miragefairy2019.colormaker.core;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 import mirrg.boron.util.struct.ImmutableArray;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class LabelImage extends JLabel {
 

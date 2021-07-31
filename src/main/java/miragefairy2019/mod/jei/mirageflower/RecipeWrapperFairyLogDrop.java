@@ -1,7 +1,5 @@
 package miragefairy2019.mod.jei.mirageflower;
 
-import java.util.List;
-
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -10,6 +8,8 @@ import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public class RecipeWrapperFairyLogDrop implements IRecipeWrapper {
 

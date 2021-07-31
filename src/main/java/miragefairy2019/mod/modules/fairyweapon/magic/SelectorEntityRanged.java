@@ -1,15 +1,15 @@
 package miragefairy2019.mod.modules.fairyweapon.magic;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
-
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * ある点を中心とした球形の範囲のエンティティに効果を与えるエンティティセレクタです。

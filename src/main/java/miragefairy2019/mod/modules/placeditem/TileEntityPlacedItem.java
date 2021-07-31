@@ -1,7 +1,5 @@
 package miragefairy2019.mod.modules.placeditem;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.ItemStackHelper;
@@ -11,6 +9,8 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
+
+import javax.annotation.Nullable;
 
 public class TileEntityPlacedItem extends TileEntity {
 

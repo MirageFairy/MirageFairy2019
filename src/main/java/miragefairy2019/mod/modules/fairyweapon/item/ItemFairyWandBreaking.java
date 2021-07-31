@@ -1,10 +1,5 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -18,6 +13,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingTool {
 

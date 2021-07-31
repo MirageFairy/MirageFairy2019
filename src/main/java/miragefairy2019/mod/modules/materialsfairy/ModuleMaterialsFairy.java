@@ -1,12 +1,5 @@
 package miragefairy2019.mod.modules.materialsfairy;
 
-import static miragefairy2019.mod.api.composite.ApiComposite.*;
-import static miragefairy2019.mod.api.composite.Components.*;
-import static miragefairy2019.mod.lib.Configurator.*;
-
-import java.util.Optional;
-import java.util.function.Function;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.composite.IComponentInstance;
@@ -28,6 +21,13 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
+
+import java.util.Optional;
+import java.util.function.Function;
+
+import static miragefairy2019.mod.api.composite.ApiComposite.instance;
+import static miragefairy2019.mod.api.composite.Components.*;
+import static miragefairy2019.mod.lib.Configurator.*;
 
 public class ModuleMaterialsFairy {
 

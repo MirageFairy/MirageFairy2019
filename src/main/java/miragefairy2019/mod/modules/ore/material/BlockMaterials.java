@@ -1,9 +1,5 @@
 package miragefairy2019.mod.modules.ore.material;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import miragefairy2019.mod.lib.multi.BlockMulti;
 import miragefairy2019.mod.lib.multi.IListBlockVariant;
 import net.minecraft.block.Block;
@@ -20,6 +16,9 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockMaterials<V extends IBlockVariantMaterials> extends BlockMulti<V> {
 

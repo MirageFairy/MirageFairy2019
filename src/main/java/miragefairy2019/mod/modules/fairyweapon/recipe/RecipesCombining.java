@@ -1,7 +1,5 @@
 package miragefairy2019.mod.modules.fairyweapon.recipe;
 
-import java.util.Optional;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairyweapon.recipe.ICombiningItem;
 import net.minecraft.inventory.InventoryCrafting;
@@ -13,6 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import java.util.Optional;
 
 public class RecipesCombining extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 

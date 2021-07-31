@@ -1,11 +1,5 @@
 package miragefairy2019.mod.modules.ore;
 
-import static miragefairy2019.mod.lib.Configurator.*;
-
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.ore.ApiOre;
@@ -18,11 +12,7 @@ import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import miragefairy2019.mod.modules.ore.material.BlockMaterials;
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1;
 import miragefairy2019.mod.modules.ore.material.ItemBlockMaterials;
-import miragefairy2019.mod.modules.ore.ore.BlockOre;
-import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1;
-import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2;
-import miragefairy2019.mod.modules.ore.ore.IBlockVariantOre;
-import miragefairy2019.mod.modules.ore.ore.ItemBlockOre;
+import miragefairy2019.mod.modules.ore.ore.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
@@ -44,6 +34,12 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+import static miragefairy2019.mod.lib.Configurator.*;
 
 public class ModuleOre {
 

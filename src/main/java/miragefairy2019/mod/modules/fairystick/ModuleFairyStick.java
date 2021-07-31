@@ -1,28 +1,22 @@
 package miragefairy2019.mod.modules.fairystick;
 
-import static miragefairy2019.mod.lib.Configurator.*;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft;
-import miragefairy2019.modkt.api.fairystickcraft.IFairyStickCraftCondition;
-import miragefairy2019.modkt.api.fairystickcraft.IFairyStickCraftEnvironment;
-import miragefairy2019.modkt.api.fairystickcraft.IFairyStickCraftExecutor;
 import miragefairy2019.modkt.impl.fairystickcraft.*;
-import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
-import org.jetbrains.annotations.NotNull;
+
+import static miragefairy2019.mod.lib.Configurator.*;
 
 public class ModuleFairyStick {
 

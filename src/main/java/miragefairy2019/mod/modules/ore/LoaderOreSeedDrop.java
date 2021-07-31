@@ -1,14 +1,5 @@
 package miragefairy2019.mod.modules.ore;
 
-import static miragefairy2019.mod.api.oreseed.EnumOreSeedShape.*;
-import static miragefairy2019.mod.api.oreseed.EnumOreSeedType.*;
-import static miragefairy2019.mod.api.oreseed.GenerationConditions.*;
-import static miragefairy2019.mod.modules.ore.Elements.*;
-import static miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.*;
-import static miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.*;
-
-import java.util.function.Supplier;
-
 import miragefairy2019.mod.api.oreseed.EnumOreSeedShape;
 import miragefairy2019.mod.api.oreseed.EnumOreSeedType;
 import miragefairy2019.mod.api.oreseed.IGenerationCondition;
@@ -17,6 +8,17 @@ import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.UtilsString;
 import net.minecraft.block.state.IBlockState;
 import scala.util.Random;
+
+import java.util.function.Supplier;
+
+import static miragefairy2019.mod.api.oreseed.EnumOreSeedShape.*;
+import static miragefairy2019.mod.api.oreseed.EnumOreSeedType.NETHERRACK;
+import static miragefairy2019.mod.api.oreseed.EnumOreSeedType.STONE;
+import static miragefairy2019.mod.api.oreseed.GenerationConditions.maxY;
+import static miragefairy2019.mod.api.oreseed.GenerationConditions.minY;
+import static miragefairy2019.mod.modules.ore.Elements.*;
+import static miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.*;
+import static miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.TOURMALINE_ORE;
 
 public class LoaderOreSeedDrop {
 

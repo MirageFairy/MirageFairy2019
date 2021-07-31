@@ -1,6 +1,6 @@
 package miragefairy2019.colormaker.core;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class ColorIdentifier {
 

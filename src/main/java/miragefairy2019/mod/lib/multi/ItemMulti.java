@@ -1,15 +1,15 @@
 package miragefairy2019.mod.lib.multi;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class ItemMulti<V extends ItemVariant> extends Item {
 

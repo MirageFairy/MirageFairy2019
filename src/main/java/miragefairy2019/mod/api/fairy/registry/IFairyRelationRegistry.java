@@ -1,10 +1,10 @@
 package miragefairy2019.mod.api.fairy.registry;
 
-import java.util.function.Predicate;
-
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.function.Predicate;
 
 public interface IFairyRelationRegistry {
 

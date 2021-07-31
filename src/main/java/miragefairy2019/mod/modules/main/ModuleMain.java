@@ -1,7 +1,5 @@
 package miragefairy2019.mod.modules.main;
 
-import org.apache.logging.log4j.Logger;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
@@ -11,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.Logger;
 
 public class ModuleMain {
 

@@ -1,10 +1,5 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import static miragefairy2019.mod.api.fairy.AbilityTypes.*;
-import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
-
-import java.util.List;
-
 import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
@@ -28,6 +23,12 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
+
+import static miragefairy2019.mod.api.fairy.AbilityTypes.fell;
+import static miragefairy2019.mod.api.fairy.AbilityTypes.warp;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
 
 public class ItemMiragiumAxe extends ItemFairyWeaponBase {
 

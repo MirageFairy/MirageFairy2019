@@ -1,9 +1,5 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
-
-import java.util.List;
-
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import mirrg.boron.util.struct.Tuple;
@@ -19,6 +15,10 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
+
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
 
 public class ItemBellBase extends ItemFairyWeaponBase {
 

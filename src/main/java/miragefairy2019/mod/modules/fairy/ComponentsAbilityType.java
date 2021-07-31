@@ -1,14 +1,14 @@
 package miragefairy2019.mod.modules.fairy;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairy.IAbilityType;
 import miragefairy2019.mod.api.fairy.IComponentAbilityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ComponentsAbilityType {
 

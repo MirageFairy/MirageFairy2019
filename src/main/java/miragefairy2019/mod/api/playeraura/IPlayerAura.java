@@ -1,12 +1,12 @@
 package miragefairy2019.mod.api.playeraura;
 
-import java.util.Optional;
-
 import miragefairy2019.mod.api.fairy.IManaSet;
 import miragefairy2019.mod.modules.fairy.EnumManaType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+
+import java.util.Optional;
 
 public interface IPlayerAura {
 

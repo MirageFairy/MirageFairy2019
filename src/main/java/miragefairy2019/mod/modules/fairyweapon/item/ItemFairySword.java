@@ -1,9 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import java.util.List;
-
 import com.google.common.collect.Multimap;
-
 import miragefairy2019.mod.api.fairy.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
@@ -18,6 +15,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemFairySword extends ItemFairyWeaponBase {
 

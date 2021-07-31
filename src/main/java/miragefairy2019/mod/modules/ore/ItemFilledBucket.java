@@ -1,9 +1,5 @@
 package miragefairy2019.mod.modules.ore;
 
-import java.util.Optional;
-
-import javax.annotation.Nullable;
-
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.state.IBlockState;
@@ -14,16 +10,14 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
+
+import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class ItemFilledBucket extends ItemMultiMaterial<ItemVariantFilledBucket> {
 

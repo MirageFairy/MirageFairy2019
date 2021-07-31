@@ -1,21 +1,14 @@
 package miragefairy2019.mod.modules.oreseed;
 
-import java.util.Random;
-import java.util.function.Predicate;
-
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedCube;
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedHorizontal;
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedPoint;
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedPyramid;
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedRing;
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedStar;
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedString;
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedVertical;
+import miragefairy2019.mod.modules.oreseed.worldgen.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
+import java.util.function.Predicate;
 
 public class WorldGenCompoundOreSeed {
 

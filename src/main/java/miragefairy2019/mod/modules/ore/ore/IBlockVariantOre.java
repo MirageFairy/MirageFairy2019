@@ -1,12 +1,12 @@
 package miragefairy2019.mod.modules.ore.ore;
 
-import java.util.Random;
-
 import miragefairy2019.mod.lib.multi.IBlockVariant;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+
+import java.util.Random;
 
 public interface IBlockVariantOre extends IBlockVariant {
 

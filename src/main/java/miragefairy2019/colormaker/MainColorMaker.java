@@ -1,12 +1,12 @@
 package miragefairy2019.colormaker;
 
-import java.io.IOException;
-
 import miragefairy2019.colormaker.core.ColorIdentifier;
 import miragefairy2019.colormaker.core.ImageLayer;
 import miragefairy2019.colormaker.core.ImageLoader;
 import miragefairy2019.mod.ModMirageFairy2019;
 import mirrg.boron.util.struct.ImmutableArray;
+
+import java.io.IOException;
 
 public class MainColorMaker {
 

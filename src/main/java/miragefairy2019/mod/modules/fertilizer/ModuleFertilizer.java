@@ -1,13 +1,13 @@
 package miragefairy2019.mod.modules.fertilizer;
 
-import static miragefairy2019.mod.lib.Configurator.*;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+
+import static miragefairy2019.mod.lib.Configurator.*;
 
 public class ModuleFertilizer {
 

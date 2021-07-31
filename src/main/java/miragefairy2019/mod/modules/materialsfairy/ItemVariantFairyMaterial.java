@@ -1,9 +1,5 @@
 package miragefairy2019.mod.modules.materialsfairy;
 
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 import miragefairy2019.mod.api.composite.ApiComposite;
 import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.api.composite.IComposite;
@@ -11,6 +7,10 @@ import miragefairy2019.mod.lib.Configurator;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import net.minecraft.item.ItemStack;
+
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class ItemVariantFairyMaterial extends ItemVariantMaterial {
 

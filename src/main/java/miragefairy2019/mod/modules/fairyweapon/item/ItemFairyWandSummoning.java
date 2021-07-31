@@ -1,7 +1,5 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import java.util.List;
-
 import miragefairy2019.mod.modules.fairycrystal.ItemFairyCrystal;
 import miragefairy2019.mod.modules.fairycrystal.VariantFairyCrystal;
 import net.minecraft.client.util.ITooltipFlag;
@@ -21,6 +19,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemFairyWandSummoning extends ItemFairyWeaponCraftingTool {
 

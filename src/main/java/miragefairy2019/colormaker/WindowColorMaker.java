@@ -1,28 +1,20 @@
 package miragefairy2019.colormaker;
 
-import static mirrg.boron.swing.UtilsComponent.*;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.io.IOException;
-import java.util.stream.Stream;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 import miragefairy2019.colormaker.core.ColorConstants;
 import miragefairy2019.colormaker.core.ImageLayer;
 import miragefairy2019.colormaker.core.LabelImage;
 import miragefairy2019.colormaker.core.PanelColorSlider;
 import mirrg.boron.util.struct.ImmutableArray;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.io.IOException;
+import java.util.stream.Stream;
+
+import static mirrg.boron.swing.UtilsComponent.*;
 
 public class WindowColorMaker extends JFrame {
 

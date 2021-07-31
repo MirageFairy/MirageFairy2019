@@ -1,13 +1,13 @@
 package miragefairy2019.mod.modules.oreseed.worldgen;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Predicate;
-
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class WorldGenOreSeedString extends WorldGenOreSeedBase {
 

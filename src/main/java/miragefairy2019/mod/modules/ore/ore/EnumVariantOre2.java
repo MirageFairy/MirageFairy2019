@@ -1,11 +1,5 @@
 package miragefairy2019.mod.modules.ore.ore;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Random;
-import java.util.function.Supplier;
-
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.multi.IListBlockVariant;
 import mirrg.boron.util.UtilsMath;
@@ -15,6 +9,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public enum EnumVariantOre2 implements IStringSerializable, IBlockVariantOre {
     TOURMALINE_ORE(0, "tourmaline_ore", "oreTourmaline", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemTourmaline").copy(), 1, 0.5, 1, 5)),

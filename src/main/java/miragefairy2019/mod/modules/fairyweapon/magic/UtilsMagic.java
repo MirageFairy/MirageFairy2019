@@ -1,13 +1,13 @@
 package miragefairy2019.mod.modules.fairyweapon.magic;
 
-import java.util.List;
-
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class UtilsMagic {
 

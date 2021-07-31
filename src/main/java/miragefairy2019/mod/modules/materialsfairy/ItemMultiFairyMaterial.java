@@ -1,9 +1,5 @@
 package miragefairy2019.mod.modules.materialsfairy;
 
-import static net.minecraft.util.text.TextFormatting.*;
-
-import java.util.List;
-
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
 import net.minecraft.client.util.ITooltipFlag;
@@ -13,6 +9,11 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
+
+import static net.minecraft.util.text.TextFormatting.AQUA;
+import static net.minecraft.util.text.TextFormatting.YELLOW;
 
 public class ItemMultiFairyMaterial<V extends ItemVariantFairyMaterial> extends ItemMultiMaterial<V> {
 

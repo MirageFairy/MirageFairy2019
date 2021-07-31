@@ -1,6 +1,6 @@
 package miragefairy2019.colormaker.core;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Hashtable;
 import java.util.Optional;
 import java.util.function.Supplier;

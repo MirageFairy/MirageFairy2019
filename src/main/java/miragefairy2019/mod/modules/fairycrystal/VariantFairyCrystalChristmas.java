@@ -1,26 +1,6 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
-import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.google.gson.Gson;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairycrystal.DropFixed;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
@@ -39,6 +19,20 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+
+import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.christmas;
+import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.santaclaus;
 
 public class VariantFairyCrystalChristmas extends VariantFairyCrystal {
 

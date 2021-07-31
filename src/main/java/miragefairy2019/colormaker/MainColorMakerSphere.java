@@ -1,11 +1,11 @@
 package miragefairy2019.colormaker;
 
-import java.awt.Color;
-
 import miragefairy2019.colormaker.core.ImageLoader;
 import miragefairy2019.mod.ModMirageFairy2019;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple3;
+
+import java.awt.*;
 
 public class MainColorMakerSphere {
 

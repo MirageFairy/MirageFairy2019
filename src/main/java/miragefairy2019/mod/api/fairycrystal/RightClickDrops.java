@@ -1,9 +1,5 @@
 package miragefairy2019.mod.api.fairycrystal;
 
-import java.util.List;
-import java.util.function.BiPredicate;
-import java.util.function.Predicate;
-
 import mirrg.boron.util.struct.Tuple3;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
@@ -20,6 +16,10 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.oredict.OreIngredient;
+
+import java.util.List;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 public class RightClickDrops {
 

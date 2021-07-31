@@ -1,14 +1,14 @@
 package miragefairy2019.mod.modules.fairy.registry;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Predicate;
-
 import miragefairy2019.mod.api.fairy.registry.IFairyRelationRegistry;
 import miragefairy2019.mod.api.fairy.registry.IFairySelector;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Predicate;
 
 public class FairyRelationRegistry implements IFairyRelationRegistry {
 

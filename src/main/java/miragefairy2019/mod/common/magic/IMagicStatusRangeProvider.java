@@ -1,8 +1,8 @@
 package miragefairy2019.mod.common.magic;
 
-import java.util.function.Function;
-
 import net.minecraft.util.text.ITextComponent;
+
+import java.util.function.Function;
 
 public interface IMagicStatusRangeProvider<T> {
 

@@ -1,17 +1,13 @@
 package miragefairy2019.colormaker.core;
 
-import static mirrg.boron.swing.UtilsComponent.*;
-
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.IntConsumer;
 import java.util.regex.Pattern;
 
-import javax.swing.JPanel;
-import javax.swing.JSlider;
+import static mirrg.boron.swing.UtilsComponent.get;
 
 public class PanelSliderField extends JPanel {
 

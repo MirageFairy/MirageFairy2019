@@ -1,9 +1,5 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import static net.minecraft.util.text.TextFormatting.*;
-
-import java.util.List;
-
 import miragefairy2019.mod.api.ApiPlayerAura;
 import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
@@ -26,6 +22,10 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
+
+import static net.minecraft.util.text.TextFormatting.*;
 
 public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
 

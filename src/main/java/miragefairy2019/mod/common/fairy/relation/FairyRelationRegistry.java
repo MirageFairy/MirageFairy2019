@@ -1,13 +1,13 @@
 package miragefairy2019.mod.common.fairy.relation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import miragefairy2019.mod.api.fairy.relation.IFairyRelationRegistry;
 import miragefairy2019.mod.api.fairy.relation.IIngredientFairyRelation;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FairyRelationRegistry implements IFairyRelationRegistry {
 

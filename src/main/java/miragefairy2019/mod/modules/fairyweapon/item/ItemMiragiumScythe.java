@@ -1,10 +1,5 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
@@ -21,14 +16,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
 
 public class ItemMiragiumScythe extends ItemFairyWeaponBase2 {
 

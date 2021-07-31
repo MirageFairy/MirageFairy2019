@@ -1,13 +1,9 @@
 package miragefairy2019.mod.lib;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
-import java.util.function.BiPredicate;
-
 import mirrg.boron.util.suppliterator.ISuppliterator;
+
+import java.util.*;
+import java.util.function.BiPredicate;
 
 // TODO mirrg.boron
 public class WeightedRandom {

@@ -1,8 +1,5 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.oreseed.EnumOreSeedType;
 import miragefairy2019.mod.api.oreseed.RegistryOreSeedDrop;
@@ -18,6 +15,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingTool {
 

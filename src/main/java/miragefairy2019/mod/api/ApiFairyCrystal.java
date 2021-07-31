@@ -1,9 +1,9 @@
 package miragefairy2019.mod.api;
 
+import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 
 public class ApiFairyCrystal {
 

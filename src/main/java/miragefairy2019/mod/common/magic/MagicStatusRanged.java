@@ -1,10 +1,10 @@
 package miragefairy2019.mod.common.magic;
 
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 import miragefairy2019.mod.api.magic.IMagicFactorProvider;
 import net.minecraft.util.text.ITextComponent;
+
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class MagicStatusRanged<T> extends MagicStatus<T> {
 

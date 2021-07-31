@@ -1,15 +1,7 @@
 package miragefairy2019.colormaker.core;
 
-import static mirrg.boron.swing.UtilsComponent.*;
-
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Robot;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
@@ -18,9 +10,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
-import javax.swing.JPanel;
-import javax.swing.JToggleButton;
-import javax.swing.Timer;
+import static mirrg.boron.swing.UtilsComponent.get;
 
 public class PanelColorSlider extends JPanel {
 

@@ -1,14 +1,5 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import static miragefairy2019.mod.api.composite.ApiComposite.*;
-import static miragefairy2019.mod.api.composite.Components.*;
-import static miragefairy2019.mod.api.fairy.AbilityTypes.*;
-import static miragefairy2019.mod.api.fairy.ApiFairy.*;
-import static miragefairy2019.mod.lib.Configurator.*;
-
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.api.main.ApiMain;
@@ -32,6 +23,15 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
+
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+import static miragefairy2019.mod.api.composite.ApiComposite.instance;
+import static miragefairy2019.mod.api.composite.Components.*;
+import static miragefairy2019.mod.api.fairy.AbilityTypes.*;
+import static miragefairy2019.mod.api.fairy.ApiFairy.getComponentAbilityType;
+import static miragefairy2019.mod.lib.Configurator.*;
 
 public class Loader {
 

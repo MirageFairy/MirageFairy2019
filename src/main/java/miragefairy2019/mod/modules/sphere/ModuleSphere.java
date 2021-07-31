@@ -1,9 +1,5 @@
 package miragefairy2019.mod.modules.sphere;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.ore.ApiOre;
@@ -27,6 +23,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ModuleSphere {
 

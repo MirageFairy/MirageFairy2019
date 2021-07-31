@@ -1,11 +1,11 @@
 package miragefairy2019.mod.modules.fairyweapon.critical;
 
+import miragefairy2019.mod.lib.WeightedRandom;
+import mirrg.boron.util.suppliterator.ISuppliterator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import miragefairy2019.mod.lib.WeightedRandom;
-import mirrg.boron.util.suppliterator.ISuppliterator;
 
 public final class CriticalRate {
 

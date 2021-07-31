@@ -1,10 +1,10 @@
 package miragefairy2019.mod.modules.ore;
 
-import java.util.Optional;
-import java.util.function.Supplier;
-
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import net.minecraft.block.state.IBlockState;
+
+import java.util.Optional;
+import java.util.function.Supplier;
 
 public class ItemVariantFilledBucket extends ItemVariantMaterial {
 

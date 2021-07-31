@@ -1,8 +1,5 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import java.util.List;
-import java.util.Optional;
-
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import mirrg.boron.util.struct.Tuple;
@@ -25,6 +22,9 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
+import java.util.Optional;
 
 public class ItemMagicWandLight extends ItemFairyWeaponBase {
 

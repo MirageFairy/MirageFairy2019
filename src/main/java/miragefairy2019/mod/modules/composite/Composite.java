@@ -1,8 +1,5 @@
 package miragefairy2019.mod.modules.composite;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import miragefairy2019.mod.api.composite.IComponent;
 import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.api.composite.IComposite;
@@ -10,6 +7,9 @@ import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public final class Composite implements IComposite {
 

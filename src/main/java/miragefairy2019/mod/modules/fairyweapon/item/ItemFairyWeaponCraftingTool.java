@@ -1,7 +1,5 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import java.util.Optional;
-
 import kotlin.Unit;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft;

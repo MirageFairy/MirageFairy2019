@@ -1,13 +1,13 @@
 package miragefairy2019.mod.common.magic;
 
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 import miragefairy2019.mod.api.magic.IMagicFactorProvider;
 import miragefairy2019.mod.api.magic.IMagicStatus;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class MagicStatus<T> implements IMagicStatus<T> {
 

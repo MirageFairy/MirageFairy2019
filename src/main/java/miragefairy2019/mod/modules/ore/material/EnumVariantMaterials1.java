@@ -1,14 +1,14 @@
 package miragefairy2019.mod.modules.ore.material;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import miragefairy2019.mod.lib.multi.IListBlockVariant;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public enum EnumVariantMaterials1 implements IStringSerializable, IBlockVariantMaterials {
     APATITE_BLOCK(0, "apatite_block", "blockApatite", "blockApatite", 3, "pickaxe", 1, 0, SoundType.STONE, false, Material.IRON),

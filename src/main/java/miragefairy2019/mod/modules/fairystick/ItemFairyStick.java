@@ -1,8 +1,5 @@
 package miragefairy2019.mod.modules.fairystick;
 
-import java.util.List;
-import java.util.Optional;
-
 import kotlin.Unit;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.UtilsMinecraft;
@@ -23,6 +20,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemFairyStick extends Item {
 

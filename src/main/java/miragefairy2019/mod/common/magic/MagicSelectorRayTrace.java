@@ -1,21 +1,16 @@
 package miragefairy2019.mod.common.magic;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.google.common.base.Predicate;
-
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * レイトレースを行い、何もヒットしなかった場合は空中の座標を得ます。

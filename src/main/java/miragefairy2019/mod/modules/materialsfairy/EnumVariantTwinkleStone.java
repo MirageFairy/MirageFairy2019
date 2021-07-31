@@ -1,13 +1,13 @@
 package miragefairy2019.mod.modules.materialsfairy;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import miragefairy2019.mod.lib.multi.IBlockVariant;
 import miragefairy2019.mod.lib.multi.IListBlockVariant;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.util.IStringSerializable;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public enum EnumVariantTwinkleStone implements IStringSerializable, IBlockVariant {
     WHITE(0, "white_twinkle_stone", "twinkleStoneWhite", o("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneWhite"), 15),

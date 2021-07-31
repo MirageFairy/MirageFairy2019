@@ -1,7 +1,5 @@
 package miragefairy2019.mod.lib.multi;
 
-import java.util.List;
-
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -12,6 +10,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<V> {
 

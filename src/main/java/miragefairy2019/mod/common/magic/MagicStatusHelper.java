@@ -1,10 +1,5 @@
 package miragefairy2019.mod.common.magic;
 
-import static net.minecraft.util.text.TextFormatting.*;
-
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 import miragefairy2019.mod.api.magic.IMagicFactorProvider;
 import miragefairy2019.mod.api.magic.IMagicStatus;
 import mirrg.boron.util.UtilsMath;
@@ -12,6 +7,11 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
+
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+import static net.minecraft.util.text.TextFormatting.*;
 
 public final class MagicStatusHelper {
 

@@ -1,12 +1,5 @@
 package miragefairy2019.mod.modules.fairy;
 
-import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.IntFunction;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IAbilityType;
@@ -42,6 +35,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.IntFunction;
+
+import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
 
 public class ModuleFairy {
 

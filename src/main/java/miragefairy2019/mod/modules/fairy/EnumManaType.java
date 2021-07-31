@@ -1,11 +1,7 @@
 package miragefairy2019.mod.modules.fairy;
 
 import miragefairy2019.mod.api.fairy.IManaType;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.*;
 
 public enum EnumManaType implements IManaType {
     shine(TextFormatting.WHITE),

@@ -1,7 +1,5 @@
 package miragefairy2019.mod.modules.placeditem;
 
-import org.lwjgl.input.Keyboard;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiPlacedItem;
 import miragefairy2019.mod.api.main.ApiMain;
@@ -21,6 +19,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
 
 public class ModulePlacedItem {
 

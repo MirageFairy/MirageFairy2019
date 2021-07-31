@@ -1,13 +1,13 @@
 package miragefairy2019.mod.common.magic;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import miragefairy2019.mod.modules.fairyweapon.item.ItemMagicWandCollecting;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MagicSelectorCircle extends MagicSelector {
 

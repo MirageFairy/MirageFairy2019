@@ -1,12 +1,11 @@
 package miragefairy2019.mod.api.main;
 
-import org.apache.logging.log4j.Logger;
-
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.modules.main.ModuleMain;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
+import org.apache.logging.log4j.Logger;
 
 public class ApiMain {
 

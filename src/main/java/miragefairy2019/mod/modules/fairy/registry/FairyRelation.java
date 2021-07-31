@@ -1,11 +1,11 @@
 package miragefairy2019.mod.modules.fairy.registry;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
-
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
 
 public class FairyRelation {
 

@@ -1,8 +1,5 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
-import java.util.List;
-import java.util.Optional;
-
 import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.lib.WeightedRandom;
@@ -19,6 +16,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Optional;
 
 public class VariantFairyCrystal extends ItemVariant {
 

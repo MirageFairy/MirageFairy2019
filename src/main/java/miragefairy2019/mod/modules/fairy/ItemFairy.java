@@ -1,12 +1,5 @@
 package miragefairy2019.mod.modules.fairy;
 
-import static miragefairy2019.mod.api.fairy.ManaTypes.*;
-import static net.minecraft.util.text.TextFormatting.*;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
-
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.api.fairy.IManaType;
@@ -25,6 +18,13 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Supplier;
+
+import static miragefairy2019.mod.api.fairy.ManaTypes.*;
+import static net.minecraft.util.text.TextFormatting.*;
 
 public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
 

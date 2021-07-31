@@ -1,13 +1,13 @@
 package miragefairy2019.mod.modules.fairy;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import miragefairy2019.mod.api.fairy.IAbilitySet;
 import miragefairy2019.mod.api.fairy.IAbilityType;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public final class AbilitySet implements IAbilitySet {
 

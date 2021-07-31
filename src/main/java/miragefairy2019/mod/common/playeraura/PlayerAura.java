@@ -1,18 +1,6 @@
 package miragefairy2019.mod.common.playeraura;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.HashMap;
-import java.util.Optional;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.google.gson.Gson;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairy.IManaSet;
 import miragefairy2019.mod.api.main.ApiMain;
@@ -26,6 +14,12 @@ import mirrg.boron.util.UtilsFile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.*;
+import java.util.HashMap;
+import java.util.Optional;
 
 public class PlayerAura implements IPlayerAura {
 

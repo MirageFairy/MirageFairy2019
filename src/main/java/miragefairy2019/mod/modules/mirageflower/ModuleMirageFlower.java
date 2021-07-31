@@ -1,8 +1,5 @@
 package miragefairy2019.mod.modules.mirageflower;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.main.ApiMain;
@@ -30,6 +27,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModuleMirageFlower {
 

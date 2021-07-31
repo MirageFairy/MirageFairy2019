@@ -1,11 +1,5 @@
 package miragefairy2019.mod.modules.mirageflower;
 
-import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
-import static net.minecraftforge.common.BiomeDictionary.Type.*;
-
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
 import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropRegistry;
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionCanRain;
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionHasBiomeType;
@@ -14,6 +8,12 @@ import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRecipe;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.modules.fairy.VariantFairy;
 import net.minecraftforge.common.BiomeDictionary;
+
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
+import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
+import static net.minecraftforge.common.BiomeDictionary.Type.*;
 
 public class FairyLogDropLoader {
 

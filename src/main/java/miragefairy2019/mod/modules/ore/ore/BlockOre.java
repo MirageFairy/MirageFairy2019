@@ -1,7 +1,5 @@
 package miragefairy2019.mod.modules.ore.ore;
 
-import java.util.Random;
-
 import miragefairy2019.mod.lib.multi.BlockMulti;
 import miragefairy2019.mod.lib.multi.IListBlockVariant;
 import net.minecraft.block.SoundType;
@@ -18,6 +16,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class BlockOre<V extends IBlockVariantOre> extends BlockMulti<V> {
 

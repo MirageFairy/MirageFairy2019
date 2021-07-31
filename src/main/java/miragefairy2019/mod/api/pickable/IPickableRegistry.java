@@ -1,8 +1,8 @@
 package miragefairy2019.mod.api.pickable;
 
-import java.util.Optional;
-
 import net.minecraft.block.Block;
+
+import java.util.Optional;
 
 public interface IPickableRegistry {
 
