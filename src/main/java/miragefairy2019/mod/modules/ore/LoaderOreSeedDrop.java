@@ -70,9 +70,9 @@ class Vein implements IOreSeedDropRequirement {
             BlockPos pos = envoronment.getBlockPos();
 
             // タイル位置の特定
-            int tileX = div(pos.getX(), horizontalSize);
-            int tileY = div(pos.getY(), verticalSize);
-            int tileZ = div(pos.getZ(), horizontalSize);
+            int tileX = getTileCoordinate(pos.getX(), horizontalSize);
+            int tileY = getTileCoordinate(pos.getY(), verticalSize);
+            int tileZ = getTileCoordinate(pos.getZ(), horizontalSize);
 
             // 成分倍率
             double[] as = new double[elements.length];
@@ -132,8 +132,8 @@ class Vein implements IOreSeedDropRequirement {
      * @return 引数の変動に対して戻り値は一様分布に従います。
      */
     private static double randomElement(long seed, int size, int x, int z) {
-        int tileX = div(x, size);
-        int tileZ = div(z, size);
+        int tileX = getTileCoordinate(x, size);
+        int tileZ = getTileCoordinate(z, size);
         double b00 = randomElementCrossPoint(seed, tileX + 0, tileZ + 0);
         double b01 = randomElementCrossPoint(seed, tileX + 0, tileZ + 1);
         double b10 = randomElementCrossPoint(seed, tileX + 1, tileZ + 0);
@@ -146,7 +146,7 @@ class Vein implements IOreSeedDropRequirement {
     /**
      * ブロック座標が所属するタイル位置を求める
      */
-    private static int div(int a, int b) {
+    private static int getTileCoordinate(int a, int b) {
         if (a < 0) a -= b - 1;
         return a / b;
     }
