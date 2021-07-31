@@ -1,92 +1,19 @@
 package miragefairy2019.mod.modules.ore;
 
-import miragefairy2019.mod.api.oreseed.EnumOreSeedShape;
-import miragefairy2019.mod.api.oreseed.EnumOreSeedType;
-import miragefairy2019.mod.api.oreseed.IGenerationCondition;
-import miragefairy2019.mod.api.oreseed.RegistryOreSeedDrop;
+import miragefairy2019.modkt.api.oreseeddrop.IOreSeedDropRequirement;
+import miragefairy2019.modkt.api.oreseeddrop.OreSeedDropEnvironment;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.UtilsString;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import scala.util.Random;
 
-import java.util.function.Supplier;
-
-import static miragefairy2019.mod.api.oreseed.EnumOreSeedShape.*;
-import static miragefairy2019.mod.api.oreseed.EnumOreSeedType.NETHERRACK;
-import static miragefairy2019.mod.api.oreseed.EnumOreSeedType.STONE;
-import static miragefairy2019.mod.api.oreseed.GenerationConditions.maxY;
-import static miragefairy2019.mod.api.oreseed.GenerationConditions.minY;
 import static miragefairy2019.mod.modules.ore.Elements.*;
-import static miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.*;
-import static miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.TOURMALINE_ORE;
 
-public class LoaderOreSeedDrop {
+class Vein implements IOreSeedDropRequirement {
 
-    // /effect @p minecraft:night_vision 99999 1
-    // /fill ~-120 10 ~ ~120 80 ~ minecraft:air
-    // /fill ~-60 ~ ~-60 ~60 ~1 ~60 minecraft:air
-    // /fill ~-90 ~ ~-90 ~90 ~ ~90 minecraft:air
-    // /fill ~-90 45 ~-90 ~90 45 ~90 minecraft:air
-    // /fill ~-90 11 ~-90 ~90 11 ~90 minecraft:air
-
-    public static void loadOreSeedDrop() {
-
-        // まばら天然石
-        r(STONE, POINT, 0.03, () -> ModuleOre.blockOre1.getState(APATITE_ORE));
-        r(STONE, POINT, 0.03, () -> ModuleOre.blockOre1.getState(FLUORITE_ORE));
-        r(STONE, POINT, 0.03, () -> ModuleOre.blockOre1.getState(SULFUR_ORE), maxY(15));
-        r(STONE, POINT, 0.03, () -> ModuleOre.blockOre1.getState(CINNABAR_ORE), maxY(15));
-        r(STONE, POINT, 0.03, () -> ModuleOre.blockOre1.getState(MAGNETITE_ORE));
-        r(STONE, POINT, 0.03, () -> ModuleOre.blockOre1.getState(MOONSTONE_ORE), minY(40), maxY(50));
-
-        // 鉱脈天然石
-        r2(STONE, LARGE, 1, () -> ModuleOre.blockOre1.getState(APATITE_ORE), vein(97063327, 32, 8, 0.02, FLUORINE, CALCIUM, PHOSPHORUS));
-        r2(STONE, PYRAMID, 1, () -> ModuleOre.blockOre1.getState(FLUORITE_ORE), vein(63503821, 32, 8, 0.02, FLUORINE, CALCIUM));
-        r2(STONE, STAR, 1, () -> ModuleOre.blockOre1.getState(SULFUR_ORE), vein(34153177, 32, 8, 0.02, SULFUR), maxY(15));
-        r2(STONE, POINT, 1, () -> ModuleOre.blockOre1.getState(CINNABAR_ORE), vein(27826567, 32, 8, 0.02, SULFUR, MERCURY), maxY(15));
-        r2(STONE, COAL, 1, () -> ModuleOre.blockOre1.getState(MAGNETITE_ORE), vein(16287001, 64, 16, 0.02, FERRUM));
-        r2(STONE, TINY, 1, () -> ModuleOre.blockOre1.getState(MOONSTONE_ORE), vein(78750461, 16, 4, 0.02, KALIUM, ALUMINIUM), minY(40), maxY(50));
-
-        // 鉱脈宝石
-        r2(STONE, POINT, 0.5, () -> ModuleOre.blockOre1.getState(PYROPE_ORE), vein(39250117, 16, 4, 0.01, MAGNESIUM, ALUMINIUM), maxY(50));
-        r2(STONE, LARGE, 0.75, () -> ModuleOre.blockOre1.getState(SMITHSONITE_ORE), vein(32379601, 32, 8, 0.01, ZINC, CARBON), minY(30));
-        r2(STONE, MEDIUM, 0.75, () -> ModuleOre.blockOre1.getState(NEPHRITE_ORE), vein(50393467, 64, 16, 0.01, CALCIUM, MAGNESIUM, FERRUM));
-        r2(STONE, HORIZONTAL, 0.5, () -> ModuleOre.blockOre1.getState(TOPAZ_ORE), vein(58068649, 16, 4, 0.01, ALUMINIUM, FLUORINE));
-        r2(STONE, HORIZONTAL, 0.5, () -> ModuleOre.blockOre2.getState(TOURMALINE_ORE), vein(25988519, 16, 4, 0.01, NATRIUM, LITHIUM, ALUMINIUM, BORON));
-
-        // ネザー鉱石
-        r(NETHERRACK, LARGE, 0.10, () -> ModuleOre.blockOre1.getState(NETHERRACK_APATITE_ORE), minY(90));
-        r(NETHERRACK, PYRAMID, 0.10, () -> ModuleOre.blockOre1.getState(NETHERRACK_FLUORITE_ORE), minY(90));
-        r(NETHERRACK, TINY, 0.30, () -> ModuleOre.blockOre1.getState(NETHERRACK_SULFUR_ORE), minY(20), maxY(40));
-        r(NETHERRACK, IRON, 0.10, () -> ModuleOre.blockOre1.getState(NETHERRACK_CINNABAR_ORE));
-        r(NETHERRACK, COAL, 0.10, () -> ModuleOre.blockOre1.getState(NETHERRACK_MAGNETITE_ORE));
-        r(NETHERRACK, TINY, 0.10, () -> ModuleOre.blockOre1.getState(NETHERRACK_MOONSTONE_ORE), maxY(32));
-
-    }
-
-    private static void r(
-            EnumOreSeedType type,
-            EnumOreSeedShape shape,
-            double weight,
-            Supplier<IBlockState> block,
-            IGenerationCondition... generationConditions) {
-        RegistryOreSeedDrop.register(type, shape, weight, block, generationConditions);
-    }
-
-    private static void r2(
-            EnumOreSeedType type,
-            EnumOreSeedShape shape,
-            double weight,
-            Supplier<IBlockState> block,
-            IGenerationCondition... generationConditions) {
-        r(type, POINT, weight / 2, block, generationConditions);
-        r(type, TINY, weight / 2, block, generationConditions);
-        r(type, LAPIS, weight / 2, block, generationConditions);
-        r(type, DIAMOND, weight / 2, block, generationConditions);
-        r(type, IRON, weight / 2, block, generationConditions);
-        r(type, MEDIUM, weight / 2, block, generationConditions);
-        r(type, shape, weight, block, generationConditions);
-    }
+    // テスト
 
     @SuppressWarnings("unused")
     public static void main(String[] args) {
@@ -122,8 +49,26 @@ public class LoaderOreSeedDrop {
 
     }
 
-    private static IGenerationCondition vein(long seed, int horizontalSize, int verticalSize, double rate, Element... elements) {
-        return (type, shape, world, pos) -> {
+    private final long seed;
+    private final int horizontalSize;
+    private final int verticalSize;
+    private final double rate;
+    private final Element[] elements;
+
+    public Vein(long seed, int horizontalSize, int verticalSize, double rate, Element... elements) {
+        this.seed = seed;
+        this.horizontalSize = horizontalSize;
+        this.verticalSize = verticalSize;
+        this.rate = rate;
+        this.elements = elements;
+    }
+
+    @Override
+    public boolean test(@NotNull OreSeedDropEnvironment envoronment) {
+        {
+            World world = envoronment.getWorld();
+            BlockPos pos = envoronment.getBlockPos();
+
             // タイル位置の特定
             int tileX = div(pos.getX(), horizontalSize);
             int tileY = div(pos.getY(), verticalSize);
@@ -143,7 +88,7 @@ public class LoaderOreSeedDrop {
 
             // 出現判定
             return multiplyElement(a, b) < rate;
-        };
+        }
     }
 
     /**
@@ -236,6 +181,14 @@ public class LoaderOreSeedDrop {
         return x < rate
                 ? (1 / (2 - 2 * rate)) * (x * x / rate)
                 : (1 / (2 - 2 * rate)) * (2 * x - rate);
+    }
+
+}
+
+public class LoaderOreSeedDrop {
+
+    public static void loadOreSeedDrop() {
+        LoaderOreSeedDropKt.load();
     }
 
 }
