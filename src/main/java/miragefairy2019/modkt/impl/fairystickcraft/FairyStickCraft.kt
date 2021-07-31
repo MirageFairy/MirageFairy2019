@@ -37,12 +37,11 @@ class FairyStickCraftRecipe : IFairyStickCraftRecipe {
     }
 }
 
-
 class FairyStickCraftEnvironment(
-    override val player: EntityPlayer?,
-    override val world: World,
-    override val blockPos: BlockPos,
-    private val getterItemStackFairyStick: () -> ItemStack
+        override val player: EntityPlayer?,
+        override val world: World,
+        override val blockPos: BlockPos,
+        private val getterItemStackFairyStick: () -> ItemStack
 ) : IFairyStickCraftEnvironment {
     private val entitiesItemRemaining = world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPos).grow(1.0)).map { it!! }.toMutableList()
     override val itemStackFairyStick get() = getterItemStackFairyStick()
