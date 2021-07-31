@@ -96,10 +96,10 @@ tasks {
         from(sourceSets["main"].resources.srcDirs) {
             include("mcmod.info")
             expand(
-                mapOf(
-                    "version" to project.version,
-                    "mcversion" to project.minecraft.version
-                )
+                    mapOf(
+                            "version" to project.version,
+                            "mcversion" to project.minecraft.version
+                    )
             )
         }
         from(sourceSets["main"].resources.srcDirs) {
@@ -117,10 +117,10 @@ tasks {
         classifier = ""
         configurations = listOf(adder)
         listOf(
-            "kotlin",
-            "org.intellij.lang.annotations",
-            "org.jetbrains.annotations",
-            "mirrg.boron"
+                "kotlin",
+                "org.intellij.lang.annotations",
+                "org.jetbrains.annotations",
+                "mirrg.boron"
         ).forEach {
             relocate(it, "${project.group}.$it")
         }
