@@ -17,9 +17,9 @@ import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nullable;
 import java.io.*;
 import java.util.HashMap;
-import java.util.Optional;
 
 public class PlayerAura implements IPlayerAura {
 
@@ -61,17 +61,18 @@ public class PlayerAura implements IPlayerAura {
     }
 
     @Override
-    public Optional<IManaSet> getFoodAura(ItemStack itemStack) {
+    @Nullable
+    public IManaSet getFoodAura(ItemStack itemStack) {
         // TODO 摂食履歴による効果低減
-        return playerAuraManager.getFoodAura(itemStack).map(aura -> {
-            return new ManaSet(
-                    aura.getShine(),
-                    aura.getFire(),
-                    aura.getWind(),
-                    aura.getGaia(),
-                    aura.getAqua(),
-                    aura.getDark());
-        });
+        IManaSet aura = playerAuraManager.getFoodAura(itemStack);
+        if (aura == null) return null;
+        return new ManaSet(
+                aura.getShine(),
+                aura.getFire(),
+                aura.getWind(),
+                aura.getGaia(),
+                aura.getAqua(),
+                aura.getDark());
     }
 
     @Override
@@ -143,7 +144,7 @@ public class PlayerAura implements IPlayerAura {
 
     @Override
     public void onEat(EntityPlayerMP player, ItemStack itemStack, int healAmount) {
-        IManaSet aura = playerAuraManager.getFoodAura(itemStack).orElse(null);
+        IManaSet aura = playerAuraManager.getFoodAura(itemStack);
         if (aura == null) return;
 
         // TODO 摂食履歴システム　連続で同じアイテムを食べると効果が下がっていく

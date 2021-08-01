@@ -67,7 +67,7 @@ public class ModulePlayerAura {
 
                         // TODO 摂食履歴
                         // 食べた後のオーラ
-                        IManaSet aura = playerAura.getFoodAura(event.getItemStack()).orElse(null);
+                        IManaSet aura = playerAura.getFoodAura(event.getItemStack());
 
                         if (aura != null) {
                             event.getToolTip().add("Aura:");

@@ -13,6 +13,7 @@ import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,8 @@ public class PlayerAuraManager implements IPlayerAuraManager {
     }
 
     @Override
-    public Optional<IManaSet> getFoodAura(ItemStack itemStack) {
+    @Nullable
+    public IManaSet getFoodAura(ItemStack itemStack) {
 
         // 該当する全妖精のリスト
         List<IIngredientFairyRelation> list = ApiFairy.fairyRelationRegistry.getIngredientFairyRelations()
@@ -45,7 +47,7 @@ public class PlayerAuraManager implements IPlayerAuraManager {
                 .toList();
 
         // 誰も該当しなければ中止
-        if (list.isEmpty()) return Optional.empty();
+        if (list.isEmpty()) return null;
 
         // 最も関連の深い妖精のリスト
         double relevanceMax = ISuppliterator.ofIterable(list)
@@ -59,7 +61,7 @@ public class PlayerAuraManager implements IPlayerAuraManager {
 
         //
 
-        return Optional.of(new ManaSet(
+        return new ManaSet(
                 list2.stream()
                         .mapToDouble(r -> r.getManas().getShine() / r.getCost() * 50 * 0.5)
                         .average()
@@ -83,7 +85,7 @@ public class PlayerAuraManager implements IPlayerAuraManager {
                 list2.stream()
                         .mapToDouble(r -> r.getManas().getDark() / r.getCost() * 50 * 0.5)
                         .average()
-                        .getAsDouble()));
+                        .getAsDouble());
     }
 
     private static Optional<IFairyType> getFairyType(ItemStack itemStackFairy) {

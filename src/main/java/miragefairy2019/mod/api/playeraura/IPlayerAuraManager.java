@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public interface IPlayerAuraManager {
 
@@ -21,6 +21,7 @@ public interface IPlayerAuraManager {
     @SideOnly(Side.CLIENT)
     public IPlayerAura getClientPlayerAura();
 
-    public Optional<IManaSet> getFoodAura(ItemStack itemStack);
+    @Nullable
+    public IManaSet getFoodAura(ItemStack itemStack);
 
 }

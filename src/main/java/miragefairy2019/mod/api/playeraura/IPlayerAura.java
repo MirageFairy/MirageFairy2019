@@ -6,13 +6,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public interface IPlayerAura {
 
     public double getAura(EnumManaType manaType);
 
-    public Optional<IManaSet> getFoodAura(ItemStack itemStack);
+    @Nullable
+    public IManaSet getFoodAura(ItemStack itemStack);
 
     public void setAura(double shine, double fire, double wind, double gaia, double aqua, double dark);
 
