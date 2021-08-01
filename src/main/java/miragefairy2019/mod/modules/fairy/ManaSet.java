@@ -2,6 +2,8 @@ package miragefairy2019.mod.modules.fairy;
 
 import miragefairy2019.mod.api.fairy.IManaSet;
 
+// TODO 移行: miragefairy2019.modkt.impl.fairystickcraft:ManaSet
+@Deprecated
 public final class ManaSet implements IManaSet {
 
     public final double shine;

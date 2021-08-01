@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import miragefairy2019.mod.api.ApiPlayerAura;
+import miragefairy2019.modkt.api.playeraura.ApiPlayerAura;
 import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.magic.IMagicFactorProvider;
