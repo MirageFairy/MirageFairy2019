@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.jei
+package miragefairy2019.jei
 
 import mezz.jei.api.IModPlugin
 import mezz.jei.api.IModRegistry
@@ -14,7 +14,7 @@ import miragefairy2019.mod.modules.fairystick.ModuleFairyStick
 import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.modkt.api.fairystickcraft.IFairyStickCraftRecipe
 import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.modkt.jei.JeiUtilities.Companion.drawStringCentered
+import miragefairy2019.jei.JeiUtilities.Companion.drawStringCentered
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 

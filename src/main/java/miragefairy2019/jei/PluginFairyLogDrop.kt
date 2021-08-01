@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.jei
+package miragefairy2019.jei
 
 import mezz.jei.api.IModPlugin
 import mezz.jei.api.IModRegistry
@@ -11,7 +11,7 @@ import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.mod.api.ApiMirageFlower
-import miragefairy2019.modkt.jei.JeiUtilities.Companion.drawStringRightAligned
+import miragefairy2019.jei.JeiUtilities.Companion.drawStringRightAligned
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 
