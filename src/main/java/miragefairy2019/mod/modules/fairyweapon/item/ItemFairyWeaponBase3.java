@@ -6,7 +6,7 @@ import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.magic.IMagicFactorProvider;
 import miragefairy2019.mod.api.magic.IMagicHandler;
 import miragefairy2019.mod.api.main.ApiMain;
-import miragefairy2019.mod.api.playeraura.IPlayerAura;
+import miragefairy2019.modkt.api.playeraura.IPlayerAura;
 import miragefairy2019.mod.modules.fairy.EnumAbilityType;
 import miragefairy2019.mod.modules.fairy.EnumManaType;
 import net.minecraft.client.util.ITooltipFlag;

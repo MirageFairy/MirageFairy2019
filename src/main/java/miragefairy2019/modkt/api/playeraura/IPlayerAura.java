@@ -1,4 +1,4 @@
-package miragefairy2019.mod.api.playeraura;
+package miragefairy2019.modkt.api.playeraura;
 
 import miragefairy2019.mod.api.fairy.IManaSet;
 import miragefairy2019.mod.modules.fairy.EnumManaType;

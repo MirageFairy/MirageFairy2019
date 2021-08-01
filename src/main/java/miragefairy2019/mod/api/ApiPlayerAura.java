@@ -1,6 +1,6 @@
 package miragefairy2019.mod.api;
 
-import miragefairy2019.mod.api.playeraura.IPlayerAuraManager;
+import miragefairy2019.modkt.api.playeraura.IPlayerAuraManager;
 
 public class ApiPlayerAura {
 

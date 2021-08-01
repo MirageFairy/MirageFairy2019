@@ -1,10 +1,10 @@
-package miragefairy2019.mod.common.playeraura;
+package miragefairy2019.modkt.impl.playeraura;
 
 import com.google.gson.Gson;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairy.IManaSet;
 import miragefairy2019.mod.api.main.ApiMain;
-import miragefairy2019.mod.api.playeraura.IPlayerAura;
+import miragefairy2019.modkt.api.playeraura.IPlayerAura;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.lib.json.JsonExtractor;
 import miragefairy2019.mod.modules.fairy.EnumManaType;

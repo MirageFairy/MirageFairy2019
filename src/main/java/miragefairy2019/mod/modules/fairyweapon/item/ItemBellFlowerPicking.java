@@ -6,7 +6,7 @@ import miragefairy2019.mod.api.magic.IMagicExecutor;
 import miragefairy2019.mod.api.magic.IMagicHandler;
 import miragefairy2019.mod.api.magic.IMagicStatus;
 import miragefairy2019.mod.api.pickable.IPickable;
-import miragefairy2019.mod.api.playeraura.IPlayerAura;
+import miragefairy2019.modkt.api.playeraura.IPlayerAura;
 import miragefairy2019.mod.common.magic.MagicSelectorCircle;
 import miragefairy2019.mod.common.magic.MagicSelectorPosition;
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace;

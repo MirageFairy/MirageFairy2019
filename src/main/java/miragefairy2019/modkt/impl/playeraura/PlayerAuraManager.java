@@ -1,12 +1,12 @@
-package miragefairy2019.mod.common.playeraura;
+package miragefairy2019.modkt.impl.playeraura;
 
 import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.api.fairy.IManaSet;
 import miragefairy2019.mod.api.fairy.relation.IIngredientFairyRelation;
-import miragefairy2019.mod.api.playeraura.IPlayerAura;
-import miragefairy2019.mod.api.playeraura.IPlayerAuraManager;
+import miragefairy2019.modkt.api.playeraura.IPlayerAura;
+import miragefairy2019.modkt.api.playeraura.IPlayerAuraManager;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.modules.fairy.ManaSet;
 import mirrg.boron.util.suppliterator.ISuppliterator;
