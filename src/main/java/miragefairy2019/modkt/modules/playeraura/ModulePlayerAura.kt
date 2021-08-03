@@ -172,6 +172,20 @@ class MessagePlayerAura : IMessage {
         this.json = json
     }
 
-    override fun fromBytes(buf: ByteBuf) = run { json = PacketBuffer(buf).readString(10000) }
-    override fun toBytes(buf: ByteBuf) = run { PacketBuffer(buf).writeString(json); Unit }
+    override fun fromBytes(buf: ByteBuf) {
+        val packetBuffer = PacketBuffer(buf)
+        val size = packetBuffer.readInt()
+        json = (0 until size).joinToString("") { packetBuffer.readString(10000) }
+    }
+
+    override fun toBytes(buf: ByteBuf) {
+        val json = this.json!!
+        if (json.length > 1_000_000) throw Exception("Too long json: ${json.length}")
+        val strings = json.chunked(10000)
+        val packetBuffer = PacketBuffer(buf)
+        packetBuffer.writeInt(strings.size)
+        strings.forEach {
+            packetBuffer.writeString(it)
+        }
+    }
 }
