@@ -6,11 +6,11 @@ import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod.modules.fairy.EnumManaType
 import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
-import miragefairy2019.modkt.impl.MutableManaSet
 import miragefairy2019.modkt.impl.playeraura.PlayerAuraManager
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemFood
 import net.minecraft.network.NetHandlerPlayServer
+import net.minecraft.network.PacketBuffer
 import net.minecraft.util.text.Style
 import net.minecraft.util.text.TextComponentString
 import net.minecraft.util.text.TextFormatting
@@ -45,7 +45,7 @@ object ModulePlayerAura {
                 @SubscribeEvent
                 fun hook(event: ServerConnectionFromClientEvent) {
                     val handler = event.handler
-                    if (handler is NetHandlerPlayServer) ApiPlayerAura.playerAuraManager.getServerPlayerAura(handler.player).send(handler.player)
+                    if (handler is NetHandlerPlayServer) ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(handler.player).send()
                 }
             })
         })
@@ -65,11 +65,11 @@ object ModulePlayerAura {
                         if (event.itemStack.item !is ItemFood) return
 
                         // 現在オーラ
-                        val playerAura = ApiPlayerAura.playerAuraManager.clientPlayerAura
+                        val playerAuraHandler = ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler
 
-                        // TODO 摂食履歴
+                        // TODO 摂食履歴の表示
                         // 食べた後のオーラ
-                        val aura = playerAura.getFoodAura(event.itemStack)
+                        val aura = playerAuraHandler.getLocalFoodAura(event.itemStack)
                         if (aura != null) {
                             fun format(value: Double): Int {
                                 var value2 = floor(value).toInt()
@@ -99,12 +99,12 @@ object ModulePlayerAura {
                             }
 
                             event.toolTip.add("Aura:")
-                            event.toolTip.add(f1(playerAura.aura, aura, EnumManaType.shine))
-                            event.toolTip.add(f1(playerAura.aura, aura, EnumManaType.fire))
-                            event.toolTip.add(f1(playerAura.aura, aura, EnumManaType.wind))
-                            event.toolTip.add(f1(playerAura.aura, aura, EnumManaType.gaia))
-                            event.toolTip.add(f1(playerAura.aura, aura, EnumManaType.aqua))
-                            event.toolTip.add(f1(playerAura.aura, aura, EnumManaType.dark))
+                            event.toolTip.add(f1(playerAuraHandler.playerAura, aura, EnumManaType.shine))
+                            event.toolTip.add(f1(playerAuraHandler.playerAura, aura, EnumManaType.fire))
+                            event.toolTip.add(f1(playerAuraHandler.playerAura, aura, EnumManaType.wind))
+                            event.toolTip.add(f1(playerAuraHandler.playerAura, aura, EnumManaType.gaia))
+                            event.toolTip.add(f1(playerAuraHandler.playerAura, aura, EnumManaType.aqua))
+                            event.toolTip.add(f1(playerAuraHandler.playerAura, aura, EnumManaType.dark))
                         }
                     }
                 })
@@ -123,7 +123,9 @@ object ModulePlayerAura {
                         if (item is ItemFood) {
                             val entityLivingBase = event.entityLiving
                             if (entityLivingBase is EntityPlayerMP) {
-                                ApiPlayerAura.playerAuraManager.getServerPlayerAura(entityLivingBase).onEat(entityLivingBase, itemStack, item.getHealAmount(itemStack))
+                                val playerAuraHandler = ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(entityLivingBase)
+                                playerAuraHandler.onEat(itemStack, item.getHealAmount(itemStack))
+                                playerAuraHandler.send()
                             }
                         }
                     }
@@ -136,7 +138,10 @@ object ModulePlayerAura {
             MinecraftForge.EVENT_BUS.register(object : Any() {
                 @Suppress("unused")
                 @SubscribeEvent
-                fun hook(event: PlayerEvent.SaveToFile) = ApiPlayerAura.playerAuraManager.getServerPlayerAura(event.entityPlayer).save(event.entityPlayer)
+                fun hook(event: PlayerEvent.SaveToFile) {
+                    val player = event.entityPlayer
+                    if (player is EntityPlayerMP) ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(player).save()
+                }
             })
         })
 
@@ -146,36 +151,27 @@ object ModulePlayerAura {
 class PacketPlayerAura : IMessageHandler<MessagePlayerAura, IMessage> {
     @SideOnly(Side.CLIENT)
     override fun onMessage(message: MessagePlayerAura, ctx: MessageContext): IMessage? {
-        if (ctx.side == Side.CLIENT) ApiPlayerAura.playerAuraManager.clientPlayerAura.aura = message.aura
+        if (ctx.side == Side.CLIENT) {
+            try {
+                ApiPlayerAura.playerAuraManager.setClientPlayerAuraModelJson(message.json)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
         return null
     }
 }
 
 class MessagePlayerAura : IMessage {
-    val aura = MutableManaSet()
+    var json: String? = null // TODO メッセージングAPIの整備
 
     @Suppress("unused") // リフレクションで呼ばれる
     constructor()
 
-    constructor(aura: IManaSet) {
-        this.aura.set(aura)
+    constructor(json: String) {
+        this.json = json
     }
 
-    override fun fromBytes(buf: ByteBuf) {
-        aura.shine = buf.readDouble()
-        aura.fire = buf.readDouble()
-        aura.wind = buf.readDouble()
-        aura.gaia = buf.readDouble()
-        aura.aqua = buf.readDouble()
-        aura.dark = buf.readDouble()
-    }
-
-    override fun toBytes(buf: ByteBuf) {
-        buf.writeDouble(aura.shine)
-        buf.writeDouble(aura.fire)
-        buf.writeDouble(aura.wind)
-        buf.writeDouble(aura.gaia)
-        buf.writeDouble(aura.aqua)
-        buf.writeDouble(aura.dark)
-    }
+    override fun fromBytes(buf: ByteBuf) = run { json = PacketBuffer(buf).readString(10000) }
+    override fun toBytes(buf: ByteBuf) = run { PacketBuffer(buf).writeString(json); Unit }
 }

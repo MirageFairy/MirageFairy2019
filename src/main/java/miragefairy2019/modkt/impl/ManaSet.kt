@@ -1,14 +1,15 @@
 package miragefairy2019.modkt.impl
 
+import com.google.gson.annotations.Expose
 import miragefairy2019.mod.api.fairy.IManaSet
 
 data class ManaSet(
-        private val shine: Double,
-        private val fire: Double,
-        private val wind: Double,
-        private val gaia: Double,
-        private val aqua: Double,
-        private val dark: Double
+        @Expose private val shine: Double,
+        @Expose private val fire: Double,
+        @Expose private val wind: Double,
+        @Expose private val gaia: Double,
+        @Expose private val aqua: Double,
+        @Expose private val dark: Double
 ) : IManaSet {
     companion object {
         val ZERO = ManaSet(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
@@ -24,13 +25,13 @@ data class ManaSet(
     override fun getDark() = dark
 }
 
-class MutableManaSet(
-        private var shine: Double,
-        private var fire: Double,
-        private var wind: Double,
-        private var gaia: Double,
-        private var aqua: Double,
-        private var dark: Double
+data class MutableManaSet(
+        @Expose private var shine: Double,
+        @Expose private var fire: Double,
+        @Expose private var wind: Double,
+        @Expose private var gaia: Double,
+        @Expose private var aqua: Double,
+        @Expose private var dark: Double
 ) : IManaSet {
     constructor() : this(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 
@@ -64,8 +65,20 @@ class MutableManaSet(
         this.aqua = aqua
         this.dark = dark
     }
+
+    fun reset() = set(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+
+    operator fun plusAssign(other: IManaSet) {
+        this.shine += other.shine
+        this.fire += other.fire
+        this.wind += other.wind
+        this.gaia += other.gaia
+        this.aqua += other.aqua
+        this.dark += other.dark
+    }
 }
 
-fun IManaSet.copy() = ManaSet(this.shine, this.fire, this.wind, this.gaia, this.aqua, this.dark)
+fun IManaSet.copy(): ManaSet = ManaSet(this.shine, this.fire, this.wind, this.gaia, this.aqua, this.dark)
 fun IManaSet.copyAsMutable() = MutableManaSet(this.shine, this.fire, this.wind, this.gaia, this.aqua, this.dark)
-operator fun IManaSet.plus(other: IManaSet) = ManaSet(this.shine + other.shine, this.fire + other.fire, this.wind + other.wind, this.gaia + other.gaia, this.aqua + other.aqua, this.dark + other.dark)
+operator fun IManaSet.plus(other: IManaSet): IManaSet = ManaSet(this.shine + other.shine, this.fire + other.fire, this.wind + other.wind, this.gaia + other.gaia, this.aqua + other.aqua, this.dark + other.dark)
+operator fun IManaSet.times(other: Double): IManaSet = ManaSet(this.shine * other, this.fire * other, this.wind * other, this.gaia * other, this.aqua * other, this.dark * other)

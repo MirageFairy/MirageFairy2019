@@ -1,17 +1,18 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import miragefairy2019.modkt.api.playeraura.ApiPlayerAura;
 import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.magic.IMagicFactorProvider;
 import miragefairy2019.mod.api.magic.IMagicHandler;
 import miragefairy2019.mod.api.main.ApiMain;
-import miragefairy2019.modkt.api.playeraura.IPlayerAura;
 import miragefairy2019.mod.modules.fairy.EnumAbilityType;
 import miragefairy2019.mod.modules.fairy.EnumManaType;
+import miragefairy2019.modkt.api.playeraura.ApiPlayerAura;
+import miragefairy2019.modkt.api.playeraura.IPlayerAuraHandler;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
@@ -29,7 +30,7 @@ import static net.minecraft.util.text.TextFormatting.*;
 
 public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
 
-    public abstract IMagicHandler getMagicHandler(IPlayerAura playerAura, IFairyType fairyType);
+    public abstract IMagicHandler getMagicHandler(IPlayerAuraHandler playerAura, IFairyType fairyType);
 
     //
 
@@ -44,7 +45,7 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
     @SideOnly(Side.CLIENT)
     public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag) {
         if (flag.isAdvanced()) {
-            getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAura(), fairyType).getMagicStatusList()
+            getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler(), fairyType).getMagicStatusList()
                     .forEach(magicStatus -> tooltip.add(magicStatus.getLocalizedName()
                             .appendText(": ")
                             .appendSibling(magicStatus.getDisplayValue())
@@ -71,7 +72,7 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
                             .setStyle(new Style().setColor(BLUE))
                             .getFormattedText()));
         } else {
-            getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAura(), fairyType).getMagicStatusList()
+            getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler(), fairyType).getMagicStatusList()
                     .forEach(magicStatus -> tooltip.add(magicStatus.getLocalizedName()
                             .appendText(": ")
                             .appendSibling(magicStatus.getDisplayValue())
@@ -89,7 +90,11 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
         // 妖精取得
         IFairyType fairyType = findFairy(itemStack, player).map(t -> t.y).orElseGet(ApiFairy::empty);
 
-        return new ActionResult<>(getMagicHandler(ApiPlayerAura.playerAuraManager.getServerPlayerAura(player), fairyType).getMagicExecutor(world, player, itemStack).onItemRightClick(hand), itemStack);
+        if (world.isRemote) {
+            return new ActionResult<>(getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler(), fairyType).getMagicExecutor(world, player, itemStack).onItemRightClick(hand), itemStack);
+        } else {
+            return new ActionResult<>(getMagicHandler(ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler((EntityPlayerMP) player), fairyType).getMagicExecutor(world, player, itemStack).onItemRightClick(hand), itemStack);
+        }
     }
 
     @Override
@@ -108,8 +113,9 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
         // 妖精取得
         IFairyType fairyType = findFairy(itemStack, player).map(t -> t.y).orElseGet(ApiFairy::empty);
 
-        getMagicHandler(ApiPlayerAura.playerAuraManager.getServerPlayerAura(player), fairyType).getMagicExecutor(world, player, itemStack).onUpdate(itemSlot, isSelected);
-
+        if (world.isRemote) {
+            getMagicHandler(ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler(), fairyType).getMagicExecutor(world, player, itemStack).onUpdate(itemSlot, isSelected);
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 package miragefairy2019.modkt.api.playeraura;
 
 import miragefairy2019.mod.api.fairy.IManaSet;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -11,17 +11,23 @@ import javax.annotation.Nullable;
 public interface IPlayerAuraManager {
 
     /**
-     * Server World Only
+     * Client World Only
      */
-    public IPlayerAura getServerPlayerAura(EntityPlayer player);
+    @SideOnly(Side.CLIENT)
+    public IClientPlayerAuraHandler getClientPlayerAuraHandler();
 
     /**
      * Client World Only
      */
     @SideOnly(Side.CLIENT)
-    public IPlayerAura getClientPlayerAura();
+    public void setClientPlayerAuraModelJson(String json);
+
+    /**
+     * Server World Only
+     */
+    public IServerPlayerAuraHandler getServerPlayerAuraHandler(EntityPlayerMP player);
 
     @Nullable
-    public IManaSet getFoodAura(ItemStack itemStack);
+    public IManaSet getGlobalFoodAura(ItemStack itemStack);
 
 }
