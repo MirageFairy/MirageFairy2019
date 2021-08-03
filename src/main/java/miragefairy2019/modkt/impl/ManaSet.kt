@@ -10,6 +10,10 @@ data class ManaSet(
         private val aqua: Double,
         private val dark: Double
 ) : IManaSet {
+    companion object {
+        val ZERO = ManaSet(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+    }
+
     constructor() : this(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 
     override fun getShine() = shine
@@ -64,3 +68,4 @@ class MutableManaSet(
 
 fun IManaSet.copy() = ManaSet(this.shine, this.fire, this.wind, this.gaia, this.aqua, this.dark)
 fun IManaSet.copyAsMutable() = MutableManaSet(this.shine, this.fire, this.wind, this.gaia, this.aqua, this.dark)
+operator fun IManaSet.plus(other: IManaSet) = ManaSet(this.shine + other.shine, this.fire + other.fire, this.wind + other.wind, this.gaia + other.gaia, this.aqua + other.aqua, this.dark + other.dark)
