@@ -91,6 +91,9 @@ tasks {
         executable = "bash"
         args("make_json.sh")
     }
+    getByName("processResources") {
+        dependsOn("makeJson")
+    }
 
     named<ProcessResources>("processResources") {
         inputs.property("version", project.version)
