@@ -23,3 +23,10 @@ mirageFairy2019.magic.status.criticalRate.name=Critical Rate
 mirageFairy2019.magic.status.chargeTime.name=Charge Time
 
 miragefairy2019.placeItem=Place Item
+
+miragefairy2019.gui.playerAura.title=Player Aura
+miragefairy2019.gui.playerAura.poem.step1=It's an appetizing scent.
+miragefairy2019.gui.playerAura.poem.step2=It's a familiar taste.
+miragefairy2019.gui.playerAura.poem.step3=I'm getting tired of this taste...
+miragefairy2019.gui.playerAura.poem.step4=The nutrition is biased...
+miragefairy2019.gui.playerAura.poem.step5=I want to eat something else...

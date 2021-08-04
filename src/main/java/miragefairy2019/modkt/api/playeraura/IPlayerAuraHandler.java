@@ -12,4 +12,9 @@ public interface IPlayerAuraHandler {
     @Nullable
     public IManaSet getLocalFoodAura(ItemStack itemStack);
 
+    public double getSaturationRate(ItemStack itemStack);
+
+    @Nullable
+    public IManaSet simulatePlayerAura(ItemStack itemStack, int healAmount);
+
 }

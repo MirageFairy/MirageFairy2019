@@ -411,6 +411,13 @@ mirageFairy2019.magic.status.criticalRate.name=クリティカル率
 mirageFairy2019.magic.status.chargeTime.name=チャージタイム
 
 miragefairy2019.placeItem=アイテムを置く
+
+miragefairy2019.gui.playerAura.title=プレイヤーオーラ
+miragefairy2019.gui.playerAura.poem.step1=食欲をそそられる香りだ
+miragefairy2019.gui.playerAura.poem.step2=食べ慣れた味だ
+miragefairy2019.gui.playerAura.poem.step3=この味にも飽きてきたな…
+miragefairy2019.gui.playerAura.poem.step4=栄養が偏り気味だ…
+miragefairy2019.gui.playerAura.poem.step5=そろそろ他のものが食べたい…
 mirageFairy2019.mana.shine.name=光
 mirageFairy2019.mana.fire.name=火
 mirageFairy2019.mana.wind.name=風

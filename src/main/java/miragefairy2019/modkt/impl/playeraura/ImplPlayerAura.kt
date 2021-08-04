@@ -71,7 +71,9 @@ fun Food.toJsonObject() = FoodData(itemStack.toJsonObject(), aura.copy())
 fun FoodData.fromJsonObject() = Food(itemStack.fromJsonObject(), aura)
 fun PlayerAuraData.fromJsonObject() = PlayerAuraModel().also { it.fromJsonObject(this) }
 
-class Food(val itemStack: ItemStack, val aura: IManaSet)
+class Food(val itemStack: ItemStack, val aura: IManaSet) {
+    fun copy() = Food(itemStack.copy(), aura.copy())
+}
 
 data class ResettableProperty<T : Any>(private val getter: () -> T) {
     private var value: T? = null
@@ -85,87 +87,103 @@ class PlayerAuraModel {
     }
 
 
+    private val lock = Any()
     private fun reset() {
         foods.clear()
         auraCache.dirty()
     }
 
     fun fromJsonObject(data: PlayerAuraData) {
-        reset()
-        data.foods.forEach { foods += it.fromJsonObject() }
-        while (foods.size > 100) foods.removeLast()
+        synchronized(lock) {
+            reset()
+            data.foods.forEach { foods += it.fromJsonObject() }
+            while (foods.size > 100) foods.removeLast()
+        }
     }
 
-    fun toJsonObject() = PlayerAuraData(foods.map { it.toJsonObject() })
+    fun toJsonObject() = synchronized(lock) { PlayerAuraData(foods.map { it.toJsonObject() }) }
+    fun copy() = synchronized(lock) { PlayerAuraModel().also { model -> foods.forEach { model.foods.add(it.copy()) } } }
 
 
     private val foods = ArrayDeque<Food>()
-    fun getFoods(): List<Food> = foods.toList()
+    fun getFoods(): List<Food> = synchronized(lock) { foods.toList() }
 
     // 過去100エントリーの回複分について、それ自身のオーラにその寿命割合を乗じたものの合計
-    val aura get() = auraCache.getValue()
     private val auraCache = ResettableProperty { foods.mapIndexed { index, food -> food.aura * ((100 - index) / 100.0) }.fold<IManaSet, IManaSet>(ManaSet.ZERO) { a, b -> a + b } * (1 / 100.0) * 8.0 }
+    val aura get() = synchronized(lock) { auraCache.getValue() }
 
 
     // 回復量の分だけ、その都度計算したローカルオーラをキューに追加
     fun pushFood(globalFoodAura: IManaSet, itemStack: ItemStack, healAmount: Int) {
-        val itemStackNormalized = normalizeItemStack(itemStack)
-        repeat(healAmount) {
-            foods.addFirst(Food(itemStackNormalized, getLocalFoodAura(globalFoodAura, itemStackNormalized)))
-            if (foods.size > 100) foods.removeLast()
+        synchronized(lock) {
+            val itemStackNormalized = normalizeItemStack(itemStack)
+            repeat(healAmount) {
+                foods.addFirst(Food(itemStackNormalized, getLocalFoodAura(globalFoodAura, itemStackNormalized)))
+                if (foods.size > 100) foods.removeLast()
+            }
+            auraCache.dirty()
         }
-        auraCache.dirty()
     }
 
     private fun normalizeItemStack(itemStack: ItemStack) = if (itemStack.hasSubtypes) ItemStack(itemStack.item, 1, itemStack.metadata) else ItemStack(itemStack.item)
 
     // 過去100エントリー分の回復分について、それの寿命ごとにスロットを持つ
-    // スロットが同じ料理で埋まっている割合に応じて100%から30%まで効果量が線形に減少する
-    fun getLocalFoodAura(globalFoodAura: IManaSet, itemStackNormalized: ItemStack): IManaSet {
-        fun equals(a: ItemStack, b: ItemStack) = a.item == b.item && a.metadata == b.metadata
-        fun stair(n: Int) = n * (n + 1) / 2
-        val saturationRate = foods.mapIndexed { index, food -> if (equals(food.itemStack, itemStackNormalized)) 100 - index else 0 }.sum() / stair(100).toDouble()
-        return globalFoodAura * (1.0 - 0.7 * saturationRate)
+    fun getSaturationRate(itemStack: ItemStack): Double {
+        synchronized(lock) {
+            fun equals(a: ItemStack, b: ItemStack) = a.item == b.item && a.metadata == b.metadata
+            fun stair(n: Int) = n * (n + 1) / 2
+            val itemStackNormalized = normalizeItemStack(itemStack)
+            return foods.mapIndexed { index, food -> if (equals(food.itemStack, itemStackNormalized)) 100 - index else 0 }.sum() / stair(100).toDouble()
+        }
     }
+
+    // スロットが同じ料理で埋まっている割合に応じて100%から30%まで効果量が線形に減少する
+    fun getLocalFoodAura(globalFoodAura: IManaSet, itemStack: ItemStack) = synchronized(lock) { globalFoodAura * (1.0 - 0.7 * getSaturationRate(itemStack)) }
 
 
     private val gson by lazy { GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create()!! }
     private fun getFile(player: EntityPlayer) = File(player.world.saveHandler.worldDirectory, "${ModMirageFairy2019.MODID}/playeraura/${player.cachedUniqueIdString}.json")
 
-    fun toJson() = gson.toJson(toJsonObject())!!
+    fun toJson() = synchronized(lock) { gson.toJson(toJsonObject())!! }
 
     fun fromJson(json: String) {
-        reset()
-        fromJsonObject(gson.fromJson(json, PlayerAuraData::class.java))
+        synchronized(lock) {
+            reset()
+            fromJsonObject(gson.fromJson(json, PlayerAuraData::class.java))
+        }
     }
 
     fun load(player: EntityPlayerMP) {
-        reset()
-        val file = getFile(player)
-        if (file.exists()) {
-            try {
-                fromJson(file.readText())
-            } catch (e: Exception) {
-                LOGGER.error("Can not load player aura:")
-                LOGGER.error("  Player: ${player.name}")
-                LOGGER.error("  File: $file")
-                LOGGER.error(e)
-                return
+        synchronized(lock) {
+            reset()
+            val file = getFile(player)
+            if (file.exists()) {
+                try {
+                    fromJson(file.readText())
+                } catch (e: Exception) {
+                    LOGGER.error("Can not load player aura:")
+                    LOGGER.error("  Player: ${player.name}")
+                    LOGGER.error("  File: $file")
+                    LOGGER.error(e)
+                    return
+                }
             }
         }
     }
 
     fun save(player: EntityPlayerMP) {
-        val file = getFile(player)
-        LOGGER.debug("Saving: " + player.cachedUniqueIdString + " > " + file)
-        try {
-            file.parentFile.mkdirs()
-            file.writeText(toJson())
-        } catch (e: Exception) {
-            LOGGER.error("Can not save player aura:")
-            LOGGER.error("  Player: ${player.name}")
-            LOGGER.error("  File: $file")
-            LOGGER.error(e)
+        synchronized(lock) {
+            val file = getFile(player)
+            LOGGER.debug("Saving: " + player.cachedUniqueIdString + " > " + file)
+            try {
+                file.parentFile.mkdirs()
+                file.writeText(toJson())
+            } catch (e: Exception) {
+                LOGGER.error("Can not save player aura:")
+                LOGGER.error("  Player: ${player.name}")
+                LOGGER.error("  File: $file")
+                LOGGER.error(e)
+            }
         }
     }
 }
@@ -174,6 +192,12 @@ open class PlayerAuraHandler(protected val manager: IPlayerAuraManager,
                              protected val model: PlayerAuraModel) : IPlayerAuraHandler {
     override fun getPlayerAura() = model.aura
     override fun getLocalFoodAura(itemStack: ItemStack) = manager.getGlobalFoodAura(itemStack)?.let { model.getLocalFoodAura(it, itemStack) }
+    override fun getSaturationRate(itemStack: ItemStack) = model.getSaturationRate(itemStack)
+    override fun simulatePlayerAura(itemStack: ItemStack, healAmount: Int): IManaSet? = manager.getGlobalFoodAura(itemStack)?.let {
+        val model2 = model.copy()
+        model2.pushFood(it, itemStack, healAmount)
+        model2.aura
+    }
 }
 
 class ClientPlayerAuraHandler(manager: IPlayerAuraManager,

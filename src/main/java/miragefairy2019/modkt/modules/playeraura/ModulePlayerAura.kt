@@ -1,7 +1,8 @@
 package miragefairy2019.modkt.modules.playeraura
 
 import io.netty.buffer.ByteBuf
-import miragefairy2019.mod.api.fairy.IManaSet
+import miragefairy2019.libkt.color
+import miragefairy2019.libkt.text
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod.modules.fairy.EnumManaType
@@ -11,8 +12,7 @@ import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemFood
 import net.minecraft.network.NetHandlerPlayServer
 import net.minecraft.network.PacketBuffer
-import net.minecraft.util.text.Style
-import net.minecraft.util.text.TextComponentString
+import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent
@@ -26,7 +26,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.function.Consumer
-import kotlin.math.floor
 
 object ModulePlayerAura {
     @JvmStatic // TODO remove jvm
@@ -62,49 +61,65 @@ object ModulePlayerAura {
                         if (event.entityPlayer == null) return
 
                         // 食べ物以外には反応しない
-                        if (event.itemStack.item !is ItemFood) return
+                        val itemStack = event.itemStack
+                        val item = itemStack.item
+                        if (item !is ItemFood) return
 
-                        // 現在オーラ
+                        // 食べた後のオーラ表示
                         val playerAuraHandler = ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler
+                        val auraBefore = playerAuraHandler.playerAura
+                        val auraAfter = playerAuraHandler.simulatePlayerAura(itemStack, item.getHealAmount(itemStack))
+                        if (auraAfter != null) {
 
-                        // TODO 摂食履歴の表示
-                        // 食べた後のオーラ
-                        val aura = playerAuraHandler.getLocalFoodAura(event.itemStack)
-                        if (aura != null) {
-                            fun format(value: Double): Int {
-                                var value2 = floor(value).toInt()
-                                if (value2 == 0 && value > 0) value2 = 1
-                                if (value2 == 0 && value < 0) value2 = -1
-                                return value2
-                            }
+                            // 飽和率ポエム
+                            event.toolTip.add(text {
+                                translate(playerAuraHandler.getSaturationRate(itemStack).let { saturationRate ->
+                                    when {
+                                        saturationRate > 0.7 -> "miragefairy2019.gui.playerAura.poem.step5"
+                                        saturationRate > 0.5 -> "miragefairy2019.gui.playerAura.poem.step4"
+                                        saturationRate > 0.3 -> "miragefairy2019.gui.playerAura.poem.step3"
+                                        saturationRate > 0.1 -> "miragefairy2019.gui.playerAura.poem.step2"
+                                        else -> "miragefairy2019.gui.playerAura.poem.step1"
+                                    }
+                                })
+                            }.formattedText)
 
-                            fun f1(auraBefore: IManaSet, auraAfter: IManaSet, manaType: EnumManaType): String {
+                            // 栄養素表示
+                            event.toolTip.add(text {
+                                translate("miragefairy2019.gui.playerAura.title")
+                                text(":")
+                            }.formattedText)
+                            fun f1(manaType: EnumManaType): ITextComponent {
                                 val before = auraBefore.getMana(manaType)
                                 val after = auraAfter.getMana(manaType)
                                 val difference = after - before
-                                return TextComponentString("")
-                                        .appendSibling(manaType.displayName)
-                                        .appendText(": ")
-                                        .appendText(String.format("%3d", format(before)))
-                                        .appendText(" → ")
-                                        .appendSibling(TextComponentString(String.format("%3d", format(after)))
-                                                .setStyle(Style().setBold(true)))
-                                        .appendText(" (")
-                                        .appendSibling(TextComponentString("")
-                                                .appendText(String.format("%4d", format(difference)))
-                                                .setStyle(Style().setColor(if (difference > 0) TextFormatting.GREEN else if (difference < 0) TextFormatting.RED else TextFormatting.GRAY)))
-                                        .appendText(")")
-                                        .setStyle(Style().setColor(manaType.getTextColor()))
-                                        .formattedText
+                                return text {
+                                    text("  ")
+                                    text(manaType.displayName)
+                                    text(": ")
+                                    format("%3.0f", before)
+                                    when {
+                                        difference > 2 -> text(" +++++").color(TextFormatting.GREEN)
+                                        difference < -2 -> text(" -----").color(TextFormatting.RED)
+                                        difference > 1 -> text(" ++++").color(TextFormatting.GREEN)
+                                        difference < -1 -> text(" ----").color(TextFormatting.RED)
+                                        difference > 0.5 -> text(" +++").color(TextFormatting.GREEN)
+                                        difference < -0.5 -> text(" ---").color(TextFormatting.RED)
+                                        difference > 0.2 -> text(" ++").color(TextFormatting.GREEN)
+                                        difference < -0.2 -> text(" --").color(TextFormatting.RED)
+                                        difference > 0.1 -> text(" +").color(TextFormatting.GREEN)
+                                        difference < -0.1 -> text(" -").color(TextFormatting.RED)
+                                        else -> Unit
+                                    }
+                                }.color(manaType.getTextColor())
                             }
+                            event.toolTip.add(f1(EnumManaType.shine).formattedText)
+                            event.toolTip.add(f1(EnumManaType.fire).formattedText)
+                            event.toolTip.add(f1(EnumManaType.wind).formattedText)
+                            event.toolTip.add(f1(EnumManaType.gaia).formattedText)
+                            event.toolTip.add(f1(EnumManaType.aqua).formattedText)
+                            event.toolTip.add(f1(EnumManaType.dark).formattedText)
 
-                            event.toolTip.add("Aura:")
-                            event.toolTip.add(f1(playerAuraHandler.playerAura, aura, EnumManaType.shine))
-                            event.toolTip.add(f1(playerAuraHandler.playerAura, aura, EnumManaType.fire))
-                            event.toolTip.add(f1(playerAuraHandler.playerAura, aura, EnumManaType.wind))
-                            event.toolTip.add(f1(playerAuraHandler.playerAura, aura, EnumManaType.gaia))
-                            event.toolTip.add(f1(playerAuraHandler.playerAura, aura, EnumManaType.aqua))
-                            event.toolTip.add(f1(playerAuraHandler.playerAura, aura, EnumManaType.dark))
                         }
                     }
                 })
