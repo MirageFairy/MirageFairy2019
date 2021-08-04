@@ -103,8 +103,8 @@ class PlayerAuraModel {
     fun getFoods(): List<Food> = foods.toList()
 
     // 過去100エントリーの回複分について、それ自身のオーラにその寿命割合を乗じたものの合計
-    private val auraCache = ResettableProperty { foods.mapIndexed { index, food -> food.aura * ((100 - index) / 100.0) }.fold<IManaSet, IManaSet>(ManaSet.ZERO) { a, b -> a + b } * (1 / 100.0) * 4.0 }
     val aura get() = auraCache.getValue()
+    private val auraCache = ResettableProperty { foods.mapIndexed { index, food -> food.aura * ((100 - index) / 100.0) }.fold<IManaSet, IManaSet>(ManaSet.ZERO) { a, b -> a + b } * (1 / 100.0) * 8.0 }
 
 
     // 回復量の分だけ、その都度計算したローカルオーラをキューに追加
