@@ -67,20 +67,19 @@ object ModulePlacedItem {
                             @SubscribeEvent
                             fun accept(event: InputUpdateEvent) {
                                 while (ApiPlacedItem.keyBindingPlaceItem.isPressed) {
+
+                                    // プレイヤー判定
                                     val player = event.entityPlayer
-                                    if (!player.isSpectator) {
-                                        if (player is EntityPlayerSP) {
-                                            val result = player.rayTrace(player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue, 0f)
-                                            if (result!!.typeOfHit == RayTraceResult.Type.BLOCK) {
-                                                ApiMain.simpleNetworkWrapper.sendToServer(MessagePlaceItem(
-                                                        if (player.world.getBlockState(result.blockPos).block.isReplaceable(player.world, result.blockPos)) {
-                                                            result.blockPos
-                                                        } else {
-                                                            result.blockPos.offset(result.sideHit)
-                                                        }))
-                                            }
-                                        }
-                                    }
+                                    if (player.isSpectator) return // スペクテイターの場合無効
+                                    if (player !is EntityPlayerSP) return
+
+                                    // 視線判定
+                                    val result = player.rayTrace(player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue, 0f) ?: return // レイトレースが失敗したら中止
+                                    if (result.typeOfHit != RayTraceResult.Type.BLOCK) return // ブロックにヒットしなければ中止
+
+                                    // 成立
+                                    ApiMain.simpleNetworkWrapper.sendToServer(MessagePlaceItem(result.blockPos, result.sideHit))
+
                                 }
                             }
                         })
