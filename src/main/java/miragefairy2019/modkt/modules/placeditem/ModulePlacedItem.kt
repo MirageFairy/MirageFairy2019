@@ -45,7 +45,7 @@ object ModulePlacedItem {
                 object : Any() {
                     @SideOnly(Side.CLIENT)
                     fun run() {
-                        ApiPlacedItem.keyBindingPlaceItem = KeyBinding("miragefairy2019.placeItem", KeyConflictContext.IN_GAME, Keyboard.KEY_P, "miragefairy2019 (MirageFairy2019)")
+                        ApiPlacedItem.keyBindingPlaceItem = KeyBinding("miragefairy2019.placeItem", KeyConflictContext.IN_GAME, Keyboard.KEY_Z, "miragefairy2019 (MirageFairy2019)")
                     }
                 }.run()
             }
