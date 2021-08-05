@@ -102,9 +102,12 @@ class BlockPlacedItem : BlockContainer(Material.CIRCUITS) {
         val tileEntity = worldIn.getTileEntity(pos)
         if (tileEntity !is TileEntityPlacedItem) return true
         if (playerIn.isSneaking) {
-            tileEntity.rotation = playerIn.rotationYawHead.toDouble()
+            tileEntity.standing = !tileEntity.standing
         } else {
-            tileEntity.action()
+            tileEntity.rotation += 45.0
+            if (tileEntity.rotation >= 360) {
+                tileEntity.rotation -= 360.0
+            }
         }
         tileEntity.markDirty()
         tileEntity.sendUpdatePacket()
@@ -147,15 +150,6 @@ class TileEntityPlacedItem : TileEntity() {
     var itemStack: ItemStack
         get() = itemStacks[0]
         set(itemStack) = run { itemStacks[0] = itemStack }
-
-
-    fun action() {
-        rotation += 45.0
-        if (rotation >= 360) {
-            rotation -= 360.0
-            standing = !standing
-        }
-    }
 }
 
 @SideOnly(Side.CLIENT)
