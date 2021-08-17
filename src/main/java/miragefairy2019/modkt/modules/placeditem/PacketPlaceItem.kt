@@ -42,7 +42,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
         fun tryBreak(): EnumActionResult { // 撤去
             val blockPos = message.blockPos!! // 起点座標
             val blockState = world.getBlockState(blockPos) // 指定座標のブロック
-            if (blockState !== ApiPlacedItem.blockPlacedItem.defaultState) return EnumActionResult.PASS // 指定座標は置かれたブロックでなければならない
+            if (blockState !== ApiPlacedItem.blockPlacedItem.defaultState) return EnumActionResult.PASS // 指定座標は置かれたアイテムでなければならない
 
             // 発動
 
