@@ -2,6 +2,7 @@ package miragefairy2019.modkt.modules.placeditem
 
 import io.netty.buffer.ByteBuf
 import miragefairy2019.mod.api.ApiPlacedItem
+import miragefairy2019.modkt.api.placeditem.IPlaceableBlock
 import net.minecraft.init.Blocks
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
@@ -38,6 +39,37 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
                 0.2f,
                 ((Math.random() - Math.random()) * 1.4 + 2.0).toFloat())
 
+
+        fun tryBlockAction(): EnumActionResult { // お皿とかに設置・撤去する
+            val blockPos = message.blockPos!! // 起点座標
+            val blockState = world.getBlockState(blockPos) // 指定座標のブロックステート
+            val block = blockState.block // 指定座標のブロック
+            if (block !is IPlaceableBlock) return EnumActionResult.PASS // 指定座標はPlaceHandlerでなければならない
+
+            // 発動
+
+            // プレイヤーの行動更新
+            player.markPlayerActive()
+
+            if (!player.canPlayerEdit(blockPos, EnumFacing.UP, ItemStack.EMPTY)) return EnumActionResult.FAIL // 改変禁止なら中止
+
+            // アクションを試行
+            val result = block.doPlaceAction(player, world, blockPos, { itemStack ->
+                if (!player.inventory.addItemStackToInventory(itemStack)) {
+                    player.dropItem(itemStack, false)
+                }
+            }, {
+                val itemStackHeld = player.getHeldItem(EnumHand.MAIN_HAND)
+                if (itemStackHeld.isEmpty) ItemStack.EMPTY.copy() else itemStackHeld.splitStack(1)
+            })
+            if (!result) return EnumActionResult.FAIL // アクションに失敗したなら中止
+
+            // エフェクト
+            effect(blockPos)
+
+            return EnumActionResult.SUCCESS
+        }
+        if (tryBlockAction() != EnumActionResult.PASS) return null
 
         fun tryBreak(): EnumActionResult { // 撤去
             val blockPos = message.blockPos!! // 起点座標
