@@ -130,6 +130,7 @@ class TileEntityPlacedItem : TileEntity() {
 
     override fun readFromNBT(nbt: NBTTagCompound) {
         super.readFromNBT(nbt)
+        itemStacks.fill(ItemStack.EMPTY)
         ItemStackHelper.loadAllItems(nbt, itemStacks)
         rotation = nbt.getDouble("rotation")
         standing = nbt.getBoolean("standing")
