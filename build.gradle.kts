@@ -23,9 +23,9 @@ val versionZero = 0
 // Forge対応バージョンの区別
 val versionForge = 1
 // クライアント互換性の区別
-val versionCompatibility = 13
+val versionCompatibility = 14
 // ビルドバージョンの区別
-val versionBuild = 21
+val versionBuild = 22
 
 version = "${versionZero}.${versionForge}.${versionCompatibility}.${versionBuild}"
 group = "miragefairy2019"
