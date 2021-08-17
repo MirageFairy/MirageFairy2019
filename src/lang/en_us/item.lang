@@ -233,3 +233,5 @@ fluid.mirage_flower_extract=Mirage Extract
 tile.mirageFlowerExtract.name=Mirage Extract
 fluid.mirage_flower_oil=Mirage Oil
 tile.mirageFlowerOil.name=Mirage Oil
+
+tile.dish.name=Dish

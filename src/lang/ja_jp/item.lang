@@ -233,3 +233,5 @@ fluid.mirage_flower_extract=ミラージュエキス
 tile.mirageFlowerExtract.name=ミラージュエキス
 fluid.mirage_flower_oil=ミラージュオイル
 tile.mirageFlowerOil.name=ミラージュオイル
+
+tile.dish.name=皿

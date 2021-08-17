@@ -386,6 +386,8 @@ fluid.mirage_flower_extract=ミラージュエキス
 tile.mirageFlowerExtract.name=ミラージュエキス
 fluid.mirage_flower_oil=ミラージュオイル
 tile.mirageFlowerOil.name=ミラージュオイル
+
+tile.dish.name=皿
 itemGroup.mirageFairy2019=MirageFairy 2019
 itemGroup.mirageFairy2019.fairy=MirageFairy 2019：妖精
 
