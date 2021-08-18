@@ -1,0 +1,310 @@
+@STRICT;
+
+Writer : USE("src/fl7/Writer.fl7").Writer;
+
+#################### 素材 ####################
+(
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials");
+
+	obj: {
+		type: "forge:ore_shapeless";
+		group: "blaze_powder";
+		ingredients: [
+			{
+				type: "miragefairy2019:ore_dict_complex";
+				ore: "mirageFairy2019CraftingToolFairyWandBreaking";
+			};
+			{
+				item: "minecraft:blaze_rod";
+			};
+		];
+		result: {
+			item: "minecraft:blaze_powder";
+			count: 3;
+		};
+	};
+
+	writer::write("blaze_powder_from_blaze_rod.json"; obj);
+);
+
+#################### 圧縮 ####################
+(
+	writer : Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials/compress");
+
+	iOre : oreName -> {
+		type = "forge:ore_dict";
+		ore = oreName;
+	};
+	iSubItem : item, data -> {
+		item;
+		data;
+	};
+
+	x9 : ingot, block, ingredientIngot, ingredientBlock, resultIngot, resultBlock -> (
+		writer::write("$(ingot)_from_$(block).json"; {
+			type = "forge:ore_shaped";
+			group = ingot;
+			pattern = [
+				"#";
+			];
+			key = {
+				"#" = ingredientBlock;
+			};
+			result = {
+				item = resultIngot.item;
+				count = 9;
+				data = resultIngot.data;
+			};
+		});
+		writer::write("$(block).json"; {
+			type = "forge:ore_shaped";
+			group = block;
+			pattern = [
+				"###";
+				"###";
+				"###";
+			];
+			key = {
+				"#" = ingredientIngot;
+			};
+			result = resultBlock;
+		});
+	);
+
+	x9("apatite_gem"       ; "apatite_block"           ; iOre    ("gemApatite"       ); iOre("blockApatite"         ); iSubItem("miragefairy2019:materials"      ;  0); iSubItem("miragefairy2019:materials1";  0));
+	x9("fluorite_gem"      ; "fluorite_block"          ; iOre    ("gemFluorite"      ); iOre("blockFluorite"        ); iSubItem("miragefairy2019:materials"      ;  1); iSubItem("miragefairy2019:materials1";  1));
+	x9("sulfur_gem"        ; "sulfur_block"            ; iOre    ("gemSulfur"        ); iOre("blockSulfur"          ); iSubItem("miragefairy2019:materials"      ;  2); iSubItem("miragefairy2019:materials1";  2));
+	x9("cinnabar_gem"      ; "cinnabar_block"          ; iOre    ("gemCinnabar"      ); iOre("blockCinnabar"        ); iSubItem("miragefairy2019:materials"      ;  6); iSubItem("miragefairy2019:materials1";  3));
+	x9("moonstone_gem"     ; "moonstone_block"         ; iOre    ("gemMoonstone"     ); iOre("blockMoonstone"       ); iSubItem("miragefairy2019:materials"      ;  7); iSubItem("miragefairy2019:materials1";  4));
+	x9("magnetite_gem"     ; "magnetite_block"         ; iOre    ("gemMagnetite"     ); iOre("blockMagnetite"       ); iSubItem("miragefairy2019:materials"      ;  8); iSubItem("miragefairy2019:materials1";  5));
+	x9("pyrope_gem"        ; "pyrope_block"            ; iOre    ("gemPyrope"        ); iOre("blockPyrope"          ); iSubItem("miragefairy2019:materials"      ; 10); iSubItem("miragefairy2019:materials1";  6));
+	x9("smithsonite_gem"   ; "smithsonite_block"       ; iOre    ("gemSmithsonite"   ); iOre("blockSmithsonite"     ); iSubItem("miragefairy2019:materials"      ; 11); iSubItem("miragefairy2019:materials1";  7));
+	x9("charcoal"          ; "charcoal_block"          ; iSubItem("minecraft:coal"; 1); iOre("blockCharcoal"        ); iSubItem("minecraft:coal"                 ;  1); iSubItem("miragefairy2019:materials1";  8));
+	x9("mirage_flower_leaf"; "mirage_flower_leaf_block"; iOre    ("leafMirageFlower" ); iOre("blockLeafMirageFlower"); iSubItem("miragefairy2019:fairy_materials";  8); iSubItem("miragefairy2019:materials1";  9));
+	x9("miragium_ingot"    ; "miragium_ingot_block"    ; iOre    ("ingotMiragium"    ); iOre("blockMiragium"        ); iSubItem("miragefairy2019:materials"      ;  5); iSubItem("miragefairy2019:materials1"; 10));
+	x9("miragium_dust"     ; "miragium_dust_block"     ; iOre    ("dustMiragium"     ); iOre("blockDustMiragium"    ); iSubItem("miragefairy2019:materials"      ;  3); iSubItem("miragefairy2019:materials1"; 11));
+
+	x9("miragium_tiny_dust"; "miragium_dust"           ; iOre    ("dustTinyMiragium" ); iOre("dustMiragium"         ); iSubItem("miragefairy2019:materials"      ;  4); iSubItem("miragefairy2019:materials" ;  3));
+	x9("miragium_nugget"   ; "miragium_ingot"          ; iOre    ("nuggetMiragium"   ); iOre("ingotMiragium"        ); iSubItem("miragefairy2019:materials"      ; 13); iSubItem("miragefairy2019:materials" ;  5));
+
+);
+
+#################### ワンド ####################
+(
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/fairyweapons/fairywand");
+
+	# 普通のワンド
+	(
+		fairyWand : registerName, rod, erg -> writer::write("$registerName.json"; {
+			type = "forge:ore_shaped";
+			group = registerName;
+			pattern = [
+				" cS",
+				" R ",
+				"R  ",
+			];
+			key = {
+				c = {
+					type = "miragefairy2019:ore_dict_complex";
+					ore = "mirageFairy2019CraftingToolFairyWandCrafting";
+				};
+				R = {
+					type = "forge:ore_dict";
+					ore = rod;
+				};
+				S = {
+					type = "forge:ore_dict";
+					ore = "mirageFairy2019Sphere$erg";
+				};
+			};
+			result = {
+				item = "miragefairy2019:$registerName";
+			};
+		});
+
+		rs : [
+			"stickMirageFlower",
+			"rodMiragium",
+			"mirageFairy2019ManaRodQuartz",
+			"stickMirageFairyWood",
+		];
+
+		fairyWand("crafting_fairy_wand"   ; rs[0]; "Craft");
+		fairyWand("crafting_fairy_wand_2" ; rs[1]; "Craft");
+		fairyWand("crafting_fairy_wand_3" ; rs[2]; "Craft");
+		fairyWand("crafting_fairy_wand_4" ; rs[3]; "Craft");
+		fairyWand("hydrating_fairy_wand"  ; rs[0]; "Water");
+		fairyWand("hydrating_fairy_wand_2"; rs[1]; "Water");
+		fairyWand("hydrating_fairy_wand_3"; rs[2]; "Water");
+		fairyWand("hydrating_fairy_wand_4"; rs[3]; "Water");
+		fairyWand("melting_fairy_wand"    ; rs[1]; "Flame");
+		fairyWand("melting_fairy_wand_2"  ; rs[2]; "Flame");
+		fairyWand("melting_fairy_wand_3"  ; rs[3]; "Flame");
+		fairyWand("breaking_fairy_wand"   ; rs[1]; "Breaking");
+		fairyWand("breaking_fairy_wand_2" ; rs[2]; "Breaking");
+		fairyWand("breaking_fairy_wand_3" ; rs[3]; "Breaking");
+		fairyWand("freezing_fairy_wand"   ; rs[1]; "Freeze");
+		fairyWand("freezing_fairy_wand_2" ; rs[2]; "Freeze");
+		fairyWand("freezing_fairy_wand_3" ; rs[3]; "Freeze");
+		fairyWand("polishing_fairy_wand"  ; rs[2]; "Crystal");
+		fairyWand("polishing_fairy_wand_2"; rs[3]; "Crystal");
+		fairyWand("summoning_fairy_wand"  ; rs[2]; "Submission");
+		fairyWand("summoning_fairy_wand_2"; rs[3]; "Submission");
+	);
+
+	# 糸から技巧杖
+	writer::write("crafting_fairy_wand_from_string.json"; {
+		type = "forge:ore_shaped";
+		group = "crafting_fairy_wand";
+		pattern = [
+			" cS",
+			" R ",
+			"R  ",
+		];
+		key = {
+			c = {
+				item = "minecraft:string";
+			};
+			R = {
+				type = "forge:ore_dict";
+				ore = "stickMirageFlower";
+			};
+			S = {
+				type = "forge:ore_dict";
+				ore = "mirageFairy2019SphereCraft";
+			};
+		};
+		result = {
+			item = "miragefairy2019:crafting_fairy_wand";
+		};
+	});
+
+);
+
+#################### その他 ####################
+(
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials");
+
+	func : registerName, oreName, metadata_bucket, metadata_bottle -> (
+		writer::write("$(registerName)_bucket_from_$(registerName)_bottle.json"; {
+			type = "forge:ore_shapeless";
+			group = "$(registerName)_bucket";
+			ingredients = [
+				{
+					item = "minecraft:bucket";
+				};
+				1 .. 4 | {
+					type = "forge:ore_dict";
+					ore = "container250$(oreName)";
+				};
+			];
+			result = {
+				item = "miragefairy2019:filled_bucket";
+				data = metadata_bucket;
+			};
+		});
+		writer::write("$(registerName)_bottle_from_$(registerName)_bucket.json"; {
+			type = "forge:ore_shapeless";
+			group = "$(registerName)_bottle";
+			ingredients = [
+				1 .. 4 | {
+					item = "minecraft:glass_bottle";
+				};
+				{
+					type = "forge:ore_dict";
+					ore = "container1000$(oreName)";
+				};
+			];
+			result = {
+				item = "miragefairy2019:fairy_materials";
+				data = metadata_bottle;
+				count = 4;
+			};
+		});
+	);
+	func("miragium_water"       ; "MiragiumWater"      ; 0; 10);
+	func("mirage_flower_extract"; "MirageFlowerExtract"; 1; 11);
+	func("mirage_flower_oil"    ; "MirageFlowerOil"    ; 2; 12);
+
+);
+
+#################### 妖精アイテム ####################
+(
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/fairymaterials");
+
+	# トゥインクルストーン
+	writer::write("twinkle_stone.json"; {
+		type = "forge:ore_shaped";
+		group = "twinkle_stone";
+		pattern = [
+			"ScS";
+			"IlI";
+			"SmS";
+		];
+		key = {
+			S = {
+				item = "minecraft:stone";
+				data = 0;
+			};
+			I = {
+				type = "forge:ore_dict";
+				ore = "ingotMiragium";
+			};
+			c = {
+				type = "miragefairy2019:ore_dict_complex";
+				ore = "mirageFairy2019CraftingToolFairyWandCrafting";
+			};
+			m = {
+				type = "miragefairy2019:ore_dict_complex";
+				ore = "mirageFairy2019CraftingToolFairyWandMelting";
+			};
+			l = {
+				type = "forge:ore_dict";
+				ore = "mirageFairy2019SphereLight";
+			};
+		};
+		result = {
+			item = "miragefairy2019:twinkle_stone";
+			data = 3;
+			count = 4;
+		};
+	});
+	entry : (
+		[0 , "white"     , "White"    ],
+		[1 , "orange"    , "Orange"   ],
+		[2 , "magenta"   , "Magenta"  ],
+		[3 , "light_blue", "LightBlue"],
+		[4 , "yellow"    , "Yellow"   ],
+		[5 , "lime"      , "Lime"     ],
+		[6 , "pink"      , "Pink"     ],
+		[7 , "gray"      , "Gray"     ],
+		[8 , "silver"    , "Silver"   ],
+		[9 , "cyan"      , "Cyan"     ],
+		[10, "purple"    , "Purple"   ],
+		[11, "blue"      , "Blue"     ],
+		[12, "brown"     , "Brown"    ],
+		[13, "green"     , "Green"    ],
+		[14, "red"       , "Red"      ],
+		[15, "black"     , "Black"    ],
+	) | writer::write("$(entry.1)_twinkle_stone.json"; {
+		type = "forge:ore_shapeless";
+		group = "$(entry.1)_twinkle_stone";
+		ingredients = [
+			{
+				type = "forge:ore_dict";
+				ore = "mirageFairy2019TwinkleStone";
+			};
+			{
+				type = "forge:ore_dict";
+				ore = "dye$(entry.2)";
+			};
+		];
+		result = {
+			item = "miragefairy2019:twinkle_stone";
+			data = entry.0;
+		};
+	});
+
+);
+
+"[recipe] OK" => OUT;

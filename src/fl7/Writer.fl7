@@ -1,0 +1,16 @@
+@STRICT;
+
+Writer : {
+	new : class, dir -> class {
+		dir;
+		indent = "\t";
+	};
+	write : this, file, data -> (
+		EXEC("mkdir"; "-p", RESOLVE("$(this.dir)/$file", ".."));
+		WRITE("$(this.dir)/$file"; JSON(data; this.indent));
+	);
+};
+
+{
+    Writer;
+}
