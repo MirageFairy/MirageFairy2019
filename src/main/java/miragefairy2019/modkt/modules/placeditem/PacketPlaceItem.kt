@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
+import kotlin.math.round
 
 class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
     override fun onMessage(message: MessagePlaceItem, ctx: MessageContext): IMessage? {
@@ -133,6 +134,10 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
 
             // アイテムを設置
             tileEntity.itemStack = itemStackHeld.splitStack(1)
+
+            // 角度調整
+            tileEntity.rotation = round(player.rotationYawHead.toDouble() / 45) * 45
+
             tileEntity.markDirty()
 
             // エフェクト

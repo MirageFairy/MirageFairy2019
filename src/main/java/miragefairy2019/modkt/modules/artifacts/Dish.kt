@@ -30,6 +30,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.function.Consumer
 import java.util.function.Supplier
+import kotlin.math.round
 
 class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceableBlock {
     companion object {
@@ -127,6 +128,10 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceableBlock {
 
             // アイテムを設置
             tileEntity.itemStack = itemStack
+
+            // 角度調整
+            tileEntity.rotation = round(player.rotationYawHead.toDouble() / 45) * 45
+
             tileEntity.markDirty()
             tileEntity.sendUpdatePacket()
 
@@ -136,6 +141,7 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceableBlock {
             // アイテムを回収
             val itemStackContained = tileEntity.itemStack
             tileEntity.itemStack = ItemStack.EMPTY
+
             tileEntity.markDirty()
             tileEntity.sendUpdatePacket()
 
