@@ -16,7 +16,9 @@ import miragefairy2019.modkt.impl.oreseeddrop.OreSeedDropRequirements.minY
 import miragefairy2019.modkt.impl.oreseeddrop.Vein
 import miragefairy2019.modkt.impl.oreseeddrop.invoke
 import miragefairy2019.modkt.impl.oreseeddrop.register
+import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
+import net.minecraft.init.Blocks.*
 import net.minecraft.item.ItemStack
 import miragefairy2019.modkt.impl.oreseeddrop.Elements as el
 
@@ -42,6 +44,7 @@ object LoaderOreSeedDrop {
 
             fun ore1(variant: EnumVariantOre1) = Pair({ ModuleOre.blockOre1.getState(variant) }, { ItemStack(ModuleOre.blockOre1, 1, variant.metadata) })
             fun ore2(variant: EnumVariantOre2) = Pair({ ModuleOre.blockOre2.getState(variant) }, { ItemStack(ModuleOre.blockOre2, 1, variant.metadata) })
+            fun block(block: Block, meta: Int = 0) = Pair({ block.defaultState }, { ItemStack(block) })
 
             fun OreSeedDropRegistryScope.TypedOreSeedDropRegistryScope.vein(shape: EnumOreSeedShape, weight: Double, output: Pair<() -> IBlockState, () -> ItemStack>, vararg generationConditions: IOreSeedDropRequirement) {
                 registry.register(type, POINT, weight / 2, output, *generationConditions)
@@ -82,6 +85,13 @@ object LoaderOreSeedDrop {
                 vein(MEDIUM, 0.75, ore1(NEPHRITE_ORE), Vein(50393467, 64, 16, 0.01, el.CALCIUM, el.MAGNESIUM, el.FERRUM))
                 vein(HORIZONTAL, 0.50, ore1(TOPAZ_ORE), Vein(58068649, 16, 4, 0.01, el.ALUMINIUM, el.FLUORINE))
                 vein(HORIZONTAL, 0.50, ore2(TOURMALINE_ORE), Vein(25988519, 16, 4, 0.01, el.NATRIUM, el.LITHIUM, el.ALUMINIUM, el.BORON))
+                vein(POINT, 0.50, block(EMERALD_ORE), Vein(54693454, 16, 4, 0.02, el.BERYLLIUM, el.ALUMINIUM))
+                vein(LAPIS, 0.50, block(LAPIS_ORE), Vein(60410682, 32, 8, 0.005, el.NATRIUM, el.ALUMINIUM))
+                vein(DIAMOND, 0.50, block(DIAMOND_ORE), Vein(20741887, 8, 2, 0.003, el.CARBON))
+                vein(COAL, 0.50, block(COAL_ORE), Vein(25197329, 64, 16, 0.003, el.CARBON))
+                vein(DIAMOND, 0.50, block(REDSTONE_ORE), Vein(95298700, 64, 16, 0.003, el.FERRUM, el.CUPRUM, el.ALUMINIUM, el.MERCURY))
+                vein(IRON, 0.50, block(IRON_ORE), Vein(34443884, 64, 16, 0.003, el.FERRUM))
+                vein(IRON, 0.50, block(GOLD_ORE), Vein(93307749, 16, 4, 0.003, el.AURUM))
             }
 
             // ネザー鉱石
