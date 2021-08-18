@@ -1,8 +1,10 @@
 package miragefairy2019.modkt.modules.placeditem
 
 import io.netty.buffer.ByteBuf
+import miragefairy2019.libkt.squared
 import miragefairy2019.mod.api.ApiPlacedItem
 import miragefairy2019.modkt.api.placeditem.IPlaceableBlock
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
@@ -32,6 +34,9 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
 
         val world = player.world
 
+        // 届かないなら中止
+        if (message.blockPos.distanceSq(player.position) > (player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue + 2).squared()) return null
+
         fun effect(blockPos: BlockPos) = world.playSound(
                 null,
                 blockPos,
@@ -42,7 +47,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
 
 
         fun tryBlockAction(): EnumActionResult { // お皿とかに設置・撤去する
-            val blockPos = message.blockPos!! // 起点座標
+            val blockPos = message.blockPos // 起点座標
             val blockState = world.getBlockState(blockPos) // 指定座標のブロックステート
             val block = blockState.block // 指定座標のブロック
             if (block !is IPlaceableBlock) return EnumActionResult.PASS // 指定座標はPlaceHandlerでなければならない
@@ -73,7 +78,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
         if (tryBlockAction() != EnumActionResult.PASS) return null
 
         fun tryBreak(): EnumActionResult { // 撤去
-            val blockPos = message.blockPos!! // 起点座標
+            val blockPos = message.blockPos // 起点座標
             val blockState = world.getBlockState(blockPos) // 指定座標のブロック
             if (blockState !== ApiPlacedItem.blockPlacedItem.defaultState) return EnumActionResult.PASS // 指定座標は置かれたアイテムでなければならない
 
@@ -109,7 +114,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
         if (tryBreak() != EnumActionResult.PASS) return null
 
         fun tryPut(): EnumActionResult { // 設置
-            val blockPos = message.blockPos!!.offset(message.facing!!) // オフセット座標
+            val blockPos = message.blockPos.offset(message.facing) // オフセット座標
             val blockState = world.getBlockState(blockPos) // 指定座標のブロック
             if (!blockState.block.isAir(blockState, world, blockPos)) return EnumActionResult.PASS // 指定座標は空気でなければならない
 
@@ -152,8 +157,8 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
 }
 
 class MessagePlaceItem : IMessage {
-    var blockPos: BlockPos? = null
-    var facing: EnumFacing? = null
+    lateinit var blockPos: BlockPos
+    lateinit var facing: EnumFacing
 
     @Suppress("unused") // リフレクションで呼ばれる
     constructor()
