@@ -1,0 +1,21 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "dish",
+	"pattern": [
+		" p ",
+		"qqq"
+	],
+	"key": {
+		"q": {
+			"type": "forge:ore_dict",
+			"ore": "gemQuartz"
+		},
+		"p": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:dish"
+	}
+}
