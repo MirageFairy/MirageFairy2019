@@ -26,6 +26,9 @@ object Elements {
     val SULFUR = Element("S", 52516049, 16 * 16)
     val LITHIUM = Element("Li", 47876821, 16 * 32)
     val ZINC = Element("Zn", 89828281, 16 * 32)
+    val CUPRUM = Element("Cu", 75013643, 16 * 32)
     val BORON = Element("B", 51617299, 16 * 32)
+    val BERYLLIUM = Element("Be", 52884671, 16 * 32)
     val MERCURY = Element("Hg", 45121997, 16 * 64)
+    val AURUM = Element("Au", 39500908, 16 * 64)
 }
