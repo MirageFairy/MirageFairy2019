@@ -57,12 +57,12 @@ object LoaderOreSeedDrop {
 
             // まばら天然石
             STONE {
-                register(POINT, 0.03, ore1(APATITE_ORE))
-                register(POINT, 0.03, ore1(FLUORITE_ORE))
-                register(POINT, 0.03, ore1(SULFUR_ORE), maxY(15))
-                register(POINT, 0.03, ore1(CINNABAR_ORE), maxY(15))
-                register(POINT, 0.03, ore1(MAGNETITE_ORE))
-                register(POINT, 0.03, ore1(MOONSTONE_ORE), minY(40), maxY(50))
+                register(POINT, 0.05, ore1(APATITE_ORE))
+                register(POINT, 0.05, ore1(FLUORITE_ORE))
+                register(POINT, 0.05, ore1(SULFUR_ORE), maxY(15))
+                register(POINT, 0.05, ore1(CINNABAR_ORE), maxY(15))
+                register(POINT, 0.05, ore1(MAGNETITE_ORE))
+                register(POINT, 0.05, ore1(MOONSTONE_ORE), minY(40), maxY(50))
             }
 
             // 鉱脈天然石
