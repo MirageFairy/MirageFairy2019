@@ -7,4 +7,4 @@ then
 	)
 fi
 
-bash fluorite-7/fl7 "$(cat make_json.fl7)"
+bash fluorite-7/fluorite7 src/fl7/make_json.fl7
