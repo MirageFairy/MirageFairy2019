@@ -19,13 +19,14 @@ plugins {
 
 // 各数字は上位のバージョンが増えてもリセットしない
 // 正式版でないので常に0
-val versionZero = 0
 // Forge対応バージョンの区別
-val versionForge = 1
 // クライアント互換性の区別
-val versionCompatibility = 15
 // ビルドバージョンの区別
-val versionBuild = 23
+val versionTag = "v0.1.15.23"
+val versionZero = versionTag.substring(1).split(".")[0].toInt()
+val versionForge = versionTag.substring(1).split(".")[1].toInt()
+val versionCompatibility = versionTag.substring(1).split(".")[2].toInt()
+val versionBuild = versionTag.substring(1).split(".")[3].toInt()
 
 version = "${versionZero}.${versionForge}.${versionCompatibility}.${versionBuild}"
 group = "miragefairy2019"
