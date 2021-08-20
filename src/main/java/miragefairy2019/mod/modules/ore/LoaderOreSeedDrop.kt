@@ -72,16 +72,16 @@ object LoaderOreSeedDrop {
             STONE {
                 vein(LARGE, 1.00, ore1(APATITE_ORE), Vein(97063327, 32, 8, 0.02, el.FLUORINE, el.CALCIUM, el.PHOSPHORUS))
                 vein(PYRAMID, 1.00, ore1(FLUORITE_ORE), Vein(63503821, 32, 8, 0.02, el.FLUORINE, el.CALCIUM))
-                vein(STAR, 1.00, ore1(SULFUR_ORE), Vein(34153177, 32, 8, 0.02, el.SULFUR), maxY(15))
-                vein(POINT, 1.00, ore1(CINNABAR_ORE), Vein(27826567, 32, 8, 0.02, el.SULFUR, el.MERCURY), maxY(15))
+                vein(STAR, 1.00, ore1(SULFUR_ORE), Vein(34153177, 32, 8, 0.02, el.SULFUR))
+                vein(POINT, 1.00, ore1(CINNABAR_ORE), Vein(27826567, 32, 8, 0.02, el.SULFUR, el.MERCURY))
                 vein(COAL, 1.00, ore1(MAGNETITE_ORE), Vein(16287001, 64, 16, 0.02, el.FERRUM))
-                vein(TINY, 1.00, ore1(MOONSTONE_ORE), Vein(78750461, 16, 4, 0.02, el.KALIUM, el.ALUMINIUM), minY(40), maxY(50))
+                vein(TINY, 1.00, ore1(MOONSTONE_ORE), Vein(78750461, 16, 4, 0.02, el.KALIUM, el.ALUMINIUM))
             }
 
             // 鉱脈宝石
             STONE {
-                vein(POINT, 0.50, ore1(PYROPE_ORE), Vein(39250117, 16, 4, 0.01, el.MAGNESIUM, el.ALUMINIUM), maxY(50))
-                vein(LARGE, 0.75, ore1(SMITHSONITE_ORE), Vein(32379601, 32, 8, 0.01, el.ZINC, el.CARBON), minY(30))
+                vein(POINT, 0.50, ore1(PYROPE_ORE), Vein(39250117, 16, 4, 0.01, el.MAGNESIUM, el.ALUMINIUM))
+                vein(LARGE, 0.75, ore1(SMITHSONITE_ORE), Vein(32379601, 32, 8, 0.01, el.ZINC, el.CARBON))
                 vein(MEDIUM, 0.75, ore1(NEPHRITE_ORE), Vein(50393467, 64, 16, 0.01, el.CALCIUM, el.MAGNESIUM, el.FERRUM))
                 vein(HORIZONTAL, 0.50, ore1(TOPAZ_ORE), Vein(58068649, 16, 4, 0.01, el.ALUMINIUM, el.FLUORINE))
                 vein(HORIZONTAL, 0.50, ore2(TOURMALINE_ORE), Vein(25988519, 16, 4, 0.01, el.NATRIUM, el.LITHIUM, el.ALUMINIUM, el.BORON))
