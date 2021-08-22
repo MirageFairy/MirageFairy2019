@@ -30,4 +30,9 @@ public interface IPlayerAuraManager {
     @Nullable
     public IManaSet getGlobalFoodAura(ItemStack itemStack);
 
+    /**
+     * Server World Only
+     */
+    public void unloadAllServerPlayerAuraHandlers();
+
 }

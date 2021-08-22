@@ -18,6 +18,7 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent
 import net.minecraftforge.event.entity.player.ItemTooltipEvent
 import net.minecraftforge.event.entity.player.PlayerEvent
+import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ServerConnectionFromClientEvent
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
@@ -156,6 +157,21 @@ object ModulePlayerAura {
                 fun hook(event: PlayerEvent.SaveToFile) {
                     val player = event.entityPlayer
                     if (player is EntityPlayerMP) ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(player).save()
+                }
+            })
+        })
+
+        // ワールド停止時にロード済みのデータを破棄
+        erMod.init.register(Consumer {
+            MinecraftForge.EVENT_BUS.register(object : Any() {
+                @SubscribeEvent
+                fun hook(event: WorldEvent.Unload) {
+                    if (!event.world.isRemote) {
+                        if (event.world.minecraftServer!!.getWorld(0) === event.world) {
+                            ApiMain.logger().info("Unloading all playerauras")
+                            ApiPlayerAura.playerAuraManager.unloadAllServerPlayerAuraHandlers()
+                        }
+                    }
                 }
             })
         })

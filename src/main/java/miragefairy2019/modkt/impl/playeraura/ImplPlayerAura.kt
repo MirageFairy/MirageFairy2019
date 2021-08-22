@@ -58,6 +58,8 @@ class PlayerAuraManager : IPlayerAuraManager {
         fun f(typeChooser: (IManaSet) -> Double) = listFairyRelationMax.map { typeChooser(it.manas) / it.cost * 50 * 0.5 }.average()
         return ManaSet(f { it.shine }, f { it.fire }, f { it.wind }, f { it.gaia }, f { it.aqua }, f { it.dark })
     }
+
+    override fun unloadAllServerPlayerAuraHandlers() = playerAuraHandlersServer.clear()
 }
 
 
