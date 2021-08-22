@@ -1,6 +1,6 @@
 package miragefairy2019.modkt.api.playeraura;
 
-import miragefairy2019.mod.api.fairy.IManaSet;
+import miragefairy2019.modkt.api.IManaSet;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;

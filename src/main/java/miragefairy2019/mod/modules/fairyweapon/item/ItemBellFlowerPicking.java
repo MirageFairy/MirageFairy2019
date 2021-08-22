@@ -11,6 +11,8 @@ import miragefairy2019.mod.common.magic.MagicSelectorPosition;
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace;
 import miragefairy2019.mod.common.magic.MagicStatusHelper;
 import miragefairy2019.modkt.api.playeraura.IPlayerAuraHandler;
+import miragefairy2019.modkt.impl.ManaSetKt;
+import miragefairy2019.modkt.impl.ManaType;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -32,7 +34,6 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static miragefairy2019.mod.modules.fairy.EnumAbilityType.*;
-import static miragefairy2019.mod.modules.fairy.EnumManaType.*;
 
 public class ItemBellFlowerPicking extends ItemFairyWeaponBase3 {
 
@@ -53,48 +54,48 @@ public class ItemBellFlowerPicking extends ItemFairyWeaponBase3 {
                 f -> new TextComponentString("").appendSibling(f.cost()),
                 -12, 0, 12);
         IMagicStatus<Integer> maxTargetCount = MagicStatusHelper.getMagicStatusMaxTargetCount(
-                () -> (int) Math.floor(2 + (fairyType.getManas().getDark() + playerAura.getPlayerAura().getMana(dark)) * maxTargetCountFactor + fairyType.getAbilities().getAbilityPower(fell) * 0.1),
+                () -> (int) Math.floor(2 + (fairyType.getManas().getDark() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getDark())) * maxTargetCountFactor + fairyType.getAbilities().getAbilityPower(fell) * 0.1),
                 f -> new TextComponentString("")
                         .appendText("2")
                         .appendText("+")
-                        .appendSibling(f.mana(dark)).appendText("*" + String.format("%.2f", maxTargetCountFactor))
+                        .appendSibling(f.mana(ManaType.Companion.getDark())).appendText("*" + String.format("%.2f", maxTargetCountFactor))
                         .appendText("+")
                         .appendSibling(f.ability(fell)).appendText("*0.1"),
                 2, 10000);
         IMagicStatus<Double> fortune = MagicStatusHelper.getMagicStatusFortune(
-                () -> 3 + (fairyType.getManas().getShine() + playerAura.getPlayerAura().getMana(shine)) * fortuneFactor + fairyType.getAbilities().getAbilityPower(knowledge) * 0.1,
+                () -> 3 + (fairyType.getManas().getShine() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getShine())) * fortuneFactor + fairyType.getAbilities().getAbilityPower(knowledge) * 0.1,
                 f -> new TextComponentString("")
                         .appendText("3")
                         .appendText("+")
-                        .appendSibling(f.mana(shine)).appendText("*" + String.format("%.2f", fortuneFactor))
+                        .appendSibling(f.mana(ManaType.Companion.getShine())).appendText("*" + String.format("%.2f", fortuneFactor))
                         .appendText("+")
                         .appendSibling(f.ability(knowledge)).appendText("*0.1"),
                 3, 10000);
         IMagicStatus<Double> additionalReach = MagicStatusHelper.getMagicStatusAdditionalReach(
-                () -> 0 + (fairyType.getManas().getWind() + playerAura.getPlayerAura().getMana(wind)) * 0.1,
+                () -> 0 + (fairyType.getManas().getWind() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getWind())) * 0.1,
                 f -> new TextComponentString("")
-                        .appendSibling(f.mana(wind)).appendText("*0.1"),
+                        .appendSibling(f.mana(ManaType.Companion.getWind())).appendText("*0.1"),
                 0, 10);
         IMagicStatus<Double> radius = MagicStatusHelper.getMagicStatusRadius(
-                () -> 4 + (fairyType.getManas().getGaia() + playerAura.getPlayerAura().getMana(gaia)) * radiusFactor,
+                () -> 4 + (fairyType.getManas().getGaia() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getGaia())) * radiusFactor,
                 f -> new TextComponentString("")
                         .appendText("4")
                         .appendText("+")
-                        .appendSibling(f.mana(gaia)).appendText("*" + String.format("%.2f", radiusFactor)),
+                        .appendSibling(f.mana(ManaType.Companion.getGaia())).appendText("*" + String.format("%.2f", radiusFactor)),
                 4, 10);
         IMagicStatus<Double> wear = MagicStatusHelper.getMagicStatusWear(
-                () -> 0.2 / (1 + (fairyType.getManas().getFire() + playerAura.getPlayerAura().getMana(fire)) * 0.03),
+                () -> 0.2 / (1 + (fairyType.getManas().getFire() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getFire())) * 0.03),
                 f -> new TextComponentString("")
                         .appendText("0.2/(1+")
-                        .appendSibling(f.mana(fire)).appendText("*0.03")
+                        .appendSibling(f.mana(ManaType.Companion.getFire())).appendText("*0.03")
                         .appendText(")"),
                 0.0001, 0.2);
         IMagicStatus<Double> coolTime = MagicStatusHelper.getMagicStatusCoolTime(
-                () -> fairyType.getCost() * 0.5 / (1 + (fairyType.getManas().getAqua() + playerAura.getPlayerAura().getMana(aqua)) * 0.03),
+                () -> fairyType.getCost() * 0.5 / (1 + (fairyType.getManas().getAqua() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getAqua())) * 0.03),
                 f -> new TextComponentString("")
                         .appendSibling(f.cost()).appendText("*0.5")
                         .appendText("/(1+")
-                        .appendSibling(f.mana(aqua)).appendText("*0.03")
+                        .appendSibling(f.mana(ManaType.Companion.getAqua())).appendText("*0.03")
                         .appendText(")"),
                 0.0001, 100);
         IMagicStatus<Boolean> collection = MagicStatusHelper.getMagicStatusCollection(

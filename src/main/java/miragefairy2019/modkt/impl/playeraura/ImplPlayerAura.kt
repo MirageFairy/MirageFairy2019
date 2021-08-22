@@ -5,8 +5,8 @@ import com.google.gson.annotations.Expose
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IItemFairy
-import miragefairy2019.mod.api.fairy.IManaSet
 import miragefairy2019.mod.api.main.ApiMain
+import miragefairy2019.modkt.api.IManaSet
 import miragefairy2019.modkt.api.playeraura.IClientPlayerAuraHandler
 import miragefairy2019.modkt.api.playeraura.IPlayerAuraHandler
 import miragefairy2019.modkt.api.playeraura.IPlayerAuraManager

@@ -1,10 +1,10 @@
 package miragefairy2019.mod.api.fairyweapon.formula;
 
 import miragefairy2019.mod.api.fairy.IAbilityType;
-import miragefairy2019.mod.api.fairy.IManaType;
-import miragefairy2019.mod.api.fairy.ManaTypes;
 import miragefairy2019.mod.modules.fairyweapon.critical.CriticalRate;
 import miragefairy2019.mod.modules.fairyweapon.formula.*;
+import miragefairy2019.modkt.api.IManaType;
+import miragefairy2019.modkt.impl.ManaType;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Struct1;
 import net.minecraft.util.text.ITextComponent;
@@ -29,27 +29,27 @@ public class ApiFormula {
     }
 
     public static IFormulaDouble shine() {
-        return mana(ManaTypes.shine.get());
+        return mana(ManaType.Companion.getShine());
     }
 
     public static IFormulaDouble fire() {
-        return mana(ManaTypes.fire.get());
+        return mana(ManaType.Companion.getFire());
     }
 
     public static IFormulaDouble wind() {
-        return mana(ManaTypes.wind.get());
+        return mana(ManaType.Companion.getWind());
     }
 
     public static IFormulaDouble gaia() {
-        return mana(ManaTypes.gaia.get());
+        return mana(ManaType.Companion.getGaia());
     }
 
     public static IFormulaDouble aqua() {
-        return mana(ManaTypes.aqua.get());
+        return mana(ManaType.Companion.getAqua());
     }
 
     public static IFormulaDouble dark() {
-        return mana(ManaTypes.dark.get());
+        return mana(ManaType.Companion.getDark());
     }
 
     public static IFormulaDouble abilityRaw(Supplier<IAbilityType> sAbilityType) {

@@ -1,7 +1,8 @@
 package miragefairy2019.mod.modules.fairyweapon.formula;
 
-import miragefairy2019.mod.api.fairy.IManaType;
 import miragefairy2019.mod.api.fairyweapon.formula.ISource;
+import miragefairy2019.modkt.api.IManaType;
+import miragefairy2019.modkt.impl.ManaTypeKt;
 import net.minecraft.util.text.ITextComponent;
 
 public class SourceMana implements ISource {
@@ -19,7 +20,7 @@ public class SourceMana implements ISource {
 
     @Override
     public ITextComponent getDisplayName() {
-        return manaType.getDisplayName();
+        return ManaTypeKt.getDisplayName(manaType);
     }
 
 }

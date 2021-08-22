@@ -1,6 +1,5 @@
-package miragefairy2019.mod.api.fairy;
+package miragefairy2019.modkt.api;
 
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 
 public interface IManaType {
@@ -11,7 +10,5 @@ public interface IManaType {
     public String getName();
 
     public TextFormatting getTextColor();
-
-    public ITextComponent getDisplayName();
 
 }

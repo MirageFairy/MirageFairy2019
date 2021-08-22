@@ -10,6 +10,9 @@ import miragefairy2019.mod.common.fairy.relation.FairyRelationRegistry;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.InitializationContext;
 import miragefairy2019.mod.lib.OreIngredientComplex;
+import miragefairy2019.modkt.api.IManaSet;
+import miragefairy2019.modkt.impl.ManaSet;
+import miragefairy2019.modkt.impl.ManaSetKt;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple;
@@ -306,24 +309,24 @@ public class ModuleFairy {
                     .toArray(VariantFairy[]::new);
         }
 
-        private FairyType[] t(int id, String name, int rare, int cost, double rateSspecial, ManaSet manaSet, AbilitySet abilitySet, ColorSet colorSet) {
+        private FairyType[] t(int id, String name, int rare, int cost, double rateSspecial, IManaSet manaSet, AbilitySet abilitySet, ColorSet colorSet) {
             IntFunction<FairyType> f = rank -> {
 
                 double rateRare = Math.pow(2, (rare + rank - 2) / 4.0);
-                double rateVariance = Math.pow(0.5, ((manaSet.shine / manaSet.getMax()
-                        + manaSet.fire / manaSet.getMax()
-                        + manaSet.wind / manaSet.getMax()
-                        + manaSet.gaia / manaSet.getMax()
-                        + manaSet.aqua / manaSet.getMax()
-                        + manaSet.dark / manaSet.getMax()) - 1) / 5.0);
+                double rateVariance = Math.pow(0.5, ((manaSet.getShine() / ManaSetKt.getMax(manaSet)
+                        + manaSet.getFire() / ManaSetKt.getMax(manaSet)
+                        + manaSet.getWind() / ManaSetKt.getMax(manaSet)
+                        + manaSet.getGaia() / ManaSetKt.getMax(manaSet)
+                        + manaSet.getAqua() / ManaSetKt.getMax(manaSet)
+                        + manaSet.getDark() / ManaSetKt.getMax(manaSet)) - 1) / 5.0);
                 double sum = cost * rateRare * rateVariance * rateSspecial;
                 ManaSet manaSetReal = new ManaSet(
-                        manaSet.shine * sum / manaSet.getSum(),
-                        manaSet.fire * sum / manaSet.getSum(),
-                        manaSet.wind * sum / manaSet.getSum(),
-                        manaSet.gaia * sum / manaSet.getSum(),
-                        manaSet.aqua * sum / manaSet.getSum(),
-                        manaSet.dark * sum / manaSet.getSum());
+                        manaSet.getShine() * sum / ManaSetKt.getSum(manaSet),
+                        manaSet.getFire() * sum / ManaSetKt.getSum(manaSet),
+                        manaSet.getWind() * sum / ManaSetKt.getSum(manaSet),
+                        manaSet.getGaia() * sum / ManaSetKt.getSum(manaSet),
+                        manaSet.getAqua() * sum / ManaSetKt.getSum(manaSet),
+                        manaSet.getDark() * sum / ManaSetKt.getSum(manaSet));
 
                 AbilitySet abilitySetReal = new AbilitySet(abilitySet.getAbilities()
                         .map(tuple -> Tuple.of(tuple.x, tuple.y * rateRare))
@@ -336,7 +339,7 @@ public class ModuleFairy {
                     .toArray(FairyType[]::new);
         }
 
-        private ManaSet m(double shine, double fire, double wind, double gaia, double aqua, double dark) {
+        private IManaSet m(double shine, double fire, double wind, double gaia, double aqua, double dark) {
             return new ManaSet(shine, fire, wind, gaia, aqua, dark);
         }
 

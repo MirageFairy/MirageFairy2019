@@ -6,9 +6,10 @@ import miragefairy2019.mod.api.magic.IMagicFactorProvider;
 import miragefairy2019.mod.api.magic.IMagicHandler;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.modules.fairy.EnumAbilityType;
-import miragefairy2019.mod.modules.fairy.EnumManaType;
+import miragefairy2019.modkt.api.IManaType;
 import miragefairy2019.modkt.api.playeraura.ApiPlayerAura;
 import miragefairy2019.modkt.api.playeraura.IPlayerAuraHandler;
+import miragefairy2019.modkt.impl.ManaTypeKt;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,8 +53,8 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
                             .appendText(" (")
                             .appendSibling(magicStatus.getFormula(new IMagicFactorProvider() {
                                 @Override
-                                public ITextComponent mana(EnumManaType manaType) {
-                                    return manaType.getDisplayName();
+                                public ITextComponent mana(IManaType manaType) {
+                                    return ManaTypeKt.getDisplayName(manaType);
                                 }
 
                                 @Override

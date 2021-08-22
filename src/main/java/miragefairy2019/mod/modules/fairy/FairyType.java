@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairy;
 
 import miragefairy2019.mod.api.fairy.IAbilitySet;
 import miragefairy2019.mod.api.fairy.IFairyType;
-import miragefairy2019.mod.api.fairy.IManaSet;
+import miragefairy2019.modkt.api.IManaSet;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -15,7 +15,7 @@ public final class FairyType implements IFairyType {
     public final int rare;
     public final int rank;
     public final double cost;
-    public final ManaSet manaSet;
+    public final IManaSet manaSet;
     public final AbilitySet abilitySet;
     public final ColorSet colorSet;
 
@@ -28,7 +28,7 @@ public final class FairyType implements IFairyType {
             int rare,
             int rank,
             double cost,
-            ManaSet manaSet,
+            IManaSet manaSet,
             AbilitySet abilitySet,
             ColorSet colorSet) {
         this.modid = modid;
