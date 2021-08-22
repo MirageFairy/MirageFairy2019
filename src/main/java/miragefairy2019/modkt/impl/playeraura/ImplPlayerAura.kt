@@ -144,7 +144,7 @@ class PlayerAuraModel {
 
 
     private val gson by lazy { GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create()!! }
-    private fun getFile(player: EntityPlayer) = File(player.world.saveHandler.worldDirectory, "${ModMirageFairy2019.MODID}/playeraura/${player.cachedUniqueIdString}.json")
+    private fun getFile(player: EntityPlayer) = File(player.world.minecraftServer!!.getWorld(0).saveHandler.worldDirectory, "${ModMirageFairy2019.MODID}/playeraura/${player.cachedUniqueIdString}.json")
 
     fun toJson() = synchronized(lock) { gson.toJson(toJsonObject())!! }
 
