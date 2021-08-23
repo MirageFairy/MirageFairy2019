@@ -1,9 +1,9 @@
 package miragefairy2019.mod.api.fairyweapon.formula;
 
-import miragefairy2019.mod.api.fairy.IAbilityType;
 import miragefairy2019.mod.modules.fairyweapon.critical.CriticalRate;
 import miragefairy2019.mod.modules.fairyweapon.formula.*;
 import miragefairy2019.modkt.api.IManaType;
+import miragefairy2019.modkt.api.fairy.IAbilityType;
 import miragefairy2019.modkt.impl.ManaType;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Struct1;
@@ -12,7 +12,6 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class ApiFormula {
 
@@ -52,12 +51,12 @@ public class ApiFormula {
         return mana(ManaType.Companion.getDark());
     }
 
-    public static IFormulaDouble abilityRaw(Supplier<IAbilityType> sAbilityType) {
-        return new FormulaDoubleAbility(sAbilityType.get());
+    public static IFormulaDouble abilityRaw(IAbilityType abilityType) {
+        return new FormulaDoubleAbility(abilityType);
     }
 
-    public static IFormulaDouble ability(Supplier<IAbilityType> sAbilityType) {
-        return mul(abilityRaw(sAbilityType), div(cost(), 50));
+    public static IFormulaDouble ability(IAbilityType abilityType) {
+        return mul(abilityRaw(abilityType), div(cost(), 50));
     }
 
     public static IFormulaDouble cost() {

@@ -5,6 +5,7 @@ import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.modules.fairy.ComponentsAbilityType;
 import miragefairy2019.mod.modules.fairy.FairyTypeEmpty;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
+import miragefairy2019.modkt.api.fairy.IAbilityType;
 
 public class ApiFairy {
 

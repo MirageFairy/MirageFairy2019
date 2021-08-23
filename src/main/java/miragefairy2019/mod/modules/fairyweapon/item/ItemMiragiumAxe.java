@@ -5,6 +5,7 @@ import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.modkt.impl.fairy.AbilityType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
@@ -26,8 +27,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static miragefairy2019.mod.api.fairy.AbilityTypes.fell;
-import static miragefairy2019.mod.api.fairy.AbilityTypes.warp;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
 
 public class ItemMiragiumAxe extends ItemFairyWeaponBase {
@@ -42,7 +41,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
             add(new IFormulaDouble[]{
                     val(2.0),
                     div(aqua(), 2),
-                    div(abilityRaw(fell), 4),
+                    div(abilityRaw(AbilityType.Companion.getFell()), 4),
             }));
 
     public IMagicStatus<Integer> fortune = registerMagicStatus("fortune", formatterInteger(),
@@ -64,7 +63,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
             min(div(wind(), 5), 20));
 
     public IMagicStatus<Boolean> collection = registerMagicStatus("collection", formatterYesNo(),
-            gte(abilityRaw(warp), 10));
+            gte(abilityRaw(AbilityType.Companion.getWarp()), 10));
 
     public ItemMiragiumAxe() {
         setHarvestLevel("axe", 1);

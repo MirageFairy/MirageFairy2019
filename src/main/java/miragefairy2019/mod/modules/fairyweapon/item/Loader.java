@@ -8,6 +8,7 @@ import miragefairy2019.mod.lib.Configurator;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft;
+import miragefairy2019.modkt.impl.fairy.AbilityType;
 import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftConditionReplaceBlock;
 import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftConditionUseItem;
 import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftRecipe;
@@ -29,7 +30,6 @@ import java.util.function.Supplier;
 
 import static miragefairy2019.mod.api.composite.ApiComposite.instance;
 import static miragefairy2019.mod.api.composite.Components.*;
-import static miragefairy2019.mod.api.fairy.AbilityTypes.*;
 import static miragefairy2019.mod.api.fairy.ApiFairy.getComponentAbilityType;
 import static miragefairy2019.mod.lib.Configurator.*;
 
@@ -43,7 +43,7 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandCrafting"))
                 .bind(addOreName("mirageFairy2019FairyStick"))
                 .bind(addComponent(instance(wood.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(craft.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getCraft()))))
                 .bind(setFairyWandStatusOfTier(1))
                 .get();
 
@@ -52,7 +52,7 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandCrafting"))
                 .bind(addOreName("mirageFairy2019FairyStick"))
                 .bind(addComponent(instance(miragium.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(craft.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getCraft()))))
                 .bind(setFairyWandStatusOfTier(2))
                 .get();
 
@@ -62,7 +62,7 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019FairyStick"))
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(craft.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getCraft()))))
                 .bind(setFairyWandStatusOfTier(3))
                 .get();
 
@@ -70,7 +70,7 @@ public class Loader {
         fairyWeapon(erMod, ItemFairyWandCrafting::new, "crafting_fairy_wand_4", "fairyWandCrafting4")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandCrafting"))
                 .bind(addOreName("mirageFairy2019FairyStick"))
-                .bind(addComponent(instance(getComponentAbilityType(craft.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getCraft()))))
                 .bind(setFairyWandStatusOfTier(4))
                 .get();
 
@@ -79,7 +79,7 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandHydrating"))
                 .bind(addOreName("container1000Water"))
                 .bind(addComponent(instance(wood.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(water.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getWater()))))
                 .bind(setFairyWandStatusOfTier(1))
                 .get();
 
@@ -88,7 +88,7 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandHydrating"))
                 .bind(addOreName("container1000Water"))
                 .bind(addComponent(instance(miragium.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(water.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getWater()))))
                 .bind(setFairyWandStatusOfTier(2))
                 .get();
 
@@ -98,7 +98,7 @@ public class Loader {
                 .bind(addOreName("container1000Water"))
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(water.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getWater()))))
                 .bind(setFairyWandStatusOfTier(3))
                 .get();
 
@@ -106,7 +106,7 @@ public class Loader {
         fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "hydrating_fairy_wand_4", "fairyWandHydrating4")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandHydrating"))
                 .bind(addOreName("container1000Water"))
-                .bind(addComponent(instance(getComponentAbilityType(water.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getWater()))))
                 .bind(setFairyWandStatusOfTier(4))
                 .get();
 
@@ -114,7 +114,7 @@ public class Loader {
         fairyWeapon(erMod, ItemFairyWandMelting::new, "melting_fairy_wand", "fairyWandMelting")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandMelting"))
                 .bind(addComponent(instance(miragium.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(flame.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getFlame()))))
                 .bind(setFairyWandStatusOfTier(2))
                 .get();
 
@@ -123,14 +123,14 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandMelting"))
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(flame.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getFlame()))))
                 .bind(setFairyWandStatusOfTier(3))
                 .get();
 
         // 紅蓮のステッキ3
         fairyWeapon(erMod, ItemFairyWandMelting::new, "melting_fairy_wand_3", "fairyWandMelting3")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandMelting"))
-                .bind(addComponent(instance(getComponentAbilityType(flame.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getFlame()))))
                 .bind(setFairyWandStatusOfTier(4))
                 .get();
 
@@ -138,7 +138,7 @@ public class Loader {
         fairyWeapon(erMod, ItemFairyWandBreaking::new, "breaking_fairy_wand", "fairyWandBreaking")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandBreaking"))
                 .bind(addComponent(instance(miragium.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(breaking.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getBreaking()))))
                 .bind(setFairyWandStatusOfTier(2))
                 .get();
 
@@ -147,14 +147,14 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandBreaking"))
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(breaking.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getBreaking()))))
                 .bind(setFairyWandStatusOfTier(3))
                 .get();
 
         // 破壊のステッキ3
         fairyWeapon(erMod, ItemFairyWandBreaking::new, "breaking_fairy_wand_3", "fairyWandBreaking3")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandBreaking"))
-                .bind(addComponent(instance(getComponentAbilityType(breaking.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getBreaking()))))
                 .bind(setFairyWandStatusOfTier(4))
                 .get();
 
@@ -162,7 +162,7 @@ public class Loader {
         fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "freezing_fairy_wand", "fairyWandFreezing")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandFreezing"))
                 .bind(addComponent(instance(miragium.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(freeze.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getFreeze()))))
                 .bind(setFairyWandStatusOfTier(2))
                 .get();
 
@@ -171,14 +171,14 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandFreezing"))
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(freeze.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getFreeze()))))
                 .bind(setFairyWandStatusOfTier(3))
                 .get();
 
         // 氷晶のステッキ3
         fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "freezing_fairy_wand_3", "fairyWandFreezing3")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandFreezing"))
-                .bind(addComponent(instance(getComponentAbilityType(freeze.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getFreeze()))))
                 .bind(setFairyWandStatusOfTier(4))
                 .get();
 
@@ -187,14 +187,14 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandPolishing"))
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(crystal.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getCrystal()))))
                 .bind(setFairyWandStatusOfTier(3))
                 .get();
 
         // 珠玉のステッキ2
         fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "polishing_fairy_wand_2", "fairyWandPolishing2")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandPolishing"))
-                .bind(addComponent(instance(getComponentAbilityType(crystal.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getCrystal()))))
                 .bind(setFairyWandStatusOfTier(4))
                 .get();
 
@@ -203,14 +203,14 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandSummoning"))
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(submission.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getSubmission()))))
                 .bind(setFairyWandStatusOfTier(3))
                 .get();
 
         // 召喚のステッキ2
         fairyWeapon(erMod, ItemFairyWandSummoning::new, "summoning_fairy_wand_2", "fairyWandSummoning2")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandSummoning"))
-                .bind(addComponent(instance(getComponentAbilityType(submission.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getSubmission()))))
                 .bind(setFairyWandStatusOfTier(4))
                 .get();
 
@@ -220,8 +220,8 @@ public class Loader {
         Configurator<ItemFairyWeaponBase> miragiumSword = fairyWeapon(erMod, ItemFairyWeaponBase::new, "miragium_sword", "miragiumSword")
                 .bind(addComponent(instance(miragium.get(), 2)))
                 .bind(addComponent(instance(wood.get(), 0.5)))
-                .bind(addComponent(instance(getComponentAbilityType(attack.get()))))
-                .bind(addComponent(instance(getComponentAbilityType(slash.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getAttack()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getSlash()))))
                 .bind(setWeaponStatusOfTier(2))
                 .get();
 
@@ -234,7 +234,7 @@ public class Loader {
                 .bind(addComponent(instance(cinnabar.get(), 1)))
                 .bind(addComponent(instance(magnetite.get(), 1)))
                 .bind(addComponent(instance(moonstone.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(attack.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getAttack()))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
@@ -242,8 +242,8 @@ public class Loader {
         Configurator<ItemMiragiumAxe> miragiumAxe = fairyWeapon(erMod, ItemMiragiumAxe::new, "miragium_axe", "miragiumAxe")
                 .bind(addComponent(instance(miragium.get(), 3)))
                 .bind(addComponent(instance(wood.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(slash.get()))))
-                .bind(addComponent(instance(getComponentAbilityType(fell.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getSlash()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getFell()))))
                 .bind(setWeaponStatusOfTier(2))
                 .get();
 
@@ -252,7 +252,7 @@ public class Loader {
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(fluorite.get(), 1)))
                 .bind(addComponent(instance(miragium.get(), 4)))
-                .bind(addComponent(instance(getComponentAbilityType(knowledge.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getKnowledge()))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
@@ -260,7 +260,7 @@ public class Loader {
         Configurator<ItemMagicWandLight> magicWandLight = fairyWeapon(erMod, ItemMagicWandLight::new, "light_magic_wand", "magicWandLight")
                 .bind(addComponent(magicWandBase))
                 .bind(addComponent(instance(apatite.get(), 3)))
-                .bind(addComponent(instance(getComponentAbilityType(light.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getLight()))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
@@ -269,7 +269,7 @@ public class Loader {
                 .bind(addComponent(magicWandBase))
                 .bind(addComponent(instance(obsidian.get(), 2)))
                 .bind(addComponent(instance(fluorite.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(warp.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getWarp()))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
@@ -277,8 +277,8 @@ public class Loader {
         Configurator<ItemMagicWandLightning> magicWandLightning = fairyWeapon(erMod, ItemMagicWandLightning::new, "lightning_magic_wand", "magicWandLightning")
                 .bind(addComponent(magicWandBase))
                 .bind(addComponent(instance(gold.get(), 4)))
-                .bind(addComponent(instance(getComponentAbilityType(thunder.get()))))
-                .bind(addComponent(instance(getComponentAbilityType(energy.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getThunder()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getEnergy()))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
@@ -286,7 +286,7 @@ public class Loader {
         Configurator<ItemFairyWeaponBase> ocarinaBase = fairyWeapon(erMod, ItemFairyWeaponBase::new, "ocarina_base", "ocarinaBase")
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(apatite.get(), 4)))
-                .bind(addComponent(instance(getComponentAbilityType(art.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getArt()))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
@@ -294,7 +294,7 @@ public class Loader {
         Configurator<ItemOcarinaTemptation> ocarinaTemptation = fairyWeapon(erMod, ItemOcarinaTemptation::new, "temptation_ocarina", "ocarinaTemptation")
                 .bind(addComponent(ocarinaBase))
                 .bind(addComponent(instance(pyrope.get(), 4)))
-                .bind(addComponent(instance(getComponentAbilityType(food.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getFood()))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
@@ -302,7 +302,7 @@ public class Loader {
         Configurator<ItemBellBase> bellBase = fairyWeapon(erMod, ItemBellBase::new, "bell_base", "bellBase")
                 .bind(addComponent(instance(miragium.get(), 0.5)))
                 .bind(addComponent(instance(miragium.get(), 3)))
-                .bind(addComponent(instance(getComponentAbilityType(submission.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getSubmission()))))
                 .bind(setWeaponStatusOfTier(2))
                 .get();
 
@@ -313,7 +313,7 @@ public class Loader {
                 .bind(addComponent(instance(magnetite.get(), 0.5)))
                 .bind(addComponent(instance(pyrope.get(), 2)))
                 .bind(addComponent(instance(gold.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(fell.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getFell()))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
@@ -321,7 +321,7 @@ public class Loader {
         Configurator<ItemBellFlowerPicking> bellFlowerPicking2 = fairyWeapon(erMod, () -> new ItemBellFlowerPicking(0.2, 0.2, 0.1), "flower_picking_bell_2", "bellFlowerPicking2")
                 .bind(addComponent(bellFlowerPicking))
                 .bind(addComponent(instance(miragium.get(), 4)))
-                .bind(addComponent(instance(getComponentAbilityType(fell.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getFell()))))
                 .bind(setWeaponStatusOfTier(4))
                 .get();
 
@@ -331,8 +331,8 @@ public class Loader {
                 .bind(addComponent(instance(miragium.get(), 0.5)))
                 .bind(addComponent(instance(magnetite.get(), 0.5)))
                 .bind(addComponent(instance(gold.get(), 10)))
-                .bind(addComponent(instance(getComponentAbilityType(christmas.get()))))
-                .bind(addComponent(instance(getComponentAbilityType(attack.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getChristmas()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getAttack()))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
@@ -340,8 +340,8 @@ public class Loader {
         Configurator<ItemMiragiumScythe> miragiumScythe = fairyWeapon(erMod, ItemMiragiumScythe::new, "miragium_scythe", "miragiumScythe")
                 .bind(addComponent(instance(miragium.get(), 3)))
                 .bind(addComponent(instance(wood.get(), 1)))
-                .bind(addComponent(instance(getComponentAbilityType(slash.get()))))
-                .bind(addComponent(instance(getComponentAbilityType(fell.get()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getSlash()))))
+                .bind(addComponent(instance(getComponentAbilityType(AbilityType.Companion.getFell()))))
                 .bind(setWeaponStatusOfTier(2))
                 .get();
 

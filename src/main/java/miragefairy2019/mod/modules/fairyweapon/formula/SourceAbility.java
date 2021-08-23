@@ -1,7 +1,8 @@
 package miragefairy2019.mod.modules.fairyweapon.formula;
 
-import miragefairy2019.mod.api.fairy.IAbilityType;
 import miragefairy2019.mod.api.fairyweapon.formula.ISource;
+import miragefairy2019.modkt.api.fairy.IAbilityType;
+import miragefairy2019.modkt.impl.fairy.AbilityTypeKt;
 import net.minecraft.util.text.ITextComponent;
 
 public class SourceAbility implements ISource {
@@ -19,7 +20,7 @@ public class SourceAbility implements ISource {
 
     @Override
     public ITextComponent getDisplayName() {
-        return abilityType.getDisplayName();
+        return AbilityTypeKt.getDisplayName(abilityType);
     }
 
 }

@@ -1,5 +1,6 @@
 package miragefairy2019.mod.api.fairy;
 
+import miragefairy2019.modkt.api.fairy.IAbilityType;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 

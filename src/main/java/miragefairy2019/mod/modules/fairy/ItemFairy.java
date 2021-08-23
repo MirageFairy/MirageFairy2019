@@ -9,6 +9,7 @@ import miragefairy2019.modkt.api.IManaType;
 import miragefairy2019.modkt.impl.ManaSetKt;
 import miragefairy2019.modkt.impl.ManaType;
 import miragefairy2019.modkt.impl.ManaTypeKt;
+import miragefairy2019.modkt.impl.fairy.AbilityTypeKt;
 import mirrg.boron.util.UtilsString;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
@@ -90,7 +91,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
                             .sorted((a, b) -> -a.y.compareTo(b.y))
                             .map(t -> {
                                 return new TextComponentString("")
-                                        .appendSibling(t.x.getDisplayName())
+                                        .appendSibling(AbilityTypeKt.getDisplayName(t.x))
                                         .appendText(String.format("(%s)", format(t.y)));
                             })
                             .sandwich(new TextComponentString(", "))
@@ -109,7 +110,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
                             .sorted((a, b) -> -a.y.compareTo(b.y))
                             .map(t -> {
                                 return new TextComponentString("")
-                                        .appendSibling(t.x.getDisplayName())
+                                        .appendSibling(AbilityTypeKt.getDisplayName(t.x))
                                         .appendText(String.format("(%.3f)", t.y));
                             })
                             .sandwich(new TextComponentString(", "))

@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.mirageflower;
 
 import miragefairy2019.mod.api.ApiMirageFlower;
-import miragefairy2019.mod.api.fairy.AbilityTypes;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
 import miragefairy2019.mod.api.pickable.IPickable;
@@ -10,6 +9,7 @@ import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1;
+import miragefairy2019.modkt.impl.fairy.AbilityType;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.*;
@@ -41,7 +41,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable {
 
     public static double getGrowRateInFloor(IFairyType fairyType) {
         double costWeight = fairyType.getCost() / 50.0;
-        return (fairyType.getManas().getShine() / costWeight) * fairyType.getAbilities().getAbilityPower(AbilityTypes.crystal.get()) / 100.0 * 3;
+        return (fairyType.getManas().getShine() / costWeight) * fairyType.getAbilities().getAbilityPower(AbilityType.Companion.getCrystal()) / 100.0 * 3;
     }
 
     public static ITextComponent getGrowRateTableMessage() {

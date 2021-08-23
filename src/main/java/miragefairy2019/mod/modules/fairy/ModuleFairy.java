@@ -2,7 +2,6 @@ package miragefairy2019.mod.modules.fairy;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairy.ApiFairy;
-import miragefairy2019.mod.api.fairy.IAbilityType;
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
 import miragefairy2019.mod.api.fairy.relation.IIngredientFairyRelation;
 import miragefairy2019.mod.api.main.ApiMain;
@@ -11,8 +10,10 @@ import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.InitializationContext;
 import miragefairy2019.mod.lib.OreIngredientComplex;
 import miragefairy2019.modkt.api.IManaSet;
+import miragefairy2019.modkt.api.fairy.IAbilityType;
 import miragefairy2019.modkt.impl.ManaSet;
 import miragefairy2019.modkt.impl.ManaSetKt;
+import miragefairy2019.modkt.impl.fairy.AbilityType;
 import miragefairy2019.modkt.impl.fairy.ColorSet;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.ImmutableArray;
@@ -345,7 +346,7 @@ public class ModuleFairy {
         }
 
         private final AbilitySet a(double... abilities) {
-            EnumAbilityType[] types = EnumAbilityType.values();
+            IAbilityType[] types = AbilityType.Companion.values();
             if (abilities.length != types.length) throw null;
             return new AbilitySet(ISuppliterator.ofObjArray(types)
                     .map((t, i) -> Tuple.of((IAbilityType) t, abilities[i]))

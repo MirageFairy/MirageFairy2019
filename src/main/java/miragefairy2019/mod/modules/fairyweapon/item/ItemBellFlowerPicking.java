@@ -13,6 +13,7 @@ import miragefairy2019.mod.common.magic.MagicStatusHelper;
 import miragefairy2019.modkt.api.playeraura.IPlayerAuraHandler;
 import miragefairy2019.modkt.impl.ManaSetKt;
 import miragefairy2019.modkt.impl.ManaType;
+import miragefairy2019.modkt.impl.fairy.AbilityType;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -33,7 +34,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-import static miragefairy2019.mod.modules.fairy.EnumAbilityType.*;
 
 public class ItemBellFlowerPicking extends ItemFairyWeaponBase3 {
 
@@ -54,22 +54,22 @@ public class ItemBellFlowerPicking extends ItemFairyWeaponBase3 {
                 f -> new TextComponentString("").appendSibling(f.cost()),
                 -12, 0, 12);
         IMagicStatus<Integer> maxTargetCount = MagicStatusHelper.getMagicStatusMaxTargetCount(
-                () -> (int) Math.floor(2 + (fairyType.getManas().getDark() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getDark())) * maxTargetCountFactor + fairyType.getAbilities().getAbilityPower(fell) * 0.1),
+                () -> (int) Math.floor(2 + (fairyType.getManas().getDark() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getDark())) * maxTargetCountFactor + fairyType.getAbilities().getAbilityPower(AbilityType.Companion.getFell()) * 0.1),
                 f -> new TextComponentString("")
                         .appendText("2")
                         .appendText("+")
                         .appendSibling(f.mana(ManaType.Companion.getDark())).appendText("*" + String.format("%.2f", maxTargetCountFactor))
                         .appendText("+")
-                        .appendSibling(f.ability(fell)).appendText("*0.1"),
+                        .appendSibling(f.ability(AbilityType.Companion.getFell())).appendText("*0.1"),
                 2, 10000);
         IMagicStatus<Double> fortune = MagicStatusHelper.getMagicStatusFortune(
-                () -> 3 + (fairyType.getManas().getShine() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getShine())) * fortuneFactor + fairyType.getAbilities().getAbilityPower(knowledge) * 0.1,
+                () -> 3 + (fairyType.getManas().getShine() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getShine())) * fortuneFactor + fairyType.getAbilities().getAbilityPower(AbilityType.Companion.getKnowledge()) * 0.1,
                 f -> new TextComponentString("")
                         .appendText("3")
                         .appendText("+")
                         .appendSibling(f.mana(ManaType.Companion.getShine())).appendText("*" + String.format("%.2f", fortuneFactor))
                         .appendText("+")
-                        .appendSibling(f.ability(knowledge)).appendText("*0.1"),
+                        .appendSibling(f.ability(AbilityType.Companion.getKnowledge())).appendText("*0.1"),
                 3, 10000);
         IMagicStatus<Double> additionalReach = MagicStatusHelper.getMagicStatusAdditionalReach(
                 () -> 0 + (fairyType.getManas().getWind() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getWind())) * 0.1,
@@ -99,9 +99,9 @@ public class ItemBellFlowerPicking extends ItemFairyWeaponBase3 {
                         .appendText(")"),
                 0.0001, 100);
         IMagicStatus<Boolean> collection = MagicStatusHelper.getMagicStatusCollection(
-                () -> fairyType.getAbilities().getAbilityPower(warp) >= 10,
+                () -> fairyType.getAbilities().getAbilityPower(AbilityType.Companion.getWarp()) >= 10,
                 f -> new TextComponentString("")
-                        .appendSibling(f.ability(warp)).appendText(">=10"));
+                        .appendSibling(f.ability(AbilityType.Companion.getWarp())).appendText(">=10"));
 
         return new IMagicHandler() {
             @Override
