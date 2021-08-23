@@ -7,7 +7,7 @@ public interface IAbilitySet {
     /**
      * 非負です。
      */
-    public double getPower(IAbilityType type);
+    public double getPower(IErgType type);
 
 }
 

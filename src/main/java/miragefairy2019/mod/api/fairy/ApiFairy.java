@@ -5,7 +5,7 @@ import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.modules.fairy.ComponentsAbilityType;
 import miragefairy2019.mod.modules.fairy.FairyTypeEmpty;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
-import miragefairy2019.modkt.api.fairy.IAbilityType;
+import miragefairy2019.modkt.api.fairy.IErgType;
 
 public class ApiFairy {
 
@@ -15,7 +15,7 @@ public class ApiFairy {
         ModuleFairy.init(erMod);
     }
 
-    public static IComponentAbilityType getComponentAbilityType(IAbilityType abilityType) {
+    public static IComponentAbilityType getComponentAbilityType(IErgType abilityType) {
         return ComponentsAbilityType.getComponentAbilityType(abilityType);
     }
 

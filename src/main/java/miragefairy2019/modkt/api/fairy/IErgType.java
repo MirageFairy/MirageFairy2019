@@ -2,7 +2,7 @@ package miragefairy2019.modkt.api.fairy;
 
 import net.minecraft.util.text.TextFormatting;
 
-public interface IAbilityType {
+public interface IErgType {
 
     /**
      * @return すべて小文字

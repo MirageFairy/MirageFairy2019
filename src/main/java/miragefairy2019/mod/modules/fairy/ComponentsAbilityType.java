@@ -2,8 +2,8 @@ package miragefairy2019.mod.modules.fairy;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairy.IComponentAbilityType;
-import miragefairy2019.modkt.api.fairy.IAbilityType;
-import miragefairy2019.modkt.impl.fairy.AbilityTypeKt;
+import miragefairy2019.modkt.api.fairy.IErgType;
+import miragefairy2019.modkt.impl.fairy.ErgTypeKt;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -13,17 +13,17 @@ import java.util.Map;
 
 public class ComponentsAbilityType {
 
-    private static Map<IAbilityType, IComponentAbilityType> fairyAbilityTypes = new HashMap<>();
+    private static Map<IErgType, IComponentAbilityType> fairyAbilityTypes = new HashMap<>();
 
-    public static IComponentAbilityType getComponentAbilityType(IAbilityType abilityType) {
+    public static IComponentAbilityType getComponentAbilityType(IErgType abilityType) {
         return fairyAbilityTypes.computeIfAbsent(abilityType, k -> new ComponentAbilityType(abilityType));
     }
 
     private static class ComponentAbilityType implements IComponentAbilityType {
 
-        private IAbilityType abilityType;
+        private IErgType abilityType;
 
-        private ComponentAbilityType(IAbilityType abilityType) {
+        private ComponentAbilityType(IErgType abilityType) {
             this.abilityType = abilityType;
         }
 
@@ -34,11 +34,11 @@ public class ComponentsAbilityType {
 
         @Override
         public ITextComponent getDisplayName() {
-            return new TextComponentTranslation("mirageFairy2019.component.cuticle.format", AbilityTypeKt.getDisplayName(abilityType));
+            return new TextComponentTranslation("mirageFairy2019.component.cuticle.format", ErgTypeKt.getDisplayName(abilityType));
         }
 
         @Override
-        public IAbilityType getAbilityType() {
+        public IErgType getAbilityType() {
             return abilityType;
         }
 

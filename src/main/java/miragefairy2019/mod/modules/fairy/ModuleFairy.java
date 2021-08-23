@@ -12,13 +12,13 @@ import miragefairy2019.mod.lib.OreIngredientComplex;
 import miragefairy2019.modkt.api.IManaSet;
 import miragefairy2019.modkt.api.fairy.IAbilityEntry;
 import miragefairy2019.modkt.api.fairy.IAbilitySet;
-import miragefairy2019.modkt.api.fairy.IAbilityType;
+import miragefairy2019.modkt.api.fairy.IErgType;
 import miragefairy2019.modkt.impl.ManaSet;
 import miragefairy2019.modkt.impl.ManaSetKt;
 import miragefairy2019.modkt.impl.fairy.AbilityEntry;
 import miragefairy2019.modkt.impl.fairy.AbilitySet;
-import miragefairy2019.modkt.impl.fairy.AbilityType;
 import miragefairy2019.modkt.impl.fairy.ColorSet;
+import miragefairy2019.modkt.impl.fairy.ErgType;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple;
@@ -350,10 +350,11 @@ public class ModuleFairy {
         }
 
         private final IAbilitySet a(double... abilities) {
-            IAbilityType[] types = AbilityType.Companion.values();
+            IErgType[] types = ErgType.Companion.values();
             if (abilities.length != types.length) throw null;
             return new AbilitySet(ISuppliterator.ofObjArray(types)
-                    .map((t, i) -> new AbilityEntry((IAbilityType) t, abilities[i])));
+                    .map((t, i) -> new AbilityEntry((IErgType) t, abilities[i]))
+                    .toImmutableArray());
         }
 
         private ColorSet c(int skin, int bright, int dark, int hair) {
