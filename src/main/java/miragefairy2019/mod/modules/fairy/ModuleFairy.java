@@ -13,6 +13,7 @@ import miragefairy2019.mod.lib.OreIngredientComplex;
 import miragefairy2019.modkt.api.IManaSet;
 import miragefairy2019.modkt.impl.ManaSet;
 import miragefairy2019.modkt.impl.ManaSetKt;
+import miragefairy2019.modkt.impl.fairy.ColorSet;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple;
@@ -431,11 +432,11 @@ public class ModuleFairy {
                         public int colorMultiplier(ItemStack stack, int tintIndex) {
                             VariantFairy variant = itemMirageFairy.getVariant(stack).orElse(null);
                             if (variant == null) return 0xFFFFFF;
-                            if (tintIndex == 0) return variant.type.colorSet.skin;
+                            if (tintIndex == 0) return variant.type.colorSet.getSkin();
                             if (tintIndex == 1) return colorCloth;
-                            if (tintIndex == 2) return variant.type.colorSet.dark;
-                            if (tintIndex == 3) return variant.type.colorSet.bright;
-                            if (tintIndex == 4) return variant.type.colorSet.hair;
+                            if (tintIndex == 2) return variant.type.colorSet.getDark();
+                            if (tintIndex == 3) return variant.type.colorSet.getBright();
+                            if (tintIndex == 4) return variant.type.colorSet.getHair();
                             return 0xFFFFFF;
                         }
 

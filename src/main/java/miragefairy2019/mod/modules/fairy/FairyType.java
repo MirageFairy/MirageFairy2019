@@ -3,6 +3,7 @@ package miragefairy2019.mod.modules.fairy;
 import miragefairy2019.mod.api.fairy.IAbilitySet;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.modkt.api.IManaSet;
+import miragefairy2019.modkt.impl.fairy.ColorSet;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -56,7 +57,7 @@ public final class FairyType implements IFairyType {
 
     @Override
     public int getColor() {
-        return colorSet.hair;
+        return colorSet.getHair();
     }
 
     @Override
