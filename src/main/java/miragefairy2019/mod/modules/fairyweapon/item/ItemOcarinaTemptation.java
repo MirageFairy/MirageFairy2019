@@ -39,7 +39,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
             radius = UtilsMath.trim(5 + fairyType.getManas().getWind() / 5.0, 5, 10);
             maxTargetCount = UtilsMath.trim(1 + (int) (fairyType.getManas().getAqua() / 7.0), 1, 8);
             wear = UtilsMath.trim(4 * Math.pow(0.5, fairyType.getManas().getFire() / 50.0), 0.4, 4);
-            experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManas().getGaia() / 50.0 + fairyType.getAbilities().getAbilityPower(AbilityType.Companion.getFood()) / 10.0), 0.1, 1);
+            experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManas().getGaia() / 50.0 + fairyType.getAbilities().getPower(AbilityType.Companion.getFood()) / 10.0), 0.1, 1);
             coolTime = fairyType.getCost() * UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManas().getDark() / 50.0), 0.1, 1);
         }
 

@@ -54,7 +54,7 @@ public class ItemBellFlowerPicking extends ItemFairyWeaponBase3 {
                 f -> new TextComponentString("").appendSibling(f.cost()),
                 -12, 0, 12);
         IMagicStatus<Integer> maxTargetCount = MagicStatusHelper.getMagicStatusMaxTargetCount(
-                () -> (int) Math.floor(2 + (fairyType.getManas().getDark() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getDark())) * maxTargetCountFactor + fairyType.getAbilities().getAbilityPower(AbilityType.Companion.getFell()) * 0.1),
+                () -> (int) Math.floor(2 + (fairyType.getManas().getDark() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getDark())) * maxTargetCountFactor + fairyType.getAbilities().getPower(AbilityType.Companion.getFell()) * 0.1),
                 f -> new TextComponentString("")
                         .appendText("2")
                         .appendText("+")
@@ -63,7 +63,7 @@ public class ItemBellFlowerPicking extends ItemFairyWeaponBase3 {
                         .appendSibling(f.ability(AbilityType.Companion.getFell())).appendText("*0.1"),
                 2, 10000);
         IMagicStatus<Double> fortune = MagicStatusHelper.getMagicStatusFortune(
-                () -> 3 + (fairyType.getManas().getShine() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getShine())) * fortuneFactor + fairyType.getAbilities().getAbilityPower(AbilityType.Companion.getKnowledge()) * 0.1,
+                () -> 3 + (fairyType.getManas().getShine() + ManaSetKt.getMana(playerAura.getPlayerAura(), ManaType.Companion.getShine())) * fortuneFactor + fairyType.getAbilities().getPower(AbilityType.Companion.getKnowledge()) * 0.1,
                 f -> new TextComponentString("")
                         .appendText("3")
                         .appendText("+")
@@ -99,7 +99,7 @@ public class ItemBellFlowerPicking extends ItemFairyWeaponBase3 {
                         .appendText(")"),
                 0.0001, 100);
         IMagicStatus<Boolean> collection = MagicStatusHelper.getMagicStatusCollection(
-                () -> fairyType.getAbilities().getAbilityPower(AbilityType.Companion.getWarp()) >= 10,
+                () -> fairyType.getAbilities().getPower(AbilityType.Companion.getWarp()) >= 10,
                 f -> new TextComponentString("")
                         .appendSibling(f.ability(AbilityType.Companion.getWarp())).appendText(">=10"));
 

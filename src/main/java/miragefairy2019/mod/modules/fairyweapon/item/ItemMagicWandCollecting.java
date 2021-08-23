@@ -38,8 +38,8 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
 
         public Status(IFairyType fairyType) {
             additionalReach = Math.min(fairyType.getManas().getWind() / 5.0, 8);
-            radius = Math.min(2 + fairyType.getManas().getFire() / 10.0 + fairyType.getAbilities().getAbilityPower(AbilityType.Companion.getWarp()) / 10.0, 7);
-            maxTargets = (int) (Math.min(1 + fairyType.getManas().getGaia() / 2.0 + fairyType.getAbilities().getAbilityPower(AbilityType.Companion.getStore()) / 2.0, 20));
+            radius = Math.min(2 + fairyType.getManas().getFire() / 10.0 + fairyType.getAbilities().getPower(AbilityType.Companion.getWarp()) / 10.0, 7);
+            maxTargets = (int) (Math.min(1 + fairyType.getManas().getGaia() / 2.0 + fairyType.getAbilities().getPower(AbilityType.Companion.getStore()) / 2.0, 20));
             wear = 0.25 * Math.pow(0.5, fairyType.getManas().getAqua() / 30);
             coolTime = fairyType.getCost() * 3 * Math.pow(0.5, fairyType.getManas().getDark() / 40);
         }

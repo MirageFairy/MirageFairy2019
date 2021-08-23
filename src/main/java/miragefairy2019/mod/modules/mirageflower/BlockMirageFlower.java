@@ -41,7 +41,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable {
 
     public static double getGrowRateInFloor(IFairyType fairyType) {
         double costWeight = fairyType.getCost() / 50.0;
-        return (fairyType.getManas().getShine() / costWeight) * fairyType.getAbilities().getAbilityPower(AbilityType.Companion.getCrystal()) / 100.0 * 3;
+        return (fairyType.getManas().getShine() / costWeight) * fairyType.getAbilities().getPower(AbilityType.Companion.getCrystal()) / 100.0 * 3;
     }
 
     public static ITextComponent getGrowRateTableMessage() {

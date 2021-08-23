@@ -16,7 +16,7 @@ public class FormulaDoubleAbility implements IFormulaDouble {
 
     @Override
     public Double get(IFairyType fairyType) {
-        return fairyType.getAbilities().getAbilityPower(abilityType);
+        return fairyType.getAbilities().getPower(abilityType);
     }
 
     @Override

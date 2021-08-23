@@ -1,6 +1,7 @@
 package miragefairy2019.mod.api.fairy;
 
 import miragefairy2019.modkt.api.IManaSet;
+import miragefairy2019.modkt.api.fairy.IAbilitySet;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 

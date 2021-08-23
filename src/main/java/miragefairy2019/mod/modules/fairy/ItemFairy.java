@@ -11,6 +11,7 @@ import miragefairy2019.modkt.impl.ManaType;
 import miragefairy2019.modkt.impl.ManaTypeKt;
 import miragefairy2019.modkt.impl.fairy.AbilityTypeKt;
 import mirrg.boron.util.UtilsString;
+import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -86,13 +87,13 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
             tooltip.add(new TextComponentString("")
                     .setStyle(new Style().setColor(GREEN))
                     .appendText("Abilities: ")
-                    .appendSibling(variant.type.abilitySet.getAbilities()
-                            .filter(tuple -> format(tuple.y) >= 10)
-                            .sorted((a, b) -> -a.y.compareTo(b.y))
+                    .appendSibling(ISuppliterator.ofIterable(variant.type.abilitySet.getEntries())
+                            .filter(tuple -> format(tuple.getPower()) >= 10)
+                            .sorted((a, b) -> -Double.compare(a.getPower(), b.getPower()))
                             .map(t -> {
                                 return new TextComponentString("")
-                                        .appendSibling(AbilityTypeKt.getDisplayName(t.x))
-                                        .appendText(String.format("(%s)", format(t.y)));
+                                        .appendSibling(AbilityTypeKt.getDisplayName(t.getType()))
+                                        .appendText(String.format("(%s)", format(t.getPower())));
                             })
                             .sandwich(new TextComponentString(", "))
                             .apply(tcs -> {
@@ -105,13 +106,13 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
             tooltip.add(new TextComponentString("")
                     .setStyle(new Style().setColor(GREEN))
                     .appendText("Abilities: ")
-                    .appendSibling(variant.type.abilitySet.getAbilities()
-                            .filter(tuple -> format(tuple.y) >= 10)
-                            .sorted((a, b) -> -a.y.compareTo(b.y))
+                    .appendSibling(ISuppliterator.ofIterable(variant.type.abilitySet.getEntries())
+                            .filter(tuple -> format(tuple.getPower()) >= 10)
+                            .sorted((a, b) -> -Double.compare(a.getPower(), b.getPower()))
                             .map(t -> {
                                 return new TextComponentString("")
-                                        .appendSibling(AbilityTypeKt.getDisplayName(t.x))
-                                        .appendText(String.format("(%.3f)", t.y));
+                                        .appendSibling(AbilityTypeKt.getDisplayName(t.getType()))
+                                        .appendText(String.format("(%.3f)", t.getPower()));
                             })
                             .sandwich(new TextComponentString(", "))
                             .apply(tcs -> {

@@ -1,9 +1,10 @@
 package miragefairy2019.mod.modules.fairy;
 
-import miragefairy2019.mod.api.fairy.IAbilitySet;
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.modkt.api.IManaSet;
+import miragefairy2019.modkt.api.fairy.IAbilitySet;
 import miragefairy2019.modkt.impl.ManaSet;
+import miragefairy2019.modkt.impl.fairy.AbilitySet;
 import mirrg.boron.util.struct.ImmutableArray;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
