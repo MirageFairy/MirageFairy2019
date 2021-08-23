@@ -1,17 +1,17 @@
 package miragefairy2019.modkt.impl.fairy
 
-import miragefairy2019.modkt.api.fairy.IAbilityEntry
-import miragefairy2019.modkt.api.fairy.IAbilitySet
+import miragefairy2019.modkt.api.fairy.IErgEntry
+import miragefairy2019.modkt.api.fairy.IErgSet
 import miragefairy2019.modkt.api.fairy.IErgType
 
-class AbilitySet(private val iterable: Iterable<IAbilityEntry>) : IAbilitySet {
+class ErgSet(private val iterable: Iterable<IErgEntry>) : IErgSet {
     private val list = iterable.toList()
     private val map = list.associateBy { it.type }
     override fun getEntries() = list
     override fun getPower(type: IErgType) = map[type]?.power ?: 0.0
 }
 
-class AbilityEntry(private val type: IErgType, private val power: Double) : IAbilityEntry {
+class ErgEntry(private val type: IErgType, private val power: Double) : IErgEntry {
     override fun getPower() = power
     override fun getType() = type
 }

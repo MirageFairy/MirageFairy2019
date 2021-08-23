@@ -1,7 +1,7 @@
 package miragefairy2019.mod.api.fairy;
 
 import miragefairy2019.modkt.api.IManaSet;
-import miragefairy2019.modkt.api.fairy.IAbilitySet;
+import miragefairy2019.modkt.api.fairy.IErgSet;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
@@ -17,7 +17,7 @@ public interface IFairyType {
 
     public IManaSet getManas();
 
-    public IAbilitySet getAbilities();
+    public IErgSet getAbilities();
 
     public ITextComponent getDisplayName();
 
