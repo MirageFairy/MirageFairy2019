@@ -81,11 +81,6 @@ data class MutableManaSet(
 }
 
 
-fun IManaSet.copy() = ManaSet(this.shine, this.fire, this.wind, this.gaia, this.aqua, this.dark)
-fun IManaSet.copyAsMutable() = MutableManaSet(this.shine, this.fire, this.wind, this.gaia, this.aqua, this.dark)
-operator fun IManaSet.plus(other: IManaSet): IManaSet = ManaSet(this.shine + other.shine, this.fire + other.fire, this.wind + other.wind, this.gaia + other.gaia, this.aqua + other.aqua, this.dark + other.dark)
-operator fun IManaSet.times(other: Double): IManaSet = ManaSet(this.shine * other, this.fire * other, this.wind * other, this.gaia * other, this.aqua * other, this.dark * other)
-
 fun IManaSet.getMana(manaType: IManaType) = when (manaType) {
     ManaType.shine -> shine
     ManaType.fire -> fire
@@ -96,8 +91,11 @@ fun IManaSet.getMana(manaType: IManaType) = when (manaType) {
     else -> throw IllegalArgumentException("$manaType")
 }
 
+fun IManaSet.copy() = ManaSet(shine, fire, wind, gaia, aqua, dark)
+fun IManaSet.copyAsMutable() = MutableManaSet(shine, fire, wind, gaia, aqua, dark)
+operator fun IManaSet.plus(a: IManaSet): IManaSet = ManaSet(shine + a.shine, fire + a.fire, wind + a.wind, gaia + a.gaia, aqua + a.aqua, dark + a.dark)
+operator fun IManaSet.times(a: Double): IManaSet = ManaSet(shine * a, fire * a, wind * a, gaia * a, aqua * a, dark * a)
+operator fun IManaSet.div(a: Double): IManaSet = ManaSet(shine / a, fire / a, wind / a, gaia / a, aqua / a, dark / a)
 val IManaSet.max get() = max(shine, max(fire, max(wind, max(gaia, max(aqua, dark)))))
 val IManaSet.sum get() = shine + fire + wind + gaia + aqua + dark
-fun IManaSet.sum(rateShine: Double, rateFire: Double, rateWind: Double, rateGaia: Double, rateAqua: Double, rateDark: Double): Double {
-    return shine * rateShine + fire * rateFire + wind * rateWind + gaia * rateGaia + aqua * rateAqua + dark * rateDark
-}
+fun IManaSet.sum(rateShine: Double, rateFire: Double, rateWind: Double, rateGaia: Double, rateAqua: Double, rateDark: Double) = shine * rateShine + fire * rateFire + wind * rateWind + gaia * rateGaia + aqua * rateAqua + dark * rateDark
