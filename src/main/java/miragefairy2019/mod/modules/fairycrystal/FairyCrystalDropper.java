@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairycrystal;
 import miragefairy2019.mod.api.fairycrystal.IDrop;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.lib.WeightedRandom;
-import miragefairy2019.mod.modules.fairy.ModuleFairy;
+import miragefairy2019.mod.modules.fairy.FairyTypes;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
@@ -159,7 +159,7 @@ public abstract class FairyCrystalDropper {
 
         // 1に満たない場合はairを入れて詰める
         double totalWeight = WeightedRandom.getTotalWeight(dropTable);
-        if (totalWeight < 1) dropTable.add(new WeightedRandom.Item<>(ModuleFairy.FairyTypes.air[0].createItemStack(), 1 - totalWeight));
+        if (totalWeight < 1) dropTable.add(new WeightedRandom.Item<>(FairyTypes.instance.getAir().getMain().createItemStack(), 1 - totalWeight));
 
         return dropTable;
     }

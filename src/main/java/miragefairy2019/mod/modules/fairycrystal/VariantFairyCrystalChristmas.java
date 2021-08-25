@@ -6,6 +6,7 @@ import miragefairy2019.mod.api.fairycrystal.DropFixed;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
 import miragefairy2019.mod.lib.WeightedRandom;
+import miragefairy2019.mod.modules.fairy.FairyTypes;
 import mirrg.boron.util.UtilsFile;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,8 +32,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
-import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.christmas;
-import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.santaclaus;
 
 public class VariantFairyCrystalChristmas extends VariantFairyCrystal {
 
@@ -157,8 +156,8 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal {
                 }
 
                 // 表示
-                player.sendStatusMessage(new TextComponentString("Global Stock: " + stockGlobal + " / " + capacityGlobal + " " + santaclaus[0].createItemStack().getDisplayName()), false);
-                player.sendStatusMessage(new TextComponentString("Player Stock: " + stockPlayer + " / " + capacityPlayer + " " + santaclaus[0].createItemStack().getDisplayName()), false);
+                player.sendStatusMessage(new TextComponentString("Global Stock: " + stockGlobal + " / " + capacityGlobal + " " + FairyTypes.instance.getSantaclaus().getMain().createItemStack().getDisplayName()), false);
+                player.sendStatusMessage(new TextComponentString("Player Stock: " + stockPlayer + " / " + capacityPlayer + " " + FairyTypes.instance.getSantaclaus().getMain().createItemStack().getDisplayName()), false);
 
             }
 
@@ -189,8 +188,8 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal {
                 }
 
                 // 表示
-                player.sendStatusMessage(new TextComponentString("Global Stock: " + stockGlobal + " / " + capacityGlobal + " " + christmas[0].createItemStack().getDisplayName()), false);
-                player.sendStatusMessage(new TextComponentString("Player Stock: " + stockPlayer + " / " + capacityPlayer + " " + christmas[0].createItemStack().getDisplayName()), false);
+                player.sendStatusMessage(new TextComponentString("Global Stock: " + stockGlobal + " / " + capacityGlobal + " " + FairyTypes.instance.getChristmas().getMain().createItemStack().getDisplayName()), false);
+                player.sendStatusMessage(new TextComponentString("Player Stock: " + stockPlayer + " / " + capacityPlayer + " " + FairyTypes.instance.getChristmas().getMain().createItemStack().getDisplayName()), false);
 
             }
 
@@ -215,8 +214,8 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal {
 
                     // ドロップしたものが限定ならカウントする
                     if (oItemStack.isPresent()) {
-                        onDrop(world, pos, player, oItemStack.get(), santaclaus[0].createItemStack(), "santaclaus");
-                        onDrop(world, pos, player, oItemStack.get(), christmas[0].createItemStack(), "christmas");
+                        onDrop(world, pos, player, oItemStack.get(), FairyTypes.instance.getSantaclaus().getMain().createItemStack(), "santaclaus");
+                        onDrop(world, pos, player, oItemStack.get(), FairyTypes.instance.getChristmas().getMain().createItemStack(), "christmas");
                     }
 
                     return oItemStack;
@@ -306,7 +305,7 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal {
             @Override
             public ISuppliterator<IRightClickDrop> getDropList() {
                 return self.getDropList()
-                        .after(RightClickDrops.eventDrop(new DropFixed(santaclaus[0].createItemStack(), 0.01), t -> {
+                        .after(RightClickDrops.eventDrop(new DropFixed(FairyTypes.instance.getSantaclaus().getMain().createItemStack(), 0.01), t -> {
 
                             // 在庫読み込み
                             // 在庫が読み込めなかった場合は出ない
@@ -335,7 +334,7 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal {
 
                             return true;
                         }))
-                        .after(RightClickDrops.eventDrop(new DropFixed(christmas[0].createItemStack(), 0.1), t -> {
+                        .after(RightClickDrops.eventDrop(new DropFixed(FairyTypes.instance.getChristmas().getMain().createItemStack(), 0.1), t -> {
 
                             // 在庫読み込み
                             // 在庫が読み込めなかった場合は出ない

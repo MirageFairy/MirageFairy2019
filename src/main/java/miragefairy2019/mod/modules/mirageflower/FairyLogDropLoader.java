@@ -6,13 +6,13 @@ import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionHasBiomeType
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionOverworld;
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRecipe;
 import miragefairy2019.mod.lib.Monad;
+import miragefairy2019.mod.modules.fairy.FairyTypes;
 import miragefairy2019.mod.modules.fairy.VariantFairy;
 import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static miragefairy2019.mod.modules.fairy.ModuleFairy.FairyTypes.*;
 import static net.minecraftforge.common.BiomeDictionary.Type.*;
 
 public class FairyLogDropLoader {
@@ -26,26 +26,26 @@ public class FairyLogDropLoader {
     public void init() {
 
         // 時間帯
-        mrfld(0.1, () -> daytime).peek(o());
-        mrfld(0.1, () -> night).peek(o());
-        mrfld(0.1, () -> morning).peek(o());
+        mrfld(0.1, () -> FairyTypes.instance.getDaytime().getMain()).peek(o());
+        mrfld(0.1, () -> FairyTypes.instance.getNight().getMain()).peek(o());
+        mrfld(0.1, () -> FairyTypes.instance.getMorning().getMain()).peek(o());
 
         // 天候
-        mrfld(0.1, () -> fine).peek(o());
-        mrfld(0.1, () -> rain).peek(o()).peek(r());
-        mrfld(0.02, () -> thunder).peek(o()).peek(r());
+        mrfld(0.1, () -> FairyTypes.instance.getFine().getMain()).peek(o());
+        mrfld(0.1, () -> FairyTypes.instance.getRain().getMain()).peek(o()).peek(r());
+        mrfld(0.02, () -> FairyTypes.instance.getThunder().getMain()).peek(o()).peek(r());
 
         // バイオーム
-        mrfld(1, () -> plains).peek(b(PLAINS));
-        mrfld(1, () -> forest).peek(b(FOREST));
-        mrfld(1, () -> taiga).peek(b(CONIFEROUS));
-        mrfld(1, () -> desert).peek(b(SANDY));
-        mrfld(1, () -> mountain).peek(b(MOUNTAIN));
+        mrfld(1, () -> FairyTypes.instance.getPlains().getMain()).peek(b(PLAINS));
+        mrfld(1, () -> FairyTypes.instance.getForest().getMain()).peek(b(FOREST));
+        mrfld(1, () -> FairyTypes.instance.getTaiga().getMain()).peek(b(CONIFEROUS));
+        mrfld(1, () -> FairyTypes.instance.getDesert().getMain()).peek(b(SANDY));
+        mrfld(1, () -> FairyTypes.instance.getMountain().getMain()).peek(b(MOUNTAIN));
 
     }
 
-    private Monad<FairyLogDropRecipe> mrfld(double rate, Supplier<VariantFairy[]> sArrayVariantFairy) {
-        return Monad.of(new FairyLogDropRecipe(rate, () -> sArrayVariantFairy.get()[0].createItemStack()))
+    private Monad<FairyLogDropRecipe> mrfld(double rate, Supplier<VariantFairy> sArrayVariantFairy) {
+        return Monad.of(new FairyLogDropRecipe(rate, () -> sArrayVariantFairy.get().createItemStack()))
                 .peek(recipe -> registry.addRecipe(recipe));
     }
 

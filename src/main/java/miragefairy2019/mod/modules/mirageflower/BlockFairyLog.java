@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.mirageflower;
 
 import miragefairy2019.mod.api.ApiMirageFlower;
-import miragefairy2019.mod.modules.fairy.ModuleFairy;
+import miragefairy2019.mod.modules.fairy.FairyTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -133,7 +133,7 @@ public class BlockFairyLog extends Block {
 
         for (int i = 0; i < 3 + fortune; i++) {
             ItemStack drop = ApiMirageFlower.fairyLogDropRegistry.drop(world, pos, world.rand).orElse(null);
-            if (drop == null) drop = ModuleFairy.FairyTypes.air[0].createItemStack();
+            if (drop == null) drop = FairyTypes.instance.getAir().getMain().createItemStack();
             drops.add(drop);
         }
     }
