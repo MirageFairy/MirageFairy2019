@@ -9,6 +9,8 @@ public interface IManaType {
      */
     public String getName();
 
+    public int getColor();
+
     public TextFormatting getTextColor();
 
 }

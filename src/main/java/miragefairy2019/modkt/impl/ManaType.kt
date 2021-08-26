@@ -5,17 +5,18 @@ import miragefairy2019.libkt.text
 import miragefairy2019.modkt.api.IManaType
 import net.minecraft.util.text.TextFormatting
 
-class ManaType(private val name: String, private val textColor: TextFormatting) : IManaType {
+class ManaType(private val name: String, private val color: Int, private val textColor: TextFormatting) : IManaType {
     companion object {
-        val shine = ManaType("shine", TextFormatting.WHITE)
-        val fire = ManaType("fire", TextFormatting.RED)
-        val wind = ManaType("wind", TextFormatting.GREEN)
-        val gaia = ManaType("gaia", TextFormatting.YELLOW)
-        val aqua = ManaType("aqua", TextFormatting.BLUE)
-        val dark = ManaType("dark", TextFormatting.DARK_GRAY)
+        val shine = ManaType("shine", 0xC9FFFF, TextFormatting.WHITE)
+        val fire = ManaType("fire", 0xCE0000, TextFormatting.RED)
+        val wind = ManaType("wind", 0x00C600, TextFormatting.GREEN)
+        val gaia = ManaType("gaia", 0x777700, TextFormatting.YELLOW)
+        val aqua = ManaType("aqua", 0x0000E2, TextFormatting.BLUE)
+        val dark = ManaType("dark", 0x191919, TextFormatting.DARK_GRAY)
     }
 
     override fun getName() = name
+    override fun getColor() = color
     override fun getTextColor() = textColor
 }
 
