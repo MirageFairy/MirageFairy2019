@@ -2,9 +2,9 @@ package miragefairy2019.mod.api.fairyweapon.formula;
 
 import miragefairy2019.mod.modules.fairyweapon.critical.CriticalRate;
 import miragefairy2019.mod.modules.fairyweapon.formula.*;
-import miragefairy2019.modkt.api.IManaType;
+import miragefairy2019.modkt.api.mana.IManaType;
+import miragefairy2019.modkt.api.mana.ManaTypes;
 import miragefairy2019.modkt.api.erg.IErgType;
-import miragefairy2019.modkt.impl.ManaType;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Struct1;
 import net.minecraft.util.text.ITextComponent;
@@ -28,27 +28,27 @@ public class ApiFormula {
     }
 
     public static IFormulaDouble shine() {
-        return mana(ManaType.Companion.getShine());
+        return mana(ManaTypes.shine);
     }
 
     public static IFormulaDouble fire() {
-        return mana(ManaType.Companion.getFire());
+        return mana(ManaTypes.fire);
     }
 
     public static IFormulaDouble wind() {
-        return mana(ManaType.Companion.getWind());
+        return mana(ManaTypes.wind);
     }
 
     public static IFormulaDouble gaia() {
-        return mana(ManaType.Companion.getGaia());
+        return mana(ManaTypes.gaia);
     }
 
     public static IFormulaDouble aqua() {
-        return mana(ManaType.Companion.getAqua());
+        return mana(ManaTypes.aqua);
     }
 
     public static IFormulaDouble dark() {
-        return mana(ManaType.Companion.getDark());
+        return mana(ManaTypes.dark);
     }
 
     public static IFormulaDouble abilityRaw(IErgType abilityType) {

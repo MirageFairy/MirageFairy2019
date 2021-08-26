@@ -5,11 +5,11 @@ import miragefairy2019.libkt.color
 import miragefairy2019.libkt.text
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.EventRegistryMod
-import miragefairy2019.modkt.api.IManaType
+import miragefairy2019.modkt.api.mana.IManaType
+import miragefairy2019.modkt.api.mana.ManaTypes
 import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
-import miragefairy2019.modkt.impl.ManaType
-import miragefairy2019.modkt.impl.displayName
 import miragefairy2019.modkt.impl.getMana
+import miragefairy2019.modkt.impl.mana.displayName
 import miragefairy2019.modkt.impl.playeraura.PlayerAuraManager
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemFood
@@ -117,12 +117,12 @@ object ModulePlayerAura {
                                     }
                                 }.color(manaType.getTextColor())
                             }
-                            event.toolTip.add(f1(ManaType.shine).formattedText)
-                            event.toolTip.add(f1(ManaType.fire).formattedText)
-                            event.toolTip.add(f1(ManaType.wind).formattedText)
-                            event.toolTip.add(f1(ManaType.gaia).formattedText)
-                            event.toolTip.add(f1(ManaType.aqua).formattedText)
-                            event.toolTip.add(f1(ManaType.dark).formattedText)
+                            event.toolTip.add(f1(ManaTypes.shine).formattedText)
+                            event.toolTip.add(f1(ManaTypes.fire).formattedText)
+                            event.toolTip.add(f1(ManaTypes.wind).formattedText)
+                            event.toolTip.add(f1(ManaTypes.gaia).formattedText)
+                            event.toolTip.add(f1(ManaTypes.aqua).formattedText)
+                            event.toolTip.add(f1(ManaTypes.dark).formattedText)
 
                         }
                     }

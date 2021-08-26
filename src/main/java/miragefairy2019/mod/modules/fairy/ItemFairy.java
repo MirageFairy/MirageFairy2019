@@ -5,11 +5,11 @@ import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.lib.multi.ItemMulti;
-import miragefairy2019.modkt.api.IManaType;
+import miragefairy2019.modkt.api.mana.IManaType;
+import miragefairy2019.modkt.api.mana.ManaTypes;
 import miragefairy2019.modkt.impl.ManaSetKt;
-import miragefairy2019.modkt.impl.ManaType;
-import miragefairy2019.modkt.impl.ManaTypeKt;
 import miragefairy2019.modkt.impl.fairy.ErgKt;
+import miragefairy2019.modkt.impl.mana.ManaTypeKt;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.Minecraft;
@@ -66,15 +66,15 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
         }
 
         if (!flag.isAdvanced()) {
-            tooltip.add("    " + f1(ManaType.Companion.getShine(), variant));
-            tooltip.add("" + f1(ManaType.Companion.getFire(), variant) + "    " + f1(ManaType.Companion.getWind(), variant));
-            tooltip.add("" + f1(ManaType.Companion.getGaia(), variant) + "    " + f1(ManaType.Companion.getAqua(), variant));
-            tooltip.add("    " + f1(ManaType.Companion.getDark(), variant));
+            tooltip.add("    " + f1(ManaTypes.shine, variant));
+            tooltip.add("" + f1(ManaTypes.fire, variant) + "    " + f1(ManaTypes.wind, variant));
+            tooltip.add("" + f1(ManaTypes.gaia, variant) + "    " + f1(ManaTypes.aqua, variant));
+            tooltip.add("    " + f1(ManaTypes.dark, variant));
         } else {
-            tooltip.add("        " + f2(ManaType.Companion.getShine(), variant));
-            tooltip.add("" + f2(ManaType.Companion.getFire(), variant) + "    " + f2(ManaType.Companion.getWind(), variant));
-            tooltip.add("" + f2(ManaType.Companion.getGaia(), variant) + "    " + f2(ManaType.Companion.getAqua(), variant));
-            tooltip.add("        " + f2(ManaType.Companion.getDark(), variant));
+            tooltip.add("        " + f2(ManaTypes.shine, variant));
+            tooltip.add("" + f2(ManaTypes.fire, variant) + "    " + f2(ManaTypes.wind, variant));
+            tooltip.add("" + f2(ManaTypes.gaia, variant) + "    " + f2(ManaTypes.aqua, variant));
+            tooltip.add("        " + f2(ManaTypes.dark, variant));
         }
 
         if (!flag.isAdvanced()) {

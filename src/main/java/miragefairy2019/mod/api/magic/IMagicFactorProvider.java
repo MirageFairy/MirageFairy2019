@@ -1,6 +1,6 @@
 package miragefairy2019.mod.api.magic;
 
-import miragefairy2019.modkt.api.IManaType;
+import miragefairy2019.modkt.api.mana.IManaType;
 import miragefairy2019.modkt.api.erg.IErgType;
 import net.minecraft.util.text.ITextComponent;
 

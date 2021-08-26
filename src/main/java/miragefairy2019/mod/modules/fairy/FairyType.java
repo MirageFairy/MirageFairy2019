@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairy;
 
 import miragefairy2019.mod.api.fairy.IFairyType;
-import miragefairy2019.modkt.api.IManaSet;
+import miragefairy2019.modkt.api.mana.IManaSet;
 import miragefairy2019.modkt.api.erg.IErgSet;
 import miragefairy2019.modkt.impl.fairy.ColorSet;
 import net.minecraft.util.ResourceLocation;

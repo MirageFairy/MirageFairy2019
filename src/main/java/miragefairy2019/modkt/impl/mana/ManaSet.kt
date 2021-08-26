@@ -1,8 +1,9 @@
 package miragefairy2019.modkt.impl
 
 import com.google.gson.annotations.Expose
-import miragefairy2019.modkt.api.IManaSet
-import miragefairy2019.modkt.api.IManaType
+import miragefairy2019.modkt.api.mana.IManaSet
+import miragefairy2019.modkt.api.mana.IManaType
+import miragefairy2019.modkt.api.mana.ManaTypes
 import kotlin.math.max
 
 data class ManaSet(
@@ -82,12 +83,12 @@ data class MutableManaSet(
 
 
 fun IManaSet.getMana(manaType: IManaType) = when (manaType) {
-    ManaType.shine -> shine
-    ManaType.fire -> fire
-    ManaType.wind -> wind
-    ManaType.gaia -> gaia
-    ManaType.aqua -> aqua
-    ManaType.dark -> dark
+    ManaTypes.shine -> shine
+    ManaTypes.fire -> fire
+    ManaTypes.wind -> wind
+    ManaTypes.gaia -> gaia
+    ManaTypes.aqua -> aqua
+    ManaTypes.dark -> dark
     else -> throw IllegalArgumentException("$manaType")
 }
 

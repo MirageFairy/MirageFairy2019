@@ -1,6 +1,6 @@
 package miragefairy2019.modkt.api.playeraura;
 
-import miragefairy2019.modkt.api.IManaSet;
+import miragefairy2019.modkt.api.mana.IManaSet;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;

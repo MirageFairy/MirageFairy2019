@@ -14,6 +14,7 @@ import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed;
 import miragefairy2019.mod.modules.sphere.ModuleSphere;
+import miragefairy2019.modkt.impl.mana.ManaTypeKt;
 import miragefairy2019.modkt.modules.artifacts.ModuleArtifacts;
 import miragefairy2019.modkt.modules.placeditem.ModulePlacedItem;
 import miragefairy2019.modkt.modules.playeraura.ModulePlayerAura;
@@ -52,6 +53,8 @@ public class ModMirageFairy2019 {
         ModulePlacedItem.init(erMod);
         ModulePlayerAura.init(erMod);
         ModuleArtifacts.init(erMod);
+
+        ManaTypeKt.init(modInitializer);
 
         modInitializer.getOnInstantiation().fire(Unit.INSTANCE);
 

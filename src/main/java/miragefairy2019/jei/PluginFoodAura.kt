@@ -12,9 +12,9 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.jei.JeiUtilities.Companion.drawStringCentered
 import miragefairy2019.libkt.getSubItems
-import miragefairy2019.modkt.api.IManaType
+import miragefairy2019.modkt.api.mana.IManaType
+import miragefairy2019.modkt.api.mana.ManaTypes
 import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
-import miragefairy2019.modkt.impl.ManaType
 import miragefairy2019.modkt.impl.getMana
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Gui
@@ -78,12 +78,12 @@ class PluginFoodAura : IModPlugin {
                                     Gui.drawRect(x + 10 - stringWidth / 2 - 1, 10, x + 10 + stringWidth / 2 + 1, 18, 0xFFC6C6C6.toInt())
                                     minecraft.fontRenderer.drawStringCentered(string, x + 10, 10, manaType.color)
                                 }
-                                d(ManaType.shine, 30)
-                                d(ManaType.fire, 50)
-                                d(ManaType.wind, 70)
-                                d(ManaType.gaia, 90)
-                                d(ManaType.aqua, 110)
-                                d(ManaType.dark, 130)
+                                d(ManaTypes.shine, 30)
+                                d(ManaTypes.fire, 50)
+                                d(ManaTypes.wind, 70)
+                                d(ManaTypes.gaia, 90)
+                                d(ManaTypes.aqua, 110)
+                                d(ManaTypes.dark, 130)
                             }
                         })
 
