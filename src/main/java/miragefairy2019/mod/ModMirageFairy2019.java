@@ -1,5 +1,7 @@
 package miragefairy2019.mod;
 
+import kotlin.Unit;
+import miragefairy2019.libkt.ModInitializer;
 import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fertilizer.ApiFertilizer;
 import miragefairy2019.mod.api.main.ApiMain;
@@ -30,6 +32,7 @@ public class ModMirageFairy2019 {
     public static final String ACCEPTABLE_REMOTE_VERSIONS = "{acceptableRemoteVersions}";
 
     public EventRegistryMod erMod = new EventRegistryMod();
+    public ModInitializer modInitializer = new ModInitializer();
 
     public ModMirageFairy2019() {
         ModuleFairyStick.init(erMod);
@@ -50,6 +53,8 @@ public class ModMirageFairy2019 {
         ModulePlayerAura.init(erMod);
         ModuleArtifacts.init(erMod);
 
+        modInitializer.getOnInstantiation().fire(Unit.INSTANCE);
+
         erMod.initRegistry.trigger().run();
 
         erMod.initCreativeTab.trigger().run();
@@ -58,6 +63,8 @@ public class ModMirageFairy2019 {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+
+        modInitializer.getOnPreInit().fire(event);
 
         erMod.preInit.trigger().accept(event);
 
@@ -78,6 +85,8 @@ public class ModMirageFairy2019 {
     @EventHandler
     public void init(FMLInitializationEvent event) {
 
+        modInitializer.getOnInit().fire(event);
+
         erMod.init.trigger().accept(event);
 
         erMod.addRecipe.trigger().run();
@@ -94,6 +103,8 @@ public class ModMirageFairy2019 {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+
+        modInitializer.getOnPostInit().fire(event);
 
         erMod.postInit.trigger().accept(event);
 
