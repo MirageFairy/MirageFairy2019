@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.sphere;
 
-import miragefairy2019.modkt.api.fairy.IErgType;
+import miragefairy2019.modkt.api.erg.IErgType;
 import miragefairy2019.modkt.impl.fairy.ErgType;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.suppliterator.ISuppliterator;

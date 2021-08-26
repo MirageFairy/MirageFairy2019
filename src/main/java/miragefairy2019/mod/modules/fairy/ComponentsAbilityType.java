@@ -2,8 +2,8 @@ package miragefairy2019.mod.modules.fairy;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairy.IComponentAbilityType;
-import miragefairy2019.modkt.api.fairy.IErgType;
-import miragefairy2019.modkt.impl.fairy.ErgTypeKt;
+import miragefairy2019.modkt.api.erg.IErgType;
+import miragefairy2019.modkt.impl.fairy.ErgKt;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -34,7 +34,7 @@ public class ComponentsAbilityType {
 
         @Override
         public ITextComponent getDisplayName() {
-            return new TextComponentTranslation("mirageFairy2019.component.cuticle.format", ErgTypeKt.getDisplayName(abilityType));
+            return new TextComponentTranslation("mirageFairy2019.component.cuticle.format", ErgKt.getDisplayName(abilityType));
         }
 
         @Override

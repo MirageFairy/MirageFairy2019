@@ -1,8 +1,8 @@
 package miragefairy2019.mod.modules.fairyweapon.formula;
 
 import miragefairy2019.mod.api.fairyweapon.formula.ISource;
-import miragefairy2019.modkt.api.fairy.IErgType;
-import miragefairy2019.modkt.impl.fairy.ErgTypeKt;
+import miragefairy2019.modkt.api.erg.IErgType;
+import miragefairy2019.modkt.impl.fairy.ErgKt;
 import net.minecraft.util.text.ITextComponent;
 
 public class SourceAbility implements ISource {
@@ -20,7 +20,7 @@ public class SourceAbility implements ISource {
 
     @Override
     public ITextComponent getDisplayName() {
-        return ErgTypeKt.getDisplayName(abilityType);
+        return ErgKt.getDisplayName(abilityType);
     }
 
 }

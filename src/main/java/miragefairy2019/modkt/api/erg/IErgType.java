@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.api.fairy;
+package miragefairy2019.modkt.api.erg;
 
 import net.minecraft.util.text.TextFormatting;
 

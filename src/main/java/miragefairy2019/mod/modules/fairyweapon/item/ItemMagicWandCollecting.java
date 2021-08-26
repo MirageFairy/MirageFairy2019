@@ -2,8 +2,8 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.modkt.impl.fairy.ErgKt;
 import miragefairy2019.modkt.impl.fairy.ErgType;
-import miragefairy2019.modkt.impl.fairy.ErgTypeKt;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.util.ITooltipFlag;
@@ -61,8 +61,8 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
     public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag) {
         Status status = new Status(fairyType);
         tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
-        tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Fire, " + ErgTypeKt.getDisplayName(ErgType.Companion.getWarp()).getUnformattedText() + ")");
-        tooltip.add(TextFormatting.BLUE + "Max Targets: " + status.maxTargets + " (Gaia, " + ErgTypeKt.getDisplayName(ErgType.Companion.getStore()).getUnformattedText() + ")");
+        tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Fire, " + ErgKt.getDisplayName(ErgType.Companion.getWarp()).getUnformattedText() + ")");
+        tooltip.add(TextFormatting.BLUE + "Max Targets: " + status.maxTargets + " (Gaia, " + ErgKt.getDisplayName(ErgType.Companion.getStore()).getUnformattedText() + ")");
         tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Aqua)");
         tooltip.add(TextFormatting.BLUE + "Cool Time: " + ((int) status.coolTime) + "t (Dark, Cost)");
     }

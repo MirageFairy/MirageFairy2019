@@ -2,8 +2,8 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.modkt.impl.fairy.ErgKt;
 import miragefairy2019.modkt.impl.fairy.ErgType;
-import miragefairy2019.modkt.impl.fairy.ErgTypeKt;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -62,7 +62,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
         tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Wind)");
         tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Aqua)");
         tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
-        tooltip.add(TextFormatting.BLUE + "Experience Cost: " + String.format("%.1f", status.experienceCost * 100) + "% (Gaia, " + ErgTypeKt.getDisplayName(ErgType.Companion.getFood()).getUnformattedText() + ")");
+        tooltip.add(TextFormatting.BLUE + "Experience Cost: " + String.format("%.1f", status.experienceCost * 100) + "% (Gaia, " + ErgKt.getDisplayName(ErgType.Companion.getFood()).getUnformattedText() + ")");
         tooltip.add(TextFormatting.BLUE + "Cool Time: " + String.format("%.0f", status.coolTime) + "t (Dark, Cost)");
     }
 

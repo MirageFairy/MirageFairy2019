@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairy;
 
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.modkt.api.IManaSet;
-import miragefairy2019.modkt.api.fairy.IErgSet;
+import miragefairy2019.modkt.api.erg.IErgSet;
 import miragefairy2019.modkt.impl.ManaSet;
 import miragefairy2019.modkt.impl.fairy.ErgSet;
 import mirrg.boron.util.struct.ImmutableArray;

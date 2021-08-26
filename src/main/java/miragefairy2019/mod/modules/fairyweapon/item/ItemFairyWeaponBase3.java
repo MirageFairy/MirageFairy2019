@@ -6,11 +6,11 @@ import miragefairy2019.mod.api.magic.IMagicFactorProvider;
 import miragefairy2019.mod.api.magic.IMagicHandler;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.modkt.api.IManaType;
-import miragefairy2019.modkt.api.fairy.IErgType;
+import miragefairy2019.modkt.api.erg.IErgType;
 import miragefairy2019.modkt.api.playeraura.ApiPlayerAura;
 import miragefairy2019.modkt.api.playeraura.IPlayerAuraHandler;
 import miragefairy2019.modkt.impl.ManaTypeKt;
-import miragefairy2019.modkt.impl.fairy.ErgTypeKt;
+import miragefairy2019.modkt.impl.fairy.ErgKt;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -60,7 +60,7 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
 
                                 @Override
                                 public ITextComponent ability(IErgType abilityType) {
-                                    return ErgTypeKt.getDisplayName(abilityType);
+                                    return ErgKt.getDisplayName(abilityType);
                                 }
 
                                 @Override

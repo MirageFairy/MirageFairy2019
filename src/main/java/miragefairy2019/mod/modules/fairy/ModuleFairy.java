@@ -9,7 +9,7 @@ import miragefairy2019.mod.common.fairy.relation.FairyRelationRegistry;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.InitializationContext;
 import miragefairy2019.mod.lib.OreIngredientComplex;
-import miragefairy2019.modkt.api.fairy.IErgEntry;
+import miragefairy2019.modkt.api.erg.IErgEntry;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.Block;

@@ -9,7 +9,7 @@ import miragefairy2019.modkt.api.IManaType;
 import miragefairy2019.modkt.impl.ManaSetKt;
 import miragefairy2019.modkt.impl.ManaType;
 import miragefairy2019.modkt.impl.ManaTypeKt;
-import miragefairy2019.modkt.impl.fairy.ErgTypeKt;
+import miragefairy2019.modkt.impl.fairy.ErgKt;
 import mirrg.boron.util.UtilsString;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.Minecraft;
@@ -92,7 +92,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
                             .sorted((a, b) -> -Double.compare(a.getPower(), b.getPower()))
                             .map(t -> {
                                 return new TextComponentString("")
-                                        .appendSibling(ErgTypeKt.getDisplayName(t.getType()))
+                                        .appendSibling(ErgKt.getDisplayName(t.getType()))
                                         .appendText(String.format("(%s)", format(t.getPower())));
                             })
                             .sandwich(new TextComponentString(", "))
@@ -111,7 +111,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
                             .sorted((a, b) -> -Double.compare(a.getPower(), b.getPower()))
                             .map(t -> {
                                 return new TextComponentString("")
-                                        .appendSibling(ErgTypeKt.getDisplayName(t.getType()))
+                                        .appendSibling(ErgKt.getDisplayName(t.getType()))
                                         .appendText(String.format("(%.3f)", t.getPower()));
                             })
                             .sandwich(new TextComponentString(", "))
