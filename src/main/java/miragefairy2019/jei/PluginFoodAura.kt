@@ -11,6 +11,7 @@ import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.jei.JeiUtilities.Companion.drawStringCentered
+import miragefairy2019.libkt.getSubItems
 import miragefairy2019.modkt.api.IManaType
 import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
 import miragefairy2019.modkt.impl.ManaType
@@ -22,7 +23,6 @@ import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemFood
 import net.minecraft.item.ItemStack
-import net.minecraft.util.NonNullList
 
 @JEIPlugin
 class PluginFoodAura : IModPlugin {
@@ -57,13 +57,7 @@ class PluginFoodAura : IModPlugin {
             val registered = mutableSetOf<ItemStack>()
             CreativeTabs.CREATIVE_TAB_ARRAY.forEach { creativeTab ->
                 Item.REGISTRY.forEach { item ->
-                    fun Item.getSubItems(creativeTab: CreativeTabs): List<ItemStack> {
-                        val list = NonNullList.create<ItemStack>()
-                        this.getSubItems(creativeTab, list)
-                        return list
-                    }
-
-                    item.getSubItems(creativeTab).forEach { itemStack ->
+                    item!!.getSubItems(creativeTab).forEach { itemStack ->
 
                         if (itemStack.item !is ItemFood) return@forEach // 食べ物以外は無視
 
