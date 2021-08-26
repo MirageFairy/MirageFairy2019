@@ -57,7 +57,7 @@ class PluginFoodAura : IModPlugin {
             val registered = mutableSetOf<ItemStack>()
             CreativeTabs.CREATIVE_TAB_ARRAY.forEach { creativeTab ->
                 Item.REGISTRY.forEach { item ->
-                    item!!.getSubItems(creativeTab).forEach { itemStack ->
+                    (item as Item).getSubItems(creativeTab).forEach { itemStack ->
 
                         if (itemStack.item !is ItemFood) return@forEach // 食べ物以外は無視
 
