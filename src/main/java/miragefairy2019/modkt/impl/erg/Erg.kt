@@ -1,6 +1,6 @@
 package miragefairy2019.modkt.impl.fairy
 
-import miragefairy2019.libkt.ModInitializer
+import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.color
 import miragefairy2019.libkt.text
 import miragefairy2019.modkt.api.erg.ErgTypes
@@ -9,7 +9,7 @@ import miragefairy2019.modkt.api.erg.IErgSet
 import miragefairy2019.modkt.api.erg.IErgType
 import net.minecraft.util.text.TextFormatting
 
-fun ModInitializer.init() {
+val moduleErg: Module = {
     onInstantiation {
         val values = mutableListOf<IErgType>()
         operator fun String.invoke(textColor: TextFormatting): ErgType {

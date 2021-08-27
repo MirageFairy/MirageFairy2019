@@ -1,13 +1,13 @@
 package miragefairy2019.modkt.impl.mana
 
-import miragefairy2019.libkt.ModInitializer
+import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.color
 import miragefairy2019.libkt.text
 import miragefairy2019.modkt.api.mana.IManaType
 import miragefairy2019.modkt.api.mana.ManaTypes
 import net.minecraft.util.text.TextFormatting
 
-fun ModInitializer.init() {
+val moduleMana: Module = {
     onInstantiation {
         val values = mutableListOf<IManaType>()
         operator fun String.invoke(color: Int, textColor: TextFormatting): ManaType {
