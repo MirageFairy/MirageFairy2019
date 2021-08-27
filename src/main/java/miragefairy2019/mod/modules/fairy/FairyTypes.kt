@@ -9,7 +9,6 @@ import miragefairy2019.modkt.impl.*
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.ErgEntry
 import miragefairy2019.modkt.impl.fairy.ErgSet
-import miragefairy2019.modkt.impl.fairy.ErgType
 import mirrg.boron.util.struct.Tuple
 import kotlin.math.pow
 
