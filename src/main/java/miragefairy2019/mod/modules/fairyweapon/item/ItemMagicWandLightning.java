@@ -13,7 +13,7 @@ import miragefairy2019.mod.modules.fairyweapon.critical.EnumCriticalFactor;
 import miragefairy2019.mod.modules.fairyweapon.magic.MagicExecutor;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace;
-import miragefairy2019.modkt.impl.fairy.ErgType;
+import miragefairy2019.modkt.api.erg.ErgTypes;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -41,7 +41,7 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
             add(new IFormulaDouble[]{
                     val(1),
                     scale(wind(), 60.0, 10.0, 1),
-                    scale(ability(ErgType.Companion.getThunder()), 20.0, 10.0),
+                    scale(ability(ErgTypes.thunder), 20.0, 10.0),
             }));
 
     public IMagicStatus<CriticalRate> criticalRate = registerMagicStatus("criticalRate", formatterCriticalRate(),
@@ -51,7 +51,7 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
             add(new IFormulaDouble[]{
                     val(2),
                     scale(aqua(), 30.0, 8.0, 1),
-                    scale(ability(ErgType.Companion.getShoot()), 10.0, 4.0),
+                    scale(ability(ErgTypes.shoot), 10.0, 4.0),
             }));
 
     public IMagicStatus<Double> radius = registerMagicStatus("radius", formatterDouble1(),
@@ -70,7 +70,7 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
             mul(new IFormulaDouble[]{
                     mul(cost(), 1 / 50.0 * 40),
                     pow(0.5, norm(dark(), 30.0)),
-                    pow(0.5, norm(ability(ErgType.Companion.getKnowledge()), 10.0)),
+                    pow(0.5, norm(ability(ErgTypes.knowledge), 10.0)),
             }));
 
     //

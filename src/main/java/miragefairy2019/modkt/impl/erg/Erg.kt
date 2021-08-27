@@ -1,11 +1,49 @@
 package miragefairy2019.modkt.impl.fairy
 
+import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.color
 import miragefairy2019.libkt.text
+import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.erg.IErgEntry
 import miragefairy2019.modkt.api.erg.IErgSet
 import miragefairy2019.modkt.api.erg.IErgType
 import net.minecraft.util.text.TextFormatting
+
+fun ModInitializer.init() {
+    onInstantiation {
+        val values = mutableListOf<IErgType>()
+        operator fun String.invoke(textColor: TextFormatting): ErgType {
+            val ergType = ErgType(this, textColor)
+            values += ergType
+            return ergType
+        }
+
+        ErgTypes.attack = "attack"(TextFormatting.DARK_RED)
+        ErgTypes.craft = "craft"(TextFormatting.GOLD)
+        ErgTypes.fell = "fell"(TextFormatting.DARK_GREEN)
+        ErgTypes.light = "light"(TextFormatting.YELLOW)
+        ErgTypes.flame = "flame"(TextFormatting.RED)
+        ErgTypes.water = "water"(TextFormatting.BLUE)
+        ErgTypes.crystal = "crystal"(TextFormatting.AQUA)
+        ErgTypes.art = "art"(TextFormatting.GREEN)
+        ErgTypes.store = "store"(TextFormatting.GOLD)
+        ErgTypes.warp = "warp"(TextFormatting.DARK_PURPLE)
+        ErgTypes.shoot = "shoot"(TextFormatting.GREEN)
+        ErgTypes.breaking = "breaking"(TextFormatting.DARK_RED)
+        ErgTypes.chemical = "chemical"(TextFormatting.DARK_AQUA)
+        ErgTypes.slash = "slash"(TextFormatting.DARK_RED)
+        ErgTypes.food = "food"(TextFormatting.YELLOW)
+        ErgTypes.knowledge = "knowledge"(TextFormatting.DARK_GREEN)
+        ErgTypes.energy = "energy"(TextFormatting.GOLD)
+        ErgTypes.submission = "submission"(TextFormatting.DARK_GRAY)
+        ErgTypes.christmas = "christmas"(TextFormatting.DARK_GREEN)
+        ErgTypes.freeze = "freeze"(TextFormatting.AQUA)
+        ErgTypes.thunder = "thunder"(TextFormatting.YELLOW)
+
+        ErgTypes.values = values
+    }
+}
+
 
 class ErgSet(private val iterable: Iterable<IErgEntry>) : IErgSet {
     private val list = iterable.toList()
@@ -20,53 +58,6 @@ class ErgEntry(private val type: IErgType, private val power: Double) : IErgEntr
 }
 
 class ErgType(private val name: String, private val textColor: TextFormatting) : IErgType {
-    companion object {
-        val attack = ErgType("attack", TextFormatting.DARK_RED)
-        val craft = ErgType("craft", TextFormatting.GOLD)
-        val fell = ErgType("fell", TextFormatting.DARK_GREEN)
-        val light = ErgType("light", TextFormatting.YELLOW)
-        val flame = ErgType("flame", TextFormatting.RED)
-        val water = ErgType("water", TextFormatting.BLUE)
-        val crystal = ErgType("crystal", TextFormatting.AQUA)
-        val art = ErgType("art", TextFormatting.GREEN)
-        val store = ErgType("store", TextFormatting.GOLD)
-        val warp = ErgType("warp", TextFormatting.DARK_PURPLE)
-        val shoot = ErgType("shoot", TextFormatting.GREEN)
-        val breaking = ErgType("breaking", TextFormatting.DARK_RED)
-        val chemical = ErgType("chemical", TextFormatting.DARK_AQUA)
-        val slash = ErgType("slash", TextFormatting.DARK_RED)
-        val food = ErgType("food", TextFormatting.YELLOW)
-        val knowledge = ErgType("knowledge", TextFormatting.DARK_GREEN)
-        val energy = ErgType("energy", TextFormatting.GOLD)
-        val submission = ErgType("submission", TextFormatting.DARK_GRAY)
-        val christmas = ErgType("christmas", TextFormatting.DARK_GREEN)
-        val freeze = ErgType("freeze", TextFormatting.AQUA)
-        val thunder = ErgType("thunder", TextFormatting.YELLOW)
-        fun values(): Array<IErgType> = arrayOf(
-                attack,
-                craft,
-                fell,
-                light,
-                flame,
-                water,
-                crystal,
-                art,
-                store,
-                warp,
-                shoot,
-                breaking,
-                chemical,
-                slash,
-                food,
-                knowledge,
-                energy,
-                submission,
-                christmas,
-                freeze,
-                thunder
-        )
-    }
-
     override fun getName() = name
     override fun getTextColor() = textColor
 }

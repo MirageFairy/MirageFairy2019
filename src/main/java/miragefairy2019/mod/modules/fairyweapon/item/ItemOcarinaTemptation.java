@@ -2,8 +2,8 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
+import miragefairy2019.modkt.api.erg.ErgTypes;
 import miragefairy2019.modkt.impl.fairy.ErgKt;
-import miragefairy2019.modkt.impl.fairy.ErgType;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -39,7 +39,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
             radius = UtilsMath.trim(5 + fairyType.getManas().getWind() / 5.0, 5, 10);
             maxTargetCount = UtilsMath.trim(1 + (int) (fairyType.getManas().getAqua() / 7.0), 1, 8);
             wear = UtilsMath.trim(4 * Math.pow(0.5, fairyType.getManas().getFire() / 50.0), 0.4, 4);
-            experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManas().getGaia() / 50.0 + fairyType.getAbilities().getPower(ErgType.Companion.getFood()) / 10.0), 0.1, 1);
+            experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManas().getGaia() / 50.0 + fairyType.getAbilities().getPower(ErgTypes.food) / 10.0), 0.1, 1);
             coolTime = fairyType.getCost() * UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManas().getDark() / 50.0), 0.1, 1);
         }
 
@@ -62,7 +62,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
         tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Wind)");
         tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Aqua)");
         tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
-        tooltip.add(TextFormatting.BLUE + "Experience Cost: " + String.format("%.1f", status.experienceCost * 100) + "% (Gaia, " + ErgKt.getDisplayName(ErgType.Companion.getFood()).getUnformattedText() + ")");
+        tooltip.add(TextFormatting.BLUE + "Experience Cost: " + String.format("%.1f", status.experienceCost * 100) + "% (Gaia, " + ErgKt.getDisplayName(ErgTypes.food).getUnformattedText() + ")");
         tooltip.add(TextFormatting.BLUE + "Cool Time: " + String.format("%.0f", status.coolTime) + "t (Dark, Cost)");
     }
 
