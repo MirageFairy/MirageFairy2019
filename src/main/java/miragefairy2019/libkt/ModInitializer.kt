@@ -4,6 +4,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 
+typealias Module = ModInitializer.() -> Unit
+
 class ModInitializer {
     val onInstantiation = EventRegistry<Unit>()
     val onPreInit = EventRegistry<FMLPreInitializationEvent>()
