@@ -10,12 +10,19 @@ import net.minecraft.util.text.TextFormatting
 fun ModInitializer.init() {
     onInstantiation {
         val values = mutableListOf<IManaType>()
-        ManaTypes.shine = ManaType("shine", 0xC9FFFF, TextFormatting.WHITE).also { values += it }
-        ManaTypes.fire = ManaType("fire", 0xCE0000, TextFormatting.RED).also { values += it }
-        ManaTypes.wind = ManaType("wind", 0x00C600, TextFormatting.GREEN).also { values += it }
-        ManaTypes.gaia = ManaType("gaia", 0x777700, TextFormatting.YELLOW).also { values += it }
-        ManaTypes.aqua = ManaType("aqua", 0x0000E2, TextFormatting.BLUE).also { values += it }
-        ManaTypes.dark = ManaType("dark", 0x191919, TextFormatting.DARK_GRAY).also { values += it }
+        operator fun String.invoke(color: Int, textColor: TextFormatting): ManaType {
+            val manaType = ManaType(this, color, textColor)
+            values += manaType
+            return manaType
+        }
+
+        ManaTypes.shine = "shine"(0xC9FFFF, TextFormatting.WHITE)
+        ManaTypes.fire = "fire"(0xCE0000, TextFormatting.RED)
+        ManaTypes.wind = "wind"(0x00C600, TextFormatting.GREEN)
+        ManaTypes.gaia = "gaia"(0x777700, TextFormatting.YELLOW)
+        ManaTypes.aqua = "aqua"(0x0000E2, TextFormatting.BLUE)
+        ManaTypes.dark = "dark"(0x191919, TextFormatting.DARK_GRAY)
+
         ManaTypes.values = values
     }
 }
