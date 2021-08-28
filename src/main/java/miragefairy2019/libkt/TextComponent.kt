@@ -15,6 +15,6 @@ class TextComponentBuilder {
     fun text(block: TextComponentBuilder.() -> Unit) = text(TextComponentBuilder().also { it.block() }.build())
 }
 
-fun text(block: TextComponentBuilder.() -> Unit) = TextComponentBuilder().also { it.block() }.build()
+fun text(block: TextComponentBuilder.() -> Unit): ITextComponent = TextComponentBuilder().also { it.block() }.build()
 fun <T : ITextComponent> T.color(color: TextFormatting) = run { this.style.color = color; this }
 fun <T : ITextComponent> T.bold(value: Boolean = true) = run { this.style.bold = value; this }
