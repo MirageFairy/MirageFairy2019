@@ -28,14 +28,23 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
 abstract class ItemFairyWeaponBase3 : ItemFairyWeaponBase() {
-    private val magicStatusList = mutableListOf<IMagicStatus<*>>()
-    fun <T> register(magicStatus: IMagicStatus<T>): IMagicStatus<T> = magicStatus.also { magicStatusList += it }
 
-    operator fun <T> String.invoke(function: IFairyType.() -> T, fFormatter: MagicStatusFormatterScope<T>.() -> IMagicStatusFormatter<T>): MagicStatus<T> {
+    // Magic
+
+    private var magicProvider: ((world: World, player: EntityPlayer, itemStack: ItemStack, fairyType: IFairyType) -> IMagicHandler)? = null
+    internal fun magic(magicProvider: (world: World, player: EntityPlayer, itemStack: ItemStack, fairyType: IFairyType) -> IMagicHandler) = run { this.magicProvider as Nothing?; this.magicProvider = magicProvider }
+    private fun getMagicHandler(world: World, player: EntityPlayer, itemStack: ItemStack, fairyType: IFairyType) = magicProvider?.invoke(world, player, itemStack, fairyType) ?: object : IMagicHandler {}
+
+    // Magic Status
+
+    private val magicStatusList = mutableListOf<IMagicStatus<*>>()
+    internal fun <T> register(magicStatus: IMagicStatus<T>): IMagicStatus<T> = magicStatus.also { magicStatusList += it }
+
+    internal operator fun <T> String.invoke(function: IFairyType.() -> T, fFormatter: MagicStatusFormatterScope<T>.() -> IMagicStatusFormatter<T>): MagicStatus<T> {
         return MagicStatus(this, IMagicStatusFunction<T> { it.function() }, MagicStatusFormatterScope<T>().fFormatter())
     }
 
-    class MagicStatusFormatterScope<T> {
+    internal class MagicStatusFormatterScope<T> {
         private fun <T> f(block: (T) -> ITextComponent) = IMagicStatusFormatter<T> { function, fairyType -> block(function.getValue(fairyType)) }
         val string get() = f<T> { buildText { format("%s", it) } }
         val int get() = f<Int> { buildText { format("%d", it) } }
@@ -50,8 +59,6 @@ abstract class ItemFairyWeaponBase3 : ItemFairyWeaponBase() {
         val boolean get() = f<Boolean> { buildText { text(if (it) "Yes" else "No") } }
         val tick get() = f<Double> { buildText { format("%.2f sec", it / 20.0) } }
     }
-
-    abstract fun getMagicHandler(world: World, player: EntityPlayer, itemStack: ItemStack, fairyType: IFairyType): IMagicHandler
 
     //
 
