@@ -17,6 +17,7 @@ import miragefairy2019.modkt.impl.mana.displayName
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting
+import net.minecraft.util.text.TextFormatting.*
 
 class MagicStatus<T>(
         private val name: String,
@@ -63,7 +64,7 @@ val <T> IMagicStatusFunction<T>.factors
             override fun isEmpty() = throw UnsupportedOperationException()
             override fun getName() = throw UnsupportedOperationException()
             override fun getColor() = throw UnsupportedOperationException()
-            override fun getCost() = add(text { translate("mirageFairy2019.formula.source.cost.name").color(TextFormatting.DARK_PURPLE) })
+            override fun getCost() = add(text { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) })
             override fun getManas() = object : IManaSet {
                 override fun getShine() = add(ManaTypes.shine.displayName)
                 override fun getFire() = add(ManaTypes.fire.displayName)
@@ -97,8 +98,8 @@ fun <T : Comparable<T>> IMagicStatus<T>.coloredBySign(colorPositive: TextFormatt
     }
 }
 
-fun <T : Comparable<T>> IMagicStatus<T>.positive() = coloredBySign(TextFormatting.GREEN, TextFormatting.RED)
-fun <T : Comparable<T>> IMagicStatus<T>.negative() = coloredBySign(TextFormatting.RED, TextFormatting.GREEN)
+fun <T : Comparable<T>> IMagicStatus<T>.positive() = coloredBySign(GREEN, RED)
+fun <T : Comparable<T>> IMagicStatus<T>.negative() = coloredBySign(RED, GREEN)
 
 fun <T : Comparable<T>> IMagicStatus<T>.ranged(min: T, max: T): IMagicStatus<T> = object : MagicStatusAdapter<T>(this) {
     override fun getFunction() = IMagicStatusFunction { parent.function.getValue(it).coerceIn(min, max) }
