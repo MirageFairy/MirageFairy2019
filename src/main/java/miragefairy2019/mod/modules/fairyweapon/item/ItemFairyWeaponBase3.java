@@ -46,6 +46,7 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
         super.addInformationFunctions(itemStack, world, tooltip, flag);
     }
 
+    @SideOnly(Side.CLIENT)
     private <T> ITextComponent getStatusText(IMagicStatus<T> magicStatus, IFairyType fairyType, boolean isAdvanced) {
         ITextComponent textComponent = ImplMagicStatusKt.getDisplayName(magicStatus);
         textComponent.appendText(": ");
