@@ -13,3 +13,4 @@ public interface IMagicStatus<T> {
     public ITextComponent getFormula(IMagicFactorProvider magicFactorProvider);
 
 }
+
