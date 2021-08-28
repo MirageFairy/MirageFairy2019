@@ -2,7 +2,6 @@ package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.api.fairy.IFairyType
-import miragefairy2019.mod.api.magic.IMagicExecutor
 import miragefairy2019.mod.api.magic.IMagicHandler
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.modkt.api.erg.ErgTypes
@@ -43,156 +42,152 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
     val coolTime = "coolTime" { cost * 0.5 / (1 + mana(ManaTypes.aqua) * 0.03) }.shows { tick }.negative().ranged(0.0001, 100.0)
     val collection = "collection" { erg(ErgTypes.warp) >= 10 }.shows { boolean }
 
-    override fun getMagicHandler(fairyType: IFairyType): IMagicHandler {
+    override fun getMagicStatusList() = listOf(
+            pitch,
+            maxTargetCount,
+            fortune,
+            additionalReach,
+            radius,
+            wear,
+            coolTime,
+            collection)
+
+    override fun getMagicHandler(world: World, player: EntityPlayer, itemStack: ItemStack, fairyType: IFairyType): IMagicHandler {
         operator fun <T> IMagicStatus<T>.invoke() = function.getValue(fairyType)
+
+        // 視線判定
+        val magicSelectorRayTrace = MagicSelectorRayTrace(world, player, additionalReach())
+
+        // 視点判定
+        val magicSelectorPosition = magicSelectorRayTrace.magicSelectorPosition
+
+        // 妖精を持っていない場合、中止
+        if (fairyType.isEmpty) return object : IMagicHandler {
+            override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
+                magicSelectorPosition.doEffect(0xFF00FF) // 視点
+            }
+        }
+
+        // 範囲判定
+        val magicSelectorCircle = magicSelectorPosition.getMagicSelectorCircle(radius())
+
+        // 対象計算
+        val listTarget = magicSelectorCircle.blockPosList
+                .mapNotNull {
+                    val blockState = world.getBlockState(it.blockPos)
+                    val pickable = ApiMirageFlower.pickableRegistry[blockState.block].orElse(null)
+                    if (pickable != null && pickable.isPickableAge(blockState)) Pair(it, pickable) else null
+                }
+                .sortedBy { it.first.distanceSquared }
+                .take(maxTargetCount())
+                .map { Pair(it.first.blockPos, it.second) }
+
+        // 資源がない場合、中止
+        if (itemStack.itemDamage + ceil(wear()).toInt() > itemStack.maxDamage) return object : IMagicHandler {
+            override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
+                magicSelectorPosition.doEffect(0xFF0000) // 視点
+                magicSelectorCircle.doEffect() // 範囲
+            }
+        }
+
+        // 発動対象がない場合、中止
+        if (listTarget.isEmpty()) return object : IMagicHandler {
+            override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
+                magicSelectorPosition.doEffect(0x00FFFF) // 視点
+                magicSelectorCircle.doEffect() // 範囲
+            }
+        }
+
+        // クールタイムが残っている場合、中止
+        if (player.cooldownTracker.hasCooldown(this@ItemBellFlowerPicking)) return object : IMagicHandler {
+            override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
+                magicSelectorPosition.doEffect(0xFFFF00) // 視点
+                magicSelectorCircle.doEffect() // 範囲
+                spawnParticleTargets(world, listTarget, { Vec3d(it.first).addVector(0.5, 0.5, 0.5) }, { 0xFFFF00 }) // 対象
+            }
+        }
+
+        // 魔法成立
         return object : IMagicHandler {
-            override fun getMagicStatuses() = listOf(
-                    pitch,
-                    maxTargetCount,
-                    fortune,
-                    additionalReach,
-                    radius,
-                    wear,
-                    coolTime,
-                    collection)
+            override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
+                magicSelectorPosition.doEffect(0x00FF00) // 視点
+                magicSelectorCircle.doEffect() // 範囲
+                spawnParticleTargets(world, listTarget, { Vec3d(it.first).addVector(0.5, 0.5, 0.5) }, { 0x00FF00 }) // 対象
+            }
 
-            override fun getMagicExecutor(world: World, player: EntityPlayer, itemStack: ItemStack): IMagicExecutor {
+            override fun onItemRightClick(hand: EnumHand): EnumActionResult {
+                var breakSound: SoundEvent? = null
+                var collected = false
+                var targetCount = 0
 
-                // 視線判定
-                val magicSelectorRayTrace = MagicSelectorRayTrace(world, player, additionalReach())
+                run targets@{
+                    for (pair in listTarget) {
+                        if (itemStack.itemDamage + ceil(wear()).toInt() > itemStack.maxDamage) return@targets // 耐久が足りないので中止
+                        if (targetCount + 1 > maxTargetCount()) return@targets // パワーが足りないので中止
 
-                // 視点判定
-                val magicSelectorPosition = magicSelectorRayTrace.magicSelectorPosition
+                        // 成立
 
-                // 妖精を持っていない場合、中止
-                if (fairyType.isEmpty) return object : IMagicExecutor {
-                    override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
-                        magicSelectorPosition.doEffect(0xFF00FF) // 視点
-                    }
-                }
+                        // 資源消費
+                        itemStack.damageItem(UtilsMath.randomInt(world.rand, wear()), player)
+                        targetCount++
 
-                // 範囲判定
-                val magicSelectorCircle = magicSelectorPosition.getMagicSelectorCircle(radius())
-
-                // 対象計算
-                val listTarget = magicSelectorCircle.blockPosList
-                        .mapNotNull {
-                            val blockState = world.getBlockState(it.blockPos)
-                            val pickable = ApiMirageFlower.pickableRegistry[blockState.block].orElse(null)
-                            if (pickable != null && pickable.isPickableAge(blockState)) Pair(it, pickable) else null
+                        // 音取得
+                        run {
+                            val blockState = world.getBlockState(pair.first)
+                            breakSound = blockState.block.getSoundType(blockState, world, pair.first, player).breakSound
                         }
-                        .sortedBy { it.first.distanceSquared }
-                        .take(maxTargetCount())
-                        .map { Pair(it.first.blockPos, it.second) }
 
-                // 資源がない場合、中止
-                if (itemStack.itemDamage + ceil(wear()).toInt() > itemStack.maxDamage) return object : IMagicExecutor {
-                    override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
-                        magicSelectorPosition.doEffect(0xFF0000) // 視点
-                        magicSelectorCircle.doEffect() // 範囲
-                    }
-                }
+                        // 収穫
+                        run {
 
-                // 発動対象がない場合、中止
-                if (listTarget.isEmpty()) return object : IMagicExecutor {
-                    override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
-                        magicSelectorPosition.doEffect(0x00FFFF) // 視点
-                        magicSelectorCircle.doEffect() // 範囲
-                    }
-                }
+                            // 収穫試行
+                            val result = pair.second.tryPick(world, pair.first, Optional.of(player), UtilsMath.randomInt(world.rand, fortune()))
+                            if (!result) return@targets
 
-                // クールタイムが残っている場合、中止
-                if (player.cooldownTracker.hasCooldown(this@ItemBellFlowerPicking)) return object : IMagicExecutor {
-                    override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
-                        magicSelectorPosition.doEffect(0xFFFF00) // 視点
-                        magicSelectorCircle.doEffect() // 範囲
-                        spawnParticleTargets(world, listTarget, { Vec3d(it.first).addVector(0.5, 0.5, 0.5) }, { 0xFFFF00 }) // 対象
-                    }
-                }
-
-                // 魔法成立
-                return object : IMagicExecutor {
-                    override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
-                        magicSelectorPosition.doEffect(0x00FF00) // 視点
-                        magicSelectorCircle.doEffect() // 範囲
-                        spawnParticleTargets(world, listTarget, { Vec3d(it.first).addVector(0.5, 0.5, 0.5) }, { 0x00FF00 }) // 対象
-                    }
-
-                    override fun onItemRightClick(hand: EnumHand): EnumActionResult {
-                        var breakSound: SoundEvent? = null
-                        var collected = false
-                        var targetCount = 0
-
-                        run targets@{
-                            for (pair in listTarget) {
-                                if (itemStack.itemDamage + ceil(wear()).toInt() > itemStack.maxDamage) return@targets // 耐久が足りないので中止
-                                if (targetCount + 1 > maxTargetCount()) return@targets // パワーが足りないので中止
-
-                                // 成立
-
-                                // 資源消費
-                                itemStack.damageItem(UtilsMath.randomInt(world.rand, wear()), player)
-                                targetCount++
-
-                                // 音取得
-                                run {
-                                    val blockState = world.getBlockState(pair.first)
-                                    breakSound = blockState.block.getSoundType(blockState, world, pair.first, player).breakSound
+                            // 破壊したばかりのブロックの周辺のアイテムを集める
+                            if (collection()) {
+                                world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(pair.first)).forEach {
+                                    collected = true
+                                    it.setPosition(player.posX, player.posY, player.posZ)
+                                    it.setNoPickupDelay()
                                 }
-
-                                // 収穫
-                                run {
-
-                                    // 収穫試行
-                                    val result = pair.second.tryPick(world, pair.first, Optional.of(player), UtilsMath.randomInt(world.rand, fortune()))
-                                    if (!result) return@targets
-
-                                    // 破壊したばかりのブロックの周辺のアイテムを集める
-                                    if (collection()) {
-                                        world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(pair.first)).forEach {
-                                            collected = true
-                                            it.setPosition(player.posX, player.posY, player.posZ)
-                                            it.setNoPickupDelay()
-                                        }
-                                    }
-
-                                }
-
-                                // エフェクト
-                                val color = fairyType.color
-                                world.spawnParticle(
-                                        EnumParticleTypes.SPELL_MOB,
-                                        pair.first.x + 0.5,
-                                        pair.first.y + 0.5,
-                                        pair.first.z + 0.5,
-                                        (color shr 16 and 0xFF) / 255.0,
-                                        (color shr 8 and 0xFF) / 255.0,
-                                        (color shr 0 and 0xFF) / 255.0)
-
                             }
-                        }
-
-                        if (targetCount >= 1) {
-
-                            // エフェクト
-                            playSound(world, player, 2.0.pow(pitch() / 12.0))
-                            world.playSound(null, player.posX, player.posY, player.posZ, breakSound!!, SoundCategory.PLAYERS, 1.0f, 1.0f)
-
-                            // クールタイム
-                            val ratio = targetCount / maxTargetCount().toDouble()
-                            player.cooldownTracker.setCooldown(this@ItemBellFlowerPicking, (coolTime() * ratio.pow(0.5)).toInt())
-
-                        }
-                        if (collected) {
-
-                            // エフェクト
-                            world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f)
 
                         }
 
-                        return EnumActionResult.SUCCESS
+                        // エフェクト
+                        val color = fairyType.color
+                        world.spawnParticle(
+                                EnumParticleTypes.SPELL_MOB,
+                                pair.first.x + 0.5,
+                                pair.first.y + 0.5,
+                                pair.first.z + 0.5,
+                                (color shr 16 and 0xFF) / 255.0,
+                                (color shr 8 and 0xFF) / 255.0,
+                                (color shr 0 and 0xFF) / 255.0)
+
                     }
                 }
+
+                if (targetCount >= 1) {
+
+                    // エフェクト
+                    playSound(world, player, 2.0.pow(pitch() / 12.0))
+                    world.playSound(null, player.posX, player.posY, player.posZ, breakSound!!, SoundCategory.PLAYERS, 1.0f, 1.0f)
+
+                    // クールタイム
+                    val ratio = targetCount / maxTargetCount().toDouble()
+                    player.cooldownTracker.setCooldown(this@ItemBellFlowerPicking, (coolTime() * ratio.pow(0.5)).toInt())
+
+                }
+                if (collected) {
+
+                    // エフェクト
+                    world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f)
+
+                }
+
+                return EnumActionResult.SUCCESS
             }
         }
     }

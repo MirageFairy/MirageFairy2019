@@ -1,13 +1,16 @@
 package miragefairy2019.mod.api.magic;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 
 public interface IMagicHandler {
 
-    public Iterable<miragefairy2019.modkt.api.magicstatus.IMagicStatus<?>> getMagicStatuses();
+    public default EnumActionResult onItemRightClick(EnumHand hand) {
+        return EnumActionResult.PASS;
+    }
 
-    public IMagicExecutor getMagicExecutor(World world, EntityPlayer player, ItemStack itemStack);
+    public default void onUpdate(int itemSlot, boolean isSelected) {
+
+    }
 
 }

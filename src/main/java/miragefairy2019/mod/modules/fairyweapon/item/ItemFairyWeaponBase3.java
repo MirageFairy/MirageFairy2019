@@ -29,7 +29,9 @@ import static net.minecraft.util.text.TextFormatting.*;
 
 public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
 
-    public abstract IMagicHandler getMagicHandler(IFairyType fairyType);
+    public abstract Iterable<IMagicStatus<?>> getMagicStatusList();
+
+    public abstract IMagicHandler getMagicHandler(World world, EntityPlayer player, ItemStack itemStack, IFairyType fairyType);
 
     //
 
@@ -65,7 +67,7 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
     @SideOnly(Side.CLIENT)
     public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag) {
         IFairyType actualFairyType = ImplMagicStatusKt.getActualFairyType(fairyType, ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler().getPlayerAura());
-        ISuppliterator.ofIterable(getMagicHandler(actualFairyType).getMagicStatuses())
+        ISuppliterator.ofIterable(getMagicStatusList())
                 .forEach(magicStatus -> tooltip.add(getStatusText(magicStatus, actualFairyType, flag.isAdvanced()).getFormattedText()));
     }
 
@@ -80,10 +82,10 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
 
         if (world.isRemote) {
             IFairyType actualFairyType = ImplMagicStatusKt.getActualFairyType(fairyType, ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler().getPlayerAura());
-            return new ActionResult<>(getMagicHandler(actualFairyType).getMagicExecutor(world, player, itemStack).onItemRightClick(hand), itemStack);
+            return new ActionResult<>(getMagicHandler(world, player, itemStack, actualFairyType).onItemRightClick(hand), itemStack);
         } else {
             IFairyType actualFairyType = ImplMagicStatusKt.getActualFairyType(fairyType, ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler((EntityPlayerMP) player).getPlayerAura());
-            return new ActionResult<>(getMagicHandler(actualFairyType).getMagicExecutor(world, player, itemStack).onItemRightClick(hand), itemStack);
+            return new ActionResult<>(getMagicHandler(world, player, itemStack, actualFairyType).onItemRightClick(hand), itemStack);
         }
     }
 
@@ -105,7 +107,7 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
 
         if (world.isRemote) {
             IFairyType actualFairyType = ImplMagicStatusKt.getActualFairyType(fairyType, ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler().getPlayerAura());
-            getMagicHandler(actualFairyType).getMagicExecutor(world, player, itemStack).onUpdate(itemSlot, isSelected);
+            getMagicHandler(world, player, itemStack, actualFairyType).onUpdate(itemSlot, isSelected);
         }
     }
 
