@@ -104,8 +104,10 @@ fun <T : Comparable<T>> IMagicStatus<T>.ranged(min: T, max: T): IMagicStatus<T> 
     override fun getFunction() = IMagicStatusFunction { parent.function.getValue(it).coerceIn(min, max) }
     override fun getFormatter() = IMagicStatusFormatter<T> { function, fairyType ->
         val value = function.getValue(fairyType)
+        val defaultValue = function.defaultValue
         val displayValue = parent.formatter.getDisplayValue(function, fairyType)
         when {
+            value == defaultValue -> displayValue
             value == min -> displayValue.bold()
             value == max -> displayValue.bold()
             else -> displayValue
