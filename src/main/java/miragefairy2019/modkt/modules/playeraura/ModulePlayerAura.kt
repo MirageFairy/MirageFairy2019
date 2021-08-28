@@ -1,8 +1,8 @@
 package miragefairy2019.modkt.modules.playeraura
 
 import io.netty.buffer.ByteBuf
+import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
-import miragefairy2019.libkt.text
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.modkt.api.mana.IManaType
@@ -76,7 +76,7 @@ object ModulePlayerAura {
                         if (auraAfter != null) {
 
                             // 飽和率ポエム
-                            event.toolTip.add(text {
+                            event.toolTip.add(buildText {
                                 translate(playerAuraHandler.getSaturationRate(itemStack).let { saturationRate ->
                                     when {
                                         saturationRate > 0.7 -> "miragefairy2019.gui.playerAura.poem.step5"
@@ -89,7 +89,7 @@ object ModulePlayerAura {
                             }.formattedText)
 
                             // 栄養素表示
-                            event.toolTip.add(text {
+                            event.toolTip.add(buildText {
                                 translate("miragefairy2019.gui.playerAura.title")
                                 text(":")
                             }.formattedText)
@@ -97,7 +97,7 @@ object ModulePlayerAura {
                                 val before = auraBefore.getMana(manaType)
                                 val after = auraAfter.getMana(manaType)
                                 val difference = after - before
-                                return text {
+                                return buildText {
                                     text("  ")
                                     text(manaType.displayName)
                                     text(": ")

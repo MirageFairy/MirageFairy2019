@@ -1,8 +1,8 @@
 package miragefairy2019.modkt.impl.fairy
 
 import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
-import miragefairy2019.libkt.text
 import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.erg.IErgEntry
 import miragefairy2019.modkt.api.erg.IErgSet
@@ -63,4 +63,4 @@ class ErgType(private val name: String, private val textColor: TextFormatting) :
 }
 
 
-val IErgType.displayName get() = text { translate("mirageFairy2019.erg.$name.name").color(textColor) }
+val IErgType.displayName get() = buildText { translate("mirageFairy2019.erg.$name.name").color(textColor) }

@@ -1,8 +1,8 @@
 package miragefairy2019.modkt.impl.magicstatus
 
 import miragefairy2019.libkt.bold
+import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
-import miragefairy2019.libkt.text
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IFairyType
 import miragefairy2019.modkt.api.erg.IErgSet
@@ -39,7 +39,7 @@ open class MagicStatusAdapter<T>(internal val parent: IMagicStatus<T>) : IMagicS
 // DSL
 
 
-val <T> IMagicStatus<T>.displayName get() = text { translate("mirageFairy2019.magic.status.$name.name") }
+val <T> IMagicStatus<T>.displayName get() = buildText { translate("mirageFairy2019.magic.status.$name.name") }
 
 val <T> IMagicStatusFunction<T>.defaultValue: T get() = getValue(ApiFairy.empty())
 
@@ -55,7 +55,7 @@ val <T> IMagicStatusFunction<T>.factors
             override fun isEmpty() = throw UnsupportedOperationException()
             override fun getName() = throw UnsupportedOperationException()
             override fun getColor() = throw UnsupportedOperationException()
-            override fun getCost() = add(text { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) })
+            override fun getCost() = add(buildText { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) })
             override fun getManas() = object : IManaSet {
                 override fun getShine() = add(ManaTypes.shine.displayName)
                 override fun getFire() = add(ManaTypes.fire.displayName)
