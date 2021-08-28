@@ -2,12 +2,12 @@ package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.api.fairy.IFairyType
-import miragefairy2019.mod.api.magic.IMagicHandler
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.erg.ErgTypes.fell
 import miragefairy2019.modkt.api.erg.ErgTypes.knowledge
 import miragefairy2019.modkt.api.erg.IErgType
+import miragefairy2019.modkt.api.magic.IMagicHandler
 import miragefairy2019.modkt.api.magicstatus.IMagicStatus
 import miragefairy2019.modkt.api.mana.IManaType
 import miragefairy2019.modkt.api.mana.ManaTypes
