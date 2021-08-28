@@ -50,7 +50,10 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
     private <T> ITextComponent getStatusText(IMagicStatus<T> magicStatus, IFairyType fairyType, boolean isAdvanced) {
         ITextComponent textComponent = ImplMagicStatusKt.getDisplayName(magicStatus);
         textComponent.appendText(": ");
-        textComponent.appendSibling(magicStatus.getFormatter().getDisplayValue(magicStatus.getFunction(), fairyType));
+        textComponent.appendSibling(
+                new TextComponentString("")
+                        .appendSibling(magicStatus.getFormatter().getDisplayValue(magicStatus.getFunction(), fairyType))
+                        .setStyle(new Style().setColor(WHITE)));
         if (isAdvanced) {
             Optional<ITextComponent> c = ISuppliterator.ofIterable(ImplMagicStatusKt.getFactors(magicStatus.getFunction())).stream()
                     .reduce((a, b) -> a.appendText(",").appendSibling(b));
