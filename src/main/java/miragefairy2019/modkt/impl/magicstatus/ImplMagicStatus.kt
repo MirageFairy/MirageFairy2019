@@ -84,8 +84,8 @@ val <T> IMagicStatusFunction<T>.factors
     }
 
 
-fun IMagicStatus<Double>.coloredBySign(colorPositive: TextFormatting, colorNegative: TextFormatting): IMagicStatus<Double> = object : MagicStatusAdapter<Double>(this) {
-    override fun getFormatter() = IMagicStatusFormatter<Double> { function, fairyType ->
+fun <T : Comparable<T>> IMagicStatus<T>.coloredBySign(colorPositive: TextFormatting, colorNegative: TextFormatting): IMagicStatus<T> = object : MagicStatusAdapter<T>(this) {
+    override fun getFormatter() = IMagicStatusFormatter<T> { function, fairyType ->
         val value = function.getValue(fairyType)
         val defaultValue = function.defaultValue
         val displayValue = parent.formatter.getDisplayValue(function, fairyType)
@@ -97,12 +97,12 @@ fun IMagicStatus<Double>.coloredBySign(colorPositive: TextFormatting, colorNegat
     }
 }
 
-fun IMagicStatus<Double>.positive() = coloredBySign(TextFormatting.GREEN, TextFormatting.RED)
-fun IMagicStatus<Double>.negative() = coloredBySign(TextFormatting.RED, TextFormatting.GREEN)
+fun <T : Comparable<T>> IMagicStatus<T>.positive() = coloredBySign(TextFormatting.GREEN, TextFormatting.RED)
+fun <T : Comparable<T>> IMagicStatus<T>.negative() = coloredBySign(TextFormatting.RED, TextFormatting.GREEN)
 
-fun IMagicStatus<Double>.ranged(min: Double, max: Double): IMagicStatus<Double> = object : MagicStatusAdapter<Double>(this) {
+fun <T : Comparable<T>> IMagicStatus<T>.ranged(min: T, max: T): IMagicStatus<T> = object : MagicStatusAdapter<T>(this) {
     override fun getFunction() = IMagicStatusFunction { parent.function.getValue(it).coerceIn(min, max) }
-    override fun getFormatter() = IMagicStatusFormatter<Double> { function, fairyType ->
+    override fun getFormatter() = IMagicStatusFormatter<T> { function, fairyType ->
         val value = function.getValue(fairyType)
         val displayValue = parent.formatter.getDisplayValue(function, fairyType)
         when {
