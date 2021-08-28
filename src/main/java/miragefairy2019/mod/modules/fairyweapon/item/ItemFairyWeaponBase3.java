@@ -52,7 +52,7 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
                     .appendSibling(magicStatus.getFormatter().getDisplayValue(magicStatus.getFunction(), fairyType))
                     .appendText(" (")
                     .appendSibling(ISuppliterator.ofIterable(ImplMagicStatusKt.getFactors(magicStatus.getFunction())).stream()
-                            .reduce(new TextComponentString(""), ITextComponent::appendSibling))
+                            .reduce(new TextComponentString(""), (a, b) -> a.appendText(",").appendSibling(b)))
                     .appendText(")")
                     .setStyle(new Style().setColor(BLUE));
         } else {
