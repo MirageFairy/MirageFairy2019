@@ -8,10 +8,12 @@ import miragefairy2019.mod.api.magic.IMagicHandler
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod.common.magic.MagicStatusHelper
 import miragefairy2019.modkt.api.erg.ErgTypes
+import miragefairy2019.modkt.api.erg.ErgTypes.fell
 import miragefairy2019.modkt.api.erg.IErgType
 import miragefairy2019.modkt.api.magicstatus.IMagicStatus
 import miragefairy2019.modkt.api.mana.IManaType
 import miragefairy2019.modkt.api.mana.ManaTypes
+import miragefairy2019.modkt.api.mana.ManaTypes.dark
 import miragefairy2019.modkt.impl.getMana
 import miragefairy2019.modkt.impl.magicstatus.invoke
 import miragefairy2019.modkt.impl.magicstatus.positive
@@ -33,27 +35,17 @@ import kotlin.math.floor
 import kotlin.math.pow
 
 class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private val fortuneFactor: Double, private val radiusFactor: Double) : ItemFairyWeaponBase3() {
+    fun IFairyType.mana(manaType: IManaType) = manas.getMana(manaType)
+    fun IFairyType.erg(ergType: IErgType) = abilities.getPower(ergType)
+
     val pitch = "pitch" { -(cost / 50.0 - 1) * 12 }.shows { formatted("%.2f") }.positive().ranged(-12.0, 12.0)
+    val maxTargetCount = "maxTargetCount" { floor(2 + mana(dark) * maxTargetCountFactor + erg(fell) * 0.1).toInt() }.shows { toString }.positive().ranged(2, 10000)
+
     override fun getMagicHandler(fairyType: IFairyType): IMagicHandler {
         operator fun <T> IMagicStatus<T>.invoke() = function.getValue(fairyType)
         fun mana(manaType: IManaType) = fairyType.manas.getMana(manaType)
         fun erg(ergType: IErgType) = fairyType.abilities.getPower(ergType)
 
-        val maxTargetCount = MagicStatusHelper.getMagicStatusMaxTargetCount(
-                { floor(2 + mana(ManaTypes.dark) * maxTargetCountFactor + erg(ErgTypes.fell) * 0.1).toInt() },
-                {
-                    text {
-                        text("2")
-                        text("+")
-                        text(it.mana(ManaTypes.dark))
-                        text("*")
-                        format("%.2f", maxTargetCountFactor)
-                        text("+")
-                        text(it.ability(ErgTypes.fell))
-                        text("*0.1")
-                    }
-                },
-                2, 10000)
         val fortune = MagicStatusHelper.getMagicStatusFortune(
                 { 3 + mana(ManaTypes.shine) * fortuneFactor + erg(ErgTypes.knowledge) * 0.1 },
                 {
@@ -124,10 +116,12 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
                 })
 
         return object : IMagicHandler {
-            override fun getMagicStatuses() = listOf(pitch)
+            override fun getMagicStatuses() = listOf(
+                    pitch,
+                    maxTargetCount)
+
             override fun getMagicStatusList(): ISuppliterator<miragefairy2019.mod.api.magic.IMagicStatus<*>> {
                 return ISuppliterator.of(
-                        maxTargetCount,
                         fortune,
                         additionalReach,
                         radius,
@@ -162,7 +156,7 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
                             if (pickable != null && pickable.isPickableAge(blockState)) Pair(it, pickable) else null
                         }
                         .sortedBy { it.first.distanceSquared }
-                        .take(maxTargetCount.get())
+                        .take(maxTargetCount())
                         .map { Pair(it.first.blockPos, it.second) }
 
                 // 資源がない場合、中止
@@ -206,7 +200,7 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
                         run targets@{
                             for (pair in listTarget) {
                                 if (itemStack.itemDamage + ceil(wear.get()).toInt() > itemStack.maxDamage) return@targets // 耐久が足りないので中止
-                                if (targetCount + 1 > maxTargetCount.get()) return@targets // パワーが足りないので中止
+                                if (targetCount + 1 > maxTargetCount()) return@targets // パワーが足りないので中止
 
                                 // 成立
 
@@ -259,7 +253,7 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
                             world.playSound(null, player.posX, player.posY, player.posZ, breakSound!!, SoundCategory.PLAYERS, 1.0f, 1.0f)
 
                             // クールタイム
-                            val ratio = targetCount / maxTargetCount.get().toDouble()
+                            val ratio = targetCount / maxTargetCount().toDouble()
                             player.cooldownTracker.setCooldown(this@ItemBellFlowerPicking, (coolTime.get() * ratio.pow(0.5)).toInt())
 
                         }
