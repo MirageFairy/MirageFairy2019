@@ -2,16 +2,11 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IFairyType;
-import miragefairy2019.mod.api.magic.IMagicFactorProvider;
 import miragefairy2019.mod.api.magic.IMagicHandler;
 import miragefairy2019.mod.api.main.ApiMain;
-import miragefairy2019.modkt.api.erg.IErgType;
 import miragefairy2019.modkt.api.magicstatus.IMagicStatus;
-import miragefairy2019.modkt.api.mana.IManaType;
 import miragefairy2019.modkt.api.playeraura.ApiPlayerAura;
-import miragefairy2019.modkt.impl.fairy.ErgKt;
 import miragefairy2019.modkt.impl.magicstatus.ImplMagicStatusKt;
-import miragefairy2019.modkt.impl.mana.ManaTypeKt;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -23,7 +18,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -71,45 +65,8 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
     @SideOnly(Side.CLIENT)
     public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag) {
         IFairyType actualFairyType = ImplMagicStatusKt.getActualFairyType(fairyType, ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler().getPlayerAura());
-        if (flag.isAdvanced()) {
-            ISuppliterator.ofIterable(getMagicHandler(actualFairyType).getMagicStatuses())
-                    .forEach(magicStatus -> tooltip.add(getStatusText(magicStatus, actualFairyType, true).getFormattedText()));
-            getMagicHandler(actualFairyType).getMagicStatusList()
-                    .forEach(magicStatus -> tooltip.add(magicStatus.getLocalizedName()
-                            .appendText(": ")
-                            .appendSibling(magicStatus.getDisplayValue())
-                            .appendText(" (")
-                            .appendSibling(magicStatus.getFormula(new IMagicFactorProvider() {
-                                @Override
-                                public ITextComponent mana(IManaType manaType) {
-                                    return ManaTypeKt.getDisplayName(manaType);
-                                }
-
-                                @Override
-                                public ITextComponent ability(IErgType abilityType) {
-                                    return ErgKt.getDisplayName(abilityType);
-                                }
-
-                                @Override
-                                public ITextComponent cost() {
-                                    return new TextComponentString("")
-                                            .appendSibling(new TextComponentTranslation("mirageFairy2019.formula.source.cost.name")
-                                                    .setStyle(new Style().setColor(DARK_PURPLE)));
-                                }
-                            }))
-                            .appendText(")")
-                            .setStyle(new Style().setColor(BLUE))
-                            .getFormattedText()));
-        } else {
-            ISuppliterator.ofIterable(getMagicHandler(actualFairyType).getMagicStatuses())
-                    .forEach(magicStatus -> tooltip.add(getStatusText(magicStatus, actualFairyType, false).getFormattedText()));
-            getMagicHandler(actualFairyType).getMagicStatusList()
-                    .forEach(magicStatus -> tooltip.add(magicStatus.getLocalizedName()
-                            .appendText(": ")
-                            .appendSibling(magicStatus.getDisplayValue())
-                            .setStyle(new Style().setColor(BLUE))
-                            .getFormattedText()));
-        }
+        ISuppliterator.ofIterable(getMagicHandler(actualFairyType).getMagicStatuses())
+                .forEach(magicStatus -> tooltip.add(getStatusText(magicStatus, actualFairyType, flag.isAdvanced()).getFormattedText()));
     }
 
     @Override

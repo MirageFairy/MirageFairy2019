@@ -1,26 +1,22 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
-import miragefairy2019.libkt.text
 import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.api.fairy.IFairyType
 import miragefairy2019.mod.api.magic.IMagicExecutor
 import miragefairy2019.mod.api.magic.IMagicHandler
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
-import miragefairy2019.mod.common.magic.MagicStatusHelper
 import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.erg.ErgTypes.fell
+import miragefairy2019.modkt.api.erg.ErgTypes.knowledge
 import miragefairy2019.modkt.api.erg.IErgType
 import miragefairy2019.modkt.api.magicstatus.IMagicStatus
 import miragefairy2019.modkt.api.mana.IManaType
 import miragefairy2019.modkt.api.mana.ManaTypes
 import miragefairy2019.modkt.api.mana.ManaTypes.dark
+import miragefairy2019.modkt.api.mana.ManaTypes.shine
 import miragefairy2019.modkt.impl.getMana
-import miragefairy2019.modkt.impl.magicstatus.invoke
-import miragefairy2019.modkt.impl.magicstatus.positive
-import miragefairy2019.modkt.impl.magicstatus.ranged
-import miragefairy2019.modkt.impl.magicstatus.shows
+import miragefairy2019.modkt.impl.magicstatus.*
 import mirrg.boron.util.UtilsMath
-import mirrg.boron.util.suppliterator.ISuppliterator
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
@@ -38,102 +34,32 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
     fun IFairyType.mana(manaType: IManaType) = manas.getMana(manaType)
     fun IFairyType.erg(ergType: IErgType) = abilities.getPower(ergType)
 
-    val pitch = "pitch" { -(cost / 50.0 - 1) * 12 }.shows { formatted("%.2f") }.positive().ranged(-12.0, 12.0)
-    val maxTargetCount = "maxTargetCount" { floor(2 + mana(dark) * maxTargetCountFactor + erg(fell) * 0.1).toInt() }.shows { toString }.positive().ranged(2, 10000)
+    val pitch = "pitch" { -(cost / 50.0 - 1) * 12 }.shows { double2 }.positive().ranged(-12.0, 12.0)
+    val maxTargetCount = "maxTargetCount" { floor(2 + mana(dark) * maxTargetCountFactor + erg(fell) * 0.1).toInt() }.shows { int }.positive().ranged(2, 10000)
+    val fortune = "fortune" { 3 + mana(shine) * fortuneFactor + erg(knowledge) * 0.1 }.shows { double2 }.positive().ranged(3.0, 10000.0)
+    val additionalReach = "additionalReach" { 0 + mana(ManaTypes.wind) * 0.1 }.shows { double2 }.positive().ranged(0.0, 10.0)
+    val radius = "radius" { 4 + mana(ManaTypes.gaia) * radiusFactor }.shows { double2 }.positive().ranged(4.0, 10.0)
+    val wear = "wear" { 0.2 / (1 + mana(ManaTypes.fire) * 0.03) }.shows { percent2 }.negative().ranged(0.0001, 0.2)
+    val coolTime = "coolTime" { cost * 0.5 / (1 + mana(ManaTypes.aqua) * 0.03) }.shows { tick }.negative().ranged(0.0001, 100.0)
+    val collection = "collection" { erg(ErgTypes.warp) >= 10 }.shows { boolean }
 
     override fun getMagicHandler(fairyType: IFairyType): IMagicHandler {
         operator fun <T> IMagicStatus<T>.invoke() = function.getValue(fairyType)
-        fun mana(manaType: IManaType) = fairyType.manas.getMana(manaType)
-        fun erg(ergType: IErgType) = fairyType.abilities.getPower(ergType)
-
-        val fortune = MagicStatusHelper.getMagicStatusFortune(
-                { 3 + mana(ManaTypes.shine) * fortuneFactor + erg(ErgTypes.knowledge) * 0.1 },
-                {
-                    text {
-                        text("3")
-                        text("+")
-                        text(it.mana(ManaTypes.shine))
-                        text("*")
-                        format("%.2f", fortuneFactor)
-                        text("+")
-                        text(it.ability(ErgTypes.knowledge))
-                        text("*0.1")
-                    }
-                },
-                3.0, 10000.0)
-        val additionalReach = MagicStatusHelper.getMagicStatusAdditionalReach(
-                { 0 + mana(ManaTypes.wind) * 0.1 },
-                {
-                    text {
-                        text(it.mana(ManaTypes.wind))
-                        text("*0.1")
-                    }
-                },
-                0.0, 10.0)
-        val radius = MagicStatusHelper.getMagicStatusRadius(
-                { 4 + mana(ManaTypes.gaia) * radiusFactor },
-                {
-                    text {
-                        text("4")
-                        text("+")
-                        text(it.mana(ManaTypes.gaia))
-                        text("*")
-                        format("%.2f", radiusFactor)
-                    }
-                },
-                4.0, 10.0)
-        val wear = MagicStatusHelper.getMagicStatusWear(
-                { 0.2 / (1 + mana(ManaTypes.fire) * 0.03) },
-                {
-                    text {
-                        text("0.2/(1+")
-                        text(it.mana(ManaTypes.fire))
-                        text("*0.03")
-                        text(")")
-                    }
-                },
-                0.0001, 0.2)
-        val coolTime = MagicStatusHelper.getMagicStatusCoolTime(
-                { fairyType.cost * 0.5 / (1 + mana(ManaTypes.aqua) * 0.03) },
-                {
-                    text {
-                        text(it.cost())
-                        text("*0.5")
-                        text("/(1+")
-                        text(it.mana(ManaTypes.aqua))
-                        text("*0.03")
-                        text(")")
-                    }
-                },
-                0.0001, 100.0)
-        val collection = MagicStatusHelper.getMagicStatusCollection(
-                { erg(ErgTypes.warp) >= 10 },
-                {
-                    text {
-                        text(it.ability(ErgTypes.warp))
-                        text(">=10")
-                    }
-                })
-
         return object : IMagicHandler {
             override fun getMagicStatuses() = listOf(
                     pitch,
-                    maxTargetCount)
-
-            override fun getMagicStatusList(): ISuppliterator<miragefairy2019.mod.api.magic.IMagicStatus<*>> {
-                return ISuppliterator.of(
-                        fortune,
-                        additionalReach,
-                        radius,
-                        wear,
-                        coolTime,
-                        collection)
-            }
+                    maxTargetCount,
+                    fortune,
+                    additionalReach,
+                    radius,
+                    wear,
+                    coolTime,
+                    collection)
 
             override fun getMagicExecutor(world: World, player: EntityPlayer, itemStack: ItemStack): IMagicExecutor {
 
                 // 視線判定
-                val magicSelectorRayTrace = MagicSelectorRayTrace(world, player, additionalReach.get())
+                val magicSelectorRayTrace = MagicSelectorRayTrace(world, player, additionalReach())
 
                 // 視点判定
                 val magicSelectorPosition = magicSelectorRayTrace.magicSelectorPosition
@@ -146,7 +72,7 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
                 }
 
                 // 範囲判定
-                val magicSelectorCircle = magicSelectorPosition.getMagicSelectorCircle(radius.get())
+                val magicSelectorCircle = magicSelectorPosition.getMagicSelectorCircle(radius())
 
                 // 対象計算
                 val listTarget = magicSelectorCircle.blockPosList
@@ -160,7 +86,7 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
                         .map { Pair(it.first.blockPos, it.second) }
 
                 // 資源がない場合、中止
-                if (itemStack.itemDamage + ceil(wear.get()).toInt() > itemStack.maxDamage) return object : IMagicExecutor {
+                if (itemStack.itemDamage + ceil(wear()).toInt() > itemStack.maxDamage) return object : IMagicExecutor {
                     override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                         magicSelectorPosition.doEffect(0xFF0000) // 視点
                         magicSelectorCircle.doEffect() // 範囲
@@ -199,13 +125,13 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
 
                         run targets@{
                             for (pair in listTarget) {
-                                if (itemStack.itemDamage + ceil(wear.get()).toInt() > itemStack.maxDamage) return@targets // 耐久が足りないので中止
+                                if (itemStack.itemDamage + ceil(wear()).toInt() > itemStack.maxDamage) return@targets // 耐久が足りないので中止
                                 if (targetCount + 1 > maxTargetCount()) return@targets // パワーが足りないので中止
 
                                 // 成立
 
                                 // 資源消費
-                                itemStack.damageItem(UtilsMath.randomInt(world.rand, wear.get()), player)
+                                itemStack.damageItem(UtilsMath.randomInt(world.rand, wear()), player)
                                 targetCount++
 
                                 // 音取得
@@ -218,11 +144,11 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
                                 run {
 
                                     // 収穫試行
-                                    val result = pair.second.tryPick(world, pair.first, Optional.of(player), UtilsMath.randomInt(world.rand, fortune.get()))
+                                    val result = pair.second.tryPick(world, pair.first, Optional.of(player), UtilsMath.randomInt(world.rand, fortune()))
                                     if (!result) return@targets
 
                                     // 破壊したばかりのブロックの周辺のアイテムを集める
-                                    if (collection.get()) {
+                                    if (collection()) {
                                         world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(pair.first)).forEach {
                                             collected = true
                                             it.setPosition(player.posX, player.posY, player.posZ)
@@ -254,7 +180,7 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
 
                             // クールタイム
                             val ratio = targetCount / maxTargetCount().toDouble()
-                            player.cooldownTracker.setCooldown(this@ItemBellFlowerPicking, (coolTime.get() * ratio.pow(0.5)).toInt())
+                            player.cooldownTracker.setCooldown(this@ItemBellFlowerPicking, (coolTime() * ratio.pow(0.5)).toInt())
 
                         }
                         if (collected) {

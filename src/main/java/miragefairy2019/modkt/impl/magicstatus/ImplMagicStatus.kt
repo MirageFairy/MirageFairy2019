@@ -36,15 +36,6 @@ open class MagicStatusAdapter<T>(internal val parent: IMagicStatus<T>) : IMagicS
 }
 
 
-class MagicStatusFormatterToString<T> : IMagicStatusFormatter<T> {
-    override fun getDisplayValue(function: IMagicStatusFunction<T>, fairyType: IFairyType) = text { text(function.getValue(fairyType).toString()) }
-}
-
-class MagicStatusFormatterFormatted<T>(private val format: String) : IMagicStatusFormatter<T> {
-    override fun getDisplayValue(function: IMagicStatusFunction<T>, fairyType: IFairyType) = text { format(format, function.getValue(fairyType)) }
-}
-
-
 // DSL
 
 
@@ -135,8 +126,19 @@ infix fun <T> Pair<String, IFairyType.() -> T>.shows(block: MagicStatusFormatter
 }
 
 class MagicStatusFormatterScope<T> {
-    val toString get() = MagicStatusFormatterToString<T>()
-    fun formatted(format: String) = MagicStatusFormatterFormatted<T>(format)
+    private fun <T> f(block: (T) -> ITextComponent) = IMagicStatusFormatter<T> { function, fairyType -> block(function.getValue(fairyType)) }
+    val string get() = f<T> { text { format("%s", it) } }
+    val int get() = f<Int> { text { format("%d", it) } }
+    val double0 get() = f<Double> { text { format("%.0f", it) } }
+    val double1 get() = f<Double> { text { format("%.1f", it) } }
+    val double2 get() = f<Double> { text { format("%.2f", it) } }
+    val double3 get() = f<Double> { text { format("%.3f", it) } }
+    val percent0 get() = f<Double> { text { format("%.0f%%", it * 100) } }
+    val percent1 get() = f<Double> { text { format("%.1f%%", it * 100) } }
+    val percent2 get() = f<Double> { text { format("%.2f%%", it * 100) } }
+    val percent3 get() = f<Double> { text { format("%.3f%%", it * 100) } }
+    val boolean get() = f<Boolean> { text { text(if (it) "Yes" else "No") } }
+    val tick get() = f<Double> { text { format("%.2f sec", it / 20.0) } }
 }
 
 
