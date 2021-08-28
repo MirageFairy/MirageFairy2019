@@ -6,15 +6,15 @@ import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.erg.ErgTypes.fell
 import miragefairy2019.modkt.api.erg.ErgTypes.knowledge
-import miragefairy2019.modkt.api.erg.IErgType
 import miragefairy2019.modkt.api.magic.IMagicHandler
 import miragefairy2019.modkt.api.magicstatus.IMagicStatus
-import miragefairy2019.modkt.api.mana.IManaType
 import miragefairy2019.modkt.api.mana.ManaTypes
 import miragefairy2019.modkt.api.mana.ManaTypes.dark
 import miragefairy2019.modkt.api.mana.ManaTypes.shine
-import miragefairy2019.modkt.impl.getMana
-import miragefairy2019.modkt.impl.magicstatus.*
+import miragefairy2019.modkt.impl.magicstatus.negative
+import miragefairy2019.modkt.impl.magicstatus.positive
+import miragefairy2019.modkt.impl.magicstatus.positiveBoolean
+import miragefairy2019.modkt.impl.magicstatus.ranged
 import mirrg.boron.util.UtilsMath
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
@@ -30,28 +30,14 @@ import kotlin.math.floor
 import kotlin.math.pow
 
 class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private val fortuneFactor: Double, private val radiusFactor: Double) : ItemFairyWeaponBase3() {
-    fun IFairyType.mana(manaType: IManaType) = manas.getMana(manaType)
-    fun IFairyType.erg(ergType: IErgType) = abilities.getPower(ergType)
-
-    val pitch = "pitch" { -(cost / 50.0 - 1) * 12 }.shows { double2 }.positive().ranged(-12.0, 12.0)
-    val maxTargetCount = "maxTargetCount" { floor(2 + mana(dark) * maxTargetCountFactor + erg(fell) * 0.1).toInt() }.shows { int }.positive().ranged(2, 10000)
-    val fortune = "fortune" { 3 + mana(shine) * fortuneFactor + erg(knowledge) * 0.1 }.shows { double2 }.positive().ranged(3.0, 10000.0)
-    val additionalReach = "additionalReach" { 0 + mana(ManaTypes.wind) * 0.1 }.shows { double2 }.positive().ranged(0.0, 10.0)
-    val radius = "radius" { 4 + mana(ManaTypes.gaia) * radiusFactor }.shows { double2 }.positive().ranged(4.0, 10.0)
-    val wear = "wear" { 0.2 / (1 + mana(ManaTypes.fire) * 0.03) }.shows { percent2 }.negative().ranged(0.0001, 0.2)
-    val coolTime = "coolTime" { cost * 0.5 / (1 + mana(ManaTypes.aqua) * 0.03) }.shows { tick }.negative().ranged(0.0001, 100.0)
-    val collection = "collection" { erg(ErgTypes.warp) >= 10 }.shows { boolean }
-
-    override fun getMagicStatusList() = listOf(
-            pitch,
-            maxTargetCount,
-            fortune,
-            additionalReach,
-            radius,
-            wear,
-            coolTime,
-            collection)
-
+    val pitch = register("pitch"({ -(cost / 50.0 - 1) * 12 }, { double2 }).positive().ranged(-12.0, 12.0))
+    val maxTargetCount = register("maxTargetCount"({ floor(2 + mana(dark) * maxTargetCountFactor + erg(fell) * 0.1).toInt() }, { int }).positive().ranged(2, 10000))
+    val fortune = register("fortune"({ 3 + mana(shine) * fortuneFactor + erg(knowledge) * 0.1 }, { double2 }).positive().ranged(3.0, 10000.0))
+    val additionalReach = register("additionalReach"({ 0 + mana(ManaTypes.wind) * 0.1 }, { double2 }).positive().ranged(0.0, 10.0))
+    val radius = register("radius"({ 4 + mana(ManaTypes.gaia) * radiusFactor }, { double2 }).positive().ranged(4.0, 10.0))
+    val wear = register("wear"({ 0.2 / (1 + mana(ManaTypes.fire) * 0.03) }, { percent2 }).negative().ranged(0.0001, 0.2))
+    val coolTime = register("coolTime"({ cost * 0.5 / (1 + mana(ManaTypes.aqua) * 0.03) }, { tick }).negative().ranged(0.0001, 100.0))
+    val collection = register("collection"({ erg(ErgTypes.warp) >= 10 }, { boolean }).positiveBoolean())
     override fun getMagicHandler(world: World, player: EntityPlayer, itemStack: ItemStack, fairyType: IFairyType): IMagicHandler {
         operator fun <T> IMagicStatus<T>.invoke() = function.getValue(fairyType)
 
