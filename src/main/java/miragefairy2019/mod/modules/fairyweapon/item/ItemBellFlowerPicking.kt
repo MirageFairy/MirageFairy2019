@@ -5,15 +5,18 @@ import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.api.fairy.IFairyType
 import miragefairy2019.mod.api.magic.IMagicExecutor
 import miragefairy2019.mod.api.magic.IMagicHandler
-import miragefairy2019.mod.api.magic.IMagicStatus
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod.common.magic.MagicStatusHelper
 import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.erg.IErgType
+import miragefairy2019.modkt.api.magicstatus.IMagicStatus
 import miragefairy2019.modkt.api.mana.IManaType
 import miragefairy2019.modkt.api.mana.ManaTypes
-import miragefairy2019.modkt.api.playeraura.IPlayerAuraHandler
 import miragefairy2019.modkt.impl.getMana
+import miragefairy2019.modkt.impl.magicstatus.invoke
+import miragefairy2019.modkt.impl.magicstatus.positive
+import miragefairy2019.modkt.impl.magicstatus.ranged
+import miragefairy2019.modkt.impl.magicstatus.shows
 import mirrg.boron.util.UtilsMath
 import mirrg.boron.util.suppliterator.ISuppliterator
 import net.minecraft.entity.item.EntityItem
@@ -30,14 +33,12 @@ import kotlin.math.floor
 import kotlin.math.pow
 
 class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private val fortuneFactor: Double, private val radiusFactor: Double) : ItemFairyWeaponBase3() {
-    override fun getMagicHandler(playerAura: IPlayerAuraHandler, fairyType: IFairyType): IMagicHandler {
-        fun mana(manaType: IManaType) = fairyType.manas.getMana(manaType) + playerAura.playerAura.getMana(manaType)
+    val pitch = "pitch" { -(cost / 50.0 - 1) * 12 }.shows { formatted("%.2f") }.positive().ranged(-12.0, 12.0)
+    override fun getMagicHandler(fairyType: IFairyType): IMagicHandler {
+        operator fun <T> IMagicStatus<T>.invoke() = function.getValue(fairyType)
+        fun mana(manaType: IManaType) = fairyType.manas.getMana(manaType)
         fun erg(ergType: IErgType) = fairyType.abilities.getPower(ergType)
 
-        val pitch = MagicStatusHelper.getMagicStatusPitch(
-                { -(fairyType.cost / 50.0 - 1) * 12 },
-                { text { text(it.cost()) } },
-                -12.0, 0.0, 12.0)
         val maxTargetCount = MagicStatusHelper.getMagicStatusMaxTargetCount(
                 { floor(2 + mana(ManaTypes.dark) * maxTargetCountFactor + erg(ErgTypes.fell) * 0.1).toInt() },
                 {
@@ -123,9 +124,9 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
                 })
 
         return object : IMagicHandler {
-            override fun getMagicStatusList(): ISuppliterator<IMagicStatus<*>> {
+            override fun getMagicStatuses() = listOf(pitch)
+            override fun getMagicStatusList(): ISuppliterator<miragefairy2019.mod.api.magic.IMagicStatus<*>> {
                 return ISuppliterator.of(
-                        pitch,
                         maxTargetCount,
                         fortune,
                         additionalReach,
@@ -254,7 +255,7 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
                         if (targetCount >= 1) {
 
                             // エフェクト
-                            playSound(world, player, 2.0.pow(pitch.get() / 12.0))
+                            playSound(world, player, 2.0.pow(pitch() / 12.0))
                             world.playSound(null, player.posX, player.posY, player.posZ, breakSound!!, SoundCategory.PLAYERS, 1.0f, 1.0f)
 
                             // クールタイム

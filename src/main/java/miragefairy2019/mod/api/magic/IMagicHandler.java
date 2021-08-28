@@ -7,6 +7,8 @@ import net.minecraft.world.World;
 
 public interface IMagicHandler {
 
+    public Iterable<miragefairy2019.modkt.api.magicstatus.IMagicStatus<?>> getMagicStatuses();
+
     public ISuppliterator<IMagicStatus<?>> getMagicStatusList();
 
     public IMagicExecutor getMagicExecutor(World world, EntityPlayer player, ItemStack itemStack);
