@@ -29,6 +29,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
+import java.util.Optional;
 
 import static net.minecraft.util.text.TextFormatting.*;
 
@@ -46,21 +47,20 @@ public abstract class ItemFairyWeaponBase3 extends ItemFairyWeaponBase {
     }
 
     private <T> ITextComponent getStatusText(IMagicStatus<T> magicStatus, IFairyType fairyType, boolean isAdvanced) {
+        ITextComponent textComponent = ImplMagicStatusKt.getDisplayName(magicStatus);
+        textComponent.appendText(": ");
+        textComponent.appendSibling(magicStatus.getFormatter().getDisplayValue(magicStatus.getFunction(), fairyType));
         if (isAdvanced) {
-            return ImplMagicStatusKt.getDisplayName(magicStatus)
-                    .appendText(": ")
-                    .appendSibling(magicStatus.getFormatter().getDisplayValue(magicStatus.getFunction(), fairyType))
-                    .appendText(" (")
-                    .appendSibling(ISuppliterator.ofIterable(ImplMagicStatusKt.getFactors(magicStatus.getFunction())).stream()
-                            .reduce(new TextComponentString(""), (a, b) -> a.appendText(",").appendSibling(b)))
-                    .appendText(")")
-                    .setStyle(new Style().setColor(BLUE));
-        } else {
-            return ImplMagicStatusKt.getDisplayName(magicStatus)
-                    .appendText(": ")
-                    .appendSibling(magicStatus.getFormatter().getDisplayValue(magicStatus.getFunction(), fairyType))
-                    .setStyle(new Style().setColor(BLUE));
+            Optional<ITextComponent> c = ISuppliterator.ofIterable(ImplMagicStatusKt.getFactors(magicStatus.getFunction())).stream()
+                    .reduce((a, b) -> a.appendText(",").appendSibling(b));
+            if (c.isPresent()) {
+                textComponent.appendText(" (");
+                textComponent.appendSibling(c.get());
+                textComponent.appendText(")");
+            }
         }
+        textComponent.setStyle(new Style().setColor(BLUE));
+        return textComponent;
     }
 
     @Override
