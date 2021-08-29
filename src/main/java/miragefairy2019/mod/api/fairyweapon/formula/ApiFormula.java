@@ -2,9 +2,9 @@ package miragefairy2019.mod.api.fairyweapon.formula;
 
 import miragefairy2019.mod.modules.fairyweapon.critical.CriticalRate;
 import miragefairy2019.mod.modules.fairyweapon.formula.*;
+import miragefairy2019.modkt.api.erg.IErgType;
 import miragefairy2019.modkt.api.mana.IManaType;
 import miragefairy2019.modkt.api.mana.ManaTypes;
-import miragefairy2019.modkt.api.erg.IErgType;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Struct1;
 import net.minecraft.util.text.ITextComponent;

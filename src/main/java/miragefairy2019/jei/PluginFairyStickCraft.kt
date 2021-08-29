@@ -10,11 +10,11 @@ import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
+import miragefairy2019.jei.JeiUtilities.Companion.drawStringCentered
 import miragefairy2019.mod.modules.fairystick.ModuleFairyStick
 import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.modkt.api.fairystickcraft.IFairyStickCraftRecipe
 import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.jei.JeiUtilities.Companion.drawStringCentered
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 

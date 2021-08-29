@@ -3,8 +3,8 @@ package miragefairy2019.mod.modules.fairy
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
 import miragefairy2019.modkt.api.erg.ErgTypes
-import miragefairy2019.modkt.api.mana.IManaSet
 import miragefairy2019.modkt.api.erg.IErgSet
+import miragefairy2019.modkt.api.mana.IManaSet
 import miragefairy2019.modkt.impl.*
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.ErgEntry

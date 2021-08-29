@@ -10,10 +10,10 @@ import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
+import miragefairy2019.jei.JeiUtilities.Companion.drawStringCentered
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1
 import miragefairy2019.modkt.api.oreseeddrop.ApiOreSeedDrop
-import miragefairy2019.jei.JeiUtilities.Companion.drawStringCentered
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 
