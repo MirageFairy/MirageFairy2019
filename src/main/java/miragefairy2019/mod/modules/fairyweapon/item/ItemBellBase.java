@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;

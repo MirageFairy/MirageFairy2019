@@ -1,7 +1,6 @@
 package miragefairy2019.modkt.api.fairy
 
 import miragefairy2019.libkt.buildText
-import miragefairy2019.mod.api.fairy.IFairyType
 import miragefairy2019.modkt.api.erg.IErgSet
 import miragefairy2019.modkt.api.erg.IErgType
 import miragefairy2019.modkt.api.mana.IManaSet
@@ -25,8 +24,8 @@ class FairyType(
     override fun getDisplayName() = displayName
     override fun getColor() = color
     override fun getCost() = cost
-    override fun getManas() = manaSet
-    override fun getAbilities() = ergSet
+    override fun getManaSet() = manaSet
+    override fun getErgSet() = ergSet
 }
 
 class FairyTypeEmpty : IFairyType {
@@ -35,8 +34,8 @@ class FairyTypeEmpty : IFairyType {
     override fun getDisplayName() = buildText { text("Empty") }
     override fun getColor() = 0xFFFFFF
     override fun getCost() = 50.0
-    override fun getManas() = ManaSet.ZERO
-    override fun getAbilities() = ErgSet(emptyList())
+    override fun getManaSet() = ManaSet.ZERO
+    override fun getErgSet() = ErgSet(emptyList())
 }
 
 open class FairyTypeAdapter(internal val parent: IFairyType) : IFairyType {
@@ -45,10 +44,10 @@ open class FairyTypeAdapter(internal val parent: IFairyType) : IFairyType {
     override fun getDisplayName(): ITextComponent = parent.displayName
     override fun getColor() = parent.color
     override fun getCost() = parent.cost
-    override fun getManas(): IManaSet = parent.manas
-    override fun getAbilities(): IErgSet = parent.abilities
+    override fun getManaSet(): IManaSet = parent.manaSet
+    override fun getErgSet(): IErgSet = parent.ergSet
 }
 
 
-fun IFairyType.mana(manaType: IManaType) = manas.getMana(manaType)
-fun IFairyType.erg(ergType: IErgType) = abilities.getPower(ergType)
+fun IFairyType.mana(manaType: IManaType) = manaSet.getMana(manaType)
+fun IFairyType.erg(ergType: IErgType) = ergSet.getPower(ergType)

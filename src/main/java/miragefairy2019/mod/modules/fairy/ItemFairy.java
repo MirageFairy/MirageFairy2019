@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.fairy;
 
-import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon;
 import miragefairy2019.mod.lib.UtilsMinecraft;
@@ -87,7 +87,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
             tooltip.add(new TextComponentString("")
                     .setStyle(new Style().setColor(GREEN))
                     .appendText("Abilities: ")
-                    .appendSibling(ISuppliterator.ofIterable(variant.getType().getAbilities().getEntries())
+                    .appendSibling(ISuppliterator.ofIterable(variant.getType().getErgSet().getEntries())
                             .filter(tuple -> format(tuple.getPower()) >= 10)
                             .sorted((a, b) -> -Double.compare(a.getPower(), b.getPower()))
                             .map(t -> {
@@ -106,7 +106,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
             tooltip.add(new TextComponentString("")
                     .setStyle(new Style().setColor(GREEN))
                     .appendText("Abilities: ")
-                    .appendSibling(ISuppliterator.ofIterable(variant.getType().getAbilities().getEntries())
+                    .appendSibling(ISuppliterator.ofIterable(variant.getType().getErgSet().getEntries())
                             .filter(tuple -> format(tuple.getPower()) >= 10)
                             .sorted((a, b) -> -Double.compare(a.getPower(), b.getPower()))
                             .map(t -> {
@@ -183,11 +183,11 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
     }
 
     private String f1(IManaType manaType, VariantFairy variant) {
-        return "" + manaType.getTextColor() + String.format("%4d", format(ManaSetKt.getMana(variant.getType().getManas(), manaType)));
+        return "" + manaType.getTextColor() + String.format("%4d", format(ManaSetKt.getMana(variant.getType().getManaSet(), manaType)));
     }
 
     private String f2(IManaType manaType, VariantFairy variant) {
-        return "" + manaType.getTextColor() + ManaTypeKt.getDisplayName(manaType).getUnformattedText() + ":" + String.format("%.3f", ManaSetKt.getMana(variant.getType().getManas(), manaType));
+        return "" + manaType.getTextColor() + ManaTypeKt.getDisplayName(manaType).getUnformattedText() + ":" + String.format("%.3f", ManaSetKt.getMana(variant.getType().getManaSet(), manaType));
     }
 
 }

@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.api.fairy.ApiFairy;
-import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.modules.fairyweapon.magic.EnumTargetExecutability;
 import miragefairy2019.mod.modules.fairyweapon.magic.MagicExecutor;

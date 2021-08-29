@@ -1,4 +1,4 @@
-package miragefairy2019.mod.api.fairy;
+package miragefairy2019.modkt.api.fairy;
 
 import miragefairy2019.modkt.api.erg.IErgSet;
 import miragefairy2019.modkt.api.mana.IManaSet;
@@ -30,8 +30,8 @@ public interface IFairyType {
 
     public double getCost();
 
-    public IManaSet getManas();
+    public IManaSet getManaSet();
 
-    public IErgSet getAbilities();
+    public IErgSet getErgSet();
 
 }

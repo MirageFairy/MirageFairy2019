@@ -7,7 +7,7 @@ import miragefairy2019.mod.api.composite.IComposite;
 import miragefairy2019.mod.api.composite.IItemComposite;
 import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IComponentAbilityType;
-import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.api.fairyweapon.formula.ApiFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormula;

@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.item
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
 import miragefairy2019.mod.api.fairy.ApiFairy
-import miragefairy2019.mod.api.fairy.IFairyType
+import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.modkt.api.magic.IMagicHandler
 import miragefairy2019.modkt.api.magicstatus.IMagicStatus

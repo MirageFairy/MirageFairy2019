@@ -4,7 +4,7 @@ import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
 import miragefairy2019.mod.api.fairy.ApiFairy
-import miragefairy2019.mod.api.fairy.IFairyType
+import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.api.erg.IErgSet
 import miragefairy2019.modkt.api.erg.IErgType
 import miragefairy2019.modkt.api.fairy.FairyTypeAdapter
@@ -55,7 +55,7 @@ val <T> IMagicStatusFunction<T>.factors
             override fun getDisplayName() = throw UnsupportedOperationException()
             override fun getColor() = throw UnsupportedOperationException()
             override fun getCost() = add(buildText { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) })
-            override fun getManas() = object : IManaSet {
+            override fun getManaSet() = object : IManaSet {
                 override fun getShine() = add(ManaTypes.shine.displayName)
                 override fun getFire() = add(ManaTypes.fire.displayName)
                 override fun getWind() = add(ManaTypes.wind.displayName)
@@ -64,7 +64,7 @@ val <T> IMagicStatusFunction<T>.factors
                 override fun getDark() = add(ManaTypes.dark.displayName)
             }
 
-            override fun getAbilities() = object : IErgSet {
+            override fun getErgSet() = object : IErgSet {
                 override fun getEntries() = throw UnsupportedOperationException()
                 override fun getPower(type: IErgType) = add(type.displayName)
             }
@@ -117,5 +117,5 @@ fun <T : Comparable<T>> IMagicStatus<T>.ranged(min: T, max: T): IMagicStatus<T> 
 
 
 fun getActualFairyType(fairyType: IFairyType, playerAura: IManaSet): IFairyType = object : FairyTypeAdapter(fairyType) {
-    override fun getManas() = parent.manas + playerAura
+    override fun getManaSet() = parent.manaSet + playerAura
 }

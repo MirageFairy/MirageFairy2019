@@ -4,7 +4,7 @@ import appeng.api.config.Actionable;
 import appeng.api.networking.energy.IAEPowerStorage;
 import appeng.api.networking.security.IActionHost;
 import miragefairy2019.mod.api.fairy.ApiFairy;
-import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.main.ApiMain;

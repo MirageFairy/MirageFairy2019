@@ -1,6 +1,6 @@
 package miragefairy2019.mod.api.fairy.registry;
 
-import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

@@ -1,5 +1,6 @@
 package miragefairy2019.mod.api.fairy;
 
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import net.minecraft.item.ItemStack;
 
 import java.util.Optional;

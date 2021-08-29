@@ -6,6 +6,7 @@ import miragefairy2019.mod.modules.fairy.ComponentsAbilityType;
 import miragefairy2019.mod.modules.fairy.ModuleFairy;
 import miragefairy2019.modkt.api.erg.IErgType;
 import miragefairy2019.modkt.api.fairy.FairyTypeEmpty;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 
 public class ApiFairy {
 

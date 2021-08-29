@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.modkt.api.erg.ErgTypes;
 import miragefairy2019.modkt.impl.fairy.ErgKt;
@@ -36,11 +36,11 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
         public final double coolTime;
 
         public Status(IFairyType fairyType) {
-            radius = UtilsMath.trim(5 + fairyType.getManas().getWind() / 5.0, 5, 10);
-            maxTargetCount = UtilsMath.trim(1 + (int) (fairyType.getManas().getAqua() / 7.0), 1, 8);
-            wear = UtilsMath.trim(4 * Math.pow(0.5, fairyType.getManas().getFire() / 50.0), 0.4, 4);
-            experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManas().getGaia() / 50.0 + fairyType.getAbilities().getPower(ErgTypes.food) / 10.0), 0.1, 1);
-            coolTime = fairyType.getCost() * UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManas().getDark() / 50.0), 0.1, 1);
+            radius = UtilsMath.trim(5 + fairyType.getManaSet().getWind() / 5.0, 5, 10);
+            maxTargetCount = UtilsMath.trim(1 + (int) (fairyType.getManaSet().getAqua() / 7.0), 1, 8);
+            wear = UtilsMath.trim(4 * Math.pow(0.5, fairyType.getManaSet().getFire() / 50.0), 0.4, 4);
+            experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManaSet().getGaia() / 50.0 + fairyType.getErgSet().getPower(ErgTypes.food) / 10.0), 0.1, 1);
+            coolTime = fairyType.getCost() * UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManaSet().getDark() / 50.0), 0.1, 1);
         }
 
     }

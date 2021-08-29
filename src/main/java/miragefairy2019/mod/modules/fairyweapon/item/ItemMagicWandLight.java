@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.Block;
@@ -34,8 +34,8 @@ public class ItemMagicWandLight extends ItemFairyWeaponBase {
         public final double coolTime;
 
         public Status(IFairyType fairyType) {
-            additionalReach = Math.min(fairyType.getManas().getAqua() / 50.0 * 20, 40);
-            coolTime = fairyType.getCost() * 2 * Math.pow(0.5, fairyType.getManas().getGaia() / 30);
+            additionalReach = Math.min(fairyType.getManaSet().getAqua() / 50.0 * 20, 40);
+            coolTime = fairyType.getCost() * 2 * Math.pow(0.5, fairyType.getManaSet().getGaia() / 30);
         }
 
     }

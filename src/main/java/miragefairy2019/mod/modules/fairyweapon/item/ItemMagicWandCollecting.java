@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.modkt.api.erg.ErgTypes;
 import miragefairy2019.modkt.impl.fairy.ErgKt;
@@ -37,11 +37,11 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
         public final double coolTime;
 
         public Status(IFairyType fairyType) {
-            additionalReach = Math.min(fairyType.getManas().getWind() / 5.0, 8);
-            radius = Math.min(2 + fairyType.getManas().getFire() / 10.0 + fairyType.getAbilities().getPower(ErgTypes.warp) / 10.0, 7);
-            maxTargets = (int) (Math.min(1 + fairyType.getManas().getGaia() / 2.0 + fairyType.getAbilities().getPower(ErgTypes.store) / 2.0, 20));
-            wear = 0.25 * Math.pow(0.5, fairyType.getManas().getAqua() / 30);
-            coolTime = fairyType.getCost() * 3 * Math.pow(0.5, fairyType.getManas().getDark() / 40);
+            additionalReach = Math.min(fairyType.getManaSet().getWind() / 5.0, 8);
+            radius = Math.min(2 + fairyType.getManaSet().getFire() / 10.0 + fairyType.getErgSet().getPower(ErgTypes.warp) / 10.0, 7);
+            maxTargets = (int) (Math.min(1 + fairyType.getManaSet().getGaia() / 2.0 + fairyType.getErgSet().getPower(ErgTypes.store) / 2.0, 20));
+            wear = 0.25 * Math.pow(0.5, fairyType.getManaSet().getAqua() / 30);
+            coolTime = fairyType.getCost() * 3 * Math.pow(0.5, fairyType.getManaSet().getDark() / 40);
         }
 
     }

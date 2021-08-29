@@ -152,7 +152,7 @@ public class ModuleFairy {
                     OreDictionary.registerOre(
                             "mirageFairy2019Fairy" + UtilsString.toUpperCaseHead(variant.y.get(i).getType().getBreed().getResourcePath()) + "Rank" + (i + 1),
                             variant.y.get(i).createItemStack());
-                    for (IErgEntry tuple : variant.y.get(i).getType().getAbilities().getEntries()) {
+                    for (IErgEntry tuple : variant.y.get(i).getType().getErgSet().getEntries()) {
                         if (tuple.getPower() >= 10) {
                             OreDictionary.registerOre(
                                     "mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(tuple.getType().getName()),

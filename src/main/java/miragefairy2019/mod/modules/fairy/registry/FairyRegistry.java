@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.fairy.registry;
 
-import miragefairy2019.mod.api.fairy.IFairyType;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.registry.IFairyRecord;
 import miragefairy2019.mod.api.fairy.registry.IFairyRegistry;
 import mirrg.boron.util.suppliterator.ISuppliterator;

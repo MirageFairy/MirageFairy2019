@@ -55,7 +55,7 @@ class PlayerAuraManager : IPlayerAuraManager {
         val relevanceMax = listFairyRelation.map { it.relevance }.max()!!
         val listFairyRelationMax = listFairyRelation.filter { it.relevance == relevanceMax }.mapNotNull { getFairyType(it.itemStackFairy) }
 
-        fun f(typeChooser: (IManaSet) -> Double) = listFairyRelationMax.map { typeChooser(it.manas) / it.cost * 50 * 0.5 }.average()
+        fun f(typeChooser: (IManaSet) -> Double) = listFairyRelationMax.map { typeChooser(it.manaSet) / it.cost * 50 * 0.5 }.average()
         return ManaSet(f { it.shine }, f { it.fire }, f { it.wind }, f { it.gaia }, f { it.aqua }, f { it.dark })
     }
 
