@@ -1,15 +1,18 @@
 package miragefairy2019.mod.modules.fairy
 
+import miragefairy2019.libkt.buildText
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
 import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.erg.IErgSet
+import miragefairy2019.modkt.api.fairy.FairyType
 import miragefairy2019.modkt.api.mana.IManaSet
 import miragefairy2019.modkt.impl.*
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.ErgEntry
 import miragefairy2019.modkt.impl.fairy.ErgSet
 import mirrg.boron.util.struct.Tuple
+import net.minecraft.util.ResourceLocation
 import kotlin.math.pow
 
 class RankedFairyTypeBundle(val variants: List<VariantFairy>) {
@@ -43,16 +46,16 @@ class FairyTypes(private val count: Int) {
             val rateVariance = 0.5.pow(((manaSet / manaSet.max).sum - 1) / 5.0)
             val manaSetReal = manaSet / manaSet.sum * (cost * rateRare * rateVariance * rateSpecial)
             val ergSetReal = ErgSet(ergSet.entries.map { ErgEntry(it.type, it.power * rateRare) })
-            return FairyType(ModMirageFairy2019.MODID, id, name, rare, rank, cost.toDouble(), manaSetReal, ergSetReal, colorSet)
+            return FairyType(ResourceLocation(ModMirageFairy2019.MODID, name), buildText { translate("mirageFairy2019.fairy.$name.name") }, colorSet.hair, cost.toDouble(), manaSetReal, ergSetReal)
         }
 
         // Create Variants
-        val variants = (1..count).map { VariantFairy(getType(it)) }
+        val variants = (1..count).map { VariantFairy(id, colorSet, getType(it), rare, it) }
         val bundle = RankedFairyTypeBundle(variants)
 
         // Register
         variantsImpl += Tuple.of(id, bundle)
-        ApiFairyRegistry.getFairyRegistry().registerFairy(bundle.main.type.registryName, bundle.main.type, bundle.main.createItemStack())
+        ApiFairyRegistry.getFairyRegistry().registerFairy(bundle.main.type.breed, bundle.main.type, bundle.main.createItemStack())
 
         return bundle
     }

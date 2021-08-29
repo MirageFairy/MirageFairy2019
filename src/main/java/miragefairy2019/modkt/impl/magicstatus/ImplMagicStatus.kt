@@ -7,6 +7,7 @@ import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IFairyType
 import miragefairy2019.modkt.api.erg.IErgSet
 import miragefairy2019.modkt.api.erg.IErgType
+import miragefairy2019.modkt.api.fairy.FairyTypeAdapter
 import miragefairy2019.modkt.api.magicstatus.IMagicStatus
 import miragefairy2019.modkt.api.magicstatus.IMagicStatusFormatter
 import miragefairy2019.modkt.api.magicstatus.IMagicStatusFunction
@@ -14,7 +15,7 @@ import miragefairy2019.modkt.api.mana.IManaSet
 import miragefairy2019.modkt.api.mana.ManaTypes
 import miragefairy2019.modkt.impl.fairy.displayName
 import miragefairy2019.modkt.impl.mana.displayName
-import net.minecraft.util.ResourceLocation
+import miragefairy2019.modkt.impl.plus
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.util.text.TextFormatting.*
@@ -50,7 +51,8 @@ val <T> IMagicStatusFunction<T>.factors
             }
 
             override fun isEmpty() = throw UnsupportedOperationException()
-            override fun getName() = throw UnsupportedOperationException()
+            override fun getBreed() = throw UnsupportedOperationException()
+            override fun getDisplayName() = throw UnsupportedOperationException()
             override fun getColor() = throw UnsupportedOperationException()
             override fun getCost() = add(buildText { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) })
             override fun getManas() = object : IManaSet {
@@ -66,8 +68,6 @@ val <T> IMagicStatusFunction<T>.factors
                 override fun getEntries() = throw UnsupportedOperationException()
                 override fun getPower(type: IErgType) = add(type.displayName)
             }
-
-            override fun getDisplayName() = throw UnsupportedOperationException()
         })
         return factors
     }
@@ -116,20 +116,6 @@ fun <T : Comparable<T>> IMagicStatus<T>.ranged(min: T, max: T): IMagicStatus<T> 
 }
 
 
-fun getActualFairyType(fairyType: IFairyType, playerAura: IManaSet): IFairyType = object : IFairyType {
-    override fun isEmpty(): Boolean = fairyType.isEmpty
-    override fun getName(): ResourceLocation = fairyType.name
-    override fun getColor(): Int = fairyType.color
-    override fun getCost(): Double = fairyType.cost
-    override fun getManas() = object : IManaSet {
-        override fun getShine() = fairyType.manas.shine + playerAura.shine
-        override fun getFire() = fairyType.manas.fire + playerAura.fire
-        override fun getWind() = fairyType.manas.wind + playerAura.wind
-        override fun getGaia() = fairyType.manas.gaia + playerAura.gaia
-        override fun getAqua() = fairyType.manas.aqua + playerAura.aqua
-        override fun getDark() = fairyType.manas.dark + playerAura.dark
-    }
-
-    override fun getAbilities(): IErgSet = fairyType.abilities
-    override fun getDisplayName(): ITextComponent = fairyType.displayName
+fun getActualFairyType(fairyType: IFairyType, playerAura: IManaSet): IFairyType = object : FairyTypeAdapter(fairyType) {
+    override fun getManas() = parent.manas + playerAura
 }

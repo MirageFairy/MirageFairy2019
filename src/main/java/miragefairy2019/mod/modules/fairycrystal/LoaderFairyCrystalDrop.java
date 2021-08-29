@@ -259,7 +259,7 @@ public class LoaderFairyCrystalDrop {
     }
 
     private static IDrop r(VariantFairy variantFairy) {
-        return new DropFixed(variantFairy.createItemStack(), 0.1 * Math.pow(0.1, variantFairy.type.rare - 1));
+        return new DropFixed(variantFairy.createItemStack(), 0.1 * Math.pow(0.1, variantFairy.getRare() - 1));
     }
 
     private static IDrop d(VariantFairy variantFairy, double weight) {

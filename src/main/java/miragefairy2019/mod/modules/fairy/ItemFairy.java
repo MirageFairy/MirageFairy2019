@@ -35,14 +35,14 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
     public Optional<IFairyType> getMirageFairy2019Fairy(ItemStack itemStack) {
         VariantFairy variant = getVariant(itemStack).orElse(null);
         if (variant == null) return Optional.empty();
-        return Optional.of(variant.type);
+        return Optional.of(variant.getType());
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack itemStack) {
         VariantFairy variant = getVariant(itemStack).orElse(null);
         if (variant == null) return UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".name");
-        return UtilsMinecraft.translateToLocalFormatted(getUnlocalizedName() + ".format", variant.type.getDisplayName().getFormattedText());
+        return UtilsMinecraft.translateToLocalFormatted(getUnlocalizedName() + ".format", variant.getType().getDisplayName().getFormattedText());
     }
 
     @Override
@@ -52,17 +52,17 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
         if (variant == null) return;
 
         if (!flag.isAdvanced()) {
-            tooltip.add("" + GREEN + "No: " + variant.type.id + " (" + variant.type.modid + ")");
+            tooltip.add("" + GREEN + "No: " + variant.getId() + " (" + variant.getType().getBreed().getResourceDomain() + ")");
             tooltip.add("" + "Type:"
-                    + " " + GOLD + UtilsString.repeat("★", variant.type.rare) + getRankColor(variant) + UtilsString.repeat("★", variant.type.rank - 1)
-                    + " " + WHITE + variant.type.name);
+                    + " " + GOLD + UtilsString.repeat("★", variant.getRare()) + getRankColor(variant) + UtilsString.repeat("★", variant.getRank() - 1)
+                    + " " + WHITE + variant.getType().getBreed().getResourcePath());
         } else {
-            tooltip.add("" + GREEN + "No: " + variant.type.id + " (" + variant.type.modid + ")");
+            tooltip.add("" + GREEN + "No: " + variant.getId() + " (" + variant.getType().getBreed().getResourceDomain() + ")");
             tooltip.add("" + "Type:"
-                    + " " + GOLD + UtilsString.repeat("★", variant.type.rare) + getRankColor(variant) + UtilsString.repeat("★", variant.type.rank - 1)
-                    + " " + GOLD + "Rare." + variant.type.rare
-                    + " " + getRankColor(variant) + "Rank." + variant.type.rank
-                    + " " + WHITE + variant.type.name);
+                    + " " + GOLD + UtilsString.repeat("★", variant.getRare()) + getRankColor(variant) + UtilsString.repeat("★", variant.getRank() - 1)
+                    + " " + GOLD + "Rare." + variant.getRare()
+                    + " " + getRankColor(variant) + "Rank." + variant.getRank()
+                    + " " + WHITE + variant.getType().getBreed().getResourcePath());
         }
 
         if (!flag.isAdvanced()) {
@@ -78,16 +78,16 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
         }
 
         if (!flag.isAdvanced()) {
-            tooltip.add("" + DARK_PURPLE + "Cost: " + String.format("%.1f", variant.type.cost));
+            tooltip.add("" + DARK_PURPLE + "Cost: " + String.format("%.1f", variant.getType().getCost()));
         } else {
-            tooltip.add("" + DARK_PURPLE + "Cost: " + String.format("%.3f", variant.type.cost));
+            tooltip.add("" + DARK_PURPLE + "Cost: " + String.format("%.3f", variant.getType().getCost()));
         }
 
         if (!flag.isAdvanced()) {
             tooltip.add(new TextComponentString("")
                     .setStyle(new Style().setColor(GREEN))
                     .appendText("Abilities: ")
-                    .appendSibling(ISuppliterator.ofIterable(variant.type.abilitySet.getEntries())
+                    .appendSibling(ISuppliterator.ofIterable(variant.getType().getAbilities().getEntries())
                             .filter(tuple -> format(tuple.getPower()) >= 10)
                             .sorted((a, b) -> -Double.compare(a.getPower(), b.getPower()))
                             .map(t -> {
@@ -106,7 +106,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
             tooltip.add(new TextComponentString("")
                     .setStyle(new Style().setColor(GREEN))
                     .appendText("Abilities: ")
-                    .appendSibling(ISuppliterator.ofIterable(variant.type.abilitySet.getEntries())
+                    .appendSibling(ISuppliterator.ofIterable(variant.getType().getAbilities().getEntries())
                             .filter(tuple -> format(tuple.getPower()) >= 10)
                             .sorted((a, b) -> -Double.compare(a.getPower(), b.getPower()))
                             .map(t -> {
@@ -137,7 +137,7 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
                         .appendSibling(new TextComponentString(itemStackFairyWeapon.getDisplayName())
                                 .setStyle(new Style().setColor(WHITE)))
                         .getFormattedText());
-                ((IItemFairyWeapon) itemStackFairyWeapon.getItem()).addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag);
+                ((IItemFairyWeapon) itemStackFairyWeapon.getItem()).addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.getType(), world, tooltip, flag);
             }
             itemStackFairyWeapon = player.getHeldItem(EnumHand.OFF_HAND);
             if (itemStackFairyWeapon.getItem() instanceof IItemFairyWeapon) {
@@ -149,14 +149,14 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
                         .appendSibling(new TextComponentString(itemStackFairyWeapon.getDisplayName())
                                 .setStyle(new Style().setColor(WHITE)))
                         .getFormattedText());
-                ((IItemFairyWeapon) itemStackFairyWeapon.getItem()).addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag);
+                ((IItemFairyWeapon) itemStackFairyWeapon.getItem()).addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.getType(), world, tooltip, flag);
             }
         }
 
     }
 
     private TextFormatting getRankColor(VariantFairy variant) {
-        switch (variant.type.rank) {
+        switch (variant.getRank()) {
             case 1:
                 return RED;
             case 2:
@@ -183,11 +183,11 @@ public class ItemFairy extends ItemMulti<VariantFairy> implements IItemFairy {
     }
 
     private String f1(IManaType manaType, VariantFairy variant) {
-        return "" + manaType.getTextColor() + String.format("%4d", format(ManaSetKt.getMana(variant.type.manaSet, manaType)));
+        return "" + manaType.getTextColor() + String.format("%4d", format(ManaSetKt.getMana(variant.getType().getManas(), manaType)));
     }
 
     private String f2(IManaType manaType, VariantFairy variant) {
-        return "" + manaType.getTextColor() + ManaTypeKt.getDisplayName(manaType).getUnformattedText() + ":" + String.format("%.3f", ManaSetKt.getMana(variant.type.manaSet, manaType));
+        return "" + manaType.getTextColor() + ManaTypeKt.getDisplayName(manaType).getUnformattedText() + ":" + String.format("%.3f", ManaSetKt.getMana(variant.getType().getManas(), manaType));
     }
 
 }

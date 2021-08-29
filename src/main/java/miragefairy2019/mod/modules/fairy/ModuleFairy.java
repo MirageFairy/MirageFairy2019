@@ -118,11 +118,11 @@ public class ModuleFairy {
                         public int colorMultiplier(ItemStack stack, int tintIndex) {
                             VariantFairy variant = itemMirageFairy.getVariant(stack).orElse(null);
                             if (variant == null) return 0xFFFFFF;
-                            if (tintIndex == 0) return variant.type.colorSet.getSkin();
+                            if (tintIndex == 0) return variant.getColorSet().getSkin();
                             if (tintIndex == 1) return colorCloth;
-                            if (tintIndex == 2) return variant.type.colorSet.getDark();
-                            if (tintIndex == 3) return variant.type.colorSet.getBright();
-                            if (tintIndex == 4) return variant.type.colorSet.getHair();
+                            if (tintIndex == 2) return variant.getColorSet().getDark();
+                            if (tintIndex == 3) return variant.getColorSet().getBright();
+                            if (tintIndex == 4) return variant.getColorSet().getHair();
                             return 0xFFFFFF;
                         }
 
@@ -150,9 +150,9 @@ public class ModuleFairy {
             for (Tuple<Integer, RankedFairyTypeBundle> variant : FairyTypes.instance.getVariants()) {
                 for (int i = 0; i <= itemFairyList.length - 1; i++) {
                     OreDictionary.registerOre(
-                            "mirageFairy2019Fairy" + UtilsString.toUpperCaseHead(variant.y.get(i).type.getName().getResourcePath()) + "Rank" + (i + 1),
+                            "mirageFairy2019Fairy" + UtilsString.toUpperCaseHead(variant.y.get(i).getType().getBreed().getResourcePath()) + "Rank" + (i + 1),
                             variant.y.get(i).createItemStack());
-                    for (IErgEntry tuple : variant.y.get(i).type.abilitySet.getEntries()) {
+                    for (IErgEntry tuple : variant.y.get(i).getType().getAbilities().getEntries()) {
                         if (tuple.getPower() >= 10) {
                             OreDictionary.registerOre(
                                     "mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(tuple.getType().getName()),
@@ -172,8 +172,8 @@ public class ModuleFairy {
 
                     // 凝縮
                     GameRegistry.addShapelessRecipe(
-                            new ResourceLocation(ModMirageFairy2019.MODID + ":" + "condense_r" + i + "_fairy_" + tuple.y.get(i).type.name),
-                            new ResourceLocation(ModMirageFairy2019.MODID + ":" + "condense_r" + i + "_fairy_" + tuple.y.get(i).type.name),
+                            new ResourceLocation(ModMirageFairy2019.MODID + ":" + "condense_r" + i + "_fairy_" + tuple.y.get(i).getType().getBreed().getResourcePath()),
+                            new ResourceLocation(ModMirageFairy2019.MODID + ":" + "condense_r" + i + "_fairy_" + tuple.y.get(i).getType().getBreed().getResourcePath()),
                             tuple.y.get(i + 1).createItemStack(),
                             Ingredient.fromStacks(tuple.y.get(i).createItemStack()),
                             Ingredient.fromStacks(tuple.y.get(i).createItemStack()),
@@ -186,8 +186,8 @@ public class ModuleFairy {
 
                     // 分散
                     GameRegistry.addShapelessRecipe(
-                            new ResourceLocation(ModMirageFairy2019.MODID + ":" + "decondense_r" + i + "_fairy_" + tuple.y.get(i).type.name),
-                            new ResourceLocation(ModMirageFairy2019.MODID + ":" + "decondense_r" + i + "_fairy_" + tuple.y.get(i).type.name),
+                            new ResourceLocation(ModMirageFairy2019.MODID + ":" + "decondense_r" + i + "_fairy_" + tuple.y.get(i).getType().getBreed().getResourcePath()),
+                            new ResourceLocation(ModMirageFairy2019.MODID + ":" + "decondense_r" + i + "_fairy_" + tuple.y.get(i).getType().getBreed().getResourcePath()),
                             tuple.y.get(i).createItemStack(8),
                             Ingredient.fromStacks(tuple.y.get(i + 1).createItemStack()));
 
@@ -200,25 +200,25 @@ public class ModuleFairy {
         // 妖精関係レジストリー
         erMod.createItemStack.register(ic -> {
 
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockDiamond"), FairyTypes.instance.getDiamond().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockEmerald"), FairyTypes.instance.getEmerald().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockPyrope"), FairyTypes.instance.getPyrope().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockMoonstone"), FairyTypes.instance.getMoonstone().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockApatite"), FairyTypes.instance.getApatite().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("obsidian"), FairyTypes.instance.getObsidian().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockFluorite"), FairyTypes.instance.getFluorite().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockCinnabar"), FairyTypes.instance.getCinnabar().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockMagnetite"), FairyTypes.instance.getMagnetite().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("glowstone"), FairyTypes.instance.getGlowstone().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockSmithsonite"), FairyTypes.instance.getSmithsonite().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockLapis"), FairyTypes.instance.getLapislazuli().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockSulfur"), FairyTypes.instance.getSulfur().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockGold"), FairyTypes.instance.getGold().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockRedstone"), FairyTypes.instance.getRedstone().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(Ingredient.fromStacks(new ItemStack(Blocks.SAND)), FairyTypes.instance.getSand().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockNephrite"), FairyTypes.instance.getNephrite().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockTourmaline"), FairyTypes.instance.getTourmaline().get(0).type.registryName);
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockTopaz"), FairyTypes.instance.getTopaz().get(0).type.registryName);
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockDiamond"), FairyTypes.instance.getDiamond().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockEmerald"), FairyTypes.instance.getEmerald().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockPyrope"), FairyTypes.instance.getPyrope().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockMoonstone"), FairyTypes.instance.getMoonstone().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockApatite"), FairyTypes.instance.getApatite().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("obsidian"), FairyTypes.instance.getObsidian().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockFluorite"), FairyTypes.instance.getFluorite().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockCinnabar"), FairyTypes.instance.getCinnabar().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockMagnetite"), FairyTypes.instance.getMagnetite().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("glowstone"), FairyTypes.instance.getGlowstone().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockSmithsonite"), FairyTypes.instance.getSmithsonite().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockLapis"), FairyTypes.instance.getLapislazuli().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockSulfur"), FairyTypes.instance.getSulfur().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockGold"), FairyTypes.instance.getGold().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockRedstone"), FairyTypes.instance.getRedstone().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(Ingredient.fromStacks(new ItemStack(Blocks.SAND)), FairyTypes.instance.getSand().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockNephrite"), FairyTypes.instance.getNephrite().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockTourmaline"), FairyTypes.instance.getTourmaline().get(0).getType().getBreed());
+            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(new OreIngredient("blockTopaz"), FairyTypes.instance.getTopaz().get(0).getType().getBreed());
             // TODO ほとんどの妖精とアイテムの関連付けは妖精レジストリーを使う
 
         });

@@ -11,6 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Objects;
+
 public class ItemFairyWandMelting extends ItemFairyWeaponCraftingTool {
 
     @Override
@@ -21,7 +23,7 @@ public class ItemFairyWandMelting extends ItemFairyWeaponCraftingTool {
         {
             ItemStack itemStackFairy = getCombinedFairy(player.getHeldItem(hand));
             if (getFairy(itemStackFairy).isPresent()) {
-                if (getFairy(itemStackFairy).get().getName().equals(new ResourceLocation(ModMirageFairy2019.MODID, "mina"))) {
+                if (Objects.equals(getFairy(itemStackFairy).get().getBreed(), new ResourceLocation(ModMirageFairy2019.MODID, "mina"))) {
                     break a;
                 }
             }
