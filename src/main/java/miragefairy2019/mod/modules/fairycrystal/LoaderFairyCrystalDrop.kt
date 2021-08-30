@@ -33,15 +33,13 @@ import java.util.function.Predicate
 
 val loaderFairyCrystalDrop: Module = {
     onCreateItemStack {
-        fun time(world: World, min: Int, max: Int) = world.provider.isSurfaceWorld && min <= (world.worldTime + 6000) % 24000 && (world.worldTime + 6000) % 24000 <= max
+        fun World.time(min: Int, max: Int) = provider.isSurfaceWorld && min <= (worldTime + 6000) % 24000 && (worldTime + 6000) % 24000 <= max
 
         operator fun RankedFairyTypeBundle.invoke(weight: Double? = null) = DropFixed(main.createItemStack(), weight ?: 0.1 * Math.pow(0.1, (main.rare - 1).toDouble()))
 
-        class BlockPosScope(val world: World, val blockPos: BlockPos)
-
         fun register(listener: IRightClickDrop) = run { ApiFairyCrystal.dropsFairyCrystal.add(listener); Unit }
         fun IDrop.fixed() = register(RightClickDrops.fixed(this))
-        fun IDrop.world(predicate: BlockPosScope.() -> Boolean) = register(RightClickDrops.world(this) { world, blockPos -> BlockPosScope(world, blockPos).predicate() })
+        fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = register(RightClickDrops.world(this) { world, blockPos -> world.predicate(blockPos) })
         fun IDrop.biomeType(vararg biomes: BiomeDictionary.Type) = register(RightClickDrops.biomeTypes(this, *biomes))
         fun IDrop.block(vararg blocks: Block) = register(RightClickDrops.blocks(this, *blocks))
         fun IDrop.blockState(vararg blockStates: IBlockState) = register(RightClickDrops.blockStates(this, *blockStates))
@@ -53,59 +51,60 @@ val loaderFairyCrystalDrop: Module = {
         fun IDrop.entity(vararg entityClasses: Class<out Entity>) = register(RightClickDrops.classEntities(this, *entityClasses))
         fun <E : Entity> IDrop.entity(classEntity: Class<out E>, predicate: E.() -> Boolean) = register(RightClickDrops.entity(this, classEntity, predicate))
 
+
         // コモン
         FairyTypes.instance.run {
 
             // 地上
-            water().world { world.provider.isSurfaceWorld }
-            stone().world { world.provider.isSurfaceWorld }
-            dirt().world { world.provider.isSurfaceWorld }
-            sand().world { world.provider.isSurfaceWorld }
-            gravel().world { world.provider.isSurfaceWorld }
-            iron().world { world.provider.isSurfaceWorld }
-            gold().world { world.provider.isSurfaceWorld }
-            diamond().world { world.provider.isSurfaceWorld }
-            emerald().world { world.provider.isSurfaceWorld }
-            magnetite().world { world.provider.isSurfaceWorld }
-            apatite().world { world.provider.isSurfaceWorld }
-            fluorite().world { world.provider.isSurfaceWorld }
-            sulfur().world { world.provider.isSurfaceWorld }
-            cinnabar().world { world.provider.isSurfaceWorld }
-            moonstone().world { world.provider.isSurfaceWorld }
-            pyrope().world { world.provider.isSurfaceWorld }
-            smithsonite().world { world.provider.isSurfaceWorld }
-            redstone().world { world.provider.isSurfaceWorld }
-            lapislazuli().world { world.provider.isSurfaceWorld }
-            obsidian().world { world.provider.isSurfaceWorld }
-            coal().world { world.provider.isSurfaceWorld }
-            ice().world { world.provider.isSurfaceWorld }
-            nephrite().world { world.provider.isSurfaceWorld }
-            tourmaline().world { world.provider.isSurfaceWorld }
-            topaz().world { world.provider.isSurfaceWorld }
+            water().world { provider.isSurfaceWorld }
+            stone().world { provider.isSurfaceWorld }
+            dirt().world { provider.isSurfaceWorld }
+            sand().world { provider.isSurfaceWorld }
+            gravel().world { provider.isSurfaceWorld }
+            iron().world { provider.isSurfaceWorld }
+            gold().world { provider.isSurfaceWorld }
+            diamond().world { provider.isSurfaceWorld }
+            emerald().world { provider.isSurfaceWorld }
+            magnetite().world { provider.isSurfaceWorld }
+            apatite().world { provider.isSurfaceWorld }
+            fluorite().world { provider.isSurfaceWorld }
+            sulfur().world { provider.isSurfaceWorld }
+            cinnabar().world { provider.isSurfaceWorld }
+            moonstone().world { provider.isSurfaceWorld }
+            pyrope().world { provider.isSurfaceWorld }
+            smithsonite().world { provider.isSurfaceWorld }
+            redstone().world { provider.isSurfaceWorld }
+            lapislazuli().world { provider.isSurfaceWorld }
+            obsidian().world { provider.isSurfaceWorld }
+            coal().world { provider.isSurfaceWorld }
+            ice().world { provider.isSurfaceWorld }
+            nephrite().world { provider.isSurfaceWorld }
+            tourmaline().world { provider.isSurfaceWorld }
+            topaz().world { provider.isSurfaceWorld }
 
-            spider().world { world.provider.isSurfaceWorld }
-            chicken().world { world.provider.isSurfaceWorld }
-            skeleton().world { world.provider.isSurfaceWorld }
-            zombie().world { world.provider.isSurfaceWorld }
-            creeper().world { world.provider.isSurfaceWorld }
-            fish().world { world.provider.isSurfaceWorld }
-            cod().world { world.provider.isSurfaceWorld }
-            salmon().world { world.provider.isSurfaceWorld }
-            pufferfish().world { world.provider.isSurfaceWorld }
-            clownfish().world { world.provider.isSurfaceWorld }
-            villager().world { world.provider.isSurfaceWorld }
-            cow().world { world.provider.isSurfaceWorld }
-            pig().world { world.provider.isSurfaceWorld }
+            spider().world { provider.isSurfaceWorld }
+            chicken().world { provider.isSurfaceWorld }
+            skeleton().world { provider.isSurfaceWorld }
+            zombie().world { provider.isSurfaceWorld }
+            creeper().world { provider.isSurfaceWorld }
+            fish().world { provider.isSurfaceWorld }
+            cod().world { provider.isSurfaceWorld }
+            salmon().world { provider.isSurfaceWorld }
+            pufferfish().world { provider.isSurfaceWorld }
+            clownfish().world { provider.isSurfaceWorld }
+            villager().world { provider.isSurfaceWorld }
+            cow().world { provider.isSurfaceWorld }
+            pig().world { provider.isSurfaceWorld }
 
-            wheat().world { world.provider.isSurfaceWorld }
-            lilac().world { world.provider.isSurfaceWorld }
-            apple().world { world.provider.isSurfaceWorld }
-            carrot().world { world.provider.isSurfaceWorld }
-            cactus().world { world.provider.isSurfaceWorld }
-            spruce().world { world.provider.isSurfaceWorld }
-            seed().world { world.provider.isSurfaceWorld }
-            poisonouspotato().world { world.provider.isSurfaceWorld }
-            melon().world { world.provider.isSurfaceWorld }
+            wheat().world { provider.isSurfaceWorld }
+            lilac().world { provider.isSurfaceWorld }
+            apple().world { provider.isSurfaceWorld }
+            carrot().world { provider.isSurfaceWorld }
+            cactus().world { provider.isSurfaceWorld }
+            spruce().world { provider.isSurfaceWorld }
+            seed().world { provider.isSurfaceWorld }
+            poisonouspotato().world { provider.isSurfaceWorld }
+            melon().world { provider.isSurfaceWorld }
 
 
             // ネザー
@@ -131,10 +130,10 @@ val loaderFairyCrystalDrop: Module = {
             lava(0.3).item(Items.LAVA_BUCKET)
             fire(0.1).block(Blocks.FIRE)
 
-            thunder(0.01).world { world.provider.isSurfaceWorld && world.canSeeSky(blockPos) && world.isRainingAt(blockPos) && world.isThundering }
-            sun(0.0001).world { world.provider.isSurfaceWorld && world.canSeeSky(blockPos) && time(world, 6000, 18000) && !world.isRainingAt(blockPos) }
-            moon(0.0001).world { world.provider.isSurfaceWorld && world.canSeeSky(blockPos) && (time(world, 19000, 24000) || time(world, 0, 5000)) && !world.isRainingAt(blockPos) }
-            star(0.0003).world { world.provider.isSurfaceWorld && world.canSeeSky(blockPos) && (time(world, 19000, 24000) || time(world, 0, 5000)) && !world.isRainingAt(blockPos) }
+            thunder(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) && isThundering }
+            sun(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && time(6000, 18000) && !isRainingAt(it) }
+            moon(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) }
+            star(0.0003).world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) }
 
             stone(0.3).block(Blocks.STONE, Blocks.COBBLESTONE)
             dirt(0.3).block(Blocks.DIRT, Blocks.GRASS)
@@ -234,11 +233,11 @@ val loaderFairyCrystalDrop: Module = {
             steak(0.1).item(Items.COOKED_BEEF)
             goldenapple(0.03).itemStack(ItemStack(Items.GOLDEN_APPLE, 1, 0))
 
-            daytime(0.001).world { time(world, 6000, 18000) }
-            night(0.001).world { time(world, 19000, 24000) || time(world, 0, 5000) }
-            morning(0.001).world { time(world, 5000, 9000) }
-            fine(0.01).world { world.provider.isSurfaceWorld && world.canSeeSky(blockPos) && !world.isRainingAt(blockPos) }
-            rain(0.01).world { world.provider.isSurfaceWorld && world.canSeeSky(blockPos) && world.isRainingAt(blockPos) }
+            daytime(0.001).world { time(6000, 18000) }
+            night(0.001).world { time(19000, 24000) || time(0, 5000) }
+            morning(0.001).world { time(5000, 9000) }
+            fine(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) }
+            rain(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
 
             plains(0.01).biomeType(BiomeDictionary.Type.PLAINS)
             forest(0.01).biomeType(BiomeDictionary.Type.FOREST)
