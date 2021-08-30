@@ -9,6 +9,7 @@ typealias Module = ModInitializer.() -> Unit
 class ModInitializer {
     val onInstantiation = EventRegistry0()
     val onPreInit = EventRegistry1<FMLPreInitializationEvent>()
+    val onCreateItemStack = EventRegistry0()
     val onInit = EventRegistry1<FMLInitializationEvent>()
     val onPostInit = EventRegistry1<FMLPostInitializationEvent>()
 }

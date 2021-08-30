@@ -67,6 +67,7 @@ class InitializerMirageFairy2019 {
         val initializationContext = InitializationContext(ModMirageFairy2019.MODID, event.side, ApiMain.creativeTab())
         erMod.registerBlock.trigger().accept(initializationContext)
         erMod.registerItem.trigger().accept(initializationContext)
+        modInitializer.onCreateItemStack()
         erMod.createItemStack.trigger().accept(initializationContext)
         erMod.hookDecorator.trigger().run()
         erMod.initKeyBinding.trigger().run()
