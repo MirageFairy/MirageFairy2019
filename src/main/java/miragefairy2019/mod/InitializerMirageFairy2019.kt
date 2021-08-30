@@ -7,7 +7,7 @@ import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.api.materialsfairy.ApiMaterialsFairy
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod.lib.InitializationContext
-import miragefairy2019.mod.modules.fairy.moduleFairyRelation
+import miragefairy2019.modkt.modules.fairy.loaderFairyRelation
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
 import miragefairy2019.mod.modules.fairystick.ModuleFairyStick
 import miragefairy2019.mod.modules.fairyweapon.item.Loader
@@ -34,7 +34,7 @@ class InitializerMirageFairy2019 {
         modInitializer.run {
             moduleMana()
             moduleErg()
-            moduleFairyRelation()
+            loaderFairyRelation()
         }
 
         modInitializer.onInstantiation()

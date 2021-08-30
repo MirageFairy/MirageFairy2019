@@ -1,8 +1,10 @@
-package miragefairy2019.mod.modules.fairy
+package miragefairy2019.modkt.modules.fairy
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
+import miragefairy2019.mod.modules.fairy.FairyTypes
+import miragefairy2019.mod.modules.fairy.RankedFairyTypeBundle
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
@@ -11,7 +13,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
 import net.minecraftforge.oredict.OreIngredient
 
-val moduleFairyRelation: Module = {
+val loaderFairyRelation: Module = {
     onCreateItemStack {
         fun i(item: Item, meta: Int = 32767) = Ingredient.fromStacks(ItemStack(item, 1, meta))
         fun i(block: Block, meta: Int = 32767) = Ingredient.fromStacks(ItemStack(Item.getItemFromBlock(block), 1, meta))
