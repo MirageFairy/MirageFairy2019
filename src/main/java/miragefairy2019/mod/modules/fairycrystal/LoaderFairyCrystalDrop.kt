@@ -51,7 +51,7 @@ val loaderFairyCrystalDrop: Module = {
         fun IDrop.material(material: String) = register(RightClickDrops.ores(this, *listOf("ingot", "nugget", "gem", "dust", "dustTiny", "block", "rod", "plate", "ore").map { "$it$material" }.toTypedArray()))
         fun IDrop.ore(vararg ore: String) = register(RightClickDrops.ores(this, *ore))
         fun IDrop.entity(vararg entityClasses: Class<out Entity>) = register(RightClickDrops.classEntities(this, *entityClasses))
-        fun <E : Entity> IDrop.entity(classEntity: Class<out E>, predicate: (E) -> Boolean) = register(RightClickDrops.entity(this, classEntity, predicate))
+        fun <E : Entity> IDrop.entity(classEntity: Class<out E>, predicate: E.() -> Boolean) = register(RightClickDrops.entity(this, classEntity, predicate))
 
         // コモン
         FairyTypes.instance.run {
@@ -180,7 +180,7 @@ val loaderFairyCrystalDrop: Module = {
             pufferfish(0.03).itemStack(ItemStack(Items.FISH, 1, 3))
             clownfish(0.03).itemStack(ItemStack(Items.FISH, 1, 2))
             villager(0.3).entity(EntityVillager::class.java) { true }
-            librarian(0.1).entity(EntityVillager::class.java) { it.professionForge.registryName == ResourceLocation("minecraft:librarian") }
+            librarian(0.1).entity(EntityVillager::class.java) { professionForge.registryName == ResourceLocation("minecraft:librarian") }
             netherstar(0.01).item(Items.NETHER_STAR)
             golem(0.1).entity(EntityIronGolem::class.java)
             cow(0.1).entity(EntityCow::class.java)
