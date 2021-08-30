@@ -25,6 +25,7 @@ import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.ResourceLocation
+import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
 import java.util.function.Predicate
@@ -40,57 +41,61 @@ val loaderFairyCrystalDrop: Module = {
             ApiFairyCrystal.dropsFairyCrystal.add(listener)
         }
 
+        fun RankedFairyTypeBundle.world(weight: Double? = null, predicate: (World, BlockPos) -> Boolean) {
+            register(RightClickDrops.world(r(this), predicate))
+        }
+
         // コモン
         FairyTypes.instance.run {
-            register(RightClickDrops.world(r(water)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(stone)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(dirt)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(sand)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(gravel)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(iron)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(gold)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(diamond)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(emerald)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(magnetite)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(apatite)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(fluorite)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(sulfur)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(cinnabar)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(moonstone)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(pyrope)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(smithsonite)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(redstone)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(lapislazuli)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(obsidian)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(coal)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(ice)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(nephrite)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(tourmaline)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(topaz)) { w, p -> w.provider.isSurfaceWorld })
+            water.world { w, p -> w.provider.isSurfaceWorld }
+            stone.world { w, p -> w.provider.isSurfaceWorld }
+            dirt.world { w, p -> w.provider.isSurfaceWorld }
+            sand.world { w, p -> w.provider.isSurfaceWorld }
+            gravel.world { w, p -> w.provider.isSurfaceWorld }
+            iron.world { w, p -> w.provider.isSurfaceWorld }
+            gold.world { w, p -> w.provider.isSurfaceWorld }
+            diamond.world { w, p -> w.provider.isSurfaceWorld }
+            emerald.world { w, p -> w.provider.isSurfaceWorld }
+            magnetite.world { w, p -> w.provider.isSurfaceWorld }
+            apatite.world { w, p -> w.provider.isSurfaceWorld }
+            fluorite.world { w, p -> w.provider.isSurfaceWorld }
+            sulfur.world { w, p -> w.provider.isSurfaceWorld }
+            cinnabar.world { w, p -> w.provider.isSurfaceWorld }
+            moonstone.world { w, p -> w.provider.isSurfaceWorld }
+            pyrope.world { w, p -> w.provider.isSurfaceWorld }
+            smithsonite.world { w, p -> w.provider.isSurfaceWorld }
+            redstone.world { w, p -> w.provider.isSurfaceWorld }
+            lapislazuli.world { w, p -> w.provider.isSurfaceWorld }
+            obsidian.world { w, p -> w.provider.isSurfaceWorld }
+            coal.world { w, p -> w.provider.isSurfaceWorld }
+            ice.world { w, p -> w.provider.isSurfaceWorld }
+            nephrite.world { w, p -> w.provider.isSurfaceWorld }
+            tourmaline.world { w, p -> w.provider.isSurfaceWorld }
+            topaz.world { w, p -> w.provider.isSurfaceWorld }
 
-            register(RightClickDrops.world(r(spider)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(chicken)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(skeleton)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(zombie)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(creeper)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(fish)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(cod)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(salmon)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(pufferfish)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(clownfish)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(villager)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(cow)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(pig)) { w, p -> w.provider.isSurfaceWorld })
+            spider.world { w, p -> w.provider.isSurfaceWorld }
+            chicken.world { w, p -> w.provider.isSurfaceWorld }
+            skeleton.world { w, p -> w.provider.isSurfaceWorld }
+            zombie.world { w, p -> w.provider.isSurfaceWorld }
+            creeper.world { w, p -> w.provider.isSurfaceWorld }
+            fish.world { w, p -> w.provider.isSurfaceWorld }
+            cod.world { w, p -> w.provider.isSurfaceWorld }
+            salmon.world { w, p -> w.provider.isSurfaceWorld }
+            pufferfish.world { w, p -> w.provider.isSurfaceWorld }
+            clownfish.world { w, p -> w.provider.isSurfaceWorld }
+            villager.world { w, p -> w.provider.isSurfaceWorld }
+            cow.world { w, p -> w.provider.isSurfaceWorld }
+            pig.world { w, p -> w.provider.isSurfaceWorld }
 
-            register(RightClickDrops.world(r(wheat)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(lilac)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(apple)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(carrot)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(cactus)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(spruce)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(seed)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(poisonouspotato)) { w, p -> w.provider.isSurfaceWorld })
-            register(RightClickDrops.world(r(melon)) { w, p -> w.provider.isSurfaceWorld })
+            wheat.world { w, p -> w.provider.isSurfaceWorld }
+            lilac.world { w, p -> w.provider.isSurfaceWorld }
+            apple.world { w, p -> w.provider.isSurfaceWorld }
+            carrot.world { w, p -> w.provider.isSurfaceWorld }
+            cactus.world { w, p -> w.provider.isSurfaceWorld }
+            spruce.world { w, p -> w.provider.isSurfaceWorld }
+            seed.world { w, p -> w.provider.isSurfaceWorld }
+            poisonouspotato.world { w, p -> w.provider.isSurfaceWorld }
+            melon.world { w, p -> w.provider.isSurfaceWorld }
         }
         FairyTypes.instance.run {
             register(RightClickDrops.biomeTypes(r(lava), BiomeDictionary.Type.NETHER))
@@ -113,10 +118,10 @@ val loaderFairyCrystalDrop: Module = {
             register(RightClickDrops.items(d(lava, 0.3), Items.LAVA_BUCKET))
             register(RightClickDrops.blocks(d(fire, 0.1), Blocks.FIRE))
 
-            register(RightClickDrops.world(d(thunder, 0.01)) { w, p -> w.provider.isSurfaceWorld && w.canSeeSky(p) && w.isRainingAt(p) && w.isThundering })
-            register(RightClickDrops.world(d(sun, 0.0001)) { w, p -> w.provider.isSurfaceWorld && w.canSeeSky(p) && time(w, 6000, 18000) && !w.isRainingAt(p) })
-            register(RightClickDrops.world(d(moon, 0.0001)) { w, p -> w.provider.isSurfaceWorld && w.canSeeSky(p) && (time(w, 19000, 24000) || time(w, 0, 5000)) && !w.isRainingAt(p) })
-            register(RightClickDrops.world(d(star, 0.0003)) { w, p -> w.provider.isSurfaceWorld && w.canSeeSky(p) && (time(w, 19000, 24000) || time(w, 0, 5000)) && !w.isRainingAt(p) })
+            thunder.world(0.01) { w, p -> w.provider.isSurfaceWorld && w.canSeeSky(p) && w.isRainingAt(p) && w.isThundering }
+            sun.world(0.0001) { w, p -> w.provider.isSurfaceWorld && w.canSeeSky(p) && time(w, 6000, 18000) && !w.isRainingAt(p) }
+            moon.world(0.0001) { w, p -> w.provider.isSurfaceWorld && w.canSeeSky(p) && (time(w, 19000, 24000) || time(w, 0, 5000)) && !w.isRainingAt(p) }
+            star.world(0.0003) { w, p -> w.provider.isSurfaceWorld && w.canSeeSky(p) && (time(w, 19000, 24000) || time(w, 0, 5000)) && !w.isRainingAt(p) }
 
             register(RightClickDrops.blocks(d(stone, 0.3), Blocks.STONE, Blocks.COBBLESTONE))
             register(RightClickDrops.blocks(d(dirt, 0.3), Blocks.DIRT, Blocks.GRASS))
@@ -215,11 +220,11 @@ val loaderFairyCrystalDrop: Module = {
             register(RightClickDrops.items(d(steak, 0.1), Items.COOKED_BEEF))
             register(RightClickDrops.ingredients(d(goldenapple, 0.03), Ingredient.fromStacks(ItemStack(Items.GOLDEN_APPLE, 1, 0))))
 
-            register(RightClickDrops.world(d(daytime, 0.001)) { w, p -> time(w, 6000, 18000) })
-            register(RightClickDrops.world(d(night, 0.001)) { w, p -> time(w, 19000, 24000) || time(w, 0, 5000) })
-            register(RightClickDrops.world(d(morning, 0.001)) { w, p -> time(w, 5000, 9000) })
-            register(RightClickDrops.world(d(fine, 0.01)) { w, p -> w.provider.isSurfaceWorld && w.canSeeSky(p) && !w.isRainingAt(p) })
-            register(RightClickDrops.world(d(rain, 0.01)) { w, p -> w.provider.isSurfaceWorld && w.canSeeSky(p) && w.isRainingAt(p) })
+            daytime.world(0.001) { w, p -> time(w, 6000, 18000) }
+            night.world(0.001) { w, p -> time(w, 19000, 24000) || time(w, 0, 5000) }
+            morning.world(0.001) { w, p -> time(w, 5000, 9000) }
+            fine.world(0.01) { w, p -> w.provider.isSurfaceWorld && w.canSeeSky(p) && !w.isRainingAt(p) }
+            rain.world(0.01) { w, p -> w.provider.isSurfaceWorld && w.canSeeSky(p) && w.isRainingAt(p) }
 
             register(RightClickDrops.biomeTypes(d(plains, 0.01), BiomeDictionary.Type.PLAINS))
             register(RightClickDrops.biomeTypes(d(forest, 0.01), BiomeDictionary.Type.FOREST))
