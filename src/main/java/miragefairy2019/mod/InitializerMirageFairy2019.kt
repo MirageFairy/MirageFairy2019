@@ -7,8 +7,8 @@ import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.api.materialsfairy.ApiMaterialsFairy
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod.lib.InitializationContext
-import miragefairy2019.modkt.modules.fairy.loaderFairyRelation
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
+import miragefairy2019.mod.modules.fairycrystal.loaderFairyCrystalDrop
 import miragefairy2019.mod.modules.fairystick.ModuleFairyStick
 import miragefairy2019.mod.modules.fairyweapon.item.Loader
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower
@@ -18,6 +18,7 @@ import miragefairy2019.mod.modules.sphere.ModuleSphere
 import miragefairy2019.modkt.impl.fairy.moduleErg
 import miragefairy2019.modkt.impl.mana.moduleMana
 import miragefairy2019.modkt.modules.artifacts.ModuleArtifacts
+import miragefairy2019.modkt.modules.fairy.loaderFairyRelation
 import miragefairy2019.modkt.modules.placeditem.ModulePlacedItem
 import miragefairy2019.modkt.modules.playeraura.ModulePlayerAura
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
@@ -35,6 +36,7 @@ class InitializerMirageFairy2019 {
             moduleMana()
             moduleErg()
             loaderFairyRelation()
+            loaderFairyCrystalDrop()
         }
 
         modInitializer.onInstantiation()

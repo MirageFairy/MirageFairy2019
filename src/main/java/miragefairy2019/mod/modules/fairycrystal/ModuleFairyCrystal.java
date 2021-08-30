@@ -49,9 +49,6 @@ public class ModuleFairyCrystal {
                 OreDictionary.registerOre("mirageFairyCrystalAny", tuple.y.createItemStack());
             }
 
-            // 妖晶ドロップ登録
-            LoaderFairyCrystalDrop.loadFairyCrystalDrop();
-
         });
     }
 
