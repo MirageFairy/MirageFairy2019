@@ -51,11 +51,6 @@ public class ModuleMirageFlower {
             ApiMirageFlower.fairyLogDropRegistry = new FairyLogDropRegistry();
         });
 
-        // デフォルトレシピ
-        erMod.addRecipe.register(() -> {
-            new FairyLogDropLoader(ApiMirageFlower.fairyLogDropRegistry).init();
-        });
-
         // ブロック
         erMod.registerBlock.register(b -> {
             blockFairyLog = new BlockFairyLog();

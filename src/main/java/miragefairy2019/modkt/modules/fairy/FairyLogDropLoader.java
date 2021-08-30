@@ -1,5 +1,7 @@
 package miragefairy2019.modkt.modules.fairy;
 
+import kotlin.Unit;
+import miragefairy2019.libkt.ModInitializer;
 import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropRegistry;
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionCanRain;
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionHasBiomeType;
@@ -23,7 +25,14 @@ public class FairyLogDropLoader {
         this.registry = registry;
     }
 
-    public void init() {
+    public void init(ModInitializer modInitializer) {
+        modInitializer.getOnCreateItemStack().invoke(() -> {
+            register();
+            return Unit.INSTANCE;
+        });
+    }
+    
+    private void register() {
 
         // 時間帯
         mrfld(0.1, () -> FairyTypes.instance.getDaytime().getMain()).peek(o());
