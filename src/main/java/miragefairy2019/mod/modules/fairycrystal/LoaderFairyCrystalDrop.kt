@@ -8,11 +8,10 @@ import miragefairy2019.mod.api.fairycrystal.IRightClickDrop
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops
 import miragefairy2019.mod.modules.fairy.FairyTypes
 import miragefairy2019.mod.modules.fairy.RankedFairyTypeBundle
-import net.minecraft.block.BlockDoublePlant
-import net.minecraft.block.BlockOldLeaf
-import net.minecraft.block.BlockOldLog
-import net.minecraft.block.BlockPlanks
+import net.minecraft.block.*
+import net.minecraft.block.state.IBlockState
 import net.minecraft.enchantment.EnchantmentHelper
+import net.minecraft.entity.Entity
 import net.minecraft.entity.boss.EntityDragon
 import net.minecraft.entity.boss.EntityWither
 import net.minecraft.entity.monster.*
@@ -23,6 +22,7 @@ import net.minecraft.entity.passive.EntityVillager
 import net.minecraft.init.Blocks
 import net.minecraft.init.Enchantments
 import net.minecraft.init.Items
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.ResourceLocation
@@ -33,27 +33,30 @@ import java.util.function.Predicate
 
 val loaderFairyCrystalDrop: Module = {
     onCreateItemStack {
-        fun m(material: String) = listOf("ingot", "nugget", "gem", "dust", "dustTiny", "block", "rod", "plate", "ore").map { "$it$material" }.toTypedArray()
         fun time(world: World, min: Int, max: Int) = world.provider.isSurfaceWorld && min <= (world.worldTime + 6000) % 24000 && (world.worldTime + 6000) % 24000 <= max
 
         operator fun RankedFairyTypeBundle.invoke(weight: Double? = null) = DropFixed(main.createItemStack(), weight ?: 0.1 * Math.pow(0.1, (main.rare - 1).toDouble()))
 
-        fun register(listener: IRightClickDrop) {
-            ApiFairyCrystal.dropsFairyCrystal.add(listener)
-        }
-
         class BlockPosScope(val world: World, val blockPos: BlockPos)
 
-        fun IDrop.world(predicate: BlockPosScope.() -> Boolean) {
-            register(RightClickDrops.world(this) { world, blockPos -> BlockPosScope(world, blockPos).predicate() })
-        }
-
-        fun IDrop.biomeType(vararg biomes: BiomeDictionary.Type) {
-            register(RightClickDrops.biomeTypes(this, *biomes))
-        }
+        fun register(listener: IRightClickDrop) = run { ApiFairyCrystal.dropsFairyCrystal.add(listener); Unit }
+        fun IDrop.fixed() = register(RightClickDrops.fixed(this))
+        fun IDrop.world(predicate: BlockPosScope.() -> Boolean) = register(RightClickDrops.world(this) { world, blockPos -> BlockPosScope(world, blockPos).predicate() })
+        fun IDrop.biomeType(vararg biomes: BiomeDictionary.Type) = register(RightClickDrops.biomeTypes(this, *biomes))
+        fun IDrop.block(vararg blocks: Block) = register(RightClickDrops.blocks(this, *blocks))
+        fun IDrop.blockState(vararg blockStates: IBlockState) = register(RightClickDrops.blockStates(this, *blockStates))
+        fun IDrop.item(vararg items: Item) = register(RightClickDrops.items(this, *items))
+        fun IDrop.itemStack(vararg itemStacks: ItemStack) = register(RightClickDrops.ingredients(this, *itemStacks.map { Ingredient.fromStacks(it) }.toTypedArray()))
+        fun IDrop.itemStack(predicate: (ItemStack) -> Boolean) = register(RightClickDrops.ingredients(this, Predicate { predicate(it) }))
+        fun IDrop.material(material: String) = register(RightClickDrops.ores(this, *listOf("ingot", "nugget", "gem", "dust", "dustTiny", "block", "rod", "plate", "ore").map { "$it$material" }.toTypedArray()))
+        fun IDrop.ore(vararg ore: String) = register(RightClickDrops.ores(this, *ore))
+        fun IDrop.entity(vararg entityClasses: Class<out Entity>) = register(RightClickDrops.classEntities(this, *entityClasses))
+        fun <E : Entity> IDrop.entity(classEntity: Class<out E>, predicate: (E) -> Boolean) = register(RightClickDrops.entity(this, classEntity, predicate))
 
         // コモン
         FairyTypes.instance.run {
+
+            // 地上
             water().world { world.provider.isSurfaceWorld }
             stone().world { world.provider.isSurfaceWorld }
             dirt().world { world.provider.isSurfaceWorld }
@@ -103,129 +106,133 @@ val loaderFairyCrystalDrop: Module = {
             seed().world { world.provider.isSurfaceWorld }
             poisonouspotato().world { world.provider.isSurfaceWorld }
             melon().world { world.provider.isSurfaceWorld }
-        }
-        FairyTypes.instance.run {
+
+
+            // ネザー
             lava().biomeType(BiomeDictionary.Type.NETHER)
             fire().biomeType(BiomeDictionary.Type.NETHER)
 
             glowstone().biomeType(BiomeDictionary.Type.NETHER)
-        }
-        FairyTypes.instance.run {
+
+
+            // エンド
             enderman().biomeType(BiomeDictionary.Type.END)
             enderdragon().biomeType(BiomeDictionary.Type.END)
+
         }
 
-        // 限定高確率ドロップ
+        // 条件付きドロップ
         FairyTypes.instance.run {
-            register(RightClickDrops.fixed(air(1.0)))
+            air(1.0).fixed()
 
-            register(RightClickDrops.blocks(water(0.3), Blocks.WATER, Blocks.FLOWING_WATER))
-            register(RightClickDrops.items(water(0.3), Items.WATER_BUCKET))
-            register(RightClickDrops.blocks(lava(0.1), Blocks.LAVA, Blocks.FLOWING_LAVA))
-            register(RightClickDrops.items(lava(0.3), Items.LAVA_BUCKET))
-            register(RightClickDrops.blocks(fire(0.1), Blocks.FIRE))
+            water(0.3).block(Blocks.WATER, Blocks.FLOWING_WATER)
+            water(0.3).item(Items.WATER_BUCKET)
+            lava(0.1).block(Blocks.LAVA, Blocks.FLOWING_LAVA)
+            lava(0.3).item(Items.LAVA_BUCKET)
+            fire(0.1).block(Blocks.FIRE)
 
             thunder(0.01).world { world.provider.isSurfaceWorld && world.canSeeSky(blockPos) && world.isRainingAt(blockPos) && world.isThundering }
             sun(0.0001).world { world.provider.isSurfaceWorld && world.canSeeSky(blockPos) && time(world, 6000, 18000) && !world.isRainingAt(blockPos) }
             moon(0.0001).world { world.provider.isSurfaceWorld && world.canSeeSky(blockPos) && (time(world, 19000, 24000) || time(world, 0, 5000)) && !world.isRainingAt(blockPos) }
             star(0.0003).world { world.provider.isSurfaceWorld && world.canSeeSky(blockPos) && (time(world, 19000, 24000) || time(world, 0, 5000)) && !world.isRainingAt(blockPos) }
 
-            register(RightClickDrops.blocks(stone(0.3), Blocks.STONE, Blocks.COBBLESTONE))
-            register(RightClickDrops.blocks(dirt(0.3), Blocks.DIRT, Blocks.GRASS))
-            register(RightClickDrops.blocks(sand(0.3), Blocks.SAND, Blocks.SANDSTONE, Blocks.RED_SANDSTONE))
-            register(RightClickDrops.blocks(gravel(0.1), Blocks.GRAVEL))
-            register(RightClickDrops.ores(iron(0.1), *m("Iron")))
-            register(RightClickDrops.ores(gold(0.03), *m("Gold")))
-            register(RightClickDrops.ores(diamond(0.01), *m("Diamond")))
-            register(RightClickDrops.ores(emerald(0.03), *m("Emerald")))
-            register(RightClickDrops.ores(magnetite(0.1), *m("Magnetite")))
-            register(RightClickDrops.ores(apatite(0.03), *m("Apatite")))
-            register(RightClickDrops.ores(fluorite(0.01), *m("Fluorite")))
-            register(RightClickDrops.ores(sulfur(0.03), *m("Sulfur")))
-            register(RightClickDrops.ores(cinnabar(0.01), *m("Cinnabar")))
-            register(RightClickDrops.ores(moonstone(0.003), *m("Moonstone")))
-            register(RightClickDrops.ores(pyrope(0.01), *m("Pyrope")))
-            register(RightClickDrops.ores(smithsonite(0.1), *m("Smithsonite")))
-            register(RightClickDrops.ores(redstone(0.1), *m("Redstone")))
-            register(RightClickDrops.ores(lapislazuli(0.1), *m("Lapis")))
-            register(RightClickDrops.blocks(obsidian(0.1), Blocks.OBSIDIAN))
-            register(RightClickDrops.ores(glowstone(0.1), *m("Glowstone")))
-            register(RightClickDrops.ores(glowstone(0.1), "glowstone"))
-            register(RightClickDrops.ingredients(coal(0.1), Ingredient.fromStacks(ItemStack(Items.COAL))))
-            register(RightClickDrops.ores(coal(0.1), *m("Coal")))
-            register(RightClickDrops.blocks(ice(0.3), Blocks.ICE))
-            register(RightClickDrops.blocks(packedice(0.01), Blocks.PACKED_ICE))
-            register(RightClickDrops.ores(nephrite(0.03), *m("Nephrite")))
-            register(RightClickDrops.ores(tourmaline(0.01), *m("Tourmaline")))
-            register(RightClickDrops.ores(topaz(0.01), *m("Topaz")))
+            stone(0.3).block(Blocks.STONE, Blocks.COBBLESTONE)
+            dirt(0.3).block(Blocks.DIRT, Blocks.GRASS)
+            sand(0.3).block(Blocks.SAND, Blocks.SANDSTONE, Blocks.RED_SANDSTONE)
+            gravel(0.1).block(Blocks.GRAVEL)
+            iron(0.1).material("Iron")
+            gold(0.03).material("Gold")
+            diamond(0.01).material("Diamond")
+            emerald(0.03).material("Emerald")
+            magnetite(0.1).material("Magnetite")
+            apatite(0.03).material("Apatite")
+            fluorite(0.01).material("Fluorite")
+            sulfur(0.03).material("Sulfur")
+            cinnabar(0.01).material("Cinnabar")
+            moonstone(0.003).material("Moonstone")
+            pyrope(0.01).material("Pyrope")
+            smithsonite(0.1).material("Smithsonite")
+            redstone(0.1).material("Redstone")
+            lapislazuli(0.1).material("Lapis")
+            obsidian(0.1).block(Blocks.OBSIDIAN)
+            glowstone(0.1).material("Glowstone")
+            glowstone(0.1).ore("glowstone")
+            coal(0.1).itemStack(ItemStack(Items.COAL))
+            coal(0.1).material("Coal")
+            ice(0.3).block(Blocks.ICE)
+            packedice(0.01).block(Blocks.PACKED_ICE)
+            nephrite(0.03).material("Nephrite")
+            tourmaline(0.01).material("Tourmaline")
+            topaz(0.01).material("Topaz")
 
-            register(RightClickDrops.classEntities(enderman(0.03), EntityEnderman::class.java))
-            register(RightClickDrops.classEntities(spider(0.1), EntitySpider::class.java))
-            register(RightClickDrops.classEntities(enderdragon(0.1), EntityDragon::class.java))
-            register(RightClickDrops.classEntities(chicken(0.1), EntityChicken::class.java))
-            register(RightClickDrops.classEntities(skeleton(0.3), EntitySkeleton::class.java))
-            register(RightClickDrops.classEntities(zombie(0.3), EntityZombie::class.java))
-            register(RightClickDrops.classEntities(witherskeleton(0.03), EntityWitherSkeleton::class.java))
-            register(RightClickDrops.classEntities(wither(0.01), EntityWither::class.java))
-            register(RightClickDrops.classEntities(creeper(0.1), EntityCreeper::class.java))
-            register(RightClickDrops.items(fish(0.3), Items.FISH))
-            register(RightClickDrops.ingredients(cod(0.1), Ingredient.fromStacks(ItemStack(Items.FISH, 1, 0))))
-            register(RightClickDrops.ingredients(salmon(0.1), Ingredient.fromStacks(ItemStack(Items.FISH, 1, 1))))
-            register(RightClickDrops.ingredients(pufferfish(0.03), Ingredient.fromStacks(ItemStack(Items.FISH, 1, 3))))
-            register(RightClickDrops.ingredients(clownfish(0.03), Ingredient.fromStacks(ItemStack(Items.FISH, 1, 2))))
-            register(RightClickDrops.entity(villager(0.3), EntityVillager::class.java) { e: EntityVillager? -> true })
-            register(RightClickDrops.entity(librarian(0.1), EntityVillager::class.java) { e: EntityVillager -> e.professionForge.registryName == ResourceLocation("minecraft:librarian") })
-            register(RightClickDrops.items(netherstar(0.01), Items.NETHER_STAR))
-            register(RightClickDrops.classEntities(golem(0.1), EntityIronGolem::class.java))
-            register(RightClickDrops.classEntities(cow(0.1), EntityCow::class.java))
-            register(RightClickDrops.classEntities(pig(0.1), EntityPig::class.java))
+            enderman(0.03).entity(EntityEnderman::class.java)
+            spider(0.1).entity(EntitySpider::class.java)
+            enderdragon(0.1).entity(EntityDragon::class.java)
+            chicken(0.1).entity(EntityChicken::class.java)
+            skeleton(0.3).entity(EntitySkeleton::class.java)
+            zombie(0.3).entity(EntityZombie::class.java)
+            witherskeleton(0.03).entity(EntityWitherSkeleton::class.java)
+            wither(0.01).entity(EntityWither::class.java)
+            creeper(0.1).entity(EntityCreeper::class.java)
+            fish(0.3).item(Items.FISH)
+            cod(0.1).itemStack(ItemStack(Items.FISH, 1, 0))
+            salmon(0.1).itemStack(ItemStack(Items.FISH, 1, 1))
+            pufferfish(0.03).itemStack(ItemStack(Items.FISH, 1, 3))
+            clownfish(0.03).itemStack(ItemStack(Items.FISH, 1, 2))
+            villager(0.3).entity(EntityVillager::class.java) { true }
+            librarian(0.1).entity(EntityVillager::class.java) { it.professionForge.registryName == ResourceLocation("minecraft:librarian") }
+            netherstar(0.01).item(Items.NETHER_STAR)
+            golem(0.1).entity(EntityIronGolem::class.java)
+            cow(0.1).entity(EntityCow::class.java)
+            pig(0.1).entity(EntityPig::class.java)
 
-            register(RightClickDrops.blocks(wheat(0.1), Blocks.WHEAT, Blocks.HAY_BLOCK))
-            register(RightClickDrops.blockStates(lilac(0.03), Blocks.DOUBLE_PLANT.defaultState.withProperty(BlockDoublePlant.VARIANT, BlockDoublePlant.EnumPlantType.SYRINGA)))
-            register(RightClickDrops.items(apple(0.1), Items.APPLE, Items.GOLDEN_APPLE))
-            register(RightClickDrops.items(carrot(0.03), Items.CARROT, Items.CARROT_ON_A_STICK, Items.GOLDEN_CARROT))
-            register(RightClickDrops.blocks(cactus(0.1), Blocks.CACTUS))
-            register(RightClickDrops.blockStates(spruce(0.1),
+            wheat(0.1).block(Blocks.WHEAT, Blocks.HAY_BLOCK)
+            lilac(0.03).blockState(Blocks.DOUBLE_PLANT.defaultState.withProperty(BlockDoublePlant.VARIANT, BlockDoublePlant.EnumPlantType.SYRINGA))
+            apple(0.1).item(Items.APPLE, Items.GOLDEN_APPLE)
+            carrot(0.03).item(Items.CARROT, Items.CARROT_ON_A_STICK, Items.GOLDEN_CARROT)
+            cactus(0.1).block(Blocks.CACTUS)
+            spruce(0.1).blockState(
                     Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE),
                     Blocks.PLANKS.defaultState.withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE),
-                    Blocks.LEAVES.defaultState.withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.SPRUCE)))
-            register(RightClickDrops.items(seed(0.1), Items.WHEAT_SEEDS))
-            register(RightClickDrops.items(poisonouspotato(0.01), Items.POISONOUS_POTATO))
-            register(RightClickDrops.items(melon(0.03), Items.MELON))
+                    Blocks.LEAVES.defaultState.withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.SPRUCE)
+            )
+            seed(0.1).item(Items.WHEAT_SEEDS)
+            poisonouspotato(0.01).item(Items.POISONOUS_POTATO)
+            melon(0.03).item(Items.MELON)
 
-            register(RightClickDrops.blocks(torch(0.3), Blocks.TORCH))
-            register(RightClickDrops.blocks(furnace(0.1), Blocks.FURNACE))
-            register(RightClickDrops.blocks(magentaglazedterracotta(0.03), Blocks.MAGENTA_GLAZED_TERRACOTTA))
-            register(RightClickDrops.items(axe(0.1), Items.WOODEN_AXE, Items.STONE_AXE, Items.IRON_AXE, Items.GOLDEN_AXE, Items.DIAMOND_AXE))
-            register(RightClickDrops.blocks(chest(0.1), Blocks.CHEST))
-            register(RightClickDrops.blocks(craftingtable(0.1), Blocks.CRAFTING_TABLE))
-            register(RightClickDrops.items(potion(0.1), Items.POTIONITEM, Items.LINGERING_POTION, Items.SPLASH_POTION))
-            register(RightClickDrops.items(sword(0.1), Items.WOODEN_SWORD, Items.STONE_SWORD, Items.IRON_SWORD, Items.GOLDEN_SWORD, Items.DIAMOND_SWORD))
-            register(RightClickDrops.blocks(dispenser(0.1), Blocks.DISPENSER))
-            register(RightClickDrops.blocks(anvil(0.1), Blocks.ANVIL))
-            register(RightClickDrops.blocks(enchant(0.03), Blocks.ENCHANTING_TABLE))
-            register(RightClickDrops.items(enchant(0.03), Items.ENCHANTED_BOOK))
-            register(RightClickDrops.ingredients(enchant(0.03), Predicate { itemStack: ItemStack -> itemStack.isItemEnchanted }))
-            register(RightClickDrops.items(brewingstand(0.03), Items.BREWING_STAND))
-            register(RightClickDrops.blocks(brewingstand(0.03), Blocks.BREWING_STAND))
-            register(RightClickDrops.items(hoe(0.3), Items.WOODEN_HOE, Items.STONE_HOE, Items.IRON_HOE, Items.GOLDEN_HOE, Items.DIAMOND_HOE))
-            register(RightClickDrops.items(shield(0.1), Items.SHIELD))
-            register(RightClickDrops.blocks(hopper(0.1), Blocks.HOPPER))
-            register(RightClickDrops.ores(glass(0.1), "blockGlass"))
-            register(RightClickDrops.blocks(activatorrail(0.03), Blocks.ACTIVATOR_RAIL))
-            register(RightClickDrops.blocks(ironbars(0.1), Blocks.IRON_BARS))
+            torch(0.3).block(Blocks.TORCH)
+            furnace(0.1).block(Blocks.FURNACE)
+            magentaglazedterracotta(0.03).block(Blocks.MAGENTA_GLAZED_TERRACOTTA)
+            axe(0.1).item(Items.WOODEN_AXE, Items.STONE_AXE, Items.IRON_AXE, Items.GOLDEN_AXE, Items.DIAMOND_AXE)
+            chest(0.1).block(Blocks.CHEST)
+            craftingtable(0.1).block(Blocks.CRAFTING_TABLE)
+            potion(0.1).item(Items.POTIONITEM, Items.LINGERING_POTION, Items.SPLASH_POTION)
+            sword(0.1).item(Items.WOODEN_SWORD, Items.STONE_SWORD, Items.IRON_SWORD, Items.GOLDEN_SWORD, Items.DIAMOND_SWORD)
+            dispenser(0.1).block(Blocks.DISPENSER)
+            anvil(0.1).block(Blocks.ANVIL)
+            enchant(0.03).block(Blocks.ENCHANTING_TABLE)
+            enchant(0.03).item(Items.ENCHANTED_BOOK)
+            enchant(0.03).itemStack { itemStack: ItemStack -> itemStack.isItemEnchanted }
+            brewingstand(0.03).item(Items.BREWING_STAND)
+            brewingstand(0.03).block(Blocks.BREWING_STAND)
+            hoe(0.3).item(Items.WOODEN_HOE, Items.STONE_HOE, Items.IRON_HOE, Items.GOLDEN_HOE, Items.DIAMOND_HOE)
+            shield(0.1).item(Items.SHIELD)
+            hopper(0.1).block(Blocks.HOPPER)
+            glass(0.1).ore("blockGlass")
+            activatorrail(0.03).block(Blocks.ACTIVATOR_RAIL)
+            ironbars(0.1).block(Blocks.IRON_BARS)
 
-            register(RightClickDrops.items(bread(0.1), Items.BREAD))
-            register(RightClickDrops.items(cookie(0.1), Items.COOKIE))
-            register(RightClickDrops.items(cake(0.03), Items.CAKE))
-            register(RightClickDrops.ingredients(enchantedgoldenapple(0.003), Ingredient.fromStacks(ItemStack(Items.GOLDEN_APPLE, 1, 1))))
-            register(RightClickDrops.items(sugar(0.3), Items.SUGAR))
-            register(RightClickDrops.items(rottenflesh(0.1), Items.ROTTEN_FLESH))
-            register(RightClickDrops.items(bakedpotato(0.03), Items.BAKED_POTATO))
-            register(RightClickDrops.items(cookedchicken(0.1), Items.COOKED_CHICKEN))
-            register(RightClickDrops.ingredients(cookedsalmon(0.03), Ingredient.fromStacks(ItemStack(Items.COOKED_FISH, 1, 1))))
-            register(RightClickDrops.items(steak(0.1), Items.COOKED_BEEF))
-            register(RightClickDrops.ingredients(goldenapple(0.03), Ingredient.fromStacks(ItemStack(Items.GOLDEN_APPLE, 1, 0))))
+            bread(0.1).item(Items.BREAD)
+            cookie(0.1).item(Items.COOKIE)
+            cake(0.03).item(Items.CAKE)
+            enchantedgoldenapple(0.003).itemStack(ItemStack(Items.GOLDEN_APPLE, 1, 1))
+            sugar(0.3).item(Items.SUGAR)
+            rottenflesh(0.1).item(Items.ROTTEN_FLESH)
+            bakedpotato(0.03).item(Items.BAKED_POTATO)
+            cookedchicken(0.1).item(Items.COOKED_CHICKEN)
+            cookedsalmon(0.03).itemStack(ItemStack(Items.COOKED_FISH, 1, 1))
+            steak(0.1).item(Items.COOKED_BEEF)
+            goldenapple(0.03).itemStack(ItemStack(Items.GOLDEN_APPLE, 1, 0))
 
             daytime(0.001).world { time(world, 6000, 18000) }
             night(0.001).world { time(world, 19000, 24000) || time(world, 0, 5000) }
@@ -240,9 +247,9 @@ val loaderFairyCrystalDrop: Module = {
             desert(0.01).biomeType(BiomeDictionary.Type.SANDY)
             mountain(0.01).biomeType(BiomeDictionary.Type.MOUNTAIN)
 
-            register(RightClickDrops.ingredients(fortune(0.01), Predicate { itemStack: ItemStack? -> EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemStack) > 0 }))
+            fortune(0.01).itemStack { EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, it) > 0 }
 
-            register(RightClickDrops.fixed(time(0.0001)))
+            time(0.0001).fixed()
         }
 
     }
