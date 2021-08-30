@@ -1,8 +1,8 @@
 package miragefairy2019.mod.modules.fairy
 
+import miragefairy2019.libkt.Module
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
-import miragefairy2019.mod.lib.EventRegistryMod
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
@@ -10,22 +10,21 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
 import net.minecraftforge.oredict.OreIngredient
-import java.util.function.Consumer
 
-fun init(erMod: EventRegistryMod) {
-    fun i(item: Item, meta: Int = 32767) = Ingredient.fromStacks(ItemStack(item, 1, meta))
-    fun i(block: Block, meta: Int = 32767) = Ingredient.fromStacks(ItemStack(Item.getItemFromBlock(block), 1, meta))
-    fun i(itemStack: ItemStack) = Ingredient.fromStacks(itemStack)
-    fun i(ore: String) = OreIngredient(ore)
+val moduleFairyRelation: Module = {
+    onCreateItemStack {
+        fun i(item: Item, meta: Int = 32767) = Ingredient.fromStacks(ItemStack(item, 1, meta))
+        fun i(block: Block, meta: Int = 32767) = Ingredient.fromStacks(ItemStack(Item.getItemFromBlock(block), 1, meta))
+        fun i(itemStack: ItemStack) = Ingredient.fromStacks(itemStack)
+        fun i(ore: String) = OreIngredient(ore)
 
-    // 妖精関係レジストリー
-    // TODO ほとんどの妖精とアイテムの関連付けは妖精レジストリーを使う
-    erMod.createItemStack.register(Consumer {
-        operator fun RankedFairyTypeBundle.invoke(ingredient: Ingredient) {
-            ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(ingredient, this.main.type.breed)
-        }
-
+        // 妖精関係レジストリー
+        // TODO ほとんどの妖精とアイテムの関連付けは妖精レジストリーを使う
         FairyTypes.instance.run {
+            operator fun RankedFairyTypeBundle.invoke(ingredient: Ingredient) {
+                ApiFairyRegistry.getFairyRelationRegistry().registerFairyRelationItemStack(ingredient, this.main.type.breed)
+            }
+
             diamond(i("blockDiamond"))
             emerald(i("blockEmerald"))
             pyrope(i("blockPyrope"))
@@ -46,15 +45,13 @@ fun init(erMod: EventRegistryMod) {
             tourmaline(i("blockTourmaline"))
             topaz(i("blockTopaz"))
         }
-    })
 
-    // 妖精の関係を登録
-    erMod.createItemStack.register(Consumer {
-        operator fun RankedFairyTypeBundle.invoke(relevance: Double, vararg ingredients: Ingredient) = ingredients.forEach {
-            ApiFairy.fairyRelationRegistry.registerIngredientFairyRelation(relevance, main.createItemStack(), it)
-        }
-
+        // 妖精の関係を登録
         FairyTypes.instance.run {
+            operator fun RankedFairyTypeBundle.invoke(relevance: Double, vararg ingredients: Ingredient) = ingredients.forEach {
+                ApiFairy.fairyRelationRegistry.registerIngredientFairyRelation(relevance, main.createItemStack(), it)
+            }
+
             stone(1.0, i(Blocks.STONE, 0))
             dirt(1.0, i(Blocks.DIRT, 0))
             iron(1.0, i("ingotIron"))
@@ -119,6 +116,6 @@ fun init(erMod: EventRegistryMod) {
             steak(1.0, i(Items.COOKED_BEEF))
             goldenapple(1.0, i(Items.GOLDEN_APPLE, 0))
         }
-    })
 
+    }
 }

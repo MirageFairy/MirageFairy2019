@@ -189,8 +189,6 @@ public class ModuleFairy {
 
         });
 
-        ModuleFairyKt.init(erMod);
-
         // 妖精の確定レシピ
         erMod.addRecipe.register(() -> {
             int counter = 0;
