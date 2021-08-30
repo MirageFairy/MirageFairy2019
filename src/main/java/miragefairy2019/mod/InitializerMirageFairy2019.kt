@@ -1,7 +1,6 @@
 package miragefairy2019.mod
 
 import miragefairy2019.libkt.ModInitializer
-import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fertilizer.ApiFertilizer
 import miragefairy2019.mod.api.main.ApiMain
@@ -18,8 +17,8 @@ import miragefairy2019.mod.modules.sphere.ModuleSphere
 import miragefairy2019.modkt.impl.fairy.moduleErg
 import miragefairy2019.modkt.impl.mana.moduleMana
 import miragefairy2019.modkt.modules.artifacts.ModuleArtifacts
-import miragefairy2019.modkt.modules.fairy.FairyLogDropLoader
 import miragefairy2019.modkt.modules.fairy.loaderFairyCrystalDrop
+import miragefairy2019.modkt.modules.fairy.loaderFairyLogDrop
 import miragefairy2019.modkt.modules.fairy.loaderFairyRelation
 import miragefairy2019.modkt.modules.placeditem.ModulePlacedItem
 import miragefairy2019.modkt.modules.playeraura.ModulePlayerAura
@@ -39,7 +38,7 @@ class InitializerMirageFairy2019 {
             moduleErg()
             loaderFairyRelation()
             loaderFairyCrystalDrop()
-            FairyLogDropLoader(ApiMirageFlower.fairyLogDropRegistry).init(this)
+            loaderFairyLogDrop()
         }
 
         modInitializer.onInstantiation()
