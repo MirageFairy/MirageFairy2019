@@ -7,6 +7,7 @@ import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.api.materialsfairy.ApiMaterialsFairy
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod.lib.InitializationContext
+import miragefairy2019.mod.modules.fairy.moduleFairyRelation
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
 import miragefairy2019.mod.modules.fairystick.ModuleFairyStick
 import miragefairy2019.mod.modules.fairyweapon.item.Loader
@@ -33,9 +34,10 @@ class InitializerMirageFairy2019 {
         modInitializer.run {
             moduleMana()
             moduleErg()
+            moduleFairyRelation()
         }
 
-        modInitializer.onInstantiation.fire(Unit)
+        modInitializer.onInstantiation()
 
 
         ModuleFairyStick.init(erMod)
@@ -60,7 +62,7 @@ class InitializerMirageFairy2019 {
     }
 
     fun preInit(event: FMLPreInitializationEvent) {
-        modInitializer.onPreInit.fire(event)
+        modInitializer.onPreInit(event)
         erMod.preInit.trigger().accept(event)
         val initializationContext = InitializationContext(ModMirageFairy2019.MODID, event.side, ApiMain.creativeTab())
         erMod.registerBlock.trigger().accept(initializationContext)
@@ -71,7 +73,7 @@ class InitializerMirageFairy2019 {
     }
 
     fun init(event: FMLInitializationEvent) {
-        modInitializer.onInit.fire(event)
+        modInitializer.onInit(event)
         erMod.init.trigger().accept(event)
         erMod.addRecipe.trigger().run()
         if (event.side.isClient) erMod.registerItemColorHandler.trigger().run()
@@ -81,7 +83,7 @@ class InitializerMirageFairy2019 {
     }
 
     fun postInit(event: FMLPostInitializationEvent) {
-        modInitializer.onPostInit.fire(event)
+        modInitializer.onPostInit(event)
         erMod.postInit.trigger().accept(event)
     }
 }
