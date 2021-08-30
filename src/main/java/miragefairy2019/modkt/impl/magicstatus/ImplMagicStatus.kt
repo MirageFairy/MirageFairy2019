@@ -7,7 +7,7 @@ import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.api.erg.IErgSet
 import miragefairy2019.modkt.api.erg.IErgType
-import miragefairy2019.modkt.api.fairy.FairyTypeAdapter
+import miragefairy2019.modkt.impl.fairy.FairyTypeAdapter
 import miragefairy2019.modkt.api.magicstatus.IMagicStatus
 import miragefairy2019.modkt.api.magicstatus.IMagicStatusFormatter
 import miragefairy2019.modkt.api.magicstatus.IMagicStatusFunction
