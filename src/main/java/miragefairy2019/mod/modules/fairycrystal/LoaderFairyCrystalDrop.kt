@@ -211,7 +211,7 @@ val loaderFairyCrystalDrop: Module = {
             anvil(0.1).block(Blocks.ANVIL)
             enchant(0.03).block(Blocks.ENCHANTING_TABLE)
             enchant(0.03).item(Items.ENCHANTED_BOOK)
-            enchant(0.03).itemStack { itemStack: ItemStack -> itemStack.isItemEnchanted }
+            enchant(0.03).itemStack { it.isItemEnchanted }
             brewingstand(0.03).item(Items.BREWING_STAND)
             brewingstand(0.03).block(Blocks.BREWING_STAND)
             hoe(0.3).item(Items.WOODEN_HOE, Items.STONE_HOE, Items.IRON_HOE, Items.GOLDEN_HOE, Items.DIAMOND_HOE)
