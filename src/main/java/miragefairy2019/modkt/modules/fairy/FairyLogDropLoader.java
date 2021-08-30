@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.mirageflower;
+package miragefairy2019.modkt.modules.fairy;
 
 import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropRegistry;
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionCanRain;

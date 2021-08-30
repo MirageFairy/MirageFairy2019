@@ -8,6 +8,7 @@ import miragefairy2019.mod.common.pickable.PickableRegistry;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.WorldGenBush;
+import miragefairy2019.modkt.modules.fairy.FairyLogDropLoader;
 import mirrg.boron.util.UtilsLambda;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.block.BlockNewLog;
