@@ -111,7 +111,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
             if (flag.isAdvanced) {
                 format("Cost: %.3f", variant.type.cost).color(DARK_PURPLE)
             } else {
-                format("Cost: %.1f", variant.type.cost).color(DARK_PURPLE)
+                format("Cost: %.0f", variant.type.cost).color(DARK_PURPLE)
             }
         }
 
@@ -126,11 +126,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
                         .map {
                             buildText {
                                 text(it.type.displayName)
-                                if (flag.isAdvanced) {
-                                    format("(%.3f)", it.power)
-                                } else {
-                                    format("(%s)", formatInt(it.power))
-                                }
+                                if (flag.isAdvanced) format("(%.3f)", it.power)
                             }
                         }
                         .sandwich(buildText { text(", ") })
