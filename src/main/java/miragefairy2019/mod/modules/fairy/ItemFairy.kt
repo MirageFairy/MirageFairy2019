@@ -38,8 +38,10 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
 
 
         // 番号　MOD名
-        tooltip {
-            text("No: ${variant.id} (${variant.type.breed?.resourceDomain ?: "unknown"})").color(GREEN)
+        if (flag.isAdvanced) {
+            tooltip {
+                text("No: ${variant.id} (${variant.type.breed?.resourceDomain ?: "unknown"})").color(GREEN)
+            }
         }
 
         // レア　ランク　品種名
@@ -57,13 +59,20 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
 
             text("Type: ")
             text(UtilsString.repeat("★", variant.rare)).color(GOLD)
-            text(UtilsString.repeat("★", variant.rank - 1)).color(getRankColor(variant))
+            if (flag.isAdvanced) {
+                text(UtilsString.repeat("★", variant.rank - 1)).color(getRankColor(variant))
+            } else {
+                text(UtilsString.repeat("★", variant.rank - 1)).color(GOLD)
+            }
             if (flag.isAdvanced) text(" Rare.${variant.rare}").color(GOLD)
             if (flag.isAdvanced) text(" Rank.${variant.rank}").color(getRankColor(variant))
             text(" ${variant.type.breed?.resourcePath ?: "unknown"}").color(WHITE)
         }
 
         // マナ
+        tooltip {
+            text("Mana: ").color(AQUA)
+        }
         if (flag.isAdvanced) {
             fun f(manaType: IManaType) = buildText { format("%s:%.3f", manaType.displayName.unformattedText, variant.type.manaSet.getMana(manaType)).color(manaType.textColor) }
             tooltip {
@@ -119,7 +128,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
         fun <T> Iterable<T>.sandwich(separator: T) = mapIndexed { i, it -> if (i == 0) listOf(it) else listOf(separator, it) }.flatten()
         tooltip {
             text {
-                text("Abilities: ")
+                text("Erg: ")
                 variant.type.ergSet.entries
                         .filter { formatInt(it.power) >= 10 }
                         .sortedByDescending { it.power }
