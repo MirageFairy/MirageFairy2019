@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairy
+package miragefairy2019.modkt.modules.fairy
 
 import miragefairy2019.libkt.buildText
 import miragefairy2019.mod.ModMirageFairy2019

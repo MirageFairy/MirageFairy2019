@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.mirageflower;
 
 import miragefairy2019.mod.api.ApiMirageFlower;
-import miragefairy2019.mod.modules.fairy.FairyTypes;
+import miragefairy2019.modkt.modules.fairy.FairyTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;

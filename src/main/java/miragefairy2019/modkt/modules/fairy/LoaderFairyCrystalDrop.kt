@@ -6,8 +6,8 @@ import miragefairy2019.mod.api.fairycrystal.DropFixed
 import miragefairy2019.mod.api.fairycrystal.IDrop
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops
-import miragefairy2019.mod.modules.fairy.FairyTypes
-import miragefairy2019.mod.modules.fairy.RankedFairyTypeBundle
+import miragefairy2019.modkt.modules.fairy.FairyTypes
+import miragefairy2019.modkt.modules.fairy.RankedFairyTypeBundle
 import net.minecraft.block.*
 import net.minecraft.block.state.IBlockState
 import net.minecraft.enchantment.EnchantmentHelper

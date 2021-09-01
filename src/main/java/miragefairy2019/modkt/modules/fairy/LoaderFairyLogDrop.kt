@@ -6,8 +6,8 @@ import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionCanRain
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionHasBiomeType
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionOverworld
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRecipe
-import miragefairy2019.mod.modules.fairy.FairyTypes
-import miragefairy2019.mod.modules.fairy.RankedFairyTypeBundle
+import miragefairy2019.modkt.modules.fairy.FairyTypes
+import miragefairy2019.modkt.modules.fairy.RankedFairyTypeBundle
 import net.minecraftforge.common.BiomeDictionary
 
 val loaderFairyLogDrop: Module = {

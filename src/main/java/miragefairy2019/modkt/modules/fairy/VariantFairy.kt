@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairy
+package miragefairy2019.modkt.modules.fairy
 
 import miragefairy2019.mod.lib.multi.ItemVariant
 import miragefairy2019.modkt.impl.fairy.FairyType

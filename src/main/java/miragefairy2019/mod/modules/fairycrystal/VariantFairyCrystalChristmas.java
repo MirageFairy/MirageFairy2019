@@ -6,7 +6,7 @@ import miragefairy2019.mod.api.fairycrystal.DropFixed;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
 import miragefairy2019.mod.lib.WeightedRandom;
-import miragefairy2019.mod.modules.fairy.FairyTypes;
+import miragefairy2019.modkt.modules.fairy.FairyTypes;
 import mirrg.boron.util.UtilsFile;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
