@@ -1,7 +1,6 @@
 package miragefairy2019.mod
 
 import miragefairy2019.libkt.ModInitializer
-import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fertilizer.ApiFertilizer
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.api.materialsfairy.ApiMaterialsFairy
@@ -17,6 +16,7 @@ import miragefairy2019.mod.modules.sphere.ModuleSphere
 import miragefairy2019.modkt.impl.fairy.moduleErg
 import miragefairy2019.modkt.impl.mana.moduleMana
 import miragefairy2019.modkt.modules.artifacts.ModuleArtifacts
+import miragefairy2019.modkt.modules.fairy.ModuleFairy
 import miragefairy2019.modkt.modules.fairy.loaderFairyCrystalDrop
 import miragefairy2019.modkt.modules.fairy.loaderFairyLogDrop
 import miragefairy2019.modkt.modules.fairy.loaderFairyRelation
@@ -36,6 +36,7 @@ class InitializerMirageFairy2019 {
         modInitializer.run {
             moduleMana()
             moduleErg()
+            ModuleFairy.init(this)
             loaderFairyRelation()
             loaderFairyCrystalDrop()
             loaderFairyLogDrop()
@@ -46,7 +47,6 @@ class InitializerMirageFairy2019 {
 
         ModuleFairyStick.init(erMod)
         ApiMain.init(erMod)
-        ApiFairy.init(erMod)
         ModuleFairyCrystal.init(erMod)
         Loader.init(erMod)
         miragefairy2019.mod.modules.fairyweapon.damagesource.Loader.init(erMod)
@@ -62,6 +62,7 @@ class InitializerMirageFairy2019 {
         ModuleArtifacts.init(erMod)
 
         erMod.initRegistry.trigger().run()
+        modInitializer.onInitCreativeTab()
         erMod.initCreativeTab.trigger().run()
     }
 
@@ -69,7 +70,9 @@ class InitializerMirageFairy2019 {
         modInitializer.onPreInit(event)
         erMod.preInit.trigger().accept(event)
         val initializationContext = InitializationContext(ModMirageFairy2019.MODID, event.side, ApiMain.creativeTab())
+        modInitializer.onRegisterBlock()
         erMod.registerBlock.trigger().accept(initializationContext)
+        modInitializer.onRegisterItem()
         erMod.registerItem.trigger().accept(initializationContext)
         modInitializer.onCreateItemStack()
         erMod.createItemStack.trigger().accept(initializationContext)
@@ -80,7 +83,9 @@ class InitializerMirageFairy2019 {
     fun init(event: FMLInitializationEvent) {
         modInitializer.onInit(event)
         erMod.init.trigger().accept(event)
+        modInitializer.onAddRecipe()
         erMod.addRecipe.trigger().run()
+        if (event.side.isClient) modInitializer.onRegisterItemColorHandler()
         if (event.side.isClient) erMod.registerItemColorHandler.trigger().run()
         erMod.registerTileEntity.trigger().run()
         erMod.initNetworkChannel.trigger().run()

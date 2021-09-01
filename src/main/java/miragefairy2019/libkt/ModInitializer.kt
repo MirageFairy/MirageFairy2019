@@ -8,9 +8,14 @@ typealias Module = ModInitializer.() -> Unit
 
 class ModInitializer {
     val onInstantiation = EventRegistry0()
+    val onInitCreativeTab = EventRegistry0()
     val onPreInit = EventRegistry1<FMLPreInitializationEvent>()
+    val onRegisterBlock = EventRegistry0()
+    val onRegisterItem = EventRegistry0()
     val onCreateItemStack = EventRegistry0()
     val onInit = EventRegistry1<FMLInitializationEvent>()
+    val onAddRecipe = EventRegistry0()
+    val onRegisterItemColorHandler = EventRegistry0()
     val onPostInit = EventRegistry1<FMLPostInitializationEvent>()
 }
 
