@@ -8,9 +8,12 @@ import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.lib.multi.ItemMulti
+import miragefairy2019.mod.lib.multi.ItemVariant
 import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.api.mana.IManaType
 import miragefairy2019.modkt.api.mana.ManaTypes
+import miragefairy2019.modkt.impl.fairy.ColorSet
+import miragefairy2019.modkt.impl.fairy.FairyType
 import miragefairy2019.modkt.impl.fairy.displayName
 import miragefairy2019.modkt.impl.getMana
 import miragefairy2019.modkt.impl.mana.displayName
@@ -25,6 +28,8 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.*
+
+class VariantFairy(val id: Int, val colorSet: ColorSet, val type: FairyType, val rare: Int, val rank: Int) : ItemVariant()
 
 class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
     override fun getMirageFairy2019Fairy(itemStack: ItemStack): Optional<IFairyType> = getVariant(itemStack).map { it.type }

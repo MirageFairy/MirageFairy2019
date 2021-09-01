@@ -3,8 +3,6 @@ package miragefairy2019.modkt.modules.fairy
 import miragefairy2019.libkt.Module
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
-import miragefairy2019.modkt.modules.fairy.FairyTypes
-import miragefairy2019.modkt.modules.fairy.RankedFairyTypeBundle
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
