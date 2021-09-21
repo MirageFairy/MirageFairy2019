@@ -22,6 +22,7 @@ import miragefairy2019.modkt.modules.fairy.loaderFairyLogDrop
 import miragefairy2019.modkt.modules.fairy.loaderFairyRelation
 import miragefairy2019.modkt.modules.placeditem.ModulePlacedItem
 import miragefairy2019.modkt.modules.playeraura.ModulePlayerAura
+import miragefairy2019.modkt.modules.playeraura.modulePlayerAura
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
@@ -36,6 +37,7 @@ class InitializerMirageFairy2019 {
         modInitializer.run {
             moduleMana()
             moduleErg()
+            modulePlayerAura()
             ModuleFairy.init(this)
             loaderFairyRelation()
             loaderFairyCrystalDrop()
