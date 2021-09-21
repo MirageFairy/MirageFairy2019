@@ -16,12 +16,12 @@ val moduleMana: Module = {
             return manaType
         }
 
-        ManaTypes.shine = "shine"(0xC9FFFF, TextFormatting.WHITE)
-        ManaTypes.fire = "fire"(0xCE0000, TextFormatting.RED)
-        ManaTypes.wind = "wind"(0x00C600, TextFormatting.GREEN)
-        ManaTypes.gaia = "gaia"(0x777700, TextFormatting.YELLOW)
-        ManaTypes.aqua = "aqua"(0x0000E2, TextFormatting.BLUE)
-        ManaTypes.dark = "dark"(0x191919, TextFormatting.DARK_GRAY)
+        ManaTypes.shine = "shine"(0x007068, TextFormatting.WHITE)
+        ManaTypes.fire = "fire"(0xFF0000, TextFormatting.RED)
+        ManaTypes.wind = "wind"(0x107A00, TextFormatting.GREEN)
+        ManaTypes.gaia = "gaia"(0x664E00, TextFormatting.YELLOW)
+        ManaTypes.aqua = "aqua"(0x3535FF, TextFormatting.BLUE)
+        ManaTypes.dark = "dark"(0xB000D3, TextFormatting.DARK_GRAY)
 
         ManaTypes.values = values
     }
