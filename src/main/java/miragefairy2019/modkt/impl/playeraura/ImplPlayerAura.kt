@@ -19,6 +19,7 @@ import miragefairy2019.modkt.modules.playeraura.MessagePlayerAura
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.Item
+import net.minecraft.item.ItemFood
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -47,6 +48,9 @@ class PlayerAuraManager : IPlayerAuraManager {
     }, player)
 
     override fun getGlobalFoodAura(itemStack: ItemStack): IManaSet? {
+
+        if (itemStack.item !is ItemFood) return null // 食べ物以外は無視
+
         val listFairyRelation = ApiFairy.fairyRelationRegistry.ingredientFairyRelations.toList()
                 .filter { it.ingredient.test(itemStack) }
                 .filter { it.relevance >= 1 }

@@ -59,8 +59,6 @@ class PluginFoodAura : IModPlugin {
                 Item.REGISTRY.forEach { item ->
                     (item as Item/* これをしないと謎レシーバ解決不能がCI上で発生する */).getSubItems(creativeTab).forEach a@{ itemStack ->
 
-                        if (itemStack.item !is ItemFood) return@a // 食べ物以外は無視
-
                         val foodAura = ApiPlayerAura.playerAuraManager.getGlobalFoodAura(itemStack) ?: return@a // オーラが登録されていない食べ物は無視
 
                         if (registered.any { ItemStack.areItemStacksEqualUsingNBTShareTag(itemStack, it) }) return@a // 既に登録済みの食べ物は無視
