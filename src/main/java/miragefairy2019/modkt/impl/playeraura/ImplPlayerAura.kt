@@ -7,10 +7,7 @@ import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.modkt.api.mana.IManaSet
-import miragefairy2019.modkt.api.playeraura.IClientPlayerAuraHandler
-import miragefairy2019.modkt.api.playeraura.IPlayerAuraHandler
-import miragefairy2019.modkt.api.playeraura.IPlayerAuraManager
-import miragefairy2019.modkt.api.playeraura.IServerPlayerAuraHandler
+import miragefairy2019.modkt.api.playeraura.*
 import miragefairy2019.modkt.impl.ManaSet
 import miragefairy2019.modkt.impl.copy
 import miragefairy2019.modkt.impl.plus
@@ -112,7 +109,7 @@ class PlayerAuraModel {
 
 
     private val foods = ArrayDeque<Food>()
-    fun getFoods(): List<Food> = synchronized(lock) { foods.toList() }
+    val foodHistory get() = synchronized(lock) { foods.mapIndexed { i, food -> FoodHistoryEntry(food.itemStack, food.aura, (100 - i) / 100.0) } }
 
     // 過去100エントリーの回複分について、それ自身のオーラにその寿命割合を乗じたものの合計
     private val auraCache = ResettableProperty { foods.mapIndexed { index, food -> food.aura * ((100 - index) / 100.0) }.fold<IManaSet, IManaSet>(ManaSet.ZERO) { a, b -> a + b } * (1 / 100.0) * 8.0 }
@@ -194,6 +191,12 @@ class PlayerAuraModel {
     }
 }
 
+class FoodHistoryEntry(private val food: ItemStack, private val baseLocalFoodAura: IManaSet?, private val health: Double) : IFoodHistoryEntry {
+    override fun getFood() = food
+    override fun getBaseLocalFoodAura() = baseLocalFoodAura
+    override fun getHealth() = health
+}
+
 open class PlayerAuraHandler(protected val manager: IPlayerAuraManager,
                              protected val model: PlayerAuraModel) : IPlayerAuraHandler {
     override fun getPlayerAura() = model.aura
@@ -204,6 +207,8 @@ open class PlayerAuraHandler(protected val manager: IPlayerAuraManager,
         model2.pushFood(it, itemStack, healAmount)
         model2.aura
     }
+
+    override fun getFoodHistory() = model.foodHistory
 }
 
 class ClientPlayerAuraHandler(manager: IPlayerAuraManager,

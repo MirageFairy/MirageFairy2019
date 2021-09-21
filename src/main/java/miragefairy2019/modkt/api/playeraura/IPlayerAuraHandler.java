@@ -17,4 +17,9 @@ public interface IPlayerAuraHandler {
     @Nullable
     public IManaSet simulatePlayerAura(ItemStack itemStack, int healAmount);
 
+    /**
+     * @return 新しい順
+     */
+    public Iterable<IFoodHistoryEntry> getFoodHistory();
+
 }
