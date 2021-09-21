@@ -51,7 +51,7 @@ class PlayerAuraManager : IPlayerAuraManager {
         val listFairyRelation = ApiFairy.fairyRelationRegistry.ingredientFairyRelations.toList()
                 .filter { it.ingredient.test(itemStack) }
                 .filter { it.relevance >= 1 }
-        if (listFairyRelation.isEmpty()) return null
+        if (listFairyRelation.isEmpty()) return null // 関連付けられた妖精が居ない場合は無視
 
         val relevanceMax = listFairyRelation.map { it.relevance }.max()!!
         val listFairyRelationMax = listFairyRelation.filter { it.relevance == relevanceMax }.mapNotNull { getFairyType(it.itemStackFairy) }
@@ -112,7 +112,7 @@ class PlayerAuraModel {
     val foodHistory get() = synchronized(lock) { foods.mapIndexed { i, food -> FoodHistoryEntry(food.itemStack, food.aura, (100 - i) / 100.0) } }
 
     // 過去100エントリーの回複分について、それ自身のオーラにその寿命割合を乗じたものの合計
-    private val auraCache = ResettableProperty { foods.mapIndexed { index, food -> food.aura * ((100 - index) / 100.0) }.fold<IManaSet, IManaSet>(ManaSet.ZERO) { a, b -> a + b } * (1 / 100.0) * 8.0 }
+    private val auraCache = ResettableProperty { foods.mapIndexed { i, food -> food.aura * ((100 - i) / 100.0) }.fold<IManaSet, IManaSet>(ManaSet.ZERO) { a, b -> a + b } * (1 / 100.0) * 8.0 }
     val aura get() = synchronized(lock) { auraCache.getValue() }
 
 
