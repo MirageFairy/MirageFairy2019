@@ -73,7 +73,7 @@ class PluginMfa : IModPlugin {
                 ｿﾃﾞｨｱ「星みたいって言うかなって」
                 """
             }
-            register(fairy("magentaglazedterracotta")) {
+            register(fairy("magentaglazedterracotta"), fairy("carrot"), fairy("dispenser"), fairy("lilac")) {
                 """
                 【MFA-34681526：美術展にて】
                 ﾂｧｯﾛｰﾁｬ「大変！ﾃﾞｨｽﾍﾟﾝｾｰﾘｬが！」
@@ -129,7 +129,7 @@ class PluginMfa : IModPlugin {
                 （Σ）
                 """
             }
-            register(fairy("pufferfish")) {
+            register(fairy("pufferfish"), fairy("salmon")) {
                 """
                 【MFA-30948551：栄養満点】
                 「甘いものが恋しくなりました！」
@@ -143,7 +143,7 @@ class PluginMfa : IModPlugin {
                 ｻﾙﾓｰﾆｬ「本当に店ごと食べるんだ」
                 """
             }
-            register(fairy("bread")) {
+            register(fairy("bread"), fairy("axe"), fairy("poisonouspotato"), fairy("fire")) {
                 """
                 【MFA-43685165：闇鍋ﾊﾟｰﾃｨｰ】
                 「今日は揚げ物だよ！召し上がれ！」
@@ -157,7 +157,7 @@ class PluginMfa : IModPlugin {
                 「こ、こっち見ないで…？」
                 """
             }
-            register(item("miragium_axe")) {
+            register(item("miragium_axe"), fairy("air")) {
                 """
                 【MFA-16487544：落とし物】
                 （……）
@@ -171,7 +171,7 @@ class PluginMfa : IModPlugin {
                 ﾙﾒﾘ「あっ！」
                 """
             }
-            register(item("dish")) {
+            register(item("dish"), fairy("cake")) {
                 """
                 【MFA-46805554：クリームまみれ】
                 N-111615「そこに乗っちゃだめだよ！」
