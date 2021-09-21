@@ -262,9 +262,11 @@ val modulePlayerAura: Module = {
                     fun drawAuraGauge(center: Complex, radius: Double) {
                         drawPieces(center, radius, 1 + 0.05 + healAmount / 100.0, foodAura)
                         drawPieces(center, radius * 1.05, 0xFFFFFF)
-                        ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler.foodHistory.forEach { entry ->
+                        val foodHistory = ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler.foodHistory.toList()
+                        foodHistory.forEach { entry ->
                             drawPieces(center, radius, entry.health, entry.baseLocalFoodAura)
                         }
+                        drawPieces(center, radius * (100 - foodHistory.size) / 100.0, 0x000000)
                     }
 
                     if (player.isSneaking) {
