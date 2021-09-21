@@ -32,13 +32,15 @@ class PluginMfa : IModPlugin {
                 override fun getWidth() = 160
                 override fun getHeight() = 120
                 override fun draw(minecraft: Minecraft, xOffset: Int, yOffset: Int) {
-                    JeiUtilities.drawSlot(71f, 1f)
+                    JeiUtilities.drawSlot(1f, 1f)
+                    repeat(7) { JeiUtilities.drawSlot(33f + 18f * it, 1f) }
                 }
             }
 
             override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(Items.WRITABLE_BOOK))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
-                recipeLayout.itemStacks.init(0, true, 71, 1)
+                recipeLayout.itemStacks.init(0, true, 1, 1)
+                repeat(7) { recipeLayout.itemStacks.init(1 + it, true, 33 + 18 * it, 1) }
                 recipeLayout.itemStacks.set(ingredients)
             }
         })
@@ -46,17 +48,18 @@ class PluginMfa : IModPlugin {
 
     override fun register(registry: IModRegistry) {
         registry.addRecipes(mutableListOf<IRecipeWrapper>().apply {
-            fun register(itemStacks: List<ItemStack>, content: String) = add(object : IRecipeWrapper {
-                override fun getIngredients(ingredients: IIngredients) = ingredients.setInputLists(VanillaTypes.ITEM, listOf(itemStacks))
+            fun register(main: List<ItemStack>, vararg subs: List<ItemStack>, content: () -> String) = add(object : IRecipeWrapper {
+                override fun getIngredients(ingredients: IIngredients) = ingredients.setInputLists(VanillaTypes.ITEM, listOf(main) + (0 until 7).map { subs.getOrNull(it) ?: listOf() })
                 override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {
-                    content.trimIndent().split("\n").forEachIndexed { i, it -> minecraft.fontRenderer.drawString(it, 4, 20 + 10 * i, 0x444444) }
+                    content().trimIndent().split("\n").forEachIndexed { i, it -> minecraft.fontRenderer.drawString(it, 4, 21 + 10 * i, 0x444444) }
                 }
             })
 
-            fun oreName(oreName: String, content: () -> String) = register(OreIngredient(oreName).matchingStacks.toList(), content())
-            fun item(registerName: String, content: () -> String) = register(listOf(ItemStack(Item.getByNameOrId("${ModMirageFairy2019.MODID}:$registerName")!!)), content())
+            fun ore(oreName: String) = OreIngredient(oreName).matchingStacks.toList()
+            fun item(registerName: String) = listOf(ItemStack(Item.getByNameOrId("${ModMirageFairy2019.MODID}:$registerName")!!))
+            fun fairy(type: String) = ore("mirageFairy2019Fairy${type.take(1).toUpperCase() + type.drop(1)}Rank1")
 
-            oreName("mirageFairy2019TwinkleStone") {
+            register(ore("mirageFairy2019TwinkleStone")) {
                 """
                 【MFA-64897357：蛍】
                 ｿﾃﾞｨｱ「ほら」
@@ -70,7 +73,7 @@ class PluginMfa : IModPlugin {
                 ｿﾃﾞｨｱ「星みたいって言うかなって」
                 """
             }
-            oreName("mirageFairy2019FairyMagentaglazedterracottaRank1") {
+            register(fairy("magentaglazedterracotta")) {
                 """
                 【MFA-34681526：美術展にて】
                 ﾂｧｯﾛｰﾁｬ「大変！ﾃﾞｨｽﾍﾟﾝｾｰﾘｬが！」
@@ -84,7 +87,7 @@ class PluginMfa : IModPlugin {
                 （？）
                 """
             }
-            oreName("mirageFairy2019FairyZombieRank1") {
+            register(fairy("zombie")) {
                 """
                 【MFA-00000461：おかず】
                 ｳ˝ｪｱｰｰ「来たぞ……」
@@ -98,7 +101,7 @@ class PluginMfa : IModPlugin {
                 ｹﾞｪｪｪｪｪ「ｧﾞｴｴ！」
                 """
             }
-            oreName("mirageFairy2019FairyEndermanRank1") {
+            register(fairy("enderman")) {
                 """
                 【MFA-00169455：つかまえた】
                 人間「キミってどこから来たの？」
@@ -112,7 +115,7 @@ class PluginMfa : IModPlugin {
                 （^_^）
                 """
             }
-            oreName("mirageFairy2019FairyChickenRank1") {
+            register(fairy("chicken")) {
                 """
                 【MFA-34996052：妖精が先か？】
                 N-183207「お夕飯何にしようかしら」
@@ -126,7 +129,7 @@ class PluginMfa : IModPlugin {
                 （Σ）
                 """
             }
-            oreName("mirageFairy2019FairyPufferfishRank1") {
+            register(fairy("pufferfish")) {
                 """
                 【MFA-30948551：栄養満点】
                 「甘いものが恋しくなりました！」
@@ -140,7 +143,7 @@ class PluginMfa : IModPlugin {
                 ｻﾙﾓｰﾆｬ「本当に店ごと食べるんだ」
                 """
             }
-            oreName("mirageFairy2019FairyBreadRank1") {
+            register(fairy("bread")) {
                 """
                 【MFA-43685165：闇鍋ﾊﾟｰﾃｨｰ】
                 「今日は揚げ物だよ！召し上がれ！」
@@ -154,7 +157,7 @@ class PluginMfa : IModPlugin {
                 「こ、こっち見ないで…？」
                 """
             }
-            item("miragium_axe") {
+            register(item("miragium_axe")) {
                 """
                 【MFA-16487544：落とし物】
                 （……）
@@ -168,7 +171,7 @@ class PluginMfa : IModPlugin {
                 ﾙﾒﾘ「あっ！」
                 """
             }
-            item("dish") {
+            register(item("dish")) {
                 """
                 【MFA-46805554：クリームまみれ】
                 N-111615「そこに乗っちゃだめだよ！」
