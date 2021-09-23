@@ -2,6 +2,7 @@ package miragefairy2019.modkt.api.skill
 
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
+import miragefairy2019.libkt.buildText
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import java.io.File
@@ -38,3 +39,5 @@ class SkillContainer(private val manager: SkillManager) : ISkillContainer {
 fun ISkillContainer.getSkillLevel(mastery: IMastery): Int = getMasteryLevel(mastery) * mastery.coefficient + (mastery.parent?.let { getSkillLevel(it) } ?: 0)
 
 data class SkillModel(@Expose val masteryLevels: MutableMap<String, Int> = mutableMapOf())
+
+val IMastery.displayName get() = buildText { translate("mirageFairy2019.mastery.$name.name") }
