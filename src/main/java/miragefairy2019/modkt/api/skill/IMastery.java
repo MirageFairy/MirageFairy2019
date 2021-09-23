@@ -1,6 +1,6 @@
 package miragefairy2019.modkt.api.skill;
 
-import javax.annotation.*;
+import javax.annotation.Nullable;
 
 public interface IMastery {
 

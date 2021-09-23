@@ -1,7 +1,8 @@
 package miragefairy2019.modkt.api.skill;
 
-import net.minecraft.entity.player.*;
-import net.minecraftforge.fml.relauncher.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface ISkillManager {
 

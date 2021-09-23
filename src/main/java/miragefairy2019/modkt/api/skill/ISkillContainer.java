@@ -1,6 +1,7 @@
 package miragefairy2019.modkt.api.skill;
 
-import net.minecraft.entity.player.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 
 public interface ISkillContainer {
 
