@@ -96,7 +96,7 @@ enum class EnumMastery(private val parent: IMastery?, private val layer: Int) : 
     }
 }
 
-private class PacketSkill : IMessageHandler<MessageSkill, IMessage> {
+class PacketSkill : IMessageHandler<MessageSkill, IMessage> {
     override fun onMessage(message: MessageSkill, messageContext: MessageContext): IMessage? {
         if (messageContext.side == Side.CLIENT) {
             ApiSkill.skillManager.receive(message.json)
@@ -105,7 +105,7 @@ private class PacketSkill : IMessageHandler<MessageSkill, IMessage> {
     }
 }
 
-private class MessageSkill : IMessage {
+class MessageSkill : IMessage {
     var json: String? = null
 
     @Suppress("unused") // リフレクションで呼ばれる
