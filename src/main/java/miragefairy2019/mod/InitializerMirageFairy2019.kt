@@ -91,6 +91,7 @@ class InitializerMirageFairy2019 {
         if (event.side.isClient) erMod.registerItemColorHandler.trigger().run()
         erMod.registerTileEntity.trigger().run()
         erMod.initNetworkChannel.trigger().run()
+        modInitializer.onRegisterNetworkMessage()
         erMod.registerNetworkMessage.trigger().run()
     }
 

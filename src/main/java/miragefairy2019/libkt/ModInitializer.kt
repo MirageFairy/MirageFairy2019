@@ -15,6 +15,7 @@ class ModInitializer {
     val onCreateItemStack = EventRegistry0()
     val onInit = EventRegistry1<FMLInitializationEvent>()
     val onAddRecipe = EventRegistry0()
+    val onRegisterNetworkMessage = EventRegistry0()
     val onRegisterItemColorHandler = EventRegistry0()
     val onPostInit = EventRegistry1<FMLPostInitializationEvent>()
 }
