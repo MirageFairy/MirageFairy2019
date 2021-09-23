@@ -35,4 +35,6 @@ class SkillContainer(private val manager: SkillManager) : ISkillContainer {
     override fun setMasteryLevel(mastery: IMastery, masteryLevel: Int) = run { model.masteryLevels[mastery.name] = masteryLevel }
 }
 
+fun ISkillContainer.getSkillLevel(mastery: IMastery): Int = getMasteryLevel(mastery) * mastery.coefficient + (mastery.parent?.let { getSkillLevel(it) } ?: 0)
+
 data class SkillModel(@Expose val masteryLevels: MutableMap<String, Int> = mutableMapOf())
