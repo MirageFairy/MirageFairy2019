@@ -1,27 +1,37 @@
 package miragefairy2019.modkt.api.skill
 
 import io.netty.buffer.ByteBuf
+import miragefairy2019.jei.JeiUtilities.Companion.drawStringRightAligned
 import miragefairy2019.libkt.Module
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.main.ApiMain
+import miragefairy2019.mod3.main.registerGuiHandler
+import net.minecraft.client.gui.Gui
+import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
+import net.minecraft.inventory.Container
 import net.minecraft.item.ItemAppleGold
 import net.minecraft.item.ItemFishFood
 import net.minecraft.item.ItemSeedFood
 import net.minecraft.network.NetHandlerPlayServer
 import net.minecraft.network.PacketBuffer
+import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent
 import net.minecraftforge.event.entity.player.PlayerEvent
 import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.network.FMLNetworkEvent
+import net.minecraftforge.fml.common.network.IGuiHandler
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
+import org.lwjgl.opengl.GL11
 import java.io.File
+
+const val guiIdSkill = 2
 
 val moduleSkill: Module = {
 
@@ -69,10 +79,18 @@ val moduleSkill: Module = {
         })
     }
 
+    // スキルGUI
+    onInit {
+        registerGuiHandler(guiIdSkill, object : IGuiHandler {
+            override fun getServerGuiElement(id: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int) = ContainerSkill()
+            override fun getClientGuiElement(id: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int) = GuiSkill()
+        })
+    }
+
 }
 
 @Suppress("EnumEntryName")
-enum class EnumMastery(private val parent: IMastery?, private val layer: Int) : IMastery {
+enum class EnumMastery(private val parent: IMastery?, val layer: Int) : IMastery {
     root(null, 0),
     /**/ combat(root, 1),
     /**/ /**/ closeCombat(combat, 2),
@@ -129,6 +147,50 @@ class MessageSkill : IMessage {
         packetBuffer.writeInt(strings.size)
         strings.forEach {
             packetBuffer.writeString(it)
+        }
+    }
+}
+
+class ContainerSkill() : Container() {
+    override fun canInteractWith(playerIn: EntityPlayer) = true
+}
+
+class GuiSkill() : GuiContainer(ContainerSkill()) {
+    override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
+        drawDefaultBackground()
+        super.drawScreen(mouseX, mouseY, partialTicks)
+        val x = (width - xSize) / 2
+        val y = (height - ySize) / 2
+        if (mouseX in x + xSize - 44..x + xSize - 24 && mouseY in y + 4..y + 14) {
+            drawHoveringText(listOf("マスタリレベルはある領域に関する理解の深さです。"), mouseX, mouseY)
+        }
+        if (mouseX in x + xSize - 24..x + xSize - 4 && mouseY in y + 4..y + 14) {
+            drawHoveringText(listOf("スキルレベルは個々のアクションの強さです。"), mouseX, mouseY)
+        }
+    }
+
+    override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
+        fun drawGuiBackground(left: Int, top: Int, width: Int, height: Int) {
+            Gui.drawRect(left + 0, top + 0, left + width, top + height, 0xFF000000.toInt())
+            Gui.drawRect(left + 3, top + 3, left + width - 1, top + height - 1, 0xFF555555.toInt())
+            Gui.drawRect(left + 1, top + 1, left + 3, top + height - 1, 0xFFFFFFFF.toInt())
+            Gui.drawRect(left + 1, top + 1, left + width - 1, top + 3, 0xFFFFFFFF.toInt())
+            Gui.drawRect(left + 3, top + 3, left + width - 3, top + height - 3, 0xFFC6C6C6.toInt())
+        }
+
+        val x = (width - xSize) / 2
+        val y = (height - ySize) / 2
+        drawGuiBackground(x, y, xSize, ySize)
+    }
+
+    override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
+        fontRenderer.drawString("マスタリ名", 4, 4, 0x404040)
+        fontRenderer.drawStringRightAligned("MLv", xSize - 24, 4, 0x404040)
+        fontRenderer.drawStringRightAligned("SLv", xSize - 4, 4, 0x404040)
+        EnumMastery.values().forEachIndexed { i, it ->
+            fontRenderer.drawString(it.displayName.unformattedText, 4 + 8 * it.layer, 14 + 10 * i, 0x000000)
+            fontRenderer.drawStringRightAligned("${ApiSkill.skillManager.clientSkillContainer.getMasteryLevel(it)}", xSize - 24, 14 + 10 * i, 0x000000)
+            fontRenderer.drawStringRightAligned("${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it)}", xSize - 4, 14 + 10 * i, 0x000000)
         }
     }
 }
