@@ -13,6 +13,7 @@ import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
 import miragefairy2019.mod.modules.sphere.ModuleSphere
+import miragefairy2019.modkt.api.skill.moduleSkill
 import miragefairy2019.modkt.impl.fairy.moduleErg
 import miragefairy2019.modkt.impl.mana.moduleMana
 import miragefairy2019.modkt.modules.artifacts.ModuleArtifacts
@@ -38,6 +39,7 @@ class InitializerMirageFairy2019 {
             moduleMana()
             moduleErg()
             modulePlayerAura()
+            moduleSkill()
             ModuleFairy.init(this)
             loaderFairyRelation()
             loaderFairyCrystalDrop()
