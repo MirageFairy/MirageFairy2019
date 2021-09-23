@@ -14,6 +14,9 @@ public class ModMirageFairy2019 {
     public static final String VERSION = "{version}";
     public static final String ACCEPTABLE_REMOTE_VERSIONS = "{acceptableRemoteVersions}";
 
+    @Mod.Instance
+    public static ModMirageFairy2019 instance;
+
     private final InitializerMirageFairy2019 initializer = new InitializerMirageFairy2019();
 
     @EventHandler
