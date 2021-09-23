@@ -14,9 +14,10 @@ public interface ISkillContainer {
      */
     public void save(EntityPlayer player);
 
-    public String getJson();
-
-    public void setJson(String json);
+    /**
+     * Server World Only
+     */
+    public void send(EntityPlayerMP player);
 
     //
 

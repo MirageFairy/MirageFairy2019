@@ -17,6 +17,11 @@ public interface ISkillManager {
     public ISkillContainer getServerSkillContainer(EntityPlayer player);
 
     /**
+     * Client World Only
+     */
+    public void receive(String json);
+
+    /**
      * Server World Only
      */
     public void resetServer();
