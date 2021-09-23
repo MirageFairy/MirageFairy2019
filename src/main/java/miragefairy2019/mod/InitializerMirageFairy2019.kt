@@ -16,6 +16,7 @@ import miragefairy2019.mod.modules.sphere.ModuleSphere
 import miragefairy2019.modkt.api.skill.moduleSkill
 import miragefairy2019.modkt.impl.fairy.moduleErg
 import miragefairy2019.modkt.impl.mana.moduleMana
+import miragefairy2019.mod3.main.moduleMain
 import miragefairy2019.modkt.modules.artifacts.ModuleArtifacts
 import miragefairy2019.modkt.modules.fairy.ModuleFairy
 import miragefairy2019.modkt.modules.fairy.loaderFairyCrystalDrop
@@ -36,6 +37,7 @@ class InitializerMirageFairy2019 {
     init {
 
         modInitializer.run {
+            moduleMain()
             moduleMana()
             moduleErg()
             modulePlayerAura()
