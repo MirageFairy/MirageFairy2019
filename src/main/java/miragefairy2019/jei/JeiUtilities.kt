@@ -1,7 +1,10 @@
 package miragefairy2019.jei
 
 import miragefairy2019.libkt.Complex
+import miragefairy2019.libkt.IArgb
 import miragefairy2019.libkt.IRgb
+import miragefairy2019.libkt.RectangleInt
+import miragefairy2019.libkt.toArgb
 import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.renderer.GlStateManager
@@ -38,6 +41,29 @@ class JeiUtilities {
             tessellator.draw()
             GlStateManager.enableTexture2D()
             GlStateManager.disableBlend()
+        }
+
+        fun RectangleInt.draw(color: IArgb) = Gui.drawRect(left, top, right, bottom, color.argb)
+        fun RectangleInt.drawGuiBackground() {
+
+            // 外枠
+            draw(0xFF000000.toInt().toArgb())
+
+            // 背景
+            shrink(1).draw(0xFFC6C6C6.toInt().toArgb())
+
+            // 左上白帯
+            shrink(1, 1, 2, 0).withHeight(1).draw(0xFFFFFFFF.toInt().toArgb())
+            shrink(2, 2, 3, 0).withHeight(1).draw(0xFFFFFFFF.toInt().toArgb())
+            shrink(1, 1, 0, 2).withWidth(1).draw(0xFFFFFFFF.toInt().toArgb())
+            shrink(2, 2, 0, 3).withWidth(1).draw(0xFFFFFFFF.toInt().toArgb())
+
+            // 右下灰帯
+            shrink(2, 0, 1, 1).withHeight(-1).draw(0xFF555555.toInt().toArgb())
+            shrink(3, 0, 2, 2).withHeight(-1).draw(0xFF555555.toInt().toArgb())
+            shrink(0, 2, 1, 1).withWidth(-1).draw(0xFF555555.toInt().toArgb())
+            shrink(0, 3, 2, 2).withWidth(-1).draw(0xFF555555.toInt().toArgb())
+
         }
     }
 }
