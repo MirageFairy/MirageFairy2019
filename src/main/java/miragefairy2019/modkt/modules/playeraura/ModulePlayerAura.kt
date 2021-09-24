@@ -1,9 +1,12 @@
 package miragefairy2019.modkt.modules.playeraura
 
 import io.netty.buffer.ByteBuf
+import miragefairy2019.libkt.IRgb
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
+import miragefairy2019.libkt.times
+import miragefairy2019.libkt.toRgb
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.modkt.api.mana.IManaSet
@@ -223,13 +226,13 @@ val modulePlayerAura: Module = {
 
                     data class Complex(val re: Double, val im: Double)
 
-                    fun drawTriangle(p1: Complex, p2: Complex, p3: Complex, r: Double, g: Double, b: Double) {
+                    fun drawTriangle(p1: Complex, p2: Complex, p3: Complex, color: IRgb) {
                         val tessellator = Tessellator.getInstance()
                         val bufferbuilder = tessellator.buffer
                         GlStateManager.enableBlend()
                         GlStateManager.disableTexture2D()
                         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO)
-                        GlStateManager.color(r.toFloat(), g.toFloat(), b.toFloat(), 1f)
+                        GlStateManager.color(color.rf, color.gf, color.bf, 1f)
                         bufferbuilder.begin(GL11.GL_TRIANGLES, DefaultVertexFormats.POSITION)
                         bufferbuilder.pos(p1.re, p1.im, 0.0).endVertex()
                         bufferbuilder.pos(p2.re, p2.im, 0.0).endVertex()
@@ -243,9 +246,7 @@ val modulePlayerAura: Module = {
                             Complex(center.re, center.im),
                             Complex(center.re + cos(PI / 3 * i) * length, center.im - sin(PI / 3 * i) * length),
                             Complex(center.re + cos(PI / 3 * (i + 1)) * length, center.im - sin(PI / 3 * (i + 1)) * length),
-                            (rgb shr 16 and 255) / 255.0 * brightness,
-                            (rgb shr 8 and 255) / 255.0 * brightness,
-                            (rgb and 255) / 255.0 * brightness
+                            rgb.toRgb() * brightness.toFloat()
                     )
 
                     fun drawPieces(center: Complex, radius: Double, rgb: Int) = repeat(6) { drawPiece(center, radius, it.toDouble(), rgb, 1.0) }
