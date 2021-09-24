@@ -1,6 +1,13 @@
 package miragefairy2019.libkt
 
-data class Complex(val re: Float, val im: Float)
+import kotlin.math.roundToInt
+
+data class Complex(val re: Float, val im: Float) {
+    val rei = re.roundToInt()
+    val imi = im.roundToInt()
+    val red = re.toDouble()
+    val imd = im.toDouble()
+}
 
 operator fun Complex.plus(o: Complex) = Complex(re + o.re, im + o.im)
 operator fun Complex.minus(o: Complex) = Complex(re - o.re, im - o.im)
