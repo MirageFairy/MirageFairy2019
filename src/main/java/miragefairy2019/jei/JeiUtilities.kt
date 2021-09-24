@@ -1,8 +1,13 @@
 package miragefairy2019.jei
 
+import miragefairy2019.libkt.Complex
+import miragefairy2019.libkt.IRgb
 import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.renderer.GlStateManager
+import net.minecraft.client.renderer.Tessellator
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats
+import org.lwjgl.opengl.GL11
 
 class JeiUtilities {
     companion object {
@@ -17,6 +22,22 @@ class JeiUtilities {
             Gui.drawRect(1, 17, 18, 18, 0xFFFFFFFF.toInt())
             Gui.drawRect(17, 1, 18, 17, 0xFFFFFFFF.toInt())
             GlStateManager.popMatrix()
+        }
+
+        fun drawTriangle(p1: Complex, p2: Complex, p3: Complex, color: IRgb) {
+            val tessellator = Tessellator.getInstance()
+            val bufferbuilder = tessellator.buffer
+            GlStateManager.enableBlend()
+            GlStateManager.disableTexture2D()
+            GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO)
+            GlStateManager.color(color.rf, color.gf, color.bf, 1f)
+            bufferbuilder.begin(GL11.GL_TRIANGLES, DefaultVertexFormats.POSITION)
+            bufferbuilder.pos(p1.red, p1.imd, 0.0).endVertex()
+            bufferbuilder.pos(p2.red, p2.imd, 0.0).endVertex()
+            bufferbuilder.pos(p3.red, p3.imd, 0.0).endVertex()
+            tessellator.draw()
+            GlStateManager.enableTexture2D()
+            GlStateManager.disableBlend()
         }
     }
 }
