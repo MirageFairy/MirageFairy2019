@@ -3,6 +3,8 @@ package miragefairy2019.libkt
 import kotlin.math.roundToInt
 
 data class Complex(val re: Float, val im: Float) {
+    constructor(re: Double, im: Double) : this(re.toFloat(), im.toFloat())
+
     val rei = re.roundToInt()
     val imi = im.roundToInt()
     val red = re.toDouble()
