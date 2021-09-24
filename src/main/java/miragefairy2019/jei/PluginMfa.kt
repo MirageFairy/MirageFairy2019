@@ -10,6 +10,7 @@ import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
+import miragefairy2019.libkt.drawSlot
 import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.client.Minecraft
 import net.minecraft.init.Items
@@ -32,8 +33,8 @@ class PluginMfa : IModPlugin {
                 override fun getWidth() = 160
                 override fun getHeight() = 120
                 override fun draw(minecraft: Minecraft, xOffset: Int, yOffset: Int) {
-                    JeiUtilities.drawSlot(1f, 1f)
-                    repeat(7) { JeiUtilities.drawSlot(33f + 18f * it, 1f) }
+                    drawSlot(1f, 1f)
+                    repeat(7) { drawSlot(33f + 18f * it, 1f) }
                 }
             }
 

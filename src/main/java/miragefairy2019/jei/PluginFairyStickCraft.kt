@@ -10,7 +10,8 @@ import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
-import miragefairy2019.jei.JeiUtilities.Companion.drawStringCentered
+import miragefairy2019.libkt.drawSlot
+import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.mod.modules.fairystick.ModuleFairyStick
 import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.modkt.api.fairystickcraft.IFairyStickCraftRecipe
@@ -33,10 +34,10 @@ class PluginFairyStickCraft : IModPlugin {
                 override fun getWidth() = 18 * 9
                 override fun getHeight() = 120
                 override fun draw(minecraft: Minecraft, xOffset: Int, yOffset: Int) {
-                    (0..8).forEach { JeiUtilities.drawSlot(18f * it, 0f) }
+                    (0..8).forEach { drawSlot(18f * it, 0f) }
                     minecraft.fontRenderer.drawStringCentered("|", width / 2, 50, 0x444444)
                     minecraft.fontRenderer.drawStringCentered("""\|/""", width / 2, 50 + 10, 0x444444)
-                    (0..8).forEach { JeiUtilities.drawSlot(18f * it, 50f + 20f) }
+                    (0..8).forEach { drawSlot(18f * it, 50f + 20f) }
                 }
             }
 

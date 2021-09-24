@@ -1,10 +1,10 @@
 package miragefairy2019.modkt.api.skill
 
 import io.netty.buffer.ByteBuf
-import miragefairy2019.jei.JeiUtilities.Companion.drawGuiBackground
-import miragefairy2019.jei.JeiUtilities.Companion.drawStringRightAligned
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.RectangleInt
+import miragefairy2019.libkt.drawGuiBackground
+import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod3.main.registerGuiHandler

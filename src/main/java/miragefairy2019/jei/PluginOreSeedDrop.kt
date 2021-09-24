@@ -10,7 +10,8 @@ import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
-import miragefairy2019.jei.JeiUtilities.Companion.drawStringCentered
+import miragefairy2019.libkt.drawSlot
+import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1
 import miragefairy2019.modkt.api.oreseeddrop.ApiOreSeedDrop
@@ -32,8 +33,8 @@ class PluginOreSeedDrop : IModPlugin {
                 override fun getWidth() = 160
                 override fun getHeight() = 80
                 override fun draw(minecraft: Minecraft, xOffset: Int, yOffset: Int) {
-                    JeiUtilities.drawSlot(20f, 0f)
-                    JeiUtilities.drawSlot(120f, 0f)
+                    drawSlot(20f, 0f)
+                    drawSlot(120f, 0f)
                 }
             }
 

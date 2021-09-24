@@ -1,12 +1,12 @@
 package miragefairy2019.modkt.modules.playeraura
 
 import io.netty.buffer.ByteBuf
-import miragefairy2019.jei.JeiUtilities.Companion.drawTriangle
 import miragefairy2019.libkt.Complex
 import miragefairy2019.libkt.IRgb
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
+import miragefairy2019.libkt.drawTriangle
 import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.mod.api.main.ApiMain

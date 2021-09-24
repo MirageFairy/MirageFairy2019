@@ -10,7 +10,8 @@ import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
-import miragefairy2019.jei.JeiUtilities.Companion.drawStringCentered
+import miragefairy2019.libkt.drawSlot
+import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.getSubItems
 import miragefairy2019.modkt.api.mana.IManaType
 import miragefairy2019.modkt.api.mana.ManaTypes
@@ -21,7 +22,6 @@ import net.minecraft.client.gui.Gui
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.init.Items
 import net.minecraft.item.Item
-import net.minecraft.item.ItemFood
 import net.minecraft.item.ItemStack
 
 @JEIPlugin
@@ -39,7 +39,7 @@ class PluginFoodAura : IModPlugin {
                 override fun getWidth() = 160
                 override fun getHeight() = 20
                 override fun draw(minecraft: Minecraft, xOffset: Int, yOffset: Int) {
-                    JeiUtilities.drawSlot(1f, 1f)
+                    drawSlot(1f, 1f)
                 }
             }
 
