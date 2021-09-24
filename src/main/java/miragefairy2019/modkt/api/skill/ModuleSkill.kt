@@ -1,12 +1,13 @@
 package miragefairy2019.modkt.api.skill
 
 import io.netty.buffer.ByteBuf
+import miragefairy2019.jei.JeiUtilities.Companion.drawGuiBackground
 import miragefairy2019.jei.JeiUtilities.Companion.drawStringRightAligned
 import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod3.main.registerGuiHandler
-import net.minecraft.client.gui.Gui
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
@@ -28,7 +29,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
-import org.lwjgl.opengl.GL11
 import java.io.File
 
 const val guiIdSkill = 2
@@ -170,17 +170,9 @@ class GuiSkill() : GuiContainer(ContainerSkill()) {
     }
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
-        fun drawGuiBackground(left: Int, top: Int, width: Int, height: Int) {
-            Gui.drawRect(left + 0, top + 0, left + width, top + height, 0xFF000000.toInt())
-            Gui.drawRect(left + 3, top + 3, left + width - 1, top + height - 1, 0xFF555555.toInt())
-            Gui.drawRect(left + 1, top + 1, left + 3, top + height - 1, 0xFFFFFFFF.toInt())
-            Gui.drawRect(left + 1, top + 1, left + width - 1, top + 3, 0xFFFFFFFF.toInt())
-            Gui.drawRect(left + 3, top + 3, left + width - 3, top + height - 3, 0xFFC6C6C6.toInt())
-        }
-
         val x = (width - xSize) / 2
         val y = (height - ySize) / 2
-        drawGuiBackground(x, y, xSize, ySize)
+        RectangleInt(x, y, xSize, ySize).drawGuiBackground()
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
