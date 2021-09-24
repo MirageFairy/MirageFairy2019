@@ -1,6 +1,8 @@
 package miragefairy2019.modkt.modules.playeraura
 
 import io.netty.buffer.ByteBuf
+import miragefairy2019.jei.JeiUtilities.Companion.drawTriangle
+import miragefairy2019.libkt.Complex
 import miragefairy2019.libkt.IRgb
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.buildText
@@ -18,9 +20,6 @@ import miragefairy2019.modkt.impl.getMana
 import miragefairy2019.modkt.impl.mana.displayName
 import miragefairy2019.modkt.impl.playeraura.PlayerAuraManager
 import net.minecraft.client.Minecraft
-import net.minecraft.client.renderer.GlStateManager
-import net.minecraft.client.renderer.Tessellator
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemFood
 import net.minecraft.network.NetHandlerPlayServer
@@ -40,7 +39,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import org.lwjgl.opengl.GL11
 import java.lang.Math.sin
 import java.util.function.Consumer
 import kotlin.math.PI
@@ -223,51 +221,32 @@ val modulePlayerAura: Module = {
                         null
                     } ?: return // 食べ物を持っている場合のみ
 
-
-                    data class Complex(val re: Double, val im: Double)
-
-                    fun drawTriangle(p1: Complex, p2: Complex, p3: Complex, color: IRgb) {
-                        val tessellator = Tessellator.getInstance()
-                        val bufferbuilder = tessellator.buffer
-                        GlStateManager.enableBlend()
-                        GlStateManager.disableTexture2D()
-                        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO)
-                        GlStateManager.color(color.rf, color.gf, color.bf, 1f)
-                        bufferbuilder.begin(GL11.GL_TRIANGLES, DefaultVertexFormats.POSITION)
-                        bufferbuilder.pos(p1.re, p1.im, 0.0).endVertex()
-                        bufferbuilder.pos(p2.re, p2.im, 0.0).endVertex()
-                        bufferbuilder.pos(p3.re, p3.im, 0.0).endVertex()
-                        tessellator.draw()
-                        GlStateManager.enableTexture2D()
-                        GlStateManager.disableBlend()
-                    }
-
-                    fun drawPiece(center: Complex, length: Double, i: Double, rgb: Int, brightness: Double) = drawTriangle(
+                    fun drawPiece(center: Complex, length: Double, i: Double, rgb: IRgb, brightness: Double) = drawTriangle(
                             Complex(center.re, center.im),
                             Complex(center.re + cos(PI / 3 * i) * length, center.im - sin(PI / 3 * i) * length),
                             Complex(center.re + cos(PI / 3 * (i + 1)) * length, center.im - sin(PI / 3 * (i + 1)) * length),
-                            rgb.toRgb() * brightness.toFloat()
+                            rgb * brightness.toFloat()
                     )
 
-                    fun drawPieces(center: Complex, radius: Double, rgb: Int) = repeat(6) { drawPiece(center, radius, it.toDouble(), rgb, 1.0) }
+                    fun drawPieces(center: Complex, radius: Double, rgb: IRgb) = repeat(6) { drawPiece(center, radius, it.toDouble(), rgb, 1.0) }
 
                     fun drawPieces(center: Complex, radius: Double, health: Double, foodAura: IManaSet) {
-                        drawPiece(center, radius * health, 0.0, ManaTypes.wind.color, 0.1 * foodAura.wind)
-                        drawPiece(center, radius * health, 1.0, ManaTypes.shine.color, 0.1 * foodAura.shine)
-                        drawPiece(center, radius * health, 2.0, ManaTypes.fire.color, 0.1 * foodAura.fire)
-                        drawPiece(center, radius * health, 3.0, ManaTypes.gaia.color, 0.1 * foodAura.gaia)
-                        drawPiece(center, radius * health, 4.0, ManaTypes.dark.color, 0.1 * foodAura.dark)
-                        drawPiece(center, radius * health, 5.0, ManaTypes.aqua.color, 0.1 * foodAura.aqua)
+                        drawPiece(center, radius * health, 0.0, ManaTypes.wind.color.toRgb(), 0.1 * foodAura.wind)
+                        drawPiece(center, radius * health, 1.0, ManaTypes.shine.color.toRgb(), 0.1 * foodAura.shine)
+                        drawPiece(center, radius * health, 2.0, ManaTypes.fire.color.toRgb(), 0.1 * foodAura.fire)
+                        drawPiece(center, radius * health, 3.0, ManaTypes.gaia.color.toRgb(), 0.1 * foodAura.gaia)
+                        drawPiece(center, radius * health, 4.0, ManaTypes.dark.color.toRgb(), 0.1 * foodAura.dark)
+                        drawPiece(center, radius * health, 5.0, ManaTypes.aqua.color.toRgb(), 0.1 * foodAura.aqua)
                     }
 
                     fun drawAuraGauge(center: Complex, radius: Double) {
                         drawPieces(center, radius, 1 + 0.05 + healAmount / 100.0, foodAura)
-                        drawPieces(center, radius * 1.05, 0xFFFFFF)
+                        drawPieces(center, radius * 1.05, 0xFFFFFF.toRgb())
                         val foodHistory = ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler.foodHistory.toList()
                         foodHistory.forEach { entry ->
                             drawPieces(center, radius, entry.health, entry.baseLocalFoodAura)
                         }
-                        drawPieces(center, radius * (100 - foodHistory.size) / 100.0, 0x000000)
+                        drawPieces(center, radius * (100 - foodHistory.size) / 100.0, 0x000000.toRgb())
                     }
 
                     if (player.isSneaking) {
