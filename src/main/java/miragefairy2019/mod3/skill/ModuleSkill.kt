@@ -7,24 +7,35 @@ import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.TextAlignment
 import miragefairy2019.libkt.argb
+import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.component
 import miragefairy2019.libkt.drawGuiBackground
+import miragefairy2019.libkt.item
 import miragefairy2019.libkt.label
 import miragefairy2019.libkt.minus
 import miragefairy2019.libkt.position
 import miragefairy2019.libkt.rectangle
+import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setCustomModelResourceLocation
+import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.toArgb
 import miragefairy2019.libkt.tooltip
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.main.ApiMain
+import miragefairy2019.mod.modules.main.ModuleMain
 import miragefairy2019.mod3.main.registerGuiHandler
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.inventory.Container
+import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.network.NetHandlerPlayServer
 import net.minecraft.network.PacketBuffer
+import net.minecraft.util.ActionResult
+import net.minecraft.util.EnumActionResult
+import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerEvent
@@ -37,8 +48,12 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
 import java.io.File
+import java.util.function.Supplier
 
 const val guiIdSkill = 2
+
+lateinit var itemSkillBook: Supplier<ItemSkillBook>
+lateinit var itemAstronomicalObservationBook: Supplier<ItemAstronomicalObservationBook>
 
 val moduleSkill: Module = {
 
@@ -94,6 +109,36 @@ val moduleSkill: Module = {
         })
     }
 
+    // スキルブック
+    itemSkillBook = item({ ItemSkillBook() }, "skill_book") {
+        setUnlocalizedName("skillBook")
+        setCreativeTab { ModuleMain.creativeTab }
+        setCustomModelResourceLocation()
+    }
+
+    // 天体観測ブック
+    itemAstronomicalObservationBook = item({ ItemAstronomicalObservationBook() }, "astronomical_observation_book") {
+        setUnlocalizedName("astronomicalObservationBook")
+        setCreativeTab { ModuleMain.creativeTab }
+        setCustomModelResourceLocation()
+    }
+
+}
+
+class ItemSkillBook : Item() {
+    override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
+        if (!world.isRemote) player.openGui(ModMirageFairy2019.instance, guiIdSkill, player.world, player.position.x, player.position.y, player.position.z)
+        return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
+    }
+}
+
+class ItemAstronomicalObservationBook : Item() {
+    override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
+        if (!world.isRemote) {
+            // TODO
+        }
+        return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
+    }
 }
 
 class PacketSkill : IMessageHandler<MessageSkill, IMessage> {
