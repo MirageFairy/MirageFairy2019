@@ -1,12 +1,37 @@
 package miragefairy2019.mod.modules.ore
 
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1
-import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.*
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.APATITE_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.CINNABAR_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.FLUORITE_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.MAGNETITE_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.MOONSTONE_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.NEPHRITE_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.NETHERRACK_APATITE_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.NETHERRACK_CINNABAR_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.NETHERRACK_FLUORITE_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.NETHERRACK_MAGNETITE_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.NETHERRACK_MOONSTONE_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.NETHERRACK_SULFUR_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.PYROPE_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.SMITHSONITE_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.SULFUR_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.TOPAZ_ORE
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.TOURMALINE_ORE
 import miragefairy2019.modkt.api.oreseeddrop.ApiOreSeedDrop
 import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.*
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.COAL
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.DIAMOND
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.HORIZONTAL
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.IRON
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.LAPIS
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.LARGE
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.MEDIUM
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.POINT
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.PYRAMID
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.STAR
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.TINY
 import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedType.NETHERRACK
 import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedType.STONE
 import miragefairy2019.modkt.api.oreseeddrop.IOreSeedDropRequirement
@@ -18,7 +43,13 @@ import miragefairy2019.modkt.impl.oreseeddrop.invoke
 import miragefairy2019.modkt.impl.oreseeddrop.register
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
-import net.minecraft.init.Blocks.*
+import net.minecraft.init.Blocks.COAL_ORE
+import net.minecraft.init.Blocks.DIAMOND_ORE
+import net.minecraft.init.Blocks.EMERALD_ORE
+import net.minecraft.init.Blocks.GOLD_ORE
+import net.minecraft.init.Blocks.IRON_ORE
+import net.minecraft.init.Blocks.LAPIS_ORE
+import net.minecraft.init.Blocks.REDSTONE_ORE
 import net.minecraft.item.ItemStack
 import miragefairy2019.modkt.impl.oreseeddrop.Elements as el
 

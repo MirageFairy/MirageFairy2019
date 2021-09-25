@@ -1,8 +1,8 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.modkt.api.erg.ErgTypes;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.modkt.impl.fairy.ErgKt;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -12,7 +12,11 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
