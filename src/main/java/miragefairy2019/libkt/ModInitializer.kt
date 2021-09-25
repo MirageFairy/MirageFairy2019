@@ -1,8 +1,16 @@
 package miragefairy2019.libkt
 
+import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.api.main.ApiMain
+import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.item.Item
+import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
+import net.minecraftforge.fml.common.registry.ForgeRegistries
+import java.util.function.Supplier
 
 typealias Module = ModInitializer.() -> Unit
 
@@ -30,4 +38,28 @@ class EventRegistry1<E> {
     private val list = mutableListOf<E.() -> Unit>()
     operator fun invoke(listener: E.() -> Unit) = run { list += listener }
     operator fun invoke(event: E) = list.forEach { it(event) }
+}
+
+
+class ItemInitializer<T : Item>(val modInitializer: ModInitializer, private val sItem: () -> T) {
+    val item get() = sItem()
+}
+
+fun <T : Item> ModInitializer.item(creator: () -> T, registryName: String, block: ItemInitializer<T>.() -> Unit): Supplier<T> {
+    lateinit var item: T
+    onRegisterItem {
+        item = creator()
+        item.setRegistryName(ModMirageFairy2019.MODID, registryName)
+        ForgeRegistries.ITEMS.register(item)
+    }
+    ItemInitializer<T>(this) { item }.block()
+    return Supplier { item }
+}
+
+fun <T : Item> ItemInitializer<T>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { item.unlocalizedName = unlocalizedName }
+fun <T : Item> ItemInitializer<T>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { item.creativeTab = creativeTab() }
+fun <T : Item> ItemInitializer<T>.setCustomModelResourceLocation(metadata: Int = 0) = modInitializer.onRegisterItem {
+    if (ApiMain.side().isClient) {
+        ModelLoader.setCustomModelResourceLocation(item, metadata, ModelResourceLocation(item.registryName!!, "normal"))
+    }
 }
