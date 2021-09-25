@@ -47,3 +47,4 @@ fun ISkillContainer.getSkillLevel(mastery: IMastery): Int = getMasteryLevel(mast
 
 
 val IMastery.displayName get() = buildText { translate("mirageFairy2019.mastery.$name.name") }
+val IMastery.displayPoem get() = buildText { translate("mirageFairy2019.mastery.$name.poem") }
