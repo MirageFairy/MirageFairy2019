@@ -116,7 +116,7 @@ class BlockPlacedItem : BlockContainer(Material.CIRCUITS) {
 }
 
 class TileEntityPlacedItem : TileEntity() {
-    var itemStacks = NonNullList.withSize(1, ItemStack.EMPTY)!!
+    var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(1, ItemStack.EMPTY)
     var rotation = 0.0
     var standing = false
 

@@ -5,7 +5,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.NonNullList
 
-val ItemStack.orNull get(): ItemStack? = this?.takeIf { !it.isEmpty }
+val ItemStack.orNull get(): ItemStack? = takeIf { !it.isEmpty }
 
 fun Item.getSubItems(creativeTab: CreativeTabs): List<ItemStack> {
     val list = NonNullList.create<ItemStack>()
