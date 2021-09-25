@@ -3,9 +3,9 @@ package miragefairy2019.modkt.api.skill
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
 import miragefairy2019.libkt.buildText
-import miragefairy2019.modkt.api.skill.api.IMastery
-import miragefairy2019.modkt.api.skill.api.ISkillContainer
-import miragefairy2019.modkt.api.skill.api.ISkillManager
+import miragefairy2019.mod3.skill.api.IMastery
+import miragefairy2019.mod3.skill.api.ISkillContainer
+import miragefairy2019.mod3.skill.api.ISkillManager
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import java.io.File

@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.api.skill.api;
+package miragefairy2019.mod3.skill.api;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.relauncher.Side;
