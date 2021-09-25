@@ -54,7 +54,7 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceableBlock {
      * クリエイティブピックでの取得アイテム。
      */
     @Suppress("DEPRECATION")
-    override fun getItem(world: World, pos: BlockPos, state: IBlockState): ItemStack = (world.getTileEntity(pos) as? TileEntityDish)?.itemStack.orNull ?: super.getItem(world, pos, state)
+    override fun getItem(world: World, pos: BlockPos, state: IBlockState): ItemStack = (world.getTileEntity(pos) as? TileEntityDish)?.itemStack?.orNull ?: super.getItem(world, pos, state)
 
     /**
      * 破壊時ドロップ
