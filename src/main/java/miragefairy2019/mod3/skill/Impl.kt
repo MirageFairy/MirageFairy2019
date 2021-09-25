@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import java.io.File
 
+
 abstract class SkillManager : ISkillManager {
     private val clientSkillContainer = SkillContainer(this)
     override fun getClientSkillContainer() = clientSkillContainer
@@ -24,10 +25,13 @@ abstract class SkillManager : ISkillManager {
     abstract fun send(player: EntityPlayerMP, json: String)
 }
 
+
 class SkillContainer(private val manager: SkillManager) : ISkillContainer {
     override fun load(player: EntityPlayer) = manager.getFile(player).let { if (it.exists()) json = it.readText() else model = SkillModel() }
     override fun save(player: EntityPlayer) = manager.getFile(player).also { it.parentFile.mkdirs() }.writeText(json)
     override fun send(player: EntityPlayerMP) = manager.send(player, json)
+
+    data class SkillModel(@Expose val masteryLevels: MutableMap<String, Int> = mutableMapOf())
 
     private val gson = GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create()!!
     private var model = SkillModel()
@@ -41,6 +45,5 @@ class SkillContainer(private val manager: SkillManager) : ISkillContainer {
 
 fun ISkillContainer.getSkillLevel(mastery: IMastery): Int = getMasteryLevel(mastery) * mastery.coefficient + (mastery.parent?.let { getSkillLevel(it) } ?: 0)
 
-data class SkillModel(@Expose val masteryLevels: MutableMap<String, Int> = mutableMapOf())
 
 val IMastery.displayName get() = buildText { translate("mirageFairy2019.mastery.$name.name") }
