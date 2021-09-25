@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.api.skill;
+package miragefairy2019.modkt.api.skill.api;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

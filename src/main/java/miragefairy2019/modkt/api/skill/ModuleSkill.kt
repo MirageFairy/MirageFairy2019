@@ -8,6 +8,8 @@ import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod3.main.registerGuiHandler
+import miragefairy2019.modkt.api.skill.api.ApiSkill
+import miragefairy2019.modkt.api.skill.api.IMastery
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
