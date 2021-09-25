@@ -7,7 +7,11 @@ import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.modkt.api.mana.IManaSet
-import miragefairy2019.modkt.api.playeraura.*
+import miragefairy2019.modkt.api.playeraura.IClientPlayerAuraHandler
+import miragefairy2019.modkt.api.playeraura.IFoodHistoryEntry
+import miragefairy2019.modkt.api.playeraura.IPlayerAuraHandler
+import miragefairy2019.modkt.api.playeraura.IPlayerAuraManager
+import miragefairy2019.modkt.api.playeraura.IServerPlayerAuraHandler
 import miragefairy2019.modkt.impl.ManaSet
 import miragefairy2019.modkt.impl.copy
 import miragefairy2019.modkt.impl.plus

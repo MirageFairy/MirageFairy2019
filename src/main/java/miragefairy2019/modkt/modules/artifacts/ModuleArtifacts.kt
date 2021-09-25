@@ -1,6 +1,10 @@
 package miragefairy2019.modkt.modules.artifacts
 
-import miragefairy2019.libkt.*
+import miragefairy2019.libkt.block
+import miragefairy2019.libkt.invoke
+import miragefairy2019.libkt.item
+import miragefairy2019.libkt.tileEntity
+import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.EventRegistryMod

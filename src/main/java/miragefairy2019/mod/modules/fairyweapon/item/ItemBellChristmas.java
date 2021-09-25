@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.api.fairy.ApiFairy;
-import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaSelectEntry;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
@@ -10,6 +9,7 @@ import miragefairy2019.mod.modules.fairyweapon.magic.MagicExecutor;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace;
 import miragefairy2019.modkt.api.erg.ErgTypes;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;

@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairy.registry;
 
-import miragefairy2019.modkt.api.fairy.IFairyType;
 import miragefairy2019.mod.api.fairy.registry.IFairyRecord;
+import miragefairy2019.modkt.api.fairy.IFairyType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 

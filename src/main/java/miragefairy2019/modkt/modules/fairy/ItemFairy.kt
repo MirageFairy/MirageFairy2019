@@ -23,7 +23,16 @@ import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
 import net.minecraft.util.text.TextComponentString
-import net.minecraft.util.text.TextFormatting.*
+import net.minecraft.util.text.TextFormatting.AQUA
+import net.minecraft.util.text.TextFormatting.BLUE
+import net.minecraft.util.text.TextFormatting.DARK_GRAY
+import net.minecraft.util.text.TextFormatting.DARK_PURPLE
+import net.minecraft.util.text.TextFormatting.GOLD
+import net.minecraft.util.text.TextFormatting.GREEN
+import net.minecraft.util.text.TextFormatting.LIGHT_PURPLE
+import net.minecraft.util.text.TextFormatting.RED
+import net.minecraft.util.text.TextFormatting.WHITE
+import net.minecraft.util.text.TextFormatting.YELLOW
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly

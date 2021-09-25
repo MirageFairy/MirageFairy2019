@@ -5,13 +5,13 @@ import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.erg.ErgTypes.fell
 import miragefairy2019.modkt.api.erg.ErgTypes.knowledge
-import miragefairy2019.modkt.impl.fairy.erg
-import miragefairy2019.modkt.impl.fairy.mana
 import miragefairy2019.modkt.api.magic.IMagicHandler
 import miragefairy2019.modkt.api.magicstatus.IMagicStatus
 import miragefairy2019.modkt.api.mana.ManaTypes
 import miragefairy2019.modkt.api.mana.ManaTypes.dark
 import miragefairy2019.modkt.api.mana.ManaTypes.shine
+import miragefairy2019.modkt.impl.fairy.erg
+import miragefairy2019.modkt.impl.fairy.mana
 import miragefairy2019.modkt.impl.magicstatus.negative
 import miragefairy2019.modkt.impl.magicstatus.positive
 import miragefairy2019.modkt.impl.magicstatus.positiveBoolean

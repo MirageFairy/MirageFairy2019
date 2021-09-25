@@ -3,8 +3,8 @@ package miragefairy2019.mod.modules.fairyweapon.item
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
 import miragefairy2019.mod.api.fairy.ApiFairy
-import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.mod.api.main.ApiMain
+import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.api.magic.IMagicHandler
 import miragefairy2019.modkt.api.magicstatus.IMagicStatus
 import miragefairy2019.modkt.api.magicstatus.IMagicStatusFormatter
@@ -22,7 +22,9 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.util.text.ITextComponent
-import net.minecraft.util.text.TextFormatting.*
+import net.minecraft.util.text.TextFormatting.BLUE
+import net.minecraft.util.text.TextFormatting.RED
+import net.minecraft.util.text.TextFormatting.WHITE
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly

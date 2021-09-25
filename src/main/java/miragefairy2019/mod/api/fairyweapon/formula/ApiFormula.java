@@ -1,7 +1,23 @@
 package miragefairy2019.mod.api.fairyweapon.formula;
 
 import miragefairy2019.mod.modules.fairyweapon.critical.CriticalRate;
-import miragefairy2019.mod.modules.fairyweapon.formula.*;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaBooleanGreaterThanEqualFormulaDoubleDouble;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaConstantDouble;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaConstantObject;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleAbility;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleAddFormulas;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleCost;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleDoublePowFormula;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleFormulaAddDouble;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleFormulaMulDouble;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleFormulaPowDouble;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMana;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMaxFormulaDouble;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMinFormulaDouble;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMulFormulas;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaIntegerRoundFormulaDouble;
+import miragefairy2019.mod.modules.fairyweapon.formula.FormulaSelectEntry;
+import miragefairy2019.mod.modules.fairyweapon.formula.MagicStatus;
 import miragefairy2019.modkt.api.erg.IErgType;
 import miragefairy2019.modkt.api.mana.IManaType;
 import miragefairy2019.modkt.api.mana.ManaTypes;

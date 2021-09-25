@@ -1,6 +1,11 @@
 package miragefairy2019.colormaker;
 
-import miragefairy2019.colormaker.core.*;
+import miragefairy2019.colormaker.core.ColorConstants;
+import miragefairy2019.colormaker.core.ColorIdentifier;
+import miragefairy2019.colormaker.core.ImageLayer;
+import miragefairy2019.colormaker.core.ImageLoader;
+import miragefairy2019.colormaker.core.LabelImage;
+import miragefairy2019.colormaker.core.PanelColorSlider;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Tuple3;
 import mirrg.boron.util.suppliterator.ISuppliterator;

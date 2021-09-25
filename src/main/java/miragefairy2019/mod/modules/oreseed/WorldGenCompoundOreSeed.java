@@ -1,6 +1,13 @@
 package miragefairy2019.mod.modules.oreseed;
 
-import miragefairy2019.mod.modules.oreseed.worldgen.*;
+import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedCube;
+import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedHorizontal;
+import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedPoint;
+import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedPyramid;
+import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedRing;
+import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedStar;
+import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedString;
+import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedVertical;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
