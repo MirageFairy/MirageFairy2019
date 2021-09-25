@@ -34,6 +34,8 @@ fun rgb(rgb: Int) = object : IRgb {
     override val bf by lazy { b / 255f }
 }
 
+fun rgb(rgb: Long) = rgb(rgb.toInt())
+
 fun argb(argb: Int) = object : IArgb {
     override val argb = argb
     override val a by lazy { argb shr 24 and 0xFF }
@@ -45,6 +47,8 @@ fun argb(argb: Int) = object : IArgb {
     override val gf by lazy { g / 255f }
     override val bf by lazy { b / 255f }
 }
+
+fun argb(argb: Long) = argb(argb.toInt())
 
 fun rgb(r: Int, g: Int, b: Int) = object : IRgb {
     override val rgb by lazy { (r.coerceIn(0, 255) shl 16) or (g.coerceIn(0, 255) shl 8) or b.coerceIn(0, 255) }
@@ -93,6 +97,8 @@ fun argb(af: Float, rf: Float, gf: Float, bf: Float) = object : IArgb {
 
 fun Int.toRgb() = rgb(this)
 fun Int.toArgb() = argb(this)
+fun Long.toRgb() = rgb(this)
+fun Long.toArgb() = argb(this)
 fun IArgb.toRgb() = rgb(argb)
 fun IRgb.toArgb(a: Int) = argb(a, r, g, b)
 operator fun IRgb.times(x: Float) = rgb(rf * x, gf * x, bf * x)
