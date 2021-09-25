@@ -158,10 +158,10 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
                 label(::fontRenderer, it.displayName.unformattedText, color = 0xFF000000.toArgb())
                 tooltip(it.displayPoem.unformattedText)
             }
-            components += component(RectangleInt(xSize - 24, 14 + 10 * i, 20, 10)) {
+            components += component(RectangleInt(xSize - 44, 14 + 10 * i, 20, 10)) {
                 label(::fontRenderer, "${ApiSkill.skillManager.clientSkillContainer.getMasteryLevel(it)}", color = 0xFF000000.toArgb(), align = TextAlignment.RIGHT)
             }
-            components += component(RectangleInt(xSize - 4, 14 + 10 * i, 20, 10)) {
+            components += component(RectangleInt(xSize - 24, 14 + 10 * i, 20, 10)) {
                 label(::fontRenderer, "${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it)}", color = 0xFF000000.toArgb(), align = TextAlignment.RIGHT)
             }
         }
