@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.api.skill
+package miragefairy2019.mod3.skill
 
 import io.netty.buffer.ByteBuf
 import miragefairy2019.libkt.Component
@@ -18,7 +18,6 @@ import miragefairy2019.libkt.tooltip
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod3.main.registerGuiHandler
-import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
