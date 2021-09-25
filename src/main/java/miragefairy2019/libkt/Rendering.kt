@@ -7,8 +7,12 @@ import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats
 import org.lwjgl.opengl.GL11
 
+fun FontRenderer.drawString(text: String, rectangle: RectangleInt, color: Int) = drawString(text, rectangle.left, rectangle.middle - FONT_HEIGHT / 2, color)
 fun FontRenderer.drawStringRightAligned(text: String, x: Int, y: Int, color: Int) = drawString(text, x - getStringWidth(text), y, color)
+fun FontRenderer.drawStringRightAligned(text: String, rectangle: RectangleInt, color: Int) = drawStringRightAligned(text, rectangle.right, rectangle.middle - FONT_HEIGHT / 2, color)
 fun FontRenderer.drawStringCentered(text: String, x: Int, y: Int, color: Int) = drawString(text, x - getStringWidth(text) / 2, y, color)
+fun FontRenderer.drawStringCentered(text: String, rectangle: RectangleInt, color: Int) = drawStringCentered(text, rectangle.center, rectangle.middle - FONT_HEIGHT / 2, color)
+
 fun drawSlot(x: Float, y: Float) {
     GlStateManager.pushMatrix()
     GlStateManager.translate(x, y, 0f)
