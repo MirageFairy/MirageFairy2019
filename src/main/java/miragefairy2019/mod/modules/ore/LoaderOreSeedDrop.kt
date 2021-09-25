@@ -44,7 +44,7 @@ object LoaderOreSeedDrop {
 
             fun ore1(variant: EnumVariantOre1) = Pair({ ModuleOre.blockOre1.getState(variant) }, { ItemStack(ModuleOre.blockOre1, 1, variant.metadata) })
             fun ore2(variant: EnumVariantOre2) = Pair({ ModuleOre.blockOre2.getState(variant) }, { ItemStack(ModuleOre.blockOre2, 1, variant.metadata) })
-            fun block(block: Block, meta: Int = 0) = Pair({ block.defaultState }, { ItemStack(block) })
+            fun block(block: Block, meta: Int = 0) = Pair({ block.defaultState }, { ItemStack(block, 1, meta) })
 
             fun OreSeedDropRegistryScope.TypedOreSeedDropRegistryScope.vein(shape: EnumOreSeedShape, weight: Double, output: Pair<() -> IBlockState, () -> ItemStack>, vararg generationConditions: IOreSeedDropRequirement) {
                 registry.register(type, POINT, weight / 2, output, *generationConditions)
