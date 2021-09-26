@@ -1,6 +1,5 @@
 package miragefairy2019.mod3.skill
 
-import io.netty.buffer.ByteBuf
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.item
@@ -17,7 +16,6 @@ import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.network.NetHandlerPlayServer
-import net.minecraft.network.PacketBuffer
 import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
@@ -28,9 +26,6 @@ import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.network.FMLNetworkEvent
 import net.minecraftforge.fml.common.network.IGuiHandler
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
 import java.io.File
 import java.util.function.Supplier
@@ -123,42 +118,5 @@ class ItemAstronomicalObservationBook : Item() {
             // TODO
         }
         return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
-    }
-}
-
-class PacketSkill : IMessageHandler<MessageSkill, IMessage> {
-    override fun onMessage(message: MessageSkill, messageContext: MessageContext): IMessage? {
-        if (messageContext.side == Side.CLIENT) {
-            ApiSkill.skillManager.receive(message.json)
-        }
-        return null
-    }
-}
-
-class MessageSkill : IMessage {
-    var json: String? = null
-
-    @Suppress("unused") // リフレクションで呼ばれる
-    constructor()
-
-    constructor(json: String) {
-        this.json = json
-    }
-
-    override fun fromBytes(buf: ByteBuf) {
-        val packetBuffer = PacketBuffer(buf)
-        val size = packetBuffer.readInt()
-        json = (0 until size).joinToString("") { packetBuffer.readString(10000) }
-    }
-
-    override fun toBytes(buf: ByteBuf) {
-        val json = this.json!!
-        if (json.length > 1_000_000) throw Exception("Too long json: ${json.length}")
-        val strings = json.chunked(10000)
-        val packetBuffer = PacketBuffer(buf)
-        packetBuffer.writeInt(strings.size)
-        strings.forEach {
-            packetBuffer.writeString(it)
-        }
     }
 }
