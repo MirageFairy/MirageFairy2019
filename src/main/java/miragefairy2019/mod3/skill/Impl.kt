@@ -6,9 +6,11 @@ import miragefairy2019.libkt.buildText
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.api.ISkillContainer
 import miragefairy2019.mod3.skill.api.ISkillManager
+import miragefairy2019.mod3.skill.api.ISkillVariables
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import java.io.File
+import java.time.Instant
 
 
 abstract class SkillManager : ISkillManager {
@@ -31,19 +33,37 @@ class SkillContainer(private val manager: SkillManager) : ISkillContainer {
     override fun save(player: EntityPlayer) = manager.getFile(player).also { it.parentFile.mkdirs() }.writeText(json)
     override fun send(player: EntityPlayerMP) = manager.send(player, json)
 
-    data class SkillModel(@Expose val masteryLevels: MutableMap<String, Int> = mutableMapOf())
 
     private val gson = GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create()!!
-    private var model = SkillModel()
     var json: String
         get() = gson.toJson(model)
         set(json) = run { model = gson.fromJson(json, SkillModel::class.java) }
 
-    override fun getMasteryLevel(mastery: IMastery) = model.masteryLevels[mastery.name] ?: 0
-    override fun setMasteryLevel(mastery: IMastery, masteryLevel: Int) = run { model.masteryLevels[mastery.name] = masteryLevel }
+    private var model = SkillModel()
+
+
+    override fun getMasteryLevel(mastery: IMastery) = model.getMasteryLevels()[mastery.name] ?: 0
+    override fun setMasteryLevel(mastery: IMastery, masteryLevel: Int) = run { model.getMasteryLevels()[mastery.name] = masteryLevel }
+
+    override fun getVariables(): ISkillVariables = model.getVariables()
 }
 
 fun ISkillContainer.getSkillLevel(mastery: IMastery): Int = getMasteryLevel(mastery) * mastery.coefficient + (mastery.parent?.let { getSkillLevel(it) } ?: 0)
+
+data class SkillModel(
+        @[JvmField Expose] var masteryLevels: MutableMap<String, Int>? = null,
+        @[JvmField Expose] var variables: SkillVariables? = null
+) {
+    fun getMasteryLevels() = masteryLevels ?: mutableMapOf<String, Int>().also { masteryLevels = it }
+    fun getVariables() = variables ?: SkillVariables().also { variables = it }
+}
+
+data class SkillVariables(
+        @[JvmField Expose] var lastAstronomicalObservationTime: Long? = null
+) : ISkillVariables {
+    override fun getLastAstronomicalObservationTime() = lastAstronomicalObservationTime?.let { Instant.ofEpochMilli(it) }
+    override fun setLastAstronomicalObservationTime(it: Instant?) = run { lastAstronomicalObservationTime = it?.toEpochMilli() }
+}
 
 
 val IMastery.displayName get() = buildText { translate("mirageFairy2019.mastery.$name.name") }

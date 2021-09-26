@@ -26,4 +26,6 @@ public interface ISkillContainer {
 
     public void setMasteryLevel(IMastery mastery, int masteryLevel);
 
+    public ISkillVariables getVariables();
+
 }
