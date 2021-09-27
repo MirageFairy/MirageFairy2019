@@ -24,6 +24,13 @@ mirageFairy2019.magic.status.chargeTime.name=Charge Time
 
 miragefairy2019.placeItem=Place Item
 
+
+miragefairy2019.gui.duration.days=days
+miragefairy2019.gui.duration.hours=hours
+miragefairy2019.gui.duration.minutes=minutes
+miragefairy2019.gui.duration.seconds=seconds
+miragefairy2019.gui.duration.milliSeconds=milli seconds
+
 miragefairy2019.gui.playerAura.title=Player Aura
 miragefairy2019.gui.playerAura.poem.step1=It's an appetizing scent.
 miragefairy2019.gui.playerAura.poem.step2=It's a familiar taste.

@@ -414,6 +414,13 @@ mirageFairy2019.magic.status.chargeTime.name=チャージタイム
 
 miragefairy2019.placeItem=アイテムを置く
 
+
+miragefairy2019.gui.duration.days=日
+miragefairy2019.gui.duration.hours=時間
+miragefairy2019.gui.duration.minutes=分
+miragefairy2019.gui.duration.seconds=秒
+miragefairy2019.gui.duration.milliSeconds=ミリ秒
+
 miragefairy2019.gui.playerAura.title=プレイヤーオーラ
 miragefairy2019.gui.playerAura.poem.step1=食欲をそそられる香りだ
 miragefairy2019.gui.playerAura.poem.step2=食べ慣れた味だ
