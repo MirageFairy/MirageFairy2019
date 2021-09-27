@@ -5,6 +5,10 @@ import java.time.Instant;
 
 public interface ISkillVariables {
 
+    public int getExp();
+
+    public void setExp(int exp);
+
     @Nullable
     public Instant getLastAstronomicalObservationTime();
 
