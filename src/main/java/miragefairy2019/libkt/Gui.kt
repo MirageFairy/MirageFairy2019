@@ -18,6 +18,7 @@ class EventContainer<T> {
 class Component(val container: GuiContainer, val rectangle: RectangleInt) {
     val onScreenDraw = EventContainer<(mouse: PointInt, partialTicks: Float) -> Unit>()
     val onForegroundDraw = EventContainer<(mouse: PointInt) -> Unit>()
+    val onMouseClicked = EventContainer<(mouse: PointInt, mouseButton: Int) -> Unit>()
 }
 
 fun GuiContainer.component(rectangle: RectangleInt, block: Component.() -> Unit) = Component(this, rectangle).apply { block() }
@@ -26,16 +27,22 @@ fun GuiContainer.component(rectangle: RectangleInt, block: Component.() -> Unit)
 enum class TextAlignment { LEFT, CENTER, RIGHT }
 
 
-fun Component.label(sFontRenderer: () -> FontRenderer, text: String, color: IArgb = 0xFF000000.toArgb(), align: TextAlignment = TextAlignment.LEFT) {
+fun Component.label(sFontRenderer: () -> FontRenderer, color: IArgb = 0xFF000000.toArgb(), align: TextAlignment = TextAlignment.LEFT, getText: () -> String) {
     onForegroundDraw {
         when (align) {
-            TextAlignment.LEFT -> sFontRenderer().drawString(text, rectangle, color.argb)
-            TextAlignment.CENTER -> sFontRenderer().drawStringCentered(text, rectangle, color.argb)
-            TextAlignment.RIGHT -> sFontRenderer().drawStringRightAligned(text, rectangle, color.argb)
+            TextAlignment.LEFT -> sFontRenderer().drawString(getText(), rectangle, color.argb)
+            TextAlignment.CENTER -> sFontRenderer().drawStringCentered(getText(), rectangle, color.argb)
+            TextAlignment.RIGHT -> sFontRenderer().drawStringRightAligned(getText(), rectangle, color.argb)
         }
     }
 }
 
-fun Component.tooltip(text: String) = onScreenDraw { mouse, _ ->
-    if (mouse in rectangle) container.drawHoveringText(listOf(text), mouse.x + container.x, mouse.y + container.y)
+fun Component.tooltip(vararg text: String) = tooltip { listOf(*text) }
+
+fun Component.tooltip(getText: () -> List<String>) = onScreenDraw { mouse, _ ->
+    if (mouse in rectangle) container.drawHoveringText(getText(), mouse.x + container.x, mouse.y + container.y)
 }
+
+fun Component.button(onClick: (mouseButton: Int) -> Unit) = onMouseClicked { mouse, mouseButton ->
+    if (mouse in rectangle) onClick(mouseButton)
+} // TODO 枠
