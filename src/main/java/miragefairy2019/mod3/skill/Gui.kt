@@ -62,6 +62,12 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
         }
         components += component(RectangleInt(xSize - 34, 4, 30, 10)) {
             button {
+                if (skillContainer.canResetMastery(Instant.now()) && skillContainer.usedSkillPoints > 0) {
+                    mc.displayGuiScreen(GuiYesNo({ result, _ ->
+                        mc.displayGuiScreen(this@GuiSkill)
+                        if (result) ApiMain.simpleNetworkWrapper.sendToServer(MessageResetMastery())
+                    }, "マスタリレベル初期化", "すべてのマスタリのレベルをリセットし、スキルポイントに戻しますか？\nこの操作は毎月1度だけ実行できます。", 0)) // TODO translate
+                }
             }
             // TODO クリックできないときは灰色にする
             label(::fontRenderer, color = 0xFF0000FF.toArgb(), align = TextAlignment.CENTER) { "初期化" } // TODO translate
@@ -102,6 +108,9 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
             }
             components += component(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
                 button {
+                    if (skillContainer.remainingSkillPoints > 0) {
+                        ApiMain.simpleNetworkWrapper.sendToServer(MessageTrainMastery(mastery.name))
+                    }
                 }
                 // TODO ホバーで影響するマスタリのレベルを緑色に光らせつつ実行後の値を表示
                 label(::fontRenderer, color = 0xFF0000FF.toArgb(), align = TextAlignment.CENTER) { "*" } // TODO icon
