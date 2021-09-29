@@ -1,8 +1,15 @@
 package miragefairy2019.libkt
 
+import kotlin.math.cos
 import kotlin.math.roundToInt
+import kotlin.math.sin
 
 data class Complex(val re: Float, val im: Float) {
+    companion object {
+        fun ofPolar(abs: Float, arg: Float) = Complex(abs * cos(arg), abs * sin(arg))
+        fun ofPolar(abs: Double, arg: Double) = Complex(abs * cos(arg), abs * sin(arg))
+    }
+
     constructor(re: Double, im: Double) : this(re.toFloat(), im.toFloat())
 
     val rei = re.roundToInt()
