@@ -27,4 +27,8 @@ public interface ISkillManager {
      */
     public void resetServer();
 
+    public int getFairyMasterExp(int lv);
+
+    public int getFairyMasterLevel(int exp);
+
 }

@@ -11,6 +11,8 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import java.io.File
 import java.time.Instant
+import kotlin.math.roundToInt
+import kotlin.math.sqrt
 
 
 abstract class SkillManager : ISkillManager {
@@ -25,6 +27,10 @@ abstract class SkillManager : ISkillManager {
 
     abstract fun getFile(player: EntityPlayer): File
     abstract fun send(player: EntityPlayerMP, json: String)
+
+    override fun getFairyMasterExp(lv: Int) = 5 * lv * (lv + 1) / 2
+    private fun getInaccurateFairyMasterLevel(exp: Int) = (1.0 / 10.0) * (sqrt(5.0) * sqrt(8.0 * exp.toDouble() + 5.0) - 5.0)
+    override fun getFairyMasterLevel(exp: Int) = getInaccurateFairyMasterLevel(exp).roundToInt().let { if (exp < getFairyMasterExp(it)) it - 1 else it }
 }
 
 
