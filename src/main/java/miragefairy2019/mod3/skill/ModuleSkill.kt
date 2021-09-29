@@ -49,7 +49,7 @@ val moduleSkill: Module = {
 
     // ネットワークメッセージ登録
     onRegisterNetworkMessage {
-        ApiMain.simpleNetworkWrapper.registerMessage(PacketSkill::class.java, MessageSkill::class.java, 2, Side.CLIENT)
+        ApiMain.simpleNetworkWrapper.registerMessage(PacketSkill::class.java, MessageSkill::class.java, discriminatorSkill, Side.CLIENT)
     }
 
     onInit {
