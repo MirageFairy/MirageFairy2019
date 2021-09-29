@@ -60,7 +60,9 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
         components.forEach { it.onScreenDraw.fire { it(PointInt(mouseX, mouseY) - position, partialTicks) } }
     }
 
-    override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) = rectangle.drawGuiBackground()
+    override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
+        rectangle.drawGuiBackground()
+    }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         components.forEach { it.onForegroundDraw.fire { it(PointInt(mouseX, mouseY) - position) } }
