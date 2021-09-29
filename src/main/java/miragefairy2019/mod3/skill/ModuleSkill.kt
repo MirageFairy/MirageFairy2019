@@ -1,7 +1,6 @@
 package miragefairy2019.mod3.skill
 
 import miragefairy2019.libkt.Module
-import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -13,12 +12,7 @@ import miragefairy2019.mod3.main.registerGuiHandler
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
 import net.minecraft.network.NetHandlerPlayServer
-import net.minecraft.util.ActionResult
-import net.minecraft.util.EnumActionResult
-import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerEvent
@@ -97,20 +91,4 @@ val moduleSkill: Module = {
         setCustomModelResourceLocation()
     }
 
-}
-
-class ItemSkillBook : Item() {
-    override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
-        if (!world.isRemote) player.openGui(ModMirageFairy2019.instance, guiIdSkill, player.world, player.position.x, player.position.y, player.position.z)
-        return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
-    }
-}
-
-class ItemAstronomicalObservationBook : Item() {
-    override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
-        if (!world.isRemote) {
-            // TODO
-        }
-        return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
-    }
 }
