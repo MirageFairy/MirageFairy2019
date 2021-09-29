@@ -33,6 +33,8 @@ abstract class SkillManager : ISkillManager {
     override fun getFairyMasterLevel(exp: Int) = getInaccurateFairyMasterLevel(exp).roundToInt().let { if (exp < getFairyMasterExp(it)) it - 1 else it }
 }
 
+fun ISkillManager.getRequiredFairyMasterExpForNextLevel(exp: Int) = getFairyMasterExp(getFairyMasterLevel(exp) + 1) - exp
+
 
 class SkillContainer(private val manager: SkillManager) : ISkillContainer {
     override fun load(player: EntityPlayer) = manager.getFile(player).let { if (it.exists()) json = it.readText() else model = SkillModel() }
