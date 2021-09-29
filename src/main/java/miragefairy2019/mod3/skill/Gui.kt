@@ -100,6 +100,7 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
                 label(::fontRenderer, color = 0xFF000000.toArgb()) { mastery.displayName.unformattedText }
                 tooltip(mastery.displayPoem.unformattedText)
             }
+            // TODO SP→SLv効率表示
             components += component(RectangleInt(xSize - 54, 24 + 10 * i, 20, 10)) {
                 label(::fontRenderer, color = 0xFF000000.toArgb(), align = TextAlignment.RIGHT) { "${skillContainer.getMasteryLevel(mastery.name)}" }
             }
