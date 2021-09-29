@@ -235,3 +235,6 @@ fluid.mirage_flower_oil=Mirage Oil
 tile.mirageFlowerOil.name=Mirage Oil
 
 tile.dish.name=Dish
+
+item.skillBook.name=Skill Book
+item.astronomicalObservationBook.name=Astronomical Observation Book

@@ -235,3 +235,6 @@ fluid.mirage_flower_oil=ミラージュオイル
 tile.mirageFlowerOil.name=ミラージュオイル
 
 tile.dish.name=皿
+
+item.skillBook.name=スキルブック
+item.astronomicalObservationBook.name=天体観測ブック

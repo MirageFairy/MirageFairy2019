@@ -37,3 +37,17 @@ miragefairy2019.gui.playerAura.poem.step2=食べ慣れた味だ
 miragefairy2019.gui.playerAura.poem.step3=この味にも飽きてきたな…
 miragefairy2019.gui.playerAura.poem.step4=栄養が偏り気味だ…
 miragefairy2019.gui.playerAura.poem.step5=そろそろ他のものが食べたい…
+
+miragefairy2019.gui.astronomicalObservation.title=天体観測クエスト
+miragefairy2019.gui.astronomicalObservation.daily=日間
+miragefairy2019.gui.astronomicalObservation.weekly=週間
+miragefairy2019.gui.astronomicalObservation.monthly=月間
+miragefairy2019.gui.astronomicalObservation.impossible=不可能
+miragefairy2019.gui.astronomicalObservation.incomplete=未完了
+miragefairy2019.gui.astronomicalObservation.completed=完了
+miragefairy2019.gui.astronomicalObservation.usage=天体観測を行うには、天体観測ブックを太陽もしくは月に向かって右クリック長押しします。
+miragefairy2019.gui.astronomicalObservation.message.remaining=残り %s で更新
+miragefairy2019.gui.astronomicalObservation.message.completed=完了！
+miragefairy2019.gui.astronomicalObservation.message.gainExp=%s のフェアリーマスター経験値を獲得しました！
+miragefairy2019.gui.astronomicalObservation.message.gainLevel=フェアリーマスターレベルが %s 上昇しました！
+miragefairy2019.gui.astronomicalObservation.message.doNothing=特筆すべき変化は見られなかった…
