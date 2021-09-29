@@ -2,7 +2,10 @@ package miragefairy2019.mod3.skill
 
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
+import miragefairy2019.libkt.atMonthStart
 import miragefairy2019.libkt.buildText
+import miragefairy2019.libkt.toInstant
+import miragefairy2019.libkt.toLocalDateTime
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.api.ISkillContainer
 import miragefairy2019.mod3.skill.api.ISkillManager
@@ -59,6 +62,9 @@ class SkillContainer(private val manager: SkillManager) : ISkillContainer {
 }
 
 fun ISkillContainer.getSkillLevel(mastery: IMastery): Int = getMasteryLevel(mastery.name) * mastery.coefficient + (mastery.parent?.let { getSkillLevel(it) } ?: 0)
+val ISkillContainer.usedSkillPoints get() = masteryList.sumBy { getMasteryLevel(it) }
+val ISkillContainer.remainingSkillPoints get() = skillManager.getFairyMasterLevel(variables.exp) - usedSkillPoints
+fun ISkillContainer.canResetMastery(now: Instant) = variables.lastMasteryResetTime.let { it == null || it < now.toLocalDateTime().toLocalDate().atMonthStart().toInstant() }
 
 data class SkillModel(
         @[JvmField Expose] var masteryLevels: MutableMap<String, Int>? = null,
