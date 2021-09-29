@@ -51,13 +51,14 @@ class SkillContainer(private val manager: SkillManager) : ISkillContainer {
     private var model = SkillModel()
 
 
-    override fun getMasteryLevel(mastery: IMastery) = model.getMasteryLevels()[mastery.name] ?: 0
-    override fun setMasteryLevel(mastery: IMastery, masteryLevel: Int) = run { model.getMasteryLevels()[mastery.name] = masteryLevel }
+    override fun getMasteryList() = model.getMasteryLevels().keys
+    override fun getMasteryLevel(mastery: String) = model.getMasteryLevels()[mastery] ?: 0
+    override fun setMasteryLevel(mastery: String, masteryLevel: Int) = run { model.getMasteryLevels()[mastery] = masteryLevel }
 
     override fun getVariables(): ISkillVariables = model.getVariables()
 }
 
-fun ISkillContainer.getSkillLevel(mastery: IMastery): Int = getMasteryLevel(mastery) * mastery.coefficient + (mastery.parent?.let { getSkillLevel(it) } ?: 0)
+fun ISkillContainer.getSkillLevel(mastery: IMastery): Int = getMasteryLevel(mastery.name) * mastery.coefficient + (mastery.parent?.let { getSkillLevel(it) } ?: 0)
 
 data class SkillModel(
         @[JvmField Expose] var masteryLevels: MutableMap<String, Int>? = null,

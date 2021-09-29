@@ -24,9 +24,11 @@ public interface ISkillContainer {
 
     //
 
-    public int getMasteryLevel(IMastery mastery);
+    public Iterable<String> getMasteryList();
 
-    public void setMasteryLevel(IMastery mastery, int masteryLevel);
+    public int getMasteryLevel(String mastery);
+
+    public void setMasteryLevel(String mastery, int masteryLevel);
 
     public ISkillVariables getVariables();
 
