@@ -37,6 +37,7 @@ fun ISkillManager.getRequiredFairyMasterExpForNextLevel(exp: Int) = getFairyMast
 
 
 class SkillContainer(private val manager: SkillManager) : ISkillContainer {
+    override fun getSkillManager() = manager
     override fun load(player: EntityPlayer) = manager.getFile(player).let { if (it.exists()) json = it.readText() else model = SkillModel() }
     override fun save(player: EntityPlayer) = manager.getFile(player).also { it.parentFile.mkdirs() }.writeText(json)
     override fun send(player: EntityPlayerMP) = manager.send(player, json)

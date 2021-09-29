@@ -5,6 +5,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 
 public interface ISkillContainer {
 
+    public ISkillManager getSkillManager();
+
     /**
      * Server World Only
      */
