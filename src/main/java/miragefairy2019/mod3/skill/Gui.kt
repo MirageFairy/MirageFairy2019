@@ -18,6 +18,8 @@ import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
 
+const val guiIdSkill = 2
+
 class ContainerSkill : Container() {
     override fun canInteractWith(playerIn: EntityPlayer) = true
 }

@@ -30,8 +30,6 @@ import net.minecraftforge.fml.relauncher.Side
 import java.io.File
 import java.util.function.Supplier
 
-const val guiIdSkill = 2
-
 lateinit var itemSkillBook: Supplier<ItemSkillBook>
 lateinit var itemAstronomicalObservationBook: Supplier<ItemAstronomicalObservationBook>
 
