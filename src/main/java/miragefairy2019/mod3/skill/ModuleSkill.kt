@@ -38,6 +38,8 @@ val moduleSkill: Module = {
     // ネットワークメッセージ登録
     onRegisterNetworkMessage {
         ApiMain.simpleNetworkWrapper.registerMessage(PacketSkill::class.java, MessageSkill::class.java, discriminatorSkill, Side.CLIENT)
+        ApiMain.simpleNetworkWrapper.registerMessage(PacketTrainMastery::class.java, MessageTrainMastery::class.java, discriminatorTrainMastery, Side.SERVER)
+        ApiMain.simpleNetworkWrapper.registerMessage(PacketResetMastery::class.java, MessageResetMastery::class.java, discriminatorResetMastery, Side.SERVER)
     }
 
     onInit {
