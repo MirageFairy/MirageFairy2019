@@ -28,10 +28,6 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent
 import net.minecraftforge.fml.common.network.IGuiHandler
 import net.minecraftforge.fml.relauncher.Side
 import java.io.File
-import java.util.function.Supplier
-
-lateinit var itemSkillBook: Supplier<ItemSkillBook>
-lateinit var itemAstronomicalObservationBook: Supplier<ItemAstronomicalObservationBook>
 
 val moduleSkill: Module = {
 
