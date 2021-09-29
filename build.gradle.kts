@@ -67,6 +67,8 @@ repositories {
 }
 
 dependencies {
+    testRuntime("junit:junit:4.12")
+
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72")
     adder("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72")
 
