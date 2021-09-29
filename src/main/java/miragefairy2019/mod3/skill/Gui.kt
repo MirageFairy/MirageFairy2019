@@ -65,4 +65,9 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         components.forEach { it.onForegroundDraw.fire { it(PointInt(mouseX, mouseY) - position) } }
     }
+
+    override fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) {
+        components.forEach { it.onMouseClicked.fire { it(PointInt(mouseX, mouseY) - position, mouseButton) } }
+        super.mouseClicked(mouseX, mouseY, mouseButton)
+    }
 }
