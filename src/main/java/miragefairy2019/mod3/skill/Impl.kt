@@ -69,10 +69,13 @@ data class SkillModel(
 
 data class SkillVariables(
         @[JvmField Expose] var exp: Int? = null,
+        @[JvmField Expose] var lastMasteryResetTime: Long? = null,
         @[JvmField Expose] var lastAstronomicalObservationTime: Long? = null
 ) : ISkillVariables {
     override fun getExp(): Int = exp ?: 0
     override fun setExp(it: Int) = run { exp = it }
+    override fun getLastMasteryResetTime() = lastMasteryResetTime?.let { Instant.ofEpochMilli(it) }
+    override fun setLastMasteryResetTime(it: Instant?) = run { lastMasteryResetTime = it?.toEpochMilli() }
     override fun getLastAstronomicalObservationTime() = lastAstronomicalObservationTime?.let { Instant.ofEpochMilli(it) }
     override fun setLastAstronomicalObservationTime(it: Instant?) = run { lastAstronomicalObservationTime = it?.toEpochMilli() }
 }
