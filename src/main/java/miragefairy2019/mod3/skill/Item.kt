@@ -15,6 +15,7 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toInstant
 import miragefairy2019.libkt.toLocalDateTime
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.EntityLivingBase
@@ -28,11 +29,17 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.util.SoundCategory
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.time.Instant
 import java.util.function.Supplier
+import kotlin.math.PI
+import kotlin.math.abs
+import kotlin.math.acos
+import kotlin.math.cos
+import kotlin.math.sin
 
 lateinit var itemSkillBook: Supplier<ItemSkillBook>
 lateinit var itemAstronomicalObservationBook: Supplier<ItemAstronomicalObservationBook>
@@ -66,10 +73,33 @@ class ItemAstronomicalObservationBook : Item() {
     override fun getItemUseAction(stack: ItemStack) = EnumAction.BOW
     override fun getMaxItemUseDuration(itemStack: ItemStack) = 100
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
-        // TODO 天体観測可能か検査
-        // TODO 天体の方に向いているか検査
-        player.activeHand = hand
 
+        // 現在地平線より上にある天体を見なければならない
+        if (player.lookVec.y < 0) {
+            player.sendStatusMessage(textComponent { (!"空がよく見えない").darkPurple }, true) // TODO translate
+            return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
+        }
+
+        // 天井が塞がれている場合は失敗
+        val selector = MagicSelectorRayTrace(world, player, 64.0)
+        if (selector.isHit) {
+            player.sendStatusMessage(textComponent { (!"空がよく見えない").darkPurple }, true) // TODO translate
+            return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
+        }
+
+        // 太陽か月を見なければならない
+        val vectorLook = player.lookVec
+        val angle = player.world.getCelestialAngleRadians(0.0f)
+        val vectorSun = Vec3d(-sin(angle).toDouble(), cos(angle).toDouble(), 0.0)
+        val vectorMoon = Vec3d(-sin(angle + PI), cos(angle + PI), 0.0)
+        val angleSunDiff = abs(acos(vectorLook.dotProduct(vectorSun))) * 180 / PI
+        val angleMoonDiff = abs(acos(vectorLook.dotProduct(vectorMoon))) * 180 / PI
+        if (angleSunDiff >= 15 && angleMoonDiff >= 15) {
+            player.sendStatusMessage(textComponent { (!"観測可能な天体が見当たらない").darkPurple }, true) // TODO translate
+            return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
+        }
+
+        player.activeHand = hand
         return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
     }
 
