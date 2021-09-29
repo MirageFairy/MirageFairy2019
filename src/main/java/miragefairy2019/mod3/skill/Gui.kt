@@ -5,18 +5,27 @@ import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.TextAlignment
 import miragefairy2019.libkt.argb
+import miragefairy2019.libkt.atMonthStart
+import miragefairy2019.libkt.button
 import miragefairy2019.libkt.component
+import miragefairy2019.libkt.displayText
 import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.label
 import miragefairy2019.libkt.minus
 import miragefairy2019.libkt.position
 import miragefairy2019.libkt.rectangle
+import miragefairy2019.libkt.stringFormat
 import miragefairy2019.libkt.toArgb
+import miragefairy2019.libkt.toInstant
+import miragefairy2019.libkt.toLocalDateTime
 import miragefairy2019.libkt.tooltip
+import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod3.skill.api.ApiSkill
+import net.minecraft.client.gui.GuiYesNo
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
+import java.time.Instant
 
 const val guiIdSkill = 2
 
@@ -28,30 +37,78 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
 
     private val components = mutableListOf<Component>()
 
+    private val skillManager get() = ApiSkill.skillManager
+    private val skillContainer get() = skillManager.clientSkillContainer
+
     init {
-        components += component(RectangleInt(4, 4, xSize - 4 - 4 - 20 - 20, 10)) {
-            label(::fontRenderer, "マスタリ名", color = 0xFF404040.toArgb())
+
+        components += component(RectangleInt(4 + 0, 4, 20, 10)) {
+            label(::fontRenderer, color = 0xFF808080.toArgb()) { "FMLv:" }
         }
-        components += component(RectangleInt(xSize - 44, 4, 20, 10)) {
-            label(::fontRenderer, "MLv", color = argb(0xFF404040.toInt()), align = TextAlignment.RIGHT)
-            tooltip("マスタリレベルはある領域に関する理解の深さです。")
+        components += component(RectangleInt(4 + 20, 4, 20 - 4, 10)) {
+            label(::fontRenderer, align = TextAlignment.RIGHT) { "${skillManager.getFairyMasterLevel(skillContainer.variables.exp)}" }
+            tooltip(
+                    "フェアリーマスターレベル: ${skillManager.getFairyMasterLevel(skillContainer.variables.exp)}", // TODO translate
+                    "累積経験値: ${skillContainer.variables.exp.stringFormat("%8d")}", // TODO translate
+                    "必要経験値: ${skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.exp).stringFormat("%8d")}" // TODO translate
+            )
         }
-        components += component(RectangleInt(xSize - 24, 4, 20, 10)) {
-            label(::fontRenderer, "SLv", color = argb(0xFF404040.toInt()), align = TextAlignment.RIGHT)
-            tooltip("スキルレベルは個々のアクションの強さです。")
+        components += component(RectangleInt(4 + 40, 4, 20, 10)) {
+            label(::fontRenderer, color = 0xFF808080.toArgb()) { "SP:" }
         }
-        EnumMastery.values().forEachIndexed { i, it ->
-            components += component(RectangleInt(4 + 8 * it.layer, 14 + 10 * i, xSize - 4 - 4 - 20 - 20 - 8 * it.layer, 10)) {
-                label(::fontRenderer, it.displayName.unformattedText, color = 0xFF000000.toArgb())
-                tooltip(it.displayPoem.unformattedText)
+        components += component(RectangleInt(4 + 60, 4, 20 - 4, 10)) {
+            label(::fontRenderer, align = TextAlignment.RIGHT) { "${skillContainer.remainingSkillPoints}" }
+            tooltip("スキルポイントはフェアリーマスターレベル上昇時に入手します。") // TODO translate
+        }
+        components += component(RectangleInt(xSize - 34, 4, 30, 10)) {
+            button {
             }
-            components += component(RectangleInt(xSize - 44, 14 + 10 * i, 20, 10)) {
-                label(::fontRenderer, "${ApiSkill.skillManager.clientSkillContainer.getMasteryLevel(it)}", color = 0xFF000000.toArgb(), align = TextAlignment.RIGHT)
-            }
-            components += component(RectangleInt(xSize - 24, 14 + 10 * i, 20, 10)) {
-                label(::fontRenderer, "${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it)}", color = 0xFF000000.toArgb(), align = TextAlignment.RIGHT)
+            // TODO クリックできないときは灰色にする
+            label(::fontRenderer, color = 0xFF0000FF.toArgb(), align = TextAlignment.CENTER) { "初期化" } // TODO translate
+            tooltip {
+                when {
+                    !skillContainer.canResetMastery(Instant.now()) -> listOf(
+                            "今月は初期化できません。",
+                            "残り: ${(skillContainer.variables.lastMasteryResetTime!!.toLocalDateTime().toLocalDate().atMonthStart().plusMonths(1).toInstant() - Instant.now()).displayText.unformattedText}"
+                    ) // TODO translate
+                    skillContainer.usedSkillPoints == 0 -> listOf("初期化の必要はありません。") // TODO translate
+                    else -> listOf("1か月に1度だけ、全マスタリのレベルをリセットしSPに戻せます。") // TODO translate
+                }
             }
         }
+
+        components += component(RectangleInt(4, 14, xSize - 4 - 4 - 10 - 20 - 20, 10)) {
+            label(::fontRenderer, color = 0xFF808080.toArgb()) { "マスタリ名" }// TODO translate
+        }
+        components += component(RectangleInt(xSize - 54, 14, 20, 10)) {
+            label(::fontRenderer, color = argb(0xFF808080.toInt()), align = TextAlignment.RIGHT) { "MLv" } // TODO translate
+            tooltip("マスタリレベルはある領域に関する理解の深さです。") // TODO translate
+        }
+        components += component(RectangleInt(xSize - 34, 14, 20, 10)) {
+            label(::fontRenderer, color = argb(0xFF808080.toInt()), align = TextAlignment.RIGHT) { "SLv" } // TODO translate
+            tooltip("スキルレベルは個々のアクションの強さです。") // TODO translate
+        }
+
+        EnumMastery.values().forEachIndexed { i, mastery ->
+            components += component(RectangleInt(4 + 8 * mastery.layer, 24 + 10 * i, xSize - 4 - 4 - 10 - 20 - 20 - 8 * mastery.layer, 10)) {
+                label(::fontRenderer, color = 0xFF000000.toArgb()) { mastery.displayName.unformattedText }
+                tooltip(mastery.displayPoem.unformattedText)
+            }
+            components += component(RectangleInt(xSize - 54, 24 + 10 * i, 20, 10)) {
+                label(::fontRenderer, color = 0xFF000000.toArgb(), align = TextAlignment.RIGHT) { "${skillContainer.getMasteryLevel(mastery.name)}" }
+            }
+            components += component(RectangleInt(xSize - 34, 24 + 10 * i, 20, 10)) {
+                label(::fontRenderer, color = 0xFF000000.toArgb(), align = TextAlignment.RIGHT) { "${skillContainer.getSkillLevel(mastery)}" }
+            }
+            components += component(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
+                button {
+                }
+                // TODO ホバーで影響するマスタリのレベルを緑色に光らせつつ実行後の値を表示
+                label(::fontRenderer, color = 0xFF0000FF.toArgb(), align = TextAlignment.CENTER) { "*" } // TODO icon
+                tooltip { listOf(if (skillContainer.remainingSkillPoints > 0) "このマスタリにスキルポイントを割り振ります。" else "スキルポイントが足りません。") } // TODO translate
+            }
+        }
+
     }
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
