@@ -7,7 +7,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
 
-val discriminatorSkill = 2
+
+const val discriminatorSkill = 2
 
 class PacketSkill : IMessageHandler<MessageSkill, IMessage> {
     override fun onMessage(message: MessageSkill, messageContext: MessageContext): IMessage? {
