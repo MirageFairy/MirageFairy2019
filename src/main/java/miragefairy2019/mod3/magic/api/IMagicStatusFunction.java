@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.api.magicstatus;
+package miragefairy2019.mod3.magic.api;
 
 import miragefairy2019.modkt.api.fairy.IFairyType;
 

@@ -5,10 +5,10 @@ import miragefairy2019.libkt.color
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.modkt.api.fairy.IFairyType
-import miragefairy2019.modkt.api.magic.IMagicHandler
-import miragefairy2019.modkt.api.magicstatus.IMagicStatus
-import miragefairy2019.modkt.api.magicstatus.IMagicStatusFormatter
-import miragefairy2019.modkt.api.magicstatus.IMagicStatusFunction
+import miragefairy2019.mod3.magic.api.IMagicHandler
+import miragefairy2019.mod3.magic.api.IMagicStatus
+import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
+import miragefairy2019.mod3.magic.api.IMagicStatusFunction
 import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
 import miragefairy2019.modkt.impl.magicstatus.MagicStatus
 import miragefairy2019.modkt.impl.magicstatus.displayName
