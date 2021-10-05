@@ -62,7 +62,7 @@ abstract class ItemFairyWeaponBase3 : ItemFairyWeaponBase() {
         val tick get() = f<Double> { buildText { format("%.2f sec", it / 20.0) } }
     }
 
-    //
+    // Overrides
 
     @SideOnly(Side.CLIENT)
     override fun addInformationFunctions(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
@@ -92,12 +92,8 @@ abstract class ItemFairyWeaponBase3 : ItemFairyWeaponBase() {
     }
 
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
-
-        // アイテム取得
-        val itemStack = player.getHeldItem(hand)
-
-        // 妖精取得
-        val fairyType = findFairy(itemStack, player).orElse(null)?.let { it.y!! } ?: ApiFairy.empty()
+        val itemStack = player.getHeldItem(hand) // アイテム取得
+        val fairyType = findFairy(itemStack, player).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
         if (world.isRemote) {
             val actualFairyType = getActualFairyType(fairyType, ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler.playerAura)
             return ActionResult(getMagicHandler(world, player, itemStack, actualFairyType).onItemRightClick(hand), itemStack)
@@ -108,19 +104,10 @@ abstract class ItemFairyWeaponBase3 : ItemFairyWeaponBase() {
     }
 
     override fun onUpdate(itemStack: ItemStack, world: World, entity: Entity, itemSlot: Int, isSelected: Boolean) {
-
-        // クライアントサイドでなければ中止
-        if (!ApiMain.side().isClient) return
-
-        // プレイヤー取得
-        if (entity !is EntityPlayer) return
-
-        // アイテム取得
-        if (!isSelected && entity.heldItemOffhand != itemStack) return
-
-        // 妖精取得
-        val fairyType = findFairy(itemStack, entity).orElse(null)?.let { it.y!! } ?: ApiFairy.empty()
-
+        if (!ApiMain.side().isClient) return // クライアントサイドでなければ中止
+        if (entity !is EntityPlayer) return // プレイヤー取得
+        if (!isSelected && entity.heldItemOffhand != itemStack) return // アイテム取得
+        val fairyType = findFairy(itemStack, entity).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
         if (world.isRemote) {
             val actualFairyType = getActualFairyType(fairyType, ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler.playerAura)
             getMagicHandler(world, entity, itemStack, actualFairyType).onUpdate(itemSlot, isSelected)
