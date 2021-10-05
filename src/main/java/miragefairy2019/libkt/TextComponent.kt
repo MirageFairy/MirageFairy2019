@@ -21,7 +21,8 @@ fun buildText(block: TextComponentBuilder.() -> Unit): ITextComponent = TextComp
 
 
 // スタイル
-fun <T : ITextComponent> T.color(color: TextFormatting) = apply { this.style.color = color }
+// TODO bold()は引数を省略不可に
+fun <T : ITextComponent> T.color(color: TextFormatting) = apply { this.style.color = color } // TODO 純粋関数に変更
 fun <T : ITextComponent> T.obfuscated(value: Boolean = true) = apply { this.style.obfuscated = value }
 fun <T : ITextComponent> T.bold(value: Boolean = true) = apply { this.style.bold = value }
 fun <T : ITextComponent> T.strikethrough(value: Boolean = true) = apply { this.style.strikethrough = value }
