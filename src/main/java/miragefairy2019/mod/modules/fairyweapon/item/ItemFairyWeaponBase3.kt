@@ -37,6 +37,8 @@ abstract class ItemFairyWeaponBase3(
         val mastery: IMastery
 ) : ItemFairyWeaponBase() {
     companion object {
+        private const val prefix = "miragefairy2019.gui.magic"
+
         class MagicScope(val skillLevel: Int, val world: World, val player: EntityPlayer, val itemStack: ItemStack, val fairyType: IFairyType) {
             operator fun <T> IMagicStatus<T>.not(): T = function.getValue(fairyType)
         }
@@ -81,7 +83,7 @@ abstract class ItemFairyWeaponBase3(
 
     @SideOnly(Side.CLIENT)
     override fun addInformationFunctions(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        tooltip.add(buildText { text("Right click to use magic").color(RED) }.formattedText)
+        tooltip += formattedText { translate("$prefix.message.rightClick").red }
         super.addInformationFunctions(itemStack, world, tooltip, flag)
     }
 
