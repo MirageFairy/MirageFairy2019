@@ -41,6 +41,7 @@ import miragefairy2019.modkt.impl.magicstatus.MagicStatusFunctionArguments
 import miragefairy2019.modkt.impl.magicstatus.displayName
 import miragefairy2019.modkt.impl.magicstatus.factors
 import miragefairy2019.modkt.impl.magicstatus.getDisplayValue
+import miragefairy2019.modkt.impl.magicstatus.negative
 import miragefairy2019.modkt.impl.magicstatus.positive
 import miragefairy2019.modkt.impl.magicstatus.ranged
 import miragefairy2019.modkt.impl.plus
@@ -261,4 +262,6 @@ abstract class ItemFairyWeaponBase3(
             else -> throw IllegalArgumentException()
         }
     }.setVisibility(ALWAYS)
+
+    val cost = "cost"({ double0.negative }) { cost / (1.0 + skillLevel * 0.01) }.setVisibility(ALWAYS)
 }
