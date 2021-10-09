@@ -4,18 +4,16 @@ import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
 import miragefairy2019.mod.api.fairy.ApiFairy
-import miragefairy2019.modkt.api.erg.IErgSet
-import miragefairy2019.modkt.api.erg.IErgType
-import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction
+import miragefairy2019.modkt.api.erg.IErgSet
+import miragefairy2019.modkt.api.erg.IErgType
+import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.api.mana.IManaSet
 import miragefairy2019.modkt.api.mana.ManaTypes
-import miragefairy2019.modkt.impl.fairy.FairyTypeAdapter
 import miragefairy2019.modkt.impl.fairy.displayName
 import miragefairy2019.modkt.impl.mana.displayName
-import miragefairy2019.modkt.impl.plus
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.util.text.TextFormatting.DARK_PURPLE
@@ -115,9 +113,4 @@ fun <T : Comparable<T>> IMagicStatus<T>.ranged(min: T, max: T): IMagicStatus<T> 
             else -> displayValue
         }
     }
-}
-
-
-fun getActualFairyType(fairyType: IFairyType, playerAura: IManaSet): IFairyType = object : FairyTypeAdapter(fairyType) {
-    override fun getManaSet() = parent.manaSet + playerAura
 }
