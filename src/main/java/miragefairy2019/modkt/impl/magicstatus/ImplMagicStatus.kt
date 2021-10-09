@@ -3,6 +3,7 @@ package miragefairy2019.modkt.impl.magicstatus
 import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
+import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod3.magic.api.IMagicStatus
@@ -54,7 +55,7 @@ val <T> IMagicStatusFunction<T>.factors
         val factors = mutableListOf<ITextComponent>()
         getValue(object : IMagicStatusFunctionArguments {
             override fun getSkillLevel(mastery: IMastery): Int {
-                factors.add(mastery.displayName)
+                factors.add(textComponent { (!mastery.displayName).gold })
                 return 0
             }
 
