@@ -404,6 +404,7 @@ mirageFairy2019.magic.status.strength.name=効果値
 mirageFairy2019.magic.status.extent.name=拡散力
 mirageFairy2019.magic.status.endurance.name=持久力
 mirageFairy2019.magic.status.production.name=生産力
+mirageFairy2019.magic.status.cost.name=コスト
 mirageFairy2019.magic.status.pitch.name=音程
 mirageFairy2019.magic.status.maxHeight.name=最大高さ
 mirageFairy2019.magic.status.power.name=パワー
