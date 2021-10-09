@@ -82,6 +82,7 @@ val <T : ITextComponent> List<T>.italic get() = italic()
 // 新DSL
 class TextComponentScope {
     val empty get() = listOf<ITextComponent>()
+    fun join(vararg textComponents: List<ITextComponent>) = listOf(*textComponents).flatten()
     operator fun ITextComponent.not() = listOf(this)
     operator fun String.not() = !TextComponentString(this)
     fun format(format: String, vararg args: Any?) = !String.format(format, *args)
