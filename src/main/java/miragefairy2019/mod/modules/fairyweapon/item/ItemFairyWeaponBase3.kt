@@ -8,6 +8,9 @@ import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction
+import miragefairy2019.mod3.skill.api.ApiSkill
+import miragefairy2019.mod3.skill.api.IMastery
+import miragefairy2019.mod3.skill.getSkillLevel
 import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
 import miragefairy2019.modkt.impl.magicstatus.MagicStatus
@@ -29,9 +32,11 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-abstract class ItemFairyWeaponBase3 : ItemFairyWeaponBase() {
+abstract class ItemFairyWeaponBase3(
+        val mastery: IMastery
+) : ItemFairyWeaponBase() {
     companion object {
-        class MagicScope(val world: World, val player: EntityPlayer, val itemStack: ItemStack, val fairyType: IFairyType) {
+        class MagicScope(val skillLevel: Int, val world: World, val player: EntityPlayer, val itemStack: ItemStack, val fairyType: IFairyType) {
             operator fun <T> IMagicStatus<T>.not(): T = function.getValue(fairyType)
         }
     }
@@ -105,10 +110,10 @@ abstract class ItemFairyWeaponBase3 : ItemFairyWeaponBase() {
         val fairyType = findFairy(itemStack, player).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
         if (world.isRemote) {
             val actualFairyType = getActualFairyType(fairyType, ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler.playerAura)
-            return ActionResult(getMagicHandler(MagicScope(world, player, itemStack, actualFairyType)).onItemRightClick(hand), itemStack)
+            return ActionResult(getMagicHandler(MagicScope(ApiSkill.skillManager.clientSkillContainer.getSkillLevel(mastery), world, player, itemStack, actualFairyType)).onItemRightClick(hand), itemStack)
         } else {
             val actualFairyType = getActualFairyType(fairyType, ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(player as EntityPlayerMP).playerAura)
-            return ActionResult(getMagicHandler(MagicScope(world, player, itemStack, actualFairyType)).onItemRightClick(hand), itemStack)
+            return ActionResult(getMagicHandler(MagicScope(ApiSkill.skillManager.getServerSkillContainer(player).getSkillLevel(mastery), world, player, itemStack, actualFairyType)).onItemRightClick(hand), itemStack)
         }
     }
 
@@ -119,7 +124,7 @@ abstract class ItemFairyWeaponBase3 : ItemFairyWeaponBase() {
         val fairyType = findFairy(itemStack, entity).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
         if (world.isRemote) {
             val actualFairyType = getActualFairyType(fairyType, ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler.playerAura)
-            getMagicHandler(MagicScope(world, entity, itemStack, actualFairyType)).onUpdate(itemSlot, isSelected)
+            getMagicHandler(MagicScope(ApiSkill.skillManager.clientSkillContainer.getSkillLevel(mastery), world, entity, itemStack, actualFairyType)).onUpdate(itemSlot, isSelected)
         }
     }
 }

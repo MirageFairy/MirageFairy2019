@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.item
 import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod3.magic.api.IMagicHandler
-import miragefairy2019.mod3.magic.api.IMagicStatus
+import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.erg.ErgTypes.fell
 import miragefairy2019.modkt.api.erg.ErgTypes.knowledge
@@ -31,7 +31,9 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.pow
 
-class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private val fortuneFactor: Double, private val radiusFactor: Double) : ItemFairyWeaponBase3() {
+class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private val fortuneFactor: Double, private val radiusFactor: Double) : ItemFairyWeaponBase3(
+        EnumMastery.flowerPicking
+) {
     val pitch = register("pitch"({ -(cost / 50.0 - 1) * 12 }, { double2 }).positive().ranged(-12.0, 12.0))
     val maxTargetCount = register("maxTargetCount"({ floor(2 + mana(dark) * maxTargetCountFactor + erg(fell) * 0.1).toInt() }, { int }).positive().ranged(2, 10000))
     val fortune = register("fortune"({ 3 + mana(shine) * fortuneFactor + erg(knowledge) * 0.1 }, { double2 }).positive().ranged(3.0, 10000.0))
