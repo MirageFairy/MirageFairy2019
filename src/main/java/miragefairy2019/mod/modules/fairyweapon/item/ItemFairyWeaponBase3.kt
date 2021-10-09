@@ -14,13 +14,17 @@ import miragefairy2019.mod3.magic.api.IMagicStatusFunction
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
+import miragefairy2019.modkt.api.erg.IErgType
 import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.api.mana.IManaSet
+import miragefairy2019.modkt.api.mana.IManaType
 import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
 import miragefairy2019.modkt.impl.fairy.FairyTypeAdapter
+import miragefairy2019.modkt.impl.getMana
 import miragefairy2019.modkt.impl.magicstatus.MagicStatus
 import miragefairy2019.modkt.impl.magicstatus.displayName
 import miragefairy2019.modkt.impl.magicstatus.factors
+import miragefairy2019.modkt.impl.magicstatus.ranged
 import miragefairy2019.modkt.impl.plus
 import miragefairy2019.modkt.impl.times
 import net.minecraft.client.util.ITooltipFlag
@@ -43,9 +47,20 @@ abstract class ItemFairyWeaponBase3(
     companion object {
         private const val prefix = "miragefairy2019.gui.magic"
 
-        class MagicScope(val skillLevel: Int, val world: World, val player: EntityPlayer, val itemStack: ItemStack, val fairyType: IFairyType) {
+        class
+        MagicScope(val skillLevel: Int, val world: World, val player: EntityPlayer, val itemStack: ItemStack, val fairyType: IFairyType) {
             operator fun <T> IMagicStatus<T>.not(): T = function.getValue(fairyType)
         }
+
+
+        class MagicStatusWrapper<T>(var magicStatus: IMagicStatus<T>) : IMagicStatus<T> {
+            override fun getName(): String = magicStatus.name
+            override fun getFunction(): IMagicStatusFunction<T> = magicStatus.function
+            override fun getFormatter(): IMagicStatusFormatter<T> = magicStatus.formatter
+        }
+
+        fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
+
 
         class MagicStatusFormatterScope<T> {
             private fun <T> f(block: (T) -> ITextComponent) = IMagicStatusFormatter<T> { function, fairyType -> block(function.getValue(fairyType)) }
@@ -62,6 +77,13 @@ abstract class ItemFairyWeaponBase3(
             val boolean get() = f<Boolean> { textComponent { if (it) !"Yes" else !"No" } }
             val tick get() = f<Double> { textComponent { format("%.2f sec", it / 20.0) } }
         }
+
+        class MagicStatusFormulaScope(val fairyType: IFairyType) {
+            val cost get() = fairyType.cost
+            operator fun IManaType.not() = fairyType.manaSet.getMana(this)
+            operator fun IErgType.not() = fairyType.ergSet.getPower(this)
+            operator fun <T> IMagicStatus<T>.not(): T = function.getValue(fairyType)
+        }
     }
 
     // Magic
@@ -76,11 +98,13 @@ abstract class ItemFairyWeaponBase3(
 
     // Magic Status
 
-    private val magicStatusList = mutableListOf<IMagicStatus<*>>()
-    internal fun <T> register(magicStatus: IMagicStatus<T>): IMagicStatus<T> = magicStatus.also { magicStatusList += it }
-
-    internal operator fun <T> String.invoke(function: IFairyType.() -> T, fFormatter: MagicStatusFormatterScope<T>.() -> IMagicStatusFormatter<T>): MagicStatus<T> {
-        return MagicStatus(this, IMagicStatusFunction<T> { it.function() }, MagicStatusFormatterScope<T>().fFormatter())
+    private val magicStatusWrapperList = mutableListOf<MagicStatusWrapper<*>>()
+    internal operator fun <T> String.invoke(getFormatter: MagicStatusFormatterScope<T>.() -> IMagicStatusFormatter<T>, function: MagicStatusFormulaScope.() -> T): MagicStatusWrapper<T> {
+        val magicStatusWrapper = MagicStatusWrapper<T>(MagicStatus(this,
+                IMagicStatusFunction<T> { MagicStatusFormulaScope(it).function() },
+                MagicStatusFormatterScope<T>().getFormatter()))
+        magicStatusWrapperList += magicStatusWrapper
+        return magicStatusWrapper
     }
 
     // Actual Fairy Type
@@ -132,7 +156,7 @@ abstract class ItemFairyWeaponBase3(
                 }
             }
         }.color(BLUE)
-        magicStatusList.forEach { tooltip.add(getStatusText(it).formattedText) }
+        magicStatusWrapperList.forEach { tooltip.add(getStatusText(it).formattedText) }
     }
 
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
