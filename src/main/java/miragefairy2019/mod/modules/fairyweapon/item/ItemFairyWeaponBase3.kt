@@ -11,6 +11,9 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.main.ApiMain
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.NEVER
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
@@ -155,9 +158,9 @@ abstract class ItemFairyWeaponBase3(
         tooltip += formattedText { (translate("$prefix.label.skillLevel") + !": " + (!"${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(mastery)}").white.bold + !" (" + !mastery.displayName + !")").aqua }
         magicStatusWrapperList.forEach {
             if (when (it.visibility) {
-                        EnumVisibility.ALWAYS -> true
-                        EnumVisibility.DETAIL -> flag.isAdvanced
-                        EnumVisibility.NEVER -> false
+                        ALWAYS -> true
+                        DETAIL -> flag.isAdvanced
+                        NEVER -> false
                     }) {
                 tooltip += formattedText { (!it.displayName + !": " + !it.getDisplayValue(actualFairyType).white + f(it)).blue }
             }
