@@ -162,7 +162,7 @@ abstract class ItemFairyWeaponBase3(
                         DETAIL -> flag.isAdvanced
                         NEVER -> false
                     }) {
-                tooltip += formattedText { (!it.displayName + !": " + !it.getDisplayValue(actualFairyType).white + f(it)).blue }
+                tooltip += formattedText { (!it.displayName + !": " + (!it.getDisplayValue(actualFairyType)).white + f(it)).blue }
             }
         }
     }
