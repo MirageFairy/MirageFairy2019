@@ -18,6 +18,7 @@ import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction
+import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.displayName
@@ -36,6 +37,7 @@ import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
 import miragefairy2019.modkt.impl.fairy.FairyTypeAdapter
 import miragefairy2019.modkt.impl.getMana
 import miragefairy2019.modkt.impl.magicstatus.MagicStatus
+import miragefairy2019.modkt.impl.magicstatus.MagicStatusFunctionArguments
 import miragefairy2019.modkt.impl.magicstatus.displayName
 import miragefairy2019.modkt.impl.magicstatus.factors
 import miragefairy2019.modkt.impl.magicstatus.getDisplayValue
@@ -68,7 +70,7 @@ abstract class ItemFairyWeaponBase3(
 
 
         class MagicScope(val skillLevel: Int, val world: World, val player: EntityPlayer, val itemStack: ItemStack, val fairyType: IFairyType) {
-            operator fun <T> IMagicStatus<T>.not(): T = function.getValue(fairyType)
+            operator fun <T> IMagicStatus<T>.not(): T = function.getValue(MagicStatusFunctionArguments(skillLevel, fairyType))
         }
 
 
@@ -100,11 +102,11 @@ abstract class ItemFairyWeaponBase3(
             val tick get() = f<Double> { textComponent { format("%.2f sec", it / 20.0) } }
         }
 
-        class MagicStatusFormulaScope(val fairyType: IFairyType) {
-            val cost get() = fairyType.cost
-            operator fun IManaType.not() = fairyType.manaSet.getMana(this)
-            operator fun IErgType.not() = fairyType.ergSet.getPower(this)
-            operator fun <T> IMagicStatus<T>.not(): T = function.getValue(fairyType)
+        class MagicStatusFormulaScope(val arguments: IMagicStatusFunctionArguments) {
+            val cost get() = arguments.fairyType.cost
+            operator fun IManaType.not() = arguments.fairyType.manaSet.getMana(this)
+            operator fun IErgType.not() = arguments.fairyType.ergSet.getPower(this)
+            operator fun <T> IMagicStatus<T>.not(): T = function.getValue(arguments)
         }
     }
 
@@ -174,7 +176,14 @@ abstract class ItemFairyWeaponBase3(
                         DETAIL -> flag.isAdvanced
                         NEVER -> false
                     }) {
-                tooltip += formattedText { (!it.displayName + !": " + (!it.getDisplayValue(actualFairyType)).white + f(it)).blue }
+                tooltip += formattedText {
+                    join(
+                            !it.displayName,
+                            !": ",
+                            (!it.getDisplayValue(MagicStatusFunctionArguments(ApiSkill.skillManager.clientSkillContainer.getSkillLevel(mastery), actualFairyType))).white,
+                            f(it)
+                    ).blue
+                }
             }
         }
     }

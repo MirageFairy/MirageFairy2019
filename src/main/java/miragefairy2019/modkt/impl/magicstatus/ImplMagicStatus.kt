@@ -8,6 +8,7 @@ import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction
+import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
 import miragefairy2019.modkt.api.erg.IErgSet
 import miragefairy2019.modkt.api.erg.IErgType
 import miragefairy2019.modkt.api.fairy.IFairyType
@@ -31,17 +32,25 @@ class MagicStatus<T>(
     override fun getFormatter() = formatter
 }
 
+data class MagicStatusFunctionArguments(
+        private val skillLevel: Int,
+        private val fairyType: IFairyType
+) : IMagicStatusFunctionArguments {
+    override fun getSkillLevel() = skillLevel
+    override fun getFairyType() = fairyType
+}
+
 
 val <T> IMagicStatus<T>.displayName get() = textComponent { translate("mirageFairy2019.magic.status.$name.name") }
 
-fun <T> IMagicStatus<T>.getDisplayValue(fairyType: IFairyType): ITextComponent = formatter.getDisplayValue(function, fairyType)
+fun <T> IMagicStatus<T>.getDisplayValue(arguments: IMagicStatusFunctionArguments): ITextComponent = formatter.getDisplayValue(function, arguments)
 
-val <T> IMagicStatusFunction<T>.defaultValue: T get() = getValue(ApiFairy.empty())
+val <T> IMagicStatusFunction<T>.defaultValue: T get() = getValue(MagicStatusFunctionArguments(0, ApiFairy.empty()))
 
 val <T> IMagicStatusFunction<T>.factors
     get(): Iterable<ITextComponent> {
         val factors = mutableListOf<ITextComponent>()
-        getValue(object : IFairyType {
+        getValue(MagicStatusFunctionArguments(0, object : IFairyType {
             fun add(textComponent: ITextComponent): Double {
                 factors.add(textComponent)
                 return 0.0
@@ -65,7 +74,7 @@ val <T> IMagicStatusFunction<T>.factors
                 override fun getEntries() = throw UnsupportedOperationException()
                 override fun getPower(type: IErgType) = add(type.displayName)
             }
-        })
+        }))
         return factors
     }
 
