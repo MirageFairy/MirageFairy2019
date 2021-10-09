@@ -391,15 +391,6 @@ tile.dish.name=皿
 
 item.skillBook.name=スキルブック
 item.astronomicalObservationBook.name=天体観測ブック
-itemGroup.mirageFairy2019=MirageFairy 2019
-itemGroup.mirageFairy2019.fairy=MirageFairy 2019：妖精
-
-advancements.miragefairy2019.fairy_weapon.root.title=妖精武器
-advancements.miragefairy2019.fairy_weapon.root.description=妖精武器
-advancements.miragefairy2019.fairy_weapon.all.description=所定のアイテムを入手する
-
-mirageFairy2019.formula.source.cost.name=コスト
-
 mirageFairy2019.magic.status.strength.name=効果値
 mirageFairy2019.magic.status.extent.name=拡散力
 mirageFairy2019.magic.status.endurance.name=持久力
@@ -419,6 +410,14 @@ mirageFairy2019.magic.status.maxTargetCount.name=最大ターゲット数
 mirageFairy2019.magic.status.looting.name=ドロップ増加
 mirageFairy2019.magic.status.criticalRate.name=クリティカル率
 mirageFairy2019.magic.status.chargeTime.name=チャージタイム
+itemGroup.mirageFairy2019=MirageFairy 2019
+itemGroup.mirageFairy2019.fairy=MirageFairy 2019：妖精
+
+advancements.miragefairy2019.fairy_weapon.root.title=妖精武器
+advancements.miragefairy2019.fairy_weapon.root.description=妖精武器
+advancements.miragefairy2019.fairy_weapon.all.description=所定のアイテムを入手する
+
+mirageFairy2019.formula.source.cost.name=コスト
 
 miragefairy2019.placeItem=アイテムを置く
 

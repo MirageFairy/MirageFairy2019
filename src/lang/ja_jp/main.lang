@@ -7,26 +7,6 @@ advancements.miragefairy2019.fairy_weapon.all.description=所定のアイテム�
 
 mirageFairy2019.formula.source.cost.name=コスト
 
-mirageFairy2019.magic.status.strength.name=効果値
-mirageFairy2019.magic.status.extent.name=拡散力
-mirageFairy2019.magic.status.endurance.name=持久力
-mirageFairy2019.magic.status.production.name=生産力
-mirageFairy2019.magic.status.cost.name=コスト
-mirageFairy2019.magic.status.pitch.name=音程
-mirageFairy2019.magic.status.maxHeight.name=最大高さ
-mirageFairy2019.magic.status.power.name=パワー
-mirageFairy2019.magic.status.fortune.name=幸運
-mirageFairy2019.magic.status.coolTime.name=クールタイム
-mirageFairy2019.magic.status.wear.name=摩耗
-mirageFairy2019.magic.status.additionalReach.name=追加リーチ
-mirageFairy2019.magic.status.collection.name=収集
-mirageFairy2019.magic.status.damage.name=ダメージ
-mirageFairy2019.magic.status.radius.name=半径
-mirageFairy2019.magic.status.maxTargetCount.name=最大ターゲット数
-mirageFairy2019.magic.status.looting.name=ドロップ増加
-mirageFairy2019.magic.status.criticalRate.name=クリティカル率
-mirageFairy2019.magic.status.chargeTime.name=チャージタイム
-
 miragefairy2019.placeItem=アイテムを置く
 
 
