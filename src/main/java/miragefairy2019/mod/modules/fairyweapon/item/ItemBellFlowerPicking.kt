@@ -109,6 +109,9 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
 
                     run targets@{
                         for (pair in listTarget) {
+                            val blockPos = pair.first
+                            val pickable = pair.second
+
                             if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@targets // 耐久が足りないので中止
                             if (targetCount + 1 > !maxTargetCount) return@targets // パワーが足りないので中止
 
@@ -120,20 +123,20 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
 
                             // 音取得
                             run {
-                                val blockState = world.getBlockState(pair.first)
-                                breakSound = blockState.block.getSoundType(blockState, world, pair.first, player).breakSound
+                                val blockState = world.getBlockState(blockPos)
+                                breakSound = blockState.block.getSoundType(blockState, world, blockPos, player).breakSound
                             }
 
                             // 収穫
                             run {
 
                                 // 収穫試行
-                                val result = pair.second.tryPick(world, pair.first, Optional.of(player), UtilsMath.randomInt(world.rand, !fortune))
+                                val result = pickable.tryPick(world, blockPos, Optional.of(player), UtilsMath.randomInt(world.rand, !fortune))
                                 if (!result) return@targets
 
                                 // 破壊したばかりのブロックの周辺のアイテムを集める
                                 if (!collection) {
-                                    world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(pair.first)).forEach {
+                                    world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPos)).forEach {
                                         collected = true
                                         it.setPosition(player.posX, player.posY, player.posZ)
                                         it.setNoPickupDelay()
@@ -146,9 +149,9 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
                             val color = fairyType.color
                             world.spawnParticle(
                                     EnumParticleTypes.SPELL_MOB,
-                                    pair.first.x + 0.5,
-                                    pair.first.y + 0.5,
-                                    pair.first.z + 0.5,
+                                    blockPos.x + 0.5,
+                                    blockPos.y + 0.5,
+                                    blockPos.z + 0.5,
                                     (color shr 16 and 0xFF) / 255.0,
                                     (color shr 8 and 0xFF) / 255.0,
                                     (color shr 0 and 0xFF) / 255.0)
