@@ -2,6 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.modkt.api.erg.ErgTypes.fell
@@ -41,7 +42,7 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
     val radius = "radius"({ double2.positive }) { 4 + !gaia * radiusFactor }.setRange(4.0..10.0)
     val wear = "wear"({ percent2.negative }) { 0.2 / (1 + !fire * 0.03) }.setRange(0.0001..0.2)
     val coolTime = "coolTime"({ tick.negative }) { cost * 0.5 / (1 + !aqua * 0.03) }.setRange(0.0001..100.0)
-    val collection = "collection"({ boolean.positiveBoolean }) { !warp >= 10 }
+    val collection = "collection"({ boolean.positiveBoolean }) { !warp >= 10 }.setVisibility(ALWAYS)
 
     init {
         magic {

@@ -1,10 +1,12 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
-import miragefairy2019.libkt.buildText
-import miragefairy2019.libkt.color
+import miragefairy2019.libkt.TextComponentScope
+import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.red
+import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.libkt.white
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod3.magic.api.IMagicHandler
@@ -35,8 +37,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.util.text.ITextComponent
-import net.minecraft.util.text.TextFormatting.BLUE
-import net.minecraft.util.text.TextFormatting.WHITE
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -53,7 +53,11 @@ abstract class ItemFairyWeaponBase3(
         }
 
 
+        enum class EnumVisibility { ALWAYS, DETAIL, NEVER }
         class MagicStatusWrapper<T>(var magicStatus: IMagicStatus<T>) : IMagicStatus<T> {
+            @JvmField
+            var visibility = EnumVisibility.NEVER
+            fun setVisibility(it: EnumVisibility) = apply { this.visibility = it }
             override fun getName(): String = magicStatus.name
             override fun getFunction(): IMagicStatusFunction<T> = magicStatus.function
             override fun getFormatter(): IMagicStatusFormatter<T> = magicStatus.formatter
@@ -141,22 +145,20 @@ abstract class ItemFairyWeaponBase3(
     @SideOnly(Side.CLIENT)
     override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val actualFairyType = getActualFairyTypeClient(fairyType)
-        fun <T> getStatusText(magicStatus: IMagicStatus<T>) = buildText {
-            text(magicStatus.displayName)
-            text(": ")
-            text {
-                text(magicStatus.formatter.getDisplayValue(magicStatus.function, actualFairyType))
-            }.color(WHITE)
-            if (flag.isAdvanced) {
-                val list = magicStatus.function.factors.map { listOf(it) }.stream().reduce { a, b -> listOf(a, listOf(buildText { text(", ") }), b).flatten() }.orElse(null)
-                if (list != null) {
-                    text(" (")
-                    list.forEach { text(it) }
-                    text(")")
-                }
+        fun <T> TextComponentScope.f2(magicStatus: IMagicStatus<T>) = !magicStatus.formatter.getDisplayValue(magicStatus.function, actualFairyType)
+        fun <T> TextComponentScope.f(magicStatus: IMagicStatus<T>): List<ITextComponent> {
+            val list = magicStatus.function.factors.map { !it }.sandwich { !", " }.flatten()
+            return if (list.isNotEmpty()) !" (" + list + !")" else empty
+        }
+        magicStatusWrapperList.forEach {
+            if (when (it.visibility) {
+                        EnumVisibility.ALWAYS -> true
+                        EnumVisibility.DETAIL -> flag.isAdvanced
+                        EnumVisibility.NEVER -> false
+                    }) {
+                tooltip += formattedText { (!it.displayName + !": " + f2(it).white + f(it)).blue }
             }
-        }.color(BLUE)
-        magicStatusWrapperList.forEach { tooltip.add(getStatusText(it).formattedText) }
+        }
     }
 
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
