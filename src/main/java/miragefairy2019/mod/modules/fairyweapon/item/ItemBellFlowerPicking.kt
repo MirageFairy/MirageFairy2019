@@ -2,11 +2,11 @@ package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
+import miragefairy2019.mod3.magic.api.IMagicHandler
+import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.erg.ErgTypes.fell
 import miragefairy2019.modkt.api.erg.ErgTypes.knowledge
-import miragefairy2019.mod3.magic.api.IMagicHandler
-import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.modkt.api.mana.ManaTypes
 import miragefairy2019.modkt.api.mana.ManaTypes.dark
 import miragefairy2019.modkt.api.mana.ManaTypes.shine
@@ -19,7 +19,11 @@ import miragefairy2019.modkt.impl.magicstatus.ranged
 import mirrg.boron.util.UtilsMath
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.init.SoundEvents
-import net.minecraft.util.*
+import net.minecraft.util.EnumActionResult
+import net.minecraft.util.EnumHand
+import net.minecraft.util.EnumParticleTypes
+import net.minecraft.util.SoundCategory
+import net.minecraft.util.SoundEvent
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.Vec3d
 import java.util.*
@@ -39,10 +43,10 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
 
     init {
         magic { world, player, itemStack, fairyType ->
-            operator fun <T> IMagicStatus<T>.invoke() = function.getValue(fairyType)
+            operator fun <T> IMagicStatus<T>.not() = function.getValue(fairyType)
 
             // 視線判定
-            val magicSelectorRayTrace = MagicSelectorRayTrace(world, player, additionalReach())
+            val magicSelectorRayTrace = MagicSelectorRayTrace(world, player, !additionalReach)
 
             // 視点判定
             val magicSelectorPosition = magicSelectorRayTrace.magicSelectorPosition
@@ -55,7 +59,7 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
             }
 
             // 範囲判定
-            val magicSelectorCircle = magicSelectorPosition.getMagicSelectorCircle(radius())
+            val magicSelectorCircle = magicSelectorPosition.getMagicSelectorCircle(!radius)
 
             // 対象計算
             val listTarget = magicSelectorCircle.blockPosList
@@ -65,11 +69,11 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
                         if (pickable != null && pickable.isPickableAge(blockState)) Pair(it, pickable) else null
                     }
                     .sortedBy { it.first.distanceSquared }
-                    .take(maxTargetCount())
+                    .take(!maxTargetCount)
                     .map { Pair(it.first.blockPos, it.second) }
 
             // 資源がない場合、中止
-            if (itemStack.itemDamage + ceil(wear()).toInt() > itemStack.maxDamage) return@magic object : IMagicHandler {
+            if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic object : IMagicHandler {
                 override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                     magicSelectorPosition.doEffect(0xFF0000) // 視点
                     magicSelectorCircle.doEffect() // 範囲
@@ -108,13 +112,13 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
 
                     run targets@{
                         for (pair in listTarget) {
-                            if (itemStack.itemDamage + ceil(wear()).toInt() > itemStack.maxDamage) return@targets // 耐久が足りないので中止
-                            if (targetCount + 1 > maxTargetCount()) return@targets // パワーが足りないので中止
+                            if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@targets // 耐久が足りないので中止
+                            if (targetCount + 1 > !maxTargetCount) return@targets // パワーが足りないので中止
 
                             // 成立
 
                             // 資源消費
-                            itemStack.damageItem(UtilsMath.randomInt(world.rand, wear()), player)
+                            itemStack.damageItem(UtilsMath.randomInt(world.rand, !wear), player)
                             targetCount++
 
                             // 音取得
@@ -127,11 +131,11 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
                             run {
 
                                 // 収穫試行
-                                val result = pair.second.tryPick(world, pair.first, Optional.of(player), UtilsMath.randomInt(world.rand, fortune()))
+                                val result = pair.second.tryPick(world, pair.first, Optional.of(player), UtilsMath.randomInt(world.rand, !fortune))
                                 if (!result) return@targets
 
                                 // 破壊したばかりのブロックの周辺のアイテムを集める
-                                if (collection()) {
+                                if (!collection) {
                                     world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(pair.first)).forEach {
                                         collected = true
                                         it.setPosition(player.posX, player.posY, player.posZ)
@@ -158,12 +162,12 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
                     if (targetCount >= 1) {
 
                         // エフェクト
-                        playSound(world, player, 2.0.pow(pitch() / 12.0))
+                        playSound(world, player, 2.0.pow(!pitch / 12.0))
                         world.playSound(null, player.posX, player.posY, player.posZ, breakSound!!, SoundCategory.PLAYERS, 1.0f, 1.0f)
 
                         // クールタイム
-                        val ratio = targetCount / maxTargetCount().toDouble()
-                        player.cooldownTracker.setCooldown(this@ItemBellFlowerPicking, (coolTime() * ratio.pow(0.5)).toInt())
+                        val ratio = targetCount / (!maxTargetCount).toDouble()
+                        player.cooldownTracker.setCooldown(this@ItemBellFlowerPicking, (!coolTime * ratio.pow(0.5)).toInt())
 
                     }
                     if (collected) {
