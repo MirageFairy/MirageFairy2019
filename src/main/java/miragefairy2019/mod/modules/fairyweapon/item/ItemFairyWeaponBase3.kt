@@ -48,8 +48,7 @@ abstract class ItemFairyWeaponBase3(
     companion object {
         private const val prefix = "miragefairy2019.gui.magic"
 
-        class
-        MagicScope(val skillLevel: Int, val world: World, val player: EntityPlayer, val itemStack: ItemStack, val fairyType: IFairyType) {
+        class MagicScope(val skillLevel: Int, val world: World, val player: EntityPlayer, val itemStack: ItemStack, val fairyType: IFairyType) {
             operator fun <T> IMagicStatus<T>.not(): T = function.getValue(fairyType)
         }
 
