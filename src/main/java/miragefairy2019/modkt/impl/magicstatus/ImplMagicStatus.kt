@@ -34,6 +34,8 @@ class MagicStatus<T>(
 
 val <T> IMagicStatus<T>.displayName get() = textComponent { translate("mirageFairy2019.magic.status.$name.name") }
 
+fun <T> IMagicStatus<T>.getDisplayValue(fairyType: IFairyType): ITextComponent = formatter.getDisplayValue(function, fairyType)
+
 val <T> IMagicStatusFunction<T>.defaultValue: T get() = getValue(ApiFairy.empty())
 
 val <T> IMagicStatusFunction<T>.factors

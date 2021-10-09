@@ -26,6 +26,7 @@ import miragefairy2019.modkt.impl.getMana
 import miragefairy2019.modkt.impl.magicstatus.MagicStatus
 import miragefairy2019.modkt.impl.magicstatus.displayName
 import miragefairy2019.modkt.impl.magicstatus.factors
+import miragefairy2019.modkt.impl.magicstatus.getDisplayValue
 import miragefairy2019.modkt.impl.magicstatus.ranged
 import miragefairy2019.modkt.impl.plus
 import miragefairy2019.modkt.impl.times
@@ -145,7 +146,6 @@ abstract class ItemFairyWeaponBase3(
     @SideOnly(Side.CLIENT)
     override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val actualFairyType = getActualFairyTypeClient(fairyType)
-        fun <T> TextComponentScope.f2(magicStatus: IMagicStatus<T>) = !magicStatus.formatter.getDisplayValue(magicStatus.function, actualFairyType)
         fun <T> TextComponentScope.f(magicStatus: IMagicStatus<T>): List<ITextComponent> {
             val list = magicStatus.function.factors.map { !it }.sandwich { !", " }.flatten()
             return if (list.isNotEmpty()) !" (" + list + !")" else empty
@@ -156,7 +156,7 @@ abstract class ItemFairyWeaponBase3(
                         EnumVisibility.DETAIL -> flag.isAdvanced
                         EnumVisibility.NEVER -> false
                     }) {
-                tooltip += formattedText { (!it.displayName + !": " + f2(it).white + f(it)).blue }
+                tooltip += formattedText { (!it.displayName + !": " + !it.getDisplayValue(actualFairyType).white + f(it)).blue }
             }
         }
     }
