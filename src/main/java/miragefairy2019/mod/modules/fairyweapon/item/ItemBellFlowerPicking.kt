@@ -42,8 +42,7 @@ class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private va
     val collection = register("collection"({ erg(ErgTypes.warp) >= 10 }, { boolean }).positiveBoolean())
 
     init {
-        magic { world, player, itemStack, fairyType ->
-            operator fun <T> IMagicStatus<T>.not() = function.getValue(fairyType)
+        magic {
 
             // 視線判定
             val magicSelectorRayTrace = MagicSelectorRayTrace(world, player, !additionalReach)
