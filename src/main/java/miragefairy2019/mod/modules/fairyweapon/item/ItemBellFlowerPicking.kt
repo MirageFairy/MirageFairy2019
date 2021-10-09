@@ -10,9 +10,9 @@ import miragefairy2019.modkt.api.erg.ErgTypes.fell
 import miragefairy2019.modkt.api.erg.ErgTypes.knowledge
 import miragefairy2019.modkt.api.erg.ErgTypes.warp
 import miragefairy2019.modkt.api.mana.ManaTypes
-import miragefairy2019.modkt.impl.magicstatus.negative
-import miragefairy2019.modkt.impl.magicstatus.positive
-import miragefairy2019.modkt.impl.magicstatus.positiveBoolean
+import miragefairy2019.mod3.magic.negative
+import miragefairy2019.mod3.magic.positive
+import miragefairy2019.mod3.magic.positiveBoolean
 import mirrg.boron.util.UtilsMath
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.init.SoundEvents

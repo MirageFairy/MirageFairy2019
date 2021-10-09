@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.impl.magicstatus
+package miragefairy2019.mod3.magic
 
 import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.buildText
