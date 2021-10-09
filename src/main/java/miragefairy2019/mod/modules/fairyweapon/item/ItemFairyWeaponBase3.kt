@@ -74,7 +74,7 @@ abstract class ItemFairyWeaponBase3(
         enum class EnumVisibility { ALWAYS, DETAIL, NEVER }
         class MagicStatusWrapper<T>(var magicStatus: IMagicStatus<T>) : IMagicStatus<T> {
             @JvmField
-            var visibility = EnumVisibility.NEVER
+            var visibility = NEVER
             fun setVisibility(it: EnumVisibility) = apply { this.visibility = it }
             override fun getName(): String = magicStatus.name
             override fun getFunction(): IMagicStatusFunction<T> = magicStatus.function
