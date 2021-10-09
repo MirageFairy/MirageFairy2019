@@ -3,6 +3,7 @@ package miragefairy2019.modkt.impl.magicstatus
 import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
+import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
@@ -30,14 +31,8 @@ class MagicStatus<T>(
     override fun getFormatter() = formatter
 }
 
-open class MagicStatusAdapter<T>(internal val parent: IMagicStatus<T>) : IMagicStatus<T> {
-    override fun getName(): String = parent.name
-    override fun getFunction(): IMagicStatusFunction<T> = parent.function
-    override fun getFormatter(): IMagicStatusFormatter<T> = parent.formatter
-}
 
-
-val <T> IMagicStatus<T>.displayName get() = buildText { translate("mirageFairy2019.magic.status.$name.name") }
+val <T> IMagicStatus<T>.displayName get() = textComponent { translate("mirageFairy2019.magic.status.$name.name") }
 
 val <T> IMagicStatusFunction<T>.defaultValue: T get() = getValue(ApiFairy.empty())
 
@@ -73,7 +68,7 @@ val <T> IMagicStatusFunction<T>.factors
     }
 
 
-fun <T : Comparable<T>> IMagicStatusFormatter<T>.coloredBySign(colorPositive: TextFormatting, colorNegative: TextFormatting): IMagicStatusFormatter<T> = IMagicStatusFormatter<T> { function, fairyType ->
+fun <T : Comparable<T>> IMagicStatusFormatter<T>.coloredBySign(colorPositive: TextFormatting, colorNegative: TextFormatting) = IMagicStatusFormatter<T> { function, fairyType ->
     val value = function.getValue(fairyType)
     val defaultValue = function.defaultValue
     val displayValue = this@coloredBySign.getDisplayValue(function, fairyType)
@@ -87,7 +82,7 @@ fun <T : Comparable<T>> IMagicStatusFormatter<T>.coloredBySign(colorPositive: Te
 val <T : Comparable<T>> IMagicStatusFormatter<T>.positive get() = coloredBySign(GREEN, RED)
 val <T : Comparable<T>> IMagicStatusFormatter<T>.negative get() = coloredBySign(RED, GREEN)
 
-fun IMagicStatusFormatter<Boolean>.boolean(isPositive: Boolean): IMagicStatusFormatter<Boolean> = IMagicStatusFormatter<Boolean> { function, fairyType ->
+fun IMagicStatusFormatter<Boolean>.boolean(isPositive: Boolean) = IMagicStatusFormatter<Boolean> { function, fairyType ->
     val value = function.getValue(fairyType)
     val displayValue = this@boolean.getDisplayValue(function, fairyType)
     displayValue.color(if (value xor !isPositive) GREEN else RED)
@@ -105,8 +100,8 @@ fun <T : Comparable<T>> IMagicStatus<T>.ranged(min: T, max: T) = object : IMagic
         val displayValue = this@ranged.formatter.getDisplayValue(function, fairyType)
         when (value) {
             defaultValue -> displayValue
-            min -> displayValue.bold()
-            max -> displayValue.bold()
+            min -> displayValue.bold
+            max -> displayValue.bold
             else -> displayValue
         }
     }
