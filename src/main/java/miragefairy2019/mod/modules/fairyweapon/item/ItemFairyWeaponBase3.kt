@@ -165,10 +165,6 @@ abstract class ItemFairyWeaponBase3(
     @SideOnly(Side.CLIENT)
     override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val actualFairyType = getActualFairyTypeClient(fairyType)
-        fun <T> TextComponentScope.f(magicStatus: IMagicStatus<T>): List<ITextComponent> {
-            val list = magicStatus.function.factors.map { !it }.sandwich { !", " }.flatten()
-            return if (list.isNotEmpty()) !" (" + list + !")" else empty
-        }
         tooltip += formattedText { (translate("$prefix.label.skillLevel") + !": " + (!"${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(mastery)}").white.bold + !" (" + !mastery.displayName + !")").aqua }
         magicStatusWrapperList.forEach {
             if (when (it.visibility) {
@@ -177,6 +173,10 @@ abstract class ItemFairyWeaponBase3(
                         NEVER -> false
                     }) {
                 tooltip += formattedText {
+                    fun <T> TextComponentScope.f(magicStatus: IMagicStatus<T>): List<ITextComponent> {
+                        val list = magicStatus.function.factors.map { !it }.sandwich { !", " }.flatten()
+                        return if (list.isNotEmpty()) !" (" + list + !")" else empty
+                    }
                     join(
                             !it.displayName,
                             !": ",
