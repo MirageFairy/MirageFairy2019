@@ -8,6 +8,7 @@ import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.modkt.api.erg.ErgTypes.fell
 import miragefairy2019.modkt.api.erg.ErgTypes.knowledge
 import miragefairy2019.modkt.api.erg.ErgTypes.warp
+import miragefairy2019.modkt.api.mana.ManaTypes
 import miragefairy2019.modkt.api.mana.ManaTypes.aqua
 import miragefairy2019.modkt.api.mana.ManaTypes.dark
 import miragefairy2019.modkt.api.mana.ManaTypes.fire
@@ -33,7 +34,12 @@ import kotlin.math.floor
 import kotlin.math.pow
 
 class ItemBellFlowerPicking(private val maxTargetCountFactor: Double, private val fortuneFactor: Double, private val radiusFactor: Double) : ItemFairyWeaponBase3(
-        EnumMastery.flowerPicking
+        ManaTypes.dark,
+        EnumMastery.flowerPicking,
+        0.0,
+        0.0,
+        0.0,
+        0.0
 ) {
     val pitch = "pitch"({ double2.positive }) { -(cost / 50.0 - 1) * 12 }.setRange(-12.0..12.0)
     val maxTargetCount = "maxTargetCount"({ int.positive }) { floor(2 + !dark * maxTargetCountFactor + !fell * 0.1).toInt() }.setRange(2..10000)
