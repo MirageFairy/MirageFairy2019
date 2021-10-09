@@ -2,6 +2,8 @@ package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
+import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.main.ApiMain
@@ -27,7 +29,6 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting.BLUE
-import net.minecraft.util.text.TextFormatting.RED
 import net.minecraft.util.text.TextFormatting.WHITE
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
