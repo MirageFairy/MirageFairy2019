@@ -79,10 +79,10 @@ val <T> IMagicStatusFunction<T>.factors
     }
 
 
-fun <T : Comparable<T>> IMagicStatusFormatter<T>.coloredBySign(colorPositive: TextFormatting, colorNegative: TextFormatting) = IMagicStatusFormatter<T> { function, fairyType ->
-    val value = function.getValue(fairyType)
+fun <T : Comparable<T>> IMagicStatusFormatter<T>.coloredBySign(colorPositive: TextFormatting, colorNegative: TextFormatting) = IMagicStatusFormatter<T> { function, arguments ->
+    val value = function.getValue(arguments)
     val defaultValue = function.defaultValue
-    val displayValue = this@coloredBySign.getDisplayValue(function, fairyType)
+    val displayValue = this@coloredBySign.getDisplayValue(function, arguments)
     when {
         value > defaultValue -> displayValue.color(colorPositive)
         value < defaultValue -> displayValue.color(colorNegative)
@@ -93,9 +93,9 @@ fun <T : Comparable<T>> IMagicStatusFormatter<T>.coloredBySign(colorPositive: Te
 val <T : Comparable<T>> IMagicStatusFormatter<T>.positive get() = coloredBySign(GREEN, RED)
 val <T : Comparable<T>> IMagicStatusFormatter<T>.negative get() = coloredBySign(RED, GREEN)
 
-fun IMagicStatusFormatter<Boolean>.boolean(isPositive: Boolean) = IMagicStatusFormatter<Boolean> { function, fairyType ->
-    val value = function.getValue(fairyType)
-    val displayValue = this@boolean.getDisplayValue(function, fairyType)
+fun IMagicStatusFormatter<Boolean>.boolean(isPositive: Boolean) = IMagicStatusFormatter<Boolean> { function, arguments ->
+    val value = function.getValue(arguments)
+    val displayValue = this@boolean.getDisplayValue(function, arguments)
     displayValue.color(if (value xor !isPositive) GREEN else RED)
 }
 
@@ -105,10 +105,10 @@ val IMagicStatusFormatter<Boolean>.negativeBoolean get() = boolean(false)
 fun <T : Comparable<T>> IMagicStatus<T>.ranged(min: T, max: T) = object : IMagicStatus<T> {
     override fun getName() = this@ranged.name
     override fun getFunction() = IMagicStatusFunction { this@ranged.function.getValue(it).coerceIn(min, max) }
-    override fun getFormatter() = IMagicStatusFormatter<T> { function, fairyType ->
-        val value = function.getValue(fairyType)
+    override fun getFormatter() = IMagicStatusFormatter<T> { function, arguments ->
+        val value = function.getValue(arguments)
         val defaultValue = function.defaultValue
-        val displayValue = this@ranged.formatter.getDisplayValue(function, fairyType)
+        val displayValue = this@ranged.formatter.getDisplayValue(function, arguments)
         when (value) {
             defaultValue -> displayValue
             min -> displayValue.bold
