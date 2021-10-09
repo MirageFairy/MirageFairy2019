@@ -103,6 +103,7 @@ abstract class ItemFairyWeaponBase3(
         }
 
         class MagicStatusFormulaScope(val arguments: IMagicStatusFunctionArguments) {
+            val skillLevel get() = arguments.skillLevel
             val cost get() = arguments.fairyType.cost
             operator fun IManaType.not() = arguments.fairyType.manaSet.getMana(this)
             operator fun IErgType.not() = arguments.fairyType.ergSet.getPower(this)
