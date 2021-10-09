@@ -1,9 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.libkt.TextComponentScope
-import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
-import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.sandwich
@@ -21,7 +19,6 @@ import miragefairy2019.mod3.magic.api.IMagicStatusFunction
 import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
-import miragefairy2019.mod3.skill.displayName
 import miragefairy2019.mod3.skill.getSkillLevel
 import miragefairy2019.modkt.api.erg.IErgType
 import miragefairy2019.modkt.api.fairy.IFairyType
@@ -167,7 +164,6 @@ abstract class ItemFairyWeaponBase3(
     @SideOnly(Side.CLIENT)
     override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val actualFairyType = getActualFairyTypeClient(fairyType)
-        tooltip += formattedText { (translate("$prefix.label.skillLevel") + !": " + (!"${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(mastery)}").white.bold + !" (" + !mastery.displayName + !")").aqua }
         magicStatusWrapperList.forEach {
             if (when (it.visibility) {
                         ALWAYS -> true
