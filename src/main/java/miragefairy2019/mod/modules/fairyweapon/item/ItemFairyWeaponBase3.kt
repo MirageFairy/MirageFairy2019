@@ -26,7 +26,12 @@ import miragefairy2019.modkt.api.erg.IErgType
 import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.api.mana.IManaSet
 import miragefairy2019.modkt.api.mana.IManaType
-import miragefairy2019.modkt.api.mana.ManaTypes
+import miragefairy2019.modkt.api.mana.ManaTypes.aqua
+import miragefairy2019.modkt.api.mana.ManaTypes.dark
+import miragefairy2019.modkt.api.mana.ManaTypes.fire
+import miragefairy2019.modkt.api.mana.ManaTypes.gaia
+import miragefairy2019.modkt.api.mana.ManaTypes.shine
+import miragefairy2019.modkt.api.mana.ManaTypes.wind
 import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
 import miragefairy2019.modkt.impl.fairy.FairyTypeAdapter
 import miragefairy2019.modkt.impl.getMana
@@ -201,48 +206,48 @@ abstract class ItemFairyWeaponBase3(
 
     val strength = "strength"({ double0.positive }) {
         if (weaponStrength == null) 0.0 else weaponStrength * (cost / 50.0) + when (weaponManaType) {
-            ManaTypes.shine -> !ManaTypes.shine
-            ManaTypes.fire -> !ManaTypes.fire
-            ManaTypes.wind -> !ManaTypes.wind
-            ManaTypes.gaia -> !ManaTypes.gaia
-            ManaTypes.aqua -> !ManaTypes.aqua
-            ManaTypes.dark -> !ManaTypes.dark
+            shine -> !shine
+            fire -> !fire
+            wind -> !wind
+            gaia -> !gaia
+            aqua -> !aqua
+            dark -> !dark
             else -> throw IllegalArgumentException()
         }
     }.setVisibility(ALWAYS)
 
     val extent = "extent"({ double0.positive }) {
         if (weaponExtent == null) 0.0 else weaponExtent * (cost / 50.0) + when (weaponManaType) {
-            ManaTypes.shine -> !ManaTypes.gaia + !ManaTypes.wind
-            ManaTypes.fire -> !ManaTypes.gaia + !ManaTypes.wind
-            ManaTypes.wind -> !ManaTypes.gaia * 2
-            ManaTypes.gaia -> !ManaTypes.wind * 2
-            ManaTypes.aqua -> !ManaTypes.gaia + !ManaTypes.wind
-            ManaTypes.dark -> !ManaTypes.gaia + !ManaTypes.wind
+            shine -> !gaia + !wind
+            fire -> !gaia + !wind
+            wind -> !gaia * 2
+            gaia -> !wind * 2
+            aqua -> !gaia + !wind
+            dark -> !gaia + !wind
             else -> throw IllegalArgumentException()
         }
     }.setVisibility(ALWAYS)
 
     val endurance = "endurance"({ double0.positive }) {
         if (weaponEndurance == null) 0.0 else weaponEndurance * (cost / 50.0) + when (weaponManaType) {
-            ManaTypes.shine -> !ManaTypes.fire + !ManaTypes.aqua
-            ManaTypes.fire -> !ManaTypes.aqua * 2
-            ManaTypes.wind -> !ManaTypes.fire + !ManaTypes.aqua
-            ManaTypes.gaia -> !ManaTypes.fire + !ManaTypes.aqua
-            ManaTypes.aqua -> !ManaTypes.fire * 2
-            ManaTypes.dark -> !ManaTypes.fire + !ManaTypes.aqua
+            shine -> !fire + !aqua
+            fire -> !aqua * 2
+            wind -> !fire + !aqua
+            gaia -> !fire + !aqua
+            aqua -> !fire * 2
+            dark -> !fire + !aqua
             else -> throw IllegalArgumentException()
         }
     }.setVisibility(ALWAYS)
 
     val production = "production"({ double0.positive }) {
         if (weaponProduction == null) 0.0 else weaponProduction * (cost / 50.0) + when (weaponManaType) {
-            ManaTypes.shine -> !ManaTypes.dark * 2
-            ManaTypes.fire -> !ManaTypes.shine + !ManaTypes.dark
-            ManaTypes.wind -> !ManaTypes.shine + !ManaTypes.dark
-            ManaTypes.gaia -> !ManaTypes.shine + !ManaTypes.dark
-            ManaTypes.aqua -> !ManaTypes.shine + !ManaTypes.dark
-            ManaTypes.dark -> !ManaTypes.shine * 2
+            shine -> !dark * 2
+            fire -> !shine + !dark
+            wind -> !shine + !dark
+            gaia -> !shine + !dark
+            aqua -> !shine + !dark
+            dark -> !shine * 2
             else -> throw IllegalArgumentException()
         }
     }.setVisibility(ALWAYS)
