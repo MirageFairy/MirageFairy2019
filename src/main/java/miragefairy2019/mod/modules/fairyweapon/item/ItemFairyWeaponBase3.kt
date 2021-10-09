@@ -83,7 +83,6 @@ abstract class ItemFairyWeaponBase3(
 
         fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
 
-
         class MagicStatusFormatterScope<T> {
             private fun <T> f(block: (T) -> ITextComponent) = IMagicStatusFormatter<T> { function, fairyType -> block(function.getValue(fairyType)) }
             val string get() = f<T> { textComponent { format("%s", it) } }
