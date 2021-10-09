@@ -53,3 +53,4 @@ miragefairy2019.gui.astronomicalObservation.message.gainLevel=You have earned %s
 miragefairy2019.gui.astronomicalObservation.message.doNothing=You got nothing...
 
 miragefairy2019.gui.magic.message.rightClick=Right click to use magic
+miragefairy2019.gui.magic.label.skillLevel=Skill Level
