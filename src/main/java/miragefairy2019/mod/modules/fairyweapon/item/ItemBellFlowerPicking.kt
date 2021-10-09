@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.libkt.drop
 import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
@@ -15,6 +16,7 @@ import miragefairy2019.modkt.impl.magicstatus.positiveBoolean
 import mirrg.boron.util.UtilsMath
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.init.SoundEvents
+import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.util.EnumParticleTypes
@@ -38,6 +40,7 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
     val wear = "wear"({ percent2.negative }) { 0.2 / (1 + !endurance * 0.03) }
     val coolTime = "coolTime"({ tick.negative }) { cost * 0.5 }
     val collection = "collection"({ boolean.positiveBoolean }) { !warp >= 10 }.setVisibility(ALWAYS)
+    val extraSeedDropRate = "extraSeedDropRate"({ percent1.positive }) { (getSkillLevel(mastery) / 100.0).coerceIn(0.0, 1.0) }.setVisibility(ALWAYS)
 
     init {
         magic {
@@ -133,6 +136,11 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
                                 // 収穫試行
                                 val result = pickable.tryPick(world, blockPos, Optional.of(player), UtilsMath.randomInt(world.rand, !fortune))
                                 if (!result) return@targets
+
+                                // 種の追加ドロップ
+                                if (!extraSeedDropRate > world.rand.nextDouble()) {
+                                    drop(world, ItemStack(ApiMirageFlower.itemMirageFlowerSeeds), Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
+                                }
 
                                 // 破壊したばかりのブロックの周辺のアイテムを集める
                                 if (!collection) {
