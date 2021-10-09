@@ -67,8 +67,8 @@ abstract class ItemFairyWeaponBase3(
         private const val prefix = "miragefairy2019.gui.magic"
 
 
-        class MagicScope(val skillLevel: Int, val world: World, val player: EntityPlayer, val itemStack: ItemStack, val fairyType: IFairyType) {
-            operator fun <T> IMagicStatus<T>.not(): T = function.getValue(MagicStatusFunctionArguments({ 0 }, fairyType))
+        class MagicScope(val getSkillLevel: (IMastery) -> Int, val world: World, val player: EntityPlayer, val itemStack: ItemStack, val fairyType: IFairyType) {
+            operator fun <T> IMagicStatus<T>.not(): T = function.getValue(MagicStatusFunctionArguments({ getSkillLevel(it) }, fairyType))
         }
 
 
@@ -191,10 +191,10 @@ abstract class ItemFairyWeaponBase3(
         val fairyType = findFairy(itemStack, player).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
         if (world.isRemote) {
             val actualFairyType = getActualFairyTypeClient(fairyType)
-            return ActionResult(getMagicHandler(MagicScope(ApiSkill.skillManager.clientSkillContainer.getSkillLevel(mastery), world, player, itemStack, actualFairyType)).onItemRightClick(hand), itemStack)
+            return ActionResult(getMagicHandler(MagicScope({ ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it) }, world, player, itemStack, actualFairyType)).onItemRightClick(hand), itemStack)
         } else {
             val actualFairyType = getActualFairyTypeServer(player, fairyType)
-            return ActionResult(getMagicHandler(MagicScope(ApiSkill.skillManager.getServerSkillContainer(player).getSkillLevel(mastery), world, player, itemStack, actualFairyType)).onItemRightClick(hand), itemStack)
+            return ActionResult(getMagicHandler(MagicScope({ ApiSkill.skillManager.getServerSkillContainer(player).getSkillLevel(it) }, world, player, itemStack, actualFairyType)).onItemRightClick(hand), itemStack)
         }
     }
 
@@ -205,7 +205,7 @@ abstract class ItemFairyWeaponBase3(
         val fairyType = findFairy(itemStack, entity).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
         if (world.isRemote) {
             val actualFairyType = getActualFairyTypeClient(fairyType)
-            getMagicHandler(MagicScope(ApiSkill.skillManager.clientSkillContainer.getSkillLevel(mastery), world, entity, itemStack, actualFairyType)).onUpdate(itemSlot, isSelected)
+            getMagicHandler(MagicScope({ ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it) }, world, entity, itemStack, actualFairyType)).onUpdate(itemSlot, isSelected)
         }
     }
 
