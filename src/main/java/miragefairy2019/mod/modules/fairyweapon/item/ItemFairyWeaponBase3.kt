@@ -71,7 +71,7 @@ abstract class ItemFairyWeaponBase3(
 
 
         class MagicScope(val skillLevel: Int, val world: World, val player: EntityPlayer, val itemStack: ItemStack, val fairyType: IFairyType) {
-            operator fun <T> IMagicStatus<T>.not(): T = function.getValue(MagicStatusFunctionArguments(skillLevel, fairyType))
+            operator fun <T> IMagicStatus<T>.not(): T = function.getValue(MagicStatusFunctionArguments({ 0 }, fairyType))
         }
 
 
@@ -104,7 +104,7 @@ abstract class ItemFairyWeaponBase3(
         }
 
         class MagicStatusFormulaScope(val arguments: IMagicStatusFunctionArguments) {
-            val skillLevel get() = arguments.skillLevel
+            fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
             val cost get() = arguments.fairyType.cost
             operator fun IManaType.not() = arguments.fairyType.manaSet.getMana(this)
             operator fun IErgType.not() = arguments.fairyType.ergSet.getPower(this)
@@ -182,7 +182,7 @@ abstract class ItemFairyWeaponBase3(
                     join(
                             !it.displayName,
                             !": ",
-                            (!it.getDisplayValue(MagicStatusFunctionArguments(ApiSkill.skillManager.clientSkillContainer.getSkillLevel(mastery), actualFairyType))).white,
+                            (!it.getDisplayValue(MagicStatusFunctionArguments({ ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it) }, actualFairyType))).white,
                             f(it)
                     ).blue
                 }
@@ -263,5 +263,5 @@ abstract class ItemFairyWeaponBase3(
         }
     }.setVisibility(ALWAYS)
 
-    val cost = "cost"({ double0.negative }) { cost / (1.0 + skillLevel * 0.01) }.setVisibility(ALWAYS)
+    val cost = "cost"({ double0.negative }) { cost / (1.0 + getSkillLevel(mastery) * 0.01) }.setVisibility(ALWAYS)
 }

@@ -9,6 +9,8 @@ import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction
 import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
+import miragefairy2019.mod3.skill.api.IMastery
+import miragefairy2019.mod3.skill.displayName
 import miragefairy2019.modkt.api.erg.IErgSet
 import miragefairy2019.modkt.api.erg.IErgType
 import miragefairy2019.modkt.api.fairy.IFairyType
@@ -33,10 +35,10 @@ class MagicStatus<T>(
 }
 
 data class MagicStatusFunctionArguments(
-        private val skillLevel: Int,
+        private val getSkillLevel: (IMastery) -> Int,
         private val fairyType: IFairyType
 ) : IMagicStatusFunctionArguments {
-    override fun getSkillLevel() = skillLevel
+    override fun getSkillLevel(mastery: IMastery) = getSkillLevel.invoke(mastery)
     override fun getFairyType() = fairyType
 }
 
@@ -45,36 +47,44 @@ val <T> IMagicStatus<T>.displayName get() = textComponent { translate("mirageFai
 
 fun <T> IMagicStatus<T>.getDisplayValue(arguments: IMagicStatusFunctionArguments): ITextComponent = formatter.getDisplayValue(function, arguments)
 
-val <T> IMagicStatusFunction<T>.defaultValue: T get() = getValue(MagicStatusFunctionArguments(0, ApiFairy.empty()))
+val <T> IMagicStatusFunction<T>.defaultValue: T get() = getValue(MagicStatusFunctionArguments({ 0 }, ApiFairy.empty()))
 
 val <T> IMagicStatusFunction<T>.factors
     get(): Iterable<ITextComponent> {
         val factors = mutableListOf<ITextComponent>()
-        getValue(MagicStatusFunctionArguments(0, object : IFairyType {
-            fun add(textComponent: ITextComponent): Double {
-                factors.add(textComponent)
-                return 0.0
+        getValue(object : IMagicStatusFunctionArguments {
+            override fun getSkillLevel(mastery: IMastery): Int {
+                factors.add(mastery.displayName)
+                return 0
             }
 
-            override fun isEmpty() = throw UnsupportedOperationException()
-            override fun getBreed() = throw UnsupportedOperationException()
-            override fun getDisplayName() = throw UnsupportedOperationException()
-            override fun getColor() = throw UnsupportedOperationException()
-            override fun getCost() = add(buildText { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) }) // TODO 色変更
-            override fun getManaSet() = object : IManaSet {
-                override fun getShine() = add(ManaTypes.shine.displayName)
-                override fun getFire() = add(ManaTypes.fire.displayName)
-                override fun getWind() = add(ManaTypes.wind.displayName)
-                override fun getGaia() = add(ManaTypes.gaia.displayName)
-                override fun getAqua() = add(ManaTypes.aqua.displayName)
-                override fun getDark() = add(ManaTypes.dark.displayName) // TODO 色変更
+            override fun getFairyType() = object : IFairyType {
+                fun add(textComponent: ITextComponent): Double {
+                    factors.add(textComponent)
+                    return 0.0
+                }
+
+                override fun isEmpty() = throw UnsupportedOperationException()
+                override fun getBreed() = throw UnsupportedOperationException()
+                override fun getDisplayName() = throw UnsupportedOperationException()
+                override fun getColor() = throw UnsupportedOperationException()
+                override fun getCost() = add(buildText { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) }) // TODO 色変更
+                override fun getManaSet() = object : IManaSet {
+                    override fun getShine() = add(ManaTypes.shine.displayName)
+                    override fun getFire() = add(ManaTypes.fire.displayName)
+                    override fun getWind() = add(ManaTypes.wind.displayName)
+                    override fun getGaia() = add(ManaTypes.gaia.displayName)
+                    override fun getAqua() = add(ManaTypes.aqua.displayName)
+                    override fun getDark() = add(ManaTypes.dark.displayName) // TODO 色変更
+                }
+
+                override fun getErgSet() = object : IErgSet {
+                    override fun getEntries() = throw UnsupportedOperationException()
+                    override fun getPower(type: IErgType) = add(type.displayName)
+                }
             }
 
-            override fun getErgSet() = object : IErgSet {
-                override fun getEntries() = throw UnsupportedOperationException()
-                override fun getPower(type: IErgType) = add(type.displayName)
-            }
-        }))
+        })
         return factors
     }
 
