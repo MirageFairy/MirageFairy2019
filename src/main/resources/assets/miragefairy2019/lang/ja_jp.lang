@@ -390,7 +390,7 @@ tile.mirageFlowerOil.name=ミラージュオイル
 tile.dish.name=皿
 
 item.skillBook.name=スキルブック
-item.astronomicalObservationBook.name=天体観測ブック
+item.astronomicalObservationBook.name=天体観測ノート
 mirageFairy2019.magic.status.strength.name=効果値
 mirageFairy2019.magic.status.extent.name=拡散力
 mirageFairy2019.magic.status.endurance.name=持久力
