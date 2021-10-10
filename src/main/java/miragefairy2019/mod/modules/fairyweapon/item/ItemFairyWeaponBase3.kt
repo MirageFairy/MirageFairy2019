@@ -12,11 +12,19 @@ import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.NEVER
+import miragefairy2019.mod3.magic.MagicStatus
+import miragefairy2019.mod3.magic.MagicStatusFunctionArguments
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction
 import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
+import miragefairy2019.mod3.magic.displayName
+import miragefairy2019.mod3.magic.factors
+import miragefairy2019.mod3.magic.getDisplayValue
+import miragefairy2019.mod3.magic.negative
+import miragefairy2019.mod3.magic.positive
+import miragefairy2019.mod3.magic.ranged
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
@@ -33,14 +41,6 @@ import miragefairy2019.modkt.api.mana.ManaTypes.wind
 import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
 import miragefairy2019.modkt.impl.fairy.FairyTypeAdapter
 import miragefairy2019.modkt.impl.getMana
-import miragefairy2019.mod3.magic.MagicStatus
-import miragefairy2019.mod3.magic.MagicStatusFunctionArguments
-import miragefairy2019.mod3.magic.displayName
-import miragefairy2019.mod3.magic.factors
-import miragefairy2019.mod3.magic.getDisplayValue
-import miragefairy2019.mod3.magic.negative
-import miragefairy2019.mod3.magic.positive
-import miragefairy2019.mod3.magic.ranged
 import miragefairy2019.modkt.impl.plus
 import miragefairy2019.modkt.impl.times
 import net.minecraft.client.util.ITooltipFlag
@@ -61,7 +61,11 @@ abstract class ItemFairyWeaponBase3(
         val weaponStrength: Double?,
         val weaponExtent: Double?,
         val weaponEndurance: Double?,
-        val weaponProduction: Double?
+        val weaponProduction: Double?,
+        val strengthErg: IErgType?,
+        val extentErg: IErgType?,
+        val enduranceErg: IErgType?,
+        val productionErg: IErgType?
 ) : ItemFairyWeaponBase() {
     companion object {
         private const val prefix = "miragefairy2019.gui.magic"
@@ -220,7 +224,7 @@ abstract class ItemFairyWeaponBase3(
             aqua -> !aqua
             dark -> !dark
             else -> throw IllegalArgumentException()
-        }
+        } + (strengthErg?.let { !it } ?: 0.0)
     }.setVisibility(ALWAYS)
 
     val extent = "extent"({ double0.positive }) {
@@ -232,7 +236,7 @@ abstract class ItemFairyWeaponBase3(
             aqua -> !gaia + !wind
             dark -> !gaia + !wind
             else -> throw IllegalArgumentException()
-        }
+        } + (extentErg?.let { !it } ?: 0.0)
     }.setVisibility(ALWAYS)
 
     val endurance = "endurance"({ double0.positive }) {
@@ -244,7 +248,7 @@ abstract class ItemFairyWeaponBase3(
             aqua -> !fire * 2
             dark -> !fire + !aqua
             else -> throw IllegalArgumentException()
-        }
+        } + (enduranceErg?.let { !it } ?: 0.0)
     }.setVisibility(ALWAYS)
 
     val production = "production"({ double0.positive }) {
@@ -256,7 +260,7 @@ abstract class ItemFairyWeaponBase3(
             aqua -> !shine + !dark
             dark -> !shine * 2
             else -> throw IllegalArgumentException()
-        }
+        } + (productionErg?.let { !it } ?: 0.0)
     }.setVisibility(ALWAYS)
 
     val cost = "cost"({ double0.negative }) { cost / (1.0 + getSkillLevel(mastery) * 0.01) }.setVisibility(ALWAYS)

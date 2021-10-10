@@ -5,14 +5,15 @@ import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
 import miragefairy2019.mod3.magic.api.IMagicHandler
+import miragefairy2019.mod3.magic.negative
+import miragefairy2019.mod3.magic.positive
+import miragefairy2019.mod3.magic.positiveBoolean
 import miragefairy2019.mod3.skill.EnumMastery
+import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.erg.ErgTypes.fell
 import miragefairy2019.modkt.api.erg.ErgTypes.knowledge
 import miragefairy2019.modkt.api.erg.ErgTypes.warp
 import miragefairy2019.modkt.api.mana.ManaTypes
-import miragefairy2019.mod3.magic.negative
-import miragefairy2019.mod3.magic.positive
-import miragefairy2019.mod3.magic.positiveBoolean
 import mirrg.boron.util.UtilsMath
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.init.SoundEvents
@@ -31,7 +32,9 @@ import kotlin.math.pow
 
 
 class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weaponEndurance: Double, weaponProduction: Double) :
-        ItemFairyWeaponBase3(ManaTypes.dark, EnumMastery.flowerPicking, weaponStrength, weaponExtent, weaponEndurance, weaponProduction) {
+        ItemFairyWeaponBase3(ManaTypes.dark, EnumMastery.flowerPicking,
+                weaponStrength, weaponExtent, weaponEndurance, weaponProduction,
+                ErgTypes.submission, ErgTypes.art, ErgTypes.slash, ErgTypes.crystal) {
     val pitch = "pitch"({ double2.positive }) { -(cost / 50.0 - 1) * 12 }.setRange(-12.0..12.0)
     val maxTargetCount = "maxTargetCount"({ int.positive }) { 2 + floor(+!strength * 0.1 + !fell * 0.1).toInt() }.setRange(1..100)
     val fortune = "fortune"({ double2.positive }) { 3 + !production * 0.1 + !knowledge * 0.1 }.setRange(0.0..100.0)
