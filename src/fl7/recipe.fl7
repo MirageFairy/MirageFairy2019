@@ -238,6 +238,10 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 				type = "forge:ore_dict";
 				ore = "mirageFairyCrystal";
 			};
+			{
+				type = "forge:ore_dict";
+				ore = "ingotGold";
+			};
 		];
 		result = {
 			item = "miragefairy2019:skill_book";
