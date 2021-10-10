@@ -11,7 +11,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.io.IOException;
 import java.util.stream.Stream;
 
 import static mirrg.boron.swing.UtilsComponent.*;
@@ -220,15 +219,7 @@ public class WindowColorMaker extends JFrame {
 
     //
 
-    private ImmutableArray<ImmutableArray<ImageLayer>> images;
-
-    {
-        try {
-            images = MainColorMaker.loadImages();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    private ImmutableArray<ImmutableArray<ImageLayer>> images = MainColorMaker.loadImages();
 
     public void updateImage() {
         if (!leadyUpdate) return;
