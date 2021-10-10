@@ -226,6 +226,45 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	fluid("mirage_flower_extract"; "MirageFlowerExtract"; 1; 11);
 	fluid("mirage_flower_oil"    ; "MirageFlowerOil"    ; 2; 12);
 
+    # スキルブック
+	writer::write("skill_book.json"; {
+		type = "forge:ore_shapeless";
+		group = "skill_book";
+		ingredients = [
+			{
+				item = "minecraft:writable_book";
+			};
+			{
+				type = "forge:ore_dict";
+				ore = "mirageFairyCrystal";
+			};
+		];
+		result = {
+			item = "miragefairy2019:skill_book";
+		};
+	});
+
+    # 天体観測ノート
+	writer::write("astronomical_observation_book.json"; {
+		type = "forge:ore_shapeless";
+		group = "astronomical_observation_book";
+		ingredients = [
+			{
+				item = "minecraft:writable_book";
+			};
+			{
+				type = "forge:ore_dict";
+				ore = "mirageFairyCrystal";
+			};
+			{
+				item = "minecraft:ender_eye";
+			};
+		];
+		result = {
+			item = "miragefairy2019:astronomical_observation_book";
+		};
+	});
+
 );
 
 #################### 妖精アイテム ####################
