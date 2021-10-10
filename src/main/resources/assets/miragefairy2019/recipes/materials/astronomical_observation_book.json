@@ -1,0 +1,19 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "astronomical_observation_book",
+	"ingredients": [
+		{
+			"item": "minecraft:writable_book"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyCrystal"
+		},
+		{
+			"item": "minecraft:ender_eye"
+		}
+	],
+	"result": {
+		"item": "miragefairy2019:astronomical_observation_book"
+	}
+}

@@ -497,6 +497,10 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     # 皿
 	block("dish");
 
+    # メインストリーム
+	item("skill_book");
+	item("astronomical_observation_book");
+
 );
 
 REQUIRE("src/fl7/recipe.fl7");

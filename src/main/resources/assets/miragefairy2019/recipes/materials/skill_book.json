@@ -1,0 +1,16 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "skill_book",
+	"ingredients": [
+		{
+			"item": "minecraft:writable_book"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyCrystal"
+		}
+	],
+	"result": {
+		"item": "miragefairy2019:skill_book"
+	}
+}
