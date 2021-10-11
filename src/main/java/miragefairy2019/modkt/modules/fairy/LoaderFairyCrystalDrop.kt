@@ -1,18 +1,33 @@
 package miragefairy2019.modkt.modules.fairy
 
 import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.toInstant
 import miragefairy2019.mod.api.ApiFairyCrystal
 import miragefairy2019.mod.api.fairycrystal.DropFixed
 import miragefairy2019.mod.api.fairycrystal.IDrop
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockDoublePlant
+import net.minecraft.block.BlockOldLeaf
+import net.minecraft.block.BlockOldLog
+import net.minecraft.block.BlockPlanks
 import net.minecraft.block.state.IBlockState
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.boss.EntityDragon
 import net.minecraft.entity.boss.EntityWither
-import net.minecraft.entity.monster.*
+import net.minecraft.entity.monster.EntityBlaze
+import net.minecraft.entity.monster.EntityCreeper
+import net.minecraft.entity.monster.EntityEnderman
+import net.minecraft.entity.monster.EntityIronGolem
+import net.minecraft.entity.monster.EntityMagmaCube
+import net.minecraft.entity.monster.EntityShulker
+import net.minecraft.entity.monster.EntitySkeleton
+import net.minecraft.entity.monster.EntitySlime
+import net.minecraft.entity.monster.EntitySpider
+import net.minecraft.entity.monster.EntityWitherSkeleton
+import net.minecraft.entity.monster.EntityZombie
 import net.minecraft.entity.passive.EntityChicken
 import net.minecraft.entity.passive.EntityCow
 import net.minecraft.entity.passive.EntityPig
@@ -27,6 +42,8 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
+import java.time.Instant
+import java.time.LocalDateTime
 import java.util.function.Predicate
 
 val loaderFairyCrystalDrop: Module = {
@@ -93,6 +110,8 @@ val loaderFairyCrystalDrop: Module = {
             villager().world { provider.isSurfaceWorld }
             cow().world { provider.isSurfaceWorld }
             pig().world { provider.isSurfaceWorld }
+            spidereye().world { provider.isSurfaceWorld }
+            slime().world { provider.isSurfaceWorld }
 
             wheat().world { provider.isSurfaceWorld }
             lilac().world { provider.isSurfaceWorld }
@@ -103,6 +122,7 @@ val loaderFairyCrystalDrop: Module = {
             seed().world { provider.isSurfaceWorld }
             poisonouspotato().world { provider.isSurfaceWorld }
             melon().world { provider.isSurfaceWorld }
+            beetroot().world { provider.isSurfaceWorld }
 
 
             // ネザー
@@ -111,10 +131,14 @@ val loaderFairyCrystalDrop: Module = {
 
             glowstone().biomeType(BiomeDictionary.Type.NETHER)
 
+            magmacube().biomeType(BiomeDictionary.Type.NETHER)
+            blaze().biomeType(BiomeDictionary.Type.NETHER)
+
 
             // エンド
             enderman().biomeType(BiomeDictionary.Type.END)
             enderdragon().biomeType(BiomeDictionary.Type.END)
+            shulker().biomeType(BiomeDictionary.Type.END)
 
         }
 
@@ -161,6 +185,9 @@ val loaderFairyCrystalDrop: Module = {
             nephrite(0.03).material("Nephrite")
             tourmaline(0.01).material("Tourmaline")
             topaz(0.01).material("Topaz")
+            if (Instant.now() < LocalDateTime.of(2021, 12, 1, 0, 0, 0).toInstant()) {
+                imperialtopaz(0.001).material("Topaz")
+            }
 
             enderman(0.03).entity(EntityEnderman::class.java)
             spider(0.1).entity(EntitySpider::class.java)
@@ -182,6 +209,10 @@ val loaderFairyCrystalDrop: Module = {
             golem(0.1).entity(EntityIronGolem::class.java)
             cow(0.1).entity(EntityCow::class.java)
             pig(0.1).entity(EntityPig::class.java)
+            shulker(0.03).entity(EntityShulker::class.java)
+            slime(0.1).entity(EntitySlime::class.java)
+            magmacube(0.1).entity(EntityMagmaCube::class.java)
+            blaze(0.1).entity(EntityBlaze::class.java)
 
             wheat(0.1).block(Blocks.WHEAT, Blocks.HAY_BLOCK)
             lilac(0.03).blockState(Blocks.DOUBLE_PLANT.defaultState.withProperty(BlockDoublePlant.VARIANT, BlockDoublePlant.EnumPlantType.SYRINGA))
@@ -196,6 +227,7 @@ val loaderFairyCrystalDrop: Module = {
             seed(0.1).item(Items.WHEAT_SEEDS)
             poisonouspotato(0.01).item(Items.POISONOUS_POTATO)
             melon(0.03).item(Items.MELON)
+            beetroot(0.03).item(Items.BEETROOT)
 
             torch(0.3).block(Blocks.TORCH)
             furnace(0.1).block(Blocks.FURNACE)
@@ -230,6 +262,9 @@ val loaderFairyCrystalDrop: Module = {
             cookedsalmon(0.03).itemStack(ItemStack(Items.COOKED_FISH, 1, 1))
             steak(0.1).item(Items.COOKED_BEEF)
             goldenapple(0.03).itemStack(ItemStack(Items.GOLDEN_APPLE, 1, 0))
+            spidereye(0.03).item(Items.SPIDER_EYE)
+            pumpkinpie(0.03).item(Items.PUMPKIN_PIE)
+            beetrootsoup(0.03).item(Items.BEETROOT_SOUP)
 
             daytime(0.001).world { time(6000, 18000) }
             night(0.001).world { time(19000, 24000) || time(0, 5000) }
@@ -245,6 +280,8 @@ val loaderFairyCrystalDrop: Module = {
             mountain(0.01).biomeType(BiomeDictionary.Type.MOUNTAIN)
 
             fortune(0.01).itemStack { EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, it) > 0 }
+
+            eleven(0.003).item(Items.RECORD_11)
 
             time(0.0001).fixed()
         }

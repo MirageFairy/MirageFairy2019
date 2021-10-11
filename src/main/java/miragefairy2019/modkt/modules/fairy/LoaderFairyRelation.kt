@@ -115,6 +115,11 @@ val loaderFairyRelation: Module = {
             cookedsalmon(1.0, i(Items.COOKED_FISH, 1))
             steak(1.0, i(Items.COOKED_BEEF))
             goldenapple(1.0, i(Items.GOLDEN_APPLE, 0))
+            spidereye(1.0, i(Items.SPIDER_EYE))
+            beetroot(1.0, i(Items.BEETROOT))
+            pumpkinpie(1.0, i(Items.PUMPKIN_PIE))
+            beetrootsoup(1.0, i(Items.BEETROOT_SOUP))
+            eleven(1.0, i(Items.RECORD_11))
         }
 
     }
