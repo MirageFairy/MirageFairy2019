@@ -401,6 +401,9 @@ tile.dish.name=皿
 
 item.skillBook.name=スキルブック
 item.astronomicalObservationBook.name=天体観測ノート
+
+item.bakedFairy.name=焼き妖精
+item.bakedFairy.format=焼き%s
 mirageFairy2019.magic.status.strength.name=効果値
 mirageFairy2019.magic.status.extent.name=拡散力
 mirageFairy2019.magic.status.endurance.name=持久力

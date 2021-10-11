@@ -401,6 +401,9 @@ tile.dish.name=Dish
 
 item.skillBook.name=Skill Book
 item.astronomicalObservationBook.name=Astronomical Observation Note
+
+item.bakedFairy.name=Baked Fairy
+item.bakedFairy.format=Baked %s
 mirageFairy2019.magic.status.strength.name=Strength
 mirageFairy2019.magic.status.extent.name=Extent
 mirageFairy2019.magic.status.endurance.name=Endurance

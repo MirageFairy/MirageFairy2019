@@ -238,3 +238,6 @@ tile.dish.name=Dish
 
 item.skillBook.name=Skill Book
 item.astronomicalObservationBook.name=Astronomical Observation Note
+
+item.bakedFairy.name=Baked Fairy
+item.bakedFairy.format=Baked %s
