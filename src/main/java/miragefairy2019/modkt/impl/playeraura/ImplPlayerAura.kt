@@ -8,6 +8,7 @@ import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.modkt.api.mana.IManaSet
 import miragefairy2019.modkt.api.playeraura.IClientPlayerAuraHandler
+import miragefairy2019.modkt.api.playeraura.IFoodAuraContainer
 import miragefairy2019.modkt.api.playeraura.IFoodHistoryEntry
 import miragefairy2019.modkt.api.playeraura.IPlayerAuraHandler
 import miragefairy2019.modkt.api.playeraura.IPlayerAuraManager
@@ -49,19 +50,27 @@ class PlayerAuraManager : IPlayerAuraManager {
     }, player)
 
     override fun getGlobalFoodAura(itemStack: ItemStack): IManaSet? {
+        val item = itemStack.item
 
-        if (itemStack.item !is ItemFood) return null // 食べ物以外は無視
+        if (item !is ItemFood) return null // 食べ物以外は無視
 
-        val listFairyRelation = ApiFairy.fairyRelationRegistry.ingredientFairyRelations.toList()
-                .filter { it.ingredient.test(itemStack) }
-                .filter { it.relevance >= 1 }
-        if (listFairyRelation.isEmpty()) return null // 関連付けられた妖精が居ない場合は無視
+        if (item is IFoodAuraContainer) {
+            return item.getFoodAura(itemStack).orElse(null) // カスタムフードオーラ
+        } else {
+            // 妖精関係レジストリ―から、アイテムスタックに対して紐づけられた妖精列を得る
+            val listFairyRelation = ApiFairy.fairyRelationRegistry.ingredientFairyRelations.toList()
+                    .filter { it.ingredient.test(itemStack) }
+                    .filter { it.relevance >= 1 }
+            if (listFairyRelation.isEmpty()) return null // 関連付けられた妖精が居ない場合は無視
 
-        val relevanceMax = listFairyRelation.map { it.relevance }.max()!!
-        val listFairyRelationMax = listFairyRelation.filter { it.relevance == relevanceMax }.mapNotNull { getFairyType(it.itemStackFairy) }
+            // 最も関連殿深い妖精の集合
+            val relevanceMax = listFairyRelation.map { it.relevance }.max()!!
+            val listFairyRelationMax = listFairyRelation.filter { it.relevance == relevanceMax }.mapNotNull { getFairyType(it.itemStackFairy) }
 
-        fun f(typeChooser: (IManaSet) -> Double) = listFairyRelationMax.map { typeChooser(it.manaSet) / it.cost * 50 * 0.5 }.average()
-        return ManaSet(f { it.shine }, f { it.fire }, f { it.wind }, f { it.gaia }, f { it.aqua }, f { it.dark })
+            // 平均を返す
+            fun f(typeChooser: (IManaSet) -> Double) = listFairyRelationMax.map { typeChooser(it.manaSet) / it.cost * 50 * 0.5 }.average()
+            return ManaSet(f { it.shine }, f { it.fire }, f { it.wind }, f { it.gaia }, f { it.aqua }, f { it.dark })
+        }
     }
 
     override fun unloadAllServerPlayerAuraHandlers() = playerAuraHandlersServer.clear()
