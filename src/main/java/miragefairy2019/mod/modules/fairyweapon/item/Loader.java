@@ -318,7 +318,7 @@ public class Loader {
                 .get();
 
         // 花摘みの鐘 II
-        Configurator<ItemBellFlowerPicking> bellFlowerPicking2 = fairyWeapon(erMod, () -> new ItemBellFlowerPicking(20.0, 20.0, 20.0, 20.0), "flower_picking_bell_2", "bellFlowerPicking2")
+        Configurator<ItemBellFlowerPicking> bellFlowerPicking2 = fairyWeapon(erMod, () -> new ItemBellFlowerPicking(10.0, 10.0, 10.0, 10.0), "flower_picking_bell_2", "bellFlowerPicking2")
                 .bind(addComponent(bellFlowerPicking))
                 .bind(addComponent(instance(miragium.get(), 4)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.fell))))

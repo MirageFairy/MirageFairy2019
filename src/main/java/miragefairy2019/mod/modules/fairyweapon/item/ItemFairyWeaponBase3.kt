@@ -216,7 +216,7 @@ abstract class ItemFairyWeaponBase3(
     // Statuses
 
     val strength = "strength"({ double0.positive }) {
-        if (weaponStrength == null) 0.0 else weaponStrength * (cost / 50.0) + when (weaponManaType) {
+        if (weaponStrength == null) 0.0 else (weaponStrength + (strengthErg?.let { !it } ?: 0.0) + getSkillLevel(mastery) * 0.5) * (cost / 50.0) + when (weaponManaType) {
             shine -> !shine
             fire -> !fire
             wind -> !wind
@@ -224,11 +224,11 @@ abstract class ItemFairyWeaponBase3(
             aqua -> !aqua
             dark -> !dark
             else -> throw IllegalArgumentException()
-        } + (strengthErg?.let { !it } ?: 0.0)
+        }
     }.setVisibility(ALWAYS)
 
     val extent = "extent"({ double0.positive }) {
-        if (weaponExtent == null) 0.0 else weaponExtent * (cost / 50.0) + when (weaponManaType) {
+        if (weaponExtent == null) 0.0 else (weaponExtent + (extentErg?.let { !it } ?: 0.0)) * (cost / 50.0) + when (weaponManaType) {
             shine -> !gaia + !wind
             fire -> !gaia + !wind
             wind -> !gaia * 2
@@ -236,11 +236,11 @@ abstract class ItemFairyWeaponBase3(
             aqua -> !gaia + !wind
             dark -> !gaia + !wind
             else -> throw IllegalArgumentException()
-        } + (extentErg?.let { !it } ?: 0.0)
+        }
     }.setVisibility(ALWAYS)
 
     val endurance = "endurance"({ double0.positive }) {
-        if (weaponEndurance == null) 0.0 else weaponEndurance * (cost / 50.0) + when (weaponManaType) {
+        if (weaponEndurance == null) 0.0 else (weaponEndurance + (enduranceErg?.let { !it } ?: 0.0)) * (cost / 50.0) + when (weaponManaType) {
             shine -> !fire + !aqua
             fire -> !aqua * 2
             wind -> !fire + !aqua
@@ -248,11 +248,11 @@ abstract class ItemFairyWeaponBase3(
             aqua -> !fire * 2
             dark -> !fire + !aqua
             else -> throw IllegalArgumentException()
-        } + (enduranceErg?.let { !it } ?: 0.0)
+        }
     }.setVisibility(ALWAYS)
 
     val production = "production"({ double0.positive }) {
-        if (weaponProduction == null) 0.0 else weaponProduction * (cost / 50.0) + when (weaponManaType) {
+        if (weaponProduction == null) 0.0 else (weaponProduction + (productionErg?.let { !it } ?: 0.0)) * (cost / 50.0) + when (weaponManaType) {
             shine -> !dark * 2
             fire -> !shine + !dark
             wind -> !shine + !dark
@@ -260,8 +260,8 @@ abstract class ItemFairyWeaponBase3(
             aqua -> !shine + !dark
             dark -> !shine * 2
             else -> throw IllegalArgumentException()
-        } + (productionErg?.let { !it } ?: 0.0)
+        }
     }.setVisibility(ALWAYS)
 
-    val cost = "cost"({ double0.negative }) { cost / (1.0 + getSkillLevel(mastery) * 0.01) }.setVisibility(ALWAYS)
+    val cost = "cost"({ double0.negative }) { cost / (1.0 + getSkillLevel(mastery) * 0.002) }.setVisibility(ALWAYS)
 }
