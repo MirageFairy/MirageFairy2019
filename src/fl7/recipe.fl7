@@ -321,7 +321,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		[5 , "lime"      , "Lime"     ],
 		[6 , "pink"      , "Pink"     ],
 		[7 , "gray"      , "Gray"     ],
-		[8 , "silver"    , "Silver"   ],
+		[8 , "silver"    , "LightGray"],
 		[9 , "cyan"      , "Cyan"     ],
 		[10, "purple"    , "Purple"   ],
 		[11, "blue"      , "Blue"     ],
