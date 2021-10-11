@@ -15,7 +15,9 @@ import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.modules.main.ModuleMain
 import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.playeraura.IFoodAuraContainer
+import miragefairy2019.modkt.impl.div
 import miragefairy2019.modkt.impl.fairy.erg
+import miragefairy2019.modkt.impl.times
 import mirrg.boron.util.UtilsString
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
@@ -307,7 +309,7 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraContainer {
     }
 
 
-    override fun getFoodAura(itemStack: ItemStack) = Optional.ofNullable(getFairy(itemStack)?.fairyType?.manaSet)
+    override fun getFoodAura(itemStack: ItemStack) = Optional.ofNullable(getFairy(itemStack)?.fairyType?.let { it.manaSet / (it.cost / 50.0) })
 }
 
 class RecipeFairyBaking : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
