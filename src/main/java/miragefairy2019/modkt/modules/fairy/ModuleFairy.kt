@@ -17,7 +17,6 @@ import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.playeraura.IFoodAuraContainer
 import miragefairy2019.modkt.impl.div
 import miragefairy2019.modkt.impl.fairy.erg
-import miragefairy2019.modkt.impl.times
 import mirrg.boron.util.UtilsString
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
