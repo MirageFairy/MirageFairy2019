@@ -215,6 +215,17 @@ object ModuleFairy {
             }
         }
 
+        // 妖精一覧デバッグアイテム
+        item({ ItemDebugFairyList() }, "debug_fairy_list") {
+            setUnlocalizedName("debugFairyList")
+            setCreativeTab { ModuleMain.creativeTab }
+            modInitializer.onRegisterItem {
+                if (ApiMain.side().isClient) {
+                    ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("minecraft:book", "normal"))
+                }
+            }
+        }
+
         // 焼き妖精
         itemBakedFairy = item({ ItemBakedFairy() }, "baked_fairy") {
             setUnlocalizedName("bakedFairy")
