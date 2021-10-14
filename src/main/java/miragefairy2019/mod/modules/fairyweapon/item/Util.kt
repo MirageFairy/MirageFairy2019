@@ -1,14 +1,14 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.SoundEvents
 import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.SoundCategory
+import net.minecraft.util.SoundEvent
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-fun playSound(world: World, player: EntityPlayer, pitch: Double) {
-    world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, pitch.toFloat())
+fun playSound(world: World, player: EntityPlayer, soundEvent: SoundEvent, volume: Float = 1.0f, pitch: Float = 1.0f) {
+    world.playSound(null, player.posX, player.posY, player.posZ, soundEvent, SoundCategory.PLAYERS, volume, pitch)
 }
 
 fun <T> spawnParticleTargets(

@@ -173,7 +173,7 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
                     if (targetCount >= 1) {
 
                         // エフェクト
-                        playSound(world, player, 2.0.pow(!pitch / 12.0))
+                        playSound(world, player, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 2.0.pow(!pitch / 12.0).toFloat())
                         world.playSound(null, player.posX, player.posY, player.posZ, breakSound!!, SoundCategory.PLAYERS, 1.0f, 1.0f)
 
                         // クールタイム
