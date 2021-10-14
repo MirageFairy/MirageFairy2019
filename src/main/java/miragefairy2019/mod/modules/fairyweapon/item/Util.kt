@@ -1,6 +1,9 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.libkt.equalsItemDamageTag
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.ItemStack
+import net.minecraft.util.EnumHand
 import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.SoundCategory
 import net.minecraft.util.SoundEvent
@@ -31,4 +34,16 @@ fun <T> spawnParticleTargets(
                     (color shr 0 and 0xFF) / 255.0)
         }
     }
+}
+
+/**
+ * 考慮する：アイテム・メタ・タグ
+ */
+fun findItem(player: EntityPlayer, itemStackTarget: ItemStack): ItemStack? {
+    player.getHeldItem(EnumHand.OFF_HAND).let { if (itemStackTarget.equalsItemDamageTag(it)) return it }
+    player.getHeldItem(EnumHand.MAIN_HAND).let { if (itemStackTarget.equalsItemDamageTag(it)) return it }
+    (0 until player.inventory.sizeInventory).forEach { i ->
+        player.inventory.getStackInSlot(i).let { if (itemStackTarget.equalsItemDamageTag(it)) return it }
+    }
+    return null
 }
