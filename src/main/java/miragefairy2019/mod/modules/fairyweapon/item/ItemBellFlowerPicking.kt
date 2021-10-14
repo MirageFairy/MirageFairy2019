@@ -43,7 +43,7 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
     val wear = "wear"({ percent2.negative }) { 0.2 / (1 + !endurance * 0.03) }
     val coolTime = "coolTime"({ tick.negative }) { cost * 0.5 }
     val collection = "collection"({ boolean.positiveBoolean }) { !warp >= 10 }.setVisibility(ALWAYS)
-    val extraSeedDropRate = "extraSeedDropRate"({ percent1.positive }) { (getSkillLevel(mastery) / 100.0).coerceIn(0.0, 1.0) }.setVisibility(ALWAYS)
+    val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { (getSkillLevel(mastery) / 100.0).coerceIn(0.0, 1.0) }.setVisibility(ALWAYS)
 
     init {
         magic {
@@ -141,7 +141,7 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
                                 if (!result) return@targets
 
                                 // 種の追加ドロップ
-                                if (!extraSeedDropRate > world.rand.nextDouble()) {
+                                if (!extraItemDropRate > world.rand.nextDouble()) {
                                     drop(world, ItemStack(ApiMirageFlower.itemMirageFlowerSeeds), Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
                                 }
 

@@ -17,4 +17,4 @@ mirageFairy2019.magic.status.maxTargetCount.name=最大ターゲット数
 mirageFairy2019.magic.status.looting.name=ドロップ増加
 mirageFairy2019.magic.status.criticalRate.name=クリティカル率
 mirageFairy2019.magic.status.chargeTime.name=チャージタイム
-mirageFairy2019.magic.status.extraSeedDropRate.name=追加種子出現率
+mirageFairy2019.magic.status.extraItemDropRate.name=追加ドロップ率
