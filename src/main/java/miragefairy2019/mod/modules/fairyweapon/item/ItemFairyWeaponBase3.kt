@@ -45,6 +45,7 @@ import miragefairy2019.modkt.impl.plus
 import miragefairy2019.modkt.impl.times
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemStack
@@ -211,6 +212,20 @@ abstract class ItemFairyWeaponBase3(
             val actualFairyType = getActualFairyTypeClient(fairyType)
             getMagicHandler(MagicScope({ ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it) }, world, entity, itemStack, actualFairyType)).onUpdate(itemSlot, isSelected)
         }
+    }
+
+    override fun hitEntity(itemStack: ItemStack, target: EntityLivingBase, attacker: EntityLivingBase): Boolean {
+        super.hitEntity(itemStack, target, attacker)
+        if (attacker !is EntityPlayer) return true // プレイヤー取得
+        val fairyType = findFairy(itemStack, attacker).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
+        if (attacker.world.isRemote) {
+            val actualFairyType = getActualFairyTypeClient(fairyType)
+            getMagicHandler(MagicScope({ ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it) }, attacker.world, attacker, itemStack, actualFairyType)).hitEntity(target)
+        } else {
+            val actualFairyType = getActualFairyTypeServer(attacker, fairyType)
+            getMagicHandler(MagicScope({ ApiSkill.skillManager.getServerSkillContainer(attacker).getSkillLevel(it) }, attacker.world, attacker, itemStack, actualFairyType)).hitEntity(target)
+        }
+        return true
     }
 
     // Statuses
