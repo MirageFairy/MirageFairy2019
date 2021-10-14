@@ -1,17 +1,22 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
 import com.google.common.collect.Multimap
+import miragefairy2019.libkt.drop
+import miragefairy2019.libkt.red
+import miragefairy2019.libkt.textComponent
+import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
+import miragefairy2019.mod3.fairy.api.ApiFairyRelation
+import miragefairy2019.mod3.fairy.drop
+import miragefairy2019.mod3.fairy.getDropList
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.modkt.api.erg.ErgTypes
 import miragefairy2019.modkt.api.mana.ManaTypes
+import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.init.SoundEvents
-import net.minecraft.util.EnumActionResult
-import net.minecraft.util.EnumHand
-import net.minecraft.util.SoundCategory
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemStack
 
@@ -33,9 +38,31 @@ class ItemCrystalSword : ItemFairyWeaponBase3(ManaTypes.gaia, EnumMastery.closeC
     init {
         magic {
             object : IMagicHandler {
-                override fun onItemRightClick(hand: EnumHand?): EnumActionResult {
-                    world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.PLAYERS, 1.0f, 1.0f)
-                    return super.onItemRightClick(hand)
+                override fun hitEntity(target: EntityLivingBase) {
+                    if (target.health > 0) return // 撃破時のみ有効
+
+                    // クリスタルがないと失敗
+                    val itemStackFuel = findItem(player, ItemStack(ModuleFairyCrystal.itemFairyCrystal))
+                    if (itemStackFuel == null) {
+                        player.sendStatusMessage(textComponent { (!"フェアリークリスタルが足りません！").red }, false) // TODO translate
+                        return
+                    }
+
+                    // 魔法成立
+
+                    if (!extraItemDropRate > world.rand.nextDouble()) { // ステータスに基づいた確率で
+
+                        val itemStackFairy = ApiFairyRelation.fairyRelationManager.getDropList(target).drop(world.rand) ?: return // ターゲットMOBに紐づいた妖精から抽選し
+
+                        // 効果成立
+
+                        itemStackFuel.shrink(1) // クリスタル消費
+                        if (itemStackFuel.isEmpty) player.sendStatusMessage(textComponent { (!"フェアリークリスタルを使い切りました！").red }, false) // TODO translate
+                        drop(world, itemStackFairy.copy(), target.positionVector).setPickupDelay(20) // ドロップする
+                        playSound(world, player, SoundEvents.BLOCK_ANVIL_PLACE, 0.5f, 1.5f) // エフェクト
+
+                    }
+
                 }
             }
         }
