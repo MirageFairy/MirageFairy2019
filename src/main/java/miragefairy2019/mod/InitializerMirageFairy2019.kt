@@ -9,6 +9,7 @@ import miragefairy2019.mod.lib.InitializationContext
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
 import miragefairy2019.mod.modules.fairystick.ModuleFairyStick
 import miragefairy2019.mod.modules.fairyweapon.item.Loader
+import miragefairy2019.mod.modules.fairyweapon.item.moduleFairyWeapon
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
@@ -46,6 +47,7 @@ class InitializerMirageFairy2019 {
             loaderFairyRelation()
             loaderFairyCrystalDrop()
             loaderFairyLogDrop()
+            moduleFairyWeapon()
         }
 
         modInitializer.onInstantiation()
