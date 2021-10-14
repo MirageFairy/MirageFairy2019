@@ -35,6 +35,8 @@ import static miragefairy2019.mod.lib.Configurator.*;
 
 public class Loader {
 
+    public static Configurator<ItemFairyWeaponBase> miragiumSword;
+
     @SuppressWarnings("unused")
     public static void init(EventRegistryMod erMod) {
 
@@ -217,7 +219,7 @@ public class Loader {
         //
 
         // ミラジウムの剣
-        Configurator<ItemFairyWeaponBase> miragiumSword = fairyWeapon(erMod, ItemFairyWeaponBase::new, "miragium_sword", "miragiumSword")
+        miragiumSword = fairyWeapon(erMod, ItemFairyWeaponBase::new, "miragium_sword", "miragiumSword")
                 .bind(addComponent(instance(miragium.get(), 2)))
                 .bind(addComponent(instance(wood.get(), 0.5)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.attack))))
@@ -414,7 +416,7 @@ public class Loader {
                 .bind(onRegisterItem(i -> i.setMaxDamage(getDurability(tier) / 2 - 1)));
     }
 
-    private static int getDurability(int tier) {
+    public static int getDurability(int tier) {
         if (tier == 1) return 32;
         if (tier == 2) return 64;
         if (tier == 3) return 128;

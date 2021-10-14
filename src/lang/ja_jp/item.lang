@@ -164,6 +164,9 @@ item.bellFlowerPicking2.magic.name=【花摘みの時間】
 item.bellChristmas.name=クリスマスの鐘
 item.bellChristmas.poem=いけない子には
 item.bellChristmas.magic.name=【共鳴の鎮魂歌】
+item.crystalSword.name=クリスタルソード
+item.crystalSword.poem=妖精はこれをおやつにするという
+item.crystalSword.magic.name=【淡青色の血】
 
 item.fertilizer.name=肥料
 tile.twinkleStoneWhite.name=白色のトゥインクルストーン

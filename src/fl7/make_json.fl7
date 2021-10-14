@@ -125,6 +125,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	Achievement::new("light_magic_wand"      ; "magicWandLight"     )::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
 	Achievement::new("collecting_magic_wand" ; "magicWandCollecting")::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
 	Achievement::new("lightning_magic_wand"  ; "magicWandLightning" )::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
+	Achievement::new("crystal_sword"         ; "crystalSword"       )::parent("fairy_weapon/miragium_sword"        )::frame("goal"     )::write();
 
 );
 
@@ -490,6 +491,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	fairyWeapon("light_magic_wand");
 	fairyWeapon("collecting_magic_wand");
 	fairyWeapon("lightning_magic_wand");
+	fairyWeapon("crystal_sword");
 
 	layered("fairy"; [0 .. 4 | "fairy_layer$_"]);
 	layered("sphere"; [0 .. 3 | "sphere_layer$_"]);
