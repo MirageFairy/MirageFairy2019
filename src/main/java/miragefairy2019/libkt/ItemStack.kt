@@ -36,3 +36,8 @@ fun drop(world: World, itemStack: ItemStack, pos: Vec3d): EntityItem {
  * @param itemStack このインスタンスはメソッド内部でcopyされるため、破壊されません。
  */
 fun drop(world: World, itemStack: ItemStack, blockPos: BlockPos) = drop(world, itemStack, Vec3d(blockPos).addVector(0.5, 0.5, 0.5))
+
+fun ItemStack.equalsItem(other: ItemStack) = item == other.item
+fun ItemStack.equalsItemDamage(other: ItemStack) = equalsItem(other) && itemDamage == other.itemDamage
+fun ItemStack.equalsItemDamageTag(other: ItemStack) = equalsItemDamage(other) && ItemStack.areItemStackShareTagsEqual(this, other)
+fun ItemStack.equalsItemDamageTagCount(other: ItemStack) = equalsItemDamageTag(other) && count == other.count
