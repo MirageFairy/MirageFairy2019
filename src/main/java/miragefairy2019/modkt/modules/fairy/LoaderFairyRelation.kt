@@ -3,12 +3,35 @@ package miragefairy2019.modkt.modules.fairy
 import miragefairy2019.libkt.Module
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
+import miragefairy2019.mod3.fairy.api.ApiFairyRelation
+import miragefairy2019.mod3.fairy.api.FairyDropEntry
+import miragefairy2019.mod3.fairy.api.FairyRelationEntry
+import miragefairy2019.mod3.fairy.api.IFairyRelationHandler
 import net.minecraft.block.Block
+import net.minecraft.entity.Entity
+import net.minecraft.entity.boss.EntityDragon
+import net.minecraft.entity.boss.EntityWither
+import net.minecraft.entity.monster.EntityBlaze
+import net.minecraft.entity.monster.EntityCreeper
+import net.minecraft.entity.monster.EntityEnderman
+import net.minecraft.entity.monster.EntityIronGolem
+import net.minecraft.entity.monster.EntityMagmaCube
+import net.minecraft.entity.monster.EntityShulker
+import net.minecraft.entity.monster.EntitySkeleton
+import net.minecraft.entity.monster.EntitySlime
+import net.minecraft.entity.monster.EntitySpider
+import net.minecraft.entity.monster.EntityWitherSkeleton
+import net.minecraft.entity.monster.EntityZombie
+import net.minecraft.entity.passive.EntityChicken
+import net.minecraft.entity.passive.EntityCow
+import net.minecraft.entity.passive.EntityPig
+import net.minecraft.entity.passive.EntityVillager
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
+import net.minecraft.util.ResourceLocation
 import net.minecraftforge.oredict.OreIngredient
 
 val loaderFairyRelation: Module = {
@@ -120,6 +143,39 @@ val loaderFairyRelation: Module = {
             pumpkinpie(1.0, i(Items.PUMPKIN_PIE))
             beetrootsoup(1.0, i(Items.BEETROOT_SOUP))
             eleven(1.0, i(Items.RECORD_11))
+        }
+
+        // エンティティ関係を登録
+        FairyTypes.instance.run {
+            operator fun <E : Entity> RankedFairyTypeBundle.invoke(relevance: Double, clazz: Class<E>) {
+                ApiFairyRelation.fairyRelationManager.entityClassRelationRegistry.add(FairyRelationEntry(clazz, FairyDropEntry(relevance, main.createItemStack())))
+            }
+
+            operator fun <E : Entity> RankedFairyTypeBundle.invoke(relevance: Double, clazz: Class<E>, predicate: E.() -> Boolean) {
+                ApiFairyRelation.fairyRelationManager.entityRelationRegistry += IFairyRelationHandler {
+                    @Suppress("UNCHECKED_CAST")
+                    if (clazz.isInstance(it) && predicate(it as E)) FairyDropEntry(relevance, main.createItemStack()) else null
+                }
+            }
+
+            enderman(1.0, EntityEnderman::class.java)
+            spider(1.0, EntitySpider::class.java)
+            enderdragon(1.0, EntityDragon::class.java)
+            chicken(1.0, EntityChicken::class.java)
+            skeleton(1.0, EntitySkeleton::class.java)
+            zombie(1.0, EntityZombie::class.java)
+            witherskeleton(1.0, EntityWitherSkeleton::class.java)
+            wither(1.0, EntityWither::class.java)
+            creeper(1.0, EntityCreeper::class.java)
+            villager(1.0, EntityVillager::class.java)
+            librarian(2.0, EntityVillager::class.java) { professionForge.registryName == ResourceLocation("minecraft:librarian") }
+            golem(1.0, EntityIronGolem::class.java)
+            cow(1.0, EntityCow::class.java)
+            pig(1.0, EntityPig::class.java)
+            shulker(1.0, EntityShulker::class.java)
+            slime(1.0, EntitySlime::class.java)
+            magmacube(2.0, EntityMagmaCube::class.java) // スライムのサブクラスのため
+            blaze(1.0, EntityBlaze::class.java)
         }
 
     }
