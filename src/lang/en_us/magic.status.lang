@@ -17,4 +17,4 @@ mirageFairy2019.magic.status.maxTargetCount.name=Max Target Count
 mirageFairy2019.magic.status.looting.name=Looting
 mirageFairy2019.magic.status.criticalRate.name=Critical Rate
 mirageFairy2019.magic.status.chargeTime.name=Charge Time
-mirageFairy2019.magic.status.extraSeedDropRate.name=Extra Seed Drop Rate
+mirageFairy2019.magic.status.extraItemDropRate.name=Extra Drop Rate

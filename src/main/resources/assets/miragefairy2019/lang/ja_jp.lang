@@ -327,6 +327,9 @@ item.bellFlowerPicking2.magic.name=【花摘みの時間】
 item.bellChristmas.name=クリスマスの鐘
 item.bellChristmas.poem=いけない子には
 item.bellChristmas.magic.name=【共鳴の鎮魂歌】
+item.crystalSword.name=クリスタルソード
+item.crystalSword.poem=妖精はこれをおやつにするという
+item.crystalSword.magic.name=【淡青色の血】
 
 item.fertilizer.name=肥料
 tile.twinkleStoneWhite.name=白色のトゥインクルストーン
@@ -423,7 +426,7 @@ mirageFairy2019.magic.status.maxTargetCount.name=最大ターゲット数
 mirageFairy2019.magic.status.looting.name=ドロップ増加
 mirageFairy2019.magic.status.criticalRate.name=クリティカル率
 mirageFairy2019.magic.status.chargeTime.name=チャージタイム
-mirageFairy2019.magic.status.extraSeedDropRate.name=追加種子出現率
+mirageFairy2019.magic.status.extraItemDropRate.name=追加ドロップ率
 itemGroup.mirageFairy2019=MirageFairy 2019
 itemGroup.mirageFairy2019.fairy=MirageFairy 2019：妖精
 
