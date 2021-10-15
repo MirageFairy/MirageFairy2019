@@ -142,7 +142,7 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
 
                                 // 種の追加ドロップ
                                 if (!extraItemDropRate > world.rand.nextDouble()) {
-                                    drop(world, ItemStack(ApiMirageFlower.itemMirageFlowerSeeds), Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
+                                    if (!world.isRemote) drop(world, ItemStack(ApiMirageFlower.itemMirageFlowerSeeds), Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
                                 }
 
                                 // 破壊したばかりのブロックの周辺のアイテムを集める
