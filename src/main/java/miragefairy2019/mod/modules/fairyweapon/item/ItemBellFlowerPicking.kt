@@ -30,7 +30,6 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.pow
 
-
 class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weaponEndurance: Double, weaponProduction: Double) :
         ItemFairyWeaponBase3(ManaTypes.dark, EnumMastery.flowerPicking,
                 weaponStrength, weaponExtent, weaponEndurance, weaponProduction,
