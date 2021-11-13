@@ -46,7 +46,7 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019FairyStick"))
                 .bind(addComponent(instance(wood.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.craft))))
-                .bind(setFairyWandStatusOfTier(1))
+                .bind(setWeaponStatusOfTier(1))
                 .get();
 
         // 技巧のステッキ2
@@ -55,7 +55,7 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019FairyStick"))
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.craft))))
-                .bind(setFairyWandStatusOfTier(2))
+                .bind(setWeaponStatusOfTier(2))
                 .get();
 
         // 技巧のステッキ3
@@ -65,7 +65,7 @@ public class Loader {
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.craft))))
-                .bind(setFairyWandStatusOfTier(3))
+                .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 技巧のステッキ4
@@ -73,7 +73,7 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandCrafting"))
                 .bind(addOreName("mirageFairy2019FairyStick"))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.craft))))
-                .bind(setFairyWandStatusOfTier(4))
+                .bind(setWeaponStatusOfTier(4))
                 .get();
 
         // 潤いのステッキ
@@ -82,7 +82,7 @@ public class Loader {
                 .bind(addOreName("container1000Water"))
                 .bind(addComponent(instance(wood.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.water))))
-                .bind(setFairyWandStatusOfTier(1))
+                .bind(setWeaponStatusOfTier(1))
                 .get();
 
         // 潤いのステッキ2
@@ -91,7 +91,7 @@ public class Loader {
                 .bind(addOreName("container1000Water"))
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.water))))
-                .bind(setFairyWandStatusOfTier(2))
+                .bind(setWeaponStatusOfTier(2))
                 .get();
 
         // 潤いのステッキ3
@@ -101,7 +101,7 @@ public class Loader {
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.water))))
-                .bind(setFairyWandStatusOfTier(3))
+                .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 潤いのステッキ4
@@ -109,7 +109,7 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandHydrating"))
                 .bind(addOreName("container1000Water"))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.water))))
-                .bind(setFairyWandStatusOfTier(4))
+                .bind(setWeaponStatusOfTier(4))
                 .get();
 
         // 紅蓮のステッキ
@@ -117,7 +117,7 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandMelting"))
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.flame))))
-                .bind(setFairyWandStatusOfTier(2))
+                .bind(setWeaponStatusOfTier(2))
                 .get();
 
         // 紅蓮のステッキ2
@@ -126,14 +126,14 @@ public class Loader {
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.flame))))
-                .bind(setFairyWandStatusOfTier(3))
+                .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 紅蓮のステッキ3
         fairyWeapon(erMod, ItemFairyWandMelting::new, "melting_fairy_wand_3", "fairyWandMelting3")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandMelting"))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.flame))))
-                .bind(setFairyWandStatusOfTier(4))
+                .bind(setWeaponStatusOfTier(4))
                 .get();
 
         // 破壊のステッキ
@@ -141,7 +141,7 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandBreaking"))
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.breaking))))
-                .bind(setFairyWandStatusOfTier(2))
+                .bind(setWeaponStatusOfTier(2))
                 .get();
 
         // 破壊のステッキ2
@@ -150,14 +150,14 @@ public class Loader {
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.breaking))))
-                .bind(setFairyWandStatusOfTier(3))
+                .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 破壊のステッキ3
         fairyWeapon(erMod, ItemFairyWandBreaking::new, "breaking_fairy_wand_3", "fairyWandBreaking3")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandBreaking"))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.breaking))))
-                .bind(setFairyWandStatusOfTier(4))
+                .bind(setWeaponStatusOfTier(4))
                 .get();
 
         // 氷晶のステッキ
@@ -165,7 +165,7 @@ public class Loader {
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandFreezing"))
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.freeze))))
-                .bind(setFairyWandStatusOfTier(2))
+                .bind(setWeaponStatusOfTier(2))
                 .get();
 
         // 氷晶のステッキ2
@@ -174,14 +174,14 @@ public class Loader {
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.freeze))))
-                .bind(setFairyWandStatusOfTier(3))
+                .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 氷晶のステッキ3
         fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "freezing_fairy_wand_3", "fairyWandFreezing3")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandFreezing"))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.freeze))))
-                .bind(setFairyWandStatusOfTier(4))
+                .bind(setWeaponStatusOfTier(4))
                 .get();
 
         // 珠玉のステッキ
@@ -190,14 +190,14 @@ public class Loader {
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.crystal))))
-                .bind(setFairyWandStatusOfTier(3))
+                .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 珠玉のステッキ2
         fairyWeapon(erMod, ItemFairyWeaponCraftingTool::new, "polishing_fairy_wand_2", "fairyWandPolishing2")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandPolishing"))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.crystal))))
-                .bind(setFairyWandStatusOfTier(4))
+                .bind(setWeaponStatusOfTier(4))
                 .get();
 
         // 召喚のステッキ
@@ -206,14 +206,14 @@ public class Loader {
                 .bind(addComponent(instance(miragium.get(), 1)))
                 .bind(addComponent(instance(quartz.get(), 1)))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.submission))))
-                .bind(setFairyWandStatusOfTier(3))
+                .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 召喚のステッキ2
         fairyWeapon(erMod, ItemFairyWandSummoning::new, "summoning_fairy_wand_2", "fairyWandSummoning2")
                 .bind(addOreName("mirageFairy2019CraftingToolFairyWandSummoning"))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.submission))))
-                .bind(setFairyWandStatusOfTier(4))
+                .bind(setWeaponStatusOfTier(4))
                 .get();
 
         //
@@ -409,11 +409,6 @@ public class Loader {
     private static <I extends ItemFairyWeaponBase> Function<Configurator<I>, Monad<Configurator<I>>> setWeaponStatusOfTier(int tier) {
         return c -> Monad.of(c)
                 .bind(onRegisterItem(i -> i.setMaxDamage(getDurability(tier) - 1)));
-    }
-
-    private static <I extends ItemFairyWeaponBase> Function<Configurator<I>, Monad<Configurator<I>>> setFairyWandStatusOfTier(int tier) {
-        return c -> Monad.of(c)
-                .bind(onRegisterItem(i -> i.setMaxDamage(getDurability(tier) / 2 - 1)));
     }
 
     public static int getDurability(int tier) {
