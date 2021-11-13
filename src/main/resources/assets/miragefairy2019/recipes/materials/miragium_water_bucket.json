@@ -6,7 +6,7 @@
 			"item": "minecraft:bucket"
 		},
 		{
-			"type": "forge:ore_dict",
+			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "container1000Water"
 		},
 		{
