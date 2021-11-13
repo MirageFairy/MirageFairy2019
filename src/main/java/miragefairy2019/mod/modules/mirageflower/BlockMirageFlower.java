@@ -41,7 +41,7 @@ import net.minecraftforge.common.BiomeDictionary;
 import java.util.Optional;
 import java.util.Random;
 
-public class BlockMirageFlower extends BlockBush implements IGrowable {
+public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
 
     public static double getGrowRateInFloor(IFairyType fairyType) {
         double costWeight = fairyType.getCost() / 50.0;
@@ -77,7 +77,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable {
 
     //
 
-    public BlockMirageFlower() {
+    public BlockMirageFlowerBase() {
         super(Material.PLANTS); // Solidでないマテリアルでなければ耕土の上に置けない
 
         // meta
@@ -363,7 +363,7 @@ public class BlockMirageFlower extends BlockBush implements IGrowable {
         return new IPickable() {
             @Override
             public Block getBlock() {
-                return BlockMirageFlower.this;
+                return BlockMirageFlowerBase.this;
             }
 
             @Override
