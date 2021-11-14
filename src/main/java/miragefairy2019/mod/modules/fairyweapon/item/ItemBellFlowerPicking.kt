@@ -33,7 +33,7 @@ import kotlin.math.pow
 class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weaponEndurance: Double, weaponProduction: Double) :
         ItemFairyWeaponBase3(ManaTypes.dark, EnumMastery.flowerPicking,
                 weaponStrength, weaponExtent, weaponEndurance, weaponProduction,
-                ErgTypes.submission, ErgTypes.art, ErgTypes.slash, ErgTypes.crystal) {
+                ErgTypes.submission, ErgTypes.store, ErgTypes.slash, ErgTypes.fell) {
     val pitch = "pitch"({ double2.positive }) { -(cost / 50.0 - 1) * 12 }.setRange(-12.0..12.0)
     val maxTargetCount = "maxTargetCount"({ int.positive }) { 2 + floor(+!strength * 0.1 + !fell * 0.1).toInt() }.setRange(1..100)
     val fortune = "fortune"({ double2.positive }) { 3 + !production * 0.1 + !knowledge * 0.1 }.setRange(0.0..100.0)
