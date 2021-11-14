@@ -31,9 +31,11 @@ import kotlin.math.floor
 import kotlin.math.pow
 
 class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weaponEndurance: Double, weaponProduction: Double) :
-        ItemFairyWeaponBase3(ManaTypes.dark, EnumMastery.flowerPicking,
-                weaponStrength, weaponExtent, weaponEndurance, weaponProduction,
-                ErgTypes.submission, ErgTypes.store, ErgTypes.slash, ErgTypes.fell) {
+    ItemFairyWeaponBase3(
+        ManaTypes.dark, EnumMastery.flowerPicking,
+        weaponStrength, weaponExtent, weaponEndurance, weaponProduction,
+        ErgTypes.submission, ErgTypes.store, ErgTypes.slash, ErgTypes.fell
+    ) {
     val pitch = "pitch"({ double2.positive }) { -(cost / 50.0 - 1) * 12 }.setRange(-12.0..12.0)
     val maxTargetCount = "maxTargetCount"({ int.positive }) { 2 + floor(+!strength * 0.1 + !fell * 0.1).toInt() }.setRange(1..100)
     val fortune = "fortune"({ double2.positive }) { 3 + !production * 0.1 + !knowledge * 0.1 }.setRange(0.0..100.0)
@@ -65,14 +67,14 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
 
             // 対象計算
             val listTarget = magicSelectorCircle.blockPosList
-                    .mapNotNull {
-                        val blockState = world.getBlockState(it.blockPos)
-                        val pickable = ApiMirageFlower.pickableRegistry[blockState.block].orElse(null)
-                        if (pickable != null && pickable.isPickableAge(blockState)) Pair(it, pickable) else null
-                    }
-                    .sortedBy { it.first.distanceSquared }
-                    .take(!maxTargetCount)
-                    .map { Pair(it.first.blockPos, it.second) }
+                .mapNotNull {
+                    val blockState = world.getBlockState(it.blockPos)
+                    val pickable = ApiMirageFlower.pickableRegistry[blockState.block].orElse(null)
+                    if (pickable != null && pickable.isPickableAge(blockState)) Pair(it, pickable) else null
+                }
+                .sortedBy { it.first.distanceSquared }
+                .take(!maxTargetCount)
+                .map { Pair(it.first.blockPos, it.second) }
 
             // 資源がない場合、中止
             if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic object : IMagicHandler {
@@ -158,13 +160,14 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
                             // エフェクト
                             val color = fairyType.color
                             world.spawnParticle(
-                                    EnumParticleTypes.SPELL_MOB,
-                                    blockPos.x + 0.5,
-                                    blockPos.y + 0.5,
-                                    blockPos.z + 0.5,
-                                    (color shr 16 and 0xFF) / 255.0,
-                                    (color shr 8 and 0xFF) / 255.0,
-                                    (color shr 0 and 0xFF) / 255.0)
+                                EnumParticleTypes.SPELL_MOB,
+                                blockPos.x + 0.5,
+                                blockPos.y + 0.5,
+                                blockPos.z + 0.5,
+                                (color shr 16 and 0xFF) / 255.0,
+                                (color shr 8 and 0xFF) / 255.0,
+                                (color shr 0 and 0xFF) / 255.0
+                            )
 
                         }
                     }
