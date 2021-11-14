@@ -112,6 +112,21 @@ abstract class ItemFairyWeaponBase3(
             operator fun IErgType.not() = arguments.fairyType.ergSet.getPower(this)
             operator fun <T> IMagicStatus<T>.not(): T = function.getValue(arguments)
         }
+
+        /**
+         * @return
+         * スキルレベルが[minSkillLevel]に届かない場合、0。
+         * スキルレベルが[minSkillLevel]から[maxSkillLevel]にかけて、[minValue]と[maxValue]の間を遷移。
+         * スキルレベルが[maxSkillLevel]を超える場合、[maxValue]でリミット。
+         */
+        fun MagicStatusFormulaScope.skillFunction1(mastery: IMastery, minSkillLevel: Int, maxSkillLevel: Int, minValue: Double, maxValue: Double): Double {
+            val skillLevel = getSkillLevel(mastery)
+            return when {
+                skillLevel < minSkillLevel -> 0.0
+                skillLevel > maxSkillLevel -> maxValue
+                else -> minValue + (maxValue - minValue) * ((skillLevel - minSkillLevel) / (maxSkillLevel - minSkillLevel))
+            }
+        }
     }
 
     // Magic

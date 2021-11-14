@@ -30,7 +30,7 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.pow
 
-class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weaponEndurance: Double, weaponProduction: Double) :
+class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weaponEndurance: Double, weaponProduction: Double, maxExtraItemDropRate: Double) :
     ItemFairyWeaponBase3(
         ManaTypes.dark, EnumMastery.flowerPicking,
         weaponStrength, weaponExtent, weaponEndurance, weaponProduction,
@@ -44,7 +44,7 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
     val wear = "wear"({ percent2.negative }) { 1.0 / (1 + !endurance * 0.03) }
     val coolTime = "coolTime"({ tick.negative }) { cost * 0.5 }
     val collection = "collection"({ boolean.positiveBoolean }) { !warp >= 10 }.setVisibility(ALWAYS)
-    val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { (getSkillLevel(mastery) / 100.0).coerceIn(0.0, 1.0) }.setVisibility(ALWAYS)
+    val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { skillFunction1(mastery, 0, 100, 0.1, maxExtraItemDropRate) }.setVisibility(ALWAYS)
 
     init {
         magic {
