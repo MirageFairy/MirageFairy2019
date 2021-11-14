@@ -57,16 +57,16 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
 abstract class ItemFairyWeaponBase3(
-        val weaponManaType: IManaType,
-        val mastery: IMastery,
-        val weaponStrength: Double?,
-        val weaponExtent: Double?,
-        val weaponEndurance: Double?,
-        val weaponProduction: Double?,
-        val strengthErg: IErgType?,
-        val extentErg: IErgType?,
-        val enduranceErg: IErgType?,
-        val productionErg: IErgType?
+    val weaponManaType: IManaType,
+    val mastery: IMastery,
+    val weaponStrength: Double?,
+    val weaponExtent: Double?,
+    val weaponEndurance: Double?,
+    val weaponProduction: Double?,
+    val strengthErg: IErgType?,
+    val extentErg: IErgType?,
+    val enduranceErg: IErgType?,
+    val productionErg: IErgType?
 ) : ItemFairyWeaponBase() {
     companion object {
         private const val prefix = "miragefairy2019.gui.magic"
@@ -128,9 +128,13 @@ abstract class ItemFairyWeaponBase3(
 
     private val magicStatusWrapperList = mutableListOf<MagicStatusWrapper<*>>()
     internal operator fun <T> String.invoke(getFormatter: MagicStatusFormatterScope<T>.() -> IMagicStatusFormatter<T>, function: MagicStatusFormulaScope.() -> T): MagicStatusWrapper<T> {
-        val magicStatusWrapper = MagicStatusWrapper<T>(MagicStatus(this,
+        val magicStatusWrapper = MagicStatusWrapper<T>(
+            MagicStatus(
+                this,
                 IMagicStatusFunction<T> { MagicStatusFormulaScope(it).function() },
-                MagicStatusFormatterScope<T>().getFormatter()))
+                MagicStatusFormatterScope<T>().getFormatter()
+            )
+        )
         magicStatusWrapperList += magicStatusWrapper
         return magicStatusWrapper
     }
@@ -171,20 +175,21 @@ abstract class ItemFairyWeaponBase3(
         val actualFairyType = getActualFairyTypeClient(fairyType)
         magicStatusWrapperList.forEach {
             if (when (it.visibility) {
-                        ALWAYS -> true
-                        DETAIL -> flag.isAdvanced
-                        NEVER -> false
-                    }) {
+                    ALWAYS -> true
+                    DETAIL -> flag.isAdvanced
+                    NEVER -> false
+                }
+            ) {
                 tooltip += formattedText {
                     fun <T> TextComponentScope.f(magicStatus: IMagicStatus<T>): List<ITextComponent> {
                         val list = magicStatus.function.factors.map { !it }.sandwich { !", " }.flatten()
                         return if (list.isNotEmpty()) !" (" + list + !")" else empty
                     }
                     join(
-                            !it.displayName,
-                            !": ",
-                            (!it.getDisplayValue(MagicStatusFunctionArguments({ ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it) }, actualFairyType))).white,
-                            f(it)
+                        !it.displayName,
+                        !": ",
+                        (!it.getDisplayValue(MagicStatusFunctionArguments({ ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it) }, actualFairyType))).white,
+                        f(it)
                     ).blue
                 }
             }
