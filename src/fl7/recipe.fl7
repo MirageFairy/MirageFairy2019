@@ -269,6 +269,36 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		};
 	});
 
+    # 硫黄→ファイヤーチャージ
+	writer::write("fire_charge_from_sulfur_gem.json"; {
+		type = "forge:ore_shapeless";
+		group = "astronomical_observation_book";
+		ingredients = [
+			{
+				type = "forge:ore_dict";
+				ore = "gunpowder";
+			};
+			{
+				type = "forge:ore_dict";
+				ore = "gemSulfur";
+			};
+			[
+                {
+                    item = "minecraft:coal";
+                    data = 0;
+                };
+                {
+                    item = "minecraft:coal";
+                    data = 1;
+                };
+			];
+		];
+		result = {
+			item = "minecraft:fire_charge";
+			count = 3;
+		};
+	});
+
 );
 
 #################### 妖精アイテム ####################
