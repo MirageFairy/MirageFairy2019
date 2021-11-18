@@ -29,10 +29,10 @@ public class LabelImage extends JLabel {
                 for (ImageLayer imageLayer : imageLayers) {
 
                     // 乗算する色
-                    Color colorMul = colorConstants.getColor(imageLayer.colorIdentifier);
+                    Color colorMul = colorConstants.getColor(imageLayer.getColorIdentifier());
 
                     // 画像の色
-                    int argbOver = imageLayer.image.getRGB(x / 4, y / 4);
+                    int argbOver = imageLayer.getImage().getRGB(x / 4, y / 4);
                     int a2 = (argbOver >> 24) & 0xff;
                     int r2 = (argbOver >> 16) & 0xff;
                     int g2 = (argbOver >> 8) & 0xff;
