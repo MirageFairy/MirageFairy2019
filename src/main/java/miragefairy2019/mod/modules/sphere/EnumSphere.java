@@ -28,11 +28,11 @@ public class EnumSphere {
     public static final EnumSphere craft = new EnumSphere(ErgTypes.craft, 0xF1B772, 0xD3FDCC, 0x92B56A, 0xFFFFFF, () -> new OreIngredient("workbench"), () -> new OreIngredient("gemNephrite"));
     public static final EnumSphere fell = new EnumSphere(ErgTypes.fell, 0x00BD00, 0xD09D74, 0x6E4219, 0x2FFF2F, () -> Ingredient.fromStacks(new ItemStack(Items.IRON_AXE)), () -> null);
     public static final EnumSphere light = new EnumSphere(ErgTypes.light, 0xFF8300, 0xFFC9BC, 0xF1C483, 0xFFFF25, () -> new OreIngredient("torch"), () -> new OreIngredient("gemTopaz"));
-    public static final EnumSphere flame = new EnumSphere(ErgTypes.flame, 0xFF3600, 0xFF9900, 0xCA5B25, 0xFF0000, () -> Ingredient.fromStacks(new ItemStack(Items.FIRE_CHARGE)), () -> null);
+    public static final EnumSphere flame = new EnumSphere(ErgTypes.flame, 0xFF9F68, 0xFF6800, 0xE2713F, 0xBF1805, () -> Ingredient.fromStacks(new ItemStack(Items.FIRE_CHARGE)), () -> new OreIngredient("gemHeliolite"));
     public static final EnumSphere water = new EnumSphere(ErgTypes.water, 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF, () -> Ingredient.fromStacks(new ItemStack(Items.WATER_BUCKET)), () -> null);
     public static final EnumSphere crystal = new EnumSphere(ErgTypes.crystal, 0xA2FFFF, 0xB6FFFF, 0x36CECE, 0xEBFFFF, () -> new OreIngredient("gemDiamond"), () -> null);
     public static final EnumSphere art = new EnumSphere(ErgTypes.art, 0xFF5353, 0x41C6FF, 0xFFFF84, 0x00C800, () -> Ingredient.fromStacks(new ItemStack(Items.PAINTING)), () -> null);
-    public static final EnumSphere store = new EnumSphere(ErgTypes.store, 0xDCDCDC, 0xEBA242, 0xC47F25, 0x404040, () -> Ingredient.fromStacks(new ItemStack(Blocks.CHEST)), () -> null);
+    public static final EnumSphere store = new EnumSphere(ErgTypes.store, 0x000000, 0x350F40, 0x570F6F, 0xB292F7, () -> Ingredient.fromStacks(new ItemStack(Blocks.CHEST)), () -> null);
     public static final EnumSphere warp = new EnumSphere(ErgTypes.warp, 0x3A00D3, 0x8CF4E2, 0x349988, 0xD004FB, () -> new OreIngredient("enderpearl"), () -> null);
     public static final EnumSphere shoot = new EnumSphere(ErgTypes.shoot, 0x969696, 0x896727, 0x896727, 0xD8D8D8, () -> Ingredient.fromStacks(new ItemStack(Items.BOW)), () -> null);
     public static final EnumSphere breaking = new EnumSphere(ErgTypes.breaking, 0xFFFFFF, 0xFF5A35, 0xFF4800, 0x000000, () -> Ingredient.fromStacks(new ItemStack(Blocks.TNT)), () -> null);
