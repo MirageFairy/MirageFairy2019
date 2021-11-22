@@ -82,10 +82,10 @@ public class ModuleSphere {
                     public int colorMultiplier(ItemStack stack, int tintIndex) {
                         VariantSphere variant = itemSpheres.getVariant(stack).orElse(null);
                         if (variant == null) return 0xFFFFFF;
-                        if (tintIndex == 0) return variant.sphere.colorBackground;
-                        if (tintIndex == 1) return variant.sphere.colorPlasma;
-                        if (tintIndex == 2) return variant.sphere.colorCore;
-                        if (tintIndex == 3) return variant.sphere.colorHighlight;
+                        if (tintIndex == 0) return variant.getSphere().colorBackground;
+                        if (tintIndex == 1) return variant.getSphere().colorPlasma;
+                        if (tintIndex == 2) return variant.getSphere().colorCore;
+                        if (tintIndex == 3) return variant.getSphere().colorHighlight;
                         return 0xFFFFFF;
                     }
 
@@ -98,7 +98,7 @@ public class ModuleSphere {
 
             // スフィアの鉱石辞書
             for (Tuple<Integer, VariantSphere> tuple : itemSpheres.getVariants()) {
-                OreDictionary.registerOre(tuple.y.sphere.getOreName(), tuple.y.createItemStack());
+                OreDictionary.registerOre(tuple.y.getSphere().getOreName(), tuple.y.createItemStack());
                 OreDictionary.registerOre("mirageFairy2019SphereAny", tuple.y.createItemStack());
             }
 
@@ -108,18 +108,18 @@ public class ModuleSphere {
             for (Tuple<Integer, VariantSphere> variant : itemSpheres.getVariants()) {
 
                 {
-                    Ingredient ingredient = variant.y.sphere.sIngredientWithFluorite.get();
+                    Ingredient ingredient = variant.y.getSphere().sIngredientWithFluorite.get();
                     if (ingredient != null) {
 
                         // クラフトレシピ
                         GameRegistry.addShapelessRecipe(
-                                new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere_with_fluorite"),
-                                new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
+                                new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.getSphere().abilityType.getName() + "_sphere_with_fluorite"),
+                                new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.getSphere().abilityType.getName() + "_sphere"),
                                 variant.y.createItemStack(),
                                 new OreIngredientComplex("container1000MiragiumWater"),
                                 new OreIngredient("gemFluorite"),
                                 new OreIngredientComplex("mirageFairy2019CraftingToolFairyWandCrafting"),
-                                new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
+                                new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.getSphere().abilityType.getName())),
                                 ingredient);
 
                         // 妖精のステッキレシピ
@@ -127,7 +127,7 @@ public class ModuleSphere {
                                 .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
                                 .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState())))
                                 .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("gemFluorite"))))
-                                .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())))))
+                                .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.getSphere().abilityType.getName())))))
                                 .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(ingredient)))
                                 .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionSpawnItem(() -> variant.y.createItemStack())))
                                 .get());
@@ -136,24 +136,24 @@ public class ModuleSphere {
                 }
 
                 {
-                    Ingredient ingredient = variant.y.sphere.sIngredientGem.get();
+                    Ingredient ingredient = variant.y.getSphere().sIngredientGem.get();
                     if (ingredient != null) {
 
                         // クラフトレシピ
                         GameRegistry.addShapelessRecipe(
-                                new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere_from_gem"),
-                                new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.sphere.abilityType.getName() + "_sphere"),
+                                new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.getSphere().abilityType.getName() + "_sphere_from_gem"),
+                                new ResourceLocation(ModMirageFairy2019.MODID + ":" + variant.y.getSphere().abilityType.getName() + "_sphere"),
                                 variant.y.createItemStack(),
                                 new OreIngredientComplex("container1000MiragiumWater"),
                                 new OreIngredientComplex("mirageFairy2019CraftingToolFairyWandCrafting"),
-                                new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())),
+                                new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.getSphere().abilityType.getName())),
                                 ingredient);
 
                         // 妖精のステッキレシピ
                         ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
                                 .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019FairyStick"))))
                                 .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeBlock(() -> ApiOre.blockFluidMiragiumWater.getDefaultState())))
-                                .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.sphere.abilityType.getName())))))
+                                .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("mirageFairy2019FairyAbility" + UtilsString.toUpperCaseHead(variant.y.getSphere().abilityType.getName())))))
                                 .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(ingredient)))
                                 .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionSpawnItem(() -> variant.y.createItemStack())))
                                 .get());
