@@ -39,7 +39,6 @@ val moduleFairyWeapon: Module = {
 
         modInitializer.onInit {
             item.addComponent(Loader.miragiumSword.get().composite)
-            item.addComponent(ApiComposite.instance(Components.miragium.get(), 0.5))
             item.addComponent(ApiComposite.instance(ApiFairy.getComponentAbilityType(ErgTypes.crystal)))
             item.maxDamage = Loader.getDurability(3) - 1
         }
