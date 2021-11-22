@@ -1,6 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.libkt.ItemInitializer
+import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.setCreativeTab
@@ -11,12 +12,14 @@ import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod.modules.main.ModuleMain
 import miragefairy2019.modkt.api.erg.ErgTypes
+import miragefairy2019.modkt.api.erg.IErgType
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.item.Item
 import net.minecraftforge.client.event.ModelBakeEvent
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import java.util.function.Supplier
 
 fun <T : Item> ItemInitializer<T>.registerFairyWeaponModel() = modInitializer.onRegisterItem {
     modInitializer.onRegisterItem {
@@ -33,17 +36,26 @@ fun <T : Item> ItemInitializer<T>.registerFairyWeaponModel() = modInitializer.on
     }
 }
 
-val moduleFairyWeapon: Module = {
-
-    item({ ItemCrystalSword() }, "crystal_sword") {
-        setUnlocalizedName("crystalSword")
-        setCreativeTab { ModuleMain.creativeTab }
-        registerFairyWeaponModel()
-        modInitializer.onInit {
-            item.addComponent(Loader.miragiumSword.get().composite)
-            item.addComponent(ApiComposite.instance(ApiFairy.getComponentAbilityType(ErgTypes.crystal)))
-            item.maxDamage = Loader.getDurability(3) - 1
+fun <T : ItemFairyWeaponBase> ModInitializer.fairyWeapon(
+    tier: Int,
+    creator: () -> T,
+    registryName: String,
+    unlocalizedName: String,
+    parent: (() -> Supplier<ItemFairyWeaponBase>)?,
+    vararg ergTypes: IErgType
+) = item(creator, registryName) {
+    setUnlocalizedName(unlocalizedName)
+    setCreativeTab { ModuleMain.creativeTab }
+    registerFairyWeaponModel()
+    modInitializer.onInit {
+        if (parent != null) item.addComponent(parent().get().composite)
+        ergTypes.forEach { ergType ->
+            item.addComponent(ApiComposite.instance(ApiFairy.getComponentAbilityType(ergType)))
         }
+        item.maxDamage = Loader.getDurability(tier) - 1
     }
+}
 
+val moduleFairyWeapon: Module = {
+    fairyWeapon(3, { ItemCrystalSword() }, "crystal_sword", "crystalSword", { Loader.miragiumSword }, ErgTypes.crystal)
 }
