@@ -389,12 +389,18 @@ tile.oreTopaz.name=トパーズ鉱石
 item.gemTopaz.name=トパーズ
 tile.oreTourmaline.name=トルマリン鉱石
 item.gemTourmaline.name=トルマリン
+tile.oreHeliolite.name=ヘリオライト鉱石
+item.gemHeliolite.name=ヘリオライト
+tile.oreLabradorite.name=ラブラドライト鉱石
+item.gemLabradorite.name=ラブラドライト
 tile.blockLeafMirageFlower.name=ミラージュフラワーの葉ブロック
 tile.blockMiragium.name=ミラジウムブロック
 tile.blockDustMiragium.name=ミラジウムの粉ブロック
 
 item.spheres.name=スフィア
 item.spheres.format=%sのスフィア
+
+item.ingotLilagium.name=リラジウムインゴット
 
 fluid.miragium_water=ミラジウムウォーター
 tile.miragiumWater.name=ミラジウムウォーター

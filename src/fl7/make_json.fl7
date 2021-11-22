@@ -380,6 +380,9 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	item("nephrite_gem");
 	item("topaz_gem");
 	item("tourmaline_gem");
+	item("heliolite_gem");
+	item("labradorite_gem");
+	item("lilagium_ingot");
 
 	item("saltpeter_gem");
 

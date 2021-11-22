@@ -102,6 +102,9 @@ public class ModuleOre {
                     itemVariant(c.erMod, c, 14, () -> new ItemVariantMaterial("nephrite_gem", "gemNephrite")).bind(addOreName("gemNephrite"));
                     itemVariant(c.erMod, c, 15, () -> new ItemVariantMaterial("topaz_gem", "gemTopaz")).bind(addOreName("gemTopaz"));
                     itemVariant(c.erMod, c, 16, () -> new ItemVariantMaterial("tourmaline_gem", "gemTourmaline")).bind(addOreName("gemTourmaline"));
+                    itemVariant(c.erMod, c, 17, () -> new ItemVariantMaterial("heliolite_gem", "gemHeliolite")).bind(addOreName("gemHeliolite"));
+                    itemVariant(c.erMod, c, 18, () -> new ItemVariantMaterial("labradorite_gem", "gemLabradorite")).bind(addOreName("gemLabradorite"));
+                    itemVariant(c.erMod, c, 19, () -> new ItemVariantMaterial("lilagium_ingot", "ingotLilagium")).bind(addOreName("ingotLilagium"));
 
                     erMod.registerItem.register(b -> {
                         if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();

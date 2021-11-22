@@ -389,12 +389,18 @@ tile.oreTopaz.name=Topaz Ore
 item.gemTopaz.name=Topaz
 tile.oreTourmaline.name=Tourmaline Ore
 item.gemTourmaline.name=Tourmaline
+tile.oreHeliolite.name=Heliolite Ore
+item.gemHeliolite.name=Heliolite
+tile.oreLabradorite.name=Labradorite Ore
+item.gemLabradorite.name=Labradorite
 tile.blockLeafMirageFlower.name=Block of Mirage Flower Leaf
 tile.blockMiragium.name=Block of Miragium
 tile.blockDustMiragium.name=Block of Miragium Dust
 
 item.spheres.name=Sphere
 item.spheres.format=Sphere of %s
+
+item.ingotLilagium.name=Lilagium Ingot
 
 fluid.miragium_water=Miragium Water
 tile.miragiumWater.name=Miragium Water
