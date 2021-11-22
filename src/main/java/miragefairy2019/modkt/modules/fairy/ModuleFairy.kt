@@ -163,24 +163,26 @@ object ModuleFairy {
 
                     // 凝縮
                     GameRegistry.addShapelessRecipe(
-                            ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.y[i].type.breed!!.resourcePath}"),
-                            ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.y[i].type.breed!!.resourcePath}"),
-                            variant.y[i + 1].createItemStack(),
-                            Ingredient.fromStacks(variant.y[i].createItemStack()),
-                            Ingredient.fromStacks(variant.y[i].createItemStack()),
-                            Ingredient.fromStacks(variant.y[i].createItemStack()),
-                            Ingredient.fromStacks(variant.y[i].createItemStack()),
-                            Ingredient.fromStacks(variant.y[i].createItemStack()),
-                            Ingredient.fromStacks(variant.y[i].createItemStack()),
-                            Ingredient.fromStacks(variant.y[i].createItemStack()),
-                            Ingredient.fromStacks(variant.y[i].createItemStack()))
+                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.y[i].type.breed!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.y[i].type.breed!!.resourcePath}"),
+                        variant.y[i + 1].createItemStack(),
+                        Ingredient.fromStacks(variant.y[i].createItemStack()),
+                        Ingredient.fromStacks(variant.y[i].createItemStack()),
+                        Ingredient.fromStacks(variant.y[i].createItemStack()),
+                        Ingredient.fromStacks(variant.y[i].createItemStack()),
+                        Ingredient.fromStacks(variant.y[i].createItemStack()),
+                        Ingredient.fromStacks(variant.y[i].createItemStack()),
+                        Ingredient.fromStacks(variant.y[i].createItemStack()),
+                        Ingredient.fromStacks(variant.y[i].createItemStack())
+                    )
 
                     // 分解
                     GameRegistry.addShapelessRecipe(
-                            ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.y[i].type.breed!!.resourcePath}"),
-                            ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.y[i].type.breed!!.resourcePath}"),
-                            variant.y[i].createItemStack(8),
-                            Ingredient.fromStacks(variant.y[i + 1].createItemStack()))
+                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.y[i].type.breed!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.y[i].type.breed!!.resourcePath}"),
+                        variant.y[i].createItemStack(8),
+                        Ingredient.fromStacks(variant.y[i + 1].createItemStack())
+                    )
 
                 }
             }
@@ -193,21 +195,27 @@ object ModuleFairy {
                 if (relation.relevance >= 1) {
 
                     // ダイヤモンド使用
-                    GameRegistry.findRegistry(IRecipe::class.java).register(ShapelessOreRecipe(
+                    GameRegistry.findRegistry(IRecipe::class.java).register(
+                        ShapelessOreRecipe(
                             ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_from_item_$counter"),
                             relation.itemStackFairy,
                             OreIngredientComplex("mirageFairy2019CraftingToolFairyWandSummoning"),
                             OreIngredient("mirageFairyCrystal"),
-                            relation.ingredient).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_from_item_$counter"))
+                            relation.ingredient
+                        ).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_from_item_$counter")
+                    )
                     counter++
 
                     // 召喚のワンド使用
-                    GameRegistry.findRegistry(IRecipe::class.java).register(ShapelessOreRecipe(
+                    GameRegistry.findRegistry(IRecipe::class.java).register(
+                        ShapelessOreRecipe(
                             ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_from_summoning_fairy_wand_$counter"),
                             relation.itemStackFairy,
                             OreIngredient("gemDiamond"),
                             OreIngredient("mirageFairyCrystal"),
-                            relation.ingredient).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_from_summoning_fairy_wand_$counter"))
+                            relation.ingredient
+                        ).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_from_summoning_fairy_wand_$counter")
+                    )
                     counter++
 
                 }
