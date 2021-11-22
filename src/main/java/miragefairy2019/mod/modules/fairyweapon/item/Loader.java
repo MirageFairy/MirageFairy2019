@@ -34,8 +34,6 @@ import static miragefairy2019.mod.lib.Configurator.*;
 
 public class Loader {
 
-    public static Configurator<ItemFairyWeaponBase> miragiumSword;
-
     @SuppressWarnings("unused")
     public static void init(EventRegistryMod erMod) {
 
@@ -195,20 +193,6 @@ public class Loader {
                 .get();
 
         //
-
-        // ミラジウムの剣
-        miragiumSword = fairyWeapon(erMod, ItemFairyWeaponBase::new, "miragium_sword", "miragiumSword")
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.attack))))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.slash))))
-                .bind(setWeaponStatusOfTier(2))
-                .get();
-
-        // 妖精剣
-        Configurator<ItemFairySword> fairySword = fairyWeapon(erMod, ItemFairySword::new, "fairy_sword", "fairySword")
-                .bind(addComponent(miragiumSword))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.attack))))
-                .bind(setWeaponStatusOfTier(3))
-                .get();
 
         // ミラジウムの斧
         Configurator<ItemMiragiumAxe> miragiumAxe = fairyWeapon(erMod, ItemMiragiumAxe::new, "miragium_axe", "miragiumAxe")
