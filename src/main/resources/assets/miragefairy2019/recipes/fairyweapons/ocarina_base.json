@@ -13,7 +13,7 @@
 		},
 		"S": {
 			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereArt"
+			"ore": "mirageFairy2019SphereSound"
 		},
 		"I": {
 			"type": "forge:ore_dict",

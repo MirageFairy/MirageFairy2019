@@ -16,7 +16,7 @@
 		},
 		"S": {
 			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereFood"
+			"ore": "mirageFairy2019SphereLife"
 		},
 		"c": {
 			"type": "miragefairy2019:ore_dict_complex",

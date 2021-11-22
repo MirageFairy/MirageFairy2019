@@ -41,7 +41,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
             add(new IFormulaDouble[]{
                     val(2.0),
                     div(aqua(), 2),
-                    div(abilityRaw(ErgTypes.fell), 4),
+                    div(abilityRaw(ErgTypes.harvest), 4),
             }));
 
     public IMagicStatus<Integer> fortune = registerMagicStatus("fortune", formatterInteger(),

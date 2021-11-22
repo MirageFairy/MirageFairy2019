@@ -43,7 +43,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
         public Status(IFairyType fairyType) {
             additionalReach = Math.min(fairyType.getManaSet().getWind() / 5.0, 8);
             radius = Math.min(2 + fairyType.getManaSet().getFire() / 10.0 + fairyType.getErgSet().getPower(ErgTypes.warp) / 10.0, 7);
-            maxTargets = (int) (Math.min(1 + fairyType.getManaSet().getGaia() / 2.0 + fairyType.getErgSet().getPower(ErgTypes.store) / 2.0, 20));
+            maxTargets = (int) (Math.min(1 + fairyType.getManaSet().getGaia() / 2.0 + fairyType.getErgSet().getPower(ErgTypes.space) / 2.0, 20));
             wear = 0.25 * Math.pow(0.5, fairyType.getManaSet().getAqua() / 30);
             coolTime = fairyType.getCost() * 3 * Math.pow(0.5, fairyType.getManaSet().getDark() / 40);
         }
@@ -66,7 +66,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
         Status status = new Status(fairyType);
         tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
         tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Fire, " + ErgKt.getDisplayName(ErgTypes.warp).getUnformattedText() + ")");
-        tooltip.add(TextFormatting.BLUE + "Max Targets: " + status.maxTargets + " (Gaia, " + ErgKt.getDisplayName(ErgTypes.store).getUnformattedText() + ")");
+        tooltip.add(TextFormatting.BLUE + "Max Targets: " + status.maxTargets + " (Gaia, " + ErgKt.getDisplayName(ErgTypes.space).getUnformattedText() + ")");
         tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Aqua)");
         tooltip.add(TextFormatting.BLUE + "Cool Time: " + ((int) status.coolTime) + "t (Dark, Cost)");
     }

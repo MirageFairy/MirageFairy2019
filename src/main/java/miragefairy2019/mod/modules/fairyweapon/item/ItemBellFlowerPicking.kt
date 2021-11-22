@@ -10,7 +10,7 @@ import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.positiveBoolean
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.modkt.api.erg.ErgTypes
-import miragefairy2019.modkt.api.erg.ErgTypes.fell
+import miragefairy2019.modkt.api.erg.ErgTypes.harvest
 import miragefairy2019.modkt.api.erg.ErgTypes.knowledge
 import miragefairy2019.modkt.api.erg.ErgTypes.warp
 import miragefairy2019.modkt.api.mana.ManaTypes
@@ -34,10 +34,10 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
     ItemFairyWeaponBase3(
         ManaTypes.dark, EnumMastery.flowerPicking,
         weaponStrength, weaponExtent, weaponEndurance, weaponProduction,
-        ErgTypes.submission, ErgTypes.store, ErgTypes.slash, ErgTypes.fell
+        ErgTypes.submission, ErgTypes.space, ErgTypes.slash, ErgTypes.harvest
     ) {
     val pitch = "pitch"({ double2.positive }) { -(cost / 50.0 - 1) * 12 }.setRange(-12.0..12.0)
-    val maxTargetCount = "maxTargetCount"({ int.positive }) { 2 + floor(+!strength * 0.1 + !fell * 0.1).toInt() }.setRange(1..100)
+    val maxTargetCount = "maxTargetCount"({ int.positive }) { 2 + floor(+!strength * 0.1 + !harvest * 0.1).toInt() }.setRange(1..100)
     val fortune = "fortune"({ double2.positive }) { 3 + !production * 0.1 + !knowledge * 0.1 }.setRange(0.0..100.0)
     val additionalReach = "additionalReach"({ double2.positive }) { !extent * 0.1 }.setRange(0.0..10.0)
     val radius = "radius"({ double2.positive }) { 4 + !extent * 0.05 }.setRange(0.0..10.0)

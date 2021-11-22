@@ -40,7 +40,7 @@ public class Loader {
         // ミラジウムの斧
         Configurator<ItemMiragiumAxe> miragiumAxe = fairyWeapon(erMod, ItemMiragiumAxe::new, "miragium_axe", "miragiumAxe")
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.slash))))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.fell))))
+                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.harvest))))
                 .bind(setWeaponStatusOfTier(2))
                 .get();
 
@@ -74,14 +74,14 @@ public class Loader {
 
         // オカリナベース
         Configurator<ItemFairyWeaponBase> ocarinaBase = fairyWeapon(erMod, ItemFairyWeaponBase::new, "ocarina_base", "ocarinaBase")
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.art))))
+                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.sound))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 魅惑のオカリナ
         Configurator<ItemOcarinaTemptation> ocarinaTemptation = fairyWeapon(erMod, ItemOcarinaTemptation::new, "temptation_ocarina", "ocarinaTemptation")
                 .bind(addComponent(ocarinaBase))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.food))))
+                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.life))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
@@ -94,14 +94,14 @@ public class Loader {
         // 花摘みの鐘
         Configurator<ItemBellFlowerPicking> bellFlowerPicking = fairyWeapon(erMod, () -> new ItemBellFlowerPicking(0.0, 0.0, 0.0, 0.0, 0.2), "flower_picking_bell", "bellFlowerPicking")
                 .bind(addComponent(bellBase))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.fell))))
+                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.harvest))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 花摘みの鐘 II
         Configurator<ItemBellFlowerPicking> bellFlowerPicking2 = fairyWeapon(erMod, () -> new ItemBellFlowerPicking(10.0, 10.0, 10.0, 10.0, 1.0), "flower_picking_bell_2", "bellFlowerPicking2")
                 .bind(addComponent(bellFlowerPicking))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.fell))))
+                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.harvest))))
                 .bind(setWeaponStatusOfTier(4))
                 .get();
 
@@ -116,7 +116,7 @@ public class Loader {
         // ミラジウムの大鎌
         Configurator<ItemMiragiumScythe> miragiumScythe = fairyWeapon(erMod, ItemMiragiumScythe::new, "miragium_scythe", "miragiumScythe")
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.slash))))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.fell))))
+                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.harvest))))
                 .bind(setWeaponStatusOfTier(2))
                 .get();
 

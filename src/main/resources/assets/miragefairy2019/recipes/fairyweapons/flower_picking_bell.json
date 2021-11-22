@@ -24,7 +24,7 @@
 		},
 		"S": {
 			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereFell"
+			"ore": "mirageFairy2019SphereHarvest"
 		},
 		"c": {
 			"type": "miragefairy2019:ore_dict_complex",

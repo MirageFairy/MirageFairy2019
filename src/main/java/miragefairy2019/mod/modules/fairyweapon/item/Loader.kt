@@ -11,13 +11,13 @@ import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod.modules.main.ModuleMain
 import miragefairy2019.modkt.api.erg.ErgTypes.attack
-import miragefairy2019.modkt.api.erg.ErgTypes.breaking
 import miragefairy2019.modkt.api.erg.ErgTypes.craft
 import miragefairy2019.modkt.api.erg.ErgTypes.crystal
+import miragefairy2019.modkt.api.erg.ErgTypes.destroy
 import miragefairy2019.modkt.api.erg.ErgTypes.flame
 import miragefairy2019.modkt.api.erg.ErgTypes.freeze
 import miragefairy2019.modkt.api.erg.ErgTypes.slash
-import miragefairy2019.modkt.api.erg.ErgTypes.store
+import miragefairy2019.modkt.api.erg.ErgTypes.space
 import miragefairy2019.modkt.api.erg.ErgTypes.submission
 import miragefairy2019.modkt.api.erg.ErgTypes.water
 import miragefairy2019.modkt.api.erg.IErgType
@@ -84,9 +84,9 @@ class FairyWeaponLoader(m: ModInitializer) {
     val fairyWandMelting = m.fw(2, ::ItemFairyWandMelting, "melting_fairy_wand", "${fw}Melting", listOf("${fw2}Melting"), null, { flame })
     val fairyWandMelting2 = m.fw(3, ::ItemFairyWandMelting, "melting_fairy_wand_2", "${fw}Melting2", listOf("${fw2}Melting"), null, { flame })
     val fairyWandMelting3 = m.fw(4, ::ItemFairyWandMelting, "melting_fairy_wand_3", "${fw}Melting3", listOf("${fw2}Melting"), null, { flame })
-    val fairyWandBreaking = m.fw(2, ::ItemFairyWandBreaking, "breaking_fairy_wand", "${fw}Breaking", listOf("${fw2}Breaking"), null, { breaking })
-    val fairyWandBreaking2 = m.fw(3, ::ItemFairyWandBreaking, "breaking_fairy_wand_2", "${fw}Breaking2", listOf("${fw2}Breaking"), null, { breaking })
-    val fairyWandBreaking3 = m.fw(4, ::ItemFairyWandBreaking, "breaking_fairy_wand_3", "${fw}Breaking3", listOf("${fw2}Breaking"), null, { breaking })
+    val fairyWandBreaking = m.fw(2, ::ItemFairyWandBreaking, "breaking_fairy_wand", "${fw}Breaking", listOf("${fw2}Breaking"), null, { destroy })
+    val fairyWandBreaking2 = m.fw(3, ::ItemFairyWandBreaking, "breaking_fairy_wand_2", "${fw}Breaking2", listOf("${fw2}Breaking"), null, { destroy })
+    val fairyWandBreaking3 = m.fw(4, ::ItemFairyWandBreaking, "breaking_fairy_wand_3", "${fw}Breaking3", listOf("${fw2}Breaking"), null, { destroy })
     val fairyWandFreezing = m.fw(2, ::ItemFairyWeaponCraftingTool, "freezing_fairy_wand", "${fw}Freezing", listOf("${fw2}Freezing"), null, { freeze })
     val fairyWandFreezing2 = m.fw(3, ::ItemFairyWeaponCraftingTool, "freezing_fairy_wand_2", "${fw}Freezing2", listOf("${fw2}Freezing"), null, { freeze })
     val fairyWandFreezing3 = m.fw(4, ::ItemFairyWeaponCraftingTool, "freezing_fairy_wand_3", "${fw}Freezing3", listOf("${fw2}Freezing"), null, { freeze })
@@ -94,7 +94,7 @@ class FairyWeaponLoader(m: ModInitializer) {
     val fairyWandPolishing2 = m.fw(4, ::ItemFairyWeaponCraftingTool, "polishing_fairy_wand_2", "${fw}Polishing2", listOf("${fw2}Polishing"), null, { crystal })
     val fairyWandSummoning = m.fw(3, ::ItemFairyWandSummoning, "summoning_fairy_wand", "${fw}Summoning", listOf("${fw2}Summoning"), null, { submission })
     val fairyWandSummoning2 = m.fw(4, ::ItemFairyWandSummoning, "summoning_fairy_wand_2", "${fw}Summoning2", listOf("${fw2}Summoning"), null, { submission })
-    val fairyWandDistortion = m.fw(3, ::ItemFairyWeaponCraftingTool, "distortion_fairy_wand", "${fw}Distortion", listOf("${fw2}Distortion"), null, { store })
+    val fairyWandDistortion = m.fw(3, ::ItemFairyWeaponCraftingTool, "distortion_fairy_wand", "${fw}Distortion", listOf("${fw2}Distortion"), null, { space })
 
     val miragiumSword = m.fw(2, ::ItemFairyWeaponBase, "miragium_sword", "miragiumSword", listOf(), null, { attack }, { slash })
     val crystalSword = m.fw(3, ::ItemCrystalSword, "crystal_sword", "crystalSword", listOf(), { miragiumSword }, { crystal })

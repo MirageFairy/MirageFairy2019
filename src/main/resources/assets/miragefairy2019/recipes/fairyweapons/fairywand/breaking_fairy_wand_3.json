@@ -17,7 +17,7 @@
 		},
 		"S": {
 			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereBreaking"
+			"ore": "mirageFairy2019SphereDestroy"
 		}
 	},
 	"result": {
