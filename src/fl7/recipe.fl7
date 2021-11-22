@@ -150,6 +150,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		fairyWand("polishing_fairy_wand_2"; rs[3]; "Crystal");
 		fairyWand("summoning_fairy_wand"  ; rs[2]; "Submission");
 		fairyWand("summoning_fairy_wand_2"; rs[3]; "Submission");
+		fairyWand("distortion_fairy_wand" ; rs[3]; "Store");
 	);
 
 	# 糸から技巧杖

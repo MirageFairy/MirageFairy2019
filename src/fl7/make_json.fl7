@@ -112,6 +112,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	Achievement::new("polishing_fairy_wand_2"; "fairyWandPolishing2")::parent("fairy_weapon/polishing_fairy_wand"  )                    ::write();
 	Achievement::new("summoning_fairy_wand"  ; "fairyWandSummoning" )::parent("fairy_weapon/root"                  )                    ::write();
 	Achievement::new("summoning_fairy_wand_2"; "fairyWandSummoning2")::parent("fairy_weapon/summoning_fairy_wand"  )                    ::write();
+	Achievement::new("distortion_fairy_wand" ; "fairyWandDistortion")::parent("fairy_weapon/root"                  )                    ::write();
 
 	Achievement::new("miragium_axe"          ; "miragiumAxe"        )::parent("fairy_weapon/root"                  )                    ::write();
 
@@ -483,6 +484,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	fairyWand("polishing_fairy_wand_2"; "polishing_fairy_wand" ; 4);
 	fairyWand("summoning_fairy_wand"  ; "summoning_fairy_wand" ; 3);
 	fairyWand("summoning_fairy_wand_2"; "summoning_fairy_wand" ; 4);
+	fairyWand("distortion_fairy_wand" ; "distortion_fairy_wand"; 4);
 
 	fairyWeapon("miragium_axe");
 	fairyWeapon("miragium_scythe");

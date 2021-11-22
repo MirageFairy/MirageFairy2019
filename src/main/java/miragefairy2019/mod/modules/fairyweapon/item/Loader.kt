@@ -17,6 +17,7 @@ import miragefairy2019.modkt.api.erg.ErgTypes.crystal
 import miragefairy2019.modkt.api.erg.ErgTypes.flame
 import miragefairy2019.modkt.api.erg.ErgTypes.freeze
 import miragefairy2019.modkt.api.erg.ErgTypes.slash
+import miragefairy2019.modkt.api.erg.ErgTypes.store
 import miragefairy2019.modkt.api.erg.ErgTypes.submission
 import miragefairy2019.modkt.api.erg.ErgTypes.water
 import miragefairy2019.modkt.api.erg.IErgType
@@ -93,6 +94,7 @@ class FairyWeaponLoader(m: ModInitializer) {
     val fairyWandPolishing2 = m.fw(4, ::ItemFairyWeaponCraftingTool, "polishing_fairy_wand_2", "${fw}Polishing2", listOf("${fw2}Polishing"), null, { crystal })
     val fairyWandSummoning = m.fw(3, ::ItemFairyWandSummoning, "summoning_fairy_wand", "${fw}Summoning", listOf("${fw2}Summoning"), null, { submission })
     val fairyWandSummoning2 = m.fw(4, ::ItemFairyWandSummoning, "summoning_fairy_wand_2", "${fw}Summoning2", listOf("${fw2}Summoning"), null, { submission })
+    val fairyWandDistortion = m.fw(3, ::ItemFairyWeaponCraftingTool, "distortion_fairy_wand", "${fw}Distortion", listOf("${fw2}Distortion"), null, { store })
 
     val miragiumSword = m.fw(2, ::ItemFairyWeaponBase, "miragium_sword", "miragiumSword", listOf(), null, { attack }, { slash })
     val crystalSword = m.fw(3, ::ItemCrystalSword, "crystal_sword", "crystalSword", listOf(), { miragiumSword }, { crystal })
