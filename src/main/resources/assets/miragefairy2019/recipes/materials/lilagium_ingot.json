@@ -1,0 +1,27 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "lilagium_ingot",
+	"pattern": [
+		"mLm",
+		"LIL",
+		"mLm"
+	],
+	"key": {
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotMiragium"
+		},
+		"L": {
+			"item": "minecraft:double_plant",
+			"data": 1
+		},
+		"m": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:materials",
+		"data": 19
+	}
+}
