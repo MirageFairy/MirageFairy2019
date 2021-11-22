@@ -25,7 +25,7 @@ fun <T : ItemFairyWeaponBase> ModInitializer.fairyWeapon(
     registryName: String,
     unlocalizedName: String,
     parent: (() -> Supplier<ItemFairyWeaponBase>)?,
-    vararg ergTypes: IErgType
+    vararg ergTypeSuppliers: () -> IErgType
 ) = item(creator, registryName) {
     setUnlocalizedName(unlocalizedName)
     setCreativeTab { ModuleMain.creativeTab }
@@ -43,8 +43,8 @@ fun <T : ItemFairyWeaponBase> ModInitializer.fairyWeapon(
     }
     onInit {
         if (parent != null) item.addComponent(parent().get().composite)
-        ergTypes.forEach { ergType ->
-            item.addComponent(ApiComposite.instance(ApiFairy.getComponentAbilityType(ergType)))
+        ergTypeSuppliers.forEach { ergTypeSupplier ->
+            item.addComponent(ApiComposite.instance(ApiFairy.getComponentAbilityType(ergTypeSupplier())))
         }
         item.maxDamage = Loader.getDurability(tier) - 1
     }
@@ -54,8 +54,9 @@ fun <T : ItemFairyWeaponBase> ModInitializer.fairyWeapon(
 val moduleFairyWeapon: Module = { fairyWeaponLoader = FairyWeaponLoader(this) }
 lateinit var fairyWeaponLoader: FairyWeaponLoader
 
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 class FairyWeaponLoader(m: ModInitializer) {
-    val miragiumSword = m.fairyWeapon(2, { ItemFairyWeaponBase() }, "miragium_sword", "miragiumSword", null, ErgTypes.attack, ErgTypes.slash)
-    val crystalSword = m.fairyWeapon(3, { ItemCrystalSword() }, "crystal_sword", "crystalSword", { miragiumSword }, ErgTypes.crystal)
-    val fairySword = m.fairyWeapon(3, { ItemFairySword() }, "fairy_sword", "fairySword", { miragiumSword }, ErgTypes.attack)
+    val miragiumSword = m.fairyWeapon(2, ::ItemFairyWeaponBase, "miragium_sword", "miragiumSword", null, { ErgTypes.attack }, { ErgTypes.slash })
+    val crystalSword = m.fairyWeapon(3, ::ItemCrystalSword, "crystal_sword", "crystalSword", { miragiumSword }, { ErgTypes.crystal })
+    val fairySword = m.fairyWeapon(3, ::ItemFairySword, "fairy_sword", "fairySword", { miragiumSword }, { ErgTypes.attack })
 }
