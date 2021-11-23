@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 class ItemFairyWandSummoning : ItemFairyWeaponCraftingTool() {
     @SideOnly(Side.CLIENT)
-    override fun addInformationFunctions(itemStack: ItemStack, world: World, tooltip: MutableList<String>, flag: ITooltipFlag) {
+    override fun addInformationFunctions(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         tooltip.add(formattedText { (!"Hold right mouse button to use fairy crystals quickly").red }) // TODO translate
         super.addInformationFunctions(itemStack, world, tooltip, flag)
     }
