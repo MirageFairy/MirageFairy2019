@@ -8,8 +8,6 @@ import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1;
-import miragefairy2019.mod3.erg.api.ErgTypes;
-import miragefairy2019.modkt.api.fairy.IFairyType;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.Block;
@@ -43,16 +41,11 @@ import java.util.Random;
 
 public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
 
-    public static double getGrowRateInFloor(IFairyType fairyType) {
-        double costWeight = fairyType.getCost() / 50.0;
-        return (fairyType.getManaSet().getShine() / costWeight) * fairyType.getErgSet().getPower(ErgTypes.crystal) / 100.0 * 3;
-    }
-
     public static ITextComponent getGrowRateTableMessage() {
         ITextComponent textComponent = new TextComponentString("");
         textComponent.appendText("===== Mirage Flower Grow Rate Table =====\n");
         ApiFairyRegistry.getFairyRegistry().getFairies()
-                .map(r -> Tuple.of(r.getFairyType(), BlockMirageFlower.getGrowRateInFloor(r.getFairyType())))
+                .map(r -> Tuple.of(r.getFairyType(), BlockMirageFlowerKt.getGrowRateInFloor(r.getFairyType())))
                 .filter(t -> t.y > 1)
                 .sortedDouble(Tuple::getY)
                 .forEach(t -> {
@@ -205,7 +198,7 @@ public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
                         .add(itemStack)
                         .select()
                         .mapIfPresent(n -> ApiFairyRegistry.getFairyRegistry().getFairy(n))
-                        .map(r -> getGrowRateInFloor(r.getFairyType()))
+                        .map(r -> BlockMirageFlowerKt.getGrowRateInFloor(r.getFairyType()))
                         .max(Double::compare)
                         .orElse(null);
                 if (value != null) {
