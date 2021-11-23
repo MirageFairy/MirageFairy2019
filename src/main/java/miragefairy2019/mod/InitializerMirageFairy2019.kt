@@ -13,7 +13,7 @@ import miragefairy2019.mod.modules.fairyweapon.item.moduleFairyWeapon
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
-import miragefairy2019.mod.modules.sphere.moduleSphere
+import miragefairy2019.mod3.sphere.moduleSphere
 import miragefairy2019.mod3.erg.moduleErg
 import miragefairy2019.mod3.fairy.moduleFairy
 import miragefairy2019.mod3.main.moduleMain

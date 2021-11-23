@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.sphere
+package miragefairy2019.mod3.sphere
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.item
