@@ -5,6 +5,7 @@ import miragefairy2019.mod.api.main.ApiMain
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
+import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
@@ -58,8 +59,15 @@ fun <T : Item> ModInitializer.item(creator: () -> T, registryName: String, block
 
 fun <T : Item> ItemInitializer<T>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { item.unlocalizedName = unlocalizedName }
 fun <T : Item> ItemInitializer<T>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { item.creativeTab = creativeTab() }
-fun <T : Item> ItemInitializer<T>.setCustomModelResourceLocation(metadata: Int = 0) = modInitializer.onRegisterItem {
+fun <T : Item> ItemInitializer<T>.setCustomModelResourceLocation(metadata: Int = 0) = modInitializer.onRegisterItem { item.setCustomModelResourceLocation(metadata) }
+fun <T : Item> T.setCustomModelResourceLocation(modelName: String, metadata: Int = 0) {
     if (ApiMain.side().isClient) {
-        ModelLoader.setCustomModelResourceLocation(item, metadata, ModelResourceLocation(item.registryName!!, "normal"))
+        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, modelName), "normal"))
+    }
+}
+
+fun <T : Item> T.setCustomModelResourceLocation(metadata: Int = 0) {
+    if (ApiMain.side().isClient) {
+        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(registryName!!, "normal"))
     }
 }
