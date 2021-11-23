@@ -6,18 +6,18 @@ import miragefairy2019.libkt.color
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.fairy.ApiFairy
+import miragefairy2019.mod3.erg.api.IErgSet
+import miragefairy2019.mod3.erg.api.IErgType
+import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction
 import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.displayName
-import miragefairy2019.mod3.erg.api.IErgSet
-import miragefairy2019.mod3.erg.api.IErgType
 import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.api.mana.IManaSet
 import miragefairy2019.modkt.api.mana.ManaTypes
-import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.modkt.impl.mana.displayName
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting
@@ -26,9 +26,9 @@ import net.minecraft.util.text.TextFormatting.GREEN
 import net.minecraft.util.text.TextFormatting.RED
 
 class MagicStatus<T>(
-        private val name: String,
-        private val function: IMagicStatusFunction<T>,
-        private val formatter: IMagicStatusFormatter<T>
+    private val name: String,
+    private val function: IMagicStatusFunction<T>,
+    private val formatter: IMagicStatusFormatter<T>
 ) : IMagicStatus<T> {
     override fun getName() = name
     override fun getFunction() = function
@@ -36,8 +36,8 @@ class MagicStatus<T>(
 }
 
 data class MagicStatusFunctionArguments(
-        private val getSkillLevel: (IMastery) -> Int,
-        private val fairyType: IFairyType
+    private val getSkillLevel: (IMastery) -> Int,
+    private val fairyType: IFairyType
 ) : IMagicStatusFunctionArguments {
     override fun getSkillLevel(mastery: IMastery) = getSkillLevel.invoke(mastery)
     override fun getFairyType() = fairyType

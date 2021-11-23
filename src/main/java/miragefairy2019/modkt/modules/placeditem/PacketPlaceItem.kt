@@ -38,12 +38,13 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
         if (message.blockPos.distanceSq(player.position) > (player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue + 2).squared()) return null
 
         fun effect(blockPos: BlockPos) = world.playSound(
-                null,
-                blockPos,
-                SoundEvents.ENTITY_ITEM_PICKUP,
-                SoundCategory.PLAYERS,
-                0.2f,
-                ((Math.random() - Math.random()) * 1.4 + 2.0).toFloat())
+            null,
+            blockPos,
+            SoundEvents.ENTITY_ITEM_PICKUP,
+            SoundCategory.PLAYERS,
+            0.2f,
+            ((Math.random() - Math.random()) * 1.4 + 2.0).toFloat()
+        )
 
 
         fun tryBlockAction(): EnumActionResult { // お皿とかに設置・撤去する

@@ -18,11 +18,11 @@ class OreSeedDropRegistry : IOreSeedDropRegistry {
 }
 
 fun IOreSeedDropRegistry.register(
-        type: EnumOreSeedType,
-        shape: EnumOreSeedShape,
-        weight: Double,
-        output: Pair<() -> IBlockState, () -> ItemStack>,
-        vararg requirements: IOreSeedDropRequirement
+    type: EnumOreSeedType,
+    shape: EnumOreSeedShape,
+    weight: Double,
+    output: Pair<() -> IBlockState, () -> ItemStack>,
+    vararg requirements: IOreSeedDropRequirement
 ) {
     register(object : IOreSeedDropHandler {
         override fun getDrop(environment: OreSeedDropEnvironment): OreSeedDrop? {
@@ -46,10 +46,10 @@ class OreSeedDropRegistryScope(val registry: IOreSeedDropRegistry) {
     operator fun EnumOreSeedType.invoke(block: TypedOreSeedDropRegistryScope.() -> Unit) = TypedOreSeedDropRegistryScope(this).block()
     inner class TypedOreSeedDropRegistryScope(val type: EnumOreSeedType) {
         fun register(
-                shape: EnumOreSeedShape,
-                weight: Double,
-                output: Pair<() -> IBlockState, () -> ItemStack>,
-                vararg generationConditions: IOreSeedDropRequirement
+            shape: EnumOreSeedShape,
+            weight: Double,
+            output: Pair<() -> IBlockState, () -> ItemStack>,
+            vararg generationConditions: IOreSeedDropRequirement
         ) {
             registry.register(type, shape, weight, output, *generationConditions)
         }

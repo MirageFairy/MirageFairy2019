@@ -6,7 +6,7 @@ import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import java.util.*
+import java.util.Random
 
 object ApiOreSeedDrop {
     lateinit var oreSeedDropRegistry: IOreSeedDropRegistry
@@ -35,8 +35,8 @@ interface IOreSeedDropHandler {
 data class OreSeedDropEnvironment(val type: EnumOreSeedType, val shape: EnumOreSeedShape, val world: World, val blockPos: BlockPos)
 
 enum class EnumOreSeedType(
-        private val sBlockState: () -> IBlockState,
-        private val sItemStack: () -> ItemStack
+    private val sBlockState: () -> IBlockState,
+    private val sItemStack: () -> ItemStack
 ) {
     STONE({ Blocks.STONE.defaultState }, { ItemStack(Blocks.STONE) }),
     NETHERRACK({ Blocks.NETHERRACK.defaultState }, { ItemStack(Blocks.NETHERRACK) }),

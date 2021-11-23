@@ -7,12 +7,12 @@ import miragefairy2019.modkt.api.mana.ManaTypes
 import kotlin.math.max
 
 data class ManaSet(
-        @Expose private val shine: Double,
-        @Expose private val fire: Double,
-        @Expose private val wind: Double,
-        @Expose private val gaia: Double,
-        @Expose private val aqua: Double,
-        @Expose private val dark: Double
+    @Expose private val shine: Double,
+    @Expose private val fire: Double,
+    @Expose private val wind: Double,
+    @Expose private val gaia: Double,
+    @Expose private val aqua: Double,
+    @Expose private val dark: Double
 ) : IManaSet {
     companion object {
         val ZERO = ManaSet(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
@@ -29,12 +29,12 @@ data class ManaSet(
 }
 
 data class MutableManaSet(
-        @Expose private var shine: Double,
-        @Expose private var fire: Double,
-        @Expose private var wind: Double,
-        @Expose private var gaia: Double,
-        @Expose private var aqua: Double,
-        @Expose private var dark: Double
+    @Expose private var shine: Double,
+    @Expose private var fire: Double,
+    @Expose private var wind: Double,
+    @Expose private var gaia: Double,
+    @Expose private var aqua: Double,
+    @Expose private var dark: Double
 ) : IManaSet {
     constructor() : this(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 

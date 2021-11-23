@@ -222,10 +222,10 @@ val modulePlayerAura: Module = {
                     } ?: return // 食べ物を持っている場合のみ
 
                     fun drawPiece(center: Complex, length: Double, i: Double, rgb: IRgb, brightness: Double) = drawTriangle(
-                            Complex(center.re, center.im),
-                            Complex(center.re + cos(PI / 3 * i) * length, center.im - sin(PI / 3 * i) * length),
-                            Complex(center.re + cos(PI / 3 * (i + 1)) * length, center.im - sin(PI / 3 * (i + 1)) * length),
-                            rgb * brightness.toFloat()
+                        Complex(center.re, center.im),
+                        Complex(center.re + cos(PI / 3 * i) * length, center.im - sin(PI / 3 * i) * length),
+                        Complex(center.re + cos(PI / 3 * (i + 1)) * length, center.im - sin(PI / 3 * (i + 1)) * length),
+                        rgb * brightness.toFloat()
                     )
 
                     fun drawPieces(center: Complex, radius: Double, rgb: IRgb) = repeat(6) { drawPiece(center, radius, it.toDouble(), rgb, 1.0) }

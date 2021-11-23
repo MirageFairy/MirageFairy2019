@@ -66,13 +66,13 @@ class BlockFairyLog : Block(Material.WOOD) {
     fun getState(facing: EnumFacing): IBlockState = defaultState.withProperty(FACING, facing)
 
     override fun getActualState(blockState: IBlockState, world: IBlockAccess, pos: BlockPos): IBlockState = null
-            ?: getActualState0(blockState, world, pos.up())
-            ?: getActualState0(blockState, world, pos.down())
-            ?: getActualState0(blockState, world, pos.west())
-            ?: getActualState0(blockState, world, pos.east())
-            ?: getActualState0(blockState, world, pos.north())
-            ?: getActualState0(blockState, world, pos.south())
-            ?: blockState
+        ?: getActualState0(blockState, world, pos.up())
+        ?: getActualState0(blockState, world, pos.down())
+        ?: getActualState0(blockState, world, pos.west())
+        ?: getActualState0(blockState, world, pos.east())
+        ?: getActualState0(blockState, world, pos.north())
+        ?: getActualState0(blockState, world, pos.south())
+        ?: blockState
 
     private fun getActualState0(blockState: IBlockState, world: IBlockAccess, pos: BlockPos): IBlockState? = when (world.getBlockState(pos)) {
         Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK) -> blockState.withProperty(VARIANT, BlockPlanks.EnumType.OAK)

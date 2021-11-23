@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import org.apache.logging.log4j.LogManager
 import java.io.File
-import java.util.*
+import java.util.ArrayDeque
 
 class PlayerAuraManager : IPlayerAuraManager {
     companion object {
@@ -59,8 +59,8 @@ class PlayerAuraManager : IPlayerAuraManager {
         } else {
             // 妖精関係レジストリ―から、アイテムスタックに対して紐づけられた妖精列を得る
             val listFairyRelation = ApiFairy.fairyRelationRegistry.ingredientFairyRelations.toList()
-                    .filter { it.ingredient.test(itemStack) }
-                    .filter { it.relevance >= 1 }
+                .filter { it.ingredient.test(itemStack) }
+                .filter { it.relevance >= 1 }
             if (listFairyRelation.isEmpty()) return null // 関連付けられた妖精が居ない場合は無視
 
             // 最も関連殿深い妖精の集合
@@ -210,8 +210,10 @@ class FoodHistoryEntry(private val food: ItemStack, private val baseLocalFoodAur
     override fun getHealth() = health
 }
 
-open class PlayerAuraHandler(protected val manager: IPlayerAuraManager,
-                             protected val model: PlayerAuraModel) : IPlayerAuraHandler {
+open class PlayerAuraHandler(
+    protected val manager: IPlayerAuraManager,
+    protected val model: PlayerAuraModel
+) : IPlayerAuraHandler {
     override fun getPlayerAura() = model.aura
     override fun getLocalFoodAura(itemStack: ItemStack) = manager.getGlobalFoodAura(itemStack)?.let { model.getLocalFoodAura(it, itemStack) }
     override fun getSaturationRate(itemStack: ItemStack) = model.getSaturationRate(itemStack)
@@ -224,12 +226,16 @@ open class PlayerAuraHandler(protected val manager: IPlayerAuraManager,
     override fun getFoodHistory() = model.foodHistory
 }
 
-class ClientPlayerAuraHandler(manager: IPlayerAuraManager,
-                              model: PlayerAuraModel) : PlayerAuraHandler(manager, model), IClientPlayerAuraHandler
+class ClientPlayerAuraHandler(
+    manager: IPlayerAuraManager,
+    model: PlayerAuraModel
+) : PlayerAuraHandler(manager, model), IClientPlayerAuraHandler
 
-class ServerPlayerAuraHandler(manager: IPlayerAuraManager,
-                              model: PlayerAuraModel,
-                              private val player: EntityPlayerMP) : PlayerAuraHandler(manager, model), IServerPlayerAuraHandler {
+class ServerPlayerAuraHandler(
+    manager: IPlayerAuraManager,
+    model: PlayerAuraModel,
+    private val player: EntityPlayerMP
+) : PlayerAuraHandler(manager, model), IServerPlayerAuraHandler {
     override fun load() = model.load(player)
     override fun save() = model.save(player)
     override fun onEat(itemStack: ItemStack, healAmount: Int) = run { manager.getGlobalFoodAura(itemStack)?.let { model.pushFood(it, itemStack, healAmount) }; Unit }

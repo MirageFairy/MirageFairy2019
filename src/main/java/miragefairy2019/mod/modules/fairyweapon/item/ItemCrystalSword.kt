@@ -5,13 +5,13 @@ import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
+import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.mod3.fairy.api.ApiFairyRelation
 import miragefairy2019.mod3.fairy.drop
 import miragefairy2019.mod3.fairy.getDropList
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.skill.EnumMastery
-import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.modkt.api.mana.ManaTypes
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes
@@ -20,9 +20,11 @@ import net.minecraft.init.SoundEvents
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemStack
 
-class ItemCrystalSword : ItemFairyWeaponBase3(ManaTypes.gaia, EnumMastery.closeCombat,
-        0.0, 0.0, 0.0, 0.0,
-        ErgTypes.slash, ErgTypes.attack, ErgTypes.crystal, ErgTypes.submission) {
+class ItemCrystalSword : ItemFairyWeaponBase3(
+    ManaTypes.gaia, EnumMastery.closeCombat,
+    0.0, 0.0, 0.0, 0.0,
+    ErgTypes.slash, ErgTypes.attack, ErgTypes.crystal, ErgTypes.submission
+) {
     val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { (getSkillLevel(mastery) / 100.0).coerceIn(0.0, 1.0) }.setVisibility(Companion.EnumVisibility.ALWAYS)
 
     // 攻撃力は7（ダイヤ剣+1）固定

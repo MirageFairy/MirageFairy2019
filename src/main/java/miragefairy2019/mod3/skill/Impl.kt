@@ -67,17 +67,17 @@ val ISkillContainer.remainingSkillPoints get() = skillManager.getFairyMasterLeve
 fun ISkillContainer.canResetMastery(now: Instant) = variables.lastMasteryResetTime.let { it == null || it < now.toLocalDateTime().toLocalDate().atMonthStart().toInstant() }
 
 data class SkillModel(
-        @[JvmField Expose] var masteryLevels: MutableMap<String, Int>? = null,
-        @[JvmField Expose] var variables: SkillVariables? = null
+    @[JvmField Expose] var masteryLevels: MutableMap<String, Int>? = null,
+    @[JvmField Expose] var variables: SkillVariables? = null
 ) {
     fun getMasteryLevels() = masteryLevels ?: mutableMapOf<String, Int>().also { masteryLevels = it }
     fun getVariables() = variables ?: SkillVariables().also { variables = it }
 }
 
 data class SkillVariables(
-        @[JvmField Expose] var exp: Int? = null,
-        @[JvmField Expose] var lastMasteryResetTime: Long? = null,
-        @[JvmField Expose] var lastAstronomicalObservationTime: Long? = null
+    @[JvmField Expose] var exp: Int? = null,
+    @[JvmField Expose] var lastMasteryResetTime: Long? = null,
+    @[JvmField Expose] var lastAstronomicalObservationTime: Long? = null
 ) : ISkillVariables {
     override fun getExp(): Int = exp ?: 0
     override fun setExp(it: Int) = run { exp = it }

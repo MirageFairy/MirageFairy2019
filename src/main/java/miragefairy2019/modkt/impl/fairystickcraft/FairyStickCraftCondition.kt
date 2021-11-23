@@ -18,11 +18,11 @@ class FairyStickCraftConditionSpawnItem(private val sItemStack: () -> ItemStack)
         executor.hookOnCraft {
             if (!environment.world.isRemote) {
                 val entityitem = EntityItem(
-                        environment.world,
-                        environment.blockPos.x + 0.5,
-                        environment.blockPos.y + 0.5,
-                        environment.blockPos.z + 0.5,
-                        sItemStack().copy()
+                    environment.world,
+                    environment.blockPos.x + 0.5,
+                    environment.blockPos.y + 0.5,
+                    environment.blockPos.z + 0.5,
+                    sItemStack().copy()
                 )
                 entityitem.setNoPickupDelay()
                 environment.world.spawnEntity(entityitem)
@@ -35,8 +35,8 @@ class FairyStickCraftConditionSpawnItem(private val sItemStack: () -> ItemStack)
 }
 
 class FairyStickCraftConditionConsumeItem @JvmOverloads constructor( // TODO remove jvm annotation
-        private val ingredient: Ingredient,
-        private val count: Int = 1
+    private val ingredient: Ingredient,
+    private val count: Int = 1
 ) : IFairyStickCraftCondition {
     override fun test(environment: IFairyStickCraftEnvironment, executor: IFairyStickCraftExecutor): Boolean {
         // TODO 同種のアイテムを登録したとき、スタックされていると反応しない
@@ -83,22 +83,22 @@ class FairyStickCraftConditionSpawnBlock(private val sBlockStateInput: () -> IBl
             world.playSound(null, blockPos, SoundEvents.BLOCK_NOTE_BELL, SoundCategory.PLAYERS, 0.2f, 1.0f)
             (0..19).forEach {
                 world.spawnParticle(
-                        EnumParticleTypes.VILLAGER_HAPPY,
-                        blockPos.x + world.rand.nextDouble(),
-                        blockPos.y + world.rand.nextDouble(),
-                        blockPos.z + world.rand.nextDouble(),
-                        0.0, 0.0, 0.0
+                    EnumParticleTypes.VILLAGER_HAPPY,
+                    blockPos.x + world.rand.nextDouble(),
+                    blockPos.y + world.rand.nextDouble(),
+                    blockPos.z + world.rand.nextDouble(),
+                    0.0, 0.0, 0.0
                 )
             }
         }
         executor.hookOnUpdate {
             (0..2).forEach {
                 world.spawnParticle(
-                        EnumParticleTypes.END_ROD,
-                        blockPos.x + world.rand.nextDouble(),
-                        blockPos.y + world.rand.nextDouble(),
-                        blockPos.z + world.rand.nextDouble(),
-                        0.0, 0.0, 0.0
+                    EnumParticleTypes.END_ROD,
+                    blockPos.x + world.rand.nextDouble(),
+                    blockPos.y + world.rand.nextDouble(),
+                    blockPos.z + world.rand.nextDouble(),
+                    0.0, 0.0, 0.0
                 )
             }
         }
@@ -124,22 +124,22 @@ class FairyStickCraftConditionConsumeBlock(private val sBlockStateInput: () -> I
             world.playSound(null, blockPos, SoundEvents.BLOCK_NOTE_BELL, SoundCategory.PLAYERS, 0.2f, 1.0f)
             (0..19).forEach {
                 world.spawnParticle(
-                        EnumParticleTypes.VILLAGER_HAPPY,
-                        blockPos.x + world.rand.nextDouble(),
-                        blockPos.y + world.rand.nextDouble(),
-                        blockPos.z + world.rand.nextDouble(),
-                        0.0, 0.0, 0.0
+                    EnumParticleTypes.VILLAGER_HAPPY,
+                    blockPos.x + world.rand.nextDouble(),
+                    blockPos.y + world.rand.nextDouble(),
+                    blockPos.z + world.rand.nextDouble(),
+                    0.0, 0.0, 0.0
                 )
             }
         }
         executor.hookOnUpdate {
             (0..2).forEach {
                 world.spawnParticle(
-                        EnumParticleTypes.END_ROD,
-                        blockPos.x + world.rand.nextDouble(),
-                        blockPos.y + world.rand.nextDouble(),
-                        blockPos.z + world.rand.nextDouble(),
-                        0.0, 0.0, 0.0
+                    EnumParticleTypes.END_ROD,
+                    blockPos.x + world.rand.nextDouble(),
+                    blockPos.y + world.rand.nextDouble(),
+                    blockPos.z + world.rand.nextDouble(),
+                    0.0, 0.0, 0.0
                 )
             }
         }
@@ -164,22 +164,22 @@ class FairyStickCraftConditionReplaceBlock(private val sBlockStateInput: () -> I
             world.playSound(null, blockPos, SoundEvents.BLOCK_NOTE_BELL, SoundCategory.PLAYERS, 0.2f, 1.0f)
             (0..19).forEach {
                 world.spawnParticle(
-                        EnumParticleTypes.VILLAGER_HAPPY,
-                        blockPos.x + world.rand.nextDouble(),
-                        blockPos.y + world.rand.nextDouble(),
-                        blockPos.z + world.rand.nextDouble(),
-                        0.0, 0.0, 0.0
+                    EnumParticleTypes.VILLAGER_HAPPY,
+                    blockPos.x + world.rand.nextDouble(),
+                    blockPos.y + world.rand.nextDouble(),
+                    blockPos.z + world.rand.nextDouble(),
+                    0.0, 0.0, 0.0
                 )
             }
         }
         executor.hookOnUpdate {
             (0..2).forEach {
                 world.spawnParticle(
-                        EnumParticleTypes.END_ROD,
-                        blockPos.x + world.rand.nextDouble(),
-                        blockPos.y + world.rand.nextDouble(),
-                        blockPos.z + world.rand.nextDouble(),
-                        0.0, 0.0, 0.0
+                    EnumParticleTypes.END_ROD,
+                    blockPos.x + world.rand.nextDouble(),
+                    blockPos.y + world.rand.nextDouble(),
+                    blockPos.z + world.rand.nextDouble(),
+                    0.0, 0.0, 0.0
                 )
             }
         }

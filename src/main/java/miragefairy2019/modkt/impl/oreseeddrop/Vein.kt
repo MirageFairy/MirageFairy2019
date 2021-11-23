@@ -6,8 +6,8 @@ import miragefairy2019.modkt.api.oreseeddrop.OreSeedDropEnvironment
 class Vein(val seed: Long, val horizontalSize: Int, val verticalSize: Int, val chance: Double, vararg val elements: Element) : IOreSeedDropRequirement {
     override fun test(environment: OreSeedDropEnvironment) = VeinHelper.test(seed, horizontalSize, verticalSize, chance, elements, environment)
     override fun getDescriptions() = listOf(
-            "Vein: #$seed ${horizontalSize}H x ${verticalSize}V ${String.format("%.1f%%", chance * 100)}",
-            "Elements: ${elements.joinToString(" ") { it.shortName }}"
+        "Vein: #$seed ${horizontalSize}H x ${verticalSize}V ${String.format("%.1f%%", chance * 100)}",
+        "Elements: ${elements.joinToString(" ") { it.shortName }}"
     )
 }
 

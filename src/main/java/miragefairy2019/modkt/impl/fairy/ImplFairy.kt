@@ -13,12 +13,12 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 
 class FairyType(
-        private val breed: ResourceLocation?,
-        private val displayName: ITextComponent,
-        private val color: Int,
-        private val cost: Double,
-        private val manaSet: IManaSet,
-        private val ergSet: IErgSet
+    private val breed: ResourceLocation?,
+    private val displayName: ITextComponent,
+    private val color: Int,
+    private val cost: Double,
+    private val manaSet: IManaSet,
+    private val ergSet: IErgSet
 ) : IFairyType {
     override fun isEmpty() = false
     override fun getBreed() = breed

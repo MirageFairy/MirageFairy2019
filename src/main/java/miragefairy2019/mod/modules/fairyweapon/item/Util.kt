@@ -15,23 +15,25 @@ fun playSound(world: World, player: EntityPlayer, soundEvent: SoundEvent, volume
 }
 
 fun <T> spawnParticleTargets(
-        world: World,
-        targets: List<T>,
-        fPosition: (T) -> Vec3d,
-        fColor: (T) -> Int) {
+    world: World,
+    targets: List<T>,
+    fPosition: (T) -> Vec3d,
+    fColor: (T) -> Int
+) {
     val rate = 5 / targets.size.coerceAtLeast(5).toDouble()
     targets.forEach { target ->
         if (Math.random() < 0.2 * rate) {
             val position = fPosition(target)
             val color = fColor(target)
             world.spawnParticle(
-                    EnumParticleTypes.SPELL_MOB,
-                    position.x,
-                    position.y,
-                    position.z,
-                    (color shr 16 and 0xFF) / 255.0,
-                    (color shr 8 and 0xFF) / 255.0,
-                    (color shr 0 and 0xFF) / 255.0)
+                EnumParticleTypes.SPELL_MOB,
+                position.x,
+                position.y,
+                position.z,
+                (color shr 16 and 0xFF) / 255.0,
+                (color shr 8 and 0xFF) / 255.0,
+                (color shr 0 and 0xFF) / 255.0
+            )
         }
     }
 }

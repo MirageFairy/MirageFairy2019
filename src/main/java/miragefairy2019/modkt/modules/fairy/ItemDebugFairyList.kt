@@ -29,10 +29,10 @@ class ItemDebugFairyList : Item() {
         if (!world.isRemote) return EnumActionResult.SUCCESS
 
         fun getLang(lang: String) = ItemDebugFairyList::class.java.getResource("/assets/miragefairy2019/lang/$lang.lang")!!.readText().split("""\r\n?|\n""".toRegex())
-                .filter { it.isNotBlank() }
-                .map { it.split("=", limit = 2) }
-                .filter { it.size == 2 }
-                .associate { Pair(it[0], it[1]) }
+            .filter { it.isNotBlank() }
+            .map { it.split("=", limit = 2) }
+            .filter { it.size == 2 }
+            .associate { Pair(it[0], it[1]) }
 
         val enUs = getLang("en_us")
         val jaJp = getLang("ja_jp")
@@ -41,41 +41,41 @@ class ItemDebugFairyList : Item() {
         player.sendStatusMessage(textComponent { !"Saved to " + !fileDest.absolutePath }, false)
         fileDest.parentFile.mkdirs()
         fileDest.writeText(
-                FairyTypes.instance.variants.joinToString("") { (id, b) ->
-                    val v = b.main
-                    val f = v.type
-                    fun color(selector: ColorSet.() -> Int) = v.colorSet.selector().toRgb().hex
-                    val type = f.breed!!.resourcePath
-                    "|${
+            FairyTypes.instance.variants.joinToString("") { (id, b) ->
+                val v = b.main
+                val f = v.type
+                fun color(selector: ColorSet.() -> Int) = v.colorSet.selector().toRgb().hex
+                val type = f.breed!!.resourcePath
+                "|${
+                    listOf(
                         listOf(
-                                listOf(
-                                        id,
-                                        "&bold(){!FairyImage(#${color { skin }},#${color { bright }},#${color { dark }},#${color { hair }})}",
-                                        "CENTER:$type&br()${enUs["mirageFairy2019.fairy.$type.name"]!!}",
-                                        "CENTER:${jaJp["mirageFairy2019.fairy.$type.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
-                                        "CENTER:${v.rare}",
-                                        "RIGHT:${f.cost.f0}"
-                                ),
-                                ManaTypes.values.map {
-                                    "RIGHT:${f.mana(it).f3}"
-                                },
-                                listOf(
-                                        "RIGHT:${f.manaSet.sum.f3}"
-                                ),
-                                ManaTypes.values.map {
-                                    val a = f.mana(it) / f.cost * 50
-                                    "${if (a >= 10) "BGCOLOR(#FDB):" else ""}RIGHT:${a.f3}"
-                                },
-                                listOf(
-                                        "RIGHT:${(f.manaSet.sum / f.cost * 50).f3}"
-                                ),
-                                ErgTypes.values.map {
-                                    val a = f.erg(it)
-                                    "${if (a >= 10) "BGCOLOR(#FDB):" else ""}RIGHT:${a.f3}"
-                                }
-                        ).flatten().joinToString("|")
-                    }|\n"
-                }
+                            id,
+                            "&bold(){!FairyImage(#${color { skin }},#${color { bright }},#${color { dark }},#${color { hair }})}",
+                            "CENTER:$type&br()${enUs["mirageFairy2019.fairy.$type.name"]!!}",
+                            "CENTER:${jaJp["mirageFairy2019.fairy.$type.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
+                            "CENTER:${v.rare}",
+                            "RIGHT:${f.cost.f0}"
+                        ),
+                        ManaTypes.values.map {
+                            "RIGHT:${f.mana(it).f3}"
+                        },
+                        listOf(
+                            "RIGHT:${f.manaSet.sum.f3}"
+                        ),
+                        ManaTypes.values.map {
+                            val a = f.mana(it) / f.cost * 50
+                            "${if (a >= 10) "BGCOLOR(#FDB):" else ""}RIGHT:${a.f3}"
+                        },
+                        listOf(
+                            "RIGHT:${(f.manaSet.sum / f.cost * 50).f3}"
+                        ),
+                        ErgTypes.values.map {
+                            val a = f.erg(it)
+                            "${if (a >= 10) "BGCOLOR(#FDB):" else ""}RIGHT:${a.f3}"
+                        }
+                    ).flatten().joinToString("|")
+                }|\n"
+            }
         )
 
         return EnumActionResult.SUCCESS

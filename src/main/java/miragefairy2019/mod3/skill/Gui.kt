@@ -48,9 +48,9 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
         components += component(RectangleInt(4 + 20, 4, 20 - 4, 10)) {
             label(::fontRenderer, align = TextAlignment.RIGHT) { "${skillManager.getFairyMasterLevel(skillContainer.variables.exp)}" }
             tooltip(
-                    "フェアリーマスターレベル: ${skillManager.getFairyMasterLevel(skillContainer.variables.exp)}", // TODO translate
-                    "累積経験値: ${skillContainer.variables.exp.stringFormat("%8d")}", // TODO translate
-                    "必要経験値: ${skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.exp).stringFormat("%8d")}" // TODO translate
+                "フェアリーマスターレベル: ${skillManager.getFairyMasterLevel(skillContainer.variables.exp)}", // TODO translate
+                "累積経験値: ${skillContainer.variables.exp.stringFormat("%8d")}", // TODO translate
+                "必要経験値: ${skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.exp).stringFormat("%8d")}" // TODO translate
             )
         }
         components += component(RectangleInt(4 + 40, 4, 20, 10)) {
@@ -74,8 +74,8 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
             tooltip {
                 when {
                     !skillContainer.canResetMastery(Instant.now()) -> listOf(
-                            "今月は初期化できません。",
-                            "残り: ${(skillContainer.variables.lastMasteryResetTime!!.toLocalDateTime().toLocalDate().atMonthStart().plusMonths(1).toInstant() - Instant.now()).displayText.unformattedText}"
+                        "今月は初期化できません。",
+                        "残り: ${(skillContainer.variables.lastMasteryResetTime!!.toLocalDateTime().toLocalDate().atMonthStart().plusMonths(1).toInstant() - Instant.now()).displayText.unformattedText}"
                     ) // TODO translate
                     skillContainer.usedSkillPoints == 0 -> listOf("初期化の必要はありません。") // TODO translate
                     else -> listOf("1か月に1度だけ、全マスタリのレベルをリセットしSPに戻せます。") // TODO translate
