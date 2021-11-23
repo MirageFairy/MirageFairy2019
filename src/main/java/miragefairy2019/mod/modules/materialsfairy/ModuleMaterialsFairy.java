@@ -51,6 +51,7 @@ public class ModuleMaterialsFairy {
     public static ItemStack itemStackBottleMirageFlowerExtract;
     public static ItemStack itemStackBottleMirageFlowerOil;
     public static ItemStack itemStackManaRodGlass;
+    public static ItemStack itemStackMirageFairyLeather;
 
     public static void init(EventRegistryMod erMod) {
 
@@ -173,6 +174,10 @@ public class ModuleMaterialsFairy {
                             .bind(addComponent(instance(glass.get(), 0.5)))
                             .bind(addOreName("mirageFairy2019ManaRodGlass"))
                             .bind(onCreateItemStack(v -> itemStackManaRodGlass = v.createItemStack()));
+
+                    itemVariant(c.erMod, c, 14, () -> new ItemVariantFairyMaterial("mirage_fairy_leather", "mirageFairyLeather", 4))
+                            .bind(addOreName("mirageFairyLeather"))
+                            .bind(onCreateItemStack(v -> itemStackMirageFairyLeather = v.createItemStack()));
 
                     erMod.registerItem.register(b -> {
                         if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
