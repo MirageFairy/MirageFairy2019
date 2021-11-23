@@ -37,7 +37,7 @@ fun getGrowRateMessage(world: World, pos: BlockPos) = textComponent {
 }
 
 
-class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidでないマテリアルでなければ耕土の上に置けない
+class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidであるマテリアルは耕土を破壊する
     init {
         // meta
         defaultState = blockState.baseState.withProperty(AGE, 0)
