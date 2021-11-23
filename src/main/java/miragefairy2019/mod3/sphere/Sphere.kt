@@ -89,6 +89,7 @@ fun getSphereType(ergType: IErgType): SphereType {
         ErgTypes.freeze -> SphereType(ErgTypes.freeze, 0x5AFFFF, 0xFFFFFF, 0xF6FFFF, 0xACFFFF, ore("ice"), null)
         ErgTypes.thunder -> SphereType(ErgTypes.thunder, 0xFFFFB2, 0x359C00, 0xC370A7, 0xFFFF00, item { Items.GOLDEN_SWORD }, ore("gemTourmaline"))
         ErgTypes.levitate -> SphereType(ErgTypes.levitate, 0x00A2FF, 0xB7ECFF, 0x35366B, 0x8CD0FF, item { Items.FEATHER }, ore("gemLabradorite"))
+        ErgTypes.sense -> SphereType(ErgTypes.sense, 0x1B3211, 0xD3E6DF, 0x7ACF45, 0x4784A0, item { Items.ENDER_EYE }, null)
         else -> throw IllegalArgumentException()
     }
 }

@@ -40,6 +40,7 @@ val moduleErg: Module = {
         ErgTypes.freeze = "freeze"(TextFormatting.AQUA)
         ErgTypes.thunder = "thunder"(TextFormatting.YELLOW)
         ErgTypes.levitate = "levitate"(TextFormatting.BLUE)
+        ErgTypes.sense = "sense"(TextFormatting.WHITE)
 
         ErgTypes.values = values
     }

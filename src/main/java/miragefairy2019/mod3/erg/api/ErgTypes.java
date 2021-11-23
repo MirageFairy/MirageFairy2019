@@ -26,5 +26,6 @@ public class ErgTypes {
     public static IErgType freeze;
     public static IErgType thunder;
     public static IErgType levitate;
+    public static IErgType sense;
 
 }
