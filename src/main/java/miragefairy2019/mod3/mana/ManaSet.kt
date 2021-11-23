@@ -1,9 +1,9 @@
-package miragefairy2019.modkt.impl
+package miragefairy2019.mod3.mana
 
 import com.google.gson.annotations.Expose
-import miragefairy2019.modkt.api.mana.IManaSet
-import miragefairy2019.modkt.api.mana.IManaType
-import miragefairy2019.modkt.api.mana.ManaTypes
+import miragefairy2019.mod3.mana.api.IManaSet
+import miragefairy2019.mod3.mana.api.IManaType
+import miragefairy2019.mod3.mana.api.ManaTypes
 import kotlin.math.max
 
 data class ManaSet(

@@ -11,12 +11,12 @@ import miragefairy2019.mod.lib.multi.ItemMulti
 import miragefairy2019.mod.lib.multi.ItemVariant
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.modkt.api.fairy.IFairyType
-import miragefairy2019.modkt.api.mana.IManaType
-import miragefairy2019.modkt.api.mana.ManaTypes
+import miragefairy2019.mod3.mana.api.IManaType
+import miragefairy2019.mod3.mana.api.ManaTypes
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.FairyType
-import miragefairy2019.modkt.impl.getMana
-import miragefairy2019.modkt.impl.mana.displayName
+import miragefairy2019.mod3.mana.getMana
+import miragefairy2019.mod3.mana.displayName
 import mirrg.boron.util.UtilsString
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag

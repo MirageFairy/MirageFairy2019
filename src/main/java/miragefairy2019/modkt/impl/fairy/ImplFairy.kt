@@ -5,10 +5,10 @@ import miragefairy2019.mod3.erg.ErgSet
 import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.erg.api.IErgType
 import miragefairy2019.modkt.api.fairy.IFairyType
-import miragefairy2019.modkt.api.mana.IManaSet
-import miragefairy2019.modkt.api.mana.IManaType
-import miragefairy2019.modkt.impl.ManaSet
-import miragefairy2019.modkt.impl.getMana
+import miragefairy2019.mod3.mana.api.IManaSet
+import miragefairy2019.mod3.mana.api.IManaType
+import miragefairy2019.mod3.mana.ManaSet
+import miragefairy2019.mod3.mana.getMana
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 

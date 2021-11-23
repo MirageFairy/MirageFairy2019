@@ -11,7 +11,7 @@ import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.positiveBoolean
 import miragefairy2019.mod3.skill.EnumMastery
-import miragefairy2019.modkt.api.mana.ManaTypes
+import miragefairy2019.mod3.mana.api.ManaTypes
 import mirrg.boron.util.UtilsMath
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.init.SoundEvents

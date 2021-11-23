@@ -1,10 +1,10 @@
-package miragefairy2019.modkt.impl.mana
+package miragefairy2019.mod3.mana
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
-import miragefairy2019.modkt.api.mana.IManaType
-import miragefairy2019.modkt.api.mana.ManaTypes
+import miragefairy2019.mod3.mana.api.IManaType
+import miragefairy2019.mod3.mana.api.ManaTypes
 import net.minecraft.util.text.TextFormatting
 
 val moduleMana: Module = {

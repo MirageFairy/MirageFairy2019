@@ -16,9 +16,9 @@ import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.displayName
 import miragefairy2019.modkt.api.fairy.IFairyType
-import miragefairy2019.modkt.api.mana.IManaSet
-import miragefairy2019.modkt.api.mana.ManaTypes
-import miragefairy2019.modkt.impl.mana.displayName
+import miragefairy2019.mod3.mana.api.IManaSet
+import miragefairy2019.mod3.mana.api.ManaTypes
+import miragefairy2019.mod3.mana.displayName
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.util.text.TextFormatting.DARK_PURPLE
