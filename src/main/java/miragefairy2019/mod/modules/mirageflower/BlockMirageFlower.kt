@@ -51,7 +51,7 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solid„Åß„
     override fun getMetaFromState(state: IBlockState) = state.getValue(AGE).coerceIn(0, 3)
     override fun getStateFromMeta(meta: Int): IBlockState = defaultState.withProperty(AGE, meta.coerceIn(0, 3))
     override fun createBlockState() = BlockStateContainer(this, AGE)
-    private fun getState(age: Int): IBlockState = defaultState.withProperty(AGE, age)
+    fun getState(age: Int): IBlockState = defaultState.withProperty(AGE, age)
 
     companion object {
         val AGE = PropertyInteger.create("age", 0, 3)
