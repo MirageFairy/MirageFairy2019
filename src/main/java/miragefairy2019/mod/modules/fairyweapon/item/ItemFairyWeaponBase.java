@@ -18,6 +18,7 @@ import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.modules.sphere.EnumSphere;
+import miragefairy2019.mod.modules.sphere.SphereKt;
 import miragefairy2019.modkt.api.fairy.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -579,7 +580,7 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
                     long amount = e.y;
                     int count = (int) (amount / 1_000_000_000L) + (amount % 1_000_000_000L != 0 ? 1 : 0);
                     return ISuppliterator.range(count)
-                            .map(i -> new OreIngredient(e.x.getOreName()));
+                            .map(i -> new OreIngredient(SphereKt.getOreName(e.x)));
                 })
                 .toCollection(NonNullList::create);
     }

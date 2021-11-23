@@ -13,7 +13,7 @@ import miragefairy2019.mod.modules.fairyweapon.item.moduleFairyWeapon
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
-import miragefairy2019.mod.modules.sphere.ModuleSphere
+import miragefairy2019.mod.modules.sphere.moduleSphere
 import miragefairy2019.mod3.fairy.moduleFairy
 import miragefairy2019.mod3.main.moduleMain
 import miragefairy2019.mod3.skill.moduleSkill
@@ -50,6 +50,7 @@ class InitializerMirageFairy2019 {
             loaderFairyLogDrop()
             moduleFairyWeapon()
             moduleFairy()
+            moduleSphere()
         }
 
         modInitializer.onInstantiation()
@@ -66,7 +67,6 @@ class InitializerMirageFairy2019 {
         ModuleMirageFlower.init(erMod)
         ModuleOreSeed.init(erMod)
         ModuleOre.init(erMod)
-        ModuleSphere.init(erMod)
         ModulePlacedItem.init(erMod)
         ModulePlayerAura.init(erMod)
         ModuleArtifacts.init(erMod)
