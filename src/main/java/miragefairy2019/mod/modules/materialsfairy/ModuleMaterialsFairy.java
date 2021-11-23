@@ -163,7 +163,7 @@ public class ModuleMaterialsFairy {
                                         .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019CraftingToolFairyWandPolishing"))))
                                         .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))))
                                         .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(Ingredient.fromItem(ApiMirageFlower.itemMirageFlowerSeeds), 50)))
-                                        .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("gemCinnabar"), 16)))
+                                        .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("gemCinnabar"), 4)))
                                         .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionSpawnItem(() -> v.createItemStack())))
                                         .get());
 
