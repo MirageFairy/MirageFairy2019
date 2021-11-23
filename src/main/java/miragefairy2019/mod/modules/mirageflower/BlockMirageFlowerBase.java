@@ -9,7 +9,6 @@ import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1;
 import mirrg.boron.util.UtilsMath;
-import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockFarmland;
@@ -29,8 +28,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -40,35 +37,6 @@ import java.util.Optional;
 import java.util.Random;
 
 public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
-
-    public static ITextComponent getGrowRateTableMessage() {
-        ITextComponent textComponent = new TextComponentString("");
-        textComponent.appendText("===== Mirage Flower Grow Rate Table =====\n");
-        ApiFairyRegistry.getFairyRegistry().getFairies()
-                .map(r -> Tuple.of(r.getFairyType(), BlockMirageFlowerKt.getGrowRateInFloor(r.getFairyType())))
-                .filter(t -> t.y > 1)
-                .sortedDouble(Tuple::getY)
-                .forEach(t -> {
-                    textComponent.appendText(String.format("%7.2f%%  ", t.y * 100));
-                    textComponent.appendSibling(t.x.getDisplayName());
-                    textComponent.appendText("\n");
-                });
-        textComponent.appendText("====================");
-        return textComponent;
-    }
-
-    public static ITextComponent getGrowRateMessage(World world, BlockPos pos) {
-        ITextComponent textComponent = new TextComponentString("");
-        textComponent.appendText("===== Mirage Flower Grow Rate =====\n");
-        textComponent.appendText(String.format("Pos: %d %d %d\n", pos.getX(), pos.getY(), pos.getZ()));
-        textComponent.appendText(String.format("Block: %s\n", world.getBlockState(pos)));
-        textComponent.appendText(String.format("Floor: %s\n", world.getBlockState(pos.down())));
-        textComponent.appendText(String.format("%.2f%%\n", getGrowRate(world, pos) * 100));
-        textComponent.appendText("====================");
-        return textComponent;
-    }
-
-    //
 
     public BlockMirageFlowerBase() {
         super(Material.PLANTS); // Solidでないマテリアルでなければ耕土の上に置けない
