@@ -2,7 +2,7 @@
 	"type": "forge:ore_shaped",
 	"group": "bell_base",
 	"pattern": [
-		"cIS",
+		"cIs",
 		" RI",
 		"I m"
 	],
@@ -15,9 +15,9 @@
 			"type": "forge:ore_dict",
 			"ore": "ingotMiragium"
 		},
-		"S": {
+		"s": {
 			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereSubmission"
+			"ore": "mirageFairy2019SphereSound"
 		},
 		"c": {
 			"type": "miragefairy2019:ore_dict_complex",

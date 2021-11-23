@@ -2,27 +2,27 @@
 	"type": "forge:ore_shaped",
 	"group": "flower_picking_bell",
 	"pattern": [
-		"pGS",
-		"c#G",
-		"Rgm"
+		"cIh",
+		"a#I",
+		"gam"
 	],
 	"key": {
 		"#": {
 			"item": "miragefairy2019:bell_base"
 		},
-		"R": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019ManaRodDark"
-		},
 		"g": {
 			"type": "forge:ore_dict",
 			"ore": "ingotGold"
 		},
-		"G": {
+		"a": {
 			"type": "forge:ore_dict",
-			"ore": "gemPyrope"
+			"ore": "gemMagnetite"
 		},
-		"S": {
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotLilagium"
+		},
+		"h": {
 			"type": "forge:ore_dict",
 			"ore": "mirageFairy2019SphereHarvest"
 		},
@@ -33,10 +33,6 @@
 		"m": {
 			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
-		},
-		"p": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
 		}
 	},
 	"result": {

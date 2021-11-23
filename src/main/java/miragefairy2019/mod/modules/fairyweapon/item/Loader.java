@@ -87,7 +87,7 @@ public class Loader {
 
         // 鐘ベース
         Configurator<ItemBellBase> bellBase = fairyWeapon(erMod, ItemBellBase::new, "bell_base", "bellBase")
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.submission))))
+                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.sound))))
                 .bind(setWeaponStatusOfTier(2))
                 .get();
 

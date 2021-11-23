@@ -2,9 +2,9 @@
 	"type": "forge:ore_shaped",
 	"group": "flower_picking_bell_2",
 	"pattern": [
-		"cIf",
-		"I#I",
-		"RIm"
+		"cGh",
+		"G#G",
+		"RGp"
 	],
 	"key": {
 		"#": {
@@ -14,11 +14,11 @@
 			"type": "forge:ore_dict",
 			"ore": "stickMirageFairyWood"
 		},
-		"I": {
+		"G": {
 			"type": "forge:ore_dict",
-			"ore": "ingotMiragium"
+			"ore": "gemPyrope"
 		},
-		"f": {
+		"h": {
 			"type": "forge:ore_dict",
 			"ore": "mirageFairy2019SphereHarvest"
 		},
@@ -26,9 +26,9 @@
 			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
 		},
-		"m": {
+		"p": {
 			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
+			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
 		}
 	},
 	"result": {
