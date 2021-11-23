@@ -13,12 +13,12 @@ import miragefairy2019.mod.modules.fairyweapon.item.moduleFairyWeapon
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
-import miragefairy2019.mod3.sphere.moduleSphere
 import miragefairy2019.mod3.erg.moduleErg
 import miragefairy2019.mod3.fairy.moduleFairy
 import miragefairy2019.mod3.main.moduleMain
-import miragefairy2019.mod3.skill.moduleSkill
 import miragefairy2019.mod3.mana.moduleMana
+import miragefairy2019.mod3.skill.moduleSkill
+import miragefairy2019.mod3.sphere.moduleSphere
 import miragefairy2019.modkt.modules.artifacts.ModuleArtifacts
 import miragefairy2019.modkt.modules.fairy.ModuleFairy
 import miragefairy2019.modkt.modules.fairy.loaderFairyCrystalDrop

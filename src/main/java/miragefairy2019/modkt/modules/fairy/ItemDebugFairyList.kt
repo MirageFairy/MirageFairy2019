@@ -6,10 +6,10 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.mod3.mana.api.ManaTypes
+import miragefairy2019.mod3.mana.sum
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.mana
-import miragefairy2019.mod3.mana.sum
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.util.EnumActionResult

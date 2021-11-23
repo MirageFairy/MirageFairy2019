@@ -11,13 +11,13 @@ import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.EventRegistryMod
+import miragefairy2019.mod3.mana.ManaSet
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.api.IManaType
 import miragefairy2019.mod3.mana.api.ManaTypes
-import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
-import miragefairy2019.mod3.mana.ManaSet
-import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.mana.displayName
+import miragefairy2019.mod3.mana.getMana
+import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
 import miragefairy2019.modkt.impl.playeraura.PlayerAuraManager
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayerMP
