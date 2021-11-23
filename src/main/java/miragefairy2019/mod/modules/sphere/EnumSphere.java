@@ -32,7 +32,7 @@ public class EnumSphere {
     public static final EnumSphere water = new EnumSphere(ErgTypes.water, 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF, () -> Ingredient.fromStacks(new ItemStack(Items.WATER_BUCKET)), () -> null);
     public static final EnumSphere crystal = new EnumSphere(ErgTypes.crystal, 0xA2FFFF, 0xB6FFFF, 0x36CECE, 0xEBFFFF, () -> new OreIngredient("gemDiamond"), () -> null);
     public static final EnumSphere sound = new EnumSphere(ErgTypes.sound, 0x98ACE7, 0xD8DDFF, 0xBFC9D8, 0xC9D0ED, () -> Ingredient.fromStacks(new ItemStack(Blocks.NOTEBLOCK)), () -> null);
-    public static final EnumSphere space = new EnumSphere(ErgTypes.space, 0x000000, 0x350F40, 0x570F6F, 0xB292F7, () -> Ingredient.fromStacks(new ItemStack(Blocks.CHEST)), () -> null);
+    public static final EnumSphere space = new EnumSphere(ErgTypes.space, 0x000000, 0x4D0065, 0x67009D, 0x001E74, () -> Ingredient.fromStacks(new ItemStack(Blocks.CHEST)), () -> null);
     public static final EnumSphere warp = new EnumSphere(ErgTypes.warp, 0x3A00D3, 0x8CF4E2, 0x349988, 0xD004FB, () -> new OreIngredient("enderpearl"), () -> null);
     public static final EnumSphere shoot = new EnumSphere(ErgTypes.shoot, 0x969696, 0x896727, 0x896727, 0xD8D8D8, () -> Ingredient.fromStacks(new ItemStack(Items.BOW)), () -> null);
     public static final EnumSphere destroy = new EnumSphere(ErgTypes.destroy, 0xFFFFFF, 0xFF5A35, 0xFF4800, 0x000000, () -> Ingredient.fromStacks(new ItemStack(Blocks.TNT)), () -> null);
