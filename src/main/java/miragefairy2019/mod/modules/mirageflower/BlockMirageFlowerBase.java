@@ -14,7 +14,6 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,27 +37,6 @@ public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
 
     public BlockMirageFlowerBase(Material material) {
         super(material);
-    }
-
-    // state
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return UtilsMath.trim(state.getValue(BlockMirageFlower.Companion.getAGE()), 0, 3);
-    }
-
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(BlockMirageFlower.Companion.getAGE(), UtilsMath.trim(meta, 0, 3));
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, BlockMirageFlower.Companion.getAGE());
-    }
-
-    public IBlockState getState(int age) {
-        return getDefaultState().withProperty(BlockMirageFlower.Companion.getAGE(), age);
     }
 
     // 判定

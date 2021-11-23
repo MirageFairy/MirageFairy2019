@@ -9,6 +9,8 @@ import miragefairy2019.modkt.impl.fairy.shineEfficiency
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyInteger
+import net.minecraft.block.state.BlockStateContainer
+import net.minecraft.block.state.IBlockState
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -44,6 +46,12 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solid„Åß„
         // style
         soundType = SoundType.GLASS
     }
+
+    // state
+    override fun getMetaFromState(state: IBlockState) = state.getValue(AGE).coerceIn(0, 3)
+    override fun getStateFromMeta(meta: Int): IBlockState = defaultState.withProperty(AGE, meta.coerceIn(0, 3))
+    override fun createBlockState() = BlockStateContainer(this, AGE)
+    private fun getState(age: Int): IBlockState = defaultState.withProperty(AGE, age)
 
     companion object {
         val AGE = PropertyInteger.create("age", 0, 3)
