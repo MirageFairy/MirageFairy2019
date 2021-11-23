@@ -14,7 +14,6 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -45,21 +44,21 @@ public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return UtilsMath.trim(state.getValue(AGE), 0, 3);
+        return UtilsMath.trim(state.getValue(BlockMirageFlower.Companion.getAGE()), 0, 3);
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(AGE, UtilsMath.trim(meta, 0, 3));
+        return getDefaultState().withProperty(BlockMirageFlower.Companion.getAGE(), UtilsMath.trim(meta, 0, 3));
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, AGE);
+        return new BlockStateContainer(this, BlockMirageFlower.Companion.getAGE());
     }
 
     public IBlockState getState(int age) {
-        return getDefaultState().withProperty(AGE, age);
+        return getDefaultState().withProperty(BlockMirageFlower.Companion.getAGE(), age);
     }
 
     // 判定
@@ -87,7 +86,7 @@ public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
     }
 
     public int getAge(IBlockState state) {
-        return state.getValue(AGE);
+        return state.getValue(BlockMirageFlower.Companion.getAGE());
     }
 
     public boolean isMaxAge(IBlockState state) {
@@ -98,7 +97,7 @@ public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
         int t = UtilsMath.randomInt(rand, rate);
         for (int i = 0; i < t; i++) {
             if (!isMaxAge(state)) {
-                worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, getAge(state) + 1), 2);
+                worldIn.setBlockState(pos, getDefaultState().withProperty(BlockMirageFlower.Companion.getAGE(), getAge(state) + 1), 2);
             }
         }
     }
@@ -344,7 +343,7 @@ public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
                 world.playEvent(oPlayer.orElse(null), 2001, blockPos, Block.getStateId(blockState));
 
                 // ブロックの置換
-                world.setBlockState(blockPos, getDefaultState().withProperty(AGE, 1), 2);
+                world.setBlockState(blockPos, getDefaultState().withProperty(BlockMirageFlower.Companion.getAGE(), 1), 2);
 
                 return true;
             }
