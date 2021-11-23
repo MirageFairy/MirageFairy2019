@@ -18,7 +18,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-class ItemFairyWandSummoning : ItemFairyWeaponCraftingTool() {
+class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWeaponCraftingTool() {
     @SideOnly(Side.CLIENT)
     override fun addInformationFunctions(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         tooltip.add(formattedText { (!"Hold right mouse button to use fairy crystals quickly").red }) // TODO translate
@@ -39,54 +39,60 @@ class ItemFairyWandSummoning : ItemFairyWeaponCraftingTool() {
         if (entityLivingBase.world.isRemote) return
 
         if (entityLivingBase is EntityPlayer) {
-
-            // 使用Tickじゃないなら抜ける
-            if (!isUsingTick(count)) return
-
-            // 妖晶を得る
-            val itemStackFairyCrystal = findItem(entityLivingBase) { itemStack -> itemStack!!.item is ItemFairyCrystal }.orElse(null) ?: return
-            val variantFairyCrystal = (itemStackFairyCrystal.item as ItemFairyCrystal).getVariant(itemStackFairyCrystal).orElse(null) ?: return
-
-            // プレイヤー視点判定
-            val rayTraceResult = rayTrace(entityLivingBase.world, entityLivingBase, false) ?: return // ブロックに当たらなかった場合は無視
-            if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return // ブロックに当たらなかった場合は無視
-
-            // ガチャを引く
-            val itemStackDrop = variantFairyCrystal.dropper.drop(
-                entityLivingBase,
-                entityLivingBase.world,
-                rayTraceResult.blockPos,
-                if (entityLivingBase.getHeldItem(EnumHand.MAIN_HAND).item === this) EnumHand.MAIN_HAND else EnumHand.OFF_HAND,
-                rayTraceResult.sideHit,
-                rayTraceResult.hitVec.x.toFloat(),
-                rayTraceResult.hitVec.y.toFloat(),
-                rayTraceResult.hitVec.z.toFloat()
-            ).orElse(null) ?: return // ガチャが引けなかった場合は無視
-            if (itemStackDrop.isEmpty) return // ガチャが引けなかった場合は無視
-
-            // 成立
-
-            // ガチャアイテムを消費
-            if (!entityLivingBase.isCreative) itemStackFairyCrystal.shrink(1)
-            entityLivingBase.addStat(StatList.getObjectUseStats(itemStackFairyCrystal.item))
-
-            // 妖精をドロップ
-            val blockPos = rayTraceResult.blockPos.offset(rayTraceResult.sideHit)
-            val entityItem = EntityItem(entityLivingBase.world, blockPos.x + 0.5, blockPos.y + 0.5, blockPos.z + 0.5, itemStackDrop.copy())
-            entityItem.setNoPickupDelay()
-            entityLivingBase.world.spawnEntity(entityItem)
-
+            repeat(getTryCount(count)) a@{
+                if (!tryUseCrystal(entityLivingBase)) return@a
+            }
         }
     }
 
-    private fun isUsingTick(count: Int): Boolean {
+    private fun tryUseCrystal(player: EntityPlayer): Boolean {
+
+        // 妖晶を得る
+        val itemStackFairyCrystal = findItem(player) { itemStack -> itemStack!!.item is ItemFairyCrystal }.orElse(null) ?: return false // クリスタルを持ってない場合は無視
+        val variantFairyCrystal = (itemStackFairyCrystal.item as ItemFairyCrystal).getVariant(itemStackFairyCrystal).orElse(null) ?: return false // 異常なクリスタルを持っている場合は無視
+
+        // プレイヤー視点判定
+        val rayTraceResult = rayTrace(player.world, player, false) ?: return false // ブロックに当たらなかった場合は無視
+        if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return false // ブロックに当たらなかった場合は無視
+
+        // ガチャを引く
+        val itemStackDrop = variantFairyCrystal.dropper.drop(
+            player,
+            player.world,
+            rayTraceResult.blockPos,
+            if (player.getHeldItem(EnumHand.MAIN_HAND).item === this) EnumHand.MAIN_HAND else EnumHand.OFF_HAND,
+            rayTraceResult.sideHit,
+            rayTraceResult.hitVec.x.toFloat(),
+            rayTraceResult.hitVec.y.toFloat(),
+            rayTraceResult.hitVec.z.toFloat()
+        ).orElse(null) ?: return false // ガチャが引けなかった場合は無視
+        if (itemStackDrop.isEmpty) return false // ガチャが引けなかった場合は無視
+
+        // 成立
+
+        // ガチャアイテムを消費
+        if (!player.isCreative) itemStackFairyCrystal.shrink(1)
+        player.addStat(StatList.getObjectUseStats(itemStackFairyCrystal.item))
+
+        // 妖精をドロップ
+        val blockPos = rayTraceResult.blockPos.offset(rayTraceResult.sideHit)
+        val entityItem = EntityItem(player.world, blockPos.x + 0.5, blockPos.y + 0.5, blockPos.z + 0.5, itemStackDrop.copy())
+        entityItem.setNoPickupDelay()
+        player.world.spawnEntity(entityItem)
+
+        return true
+    }
+
+    private fun getTryCount(count: Int): Int {
         val t = 72000 - count
         return when {
-            t >= 60 -> true
-            t >= 20 -> t % 2 == 0
-            t >= 5 -> t % 5 == 0
-            t == 1 -> true
-            else -> false
-        }
+            t >= 200 -> 5
+            t >= 100 -> 2
+            t >= 60 -> 1
+            t >= 20 -> if (t % 2 == 0) 1 else 0
+            t >= 5 -> if (t % 5 == 0) 1 else 0
+            t == 1 -> 1
+            else -> 0
+        }.coerceAtMost(maxTryCountPerTick)
     }
 }
