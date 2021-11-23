@@ -347,6 +347,34 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		};
 	});
 
+    # エリトラ
+	writer::write("elytra_from_mirage_fairy_leather.json"; {
+		type = "forge:ore_shaped";
+		group = "elytra_from_mirage_fairy_leather";
+		pattern = [
+			"SLS",
+			"LLL",
+			"LcL",
+		];
+		key = {
+			c = {
+                type = "miragefairy2019:ore_dict_complex";
+                ore = "mirageFairy2019CraftingToolFairyWandCrafting";
+			};
+			S = {
+				type = "forge:ore_dict";
+				ore = "mirageFairy2019SphereLevitate";
+			};
+			L = {
+				type = "forge:ore_dict";
+				ore = "mirageFairyLeather";
+			};
+		};
+		result = {
+			item = "minecraft:elytra";
+		};
+	});
+
 );
 
 #################### 妖精アイテム ####################
