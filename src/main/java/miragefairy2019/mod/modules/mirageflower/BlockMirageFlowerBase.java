@@ -63,19 +63,14 @@ public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
 
     // 判定
 
-    public static final AxisAlignedBB AABB_STAGE0 = new AxisAlignedBB(5 / 16.0, 0 / 16.0, 5 / 16.0, 11 / 16.0, 5 / 16.0, 11 / 16.0);
-    public static final AxisAlignedBB AABB_STAGE1 = new AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 12 / 16.0, 14 / 16.0);
-    public static final AxisAlignedBB AABB_STAGE2 = new AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0);
-    public static final AxisAlignedBB AABB_STAGE3 = new AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0);
-
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         int age = getAge(state);
-        if (age == 0) return AABB_STAGE0;
-        if (age == 1) return AABB_STAGE1;
-        if (age == 2) return AABB_STAGE2;
-        if (age == 3) return AABB_STAGE3;
-        return AABB_STAGE3;
+        if (age == 0) return BlockMirageFlower.Companion.getAABB_STAGE0();
+        if (age == 1) return BlockMirageFlower.Companion.getAABB_STAGE1();
+        if (age == 2) return BlockMirageFlower.Companion.getAABB_STAGE2();
+        if (age == 3) return BlockMirageFlower.Companion.getAABB_STAGE3();
+        return BlockMirageFlower.Companion.getAABB_STAGE3();
     }
 
     // 動作
