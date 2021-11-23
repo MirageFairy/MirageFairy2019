@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static net.minecraft.util.text.TextFormatting.AQUA;
@@ -19,7 +20,7 @@ public class ItemMultiFairyMaterial<V extends ItemVariantFairyMaterial> extends 
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
         V variant = getVariant(itemStack).orElse(null);
         if (variant != null) {
 

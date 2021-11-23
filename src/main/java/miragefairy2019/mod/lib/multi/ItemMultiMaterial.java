@@ -11,6 +11,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<V> {
@@ -31,7 +32,7 @@ public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
         V variant = getVariant(itemStack).orElse(null);
         if (variant != null) {
 

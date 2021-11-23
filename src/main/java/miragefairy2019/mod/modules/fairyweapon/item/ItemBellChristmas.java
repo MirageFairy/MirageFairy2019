@@ -24,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
@@ -169,7 +170,7 @@ public class ItemBellChristmas extends ItemBellBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag) {
+    protected void addInformationFunctions(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 
         super.addInformationFunctions(itemStack, world, tooltip, flag);
 

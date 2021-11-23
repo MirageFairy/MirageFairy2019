@@ -57,6 +57,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreIngredient;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -167,7 +168,7 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
 
     @Override
     @SideOnly(Side.CLIENT)
-    public final void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag) {
+    public final void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 
         // ポエム
         if (UtilsMinecraft.canTranslate(getUnlocalizedName() + ".poem")) {
@@ -220,7 +221,7 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
     protected interface IInformationHandler {
 
         @SideOnly(Side.CLIENT)
-        public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag);
+        public void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag);
 
     }
 
@@ -234,14 +235,14 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
         addInformationHandlerFunctions(new IInformationHandler() {
             @Override
             @SideOnly(Side.CLIENT)
-            public void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag) {
+            public void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
                 tooltip.add(RED + information);
             }
         });
     }
 
     @SideOnly(Side.CLIENT)
-    protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag) {
+    protected void addInformationFunctions(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 
         tooltip.add(RED + "Can be combined with fairy by crafting");
 
@@ -257,7 +258,7 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 
         addInformationMagicStatuses(itemStackFairyWeapon, itemStackFairy, fairyType, world, tooltip, flag);
 
@@ -607,7 +608,7 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
     }
 
     @SideOnly(Side.CLIENT)
-    protected void addInformationMagicStatuses(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag) {
+    protected void addInformationMagicStatuses(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
         for (IMagicStatus<?> magicStatus : getMagicStatuses()) {
             tooltip.add(magicStatus.getDisplayString(fairyType)
                     .setStyle(new Style().setColor(BLUE))

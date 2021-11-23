@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemFairyStick extends Item {
@@ -41,7 +42,7 @@ public class ItemFairyStick extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public final void addInformation(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag) {
+    public final void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 
         // ポエム
         if (UtilsMinecraft.canTranslate(getUnlocalizedName() + ".poem")) {

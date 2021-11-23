@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +43,7 @@ public class ItemMagicWandLight extends ItemFairyWeaponBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    protected void addInformationFunctions(ItemStack itemStack, World world, List<String> tooltip, ITooltipFlag flag) {
+    protected void addInformationFunctions(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 
         tooltip.add(TextFormatting.RED + "Right click to use magic");
 
@@ -52,7 +53,7 @@ public class ItemMagicWandLight extends ItemFairyWeaponBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
         Status status = new Status(fairyType);
         tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Aqua)");
         tooltip.add(TextFormatting.BLUE + "Cool Time: " + ((int) status.coolTime) + "t (Gaia, Cost)");
