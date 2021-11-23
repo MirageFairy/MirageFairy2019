@@ -21,7 +21,7 @@ public enum EnumVariantOre1 implements IStringSerializable, IBlockVariantOre {
     FLUORITE_ORE(1, "fluorite_ore", "oreFluorite", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemFluorite").copy(), 1, 1, 15, 30)),
     SULFUR_ORE(2, "sulfur_ore", "oreSulfur", 3, 5, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemSulfur").copy(), 1, 1.5, 1, 3)),
     CINNABAR_ORE(3, "cinnabar_ore", "oreCinnabar", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemCinnabar").copy(), 1, 1, 1, 3)),
-    MOONSTONE_ORE(4, "moonstone_ore", "oreMoonstone", 3, 5, 3, new GemProvider(() -> UtilsMinecraft.getItemStack("gemMoonstone").copy(), 1, 0.5, 20, 40)),
+    MOONSTONE_ORE(4, "moonstone_ore", "oreMoonstone", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemMoonstone").copy(), 1, 0.5, 20, 40)),
     MAGNETITE_ORE(5, "magnetite_ore", "oreMagnetite", 3, 5, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemMagnetite").copy(), 1, 2, 1, 2)),
 
     PYROPE_ORE(6, "pyrope_ore", "orePyrope", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemPyrope").copy(), 1, 0.5, 1, 5)),
@@ -31,7 +31,7 @@ public enum EnumVariantOre1 implements IStringSerializable, IBlockVariantOre {
     NETHERRACK_FLUORITE_ORE(9, "netherrack_fluorite_ore", "oreFluorite", 0.4F, 0.4F, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemFluorite").copy(), 1, 1, 15, 30)),
     NETHERRACK_SULFUR_ORE(10, "netherrack_sulfur_ore", "oreSulfur", 0.4F, 0.4F, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemSulfur").copy(), 1, 1.5, 1, 3)),
     NETHERRACK_CINNABAR_ORE(11, "netherrack_cinnabar_ore", "oreCinnabar", 0.4F, 0.4F, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemCinnabar").copy(), 1, 1, 1, 3)),
-    NETHERRACK_MOONSTONE_ORE(12, "netherrack_moonstone_ore", "oreMoonstone", 0.4F, 0.4F, 3, new GemProvider(() -> UtilsMinecraft.getItemStack("gemMoonstone").copy(), 1, 0.5, 20, 40)),
+    NETHERRACK_MOONSTONE_ORE(12, "netherrack_moonstone_ore", "oreMoonstone", 0.4F, 0.4F, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemMoonstone").copy(), 1, 0.5, 20, 40)),
     NETHERRACK_MAGNETITE_ORE(13, "netherrack_magnetite_ore", "oreMagnetite", 0.4F, 0.4F, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemMagnetite").copy(), 1, 2, 1, 2)),
 
     NEPHRITE_ORE(14, "nephrite_ore", "oreNephrite", 3, 5, 1, new GemProvider(() -> UtilsMinecraft.getItemStack("gemNephrite").copy(), 1, 2, 1, 3)),
