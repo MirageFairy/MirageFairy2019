@@ -3,8 +3,8 @@
 	"group": "flower_picking_bell",
 	"pattern": [
 		"cIh",
-		"a#I",
-		"gam"
+		"o#I",
+		"gom"
 	],
 	"key": {
 		"#": {
@@ -14,9 +14,9 @@
 			"type": "forge:ore_dict",
 			"ore": "ingotGold"
 		},
-		"a": {
+		"o": {
 			"type": "forge:ore_dict",
-			"ore": "gemMagnetite"
+			"ore": "obsidian"
 		},
 		"I": {
 			"type": "forge:ore_dict",
