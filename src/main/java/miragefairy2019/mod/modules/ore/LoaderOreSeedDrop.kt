@@ -18,6 +18,8 @@ import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.SMITHSONITE_ORE
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.SULFUR_ORE
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.TOPAZ_ORE
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.END_STONE_LABRADORITE_ORE
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.HELIOLITE_ORE
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.TOURMALINE_ORE
 import miragefairy2019.modkt.api.oreseeddrop.ApiOreSeedDrop
 import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape
@@ -32,6 +34,7 @@ import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.POINT
 import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.PYRAMID
 import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.STAR
 import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.TINY
+import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedType.END_STONE
 import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedType.NETHERRACK
 import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedType.STONE
 import miragefairy2019.modkt.api.oreseeddrop.IOreSeedDropRequirement
@@ -116,6 +119,7 @@ object LoaderOreSeedDrop {
                 vein(MEDIUM, 0.75, ore1(NEPHRITE_ORE), Vein(50393467, 64, 16, 0.01, el.CALCIUM, el.MAGNESIUM, el.FERRUM))
                 vein(HORIZONTAL, 0.50, ore1(TOPAZ_ORE), Vein(58068649, 16, 4, 0.01, el.ALUMINIUM, el.FLUORINE))
                 vein(HORIZONTAL, 0.50, ore2(TOURMALINE_ORE), Vein(25988519, 16, 4, 0.01, el.NATRIUM, el.LITHIUM, el.ALUMINIUM, el.BORON))
+                vein(TINY, 0.50, ore2(HELIOLITE_ORE), Vein(85462735, 16, 4, 0.01, el.CALCIUM, el.ALUMINIUM))
                 vein(POINT, 0.50, block(EMERALD_ORE), Vein(54693454, 16, 4, 0.02, el.BERYLLIUM, el.ALUMINIUM))
                 vein(LAPIS, 0.50, block(LAPIS_ORE), Vein(60410682, 32, 8, 0.005, el.NATRIUM, el.ALUMINIUM))
                 vein(DIAMOND, 0.50, block(DIAMOND_ORE), Vein(20741887, 8, 2, 0.003, el.CARBON))
@@ -123,6 +127,9 @@ object LoaderOreSeedDrop {
                 vein(DIAMOND, 0.50, block(REDSTONE_ORE), Vein(95298700, 64, 16, 0.003, el.FERRUM, el.CUPRUM, el.ALUMINIUM, el.MERCURY))
                 vein(IRON, 0.50, block(IRON_ORE), Vein(34443884, 64, 16, 0.003, el.FERRUM))
                 vein(IRON, 0.50, block(GOLD_ORE), Vein(93307749, 16, 4, 0.003, el.AURUM))
+            }
+            END_STONE {
+                vein(TINY, 0.50, ore2(END_STONE_LABRADORITE_ORE), Vein(61584972, 16, 256, 0.1, el.CALCIUM, el.ALUMINIUM, el.NATRIUM))
             }
 
             // ネザー鉱石

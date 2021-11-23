@@ -1,8 +1,8 @@
 {
 	"variants": {
 		"variant=0": { "model": "miragefairy2019:tourmaline_ore" },
-		"variant=1": { "model": "minecraft:stone" },
-		"variant=2": { "model": "minecraft:stone" },
+		"variant=1": { "model": "miragefairy2019:heliolite_ore" },
+		"variant=2": { "model": "miragefairy2019:end_stone_labradorite_ore" },
 		"variant=3": { "model": "minecraft:stone" },
 		"variant=4": { "model": "minecraft:stone" },
 		"variant=5": { "model": "minecraft:stone" },

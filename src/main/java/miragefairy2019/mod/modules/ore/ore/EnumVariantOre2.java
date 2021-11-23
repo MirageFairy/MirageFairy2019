@@ -18,7 +18,8 @@ import java.util.function.Supplier;
 
 public enum EnumVariantOre2 implements IStringSerializable, IBlockVariantOre {
     TOURMALINE_ORE(0, "tourmaline_ore", "oreTourmaline", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemTourmaline").copy(), 1, 0.5, 1, 5)),
-
+    HELIOLITE_ORE(1, "heliolite_ore", "oreHeliolite", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemHeliolite").copy(), 1, 0.5, 10, 20)),
+    END_STONE_LABRADORITE_ORE(2, "end_stone_labradorite_ore", "oreLabradorite", 3, 5, 2, new GemProvider(() -> UtilsMinecraft.getItemStack("gemLabradorite").copy(), 1, 0.5, 15, 30)),
     ;
 
     //
