@@ -53,5 +53,12 @@ open class FairyTypeAdapter(internal val parent: IFairyType) : IFairyType {
 fun IFairyType.mana(manaType: IManaType) = manaSet.getMana(manaType)
 fun IFairyType.erg(ergType: IErgType) = ergSet.getPower(ergType)
 
+val IFairyType.shineEfficiency get() = manaSet.shine / (cost / 50.0)
+val IFairyType.fireEfficiency get() = manaSet.fire / (cost / 50.0)
+val IFairyType.windEfficiency get() = manaSet.wind / (cost / 50.0)
+val IFairyType.gaiaEfficiency get() = manaSet.gaia / (cost / 50.0)
+val IFairyType.aquaEfficiency get() = manaSet.aqua / (cost / 50.0)
+val IFairyType.darkEfficiency get() = manaSet.dark / (cost / 50.0)
+
 
 class ColorSet(val skin: Int, val bright: Int, val dark: Int, val hair: Int)
