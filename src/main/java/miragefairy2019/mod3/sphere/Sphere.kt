@@ -73,7 +73,7 @@ fun getSphereType(ergType: IErgType): SphereType {
         ErgTypes.light -> SphereType(ErgTypes.light, 0xFF8300, 0xFFC9BC, 0xF1C483, 0xFFFF25, ore("torch"), ore("gemTopaz"))
         ErgTypes.flame -> SphereType(ErgTypes.flame, 0xFF9F68, 0xFF6800, 0xE2713F, 0xBF1805, item { Items.FIRE_CHARGE }, ore("gemHeliolite"))
         ErgTypes.water -> SphereType(ErgTypes.water, 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF, item { Items.WATER_BUCKET }, null)
-        ErgTypes.crystal -> SphereType(ErgTypes.crystal, 0xA2FFFF, 0xB6FFFF, 0x36CECE, 0xEBFFFF, ore("gemDiamond"), null)
+        ErgTypes.crystal -> SphereType(ErgTypes.crystal, 0xA2FFFF, 0xB6FFFF, 0x36CECE, 0xEBFFFF, ore("blockGlass"), ore("gemDiamond"))
         ErgTypes.sound -> SphereType(ErgTypes.sound, 0x98ACE7, 0xD8DDFF, 0xBFC9D8, 0xC9D0ED, block { Blocks.NOTEBLOCK }, null)
         ErgTypes.space -> SphereType(ErgTypes.space, 0x000000, 0x4D0065, 0x67009D, 0x001E74, block { Blocks.CHEST }, null)
         ErgTypes.warp -> SphereType(ErgTypes.warp, 0x3A00D3, 0x8CF4E2, 0x349988, 0xD004FB, ore("enderpearl"), null)
