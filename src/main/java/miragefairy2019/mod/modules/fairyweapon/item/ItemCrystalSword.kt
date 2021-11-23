@@ -11,7 +11,7 @@ import miragefairy2019.mod3.fairy.getDropList
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.skill.EnumMastery
-import miragefairy2019.modkt.api.erg.ErgTypes
+import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.modkt.api.mana.ManaTypes
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes

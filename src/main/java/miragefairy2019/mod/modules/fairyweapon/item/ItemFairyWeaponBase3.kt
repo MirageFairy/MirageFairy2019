@@ -28,7 +28,7 @@ import miragefairy2019.mod3.magic.ranged
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
-import miragefairy2019.modkt.api.erg.IErgType
+import miragefairy2019.mod3.erg.api.IErgType
 import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.api.mana.IManaSet
 import miragefairy2019.modkt.api.mana.IManaType

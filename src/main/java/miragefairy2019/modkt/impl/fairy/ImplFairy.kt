@@ -1,8 +1,9 @@
 package miragefairy2019.modkt.impl.fairy
 
 import miragefairy2019.libkt.buildText
-import miragefairy2019.modkt.api.erg.IErgSet
-import miragefairy2019.modkt.api.erg.IErgType
+import miragefairy2019.mod3.erg.ErgSet
+import miragefairy2019.mod3.erg.api.IErgSet
+import miragefairy2019.mod3.erg.api.IErgType
 import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.api.mana.IManaSet
 import miragefairy2019.modkt.api.mana.IManaType

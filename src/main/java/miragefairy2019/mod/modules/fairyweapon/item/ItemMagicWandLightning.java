@@ -12,7 +12,7 @@ import miragefairy2019.mod.modules.fairyweapon.critical.EnumCriticalFactor;
 import miragefairy2019.mod.modules.fairyweapon.magic.MagicExecutor;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace;
-import miragefairy2019.modkt.api.erg.ErgTypes;
+import miragefairy2019.mod3.erg.api.ErgTypes;
 import miragefairy2019.modkt.api.fairy.IFairyType;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.client.util.ITooltipFlag;

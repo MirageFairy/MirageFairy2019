@@ -18,7 +18,7 @@ import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMulFormulas;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaIntegerRoundFormulaDouble;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaSelectEntry;
 import miragefairy2019.mod.modules.fairyweapon.formula.MagicStatus;
-import miragefairy2019.modkt.api.erg.IErgType;
+import miragefairy2019.mod3.erg.api.IErgType;
 import miragefairy2019.modkt.api.mana.IManaType;
 import miragefairy2019.modkt.api.mana.ManaTypes;
 import mirrg.boron.util.struct.ImmutableArray;

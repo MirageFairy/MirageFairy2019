@@ -12,12 +12,12 @@ import miragefairy2019.mod3.magic.api.IMagicStatusFunction
 import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.displayName
-import miragefairy2019.modkt.api.erg.IErgSet
-import miragefairy2019.modkt.api.erg.IErgType
+import miragefairy2019.mod3.erg.api.IErgSet
+import miragefairy2019.mod3.erg.api.IErgType
 import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.api.mana.IManaSet
 import miragefairy2019.modkt.api.mana.ManaTypes
-import miragefairy2019.modkt.impl.fairy.displayName
+import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.modkt.impl.mana.displayName
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting

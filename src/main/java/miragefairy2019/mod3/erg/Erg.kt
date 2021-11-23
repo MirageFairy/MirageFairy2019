@@ -1,12 +1,12 @@
-package miragefairy2019.modkt.impl.fairy
+package miragefairy2019.mod3.erg
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
-import miragefairy2019.modkt.api.erg.ErgTypes
-import miragefairy2019.modkt.api.erg.IErgEntry
-import miragefairy2019.modkt.api.erg.IErgSet
-import miragefairy2019.modkt.api.erg.IErgType
+import miragefairy2019.mod3.erg.api.ErgTypes
+import miragefairy2019.mod3.erg.api.IErgEntry
+import miragefairy2019.mod3.erg.api.IErgSet
+import miragefairy2019.mod3.erg.api.IErgType
 import net.minecraft.util.text.TextFormatting
 
 val moduleErg: Module = {

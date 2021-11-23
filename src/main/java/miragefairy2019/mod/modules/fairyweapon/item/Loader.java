@@ -7,7 +7,7 @@ import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.Configurator;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
-import miragefairy2019.modkt.api.erg.ErgTypes;
+import miragefairy2019.mod3.erg.api.ErgTypes;
 import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft;
 import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftConditionReplaceBlock;
 import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftConditionUseItem;

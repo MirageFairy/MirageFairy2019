@@ -12,10 +12,10 @@ import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.lib.multi.ItemMulti
 import miragefairy2019.mod.lib.multi.ItemVariant
-import miragefairy2019.modkt.api.erg.ErgTypes
-import miragefairy2019.modkt.api.erg.IErgType
+import miragefairy2019.mod3.erg.api.ErgTypes
+import miragefairy2019.mod3.erg.api.IErgType
 import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft
-import miragefairy2019.modkt.impl.fairy.displayName
+import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftConditionConsumeBlock
 import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.modkt.impl.fairystickcraft.FairyStickCraftConditionSpawnItem

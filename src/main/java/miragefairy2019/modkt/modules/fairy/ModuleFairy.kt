@@ -13,7 +13,7 @@ import miragefairy2019.mod.common.fairy.relation.FairyRelationRegistry
 import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.modules.main.ModuleMain
-import miragefairy2019.modkt.api.erg.ErgTypes
+import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.modkt.api.playeraura.IFoodAuraContainer
 import miragefairy2019.modkt.impl.div
 import miragefairy2019.modkt.impl.fairy.erg

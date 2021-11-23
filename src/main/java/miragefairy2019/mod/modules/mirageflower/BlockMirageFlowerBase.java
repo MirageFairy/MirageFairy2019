@@ -8,7 +8,7 @@ import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy;
 import miragefairy2019.mod.modules.ore.ModuleOre;
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1;
-import miragefairy2019.modkt.api.erg.ErgTypes;
+import miragefairy2019.mod3.erg.api.ErgTypes;
 import miragefairy2019.modkt.api.fairy.IFairyType;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;

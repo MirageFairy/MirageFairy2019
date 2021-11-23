@@ -9,10 +9,10 @@ import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.positiveBoolean
 import miragefairy2019.mod3.skill.EnumMastery
-import miragefairy2019.modkt.api.erg.ErgTypes
-import miragefairy2019.modkt.api.erg.ErgTypes.harvest
-import miragefairy2019.modkt.api.erg.ErgTypes.knowledge
-import miragefairy2019.modkt.api.erg.ErgTypes.warp
+import miragefairy2019.mod3.erg.api.ErgTypes
+import miragefairy2019.mod3.erg.api.ErgTypes.harvest
+import miragefairy2019.mod3.erg.api.ErgTypes.knowledge
+import miragefairy2019.mod3.erg.api.ErgTypes.warp
 import miragefairy2019.modkt.api.mana.ManaTypes
 import mirrg.boron.util.UtilsMath
 import net.minecraft.entity.item.EntityItem
