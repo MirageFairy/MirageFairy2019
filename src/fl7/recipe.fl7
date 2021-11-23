@@ -549,8 +549,8 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		group = "flower_picking_bell";
 		pattern = [
             "cIh";
-            "a#I";
-            "gam";
+            "o#I";
+            "gom";
 		];
 		key = {
             "#" = {
@@ -560,9 +560,9 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
                 type = "forge:ore_dict";
                 ore = "ingotGold";
             };
-            a = {
+            o = {
                 type = "forge:ore_dict";
-                ore = "gemMagnetite";
+                ore = "obsidian";
             };
             I = {
                 type = "forge:ore_dict";

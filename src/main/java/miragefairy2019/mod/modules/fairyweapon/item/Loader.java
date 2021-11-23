@@ -95,7 +95,7 @@ public class Loader {
         Configurator<ItemBellFlowerPicking> bellFlowerPicking = fairyWeapon(erMod, () -> new ItemBellFlowerPicking(0.0, 0.0, 0.0, 0.0, 0.2), "flower_picking_bell", "bellFlowerPicking")
                 .bind(addComponent(bellBase))
                 .bind(addComponent(instance(getComponentAbilityType(ErgTypes.harvest))))
-                .bind(setWeaponStatusOfTier(3))
+                .bind(setWeaponStatusOfTier(2))
                 .get();
 
         // 花摘みの鐘 II
