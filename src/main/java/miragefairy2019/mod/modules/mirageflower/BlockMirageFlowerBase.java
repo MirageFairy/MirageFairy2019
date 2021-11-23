@@ -13,7 +13,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -38,21 +37,11 @@ import java.util.Random;
 
 public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
 
-    public BlockMirageFlowerBase() {
-        super(Material.PLANTS); // Solidでないマテリアルでなければ耕土の上に置けない
-
-        // meta
-        setDefaultState(blockState.getBaseState()
-                .withProperty(AGE, 0));
-
-        // style
-        setSoundType(SoundType.GLASS);
-
+    public BlockMirageFlowerBase(Material material) {
+        super(material);
     }
 
     // state
-
-    public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
 
     @Override
     public int getMetaFromState(IBlockState state) {

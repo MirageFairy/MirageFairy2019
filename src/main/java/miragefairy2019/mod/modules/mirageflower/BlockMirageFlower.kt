@@ -6,6 +6,9 @@ import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.shineEfficiency
+import net.minecraft.block.SoundType
+import net.minecraft.block.material.Material
+import net.minecraft.block.properties.PropertyInteger
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
@@ -33,4 +36,15 @@ fun getGrowRateMessage(world: World, pos: BlockPos) = textComponent {
 }
 
 
-class BlockMirageFlower : BlockMirageFlowerBase()
+class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidでないマテリアルでなければ耕土の上に置けない
+    init {
+        // meta
+        defaultState = blockState.baseState.withProperty(AGE, 0)
+        // style
+        soundType = SoundType.GLASS
+    }
+
+    companion object {
+        val AGE = PropertyInteger.create("age", 0, 3)
+    }
+}
