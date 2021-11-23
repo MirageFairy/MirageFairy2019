@@ -158,12 +158,12 @@ public class ModuleMaterialsFairy {
                             .bind(onCreateItemStack(v -> itemStackBottleMirageFlowerOil = v.createItemStack()))
                             .bind(onAddRecipe(v -> {
 
-                                // 空き瓶＋ミラ種50個＋クォーツ16個＞珠玉→ミラオイル瓶
+                                // 空き瓶＋ミラ種50個＋辰砂16個＞珠玉→ミラオイル瓶
                                 ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(Monad.of(new FairyStickCraftRecipe())
                                         .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionUseItem(new OreIngredient("mirageFairy2019CraftingToolFairyWandPolishing"))))
                                         .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))))
                                         .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(Ingredient.fromItem(ApiMirageFlower.itemMirageFlowerSeeds), 50)))
-                                        .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("gemQuartz"), 16)))
+                                        .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionConsumeItem(new OreIngredient("gemCinnabar"), 16)))
                                         .peek(FairyStickCraftRecipe.adderCondition(new FairyStickCraftConditionSpawnItem(() -> v.createItemStack())))
                                         .get());
 
