@@ -403,6 +403,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 
 	item("fairy_crystal");
 	item("christmas_fairy_crystal");
+	item("pure_fairy_crystal");
 
 	# 液体
 	fluid("miragium_water");
