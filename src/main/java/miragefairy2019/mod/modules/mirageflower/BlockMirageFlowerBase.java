@@ -1,17 +1,13 @@
 package miragefairy2019.mod.modules.mirageflower;
 
 import miragefairy2019.mod.api.ApiMirageFlower;
-import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry;
 import miragefairy2019.mod.api.pickable.IPickable;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal;
 import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy;
-import miragefairy2019.mod.modules.ore.ModuleOre;
-import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -25,10 +21,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.Optional;
 import java.util.Random;
@@ -83,83 +77,7 @@ public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
         super.updateTick(worldIn, pos, state, rand);
         if (!worldIn.isAreaLoaded(pos, 1)) return;
 
-        grow(worldIn, pos, state, rand, getGrowRate(worldIn, pos));
-    }
-
-    @SuppressWarnings("deprecation")
-    public static double getGrowRate(World world, BlockPos blockPos) {
-        double rate = 0.04;
-
-        // 人工光が当たっているなら加点
-        if (world.getLightFor(EnumSkyBlock.BLOCK, blockPos) >= 13) rate *= 1.2;
-        else if (world.getLightFor(EnumSkyBlock.BLOCK, blockPos) >= 9) rate *= 1.1;
-
-        // 太陽光が当たっているなら加点
-        if (world.getLightFor(EnumSkyBlock.SKY, blockPos) >= 15) rate *= 1.1;
-        else if (world.getLightFor(EnumSkyBlock.SKY, blockPos) >= 9) rate *= 1.05;
-
-        // 空が見えるなら加点
-        if (world.canSeeSky(blockPos)) rate *= 1.1;
-
-        // 地面加点
-        {
-            double bonus = 0.5;
-
-            if (world.getBlockState(blockPos.down()).getBlock() == Blocks.GRASS) bonus = Math.max(bonus, 1);
-
-            if (world.getBlockState(blockPos.down()).getBlock() == Blocks.DIRT) bonus = Math.max(bonus, 1.1);
-
-            if (world.getBlockState(blockPos.down()).getBlock() == Blocks.FARMLAND) {
-                bonus = Math.max(bonus, 1.2);
-
-                // 耕土が湿っているなら加点
-                if (world.getBlockState(blockPos.down()).getValue(BlockFarmland.MOISTURE) > 0) bonus = Math.max(bonus, 1.3);
-
-            }
-
-            // 妖精による判定
-            {
-                IBlockState blockState = world.getBlockState(blockPos.down());
-                ItemStack itemStack = blockState.getBlock().getItem(world, blockPos, blockState);
-
-                Double value = ApiFairyRegistry.getFairyRelationRegistry().fairySelector()
-                        .add(blockState)
-                        .add(itemStack)
-                        .select()
-                        .mapIfPresent(n -> ApiFairyRegistry.getFairyRegistry().getFairy(n))
-                        .map(r -> BlockMirageFlowerKt.getGrowRateInFloor(r.getFairyType()))
-                        .max(Double::compare)
-                        .orElse(null);
-                if (value != null) {
-                    bonus = Math.max(bonus, value);
-                }
-            }
-
-            if (world.getBlockState(blockPos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.APATITE_BLOCK)) bonus = Math.max(bonus, 1.5);
-            if (world.getBlockState(blockPos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.FLUORITE_BLOCK)) bonus = Math.max(bonus, 2);
-            if (world.getBlockState(blockPos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.SULFUR_BLOCK)) bonus = Math.max(bonus, 1.5);
-            if (world.getBlockState(blockPos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.CINNABAR_BLOCK)) bonus = Math.max(bonus, 2);
-            if (world.getBlockState(blockPos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.MOONSTONE_BLOCK)) bonus = Math.max(bonus, 3);
-            if (world.getBlockState(blockPos.down()) == ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.MAGNETITE_BLOCK)) bonus = Math.max(bonus, 1.2);
-
-            rate *= bonus;
-        }
-
-        // バイオーム加点
-        {
-            double bonus = 1;
-
-            if (BiomeDictionary.hasType(world.getBiome(blockPos), BiomeDictionary.Type.PLAINS)) bonus = Math.max(bonus, 1.1);
-            if (BiomeDictionary.hasType(world.getBiome(blockPos), BiomeDictionary.Type.SWAMP)) bonus = Math.max(bonus, 1.1);
-            if (BiomeDictionary.hasType(world.getBiome(blockPos), BiomeDictionary.Type.MOUNTAIN)) bonus = Math.max(bonus, 1.2);
-            if (BiomeDictionary.hasType(world.getBiome(blockPos), BiomeDictionary.Type.JUNGLE)) bonus = Math.max(bonus, 1.2);
-            if (BiomeDictionary.hasType(world.getBiome(blockPos), BiomeDictionary.Type.FOREST)) bonus = Math.max(bonus, 1.3);
-            if (BiomeDictionary.hasType(world.getBiome(blockPos), BiomeDictionary.Type.MAGICAL)) bonus = Math.max(bonus, 1.3);
-
-            rate *= bonus;
-        }
-
-        return rate;
+        grow(worldIn, pos, state, rand, BlockMirageFlowerKt.getGrowRate(worldIn, pos));
     }
 
     /**
@@ -167,7 +85,7 @@ public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
      */
     @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        grow(worldIn, pos, state, rand, getGrowRate(worldIn, pos));
+        grow(worldIn, pos, state, rand, BlockMirageFlowerKt.getGrowRate(worldIn, pos));
     }
 
     @Override
