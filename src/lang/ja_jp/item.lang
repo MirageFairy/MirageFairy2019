@@ -127,6 +127,9 @@ item.fairyWandSummoning2.magic.name=
 item.fairyWandDistortion.name=歪曲のワンド
 item.fairyWandDistortion.poem=空間がねじれている
 item.fairyWandDistortion.magic.name=
+item.fairyWandFusion.name=融合のワンド
+item.fairyWandFusion.poem=4次元折り紙
+item.fairyWandFusion.magic.name=
 
 item.miragiumSword.name=ミラジウムの剣
 item.miragiumSword.poem=その刃で何を切る？

@@ -494,6 +494,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	fairyWand("summoning_fairy_wand"  ; "summoning_fairy_wand" ; 3);
 	fairyWand("summoning_fairy_wand_2"; "summoning_fairy_wand" ; 4);
 	fairyWand("distortion_fairy_wand" ; "distortion_fairy_wand"; 4);
+	fairyWand("fusion_fairy_wand"     ; "fusion_fairy_wand"    ; 4);
 
 	fairyWeapon("miragium_axe");
 	fairyWeapon("miragium_scythe");

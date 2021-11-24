@@ -247,6 +247,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		fairyWand("summoning_fairy_wand"  ; rs[2]; "Submission");
 		fairyWand("summoning_fairy_wand_2"; rs[3]; "Submission");
 		fairyWand("distortion_fairy_wand" ; rs[3]; "Space");
+		fairyWand("fusion_fairy_wand"     ; rs[3]; "Warp");
 	);
 
 	# 糸から技巧杖

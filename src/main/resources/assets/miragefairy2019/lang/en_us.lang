@@ -291,6 +291,9 @@ item.fairyWandSummoning2.magic.name=
 item.fairyWandDistortion.name=Distortion Wand II
 item.fairyWandDistortion.poem=
 item.fairyWandDistortion.magic.name=
+item.fairyWandFusion.name=Fusion Wand
+item.fairyWandFusion.poem=
+item.fairyWandFusion.magic.name=
 
 item.miragiumSword.name=Miragium Sword
 item.miragiumSword.poem=
