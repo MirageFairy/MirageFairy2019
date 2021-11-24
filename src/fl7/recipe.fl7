@@ -35,6 +35,34 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
         };
     });
 
+    # 融合のワンドからリラジウム
+    writer::write("lilagium_ingot_from_fusion_fairy_wand.json"; {
+        type = "forge:ore_shapeless";
+        group = "lilagium_ingot_from_fusion_fairy_wand";
+        ingredients = [
+            {
+                type = "forge:ore_dict";
+                ore = "ingotMiragium";
+            };
+            {
+                item = "minecraft:double_plant";
+                data = 1;
+            };
+            {
+                item = "minecraft:double_plant";
+                data = 1;
+            };
+            {
+                type = "miragefairy2019:ore_dict_complex";
+                ore = "mirageFairy2019CraftingToolFairyWandFusion";
+            };
+        ];
+        result = {
+            item = "miragefairy2019:materials";
+            data = 19;
+        };
+    });
+
     # 妖精の革
     writer::write("mirage_fairy_leather.json"; {
         type: "forge:ore_shapeless";
