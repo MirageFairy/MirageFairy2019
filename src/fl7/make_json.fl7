@@ -113,6 +113,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	Achievement::new("summoning_fairy_wand"  ; "fairyWandSummoning" )::parent("fairy_weapon/root"                  )                    ::write();
 	Achievement::new("summoning_fairy_wand_2"; "fairyWandSummoning2")::parent("fairy_weapon/summoning_fairy_wand"  )                    ::write();
 	Achievement::new("distortion_fairy_wand" ; "fairyWandDistortion")::parent("fairy_weapon/root"                  )                    ::write();
+	Achievement::new("fusion_fairy_wand"     ; "fairyWandFusion"    )::parent("fairy_weapon/root"                  )                    ::write();
 
 	Achievement::new("miragium_axe"          ; "miragiumAxe"        )::parent("fairy_weapon/root"                  )                    ::write();
 
