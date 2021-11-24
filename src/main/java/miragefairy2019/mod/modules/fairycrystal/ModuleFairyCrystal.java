@@ -16,6 +16,7 @@ public class ModuleFairyCrystal {
 
     public static VariantFairyCrystal variantFairyCrystal;
     public static VariantFairyCrystalChristmas variantFairyCrystalChristmas;
+    public static VariantFairyCrystal variantFairyCrystalPure;
 
     public static void init(EventRegistryMod erMod) {
         erMod.registerItem.register(b -> {
@@ -28,6 +29,7 @@ public class ModuleFairyCrystal {
                 item.setCreativeTab(ApiMain.creativeTab());
                 item.registerVariant(0, variantFairyCrystal = new VariantFairyCrystal("fairy_crystal", "fairyCrystal", "mirageFairyCrystal"));
                 item.registerVariant(1, variantFairyCrystalChristmas = new VariantFairyCrystalChristmas("christmas_fairy_crystal", "fairyCrystalChristmas", "mirageFairyCrystalChristmas"));
+                item.registerVariant(2, variantFairyCrystalPure = new VariantFairyCrystalPure("pure_fairy_crystal", "fairyCrystalPure", "mirageFairyCrystalPure"));
                 ForgeRegistries.ITEMS.register(item);
                 if (ApiMain.side().isClient()) {
                     for (Tuple<Integer, VariantFairyCrystal> tuple : item.getVariants()) {
