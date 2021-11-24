@@ -187,6 +187,10 @@ val loaderFairyCrystalDrop: Module = {
             topaz(0.01).material("Topaz")
             if (Instant.now() < LocalDateTime.of(2021, 12, 1, 0, 0, 0).toInstant()) {
                 imperialtopaz(0.001).material("Topaz")
+                if (Instant.now() < LocalDateTime.of(2022, 1, 10, 0, 0, 0).toInstant()) {
+                    santaclaus(0.001).fixed()
+                    christmas(0.005).fixed()
+                }
             }
 
             enderman(0.03).entity(EntityEnderman::class.java)

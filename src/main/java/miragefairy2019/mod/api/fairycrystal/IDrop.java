@@ -6,6 +6,8 @@ public interface IDrop {
 
     public ItemStack getItemStack();
 
+    public DropCategory getDropCategory();
+
     public double getWeight();
 
 }

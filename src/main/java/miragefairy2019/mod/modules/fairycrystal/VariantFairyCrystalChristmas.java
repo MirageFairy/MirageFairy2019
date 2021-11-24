@@ -2,6 +2,7 @@ package miragefairy2019.mod.modules.fairycrystal;
 
 import com.google.gson.Gson;
 import miragefairy2019.mod.ModMirageFairy2019;
+import miragefairy2019.mod.api.fairycrystal.DropCategory;
 import miragefairy2019.mod.api.fairycrystal.DropFixed;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops;
@@ -310,7 +311,7 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal {
             @Override
             public ISuppliterator<IRightClickDrop> getDropList() {
                 return self.getDropList()
-                        .after(RightClickDrops.eventDrop(new DropFixed(FairyTypes.instance.getSantaclaus().getMain().createItemStack(), 0.01), t -> {
+                        .after(RightClickDrops.eventDrop(new DropFixed(FairyTypes.instance.getSantaclaus().getMain().createItemStack(), DropCategory.FIXED, 0.01), t -> {
 
                             // 在庫読み込み
                             // 在庫が読み込めなかった場合は出ない
@@ -339,7 +340,7 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal {
 
                             return true;
                         }))
-                        .after(RightClickDrops.eventDrop(new DropFixed(FairyTypes.instance.getChristmas().getMain().createItemStack(), 0.1), t -> {
+                        .after(RightClickDrops.eventDrop(new DropFixed(FairyTypes.instance.getChristmas().getMain().createItemStack(), DropCategory.FIXED, 0.1), t -> {
 
                             // 在庫読み込み
                             // 在庫が読み込めなかった場合は出ない
