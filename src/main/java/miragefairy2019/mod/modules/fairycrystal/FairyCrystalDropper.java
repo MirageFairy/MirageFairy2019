@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
+import miragefairy2019.mod.api.fairycrystal.DropCategory;
 import miragefairy2019.mod.api.fairycrystal.IDrop;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.lib.WeightedRandom;
@@ -38,7 +39,7 @@ public abstract class FairyCrystalDropper {
     /**
      * このメソッドはサーバーワールドのスレッドからしか呼び出せません。
      */
-    public List<WeightedRandom.Item<ItemStack>> getDropTable(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public List<WeightedRandom.Item<ItemStack>> getDropTable(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, int rank, double rareBoost) {
         BlockPos pos2 = world.getBlockState(pos).isFullBlock() ? pos.offset(facing) : pos;
 
         Set<Block> blocks = new HashSet<>();
@@ -153,7 +154,7 @@ public abstract class FairyCrystalDropper {
 
                     return null;
                 })
-                .map(d -> new WeightedRandom.Item<>(d.getItemStack(), d.getWeight()))
+                .map(d -> new WeightedRandom.Item<>(d.getItemStack(rank), d.getWeight() * (d.getDropCategory() == DropCategory.RARE ? rareBoost : 1)))
                 .toList();
         dropTable = WeightedRandom.unique(dropTable, (a, b) -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b));
 
@@ -167,10 +168,10 @@ public abstract class FairyCrystalDropper {
     /**
      * このメソッドはサーバーワールドのスレッドからしか呼び出せません。
      */
-    public Optional<ItemStack> drop(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public Optional<ItemStack> drop(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, int rank, double rareBoost) {
 
         // ガチャリスト取得
-        List<WeightedRandom.Item<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ);
+        List<WeightedRandom.Item<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, rank, rareBoost);
 
         // ガチャを引く
         Optional<ItemStack> oItemStack = WeightedRandom.getRandomItem(world.rand, dropTable);

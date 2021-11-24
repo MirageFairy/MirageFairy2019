@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 
 public interface IDrop {
 
-    public ItemStack getItemStack();
+    public ItemStack getItemStack(int rank);
 
     public DropCategory getDropCategory();
 

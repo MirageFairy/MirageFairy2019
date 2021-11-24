@@ -64,7 +64,9 @@ class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWeaponCraft
             rayTraceResult.sideHit,
             rayTraceResult.hitVec.x.toFloat(),
             rayTraceResult.hitVec.y.toFloat(),
-            rayTraceResult.hitVec.z.toFloat()
+            rayTraceResult.hitVec.z.toFloat(),
+            variantFairyCrystal.dropRank,
+            variantFairyCrystal.rareBoost
         ).orElse(null) ?: return false // ガチャが引けなかった場合は無視
         if (itemStackDrop.isEmpty) return false // ガチャが引けなかった場合は無視
 

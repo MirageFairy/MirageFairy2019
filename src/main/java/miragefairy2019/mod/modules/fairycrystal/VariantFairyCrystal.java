@@ -40,7 +40,7 @@ public class VariantFairyCrystal extends ItemVariant {
             if (world.isRemote) return EnumActionResult.SUCCESS;
 
             // ガチャを引く
-            Optional<ItemStack> oItemStack = getDropper().drop(player, world, pos, hand, facing, hitX, hitY, hitZ);
+            Optional<ItemStack> oItemStack = getDropper().drop(player, world, pos, hand, facing, hitX, hitY, hitZ, getDropRank(), getRareBoost());
 
             // ガチャが成功した場合、
             if (oItemStack.isPresent()) {
@@ -64,7 +64,7 @@ public class VariantFairyCrystal extends ItemVariant {
             if (world.isRemote) return EnumActionResult.SUCCESS;
 
             // ガチャリスト取得
-            List<WeightedRandom.Item<ItemStack>> dropTable = getDropper().getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ);
+            List<WeightedRandom.Item<ItemStack>> dropTable = getDropper().getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, getDropRank(), getRareBoost());
 
             // 表示
             ITextComponent string = new TextComponentString("");
@@ -84,6 +84,14 @@ public class VariantFairyCrystal extends ItemVariant {
             return EnumActionResult.SUCCESS;
         }
 
+    }
+
+    public int getDropRank() {
+        return 0;
+    }
+
+    public double getRareBoost() {
+        return 1;
     }
 
     public FairyCrystalDropper getDropper() {

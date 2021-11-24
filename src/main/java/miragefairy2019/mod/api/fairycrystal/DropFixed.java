@@ -1,22 +1,23 @@
 package miragefairy2019.mod.api.fairycrystal;
 
+import miragefairy2019.modkt.modules.fairy.RankedFairyTypeBundle;
 import net.minecraft.item.ItemStack;
 
 public final class DropFixed implements IDrop {
 
-    public final ItemStack itemStack;
+    public final RankedFairyTypeBundle bundle;
     public final DropCategory dropCategory;
     public final double weight;
 
-    public DropFixed(ItemStack itemStack, DropCategory dropCategory, double weight) {
-        this.itemStack = itemStack;
+    public DropFixed(RankedFairyTypeBundle bundle, DropCategory dropCategory, double weight) {
+        this.bundle = bundle;
         this.dropCategory = dropCategory;
         this.weight = weight;
     }
 
     @Override
-    public ItemStack getItemStack() {
-        return itemStack;
+    public ItemStack getItemStack(int rank) {
+        return bundle.get(rank).createItemStack();
     }
 
     @Override

@@ -209,11 +209,11 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal {
         FairyCrystalDropper self = super.getDropper();
         return new FairyCrystalDropper() {
             @Override
-            public Optional<ItemStack> drop(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+            public Optional<ItemStack> drop(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, int rank, double rareBoost) {
                 synchronized (lock) {
 
                     // ガチャリスト取得
-                    List<WeightedRandom.Item<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ);
+                    List<WeightedRandom.Item<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, rank, rareBoost);
 
                     // ガチャを引く
                     Optional<ItemStack> oItemStack = WeightedRandom.getRandomItem(world.rand, dropTable);
@@ -311,7 +311,7 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal {
             @Override
             public ISuppliterator<IRightClickDrop> getDropList() {
                 return self.getDropList()
-                        .after(RightClickDrops.eventDrop(new DropFixed(FairyTypes.instance.getSantaclaus().getMain().createItemStack(), DropCategory.FIXED, 0.01), t -> {
+                        .after(RightClickDrops.eventDrop(new DropFixed(FairyTypes.instance.getSantaclaus(), DropCategory.FIXED, 0.01), t -> {
 
                             // 在庫読み込み
                             // 在庫が読み込めなかった場合は出ない
@@ -340,7 +340,7 @@ public class VariantFairyCrystalChristmas extends VariantFairyCrystal {
 
                             return true;
                         }))
-                        .after(RightClickDrops.eventDrop(new DropFixed(FairyTypes.instance.getChristmas().getMain().createItemStack(), DropCategory.FIXED, 0.1), t -> {
+                        .after(RightClickDrops.eventDrop(new DropFixed(FairyTypes.instance.getChristmas(), DropCategory.FIXED, 0.1), t -> {
 
                             // 在庫読み込み
                             // 在庫が読み込めなかった場合は出ない
