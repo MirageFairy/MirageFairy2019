@@ -12,7 +12,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
-import miragefairy2019.mod.modules.fairystick.ModuleFairyStick
+import miragefairy2019.mod.modules.fairystick.itemFairyStick
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
 import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftRecipe
@@ -41,7 +41,7 @@ class PluginFairyStickCraft : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ModuleFairyStick.itemStackFairyStick)
+            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(itemFairyStick.get()))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: RecipeWrapperFairyStickCraft, ingredients: IIngredients) {
                 recipeWrapper.listListItemStackInput.forEachIndexed { i, _ ->
                     recipeLayout.itemStacks.init(i, true, 18 * i, 0)
@@ -57,7 +57,7 @@ class PluginFairyStickCraft : IModPlugin {
     override fun register(registry: IModRegistry) {
         registry.addRecipes(ApiFairyStickCraft.fairyStickCraftRegistry.recipes.toList(), uid)
         registry.handleRecipes(FairyStickCraftRecipe::class.java, { RecipeWrapperFairyStickCraft(registry, it) }, uid)
-        registry.addRecipeCatalyst(ModuleFairyStick.itemStackFairyStick, uid)
+        registry.addRecipeCatalyst(ItemStack(itemFairyStick.get()), uid)
     }
 
     class RecipeWrapperFairyStickCraft(registry: IModRegistry, recipe: IFairyStickCraftRecipe) : IRecipeWrapper {
