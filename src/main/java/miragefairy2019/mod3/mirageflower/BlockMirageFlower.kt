@@ -1,8 +1,7 @@
-package miragefairy2019.mod.modules.mirageflower
+package miragefairy2019.mod3.mirageflower
 
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
 import miragefairy2019.mod.api.pickable.IPickable
 import miragefairy2019.mod.lib.UtilsMinecraft
@@ -12,6 +11,7 @@ import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
+import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.shineEfficiency
 import mirrg.boron.util.UtilsMath

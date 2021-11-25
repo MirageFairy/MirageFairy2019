@@ -1,11 +1,11 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod3.erg.api.EnumErgType;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
+import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;

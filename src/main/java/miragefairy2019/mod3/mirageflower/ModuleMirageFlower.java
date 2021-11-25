@@ -1,13 +1,13 @@
-package miragefairy2019.mod.modules.mirageflower;
+package miragefairy2019.mod3.mirageflower;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRegistry;
 import miragefairy2019.mod.common.pickable.PickableRegistry;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.WorldGenBush;
 import miragefairy2019.mod3.main.api.ApiMain;
+import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower;
 import mirrg.boron.util.UtilsLambda;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.block.BlockNewLog;

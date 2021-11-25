@@ -12,7 +12,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringRightAligned
-import miragefairy2019.mod.api.ApiMirageFlower
+import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 

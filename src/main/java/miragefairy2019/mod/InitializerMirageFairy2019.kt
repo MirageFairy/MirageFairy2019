@@ -7,7 +7,6 @@ import miragefairy2019.mod.lib.InitializationContext
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
 import miragefairy2019.mod.modules.fairyweapon.item.Loader
 import miragefairy2019.mod.modules.fairyweapon.item.moduleFairyWeapon
-import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
 import miragefairy2019.mod3.artifacts.moduleArtifacts
@@ -18,6 +17,7 @@ import miragefairy2019.mod3.fairy.moduleFairy
 import miragefairy2019.mod3.fairystick.moduleFairyStick
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.moduleMain
+import miragefairy2019.mod3.mirageflower.ModuleMirageFlower
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
 import miragefairy2019.mod3.playeraura.modulePlayerAura

@@ -1,6 +1,6 @@
-package miragefairy2019.mod.modules.mirageflower
+package miragefairy2019.mod3.mirageflower
 
-import miragefairy2019.mod.api.ApiMirageFlower
+import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState

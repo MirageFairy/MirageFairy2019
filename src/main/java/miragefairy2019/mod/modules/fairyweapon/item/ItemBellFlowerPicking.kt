@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.libkt.drop
-import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
 import miragefairy2019.mod3.erg.api.EnumErgType
@@ -11,6 +10,7 @@ import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.positiveBoolean
 import miragefairy2019.mod3.mana.api.EnumManaType
+import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower
 import miragefairy2019.mod3.skill.EnumMastery
 import mirrg.boron.util.UtilsMath
 import net.minecraft.entity.item.EntityItem
