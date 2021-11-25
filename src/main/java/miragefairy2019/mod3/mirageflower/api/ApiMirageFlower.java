@@ -1,7 +1,7 @@
 package miragefairy2019.mod3.mirageflower.api;
 
-import miragefairy2019.mod3.fairylogdrop.api.IFairyLogDropRegistry;
 import miragefairy2019.mod.api.pickable.IPickableRegistry;
+import miragefairy2019.mod3.fairylogdrop.api.IFairyLogDropRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
