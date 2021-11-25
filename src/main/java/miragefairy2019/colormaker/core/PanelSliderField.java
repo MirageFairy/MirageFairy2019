@@ -1,9 +1,10 @@
 package miragefairy2019.colormaker.core;
 
+import kotlin.Unit;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.function.IntConsumer;
 import java.util.regex.Pattern;
 
@@ -40,28 +41,27 @@ public class PanelSliderField extends JPanel {
             c.gridy = 0;
         }));
 
-        add(get(textField = new ParsingTextField<>(), c -> {
-            Pattern pattern = Pattern.compile("[0-9]+");
-            c.parser = s -> {
-                int i;
-                if (pattern.matcher(s.trim()).matches()) {
-                    try {
-                        i = Integer.parseInt(s.trim(), 10);
-                    } catch (Exception e) {
-                        return Optional.empty();
-                    }
-                    if (i < slider.getMinimum()) return Optional.empty();
-                    if (i > slider.getMaximum()) return Optional.empty();
-                    return Optional.of(i);
-                } else {
-                    return Optional.empty();
+        Pattern pattern = Pattern.compile("[0-9]+");
+        add(get(textField = new ParsingTextField<>(s -> {
+            int i;
+            if (pattern.matcher(s.trim()).matches()) {
+                try {
+                    i = Integer.parseInt(s.trim(), 10);
+                } catch (Exception e) {
+                    return null;
                 }
-            };
-            c.builder = v -> "" + v;
+                if (i < slider.getMinimum()) return null;
+                if (i > slider.getMaximum()) return null;
+                return i;
+            } else {
+                return null;
+            }
+        }, v -> "" + v), c -> {
             c.setColumns(5);
-            c.listener.add(i -> {
-                if (isInProcessing) return;
+            c.getListeners().add(i -> {
+                if (isInProcessing) return Unit.INSTANCE;
                 setValue(i, c);
+                return Unit.INSTANCE;
             });
         }), get(new GridBagConstraints(), c -> {
             c.fill = GridBagConstraints.HORIZONTAL;

@@ -1,12 +1,13 @@
 package miragefairy2019.colormaker.core;
 
+import kotlin.Unit;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
@@ -80,20 +81,19 @@ public class PanelColorSlider extends JPanel {
             c.gridheight = 1;
         }));
 
-        add(get(textField = new ParsingTextField<>(), c -> {
-            Pattern pattern = Pattern.compile("[0-9a-fA-F]{6}");
-            c.parser = s -> {
-                if (pattern.matcher(s.trim()).matches()) {
-                    return Optional.of(Integer.parseInt(s.trim(), 16));
-                } else {
-                    return Optional.empty();
-                }
-            };
-            c.builder = v -> String.format("%06X", v & 0xffffff);
+        Pattern pattern = Pattern.compile("[0-9a-fA-F]{6}");
+        add(get(textField = new ParsingTextField<>(s -> {
+            if (pattern.matcher(s.trim()).matches()) {
+                return Integer.parseInt(s.trim(), 16);
+            } else {
+                return null;
+            }
+        }, v -> String.format("%06X", v & 0xffffff)), c -> {
             c.setColumns(10);
-            c.listener.add(i -> {
-                if (isInProcessing) return;
+            c.getListeners().add(i -> {
+                if (isInProcessing) return Unit.INSTANCE;
                 setValue(new Color(c.getValue()), c);
+                return Unit.INSTANCE;
             });
         }), get(new GridBagConstraints(), c -> {
             c.fill = GridBagConstraints.HORIZONTAL;
