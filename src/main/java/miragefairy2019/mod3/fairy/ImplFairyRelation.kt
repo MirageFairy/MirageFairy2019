@@ -1,8 +1,8 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.mod.lib.WeightedRandom
-import miragefairy2019.mod3.fairy.api.FairyDropEntry
-import miragefairy2019.mod3.fairy.api.IFairyRelationManager
+import miragefairy2019.mod3.fairy.relation.api.FairyDropEntry
+import miragefairy2019.mod3.fairy.relation.api.IFairyRelationManager
 import net.minecraft.entity.Entity
 import net.minecraft.item.ItemStack
 import java.util.Random

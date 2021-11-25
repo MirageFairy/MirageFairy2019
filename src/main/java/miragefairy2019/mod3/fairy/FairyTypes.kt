@@ -13,6 +13,8 @@ import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.mana.max
 import miragefairy2019.mod3.mana.sum
 import miragefairy2019.mod3.mana.times
+import miragefairy2019.modkt.impl.fairy.ColorSet
+import miragefairy2019.modkt.impl.fairy.FairyType
 import mirrg.boron.util.struct.Tuple
 import net.minecraft.util.ResourceLocation
 import kotlin.math.pow
