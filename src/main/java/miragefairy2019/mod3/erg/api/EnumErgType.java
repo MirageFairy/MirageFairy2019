@@ -1,19 +1,34 @@
 package miragefairy2019.mod3.erg.api;
 
-import net.minecraft.util.text.TextFormatting;
-
-public abstract class EnumErgType {
-
-    /**
-     * @return すべて小文字
-     */
-    public abstract String getName();
+public enum EnumErgType {
+    attack,
+    craft,
+    harvest,
+    light,
+    flame,
+    water,
+    crystal,
+    sound,
+    space,
+    warp,
+    shoot,
+    destroy,
+    chemical,
+    slash,
+    life,
+    knowledge,
+    energy,
+    submission,
+    christmas,
+    freeze,
+    thunder,
+    levitate,
+    sense,
+    ;
 
     @Override
     public String toString() {
-        return getName().toLowerCase();
+        return name().toLowerCase();
     }
-
-    public abstract TextFormatting getTextColor();
 
 }

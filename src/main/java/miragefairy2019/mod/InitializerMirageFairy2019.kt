@@ -13,7 +13,6 @@ import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
 import miragefairy2019.mod3.artifacts.ModuleArtifacts
-import miragefairy2019.mod3.erg.moduleErg
 import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
 import miragefairy2019.mod3.fairy.loaderFairyLogDrop
 import miragefairy2019.mod3.fairy.loaderFairyRelation
@@ -39,7 +38,6 @@ class InitializerMirageFairy2019 {
 
         modInitializer.run {
             moduleMain()
-            moduleErg()
             modulePlayerAura()
             moduleSkill()
             ModuleFairy.init(this)

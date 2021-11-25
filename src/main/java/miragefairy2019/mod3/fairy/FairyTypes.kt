@@ -5,7 +5,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
 import miragefairy2019.mod3.erg.ErgEntry
 import miragefairy2019.mod3.erg.ErgSet
-import miragefairy2019.mod3.erg.api.ErgTypes
+import miragefairy2019.mod3.erg.api.EnumErgType.values
 import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.mana.ManaSet
 import miragefairy2019.mod3.mana.api.IManaSet
@@ -36,7 +36,7 @@ class FairyTypes(private val count: Int) {
     private fun m(shine: Double, fire: Double, wind: Double, gaia: Double, aqua: Double, dark: Double) = ManaSet(shine, fire, wind, gaia, aqua, dark)
 
     private fun a(vararg powers: Double): IErgSet {
-        val types = ErgTypes.values.toList()
+        val types = values().toList()
         if (powers.size != types.size) throw IllegalArgumentException("Illegal erg count: ${powers.size} != ${types.size}")
         return ErgSet(types.indices.map { i -> ErgEntry(types[i], powers[i]) })
     }

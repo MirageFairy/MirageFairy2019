@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 import miragefairy2019.mod.api.ApiMirageFlower;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
-import miragefairy2019.mod3.erg.api.ErgTypes;
+import miragefairy2019.mod3.erg.api.EnumErgType;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
 import mirrg.boron.util.struct.Tuple;
@@ -42,7 +42,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
             add(new IFormulaDouble[]{
                     val(2.0),
                     div(aqua(), 2),
-                    div(abilityRaw(ErgTypes.harvest), 4),
+                    div(abilityRaw(EnumErgType.harvest), 4),
             }));
 
     public IMagicStatus<Integer> fortune = registerMagicStatus("fortune", formatterInteger(),
@@ -64,7 +64,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
             min(div(wind(), 5), 20));
 
     public IMagicStatus<Boolean> collection = registerMagicStatus("collection", formatterYesNo(),
-            gte(abilityRaw(ErgTypes.warp), 10));
+            gte(abilityRaw(EnumErgType.warp), 10));
 
     public ItemMiragiumAxe() {
         setHarvestLevel("axe", 1);

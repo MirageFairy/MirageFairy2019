@@ -4,8 +4,8 @@ import miragefairy2019.libkt.drop
 import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
-import miragefairy2019.mod3.erg.api.ErgTypes
-import miragefairy2019.mod3.erg.api.ErgTypes.warp
+import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.erg.api.EnumErgType.warp
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
@@ -32,7 +32,7 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
     ItemFairyWeaponBase3(
         EnumManaType.DARK, EnumMastery.flowerPicking,
         weaponStrength, weaponExtent, weaponEndurance, weaponProduction,
-        ErgTypes.sound, ErgTypes.space, ErgTypes.slash, ErgTypes.harvest
+        EnumErgType.sound, EnumErgType.space, EnumErgType.slash, EnumErgType.harvest
     ) {
     val pitch = "pitch"({ double2.positive }) { -(cost / 50.0 - 1) * 12 }.setRange(-12.0..12.0)
     val maxTargetCount = "maxTargetCount"({ int.positive }) { 2 + floor(+!strength * 0.1).toInt() }.setRange(1..100)

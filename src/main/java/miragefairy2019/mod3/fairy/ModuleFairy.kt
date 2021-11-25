@@ -11,7 +11,7 @@ import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.common.fairy.relation.FairyRelationRegistry
 import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
-import miragefairy2019.mod3.erg.api.ErgTypes
+import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.ItemDebugFairyList
 import miragefairy2019.mod3.fairy.ItemFairy
@@ -315,7 +315,7 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraContainer {
     }
 
 
-    override fun getHealAmount(itemStack: ItemStack) = 1 + (getFairy(itemStack)?.fairyType?.let { it.erg(ErgTypes.life).toInt() / 4 } ?: 0)
+    override fun getHealAmount(itemStack: ItemStack) = 1 + (getFairy(itemStack)?.fairyType?.let { it.erg(EnumErgType.life).toInt() / 4 } ?: 0)
     override fun getSaturationModifier(itemStack: ItemStack) = getHealAmount(itemStack) * 0.1f
     override fun getMaxItemUseDuration(itemStack: ItemStack) = 16
     override fun onItemUseFinish(itemStack: ItemStack, world: World, entity: EntityLivingBase): ItemStack {

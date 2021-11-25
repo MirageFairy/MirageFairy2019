@@ -5,7 +5,7 @@ import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
-import miragefairy2019.mod3.erg.api.ErgTypes
+import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.drop
 import miragefairy2019.mod3.fairy.getDropList
 import miragefairy2019.mod3.fairy.relation.api.ApiFairyRelation
@@ -23,7 +23,7 @@ import net.minecraft.item.ItemStack
 class ItemCrystalSword : ItemFairyWeaponBase3(
     EnumManaType.GAIA, EnumMastery.closeCombat,
     0.0, 0.0, 0.0, 0.0,
-    ErgTypes.slash, ErgTypes.attack, ErgTypes.crystal, ErgTypes.submission
+    EnumErgType.slash, EnumErgType.attack, EnumErgType.crystal, EnumErgType.submission
 ) {
     val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { (getSkillLevel(mastery) / 100.0).coerceIn(0.0, 1.0) }.setVisibility(Companion.EnumVisibility.ALWAYS)
 

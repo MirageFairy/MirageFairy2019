@@ -6,7 +6,7 @@ import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.Configurator;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
-import miragefairy2019.mod3.erg.api.ErgTypes;
+import miragefairy2019.mod3.erg.api.EnumErgType;
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionReplaceBlock;
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem;
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe;
@@ -39,84 +39,84 @@ public class Loader {
 
         // ミラジウムの斧
         Configurator<ItemMiragiumAxe> miragiumAxe = fairyWeapon(erMod, ItemMiragiumAxe::new, "miragium_axe", "miragiumAxe")
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.slash))))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.harvest))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.slash))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.harvest))))
                 .bind(setWeaponStatusOfTier(2))
                 .get();
 
         // ロッドベース
         Configurator<ItemFairyWeaponBase> magicWandBase = fairyWeapon(erMod, ItemFairyWeaponBase::new, "magic_wand_base", "magicWandBase")
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.knowledge))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.knowledge))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 光のロッド
         Configurator<ItemMagicWandLight> magicWandLight = fairyWeapon(erMod, ItemMagicWandLight::new, "light_magic_wand", "magicWandLight")
                 .bind(addComponent(magicWandBase))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.light))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.light))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 収集のロッド
         Configurator<ItemMagicWandCollecting> magicWandCollecting = fairyWeapon(erMod, ItemMagicWandCollecting::new, "collecting_magic_wand", "magicWandCollecting")
                 .bind(addComponent(magicWandBase))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.warp))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.warp))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // ライトニングロッド
         Configurator<ItemMagicWandLightning> magicWandLightning = fairyWeapon(erMod, ItemMagicWandLightning::new, "lightning_magic_wand", "magicWandLightning")
                 .bind(addComponent(magicWandBase))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.thunder))))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.energy))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.thunder))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.energy))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // オカリナベース
         Configurator<ItemFairyWeaponBase> ocarinaBase = fairyWeapon(erMod, ItemFairyWeaponBase::new, "ocarina_base", "ocarinaBase")
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.sound))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.sound))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 魅惑のオカリナ
         Configurator<ItemOcarinaTemptation> ocarinaTemptation = fairyWeapon(erMod, ItemOcarinaTemptation::new, "temptation_ocarina", "ocarinaTemptation")
                 .bind(addComponent(ocarinaBase))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.life))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.life))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // 鐘ベース
         Configurator<ItemBellBase> bellBase = fairyWeapon(erMod, ItemBellBase::new, "bell_base", "bellBase")
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.sound))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.sound))))
                 .bind(setWeaponStatusOfTier(2))
                 .get();
 
         // 花摘みの鐘
         Configurator<ItemBellFlowerPicking> bellFlowerPicking = fairyWeapon(erMod, () -> new ItemBellFlowerPicking(0.0, 0.0, 0.0, 0.0, 0.2), "flower_picking_bell", "bellFlowerPicking")
                 .bind(addComponent(bellBase))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.harvest))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.harvest))))
                 .bind(setWeaponStatusOfTier(2))
                 .get();
 
         // 花摘みの鐘 II
         Configurator<ItemBellFlowerPicking> bellFlowerPicking2 = fairyWeapon(erMod, () -> new ItemBellFlowerPicking(10.0, 10.0, 10.0, 10.0, 1.0), "flower_picking_bell_2", "bellFlowerPicking2")
                 .bind(addComponent(bellFlowerPicking))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.harvest))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.harvest))))
                 .bind(setWeaponStatusOfTier(4))
                 .get();
 
         // クリスマスの鐘
         Configurator<ItemBellChristmas> bellChristmas = fairyWeapon(erMod, ItemBellChristmas::new, "christmas_bell", "bellChristmas")
                 .bind(addComponent(bellBase))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.christmas))))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.attack))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.christmas))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.attack))))
                 .bind(setWeaponStatusOfTier(3))
                 .get();
 
         // ミラジウムの大鎌
         Configurator<ItemMiragiumScythe> miragiumScythe = fairyWeapon(erMod, ItemMiragiumScythe::new, "miragium_scythe", "miragiumScythe")
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.slash))))
-                .bind(addComponent(instance(getComponentAbilityType(ErgTypes.harvest))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.slash))))
+                .bind(addComponent(instance(getComponentAbilityType(EnumErgType.harvest))))
                 .bind(setWeaponStatusOfTier(2))
                 .get();
 

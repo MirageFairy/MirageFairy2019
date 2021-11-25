@@ -10,7 +10,7 @@ import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
 import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
-import miragefairy2019.mod3.erg.api.ErgTypes
+import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.shineEfficiency
@@ -115,7 +115,7 @@ fun getGrowRate(world: World, blockPos: BlockPos): Double {
     return rate
 }
 
-fun getGrowRateInFloor(fairyType: IFairyType) = fairyType.shineEfficiency * fairyType.erg(ErgTypes.crystal) / 100.0 * 3
+fun getGrowRateInFloor(fairyType: IFairyType) = fairyType.shineEfficiency * fairyType.erg(EnumErgType.crystal) / 100.0 * 3
 
 fun getGrowRateTableMessage() = textComponent {
     listOf(
