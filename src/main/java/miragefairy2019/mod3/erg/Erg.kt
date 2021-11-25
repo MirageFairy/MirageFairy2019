@@ -6,12 +6,12 @@ import miragefairy2019.libkt.color
 import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.mod3.erg.api.IErgEntry
 import miragefairy2019.mod3.erg.api.IErgSet
-import miragefairy2019.mod3.erg.api.IErgType
+import miragefairy2019.mod3.erg.api.EnumErgType
 import net.minecraft.util.text.TextFormatting
 
 val moduleErg: Module = {
     onInstantiation {
-        val values = mutableListOf<IErgType>()
+        val values = mutableListOf<EnumErgType>()
         operator fun String.invoke(textColor: TextFormatting): ErgType {
             val ergType = ErgType(this, textColor)
             values += ergType
@@ -51,18 +51,18 @@ class ErgSet(private val iterable: Iterable<IErgEntry>) : IErgSet {
     private val list = iterable.toList()
     private val map = list.associateBy { it.type }
     override fun getEntries() = list
-    override fun getPower(type: IErgType) = map[type]?.power ?: 0.0
+    override fun getPower(type: EnumErgType) = map[type]?.power ?: 0.0
 }
 
-class ErgEntry(private val type: IErgType, private val power: Double) : IErgEntry {
+class ErgEntry(private val type: EnumErgType, private val power: Double) : IErgEntry {
     override fun getPower() = power
     override fun getType() = type
 }
 
-class ErgType(private val name: String, private val textColor: TextFormatting) : IErgType {
+class ErgType(private val name: String, private val textColor: TextFormatting) : EnumErgType {
     override fun getName() = name
     override fun getTextColor() = textColor
 }
 
 
-val IErgType.displayName get() = buildText { translate("mirageFairy2019.erg.$name.name").color(textColor) }
+val EnumErgType.displayName get() = buildText { translate("mirageFairy2019.erg.$name.name").color(textColor) }

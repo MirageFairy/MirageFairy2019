@@ -18,7 +18,7 @@ import miragefairy2019.mod.modules.fairyweapon.formula.FormulaDoubleMulFormulas;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaIntegerRoundFormulaDouble;
 import miragefairy2019.mod.modules.fairyweapon.formula.FormulaSelectEntry;
 import miragefairy2019.mod.modules.fairyweapon.formula.MagicStatus;
-import miragefairy2019.mod3.erg.api.IErgType;
+import miragefairy2019.mod3.erg.api.EnumErgType;
 import miragefairy2019.mod3.mana.api.EnumManaType;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Struct1;
@@ -66,11 +66,11 @@ public class ApiFormula {
         return mana(EnumManaType.DARK);
     }
 
-    public static IFormulaDouble abilityRaw(IErgType abilityType) {
+    public static IFormulaDouble abilityRaw(EnumErgType abilityType) {
         return new FormulaDoubleAbility(abilityType);
     }
 
-    public static IFormulaDouble ability(IErgType abilityType) {
+    public static IFormulaDouble ability(EnumErgType abilityType) {
         return mul(abilityRaw(abilityType), div(cost(), 50));
     }
 

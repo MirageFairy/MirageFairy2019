@@ -7,7 +7,7 @@ public interface IErgSet {
     /**
      * 非負です。
      */
-    public double getPower(IErgType type);
+    public double getPower(EnumErgType type);
 
 }
 

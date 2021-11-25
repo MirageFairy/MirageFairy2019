@@ -12,7 +12,7 @@ import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.lib.multi.ItemMulti
 import miragefairy2019.mod.lib.multi.ItemVariant
 import miragefairy2019.mod3.erg.api.ErgTypes
-import miragefairy2019.mod3.erg.api.IErgType
+import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeItem
@@ -50,7 +50,7 @@ class VariantSphere(val sphere: SphereType) : ItemVariant()
 
 
 class SphereType(
-    val ergType: IErgType,
+    val ergType: EnumErgType,
     val colorCore: Int,
     val colorHighlight: Int,
     val colorBackground: Int,
@@ -61,7 +61,7 @@ class SphereType(
 
 val SphereType.oreName: String get() = "mirageFairy2019Sphere${UtilsString.toUpperCaseHead(ergType.name)}"
 
-fun getSphereType(ergType: IErgType): SphereType {
+fun getSphereType(ergType: EnumErgType): SphereType {
     fun stack(itemStack: () -> ItemStack): () -> Ingredient = { Ingredient.fromStacks(itemStack()) }
     fun item(item: () -> Item): () -> Ingredient = stack { ItemStack(item()) }
     fun block(block: () -> Block): () -> Ingredient = stack { ItemStack(block()) }
@@ -215,5 +215,5 @@ val moduleSphere: Module = {
 object EnumSphere {
     @JvmStatic
     @Deprecated(message = "削除予定のAPI", replaceWith = ReplaceWith("Optional.of(getSphereType(ergType))"))
-    fun of(ergType: IErgType) = Optional.of(getSphereType(ergType))
+    fun of(ergType: EnumErgType) = Optional.of(getSphereType(ergType))
 }

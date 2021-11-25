@@ -2,15 +2,15 @@ package miragefairy2019.mod.modules.fairyweapon.formula;
 
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.ISource;
-import miragefairy2019.mod3.erg.api.IErgType;
+import miragefairy2019.mod3.erg.api.EnumErgType;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
 public class FormulaDoubleAbility implements IFormulaDouble {
 
-    private IErgType abilityType;
+    private EnumErgType abilityType;
 
-    public FormulaDoubleAbility(IErgType abilityType) {
+    public FormulaDoubleAbility(EnumErgType abilityType) {
         this.abilityType = abilityType;
     }
 

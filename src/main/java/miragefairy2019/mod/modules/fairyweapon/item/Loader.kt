@@ -19,7 +19,7 @@ import miragefairy2019.mod3.erg.api.ErgTypes.space
 import miragefairy2019.mod3.erg.api.ErgTypes.submission
 import miragefairy2019.mod3.erg.api.ErgTypes.warp
 import miragefairy2019.mod3.erg.api.ErgTypes.water
-import miragefairy2019.mod3.erg.api.IErgType
+import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.api.ApiMain.side
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
@@ -38,7 +38,7 @@ private fun <T : ItemFairyWeaponBase> ModInitializer.fw(
     unlocalizedName: String,
     oreNameList: List<String>,
     parent: (() -> Supplier<ItemFairyWeaponBase>)?,
-    vararg ergTypeSuppliers: () -> IErgType
+    vararg ergTypeSuppliers: () -> EnumErgType
 ) = item(creator, registryName) {
     setUnlocalizedName(unlocalizedName)
     setCreativeTab { creativeTab }

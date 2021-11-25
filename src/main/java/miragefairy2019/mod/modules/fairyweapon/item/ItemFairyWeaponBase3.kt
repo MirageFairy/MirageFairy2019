@@ -11,7 +11,7 @@ import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.NEVER
-import miragefairy2019.mod3.erg.api.IErgType
+import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.magic.MagicStatus
 import miragefairy2019.mod3.magic.MagicStatusFunctionArguments
@@ -63,10 +63,10 @@ abstract class ItemFairyWeaponBase3(
     val weaponExtent: Double?,
     val weaponEndurance: Double?,
     val weaponProduction: Double?,
-    val strengthErg: IErgType?,
-    val extentErg: IErgType?,
-    val enduranceErg: IErgType?,
-    val productionErg: IErgType?
+    val strengthErg: EnumErgType?,
+    val extentErg: EnumErgType?,
+    val enduranceErg: EnumErgType?,
+    val productionErg: EnumErgType?
 ) : ItemFairyWeaponBase() {
     companion object {
         private const val prefix = "miragefairy2019.gui.magic"
@@ -109,7 +109,7 @@ abstract class ItemFairyWeaponBase3(
             fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
             val cost get() = arguments.fairyType.cost
             operator fun EnumManaType.not() = arguments.fairyType.manaSet.getMana(this)
-            operator fun IErgType.not() = arguments.fairyType.ergSet.getPower(this)
+            operator fun EnumErgType.not() = arguments.fairyType.ergSet.getPower(this)
             operator fun <T> IMagicStatus<T>.not(): T = function.getValue(arguments)
         }
 

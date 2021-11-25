@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairy;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.fairy.IComponentAbilityType;
 import miragefairy2019.mod3.erg.ErgKt;
-import miragefairy2019.mod3.erg.api.IErgType;
+import miragefairy2019.mod3.erg.api.EnumErgType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -13,17 +13,17 @@ import java.util.Map;
 
 public class ComponentsAbilityType {
 
-    private static Map<IErgType, IComponentAbilityType> fairyAbilityTypes = new HashMap<>();
+    private static Map<EnumErgType, IComponentAbilityType> fairyAbilityTypes = new HashMap<>();
 
-    public static IComponentAbilityType getComponentAbilityType(IErgType abilityType) {
+    public static IComponentAbilityType getComponentAbilityType(EnumErgType abilityType) {
         return fairyAbilityTypes.computeIfAbsent(abilityType, k -> new ComponentAbilityType(abilityType));
     }
 
     private static class ComponentAbilityType implements IComponentAbilityType {
 
-        private IErgType abilityType;
+        private EnumErgType abilityType;
 
-        private ComponentAbilityType(IErgType abilityType) {
+        private ComponentAbilityType(EnumErgType abilityType) {
             this.abilityType = abilityType;
         }
 
@@ -38,7 +38,7 @@ public class ComponentsAbilityType {
         }
 
         @Override
-        public IErgType getAbilityType() {
+        public EnumErgType getAbilityType() {
             return abilityType;
         }
 

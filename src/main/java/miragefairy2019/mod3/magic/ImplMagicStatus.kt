@@ -7,7 +7,7 @@ import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod3.erg.api.IErgSet
-import miragefairy2019.mod3.erg.api.IErgType
+import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.magic.api.IMagicStatus
@@ -81,7 +81,7 @@ val <T> IMagicStatusFunction<T>.factors
 
                 override fun getErgSet() = object : IErgSet {
                     override fun getEntries() = throw UnsupportedOperationException()
-                    override fun getPower(type: IErgType) = add(type.displayName)
+                    override fun getPower(type: EnumErgType) = add(type.displayName)
                 }
             }
 
