@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.api.playeraura;
+package miragefairy2019.mod3.playeraura.api;
 
 public class ApiPlayerAura {
 

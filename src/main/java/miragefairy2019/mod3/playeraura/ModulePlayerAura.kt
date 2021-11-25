@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.modules.playeraura
+package miragefairy2019.mod3.playeraura
 
 import io.netty.buffer.ByteBuf
 import miragefairy2019.libkt.Complex
@@ -17,8 +17,7 @@ import miragefairy2019.mod3.mana.api.IManaType
 import miragefairy2019.mod3.mana.api.ManaTypes
 import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.mana.getMana
-import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
-import miragefairy2019.modkt.impl.playeraura.PlayerAuraManager
+import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemFood

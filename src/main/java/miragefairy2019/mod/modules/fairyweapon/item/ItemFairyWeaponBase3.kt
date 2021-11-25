@@ -37,11 +37,11 @@ import miragefairy2019.mod3.mana.api.ManaTypes.wind
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.mana.plus
 import miragefairy2019.mod3.mana.times
+import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
 import miragefairy2019.modkt.api.fairy.IFairyType
-import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
 import miragefairy2019.modkt.impl.fairy.FairyTypeAdapter
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity

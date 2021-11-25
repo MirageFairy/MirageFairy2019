@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.impl.playeraura
+package miragefairy2019.mod3.playeraura
 
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
@@ -11,13 +11,12 @@ import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.copy
 import miragefairy2019.mod3.mana.plus
 import miragefairy2019.mod3.mana.times
-import miragefairy2019.modkt.api.playeraura.IClientPlayerAuraHandler
-import miragefairy2019.modkt.api.playeraura.IFoodAuraContainer
-import miragefairy2019.modkt.api.playeraura.IFoodHistoryEntry
-import miragefairy2019.modkt.api.playeraura.IPlayerAuraHandler
-import miragefairy2019.modkt.api.playeraura.IPlayerAuraManager
-import miragefairy2019.modkt.api.playeraura.IServerPlayerAuraHandler
-import miragefairy2019.modkt.modules.playeraura.MessagePlayerAura
+import miragefairy2019.mod3.playeraura.api.IClientPlayerAuraHandler
+import miragefairy2019.mod3.playeraura.api.IFoodAuraContainer
+import miragefairy2019.mod3.playeraura.api.IFoodHistoryEntry
+import miragefairy2019.mod3.playeraura.api.IPlayerAuraHandler
+import miragefairy2019.mod3.playeraura.api.IPlayerAuraManager
+import miragefairy2019.mod3.playeraura.api.IServerPlayerAuraHandler
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.Item

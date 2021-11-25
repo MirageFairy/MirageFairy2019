@@ -16,7 +16,7 @@ import miragefairy2019.libkt.getSubItems
 import miragefairy2019.mod3.mana.api.IManaType
 import miragefairy2019.mod3.mana.api.ManaTypes
 import miragefairy2019.mod3.mana.getMana
-import miragefairy2019.modkt.api.playeraura.ApiPlayerAura
+import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Gui
 import net.minecraft.creativetab.CreativeTabs
