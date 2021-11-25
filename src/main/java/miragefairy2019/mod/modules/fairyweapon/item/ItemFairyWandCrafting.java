@@ -2,9 +2,9 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.modules.oreseed.EnumVariantOreSeed;
-import miragefairy2019.modkt.api.oreseeddrop.ApiOreSeedDrop;
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedType;
-import miragefairy2019.modkt.api.oreseeddrop.OreSeedDropEnvironment;
+import miragefairy2019.mod3.oreseeddrop.api.ApiOreSeedDrop;
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType;
+import miragefairy2019.mod3.oreseeddrop.api.OreSeedDropEnvironment;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

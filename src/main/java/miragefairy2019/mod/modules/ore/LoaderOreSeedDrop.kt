@@ -21,29 +21,29 @@ import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.END_STONE_LABRADORITE_ORE
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.HELIOLITE_ORE
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.TOURMALINE_ORE
-import miragefairy2019.modkt.api.oreseeddrop.ApiOreSeedDrop
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.COAL
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.DIAMOND
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.HORIZONTAL
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.IRON
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.LAPIS
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.LARGE
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.MEDIUM
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.POINT
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.PYRAMID
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.STAR
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape.TINY
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedType.END_STONE
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedType.NETHERRACK
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedType.STONE
-import miragefairy2019.modkt.api.oreseeddrop.IOreSeedDropRequirement
-import miragefairy2019.modkt.impl.oreseeddrop.OreSeedDropRegistryScope
-import miragefairy2019.modkt.impl.oreseeddrop.OreSeedDropRequirements.maxY
-import miragefairy2019.modkt.impl.oreseeddrop.OreSeedDropRequirements.minY
-import miragefairy2019.modkt.impl.oreseeddrop.Vein
-import miragefairy2019.modkt.impl.oreseeddrop.invoke
-import miragefairy2019.modkt.impl.oreseeddrop.register
+import miragefairy2019.mod3.oreseeddrop.OreSeedDropRegistryScope
+import miragefairy2019.mod3.oreseeddrop.OreSeedDropRequirements.maxY
+import miragefairy2019.mod3.oreseeddrop.OreSeedDropRequirements.minY
+import miragefairy2019.mod3.oreseeddrop.Vein
+import miragefairy2019.mod3.oreseeddrop.api.ApiOreSeedDrop
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape.COAL
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape.DIAMOND
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape.HORIZONTAL
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape.IRON
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape.LAPIS
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape.LARGE
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape.MEDIUM
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape.POINT
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape.PYRAMID
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape.STAR
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape.TINY
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType.END_STONE
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType.NETHERRACK
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType.STONE
+import miragefairy2019.mod3.oreseeddrop.api.IOreSeedDropRequirement
+import miragefairy2019.mod3.oreseeddrop.invoke
+import miragefairy2019.mod3.oreseeddrop.register
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks.COAL_ORE
@@ -54,7 +54,7 @@ import net.minecraft.init.Blocks.IRON_ORE
 import net.minecraft.init.Blocks.LAPIS_ORE
 import net.minecraft.init.Blocks.REDSTONE_ORE
 import net.minecraft.item.ItemStack
-import miragefairy2019.modkt.impl.oreseeddrop.Elements as el
+import miragefairy2019.mod3.oreseeddrop.Elements as el
 
 /*
  * 暗視

@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.oreseed;
 
-import miragefairy2019.modkt.api.oreseeddrop.EnumOreSeedShape;
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape;
 import net.minecraft.util.IStringSerializable;
 
 public enum EnumVariantOreSeed implements IStringSerializable {

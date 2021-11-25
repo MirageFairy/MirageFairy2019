@@ -1,7 +1,7 @@
-package miragefairy2019.modkt.impl.oreseeddrop
+package miragefairy2019.mod3.oreseeddrop
 
-import miragefairy2019.modkt.api.oreseeddrop.IOreSeedDropRequirement
-import miragefairy2019.modkt.api.oreseeddrop.OreSeedDropEnvironment
+import miragefairy2019.mod3.oreseeddrop.api.IOreSeedDropRequirement
+import miragefairy2019.mod3.oreseeddrop.api.OreSeedDropEnvironment
 
 class Vein(val seed: Long, val horizontalSize: Int, val verticalSize: Int, val chance: Double, vararg val elements: Element) : IOreSeedDropRequirement {
     override fun test(environment: OreSeedDropEnvironment) = VeinHelper.test(seed, horizontalSize, verticalSize, chance, elements, environment)

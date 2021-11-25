@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.api.oreseeddrop
+package miragefairy2019.mod3.oreseeddrop.api
 
 import miragefairy2019.mod.lib.WeightedRandom
 import net.minecraft.block.state.IBlockState
