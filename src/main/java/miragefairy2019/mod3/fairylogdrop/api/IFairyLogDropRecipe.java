@@ -1,6 +1,5 @@
 package miragefairy2019.mod3.fairylogdrop.api;
 
-import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.item.ItemStack;
 
 public interface IFairyLogDropRecipe {
@@ -9,6 +8,6 @@ public interface IFairyLogDropRecipe {
 
     public ItemStack getItemStackOutput();
 
-    public ISuppliterator<IFairyLogDropCondition> getConditions();
+    public Iterable<IFairyLogDropCondition> getConditions();
 
 }

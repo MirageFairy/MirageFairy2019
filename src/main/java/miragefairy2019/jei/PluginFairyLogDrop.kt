@@ -54,7 +54,7 @@ class PluginFairyLogDrop : IModPlugin {
                 }
 
                 override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {
-                    val descriptions = recipe.conditions.toList().chunked(2).map { it.joinToString(", ") { condition -> condition.localizedDescription } }
+                    val descriptions = recipe.conditions.chunked(2).map { it.joinToString(", ") { condition -> condition.localizedDescription } }
                     minecraft.fontRenderer.drawStringRightAligned(String.format("%.0f%%", recipe.rate * 100), 45 - 2, 4, 0x444444)
                     minecraft.fontRenderer.drawString(recipe.itemStackOutput.displayName, 65, 0, 0x444444)
                     descriptions.forEachIndexed { i, it -> minecraft.fontRenderer.drawString(it, 65, 10 + 10 * i, 0x444444) }

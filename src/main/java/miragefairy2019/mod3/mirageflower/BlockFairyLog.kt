@@ -99,7 +99,7 @@ class BlockFairyLog : Block(Material.WOOD) {
     override fun getDrops(drops: NonNullList<ItemStack>, blockAccess: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) {
         if (blockAccess !is World) return
         repeat(3 + fortune) {
-            drops.add(ApiMirageFlower.fairyLogDropRegistry.drop(blockAccess, pos, blockAccess.rand).orElse(null) ?: FairyTypes.instance.air.main.createItemStack())
+            drops.add(ApiMirageFlower.fairyLogDropRegistry.drop(blockAccess, pos, blockAccess.rand) ?: FairyTypes.instance.air.main.createItemStack())
         }
     }
 
