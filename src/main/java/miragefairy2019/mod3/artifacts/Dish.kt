@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.modules.artifacts
+package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.orNull
 import miragefairy2019.mod3.placeditem.api.IPlaceableBlock

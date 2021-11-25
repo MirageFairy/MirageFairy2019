@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.modules.artifacts
+package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.invoke
