@@ -1,8 +1,8 @@
 package miragefairy2019.mod3.mana
 
 import com.google.gson.annotations.Expose
-import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.api.EnumManaType
+import miragefairy2019.mod3.mana.api.IManaSet
 import kotlin.math.max
 
 data class ManaSet(

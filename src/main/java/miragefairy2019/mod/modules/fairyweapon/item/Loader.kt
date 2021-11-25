@@ -8,6 +8,7 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.api.composite.ApiComposite
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
+import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.EnumErgType.ATTACK
 import miragefairy2019.mod3.erg.api.EnumErgType.CRAFT
 import miragefairy2019.mod3.erg.api.EnumErgType.CRYSTAL
@@ -19,7 +20,6 @@ import miragefairy2019.mod3.erg.api.EnumErgType.SPACE
 import miragefairy2019.mod3.erg.api.EnumErgType.SUBMISSION
 import miragefairy2019.mod3.erg.api.EnumErgType.WARP
 import miragefairy2019.mod3.erg.api.EnumErgType.WATER
-import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.api.ApiMain.side
 import net.minecraft.client.renderer.block.model.ModelResourceLocation

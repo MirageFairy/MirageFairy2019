@@ -6,8 +6,8 @@ import miragefairy2019.libkt.color
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.fairy.ApiFairy
-import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.magic.api.IMagicStatus
