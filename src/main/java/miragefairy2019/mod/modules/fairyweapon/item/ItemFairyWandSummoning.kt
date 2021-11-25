@@ -27,6 +27,10 @@ class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWeaponCraft
 
     //
 
+    override fun canCombine(itemStack: ItemStack?) = false
+
+    //
+
     override fun getItemUseAction(stack: ItemStack) = EnumAction.BOW
     override fun getMaxItemUseDuration(stack: ItemStack) = 72000 // 永続
 
