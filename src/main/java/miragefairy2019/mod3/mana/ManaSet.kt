@@ -88,7 +88,6 @@ fun IManaSet.getMana(manaType: EnumManaType) = when (manaType) {
     EnumManaType.gaia -> gaia
     EnumManaType.aqua -> aqua
     EnumManaType.dark -> dark
-    else -> throw IllegalArgumentException("$manaType")
 }
 
 fun IManaSet.copy() = ManaSet(shine, fire, wind, gaia, aqua, dark)

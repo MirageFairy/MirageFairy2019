@@ -27,7 +27,6 @@ import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.ranged
 import miragefairy2019.mod3.main.api.ApiMain.side
-import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.api.EnumManaType.aqua
 import miragefairy2019.mod3.mana.api.EnumManaType.dark
@@ -35,6 +34,7 @@ import miragefairy2019.mod3.mana.api.EnumManaType.fire
 import miragefairy2019.mod3.mana.api.EnumManaType.gaia
 import miragefairy2019.mod3.mana.api.EnumManaType.shine
 import miragefairy2019.mod3.mana.api.EnumManaType.wind
+import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.mana.plus
 import miragefairy2019.mod3.mana.times
@@ -258,7 +258,6 @@ abstract class ItemFairyWeaponBase3(
             gaia -> !gaia
             aqua -> !aqua
             dark -> !dark
-            else -> throw IllegalArgumentException()
         }
     }.setVisibility(ALWAYS)
 
@@ -270,7 +269,6 @@ abstract class ItemFairyWeaponBase3(
             gaia -> !wind * 2
             aqua -> !gaia + !wind
             dark -> !gaia + !wind
-            else -> throw IllegalArgumentException()
         }
     }.setVisibility(ALWAYS)
 
@@ -282,7 +280,6 @@ abstract class ItemFairyWeaponBase3(
             gaia -> !fire + !aqua
             aqua -> !fire * 2
             dark -> !fire + !aqua
-            else -> throw IllegalArgumentException()
         }
     }.setVisibility(ALWAYS)
 
@@ -294,7 +291,6 @@ abstract class ItemFairyWeaponBase3(
             gaia -> !shine + !dark
             aqua -> !shine + !dark
             dark -> !shine * 2
-            else -> throw IllegalArgumentException()
         }
     }.setVisibility(ALWAYS)
 
