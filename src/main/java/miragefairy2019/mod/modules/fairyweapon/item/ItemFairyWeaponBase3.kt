@@ -37,7 +37,6 @@ import miragefairy2019.mod3.mana.api.ManaTypes.gaia
 import miragefairy2019.mod3.mana.api.ManaTypes.shine
 import miragefairy2019.mod3.mana.api.ManaTypes.wind
 import miragefairy2019.mod3.mana.getMana
-import miragefairy2019.mod3.mana.plus
 import miragefairy2019.mod3.mana.times
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill

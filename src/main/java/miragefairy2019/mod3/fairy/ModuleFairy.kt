@@ -14,6 +14,9 @@ import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.modules.main.ModuleMain
 import miragefairy2019.mod3.erg.api.ErgTypes
+import miragefairy2019.mod3.fairy.FairyTypes
+import miragefairy2019.mod3.fairy.ItemDebugFairyList
+import miragefairy2019.mod3.fairy.ItemFairy
 import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.playeraura.api.IFoodAuraContainer
 import miragefairy2019.modkt.impl.fairy.erg

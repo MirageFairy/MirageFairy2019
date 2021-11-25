@@ -1,10 +1,10 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.Module
-import miragefairy2019.mod3.fairy.api.ApiFairyRelation
-import miragefairy2019.mod3.fairy.api.FairyRelationEntry
-import miragefairy2019.mod3.fairy.api.IFairyRelationHandler
-import miragefairy2019.mod3.fairy.api.IFairyRelationManager
+import miragefairy2019.mod3.fairy.relation.api.ApiFairyRelation
+import miragefairy2019.mod3.fairy.relation.api.FairyRelationEntry
+import miragefairy2019.mod3.fairy.relation.api.IFairyRelationHandler
+import miragefairy2019.mod3.fairy.relation.api.IFairyRelationManager
 import net.minecraft.entity.Entity
 
 val moduleFairy: Module = {
