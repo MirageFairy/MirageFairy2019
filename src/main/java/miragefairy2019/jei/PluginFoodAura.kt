@@ -13,7 +13,7 @@ import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.getSubItems
-import miragefairy2019.mod3.mana.api.IManaType
+import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.api.ManaTypes
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
@@ -68,7 +68,7 @@ class PluginFoodAura : IModPlugin {
                         add(object : IRecipeWrapper {
                             override fun getIngredients(ingredients: IIngredients) = ingredients.setInputLists(VanillaTypes.ITEM, listOf(listOf(itemStack)))
                             override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {
-                                fun d(manaType: IManaType, x: Int) {
+                                fun d(manaType: EnumManaType, x: Int) {
                                     val value = foodAura.getMana(manaType)
                                     Gui.drawRect(x + 2, (20 - 20 * value / 50.0).toInt(), x + 18, 20, manaType.color or 0xFF000000.toInt())
                                     val string = String.format("%.0f", value)

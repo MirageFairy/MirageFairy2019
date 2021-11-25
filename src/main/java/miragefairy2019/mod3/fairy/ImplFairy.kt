@@ -7,7 +7,7 @@ import miragefairy2019.mod3.erg.api.IErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.mana.ManaSet
 import miragefairy2019.mod3.mana.api.IManaSet
-import miragefairy2019.mod3.mana.api.IManaType
+import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.getMana
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
@@ -50,7 +50,7 @@ open class FairyTypeAdapter(internal val parent: IFairyType) : IFairyType {
 }
 
 
-fun IFairyType.mana(manaType: IManaType) = manaSet.getMana(manaType)
+fun IFairyType.mana(manaType: EnumManaType) = manaSet.getMana(manaType)
 fun IFairyType.erg(ergType: IErgType) = ergSet.getPower(ergType)
 
 val IFairyType.shineEfficiency get() = manaSet.shine / (cost / 50.0)

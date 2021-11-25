@@ -15,7 +15,7 @@ import miragefairy2019.mod3.main.api.ApiMain.logger
 import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.mana.ManaSet
 import miragefairy2019.mod3.mana.api.IManaSet
-import miragefairy2019.mod3.mana.api.IManaType
+import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.api.ManaTypes
 import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.mana.getMana
@@ -107,7 +107,7 @@ object ModulePlayerAura {
                                 translate("miragefairy2019.gui.playerAura.title")
                                 text(":")
                             }.formattedText)
-                            fun f1(manaType: IManaType): ITextComponent {
+                            fun f1(manaType: EnumManaType): ITextComponent {
                                 val before = auraBefore.getMana(manaType)
                                 val after = auraAfter.getMana(manaType)
                                 val difference = after - before

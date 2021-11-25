@@ -3,13 +3,13 @@ package miragefairy2019.mod3.mana
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
-import miragefairy2019.mod3.mana.api.IManaType
+import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.api.ManaTypes
 import net.minecraft.util.text.TextFormatting
 
 val moduleMana: Module = {
     onInstantiation {
-        val values = mutableListOf<IManaType>()
+        val values = mutableListOf<EnumManaType>()
         operator fun String.invoke(color: Int, textColor: TextFormatting): ManaType {
             val manaType = ManaType(this, color, textColor)
             values += manaType
@@ -28,11 +28,11 @@ val moduleMana: Module = {
 }
 
 
-class ManaType(private val name: String, private val color: Int, private val textColor: TextFormatting) : IManaType {
+class ManaType(private val name: String, private val color: Int, private val textColor: TextFormatting) : EnumManaType {
     override fun getName() = name
     override fun getColor() = color
     override fun getTextColor() = textColor
 }
 
 
-val IManaType.displayName get() = buildText { translate("mirageFairy2019.mana.$name.name").color(textColor) }
+val EnumManaType.displayName get() = buildText { translate("mirageFairy2019.mana.$name.name").color(textColor) }

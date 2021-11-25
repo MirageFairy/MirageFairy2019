@@ -4,14 +4,14 @@ import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.ISource;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.mana.ManaSetKt;
-import miragefairy2019.mod3.mana.api.IManaType;
+import miragefairy2019.mod3.mana.api.EnumManaType;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
 public class FormulaDoubleMana implements IFormulaDouble {
 
-    private IManaType manaType;
+    private EnumManaType manaType;
 
-    public FormulaDoubleMana(IManaType manaType) {
+    public FormulaDoubleMana(EnumManaType manaType) {
         this.manaType = manaType;
     }
 

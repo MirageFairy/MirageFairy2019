@@ -28,7 +28,7 @@ import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.ranged
 import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.mana.api.IManaSet
-import miragefairy2019.mod3.mana.api.IManaType
+import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.api.ManaTypes.aqua
 import miragefairy2019.mod3.mana.api.ManaTypes.dark
 import miragefairy2019.mod3.mana.api.ManaTypes.fire
@@ -57,7 +57,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
 abstract class ItemFairyWeaponBase3(
-    val weaponManaType: IManaType,
+    val weaponManaType: EnumManaType,
     val mastery: IMastery,
     val weaponStrength: Double?,
     val weaponExtent: Double?,
@@ -108,7 +108,7 @@ abstract class ItemFairyWeaponBase3(
         class MagicStatusFormulaScope(val arguments: IMagicStatusFunctionArguments) {
             fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
             val cost get() = arguments.fairyType.cost
-            operator fun IManaType.not() = arguments.fairyType.manaSet.getMana(this)
+            operator fun EnumManaType.not() = arguments.fairyType.manaSet.getMana(this)
             operator fun IErgType.not() = arguments.fairyType.ergSet.getPower(this)
             operator fun <T> IMagicStatus<T>.not(): T = function.getValue(arguments)
         }

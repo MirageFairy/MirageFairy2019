@@ -11,7 +11,7 @@ import miragefairy2019.mod.lib.multi.ItemMulti
 import miragefairy2019.mod.lib.multi.ItemVariant
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.fairy.api.IFairyType
-import miragefairy2019.mod3.mana.api.IManaType
+import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.api.ManaTypes
 import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.mana.getMana
@@ -88,7 +88,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
             text("Mana: ").color(AQUA)
         }
         if (flag.isAdvanced) {
-            fun f(manaType: IManaType) = buildText { format("%s:%.3f", manaType.displayName.unformattedText, variant.type.manaSet.getMana(manaType)).color(manaType.textColor) }
+            fun f(manaType: EnumManaType) = buildText { format("%s:%.3f", manaType.displayName.unformattedText, variant.type.manaSet.getMana(manaType)).color(manaType.textColor) }
             tooltip {
                 text("        ")
                 text(f(ManaTypes.shine))
@@ -108,7 +108,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
                 text(f(ManaTypes.dark))
             }
         } else {
-            fun f(manaType: IManaType) = buildText { format("%4d", formatInt(variant.type.manaSet.getMana(manaType))).color(manaType.textColor) }
+            fun f(manaType: EnumManaType) = buildText { format("%4d", formatInt(variant.type.manaSet.getMana(manaType))).color(manaType.textColor) }
             tooltip {
                 text("    ")
                 text(f(ManaTypes.shine))

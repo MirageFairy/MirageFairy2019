@@ -2,13 +2,13 @@ package miragefairy2019.mod3.mana.api;
 
 public class ManaTypes {
 
-    public static Iterable<IManaType> values;
+    public static Iterable<EnumManaType> values;
 
-    public static IManaType shine;
-    public static IManaType fire;
-    public static IManaType wind;
-    public static IManaType gaia;
-    public static IManaType aqua;
-    public static IManaType dark;
+    public static EnumManaType shine;
+    public static EnumManaType fire;
+    public static EnumManaType wind;
+    public static EnumManaType gaia;
+    public static EnumManaType aqua;
+    public static EnumManaType dark;
 
 }
