@@ -1,7 +1,7 @@
 package miragefairy2019.mod3.mirageflower;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRegistry;
+import miragefairy2019.mod3.fairylogdrop.FairyLogDropRegistry;
 import miragefairy2019.mod.common.pickable.PickableRegistry;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
 import miragefairy2019.mod.lib.EventRegistryMod;

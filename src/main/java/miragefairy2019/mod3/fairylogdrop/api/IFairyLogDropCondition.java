@@ -1,4 +1,4 @@
-package miragefairy2019.mod.api.fairylogdrop;
+package miragefairy2019.mod3.fairylogdrop.api;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

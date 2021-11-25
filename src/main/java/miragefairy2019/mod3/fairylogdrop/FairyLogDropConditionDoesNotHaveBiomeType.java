@@ -1,27 +1,27 @@
-package miragefairy2019.mod.common.fairylogdrop;
+package miragefairy2019.mod3.fairylogdrop;
 
-import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropCondition;
+import miragefairy2019.mod3.fairylogdrop.api.IFairyLogDropCondition;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
-public class FairyLogDropConditionHasBiomeType implements IFairyLogDropCondition {
+public class FairyLogDropConditionDoesNotHaveBiomeType implements IFairyLogDropCondition {
 
     private final Type biome;
 
-    public FairyLogDropConditionHasBiomeType(Type biome) {
+    public FairyLogDropConditionDoesNotHaveBiomeType(Type biome) {
         this.biome = biome;
     }
 
     @Override
     public boolean test(World world, BlockPos blockPos) {
-        return BiomeDictionary.hasType(world.getBiome(blockPos), biome);
+        return !BiomeDictionary.hasType(world.getBiome(blockPos), biome);
     }
 
     @Override
     public String getLocalizedDescription() {
-        return biome.getName();
+        return "NOT(" + biome.getName() + ")";
     }
 
 }

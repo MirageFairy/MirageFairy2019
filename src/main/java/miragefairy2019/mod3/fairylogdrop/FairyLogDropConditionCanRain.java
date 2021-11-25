@@ -1,6 +1,6 @@
-package miragefairy2019.mod.common.fairylogdrop;
+package miragefairy2019.mod3.fairylogdrop;
 
-import miragefairy2019.mod.api.fairylogdrop.IFairyLogDropCondition;
+import miragefairy2019.mod3.fairylogdrop.api.IFairyLogDropCondition;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

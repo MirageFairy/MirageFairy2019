@@ -1,10 +1,10 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.Module
-import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionCanRain
-import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionHasBiomeType
-import miragefairy2019.mod.common.fairylogdrop.FairyLogDropConditionOverworld
-import miragefairy2019.mod.common.fairylogdrop.FairyLogDropRecipe
+import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionCanRain
+import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionHasBiomeType
+import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionOverworld
+import miragefairy2019.mod3.fairylogdrop.FairyLogDropRecipe
 import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower
 import net.minecraftforge.common.BiomeDictionary
 
