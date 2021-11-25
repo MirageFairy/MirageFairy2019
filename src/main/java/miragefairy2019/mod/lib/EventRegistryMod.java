@@ -14,19 +14,19 @@ public class EventRegistryMod {
 
     public final IEventProvider<Runnable> initCreativeTab = EventProviders.runnable();
 
-    public final IEventProvider<Runnable> initKeyBinding = EventProviders.runnable();
-
     //
 
     public final IEventProvider<Consumer<FMLPreInitializationEvent>> preInit = EventProviders.consumer();
 
-    public final IEventProvider<Consumer<InitializationContext>> registerItem = EventProviders.consumer();
-
     public final IEventProvider<Consumer<InitializationContext>> registerBlock = EventProviders.consumer();
+
+    public final IEventProvider<Consumer<InitializationContext>> registerItem = EventProviders.consumer();
 
     public final IEventProvider<Consumer<InitializationContext>> createItemStack = EventProviders.consumer();
 
     public final IEventProvider<Runnable> hookDecorator = EventProviders.runnable();
+
+    public final IEventProvider<Runnable> initKeyBinding = EventProviders.runnable();
 
     //
 

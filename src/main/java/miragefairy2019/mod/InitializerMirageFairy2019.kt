@@ -86,7 +86,9 @@ class InitializerMirageFairy2019 {
         erMod.registerItem.trigger().accept(initializationContext)
         modInitializer.onCreateItemStack()
         erMod.createItemStack.trigger().accept(initializationContext)
+        modInitializer.onHookDecorator()
         erMod.hookDecorator.trigger().run()
+        modInitializer.onInitKeyBinding()
         erMod.initKeyBinding.trigger().run()
     }
 
@@ -97,7 +99,9 @@ class InitializerMirageFairy2019 {
         erMod.addRecipe.trigger().run()
         if (event.side.isClient) modInitializer.onRegisterItemColorHandler()
         if (event.side.isClient) erMod.registerItemColorHandler.trigger().run()
+        modInitializer.onRegisterTileEntity()
         erMod.registerTileEntity.trigger().run()
+        modInitializer.onInitNetworkChannel()
         erMod.initNetworkChannel.trigger().run()
         modInitializer.onRegisterNetworkMessage()
         erMod.registerNetworkMessage.trigger().run()
