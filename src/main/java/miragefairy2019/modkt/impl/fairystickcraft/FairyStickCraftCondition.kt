@@ -50,7 +50,7 @@ class FairyStickCraftConditionConsumeItem @JvmOverloads constructor( // TODO rem
             environment.world.spawnParticle(EnumParticleTypes.SPELL_MOB, entity.posX, entity.posY, entity.posZ, 1.0, 0.0, 0.0)
         }
         executor.hookOnUpdate {
-            (0..1).forEach {
+            repeat(2) {
                 environment.world.spawnParticle(EnumParticleTypes.SPELL_MOB, entity.posX, entity.posY, entity.posZ, 0.0, 1.0, 0.0)
             }
         }
@@ -81,7 +81,7 @@ class FairyStickCraftConditionSpawnBlock(private val sBlockStateInput: () -> IBl
             world.setBlockState(blockPos, blockState, 3)
             world.neighborChanged(blockPos, blockState.block, blockPos.up())
             world.playSound(null, blockPos, SoundEvents.BLOCK_NOTE_BELL, SoundCategory.PLAYERS, 0.2f, 1.0f)
-            (0..19).forEach {
+            repeat(20) {
                 world.spawnParticle(
                     EnumParticleTypes.VILLAGER_HAPPY,
                     blockPos.x + world.rand.nextDouble(),
@@ -92,7 +92,7 @@ class FairyStickCraftConditionSpawnBlock(private val sBlockStateInput: () -> IBl
             }
         }
         executor.hookOnUpdate {
-            (0..2).forEach {
+            repeat(3) {
                 world.spawnParticle(
                     EnumParticleTypes.END_ROD,
                     blockPos.x + world.rand.nextDouble(),
@@ -122,7 +122,7 @@ class FairyStickCraftConditionConsumeBlock(private val sBlockStateInput: () -> I
             world.setBlockState(blockPos, blockState, 3)
             world.neighborChanged(blockPos, blockState.block, blockPos.up())
             world.playSound(null, blockPos, SoundEvents.BLOCK_NOTE_BELL, SoundCategory.PLAYERS, 0.2f, 1.0f)
-            (0..19).forEach {
+            repeat(20) {
                 world.spawnParticle(
                     EnumParticleTypes.VILLAGER_HAPPY,
                     blockPos.x + world.rand.nextDouble(),
@@ -133,7 +133,7 @@ class FairyStickCraftConditionConsumeBlock(private val sBlockStateInput: () -> I
             }
         }
         executor.hookOnUpdate {
-            (0..2).forEach {
+            repeat(3) {
                 world.spawnParticle(
                     EnumParticleTypes.END_ROD,
                     blockPos.x + world.rand.nextDouble(),
@@ -162,7 +162,7 @@ class FairyStickCraftConditionReplaceBlock(private val sBlockStateInput: () -> I
             world.setBlockState(blockPos, blockState, 3)
             world.neighborChanged(blockPos, blockState.block, blockPos.up())
             world.playSound(null, blockPos, SoundEvents.BLOCK_NOTE_BELL, SoundCategory.PLAYERS, 0.2f, 1.0f)
-            (0..19).forEach {
+            repeat(20) {
                 world.spawnParticle(
                     EnumParticleTypes.VILLAGER_HAPPY,
                     blockPos.x + world.rand.nextDouble(),
@@ -173,7 +173,7 @@ class FairyStickCraftConditionReplaceBlock(private val sBlockStateInput: () -> I
             }
         }
         executor.hookOnUpdate {
-            (0..2).forEach {
+            repeat(3) {
                 world.spawnParticle(
                     EnumParticleTypes.END_ROD,
                     blockPos.x + world.rand.nextDouble(),
