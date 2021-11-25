@@ -1,7 +1,11 @@
 package miragefairy2019.mod.modules.mirageflower
 
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
+import miragefairy2019.mod.lib.UtilsMinecraft
+import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
+import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
 import miragefairy2019.mod3.erg.api.ErgTypes
@@ -15,7 +19,10 @@ import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyInteger
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.item.ItemStack
+import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
@@ -173,6 +180,57 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidで�
     override fun grow(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = grow(worldIn, pos, state, rand, getGrowRate(worldIn, pos))
     override fun canGrow(worldIn: World, pos: BlockPos, state: IBlockState, isClient: Boolean) = !isMaxAge(state)
     override fun canUseBonemeal(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = worldIn.rand.nextFloat() < 0.05
+
+
+    // ドロップ
+
+    // クリエイティブピックでの取得アイテム。
+    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(ApiMirageFlower.itemMirageFlowerSeeds)
+
+    /*
+     * Ageが最大のとき、種を1個ドロップする。
+     * 幸運Lv1につき種のドロップ数が1%増える。
+     * 地面破壊ドロップでも適用される。
+     */
+    override fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) = getDrops(drops, world, pos, state, fortune, true)
+
+    private fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int, isBreaking: Boolean) {
+        val random = if (world is World) world.rand else Random()
+
+        // 種1個は確定でドロップ
+        if (isBreaking) {
+            drops.add(ItemStack(ApiMirageFlower.itemMirageFlowerSeeds))
+        }
+
+        // サイズが2以上なら確定で茎をドロップ
+        if (isBreaking) {
+            if (getAge(state) >= 2) {
+                val count = UtilsMath.randomInt(random, 1 + fortune * 0.2)
+                repeat(count) { drops.add(ModuleMaterialsFairy.itemStackLeafMirageFlower.copy()) }
+            }
+        }
+
+        // 追加の種
+        if (getAge(state) >= 3) {
+            val count = UtilsMath.randomInt(random, fortune * 0.01)
+            repeat(count) { drops.add(ItemStack(ApiMirageFlower.itemMirageFlowerSeeds)) }
+        }
+
+        // クリスタル
+        if (getAge(state) >= 3) {
+            val count = UtilsMath.randomInt(random, 1 + fortune * 0.5)
+            repeat(count) { drops.add(ModuleFairyCrystal.variantFairyCrystal.createItemStack()) }
+        }
+
+        // ミラジウム
+        if (getAge(state) >= 3) {
+            val count = UtilsMath.randomInt(random, 1 + fortune * 0.5)
+            repeat(count) { drops.add(UtilsMinecraft.getItemStack("dustTinyMiragium").copy()) }
+        }
+    }
+
+    // シルクタッチ無効。
+    override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer) = false
 
 
     companion object {
