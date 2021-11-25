@@ -15,7 +15,7 @@ public class SourceMana implements ISource {
 
     @Override
     public String getIdentifier() {
-        return "mana." + manaType.getName();
+        return "mana." + manaType;
     }
 
     @Override

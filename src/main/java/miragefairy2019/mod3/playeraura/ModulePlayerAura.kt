@@ -14,10 +14,12 @@ import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.api.ApiMain.logger
 import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.mana.ManaSet
-import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.api.EnumManaType
+import miragefairy2019.mod3.mana.api.IManaSet
+import miragefairy2019.mod3.mana.color
 import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.mana.getMana
+import miragefairy2019.mod3.mana.textColor
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayerMP
@@ -128,7 +130,7 @@ object ModulePlayerAura {
                                         difference < -0.1 -> text(" -").color(TextFormatting.RED)
                                         else -> Unit
                                     }
-                                }.color(manaType.getTextColor())
+                                }.color(manaType.textColor)
                             }
                             event.toolTip.add(f1(EnumManaType.shine).formattedText)
                             event.toolTip.add(f1(EnumManaType.fire).formattedText)

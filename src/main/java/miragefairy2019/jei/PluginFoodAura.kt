@@ -14,6 +14,7 @@ import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.getSubItems
 import miragefairy2019.mod3.mana.api.EnumManaType
+import miragefairy2019.mod3.mana.color
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import net.minecraft.client.Minecraft
