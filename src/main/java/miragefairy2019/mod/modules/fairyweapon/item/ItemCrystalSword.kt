@@ -6,9 +6,9 @@ import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
 import miragefairy2019.mod3.erg.api.ErgTypes
-import miragefairy2019.mod3.fairy.api.ApiFairyRelation
-import miragefairy2019.mod3.fairy.drop
-import miragefairy2019.mod3.fairy.getDropList
+import miragefairy2019.mod3.fairy.relation.api.ApiFairyRelation
+import miragefairy2019.mod3.fairy.relation.drop
+import miragefairy2019.mod3.fairy.relation.getDropList
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.mana.api.ManaTypes

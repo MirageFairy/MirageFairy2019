@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.formula;
 
 import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
-import miragefairy2019.modkt.api.fairy.IFairyType;
+import miragefairy2019.mod3.fairy.api.IFairyType;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;

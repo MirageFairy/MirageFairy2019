@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.mirageflower
 
 import miragefairy2019.mod.api.ApiMirageFlower
-import miragefairy2019.modkt.modules.fairy.FairyTypes
+import miragefairy2019.mod3.fairy.FairyTypes
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
 import net.minecraft.block.BlockOldLog

@@ -4,7 +4,7 @@ import miragefairy2019.mod.api.fairycrystal.DropCategory;
 import miragefairy2019.mod.api.fairycrystal.IDrop;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.lib.WeightedRandom;
-import miragefairy2019.modkt.modules.fairy.FairyTypes;
+import miragefairy2019.mod3.fairy.FairyTypes;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;

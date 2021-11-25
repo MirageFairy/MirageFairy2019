@@ -5,7 +5,7 @@ import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod3.erg.api.ErgTypes;
-import miragefairy2019.modkt.api.fairy.IFairyType;
+import miragefairy2019.mod3.fairy.api.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;

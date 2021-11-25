@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.api.fairy;
+package miragefairy2019.mod3.fairy.api;
 
 import miragefairy2019.mod3.erg.api.IErgSet;
 import miragefairy2019.mod3.mana.api.IManaSet;

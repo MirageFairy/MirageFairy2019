@@ -15,7 +15,11 @@ import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
 import miragefairy2019.mod3.artifacts.ModuleArtifacts
 import miragefairy2019.mod3.erg.moduleErg
-import miragefairy2019.mod3.fairy.moduleFairy
+import miragefairy2019.mod3.fairy.ModuleFairy
+import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
+import miragefairy2019.mod3.fairy.loaderFairyLogDrop
+import miragefairy2019.mod3.fairy.loaderFairyRelation
+import miragefairy2019.mod3.fairy.relation.moduleFairy
 import miragefairy2019.mod3.main.moduleMain
 import miragefairy2019.mod3.mana.moduleMana
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
@@ -23,10 +27,6 @@ import miragefairy2019.mod3.playeraura.ModulePlayerAura
 import miragefairy2019.mod3.playeraura.modulePlayerAura
 import miragefairy2019.mod3.skill.moduleSkill
 import miragefairy2019.mod3.sphere.moduleSphere
-import miragefairy2019.modkt.modules.fairy.ModuleFairy
-import miragefairy2019.modkt.modules.fairy.loaderFairyCrystalDrop
-import miragefairy2019.modkt.modules.fairy.loaderFairyLogDrop
-import miragefairy2019.modkt.modules.fairy.loaderFairyRelation
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent

@@ -11,9 +11,9 @@ import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
 import miragefairy2019.mod3.erg.api.ErgTypes
-import miragefairy2019.modkt.api.fairy.IFairyType
-import miragefairy2019.modkt.impl.fairy.erg
-import miragefairy2019.modkt.impl.fairy.shineEfficiency
+import miragefairy2019.mod3.fairy.api.IFairyType
+import miragefairy2019.mod3.fairy.erg
+import miragefairy2019.mod3.fairy.shineEfficiency
 import mirrg.boron.util.UtilsMath
 import net.minecraft.block.BlockBush
 import net.minecraft.block.BlockFarmland

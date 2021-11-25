@@ -9,6 +9,7 @@ import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.erg.api.IErgType
 import miragefairy2019.mod3.erg.displayName
+import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction
@@ -18,7 +19,6 @@ import miragefairy2019.mod3.mana.api.ManaTypes
 import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.displayName
-import miragefairy2019.modkt.api.fairy.IFairyType
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.util.text.TextFormatting.DARK_PURPLE

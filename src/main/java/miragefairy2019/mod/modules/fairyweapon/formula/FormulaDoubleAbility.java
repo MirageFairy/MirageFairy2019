@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.formula;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.ISource;
 import miragefairy2019.mod3.erg.api.IErgType;
-import miragefairy2019.modkt.api.fairy.IFairyType;
+import miragefairy2019.mod3.fairy.api.IFairyType;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
 public class FormulaDoubleAbility implements IFormulaDouble {

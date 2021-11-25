@@ -1,6 +1,6 @@
 package miragefairy2019.mod.api.fairycrystal;
 
-import miragefairy2019.modkt.modules.fairy.RankedFairyTypeBundle;
+import miragefairy2019.mod3.fairy.RankedFairyTypeBundle;
 import net.minecraft.item.ItemStack;
 
 public final class DropFixed implements IDrop {

@@ -1,8 +1,8 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import com.google.common.collect.Multimap;
+import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.mana.ManaSetKt;
-import miragefairy2019.modkt.api.fairy.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;

@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod3.erg.ErgKt;
 import miragefairy2019.mod3.erg.api.ErgTypes;
-import miragefairy2019.modkt.api.fairy.IFairyType;
+import miragefairy2019.mod3.fairy.api.IFairyType;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;

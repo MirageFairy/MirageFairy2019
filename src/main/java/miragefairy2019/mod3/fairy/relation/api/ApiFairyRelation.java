@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.fairy.api;
+package miragefairy2019.mod3.fairy.relation.api;
 
 public class ApiFairyRelation {
 

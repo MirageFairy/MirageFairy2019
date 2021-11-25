@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.api.main.ApiMain;
-import miragefairy2019.modkt.api.fairy.IFairyType;
+import miragefairy2019.mod3.fairy.api.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

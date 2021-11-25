@@ -6,7 +6,7 @@ import miragefairy2019.mod.modules.fairyweapon.magic.EnumTargetExecutability;
 import miragefairy2019.mod.modules.fairyweapon.magic.MagicExecutor;
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace;
 import miragefairy2019.mod.modules.fairyweapon.magic.UtilsMagic;
-import miragefairy2019.modkt.api.fairy.IFairyType;
+import miragefairy2019.mod3.fairy.api.IFairyType;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;

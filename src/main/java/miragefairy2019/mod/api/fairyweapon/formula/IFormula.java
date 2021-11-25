@@ -1,6 +1,6 @@
 package miragefairy2019.mod.api.fairyweapon.formula;
 
-import miragefairy2019.modkt.api.fairy.IFairyType;
+import miragefairy2019.mod3.fairy.api.IFairyType;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
 public interface IFormula<T> {
