@@ -35,7 +35,6 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.OreIngredient
-import java.util.Optional
 import java.util.function.Supplier
 
 class ItemSpheres : ItemMulti<VariantSphere>() {
@@ -205,13 +204,4 @@ val moduleSphere: Module = {
 
     }
 
-}
-
-
-// TODO delete
-@Deprecated(message = "削除予定のAPI")
-object EnumSphere {
-    @JvmStatic
-    @Deprecated(message = "削除予定のAPI", replaceWith = ReplaceWith("Optional.of(getSphereType(ergType))"))
-    fun of(ergType: EnumErgType) = Optional.of(getSphereType(ergType))
 }

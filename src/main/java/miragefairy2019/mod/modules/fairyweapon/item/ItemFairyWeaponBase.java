@@ -18,7 +18,6 @@ import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
-import miragefairy2019.mod3.sphere.EnumSphere;
 import miragefairy2019.mod3.sphere.SphereKt;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -576,7 +575,7 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
         return getComposite().getComponents()
                 .filter(e -> e.getComponent() instanceof IComponentAbilityType)
                 .map(e -> Tuple.of((IComponentAbilityType) e.getComponent(), e.getNanoAmount()))
-                .mapIfPresent(e -> EnumSphere.of(e.x.getAbilityType()).map(s -> Tuple.of(s, e.y)))
+                .map(e -> Tuple.of(SphereKt.getSphereType(e.x.getAbilityType()), e.y))
                 .flatMap(e -> {
                     long amount = e.y;
                     int count = (int) (amount / 1_000_000_000L) + (amount % 1_000_000_000L != 0 ? 1 : 0);
