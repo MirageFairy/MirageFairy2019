@@ -11,7 +11,7 @@ import miragefairy2019.mod3.fairy.getDropList
 import miragefairy2019.mod3.fairy.relation.api.ApiFairyRelation
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
-import miragefairy2019.mod3.mana.api.ManaTypes
+import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.skill.EnumMastery
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes
@@ -21,7 +21,7 @@ import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemStack
 
 class ItemCrystalSword : ItemFairyWeaponBase3(
-    ManaTypes.gaia, EnumMastery.closeCombat,
+    EnumManaType.gaia, EnumMastery.closeCombat,
     0.0, 0.0, 0.0, 0.0,
     ErgTypes.slash, ErgTypes.attack, ErgTypes.crystal, ErgTypes.submission
 ) {

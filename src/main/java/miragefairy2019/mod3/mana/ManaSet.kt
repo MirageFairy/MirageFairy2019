@@ -3,7 +3,6 @@ package miragefairy2019.mod3.mana
 import com.google.gson.annotations.Expose
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.api.EnumManaType
-import miragefairy2019.mod3.mana.api.ManaTypes
 import kotlin.math.max
 
 data class ManaSet(
@@ -83,12 +82,12 @@ data class MutableManaSet(
 
 
 fun IManaSet.getMana(manaType: EnumManaType) = when (manaType) {
-    ManaTypes.shine -> shine
-    ManaTypes.fire -> fire
-    ManaTypes.wind -> wind
-    ManaTypes.gaia -> gaia
-    ManaTypes.aqua -> aqua
-    ManaTypes.dark -> dark
+    EnumManaType.shine -> shine
+    EnumManaType.fire -> fire
+    EnumManaType.wind -> wind
+    EnumManaType.gaia -> gaia
+    EnumManaType.aqua -> aqua
+    EnumManaType.dark -> dark
     else -> throw IllegalArgumentException("$manaType")
 }
 

@@ -5,7 +5,7 @@ import miragefairy2019.libkt.stringFormat
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.mod3.erg.api.ErgTypes
-import miragefairy2019.mod3.mana.api.ManaTypes
+import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.sum
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.erg
@@ -56,13 +56,13 @@ class ItemDebugFairyList : Item() {
                             "CENTER:${v.rare}",
                             "RIGHT:${f.cost.f0}"
                         ),
-                        ManaTypes.values.map {
+                        EnumManaType.values().map {
                             "RIGHT:${f.mana(it).f3}"
                         },
                         listOf(
                             "RIGHT:${f.manaSet.sum.f3}"
                         ),
-                        ManaTypes.values.map {
+                        EnumManaType.values().map {
                             val a = f.mana(it) / f.cost * 50
                             "${if (a >= 10) "BGCOLOR(#FDB):" else ""}RIGHT:${a.f3}"
                         },

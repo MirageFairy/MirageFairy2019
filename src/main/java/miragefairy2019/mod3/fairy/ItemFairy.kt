@@ -12,7 +12,6 @@ import miragefairy2019.mod.lib.multi.ItemVariant
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.mana.api.EnumManaType
-import miragefairy2019.mod3.mana.api.ManaTypes
 import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.modkt.impl.fairy.ColorSet
@@ -91,41 +90,41 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
             fun f(manaType: EnumManaType) = buildText { format("%s:%.3f", manaType.displayName.unformattedText, variant.type.manaSet.getMana(manaType)).color(manaType.textColor) }
             tooltip {
                 text("        ")
-                text(f(ManaTypes.shine))
+                text(f(EnumManaType.shine))
             }
             tooltip {
-                text(f(ManaTypes.fire))
+                text(f(EnumManaType.fire))
                 text("    ")
-                text(f(ManaTypes.wind))
+                text(f(EnumManaType.wind))
             }
             tooltip {
-                text(f(ManaTypes.gaia))
+                text(f(EnumManaType.gaia))
                 text("    ")
-                text(f(ManaTypes.aqua))
+                text(f(EnumManaType.aqua))
             }
             tooltip {
                 text("        ")
-                text(f(ManaTypes.dark))
+                text(f(EnumManaType.dark))
             }
         } else {
             fun f(manaType: EnumManaType) = buildText { format("%4d", formatInt(variant.type.manaSet.getMana(manaType))).color(manaType.textColor) }
             tooltip {
                 text("    ")
-                text(f(ManaTypes.shine))
+                text(f(EnumManaType.shine))
             }
             tooltip {
-                text(f(ManaTypes.fire))
+                text(f(EnumManaType.fire))
                 text("    ")
-                text(f(ManaTypes.wind))
+                text(f(EnumManaType.wind))
             }
             tooltip {
-                text(f(ManaTypes.gaia))
+                text(f(EnumManaType.gaia))
                 text("    ")
-                text(f(ManaTypes.aqua))
+                text(f(EnumManaType.aqua))
             }
             tooltip {
                 text("    ")
-                text(f(ManaTypes.dark))
+                text(f(EnumManaType.dark))
             }
         }
 

@@ -10,7 +10,7 @@ import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.positiveBoolean
-import miragefairy2019.mod3.mana.api.ManaTypes
+import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.skill.EnumMastery
 import mirrg.boron.util.UtilsMath
 import net.minecraft.entity.item.EntityItem
@@ -30,7 +30,7 @@ import kotlin.math.pow
 
 class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weaponEndurance: Double, weaponProduction: Double, maxExtraItemDropRate: Double) :
     ItemFairyWeaponBase3(
-        ManaTypes.dark, EnumMastery.flowerPicking,
+        EnumManaType.dark, EnumMastery.flowerPicking,
         weaponStrength, weaponExtent, weaponEndurance, weaponProduction,
         ErgTypes.sound, ErgTypes.space, ErgTypes.slash, ErgTypes.harvest
     ) {

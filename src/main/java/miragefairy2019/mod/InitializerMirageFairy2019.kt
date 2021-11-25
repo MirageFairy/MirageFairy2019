@@ -20,7 +20,6 @@ import miragefairy2019.mod3.fairy.loaderFairyRelation
 import miragefairy2019.mod3.fairy.moduleFairy
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.moduleMain
-import miragefairy2019.mod3.mana.moduleMana
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
 import miragefairy2019.mod3.playeraura.modulePlayerAura
@@ -40,7 +39,6 @@ class InitializerMirageFairy2019 {
 
         modInitializer.run {
             moduleMain()
-            moduleMana()
             moduleErg()
             modulePlayerAura()
             moduleSkill()

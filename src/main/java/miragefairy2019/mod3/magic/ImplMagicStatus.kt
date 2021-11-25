@@ -14,8 +14,8 @@ import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction
 import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
+import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.api.IManaSet
-import miragefairy2019.mod3.mana.api.ManaTypes
 import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.displayName
@@ -71,12 +71,12 @@ val <T> IMagicStatusFunction<T>.factors
                 override fun getColor() = throw UnsupportedOperationException()
                 override fun getCost() = add(buildText { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) }) // TODO 色変更
                 override fun getManaSet() = object : IManaSet {
-                    override fun getShine() = add(ManaTypes.shine.displayName)
-                    override fun getFire() = add(ManaTypes.fire.displayName)
-                    override fun getWind() = add(ManaTypes.wind.displayName)
-                    override fun getGaia() = add(ManaTypes.gaia.displayName)
-                    override fun getAqua() = add(ManaTypes.aqua.displayName)
-                    override fun getDark() = add(ManaTypes.dark.displayName) // TODO 色変更
+                    override fun getShine() = add(EnumManaType.shine.displayName)
+                    override fun getFire() = add(EnumManaType.fire.displayName)
+                    override fun getWind() = add(EnumManaType.wind.displayName)
+                    override fun getGaia() = add(EnumManaType.gaia.displayName)
+                    override fun getAqua() = add(EnumManaType.aqua.displayName)
+                    override fun getDark() = add(EnumManaType.dark.displayName) // TODO 色変更
                 }
 
                 override fun getErgSet() = object : IErgSet {

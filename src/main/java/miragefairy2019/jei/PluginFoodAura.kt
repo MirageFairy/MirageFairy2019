@@ -14,7 +14,6 @@ import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.getSubItems
 import miragefairy2019.mod3.mana.api.EnumManaType
-import miragefairy2019.mod3.mana.api.ManaTypes
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import net.minecraft.client.Minecraft
@@ -76,12 +75,12 @@ class PluginFoodAura : IModPlugin {
                                     Gui.drawRect(x + 10 - stringWidth / 2 - 1, 10, x + 10 + stringWidth / 2 + 1, 18, 0xFFC6C6C6.toInt())
                                     minecraft.fontRenderer.drawStringCentered(string, x + 10, 10, manaType.color)
                                 }
-                                d(ManaTypes.shine, 30)
-                                d(ManaTypes.fire, 50)
-                                d(ManaTypes.wind, 70)
-                                d(ManaTypes.gaia, 90)
-                                d(ManaTypes.aqua, 110)
-                                d(ManaTypes.dark, 130)
+                                d(EnumManaType.shine, 30)
+                                d(EnumManaType.fire, 50)
+                                d(EnumManaType.wind, 70)
+                                d(EnumManaType.gaia, 90)
+                                d(EnumManaType.aqua, 110)
+                                d(EnumManaType.dark, 130)
                             }
                         })
 

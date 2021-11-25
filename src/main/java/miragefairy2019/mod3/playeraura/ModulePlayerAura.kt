@@ -16,7 +16,6 @@ import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.mana.ManaSet
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.api.EnumManaType
-import miragefairy2019.mod3.mana.api.ManaTypes
 import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
@@ -131,12 +130,12 @@ object ModulePlayerAura {
                                     }
                                 }.color(manaType.getTextColor())
                             }
-                            event.toolTip.add(f1(ManaTypes.shine).formattedText)
-                            event.toolTip.add(f1(ManaTypes.fire).formattedText)
-                            event.toolTip.add(f1(ManaTypes.wind).formattedText)
-                            event.toolTip.add(f1(ManaTypes.gaia).formattedText)
-                            event.toolTip.add(f1(ManaTypes.aqua).formattedText)
-                            event.toolTip.add(f1(ManaTypes.dark).formattedText)
+                            event.toolTip.add(f1(EnumManaType.shine).formattedText)
+                            event.toolTip.add(f1(EnumManaType.fire).formattedText)
+                            event.toolTip.add(f1(EnumManaType.wind).formattedText)
+                            event.toolTip.add(f1(EnumManaType.gaia).formattedText)
+                            event.toolTip.add(f1(EnumManaType.aqua).formattedText)
+                            event.toolTip.add(f1(EnumManaType.dark).formattedText)
 
                         }
                     }
@@ -232,12 +231,12 @@ val modulePlayerAura: Module = {
                     fun drawPieces(center: Complex, radius: Double, rgb: IRgb) = repeat(6) { drawPiece(center, radius, it.toDouble(), rgb, 1.0) }
 
                     fun drawPieces(center: Complex, radius: Double, health: Double, foodAura: IManaSet) {
-                        drawPiece(center, radius * health, 0.0, ManaTypes.wind.color.toRgb(), 0.1 * foodAura.wind)
-                        drawPiece(center, radius * health, 1.0, ManaTypes.shine.color.toRgb(), 0.1 * foodAura.shine)
-                        drawPiece(center, radius * health, 2.0, ManaTypes.fire.color.toRgb(), 0.1 * foodAura.fire)
-                        drawPiece(center, radius * health, 3.0, ManaTypes.gaia.color.toRgb(), 0.1 * foodAura.gaia)
-                        drawPiece(center, radius * health, 4.0, ManaTypes.dark.color.toRgb(), 0.1 * foodAura.dark)
-                        drawPiece(center, radius * health, 5.0, ManaTypes.aqua.color.toRgb(), 0.1 * foodAura.aqua)
+                        drawPiece(center, radius * health, 0.0, EnumManaType.wind.color.toRgb(), 0.1 * foodAura.wind)
+                        drawPiece(center, radius * health, 1.0, EnumManaType.shine.color.toRgb(), 0.1 * foodAura.shine)
+                        drawPiece(center, radius * health, 2.0, EnumManaType.fire.color.toRgb(), 0.1 * foodAura.fire)
+                        drawPiece(center, radius * health, 3.0, EnumManaType.gaia.color.toRgb(), 0.1 * foodAura.gaia)
+                        drawPiece(center, radius * health, 4.0, EnumManaType.dark.color.toRgb(), 0.1 * foodAura.dark)
+                        drawPiece(center, radius * health, 5.0, EnumManaType.aqua.color.toRgb(), 0.1 * foodAura.aqua)
                     }
 
                     fun drawAuraGauge(center: Complex, radius: Double) {

@@ -20,7 +20,6 @@ import miragefairy2019.mod.modules.fairyweapon.formula.FormulaSelectEntry;
 import miragefairy2019.mod.modules.fairyweapon.formula.MagicStatus;
 import miragefairy2019.mod3.erg.api.IErgType;
 import miragefairy2019.mod3.mana.api.EnumManaType;
-import miragefairy2019.mod3.mana.api.ManaTypes;
 import mirrg.boron.util.struct.ImmutableArray;
 import mirrg.boron.util.struct.Struct1;
 import net.minecraft.util.text.ITextComponent;
@@ -44,27 +43,27 @@ public class ApiFormula {
     }
 
     public static IFormulaDouble shine() {
-        return mana(ManaTypes.shine);
+        return mana(EnumManaType.shine);
     }
 
     public static IFormulaDouble fire() {
-        return mana(ManaTypes.fire);
+        return mana(EnumManaType.fire);
     }
 
     public static IFormulaDouble wind() {
-        return mana(ManaTypes.wind);
+        return mana(EnumManaType.wind);
     }
 
     public static IFormulaDouble gaia() {
-        return mana(ManaTypes.gaia);
+        return mana(EnumManaType.gaia);
     }
 
     public static IFormulaDouble aqua() {
-        return mana(ManaTypes.aqua);
+        return mana(EnumManaType.aqua);
     }
 
     public static IFormulaDouble dark() {
-        return mana(ManaTypes.dark);
+        return mana(EnumManaType.dark);
     }
 
     public static IFormulaDouble abilityRaw(IErgType abilityType) {
