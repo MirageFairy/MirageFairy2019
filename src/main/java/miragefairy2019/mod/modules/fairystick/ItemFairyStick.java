@@ -1,10 +1,10 @@
 package miragefairy2019.mod.modules.fairystick;
 
 import kotlin.Unit;
-import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft;
 import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftExecutor;
+import miragefairy2019.mod3.main.api.ApiMain;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

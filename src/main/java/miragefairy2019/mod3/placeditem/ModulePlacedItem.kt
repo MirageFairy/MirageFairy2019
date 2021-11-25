@@ -6,8 +6,8 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.ApiPlacedItem
-import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.EventRegistryMod
+import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.client.settings.KeyBinding
 import net.minecraft.entity.player.EntityPlayer

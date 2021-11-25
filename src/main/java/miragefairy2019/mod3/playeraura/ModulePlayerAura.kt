@@ -9,8 +9,8 @@ import miragefairy2019.libkt.color
 import miragefairy2019.libkt.drawTriangle
 import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
-import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.EventRegistryMod
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.ManaSet
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.api.IManaType

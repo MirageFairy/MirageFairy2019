@@ -2,7 +2,6 @@ package miragefairy2019.mod
 
 import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.mod.api.fertilizer.ApiFertilizer
-import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.api.materialsfairy.ApiMaterialsFairy
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod.lib.InitializationContext
@@ -19,6 +18,7 @@ import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
 import miragefairy2019.mod3.fairy.loaderFairyLogDrop
 import miragefairy2019.mod3.fairy.loaderFairyRelation
 import miragefairy2019.mod3.fairy.moduleFairy
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.moduleMain
 import miragefairy2019.mod3.mana.moduleMana
 import miragefairy2019.mod3.placeditem.ModulePlacedItem

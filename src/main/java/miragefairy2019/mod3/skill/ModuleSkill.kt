@@ -6,8 +6,7 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.api.main.ApiMain
-import miragefairy2019.mod3.main.registerGuiHandler
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
@@ -72,7 +71,7 @@ val moduleSkill: Module = {
 
     // スキルGUI
     onInit {
-        registerGuiHandler(guiIdSkill, object : IGuiHandler {
+        ApiMain.registerGuiHandler(guiIdSkill, object : IGuiHandler {
             override fun getServerGuiElement(id: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int) = ContainerSkill()
             override fun getClientGuiElement(id: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int) = GuiSkill()
         })

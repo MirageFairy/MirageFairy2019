@@ -1,7 +1,7 @@
 package miragefairy2019.libkt
 
-import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.EventRegistryMod
+import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.item.Item

@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
-import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.modules.fairyweapon.magic.MagicExecutor;
+import miragefairy2019.mod3.main.api.ApiMain;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

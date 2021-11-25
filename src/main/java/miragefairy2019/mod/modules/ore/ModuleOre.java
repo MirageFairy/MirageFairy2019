@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.ore;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.lib.Configurator;
 import miragefairy2019.mod.lib.EventRegistryMod;
@@ -17,6 +16,7 @@ import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1;
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2;
 import miragefairy2019.mod.modules.ore.ore.IBlockVariantOre;
 import miragefairy2019.mod.modules.ore.ore.ItemBlockOre;
+import miragefairy2019.mod3.main.api.ApiMain;
 import miragefairy2019.mod3.oreseeddrop.OreSeedDropRegistry;
 import miragefairy2019.mod3.oreseeddrop.api.ApiOreSeedDrop;
 import net.minecraft.block.state.IBlockState;

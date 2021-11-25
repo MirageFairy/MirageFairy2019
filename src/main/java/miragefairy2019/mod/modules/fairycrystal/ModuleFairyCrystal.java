@@ -1,8 +1,8 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
+import miragefairy2019.mod3.main.api.ApiMain;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;

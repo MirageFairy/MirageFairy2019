@@ -7,7 +7,6 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.api.composite.ApiComposite
 import miragefairy2019.mod.api.fairy.ApiFairy
-import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod3.erg.api.ErgTypes.attack
 import miragefairy2019.mod3.erg.api.ErgTypes.craft
@@ -21,6 +20,7 @@ import miragefairy2019.mod3.erg.api.ErgTypes.submission
 import miragefairy2019.mod3.erg.api.ErgTypes.warp
 import miragefairy2019.mod3.erg.api.ErgTypes.water
 import miragefairy2019.mod3.erg.api.IErgType
+import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.item.ItemStack
 import net.minecraftforge.client.event.ModelBakeEvent

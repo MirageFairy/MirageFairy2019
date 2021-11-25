@@ -6,7 +6,6 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.api.ore.ApiOre
 import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
@@ -21,6 +20,7 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
+import miragefairy2019.mod3.main.api.ApiMain
 import mirrg.boron.util.UtilsString
 import net.minecraft.block.Block
 import net.minecraft.client.Minecraft

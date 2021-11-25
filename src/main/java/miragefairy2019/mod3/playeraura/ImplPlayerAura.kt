@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IItemFairy
-import miragefairy2019.mod.api.main.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.ManaSet
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.copy

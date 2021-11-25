@@ -19,7 +19,7 @@ import miragefairy2019.libkt.toArgb
 import miragefairy2019.libkt.toInstant
 import miragefairy2019.libkt.toLocalDateTime
 import miragefairy2019.libkt.tooltip
-import miragefairy2019.mod.api.main.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.client.gui.GuiYesNo
 import net.minecraft.client.gui.inventory.GuiContainer

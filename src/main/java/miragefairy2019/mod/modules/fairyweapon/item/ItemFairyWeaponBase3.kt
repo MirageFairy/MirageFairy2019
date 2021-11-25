@@ -8,7 +8,6 @@ import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.api.fairy.ApiFairy
-import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.NEVER
@@ -27,6 +26,7 @@ import miragefairy2019.mod3.magic.getDisplayValue
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.ranged
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.api.IManaType
 import miragefairy2019.mod3.mana.api.ManaTypes.aqua

@@ -2,7 +2,6 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.composite.IComponentInstance;
-import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.Configurator;
 import miragefairy2019.mod.lib.EventRegistryMod;
@@ -12,6 +11,7 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem;
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe;
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft;
+import miragefairy2019.mod3.main.api.ApiMain;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;

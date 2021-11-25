@@ -1,8 +1,8 @@
 package miragefairy2019.mod.modules.oreseed;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.main.ApiMain;
 import miragefairy2019.mod.lib.EventRegistryMod;
+import miragefairy2019.mod3.main.api.ApiMain;
 import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType;
 import net.minecraft.block.BlockStone;
 import net.minecraft.init.Blocks;

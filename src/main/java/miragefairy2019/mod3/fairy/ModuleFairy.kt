@@ -8,7 +8,6 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IItemFairy
-import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.common.fairy.relation.FairyRelationRegistry
 import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
@@ -16,6 +15,7 @@ import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.ItemDebugFairyList
 import miragefairy2019.mod3.fairy.ItemFairy
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.playeraura.api.IFoodAuraContainer
 import miragefairy2019.modkt.impl.fairy.erg
