@@ -10,13 +10,12 @@ import miragefairy2019.mod.modules.fairyweapon.item.moduleFairyWeapon
 import miragefairy2019.mod.modules.mirageflower.ModuleMirageFlower
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
-import miragefairy2019.mod3.artifacts.ModuleArtifacts
+import miragefairy2019.mod3.artifacts.moduleArtifacts
 import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
 import miragefairy2019.mod3.fairy.loaderFairyLogDrop
 import miragefairy2019.mod3.fairy.loaderFairyRelation
 import miragefairy2019.mod3.fairy.moduleFairy
 import miragefairy2019.mod3.fairystick.moduleFairyStick
-import miragefairy2019.mod3.fertilizer.moduleFertilizer
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.moduleMain
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
@@ -48,7 +47,7 @@ class InitializerMirageFairy2019 {
             moduleFairy()
             moduleSphere()
             moduleFairyStick()
-            moduleFertilizer()
+            moduleArtifacts()
         }
 
         modInitializer.onInstantiation()
@@ -64,7 +63,6 @@ class InitializerMirageFairy2019 {
         ModuleOre.init(erMod)
         ModulePlacedItem.init(erMod)
         ModulePlayerAura.init(erMod)
-        ModuleArtifacts.init(erMod)
 
         erMod.initRegistry.trigger().run()
         modInitializer.onInitCreativeTab()
@@ -96,6 +94,7 @@ class InitializerMirageFairy2019 {
         if (event.side.isClient) erMod.registerItemColorHandler.trigger().run()
         modInitializer.onRegisterTileEntity()
         erMod.registerTileEntity.trigger().run()
+        modInitializer.onRegisterTileEntityRenderer()
         modInitializer.onInitNetworkChannel()
         erMod.initNetworkChannel.trigger().run()
         modInitializer.onRegisterNetworkMessage()
