@@ -1,4 +1,4 @@
-package miragefairy2019.mod.api;
+package miragefairy2019.mod3.placeditem.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.settings.KeyBinding;
