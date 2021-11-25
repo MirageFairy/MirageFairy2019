@@ -5,7 +5,7 @@ import miragefairy2019.libkt.color
 import miragefairy2019.mod3.mana.api.EnumManaType
 import net.minecraft.util.text.TextFormatting
 
-val EnumManaType.displayName get() = buildText { translate("mirageFairy2019.mana.$this.name").color(textColor) }
+val EnumManaType.displayName get() = let { manaType -> buildText { translate("mirageFairy2019.mana.$manaType.name").color(textColor) } }
 
 val EnumManaType.color
     get() = when (this) {
