@@ -31,35 +31,6 @@ public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
         super(material);
     }
 
-    /**
-     * UpdateTickごとにAgeが1ずつ最大3まで増える。
-     */
-    @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        super.updateTick(worldIn, pos, state, rand);
-        if (!worldIn.isAreaLoaded(pos, 1)) return;
-
-        grow(worldIn, pos, state, rand, BlockMirageFlowerKt.getGrowRate(worldIn, pos));
-    }
-
-    /**
-     * 骨粉をやると低確率で成長する。
-     */
-    @Override
-    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        grow(worldIn, pos, state, rand, BlockMirageFlowerKt.getGrowRate(worldIn, pos));
-    }
-
-    @Override
-    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-        return !isMaxAge(state);
-    }
-
-    @Override
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        return worldIn.rand.nextFloat() < 0.05;
-    }
-
     // ドロップ
 
     /**

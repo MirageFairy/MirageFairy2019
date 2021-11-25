@@ -159,6 +159,19 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidで�
         }
     }
 
+    // UpdateTickごとにAgeが1ずつ最大3まで増える。
+    override fun updateTick(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random) {
+        super.updateTick(worldIn, pos, state, rand)
+        if (!worldIn.isAreaLoaded(pos, 1)) return
+        grow(worldIn, pos, state, rand, getGrowRate(worldIn, pos))
+    }
+
+
+    // 骨粉をやると低確率で成長する。
+    override fun grow(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = grow(worldIn, pos, state, rand, getGrowRate(worldIn, pos))
+    override fun canGrow(worldIn: World, pos: BlockPos, state: IBlockState, isClient: Boolean) = !isMaxAge(state)
+    override fun canUseBonemeal(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = worldIn.rand.nextFloat() < 0.05
+
 
     companion object {
         val AGE: PropertyInteger = PropertyInteger.create("age", 0, 3)
