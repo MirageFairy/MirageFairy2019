@@ -47,7 +47,6 @@ val moduleArtifacts: Module = {
     }
     itemBlockTwinkleStone = item({ ItemBlockMulti(blockTwinkleStone.get()) }, "twinkle_stone") {
         setUnlocalizedName("twinkleStone")
-        //setCreativeTab{ApiMain.creativeTab}
         onRegisterItem {
             blockTwinkleStone.get().variantList.forEach { variant ->
                 item.setCustomModelResourceLocation(variant.resourceName, variant.metadata)
