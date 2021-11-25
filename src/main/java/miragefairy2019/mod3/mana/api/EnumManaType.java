@@ -9,6 +9,7 @@ public enum EnumManaType {
     DARK,
     ;
 
+    @Override
     public String toString() {
         return name().toLowerCase();
     }
