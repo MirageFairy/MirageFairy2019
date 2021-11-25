@@ -10,26 +10,48 @@ import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.EnumErgType.ATTACK
+import miragefairy2019.mod3.erg.api.EnumErgType.CHRISTMAS
 import miragefairy2019.mod3.erg.api.EnumErgType.CRAFT
 import miragefairy2019.mod3.erg.api.EnumErgType.CRYSTAL
 import miragefairy2019.mod3.erg.api.EnumErgType.DESTROY
+import miragefairy2019.mod3.erg.api.EnumErgType.ENERGY
 import miragefairy2019.mod3.erg.api.EnumErgType.FLAME
 import miragefairy2019.mod3.erg.api.EnumErgType.FREEZE
+import miragefairy2019.mod3.erg.api.EnumErgType.HARVEST
+import miragefairy2019.mod3.erg.api.EnumErgType.KNOWLEDGE
+import miragefairy2019.mod3.erg.api.EnumErgType.LIFE
+import miragefairy2019.mod3.erg.api.EnumErgType.LIGHT
 import miragefairy2019.mod3.erg.api.EnumErgType.SLASH
+import miragefairy2019.mod3.erg.api.EnumErgType.SOUND
 import miragefairy2019.mod3.erg.api.EnumErgType.SPACE
 import miragefairy2019.mod3.erg.api.EnumErgType.SUBMISSION
+import miragefairy2019.mod3.erg.api.EnumErgType.THUNDER
 import miragefairy2019.mod3.erg.api.EnumErgType.WARP
 import miragefairy2019.mod3.erg.api.EnumErgType.WATER
+import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionReplaceBlock
+import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
+import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
+import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.api.ApiMain.side
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraftforge.client.event.ModelBakeEvent
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.oredict.OreDictionary
+import net.minecraftforge.oredict.OreIngredient
 import java.util.function.Supplier
+
+private fun getDurability(tier: Int) = when (tier) {
+    1 -> 32
+    2 -> 64
+    3 -> 128
+    4 -> 256
+    else -> throw IllegalArgumentException("Illegal tier: $tier")
+}
 
 private fun <T : ItemFairyWeaponBase> ModInitializer.fw(
     tier: Int,
@@ -37,7 +59,7 @@ private fun <T : ItemFairyWeaponBase> ModInitializer.fw(
     registryName: String,
     unlocalizedName: String,
     oreNameList: List<String>,
-    parent: (() -> Supplier<ItemFairyWeaponBase>)?,
+    parent: (() -> Supplier<out ItemFairyWeaponBase>)?,
     vararg ergTypeSuppliers: () -> EnumErgType
 ) = item(creator, registryName) {
     setUnlocalizedName(unlocalizedName)
@@ -57,7 +79,7 @@ private fun <T : ItemFairyWeaponBase> ModInitializer.fw(
     onInit {
         if (parent != null) item.addComponent(parent().get().composite)
         ergTypeSuppliers.forEach { item.addComponent(ApiComposite.instance(ApiFairy.getComponentAbilityType(it()))) }
-        item.maxDamage = Loader.getDurability(tier) - 1
+        item.maxDamage = getDurability(tier) - 1
     }
     onCreateItemStack {
         oreNameList.forEach { OreDictionary.registerOre(it, ItemStack(item, 1, OreDictionary.WILDCARD_VALUE)) }
@@ -101,7 +123,37 @@ class FairyWeaponLoader(m: ModInitializer) {
     val miragiumSword = m.fw(2, ::ItemFairyWeaponBase, "miragium_sword", "miragiumSword", listOf(), null, { ATTACK }, { SLASH })
     val crystalSword = m.fw(3, ::ItemCrystalSword, "crystal_sword", "crystalSword", listOf(), { miragiumSword }, { CRYSTAL })
     val fairySword = m.fw(3, ::ItemFairySword, "fairy_sword", "fairySword", listOf(), { miragiumSword }, { ATTACK })
+
+    val miragiumAxe = m.fw(2, ::ItemMiragiumAxe, "miragium_axe", "miragiumAxe", listOf(), null, { SLASH }, { HARVEST })
+
+    val magicWandBase = m.fw(3, ::ItemFairyWeaponBase, "magic_wand_base", "magicWandBase", listOf(), null, { KNOWLEDGE })
+    val magicWandLight = m.fw(3, ::ItemMagicWandLight, "light_magic_wand", "magicWandLight", listOf(), { magicWandBase }, { LIGHT })
+    val magicWandCollecting = m.fw(3, ::ItemMagicWandCollecting, "collecting_magic_wand", "magicWandCollecting", listOf(), { magicWandBase }, { WARP })
+    val magicWandLightning = m.fw(3, ::ItemMagicWandLightning, "lightning_magic_wand", "magicWandLightning", listOf(), { magicWandBase }, { THUNDER }, { ENERGY })
+
+    val ocarinaBase = m.fw(3, ::ItemFairyWeaponBase, "ocarina_base", "ocarinaBase", listOf(), null, { SOUND })
+    val ocarinaTemptation = m.fw(3, ::ItemOcarinaTemptation, "temptation_ocarina", "ocarinaTemptation", listOf(), { ocarinaBase }, { LIFE })
+    val bellBase = m.fw(2, ::ItemBellBase, "bell_base", "bellBase", listOf(), null, { SOUND })
+    val bellFlowerPicking = m.fw(2, { ItemBellFlowerPicking(0.0, 0.0, 0.0, 0.0, 0.2) }, "flower_picking_bell", "bellFlowerPicking", listOf(), { bellBase }, { HARVEST })
+    val bellFlowerPicking2 = m.fw(4, { ItemBellFlowerPicking(10.0, 10.0, 10.0, 10.0, 1.0) }, "flower_picking_bell_2", "bellFlowerPicking2", listOf(), { bellFlowerPicking }, { HARVEST })
+    val bellChristmas = m.fw(3, ::ItemBellChristmas, "christmas_bell", "bellChristmas", listOf(), { bellBase }, { CHRISTMAS }, { ATTACK })
+    val miragiumScythe = m.fw(2, ::ItemMiragiumScythe, "miragium_scythe", "miragiumScythe", listOf(), null, { SLASH }, { HARVEST })
 }
 
 
-val moduleFairyWeapon: Module = { fairyWeaponLoader = FairyWeaponLoader(this) }
+val moduleFairyWeapon: Module = {
+
+    fairyWeaponLoader = FairyWeaponLoader(this)
+
+    // ワンドステッキクラフトレシピ登録
+    onAddRecipe {
+
+        // 丸石＞紅蓮→焼き石
+        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+            it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019CraftingToolFairyWandMelting"))
+            it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.COBBLESTONE.defaultState }, { Blocks.STONE.defaultState })
+        })
+
+    }
+
+}

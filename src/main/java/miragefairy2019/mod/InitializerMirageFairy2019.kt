@@ -5,7 +5,6 @@ import miragefairy2019.mod.api.materialsfairy.ApiMaterialsFairy
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod.lib.InitializationContext
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
-import miragefairy2019.mod.modules.fairyweapon.item.Loader
 import miragefairy2019.mod.modules.fairyweapon.item.moduleFairyWeapon
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
@@ -54,7 +53,6 @@ class InitializerMirageFairy2019 {
 
 
         ModuleFairyCrystal.init(erMod)
-        Loader.init(erMod)
         miragefairy2019.mod.modules.fairyweapon.damagesource.Loader.init(erMod)
         miragefairy2019.mod.modules.fairyweapon.recipe.Loader.init(erMod)
         ApiMaterialsFairy.init(erMod)
