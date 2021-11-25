@@ -36,9 +36,9 @@ public class ModuleFairyStick {
 
         // 妖精のステッキ
         item(erMod, ItemFairyStick::new, new ResourceLocation(ModMirageFairy2019.MODID, "fairy_stick"), "fairyStick")
-                .bind(setCreativeTab(() -> ApiMain.creativeTab()))
+                .bind(setCreativeTab(() -> ApiMain.creativeTab))
                 .bind(onRegisterItem(i -> {
-                    if (ApiMain.side().isClient()) ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), null));
+                    if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), null));
                 }))
                 .bind(onCreateItemStack(i -> OreDictionary.registerOre("mirageFairy2019FairyStick", new ItemStack(i))))
                 .bind(onCreateItemStack(i -> itemStackFairyStick = new ItemStack(i)));

@@ -11,6 +11,8 @@ import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain.logger
+import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.mana.ManaSet
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.api.IManaType
@@ -67,7 +69,7 @@ object ModulePlayerAura {
 
         // アイテムツールチップイベント
         erMod.init.register(Consumer {
-            if (ApiMain.side().isClient) {
+            if (side.isClient) {
                 MinecraftForge.EVENT_BUS.register(object : Any() {
                     @Suppress("unused")
                     @SubscribeEvent
@@ -183,7 +185,7 @@ object ModulePlayerAura {
                 fun hook(event: WorldEvent.Unload) {
                     if (!event.world.isRemote) {
                         if (event.world.minecraftServer!!.getWorld(0) === event.world) {
-                            ApiMain.logger().info("Unloading all playerauras")
+                            logger.info("Unloading all playerauras")
                             ApiPlayerAura.playerAuraManager.unloadAllServerPlayerAuraHandlers()
                         }
                     }
@@ -198,7 +200,7 @@ val modulePlayerAura: Module = {
 
     // オーラゲージオーバーレイ
     onInit {
-        if (ApiMain.side().isClient) {
+        if (side.isClient) {
             MinecraftForge.EVENT_BUS.register(object {
                 @SubscribeEvent
                 fun hook(event: RenderGameOverlayEvent.Post) {

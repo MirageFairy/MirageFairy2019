@@ -82,7 +82,7 @@ public class ModuleOre {
         // マテリアル
         item(erMod, ItemMultiMaterial<ItemVariantMaterial>::new, new ResourceLocation(ModMirageFairy2019.MODID, "materials"), "materials")
                 .bind(onRegisterItem(item -> ApiOre.itemMaterials1 = itemMaterials = item))
-                .bind(setCreativeTab(() -> ApiMain.creativeTab()))
+                .bind(setCreativeTab(() -> ApiMain.creativeTab))
                 .bind(c -> {
 
                     itemVariant(c.erMod, c, 0, () -> new ItemVariantMaterial("apatite_gem", "gemApatite")).bind(addOreName("gemApatite"));
@@ -107,7 +107,7 @@ public class ModuleOre {
                     itemVariant(c.erMod, c, 19, () -> new ItemVariantMaterial("lilagium_ingot", "ingotLilagium")).bind(addOreName("ingotLilagium"));
 
                     erMod.registerItem.register(b -> {
-                        if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
+                        if (ApiMain.side.isClient()) c.get().setCustomModelResourceLocations();
                     });
 
                     return Monad.of(c);
@@ -115,7 +115,7 @@ public class ModuleOre {
 
         // 中身入りバケツ
         item(erMod, () -> new ItemFilledBucket(), new ResourceLocation(ModMirageFairy2019.MODID, "filled_bucket"), "filledBucket")
-                .bind(setCreativeTab(() -> ApiMain.creativeTab()))
+                .bind(setCreativeTab(() -> ApiMain.creativeTab))
                 .peek(c -> {
 
                     itemVariant(c.erMod, c, 0, () -> new ItemVariantFilledBucket("miragium_water_bucket", "bucketMiragiumWater", true, () -> Optional.of(blockFluidMiragiumWater.getDefaultState())))
@@ -132,7 +132,7 @@ public class ModuleOre {
                             .bind(registererEmptyBucketFiller(() -> blockFluidMirageFlowerOil.getDefaultState()));
 
                     erMod.registerItem.register(b -> {
-                        if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
+                        if (ApiMain.side.isClient()) c.get().setCustomModelResourceLocations();
                     });
 
                 });
@@ -174,28 +174,28 @@ public class ModuleOre {
             // 鉱石1
             ApiOre.blockOre1 = blockOre1 = new BlockOre<>(EnumVariantOre1.variantList);
             blockOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
-            blockOre1.setCreativeTab(ApiMain.creativeTab());
+            blockOre1.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockOre1);
 
             // 鉱石2
             ApiOre.blockOre2 = blockOre2 = new BlockOre<>(EnumVariantOre2.variantList);
             blockOre2.setRegistryName(ModMirageFairy2019.MODID, "ore2");
-            blockOre2.setCreativeTab(ApiMain.creativeTab());
+            blockOre2.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockOre2);
 
             // ブロック
             ApiOre.blockMaterials1 = blockMaterials1 = new BlockMaterials<>(EnumVariantMaterials1.variantList);
             blockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
-            blockMaterials1.setCreativeTab(ApiMain.creativeTab());
+            blockMaterials1.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockMaterials1);
 
             // 妖水ブロック
             ApiOre.blockFluidMiragiumWater = blockFluidMiragiumWater = new BlockFluidMiragiumWater(fluidMiragiumWater);
             blockFluidMiragiumWater.setRegistryName(ModMirageFairy2019.MODID, "miragium_water");
             blockFluidMiragiumWater.setUnlocalizedName("miragiumWater");
-            blockFluidMiragiumWater.setCreativeTab(ApiMain.creativeTab());
+            blockFluidMiragiumWater.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockFluidMiragiumWater);
-            if (ApiMain.side().isClient()) {
+            if (ApiMain.side.isClient()) {
                 new Object() {
                     @SideOnly(Side.CLIENT)
                     public void run() {
@@ -213,9 +213,9 @@ public class ModuleOre {
             ApiOre.blockFluidMirageFlowerExtract = blockFluidMirageFlowerExtract = new BlockFluidMiragiumWater(fluidMirageFlowerExtract);
             blockFluidMirageFlowerExtract.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_extract");
             blockFluidMirageFlowerExtract.setUnlocalizedName("mirageFlowerExtract");
-            blockFluidMirageFlowerExtract.setCreativeTab(ApiMain.creativeTab());
+            blockFluidMirageFlowerExtract.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockFluidMirageFlowerExtract);
-            if (ApiMain.side().isClient()) {
+            if (ApiMain.side.isClient()) {
                 new Object() {
                     @SideOnly(Side.CLIENT)
                     public void run() {
@@ -233,9 +233,9 @@ public class ModuleOre {
             ApiOre.blockFluidMirageFlowerOil = blockFluidMirageFlowerOil = new BlockFluidMiragiumWater(fluidMirageFlowerOil);
             blockFluidMirageFlowerOil.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_oil");
             blockFluidMirageFlowerOil.setUnlocalizedName("mirageFlowerOil");
-            blockFluidMirageFlowerOil.setCreativeTab(ApiMain.creativeTab());
+            blockFluidMirageFlowerOil.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockFluidMirageFlowerOil);
-            if (ApiMain.side().isClient()) {
+            if (ApiMain.side.isClient()) {
                 new Object() {
                     @SideOnly(Side.CLIENT)
                     public void run() {
@@ -256,9 +256,9 @@ public class ModuleOre {
             ApiOre.itemBlockOre1 = itemBlockOre1 = new ItemBlockOre<>(blockOre1);
             itemBlockOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
             itemBlockOre1.setUnlocalizedName("ore1");
-            itemBlockOre1.setCreativeTab(ApiMain.creativeTab());
+            itemBlockOre1.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.ITEMS.register(itemBlockOre1);
-            if (ApiMain.side().isClient()) {
+            if (ApiMain.side.isClient()) {
                 for (IBlockVariantOre variant : blockOre1.variantList) {
                     ModelLoader.setCustomModelResourceLocation(
                             itemBlockOre1,
@@ -271,9 +271,9 @@ public class ModuleOre {
             ApiOre.itemBlockOre2 = itemBlockOre2 = new ItemBlockOre<>(blockOre2);
             itemBlockOre2.setRegistryName(ModMirageFairy2019.MODID, "ore2");
             itemBlockOre2.setUnlocalizedName("ore2");
-            itemBlockOre2.setCreativeTab(ApiMain.creativeTab());
+            itemBlockOre2.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.ITEMS.register(itemBlockOre2);
-            if (ApiMain.side().isClient()) {
+            if (ApiMain.side.isClient()) {
                 for (IBlockVariantOre variant : blockOre2.variantList) {
                     ModelLoader.setCustomModelResourceLocation(
                             itemBlockOre2,
@@ -286,9 +286,9 @@ public class ModuleOre {
             ApiOre.itemBlockMaterials1 = itemBlockMaterials1 = new ItemBlockMaterials<>(blockMaterials1);
             itemBlockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
             itemBlockMaterials1.setUnlocalizedName("materials1");
-            itemBlockMaterials1.setCreativeTab(ApiMain.creativeTab());
+            itemBlockMaterials1.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.ITEMS.register(itemBlockMaterials1);
-            if (ApiMain.side().isClient()) {
+            if (ApiMain.side.isClient()) {
                 for (IBlockVariant variant : blockMaterials1.variantList) {
                     ModelLoader.setCustomModelResourceLocation(
                             itemBlockMaterials1,
@@ -307,9 +307,9 @@ public class ModuleOre {
             };
             itemFluidMiragiumWater.setRegistryName(ModMirageFairy2019.MODID, "miragium_water");
             itemFluidMiragiumWater.setUnlocalizedName("miragiumWater");
-            itemFluidMiragiumWater.setCreativeTab(ApiMain.creativeTab());
+            itemFluidMiragiumWater.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.ITEMS.register(itemFluidMiragiumWater);
-            if (ApiMain.side().isClient()) {
+            if (ApiMain.side.isClient()) {
                 ModelLoader.setCustomModelResourceLocation(itemFluidMiragiumWater,
                         0,
                         new ModelResourceLocation(itemFluidMiragiumWater.getRegistryName(), null));
@@ -325,9 +325,9 @@ public class ModuleOre {
             };
             itemFluidMirageFlowerExtract.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_extract");
             itemFluidMirageFlowerExtract.setUnlocalizedName("mirageFlowerExtract");
-            itemFluidMirageFlowerExtract.setCreativeTab(ApiMain.creativeTab());
+            itemFluidMirageFlowerExtract.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.ITEMS.register(itemFluidMirageFlowerExtract);
-            if (ApiMain.side().isClient()) {
+            if (ApiMain.side.isClient()) {
                 ModelLoader.setCustomModelResourceLocation(itemFluidMirageFlowerExtract,
                         0,
                         new ModelResourceLocation(itemFluidMirageFlowerExtract.getRegistryName(), null));
@@ -343,9 +343,9 @@ public class ModuleOre {
             };
             itemFluidMirageFlowerOil.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_oil");
             itemFluidMirageFlowerOil.setUnlocalizedName("mirageFlowerOil");
-            itemFluidMirageFlowerOil.setCreativeTab(ApiMain.creativeTab());
+            itemFluidMirageFlowerOil.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.ITEMS.register(itemFluidMirageFlowerOil);
-            if (ApiMain.side().isClient()) {
+            if (ApiMain.side.isClient()) {
                 ModelLoader.setCustomModelResourceLocation(itemFluidMirageFlowerOil,
                         0,
                         new ModelResourceLocation(itemFluidMirageFlowerOil.getRegistryName(), null));

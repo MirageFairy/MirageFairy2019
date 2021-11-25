@@ -176,7 +176,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
 
             if (isSelected || player.getHeldItemOffhand() == itemStack) {
 
-                if (ApiMain.side().isClient()) {
+                if (ApiMain.side.isClient()) {
 
                     // 妖精がない場合はマゼンタ
                     Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);

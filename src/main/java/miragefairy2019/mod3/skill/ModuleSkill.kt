@@ -7,6 +7,8 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain.creativeTab
+import miragefairy2019.mod3.main.api.ApiMain.logger
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
@@ -62,7 +64,7 @@ val moduleSkill: Module = {
             fun handle(event: WorldEvent.Unload) {
                 if (event.world.isRemote) return // サーバーワールドのみ
                 if (event.world.minecraftServer!!.getWorld(0) !== event.world) return // 地上ディメンションのみ
-                ApiMain.logger().info("Unloading all the skill containers")
+                logger.info("Unloading all the skill containers")
                 ApiSkill.skillManager.resetServer()
             }
 
@@ -80,14 +82,14 @@ val moduleSkill: Module = {
     // スキルブック
     itemSkillBook = item({ ItemSkillBook() }, "skill_book") {
         setUnlocalizedName("skillBook")
-        setCreativeTab { ApiMain.creativeTab() }
+        setCreativeTab { creativeTab }
         setCustomModelResourceLocation()
     }
 
     // 天体観測ブック
     itemAstronomicalObservationBook = item({ ItemAstronomicalObservationBook() }, "astronomical_observation_book") {
         setUnlocalizedName("astronomicalObservationBook")
-        setCreativeTab { ApiMain.creativeTab() }
+        setCreativeTab { creativeTab }
         setCustomModelResourceLocation()
     }
 

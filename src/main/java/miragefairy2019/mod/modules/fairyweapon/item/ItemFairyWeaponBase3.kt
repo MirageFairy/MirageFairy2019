@@ -26,7 +26,7 @@ import miragefairy2019.mod3.magic.getDisplayValue
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.ranged
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.api.IManaType
 import miragefairy2019.mod3.mana.api.ManaTypes.aqua
@@ -224,7 +224,7 @@ abstract class ItemFairyWeaponBase3(
     }
 
     override fun onUpdate(itemStack: ItemStack, world: World, entity: Entity, itemSlot: Int, isSelected: Boolean) {
-        if (!ApiMain.side().isClient) return // クライアントサイドでなければ中止
+        if (!side.isClient) return // クライアントサイドでなければ中止
         if (entity !is EntityPlayer) return // プレイヤー取得
         if (!isSelected && entity.heldItemOffhand != itemStack) return // アイテム取得
         val fairyType = findFairy(itemStack, entity).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得

@@ -57,7 +57,7 @@ public class ModuleMaterialsFairy {
 
         // マテリアル
         item(erMod, ItemMultiFairyMaterial<ItemVariantFairyMaterial>::new, new ResourceLocation(ModMirageFairy2019.MODID, "fairy_materials"), "materialsFairy")
-                .bind(setCreativeTab(() -> ApiMain.creativeTab()))
+                .bind(setCreativeTab(() -> ApiMain.creativeTab))
                 .bind(c -> {
 
                     itemVariant(c.erMod, c, 0, () -> new ItemVariantFairyMaterial("shine_mana_rod", "manaRodShine", 3))
@@ -180,7 +180,7 @@ public class ModuleMaterialsFairy {
                             .bind(onCreateItemStack(v -> itemStackMirageFairyLeather = v.createItemStack()));
 
                     erMod.registerItem.register(b -> {
-                        if (ApiMain.side().isClient()) c.get().setCustomModelResourceLocations();
+                        if (ApiMain.side.isClient()) c.get().setCustomModelResourceLocations();
                     });
 
                     return Monad.of(c);
@@ -191,7 +191,7 @@ public class ModuleMaterialsFairy {
             // トゥインクルストーン
             ApiMaterialsFairy.blockTwinkleStone = blockTwinkleStone = new BlockTwinkleStone();
             blockTwinkleStone.setRegistryName(ModMirageFairy2019.MODID, "twinkle_stone");
-            blockTwinkleStone.setCreativeTab(ApiMain.creativeTab());
+            blockTwinkleStone.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockTwinkleStone);
 
         });
@@ -201,9 +201,9 @@ public class ModuleMaterialsFairy {
             ApiMaterialsFairy.itemBlockTwinkleStone = itemBlockTwinkleStone = new ItemBlockMulti<>(blockTwinkleStone);
             itemBlockTwinkleStone.setRegistryName(ModMirageFairy2019.MODID, "twinkle_stone");
             itemBlockTwinkleStone.setUnlocalizedName("twinkle_stone");
-            itemBlockTwinkleStone.setCreativeTab(ApiMain.creativeTab());
+            itemBlockTwinkleStone.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.ITEMS.register(itemBlockTwinkleStone);
-            if (ApiMain.side().isClient()) {
+            if (ApiMain.side.isClient()) {
                 for (EnumVariantTwinkleStone variant : blockTwinkleStone.variantList) {
                     ModelLoader.setCustomModelResourceLocation(
                             itemBlockTwinkleStone,

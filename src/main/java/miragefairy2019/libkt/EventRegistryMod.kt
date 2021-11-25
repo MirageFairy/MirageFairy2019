@@ -1,7 +1,7 @@
 package miragefairy2019.libkt
 
 import miragefairy2019.mod.lib.EventRegistryMod
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain.side
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.item.Item
@@ -42,7 +42,7 @@ fun <T : TileEntity> EventRegistryMod.tileEntity(modid: String, registerName: St
 
 fun <T : TileEntity, R : TileEntitySpecialRenderer<T>> EventRegistryMod.tileEntityRenderer(classTileEntity: Class<T>, creatorRenderer: () -> R, block: R.() -> Unit = {}) {
     init.register(Consumer {
-        if (ApiMain.side().isClient) {
+        if (side.isClient) {
             object : Any() {
                 @SideOnly(Side.CLIENT)
                 fun run() {

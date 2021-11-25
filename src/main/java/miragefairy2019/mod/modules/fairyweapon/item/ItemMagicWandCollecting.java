@@ -226,7 +226,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
         if (!isSelected && player.getHeldItemOffhand() != itemStack) return;
 
         // クライアントのみ
-        if (!ApiMain.side().isClient()) return;
+        if (!ApiMain.side.isClient()) return;
 
         //
 

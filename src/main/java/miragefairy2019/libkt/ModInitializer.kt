@@ -1,7 +1,7 @@
 package miragefairy2019.libkt
 
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain.side
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
@@ -68,13 +68,13 @@ fun <T : Item> ItemInitializer<T>.setUnlocalizedName(unlocalizedName: String) = 
 fun <T : Item> ItemInitializer<T>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { item.creativeTab = creativeTab() }
 fun <T : Item> ItemInitializer<T>.setCustomModelResourceLocation(metadata: Int = 0) = modInitializer.onRegisterItem { item.setCustomModelResourceLocation(metadata) }
 fun <T : Item> T.setCustomModelResourceLocation(modelName: String, metadata: Int = 0) {
-    if (ApiMain.side().isClient) {
+    if (side.isClient) {
         ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, modelName), "normal"))
     }
 }
 
 fun <T : Item> T.setCustomModelResourceLocation(metadata: Int = 0) {
-    if (ApiMain.side().isClient) {
+    if (side.isClient) {
         ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(registryName!!, "normal"))
     }
 }

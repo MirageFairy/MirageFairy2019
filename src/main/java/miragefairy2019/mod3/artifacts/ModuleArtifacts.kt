@@ -7,7 +7,8 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.EventRegistryMod
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain.creativeTab
+import miragefairy2019.mod3.main.api.ApiMain.side
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.item.ItemBlock
@@ -23,11 +24,11 @@ object ModuleArtifacts {
             // 皿
             block(ModMirageFairy2019.MODID, "dish", { BlockDish().also { blockDish = it } }) {
                 unlocalizedName = "dish"
-                setCreativeTab(ApiMain.creativeTab())
+                setCreativeTab(creativeTab)
             }
             item(ModMirageFairy2019.MODID, "dish", { ItemBlock(blockDish) }) {
                 unlocalizedName = "dish"
-                if (ApiMain.side().isClient) {
+                if (side.isClient) {
                     ModelLoader.setCustomModelResourceLocation(this, 0, ModelResourceLocation(registryName!!, "normal"))
                 }
             }

@@ -267,7 +267,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
     public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected) {
 
         // クライアントのみ
-        if (!ApiMain.side().isClient()) return;
+        if (!ApiMain.side.isClient()) return;
 
         // プレイヤー取得
         if (!(entity instanceof EntityPlayer)) return;

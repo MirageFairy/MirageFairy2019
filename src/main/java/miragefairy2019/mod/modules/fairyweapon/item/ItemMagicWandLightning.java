@@ -260,7 +260,7 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
         } catch (NoClassDefFoundError e) {
             aeflag = false;
         }
-        ApiMain.logger().debug("Appeng IAEPowerStorage state: " + aeflag);
+        ApiMain.logger.debug("Appeng IAEPowerStorage state: " + aeflag);
     }
 
     // TODO 削除
@@ -296,7 +296,7 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
         }
 
         // クライアントのみ
-        if (!ApiMain.side().isClient()) return;
+        if (!ApiMain.side.isClient()) return;
 
         // プレイヤー取得
         if (!(entity instanceof EntityPlayer)) return;

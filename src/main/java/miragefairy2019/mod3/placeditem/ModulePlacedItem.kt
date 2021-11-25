@@ -8,6 +8,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.ApiPlacedItem
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain.side
 import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.client.settings.KeyBinding
 import net.minecraft.entity.player.EntityPlayer
@@ -41,7 +42,7 @@ object ModulePlacedItem {
 
         // キーバインディング
         erMod.initKeyBinding.register(Runnable {
-            if (ApiMain.side().isClient) {
+            if (side.isClient) {
                 object : Any() {
                     @SideOnly(Side.CLIENT)
                     fun run() {
@@ -58,7 +59,7 @@ object ModulePlacedItem {
 
         // キーリスナー
         erMod.init.register(Consumer {
-            if (ApiMain.side().isClient) {
+            if (side.isClient) {
                 object : Any() {
                     @SideOnly(Side.CLIENT)
                     fun run() {

@@ -55,7 +55,7 @@ public class ModuleMirageFlower {
             blockFairyLog = new BlockFairyLog();
             blockFairyLog.setRegistryName(ModMirageFairy2019.MODID, "fairy_log");
             blockFairyLog.setUnlocalizedName("fairyLog");
-            blockFairyLog.setCreativeTab(ApiMain.creativeTab());
+            blockFairyLog.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockFairyLog);
             ApiMirageFlower.blockFairyLog = blockFairyLog;
         });
@@ -65,10 +65,10 @@ public class ModuleMirageFlower {
             itemBlockFairyLog = new ItemBlock(blockFairyLog);
             itemBlockFairyLog.setRegistryName(ModMirageFairy2019.MODID, "fairy_log");
             itemBlockFairyLog.setUnlocalizedName("fairyLog");
-            itemBlockFairyLog.setCreativeTab(ApiMain.creativeTab());
+            itemBlockFairyLog.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.ITEMS.register(itemBlockFairyLog);
             ApiMirageFlower.itemBlockFairyLog = itemBlockFairyLog;
-            if (ApiMain.side().isClient()) {
+            if (ApiMain.side.isClient()) {
                 ModelLoader.setCustomModelResourceLocation(itemBlockFairyLog, 0, new ModelResourceLocation(itemBlockFairyLog.getRegistryName(), "facing=north,variant=oak"));
             }
         });
@@ -128,7 +128,7 @@ public class ModuleMirageFlower {
             blockMirageFlower = new BlockMirageFlower();
             blockMirageFlower.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower");
             blockMirageFlower.setUnlocalizedName("mirageFlower");
-            blockMirageFlower.setCreativeTab(ApiMain.creativeTab());
+            blockMirageFlower.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockMirageFlower);
             ApiMirageFlower.blockMirageFlower = blockMirageFlower;
             ApiMirageFlower.pickableRegistry.register(blockMirageFlower, blockMirageFlower.getPickable());
@@ -139,10 +139,10 @@ public class ModuleMirageFlower {
             itemMirageFlowerSeeds = new ItemMirageFlowerSeeds<>(blockMirageFlower);
             itemMirageFlowerSeeds.setRegistryName(ModMirageFairy2019.MODID, "mirage_flower_seeds");
             itemMirageFlowerSeeds.setUnlocalizedName("mirageFlowerSeeds");
-            itemMirageFlowerSeeds.setCreativeTab(ApiMain.creativeTab());
+            itemMirageFlowerSeeds.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.ITEMS.register(itemMirageFlowerSeeds);
             ApiMirageFlower.itemMirageFlowerSeeds = itemMirageFlowerSeeds;
-            if (ApiMain.side().isClient()) {
+            if (ApiMain.side.isClient()) {
                 ModelLoader.setCustomModelResourceLocation(itemMirageFlowerSeeds, 0, new ModelResourceLocation(itemMirageFlowerSeeds.getRegistryName(), null));
             }
         });

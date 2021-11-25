@@ -13,27 +13,11 @@ public class ApiMain {
 
     public static Logger logger;
 
-    public static Logger logger() {
-        return logger;
-    }
-
-
     public static Side side;
-
-    public static Side side() {
-        return side;
-    }
-
 
     public static CreativeTabs creativeTab;
 
-    public static CreativeTabs creativeTab() {
-        return creativeTab;
-    }
-
-
     public static SimpleNetworkWrapper simpleNetworkWrapper;
-
 
     public static Map<Integer, IGuiHandler> guiHandlers = new HashMap<>();
 

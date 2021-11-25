@@ -27,19 +27,19 @@ public class ModuleOreSeed {
             // 鉱石の種
             blockOreSeed = new BlockOreSeed(EnumOreSeedType.STONE);
             blockOreSeed.setRegistryName(ModMirageFairy2019.MODID, "ore_seed");
-            blockOreSeed.setCreativeTab(ApiMain.creativeTab());
+            blockOreSeed.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockOreSeed);
 
             // 鉱石の種：ネザー
             blockOreSeedNether = new BlockOreSeed(EnumOreSeedType.NETHERRACK);
             blockOreSeedNether.setRegistryName(ModMirageFairy2019.MODID, "ore_seed_nether");
-            blockOreSeedNether.setCreativeTab(ApiMain.creativeTab());
+            blockOreSeedNether.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockOreSeedNether);
 
             // 鉱石の種：エンド
             blockOreSeedEnd = new BlockOreSeed(EnumOreSeedType.END_STONE);
             blockOreSeedEnd.setRegistryName(ModMirageFairy2019.MODID, "ore_seed_end");
-            blockOreSeedEnd.setCreativeTab(ApiMain.creativeTab());
+            blockOreSeedEnd.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockOreSeedEnd);
 
         });

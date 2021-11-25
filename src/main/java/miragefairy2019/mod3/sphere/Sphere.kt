@@ -20,7 +20,7 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import mirrg.boron.util.UtilsString
 import net.minecraft.block.Block
 import net.minecraft.client.Minecraft
@@ -102,7 +102,7 @@ val moduleSphere: Module = {
     // スフィアアイテム
     itemSpheres = item({ ItemSpheres() }, "spheres") {
         setUnlocalizedName("spheres")
-        setCreativeTab { ApiMain.creativeTab() }
+        setCreativeTab { creativeTab }
         onRegisterItem {
             ErgTypes.values.forEachIndexed { i, ergType ->
                 item.registerVariant(i, VariantSphere(getSphereType(ergType)))

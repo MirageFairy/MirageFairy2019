@@ -69,7 +69,7 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
 
     public ItemFairyWeaponBase() {
         setMaxStackSize(1);
-        if (ApiMain.side().isClient()) {
+        if (ApiMain.side.isClient()) {
             new Object() {
                 @SideOnly(Side.CLIENT)
                 public void run() {

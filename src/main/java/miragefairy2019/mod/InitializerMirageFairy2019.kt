@@ -18,7 +18,7 @@ import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
 import miragefairy2019.mod3.fairy.loaderFairyLogDrop
 import miragefairy2019.mod3.fairy.loaderFairyRelation
 import miragefairy2019.mod3.fairy.moduleFairy
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.moduleMain
 import miragefairy2019.mod3.mana.moduleMana
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
@@ -78,7 +78,7 @@ class InitializerMirageFairy2019 {
     fun preInit(event: FMLPreInitializationEvent) {
         modInitializer.onPreInit(event)
         erMod.preInit.trigger().accept(event)
-        val initializationContext = InitializationContext(ModMirageFairy2019.MODID, event.side, ApiMain.creativeTab())
+        val initializationContext = InitializationContext(ModMirageFairy2019.MODID, event.side, creativeTab)
         modInitializer.onRegisterBlock()
         erMod.registerBlock.trigger().accept(initializationContext)
         modInitializer.onRegisterItem()

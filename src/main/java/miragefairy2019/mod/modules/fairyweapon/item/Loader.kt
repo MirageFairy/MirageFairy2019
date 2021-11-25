@@ -20,7 +20,8 @@ import miragefairy2019.mod3.erg.api.ErgTypes.submission
 import miragefairy2019.mod3.erg.api.ErgTypes.warp
 import miragefairy2019.mod3.erg.api.ErgTypes.water
 import miragefairy2019.mod3.erg.api.IErgType
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain.creativeTab
+import miragefairy2019.mod3.main.api.ApiMain.side
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.item.ItemStack
 import net.minecraftforge.client.event.ModelBakeEvent
@@ -40,9 +41,9 @@ private fun <T : ItemFairyWeaponBase> ModInitializer.fw(
     vararg ergTypeSuppliers: () -> IErgType
 ) = item(creator, registryName) {
     setUnlocalizedName(unlocalizedName)
-    setCreativeTab { ApiMain.creativeTab() }
+    setCreativeTab { creativeTab }
     onRegisterItem {
-        if (ApiMain.side().isClient) {
+        if (side.isClient) {
             val modelResourceLocation = ModelResourceLocation(item.registryName!!, "normal")
             MinecraftForge.EVENT_BUS.register(object : Any() {
                 @SubscribeEvent

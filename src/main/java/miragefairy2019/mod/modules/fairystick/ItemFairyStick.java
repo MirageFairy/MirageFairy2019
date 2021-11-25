@@ -87,7 +87,7 @@ public class ItemFairyStick extends Item {
     public void onUpdate(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected) {
 
         // クライアントのみ
-        if (!ApiMain.side().isClient()) return;
+        if (!ApiMain.side.isClient()) return;
 
         // 使用tick判定
         if (!(world.rand.nextDouble() < 0.1)) return;

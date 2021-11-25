@@ -15,7 +15,7 @@ import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.ItemDebugFairyList
 import miragefairy2019.mod3.fairy.ItemFairy
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.playeraura.api.IFoodAuraContainer
 import miragefairy2019.modkt.impl.fairy.erg
@@ -95,7 +95,7 @@ object ModuleFairy {
                 item.creativeTab = creativeTab // TODO 冗長説
                 FairyTypes.instance.variants.forEach { item.registerVariant(it.x, it.y[rank - 1]) }
                 ForgeRegistries.ITEMS.register(item)
-                if (ApiMain.side().isClient) {
+                if (side.isClient) {
                     item.variants.forEach { ModelLoader.setCustomModelResourceLocation(item, it.x, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, "fairy"), "normal")) }
                 }
                 item
@@ -227,9 +227,9 @@ object ModuleFairy {
         // 妖精一覧デバッグアイテム
         item({ ItemDebugFairyList() }, "debug_fairy_list") {
             setUnlocalizedName("debugFairyList")
-            setCreativeTab { ApiMain.creativeTab() }
+            setCreativeTab { creativeTab }
             modInitializer.onRegisterItem {
-                if (ApiMain.side().isClient) {
+                if (side.isClient) {
                     ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("minecraft:book", "normal"))
                 }
             }
@@ -238,9 +238,9 @@ object ModuleFairy {
         // 焼き妖精
         itemBakedFairy = item({ ItemBakedFairy() }, "baked_fairy") {
             setUnlocalizedName("bakedFairy")
-            setCreativeTab { ApiMain.creativeTab() }
+            setCreativeTab { creativeTab }
             modInitializer.onRegisterItem {
-                if (ApiMain.side().isClient) {
+                if (side.isClient) {
                     ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation(item.registryName!!, "normal"))
                 }
             }

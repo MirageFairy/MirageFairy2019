@@ -139,11 +139,11 @@ public class Loader {
 
     private static <I extends Item> Monad<Configurator<I>> fairyWeapon(EventRegistryMod erMod, Supplier<I> sItem, String registryName, String unlocalizedName) {
         return item(erMod, sItem, new ResourceLocation(ModMirageFairy2019.MODID, registryName), unlocalizedName)
-                .bind(setCreativeTab(() -> ApiMain.creativeTab()))
+                .bind(setCreativeTab(() -> ApiMain.creativeTab))
                 .bind(c -> {
 
                     c.erMod.registerItem.register(b -> {
-                        if (ApiMain.side().isClient()) {
+                        if (ApiMain.side.isClient()) {
 
                             // 搭乗妖精の描画
                             MinecraftForge.EVENT_BUS.register(new Object() {

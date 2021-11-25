@@ -15,9 +15,9 @@ public class ModuleFertilizer {
 
         // 肥料
         item(erMod, ItemFertilizer::new, new ResourceLocation(ModMirageFairy2019.MODID, "fertilizer"), "fertilizer")
-                .bind(setCreativeTab(() -> ApiMain.creativeTab()))
+                .bind(setCreativeTab(() -> ApiMain.creativeTab))
                 .bind(onRegisterItem(i -> {
-                    if (ApiMain.side().isClient()) ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), null));
+                    if (ApiMain.side.isClient()) ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), null));
                 }));
 
     }
