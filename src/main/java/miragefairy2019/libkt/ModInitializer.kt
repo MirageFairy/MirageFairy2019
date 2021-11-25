@@ -2,16 +2,23 @@ package miragefairy2019.libkt
 
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.main.api.ApiMain.side
+import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.model.ModelLoader
+import net.minecraftforge.fml.client.registry.ClientRegistry
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.registry.ForgeRegistries
+import net.minecraftforge.fml.common.registry.GameRegistry
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import java.util.function.Supplier
 
@@ -32,6 +39,7 @@ class ModInitializer {
     val onAddRecipe = EventRegistry0()
     val onRegisterItemColorHandler = EventRegistry0()
     val onRegisterTileEntity = EventRegistry0()
+    val onRegisterTileEntityRenderer = EventRegistry0()
     val onInitNetworkChannel = EventRegistry0()
     val onRegisterNetworkMessage = EventRegistry0()
 
@@ -51,6 +59,8 @@ class EventRegistry1<E> {
 }
 
 
+// item
+
 class ItemInitializer<T : Item>(val modInitializer: ModInitializer, private val sItem: () -> T) {
     val item get() = sItem()
 }
@@ -62,7 +72,7 @@ fun <T : Item> ModInitializer.item(creator: () -> T, registryName: String, block
         item.setRegistryName(ModMirageFairy2019.MODID, registryName)
         ForgeRegistries.ITEMS.register(item)
     }
-    ItemInitializer<T>(this) { item }.block()
+    ItemInitializer(this) { item }.block()
     return Supplier { item }
 }
 
@@ -79,5 +89,48 @@ fun <T : Item> T.setCustomModelResourceLocation(modelName: String, metadata: Int
 fun <T : Item> T.setCustomModelResourceLocation(metadata: Int = 0) {
     if (side.isClient) {
         ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(registryName!!, "normal"))
+    }
+}
+
+
+// block
+
+class BlockInitializer<T : Block>(val modInitializer: ModInitializer, private val sBlock: () -> T) {
+    val block get() = sBlock()
+}
+
+fun <T : Block> ModInitializer.block(creator: () -> T, registryName: String, block: BlockInitializer<T>.() -> Unit): Supplier<T> {
+    lateinit var block: T
+    onRegisterBlock {
+        block = creator()
+        block.setRegistryName(ModMirageFairy2019.MODID, registryName)
+        ForgeRegistries.BLOCKS.register(block)
+    }
+    BlockInitializer(this) { block }.block()
+    return Supplier { block }
+}
+
+fun <T : Block> BlockInitializer<T>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { block.unlocalizedName = unlocalizedName }
+fun <T : Block> BlockInitializer<T>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { block.setCreativeTab(creativeTab()) }
+
+
+// misc
+
+fun <T : TileEntity> ModInitializer.tileEntity(registerName: String, clazz: Class<T>) {
+    onRegisterTileEntity {
+        GameRegistry.registerTileEntity(clazz, ResourceLocation(ModMirageFairy2019.MODID, registerName))
+    }
+}
+
+fun <T : TileEntity, R : TileEntitySpecialRenderer<T>> ModInitializer.tileEntityRenderer(classTileEntity: Class<T>, creatorRenderer: () -> R) {
+    onRegisterTileEntityRenderer {
+        if (side.isClient) {
+            object : Any() {
+                @SideOnly(Side.CLIENT)
+                fun run() {
+                    ClientRegistry.bindTileEntitySpecialRenderer(classTileEntity, creatorRenderer())
+                }
+            }.run()
+        }
     }
 }
