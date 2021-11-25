@@ -15,7 +15,7 @@ public class SourceAbility implements ISource {
 
     @Override
     public String getIdentifier() {
-        return "ability." + abilityType.getName();
+        return "ability." + abilityType;
     }
 
     @Override

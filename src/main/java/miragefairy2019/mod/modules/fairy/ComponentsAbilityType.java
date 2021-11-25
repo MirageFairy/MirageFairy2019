@@ -29,7 +29,7 @@ public class ComponentsAbilityType {
 
         @Override
         public ResourceLocation getName() {
-            return new ResourceLocation(ModMirageFairy2019.MODID, "cuticle_" + abilityType.getName());
+            return new ResourceLocation(ModMirageFairy2019.MODID, "cuticle_" + abilityType);
         }
 
         @Override

@@ -11,8 +11,8 @@ import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.lib.multi.ItemMulti
 import miragefairy2019.mod.lib.multi.ItemVariant
-import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeItem
@@ -59,7 +59,7 @@ class SphereType(
     val gemSupplier: (() -> Ingredient)?
 )
 
-val SphereType.oreName: String get() = "mirageFairy2019Sphere${UtilsString.toUpperCaseHead(ergType.name)}"
+val SphereType.oreName: String get() = "mirageFairy2019Sphere${UtilsString.toUpperCaseHead(ergType.toString())}"
 
 fun getSphereType(ergType: EnumErgType): SphereType {
     fun stack(itemStack: () -> ItemStack): () -> Ingredient = { Ingredient.fromStacks(itemStack()) }
@@ -155,13 +155,13 @@ val moduleSphere: Module = {
 
                 // クラフトレシピ
                 GameRegistry.addShapelessRecipe(
-                    ResourceLocation("${ModMirageFairy2019.MODID}:${ergType.name}_sphere_with_fluorite"),
-                    ResourceLocation("${ModMirageFairy2019.MODID}:${ergType.name}_sphere"),
+                    ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere_with_fluorite"),
+                    ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere"),
                     variant.createItemStack(),
                     OreIngredientComplex("container1000MiragiumWater"),
                     OreIngredient("gemFluorite"),
                     OreIngredientComplex("mirageFairy2019CraftingToolFairyWandCrafting"),
-                    OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.name)}"),
+                    OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}"),
                     ingredient
                 )
 
@@ -170,7 +170,7 @@ val moduleSphere: Module = {
                     conditions.add(FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019FairyStick")))
                     conditions.add(FairyStickCraftConditionConsumeBlock { ApiOre.blockFluidMiragiumWater.defaultState })
                     conditions.add(FairyStickCraftConditionConsumeItem(OreIngredient("gemFluorite")))
-                    conditions.add(FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.name)}")))
+                    conditions.add(FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}")))
                     conditions.add(FairyStickCraftConditionConsumeItem(ingredient))
                     conditions.add(FairyStickCraftConditionSpawnItem { variant.createItemStack() })
                 })
@@ -183,12 +183,12 @@ val moduleSphere: Module = {
 
                 // クラフトレシピ
                 GameRegistry.addShapelessRecipe(
-                    ResourceLocation("${ModMirageFairy2019.MODID}:${ergType.name}_sphere_from_gem"),
-                    ResourceLocation("${ModMirageFairy2019.MODID}:${ergType.name}_sphere"),
+                    ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere_from_gem"),
+                    ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere"),
                     variant.createItemStack(),
                     OreIngredientComplex("container1000MiragiumWater"),
                     OreIngredientComplex("mirageFairy2019CraftingToolFairyWandCrafting"),
-                    OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.name)}"),
+                    OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}"),
                     ingredient
                 )
 
@@ -196,7 +196,7 @@ val moduleSphere: Module = {
                 ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().apply {
                     conditions.add(FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019FairyStick")))
                     conditions.add(FairyStickCraftConditionConsumeBlock { ApiOre.blockFluidMiragiumWater.defaultState })
-                    conditions.add(FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.name)}")))
+                    conditions.add(FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}")))
                     conditions.add(FairyStickCraftConditionConsumeItem(ingredient))
                     conditions.add(FairyStickCraftConditionSpawnItem { variant.createItemStack() })
                 })

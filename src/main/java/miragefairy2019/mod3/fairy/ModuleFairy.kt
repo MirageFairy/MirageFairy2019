@@ -150,7 +150,7 @@ object ModuleFairy {
                     // エルグ別
                     variant.y[i].type.ergSet.entries.forEach {
                         if (it.power >= 10) {
-                            OreDictionary.registerOre("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(it.type.name)}", variant.y[i].createItemStack())
+                            OreDictionary.registerOre("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(it.type.toString())}", variant.y[i].createItemStack())
                         }
                     }
 

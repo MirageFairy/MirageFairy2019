@@ -3,10 +3,10 @@ package miragefairy2019.mod3.erg
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
+import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.mod3.erg.api.IErgEntry
 import miragefairy2019.mod3.erg.api.IErgSet
-import miragefairy2019.mod3.erg.api.EnumErgType
 import net.minecraft.util.text.TextFormatting
 
 val moduleErg: Module = {
@@ -59,10 +59,10 @@ class ErgEntry(private val type: EnumErgType, private val power: Double) : IErgE
     override fun getType() = type
 }
 
-class ErgType(private val name: String, private val textColor: TextFormatting) : EnumErgType {
+class ErgType(private val name: String, private val textColor: TextFormatting) : EnumErgType() {
     override fun getName() = name
     override fun getTextColor() = textColor
 }
 
 
-val EnumErgType.displayName get() = buildText { translate("mirageFairy2019.erg.$name.name").color(textColor) }
+val EnumErgType.displayName get() = let { ergType -> buildText { translate("mirageFairy2019.erg.$ergType.name").color(textColor) } }
