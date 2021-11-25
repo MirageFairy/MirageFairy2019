@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.mirageflower
 
+import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
@@ -167,7 +168,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
     // 動作
 
     override fun canSustainBush(state: IBlockState) = state.isFullBlock || state.block === Blocks.FARMLAND
-    fun getAge(state: IBlockState) = state.getValue(AGE)
+    fun getAge(state: IBlockState): Int = state.getValue(AGE)
     fun isMaxAge(state: IBlockState) = getAge(state) == 3
     fun grow(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random, rate: Double) {
         repeat(UtilsMath.randomInt(rand, rate)) {
@@ -204,35 +205,15 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
         val random = if (world is World) world.rand else Random()
 
         // 種1個は確定でドロップ
-        if (isBreaking) {
-            drops.add(ItemStack(ApiMirageFlower.itemMirageFlowerSeeds))
-        }
-
+        if (isBreaking) drops += ItemStack(ApiMirageFlower.itemMirageFlowerSeeds)
         // サイズが2以上なら確定で茎をドロップ
-        if (isBreaking) {
-            if (getAge(state) >= 2) {
-                val count = UtilsMath.randomInt(random, 1 + fortune * 0.2)
-                repeat(count) { drops.add(ModuleMaterialsFairy.itemStackLeafMirageFlower.copy()) }
-            }
-        }
-
+        if (isBreaking && getAge(state) >= 2) repeat(random.randomInt(1 + fortune * 0.2)) { drops += ModuleMaterialsFairy.itemStackLeafMirageFlower.copy() }
         // 追加の種
-        if (getAge(state) >= 3) {
-            val count = UtilsMath.randomInt(random, fortune * 0.01)
-            repeat(count) { drops.add(ItemStack(ApiMirageFlower.itemMirageFlowerSeeds)) }
-        }
-
+        if (getAge(state) >= 3) repeat(random.randomInt(fortune * 0.01)) { drops += ItemStack(ApiMirageFlower.itemMirageFlowerSeeds) }
         // クリスタル
-        if (getAge(state) >= 3) {
-            val count = UtilsMath.randomInt(random, 1 + fortune * 0.5)
-            repeat(count) { drops.add(ModuleFairyCrystal.variantFairyCrystal.createItemStack()) }
-        }
-
+        if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) { drops += ModuleFairyCrystal.variantFairyCrystal.createItemStack() }
         // ミラジウム
-        if (getAge(state) >= 3) {
-            val count = UtilsMath.randomInt(random, 1 + fortune * 0.5)
-            repeat(count) { drops.add(UtilsMinecraft.getItemStack("dustTinyMiragium").copy()) }
-        }
+        if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) { drops += UtilsMinecraft.getItemStack("dustTinyMiragium").copy() }
     }
 
     // シルクタッチ無効。
@@ -241,17 +222,13 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
 
     // 経験値ドロップ
     override fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int) = getExpDrop(state, world, pos, fortune, true)
-    private fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int, isBreaking: Boolean) = if (isBreaking) {
-        when {
-            getAge(state) >= 3 -> 2
-            getAge(state) >= 2 -> 1
-            else -> 0
-        }
-    } else {
-        when {
-            getAge(state) >= 3 -> 1
-            else -> 0
-        }
+    private fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int, isBreaking: Boolean) = if (isBreaking) when {
+        getAge(state) >= 3 -> 2
+        getAge(state) >= 2 -> 1
+        else -> 0
+    } else when {
+        getAge(state) >= 3 -> 1
+        else -> 0
     }
 
 
