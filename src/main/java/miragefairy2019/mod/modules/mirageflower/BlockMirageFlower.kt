@@ -19,6 +19,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.EnumSkyBlock
+import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
 
@@ -128,11 +129,23 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidで�
         soundType = SoundType.GLASS
     }
 
+
     // state
     override fun getMetaFromState(state: IBlockState) = state.getValue(AGE).coerceIn(0, 3)
     override fun getStateFromMeta(meta: Int): IBlockState = defaultState.withProperty(AGE, meta.coerceIn(0, 3))
     override fun createBlockState() = BlockStateContainer(this, AGE)
     fun getState(age: Int): IBlockState = defaultState.withProperty(AGE, age)
+
+
+    // 判定
+    override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) = when (getAge(state)) {
+        0 -> AABB_STAGE0
+        1 -> AABB_STAGE1
+        2 -> AABB_STAGE2
+        3 -> AABB_STAGE3
+        else -> AABB_STAGE3
+    }
+
 
     companion object {
         val AGE: PropertyInteger = PropertyInteger.create("age", 0, 3)
