@@ -8,6 +8,7 @@ import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.shineEfficiency
+import mirrg.boron.util.UtilsMath
 import net.minecraft.block.BlockFarmland
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -22,6 +23,7 @@ import net.minecraft.world.EnumSkyBlock
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
+import java.util.Random
 
 fun getGrowRate(world: World, blockPos: BlockPos): Double {
     var rate = 0.04 // 何もしなくても25回に1回の割合で成長する
@@ -144,6 +146,17 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidで�
         2 -> AABB_STAGE2
         3 -> AABB_STAGE3
         else -> AABB_STAGE3
+    }
+
+
+    // 動作
+    override fun canSustainBush(state: IBlockState) = state.isFullBlock || state.block === Blocks.FARMLAND
+    fun getAge(state: IBlockState) = state.getValue(AGE)
+    fun isMaxAge(state: IBlockState) = getAge(state) == 3
+    fun grow(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random, rate: Double) {
+        repeat(UtilsMath.randomInt(rand, rate)) {
+            if (!isMaxAge(state)) worldIn.setBlockState(pos, defaultState.withProperty(AGE, getAge(state) + 1), 2)
+        }
     }
 
 

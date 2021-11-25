@@ -13,13 +13,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -31,30 +29,6 @@ public class BlockMirageFlowerBase extends BlockBush implements IGrowable {
 
     public BlockMirageFlowerBase(Material material) {
         super(material);
-    }
-
-    // 動作
-
-    @Override
-    protected boolean canSustainBush(IBlockState state) {
-        return state.isFullBlock() || state.getBlock() == Blocks.FARMLAND;
-    }
-
-    public int getAge(IBlockState state) {
-        return state.getValue(BlockMirageFlower.Companion.getAGE());
-    }
-
-    public boolean isMaxAge(IBlockState state) {
-        return getAge(state) == 3;
-    }
-
-    protected void grow(World worldIn, BlockPos pos, IBlockState state, Random rand, double rate) {
-        int t = UtilsMath.randomInt(rand, rate);
-        for (int i = 0; i < t; i++) {
-            if (!isMaxAge(state)) {
-                worldIn.setBlockState(pos, getDefaultState().withProperty(BlockMirageFlower.Companion.getAGE(), getAge(state) + 1), 2);
-            }
-        }
     }
 
     /**
