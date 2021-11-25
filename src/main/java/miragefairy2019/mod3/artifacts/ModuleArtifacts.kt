@@ -47,7 +47,7 @@ val moduleArtifacts: Module = {
 
 }
 
-private class ItemFertilizer : Item() {
+class ItemFertilizer : Item() {
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         val itemStack = player.getHeldItem(hand)
 
