@@ -133,13 +133,15 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidで�
 
 
     // state
+
     override fun getMetaFromState(state: IBlockState) = state.getValue(AGE).coerceIn(0, 3)
     override fun getStateFromMeta(meta: Int): IBlockState = defaultState.withProperty(AGE, meta.coerceIn(0, 3))
     override fun createBlockState() = BlockStateContainer(this, AGE)
     fun getState(age: Int): IBlockState = defaultState.withProperty(AGE, age)
 
 
-    // 判定
+    // 当たり判定
+
     override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) = when (getAge(state)) {
         0 -> AABB_STAGE0
         1 -> AABB_STAGE1
@@ -150,6 +152,7 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidで�
 
 
     // 動作
+
     override fun canSustainBush(state: IBlockState) = state.isFullBlock || state.block === Blocks.FARMLAND
     fun getAge(state: IBlockState) = state.getValue(AGE)
     fun isMaxAge(state: IBlockState) = getAge(state) == 3
@@ -165,7 +168,6 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidで�
         if (!worldIn.isAreaLoaded(pos, 1)) return
         grow(worldIn, pos, state, rand, getGrowRate(worldIn, pos))
     }
-
 
     // 骨粉をやると低確率で成長する。
     override fun grow(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = grow(worldIn, pos, state, rand, getGrowRate(worldIn, pos))
