@@ -1,0 +1,22 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "cobblestone_from_minia",
+	"pattern": [
+		"#  ",
+		" s ",
+		"   "
+	],
+	"key": {
+		"s": {
+			"type": "miragefairy2019:ore_dict_complex",
+			"ore": "mirageFairy2019CraftingToolFairyWandSummoning"
+		},
+		"#": {
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019FairyMinaRank2"
+		}
+	},
+	"result": {
+		"item": "minecraft:cobblestone"
+	}
+}

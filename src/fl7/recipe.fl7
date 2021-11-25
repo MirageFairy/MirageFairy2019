@@ -151,6 +151,126 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     });
 );
 
+#################### ミーニャ売買 ####################
+(
+	writer : Writer::new("src/main/resources/assets/miragefairy2019/recipes/minia");
+
+    f : name, pattern, in, out -> writer::write("$(name)_from_minia.json"; {
+        type = "forge:ore_shaped";
+        group = "$(name)_from_minia";
+        pattern = pattern;
+        key = {
+            s = {
+                type = "miragefairy2019:ore_dict_complex";
+                ore = "mirageFairy2019CraftingToolFairyWandSummoning";
+            };
+            "#" = {
+                type = "forge:ore_dict";
+                ore = "mirageFairy2019FairyMinaRank$in";
+            };
+        };
+        result = out;
+    });
+
+    # 丸石
+    f("cobblestone"; [
+        "#  ";
+        " s ";
+        "   ";
+    ]; 2; {
+        item = "minecraft:cobblestone";
+    });
+
+    # 木炭
+    f("charcoal"; [
+        "   ";
+        " s ";
+        "  #";
+    ]; 3; {
+        item = "minecraft:coal";
+        data = 1;
+    });
+
+    # 鉄
+    f("iron_ingot"; [
+        "#  ";
+        " s ";
+        "   ";
+    ]; 3; {
+        item = "minecraft:iron_ingot";
+    });
+
+    # 金
+    f("gold_ingot"; [
+        "## ";
+        " s ";
+        "   ";
+    ]; 3; {
+        item = "minecraft:gold_ingot";
+    });
+
+    # 磁鉄鉱
+    f("magnetite"; [
+        "   ";
+        " s ";
+        " # ";
+    ]; 5; {
+        item = "miragefairy2019:materials";
+        data = 8;
+    });
+
+    # 硫黄
+    f("sulfur"; [
+        "   ";
+        " s ";
+        "## ";
+    ]; 5; {
+        item = "miragefairy2019:materials";
+        data = 2;
+    });
+
+    # 燐灰石
+    f("apatite"; [
+        "   ";
+        " s ";
+        " ##";
+    ]; 5; {
+        item = "miragefairy2019:materials";
+        data = 0;
+    });
+
+    # 辰砂
+    f("cinnabar"; [
+        "#  ";
+        "#s ";
+        "## ";
+    ]; 5; {
+        item = "miragefairy2019:materials";
+        data = 6;
+    });
+
+    # 蛍石
+    f("fluorite"; [
+        "  #";
+        " s#";
+        " ##";
+    ]; 5; {
+        item = "miragefairy2019:materials";
+        data = 1;
+    });
+
+    # 月長石
+    f("moonstone"; [
+        "###";
+        "#s#";
+        "###";
+    ]; 5; {
+        item = "miragefairy2019:materials";
+        data = 7;
+    });
+
+);
+
 #################### 圧縮 ####################
 (
 	writer : Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials/compress");
