@@ -91,41 +91,41 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
             fun f(manaType: EnumManaType) = buildText { format("%s:%.3f", manaType.displayName.unformattedText, variant.type.manaSet.getMana(manaType)).color(manaType.textColor) }
             tooltip {
                 text("        ")
-                text(f(EnumManaType.shine))
+                text(f(EnumManaType.SHINE))
             }
             tooltip {
-                text(f(EnumManaType.fire))
+                text(f(EnumManaType.FIRE))
                 text("    ")
-                text(f(EnumManaType.wind))
+                text(f(EnumManaType.WIND))
             }
             tooltip {
-                text(f(EnumManaType.gaia))
+                text(f(EnumManaType.GAIA))
                 text("    ")
-                text(f(EnumManaType.aqua))
+                text(f(EnumManaType.AQUA))
             }
             tooltip {
                 text("        ")
-                text(f(EnumManaType.dark))
+                text(f(EnumManaType.DARK))
             }
         } else {
             fun f(manaType: EnumManaType) = buildText { format("%4d", formatInt(variant.type.manaSet.getMana(manaType))).color(manaType.textColor) }
             tooltip {
                 text("    ")
-                text(f(EnumManaType.shine))
+                text(f(EnumManaType.SHINE))
             }
             tooltip {
-                text(f(EnumManaType.fire))
+                text(f(EnumManaType.FIRE))
                 text("    ")
-                text(f(EnumManaType.wind))
+                text(f(EnumManaType.WIND))
             }
             tooltip {
-                text(f(EnumManaType.gaia))
+                text(f(EnumManaType.GAIA))
                 text("    ")
-                text(f(EnumManaType.aqua))
+                text(f(EnumManaType.AQUA))
             }
             tooltip {
                 text("    ")
-                text(f(EnumManaType.dark))
+                text(f(EnumManaType.DARK))
             }
         }
 

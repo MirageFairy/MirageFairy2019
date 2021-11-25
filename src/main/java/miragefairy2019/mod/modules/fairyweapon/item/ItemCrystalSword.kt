@@ -21,7 +21,7 @@ import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemStack
 
 class ItemCrystalSword : ItemFairyWeaponBase3(
-    EnumManaType.gaia, EnumMastery.closeCombat,
+    EnumManaType.GAIA, EnumMastery.closeCombat,
     0.0, 0.0, 0.0, 0.0,
     ErgTypes.slash, ErgTypes.attack, ErgTypes.crystal, ErgTypes.submission
 ) {

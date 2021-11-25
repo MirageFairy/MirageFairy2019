@@ -76,12 +76,12 @@ class PluginFoodAura : IModPlugin {
                                     Gui.drawRect(x + 10 - stringWidth / 2 - 1, 10, x + 10 + stringWidth / 2 + 1, 18, 0xFFC6C6C6.toInt())
                                     minecraft.fontRenderer.drawStringCentered(string, x + 10, 10, manaType.color)
                                 }
-                                d(EnumManaType.shine, 30)
-                                d(EnumManaType.fire, 50)
-                                d(EnumManaType.wind, 70)
-                                d(EnumManaType.gaia, 90)
-                                d(EnumManaType.aqua, 110)
-                                d(EnumManaType.dark, 130)
+                                d(EnumManaType.SHINE, 30)
+                                d(EnumManaType.FIRE, 50)
+                                d(EnumManaType.WIND, 70)
+                                d(EnumManaType.GAIA, 90)
+                                d(EnumManaType.AQUA, 110)
+                                d(EnumManaType.DARK, 130)
                             }
                         })
 

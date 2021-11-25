@@ -82,12 +82,12 @@ data class MutableManaSet(
 
 
 fun IManaSet.getMana(manaType: EnumManaType) = when (manaType) {
-    EnumManaType.shine -> shine
-    EnumManaType.fire -> fire
-    EnumManaType.wind -> wind
-    EnumManaType.gaia -> gaia
-    EnumManaType.aqua -> aqua
-    EnumManaType.dark -> dark
+    EnumManaType.SHINE -> shine
+    EnumManaType.FIRE -> fire
+    EnumManaType.WIND -> wind
+    EnumManaType.GAIA -> gaia
+    EnumManaType.AQUA -> aqua
+    EnumManaType.DARK -> dark
 }
 
 fun IManaSet.copy() = ManaSet(shine, fire, wind, gaia, aqua, dark)

@@ -43,27 +43,27 @@ public class ApiFormula {
     }
 
     public static IFormulaDouble shine() {
-        return mana(EnumManaType.shine);
+        return mana(EnumManaType.SHINE);
     }
 
     public static IFormulaDouble fire() {
-        return mana(EnumManaType.fire);
+        return mana(EnumManaType.FIRE);
     }
 
     public static IFormulaDouble wind() {
-        return mana(EnumManaType.wind);
+        return mana(EnumManaType.WIND);
     }
 
     public static IFormulaDouble gaia() {
-        return mana(EnumManaType.gaia);
+        return mana(EnumManaType.GAIA);
     }
 
     public static IFormulaDouble aqua() {
-        return mana(EnumManaType.aqua);
+        return mana(EnumManaType.AQUA);
     }
 
     public static IFormulaDouble dark() {
-        return mana(EnumManaType.dark);
+        return mana(EnumManaType.DARK);
     }
 
     public static IFormulaDouble abilityRaw(IErgType abilityType) {

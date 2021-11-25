@@ -30,7 +30,7 @@ import kotlin.math.pow
 
 class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weaponEndurance: Double, weaponProduction: Double, maxExtraItemDropRate: Double) :
     ItemFairyWeaponBase3(
-        EnumManaType.dark, EnumMastery.flowerPicking,
+        EnumManaType.DARK, EnumMastery.flowerPicking,
         weaponStrength, weaponExtent, weaponEndurance, weaponProduction,
         ErgTypes.sound, ErgTypes.space, ErgTypes.slash, ErgTypes.harvest
     ) {

@@ -1,12 +1,12 @@
 package miragefairy2019.mod3.mana.api;
 
 public enum EnumManaType {
-    shine,
-    fire,
-    wind,
-    gaia,
-    aqua,
-    dark,
+    SHINE,
+    FIRE,
+    WIND,
+    GAIA,
+    AQUA,
+    DARK,
     ;
 
     public String toString() {

@@ -71,12 +71,12 @@ val <T> IMagicStatusFunction<T>.factors
                 override fun getColor() = throw UnsupportedOperationException()
                 override fun getCost() = add(buildText { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) }) // TODO 色変更
                 override fun getManaSet() = object : IManaSet {
-                    override fun getShine() = add(EnumManaType.shine.displayName)
-                    override fun getFire() = add(EnumManaType.fire.displayName)
-                    override fun getWind() = add(EnumManaType.wind.displayName)
-                    override fun getGaia() = add(EnumManaType.gaia.displayName)
-                    override fun getAqua() = add(EnumManaType.aqua.displayName)
-                    override fun getDark() = add(EnumManaType.dark.displayName) // TODO 色変更
+                    override fun getShine() = add(EnumManaType.SHINE.displayName)
+                    override fun getFire() = add(EnumManaType.FIRE.displayName)
+                    override fun getWind() = add(EnumManaType.WIND.displayName)
+                    override fun getGaia() = add(EnumManaType.GAIA.displayName)
+                    override fun getAqua() = add(EnumManaType.AQUA.displayName)
+                    override fun getDark() = add(EnumManaType.DARK.displayName) // TODO 色変更
                 }
 
                 override fun getErgSet() = object : IErgSet {

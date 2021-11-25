@@ -28,12 +28,12 @@ import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.ranged
 import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.mana.api.EnumManaType
-import miragefairy2019.mod3.mana.api.EnumManaType.aqua
-import miragefairy2019.mod3.mana.api.EnumManaType.dark
-import miragefairy2019.mod3.mana.api.EnumManaType.fire
-import miragefairy2019.mod3.mana.api.EnumManaType.gaia
-import miragefairy2019.mod3.mana.api.EnumManaType.shine
-import miragefairy2019.mod3.mana.api.EnumManaType.wind
+import miragefairy2019.mod3.mana.api.EnumManaType.AQUA
+import miragefairy2019.mod3.mana.api.EnumManaType.DARK
+import miragefairy2019.mod3.mana.api.EnumManaType.FIRE
+import miragefairy2019.mod3.mana.api.EnumManaType.GAIA
+import miragefairy2019.mod3.mana.api.EnumManaType.SHINE
+import miragefairy2019.mod3.mana.api.EnumManaType.WIND
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.mana.plus
@@ -252,45 +252,45 @@ abstract class ItemFairyWeaponBase3(
 
     val strength = "strength"({ double0.positive }) {
         if (weaponStrength == null) 0.0 else (weaponStrength + (strengthErg?.let { !it } ?: 0.0) + getSkillLevel(mastery) * 0.5) * (cost / 50.0) + when (weaponManaType) {
-            shine -> !shine
-            fire -> !fire
-            wind -> !wind
-            gaia -> !gaia
-            aqua -> !aqua
-            dark -> !dark
+            SHINE -> !SHINE
+            FIRE -> !FIRE
+            WIND -> !WIND
+            GAIA -> !GAIA
+            AQUA -> !AQUA
+            DARK -> !DARK
         }
     }.setVisibility(ALWAYS)
 
     val extent = "extent"({ double0.positive }) {
         if (weaponExtent == null) 0.0 else (weaponExtent + (extentErg?.let { !it } ?: 0.0)) * (cost / 50.0) + when (weaponManaType) {
-            shine -> !gaia + !wind
-            fire -> !gaia + !wind
-            wind -> !gaia * 2
-            gaia -> !wind * 2
-            aqua -> !gaia + !wind
-            dark -> !gaia + !wind
+            SHINE -> !GAIA + !WIND
+            FIRE -> !GAIA + !WIND
+            WIND -> !GAIA * 2
+            GAIA -> !WIND * 2
+            AQUA -> !GAIA + !WIND
+            DARK -> !GAIA + !WIND
         }
     }.setVisibility(ALWAYS)
 
     val endurance = "endurance"({ double0.positive }) {
         if (weaponEndurance == null) 0.0 else (weaponEndurance + (enduranceErg?.let { !it } ?: 0.0)) * (cost / 50.0) + when (weaponManaType) {
-            shine -> !fire + !aqua
-            fire -> !aqua * 2
-            wind -> !fire + !aqua
-            gaia -> !fire + !aqua
-            aqua -> !fire * 2
-            dark -> !fire + !aqua
+            SHINE -> !FIRE + !AQUA
+            FIRE -> !AQUA * 2
+            WIND -> !FIRE + !AQUA
+            GAIA -> !FIRE + !AQUA
+            AQUA -> !FIRE * 2
+            DARK -> !FIRE + !AQUA
         }
     }.setVisibility(ALWAYS)
 
     val production = "production"({ double0.positive }) {
         if (weaponProduction == null) 0.0 else (weaponProduction + (productionErg?.let { !it } ?: 0.0)) * (cost / 50.0) + when (weaponManaType) {
-            shine -> !dark * 2
-            fire -> !shine + !dark
-            wind -> !shine + !dark
-            gaia -> !shine + !dark
-            aqua -> !shine + !dark
-            dark -> !shine * 2
+            SHINE -> !DARK * 2
+            FIRE -> !SHINE + !DARK
+            WIND -> !SHINE + !DARK
+            GAIA -> !SHINE + !DARK
+            AQUA -> !SHINE + !DARK
+            DARK -> !SHINE * 2
         }
     }.setVisibility(ALWAYS)
 
