@@ -14,7 +14,9 @@ import miragefairy2019.modkt.api.fairy.IFairyType
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.shineEfficiency
 import mirrg.boron.util.UtilsMath
+import net.minecraft.block.BlockBush
 import net.minecraft.block.BlockFarmland
+import net.minecraft.block.IGrowable
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyInteger
@@ -136,7 +138,7 @@ fun getGrowRateMessage(world: World, pos: BlockPos) = textComponent {
 }
 
 
-class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidであるマテリアルは耕土を破壊する
+class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidであるマテリアルは耕土を破壊する
     init {
         // meta
         defaultState = blockState.baseState.withProperty(AGE, 0)
