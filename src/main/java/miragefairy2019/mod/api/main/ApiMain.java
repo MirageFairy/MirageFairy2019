@@ -1,7 +1,6 @@
 package miragefairy2019.mod.api.main;
 
-import miragefairy2019.mod.lib.EventRegistryMod;
-import miragefairy2019.mod.modules.main.ModuleMain;
+import miragefairy2019.mod3.main.ModuleMainKt;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -11,20 +10,16 @@ public class ApiMain {
 
     public static SimpleNetworkWrapper simpleNetworkWrapper;
 
-    public static void init(EventRegistryMod erMod) {
-        ModuleMain.init(erMod);
-    }
-
     public static Logger logger() {
-        return ModuleMain.logger;
+        return ModuleMainKt.logger;
     }
 
     public static Side side() {
-        return ModuleMain.side;
+        return ModuleMainKt.side;
     }
 
     public static CreativeTabs creativeTab() {
-        return ModuleMain.creativeTab;
+        return ModuleMainKt.creativeTab;
     }
 
 }

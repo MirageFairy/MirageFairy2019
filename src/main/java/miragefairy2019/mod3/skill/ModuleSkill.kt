@@ -7,7 +7,6 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.main.ApiMain
-import miragefairy2019.mod.modules.main.ModuleMain
 import miragefairy2019.mod3.main.registerGuiHandler
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.entity.player.EntityPlayer
@@ -82,14 +81,14 @@ val moduleSkill: Module = {
     // スキルブック
     itemSkillBook = item({ ItemSkillBook() }, "skill_book") {
         setUnlocalizedName("skillBook")
-        setCreativeTab { ModuleMain.creativeTab }
+        setCreativeTab { ApiMain.creativeTab() }
         setCustomModelResourceLocation()
     }
 
     // 天体観測ブック
     itemAstronomicalObservationBook = item({ ItemAstronomicalObservationBook() }, "astronomical_observation_book") {
         setUnlocalizedName("astronomicalObservationBook")
-        setCreativeTab { ModuleMain.creativeTab }
+        setCreativeTab { ApiMain.creativeTab() }
         setCustomModelResourceLocation()
     }
 

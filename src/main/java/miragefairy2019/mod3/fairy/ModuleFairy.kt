@@ -12,7 +12,6 @@ import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.common.fairy.relation.FairyRelationRegistry
 import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
-import miragefairy2019.mod.modules.main.ModuleMain
 import miragefairy2019.mod3.erg.api.ErgTypes
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.ItemDebugFairyList
@@ -228,7 +227,7 @@ object ModuleFairy {
         // 妖精一覧デバッグアイテム
         item({ ItemDebugFairyList() }, "debug_fairy_list") {
             setUnlocalizedName("debugFairyList")
-            setCreativeTab { ModuleMain.creativeTab }
+            setCreativeTab { ApiMain.creativeTab() }
             modInitializer.onRegisterItem {
                 if (ApiMain.side().isClient) {
                     ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("minecraft:book", "normal"))
@@ -239,7 +238,7 @@ object ModuleFairy {
         // 焼き妖精
         itemBakedFairy = item({ ItemBakedFairy() }, "baked_fairy") {
             setUnlocalizedName("bakedFairy")
-            setCreativeTab { ModuleMain.creativeTab }
+            setCreativeTab { ApiMain.creativeTab() }
             modInitializer.onRegisterItem {
                 if (ApiMain.side().isClient) {
                     ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation(item.registryName!!, "normal"))

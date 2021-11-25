@@ -57,7 +57,6 @@ class InitializerMirageFairy2019 {
 
 
         ModuleFairyStick.init(erMod)
-        ApiMain.init(erMod)
         ModuleFairyCrystal.init(erMod)
         Loader.init(erMod)
         miragefairy2019.mod.modules.fairyweapon.damagesource.Loader.init(erMod)

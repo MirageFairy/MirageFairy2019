@@ -9,7 +9,6 @@ import miragefairy2019.mod.api.composite.ApiComposite
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.main.ApiMain
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
-import miragefairy2019.mod.modules.main.ModuleMain
 import miragefairy2019.mod3.erg.api.ErgTypes.attack
 import miragefairy2019.mod3.erg.api.ErgTypes.craft
 import miragefairy2019.mod3.erg.api.ErgTypes.crystal
@@ -41,7 +40,7 @@ private fun <T : ItemFairyWeaponBase> ModInitializer.fw(
     vararg ergTypeSuppliers: () -> IErgType
 ) = item(creator, registryName) {
     setUnlocalizedName(unlocalizedName)
-    setCreativeTab { ModuleMain.creativeTab }
+    setCreativeTab { ApiMain.creativeTab() }
     onRegisterItem {
         if (ApiMain.side().isClient) {
             val modelResourceLocation = ModelResourceLocation(item.registryName!!, "normal")
