@@ -1,7 +1,7 @@
 package miragefairy2019.modkt.modules.artifacts
 
 import miragefairy2019.libkt.orNull
-import miragefairy2019.modkt.api.placeditem.IPlaceableBlock
+import miragefairy2019.mod3.placeditem.api.IPlaceableBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType

@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.api.placeditem;
+package miragefairy2019.mod3.placeditem.api;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

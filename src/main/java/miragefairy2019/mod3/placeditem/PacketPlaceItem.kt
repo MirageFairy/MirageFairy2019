@@ -1,9 +1,9 @@
-package miragefairy2019.modkt.modules.placeditem
+package miragefairy2019.mod3.placeditem
 
 import io.netty.buffer.ByteBuf
 import miragefairy2019.libkt.squared
 import miragefairy2019.mod.api.ApiPlacedItem
-import miragefairy2019.modkt.api.placeditem.IPlaceableBlock
+import miragefairy2019.mod3.placeditem.api.IPlaceableBlock
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.init.SoundEvents

@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.modules.placeditem
+package miragefairy2019.mod3.placeditem
 
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
