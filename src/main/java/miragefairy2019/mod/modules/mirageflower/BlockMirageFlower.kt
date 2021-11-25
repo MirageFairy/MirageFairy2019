@@ -140,7 +140,6 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidで�
 
 
     // state
-
     override fun getMetaFromState(state: IBlockState) = state.getValue(AGE).coerceIn(0, 3)
     override fun getStateFromMeta(meta: Int): IBlockState = defaultState.withProperty(AGE, meta.coerceIn(0, 3))
     override fun createBlockState() = BlockStateContainer(this, AGE)
@@ -148,7 +147,6 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidで�
 
 
     // 当たり判定
-
     override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) = when (getAge(state)) {
         0 -> AABB_STAGE0
         1 -> AABB_STAGE1
@@ -231,6 +229,22 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidで�
 
     // シルクタッチ無効。
     override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer) = false
+
+
+    // 経験値ドロップ
+    override fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int) = getExpDrop(state, world, pos, fortune, true)
+    private fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int, isBreaking: Boolean) = if (isBreaking) {
+        when {
+            getAge(state) >= 3 -> 2
+            getAge(state) >= 2 -> 1
+            else -> 0
+        }
+    } else {
+        when {
+            getAge(state) >= 3 -> 1
+            else -> 0
+        }
+    }
 
 
     companion object {
