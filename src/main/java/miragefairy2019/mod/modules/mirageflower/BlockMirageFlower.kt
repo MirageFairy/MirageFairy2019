@@ -3,6 +3,7 @@ package miragefairy2019.mod.modules.mirageflower
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
+import miragefairy2019.mod.api.pickable.IPickable
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
 import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy
@@ -19,9 +20,13 @@ import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyInteger
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.init.Enchantments
 import net.minecraft.item.ItemStack
+import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumHand
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.AxisAlignedBB
@@ -30,6 +35,7 @@ import net.minecraft.world.EnumSkyBlock
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
+import java.util.Optional
 import java.util.Random
 
 fun getGrowRate(world: World, blockPos: BlockPos): Double {
@@ -245,6 +251,45 @@ class BlockMirageFlower : BlockMirageFlowerBase(Material.PLANTS) {  // Solidで�
             else -> 0
         }
     }
+
+
+    // Pickable関連
+    override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        var itemStack = playerIn.heldItemMainhand
+        itemStack = if (itemStack.isEmpty) ItemStack.EMPTY else itemStack.copy()
+        val fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemStack)
+        return pickable.tryPick(worldIn, pos, Optional.of(playerIn), fortune)
+    }
+
+    val pickable: IPickable
+        get() = object : IPickable {
+            override fun getBlock() = this@BlockMirageFlower
+            override fun isPickableAge(blockState: IBlockState) = getAge(blockState) == 3
+            override fun tryPick(world: World, blockPos: BlockPos, oPlayer: Optional<EntityPlayer>, fortune: Int): Boolean {
+                val blockState = world.getBlockState(blockPos)
+
+                // 最大サイズでないなら失敗
+                if (!isPickableAge(blockState)) return false
+
+                // 収穫物計算
+                val drops = NonNullList.create<ItemStack>()
+                getDrops(drops, world, blockPos, blockState, fortune, false)
+
+                // 収穫物生成
+                drops.forEach { spawnAsEntity(world, blockPos, it) }
+
+                // 経験値生成
+                blockState.block.dropXpOnBlockBreak(world, blockPos, getExpDrop(blockState, world, blockPos, fortune, false))
+
+                // エフェクト
+                world.playEvent(oPlayer.orElse(null), 2001, blockPos, getStateId(blockState))
+
+                // ブロックの置換
+                world.setBlockState(blockPos, defaultState.withProperty(AGE, 1), 2)
+
+                return true
+            }
+        }
 
 
     companion object {
