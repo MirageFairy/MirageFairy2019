@@ -315,7 +315,7 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraContainer {
     }
 
 
-    override fun getHealAmount(itemStack: ItemStack) = 1 + (getFairy(itemStack)?.fairyType?.let { it.erg(EnumErgType.life).toInt() / 4 } ?: 0)
+    override fun getHealAmount(itemStack: ItemStack) = 1 + (getFairy(itemStack)?.fairyType?.let { it.erg(EnumErgType.LIFE).toInt() / 4 } ?: 0)
     override fun getSaturationModifier(itemStack: ItemStack) = getHealAmount(itemStack) * 0.1f
     override fun getMaxItemUseDuration(itemStack: ItemStack) = 16
     override fun onItemUseFinish(itemStack: ItemStack, world: World, entity: EntityLivingBase): ItemStack {

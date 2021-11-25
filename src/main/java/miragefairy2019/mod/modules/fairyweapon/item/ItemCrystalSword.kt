@@ -23,7 +23,7 @@ import net.minecraft.item.ItemStack
 class ItemCrystalSword : ItemFairyWeaponBase3(
     EnumManaType.GAIA, EnumMastery.closeCombat,
     0.0, 0.0, 0.0, 0.0,
-    EnumErgType.slash, EnumErgType.attack, EnumErgType.crystal, EnumErgType.submission
+    EnumErgType.SLASH, EnumErgType.ATTACK, EnumErgType.CRYSTAL, EnumErgType.SUBMISSION
 ) {
     val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { (getSkillLevel(mastery) / 100.0).coerceIn(0.0, 1.0) }.setVisibility(Companion.EnumVisibility.ALWAYS)
 

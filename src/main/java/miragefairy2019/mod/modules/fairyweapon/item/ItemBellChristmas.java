@@ -35,7 +35,7 @@ public class ItemBellChristmas extends ItemBellBase {
             add(new IFormulaDouble[]{
                     val(1),
                     scale(dark(), 90.0, 5.0, 3),
-                    scale(ability(EnumErgType.christmas), 20.0, 10.0),
+                    scale(ability(EnumErgType.CHRISTMAS), 20.0, 10.0),
             }));
 
     public IMagicStatus<Double> additionalReach = registerMagicStatus("additionalReach", formatterDouble1(),
@@ -54,7 +54,7 @@ public class ItemBellChristmas extends ItemBellBase {
             round(add(new IFormulaDouble[]{
                     val(2),
                     scale(dark(), 90.0, 3.0, 3),
-                    scale(ability(EnumErgType.attack), 10.0, 10.0 / 3.0),
+                    scale(ability(EnumErgType.ATTACK), 10.0, 10.0 / 3.0),
             })));
 
     public IMagicStatus<Integer> looting = registerMagicStatus("looting", formatterInteger(),
@@ -76,7 +76,7 @@ public class ItemBellChristmas extends ItemBellBase {
             mul(new IFormulaDouble[]{
                     mul(cost(), 0.5),
                     pow(0.5, norm(dark(), 90.0, 3)),
-                    pow(0.5, norm(ability(EnumErgType.submission), 10.0)),
+                    pow(0.5, norm(ability(EnumErgType.SUBMISSION), 10.0)),
             }));
 
     //

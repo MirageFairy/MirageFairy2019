@@ -42,7 +42,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
             add(new IFormulaDouble[]{
                     val(2.0),
                     div(aqua(), 2),
-                    div(abilityRaw(EnumErgType.harvest), 4),
+                    div(abilityRaw(EnumErgType.HARVEST), 4),
             }));
 
     public IMagicStatus<Integer> fortune = registerMagicStatus("fortune", formatterInteger(),
@@ -64,7 +64,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
             min(div(wind(), 5), 20));
 
     public IMagicStatus<Boolean> collection = registerMagicStatus("collection", formatterYesNo(),
-            gte(abilityRaw(EnumErgType.warp), 10));
+            gte(abilityRaw(EnumErgType.WARP), 10));
 
     public ItemMiragiumAxe() {
         setHarvestLevel("axe", 1);

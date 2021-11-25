@@ -21,29 +21,29 @@ class ErgEntry(private val type: EnumErgType, private val power: Double) : IErgE
 
 val EnumErgType.textColor
     get() = when (this) {
-        EnumErgType.attack -> TextFormatting.DARK_RED
-        EnumErgType.craft -> TextFormatting.GREEN
-        EnumErgType.harvest -> TextFormatting.DARK_GREEN
-        EnumErgType.light -> TextFormatting.YELLOW
-        EnumErgType.flame -> TextFormatting.RED
-        EnumErgType.water -> TextFormatting.BLUE
-        EnumErgType.crystal -> TextFormatting.AQUA
-        EnumErgType.sound -> TextFormatting.GRAY
-        EnumErgType.space -> TextFormatting.DARK_PURPLE
-        EnumErgType.warp -> TextFormatting.DARK_PURPLE
-        EnumErgType.shoot -> TextFormatting.GREEN
-        EnumErgType.destroy -> TextFormatting.DARK_RED
-        EnumErgType.chemical -> TextFormatting.DARK_AQUA
-        EnumErgType.slash -> TextFormatting.DARK_RED
-        EnumErgType.life -> TextFormatting.LIGHT_PURPLE
-        EnumErgType.knowledge -> TextFormatting.DARK_GREEN
-        EnumErgType.energy -> TextFormatting.GOLD
-        EnumErgType.submission -> TextFormatting.DARK_GRAY
-        EnumErgType.christmas -> TextFormatting.DARK_GREEN
-        EnumErgType.freeze -> TextFormatting.AQUA
-        EnumErgType.thunder -> TextFormatting.YELLOW
-        EnumErgType.levitate -> TextFormatting.BLUE
-        EnumErgType.sense -> TextFormatting.WHITE
+        EnumErgType.ATTACK -> TextFormatting.DARK_RED
+        EnumErgType.CRAFT -> TextFormatting.GREEN
+        EnumErgType.HARVEST -> TextFormatting.DARK_GREEN
+        EnumErgType.LIGHT -> TextFormatting.YELLOW
+        EnumErgType.FLAME -> TextFormatting.RED
+        EnumErgType.WATER -> TextFormatting.BLUE
+        EnumErgType.CRYSTAL -> TextFormatting.AQUA
+        EnumErgType.SOUND -> TextFormatting.GRAY
+        EnumErgType.SPACE -> TextFormatting.DARK_PURPLE
+        EnumErgType.WARP -> TextFormatting.DARK_PURPLE
+        EnumErgType.SHOOT -> TextFormatting.GREEN
+        EnumErgType.DESTROY -> TextFormatting.DARK_RED
+        EnumErgType.CHEMICAL -> TextFormatting.DARK_AQUA
+        EnumErgType.SLASH -> TextFormatting.DARK_RED
+        EnumErgType.LIFE -> TextFormatting.LIGHT_PURPLE
+        EnumErgType.KNOWLEDGE -> TextFormatting.DARK_GREEN
+        EnumErgType.ENERGY -> TextFormatting.GOLD
+        EnumErgType.SUBMISSION -> TextFormatting.DARK_GRAY
+        EnumErgType.CHRISTMAS -> TextFormatting.DARK_GREEN
+        EnumErgType.FREEZE -> TextFormatting.AQUA
+        EnumErgType.THUNDER -> TextFormatting.YELLOW
+        EnumErgType.LEVITATE -> TextFormatting.BLUE
+        EnumErgType.SENSE -> TextFormatting.WHITE
     }
 
 val EnumErgType.displayName get() = let { ergType -> buildText { translate("mirageFairy2019.erg.$ergType.name").color(textColor) } }

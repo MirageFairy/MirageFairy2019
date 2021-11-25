@@ -43,8 +43,8 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
 
         public Status(IFairyType fairyType) {
             additionalReach = Math.min(fairyType.getManaSet().getWind() / 5.0, 8);
-            radius = Math.min(2 + fairyType.getManaSet().getFire() / 10.0 + fairyType.getErgSet().getPower(EnumErgType.warp) / 10.0, 7);
-            maxTargets = (int) (Math.min(1 + fairyType.getManaSet().getGaia() / 2.0 + fairyType.getErgSet().getPower(EnumErgType.space) / 2.0, 20));
+            radius = Math.min(2 + fairyType.getManaSet().getFire() / 10.0 + fairyType.getErgSet().getPower(EnumErgType.WARP) / 10.0, 7);
+            maxTargets = (int) (Math.min(1 + fairyType.getManaSet().getGaia() / 2.0 + fairyType.getErgSet().getPower(EnumErgType.SPACE) / 2.0, 20));
             wear = 0.25 * Math.pow(0.5, fairyType.getManaSet().getAqua() / 30);
             coolTime = fairyType.getCost() * 3 * Math.pow(0.5, fairyType.getManaSet().getDark() / 40);
         }
@@ -66,8 +66,8 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
     public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
         Status status = new Status(fairyType);
         tooltip.add(TextFormatting.BLUE + "Additional Reach: " + String.format("%.1f", status.additionalReach) + " (Wind)");
-        tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Fire, " + ErgKt.getDisplayName(EnumErgType.warp).getUnformattedText() + ")");
-        tooltip.add(TextFormatting.BLUE + "Max Targets: " + status.maxTargets + " (Gaia, " + ErgKt.getDisplayName(EnumErgType.space).getUnformattedText() + ")");
+        tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Fire, " + ErgKt.getDisplayName(EnumErgType.WARP).getUnformattedText() + ")");
+        tooltip.add(TextFormatting.BLUE + "Max Targets: " + status.maxTargets + " (Gaia, " + ErgKt.getDisplayName(EnumErgType.SPACE).getUnformattedText() + ")");
         tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Aqua)");
         tooltip.add(TextFormatting.BLUE + "Cool Time: " + ((int) status.coolTime) + "t (Dark, Cost)");
     }

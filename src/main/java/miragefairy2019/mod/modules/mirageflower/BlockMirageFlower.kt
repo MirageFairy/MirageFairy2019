@@ -115,7 +115,7 @@ fun getGrowRate(world: World, blockPos: BlockPos): Double {
     return rate
 }
 
-fun getGrowRateInFloor(fairyType: IFairyType) = fairyType.shineEfficiency * fairyType.erg(EnumErgType.crystal) / 100.0 * 3
+fun getGrowRateInFloor(fairyType: IFairyType) = fairyType.shineEfficiency * fairyType.erg(EnumErgType.CRYSTAL) / 100.0 * 3
 
 fun getGrowRateTableMessage() = textComponent {
     listOf(

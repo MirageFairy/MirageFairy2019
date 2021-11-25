@@ -5,7 +5,7 @@ import miragefairy2019.mod.api.ApiMirageFlower
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
 import miragefairy2019.mod3.erg.api.EnumErgType
-import miragefairy2019.mod3.erg.api.EnumErgType.warp
+import miragefairy2019.mod3.erg.api.EnumErgType.WARP
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
@@ -32,7 +32,7 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
     ItemFairyWeaponBase3(
         EnumManaType.DARK, EnumMastery.flowerPicking,
         weaponStrength, weaponExtent, weaponEndurance, weaponProduction,
-        EnumErgType.sound, EnumErgType.space, EnumErgType.slash, EnumErgType.harvest
+        EnumErgType.SOUND, EnumErgType.SPACE, EnumErgType.SLASH, EnumErgType.HARVEST
     ) {
     val pitch = "pitch"({ double2.positive }) { -(cost / 50.0 - 1) * 12 }.setRange(-12.0..12.0)
     val maxTargetCount = "maxTargetCount"({ int.positive }) { 2 + floor(+!strength * 0.1).toInt() }.setRange(1..100)
@@ -41,7 +41,7 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
     val radius = "radius"({ double2.positive }) { 4 + !extent * 0.05 }.setRange(0.0..10.0)
     val wear = "wear"({ percent2.negative }) { 1.0 / (1 + !endurance * 0.03) }
     val coolTime = "coolTime"({ tick.negative }) { cost * 0.5 }
-    val collection = "collection"({ boolean.positiveBoolean }) { !warp >= 10 }.setVisibility(ALWAYS)
+    val collection = "collection"({ boolean.positiveBoolean }) { !WARP >= 10 }.setVisibility(ALWAYS)
     val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { skillFunction1(mastery, 0, 100, 0.1, maxExtraItemDropRate) }.setVisibility(ALWAYS)
 
     init {
