@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairystick;
+package miragefairy2019.mod3.fairystick;
 
 import kotlin.Unit;
 import miragefairy2019.mod.lib.UtilsMinecraft;

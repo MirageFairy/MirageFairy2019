@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairystick
+package miragefairy2019.mod3.fairystick
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.addOreName
