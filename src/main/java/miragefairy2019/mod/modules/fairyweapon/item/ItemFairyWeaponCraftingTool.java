@@ -2,8 +2,8 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import kotlin.Unit;
 import miragefairy2019.mod.api.main.ApiMain;
-import miragefairy2019.modkt.api.fairystickcraft.ApiFairyStickCraft;
-import miragefairy2019.modkt.api.fairystickcraft.IFairyStickCraftExecutor;
+import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft;
+import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftExecutor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

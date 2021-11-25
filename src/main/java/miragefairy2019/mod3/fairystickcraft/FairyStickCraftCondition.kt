@@ -1,8 +1,8 @@
-package miragefairy2019.modkt.impl.fairystickcraft
+package miragefairy2019.mod3.fairystickcraft
 
-import miragefairy2019.modkt.api.fairystickcraft.IFairyStickCraftCondition
-import miragefairy2019.modkt.api.fairystickcraft.IFairyStickCraftEnvironment
-import miragefairy2019.modkt.api.fairystickcraft.IFairyStickCraftExecutor
+import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftCondition
+import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftEnvironment
+import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftExecutor
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.init.Blocks

@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.api.fairystickcraft
+package miragefairy2019.mod3.fairystickcraft.api
 
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
