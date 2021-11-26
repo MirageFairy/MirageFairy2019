@@ -36,13 +36,13 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
     val production = createProductionStatus(weaponProduction, EnumErgType.HARVEST)
     val cost = createCostStatus()
 
-    val pitch = "pitch"({ double2.positive }) { -(cost / 50.0 - 1) * 12 }.setRange(-12.0..12.0)
-    val maxTargetCount = "maxTargetCount"({ int.positive }) { 2 + floor(+!strength * 0.1).toInt() }.setRange(1..100)
-    val fortune = "fortune"({ double2.positive }) { 3 + !production * 0.1 }.setRange(0.0..100.0)
-    val additionalReach = "additionalReach"({ double2.positive }) { !extent * 0.1 }.setRange(0.0..10.0)
-    val radius = "radius"({ double2.positive }) { 4 + !extent * 0.05 }.setRange(0.0..10.0)
-    val wear = "wear"({ percent2.negative }) { 1.0 / (1 + !endurance * 0.03) }
-    val coolTime = "coolTime"({ tick.negative }) { cost * 0.5 }
+    val pitch = "pitch"({ double2.positive }) { -(cost / 50.0 - 1) * 12 }.setRange(-12.0..12.0).setVisibility(Companion.EnumVisibility.DETAIL)
+    val maxTargetCount = "maxTargetCount"({ int.positive }) { 2 + floor(+!strength * 0.1).toInt() }.setRange(1..100).setVisibility(Companion.EnumVisibility.DETAIL)
+    val fortune = "fortune"({ double2.positive }) { 3 + !production * 0.1 }.setRange(0.0..100.0).setVisibility(Companion.EnumVisibility.DETAIL)
+    val additionalReach = "additionalReach"({ double2.positive }) { !extent * 0.1 }.setRange(0.0..10.0).setVisibility(Companion.EnumVisibility.DETAIL)
+    val radius = "radius"({ double2.positive }) { 4 + !extent * 0.05 }.setRange(0.0..10.0).setVisibility(Companion.EnumVisibility.DETAIL)
+    val wear = "wear"({ percent2.negative }) { 1.0 / (1 + !endurance * 0.03) }.setVisibility(Companion.EnumVisibility.DETAIL)
+    val coolTime = "coolTime"({ tick.negative }) { cost * 0.5 }.setVisibility(Companion.EnumVisibility.DETAIL)
     val collection = "collection"({ boolean.positiveBoolean }) { !WARP >= 10 }.setVisibility(ALWAYS)
     val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { skillFunction1(mastery, 0, 100, 0.1, maxExtraItemDropRate) }.setVisibility(ALWAYS)
 
