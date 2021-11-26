@@ -58,15 +58,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 abstract class ItemFairyWeaponBase3(
     val weaponManaType: EnumManaType,
-    val mastery: IMastery,
-    val weaponStrength: Double?,
-    val weaponExtent: Double?,
-    val weaponEndurance: Double?,
-    val weaponProduction: Double?,
-    val strengthErg: EnumErgType?,
-    val extentErg: EnumErgType?,
-    val enduranceErg: EnumErgType?,
-    val productionErg: EnumErgType?
+    val mastery: IMastery
 ) : ItemFairyWeaponBase() {
     companion object {
         private const val prefix = "miragefairy2019.gui.magic"
@@ -250,8 +242,8 @@ abstract class ItemFairyWeaponBase3(
 
     // Statuses
 
-    val strength = "strength"({ double0.positive }) {
-        if (weaponStrength == null) 0.0 else (weaponStrength + (strengthErg?.let { !it } ?: 0.0) + getSkillLevel(mastery) * 0.5) * (cost / 50.0) + when (weaponManaType) {
+    fun createStrengthStatus(weaponStrength: Double, strengthErg: EnumErgType) = "strength"({ double0.positive }) {
+        (weaponStrength + !strengthErg + getSkillLevel(mastery) * 0.5) * (cost / 50.0) + when (weaponManaType) {
             SHINE -> !SHINE
             FIRE -> !FIRE
             WIND -> !WIND
@@ -261,8 +253,8 @@ abstract class ItemFairyWeaponBase3(
         }
     }.setVisibility(ALWAYS)
 
-    val extent = "extent"({ double0.positive }) {
-        if (weaponExtent == null) 0.0 else (weaponExtent + (extentErg?.let { !it } ?: 0.0)) * (cost / 50.0) + when (weaponManaType) {
+    fun createExtentStatus(weaponExtent: Double, extentErg: EnumErgType) = "extent"({ double0.positive }) {
+        (weaponExtent + !extentErg) * (cost / 50.0) + when (weaponManaType) {
             SHINE -> !GAIA + !WIND
             FIRE -> !GAIA + !WIND
             WIND -> !GAIA * 2
@@ -272,8 +264,8 @@ abstract class ItemFairyWeaponBase3(
         }
     }.setVisibility(ALWAYS)
 
-    val endurance = "endurance"({ double0.positive }) {
-        if (weaponEndurance == null) 0.0 else (weaponEndurance + (enduranceErg?.let { !it } ?: 0.0)) * (cost / 50.0) + when (weaponManaType) {
+    fun createEnduranceStatus(weaponEndurance: Double, enduranceErg: EnumErgType) = "endurance"({ double0.positive }) {
+        (weaponEndurance + !enduranceErg) * (cost / 50.0) + when (weaponManaType) {
             SHINE -> !FIRE + !AQUA
             FIRE -> !AQUA * 2
             WIND -> !FIRE + !AQUA
@@ -283,8 +275,8 @@ abstract class ItemFairyWeaponBase3(
         }
     }.setVisibility(ALWAYS)
 
-    val production = "production"({ double0.positive }) {
-        if (weaponProduction == null) 0.0 else (weaponProduction + (productionErg?.let { !it } ?: 0.0)) * (cost / 50.0) + when (weaponManaType) {
+    fun createProductionStatus(weaponProduction: Double, productionErg: EnumErgType) = "production"({ double0.positive }) {
+        (weaponProduction + !productionErg) * (cost / 50.0) + when (weaponManaType) {
             SHINE -> !DARK * 2
             FIRE -> !SHINE + !DARK
             WIND -> !SHINE + !DARK
@@ -294,5 +286,5 @@ abstract class ItemFairyWeaponBase3(
         }
     }.setVisibility(ALWAYS)
 
-    val cost = "cost"({ double0.negative }) { cost / (1.0 + getSkillLevel(mastery) * 0.002) }.setVisibility(ALWAYS)
+    fun createCostStatus() = "cost"({ double0.negative }) { cost / (1.0 + getSkillLevel(mastery) * 0.002) }.setVisibility(ALWAYS)
 }
