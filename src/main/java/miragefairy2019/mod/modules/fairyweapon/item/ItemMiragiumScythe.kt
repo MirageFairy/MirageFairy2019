@@ -24,7 +24,7 @@ import net.minecraft.world.World
 import kotlin.math.ceil
 
 class ItemMiragiumScythe : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.harvest) {
-    val strength = createStrengthStatus(0.0, EnumErgType.DESTROY)
+    val strength = createStrengthStatus(0.0, EnumErgType.SLASH)
     val extent = createExtentStatus(0.0, EnumErgType.SHOOT)
     val endurance = createEnduranceStatus(0.0, EnumErgType.SENSE)
     val production = createProductionStatus(0.0, EnumErgType.HARVEST)
