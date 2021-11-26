@@ -439,11 +439,13 @@ mirageFairy2019.magic.status.additionalReach.name=Additional Reach
 mirageFairy2019.magic.status.collection.name=Collection
 mirageFairy2019.magic.status.damage.name=Damage
 mirageFairy2019.magic.status.radius.name=Radius
+mirageFairy2019.magic.status.range.name=Range
 mirageFairy2019.magic.status.maxTargetCount.name=Max Target Count
 mirageFairy2019.magic.status.looting.name=Looting
 mirageFairy2019.magic.status.criticalRate.name=Critical Rate
 mirageFairy2019.magic.status.chargeTime.name=Charge Time
 mirageFairy2019.magic.status.extraItemDropRate.name=Extra Drop Rate
+mirageFairy2019.magic.status.maxHardness.name=Max Hardness
 itemGroup.mirageFairy2019=MirageFairy 2019
 itemGroup.mirageFairy2019.fairy=MirageFairy 2019: Fairy
 
