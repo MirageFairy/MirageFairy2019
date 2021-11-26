@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.magic;
 
-import mirrg.boron.util.struct.Tuple;
-import mirrg.boron.util.suppliterator.ISuppliterator;
+import kotlin.Pair;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -75,17 +74,15 @@ public class UtilsMagic {
 
     private static final double MAX_PARTICLE_COUNT = 1;
 
-    public static void spawnParticleTargets(World world, ISuppliterator<Tuple<Vec3d, EnumTargetExecutability>> tuples) {
-
-        List<Tuple<Vec3d, EnumTargetExecutability>> listTuple = tuples.toList();
+    public static void spawnParticleTargets(World world, List<Pair<Vec3d, EnumTargetExecutability>> tuples) {
 
         // 1tickに平均MAX_PARTICLE_COUNT個までしかパーティクルを表示しない
-        double rate = MAX_PARTICLE_COUNT / (double) Math.max(listTuple.size(), MAX_PARTICLE_COUNT);
+        double rate = MAX_PARTICLE_COUNT / (double) Math.max(tuples.size(), MAX_PARTICLE_COUNT);
 
         // パーティクル生成
-        for (Tuple<Vec3d, EnumTargetExecutability> tuple : listTuple) {
+        for (Pair<Vec3d, EnumTargetExecutability> tuple : tuples) {
             if (Math.random() < rate) {
-                spawnParticleTarget(world, tuple.x, tuple.y);
+                spawnParticleTarget(world, tuple.getFirst(), tuple.getSecond());
             }
         }
 

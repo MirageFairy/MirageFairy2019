@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.magic;
 
+import kotlin.Pair;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.Entity;
@@ -92,7 +93,8 @@ public class SelectorEntityRanged<E extends Entity> {
     public void effect() {
         UtilsMagic.spawnParticleSphericalRange(world, position, radius);
         UtilsMagic.spawnParticleTargets(world, ISuppliterator.ofIterable(tuples)
-                .map(t -> t.deriveX(t.x.getPositionVector())));
+                .map(t -> new Pair<>(t.x.getPositionVector(), t.y))
+                .toList());
     }
 
 }
