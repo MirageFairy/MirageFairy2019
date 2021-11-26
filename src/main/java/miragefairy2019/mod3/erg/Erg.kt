@@ -43,7 +43,7 @@ val EnumErgType.textColor
         EnumErgType.FREEZE -> TextFormatting.AQUA
         EnumErgType.THUNDER -> TextFormatting.YELLOW
         EnumErgType.LEVITATE -> TextFormatting.BLUE
-        EnumErgType.SENSE -> TextFormatting.WHITE
+        EnumErgType.SENSE -> TextFormatting.GREEN
     }
 
 val EnumErgType.displayName get() = let { ergType -> buildText { translate("mirageFairy2019.erg.$ergType.name").color(textColor) } }
