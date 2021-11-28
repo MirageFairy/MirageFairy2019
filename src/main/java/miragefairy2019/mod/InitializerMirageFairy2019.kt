@@ -16,6 +16,7 @@ import miragefairy2019.mod3.fairy.moduleFairy
 import miragefairy2019.mod3.fairystick.moduleFairyStick
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.moduleMain
+import miragefairy2019.mod3.manualrepair.moduleManualRepair
 import miragefairy2019.mod3.mirageflower.ModuleMirageFlower
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
@@ -47,6 +48,7 @@ class InitializerMirageFairy2019 {
             moduleSphere()
             moduleFairyStick()
             moduleArtifacts()
+            moduleManualRepair()
         }
 
         modInitializer.onInstantiation()
