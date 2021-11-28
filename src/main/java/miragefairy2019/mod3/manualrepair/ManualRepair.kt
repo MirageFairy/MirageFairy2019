@@ -23,19 +23,19 @@ val moduleManualRepair: Module = {
 
 class RecipeManualRepair : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
     init {
-        setRegistryName(ResourceLocation(ModMirageFairy2019.MODID, "manual_repair"))
+        registryName = ResourceLocation(ModMirageFairy2019.MODID, "manual_repair")
     }
 
-    private class MatchResult(val itemTarget: IManualRepairableItem, val itemStackTarget: ItemStack)
+    private class MatchResult(val itemTarget: IManualRepairableItem, val itemStackTarget: ItemStack, val slotIndexTarget: Int)
 
     private fun match(inventoryCrafting: InventoryCrafting): MatchResult? {
         val used = BooleanArray(inventoryCrafting.sizeInventory)
 
-        fun <T : Any> pull(predicate: (ItemStack) -> T?): T? = run a@{
+        fun <T : Any> pull(predicate: (index: Int, ItemStack) -> T?): T? = run a@{
             (0 until inventoryCrafting.sizeInventory).forEach { i ->
                 if (!used[i]) {
                     val itemStack: ItemStack = inventoryCrafting.getStackInSlot(i)
-                    val result = predicate(itemStack)
+                    val result = predicate(i, itemStack)
                     if (result != null) {
                         used[i] = true
                         return@a result
@@ -46,22 +46,22 @@ class RecipeManualRepair : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         }
 
         // 妖精武器探索
-        val (itemStackTarget, itemTarget) = pull { itemStack ->
+        val matchResult = pull { i, itemStack ->
             val item: Item = itemStack.item
-            if (item is IManualRepairableItem && item.canManualRepair(itemStack)) Pair(itemStack, item as IManualRepairableItem) else null
+            if (item is IManualRepairableItem && item.canManualRepair(itemStack)) MatchResult(item, itemStack, i) else null
         } ?: return null
 
         // スフィア探索
-        val ingredientsSubstitutes = itemTarget.getManualRepairSubstitute(itemStackTarget)
+        val ingredientsSubstitutes = matchResult.itemTarget.getManualRepairSubstitute(matchResult.itemStackTarget)
         if (ingredientsSubstitutes.size == 0) return null
-        ingredientsSubstitutes.forEach { ingredient -> pull { if (ingredient.test(it)) true else null } ?: return null }
+        ingredientsSubstitutes.forEach { ingredient -> pull { _, it -> if (ingredient.test(it)) true else null } ?: return null }
 
         // 余りがあってはならない
         (0 until inventoryCrafting.sizeInventory).forEach {
             if (!used[it] && !inventoryCrafting.getStackInSlot(it).isEmpty) return null
         }
 
-        return MatchResult(itemTarget, itemStackTarget)
+        return matchResult
     }
 
     override fun matches(inventory: InventoryCrafting, world: World) = match(inventory) != null
@@ -69,9 +69,9 @@ class RecipeManualRepair : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
     override fun isDynamic() = true
     override fun canFit(width: Int, height: Int) = width * height >= 1
     override fun getCraftingResult(inventory: InventoryCrafting): ItemStack = match(inventory)?.let { it.itemTarget.getManualRepairedItem(it.itemStackTarget) } ?: EMPTY
-    override fun getRemainingItems(inventory: InventoryCrafting): NonNullList<ItemStack> = match(inventory)?.let {
+    override fun getRemainingItems(inventory: InventoryCrafting): NonNullList<ItemStack> = match(inventory)?.let { result ->
         (0 until inventory.sizeInventory)
-            .map { ForgeHooks.getContainerItem(inventory.getStackInSlot(it)) }
+            .map { i -> if (i == result.slotIndexTarget) EMPTY else ForgeHooks.getContainerItem(inventory.getStackInSlot(i)) }
             .toCollection(NonNullList.create())
     } ?: NonNullList.create()
 }
