@@ -44,6 +44,8 @@ class ItemSpheres : ItemMulti<VariantSphere>() {
     }
 }
 
+operator fun Supplier<ItemSpheres>.get(ergType: EnumErgType): Any = get().getVariant(ergType.ordinal).get().createItemStack()
+
 class VariantSphere(val sphere: SphereType) : ItemVariant()
 
 
