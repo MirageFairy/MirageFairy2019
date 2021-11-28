@@ -45,7 +45,7 @@ object FairyMaterials {
             setCreativeTab { ApiMain.creativeTab }
             itemVariants = ItemVariants(this)
             onRegisterItem {
-                item.setCustomModelResourceLocations()
+                if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
             }
         }
 
