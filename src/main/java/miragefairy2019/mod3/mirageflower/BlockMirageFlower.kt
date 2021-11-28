@@ -1,15 +1,16 @@
 package miragefairy2019.mod3.mirageflower
 
+import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
-import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
+import miragefairy2019.mod3.fairymaterials.FairyMaterials
 import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower
 import miragefairy2019.mod3.pick.PickHandler
 import miragefairy2019.mod3.pick.api.IPickHandler
@@ -207,7 +208,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
         // 種1個は確定でドロップ
         if (isBreaking) drops += ItemStack(ApiMirageFlower.itemMirageFlowerSeeds)
         // サイズが2以上なら確定で茎をドロップ
-        if (isBreaking && getAge(state) >= 2) repeat(random.randomInt(1 + fortune * 0.2)) { drops += ModuleMaterialsFairy.itemStackLeafMirageFlower.copy() }
+        if (isBreaking && getAge(state) >= 2) repeat(random.randomInt(1 + fortune * 0.2)) { drops += FairyMaterials.itemVariants.leafMirageFlower.createItemStack() }
         // 追加の種
         if (getAge(state) >= 3) repeat(random.randomInt(fortune * 0.01)) { drops += ItemStack(ApiMirageFlower.itemMirageFlowerSeeds) }
         // クリスタル

@@ -1,6 +1,8 @@
 package miragefairy2019.libkt
 
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.lib.multi.ItemMulti
+import miragefairy2019.mod.lib.multi.ItemVariant
 import miragefairy2019.mod3.main.api.ApiMain.side
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
@@ -59,61 +61,86 @@ class EventRegistry1<E> {
 }
 
 
-// item
+// Item
 
-class ItemInitializer<T : Item>(val modInitializer: ModInitializer, private val sItem: () -> T) {
+class ItemInitializer<I : Item>(val modInitializer: ModInitializer, private val sItem: () -> I) : Supplier<I> {
     val item get() = sItem()
+    override fun get(): I = item
 }
 
-fun <T : Item> ModInitializer.item(creator: () -> T, registryName: String, block: ItemInitializer<T>.() -> Unit): Supplier<T> {
-    lateinit var item: T
+fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, block: ItemInitializer<I>.() -> Unit): ItemInitializer<I> {
+    lateinit var item: I
     onRegisterItem {
         item = creator()
         item.setRegistryName(ModMirageFairy2019.MODID, registryName)
         ForgeRegistries.ITEMS.register(item)
     }
-    ItemInitializer(this) { item }.block()
-    return Supplier { item }
+    return ItemInitializer(this) { item }.also { it.block() }
 }
 
-fun <T : Item> ItemInitializer<T>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { item.unlocalizedName = unlocalizedName }
-fun <T : Item> ItemInitializer<T>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { item.creativeTab = creativeTab() }
-fun <T : Item> ItemInitializer<T>.setCustomModelResourceLocation(metadata: Int = 0) = modInitializer.onRegisterItem { item.setCustomModelResourceLocation(metadata) }
-fun <T : Item> T.setCustomModelResourceLocation(modelName: String, metadata: Int = 0) {
+fun <I : Item> ItemInitializer<I>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { item.unlocalizedName = unlocalizedName }
+fun <I : Item> ItemInitializer<I>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { item.creativeTab = creativeTab() }
+fun <I : Item> ItemInitializer<I>.setCustomModelResourceLocation(metadata: Int = 0) = modInitializer.onRegisterItem { item.setCustomModelResourceLocation(metadata) }
+fun <I : Item> I.setCustomModelResourceLocation(modelName: String, metadata: Int = 0) {
     if (side.isClient) {
         ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, modelName), "normal"))
     }
 }
 
-fun <T : Item> T.setCustomModelResourceLocation(metadata: Int = 0) {
+fun <I : Item> I.setCustomModelResourceLocation(metadata: Int = 0) {
     if (side.isClient) {
         ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(registryName!!, "normal"))
     }
 }
 
-fun <T : Item> ItemInitializer<T>.addOreName(oreName: String, metadata: Int = 0) = modInitializer.onCreateItemStack { item.addOreName(oreName, metadata) }
-fun <T : Item> T.addOreName(oreName: String, metadata: Int = 0) = OreDictionary.registerOre(oreName, ItemStack(this, 1, metadata))
+fun <I : Item> ItemInitializer<I>.addOreName(oreName: String, metadata: Int = 0) = modInitializer.onCreateItemStack { item.addOreName(oreName, metadata) }
+fun <I : Item> I.addOreName(oreName: String, metadata: Int = 0) = OreDictionary.registerOre(oreName, ItemStack(this, 1, metadata))
 
 
-// block
+// ItemVariant
 
-class BlockInitializer<T : Block>(val modInitializer: ModInitializer, private val sBlock: () -> T) {
-    val block get() = sBlock()
+class ItemVariantInitializer<I : ItemMulti<V>, V : ItemVariant>(val itemInitializer: ItemInitializer<I>, private val sItemVariant: () -> V) : Supplier<V> {
+    val itemVariant get() = sItemVariant()
+    override fun get(): V = itemVariant
 }
 
-fun <T : Block> ModInitializer.block(creator: () -> T, registryName: String, block: BlockInitializer<T>.() -> Unit): Supplier<T> {
-    lateinit var block: T
-    onRegisterBlock {
-        block = creator()
-        block.setRegistryName(ModMirageFairy2019.MODID, registryName)
-        ForgeRegistries.BLOCKS.register(block)
+fun <I : ItemMulti<V>, V : ItemVariant> ItemInitializer<I>.itemVariant(
+    creator: () -> V,
+    metadata: Int,
+    block: ItemVariantInitializer<I, V>.() -> Unit
+): ItemVariantInitializer<I, V> {
+    lateinit var itemVariant: V
+    modInitializer.onRegisterItem {
+        itemVariant = creator()
+        item.registerVariant(metadata, itemVariant)
     }
-    BlockInitializer(this) { block }.block()
-    return Supplier { block }
+    return ItemVariantInitializer(this) { itemVariant }.also { it.block() }
 }
 
-fun <T : Block> BlockInitializer<T>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { block.unlocalizedName = unlocalizedName }
-fun <T : Block> BlockInitializer<T>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { block.setCreativeTab(creativeTab()) }
+fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.addOreName(oreName: String) = itemInitializer.modInitializer.onCreateItemStack { itemVariant.addOreName(oreName) }
+fun <V : ItemVariant> V.addOreName(oreName: String) = OreDictionary.registerOre(oreName, ItemStack(item, 1, metadata))
+fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.createItemStack(amount: Int = 1): ItemStack = itemVariant.createItemStack(amount)
+
+
+// Block
+
+class BlockInitializer<B : Block>(val modInitializer: ModInitializer, private val sBlock: () -> B) : Supplier<B> {
+    val block get() = sBlock()
+    override fun get(): B = block
+}
+
+fun <B : Block> ModInitializer.block(creator: () -> B, registryName: String, block: BlockInitializer<B>.() -> Unit): BlockInitializer<B> {
+    lateinit var block2: B
+    onRegisterBlock {
+        block2 = creator()
+        block2.setRegistryName(ModMirageFairy2019.MODID, registryName)
+        ForgeRegistries.BLOCKS.register(block2)
+    }
+    return BlockInitializer(this) { block2 }.also { it.block() }
+}
+
+fun <B : Block> BlockInitializer<B>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { block.unlocalizedName = unlocalizedName }
+fun <B : Block> BlockInitializer<B>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { block.setCreativeTab(creativeTab()) }
 
 
 // misc
