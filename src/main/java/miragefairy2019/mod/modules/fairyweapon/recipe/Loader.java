@@ -9,9 +9,6 @@ public class Loader {
     public static void init(EventRegistryMod erMod) {
         erMod.addRecipe.register(() -> {
 
-            // スフィア交換レシピ
-            GameRegistry.findRegistry(IRecipe.class).register(new RecipesSphereReplacement());
-
             // 妖精搭乗レシピ
             GameRegistry.findRegistry(IRecipe.class).register(new RecipesCombining());
             GameRegistry.findRegistry(IRecipe.class).register(new RecipesUncombining());
