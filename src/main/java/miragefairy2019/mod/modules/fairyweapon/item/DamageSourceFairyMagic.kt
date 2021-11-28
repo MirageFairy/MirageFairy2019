@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
-import miragefairy2019.mod.api.fairyweapon.damagesource.IDamageSourceLooting
+import miragefairy2019.mod3.damagesource.api.IDamageSourceLooting
 import net.minecraft.entity.Entity
 import net.minecraft.util.EntityDamageSource
 

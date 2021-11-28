@@ -1,4 +1,4 @@
-package miragefairy2019.mod.api.fairyweapon.damagesource;
+package miragefairy2019.mod3.damagesource.api;
 
 public interface IDamageSourceLooting {
 
