@@ -68,14 +68,16 @@ class ItemInitializer<I : Item>(val modInitializer: ModInitializer, private val 
     override fun get(): I = item
 }
 
-fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, block: ItemInitializer<I>.() -> Unit): ItemInitializer<I> {
+fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, block: (ItemInitializer<I>.() -> Unit)? = null): ItemInitializer<I> {
     lateinit var item: I
     onRegisterItem {
         item = creator()
         item.setRegistryName(ModMirageFairy2019.MODID, registryName)
         ForgeRegistries.ITEMS.register(item)
     }
-    return ItemInitializer(this) { item }.also { it.block() }
+    return ItemInitializer(this) { item }.also {
+        if (block != null) it.block()
+    }
 }
 
 fun <I : Item> ItemInitializer<I>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { item.unlocalizedName = unlocalizedName }
@@ -107,14 +109,16 @@ class ItemVariantInitializer<I : ItemMulti<V>, V : ItemVariant>(val itemInitiali
 fun <I : ItemMulti<V>, V : ItemVariant> ItemInitializer<I>.itemVariant(
     creator: () -> V,
     metadata: Int,
-    block: ItemVariantInitializer<I, V>.() -> Unit
+    block: (ItemVariantInitializer<I, V>.() -> Unit)? = null
 ): ItemVariantInitializer<I, V> {
     lateinit var itemVariant: V
     modInitializer.onRegisterItem {
         itemVariant = creator()
         item.registerVariant(metadata, itemVariant)
     }
-    return ItemVariantInitializer(this) { itemVariant }.also { it.block() }
+    return ItemVariantInitializer(this) { itemVariant }.also {
+        if (block != null) it.block()
+    }
 }
 
 fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.addOreName(oreName: String) = itemInitializer.modInitializer.onCreateItemStack { itemVariant.addOreName(oreName) }
@@ -129,14 +133,16 @@ class BlockInitializer<B : Block>(val modInitializer: ModInitializer, private va
     override fun get(): B = block
 }
 
-fun <B : Block> ModInitializer.block(creator: () -> B, registryName: String, block: BlockInitializer<B>.() -> Unit): BlockInitializer<B> {
+fun <B : Block> ModInitializer.block(creator: () -> B, registryName: String, block: (BlockInitializer<B>.() -> Unit)? = null): BlockInitializer<B> {
     lateinit var block2: B
     onRegisterBlock {
         block2 = creator()
         block2.setRegistryName(ModMirageFairy2019.MODID, registryName)
         ForgeRegistries.BLOCKS.register(block2)
     }
-    return BlockInitializer(this) { block2 }.also { it.block() }
+    return BlockInitializer(this) { block2 }.also {
+        if (block != null) it.block()
+    }
 }
 
 fun <B : Block> BlockInitializer<B>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { block.unlocalizedName = unlocalizedName }
