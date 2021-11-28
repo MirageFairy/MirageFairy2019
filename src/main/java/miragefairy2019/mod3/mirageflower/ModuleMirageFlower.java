@@ -1,13 +1,13 @@
 package miragefairy2019.mod3.mirageflower;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.common.pickable.PickableRegistry;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.WorldGenBush;
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropRegistry;
 import miragefairy2019.mod3.main.api.ApiMain;
 import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower;
+import miragefairy2019.mod3.pick.PickHandlerRegistry;
 import mirrg.boron.util.UtilsLambda;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.block.BlockNewLog;
@@ -120,7 +120,7 @@ public class ModuleMirageFlower {
 
         // レジストリ
         erMod.initRegistry.register(() -> {
-            ApiMirageFlower.pickableRegistry = new PickableRegistry();
+            ApiMirageFlower.pickHandlerRegistry = new PickHandlerRegistry();
         });
 
         // ブロック
@@ -131,7 +131,7 @@ public class ModuleMirageFlower {
             blockMirageFlower.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockMirageFlower);
             ApiMirageFlower.blockMirageFlower = blockMirageFlower;
-            ApiMirageFlower.pickableRegistry.register(blockMirageFlower, blockMirageFlower.getPickable());
+            ApiMirageFlower.pickHandlerRegistry.register(blockMirageFlower, blockMirageFlower.getPickHandler());
         });
 
         // 種アイテム

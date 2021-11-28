@@ -23,7 +23,6 @@ import net.minecraft.util.SoundCategory
 import net.minecraft.util.SoundEvent
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.Vec3d
-import java.util.Optional
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.pow
@@ -69,8 +68,8 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
             val listTarget = magicSelectorCircle.blockPosList
                 .mapNotNull {
                     val blockState = world.getBlockState(it.blockPos)
-                    val pickable = ApiMirageFlower.pickableRegistry[blockState.block].orElse(null)
-                    if (pickable != null && pickable.isPickableAge(blockState)) Pair(it, pickable) else null
+                    val pickHandler = ApiMirageFlower.pickHandlerRegistry[blockState.block]
+                    if (pickHandler != null && pickHandler.canPick(blockState)) Pair(it, pickHandler) else null
                 }
                 .sortedBy { it.first.distanceSquared }
                 .take(!maxTargetCount)
@@ -138,7 +137,7 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
                             run {
 
                                 // 収穫試行
-                                val result = pickable.tryPick(world, blockPos, Optional.of(player), UtilsMath.randomInt(world.rand, !fortune))
+                                val result = pickable.tryPick(world, blockPos, player, UtilsMath.randomInt(world.rand, !fortune))
                                 if (!result) return@targets
 
                                 // 種の追加ドロップ

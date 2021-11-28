@@ -3,7 +3,6 @@ package miragefairy2019.mod3.mirageflower
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
-import miragefairy2019.mod.api.pickable.IPickable
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
 import miragefairy2019.mod.modules.materialsfairy.ModuleMaterialsFairy
@@ -12,6 +11,8 @@ import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower
+import miragefairy2019.mod3.pick.PickHandler
+import miragefairy2019.mod3.pick.api.IPickHandler
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.shineEfficiency
 import mirrg.boron.util.UtilsMath
@@ -38,7 +39,6 @@ import net.minecraft.world.EnumSkyBlock
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
-import java.util.Optional
 import java.util.Random
 
 fun getGrowRate(world: World, blockPos: BlockPos): Double {
@@ -237,18 +237,15 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
         var itemStack = playerIn.heldItemMainhand
         itemStack = if (itemStack.isEmpty) ItemStack.EMPTY else itemStack.copy()
         val fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemStack)
-        return pickable.tryPick(worldIn, pos, Optional.of(playerIn), fortune)
+        return pickHandler.tryPick(worldIn, pos, playerIn, fortune)
     }
 
-    val pickable: IPickable
-        get() = object : IPickable {
+    val pickHandler: IPickHandler
+        get() = object : PickHandler() {
             override fun getBlock() = this@BlockMirageFlower
-            override fun isPickableAge(blockState: IBlockState) = getAge(blockState) == 3
-            override fun tryPick(world: World, blockPos: BlockPos, oPlayer: Optional<EntityPlayer>, fortune: Int): Boolean {
+            override fun canPick(blockState: IBlockState) = getAge(blockState) == 3
+            override fun tryPickImpl(world: World, blockPos: BlockPos, player: EntityPlayer?, fortune: Int): Boolean {
                 val blockState = world.getBlockState(blockPos)
-
-                // 最大サイズでないなら失敗
-                if (!isPickableAge(blockState)) return false
 
                 // 収穫物計算
                 val drops = NonNullList.create<ItemStack>()
@@ -261,7 +258,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
                 blockState.block.dropXpOnBlockBreak(world, blockPos, getExpDrop(blockState, world, blockPos, fortune, false))
 
                 // エフェクト
-                world.playEvent(oPlayer.orElse(null), 2001, blockPos, getStateId(blockState))
+                world.playEvent(player, 2001, blockPos, getStateId(blockState))
 
                 // ブロックの置換
                 world.setBlockState(blockPos, defaultState.withProperty(AGE, 1), 2)
