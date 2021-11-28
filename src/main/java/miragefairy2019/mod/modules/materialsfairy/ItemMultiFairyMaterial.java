@@ -14,7 +14,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static net.minecraft.util.text.TextFormatting.AQUA;
-import static net.minecraft.util.text.TextFormatting.YELLOW;
 
 public class ItemMultiFairyMaterial<V extends ItemVariantFairyMaterial> extends ItemMultiMaterial<V> {
 
@@ -35,14 +34,6 @@ public class ItemMultiFairyMaterial<V extends ItemVariantFairyMaterial> extends 
             tooltip.add(new TextComponentString("Tier " + variant.tier)
                     .setStyle(new Style().setColor(AQUA))
                     .getFormattedText());
-
-            // 素材
-            if (!variant.getComposite().isEmpty()) {
-                tooltip.add(new TextComponentString("Contains: ")
-                        .setStyle(new Style().setColor(YELLOW))
-                        .appendSibling(variant.getComposite().getDisplayString())
-                        .getFormattedText());
-            }
 
         }
     }

@@ -1,9 +1,7 @@
 package miragefairy2019.mod.modules.materialsfairy;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.composite.IComponentInstance;
 import miragefairy2019.mod.api.ore.ApiOre;
-import miragefairy2019.mod.lib.Configurator;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeBlock;
@@ -21,10 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.Optional;
-import java.util.function.Function;
 
-import static miragefairy2019.mod.api.composite.ApiComposite.instance;
-import static miragefairy2019.mod.api.composite.Components.*;
 import static miragefairy2019.mod.lib.Configurator.*;
 
 public class ModuleMaterialsFairy {
@@ -53,44 +48,30 @@ public class ModuleMaterialsFairy {
                 .bind(c -> {
 
                     itemVariant(c.erMod, c, 0, () -> new ItemVariantFairyMaterial("shine_mana_rod", "manaRodShine", 3))
-                            .bind(addComponent(instance(miragium.get(), 0.5)))
-                            .bind(addComponent(instance(moonstone.get(), 0.5)))
                             .bind(addOreName("mirageFairy2019ManaRodShine"))
                             .bind(onCreateItemStack(v -> itemStackManaRodShine = v.createItemStack()));
 
                     itemVariant(c.erMod, c, 1, () -> new ItemVariantFairyMaterial("fire_mana_rod", "manaRodFire", 3))
-                            .bind(addComponent(instance(miragium.get(), 0.5)))
-                            .bind(addComponent(instance(cinnabar.get(), 0.5)))
                             .bind(addOreName("mirageFairy2019ManaRodFire"))
                             .bind(onCreateItemStack(v -> itemStackManaRodFire = v.createItemStack()));
 
                     itemVariant(c.erMod, c, 2, () -> new ItemVariantFairyMaterial("wind_mana_rod", "manaRodWind", 3))
-                            .bind(addComponent(instance(miragium.get(), 0.5)))
-                            .bind(addComponent(instance(fluorite.get(), 0.5)))
                             .bind(addOreName("mirageFairy2019ManaRodWind"))
                             .bind(onCreateItemStack(v -> itemStackManaRodWind = v.createItemStack()));
 
                     itemVariant(c.erMod, c, 3, () -> new ItemVariantFairyMaterial("gaia_mana_rod", "manaRodGaia", 3))
-                            .bind(addComponent(instance(miragium.get(), 0.5)))
-                            .bind(addComponent(instance(sulfur.get(), 0.5)))
                             .bind(addOreName("mirageFairy2019ManaRodGaia"))
                             .bind(onCreateItemStack(v -> itemStackManaRodGaia = v.createItemStack()));
 
                     itemVariant(c.erMod, c, 4, () -> new ItemVariantFairyMaterial("aqua_mana_rod", "manaRodAqua", 3))
-                            .bind(addComponent(instance(miragium.get(), 0.5)))
-                            .bind(addComponent(instance(apatite.get(), 0.5)))
                             .bind(addOreName("mirageFairy2019ManaRodAqua"))
                             .bind(onCreateItemStack(v -> itemStackManaRodAqua = v.createItemStack()));
 
                     itemVariant(c.erMod, c, 5, () -> new ItemVariantFairyMaterial("dark_mana_rod", "manaRodDark", 3))
-                            .bind(addComponent(instance(miragium.get(), 0.5)))
-                            .bind(addComponent(instance(magnetite.get(), 0.5)))
                             .bind(addOreName("mirageFairy2019ManaRodDark"))
                             .bind(onCreateItemStack(v -> itemStackManaRodDark = v.createItemStack()));
 
                     itemVariant(c.erMod, c, 6, () -> new ItemVariantFairyMaterial("quartz_mana_rod", "manaRodQuartz", 3))
-                            .bind(addComponent(instance(miragium.get(), 0.5)))
-                            .bind(addComponent(instance(quartz.get(), 0.5)))
                             .bind(addOreName("mirageFairy2019ManaRodQuartz"))
                             .bind(onCreateItemStack(v -> itemStackManaRodQuartz = v.createItemStack()))
                             .bind(onAddRecipe(v -> {
@@ -162,8 +143,6 @@ public class ModuleMaterialsFairy {
                             }));
 
                     itemVariant(c.erMod, c, 13, () -> new ItemVariantFairyMaterial("glass_mana_rod", "manaRodGlass", 2))
-                            .bind(addComponent(instance(miragium.get(), 0.5)))
-                            .bind(addComponent(instance(glass.get(), 0.5)))
                             .bind(addOreName("mirageFairy2019ManaRodGlass"))
                             .bind(onCreateItemStack(v -> itemStackManaRodGlass = v.createItemStack()));
 
@@ -178,11 +157,6 @@ public class ModuleMaterialsFairy {
                     return Monad.of(c);
                 });
 
-    }
-
-    public static <V extends ItemVariantFairyMaterial> Function<Configurator<V>, Monad<Configurator<V>>> addComponent(IComponentInstance componentInstance) {
-        return c -> Monad.of(c)
-                .bind(onRegisterItem(v -> v.addComponent(componentInstance)));
     }
 
 }
