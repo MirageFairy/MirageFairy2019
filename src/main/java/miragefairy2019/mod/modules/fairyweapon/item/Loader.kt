@@ -5,8 +5,6 @@ import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.mod.api.composite.ApiComposite
-import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.EnumErgType.ATTACK
@@ -77,8 +75,8 @@ private fun <T : ItemFairyWeaponBase> ModInitializer.fw(
         }
     }
     onInit {
-        if (parent != null) item.addComponent(parent().get().composite)
-        ergTypeSuppliers.forEach { item.addComponent(ApiComposite.instance(ApiFairy.getComponentAbilityType(it()))) }
+        if (parent != null) parent().get().manualRepairErgs.forEach { (key, value) -> item.addManualRepairErg(key, value) }
+        ergTypeSuppliers.forEach { item.addManualRepairErg(it()) }
         item.maxDamage = getDurability(tier) - 1
     }
     onCreateItemStack {

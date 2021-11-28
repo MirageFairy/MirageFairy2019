@@ -1,23 +1,20 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import com.google.common.base.Predicate;
-import miragefairy2019.mod.api.composite.ApiComposite;
-import miragefairy2019.mod.api.composite.IComponentInstance;
-import miragefairy2019.mod.api.composite.IComposite;
-import miragefairy2019.mod.api.composite.IItemComposite;
 import miragefairy2019.mod.api.fairy.ApiFairy;
-import miragefairy2019.mod.api.fairy.IComponentAbilityType;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.api.fairyweapon.formula.ApiFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon;
 import miragefairy2019.mod.api.fairyweapon.recipe.ICombiningItem;
-import miragefairy2019.mod.api.fairyweapon.recipe.ISphereReplacementItem;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.UtilsMinecraft;
+import miragefairy2019.mod3.erg.ErgKt;
+import miragefairy2019.mod3.erg.api.EnumErgType;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
+import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem;
 import miragefairy2019.mod3.sphere.SphereKt;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -58,13 +55,17 @@ import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static net.minecraft.util.text.TextFormatting.*;
 
-public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem, IItemComposite, ICombiningItem, IItemFairyWeapon {
+public class ItemFairyWeaponBase extends Item implements IManualRepairableItem, ICombiningItem, IItemFairyWeapon {
 
     public ItemFairyWeaponBase() {
         setMaxStackSize(1);
@@ -193,11 +194,22 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
         ItemStack itemStackFairy = getCombinedFairy(itemStack);
         if (!itemStackFairy.isEmpty()) tooltip.add(AQUA + "Combined: " + itemStackFairy.getDisplayName());
 
-        // 素材
-        tooltip.add(new TextComponentString("Contains: ")
-                .setStyle(new Style().setColor(YELLOW))
-                .appendSibling(getComposite().getDisplayString())
-                .getFormattedText());
+        // スフィア交換
+        if (canManualRepair(itemStack)) {
+            TextComponentString a = new TextComponentString("Sphere Replacement: ");
+            a.setStyle(new Style().setColor(YELLOW));
+
+            ISuppliterator.ofIterable(manualRepairErgs.entrySet())
+                    .map(e -> ISuppliterator.of(
+                            ErgKt.getDisplayName(e.getKey()),
+                            new TextComponentString(e.getValue() == 1 ? "" : "×" + e.getValue())
+                    ).toList())
+                    .sandwich(ISuppliterator.of((ITextComponent) new TextComponentString(", ")).toList())
+                    .flatMap(t -> ISuppliterator.ofIterable(t))
+                    .forEach(t -> a.appendSibling(t));
+
+            tooltip.add(a.getFormattedText());
+        }
 
         // 妖精魔法ステータス
         Tuple<ItemStack, IFairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player)
@@ -503,25 +515,42 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
                 ((color >> 0) & 0xFF) / 255.0);
     }
 
-    //////////////////// コンポジット関連
+    //////////////////// スフィア交換関連
 
-    private IComposite composite = ApiComposite.composite();
+    private Map<EnumErgType, Integer> manualRepairErgs = new HashMap<>();
 
-    public void addComponent(IComponentInstance componentInstance) {
-        composite = composite.add(componentInstance);
+    public Map<EnumErgType, Integer> getManualRepairErgs() {
+        return manualRepairErgs;
     }
 
-    public void addComponent(IComposite composite) {
-        this.composite = this.composite.add(composite);
+    public void addManualRepairErg(EnumErgType ergType) {
+        addManualRepairErg(ergType, 1);
     }
 
-    public IComposite getComposite() {
-        return composite;
+    public void addManualRepairErg(EnumErgType ergType, int amount) {
+        manualRepairErgs.compute(ergType, (ergType2, amountNow) -> (amountNow != null ? amountNow : 0) + amount);
     }
 
     @Override
-    public Optional<IComposite> getMirageFairy2019Composite(ItemStack itemStack) {
-        return Optional.of(getComposite());
+    public boolean canManualRepair(ItemStack itemStack) {
+        return true;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getManualRepairSubstitute(ItemStack itemStack) {
+        return manualRepairErgs.entrySet().stream()
+                .filter(e -> e.getValue() > 0)
+                .sorted(Map.Entry.comparingByKey())
+                .flatMap(e -> IntStream.range(0, e.getValue())
+                        .mapToObj(i -> new OreIngredient(SphereKt.getOreName(SphereKt.getSphereType(e.getKey())))))
+                .collect(Collectors.toCollection(NonNullList::create));
+    }
+
+    @Override
+    public ItemStack getManualRepairedItem(ItemStack itemStack) {
+        itemStack = itemStack.copy();
+        itemStack.setItemDamage(0);
+        return itemStack;
     }
 
     //////////////////// 妖精搭乗関連
@@ -561,35 +590,6 @@ public class ItemFairyWeaponBase extends Item implements ISphereReplacementItem,
     @Override
     public ItemStack getContainerItem(ItemStack itemStack) {
         return getCombinedFairy(itemStack);
-    }
-
-    //////////////////// スフィア交換関連
-
-    @Override
-    public boolean canSphereReplace(ItemStack itemStack) {
-        return true;
-    }
-
-    @Override
-    public NonNullList<Ingredient> getRepairmentSpheres(ItemStack itemStack) {
-        return getComposite().getComponents()
-                .filter(e -> e.getComponent() instanceof IComponentAbilityType)
-                .map(e -> Tuple.of((IComponentAbilityType) e.getComponent(), e.getNanoAmount()))
-                .map(e -> Tuple.of(SphereKt.getSphereType(e.x.getAbilityType()), e.y))
-                .flatMap(e -> {
-                    long amount = e.y;
-                    int count = (int) (amount / 1_000_000_000L) + (amount % 1_000_000_000L != 0 ? 1 : 0);
-                    return ISuppliterator.range(count)
-                            .map(i -> new OreIngredient(SphereKt.getOreName(e.x)));
-                })
-                .toCollection(NonNullList::create);
-    }
-
-    @Override
-    public ItemStack getSphereReplacedItem(ItemStack itemStack) {
-        itemStack = itemStack.copy();
-        itemStack.setItemDamage(0);
-        return itemStack;
     }
 
     //////////////////// 妖精魔法ステータス関連

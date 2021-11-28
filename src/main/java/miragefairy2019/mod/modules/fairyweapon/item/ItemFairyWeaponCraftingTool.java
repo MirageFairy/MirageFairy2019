@@ -94,7 +94,7 @@ public class ItemFairyWeaponCraftingTool extends ItemFairyWeaponBase {
     //
 
     @Override
-    public boolean canSphereReplace(ItemStack itemStack) {
+    public boolean canManualRepair(ItemStack itemStack) {
         return false;
     }
 
