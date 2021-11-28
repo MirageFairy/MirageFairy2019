@@ -2,12 +2,8 @@ package miragefairy2019.mod.modules.ore;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ore.ApiOre;
-import miragefairy2019.mod.lib.Configurator;
 import miragefairy2019.mod.lib.EventRegistryMod;
-import miragefairy2019.mod.lib.Monad;
 import miragefairy2019.mod.lib.multi.IBlockVariant;
-import miragefairy2019.mod.lib.multi.ItemMultiMaterial;
-import miragefairy2019.mod.lib.multi.ItemVariantMaterial;
 import miragefairy2019.mod.modules.ore.material.BlockMaterials;
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1;
 import miragefairy2019.mod.modules.ore.material.ItemBlockMaterials;
@@ -30,22 +26,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.eventhandler.Event.Result;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
-import static miragefairy2019.mod.lib.Configurator.*;
 
 public class ModuleOre {
 
@@ -67,7 +53,6 @@ public class ModuleOre {
     public static BlockOre<EnumVariantOre2> blockOre2;
     public static BlockMaterials<EnumVariantMaterials1> blockMaterials1;
 
-    public static ItemMultiMaterial<ItemVariantMaterial> itemMaterials;
     public static ItemBlockOre<EnumVariantOre1> itemBlockOre1;
     public static ItemBlockOre<EnumVariantOre2> itemBlockOre2;
     public static ItemBlockMaterials<EnumVariantMaterials1> itemBlockMaterials1;
@@ -78,64 +63,6 @@ public class ModuleOre {
             ApiOreSeedDrop.oreSeedDropRegistry = new OreSeedDropRegistry();
             LoaderOreSeedDrop.loadOreSeedDrop();
         });
-
-        // マテリアル
-        item(erMod, ItemMultiMaterial<ItemVariantMaterial>::new, new ResourceLocation(ModMirageFairy2019.MODID, "materials"), "materials")
-                .bind(onRegisterItem(item -> ApiOre.itemMaterials1 = itemMaterials = item))
-                .bind(setCreativeTab(() -> ApiMain.creativeTab))
-                .bind(c -> {
-
-                    itemVariant(c.erMod, c, 0, () -> new ItemVariantMaterial("apatite_gem", "gemApatite")).bind(addOreName("gemApatite"));
-                    itemVariant(c.erMod, c, 1, () -> new ItemVariantMaterial("fluorite_gem", "gemFluorite")).bind(addOreName("gemFluorite"));
-                    itemVariant(c.erMod, c, 2, () -> new ItemVariantMaterial("sulfur_gem", "gemSulfur")).bind(addOreName("gemSulfur"));
-                    itemVariant(c.erMod, c, 3, () -> new ItemVariantMaterial("miragium_dust", "dustMiragium")).bind(addOreName("dustMiragium"));
-                    itemVariant(c.erMod, c, 4, () -> new ItemVariantMaterial("miragium_tiny_dust", "dustTinyMiragium")).bind(addOreName("dustTinyMiragium"));
-                    itemVariant(c.erMod, c, 5, () -> new ItemVariantMaterial("miragium_ingot", "ingotMiragium")).bind(addOreName("ingotMiragium"));
-                    itemVariant(c.erMod, c, 6, () -> new ItemVariantMaterial("cinnabar_gem", "gemCinnabar")).bind(addOreName("gemCinnabar"));
-                    itemVariant(c.erMod, c, 7, () -> new ItemVariantMaterial("moonstone_gem", "gemMoonstone")).bind(addOreName("gemMoonstone"));
-                    itemVariant(c.erMod, c, 8, () -> new ItemVariantMaterial("magnetite_gem", "gemMagnetite")).bind(addOreName("gemMagnetite"));
-                    itemVariant(c.erMod, c, 9, () -> new ItemVariantMaterial("saltpeter_gem", "gemSaltpeter")).bind(addOreName("gemSaltpeter"));
-                    itemVariant(c.erMod, c, 10, () -> new ItemVariantMaterial("pyrope_gem", "gemPyrope")).bind(addOreName("gemPyrope"));
-                    itemVariant(c.erMod, c, 11, () -> new ItemVariantMaterial("smithsonite_gem", "gemSmithsonite")).bind(addOreName("gemSmithsonite"));
-                    itemVariant(c.erMod, c, 12, () -> new ItemVariantMaterial("miragium_rod", "rodMiragium")).bind(addOreName("rodMiragium"));
-                    itemVariant(c.erMod, c, 13, () -> new ItemVariantMaterial("miragium_nugget", "nuggetMiragium")).bind(addOreName("nuggetMiragium"));
-                    itemVariant(c.erMod, c, 14, () -> new ItemVariantMaterial("nephrite_gem", "gemNephrite")).bind(addOreName("gemNephrite"));
-                    itemVariant(c.erMod, c, 15, () -> new ItemVariantMaterial("topaz_gem", "gemTopaz")).bind(addOreName("gemTopaz"));
-                    itemVariant(c.erMod, c, 16, () -> new ItemVariantMaterial("tourmaline_gem", "gemTourmaline")).bind(addOreName("gemTourmaline"));
-                    itemVariant(c.erMod, c, 17, () -> new ItemVariantMaterial("heliolite_gem", "gemHeliolite")).bind(addOreName("gemHeliolite"));
-                    itemVariant(c.erMod, c, 18, () -> new ItemVariantMaterial("labradorite_gem", "gemLabradorite")).bind(addOreName("gemLabradorite"));
-                    itemVariant(c.erMod, c, 19, () -> new ItemVariantMaterial("lilagium_ingot", "ingotLilagium")).bind(addOreName("ingotLilagium"));
-
-                    erMod.registerItem.register(b -> {
-                        if (ApiMain.side.isClient()) c.get().setCustomModelResourceLocations();
-                    });
-
-                    return Monad.of(c);
-                });
-
-        // 中身入りバケツ
-        item(erMod, () -> new ItemFilledBucket(), new ResourceLocation(ModMirageFairy2019.MODID, "filled_bucket"), "filledBucket")
-                .bind(setCreativeTab(() -> ApiMain.creativeTab))
-                .peek(c -> {
-
-                    itemVariant(c.erMod, c, 0, () -> new ItemVariantFilledBucket("miragium_water_bucket", "bucketMiragiumWater", true, () -> Optional.of(blockFluidMiragiumWater.getDefaultState())))
-                            .bind(addOreName("bucketMiragiumWater"))
-                            .bind(addOreName("container1000MiragiumWater"))
-                            .bind(registererEmptyBucketFiller(() -> blockFluidMiragiumWater.getDefaultState()));
-                    itemVariant(c.erMod, c, 1, () -> new ItemVariantFilledBucket("mirage_flower_extract_bucket", "bucketMirageFlowerExtract", true, () -> Optional.of(blockFluidMirageFlowerExtract.getDefaultState())))
-                            .bind(addOreName("bucketMirageFlowerExtract"))
-                            .bind(addOreName("container1000MirageFlowerExtract"))
-                            .bind(registererEmptyBucketFiller(() -> blockFluidMirageFlowerExtract.getDefaultState()));
-                    itemVariant(c.erMod, c, 2, () -> new ItemVariantFilledBucket("mirage_flower_oil_bucket", "bucketMirageFlowerOil", true, () -> Optional.of(blockFluidMirageFlowerOil.getDefaultState())))
-                            .bind(addOreName("bucketMirageFlowerOil"))
-                            .bind(addOreName("container1000MirageFlowerOil"))
-                            .bind(registererEmptyBucketFiller(() -> blockFluidMirageFlowerOil.getDefaultState()));
-
-                    erMod.registerItem.register(b -> {
-                        if (ApiMain.side.isClient()) c.get().setCustomModelResourceLocations();
-                    });
-
-                });
 
         erMod.registerBlock.register(b -> {
 
@@ -368,30 +295,6 @@ public class ModuleOre {
             //GameRegistry.addSmelting(ApiOre.itemStackDustMiragium, ApiOre.itemStackIngotMiragium, 0);
 
         });
-    }
-
-    public static <V extends ItemVariantMaterial> Function<Configurator<V>, Monad<Configurator<V>>> registererEmptyBucketFiller(Supplier<IBlockState> sBlockState) {
-        return cv -> {
-            MinecraftForge.EVENT_BUS.register(new Object() {
-                @SubscribeEvent
-                public void accept(FillBucketEvent event) {
-                    if (event.getResult() != Result.DEFAULT) return;
-                    if (event.getEmptyBucket().getItem() == Items.BUCKET) {
-                        boolean result = ItemFilledBucket.tryDrainFluid(
-                                event.getWorld(),
-                                event.getEntityPlayer(),
-                                event.getEmptyBucket(),
-                                event.getTarget(),
-                                sBlockState.get());
-                        if (result) {
-                            event.setFilledBucket(cv.get().createItemStack());
-                            event.setResult(Result.ALLOW);
-                        }
-                    }
-                }
-            });
-            return Monad.of(cv);
-        };
     }
 
 }

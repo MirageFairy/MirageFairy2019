@@ -6,6 +6,7 @@ import miragefairy2019.mod.lib.InitializationContext
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
 import miragefairy2019.mod.modules.fairyweapon.item.moduleFairyWeapon
 import miragefairy2019.mod.modules.ore.ModuleOre
+import miragefairy2019.mod.modules.ore.Ore
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
 import miragefairy2019.mod3.artifacts.moduleArtifacts
 import miragefairy2019.mod3.damagesource.moduleDamageSource
@@ -52,6 +53,7 @@ class InitializerMirageFairy2019 {
             moduleManualRepair()
             moduleDamageSource()
             FairyMaterials.module(this)
+            Ore.module(this)
         }
 
         modInitializer.onInstantiation()
