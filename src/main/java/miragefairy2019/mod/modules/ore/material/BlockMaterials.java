@@ -25,7 +25,7 @@ public class BlockMaterials<V extends IBlockVariantMaterials> extends BlockMulti
     public BlockMaterials(IListBlockVariant<V> variantList) {
         super(Material.IRON, variantList);
 
-        for (V variant : variantList) {
+        for (V variant : variantList.getBlockVariants()) {
             setHarvestLevel(variant.getHarvestTool(), variant.getHarvestLevel(), getState(variant));
         }
 

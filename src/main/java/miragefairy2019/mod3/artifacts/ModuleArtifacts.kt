@@ -48,12 +48,12 @@ val moduleArtifacts: Module = {
     itemBlockTwinkleStone = item({ ItemBlockMulti(blockTwinkleStone.get()) }, "twinkle_stone") {
         setUnlocalizedName("twinkleStone")
         onRegisterItem {
-            blockTwinkleStone.get().variantList.forEach { variant ->
+            blockTwinkleStone.get().variantList.blockVariants.forEach { variant ->
                 item.setCustomModelResourceLocation(variant.resourceName, variant.metadata)
             }
         }
         onCreateItemStack {
-            blockTwinkleStone.get().variantList.forEach { variant ->
+            blockTwinkleStone.get().variantList.blockVariants.forEach { variant ->
                 variant.oreNames.forEach { oreName ->
                     item.addOreName(oreName, variant.metadata)
                 }

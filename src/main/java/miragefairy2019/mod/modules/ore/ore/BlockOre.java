@@ -31,7 +31,7 @@ public class BlockOre<V extends IBlockVariantOre> extends BlockMulti<V> {
         setHardness(3.0F);
         setResistance(5.0F);
 
-        for (V variant : variantList) {
+        for (V variant : variantList.getBlockVariants()) {
             setHarvestLevel(variant.getHarvestTool(), variant.getHarvestLevel(), getState(variant));
         }
 

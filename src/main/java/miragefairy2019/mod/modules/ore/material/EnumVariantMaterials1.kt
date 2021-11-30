@@ -2,13 +2,8 @@ package miragefairy2019.mod.modules.ore.material
 
 import net.minecraft.block.SoundType
 import net.minecraft.util.IStringSerializable
-import miragefairy2019.mod.modules.ore.material.IBlockVariantMaterials
 import miragefairy2019.mod.lib.multi.IListBlockVariant
-import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
-import miragefairy2019.mod3.artifacts.EnumVariantTwinkleStone
-import mirrg.boron.util.suppliterator.ISuppliterator
 import net.minecraft.block.material.Material
-import java.util.HashMap
 
 enum class EnumVariantMaterials1(
     @JvmField val metadata: Int,
@@ -60,8 +55,8 @@ enum class EnumVariantMaterials1(
                 }
             }
 
-            override fun iterator(): MutableIterator<EnumVariantMaterials1> = values.toMutableList().iterator() // TODO
             override fun byMetadata(metadata: Int) = metaLookup[metadata] ?: values[0]
+            override fun getBlockVariants() = values
         }
     }
 }

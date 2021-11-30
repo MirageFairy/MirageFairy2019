@@ -60,7 +60,7 @@ public class BlockMulti<V extends IBlockVariant> extends Block {
 
     @Override
     public void getSubBlocks(CreativeTabs creativeTab, NonNullList<ItemStack> itemStacks) {
-        for (V variant : variantList) {
+        for (V variant : variantList.getBlockVariants()) {
             itemStacks.add(new ItemStack(this, 1, variant.getMetadata()));
         }
     }

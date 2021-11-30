@@ -20,7 +20,7 @@ class BlockTwinkleStone : BlockMulti<EnumVariantTwinkleStone>(Material.ROCK, Enu
         // 挙動
         setHardness(3.0f)
         setResistance(5.0f)
-        variantList.forEach { setHarvestLevel("pickaxe", 0, getState(it)) }
+        variantList.blockVariants.forEach { setHarvestLevel("pickaxe", 0, getState(it)) }
     }
 
     override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer) = true
@@ -70,8 +70,8 @@ enum class EnumVariantTwinkleStone(
                 }
             }
 
-            override fun iterator(): MutableIterator<EnumVariantTwinkleStone> = values.toMutableList().iterator() // TODO
             override fun byMetadata(metadata: Int) = metaLookup[metadata] ?: values[0]
+            override fun getBlockVariants() = values
         }
     }
 }

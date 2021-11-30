@@ -186,7 +186,7 @@ public class ModuleOre {
             itemBlockOre1.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.ITEMS.register(itemBlockOre1);
             if (ApiMain.side.isClient()) {
-                for (IBlockVariantOre variant : blockOre1.variantList) {
+                for (IBlockVariantOre variant : blockOre1.variantList.getBlockVariants()) {
                     ModelLoader.setCustomModelResourceLocation(
                             itemBlockOre1,
                             variant.getMetadata(),
@@ -201,7 +201,7 @@ public class ModuleOre {
             itemBlockOre2.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.ITEMS.register(itemBlockOre2);
             if (ApiMain.side.isClient()) {
-                for (IBlockVariantOre variant : blockOre2.variantList) {
+                for (IBlockVariantOre variant : blockOre2.variantList.getBlockVariants()) {
                     ModelLoader.setCustomModelResourceLocation(
                             itemBlockOre2,
                             variant.getMetadata(),
@@ -216,7 +216,7 @@ public class ModuleOre {
             itemBlockMaterials1.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.ITEMS.register(itemBlockMaterials1);
             if (ApiMain.side.isClient()) {
-                for (IBlockVariant variant : blockMaterials1.variantList) {
+                for (IBlockVariant variant : blockMaterials1.variantList.getBlockVariants()) {
                     ModelLoader.setCustomModelResourceLocation(
                             itemBlockMaterials1,
                             variant.getMetadata(),
