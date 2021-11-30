@@ -111,7 +111,7 @@ public class ModuleOre {
             ForgeRegistries.BLOCKS.register(blockOre2);
 
             // ブロック
-            ApiOre.blockMaterials1 = blockMaterials1 = new BlockMaterials<>(EnumVariantMaterials1.variantList);
+            ApiOre.blockMaterials1 = blockMaterials1 = new BlockMaterials<>(EnumVariantMaterials1.Companion.getVariantList());
             blockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
             blockMaterials1.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockMaterials1);
@@ -281,7 +281,7 @@ public class ModuleOre {
         });
         erMod.createItemStack.register(ic -> {
             for (EnumVariantMaterials1 variant : EnumVariantMaterials1.values()) {
-                OreDictionary.registerOre(variant.oreName, new ItemStack(itemBlockMaterials1, 1, variant.metadata));
+                OreDictionary.registerOre(variant.getOreName(), new ItemStack(itemBlockMaterials1, 1, variant.metadata));
             }
             OreDictionary.registerOre("container1000Water", Items.WATER_BUCKET);
             OreDictionary.registerOre("container1000Lava", Items.LAVA_BUCKET);
