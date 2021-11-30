@@ -70,8 +70,8 @@ enum class EnumVariantTwinkleStone(
                 }
             }
 
-            override fun byMetadata(metadata: Int): EnumVariantTwinkleStone = metaLookup[metadata] ?: values[0]
             override fun iterator(): MutableIterator<EnumVariantTwinkleStone> = values.toMutableList().iterator() // TODO
+            override fun byMetadata(metadata: Int) = metaLookup[metadata] ?: values[0]
         }
     }
 }

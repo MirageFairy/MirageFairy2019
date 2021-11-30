@@ -60,8 +60,8 @@ enum class EnumVariantMaterials1(
                 }
             }
 
-            override fun byMetadata(metadata: Int): EnumVariantMaterials1 = metaLookup[metadata] ?: values[0]
             override fun iterator(): MutableIterator<EnumVariantMaterials1> = values.toMutableList().iterator() // TODO
+            override fun byMetadata(metadata: Int) = metaLookup[metadata] ?: values[0]
         }
     }
 }

@@ -53,8 +53,8 @@ enum class EnumVariantOre2(
                 }
             }
 
-            override fun byMetadata(metadata: Int): EnumVariantOre2 = metaLookup[metadata] ?: values[0]
             override fun iterator(): MutableIterator<EnumVariantOre2> = values.toMutableList().iterator() // TODO
+            override fun byMetadata(metadata: Int) = metaLookup[metadata] ?: values[0]
         }
     }
 }
