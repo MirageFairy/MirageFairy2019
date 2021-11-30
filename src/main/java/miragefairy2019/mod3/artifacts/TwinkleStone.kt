@@ -63,18 +63,15 @@ enum class EnumVariantTwinkleStone(
     companion object {
         val variantList: IListBlockVariant<EnumVariantTwinkleStone> = object : IListBlockVariant<EnumVariantTwinkleStone> {
             private val values = values().toList()
-            private val metaLookup = run {
-                val map = mutableMapOf<Int, EnumVariantTwinkleStone>()
+            private val metaLookup = mutableMapOf<Int, EnumVariantTwinkleStone>().also { map ->
                 values().forEach { variant ->
                     require(!map.containsKey(variant.metadata))
                     map[variant.metadata] = variant
                 }
-                map
             }
 
             override fun byMetadata(metadata: Int): EnumVariantTwinkleStone = metaLookup[metadata] ?: values[0]
             override fun iterator(): MutableIterator<EnumVariantTwinkleStone> = values.toMutableList().iterator() // TODO
         }
-
     }
 }
