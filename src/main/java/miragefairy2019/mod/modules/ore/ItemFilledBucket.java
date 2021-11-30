@@ -108,10 +108,10 @@ public class ItemFilledBucket extends ItemMultiMaterial<ItemVariantFilledBucket>
         if (!worldIn.isAirBlock(posIn) && solid && !replaceable) return false;
 
         // 設置ブロック
-        IBlockState blockStateFluid = getVariant(itemStack).map(v -> v.soBlockStateFluid.get()).orElse(Optional.empty()).orElse(null);
+        IBlockState blockStateFluid = getVariant(itemStack).map(v -> v.getGetFluidBlockState().invoke()).orElse(null);
         if (blockStateFluid == null) return false;
 
-        if (getVariant(itemStack).map(v -> v.vaporizable).orElse(false) && worldIn.provider.doesWaterVaporize()) {
+        if (getVariant(itemStack).map(v -> v.getVaporizable()).orElse(false) && worldIn.provider.doesWaterVaporize()) {
             // 気化する場合
 
             // エフェクト

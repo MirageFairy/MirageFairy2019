@@ -20,6 +20,7 @@ import net.minecraftforge.fluids.Fluid
 import net.minecraftforge.fml.common.eventhandler.Event
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import java.util.Optional
+import java.util.function.Supplier
 
 private typealias Ivifb = ItemVariantInitializer<ItemFilledBucket, ItemVariantFilledBucket>
 
@@ -85,7 +86,7 @@ object Ore {
                     "miragium_water_bucket",
                     "bucketMiragiumWater",
                     true
-                ) { Optional.of(ModuleOre.blockFluidMiragiumWater.defaultState) }
+                ) { ModuleOre.blockFluidMiragiumWater.defaultState }
             }, 0) {
                 addOreName("bucketMiragiumWater")
                 addOreName("container1000MiragiumWater")
@@ -96,7 +97,7 @@ object Ore {
                     "mirage_flower_extract_bucket",
                     "bucketMirageFlowerExtract",
                     true
-                ) { Optional.of(ModuleOre.blockFluidMirageFlowerExtract.defaultState) }
+                ) { ModuleOre.blockFluidMirageFlowerExtract.defaultState }
             }, 1) {
                 addOreName("bucketMirageFlowerExtract")
                 addOreName("container1000MirageFlowerExtract")
@@ -107,7 +108,7 @@ object Ore {
                     "mirage_flower_oil_bucket",
                     "bucketMirageFlowerOil",
                     true
-                ) { Optional.of(ModuleOre.blockFluidMirageFlowerOil.defaultState) }
+                ) { ModuleOre.blockFluidMirageFlowerOil.defaultState }
             }, 2) {
                 addOreName("bucketMirageFlowerOil")
                 addOreName("container1000MirageFlowerOil")
@@ -128,3 +129,5 @@ class BlockFluidMiragiumWater(fluid: Fluid) : BlockFluidClassic(fluid, Material.
         setLightOpacity(3)
     }
 }
+
+class ItemVariantFilledBucket(registryName: String, unlocalizedName: String, val vaporizable: Boolean, val getFluidBlockState: () -> IBlockState?) : ItemVariantMaterial(registryName, unlocalizedName)
