@@ -99,13 +99,13 @@ public class ModuleOre {
             //
 
             // 鉱石1
-            ApiOre.blockOre1 = blockOre1 = new BlockOre<>(EnumVariantOre1.variantList);
+            ApiOre.blockOre1 = blockOre1 = new BlockOre<>(EnumVariantOre1.Companion.getVariantList());
             blockOre1.setRegistryName(ModMirageFairy2019.MODID, "ore1");
             blockOre1.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockOre1);
 
             // 鉱石2
-            ApiOre.blockOre2 = blockOre2 = new BlockOre<>(EnumVariantOre2.variantList);
+            ApiOre.blockOre2 = blockOre2 = new BlockOre<>(EnumVariantOre2.Companion.getVariantList());
             blockOre2.setRegistryName(ModMirageFairy2019.MODID, "ore2");
             blockOre2.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockOre2);
