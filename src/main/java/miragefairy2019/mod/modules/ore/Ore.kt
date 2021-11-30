@@ -10,10 +10,13 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial
 import miragefairy2019.mod3.main.api.ApiMain
+import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Items
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.FillBucketEvent
+import net.minecraftforge.fluids.BlockFluidClassic
+import net.minecraftforge.fluids.Fluid
 import net.minecraftforge.fml.common.eventhandler.Event
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import java.util.Optional
@@ -116,5 +119,12 @@ object Ore {
             }
         }
 
+    }
+}
+
+class BlockFluidMiragiumWater(fluid: Fluid) : BlockFluidClassic(fluid, Material.WATER) {
+    init {
+        setHardness(100.0f)
+        setLightOpacity(3)
     }
 }
