@@ -2,7 +2,7 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.mod.lib.multi.BlockMulti
 import miragefairy2019.mod.lib.multi.IBlockVariant
-import miragefairy2019.mod.lib.multi.IListBlockVariant
+import miragefairy2019.mod.lib.multi.IBlockVariantsList
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -61,7 +61,7 @@ enum class EnumVariantTwinkleStone(
     override fun getUnlocalizedName(): String = unlocalizedName
 
     companion object {
-        val variantList: IListBlockVariant<EnumVariantTwinkleStone> = object : IListBlockVariant<EnumVariantTwinkleStone> {
+        val variantList: IBlockVariantsList<EnumVariantTwinkleStone> = object : IBlockVariantsList<EnumVariantTwinkleStone> {
             private val values = values().toList()
             private val metaLookup = mutableMapOf<Int, EnumVariantTwinkleStone>().also { map ->
                 values().forEach { variant ->
