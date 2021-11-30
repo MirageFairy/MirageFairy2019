@@ -15,9 +15,9 @@ import net.minecraft.world.World;
 
 public class BlockMulti<V extends IBlockVariant> extends Block {
 
-    public final IBlockVariantsList<V> variantList;
+    public final IBlockVariantList<V> variantList;
 
-    public BlockMulti(Material material, IBlockVariantsList<V> variantList) {
+    public BlockMulti(Material material, IBlockVariantList<V> variantList) {
         super(material);
         this.variantList = variantList;
 

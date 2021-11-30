@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.ore.material
 
 import net.minecraft.block.SoundType
 import net.minecraft.util.IStringSerializable
-import miragefairy2019.mod.lib.multi.IBlockVariantsList
+import miragefairy2019.mod.lib.multi.IBlockVariantList
 import net.minecraft.block.material.Material
 
 enum class EnumVariantMaterials1(
@@ -46,7 +46,7 @@ enum class EnumVariantMaterials1(
     override fun getMaterial() = material
 
     companion object {
-        val variantList: IBlockVariantsList<EnumVariantMaterials1> = object : IBlockVariantsList<EnumVariantMaterials1> {
+        val variantList: IBlockVariantList<EnumVariantMaterials1> = object : IBlockVariantList<EnumVariantMaterials1> {
             private val values = values().toList()
             private val metaLookup = mutableMapOf<Int, EnumVariantMaterials1>().also { map ->
                 values().forEach { variant ->
