@@ -15,10 +15,10 @@ abstract class WorldGenOreSeedBase(private val blockState: IBlockState, private 
 
 class WorldGenOreSeedString(blockState: IBlockState, isReplaceable: (IBlockState) -> Boolean) : WorldGenOreSeedBase(blockState, isReplaceable) {
     override fun generate(world: World, random: Random, pos: BlockPos): Boolean {
-        var pos = pos
-        val posMin = pos.add(0, 0, 0)
-        val posMax = pos.add(15, 0, 15)
-        pos = pos.add(8, 0, 8)
+        var pos2 = pos
+        val posMin = pos2.add(0, 0, 0)
+        val posMax = pos2.add(15, 0, 15)
+        pos2 = pos2.add(8, 0, 8)
 
         val poses = mutableSetOf<BlockPos>()
         var variant = random.nextInt(6)
@@ -26,23 +26,23 @@ class WorldGenOreSeedString(blockState: IBlockState, isReplaceable: (IBlockState
         repeat(100) {
             if (poses.size >= 32) return true
 
-            if (pos.x < posMin.x) return true
-            if (pos.z < posMin.z) return true
-            if (pos.x > posMax.x) return true
-            if (pos.z > posMax.z) return true
+            if (pos2.x < posMin.x) return true
+            if (pos2.z < posMin.z) return true
+            if (pos2.x > posMax.x) return true
+            if (pos2.z > posMax.z) return true
 
-            replace(world, random, pos)
-            poses += pos
+            replace(world, random, pos2)
+            poses += pos2
 
             if (random.nextInt(2) == 0) variant = random.nextInt(6)
 
             when (variant) {
-                0 -> pos = pos.up()
-                1 -> pos = pos.down()
-                2 -> pos = pos.west()
-                3 -> pos = pos.east()
-                4 -> pos = pos.north()
-                5 -> pos = pos.south()
+                0 -> pos2 = pos2.up()
+                1 -> pos2 = pos2.down()
+                2 -> pos2 = pos2.west()
+                3 -> pos2 = pos2.east()
+                4 -> pos2 = pos2.north()
+                5 -> pos2 = pos2.south()
             }
         }
         return true
