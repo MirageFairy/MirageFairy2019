@@ -5,14 +5,6 @@ import net.minecraft.world.gen.feature.WorldGenerator
 import net.minecraft.world.World
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.gen.feature.WorldGenMinable
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedString
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedHorizontal
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedVertical
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedPoint
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedStar
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedRing
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedPyramid
-import miragefairy2019.mod.modules.oreseed.worldgen.WorldGenOreSeedCube
 import java.util.Random
 
 class WorldGenCompoundOreSeed(block: BlockOreSeed, isReplaceable: (IBlockState) -> Boolean) {
