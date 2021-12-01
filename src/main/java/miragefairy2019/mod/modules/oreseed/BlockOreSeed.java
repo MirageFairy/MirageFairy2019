@@ -65,18 +65,18 @@ public class BlockOreSeed extends Block {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(VARIANT, EnumVariantOreSeed.byMetadata(meta));
+        return getDefaultState().withProperty(VARIANT, EnumVariantOreSeed.Companion.byMetadata(meta));
     }
 
     @Override
     public int getMetaFromState(IBlockState blockState) {
-        return blockState.getValue(VARIANT).metadata;
+        return blockState.getValue(VARIANT).getMetadata();
     }
 
     @Override
     public void getSubBlocks(CreativeTabs creativeTab, NonNullList<ItemStack> itemStacks) {
         for (EnumVariantOreSeed variant : EnumVariantOreSeed.values()) {
-            itemStacks.add(new ItemStack(this, 1, variant.metadata));
+            itemStacks.add(new ItemStack(this, 1, variant.getMetadata()));
         }
     }
 
@@ -144,7 +144,7 @@ public class BlockOreSeed extends Block {
         Random random = new Random(pos.getX() * 15946848L + pos.getY() * 29135678L + pos.getZ() * 65726816L);
         IBlockState blockStateAfter = Optional.ofNullable(ApiOreSeedDrop.oreSeedDropRegistry.drop(
                 new OreSeedDropEnvironment(type,
-                        getVariant(state).shape,
+                        getVariant(state).getShape(),
                         world,
                         pos),
                 random)).orElseGet(() -> type.getBlockState());

@@ -50,7 +50,7 @@ public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingTool {
             lines.add("===== Ore List (" + type + ") =====");
             for (EnumVariantOreSeed variant : EnumVariantOreSeed.values()) {
                 lines.add("----- " + variant.name());
-                ApiOreSeedDrop.oreSeedDropRegistry.getDropList(new OreSeedDropEnvironment(type, variant.shape, world, pos)).stream()
+                ApiOreSeedDrop.oreSeedDropRegistry.getDropList(new OreSeedDropEnvironment(type, variant.getShape(), world, pos)).stream()
                         .forEach(t -> lines.add(String.format("%.2f", t.weight) + ": " + t.item.invoke().getBlock().getItem(world, pos, t.item.invoke()).getDisplayName()));
             }
             lines.add("====================");
