@@ -4,19 +4,23 @@ import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.block
+import miragefairy2019.libkt.drawGuiBackground
+import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
+import miragefairy2019.libkt.x
+import miragefairy2019.libkt.y
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.gui.inventory.GuiContainer
-import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
 import net.minecraft.inventory.IInventory
@@ -25,7 +29,6 @@ import net.minecraft.item.ItemBlock
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
-import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.function.Supplier
@@ -69,26 +72,33 @@ class TileEntityFairyCollectionBox : TileEntity() {
 
 class ContainerFairyCollectionBox(private val inventoryPlayer: IInventory, private val tileEntity: TileEntityFairyCollectionBox) : Container() {
     init {
-        repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, c, 8 + c * 18, 142)) }
-        repeat(3) { r -> repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, 9 + r * 9 + c, 8 + c * 18, 84 + r * 18)) } }
+        repeat(5) { r -> repeat(10) { c -> addSlotToContainer(Slot(inventoryPlayer, 0, 8 + c * 18, 17 + r * 18 + 1)) } }
+        repeat(3) { r -> repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, 9 + r * 9 + c, 9 + 8 + c * 18, 84 + 18 * 2 + r * 18 + 1)) } }
+        repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, c, 9 + 8 + c * 18, 142 + 18 * 2 + 1)) } // TODO
     }
 
     override fun canInteractWith(playerIn: EntityPlayer) = true // TODO
 }
 
 class GuiFairyCollectionBox(private val inventoryPlayer: IInventory, private val tileEntity: TileEntityFairyCollectionBox) : GuiContainer(ContainerFairyCollectionBox(inventoryPlayer, tileEntity)) {
-    private val texture = ResourceLocation("textures/gui/container/dispenser.png") // TODO
+    init {
+        xSize = 14 + 18 * 10
+        ySize = 114 + 18 * 5 - 1
+    }
+
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
         renderHoveredToolTip(mouseX, mouseY)
     }
 
-    override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) = Unit
+    override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
+        rectangle.drawGuiBackground()
 
-    override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) { // TODO
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f)
-        mc.textureManager.bindTexture(texture)
-        drawTexturedModalRect((width - xSize) / 2, (height - ySize) / 2, 0, 0, xSize, ySize)
+        repeat(5) { r -> repeat(10) { c -> drawSlot(x + 8f + c * 18f - 1f, y + 17f + r * 18f - 1f + 1f) } }
+        repeat(3) { r -> repeat(9) { c -> drawSlot(x + 9f + 8f + c * 18f - 1f, y + 84f + 18f * 2 + r * 18f - 1f + 1f) } }
+        repeat(9) { c -> drawSlot(x + 9f + 8f + c * 18f - 1f, y + 142f + 18f * 2 - 1f + 1f) }
     }
+
+    override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) = Unit
 }
