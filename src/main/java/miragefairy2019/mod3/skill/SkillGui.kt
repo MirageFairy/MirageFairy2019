@@ -1,6 +1,8 @@
 package miragefairy2019.mod3.skill
 
 import miragefairy2019.libkt.Component
+import miragefairy2019.libkt.GuiHandlerContext
+import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
@@ -11,6 +13,7 @@ import miragefairy2019.libkt.button
 import miragefairy2019.libkt.component
 import miragefairy2019.libkt.displayText
 import miragefairy2019.libkt.drawGuiBackground
+import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.label
 import miragefairy2019.libkt.minus
 import miragefairy2019.libkt.position
@@ -26,18 +29,16 @@ import net.minecraft.client.gui.GuiYesNo
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
-import net.minecraft.world.World
-import net.minecraftforge.fml.common.network.IGuiHandler
 import java.time.Instant
 
 object SkillGui {
     const val guiIdSkillGui = 2
     val module: Module = {
         onInit {
-            ApiMain.registerGuiHandler(guiIdSkillGui, object : IGuiHandler {
-                override fun getServerGuiElement(id: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int) = ContainerSkill()
-                override fun getClientGuiElement(id: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int) = GuiSkill()
-            })
+            ApiMain.registerGuiHandler(guiIdSkillGui, object : ISimpleGuiHandler {
+                override fun GuiHandlerContext.onServer() = ContainerSkill()
+                override fun GuiHandlerContext.onClient() = GuiSkill()
+            }.guiHandler)
         }
     }
 }
