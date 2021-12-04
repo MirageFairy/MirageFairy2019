@@ -6,10 +6,13 @@ import miragefairy2019.libkt.item
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod3.main.api.ApiMain
-import net.minecraft.block.Block
+import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.item.ItemBlock
+import net.minecraft.tileentity.TileEntity
+import net.minecraft.world.World
 import java.util.function.Supplier
 
 object FairyCollectionBox {
@@ -24,9 +27,15 @@ object FairyCollectionBox {
         itemDish = item({ ItemBlock(blockFairyCollectionBox.get()) }, "fairy_collection_box") {
             setCustomModelResourceLocation()
         }
+        tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)
     }
 }
 
-class BlockFairyCollectionBox : Block(Material.WOOD) {
+class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
+
+    override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityFairyCollectionBox()
+}
+
+class TileEntityFairyCollectionBox : TileEntity() {
 
 }
