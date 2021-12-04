@@ -1,5 +1,11 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.item
+import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setCustomModelResourceLocation
+import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemDye
@@ -8,6 +14,18 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import java.util.function.Supplier
+
+object Fertilizer {
+    lateinit var itemFertilizer: Supplier<ItemFertilizer>
+    val module: Module = {
+        itemFertilizer = item({ ItemFertilizer() }, "fertilizer") {
+            setUnlocalizedName("fertilizer")
+            setCreativeTab { ApiMain.creativeTab }
+            setCustomModelResourceLocation()
+        }
+    }
+}
 
 class ItemFertilizer : Item() {
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {

@@ -1,6 +1,15 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.block
+import miragefairy2019.libkt.item
 import miragefairy2019.libkt.orNull
+import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setCustomModelResourceLocation
+import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.libkt.tileEntity
+import miragefairy2019.libkt.tileEntityRenderer
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.placeditem.api.IPlaceableBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
@@ -16,6 +25,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.inventory.InventoryHelper
 import net.minecraft.inventory.ItemStackHelper
+import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.network.NetworkManager
@@ -35,6 +45,23 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.function.Consumer
 import java.util.function.Supplier
 import kotlin.math.round
+
+object Dish {
+    lateinit var blockDish: Supplier<BlockDish>
+    lateinit var itemDish: Supplier<ItemBlock>
+    val module: Module = {
+        blockDish = block({ BlockDish() }, "dish") {
+            setUnlocalizedName("dish")
+            setCreativeTab { ApiMain.creativeTab }
+        }
+        itemDish = item({ ItemBlock(blockDish.get()) }, "dish") {
+            setCustomModelResourceLocation()
+        }
+        tileEntity("dish", TileEntityDish::class.java)
+        tileEntityRenderer(TileEntityDish::class.java, { TileEntityRendererDish() })
+
+    }
+}
 
 class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceableBlock {
     companion object {

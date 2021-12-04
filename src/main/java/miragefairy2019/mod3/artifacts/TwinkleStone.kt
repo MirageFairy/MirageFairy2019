@@ -1,8 +1,17 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.addOreName
+import miragefairy2019.libkt.block
+import miragefairy2019.libkt.item
+import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setCustomModelResourceLocation
+import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.lib.multi.BlockMulti
 import miragefairy2019.mod.lib.multi.IBlockVariant
 import miragefairy2019.mod.lib.multi.IBlockVariantList
+import miragefairy2019.mod.lib.multi.ItemBlockMulti
+import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -12,6 +21,32 @@ import net.minecraft.util.IStringSerializable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import java.util.function.Supplier
+
+object TwinkleStone {
+    lateinit var blockTwinkleStone: Supplier<BlockTwinkleStone>
+    lateinit var itemBlockTwinkleStone: Supplier<ItemBlockMulti<BlockTwinkleStone, EnumVariantTwinkleStone>>
+    val module: Module = {
+        blockTwinkleStone = block({ BlockTwinkleStone() }, "twinkle_stone") {
+            setCreativeTab { ApiMain.creativeTab }
+        }
+        itemBlockTwinkleStone = item({ ItemBlockMulti(blockTwinkleStone.get()) }, "twinkle_stone") {
+            setUnlocalizedName("twinkleStone")
+            onRegisterItem {
+                blockTwinkleStone.get().variantList.blockVariants.forEach { variant ->
+                    item.setCustomModelResourceLocation(variant.resourceName, variant.metadata)
+                }
+            }
+            onCreateItemStack {
+                blockTwinkleStone.get().variantList.blockVariants.forEach { variant ->
+                    variant.oreNames.forEach { oreName ->
+                        item.addOreName(oreName, variant.metadata)
+                    }
+                }
+            }
+        }
+    }
+}
 
 class BlockTwinkleStone : BlockMulti<EnumVariantTwinkleStone>(Material.ROCK, EnumVariantTwinkleStone.variantList) {
     init {
