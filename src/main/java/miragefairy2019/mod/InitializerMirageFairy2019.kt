@@ -23,7 +23,7 @@ import miragefairy2019.mod3.mirageflower.ModuleMirageFlower
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
 import miragefairy2019.mod3.playeraura.modulePlayerAura
-import miragefairy2019.mod3.skill.moduleSkill
+import miragefairy2019.mod3.skill.Skill
 import miragefairy2019.mod3.sphere.moduleSphere
 import miragefairy2019.modkt.modules.fairy.ModuleFairy
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
@@ -40,7 +40,7 @@ class InitializerMirageFairy2019 {
         modInitializer.run {
             moduleMain()
             modulePlayerAura()
-            moduleSkill()
+            Skill.module(this)
             ModuleFairy.init(this)
             loaderFairyRelation()
             loaderFairyCrystalDrop()
