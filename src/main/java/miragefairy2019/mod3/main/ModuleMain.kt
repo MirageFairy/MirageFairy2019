@@ -33,8 +33,8 @@ val moduleMain: Module = {
     // Gui Handler
     onInit {
         NetworkRegistry.INSTANCE.registerGuiHandler(ModMirageFairy2019.instance, object : IGuiHandler {
-            override fun getServerGuiElement(id: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int) = ApiMain.guiHandlers[id]?.getServerGuiElement(id, player, world, x, y, z)
-            override fun getClientGuiElement(id: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int) = ApiMain.guiHandlers[id]?.getClientGuiElement(id, player, world, x, y, z)
+            override fun getServerGuiElement(id: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int) = ApiMain.guiHandlers[id]?.getServerGuiElement(id, player, world, x, y, z)
+            override fun getClientGuiElement(id: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int) = ApiMain.guiHandlers[id]?.getClientGuiElement(id, player, world, x, y, z)
         })
     }
 
