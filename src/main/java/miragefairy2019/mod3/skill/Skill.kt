@@ -8,13 +8,11 @@ import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.network.NetHandlerPlayServer
-import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerEvent
 import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.network.FMLNetworkEvent
-import net.minecraftforge.fml.common.network.IGuiHandler
 import net.minecraftforge.fml.relauncher.Side
 import java.io.File
 
@@ -67,14 +65,7 @@ object Skill {
             })
         }
 
-        // スキルGUI
-        onInit {
-            ApiMain.registerGuiHandler(guiIdSkill, object : IGuiHandler {
-                override fun getServerGuiElement(id: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int) = ContainerSkill()
-                override fun getClientGuiElement(id: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int) = GuiSkill()
-            })
-        }
-
+        SkillGui.module(this)
         SkillBook.module(this)
         AstronomicalObservationBook.module(this)
     }

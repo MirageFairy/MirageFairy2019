@@ -1,6 +1,7 @@
 package miragefairy2019.mod3.skill
 
 import miragefairy2019.libkt.Component
+import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.TextAlignment
@@ -25,9 +26,21 @@ import net.minecraft.client.gui.GuiYesNo
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
+import net.minecraft.world.World
+import net.minecraftforge.fml.common.network.IGuiHandler
 import java.time.Instant
 
-const val guiIdSkill = 2
+object SkillGui {
+    const val guiIdSkillGui = 2
+    val module: Module = {
+        onInit {
+            ApiMain.registerGuiHandler(guiIdSkillGui, object : IGuiHandler {
+                override fun getServerGuiElement(id: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int) = ContainerSkill()
+                override fun getClientGuiElement(id: Int, player: EntityPlayer, world: World?, x: Int, y: Int, z: Int) = GuiSkill()
+            })
+        }
+    }
+}
 
 class ContainerSkill : Container() {
     override fun canInteractWith(playerIn: EntityPlayer) = true
