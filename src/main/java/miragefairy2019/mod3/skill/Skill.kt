@@ -1,13 +1,8 @@
 package miragefairy2019.mod3.skill
 
 import miragefairy2019.libkt.Module
-import miragefairy2019.libkt.item
-import miragefairy2019.libkt.setCreativeTab
-import miragefairy2019.libkt.setCustomModelResourceLocation
-import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.api.ApiMain.logger
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.entity.player.EntityPlayer
@@ -80,19 +75,7 @@ object Skill {
             })
         }
 
-        // スキルブック
-        itemSkillBook = item({ ItemSkillBook() }, "skill_book") {
-            setUnlocalizedName("skillBook")
-            setCreativeTab { creativeTab }
-            setCustomModelResourceLocation()
-        }
-
-        // 天体観測ブック
-        itemAstronomicalObservationBook = item({ ItemAstronomicalObservationBook() }, "astronomical_observation_book") {
-            setUnlocalizedName("astronomicalObservationBook")
-            setCreativeTab { creativeTab }
-            setCustomModelResourceLocation()
-        }
-
+        SkillBook.module(this)
+        AstronomicalObservationBook.module(this)
     }
 }

@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.skill
 
+import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.atDayStart
 import miragefairy2019.libkt.atMonthStart
 import miragefairy2019.libkt.atWeekStart
@@ -9,13 +10,17 @@ import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.displayText
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
+import miragefairy2019.libkt.item
 import miragefairy2019.libkt.minus
 import miragefairy2019.libkt.red
+import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setCustomModelResourceLocation
+import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toInstant
 import miragefairy2019.libkt.toLocalDateTime
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.EntityLivingBase
@@ -41,29 +46,16 @@ import kotlin.math.acos
 import kotlin.math.cos
 import kotlin.math.sin
 
-lateinit var itemSkillBook: Supplier<ItemSkillBook>
-lateinit var itemAstronomicalObservationBook: Supplier<ItemAstronomicalObservationBook>
-
-class ItemSkillBook : Item() {
-    override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
-        if (!world.isRemote) player.openGui(ModMirageFairy2019.instance, guiIdSkill, player.world, player.position.x, player.position.y, player.position.z)
-        return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        // TODO 現在スキルレベルとか表示
+object AstronomicalObservationBook {
+    lateinit var itemAstronomicalObservationBook: Supplier<ItemAstronomicalObservationBook>
+    val module: Module = {
+        itemAstronomicalObservationBook = item({ ItemAstronomicalObservationBook() }, "astronomical_observation_book") {
+            setUnlocalizedName("astronomicalObservationBook")
+            setCreativeTab { ApiMain.creativeTab }
+            setCustomModelResourceLocation()
+        }
     }
 }
-
-private enum class EnumQuestStatus { IMPOSSIBLE, INCOMPLETE, COMPLETED }
-
-private val EnumQuestStatus.displayText
-    get() = when (this) {
-        EnumQuestStatus.IMPOSSIBLE -> buildText { translate("miragefairy2019.gui.astronomicalObservation.impossible").darkGray }
-        EnumQuestStatus.INCOMPLETE -> buildText { translate("miragefairy2019.gui.astronomicalObservation.incomplete").red }
-        EnumQuestStatus.COMPLETED -> buildText { translate("miragefairy2019.gui.astronomicalObservation.completed").green }
-    }
 
 class ItemAstronomicalObservationBook : Item() {
     companion object {
@@ -211,3 +203,12 @@ class ItemAstronomicalObservationBook : Item() {
         tooltip += formattedText { translate("$prefix.usage").red }
     }
 }
+
+private enum class EnumQuestStatus { IMPOSSIBLE, INCOMPLETE, COMPLETED }
+
+private val EnumQuestStatus.displayText
+    get() = when (this) {
+        EnumQuestStatus.IMPOSSIBLE -> buildText { translate("miragefairy2019.gui.astronomicalObservation.impossible").darkGray }
+        EnumQuestStatus.INCOMPLETE -> buildText { translate("miragefairy2019.gui.astronomicalObservation.incomplete").red }
+        EnumQuestStatus.COMPLETED -> buildText { translate("miragefairy2019.gui.astronomicalObservation.completed").green }
+    }
