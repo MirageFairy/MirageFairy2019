@@ -100,5 +100,8 @@ class GuiFairyCollectionBox(private val inventoryPlayer: IInventory, private val
         repeat(9) { c -> drawSlot(x + 9f + 8f + c * 18f - 1f, y + 142f + 18f * 2 - 1f + 1f) }
     }
 
-    override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) = Unit
+    override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
+        fontRenderer.drawString("Fairy Collection Box", 8, 6, 0x404040) // TODO
+        fontRenderer.drawString(inventoryPlayer.displayName.unformattedText, 8, ySize - 96 + 2 + 18 * 2, 0x404040)
+    }
 }
