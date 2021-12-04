@@ -259,3 +259,5 @@ item.astronomicalObservationBook.name=Astronomical Observation Note
 
 item.bakedFairy.name=Baked Fairy
 item.bakedFairy.format=Baked %s
+
+tile.fairyCollectionBox.name=Fairy Collection Box

@@ -6,4 +6,5 @@ val moduleArtifacts: Module = {
     Dish.module(this)
     Fertilizer.module(this)
     TwinkleStone.module(this)
+    FairyCollectionBox.module(this)
 }

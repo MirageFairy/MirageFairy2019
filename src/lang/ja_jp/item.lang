@@ -260,3 +260,5 @@ item.astronomicalObservationBook.name=天体観測ノート
 
 item.bakedFairy.name=焼き妖精
 item.bakedFairy.format=焼き%s
+
+tile.fairyCollectionBox.name=妖精蒐集箱
