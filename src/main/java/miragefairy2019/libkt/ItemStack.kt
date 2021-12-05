@@ -9,19 +9,11 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-val ItemStack.orNull get(): ItemStack? = takeIf { !it.isEmpty }
+val ItemStack.orNull get() = takeIf { !it.isEmpty }
 
-fun ItemStack.copy(count: Int): ItemStack {
-    val itemStack = copy()
-    itemStack.count = count
-    return itemStack
-}
+fun ItemStack.copy(count: Int): ItemStack = copy().also { it.count = count }
 
-fun Item.getSubItems(creativeTab: CreativeTabs): List<ItemStack> {
-    val list = NonNullList.create<ItemStack>()
-    this.getSubItems(creativeTab, list)
-    return list
-}
+fun Item.getSubItems(creativeTab: CreativeTabs): List<ItemStack> = NonNullList.create<ItemStack>().also { getSubItems(creativeTab, it) }
 
 /**
  * @param itemStack このインスタンスはメソッド内部でcopyされるため、破壊されません。
