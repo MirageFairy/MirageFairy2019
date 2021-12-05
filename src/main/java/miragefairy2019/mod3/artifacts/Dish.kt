@@ -81,15 +81,11 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceableBlock {
 
     // ドロップ
 
-    /**
-     * クリエイティブピックでの取得アイテム。
-     */
+    // クリエイティブピックでの取得アイテム
     @Suppress("DEPRECATION")
     override fun getItem(world: World, pos: BlockPos, state: IBlockState): ItemStack = (world.getTileEntity(pos) as? TileEntityDish)?.itemStack?.orNull ?: super.getItem(world, pos, state)
 
-    /**
-     * 破壊時ドロップ
-     */
+    // 破壊時ドロップ
     override fun breakBlock(world: World, blockPos: BlockPos, blockState: IBlockState) {
         val tileEntity = world.getTileEntity(blockPos)
         if (tileEntity is TileEntityDish) {
@@ -99,9 +95,7 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceableBlock {
         super.breakBlock(world, blockPos, blockState)
     }
 
-    /**
-     * シルクタッチ無効。
-     */
+    // シルクタッチ無効
     override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer) = false
 
 
