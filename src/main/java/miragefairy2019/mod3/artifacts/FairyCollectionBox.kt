@@ -123,6 +123,7 @@ class ContainerFairyCollectionBox(val inventoryPlayer: IInventory, val inventory
 
     override fun canInteractWith(playerIn: EntityPlayer) = inventoryTileEntity.isUsableByPlayer(playerIn) //
 
+    val fairyMasterGrade get() = inventoryTileEntity.itemStacks.mapNotNull { itemStack -> itemStack.fairyVariant }.distinctBy { it.id }.sumBy { it.level }
 }
 
 class GuiFairyCollectionBox(val container: ContainerFairyCollectionBox) : GuiContainer(container) {
@@ -147,6 +148,7 @@ class GuiFairyCollectionBox(val container: ContainerFairyCollectionBox) : GuiCon
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         fontRenderer.drawString(container.inventoryTileEntity.displayName.unformattedText, 8, 6, 0x404040)
+        fontRenderer.drawStringRightAligned("Grade: ${container.fairyMasterGrade}", xSize - 8, 6, 0x000088) // TODO translate
         fontRenderer.drawString(container.inventoryPlayer.displayName.unformattedText, 8, ySize - 96 + 2 + 18 * 0, 0x404040)
     }
 }
