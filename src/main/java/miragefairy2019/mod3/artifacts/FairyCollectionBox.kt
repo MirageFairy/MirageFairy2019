@@ -76,7 +76,7 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
 }
 
 class TileEntityFairyCollectionBox : TileEntity() {
-    val inventory = InventoryBasic("tile.fairyCollectionBox.name", false, 50)
+    val inventory = InventoryFairyCollectionBox(this, "tile.fairyCollectionBox.name", false, 50)
 
     override fun readFromNBT(nbt: NBTTagCompound) {
         super.readFromNBT(nbt)
@@ -90,6 +90,14 @@ class TileEntityFairyCollectionBox : TileEntity() {
     }
 }
 
+class InventoryFairyCollectionBox(val tileEntity: TileEntity, title: String, customName: Boolean, slotCount: Int) : InventoryBasic(title, customName, slotCount) {
+
+    override fun isUsableByPlayer(player: EntityPlayer): Boolean {
+        if (tileEntity.world.getTileEntity(tileEntity.pos) != tileEntity) return false
+        return player.getDistanceSq(tileEntity.pos.x.toDouble() + 0.5, tileEntity.pos.y.toDouble() + 0.5, tileEntity.pos.z.toDouble() + 0.5) <= 64.0
+    }
+}
+
 class ContainerFairyCollectionBox(val inventoryPlayer: IInventory, val inventoryTileEntity: IInventory) : Container() {
     init {
         repeat(5) { r -> repeat(10) { c -> addSlotToContainer(Slot(inventoryTileEntity, r * 10 + c, 8 + c * 18, 17 + r * 18 + 1)) } }
@@ -97,7 +105,8 @@ class ContainerFairyCollectionBox(val inventoryPlayer: IInventory, val inventory
         repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, c, 9 + 8 + c * 18, 142 + 18 * 2 + 1)) }
     }
 
-    override fun canInteractWith(playerIn: EntityPlayer) = true // TODO
+    override fun canInteractWith(playerIn: EntityPlayer) = inventoryTileEntity.isUsableByPlayer(playerIn) //
+
 }
 
 class GuiFairyCollectionBox(val container: ContainerFairyCollectionBox) : GuiContainer(container) {
