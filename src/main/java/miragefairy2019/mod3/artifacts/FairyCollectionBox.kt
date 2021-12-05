@@ -10,7 +10,6 @@ import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemStacks
-import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.readFromNBT
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.setCreativeTab
@@ -21,7 +20,8 @@ import miragefairy2019.libkt.writeToNBT
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.fairy.ItemFairy
+import miragefairy2019.mod3.fairy.fairyVariant
+import miragefairy2019.mod3.fairy.hasSameId
 import miragefairy2019.mod3.fairy.level
 import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.BlockContainer
@@ -34,6 +34,7 @@ import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.InventoryBasic
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemBlock
+import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
@@ -95,6 +96,13 @@ class InventoryFairyCollectionBox(val tileEntity: TileEntity, title: String, cus
         addInventoryChangeListener { tileEntity.markDirty() }
     }
 
+    override fun getInventoryStackLimit() = 1
+    override fun isItemValidForSlot(index: Int, itemStack: ItemStack): Boolean {
+        val variant = itemStack.fairyVariant ?: return false // スタンダード妖精でないと受け付けない
+        return itemStacks
+            .filterIndexed { i, _ -> i != index } // 他スロットにおいて
+            .all a@{ itemStack2 -> !hasSameId(variant, itemStack2.fairyVariant ?: return@a true) } // 同種の妖精があってはならない
+    }
 
     override fun isUsableByPlayer(player: EntityPlayer): Boolean {
         if (tileEntity.world.getTileEntity(tileEntity.pos) != tileEntity) return false
@@ -102,9 +110,13 @@ class InventoryFairyCollectionBox(val tileEntity: TileEntity, title: String, cus
     }
 }
 
+class SlotFairyCollectionBox(inventory: IInventory, index: Int, xPosition: Int, yPosition: Int) : Slot(inventory, index, xPosition, yPosition) {
+    override fun isItemValid(stack: ItemStack) = inventory.isItemValidForSlot(slotIndex, stack)
+}
+
 class ContainerFairyCollectionBox(val inventoryPlayer: IInventory, val inventoryTileEntity: IInventory) : Container() {
     init {
-        repeat(5) { r -> repeat(10) { c -> addSlotToContainer(Slot(inventoryTileEntity, r * 10 + c, 8 + c * 18, 17 + r * 18 + 1)) } }
+        repeat(5) { r -> repeat(10) { c -> addSlotToContainer(SlotFairyCollectionBox(inventoryTileEntity, r * 10 + c, 8 + c * 18, 17 + r * 18 + 1)) } }
         repeat(3) { r -> repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, 9 + r * 9 + c, 9 + 8 + c * 18, 84 + 18 * 2 + r * 18 + 1)) } }
         repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, c, 9 + 8 + c * 18, 142 + 18 * 2 + 1)) }
     }
