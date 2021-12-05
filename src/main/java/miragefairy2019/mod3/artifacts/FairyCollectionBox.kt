@@ -91,6 +91,10 @@ class TileEntityFairyCollectionBox : TileEntity() {
 }
 
 class InventoryFairyCollectionBox(val tileEntity: TileEntity, title: String, customName: Boolean, slotCount: Int) : InventoryBasic(title, customName, slotCount) {
+    init {
+        addInventoryChangeListener { tileEntity.markDirty() }
+    }
+
 
     override fun isUsableByPlayer(player: EntityPlayer): Boolean {
         if (tileEntity.world.getTileEntity(tileEntity.pos) != tileEntity) return false
