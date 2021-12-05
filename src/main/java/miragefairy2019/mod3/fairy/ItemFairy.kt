@@ -4,6 +4,7 @@ import miragefairy2019.libkt.TextComponentBuilder
 import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
+import miragefairy2019.libkt.orNull
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.UtilsMinecraft
@@ -41,6 +42,8 @@ import java.util.Optional
 class VariantFairy(val id: Int, val colorSet: ColorSet, val type: FairyType, val rare: Int, val rank: Int) : ItemVariant()
 
 val VariantFairy.level get() = rare + rank - 1
+
+fun hasSameId(a: VariantFairy, b: VariantFairy) = a.id == b.id
 
 class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
     override fun getMirageFairy2019Fairy(itemStack: ItemStack): Optional<IFairyType> = getVariant(itemStack).map { it.type }
@@ -179,3 +182,5 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
 
     }
 }
+
+val ItemStack.fairyVariant get() = (item as? ItemFairy)?.getVariant(this)?.orNull
