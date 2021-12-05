@@ -32,6 +32,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
 import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.InventoryBasic
+import net.minecraft.inventory.InventoryHelper
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
@@ -74,6 +75,16 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
     }
 
     override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityFairyCollectionBox()
+
+    // 破壊時ドロップ
+    override fun breakBlock(world: World, blockPos: BlockPos, blockState: IBlockState) {
+        val tileEntity = world.getTileEntity(blockPos)
+        if (tileEntity is TileEntityFairyCollectionBox) {
+            tileEntity.inventory.itemStacks.forEach { InventoryHelper.spawnItemStack(world, blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble(), it) }
+            world.updateComparatorOutputLevel(blockPos, this)
+        }
+        super.breakBlock(world, blockPos, blockState)
+    }
 }
 
 class TileEntityFairyCollectionBox : TileEntity() {
