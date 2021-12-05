@@ -40,6 +40,8 @@ import java.util.Optional
 
 class VariantFairy(val id: Int, val colorSet: ColorSet, val type: FairyType, val rare: Int, val rank: Int) : ItemVariant()
 
+val VariantFairy.level get() = rare + rank - 1
+
 class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
     override fun getMirageFairy2019Fairy(itemStack: ItemStack): Optional<IFairyType> = getVariant(itemStack).map { it.type }
     override fun getItemStackDisplayName(itemStack: ItemStack): String = getMirageFairy2019Fairy(itemStack).map { UtilsMinecraft.translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText) }.orElseGet { UtilsMinecraft.translateToLocal("$unlocalizedName.name") }
