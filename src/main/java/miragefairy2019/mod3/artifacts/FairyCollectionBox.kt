@@ -24,11 +24,16 @@ import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
 import net.minecraft.inventory.IInventory
+import net.minecraft.inventory.InventoryBasic
+import net.minecraft.inventory.ItemStackHelper
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemBlock
+import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
+import net.minecraft.util.NonNullList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.function.Supplier
@@ -49,8 +54,8 @@ object FairyCollectionBox {
         tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)
         onInit {
             ApiMain.registerGuiHandler(guiIdFairyCollectionBox, object : ISimpleGuiHandler {
-                override fun GuiHandlerContext.onServer() = (tileEntity as? TileEntityFairyCollectionBox)?.let { ContainerFairyCollectionBox(player.inventory, it) }
-                override fun GuiHandlerContext.onClient() = (tileEntity as? TileEntityFairyCollectionBox)?.let { GuiFairyCollectionBox(player.inventory, it) }
+                override fun GuiHandlerContext.onServer() = (tileEntity as? TileEntityFairyCollectionBox)?.let { ContainerFairyCollectionBox(player.inventory, it.inventory) }
+                override fun GuiHandlerContext.onClient() = (tileEntity as? TileEntityFairyCollectionBox)?.let { GuiFairyCollectionBox(player.inventory, it.inventory) }
             }.guiHandler)
         }
     }
@@ -67,12 +72,34 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
 }
 
 class TileEntityFairyCollectionBox : TileEntity() {
+    val inventory = InventoryBasic("tile.fairyCollectionBox.name", false, 50)
 
+    override fun readFromNBT(nbt: NBTTagCompound) {
+        super.readFromNBT(nbt)
+
+        val list = NonNullList.withSize(inventory.sizeInventory, ItemStack.EMPTY)
+        ItemStackHelper.loadAllItems(nbt, list)
+        (0 until inventory.sizeInventory).map { i -> inventory.setInventorySlotContents(i, list[i]) }
+
+    }
+
+    override fun writeToNBT(nbt: NBTTagCompound): NBTTagCompound {
+        super.writeToNBT(nbt)
+
+        val list = NonNullList.withSize(inventory.sizeInventory, ItemStack.EMPTY)
+        (0 until inventory.sizeInventory).map { i -> list[i] = inventory.getStackInSlot(i) }
+        ItemStackHelper.saveAllItems(nbt, list)
+
+        return nbt
+    }
 }
 
-class ContainerFairyCollectionBox(private val inventoryPlayer: IInventory, private val tileEntity: TileEntityFairyCollectionBox) : Container() {
+class ContainerFairyCollectionBox(
+    private val inventoryPlayer: IInventory,
+    private val inventoryTileEntity: IInventory
+) : Container() {
     init {
-        repeat(5) { r -> repeat(10) { c -> addSlotToContainer(Slot(inventoryPlayer, 0, 8 + c * 18, 17 + r * 18 + 1)) } }
+        repeat(5) { r -> repeat(10) { c -> addSlotToContainer(Slot(inventoryTileEntity, r * 10 + c, 8 + c * 18, 17 + r * 18 + 1)) } }
         repeat(3) { r -> repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, 9 + r * 9 + c, 9 + 8 + c * 18, 84 + 18 * 2 + r * 18 + 1)) } }
         repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, c, 9 + 8 + c * 18, 142 + 18 * 2 + 1)) } // TODO
     }
@@ -80,7 +107,10 @@ class ContainerFairyCollectionBox(private val inventoryPlayer: IInventory, priva
     override fun canInteractWith(playerIn: EntityPlayer) = true // TODO
 }
 
-class GuiFairyCollectionBox(private val inventoryPlayer: IInventory, private val tileEntity: TileEntityFairyCollectionBox) : GuiContainer(ContainerFairyCollectionBox(inventoryPlayer, tileEntity)) {
+class GuiFairyCollectionBox(
+    private val inventoryPlayer: IInventory,
+    private val inventoryTileEntity: IInventory
+) : GuiContainer(ContainerFairyCollectionBox(inventoryPlayer, inventoryTileEntity)) {
     init {
         xSize = 14 + 18 * 10
         ySize = 114 + 18 * 5 - 1
@@ -101,7 +131,7 @@ class GuiFairyCollectionBox(private val inventoryPlayer: IInventory, private val
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
-        fontRenderer.drawString("Fairy Collection Box", 8, 6, 0x404040) // TODO
+        fontRenderer.drawString(inventoryTileEntity.displayName.unformattedText, 8, 6, 0x404040)
         fontRenderer.drawString(inventoryPlayer.displayName.unformattedText, 8, ySize - 96 + 2 + 18 * 0, 0x404040)
     }
 }
