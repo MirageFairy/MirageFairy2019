@@ -102,6 +102,6 @@ class GuiFairyCollectionBox(private val inventoryPlayer: IInventory, private val
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         fontRenderer.drawString("Fairy Collection Box", 8, 6, 0x404040) // TODO
-        fontRenderer.drawString(inventoryPlayer.displayName.unformattedText, 8, ySize - 96 + 2 + 18 * 2, 0x404040)
+        fontRenderer.drawString(inventoryPlayer.displayName.unformattedText, 8, ySize - 96 + 2 + 18 * 0, 0x404040)
     }
 }
