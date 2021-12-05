@@ -124,6 +124,36 @@ class ContainerFairyCollectionBox(val inventoryPlayer: IInventory, val inventory
     override fun canInteractWith(playerIn: EntityPlayer) = inventoryTileEntity.isUsableByPlayer(playerIn) //
 
     val fairyMasterGrade get() = inventoryTileEntity.itemStacks.mapNotNull { itemStack -> itemStack.fairyVariant }.distinctBy { it.id }.sumBy { it.level }
+
+    override fun transferStackInSlot(playerIn: EntityPlayer, index: Int): ItemStack {
+        val slot = inventorySlots[index] ?: return ItemStack.EMPTY // スロットがnullなら終了
+        if (!slot.hasStack) return ItemStack.EMPTY // スロットが空なら終了
+
+        val itemStack = slot.stack
+        val itemStackOriginal = itemStack.copy()
+
+        // 移動処理
+        // itemStackを改変する
+        if (index < 50) { // タイルエンティティ→プレイヤー
+            if (!mergeItemStack(itemStack, 50, 50 + 9 * 4, true)) return ItemStack.EMPTY
+        } else { // プレイヤー→タイルエンティティ
+            if (!mergeItemStack(itemStack, 0, 50, false)) return ItemStack.EMPTY
+        }
+
+        if (itemStack.isEmpty) { // スタックが丸ごと移動した
+            slot.putStack(ItemStack.EMPTY)
+        } else { // 部分的に残った
+            slot.onSlotChanged()
+        }
+
+        if (itemStack.count == itemStackOriginal.count) return ItemStack.EMPTY // アイテムが何も移動していない場合は終了
+
+        // スロットが改変を受けた場合にここを通過する
+
+        slot.onTake(playerIn, itemStack)
+
+        return itemStackOriginal
+    }
 }
 
 class GuiFairyCollectionBox(val container: ContainerFairyCollectionBox) : GuiContainer(container) {
