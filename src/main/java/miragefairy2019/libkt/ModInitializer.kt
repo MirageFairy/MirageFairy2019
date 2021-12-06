@@ -82,16 +82,16 @@ fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, block
 
 fun <I : Item> ItemInitializer<I>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { item.unlocalizedName = unlocalizedName }
 fun <I : Item> ItemInitializer<I>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { item.creativeTab = creativeTab() }
-fun <I : Item> ItemInitializer<I>.setCustomModelResourceLocation(metadata: Int = 0) = modInitializer.onRegisterItem { item.setCustomModelResourceLocation(metadata) }
-fun <I : Item> I.setCustomModelResourceLocation(modelName: String, metadata: Int = 0) {
+fun <I : Item> ItemInitializer<I>.setCustomModelResourceLocation(metadata: Int = 0, variant: String = "normal") = modInitializer.onRegisterItem { item.setCustomModelResourceLocation(metadata, variant) }
+fun <I : Item> I.setCustomModelResourceLocation(modelName: String, metadata: Int = 0, variant: String = "normal") {
     if (side.isClient) {
-        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, modelName), "normal"))
+        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, modelName), variant))
     }
 }
 
-fun <I : Item> I.setCustomModelResourceLocation(metadata: Int = 0) {
+fun <I : Item> I.setCustomModelResourceLocation(metadata: Int = 0, variant: String = "normal") {
     if (side.isClient) {
-        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(registryName!!, "normal"))
+        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(registryName!!, variant))
     }
 }
 
