@@ -132,6 +132,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
         };
     });
 
+    # ブレイズロッドからブレイズパウダー　高効率
 	writer::write("blaze_powder_from_blaze_rod.json"; {
         type: "forge:ore_shapeless";
         group: "blaze_powder";
