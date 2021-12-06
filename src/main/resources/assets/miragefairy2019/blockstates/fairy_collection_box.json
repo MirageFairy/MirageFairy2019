@@ -1,0 +1,13 @@
+{
+    "variants": {
+        "context=middle,facing=north": { "model": "miragefairy2019:fairy_building_middle" },
+        "context=middle,facing=south": { "model": "miragefairy2019:fairy_building_middle", "y": 180 },
+        "context=middle,facing=west":  { "model": "miragefairy2019:fairy_building_middle", "y": 270 },
+        "context=middle,facing=east":  { "model": "miragefairy2019:fairy_building_middle", "y": 90 },
+
+        "context=bottom,facing=north": { "model": "miragefairy2019:fairy_building_bottom" },
+        "context=bottom,facing=south": { "model": "miragefairy2019:fairy_building_bottom", "y": 180 },
+        "context=bottom,facing=west":  { "model": "miragefairy2019:fairy_building_bottom", "y": 270 },
+        "context=bottom,facing=east":  { "model": "miragefairy2019:fairy_building_bottom", "y": 90 }
+    }
+}

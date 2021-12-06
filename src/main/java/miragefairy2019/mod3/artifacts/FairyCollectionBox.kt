@@ -24,10 +24,15 @@ import miragefairy2019.mod3.fairy.fairyVariant
 import miragefairy2019.mod3.fairy.hasSameId
 import miragefairy2019.mod3.fairy.level
 import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.mirageflower.BlockFairyLog
 import net.minecraft.block.BlockContainer
+import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
+import net.minecraft.block.properties.PropertyEnum
+import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.gui.inventory.GuiContainer
+import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
 import net.minecraft.inventory.IInventory
@@ -38,10 +43,18 @@ import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
+import net.minecraft.util.BlockRenderLayer
+import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
+import net.minecraft.util.IStringSerializable
+import net.minecraft.util.Mirror
+import net.minecraft.util.Rotation
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.function.Supplier
 
 object FairyCollectionBox {
@@ -55,7 +68,7 @@ object FairyCollectionBox {
             setCreativeTab { ApiMain.creativeTab }
         }
         itemDish = item({ ItemBlock(blockFairyCollectionBox.get()) }, "fairy_collection_box") {
-            setCustomModelResourceLocation()
+            setCustomModelResourceLocation(variant = "context=bottom,facing=north")
         }
         tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)
         onInit {
@@ -68,11 +81,73 @@ object FairyCollectionBox {
 }
 
 class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
+    init {
+
+        // meta
+        defaultState = blockState.baseState.withProperty(FACING, EnumFacing.NORTH).withProperty(CONTEXT, EnumFairyCollectionBoxContext.BOTTOM)
+
+        // style
+        soundType = SoundType.WOOD
+
+        // 挙動
+        setHardness(1.0f)
+        setHarvestLevel("axe", 0)
+
     }
+
+
+    // Variant
+
+    override fun getMetaFromState(state: IBlockState) = when (state.getValue(FACING)) {
+        EnumFacing.NORTH -> 0
+        EnumFacing.SOUTH -> 1
+        EnumFacing.WEST -> 2
+        EnumFacing.EAST -> 3
+        else -> 0
+    }
+
+    override fun getStateFromMeta(meta: Int): IBlockState = when (meta) {
+        0 -> defaultState.withProperty(FACING, EnumFacing.NORTH)
+        1 -> defaultState.withProperty(FACING, EnumFacing.SOUTH)
+        2 -> defaultState.withProperty(FACING, EnumFacing.WEST)
+        3 -> defaultState.withProperty(FACING, EnumFacing.EAST)
+        else -> defaultState
+    }
+
+    override fun createBlockState() = BlockStateContainer(this, FACING, CONTEXT)
+
+    fun getState(facing: EnumFacing): IBlockState = defaultState.withProperty(FACING, facing)
+
+    override fun getActualState(blockState: IBlockState, world: IBlockAccess, pos: BlockPos): IBlockState = if (world.getBlockState(pos.down()).block is BlockFairyCollectionBox) {
+        blockState.withProperty(CONTEXT, EnumFairyCollectionBoxContext.MIDDLE)
+    } else {
+        blockState
+    }
+
+    override fun withRotation(state: IBlockState, rot: Rotation): IBlockState = state.withProperty(FACING, rot.rotate(state.getValue(FACING)))
+    override fun withMirror(state: IBlockState, mirrorIn: Mirror): IBlockState = state.withProperty(FACING, mirrorIn.mirror(state.getValue(FACING)))
+
+    override fun onBlockPlacedBy(worldIn: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, stack: ItemStack) {
+        worldIn.setBlockState(pos, state.withProperty(BlockFairyLog.FACING, placer.horizontalFacing.opposite), 2)
+    }
+
+
+    // TileEntity
 
     override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityFairyCollectionBox()
 
-    // 破壊時ドロップ
+
+    // Graphics
+
+    @SideOnly(Side.CLIENT)
+    override fun getBlockLayer() = BlockRenderLayer.CUTOUT_MIPPED
+    override fun getRenderType(state: IBlockState) = EnumBlockRenderType.MODEL
+    override fun isOpaqueCube(state: IBlockState) = false
+    override fun isFullCube(state: IBlockState) = false
+
+
+    // Drop
+
     override fun breakBlock(world: World, blockPos: BlockPos, blockState: IBlockState) {
         val tileEntity = world.getTileEntity(blockPos)
         if (tileEntity is TileEntityFairyCollectionBox) {
@@ -89,6 +164,19 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
         if (worldIn.isRemote) return true
         playerIn.openGui(ModMirageFairy2019.instance, FairyCollectionBox.guiIdFairyCollectionBox, worldIn, pos.x, pos.y, pos.z)
         return true
+    }
+
+
+    companion object {
+        val FACING: PropertyEnum<EnumFacing> = PropertyEnum.create("facing", EnumFacing::class.java, EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.WEST, EnumFacing.EAST)
+        val CONTEXT: PropertyEnum<EnumFairyCollectionBoxContext> = PropertyEnum.create("context", EnumFairyCollectionBoxContext::class.java)
+
+        enum class EnumFairyCollectionBoxContext : IStringSerializable {
+            MIDDLE, BOTTOM, ;
+
+            override fun getName(): String = name.toLowerCase()
+            override fun toString(): String = name.toLowerCase()
+        }
     }
 }
 
