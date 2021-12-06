@@ -68,10 +68,6 @@ object FairyCollectionBox {
 }
 
 class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
-    override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        if (worldIn.isRemote) return true
-        playerIn.openGui(ModMirageFairy2019.instance, FairyCollectionBox.guiIdFairyCollectionBox, worldIn, pos.x, pos.y, pos.z)
-        return true
     }
 
     override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityFairyCollectionBox()
@@ -84,6 +80,15 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
             world.updateComparatorOutputLevel(blockPos, this)
         }
         super.breakBlock(world, blockPos, blockState)
+    }
+
+
+    // Action
+
+    override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        if (worldIn.isRemote) return true
+        playerIn.openGui(ModMirageFairy2019.instance, FairyCollectionBox.guiIdFairyCollectionBox, worldIn, pos.x, pos.y, pos.z)
+        return true
     }
 }
 
