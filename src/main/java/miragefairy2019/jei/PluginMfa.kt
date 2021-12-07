@@ -60,34 +60,6 @@ class PluginMfa : IModPlugin {
             fun item(registerName: String) = listOf(ItemStack(Item.getByNameOrId("${ModMirageFairy2019.MODID}:$registerName")!!))
             fun fairy(type: String) = ore("mirageFairy2019Fairy${type.take(1).toUpperCase() + type.drop(1)}Rank1")
 
-            register(ore("mirageFairy2019TwinkleStone")) {
-                """
-                【MFA-64897357：蛍】
-                ｿﾃﾞｨｱ「ほら」
-                
-                「綺麗だな…」
-                「虫みたいだ」
-                
-                ｿﾃﾞｨｱ「……ふふ、意外」
-                「…えっ？」
-                
-                ｿﾃﾞｨｱ「星みたいって言うかなって」
-                """
-            }
-            register(fairy("magentaglazedterracotta"), fairy("carrot"), fairy("dispenser"), fairy("lilac")) {
-                """
-                【MFA-34681526：美術展にて】
-                ﾂｧｯﾛｰﾁｬ「大変！ﾃﾞｨｽﾍﾟﾝｾｰﾘｬが！」
-                
-                ﾃﾞｨｽﾍﾟﾝｾｰﾘｬ（……）
-                
-                ﾘﾗｰﾂｧ「止まって！こっちじゃないの！」
-                
-                ﾃﾞｨｽﾍﾟﾝｾｰﾘｬ（……）
-                
-                （？）
-                """
-            }
             register(fairy("zombie")) {
                 """
                 【MFA-00000461：おかず】
@@ -116,18 +88,18 @@ class PluginMfa : IModPlugin {
                 （^_^）
                 """
             }
-            register(fairy("chicken")) {
+            register(item("miragium_axe"), fairy("air")) {
                 """
-                【MFA-34996052：妖精が先か？】
-                N-183207「お夕飯何にしようかしら」
-                （ﾄﾞｷﾄﾞｷ）
-                N-183211「私、ステーキが食べたい！」
-                （ﾎｯ…）
-                N-183213「ふわふわしたのがいー！」
+                【MFA-16487544：落とし物】
                 （……）
-                N-183211「私もあれまた食べたい！」
-                N-183207「オムレツにしよっか☆」
-                （Σ）
+                
+                ﾙﾒﾘ「待って！」
+                
+                ﾙﾒﾘ「妖精さん！！」
+                ﾙﾒﾘ「待って！」
+                （……）
+                
+                ﾙﾒﾘ「あっ！」
                 """
             }
             register(fairy("pufferfish"), fairy("salmon")) {
@@ -144,6 +116,34 @@ class PluginMfa : IModPlugin {
                 ｻﾙﾓｰﾆｬ「本当に店ごと食べるんだ」
                 """
             }
+            register(fairy("magentaglazedterracotta"), fairy("carrot"), fairy("dispenser"), fairy("lilac")) {
+                """
+                【MFA-34681526：美術展にて】
+                ﾂｧｯﾛｰﾁｬ「大変！ﾃﾞｨｽﾍﾟﾝｾｰﾘｬが！」
+                
+                ﾃﾞｨｽﾍﾟﾝｾｰﾘｬ（……）
+                
+                ﾘﾗｰﾂｧ「止まって！こっちじゃないの！」
+                
+                ﾃﾞｨｽﾍﾟﾝｾｰﾘｬ（……）
+                
+                （？）
+                """
+            }
+            register(fairy("chicken")) {
+                """
+                【MFA-34996052：妖精が先か？】
+                N-183207「お夕飯何にしようかしら」
+                （ﾄﾞｷﾄﾞｷ）
+                N-183211「私、ステーキが食べたい！」
+                （ﾎｯ…）
+                N-183213「ふわふわしたのがいー！」
+                （……）
+                N-183211「私もあれまた食べたい！」
+                N-183207「オムレツにしよっか☆」
+                （Σ）
+                """
+            }
             register(fairy("bread"), fairy("axe"), fairy("poisonouspotato"), fairy("fire")) {
                 """
                 【MFA-43685165：闇鍋ﾊﾟｰﾃｨｰ】
@@ -158,20 +158,6 @@ class PluginMfa : IModPlugin {
                 「こ、こっち見ないで…？」
                 """
             }
-            register(item("miragium_axe"), fairy("air")) {
-                """
-                【MFA-16487544：落とし物】
-                （……）
-                
-                ﾙﾒﾘ「待って！」
-                
-                ﾙﾒﾘ「妖精さん！！」
-                ﾙﾒﾘ「待って！」
-                （……）
-                
-                ﾙﾒﾘ「あっ！」
-                """
-            }
             register(item("dish"), fairy("cake")) {
                 """
                 【MFA-46805554：クリームまみれ】
@@ -184,6 +170,20 @@ class PluginMfa : IModPlugin {
                 N-111615「……」
                 
                 N-111615「……そこが好きなの？」
+                """
+            }
+            register(ore("mirageFairy2019TwinkleStone")) {
+                """
+                【MFA-64897357：蛍】
+                ｿﾃﾞｨｱ「ほら」
+                
+                「綺麗だな…」
+                「虫みたいだ」
+                
+                ｿﾃﾞｨｱ「……ふふ、意外」
+                「…えっ？」
+                
+                ｿﾃﾞｨｱ「星みたいって言うかなって」
                 """
             }
         }, uid)
