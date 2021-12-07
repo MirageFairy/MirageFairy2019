@@ -61,12 +61,18 @@ class EventRegistry1<E> {
 }
 
 
+// Initializer
+abstract class Initializer<T : Any>(private val getter: () -> T) : Supplier<T>, () -> T {
+    internal val initializingObject get() = getter()
+    override fun get() = initializingObject
+    override operator fun invoke() = initializingObject
+}
+
+
 // Item
 
-class ItemInitializer<I : Item>(val modInitializer: ModInitializer, private val sItem: () -> I) : Supplier<I>, () -> I {
-    val item get() = sItem()
-    override fun get(): I = item
-    override operator fun invoke(): I = item
+class ItemInitializer<I : Item>(val modInitializer: ModInitializer, getter: () -> I) : Initializer<I>(getter) {
+    val item get() = initializingObject
 }
 
 fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, block: (ItemInitializer<I>.() -> Unit)? = null): ItemInitializer<I> {
@@ -102,10 +108,8 @@ fun <I : Item> I.addOreName(oreName: String, metadata: Int = 0) = OreDictionary.
 
 // ItemVariant
 
-class ItemVariantInitializer<I : ItemMulti<V>, V : ItemVariant>(val itemInitializer: ItemInitializer<I>, private val sItemVariant: () -> V) : Supplier<V>, () -> V {
-    val itemVariant get() = sItemVariant()
-    override fun get(): V = itemVariant
-    override operator fun invoke(): V = itemVariant
+class ItemVariantInitializer<I : ItemMulti<V>, V : ItemVariant>(val itemInitializer: ItemInitializer<I>, getter: () -> V) : Initializer<V>(getter) {
+    val itemVariant get() = initializingObject
 }
 
 fun <I : ItemMulti<V>, V : ItemVariant> ItemInitializer<I>.itemVariant(
@@ -130,10 +134,8 @@ fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.createItemS
 
 // Block
 
-class BlockInitializer<B : Block>(val modInitializer: ModInitializer, private val sBlock: () -> B) : Supplier<B>, () -> B {
-    val block get() = sBlock()
-    override fun get(): B = block
-    override operator fun invoke(): B = block
+class BlockInitializer<B : Block>(val modInitializer: ModInitializer, getter: () -> B) : Initializer<B>(getter) {
+    val block get() = initializingObject
 }
 
 fun <B : Block> ModInitializer.block(creator: () -> B, registryName: String, block: (BlockInitializer<B>.() -> Unit)? = null): BlockInitializer<B> {
