@@ -22,7 +22,7 @@ import miragefairy2019.mod3.manualrepair.ManualRepair
 import miragefairy2019.mod3.pick.Pick
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
-import miragefairy2019.mod3.playeraura.modulePlayerAura
+import miragefairy2019.mod3.playeraura.PlayerAura
 import miragefairy2019.mod3.skill.Skill
 import miragefairy2019.mod3.sphere.Sphere
 import miragefairy2019.mod3.worldgen.ModuleMirageFlower
@@ -41,7 +41,7 @@ class InitializerMirageFairy2019 {
 
         modInitializer.run {
             Main.module(this)
-            modulePlayerAura()
+            PlayerAura.module(this)
             Skill.module(this)
             ModuleFairy.init(this)
             loaderFairyRelation()

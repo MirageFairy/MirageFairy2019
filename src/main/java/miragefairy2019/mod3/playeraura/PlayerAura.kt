@@ -197,71 +197,73 @@ object ModulePlayerAura {
     }
 }
 
-val modulePlayerAura: Module = {
+object PlayerAura {
+    val module: Module = {
 
-    // オーラゲージオーバーレイ
-    onInit {
-        if (side.isClient) {
-            MinecraftForge.EVENT_BUS.register(object {
-                @SubscribeEvent
-                fun hook(event: RenderGameOverlayEvent.Post) {
-                    if (event.type != RenderGameOverlayEvent.ElementType.POTION_ICONS) return // ポーションアイコンと同時
-                    val player = Minecraft.getMinecraft().player ?: return
-                    val playerAuraHandler = ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler
+        // オーラゲージオーバーレイ
+        onInit {
+            if (side.isClient) {
+                MinecraftForge.EVENT_BUS.register(object {
+                    @SubscribeEvent
+                    fun hook(event: RenderGameOverlayEvent.Post) {
+                        if (event.type != RenderGameOverlayEvent.ElementType.POTION_ICONS) return // ポーションアイコンと同時
+                        val player = Minecraft.getMinecraft().player ?: return
+                        val playerAuraHandler = ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler
 
-                    val (foodAura, healAmount) = run result@{
-                        player.heldItemMainhand.let next@{
-                            val item = it.item as? ItemFood ?: return@next
-                            val manaSet = playerAuraHandler.getLocalFoodAura(it) ?: return@result Pair(ManaSet.ZERO, 0)
-                            return@result Pair(manaSet, item.getHealAmount(it))
+                        val (foodAura, healAmount) = run result@{
+                            player.heldItemMainhand.let next@{
+                                val item = it.item as? ItemFood ?: return@next
+                                val manaSet = playerAuraHandler.getLocalFoodAura(it) ?: return@result Pair(ManaSet.ZERO, 0)
+                                return@result Pair(manaSet, item.getHealAmount(it))
+                            }
+                            player.heldItemOffhand.let next@{
+                                val item = it.item as? ItemFood ?: return@next
+                                val manaSet = playerAuraHandler.getLocalFoodAura(it) ?: return@result Pair(ManaSet.ZERO, 0)
+                                return@result Pair(manaSet, item.getHealAmount(it))
+                            }
+                            null
+                        } ?: return // 食べ物を持っている場合のみ
+
+                        fun drawPiece(center: Complex, length: Double, i: Double, rgb: IRgb, brightness: Double) = drawTriangle(
+                            Complex(center.re, center.im),
+                            Complex(center.re + cos(PI / 3 * i) * length, center.im - sin(PI / 3 * i) * length),
+                            Complex(center.re + cos(PI / 3 * (i + 1)) * length, center.im - sin(PI / 3 * (i + 1)) * length),
+                            rgb * brightness.toFloat()
+                        )
+
+                        fun drawPieces(center: Complex, radius: Double, rgb: IRgb) = repeat(6) { drawPiece(center, radius, it.toDouble(), rgb, 1.0) }
+
+                        fun drawPieces(center: Complex, radius: Double, health: Double, foodAura: IManaSet) {
+                            drawPiece(center, radius * health, 0.0, EnumManaType.WIND.color.toRgb(), 0.1 * foodAura.wind)
+                            drawPiece(center, radius * health, 1.0, EnumManaType.SHINE.color.toRgb(), 0.1 * foodAura.shine)
+                            drawPiece(center, radius * health, 2.0, EnumManaType.FIRE.color.toRgb(), 0.1 * foodAura.fire)
+                            drawPiece(center, radius * health, 3.0, EnumManaType.GAIA.color.toRgb(), 0.1 * foodAura.gaia)
+                            drawPiece(center, radius * health, 4.0, EnumManaType.DARK.color.toRgb(), 0.1 * foodAura.dark)
+                            drawPiece(center, radius * health, 5.0, EnumManaType.AQUA.color.toRgb(), 0.1 * foodAura.aqua)
                         }
-                        player.heldItemOffhand.let next@{
-                            val item = it.item as? ItemFood ?: return@next
-                            val manaSet = playerAuraHandler.getLocalFoodAura(it) ?: return@result Pair(ManaSet.ZERO, 0)
-                            return@result Pair(manaSet, item.getHealAmount(it))
+
+                        fun drawAuraGauge(center: Complex, radius: Double) {
+                            drawPieces(center, radius, 1 + 0.05 + healAmount / 100.0, foodAura)
+                            drawPieces(center, radius * 1.05, 0xFFFFFF.toRgb())
+                            val foodHistory = ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler.foodHistory.toList()
+                            foodHistory.forEach { entry ->
+                                drawPieces(center, radius, entry.health, entry.baseLocalFoodAura)
+                            }
+                            drawPieces(center, radius * (100 - foodHistory.size) / 100.0, 0x000000.toRgb())
                         }
-                        null
-                    } ?: return // 食べ物を持っている場合のみ
 
-                    fun drawPiece(center: Complex, length: Double, i: Double, rgb: IRgb, brightness: Double) = drawTriangle(
-                        Complex(center.re, center.im),
-                        Complex(center.re + cos(PI / 3 * i) * length, center.im - sin(PI / 3 * i) * length),
-                        Complex(center.re + cos(PI / 3 * (i + 1)) * length, center.im - sin(PI / 3 * (i + 1)) * length),
-                        rgb * brightness.toFloat()
-                    )
-
-                    fun drawPieces(center: Complex, radius: Double, rgb: IRgb) = repeat(6) { drawPiece(center, radius, it.toDouble(), rgb, 1.0) }
-
-                    fun drawPieces(center: Complex, radius: Double, health: Double, foodAura: IManaSet) {
-                        drawPiece(center, radius * health, 0.0, EnumManaType.WIND.color.toRgb(), 0.1 * foodAura.wind)
-                        drawPiece(center, radius * health, 1.0, EnumManaType.SHINE.color.toRgb(), 0.1 * foodAura.shine)
-                        drawPiece(center, radius * health, 2.0, EnumManaType.FIRE.color.toRgb(), 0.1 * foodAura.fire)
-                        drawPiece(center, radius * health, 3.0, EnumManaType.GAIA.color.toRgb(), 0.1 * foodAura.gaia)
-                        drawPiece(center, radius * health, 4.0, EnumManaType.DARK.color.toRgb(), 0.1 * foodAura.dark)
-                        drawPiece(center, radius * health, 5.0, EnumManaType.AQUA.color.toRgb(), 0.1 * foodAura.aqua)
-                    }
-
-                    fun drawAuraGauge(center: Complex, radius: Double) {
-                        drawPieces(center, radius, 1 + 0.05 + healAmount / 100.0, foodAura)
-                        drawPieces(center, radius * 1.05, 0xFFFFFF.toRgb())
-                        val foodHistory = ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler.foodHistory.toList()
-                        foodHistory.forEach { entry ->
-                            drawPieces(center, radius, entry.health, entry.baseLocalFoodAura)
+                        if (player.isSneaking) {
+                            drawAuraGauge(Complex(88.0, 80.0), 80.0)
+                        } else {
+                            drawAuraGauge(Complex(22.0, 20.0), 20.0)
                         }
-                        drawPieces(center, radius * (100 - foodHistory.size) / 100.0, 0x000000.toRgb())
-                    }
 
-                    if (player.isSneaking) {
-                        drawAuraGauge(Complex(88.0, 80.0), 80.0)
-                    } else {
-                        drawAuraGauge(Complex(22.0, 20.0), 20.0)
                     }
-
-                }
-            })
+                })
+            }
         }
-    }
 
+    }
 }
 
 class PacketPlayerAura : IMessageHandler<MessagePlayerAura, IMessage> {
