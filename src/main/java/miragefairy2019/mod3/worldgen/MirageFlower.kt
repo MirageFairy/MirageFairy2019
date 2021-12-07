@@ -63,7 +63,7 @@ object MirageFlower {
         blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
             setUnlocalizedName("mirageFlower")
             setCreativeTab { ApiMain.creativeTab }
-            ApiWorldGen.pickHandlerRegistry.register(block, block.pickHandler)
+            onRegisterBlock { ApiWorldGen.pickHandlerRegistry.register(block, block.pickHandler) }
         }
         itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower()) }, "mirage_flower_seeds") {
             setUnlocalizedName("mirageFlowerSeeds")
