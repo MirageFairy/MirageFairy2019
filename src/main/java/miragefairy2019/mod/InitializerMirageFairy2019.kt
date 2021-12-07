@@ -19,13 +19,14 @@ import miragefairy2019.mod3.fairystick.moduleFairyStick
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.moduleMain
 import miragefairy2019.mod3.manualrepair.moduleManualRepair
-import miragefairy2019.mod3.worldgen.WorldGen
-import miragefairy2019.mod3.worldgen.ModuleMirageFlower
+import miragefairy2019.mod3.pick.Pick
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
 import miragefairy2019.mod3.playeraura.modulePlayerAura
 import miragefairy2019.mod3.skill.Skill
 import miragefairy2019.mod3.sphere.moduleSphere
+import miragefairy2019.mod3.worldgen.ModuleMirageFlower
+import miragefairy2019.mod3.worldgen.WorldGen
 import miragefairy2019.modkt.modules.fairy.ModuleFairy
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
@@ -56,6 +57,7 @@ class InitializerMirageFairy2019 {
             FairyMaterials.module(this)
             Ore.module(this)
             WorldGen.module(this)
+            Pick.module(this)
         }
 
         modInitializer.onInstantiation()

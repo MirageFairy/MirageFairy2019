@@ -4,7 +4,6 @@ import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
 import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.WorldGenBush;
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropRegistry;
-import miragefairy2019.mod3.pick.PickHandlerRegistry;
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen;
 import mirrg.boron.util.UtilsLambda;
 import mirrg.boron.util.UtilsMath;
@@ -82,11 +81,6 @@ public class ModuleMirageFlower {
     //
 
     private static void initMirageFlower(EventRegistryMod erMod) {
-
-        // レジストリ
-        erMod.initRegistry.register(() -> {
-            ApiWorldGen.pickHandlerRegistry = new PickHandlerRegistry();
-        });
 
         // 雑草が種をドロップ
         erMod.addRecipe.register(() -> {
