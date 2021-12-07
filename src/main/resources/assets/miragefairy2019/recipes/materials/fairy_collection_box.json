@@ -20,8 +20,7 @@
 			"ore": "doorWood"
 		},
 		"l": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereLight"
+			"item": "miragefairy2019:light_magic_wand"
 		},
 		"C": {
 			"item": "minecraft:carpet",
