@@ -24,7 +24,7 @@ import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
 import miragefairy2019.mod3.playeraura.modulePlayerAura
 import miragefairy2019.mod3.skill.Skill
-import miragefairy2019.mod3.sphere.moduleSphere
+import miragefairy2019.mod3.sphere.Sphere
 import miragefairy2019.mod3.worldgen.ModuleMirageFlower
 import miragefairy2019.mod3.worldgen.WorldGen
 import miragefairy2019.modkt.modules.fairy.ModuleFairy
@@ -49,7 +49,7 @@ class InitializerMirageFairy2019 {
             loaderFairyLogDrop()
             moduleFairyWeapon()
             moduleFairy()
-            moduleSphere()
+            Sphere.module(this)
             FairyStick.module(this)
             moduleArtifacts()
             moduleManualRepair()
