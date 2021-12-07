@@ -11,8 +11,6 @@ import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
 import miragefairy2019.mod3.artifacts.Artifacts
 import miragefairy2019.mod3.damagesource.DamageSource
 import miragefairy2019.mod3.fairy.FairyRelation
-import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
-import miragefairy2019.mod3.fairy.loaderFairyLogDrop
 import miragefairy2019.mod3.fairymaterials.FairyMaterials
 import miragefairy2019.mod3.fairystick.FairyStick
 import miragefairy2019.mod3.main.Main
@@ -26,7 +24,7 @@ import miragefairy2019.mod3.skill.Skill
 import miragefairy2019.mod3.sphere.Sphere
 import miragefairy2019.mod3.worldgen.ModuleMirageFlower
 import miragefairy2019.mod3.worldgen.WorldGen
-import miragefairy2019.modkt.modules.fairy.ModuleFairy
+import miragefairy2019.modkt.modules.fairy.Fairy
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
@@ -42,9 +40,7 @@ class InitializerMirageFairy2019 {
             Main.module(this)
             PlayerAura.module(this)
             Skill.module(this)
-            ModuleFairy.init(this)
-            loaderFairyCrystalDrop()
-            loaderFairyLogDrop()
+            Fairy.module(this)
             FairyWeapon.module(this)
             FairyRelation.module(this)
             Sphere.module(this)

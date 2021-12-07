@@ -15,6 +15,8 @@ import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.ItemDebugFairyList
 import miragefairy2019.mod3.fairy.ItemFairy
+import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
+import miragefairy2019.mod3.fairy.loaderFairyLogDrop
 import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.playeraura.api.IFoodAuraContainer
@@ -51,11 +53,13 @@ import java.util.function.Predicate
 
 lateinit var itemBakedFairy: () -> ItemBakedFairy
 
-object ModuleFairy {
+object Fairy {
     lateinit var creativeTab: CreativeTabs
     lateinit var listItemFairy: List<ItemFairy>
+    val module: Module = {
 
-    val init: Module = {
+        loaderFairyCrystalDrop(this)
+        loaderFairyLogDrop(this)
 
         // 妖精関係性レジストリ
         onInstantiation {
@@ -360,7 +364,7 @@ class RecipeFairyBaking : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 
         // 探索
         val itemStackWand = find(OreIngredientComplex("mirageFairy2019CraftingToolFairyWandMelting")) ?: return null // 紅蓮杖
-        val itemStackFairy = find { it.item == ModuleFairy.listItemFairy[0] } ?: return null // 妖精
+        val itemStackFairy = find { it.item == Fairy.listItemFairy[0] } ?: return null // 妖精
         find(Ingredient.fromItem(Items.SUGAR)) ?: return null // 砂糖
         find(Ingredient.fromItem(Items.BOWL)) ?: return null // ボウル
 
