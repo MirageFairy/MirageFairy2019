@@ -16,8 +16,8 @@ import miragefairy2019.mod3.fairy.loaderFairyRelation
 import miragefairy2019.mod3.fairy.moduleFairy
 import miragefairy2019.mod3.fairymaterials.FairyMaterials
 import miragefairy2019.mod3.fairystick.FairyStick
+import miragefairy2019.mod3.main.Main
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
-import miragefairy2019.mod3.main.moduleMain
 import miragefairy2019.mod3.manualrepair.ManualRepair
 import miragefairy2019.mod3.pick.Pick
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
@@ -40,7 +40,7 @@ class InitializerMirageFairy2019 {
     init {
 
         modInitializer.run {
-            moduleMain()
+            Main.module(this)
             modulePlayerAura()
             Skill.module(this)
             ModuleFairy.init(this)
