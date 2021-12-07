@@ -137,20 +137,21 @@ class FairyWeaponLoader(m: ModInitializer) {
     val miragiumScythe = m.fw(2, ::ItemMiragiumScythe, "miragium_scythe", "miragiumScythe", listOf(), null, { SLASH }, { HARVEST })
 }
 
+object FairyWeapon {
+    val module: Module = {
 
-val moduleFairyWeapon: Module = {
+        fairyWeaponLoader = FairyWeaponLoader(this)
 
-    fairyWeaponLoader = FairyWeaponLoader(this)
+        // ワンドステッキクラフトレシピ登録
+        onAddRecipe {
 
-    // ワンドステッキクラフトレシピ登録
-    onAddRecipe {
+            // 丸石＞紅蓮→焼き石
+            ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019CraftingToolFairyWandMelting"))
+                it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.COBBLESTONE.defaultState }, { Blocks.STONE.defaultState })
+            })
 
-        // 丸石＞紅蓮→焼き石
-        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-            it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019CraftingToolFairyWandMelting"))
-            it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.COBBLESTONE.defaultState }, { Blocks.STONE.defaultState })
-        })
+        }
 
     }
-
 }

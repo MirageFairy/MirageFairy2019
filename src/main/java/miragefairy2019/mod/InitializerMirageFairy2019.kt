@@ -4,7 +4,7 @@ import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod.lib.InitializationContext
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
-import miragefairy2019.mod.modules.fairyweapon.item.moduleFairyWeapon
+import miragefairy2019.mod.modules.fairyweapon.item.FairyWeapon
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.Ore
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
@@ -47,7 +47,7 @@ class InitializerMirageFairy2019 {
             loaderFairyRelation()
             loaderFairyCrystalDrop()
             loaderFairyLogDrop()
-            moduleFairyWeapon()
+            FairyWeapon.module(this)
             FairyRelation.module(this)
             Sphere.module(this)
             FairyStick.module(this)
