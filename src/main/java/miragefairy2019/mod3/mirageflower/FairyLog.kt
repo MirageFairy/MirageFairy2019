@@ -1,6 +1,13 @@
 package miragefairy2019.mod3.mirageflower
 
+import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.block
+import miragefairy2019.libkt.item
+import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setCustomModelResourceLocation
+import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod3.fairy.FairyTypes
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
@@ -14,6 +21,7 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumFacing
@@ -25,6 +33,23 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+import java.util.function.Supplier
+
+object FairyLog {
+    lateinit var blockFairyLog: Supplier<BlockFairyLog>
+    lateinit var itemBlockFairyLog: Supplier<ItemBlock>
+    val module: Module = {
+        blockFairyLog = block({ BlockFairyLog() }, "fairy_log") {
+            setUnlocalizedName("fairyLog")
+            setCreativeTab { ApiMain.creativeTab }
+        }
+        itemBlockFairyLog = item({ ItemBlock(blockFairyLog.get()) }, "fairy_log") {
+            setUnlocalizedName("fairyLog")
+            setCreativeTab { ApiMain.creativeTab }
+            setCustomModelResourceLocation(variant = "facing=north,variant=oak")
+        }
+    }
+}
 
 class BlockFairyLog : Block(Material.WOOD) {
     companion object {
