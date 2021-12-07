@@ -19,8 +19,8 @@ import miragefairy2019.mod3.fairystick.moduleFairyStick
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.moduleMain
 import miragefairy2019.mod3.manualrepair.moduleManualRepair
-import miragefairy2019.mod3.mirageflower.MirageFlower
-import miragefairy2019.mod3.mirageflower.ModuleMirageFlower
+import miragefairy2019.mod3.worldgen.WorldGen
+import miragefairy2019.mod3.worldgen.ModuleMirageFlower
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
 import miragefairy2019.mod3.playeraura.modulePlayerAura
@@ -55,7 +55,7 @@ class InitializerMirageFairy2019 {
             moduleDamageSource()
             FairyMaterials.module(this)
             Ore.module(this)
-            MirageFlower.module(this)
+            WorldGen.module(this)
         }
 
         modInitializer.onInstantiation()

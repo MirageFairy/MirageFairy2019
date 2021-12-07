@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.mirageflower
+package miragefairy2019.mod3.worldgen
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.block
@@ -8,7 +8,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower
+import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
 import net.minecraft.block.BlockOldLog

@@ -5,7 +5,7 @@ import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionCanRain
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionHasBiomeType
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionOverworld
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropRecipe
-import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower
+import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
 import net.minecraftforge.common.BiomeDictionary
 
 val loaderFairyLogDrop: Module = {

@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod3.mirageflower.BlockMirageFlowerKt;
+import miragefairy2019.mod3.worldgen.BlockMirageFlowerKt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;

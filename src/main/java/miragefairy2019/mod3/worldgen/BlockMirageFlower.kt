@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.mirageflower
+package miragefairy2019.mod3.worldgen
 
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.randomInt
@@ -11,7 +11,7 @@ import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairymaterials.FairyMaterials
-import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower
+import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
 import miragefairy2019.mod3.pick.PickHandler
 import miragefairy2019.mod3.pick.api.IPickHandler
 import miragefairy2019.modkt.impl.fairy.erg

@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.mirageflower;
+package miragefairy2019.mod3.worldgen;
 
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers;
@@ -6,7 +6,7 @@ import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.WorldGenBush;
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropRegistry;
 import miragefairy2019.mod3.main.api.ApiMain;
-import miragefairy2019.mod3.mirageflower.api.ApiMirageFlower;
+import miragefairy2019.mod3.worldgen.api.ApiMirageFlower;
 import miragefairy2019.mod3.pick.PickHandlerRegistry;
 import mirrg.boron.util.UtilsLambda;
 import mirrg.boron.util.UtilsMath;
@@ -16,7 +16,6 @@ import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -40,37 +39,11 @@ public class ModuleMirageFlower {
 
     //
 
-    private static BlockFairyLog blockFairyLog;
-    private static ItemBlock itemBlockFairyLog;
-
     private static void initFairyLog(EventRegistryMod erMod) {
 
         // レジストリ
         erMod.initRegistry.register(() -> {
             ApiMirageFlower.fairyLogDropRegistry = new FairyLogDropRegistry();
-        });
-
-        // ブロック
-        erMod.registerBlock.register(b -> {
-            blockFairyLog = new BlockFairyLog();
-            blockFairyLog.setRegistryName(ModMirageFairy2019.MODID, "fairy_log");
-            blockFairyLog.setUnlocalizedName("fairyLog");
-            blockFairyLog.setCreativeTab(ApiMain.creativeTab);
-            ForgeRegistries.BLOCKS.register(blockFairyLog);
-            ApiMirageFlower.blockFairyLog = blockFairyLog;
-        });
-
-        // アイテム
-        erMod.registerItem.register(b -> {
-            itemBlockFairyLog = new ItemBlock(blockFairyLog);
-            itemBlockFairyLog.setRegistryName(ModMirageFairy2019.MODID, "fairy_log");
-            itemBlockFairyLog.setUnlocalizedName("fairyLog");
-            itemBlockFairyLog.setCreativeTab(ApiMain.creativeTab);
-            ForgeRegistries.ITEMS.register(itemBlockFairyLog);
-            ApiMirageFlower.itemBlockFairyLog = itemBlockFairyLog;
-            if (ApiMain.side.isClient()) {
-                ModelLoader.setCustomModelResourceLocation(itemBlockFairyLog, 0, new ModelResourceLocation(itemBlockFairyLog.getRegistryName(), "facing=north,variant=oak"));
-            }
         });
 
         // 地形生成
@@ -88,7 +61,7 @@ public class ModuleMirageFlower {
                         BlockPos posAir = posLog.offset(facing);
                         IBlockState blockStateLog = event.getWorld().getBlockState(posLog);
                         IBlockState blockStateAir = event.getWorld().getBlockState(posAir);
-                        IBlockState blockStateFairyLog = blockFairyLog.getState(facing);
+                        IBlockState blockStateFairyLog = FairyLog.blockFairyLog.get().getState(facing);
                         if (!blockStateAir.isSideSolid(event.getWorld(), posAir, facing.getOpposite())) {
                             if (blockStateLog.equals(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK))) {
                                 event.getWorld().setBlockState(posLog, blockStateFairyLog, 2);

@@ -1,8 +1,8 @@
-package  miragefairy2019.mod3.mirageflower
+package  miragefairy2019.mod3.worldgen
 
 import miragefairy2019.libkt.Module
 
-object MirageFlower {
+object WorldGen {
     val module: Module = {
         FairyLog.module(this)
     }
