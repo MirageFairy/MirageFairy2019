@@ -56,7 +56,7 @@ public class ModuleMirageFlower {
                         BlockPos posAir = posLog.offset(facing);
                         IBlockState blockStateLog = event.getWorld().getBlockState(posLog);
                         IBlockState blockStateAir = event.getWorld().getBlockState(posAir);
-                        IBlockState blockStateFairyLog = FairyLog.blockFairyLog.get().getState(facing);
+                        IBlockState blockStateFairyLog = FairyLog.blockFairyLog.invoke().getState(facing);
                         if (!blockStateAir.isSideSolid(event.getWorld(), posAir, facing.getOpposite())) {
                             if (blockStateLog.equals(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK))) {
                                 event.getWorld().setBlockState(posLog, blockStateFairyLog, 2);
@@ -90,7 +90,7 @@ public class ModuleMirageFlower {
 
         // 雑草が種をドロップ
         erMod.addRecipe.register(() -> {
-            MinecraftForge.addGrassSeed(new ItemStack(MirageFlower.itemMirageFlowerSeeds.get()), 1);
+            MinecraftForge.addGrassSeed(new ItemStack(MirageFlower.itemMirageFlowerSeeds.invoke()), 1);
         });
 
         // 地形生成
@@ -98,14 +98,14 @@ public class ModuleMirageFlower {
             List<BiomeDecoratorFlowers> biomeDecorators = new ArrayList<>();
             {
                 biomeDecorators.add(new BiomeDecoratorFlowers(
-                        UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.get(), MirageFlower.blockMirageFlower.get().getState(3)), wg -> {
+                        UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.invoke(), MirageFlower.blockMirageFlower.invoke().getState(3)), wg -> {
                             wg.blockCountMin = 1;
                             wg.blockCountMax = 3;
                         }),
                         0.01));
 
                 biomeDecorators.add(new BiomeDecoratorFlowers(
-                        UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.get(), MirageFlower.blockMirageFlower.get().getState(3)), wg -> {
+                        UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.invoke(), MirageFlower.blockMirageFlower.invoke().getState(3)), wg -> {
                             wg.blockCountMin = 1;
                             wg.blockCountMax = 10;
                         }),
@@ -117,7 +117,7 @@ public class ModuleMirageFlower {
                 });
 
                 biomeDecorators.add(new BiomeDecoratorFlowers(
-                        UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.get(), MirageFlower.blockMirageFlower.get().getState(3)), wg -> {
+                        UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.invoke(), MirageFlower.blockMirageFlower.invoke().getState(3)), wg -> {
                             wg.blockCountMin = 1;
                             wg.blockCountMax = 10;
                         }),

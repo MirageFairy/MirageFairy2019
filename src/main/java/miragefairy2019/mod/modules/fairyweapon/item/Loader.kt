@@ -41,7 +41,6 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.OreIngredient
-import java.util.function.Supplier
 
 private fun getDurability(tier: Int) = when (tier) {
     1 -> 32
@@ -57,7 +56,7 @@ private fun <T : ItemFairyWeaponBase> ModInitializer.fw(
     registryName: String,
     unlocalizedName: String,
     oreNameList: List<String>,
-    parent: (() -> Supplier<out ItemFairyWeaponBase>)?,
+    parent: (() -> () -> ItemFairyWeaponBase)?,
     vararg ergTypeSuppliers: () -> EnumErgType
 ) = item(creator, registryName) {
     setUnlocalizedName(unlocalizedName)
@@ -75,7 +74,7 @@ private fun <T : ItemFairyWeaponBase> ModInitializer.fw(
         }
     }
     onInit {
-        if (parent != null) parent().get().manualRepairErgs.forEach { (key, value) -> item.addManualRepairErg(key, value) }
+        if (parent != null) parent()().manualRepairErgs.forEach { (key, value) -> item.addManualRepairErg(key, value) }
         ergTypeSuppliers.forEach { item.addManualRepairErg(it()) }
         item.maxDamage = getDurability(tier) - 1
     }

@@ -48,9 +48,8 @@ import net.minecraftforge.oredict.ShapelessOreRecipe
 import net.minecraftforge.registries.IForgeRegistryEntry
 import java.util.Optional
 import java.util.function.Predicate
-import java.util.function.Supplier
 
-lateinit var itemBakedFairy: Supplier<ItemBakedFairy>
+lateinit var itemBakedFairy: () -> ItemBakedFairy
 
 object ModuleFairy {
     lateinit var creativeTab: CreativeTabs
@@ -268,7 +267,7 @@ object ModuleFairy {
                             }
                         }
                     }
-                    Minecraft.getMinecraft().itemColors.registerItemColorHandler(ItemColorImpl(), itemBakedFairy.get())
+                    Minecraft.getMinecraft().itemColors.registerItemColorHandler(ItemColorImpl(), itemBakedFairy())
                 }
             }.run()
         }
@@ -382,7 +381,7 @@ class RecipeFairyBaking : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 
     override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack {
         val result = match(inventoryCrafting) ?: return ItemStack.EMPTY
-        val itemStackBakedFairy = ItemStack(itemBakedFairy.get())
+        val itemStackBakedFairy = ItemStack(itemBakedFairy())
         ItemBakedFairy.setFairy(itemStackBakedFairy, result.itemStackFairy.copy(1))
         return itemStackBakedFairy
     }

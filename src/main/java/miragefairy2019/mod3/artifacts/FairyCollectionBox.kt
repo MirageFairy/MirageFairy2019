@@ -57,8 +57,8 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.function.Supplier
 
 object FairyCollectionBox {
-    lateinit var blockFairyCollectionBox: Supplier<BlockFairyCollectionBox>
-    lateinit var itemDish: Supplier<ItemBlock>
+    lateinit var blockFairyCollectionBox: () -> BlockFairyCollectionBox
+    lateinit var itemDish: () -> ItemBlock
 
     const val guiIdFairyCollectionBox = 3
     val module: Module = {
@@ -66,7 +66,7 @@ object FairyCollectionBox {
             setUnlocalizedName("fairyCollectionBox")
             setCreativeTab { ApiMain.creativeTab }
         }
-        itemDish = item({ ItemBlock(blockFairyCollectionBox.get()) }, "fairy_collection_box") {
+        itemDish = item({ ItemBlock(blockFairyCollectionBox()) }, "fairy_collection_box") {
             setCustomModelResourceLocation(variant = "context=bottom,facing=north")
         }
         tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)

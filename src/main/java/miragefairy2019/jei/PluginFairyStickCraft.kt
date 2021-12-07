@@ -41,7 +41,7 @@ class PluginFairyStickCraft : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(itemFairyStick.get()))
+            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(itemFairyStick()))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: RecipeWrapperFairyStickCraft, ingredients: IIngredients) {
                 recipeWrapper.listListItemStackInput.forEachIndexed { i, _ ->
                     recipeLayout.itemStacks.init(i, true, 18 * i, 0)
@@ -57,7 +57,7 @@ class PluginFairyStickCraft : IModPlugin {
     override fun register(registry: IModRegistry) {
         registry.addRecipes(ApiFairyStickCraft.fairyStickCraftRegistry.recipes.toList(), uid)
         registry.handleRecipes(FairyStickCraftRecipe::class.java, { RecipeWrapperFairyStickCraft(registry, it) }, uid)
-        registry.addRecipeCatalyst(ItemStack(itemFairyStick.get()), uid)
+        registry.addRecipeCatalyst(ItemStack(itemFairyStick()), uid)
     }
 
     class RecipeWrapperFairyStickCraft(registry: IModRegistry, recipe: IFairyStickCraftRecipe) : IRecipeWrapper {

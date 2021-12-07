@@ -35,7 +35,6 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.OreIngredient
-import java.util.function.Supplier
 
 class ItemSpheres : ItemMulti<VariantSphere>() {
     override fun getItemStackDisplayName(itemStack: ItemStack): String {
@@ -44,7 +43,7 @@ class ItemSpheres : ItemMulti<VariantSphere>() {
     }
 }
 
-operator fun Supplier<ItemSpheres>.get(ergType: EnumErgType): Any = get().getVariant(ergType.ordinal).get().createItemStack()
+operator fun (() -> ItemSpheres).get(ergType: EnumErgType): Any = this().getVariant(ergType.ordinal).get().createItemStack()
 
 class VariantSphere(val sphere: SphereType) : ItemVariant()
 
@@ -94,7 +93,7 @@ fun getSphereType(ergType: EnumErgType): SphereType {
 }
 
 
-lateinit var itemSpheres: Supplier<ItemSpheres>
+lateinit var itemSpheres: () -> ItemSpheres
 
 val moduleSphere: Module = {
 
@@ -118,7 +117,7 @@ val moduleSphere: Module = {
                 @SideOnly(Side.CLIENT)
                 class ItemColorImpl : IItemColor {
                     override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
-                        val variant = itemSpheres.get().getVariant(itemStack).orElse(null) ?: return 0xFFFFFF
+                        val variant = itemSpheres().getVariant(itemStack).orElse(null) ?: return 0xFFFFFF
                         return when (tintIndex) {
                             0 -> variant.sphere.colorBackground
                             1 -> variant.sphere.colorPlasma
@@ -128,7 +127,7 @@ val moduleSphere: Module = {
                         }
                     }
                 }
-                Minecraft.getMinecraft().itemColors.registerItemColorHandler(ItemColorImpl(), itemSpheres.get())
+                Minecraft.getMinecraft().itemColors.registerItemColorHandler(ItemColorImpl(), itemSpheres())
             }
         }.run()
     }
@@ -136,7 +135,7 @@ val moduleSphere: Module = {
     // スフィアの鉱石辞書
     onCreateItemStack {
         EnumErgType.values().forEachIndexed { meta, ergType ->
-            val itemStack = itemSpheres.get().getVariant(meta).orElse(null)!!.createItemStack()
+            val itemStack = itemSpheres().getVariant(meta).orElse(null)!!.createItemStack()
             OreDictionary.registerOre(getSphereType(ergType).oreName, itemStack)
             OreDictionary.registerOre("mirageFairy2019SphereAny", itemStack)
         }
@@ -146,7 +145,7 @@ val moduleSphere: Module = {
     onAddRecipe {
         EnumErgType.values().forEachIndexed { meta, ergType ->
             val sphere = getSphereType(ergType)
-            val variant = itemSpheres.get().getVariant(meta).orElse(null)!!
+            val variant = itemSpheres().getVariant(meta).orElse(null)!!
 
             // 蛍石触媒レシピ
             run {

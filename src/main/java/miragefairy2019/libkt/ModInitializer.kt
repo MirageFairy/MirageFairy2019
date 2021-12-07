@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
-import java.util.function.Supplier
 
 typealias Module = ModInitializer.() -> Unit
 
@@ -62,9 +61,8 @@ class EventRegistry1<E> {
 
 
 // Initializer
-abstract class Initializer<T : Any>(private val getter: () -> T) : Supplier<T>, () -> T {
+abstract class Initializer<T : Any>(private val getter: () -> T) : () -> T {
     internal val initializingObject get() = getter()
-    override fun get() = initializingObject
     override operator fun invoke() = initializingObject
 }
 

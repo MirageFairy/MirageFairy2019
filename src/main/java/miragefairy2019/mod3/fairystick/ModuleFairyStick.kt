@@ -19,9 +19,8 @@ import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.BlockDynamicLiquid
 import net.minecraft.init.Blocks
 import net.minecraftforge.oredict.OreIngredient
-import java.util.function.Supplier
 
-lateinit var itemFairyStick: Supplier<ItemFairyStick>
+lateinit var itemFairyStick: () -> ItemFairyStick
 
 val moduleFairyStick: Module = {
 

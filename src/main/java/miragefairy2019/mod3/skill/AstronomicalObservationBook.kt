@@ -39,7 +39,6 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.time.Instant
-import java.util.function.Supplier
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.acos
@@ -47,7 +46,7 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 object AstronomicalObservationBook {
-    lateinit var itemAstronomicalObservationBook: Supplier<ItemAstronomicalObservationBook>
+    lateinit var itemAstronomicalObservationBook: () -> ItemAstronomicalObservationBook
     val module: Module = {
         itemAstronomicalObservationBook = item({ ItemAstronomicalObservationBook() }, "astronomical_observation_book") {
             setUnlocalizedName("astronomicalObservationBook")

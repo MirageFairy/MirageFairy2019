@@ -37,7 +37,7 @@ class PluginFairyLogDrop : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(FairyLog.itemBlockFairyLog.get()))
+            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(FairyLog.itemBlockFairyLog()))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 0, 0)
                 recipeLayout.itemStacks.init(1, false, 45, 0)
@@ -50,7 +50,7 @@ class PluginFairyLogDrop : IModPlugin {
         registry.addRecipes(ApiMirageFlower.fairyLogDropRegistry.recipes.toList().map { recipe ->
             object : IRecipeWrapper {
                 override fun getIngredients(ingredients: IIngredients) {
-                    ingredients.setInput(VanillaTypes.ITEM, ItemStack(FairyLog.itemBlockFairyLog.get()))
+                    ingredients.setInput(VanillaTypes.ITEM, ItemStack(FairyLog.itemBlockFairyLog()))
                     ingredients.setOutput(VanillaTypes.ITEM, recipe.itemStackOutput)
                 }
 

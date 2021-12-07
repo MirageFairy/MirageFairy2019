@@ -55,18 +55,17 @@ import net.minecraftforge.common.BiomeDictionary
 import net.minecraftforge.common.EnumPlantType
 import net.minecraftforge.common.IPlantable
 import java.util.Random
-import java.util.function.Supplier
 
 object MirageFlower {
-    lateinit var blockMirageFlower: Supplier<BlockMirageFlower>
-    lateinit var itemMirageFlowerSeeds: Supplier<ItemMirageFlowerSeeds<BlockMirageFlower>>
+    lateinit var blockMirageFlower: () -> BlockMirageFlower
+    lateinit var itemMirageFlowerSeeds: () -> ItemMirageFlowerSeeds<BlockMirageFlower>
     val module: Module = {
         blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
             setUnlocalizedName("mirageFlower")
             setCreativeTab { ApiMain.creativeTab }
             ApiMirageFlower.pickHandlerRegistry.register(block, block.pickHandler)
         }
-        itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower.get()) }, "mirage_flower_seeds") {
+        itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower()) }, "mirage_flower_seeds") {
             setUnlocalizedName("mirageFlowerSeeds")
             setCreativeTab { ApiMain.creativeTab }
             setCustomModelResourceLocation()
@@ -225,7 +224,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
     // ドロップ
 
     // クリエイティブピックでの取得アイテム。
-    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(MirageFlower.itemMirageFlowerSeeds.get())
+    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(MirageFlower.itemMirageFlowerSeeds())
 
     /*
      * Ageが最大のとき、種を1個ドロップする。
@@ -238,11 +237,11 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
         val random = if (world is World) world.rand else Random()
 
         // 種1個は確定でドロップ
-        if (isBreaking) drops += ItemStack(MirageFlower.itemMirageFlowerSeeds.get())
+        if (isBreaking) drops += ItemStack(MirageFlower.itemMirageFlowerSeeds())
         // サイズが2以上なら確定で茎をドロップ
         if (isBreaking && getAge(state) >= 2) repeat(random.randomInt(1 + fortune * 0.2)) { drops += FairyMaterials.itemVariants.leafMirageFlower.createItemStack() }
         // 追加の種
-        if (getAge(state) >= 3) repeat(random.randomInt(fortune * 0.01)) { drops += ItemStack(MirageFlower.itemMirageFlowerSeeds.get()) }
+        if (getAge(state) >= 3) repeat(random.randomInt(fortune * 0.01)) { drops += ItemStack(MirageFlower.itemMirageFlowerSeeds()) }
         // クリスタル
         if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) { drops += ModuleFairyCrystal.variantFairyCrystal.createItemStack() }
         // ミラジウム
@@ -327,5 +326,5 @@ class ItemMirageFlowerSeeds<T>(private val block: T) : Item(), IPlantable where 
     }
 
     override fun getPlantType(world: IBlockAccess, pos: BlockPos) = EnumPlantType.Plains // 常に草の上に蒔ける
-    override fun getPlant(world: IBlockAccess, pos: BlockPos): IBlockState = MirageFlower.blockMirageFlower.get().defaultState // 常にAge0のミラ花を与える
+    override fun getPlant(world: IBlockAccess, pos: BlockPos): IBlockState = MirageFlower.blockMirageFlower().defaultState // 常にAge0のミラ花を与える
 }

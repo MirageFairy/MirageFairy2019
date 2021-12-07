@@ -21,24 +21,23 @@ import net.minecraft.util.IStringSerializable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import java.util.function.Supplier
 
 object TwinkleStone {
-    lateinit var blockTwinkleStone: Supplier<BlockTwinkleStone>
-    lateinit var itemBlockTwinkleStone: Supplier<ItemBlockMulti<BlockTwinkleStone, EnumVariantTwinkleStone>>
+    lateinit var blockTwinkleStone: () -> BlockTwinkleStone
+    lateinit var itemBlockTwinkleStone: () -> ItemBlockMulti<BlockTwinkleStone, EnumVariantTwinkleStone>
     val module: Module = {
         blockTwinkleStone = block({ BlockTwinkleStone() }, "twinkle_stone") {
             setCreativeTab { ApiMain.creativeTab }
         }
-        itemBlockTwinkleStone = item({ ItemBlockMulti(blockTwinkleStone.get()) }, "twinkle_stone") {
+        itemBlockTwinkleStone = item({ ItemBlockMulti(blockTwinkleStone()) }, "twinkle_stone") {
             setUnlocalizedName("twinkleStone")
             onRegisterItem {
-                blockTwinkleStone.get().variantList.blockVariants.forEach { variant ->
+                blockTwinkleStone().variantList.blockVariants.forEach { variant ->
                     item.setCustomModelResourceLocation(variant.resourceName, variant.metadata)
                 }
             }
             onCreateItemStack {
-                blockTwinkleStone.get().variantList.blockVariants.forEach { variant ->
+                blockTwinkleStone().variantList.blockVariants.forEach { variant ->
                     variant.oreNames.forEach { oreName ->
                         item.addOreName(oreName, variant.metadata)
                     }

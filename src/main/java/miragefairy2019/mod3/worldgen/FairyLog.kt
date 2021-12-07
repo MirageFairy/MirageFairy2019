@@ -33,17 +33,16 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import java.util.function.Supplier
 
 object FairyLog {
-    lateinit var blockFairyLog: Supplier<BlockFairyLog>
-    lateinit var itemBlockFairyLog: Supplier<ItemBlock>
+    lateinit var blockFairyLog: () -> BlockFairyLog
+    lateinit var itemBlockFairyLog: () -> ItemBlock
     val module: Module = {
         blockFairyLog = block({ BlockFairyLog() }, "fairy_log") {
             setUnlocalizedName("fairyLog")
             setCreativeTab { ApiMain.creativeTab }
         }
-        itemBlockFairyLog = item({ ItemBlock(blockFairyLog.get()) }, "fairy_log") {
+        itemBlockFairyLog = item({ ItemBlock(blockFairyLog()) }, "fairy_log") {
             setUnlocalizedName("fairyLog")
             setCreativeTab { ApiMain.creativeTab }
             setCustomModelResourceLocation(variant = "facing=north,variant=oak")
@@ -125,7 +124,7 @@ class BlockFairyLog : Block(Material.WOOD) {
     /**
      * クリエイティブピックでの取得アイテム。
      */
-    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(FairyLog.itemBlockFairyLog.get())
+    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(FairyLog.itemBlockFairyLog())
 
     override fun getDrops(drops: NonNullList<ItemStack>, blockAccess: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) {
         if (blockAccess !is World) return

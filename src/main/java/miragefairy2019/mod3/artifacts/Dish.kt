@@ -47,14 +47,14 @@ import java.util.function.Supplier
 import kotlin.math.round
 
 object Dish {
-    lateinit var blockDish: Supplier<BlockDish>
-    lateinit var itemDish: Supplier<ItemBlock>
+    lateinit var blockDish: () -> BlockDish
+    lateinit var itemDish: () -> ItemBlock
     val module: Module = {
         blockDish = block({ BlockDish() }, "dish") {
             setUnlocalizedName("dish")
             setCreativeTab { ApiMain.creativeTab }
         }
-        itemDish = item({ ItemBlock(blockDish.get()) }, "dish") {
+        itemDish = item({ ItemBlock(blockDish()) }, "dish") {
             setCustomModelResourceLocation()
         }
         tileEntity("dish", TileEntityDish::class.java)

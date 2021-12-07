@@ -75,7 +75,7 @@ object FairyMaterials {
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019CraftingToolFairyWandPolishing"))
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
-                it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds.get()), 50)
+                it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds()), 50)
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("gemCinnabar"), 4)
                 it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.bottleMirageFlowerOil.createItemStack() }
             })

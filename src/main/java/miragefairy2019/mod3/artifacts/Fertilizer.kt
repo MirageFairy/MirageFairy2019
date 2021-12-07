@@ -17,7 +17,7 @@ import net.minecraft.world.World
 import java.util.function.Supplier
 
 object Fertilizer {
-    lateinit var itemFertilizer: Supplier<ItemFertilizer>
+    lateinit var itemFertilizer: () -> ItemFertilizer
     val module: Module = {
         itemFertilizer = item({ ItemFertilizer() }, "fertilizer") {
             setUnlocalizedName("fertilizer")

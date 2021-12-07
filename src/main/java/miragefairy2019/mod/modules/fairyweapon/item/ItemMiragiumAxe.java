@@ -163,7 +163,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
 
     private boolean isLog(World world, BlockPos blockPos) {
         IBlockState blockState = world.getBlockState(blockPos);
-        if (blockState.getBlock().equals(FairyLog.blockFairyLog.get())) return true;
+        if (blockState.getBlock().equals(FairyLog.blockFairyLog.invoke())) return true;
         if (blockState.getBlock() instanceof BlockLog) return true;
         if (blockState.getBlock() instanceof BlockLeaves) return true;
         return false;
