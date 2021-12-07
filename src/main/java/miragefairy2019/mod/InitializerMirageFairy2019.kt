@@ -36,23 +36,23 @@ class InitializerMirageFairy2019 {
 
     init {
 
-        modInitializer.run {
-            Main.module(this)
-            PlayerAura.module(this)
-            Skill.module(this)
-            Fairy.module(this)
-            FairyWeapon.module(this)
-            FairyRelation.module(this)
-            Sphere.module(this)
-            FairyStick.module(this)
-            Artifacts.module(this)
-            ManualRepair.module(this)
-            DamageSource.module(this)
-            FairyMaterials.module(this)
-            Ore.module(this)
-            WorldGen.module(this)
-            Pick.module(this)
-        }
+        listOf(
+            Main.module,
+            PlayerAura.module,
+            Skill.module,
+            Fairy.module,
+            FairyWeapon.module,
+            FairyRelation.module,
+            Sphere.module,
+            FairyStick.module,
+            Artifacts.module,
+            ManualRepair.module,
+            DamageSource.module,
+            FairyMaterials.module,
+            Ore.module,
+            WorldGen.module,
+            Pick.module
+        ).forEach { it(modInitializer) }
 
         modInitializer.onInstantiation()
 
