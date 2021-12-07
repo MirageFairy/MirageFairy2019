@@ -136,6 +136,8 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	Achievement::new("lightning_magic_wand"  ; "magicWandLightning" )::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
 	Achievement::new("crystal_sword"         ; "crystalSword"       )::parent("fairy_weapon/miragium_sword"        )::frame("goal"     )::write();
 
+	Achievement::new("ryugyo_drill"          ; "ryugyoDrill"        )::parent("fairy_weapon/root"                  )::frame("goal"     )::write();
+
 );
 
 #################### ブロックステート ####################
@@ -513,6 +515,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	fairyWeapon("collecting_magic_wand");
 	fairyWeapon("lightning_magic_wand");
 	fairyWeapon("crystal_sword");
+	fairyWeapon("ryugyo_drill");
 
 	layered("fairy"; [0 .. 4 | "fairy_layer$_"]);
 	layered("sphere"; [0 .. 3 | "sphere_layer$_"]);

@@ -936,6 +936,50 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		};
 	});
 
+    # 龍魚ドリル
+	writer::write("ryugyo_drill.json"; {
+		type = "forge:ore_shaped";
+		group = "ryugyo_drill";
+		pattern = [
+            "cLL";
+            "b#L";
+            "twd";
+		];
+		key = {
+            "#" = {
+                item = "minecraft:fish";
+                data = 2;
+            };
+            L = {
+                type = "forge:ore_dict";
+                ore = "mirageFairyLeather";
+            };
+            c = {
+                type = "miragefairy2019:ore_dict_complex";
+                ore = "mirageFairy2019CraftingToolFairyWandCrafting";
+            };
+            d = {
+                type = "miragefairy2019:ore_dict_complex";
+                ore = "mirageFairy2019CraftingToolFairyWandDistortion";
+            };
+            b = {
+                type = "forge:ore_dict";
+                ore = "mirageFairy2019SphereDestroy";
+            };
+            t = {
+                type = "forge:ore_dict";
+                ore = "mirageFairy2019SphereThunder";
+            };
+            w = {
+                type = "forge:ore_dict";
+                ore = "mirageFairy2019SphereWater";
+            };
+		};
+		result = {
+			item = "miragefairy2019:ryugyo_drill";
+		};
+	});
+
 );
 
 "[recipe] OK" => OUT;

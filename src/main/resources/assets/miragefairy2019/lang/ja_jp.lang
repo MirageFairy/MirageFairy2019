@@ -320,6 +320,10 @@ item.bellChristmas.magic.name=【共鳴の鎮魂歌】
 item.crystalSword.name=クリスタルソード
 item.crystalSword.poem=妖精はこれをおやつにするという
 item.crystalSword.magic.name=【淡青色の血】
+item.ryugyoDrill.name=龍魚ドリル
+item.ryugyoDrill.poem=デザインコンテスト武器
+item.ryugyoDrill.author=よしのん
+item.ryugyoDrill.magic.name=
 
 item.fertilizer.name=肥料
 tile.twinkleStoneWhite.name=白色のトゥインクルストーン
