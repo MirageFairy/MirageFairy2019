@@ -24,7 +24,6 @@ import miragefairy2019.mod3.fairy.fairyVariant
 import miragefairy2019.mod3.fairy.hasSameId
 import miragefairy2019.mod3.fairy.level
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.mirageflower.BlockFairyLog
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -128,7 +127,7 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
     override fun withMirror(state: IBlockState, mirrorIn: Mirror): IBlockState = state.withProperty(FACING, mirrorIn.mirror(state.getValue(FACING)))
 
     override fun onBlockPlacedBy(worldIn: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, stack: ItemStack) {
-        worldIn.setBlockState(pos, state.withProperty(BlockFairyLog.FACING, placer.horizontalFacing.opposite), 2)
+        worldIn.setBlockState(pos, state.withProperty(FACING, placer.horizontalFacing.opposite), 2)
     }
 
 
