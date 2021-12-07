@@ -13,7 +13,6 @@ import miragefairy2019.mod3.damagesource.DamageSource
 import miragefairy2019.mod3.fairy.FairyRelation
 import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
 import miragefairy2019.mod3.fairy.loaderFairyLogDrop
-import miragefairy2019.mod3.fairy.loaderFairyRelation
 import miragefairy2019.mod3.fairymaterials.FairyMaterials
 import miragefairy2019.mod3.fairystick.FairyStick
 import miragefairy2019.mod3.main.Main
@@ -44,7 +43,6 @@ class InitializerMirageFairy2019 {
             PlayerAura.module(this)
             Skill.module(this)
             ModuleFairy.init(this)
-            loaderFairyRelation()
             loaderFairyCrystalDrop()
             loaderFairyLogDrop()
             FairyWeapon.module(this)
