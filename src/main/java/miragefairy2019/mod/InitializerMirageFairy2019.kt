@@ -8,7 +8,7 @@ import miragefairy2019.mod.modules.fairyweapon.item.moduleFairyWeapon
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.Ore
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
-import miragefairy2019.mod3.artifacts.moduleArtifacts
+import miragefairy2019.mod3.artifacts.Artifacts
 import miragefairy2019.mod3.damagesource.DamageSource
 import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
 import miragefairy2019.mod3.fairy.loaderFairyLogDrop
@@ -51,7 +51,7 @@ class InitializerMirageFairy2019 {
             moduleFairy()
             Sphere.module(this)
             FairyStick.module(this)
-            moduleArtifacts()
+            Artifacts.module(this)
             moduleManualRepair()
             DamageSource.module(this)
             FairyMaterials.module(this)
