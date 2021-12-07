@@ -5,7 +5,7 @@ import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionCanRain
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionHasBiomeType
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionOverworld
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropRecipe
-import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
+import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import net.minecraftforge.common.BiomeDictionary
 
 val loaderFairyLogDrop: Module = {
@@ -17,7 +17,7 @@ val loaderFairyLogDrop: Module = {
         operator fun RankedFairyTypeBundle.invoke(weight: Double, block: FairyLogDropRecipe.() -> Unit) {
             val recipe = FairyLogDropRecipe(weight) { main.createItemStack() }
             recipe.block()
-            ApiMirageFlower.fairyLogDropRegistry.addRecipe(recipe)
+            ApiWorldGen.fairyLogDropRegistry.addRecipe(recipe)
         }
 
         FairyTypes.instance.run {

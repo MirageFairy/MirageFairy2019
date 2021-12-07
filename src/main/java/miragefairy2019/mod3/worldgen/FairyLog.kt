@@ -8,7 +8,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
+import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
 import net.minecraft.block.BlockOldLog
@@ -129,7 +129,7 @@ class BlockFairyLog : Block(Material.WOOD) {
     override fun getDrops(drops: NonNullList<ItemStack>, blockAccess: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) {
         if (blockAccess !is World) return
         repeat(3 + fortune) {
-            drops.add(ApiMirageFlower.fairyLogDropRegistry.drop(blockAccess, pos, blockAccess.rand) ?: FairyTypes.instance.air.main.createItemStack())
+            drops.add(ApiWorldGen.fairyLogDropRegistry.drop(blockAccess, pos, blockAccess.rand) ?: FairyTypes.instance.air.main.createItemStack())
         }
     }
 

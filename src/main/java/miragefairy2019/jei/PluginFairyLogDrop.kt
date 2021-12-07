@@ -13,7 +13,7 @@ import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.mod3.worldgen.FairyLog
-import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
+import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 
@@ -47,7 +47,7 @@ class PluginFairyLogDrop : IModPlugin {
     }
 
     override fun register(registry: IModRegistry) {
-        registry.addRecipes(ApiMirageFlower.fairyLogDropRegistry.recipes.toList().map { recipe ->
+        registry.addRecipes(ApiWorldGen.fairyLogDropRegistry.recipes.toList().map { recipe ->
             object : IRecipeWrapper {
                 override fun getIngredients(ingredients: IIngredients) {
                     ingredients.setInput(VanillaTypes.ITEM, ItemStack(FairyLog.itemBlockFairyLog()))

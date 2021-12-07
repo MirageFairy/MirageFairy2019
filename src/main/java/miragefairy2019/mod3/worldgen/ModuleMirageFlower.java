@@ -5,7 +5,7 @@ import miragefairy2019.mod.lib.EventRegistryMod;
 import miragefairy2019.mod.lib.WorldGenBush;
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropRegistry;
 import miragefairy2019.mod3.pick.PickHandlerRegistry;
-import miragefairy2019.mod3.worldgen.api.ApiMirageFlower;
+import miragefairy2019.mod3.worldgen.api.ApiWorldGen;
 import mirrg.boron.util.UtilsLambda;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.block.BlockNewLog;
@@ -38,7 +38,7 @@ public class ModuleMirageFlower {
 
         // レジストリ
         erMod.initRegistry.register(() -> {
-            ApiMirageFlower.fairyLogDropRegistry = new FairyLogDropRegistry();
+            ApiWorldGen.fairyLogDropRegistry = new FairyLogDropRegistry();
         });
 
         // 地形生成
@@ -85,7 +85,7 @@ public class ModuleMirageFlower {
 
         // レジストリ
         erMod.initRegistry.register(() -> {
-            ApiMirageFlower.pickHandlerRegistry = new PickHandlerRegistry();
+            ApiWorldGen.pickHandlerRegistry = new PickHandlerRegistry();
         });
 
         // 雑草が種をドロップ

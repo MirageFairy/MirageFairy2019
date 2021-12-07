@@ -12,7 +12,7 @@ import miragefairy2019.mod3.magic.positiveBoolean
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.worldgen.MirageFlower
-import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
+import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import mirrg.boron.util.UtilsMath
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.init.SoundEvents
@@ -69,7 +69,7 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
             val listTarget = magicSelectorCircle.blockPosList
                 .mapNotNull {
                     val blockState = world.getBlockState(it.blockPos)
-                    val pickHandler = ApiMirageFlower.pickHandlerRegistry[blockState.block]
+                    val pickHandler = ApiWorldGen.pickHandlerRegistry[blockState.block]
                     if (pickHandler != null && pickHandler.canPick(blockState)) Pair(it, pickHandler) else null
                 }
                 .sortedBy { it.first.distanceSquared }

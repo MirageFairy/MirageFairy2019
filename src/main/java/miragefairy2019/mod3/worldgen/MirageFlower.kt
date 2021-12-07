@@ -20,7 +20,7 @@ import miragefairy2019.mod3.fairymaterials.FairyMaterials
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.pick.PickHandler
 import miragefairy2019.mod3.pick.api.IPickHandler
-import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
+import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.shineEfficiency
 import mirrg.boron.util.UtilsMath
@@ -63,7 +63,7 @@ object MirageFlower {
         blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
             setUnlocalizedName("mirageFlower")
             setCreativeTab { ApiMain.creativeTab }
-            ApiMirageFlower.pickHandlerRegistry.register(block, block.pickHandler)
+            ApiWorldGen.pickHandlerRegistry.register(block, block.pickHandler)
         }
         itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower()) }, "mirage_flower_seeds") {
             setUnlocalizedName("mirageFlowerSeeds")
