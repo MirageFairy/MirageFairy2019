@@ -9,7 +9,7 @@ import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.Ore
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
 import miragefairy2019.mod3.artifacts.moduleArtifacts
-import miragefairy2019.mod3.damagesource.moduleDamageSource
+import miragefairy2019.mod3.damagesource.DamageSource
 import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
 import miragefairy2019.mod3.fairy.loaderFairyLogDrop
 import miragefairy2019.mod3.fairy.loaderFairyRelation
@@ -53,7 +53,7 @@ class InitializerMirageFairy2019 {
             moduleFairyStick()
             moduleArtifacts()
             moduleManualRepair()
-            moduleDamageSource()
+            DamageSource.module(this)
             FairyMaterials.module(this)
             Ore.module(this)
             WorldGen.module(this)
