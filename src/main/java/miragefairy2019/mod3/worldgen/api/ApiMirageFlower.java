@@ -14,7 +14,4 @@ public class ApiMirageFlower {
     public static Block blockMirageFlower;
     public static Item itemMirageFlowerSeeds;
 
-    public static Block blockFairyLog;
-    public static Item itemBlockFairyLog;
-
 }

@@ -5,7 +5,7 @@ import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod3.erg.api.EnumErgType;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
-import miragefairy2019.mod3.worldgen.api.ApiMirageFlower;
+import miragefairy2019.mod3.worldgen.FairyLog;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
@@ -163,7 +163,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
 
     private boolean isLog(World world, BlockPos blockPos) {
         IBlockState blockState = world.getBlockState(blockPos);
-        if (blockState.getBlock().equals(ApiMirageFlower.blockFairyLog)) return true;
+        if (blockState.getBlock().equals(FairyLog.blockFairyLog.get())) return true;
         if (blockState.getBlock() instanceof BlockLog) return true;
         if (blockState.getBlock() instanceof BlockLeaves) return true;
         return false;

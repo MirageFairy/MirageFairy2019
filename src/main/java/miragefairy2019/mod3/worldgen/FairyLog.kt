@@ -125,7 +125,7 @@ class BlockFairyLog : Block(Material.WOOD) {
     /**
      * クリエイティブピックでの取得アイテム。
      */
-    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(ApiMirageFlower.itemBlockFairyLog)
+    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(FairyLog.itemBlockFairyLog.get())
 
     override fun getDrops(drops: NonNullList<ItemStack>, blockAccess: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) {
         if (blockAccess !is World) return
