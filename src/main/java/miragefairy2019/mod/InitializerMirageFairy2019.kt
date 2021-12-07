@@ -15,7 +15,7 @@ import miragefairy2019.mod3.fairy.loaderFairyLogDrop
 import miragefairy2019.mod3.fairy.loaderFairyRelation
 import miragefairy2019.mod3.fairy.moduleFairy
 import miragefairy2019.mod3.fairymaterials.FairyMaterials
-import miragefairy2019.mod3.fairystick.moduleFairyStick
+import miragefairy2019.mod3.fairystick.FairyStick
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.moduleMain
 import miragefairy2019.mod3.manualrepair.moduleManualRepair
@@ -50,7 +50,7 @@ class InitializerMirageFairy2019 {
             moduleFairyWeapon()
             moduleFairy()
             moduleSphere()
-            moduleFairyStick()
+            FairyStick.module(this)
             moduleArtifacts()
             moduleManualRepair()
             DamageSource.module(this)
