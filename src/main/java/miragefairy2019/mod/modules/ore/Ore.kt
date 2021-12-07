@@ -70,6 +70,7 @@ object Ore {
             itemVariant({ ItemVariantMaterial("heliolite_gem", "gemHeliolite") }, 17).addOreName("gemHeliolite")
             itemVariant({ ItemVariantMaterial("labradorite_gem", "gemLabradorite") }, 18).addOreName("gemLabradorite")
             itemVariant({ ItemVariantMaterial("lilagium_ingot", "ingotLilagium") }, 19).addOreName("ingotLilagium")
+            itemVariant({ ItemVariantMaterial("miragium_plate", "plateMiragium") }, 20).addOreName("plateMiragium")
 
             onRegisterItem {
                 if (ApiMain.side.isClient) item.setCustomModelResourceLocations()

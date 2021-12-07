@@ -386,6 +386,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	item("heliolite_gem");
 	item("labradorite_gem");
 	item("lilagium_ingot");
+	item("miragium_plate");
 
 	item("saltpeter_gem");
 
