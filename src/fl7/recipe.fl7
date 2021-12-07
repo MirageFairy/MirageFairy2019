@@ -676,7 +676,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		group = "twinkle_stone";
 		pattern = [
 			"ScS";
-			"IlI";
+			"PlP";
 			"SmS";
 		];
 		key = {
@@ -684,9 +684,9 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 				item = "minecraft:stone";
 				data = 0;
 			};
-			I = {
+			P = {
 				type = "forge:ore_dict";
-				ore = "ingotMiragium";
+				ore = "plateMiragium";
 			};
 			c = {
 				type = "miragefairy2019:ore_dict_complex";
@@ -777,8 +777,8 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		type = "forge:ore_shaped";
 		group = "bell_base";
 		pattern = [
-            "cIs";
-            " RI";
+            "cPs";
+            " RP";
             "I m";
 		];
 		key = {
@@ -789,6 +789,10 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
             I = {
                 type = "forge:ore_dict";
                 ore = "ingotMiragium";
+            };
+            P = {
+                type = "forge:ore_dict";
+                ore = "plateMiragium";
             };
             s = {
                 type = "forge:ore_dict";

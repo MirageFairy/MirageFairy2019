@@ -3,7 +3,7 @@
 	"group": "twinkle_stone",
 	"pattern": [
 		"ScS",
-		"IlI",
+		"PlP",
 		"SmS"
 	],
 	"key": {
@@ -11,9 +11,9 @@
 			"item": "minecraft:stone",
 			"data": 0
 		},
-		"I": {
+		"P": {
 			"type": "forge:ore_dict",
-			"ore": "ingotMiragium"
+			"ore": "plateMiragium"
 		},
 		"c": {
 			"type": "miragefairy2019:ore_dict_complex",

@@ -2,8 +2,8 @@
 	"type": "forge:ore_shaped",
 	"group": "miragium_sword",
 	"pattern": [
-		"sI ",
-		"aIm",
+		"sP ",
+		"aPm",
 		"cR "
 	],
 	"key": {
@@ -11,9 +11,9 @@
 			"type": "forge:ore_dict",
 			"ore": "stickWood"
 		},
-		"I": {
+		"P": {
 			"type": "forge:ore_dict",
-			"ore": "ingotMiragium"
+			"ore": "plateMiragium"
 		},
 		"s": {
 			"type": "forge:ore_dict",
