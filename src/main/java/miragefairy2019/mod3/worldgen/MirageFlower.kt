@@ -1,7 +1,13 @@
 package miragefairy2019.mod3.worldgen
 
+import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.block
 import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.item
 import miragefairy2019.libkt.randomInt
+import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setCustomModelResourceLocation
+import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
 import miragefairy2019.mod.lib.UtilsMinecraft
@@ -11,9 +17,10 @@ import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairymaterials.FairyMaterials
-import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.pick.PickHandler
 import miragefairy2019.mod3.pick.api.IPickHandler
+import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.shineEfficiency
 import mirrg.boron.util.UtilsMath
@@ -41,6 +48,24 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
 import java.util.Random
+import java.util.function.Supplier
+
+object MirageFlower {
+    lateinit var blockMirageFlower: Supplier<BlockMirageFlower>
+    lateinit var itemMirageFlowerSeeds: Supplier<ItemMirageFlowerSeeds<BlockMirageFlower>>
+    val module: Module = {
+        blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
+            setUnlocalizedName("mirageFlower")
+            setCreativeTab { ApiMain.creativeTab }
+            ApiMirageFlower.pickHandlerRegistry.register(block, block.pickHandler);
+        }
+        itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower.get()) }, "mirage_flower_seeds") {
+            setUnlocalizedName("mirageFlowerSeeds")
+            setCreativeTab { ApiMain.creativeTab }
+            setCustomModelResourceLocation()
+        }
+    }
+}
 
 fun getGrowRate(world: World, blockPos: BlockPos): Double {
     var rate = 0.04 // 何もしなくても25回に1回の割合で成長する
@@ -193,7 +218,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
     // ドロップ
 
     // クリエイティブピックでの取得アイテム。
-    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(ApiMirageFlower.itemMirageFlowerSeeds)
+    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(MirageFlower.itemMirageFlowerSeeds.get())
 
     /*
      * Ageが最大のとき、種を1個ドロップする。
@@ -206,11 +231,11 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
         val random = if (world is World) world.rand else Random()
 
         // 種1個は確定でドロップ
-        if (isBreaking) drops += ItemStack(ApiMirageFlower.itemMirageFlowerSeeds)
+        if (isBreaking) drops += ItemStack(MirageFlower.itemMirageFlowerSeeds.get())
         // サイズが2以上なら確定で茎をドロップ
         if (isBreaking && getAge(state) >= 2) repeat(random.randomInt(1 + fortune * 0.2)) { drops += FairyMaterials.itemVariants.leafMirageFlower.createItemStack() }
         // 追加の種
-        if (getAge(state) >= 3) repeat(random.randomInt(fortune * 0.01)) { drops += ItemStack(ApiMirageFlower.itemMirageFlowerSeeds) }
+        if (getAge(state) >= 3) repeat(random.randomInt(fortune * 0.01)) { drops += ItemStack(MirageFlower.itemMirageFlowerSeeds.get()) }
         // クリスタル
         if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) { drops += ModuleFairyCrystal.variantFairyCrystal.createItemStack() }
         // ミラジウム

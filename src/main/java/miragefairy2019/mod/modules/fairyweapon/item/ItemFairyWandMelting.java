@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod3.worldgen.BlockMirageFlowerKt;
+import miragefairy2019.mod3.worldgen.MirageFlowerKt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -32,9 +32,9 @@ public class ItemFairyWandMelting extends ItemFairyWeaponCraftingTool {
 
         if (!world.isRemote) {
             if (player.isSneaking()) {
-                player.sendStatusMessage(BlockMirageFlowerKt.getGrowRateTableMessage(), false);
+                player.sendStatusMessage(MirageFlowerKt.getGrowRateTableMessage(), false);
             } else {
-                player.sendStatusMessage(BlockMirageFlowerKt.getGrowRateMessage(world, pos.offset(facing)), false);
+                player.sendStatusMessage(MirageFlowerKt.getGrowRateMessage(world, pos.offset(facing)), false);
             }
         }
 

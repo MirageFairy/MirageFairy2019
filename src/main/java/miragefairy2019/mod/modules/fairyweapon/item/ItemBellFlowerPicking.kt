@@ -10,8 +10,9 @@ import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.positiveBoolean
 import miragefairy2019.mod3.mana.api.EnumManaType
-import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
 import miragefairy2019.mod3.skill.EnumMastery
+import miragefairy2019.mod3.worldgen.MirageFlower
+import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
 import mirrg.boron.util.UtilsMath
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.init.SoundEvents
@@ -142,7 +143,7 @@ class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weapon
 
                                 // 種の追加ドロップ
                                 if (!extraItemDropRate > world.rand.nextDouble()) {
-                                    if (!world.isRemote) drop(world, ItemStack(ApiMirageFlower.itemMirageFlowerSeeds), Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
+                                    if (!world.isRemote) drop(world, ItemStack(MirageFlower.itemMirageFlowerSeeds.get()), Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
                                 }
 
                                 // 破壊したばかりのブロックの周辺のアイテムを集める

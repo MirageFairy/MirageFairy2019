@@ -5,5 +5,6 @@ import miragefairy2019.libkt.Module
 object WorldGen {
     val module: Module = {
         FairyLog.module(this)
+        MirageFlower.module(this)
     }
 }

@@ -1,6 +1,5 @@
 package miragefairy2019.mod3.worldgen
 
-import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
@@ -33,5 +32,5 @@ class ItemMirageFlowerSeeds<T>(private val block: T) : Item(), IPlantable where 
     }
 
     override fun getPlantType(world: IBlockAccess, pos: BlockPos) = EnumPlantType.Plains // 常に草の上に蒔ける
-    override fun getPlant(world: IBlockAccess, pos: BlockPos): IBlockState = ApiMirageFlower.blockMirageFlower.defaultState // 常にAge0のミラ花を与える
+    override fun getPlant(world: IBlockAccess, pos: BlockPos): IBlockState = MirageFlower.blockMirageFlower.get().defaultState // 常にAge0のミラ花を与える
 }

@@ -22,7 +22,7 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.worldgen.api.ApiMirageFlower
+import miragefairy2019.mod3.worldgen.MirageFlower
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
@@ -75,7 +75,7 @@ object FairyMaterials {
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019CraftingToolFairyWandPolishing"))
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
-                it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(ApiMirageFlower.itemMirageFlowerSeeds), 50)
+                it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds.get()), 50)
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("gemCinnabar"), 4)
                 it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.bottleMirageFlowerOil.createItemStack() }
             })
