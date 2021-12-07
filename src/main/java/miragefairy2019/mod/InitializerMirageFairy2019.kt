@@ -18,7 +18,7 @@ import miragefairy2019.mod3.fairymaterials.FairyMaterials
 import miragefairy2019.mod3.fairystick.FairyStick
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.moduleMain
-import miragefairy2019.mod3.manualrepair.moduleManualRepair
+import miragefairy2019.mod3.manualrepair.ManualRepair
 import miragefairy2019.mod3.pick.Pick
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
@@ -52,7 +52,7 @@ class InitializerMirageFairy2019 {
             Sphere.module(this)
             FairyStick.module(this)
             Artifacts.module(this)
-            moduleManualRepair()
+            ManualRepair.module(this)
             DamageSource.module(this)
             FairyMaterials.module(this)
             Ore.module(this)

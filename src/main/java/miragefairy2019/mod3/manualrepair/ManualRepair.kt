@@ -15,9 +15,11 @@ import net.minecraftforge.common.ForgeHooks
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.registries.IForgeRegistryEntry
 
-val moduleManualRepair: Module = {
-    onAddRecipe {
-        GameRegistry.findRegistry(IRecipe::class.java).register(RecipeManualRepair())
+object ManualRepair {
+    val module: Module = {
+        onAddRecipe {
+            GameRegistry.findRegistry(IRecipe::class.java).register(RecipeManualRepair())
+        }
     }
 }
 
