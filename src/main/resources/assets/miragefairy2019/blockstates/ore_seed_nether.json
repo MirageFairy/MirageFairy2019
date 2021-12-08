@@ -1,21 +1,52 @@
 {
-	"variants": {
-		"variant=tiny": { "model": "minecraft:netherrack" },
-		"variant=lapis": { "model": "minecraft:netherrack" },
-		"variant=diamond": { "model": "minecraft:netherrack" },
-		"variant=iron": { "model": "minecraft:netherrack" },
-		"variant=medium": { "model": "minecraft:netherrack" },
-		"variant=large": { "model": "minecraft:netherrack" },
-		"variant=coal": { "model": "minecraft:netherrack" },
-		"variant=huge": { "model": "minecraft:netherrack" },
-
-		"variant=string": { "model": "minecraft:netherrack" },
-		"variant=horizontal": { "model": "minecraft:netherrack" },
-		"variant=vertical": { "model": "minecraft:netherrack" },
-		"variant=point": { "model": "minecraft:netherrack" },
-		"variant=star": { "model": "minecraft:netherrack" },
-		"variant=ring": { "model": "minecraft:netherrack" },
-		"variant=pyramid": { "model": "minecraft:netherrack" },
-		"variant=cube": { "model": "minecraft:netherrack" }
-	}
+  "variants": {
+    "variant=tiny": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=lapis": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=diamond": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=iron": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=medium": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=large": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=coal": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=huge": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=string": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=horizontal": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=vertical": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=point": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=star": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=ring": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=pyramid": {
+      "model": "minecraft:netherrack"
+    },
+    "variant=cube": {
+      "model": "minecraft:netherrack"
+    }
+  }
 }

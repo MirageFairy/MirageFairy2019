@@ -1,21 +1,52 @@
 {
-	"variants": {
-		"variant=tiny": { "model": "minecraft:end_stone" },
-		"variant=lapis": { "model": "minecraft:end_stone" },
-		"variant=diamond": { "model": "minecraft:end_stone" },
-		"variant=iron": { "model": "minecraft:end_stone" },
-		"variant=medium": { "model": "minecraft:end_stone" },
-		"variant=large": { "model": "minecraft:end_stone" },
-		"variant=coal": { "model": "minecraft:end_stone" },
-		"variant=huge": { "model": "minecraft:end_stone" },
-
-		"variant=string": { "model": "minecraft:end_stone" },
-		"variant=horizontal": { "model": "minecraft:end_stone" },
-		"variant=vertical": { "model": "minecraft:end_stone" },
-		"variant=point": { "model": "minecraft:end_stone" },
-		"variant=star": { "model": "minecraft:end_stone" },
-		"variant=ring": { "model": "minecraft:end_stone" },
-		"variant=pyramid": { "model": "minecraft:end_stone" },
-		"variant=cube": { "model": "minecraft:end_stone" }
-	}
+  "variants": {
+    "variant=tiny": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=lapis": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=diamond": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=iron": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=medium": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=large": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=coal": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=huge": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=string": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=horizontal": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=vertical": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=point": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=star": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=ring": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=pyramid": {
+      "model": "minecraft:end_stone"
+    },
+    "variant=cube": {
+      "model": "minecraft:end_stone"
+    }
+  }
 }
