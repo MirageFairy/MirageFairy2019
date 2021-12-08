@@ -1,8 +1,11 @@
 package miragefairy2019.mod3.worldgen
 
+import miragefairy2019.libkt.DataBlockState
+import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
@@ -41,6 +44,15 @@ object FairyLog {
         blockFairyLog = block({ BlockFairyLog() }, "fairy_log") {
             setUnlocalizedName("fairyLog")
             setCreativeTab { ApiMain.creativeTab }
+            makeBlockStates {
+                DataBlockStates(
+                    listOf("oak", "birch", "spruce", "jungle", "acacia", "dark_oak").flatMap { variant ->
+                        listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
+                            "facing=${facing.first},variant=$variant" to DataBlockState("miragefairy2019:${variant}_fairy_log", y = facing.second)
+                        }
+                    }
+                )
+            }
         }
         itemBlockFairyLog = item({ ItemBlock(blockFairyLog()) }, "fairy_log") {
             setUnlocalizedName("fairyLog")
