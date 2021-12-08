@@ -26,6 +26,8 @@ import net.minecraftforge.oredict.OreDictionary
 typealias Module = ModInitializer.() -> Unit
 
 class ModInitializer {
+    val onMakeResource = EventRegistry1<ResourceMaker>()
+
     val onInstantiation = EventRegistry0()
     val onInitCreativeTab = EventRegistry0()
 
