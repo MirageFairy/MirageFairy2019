@@ -8,6 +8,7 @@ import miragefairy2019.mod.modules.fairyweapon.item.FairyWeapon
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.Ore
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
+import miragefairy2019.mod.modules.oreseed.OreSeed
 import miragefairy2019.mod3.artifacts.Artifacts
 import miragefairy2019.mod3.damagesource.DamageSource
 import miragefairy2019.mod3.fairy.FairyRelation
@@ -51,7 +52,8 @@ class InitializerMirageFairy2019 {
             FairyMaterials.module,
             Ore.module,
             WorldGen.module,
-            Pick.module
+            Pick.module,
+            OreSeed.module
         ).forEach { it(modInitializer) }
 
         modInitializer.onInstantiation()
