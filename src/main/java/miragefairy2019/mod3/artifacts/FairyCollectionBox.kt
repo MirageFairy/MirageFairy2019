@@ -1,5 +1,7 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.DataBlockState
+import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.Module
@@ -10,6 +12,7 @@ import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemStacks
+import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.readFromNBT
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.setCreativeTab
@@ -64,6 +67,15 @@ object FairyCollectionBox {
         blockFairyCollectionBox = block({ BlockFairyCollectionBox() }, "fairy_collection_box") {
             setUnlocalizedName("fairyCollectionBox")
             setCreativeTab { ApiMain.creativeTab }
+            makeBlockStates {
+                DataBlockStates(
+                    listOf("middle", "bottom").flatMap { context ->
+                        listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
+                            "context=$context,facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_building_$context", y = facing.second)
+                        }
+                    }.toMap()
+                )
+            }
         }
         itemFairyCollectionBox = item({ ItemBlock(blockFairyCollectionBox()) }, "fairy_collection_box") {
             setCustomModelResourceLocation(variant = "context=bottom,facing=north")
