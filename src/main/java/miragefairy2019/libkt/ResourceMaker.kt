@@ -7,9 +7,7 @@ import net.minecraft.util.ResourceLocation
 import java.io.File
 
 class ResourceMaker(val dirBase: File) {
-    private val String.replaceSymbols get() = this.replace("""\\u003d""".toRegex(), "=")
-    private val String.format get() = this.replaceSymbols + "\n"
-    private val Any.json get() = GsonBuilder().setPrettyPrinting().create().toJson(this).format
+    private val Any.json get() = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create().toJson(this) + "\n"
     fun File.place(data: Any) = apply { parentFile.mkdirs() }.writeText(data.json)
 }
 
