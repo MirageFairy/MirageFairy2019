@@ -25,7 +25,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -65,12 +64,9 @@ import java.util.stream.IntStream;
 
 import static net.minecraft.util.text.TextFormatting.*;
 
-public class ItemFairyWeaponBase extends Item implements IManualRepairableItem, ICombiningItem, IItemFairyWeapon {
-
-    public int tier = 0;
+public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IManualRepairableItem, ICombiningItem, IItemFairyWeapon {
 
     public ItemFairyWeaponBase() {
-        setMaxStackSize(1);
         if (ApiMain.side.isClient()) {
             new Object() {
                 @SideOnly(Side.CLIENT)
@@ -127,32 +123,6 @@ public class ItemFairyWeaponBase extends Item implements IManualRepairableItem, 
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public boolean isFull3D() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnchantable(ItemStack stack) {
-        return false;
-    }
-
-    @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return false;
-    }
-
-    @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        return false;
-    }
-
-    @Override
-    public boolean isRepairable() {
-        return false;
-    }
-
-    @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         if (itemRand.nextDouble() < 1 / 8.0) damageItem(stack, attacker);
         return true;
@@ -187,7 +157,7 @@ public class ItemFairyWeaponBase extends Item implements IManualRepairableItem, 
         }
 
         // tier
-        tooltip.add(AQUA + "Tier " + tier);
+        tooltip.add(AQUA + "Tier " + getTier());
 
         // 機能
         addInformationFunctions(itemStack, world, tooltip, flag);
