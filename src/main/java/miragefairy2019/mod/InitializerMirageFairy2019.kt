@@ -4,28 +4,12 @@ import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod.lib.InitializationContext
 import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
-import miragefairy2019.mod.modules.fairyweapon.item.FairyWeapon
 import miragefairy2019.mod.modules.ore.ModuleOre
-import miragefairy2019.mod.modules.ore.Ore
 import miragefairy2019.mod.modules.oreseed.ModuleOreSeed
-import miragefairy2019.mod.modules.oreseed.OreSeed
-import miragefairy2019.mod3.artifacts.Artifacts
-import miragefairy2019.mod3.damagesource.DamageSource
-import miragefairy2019.mod3.fairy.FairyRelation
-import miragefairy2019.mod3.fairymaterials.FairyMaterials
-import miragefairy2019.mod3.fairystick.FairyStick
-import miragefairy2019.mod3.main.Main
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
-import miragefairy2019.mod3.manualrepair.ManualRepair
-import miragefairy2019.mod3.pick.Pick
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
-import miragefairy2019.mod3.playeraura.PlayerAura
-import miragefairy2019.mod3.skill.Skill
-import miragefairy2019.mod3.sphere.Sphere
 import miragefairy2019.mod3.worldgen.ModuleMirageFlower
-import miragefairy2019.mod3.worldgen.WorldGen
-import miragefairy2019.modkt.modules.fairy.Fairy
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
@@ -37,24 +21,7 @@ class InitializerMirageFairy2019 {
 
     init {
 
-        listOf(
-            Main.module,
-            PlayerAura.module,
-            Skill.module,
-            Fairy.module,
-            FairyWeapon.module,
-            FairyRelation.module,
-            Sphere.module,
-            FairyStick.module,
-            Artifacts.module,
-            ManualRepair.module,
-            DamageSource.module,
-            FairyMaterials.module,
-            Ore.module,
-            WorldGen.module,
-            Pick.module,
-            OreSeed.module
-        ).forEach { it(modInitializer) }
+        modules.forEach { it(modInitializer) }
 
         modInitializer.onInstantiation()
 
