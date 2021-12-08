@@ -28,6 +28,7 @@ data class DataBlockStates(
     @Expose val variants: Map<String, DataBlockState>
 ) {
     constructor(vararg pairs: Pair<String, DataBlockState>) : this(pairs.toMap())
+    constructor(pairs: Iterable<Pair<String, DataBlockState>>) : this(pairs.toMap())
 }
 
 data class DataBlockState(
