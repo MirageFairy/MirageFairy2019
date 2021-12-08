@@ -154,14 +154,14 @@ public class ItemFairyWeaponBase extends Item implements IManualRepairableItem, 
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        damageItem(stack, attacker);
+        if (itemRand.nextDouble() < 1 / 8.0) damageItem(stack, attacker);
         return true;
     }
 
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
         if (!worldIn.isRemote && state.getBlockHardness(worldIn, pos) != 0.0) {
-            damageItem(stack, entityLiving);
+            if (itemRand.nextDouble() < 1 / 8.0) damageItem(stack, entityLiving);
         }
         return true;
     }
