@@ -1,9 +1,9 @@
 package miragefairy2019.mod.modules.ore.material
 
-import net.minecraft.block.SoundType
-import net.minecraft.util.IStringSerializable
 import miragefairy2019.mod.lib.multi.IBlockVariantList
+import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
+import net.minecraft.util.IStringSerializable
 
 enum class EnumVariantMaterials1(
     @JvmField val metadata: Int,

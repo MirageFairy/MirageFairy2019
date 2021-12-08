@@ -1,10 +1,10 @@
 package miragefairy2019.mod.modules.oreseed
 
 import net.minecraft.block.state.IBlockState
-import net.minecraft.world.gen.feature.WorldGenerator
-import net.minecraft.world.World
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
 import net.minecraft.world.gen.feature.WorldGenMinable
+import net.minecraft.world.gen.feature.WorldGenerator
 import java.util.Random
 
 class WorldGenCompoundOreSeed(block: BlockOreSeed, isReplaceable: (IBlockState) -> Boolean) {

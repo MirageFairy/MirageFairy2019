@@ -1,7 +1,6 @@
 package miragefairy2019.mod.api.ore;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fluids.Fluid;
 

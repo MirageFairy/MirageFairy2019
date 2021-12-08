@@ -19,8 +19,6 @@ import net.minecraftforge.fluids.BlockFluidClassic
 import net.minecraftforge.fluids.Fluid
 import net.minecraftforge.fml.common.eventhandler.Event
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import java.util.Optional
-import java.util.function.Supplier
 
 private typealias Ivifb = ItemVariantInitializer<ItemFilledBucket, ItemVariantFilledBucket>
 

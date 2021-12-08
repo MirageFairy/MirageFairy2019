@@ -22,7 +22,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class ItemFilledBucket extends ItemMultiMaterial<ItemVariantFilledBucket> {
 
