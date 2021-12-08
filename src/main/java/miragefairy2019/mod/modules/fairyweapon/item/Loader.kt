@@ -77,6 +77,7 @@ private fun <T : ItemFairyWeaponBase> ModInitializer.fw(
         if (parent != null) parent()().manualRepairErgs.forEach { (key, value) -> item.addManualRepairErg(key, value) }
         ergTypeSuppliers.forEach { item.addManualRepairErg(it()) }
         item.maxDamage = getDurability(tier) - 1
+        item.tier = tier
     }
     onCreateItemStack {
         oreNameList.forEach { OreDictionary.registerOre(it, ItemStack(item, 1, OreDictionary.WILDCARD_VALUE)) }

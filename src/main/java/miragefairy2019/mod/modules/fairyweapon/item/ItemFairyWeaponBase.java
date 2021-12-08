@@ -67,6 +67,8 @@ import static net.minecraft.util.text.TextFormatting.*;
 
 public class ItemFairyWeaponBase extends Item implements IManualRepairableItem, ICombiningItem, IItemFairyWeapon {
 
+    public int tier = 0;
+
     public ItemFairyWeaponBase() {
         setMaxStackSize(1);
         if (ApiMain.side.isClient()) {
@@ -183,6 +185,9 @@ public class ItemFairyWeaponBase extends Item implements IManualRepairableItem, 
                 tooltip.add(LIGHT_PURPLE + "Author: " + string);
             }
         }
+
+        // tier
+        tooltip.add(AQUA + "Tier " + tier);
 
         // 機能
         addInformationFunctions(itemStack, world, tooltip, flag);
