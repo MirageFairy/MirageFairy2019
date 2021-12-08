@@ -1,9 +1,12 @@
 package miragefairy2019.mod3.worldgen
 
+import miragefairy2019.libkt.DataBlockState
+import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -64,6 +67,7 @@ object MirageFlower {
             setUnlocalizedName("mirageFlower")
             setCreativeTab { ApiMain.creativeTab }
             onRegisterBlock { ApiWorldGen.pickHandlerRegistry.register(block, block.pickHandler) }
+            makeBlockStates { DataBlockStates((0..3).map { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") }) }
         }
         itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower()) }, "mirage_flower_seeds") {
             setUnlocalizedName("mirageFlowerSeeds")
