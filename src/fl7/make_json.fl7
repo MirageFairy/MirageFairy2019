@@ -140,39 +140,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 
 );
 
-#################### ブロックステート ####################
-(
-	writer : Writer::new("src/main/resources/assets/miragefairy2019/blockstates");
-
-	# トゥインクルストーン
-	writer::write("twinkle_stone.json"; {
-		variants = {[meta, color : ${white orange magenta light_blue yellow lime pink gray silver cyan purple blue brown green red black} | {
-			"variant=$meta" = {
-				model = "miragefairy2019:$(color)_twinkle_stone";
-			};
-		}[]]};
-	});
-
-	# 置かれたアイテム
-	writer::write("placed_item.json"; {
-		variants = {
-			normal = {
-				model = "miragefairy2019:placed_item";
-			};
-		};
-	});
-
-	# 皿
-	writer::write("dish.json"; {
-		variants = {
-			normal = {
-				model = "miragefairy2019:dish";
-			};
-		};
-	});
-
-);
-
 #################### ブロックモデル ####################
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
