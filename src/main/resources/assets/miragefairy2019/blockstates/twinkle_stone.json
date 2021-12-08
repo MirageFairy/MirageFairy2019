@@ -1,52 +1,52 @@
 {
-	"variants": {
-		"variant=0": {
-			"model": "miragefairy2019:white_twinkle_stone"
-		},
-		"variant=1": {
-			"model": "miragefairy2019:orange_twinkle_stone"
-		},
-		"variant=2": {
-			"model": "miragefairy2019:magenta_twinkle_stone"
-		},
-		"variant=3": {
-			"model": "miragefairy2019:light_blue_twinkle_stone"
-		},
-		"variant=4": {
-			"model": "miragefairy2019:yellow_twinkle_stone"
-		},
-		"variant=5": {
-			"model": "miragefairy2019:lime_twinkle_stone"
-		},
-		"variant=6": {
-			"model": "miragefairy2019:pink_twinkle_stone"
-		},
-		"variant=7": {
-			"model": "miragefairy2019:gray_twinkle_stone"
-		},
-		"variant=8": {
-			"model": "miragefairy2019:silver_twinkle_stone"
-		},
-		"variant=9": {
-			"model": "miragefairy2019:cyan_twinkle_stone"
-		},
-		"variant=10": {
-			"model": "miragefairy2019:purple_twinkle_stone"
-		},
-		"variant=11": {
-			"model": "miragefairy2019:blue_twinkle_stone"
-		},
-		"variant=12": {
-			"model": "miragefairy2019:brown_twinkle_stone"
-		},
-		"variant=13": {
-			"model": "miragefairy2019:green_twinkle_stone"
-		},
-		"variant=14": {
-			"model": "miragefairy2019:red_twinkle_stone"
-		},
-		"variant=15": {
-			"model": "miragefairy2019:black_twinkle_stone"
-		}
-	}
+  "variants": {
+    "variant=0": {
+      "model": "miragefairy2019:white_twinkle_stone"
+    },
+    "variant=1": {
+      "model": "miragefairy2019:orange_twinkle_stone"
+    },
+    "variant=2": {
+      "model": "miragefairy2019:magenta_twinkle_stone"
+    },
+    "variant=3": {
+      "model": "miragefairy2019:light_blue_twinkle_stone"
+    },
+    "variant=4": {
+      "model": "miragefairy2019:yellow_twinkle_stone"
+    },
+    "variant=5": {
+      "model": "miragefairy2019:lime_twinkle_stone"
+    },
+    "variant=6": {
+      "model": "miragefairy2019:pink_twinkle_stone"
+    },
+    "variant=7": {
+      "model": "miragefairy2019:gray_twinkle_stone"
+    },
+    "variant=8": {
+      "model": "miragefairy2019:silver_twinkle_stone"
+    },
+    "variant=9": {
+      "model": "miragefairy2019:cyan_twinkle_stone"
+    },
+    "variant=10": {
+      "model": "miragefairy2019:purple_twinkle_stone"
+    },
+    "variant=11": {
+      "model": "miragefairy2019:blue_twinkle_stone"
+    },
+    "variant=12": {
+      "model": "miragefairy2019:brown_twinkle_stone"
+    },
+    "variant=13": {
+      "model": "miragefairy2019:green_twinkle_stone"
+    },
+    "variant=14": {
+      "model": "miragefairy2019:red_twinkle_stone"
+    },
+    "variant=15": {
+      "model": "miragefairy2019:black_twinkle_stone"
+    }
+  }
 }
