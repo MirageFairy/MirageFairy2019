@@ -1,9 +1,12 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.DataBlockState
+import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
@@ -28,6 +31,18 @@ object TwinkleStone {
     val module: Module = {
         blockTwinkleStone = block({ BlockTwinkleStone() }, "twinkle_stone") {
             setCreativeTab { ApiMain.creativeTab }
+            makeBlockStates {
+                DataBlockStates(
+                    listOf(
+                        "white", "orange", "magenta", "light_blue",
+                        "yellow", "lime", "pink", "gray",
+                        "silver", "cyan", "purple", "blue",
+                        "brown", "green", "red", "black"
+                    )
+                        .mapIndexed { i, it -> "variant=$i" to DataBlockState("miragefairy2019:${it}_twinkle_stone") }
+                        .toMap()
+                )
+            }
         }
         itemBlockTwinkleStone = item({ ItemBlockMulti(blockTwinkleStone()) }, "twinkle_stone") {
             setUnlocalizedName("twinkleStone")

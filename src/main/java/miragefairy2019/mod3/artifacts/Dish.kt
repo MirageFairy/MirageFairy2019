@@ -3,6 +3,8 @@ package miragefairy2019.mod3.artifacts
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeBlockStates
+import miragefairy2019.libkt.normal
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -53,6 +55,7 @@ object Dish {
         blockDish = block({ BlockDish() }, "dish") {
             setUnlocalizedName("dish")
             setCreativeTab { ApiMain.creativeTab }
+            makeBlockStates { normal }
         }
         itemDish = item({ ItemBlock(blockDish()) }, "dish") {
             setCustomModelResourceLocation()
