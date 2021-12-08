@@ -134,7 +134,7 @@ fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.createItemS
 
 // Block
 
-class BlockInitializer<B : Block>(val modInitializer: ModInitializer, getter: () -> B) : Initializer<B>(getter) {
+class BlockInitializer<B : Block>(val modInitializer: ModInitializer, val registryName: ResourceLocation, getter: () -> B) : Initializer<B>(getter) {
     val block get() = initializingObject
 }
 
@@ -145,7 +145,7 @@ fun <B : Block> ModInitializer.block(creator: () -> B, registryName: String, blo
         block2.setRegistryName(ModMirageFairy2019.MODID, registryName)
         ForgeRegistries.BLOCKS.register(block2)
     }
-    return BlockInitializer(this) { block2 }.also {
+    return BlockInitializer(this, ResourceLocation(ModMirageFairy2019.MODID, registryName)) { block2 }.also {
         if (block != null) it.block()
     }
 }
