@@ -59,7 +59,6 @@ object Dish {
         }
         tileEntity("dish", TileEntityDish::class.java)
         tileEntityRenderer(TileEntityDish::class.java, { TileEntityRendererDish() })
-
     }
 }
 
