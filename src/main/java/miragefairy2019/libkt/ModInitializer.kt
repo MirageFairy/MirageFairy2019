@@ -71,7 +71,7 @@ abstract class Initializer<T : Any>(private val getter: () -> T) : () -> T {
 
 // Item
 
-class ItemInitializer<I : Item>(val modInitializer: ModInitializer, getter: () -> I) : Initializer<I>(getter) {
+class ItemInitializer<I : Item>(val modInitializer: ModInitializer, val registryName: ResourceLocation, getter: () -> I) : Initializer<I>(getter) {
     val item get() = initializingObject
 }
 
@@ -82,7 +82,7 @@ fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, block
         item.setRegistryName(ModMirageFairy2019.MODID, registryName)
         ForgeRegistries.ITEMS.register(item)
     }
-    return ItemInitializer(this) { item }.also {
+    return ItemInitializer(this, ResourceLocation(ModMirageFairy2019.MODID, registryName)) { item }.also {
         if (block != null) it.block()
     }
 }
