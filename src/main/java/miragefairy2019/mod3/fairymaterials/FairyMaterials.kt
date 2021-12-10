@@ -89,7 +89,7 @@ object FairyMaterials {
 
     class ItemVariants(private val i: Iifm) {
         private fun iv(metadata: Int, registryName: String, unlocalizedName: String, tier: Int, oreNames: List<String>): Ivifm {
-            return i.itemVariant({ ItemVariantFairyMaterial(registryName, unlocalizedName, tier) }, metadata) {
+            return i.itemVariant(registryName, { ItemVariantFairyMaterial(it, unlocalizedName, tier) }, metadata) {
                 oreNames.forEach { addOreName(it) }
             }
         }

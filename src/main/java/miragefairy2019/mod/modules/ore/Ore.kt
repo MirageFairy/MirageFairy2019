@@ -3,8 +3,11 @@ package miragefairy2019.mod.modules.ore
 import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.addOreName
+import miragefairy2019.libkt.generated
+import miragefairy2019.libkt.handheld
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
+import miragefairy2019.libkt.makeItemVariantModel
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
@@ -48,27 +51,27 @@ object Ore {
             setUnlocalizedName("materials")
             setCreativeTab { ApiMain.creativeTab }
 
-            itemVariant({ ItemVariantMaterial("apatite_gem", "gemApatite") }, 0).addOreName("gemApatite")
-            itemVariant({ ItemVariantMaterial("fluorite_gem", "gemFluorite") }, 1).addOreName("gemFluorite")
-            itemVariant({ ItemVariantMaterial("sulfur_gem", "gemSulfur") }, 2).addOreName("gemSulfur")
-            itemVariant({ ItemVariantMaterial("miragium_dust", "dustMiragium") }, 3).addOreName("dustMiragium")
-            itemVariant({ ItemVariantMaterial("miragium_tiny_dust", "dustTinyMiragium") }, 4).addOreName("dustTinyMiragium")
-            itemVariant({ ItemVariantMaterial("miragium_ingot", "ingotMiragium") }, 5).addOreName("ingotMiragium")
-            itemVariant({ ItemVariantMaterial("cinnabar_gem", "gemCinnabar") }, 6).addOreName("gemCinnabar")
-            itemVariant({ ItemVariantMaterial("moonstone_gem", "gemMoonstone") }, 7).addOreName("gemMoonstone")
-            itemVariant({ ItemVariantMaterial("magnetite_gem", "gemMagnetite") }, 8).addOreName("gemMagnetite")
-            itemVariant({ ItemVariantMaterial("saltpeter_gem", "gemSaltpeter") }, 9).addOreName("gemSaltpeter")
-            itemVariant({ ItemVariantMaterial("pyrope_gem", "gemPyrope") }, 10).addOreName("gemPyrope")
-            itemVariant({ ItemVariantMaterial("smithsonite_gem", "gemSmithsonite") }, 11).addOreName("gemSmithsonite")
-            itemVariant({ ItemVariantMaterial("miragium_rod", "rodMiragium") }, 12).addOreName("rodMiragium")
-            itemVariant({ ItemVariantMaterial("miragium_nugget", "nuggetMiragium") }, 13).addOreName("nuggetMiragium")
-            itemVariant({ ItemVariantMaterial("nephrite_gem", "gemNephrite") }, 14).addOreName("gemNephrite")
-            itemVariant({ ItemVariantMaterial("topaz_gem", "gemTopaz") }, 15).addOreName("gemTopaz")
-            itemVariant({ ItemVariantMaterial("tourmaline_gem", "gemTourmaline") }, 16).addOreName("gemTourmaline")
-            itemVariant({ ItemVariantMaterial("heliolite_gem", "gemHeliolite") }, 17).addOreName("gemHeliolite")
-            itemVariant({ ItemVariantMaterial("labradorite_gem", "gemLabradorite") }, 18).addOreName("gemLabradorite")
-            itemVariant({ ItemVariantMaterial("lilagium_ingot", "ingotLilagium") }, 19).addOreName("ingotLilagium")
-            itemVariant({ ItemVariantMaterial("miragium_plate", "plateMiragium") }, 20).addOreName("plateMiragium")
+            itemVariant("apatite_gem", { ItemVariantMaterial(it, "gemApatite") }, 0).also { addOreName("gemApatite") }.run { makeItemVariantModel { generated } }
+            itemVariant("fluorite_gem", { ItemVariantMaterial(it, "gemFluorite") }, 1).also { addOreName("gemFluorite") }.run { makeItemVariantModel { generated } }
+            itemVariant("sulfur_gem", { ItemVariantMaterial(it, "gemSulfur") }, 2).also { addOreName("gemSulfur") }.run { makeItemVariantModel { generated } }
+            itemVariant("miragium_dust", { ItemVariantMaterial(it, "dustMiragium") }, 3).also { addOreName("dustMiragium") }.run { makeItemVariantModel { generated } }
+            itemVariant("miragium_tiny_dust", { ItemVariantMaterial(it, "dustTinyMiragium") }, 4).also { addOreName("dustTinyMiragium") }.run { makeItemVariantModel { generated } }
+            itemVariant("miragium_ingot", { ItemVariantMaterial(it, "ingotMiragium") }, 5).also { addOreName("ingotMiragium") }.run { makeItemVariantModel { generated } }
+            itemVariant("cinnabar_gem", { ItemVariantMaterial(it, "gemCinnabar") }, 6).also { addOreName("gemCinnabar") }.run { makeItemVariantModel { generated } }
+            itemVariant("moonstone_gem", { ItemVariantMaterial(it, "gemMoonstone") }, 7).also { addOreName("gemMoonstone") }.run { makeItemVariantModel { generated } }
+            itemVariant("magnetite_gem", { ItemVariantMaterial(it, "gemMagnetite") }, 8).also { addOreName("gemMagnetite") }.run { makeItemVariantModel { generated } }
+            itemVariant("saltpeter_gem", { ItemVariantMaterial(it, "gemSaltpeter") }, 9).also { addOreName("gemSaltpeter") }.run { makeItemVariantModel { generated } }
+            itemVariant("pyrope_gem", { ItemVariantMaterial(it, "gemPyrope") }, 10).also { addOreName("gemPyrope") }.run { makeItemVariantModel { generated } }
+            itemVariant("smithsonite_gem", { ItemVariantMaterial(it, "gemSmithsonite") }, 11).also { addOreName("gemSmithsonite") }.run { makeItemVariantModel { generated } }
+            itemVariant("miragium_rod", { ItemVariantMaterial(it, "rodMiragium") }, 12).also { addOreName("rodMiragium") }.run { makeItemVariantModel { handheld } }
+            itemVariant("miragium_nugget", { ItemVariantMaterial(it, "nuggetMiragium") }, 13).also { addOreName("nuggetMiragium") }.run { makeItemVariantModel { generated } }
+            itemVariant("nephrite_gem", { ItemVariantMaterial(it, "gemNephrite") }, 14).also { addOreName("gemNephrite") }.run { makeItemVariantModel { generated } }
+            itemVariant("topaz_gem", { ItemVariantMaterial(it, "gemTopaz") }, 15).also { addOreName("gemTopaz") }.run { makeItemVariantModel { generated } }
+            itemVariant("tourmaline_gem", { ItemVariantMaterial(it, "gemTourmaline") }, 16).also { addOreName("gemTourmaline") }.run { makeItemVariantModel { generated } }
+            itemVariant("heliolite_gem", { ItemVariantMaterial(it, "gemHeliolite") }, 17).also { addOreName("gemHeliolite") }.run { makeItemVariantModel { generated } }
+            itemVariant("labradorite_gem", { ItemVariantMaterial(it, "gemLabradorite") }, 18).also { addOreName("gemLabradorite") }.run { makeItemVariantModel { generated } }
+            itemVariant("lilagium_ingot", { ItemVariantMaterial(it, "ingotLilagium") }, 19).also { addOreName("ingotLilagium") }.run { makeItemVariantModel { generated } }
+            itemVariant("miragium_plate", { ItemVariantMaterial(it, "plateMiragium") }, 20).also { addOreName("plateMiragium") }.run { makeItemVariantModel { generated } }
 
             onRegisterItem {
                 if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
@@ -80,9 +83,9 @@ object Ore {
             setUnlocalizedName("filledBucket")
             setCreativeTab { ApiMain.creativeTab }
 
-            itemVariant({
+            itemVariant("miragium_water_bucket", {
                 ItemVariantFilledBucket(
-                    "miragium_water_bucket",
+                    it,
                     "bucketMiragiumWater",
                     true
                 ) { ModuleOre.blockFluidMiragiumWater.defaultState }
@@ -91,9 +94,9 @@ object Ore {
                 addOreName("container1000MiragiumWater")
                 registerEmptyBucketFiller { ModuleOre.blockFluidMiragiumWater.defaultState }
             }
-            itemVariant({
+            itemVariant("mirage_flower_extract_bucket", {
                 ItemVariantFilledBucket(
-                    "mirage_flower_extract_bucket",
+                    it,
                     "bucketMirageFlowerExtract",
                     true
                 ) { ModuleOre.blockFluidMirageFlowerExtract.defaultState }
@@ -102,9 +105,9 @@ object Ore {
                 addOreName("container1000MirageFlowerExtract")
                 registerEmptyBucketFiller { ModuleOre.blockFluidMirageFlowerExtract.defaultState }
             }
-            itemVariant({
+            itemVariant("mirage_flower_oil_bucket", {
                 ItemVariantFilledBucket(
-                    "mirage_flower_oil_bucket",
+                    it,
                     "bucketMirageFlowerOil",
                     true
                 ) { ModuleOre.blockFluidMirageFlowerOil.defaultState }

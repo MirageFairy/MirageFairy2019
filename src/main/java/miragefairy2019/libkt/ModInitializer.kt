@@ -108,21 +108,22 @@ fun <I : Item> I.addOreName(oreName: String, metadata: Int = 0) = OreDictionary.
 
 // ItemVariant
 
-class ItemVariantInitializer<I : ItemMulti<V>, V : ItemVariant>(val itemInitializer: ItemInitializer<I>, getter: () -> V) : Initializer<V>(getter) {
+class ItemVariantInitializer<I : ItemMulti<V>, V : ItemVariant>(val itemInitializer: ItemInitializer<I>, val registryName: ResourceLocation, getter: () -> V) : Initializer<V>(getter) {
     val itemVariant get() = initializingObject
 }
 
 fun <I : ItemMulti<V>, V : ItemVariant> ItemInitializer<I>.itemVariant(
-    creator: () -> V,
+    registryName: String,
+    creator: (String) -> V,
     metadata: Int,
     block: (ItemVariantInitializer<I, V>.() -> Unit)? = null
 ): ItemVariantInitializer<I, V> {
     lateinit var itemVariant: V
     modInitializer.onRegisterItem {
-        itemVariant = creator()
+        itemVariant = creator(registryName)
         item.registerVariant(metadata, itemVariant)
     }
-    return ItemVariantInitializer(this) { itemVariant }.also {
+    return ItemVariantInitializer(this, ResourceLocation(ModMirageFairy2019.MODID, registryName)) { itemVariant }.also {
         if (block != null) it.block()
     }
 }

@@ -341,30 +341,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		};
 	});
 
-	item("apatite_gem");
-	item("fluorite_gem");
-	item("sulfur_gem");
-	item("cinnabar_gem");
-	item("moonstone_gem");
-	item("magnetite_gem");
-	item("pyrope_gem");
-	item("smithsonite_gem");
-	item("nephrite_gem");
-	item("topaz_gem");
-	item("tourmaline_gem");
-	item("heliolite_gem");
-	item("labradorite_gem");
-	item("lilagium_ingot");
-	item("miragium_plate");
-
-	item("saltpeter_gem");
-
-	item("miragium_ingot");
-	item("miragium_dust");
-	item("miragium_tiny_dust");
-	item("miragium_nugget");
-	handheld("miragium_rod");
-
 	item("fertilizer");
 	${white orange magenta light_blue yellow lime pink gray silver cyan purple blue brown green red black} | (
 	  block("$(_)_twinkle_stone");
