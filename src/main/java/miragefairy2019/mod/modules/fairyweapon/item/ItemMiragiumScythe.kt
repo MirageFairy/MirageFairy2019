@@ -13,7 +13,10 @@ import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.skill.EnumMastery
 import net.minecraft.block.material.Material
+import net.minecraft.block.state.IBlockState
+import net.minecraft.init.Blocks
 import net.minecraft.init.SoundEvents
+import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
@@ -35,6 +38,9 @@ class ItemMiragiumScythe : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.h
     val range = "range"({ int.positive }) { (2 + !extent * 0.02).toInt() }.setRange(2..5).setVisibility(Companion.EnumVisibility.DETAIL)
     val wear = "wear"({ percent2.positive }) { 1 / (25.0 + !endurance * 0.25) }.setVisibility(Companion.EnumVisibility.DETAIL)
     val coolTime = "coolTime"({ tick.negative }) { cost * 0.3 }.setVisibility(Companion.EnumVisibility.DETAIL)
+
+    override fun getDestroySpeed(itemStack: ItemStack, blockState: IBlockState) = if (isEffective(blockState)) 8.0f else 1.0f
+    override fun canHarvestBlock(blockState: IBlockState) = isEffective(blockState)
 
     init {
         addInformationHandlerFunctions("Right click: use magic") // TODO translate
@@ -153,12 +159,10 @@ class ItemMiragiumScythe : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.h
                 (-!range..!range).forEach { zi ->
                     val blockPos2 = blockPos.add(xi, yi, zi)
                     val blockState = world.getBlockState(blockPos2)
-                    when (blockState.material) {
-                        Material.PLANTS, Material.LEAVES, Material.VINE, Material.GRASS, Material.CACTUS -> {
-                            if (blockState.getBlockHardness(world, blockPos2) <= !maxHardness) {
-                                if (!blockState.isNormalCube) {
-                                    tuples += Pair(blockPos2, blockPos2.distanceSq(blockPos))
-                                }
+                    if (isEffective(blockState)) {
+                        if (blockState.getBlockHardness(world, blockPos2) <= !maxHardness) {
+                            if (!blockState.isNormalCube) {
+                                tuples += Pair(blockPos2, blockPos2.distanceSq(blockPos))
                             }
                         }
                     }
@@ -168,4 +172,15 @@ class ItemMiragiumScythe : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.h
         return tuples.sortedBy { it.second }.map { it.first }
     }
 
+    private fun isEffective(state: IBlockState) = when {
+        state.block === Blocks.WEB -> true
+        state.material === Material.PLANTS -> true
+        state.material === Material.VINE -> true
+        state.material === Material.CORAL -> true
+        state.material === Material.LEAVES -> true
+        state.material === Material.GOURD -> true
+        state.material === Material.GRASS -> true
+        state.material === Material.CACTUS -> true
+        else -> false
+    }
 }
