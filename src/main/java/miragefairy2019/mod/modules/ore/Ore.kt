@@ -1,6 +1,8 @@
 package miragefairy2019.mod.modules.ore
 
+import miragefairy2019.libkt.DataItemModel
 import miragefairy2019.libkt.ItemVariantInitializer
+import miragefairy2019.libkt.MakeItemVariantModelScope
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.generated
@@ -51,27 +53,37 @@ object Ore {
             setUnlocalizedName("materials")
             setCreativeTab { ApiMain.creativeTab }
 
-            itemVariant("apatite_gem", { ItemVariantMaterial(it, "gemApatite") }, 0).apply { addOreName("gemApatite") }.apply { makeItemVariantModel { generated } }
-            itemVariant("fluorite_gem", { ItemVariantMaterial(it, "gemFluorite") }, 1).apply { addOreName("gemFluorite") }.apply { makeItemVariantModel { generated } }
-            itemVariant("sulfur_gem", { ItemVariantMaterial(it, "gemSulfur") }, 2).apply { addOreName("gemSulfur") }.apply { makeItemVariantModel { generated } }
-            itemVariant("miragium_dust", { ItemVariantMaterial(it, "dustMiragium") }, 3).apply { addOreName("dustMiragium") }.apply { makeItemVariantModel { generated } }
-            itemVariant("miragium_tiny_dust", { ItemVariantMaterial(it, "dustTinyMiragium") }, 4).apply { addOreName("dustTinyMiragium") }.apply { makeItemVariantModel { generated } }
-            itemVariant("miragium_ingot", { ItemVariantMaterial(it, "ingotMiragium") }, 5).apply { addOreName("ingotMiragium") }.apply { makeItemVariantModel { generated } }
-            itemVariant("cinnabar_gem", { ItemVariantMaterial(it, "gemCinnabar") }, 6).apply { addOreName("gemCinnabar") }.apply { makeItemVariantModel { generated } }
-            itemVariant("moonstone_gem", { ItemVariantMaterial(it, "gemMoonstone") }, 7).apply { addOreName("gemMoonstone") }.apply { makeItemVariantModel { generated } }
-            itemVariant("magnetite_gem", { ItemVariantMaterial(it, "gemMagnetite") }, 8).apply { addOreName("gemMagnetite") }.apply { makeItemVariantModel { generated } }
-            itemVariant("saltpeter_gem", { ItemVariantMaterial(it, "gemSaltpeter") }, 9).apply { addOreName("gemSaltpeter") }.apply { makeItemVariantModel { generated } }
-            itemVariant("pyrope_gem", { ItemVariantMaterial(it, "gemPyrope") }, 10).apply { addOreName("gemPyrope") }.apply { makeItemVariantModel { generated } }
-            itemVariant("smithsonite_gem", { ItemVariantMaterial(it, "gemSmithsonite") }, 11).apply { addOreName("gemSmithsonite") }.apply { makeItemVariantModel { generated } }
-            itemVariant("miragium_rod", { ItemVariantMaterial(it, "rodMiragium") }, 12).apply { addOreName("rodMiragium") }.apply { makeItemVariantModel { handheld } }
-            itemVariant("miragium_nugget", { ItemVariantMaterial(it, "nuggetMiragium") }, 13).apply { addOreName("nuggetMiragium") }.apply { makeItemVariantModel { generated } }
-            itemVariant("nephrite_gem", { ItemVariantMaterial(it, "gemNephrite") }, 14).apply { addOreName("gemNephrite") }.apply { makeItemVariantModel { generated } }
-            itemVariant("topaz_gem", { ItemVariantMaterial(it, "gemTopaz") }, 15).apply { addOreName("gemTopaz") }.apply { makeItemVariantModel { generated } }
-            itemVariant("tourmaline_gem", { ItemVariantMaterial(it, "gemTourmaline") }, 16).apply { addOreName("gemTourmaline") }.apply { makeItemVariantModel { generated } }
-            itemVariant("heliolite_gem", { ItemVariantMaterial(it, "gemHeliolite") }, 17).apply { addOreName("gemHeliolite") }.apply { makeItemVariantModel { generated } }
-            itemVariant("labradorite_gem", { ItemVariantMaterial(it, "gemLabradorite") }, 18).apply { addOreName("gemLabradorite") }.apply { makeItemVariantModel { generated } }
-            itemVariant("lilagium_ingot", { ItemVariantMaterial(it, "ingotLilagium") }, 19).apply { addOreName("ingotLilagium") }.apply { makeItemVariantModel { generated } }
-            itemVariant("miragium_plate", { ItemVariantMaterial(it, "plateMiragium") }, 20).apply { addOreName("plateMiragium") }.apply { makeItemVariantModel { generated } }
+            fun r(
+                metadata: Int,
+                registryName: String,
+                unlocalizedName: String,
+                oreName: String,
+                modelSupplier: MakeItemVariantModelScope<ItemMultiMaterial<ItemVariantMaterial>, ItemVariantMaterial>.() -> DataItemModel
+            ) = itemVariant(registryName, { ItemVariantMaterial(it, unlocalizedName) }, metadata) {
+                addOreName(oreName)
+                makeItemVariantModel { modelSupplier() }
+            }
+            r(0, "apatite_gem", "gemApatite", "gemApatite", { generated })
+            r(1, "fluorite_gem", "gemFluorite", "gemFluorite", { generated })
+            r(2, "sulfur_gem", "gemSulfur", "gemSulfur", { generated })
+            r(3, "miragium_dust", "dustMiragium", "dustMiragium", { generated })
+            r(4, "miragium_tiny_dust", "dustTinyMiragium", "dustTinyMiragium", { generated })
+            r(5, "miragium_ingot", "ingotMiragium", "ingotMiragium", { generated })
+            r(6, "cinnabar_gem", "gemCinnabar", "gemCinnabar", { generated })
+            r(7, "moonstone_gem", "gemMoonstone", "gemMoonstone", { generated })
+            r(8, "magnetite_gem", "gemMagnetite", "gemMagnetite", { generated })
+            r(9, "saltpeter_gem", "gemSaltpeter", "gemSaltpeter", { generated })
+            r(10, "pyrope_gem", "gemPyrope", "gemPyrope", { generated })
+            r(11, "smithsonite_gem", "gemSmithsonite", "gemSmithsonite", { generated })
+            r(12, "miragium_rod", "rodMiragium", "rodMiragium", { handheld })
+            r(13, "miragium_nugget", "nuggetMiragium", "nuggetMiragium", { generated })
+            r(14, "nephrite_gem", "gemNephrite", "gemNephrite", { generated })
+            r(15, "topaz_gem", "gemTopaz", "gemTopaz", { generated })
+            r(16, "tourmaline_gem", "gemTourmaline", "gemTourmaline", { generated })
+            r(17, "heliolite_gem", "gemHeliolite", "gemHeliolite", { generated })
+            r(18, "labradorite_gem", "gemLabradorite", "gemLabradorite", { generated })
+            r(19, "lilagium_ingot", "ingotLilagium", "ingotLilagium", { generated })
+            r(20, "miragium_plate", "plateMiragium", "plateMiragium", { generated })
 
             onRegisterItem {
                 if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
