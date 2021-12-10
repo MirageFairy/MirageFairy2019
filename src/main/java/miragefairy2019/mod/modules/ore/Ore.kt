@@ -51,27 +51,27 @@ object Ore {
             setUnlocalizedName("materials")
             setCreativeTab { ApiMain.creativeTab }
 
-            itemVariant("apatite_gem", { ItemVariantMaterial(it, "gemApatite") }, 0).also { addOreName("gemApatite") }.run { makeItemVariantModel { generated } }
-            itemVariant("fluorite_gem", { ItemVariantMaterial(it, "gemFluorite") }, 1).also { addOreName("gemFluorite") }.run { makeItemVariantModel { generated } }
-            itemVariant("sulfur_gem", { ItemVariantMaterial(it, "gemSulfur") }, 2).also { addOreName("gemSulfur") }.run { makeItemVariantModel { generated } }
-            itemVariant("miragium_dust", { ItemVariantMaterial(it, "dustMiragium") }, 3).also { addOreName("dustMiragium") }.run { makeItemVariantModel { generated } }
-            itemVariant("miragium_tiny_dust", { ItemVariantMaterial(it, "dustTinyMiragium") }, 4).also { addOreName("dustTinyMiragium") }.run { makeItemVariantModel { generated } }
-            itemVariant("miragium_ingot", { ItemVariantMaterial(it, "ingotMiragium") }, 5).also { addOreName("ingotMiragium") }.run { makeItemVariantModel { generated } }
-            itemVariant("cinnabar_gem", { ItemVariantMaterial(it, "gemCinnabar") }, 6).also { addOreName("gemCinnabar") }.run { makeItemVariantModel { generated } }
-            itemVariant("moonstone_gem", { ItemVariantMaterial(it, "gemMoonstone") }, 7).also { addOreName("gemMoonstone") }.run { makeItemVariantModel { generated } }
-            itemVariant("magnetite_gem", { ItemVariantMaterial(it, "gemMagnetite") }, 8).also { addOreName("gemMagnetite") }.run { makeItemVariantModel { generated } }
-            itemVariant("saltpeter_gem", { ItemVariantMaterial(it, "gemSaltpeter") }, 9).also { addOreName("gemSaltpeter") }.run { makeItemVariantModel { generated } }
-            itemVariant("pyrope_gem", { ItemVariantMaterial(it, "gemPyrope") }, 10).also { addOreName("gemPyrope") }.run { makeItemVariantModel { generated } }
-            itemVariant("smithsonite_gem", { ItemVariantMaterial(it, "gemSmithsonite") }, 11).also { addOreName("gemSmithsonite") }.run { makeItemVariantModel { generated } }
-            itemVariant("miragium_rod", { ItemVariantMaterial(it, "rodMiragium") }, 12).also { addOreName("rodMiragium") }.run { makeItemVariantModel { handheld } }
-            itemVariant("miragium_nugget", { ItemVariantMaterial(it, "nuggetMiragium") }, 13).also { addOreName("nuggetMiragium") }.run { makeItemVariantModel { generated } }
-            itemVariant("nephrite_gem", { ItemVariantMaterial(it, "gemNephrite") }, 14).also { addOreName("gemNephrite") }.run { makeItemVariantModel { generated } }
-            itemVariant("topaz_gem", { ItemVariantMaterial(it, "gemTopaz") }, 15).also { addOreName("gemTopaz") }.run { makeItemVariantModel { generated } }
-            itemVariant("tourmaline_gem", { ItemVariantMaterial(it, "gemTourmaline") }, 16).also { addOreName("gemTourmaline") }.run { makeItemVariantModel { generated } }
-            itemVariant("heliolite_gem", { ItemVariantMaterial(it, "gemHeliolite") }, 17).also { addOreName("gemHeliolite") }.run { makeItemVariantModel { generated } }
-            itemVariant("labradorite_gem", { ItemVariantMaterial(it, "gemLabradorite") }, 18).also { addOreName("gemLabradorite") }.run { makeItemVariantModel { generated } }
-            itemVariant("lilagium_ingot", { ItemVariantMaterial(it, "ingotLilagium") }, 19).also { addOreName("ingotLilagium") }.run { makeItemVariantModel { generated } }
-            itemVariant("miragium_plate", { ItemVariantMaterial(it, "plateMiragium") }, 20).also { addOreName("plateMiragium") }.run { makeItemVariantModel { generated } }
+            itemVariant("apatite_gem", { ItemVariantMaterial(it, "gemApatite") }, 0).apply { addOreName("gemApatite") }.apply { makeItemVariantModel { generated } }
+            itemVariant("fluorite_gem", { ItemVariantMaterial(it, "gemFluorite") }, 1).apply { addOreName("gemFluorite") }.apply { makeItemVariantModel { generated } }
+            itemVariant("sulfur_gem", { ItemVariantMaterial(it, "gemSulfur") }, 2).apply { addOreName("gemSulfur") }.apply { makeItemVariantModel { generated } }
+            itemVariant("miragium_dust", { ItemVariantMaterial(it, "dustMiragium") }, 3).apply { addOreName("dustMiragium") }.apply { makeItemVariantModel { generated } }
+            itemVariant("miragium_tiny_dust", { ItemVariantMaterial(it, "dustTinyMiragium") }, 4).apply { addOreName("dustTinyMiragium") }.apply { makeItemVariantModel { generated } }
+            itemVariant("miragium_ingot", { ItemVariantMaterial(it, "ingotMiragium") }, 5).apply { addOreName("ingotMiragium") }.apply { makeItemVariantModel { generated } }
+            itemVariant("cinnabar_gem", { ItemVariantMaterial(it, "gemCinnabar") }, 6).apply { addOreName("gemCinnabar") }.apply { makeItemVariantModel { generated } }
+            itemVariant("moonstone_gem", { ItemVariantMaterial(it, "gemMoonstone") }, 7).apply { addOreName("gemMoonstone") }.apply { makeItemVariantModel { generated } }
+            itemVariant("magnetite_gem", { ItemVariantMaterial(it, "gemMagnetite") }, 8).apply { addOreName("gemMagnetite") }.apply { makeItemVariantModel { generated } }
+            itemVariant("saltpeter_gem", { ItemVariantMaterial(it, "gemSaltpeter") }, 9).apply { addOreName("gemSaltpeter") }.apply { makeItemVariantModel { generated } }
+            itemVariant("pyrope_gem", { ItemVariantMaterial(it, "gemPyrope") }, 10).apply { addOreName("gemPyrope") }.apply { makeItemVariantModel { generated } }
+            itemVariant("smithsonite_gem", { ItemVariantMaterial(it, "gemSmithsonite") }, 11).apply { addOreName("gemSmithsonite") }.apply { makeItemVariantModel { generated } }
+            itemVariant("miragium_rod", { ItemVariantMaterial(it, "rodMiragium") }, 12).apply { addOreName("rodMiragium") }.apply { makeItemVariantModel { handheld } }
+            itemVariant("miragium_nugget", { ItemVariantMaterial(it, "nuggetMiragium") }, 13).apply { addOreName("nuggetMiragium") }.apply { makeItemVariantModel { generated } }
+            itemVariant("nephrite_gem", { ItemVariantMaterial(it, "gemNephrite") }, 14).apply { addOreName("gemNephrite") }.apply { makeItemVariantModel { generated } }
+            itemVariant("topaz_gem", { ItemVariantMaterial(it, "gemTopaz") }, 15).apply { addOreName("gemTopaz") }.apply { makeItemVariantModel { generated } }
+            itemVariant("tourmaline_gem", { ItemVariantMaterial(it, "gemTourmaline") }, 16).apply { addOreName("gemTourmaline") }.apply { makeItemVariantModel { generated } }
+            itemVariant("heliolite_gem", { ItemVariantMaterial(it, "gemHeliolite") }, 17).apply { addOreName("gemHeliolite") }.apply { makeItemVariantModel { generated } }
+            itemVariant("labradorite_gem", { ItemVariantMaterial(it, "gemLabradorite") }, 18).apply { addOreName("gemLabradorite") }.apply { makeItemVariantModel { generated } }
+            itemVariant("lilagium_ingot", { ItemVariantMaterial(it, "ingotLilagium") }, 19).apply { addOreName("ingotLilagium") }.apply { makeItemVariantModel { generated } }
+            itemVariant("miragium_plate", { ItemVariantMaterial(it, "plateMiragium") }, 20).apply { addOreName("plateMiragium") }.apply { makeItemVariantModel { generated } }
 
             onRegisterItem {
                 if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
