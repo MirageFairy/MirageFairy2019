@@ -135,7 +135,7 @@ class FairyWeaponLoader(m: ModInitializer) {
     val bellFlowerPicking = m.fw(2, { ItemBellFlowerPicking(0.0, 0.2) }, "flower_picking_bell", "bellFlowerPicking", listOf(), { bellBase }, { HARVEST })
     val bellFlowerPicking2 = m.fw(4, { ItemBellFlowerPicking(10.0, 1.0) }, "flower_picking_bell_2", "bellFlowerPicking2", listOf(), { bellFlowerPicking }, { HARVEST })
     val bellChristmas = m.fw(3, ::ItemBellChristmas, "christmas_bell", "bellChristmas", listOf(), { bellBase }, { CHRISTMAS }, { ATTACK })
-    val miragiumScythe = m.fw(2, ::ItemMiragiumScythe, "miragium_scythe", "miragiumScythe", listOf(), null, { SLASH }, { HARVEST })
+    val miragiumScythe = m.fw(2, { ItemMiragiumScythe(0.0, 2.0f) }, "miragium_scythe", "miragiumScythe", listOf(), null, { SLASH }, { HARVEST })
     val ryugyoDrill = m.fw(4, ::ItemFairyWeaponBase, "ryugyo_drill", "ryugyoDrill", listOf(), null, { DESTROY }, { THUNDER }, { WATER })
 }
 

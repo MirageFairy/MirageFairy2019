@@ -26,11 +26,11 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import kotlin.math.ceil
 
-class ItemMiragiumScythe : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.harvest) {
-    val strength = createStrengthStatus(0.0, EnumErgType.SLASH)
-    val extent = createExtentStatus(0.0, EnumErgType.SHOOT)
-    val endurance = createEnduranceStatus(0.0, EnumErgType.SENSE)
-    val production = createProductionStatus(0.0, EnumErgType.HARVEST)
+class ItemMiragiumScythe(additionalBaseStatus: Double, val breakSpeed: Float) : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.harvest) {
+    val strength = createStrengthStatus(additionalBaseStatus, EnumErgType.SLASH)
+    val extent = createExtentStatus(additionalBaseStatus, EnumErgType.SHOOT)
+    val endurance = createEnduranceStatus(additionalBaseStatus, EnumErgType.SENSE)
+    val production = createProductionStatus(additionalBaseStatus, EnumErgType.HARVEST)
     val cost = createCostStatus()
 
     val maxHardness = "maxHardness"({ double2.positive }) { !strength * 0.01 }.setRange(0.0..10.0).setVisibility(Companion.EnumVisibility.DETAIL)
@@ -39,7 +39,7 @@ class ItemMiragiumScythe : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.h
     val wear = "wear"({ percent2.positive }) { 1 / (25.0 + !endurance * 0.25) }.setVisibility(Companion.EnumVisibility.DETAIL)
     val coolTime = "coolTime"({ tick.negative }) { cost * 0.3 }.setVisibility(Companion.EnumVisibility.DETAIL)
 
-    override fun getDestroySpeed(itemStack: ItemStack, blockState: IBlockState) = if (isEffective(blockState)) 8.0f else 1.0f
+    override fun getDestroySpeed(itemStack: ItemStack, blockState: IBlockState) = if (isEffective(blockState)) breakSpeed else 1.0f
     override fun canHarvestBlock(blockState: IBlockState) = isEffective(blockState)
 
     init {
