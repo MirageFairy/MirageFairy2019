@@ -28,12 +28,11 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.pow
 
-class ItemBellFlowerPicking(weaponStrength: Double, weaponExtent: Double, weaponEndurance: Double, weaponProduction: Double, maxExtraItemDropRate: Double) :
-    ItemFairyWeaponBase3(EnumManaType.DARK, EnumMastery.flowerPicking) {
-    val strength = createStrengthStatus(weaponStrength, EnumErgType.SOUND)
-    val extent = createExtentStatus(weaponExtent, EnumErgType.SPACE)
-    val endurance = createEnduranceStatus(weaponEndurance, EnumErgType.SLASH)
-    val production = createProductionStatus(weaponProduction, EnumErgType.HARVEST)
+class ItemBellFlowerPicking(additionalBaseStatus: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase3(EnumManaType.DARK, EnumMastery.flowerPicking) {
+    val strength = createStrengthStatus(additionalBaseStatus, EnumErgType.SOUND)
+    val extent = createExtentStatus(additionalBaseStatus, EnumErgType.SPACE)
+    val endurance = createEnduranceStatus(additionalBaseStatus, EnumErgType.SLASH)
+    val production = createProductionStatus(additionalBaseStatus, EnumErgType.HARVEST)
     val cost = createCostStatus()
 
     val pitch = "pitch"({ double2.positive }) { -(cost / 50.0 - 1) * 12 }.setRange(-12.0..12.0).setVisibility(Companion.EnumVisibility.DETAIL)
