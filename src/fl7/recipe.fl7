@@ -771,6 +771,45 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/fairyweapons");
 
+    # リラジウムの大鎌
+	writer::write("lilagium_scythe.json"; {
+		type = "forge:ore_shaped";
+		group = "lilagium_scythe";
+		pattern = [
+            "hII";
+            "I#R";
+            "mcR";
+		];
+		key = {
+            "#" = {
+                item = "miragefairy2019:miragium_scythe";
+            };
+            R = {
+                type = "forge:ore_dict";
+                ore = "mirageFairy2019ManaRodGaia";
+            };
+            I = {
+                type = "forge:ore_dict";
+                ore = "ingotLilagium";
+            };
+            h = {
+                type = "forge:ore_dict";
+                ore = "mirageFairy2019SphereHarvest";
+            };
+            c = {
+                type = "miragefairy2019:ore_dict_complex";
+                ore = "mirageFairy2019CraftingToolFairyWandCrafting";
+            };
+            m = {
+                type = "miragefairy2019:ore_dict_complex";
+                ore = "mirageFairy2019CraftingToolFairyWandMelting";
+            };
+		};
+		result = {
+			item = "miragefairy2019:lilagium_scythe";
+		};
+	});
+
     # 鐘ベース
 	writer::write("bell_base.json"; {
 		type = "forge:ore_shaped";
