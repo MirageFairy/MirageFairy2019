@@ -1,6 +1,10 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.libkt.grow
+import miragefairy2019.libkt.positions
 import miragefairy2019.libkt.randomInt
+import miragefairy2019.libkt.range
+import miragefairy2019.libkt.sortedByDistance
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.MagicScope
 import miragefairy2019.mod.modules.fairyweapon.magic.EnumTargetExecutability
@@ -152,25 +156,17 @@ class ItemMiragiumScythe(additionalBaseStatus: Double, val breakSpeed: Float) : 
         }
     }
 
-    private fun MagicScope.getTargets(world: World, blockPos: BlockPos): List<BlockPos> {
-        val tuples = mutableListOf<Pair<BlockPos, Double>>()
-        (-!range..!range).forEach { xi ->
-            (-0..0).forEach { yi ->
-                (-!range..!range).forEach { zi ->
-                    val blockPos2 = blockPos.add(xi, yi, zi)
-                    val blockState = world.getBlockState(blockPos2)
-                    if (isEffective(blockState)) {
-                        if (blockState.getBlockHardness(world, blockPos2) <= !maxHardness) {
-                            if (!blockState.isNormalCube) {
-                                tuples += Pair(blockPos2, blockPos2.distanceSq(blockPos))
-                            }
-                        }
-                    }
-                }
+    private fun MagicScope.getTargets(world: World, blockPosBase: BlockPos) = blockPosBase.range.grow(!range, 0, !range).positions
+        .filter { blockPos ->
+            val blockState = world.getBlockState(blockPos)
+            when {
+                !isEffective(blockState) -> false
+                blockState.getBlockHardness(world, blockPos) > !maxHardness -> false
+                blockState.isNormalCube -> false
+                else -> true
             }
         }
-        return tuples.sortedBy { it.second }.map { it.first }
-    }
+        .sortedByDistance(blockPosBase)
 
     private fun isEffective(state: IBlockState) = when {
         state.block === Blocks.WEB -> true
