@@ -16,6 +16,7 @@ import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.skill.EnumMastery
+import miragefairy2019.mod3.skill.api.IMastery
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
@@ -30,7 +31,15 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import kotlin.math.ceil
 
-class ItemMiragiumScythe(additionalBaseStatus: Double, val breakSpeed: Float) : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.harvest) {
+abstract class ItemMiragiumToolBase(
+    weaponManaType: EnumManaType,
+    mastery: IMastery,
+    additionalBaseStatus: Double,
+    val breakSpeed: Float
+) : ItemFairyWeaponBase3(
+    weaponManaType,
+    mastery
+) {
     val strength = createStrengthStatus(additionalBaseStatus, EnumErgType.SLASH)
     val extent = createExtentStatus(additionalBaseStatus, EnumErgType.SHOOT)
     val endurance = createEnduranceStatus(additionalBaseStatus, EnumErgType.SENSE)
@@ -86,7 +95,7 @@ class ItemMiragiumScythe(additionalBaseStatus: Double, val breakSpeed: Float) : 
             }
 
             // クールダウン判定
-            if (player.cooldownTracker.hasCooldown(this@ItemMiragiumScythe)) return@magic object : IMagicHandler {
+            if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic object : IMagicHandler {
                 override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                     selectorRayTrace.doEffect(0xFFFF00)
                 }
@@ -131,7 +140,7 @@ class ItemMiragiumScythe(additionalBaseStatus: Double, val breakSpeed: Float) : 
                             world.playSound(null, player.posX, player.posY, player.posZ, breakSound, player.soundCategory, 1.0f, 1.0f)
 
                             // クールタイム
-                            player.cooldownTracker.setCooldown(this@ItemMiragiumScythe, (!coolTime).toInt())
+                            player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, (!coolTime).toInt())
 
                         }
 
@@ -156,7 +165,20 @@ class ItemMiragiumScythe(additionalBaseStatus: Double, val breakSpeed: Float) : 
         }
     }
 
-    private fun MagicScope.getTargets(world: World, blockPosBase: BlockPos) = blockPosBase.range.grow(!range, 0, !range).positions
+    abstract fun MagicScope.getTargets(world: World, blockPosBase: BlockPos): List<BlockPos>
+    abstract fun isEffective(state: IBlockState): Boolean
+}
+
+class ItemMiragiumScythe(
+    additionalBaseStatus: Double,
+    breakSpeed: Float
+) : ItemMiragiumToolBase(
+    EnumManaType.GAIA,
+    EnumMastery.harvest,
+    additionalBaseStatus,
+    breakSpeed
+) {
+    override fun MagicScope.getTargets(world: World, blockPosBase: BlockPos) = blockPosBase.range.grow(!range, 0, !range).positions
         .filter { blockPos ->
             val blockState = world.getBlockState(blockPos)
             when {
@@ -168,7 +190,7 @@ class ItemMiragiumScythe(additionalBaseStatus: Double, val breakSpeed: Float) : 
         }
         .sortedByDistance(blockPosBase)
 
-    private fun isEffective(state: IBlockState) = when {
+    override fun isEffective(state: IBlockState) = when {
         state.block === Blocks.WEB -> true
         state.material === Material.PLANTS -> true
         state.material === Material.VINE -> true
