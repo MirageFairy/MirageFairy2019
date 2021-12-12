@@ -4,7 +4,7 @@
 	"pattern": [
 		"cLL",
 		"b#L",
-		"twd"
+		"twf"
 	],
 	"key": {
 		"#": {
@@ -19,9 +19,9 @@
 			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
 		},
-		"d": {
+		"f": {
 			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandDistortion"
+			"ore": "mirageFairy2019CraftingToolFairyWandFusion"
 		},
 		"b": {
 			"type": "forge:ore_dict",
