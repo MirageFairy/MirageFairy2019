@@ -43,6 +43,7 @@ public class BlockOreSeed extends Block {
         setHardness(1.5f);
         setResistance(10.0f);
         setTickRandomly(true);
+        setHarvestLevel("pickaxe", 0);
 
     }
 
