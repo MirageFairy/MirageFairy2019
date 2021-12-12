@@ -982,7 +982,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		pattern = [
             "cLL";
             "b#L";
-            "twd";
+            "twf";
 		];
 		key = {
             "#" = {
@@ -997,9 +997,9 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
                 type = "miragefairy2019:ore_dict_complex";
                 ore = "mirageFairy2019CraftingToolFairyWandCrafting";
             };
-            d = {
+            f = {
                 type = "miragefairy2019:ore_dict_complex";
-                ore = "mirageFairy2019CraftingToolFairyWandDistortion";
+                ore = "mirageFairy2019CraftingToolFairyWandFusion";
             };
             b = {
                 type = "forge:ore_dict";
