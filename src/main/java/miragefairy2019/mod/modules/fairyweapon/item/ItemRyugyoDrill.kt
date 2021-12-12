@@ -24,7 +24,7 @@ class ItemRyugyoDrill(
 ) {
     val maxHardness = "maxHardness"({ double2.positive }) { 2.0 + !strength * 0.02 }.setRange(2.0..20.0).setVisibility(Companion.EnumVisibility.DETAIL)
     val range = "range"({ int.positive }) { (1 + !extent * 0.01).toInt() }.setRange(1..5).setVisibility(Companion.EnumVisibility.DETAIL)
-    val coolTime = "coolTime"({ tick.negative }) { cost * 1.0 }.setVisibility(Companion.EnumVisibility.DETAIL)
+    val coolTime = "coolTime"({ tick.negative }) { cost * 2.0 }.setVisibility(Companion.EnumVisibility.DETAIL)
 
     init {
         setHarvestLevel("pickaxe", 3)
