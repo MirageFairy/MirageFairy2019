@@ -8,11 +8,9 @@ import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.magic.UtilsMagic
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.magic.api.IMagicHandler
-import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.skill.api.IMastery
-import net.minecraft.block.state.IBlockState
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
@@ -27,8 +25,7 @@ import kotlin.math.ceil
 abstract class ItemMiragiumToolBase(
     weaponManaType: EnumManaType,
     mastery: IMastery,
-    additionalBaseStatus: Double,
-    val breakSpeed: Float
+    additionalBaseStatus: Double
 ) : ItemFairyWeaponBase3(
     weaponManaType,
     mastery
@@ -39,14 +36,8 @@ abstract class ItemMiragiumToolBase(
     val production = createProductionStatus(additionalBaseStatus, EnumErgType.HARVEST)
     val cost = createCostStatus()
 
-    val maxHardness = "maxHardness"({ double2.positive }) { !strength * 0.01 }.setRange(0.0..10.0).setVisibility(Companion.EnumVisibility.DETAIL)
     val fortune = "fortune"({ double2.positive }) { !production * 0.03 }.setRange(0.0..100.0).setVisibility(Companion.EnumVisibility.DETAIL)
-    val range = "range"({ int.positive }) { (2 + !extent * 0.02).toInt() }.setRange(2..5).setVisibility(Companion.EnumVisibility.DETAIL)
     val wear = "wear"({ percent2.positive }) { 1 / (25.0 + !endurance * 0.25) }.setVisibility(Companion.EnumVisibility.DETAIL)
-    val coolTime = "coolTime"({ tick.negative }) { cost * 0.3 }.setVisibility(Companion.EnumVisibility.DETAIL)
-
-    override fun getDestroySpeed(itemStack: ItemStack, blockState: IBlockState) = if (isEffective(blockState)) breakSpeed else 1.0f
-    override fun canHarvestBlock(blockState: IBlockState) = isEffective(blockState)
 
     init {
         addInformationHandlerFunctions("Right click: use magic") // TODO translate
@@ -61,10 +52,10 @@ abstract class ItemMiragiumToolBase(
 
             // 対象判定
             val blockPoses = if (selectorRayTrace.sideHit.isPresent) {
-                getTargets(world, selectorRayTrace.blockPos.offset(selectorRayTrace.sideHit.get()))
+                getTargets(itemStack, world, selectorRayTrace.blockPos.offset(selectorRayTrace.sideHit.get()))
             } else {
-                getTargets(world, selectorRayTrace.blockPos)
-            }
+                getTargets(itemStack, world, selectorRayTrace.blockPos)
+            }.filter { isEffective(itemStack, world.getBlockState(it)) }
 
             // 妖精なし判定
             if (fairyType.isEmpty) return@magic object : IMagicHandler {
@@ -133,7 +124,7 @@ abstract class ItemMiragiumToolBase(
                             world.playSound(null, player.posX, player.posY, player.posZ, breakSound, player.soundCategory, 1.0f, 1.0f)
 
                             // クールタイム
-                            player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, (!coolTime).toInt())
+                            player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, (getCoolTime()).toInt())
 
                         }
 
@@ -158,6 +149,6 @@ abstract class ItemMiragiumToolBase(
         }
     }
 
-    abstract fun MagicScope.getTargets(world: World, blockPosBase: BlockPos): List<BlockPos>
-    abstract fun isEffective(state: IBlockState): Boolean
+    abstract fun MagicScope.getTargets(itemStack: ItemStack, world: World, blockPosBase: BlockPos): List<BlockPos>
+    abstract fun MagicScope.getCoolTime(): Double
 }

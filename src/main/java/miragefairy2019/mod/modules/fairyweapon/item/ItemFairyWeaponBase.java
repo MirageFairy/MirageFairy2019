@@ -268,20 +268,6 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
 
     //
 
-    protected float destroySpeed = 1;
-
-    @Override
-    public float getDestroySpeed(ItemStack stack, IBlockState state) {
-        for (String type : getToolClasses(stack)) {
-            if (state.getBlock().isToolEffective(type, state)) {
-                return destroySpeed;
-            }
-        }
-        return 1;
-    }
-
-    //
-
     protected void damageItem(ItemStack itemStack, EntityLivingBase entityLivingBase) {
         ItemStack itemStackFairy = getCombinedFairy(itemStack);
         itemStack.damageItem(1, entityLivingBase);

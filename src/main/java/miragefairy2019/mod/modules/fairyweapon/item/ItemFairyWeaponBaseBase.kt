@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import net.minecraft.block.state.IBlockState
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -18,6 +19,21 @@ open class ItemFairyWeaponBaseBase : Item() {
 
     @SideOnly(Side.CLIENT)
     override fun isFull3D() = true
+
+
+    // 採掘
+    open var destroySpeed = 1.0f
+
+    open fun isEffective(itemStack: ItemStack, blockState: IBlockState) = getToolClasses(itemStack).any {
+        when {
+            !blockState.block.isToolEffective(it, blockState) -> false
+            getHarvestLevel(itemStack, it, null, blockState) < blockState.block.getHarvestLevel(blockState) -> false
+            else -> true
+        }
+    }
+
+    override fun getDestroySpeed(itemStack: ItemStack, blockState: IBlockState) = if (isEffective(itemStack, blockState)) destroySpeed else 1.0f
+    override fun canHarvestBlock(blockState: IBlockState, itemStack: ItemStack) = isEffective(itemStack, blockState)
 
 
     // 機能

@@ -68,7 +68,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
 
     public ItemMiragiumAxe() {
         setHarvestLevel("axe", 1);
-        destroySpeed = 6;
+        setDestroySpeed(6);
     }
 
     //
