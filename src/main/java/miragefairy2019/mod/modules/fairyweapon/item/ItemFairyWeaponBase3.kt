@@ -239,52 +239,53 @@ abstract class ItemFairyWeaponBase3(
         }
         return true
     }
-
-    // Statuses
-
-    fun createStrengthStatus(weaponStrength: Double, strengthErg: EnumErgType) = "strength"({ double0.positive }) {
-        (weaponStrength + !strengthErg + getSkillLevel(mastery) * 0.5) * (cost / 50.0) + when (weaponManaType) {
-            SHINE -> !SHINE
-            FIRE -> !FIRE
-            WIND -> !WIND
-            GAIA -> !GAIA
-            AQUA -> !AQUA
-            DARK -> !DARK
-        }
-    }.setVisibility(ALWAYS)
-
-    fun createExtentStatus(weaponExtent: Double, extentErg: EnumErgType) = "extent"({ double0.positive }) {
-        (weaponExtent + !extentErg) * (cost / 50.0) + when (weaponManaType) {
-            SHINE -> !GAIA + !WIND
-            FIRE -> !GAIA + !WIND
-            WIND -> !GAIA * 2
-            GAIA -> !WIND * 2
-            AQUA -> !GAIA + !WIND
-            DARK -> !GAIA + !WIND
-        }
-    }.setVisibility(ALWAYS)
-
-    fun createEnduranceStatus(weaponEndurance: Double, enduranceErg: EnumErgType) = "endurance"({ double0.positive }) {
-        (weaponEndurance + !enduranceErg) * (cost / 50.0) + when (weaponManaType) {
-            SHINE -> !FIRE + !AQUA
-            FIRE -> !AQUA * 2
-            WIND -> !FIRE + !AQUA
-            GAIA -> !FIRE + !AQUA
-            AQUA -> !FIRE * 2
-            DARK -> !FIRE + !AQUA
-        }
-    }.setVisibility(ALWAYS)
-
-    fun createProductionStatus(weaponProduction: Double, productionErg: EnumErgType) = "production"({ double0.positive }) {
-        (weaponProduction + !productionErg) * (cost / 50.0) + when (weaponManaType) {
-            SHINE -> !DARK * 2
-            FIRE -> !SHINE + !DARK
-            WIND -> !SHINE + !DARK
-            GAIA -> !SHINE + !DARK
-            AQUA -> !SHINE + !DARK
-            DARK -> !SHINE * 2
-        }
-    }.setVisibility(ALWAYS)
-
-    fun createCostStatus() = "cost"({ double0.negative }) { cost / (1.0 + getSkillLevel(mastery) * 0.002) }.setVisibility(ALWAYS)
 }
+
+
+// Statuses
+
+fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthErg: EnumErgType) = "strength"({ double0.positive }) {
+    (weaponStrength + !strengthErg + getSkillLevel(mastery) * 0.5) * (cost / 50.0) + when (weaponManaType) {
+        SHINE -> !SHINE
+        FIRE -> !FIRE
+        WIND -> !WIND
+        GAIA -> !GAIA
+        AQUA -> !AQUA
+        DARK -> !DARK
+    }
+}.setVisibility(ALWAYS)
+
+fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: EnumErgType) = "extent"({ double0.positive }) {
+    (weaponExtent + !extentErg) * (cost / 50.0) + when (weaponManaType) {
+        SHINE -> !GAIA + !WIND
+        FIRE -> !GAIA + !WIND
+        WIND -> !GAIA * 2
+        GAIA -> !WIND * 2
+        AQUA -> !GAIA + !WIND
+        DARK -> !GAIA + !WIND
+    }
+}.setVisibility(ALWAYS)
+
+fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranceErg: EnumErgType) = "endurance"({ double0.positive }) {
+    (weaponEndurance + !enduranceErg) * (cost / 50.0) + when (weaponManaType) {
+        SHINE -> !FIRE + !AQUA
+        FIRE -> !AQUA * 2
+        WIND -> !FIRE + !AQUA
+        GAIA -> !FIRE + !AQUA
+        AQUA -> !FIRE * 2
+        DARK -> !FIRE + !AQUA
+    }
+}.setVisibility(ALWAYS)
+
+fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, productionErg: EnumErgType) = "production"({ double0.positive }) {
+    (weaponProduction + !productionErg) * (cost / 50.0) + when (weaponManaType) {
+        SHINE -> !DARK * 2
+        FIRE -> !SHINE + !DARK
+        WIND -> !SHINE + !DARK
+        GAIA -> !SHINE + !DARK
+        AQUA -> !SHINE + !DARK
+        DARK -> !SHINE * 2
+    }
+}.setVisibility(ALWAYS)
+
+fun ItemFairyWeaponBase3.createCostStatus() = "cost"({ double0.negative }) { cost / (1.0 + getSkillLevel(mastery) * 0.002) }.setVisibility(ALWAYS)
