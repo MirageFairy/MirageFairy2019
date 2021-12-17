@@ -8,5 +8,6 @@ object Artifacts {
         Fertilizer.module(this)
         TwinkleStone.module(this)
         FairyCollectionBox.module(this)
+        FairyWoodLog.module(this)
     }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "miragefairy2019:blocks/fairy_wood_log_top",
+    "side": "miragefairy2019:blocks/fairy_wood_log"
+  }
+}

@@ -239,6 +239,30 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
             count: 3;
         };
     });
+
+    # 妖精の原木
+    writer::write("fairy_wood_log.json"; {
+        type = "forge:ore_shaped";
+        group: "fairy_wood_log";
+        pattern = [
+            "ooo";
+            "oLo";
+            "ooo";
+        ];
+        key = {
+            L = {
+                type = "forge:ore_dict";
+                ore = "logWood";
+            };
+            o = {
+                type = "forge:ore_dict";
+                ore = "container1000MirageFlowerOil";
+            };
+        };
+        result = {
+            item = "miragefairy2019:fairy_wood_log";
+        };
+    });
 );
 
 #################### ミーニャ売買 ####################
