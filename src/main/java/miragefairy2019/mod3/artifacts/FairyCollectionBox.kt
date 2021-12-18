@@ -126,8 +126,6 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
 
     override fun createBlockState() = BlockStateContainer(this, FACING, CONTEXT)
 
-    fun getState(facing: EnumFacing): IBlockState = defaultState.withProperty(FACING, facing)
-
     override fun getActualState(blockState: IBlockState, world: IBlockAccess, pos: BlockPos): IBlockState = if (world.getBlockState(pos.down()).block is BlockFairyCollectionBox) {
         blockState.withProperty(CONTEXT, EnumFairyCollectionBoxContext.MIDDLE)
     } else {
