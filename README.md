@@ -9,9 +9,9 @@ MirageFairy MODの2019年版（MirageFairy2019）
 
 Each file has its own license.
 
-## Design contest work
+## Design contest works
 
-The copyright of the design contest work belongs to the author.
+The copyright of the design contest works belong to the author.
 
 ## MirageFairy2019(`/src/*`)
 
