@@ -81,7 +81,7 @@ abstract class Initializer<T : Any>(private val getter: () -> T) : () -> T {
 
 // Item
 
-class ItemInitializer<I : Item>(val modInitializer: ModInitializer, val registryName: ResourceLocation, getter: () -> I) : Initializer<I>(getter) {
+class ItemInitializer<I : Item>(val modInitializer: ModInitializer, val registryName: ResourceName, getter: () -> I) : Initializer<I>(getter) {
     val item get() = initializingObject
 }
 
@@ -92,7 +92,7 @@ fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, block
         item.setRegistryName(ModMirageFairy2019.MODID, registryName)
         ForgeRegistries.ITEMS.register(item)
     }
-    return ItemInitializer(this, ResourceLocation(ModMirageFairy2019.MODID, registryName)) { item }.also {
+    return ItemInitializer(this, ResourceName(ModMirageFairy2019.MODID, registryName)) { item }.also {
         if (block != null) it.block()
     }
 }
@@ -102,7 +102,7 @@ fun <I : Item> ItemInitializer<I>.setCreativeTab(creativeTab: () -> CreativeTabs
 fun <I : Item> ItemInitializer<I>.setCustomModelResourceLocation(metadata: Int = 0, variant: String = "normal") = modInitializer.onRegisterItem { item.setCustomModelResourceLocation(metadata, variant) }
 fun <I : Item> I.setCustomModelResourceLocation(modelName: String, metadata: Int = 0, variant: String = "normal") {
     if (side.isClient) {
-        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, modelName), variant))
+        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(ResourceName(ModMirageFairy2019.MODID, modelName).resourceLocation, variant))
     }
 }
 
@@ -118,7 +118,7 @@ fun <I : Item> I.addOreName(oreName: String, metadata: Int = 0) = OreDictionary.
 
 // ItemVariant
 
-class ItemVariantInitializer<I : ItemMulti<V>, V : ItemVariant>(val itemInitializer: ItemInitializer<I>, val registryName: ResourceLocation, getter: () -> V) : Initializer<V>(getter) {
+class ItemVariantInitializer<I : ItemMulti<V>, V : ItemVariant>(val itemInitializer: ItemInitializer<I>, val registryName: ResourceName, getter: () -> V) : Initializer<V>(getter) {
     val itemVariant get() = initializingObject
 }
 
@@ -133,7 +133,7 @@ fun <I : ItemMulti<V>, V : ItemVariant> ItemInitializer<I>.itemVariant(
         itemVariant = creator(registryName)
         item.registerVariant(metadata, itemVariant)
     }
-    return ItemVariantInitializer(this, ResourceLocation(ModMirageFairy2019.MODID, registryName)) { itemVariant }.also {
+    return ItemVariantInitializer(this, ResourceName(ModMirageFairy2019.MODID, registryName)) { itemVariant }.also {
         if (block != null) it.block()
     }
 }
@@ -145,7 +145,7 @@ fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.createItemS
 
 // Block
 
-class BlockInitializer<B : Block>(val modInitializer: ModInitializer, val registryName: ResourceLocation, getter: () -> B) : Initializer<B>(getter) {
+class BlockInitializer<B : Block>(val modInitializer: ModInitializer, val registryName: ResourceName, getter: () -> B) : Initializer<B>(getter) {
     val block get() = initializingObject
 }
 
@@ -156,7 +156,7 @@ fun <B : Block> ModInitializer.block(creator: () -> B, registryName: String, blo
         block2.setRegistryName(ModMirageFairy2019.MODID, registryName)
         ForgeRegistries.BLOCKS.register(block2)
     }
-    return BlockInitializer(this, ResourceLocation(ModMirageFairy2019.MODID, registryName)) { block2 }.also {
+    return BlockInitializer(this, ResourceName(ModMirageFairy2019.MODID, registryName)) { block2 }.also {
         if (block != null) it.block()
     }
 }
@@ -169,7 +169,7 @@ fun <B : Block> BlockInitializer<B>.setCreativeTab(creativeTab: () -> CreativeTa
 
 fun <T : TileEntity> ModInitializer.tileEntity(registerName: String, clazz: Class<T>) {
     onRegisterTileEntity {
-        GameRegistry.registerTileEntity(clazz, ResourceLocation(ModMirageFairy2019.MODID, registerName))
+        GameRegistry.registerTileEntity(clazz, ResourceName(ModMirageFairy2019.MODID, registerName).resourceLocation)
     }
 }
 

@@ -6,7 +6,6 @@ import miragefairy2019.mod.lib.multi.ItemMulti
 import miragefairy2019.mod.lib.multi.ItemVariant
 import net.minecraft.block.Block
 import net.minecraft.item.Item
-import net.minecraft.util.ResourceLocation
 import java.io.File
 
 class ResourceMaker(val dirBase: File) {
@@ -17,7 +16,7 @@ class ResourceMaker(val dirBase: File) {
 
 // BlockStates
 
-fun ResourceMaker.getBlockStatesFile(registryName: ResourceLocation) = dirBase.resolve("assets/${registryName.resourceDomain}/blockstates/${registryName.resourcePath}.json")
+fun ResourceMaker.getBlockStatesFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/blockstates/${registryName.path}.json")
 
 fun <B : Block> BlockInitializer<B>.makeBlockStates(creator: MakeBlockStatesScope<B>.() -> DataBlockStates) = modInitializer.onMakeResource {
     getBlockStatesFile(registryName).place(MakeBlockStatesScope(this@makeBlockStates).creator())
@@ -38,7 +37,7 @@ data class DataBlockState(
     @Expose val y: Int? = null,
     @Expose val z: Int? = null
 ) {
-    constructor(model: ResourceLocation, x: Int? = null, y: Int? = null, z: Int? = null) : this(model.toString(), x, y, z)
+    constructor(model: ResourceName, x: Int? = null, y: Int? = null, z: Int? = null) : this(model.toString(), x, y, z)
 }
 
 val <B : Block> MakeBlockStatesScope<B>.normal get() = DataBlockStates("normal" to DataBlockState(blockInitializer.registryName))
@@ -46,7 +45,7 @@ val <B : Block> MakeBlockStatesScope<B>.normal get() = DataBlockStates("normal" 
 
 // Item Model
 
-fun ResourceMaker.getItemModelFile(registryName: ResourceLocation) = dirBase.resolve("assets/${registryName.resourceDomain}/models/item/${registryName.resourcePath}.json")
+fun ResourceMaker.getItemModelFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/models/item/${registryName.path}.json")
 
 fun <I : Item> ItemInitializer<I>.makeItemModel(creator: MakeItemModelScope<I>.() -> DataItemModel) = modInitializer.onMakeResource {
     getItemModelFile(registryName).place(MakeItemModelScope(this@makeItemModel).creator())
@@ -67,12 +66,12 @@ data class DataItemModel(
 
 fun <I : Item> MakeItemModelScope<I>.getStandardItemModel(parent: String) = DataItemModel(
     parent,
-    mapOf("layer0" to "${itemInitializer.registryName.resourceDomain}:items/${itemInitializer.registryName.resourcePath}")
+    mapOf("layer0" to "${itemInitializer.registryName.domain}:items/${itemInitializer.registryName.path}")
 )
 
 fun <I : ItemMulti<V>, V : ItemVariant> MakeItemVariantModelScope<I, V>.getStandardItemModel(parent: String) = DataItemModel(
     parent,
-    mapOf("layer0" to "${itemVariantInitializer.registryName.resourceDomain}:items/${itemVariantInitializer.registryName.resourcePath}")
+    mapOf("layer0" to "${itemVariantInitializer.registryName.domain}:items/${itemVariantInitializer.registryName.path}")
 )
 
 val <I : Item> MakeItemModelScope<I>.generated get() = getStandardItemModel("item/generated")
