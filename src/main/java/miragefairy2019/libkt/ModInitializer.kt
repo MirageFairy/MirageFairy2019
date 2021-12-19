@@ -62,6 +62,16 @@ class EventRegistry1<E> {
 }
 
 
+// ResourceName
+
+data class ResourceName(val domain: String, val path: String) {
+    override fun toString() = "$domain:$path"
+}
+
+val ResourceName.resourceLocation get() = ResourceLocation(domain, path)
+val ResourceLocation.resourceName get() = ResourceName(resourceDomain, resourcePath)
+
+
 // Initializer
 abstract class Initializer<T : Any>(private val getter: () -> T) : () -> T {
     internal val initializingObject get() = getter()
