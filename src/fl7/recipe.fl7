@@ -205,7 +205,8 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
                 ore = "doorWood";
             };
             l = {
-                item = "miragefairy2019:light_magic_wand";
+                type = "forge:ore_dict";
+                ore = "torch";
             };
             C = {
                 item = "minecraft:carpet";
