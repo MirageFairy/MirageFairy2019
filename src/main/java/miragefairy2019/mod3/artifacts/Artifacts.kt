@@ -9,5 +9,6 @@ object Artifacts {
         TwinkleStone.module(this)
         FairyCollectionBox.module(this)
         FairyWoodLog.module(this)
+        FairyBox.module(this)
     }
 }

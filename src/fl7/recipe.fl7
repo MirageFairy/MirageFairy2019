@@ -264,6 +264,46 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
             item = "miragefairy2019:fairy_wood_log";
         };
     });
+
+    # 妖精の家
+    writer::write("fairy_box.json"; {
+        type = "forge:ore_shaped";
+        group: "fairy_box";
+        pattern = [
+            "sls";
+            "PLD";
+            "sCs";
+        ];
+        key = {
+            L = {
+                type = "forge:ore_dict";
+                ore = "logFairyWood";
+            };
+            P = {
+                type = "forge:ore_dict";
+                ore = "paneGlass";
+            };
+            D = {
+                type = "forge:ore_dict";
+                ore = "doorWood";
+            };
+            l = {
+                item = "miragefairy2019:light_magic_wand";
+            };
+            C = {
+                type = "forge:ore_dict";
+                ore = "mirageFairyLeather";
+            };
+            s = {
+                type = "forge:ore_dict";
+                ore = "mirageFairy2019SphereSpace";
+            };
+        };
+        result = {
+            item = "miragefairy2019:fairy_box";
+        };
+    });
+
 );
 
 #################### ミーニャ売買 ####################
