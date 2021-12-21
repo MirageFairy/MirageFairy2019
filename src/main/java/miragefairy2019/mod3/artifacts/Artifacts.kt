@@ -10,5 +10,6 @@ object Artifacts {
         FairyCollectionBox.module(this)
         FairyWoodLog.module(this)
         FairyBox.module(this)
+        FairyResinTapper.module(this)
     }
 }
