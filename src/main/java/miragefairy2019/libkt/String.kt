@@ -1,10 +1,10 @@
 package miragefairy2019.libkt
 
-fun Double.stringFormat(format: String) = String.format(format, this)
-fun Float.stringFormat(format: String) = String.format(format, this)
-fun Long.stringFormat(format: String) = String.format(format, this)
-fun Int.stringFormat(format: String) = String.format(format, this)
-fun Short.stringFormat(format: String) = String.format(format, this)
-fun Byte.stringFormat(format: String) = String.format(format, this)
-fun Boolean.stringFormat(format: String) = String.format(format, this)
-fun String.stringFormat(format: String) = String.format(format, this)
+infix fun Double.with(format: String) = String.format(format, this)
+infix fun Float.with(format: String) = String.format(format, this)
+infix fun Long.with(format: String) = String.format(format, this)
+infix fun Int.with(format: String) = String.format(format, this)
+infix fun Short.with(format: String) = String.format(format, this)
+infix fun Byte.with(format: String) = String.format(format, this)
+infix fun Boolean.with(format: String) = String.format(format, this)
+infix fun String.with(format: String) = String.format(format, this)

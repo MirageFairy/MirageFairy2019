@@ -103,5 +103,5 @@ fun IArgb.toRgb() = rgb(argb)
 fun IRgb.toArgb(a: Int) = argb(a, r, g, b)
 operator fun IRgb.times(x: Float) = rgb(rf * x, gf * x, bf * x)
 operator fun IArgb.times(x: Float) = argb(af, rf * x, gf * x, bf * x)
-val IArgb.hex get() = argb.stringFormat("%08X")
-val IRgb.hex get() = rgb.stringFormat("%06X")
+val IArgb.hex get() = argb with "%08X"
+val IRgb.hex get() = rgb with "%06X"

@@ -1,9 +1,9 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.hex
-import miragefairy2019.libkt.stringFormat
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toRgb
+import miragefairy2019.libkt.with
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.sum
@@ -21,8 +21,8 @@ import java.io.File
 
 class ItemDebugFairyList : Item() {
     companion object {
-        val Double.f0 get() = stringFormat("%.0f")
-        val Double.f3 get() = stringFormat("%.3f")
+        val Double.f0 get() = this with "%.0f"
+        val Double.f3 get() = this with "%.3f"
     }
 
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
