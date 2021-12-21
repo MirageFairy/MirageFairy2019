@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "miragefairy2019:fairy_resin_tapper"
+    },
+    "facing=south": {
+      "model": "miragefairy2019:fairy_resin_tapper",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "miragefairy2019:fairy_resin_tapper",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "miragefairy2019:fairy_resin_tapper",
+      "y": 90
+    }
+  }
+}
