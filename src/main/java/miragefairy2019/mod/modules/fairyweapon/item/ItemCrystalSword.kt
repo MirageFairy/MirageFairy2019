@@ -55,7 +55,7 @@ class ItemCrystalSword : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.clo
 
                         itemStackFuel.shrink(1) // クリスタル消費
                         if (itemStackFuel.isEmpty) player.sendStatusMessage(textComponent { (!"フェアリークリスタルを使い切りました！").red }, false) // TODO translate
-                        drop(world, itemStackFairy.copy(), target.positionVector).setPickupDelay(20) // ドロップする
+                        itemStackFairy.drop(world, target.positionVector).setPickupDelay(20) // ドロップする
                         playSound(world, player, SoundEvents.BLOCK_ANVIL_PLACE, 0.5f, 1.5f) // エフェクト
 
                     }

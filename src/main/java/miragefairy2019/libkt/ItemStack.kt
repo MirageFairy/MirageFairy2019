@@ -16,18 +16,23 @@ fun ItemStack.copy(count: Int): ItemStack = copy().also { it.count = count }
 fun Item.getSubItems(creativeTab: CreativeTabs): List<ItemStack> = NonNullList.create<ItemStack>().also { getSubItems(creativeTab, it) }
 
 /**
- * @param itemStack このインスタンスはメソッド内部でcopyされるため、破壊されません。
+ * @receiver このインスタンスはメソッド内部でcopyされるため、破壊されません。
  */
-fun drop(world: World, itemStack: ItemStack, pos: Vec3d): EntityItem {
-    val entityItem = EntityItem(world, pos.x, pos.y, pos.z, itemStack)
+fun ItemStack.drop(world: World, pos: Vec3d, motionless: Boolean = false): EntityItem {
+    val entityItem = EntityItem(world, pos.x, pos.y, pos.z, copy())
+    if (motionless) {
+        entityItem.motionX = 0.0
+        entityItem.motionY = 0.0
+        entityItem.motionZ = 0.0
+    }
     world.spawnEntity(entityItem)
     return entityItem
 }
 
 /**
- * @param itemStack このインスタンスはメソッド内部でcopyされるため、破壊されません。
+ * @receiver このインスタンスはメソッド内部でcopyされるため、破壊されません。
  */
-fun drop(world: World, itemStack: ItemStack, blockPos: BlockPos) = drop(world, itemStack, Vec3d(blockPos).addVector(0.5, 0.5, 0.5))
+fun ItemStack.drop(world: World, blockPos: BlockPos, motionless: Boolean = false) = drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5), motionless)
 
 fun ItemStack.equalsItem(other: ItemStack) = item == other.item
 fun ItemStack.equalsItemDamage(other: ItemStack) = equalsItem(other) && itemDamage == other.itemDamage
