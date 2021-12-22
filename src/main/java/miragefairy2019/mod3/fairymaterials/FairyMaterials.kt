@@ -96,6 +96,7 @@ object FairyMaterials {
         }
 
         private fun Ivifm.bottle() = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.containerItemSupplier = { ItemStack(Items.GLASS_BOTTLE) } } }
+        private fun Ivifm.fuel(burnTime: Int) = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.burnTime = burnTime } }
 
         val manaRodShine = iv(0, "shine_mana_rod", "manaRodShine", 3, listOf("mirageFairy2019ManaRodShine"))
         val manaRodFire = iv(1, "fire_mana_rod", "manaRodFire", 3, listOf("mirageFairy2019ManaRodFire"))
@@ -117,6 +118,7 @@ object FairyMaterials {
 
 
 class ItemVariantFairyMaterial(registryName: String, unlocalizedName: String, val tier: Int) : ItemVariantMaterial(registryName, unlocalizedName) {
+    var burnTime: Int? = null
     var containerItemSupplier: (() -> ItemStack)? = null
     val containerItem get() = containerItemSupplier?.let { it() } ?: ItemStack.EMPTY
 }
@@ -137,6 +139,10 @@ class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
 
         }
     }
+
+
+    override fun getItemBurnTime(itemStack: ItemStack) = getVariant(itemStack).orNull?.burnTime ?: -1
+
 
     override fun hasContainerItem(itemStack: ItemStack) = !getContainerItem(itemStack).isEmpty
     override fun getContainerItem(itemStack: ItemStack): ItemStack = getVariant(itemStack).orNull?.containerItem ?: ItemStack.EMPTY
