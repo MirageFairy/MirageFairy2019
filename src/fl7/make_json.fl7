@@ -374,6 +374,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	item("mirage_flower_oil_bottle");
 	handheld("glass_mana_rod");
 	item("mirage_fairy_leather");
+	item("fairy_wood_resin");
 
 	# バケツ
 	item("miragium_water_bucket");

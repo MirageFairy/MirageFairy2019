@@ -113,6 +113,7 @@ object FairyMaterials {
         val bottleMirageFlowerOil = iv(12, "mirage_flower_oil_bottle", "bottleMirageFlowerOil", 4, listOf("bottleMirageFlowerOil", "container250MirageFlowerOil")).bottle()
         val manaRodGlass = iv(13, "glass_mana_rod", "manaRodGlass", 2, listOf("mirageFairy2019ManaRodGlass"))
         val mirageFairyLeather = iv(14, "mirage_fairy_leather", "mirageFairyLeather", 4, listOf("mirageFairyLeather"))
+        val fairyWoodResin = iv(15, "fairy_wood_resin", "fairyWoodResin", 4, listOf("fairyWoodResin")).fuel(1600)
     }
 }
 
