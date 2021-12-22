@@ -64,6 +64,8 @@ abstract class BlockFairyBoxBase : BlockContainer(Material.WOOD) {
         worldIn.setBlockState(pos, state.withProperty(FACING, placer.horizontalFacing.opposite), 2)
     }
 
+    fun getFacing(blockState: IBlockState): EnumFacing = blockState.getValue(FACING)
+
 
     // Graphics
 
