@@ -9,6 +9,7 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
+import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.api.ore.ApiOre
@@ -138,5 +139,5 @@ class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
     }
 
     override fun hasContainerItem(itemStack: ItemStack) = !getContainerItem(itemStack).isEmpty
-    override fun getContainerItem(itemStack: ItemStack): ItemStack = getVariant(itemStack).orElse(null)?.containerItem ?: ItemStack.EMPTY
+    override fun getContainerItem(itemStack: ItemStack): ItemStack = getVariant(itemStack).orNull?.containerItem ?: ItemStack.EMPTY
 }
