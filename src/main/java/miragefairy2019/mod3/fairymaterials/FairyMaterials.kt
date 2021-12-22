@@ -33,8 +33,8 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreIngredient
 
-typealias Iifm = ItemInitializer<ItemMultiFairyMaterial>
-typealias Ivifm = ItemVariantInitializer<ItemMultiFairyMaterial, ItemVariantFairyMaterial>
+private typealias Iifm = ItemInitializer<ItemMultiFairyMaterial>
+private typealias Ivifm = ItemVariantInitializer<ItemMultiFairyMaterial, ItemVariantFairyMaterial>
 
 
 object FairyMaterials {
