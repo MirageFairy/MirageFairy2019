@@ -6,6 +6,9 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod3.artifacts.treecompile.TreeCompileException
 import miragefairy2019.mod3.artifacts.treecompile.treeSearch
 import net.minecraft.block.BlockLeaves
+import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3i
 import net.minecraft.world.World
@@ -110,7 +113,12 @@ fun getAuraCollectionSpeed(world: World, leaves: Leaves, times: Int) = (0 until 
 const val smallTreeAuraCollectionSpeed = 30.0
 
 
-// Update
+// TileEntity
+
+open class TileEntityExecutor {
+    open fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float) = false
+    open fun onUpdateTick() = Unit
+}
 
 /** @return 0以上の値 */
 fun randomSkipTicks(random: Random, rate: Double) = floor(log(random.nextDouble(), 1 - rate)).toInt()
