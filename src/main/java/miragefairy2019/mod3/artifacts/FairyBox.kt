@@ -12,7 +12,6 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.item.ItemBlock
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.World
 
 object FairyBox {
@@ -41,4 +40,6 @@ class BlockFairyBox : BlockFairyBoxBase() {
     override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityFairyBox()
 }
 
-class TileEntityFairyBox : TileEntity()
+class TileEntityFairyBox : TileEntityFairyBoxBase() {
+    override val executor: TileEntityExecutor? = null
+}

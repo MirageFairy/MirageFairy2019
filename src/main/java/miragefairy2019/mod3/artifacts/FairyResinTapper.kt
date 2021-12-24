@@ -56,7 +56,7 @@ class BlockFairyResinTapper : BlockFairyBoxBase() {
     }
 }
 
-class TileEntityFairyResinTapper : TileEntity(), ITickable {
+abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
     private var tick = -1
     override fun update() {
         if (world.isRemote) return // サーバーワールドのみ
@@ -75,7 +75,11 @@ class TileEntityFairyResinTapper : TileEntity(), ITickable {
     }
 
 
-    val executor: TileEntityExecutor?
+    abstract val executor: TileEntityExecutor?
+}
+
+class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
+    override val executor: TileEntityExecutor?
         get() {
             return null
         }
