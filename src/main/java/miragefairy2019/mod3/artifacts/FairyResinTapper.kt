@@ -4,19 +4,30 @@ import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.block
+import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.darkRed
+import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.tileEntity
+import miragefairy2019.libkt.with
+import miragefairy2019.mod3.artifacts.treecompile.TreeCompileException
+import miragefairy2019.mod3.fairymaterials.FairyMaterials
 import miragefairy2019.mod3.main.api.ApiMain
+import mirrg.boron.util.UtilsMath
 import net.minecraft.block.state.IBlockState
+import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlock
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
+import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
 
 object FairyResinTapper {
@@ -57,6 +68,52 @@ class BlockFairyResinTapper : BlockFairyBoxBase() {
 class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
     override val executor: TileEntityExecutor?
         get() {
-            return null
+            val blockState = world.getBlockState(pos)
+            val block = blockState.block as? BlockFairyResinTapper ?: return null
+            val facing = block.getFacing(blockState)
+            val blockPosOutput = pos.offset(facing)
+
+            fun getErrorExecutor(textComponent: ITextComponent) = object : TileEntityExecutor() {
+                override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+                    player.sendStatusMessage(textComponent, true)
+                    return true
+                }
+            }
+
+            // 目の前にアイテムがある場合は行動しない（Lazy Chunk対策）
+            if (world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPosOutput)).isNotEmpty()) return getErrorExecutor(textComponent { (!"排出面がアイテムで塞がれています").darkRed }) // TODO translation
+
+            // 排出面が塞がれている場合は行動しない
+            if (world.getBlockState(blockPosOutput).isSideSolid(world, blockPosOutput, facing.opposite)) return getErrorExecutor(textComponent { (!"排出面がブロックで塞がれています").darkRed }) // TODO translation
+
+            // 妖精の木のコンパイルに失敗した場合は抜ける
+            val leaves = try {
+                compileFairyTree(world, pos)
+            } catch (e: TreeCompileException) {
+                return getErrorExecutor(e.description)
+            }
+
+            // 成立
+            return object : TileEntityExecutor() {
+                override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+                    val times = 10000
+
+                    val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times).coerceAtMost(120.0)
+                    val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5).coerceAtLeast(0.0)
+
+                    player.sendStatusMessage(textComponent { (!"オーラ吸収速度: ${auraCollectionSpeed with "%.2f"} Folia, 生産速度: ${baseCount with "%.2f"} 個/分") }, true) // TODO translation
+                    return true
+                }
+
+                override fun onUpdateTick() {
+                    val times = 10
+
+                    val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times).coerceAtMost(120.0)
+                    val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5).coerceAtLeast(0.0)
+
+                    val count = UtilsMath.randomInt(world.rand, baseCount)
+                    if (count > 0) FairyMaterials.itemVariants.fairyWoodResin.createItemStack(count).drop(world, blockPosOutput, motionless = true)
+                }
+            }
         }
 }
