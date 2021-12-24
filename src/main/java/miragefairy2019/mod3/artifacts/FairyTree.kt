@@ -7,8 +7,10 @@ import miragefairy2019.mod3.artifacts.treecompile.TreeCompileException
 import miragefairy2019.mod3.artifacts.treecompile.treeSearch
 import net.minecraft.block.BlockLeaves
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
+import net.minecraft.util.ITickable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3i
 import net.minecraft.world.World
@@ -114,6 +116,28 @@ const val smallTreeAuraCollectionSpeed = 30.0
 
 
 // TileEntity
+
+abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
+    private var tick = -1
+    override fun update() {
+        if (world.isRemote) return // サーバーワールドのみ
+
+        // 平均して1分に1回行動する
+        val interval = 20 * 60
+        if (tick < 0) tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
+        if (tick != 0) {
+            tick--
+            return
+        } else {
+            tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
+        }
+
+        executor?.onUpdateTick()
+    }
+
+
+    abstract val executor: TileEntityExecutor?
+}
 
 open class TileEntityExecutor {
     open fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float) = false

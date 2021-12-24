@@ -14,10 +14,8 @@ import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlock
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
-import net.minecraft.util.ITickable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
@@ -54,28 +52,6 @@ class BlockFairyResinTapper : BlockFairyBoxBase() {
         val executor = tileEntity.executor ?: return false
         return executor.onBlockActivated(playerIn, hand, facing, hitX, hitY, hitZ)
     }
-}
-
-abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
-    private var tick = -1
-    override fun update() {
-        if (world.isRemote) return // サーバーワールドのみ
-
-        // 平均して1分に1回行動する
-        val interval = 20 * 60
-        if (tick < 0) tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
-        if (tick != 0) {
-            tick--
-            return
-        } else {
-            tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
-        }
-
-        executor?.onUpdateTick()
-    }
-
-
-    abstract val executor: TileEntityExecutor?
 }
 
 class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
