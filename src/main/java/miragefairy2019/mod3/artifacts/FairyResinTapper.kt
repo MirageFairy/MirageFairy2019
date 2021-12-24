@@ -81,10 +81,10 @@ class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
             }
 
             // 目の前にアイテムがある場合は行動しない（Lazy Chunk対策）
-            if (world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPosOutput)).isNotEmpty()) return getErrorExecutor(textComponent { (!"排出面がアイテムで塞がれています").darkRed }) // TODO translation
+            if (world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPosOutput)).isNotEmpty()) return getErrorExecutor(textComponent { (!"制作物があふれています").darkRed }) // TODO translation
 
             // 排出面が塞がれている場合は行動しない
-            if (world.getBlockState(blockPosOutput).isSideSolid(world, blockPosOutput, facing.opposite)) return getErrorExecutor(textComponent { (!"排出面がブロックで塞がれています").darkRed }) // TODO translation
+            if (world.getBlockState(blockPosOutput).isSideSolid(world, blockPosOutput, facing.opposite)) return getErrorExecutor(textComponent { (!"妖精が入れません").darkRed }) // TODO translation
 
             // 妖精の木のコンパイルに失敗した場合は抜ける
             val leaves = try {

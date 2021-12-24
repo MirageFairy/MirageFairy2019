@@ -20,7 +20,7 @@ import kotlin.math.log
 
 // Compile
 
-class MultipleFairyBoxException : TreeCompileException(textComponent { (!"妖精の木が接触しています").darkRed }) // TODO translate
+class MultipleFairyBoxException : TreeCompileException(textComponent { (!"栄養の取り合いになっています").darkRed }) // TODO translate
 
 data class Leaves(
     /**
