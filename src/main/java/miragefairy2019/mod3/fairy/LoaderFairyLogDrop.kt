@@ -26,6 +26,7 @@ val loaderFairyLogDrop: Module = {
             daytime(0.1) { overworld() }
             night(0.1) { overworld() }
             morning(0.1) { overworld() }
+            sunrise(0.02) { overworld() }
 
             // 天候
             fine(0.1) { overworld() }

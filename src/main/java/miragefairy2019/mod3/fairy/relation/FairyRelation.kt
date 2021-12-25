@@ -157,6 +157,13 @@ object FairyRelation {
                 pumpkinpie(1.0, i(Items.PUMPKIN_PIE))
                 beetrootsoup(1.0, i(Items.BEETROOT_SOUP))
                 eleven(1.0, i(Items.RECORD_11))
+                door(1.0, i(Items.OAK_DOOR))
+                irondoor(1.0, i(Items.IRON_DOOR))
+                redstonerepeater(1.0, i(Items.REPEATER))
+                redstonecomparator(1.0, i(Items.COMPARATOR))
+                chorusfruit(1.0, i(Items.CHORUS_FRUIT))
+                mushroomstew(1.0, i(Items.MUSHROOM_STEW))
+                rawrabbit(1.0, i(Items.RABBIT))
             }
 
             // エンティティ関係を登録

@@ -8,6 +8,7 @@ import miragefairy2019.mod.api.fairycrystal.DropFixed
 import miragefairy2019.mod.api.fairycrystal.IDrop
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop
 import miragefairy2019.mod.api.fairycrystal.RightClickDrops
+import miragefairy2019.mod3.worldgen.MirageFlower
 import net.minecraft.block.Block
 import net.minecraft.block.BlockDoublePlant
 import net.minecraft.block.BlockOldLeaf
@@ -129,6 +130,7 @@ val loaderFairyCrystalDrop: Module = {
                 poisonouspotato().world { provider.isSurfaceWorld }
                 melon().world { provider.isSurfaceWorld }
                 beetroot().world { provider.isSurfaceWorld }
+                mirageflower().world { provider.isSurfaceWorld }
 
 
                 // ネザー
@@ -145,6 +147,7 @@ val loaderFairyCrystalDrop: Module = {
                 enderman().biomeType(BiomeDictionary.Type.END)
                 enderdragon().biomeType(BiomeDictionary.Type.END)
                 shulker().biomeType(BiomeDictionary.Type.END)
+                chorusfruit().biomeType(BiomeDictionary.Type.END)
 
             }
         }
@@ -158,6 +161,9 @@ val loaderFairyCrystalDrop: Module = {
                 if (Instant.now() < LocalDateTime.of(2022, 1, 10, 0, 0, 0).toInstant()) {
                     santaclaus(0.001).fixed()
                     christmas(0.005).fixed()
+                }
+                if (Instant.now() < LocalDateTime.of(2022, 2, 1, 0, 0, 0).toInstant()) {
+                    hatsuyume(0.0001).fixed()
                 }
 
             }
@@ -245,6 +251,7 @@ val loaderFairyCrystalDrop: Module = {
                 poisonouspotato(0.01).item(Items.POISONOUS_POTATO)
                 melon(0.03).item(Items.MELON)
                 beetroot(0.03).item(Items.BEETROOT)
+                mirageflower(0.03).block(MirageFlower.blockMirageFlower())
 
                 torch(0.3).block(Blocks.TORCH)
                 furnace(0.1).block(Blocks.FURNACE)
@@ -267,6 +274,14 @@ val loaderFairyCrystalDrop: Module = {
                 glass(0.1).ore("blockGlass")
                 activatorrail(0.03).block(Blocks.ACTIVATOR_RAIL)
                 ironbars(0.1).block(Blocks.IRON_BARS)
+                door(0.1).item(Items.OAK_DOOR)
+                door(0.1).block(Blocks.OAK_DOOR)
+                irondoor(0.03).item(Items.IRON_DOOR)
+                irondoor(0.03).block(Blocks.IRON_DOOR)
+                redstonerepeater(0.03).item(Items.REPEATER)
+                redstonerepeater(0.03).block(Blocks.UNPOWERED_REPEATER, Blocks.POWERED_REPEATER)
+                redstonecomparator(0.03).item(Items.COMPARATOR)
+                redstonecomparator(0.03).block(Blocks.UNPOWERED_COMPARATOR, Blocks.POWERED_COMPARATOR)
 
                 bread(0.1).item(Items.BREAD)
                 cookie(0.1).item(Items.COOKIE)
@@ -282,10 +297,14 @@ val loaderFairyCrystalDrop: Module = {
                 spidereye(0.03).item(Items.SPIDER_EYE)
                 pumpkinpie(0.03).item(Items.PUMPKIN_PIE)
                 beetrootsoup(0.03).item(Items.BEETROOT_SOUP)
+                chorusfruit(0.01).item(Items.CHORUS_FRUIT)
+                mushroomstew(0.03).item(Items.MUSHROOM_STEW)
+                rawrabbit(0.01).item(Items.RABBIT)
 
                 daytime(0.001).world { time(6000, 18000) }
                 night(0.001).world { time(19000, 24000) || time(0, 5000) }
                 morning(0.001).world { time(5000, 9000) }
+                sunrise(0.001).world { time(5000, 6000) }
                 fine(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) }
                 rain(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
 
