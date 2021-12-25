@@ -56,7 +56,7 @@ public class WindowColorMaker extends JFrame {
 
                         c2.add(get(labelMirageFairy = new LabelImage(), c -> {
                             c.setPreferredSize(new Dimension(64, 64));
-                            c.colorConstants = colorConstants;
+                            c.setColorConstants(colorConstants);
                         }), get(new GridBagConstraints(), c -> {
                             c.insets = new Insets(0, 0, 5, 0);
                             c.gridx = 0;
@@ -64,7 +64,7 @@ public class WindowColorMaker extends JFrame {
                         }));
                         c2.add(get(labelMirageWisp = new LabelImage(), c -> {
                             c.setPreferredSize(new Dimension(64, 64));
-                            c.colorConstants = colorConstants;
+                            c.setColorConstants(colorConstants);
                         }), get(new GridBagConstraints(), c -> {
                             c.insets = new Insets(0, 0, 5, 0);
                             c.gridx = 0;
@@ -72,7 +72,7 @@ public class WindowColorMaker extends JFrame {
                         }));
                         c2.add(get(labelMagicSphere = new LabelImage(), c -> {
                             c.setPreferredSize(new Dimension(64, 64));
-                            c.colorConstants = colorConstants;
+                            c.setColorConstants(colorConstants);
                         }), get(new GridBagConstraints(), c -> {
                             c.gridx = 0;
                             c.gridy = 2;
@@ -278,9 +278,9 @@ public class WindowColorMaker extends JFrame {
         isInProcessing = true;
 
         panelImage.setBackground(backgroundColor);
-        labelMirageFairy.backgroundColor = backgroundColor;
-        labelMirageWisp.backgroundColor = backgroundColor;
-        labelMagicSphere.backgroundColor = backgroundColor;
+        labelMirageFairy.setBackgroundColor(backgroundColor);
+        labelMirageWisp.setBackgroundColor(backgroundColor);
+        labelMagicSphere.setBackgroundColor(backgroundColor);
         if (source != panelColorSliderBG) panelColorSliderBG.setValue(backgroundColor);
         updateImage();
 

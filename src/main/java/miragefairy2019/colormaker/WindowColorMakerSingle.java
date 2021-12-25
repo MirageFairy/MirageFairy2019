@@ -74,7 +74,7 @@ public class WindowColorMakerSingle extends JFrame {
 
                         c2.add(get(labelImage = new LabelImage(), c -> {
                             c.setPreferredSize(new Dimension(64, 64));
-                            c.colorConstants = colorConstants;
+                            c.setColorConstants(colorConstants);
                         }), get(new GridBagConstraints(), c -> {
                             c.insets = new Insets(0, 0, 5, 0);
                             c.gridx = 0;
@@ -263,7 +263,7 @@ public class WindowColorMakerSingle extends JFrame {
         isInProcessing = true;
 
         panelImage.setBackground(backgroundColor);
-        labelImage.backgroundColor = backgroundColor;
+        labelImage.setBackgroundColor(backgroundColor);
         if (source != panelColorSliderBG) panelColorSliderBG.setValue(backgroundColor);
         updateImage();
 
