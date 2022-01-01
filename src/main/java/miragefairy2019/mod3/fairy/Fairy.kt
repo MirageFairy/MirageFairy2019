@@ -17,6 +17,7 @@ import miragefairy2019.mod3.fairy.ItemDebugFairyList
 import miragefairy2019.mod3.fairy.ItemFairy
 import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
 import miragefairy2019.mod3.fairy.loaderFairyLogDrop
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.playeraura.api.IFoodAuraContainer
@@ -230,7 +231,7 @@ object Fairy {
         // 妖精一覧デバッグアイテム
         item({ ItemDebugFairyList() }, "debug_fairy_list") {
             setUnlocalizedName("debugFairyList")
-            setCreativeTab { creativeTab }
+            setCreativeTab { ApiMain.creativeTab }
             modInitializer.onRegisterItem {
                 if (side.isClient) {
                     ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("minecraft:book", "normal"))
@@ -241,7 +242,7 @@ object Fairy {
         // 焼き妖精
         itemBakedFairy = item({ ItemBakedFairy() }, "baked_fairy") {
             setUnlocalizedName("bakedFairy")
-            setCreativeTab { creativeTab }
+            setCreativeTab { ApiMain.creativeTab }
             modInitializer.onRegisterItem {
                 if (side.isClient) {
                     ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation(item.registryName!!, "normal"))
