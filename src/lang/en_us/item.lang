@@ -274,3 +274,5 @@ tile.fairyCollectionBox.name=Fairy Collection Box
 tile.fairyWoodLog.name=Fairy Wood Log
 tile.fairyBox.name=Fairy Box
 tile.fairyResinTapper.name=Fairy Resin Extractor
+
+item.debugFairyList.name=Debug Fairy List

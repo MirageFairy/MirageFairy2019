@@ -38,7 +38,7 @@ class ItemDebugFairyList : Item() {
         val jaJp = getLang("ja_jp")
 
         val fileDest = File("./debug/fairyList.txt")
-        player.sendStatusMessage(textComponent { !"Saved to " + !fileDest.absolutePath }, false)
+        player.sendStatusMessage(textComponent { !"Saved to " + !fileDest }, false)
         fileDest.parentFile.mkdirs()
         fileDest.writeText(
             FairyTypes.instance.variants.joinToString("") { (id, b) ->
