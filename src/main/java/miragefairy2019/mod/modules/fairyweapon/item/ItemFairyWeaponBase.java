@@ -333,11 +333,11 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
             }
         }
 
-        return findItem(player, itemStackFairy -> getFairy(itemStackFairy).isPresent())
+        return findItemOptional(player, itemStackFairy -> getFairy(itemStackFairy).isPresent())
                 .map(itemStackFairy -> Tuple.of(itemStackFairy, getFairy(itemStackFairy).get()));
     }
 
-    protected Optional<ItemStack> findItem(EntityPlayer player, Predicate<ItemStack> predicate) {
+    protected Optional<ItemStack> findItemOptional(EntityPlayer player, Predicate<ItemStack> predicate) {
         ItemStack itemStack;
 
         itemStack = player.getHeldItem(EnumHand.OFF_HAND);
