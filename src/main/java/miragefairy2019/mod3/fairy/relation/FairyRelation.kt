@@ -204,7 +204,12 @@ object FairyRelation {
 
     }
 
-    class FairyRelation<T>(private val fairySupplier: () -> RankedFairyTypeBundle, private val keySupplier: () -> T, val relevance: Double = 1.0) {
+    class FairyRelation<T>(
+        private val fairySupplier: () -> RankedFairyTypeBundle,
+        private val keySupplier: () -> T,
+        val relevance: Double = 1.0,
+        val weight: Double = 1.0
+    ) {
         val fairy get() = fairySupplier()
         val key get() = keySupplier()
     }
