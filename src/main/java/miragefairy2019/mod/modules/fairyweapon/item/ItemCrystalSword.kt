@@ -2,11 +2,11 @@ package miragefairy2019.mod.modules.fairyweapon.item
 
 import com.google.common.collect.Multimap
 import miragefairy2019.libkt.drop
+import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod3.fairy.drop
-import miragefairy2019.mod3.fairy.getDropList
-import miragefairy2019.mod3.fairy.relation.api.ApiFairyRelation
+import miragefairy2019.mod.lib.WeightedRandom
+import miragefairy2019.mod3.fairy.FairyRelation
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.mana.api.EnumManaType
@@ -48,13 +48,15 @@ class ItemCrystalSword : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.clo
 
                     if (!extraItemDropRate > world.rand.nextDouble()) { // ステータスに基づいた確率で
 
-                        val itemStackFairy = ApiFairyRelation.fairyRelationManager.getDropList(target).drop(world.rand) ?: return // ターゲットMOBに紐づいた妖精から抽選し
+                        val dropFairy = WeightedRandom.getRandomItem(world.rand, FairyRelation.entity
+                            .filter { relation -> relation.key(target) }
+                            .map { WeightedRandom.Item(it.fairy, it.relevance) }).orNull ?: return// ターゲットMOBに紐づいた妖精を抽選し
 
                         // 効果成立
 
                         itemStackFuel.shrink(1) // クリスタル消費
-                        itemStackFairy.drop(world, target.positionVector).setPickupDelay(20) // ドロップする
                         if (itemStackFuel.isEmpty) player.sendStatusMessage(textComponent { (!"フェアリークリスタルを使い切りました！").red }, true) // TODO translate
+                        dropFairy.main.createItemStack().drop(world, target.positionVector).setPickupDelay(20) // ドロップする
                         playSound(world, player, SoundEvents.BLOCK_ANVIL_PLACE, 0.5f, 1.5f) // エフェクト
 
                     }
