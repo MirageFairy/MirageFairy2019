@@ -233,7 +233,7 @@ object FairyRelation {
     }
 
     // TODO init関数形式にする
-    val biomeType = listOf<FairyRelation<BiomeDictionary.Type>>(
+    val biomeType: List<FairyRelation<BiomeDictionary.Type>> = listOf(
         FairyRelation({ FairyTypes.instance.plains }, { BiomeDictionary.Type.PLAINS }),
         FairyRelation({ FairyTypes.instance.forest }, { BiomeDictionary.Type.FOREST }),
         FairyRelation({ FairyTypes.instance.ocean }, { BiomeDictionary.Type.OCEAN }),
