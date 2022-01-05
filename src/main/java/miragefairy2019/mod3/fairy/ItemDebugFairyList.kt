@@ -42,10 +42,12 @@ class ItemDebugFairyList : Item() {
         fileDest.parentFile.mkdirs()
         fileDest.writeText(
             FairyTypes.instance.variants.joinToString("") { (id, bundle) ->
-                val variant = bundle.main
-                val fairyType = variant.type
-                fun color(selector: ColorSet.() -> Int) = variant.colorSet.selector().toRgb().hex
-                val type = fairyType.breed!!.resourcePath
+                val variantRank1 = bundle.main
+                val variantRank2 = bundle[1]
+                val fairyTypeRank1 = variantRank1.type
+                val fairyTypeRank2 = variantRank2.type
+                fun color(selector: ColorSet.() -> Int) = variantRank1.colorSet.selector().toRgb().hex
+                val type = fairyTypeRank1.breed!!.resourcePath
                 "|${
                     listOf(
                         listOf(
@@ -53,25 +55,27 @@ class ItemDebugFairyList : Item() {
                             "&bold(){!FairyImage(#${color { skin }},#${color { bright }},#${color { dark }},#${color { hair }})}",
                             "CENTER:$type&br()${enUs["mirageFairy2019.fairy.$type.name"]!!}",
                             "CENTER:${jaJp["mirageFairy2019.fairy.$type.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
-                            "CENTER:${variant.rare}",
-                            "RIGHT:${fairyType.cost.f0}"
+                            "CENTER:${variantRank1.rare}",
+                            "RIGHT:${fairyTypeRank1.cost.f0}"
                         ),
                         EnumManaType.values().map {
-                            "RIGHT:${fairyType.mana(it).f3}"
+                            "RIGHT:${fairyTypeRank1.mana(it).f3}"
                         },
                         listOf(
-                            "RIGHT:${fairyType.manaSet.sum.f3}"
+                            "RIGHT:${fairyTypeRank1.manaSet.sum.f3}"
                         ),
                         EnumManaType.values().map {
-                            val a = fairyType.mana(it) / fairyType.cost * 50
-                            "${if (a >= 10) "BGCOLOR(#FDB):" else ""}RIGHT:${a.f3}"
+                            val a1 = fairyTypeRank1.mana(it) / fairyTypeRank1.cost * 50
+                            val a2 = fairyTypeRank2.mana(it) / fairyTypeRank2.cost * 50
+                            "${if (a1 >= 10) "BGCOLOR(#FDD):" else if (a2 >= 10) "BGCOLOR(#DDF):" else ""}RIGHT:${a1.f3}"
                         },
                         listOf(
-                            "RIGHT:${(fairyType.manaSet.sum / fairyType.cost * 50).f3}"
+                            "RIGHT:${(fairyTypeRank1.manaSet.sum / fairyTypeRank1.cost * 50).f3}"
                         ),
                         EnumErgType.values().map {
-                            val a = fairyType.erg(it)
-                            "${if (a >= 10) "BGCOLOR(#FDB):" else ""}RIGHT:${a.f3}"
+                            val a1 = fairyTypeRank1.erg(it)
+                            val a2 = fairyTypeRank2.erg(it)
+                            "${if (a1 >= 10) "BGCOLOR(#FDD):" else if (a2 >= 10) "BGCOLOR(#DDF):" else ""}RIGHT:${a1.f3}"
                         }
                     ).flatten().joinToString("|")
                 }|\n"
