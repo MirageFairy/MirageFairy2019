@@ -4,7 +4,6 @@ import com.google.common.collect.Multimap
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod.modules.fairycrystal.ModuleFairyCrystal
 import miragefairy2019.mod3.fairy.drop
 import miragefairy2019.mod3.fairy.getDropList
 import miragefairy2019.mod3.fairy.relation.api.ApiFairyRelation
@@ -18,6 +17,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.init.SoundEvents
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemStack
+import net.minecraftforge.oredict.OreIngredient
 
 class ItemCrystalSword : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.closeCombat) {
     val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { (getSkillLevel(mastery) / 100.0).coerceIn(0.0, 1.0) }.setVisibility(Companion.EnumVisibility.ALWAYS)
@@ -39,8 +39,7 @@ class ItemCrystalSword : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.clo
                     if (target.health > 0) return // 撃破時のみ有効
 
                     // クリスタルがないと失敗
-                    val itemStackFuel = findItem(player, ItemStack(ModuleFairyCrystal.itemFairyCrystal))
-                    if (itemStackFuel == null) {
+                    val itemStackFuel = findItem(player, OreIngredient("mirageFairyCrystal")) ?: run {
                         player.sendStatusMessage(textComponent { (!"フェアリークリスタルが足りません！").red }, true) // TODO translate
                         return
                     }
