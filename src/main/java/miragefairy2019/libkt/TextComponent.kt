@@ -4,6 +4,9 @@ import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextComponentString
 import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.util.text.TextFormatting
+import net.minecraft.util.text.event.ClickEvent
+import net.minecraft.util.text.event.HoverEvent
+import java.io.File
 
 
 // 旧DSL
@@ -22,12 +25,15 @@ fun buildText(block: TextComponentBuilder.() -> Unit): ITextComponent = TextComp
 
 // スタイル
 // TODO bold()は引数を省略不可に
+// TODO 削除 or private
 fun <T : ITextComponent> T.color(color: TextFormatting) = apply { this.style.color = color } // TODO 純粋関数に変更
 fun <T : ITextComponent> T.obfuscated(value: Boolean = true) = apply { this.style.obfuscated = value }
 fun <T : ITextComponent> T.bold(value: Boolean = true) = apply { this.style.bold = value }
 fun <T : ITextComponent> T.strikethrough(value: Boolean = true) = apply { this.style.strikethrough = value }
 fun <T : ITextComponent> T.underline(value: Boolean = true) = apply { this.style.underlined = value }
 fun <T : ITextComponent> T.italic(value: Boolean = true) = apply { this.style.italic = value }
+fun <T : ITextComponent> T.onClick(clickEvent: ClickEvent) = apply { this.style.clickEvent = clickEvent }
+fun <T : ITextComponent> T.onHover(hoverEvent: HoverEvent) = apply { this.style.hoverEvent = hoverEvent }
 val <T : ITextComponent> T.black get() = color(TextFormatting.BLACK)
 val <T : ITextComponent> T.darkBlue get() = color(TextFormatting.DARK_BLUE)
 val <T : ITextComponent> T.darkGreen get() = color(TextFormatting.DARK_GREEN)
@@ -56,6 +62,8 @@ fun <T : ITextComponent> List<T>.bold(value: Boolean = true) = listOf(textCompon
 fun <T : ITextComponent> List<T>.strikethrough(value: Boolean = true) = listOf(textComponent(this).strikethrough(value))
 fun <T : ITextComponent> List<T>.underline(value: Boolean = true) = listOf(textComponent(this).underline(value))
 fun <T : ITextComponent> List<T>.italic(value: Boolean = true) = listOf(textComponent(this).italic(value))
+fun <T : ITextComponent> List<T>.onClick(clickEvent: ClickEvent) = listOf(textComponent(this).onClick(clickEvent))
+fun <T : ITextComponent> List<T>.onHover(hoverEvent: HoverEvent) = listOf(textComponent(this).onHover(hoverEvent))
 val <T : ITextComponent> List<T>.black get() = color(TextFormatting.BLACK)
 val <T : ITextComponent> List<T>.darkBlue get() = color(TextFormatting.DARK_BLUE)
 val <T : ITextComponent> List<T>.darkGreen get() = color(TextFormatting.DARK_GREEN)
@@ -85,6 +93,7 @@ class TextComponentScope {
     fun join(vararg textComponents: List<ITextComponent>) = listOf(*textComponents).flatten()
     operator fun ITextComponent.not() = listOf(this)
     operator fun String.not() = !TextComponentString(this)
+    operator fun File.not() = (!name).onHover(HoverEvent(HoverEvent.Action.SHOW_TEXT, textComponent { !absoluteFile.canonicalPath })).onClick(ClickEvent(ClickEvent.Action.OPEN_FILE, absoluteFile.canonicalPath)).underline
     fun format(format: String, vararg args: Any?) = !String.format(format, *args)
     fun translate(translationKey: String, vararg args: Any?) = !TextComponentTranslation(translationKey, *args)
 }
