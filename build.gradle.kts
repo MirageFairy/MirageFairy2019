@@ -119,7 +119,7 @@ tasks {
     register<JavaExec>("makeResources") {
         main = "miragefairy2019.mod.MainMakeResource"
         classpath = (tasks["runClient"] as JavaExec).classpath
-        dependsOn("makeStart")
+        dependsOn("assemble")
     }
 
     named<Jar>("jar") {
