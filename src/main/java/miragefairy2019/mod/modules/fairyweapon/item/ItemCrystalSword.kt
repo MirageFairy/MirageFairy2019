@@ -41,7 +41,7 @@ class ItemCrystalSword : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.clo
                     // クリスタルがないと失敗
                     val itemStackFuel = findItem(player, ItemStack(ModuleFairyCrystal.itemFairyCrystal))
                     if (itemStackFuel == null) {
-                        player.sendStatusMessage(textComponent { (!"フェアリークリスタルが足りません！").red }, false) // TODO translate
+                        player.sendStatusMessage(textComponent { (!"フェアリークリスタルが足りません！").red }, true) // TODO translate
                         return
                     }
 
@@ -54,8 +54,8 @@ class ItemCrystalSword : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.clo
                         // 効果成立
 
                         itemStackFuel.shrink(1) // クリスタル消費
-                        if (itemStackFuel.isEmpty) player.sendStatusMessage(textComponent { (!"フェアリークリスタルを使い切りました！").red }, false) // TODO translate
                         itemStackFairy.drop(world, target.positionVector).setPickupDelay(20) // ドロップする
+                        if (itemStackFuel.isEmpty) player.sendStatusMessage(textComponent { (!"フェアリークリスタルを使い切りました！").red }, true) // TODO translate
                         playSound(world, player, SoundEvents.BLOCK_ANVIL_PLACE, 0.5f, 1.5f) // エフェクト
 
                     }
