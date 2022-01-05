@@ -31,6 +31,35 @@ import net.minecraft.util.ResourceLocation
 import net.minecraftforge.common.BiomeDictionary
 import net.minecraftforge.oredict.OreIngredient
 
+class FairyRelationEntry<T>(
+    private val fairySupplier: () -> RankedFairyTypeBundle,
+    private val keySupplier: () -> T,
+    /**
+     * キーと妖精の概念的な近さ（関係性）を表す値です。
+     * 1.0のときに標準的な関係性で、0.0のときに完全に無関係です。
+     * この値は通常0.5、2.0、4.0のような2の整数乗の値を指定します。
+     *
+     * その中間は、例えば「『パン』と『食品という概念に対する妖精』」のような、妖精側が通常よりも抽象的である関係を表します。
+     * これは、『パン』に対する『パンの妖精』の関係性が1.0であり、それよりも優先度を低くするためです。
+     *
+     * 逆に「『帯電したクリーパー』と『帯電したクリーパーの妖精』」のような、特定の状態を表す妖精は1よりも大きな数を設定します。
+     * これは、『帯電したクリーパー』は『クリーパー』の一種であるため、『クリーパーの妖精』との関係性が1.0と計算されるためです。
+     */
+    val relevance: Double = 1.0,
+    /**
+     * キーの実現難易度に応じた妖精のドロップ率の係数です。
+     * この値は、単純にキーに該当している状態を維持するのが困難な場合にバランス調整のために1よりも大きな値を設定してください。
+     *
+     * 例えば、『木の棒』はインベントリにただ置いておけばよいため、1.0です。
+     * 一方『エンダーマン』のようなその場に長時間にわたって保持しておくのが困難な対象がキーの場合には1.0よりも大きな値を設定します。
+     * 逆に『平原バイオーム』のような条件を回避する方が難しいキーの場合、低い値に設定します。
+     */
+    val weight: Double = 1.0
+) {
+    val fairy get() = fairySupplier()
+    val key get() = keySupplier()
+}
+
 object FairyRelation {
     val module: Module = {
 
@@ -156,72 +185,43 @@ object FairyRelation {
 
     }
 
-    class FairyRelation<T>(
-        private val fairySupplier: () -> RankedFairyTypeBundle,
-        private val keySupplier: () -> T,
-        /**
-         * キーと妖精の概念的な近さ（関係性）を表す値です。
-         * 1.0のときに標準的な関係性で、0.0のときに完全に無関係です。
-         * この値は通常0.5、2.0、4.0のような2の整数乗の値を指定します。
-         *
-         * その中間は、例えば「『パン』と『食品という概念に対する妖精』」のような、妖精側が通常よりも抽象的である関係を表します。
-         * これは、『パン』に対する『パンの妖精』の関係性が1.0であり、それよりも優先度を低くするためです。
-         *
-         * 逆に「『帯電したクリーパー』と『帯電したクリーパーの妖精』」のような、特定の状態を表す妖精は1よりも大きな数を設定します。
-         * これは、『帯電したクリーパー』は『クリーパー』の一種であるため、『クリーパーの妖精』との関係性が1.0と計算されるためです。
-         */
-        val relevance: Double = 1.0,
-        /**
-         * キーの実現難易度に応じた妖精のドロップ率の係数です。
-         * この値は、単純にキーに該当している状態を維持するのが困難な場合にバランス調整のために1よりも大きな値を設定してください。
-         *
-         * 例えば、『木の棒』はインベントリにただ置いておけばよいため、1.0です。
-         * 一方『エンダーマン』のようなその場に長時間にわたって保持しておくのが困難な対象がキーの場合には1.0よりも大きな値を設定します。
-         * 逆に『平原バイオーム』のような条件を回避する方が難しいキーの場合、低い値に設定します。
-         */
-        val weight: Double = 1.0
-    ) {
-        val fairy get() = fairySupplier()
-        val key get() = keySupplier()
-    }
-
     // TODO init関数形式にする
-    val biomeType: List<FairyRelation<BiomeDictionary.Type>> = listOf(
-        FairyRelation({ FairyTypes.instance.plains }, { BiomeDictionary.Type.PLAINS }, weight = 0.1),
-        FairyRelation({ FairyTypes.instance.forest }, { BiomeDictionary.Type.FOREST }, weight = 0.1),
-        FairyRelation({ FairyTypes.instance.ocean }, { BiomeDictionary.Type.OCEAN }, weight = 0.1),
-        FairyRelation({ FairyTypes.instance.taiga }, { BiomeDictionary.Type.CONIFEROUS }, weight = 0.1),
-        FairyRelation({ FairyTypes.instance.desert }, { BiomeDictionary.Type.SANDY }, weight = 0.1),
-        FairyRelation({ FairyTypes.instance.mountain }, { BiomeDictionary.Type.MOUNTAIN }, weight = 0.1)
+    val biomeType: List<FairyRelationEntry<BiomeDictionary.Type>> = listOf(
+        FairyRelationEntry({ FairyTypes.instance.plains }, { BiomeDictionary.Type.PLAINS }, weight = 0.1),
+        FairyRelationEntry({ FairyTypes.instance.forest }, { BiomeDictionary.Type.FOREST }, weight = 0.1),
+        FairyRelationEntry({ FairyTypes.instance.ocean }, { BiomeDictionary.Type.OCEAN }, weight = 0.1),
+        FairyRelationEntry({ FairyTypes.instance.taiga }, { BiomeDictionary.Type.CONIFEROUS }, weight = 0.1),
+        FairyRelationEntry({ FairyTypes.instance.desert }, { BiomeDictionary.Type.SANDY }, weight = 0.1),
+        FairyRelationEntry({ FairyTypes.instance.mountain }, { BiomeDictionary.Type.MOUNTAIN }, weight = 0.1)
     )
 
     private inline fun <reified E : Entity> entity(): (Entity) -> Boolean = { it is E }
     private inline fun <reified E : Entity> entity(crossinline predicate: E.() -> Boolean): (Entity) -> Boolean = { it is E && predicate(it) }
-    val entity: List<FairyRelation<(Entity) -> Boolean>> = listOf(
+    val entity: List<FairyRelationEntry<(Entity) -> Boolean>> = listOf(
         // 長生きするエンティティ
-        FairyRelation({ FairyTypes.instance.chicken }, { entity<EntityChicken>() }, weight = 2.0),
-        FairyRelation({ FairyTypes.instance.cow }, { entity<EntityCow>() }, weight = 2.0),
-        FairyRelation({ FairyTypes.instance.pig }, { entity<EntityPig>() }, weight = 2.0),
-        FairyRelation({ FairyTypes.instance.villager }, { entity<EntityVillager>() }, weight = 2.0),
-        FairyRelation({ FairyTypes.instance.librarian }, { entity<EntityVillager> { professionForge.registryName == ResourceLocation("minecraft:librarian") } }, relevance = 2.0, weight = 2.0),
-        FairyRelation({ FairyTypes.instance.golem }, { entity<EntityIronGolem>() }, weight = 2.0),
+        FairyRelationEntry({ FairyTypes.instance.chicken }, { entity<EntityChicken>() }, weight = 2.0),
+        FairyRelationEntry({ FairyTypes.instance.cow }, { entity<EntityCow>() }, weight = 2.0),
+        FairyRelationEntry({ FairyTypes.instance.pig }, { entity<EntityPig>() }, weight = 2.0),
+        FairyRelationEntry({ FairyTypes.instance.villager }, { entity<EntityVillager>() }, weight = 2.0),
+        FairyRelationEntry({ FairyTypes.instance.librarian }, { entity<EntityVillager> { professionForge.registryName == ResourceLocation("minecraft:librarian") } }, relevance = 2.0, weight = 2.0),
+        FairyRelationEntry({ FairyTypes.instance.golem }, { entity<EntityIronGolem>() }, weight = 2.0),
 
         // 持続的に湧かせられるエンティティ
-        FairyRelation({ FairyTypes.instance.skeleton }, { entity<EntitySkeleton>() }, weight = 5.0),
-        FairyRelation({ FairyTypes.instance.zombie }, { entity<EntityZombie>() }, weight = 5.0),
-        FairyRelation({ FairyTypes.instance.spider }, { entity<EntitySpider>() }, weight = 5.0),
-        FairyRelation({ FairyTypes.instance.blaze }, { entity<EntityBlaze>() }, weight = 5.0),
-        FairyRelation({ FairyTypes.instance.enderman }, { entity<EntityEnderman>() }, weight = 5.0),
+        FairyRelationEntry({ FairyTypes.instance.skeleton }, { entity<EntitySkeleton>() }, weight = 5.0),
+        FairyRelationEntry({ FairyTypes.instance.zombie }, { entity<EntityZombie>() }, weight = 5.0),
+        FairyRelationEntry({ FairyTypes.instance.spider }, { entity<EntitySpider>() }, weight = 5.0),
+        FairyRelationEntry({ FairyTypes.instance.blaze }, { entity<EntityBlaze>() }, weight = 5.0),
+        FairyRelationEntry({ FairyTypes.instance.enderman }, { entity<EntityEnderman>() }, weight = 5.0),
 
         // 滅多に会えないエンティティ
-        FairyRelation({ FairyTypes.instance.creeper }, { entity<EntityCreeper>() }, weight = 10.0),
-        FairyRelation({ FairyTypes.instance.slime }, { entity<EntitySlime>() }, weight = 10.0),
-        FairyRelation({ FairyTypes.instance.magmacube }, { entity<EntityMagmaCube>() }, relevance = 2.0 /* スライムのサブクラスのため */, weight = 10.0),
-        FairyRelation({ FairyTypes.instance.witherskeleton }, { entity<EntityWitherSkeleton>() }, weight = 10.0),
-        FairyRelation({ FairyTypes.instance.shulker }, { entity<EntityShulker>() }, weight = 10.0),
-        FairyRelation({ FairyTypes.instance.wither }, { entity<EntityWither>() }, weight = 10.0),
+        FairyRelationEntry({ FairyTypes.instance.creeper }, { entity<EntityCreeper>() }, weight = 10.0),
+        FairyRelationEntry({ FairyTypes.instance.slime }, { entity<EntitySlime>() }, weight = 10.0),
+        FairyRelationEntry({ FairyTypes.instance.magmacube }, { entity<EntityMagmaCube>() }, relevance = 2.0 /* スライムのサブクラスのため */, weight = 10.0),
+        FairyRelationEntry({ FairyTypes.instance.witherskeleton }, { entity<EntityWitherSkeleton>() }, weight = 10.0),
+        FairyRelationEntry({ FairyTypes.instance.shulker }, { entity<EntityShulker>() }, weight = 10.0),
+        FairyRelationEntry({ FairyTypes.instance.wither }, { entity<EntityWither>() }, weight = 10.0),
 
         // 滅多に地上に降りてこないエンティティ
-        FairyRelation({ FairyTypes.instance.enderdragon }, { entity<EntityDragon>() }, weight = 20.0)
+        FairyRelationEntry({ FairyTypes.instance.enderdragon }, { entity<EntityDragon>() }, weight = 20.0)
     )
 }
