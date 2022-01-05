@@ -9,6 +9,7 @@ import net.minecraft.util.SoundCategory
 import net.minecraft.util.SoundEvent
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
+import java.util.function.Predicate
 
 fun playSound(world: World, player: EntityPlayer, soundEvent: SoundEvent, volume: Float = 1.0f, pitch: Float = 1.0f) {
     world.playSound(null, player.posX, player.posY, player.posZ, soundEvent, SoundCategory.PLAYERS, volume, pitch)
@@ -42,11 +43,13 @@ fun <T> spawnParticleTargets(
  * 考慮する：アイテム・メタ・タグ
  * 考慮しない：個数
  */
-fun findItem(player: EntityPlayer, itemStackTarget: ItemStack): ItemStack? {
-    player.getHeldItem(EnumHand.OFF_HAND).let { if (itemStackTarget.equalsItemDamageTag(it)) return it }
-    player.getHeldItem(EnumHand.MAIN_HAND).let { if (itemStackTarget.equalsItemDamageTag(it)) return it }
+fun findItem(player: EntityPlayer, itemStackTarget: ItemStack) = findItem(player) { itemStackTarget.equalsItemDamageTag(it) }
+fun findItem(player: EntityPlayer, ingredient: Predicate<ItemStack>) = findItem(player) { ingredient.test(it) }
+fun findItem(player: EntityPlayer, predicate: (ItemStack) -> Boolean): ItemStack? {
+    player.getHeldItem(EnumHand.OFF_HAND).let { if (predicate(it)) return it }
+    player.getHeldItem(EnumHand.MAIN_HAND).let { if (predicate(it)) return it }
     (0 until player.inventory.sizeInventory).forEach { i ->
-        player.inventory.getStackInSlot(i).let { if (itemStackTarget.equalsItemDamageTag(it)) return it }
+        player.inventory.getStackInSlot(i).let { if (predicate(it)) return it }
     }
     return null
 }
