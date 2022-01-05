@@ -59,23 +59,14 @@ val loaderFairyCrystalDrop: Module = {
         operator fun DropCategory.invoke(block: WithDropCategory.() -> Unit) = WithDropCategory(this).block()
 
         fun register(listener: IRightClickDrop) = run { ApiFairyCrystal.dropsFairyCrystal.add(listener); Unit }
-        fun IDrop.fixed() = register(RightClickDrops.fixed(this))
-        fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = register(RightClickDrops.world(this) { world, blockPos -> world.predicate(blockPos) })
-        fun IDrop.biomeType(vararg biomes: BiomeDictionary.Type) = register(RightClickDrops.biomeTypes(this, *biomes))
-        fun IDrop.block(vararg blocks: Block) = register(RightClickDrops.blocks(this, *blocks))
-        fun IDrop.blockState(vararg blockStates: IBlockState) = register(RightClickDrops.blockStates(this, *blockStates))
-        fun IDrop.item(vararg items: Item) = register(RightClickDrops.items(this, *items))
-        fun IDrop.itemStack(vararg itemStacks: ItemStack) = register(RightClickDrops.ingredients(this, *itemStacks.map { Ingredient.fromStacks(it) }.toTypedArray()))
-        fun IDrop.itemStack(predicate: (ItemStack) -> Boolean) = register(RightClickDrops.ingredients(this, Predicate { predicate(it) }))
-        fun IDrop.material(material: String) = register(RightClickDrops.ores(this, *listOf("ingot", "nugget", "gem", "dust", "dustTiny", "block", "rod", "plate", "ore").map { "$it$material" }.toTypedArray()))
-        fun IDrop.ore(vararg ore: String) = register(RightClickDrops.ores(this, *ore))
-        fun IDrop.entity(vararg entityClasses: Class<out Entity>) = register(RightClickDrops.classEntities(this, *entityClasses))
-        fun <E : Entity> IDrop.entity(classEntity: Class<out E>, predicate: E.() -> Boolean) = register(RightClickDrops.entity(this, classEntity, predicate))
 
 
-        // コモン
+        // コモン枠
         FairyTypes.instance.run {
             DropCategory.COMMON {
+
+                fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = register(RightClickDrops.world(this) { world, blockPos -> world.predicate(blockPos) })
+                fun IDrop.biomeType(vararg biomes: BiomeDictionary.Type) = register(RightClickDrops.biomeTypes(this, *biomes))
 
                 // 地上
                 water().world { provider.isSurfaceWorld }
@@ -152,9 +143,11 @@ val loaderFairyCrystalDrop: Module = {
             }
         }
 
-        // 条件付きドロップ
+        // 固定枠
         FairyTypes.instance.run {
             DropCategory.FIXED {
+
+                fun IDrop.fixed() = register(RightClickDrops.fixed(this))
 
                 air(1.0).fixed()
                 time(0.0001).fixed()
@@ -167,7 +160,23 @@ val loaderFairyCrystalDrop: Module = {
                 }
 
             }
+        }
+
+        // レア枠
+        FairyTypes.instance.run {
             DropCategory.RARE {
+
+                fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = register(RightClickDrops.world(this) { world, blockPos -> world.predicate(blockPos) })
+                fun IDrop.biomeType(vararg biomes: BiomeDictionary.Type) = register(RightClickDrops.biomeTypes(this, *biomes))
+                fun IDrop.block(vararg blocks: Block) = register(RightClickDrops.blocks(this, *blocks))
+                fun IDrop.blockState(vararg blockStates: IBlockState) = register(RightClickDrops.blockStates(this, *blockStates))
+                fun IDrop.item(vararg items: Item) = register(RightClickDrops.items(this, *items))
+                fun IDrop.itemStack(vararg itemStacks: ItemStack) = register(RightClickDrops.ingredients(this, *itemStacks.map { Ingredient.fromStacks(it) }.toTypedArray()))
+                fun IDrop.itemStack(predicate: (ItemStack) -> Boolean) = register(RightClickDrops.ingredients(this, Predicate { predicate(it) }))
+                fun IDrop.material(material: String) = register(RightClickDrops.ores(this, *listOf("ingot", "nugget", "gem", "dust", "dustTiny", "block", "rod", "plate", "ore").map { "$it$material" }.toTypedArray()))
+                fun IDrop.ore(vararg ore: String) = register(RightClickDrops.ores(this, *ore))
+                fun IDrop.entity(vararg entityClasses: Class<out Entity>) = register(RightClickDrops.classEntities(this, *entityClasses))
+                fun <E : Entity> IDrop.entity(classEntity: Class<out E>, predicate: E.() -> Boolean) = register(RightClickDrops.entity(this, classEntity, predicate))
 
                 water(0.3).block(Blocks.WATER, Blocks.FLOWING_WATER)
                 water(0.3).item(Items.WATER_BUCKET)
