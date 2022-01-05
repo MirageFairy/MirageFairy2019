@@ -40,6 +40,7 @@ fun <T> spawnParticleTargets(
 
 /**
  * 考慮する：アイテム・メタ・タグ
+ * 考慮しない：個数
  */
 fun findItem(player: EntityPlayer, itemStackTarget: ItemStack): ItemStack? {
     player.getHeldItem(EnumHand.OFF_HAND).let { if (itemStackTarget.equalsItemDamageTag(it)) return it }
