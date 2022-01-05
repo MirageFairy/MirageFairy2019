@@ -217,9 +217,6 @@ val loaderFairyCrystalDrop: Module = {
                 nephrite(0.03).material("Nephrite")
                 tourmaline(0.01).material("Tourmaline")
                 topaz(0.01).material("Topaz")
-                if (Instant.now() < LocalDateTime.of(2021, 12, 1, 0, 0, 0).toInstant()) {
-                    imperialtopaz(0.001).material("Topaz")
-                }
 
                 enderman(0.03).entity(EntityEnderman::class.java)
                 spider(0.1).entity(EntitySpider::class.java)
