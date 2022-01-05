@@ -35,7 +35,7 @@ val loaderFairyLogDrop: Module = {
 
             // バイオーム
             FairyRelation.biomeType.forEach { relation ->
-                relation.fairy(relation.relevance) { biome(relation.key) }
+                relation.fairy(relation.relevance * relation.weight) { biome(relation.key) }
             }
 
         }

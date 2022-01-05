@@ -318,7 +318,7 @@ val loaderFairyCrystalDrop: Module = {
                 rain(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
 
                 FairyRelation.biomeType.forEach { relation ->
-                    relation.fairy(0.01 * relation.relevance).biomeType(relation.key)
+                    relation.fairy(0.01 * relation.relevance * relation.weight).biomeType(relation.key)
                 }
 
                 fortune(0.01).itemStack { EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, it) > 0 }
