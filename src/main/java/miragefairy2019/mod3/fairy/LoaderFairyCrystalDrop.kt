@@ -16,37 +16,21 @@ import net.minecraft.block.BlockOldLog
 import net.minecraft.block.BlockPlanks
 import net.minecraft.block.state.IBlockState
 import net.minecraft.enchantment.EnchantmentHelper
-import net.minecraft.entity.Entity
-import net.minecraft.entity.boss.EntityDragon
-import net.minecraft.entity.boss.EntityWither
-import net.minecraft.entity.monster.EntityBlaze
-import net.minecraft.entity.monster.EntityCreeper
-import net.minecraft.entity.monster.EntityEnderman
-import net.minecraft.entity.monster.EntityIronGolem
-import net.minecraft.entity.monster.EntityMagmaCube
-import net.minecraft.entity.monster.EntityShulker
-import net.minecraft.entity.monster.EntitySkeleton
-import net.minecraft.entity.monster.EntitySlime
-import net.minecraft.entity.monster.EntitySpider
-import net.minecraft.entity.monster.EntityWitherSkeleton
-import net.minecraft.entity.monster.EntityZombie
-import net.minecraft.entity.passive.EntityChicken
-import net.minecraft.entity.passive.EntityCow
-import net.minecraft.entity.passive.EntityPig
-import net.minecraft.entity.passive.EntityVillager
 import net.minecraft.init.Blocks
 import net.minecraft.init.Enchantments
 import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
-import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
 import java.time.Instant
 import java.time.LocalDateTime
 import java.util.function.Predicate
+import kotlin.math.pow
+
+private val FairyRelationEntry<*>.fairyCrystalBaseDropWeight get() = 0.1 * 0.1.pow((fairy.main.rare - 1.0) / 2.0) * weight
 
 val loaderFairyCrystalDrop: Module = {
     onCreateItemStack {
@@ -166,8 +150,14 @@ val loaderFairyCrystalDrop: Module = {
         FairyTypes.instance.run {
             DropCategory.RARE {
 
+                FairyRelation.entity.forEach { relation ->
+                    register(RightClickDrops.entity(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight), { relation.key(it) }))
+                }
+                FairyRelation.biomeType.forEach { relation ->
+                    register(RightClickDrops.biomeTypes(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight), relation.key))
+                }
+
                 fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = register(RightClickDrops.world(this) { world, blockPos -> world.predicate(blockPos) })
-                fun IDrop.biomeType(vararg biomes: BiomeDictionary.Type) = register(RightClickDrops.biomeTypes(this, *biomes))
                 fun IDrop.block(vararg blocks: Block) = register(RightClickDrops.blocks(this, *blocks))
                 fun IDrop.blockState(vararg blockStates: IBlockState) = register(RightClickDrops.blockStates(this, *blockStates))
                 fun IDrop.item(vararg items: Item) = register(RightClickDrops.items(this, *items))
@@ -175,8 +165,6 @@ val loaderFairyCrystalDrop: Module = {
                 fun IDrop.itemStack(predicate: (ItemStack) -> Boolean) = register(RightClickDrops.ingredients(this, Predicate { predicate(it) }))
                 fun IDrop.material(material: String) = register(RightClickDrops.ores(this, *listOf("ingot", "nugget", "gem", "dust", "dustTiny", "block", "rod", "plate", "ore").map { "$it$material" }.toTypedArray()))
                 fun IDrop.ore(vararg ore: String) = register(RightClickDrops.ores(this, *ore))
-                fun IDrop.entity(vararg entityClasses: Class<out Entity>) = register(RightClickDrops.classEntities(this, *entityClasses))
-                fun <E : Entity> IDrop.entity(classEntity: Class<out E>, predicate: E.() -> Boolean) = register(RightClickDrops.entity(this, classEntity, predicate))
 
                 water(0.3).block(Blocks.WATER, Blocks.FLOWING_WATER)
                 water(0.3).item(Items.WATER_BUCKET)
@@ -218,30 +206,12 @@ val loaderFairyCrystalDrop: Module = {
                 tourmaline(0.01).material("Tourmaline")
                 topaz(0.01).material("Topaz")
 
-                enderman(0.03).entity(EntityEnderman::class.java)
-                spider(0.1).entity(EntitySpider::class.java)
-                enderdragon(0.1).entity(EntityDragon::class.java)
-                chicken(0.1).entity(EntityChicken::class.java)
-                skeleton(0.3).entity(EntitySkeleton::class.java)
-                zombie(0.3).entity(EntityZombie::class.java)
-                witherskeleton(0.03).entity(EntityWitherSkeleton::class.java)
-                wither(0.01).entity(EntityWither::class.java)
-                creeper(0.1).entity(EntityCreeper::class.java)
                 fish(0.3).item(Items.FISH)
                 cod(0.1).itemStack(ItemStack(Items.FISH, 1, 0))
                 salmon(0.1).itemStack(ItemStack(Items.FISH, 1, 1))
                 pufferfish(0.03).itemStack(ItemStack(Items.FISH, 1, 3))
                 clownfish(0.03).itemStack(ItemStack(Items.FISH, 1, 2))
-                villager(0.3).entity(EntityVillager::class.java) { true }
-                librarian(0.1).entity(EntityVillager::class.java) { professionForge.registryName == ResourceLocation("minecraft:librarian") }
                 netherstar(0.01).item(Items.NETHER_STAR)
-                golem(0.1).entity(EntityIronGolem::class.java)
-                cow(0.1).entity(EntityCow::class.java)
-                pig(0.1).entity(EntityPig::class.java)
-                shulker(0.03).entity(EntityShulker::class.java)
-                slime(0.1).entity(EntitySlime::class.java)
-                magmacube(0.1).entity(EntityMagmaCube::class.java)
-                blaze(0.1).entity(EntityBlaze::class.java)
 
                 wheat(0.1).block(Blocks.WHEAT, Blocks.HAY_BLOCK)
                 lilac(0.03).blockState(Blocks.DOUBLE_PLANT.defaultState.withProperty(BlockDoublePlant.VARIANT, BlockDoublePlant.EnumPlantType.SYRINGA))
@@ -313,10 +283,6 @@ val loaderFairyCrystalDrop: Module = {
                 sunrise(0.001).world { time(5000, 6000) }
                 fine(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) }
                 rain(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
-
-                FairyRelation.biomeType.forEach { relation ->
-                    relation.fairy(0.01 * relation.relevance * relation.weight).biomeType(relation.key)
-                }
 
                 fortune(0.01).itemStack { EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, it) > 0 }
 

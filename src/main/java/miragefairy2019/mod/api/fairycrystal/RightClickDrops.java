@@ -183,25 +183,7 @@ public class RightClickDrops {
         };
     }
 
-    @SafeVarargs
-    public static IRightClickDrop classEntities(IDrop drop, Class<? extends Entity>... classEntities) {
-        return new IRightClickDrop() {
-            @Override
-            public IDrop getDrop() {
-                return drop;
-            }
-
-            @Override
-            public boolean testClassEntity(Class<? extends Entity> classEntity) {
-                for (Class<? extends Entity> classEntity2 : classEntities) {
-                    if (classEntity2.isAssignableFrom(classEntity)) return true;
-                }
-                return false;
-            }
-        };
-    }
-
-    public static <E extends Entity> IRightClickDrop entity(IDrop drop, Class<? extends E> classEntity, Predicate<? super E> predicate) {
+    public static IRightClickDrop entity(IDrop drop, Predicate<Entity> predicate) {
         return new IRightClickDrop() {
             @Override
             public IDrop getDrop() {
@@ -210,10 +192,7 @@ public class RightClickDrops {
 
             @Override
             public boolean testEntity(Entity entity) {
-                if (classEntity.isInstance(entity)) {
-                    return predicate.test(classEntity.cast(entity));
-                }
-                return false;
+                return predicate.test(entity);
             }
         };
     }
