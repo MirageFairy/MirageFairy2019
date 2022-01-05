@@ -241,4 +241,34 @@ object FairyRelation {
         FairyRelation({ FairyTypes.instance.desert }, { BiomeDictionary.Type.SANDY }),
         FairyRelation({ FairyTypes.instance.mountain }, { BiomeDictionary.Type.MOUNTAIN })
     )
+
+    private inline fun <reified E : Entity> entity(): (Entity) -> Boolean = { it is E }
+    private inline fun <reified E : Entity> entity(crossinline predicate: E.() -> Boolean): (Entity) -> Boolean = { it is E && predicate(it) }
+    val entity: List<FairyRelation<(Entity) -> Boolean>> = listOf(
+        // 長生きするエンティティ
+        FairyRelation({ FairyTypes.instance.chicken }, { entity<EntityChicken>() }, weight = 2.0),
+        FairyRelation({ FairyTypes.instance.cow }, { entity<EntityCow>() }, weight = 2.0),
+        FairyRelation({ FairyTypes.instance.pig }, { entity<EntityPig>() }, weight = 2.0),
+        FairyRelation({ FairyTypes.instance.villager }, { entity<EntityVillager>() }, weight = 2.0),
+        FairyRelation({ FairyTypes.instance.librarian }, { entity<EntityVillager> { professionForge.registryName == ResourceLocation("minecraft:librarian") } }, relevance = 2.0, weight = 2.0),
+        FairyRelation({ FairyTypes.instance.golem }, { entity<EntityIronGolem>() }, weight = 2.0),
+
+        // 持続的に湧かせられるエンティティ
+        FairyRelation({ FairyTypes.instance.skeleton }, { entity<EntitySkeleton>() }, weight = 5.0),
+        FairyRelation({ FairyTypes.instance.zombie }, { entity<EntityZombie>() }, weight = 5.0),
+        FairyRelation({ FairyTypes.instance.spider }, { entity<EntitySpider>() }, weight = 5.0),
+        FairyRelation({ FairyTypes.instance.blaze }, { entity<EntityBlaze>() }, weight = 5.0),
+        FairyRelation({ FairyTypes.instance.enderman }, { entity<EntityEnderman>() }, weight = 5.0),
+
+        // 滅多に会えないエンティティ
+        FairyRelation({ FairyTypes.instance.creeper }, { entity<EntityCreeper>() }, weight = 10.0),
+        FairyRelation({ FairyTypes.instance.slime }, { entity<EntitySlime>() }, weight = 10.0),
+        FairyRelation({ FairyTypes.instance.magmacube }, { entity<EntityMagmaCube>() }, relevance = 2.0 /* スライムのサブクラスのため */, weight = 10.0),
+        FairyRelation({ FairyTypes.instance.witherskeleton }, { entity<EntityWitherSkeleton>() }, weight = 10.0),
+        FairyRelation({ FairyTypes.instance.shulker }, { entity<EntityShulker>() }, weight = 10.0),
+        FairyRelation({ FairyTypes.instance.wither }, { entity<EntityWither>() }, weight = 10.0),
+
+        // 滅多に地上に降りてこないエンティティ
+        FairyRelation({ FairyTypes.instance.enderdragon }, { entity<EntityDragon>() }, weight = 20.0)
+    )
 }
