@@ -34,11 +34,9 @@ val loaderFairyLogDrop: Module = {
             thunder(0.02) { overworld().canRain() }
 
             // バイオーム
-            plains(1.0) { biome(BiomeDictionary.Type.PLAINS) }
-            forest(1.0) { biome(BiomeDictionary.Type.FOREST) }
-            taiga(1.0) { biome(BiomeDictionary.Type.CONIFEROUS) }
-            desert(1.0) { biome(BiomeDictionary.Type.SANDY) }
-            mountain(1.0) { biome(BiomeDictionary.Type.MOUNTAIN) }
+            FairyRelation.biomeType.forEach { relation ->
+                relation.fairy(relation.relevance) { biome(relation.key) }
+            }
 
         }
     }

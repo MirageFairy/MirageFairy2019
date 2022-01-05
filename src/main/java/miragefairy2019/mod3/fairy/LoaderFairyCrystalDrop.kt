@@ -317,12 +317,9 @@ val loaderFairyCrystalDrop: Module = {
                 fine(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) }
                 rain(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
 
-                plains(0.01).biomeType(BiomeDictionary.Type.PLAINS)
-                forest(0.01).biomeType(BiomeDictionary.Type.FOREST)
-                ocean(0.01).biomeType(BiomeDictionary.Type.OCEAN)
-                taiga(0.01).biomeType(BiomeDictionary.Type.CONIFEROUS)
-                desert(0.01).biomeType(BiomeDictionary.Type.SANDY)
-                mountain(0.01).biomeType(BiomeDictionary.Type.MOUNTAIN)
+                FairyRelation.biomeType.forEach { relation ->
+                    relation.fairy(0.01 * relation.relevance).biomeType(relation.key)
+                }
 
                 fortune(0.01).itemStack { EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, it) > 0 }
 

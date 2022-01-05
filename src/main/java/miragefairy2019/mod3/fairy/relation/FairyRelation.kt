@@ -33,6 +33,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.ResourceLocation
+import net.minecraftforge.common.BiomeDictionary
 import net.minecraftforge.oredict.OreIngredient
 
 object FairyRelation {
@@ -202,4 +203,19 @@ object FairyRelation {
         }
 
     }
+
+    class FairyRelation<T>(private val fairySupplier: () -> RankedFairyTypeBundle, private val keySupplier: () -> T, val relevance: Double = 1.0) {
+        val fairy get() = fairySupplier()
+        val key get() = keySupplier()
+    }
+
+    // TODO init関数形式にする
+    val biomeType = listOf<FairyRelation<BiomeDictionary.Type>>(
+        FairyRelation({ FairyTypes.instance.plains }, { BiomeDictionary.Type.PLAINS }),
+        FairyRelation({ FairyTypes.instance.forest }, { BiomeDictionary.Type.FOREST }),
+        FairyRelation({ FairyTypes.instance.ocean }, { BiomeDictionary.Type.OCEAN }),
+        FairyRelation({ FairyTypes.instance.taiga }, { BiomeDictionary.Type.CONIFEROUS }),
+        FairyRelation({ FairyTypes.instance.desert }, { BiomeDictionary.Type.SANDY }),
+        FairyRelation({ FairyTypes.instance.mountain }, { BiomeDictionary.Type.MOUNTAIN })
+    )
 }
