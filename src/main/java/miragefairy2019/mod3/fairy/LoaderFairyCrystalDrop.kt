@@ -172,11 +172,6 @@ val loaderFairyCrystalDrop: Module = {
                 lava(0.3).item(Items.LAVA_BUCKET)
                 fire(0.1).block(Blocks.FIRE)
 
-                thunder(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) && isThundering }
-                sun(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && time(6000, 18000) && !isRainingAt(it) }
-                moon(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) }
-                star(0.0003).world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) }
-
                 stone(0.3).block(Blocks.STONE, Blocks.COBBLESTONE)
                 dirt(0.3).block(Blocks.DIRT, Blocks.GRASS)
                 sand(0.3).block(Blocks.SAND, Blocks.SANDSTONE, Blocks.RED_SANDSTONE)
@@ -277,16 +272,21 @@ val loaderFairyCrystalDrop: Module = {
                 mushroomstew(0.03).item(Items.MUSHROOM_STEW)
                 rawrabbit(0.01).item(Items.RABBIT)
 
+                fortune(0.01).itemStack { EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, it) > 0 }
+
+                eleven(0.003).item(Items.RECORD_11)
+
+                thunder(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) && isThundering }
+                sun(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && time(6000, 18000) && !isRainingAt(it) }
+                moon(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) }
+                star(0.0003).world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) }
+
                 daytime(0.001).world { time(6000, 18000) }
                 night(0.001).world { time(19000, 24000) || time(0, 5000) }
                 morning(0.001).world { time(5000, 9000) }
                 sunrise(0.001).world { time(5000, 6000) }
                 fine(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) }
                 rain(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
-
-                fortune(0.01).itemStack { EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, it) > 0 }
-
-                eleven(0.003).item(Items.RECORD_11)
 
             }
         }
