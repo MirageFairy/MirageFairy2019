@@ -49,80 +49,92 @@ val loaderFairyCrystalDrop: Module = {
         FairyTypes.instance.run {
             DropCategory.COMMON {
 
-                fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = register(RightClickDrops.world(this) { world, blockPos -> world.predicate(blockPos) })
-                fun IDrop.biomeType(vararg biomes: BiomeDictionary.Type) = register(RightClickDrops.biomeTypes(this, *biomes))
+                fun IDrop.overworld() = register(object : IRightClickDrop {
+                    override fun getDrop() = this@overworld
+                    override fun testWorld(world: World, pos: BlockPos) = world.provider.isSurfaceWorld
+                })
+
+                fun IDrop.nether() = register(object : IRightClickDrop {
+                    override fun getDrop() = this@nether
+                    override fun testBiomeType(biomeType: BiomeDictionary.Type) = biomeType == BiomeDictionary.Type.NETHER
+                })
+
+                fun IDrop.end() = register(object : IRightClickDrop {
+                    override fun getDrop() = this@end
+                    override fun testBiomeType(biomeType: BiomeDictionary.Type) = biomeType == BiomeDictionary.Type.END
+                })
 
                 // 地上
-                water().world { provider.isSurfaceWorld }
-                stone().world { provider.isSurfaceWorld }
-                dirt().world { provider.isSurfaceWorld }
-                sand().world { provider.isSurfaceWorld }
-                gravel().world { provider.isSurfaceWorld }
-                iron().world { provider.isSurfaceWorld }
-                gold().world { provider.isSurfaceWorld }
-                diamond().world { provider.isSurfaceWorld }
-                emerald().world { provider.isSurfaceWorld }
-                magnetite().world { provider.isSurfaceWorld }
-                apatite().world { provider.isSurfaceWorld }
-                fluorite().world { provider.isSurfaceWorld }
-                sulfur().world { provider.isSurfaceWorld }
-                cinnabar().world { provider.isSurfaceWorld }
-                moonstone().world { provider.isSurfaceWorld }
-                pyrope().world { provider.isSurfaceWorld }
-                smithsonite().world { provider.isSurfaceWorld }
-                redstone().world { provider.isSurfaceWorld }
-                lapislazuli().world { provider.isSurfaceWorld }
-                obsidian().world { provider.isSurfaceWorld }
-                coal().world { provider.isSurfaceWorld }
-                ice().world { provider.isSurfaceWorld }
-                nephrite().world { provider.isSurfaceWorld }
-                tourmaline().world { provider.isSurfaceWorld }
-                topaz().world { provider.isSurfaceWorld }
+                water().overworld()
+                stone().overworld()
+                dirt().overworld()
+                sand().overworld()
+                gravel().overworld()
+                iron().overworld()
+                gold().overworld()
+                diamond().overworld()
+                emerald().overworld()
+                magnetite().overworld()
+                apatite().overworld()
+                fluorite().overworld()
+                sulfur().overworld()
+                cinnabar().overworld()
+                moonstone().overworld()
+                pyrope().overworld()
+                smithsonite().overworld()
+                redstone().overworld()
+                lapislazuli().overworld()
+                obsidian().overworld()
+                coal().overworld()
+                ice().overworld()
+                nephrite().overworld()
+                tourmaline().overworld()
+                topaz().overworld()
 
-                spider().world { provider.isSurfaceWorld }
-                chicken().world { provider.isSurfaceWorld }
-                skeleton().world { provider.isSurfaceWorld }
-                zombie().world { provider.isSurfaceWorld }
-                creeper().world { provider.isSurfaceWorld }
-                fish().world { provider.isSurfaceWorld }
-                cod().world { provider.isSurfaceWorld }
-                salmon().world { provider.isSurfaceWorld }
-                pufferfish().world { provider.isSurfaceWorld }
-                clownfish().world { provider.isSurfaceWorld }
-                villager().world { provider.isSurfaceWorld }
-                cow().world { provider.isSurfaceWorld }
-                pig().world { provider.isSurfaceWorld }
-                spidereye().world { provider.isSurfaceWorld }
-                slime().world { provider.isSurfaceWorld }
+                spider().overworld()
+                chicken().overworld()
+                skeleton().overworld()
+                zombie().overworld()
+                creeper().overworld()
+                fish().overworld()
+                cod().overworld()
+                salmon().overworld()
+                pufferfish().overworld()
+                clownfish().overworld()
+                villager().overworld()
+                cow().overworld()
+                pig().overworld()
+                spidereye().overworld()
+                slime().overworld()
 
-                wheat().world { provider.isSurfaceWorld }
-                lilac().world { provider.isSurfaceWorld }
-                apple().world { provider.isSurfaceWorld }
-                carrot().world { provider.isSurfaceWorld }
-                cactus().world { provider.isSurfaceWorld }
-                spruce().world { provider.isSurfaceWorld }
-                seed().world { provider.isSurfaceWorld }
-                poisonouspotato().world { provider.isSurfaceWorld }
-                melon().world { provider.isSurfaceWorld }
-                beetroot().world { provider.isSurfaceWorld }
-                mirageflower().world { provider.isSurfaceWorld }
+                wheat().overworld()
+                lilac().overworld()
+                apple().overworld()
+                carrot().overworld()
+                cactus().overworld()
+                spruce().overworld()
+                seed().overworld()
+                poisonouspotato().overworld()
+                melon().overworld()
+                beetroot().overworld()
+                mirageflower().overworld()
 
 
                 // ネザー
-                lava().biomeType(BiomeDictionary.Type.NETHER)
-                fire().biomeType(BiomeDictionary.Type.NETHER)
+                lava().nether()
+                fire().nether()
 
-                glowstone().biomeType(BiomeDictionary.Type.NETHER)
+                glowstone().nether()
 
-                magmacube().biomeType(BiomeDictionary.Type.NETHER)
-                blaze().biomeType(BiomeDictionary.Type.NETHER)
+                magmacube().nether()
+                blaze().nether()
 
 
                 // エンド
-                enderman().biomeType(BiomeDictionary.Type.END)
-                enderdragon().biomeType(BiomeDictionary.Type.END)
-                shulker().biomeType(BiomeDictionary.Type.END)
-                chorusfruit().biomeType(BiomeDictionary.Type.END)
+                enderman().end()
+                enderdragon().end()
+                shulker().end()
+                chorusfruit().end()
 
             }
         }
