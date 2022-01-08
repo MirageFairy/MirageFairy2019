@@ -16,6 +16,7 @@ import net.minecraft.block.BlockOldLog
 import net.minecraft.block.BlockPlanks
 import net.minecraft.block.state.IBlockState
 import net.minecraft.enchantment.EnchantmentHelper
+import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.init.Enchantments
@@ -169,10 +170,16 @@ val loaderFairyCrystalDrop: Module = {
             DropCategory.RARE {
 
                 FairyRelation.entity.forEach { relation ->
-                    register(RightClickDrops.entity(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight), { relation.key(it) }))
+                    register(object : IRightClickDrop {
+                        override fun getDrop() = DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)
+                        override fun testEntity(entity: Entity) = relation.key(entity)
+                    })
                 }
                 FairyRelation.biomeType.forEach { relation ->
-                    register(RightClickDrops.biomeTypes(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight), relation.key))
+                    register(object : IRightClickDrop {
+                        override fun getDrop() = DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)
+                        override fun testBiomeType(biomeType: BiomeDictionary.Type) = biomeType == relation.key
+                    })
                 }
 
                 fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = register(RightClickDrops.world(this) { world, blockPos -> world.predicate(blockPos) })
