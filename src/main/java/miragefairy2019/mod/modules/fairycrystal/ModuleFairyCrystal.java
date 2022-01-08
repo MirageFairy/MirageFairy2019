@@ -15,7 +15,7 @@ public class ModuleFairyCrystal {
     public static ItemFairyCrystal itemFairyCrystal;
 
     public static VariantFairyCrystal variantFairyCrystal;
-    public static VariantFairyCrystalChristmas variantFairyCrystalChristmas;
+    public static VariantFairyCrystal variantFairyCrystalChristmas;
     public static VariantFairyCrystal variantFairyCrystalPure;
 
     public static void init(EventRegistryMod erMod) {
@@ -28,7 +28,7 @@ public class ModuleFairyCrystal {
                 item.setUnlocalizedName("fairyCrystal");
                 item.setCreativeTab(ApiMain.creativeTab);
                 item.registerVariant(0, variantFairyCrystal = new VariantFairyCrystal("fairy_crystal", "fairyCrystal", "mirageFairyCrystal"));
-                item.registerVariant(1, variantFairyCrystalChristmas = new VariantFairyCrystalChristmas("christmas_fairy_crystal", "fairyCrystalChristmas", "mirageFairyCrystalChristmas"));
+                item.registerVariant(1, variantFairyCrystalChristmas = new VariantFairyCrystal("christmas_fairy_crystal", "fairyCrystalChristmas", "mirageFairyCrystalChristmas"));
                 item.registerVariant(2, variantFairyCrystalPure = new VariantFairyCrystalPure("pure_fairy_crystal", "fairyCrystalPure", "mirageFairyCrystalPure"));
                 ForgeRegistries.ITEMS.register(item);
                 if (ApiMain.side.isClient()) {
