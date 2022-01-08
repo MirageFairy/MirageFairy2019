@@ -49,97 +49,95 @@ val loaderFairyCrystalDrop: Module = {
 
 
         // コモン枠
-        FairyTypes.instance.run {
-            DropCategory.COMMON {
+        DropCategory.COMMON {
 
-                fun IDrop.overworld() = register(object : IRightClickDrop {
-                    override fun getDrop() = this@overworld
-                    override fun testWorld(world: World, pos: BlockPos) = world.provider.isSurfaceWorld
-                })
+            fun IDrop.overworld() = register(object : IRightClickDrop {
+                override fun getDrop() = this@overworld
+                override fun testWorld(world: World, pos: BlockPos) = world.provider.isSurfaceWorld
+            })
 
-                fun IDrop.nether() = register(object : IRightClickDrop {
-                    override fun getDrop() = this@nether
-                    override fun testBiomeType(biomeType: BiomeDictionary.Type) = biomeType == BiomeDictionary.Type.NETHER
-                })
+            fun IDrop.nether() = register(object : IRightClickDrop {
+                override fun getDrop() = this@nether
+                override fun testBiomeType(biomeType: BiomeDictionary.Type) = biomeType == BiomeDictionary.Type.NETHER
+            })
 
-                fun IDrop.end() = register(object : IRightClickDrop {
-                    override fun getDrop() = this@end
-                    override fun testBiomeType(biomeType: BiomeDictionary.Type) = biomeType == BiomeDictionary.Type.END
-                })
+            fun IDrop.end() = register(object : IRightClickDrop {
+                override fun getDrop() = this@end
+                override fun testBiomeType(biomeType: BiomeDictionary.Type) = biomeType == BiomeDictionary.Type.END
+            })
 
-                // 地上
-                water().overworld()
-                stone().overworld()
-                dirt().overworld()
-                sand().overworld()
-                gravel().overworld()
-                iron().overworld()
-                gold().overworld()
-                diamond().overworld()
-                emerald().overworld()
-                magnetite().overworld()
-                apatite().overworld()
-                fluorite().overworld()
-                sulfur().overworld()
-                cinnabar().overworld()
-                moonstone().overworld()
-                pyrope().overworld()
-                smithsonite().overworld()
-                redstone().overworld()
-                lapislazuli().overworld()
-                obsidian().overworld()
-                coal().overworld()
-                ice().overworld()
-                nephrite().overworld()
-                tourmaline().overworld()
-                topaz().overworld()
+            // 地上
+            FairyTypes.instance.water().overworld()
+            FairyTypes.instance.stone().overworld()
+            FairyTypes.instance.dirt().overworld()
+            FairyTypes.instance.sand().overworld()
+            FairyTypes.instance.gravel().overworld()
+            FairyTypes.instance.iron().overworld()
+            FairyTypes.instance.gold().overworld()
+            FairyTypes.instance.diamond().overworld()
+            FairyTypes.instance.emerald().overworld()
+            FairyTypes.instance.magnetite().overworld()
+            FairyTypes.instance.apatite().overworld()
+            FairyTypes.instance.fluorite().overworld()
+            FairyTypes.instance.sulfur().overworld()
+            FairyTypes.instance.cinnabar().overworld()
+            FairyTypes.instance.moonstone().overworld()
+            FairyTypes.instance.pyrope().overworld()
+            FairyTypes.instance.smithsonite().overworld()
+            FairyTypes.instance.redstone().overworld()
+            FairyTypes.instance.lapislazuli().overworld()
+            FairyTypes.instance.obsidian().overworld()
+            FairyTypes.instance.coal().overworld()
+            FairyTypes.instance.ice().overworld()
+            FairyTypes.instance.nephrite().overworld()
+            FairyTypes.instance.tourmaline().overworld()
+            FairyTypes.instance.topaz().overworld()
 
-                spider().overworld()
-                chicken().overworld()
-                skeleton().overworld()
-                zombie().overworld()
-                creeper().overworld()
-                fish().overworld()
-                cod().overworld()
-                salmon().overworld()
-                pufferfish().overworld()
-                clownfish().overworld()
-                villager().overworld()
-                cow().overworld()
-                pig().overworld()
-                spidereye().overworld()
-                slime().overworld()
+            FairyTypes.instance.spider().overworld()
+            FairyTypes.instance.chicken().overworld()
+            FairyTypes.instance.skeleton().overworld()
+            FairyTypes.instance.zombie().overworld()
+            FairyTypes.instance.creeper().overworld()
+            FairyTypes.instance.fish().overworld()
+            FairyTypes.instance.cod().overworld()
+            FairyTypes.instance.salmon().overworld()
+            FairyTypes.instance.pufferfish().overworld()
+            FairyTypes.instance.clownfish().overworld()
+            FairyTypes.instance.villager().overworld()
+            FairyTypes.instance.cow().overworld()
+            FairyTypes.instance.pig().overworld()
+            FairyTypes.instance.spidereye().overworld()
+            FairyTypes.instance.slime().overworld()
 
-                wheat().overworld()
-                lilac().overworld()
-                apple().overworld()
-                carrot().overworld()
-                cactus().overworld()
-                spruce().overworld()
-                seed().overworld()
-                poisonouspotato().overworld()
-                melon().overworld()
-                beetroot().overworld()
-                mirageflower().overworld()
-
-
-                // ネザー
-                lava().nether()
-                fire().nether()
-
-                glowstone().nether()
-
-                magmacube().nether()
-                blaze().nether()
+            FairyTypes.instance.wheat().overworld()
+            FairyTypes.instance.lilac().overworld()
+            FairyTypes.instance.apple().overworld()
+            FairyTypes.instance.carrot().overworld()
+            FairyTypes.instance.cactus().overworld()
+            FairyTypes.instance.spruce().overworld()
+            FairyTypes.instance.seed().overworld()
+            FairyTypes.instance.poisonouspotato().overworld()
+            FairyTypes.instance.melon().overworld()
+            FairyTypes.instance.beetroot().overworld()
+            FairyTypes.instance.mirageflower().overworld()
 
 
-                // エンド
-                enderman().end()
-                enderdragon().end()
-                shulker().end()
-                chorusfruit().end()
+            // ネザー
+            FairyTypes.instance.lava().nether()
+            FairyTypes.instance.fire().nether()
 
-            }
+            FairyTypes.instance.glowstone().nether()
+
+            FairyTypes.instance.magmacube().nether()
+            FairyTypes.instance.blaze().nether()
+
+
+            // エンド
+            FairyTypes.instance.enderman().end()
+            FairyTypes.instance.enderdragon().end()
+            FairyTypes.instance.shulker().end()
+            FairyTypes.instance.chorusfruit().end()
+
         }
 
         // 固定枠
