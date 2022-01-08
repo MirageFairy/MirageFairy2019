@@ -1,5 +1,6 @@
 package miragefairy2019.mod
 
+import miragefairy2019.mod.modules.fairycrystal.FairyCrystal
 import miragefairy2019.mod.modules.fairyweapon.item.FairyWeapon
 import miragefairy2019.mod.modules.ore.Ore
 import miragefairy2019.mod.modules.oreseed.OreSeed
@@ -33,5 +34,6 @@ val modules = listOf(
     Ore.module,
     WorldGen.module,
     Pick.module,
-    OreSeed.module
+    OreSeed.module,
+    FairyCrystal.module
 )
