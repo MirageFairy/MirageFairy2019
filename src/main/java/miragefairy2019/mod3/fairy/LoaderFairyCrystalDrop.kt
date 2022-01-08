@@ -182,7 +182,6 @@ val loaderFairyCrystalDrop: Module = {
                     })
                 }
 
-                fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = register(RightClickDrops.world(this) { world, blockPos -> world.predicate(blockPos) })
                 fun IDrop.block(vararg blocks: Block) = register(RightClickDrops.blocks(this, *blocks))
                 fun IDrop.blockState(vararg blockStates: IBlockState) = register(RightClickDrops.blockStates(this, *blockStates))
                 fun IDrop.item(vararg items: Item) = register(RightClickDrops.items(this, *items))
@@ -300,6 +299,12 @@ val loaderFairyCrystalDrop: Module = {
                 fortune(0.01).itemStack { EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, it) > 0 }
 
                 eleven(0.003).item(Items.RECORD_11)
+
+
+                fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = register(object : IRightClickDrop {
+                    override fun getDrop(): IDrop = this@world
+                    override fun testWorld(world: World, pos: BlockPos): Boolean = predicate(world, pos)
+                })
 
                 thunder(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) && isThundering }
                 sun(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && time(6000, 18000) && !isRainingAt(it) }
