@@ -21,15 +21,14 @@ object FairyCrystal {
         itemFairyCrystal = item({ ItemFairyCrystal() }, "fairy_crystal") {
             setUnlocalizedName("fairyCrystal")
             setCreativeTab { ApiMain.creativeTab }
+            variantFairyCrystal = itemVariant("fairy_crystal", { VariantFairyCrystal(it, "fairyCrystal", "mirageFairyCrystal") }, 0)
+            variantFairyCrystalChristmas = itemVariant("christmas_fairy_crystal", { VariantFairyCrystal(it, "fairyCrystalChristmas", "mirageFairyCrystalChristmas") }, 1)
+            variantFairyCrystalPure = itemVariant("pure_fairy_crystal", { VariantFairyCrystalPure(it, "fairyCrystalPure", "mirageFairyCrystalPure") }, 2)
             onRegisterItem {
-                variantFairyCrystal = itemVariant("fairy_crystal", { VariantFairyCrystal(it, "fairyCrystal", "mirageFairyCrystal") }, 0)
-                variantFairyCrystalChristmas = itemVariant("christmas_fairy_crystal", { VariantFairyCrystal(it, "fairyCrystalChristmas", "mirageFairyCrystalChristmas") }, 1)
-                variantFairyCrystalPure = itemVariant("pure_fairy_crystal", { VariantFairyCrystalPure(it, "fairyCrystalPure", "mirageFairyCrystalPure") }, 2)
                 if (ApiMain.side.isClient) {
                     item.variants.forEach { item.setCustomModelResourceLocation(it.y!!.registryName, it.x!!) }
                 }
             }
-            // 鉱石辞書
             onCreateItemStack {
                 item.variants.forEach {
                     OreDictionary.registerOre(it.y!!.oreName, it.y!!.createItemStack())
