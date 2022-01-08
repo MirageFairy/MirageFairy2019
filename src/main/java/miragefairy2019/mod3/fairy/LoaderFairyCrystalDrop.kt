@@ -16,12 +16,15 @@ import net.minecraft.block.BlockOldLog
 import net.minecraft.block.BlockPlanks
 import net.minecraft.block.state.IBlockState
 import net.minecraft.enchantment.EnchantmentHelper
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.init.Enchantments
 import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
+import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
@@ -143,7 +146,10 @@ val loaderFairyCrystalDrop: Module = {
         FairyTypes.instance.run {
             DropCategory.FIXED {
 
-                fun IDrop.fixed() = register(RightClickDrops.fixed(this))
+                fun IDrop.fixed() = register(object : IRightClickDrop {
+                    override fun getDrop() = this@fixed
+                    override fun testUseItem(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float) = true
+                })
 
                 air(1.0).fixed()
                 time(0.0001).fixed()
