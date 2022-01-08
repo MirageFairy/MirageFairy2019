@@ -37,7 +37,7 @@ val loaderFairyCrystalDrop: Module = {
         fun World.time(min: Int, max: Int) = provider.isSurfaceWorld && min <= (worldTime + 6000) % 24000 && (worldTime + 6000) % 24000 <= max
 
         class WithDropCategory(val dropCategory: DropCategory) {
-            operator fun RankedFairyTypeBundle.invoke(weight: Double? = null) = DropFixed(this, dropCategory, weight ?: 0.1 * Math.pow(0.1, (main.rare - 1).toDouble()))
+            operator fun RankedFairyTypeBundle.invoke(weight: Double? = null) = DropFixed(this, dropCategory, weight ?: (0.1 * 0.1.pow((main.rare - 1).toDouble())))
         }
 
         operator fun DropCategory.invoke(block: WithDropCategory.() -> Unit) = WithDropCategory(this).block()
