@@ -7,7 +7,6 @@ import miragefairy2019.mod.api.fairycrystal.DropCategory
 import miragefairy2019.mod.api.fairycrystal.DropFixed
 import miragefairy2019.mod.api.fairycrystal.IDrop
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop
-import miragefairy2019.mod.api.fairycrystal.RightClickDrops
 import miragefairy2019.mod3.worldgen.MirageFlower
 import net.minecraft.block.Block
 import net.minecraft.block.BlockDoublePlant
@@ -29,9 +28,9 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
+import net.minecraftforge.oredict.OreIngredient
 import java.time.Instant
 import java.time.LocalDateTime
-import java.util.function.Predicate
 import kotlin.math.pow
 
 private val FairyRelationEntry<*>.fairyCrystalBaseDropWeight get() = 0.1 * 0.1.pow((fairy.main.rare - 1.0) / 2.0) * weight
@@ -182,13 +181,40 @@ val loaderFairyCrystalDrop: Module = {
                     })
                 }
 
-                fun IDrop.block(vararg blocks: Block) = register(RightClickDrops.blocks(this, *blocks))
-                fun IDrop.blockState(vararg blockStates: IBlockState) = register(RightClickDrops.blockStates(this, *blockStates))
-                fun IDrop.item(vararg items: Item) = register(RightClickDrops.items(this, *items))
-                fun IDrop.itemStack(vararg itemStacks: ItemStack) = register(RightClickDrops.ingredients(this, *itemStacks.map { Ingredient.fromStacks(it) }.toTypedArray()))
-                fun IDrop.itemStack(predicate: (ItemStack) -> Boolean) = register(RightClickDrops.ingredients(this, Predicate { predicate(it) }))
-                fun IDrop.material(material: String) = register(RightClickDrops.ores(this, *listOf("ingot", "nugget", "gem", "dust", "dustTiny", "block", "rod", "plate", "ore").map { "$it$material" }.toTypedArray()))
-                fun IDrop.ore(vararg ore: String) = register(RightClickDrops.ores(this, *ore))
+
+                fun IDrop.block(vararg blocks: Block) = register(object : IRightClickDrop {
+                    override fun getDrop() = this@block
+                    override fun testBlock(block: Block) = block in blocks
+                })
+
+
+                fun IDrop.blockState(vararg blockStates: IBlockState) = register(object : IRightClickDrop {
+                    override fun getDrop() = this@blockState
+                    override fun testBlockState(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState in blockStates
+                })
+
+
+                fun IDrop.item(vararg items: Item) = register(object : IRightClickDrop {
+                    override fun getDrop() = this@item
+                    override fun testItem(item: Item) = item in items
+                })
+
+
+                fun IDrop.itemStack(predicate: (ItemStack) -> Boolean) = register(object : IRightClickDrop {
+                    override fun getDrop() = this@itemStack
+                    override fun testItemStack(itemStack: ItemStack) = predicate(itemStack)
+                })
+
+
+                fun IDrop.ingredients(vararg ingredients: Ingredient) = register(object : IRightClickDrop {
+                    override fun getDrop() = this@ingredients
+                    override fun testItemStack(itemStack: ItemStack) = ingredients.any { it.test(itemStack) }
+                })
+
+                fun IDrop.itemStack(vararg itemStacks: ItemStack) = ingredients(*itemStacks.map { Ingredient.fromStacks(it) }.toTypedArray())
+                fun IDrop.ore(vararg oreNames: String) = ingredients(*oreNames.map { OreIngredient(it) }.toTypedArray())
+                fun IDrop.material(material: String) = ore(*listOf("ingot", "nugget", "gem", "dust", "dustTiny", "block", "rod", "plate", "ore").map { "$it$material" }.toTypedArray())
+
 
                 water(0.3).block(Blocks.WATER, Blocks.FLOWING_WATER)
                 water(0.3).item(Items.WATER_BUCKET)
