@@ -34,7 +34,7 @@ val loaderFairyLogDrop: Module = {
             thunder(0.02) { overworld().canRain() }
 
             // バイオーム
-            FairyRelation.biomeType.forEach { relation ->
+            FairyRelationRegistry.biomeType.forEach { relation ->
                 relation.fairy(relation.relevance * relation.weight) { biome(relation.key) }
             }
 

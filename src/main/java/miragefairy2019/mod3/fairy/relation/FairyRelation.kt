@@ -31,6 +31,11 @@ import net.minecraft.util.ResourceLocation
 import net.minecraftforge.common.BiomeDictionary
 import net.minecraftforge.oredict.OreIngredient
 
+object FairyRelationRegistry {
+    val biomeType = mutableListOf<FairyRelationEntry<BiomeDictionary.Type>>()
+    val entity = mutableListOf<FairyRelationEntry<(Entity) -> Boolean>>()
+}
+
 class FairyRelationEntry<T>(
     private val fairySupplier: () -> RankedFairyTypeBundle,
     private val keySupplier: () -> T,
@@ -59,6 +64,20 @@ class FairyRelationEntry<T>(
     val fairy get() = fairySupplier()
     val key get() = keySupplier()
 }
+
+
+private fun fairy(fairySelector: FairyTypes.() -> RankedFairyTypeBundle): () -> RankedFairyTypeBundle = { fairySelector(FairyTypes.instance) }
+private infix fun <T> MutableList<FairyRelationEntry<T>>.with(keyGetter: () -> T) = Pair(this, keyGetter)
+private fun <T> (() -> RankedFairyTypeBundle).register(relevance: Double = 1.0, weight: Double = 1.0, actionGetter: () -> Pair<MutableList<FairyRelationEntry<T>>, () -> T>) {
+    val result = actionGetter()
+    result.first += FairyRelationEntry(this, result.second, relevance = relevance, weight = weight)
+}
+
+
+private inline fun <reified E : Entity> entity() = FairyRelationRegistry.entity with { { it is E } }
+private inline fun <reified E : Entity> entity(crossinline predicate: E.() -> Boolean) = FairyRelationRegistry.entity with { { it is E && predicate(it) } }
+private fun biomeType(biomeTypeGetter: () -> BiomeDictionary.Type) = FairyRelationRegistry.biomeType with biomeTypeGetter
+
 
 object FairyRelation {
     val module: Module = {
@@ -183,45 +202,43 @@ object FairyRelation {
 
         }
 
-    }
 
-    // TODO init関数形式にする
-    val biomeType: List<FairyRelationEntry<BiomeDictionary.Type>> = listOf(
-        FairyRelationEntry({ FairyTypes.instance.plains }, { BiomeDictionary.Type.PLAINS }, weight = 0.1),
-        FairyRelationEntry({ FairyTypes.instance.forest }, { BiomeDictionary.Type.FOREST }, weight = 0.1),
-        FairyRelationEntry({ FairyTypes.instance.ocean }, { BiomeDictionary.Type.OCEAN }, weight = 0.1),
-        FairyRelationEntry({ FairyTypes.instance.taiga }, { BiomeDictionary.Type.CONIFEROUS }, weight = 0.1),
-        FairyRelationEntry({ FairyTypes.instance.desert }, { BiomeDictionary.Type.SANDY }, weight = 0.1),
-        FairyRelationEntry({ FairyTypes.instance.mountain }, { BiomeDictionary.Type.MOUNTAIN }, weight = 0.1)
-    )
+        // バイオーム
+        fairy { plains }.register(weight = 0.1) { biomeType { BiomeDictionary.Type.PLAINS } }
+        fairy { forest }.register(weight = 0.1) { biomeType { BiomeDictionary.Type.FOREST } }
+        fairy { ocean }.register(weight = 0.1) { biomeType { BiomeDictionary.Type.OCEAN } }
+        fairy { taiga }.register(weight = 0.1) { biomeType { BiomeDictionary.Type.CONIFEROUS } }
+        fairy { desert }.register(weight = 0.1) { biomeType { BiomeDictionary.Type.SANDY } }
+        fairy { mountain }.register(weight = 0.1) { biomeType { BiomeDictionary.Type.MOUNTAIN } }
 
-    private inline fun <reified E : Entity> entity(): (Entity) -> Boolean = { it is E }
-    private inline fun <reified E : Entity> entity(crossinline predicate: E.() -> Boolean): (Entity) -> Boolean = { it is E && predicate(it) }
-    val entity: List<FairyRelationEntry<(Entity) -> Boolean>> = listOf(
+
+        // エンティティ
+
         // 長生きするエンティティ
-        FairyRelationEntry({ FairyTypes.instance.chicken }, { entity<EntityChicken>() }, weight = 2.0),
-        FairyRelationEntry({ FairyTypes.instance.cow }, { entity<EntityCow>() }, weight = 2.0),
-        FairyRelationEntry({ FairyTypes.instance.pig }, { entity<EntityPig>() }, weight = 2.0),
-        FairyRelationEntry({ FairyTypes.instance.villager }, { entity<EntityVillager>() }, weight = 2.0),
-        FairyRelationEntry({ FairyTypes.instance.librarian }, { entity<EntityVillager> { professionForge.registryName == ResourceLocation("minecraft:librarian") } }, relevance = 2.0, weight = 2.0),
-        FairyRelationEntry({ FairyTypes.instance.golem }, { entity<EntityIronGolem>() }, weight = 2.0),
+        fairy { chicken }.register(weight = 2.0) { entity<EntityChicken>() }
+        fairy { cow }.register(weight = 2.0) { entity<EntityCow>() }
+        fairy { pig }.register(weight = 2.0) { entity<EntityPig>() }
+        fairy { villager }.register(weight = 2.0) { entity<EntityVillager>() }
+        fairy { librarian }.register(relevance = 2.0, weight = 2.0) { entity<EntityVillager> { professionForge.registryName == ResourceLocation("minecraft:librarian") } }
+        fairy { golem }.register(weight = 2.0) { entity<EntityIronGolem>() }
 
         // 持続的に湧かせられるエンティティ
-        FairyRelationEntry({ FairyTypes.instance.skeleton }, { entity<EntitySkeleton>() }, weight = 5.0),
-        FairyRelationEntry({ FairyTypes.instance.zombie }, { entity<EntityZombie>() }, weight = 5.0),
-        FairyRelationEntry({ FairyTypes.instance.spider }, { entity<EntitySpider>() }, weight = 5.0),
-        FairyRelationEntry({ FairyTypes.instance.blaze }, { entity<EntityBlaze>() }, weight = 5.0),
-        FairyRelationEntry({ FairyTypes.instance.enderman }, { entity<EntityEnderman>() }, weight = 5.0),
+        fairy { skeleton }.register(weight = 5.0) { entity<EntitySkeleton>() }
+        fairy { zombie }.register(weight = 5.0) { entity<EntityZombie>() }
+        fairy { spider }.register(weight = 5.0) { entity<EntitySpider>() }
+        fairy { blaze }.register(weight = 5.0) { entity<EntityBlaze>() }
+        fairy { enderman }.register(weight = 5.0) { entity<EntityEnderman>() }
 
         // 滅多に会えないエンティティ
-        FairyRelationEntry({ FairyTypes.instance.creeper }, { entity<EntityCreeper>() }, weight = 10.0),
-        FairyRelationEntry({ FairyTypes.instance.slime }, { entity<EntitySlime>() }, weight = 10.0),
-        FairyRelationEntry({ FairyTypes.instance.magmacube }, { entity<EntityMagmaCube>() }, relevance = 2.0 /* スライムのサブクラスのため */, weight = 10.0),
-        FairyRelationEntry({ FairyTypes.instance.witherskeleton }, { entity<EntityWitherSkeleton>() }, weight = 10.0),
-        FairyRelationEntry({ FairyTypes.instance.shulker }, { entity<EntityShulker>() }, weight = 10.0),
-        FairyRelationEntry({ FairyTypes.instance.wither }, { entity<EntityWither>() }, weight = 10.0),
+        fairy { creeper }.register(weight = 10.0) { entity<EntityCreeper>() }
+        fairy { slime }.register(weight = 10.0) { entity<EntitySlime>() }
+        fairy { magmacube }.register(relevance = 2.0 /* スライムのサブクラスのため */, weight = 10.0) { entity<EntityMagmaCube>() }
+        fairy { witherskeleton }.register(weight = 10.0) { entity<EntityWitherSkeleton>() }
+        fairy { shulker }.register(weight = 10.0) { entity<EntityShulker>() }
+        fairy { wither }.register(weight = 10.0) { entity<EntityWither>() }
 
         // 滅多に地上に降りてこないエンティティ
-        FairyRelationEntry({ FairyTypes.instance.enderdragon }, { entity<EntityDragon>() }, weight = 20.0)
-    )
+        fairy { enderdragon }.register(weight = 20.0) { entity<EntityDragon>() }
+
+    }
 }

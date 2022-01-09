@@ -166,13 +166,13 @@ val loaderFairyCrystalDrop: Module = {
         FairyTypes.instance.run {
             DropCategory.RARE {
 
-                FairyRelation.entity.forEach { relation ->
+                FairyRelationRegistry.entity.forEach { relation ->
                     register(object : IRightClickDrop {
                         override fun getDrop() = DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)
                         override fun testEntity(entity: Entity) = relation.key(entity)
                     })
                 }
-                FairyRelation.biomeType.forEach { relation ->
+                FairyRelationRegistry.biomeType.forEach { relation ->
                     register(object : IRightClickDrop {
                         override fun getDrop() = DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)
                         override fun testBiomeType(biomeType: BiomeDictionary.Type) = biomeType == relation.key
