@@ -200,7 +200,7 @@ object Fairy {
             ApiFairy.fairyRelationRegistry.ingredientFairyRelations.forEach { relation ->
                 if (relation.relevance >= 1) {
 
-                    // ダイヤモンド使用
+                    // 召喚のワンド使用
                     GameRegistry.findRegistry(IRecipe::class.java).register(
                         ShapelessOreRecipe(
                             ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_from_item_$counter"),
@@ -209,18 +209,6 @@ object Fairy {
                             OreIngredient("mirageFairyCrystal"),
                             relation.ingredient
                         ).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_from_item_$counter")
-                    )
-                    counter++
-
-                    // 召喚のワンド使用
-                    GameRegistry.findRegistry(IRecipe::class.java).register(
-                        ShapelessOreRecipe(
-                            ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_from_summoning_fairy_wand_$counter"),
-                            relation.itemStackFairy,
-                            OreIngredient("gemDiamond"),
-                            OreIngredient("mirageFairyCrystal"),
-                            relation.ingredient
-                        ).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_from_summoning_fairy_wand_$counter")
                     )
                     counter++
 
