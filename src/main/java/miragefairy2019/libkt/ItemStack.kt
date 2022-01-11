@@ -1,7 +1,10 @@
 package miragefairy2019.libkt
 
+import net.minecraft.block.Block
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.item.EntityItem
+import net.minecraft.init.Blocks
+import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.NonNullList
@@ -38,3 +41,6 @@ fun ItemStack.equalsItem(other: ItemStack) = item == other.item
 fun ItemStack.equalsItemDamage(other: ItemStack) = equalsItem(other) && itemDamage == other.itemDamage
 fun ItemStack.equalsItemDamageTag(other: ItemStack) = equalsItemDamage(other) && ItemStack.areItemStackShareTagsEqual(this, other)
 fun ItemStack.equalsItemDamageTagCount(other: ItemStack) = equalsItemDamageTag(other) && count == other.count
+
+val Item.block get() = Block.getBlockFromItem(this).takeIf { it != Blocks.AIR }
+val Block.item get() = Item.getItemFromBlock(this).takeIf { it != Items.AIR }
