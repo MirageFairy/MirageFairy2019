@@ -3,8 +3,10 @@ package miragefairy2019.mod3.playeraura
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IItemFairy
+import miragefairy2019.mod3.fairy.relation.FairySelector
+import miragefairy2019.mod3.fairy.relation.primaries
+import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.ManaSet
 import miragefairy2019.mod3.mana.api.IManaSet
@@ -56,18 +58,13 @@ class PlayerAuraManager : IPlayerAuraManager {
         if (item is IFoodAuraContainer) {
             return item.getFoodAura(itemStack).orElse(null) // カスタムフードオーラ
         } else {
-            // 妖精関係レジストリ―から、アイテムスタックに対して紐づけられた妖精列を得る
-            val listFairyRelation = ApiFairy.fairyRelationRegistry.ingredientFairyRelations.toList()
-                .filter { it.ingredient.test(itemStack) }
-                .filter { it.relevance >= 1 }
-            if (listFairyRelation.isEmpty()) return null // 関連付けられた妖精が居ない場合は無視
 
-            // 最も関連殿深い妖精の集合
-            val relevanceMax = listFairyRelation.map { it.relevance }.max()!!
-            val listFairyRelationMax = listFairyRelation.filter { it.relevance == relevanceMax }.mapNotNull { getFairyType(it.itemStackFairy) }
+            // アイテムスタックに紐づけられた妖精のリスト
+            val entries = FairySelector().itemStack(itemStack).allMatch().withoutPartiallyMatch.primaries
+            if (entries.isEmpty()) return null // 関連付けられた妖精が居ない場合は無視
 
             // 平均を返す
-            fun f(typeChooser: (IManaSet) -> Double) = listFairyRelationMax.map { typeChooser(it.manaSet) / it.cost * 50 * 0.5 }.average()
+            fun f(typeChooser: (IManaSet) -> Double) = entries.map { typeChooser(it.fairy.main.type.manaSet) / it.fairy.main.type.cost * 50 * 0.5 }.average()
             return ManaSet(f { it.shine }, f { it.fire }, f { it.wind }, f { it.gaia }, f { it.aqua }, f { it.dark })
         }
     }

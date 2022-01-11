@@ -6,7 +6,9 @@ import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.lib.WeightedRandom
-import miragefairy2019.mod3.fairy.FairyRelationRegistry
+import miragefairy2019.mod3.fairy.relation.FairySelector
+import miragefairy2019.mod3.fairy.relation.primaries
+import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.mana.api.EnumManaType
@@ -47,10 +49,13 @@ class ItemCrystalSword : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.clo
                     // 魔法成立
 
                     if (!extraItemDropRate > world.rand.nextDouble()) { // ステータスに基づいた確率で
+                        // エンティティに紐づけられた妖精のリスト
+                        val entries = FairySelector().entity(target).allMatch().withoutPartiallyMatch.primaries
+                        if (entries.isEmpty()) return // 関連付けられた妖精が居ない場合は無視
 
-                        val dropFairy = WeightedRandom.getRandomItem(world.rand, FairyRelationRegistry.entity
-                            .filter { relation -> relation.key(target) }
-                            .map { WeightedRandom.Item(it.fairy, it.relevance) }).orNull ?: return// ターゲットMOBに紐づいた妖精を抽選し
+                        // relevanceを重みとして抽選
+                        val dropFairy = WeightedRandom.getRandomItem(world.rand, entries
+                            .map { WeightedRandom.Item(it.fairy, it.relevance) }).orNull ?: return
 
                         // 効果成立
 

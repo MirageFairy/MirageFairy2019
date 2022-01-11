@@ -2,13 +2,12 @@ package miragefairy2019.modkt.modules.fairy
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.copy
+import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IItemFairy
-import miragefairy2019.mod.common.fairy.relation.FairyRelationRegistry
 import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod3.erg.api.EnumErgType
@@ -17,6 +16,8 @@ import miragefairy2019.mod3.fairy.ItemDebugFairyList
 import miragefairy2019.mod3.fairy.ItemFairy
 import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
 import miragefairy2019.mod3.fairy.loaderFairyLogDrop
+import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
+import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.mana.div
@@ -61,11 +62,6 @@ object Fairy {
 
         loaderFairyCrystalDrop(this)
         loaderFairyLogDrop(this)
-
-        // 妖精関係性レジストリ
-        onInstantiation {
-            ApiFairy.fairyRelationRegistry = FairyRelationRegistry()
-        }
 
         // 妖精クリエイティブタブ
         onInitCreativeTab {
@@ -197,23 +193,33 @@ object Fairy {
         // 確定レシピ
         onAddRecipe {
             var counter = 0
-            ApiFairy.fairyRelationRegistry.ingredientFairyRelations.forEach { relation ->
-                if (relation.relevance >= 1) {
 
-                    // 召喚のワンド使用
-                    GameRegistry.findRegistry(IRecipe::class.java).register(
-                        ShapelessOreRecipe(
-                            ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_from_item_$counter"),
-                            relation.itemStackFairy,
-                            OreIngredientComplex("mirageFairy2019CraftingToolFairyWandSummoning"),
-                            OreIngredient("mirageFairyCrystal"),
-                            relation.ingredient
-                        ).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_from_item_$counter")
-                    )
-                    counter++
+            // レシピに変換可能な妖精関係の関係性順のリスト
+            // この順序のまま登録すれば競合したレシピが関係性の強いものが優先して使われる
+            // ingredient, entry
+            val pairs = listOf(
+                FairyRelationRegistries.ingredient.entries.withoutPartiallyMatch.map { Pair(it.key, it) },
+                FairyRelationRegistries.item.entries.withoutPartiallyMatch.map { Pair(it.key.ingredient, it) },
+                FairyRelationRegistries.block.entries.withoutPartiallyMatch.mapNotNull { it.key.item?.ingredient?.let { ingredient -> Pair(ingredient, it) } }
+            ).flatten().sortedByDescending { it.second.relevance }
 
-                }
+            // 登録
+            pairs.forEach { (ingredient, entry) ->
+
+                // 召喚のワンド使用
+                GameRegistry.findRegistry(IRecipe::class.java).register(
+                    ShapelessOreRecipe(
+                        ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_from_item_$counter"),
+                        entry.fairy.main.createItemStack(),
+                        OreIngredientComplex("mirageFairy2019CraftingToolFairyWandSummoning"),
+                        OreIngredient("mirageFairyCrystal"),
+                        ingredient
+                    ).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_from_item_$counter")
+                )
+                counter++
+
             }
+
         }
 
         // 妖精一覧デバッグアイテム

@@ -19,6 +19,9 @@ import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
+import miragefairy2019.mod3.fairy.relation.FairySelector
+import miragefairy2019.mod3.fairy.relation.primaries
+import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod3.fairymaterials.FairyMaterials
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.pick.PickHandler
@@ -48,7 +51,6 @@ import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.NonNullList
-import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.EnumSkyBlock
@@ -105,17 +107,16 @@ fun getGrowRate(world: World, blockPos: BlockPos): Double {
         var bonus = 0.5
 
         // 妖精による判定
-        run {
-            val itemStack = blockState.block.getItem(world, blockPos, blockState)
-            val list: List<ResourceLocation> = ApiFairyRegistry.getFairyRelationRegistry().fairySelector()
-                .add(blockState)
-                .add(itemStack)
-                .select().toList()
-            val value = list
-                .mapNotNull { ApiFairyRegistry.getFairyRegistry().getFairy(it).orElse(null) }
-                .map { getGrowRateInFloor(it.fairyType) }
-                .max()
-            if (value != null) bonus = bonus.coerceAtLeast(value)
+        run noFairy@{
+
+            // 真下のブロックに紐づけられた妖精のリスト
+            val entries = FairySelector().blockState(blockState).allMatch().withoutPartiallyMatch.primaries
+            if (entries.isEmpty()) return@noFairy // 関連付けられた妖精が居ない場合は無視
+
+            // 最も大きな補正値
+            val growRateInFloor = entries.map { getGrowRateInFloor(it.fairy.main.type) }.max()!!
+
+            bonus = bonus.coerceAtLeast(growRateInFloor)
         }
 
         // 特定ブロックによる判定

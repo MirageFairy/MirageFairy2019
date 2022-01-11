@@ -1,6 +1,7 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.Module
+import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionCanRain
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionHasBiomeType
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionOverworld
@@ -34,7 +35,7 @@ val loaderFairyLogDrop: Module = {
             thunder(0.02) { overworld().canRain() }
 
             // バイオーム
-            FairyRelationRegistry.biomeType.forEach { relation ->
+            FairyRelationRegistries.biomeType.forEach { relation ->
                 relation.fairy(relation.relevance * relation.weight) { biome(relation.key) }
             }
 
