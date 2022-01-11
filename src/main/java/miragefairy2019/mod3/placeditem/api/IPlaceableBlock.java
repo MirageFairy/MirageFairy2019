@@ -11,10 +11,8 @@ import java.util.function.Supplier;
 public interface IPlaceableBlock {
 
     /**
-     * @param consumer
      * @param supplier 手に持っているアイテムをスプリットして新しいItemStackインスタンスで返す。
      *                 ただし何も持っていない場合はItemStack.EMPTYをcopyして返す。
-     * @return
      */
     public boolean doPlaceAction(EntityPlayer player, World world, BlockPos blockPos, Consumer<ItemStack> consumer, Supplier<ItemStack> supplier);
 
