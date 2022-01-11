@@ -166,12 +166,14 @@ fun getGrowRateTableMessage() = textComponent {
 }
 
 fun getGrowRateMessage(world: World, pos: BlockPos) = textComponent {
-    !"===== Mirage Flower Grow Rate =====\n"
-    !"Pos: ${pos.x} ${pos.y} ${pos.z}\n"
-    !"Block: ${world.getBlockState(pos)}\n"
-    !"Floor: ${world.getBlockState(pos.down())}\n"
-    format("%.2f%%\n", getGrowRate(world, pos) * 100)
-    !"===================="
+    listOf(
+        !"===== Mirage Flower Grow Rate =====\n",
+        !"Pos: ${pos.x} ${pos.y} ${pos.z}\n",
+        !"Block: ${world.getBlockState(pos)}\n",
+        !"Floor: ${world.getBlockState(pos.down())}\n",
+        format("%.2f%%\n", getGrowRate(world, pos) * 100),
+        !"===================="
+    ).flatten()
 }
 
 
