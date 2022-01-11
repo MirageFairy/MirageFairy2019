@@ -6,7 +6,7 @@ import miragefairy2019.mod.modules.ore.Ore
 import miragefairy2019.mod.modules.oreseed.OreSeed
 import miragefairy2019.mod3.artifacts.Artifacts
 import miragefairy2019.mod3.damagesource.DamageSource
-import miragefairy2019.mod3.fairy.FairyRelation
+import miragefairy2019.mod3.fairy.relation.FairyRelation
 import miragefairy2019.mod3.fairymaterials.FairyMaterials
 import miragefairy2019.mod3.fairystick.FairyStick
 import miragefairy2019.mod3.main.Main

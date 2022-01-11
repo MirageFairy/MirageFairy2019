@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.fairy
+package miragefairy2019.mod3.fairy.relation
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.mod.api.fairy.ApiFairy
