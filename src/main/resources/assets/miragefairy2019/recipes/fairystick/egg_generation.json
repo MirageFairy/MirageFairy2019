@@ -7,10 +7,6 @@
 			"ore": "mirageFairy2019FairyStick"
 		},
 		{
-			"type": "forge:ore_dict",
-			"ore": "mirageFairyCrystal"
-		},
-		{
 			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019FairyChickenRank1"
 		}
