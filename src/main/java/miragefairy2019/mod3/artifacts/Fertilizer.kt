@@ -6,9 +6,13 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod3.main.api.ApiMain
+import net.minecraft.block.BlockDispenser
+import net.minecraft.dispenser.IBlockSource
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Bootstrap.BehaviorDispenseOptional
 import net.minecraft.item.Item
 import net.minecraft.item.ItemDye
+import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
@@ -22,6 +26,24 @@ object Fertilizer {
             setUnlocalizedName("fertilizer")
             setCreativeTab { ApiMain.creativeTab }
             setCustomModelResourceLocation()
+            onInit {
+                BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(item, object : BehaviorDispenseOptional() {
+                    override fun dispenseStack(blockSource: IBlockSource, itemStack: ItemStack): ItemStack {
+                        val world = blockSource.world
+                        val blockPos = blockSource.blockPos.offset(blockSource.blockState.getValue(BlockDispenser.FACING) as EnumFacing)
+
+                        // 実行
+                        val result = ItemDye.applyBonemeal(itemStack, world, blockPos)
+                        successful = result
+                        if (!result) return itemStack
+
+                        // エフェクト
+                        if (!world.isRemote) world.playEvent(2005, blockPos, 0)
+
+                        return itemStack
+                    }
+                })
+            }
         }
     }
 }
