@@ -1,13 +1,21 @@
 package miragefairy2019.mod3.fairy
 
+import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.copy
+import miragefairy2019.libkt.item
+import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.playeraura.api.IFoodAuraContainer
 import miragefairy2019.modkt.impl.fairy.erg
+import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.client.renderer.color.IItemColor
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.init.Items
@@ -20,13 +28,65 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
+import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.ForgeHooks
 import net.minecraftforge.common.util.Constants
+import net.minecraftforge.fml.common.registry.ForgeRegistries
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.registries.IForgeRegistryEntry
 import java.util.Optional
 import java.util.function.Predicate
 
-lateinit var itemBakedFairy: () -> ItemBakedFairy
+object BakedFairy {
+    lateinit var itemBakedFairy: () -> ItemBakedFairy
+    val module: Module = {
+
+        // 焼き妖精
+        itemBakedFairy = item({ ItemBakedFairy() }, "baked_fairy") {
+            setUnlocalizedName("bakedFairy")
+            setCreativeTab { ApiMain.creativeTab }
+            modInitializer.onRegisterItem {
+                if (ApiMain.side.isClient) {
+                    ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation(item.registryName!!, "normal"))
+                }
+            }
+        }
+
+        // 焼き妖精のカスタム色
+        onRegisterItemColorHandler {
+            object {
+                @SideOnly(Side.CLIENT)
+                fun run() {
+                    @SideOnly(Side.CLIENT)
+                    class ItemColorImpl : IItemColor {
+                        override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
+                            val fairyItemStack = (ItemBakedFairy.getFairy(itemStack) ?: return 0xFFFFFF)
+                            val variant = Fairy.listItemFairy[0].getVariant(fairyItemStack).orElse(null) ?: return 0xFFFFFF
+                            return when (tintIndex) {
+                                0 -> 0xFFFFFF
+                                1 -> variant.colorSet.skin
+                                2 -> 0xFFFFFF
+                                3 -> variant.colorSet.dark
+                                4 -> variant.colorSet.bright
+                                5 -> variant.colorSet.hair
+                                6 -> 0xFFFFFF
+                                else -> 0xFFFFFF
+                            }
+                        }
+                    }
+                    Minecraft.getMinecraft().itemColors.registerItemColorHandler(ItemColorImpl(), itemBakedFairy())
+                }
+            }.run()
+        }
+
+        // 焼き妖精レシピ
+        onAddRecipe {
+            ForgeRegistries.RECIPES.register(RecipeFairyBaking())
+        }
+
+    }
+}
 
 class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraContainer {
     companion object {
@@ -127,7 +187,7 @@ class RecipeFairyBaking : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 
     override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack {
         val result = match(inventoryCrafting) ?: return ItemStack.EMPTY
-        val itemStackBakedFairy = ItemStack(itemBakedFairy())
+        val itemStackBakedFairy = ItemStack(BakedFairy.itemBakedFairy())
         ItemBakedFairy.setFairy(itemStackBakedFairy, result.itemStackFairy.copy(1))
         return itemStackBakedFairy
     }

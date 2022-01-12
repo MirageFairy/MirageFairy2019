@@ -209,49 +209,6 @@ object Fairy {
             }
         }
 
-        // 焼き妖精
-        itemBakedFairy = item({ ItemBakedFairy() }, "baked_fairy") {
-            setUnlocalizedName("bakedFairy")
-            setCreativeTab { ApiMain.creativeTab }
-            modInitializer.onRegisterItem {
-                if (side.isClient) {
-                    ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation(item.registryName!!, "normal"))
-                }
-            }
-        }
-
-        // 焼き妖精のカスタム色
-        onRegisterItemColorHandler {
-            object {
-                @SideOnly(Side.CLIENT)
-                fun run() {
-                    @SideOnly(Side.CLIENT)
-                    class ItemColorImpl : IItemColor {
-                        override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
-                            val fairyItemStack = (ItemBakedFairy.getFairy(itemStack) ?: return 0xFFFFFF)
-                            val variant = listItemFairy[0].getVariant(fairyItemStack).orElse(null) ?: return 0xFFFFFF
-                            return when (tintIndex) {
-                                0 -> 0xFFFFFF
-                                1 -> variant.colorSet.skin
-                                2 -> 0xFFFFFF
-                                3 -> variant.colorSet.dark
-                                4 -> variant.colorSet.bright
-                                5 -> variant.colorSet.hair
-                                6 -> 0xFFFFFF
-                                else -> 0xFFFFFF
-                            }
-                        }
-                    }
-                    Minecraft.getMinecraft().itemColors.registerItemColorHandler(ItemColorImpl(), itemBakedFairy())
-                }
-            }.run()
-        }
-
-        // 焼き妖精レシピ
-        onAddRecipe {
-            ForgeRegistries.RECIPES.register(RecipeFairyBaking())
-        }
-
     }
 }
 
