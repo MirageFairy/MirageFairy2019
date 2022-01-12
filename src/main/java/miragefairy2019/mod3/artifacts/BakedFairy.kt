@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.fairy
+package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.copy
@@ -9,6 +9,9 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.fairy.Fairy
+import miragefairy2019.mod3.fairy.FairyTypes
+import miragefairy2019.mod3.fairy.fairyType
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.playeraura.api.IFoodAuraContainer
