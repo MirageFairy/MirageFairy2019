@@ -67,7 +67,7 @@ object Fairy {
         onInitCreativeTab {
             creativeTab = object : CreativeTabs("mirageFairy2019.fairy") {
                 @SideOnly(Side.CLIENT)
-                override fun getTabIconItem() = FairyTypes.instance.magentaglazedterracotta.main.createItemStack()
+                override fun getTabIconItem() = FairyTypes.instance.magentaGlazedTerracotta.main.createItemStack()
 
                 @SideOnly(Side.CLIENT)
                 override fun displayAllRelevantItems(itemStacks: NonNullList<ItemStack>) {
@@ -308,7 +308,7 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraContainer {
     override fun getSubItems(tab: CreativeTabs, items: NonNullList<ItemStack>) {
         if (!isInCreativeTab(tab)) return
         val itemStack = ItemStack(this)
-        setFairy(itemStack, FairyTypes.instance.magentaglazedterracotta.main.createItemStack())
+        setFairy(itemStack, FairyTypes.instance.magentaGlazedTerracotta.main.createItemStack())
         items += itemStack
     }
 

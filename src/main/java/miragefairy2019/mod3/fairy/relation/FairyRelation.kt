@@ -125,13 +125,13 @@ object FairyRelation {
         // 滅多に会えないエンティティ
         fairy { creeper }.register(weight = 10.0) { entity<EntityCreeper>() }
         fairy { slime }.register(weight = 10.0) { entity<EntitySlime>() }
-        fairy { magmacube }.register(relevance = 2.0 /* スライムのサブクラスのため */, weight = 10.0) { entity<EntityMagmaCube>() }
-        fairy { witherskeleton }.register(weight = 10.0) { entity<EntityWitherSkeleton>() }
+        fairy { magmaCube }.register(relevance = 2.0 /* スライムのサブクラスのため */, weight = 10.0) { entity<EntityMagmaCube>() }
+        fairy { witherSkeleton }.register(weight = 10.0) { entity<EntityWitherSkeleton>() }
         fairy { shulker }.register(weight = 10.0) { entity<EntityShulker>() }
         fairy { wither }.register(weight = 10.0) { entity<EntityWither>() }
 
         // 滅多に地上に降りてこないエンティティ
-        fairy { enderdragon }.register(weight = 20.0) { entity<EntityDragon>() }
+        fairy { enderDragon }.register(weight = 20.0) { entity<EntityDragon>() }
 
 
         // アイテム・ブロック
@@ -167,7 +167,7 @@ object FairyRelation {
         fairy { obsidian }.register { block({ Blocks.OBSIDIAN }) }
         fairy { obsidian }.register { ore("obsidian") }
         fairy { ice }.register { block({ Blocks.ICE }) }
-        fairy { packedice }.register { block({ Blocks.PACKED_ICE }) }
+        fairy { packedIce }.register { block({ Blocks.PACKED_ICE }) }
         fairy { diamond }.register { block({ Blocks.DIAMOND_BLOCK }) }
         fairy { diamond }.register { material("Diamond") }
         fairy { lapislazuli }.register { block({ Blocks.LAPIS_BLOCK }) }
@@ -197,10 +197,10 @@ object FairyRelation {
         fairy { glass }.register { material("Glass") }
 
         // 動物
-        fairy { rottenflesh }.register { item({ Items.ROTTEN_FLESH }) }
-        fairy { netherstar }.register { item({ Items.NETHER_STAR }) }
-        fairy { spidereye }.register { item({ Items.SPIDER_EYE }) }
-        fairy { rawrabbit }.register { item({ Items.RABBIT }) }
+        fairy { rottenFlesh }.register { item({ Items.ROTTEN_FLESH }) }
+        fairy { netherStar }.register { item({ Items.NETHER_STAR }) }
+        fairy { spiderEye }.register { item({ Items.SPIDER_EYE }) }
+        fairy { rawRabbit }.register { item({ Items.RABBIT }) }
         fairy { fish }.register { item({ Items.FISH }) }
         fairy { cod }.register(relevance = 2.0) { ingredient({ Ingredient.fromStacks(ItemStack(Items.FISH, 1, 0)) }) }
         fairy { salmon }.register(relevance = 2.0) { ingredient({ Ingredient.fromStacks(ItemStack(Items.FISH, 1, 1)) }) }
@@ -208,7 +208,7 @@ object FairyRelation {
         fairy { clownfish }.register(relevance = 2.0) { ingredient({ Ingredient.fromStacks(ItemStack(Items.FISH, 1, 2)) }) }
 
         // 植物
-        fairy { chorusfruit }.register { item({ Items.CHORUS_FRUIT }) }
+        fairy { chorusFruit }.register { item({ Items.CHORUS_FRUIT }) }
         fairy { wheat }.register { block({ Blocks.WHEAT }) }
         fairy { wheat }.register(relevance = 0.5) { block({ Blocks.HAY_BLOCK }) }
         fairy { wheat }.register { item({ Items.WHEAT }) }
@@ -223,7 +223,7 @@ object FairyRelation {
         fairy { carrot }.register { block({ Blocks.CARROTS }) }
         fairy { carrot }.register { item({ Items.CARROT }) }
         fairy { carrot }.register(relevance = 0.5) { item({ Items.CARROT_ON_A_STICK }, { Items.GOLDEN_CARROT }) }
-        fairy { poisonouspotato }.register { item({ Items.POISONOUS_POTATO }) }
+        fairy { poisonousPotato }.register { item({ Items.POISONOUS_POTATO }) }
         fairy { beetroot }.register { block({ Blocks.BEETROOTS }) }
         fairy { beetroot }.register { item({ Items.BEETROOT }) }
         fairy { cactus }.register { block({ Blocks.CACTUS }) }
@@ -241,22 +241,22 @@ object FairyRelation {
                 { Ingredient.fromStacks(ItemStack(Blocks.SAPLING, 1, 1)) }
             )
         }
-        fairy { mirageflower }.register { block({ MirageFlower.blockMirageFlower() }) }
+        fairy { mirageFlower }.register { block({ MirageFlower.blockMirageFlower() }) }
 
         // 料理
         fairy { bread }.register { item({ Items.BREAD }) }
         fairy { cookie }.register { item({ Items.COOKIE }) }
         fairy { cake }.register { block({ Blocks.CAKE }) }
         fairy { cake }.register { item({ Items.CAKE }) }
-        fairy { bakedpotato }.register { item({ Items.BAKED_POTATO }) }
-        fairy { cookedchicken }.register { item({ Items.COOKED_CHICKEN }) }
-        fairy { cookedsalmon }.register { ingredient({ Ingredient.fromStacks(ItemStack(Items.COOKED_FISH, 1, 1)) }) }
+        fairy { bakedPotato }.register { item({ Items.BAKED_POTATO }) }
+        fairy { cookedChicken }.register { item({ Items.COOKED_CHICKEN }) }
+        fairy { cookedSalmon }.register { ingredient({ Ingredient.fromStacks(ItemStack(Items.COOKED_FISH, 1, 1)) }) }
         fairy { steak }.register { item({ Items.COOKED_BEEF }) }
-        fairy { pumpkinpie }.register { item({ Items.PUMPKIN_PIE }) }
-        fairy { beetrootsoup }.register { item({ Items.BEETROOT_SOUP }) }
-        fairy { mushroomstew }.register { item({ Items.MUSHROOM_STEW }) }
-        fairy { goldenapple }.register { ingredient({ Ingredient.fromStacks(ItemStack(Items.GOLDEN_APPLE, 1, 0)) }) }
-        fairy { enchantedgoldenapple }.register { ingredient({ Ingredient.fromStacks(ItemStack(Items.GOLDEN_APPLE, 1, 1)) }) }
+        fairy { pumpkinPie }.register { item({ Items.PUMPKIN_PIE }) }
+        fairy { beetrootSoup }.register { item({ Items.BEETROOT_SOUP }) }
+        fairy { mushroomStew }.register { item({ Items.MUSHROOM_STEW }) }
+        fairy { goldenApple }.register { ingredient({ Ingredient.fromStacks(ItemStack(Items.GOLDEN_APPLE, 1, 0)) }) }
+        fairy { enchantedGoldenApple }.register { ingredient({ Ingredient.fromStacks(ItemStack(Items.GOLDEN_APPLE, 1, 1)) }) }
 
         // 素材
         fairy { sugar }.register { item({ Items.SUGAR }) }
@@ -269,23 +269,23 @@ object FairyRelation {
         fairy { torch }.register { block({ Blocks.TORCH }) }
         fairy { door }.register { block({ Blocks.OAK_DOOR }, { Blocks.SPRUCE_DOOR }, { Blocks.BIRCH_DOOR }, { Blocks.JUNGLE_DOOR }, { Blocks.ACACIA_DOOR }, { Blocks.DARK_OAK_DOOR }) }
         fairy { door }.register { item({ Items.OAK_DOOR }, { Items.SPRUCE_DOOR }, { Items.BIRCH_DOOR }, { Items.JUNGLE_DOOR }, { Items.ACACIA_DOOR }, { Items.DARK_OAK_DOOR }) }
-        fairy { irondoor }.register { block({ Blocks.IRON_DOOR }) }
-        fairy { irondoor }.register { item({ Items.IRON_DOOR }) }
-        fairy { ironbars }.register { block({ Blocks.IRON_BARS }) }
+        fairy { ironDoor }.register { block({ Blocks.IRON_DOOR }) }
+        fairy { ironDoor }.register { item({ Items.IRON_DOOR }) }
+        fairy { ironBars }.register { block({ Blocks.IRON_BARS }) }
         fairy { chest }.register { block({ Blocks.CHEST }) }
         fairy { hopper }.register { block({ Blocks.HOPPER }) }
-        fairy { craftingtable }.register { block({ Blocks.CRAFTING_TABLE }) }
+        fairy { craftingTable }.register { block({ Blocks.CRAFTING_TABLE }) }
         fairy { furnace }.register { block({ Blocks.FURNACE }) }
         fairy { anvil }.register { block({ Blocks.ANVIL }) }
-        fairy { brewingstand }.register { block({ Blocks.BREWING_STAND }) }
-        fairy { brewingstand }.register { item({ Items.BREWING_STAND }) }
-        fairy { redstonerepeater }.register { block({ Blocks.UNPOWERED_REPEATER }, { Blocks.POWERED_REPEATER }) }
-        fairy { redstonerepeater }.register { item({ Items.REPEATER }) }
-        fairy { redstonecomparator }.register { block({ Blocks.UNPOWERED_COMPARATOR }, { Blocks.POWERED_COMPARATOR }) }
-        fairy { redstonecomparator }.register { item({ Items.COMPARATOR }) }
+        fairy { brewingStand }.register { block({ Blocks.BREWING_STAND }) }
+        fairy { brewingStand }.register { item({ Items.BREWING_STAND }) }
+        fairy { redstoneRepeater }.register { block({ Blocks.UNPOWERED_REPEATER }, { Blocks.POWERED_REPEATER }) }
+        fairy { redstoneRepeater }.register { item({ Items.REPEATER }) }
+        fairy { redstoneComparator }.register { block({ Blocks.UNPOWERED_COMPARATOR }, { Blocks.POWERED_COMPARATOR }) }
+        fairy { redstoneComparator }.register { item({ Items.COMPARATOR }) }
         fairy { dispenser }.register { block({ Blocks.DISPENSER }) }
-        fairy { activatorrail }.register { block({ Blocks.ACTIVATOR_RAIL }) }
-        fairy { magentaglazedterracotta }.register { block({ Blocks.MAGENTA_GLAZED_TERRACOTTA }) }
+        fairy { activatorRail }.register { block({ Blocks.ACTIVATOR_RAIL }) }
+        fairy { magentaGlazedTerracotta }.register { block({ Blocks.MAGENTA_GLAZED_TERRACOTTA }) }
 
         // ツール
         fairy { axe }.register { item({ Items.WOODEN_AXE }, { Items.STONE_AXE }, { Items.IRON_AXE }, { Items.GOLDEN_AXE }, { Items.DIAMOND_AXE }) }

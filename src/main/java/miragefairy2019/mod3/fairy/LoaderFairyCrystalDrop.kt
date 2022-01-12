@@ -97,7 +97,7 @@ val loaderFairyCrystalDrop: Module = {
             FairyTypes.instance.villager().overworld()
             FairyTypes.instance.cow().overworld()
             FairyTypes.instance.pig().overworld()
-            FairyTypes.instance.spidereye().overworld()
+            FairyTypes.instance.spiderEye().overworld()
             FairyTypes.instance.slime().overworld()
 
             FairyTypes.instance.wheat().overworld()
@@ -107,10 +107,10 @@ val loaderFairyCrystalDrop: Module = {
             FairyTypes.instance.cactus().overworld()
             FairyTypes.instance.spruce().overworld()
             FairyTypes.instance.seed().overworld()
-            FairyTypes.instance.poisonouspotato().overworld()
+            FairyTypes.instance.poisonousPotato().overworld()
             FairyTypes.instance.melon().overworld()
             FairyTypes.instance.beetroot().overworld()
-            FairyTypes.instance.mirageflower().overworld()
+            FairyTypes.instance.mirageFlower().overworld()
 
 
             // ネザー
@@ -119,15 +119,15 @@ val loaderFairyCrystalDrop: Module = {
 
             FairyTypes.instance.glowstone().nether()
 
-            FairyTypes.instance.magmacube().nether()
+            FairyTypes.instance.magmaCube().nether()
             FairyTypes.instance.blaze().nether()
 
 
             // エンド
             FairyTypes.instance.enderman().end()
-            FairyTypes.instance.enderdragon().end()
+            FairyTypes.instance.enderDragon().end()
             FairyTypes.instance.shulker().end()
-            FairyTypes.instance.chorusfruit().end()
+            FairyTypes.instance.chorusFruit().end()
 
         }
 
