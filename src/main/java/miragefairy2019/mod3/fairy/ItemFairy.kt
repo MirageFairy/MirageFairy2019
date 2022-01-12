@@ -1,7 +1,6 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.TextComponentBuilder
-import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
 import miragefairy2019.libkt.orNull
