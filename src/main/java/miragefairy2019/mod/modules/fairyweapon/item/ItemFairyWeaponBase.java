@@ -196,12 +196,9 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         Tuple<ItemStack, IFairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player)
                 .flatMap(p -> findFairy(itemStack, p))
                 .orElseGet(() -> Tuple.of(ItemStack.EMPTY, ApiFairy.empty()));
-        tooltip.add(new TextComponentString("Magic: ")
+        tooltip.add(new TextComponentString("Magic with ")
                 .setStyle(new Style().setColor(BLUE))
-                .appendSibling(getFairyMagicDisplayName(itemStack)
-                        .setStyle(new Style().setColor(AQUA).setBold(true)))
-                .appendText(" with ")
-                .appendSibling(new TextComponentString(fairy.x.isEmpty() ? "no fairy" : fairy.x.getDisplayName())
+                .appendSibling(new TextComponentString(fairy.x.isEmpty() ? "" : fairy.x.getDisplayName())
                         .setStyle(new Style().setColor(WHITE)))
                 .getFormattedText());
         addInformationFairyWeapon(itemStack, fairy.x, fairy.y, world, tooltip, flag);
@@ -254,22 +251,6 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
 
         addInformationMagicStatuses(itemStackFairyWeapon, itemStackFairy, fairyType, world, tooltip, flag);
 
-    }
-
-    @Override
-    public ITextComponent getFairyMagicDisplayName(ItemStack itemStack) {
-        String magicName;
-        if (UtilsMinecraft.canTranslate(getUnlocalizedName() + ".magic.name")) {
-            String string = UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".magic.name");
-            if (!string.isEmpty()) {
-                magicName = string;
-            } else {
-                magicName = getItemStackDisplayName(itemStack);
-            }
-        } else {
-            magicName = getItemStackDisplayName(itemStack);
-        }
-        return new TextComponentString(magicName);
     }
 
     //

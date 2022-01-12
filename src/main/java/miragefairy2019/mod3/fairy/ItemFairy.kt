@@ -168,9 +168,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
                 val item = itemStackFairyWeapon.item as? IItemFairyWeapon ?: return
                 tooltip {
                     text {
-                        text("Magic: ")
-                        text(item.getFairyMagicDisplayName(itemStackFairyWeapon)).color(AQUA).bold()
-                        text(" of ")
+                        text("Magic of ")
                         text(TextComponentString(itemStackFairyWeapon.displayName)).color(WHITE)
                     }.color(BLUE)
                 }
