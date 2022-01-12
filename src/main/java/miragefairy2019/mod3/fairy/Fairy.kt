@@ -3,6 +3,7 @@ package miragefairy2019.mod3.fairy
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
@@ -212,4 +213,4 @@ object Fairy {
     }
 }
 
-val ItemStack.fairyType get() = (item as? IItemFairy)?.getMirageFairy2019Fairy(this)?.orElse(null) // TODO 移動
+val ItemStack.fairyType get() = (item as? IItemFairy)?.getMirageFairy2019Fairy(this)?.orNull // TODO 移動
