@@ -13,10 +13,13 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 val ItemStack.orNull get() = takeIf { !it.isEmpty }
+val ItemStack?.orEmpty get() = this ?: ItemStack.EMPTY
 
 fun ItemStack.copy(count: Int): ItemStack = copy().also { it.count = count }
 
 fun Item.getSubItems(creativeTab: CreativeTabs): List<ItemStack> = NonNullList.create<ItemStack>().also { getSubItems(creativeTab, it) }
+
+val ItemStack.containerItem get() = if (item.hasContainerItem(this)) item.getContainerItem(this).orNull else null
 
 /**
  * @receiver このインスタンスはメソッド内部でcopyされるため、破壊されません。
