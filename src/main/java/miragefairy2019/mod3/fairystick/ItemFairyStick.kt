@@ -19,11 +19,6 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
 class ItemFairyStick : Item() {
-    init {
-        setMaxStackSize(1)
-    }
-
-
     @SideOnly(Side.CLIENT)
     override fun isFull3D() = true
 
