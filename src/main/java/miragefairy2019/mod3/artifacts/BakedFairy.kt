@@ -4,19 +4,17 @@ import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
-import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.Fairy
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.fairyType
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.playeraura.api.IFoodAuraContainer
-import miragefairy2019.modkt.impl.fairy.erg
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.color.IItemColor
@@ -27,7 +25,6 @@ import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.ItemFood
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.IRecipe
-import net.minecraft.item.crafting.Ingredient
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
@@ -124,7 +121,7 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraContainer {
     }
 
 
-    override fun getHealAmount(itemStack: ItemStack) = 1 + (getFairy(itemStack)?.fairyType?.let { it.erg(EnumErgType.LIFE).toInt() / 4 } ?: 0)
+    override fun getHealAmount(itemStack: ItemStack) = 2
     override fun getSaturationModifier(itemStack: ItemStack) = getHealAmount(itemStack) * 0.1f
     override fun getMaxItemUseDuration(itemStack: ItemStack) = 16
     override fun onItemUseFinish(itemStack: ItemStack, world: World, entity: EntityLivingBase): ItemStack {
@@ -169,9 +166,8 @@ class RecipeFairyBaking : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         fun find(predicate: Predicate<ItemStack>) = find { predicate.test(it) }
 
         // 探索
-        val itemStackWand = find(OreIngredientComplex("mirageFairy2019CraftingToolFairyWandMelting")) ?: return null // 紅蓮杖
+        val itemStackWand = find("torch".oreIngredient) ?: return null // 松明
         val itemStackFairy = find { it.item == Fairy.listItemFairy[0] } ?: return null // 妖精
-        find(Ingredient.fromItem(Items.SUGAR)) ?: return null // 砂糖
         find(Items.BOWL.ingredient) ?: return null // ボウル
 
         // 余りがあってはならない
