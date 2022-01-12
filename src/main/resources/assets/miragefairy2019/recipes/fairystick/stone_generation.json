@@ -4,7 +4,7 @@
 	"ingredients": [
 		{
 			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019FairyStick"
+			"ore": "mirageFairyStick"
 		},
 		{
 			"type": "miragefairy2019:ore_dict_complex",

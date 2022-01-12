@@ -166,7 +166,7 @@ object Sphere {
 
                     // 妖精のステッキレシピ
                     ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().apply {
-                        conditions.add(FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019FairyStick")))
+                        conditions.add(FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick")))
                         conditions.add(FairyStickCraftConditionConsumeBlock { ApiOre.blockFluidMiragiumWater.defaultState })
                         conditions.add(FairyStickCraftConditionConsumeItem(OreIngredient("gemFluorite")))
                         conditions.add(FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}")))
@@ -193,7 +193,7 @@ object Sphere {
 
                     // 妖精のステッキレシピ
                     ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().apply {
-                        conditions.add(FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019FairyStick")))
+                        conditions.add(FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick")))
                         conditions.add(FairyStickCraftConditionConsumeBlock { ApiOre.blockFluidMiragiumWater.defaultState })
                         conditions.add(FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}")))
                         conditions.add(FairyStickCraftConditionConsumeItem(ingredient))

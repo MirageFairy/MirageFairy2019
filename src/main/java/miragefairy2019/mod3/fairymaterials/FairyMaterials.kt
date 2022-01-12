@@ -55,7 +55,7 @@ object FairyMaterials {
 
             // ガラス棒＋クォーツ→クォーツ棒
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019FairyStick"))
+                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
                 it.conditions += FairyStickCraftConditionConsumeBlock { ApiOre.blockFluidMirageFlowerExtract.defaultState }
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019ManaRodGlass"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("gemQuartz"), 16)
@@ -64,7 +64,7 @@ object FairyMaterials {
 
             // ミラ葉＋骨＋燐灰石→ミラ茎
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019FairyStick"))
+                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
                 it.conditions += FairyStickCraftConditionConsumeBlock { ApiOre.blockFluidMiragiumWater.defaultState }
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("leafMirageFlower"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("bone"))
