@@ -2,6 +2,7 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.copy
+import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
@@ -171,7 +172,7 @@ class RecipeFairyBaking : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         val itemStackWand = find(OreIngredientComplex("mirageFairy2019CraftingToolFairyWandMelting")) ?: return null // 紅蓮杖
         val itemStackFairy = find { it.item == Fairy.listItemFairy[0] } ?: return null // 妖精
         find(Ingredient.fromItem(Items.SUGAR)) ?: return null // 砂糖
-        find(Ingredient.fromItem(Items.BOWL)) ?: return null // ボウル
+        find(Items.BOWL.ingredient) ?: return null // ボウル
 
         // 余りがあってはならない
         repeat(inventoryCrafting.sizeInventory) { i ->
