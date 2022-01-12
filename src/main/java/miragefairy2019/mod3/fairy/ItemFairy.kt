@@ -58,7 +58,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
         // 番号　MOD名
         if (flag.isAdvanced) {
             tooltip {
-                text("No: ${variant.id} (${variant.type.breed?.resourceDomain ?: "unknown"})").color(GREEN)
+                text("No: ${variant.id} (${variant.type.motif?.resourceDomain ?: "unknown"})").color(GREEN)
             }
         }
 
@@ -75,7 +75,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
                 else -> LIGHT_PURPLE
             }
 
-            text("Type: ")
+            text("Motif: ")
             text(UtilsString.repeat("★", variant.rare)).color(GOLD)
             if (flag.isAdvanced) {
                 text(UtilsString.repeat("★", variant.rank - 1)).color(getRankColor(variant))
@@ -84,7 +84,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
             }
             if (flag.isAdvanced) text(" Rare.${variant.rare}").color(GOLD)
             if (flag.isAdvanced) text(" Rank.${variant.rank}").color(getRankColor(variant))
-            text(" ${variant.type.breed?.resourcePath ?: "unknown"}").color(WHITE)
+            text(" ${variant.type.motif?.resourcePath ?: "unknown"}").color(WHITE)
         }
 
         // マナ

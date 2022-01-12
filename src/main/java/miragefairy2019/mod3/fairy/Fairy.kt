@@ -145,7 +145,7 @@ object Fairy {
                 listItemFairy.forEachIndexed { i, _ ->
 
                     // 品種別
-                    OreDictionary.registerOre("mirageFairy2019Fairy${UtilsString.toUpperCaseHead(variant.y[i].type.breed!!.resourcePath)}Rank${i + 1}", variant.y[i].createItemStack())
+                    OreDictionary.registerOre("mirageFairy2019Fairy${UtilsString.toUpperCaseHead(variant.y[i].type.motif!!.resourcePath)}Rank${i + 1}", variant.y[i].createItemStack())
 
                     // エルグ別
                     variant.y[i].type.ergSet.entries.forEach {
@@ -165,8 +165,8 @@ object Fairy {
 
                     // 凝縮
                     GameRegistry.addShapelessRecipe(
-                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.y[i].type.breed!!.resourcePath}"),
-                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.y[i].type.breed!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.y[i].type.motif!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.y[i].type.motif!!.resourcePath}"),
                         variant.y[i + 1].createItemStack(),
                         Ingredient.fromStacks(variant.y[i].createItemStack()),
                         Ingredient.fromStacks(variant.y[i].createItemStack()),
@@ -180,8 +180,8 @@ object Fairy {
 
                     // 分解
                     GameRegistry.addShapelessRecipe(
-                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.y[i].type.breed!!.resourcePath}"),
-                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.y[i].type.breed!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.y[i].type.motif!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.y[i].type.motif!!.resourcePath}"),
                         variant.y[i].createItemStack(8),
                         Ingredient.fromStacks(variant.y[i + 1].createItemStack())
                     )

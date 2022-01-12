@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 
 class FairyType(
-    private val breed: ResourceLocation?,
+    private val motif: ResourceLocation?,
     private val displayName: ITextComponent,
     private val color: Int,
     private val cost: Double,
@@ -21,7 +21,7 @@ class FairyType(
     private val ergSet: IErgSet
 ) : IFairyType {
     override fun isEmpty() = false
-    override fun getBreed() = breed
+    override fun getMotif() = motif
     override fun getDisplayName() = displayName
     override fun getColor() = color
     override fun getCost() = cost
@@ -31,7 +31,7 @@ class FairyType(
 
 class FairyTypeEmpty : IFairyType {
     override fun isEmpty() = true
-    override fun getBreed(): ResourceLocation? = null
+    override fun getMotif(): ResourceLocation? = null
     override fun getDisplayName() = buildText { text("Empty") }
     override fun getColor() = 0xFFFFFF
     override fun getCost() = 50.0
@@ -41,7 +41,7 @@ class FairyTypeEmpty : IFairyType {
 
 open class FairyTypeAdapter(internal val parent: IFairyType) : IFairyType {
     override fun isEmpty() = parent.isEmpty
-    override fun getBreed() = parent.breed
+    override fun getMotif() = parent.motif
     override fun getDisplayName(): ITextComponent = parent.displayName
     override fun getColor() = parent.color
     override fun getCost() = parent.cost

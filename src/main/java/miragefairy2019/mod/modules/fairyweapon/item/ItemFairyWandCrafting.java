@@ -32,7 +32,7 @@ public class ItemFairyWandCrafting extends ItemFairyWeaponCraftingTool {
         {
             ItemStack itemStackFairy = getCombinedFairy(player.getHeldItem(hand));
             if (getFairy(itemStackFairy).isPresent()) {
-                if (Objects.equals(getFairy(itemStackFairy).get().getBreed(), new ResourceLocation(ModMirageFairy2019.MODID, "mina"))) {
+                if (Objects.equals(getFairy(itemStackFairy).get().getMotif(), new ResourceLocation(ModMirageFairy2019.MODID, "mina"))) {
                     break a;
                 }
             }

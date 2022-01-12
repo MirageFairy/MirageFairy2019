@@ -66,7 +66,7 @@ val <T> IMagicStatusFunction<T>.factors
                 }
 
                 override fun isEmpty() = throw UnsupportedOperationException()
-                override fun getBreed() = throw UnsupportedOperationException()
+                override fun getMotif() = throw UnsupportedOperationException()
                 override fun getDisplayName() = throw UnsupportedOperationException()
                 override fun getColor() = throw UnsupportedOperationException()
                 override fun getCost() = add(buildText { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) }) // TODO 色変更

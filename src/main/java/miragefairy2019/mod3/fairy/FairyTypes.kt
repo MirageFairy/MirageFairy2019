@@ -60,7 +60,7 @@ class FairyTypes(private val count: Int) {
 
         // Register
         variantsImpl += Tuple.of(id, bundle)
-        ApiFairyRegistry.getFairyRegistry().registerFairy(bundle.main.type.breed, bundle.main.type, bundle.main.createItemStack())
+        ApiFairyRegistry.getFairyRegistry().registerFairy(bundle.main.type.motif, bundle.main.type, bundle.main.createItemStack())
 
         return bundle
     }

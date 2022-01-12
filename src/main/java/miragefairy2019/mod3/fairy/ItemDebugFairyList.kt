@@ -47,14 +47,14 @@ class ItemDebugFairyList : Item() {
                 val fairyTypeRank1 = variantRank1.type
                 val fairyTypeRank2 = variantRank2.type
                 fun color(selector: ColorSet.() -> Int) = variantRank1.colorSet.selector().toRgb().hex
-                val type = fairyTypeRank1.breed!!.resourcePath
+                val motif = fairyTypeRank1.motif!!.resourcePath
                 "|${
                     listOf(
                         listOf(
                             id,
                             "&bold(){!FairyImage(#${color { skin }},#${color { bright }},#${color { dark }},#${color { hair }})}",
-                            "CENTER:$type&br()${enUs["mirageFairy2019.fairy.$type.name"]!!}",
-                            "CENTER:${jaJp["mirageFairy2019.fairy.$type.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
+                            "CENTER:$motif&br()${enUs["mirageFairy2019.fairy.$motif.name"]!!}",
+                            "CENTER:${jaJp["mirageFairy2019.fairy.$motif.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
                             "CENTER:${variantRank1.rare}",
                             "RIGHT:${fairyTypeRank1.cost.f0}"
                         ),

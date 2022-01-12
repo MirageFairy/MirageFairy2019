@@ -22,7 +22,7 @@ public interface IFairyType {
      * @return 妖精の品種を表す内部名称。妖精が雑種の場合はnull。
      */
     @Nullable
-    public ResourceLocation getBreed();
+    public ResourceLocation getMotif();
 
     public ITextComponent getDisplayName();
 
