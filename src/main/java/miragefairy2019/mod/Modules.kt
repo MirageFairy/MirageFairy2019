@@ -16,7 +16,7 @@ import miragefairy2019.mod3.playeraura.PlayerAura
 import miragefairy2019.mod3.skill.Skill
 import miragefairy2019.mod3.sphere.Sphere
 import miragefairy2019.mod3.worldgen.WorldGen
-import miragefairy2019.modkt.modules.fairy.Fairy
+import miragefairy2019.mod3.fairy.Fairy
 
 val modules = listOf(
     Main.module,

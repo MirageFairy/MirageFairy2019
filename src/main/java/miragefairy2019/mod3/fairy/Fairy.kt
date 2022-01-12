@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.modules.fairy
+package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ingredient
@@ -8,14 +8,6 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.lib.OreIngredientComplex
-import miragefairy2019.mod3.fairy.FairyTypes
-import miragefairy2019.mod3.fairy.ItemBakedFairy
-import miragefairy2019.mod3.fairy.ItemDebugFairyList
-import miragefairy2019.mod3.fairy.ItemFairy
-import miragefairy2019.mod3.fairy.RecipeFairyBaking
-import miragefairy2019.mod3.fairy.itemBakedFairy
-import miragefairy2019.mod3.fairy.loaderFairyCrystalDrop
-import miragefairy2019.mod3.fairy.loaderFairyLogDrop
 import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod3.main.api.ApiMain

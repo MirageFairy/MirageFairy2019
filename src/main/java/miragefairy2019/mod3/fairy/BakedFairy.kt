@@ -8,8 +8,6 @@ import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.playeraura.api.IFoodAuraContainer
 import miragefairy2019.modkt.impl.fairy.erg
-import miragefairy2019.modkt.modules.fairy.Fairy
-import miragefairy2019.modkt.modules.fairy.fairyType
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.init.Items
