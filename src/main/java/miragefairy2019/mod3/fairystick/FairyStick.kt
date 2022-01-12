@@ -45,7 +45,6 @@ object FairyStick {
                 it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
                 it.conditions += FairyStickCraftConditionNotNether()
                 it.conditions += FairyStickCraftConditionSpawnBlock { Blocks.WATER.defaultState }
-                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairyCrystal"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyWaterRank1"))
             })
 
@@ -53,7 +52,6 @@ object FairyStick {
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
                 it.conditions += FairyStickCraftConditionSpawnBlock { Blocks.FLOWING_LAVA.defaultState.withProperty(BlockDynamicLiquid.LEVEL, 15) }
-                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairyCrystal"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyLavaRank1"))
             })
 
@@ -61,7 +59,6 @@ object FairyStick {
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
                 it.conditions += FairyStickCraftConditionSpawnBlock { Blocks.WEB.defaultState }
-                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairyCrystal"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairySpiderRank1"))
             })
 
