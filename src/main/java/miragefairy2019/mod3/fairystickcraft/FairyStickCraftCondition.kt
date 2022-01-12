@@ -1,5 +1,9 @@
 package miragefairy2019.mod3.fairystickcraft
 
+import miragefairy2019.libkt.containerItem
+import miragefairy2019.libkt.drop
+import miragefairy2019.libkt.orEmpty
+import miragefairy2019.libkt.orNull
 import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftCondition
 import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftEnvironment
 import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftExecutor
@@ -193,29 +197,27 @@ class FairyStickCraftConditionReplaceBlock(private val sBlockStateInput: () -> I
 class FairyStickCraftConditionUseItem(private val ingredient: Ingredient) : IFairyStickCraftCondition {
     override fun test(environment: IFairyStickCraftEnvironment, executor: IFairyStickCraftExecutor): Boolean {
 
-        if (!ingredient.apply(environment.itemStackFairyStick)) return false
+        if (environment.itemStackFairyStick.isEmpty) return false // ツールが1個以上あることを保証
+        if (!ingredient.apply(environment.itemStackFairyStick)) return false // ツールが適切であることをチェック
 
         executor.hookOnCraft { setterItemStackFairyStick ->
-            val itemStackFairyStick = environment.itemStackFairyStick
+            val itemStackFairyStickOriginal = environment.itemStackFairyStick // 可変プロパティなので一時変数に確保
+            val itemStackFairyStick = itemStackFairyStickOriginal.copy() // ツールのアイテムスタックのMutableなコピー
+            val itemStackContainer = itemStackFairyStick.splitStack(1).containerItem // 使用分の耐久の削れたツール
+            val itemStackFairyStickRemaining = itemStackFairyStick.orNull // 未使用分のツールのスタック
 
-            // コンテナアイテム計算
-            val itemStackContainer = if (itemStackFairyStick.item.hasContainerItem(itemStackFairyStick)) {
-                itemStackFairyStick.item.getContainerItem(itemStackFairyStick)
-            } else {
-                ItemStack.EMPTY
+            // ツールの消費
+            if (itemStackFairyStickRemaining != null) { // スタックが残っているとき
+                setterItemStackFairyStick(itemStackFairyStickRemaining) // 残りのスタックをセット
+                itemStackContainer?.drop(environment.world, environment.blockPos) // 削れたツールがあれば地面にドロップ
+            } else { // スタックされたアイテム出なかったとき
+                setterItemStackFairyStick(itemStackContainer.orEmpty) // 削れたアイテムをセット
             }
-
-            // 破損
-            setterItemStackFairyStick(itemStackContainer)
 
             // エフェクト
             val player = environment.player
             if (player != null) {
-                if (!itemStackFairyStick.isEmpty) {
-                    if (itemStackContainer.isEmpty) {
-                        player.renderBrokenItemStack(itemStackFairyStick)
-                    }
-                }
+                if (itemStackContainer == null) player.renderBrokenItemStack(itemStackFairyStickOriginal) // コンテナがないとき、必ず壊れるエフェクトを出す
             }
         }
         return true
