@@ -40,13 +40,25 @@ import java.util.Optional
 import java.util.function.Predicate
 
 object BakedFairy {
+    lateinit var creativeTabBakedFairy: () -> CreativeTabs
     lateinit var itemBakedFairy: () -> ItemBakedFairy
     val module: Module = {
+
+        // クリエイティブタブ
+        onInitCreativeTab {
+            val creativeTab = object : CreativeTabs("mirageFairy2019.bakedFairy") {
+                @SideOnly(Side.CLIENT)
+                override fun getTabIconItem() = ItemStack(itemBakedFairy()).also {
+                    ItemBakedFairy.setFairy(it, FairyTypes.instance.magentaGlazedTerracotta.main.createItemStack())
+                }
+            }
+            creativeTabBakedFairy = { creativeTab }
+        }
 
         // 焼き妖精
         itemBakedFairy = item({ ItemBakedFairy() }, "baked_fairy") {
             setUnlocalizedName("bakedFairy")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { creativeTabBakedFairy() }
             modInitializer.onRegisterItem {
                 if (ApiMain.side.isClient) {
                     ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation(item.registryName!!, "normal"))
@@ -112,12 +124,15 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraContainer {
 
     override fun getItemStackDisplayName(itemStack: ItemStack): String = getFairy(itemStack)?.fairyType?.let { UtilsMinecraft.translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText) } ?: UtilsMinecraft.translateToLocal("$unlocalizedName.name")
 
-    // TODO 専用クリエイティブタブ
     override fun getSubItems(tab: CreativeTabs, items: NonNullList<ItemStack>) {
         if (!isInCreativeTab(tab)) return
-        val itemStack = ItemStack(this)
-        setFairy(itemStack, FairyTypes.instance.magentaGlazedTerracotta.main.createItemStack())
-        items += itemStack
+
+        FairyTypes.instance.variants.forEach { (_, fairy) ->
+            items += ItemStack(this).also {
+                setFairy(it, fairy.main.createItemStack())
+            }
+        }
+
     }
 
 

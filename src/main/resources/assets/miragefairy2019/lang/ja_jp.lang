@@ -415,6 +415,7 @@ mirageFairy2019.magic.status.maxHardness.name=最大硬度
 mirageFairy2019.magic.status.lightning.name=雷属性
 itemGroup.mirageFairy2019=MirageFairy2019
 itemGroup.mirageFairy2019.fairy=MirageFairy2019：妖精
+itemGroup.mirageFairy2019.bakedFairy=MirageFairy2019：焼き妖精
 
 advancements.miragefairy2019.fairy_weapon.root.title=妖精武器
 advancements.miragefairy2019.fairy_weapon.root.description=妖精武器
