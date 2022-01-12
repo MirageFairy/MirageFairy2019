@@ -18,6 +18,8 @@ import mirrg.boron.util.UtilsMath;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -38,7 +40,27 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.ability;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.abilityRaw;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.add;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.aqua;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.cost;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.dark;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.div;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.fire;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.formatterCriticalRate;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.formatterDouble1;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.formatterPercent0;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.formatterTick;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.formatterYesNo;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.gaia;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.gte;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.mul;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.norm;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.pow;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.scale;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.val;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.wind;
 
 public class ItemMagicWandLightning extends ItemFairyWeaponBase {
 
@@ -64,6 +86,9 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
                     val(1),
                     scale(gaia(), 30.0, 3.0),
             }));
+
+    public IMagicStatus<Boolean> lightning = registerMagicStatus("lightning", formatterYesNo(),
+            gte(abilityRaw(EnumErgType.THUNDER), 10));
 
     public IMagicStatus<Double> wear = registerMagicStatus("wear", formatterPercent0(),
             mul(new IFormulaDouble[]{
@@ -141,6 +166,11 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
                         damage2 *= factor.coefficient;
 
                         target.attackEntityFrom(new DamageSourceFairyMagic(player, 0), (float) damage2);
+                        if (lightning.get(fairyType)) {
+                            if (target instanceof EntityCreeper) {
+                                target.onStruckByLightning(new EntityLightningBolt(world, target.posX, target.posY, target.posZ, false));
+                            }
+                        }
 
                         // エフェクト
                         {
