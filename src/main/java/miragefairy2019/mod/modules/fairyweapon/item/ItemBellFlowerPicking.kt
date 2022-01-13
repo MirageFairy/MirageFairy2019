@@ -15,6 +15,7 @@ import miragefairy2019.mod3.worldgen.MirageFlower
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import mirrg.boron.util.UtilsMath
 import net.minecraft.entity.item.EntityItem
+import net.minecraft.entity.item.EntityXPOrb
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
@@ -151,6 +152,10 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, maxExtraItemDropRate: 
                                         collected = true
                                         it.setPosition(player.posX, player.posY, player.posZ)
                                         it.setNoPickupDelay()
+                                    }
+                                    world.getEntitiesWithinAABB(EntityXPOrb::class.java, AxisAlignedBB(blockPos)).forEach {
+                                        collected = true
+                                        it.setPosition(player.posX, player.posY, player.posZ)
                                     }
                                 }
 
