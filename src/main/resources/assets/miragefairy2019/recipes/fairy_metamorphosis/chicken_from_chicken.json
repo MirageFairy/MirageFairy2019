@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairyStick"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container250MiragiumWater"
+    },
+    {
+      "item": "minecraft:dirt",
+      "data": 0
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyChickenRank1"
+    }
+  ],
+  "result": {
+    "item": "minecraft:chicken",
+    "count": 1
+  }
+}
