@@ -14,6 +14,44 @@ class ResourceMaker(val dirBase: File) {
 }
 
 
+// Recipe
+
+fun ResourceMaker.getRecipeFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/recipes/${registryName.path}.json")
+
+fun ModInitializer.makeRecipe(registryName: ResourceName, recipe: DataRecipe) = onMakeResource {
+    getRecipeFile(registryName).place(recipe)
+}
+
+abstract class DataRecipe
+
+data class DataShapelessRecipe(
+    @Expose val group: String? = null,
+    @Expose val ingredients: List<DataIngredient>,
+    @Expose val result: DataResult
+) : DataRecipe() {
+    @Expose
+    val type = "forge:ore_shapeless"
+}
+
+abstract class DataIngredient
+
+data class DataOreIngredient(
+    @Expose val type: String = "forge:ore_dict",
+    @Expose val ore: String
+) : DataIngredient()
+
+data class DataSimpleIngredient(
+    @Expose val item: String,
+    @Expose val data: Int? = null
+) : DataIngredient()
+
+data class DataResult(
+    @Expose val item: String,
+    @Expose val data: Int? = null,
+    @Expose val count: Int = 1
+)
+
+
 // BlockStates
 
 fun ResourceMaker.getBlockStatesFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/blockstates/${registryName.path}.json")
