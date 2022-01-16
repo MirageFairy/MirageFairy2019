@@ -38,7 +38,7 @@ import net.minecraftforge.oredict.OreIngredient
 
 object Pot {
     lateinit var itemPot: () -> ItemPot
-    lateinit var itemFilledBucket: () -> ItemFilledBucket
+    lateinit var itemFilledBucket: () -> ItemFilledPot
     val module: Module = {
 
         // 中身なしポット
@@ -65,12 +65,12 @@ object Pot {
         )
 
         // 中身入りポット
-        itemFilledBucket = item({ ItemFilledBucket() }, "filled_bucket") {
+        itemFilledBucket = item({ ItemFilledPot() }, "filled_bucket") {
             setUnlocalizedName("filledBucket")
             setCreativeTab { ApiMain.creativeTab }
 
             itemVariant("miragium_water_pot", {
-                ItemVariantFilledBucket(
+                ItemVariantFilledPot(
                     it,
                     "potMiragiumWater",
                     "miragium_water",
@@ -81,7 +81,7 @@ object Pot {
                 addOreName("container1000MiragiumWater")
             }
             itemVariant("mirage_flower_extract_pot", {
-                ItemVariantFilledBucket(
+                ItemVariantFilledPot(
                     it,
                     "potMirageFlowerExtract",
                     "mirage_flower_extract",
@@ -92,7 +92,7 @@ object Pot {
                 addOreName("container1000MirageFlowerExtract")
             }
             itemVariant("mirage_flower_oil_pot", {
-                ItemVariantFilledBucket(
+                ItemVariantFilledPot(
                     it,
                     "potMirageFlowerOil",
                     "mirage_flower_oil",
@@ -126,7 +126,7 @@ class ItemPot : Item(), IPot {
     override fun getFluid(itemStack: ItemStack): Fluid? = null
 }
 
-class ItemVariantFilledBucket(
+class ItemVariantFilledPot(
     registryName: String,
     unlocalizedName: String,
     val fluidName: String,
@@ -134,7 +134,7 @@ class ItemVariantFilledBucket(
     val getFluidBlockState: () -> IBlockState?
 ) : ItemVariantMaterial(registryName, unlocalizedName)
 
-class ItemFilledBucket : ItemMultiMaterial<ItemVariantFilledBucket>(), IPot {
+class ItemFilledPot : ItemMultiMaterial<ItemVariantFilledPot>(), IPot {
     override fun hasContainerItem(itemStack: ItemStack) = true
     override fun getContainerItem(itemStack: ItemStack) = ItemStack(Pot.itemPot.invoke())
     override fun initCapabilities(itemStack: ItemStack, nbt: NBTTagCompound?) = object : CapabilityProviderAdapter() {
