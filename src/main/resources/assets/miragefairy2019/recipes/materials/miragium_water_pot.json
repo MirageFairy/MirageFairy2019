@@ -3,7 +3,8 @@
 	"group": "miragium_water_bucket",
 	"ingredients": [
 		{
-			"item": "minecraft:bucket"
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyPot"
 		},
 		{
 			"type": "miragefairy2019:ore_dict_complex",
