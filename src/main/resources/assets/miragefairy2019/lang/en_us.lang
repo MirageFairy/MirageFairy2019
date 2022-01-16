@@ -189,10 +189,10 @@ item.mirageFairyLeather.poem=
 item.fairyWoodResin.name=Fairy Wood Resin
 item.fairyWoodResin.poem=
 
-item.pot.name=Fairy Pot
-item.potMiragiumWater.name=Miragium Water Pot
-item.potMirageFlowerExtract.name=Mirage Extract Pot
-item.potMirageFlowerOil.name=Mirage Oil Pot
+item.mirageFairyPot.name=Fairy Pot
+item.mirageFairyPotMiragiumWater.name=Miragium Water Pot
+item.mirageFairyPotMirageFlowerExtract.name=Mirage Extract Pot
+item.mirageFairyPotMirageFlowerOil.name=Mirage Oil Pot
 
 item.mirageFairyR1.name=Fairy
 item.mirageFairyR1.format=%s

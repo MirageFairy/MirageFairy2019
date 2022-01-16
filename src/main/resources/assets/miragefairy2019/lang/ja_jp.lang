@@ -189,10 +189,10 @@ item.mirageFairyLeather.poem=エーテルグラウンド
 item.fairyWoodResin.name=妖精の木の樹液
 item.fairyWoodResin.poem=くちどけまろやか
 
-item.pot.name=妖精のポット
-item.potMiragiumWater.name=ミラジウムウォーター入りポット
-item.potMirageFlowerExtract.name=ミラージュエキス入りポット
-item.potMirageFlowerOil.name=ミラージュオイル入りポット
+item.mirageFairyPot.name=妖精のポット
+item.mirageFairyPotMiragiumWater.name=ミラジウムウォーター入りポット
+item.mirageFairyPotMirageFlowerExtract.name=ミラージュエキス入りポット
+item.mirageFairyPotMirageFlowerOil.name=ミラージュオイル入りポット
 
 item.mirageFairyR1.name=ミラージュ妖精
 item.mirageFairyR1.format=%s
