@@ -12,7 +12,6 @@ import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
-import miragefairy2019.libkt.makeItemModel
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -161,7 +160,10 @@ class BlockFairyCrystalGlass : Block(Material.GLASS) {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun shouldSideBeRendered(blockState: IBlockState, world: IBlockAccess, blockPos: BlockPos, facing: EnumFacing) = blockState.block !== world.getBlockState(blockPos.offset(facing)).block
+    override fun shouldSideBeRendered(blockState: IBlockState, world: IBlockAccess, blockPos: BlockPos, facing: EnumFacing): Boolean {
+        if (blockState.block === world.getBlockState(blockPos.offset(facing)).block) return false // ブロックが等しい場合は表示しない
+        return super.shouldSideBeRendered(blockState, world, blockPos, facing)
+    }
 
     @SideOnly(Side.CLIENT)
     override fun getBlockLayer() = BlockRenderLayer.CUTOUT
