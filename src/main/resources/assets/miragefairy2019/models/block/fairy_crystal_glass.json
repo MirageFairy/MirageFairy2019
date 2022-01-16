@@ -1,0 +1,47 @@
+{
+  "parent": "block/block",
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#background",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#background",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#background",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#background",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#background",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#background",
+          "cullface": "east"
+        }
+      }
+    }
+  ],
+  "textures": {
+    "particle": "miragefairy2019:blocks/fairy_crystal_glass_frame",
+    "background": "miragefairy2019:blocks/fairy_crystal_glass_background"
+  }
+}

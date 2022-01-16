@@ -1,0 +1,17 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "blockMirageFairyCrystal"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:fairy_crystal",
+    "data": 0,
+    "count": 9
+  }
+}
