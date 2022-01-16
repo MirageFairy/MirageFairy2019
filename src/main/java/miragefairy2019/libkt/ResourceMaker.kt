@@ -90,6 +90,8 @@ data class DataBlockState(
 
 val <B : Block> MakeBlockStatesScope<B>.normal get() = DataBlockStates(variants = mapOf("normal" to DataBlockState(blockInitializer.resourceName)))
 
+data class DataPart(val `when`: Map<String, Any>? = null, val apply: DataBlockState)
+
 
 // Item Model
 
