@@ -39,6 +39,7 @@ item.fairyWoodResin.poem=
 item.bucketMiragiumWater.name=Miragium Water Bucket
 item.bucketMirageFlowerExtract.name=Mirage Extract Bucket
 item.bucketMirageFlowerOil.name=Mirage Oil Bucket
+item.pot.name=Fairy Pot
 
 item.mirageFairyR1.name=Fairy
 item.mirageFairyR1.format=%s

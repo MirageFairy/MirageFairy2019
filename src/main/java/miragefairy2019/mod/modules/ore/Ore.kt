@@ -2,16 +2,23 @@ package miragefairy2019.mod.modules.ore
 
 import miragefairy2019.libkt.DataItemModel
 import miragefairy2019.libkt.ItemVariantInitializer
+import miragefairy2019.libkt.DataOreIngredient
+import miragefairy2019.libkt.DataResult
+import miragefairy2019.libkt.DataShapedRecipe
 import miragefairy2019.libkt.MakeItemVariantModelScope
 import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.generated
 import miragefairy2019.libkt.handheld
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeItemVariantModel
+import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial
 import miragefairy2019.mod3.main.api.ApiMain
@@ -89,6 +96,29 @@ object Ore {
                 if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
             }
         }
+
+        // 中身なしポット
+        Pot.itemPot = item({ ItemPot() }, "pot") {
+            setUnlocalizedName("pot")
+            setCreativeTab { ApiMain.creativeTab }
+            setCustomModelResourceLocation()
+        }
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "pot"),
+            DataShapedRecipe(
+                pattern = listOf(
+                    "   ",
+                    "# #",
+                    " # "
+                ),
+                key = mapOf(
+                    "#" to DataOreIngredient(ore = "blockMirageFairyCrystal")
+                ),
+                result = DataResult(
+                    item = "${ModMirageFairy2019.MODID}:pot"
+                )
+            )
+        )
 
         // 中身入りバケツ
         val itemFilledBucket = item({ ItemFilledBucket() }, "filled_bucket") {
