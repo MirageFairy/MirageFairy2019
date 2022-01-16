@@ -157,7 +157,7 @@ object Sphere {
                         ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere_with_fluorite"),
                         ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere"),
                         variant.createItemStack(),
-                        OreIngredientComplex("container1000MiragiumWater"),
+                        OreIngredient("container1000MiragiumWater"),
                         OreIngredient("gemFluorite"),
                         OreIngredientComplex("mirageFairy2019CraftingToolFairyWandCrafting"),
                         OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}"),
@@ -185,7 +185,7 @@ object Sphere {
                         ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere_from_gem"),
                         ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere"),
                         variant.createItemStack(),
-                        OreIngredientComplex("container1000MiragiumWater"),
+                        OreIngredient("container1000MiragiumWater"),
                         OreIngredientComplex("mirageFairy2019CraftingToolFairyWandCrafting"),
                         OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}"),
                         ingredient
