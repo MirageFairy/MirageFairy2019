@@ -65,7 +65,7 @@ public class ModuleOre {
 
         erMod.initRegistry.register(() -> {
             ApiOreSeedDrop.oreSeedDropRegistry = new OreSeedDropRegistry();
-            LoaderOreSeedDrop.loadOreSeedDrop();
+            LoaderOreSeedDrop.INSTANCE.loadOreSeedDrop();
         });
 
         erMod.registerBlock.register(b -> {

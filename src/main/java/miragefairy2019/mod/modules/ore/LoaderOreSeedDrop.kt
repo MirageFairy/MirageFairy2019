@@ -72,7 +72,6 @@ import miragefairy2019.mod3.oreseeddrop.Elements as el
  */
 
 object LoaderOreSeedDrop {
-    @JvmStatic // TODO jvm
     fun loadOreSeedDrop() {
         ApiOreSeedDrop.oreSeedDropRegistry {
 
