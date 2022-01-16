@@ -14,5 +14,6 @@ object Artifacts {
         BakedFairy.module(this)
         FairyMetamorphosis.module(this)
         FairyCrystalGlass.module(this)
+        Pot.module(this)
     }
 }

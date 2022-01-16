@@ -1,12 +1,28 @@
 package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.CapabilityProviderAdapter
+import miragefairy2019.libkt.DataOreIngredient
+import miragefairy2019.libkt.DataResult
+import miragefairy2019.libkt.DataShapedRecipe
+import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.ResourceName
+import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.castOrNull
 import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.item
+import miragefairy2019.libkt.itemVariant
+import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.orNull
+import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setCustomModelResourceLocation
+import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.upperCamelCase
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
-import miragefairy2019.mod.modules.ore.ItemVariantFilledBucket
+import miragefairy2019.mod.lib.multi.ItemVariantMaterial
+import miragefairy2019.mod.modules.ore.ModuleOre
+import miragefairy2019.mod3.main.api.ApiMain
+import net.minecraft.block.state.IBlockState
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -23,6 +39,76 @@ import net.minecraftforge.oredict.OreIngredient
 object Pot {
     lateinit var itemPot: () -> ItemPot
     lateinit var itemFilledBucket: () -> ItemFilledBucket
+    val module: Module = {
+
+        // 中身なしポット
+        itemPot = item({ ItemPot() }, "pot") {
+            setUnlocalizedName("pot")
+            setCreativeTab { ApiMain.creativeTab }
+            setCustomModelResourceLocation()
+        }
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "pot"),
+            DataShapedRecipe(
+                pattern = listOf(
+                    "   ",
+                    "# #",
+                    " # "
+                ),
+                key = mapOf(
+                    "#" to DataOreIngredient(ore = "blockMirageFairyCrystal")
+                ),
+                result = DataResult(
+                    item = "${ModMirageFairy2019.MODID}:pot"
+                )
+            )
+        )
+
+        // 中身入りポット
+        itemFilledBucket = item({ ItemFilledBucket() }, "filled_bucket") {
+            setUnlocalizedName("filledBucket")
+            setCreativeTab { ApiMain.creativeTab }
+
+            itemVariant("miragium_water_pot", {
+                ItemVariantFilledBucket(
+                    it,
+                    "potMiragiumWater",
+                    "miragium_water",
+                    true
+                ) { ModuleOre.blockFluidMiragiumWater.defaultState }
+            }, 0) {
+                addOreName("potMiragiumWater")
+                addOreName("container1000MiragiumWater")
+            }
+            itemVariant("mirage_flower_extract_pot", {
+                ItemVariantFilledBucket(
+                    it,
+                    "potMirageFlowerExtract",
+                    "mirage_flower_extract",
+                    true
+                ) { ModuleOre.blockFluidMirageFlowerExtract.defaultState }
+            }, 1) {
+                addOreName("potMirageFlowerExtract")
+                addOreName("container1000MirageFlowerExtract")
+            }
+            itemVariant("mirage_flower_oil_pot", {
+                ItemVariantFilledBucket(
+                    it,
+                    "potMirageFlowerOil",
+                    "mirage_flower_oil",
+                    true
+                ) { ModuleOre.blockFluidMirageFlowerOil.defaultState }
+            }, 2) {
+                addOreName("potMirageFlowerOil")
+                addOreName("container1000MirageFlowerOil")
+            }
+
+            onRegisterItem {
+                if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
+            }
+        }
+
+    }
 }
 
 interface IPot {
@@ -39,6 +125,14 @@ class ItemPot : Item(), IPot {
 
     override fun getFluid(itemStack: ItemStack): Fluid? = null
 }
+
+class ItemVariantFilledBucket(
+    registryName: String,
+    unlocalizedName: String,
+    val fluidName: String,
+    val vaporizable: Boolean,
+    val getFluidBlockState: () -> IBlockState?
+) : ItemVariantMaterial(registryName, unlocalizedName)
 
 class ItemFilledBucket : ItemMultiMaterial<ItemVariantFilledBucket>(), IPot {
     override fun hasContainerItem(itemStack: ItemStack) = true
