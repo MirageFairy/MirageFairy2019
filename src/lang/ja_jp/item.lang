@@ -37,10 +37,10 @@ item.fairyWoodResin.name=妖精の木の樹液
 item.fairyWoodResin.poem=くちどけまろやか
 
 
-item.bucketMiragiumWater.name=ミラジウムウォーター入りバケツ
-item.bucketMirageFlowerExtract.name=ミラージュエキス入りバケツ
-item.bucketMirageFlowerOil.name=ミラージュオイル入りバケツ
 item.pot.name=妖精のポット
+item.potMiragiumWater.name=ミラジウムウォーター入りポット
+item.potMirageFlowerExtract.name=ミラージュエキス入りポット
+item.potMirageFlowerOil.name=ミラージュオイル入りポット
 
 item.mirageFairyR1.name=ミラージュ妖精
 item.mirageFairyR1.format=%s

@@ -94,42 +94,42 @@ object Ore {
             )
         )
 
-        // 中身入りバケツ
+        // 中身入りポット
         Pot.itemFilledBucket = item({ ItemFilledBucket() }, "filled_bucket") {
             setUnlocalizedName("filledBucket")
             setCreativeTab { ApiMain.creativeTab }
 
-            itemVariant("miragium_water_bucket", {
+            itemVariant("miragium_water_pot", {
                 ItemVariantFilledBucket(
                     it,
-                    "bucketMiragiumWater",
+                    "potMiragiumWater",
                     "miragium_water",
                     true
                 ) { ModuleOre.blockFluidMiragiumWater.defaultState }
             }, 0) {
-                addOreName("bucketMiragiumWater")
+                addOreName("potMiragiumWater")
                 addOreName("container1000MiragiumWater")
             }
-            itemVariant("mirage_flower_extract_bucket", {
+            itemVariant("mirage_flower_extract_pot", {
                 ItemVariantFilledBucket(
                     it,
-                    "bucketMirageFlowerExtract",
+                    "potMirageFlowerExtract",
                     "mirage_flower_extract",
                     true
                 ) { ModuleOre.blockFluidMirageFlowerExtract.defaultState }
             }, 1) {
-                addOreName("bucketMirageFlowerExtract")
+                addOreName("potMirageFlowerExtract")
                 addOreName("container1000MirageFlowerExtract")
             }
-            itemVariant("mirage_flower_oil_bucket", {
+            itemVariant("mirage_flower_oil_pot", {
                 ItemVariantFilledBucket(
                     it,
-                    "bucketMirageFlowerOil",
+                    "potMirageFlowerOil",
                     "mirage_flower_oil",
                     true
                 ) { ModuleOre.blockFluidMirageFlowerOil.defaultState }
             }, 2) {
-                addOreName("bucketMirageFlowerOil")
+                addOreName("potMirageFlowerOil")
                 addOreName("container1000MirageFlowerOil")
             }
 

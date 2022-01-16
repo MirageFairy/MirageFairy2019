@@ -376,11 +376,11 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	item("mirage_fairy_leather");
 	item("fairy_wood_resin");
 
-	# バケツ
-	item("miragium_water_bucket");
-	item("mirage_flower_extract_bucket");
-	item("mirage_flower_oil_bucket");
+	# ポット
 	item("pot");
+	item("miragium_water_pot");
+	item("mirage_flower_extract_pot");
+	item("mirage_flower_oil_pot");
 
 	# 汎用素材ブロック
 	block("apatite_block");
