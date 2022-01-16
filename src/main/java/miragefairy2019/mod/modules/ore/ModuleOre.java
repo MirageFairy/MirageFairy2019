@@ -57,6 +57,10 @@ public class ModuleOre {
     public static ItemBlockOre<EnumVariantOre2> itemBlockOre2;
     public static ItemBlockMaterials<EnumVariantMaterials1> itemBlockMaterials1;
 
+    static {
+        FluidRegistry.enableUniversalBucket();
+    }
+
     public static void init(EventRegistryMod erMod) {
 
         erMod.initRegistry.register(() -> {
