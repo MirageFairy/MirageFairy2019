@@ -145,7 +145,7 @@ fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.createItemS
 
 // Block
 
-class BlockInitializer<B : Block>(val modInitializer: ModInitializer, val registryName: ResourceName, getter: () -> B) : Initializer<B>(getter) {
+class BlockInitializer<B : Block>(val modInitializer: ModInitializer, val resourceName: ResourceName, getter: () -> B) : Initializer<B>(getter) {
     val block get() = initializingObject
 }
 

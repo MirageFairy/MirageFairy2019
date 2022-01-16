@@ -69,7 +69,7 @@ data class DataResult(
 fun ResourceMaker.getBlockStatesFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/blockstates/${registryName.path}.json")
 
 fun <B : Block> BlockInitializer<B>.makeBlockStates(creator: MakeBlockStatesScope<B>.() -> DataBlockStates) = modInitializer.onMakeResource {
-    getBlockStatesFile(registryName).place(MakeBlockStatesScope(this@makeBlockStates).creator())
+    getBlockStatesFile(resourceName).place(MakeBlockStatesScope(this@makeBlockStates).creator())
 }
 
 class MakeBlockStatesScope<B : Block>(val blockInitializer: BlockInitializer<B>)
@@ -90,7 +90,7 @@ data class DataBlockState(
     constructor(model: ResourceName, x: Int? = null, y: Int? = null, z: Int? = null) : this(model.toString(), x, y, z)
 }
 
-val <B : Block> MakeBlockStatesScope<B>.normal get() = DataBlockStates("normal" to DataBlockState(blockInitializer.registryName))
+val <B : Block> MakeBlockStatesScope<B>.normal get() = DataBlockStates("normal" to DataBlockState(blockInitializer.resourceName))
 
 
 // Item Model
