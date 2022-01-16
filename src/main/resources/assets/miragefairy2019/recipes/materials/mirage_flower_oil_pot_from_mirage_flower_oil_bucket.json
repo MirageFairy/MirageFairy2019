@@ -1,0 +1,22 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "mirage_flower_oil_bucket",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyPot"
+		},
+		{
+			"type": "minecraft:item_nbt",
+			"item": "forge:bucketfilled",
+			"nbt": {
+				"FluidName": "mirage_flower_oil",
+				"Amount": 1000
+			}
+		}
+	],
+	"result": {
+		"item": "miragefairy2019:filled_bucket",
+		"data": 2
+	}
+}

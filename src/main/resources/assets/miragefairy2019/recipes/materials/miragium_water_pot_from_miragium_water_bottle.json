@@ -1,29 +1,30 @@
 {
 	"type": "forge:ore_shapeless",
-	"group": "mirage_flower_extract_bucket",
+	"group": "miragium_water_bucket",
 	"ingredients": [
 		{
-			"item": "minecraft:bucket"
+			"type": "forge:ore_dict",
+			"ore": "mirageFairyPot"
 		},
 		{
 			"type": "forge:ore_dict",
-			"ore": "container250MirageFlowerExtract"
+			"ore": "container250MiragiumWater"
 		},
 		{
 			"type": "forge:ore_dict",
-			"ore": "container250MirageFlowerExtract"
+			"ore": "container250MiragiumWater"
 		},
 		{
 			"type": "forge:ore_dict",
-			"ore": "container250MirageFlowerExtract"
+			"ore": "container250MiragiumWater"
 		},
 		{
 			"type": "forge:ore_dict",
-			"ore": "container250MirageFlowerExtract"
+			"ore": "container250MiragiumWater"
 		}
 	],
 	"result": {
 		"item": "miragefairy2019:filled_bucket",
-		"data": 1
+		"data": 0
 	}
 }
