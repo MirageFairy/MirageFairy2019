@@ -111,7 +111,7 @@ class MakeItemVariantModelScope<I : ItemMulti<V>, V : ItemVariant>(val itemVaria
 
 data class DataItemModel(
     @Expose val parent: String,
-    @Expose val textures: Map<String, String>
+    @Expose val textures: Map<String, String>? = null
 )
 
 fun <I : Item> MakeItemModelScope<I>.getStandardItemModel(parent: String) = DataItemModel(
