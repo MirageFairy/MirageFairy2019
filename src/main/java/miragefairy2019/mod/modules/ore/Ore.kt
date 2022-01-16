@@ -95,7 +95,7 @@ object Ore {
         )
 
         // 中身入りバケツ
-        val itemFilledBucket = item({ ItemFilledBucket() }, "filled_bucket") {
+        Pot.itemFilledBucket = item({ ItemFilledBucket() }, "filled_bucket") {
             setUnlocalizedName("filledBucket")
             setCreativeTab { ApiMain.creativeTab }
 
