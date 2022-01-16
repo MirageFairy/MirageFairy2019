@@ -103,6 +103,7 @@ object Ore {
                 ItemVariantFilledBucket(
                     it,
                     "bucketMiragiumWater",
+                    "miragium_water",
                     true
                 ) { ModuleOre.blockFluidMiragiumWater.defaultState }
             }, 0) {
@@ -113,6 +114,7 @@ object Ore {
                 ItemVariantFilledBucket(
                     it,
                     "bucketMirageFlowerExtract",
+                    "mirage_flower_extract",
                     true
                 ) { ModuleOre.blockFluidMirageFlowerExtract.defaultState }
             }, 1) {
@@ -123,6 +125,7 @@ object Ore {
                 ItemVariantFilledBucket(
                     it,
                     "bucketMirageFlowerOil",
+                    "mirage_flower_oil",
                     true
                 ) { ModuleOre.blockFluidMirageFlowerOil.defaultState }
             }, 2) {
@@ -145,4 +148,4 @@ class BlockFluidMiragiumWater(fluid: Fluid) : BlockFluidClassic(fluid, Material.
     }
 }
 
-class ItemVariantFilledBucket(registryName: String, unlocalizedName: String, val vaporizable: Boolean, val getFluidBlockState: () -> IBlockState?) : ItemVariantMaterial(registryName, unlocalizedName)
+class ItemVariantFilledBucket(registryName: String, unlocalizedName: String, val fluidName: String, val vaporizable: Boolean, val getFluidBlockState: () -> IBlockState?) : ItemVariantMaterial(registryName, unlocalizedName)
