@@ -46,11 +46,11 @@ object FairyLog {
             setCreativeTab { ApiMain.creativeTab }
             makeBlockStates {
                 DataBlockStates(
-                    listOf("oak", "birch", "spruce", "jungle", "acacia", "dark_oak").flatMap { variant ->
+                    variants = listOf("oak", "birch", "spruce", "jungle", "acacia", "dark_oak").flatMap { variant ->
                         listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
                             "facing=${facing.first},variant=$variant" to DataBlockState("miragefairy2019:${variant}_fairy_log", y = facing.second)
                         }
-                    }
+                    }.toMap()
                 )
             }
         }

@@ -69,7 +69,7 @@ object MirageFlower {
             setUnlocalizedName("mirageFlower")
             setCreativeTab { ApiMain.creativeTab }
             onRegisterBlock { ApiWorldGen.pickHandlerRegistry.register(block, block.pickHandler) }
-            makeBlockStates { DataBlockStates((0..3).map { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") }) }
+            makeBlockStates { DataBlockStates(variants = (0..3).associate { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") }) }
         }
         itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower()) }, "mirage_flower_seeds") {
             setUnlocalizedName("mirageFlowerSeeds")

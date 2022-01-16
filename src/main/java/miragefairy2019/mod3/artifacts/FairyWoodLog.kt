@@ -28,7 +28,7 @@ object FairyWoodLog {
             setCreativeTab { ApiMain.creativeTab }
             makeBlockStates {
                 DataBlockStates(
-                    listOf("y" to Pair(null, null), "z" to Pair(90, null), "x" to Pair(90, 90)).map { axis ->
+                    variants = listOf("y" to Pair(null, null), "z" to Pair(90, null), "x" to Pair(90, 90)).associate { axis ->
                         "axis=${axis.first}" to DataBlockState("miragefairy2019:fairy_wood_log", x = axis.second.first, y = axis.second.second)
                     }
                 )

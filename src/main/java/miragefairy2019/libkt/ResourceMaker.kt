@@ -75,11 +75,9 @@ fun <B : Block> BlockInitializer<B>.makeBlockStates(creator: MakeBlockStatesScop
 class MakeBlockStatesScope<B : Block>(val blockInitializer: BlockInitializer<B>)
 
 data class DataBlockStates(
-    @Expose val variants: Map<String, DataBlockState>
-) {
-    constructor(vararg pairs: Pair<String, DataBlockState>) : this(pairs.toMap())
-    constructor(pairs: Iterable<Pair<String, DataBlockState>>) : this(pairs.toMap())
-}
+    @Expose val variants: Map<String, DataBlockState>? = null,
+    @Expose val multipart: List<DataPart>? = null
+)
 
 data class DataBlockState(
     @Expose val model: String,
@@ -90,7 +88,7 @@ data class DataBlockState(
     constructor(model: ResourceName, x: Int? = null, y: Int? = null, z: Int? = null) : this(model.toString(), x, y, z)
 }
 
-val <B : Block> MakeBlockStatesScope<B>.normal get() = DataBlockStates("normal" to DataBlockState(blockInitializer.resourceName))
+val <B : Block> MakeBlockStatesScope<B>.normal get() = DataBlockStates(variants = mapOf("normal" to DataBlockState(blockInitializer.resourceName)))
 
 
 // Item Model

@@ -69,11 +69,11 @@ object FairyCollectionBox {
             setCreativeTab { ApiMain.creativeTab }
             makeBlockStates {
                 DataBlockStates(
-                    listOf("middle", "bottom").flatMap { context ->
+                    variants = listOf("middle", "bottom").flatMap { context ->
                         listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
                             "context=$context,facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_building_$context", y = facing.second)
                         }
-                    }
+                    }.toMap()
                 )
             }
         }

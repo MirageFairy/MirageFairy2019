@@ -33,12 +33,12 @@ object TwinkleStone {
             setCreativeTab { ApiMain.creativeTab }
             makeBlockStates {
                 DataBlockStates(
-                    listOf(
+                    variants = listOf(
                         "white", "orange", "magenta", "light_blue",
                         "yellow", "lime", "pink", "gray",
                         "silver", "cyan", "purple", "blue",
                         "brown", "green", "red", "black"
-                    ).mapIndexed { i, it -> "variant=$i" to DataBlockState("miragefairy2019:${it}_twinkle_stone") }
+                    ).mapIndexed { i, it -> "variant=$i" to DataBlockState("miragefairy2019:${it}_twinkle_stone") }.toMap()
                 )
             }
         }
