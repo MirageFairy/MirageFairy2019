@@ -13,7 +13,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 val ItemStack.orNull get() = takeIf { !it.isEmpty }
-val ItemStack?.orEmpty get() = this ?: ItemStack.EMPTY
+val ItemStack?.orEmpty: ItemStack get() = this ?: ItemStack.EMPTY
 
 fun ItemStack.copy(count: Int): ItemStack = copy().also { it.count = count }
 
