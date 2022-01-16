@@ -26,7 +26,7 @@ object FairyCrystal {
             variantFairyCrystalPure = itemVariant("pure_fairy_crystal", { VariantFairyCrystalPure(it, "fairyCrystalPure", "mirageFairyCrystalPure") }, 2)
             onRegisterItem {
                 if (ApiMain.side.isClient) {
-                    item.variants.forEach { item.setCustomModelResourceLocation(it.y!!.registryName, it.x!!) }
+                    item.variants.forEach { item.setCustomModelResourceLocation(it.x!!, modelName = it.y!!.registryName) }
                 }
             }
             onCreateItemStack {

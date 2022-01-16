@@ -46,7 +46,7 @@ object TwinkleStone {
             setUnlocalizedName("twinkleStone")
             onRegisterItem {
                 blockTwinkleStone().variantList.blockVariants.forEach { variant ->
-                    item.setCustomModelResourceLocation(variant.resourceName, variant.metadata)
+                    item.setCustomModelResourceLocation(variant.metadata, modelName = variant.resourceName)
                 }
             }
             onCreateItemStack {

@@ -99,16 +99,25 @@ fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, block
 
 fun <I : Item> ItemInitializer<I>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { item.unlocalizedName = unlocalizedName }
 fun <I : Item> ItemInitializer<I>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { item.creativeTab = creativeTab() }
-fun <I : Item> ItemInitializer<I>.setCustomModelResourceLocation(metadata: Int = 0, variant: String = "normal") = modInitializer.onRegisterItem { item.setCustomModelResourceLocation(metadata, variant) }
-fun <I : Item> I.setCustomModelResourceLocation(modelName: String, metadata: Int = 0, variant: String = "normal") {
-    if (side.isClient) {
-        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(ResourceName(ModMirageFairy2019.MODID, modelName).resourceLocation, variant))
-    }
+
+
+fun <I : Item> ItemInitializer<I>.setCustomModelResourceLocation(
+    metadata: Int = 0,
+    @Suppress("UNUSED_PARAMETER") vararg vs: Void,
+    modelName: String? = null,
+    variant: String = "normal"
+) = modInitializer.onRegisterItem {
+    item.setCustomModelResourceLocation(metadata, modelName = modelName, variant = variant)
 }
 
-fun <I : Item> I.setCustomModelResourceLocation(metadata: Int = 0, variant: String = "normal") {
+fun <I : Item> I.setCustomModelResourceLocation(
+    metadata: Int = 0,
+    @Suppress("UNUSED_PARAMETER") vararg vs: Void,
+    modelName: String? = null,
+    variant: String = "normal"
+) {
     if (side.isClient) {
-        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(registryName!!, variant))
+        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(if (modelName != null) ResourceLocation(ModMirageFairy2019.MODID, modelName) else registryName!!, variant))
     }
 }
 
