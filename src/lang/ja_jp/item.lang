@@ -239,3 +239,5 @@ tile.fairyBox.name=妖精の家
 tile.fairyResinTapper.name=樹液取り職人スプルーツァの家
 
 item.debugFairyList.name=デバッグ：妖精一覧
+
+item.forge.bucketFilled.name=%s入りバケツ
