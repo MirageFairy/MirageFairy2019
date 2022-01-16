@@ -112,6 +112,7 @@ fun <I : Item> I.setCustomModelResourceLocation(metadata: Int = 0, variant: Stri
     }
 }
 
+
 fun <I : Item> ItemInitializer<I>.addOreName(oreName: String, metadata: Int = 0) = modInitializer.onCreateItemStack { item.addOreName(oreName, metadata) }
 fun <I : Item> I.addOreName(oreName: String, metadata: Int = 0) = OreDictionary.registerOre(oreName, ItemStack(this, 1, metadata))
 
