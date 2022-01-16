@@ -41,7 +41,7 @@ object Pot {
 
         // 中身なしポット
         itemPot = item({ ItemPot() }, "pot") {
-            setUnlocalizedName("pot")
+            setUnlocalizedName("mirageFairyPot")
             addOreName("mirageFairyPot")
             setCreativeTab { ApiMain.creativeTab }
             setCustomModelResourceLocation()
