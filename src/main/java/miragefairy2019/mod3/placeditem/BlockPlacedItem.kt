@@ -1,5 +1,7 @@
 package miragefairy2019.mod3.placeditem
 
+import miragefairy2019.libkt.castOrNull
+import miragefairy2019.libkt.orEmpty
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
@@ -53,7 +55,7 @@ class BlockPlacedItem : BlockContainer(Material.CIRCUITS) {
     /**
      * クリエイティブピックでの取得アイテム。
      */
-    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = (world.getTileEntity(pos) as? TileEntityPlacedItem)?.itemStack ?: ItemStack.EMPTY
+    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = world.getTileEntity(pos).castOrNull<TileEntityPlacedItem>()?.itemStack.orEmpty
 
     override fun getDrops(drops: NonNullList<ItemStack>, blockAccess: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) {}
 
