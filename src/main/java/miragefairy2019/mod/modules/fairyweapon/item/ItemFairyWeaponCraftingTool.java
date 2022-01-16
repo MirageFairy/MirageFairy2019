@@ -98,4 +98,11 @@ public class ItemFairyWeaponCraftingTool extends ItemFairyWeaponBase {
         return false;
     }
 
+    //
+
+    @Override
+    public boolean canCombine(ItemStack itemStack) {
+        return false;
+    }
+
 }
