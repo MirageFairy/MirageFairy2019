@@ -55,3 +55,5 @@ fun ItemStack.equalsItemDamageTagCount(other: ItemStack) = equalsItemDamageTag(o
 // 相互変換
 val Item.block get() = Block.getBlockFromItem(this).takeIf { it != Blocks.AIR }
 val Block.item get() = Item.getItemFromBlock(this).takeIf { it != Items.AIR }
+fun Item.createItemStack(count: Int = 1, metadata: Int = 0) = ItemStack(this, count, metadata)
+fun Block.createItemStack(count: Int = 1, metadata: Int = 0) = ItemStack(this, count, metadata)
