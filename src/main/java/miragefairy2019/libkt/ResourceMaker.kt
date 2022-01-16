@@ -22,7 +22,18 @@ fun ModInitializer.makeRecipe(registryName: ResourceName, recipe: DataRecipe) = 
     getRecipeFile(registryName).place(recipe)
 }
 
+
 abstract class DataRecipe
+
+data class DataShapedRecipe(
+    @Expose val group: String? = null,
+    @Expose val pattern: List<String>,
+    @Expose val key: Map<String, DataIngredient>,
+    @Expose val result: DataResult
+) : DataRecipe() {
+    @Expose
+    val type = "forge:ore_shaped"
+}
 
 data class DataShapelessRecipe(
     @Expose val group: String? = null,
@@ -32,6 +43,7 @@ data class DataShapelessRecipe(
     @Expose
     val type = "forge:ore_shapeless"
 }
+
 
 abstract class DataIngredient
 
