@@ -1,7 +1,6 @@
 package miragefairy2019.mod.modules.ore
 
 import miragefairy2019.libkt.DataItemModel
-import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
@@ -24,33 +23,8 @@ import miragefairy2019.mod.lib.multi.ItemVariantMaterial
 import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
-import net.minecraft.init.Items
-import net.minecraftforge.common.MinecraftForge
-import net.minecraftforge.event.entity.player.FillBucketEvent
 import net.minecraftforge.fluids.BlockFluidClassic
 import net.minecraftforge.fluids.Fluid
-import net.minecraftforge.fml.common.eventhandler.Event
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-
-private typealias Ivifb = ItemVariantInitializer<ItemFilledBucket, ItemVariantFilledBucket>
-
-private fun Ivifb.registerEmptyBucketFiller(getBlockState: () -> IBlockState) {
-    itemInitializer.modInitializer.onRegisterItem {
-        MinecraftForge.EVENT_BUS.register(object : Any() {
-            @SubscribeEvent
-            fun accept(event: FillBucketEvent) {
-                if (event.result != Event.Result.DEFAULT) return
-                if (event.emptyBucket.item === Items.BUCKET) {
-                    if (ItemFilledBucket.tryDrainFluid(event.world, event.entityPlayer, event.emptyBucket, event.target, getBlockState())) {
-                        event.filledBucket = itemVariant.createItemStack()
-                        event.result = Event.Result.ALLOW
-                    }
-                }
-            }
-        })
-    }
-}
-
 
 object Ore {
     val module: Module = {
@@ -134,7 +108,6 @@ object Ore {
             }, 0) {
                 addOreName("bucketMiragiumWater")
                 addOreName("container1000MiragiumWater")
-                registerEmptyBucketFiller { ModuleOre.blockFluidMiragiumWater.defaultState }
             }
             itemVariant("mirage_flower_extract_bucket", {
                 ItemVariantFilledBucket(
@@ -145,7 +118,6 @@ object Ore {
             }, 1) {
                 addOreName("bucketMirageFlowerExtract")
                 addOreName("container1000MirageFlowerExtract")
-                registerEmptyBucketFiller { ModuleOre.blockFluidMirageFlowerExtract.defaultState }
             }
             itemVariant("mirage_flower_oil_bucket", {
                 ItemVariantFilledBucket(
@@ -156,7 +128,6 @@ object Ore {
             }, 2) {
                 addOreName("bucketMirageFlowerOil")
                 addOreName("container1000MirageFlowerOil")
-                registerEmptyBucketFiller { ModuleOre.blockFluidMirageFlowerOil.defaultState }
             }
 
             onRegisterItem {
