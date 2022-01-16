@@ -42,6 +42,13 @@ class ItemPot : Item(), IPot {
 class ItemFilledBucket : ItemMultiMaterial<ItemVariantFilledBucket>(), IPot {
     override fun hasContainerItem(itemStack: ItemStack) = true
     override fun getContainerItem(itemStack: ItemStack) = ItemStack(Pot.itemPot.invoke())
+    override fun initCapabilities(itemStack: ItemStack, nbt: NBTTagCompound?) = object : CapabilityProviderAdapter() {
+        override fun <T> getCapabilityImpl(capability: Capability<T>, facing: EnumFacing?): (() -> T)? = when (capability) {
+            CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY -> ({ CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY.cast(FluidHandlerPot(itemStack)) })
+            else -> null
+        }
+    }
+
     override fun getFluid(itemStack: ItemStack): Fluid? = FluidRegistry.getFluid(getVariant(itemStack).orNull?.fluidName)
 }
 
