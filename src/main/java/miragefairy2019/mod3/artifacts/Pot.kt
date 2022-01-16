@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.ore
+package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.CapabilityProviderAdapter
 import miragefairy2019.libkt.castOrNull
@@ -6,6 +6,7 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.upperCamelCase
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
+import miragefairy2019.mod.modules.ore.ItemVariantFilledBucket
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound

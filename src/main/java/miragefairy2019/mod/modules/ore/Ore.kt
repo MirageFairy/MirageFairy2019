@@ -20,6 +20,9 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial
+import miragefairy2019.mod3.artifacts.ItemFilledBucket
+import miragefairy2019.mod3.artifacts.ItemPot
+import miragefairy2019.mod3.artifacts.Pot
 import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
