@@ -39,6 +39,12 @@ class ItemPot : Item(), IPot {
     override fun getFluid(itemStack: ItemStack): Fluid? = null
 }
 
+class ItemFilledBucket : ItemMultiMaterial<ItemVariantFilledBucket>(), IPot {
+    override fun hasContainerItem(itemStack: ItemStack) = true
+    override fun getContainerItem(itemStack: ItemStack) = ItemStack(Pot.itemPot.invoke())
+    override fun getFluid(itemStack: ItemStack): Fluid? = FluidRegistry.getFluid(getVariant(itemStack).orNull?.fluidName)
+}
+
 class FluidHandlerPot(@JvmField var container: ItemStack) : IFluidHandlerItem {
     private fun getFluid() = container.item.castOrNull<IPot>()?.getFluid(container)
     override fun getContainer() = container
