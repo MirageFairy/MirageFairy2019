@@ -20,9 +20,7 @@ import miragefairy2019.libkt.upperCamelCase
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial
-import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod3.main.api.ApiMain
-import net.minecraft.block.state.IBlockState
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -70,34 +68,19 @@ object Pot {
             setCreativeTab { ApiMain.creativeTab }
 
             itemVariant("miragium_water_pot", {
-                ItemVariantFilledPot(
-                    it,
-                    "potMiragiumWater",
-                    "miragium_water",
-                    true
-                ) { ModuleOre.blockFluidMiragiumWater.defaultState }
+                ItemVariantFilledPot(it, "potMiragiumWater", "miragium_water")
             }, 0) {
                 addOreName("potMiragiumWater")
                 addOreName("container1000MiragiumWater")
             }
             itemVariant("mirage_flower_extract_pot", {
-                ItemVariantFilledPot(
-                    it,
-                    "potMirageFlowerExtract",
-                    "mirage_flower_extract",
-                    true
-                ) { ModuleOre.blockFluidMirageFlowerExtract.defaultState }
+                ItemVariantFilledPot(it, "potMirageFlowerExtract", "mirage_flower_extract")
             }, 1) {
                 addOreName("potMirageFlowerExtract")
                 addOreName("container1000MirageFlowerExtract")
             }
             itemVariant("mirage_flower_oil_pot", {
-                ItemVariantFilledPot(
-                    it,
-                    "potMirageFlowerOil",
-                    "mirage_flower_oil",
-                    true
-                ) { ModuleOre.blockFluidMirageFlowerOil.defaultState }
+                ItemVariantFilledPot(it, "potMirageFlowerOil", "mirage_flower_oil")
             }, 2) {
                 addOreName("potMirageFlowerOil")
                 addOreName("container1000MirageFlowerOil")
@@ -129,9 +112,7 @@ class ItemPot : Item(), IPot {
 class ItemVariantFilledPot(
     registryName: String,
     unlocalizedName: String,
-    val fluidName: String,
-    val vaporizable: Boolean,
-    val getFluidBlockState: () -> IBlockState?
+    val fluidName: String
 ) : ItemVariantMaterial(registryName, unlocalizedName)
 
 class ItemFilledPot : ItemMultiMaterial<ItemVariantFilledPot>(), IPot {
