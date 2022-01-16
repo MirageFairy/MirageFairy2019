@@ -68,21 +68,21 @@ object Pot {
             setCreativeTab { ApiMain.creativeTab }
 
             itemVariant("miragium_water_pot", {
-                ItemVariantFilledPot(it, "potMiragiumWater", "miragium_water")
+                ItemVariantFilledPot(it, "mirageFairyPotMiragiumWater", "miragium_water")
             }, 0) {
-                addOreName("potMiragiumWater")
+                addOreName("mirageFairyPotMiragiumWater")
                 addOreName("container1000MiragiumWater")
             }
             itemVariant("mirage_flower_extract_pot", {
-                ItemVariantFilledPot(it, "potMirageFlowerExtract", "mirage_flower_extract")
+                ItemVariantFilledPot(it, "mirageFairyPotMirageFlowerExtract", "mirage_flower_extract")
             }, 1) {
-                addOreName("potMirageFlowerExtract")
+                addOreName("mirageFairyPotMirageFlowerExtract")
                 addOreName("container1000MirageFlowerExtract")
             }
             itemVariant("mirage_flower_oil_pot", {
-                ItemVariantFilledPot(it, "potMirageFlowerOil", "mirage_flower_oil")
+                ItemVariantFilledPot(it, "mirageFairyPotMirageFlowerOil", "mirage_flower_oil")
             }, 2) {
-                addOreName("potMirageFlowerOil")
+                addOreName("mirageFairyPotMirageFlowerOil")
                 addOreName("container1000MirageFlowerOil")
             }
 
@@ -136,7 +136,7 @@ class FluidHandlerPot(@JvmField var container: ItemStack) : IFluidHandlerItem {
         if (container.count != 1) return 0 // 複数スタックされている場合は不可
         if (getFluid() != null) return 0 // 中身が入っている場合は不可
         if (resource.amount < 1000) return 0 // 入力が1000に満たない場合は不可
-        val result = OreIngredient("pot${resource.fluid.name.upperCamelCase}").matchingStacks.getOrNull(0)?.copy() ?: return 0 // 対応していない場合は不可
+        val result = OreIngredient("mirageFairyPot${resource.fluid.name.upperCamelCase}").matchingStacks.getOrNull(0)?.copy() ?: return 0 // 対応していない場合は不可
 
         if (doFill) container = result
         return 1000
