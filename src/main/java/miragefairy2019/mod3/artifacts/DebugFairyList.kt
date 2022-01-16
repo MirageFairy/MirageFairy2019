@@ -1,15 +1,22 @@
-package miragefairy2019.mod3.fairy
+package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.hex
+import miragefairy2019.libkt.item
+import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.libkt.with
 import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.fairy.FairyTypes
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.sum
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.mana
+import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.util.EnumActionResult
@@ -17,7 +24,26 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraftforge.client.model.ModelLoader
 import java.io.File
+
+object DebugFairyList {
+    lateinit var itemDebugFairyList: () -> ItemDebugFairyList
+    val module: Module = {
+
+        // 妖精一覧デバッグアイテム
+        itemDebugFairyList = item({ ItemDebugFairyList() }, "debug_fairy_list") {
+            setUnlocalizedName("debugFairyList")
+            setCreativeTab { ApiMain.creativeTab }
+            modInitializer.onRegisterItem {
+                if (ApiMain.side.isClient) {
+                    ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("minecraft:book", "normal"))
+                }
+            }
+        }
+
+    }
+}
 
 class ItemDebugFairyList : Item() {
     companion object {

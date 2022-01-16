@@ -4,15 +4,12 @@ import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.orNull
-import miragefairy2019.libkt.setCreativeTab
-import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.upperCamelCase
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
-import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.api.ApiMain.side
 import mirrg.boron.util.UtilsString
 import net.minecraft.client.Minecraft
@@ -198,17 +195,6 @@ object Fairy {
 
             }
 
-        }
-
-        // 妖精一覧デバッグアイテム
-        item({ ItemDebugFairyList() }, "debug_fairy_list") {
-            setUnlocalizedName("debugFairyList")
-            setCreativeTab { ApiMain.creativeTab }
-            modInitializer.onRegisterItem {
-                if (side.isClient) {
-                    ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("minecraft:book", "normal"))
-                }
-            }
         }
 
     }
