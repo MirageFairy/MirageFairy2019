@@ -17,9 +17,13 @@ val ItemStack?.orEmpty: ItemStack get() = this ?: ItemStack.EMPTY
 
 fun ItemStack.copy(count: Int): ItemStack = copy().also { it.count = count }
 
+
 fun Item.getSubItems(creativeTab: CreativeTabs): List<ItemStack> = NonNullList.create<ItemStack>().also { getSubItems(creativeTab, it) }
 
 val ItemStack.containerItem get() = if (item.hasContainerItem(this)) item.getContainerItem(this).orNull else null
+
+
+// ワールドドロップ
 
 /**
  * @receiver このインスタンスはメソッド内部でcopyされるため、破壊されません。
@@ -40,10 +44,14 @@ fun ItemStack.drop(world: World, pos: Vec3d, motionless: Boolean = false): Entit
  */
 fun ItemStack.drop(world: World, blockPos: BlockPos, motionless: Boolean = false) = drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5), motionless)
 
+
+// 同値判定
 fun ItemStack.equalsItem(other: ItemStack) = item == other.item
 fun ItemStack.equalsItemDamage(other: ItemStack) = equalsItem(other) && itemDamage == other.itemDamage
 fun ItemStack.equalsItemDamageTag(other: ItemStack) = equalsItemDamage(other) && ItemStack.areItemStackShareTagsEqual(this, other)
 fun ItemStack.equalsItemDamageTagCount(other: ItemStack) = equalsItemDamageTag(other) && count == other.count
 
+
+// 相互変換
 val Item.block get() = Block.getBlockFromItem(this).takeIf { it != Blocks.AIR }
 val Block.item get() = Item.getItemFromBlock(this).takeIf { it != Items.AIR }
