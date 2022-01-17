@@ -158,9 +158,9 @@ object Sphere {
                         ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere"),
                         variant.createItemStack(),
                         OreIngredient("container1000MiragiumWater"),
-                        OreIngredient("gemFluorite"),
                         OreIngredientComplex("mirageFairy2019CraftingToolFairyWandCrafting"),
                         OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}"),
+                        OreIngredient("gemFluorite"),
                         ingredient
                     )
 

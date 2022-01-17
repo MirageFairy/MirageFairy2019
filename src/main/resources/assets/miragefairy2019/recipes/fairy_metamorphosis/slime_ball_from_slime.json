@@ -10,12 +10,12 @@
       "ore": "container250MiragiumWater"
     },
     {
-      "item": "minecraft:dirt",
-      "data": 0
-    },
-    {
       "type": "forge:ore_dict",
       "ore": "mirageFairy2019FairySlimeRank1"
+    },
+    {
+      "item": "minecraft:dirt",
+      "data": 0
     }
   ],
   "result": {

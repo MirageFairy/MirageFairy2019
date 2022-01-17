@@ -24,12 +24,12 @@ object FairyMetamorphosis {
                         DataOreIngredient(
                             ore = "container250MiragiumWater"
                         ),
+                        DataOreIngredient(
+                            ore = "mirageFairy2019Fairy${fairyMotif.upperCamelCase}Rank1"
+                        ),
                         DataSimpleIngredient(
                             item = "minecraft:dirt",
                             data = 0
-                        ),
-                        DataOreIngredient(
-                            ore = "mirageFairy2019Fairy${fairyMotif.upperCamelCase}Rank1"
                         )
                     ),
                     result = result
