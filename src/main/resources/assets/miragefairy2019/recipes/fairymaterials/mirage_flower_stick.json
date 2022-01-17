@@ -4,23 +4,23 @@
 	"ingredients": [
 		{
 			"type": "forge:ore_dict",
-			"ore": "leafMirageFlower"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "bone"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "gemApatite"
+			"ore": "mirageFairyStick"
 		},
 		{
 			"type": "forge:ore_dict",
 			"ore": "container1000MiragiumWater"
 		},
 		{
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+			"type": "forge:ore_dict",
+			"ore": "mirageFairy2019FairyAbilityCrystal"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "leafMirageFlower"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "gemApatite"
 		}
 	],
 	"result": {

@@ -66,8 +66,8 @@ object FairyMaterials {
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
                 it.conditions += FairyStickCraftConditionConsumeBlock { ApiOre.blockFluidMiragiumWater.defaultState }
+                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbilityCrystal"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("leafMirageFlower"))
-                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("bone"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("gemApatite"))
                 it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.stickMirageFlower.createItemStack() }
             })
