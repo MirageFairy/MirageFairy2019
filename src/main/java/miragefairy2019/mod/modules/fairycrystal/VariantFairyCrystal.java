@@ -3,6 +3,7 @@ package miragefairy2019.mod.modules.fairycrystal;
 import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.lib.WeightedRandom;
+import miragefairy2019.mod.lib.WeightedRandomKt;
 import miragefairy2019.mod.lib.multi.ItemVariant;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.item.EntityItem;
@@ -70,7 +71,7 @@ public class VariantFairyCrystal extends ItemVariant {
             ITextComponent string = new TextComponentString("");
             string.appendText("===== " + itemStackCrystal.getDisplayName() + " (" + (world.isRemote ? "Client" : "Server") + ") =====");
             string.appendText("\n");
-            double totalWeight = WeightedRandom.INSTANCE.getTotalWeight(dropTable);
+            double totalWeight = WeightedRandomKt.getTotalWeight(dropTable);
             for (WeightedRandom.Item<ItemStack> item : ISuppliterator.ofIterable(dropTable)
                     .sortedObj(i -> i.getItem().getDisplayName())
                     .sortedDouble(i -> i.getWeight())) {

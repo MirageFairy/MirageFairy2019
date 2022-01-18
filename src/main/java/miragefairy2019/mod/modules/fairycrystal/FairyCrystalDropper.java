@@ -160,7 +160,7 @@ public abstract class FairyCrystalDropper {
         dropTable = WeightedRandom.INSTANCE.unique(dropTable, (a, b) -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b));
 
         // 1に満たない場合はairを入れて詰める
-        double totalWeight = WeightedRandom.INSTANCE.getTotalWeight(dropTable);
+        double totalWeight = WeightedRandomKt.getTotalWeight(dropTable);
         if (totalWeight < 1) dropTable.add(new WeightedRandom.Item<>(FairyTypes.instance.getAir().getMain().createItemStack(), 1 - totalWeight));
 
         return dropTable;

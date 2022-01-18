@@ -2,6 +2,7 @@ package miragefairy2019.mod3.oreseeddrop.api
 
 import miragefairy2019.mod.lib.WeightedRandom
 import miragefairy2019.mod.lib.getRandomItem
+import miragefairy2019.mod.lib.totalWeight
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
@@ -19,7 +20,7 @@ interface IOreSeedDropRegistry {
     fun getDropList(environment: OreSeedDropEnvironment): List<OreSeedDrop>
     fun drop(environment: OreSeedDropEnvironment, random: Random): IBlockState? {
         val dropList = getDropList(environment)
-        if (random.nextDouble() < (1.0 - WeightedRandom.getTotalWeight(dropList)).coerceAtLeast(0.0)) return null
+        if (random.nextDouble() < (1.0 - dropList.totalWeight).coerceAtLeast(0.0)) return null
         return dropList.getRandomItem(random)?.invoke()
     }
 }

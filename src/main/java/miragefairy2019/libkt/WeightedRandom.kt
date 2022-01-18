@@ -10,7 +10,7 @@ fun <T : Any> List<WeightedRandom.Item<T>>.getRandomItem(random: Random) = getIt
 fun <T : Any> List<WeightedRandom.Item<T>>.getItem(d: Double): T? {
     if (isEmpty()) return null
 
-    var w = d * WeightedRandom.getTotalWeight(this) // 0 <= w < totalWeight
+    var w = d * totalWeight // 0 <= w < totalWeight
     this.forEach { item ->
         w -= item.weight
         if (w < 0) return item.item
@@ -18,11 +18,10 @@ fun <T : Any> List<WeightedRandom.Item<T>>.getItem(d: Double): T? {
     return this.last().item
 }
 
+val <T : Any> List<WeightedRandom.Item<T>>.totalWeight get() = sumByDouble { it.weight }
+
 // TODO flat
 object WeightedRandom {
-
-    // TODO receiver
-    fun getTotalWeight(items: List<Item<*>>) = items.sumByDouble { it.weight }
 
     // TODO -> Pair
     class Item<T : Any>(val item: T, val weight: Double)

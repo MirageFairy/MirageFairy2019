@@ -30,7 +30,7 @@ public final class CriticalRate {
         items.add(new WeightedRandom.Item<>(EnumCriticalFactor.white, weightWhite));
         items.add(new WeightedRandom.Item<>(EnumCriticalFactor.purple, weightPurple));
         items.add(new WeightedRandom.Item<>(EnumCriticalFactor.cyan, weightCyan));
-        totalWeight = WeightedRandom.INSTANCE.getTotalWeight(items);
+        totalWeight = WeightedRandomKt.getTotalWeight(items);
     }
 
     public ISuppliterator<EnumCriticalFactor> getBar() {
