@@ -4,7 +4,6 @@ import miragefairy2019.libkt.WeightedItem;
 import miragefairy2019.mod.api.fairycrystal.DropCategory;
 import miragefairy2019.mod.api.fairycrystal.IDrop;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
-import miragefairy2019.mod.lib.WeightedRandom;
 import miragefairy2019.mod.lib.WeightedRandomKt;
 import miragefairy2019.mod3.fairy.FairyTypes;
 import mirrg.boron.util.struct.Tuple;
@@ -158,7 +157,7 @@ public abstract class FairyCrystalDropper {
                 })
                 .map(d -> new WeightedItem<>(d.getItemStack(rank), d.getWeight() * (d.getDropCategory() == DropCategory.RARE ? rareBoost : 1)))
                 .toList();
-        dropTable = WeightedRandom.INSTANCE.unique(dropTable, (a, b) -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b));
+        dropTable = WeightedRandomKt.unique(dropTable, (a, b) -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b));
 
         // 1に満たない場合はairを入れて詰める
         double totalWeight = WeightedRandomKt.getTotalWeight(dropTable);

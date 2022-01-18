@@ -21,31 +21,26 @@ fun <T : Any> List<WeightedItem<T>>.getItem(d: Double): T? {
 
 val <T : Any> List<WeightedItem<T>>.totalWeight get() = sumByDouble { it.weight }
 
-// TODO flat
-object WeightedRandom {
+fun <T : Any> List<WeightedItem<T>>.unique(equals: BiPredicate<T, T>): List<WeightedItem<T>> {
+    class Slot(val item: T) {
+        override fun hashCode() = 0
 
-    // TODO receiver
-    fun <T : Any> unique(dropTable: List<WeightedItem<T>>, equals: BiPredicate<T, T>): List<WeightedItem<T>> {
-        class Slot(val item: T) {
-            override fun hashCode() = 0
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true // 相手が自分自身なら一致
+            if (other == null) return false // 相手が無なら不一致
 
-            override fun equals(other: Any?): Boolean {
-                if (this === other) return true // 相手が自分自身なら一致
-                if (other == null) return false // 相手が無なら不一致
+            // 型チェック
+            if (javaClass != other.javaClass) return false
+            @Suppress("UNCHECKED_CAST")
+            other as Slot
 
-                // 型チェック
-                if (javaClass != other.javaClass) return false
-                @Suppress("UNCHECKED_CAST")
-                other as Slot
-
-                return equals.test(item, other.item)
-            }
+            return equals.test(item, other.item)
         }
-
-        val map = mutableMapOf<Slot, Double>()
-        dropTable.forEach { item ->
-            map[Slot(item.item)] = (map[Slot(item.item)] ?: 0.0) + item.weight
-        }
-        return map.entries.map { WeightedItem<T>(it.key.item, it.value) }
     }
+
+    val map = mutableMapOf<Slot, Double>()
+    this.forEach { item ->
+        map[Slot(item.item)] = (map[Slot(item.item)] ?: 0.0) + item.weight
+    }
+    return map.entries.map { WeightedItem<T>(it.key.item, it.value) }
 }
