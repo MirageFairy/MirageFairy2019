@@ -13,12 +13,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<V> {
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return getVariant(stack).map(v -> "item" + v.getUnlocalizedName()).orElse("item.null");
+        return Optional.ofNullable(getVariant(stack)).map(v -> "item" + v.getUnlocalizedName()).orElse("item.null");
     }
 
     @SideOnly(Side.CLIENT)
@@ -34,7 +35,7 @@ public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
-        V variant = getVariant(itemStack).orElse(null);
+        V variant = getVariant(itemStack);
         if (variant != null) {
 
             // ポエム

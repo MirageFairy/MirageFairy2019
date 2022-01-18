@@ -6,7 +6,6 @@ import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.NonNullList
-import java.util.Optional
 
 open class ItemMulti<V : ItemVariant> : Item() {
     init {
@@ -25,11 +24,9 @@ open class ItemMulti<V : ItemVariant> : Item() {
         variant.metadata = metadata
     }
 
-    // TODO Nullable
     fun getVariant(itemStack: ItemStack) = getVariant(itemStack.metadata)
 
-    // TODO Nullable
-    fun getVariant(metadata: Int) = Optional.ofNullable(map[metadata])
+    fun getVariant(metadata: Int) = map[metadata]
 
     // TODO type
     val variants: Iterable<Tuple<Int, V?>> get() = map.entries.map { Tuple.of(it.key, it.value) }

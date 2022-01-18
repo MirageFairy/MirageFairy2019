@@ -87,7 +87,7 @@ object Fairy {
                         @SideOnly(Side.CLIENT)
                         class ItemColorImpl : IItemColor {
                             override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
-                                val variant = item.getVariant(itemStack).orElse(null) ?: return 0xFFFFFF
+                                val variant = item.getVariant(itemStack) ?: return 0xFFFFFF
                                 return when (tintIndex) {
                                     0 -> variant.colorSet.skin
                                     1 -> when (i) {

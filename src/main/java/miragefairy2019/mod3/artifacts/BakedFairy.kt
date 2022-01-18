@@ -75,7 +75,7 @@ object BakedFairy {
                     class ItemColorImpl : IItemColor {
                         override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
                             val fairyItemStack = (ItemBakedFairy.getFairy(itemStack) ?: return 0xFFFFFF)
-                            val variant = Fairy.listItemFairy[0].getVariant(fairyItemStack).orElse(null) ?: return 0xFFFFFF
+                            val variant = Fairy.listItemFairy[0].getVariant(fairyItemStack) ?: return 0xFFFFFF
                             return when (tintIndex) {
                                 0 -> 0xFFFFFF
                                 1 -> variant.colorSet.skin

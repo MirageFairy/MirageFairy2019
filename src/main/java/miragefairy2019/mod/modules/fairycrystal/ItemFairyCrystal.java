@@ -17,7 +17,7 @@ public class ItemFairyCrystal extends ItemMulti<VariantFairyCrystal> {
         ItemStack itemStackCrystal = player.getHeldItem(hand);
         if (itemStackCrystal.isEmpty()) return EnumActionResult.PASS;
 
-        VariantFairyCrystal variant = getVariant(itemStackCrystal).orElse(null);
+        VariantFairyCrystal variant = getVariant(itemStackCrystal);
         if (variant == null) return EnumActionResult.PASS;
 
         return variant.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
@@ -25,7 +25,7 @@ public class ItemFairyCrystal extends ItemMulti<VariantFairyCrystal> {
 
     @Override
     public String getItemStackDisplayName(ItemStack itemStack) {
-        VariantFairyCrystal variant = getVariant(itemStack).orElse(null);
+        VariantFairyCrystal variant = getVariant(itemStack);
         if (variant == null) return UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".name");
         return UtilsMinecraft.translateToLocalFormatted("item." + variant.unlocalizedName + ".name");
     }

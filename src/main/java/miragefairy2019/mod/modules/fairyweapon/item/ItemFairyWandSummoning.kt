@@ -49,7 +49,7 @@ class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWeaponCraft
 
         // 妖晶を得る
         val itemStackFairyCrystal = findItemOptional(player) { itemStack -> itemStack!!.item is ItemFairyCrystal }.orElse(null) ?: return false // クリスタルを持ってない場合は無視
-        val variantFairyCrystal = (itemStackFairyCrystal.item as ItemFairyCrystal).getVariant(itemStackFairyCrystal).orElse(null) ?: return false // 異常なクリスタルを持っている場合は無視
+        val variantFairyCrystal = (itemStackFairyCrystal.item as ItemFairyCrystal).getVariant(itemStackFairyCrystal) ?: return false // 異常なクリスタルを持っている場合は無視
 
         // プレイヤー視点判定
         val rayTraceResult = rayTrace(player.world, player, false) ?: return false // ブロックに当たらなかった場合は無視

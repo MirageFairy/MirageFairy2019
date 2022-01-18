@@ -9,7 +9,6 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
-import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.api.ore.ApiOre
@@ -127,24 +126,23 @@ class ItemVariantFairyMaterial(registryName: String, unlocalizedName: String, va
 class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        val variant = getVariant(itemStack).orElse(null)
-        if (variant != null) {
+        val variant = getVariant(itemStack) ?: return
 
-            // ポエム
-            if (UtilsMinecraft.canTranslate("${getUnlocalizedName(itemStack)}.poem")) {
-                val string = UtilsMinecraft.translateToLocal("${getUnlocalizedName(itemStack)}.poem")
-                if (string.isNotEmpty()) tooltip += string
-            }
-
-            tooltip += formattedText { (!"Tier ${variant.tier}").aqua }
-
+        // ポエム
+        if (UtilsMinecraft.canTranslate("${getUnlocalizedName(itemStack)}.poem")) {
+            val string = UtilsMinecraft.translateToLocal("${getUnlocalizedName(itemStack)}.poem")
+            if (string.isNotEmpty()) tooltip += string
         }
+
+        // Tier
+        tooltip += formattedText { (!"Tier ${variant.tier}").aqua }
+
     }
 
 
-    override fun getItemBurnTime(itemStack: ItemStack) = getVariant(itemStack).orNull?.burnTime ?: -1
+    override fun getItemBurnTime(itemStack: ItemStack) = getVariant(itemStack)?.burnTime ?: -1
 
 
     override fun hasContainerItem(itemStack: ItemStack) = !getContainerItem(itemStack).isEmpty
-    override fun getContainerItem(itemStack: ItemStack): ItemStack = getVariant(itemStack).orNull?.containerItem ?: ItemStack.EMPTY
+    override fun getContainerItem(itemStack: ItemStack): ItemStack = getVariant(itemStack)?.containerItem ?: ItemStack.EMPTY
 }

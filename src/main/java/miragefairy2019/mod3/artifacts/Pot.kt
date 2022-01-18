@@ -12,7 +12,6 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeRecipe
-import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
@@ -126,7 +125,7 @@ class ItemFilledPot : ItemMultiMaterial<ItemVariantFilledPot>(), IPot {
         }
     }
 
-    override fun getFluid(itemStack: ItemStack): Fluid? = FluidRegistry.getFluid(getVariant(itemStack).orNull?.fluidName)
+    override fun getFluid(itemStack: ItemStack): Fluid? = FluidRegistry.getFluid(getVariant(itemStack)?.fluidName)
 }
 
 class FluidHandlerPot(@JvmField var container: ItemStack) : IFluidHandlerItem {

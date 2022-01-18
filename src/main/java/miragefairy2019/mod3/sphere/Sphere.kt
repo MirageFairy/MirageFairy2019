@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.sphere
 
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.setCreativeTab
@@ -37,12 +38,12 @@ import net.minecraftforge.oredict.OreIngredient
 
 class ItemSpheres : ItemMulti<VariantSphere>() {
     override fun getItemStackDisplayName(itemStack: ItemStack): String {
-        val variant = getVariant(itemStack).orElse(null) ?: return UtilsMinecraft.translateToLocal("$unlocalizedName.name")
+        val variant = getVariant(itemStack) ?: return UtilsMinecraft.translateToLocal("$unlocalizedName.name")
         return UtilsMinecraft.translateToLocalFormatted("$unlocalizedName.format", variant.sphere.ergType.displayName.formattedText)
     }
 }
 
-operator fun (() -> ItemSpheres).get(ergType: EnumErgType): Any = this().getVariant(ergType.ordinal).get().createItemStack()
+operator fun (() -> ItemSpheres).get(ergType: EnumErgType) = this().getVariant(ergType.ordinal)?.createItemStack() ?: EMPTY_ITEM_STACK
 
 class VariantSphere(val sphere: SphereType) : ItemVariant()
 
@@ -117,7 +118,7 @@ object Sphere {
                     @SideOnly(Side.CLIENT)
                     class ItemColorImpl : IItemColor {
                         override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
-                            val variant = itemSpheres().getVariant(itemStack).orElse(null) ?: return 0xFFFFFF
+                            val variant = itemSpheres().getVariant(itemStack) ?: return 0xFFFFFF
                             return when (tintIndex) {
                                 0 -> variant.sphere.colorBackground
                                 1 -> variant.sphere.colorPlasma
@@ -135,7 +136,7 @@ object Sphere {
         // スフィアの鉱石辞書
         onCreateItemStack {
             EnumErgType.values().forEachIndexed { meta, ergType ->
-                val itemStack = itemSpheres().getVariant(meta).orElse(null)!!.createItemStack()
+                val itemStack = itemSpheres().getVariant(meta)!!.createItemStack()
                 OreDictionary.registerOre(getSphereType(ergType).oreName, itemStack)
                 OreDictionary.registerOre("mirageFairy2019SphereAny", itemStack)
             }
@@ -145,7 +146,7 @@ object Sphere {
         onAddRecipe {
             EnumErgType.values().forEachIndexed { meta, ergType ->
                 val sphere = getSphereType(ergType)
-                val variant = itemSpheres().getVariant(meta).orElse(null)!!
+                val variant = itemSpheres().getVariant(meta)!!
 
                 // 蛍石触媒レシピ
                 run {
