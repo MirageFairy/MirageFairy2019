@@ -1,5 +1,6 @@
 package miragefairy2019.mod.lib.multi;
 
+import javafx.util.Pair;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -24,10 +25,10 @@ public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<
 
     @SideOnly(Side.CLIENT)
     public void setCustomModelResourceLocations() {
-        for (Tuple<Integer, V> tuple : getVariants()) {
+        for (V variant : getVariants()) {
             ModelLoader.setCustomModelResourceLocation(this,
-                    tuple.x,
-                    new ModelResourceLocation(new ResourceLocation(getRegistryName().getResourceDomain(), tuple.y.getRegistryName()), null));
+                    variant.getMetadata(),
+                    new ModelResourceLocation(new ResourceLocation(getRegistryName().getResourceDomain(), variant.getRegistryName()), null));
         }
     }
 

@@ -71,7 +71,7 @@ object Fairy {
                 FairyTypes.instance.variants.forEach { item.registerVariant(it.x, it.y[rank - 1]) }
                 ForgeRegistries.ITEMS.register(item)
                 if (side.isClient) {
-                    item.variants.forEach { ModelLoader.setCustomModelResourceLocation(item, it.x, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, "fairy"), "normal")) }
+                    item.variants.forEach { ModelLoader.setCustomModelResourceLocation(item, it.metadata, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, "fairy"), "normal")) }
                 }
                 item
             }

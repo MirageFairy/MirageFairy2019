@@ -1,7 +1,6 @@
 package miragefairy2019.mod.lib.multi
 
 import miragefairy2019.libkt.createItemStack
-import mirrg.boron.util.struct.Tuple
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -28,8 +27,7 @@ open class ItemMulti<V : ItemVariant> : Item() {
 
     fun getVariant(metadata: Int) = map[metadata]
 
-    // TODO type
-    val variants: Iterable<Tuple<Int, V?>> get() = map.entries.map { Tuple.of(it.key, it.value) }
+    val variants get() = map.values
 
     //
 

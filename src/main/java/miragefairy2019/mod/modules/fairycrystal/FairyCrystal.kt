@@ -26,13 +26,13 @@ object FairyCrystal {
             variantFairyCrystalPure = itemVariant("pure_fairy_crystal", { VariantFairyCrystalPure(it, "fairyCrystalPure", "mirageFairyCrystalPure") }, 2)
             onRegisterItem {
                 if (ApiMain.side.isClient) {
-                    item.variants.forEach { item.setCustomModelResourceLocation(it.x!!, modelName = it.y!!.registryName) }
+                    item.variants.forEach { item.setCustomModelResourceLocation(it.metadata, modelName = it.registryName) }
                 }
             }
             onCreateItemStack {
                 item.variants.forEach {
-                    OreDictionary.registerOre(it.y!!.oreName, it.y!!.createItemStack())
-                    OreDictionary.registerOre("mirageFairyCrystalAny", it.y!!.createItemStack())
+                    OreDictionary.registerOre(it.oreName, it.createItemStack())
+                    OreDictionary.registerOre("mirageFairyCrystalAny", it.createItemStack())
                 }
             }
         }
