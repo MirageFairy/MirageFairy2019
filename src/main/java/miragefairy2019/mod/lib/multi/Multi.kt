@@ -38,11 +38,17 @@ open class ItemMulti<V : ItemVariant> : Item() {
 }
 
 open class ItemVariant {
-    var metadata = 0
-    var item: Item? = null
+    @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
+    private lateinit var iMetadata: Integer
+    var metadata
+        get() = iMetadata.toInt()
+        set(it) {
+            iMetadata = Integer(it)
+        }
+    lateinit var item: Item
 
     @JvmOverloads // TODO remove
-    fun createItemStack(amount: Int = 1) = item!!.createItemStack(amount, metadata)
+    fun createItemStack(amount: Int = 1) = item.createItemStack(amount, metadata)
 }
 
 open class ItemVariantMaterial(val registryName: String, val unlocalizedName: String) : ItemVariant()
