@@ -1,7 +1,7 @@
 package miragefairy2019.mod3.fairylogdrop
 
 import miragefairy2019.libkt.WeightedItem
-import miragefairy2019.mod.lib.getRandomItem
+import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.mod3.fairylogdrop.api.IFairyLogDropCondition
 import miragefairy2019.mod3.fairylogdrop.api.IFairyLogDropRecipe
 import miragefairy2019.mod3.fairylogdrop.api.IFairyLogDropRegistry

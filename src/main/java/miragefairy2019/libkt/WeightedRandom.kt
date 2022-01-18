@@ -1,7 +1,5 @@
-// TODO change
-package miragefairy2019.mod.lib
+package miragefairy2019.libkt
 
-import miragefairy2019.libkt.WeightedItem
 import java.util.Random
 import java.util.function.BiPredicate
 

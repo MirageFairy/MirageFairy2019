@@ -1,9 +1,9 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
 import miragefairy2019.libkt.WeightedItem;
+import miragefairy2019.libkt.WeightedRandomKt;
 import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
-import miragefairy2019.mod.lib.WeightedRandomKt;
 import miragefairy2019.mod.lib.multi.ItemVariant;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.item.EntityItem;

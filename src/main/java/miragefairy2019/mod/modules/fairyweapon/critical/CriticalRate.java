@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.critical;
 
 import miragefairy2019.libkt.WeightedItem;
-import miragefairy2019.mod.lib.WeightedRandomKt;
+import miragefairy2019.libkt.WeightedRandomKt;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
 import java.util.ArrayList;

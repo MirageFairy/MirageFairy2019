@@ -1,8 +1,8 @@
 package miragefairy2019.mod3.oreseeddrop.api
 
 import miragefairy2019.libkt.WeightedItem
-import miragefairy2019.mod.lib.getRandomItem
-import miragefairy2019.mod.lib.totalWeight
+import miragefairy2019.libkt.getRandomItem
+import miragefairy2019.libkt.totalWeight
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack

@@ -1,10 +1,10 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
 import miragefairy2019.libkt.WeightedItem;
+import miragefairy2019.libkt.WeightedRandomKt;
 import miragefairy2019.mod.api.fairycrystal.DropCategory;
 import miragefairy2019.mod.api.fairycrystal.IDrop;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
-import miragefairy2019.mod.lib.WeightedRandomKt;
 import miragefairy2019.mod3.fairy.FairyTypes;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
