@@ -29,22 +29,22 @@ public final class CriticalRate {
         items.add(new WeightedRandom.Item<>(EnumCriticalFactor.white, weightWhite));
         items.add(new WeightedRandom.Item<>(EnumCriticalFactor.purple, weightPurple));
         items.add(new WeightedRandom.Item<>(EnumCriticalFactor.cyan, weightCyan));
-        totalWeight = WeightedRandom.getTotalWeight(items);
+        totalWeight = WeightedRandom.INSTANCE.getTotalWeight(items);
     }
 
     public ISuppliterator<EnumCriticalFactor> getBar() {
         return ISuppliterator.range(0, 50)
-                .map(i -> WeightedRandom.getItem(i / 50.0, items).get());
+                .map(i -> WeightedRandom.INSTANCE.getItem(i / 50.0, items).get());
     }
 
     public double getMean() {
         return items.stream()
-                .mapToDouble(i -> i.weight * i.item.coefficient)
+                .mapToDouble(i -> i.getWeight() * i.getItem().coefficient)
                 .sum() / totalWeight;
     }
 
     public EnumCriticalFactor get(Random random) {
-        return WeightedRandom.getRandomItem(random, items).get();
+        return WeightedRandom.INSTANCE.getRandomItem(random, items).get();
     }
 
 }

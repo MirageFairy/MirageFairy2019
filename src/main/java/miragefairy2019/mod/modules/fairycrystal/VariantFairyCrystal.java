@@ -70,12 +70,12 @@ public class VariantFairyCrystal extends ItemVariant {
             ITextComponent string = new TextComponentString("");
             string.appendText("===== " + itemStackCrystal.getDisplayName() + " (" + (world.isRemote ? "Client" : "Server") + ") =====");
             string.appendText("\n");
-            double totalWeight = WeightedRandom.getTotalWeight(dropTable);
+            double totalWeight = WeightedRandom.INSTANCE.getTotalWeight(dropTable);
             for (WeightedRandom.Item<ItemStack> item : ISuppliterator.ofIterable(dropTable)
-                    .sortedObj(i -> i.item.getDisplayName())
-                    .sortedDouble(i -> i.weight)) {
-                string.appendText(String.format("%f%%", 100 * item.weight / totalWeight) + ": ");
-                string.appendText(item.item.getDisplayName());
+                    .sortedObj(i -> i.getItem().getDisplayName())
+                    .sortedDouble(i -> i.getWeight())) {
+                string.appendText(String.format("%f%%", 100 * item.getWeight() / totalWeight) + ": ");
+                string.appendText(item.getItem().getDisplayName());
                 string.appendText("\n");
             }
             string.appendText("====================");

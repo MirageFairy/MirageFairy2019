@@ -9,23 +9,19 @@ import java.util.function.BiPredicate
 // TODO flat
 object WeightedRandom {
     // TODO receiver
-    @JvmStatic // TODO remove
     fun <T : Any> getRandomItem(random: Random, items: List<Item<T>>): Optional<T> = getItem(random.nextDouble(), items)
 
     /** @param d 0以上1未満の値 */
     // TODO receiver
-    @JvmStatic // TODO remove
     fun <T : Any> getItem(d: Double, items: List<Item<T>>): Optional<T> {
         if (items.isEmpty()) return Optional.empty()
         return Optional.of(getRandomItem(items, d * getTotalWeight(items)))
     }
 
     // TODO receiver
-    @JvmStatic // TODO remove
     fun getTotalWeight(items: List<Item<*>>) = items.sumByDouble { it.weight }
 
     // TODO receiver
-    @JvmStatic // TODO remove
     private fun <T : Any> getRandomItem(items: List<Item<T>>, w: Double): T {
         var w2 = w
         items.forEach { item ->
@@ -36,15 +32,9 @@ object WeightedRandom {
     }
 
     // TODO -> Pair
-    class Item<T : Any>(
-        @JvmField // TODO remove
-        val item: T,
-        @JvmField // TODO remove
-        val weight: Double
-    )
+    class Item<T : Any>(val item: T, val weight: Double)
 
     // TODO receiver
-    @JvmStatic // TODO remove
     fun <T : Any> unique(dropTable: List<Item<T>>, equals: BiPredicate<T, T>): List<Item<T>> {
         class Slot(val item: T) {
             override fun hashCode() = 0

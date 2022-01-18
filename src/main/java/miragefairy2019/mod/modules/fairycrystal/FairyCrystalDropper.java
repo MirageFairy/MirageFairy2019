@@ -156,10 +156,10 @@ public abstract class FairyCrystalDropper {
                 })
                 .map(d -> new WeightedRandom.Item<>(d.getItemStack(rank), d.getWeight() * (d.getDropCategory() == DropCategory.RARE ? rareBoost : 1)))
                 .toList();
-        dropTable = WeightedRandom.unique(dropTable, (a, b) -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b));
+        dropTable = WeightedRandom.INSTANCE.unique(dropTable, (a, b) -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b));
 
         // 1に満たない場合はairを入れて詰める
-        double totalWeight = WeightedRandom.getTotalWeight(dropTable);
+        double totalWeight = WeightedRandom.INSTANCE.getTotalWeight(dropTable);
         if (totalWeight < 1) dropTable.add(new WeightedRandom.Item<>(FairyTypes.instance.getAir().getMain().createItemStack(), 1 - totalWeight));
 
         return dropTable;
@@ -174,7 +174,7 @@ public abstract class FairyCrystalDropper {
         List<WeightedRandom.Item<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, rank, rareBoost);
 
         // ガチャを引く
-        Optional<ItemStack> oItemStack = WeightedRandom.getRandomItem(world.rand, dropTable);
+        Optional<ItemStack> oItemStack = WeightedRandom.INSTANCE.getRandomItem(world.rand, dropTable);
 
         return oItemStack;
     }
