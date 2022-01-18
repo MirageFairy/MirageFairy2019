@@ -2,9 +2,7 @@ package miragefairy2019.mod.modules.fairycrystal;
 
 import miragefairy2019.libkt.WeightedItem;
 import miragefairy2019.libkt.WeightedItemKt;
-import miragefairy2019.mod.api.ApiFairyCrystal;
-import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
-import miragefairy2019.mod.lib.multi.ItemVariant;
+import miragefairy2019.mod3.skill.api.ApiSkill;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,20 +15,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Optional;
 
-public class VariantFairyCrystal extends ItemVariant {
+public class VariantFairyCrystal extends VariantFairyCrystalBase {
 
-    public final String registryName;
-    public final String unlocalizedName;
-    public final String oreName;
-
-    public VariantFairyCrystal(String registryName, String unlocalizedName, String oreName) {
-        this.registryName = registryName;
-        this.unlocalizedName = unlocalizedName;
-        this.oreName = oreName;
+    public VariantFairyCrystal(@NotNull String registryName, @NotNull String unlocalizedName, @NotNull String oreName) {
+        super(registryName, unlocalizedName, oreName);
     }
 
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -41,7 +34,7 @@ public class VariantFairyCrystal extends ItemVariant {
             if (world.isRemote) return EnumActionResult.SUCCESS;
 
             // ガチャを引く
-            Optional<ItemStack> oItemStack = getDropper().drop(player, world, pos, hand, facing, hitX, hitY, hitZ, getDropRank(), getRareBoost());
+            Optional<ItemStack> oItemStack = getDropper().drop(player, world, pos, hand, facing, hitX, hitY, hitZ, getDropRank(), getRareBoost(ApiSkill.skillManager.getServerSkillContainer(player)));
 
             // ガチャが成功した場合、
             if (oItemStack.isPresent()) {
@@ -65,7 +58,7 @@ public class VariantFairyCrystal extends ItemVariant {
             if (world.isRemote) return EnumActionResult.SUCCESS;
 
             // ガチャリスト取得
-            List<WeightedItem<ItemStack>> dropTable = getDropper().getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, getDropRank(), getRareBoost());
+            List<WeightedItem<ItemStack>> dropTable = getDropper().getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, getDropRank(), getRareBoost(ApiSkill.skillManager.getServerSkillContainer(player)));
 
             // 表示
             ITextComponent string = new TextComponentString("");
@@ -73,8 +66,8 @@ public class VariantFairyCrystal extends ItemVariant {
             string.appendText("\n");
             double totalWeight = WeightedItemKt.getTotalWeight(dropTable);
             for (WeightedItem<ItemStack> weightedItem : ISuppliterator.ofIterable(dropTable)
-                    .sortedObj(i -> i.getItem().getDisplayName())
-                    .sortedDouble(i -> i.getWeight())) {
+                .sortedObj(i -> i.getItem().getDisplayName())
+                .sortedDouble(i -> i.getWeight())) {
                 string.appendText(String.format("%f%%", 100 * weightedItem.getWeight() / totalWeight) + ": ");
                 string.appendText(weightedItem.getItem().getDisplayName());
                 string.appendText("\n");
@@ -85,23 +78,6 @@ public class VariantFairyCrystal extends ItemVariant {
             return EnumActionResult.SUCCESS;
         }
 
-    }
-
-    public int getDropRank() {
-        return 0;
-    }
-
-    public double getRareBoost() {
-        return 1;
-    }
-
-    public FairyCrystalDropper getDropper() {
-        return new FairyCrystalDropper() {
-            @Override
-            public ISuppliterator<IRightClickDrop> getDropList() {
-                return ISuppliterator.ofIterable(ApiFairyCrystal.dropsFairyCrystal);
-            }
-        };
     }
 
 }

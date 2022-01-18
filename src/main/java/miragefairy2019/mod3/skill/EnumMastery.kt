@@ -13,6 +13,7 @@ enum class EnumMastery(private val parent: IMastery?, val layer: Int) : IMastery
     /**/ /**/ harvest(production, 2),
     /**/ /**/ /**/ flowerPicking(harvest, 3),
     /**/ /**/ processing(production, 2),
+    /**/ /**/ /**/ fairySummoning(processing, 3),
     /**/ /**/ fabrication(production, 2),
     /**/ /**/ /**/ brewing(fabrication, 3),
     ;

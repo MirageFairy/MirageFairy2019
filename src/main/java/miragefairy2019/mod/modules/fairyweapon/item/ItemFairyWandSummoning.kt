@@ -3,6 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.item
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.red
 import miragefairy2019.mod.modules.fairycrystal.ItemFairyCrystal
+import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityItem
@@ -66,7 +67,7 @@ class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWeaponCraft
             rayTraceResult.hitVec.y.toFloat(),
             rayTraceResult.hitVec.z.toFloat(),
             variantFairyCrystal.dropRank,
-            variantFairyCrystal.rareBoost
+            variantFairyCrystal.getRareBoost(ApiSkill.skillManager.getServerSkillContainer(player))
         ).orElse(null) ?: return false // ガチャが引けなかった場合は無視
         if (itemStackDrop.isEmpty) return false // ガチャが引けなかった場合は無視
 
