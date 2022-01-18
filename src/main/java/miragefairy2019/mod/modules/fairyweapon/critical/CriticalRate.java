@@ -35,7 +35,7 @@ public final class CriticalRate {
 
     public ISuppliterator<EnumCriticalFactor> getBar() {
         return ISuppliterator.range(0, 50)
-                .map(i -> WeightedRandom.INSTANCE.getItem(i / 50.0, items).get());
+                .map(i -> WeightedRandomKt.getItem(items, i / 50.0));
     }
 
     public double getMean() {
