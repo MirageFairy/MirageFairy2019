@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.oreseeddrop
 
-import miragefairy2019.mod.lib.WeightedRandom
+import miragefairy2019.libkt.WeightedItem
 import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape
 import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType
 import miragefairy2019.mod3.oreseeddrop.api.IOreSeedDropHandler
@@ -31,7 +31,7 @@ fun IOreSeedDropRegistry.register(
             requirements.forEach {
                 if (!it.test(environment)) return null
             }
-            return WeightedRandom.WeightedItem(output.first, weight)
+            return WeightedItem(output.first, weight)
         }
 
         override fun getType() = type

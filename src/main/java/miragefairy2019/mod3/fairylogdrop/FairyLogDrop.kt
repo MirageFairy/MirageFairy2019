@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.fairylogdrop
 
-import miragefairy2019.mod.lib.WeightedRandom
+import miragefairy2019.libkt.WeightedItem
 import miragefairy2019.mod.lib.getRandomItem
 import miragefairy2019.mod3.fairylogdrop.api.IFairyLogDropCondition
 import miragefairy2019.mod3.fairylogdrop.api.IFairyLogDropRecipe
@@ -17,7 +17,7 @@ class FairyLogDropRegistry : IFairyLogDropRegistry {
     override fun getRecipes() = recipes
     override fun drop(world: World, blockPos: BlockPos, random: Random) = recipes
         .filter { r -> r.conditions.all { it.test(world, blockPos) } }
-        .map { WeightedRandom.WeightedItem(it, it.rate) }
+        .map { WeightedItem(it, it.rate) }
         .getRandomItem(random)?.itemStackOutput
 }
 

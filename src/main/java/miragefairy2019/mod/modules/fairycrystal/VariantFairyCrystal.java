@@ -1,8 +1,8 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
+import miragefairy2019.libkt.WeightedItem;
 import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
-import miragefairy2019.mod.lib.WeightedRandom;
 import miragefairy2019.mod.lib.WeightedRandomKt;
 import miragefairy2019.mod.lib.multi.ItemVariant;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -65,14 +65,14 @@ public class VariantFairyCrystal extends ItemVariant {
             if (world.isRemote) return EnumActionResult.SUCCESS;
 
             // ガチャリスト取得
-            List<WeightedRandom.WeightedItem<ItemStack>> dropTable = getDropper().getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, getDropRank(), getRareBoost());
+            List<WeightedItem<ItemStack>> dropTable = getDropper().getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, getDropRank(), getRareBoost());
 
             // 表示
             ITextComponent string = new TextComponentString("");
             string.appendText("===== " + itemStackCrystal.getDisplayName() + " (" + (world.isRemote ? "Client" : "Server") + ") =====");
             string.appendText("\n");
             double totalWeight = WeightedRandomKt.getTotalWeight(dropTable);
-            for (WeightedRandom.WeightedItem<ItemStack> weightedItem : ISuppliterator.ofIterable(dropTable)
+            for (WeightedItem<ItemStack> weightedItem : ISuppliterator.ofIterable(dropTable)
                     .sortedObj(i -> i.getItem().getDisplayName())
                     .sortedDouble(i -> i.getWeight())) {
                 string.appendText(String.format("%f%%", 100 * weightedItem.getWeight() / totalWeight) + ": ");

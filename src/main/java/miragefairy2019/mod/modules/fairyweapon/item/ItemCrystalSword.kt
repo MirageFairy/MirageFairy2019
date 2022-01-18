@@ -1,10 +1,10 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
 import com.google.common.collect.Multimap
+import miragefairy2019.libkt.WeightedItem
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod.lib.WeightedRandom
 import miragefairy2019.mod.lib.getRandomItem
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
@@ -54,7 +54,7 @@ class ItemCrystalSword : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.clo
                         if (entries.isEmpty()) return // 関連付けられた妖精が居ない場合は無視
 
                         // relevanceを重みとして抽選
-                        val dropFairy = entries.map { WeightedRandom.WeightedItem(it.fairy, it.relevance) }.getRandomItem(world.rand) ?: return
+                        val dropFairy = entries.map { WeightedItem(it.fairy, it.relevance) }.getRandomItem(world.rand) ?: return
 
                         // 効果成立
 

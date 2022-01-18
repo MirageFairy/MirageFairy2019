@@ -1,13 +1,14 @@
 // TODO change
 package miragefairy2019.mod.lib
 
+import miragefairy2019.libkt.WeightedItem
 import java.util.Random
 import java.util.function.BiPredicate
 
-fun <T : Any> List<WeightedRandom.WeightedItem<T>>.getRandomItem(random: Random) = getItem(random.nextDouble())
+fun <T : Any> List<WeightedItem<T>>.getRandomItem(random: Random) = getItem(random.nextDouble())
 
 /** @param d 0以上1未満の値 */
-fun <T : Any> List<WeightedRandom.WeightedItem<T>>.getItem(d: Double): T? {
+fun <T : Any> List<WeightedItem<T>>.getItem(d: Double): T? {
     if (isEmpty()) return null
 
     var w = d * totalWeight // 0 <= w < totalWeight
@@ -18,13 +19,10 @@ fun <T : Any> List<WeightedRandom.WeightedItem<T>>.getItem(d: Double): T? {
     return this.last().item
 }
 
-val <T : Any> List<WeightedRandom.WeightedItem<T>>.totalWeight get() = sumByDouble { it.weight }
+val <T : Any> List<WeightedItem<T>>.totalWeight get() = sumByDouble { it.weight }
 
 // TODO flat
 object WeightedRandom {
-
-    // TODO -> Pair
-    class WeightedItem<T : Any>(val item: T, val weight: Double)
 
     // TODO receiver
     fun <T : Any> unique(dropTable: List<WeightedItem<T>>, equals: BiPredicate<T, T>): List<WeightedItem<T>> {

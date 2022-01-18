@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.critical;
 
-import miragefairy2019.mod.lib.WeightedRandom;
+import miragefairy2019.libkt.WeightedItem;
 import miragefairy2019.mod.lib.WeightedRandomKt;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
@@ -10,7 +10,7 @@ import java.util.Random;
 
 public final class CriticalRate {
 
-    private List<WeightedRandom.WeightedItem<EnumCriticalFactor>> weightedItems = new ArrayList<>();
+    private List<WeightedItem<EnumCriticalFactor>> weightedItems = new ArrayList<>();
     private double totalWeight;
 
     public CriticalRate(
@@ -22,14 +22,14 @@ public final class CriticalRate {
             double weightWhite,
             double weightPurple,
             double weightCyan) {
-        weightedItems.add(new WeightedRandom.WeightedItem<>(EnumCriticalFactor.red, weightRed));
-        weightedItems.add(new WeightedRandom.WeightedItem<>(EnumCriticalFactor.orange, weightOrange));
-        weightedItems.add(new WeightedRandom.WeightedItem<>(EnumCriticalFactor.yellow, weightYellow));
-        weightedItems.add(new WeightedRandom.WeightedItem<>(EnumCriticalFactor.green, weightGreen));
-        weightedItems.add(new WeightedRandom.WeightedItem<>(EnumCriticalFactor.blue, weightBlue));
-        weightedItems.add(new WeightedRandom.WeightedItem<>(EnumCriticalFactor.white, weightWhite));
-        weightedItems.add(new WeightedRandom.WeightedItem<>(EnumCriticalFactor.purple, weightPurple));
-        weightedItems.add(new WeightedRandom.WeightedItem<>(EnumCriticalFactor.cyan, weightCyan));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.red, weightRed));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.orange, weightOrange));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.yellow, weightYellow));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.green, weightGreen));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.blue, weightBlue));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.white, weightWhite));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.purple, weightPurple));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.cyan, weightCyan));
         totalWeight = WeightedRandomKt.getTotalWeight(weightedItems);
     }
 

@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.oreseeddrop.api
 
-import miragefairy2019.mod.lib.WeightedRandom
+import miragefairy2019.libkt.WeightedItem
 import miragefairy2019.mod.lib.getRandomItem
 import miragefairy2019.mod.lib.totalWeight
 import net.minecraft.block.state.IBlockState
@@ -54,7 +54,7 @@ enum class EnumOreSeedShape {
     STRING, HORIZONTAL, VERTICAL, POINT, STAR, RING, PYRAMID, CUBE,
 }
 
-typealias OreSeedDrop = WeightedRandom.WeightedItem<() -> IBlockState>
+typealias OreSeedDrop = WeightedItem<() -> IBlockState>
 
 interface IOreSeedDropRequirement {
     fun test(environment: OreSeedDropEnvironment): Boolean
