@@ -18,7 +18,7 @@ public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return getVariant(stack).map(v -> v.getUnlocalizedName()).orElse("item.null");
+        return getVariant(stack).map(v -> "item" + v.getUnlocalizedName()).orElse("item.null");
     }
 
     @SideOnly(Side.CLIENT)
@@ -26,7 +26,7 @@ public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<
         for (Tuple<Integer, V> tuple : getVariants()) {
             ModelLoader.setCustomModelResourceLocation(this,
                     tuple.x,
-                    new ModelResourceLocation(new ResourceLocation(getRegistryName().getResourceDomain(), tuple.y.registryName), null));
+                    new ModelResourceLocation(new ResourceLocation(getRegistryName().getResourceDomain(), tuple.y.getRegistryName()), null));
         }
     }
 
