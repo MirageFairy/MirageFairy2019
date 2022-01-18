@@ -1,6 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.critical;
 
 import miragefairy2019.mod.lib.WeightedRandom;
+import miragefairy2019.mod.lib.WeightedRandomKt;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public final class CriticalRate {
     }
 
     public EnumCriticalFactor get(Random random) {
-        return WeightedRandom.INSTANCE.getRandomItem(random, items).get();
+        return WeightedRandomKt.getRandomItem(items, random);
     }
 
 }

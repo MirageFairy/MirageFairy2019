@@ -4,6 +4,7 @@ import miragefairy2019.mod.api.fairycrystal.DropCategory;
 import miragefairy2019.mod.api.fairycrystal.IDrop;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.lib.WeightedRandom;
+import miragefairy2019.mod.lib.WeightedRandomKt;
 import miragefairy2019.mod3.fairy.FairyTypes;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -174,7 +175,7 @@ public abstract class FairyCrystalDropper {
         List<WeightedRandom.Item<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, rank, rareBoost);
 
         // ガチャを引く
-        Optional<ItemStack> oItemStack = WeightedRandom.INSTANCE.getRandomItem(world.rand, dropTable);
+        Optional<ItemStack> oItemStack = Optional.ofNullable(WeightedRandomKt.getRandomItem(dropTable, world.rand));
 
         return oItemStack;
     }

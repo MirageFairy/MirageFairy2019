@@ -1,15 +1,15 @@
 // TODO change
 package miragefairy2019.mod.lib
 
+import miragefairy2019.libkt.orNull
 import java.util.Optional
 import java.util.Random
 import java.util.function.BiPredicate
 
-// TODO Optional -> Nullable
+fun <T : Any> List<WeightedRandom.Item<T>>.getRandomItem(random: Random): T? = WeightedRandom.getItem(random.nextDouble(), this).orNull // TODO
+
 // TODO flat
 object WeightedRandom {
-    // TODO receiver
-    fun <T : Any> getRandomItem(random: Random, items: List<Item<T>>): Optional<T> = getItem(random.nextDouble(), items)
 
     /** @param d 0以上1未満の値 */
     // TODO receiver
