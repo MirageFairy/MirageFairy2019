@@ -30,6 +30,7 @@ public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<
         }
     }
 
+    // TODO 子クラスに移動
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
