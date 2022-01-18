@@ -65,18 +65,18 @@ public class VariantFairyCrystal extends ItemVariant {
             if (world.isRemote) return EnumActionResult.SUCCESS;
 
             // ガチャリスト取得
-            List<WeightedRandom.Item<ItemStack>> dropTable = getDropper().getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, getDropRank(), getRareBoost());
+            List<WeightedRandom.WeightedItem<ItemStack>> dropTable = getDropper().getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, getDropRank(), getRareBoost());
 
             // 表示
             ITextComponent string = new TextComponentString("");
             string.appendText("===== " + itemStackCrystal.getDisplayName() + " (" + (world.isRemote ? "Client" : "Server") + ") =====");
             string.appendText("\n");
             double totalWeight = WeightedRandomKt.getTotalWeight(dropTable);
-            for (WeightedRandom.Item<ItemStack> item : ISuppliterator.ofIterable(dropTable)
+            for (WeightedRandom.WeightedItem<ItemStack> weightedItem : ISuppliterator.ofIterable(dropTable)
                     .sortedObj(i -> i.getItem().getDisplayName())
                     .sortedDouble(i -> i.getWeight())) {
-                string.appendText(String.format("%f%%", 100 * item.getWeight() / totalWeight) + ": ");
-                string.appendText(item.getItem().getDisplayName());
+                string.appendText(String.format("%f%%", 100 * weightedItem.getWeight() / totalWeight) + ": ");
+                string.appendText(weightedItem.getItem().getDisplayName());
                 string.appendText("\n");
             }
             string.appendText("====================");

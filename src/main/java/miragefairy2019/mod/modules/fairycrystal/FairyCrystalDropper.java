@@ -40,7 +40,7 @@ public abstract class FairyCrystalDropper {
     /**
      * このメソッドはサーバーワールドのスレッドからしか呼び出せません。
      */
-    public List<WeightedRandom.Item<ItemStack>> getDropTable(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, int rank, double rareBoost) {
+    public List<WeightedRandom.WeightedItem<ItemStack>> getDropTable(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, int rank, double rareBoost) {
         BlockPos pos2 = world.getBlockState(pos).isFullBlock() ? pos.offset(facing) : pos;
 
         Set<Block> blocks = new HashSet<>();
@@ -121,7 +121,7 @@ public abstract class FairyCrystalDropper {
         }
 
         // リスト作成
-        List<WeightedRandom.Item<ItemStack>> dropTable = getDropList()
+        List<WeightedRandom.WeightedItem<ItemStack>> dropTable = getDropList()
                 .mapIfNotNull(d -> {
                     IDrop drop = d.getDrop();
 
@@ -155,13 +155,13 @@ public abstract class FairyCrystalDropper {
 
                     return null;
                 })
-                .map(d -> new WeightedRandom.Item<>(d.getItemStack(rank), d.getWeight() * (d.getDropCategory() == DropCategory.RARE ? rareBoost : 1)))
+                .map(d -> new WeightedRandom.WeightedItem<>(d.getItemStack(rank), d.getWeight() * (d.getDropCategory() == DropCategory.RARE ? rareBoost : 1)))
                 .toList();
         dropTable = WeightedRandom.INSTANCE.unique(dropTable, (a, b) -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b));
 
         // 1に満たない場合はairを入れて詰める
         double totalWeight = WeightedRandomKt.getTotalWeight(dropTable);
-        if (totalWeight < 1) dropTable.add(new WeightedRandom.Item<>(FairyTypes.instance.getAir().getMain().createItemStack(), 1 - totalWeight));
+        if (totalWeight < 1) dropTable.add(new WeightedRandom.WeightedItem<>(FairyTypes.instance.getAir().getMain().createItemStack(), 1 - totalWeight));
 
         return dropTable;
     }
@@ -172,7 +172,7 @@ public abstract class FairyCrystalDropper {
     public Optional<ItemStack> drop(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, int rank, double rareBoost) {
 
         // ガチャリスト取得
-        List<WeightedRandom.Item<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, rank, rareBoost);
+        List<WeightedRandom.WeightedItem<ItemStack>> dropTable = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, rank, rareBoost);
 
         // ガチャを引く
         Optional<ItemStack> oItemStack = Optional.ofNullable(WeightedRandomKt.getRandomItem(dropTable, world.rand));

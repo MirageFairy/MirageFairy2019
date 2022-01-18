@@ -4,10 +4,10 @@ package miragefairy2019.mod.lib
 import java.util.Random
 import java.util.function.BiPredicate
 
-fun <T : Any> List<WeightedRandom.Item<T>>.getRandomItem(random: Random) = getItem(random.nextDouble())
+fun <T : Any> List<WeightedRandom.WeightedItem<T>>.getRandomItem(random: Random) = getItem(random.nextDouble())
 
 /** @param d 0以上1未満の値 */
-fun <T : Any> List<WeightedRandom.Item<T>>.getItem(d: Double): T? {
+fun <T : Any> List<WeightedRandom.WeightedItem<T>>.getItem(d: Double): T? {
     if (isEmpty()) return null
 
     var w = d * totalWeight // 0 <= w < totalWeight
@@ -18,16 +18,16 @@ fun <T : Any> List<WeightedRandom.Item<T>>.getItem(d: Double): T? {
     return this.last().item
 }
 
-val <T : Any> List<WeightedRandom.Item<T>>.totalWeight get() = sumByDouble { it.weight }
+val <T : Any> List<WeightedRandom.WeightedItem<T>>.totalWeight get() = sumByDouble { it.weight }
 
 // TODO flat
 object WeightedRandom {
 
     // TODO -> Pair
-    class Item<T : Any>(val item: T, val weight: Double)
+    class WeightedItem<T : Any>(val item: T, val weight: Double)
 
     // TODO receiver
-    fun <T : Any> unique(dropTable: List<Item<T>>, equals: BiPredicate<T, T>): List<Item<T>> {
+    fun <T : Any> unique(dropTable: List<WeightedItem<T>>, equals: BiPredicate<T, T>): List<WeightedItem<T>> {
         class Slot(val item: T) {
             override fun hashCode() = 0
 
@@ -48,6 +48,6 @@ object WeightedRandom {
         dropTable.forEach { item ->
             map[Slot(item.item)] = (map[Slot(item.item)] ?: 0.0) + item.weight
         }
-        return map.entries.map { Item<T>(it.key.item, it.value) }
+        return map.entries.map { WeightedItem<T>(it.key.item, it.value) }
     }
 }

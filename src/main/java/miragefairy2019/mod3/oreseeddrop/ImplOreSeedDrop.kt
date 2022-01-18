@@ -31,7 +31,7 @@ fun IOreSeedDropRegistry.register(
             requirements.forEach {
                 if (!it.test(environment)) return null
             }
-            return WeightedRandom.Item(output.first, weight)
+            return WeightedRandom.WeightedItem(output.first, weight)
         }
 
         override fun getType() = type

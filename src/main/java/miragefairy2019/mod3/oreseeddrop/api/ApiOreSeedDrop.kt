@@ -54,7 +54,7 @@ enum class EnumOreSeedShape {
     STRING, HORIZONTAL, VERTICAL, POINT, STAR, RING, PYRAMID, CUBE,
 }
 
-typealias OreSeedDrop = WeightedRandom.Item<() -> IBlockState>
+typealias OreSeedDrop = WeightedRandom.WeightedItem<() -> IBlockState>
 
 interface IOreSeedDropRequirement {
     fun test(environment: OreSeedDropEnvironment): Boolean

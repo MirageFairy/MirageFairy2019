@@ -17,7 +17,7 @@ class FairyLogDropRegistry : IFairyLogDropRegistry {
     override fun getRecipes() = recipes
     override fun drop(world: World, blockPos: BlockPos, random: Random) = recipes
         .filter { r -> r.conditions.all { it.test(world, blockPos) } }
-        .map { WeightedRandom.Item(it, it.rate) }
+        .map { WeightedRandom.WeightedItem(it, it.rate) }
         .getRandomItem(random)?.itemStackOutput
 }
 
