@@ -20,7 +20,7 @@ public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return Optional.ofNullable(getVariant(stack)).map(v -> "item" + v.getUnlocalizedName()).orElse("item.null");
+        return Optional.ofNullable(getVariant(stack)).map(v -> "item." + v.getUnlocalizedName()).orElse("item.null");
     }
 
     @SideOnly(Side.CLIENT)
