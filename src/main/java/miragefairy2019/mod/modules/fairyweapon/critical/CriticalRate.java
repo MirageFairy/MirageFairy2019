@@ -22,14 +22,14 @@ public final class CriticalRate {
             double weightWhite,
             double weightPurple,
             double weightCyan) {
-        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.red, weightRed));
-        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.orange, weightOrange));
-        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.yellow, weightYellow));
-        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.green, weightGreen));
-        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.blue, weightBlue));
-        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.white, weightWhite));
-        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.purple, weightPurple));
-        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.cyan, weightCyan));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.RED, weightRed));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.ORANGE, weightOrange));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.YELLOW, weightYellow));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.GREEN, weightGreen));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.BLUE, weightBlue));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.WHITE, weightWhite));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.PURPLE, weightPurple));
+        weightedItems.add(new WeightedItem<>(EnumCriticalFactor.CYAN, weightCyan));
         totalWeight = WeightedItemKt.getTotalWeight(weightedItems);
     }
 
