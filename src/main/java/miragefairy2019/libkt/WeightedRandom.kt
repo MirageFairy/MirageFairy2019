@@ -3,6 +3,8 @@ package miragefairy2019.libkt
 import java.util.Random
 import java.util.function.BiPredicate
 
+class WeightedItem<T : Any>(val item: T, val weight: Double)
+
 fun <T : Any> List<WeightedItem<T>>.getRandomItem(random: Random) = getItem(random.nextDouble())
 
 /** @param d 0以上1未満の値 */
