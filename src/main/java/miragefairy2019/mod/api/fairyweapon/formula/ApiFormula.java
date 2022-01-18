@@ -215,7 +215,7 @@ public class ApiFormula {
             Struct1<ITextComponent> sTtextComponent = new Struct1<>(new TextComponentString(""));
             cr.getBar().forEach(cf -> {
                 sTtextComponent.x = sTtextComponent.x.appendSibling(new TextComponentString("|")
-                        .setStyle(new Style().setColor(cf.color)));
+                        .setStyle(new Style().setColor(cf.getColor())));
             });
             sTtextComponent.x = sTtextComponent.x.appendText(String.format(" (%.2f)", cr.getMean()));
             return sTtextComponent.x;

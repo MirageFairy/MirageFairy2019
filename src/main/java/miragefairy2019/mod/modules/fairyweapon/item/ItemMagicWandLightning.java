@@ -163,7 +163,7 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
                         double damage2 = damage.get(fairyType);
 
                         EnumCriticalFactor factor = criticalRate.get(fairyType).get(world.rand);
-                        damage2 *= factor.coefficient;
+                        damage2 *= factor.getCoefficient();
 
                         target.attackEntityFrom(new DamageSourceFairyMagic(player, 0), (float) damage2);
                         if (lightning.get(fairyType)) {
@@ -200,7 +200,7 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
 
                             }
 
-                            if (factor.coefficient > 1) {
+                            if (factor.getCoefficient() > 1) {
                                 for (int i = 0; i < 16; i++) {
                                     double dx = world.rand.nextDouble() * 2 - 1;
                                     double dy = world.rand.nextDouble() * 2 - 1;
