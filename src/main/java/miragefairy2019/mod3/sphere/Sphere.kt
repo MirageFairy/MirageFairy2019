@@ -7,7 +7,6 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.ore.ApiOre
-import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.lib.multi.ItemMulti
 import miragefairy2019.mod.lib.multi.ItemVariant

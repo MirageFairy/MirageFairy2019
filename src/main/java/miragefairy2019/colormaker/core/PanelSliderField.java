@@ -2,8 +2,11 @@ package miragefairy2019.colormaker.core;
 
 import kotlin.Unit;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.function.IntConsumer;
 import java.util.regex.Pattern;

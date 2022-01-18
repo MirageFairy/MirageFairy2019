@@ -28,7 +28,27 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.abilityRaw;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.add;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.aqua;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.cost;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.dark;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.div;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.fire;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.formatterDouble1;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.formatterInteger;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.formatterPercent0;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.formatterTick;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.formatterYesNo;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.gaia;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.gte;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.min;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.mul;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.pow;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.round;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.shine;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.val;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.wind;
 
 public class ItemMiragiumAxe extends ItemFairyWeaponBase {
 

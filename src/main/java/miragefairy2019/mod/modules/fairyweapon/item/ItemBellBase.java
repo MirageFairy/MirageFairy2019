@@ -19,7 +19,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.*;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.add;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.cost;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.div;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.formatterPitch;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.mul;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.pow;
+import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.val;
 
 public class ItemBellBase extends ItemFairyWeaponBase {
 

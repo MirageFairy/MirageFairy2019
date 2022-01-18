@@ -6,14 +6,23 @@ import miragefairy2019.colormaker.core.LabelImage;
 import miragefairy2019.colormaker.core.PanelColorSlider;
 import mirrg.boron.util.struct.ImmutableArray;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.util.stream.Stream;
 
-import static mirrg.boron.swing.UtilsComponent.*;
+import static mirrg.boron.swing.UtilsComponent.createPanelTitledBorder;
+import static mirrg.boron.swing.UtilsComponent.createSplitPaneHorizontal;
+import static mirrg.boron.swing.UtilsComponent.get;
 
 public class WindowColorMaker extends JFrame {
 
