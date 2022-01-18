@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.critical;
 
 import miragefairy2019.libkt.WeightedItem;
-import miragefairy2019.libkt.WeightedRandomKt;
+import miragefairy2019.libkt.WeightedItemKt;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 
 import java.util.ArrayList;
@@ -30,12 +30,12 @@ public final class CriticalRate {
         weightedItems.add(new WeightedItem<>(EnumCriticalFactor.white, weightWhite));
         weightedItems.add(new WeightedItem<>(EnumCriticalFactor.purple, weightPurple));
         weightedItems.add(new WeightedItem<>(EnumCriticalFactor.cyan, weightCyan));
-        totalWeight = WeightedRandomKt.getTotalWeight(weightedItems);
+        totalWeight = WeightedItemKt.getTotalWeight(weightedItems);
     }
 
     public ISuppliterator<EnumCriticalFactor> getBar() {
         return ISuppliterator.range(0, 50)
-                .map(i -> WeightedRandomKt.getItem(weightedItems, i / 50.0));
+                .map(i -> WeightedItemKt.getItem(weightedItems, i / 50.0));
     }
 
     public double getMean() {
@@ -45,7 +45,7 @@ public final class CriticalRate {
     }
 
     public EnumCriticalFactor get(Random random) {
-        return WeightedRandomKt.getRandomItem(weightedItems, random);
+        return WeightedItemKt.getRandomItem(weightedItems, random);
     }
 
 }

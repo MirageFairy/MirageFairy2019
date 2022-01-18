@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairycrystal;
 
 import miragefairy2019.libkt.WeightedItem;
-import miragefairy2019.libkt.WeightedRandomKt;
+import miragefairy2019.libkt.WeightedItemKt;
 import miragefairy2019.mod.api.ApiFairyCrystal;
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop;
 import miragefairy2019.mod.lib.multi.ItemVariant;
@@ -71,7 +71,7 @@ public class VariantFairyCrystal extends ItemVariant {
             ITextComponent string = new TextComponentString("");
             string.appendText("===== " + itemStackCrystal.getDisplayName() + " (" + (world.isRemote ? "Client" : "Server") + ") =====");
             string.appendText("\n");
-            double totalWeight = WeightedRandomKt.getTotalWeight(dropTable);
+            double totalWeight = WeightedItemKt.getTotalWeight(dropTable);
             for (WeightedItem<ItemStack> weightedItem : ISuppliterator.ofIterable(dropTable)
                     .sortedObj(i -> i.getItem().getDisplayName())
                     .sortedDouble(i -> i.getWeight())) {
