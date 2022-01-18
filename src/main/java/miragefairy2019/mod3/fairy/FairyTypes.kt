@@ -2,7 +2,6 @@ package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.buildText
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
 import miragefairy2019.mod3.erg.ErgEntry
 import miragefairy2019.mod3.erg.ErgSet
 import miragefairy2019.mod3.erg.api.EnumErgType.values
@@ -60,7 +59,6 @@ class FairyTypes(private val count: Int) {
 
         // Register
         variantsImpl += Tuple.of(id, bundle)
-        ApiFairyRegistry.getFairyRegistry().registerFairy(bundle.main.type.motif, bundle.main.type, bundle.main.createItemStack())
 
         return bundle
     }

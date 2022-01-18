@@ -12,12 +12,12 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod.api.fairy.registry.ApiFairyRegistry
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.modules.fairycrystal.variantFairyCrystal
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
 import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
@@ -157,11 +157,12 @@ fun getGrowRateInFloor(fairyType: IFairyType) = fairyType.shineEfficiency * fair
 fun getGrowRateTableMessage() = textComponent {
     listOf(
         !"===== Mirage Flower Grow Rate Table =====\n",
-        ApiFairyRegistry.getFairyRegistry().fairies.toList()
-            .map { Pair(it.fairyType, getGrowRateInFloor(it.fairyType)) }
+        FairyTypes.instance.variants
+            .map { it.y.main.type }
+            .map { Pair(it, getGrowRateInFloor(it)) }
             .filter { it.second > 1 }
             .sortedBy { it.second }
-            .flatMap { format("%7.2f%%  ", it.second * 100) + !it.first!!.displayName + !"\n" },
+            .flatMap { format("%7.2f%%  ", it.second * 100) + !it.first.displayName + !"\n" },
         !"===================="
     ).flatten()
 }
