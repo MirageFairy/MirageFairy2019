@@ -10,6 +10,7 @@ import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.multi.BlockMulti
 import miragefairy2019.mod.lib.multi.IBlockVariant
 import miragefairy2019.mod.lib.multi.IBlockVariantList
@@ -21,6 +22,7 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLiving.SpawnPlacementType
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.IStringSerializable
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -46,7 +48,7 @@ object TwinkleStone {
             setUnlocalizedName("twinkleStone")
             onRegisterItem {
                 blockTwinkleStone().variantList.blockVariants.forEach { variant ->
-                    item.setCustomModelResourceLocation(variant.metadata, modelName = variant.resourceName)
+                    item.setCustomModelResourceLocation(variant.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, variant.resourceName))
                 }
             }
             onCreateItemStack {

@@ -105,7 +105,7 @@ object Sphere {
             onRegisterItem {
                 EnumErgType.values().forEachIndexed { i, ergType ->
                     item.registerVariant(i, VariantSphere(getSphereType(ergType)))
-                    item.setCustomModelResourceLocation(i, modelName = "sphere")
+                    item.setCustomModelResourceLocation(i, model = ResourceLocation(ModMirageFairy2019.MODID, "sphere"))
                 }
             }
         }

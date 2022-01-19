@@ -104,20 +104,20 @@ fun <I : Item> ItemInitializer<I>.setCreativeTab(creativeTab: () -> CreativeTabs
 fun <I : Item> ItemInitializer<I>.setCustomModelResourceLocation(
     metadata: Int = 0,
     @Suppress("UNUSED_PARAMETER") vararg vs: Void,
-    modelName: String? = null,
+    model: ResourceLocation? = null,
     variant: String = "normal"
 ) = modInitializer.onRegisterItem {
-    item.setCustomModelResourceLocation(metadata, modelName = modelName, variant = variant)
+    item.setCustomModelResourceLocation(metadata, model = model, variant = variant)
 }
 
 fun <I : Item> I.setCustomModelResourceLocation(
     metadata: Int = 0,
     @Suppress("UNUSED_PARAMETER") vararg vs: Void,
-    modelName: String? = null,
+    model: ResourceLocation? = null,
     variant: String = "normal"
 ) {
     if (side.isClient) {
-        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(if (modelName != null) ResourceLocation(ModMirageFairy2019.MODID, modelName) else registryName!!, variant))
+        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(model ?: registryName!!, variant))
     }
 }
 

@@ -28,6 +28,7 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.item.ItemBlock
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraftforge.fml.relauncher.Side
@@ -76,7 +77,7 @@ object FairyCrystalGlass {
         }
         itemBlockFairyCrystalGlass = item({ ItemBlock(blockFairyCrystalGlass()) }, "fairy_crystal_glass") {
             addOreName("blockMirageFairyCrystal")
-            setCustomModelResourceLocation(modelName = "fairy_crystal_glass")
+            setCustomModelResourceLocation(model = ResourceLocation(ModMirageFairy2019.MODID, "fairy_crystal_glass"))
         }
         makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "fairy_crystal_glass"),

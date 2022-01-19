@@ -6,7 +6,9 @@ import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.main.api.ApiMain
+import net.minecraft.util.ResourceLocation
 import net.minecraftforge.oredict.OreDictionary
 
 lateinit var itemFairyCrystal: () -> ItemFairyCrystal
@@ -26,7 +28,7 @@ object FairyCrystal {
             variantFairyCrystalPure = itemVariant("pure_fairy_crystal", { VariantFairyCrystalPure(it, "fairyCrystalPure", "mirageFairyCrystalPure") }, 2)
             onRegisterItem {
                 if (ApiMain.side.isClient) {
-                    item.variants.forEach { item.setCustomModelResourceLocation(it.metadata, modelName = it.registryName) }
+                    item.variants.forEach { item.setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.registryName)) }
                 }
             }
             onCreateItemStack {
