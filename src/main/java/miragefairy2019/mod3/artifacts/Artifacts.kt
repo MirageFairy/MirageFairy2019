@@ -17,5 +17,6 @@ object Artifacts {
         Pot.module(this)
         DebugItems.module(this)
         Sphere.module(this)
+        WandPulverizationRecipes.module(this)
     }
 }
