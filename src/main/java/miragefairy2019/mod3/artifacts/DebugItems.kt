@@ -27,7 +27,7 @@ import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
 import java.io.File
 
-object DebugFairyList {
+object DebugItems {
     lateinit var itemDebugFairyList: () -> ItemDebugFairyList
     val module: Module = {
 
