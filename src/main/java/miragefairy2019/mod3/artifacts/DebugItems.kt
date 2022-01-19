@@ -28,11 +28,10 @@ import net.minecraft.world.World
 import java.io.File
 
 object DebugItems {
-    lateinit var itemDebugFairyList: () -> ItemDebugFairyList
     val module: Module = {
 
         // 妖精一覧デバッグアイテム
-        itemDebugFairyList = item({ ItemDebugFairyList() }, "debug_fairy_list") {
+        item({ ItemDebugFairyList() }, "debug_fairy_list") {
             setUnlocalizedName("debugFairyList")
             setCreativeTab { ApiMain.creativeTab }
             setCustomModelResourceLocation(model = ResourceLocation("book"))
@@ -41,12 +40,17 @@ object DebugItems {
     }
 }
 
-class ItemDebugFairyList : Item() {
-    companion object {
-        val Double.f0 get() = this with "%.0f"
-        val Double.f3 get() = this with "%.3f"
-    }
+private val Double.f0 get() = this with "%.0f"
+private val Double.f3 get() = this with "%.3f"
 
+private fun writeAction(player: EntityPlayer, fileName: String, text: String) {
+    val file = File("debug").resolve(fileName)
+    player.sendStatusMessage(textComponent { !"Saved to " + !file }, false)
+    file.parentFile.mkdirs()
+    file.writeText(text)
+}
+
+class ItemDebugFairyList : Item() {
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (!world.isRemote) return EnumActionResult.SUCCESS
 
@@ -59,50 +63,45 @@ class ItemDebugFairyList : Item() {
         val enUs = getLang("en_us")
         val jaJp = getLang("ja_jp")
 
-        val fileDest = File("./debug/fairyList.txt")
-        player.sendStatusMessage(textComponent { !"Saved to " + !fileDest }, false)
-        fileDest.parentFile.mkdirs()
-        fileDest.writeText(
-            FairyTypes.instance.variants.joinToString("") { (id, bundle) ->
-                val variantRank1 = bundle.main
-                val variantRank2 = bundle[1]
-                val fairyTypeRank1 = variantRank1.type
-                val fairyTypeRank2 = variantRank2.type
-                fun color(selector: ColorSet.() -> Int) = variantRank1.colorSet.selector().toRgb().hex
-                val motif = fairyTypeRank1.motif!!.resourcePath
-                "|${
+        writeAction(player, "fairyList.txt", FairyTypes.instance.variants.joinToString("") { (id, bundle) ->
+            val variantRank1 = bundle.main
+            val variantRank2 = bundle[1]
+            val fairyTypeRank1 = variantRank1.type
+            val fairyTypeRank2 = variantRank2.type
+            fun color(selector: ColorSet.() -> Int) = variantRank1.colorSet.selector().toRgb().hex
+            val motif = fairyTypeRank1.motif!!.resourcePath
+            "|${
+                listOf(
                     listOf(
-                        listOf(
-                            id,
-                            "&bold(){!FairyImage(#${color { skin }},#${color { bright }},#${color { dark }},#${color { hair }})}",
-                            "CENTER:$motif&br()${enUs["mirageFairy2019.fairy.$motif.name"]!!}",
-                            "CENTER:${jaJp["mirageFairy2019.fairy.$motif.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
-                            "CENTER:${variantRank1.rare}",
-                            "RIGHT:${fairyTypeRank1.cost.f0}"
-                        ),
-                        EnumManaType.values().map {
-                            "RIGHT:${fairyTypeRank1.mana(it).f3}"
-                        },
-                        listOf(
-                            "RIGHT:${fairyTypeRank1.manaSet.sum.f3}"
-                        ),
-                        EnumManaType.values().map {
-                            val a1 = fairyTypeRank1.mana(it) / fairyTypeRank1.cost * 50
-                            val a2 = fairyTypeRank2.mana(it) / fairyTypeRank2.cost * 50
-                            "${if (a1 >= 10) "BGCOLOR(#FDD):" else if (a2 >= 10) "BGCOLOR(#DDF):" else ""}RIGHT:${a1.f3}"
-                        },
-                        listOf(
-                            "RIGHT:${(fairyTypeRank1.manaSet.sum / fairyTypeRank1.cost * 50).f3}"
-                        ),
-                        EnumErgType.values().map {
-                            val a1 = fairyTypeRank1.erg(it)
-                            val a2 = fairyTypeRank2.erg(it)
-                            "${if (a1 >= 10) "BGCOLOR(#FDD):" else if (a2 >= 10) "BGCOLOR(#DDF):" else ""}RIGHT:${a1.f3}"
-                        }
-                    ).flatten().joinToString("|")
-                }|\n"
-            }
-        )
+                        id,
+                        "&bold(){!FairyImage(#${color { skin }},#${color { bright }},#${color { dark }},#${color { hair }})}",
+                        "CENTER:$motif&br()${enUs["mirageFairy2019.fairy.$motif.name"]!!}",
+                        "CENTER:${jaJp["mirageFairy2019.fairy.$motif.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
+                        "CENTER:${variantRank1.rare}",
+                        "RIGHT:${fairyTypeRank1.cost.f0}"
+                    ),
+                    EnumManaType.values().map {
+                        "RIGHT:${fairyTypeRank1.mana(it).f3}"
+                    },
+                    listOf(
+                        "RIGHT:${fairyTypeRank1.manaSet.sum.f3}"
+                    ),
+                    EnumManaType.values().map {
+                        val a1 = fairyTypeRank1.mana(it) / fairyTypeRank1.cost * 50
+                        val a2 = fairyTypeRank2.mana(it) / fairyTypeRank2.cost * 50
+                        "${if (a1 >= 10) "BGCOLOR(#FDD):" else if (a2 >= 10) "BGCOLOR(#DDF):" else ""}RIGHT:${a1.f3}"
+                    },
+                    listOf(
+                        "RIGHT:${(fairyTypeRank1.manaSet.sum / fairyTypeRank1.cost * 50).f3}"
+                    ),
+                    EnumErgType.values().map {
+                        val a1 = fairyTypeRank1.erg(it)
+                        val a2 = fairyTypeRank2.erg(it)
+                        "${if (a1 >= 10) "BGCOLOR(#FDD):" else if (a2 >= 10) "BGCOLOR(#DDF):" else ""}RIGHT:${a1.f3}"
+                    }
+                ).flatten().joinToString("|")
+            }|\n"
+        })
 
         return EnumActionResult.SUCCESS
     }
