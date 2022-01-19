@@ -25,6 +25,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraftforge.oredict.OreDictionary
 import java.io.File
 
 object DebugItems {
@@ -33,6 +34,13 @@ object DebugItems {
         // 妖精一覧デバッグアイテム
         item({ ItemDebugFairyList() }, "debug_fairy_list") {
             setUnlocalizedName("debugFairyList")
+            setCreativeTab { ApiMain.creativeTab }
+            setCustomModelResourceLocation(model = ResourceLocation("book"))
+        }
+
+        // 妖精一覧デバッグアイテム
+        item({ ItemDebugOreNameList() }, "debug_ore_name_list") {
+            setUnlocalizedName("debugOreNameList")
             setCreativeTab { ApiMain.creativeTab }
             setCustomModelResourceLocation(model = ResourceLocation("book"))
         }
@@ -103,6 +111,17 @@ class ItemDebugFairyList : Item() {
             }|\n"
         })
 
+        return EnumActionResult.SUCCESS
+    }
+}
+
+class ItemDebugOreNameList : Item() {
+    override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        if (!world.isRemote) return EnumActionResult.SUCCESS
+        writeAction(player, "oreNameList.txt", OreDictionary.getOreNames()
+            .sorted()
+            .filter { OreDictionary.getOres(it).isNotEmpty() }
+            .joinToString("") { "$it\n" })
         return EnumActionResult.SUCCESS
     }
 }
