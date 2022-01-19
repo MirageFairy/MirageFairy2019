@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.sphere
+package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.Module

@@ -15,7 +15,6 @@ import miragefairy2019.mod3.manualrepair.ManualRepair
 import miragefairy2019.mod3.pick.Pick
 import miragefairy2019.mod3.playeraura.PlayerAura
 import miragefairy2019.mod3.skill.Skill
-import miragefairy2019.mod3.sphere.Sphere
 import miragefairy2019.mod3.worldgen.WorldGen
 
 val modules = listOf(
@@ -25,7 +24,6 @@ val modules = listOf(
     Fairy.module,
     FairyWeapon.module,
     FairyRelation.module,
-    Sphere.module,
     FairyStick.module,
     Artifacts.module,
     ManualRepair.module,

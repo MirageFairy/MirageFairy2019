@@ -16,5 +16,6 @@ object Artifacts {
         FairyCrystalGlass.module(this)
         Pot.module(this)
         DebugFairyList.module(this)
+        Sphere.module(this)
     }
 }
