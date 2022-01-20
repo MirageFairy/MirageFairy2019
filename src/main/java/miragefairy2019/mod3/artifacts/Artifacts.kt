@@ -20,5 +20,7 @@ object Artifacts {
         WandPulverizationRecipes.module(this)
         FairyMaterials.module(this)
         FairyStick.module(this)
+        SkillBook.module(this)
+        AstronomicalObservationBook.module(this)
     }
 }

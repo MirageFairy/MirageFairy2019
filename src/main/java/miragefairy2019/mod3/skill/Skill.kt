@@ -66,7 +66,5 @@ object Skill {
         }
 
         SkillGui.module(this)
-        SkillBook.module(this)
-        AstronomicalObservationBook.module(this)
     }
 }
