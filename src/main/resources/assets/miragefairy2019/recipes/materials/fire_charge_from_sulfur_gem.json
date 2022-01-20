@@ -18,6 +18,14 @@
 			{
 				"item": "minecraft:coal",
 				"data": 1
+			},
+			{
+				"type": "forge:ore_dict",
+				"ore": "dustCoal"
+			},
+			{
+				"type": "forge:ore_dict",
+				"ore": "dustCharcoal"
 			}
 		]
 	],

@@ -6,10 +6,16 @@
 			"type": "miragefairy2019:ore_dict_complex",
 			"ore": "mirageFairy2019CraftingToolFairyWandBreaking"
 		},
-		{
-			"item": "minecraft:coal",
-			"data": 1
-		},
+		[
+			{
+				"item": "minecraft:coal",
+				"data": 1
+			},
+			{
+				"type": "forge:ore_dict",
+				"ore": "dustCharcoal"
+			}
+		],
 		{
 			"type": "forge:ore_dict",
 			"ore": "gemSulfur"

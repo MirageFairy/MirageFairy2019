@@ -784,6 +784,14 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
                     item = "minecraft:coal";
                     data = 1;
                 };
+                {
+                    type = "forge:ore_dict";
+                    ore = "dustCoal";
+                };
+                {
+                    type = "forge:ore_dict";
+                    ore = "dustCharcoal";
+                };
 			];
 		];
 		result = {
