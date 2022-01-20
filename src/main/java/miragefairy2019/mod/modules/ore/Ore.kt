@@ -62,6 +62,8 @@ object Ore {
             r(18, "labradorite_gem", "gemLabradorite", "gemLabradorite", { generated })
             r(19, "lilagium_ingot", "ingotLilagium", "ingotLilagium", { generated })
             r(20, "miragium_plate", "plateMiragium", "plateMiragium", { generated })
+            r(21, "coal_dust", "dustCoal", "dustCoal", { generated }).fuel(1600)
+            r(22, "charcoal_dust", "dustCharcoal", "dustCharcoal", { generated }).fuel(1600)
 
             onRegisterItem {
                 if (ApiMain.side.isClient) item.setCustomModelResourceLocations()

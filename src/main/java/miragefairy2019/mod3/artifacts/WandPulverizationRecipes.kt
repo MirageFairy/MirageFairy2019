@@ -29,6 +29,10 @@ object WandPulverizationRecipes {
             // 妖精MODによる粉
             r("miragium_dust", "ingotMiragium".oreIngredient, "dustMiragium")
 
+            // 妖精MODによるバニラ素材の粉
+            r("coal_dust", Items.COAL.createItemStack(metadata = 0).ingredient, "dustCoal")
+            r("charcoal_dust", Items.COAL.createItemStack(metadata = 1).ingredient, "dustCharcoal")
+
             // 他MODによるバニラ素材の粉
             r("iron_dust", "ingotIron".oreIngredient, "dustIron")
             r("gold_dust", "ingotGold".oreIngredient, "dustGold")

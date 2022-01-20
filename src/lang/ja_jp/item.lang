@@ -210,6 +210,8 @@ tile.blockLeafMirageFlower.name=ミラージュフラワーの葉ブロック
 tile.blockMiragium.name=ミラジウムブロック
 tile.blockDustMiragium.name=ミラジウムの粉ブロック
 item.plateMiragium.name=ミラジウムの板
+item.dustCoal.name=石炭の粉
+item.dustCharcoal.name=木炭の粉
 
 item.spheres.name=スフィア
 item.spheres.format=%sのスフィア

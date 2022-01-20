@@ -210,6 +210,8 @@ tile.blockLeafMirageFlower.name=Block of Mirage Flower Leaf
 tile.blockMiragium.name=Block of Miragium
 tile.blockDustMiragium.name=Block of Miragium Dust
 item.plateMiragium.name=Miragium Plate
+item.dustCoal.name=Coal Dust
+item.dustCharcoal.name=Charcoal Dust
 
 item.spheres.name=Sphere
 item.spheres.format=Sphere of %s
