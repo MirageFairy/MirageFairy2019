@@ -1,6 +1,7 @@
 package miragefairy2019.mod.modules.ore
 
 import miragefairy2019.libkt.DataItemModel
+import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.MakeItemVariantModelScope
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.addOreName
@@ -15,6 +16,7 @@ import miragefairy2019.mod.lib.multi.ItemMultiMaterial
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial
 import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.material.Material
+import net.minecraft.item.ItemStack
 import net.minecraftforge.fluids.BlockFluidClassic
 import net.minecraftforge.fluids.Fluid
 
@@ -36,6 +38,9 @@ object Ore {
                 addOreName(oreName)
                 makeItemVariantModel { modelSupplier() }
             }
+
+            fun ItemVariantInitializer<ItemSimpleMaterials, ItemVariantSimpleMaterials>.fuel(burnTime: Int) = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.burnTime = burnTime } }
+
             r(0, "apatite_gem", "gemApatite", "gemApatite", { generated })
             r(1, "fluorite_gem", "gemFluorite", "gemFluorite", { generated })
             r(2, "sulfur_gem", "gemSulfur", "gemSulfur", { generated })
@@ -67,9 +72,11 @@ object Ore {
 }
 
 class ItemSimpleMaterials : ItemMultiMaterial<ItemVariantSimpleMaterials>() {
+    override fun getItemBurnTime(itemStack: ItemStack) = getVariant(itemStack)?.burnTime ?: -1
 }
 
 class ItemVariantSimpleMaterials(registryName: String, unlocalizedName: String) : ItemVariantMaterial(registryName, unlocalizedName) {
+    var burnTime: Int? = null
 }
 
 class BlockFluidMiragiumWater(fluid: Fluid) : BlockFluidClassic(fluid, Material.WATER) {
