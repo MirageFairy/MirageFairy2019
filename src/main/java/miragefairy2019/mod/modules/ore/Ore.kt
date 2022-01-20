@@ -22,7 +22,7 @@ object Ore {
     val module: Module = {
 
         // マテリアルアイテム
-        val itemMaterials = item({ ItemMultiMaterial<ItemVariantMaterial>() }, "materials") {
+        item({ ItemSimpleMaterials() }, "materials") {
             setUnlocalizedName("materials")
             setCreativeTab { ApiMain.creativeTab }
 
@@ -31,8 +31,8 @@ object Ore {
                 registryName: String,
                 unlocalizedName: String,
                 oreName: String,
-                modelSupplier: MakeItemVariantModelScope<ItemMultiMaterial<ItemVariantMaterial>, ItemVariantMaterial>.() -> DataItemModel
-            ) = itemVariant(registryName, { ItemVariantMaterial(it, unlocalizedName) }, metadata) {
+                modelSupplier: MakeItemVariantModelScope<ItemSimpleMaterials, ItemVariantSimpleMaterials>.() -> DataItemModel
+            ) = itemVariant(registryName, { ItemVariantSimpleMaterials(it, unlocalizedName) }, metadata) {
                 addOreName(oreName)
                 makeItemVariantModel { modelSupplier() }
             }
@@ -64,6 +64,12 @@ object Ore {
         }
 
     }
+}
+
+class ItemSimpleMaterials : ItemMultiMaterial<ItemVariantSimpleMaterials>() {
+}
+
+class ItemVariantSimpleMaterials(registryName: String, unlocalizedName: String) : ItemVariantMaterial(registryName, unlocalizedName) {
 }
 
 class BlockFluidMiragiumWater(fluid: Fluid) : BlockFluidClassic(fluid, Material.WATER) {
