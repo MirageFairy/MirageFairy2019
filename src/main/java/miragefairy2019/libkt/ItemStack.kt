@@ -29,13 +29,14 @@ val ItemStack.containerItem get() = if (item.hasContainerItem(this)) item.getCon
 /**
  * @receiver このインスタンスはメソッド内部でcopyされるため、破壊されません。
  */
-fun ItemStack.drop(world: World, pos: Vec3d, motionless: Boolean = false): EntityItem {
+fun ItemStack.drop(world: World, pos: Vec3d, motionless: Boolean = false, noPickupDelay: Boolean = false): EntityItem {
     val entityItem = EntityItem(world, pos.x, pos.y, pos.z, copy())
     if (motionless) {
         entityItem.motionX = 0.0
         entityItem.motionY = 0.0
         entityItem.motionZ = 0.0
     }
+    if (noPickupDelay) entityItem.setNoPickupDelay()
     world.spawnEntity(entityItem)
     return entityItem
 }
