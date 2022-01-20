@@ -16,7 +16,6 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.with
 import miragefairy2019.mod3.artifacts.treecompile.TreeCompileException
-import miragefairy2019.mod3.fairymaterials.FairyMaterials
 import miragefairy2019.mod3.main.api.ApiMain
 import mirrg.boron.util.UtilsMath
 import net.minecraft.block.state.IBlockState

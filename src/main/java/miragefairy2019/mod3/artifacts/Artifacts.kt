@@ -19,5 +19,6 @@ object Artifacts {
         Sphere.module(this)
         WandPulverizationRecipes.module(this)
         FairyMaterials.module(this)
+        FairyStick.module(this)
     }
 }

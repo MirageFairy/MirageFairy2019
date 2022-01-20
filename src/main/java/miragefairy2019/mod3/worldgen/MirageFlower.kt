@@ -16,13 +16,13 @@ import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.modules.fairycrystal.variantFairyCrystal
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
+import miragefairy2019.mod3.artifacts.FairyMaterials
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
-import miragefairy2019.mod3.fairymaterials.FairyMaterials
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.pick.PickHandler
 import miragefairy2019.mod3.pick.api.IPickHandler

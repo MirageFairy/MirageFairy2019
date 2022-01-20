@@ -8,7 +8,6 @@ import miragefairy2019.mod3.artifacts.Artifacts
 import miragefairy2019.mod3.damagesource.DamageSource
 import miragefairy2019.mod3.fairy.Fairy
 import miragefairy2019.mod3.fairy.relation.FairyRelation
-import miragefairy2019.mod3.fairystick.FairyStick
 import miragefairy2019.mod3.main.Main
 import miragefairy2019.mod3.manualrepair.ManualRepair
 import miragefairy2019.mod3.pick.Pick
@@ -23,7 +22,6 @@ val modules = listOf(
     Fairy.module,
     FairyWeapon.module,
     FairyRelation.module,
-    FairyStick.module,
     Artifacts.module,
     ManualRepair.module,
     DamageSource.module,

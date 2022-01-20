@@ -12,7 +12,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
-import miragefairy2019.mod3.fairystick.itemFairyStick
+import miragefairy2019.mod3.artifacts.itemFairyStick
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
 import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftRecipe
