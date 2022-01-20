@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.fairymaterials
+package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemVariantInitializer
