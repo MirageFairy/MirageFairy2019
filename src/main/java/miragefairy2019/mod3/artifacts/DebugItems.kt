@@ -14,10 +14,12 @@ import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.sum
+import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.mana
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.Item
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
@@ -41,6 +43,7 @@ object DebugItems {
 
         r({ ItemDebugFairyList() }, "debug_fairy_list", "debugFairyList")
         r({ ItemDebugOreNameList() }, "debug_ore_name_list", "debugOreNameList")
+        r({ ItemDebugSkillResetUnlock() }, "debug_skill_reset_unlock", "debugSkillResetUnlock")
 
     }
 }
@@ -119,6 +122,17 @@ class ItemDebugOreNameList : Item() {
             .sorted()
             .filter { OreDictionary.getOres(it).isNotEmpty() }
             .joinToString("") { "$it\n" })
+        return EnumActionResult.SUCCESS
+    }
+}
+
+class ItemDebugSkillResetUnlock : Item() {
+    override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        if (world.isRemote) return EnumActionResult.SUCCESS
+        val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
+        skillContainer.variables.lastMasteryResetTime = null
+        if (player is EntityPlayerMP) skillContainer.send(player)
+        player.sendStatusMessage(textComponent { !"スキルポイント初期化が可能になりました" }, true) // TODO translate
         return EnumActionResult.SUCCESS
     }
 }

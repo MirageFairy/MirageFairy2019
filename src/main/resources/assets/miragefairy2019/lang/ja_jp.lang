@@ -395,6 +395,7 @@ tile.fairyResinTapper.name=樹液取り職人スプルーツァの家
 
 item.debugFairyList.name=デバッグ：妖精一覧
 item.debugOreNameList.name=デバッグ：鉱石辞書名一覧
+item.debugSkillResetUnlock.name=デバッグ：スキルリセット解禁
 
 item.forge.bucketFilled.name=%s入りバケツ
 mirageFairy2019.magic.status.strength.name=効果値

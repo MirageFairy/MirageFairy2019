@@ -242,3 +242,4 @@ tile.fairyResinTapper.name=Fairy Resin Extractor
 
 item.debugFairyList.name=Debug: Fairy List
 item.debugOreNameList.name=Debug: Ore Name List
+item.debugSkillResetUnlock.name=Debug: Skill Reset Unlock
