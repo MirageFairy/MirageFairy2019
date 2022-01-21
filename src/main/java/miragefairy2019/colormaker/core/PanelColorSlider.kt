@@ -20,41 +20,41 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
-import static mirrg.boron.swing.UtilsComponent.get;
+import mirrg.boron.swing.UtilsComponent.get;
 
-public class PanelColorSlider extends JPanel {
+class PanelColorSlider : JPanel {
 
-    private PanelSliderField sliderG;
-    private PanelSliderField sliderB;
-    private PanelSliderField sliderR;
-    private ParsingTextField<Integer> textField;
+    private lateinit var sliderG: PanelSliderField;
+    private lateinit var sliderB: PanelSliderField;
+    private lateinit var sliderR: PanelSliderField;
+    private lateinit var textField: ParsingTextField<Int>;
 
-    private boolean isInProcessing = false;
+    private var isInProcessing = false;
 
-    public PanelColorSlider() {
+    constructor() {
 
-        setLayout(get(new GridBagLayout(), l -> {
-            l.columnWidths = new int[]{
+        setLayout(get(GridBagLayout(), { l ->
+            l.columnWidths = intArrayOf(
                     0, 0
-            };
-            l.rowHeights = new int[]{
+            );
+            l.rowHeights = intArrayOf(
                     0, 0, 0, 0
-            };
-            l.columnWeights = new double[]{
+            );
+            l.columnWeights = doubleArrayOf(
                     1.0, Double.MIN_VALUE
-            };
-            l.rowWeights = new double[]{
+            );
+            l.rowWeights = doubleArrayOf(
                     0.0, 0.0, 0.0, 0.0
-            };
+            );
         }));
 
-        add(get(sliderR = new PanelSliderField(), c -> {
-            c.listeners.add(value -> {
-                if (isInProcessing) return;
-                setValue(new Color(sliderR.getValue(), sliderG.getValue(), sliderB.getValue()), c);
+        add(get(PanelSliderField().also { sliderR = it }, { c ->
+            c.listeners.add(java.util.function.IntConsumer { value ->
+                if (isInProcessing) return@IntConsumer;
+                setValue(Color(sliderR.getValue(), sliderG.getValue(), sliderB.getValue()), c);
             });
-        }), get(new GridBagConstraints(), c -> {
-            c.insets = new Insets(0, 0, 5, 0);
+        }), get(GridBagConstraints(), { c ->
+            c.insets = Insets(0, 0, 5, 0);
             c.fill = GridBagConstraints.BOTH;
             c.gridx = 0;
             c.gridy = 0;
@@ -62,13 +62,13 @@ public class PanelColorSlider extends JPanel {
             c.gridheight = 1;
         }));
 
-        add(get(sliderG = new PanelSliderField(), c -> {
-            c.listeners.add(value -> {
-                if (isInProcessing) return;
-                setValue(new Color(sliderR.getValue(), sliderG.getValue(), sliderB.getValue()), c);
+        add(get(PanelSliderField().also { sliderG = it }, { c ->
+            c.listeners.add(java.util.function.IntConsumer { value ->
+                if (isInProcessing) return@IntConsumer;
+                setValue(Color(sliderR.getValue(), sliderG.getValue(), sliderB.getValue()), c);
             });
-        }), get(new GridBagConstraints(), c -> {
-            c.insets = new Insets(0, 0, 5, 0);
+        }), get(GridBagConstraints(), { c ->
+            c.insets = Insets(0, 0, 5, 0);
             c.fill = GridBagConstraints.BOTH;
             c.gridx = 0;
             c.gridy = 1;
@@ -76,13 +76,13 @@ public class PanelColorSlider extends JPanel {
             c.gridheight = 1;
         }));
 
-        add(get(sliderB = new PanelSliderField(), c -> {
-            c.listeners.add(value -> {
-                if (isInProcessing) return;
-                setValue(new Color(sliderR.getValue(), sliderG.getValue(), sliderB.getValue()), c);
+        add(get(PanelSliderField().also { sliderB = it }, { c ->
+            c.listeners.add(java.util.function.IntConsumer { value ->
+                if (isInProcessing) return@IntConsumer;
+                setValue(Color(sliderR.getValue(), sliderG.getValue(), sliderB.getValue()), c);
             });
-        }), get(new GridBagConstraints(), c -> {
-            c.insets = new Insets(0, 0, 5, 0);
+        }), get(GridBagConstraints(), { c ->
+            c.insets = Insets(0, 0, 5, 0);
             c.fill = GridBagConstraints.BOTH;
             c.gridx = 0;
             c.gridy = 2;
@@ -90,21 +90,21 @@ public class PanelColorSlider extends JPanel {
             c.gridheight = 1;
         }));
 
-        Pattern pattern = Pattern.compile("[0-9a-fA-F]{6}");
-        add(get(textField = new ParsingTextField<>(s -> {
+        val pattern = Pattern.compile("[0-9a-fA-F]{6}");
+        add(get(ParsingTextField({ s ->
             if (pattern.matcher(s.trim()).matches()) {
-                return Integer.parseInt(s.trim(), 16);
+                return@ParsingTextField Integer.parseInt(s.trim(), 16);
             } else {
-                return null;
+                return@ParsingTextField null;
             }
-        }, v -> String.format("%06X", v & 0xffffff)), c -> {
+        }, { v -> String.format("%06X", v and 0xffffff) }).also { textField = it }, { c ->
             c.setColumns(10);
-            c.getListeners().add(i -> {
-                if (isInProcessing) return Unit.INSTANCE;
-                setValue(new Color(c.getValue()), c);
-                return Unit.INSTANCE;
+            c.listeners.add({ i ->
+                if (isInProcessing) return@add Unit;
+                setValue(Color(c.value!!), c);
+                return@add Unit;
             });
-        }), get(new GridBagConstraints(), c -> {
+        }), get(GridBagConstraints(), { c ->
             c.fill = GridBagConstraints.HORIZONTAL;
             c.gridx = 0;
             c.gridy = 3;
@@ -112,38 +112,36 @@ public class PanelColorSlider extends JPanel {
             c.gridheight = 1;
         }));
 
-        add(get(new JToggleButton("Pick"), new Consumer<JToggleButton>() {
-            private Timer timer = new Timer(20, e -> {
+        add(get(JToggleButton("Pick"), object : Consumer<JToggleButton> {
+            private val timer = Timer(20, { e ->
                 try {
-                    Point location = MouseInfo.getPointerInfo().getLocation();
-                    BufferedImage createScreenCapture = new Robot().createScreenCapture(new Rectangle(location.x, location.y, 1, 1));
-                    setValue(new Color(createScreenCapture.getRGB(0, 0)));
-                } catch (Exception e2) {
+                    val location = MouseInfo.getPointerInfo().getLocation();
+                    val createScreenCapture = Robot().createScreenCapture(Rectangle(location.x, location.y, 1, 1));
+                    setValue(Color(createScreenCapture.getRGB(0, 0)));
+                } catch (e2: Exception) {
                     e2.printStackTrace();
                 }
             });
 
-            {
+            init {
                 timer.setRepeats(true);
             }
 
-            @Override
-            public void accept(JToggleButton c) {
-                c.addActionListener(e -> {
+            override fun accept(c: JToggleButton) {
+                c.addActionListener({ e ->
                     if (c.isSelected()) {
                         timer.start();
                     } else {
                         timer.stop();
                     }
                 });
-                c.addComponentListener(new ComponentAdapter() {
-                    @Override
-                    public void componentHidden(ComponentEvent e) {
+                c.addComponentListener(object : ComponentAdapter() {
+                    override fun componentHidden(e: ComponentEvent) {
                         timer.stop();
                     }
                 });
             }
-        }), get(new GridBagConstraints(), c -> {
+        }), get(GridBagConstraints(), { c ->
             c.fill = GridBagConstraints.HORIZONTAL;
             c.gridx = 1;
             c.gridy = 3;
@@ -159,21 +157,21 @@ public class PanelColorSlider extends JPanel {
 
     //
 
-    private Color value;
+    private lateinit var value: Color;
 
-    public void setValue(Color value) {
+    fun setValue(value: Color) {
         setValue(value, null);
     }
 
-    public Color getValue() {
+    fun getValue(): Color {
         return value;
     }
 
     //
 
-    public ArrayList<Consumer<Color>> listeners = new ArrayList<>();
+    @JvmField val listeners : ArrayList<Consumer<Color>> = ArrayList();
 
-    private void setValue(Color value, Object source) {
+    private fun setValue(value: Color, source: Any?) {
         isInProcessing = true;
 
         this.value = value;
@@ -181,10 +179,10 @@ public class PanelColorSlider extends JPanel {
         if (source != sliderR) sliderR.setValue(value.getRed());
         if (source != sliderG) sliderG.setValue(value.getGreen());
         if (source != sliderB) sliderB.setValue(value.getBlue());
-        listeners.forEach(l -> {
+        listeners.forEach({ l ->
             try {
                 l.accept(value);
-            } catch (Exception e) {
+            } catch (e: Exception) {
                 e.printStackTrace();
             }
         });
