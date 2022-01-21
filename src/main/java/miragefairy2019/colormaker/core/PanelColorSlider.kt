@@ -14,16 +14,13 @@ import javax.swing.JPanel
 import javax.swing.JToggleButton
 import javax.swing.Timer
 
-class PanelColorSlider : JPanel {
-
+class PanelColorSlider() : JPanel() {
     private lateinit var sliderG: PanelSliderField
     private lateinit var sliderB: PanelSliderField
     private lateinit var sliderR: PanelSliderField
     private lateinit var textField: ParsingTextField<Int>
 
-    private var isInProcessing = false
-
-    constructor() {
+    init {
 
         layout = GridBagLayout().also { l ->
             l.columnWidths = intArrayOf(0, 0)
@@ -77,13 +74,9 @@ class PanelColorSlider : JPanel {
             c.gridheight = 1
         })
 
-        val pattern = Pattern.compile("[0-9a-fA-F]{6}")
+        val pattern = """[0-9a-fA-F]{6}""".toRegex()
         add(ParsingTextField({ s ->
-            if (pattern.matcher(s.trim()).matches()) {
-                return@ParsingTextField Integer.parseInt(s.trim(), 16)
-            } else {
-                return@ParsingTextField null
-            }
+            s.trim().takeIf { pattern.matches(it) }?.toInt(16)
         }, { v -> String.format("%06X", v and 0xffffff) }).also { c ->
             textField = c
             c.columns = 10
@@ -110,17 +103,9 @@ class PanelColorSlider : JPanel {
                 }
             }
             timer.isRepeats = true
-            c.addActionListener {
-                if (c.isSelected) {
-                    timer.start()
-                } else {
-                    timer.stop()
-                }
-            }
+            c.addActionListener { if (c.isSelected) timer.start() else timer.stop() }
             c.addComponentListener(object : ComponentAdapter() {
-                override fun componentHidden(e: ComponentEvent) {
-                    timer.stop()
-                }
+                override fun componentHidden(e: ComponentEvent) = timer.stop()
             })
         }, GridBagConstraints().also { c ->
             c.fill = GridBagConstraints.HORIZONTAL
@@ -145,6 +130,7 @@ class PanelColorSlider : JPanel {
     //
 
     val listeners = mutableListOf<(Color) -> Unit>()
+    private var isInProcessing = false
 
     private fun setValue(value: Color, source: Any?) {
         isInProcessing = true
@@ -164,5 +150,4 @@ class PanelColorSlider : JPanel {
 
         isInProcessing = false
     }
-
 }
