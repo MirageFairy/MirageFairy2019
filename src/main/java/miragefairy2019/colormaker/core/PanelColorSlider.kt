@@ -33,7 +33,7 @@ class PanelColorSlider : JPanel {
 
     constructor() {
 
-        setLayout(get(GridBagLayout()) { l ->
+        layout = get(GridBagLayout()) { l ->
             l.columnWidths = intArrayOf(
                     0, 0
             )
@@ -46,12 +46,12 @@ class PanelColorSlider : JPanel {
             l.rowWeights = doubleArrayOf(
                     0.0, 0.0, 0.0, 0.0
             )
-        })
+        }
 
         add(get(PanelSliderField().also { sliderR = it }) { c ->
             c.listeners.add(java.util.function.IntConsumer { value ->
                 if (isInProcessing) return@IntConsumer
-                setValue(Color(sliderR.getValue(), sliderG.getValue(), sliderB.getValue()), c)
+                setValue(Color(sliderR.value, sliderG.value, sliderB.value), c)
             })
         }, get(GridBagConstraints()) { c ->
             c.insets = Insets(0, 0, 5, 0)
@@ -65,7 +65,7 @@ class PanelColorSlider : JPanel {
         add(get(PanelSliderField().also { sliderG = it }) { c ->
             c.listeners.add(java.util.function.IntConsumer { value ->
                 if (isInProcessing) return@IntConsumer
-                setValue(Color(sliderR.getValue(), sliderG.getValue(), sliderB.getValue()), c)
+                setValue(Color(sliderR.value, sliderG.value, sliderB.value), c)
             })
         }, get(GridBagConstraints()) { c ->
             c.insets = Insets(0, 0, 5, 0)
@@ -79,7 +79,7 @@ class PanelColorSlider : JPanel {
         add(get(PanelSliderField().also { sliderB = it }) { c ->
             c.listeners.add(java.util.function.IntConsumer { value ->
                 if (isInProcessing) return@IntConsumer
-                setValue(Color(sliderR.getValue(), sliderG.getValue(), sliderB.getValue()), c)
+                setValue(Color(sliderR.value, sliderG.value, sliderB.value), c)
             })
         }, get(GridBagConstraints()) { c ->
             c.insets = Insets(0, 0, 5, 0)
@@ -98,7 +98,7 @@ class PanelColorSlider : JPanel {
                 return@ParsingTextField null
             }
         }, { v -> String.format("%06X", v and 0xffffff) }).also { textField = it }) { c ->
-            c.setColumns(10)
+            c.columns = 10
             c.listeners.add { i ->
                 if (isInProcessing) return@add Unit
                 setValue(Color(c.value!!), c)
@@ -115,7 +115,7 @@ class PanelColorSlider : JPanel {
         add(get(JToggleButton("Pick"), object : Consumer<JToggleButton> {
             private val timer = Timer(20) { e ->
                 try {
-                    val location = MouseInfo.getPointerInfo().getLocation()
+                    val location = MouseInfo.getPointerInfo().location
                     val createScreenCapture = Robot().createScreenCapture(Rectangle(location.x, location.y, 1, 1))
                     setValue(Color(createScreenCapture.getRGB(0, 0)))
                 } catch (e2: Exception) {
@@ -124,12 +124,12 @@ class PanelColorSlider : JPanel {
             }
 
             init {
-                timer.setRepeats(true)
+                timer.isRepeats = true
             }
 
             override fun accept(c: JToggleButton) {
                 c.addActionListener { e ->
-                    if (c.isSelected()) {
+                    if (c.isSelected) {
                         timer.start()
                     } else {
                         timer.stop()
@@ -175,10 +175,10 @@ class PanelColorSlider : JPanel {
         isInProcessing = true
 
         this.value = value
-        if (source != textField) textField.setValue(value.getRGB())
-        if (source != sliderR) sliderR.setValue(value.getRed())
-        if (source != sliderG) sliderG.setValue(value.getGreen())
-        if (source != sliderB) sliderB.setValue(value.getBlue())
+        if (source != textField) textField.setValue(value.rgb)
+        if (source != sliderR) sliderR.value = value.red
+        if (source != sliderG) sliderG.value = value.green
+        if (source != sliderB) sliderB.value = value.blue
         listeners.forEach { l ->
             try {
                 l.accept(value)
