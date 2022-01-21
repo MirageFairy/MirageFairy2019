@@ -9,7 +9,6 @@ import java.awt.Rectangle
 import java.awt.Robot
 import java.awt.event.ComponentAdapter
 import java.awt.event.ComponentEvent
-import java.util.regex.Pattern
 import javax.swing.JPanel
 import javax.swing.JToggleButton
 import javax.swing.Timer
@@ -114,11 +113,6 @@ class PanelColorSlider() : JPanel() {
             c.gridwidth = 1
             c.gridheight = 1
         })
-
-        //
-
-        setValue(Color.white)
-
     }
 
     //
@@ -149,5 +143,9 @@ class PanelColorSlider() : JPanel() {
         }
 
         isInProcessing = false
+    }
+    
+    init {
+        setValue(Color.white)
     }
 }
