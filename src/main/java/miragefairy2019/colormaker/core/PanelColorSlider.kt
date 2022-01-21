@@ -41,7 +41,8 @@ class PanelColorSlider : JPanel {
             )
         }
 
-        add(PanelSliderField().also { sliderR = it }.also { c ->
+        add(PanelSliderField().also { c ->
+            sliderR = c
             c.listeners.add(java.util.function.IntConsumer {
                 if (isInProcessing) return@IntConsumer
                 setValue(Color(sliderR.value, sliderG.value, sliderB.value), c)
@@ -55,7 +56,8 @@ class PanelColorSlider : JPanel {
             c.gridheight = 1
         })
 
-        add(PanelSliderField().also { sliderG = it }.also { c ->
+        add(PanelSliderField().also { c ->
+            sliderG = c
             c.listeners.add(java.util.function.IntConsumer {
                 if (isInProcessing) return@IntConsumer
                 setValue(Color(sliderR.value, sliderG.value, sliderB.value), c)
@@ -69,7 +71,8 @@ class PanelColorSlider : JPanel {
             c.gridheight = 1
         })
 
-        add(PanelSliderField().also { sliderB = it }.also { c ->
+        add(PanelSliderField().also { c ->
+            sliderB = c
             c.listeners.add(java.util.function.IntConsumer {
                 if (isInProcessing) return@IntConsumer
                 setValue(Color(sliderR.value, sliderG.value, sliderB.value), c)
@@ -90,7 +93,8 @@ class PanelColorSlider : JPanel {
             } else {
                 return@ParsingTextField null
             }
-        }, { v -> String.format("%06X", v and 0xffffff) }).also { textField = it }.also { c ->
+        }, { v -> String.format("%06X", v and 0xffffff) }).also { c ->
+            textField = c
             c.columns = 10
             c.listeners.add {
                 if (isInProcessing) return@add
@@ -104,8 +108,8 @@ class PanelColorSlider : JPanel {
             c.gridheight = 1
         })
 
-        add(JToggleButton("Pick").also { object : (JToggleButton) -> Unit {
-            private val timer = Timer(20) {
+        add(JToggleButton("Pick").also { c ->
+            val timer = Timer(20) {
                 try {
                     val location = MouseInfo.getPointerInfo().location
                     val createScreenCapture = Robot().createScreenCapture(Rectangle(location.x, location.y, 1, 1))
@@ -114,26 +118,20 @@ class PanelColorSlider : JPanel {
                     e2.printStackTrace()
                 }
             }
-
-            init {
-                timer.isRepeats = true
-            }
-
-            override fun invoke(c: JToggleButton) {
-                c.addActionListener {
-                    if (c.isSelected) {
-                        timer.start()
-                    } else {
-                        timer.stop()
-                    }
+            timer.isRepeats = true
+            c.addActionListener {
+                if (c.isSelected) {
+                    timer.start()
+                } else {
+                    timer.stop()
                 }
-                c.addComponentListener(object : ComponentAdapter() {
-                    override fun componentHidden(e: ComponentEvent) {
-                        timer.stop()
-                    }
-                })
             }
-        }(it) }, GridBagConstraints().also { c ->
+            c.addComponentListener(object : ComponentAdapter() {
+                override fun componentHidden(e: ComponentEvent) {
+                    timer.stop()
+                }
+            })
+        }, GridBagConstraints().also { c ->
             c.fill = GridBagConstraints.HORIZONTAL
             c.gridx = 1
             c.gridy = 3
