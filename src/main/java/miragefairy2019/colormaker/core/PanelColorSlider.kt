@@ -1,26 +1,20 @@
 package miragefairy2019.colormaker.core
 
-import kotlin.Unit
-
-import javax.swing.JPanel
-import javax.swing.JToggleButton
-import javax.swing.Timer
+import mirrg.boron.swing.UtilsComponent.get
 import java.awt.Color
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
 import java.awt.MouseInfo
-import java.awt.Point
 import java.awt.Rectangle
 import java.awt.Robot
 import java.awt.event.ComponentAdapter
 import java.awt.event.ComponentEvent
-import java.awt.image.BufferedImage
-import java.util.ArrayList
 import java.util.function.Consumer
 import java.util.regex.Pattern
-
-import mirrg.boron.swing.UtilsComponent.get
+import javax.swing.JPanel
+import javax.swing.JToggleButton
+import javax.swing.Timer
 
 class PanelColorSlider : JPanel {
 
@@ -35,16 +29,16 @@ class PanelColorSlider : JPanel {
 
         layout = get(GridBagLayout()) { l ->
             l.columnWidths = intArrayOf(
-                    0, 0
+                0, 0
             )
             l.rowHeights = intArrayOf(
-                    0, 0, 0, 0
+                0, 0, 0, 0
             )
             l.columnWeights = doubleArrayOf(
-                    1.0, Double.MIN_VALUE
+                1.0, Double.MIN_VALUE
             )
             l.rowWeights = doubleArrayOf(
-                    0.0, 0.0, 0.0, 0.0
+                0.0, 0.0, 0.0, 0.0
             )
         }
 
@@ -168,7 +162,8 @@ class PanelColorSlider : JPanel {
 
     //
 
-    @JvmField val listeners : ArrayList<Consumer<Color>> = ArrayList()
+    @JvmField
+    val listeners: ArrayList<Consumer<Color>> = ArrayList()
 
     private fun setValue(value: Color, source: Any?) {
         isInProcessing = true
