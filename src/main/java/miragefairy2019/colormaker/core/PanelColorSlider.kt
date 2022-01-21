@@ -1,6 +1,5 @@
 package miragefairy2019.colormaker.core
 
-import mirrg.boron.swing.UtilsComponent.get
 import java.awt.Color
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
@@ -27,7 +26,7 @@ class PanelColorSlider : JPanel {
 
     constructor() {
 
-        layout = get(GridBagLayout()) { l ->
+        layout = GridBagLayout().also { l ->
             l.columnWidths = intArrayOf(
                 0, 0
             )
@@ -42,12 +41,12 @@ class PanelColorSlider : JPanel {
             )
         }
 
-        add(get(PanelSliderField().also { sliderR = it }) { c ->
+        add(PanelSliderField().also { sliderR = it }.also { c ->
             c.listeners.add(java.util.function.IntConsumer {
                 if (isInProcessing) return@IntConsumer
                 setValue(Color(sliderR.value, sliderG.value, sliderB.value), c)
             })
-        }, get(GridBagConstraints()) { c ->
+        }, GridBagConstraints().also { c ->
             c.insets = Insets(0, 0, 5, 0)
             c.fill = GridBagConstraints.BOTH
             c.gridx = 0
@@ -56,12 +55,12 @@ class PanelColorSlider : JPanel {
             c.gridheight = 1
         })
 
-        add(get(PanelSliderField().also { sliderG = it }) { c ->
+        add(PanelSliderField().also { sliderG = it }.also { c ->
             c.listeners.add(java.util.function.IntConsumer {
                 if (isInProcessing) return@IntConsumer
                 setValue(Color(sliderR.value, sliderG.value, sliderB.value), c)
             })
-        }, get(GridBagConstraints()) { c ->
+        }, GridBagConstraints().also { c ->
             c.insets = Insets(0, 0, 5, 0)
             c.fill = GridBagConstraints.BOTH
             c.gridx = 0
@@ -70,12 +69,12 @@ class PanelColorSlider : JPanel {
             c.gridheight = 1
         })
 
-        add(get(PanelSliderField().also { sliderB = it }) { c ->
+        add(PanelSliderField().also { sliderB = it }.also { c ->
             c.listeners.add(java.util.function.IntConsumer {
                 if (isInProcessing) return@IntConsumer
                 setValue(Color(sliderR.value, sliderG.value, sliderB.value), c)
             })
-        }, get(GridBagConstraints()) { c ->
+        }, GridBagConstraints().also { c ->
             c.insets = Insets(0, 0, 5, 0)
             c.fill = GridBagConstraints.BOTH
             c.gridx = 0
@@ -85,19 +84,19 @@ class PanelColorSlider : JPanel {
         })
 
         val pattern = Pattern.compile("[0-9a-fA-F]{6}")
-        add(get(ParsingTextField({ s ->
+        add(ParsingTextField({ s ->
             if (pattern.matcher(s.trim()).matches()) {
                 return@ParsingTextField Integer.parseInt(s.trim(), 16)
             } else {
                 return@ParsingTextField null
             }
-        }, { v -> String.format("%06X", v and 0xffffff) }).also { textField = it }) { c ->
+        }, { v -> String.format("%06X", v and 0xffffff) }).also { textField = it }.also { c ->
             c.columns = 10
             c.listeners.add {
                 if (isInProcessing) return@add
                 setValue(Color(c.value!!), c)
             }
-        }, get(GridBagConstraints()) { c ->
+        }, GridBagConstraints().also { c ->
             c.fill = GridBagConstraints.HORIZONTAL
             c.gridx = 0
             c.gridy = 3
@@ -105,7 +104,7 @@ class PanelColorSlider : JPanel {
             c.gridheight = 1
         })
 
-        add(get(JToggleButton("Pick"), object : Consumer<JToggleButton> {
+        add(JToggleButton("Pick").also { object : (JToggleButton) -> Unit {
             private val timer = Timer(20) {
                 try {
                     val location = MouseInfo.getPointerInfo().location
@@ -120,7 +119,7 @@ class PanelColorSlider : JPanel {
                 timer.isRepeats = true
             }
 
-            override fun accept(c: JToggleButton) {
+            override fun invoke(c: JToggleButton) {
                 c.addActionListener {
                     if (c.isSelected) {
                         timer.start()
@@ -134,7 +133,7 @@ class PanelColorSlider : JPanel {
                     }
                 })
             }
-        }), get(GridBagConstraints()) { c ->
+        }(it) }, GridBagConstraints().also { c ->
             c.fill = GridBagConstraints.HORIZONTAL
             c.gridx = 1
             c.gridy = 3
