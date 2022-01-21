@@ -31,19 +31,16 @@ import java.io.File
 object DebugItems {
     val module: Module = {
 
-        // 妖精一覧デバッグアイテム
-        item({ ItemDebugFairyList() }, "debug_fairy_list") {
-            setUnlocalizedName("debugFairyList")
-            setCreativeTab { ApiMain.creativeTab }
-            setCustomModelResourceLocation(model = ResourceLocation("book"))
+        fun r(itemCreator: () -> Item, registryName: String, unlocalizedName: String) {
+            item({ itemCreator() }, registryName) {
+                setUnlocalizedName(unlocalizedName)
+                setCreativeTab { ApiMain.creativeTab }
+                setCustomModelResourceLocation(model = ResourceLocation("book"))
+            }
         }
 
-        // 妖精一覧デバッグアイテム
-        item({ ItemDebugOreNameList() }, "debug_ore_name_list") {
-            setUnlocalizedName("debugOreNameList")
-            setCreativeTab { ApiMain.creativeTab }
-            setCustomModelResourceLocation(model = ResourceLocation("book"))
-        }
+        r({ ItemDebugFairyList() }, "debug_fairy_list", "debugFairyList")
+        r({ ItemDebugOreNameList() }, "debug_ore_name_list", "debugOreNameList")
 
     }
 }
