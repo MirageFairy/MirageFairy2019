@@ -1,5 +1,6 @@
 package miragefairy2019.colormaker;
 
+import kotlin.Unit;
 import miragefairy2019.colormaker.core.ColorConstants;
 import miragefairy2019.colormaker.core.ImageLayer;
 import miragefairy2019.colormaker.core.LabelImage;
@@ -104,9 +105,10 @@ public class WindowColorMaker extends JFrame {
                     // 右側スライダーコンポーネント
                     c2.add(createPanelTitledBorder("Background", get(
                             panelColorSliderBG = new PanelColorSlider(), c -> {
-                                c.listeners.add(color -> {
-                                    if (isInProcessing) return;
+                                c.getListeners().add(color -> {
+                                    if (isInProcessing) return Unit.INSTANCE;
                                     setBackgroundColor(color, c);
+                                    return Unit.INSTANCE;
                                 });
                             })), get(new GridBagConstraints(), c -> {
                         c.fill = GridBagConstraints.HORIZONTAL;
@@ -116,9 +118,10 @@ public class WindowColorMaker extends JFrame {
                     }));
                     c2.add(createPanelTitledBorder("Skin", get(
                             panelColorSlider0 = new PanelColorSlider(), c -> {
-                                c.listeners.add(color -> {
-                                    if (isInProcessing) return;
+                                c.getListeners().add(color -> {
+                                    if (isInProcessing) return Unit.INSTANCE;
                                     setValue(getColor(), c);
+                                    return Unit.INSTANCE;
                                 });
                             })), get(new GridBagConstraints(), c -> {
                         c.fill = GridBagConstraints.HORIZONTAL;
@@ -128,9 +131,10 @@ public class WindowColorMaker extends JFrame {
                     }));
                     c2.add(createPanelTitledBorder("Darker", get(
                             panelColorSlider1 = new PanelColorSlider(), c -> {
-                                c.listeners.add(color -> {
-                                    if (isInProcessing) return;
+                                c.getListeners().add(color -> {
+                                    if (isInProcessing) return Unit.INSTANCE;
                                     setValue(getColor(), c);
+                                    return Unit.INSTANCE;
                                 });
                             })), get(new GridBagConstraints(), c -> {
                         c.fill = GridBagConstraints.HORIZONTAL;
@@ -140,9 +144,10 @@ public class WindowColorMaker extends JFrame {
                     }));
                     c2.add(createPanelTitledBorder("Brighter", get(
                             panelColorSlider2 = new PanelColorSlider(), c -> {
-                                c.listeners.add(color -> {
-                                    if (isInProcessing) return;
+                                c.getListeners().add(color -> {
+                                    if (isInProcessing) return Unit.INSTANCE;
                                     setValue(getColor(), c);
+                                    return Unit.INSTANCE;
                                 });
                             })), get(new GridBagConstraints(), c -> {
                         c.fill = GridBagConstraints.HORIZONTAL;
@@ -152,9 +157,10 @@ public class WindowColorMaker extends JFrame {
                     }));
                     c2.add(createPanelTitledBorder("Hair", get(
                             panelColorSlider3 = new PanelColorSlider(), c -> {
-                                c.listeners.add(color -> {
-                                    if (isInProcessing) return;
+                                c.getListeners().add(color -> {
+                                    if (isInProcessing) return Unit.INSTANCE;
                                     setValue(getColor(), c);
+                                    return Unit.INSTANCE;
                                 });
                             })), get(new GridBagConstraints(), c -> {
                         c.insets = new Insets(0, 0, 5, 0);

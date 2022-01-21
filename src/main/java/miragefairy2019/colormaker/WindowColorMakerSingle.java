@@ -1,5 +1,6 @@
 package miragefairy2019.colormaker;
 
+import kotlin.Unit;
 import miragefairy2019.colormaker.core.ColorConstants;
 import miragefairy2019.colormaker.core.ColorIdentifier;
 import miragefairy2019.colormaker.core.ImageLayer;
@@ -107,9 +108,10 @@ public class WindowColorMakerSingle extends JFrame {
                     // 右側スライダーコンポーネント
                     c2.add(createPanelTitledBorder("Background", get(
                             panelColorSliderBG = new PanelColorSlider(), c -> {
-                                c.listeners.add(color -> {
-                                    if (isInProcessing) return;
+                                c.getListeners().add(color -> {
+                                    if (isInProcessing) return Unit.INSTANCE;
                                     setBackgroundColor(color, c);
+                                    return Unit.INSTANCE;
                                 });
                             })), get(new GridBagConstraints(), c -> {
                         c.fill = GridBagConstraints.HORIZONTAL;
@@ -121,9 +123,10 @@ public class WindowColorMakerSingle extends JFrame {
                         int i2 = i;
                         c2.add(createPanelTitledBorder(layerSettings.get(i).x, get(
                                 panelColorSliders[i] = new PanelColorSlider(), c -> {
-                                    c.listeners.add(color -> {
-                                        if (isInProcessing) return;
+                                    c.getListeners().add(color -> {
+                                        if (isInProcessing) return Unit.INSTANCE;
                                         setValue(getColor(), c);
+                                        return Unit.INSTANCE;
                                     });
                                 })), get(new GridBagConstraints(), c -> {
                             c.fill = GridBagConstraints.HORIZONTAL;

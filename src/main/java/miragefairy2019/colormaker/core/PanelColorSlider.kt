@@ -9,7 +9,6 @@ import java.awt.Rectangle
 import java.awt.Robot
 import java.awt.event.ComponentAdapter
 import java.awt.event.ComponentEvent
-import java.util.function.Consumer
 import java.util.regex.Pattern
 import javax.swing.JPanel
 import javax.swing.JToggleButton
@@ -27,18 +26,10 @@ class PanelColorSlider : JPanel {
     constructor() {
 
         layout = GridBagLayout().also { l ->
-            l.columnWidths = intArrayOf(
-                0, 0
-            )
-            l.rowHeights = intArrayOf(
-                0, 0, 0, 0
-            )
-            l.columnWeights = doubleArrayOf(
-                1.0, Double.MIN_VALUE
-            )
-            l.rowWeights = doubleArrayOf(
-                0.0, 0.0, 0.0, 0.0
-            )
+            l.columnWidths = intArrayOf(0, 0)
+            l.rowHeights = intArrayOf(0, 0, 0, 0)
+            l.columnWeights = doubleArrayOf(1.0, Double.MIN_VALUE)
+            l.rowWeights = doubleArrayOf(0.0, 0.0, 0.0, 0.0)
         }
 
         add(PanelSliderField().also { c ->
@@ -148,19 +139,12 @@ class PanelColorSlider : JPanel {
     //
 
     private lateinit var value: Color
-
-    fun setValue(value: Color) {
-        setValue(value, null)
-    }
-
-    fun getValue(): Color {
-        return value
-    }
+    fun setValue(value: Color) = setValue(value, null)
+    fun getValue() = value
 
     //
 
-    @JvmField
-    val listeners: ArrayList<Consumer<Color>> = ArrayList()
+    val listeners = mutableListOf<(Color) -> Unit>()
 
     private fun setValue(value: Color, source: Any?) {
         isInProcessing = true
@@ -172,7 +156,7 @@ class PanelColorSlider : JPanel {
         if (source != sliderB) sliderB.value = value.blue
         listeners.forEach { l ->
             try {
-                l.accept(value)
+                l(value)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
