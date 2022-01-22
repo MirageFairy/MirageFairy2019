@@ -148,6 +148,9 @@ val loaderFairyCrystalDrop: Module = {
                 if (Instant.now() < LocalDateTime.of(2022, 2, 1, 0, 0, 0).toInstant()) {
                     hatsuyume(0.0001).fixed()
                 }
+                if (Instant.now() < LocalDateTime.of(2022, 3, 1, 0, 0, 0).toInstant()) {
+                    darkChocolate(0.0001).fixed()
+                }
 
             }
         }
