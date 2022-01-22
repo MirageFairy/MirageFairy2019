@@ -4,6 +4,7 @@ import miragefairy2019.libkt.buildText
 import miragefairy2019.mod3.erg.ErgSet
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.IErgSet
+import miragefairy2019.mod3.fairy.RankedFairyTypeBundle
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.mana.ManaSet
 import miragefairy2019.mod3.mana.api.EnumManaType
@@ -14,6 +15,7 @@ import net.minecraft.util.text.ITextComponent
 
 class FairyType(
     private val motif: ResourceLocation?,
+    val parentFairy: () -> RankedFairyTypeBundle?,
     private val displayName: ITextComponent,
     private val color: Int,
     private val cost: Double,

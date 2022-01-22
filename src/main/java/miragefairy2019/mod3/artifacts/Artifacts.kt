@@ -22,5 +22,6 @@ object Artifacts {
         FairyStick.module(this)
         SkillBook.module(this)
         AstronomicalObservationBook.module(this)
+        FairyDilutionRecipe.module(this)
     }
 }
