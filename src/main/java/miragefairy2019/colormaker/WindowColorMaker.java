@@ -207,7 +207,7 @@ public class WindowColorMaker extends JFrame {
 
         //
 
-        setBackgroundColor(Color.gray);
+        setBackgroundColor(new Color(139, 139, 139));
         setValue(new Color[]{
                 Color.white,
                 Color.white,
