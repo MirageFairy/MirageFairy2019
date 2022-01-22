@@ -144,7 +144,7 @@ class PanelColorSlider() : JPanel() {
 
         isInProcessing = false
     }
-    
+
     init {
         setValue(Color.white)
     }
