@@ -2,7 +2,6 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ingredient
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.OreIngredientComplex
 import miragefairy2019.mod3.fairy.FairyTypes
 import net.minecraft.util.ResourceLocation
@@ -19,8 +18,10 @@ object FairyDilutionRecipe {
                 val outputFairy = outputFairyBundle.main
                 val rankDiff = (outputFairy.rare - inputFairy.rare).coerceAtLeast(0) // 必要凝縮回数
 
+                val inputMotif = inputFairy.type.motif ?: return@forEach
+
                 GameRegistry.addShapelessRecipe(
-                    ResourceLocation("${ModMirageFairy2019.MODID}:fairy_dilution/${inputFairy.type.motif}"),
+                    ResourceLocation("${inputMotif.resourceDomain}:fairy_dilution/${inputMotif.resourcePath}"),
                     null,
                     outputFairy.createItemStack(),
                     OreIngredientComplex("mirageFairy2019CraftingToolFairyWandSummoning"),
