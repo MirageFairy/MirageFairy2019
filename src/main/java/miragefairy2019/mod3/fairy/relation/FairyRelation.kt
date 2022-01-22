@@ -31,6 +31,7 @@ import net.minecraft.entity.passive.EntityChicken
 import net.minecraft.entity.passive.EntityCow
 import net.minecraft.entity.passive.EntityPig
 import net.minecraft.entity.passive.EntityVillager
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.init.Enchantments
 import net.minecraft.init.Items
@@ -107,6 +108,9 @@ object FairyRelation {
 
         // エンティティ
 
+        // 常時反応するエンティティ
+        fairy { player }.register(weight = 0.1) { entity<EntityPlayer>() }
+
         // 長生きするエンティティ
         fairy { chicken }.register(weight = 2.0) { entity<EntityChicken>() }
         fairy { cow }.register(weight = 2.0) { entity<EntityCow>() }
@@ -124,6 +128,7 @@ object FairyRelation {
 
         // 滅多に会えないエンティティ
         fairy { creeper }.register(weight = 10.0) { entity<EntityCreeper>() }
+        fairy { chargedCreeper }.register(relevance = 2.0, weight = 10.0) { entity<EntityCreeper> { powered } }
         fairy { slime }.register(weight = 10.0) { entity<EntitySlime>() }
         fairy { magmaCube }.register(relevance = 2.0 /* スライムのサブクラスのため */, weight = 10.0) { entity<EntityMagmaCube>() }
         fairy { witherSkeleton }.register(weight = 10.0) { entity<EntityWitherSkeleton>() }
@@ -242,6 +247,10 @@ object FairyRelation {
             )
         }
         fairy { mirageFlower }.register { block({ MirageFlower.blockMirageFlower() }) }
+        fairy { sugarCane }.register { block({ Blocks.REEDS }) }
+        fairy { sugarCane }.register { item({ Items.REEDS }) }
+        fairy { potato }.register { block({ Blocks.POTATOES }) }
+        fairy { potato }.register { item({ Items.POTATO }) }
 
         // 料理
         fairy { bread }.register { item({ Items.BREAD }) }
@@ -260,6 +269,8 @@ object FairyRelation {
 
         // 素材
         fairy { sugar }.register { item({ Items.SUGAR }) }
+        fairy { coalDust }.register(relevance = 2.0) { ore("dustCoal") }
+        fairy { diamondDust }.register(relevance = 2.0) { ore("dustDiamond") }
 
         // 道具
         fairy { potion }.register { item({ Items.POTIONITEM }) }
@@ -286,6 +297,9 @@ object FairyRelation {
         fairy { dispenser }.register { block({ Blocks.DISPENSER }) }
         fairy { activatorRail }.register { block({ Blocks.ACTIVATOR_RAIL }) }
         fairy { magentaGlazedTerracotta }.register { block({ Blocks.MAGENTA_GLAZED_TERRACOTTA }) }
+        fairy { note }.register { block({ Blocks.NOTEBLOCK }) }
+        fairy { jukebox }.register { block({ Blocks.JUKEBOX }) }
+        fairy { netherPortal }.register { block({ Blocks.PORTAL }) }
 
         // ツール
         fairy { axe }.register { item({ Items.WOODEN_AXE }, { Items.STONE_AXE }, { Items.IRON_AXE }, { Items.GOLDEN_AXE }, { Items.DIAMOND_AXE }) }

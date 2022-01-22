@@ -111,6 +111,8 @@ val loaderFairyCrystalDrop: Module = {
             FairyTypes.instance.melon().overworld()
             FairyTypes.instance.beetroot().overworld()
             FairyTypes.instance.mirageFlower().overworld()
+            FairyTypes.instance.sugarCane().overworld()
+            FairyTypes.instance.potato().overworld()
 
 
             // ネザー
@@ -142,6 +144,7 @@ val loaderFairyCrystalDrop: Module = {
 
                 air(1.0).fixed()
                 time(0.0001).fixed()
+                mirage(0.0001).fixed()
                 if (Instant.now() < LocalDateTime.of(2022, 2, 1, 0, 0, 0).toInstant()) {
                     hatsuyume(0.0001).fixed()
                 }
@@ -213,6 +216,11 @@ val loaderFairyCrystalDrop: Module = {
                 sunrise(0.001).world { time(5000, 6000) }
                 fine(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) }
                 rain(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
+
+                if (Instant.now() < LocalDateTime.of(2022, 3, 1, 0, 0, 0).toInstant()) {
+                    coalDust(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRaining && canSnowAt(it, false) }
+                    diamondDust(0.0003).world { provider.isSurfaceWorld && canSeeSky(it) && isRaining && canSnowAt(it, false) }
+                }
 
             }
         }
