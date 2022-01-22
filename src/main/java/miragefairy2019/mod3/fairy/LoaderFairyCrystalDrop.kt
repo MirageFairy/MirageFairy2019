@@ -142,10 +142,6 @@ val loaderFairyCrystalDrop: Module = {
 
                 air(1.0).fixed()
                 time(0.0001).fixed()
-                if (Instant.now() < LocalDateTime.of(2022, 1, 10, 0, 0, 0).toInstant()) {
-                    santaClaus(0.001).fixed()
-                    christmas(0.005).fixed()
-                }
                 if (Instant.now() < LocalDateTime.of(2022, 2, 1, 0, 0, 0).toInstant()) {
                     hatsuyume(0.0001).fixed()
                 }
