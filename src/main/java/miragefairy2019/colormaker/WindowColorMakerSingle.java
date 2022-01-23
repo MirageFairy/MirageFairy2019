@@ -49,14 +49,14 @@ public class WindowColorMakerSingle extends JFrame {
         this.length = layerSettings.length();
         this.layerSettings = layerSettings;
         this.images = ISuppliterator.range(length)
-                .map(i -> {
-                    try {
-                        return new ImageLayer(imageLoader.loadItemImage(layerSettings.get(i).y), new ColorIdentifier("@" + layerSettings.get(i).x));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .toImmutableArray();
+            .map(i -> {
+                try {
+                    return new ImageLayer(imageLoader.loadItemImage(layerSettings.get(i).y), new ColorIdentifier("@" + layerSettings.get(i).x));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            })
+            .toImmutableArray();
         this.schema = schema;
 
         panelColorSliders = new PanelColorSlider[length];
@@ -65,110 +65,110 @@ public class WindowColorMakerSingle extends JFrame {
 
         add(createSplitPaneHorizontal(
 
-                // 左ペイン
-                get(panelImage = new JPanel(), c2 -> {
-                    c2.setLayout(get(new GridBagLayout(), l -> {
-                        //l.columnWidths = new int[] { 100 };
-                        //l.rowHeights = new int[] { 100 };
-                        //l.columnWeights = new double[] { 0.0 };
-                        //l.rowWeights = new double[] { 0.0 };
-                    }));
+            // 左ペイン
+            get(panelImage = new JPanel(), c2 -> {
+                c2.setLayout(get(new GridBagLayout(), l -> {
+                    //l.columnWidths = new int[] { 100 };
+                    //l.rowHeights = new int[] { 100 };
+                    //l.columnWeights = new double[] { 0.0 };
+                    //l.rowWeights = new double[] { 0.0 };
+                }));
 
-                    // 画像
-                    {
-                        ColorConstants colorConstants = new ColorConstants();
-                        for (int i = 0; i < length; i++) {
-                            int i2 = i;
-                            colorConstants.addConstant("@" + layerSettings.get(i).x, () -> value[i2]);
-                        }
-
-                        c2.add(get(labelImage = new LabelImage(), c -> {
-                            c.setPreferredSize(new Dimension(64, 64));
-                            c.setColorConstants(colorConstants);
-                        }), get(new GridBagConstraints(), c -> {
-                            c.insets = new Insets(0, 0, 5, 0);
-                            c.gridx = 0;
-                            c.gridy = 0;
-                        }));
-
+                // 画像
+                {
+                    ColorConstants colorConstants = new ColorConstants();
+                    for (int i = 0; i < length; i++) {
+                        int i2 = i;
+                        colorConstants.addConstant("@" + layerSettings.get(i).x, () -> value[i2]);
                     }
 
-                }),
-
-                // 右ペイン
-                get(new JPanel(), c2 -> {
-                    c2.setBorder(new EmptyBorder(4, 4, 4, 4));
-                    c2.setLayout(get(new GridBagLayout(), l -> {
-                        //l.columnWidths = new int[] { 0 };
-                        //l.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
-                        //l.columnWeights = new double[] { 1.0 };
-                        //l.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-                    }));
-
-                    // 右側スライダーコンポーネント
-                    c2.add(createPanelTitledBorder("Background", get(
-                            panelColorSliderBG = new PanelColorSlider(), c -> {
-                                c.getListeners().add(color -> {
-                                    if (isInProcessing) return Unit.INSTANCE;
-                                    setBackgroundColor(color, c);
-                                    return Unit.INSTANCE;
-                                });
-                            })), get(new GridBagConstraints(), c -> {
-                        c.fill = GridBagConstraints.HORIZONTAL;
+                    c2.add(get(labelImage = new LabelImage(), c -> {
+                        c.setPreferredSize(new Dimension(64, 64));
+                        c.setColorConstants(colorConstants);
+                    }), get(new GridBagConstraints(), c -> {
                         c.insets = new Insets(0, 0, 5, 0);
                         c.gridx = 0;
                         c.gridy = 0;
                     }));
-                    for (int i = 0; i < length; i++) {
-                        int i2 = i;
-                        c2.add(createPanelTitledBorder(layerSettings.get(i).x, get(
-                                panelColorSliders[i] = new PanelColorSlider(), c -> {
-                                    c.getListeners().add(color -> {
-                                        if (isInProcessing) return Unit.INSTANCE;
-                                        setValue(getColor(), c);
-                                        return Unit.INSTANCE;
-                                    });
-                                })), get(new GridBagConstraints(), c -> {
-                            c.fill = GridBagConstraints.HORIZONTAL;
-                            c.insets = new Insets(0, 0, 5, 0);
-                            c.gridx = 0;
-                            c.gridy = i2 + 1;
-                        }));
-                    }
 
-                    // 右側色構文
-                    c2.add(get(textFieldColors = new JTextField(), c -> {
-                        c.setColumns(10);
-                        c.addActionListener(e -> {
+                }
+
+            }),
+
+            // 右ペイン
+            get(new JPanel(), c2 -> {
+                c2.setBorder(new EmptyBorder(4, 4, 4, 4));
+                c2.setLayout(get(new GridBagLayout(), l -> {
+                    //l.columnWidths = new int[] { 0 };
+                    //l.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
+                    //l.columnWeights = new double[] { 1.0 };
+                    //l.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+                }));
+
+                // 右側スライダーコンポーネント
+                c2.add(createPanelTitledBorder("Background", get(
+                    panelColorSliderBG = new PanelColorSlider(), c -> {
+                        c.getListeners().add(color -> {
+                            if (isInProcessing) return Unit.INSTANCE;
+                            setBackgroundColor(color, c);
+                            return Unit.INSTANCE;
+                        });
+                    })), get(new GridBagConstraints(), c -> {
+                    c.fill = GridBagConstraints.HORIZONTAL;
+                    c.insets = new Insets(0, 0, 5, 0);
+                    c.gridx = 0;
+                    c.gridy = 0;
+                }));
+                for (int i = 0; i < length; i++) {
+                    int i2 = i;
+                    c2.add(createPanelTitledBorder(layerSettings.get(i).x, get(
+                        panelColorSliders[i] = new PanelColorSlider(), c -> {
+                            c.getListeners().add(color -> {
+                                if (isInProcessing) return Unit.INSTANCE;
+                                setValue(getColor(), c);
+                                return Unit.INSTANCE;
+                            });
+                        })), get(new GridBagConstraints(), c -> {
+                        c.fill = GridBagConstraints.HORIZONTAL;
+                        c.insets = new Insets(0, 0, 5, 0);
+                        c.gridx = 0;
+                        c.gridy = i2 + 1;
+                    }));
+                }
+
+                // 右側色構文
+                c2.add(get(textFieldColors = new JTextField(), c -> {
+                    c.setColumns(10);
+                    c.addActionListener(e -> {
+                        if (isInProcessing) return;
+                        setValue(c.getText(), c);
+                    });
+                    c.getDocument().addDocumentListener(new DocumentListener() {
+                        @Override
+                        public void removeUpdate(DocumentEvent e) {
                             if (isInProcessing) return;
                             setValue(c.getText(), c);
-                        });
-                        c.getDocument().addDocumentListener(new DocumentListener() {
-                            @Override
-                            public void removeUpdate(DocumentEvent e) {
-                                if (isInProcessing) return;
-                                setValue(c.getText(), c);
-                            }
+                        }
 
-                            @Override
-                            public void insertUpdate(DocumentEvent e) {
-                                if (isInProcessing) return;
-                                setValue(c.getText(), c);
-                            }
+                        @Override
+                        public void insertUpdate(DocumentEvent e) {
+                            if (isInProcessing) return;
+                            setValue(c.getText(), c);
+                        }
 
-                            @Override
-                            public void changedUpdate(DocumentEvent e) {
-                                if (isInProcessing) return;
-                                setValue(c.getText(), c);
-                            }
-                        });
-                    }), get(new GridBagConstraints(), c -> {
-                        c.fill = GridBagConstraints.HORIZONTAL;
-                        c.gridx = 0;
-                        c.gridy = length + 1;
-                    }));
+                        @Override
+                        public void changedUpdate(DocumentEvent e) {
+                            if (isInProcessing) return;
+                            setValue(c.getText(), c);
+                        }
+                    });
+                }), get(new GridBagConstraints(), c -> {
+                    c.fill = GridBagConstraints.HORIZONTAL;
+                    c.gridx = 0;
+                    c.gridy = length + 1;
+                }));
 
-                })
+            })
 
         ));
 
@@ -176,8 +176,8 @@ public class WindowColorMakerSingle extends JFrame {
 
         setBackgroundColor(Color.gray);
         setValue(ISuppliterator.range(length)
-                .map(i -> layerSettings.get(i).z)
-                .toArray(Color[]::new));
+            .map(i -> layerSettings.get(i).z)
+            .toArray(Color[]::new));
 
         readyUpdate = true;
         updateImage();
@@ -189,8 +189,8 @@ public class WindowColorMakerSingle extends JFrame {
 
     private Color[] getColor() {
         return ISuppliterator.range(length)
-                .map(i -> panelColorSliders[i].getValue())
-                .toArray(Color[]::new);
+            .map(i -> panelColorSliders[i].getValue())
+            .toArray(Color[]::new);
     }
 
     //
@@ -211,20 +211,20 @@ public class WindowColorMakerSingle extends JFrame {
             Color[] colors2 = getColor().clone();
 
             Color[] colors1 = ISuppliterator.of(text.split(","))
-                    .map(s -> Color.decode(s.trim()))
-                    .toArray(Color[]::new);
+                .map(s -> Color.decode(s.trim()))
+                .toArray(Color[]::new);
 
             ISuppliterator.ofObjArray(colors1)
-                    .forEach((c, i) -> {
+                .forEach((c, i) -> {
 
-                        String name = schema.get(i);
+                    String name = schema.get(i);
 
-                        int index = ISuppliterator.ofIterable(layerSettings)
-                                .findWithIndex(s -> s.x.equals(name)).get().index;
+                    int index = ISuppliterator.ofIterable(layerSettings)
+                        .findWithIndex(s -> s.x.equals(name)).get().index;
 
-                        colors2[index] = c;
+                    colors2[index] = c;
 
-                    });
+                });
 
             colors = colors2;
 
@@ -249,16 +249,16 @@ public class WindowColorMakerSingle extends JFrame {
         }
         if (source != textFieldColors) {
             textFieldColors.setText(ISuppliterator.ofIterable(schema)
-                    .map(name -> {
+                .map(name -> {
 
-                        int index = ISuppliterator.ofIterable(layerSettings)
-                                .findWithIndex(s -> s.x.equals(name)).get().index;
+                    int index = ISuppliterator.ofIterable(layerSettings)
+                        .findWithIndex(s -> s.x.equals(name)).get().index;
 
-                        Color color = panelColorSliders[index].getValue();
+                    Color color = panelColorSliders[index].getValue();
 
-                        return String.format("0x%06X", color.getRGB() & 0xffffff);
-                    })
-                    .join(", "));
+                    return String.format("0x%06X", color.getRGB() & 0xffffff);
+                })
+                .join(", "));
         }
         updateImage();
 

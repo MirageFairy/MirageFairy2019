@@ -25,8 +25,8 @@ public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<
     public void setCustomModelResourceLocations() {
         for (V variant : getVariants()) {
             ModelLoader.setCustomModelResourceLocation(this,
-                    variant.getMetadata(),
-                    new ModelResourceLocation(new ResourceLocation(getRegistryName().getResourceDomain(), variant.getRegistryName()), null));
+                variant.getMetadata(),
+                new ModelResourceLocation(new ResourceLocation(getRegistryName().getResourceDomain(), variant.getRegistryName()), null));
         }
     }
 

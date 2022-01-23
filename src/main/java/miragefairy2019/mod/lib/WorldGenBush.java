@@ -31,8 +31,8 @@ public class WorldGenBush extends WorldGenerator {
             BlockPos pos2 = pos.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
 
             if (world.isAirBlock(pos2)
-                    && (!world.provider.isNether() || pos2.getY() < 255)
-                    && block.canBlockStay(world, pos2, state)) {
+                && (!world.provider.isNether() || pos2.getY() < 255)
+                && block.canBlockStay(world, pos2, state)) {
 
                 world.setBlockState(pos2, state, 2);
 

@@ -109,12 +109,12 @@ public abstract class FairyCrystalDropper {
 
         // エンティティ
         List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(
-                player.posX - 10,
-                player.posY - 10,
-                player.posZ - 10,
-                player.posX + 10,
-                player.posY + 10,
-                player.posZ + 10));
+            player.posX - 10,
+            player.posY - 10,
+            player.posZ - 10,
+            player.posX + 10,
+            player.posY + 10,
+            player.posZ + 10));
         Set<Class<? extends Entity>> classEntities = new HashSet<>();
         for (Entity entity : entities) {
             classEntities.add(entity.getClass());
@@ -122,41 +122,41 @@ public abstract class FairyCrystalDropper {
 
         // リスト作成
         List<WeightedItem<ItemStack>> dropTable = getDropList()
-                .mapIfNotNull(d -> {
-                    IDrop drop = d.getDrop();
+            .mapIfNotNull(d -> {
+                IDrop drop = d.getDrop();
 
-                    if (d.testUseItem(player, world, pos, hand, facing, hitX, hitY, hitZ)) return drop;
-                    if (d.testWorld(world, pos2)) return drop;
+                if (d.testUseItem(player, world, pos, hand, facing, hitX, hitY, hitZ)) return drop;
+                if (d.testWorld(world, pos2)) return drop;
 
-                    for (Block block : blocks) {
-                        if (d.testBlock(block)) return drop;
-                    }
-                    for (Tuple<IBlockState, BlockPos> blockState : blockStates) {
-                        if (d.testBlockState(world, blockState.y, blockState.x)) return drop;
-                    }
-                    for (Item item : items) {
-                        if (d.testItem(item)) return drop;
-                    }
-                    for (ItemStack itemStack : itemStacks) {
-                        if (d.testItemStack(itemStack)) return drop;
-                    }
-                    for (Biome biome : biomes) {
-                        if (d.testBiome(biome)) return drop;
-                    }
-                    for (BiomeDictionary.Type biomeType : biomeTypes) {
-                        if (d.testBiomeType(biomeType)) return drop;
-                    }
-                    for (Class<? extends Entity> classEntity : classEntities) {
-                        if (d.testClassEntity(classEntity)) return drop;
-                    }
-                    for (Entity entity : entities) {
-                        if (d.testEntity(entity)) return drop;
-                    }
+                for (Block block : blocks) {
+                    if (d.testBlock(block)) return drop;
+                }
+                for (Tuple<IBlockState, BlockPos> blockState : blockStates) {
+                    if (d.testBlockState(world, blockState.y, blockState.x)) return drop;
+                }
+                for (Item item : items) {
+                    if (d.testItem(item)) return drop;
+                }
+                for (ItemStack itemStack : itemStacks) {
+                    if (d.testItemStack(itemStack)) return drop;
+                }
+                for (Biome biome : biomes) {
+                    if (d.testBiome(biome)) return drop;
+                }
+                for (BiomeDictionary.Type biomeType : biomeTypes) {
+                    if (d.testBiomeType(biomeType)) return drop;
+                }
+                for (Class<? extends Entity> classEntity : classEntities) {
+                    if (d.testClassEntity(classEntity)) return drop;
+                }
+                for (Entity entity : entities) {
+                    if (d.testEntity(entity)) return drop;
+                }
 
-                    return null;
-                })
-                .map(d -> new WeightedItem<>(d.getItemStack(rank), d.getWeight() * (d.getDropCategory() == DropCategory.RARE ? rareBoost : 1)))
-                .toList();
+                return null;
+            })
+            .map(d -> new WeightedItem<>(d.getItemStack(rank), d.getWeight() * (d.getDropCategory() == DropCategory.RARE ? rareBoost : 1)))
+            .toList();
         dropTable = WeightedItemKt.unique(dropTable, (a, b) -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b));
 
         // 1に満たない場合はairを入れて詰める

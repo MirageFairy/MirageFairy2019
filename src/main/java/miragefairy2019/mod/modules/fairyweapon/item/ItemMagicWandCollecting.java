@@ -98,8 +98,8 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
         public final Vec3d positionTarget;
 
         public Result(
-                EnumExecutability executability,
-                Vec3d positionTarget) {
+            EnumExecutability executability,
+            Vec3d positionTarget) {
             this.executability = executability;
             this.positionTarget = positionTarget;
         }
@@ -114,11 +114,11 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
         public final List<EntityItem> targets;
 
         public ResultWithFairy(
-                EnumExecutability executability,
-                Vec3d positionTarget,
-                Status status,
-                RayTraceResult rayTraceResult,
-                List<EntityItem> targets) {
+            EnumExecutability executability,
+            Vec3d positionTarget,
+            Status status,
+            RayTraceResult rayTraceResult,
+            List<EntityItem> targets) {
             super(executability, positionTarget);
             this.status = status;
             this.rayTraceResult = rayTraceResult;
@@ -141,20 +141,20 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
         // 発動座標
         RayTraceResult rayTraceResult = rayTrace(world, player, false, status.additionalReach);
         Vec3d positionTarget = rayTraceResult != null
-                ? rayTraceResult.hitVec
-                : getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach);
+            ? rayTraceResult.hitVec
+            : getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach);
 
         // 対象を取得
         List<EntityItem> entityTargets = getEntities(EntityItem.class, world, positionTarget, status.radius);
 
         // 実行可能性を計算
         EnumExecutability executability = itemStack.getItemDamage() >= itemStack.getMaxDamage()
-                ? EnumExecutability.NO_DURABILITY
-                : entityTargets.isEmpty()
-                ? EnumExecutability.NO_TARGET
-                : player.getCooldownTracker().hasCooldown(this)
-                ? EnumExecutability.COOLTIME
-                : EnumExecutability.OK;
+            ? EnumExecutability.NO_DURABILITY
+            : entityTargets.isEmpty()
+            ? EnumExecutability.NO_TARGET
+            : player.getCooldownTracker().hasCooldown(this)
+            ? EnumExecutability.COOLTIME
+            : EnumExecutability.OK;
 
         return new ResultWithFairy(executability, positionTarget, status, rayTraceResult, entityTargets);
     }
@@ -235,9 +235,9 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
 
         // 発動中心点にパーティクルを表示
         spawnParticle(
-                world,
-                result.positionTarget,
-                result.executability.color);
+            world,
+            result.positionTarget,
+            result.executability.color);
 
         if (result.executability.health >= EnumExecutability.NO_TARGET.health) {
             ResultWithFairy resultWithFairy = (ResultWithFairy) result;
@@ -247,11 +247,11 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
 
             // 対象にパーティクルを表示
             spawnParticleTargets(
-                    world,
-                    resultWithFairy.targets,
-                    entityTarget -> entityTarget.getDistanceSq(player) > 0.2 * 0.2,
-                    entityTarget -> entityTarget.getPositionVector(),
-                    resultWithFairy.status.maxTargets);
+                world,
+                resultWithFairy.targets,
+                entityTarget -> entityTarget.getDistanceSq(player) > 0.2 * 0.2,
+                entityTarget -> entityTarget.getPositionVector(),
+                resultWithFairy.status.maxTargets);
 
         }
 
@@ -261,16 +261,16 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
 
     public static <E extends Entity> List<E> getEntities(Class<? extends E> classEntity, World world, Vec3d positionCenter, double radius) {
         return world.getEntitiesWithinAABB(classEntity, new AxisAlignedBB(
-                        positionCenter.x - radius,
-                        positionCenter.y - radius,
-                        positionCenter.z - radius,
-                        positionCenter.x + radius,
-                        positionCenter.y + radius,
-                        positionCenter.z + radius),
-                e -> {
-                    if (e.getDistanceSq(positionCenter.x, positionCenter.y, positionCenter.z) > radius * radius) return false;
-                    return true;
-                });
+                positionCenter.x - radius,
+                positionCenter.y - radius,
+                positionCenter.z - radius,
+                positionCenter.x + radius,
+                positionCenter.y + radius,
+                positionCenter.z + radius),
+            e -> {
+                if (e.getDistanceSq(positionCenter.x, positionCenter.y, positionCenter.z) > radius * radius) return false;
+                return true;
+            });
     }
 
     private static double rotateY = 0;
@@ -293,9 +293,9 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
                 // パーティクル仮出現点
                 double pitch = (-0.5 + Math.random()) * Math.PI;
                 Vec3d offset = new Vec3d(
-                        Math.cos(pitch) * Math.cos(yaw),
-                        Math.sin(pitch),
-                        Math.cos(pitch) * Math.sin(yaw)).scale(radius);
+                    Math.cos(pitch) * Math.cos(yaw),
+                    Math.sin(pitch),
+                    Math.cos(pitch) * Math.sin(yaw)).scale(radius);
                 Vec3d positionParticle = positionCenter.add(offset);
 
                 // 仮出現点が、真下がブロックな空洞だった場合のみ受理
@@ -315,13 +315,13 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
 
                         // パーティクル生成
                         world.spawnParticle(
-                                EnumParticleTypes.END_ROD,
-                                positionCenter.x + offsetX,
-                                Math.floor(positionParticle.y) + 0.15,
-                                positionCenter.z + offsetZ,
-                                0,
-                                -0.08,
-                                0);
+                            EnumParticleTypes.END_ROD,
+                            positionCenter.x + offsetX,
+                            Math.floor(positionParticle.y) + 0.15,
+                            positionCenter.z + offsetZ,
+                            0,
+                            -0.08,
+                            0);
 
                         break a;
                     }
@@ -335,7 +335,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
 
     public static <T> void spawnParticleTargets(World world, Iterable<? extends T> targets, Predicate<? super T> filter, Function<? super T, ? extends Vec3d> fPosition, int maxCount) {
         List<? extends T> listTargets = ISuppliterator.ofIterable(targets)
-                .toList();
+            .toList();
         double rate = 5 / (double) Math.max(listTargets.size(), 5);
         for (T target : listTargets) {
 
@@ -354,13 +354,13 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
             if (Math.random() < 0.2 * rate) {
                 Vec3d position = fPosition.apply(target);
                 world.spawnParticle(
-                        EnumParticleTypes.SPELL_MOB,
-                        position.x,
-                        position.y,
-                        position.z,
-                        ((color >> 16) & 0xFF) / 255.0,
-                        ((color >> 8) & 0xFF) / 255.0,
-                        ((color >> 0) & 0xFF) / 255.0);
+                    EnumParticleTypes.SPELL_MOB,
+                    position.x,
+                    position.y,
+                    position.z,
+                    ((color >> 16) & 0xFF) / 255.0,
+                    ((color >> 8) & 0xFF) / 255.0,
+                    ((color >> 0) & 0xFF) / 255.0);
             }
 
         }

@@ -83,11 +83,11 @@ public class BlockMaterials<V extends IBlockVariantMaterials> extends BlockMulti
             if (!BlockFalling.fallInstantly && worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
                 if (!worldIn.isRemote) {
                     EntityFallingBlock entityFallingBlock = new EntityFallingBlock(
-                            worldIn,
-                            pos.getX() + 0.5,
-                            pos.getY(),
-                            pos.getZ() + 0.5,
-                            worldIn.getBlockState(pos));
+                        worldIn,
+                        pos.getX() + 0.5,
+                        pos.getY(),
+                        pos.getZ() + 0.5,
+                        worldIn.getBlockState(pos));
                     worldIn.spawnEntity(entityFallingBlock);
                 }
             } else {

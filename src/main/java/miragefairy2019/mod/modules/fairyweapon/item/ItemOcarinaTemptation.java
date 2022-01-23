@@ -97,8 +97,8 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
         public final Vec3d positionTarget;
 
         public Result(
-                EnumExecutability executability,
-                Vec3d positionTarget) {
+            EnumExecutability executability,
+            Vec3d positionTarget) {
             this.executability = executability;
             this.positionTarget = positionTarget;
         }
@@ -112,11 +112,11 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
         public final List<Tuple<EntityVillager, Boolean>> targets;
 
         public ResultWithFairy(
-                EnumExecutability executability,
-                Vec3d positionTarget,
-                Status status,
-                boolean isEntity,
-                List<Tuple<EntityVillager, Boolean>> targets) {
+            EnumExecutability executability,
+            Vec3d positionTarget,
+            Status status,
+            boolean isEntity,
+            List<Tuple<EntityVillager, Boolean>> targets) {
             super(executability, positionTarget);
             this.status = status;
             this.isEntity = isEntity;
@@ -132,11 +132,11 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
         if (fairy == null) {
             RayTraceResult rayTraceResult = rayTrace(world, player, false, 0);
             Vec3d positionTarget = rayTraceResult != null
-                    ? rayTraceResult.hitVec
-                    : getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
+                ? rayTraceResult.hitVec
+                : getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
             return new Result(
-                    EnumExecutability.NO_FAIRY,
-                    positionTarget);
+                EnumExecutability.NO_FAIRY,
+                positionTarget);
         }
 
         // ステータスを評価
@@ -145,8 +145,8 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
         // 発動対象
         RayTraceResult rayTraceResult = rayTrace(world, player, false, 0, EntityVillager.class, e -> true);
         Vec3d positionTarget = rayTraceResult != null
-                ? rayTraceResult.hitVec
-                : getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
+            ? rayTraceResult.hitVec
+            : getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
         boolean isEntity;
         List<EntityVillager> targetEntities;
         if (rayTraceResult != null && rayTraceResult.typeOfHit == Type.ENTITY && rayTraceResult.entityHit instanceof EntityVillager) {
@@ -163,17 +163,17 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
 
         }
         List<Tuple<EntityVillager, Boolean>> targets = ISuppliterator.ofIterable(targetEntities)
-                .map(trgetEntity -> Tuple.of(trgetEntity, validate(trgetEntity)))
-                .toList();
+            .map(trgetEntity -> Tuple.of(trgetEntity, validate(trgetEntity)))
+            .toList();
 
         // 実行可能性を計算
         EnumExecutability executability = itemStack.getItemDamage() + (int) Math.ceil(status.wear) > itemStack.getMaxDamage() || (!player.isCreative() && player.experienceLevel < 30)
-                ? EnumExecutability.NO_RESOURCE
-                : !targets.stream().anyMatch(t -> t.y)
-                ? EnumExecutability.NO_TARGET
-                : player.getCooldownTracker().hasCooldown(this)
-                ? EnumExecutability.COOLTIME
-                : EnumExecutability.OK;
+            ? EnumExecutability.NO_RESOURCE
+            : !targets.stream().anyMatch(t -> t.y)
+            ? EnumExecutability.NO_TARGET
+            : player.getCooldownTracker().hasCooldown(this)
+            ? EnumExecutability.COOLTIME
+            : EnumExecutability.OK;
 
         return new ResultWithFairy(executability, positionTarget, status, isEntity, targets);
     }
@@ -237,13 +237,13 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
                 Random random = new Random();
                 for (int i = 0; i < 5; i++) {
                     world.spawnParticle(
-                            EnumParticleTypes.VILLAGER_HAPPY,
-                            tuple.x.posX + (random.nextDouble() * 2 - 1) * tuple.x.width,
-                            tuple.x.posY + 1 + random.nextDouble() * tuple.x.height,
-                            tuple.x.posZ + (random.nextDouble() * 2 - 1) * tuple.x.width,
-                            random.nextGaussian() * 0.02,
-                            random.nextGaussian() * 0.02,
-                            random.nextGaussian() * 0.02);
+                        EnumParticleTypes.VILLAGER_HAPPY,
+                        tuple.x.posX + (random.nextDouble() * 2 - 1) * tuple.x.width,
+                        tuple.x.posY + 1 + random.nextDouble() * tuple.x.height,
+                        tuple.x.posZ + (random.nextDouble() * 2 - 1) * tuple.x.width,
+                        random.nextGaussian() * 0.02,
+                        random.nextGaussian() * 0.02,
+                        random.nextGaussian() * 0.02);
                 }
 
             }
@@ -292,18 +292,18 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
             // 発動範囲にパーティクルを表示
             if (!resultWithFairy.isEntity) {
                 ItemMagicWandCollecting.spawnParticleSphericalRange(
-                        world,
-                        player.getPositionVector(),
-                        resultWithFairy.status.radius);
+                    world,
+                    player.getPositionVector(),
+                    resultWithFairy.status.radius);
             }
 
             // 対象にパーティクルを表示
             ItemMagicWandCollecting.spawnParticleTargets(
-                    world,
-                    resultWithFairy.targets,
-                    target -> target.y,
-                    target -> target.x.getPositionVector(),
-                    resultWithFairy.status.maxTargetCount);
+                world,
+                resultWithFairy.targets,
+                target -> target.y,
+                target -> target.x.getPositionVector(),
+                resultWithFairy.status.maxTargetCount);
 
         }
 

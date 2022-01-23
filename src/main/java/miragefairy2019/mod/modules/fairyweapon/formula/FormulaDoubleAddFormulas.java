@@ -44,7 +44,7 @@ public class FormulaDoubleAddFormulas implements IFormulaDouble {
     @Override
     public ISuppliterator<ISource> getSources() {
         return formulas.suppliterator()
-                .flatMap(f -> f.getSources());
+            .flatMap(f -> f.getSources());
     }
 
 }

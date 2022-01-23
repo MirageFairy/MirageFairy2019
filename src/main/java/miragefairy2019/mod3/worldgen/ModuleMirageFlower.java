@@ -49,9 +49,9 @@ public class ModuleMirageFlower {
                     for (int i = 0; i < count; i++) {
                         EnumFacing facing = EnumFacing.HORIZONTALS[event.getRand().nextInt(4)];
                         BlockPos posLog = event.getChunkPos().getBlock(
-                                event.getRand().nextInt(16) + 8,
-                                event.getRand().nextInt(event.getWorld().getHeight()),
-                                event.getRand().nextInt(16) + 8);
+                            event.getRand().nextInt(16) + 8,
+                            event.getRand().nextInt(event.getWorld().getHeight()),
+                            event.getRand().nextInt(16) + 8);
                         BlockPos posAir = posLog.offset(facing);
                         IBlockState blockStateLog = event.getWorld().getBlockState(posLog);
                         IBlockState blockStateAir = event.getWorld().getBlockState(posAir);
@@ -92,18 +92,18 @@ public class ModuleMirageFlower {
             List<BiomeDecoratorFlowers> biomeDecorators = new ArrayList<>();
             {
                 biomeDecorators.add(new BiomeDecoratorFlowers(
-                        UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.invoke(), MirageFlower.blockMirageFlower.invoke().getState(3)), wg -> {
-                            wg.blockCountMin = 1;
-                            wg.blockCountMax = 3;
-                        }),
-                        0.01));
+                    UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.invoke(), MirageFlower.blockMirageFlower.invoke().getState(3)), wg -> {
+                        wg.blockCountMin = 1;
+                        wg.blockCountMax = 3;
+                    }),
+                    0.01));
 
                 biomeDecorators.add(new BiomeDecoratorFlowers(
-                        UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.invoke(), MirageFlower.blockMirageFlower.invoke().getState(3)), wg -> {
-                            wg.blockCountMin = 1;
-                            wg.blockCountMax = 10;
-                        }),
-                        0.1) {
+                    UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.invoke(), MirageFlower.blockMirageFlower.invoke().getState(3)), wg -> {
+                        wg.blockCountMin = 1;
+                        wg.blockCountMax = 10;
+                    }),
+                    0.1) {
                     @Override
                     protected boolean canGenerate(Biome biome) {
                         return super.canGenerate(biome) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN);
@@ -111,11 +111,11 @@ public class ModuleMirageFlower {
                 });
 
                 biomeDecorators.add(new BiomeDecoratorFlowers(
-                        UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.invoke(), MirageFlower.blockMirageFlower.invoke().getState(3)), wg -> {
-                            wg.blockCountMin = 1;
-                            wg.blockCountMax = 10;
-                        }),
-                        0.5) {
+                    UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.invoke(), MirageFlower.blockMirageFlower.invoke().getState(3)), wg -> {
+                        wg.blockCountMin = 1;
+                        wg.blockCountMax = 10;
+                    }),
+                    0.5) {
                     @Override
                     protected boolean canGenerate(Biome biome) {
                         return super.canGenerate(biome) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST);

@@ -69,7 +69,7 @@ public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingTool {
             });
             lines.add("====================");
             player.sendStatusMessage(new TextComponentString(ISuppliterator.ofIterable(lines)
-                    .join("\n")), false);
+                .join("\n")), false);
 
         }
 

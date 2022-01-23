@@ -56,26 +56,26 @@ public class MagicStatus<T> implements IMagicStatus<T> {
         }
 
         return new TextComponentString("")
-                .appendSibling(getDisplayName())
-                .appendText(": ")
-                .appendSibling(formatter.apply(val)
-                        .setStyle(new Style().setColor(color).setBold(bold)))
-                .appendText(" (")
-                .appendSibling(getDisplaySources())
-                .appendText(")");
+            .appendSibling(getDisplayName())
+            .appendText(": ")
+            .appendSibling(formatter.apply(val)
+                .setStyle(new Style().setColor(color).setBold(bold)))
+            .appendText(" (")
+            .appendSibling(getDisplaySources())
+            .appendText(")");
     }
 
     private ITextComponent getDisplaySources() {
         return getFormula().getSources()
-                .distinct(s -> s.getIdentifier())
-                .sortedObj(s -> s.getIdentifier())
-                .map(s -> s.getDisplayName())
-                .sandwich(new TextComponentString(", "))
-                .apply(tcs -> {
-                    TextComponentString textComponent = new TextComponentString("");
-                    tcs.forEach(textComponent::appendSibling);
-                    return textComponent;
-                });
+            .distinct(s -> s.getIdentifier())
+            .sortedObj(s -> s.getIdentifier())
+            .map(s -> s.getDisplayName())
+            .sandwich(new TextComponentString(", "))
+            .apply(tcs -> {
+                TextComponentString textComponent = new TextComponentString("");
+                tcs.forEach(textComponent::appendSibling);
+                return textComponent;
+            });
     }
 
 }

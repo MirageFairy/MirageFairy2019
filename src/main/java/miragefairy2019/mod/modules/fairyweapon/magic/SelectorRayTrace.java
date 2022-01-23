@@ -33,8 +33,8 @@ public class SelectorRayTrace {
         if (oRayTraceResult.isPresent()) {
             this.position = oRayTraceResult.get().hitVec;
             this.blockPos = oRayTraceResult.get().getBlockPos() != null
-                    ? oRayTraceResult.get().getBlockPos()
-                    : new BlockPos(this.position);
+                ? oRayTraceResult.get().getBlockPos()
+                : new BlockPos(this.position);
         } else {
             this.position = getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + additionalReach);
             this.blockPos = new BlockPos(this.position);
@@ -106,12 +106,12 @@ public class SelectorRayTrace {
     }
 
     private static <E extends Entity> RayTraceResult rayTrace(
-            World world,
-            EntityPlayer player,
-            boolean useLiquids,
-            double additionalReach,
-            Class<? extends E> classEntity,
-            Predicate<? super E> filterEntity) {
+        World world,
+        EntityPlayer player,
+        boolean useLiquids,
+        double additionalReach,
+        Class<? extends E> classEntity,
+        Predicate<? super E> filterEntity) {
         float rotationPitch = player.rotationPitch;
         float rotationYaw = player.rotationYaw;
         double x = player.posX;
@@ -130,30 +130,30 @@ public class SelectorRayTrace {
         // ブロックのレイトレース
         RayTraceResult rayTraceResultBlock = world.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
         double squareDistanceBlock = rayTraceResultBlock != null
-                ? vec3d.squareDistanceTo(rayTraceResultBlock.hitVec)
-                : 0;
+            ? vec3d.squareDistanceTo(rayTraceResultBlock.hitVec)
+            : 0;
 
         // エンティティのレイトレース
         RayTraceResult rayTraceResultEntity = null;
         double squareDistanceEntity = 0;
         {
             List<E> entities = world.getEntitiesWithinAABB(classEntity, new AxisAlignedBB(
-                    vec3d.x,
-                    vec3d.y,
-                    vec3d.z,
-                    vec3d1.x,
-                    vec3d1.y,
-                    vec3d1.z), filterEntity);
+                vec3d.x,
+                vec3d.y,
+                vec3d.z,
+                vec3d1.x,
+                vec3d1.y,
+                vec3d1.z), filterEntity);
 
             Tuple<Double, RayTraceResult> nTuple = ISuppliterator.ofIterable(entities)
-                    .mapIfPresent(entity -> {
-                        if (entity == player) return Optional.empty();
-                        AxisAlignedBB aabb = entity.getEntityBoundingBox();
-                        RayTraceResult rayTraceResult = aabb.calculateIntercept(vec3d, vec3d1);
-                        if (rayTraceResult == null) return Optional.empty();
-                        return Optional.of(Tuple.of(vec3d.squareDistanceTo(rayTraceResult.hitVec), new RayTraceResult(entity, rayTraceResult.hitVec)));
-                    })
-                    .min((a, b) -> a.x.compareTo(b.x)).orElse(null);
+                .mapIfPresent(entity -> {
+                    if (entity == player) return Optional.empty();
+                    AxisAlignedBB aabb = entity.getEntityBoundingBox();
+                    RayTraceResult rayTraceResult = aabb.calculateIntercept(vec3d, vec3d1);
+                    if (rayTraceResult == null) return Optional.empty();
+                    return Optional.of(Tuple.of(vec3d.squareDistanceTo(rayTraceResult.hitVec), new RayTraceResult(entity, rayTraceResult.hitVec)));
+                })
+                .min((a, b) -> a.x.compareTo(b.x)).orElse(null);
             if (nTuple != null) {
                 rayTraceResultEntity = nTuple.y;
                 squareDistanceEntity = nTuple.x;

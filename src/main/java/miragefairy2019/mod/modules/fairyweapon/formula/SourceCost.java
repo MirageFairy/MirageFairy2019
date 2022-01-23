@@ -16,6 +16,6 @@ public class SourceCost implements ISource {
     @Override
     public ITextComponent getDisplayName() {
         return new TextComponentTranslation("mirageFairy2019.formula.source.cost.name")
-                .setStyle(new Style().setColor(TextFormatting.DARK_PURPLE));
+            .setStyle(new Style().setColor(TextFormatting.DARK_PURPLE));
     }
 }

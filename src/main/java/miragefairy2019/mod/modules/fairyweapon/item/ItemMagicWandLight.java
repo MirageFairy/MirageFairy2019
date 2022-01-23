@@ -98,15 +98,15 @@ public class ItemMagicWandLight extends ItemFairyWeaponBase {
 
         int meta = 0;
         boolean result = world.setBlockState(blockPos, Blocks.TORCH.getStateForPlacement(
-                world,
-                blockPos,
-                rayTraceResult.sideHit,
-                (float) rayTraceResult.hitVec.x,
-                (float) rayTraceResult.hitVec.y,
-                (float) rayTraceResult.hitVec.z,
-                meta,
-                player,
-                hand), 2);
+            world,
+            blockPos,
+            rayTraceResult.sideHit,
+            (float) rayTraceResult.hitVec.x,
+            (float) rayTraceResult.hitVec.y,
+            (float) rayTraceResult.hitVec.z,
+            meta,
+            player,
+            hand), 2);
 
         // 設置失敗した場合は失敗
         if (!result) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
@@ -159,9 +159,9 @@ public class ItemMagicWandLight extends ItemFairyWeaponBase {
                     Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
                     if (fairy == null) {
                         spawnParticle(
-                                world,
-                                getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
-                                0xFF00FF);
+                            world,
+                            getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
+                            0xFF00FF);
                         return;
                     }
 
@@ -169,9 +169,9 @@ public class ItemMagicWandLight extends ItemFairyWeaponBase {
                     ItemStack itemStackTorch = findTorch(player).orElse(null);
                     if (itemStackTorch == null) {
                         spawnParticle(
-                                world,
-                                getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
-                                0xFF00FF);
+                            world,
+                            getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
+                            0xFF00FF);
                         return;
                     }
 
@@ -184,23 +184,23 @@ public class ItemMagicWandLight extends ItemFairyWeaponBase {
                     RayTraceResult rayTraceResult = rayTrace(world, player, false, status.additionalReach);
                     if (rayTraceResult == null) {
                         spawnParticle(
-                                world,
-                                getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach),
-                                itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
+                            world,
+                            getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach),
+                            itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }
                     if (!canExecute(world, rayTraceResult)) {
                         spawnParticle(
-                                world,
-                                rayTraceResult.hitVec,
-                                itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
+                            world,
+                            rayTraceResult.hitVec,
+                            itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }
 
                     spawnParticle(
-                            world,
-                            rayTraceResult.hitVec,
-                            itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0xFFFF00 : 0xFFFFFF);
+                        world,
+                        rayTraceResult.hitVec,
+                        itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0xFFFF00 : 0xFFFFFF);
 
                 }
 

@@ -53,38 +53,38 @@ import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.wind;
 public class ItemMiragiumAxe extends ItemFairyWeaponBase {
 
     public IMagicStatus<Integer> maxHeight = registerMagicStatus("maxHeight", formatterInteger(),
-            round(add(new IFormulaDouble[]{
-                    val(1.0),
-                    min(div(gaia(), 2), 100),
-            })));
+        round(add(new IFormulaDouble[]{
+            val(1.0),
+            min(div(gaia(), 2), 100),
+        })));
 
     public IMagicStatus<Double> power = registerMagicStatus("power", formatterDouble1(),
-            add(new IFormulaDouble[]{
-                    val(2.0),
-                    div(aqua(), 2),
-                    div(abilityRaw(EnumErgType.HARVEST), 4),
-            }));
+        add(new IFormulaDouble[]{
+            val(2.0),
+            div(aqua(), 2),
+            div(abilityRaw(EnumErgType.HARVEST), 4),
+        }));
 
     public IMagicStatus<Integer> fortune = registerMagicStatus("fortune", formatterInteger(),
-            round(min(div(shine(), 5), 3)));
+        round(min(div(shine(), 5), 3)));
 
     public IMagicStatus<Double> coolTime = registerMagicStatus("coolTime", formatterTick(),
-            mul(new IFormulaDouble[]{
-                    mul(cost(), 2),
-                    pow(0.5, div(dark(), 20)),
-            }));
+        mul(new IFormulaDouble[]{
+            mul(cost(), 2),
+            pow(0.5, div(dark(), 20)),
+        }));
 
     public IMagicStatus<Double> wear = registerMagicStatus("wear", formatterPercent0(),
-            mul(new IFormulaDouble[]{
-                    val(0.25),
-                    pow(0.5, div(fire(), 20))
-            }));
+        mul(new IFormulaDouble[]{
+            val(0.25),
+            pow(0.5, div(fire(), 20))
+        }));
 
     public IMagicStatus<Double> additionalReach = registerMagicStatus("additionalReach", formatterDouble1(),
-            min(div(wind(), 5), 20));
+        min(div(wind(), 5), 20));
 
     public IMagicStatus<Boolean> collection = registerMagicStatus("collection", formatterYesNo(),
-            gte(abilityRaw(EnumErgType.WARP), 10));
+        gte(abilityRaw(EnumErgType.WARP), 10));
 
     public ItemMiragiumAxe() {
         setHarvestLevel("axe", 1);
@@ -202,9 +202,9 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
                     Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
                     if (fairy == null) {
                         spawnParticle(
-                                world,
-                                getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
-                                0xFF00FF);
+                            world,
+                            getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
+                            0xFF00FF);
                         return;
                     }
 
@@ -214,23 +214,23 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
                     RayTraceResult rayTraceResult = rayTrace(world, player, false, additionalReach.get(fairy.y));
                     if (rayTraceResult == null) {
                         spawnParticle(
-                                world,
-                                getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + additionalReach.get(fairy.y)),
-                                itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
+                            world,
+                            getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + additionalReach.get(fairy.y)),
+                            itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }
                     if (!canExecute(world, rayTraceResult)) {
                         spawnParticle(
-                                world,
-                                rayTraceResult.hitVec,
-                                itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
+                            world,
+                            rayTraceResult.hitVec,
+                            itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }
 
                     spawnParticle(
-                            world,
-                            rayTraceResult.hitVec,
-                            itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0xFFFF00 : 0xFFFFFF);
+                        world,
+                        rayTraceResult.hitVec,
+                        itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0xFFFF00 : 0xFFFFFF);
 
                 }
 

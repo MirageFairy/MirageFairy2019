@@ -30,7 +30,7 @@ import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.val;
 public class ItemBellBase extends ItemFairyWeaponBase {
 
     public IMagicStatus<Double> pitch = registerMagicStatus("pitch", formatterPitch(),
-            mul(val(1.0), pow(0.5, add(div(cost(), 50), -1))));
+        mul(val(1.0), pow(0.5, add(div(cost(), 50), -1))));
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -67,7 +67,7 @@ public class ItemBellBase extends ItemFairyWeaponBase {
         public final EnumExecutability executability;
 
         public Result(
-                EnumExecutability executability) {
+            EnumExecutability executability) {
             this.executability = executability;
         }
 
@@ -78,8 +78,8 @@ public class ItemBellBase extends ItemFairyWeaponBase {
         public final IFairyType fairyType;
 
         public ResultWithFairy(
-                EnumExecutability executability,
-                IFairyType fairyType) {
+            EnumExecutability executability,
+            IFairyType fairyType) {
             super(executability);
             this.fairyType = fairyType;
         }

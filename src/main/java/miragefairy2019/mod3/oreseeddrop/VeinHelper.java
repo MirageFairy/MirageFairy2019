@@ -76,8 +76,8 @@ public class VeinHelper {
 
     private static double k2(double rate, double x) {
         return x < rate
-                ? (1 / (2 - 2 * rate)) * (x * x / rate)
-                : (1 / (2 - 2 * rate)) * (2 * x - rate);
+            ? (1 / (2 - 2 * rate)) * (x * x / rate)
+            : (1 / (2 - 2 * rate)) * (2 * x - rate);
     }
 
     // 乱数合成
@@ -159,9 +159,9 @@ public class VeinHelper {
         for (int i = 0; i < count.length; i++) {
             double a = count[i] / (double) countAll;
             System.out.println(String.format("%3d %7.5f %s",
-                    i,
-                    a * 100,
-                    UtilsString.repeat('|', (int) (100 * a * 100))));
+                i,
+                a * 100,
+                UtilsString.repeat('|', (int) (100 * a * 100))));
         }
 
     }

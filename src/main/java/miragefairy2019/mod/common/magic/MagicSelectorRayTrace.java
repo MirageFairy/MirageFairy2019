@@ -28,20 +28,20 @@ public class MagicSelectorRayTrace extends MagicSelector {
      * エンティティを無視します。
      */
     public MagicSelectorRayTrace(
-            World world,
-            EntityLivingBase entityLivingBase,
-            double additionalReach) {
+        World world,
+        EntityLivingBase entityLivingBase,
+        double additionalReach) {
         super(world);
         oRayTraceResult = Optional.ofNullable(rayTrace(world, entityLivingBase, false, additionalReach));
         position = oRayTraceResult.map(r -> r.hitVec).orElseGet(() -> getSight(entityLivingBase, additionalReach));
     }
 
     public <E extends Entity> MagicSelectorRayTrace(
-            World world,
-            EntityLivingBase entityLivingBase,
-            double additionalReach,
-            Class<? extends E> classEntity,
-            Predicate<? super E> filterEntity) {
+        World world,
+        EntityLivingBase entityLivingBase,
+        double additionalReach,
+        Class<? extends E> classEntity,
+        Predicate<? super E> filterEntity) {
         super(world);
         oRayTraceResult = Optional.ofNullable(rayTrace(world, entityLivingBase, false, additionalReach, classEntity, filterEntity));
         position = oRayTraceResult.map(r -> r.hitVec).orElseGet(() -> getSight(entityLivingBase, additionalReach));
@@ -84,10 +84,10 @@ public class MagicSelectorRayTrace extends MagicSelector {
     //
 
     private static <E extends Entity> RayTraceResult rayTrace(
-            World world,
-            EntityLivingBase entityLivingBase,
-            boolean useLiquids,
-            double additionalReach) {
+        World world,
+        EntityLivingBase entityLivingBase,
+        boolean useLiquids,
+        double additionalReach) {
         float rotationPitch = entityLivingBase.rotationPitch;
         float rotationYaw = entityLivingBase.rotationYaw;
         double x = entityLivingBase.posX;
@@ -110,12 +110,12 @@ public class MagicSelectorRayTrace extends MagicSelector {
     }
 
     private static <E extends Entity> RayTraceResult rayTrace(
-            World world,
-            EntityLivingBase entityLivingBase,
-            boolean useLiquids,
-            double additionalReach,
-            Class<? extends E> classEntity,
-            Predicate<? super E> filterEntity) {
+        World world,
+        EntityLivingBase entityLivingBase,
+        boolean useLiquids,
+        double additionalReach,
+        Class<? extends E> classEntity,
+        Predicate<? super E> filterEntity) {
         float rotationPitch = entityLivingBase.rotationPitch;
         float rotationYaw = entityLivingBase.rotationYaw;
         double x = entityLivingBase.posX;
@@ -134,30 +134,30 @@ public class MagicSelectorRayTrace extends MagicSelector {
         // ブロックのレイトレース
         RayTraceResult rayTraceResultBlock = world.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
         double squareDistanceBlock = rayTraceResultBlock != null
-                ? vec3d.squareDistanceTo(rayTraceResultBlock.hitVec)
-                : 0;
+            ? vec3d.squareDistanceTo(rayTraceResultBlock.hitVec)
+            : 0;
 
         // エンティティのレイトレース
         RayTraceResult rayTraceResultEntity = null;
         double squareDistanceEntity = 0;
         {
             List<E> entities = world.getEntitiesWithinAABB(classEntity, new AxisAlignedBB(
-                    vec3d.x,
-                    vec3d.y,
-                    vec3d.z,
-                    vec3d1.x,
-                    vec3d1.y,
-                    vec3d1.z), filterEntity);
+                vec3d.x,
+                vec3d.y,
+                vec3d.z,
+                vec3d1.x,
+                vec3d1.y,
+                vec3d1.z), filterEntity);
 
             Tuple<Double, RayTraceResult> nTuple = ISuppliterator.ofIterable(entities)
-                    .mapIfPresent(entity -> {
-                        if (entity == entityLivingBase) return Optional.empty();
-                        AxisAlignedBB aabb = entity.getEntityBoundingBox();
-                        RayTraceResult rayTraceResult = aabb.calculateIntercept(vec3d, vec3d1);
-                        if (rayTraceResult == null) return Optional.empty();
-                        return Optional.of(Tuple.of(vec3d.squareDistanceTo(rayTraceResult.hitVec), new RayTraceResult(entity, rayTraceResult.hitVec)));
-                    })
-                    .min((a, b) -> a.x.compareTo(b.x)).orElse(null);
+                .mapIfPresent(entity -> {
+                    if (entity == entityLivingBase) return Optional.empty();
+                    AxisAlignedBB aabb = entity.getEntityBoundingBox();
+                    RayTraceResult rayTraceResult = aabb.calculateIntercept(vec3d, vec3d1);
+                    if (rayTraceResult == null) return Optional.empty();
+                    return Optional.of(Tuple.of(vec3d.squareDistanceTo(rayTraceResult.hitVec), new RayTraceResult(entity, rayTraceResult.hitVec)));
+                })
+                .min((a, b) -> a.x.compareTo(b.x)).orElse(null);
             if (nTuple != null) {
                 rayTraceResultEntity = nTuple.y;
                 squareDistanceEntity = nTuple.x;

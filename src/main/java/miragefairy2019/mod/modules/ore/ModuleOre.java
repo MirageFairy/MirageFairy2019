@@ -72,30 +72,30 @@ public class ModuleOre {
 
             // 妖水フルイド
             ApiOre.fluidMiragiumWater = fluidMiragiumWater = new Fluid(
-                    "miragium_water",
-                    new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_still"),
-                    new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_flow"),
-                    new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_overlay"));
+                "miragium_water",
+                new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_still"),
+                new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_flow"),
+                new ResourceLocation(ModMirageFairy2019.MODID, "blocks/miragium_water_overlay"));
             fluidMiragiumWater.setViscosity(600);
             FluidRegistry.registerFluid(fluidMiragiumWater);
             FluidRegistry.addBucketForFluid(fluidMiragiumWater);
 
             // 妖水フルイド
             ApiOre.fluidMirageFlowerExtract = fluidMirageFlowerExtract = new Fluid(
-                    "mirage_flower_extract",
-                    new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_extract_still"),
-                    new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_extract_flow"),
-                    new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_extract_overlay"));
+                "mirage_flower_extract",
+                new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_extract_still"),
+                new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_extract_flow"),
+                new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_extract_overlay"));
             fluidMirageFlowerExtract.setViscosity(1000);
             FluidRegistry.registerFluid(fluidMirageFlowerExtract);
             FluidRegistry.addBucketForFluid(fluidMirageFlowerExtract);
 
             // 妖水フルイド
             ApiOre.fluidMirageFlowerOil = fluidMirageFlowerOil = new Fluid(
-                    "mirage_flower_oil",
-                    new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_oil_still"),
-                    new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_oil_flow"),
-                    new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_oil_overlay"));
+                "mirage_flower_oil",
+                new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_oil_still"),
+                new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_oil_flow"),
+                new ResourceLocation(ModMirageFairy2019.MODID, "blocks/mirage_flower_oil_overlay"));
             fluidMirageFlowerOil.setViscosity(1500);
             FluidRegistry.registerFluid(fluidMirageFlowerOil);
             FluidRegistry.addBucketForFluid(fluidMirageFlowerOil);
@@ -192,9 +192,9 @@ public class ModuleOre {
             if (ApiMain.side.isClient()) {
                 for (IBlockVariantOre variant : blockOre1.variantList.getBlockVariants()) {
                     ModelLoader.setCustomModelResourceLocation(
-                            itemBlockOre1,
-                            variant.getMetadata(),
-                            new ModelResourceLocation(new ResourceLocation(itemBlockOre1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
+                        itemBlockOre1,
+                        variant.getMetadata(),
+                        new ModelResourceLocation(new ResourceLocation(itemBlockOre1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
                 }
             }
 
@@ -207,9 +207,9 @@ public class ModuleOre {
             if (ApiMain.side.isClient()) {
                 for (IBlockVariantOre variant : blockOre2.variantList.getBlockVariants()) {
                     ModelLoader.setCustomModelResourceLocation(
-                            itemBlockOre2,
-                            variant.getMetadata(),
-                            new ModelResourceLocation(new ResourceLocation(itemBlockOre2.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
+                        itemBlockOre2,
+                        variant.getMetadata(),
+                        new ModelResourceLocation(new ResourceLocation(itemBlockOre2.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
                 }
             }
 
@@ -222,9 +222,9 @@ public class ModuleOre {
             if (ApiMain.side.isClient()) {
                 for (IBlockVariant variant : blockMaterials1.variantList.getBlockVariants()) {
                     ModelLoader.setCustomModelResourceLocation(
-                            itemBlockMaterials1,
-                            variant.getMetadata(),
-                            new ModelResourceLocation(new ResourceLocation(itemBlockMaterials1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
+                        itemBlockMaterials1,
+                        variant.getMetadata(),
+                        new ModelResourceLocation(new ResourceLocation(itemBlockMaterials1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
                 }
             }
 
@@ -242,8 +242,8 @@ public class ModuleOre {
             ForgeRegistries.ITEMS.register(itemFluidMiragiumWater);
             if (ApiMain.side.isClient()) {
                 ModelLoader.setCustomModelResourceLocation(itemFluidMiragiumWater,
-                        0,
-                        new ModelResourceLocation(itemFluidMiragiumWater.getRegistryName(), null));
+                    0,
+                    new ModelResourceLocation(itemFluidMiragiumWater.getRegistryName(), null));
             }
 
             // 妖水アイテム
@@ -260,8 +260,8 @@ public class ModuleOre {
             ForgeRegistries.ITEMS.register(itemFluidMirageFlowerExtract);
             if (ApiMain.side.isClient()) {
                 ModelLoader.setCustomModelResourceLocation(itemFluidMirageFlowerExtract,
-                        0,
-                        new ModelResourceLocation(itemFluidMirageFlowerExtract.getRegistryName(), null));
+                    0,
+                    new ModelResourceLocation(itemFluidMirageFlowerExtract.getRegistryName(), null));
             }
 
             // 妖水アイテム
@@ -278,8 +278,8 @@ public class ModuleOre {
             ForgeRegistries.ITEMS.register(itemFluidMirageFlowerOil);
             if (ApiMain.side.isClient()) {
                 ModelLoader.setCustomModelResourceLocation(itemFluidMirageFlowerOil,
-                        0,
-                        new ModelResourceLocation(itemFluidMirageFlowerOil.getRegistryName(), null));
+                    0,
+                    new ModelResourceLocation(itemFluidMirageFlowerOil.getRegistryName(), null));
             }
 
         });

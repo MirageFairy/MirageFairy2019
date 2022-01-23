@@ -23,7 +23,7 @@ public class BlockMulti<V extends IBlockVariant> extends Block {
 
         // meta
         setDefaultState(blockState.getBaseState()
-                .withProperty(VARIANT, variantList.getDefaultMetadata()));
+            .withProperty(VARIANT, variantList.getDefaultMetadata()));
 
     }
 

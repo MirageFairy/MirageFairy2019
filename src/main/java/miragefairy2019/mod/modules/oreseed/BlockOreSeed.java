@@ -34,7 +34,7 @@ public class BlockOreSeed extends Block {
 
         // meta
         setDefaultState(blockState.getBaseState()
-                .withProperty(VARIANT, EnumVariantOreSeed.TINY));
+            .withProperty(VARIANT, EnumVariantOreSeed.TINY));
 
         // style
         setSoundType(SoundType.STONE);
@@ -144,11 +144,11 @@ public class BlockOreSeed extends Block {
         IBlockState state = world.getBlockState(pos);
         Random random = new Random(pos.getX() * 15946848L + pos.getY() * 29135678L + pos.getZ() * 65726816L);
         IBlockState blockStateAfter = Optional.ofNullable(ApiOreSeedDrop.oreSeedDropRegistry.drop(
-                new OreSeedDropEnvironment(type,
-                        getVariant(state).getShape(),
-                        world,
-                        pos),
-                random)).orElseGet(() -> type.getBlockState());
+            new OreSeedDropEnvironment(type,
+                getVariant(state).getShape(),
+                world,
+                pos),
+            random)).orElseGet(() -> type.getBlockState());
 
         Deque<BlockPos> poses = new ArrayDeque<>();
         poses.addLast(pos);

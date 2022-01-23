@@ -181,26 +181,26 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
             a.setStyle(new Style().setColor(YELLOW));
 
             ISuppliterator.ofIterable(manualRepairErgs.entrySet())
-                    .map(e -> ISuppliterator.of(
-                            ErgKt.getDisplayName(e.getKey()),
-                            new TextComponentString(e.getValue() == 1 ? "" : "×" + e.getValue())
-                    ).toList())
-                    .sandwich(ISuppliterator.of((ITextComponent) new TextComponentString(", ")).toList())
-                    .flatMap(t -> ISuppliterator.ofIterable(t))
-                    .forEach(t -> a.appendSibling(t));
+                .map(e -> ISuppliterator.of(
+                    ErgKt.getDisplayName(e.getKey()),
+                    new TextComponentString(e.getValue() == 1 ? "" : "×" + e.getValue())
+                ).toList())
+                .sandwich(ISuppliterator.of((ITextComponent) new TextComponentString(", ")).toList())
+                .flatMap(t -> ISuppliterator.ofIterable(t))
+                .forEach(t -> a.appendSibling(t));
 
             tooltip.add(a.getFormattedText());
         }
 
         // 妖精魔法ステータス
         Tuple<ItemStack, IFairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player)
-                .flatMap(p -> findFairy(itemStack, p))
-                .orElseGet(() -> Tuple.of(ItemStack.EMPTY, ApiFairy.empty()));
+            .flatMap(p -> findFairy(itemStack, p))
+            .orElseGet(() -> Tuple.of(ItemStack.EMPTY, ApiFairy.empty()));
         tooltip.add(new TextComponentString("Magic with ")
-                .setStyle(new Style().setColor(BLUE))
-                .appendSibling(new TextComponentString(fairy.x.isEmpty() ? "" : fairy.x.getDisplayName())
-                        .setStyle(new Style().setColor(WHITE)))
-                .getFormattedText());
+            .setStyle(new Style().setColor(BLUE))
+            .appendSibling(new TextComponentString(fairy.x.isEmpty() ? "" : fairy.x.getDisplayName())
+                .setStyle(new Style().setColor(WHITE)))
+            .getFormattedText());
         addInformationFairyWeapon(itemStack, fairy.x, fairy.y, world, tooltip, flag);
 
     }
@@ -315,7 +315,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         }
 
         return findItemOptional(player, itemStackFairy -> getFairy(itemStackFairy).isPresent())
-                .map(itemStackFairy -> Tuple.of(itemStackFairy, getFairy(itemStackFairy).get()));
+            .map(itemStackFairy -> Tuple.of(itemStackFairy, getFairy(itemStackFairy).get()));
     }
 
     protected Optional<ItemStack> findItemOptional(EntityPlayer player, Predicate<ItemStack> predicate) {
@@ -383,12 +383,12 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
     }
 
     protected <E extends Entity> RayTraceResult rayTrace(
-            World world,
-            EntityPlayer player,
-            boolean useLiquids,
-            double additionalReach,
-            Class<? extends E> classEntity,
-            Predicate<? super E> filterEntity) {
+        World world,
+        EntityPlayer player,
+        boolean useLiquids,
+        double additionalReach,
+        Class<? extends E> classEntity,
+        Predicate<? super E> filterEntity) {
         float rotationPitch = player.rotationPitch;
         float rotationYaw = player.rotationYaw;
         double x = player.posX;
@@ -407,30 +407,30 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         // ブロックのレイトレース
         RayTraceResult rayTraceResultBlock = world.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
         double squareDistanceBlock = rayTraceResultBlock != null
-                ? vec3d.squareDistanceTo(rayTraceResultBlock.hitVec)
-                : 0;
+            ? vec3d.squareDistanceTo(rayTraceResultBlock.hitVec)
+            : 0;
 
         // エンティティのレイトレース
         RayTraceResult rayTraceResultEntity = null;
         double squareDistanceEntity = 0;
         {
             List<E> entities = world.getEntitiesWithinAABB(classEntity, new AxisAlignedBB(
-                    vec3d.x,
-                    vec3d.y,
-                    vec3d.z,
-                    vec3d1.x,
-                    vec3d1.y,
-                    vec3d1.z), filterEntity);
+                vec3d.x,
+                vec3d.y,
+                vec3d.z,
+                vec3d1.x,
+                vec3d1.y,
+                vec3d1.z), filterEntity);
 
             Tuple<Double, RayTraceResult> nTuple = ISuppliterator.ofIterable(entities)
-                    .mapIfPresent(entity -> {
-                        if (entity == player) return Optional.empty();
-                        AxisAlignedBB aabb = entity.getEntityBoundingBox();
-                        RayTraceResult rayTraceResult = aabb.calculateIntercept(vec3d, vec3d1);
-                        if (rayTraceResult == null) return Optional.empty();
-                        return Optional.of(Tuple.of(vec3d.squareDistanceTo(rayTraceResult.hitVec), new RayTraceResult(entity, rayTraceResult.hitVec)));
-                    })
-                    .min((a, b) -> a.x.compareTo(b.x)).orElse(null);
+                .mapIfPresent(entity -> {
+                    if (entity == player) return Optional.empty();
+                    AxisAlignedBB aabb = entity.getEntityBoundingBox();
+                    RayTraceResult rayTraceResult = aabb.calculateIntercept(vec3d, vec3d1);
+                    if (rayTraceResult == null) return Optional.empty();
+                    return Optional.of(Tuple.of(vec3d.squareDistanceTo(rayTraceResult.hitVec), new RayTraceResult(entity, rayTraceResult.hitVec)));
+                })
+                .min((a, b) -> a.x.compareTo(b.x)).orElse(null);
             if (nTuple != null) {
                 rayTraceResultEntity = nTuple.y;
                 squareDistanceEntity = nTuple.x;
@@ -454,13 +454,13 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
 
     protected void spawnParticle(World world, Vec3d sight, int color) {
         world.spawnParticle(
-                EnumParticleTypes.SPELL_MOB,
-                sight.x,
-                sight.y,
-                sight.z,
-                ((color >> 16) & 0xFF) / 255.0,
-                ((color >> 8) & 0xFF) / 255.0,
-                ((color >> 0) & 0xFF) / 255.0);
+            EnumParticleTypes.SPELL_MOB,
+            sight.x,
+            sight.y,
+            sight.z,
+            ((color >> 16) & 0xFF) / 255.0,
+            ((color >> 8) & 0xFF) / 255.0,
+            ((color >> 0) & 0xFF) / 255.0);
     }
 
     //////////////////// スフィア交換関連
@@ -487,11 +487,11 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
     @Override
     public NonNullList<Ingredient> getManualRepairSubstitute(ItemStack itemStack) {
         return manualRepairErgs.entrySet().stream()
-                .filter(e -> e.getValue() > 0)
-                .sorted(Map.Entry.comparingByKey())
-                .flatMap(e -> IntStream.range(0, e.getValue())
-                        .mapToObj(i -> new OreIngredient(SphereKt.getOreName(SphereKt.getSphereType(e.getKey())))))
-                .collect(Collectors.toCollection(NonNullList::create));
+            .filter(e -> e.getValue() > 0)
+            .sorted(Map.Entry.comparingByKey())
+            .flatMap(e -> IntStream.range(0, e.getValue())
+                .mapToObj(i -> new OreIngredient(SphereKt.getOreName(SphereKt.getSphereType(e.getKey())))))
+            .collect(Collectors.toCollection(NonNullList::create));
     }
 
     @Override
@@ -558,8 +558,8 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
     protected void addInformationMagicStatuses(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
         for (IMagicStatus<?> magicStatus : getMagicStatuses()) {
             tooltip.add(magicStatus.getDisplayString(fairyType)
-                    .setStyle(new Style().setColor(BLUE))
-                    .getFormattedText());
+                .setStyle(new Style().setColor(BLUE))
+                .getFormattedText());
         }
     }
 

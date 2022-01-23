@@ -30,9 +30,9 @@ public class UtilsMagic {
                 // パーティクル仮出現点
                 double pitch = (-0.5 + Math.random()) * Math.PI;
                 Vec3d offset = new Vec3d(
-                        Math.cos(pitch) * Math.cos(yaw),
-                        Math.sin(pitch),
-                        Math.cos(pitch) * Math.sin(yaw)).scale(radius);
+                    Math.cos(pitch) * Math.cos(yaw),
+                    Math.sin(pitch),
+                    Math.cos(pitch) * Math.sin(yaw)).scale(radius);
                 Vec3d positionParticle = position.add(offset);
 
                 // 仮出現点が、真下がブロックな空洞だった場合のみ受理
@@ -52,13 +52,13 @@ public class UtilsMagic {
 
                         // パーティクル生成
                         world.spawnParticle(
-                                EnumParticleTypes.END_ROD,
-                                position.x + offsetX,
-                                Math.floor(positionParticle.y) + 0.15,
-                                position.z + offsetZ,
-                                0,
-                                -0.08,
-                                0);
+                            EnumParticleTypes.END_ROD,
+                            position.x + offsetX,
+                            Math.floor(positionParticle.y) + 0.15,
+                            position.z + offsetZ,
+                            0,
+                            -0.08,
+                            0);
 
                         break a;
                     }
@@ -94,13 +94,13 @@ public class UtilsMagic {
 
     public static void spawnParticle(World world, Vec3d position, int color) {
         world.spawnParticle(
-                EnumParticleTypes.SPELL_MOB,
-                position.x,
-                position.y,
-                position.z,
-                ((color >> 16) & 0xFF) / 255.0,
-                ((color >> 8) & 0xFF) / 255.0,
-                ((color >> 0) & 0xFF) / 255.0);
+            EnumParticleTypes.SPELL_MOB,
+            position.x,
+            position.y,
+            position.z,
+            ((color >> 16) & 0xFF) / 255.0,
+            ((color >> 8) & 0xFF) / 255.0,
+            ((color >> 0) & 0xFF) / 255.0);
     }
 
 }

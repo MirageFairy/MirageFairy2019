@@ -65,43 +65,43 @@ import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.wind;
 public class ItemMagicWandLightning extends ItemFairyWeaponBase {
 
     public IMagicStatus<Double> damage = registerMagicStatus("damage", formatterDouble1(),
-            add(new IFormulaDouble[]{
-                    val(1),
-                    scale(wind(), 60.0, 10.0, 1),
-                    scale(ability(EnumErgType.THUNDER), 20.0, 10.0),
-            }));
+        add(new IFormulaDouble[]{
+            val(1),
+            scale(wind(), 60.0, 10.0, 1),
+            scale(ability(EnumErgType.THUNDER), 20.0, 10.0),
+        }));
 
     public IMagicStatus<CriticalRate> criticalRate = registerMagicStatus("criticalRate", formatterCriticalRate(),
-            val(new CriticalRate(0, 0, 0, 7, 2, 1, 0, 0)));
+        val(new CriticalRate(0, 0, 0, 7, 2, 1, 0, 0)));
 
     public IMagicStatus<Double> additionalReach = registerMagicStatus("additionalReach", formatterDouble1(),
-            add(new IFormulaDouble[]{
-                    val(2),
-                    scale(aqua(), 30.0, 8.0, 1),
-                    scale(ability(EnumErgType.SHOOT), 10.0, 4.0),
-            }));
+        add(new IFormulaDouble[]{
+            val(2),
+            scale(aqua(), 30.0, 8.0, 1),
+            scale(ability(EnumErgType.SHOOT), 10.0, 4.0),
+        }));
 
     public IMagicStatus<Double> radius = registerMagicStatus("radius", formatterDouble1(),
-            add(new IFormulaDouble[]{
-                    val(1),
-                    scale(gaia(), 30.0, 3.0),
-            }));
+        add(new IFormulaDouble[]{
+            val(1),
+            scale(gaia(), 30.0, 3.0),
+        }));
 
     public IMagicStatus<Boolean> lightning = registerMagicStatus("lightning", formatterYesNo(),
-            gte(abilityRaw(EnumErgType.THUNDER), 10));
+        gte(abilityRaw(EnumErgType.THUNDER), 10));
 
     public IMagicStatus<Double> wear = registerMagicStatus("wear", formatterPercent0(),
-            mul(new IFormulaDouble[]{
-                    div(cost(), 50),
-                    pow(0.5, norm(fire(), 30.0)),
-            }));
+        mul(new IFormulaDouble[]{
+            div(cost(), 50),
+            pow(0.5, norm(fire(), 30.0)),
+        }));
 
     public IMagicStatus<Double> coolTime = registerMagicStatus("coolTime", formatterTick(),
-            mul(new IFormulaDouble[]{
-                    mul(cost(), 1 / 50.0 * 40),
-                    pow(0.5, norm(dark(), 30.0)),
-                    pow(0.5, norm(ability(EnumErgType.KNOWLEDGE), 10.0)),
-            }));
+        mul(new IFormulaDouble[]{
+            mul(cost(), 1 / 50.0 * 40),
+            pow(0.5, norm(dark(), 30.0)),
+            pow(0.5, norm(ability(EnumErgType.KNOWLEDGE), 10.0)),
+        }));
 
     //
 
@@ -115,12 +115,12 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
 
         // 対象判定
         SelectorEntityRanged<EntityLivingBase> selectorEntityRanged = new SelectorEntityRanged<>(
-                world,
-                selectorRayTrace.getPosition(),
-                EntityLivingBase.class,
-                e -> e != player,
-                radius.get(fairyType),
-                1);
+            world,
+            selectorRayTrace.getPosition(),
+            EntityLivingBase.class,
+            e -> e != player,
+            radius.get(fairyType),
+            1);
 
         // 実行可能性を計算
         boolean ok;
@@ -177,7 +177,7 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
 
                             if (world instanceof WorldServer) {
                                 Vec3d start = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ)
-                                        .add(player.getLookVec().scale(2));
+                                    .add(player.getLookVec().scale(2));
                                 Vec3d end = target.getPositionVector().addVector(0, target.height / 2, 0);
                                 Vec3d delta = end.subtract(start);
 
@@ -187,15 +187,15 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
                                     Vec3d pos = start.add(delta.scale(i / (distance * 4)));
 
                                     ((WorldServer) world).spawnParticle(
-                                            EnumParticleTypes.ENCHANTMENT_TABLE,
-                                            pos.x + (world.rand.nextDouble() - 0.5) * 0.2,
-                                            pos.y + (world.rand.nextDouble() - 0.5) * 0.2,
-                                            pos.z + (world.rand.nextDouble() - 0.5) * 0.2,
-                                            0,
-                                            0,
-                                            0,
-                                            0,
-                                            0.0);
+                                        EnumParticleTypes.ENCHANTMENT_TABLE,
+                                        pos.x + (world.rand.nextDouble() - 0.5) * 0.2,
+                                        pos.y + (world.rand.nextDouble() - 0.5) * 0.2,
+                                        pos.z + (world.rand.nextDouble() - 0.5) * 0.2,
+                                        0,
+                                        0,
+                                        0,
+                                        0,
+                                        0.0);
                                 }
 
                             }
@@ -220,15 +220,15 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
                             int count = UtilsMath.randomInt(world.rand, damage2 / 2.0);
                             if (count > 0) {
                                 ((WorldServer) world).spawnParticle(
-                                        EnumParticleTypes.DAMAGE_INDICATOR,
-                                        target.posX,
-                                        target.posY + target.height * 0.5,
-                                        target.posZ,
-                                        count,
-                                        0.1,
-                                        0,
-                                        0.1,
-                                        0.2);
+                                    EnumParticleTypes.DAMAGE_INDICATOR,
+                                    target.posX,
+                                    target.posY + target.height * 0.5,
+                                    target.posZ,
+                                    count,
+                                    0.1,
+                                    0,
+                                    0.1,
+                                    0.2);
                             }
                         }
 
@@ -299,9 +299,9 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
             if (((EntityPlayer) entity).getHeldItemOffhand() == itemStack) {
 
                 BlockPos blockPos = new BlockPos(
-                        (int) Math.floor(entity.posX),
-                        (int) Math.floor(entity.posY) - 1,
-                        (int) Math.floor(entity.posZ));
+                    (int) Math.floor(entity.posX),
+                    (int) Math.floor(entity.posY) - 1,
+                    (int) Math.floor(entity.posZ));
                 TileEntity tileEntity = world.getTileEntity(blockPos);
                 if (tileEntity instanceof IActionHost) {
                     if (((IActionHost) tileEntity).getActionableNode() != null) {

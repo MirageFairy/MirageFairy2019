@@ -13,8 +13,8 @@ public class FormulaSelect implements IFormulaDouble {
         this.formula = formula;
         this.defaultValue = defaultValue;
         this.entries = ISuppliterator.ofObjArray(entries)
-                .sortedDoubleDescending(e -> e.getThreshold())
-                .toArray(IFormulaSelectEntry[]::new);
+            .sortedDoubleDescending(e -> e.getThreshold())
+            .toArray(IFormulaSelectEntry[]::new);
     }
 
     @Override

@@ -53,52 +53,52 @@ import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.wind;
 public class ItemBellChristmas extends ItemBellBase {
 
     public IMagicStatus<Double> damage = registerMagicStatus("damage", formatterDouble1(),
-            add(new IFormulaDouble[]{
-                    val(1),
-                    scale(dark(), 90.0, 5.0, 3),
-                    scale(ability(EnumErgType.CHRISTMAS), 20.0, 10.0),
-            }));
+        add(new IFormulaDouble[]{
+            val(1),
+            scale(dark(), 90.0, 5.0, 3),
+            scale(ability(EnumErgType.CHRISTMAS), 20.0, 10.0),
+        }));
 
     public IMagicStatus<Double> additionalReach = registerMagicStatus("additionalReach", formatterDouble1(),
-            add(new IFormulaDouble[]{
-                    val(8 - 4),
-                    scale(wind(), 30.0, 6.0),
-            }));
+        add(new IFormulaDouble[]{
+            val(8 - 4),
+            scale(wind(), 30.0, 6.0),
+        }));
 
     public IMagicStatus<Double> radius = registerMagicStatus("radius", formatterDouble1(),
-            add(new IFormulaDouble[]{
-                    val(3),
-                    scale(gaia(), 30.0, 3.0),
-            }));
+        add(new IFormulaDouble[]{
+            val(3),
+            scale(gaia(), 30.0, 3.0),
+        }));
 
     public IMagicStatus<Integer> maxTargetCount = registerMagicStatus("maxTargetCount", formatterInteger(),
-            round(add(new IFormulaDouble[]{
-                    val(2),
-                    scale(dark(), 90.0, 3.0, 3),
-                    scale(ability(EnumErgType.ATTACK), 10.0, 10.0 / 3.0),
-            })));
+        round(add(new IFormulaDouble[]{
+            val(2),
+            scale(dark(), 90.0, 3.0, 3),
+            scale(ability(EnumErgType.ATTACK), 10.0, 10.0 / 3.0),
+        })));
 
     public IMagicStatus<Integer> looting = registerMagicStatus("looting", formatterInteger(),
-            round(select(shine(), 0, new IFormulaSelectEntry[]{
-                    entry(1, 1),
-                    entry(2, 2),
-                    entry(5, 3),
-                    entry(10, 4),
-            })));
+        round(select(shine(), 0, new IFormulaSelectEntry[]{
+            entry(1, 1),
+            entry(2, 2),
+            entry(5, 3),
+            entry(10, 4),
+        })));
 
     public IMagicStatus<Double> wear = registerMagicStatus("wear", formatterPercent0(),
-            mul(new IFormulaDouble[]{
-                    div(cost(), 50),
-                    pow(0.5, norm(fire(), 30.0)),
-                    pow(0.5, norm(aqua(), 30.0)),
-            }));
+        mul(new IFormulaDouble[]{
+            div(cost(), 50),
+            pow(0.5, norm(fire(), 30.0)),
+            pow(0.5, norm(aqua(), 30.0)),
+        }));
 
     public IMagicStatus<Double> coolTime = registerMagicStatus("coolTime", formatterTick(),
-            mul(new IFormulaDouble[]{
-                    mul(cost(), 0.5),
-                    pow(0.5, norm(dark(), 90.0, 3)),
-                    pow(0.5, norm(ability(EnumErgType.SUBMISSION), 10.0)),
-            }));
+        mul(new IFormulaDouble[]{
+            mul(cost(), 0.5),
+            pow(0.5, norm(dark(), 90.0, 3)),
+            pow(0.5, norm(ability(EnumErgType.SUBMISSION), 10.0)),
+        }));
 
     //
 
@@ -112,12 +112,12 @@ public class ItemBellChristmas extends ItemBellBase {
 
         // 対象判定
         SelectorEntityRanged<EntityLivingBase> selectorEntityRanged = new SelectorEntityRanged<>(
-                world,
-                selectorRayTrace.getPosition(),
-                EntityLivingBase.class,
-                e -> e != player,
-                radius.get(fairyType),
-                maxTargetCount.get(fairyType));
+            world,
+            selectorRayTrace.getPosition(),
+            EntityLivingBase.class,
+            e -> e != player,
+            radius.get(fairyType),
+            maxTargetCount.get(fairyType));
 
         // 実行可能性を計算
         boolean ok;
