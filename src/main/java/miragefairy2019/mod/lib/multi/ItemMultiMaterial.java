@@ -1,8 +1,6 @@
 package miragefairy2019.mod.lib.multi;
 
-import javafx.util.Pair;
 import miragefairy2019.mod.lib.UtilsMinecraft;
-import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
