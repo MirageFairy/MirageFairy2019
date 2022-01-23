@@ -12,10 +12,10 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.getSubItems
-import miragefairy2019.mod3.erg.api.EnumErgType
-import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
 import miragefairy2019.mod3.artifacts.get
 import miragefairy2019.mod3.artifacts.itemSpheres
+import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
 import net.minecraft.client.Minecraft
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
