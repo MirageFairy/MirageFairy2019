@@ -55,7 +55,7 @@ class BlockPlacedItem : BlockContainer(Material.CIRCUITS) {
     /**
      * クリエイティブピックでの取得アイテム。
      */
-    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = world.getTileEntity(pos).castOrNull<TileEntityPlacedItem>()?.itemStack.orEmpty
+    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = world.getTileEntity(pos)?.castOrNull<TileEntityPlacedItem>()?.itemStack.orEmpty
 
     override fun getDrops(drops: NonNullList<ItemStack>, blockAccess: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) {}
 
