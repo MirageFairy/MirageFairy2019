@@ -113,8 +113,8 @@ class FairyWeaponLoader(m: ModInitializer) {
     val fairyWandFreezing3 = m.fw(4, ::ItemFairyWeaponCraftingTool, "freezing_fairy_wand_3", "${fw}Freezing3", listOf("${fw2}Freezing"), null, { FREEZE })
     val fairyWandPolishing = m.fw(3, ::ItemFairyWeaponCraftingTool, "polishing_fairy_wand", "${fw}Polishing", listOf("${fw2}Polishing"), null, { CRYSTAL })
     val fairyWandPolishing2 = m.fw(4, ::ItemFairyWeaponCraftingTool, "polishing_fairy_wand_2", "${fw}Polishing2", listOf("${fw2}Polishing"), null, { CRYSTAL })
-    val fairyWandSummoning = m.fw(3, { ItemFairyWandSummoning(2) }, "summoning_fairy_wand", "${fw}Summoning", listOf("${fw2}Summoning", "mirageFairyStick"), null, { SUBMISSION })
-    val fairyWandSummoning2 = m.fw(4, { ItemFairyWandSummoning(5) }, "summoning_fairy_wand_2", "${fw}Summoning2", listOf("${fw2}Summoning", "mirageFairyStick"), null, { SUBMISSION })
+    val fairyWandSummoning = m.fw(3, { ItemFairyWandSummoning(2) }, "summoning_fairy_wand", "${fw}Summoning", listOf("${fw2}Summoning"), null, { SUBMISSION })
+    val fairyWandSummoning2 = m.fw(4, { ItemFairyWandSummoning(5) }, "summoning_fairy_wand_2", "${fw}Summoning2", listOf("${fw2}Summoning"), null, { SUBMISSION })
     val fairyWandDistortion = m.fw(4, ::ItemFairyWeaponCraftingTool, "distortion_fairy_wand", "${fw}Distortion", listOf("${fw2}Distortion"), null, { SPACE })
     val fairyWandFusion = m.fw(4, ::ItemFairyWeaponCraftingTool, "fusion_fairy_wand", "${fw}Fusion", listOf("${fw2}Fusion"), null, { WARP })
 
