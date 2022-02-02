@@ -198,7 +198,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
             .orElseGet(() -> Tuple.of(ItemStack.EMPTY, ApiFairy.empty()));
         tooltip.add(new TextComponentString("Magic with ")
             .setStyle(new Style().setColor(BLUE))
-            .appendSibling(new TextComponentString(fairy.x.isEmpty() ? "" : fairy.x.getDisplayName())
+            .appendSibling(new TextComponentString(fairy.x.isEmpty() ? "-" : fairy.x.getDisplayName())
                 .setStyle(new Style().setColor(WHITE)))
             .getFormattedText());
         addInformationFairyWeapon(itemStack, fairy.x, fairy.y, world, tooltip, flag);
