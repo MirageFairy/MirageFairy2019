@@ -4,8 +4,8 @@ import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.totalWeight
-import miragefairy2019.libkt.with
 import miragefairy2019.mod3.skill.api.ApiSkill
+import mirrg.kotlin.formatAs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.stats.StatList
 import net.minecraft.util.EnumActionResult
@@ -53,7 +53,7 @@ open class VariantFairyCrystal(registryName: String, unlocalizedName: String, or
 
             val totalWeight = dropTable.totalWeight
             dropTable.sortedBy { it.item.displayName }.sortedBy { it.weight }.forEach { weightedItem ->
-                send(textComponent { !"${(weightedItem.weight / totalWeight * 100.0).with("%f%%")}: " + !weightedItem.item.displayName })
+                send(textComponent { !"${weightedItem.weight / totalWeight * 100.0 formatAs "%f%%"}: " + !weightedItem.item.displayName })
             }
 
             send(textComponent { !"====================" })

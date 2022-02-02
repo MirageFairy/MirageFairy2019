@@ -22,9 +22,9 @@ import miragefairy2019.libkt.toArgb
 import miragefairy2019.libkt.toInstant
 import miragefairy2019.libkt.toLocalDateTime
 import miragefairy2019.libkt.tooltip
-import miragefairy2019.libkt.with
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.skill.api.ApiSkill
+import mirrg.kotlin.formatAs
 import net.minecraft.client.gui.GuiYesNo
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
@@ -63,8 +63,8 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
             label(::fontRenderer, align = TextAlignment.RIGHT) { "${skillManager.getFairyMasterLevel(skillContainer.variables.exp)}" }
             tooltip(
                 "フェアリーマスターレベル: ${skillManager.getFairyMasterLevel(skillContainer.variables.exp)}", // TODO translate
-                "累積経験値: ${skillContainer.variables.exp with "%8d"}", // TODO translate
-                "必要経験値: ${skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.exp) with "%8d"}" // TODO translate
+                "累積経験値: ${skillContainer.variables.exp formatAs "%8d"}", // TODO translate
+                "必要経験値: ${skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.exp) formatAs "%8d"}" // TODO translate
             )
         }
         components += component(RectangleInt(4 + 40, 4, 20, 10)) {

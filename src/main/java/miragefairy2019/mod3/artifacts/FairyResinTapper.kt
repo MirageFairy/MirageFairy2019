@@ -14,10 +14,10 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.tileEntity
-import miragefairy2019.libkt.with
 import miragefairy2019.mod3.artifacts.treecompile.TreeCompileException
 import miragefairy2019.mod3.main.api.ApiMain
 import mirrg.boron.util.UtilsMath
+import mirrg.kotlin.formatAs
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
@@ -100,7 +100,7 @@ class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
                     val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times).coerceAtMost(120.0)
                     val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5).coerceAtLeast(0.0)
 
-                    player.sendStatusMessage(textComponent { (!"オーラ吸収速度: ${auraCollectionSpeed with "%.2f"} Folia, 生産速度: ${baseCount with "%.2f"} 個/分") }, true) // TODO translation
+                    player.sendStatusMessage(textComponent { (!"オーラ吸収速度: ${auraCollectionSpeed formatAs "%.2f"} Folia, 生産速度: ${baseCount formatAs "%.2f"} 個/分") }, true) // TODO translation
                     return true
                 }
 

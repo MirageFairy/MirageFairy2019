@@ -7,7 +7,6 @@ import miragefairy2019.libkt.DataShapedRecipe
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
-import miragefairy2019.libkt.castOrNull
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
@@ -20,6 +19,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial
 import miragefairy2019.mod3.main.api.ApiMain
+import mirrg.kotlin.castOrNull
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound

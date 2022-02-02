@@ -8,7 +8,6 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toRgb
-import miragefairy2019.libkt.with
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.main.api.ApiMain
@@ -18,6 +17,7 @@ import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.mana
+import mirrg.kotlin.formatAs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.Item
@@ -48,8 +48,8 @@ object DebugItems {
     }
 }
 
-private val Double.f0 get() = this with "%.0f"
-private val Double.f3 get() = this with "%.3f"
+private val Double.f0 get() = this formatAs "%.0f"
+private val Double.f3 get() = this formatAs "%.3f"
 
 private fun writeAction(player: EntityPlayer, fileName: String, text: String) {
     val file = File("debug").resolve(fileName)
