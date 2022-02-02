@@ -50,7 +50,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, maxExtraItemDropRate: 
         magic {
 
             // 視線判定
-            val magicSelectorRayTrace = MagicSelectorRayTrace(world, player, !additionalReach)
+            val magicSelectorRayTrace = MagicSelectorRayTrace.createIgnoreEntity(world, player, !additionalReach)
 
             // 視点判定
             val magicSelectorPosition = magicSelectorRayTrace.magicSelectorPosition

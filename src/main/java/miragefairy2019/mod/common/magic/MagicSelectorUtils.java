@@ -7,83 +7,20 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * レイトレースを行い、何もヒットしなかった場合は空中の座標を得ます。
- */
-public class MagicSelectorRayTrace extends MagicSelector {
+public class MagicSelectorUtils {
 
-    private final Optional<RayTraceResult> oRayTraceResult;
-    private final Vec3d position;
-
-    /**
-     * エンティティを無視します。
-     */
-    public MagicSelectorRayTrace(
-        World world,
-        EntityLivingBase entityLivingBase,
-        double additionalReach) {
-        super(world);
-        oRayTraceResult = Optional.ofNullable(rayTrace(world, entityLivingBase, false, additionalReach));
-        position = oRayTraceResult.map(r -> r.hitVec).orElseGet(() -> getSight(entityLivingBase, additionalReach));
-    }
-
-    public <E extends Entity> MagicSelectorRayTrace(
-        World world,
-        EntityLivingBase entityLivingBase,
-        double additionalReach,
-        Class<? extends E> classEntity,
-        Predicate<? super E> filterEntity) {
-        super(world);
-        oRayTraceResult = Optional.ofNullable(rayTrace(world, entityLivingBase, false, additionalReach, classEntity, filterEntity));
-        position = oRayTraceResult.map(r -> r.hitVec).orElseGet(() -> getSight(entityLivingBase, additionalReach));
-    }
-
-    //
-
-    public MagicSelectorPosition getMagicSelectorPosition() {
-        return new MagicSelectorPosition(world, position);
-    }
-
-    /**
-     * ブロックとエンティティのうち近い方にヒットしたリザルト。
-     * 空中の場合、Empty。
-     */
-    public Optional<RayTraceResult> getRayTraceResult() {
-        return oRayTraceResult;
-    }
-
-    public boolean isHit() {
-        return oRayTraceResult.isPresent();
-    }
-
-    public Vec3d getPosition() {
-        return position;
-    }
-
-    public Optional<BlockPos> getHitBlockPos() {
-        return oRayTraceResult.flatMap(r -> Optional.ofNullable(r.getBlockPos()));
-    }
-
-    public BlockPos getBlockPos() {
-        return getHitBlockPos().orElseGet(() -> new BlockPos(position));
-    }
-
-    public Optional<Entity> getHitEntity() {
-        return oRayTraceResult.flatMap(r -> Optional.ofNullable(r.entityHit));
-    }
-
-    //
-
-    private static <E extends Entity> RayTraceResult rayTrace(
+    @Nullable
+    public static RayTraceResult rayTrace(
         World world,
         EntityLivingBase entityLivingBase,
         boolean useLiquids,
@@ -109,13 +46,14 @@ public class MagicSelectorRayTrace extends MagicSelector {
         return rayTraceResultBlock;
     }
 
-    private static <E extends Entity> RayTraceResult rayTrace(
+    @Nullable
+    public static <E extends Entity> RayTraceResult rayTrace(
         World world,
         EntityLivingBase entityLivingBase,
         boolean useLiquids,
         double additionalReach,
-        Class<? extends E> classEntity,
-        Predicate<? super E> filterEntity) {
+        Class<E> classEntity,
+        Predicate<E> filterEntity) {
         float rotationPitch = entityLivingBase.rotationPitch;
         float rotationYaw = entityLivingBase.rotationYaw;
         double x = entityLivingBase.posX;
@@ -179,22 +117,35 @@ public class MagicSelectorRayTrace extends MagicSelector {
         }
     }
 
-    private static Vec3d getSight(EntityLivingBase entityLivingBase, double distance) {
+    /**
+     * ブロックやエンティティがあるかに関わらず、視線の先の座標を返します。
+     */
+    @Nonnull
+    public static Vec3d getSight(EntityLivingBase entityLivingBase, double distance) {
+
+        // 最大距離
         double d = entityLivingBase.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + distance;
 
+        // 起点
         float rotationPitch = entityLivingBase.rotationPitch;
         float rotationYaw = entityLivingBase.rotationYaw;
         double x = entityLivingBase.posX;
         double y = entityLivingBase.posY + (double) entityLivingBase.getEyeHeight();
         double z = entityLivingBase.posZ;
-        Vec3d vec1 = new Vec3d(x, y, z);
-        float f2 = MathHelper.cos(-rotationYaw * 0.017453292F - (float) Math.PI);
-        float f3 = MathHelper.sin(-rotationYaw * 0.017453292F - (float) Math.PI);
-        float f4 = -MathHelper.cos(-rotationPitch * 0.017453292F);
-        float f5 = MathHelper.sin(-rotationPitch * 0.017453292F);
-        float f6 = f3 * f4;
-        float f7 = f2 * f4;
-        Vec3d vec2 = vec1.addVector((double) f6 * d, (double) f5 * d, (double) f7 * d);
+
+        float k = (float) Math.PI / 180.0F;
+        float f2 = MathHelper.cos(-rotationYaw * k - (float) Math.PI);
+        float f3 = MathHelper.sin(-rotationYaw * k - (float) Math.PI);
+        float f4 = -MathHelper.cos(-rotationPitch * k);
+
+        // 視線ベクトル
+        float x2 = f3 * f4;
+        float y2 = MathHelper.sin(-rotationPitch * k);
+        float z2 = f2 * f4;
+
+        // 終点
+        Vec3d vec2 = new Vec3d(x, y, z).addVector((double) x2 * d, (double) y2 * d, (double) z2 * d);
+
         return vec2;
     }
 
