@@ -30,10 +30,10 @@ class PanelColorSlider() : JPanel() {
 
         add(PanelSliderField().also { c ->
             sliderR = c
-            c.listeners.add(java.util.function.IntConsumer {
-                if (isInProcessing) return@IntConsumer
+            c.listeners += inProcessing@{
+                if (isInProcessing) return@inProcessing
                 setValue(Color(sliderR.value, sliderG.value, sliderB.value), c)
-            })
+            }
         }, GridBagConstraints().also { c ->
             c.insets = Insets(0, 0, 5, 0)
             c.fill = GridBagConstraints.BOTH
@@ -45,10 +45,10 @@ class PanelColorSlider() : JPanel() {
 
         add(PanelSliderField().also { c ->
             sliderG = c
-            c.listeners.add(java.util.function.IntConsumer {
-                if (isInProcessing) return@IntConsumer
+            c.listeners += inProcessing@{
+                if (isInProcessing) return@inProcessing
                 setValue(Color(sliderR.value, sliderG.value, sliderB.value), c)
-            })
+            }
         }, GridBagConstraints().also { c ->
             c.insets = Insets(0, 0, 5, 0)
             c.fill = GridBagConstraints.BOTH
@@ -60,10 +60,10 @@ class PanelColorSlider() : JPanel() {
 
         add(PanelSliderField().also { c ->
             sliderB = c
-            c.listeners.add(java.util.function.IntConsumer {
-                if (isInProcessing) return@IntConsumer
+            c.listeners += inProcessing@{
+                if (isInProcessing) return@inProcessing
                 setValue(Color(sliderR.value, sliderG.value, sliderB.value), c)
-            })
+            }
         }, GridBagConstraints().also { c ->
             c.insets = Insets(0, 0, 5, 0)
             c.fill = GridBagConstraints.BOTH

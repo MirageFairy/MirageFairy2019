@@ -1,115 +1,96 @@
-package miragefairy2019.colormaker.core;
+package miragefairy2019.colormaker.core
 
-import kotlin.Unit;
+import java.awt.GridBagConstraints
+import java.awt.GridBagLayout
+import java.awt.Insets
+import javax.swing.JPanel
+import javax.swing.JSlider
 
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.util.ArrayList;
-import java.util.function.IntConsumer;
-import java.util.regex.Pattern;
+class PanelSliderField() : JPanel() {
+    val listeners = mutableListOf<SetValueEvent.() -> Unit>()
 
-import mirrg.boron.swing.UtilsComponent.get;
+    class SetValueEvent(val value: Int, val source: Any?)
 
-public class PanelSliderField : JPanel {
+    private var _value = 0
+    private var isInProcessing = false
 
-    private lateinit var slider: JSlider;
-    private lateinit var textField: ParsingTextField<Int>;
+    var value: Int
+        get() = _value
+        set(value) {
+            setValue(value, null)
+        }
 
-    private var isInProcessing: Boolean = false;
+    private fun setValue(value: Int, source: Any?) {
+        isInProcessing = true
 
-    public constructor() {
-
-        setLayout(get(GridBagLayout(), { l ->
-            l.columnWidths = intArrayOf(300, 50);
-            l.rowHeights = intArrayOf(0);
-            l.columnWeights = doubleArrayOf(0.0, 0.0);
-            l.rowWeights = doubleArrayOf(0.0);
-        }));
-
-        add(get(JSlider().also { slider = it }, { c ->
-            c.setMajorTickSpacing(8);
-            c.setPaintTicks(true);
-            c.setMaximum(255);
-            c.addChangeListener({ e ->
-                if (isInProcessing) return@addChangeListener;
-                setValue(c.getValue(), c);
-            });
-        }), get(GridBagConstraints(), { c ->
-            c.insets = Insets(0, 0, 0, 5);
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 0;
-            c.gridy = 0;
-        }));
-
-        var pattern: Pattern = Pattern.compile("[0-9]+");
-        add(get(ParsingTextField({ s ->
-            var i: Int = 0;
-            if (pattern.matcher(s.trim()).matches()) {
-                try {
-                    i = Integer.parseInt(s.trim(), 10);
-                } catch (e: Exception) {
-                    return@ParsingTextField null;
-                }
-                if (i < slider.getMinimum()) return@ParsingTextField null;
-                if (i > slider.getMaximum()) return@ParsingTextField null;
-                return@ParsingTextField i;
-            } else {
-                return@ParsingTextField null;
-            }
-        }, { v -> "" + v }).also { textField = it }, { c ->
-            c.setColumns(5);
-            c.listeners.add({ i ->
-                if (isInProcessing) return@add;
-                setValue(i, c);
-                return@add;
-            });
-        }), get(GridBagConstraints(), { c ->
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 1;
-            c.gridy = 0;
-        }));
-
-        //
-
-        value = 0;
-
-    }
-
-    //
-
-    public var _value: Int = 0
-    public var value: Int
-
-    public get(): Int {
-        return _value;
-    }
-
-    public set(value: Int): Unit {
-        setValue(value, null);
-    }
-
-    //
-
-    public var listeners: ArrayList<IntConsumer> = ArrayList();
-
-    private fun setValue(value: Int, source: Any?): Unit {
-        isInProcessing = true;
-
-        this._value = value;
-        if (source != slider) slider.setValue(value);
-        if (source != textField) textField.setValue(value);
-        listeners.forEach({ l ->
+        _value = value
+        listeners.forEach {
             try {
-                l.accept(value);
+                SetValueEvent(value, source).it()
             } catch (e: Exception) {
-                e.printStackTrace();
+                e.printStackTrace()
             }
-        });
+        }
 
-        isInProcessing = false;
+        isInProcessing = false
     }
 
+
+    init {
+
+        // レイアウト
+        layout = GridBagLayout().also {
+            it.columnWidths = intArrayOf(300, 50)
+            it.rowHeights = intArrayOf(0)
+            it.columnWeights = doubleArrayOf(0.0, 0.0)
+            it.rowWeights = doubleArrayOf(0.0)
+        }
+
+        val min = 0
+        val max = 255
+
+        // スライダーを追加
+        JSlider().also { c ->
+            c.majorTickSpacing = 8
+            c.paintTicks = true
+            c.maximum = max
+            c.addChangeListener {
+                if (isInProcessing) return@addChangeListener
+                setValue(c.value, c)
+            }
+            listeners += {
+                if (source != c) c.value = value
+            }
+            add(c, GridBagConstraints().also {
+                it.insets = Insets(0, 0, 0, 5)
+                it.fill = GridBagConstraints.HORIZONTAL
+                it.gridx = 0
+                it.gridy = 0
+            })
+        }
+
+        // 入力欄
+        ParsingTextField(
+            { it.trim().toIntOrNull()?.takeIf { a -> a in min..max } },
+            { "$it" }
+        ).also { c ->
+            c.columns = 5
+            c.listeners.add { value ->
+                if (isInProcessing) return@add
+                setValue(value, c)
+            }
+            listeners += {
+                if (source != c) c.setValue(value)
+            }
+            add(c, GridBagConstraints().also {
+                it.fill = GridBagConstraints.HORIZONTAL
+                it.gridx = 1
+                it.gridy = 0
+            })
+        }
+
+        // 初期化
+        value = 0
+
+    }
 }
