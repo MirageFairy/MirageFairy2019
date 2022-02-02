@@ -275,6 +275,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
 
     private static double rotateY = 0;
 
+    // TODO move
     public static void spawnParticleSphericalRange(World world, Vec3d positionCenter, double radius) {
 
         // 角度アニメーション更新
