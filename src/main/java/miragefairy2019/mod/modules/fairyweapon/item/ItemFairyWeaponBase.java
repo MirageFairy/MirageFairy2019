@@ -128,20 +128,6 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         }
     }
 
-    @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        if (itemRand.nextDouble() < 1 / 8.0) damageItem(stack, attacker);
-        return true;
-    }
-
-    @Override
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
-        if (!worldIn.isRemote && state.getBlockHardness(worldIn, pos) != 0.0) {
-            if (itemRand.nextDouble() < 1 / 8.0) damageItem(stack, entityLiving);
-        }
-        return true;
-    }
-
     //
 
     @Override
@@ -254,19 +240,6 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
     }
 
     //
-
-    protected void damageItem(ItemStack itemStack, EntityLivingBase entityLivingBase) {
-        ItemStack itemStackFairy = getCombinedFairy(itemStack);
-        itemStack.damageItem(1, entityLivingBase);
-        if (itemStack.isEmpty()) {
-
-            // 妖精をドロップ
-            EntityItem entityItem = new EntityItem(entityLivingBase.world, entityLivingBase.posX, entityLivingBase.posY, entityLivingBase.posZ, itemStackFairy.copy());
-            entityItem.setNoPickupDelay();
-            entityLivingBase.world.spawnEntity(entityItem);
-
-        }
-    }
 
     protected double getFairyAttribute(String attributeName, ItemStack itemStack) {
         if (!itemStack.hasTagCompound()) return 0;
