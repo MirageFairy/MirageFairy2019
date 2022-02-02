@@ -21,7 +21,8 @@ open class ItemFairyWeaponBaseBase : Item() {
     override fun isFull3D() = true
 
 
-    // 採掘
+    // 採掘道具
+
     open var destroySpeed = 1.0f
 
     open fun isEffective(itemStack: ItemStack, blockState: IBlockState) = getToolClasses(itemStack).any {
@@ -36,7 +37,7 @@ open class ItemFairyWeaponBaseBase : Item() {
     override fun canHarvestBlock(blockState: IBlockState, itemStack: ItemStack) = isEffective(itemStack, blockState)
 
 
-    // 機能
+    // ユーティリティの利用
 
     override fun isEnchantable(stack: ItemStack) = false // エンチャント不可
     override fun canApplyAtEnchantingTable(stack: ItemStack, enchantment: Enchantment) = false // すべてのエンチャントが不適正
