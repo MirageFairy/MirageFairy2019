@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemFairyWeaponCraftingTool extends ItemFairyWeaponBase {
 
