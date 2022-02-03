@@ -273,7 +273,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         NBTTagCompound nbt = itemStack.getTagCompound();
         if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) nbt.setTag("Fairy", new NBTTagCompound());
         NBTTagCompound fairy = nbt.getCompoundTag("Fairy");
-        fairy.setTag("CombinedFairy", itemStackFairy.writeToNBT(new NBTTagCompound()));
+        fairy.setTag("CombinedFairy", itemStackFairy.copy().splitStack(1).writeToNBT(new NBTTagCompound()));
         itemStack.setTagCompound(nbt);
     }
 
