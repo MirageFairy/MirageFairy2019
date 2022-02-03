@@ -1,7 +1,8 @@
 package miragefairy2019.mod.modules.fairyweapon.recipe;
 
+import miragefairy2019.api.IFairyCombiningHandler;
+import miragefairy2019.api.IFairyCombiningItem;
 import miragefairy2019.mod.ModMirageFairy2019;
-import miragefairy2019.mod.api.fairyweapon.recipe.ICombiningItem;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,7 +25,7 @@ public class RecipesCombining extends IForgeRegistryEntry.Impl<IRecipe> implemen
 
     protected static class MatchResult {
 
-        public ICombiningItem combiningItem;
+        public IFairyCombiningHandler combiningItem;
         public ItemStack itemStack;
         public ItemStack itemStackPart;
 
@@ -43,11 +44,12 @@ public class RecipesCombining extends IForgeRegistryEntry.Impl<IRecipe> implemen
 
                     ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
                     Item item = itemStack.getItem();
-                    if (item instanceof ICombiningItem) {
-                        if (((ICombiningItem) item).canCombine(itemStack)) {
+                    if (item instanceof IFairyCombiningItem) {
+                        IFairyCombiningHandler handler = ((IFairyCombiningItem) item).getMirageFairyCombiningHandler();
+                        if (handler.canCombine(itemStack)) {
 
                             result.itemStack = itemStack;
-                            result.combiningItem = (ICombiningItem) item;
+                            result.combiningItem = handler;
                             used[i] = true;
                             break a;
 

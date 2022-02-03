@@ -7,7 +7,6 @@ import miragefairy2019.mod.api.fairyweapon.formula.ApiFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon;
-import miragefairy2019.mod.api.fairyweapon.recipe.ICombiningItem;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod3.artifacts.SphereKt;
@@ -69,7 +68,7 @@ import static net.minecraft.util.text.TextFormatting.RED;
 import static net.minecraft.util.text.TextFormatting.WHITE;
 import static net.minecraft.util.text.TextFormatting.YELLOW;
 
-public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IManualRepairableItem, ICombiningItem, IItemFairyWeapon {
+public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IManualRepairableItem, IItemFairyWeapon {
 
     public ItemFairyWeaponBase() {
         if (ApiMain.side.isClient()) {
@@ -471,45 +470,6 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         itemStack = itemStack.copy();
         itemStack.setItemDamage(0);
         return itemStack;
-    }
-
-    //////////////////// 妖精搭乗関連
-
-    @Override
-    public boolean canCombine(ItemStack itemStack) {
-        return true;
-    }
-
-    @Override
-    public boolean canCombineWith(ItemStack itemStack, ItemStack itemStackPart) {
-        return itemStackPart.getItem() instanceof IItemFairy;
-    }
-
-    @Override
-    public boolean canUncombine(ItemStack itemStack) {
-        return !getCombinedFairy(itemStack).isEmpty();
-    }
-
-    @Override
-    public ItemStack getCombinedPart(ItemStack itemStack) {
-        return getCombinedFairy(itemStack);
-    }
-
-    @Override
-    public void setCombinedPart(ItemStack itemStack, ItemStack itemStackPart) {
-        setCombinedFairy(itemStack, itemStackPart);
-    }
-
-    //
-
-    @Override
-    public boolean hasContainerItem(ItemStack itemStack) {
-        return !getContainerItem(itemStack).isEmpty();
-    }
-
-    @Override
-    public ItemStack getContainerItem(ItemStack itemStack) {
-        return getCombinedFairy(itemStack);
     }
 
     //////////////////// 妖精魔法ステータス関連

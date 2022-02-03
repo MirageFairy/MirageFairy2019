@@ -100,9 +100,18 @@ public class ItemFairyWeaponCraftingTool extends ItemFairyWeaponBase {
 
     //
 
+
+    @NotNull
     @Override
-    public boolean canCombine(ItemStack itemStack) {
-        return false;
+    public FairyCombiningHandler getMirageFairyCombiningHandler() {
+        return new FairyCombiningHandler() {
+
+            @Override
+            public boolean canCombine(ItemStack itemStack) {
+                return false;
+            }
+
+        };
     }
 
 }

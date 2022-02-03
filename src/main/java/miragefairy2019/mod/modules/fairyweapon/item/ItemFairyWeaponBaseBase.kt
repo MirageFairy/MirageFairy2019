@@ -1,6 +1,9 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.api.IFairyCombiningHandler
+import miragefairy2019.api.IFairyCombiningItem
 import miragefairy2019.libkt.drop
+import miragefairy2019.mod.api.fairy.IItemFairy
 import net.minecraft.block.state.IBlockState
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EntityLivingBase
@@ -11,7 +14,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemFairyWeaponBaseBase : Item() {
+open class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item() {
     var tier = 0
 
     init {
@@ -65,7 +68,19 @@ open class ItemFairyWeaponBaseBase : Item() {
     }
 
 
-    //
+    // 搭乗
+
+    override fun getMirageFairyCombiningHandler() = FairyCombiningHandler()
+    open class FairyCombiningHandler : IFairyCombiningHandler {
+        override fun canCombine(itemStack: ItemStack) = true
+        override fun canCombineWith(itemStack: ItemStack, itemStackPart: ItemStack) = itemStackPart.item is IItemFairy
+        override fun canUncombine(itemStack: ItemStack) = !ItemFairyWeaponBase.getCombinedFairy(itemStack).isEmpty
+        override fun getCombinedPart(itemStack: ItemStack) = ItemFairyWeaponBase.getCombinedFairy(itemStack)
+        override fun setCombinedPart(itemStack: ItemStack, itemStackPart: ItemStack) = ItemFairyWeaponBase.setCombinedFairy(itemStack, itemStackPart)
+    }
+
+    override fun hasContainerItem(itemStack: ItemStack) = !getContainerItem(itemStack).isEmpty
+    override fun getContainerItem(itemStack: ItemStack) = ItemFairyWeaponBase.getCombinedFairy(itemStack)
 
 
     companion object {
