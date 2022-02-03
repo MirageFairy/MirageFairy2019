@@ -50,6 +50,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreIngredient;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -257,6 +258,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         itemStack.setTagCompound(nbt);
     }
 
+    @Nonnull
     public static ItemStack getCombinedFairy(ItemStack itemStack) {
         if (!itemStack.hasTagCompound()) return ItemStack.EMPTY;
         NBTTagCompound nbt = itemStack.getTagCompound();
@@ -275,6 +277,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         itemStack.setTagCompound(nbt);
     }
 
+    @Nonnull
     protected static Optional<Tuple<ItemStack, IFairyType>> findFairy(ItemStack itemStack, EntityPlayer player) {
 
         // 搭乗中の妖精を優先
@@ -289,6 +292,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
             .map(itemStackFairy -> Tuple.of(itemStackFairy, getFairy(itemStackFairy).get()));
     }
 
+    @Nonnull
     protected static Optional<ItemStack> findItemOptional(EntityPlayer player, Predicate<ItemStack> predicate) {
         ItemStack itemStack;
 
@@ -308,12 +312,14 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         return Optional.empty();
     }
 
+    @Nonnull
     protected static Optional<IFairyType> getFairy(ItemStack itemStack) {
         Item item = itemStack.getItem();
         if (!(item instanceof IItemFairy)) return Optional.empty();
         return ((IItemFairy) item).getMirageFairy2019Fairy(itemStack);
     }
 
+    @Nonnull
     protected static Vec3d getSight(EntityPlayer player, double distance) {
         float rotationPitch = player.rotationPitch;
         float rotationYaw = player.rotationYaw;
@@ -349,10 +355,12 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         return true;
     }
 
+    @Nullable
     protected static RayTraceResult rayTrace(World world, EntityPlayer player, boolean useLiquids, double additionalReach) {
         return rayTrace(world, player, useLiquids, additionalReach, Entity.class, e -> true);
     }
 
+    @Nullable
     protected static <E extends Entity> RayTraceResult rayTrace(
         World world,
         EntityPlayer player,
