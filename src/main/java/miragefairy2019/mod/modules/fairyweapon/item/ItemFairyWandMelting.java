@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 import java.util.Objects;
 
-public class ItemFairyWandMelting extends ItemFairyWeaponCraftingTool {
+public class ItemFairyWandMelting extends ItemFairyWand {
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {

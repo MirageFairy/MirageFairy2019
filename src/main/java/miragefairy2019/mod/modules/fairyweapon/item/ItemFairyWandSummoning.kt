@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.item
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.red
 import miragefairy2019.mod.modules.fairycrystal.ItemFairyCrystal
-import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponCraftingTool.findItemOptional
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWand.findItemOptional
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.EntityLivingBase
@@ -20,7 +20,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWeaponCraftingTool() {
+class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWand() {
     @SideOnly(Side.CLIENT)
     override fun addInformationFunctions(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         tooltip.add(formattedText { (!"Hold right mouse button to use fairy crystals quickly").red }) // TODO translate

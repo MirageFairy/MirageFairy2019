@@ -16,7 +16,7 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-public class ItemFairyWeaponCraftingTool extends ItemFairyWeaponBase {
+public class ItemFairyWand extends ItemFairyWeaponBase {
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {

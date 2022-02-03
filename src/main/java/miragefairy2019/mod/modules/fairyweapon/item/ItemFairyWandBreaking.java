@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class ItemFairyWandBreaking extends ItemFairyWeaponCraftingTool {
+public class ItemFairyWandBreaking extends ItemFairyWand {
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
