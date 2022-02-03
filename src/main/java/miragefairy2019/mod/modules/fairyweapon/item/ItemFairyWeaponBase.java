@@ -26,7 +26,6 @@ import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -241,7 +240,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
 
     //
 
-    protected double getFairyAttribute(String attributeName, ItemStack itemStack) {
+    protected static double getFairyAttribute(String attributeName, ItemStack itemStack) {
         if (!itemStack.hasTagCompound()) return 0;
         NBTTagCompound nbt = itemStack.getTagCompound();
         if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) return 0;
@@ -250,7 +249,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         return fairy.getDouble(attributeName);
     }
 
-    protected void setFairyAttribute(String attributeName, ItemStack itemStack, double value) {
+    protected static void setFairyAttribute(String attributeName, ItemStack itemStack, double value) {
         if (!itemStack.hasTagCompound()) itemStack.setTagCompound(new NBTTagCompound());
         NBTTagCompound nbt = itemStack.getTagCompound();
         if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) nbt.setTag("Fairy", new NBTTagCompound());
@@ -259,7 +258,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         itemStack.setTagCompound(nbt);
     }
 
-    public ItemStack getCombinedFairy(ItemStack itemStack) {
+    public static ItemStack getCombinedFairy(ItemStack itemStack) {
         if (!itemStack.hasTagCompound()) return ItemStack.EMPTY;
         NBTTagCompound nbt = itemStack.getTagCompound();
         if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) return ItemStack.EMPTY;
@@ -268,7 +267,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         return new ItemStack(fairy.getCompoundTag("CombinedFairy"));
     }
 
-    public void setCombinedFairy(ItemStack itemStack, ItemStack itemStackFairy) {
+    public static void setCombinedFairy(ItemStack itemStack, ItemStack itemStackFairy) {
         if (!itemStack.hasTagCompound()) itemStack.setTagCompound(new NBTTagCompound());
         NBTTagCompound nbt = itemStack.getTagCompound();
         if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) nbt.setTag("Fairy", new NBTTagCompound());
@@ -277,7 +276,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         itemStack.setTagCompound(nbt);
     }
 
-    protected Optional<Tuple<ItemStack, IFairyType>> findFairy(ItemStack itemStack, EntityPlayer player) {
+    protected static Optional<Tuple<ItemStack, IFairyType>> findFairy(ItemStack itemStack, EntityPlayer player) {
 
         // 搭乗中の妖精を優先
         {
@@ -291,7 +290,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
             .map(itemStackFairy -> Tuple.of(itemStackFairy, getFairy(itemStackFairy).get()));
     }
 
-    protected Optional<ItemStack> findItemOptional(EntityPlayer player, Predicate<ItemStack> predicate) {
+    protected static Optional<ItemStack> findItemOptional(EntityPlayer player, Predicate<ItemStack> predicate) {
         ItemStack itemStack;
 
         itemStack = player.getHeldItem(EnumHand.OFF_HAND);
@@ -310,13 +309,13 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         return Optional.empty();
     }
 
-    protected Optional<IFairyType> getFairy(ItemStack itemStack) {
+    protected static Optional<IFairyType> getFairy(ItemStack itemStack) {
         Item item = itemStack.getItem();
         if (!(item instanceof IItemFairy)) return Optional.empty();
         return ((IItemFairy) item).getMirageFairy2019Fairy(itemStack);
     }
 
-    protected Vec3d getSight(EntityPlayer player, double distance) {
+    protected static Vec3d getSight(EntityPlayer player, double distance) {
         float rotationPitch = player.rotationPitch;
         float rotationYaw = player.rotationYaw;
         double x = player.posX;
@@ -333,7 +332,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         return vec2;
     }
 
-    protected boolean breakBlock(World world, EntityPlayer player, EnumFacing facing, ItemStack itemStack, BlockPos blockPos, int fortune, boolean collection) {
+    protected static boolean breakBlock(World world, EntityPlayer player, EnumFacing facing, ItemStack itemStack, BlockPos blockPos, int fortune, boolean collection) {
         if (!world.isBlockModifiable(player, blockPos)) return false;
         if (!player.canPlayerEdit(blockPos, facing, itemStack)) return false;
 
@@ -351,11 +350,11 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         return true;
     }
 
-    protected RayTraceResult rayTrace(World world, EntityPlayer player, boolean useLiquids, double additionalReach) {
+    protected static RayTraceResult rayTrace(World world, EntityPlayer player, boolean useLiquids, double additionalReach) {
         return rayTrace(world, player, useLiquids, additionalReach, Entity.class, e -> true);
     }
 
-    protected <E extends Entity> RayTraceResult rayTrace(
+    protected static <E extends Entity> RayTraceResult rayTrace(
         World world,
         EntityPlayer player,
         boolean useLiquids,
@@ -425,7 +424,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
         }
     }
 
-    protected void spawnParticle(World world, Vec3d sight, int color) {
+    protected static void spawnParticle(World world, Vec3d sight, int color) {
         world.spawnParticle(
             EnumParticleTypes.SPELL_MOB,
             sight.x,

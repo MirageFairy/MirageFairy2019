@@ -3,6 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.item
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.red
 import miragefairy2019.mod.modules.fairycrystal.ItemFairyCrystal
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponCraftingTool.findItemOptional
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.EntityLivingBase
