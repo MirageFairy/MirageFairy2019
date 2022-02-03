@@ -51,16 +51,21 @@ open class ItemFairyWeaponBaseBase : Item() {
 
     // 挙動
 
+    // エンティティを殴ると1/8の確率で削れる
     override fun hitEntity(stack: ItemStack, target: EntityLivingBase, attacker: EntityLivingBase): Boolean {
         if (itemRand.nextDouble() < 1.0 / 8.0) damageItem(stack, attacker)
         return true
     }
 
+    // 固さのあるブロックを壊すと1/8の確率で削れる
     override fun onBlockDestroyed(stack: ItemStack, worldIn: World, state: IBlockState, pos: BlockPos, entityLiving: EntityLivingBase): Boolean {
         if (worldIn.isRemote || state.getBlockHardness(worldIn, pos).toDouble() == 0.0) return true
         if (itemRand.nextDouble() < 1.0 / 8.0) damageItem(stack, entityLiving)
         return true
     }
+
+
+    //
 
 
     companion object {
