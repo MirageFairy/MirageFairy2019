@@ -2,6 +2,7 @@ package miragefairy2019.api;
 
 import net.minecraft.item.ItemStack;
 
+// TODO 構造改善（レシピ側のKotlin化待ち）
 public interface IFairyCombiningHandler {
 
     /**
@@ -37,5 +38,27 @@ public interface IFairyCombiningHandler {
      */
     @Deprecated
     public void setCombinedPart(ItemStack itemStack, ItemStack itemStackPart);
+
+
+    // そのアイテムが合成分解レシピの主体になれるかのAPIは処理上必要
+
+    /**
+     * 本体にパーツを合成します。
+     *
+     * @param itemStack     本体となるアイテム。
+     * @param itemStackPart パーツとなるアイテム。
+     * @return 合成されたアイテム。この組み合わせで合成が不能な場合、{@link ItemStack#EMPTY}。
+     */
+    //@Nonnull
+    //public ItemStack combine(@Nonnull ItemStack itemStack, @Nonnull ItemStack itemStackPart);
+
+    /**
+     * 合成されたアイテムを本体とパーツに分割します。
+     *
+     * @param itemStack 合成されたアイテム。
+     * @return 本体およびバーツのアイテム。このアイテムが分解不能な場合、null。
+     */
+    //@Nullable
+    //public Tuple<ItemStack, ItemStack> split(ItemStack itemStack);
 
 }
