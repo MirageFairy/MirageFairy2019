@@ -72,7 +72,7 @@ open class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item() {
 
     override fun getMirageFairyCombiningHandler() = FairyCombiningHandler()
     open class FairyCombiningHandler : IFairyCombiningHandler {
-        override fun canCombine(itemStack: ItemStack) = true
+        override fun canCombine(itemStack: ItemStack) = ItemFairyWeaponBase.getCombinedFairy(itemStack).isEmpty
         override fun canCombineWith(itemStack: ItemStack, itemStackPart: ItemStack) = itemStackPart.item is IItemFairy
         override fun canUncombine(itemStack: ItemStack) = !ItemFairyWeaponBase.getCombinedFairy(itemStack).isEmpty
         override fun getCombinedPart(itemStack: ItemStack) = ItemFairyWeaponBase.getCombinedFairy(itemStack)
