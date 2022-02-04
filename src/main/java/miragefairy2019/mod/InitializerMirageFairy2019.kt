@@ -8,9 +8,15 @@ import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
 import miragefairy2019.mod3.worldgen.ModuleMirageFlower
+import net.minecraftforge.fml.common.event.FMLConstructionEvent
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent
+import net.minecraftforge.fml.common.event.FMLServerStoppedEvent
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent
 
 class InitializerMirageFairy2019 {
 
@@ -33,6 +39,10 @@ class InitializerMirageFairy2019 {
         erMod.initRegistry.trigger().run()
         modInitializer.onInitCreativeTab()
         erMod.initCreativeTab.trigger().run()
+    }
+
+    fun construction(event: FMLConstructionEvent) {
+        modInitializer.onConstruction(event)
     }
 
     fun preInit(event: FMLPreInitializationEvent) {
@@ -70,5 +80,25 @@ class InitializerMirageFairy2019 {
     fun postInit(event: FMLPostInitializationEvent) {
         modInitializer.onPostInit(event)
         erMod.postInit.trigger().accept(event)
+    }
+
+    fun loadComplete(event: FMLLoadCompleteEvent) {
+        modInitializer.onLoadComplete(event)
+    }
+
+    fun serverStarting(event: FMLServerStartingEvent) {
+        modInitializer.onServerStarting(event)
+    }
+
+    fun serverStarted(event: FMLServerStartedEvent) {
+        modInitializer.onServerStarted(event)
+    }
+
+    fun serverStopping(event: FMLServerStoppingEvent) {
+        modInitializer.onServerStopping(event)
+    }
+
+    fun serverStopped(event: FMLServerStoppedEvent) {
+        modInitializer.onServerStopped(event)
     }
 }

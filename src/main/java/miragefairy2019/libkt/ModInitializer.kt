@@ -14,9 +14,15 @@ import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.fml.client.registry.ClientRegistry
+import net.minecraftforge.fml.common.event.FMLConstructionEvent
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent
+import net.minecraftforge.fml.common.event.FMLServerStoppedEvent
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent
 import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
@@ -28,6 +34,7 @@ typealias Module = ModInitializer.() -> Unit
 class ModInitializer {
     val onMakeResource = EventRegistry1<ResourceMaker>()
 
+    val onConstruction = EventRegistry1<FMLConstructionEvent>()
     val onInstantiation = EventRegistry0()
     val onInitCreativeTab = EventRegistry0()
 
@@ -47,6 +54,12 @@ class ModInitializer {
     val onRegisterNetworkMessage = EventRegistry0()
 
     val onPostInit = EventRegistry1<FMLPostInitializationEvent>()
+
+    val onLoadComplete = EventRegistry1<FMLLoadCompleteEvent>()
+    val onServerStarting = EventRegistry1<FMLServerStartingEvent>()
+    val onServerStarted = EventRegistry1<FMLServerStartedEvent>()
+    val onServerStopping = EventRegistry1<FMLServerStoppingEvent>()
+    val onServerStopped = EventRegistry1<FMLServerStoppedEvent>()
 }
 
 class EventRegistry0 {
