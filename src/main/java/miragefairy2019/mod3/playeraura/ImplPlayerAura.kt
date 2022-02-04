@@ -100,7 +100,7 @@ class PlayerAuraModel {
 
 
     private val lock = Any()
-    private fun reset() {
+    fun reset() {
         foods.clear()
         auraCache.dirty()
     }
@@ -234,6 +234,7 @@ class ServerPlayerAuraHandler(
 ) : PlayerAuraHandler(manager, model), IServerPlayerAuraHandler {
     override fun load() = model.load(player)
     override fun save() = model.save(player)
+    override fun onReset() = model.reset()
     override fun onEat(itemStack: ItemStack, healAmount: Int) = run { manager.getGlobalFoodAura(itemStack)?.let { model.pushFood(it, itemStack, healAmount) }; Unit }
     override fun send() = ApiMain.simpleNetworkWrapper.sendTo(MessagePlayerAura(model.toJson()), player)
 }

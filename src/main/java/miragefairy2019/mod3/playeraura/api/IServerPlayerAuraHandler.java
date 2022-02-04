@@ -8,6 +8,8 @@ public interface IServerPlayerAuraHandler extends IPlayerAuraHandler {
 
     public void save();
 
+    public void onReset();
+
     public void onEat(ItemStack itemStack, int healAmount);
 
     public void send();
