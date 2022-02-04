@@ -1,5 +1,6 @@
 package miragefairy2019.libkt
 
+import mirrg.kotlin.castOrNull
 import net.minecraft.block.Block
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.item.EntityItem
@@ -7,6 +8,10 @@ import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.ItemWritableBook
+import net.minecraft.item.ItemWrittenBook
+import net.minecraft.nbt.NBTTagList
+import net.minecraft.nbt.NBTTagString
 import net.minecraft.util.NonNullList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
@@ -22,6 +27,22 @@ fun ItemStack.copy(count: Int): ItemStack = copy().also { it.count = count }
 fun Item.getSubItems(creativeTab: CreativeTabs): List<ItemStack> = NonNullList.create<ItemStack>().also { getSubItems(creativeTab, it) }
 
 val ItemStack.containerItem get() = if (item.hasContainerItem(this)) item.getContainerItem(this).orNull else null
+
+/** このアイテムにカスタム名が存在する場合のみ、それを返します。 */
+val ItemStack.customName get() = if (hasDisplayName()) displayName else null
+
+
+/**
+ * このアイテムスタックに記入された文字列を返します。
+ * デフォルトでは紙に付けられた名前および本の最初のページに書かれた文字列を返します。
+ */
+val ItemStack.string
+    get() = when (item) {
+        Items.PAPER -> customName
+        is ItemWritableBook,
+        is ItemWrittenBook -> tagCompound?.getTag("pages")?.castOrNull<NBTTagList>()?.get(0)?.castOrNull<NBTTagString>()?.string
+        else -> null
+    }
 
 
 // ワールドドロップ
