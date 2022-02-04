@@ -13,6 +13,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.model.ModelLoader
+import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.fml.client.registry.ClientRegistry
 import net.minecraftforge.fml.common.event.FMLConstructionEvent
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
@@ -23,6 +25,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartedEvent
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
@@ -207,4 +210,11 @@ fun <T : TileEntity, R : TileEntitySpecialRenderer<T>> ModInitializer.tileEntity
             }.run()
         }
     }
+}
+
+fun ModInitializer.onServerSave(listener: WorldEvent.Save.() -> Unit) = onInit {
+    MinecraftForge.EVENT_BUS.register(object {
+        @[Suppress("unused") SubscribeEvent]
+        fun handle(event: WorldEvent.Save) = event.listener()
+    })
 }
