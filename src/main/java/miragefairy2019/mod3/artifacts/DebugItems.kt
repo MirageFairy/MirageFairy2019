@@ -58,7 +58,13 @@ private fun writeAction(player: EntityPlayer, fileName: String, text: String) {
     file.writeText(text)
 }
 
-class ItemDebugFairyList : Item() {
+open class ItemDebug : Item() {
+    init {
+        maxStackSize = 1
+    }
+}
+
+class ItemDebugFairyList : ItemDebug() {
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (!world.isRemote) return EnumActionResult.SUCCESS
 
@@ -115,7 +121,7 @@ class ItemDebugFairyList : Item() {
     }
 }
 
-class ItemDebugOreNameList : Item() {
+class ItemDebugOreNameList : ItemDebug() {
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (!world.isRemote) return EnumActionResult.SUCCESS
         writeAction(player, "oreNameList.txt", OreDictionary.getOreNames()
@@ -126,7 +132,7 @@ class ItemDebugOreNameList : Item() {
     }
 }
 
-class ItemDebugSkillResetUnlock : Item() {
+class ItemDebugSkillResetUnlock : ItemDebug() {
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
         val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
