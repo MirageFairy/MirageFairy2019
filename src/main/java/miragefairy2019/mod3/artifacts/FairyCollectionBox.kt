@@ -141,12 +141,10 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
 
 
     // TileEntity
-
     override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityFairyCollectionBox()
 
 
     // Graphics
-
     @SideOnly(Side.CLIENT)
     override fun getBlockLayer() = BlockRenderLayer.CUTOUT_MIPPED
     override fun getRenderType(state: IBlockState) = EnumBlockRenderType.MODEL
@@ -155,7 +153,6 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
 
 
     // Drop
-
     override fun breakBlock(world: World, blockPos: BlockPos, blockState: IBlockState) {
         val tileEntity = world.getTileEntity(blockPos)
         if (tileEntity is TileEntityFairyCollectionBox) {
@@ -167,7 +164,6 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
 
 
     // Action
-
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (worldIn.isRemote) return true
         playerIn.openGui(ModMirageFairy2019.instance, FairyCollectionBox.guiIdFairyCollectionBox, worldIn, pos.x, pos.y, pos.z)
