@@ -2,6 +2,7 @@ package miragefairy2019.libkt
 
 import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.ItemStackHelper
+import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.NonNullList
@@ -21,4 +22,8 @@ fun IInventory.writeToNBT(nbt: NBTTagCompound) {
     val list = NonNullList.withSize(sizeInventory, ItemStack.EMPTY)
     (0 until sizeInventory).map { i -> list[i] = this[i] }
     ItemStackHelper.saveAllItems(nbt, list)
+}
+
+class SmartSlot(inventory: IInventory, index: Int, xPosition: Int, yPosition: Int) : Slot(inventory, index, xPosition, yPosition) {
+    override fun isItemValid(itemStack: ItemStack) = inventory.isItemValidForSlot(slotIndex, itemStack)
 }
