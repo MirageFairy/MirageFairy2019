@@ -5,6 +5,7 @@ import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.SmartSlot
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
@@ -218,15 +219,14 @@ class InventoryFairyCollectionBox(val tileEntity: TileEntity, title: String, cus
     }
 }
 
-class SlotFairyCollectionBox(inventory: IInventory, index: Int, xPosition: Int, yPosition: Int) : Slot(inventory, index, xPosition, yPosition) {
-    override fun isItemValid(stack: ItemStack) = inventory.isItemValidForSlot(slotIndex, stack)
-}
-
 class ContainerFairyCollectionBox(val inventoryPlayer: IInventory, val inventoryTileEntity: IInventory) : Container() {
     init {
-        repeat(5) { r -> repeat(10) { c -> addSlotToContainer(SlotFairyCollectionBox(inventoryTileEntity, r * 10 + c, 8 + c * 18, 17 + r * 18 + 1)) } }
-        repeat(3) { r -> repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, 9 + r * 9 + c, 9 + 8 + c * 18, 84 + 18 * 2 + r * 18 + 1)) } }
-        repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, c, 9 + 8 + c * 18, 142 + 18 * 2 + 1)) }
+        var yi = 17
+        repeat(5) { r -> repeat(10) { c -> addSlotToContainer(SmartSlot(inventoryTileEntity, 10 * r + c, 7 + 18 * c + 1, yi + 18 * r + 1)) } }
+        yi += 18 * 5 + 13
+        repeat(3) { r -> repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, 9 + 9 * r + c, 7 + 9 + 18 * c + 1, yi + 18 * r + 1)) } }
+        yi += 18 * 3 + 4
+        repeat(9) { c -> addSlotToContainer(Slot(inventoryPlayer, c, 7 + 9 + 18 * c + 1, yi + 1)) }
     }
 
     override fun canInteractWith(playerIn: EntityPlayer) = inventoryTileEntity.isUsableByPlayer(playerIn)
@@ -264,10 +264,11 @@ class ContainerFairyCollectionBox(val inventoryPlayer: IInventory, val inventory
     }
 }
 
+@SideOnly(Side.CLIENT)
 class GuiFairyCollectionBox(val container: ContainerFairyCollectionBox) : GuiContainer(container) {
     init {
-        xSize = 14 + 18 * 10
-        ySize = 114 + 18 * 5 - 1
+        xSize = 7 + 18 * 10 + 7
+        ySize = 17 + 18 * 5 + 13 + 18 * 3 + 4 + 18 + 7
     }
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
@@ -279,14 +280,19 @@ class GuiFairyCollectionBox(val container: ContainerFairyCollectionBox) : GuiCon
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
         rectangle.drawGuiBackground()
 
-        repeat(5) { r -> repeat(10) { c -> drawSlot(x + 8f + c * 18f - 1f, y + 17f + r * 18f - 1f + 1f) } }
-        repeat(3) { r -> repeat(9) { c -> drawSlot(x + 9f + 8f + c * 18f - 1f, y + 84f + 18f * 2 + r * 18f - 1f + 1f) } }
-        repeat(9) { c -> drawSlot(x + 9f + 8f + c * 18f - 1f, y + 142f + 18f * 2 - 1f + 1f) }
+        var yi = 17
+        repeat(5) { r -> repeat(10) { c -> drawSlot((x + 7 + 18 * c).toFloat(), (y + yi + 18 * r).toFloat()) } }
+        yi += 18 * 5 + 13
+        repeat(3) { r -> repeat(9) { c -> drawSlot((x + 7 + 9 + 18 * c).toFloat(), (y + yi + 18 * r).toFloat()) } }
+        yi += 18 * 3 + 4
+        repeat(9) { c -> drawSlot((x + 7 + 9 + 18 * c).toFloat(), (y + yi).toFloat()) }
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
-        fontRenderer.drawString(container.inventoryTileEntity.displayName.unformattedText, 8, 6, 0x404040)
-        fontRenderer.drawStringRightAligned("Grade: ${container.fairyMasterGrade}", xSize - 8, 6, 0x000088) // TODO translate
-        fontRenderer.drawString(container.inventoryPlayer.displayName.unformattedText, 8, ySize - 96 + 2 + 18 * 0, 0x404040)
+        var yi = 7
+        fontRenderer.drawString(container.inventoryTileEntity.displayName.unformattedText, yi + 1, yi - 1, 0x404040)
+        fontRenderer.drawStringRightAligned("Grade: ${container.fairyMasterGrade}", xSize - 7 - 1, yi - 1, 0x000088) // TODO translate
+        yi += 10 + 18 * 5 + 3
+        fontRenderer.drawString(container.inventoryPlayer.displayName.unformattedText, 7 + 1, yi - 1, 0x404040)
     }
 }
