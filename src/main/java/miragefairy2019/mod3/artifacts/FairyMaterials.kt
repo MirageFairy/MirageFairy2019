@@ -1,16 +1,22 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.DataOreIngredient
+import miragefairy2019.libkt.DataResult
+import miragefairy2019.libkt.DataShapedRecipe
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
+import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.ore.ApiOre
 import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
@@ -82,6 +88,25 @@ object FairyMaterials {
 
         }
 
+        // 5棒＋8樹液→松明8
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "torch_from_fairy_wood_resin"),
+            DataShapedRecipe(
+                pattern = listOf(
+                    "r",
+                    "S"
+                ),
+                key = mapOf(
+                    "r" to DataOreIngredient(ore = "mirageFairyWoodResin"),
+                    "S" to DataOreIngredient(ore = "stickWood")
+                ),
+                result = DataResult(
+                    item = "minecraft:torch",
+                    count = 8
+                )
+            )
+        )
+
     }
 
 
@@ -112,7 +137,7 @@ object FairyMaterials {
         val bottleMirageFlowerOil = iv(12, "mirage_flower_oil_bottle", "bottleMirageFlowerOil", 4, listOf("bottleMirageFlowerOil", "container250MirageFlowerOil")).bottle()
         val manaRodGlass = iv(13, "glass_mana_rod", "manaRodGlass", 2, listOf("mirageFairy2019ManaRodGlass"))
         val mirageFairyLeather = iv(14, "mirage_fairy_leather", "mirageFairyLeather", 4, listOf("mirageFairyLeather"))
-        val fairyWoodResin = iv(15, "fairy_wood_resin", "fairyWoodResin", 4, listOf("fairyWoodResin")).fuel(1600)
+        val fairyWoodResin = iv(15, "fairy_wood_resin", "fairyWoodResin", 4, listOf("mirageFairyWoodResin")).fuel(1600)
     }
 }
 
