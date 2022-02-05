@@ -1,7 +1,7 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "wnw",
+    "wBw",
     "s#s",
     "wmw"
   ],
@@ -10,9 +10,8 @@
       "type": "forge:ore_dict",
       "ore": "mirageFairy2019SphereWarp"
     },
-    "n": {
-      "type": "forge:ore_dict",
-      "ore": "netherStar"
+    "B": {
+      "item": "minecraft:beacon"
     },
     "s": {
       "type": "forge:ore_dict",
