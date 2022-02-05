@@ -403,6 +403,8 @@ tile.fairyWoodLog.name=Fairy Wood Log
 tile.fairyBox.name=Fairy Box
 tile.fairyResinTapper.name=Fairy Resin Extractor
 
+tile.chatWebhookTransmitter.name=Chat Webhook Transmitter
+
 item.debugFairyList.name=Debug: Fairy List
 item.debugOreNameList.name=Debug: Ore Name List
 item.debugSkillResetUnlock.name=Debug: Skill Reset Unlock

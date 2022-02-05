@@ -1,0 +1,32 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "CBC",
+    "s#s",
+    "CmC"
+  ],
+  "key": {
+    "C": {
+      "item": "miragefairy2019:collecting_magic_wand"
+    },
+    "B": {
+      "item": "minecraft:beacon"
+    },
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "blockMiragium"
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereSound"
+    },
+    "m": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyMirageRank2"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:chat_webhook_transmitter",
+    "count": 1
+  }
+}

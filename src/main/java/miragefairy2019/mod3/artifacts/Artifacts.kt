@@ -23,5 +23,7 @@ object Artifacts {
         SkillBook.module(this)
         AstronomicalObservationBook.module(this)
         FairyDilutionRecipe.module(this)
+        ChatWebhook.module(this)
+        DaemonSystem.module(this)
     }
 }

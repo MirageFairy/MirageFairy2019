@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "miragefairy2019:chat_webhook_transmitter"
+    },
+    "facing=south": {
+      "model": "miragefairy2019:chat_webhook_transmitter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "miragefairy2019:chat_webhook_transmitter",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "miragefairy2019:chat_webhook_transmitter",
+      "y": 90
+    }
+  }
+}
