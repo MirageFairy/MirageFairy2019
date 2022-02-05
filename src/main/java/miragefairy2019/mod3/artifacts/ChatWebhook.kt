@@ -5,7 +5,6 @@ import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
-import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
@@ -117,16 +116,16 @@ object ChatWebhook {
             ResourceName(ModMirageFairy2019.MODID, "chat_webhook_transmitter"),
             DataShapedRecipe(
                 pattern = listOf(
-                    "CBC",
+                    "wnw",
                     "s#s",
-                    "CmC"
+                    "wmw"
                 ),
                 key = mapOf(
-                    "C" to DataSimpleIngredient(item = "miragefairy2019:collecting_magic_wand"),
-                    "B" to DataSimpleIngredient(item = "minecraft:beacon"),
-                    "#" to DataOreIngredient(ore = "blockMiragium"),
+                    "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
+                    "n" to DataOreIngredient(ore = "netherStar"),
                     "s" to DataOreIngredient(ore = "mirageFairy2019SphereSound"),
-                    "m" to DataOreIngredient(ore = "mirageFairy2019FairyMirageRank2")
+                    "#" to DataOreIngredient(ore = "blockMiragium"),
+                    "m" to DataOreIngredient(ore = "mirageFairy2019FairyMirageRank1")
                 ),
                 result = DataResult(
                     item = "${ModMirageFairy2019.MODID}:chat_webhook_transmitter"

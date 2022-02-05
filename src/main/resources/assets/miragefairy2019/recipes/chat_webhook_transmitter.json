@@ -1,28 +1,30 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "CBC",
+    "wnw",
     "s#s",
-    "CmC"
+    "wmw"
   ],
   "key": {
-    "C": {
-      "item": "miragefairy2019:collecting_magic_wand"
-    },
-    "B": {
-      "item": "minecraft:beacon"
-    },
-    "#": {
+    "w": {
       "type": "forge:ore_dict",
-      "ore": "blockMiragium"
+      "ore": "mirageFairy2019SphereWarp"
+    },
+    "n": {
+      "type": "forge:ore_dict",
+      "ore": "netherStar"
     },
     "s": {
       "type": "forge:ore_dict",
       "ore": "mirageFairy2019SphereSound"
     },
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "blockMiragium"
+    },
     "m": {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMirageRank2"
+      "ore": "mirageFairy2019FairyMirageRank1"
     }
   },
   "result": {
