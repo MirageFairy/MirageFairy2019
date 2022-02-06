@@ -8,7 +8,6 @@ import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
-import miragefairy2019.mod.lib.UtilsMinecraft;
 import miragefairy2019.mod3.artifacts.SphereKt;
 import miragefairy2019.mod3.erg.ErgKt;
 import miragefairy2019.mod3.erg.api.EnumErgType;
@@ -61,6 +60,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static miragefairy2019.libkt.MinecraftUtilsKt.canTranslate;
+import static miragefairy2019.libkt.MinecraftUtilsKt.translateToLocal;
 import static net.minecraft.util.text.TextFormatting.AQUA;
 import static net.minecraft.util.text.TextFormatting.BLUE;
 import static net.minecraft.util.text.TextFormatting.GREEN;
@@ -134,14 +135,14 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
     public final void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 
         // ポエム
-        if (UtilsMinecraft.canTranslate(getUnlocalizedName() + ".poem")) {
-            String string = UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".poem");
+        if (canTranslate(getUnlocalizedName() + ".poem")) {
+            String string = translateToLocal(getUnlocalizedName() + ".poem");
             if (!string.isEmpty()) {
                 tooltip.add(string);
             }
         }
-        if (UtilsMinecraft.canTranslate(getUnlocalizedName() + ".author")) {
-            String string = UtilsMinecraft.translateToLocal(getUnlocalizedName() + ".author");
+        if (canTranslate(getUnlocalizedName() + ".author")) {
+            String string = translateToLocal(getUnlocalizedName() + ".author");
             if (!string.isEmpty()) {
                 tooltip.add(LIGHT_PURPLE + "Author: " + string);
             }

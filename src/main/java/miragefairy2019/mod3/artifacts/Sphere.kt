@@ -6,9 +6,10 @@ import miragefairy2019.libkt.item
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.libkt.translateToLocal
+import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.ore.ApiOre
-import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.lib.multi.ItemMulti
 import miragefairy2019.mod.lib.multi.ItemVariant
 import miragefairy2019.mod3.erg.api.EnumErgType
@@ -38,8 +39,8 @@ import net.minecraftforge.oredict.OreIngredient
 
 class ItemSpheres : ItemMulti<VariantSphere>() {
     override fun getItemStackDisplayName(itemStack: ItemStack): String {
-        val variant = getVariant(itemStack) ?: return UtilsMinecraft.translateToLocal("$unlocalizedName.name")
-        return UtilsMinecraft.translateToLocalFormatted("$unlocalizedName.format", variant.sphere.ergType.displayName.formattedText)
+        val variant = getVariant(itemStack) ?: return translateToLocal("$unlocalizedName.name")
+        return translateToLocalFormatted("$unlocalizedName.format", variant.sphere.ergType.displayName.formattedText)
     }
 }
 

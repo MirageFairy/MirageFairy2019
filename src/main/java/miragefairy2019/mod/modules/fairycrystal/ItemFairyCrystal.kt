@@ -1,6 +1,7 @@
 package miragefairy2019.mod.modules.fairycrystal
 
-import miragefairy2019.mod.lib.UtilsMinecraft
+import miragefairy2019.libkt.translateToLocal
+import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.lib.multi.ItemMulti
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
@@ -20,8 +21,8 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
     }
 
     override fun getItemStackDisplayName(itemStack: ItemStack): String {
-        val variant = getVariant(itemStack) ?: return UtilsMinecraft.translateToLocal("$unlocalizedName.name")
-        return UtilsMinecraft.translateToLocalFormatted("item.${variant.unlocalizedName}.name")
+        val variant = getVariant(itemStack) ?: return translateToLocal("$unlocalizedName.name")
+        return translateToLocalFormatted("item.${variant.unlocalizedName}.name")
     }
 
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {

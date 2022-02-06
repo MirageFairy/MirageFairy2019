@@ -9,6 +9,7 @@ import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.aqua
+import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.item
@@ -16,9 +17,9 @@ import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.ore.ApiOre
-import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeBlock
@@ -154,8 +155,8 @@ class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
         val variant = getVariant(itemStack) ?: return
 
         // ポエム
-        if (UtilsMinecraft.canTranslate("${getUnlocalizedName(itemStack)}.poem")) {
-            val string = UtilsMinecraft.translateToLocal("${getUnlocalizedName(itemStack)}.poem")
+        if (canTranslate("${getUnlocalizedName(itemStack)}.poem")) {
+            val string = translateToLocal("${getUnlocalizedName(itemStack)}.poem")
             if (string.isNotEmpty()) tooltip += string
         }
 

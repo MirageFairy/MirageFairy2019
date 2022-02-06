@@ -7,8 +7,9 @@ import miragefairy2019.libkt.item
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.libkt.translateToLocal
+import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod3.fairy.Fairy
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.fairyType
@@ -122,7 +123,7 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraContainer {
     }
 
 
-    override fun getItemStackDisplayName(itemStack: ItemStack): String = getFairy(itemStack)?.fairyType?.let { UtilsMinecraft.translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText) } ?: UtilsMinecraft.translateToLocal("$unlocalizedName.name")
+    override fun getItemStackDisplayName(itemStack: ItemStack): String = getFairy(itemStack)?.fairyType?.let { translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText) } ?: translateToLocal("$unlocalizedName.name")
 
     override fun getSubItems(tab: CreativeTabs, items: NonNullList<ItemStack>) {
         if (!isInCreativeTab(tab)) return

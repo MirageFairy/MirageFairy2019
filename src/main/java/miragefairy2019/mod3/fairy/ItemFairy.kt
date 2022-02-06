@@ -3,9 +3,10 @@ package miragefairy2019.mod3.fairy
 import miragefairy2019.libkt.TextComponentBuilder
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
+import miragefairy2019.libkt.translateToLocal
+import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
-import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.lib.multi.ItemMulti
 import miragefairy2019.mod.lib.multi.ItemVariant
 import miragefairy2019.mod3.erg.displayName
@@ -45,7 +46,7 @@ fun hasSameId(a: VariantFairy, b: VariantFairy) = a.id == b.id
 
 class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
     override fun getMirageFairy2019Fairy(itemStack: ItemStack): Optional<IFairyType> = Optional.ofNullable(getVariant(itemStack)?.type)
-    override fun getItemStackDisplayName(itemStack: ItemStack): String = getMirageFairy2019Fairy(itemStack).map { UtilsMinecraft.translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText) }.orElseGet { UtilsMinecraft.translateToLocal("$unlocalizedName.name") }
+    override fun getItemStackDisplayName(itemStack: ItemStack): String = getMirageFairy2019Fairy(itemStack).map { translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText) }.orElseGet { translateToLocal("$unlocalizedName.name") }
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {

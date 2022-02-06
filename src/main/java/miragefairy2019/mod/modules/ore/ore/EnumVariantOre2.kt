@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.ore.ore
 
+import miragefairy2019.libkt.getItemStack
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.lib.multi.IBlockVariantList
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
@@ -19,9 +19,9 @@ enum class EnumVariantOre2(
     @JvmField val harvestLevel: Int,
     private val gemProvider: GemProvider
 ) : IStringSerializable, IBlockVariantOre {
-    TOURMALINE_ORE(0, "tourmaline_ore", "oreTourmaline", 3f, 5f, 2, GemProvider({ UtilsMinecraft.getItemStack("gemTourmaline") }, 1.0, 0.5, 1, 5)),
-    HELIOLITE_ORE(1, "heliolite_ore", "oreHeliolite", 3f, 5f, 2, GemProvider({ UtilsMinecraft.getItemStack("gemHeliolite") }, 1.0, 0.5, 10, 20)),
-    END_STONE_LABRADORITE_ORE(2, "end_stone_labradorite_ore", "oreLabradorite", 3f, 5f, 2, GemProvider({ UtilsMinecraft.getItemStack("gemLabradorite") }, 1.0, 0.5, 15, 30)),
+    TOURMALINE_ORE(0, "tourmaline_ore", "oreTourmaline", 3f, 5f, 2, GemProvider({ getItemStack("gemTourmaline") }, 1.0, 0.5, 1, 5)),
+    HELIOLITE_ORE(1, "heliolite_ore", "oreHeliolite", 3f, 5f, 2, GemProvider({ getItemStack("gemHeliolite") }, 1.0, 0.5, 10, 20)),
+    END_STONE_LABRADORITE_ORE(2, "end_stone_labradorite_ore", "oreLabradorite", 3f, 5f, 2, GemProvider({ getItemStack("gemLabradorite") }, 1.0, 0.5, 15, 30)),
     ;
 
     class GemProvider(val itemStackSupplier: () -> ItemStack, val amount: Double, val amountPerFortune: Double, val expMin: Int, val expMax: Int)

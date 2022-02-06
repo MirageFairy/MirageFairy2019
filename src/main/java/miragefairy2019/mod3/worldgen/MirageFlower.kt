@@ -5,6 +5,7 @@ import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.getItemStack
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.randomInt
@@ -12,7 +13,6 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod.modules.fairycrystal.variantFairyCrystal
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
@@ -253,7 +253,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
         // クリスタル
         if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) { drops += variantFairyCrystal().createItemStack() }
         // ミラジウム
-        if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) { drops += UtilsMinecraft.getItemStack("dustTinyMiragium").copy() }
+        if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) { drops += getItemStack("dustTinyMiragium").copy() }
     }
 
     // シルクタッチ無効。

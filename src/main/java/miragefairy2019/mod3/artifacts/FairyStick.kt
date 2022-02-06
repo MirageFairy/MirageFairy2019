@@ -2,14 +2,15 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.addOreName
+import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.api.ore.ApiOre
-import miragefairy2019.mod.lib.UtilsMinecraft
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionNotNether
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionReplaceBlock
@@ -98,8 +99,8 @@ class ItemFairyStick : Item() {
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         // ポエム
-        if (UtilsMinecraft.canTranslate("$unlocalizedName.poem")) {
-            val string = UtilsMinecraft.translateToLocal("$unlocalizedName.poem")
+        if (canTranslate("$unlocalizedName.poem")) {
+            val string = translateToLocal("$unlocalizedName.poem")
             if (string.isNotEmpty()) tooltip += string
         }
 

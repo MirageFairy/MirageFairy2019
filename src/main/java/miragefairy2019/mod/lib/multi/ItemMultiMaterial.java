@@ -1,6 +1,5 @@
 package miragefairy2019.mod.lib.multi;
 
-import miragefairy2019.mod.lib.UtilsMinecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -13,6 +12,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
+
+import static miragefairy2019.libkt.MinecraftUtilsKt.canTranslate;
+import static miragefairy2019.libkt.MinecraftUtilsKt.translateToLocal;
 
 public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<V> {
 
@@ -38,8 +40,8 @@ public class ItemMultiMaterial<V extends ItemVariantMaterial> extends ItemMulti<
         if (variant != null) {
 
             // ポエム
-            if (UtilsMinecraft.canTranslate(getUnlocalizedName(itemStack) + ".poem")) {
-                String string = UtilsMinecraft.translateToLocal(getUnlocalizedName(itemStack) + ".poem");
+            if (canTranslate(getUnlocalizedName(itemStack) + ".poem")) {
+                String string = translateToLocal(getUnlocalizedName(itemStack) + ".poem");
                 if (!string.isEmpty()) {
                     tooltip.add(string);
                 }
