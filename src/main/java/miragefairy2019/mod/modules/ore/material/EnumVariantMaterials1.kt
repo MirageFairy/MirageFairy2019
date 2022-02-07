@@ -10,13 +10,13 @@ enum class EnumVariantMaterials1(
     @JvmField val resourceName: String,
     @JvmField val unlocalizedName: String,
     val oreName: String,
-    @JvmField val blockHardness: Float,
-    @JvmField val harvestTool: String,
-    @JvmField val harvestLevel: Int,
-    @JvmField val burnTime: Int,
-    @JvmField val soundType: SoundType,
-    @JvmField val fallable: Boolean,
-    @JvmField val material: Material
+    override val blockHardness: Float,
+    override val harvestTool: String,
+    override val harvestLevel: Int,
+    override val burnTime: Int,
+    override val soundType: SoundType,
+    override val isFallable: Boolean,
+    override val material: Material
 ) : IStringSerializable, IBlockVariantMaterials {
     APATITE_BLOCK(0, "apatite_block", "blockApatite", "blockApatite", 3f, "pickaxe", 1, 0, SoundType.STONE, false, Material.IRON),
     FLUORITE_BLOCK(1, "fluorite_block", "blockFluorite", "blockFluorite", 5f, "pickaxe", 2, 0, SoundType.STONE, false, Material.IRON),
@@ -37,13 +37,6 @@ enum class EnumVariantMaterials1(
     override fun getMetadata() = metadata
     override fun getResourceName() = resourceName
     override fun getUnlocalizedName() = unlocalizedName
-    override fun getBlockHardness() = blockHardness
-    override fun getHarvestTool() = harvestTool
-    override fun getHarvestLevel() = harvestLevel
-    override fun getBurnTime() = burnTime
-    override fun getSoundType() = soundType
-    override fun isFallable() = fallable
-    override fun getMaterial() = material
 
     companion object {
         val variantList: IBlockVariantList<EnumVariantMaterials1> = object : IBlockVariantList<EnumVariantMaterials1> {
