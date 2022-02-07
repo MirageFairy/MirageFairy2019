@@ -5,7 +5,7 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.lib.OreIngredientComplex
+import miragefairy2019.libkt.OreIngredientComplex
 import net.minecraft.init.Items
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.ResourceLocation

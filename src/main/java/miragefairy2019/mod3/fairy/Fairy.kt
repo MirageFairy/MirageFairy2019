@@ -7,7 +7,7 @@ import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.upperCamelCase
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.IItemFairy
-import miragefairy2019.mod.lib.OreIngredientComplex
+import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod3.main.api.ApiMain.side
