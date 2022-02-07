@@ -93,15 +93,15 @@ public class ModuleMirageFlower {
             {
                 biomeDecorators.add(new BiomeDecoratorFlowers(
                     UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.invoke(), MirageFlower.blockMirageFlower.invoke().getState(3)), wg -> {
-                        wg.blockCountMin = 1;
-                        wg.blockCountMax = 3;
+                        wg.setBlockCountMin(1);
+                        wg.setBlockCountMax(3);
                     }),
                     0.01));
 
                 biomeDecorators.add(new BiomeDecoratorFlowers(
                     UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.invoke(), MirageFlower.blockMirageFlower.invoke().getState(3)), wg -> {
-                        wg.blockCountMin = 1;
-                        wg.blockCountMax = 10;
+                        wg.setBlockCountMin(1);
+                        wg.setBlockCountMax(10);
                     }),
                     0.1) {
                     @Override
@@ -112,8 +112,8 @@ public class ModuleMirageFlower {
 
                 biomeDecorators.add(new BiomeDecoratorFlowers(
                     UtilsLambda.get(new WorldGenBush(MirageFlower.blockMirageFlower.invoke(), MirageFlower.blockMirageFlower.invoke().getState(3)), wg -> {
-                        wg.blockCountMin = 1;
-                        wg.blockCountMax = 10;
+                        wg.setBlockCountMin(1);
+                        wg.setBlockCountMax(10);
                     }),
                     0.5) {
                     @Override
