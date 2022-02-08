@@ -26,7 +26,7 @@ import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemStacks
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.makeRecipe
-import miragefairy2019.libkt.minus
+import mirrg.kotlin.minus
 import miragefairy2019.libkt.readFromNBT
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.setCreativeTab

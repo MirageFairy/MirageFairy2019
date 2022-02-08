@@ -1,24 +1,24 @@
 package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.Module
-import miragefairy2019.libkt.atDayStart
-import miragefairy2019.libkt.atMonthStart
-import miragefairy2019.libkt.atWeekStart
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.displayText
 import miragefairy2019.libkt.formattedText
+import mirrg.kotlin.startOfDay
+import mirrg.kotlin.startOfMonth
+import mirrg.kotlin.startOfWeek
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
-import miragefairy2019.libkt.minus
+import mirrg.kotlin.minus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.libkt.toInstant
-import miragefairy2019.libkt.toLocalDateTime
+import mirrg.kotlin.toInstantAsUtc
+import mirrg.kotlin.utcLocalDateTime
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.skill.api.ApiSkill
@@ -164,12 +164,12 @@ class ItemAstronomicalObservationBook : Item() {
     }
 
 
-    private fun getLastLimitDaily(now: Instant): Instant = now.toLocalDateTime().toLocalDate().atDayStart().toInstant()
-    private fun getLastLimitWeekly(now: Instant): Instant = now.toLocalDateTime().toLocalDate().atWeekStart().toInstant()
-    private fun getLastLimitMonthly(now: Instant): Instant = now.toLocalDateTime().toLocalDate().atMonthStart().toInstant()
-    private fun getLimitDaily(now: Instant): Instant = now.toLocalDateTime().toLocalDate().atDayStart().plusDays(1).toInstant()
-    private fun getLimitWeekly(now: Instant): Instant = now.toLocalDateTime().toLocalDate().atWeekStart().plusDays(7).toInstant()
-    private fun getLimitMonthly(now: Instant): Instant = now.toLocalDateTime().toLocalDate().atMonthStart().plusMonths(1).toInstant()
+    private fun getLastLimitDaily(now: Instant): Instant = now.utcLocalDateTime.toLocalDate().startOfDay.toInstantAsUtc
+    private fun getLastLimitWeekly(now: Instant): Instant = now.utcLocalDateTime.toLocalDate().startOfWeek.toInstantAsUtc
+    private fun getLastLimitMonthly(now: Instant): Instant = now.utcLocalDateTime.toLocalDate().startOfMonth.toInstantAsUtc
+    private fun getLimitDaily(now: Instant): Instant = now.utcLocalDateTime.toLocalDate().startOfDay.plusDays(1).toInstantAsUtc
+    private fun getLimitWeekly(now: Instant): Instant = now.utcLocalDateTime.toLocalDate().startOfWeek.plusDays(7).toInstantAsUtc
+    private fun getLimitMonthly(now: Instant): Instant = now.utcLocalDateTime.toLocalDate().startOfMonth.plusMonths(1).toInstantAsUtc
 
     private fun getDailyStatus(last: Instant?, now: Instant) = when {
         last == null -> EnumQuestStatus.INCOMPLETE

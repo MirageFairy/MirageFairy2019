@@ -8,7 +8,6 @@ import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.TextAlignment
 import miragefairy2019.libkt.argb
-import miragefairy2019.libkt.atMonthStart
 import miragefairy2019.libkt.button
 import miragefairy2019.libkt.component
 import miragefairy2019.libkt.displayText
@@ -19,12 +18,14 @@ import miragefairy2019.libkt.minus
 import miragefairy2019.libkt.position
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.toArgb
-import miragefairy2019.libkt.toInstant
-import miragefairy2019.libkt.toLocalDateTime
 import miragefairy2019.libkt.tooltip
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.skill.api.ApiSkill
 import mirrg.kotlin.formatAs
+import mirrg.kotlin.minus
+import mirrg.kotlin.startOfMonth
+import mirrg.kotlin.toInstantAsUtc
+import mirrg.kotlin.utcLocalDateTime
 import net.minecraft.client.gui.GuiYesNo
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
@@ -89,7 +90,7 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
                 when {
                     !skillContainer.canResetMastery(Instant.now()) -> listOf(
                         "今月は初期化できません。",
-                        "残り: ${(skillContainer.variables.lastMasteryResetTime!!.toLocalDateTime().toLocalDate().atMonthStart().plusMonths(1).toInstant() - Instant.now()).displayText.unformattedText}"
+                        "残り: ${(skillContainer.variables.lastMasteryResetTime!!.utcLocalDateTime.toLocalDate().startOfMonth.plusMonths(1).toInstantAsUtc - Instant.now()).displayText.unformattedText}"
                     ) // TODO translate
                     skillContainer.usedSkillPoints == 0 -> listOf("初期化の必要はありません。") // TODO translate
                     else -> listOf("1か月に1度だけ、全マスタリのレベルをリセットしSPに戻せます。") // TODO translate
