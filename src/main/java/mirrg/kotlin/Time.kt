@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package mirrg.kotlin
 
 import java.time.Duration
