@@ -22,6 +22,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.ore.ApiOre
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial
+import miragefairy2019.mod.lib.multi.setCustomModelResourceLocations
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionSpawnItem
