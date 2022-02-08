@@ -6,11 +6,15 @@ import java.time.Duration
 
 val Duration.displayText: ITextComponent
     get() {
-        val prefix = "miragefairy2019.gui.duration"
-        val millis = toMillis()
-        if (millis >= 1_000 * 60 * 60 * 24) return textComponent { !((millis / (1_000 * 60 * 60 * 24).toDouble()) formatAs "%.2f") + translate("$prefix.days") }
-        if (millis >= 1_000 * 60 * 60) return textComponent { !((millis / (1_000 * 60 * 60).toDouble()) formatAs "%.2f") + translate("$prefix.hours") }
-        if (millis >= 1_000 * 60) return textComponent { !((millis / (1_000 * 60).toDouble()) formatAs "%.2f") + translate("$prefix.minutes") }
-        if (millis >= 1_000) return textComponent { !((millis / (1_000).toDouble()) formatAs "%.2f") + translate("$prefix.seconds") }
-        return textComponent { !(millis.toDouble() formatAs "%.2f") + translate("$prefix.milliSeconds") }
+        return textComponent {
+            val prefix = "miragefairy2019.gui.duration"
+            val millis = toMillis()
+            when {
+                millis >= 1000 * 60 * 60 * 24 -> !((millis / (1000 * 60 * 60 * 24).toDouble()) formatAs "%.2f") + translate("$prefix.days")
+                millis >= 1000 * 60 * 60 -> !((millis / (1000 * 60 * 60).toDouble()) formatAs "%.2f") + translate("$prefix.hours")
+                millis >= 1000 * 60 -> !((millis / (1000 * 60).toDouble()) formatAs "%.2f") + translate("$prefix.minutes")
+                millis >= 1000 -> !((millis / (1000).toDouble()) formatAs "%.2f") + translate("$prefix.seconds")
+                else -> !(millis.toDouble() formatAs "%.2f") + translate("$prefix.milliSeconds")
+            }
+        }
     }
