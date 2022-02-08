@@ -7,20 +7,21 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.NonNullList
 
+val IInventory.size get() = sizeInventory
 operator fun IInventory.get(index: Int): ItemStack = getStackInSlot(index)
 operator fun IInventory.set(index: Int, itemStack: ItemStack) = setInventorySlotContents(index, itemStack)
 
-val IInventory.itemStacks get() = (0 until sizeInventory).map { this[it] }
+val IInventory.itemStacks get() = (0 until size).map { this[it] }
 
 fun IInventory.readFromNBT(nbt: NBTTagCompound) {
-    val list = NonNullList.withSize(sizeInventory, ItemStack.EMPTY)
+    val list = NonNullList.withSize(size, ItemStack.EMPTY)
     ItemStackHelper.loadAllItems(nbt, list)
-    (0 until sizeInventory).map { i -> this[i] = list[i] }
+    (0 until size).map { i -> this[i] = list[i] }
 }
 
 fun IInventory.writeToNBT(nbt: NBTTagCompound) {
-    val list = NonNullList.withSize(sizeInventory, ItemStack.EMPTY)
-    (0 until sizeInventory).map { i -> list[i] = this[i] }
+    val list = NonNullList.withSize(size, ItemStack.EMPTY)
+    (0 until size).map { i -> list[i] = this[i] }
     ItemStackHelper.saveAllItems(nbt, list)
 }
 
