@@ -69,7 +69,7 @@ class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWand() {
             rayTraceResult.hitVec.z.toFloat(),
             variantFairyCrystal.dropRank,
             variantFairyCrystal.getRareBoost(ApiSkill.skillManager.getServerSkillContainer(player))
-        ).orElse(null) ?: return false // ガチャが引けなかった場合は無視
+        ) ?: return false // ガチャが引けなかった場合は無視
         if (itemStackDrop.isEmpty) return false // ガチャが引けなかった場合は無視
 
         // 成立

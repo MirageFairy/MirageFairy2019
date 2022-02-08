@@ -26,7 +26,7 @@ open class VariantFairyCrystal(registryName: String, unlocalizedName: String, or
         if (!player.isSneaking) {
 
             // ガチャを引く
-            val resultItemStack = dropper.drop(player, world, pos, hand, facing, hitX, hitY, hitZ, dropRank, rareBoost).orNull?.orNull ?: return EnumActionResult.SUCCESS
+            val resultItemStack = dropper.drop(player, world, pos, hand, facing, hitX, hitY, hitZ, dropRank, rareBoost)?.orNull ?: return EnumActionResult.SUCCESS
 
             // ガチャ成立
 

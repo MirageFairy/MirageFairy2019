@@ -10,7 +10,6 @@ import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.ISkillContainer
 import miragefairy2019.mod3.skill.displayName
 import miragefairy2019.mod3.skill.getSkillLevel
-import mirrg.boron.util.suppliterator.ISuppliterator
 import mirrg.kotlin.formatAs
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
@@ -38,6 +37,6 @@ abstract class VariantFairyCrystalBase(
     open val itemRareBoost get() = 1.0
     open val dropper
         get() = object : FairyCrystalDropper() {
-            override fun getDropList() = ISuppliterator.ofIterable(ApiFairyCrystal.dropsFairyCrystal)
+            override val dropList get() = ApiFairyCrystal.dropsFairyCrystal
         }
 }

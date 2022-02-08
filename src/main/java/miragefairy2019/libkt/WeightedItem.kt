@@ -1,7 +1,6 @@
 package miragefairy2019.libkt
 
 import java.util.Random
-import java.util.function.BiPredicate
 
 class WeightedItem<T : Any>(val item: T, val weight: Double)
 
@@ -21,7 +20,7 @@ fun <T : Any> List<WeightedItem<T>>.getItem(d: Double): T? {
 
 val <T : Any> List<WeightedItem<T>>.totalWeight get() = sumByDouble { it.weight }
 
-fun <T : Any> List<WeightedItem<T>>.unique(equals: BiPredicate<T, T>): List<WeightedItem<T>> {
+fun <T : Any> List<WeightedItem<T>>.unique(equals: (T, T) -> Boolean): List<WeightedItem<T>> {
     class Slot(val item: T) {
         override fun hashCode() = 0
 
@@ -34,7 +33,7 @@ fun <T : Any> List<WeightedItem<T>>.unique(equals: BiPredicate<T, T>): List<Weig
             @Suppress("UNCHECKED_CAST")
             other as Slot
 
-            return equals.test(item, other.item)
+            return equals(item, other.item)
         }
     }
 
