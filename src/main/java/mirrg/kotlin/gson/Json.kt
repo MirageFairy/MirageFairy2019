@@ -12,8 +12,15 @@ import com.google.gson.JsonPrimitive
 
 // 文字列とJavaオブジェクトの相互変換
 
+@Deprecated("暗黙のレシーバにより意図せず呼び出される可能性があります。", ReplaceWith("this.jsonElement.toJson()", "mirrg.kotlin.gson.jsonElement"))
 fun Any?.toJson(block: GsonBuilder.() -> Unit): String = GsonBuilder().apply { block() }.create().toJson(this)
-val Any?.json get() = toJson { }
+
+@Deprecated("暗黙のレシーバにより意図せず呼び出される可能性があります。", ReplaceWith("this.jsonElement.json", "mirrg.kotlin.gson.jsonElement"))
+val Any?.json
+    get() = toJson { }
+
+fun JsonElement.toJson(block: GsonBuilder.() -> Unit): String = GsonBuilder().apply { block() }.create().toJson(this)
+val JsonElement.json get() = toJson { }
 fun String.fromJson(block: GsonBuilder.() -> Unit): Any? = GsonBuilder().apply { block() }.create().fromJson(this, Any::class.java)
 val String.fromJson get() = fromJson { }
 
