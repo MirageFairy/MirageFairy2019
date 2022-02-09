@@ -14,7 +14,6 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.World
 
 class ItemMiragiumScythe(
     additionalBaseStatus: Double,
@@ -28,16 +27,13 @@ class ItemMiragiumScythe(
     val range = "range"({ int.positive }) { (2 + !extent * 0.02).toInt() }.setRange(2..5).setVisibility(Companion.EnumVisibility.DETAIL)
     val coolTime = "coolTime"({ tick.negative }) { cost * 0.3 }.setVisibility(Companion.EnumVisibility.DETAIL)
 
-    override fun MagicScope.getTargets(itemStack: ItemStack, world: World, blockPosBase: BlockPos) = blockPosBase.range.grow(!range, 0, !range).positions
-        .filter { blockPos ->
-            val blockState = world.getBlockState(blockPos)
-            when {
-                blockState.getBlockHardness(world, blockPos) > !maxHardness -> false
-                blockState.isNormalCube -> false
-                else -> true
+    override fun iterateTargets(magicScope: MagicScope, blockPosBase: BlockPos) = iterator {
+        magicScope.run {
+            blockPosBase.range.grow(!range, 0, !range).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
+                if (canBreak(magicScope, blockPos)) yield(blockPos)
             }
         }
-        .sortedByDistance(blockPosBase)
+    }
 
     override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = super.isEffective(itemStack, blockState) || when {
         blockState.block === Blocks.WEB -> true
@@ -51,5 +47,9 @@ class ItemMiragiumScythe(
         else -> false
     }
 
-    override fun MagicScope.getCoolTime() = !coolTime
+    override fun canBreak(magicScope: MagicScope, blockPos: BlockPos) = super.canBreak(magicScope, blockPos)
+            && magicScope.run { world.getBlockState(blockPos).getBlockHardness(world, blockPos) <= !maxHardness } // 硬すぎてはいけない
+            && !magicScope.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない
+
+    override fun getCoolTime(magicScope: MagicScope) = magicScope.run { !coolTime }
 }

@@ -153,6 +153,9 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
                 IBlockState blockState = world.getBlockState(blockPos2);
                 float blockHardness = blockState.getBlockHardness(world, blockPos2);
 
+                // 岩盤を見つけた
+                if (blockHardness < 0) break;
+
                 // パワーが足りないので破壊をやめる
                 if (power2 < blockHardness) break;
 

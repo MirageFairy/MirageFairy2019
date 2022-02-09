@@ -13,7 +13,6 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.World
 
 class ItemRyugyoDrill(
     additionalBaseStatus: Double
@@ -32,6 +31,14 @@ class ItemRyugyoDrill(
         destroySpeed = 8.0f
     }
 
+    override fun iterateTargets(magicScope: Companion.MagicScope, blockPosBase: BlockPos) = iterator {
+        magicScope.run {
+            blockPosBase.range.grow(!range, !range, !range).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
+                if (canBreak(magicScope, blockPos)) yield(blockPos)
+            }
+        }
+    }
+
     override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = super.isEffective(itemStack, blockState) || when {
         blockState.block === Blocks.SNOW_LAYER -> true
         blockState.material === Material.IRON -> true
@@ -41,9 +48,8 @@ class ItemRyugyoDrill(
         else -> false
     }
 
-    override fun Companion.MagicScope.getTargets(itemStack: ItemStack, world: World, blockPosBase: BlockPos) = blockPosBase.range.grow(!range, !range, !range).positions
-        .filter { blockPos -> world.getBlockState(blockPos).getBlockHardness(world, blockPos) <= !maxHardness }
-        .sortedByDistance(blockPosBase)
+    override fun canBreak(magicScope: Companion.MagicScope, blockPos: BlockPos) = super.canBreak(magicScope, blockPos)
+            && magicScope.run { world.getBlockState(blockPos).getBlockHardness(world, blockPos) <= !maxHardness } // 硬すぎてはいけない
 
-    override fun Companion.MagicScope.getCoolTime() = !coolTime
+    override fun getCoolTime(magicScope: Companion.MagicScope) = magicScope.run { !coolTime }
 }
