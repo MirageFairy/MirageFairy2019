@@ -1,6 +1,7 @@
 package miragefairy2019.mod.modules.fairycrystal
 
 import miragefairy2019.libkt.WeightedItem
+import miragefairy2019.libkt.axisAlignedBB
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.itemStacks
@@ -19,7 +20,6 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
-import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraft.world.biome.Biome
@@ -89,7 +89,7 @@ abstract class FairyCrystalDropper {
         }
 
         // エンティティ
-        val entities = world.getEntitiesWithinAABB(Entity::class.java, AxisAlignedBB(player.positionVector, player.positionVector).grow(10.0))
+        val entities = world.getEntitiesWithinAABB(Entity::class.java, axisAlignedBB(player.positionVector, player.positionVector).grow(10.0))
         entities.forEach { classEntities += it.javaClass }
 
 
