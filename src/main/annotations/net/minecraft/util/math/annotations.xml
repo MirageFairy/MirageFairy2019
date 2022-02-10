@@ -1,0 +1,5 @@
+<root>
+    <item name='net.minecraft.util.math.AxisAlignedBB AxisAlignedBB(net.minecraft.util.math.Vec3d, net.minecraft.util.math.Vec3d)'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>
