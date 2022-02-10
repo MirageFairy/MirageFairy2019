@@ -216,6 +216,8 @@ fun <T : TileEntity, R : TileEntitySpecialRenderer<T>> ModInitializer.tileEntity
 fun ModInitializer.onServerSave(listener: WorldEvent.Save.() -> Unit) = onInit {
     MinecraftForge.EVENT_BUS.register(object {
         @[Suppress("unused") SubscribeEvent]
-        fun handle(event: WorldEvent.Save) = event.listener()
+        fun handle(event: WorldEvent.Save) {
+            if (event.world.provider.dimension == 0) event.listener()
+        }
     })
 }
