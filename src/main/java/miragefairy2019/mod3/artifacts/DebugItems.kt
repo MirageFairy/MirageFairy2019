@@ -48,6 +48,7 @@ object DebugItems {
         r({ ItemDebugOreNameList() }, "debug_ore_name_list", "debugOreNameList", "Debug: Ore Name List", "デバッグ：鉱石辞書名一覧")
         r({ ItemDebugSkillResetUnlock() }, "debug_skill_reset_unlock", "debugSkillResetUnlock", "Debug: Skill Reset Unlock", "デバッグ：スキルリセット解禁")
         r({ ItemDebugPlayerAuraReset() }, "debug_player_aura_reset", "debugPlayerAuraReset", "Debug: Player Aura Reset", "デバッグ：プレイヤーオーラリセット")
+        r({ ItemDebugGainFairyMasterExp() }, "debug_gain_fairy_master_exp", "debugGainFairyMasterExp", "Debug: Gain Fairy Master Exp", "デバッグ：妖精経験値入手")
 
     }
 }
@@ -155,6 +156,17 @@ class ItemDebugPlayerAuraReset : ItemDebug() {
         playerAuraHandler.onReset()
         playerAuraHandler.send()
         player.sendStatusMessage(textComponent { !"プレイヤーオーラをリセットしました" }, true) // TODO translate
+        return EnumActionResult.SUCCESS
+    }
+}
+
+class ItemDebugGainFairyMasterExp : ItemDebug() {
+    override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        if (world.isRemote) return EnumActionResult.SUCCESS
+        if (player !is EntityPlayerMP) return EnumActionResult.SUCCESS
+        val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
+        ItemAstronomicalObservationBook.gainExp(player, if (player.isSneaking) -100 else 100)
+        skillContainer.send(player)
         return EnumActionResult.SUCCESS
     }
 }

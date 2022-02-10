@@ -59,6 +59,35 @@ object AstronomicalObservationBook {
 class ItemAstronomicalObservationBook : Item() {
     companion object {
         private const val prefix = "miragefairy2019.gui.astronomicalObservation"
+
+        /**
+         * 同期を行いません。
+         * サーバーワールドのみ
+         */
+        fun gainExp(player: EntityPlayerMP, exp: Int) {
+            val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
+
+            // 獲得処理
+            val expOld = skillContainer.variables.exp
+            val lvOld = skillContainer.skillManager.getFairyMasterLevel(skillContainer.variables.exp)
+            skillContainer.variables.exp = (skillContainer.variables.exp + exp).coerceAtLeast(0)
+            val expNew = skillContainer.variables.exp
+            val lvNew = skillContainer.skillManager.getFairyMasterLevel(skillContainer.variables.exp)
+            val lvDiff = lvNew - lvOld
+            val expDiff = expNew - expOld
+
+            // エフェクト
+            if (expDiff != 0) {
+                player.sendStatusMessage(textComponent { translate("$prefix.message.gainExp", expDiff) }, false)
+                player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 0.75f, 1.2f)
+            }
+            if (lvDiff != 0) {
+                player.sendStatusMessage(textComponent { translate("$prefix.message.gainLevel", lvDiff) }, false)
+                player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 0.75f, 1.2f)
+            }
+
+        }
+
     }
 
     override fun getItemUseAction(stack: ItemStack) = EnumAction.BOW
@@ -107,28 +136,6 @@ class ItemAstronomicalObservationBook : Item() {
             }
         }
         super.onUsingTick(itemStack, player, count)
-    }
-
-    /**
-     * 同期を行いません。
-     */
-    private fun gainExp(player: EntityPlayer, exp: Int) {
-        val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
-
-        // 獲得処理
-        val lvOld = skillContainer.skillManager.getFairyMasterLevel(skillContainer.variables.exp)
-        skillContainer.variables.exp += exp
-        val lv = skillContainer.skillManager.getFairyMasterLevel(skillContainer.variables.exp)
-        val lvDiff = lv - lvOld
-
-        // エフェクト
-        player.sendStatusMessage(textComponent { translate("$prefix.message.gainExp", exp) }, false)
-        player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 0.75f, 1.2f)
-        if (lvDiff > 0) {
-            player.sendStatusMessage(textComponent { translate("$prefix.message.gainLevel", lvDiff) }, false)
-            player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 0.75f, 1.2f)
-        }
-
     }
 
     override fun onItemUseFinish(itemStack: ItemStack, world: World, player: EntityLivingBase): ItemStack {
