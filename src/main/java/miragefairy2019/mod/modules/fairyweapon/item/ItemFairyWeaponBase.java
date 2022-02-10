@@ -250,7 +250,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IIte
     }
 
     @Nonnull
-    public static ItemStack getCombinedFairy(ItemStack itemStack) {
+    public static ItemStack getCombinedFairy(@Nonnull ItemStack itemStack) {
         if (!itemStack.hasTagCompound()) return ItemStack.EMPTY;
         NBTTagCompound nbt = itemStack.getTagCompound();
         if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) return ItemStack.EMPTY;
