@@ -133,7 +133,7 @@ class ItemAstronomicalObservationBook : Item() {
 
     override fun onItemUseFinish(itemStack: ItemStack, world: World, player: EntityLivingBase): ItemStack {
         if (!world.isRemote) {
-            if (player is EntityPlayer) {
+            if (player is EntityPlayerMP) {
                 val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
                 val oldLast = skillContainer.variables.lastAstronomicalObservationTime
 
@@ -150,7 +150,7 @@ class ItemAstronomicalObservationBook : Item() {
                 if (canWeekly) gainExp(player, 75)
                 if (canMonthly) gainExp(player, 250)
 
-                skillContainer.send(player as EntityPlayerMP) // 同期
+                skillContainer.send(player) // 同期
 
                 player.cooldownTracker.setCooldown(itemStack.item, 40) // クールタイム
 
