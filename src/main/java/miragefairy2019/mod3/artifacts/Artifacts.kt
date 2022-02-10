@@ -25,5 +25,6 @@ object Artifacts {
         FairyDilutionRecipe.module(this)
         ChatWebhook.module(this)
         DaemonSystem.module(this)
+        Mfa.module(this)
     }
 }

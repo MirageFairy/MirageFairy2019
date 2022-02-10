@@ -10,13 +10,13 @@ import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
+import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.drawSlot
-import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.libkt.translateToLocal
+import miragefairy2019.mod3.artifacts.Mfa
 import net.minecraft.client.Minecraft
 import net.minecraft.init.Items
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraftforge.oredict.OreIngredient
 
 @JEIPlugin
 class PluginMfa : IModPlugin {
@@ -48,157 +48,23 @@ class PluginMfa : IModPlugin {
     }
 
     override fun register(registry: IModRegistry) {
-        registry.addRecipes(mutableListOf<IRecipeWrapper>().apply {
-            fun register(main: List<ItemStack>, vararg subs: List<ItemStack>, content: () -> String) = add(object : IRecipeWrapper {
-                override fun getIngredients(ingredients: IIngredients) = ingredients.setInputLists(VanillaTypes.ITEM, listOf(main) + (0 until 7).map { subs.getOrNull(it) ?: listOf() })
-                override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {
-                    content().trimIndent().split("\n").forEachIndexed { i, it -> minecraft.fontRenderer.drawString(it, 4, 21 + 10 * i, 0x444444) }
+        registry.addRecipes(Mfa.mfaPages.map { mfaPage ->
+            object : IRecipeWrapper {
+                override fun getIngredients(ingredients: IIngredients) {
+                    ingredients.setInputLists(VanillaTypes.ITEM, listOf(mfaPage.mainIngredient) + (0 until 7).map { mfaPage.subIngredients.getOrNull(it) ?: listOf() })
                 }
-            })
 
-            fun ore(oreName: String) = OreIngredient(oreName).matchingStacks.toList()
-            fun item(registerName: String) = listOf(ItemStack(Item.getByNameOrId("${ModMirageFairy2019.MODID}:$registerName")!!))
-            fun fairy(type: String) = ore("mirageFairy2019Fairy${type.take(1).toUpperCase() + type.drop(1)}Rank1")
-
-            register(fairy("zombie")) {
-                """
-                【MFA-00000461：おかず】
-                ｳ˝ｪｱｰｰ「来たぞ……」
-                ｹﾞｪｪｪｪｪ「任せろ、支度はできている」
-                
-                ﾑﾞｩｩｩｩｩ「――待て、様子が違う」
-                ｳ˝ｪｱｰｰ「馬鹿な」
-                ｳ˝ｪｱｰｰ「なぜ人間が刀を持っている？」
-                ﾑﾞｩｩｩｩｩ「ｹﾞｪｪｪｪｪ、戻ってこい！」
-                
-                ｹﾞｪｪｪｪｪ「ｧﾞｴｴ！」
-                """
-            }
-            register(fairy("enderman")) {
-                """
-                【MFA-00169455：つかまえた】
-                人間「キミってどこから来たの？」
-                「えっと……」
-                
-                人間「なんてお名前？」
-                「あの、私、名前持ってなくて…」
-                人間「ｼｪ…ﾕﾌﾄ…ｿﾙ…言いづらいね…」
-                人間「黒いし、ｵﾌﾞｼﾃﾞｨｱﾝって呼ぼう！」
-                人間「それでもいいかな？」
-                （^_^）
-                """
-            }
-            register(item("miragium_axe"), fairy("air")) {
-                """
-                【MFA-16487544：落とし物】
-                （……）
-                
-                ﾙﾒﾘ「待って！」
-                
-                ﾙﾒﾘ「妖精さん！！」
-                ﾙﾒﾘ「待って！」
-                （……）
-                
-                ﾙﾒﾘ「あっ！」
-                """
-            }
-            register(fairy("pufferfish"), fairy("salmon")) {
-                """
-                【MFA-30948551：栄養満点】
-                「甘いものが恋しくなりました！」
-                「ケーキ屋さんが食べたいです！」
-                ｻﾙﾓｰﾆｬ「帰りに寄ろっか」
-                「ありがとうございます！」
-                ―――――――
-                ｻﾙﾓｰﾆｬ「着いたよ、何にしよっか？」
-                
-                「すぅぅぅぅぅぅっっっっ！！！」
-                ｻﾙﾓｰﾆｬ「本当に店ごと食べるんだ」
-                """
-            }
-            register(fairy("magentaGlazedTerracotta"), fairy("carrot"), fairy("dispenser"), fairy("lilac")) {
-                """
-                【MFA-34681526：美術展にて】
-                ﾂｧｯﾛｰﾁｬ「大変！ﾃﾞｨｽﾍﾟﾝｾｰﾘｬが！」
-                
-                ﾃﾞｨｽﾍﾟﾝｾｰﾘｬ（……）
-                
-                ﾘﾗｰﾂｧ「止まって！こっちじゃないの！」
-                
-                ﾃﾞｨｽﾍﾟﾝｾｰﾘｬ（……）
-                
-                （？）
-                """
-            }
-            register(fairy("melon"), fairy("cinnabar")) {
-                """
-                【MFA-34749950：走れ】
-                ﾂｨﾅﾊﾞｰﾘｬ「今度劇をするんだけど――」
-                ﾂｨﾅﾊﾞｰﾘｬ「主役のﾒﾛｽやってみない！？」
-                「ﾒﾛｰﾆｬでいいの…？できるかな…」
-                ﾂｨﾅﾊﾞｰﾘｬ「私、王様だから安心して！」
-                「ありがとう……やってみる…！」
-                ―― 本番当日 ――
-                ﾂｨﾅﾊﾞｰﾘｬ「ﾒﾛｰﾆｬ、真っ裸じゃないか」
-                ﾂｨﾅﾊﾞｰﾘｬ「早くそのﾏﾝﾄを着るがいい」
-                「あうぅ…」
-                """
-            }
-            register(fairy("chicken")) {
-                """
-                【MFA-34996052：妖精が先か？】
-                N-183207「お夕飯何にしようかしら」
-                （ﾄﾞｷﾄﾞｷ）
-                N-183211「私、ステーキが食べたい！」
-                （ﾎｯ…）
-                N-183213「ふわふわしたのがいー！」
-                （……）
-                N-183211「私もあれまた食べたい！」
-                N-183207「オムレツにしよっか☆」
-                （Σ）
-                """
-            }
-            register(fairy("bread"), fairy("axe"), fairy("poisonousPotato"), fairy("fire")) {
-                """
-                【MFA-43685165：闇鍋ﾊﾟｰﾃｨｰ】
-                「今日は揚げ物だよ！召し上がれ！」
-                『いただきまーす！』ｸﾞﾂｸﾞﾂ…
-                
-                ｱｰｼｬ「なんて旨いﾋﾞｽｹｯﾄなんだ」ｻｸｻｸ
-                ﾎﾟｲｿﾉｳｾﾎﾟﾀｰﾁｬ「それﾌﾞﾚｱｰｼﾞｬの髪！」
-                ﾌｨｰﾘｬ「へー！！！！！！！！……」
-                
-                「ﾌｨｰﾘｬ？お鍋持ってどうするの？」
-                「こ、こっち見ないで…？」
-                """
-            }
-            register(item("dish"), fairy("cake")) {
-                """
-                【MFA-46805554：クリームまみれ】
-                N-111615「そこに乗っちゃだめだよ！」
-                （…？）
-                
-                （…………）
-                N-111615「もう！」
-                
-                N-111615「……」
-                
-                N-111615「……そこが好きなの？」
-                """
-            }
-            register(ore("mirageFairy2019TwinkleStone")) {
-                """
-                【MFA-64897357：蛍】
-                ｿﾃﾞｨｱ「ほら」
-                
-                「綺麗だな…」
-                「虫みたいだ」
-                
-                ｿﾃﾞｨｱ「……ふふ、意外」
-                「…えっ？」
-                
-                ｿﾃﾞｨｱ「星みたいって言うかなって」
-                """
+                override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {
+                    if (canTranslate(mfaPage.unlocalizedContent)) {
+                        translateToLocal(mfaPage.unlocalizedContent).split("\\n").forEachIndexed { i, it ->
+                            minecraft.fontRenderer.drawString(it, 4, 21 + 10 * i, 0x444444)
+                        }
+                    } else {
+                        // TODO translate
+                        minecraft.fontRenderer.drawString("The fairy laboratory failed", 4, 21 + 10 * 0, 0x444444)
+                        minecraft.fontRenderer.drawString("to decipher this article.", 4, 21 + 10 * 1, 0x444444)
+                    }
+                }
             }
         }, uid)
     }
