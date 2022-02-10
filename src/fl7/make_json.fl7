@@ -492,6 +492,4 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 
 REQUIRE("src/fl7/recipe.fl7");
 
-REQUIRE("src/fl7/lang.fl7");
-
 "[main] OK" => OUT;

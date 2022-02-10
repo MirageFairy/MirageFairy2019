@@ -36,6 +36,7 @@ typealias Module = ModInitializer.() -> Unit
 
 class ModInitializer {
     val onMakeResource = EventRegistry1<ResourceMaker>()
+    val onMakeLang = EventRegistry1<LangMaker>()
 
     val onConstruction = EventRegistry1<FMLConstructionEvent>()
     val onInstantiation = EventRegistry0()

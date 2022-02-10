@@ -161,11 +161,8 @@ mirageFairy2019.fairy.nether_portal.name=Nethere Portalia
 mirageFairy2019.fairy.mirage.name=Miragia
 mirageFairy2019.fairy.coal_dust.name=Coale Dustia
 mirageFairy2019.fairy.diamond_dust.name=Diamonde Dustia
-
 tile.fairyLog.name=Fairy Log
-
 item.mirageFlowerSeeds.name=Mirage Flower Seeds
-
 item.manaRodShine.name=Shine Mana Rod
 item.manaRodShine.poem=
 item.manaRodFire.name=Fire Mana Rod
@@ -198,12 +195,10 @@ item.mirageFairyLeather.name=Fairy Leather
 item.mirageFairyLeather.poem=
 item.fairyWoodResin.name=Fairy Wood Resin
 item.fairyWoodResin.poem=
-
 item.mirageFairyPot.name=Fairy Pot
 item.mirageFairyPotMiragiumWater.name=Miragium Water Pot
 item.mirageFairyPotMirageFlowerExtract.name=Mirage Extract Pot
 item.mirageFairyPotMirageFlowerOil.name=Mirage Oil Pot
-
 item.mirageFairyR1.name=Fairy
 item.mirageFairyR1.format=%s
 item.mirageFairyR2.name=Fairy II
@@ -218,14 +213,11 @@ item.mirageFairyR6.name=Fairy VI
 item.mirageFairyR6.format=%s VI
 item.mirageFairyR7.name=Fairy VII
 item.mirageFairyR7.format=%s VII
-
 item.fairyCrystal.name=Fairy Crystal
 item.fairyCrystalChristmas.name=Christmas Fairy Crystal
 item.fairyCrystalPure.name=Pure Fairy Crystal
-
 item.fairyStick.name=Fairy Stick
 item.fairyStick.poem=
-
 item.fairyWandCrafting.name=Crafting Wand
 item.fairyWandCrafting.poem=
 item.fairyWandCrafting2.name=Crafting Wand II
@@ -272,7 +264,6 @@ item.fairyWandDistortion.name=Distortion Wand
 item.fairyWandDistortion.poem=
 item.fairyWandFusion.name=Fusion Wand
 item.fairyWandFusion.poem=
-
 item.miragiumSword.name=Miragium Sword
 item.miragiumSword.poem=
 item.fairySword.name=Fairy Sword
@@ -309,7 +300,6 @@ item.crystalSword.poem=
 item.ryugyoDrill.name=Ryugyo Drill
 item.ryugyoDrill.poem=Design Contest Work
 item.ryugyoDrill.author=Yoshinon
-
 item.fertilizer.name=Fertilizer
 tile.twinkleStoneWhite.name=White Twinkle Stone
 tile.twinkleStoneOrange.name=Orange Twinkle Stone
@@ -327,7 +317,6 @@ tile.twinkleStoneBrown.name=Brown Twinkle Stone
 tile.twinkleStoneGreen.name=Green Twinkle Stone
 tile.twinkleStoneRed.name=Red Twinkle Stone
 tile.twinkleStoneBlack.name=Black Twinkle Stone
-
 tile.oreApatite.name=Apatite Ore
 tile.blockApatite.name=Block of Apatite
 item.gemApatite.name=Apatite
@@ -375,36 +364,26 @@ tile.blockDustMiragium.name=Block of Miragium Dust
 item.plateMiragium.name=Miragium Plate
 item.dustCoal.name=Coal Dust
 item.dustCharcoal.name=Charcoal Dust
-
 item.spheres.name=Sphere
 item.spheres.format=Sphere of %s
-
 item.ingotLilagium.name=Lilagium Ingot
-
 fluid.miragium_water=Miragium Water
 tile.miragiumWater.name=Miragium Water
 fluid.mirage_flower_extract=Mirage Extract
 tile.mirageFlowerExtract.name=Mirage Extract
 fluid.mirage_flower_oil=Mirage Oil
 tile.mirageFlowerOil.name=Mirage Oil
-
 tile.dish.name=Dish
-
 tile.fairyCrystalGlass.name=Fairy Crystal Glass
-
 item.skillBook.name=Skill Book
 item.astronomicalObservationBook.name=Astronomical Observation Note
-
 item.bakedFairy.name=Baked Fairy
 item.bakedFairy.format=Baked %s
-
 tile.fairyCollectionBox.name=Fairy Collection Box
 tile.fairyWoodLog.name=Fairy Wood Log
 tile.fairyBox.name=Fairy Box
 tile.fairyResinTapper.name=Fairy Resin Extractor
-
 tile.chatWebhookTransmitter.name=Chat Webhook Transmitter
-
 item.debugFairyList.name=Debug: Fairy List
 item.debugOreNameList.name=Debug: Ore Name List
 item.debugSkillResetUnlock.name=Debug: Skill Reset Unlock
@@ -435,29 +414,22 @@ mirageFairy2019.magic.status.lightning.name=Lightning
 itemGroup.mirageFairy2019=MirageFairy2019
 itemGroup.mirageFairy2019.fairy=MirageFairy2019: Fairy
 itemGroup.mirageFairy2019.bakedFairy=MirageFairy2019: Baked Fairy
-
 advancements.miragefairy2019.fairy_weapon.root.title=Fairy Weapon
 advancements.miragefairy2019.fairy_weapon.root.description=Fairy Weapon
 advancements.miragefairy2019.fairy_weapon.all.description=Get a specific item
-
 mirageFairy2019.formula.source.cost.name=Cost
-
 miragefairy2019.placeItem=Place Item
-
-
 miragefairy2019.gui.duration.days=days
 miragefairy2019.gui.duration.hours=hours
 miragefairy2019.gui.duration.minutes=minutes
 miragefairy2019.gui.duration.seconds=seconds
 miragefairy2019.gui.duration.milliSeconds=milli seconds
-
 miragefairy2019.gui.playerAura.title=Player Aura
 miragefairy2019.gui.playerAura.poem.step1=It's an appetizing scent.
 miragefairy2019.gui.playerAura.poem.step2=It's a familiar taste.
 miragefairy2019.gui.playerAura.poem.step3=I'm getting tired of this taste...
 miragefairy2019.gui.playerAura.poem.step4=The nutrition is biased...
 miragefairy2019.gui.playerAura.poem.step5=I want to eat something else...
-
 miragefairy2019.gui.astronomicalObservation.title=Astronomical Observation Quest
 miragefairy2019.gui.astronomicalObservation.daily=Daily
 miragefairy2019.gui.astronomicalObservation.weekly=Weekly
@@ -471,7 +443,6 @@ miragefairy2019.gui.astronomicalObservation.message.completed=Completed!
 miragefairy2019.gui.astronomicalObservation.message.gainExp=You have earned %s Fairy Master XP!
 miragefairy2019.gui.astronomicalObservation.message.gainLevel=You have earned %s Fairy Master Level!
 miragefairy2019.gui.astronomicalObservation.message.doNothing=You got nothing...
-
 miragefairy2019.gui.magic.message.rightClick=Right click to use magic
 mirageFairy2019.mana.shine.name=Shine
 mirageFairy2019.mana.fire.name=Fire

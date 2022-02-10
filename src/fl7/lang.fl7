@@ -1,9 +1,0 @@
-@STRICT;
-
-d : "src/lang" | lang : LS(d) | (
-	(
-		LS("$d/$lang") => SORT | READ("$d/$lang/$_")
-	) => WRITE << "src/main/resources/assets/miragefairy2019/lang/$lang.lang";
-);
-
-"[lang] OK" => OUT;

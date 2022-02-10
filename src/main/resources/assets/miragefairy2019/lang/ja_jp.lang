@@ -161,11 +161,8 @@ mirageFairy2019.fairy.nether_portal.name=地獄門精ネテーレポルターリ
 mirageFairy2019.fairy.mirage.name=妖精ミラージャ
 mirageFairy2019.fairy.coal_dust.name=石炭粉精ツォアーレドゥスチャ
 mirageFairy2019.fairy.diamond_dust.name=金剛石粉精ディアモンデドゥスチャ
-
 tile.fairyLog.name=妖精の樹洞
-
 item.mirageFlowerSeeds.name=ミラージュフラワーの種
-
 item.manaRodShine.name=月長石の魔導芯棒
 item.manaRodShine.poem=真実の心を伝える
 item.manaRodFire.name=辰砂の魔導芯棒
@@ -198,12 +195,10 @@ item.mirageFairyLeather.name=妖精の革
 item.mirageFairyLeather.poem=エーテルグラウンド
 item.fairyWoodResin.name=妖精の木の樹液
 item.fairyWoodResin.poem=くちどけまろやか
-
 item.mirageFairyPot.name=妖精のポット
 item.mirageFairyPotMiragiumWater.name=ミラジウムウォーター入りポット
 item.mirageFairyPotMirageFlowerExtract.name=ミラージュエキス入りポット
 item.mirageFairyPotMirageFlowerOil.name=ミラージュオイル入りポット
-
 item.mirageFairyR1.name=ミラージュ妖精
 item.mirageFairyR1.format=%s
 item.mirageFairyR2.name=ミラージュ妖精 II
@@ -218,14 +213,11 @@ item.mirageFairyR6.name=ミラージュ妖精 VI
 item.mirageFairyR6.format=%s VI
 item.mirageFairyR7.name=ミラージュ妖精 VII
 item.mirageFairyR7.format=%s VII
-
 item.fairyCrystal.name=フェアリークリスタル
 item.fairyCrystalChristmas.name=聖夜のフェアリークリスタル
 item.fairyCrystalPure.name=高純度フェアリークリスタル
-
 item.fairyStick.name=妖精のステッキ
 item.fairyStick.poem=頼みごとをしてみよう
-
 item.fairyWandCrafting.name=技巧のワンド
 item.fairyWandCrafting.poem=スフィアから聞こえる、妖精の声
 item.fairyWandCrafting2.name=技巧のワンド II
@@ -272,7 +264,6 @@ item.fairyWandDistortion.name=歪曲のワンド
 item.fairyWandDistortion.poem=空間がねじれている
 item.fairyWandFusion.name=融合のワンド
 item.fairyWandFusion.poem=4次元折り紙
-
 item.miragiumSword.name=ミラジウムの剣
 item.miragiumSword.poem=その刃で何を切る？
 item.fairySword.name=妖精剣
@@ -309,7 +300,6 @@ item.crystalSword.poem=妖精はこれをおやつにするという
 item.ryugyoDrill.name=龍魚ドリル
 item.ryugyoDrill.poem=デザインコンテスト武器
 item.ryugyoDrill.author=よしのん
-
 item.fertilizer.name=肥料
 tile.twinkleStoneWhite.name=白色のトゥインクルストーン
 tile.twinkleStoneOrange.name=橙色のトゥインクルストーン
@@ -327,7 +317,6 @@ tile.twinkleStoneBrown.name=茶色のトゥインクルストーン
 tile.twinkleStoneGreen.name=緑色のトゥインクルストーン
 tile.twinkleStoneRed.name=赤色のトゥインクルストーン
 tile.twinkleStoneBlack.name=黒色のトゥインクルストーン
-
 tile.oreApatite.name=燐灰石鉱石
 tile.blockApatite.name=燐灰石ブロック
 item.gemApatite.name=燐灰石
@@ -375,41 +364,30 @@ tile.blockDustMiragium.name=ミラジウムの粉ブロック
 item.plateMiragium.name=ミラジウムの板
 item.dustCoal.name=石炭の粉
 item.dustCharcoal.name=木炭の粉
-
 item.spheres.name=スフィア
 item.spheres.format=%sのスフィア
-
 item.ingotLilagium.name=リラジウムインゴット
-
 fluid.miragium_water=ミラジウムウォーター
 tile.miragiumWater.name=ミラジウムウォーター
 fluid.mirage_flower_extract=ミラージュエキス
 tile.mirageFlowerExtract.name=ミラージュエキス
 fluid.mirage_flower_oil=ミラージュオイル
 tile.mirageFlowerOil.name=ミラージュオイル
-
 tile.dish.name=皿
-
 tile.fairyCrystalGlass.name=フェアリークリスタルガラス
-
 item.skillBook.name=スキルブック
 item.astronomicalObservationBook.name=天体観測ノート
-
 item.bakedFairy.name=焼き妖精
 item.bakedFairy.format=焼き%s
-
 tile.fairyCollectionBox.name=妖精蒐集箱
 tile.fairyWoodLog.name=妖精の原木
 tile.fairyBox.name=妖精の家
 tile.fairyResinTapper.name=樹液取り職人スプルーツァの家
-
 tile.chatWebhookTransmitter.name=天耳通の祠
-
 item.debugFairyList.name=デバッグ：妖精一覧
 item.debugOreNameList.name=デバッグ：鉱石辞書名一覧
 item.debugSkillResetUnlock.name=デバッグ：スキルリセット解禁
 item.debugPlayerAuraReset.name=デバッグ：プレイヤーオーラリセット
-
 item.forge.bucketFilled.name=%s入りバケツ
 mirageFairy2019.magic.status.strength.name=効果値
 mirageFairy2019.magic.status.extent.name=拡散力
@@ -437,29 +415,22 @@ mirageFairy2019.magic.status.lightning.name=雷属性
 itemGroup.mirageFairy2019=MirageFairy2019
 itemGroup.mirageFairy2019.fairy=MirageFairy2019：妖精
 itemGroup.mirageFairy2019.bakedFairy=MirageFairy2019：焼き妖精
-
 advancements.miragefairy2019.fairy_weapon.root.title=妖精武器
 advancements.miragefairy2019.fairy_weapon.root.description=妖精武器
 advancements.miragefairy2019.fairy_weapon.all.description=所定のアイテムを入手する
-
 mirageFairy2019.formula.source.cost.name=コスト
-
 miragefairy2019.placeItem=アイテムを置く
-
-
 miragefairy2019.gui.duration.days=日
 miragefairy2019.gui.duration.hours=時間
 miragefairy2019.gui.duration.minutes=分
 miragefairy2019.gui.duration.seconds=秒
 miragefairy2019.gui.duration.milliSeconds=ミリ秒
-
 miragefairy2019.gui.playerAura.title=プレイヤーオーラ
 miragefairy2019.gui.playerAura.poem.step1=食欲をそそられる香りだ
 miragefairy2019.gui.playerAura.poem.step2=食べ慣れた味だ
 miragefairy2019.gui.playerAura.poem.step3=この味にも飽きてきたな…
 miragefairy2019.gui.playerAura.poem.step4=栄養が偏り気味だ…
 miragefairy2019.gui.playerAura.poem.step5=そろそろ他のものが食べたい…
-
 miragefairy2019.gui.astronomicalObservation.title=天体観測クエスト
 miragefairy2019.gui.astronomicalObservation.daily=日間
 miragefairy2019.gui.astronomicalObservation.weekly=週間
@@ -473,7 +444,6 @@ miragefairy2019.gui.astronomicalObservation.message.completed=完了！
 miragefairy2019.gui.astronomicalObservation.message.gainExp=%s のフェアリーマスター経験値を獲得しました！
 miragefairy2019.gui.astronomicalObservation.message.gainLevel=フェアリーマスターレベルが %s 上昇しました！
 miragefairy2019.gui.astronomicalObservation.message.doNothing=特筆すべき変化は見られなかった…
-
 miragefairy2019.gui.magic.message.rightClick=右クリックで魔法を発動
 mirageFairy2019.mana.shine.name=光
 mirageFairy2019.mana.fire.name=火
