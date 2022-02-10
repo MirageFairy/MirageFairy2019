@@ -1,6 +1,7 @@
 package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.hex
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.setCreativeTab
@@ -34,18 +35,19 @@ import java.io.File
 object DebugItems {
     val module: Module = {
 
-        fun r(itemCreator: () -> Item, registryName: String, unlocalizedName: String) {
+        fun r(itemCreator: () -> Item, registryName: String, unlocalizedName: String, english: String, japanese: String) {
             item({ itemCreator() }, registryName) {
                 setUnlocalizedName(unlocalizedName)
                 setCreativeTab { ApiMain.creativeTab }
                 setCustomModelResourceLocation(model = ResourceLocation("book"))
             }
+            onMakeLang { enJa("item.$unlocalizedName.name", english, japanese) }
         }
 
-        r({ ItemDebugFairyList() }, "debug_fairy_list", "debugFairyList")
-        r({ ItemDebugOreNameList() }, "debug_ore_name_list", "debugOreNameList")
-        r({ ItemDebugSkillResetUnlock() }, "debug_skill_reset_unlock", "debugSkillResetUnlock")
-        r({ ItemDebugPlayerAuraReset() }, "debug_player_aura_reset", "debugPlayerAuraReset")
+        r({ ItemDebugFairyList() }, "debug_fairy_list", "debugFairyList", "Debug: Fairy List", "デバッグ：妖精一覧")
+        r({ ItemDebugOreNameList() }, "debug_ore_name_list", "debugOreNameList", "Debug: Ore Name List", "デバッグ：鉱石辞書名一覧")
+        r({ ItemDebugSkillResetUnlock() }, "debug_skill_reset_unlock", "debugSkillResetUnlock", "Debug: Skill Reset Unlock", "デバッグ：スキルリセット解禁")
+        r({ ItemDebugPlayerAuraReset() }, "debug_player_aura_reset", "debugPlayerAuraReset", "Debug: Player Aura Reset", "デバッグ：プレイヤーオーラリセット")
 
     }
 }

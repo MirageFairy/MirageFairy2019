@@ -20,3 +20,7 @@ class LangMaker(val langDir: File) {
 
 fun LangMaker.en(key: String, value: String) = registerTranslation("en_us", key, value)
 fun LangMaker.ja(key: String, value: String) = registerTranslation("ja_jp", key, value)
+fun LangMaker.enJa(key: String, english: String, japanese: String) {
+    en(key, english)
+    ja(key, japanese)
+}
