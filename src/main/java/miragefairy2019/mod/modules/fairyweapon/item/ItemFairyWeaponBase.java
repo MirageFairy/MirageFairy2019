@@ -8,12 +8,9 @@ import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon;
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
-import miragefairy2019.mod3.artifacts.SphereKt;
 import miragefairy2019.mod3.erg.ErgKt;
-import miragefairy2019.mod3.erg.api.EnumErgType;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
-import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
@@ -29,12 +26,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -47,18 +42,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static miragefairy2019.libkt.MinecraftUtilsKt.canTranslate;
 import static miragefairy2019.libkt.MinecraftUtilsKt.translateToLocal;
@@ -70,7 +60,7 @@ import static net.minecraft.util.text.TextFormatting.RED;
 import static net.minecraft.util.text.TextFormatting.WHITE;
 import static net.minecraft.util.text.TextFormatting.YELLOW;
 
-public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IManualRepairableItem, IItemFairyWeapon {
+public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IItemFairyWeapon {
 
     public ItemFairyWeaponBase() {
         if (ApiMain.side.isClient()) {
@@ -166,7 +156,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
             TextComponentString a = new TextComponentString("Sphere Replacement: ");
             a.setStyle(new Style().setColor(YELLOW));
 
-            ISuppliterator.ofIterable(manualRepairErgs.entrySet())
+            ISuppliterator.ofIterable(getManualRepairErgs().entrySet())
                 .map(e -> ISuppliterator.of(
                     ErgKt.getDisplayName(e.getKey()),
                     new TextComponentString(e.getValue() == 1 ? "" : "×" + e.getValue())
@@ -441,44 +431,6 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IMan
             ((color >> 16) & 0xFF) / 255.0,
             ((color >> 8) & 0xFF) / 255.0,
             ((color >> 0) & 0xFF) / 255.0);
-    }
-
-    //////////////////// スフィア交換関連
-
-    private Map<EnumErgType, Integer> manualRepairErgs = new HashMap<>();
-
-    public Map<EnumErgType, Integer> getManualRepairErgs() {
-        return manualRepairErgs;
-    }
-
-    public void addManualRepairErg(EnumErgType ergType) {
-        addManualRepairErg(ergType, 1);
-    }
-
-    public void addManualRepairErg(EnumErgType ergType, int amount) {
-        manualRepairErgs.compute(ergType, (ergType2, amountNow) -> (amountNow != null ? amountNow : 0) + amount);
-    }
-
-    @Override
-    public boolean canManualRepair(ItemStack itemStack) {
-        return true;
-    }
-
-    @Override
-    public NonNullList<Ingredient> getManualRepairSubstitute(ItemStack itemStack) {
-        return manualRepairErgs.entrySet().stream()
-            .filter(e -> e.getValue() > 0)
-            .sorted(Map.Entry.comparingByKey())
-            .flatMap(e -> IntStream.range(0, e.getValue())
-                .mapToObj(i -> new OreIngredient(SphereKt.getOreName(SphereKt.getSphereType(e.getKey())))))
-            .collect(Collectors.toCollection(NonNullList::create));
-    }
-
-    @Override
-    public ItemStack getManualRepairedItem(ItemStack itemStack) {
-        itemStack = itemStack.copy();
-        itemStack.setItemDamage(0);
-        return itemStack;
     }
 
     //////////////////// 妖精魔法ステータス関連

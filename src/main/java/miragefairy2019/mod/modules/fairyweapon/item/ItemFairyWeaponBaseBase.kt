@@ -3,18 +3,26 @@ package miragefairy2019.mod.modules.fairyweapon.item
 import miragefairy2019.api.IFairyCombiningHandler
 import miragefairy2019.api.IFairyCombiningItem
 import miragefairy2019.libkt.drop
+import miragefairy2019.libkt.oreIngredient
+import miragefairy2019.libkt.unit
 import miragefairy2019.mod.api.fairy.IItemFairy
+import miragefairy2019.mod3.artifacts.getSphereType
+import miragefairy2019.mod3.artifacts.oreName
+import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
 import net.minecraft.block.state.IBlockState
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.crafting.Ingredient
+import net.minecraft.util.NonNullList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item() {
+open class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRepairableItem {
     var tier = 0
 
     init {
@@ -81,6 +89,21 @@ open class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item() {
 
     override fun hasContainerItem(itemStack: ItemStack) = !getContainerItem(itemStack).isEmpty
     override fun getContainerItem(itemStack: ItemStack) = ItemFairyWeaponBase.getCombinedFairy(itemStack)
+
+
+    // 手修理
+    private val manualRepairErgs = mutableMapOf<EnumErgType, Int>()
+    fun getManualRepairErgs() = manualRepairErgs
+    fun addManualRepairErg(ergType: EnumErgType) = addManualRepairErg(ergType, 1)
+    fun addManualRepairErg(ergType: EnumErgType, amount: Int) = unit { manualRepairErgs.compute(ergType) { _, amountNow -> (amountNow ?: 0) + amount } }
+    override fun canManualRepair(itemStack: ItemStack) = true
+    override fun getManualRepairSubstitute(itemStack: ItemStack): NonNullList<Ingredient> = manualRepairErgs.entries
+        .filter { it.value > 0 }
+        .sortedBy { it.key }
+        .flatMap { (0 until it.value).map { i -> getSphereType(it.key).oreName.oreIngredient } }
+        .toCollection(NonNullList.create())
+
+    override fun getManualRepairedItem(itemStack: ItemStack): ItemStack = itemStack.copy().also { it.itemDamage = 0 }
 
 
     companion object {
