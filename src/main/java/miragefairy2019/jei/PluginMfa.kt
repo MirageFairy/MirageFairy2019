@@ -116,7 +116,7 @@ class PluginMfa : IModPlugin {
                 ｻﾙﾓｰﾆｬ「本当に店ごと食べるんだ」
                 """
             }
-            register(fairy("magenta_glazed_terracotta"), fairy("carrot"), fairy("dispenser"), fairy("lilac")) {
+            register(fairy("magentaGlazedTerracotta"), fairy("carrot"), fairy("dispenser"), fairy("lilac")) {
                 """
                 【MFA-34681526：美術展にて】
                 ﾂｧｯﾛｰﾁｬ「大変！ﾃﾞｨｽﾍﾟﾝｾｰﾘｬが！」
@@ -158,7 +158,7 @@ class PluginMfa : IModPlugin {
                 （Σ）
                 """
             }
-            register(fairy("bread"), fairy("axe"), fairy("poisonous_potato"), fairy("fire")) {
+            register(fairy("bread"), fairy("axe"), fairy("poisonousPotato"), fairy("fire")) {
                 """
                 【MFA-43685165：闇鍋ﾊﾟｰﾃｨｰ】
                 「今日は揚げ物だよ！召し上がれ！」
