@@ -7,6 +7,8 @@ import java.util.Random
 @Suppress("unused")
 fun Any?.toUnit() = Unit
 
+inline fun unit(block: () -> Unit) = block()
+
 val <T : Any> Optional<T>.orNull: T? get() = orElse(null)
 
 val File.existsOrNull get() = if (exists()) this else null
