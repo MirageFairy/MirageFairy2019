@@ -1,5 +1,6 @@
 package miragefairy2019.libkt
 
+import mirrg.kotlin.orNull
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextComponentString
 import net.minecraft.util.text.TextComponentTranslation
@@ -96,6 +97,8 @@ class TextComponentScope {
     operator fun File.not() = (!name).onHover(HoverEvent(HoverEvent.Action.SHOW_TEXT, textComponent { !absoluteFile.canonicalPath })).onClick(ClickEvent(ClickEvent.Action.OPEN_FILE, absoluteFile.canonicalPath)).underline
     fun format(format: String, vararg args: Any?) = !String.format(format, *args)
     fun translate(translationKey: String, vararg args: Any?) = !TextComponentTranslation(translationKey, *args)
+
+    fun List<List<ITextComponent>>.concat(separator: List<ITextComponent>) = orNull?.reduce { a, b -> a + separator + b } ?: empty
 }
 
 fun textComponent(textComponents: List<ITextComponent>): ITextComponent = textComponents.fold(TextComponentString("") as ITextComponent) { a, b -> a.appendSibling(b) }
