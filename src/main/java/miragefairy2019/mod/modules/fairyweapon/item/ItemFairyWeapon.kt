@@ -92,28 +92,28 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
 
         if (canTranslate("$unlocalizedName.author")) { // 著者
             val string = translateToLocal("$unlocalizedName.author")
-            if (string.isNotBlank()) tooltip += formattedText { (!"Author: $string").lightPurple } // TODO translate
+            if (string.isNotBlank()) tooltip += formattedText { (!"作者: $string").lightPurple } // TODO translate Author
         }
 
-        tooltip += formattedText { (!"Tier $tier").aqua } // tier
+        tooltip += formattedText { (!"Tier $tier").aqua } // tier // TODO translate
 
         addInformationFeatures(itemStack, world, tooltip, flag) // 機能
 
-        tooltip += formattedText { (!"Durability: ${(getMaxDamage(itemStack) - getDamage(itemStack)).coerceAtLeast(0)} / ${getMaxDamage(itemStack)}").green } // 耐久値
+        tooltip += formattedText { (!"耐久値: ${(getMaxDamage(itemStack) - getDamage(itemStack)).coerceAtLeast(0)} / ${getMaxDamage(itemStack)}").green } // 耐久値 TODO translate
 
-        FairyWeaponUtils.getCombinedFairy(itemStack).orNull?.let { tooltip += formattedText { (!"Combined: ${it.displayName}").aqua } } // 搭乗中の妖精
+        FairyWeaponUtils.getCombinedFairy(itemStack).orNull?.let { tooltip += formattedText { (!"搭乗中: ${it.displayName}").aqua } } // 搭乗中の妖精 // TODO translate
 
         // 手入れ
         if (canManualRepair(itemStack)) {
             tooltip += formattedText {
                 val value = getManualRepairErgs().entries.map { !it.key.displayName + (if (it.value == 1) !"" else !"x${it.value}") }.concat(!", ")
-                (!"Sphere Replacement: " + value).yellow // TODO translate
+                (!"手入れ用スフィア: " + value).yellow // TODO translate Manual Repair
             }
         }
 
         // 妖精魔法ステータス
         val fairy = Minecraft.getMinecraft().player?.let { FairyWeaponUtils.findFairy(itemStack, it).orNull?.let { t -> Pair(t.x!!, t.y!!) } } ?: Pair(EMPTY_ITEM_STACK, ApiFairy.empty()!!)
-        tooltip += formattedText { (!"Magic with " + (if (fairy.first.isEmpty) !"-" else !fairy.first.displayName).white).blue } // TODO translate
+        tooltip += formattedText { (!"パートナー: " + (if (fairy.first.isEmpty) !"-" else !fairy.first.displayName).white).blue } // TODO translate
         addInformationFairyWeapon(itemStack, fairy.first, fairy.second, world, tooltip, flag)
 
     }

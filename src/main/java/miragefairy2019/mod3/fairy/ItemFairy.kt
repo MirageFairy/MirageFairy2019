@@ -58,7 +58,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
         // 番号　MOD名
         if (flag.isAdvanced) {
             tooltip {
-                text("No: ${variant.id} (${variant.type.motif?.resourceDomain ?: "unknown"})").color(GREEN)
+                text("No: ${variant.id} (${variant.type.motif?.resourceDomain ?: "unknown"})").color(GREEN) // TODO translate
             }
         }
 
@@ -75,21 +75,21 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
                 else -> LIGHT_PURPLE
             }
 
-            text("Motif: ")
+            text("モチーフ: ") // TODO translate
             text(UtilsString.repeat("★", variant.rare)).color(GOLD)
             if (flag.isAdvanced) {
                 text(UtilsString.repeat("★", variant.rank - 1)).color(getRankColor(variant))
             } else {
                 text(UtilsString.repeat("★", variant.rank - 1)).color(GOLD)
             }
-            if (flag.isAdvanced) text(" Rare.${variant.rare}").color(GOLD)
-            if (flag.isAdvanced) text(" Rank.${variant.rank}").color(getRankColor(variant))
+            if (flag.isAdvanced) text(" レア度.${variant.rare}").color(GOLD) // TODO translate
+            if (flag.isAdvanced) text(" ランク.${variant.rank}").color(getRankColor(variant)) // TODO translate
             text(" ${variant.type.motif?.resourcePath ?: "unknown"}").color(WHITE)
         }
 
         // マナ
         tooltip {
-            text("Mana: ").color(AQUA)
+            text("マナ: ").color(AQUA) // TODO translate
         }
         if (flag.isAdvanced) {
             fun f(manaType: EnumManaType) = buildText { format("%s:%.3f", manaType.displayName.unformattedText, variant.type.manaSet.getMana(manaType)).color(manaType.textColor) }
@@ -136,9 +136,9 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
         // コスト
         tooltip {
             if (flag.isAdvanced) {
-                format("Cost: %.3f", variant.type.cost).color(DARK_PURPLE)
+                format("コスト: %.3f", variant.type.cost).color(DARK_PURPLE) // TODO translate
             } else {
-                format("Cost: %.0f", variant.type.cost).color(DARK_PURPLE)
+                format("コスト: %.0f", variant.type.cost).color(DARK_PURPLE) // TODO translate
             }
         }
 
@@ -146,7 +146,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
         fun <T> Iterable<T>.sandwich(separator: T) = mapIndexed { i, it -> if (i == 0) listOf(it) else listOf(separator, it) }.flatten()
         tooltip {
             text {
-                text("Erg: ")
+                text("エルグ: ") // TODO translate
                 variant.type.ergSet.entries
                     .filter { formatInt(it.power) >= 10 }
                     .sortedByDescending { it.power }
@@ -167,7 +167,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
                 val item = itemStackFairyWeapon.item as? IItemFairyWeapon ?: return
                 tooltip {
                     text {
-                        text("Magic of ")
+                        text("妖精武器: ") // TODO translate
                         text(TextComponentString(itemStackFairyWeapon.displayName)).color(WHITE)
                     }.color(BLUE)
                 }

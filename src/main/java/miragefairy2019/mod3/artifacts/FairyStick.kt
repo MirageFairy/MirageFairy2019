@@ -105,7 +105,7 @@ class ItemFairyStick : Item() {
         }
 
         // 機能
-        tooltip += formattedText { (!"Right Click: World Craft").red } // TODO translate
+        tooltip += formattedText { (!"右クリックでフェアリーステッキクラフト").red } // TODO translate
     }
 
 

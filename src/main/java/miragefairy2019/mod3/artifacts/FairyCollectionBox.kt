@@ -291,7 +291,7 @@ class GuiFairyCollectionBox(val container: ContainerFairyCollectionBox) : GuiCon
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         var yi = 7
         fontRenderer.drawString(container.inventoryTileEntity.displayName.unformattedText, yi + 1, yi - 1, 0x404040)
-        fontRenderer.drawStringRightAligned("Grade: ${container.fairyMasterGrade}", xSize - 7 - 1, yi - 1, 0x000088) // TODO translate
+        fontRenderer.drawStringRightAligned("グレード: ${container.fairyMasterGrade}", xSize - 7 - 1, yi - 1, 0x000088) // TODO translate Grade
         yi += 10 + 18 * 5 + 3
         fontRenderer.drawString(container.inventoryPlayer.displayName.unformattedText, 7 + 1, yi - 1, 0x404040)
     }
