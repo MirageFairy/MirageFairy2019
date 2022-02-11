@@ -99,6 +99,7 @@ open class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRepaira
 
 
     // 手修理
+
     private val manualRepairErgs = mutableMapOf<EnumErgType, Int>()
     fun getManualRepairErgs() = manualRepairErgs
     fun addManualRepairErg(ergType: EnumErgType) = addManualRepairErg(ergType, 1)
