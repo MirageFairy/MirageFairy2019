@@ -168,7 +168,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IIte
 
     //
 
-    protected static double getFairyAttribute(String attributeName, ItemStack itemStack) {
+    public static double getFairyAttribute(String attributeName, ItemStack itemStack) {
         if (!itemStack.hasTagCompound()) return 0;
         NBTTagCompound nbt = itemStack.getTagCompound();
         if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) return 0;
@@ -177,7 +177,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IIte
         return fairy.getDouble(attributeName);
     }
 
-    protected static void setFairyAttribute(String attributeName, ItemStack itemStack, double value) {
+    public static void setFairyAttribute(String attributeName, ItemStack itemStack, double value) {
         if (!itemStack.hasTagCompound()) itemStack.setTagCompound(new NBTTagCompound());
         NBTTagCompound nbt = itemStack.getTagCompound();
         if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) nbt.setTag("Fairy", new NBTTagCompound());
@@ -206,7 +206,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IIte
     }
 
     @Nonnull
-    protected static Optional<Tuple<ItemStack, IFairyType>> findFairy(ItemStack itemStack, EntityPlayer player) {
+    public static Optional<Tuple<ItemStack, IFairyType>> findFairy(ItemStack itemStack, EntityPlayer player) {
 
         // 搭乗中の妖精を優先
         {
@@ -221,7 +221,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IIte
     }
 
     @Nonnull
-    protected static Optional<ItemStack> findItemOptional(EntityPlayer player, Predicate<ItemStack> predicate) {
+    public static Optional<ItemStack> findItemOptional(EntityPlayer player, Predicate<ItemStack> predicate) {
         ItemStack itemStack;
 
         itemStack = player.getHeldItem(EnumHand.OFF_HAND);
@@ -241,14 +241,14 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IIte
     }
 
     @Nonnull
-    protected static Optional<IFairyType> getFairy(ItemStack itemStack) {
+    public static Optional<IFairyType> getFairy(ItemStack itemStack) {
         Item item = itemStack.getItem();
         if (!(item instanceof IItemFairy)) return Optional.empty();
         return ((IItemFairy) item).getMirageFairy2019Fairy(itemStack);
     }
 
     @Nonnull
-    protected static Vec3d getSight(EntityPlayer player, double distance) {
+    public static Vec3d getSight(EntityPlayer player, double distance) {
         float rotationPitch = player.rotationPitch;
         float rotationYaw = player.rotationYaw;
         double x = player.posX;
@@ -265,7 +265,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IIte
         return vec2;
     }
 
-    protected static boolean breakBlock(World world, EntityPlayer player, EnumFacing facing, ItemStack itemStack, BlockPos blockPos, int fortune, boolean collection) {
+    public static boolean breakBlock(World world, EntityPlayer player, EnumFacing facing, ItemStack itemStack, BlockPos blockPos, int fortune, boolean collection) {
         if (!world.isBlockModifiable(player, blockPos)) return false;
         if (!player.canPlayerEdit(blockPos, facing, itemStack)) return false;
 
@@ -284,12 +284,12 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IIte
     }
 
     @Nullable
-    protected static RayTraceResult rayTrace(World world, EntityPlayer player, boolean useLiquids, double additionalReach) {
+    public static RayTraceResult rayTrace(World world, EntityPlayer player, boolean useLiquids, double additionalReach) {
         return rayTrace(world, player, useLiquids, additionalReach, Entity.class, e -> true);
     }
 
     @Nullable
-    protected static <E extends Entity> RayTraceResult rayTrace(
+    public static <E extends Entity> RayTraceResult rayTrace(
         World world,
         EntityPlayer player,
         boolean useLiquids,
@@ -359,7 +359,7 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IIte
         }
     }
 
-    protected static void spawnParticle(World world, Vec3d sight, int color) {
+    public static void spawnParticle(World world, Vec3d sight, int color) {
         world.spawnParticle(
             EnumParticleTypes.SPELL_MOB,
             sight.x,
