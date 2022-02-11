@@ -4,6 +4,7 @@ import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.ja
 import miragefairy2019.mod.ModMirageFairy2019
+import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreIngredient
@@ -24,7 +25,7 @@ object Mfa {
 
         fun ore(oreName: String): () -> List<ItemStack> = { OreIngredient(oreName).matchingStacks.toList() }
         fun item(registerName: String): () -> List<ItemStack> = { listOf(Item.getByNameOrId("${ModMirageFairy2019.MODID}:$registerName")!!.createItemStack()) }
-        fun fairy(type: String) = ore("mirageFairy2019Fairy${type.take(1).toUpperCase() + type.drop(1)}Rank1")
+        fun fairy(type: String) = ore("mirageFairy2019Fairy${type.toUpperCamelCase()}Rank1")
 
         register("00000461", fairy("zombie")) {
             """
@@ -82,7 +83,7 @@ object Mfa {
             ｻﾙﾓｰﾆｬ「本当に店ごと食べるんだ」
             """
         }
-        register("34681526", fairy("magentaGlazedTerracotta"), fairy("carrot"), fairy("dispenser"), fairy("lilac")) {
+        register("34681526", fairy("magenta_glazed_terracotta"), fairy("carrot"), fairy("dispenser"), fairy("lilac")) {
             """
             【MFA-34681526：美術展にて】
             ﾂｧｯﾛｰﾁｬ「大変！ﾃﾞｨｽﾍﾟﾝｾｰﾘｬが！」
@@ -124,7 +125,7 @@ object Mfa {
             （Σ）
             """
         }
-        register("43685165", fairy("bread"), fairy("axe"), fairy("poisonousPotato"), fairy("fire")) {
+        register("43685165", fairy("bread"), fairy("axe"), fairy("poisonous_potato"), fairy("fire")) {
             """
             【MFA-43685165：闇鍋ﾊﾟｰﾃｨｰ】
             「今日は揚げ物だよ！召し上がれ！」
