@@ -77,11 +77,13 @@ object MirageFlower {
     }
 }
 
-fun getGrowthRate(world: World, blockPos: BlockPos): Double {
-    var rate = 0.04 // 何もしなくても25回に1回の割合で成長する
+fun calculateGrowthRate(world: World, blockPos: BlockPos): List<Pair<String, Double>> {
+    val list = mutableListOf<Pair<String, Double>>()
+
+    list += "Base Rate" to 0.04 // 何もしなくても25回に1回の割合で成長する
 
     // 人工光が当たっているなら加点
-    rate *= world.getLightFor(EnumSkyBlock.BLOCK, blockPos).let {
+    list += "Block Light Bonus" to world.getLightFor(EnumSkyBlock.BLOCK, blockPos).let {
         when {
             it >= 13 -> 1.2
             it >= 9 -> 1.1
@@ -90,7 +92,7 @@ fun getGrowthRate(world: World, blockPos: BlockPos): Double {
     }
 
     // 太陽光が当たっているなら加点
-    rate *= world.getLightFor(EnumSkyBlock.SKY, blockPos).let {
+    list += "Sky Light Bonus" to world.getLightFor(EnumSkyBlock.SKY, blockPos).let {
         when {
             it >= 15 -> 1.1
             it >= 9 -> 1.05
@@ -98,10 +100,10 @@ fun getGrowthRate(world: World, blockPos: BlockPos): Double {
         }
     }
 
-    if (world.canSeeSky(blockPos)) rate *= 1.1 // 空が見えるなら加点
+    if (world.canSeeSky(blockPos)) list += "Sky Bonus" to 1.1 // 空が見えるなら加点
 
     // 地面加点
-    rate *= world.getBlockState(blockPos.down()).let { blockState ->
+    list += "Ground Bonus" to world.getBlockState(blockPos.down()).let { blockState ->
         var bonus = 0.5
 
         // 妖精による判定
@@ -135,7 +137,7 @@ fun getGrowthRate(world: World, blockPos: BlockPos): Double {
     }
 
     // バイオーム加点
-    rate *= world.getBiome(blockPos).let { biome ->
+    list += "Biome Bonus" to world.getBiome(blockPos).let { biome ->
         when {
             BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST) -> 1.3
             BiomeDictionary.hasType(biome, BiomeDictionary.Type.MAGICAL) -> 1.3
@@ -147,8 +149,10 @@ fun getGrowthRate(world: World, blockPos: BlockPos): Double {
         }
     }
 
-    return rate
+    return list
 }
+
+val List<Pair<String, Double>>.growthRate get() = fold(1.0) { a, b -> a * b.second }
 
 fun getGrowthRateInFloor(fairyType: IFairyType) = fairyType.shineEfficiency * fairyType.erg(EnumErgType.CRYSTAL) / 100.0 * 3
 
@@ -193,11 +197,11 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
     override fun updateTick(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random) {
         super.updateTick(worldIn, pos, state, rand)
         if (!worldIn.isAreaLoaded(pos, 1)) return
-        grow(worldIn, pos, state, rand, getGrowthRate(worldIn, pos))
+        grow(worldIn, pos, state, rand, calculateGrowthRate(worldIn, pos).growthRate)
     }
 
     // 骨粉をやると低確率で成長する。
-    override fun grow(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = grow(worldIn, pos, state, rand, getGrowthRate(worldIn, pos))
+    override fun grow(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = grow(worldIn, pos, state, rand, calculateGrowthRate(worldIn, pos).growthRate)
     override fun canGrow(worldIn: World, pos: BlockPos, state: IBlockState, isClient: Boolean) = !isMaxAge(state)
     override fun canUseBonemeal(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = worldIn.rand.nextFloat() < 0.05
 

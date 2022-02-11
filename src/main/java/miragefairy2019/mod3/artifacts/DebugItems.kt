@@ -21,8 +21,9 @@ import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType
 import miragefairy2019.mod3.oreseeddrop.api.OreSeedDropEnvironment
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill
-import miragefairy2019.mod3.worldgen.getGrowthRate
+import miragefairy2019.mod3.worldgen.calculateGrowthRate
 import miragefairy2019.mod3.worldgen.getGrowthRateInFloor
+import miragefairy2019.mod3.worldgen.growthRate
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.mana
@@ -276,7 +277,11 @@ class ItemDebugMirageFlowerGrowthRate : ItemDebug() {
         player.sendStatusMessage(textComponent { !"Pos: ${airBlockPos.x} ${airBlockPos.y} ${airBlockPos.z}" }, false)
         player.sendStatusMessage(textComponent { !"Block: ${world.getBlockState(airBlockPos)}" }, false)
         player.sendStatusMessage(textComponent { !"Floor: ${world.getBlockState(airBlockPos.down())}" }, false)
-        player.sendStatusMessage(textComponent { !((getGrowthRate(world, airBlockPos) * 100) formatAs "%.2f%%") }, false)
+        val result = calculateGrowthRate(world, airBlockPos)
+        player.sendStatusMessage(textComponent { !"Growth Rate: " + !(result.growthRate * 100).f3 + !"%" }, false)
+        result.forEach { (key, value) ->
+            player.sendStatusMessage(textComponent { !"  $key: " + !(value * 100).f3 + !"%" }, false)
+        }
         player.sendStatusMessage(textComponent { !"====================" }, false)
 
         return EnumActionResult.SUCCESS
