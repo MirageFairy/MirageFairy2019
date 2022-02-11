@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class ItemMagicWandLight extends ItemFairyWeaponBase {
+public class ItemMagicWandLight extends ItemFairyWeapon {
 
     protected static class Status {
 

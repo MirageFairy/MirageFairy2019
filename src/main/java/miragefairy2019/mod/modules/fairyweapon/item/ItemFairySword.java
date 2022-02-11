@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemFairySword extends ItemFairyWeaponBase {
+public class ItemFairySword extends ItemFairyWeapon {
 
     public double getAdditionalAttackDamage(ItemStack itemStack) {
         return FairyWeaponUtils.getFairyAttribute("AdditionalAttackDamage", itemStack);

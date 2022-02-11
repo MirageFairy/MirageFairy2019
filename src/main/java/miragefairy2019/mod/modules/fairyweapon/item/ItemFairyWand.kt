@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.RayTraceResult
 import net.minecraft.world.World
 
-open class ItemFairyWand : ItemFairyWeaponBase() {
+open class ItemFairyWand : ItemFairyWeapon() {
     // フェアリーステッキクラフト関係
 
     override fun onItemUse(player: EntityPlayer, worldIn: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {

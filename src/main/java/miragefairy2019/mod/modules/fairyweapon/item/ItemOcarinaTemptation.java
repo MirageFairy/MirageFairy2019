@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
+public class ItemOcarinaTemptation extends ItemFairyWeapon {
 
     protected static class Status {
 

@@ -27,7 +27,7 @@ import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.mul;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.pow;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.val;
 
-public class ItemBellBase extends ItemFairyWeaponBase {
+public class ItemBellBase extends ItemFairyWeapon {
 
     public IMagicStatus<Double> pitch = registerMagicStatus("pitch", formatterPitch(),
         mul(val(1.0), pow(0.5, add(div(cost(), 50), -1))));

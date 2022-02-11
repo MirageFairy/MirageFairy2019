@@ -62,7 +62,7 @@ import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.scale;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.val;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.wind;
 
-public class ItemMagicWandLightning extends ItemFairyWeaponBase {
+public class ItemMagicWandLightning extends ItemFairyWeapon {
 
     public IMagicStatus<Double> damage = registerMagicStatus("damage", formatterDouble1(),
         add(new IFormulaDouble[]{
@@ -105,7 +105,7 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
 
     //
 
-    public MagicExecutor getExecutor(ItemFairyWeaponBase item, World world, ItemStack itemStack, EntityPlayer player) {
+    public MagicExecutor getExecutor(ItemFairyWeapon item, World world, ItemStack itemStack, EntityPlayer player) {
 
         // 妖精取得
         IFairyType fairyType = FairyWeaponUtils.findFairy(itemStack, player).map(t -> t.y).orElseGet(ApiFairy::empty);

@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
+public class ItemMagicWandCollecting extends ItemFairyWeapon {
 
     protected static class Status {
 

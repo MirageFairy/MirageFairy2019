@@ -102,7 +102,7 @@ public class ItemBellChristmas extends ItemBellBase {
 
     //
 
-    public MagicExecutor getExecutor(ItemFairyWeaponBase item, World world, ItemStack itemStack, EntityPlayer player) {
+    public MagicExecutor getExecutor(ItemFairyWeapon item, World world, ItemStack itemStack, EntityPlayer player) {
 
         // 妖精取得
         IFairyType fairyType = FairyWeaponUtils.findFairy(itemStack, player).map(t -> t.y).orElseGet(ApiFairy::empty);

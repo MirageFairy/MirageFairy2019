@@ -50,7 +50,7 @@ import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.shine;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.val;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.wind;
 
-public class ItemMiragiumAxe extends ItemFairyWeaponBase {
+public class ItemMiragiumAxe extends ItemFairyWeapon {
 
     public IMagicStatus<Integer> maxHeight = registerMagicStatus("maxHeight", formatterInteger(),
         round(add(new IFormulaDouble[]{

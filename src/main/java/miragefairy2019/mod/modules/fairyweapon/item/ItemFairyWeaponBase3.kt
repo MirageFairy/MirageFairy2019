@@ -59,7 +59,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 abstract class ItemFairyWeaponBase3(
     val weaponManaType: EnumManaType,
     val mastery: IMastery
-) : ItemFairyWeaponBase() {
+) : ItemFairyWeapon() {
     companion object {
         private const val prefix = "miragefairy2019.gui.magic"
 

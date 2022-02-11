@@ -50,13 +50,13 @@ private fun getDurability(tier: Int) = when (tier) {
     else -> throw IllegalArgumentException("Illegal tier: $tier")
 }
 
-private fun <T : ItemFairyWeaponBase> ModInitializer.fw(
+private fun <T : ItemFairyWeapon> ModInitializer.fw(
     tier: Int,
     creator: () -> T,
     registryName: String,
     unlocalizedName: String,
     oreNameList: List<String>,
-    parent: (() -> () -> ItemFairyWeaponBase)?,
+    parent: (() -> () -> ItemFairyWeapon)?,
     vararg ergTypeSuppliers: () -> EnumErgType
 ) = item(creator, registryName) {
     setUnlocalizedName(unlocalizedName)
@@ -118,18 +118,18 @@ class FairyWeaponLoader(m: ModInitializer) {
     val fairyWandDistortion = m.fw(4, ::ItemFairyWand, "distortion_fairy_wand", "${fw}Distortion", listOf("${fw2}Distortion"), null, { SPACE })
     val fairyWandFusion = m.fw(4, ::ItemFairyWand, "fusion_fairy_wand", "${fw}Fusion", listOf("${fw2}Fusion"), null, { WARP })
 
-    val miragiumSword = m.fw(2, ::ItemFairyWeaponBase, "miragium_sword", "miragiumSword", listOf(), null, { ATTACK }, { SLASH })
+    val miragiumSword = m.fw(2, ::ItemFairyWeapon, "miragium_sword", "miragiumSword", listOf(), null, { ATTACK }, { SLASH })
     val crystalSword = m.fw(3, ::ItemCrystalSword, "crystal_sword", "crystalSword", listOf(), { miragiumSword }, { CRYSTAL })
     val fairySword = m.fw(3, ::ItemFairySword, "fairy_sword", "fairySword", listOf(), { miragiumSword }, { ATTACK })
 
     val miragiumAxe = m.fw(2, ::ItemMiragiumAxe, "miragium_axe", "miragiumAxe", listOf(), null, { SLASH }, { HARVEST })
 
-    val magicWandBase = m.fw(3, ::ItemFairyWeaponBase, "magic_wand_base", "magicWandBase", listOf(), null, { KNOWLEDGE })
+    val magicWandBase = m.fw(3, ::ItemFairyWeapon, "magic_wand_base", "magicWandBase", listOf(), null, { KNOWLEDGE })
     val magicWandLight = m.fw(3, ::ItemMagicWandLight, "light_magic_wand", "magicWandLight", listOf(), { magicWandBase }, { LIGHT })
     val magicWandCollecting = m.fw(3, ::ItemMagicWandCollecting, "collecting_magic_wand", "magicWandCollecting", listOf(), { magicWandBase }, { WARP })
     val magicWandLightning = m.fw(3, ::ItemMagicWandLightning, "lightning_magic_wand", "magicWandLightning", listOf(), { magicWandBase }, { THUNDER }, { ENERGY })
 
-    val ocarinaBase = m.fw(3, ::ItemFairyWeaponBase, "ocarina_base", "ocarinaBase", listOf(), null, { SOUND })
+    val ocarinaBase = m.fw(3, ::ItemFairyWeapon, "ocarina_base", "ocarinaBase", listOf(), null, { SOUND })
     val ocarinaTemptation = m.fw(3, ::ItemOcarinaTemptation, "temptation_ocarina", "ocarinaTemptation", listOf(), { ocarinaBase }, { LIFE })
     val bellBase = m.fw(2, ::ItemBellBase, "bell_base", "bellBase", listOf(), null, { SOUND })
     val bellFlowerPicking = m.fw(2, { ItemBellFlowerPicking(0.0, 0.2) }, "flower_picking_bell", "bellFlowerPicking", listOf(), { bellBase }, { HARVEST })

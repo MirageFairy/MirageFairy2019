@@ -49,9 +49,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.function.Function
 
-open class ItemFairyWeaponBase : ItemFairyWeaponBaseBase()
-
-abstract class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRepairableItem, IItemFairyWeapon {
+open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem, IItemFairyWeapon {
     var tier = 0
 
     init {
@@ -197,7 +195,7 @@ abstract class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRep
     override fun getManualRepairSubstitute(itemStack: ItemStack): NonNullList<Ingredient> = manualRepairErgs.entries
         .filter { it.value > 0 }
         .sortedBy { it.key }
-        .flatMap { (0 until it.value).map { i -> getSphereType(it.key).oreName.oreIngredient } }
+        .flatMap { (key, value) -> (0 until value).map { getSphereType(key).oreName.oreIngredient } }
         .toCollection(NonNullList.create())
 
     override fun getManualRepairedItem(itemStack: ItemStack): ItemStack = itemStack.copy().also { it.itemDamage = 0 }
@@ -218,14 +216,16 @@ class TileEntityItemStackRendererFairyWeapon : TileEntityItemStackRenderer() {
         GlStateManager.disableRescaleNormal()
 
         // 本体描画
-        val bakedModel = Minecraft.getMinecraft().renderItem.getItemModelWithOverrides(itemStack, null, null)
-        if (bakedModel is BakedModelBuiltinWrapper) {
-            GlStateManager.pushMatrix()
-            try {
-                GlStateManager.translate(0.5f, 0.5f, 0.5f)
-                Minecraft.getMinecraft().renderItem.renderItem(itemStack, bakedModel.bakedModel)
-            } finally {
-                GlStateManager.popMatrix()
+        run {
+            val bakedModel = Minecraft.getMinecraft().renderItem.getItemModelWithOverrides(itemStack, null, null)
+            if (bakedModel is BakedModelBuiltinWrapper) {
+                GlStateManager.pushMatrix()
+                try {
+                    GlStateManager.translate(0.5f, 0.5f, 0.5f)
+                    Minecraft.getMinecraft().renderItem.renderItem(itemStack, bakedModel.bakedModel)
+                } finally {
+                    GlStateManager.popMatrix()
+                }
             }
         }
 
