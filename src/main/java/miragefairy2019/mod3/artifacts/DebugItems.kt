@@ -4,6 +4,7 @@ import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.hex
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.lowerCamelCase
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
@@ -38,21 +39,22 @@ import java.io.File
 object DebugItems {
     val module: Module = {
 
-        fun r(itemCreator: () -> Item, registryName: String, unlocalizedName: String, english: String, japanese: String) {
-            item({ itemCreator() }, registryName) {
+        fun r(itemCreator: () -> Item, name: String, english: String, japanese: String) {
+            val unlocalizedName = "debug_$name".lowerCamelCase
+            item({ itemCreator() }, "debug_$name") {
                 setUnlocalizedName(unlocalizedName)
                 setCreativeTab { ApiMain.creativeTab }
                 setCustomModelResourceLocation(model = ResourceLocation("book"))
             }
-            onMakeLang { enJa("item.$unlocalizedName.name", english, japanese) }
+            onMakeLang { enJa("item.$unlocalizedName.name", "Debug: $english", "デバッグ：$japanese") }
         }
 
-        r({ ItemDebugFairyList() }, "debug_fairy_list", "debugFairyList", "Debug: Fairy List", "デバッグ：妖精一覧")
-        r({ ItemDebugOreNameList() }, "debug_ore_name_list", "debugOreNameList", "Debug: Ore Name List", "デバッグ：鉱石辞書名一覧")
-        r({ ItemDebugSkillResetUnlock() }, "debug_skill_reset_unlock", "debugSkillResetUnlock", "Debug: Skill Reset Unlock", "デバッグ：スキルリセット解禁")
-        r({ ItemDebugPlayerAuraReset() }, "debug_player_aura_reset", "debugPlayerAuraReset", "Debug: Player Aura Reset", "デバッグ：プレイヤーオーラリセット")
-        r({ ItemDebugGainFairyMasterExp() }, "debug_gain_fairy_master_exp", "debugGainFairyMasterExp", "Debug: Gain Fairy Master Exp", "デバッグ：妖精経験値入手")
-        r({ ItemDebugOreSeedStatistics() }, "debug_ore_seed_statistics", "debugOreSeedStatistics", "Debug: Ore Seed Statistics", "デバッグ：鉱石分布")
+        r({ ItemDebugFairyList() }, "fairy_list", "Fairy List", "妖精一覧")
+        r({ ItemDebugOreNameList() }, "ore_name_list", "Ore Name List", "鉱石辞書名一覧")
+        r({ ItemDebugSkillResetUnlock() }, "skill_reset_unlock", "Skill Reset Unlock", "スキルリセット解禁")
+        r({ ItemDebugPlayerAuraReset() }, "player_aura_reset", "Player Aura Reset", "プレイヤーオーラリセット")
+        r({ ItemDebugGainFairyMasterExp() }, "gain_fairy_master_exp", "Gain Fairy Master Exp", "妖精経験値入手")
+        r({ ItemDebugOreSeedStatistics() }, "ore_seed_statistics", "Ore Seed Statistics", "鉱石分布")
 
     }
 }
