@@ -74,7 +74,7 @@ private fun <T : ItemFairyWeaponBase> ModInitializer.fw(
         }
     }
     onInit {
-        if (parent != null) parent()().manualRepairErgs.forEach { (key, value) -> item.addManualRepairErg(key, value) }
+        if (parent != null) parent()().getManualRepairErgs().forEach { (key, value) -> item.addManualRepairErg(key, value) }
         ergTypeSuppliers.forEach { item.addManualRepairErg(it()) }
         item.maxDamage = getDurability(tier) - 1
         item.tier = tier
