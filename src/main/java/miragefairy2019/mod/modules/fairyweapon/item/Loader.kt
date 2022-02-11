@@ -94,10 +94,10 @@ class FairyWeaponLoader(m: ModInitializer) {
         private val fw2 = "mirageFairy2019CraftingToolFairyWand"
     }
 
-    val fairyWandCrafting = m.fw(1, ::ItemFairyWandCrafting, "crafting_fairy_wand", "${fw}Crafting", listOf("${fw2}Crafting"), null, { CRAFT })
-    val fairyWandCrafting2 = m.fw(2, ::ItemFairyWandCrafting, "crafting_fairy_wand_2", "${fw}Crafting2", listOf("${fw2}Crafting"), null, { CRAFT })
-    val fairyWandCrafting3 = m.fw(3, ::ItemFairyWandCrafting, "crafting_fairy_wand_3", "${fw}Crafting3", listOf("${fw2}Crafting"), null, { CRAFT })
-    val fairyWandCrafting4 = m.fw(4, ::ItemFairyWandCrafting, "crafting_fairy_wand_4", "${fw}Crafting4", listOf("${fw2}Crafting"), null, { CRAFT })
+    val fairyWandCrafting = m.fw(1, ::ItemFairyWand, "crafting_fairy_wand", "${fw}Crafting", listOf("${fw2}Crafting"), null, { CRAFT })
+    val fairyWandCrafting2 = m.fw(2, ::ItemFairyWand, "crafting_fairy_wand_2", "${fw}Crafting2", listOf("${fw2}Crafting"), null, { CRAFT })
+    val fairyWandCrafting3 = m.fw(3, ::ItemFairyWand, "crafting_fairy_wand_3", "${fw}Crafting3", listOf("${fw2}Crafting"), null, { CRAFT })
+    val fairyWandCrafting4 = m.fw(4, ::ItemFairyWand, "crafting_fairy_wand_4", "${fw}Crafting4", listOf("${fw2}Crafting"), null, { CRAFT })
     val fairyWandHydrating = m.fw(1, ::ItemFairyWand, "hydrating_fairy_wand", "${fw}Hydrating", listOf("${fw2}Hydrating", "container1000Water"), null, { WATER })
     val fairyWandHydrating2 = m.fw(2, ::ItemFairyWand, "hydrating_fairy_wand_2", "${fw}Hydrating2", listOf("${fw2}Hydrating", "container1000Water"), null, { WATER })
     val fairyWandHydrating3 = m.fw(3, ::ItemFairyWand, "hydrating_fairy_wand_3", "${fw}Hydrating3", listOf("${fw2}Hydrating", "container1000Water"), null, { WATER })

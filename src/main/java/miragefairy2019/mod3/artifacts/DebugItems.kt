@@ -4,24 +4,28 @@ import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.hex
 import miragefairy2019.libkt.item
-import mirrg.kotlin.toLowerCamelCase
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toRgb
+import miragefairy2019.mod.modules.oreseed.EnumVariantOreSeed
 import miragefairy2019.mod.modules.oreseed.OreSeed
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.sum
+import miragefairy2019.mod3.oreseeddrop.api.ApiOreSeedDrop
+import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType
+import miragefairy2019.mod3.oreseeddrop.api.OreSeedDropEnvironment
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.mana
 import mirrg.kotlin.formatAs
+import mirrg.kotlin.toLowerCamelCase
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
@@ -33,6 +37,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraftforge.common.BiomeDictionary
 import net.minecraftforge.oredict.OreDictionary
 import java.io.File
 
@@ -55,6 +60,7 @@ object DebugItems {
         r({ ItemDebugPlayerAuraReset() }, "player_aura_reset", "Player Aura Reset", "プレイヤーオーラリセット")
         r({ ItemDebugGainFairyMasterExp() }, "gain_fairy_master_exp", "Gain Fairy Master Exp", "妖精経験値入手")
         r({ ItemDebugOreSeedStatistics() }, "ore_seed_statistics", "Ore Seed Statistics", "鉱石分布")
+        r({ ItemDebugOreSeedDropRate() }, "ore_seed_drop_rate", "Ore Seed Drop Rate", "鉱石生成確率表示")
 
     }
 }
@@ -212,6 +218,30 @@ class ItemDebugOreSeedStatistics : ItemDebug() {
         player.sendStatusMessage(textComponent { !"===== Ore Seed | Chunk: (${chunkX - 4}, ${chunkZ - 4}) .. (${chunkX + 4}, ${chunkZ + 4}) =====" }, false)
         map.entries.sortedBy { it.key.block.getMetaFromState(it.key) }.sortedBy { Block.getIdFromBlock(it.key.block) }.forEach {
             player.sendStatusMessage(textComponent { !"${it.key}: ${it.value}" }, false)
+        }
+        player.sendStatusMessage(textComponent { !"====================" }, false)
+
+        return EnumActionResult.SUCCESS
+    }
+}
+
+class ItemDebugOreSeedDropRate : ItemDebug() {
+    override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        if (world.isRemote) return EnumActionResult.SUCCESS
+
+        val type = when {
+            BiomeDictionary.hasType(world.getBiome(blockPos), BiomeDictionary.Type.NETHER) -> EnumOreSeedType.NETHERRACK
+            BiomeDictionary.hasType(world.getBiome(blockPos), BiomeDictionary.Type.END) -> EnumOreSeedType.END_STONE
+            else -> EnumOreSeedType.STONE
+        }
+
+        // 鉱石生成確率表示
+        player.sendStatusMessage(textComponent { !"===== Ore List ($type) =====" }, false)
+        EnumVariantOreSeed.values().forEach { variant ->
+            player.sendStatusMessage(textComponent { !"----- ${variant.name} -----" }, false)
+            ApiOreSeedDrop.oreSeedDropRegistry.getDropList(OreSeedDropEnvironment(type, variant.shape, world, blockPos)).forEach {
+                player.sendStatusMessage(textComponent { !it.weight.f3 + !": " + !it.item().block.getItem(world, blockPos, it.item()).displayName }, false)
+            }
         }
         player.sendStatusMessage(textComponent { !"====================" }, false)
 
