@@ -6,10 +6,10 @@ import net.minecraft.item.ItemStack;
 public interface IFairyCombiningHandler {
 
     /**
-     * @return このアイテムに何かを合成できるか否か
+     * @return このアイテムが合成の主体になれるか否か
      */
     @Deprecated
-    public boolean canCombine(ItemStack itemStack);
+    public boolean canCombine(ItemStack itemStack); // TODO -> @Nullable ICombineHandler getCombineHandler(ItemStack)
 
     /**
      * @return このアイテムにitemStackPartを合成できるか否か
@@ -18,10 +18,10 @@ public interface IFairyCombiningHandler {
     public boolean canCombineWith(ItemStack itemStack, ItemStack itemStackPart);
 
     /**
-     * @return アイテムから部品を取り外せるか否か
+     * @return このアイテムが分解の主体になれるか否か
      */
     @Deprecated
-    public boolean canUncombine(ItemStack itemStack);
+    public boolean canUncombine(ItemStack itemStack); // TODO -> @Nullable IUncombineHandler getUncombineHandler(ItemStack) TODO uncombine -> separate
 
     /**
      * @return canUncombineである場合、合成されているアイテムがあるなら、そのアイテム。無いなら、Empty。
