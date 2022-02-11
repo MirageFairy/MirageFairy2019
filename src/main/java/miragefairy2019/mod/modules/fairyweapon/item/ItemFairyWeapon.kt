@@ -122,8 +122,9 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
 
     @SideOnly(Side.CLIENT)
     open fun addInformationFeatures(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        tooltip += formattedText { (!"Can be combined with fairy by crafting").red } // TODO translate
-        tooltip += formattedText { (!"Can be repaired by crafting with contained sphere").red } // TODO translate
+        if (mirageFairyCombiningHandler.canCombine(itemStack)) tooltip += formattedText { (!"クラフトで妖精を搭乗可能").red } // TODO translate Can be combined with fairy by crafting
+        if (mirageFairyCombiningHandler.canUncombine(itemStack)) tooltip += formattedText { (!"クラフトで妖精を分離可能").red } // TODO translate
+        if (canManualRepair(itemStack)) tooltip += formattedText { (!"工作修理可能").red } // TODO translate Can be repaired by crafting with contained sphere
         featureInformationList.forEach { tooltip += formattedText { (!it).red } }
     }
 
