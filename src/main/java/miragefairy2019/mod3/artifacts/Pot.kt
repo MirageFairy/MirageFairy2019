@@ -14,7 +14,7 @@ import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.libkt.upperCamelCase
+import mirrg.kotlin.toUpperCamelCase
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial
@@ -137,7 +137,7 @@ class FluidHandlerPot(@JvmField var container: ItemStack) : IFluidHandlerItem {
         if (container.count != 1) return 0 // 複数スタックされている場合は不可
         if (getFluid() != null) return 0 // 中身が入っている場合は不可
         if (resource.amount < 1000) return 0 // 入力が1000に満たない場合は不可
-        val result = OreIngredient("mirageFairyPot${resource.fluid.name.upperCamelCase}").matchingStacks.getOrNull(0)?.copy() ?: return 0 // 対応していない場合は不可
+        val result = OreIngredient("mirageFairyPot${resource.fluid.name.toUpperCamelCase()}").matchingStacks.getOrNull(0)?.copy() ?: return 0 // 対応していない場合は不可
 
         if (doFill) container = result
         return 1000

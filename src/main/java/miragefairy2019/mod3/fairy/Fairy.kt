@@ -4,7 +4,7 @@ import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.orNull
-import miragefairy2019.libkt.upperCamelCase
+import mirrg.kotlin.toUpperCamelCase
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.libkt.OreIngredientComplex
@@ -120,7 +120,7 @@ object Fairy {
                 listItemFairy.forEachIndexed { i, _ ->
 
                     // 品種別
-                    OreDictionary.registerOre("mirageFairy2019Fairy${variant.y[i].type.motif!!.resourcePath.upperCamelCase}Rank${i + 1}", variant.y[i].createItemStack())
+                    OreDictionary.registerOre("mirageFairy2019Fairy${variant.y[i].type.motif!!.resourcePath.toUpperCamelCase()}Rank${i + 1}", variant.y[i].createItemStack())
 
                     // エルグ別
                     variant.y[i].type.ergSet.entries.forEach {

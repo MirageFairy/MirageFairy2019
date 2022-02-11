@@ -4,7 +4,7 @@ import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.hex
 import miragefairy2019.libkt.item
-import miragefairy2019.libkt.lowerCamelCase
+import mirrg.kotlin.toLowerCamelCase
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
@@ -40,7 +40,7 @@ object DebugItems {
     val module: Module = {
 
         fun r(itemCreator: () -> Item, name: String, english: String, japanese: String) {
-            val unlocalizedName = "debug_$name".lowerCamelCase
+            val unlocalizedName = "debug_$name".toLowerCamelCase()
             item({ itemCreator() }, "debug_$name") {
                 setUnlocalizedName(unlocalizedName)
                 setCreativeTab { ApiMain.creativeTab }

@@ -7,7 +7,7 @@ import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.makeRecipe
-import miragefairy2019.libkt.upperCamelCase
+import mirrg.kotlin.toUpperCamelCase
 import miragefairy2019.mod.ModMirageFairy2019
 
 object FairyMetamorphosis {
@@ -25,7 +25,7 @@ object FairyMetamorphosis {
                             ore = "container250MiragiumWater"
                         ),
                         DataOreIngredient(
-                            ore = "mirageFairy2019Fairy${fairyMotif.upperCamelCase}Rank1"
+                            ore = "mirageFairy2019Fairy${fairyMotif.toUpperCamelCase()}Rank1"
                         ),
                         DataSimpleIngredient(
                             item = "minecraft:dirt",
