@@ -91,7 +91,7 @@ abstract class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRep
 
         tooltip += formattedText { (!"Tier $tier").aqua } // tier
 
-        addInformationFunctions(itemStack, world, tooltip, flag) // 機能
+        addInformationFeatures(itemStack, world, tooltip, flag) // 機能
 
         tooltip += formattedText { (!"Durability: ${(getMaxDamage(itemStack) - getDamage(itemStack)).coerceAtLeast(0)} / ${getMaxDamage(itemStack)}").green } // 耐久値
 
@@ -112,13 +112,13 @@ abstract class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRep
 
     }
 
-    val functionsInformations = mutableListOf<String>()
+    val featureInformationList = mutableListOf<String>()
 
     @SideOnly(Side.CLIENT)
-    open fun addInformationFunctions(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+    open fun addInformationFeatures(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         tooltip += formattedText { (!"Can be combined with fairy by crafting").red } // TODO translate
         tooltip += formattedText { (!"Can be repaired by crafting with contained sphere").red } // TODO translate
-        functionsInformations.forEach { tooltip += formattedText { (!it).red } }
+        featureInformationList.forEach { tooltip += formattedText { (!it).red } }
     }
 
     @SideOnly(Side.CLIENT)

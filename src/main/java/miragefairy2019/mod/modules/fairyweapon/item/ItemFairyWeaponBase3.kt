@@ -172,9 +172,9 @@ abstract class ItemFairyWeaponBase3(
     // Overrides
 
     @SideOnly(Side.CLIENT)
-    override fun addInformationFunctions(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+    override fun addInformationFeatures(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         tooltip += formattedText { translate("$prefix.message.rightClick").red }
-        super.addInformationFunctions(itemStack, world, tooltip, flag)
+        super.addInformationFeatures(itemStack, world, tooltip, flag)
     }
 
     @SideOnly(Side.CLIENT)

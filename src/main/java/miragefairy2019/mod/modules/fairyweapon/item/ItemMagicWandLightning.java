@@ -264,9 +264,9 @@ public class ItemMagicWandLightning extends ItemFairyWeaponBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformationFunctions(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformationFeatures(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 
-        super.addInformationFunctions(itemStack, world, tooltip, flag);
+        super.addInformationFeatures(itemStack, world, tooltip, flag);
 
         tooltip.add(TextFormatting.RED + "Right click to use magic");
 

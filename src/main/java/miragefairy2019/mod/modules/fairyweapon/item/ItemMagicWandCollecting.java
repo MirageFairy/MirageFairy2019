@@ -53,11 +53,11 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformationFunctions(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformationFeatures(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 
         tooltip.add(TextFormatting.RED + "Right click to use magic");
 
-        super.addInformationFunctions(itemStack, world, tooltip, flag);
+        super.addInformationFeatures(itemStack, world, tooltip, flag);
 
     }
 
