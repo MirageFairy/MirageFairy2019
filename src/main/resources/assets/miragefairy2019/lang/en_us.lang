@@ -480,3 +480,4 @@ item.debugOreNameList.name=Debug: Ore Name List
 item.debugSkillResetUnlock.name=Debug: Skill Reset Unlock
 item.debugPlayerAuraReset.name=Debug: Player Aura Reset
 item.debugGainFairyMasterExp.name=Debug: Gain Fairy Master Exp
+item.debugOreSeedStatistics.name=Debug: Ore Seed Statistics

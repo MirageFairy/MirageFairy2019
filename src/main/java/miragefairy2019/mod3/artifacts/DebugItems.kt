@@ -9,6 +9,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toRgb
+import miragefairy2019.mod.modules.oreseed.OreSeed
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.main.api.ApiMain
@@ -20,6 +21,8 @@ import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.mana
 import mirrg.kotlin.formatAs
+import net.minecraft.block.Block
+import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.Item
@@ -49,6 +52,7 @@ object DebugItems {
         r({ ItemDebugSkillResetUnlock() }, "debug_skill_reset_unlock", "debugSkillResetUnlock", "Debug: Skill Reset Unlock", "デバッグ：スキルリセット解禁")
         r({ ItemDebugPlayerAuraReset() }, "debug_player_aura_reset", "debugPlayerAuraReset", "Debug: Player Aura Reset", "デバッグ：プレイヤーオーラリセット")
         r({ ItemDebugGainFairyMasterExp() }, "debug_gain_fairy_master_exp", "debugGainFairyMasterExp", "Debug: Gain Fairy Master Exp", "デバッグ：妖精経験値入手")
+        r({ ItemDebugOreSeedStatistics() }, "debug_ore_seed_statistics", "debugOreSeedStatistics", "Debug: Ore Seed Statistics", "デバッグ：鉱石分布")
 
     }
 }
@@ -167,6 +171,48 @@ class ItemDebugGainFairyMasterExp : ItemDebug() {
         val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
         ItemAstronomicalObservationBook.gainExp(player, if (player.isSneaking) -100 else 100)
         skillContainer.send(player)
+        return EnumActionResult.SUCCESS
+    }
+}
+
+class ItemDebugOreSeedStatistics : ItemDebug() {
+    override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        if (world.isRemote) return EnumActionResult.SUCCESS
+        val map = mutableMapOf<IBlockState, Int>()
+
+        fun processChunk(chunkX: Int, chunkZ: Int) {
+            val baseBlockPos = BlockPos(16 * chunkX, 0, 16 * chunkZ)
+            (0 until 16).forEach { xi ->
+                (0 until 256).forEach { yi ->
+                    (0 until 16).forEach { zi ->
+                        val blockState = world.getBlockState(baseBlockPos.add(xi, yi, zi))
+                        when (blockState.block) {
+                            OreSeed.blockOreSeed(),
+                            OreSeed.blockOreSeedNether(),
+                            OreSeed.blockOreSeedEnd()
+                            -> map.compute(blockState) { _, value -> (value ?: 0) + 1 }
+                        }
+                    }
+                }
+            }
+        }
+
+        val chunkX = Math.floorDiv(blockPos.x, 16)
+        val chunkZ = Math.floorDiv(blockPos.z, 16)
+
+        (-4..4).forEach { x ->
+            (-4..4).forEach { z ->
+                processChunk(chunkX + x, chunkZ + z)
+            }
+        }
+
+        // 鉱石生成確率表示
+        player.sendStatusMessage(textComponent { !"===== Ore Seed | Chunk: (${chunkX - 4}, ${chunkZ - 4}) .. (${chunkX + 4}, ${chunkZ + 4}) =====" }, false)
+        map.entries.sortedBy { it.key.block.getMetaFromState(it.key) }.sortedBy { Block.getIdFromBlock(it.key.block) }.forEach {
+            player.sendStatusMessage(textComponent { !"${it.key}: ${it.value}" }, false)
+        }
+        player.sendStatusMessage(textComponent { !"====================" }, false)
+
         return EnumActionResult.SUCCESS
     }
 }
