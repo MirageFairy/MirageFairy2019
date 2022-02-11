@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
+import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1
 import miragefairy2019.mod3.oreseeddrop.api.ApiOreSeedDrop
@@ -27,7 +28,7 @@ class PluginOreSeedDrop : IModPlugin {
     override fun registerCategories(registry: IRecipeCategoryRegistration) {
         registry.addRecipeCategories(object : IRecipeCategory<IRecipeWrapper> {
             override fun getUid() = Companion.uid
-            override fun getTitle() = "Ore Seed Drop"
+            override fun getTitle() = translateToLocal("jei.$uid.title")
             override fun getModName() = "MirageFairy2019"
             override fun getBackground() = object : IDrawable {
                 override fun getWidth() = 160

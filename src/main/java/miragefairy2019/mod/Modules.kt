@@ -1,5 +1,6 @@
 package miragefairy2019.mod
 
+import miragefairy2019.jei.Jei
 import miragefairy2019.mod.modules.fairycrystal.FairyCrystal
 import miragefairy2019.mod.modules.fairyweapon.item.FairyWeapon
 import miragefairy2019.mod.modules.ore.Ore
@@ -16,6 +17,7 @@ import miragefairy2019.mod3.skill.Skill
 import miragefairy2019.mod3.worldgen.WorldGen
 
 val modules = listOf(
+    Jei.module,
     Main.module,
     PlayerAura.module,
     Skill.module,

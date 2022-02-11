@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.getSubItems
+import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod3.artifacts.get
 import miragefairy2019.mod3.artifacts.itemSpheres
 import miragefairy2019.mod3.erg.api.EnumErgType
@@ -30,7 +31,7 @@ class PluginManualRepair : IModPlugin {
     override fun registerCategories(registry: IRecipeCategoryRegistration) {
         registry.addRecipeCategories(object : IRecipeCategory<IRecipeWrapper> {
             override fun getUid() = Companion.uid
-            override fun getTitle() = "Manual Repair"
+            override fun getTitle() = translateToLocal("jei.$uid.title")
             override fun getModName() = "MirageFairy2019"
             override fun getBackground() = object : IDrawable {
                 override fun getWidth() = 1 + 18 + 4 + 18 * 8 + 1

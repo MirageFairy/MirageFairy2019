@@ -27,7 +27,7 @@ class PluginMfa : IModPlugin {
     override fun registerCategories(registry: IRecipeCategoryRegistration) {
         registry.addRecipeCategories(object : IRecipeCategory<IRecipeWrapper> {
             override fun getUid() = Companion.uid
-            override fun getTitle() = "MFA"
+            override fun getTitle() = translateToLocal("jei.$uid.title")
             override fun getModName() = "MirageFairy2019"
             override fun getBackground() = object : IDrawable {
                 override fun getWidth() = 160

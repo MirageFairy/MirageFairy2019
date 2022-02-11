@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringRightAligned
+import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod3.worldgen.FairyLog
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import net.minecraft.client.Minecraft
@@ -26,7 +27,7 @@ class PluginFairyLogDrop : IModPlugin {
     override fun registerCategories(registry: IRecipeCategoryRegistration) {
         registry.addRecipeCategories(object : IRecipeCategory<IRecipeWrapper> {
             override fun getUid() = Companion.uid
-            override fun getTitle() = "Fairy Log Drop"
+            override fun getTitle() = translateToLocal("jei.$uid.title")
             override fun getModName() = "MirageFairy2019"
             override fun getBackground() = object : IDrawable {
                 override fun getWidth() = 18 * 9
