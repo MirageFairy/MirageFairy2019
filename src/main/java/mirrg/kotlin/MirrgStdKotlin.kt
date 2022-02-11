@@ -10,6 +10,8 @@ inline fun <reified O : Any> Any.cast(): O = this as O
 inline fun <reified O : Any> Any.castOrNull(): O? = this as? O
 inline fun <T : Any?> T?.or(default: () -> T) = this ?: default()
 
+val <T> List<T>.orNull get() = takeIf { isNotEmpty() }
+
 // セーフなjoin
 fun Iterable<CharSequence>.join(separator: CharSequence = ", ") = joinToString(separator)
 fun <T> Iterable<T>.join(separator: CharSequence = ", ", transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
@@ -17,6 +19,20 @@ fun Array<CharSequence>.join(separator: CharSequence = ", ") = joinToString(sepa
 fun <T> Array<T>.join(separator: CharSequence = ", ", transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
 fun Sequence<CharSequence>.join(separator: CharSequence = ", ") = joinToString(separator)
 fun <T> Sequence<T>.join(separator: CharSequence = ", ", transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
+
+fun <T> Iterable<Iterable<T>>.concatWith(separator: Iterable<T>): List<T> {
+    val i = iterator()
+    if (!i.hasNext()) return emptyList()
+    val left = mutableListOf<T>()
+    left += i.next()
+    while (i.hasNext()) {
+        left += separator
+        left += i.next()
+    }
+    return left
+}
+
+fun <T> Iterable<Iterable<T>>.concat(vararg separator: T) = concatWith(separator.asIterable())
 
 // 中置format
 infix fun Byte.formatAs(format: String) = String.format(format, this)
