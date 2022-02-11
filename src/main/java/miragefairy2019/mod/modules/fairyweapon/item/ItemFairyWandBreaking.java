@@ -28,9 +28,9 @@ public class ItemFairyWandBreaking extends ItemFairyWand {
         // 指定の妖精を持っていない場合、抜ける
         a:
         {
-            ItemStack itemStackFairy = getCombinedFairy(player.getHeldItem(hand));
-            if (getFairy(itemStackFairy).isPresent()) {
-                if (Objects.equals(getFairy(itemStackFairy).get().getMotif(), new ResourceLocation(ModMirageFairy2019.MODID, "mina"))) {
+            ItemStack itemStackFairy = FairyWeaponUtils.getCombinedFairy(player.getHeldItem(hand));
+            if (FairyWeaponUtils.getFairy(itemStackFairy).isPresent()) {
+                if (Objects.equals(FairyWeaponUtils.getFairy(itemStackFairy).get().getMotif(), new ResourceLocation(ModMirageFairy2019.MODID, "mina"))) {
                     break a;
                 }
             }

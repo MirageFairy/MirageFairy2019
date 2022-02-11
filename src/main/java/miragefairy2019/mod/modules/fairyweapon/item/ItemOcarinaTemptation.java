@@ -128,12 +128,12 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
     private Result getExecutability(World world, ItemStack itemStack, EntityPlayer player) {
 
         // 妖精取得
-        Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
+        Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
         if (fairy == null) {
-            RayTraceResult rayTraceResult = rayTrace(world, player, false, 0);
+            RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, 0);
             Vec3d positionTarget = rayTraceResult != null
                 ? rayTraceResult.hitVec
-                : getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
+                : FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
             return new Result(
                 EnumExecutability.NO_FAIRY,
                 positionTarget);
@@ -143,10 +143,10 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
         Status status = new Status(fairy.y);
 
         // 発動対象
-        RayTraceResult rayTraceResult = rayTrace(world, player, false, 0, EntityVillager.class, e -> true);
+        RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, 0, EntityVillager.class, e -> true);
         Vec3d positionTarget = rayTraceResult != null
             ? rayTraceResult.hitVec
-            : getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
+            : FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
         boolean isEntity;
         List<EntityVillager> targetEntities;
         if (rayTraceResult != null && rayTraceResult.typeOfHit == Type.ENTITY && rayTraceResult.entityHit instanceof EntityVillager) {
@@ -284,7 +284,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeaponBase {
         //
 
         // 発動中心点にパーティクルを表示
-        spawnParticle(world, result.positionTarget, result.executability.color);
+        FairyWeaponUtils.spawnParticle(world, result.positionTarget, result.executability.color);
 
         if (result instanceof ResultWithFairy && result.executability.health >= EnumExecutability.NO_TARGET.health) {
             ResultWithFairy resultWithFairy = (ResultWithFairy) result;

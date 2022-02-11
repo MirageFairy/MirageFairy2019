@@ -23,28 +23,28 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase {
+public class FairyWeaponUtils {
 
     public static double getFairyAttribute(String attributeName, ItemStack itemStack) {
         if (!itemStack.hasTagCompound()) return 0;
         NBTTagCompound nbt = itemStack.getTagCompound();
-        if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) return 0;
+        if (!nbt.hasKey("Fairy", Constants.NBT.TAG_COMPOUND)) return 0;
         NBTTagCompound fairy = nbt.getCompoundTag("Fairy");
-        if (!fairy.hasKey(attributeName, NBT.TAG_DOUBLE)) return 0;
+        if (!fairy.hasKey(attributeName, Constants.NBT.TAG_DOUBLE)) return 0;
         return fairy.getDouble(attributeName);
     }
 
     public static void setFairyAttribute(String attributeName, ItemStack itemStack, double value) {
         if (!itemStack.hasTagCompound()) itemStack.setTagCompound(new NBTTagCompound());
         NBTTagCompound nbt = itemStack.getTagCompound();
-        if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) nbt.setTag("Fairy", new NBTTagCompound());
+        if (!nbt.hasKey("Fairy", Constants.NBT.TAG_COMPOUND)) nbt.setTag("Fairy", new NBTTagCompound());
         NBTTagCompound fairy = nbt.getCompoundTag("Fairy");
         fairy.setDouble(attributeName, value);
         itemStack.setTagCompound(nbt);
@@ -54,16 +54,16 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase {
     public static ItemStack getCombinedFairy(@Nonnull ItemStack itemStack) {
         if (!itemStack.hasTagCompound()) return ItemStack.EMPTY;
         NBTTagCompound nbt = itemStack.getTagCompound();
-        if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) return ItemStack.EMPTY;
+        if (!nbt.hasKey("Fairy", Constants.NBT.TAG_COMPOUND)) return ItemStack.EMPTY;
         NBTTagCompound fairy = nbt.getCompoundTag("Fairy");
-        if (!fairy.hasKey("CombinedFairy", NBT.TAG_COMPOUND)) return ItemStack.EMPTY;
+        if (!fairy.hasKey("CombinedFairy", Constants.NBT.TAG_COMPOUND)) return ItemStack.EMPTY;
         return new ItemStack(fairy.getCompoundTag("CombinedFairy"));
     }
 
     public static void setCombinedFairy(ItemStack itemStack, ItemStack itemStackFairy) {
         if (!itemStack.hasTagCompound()) itemStack.setTagCompound(new NBTTagCompound());
         NBTTagCompound nbt = itemStack.getTagCompound();
-        if (!nbt.hasKey("Fairy", NBT.TAG_COMPOUND)) nbt.setTag("Fairy", new NBTTagCompound());
+        if (!nbt.hasKey("Fairy", Constants.NBT.TAG_COMPOUND)) nbt.setTag("Fairy", new NBTTagCompound());
         NBTTagCompound fairy = nbt.getCompoundTag("Fairy");
         fairy.setTag("CombinedFairy", itemStackFairy.copy().splitStack(1).writeToNBT(new NBTTagCompound()));
         itemStack.setTagCompound(nbt);

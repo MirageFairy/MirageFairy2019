@@ -23,19 +23,19 @@ import java.util.List;
 public class ItemFairySword extends ItemFairyWeaponBase {
 
     public double getAdditionalAttackDamage(ItemStack itemStack) {
-        return getFairyAttribute("AdditionalAttackDamage", itemStack);
+        return FairyWeaponUtils.getFairyAttribute("AdditionalAttackDamage", itemStack);
     }
 
     public double getAdditionalAttackSpeed(ItemStack itemStack) {
-        return getFairyAttribute("AdditionalAttackSpeed", itemStack);
+        return FairyWeaponUtils.getFairyAttribute("AdditionalAttackSpeed", itemStack);
     }
 
     public void setAdditionalAttackDamage(ItemStack itemStack, double additionalAttackDamage) {
-        setFairyAttribute("AdditionalAttackDamage", itemStack, additionalAttackDamage);
+        FairyWeaponUtils.setFairyAttribute("AdditionalAttackDamage", itemStack, additionalAttackDamage);
     }
 
     public void setAdditionalAttackSpeed(ItemStack itemStack, double additionalAttackSpeed) {
-        setFairyAttribute("AdditionalAttackSpeed", itemStack, additionalAttackSpeed);
+        FairyWeaponUtils.setFairyAttribute("AdditionalAttackSpeed", itemStack, additionalAttackSpeed);
     }
 
     //
@@ -84,7 +84,7 @@ public class ItemFairySword extends ItemFairyWeaponBase {
         if (!(entity instanceof EntityLivingBase)) return;
         EntityPlayer player = (EntityPlayer) entity;
 
-        Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
+        Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
         if (fairy != null) {
             Status status = new Status(fairy.y);
             setAdditionalAttackDamage(itemStack, status.additionalAttackDamage);

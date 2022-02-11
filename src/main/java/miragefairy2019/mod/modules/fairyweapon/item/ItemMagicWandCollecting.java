@@ -130,19 +130,19 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
     private Result getExecutability(World world, ItemStack itemStack, EntityPlayer player) {
 
         // 妖精取得
-        Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
+        Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
         if (fairy == null) {
-            return new Result(EnumExecutability.NO_FAIRY, getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()));
+            return new Result(EnumExecutability.NO_FAIRY, FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()));
         }
 
         // ステータスを評価
         Status status = new Status(fairy.y);
 
         // 発動座標
-        RayTraceResult rayTraceResult = rayTrace(world, player, false, status.additionalReach);
+        RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach);
         Vec3d positionTarget = rayTraceResult != null
             ? rayTraceResult.hitVec
-            : getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach);
+            : FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach);
 
         // 対象を取得
         List<EntityItem> entityTargets = getEntities(EntityItem.class, world, positionTarget, status.radius);
@@ -234,7 +234,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeaponBase {
         Result result = getExecutability(world, itemStack, player);
 
         // 発動中心点にパーティクルを表示
-        spawnParticle(
+        FairyWeaponUtils.spawnParticle(
             world,
             result.positionTarget,
             result.executability.color);

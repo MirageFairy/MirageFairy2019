@@ -46,7 +46,7 @@ abstract class ItemMiragiumToolBase(
         featureInformationList += "Right click: use magic" // TODO translate
 
         magic {
-            val fairyType = findFairy(itemStack, player).orNull?.let { it.y!! } ?: ApiFairy.empty()!! // 妖精取得
+            val fairyType = FairyWeaponUtils.findFairy(itemStack, player).orNull?.let { it.y!! } ?: ApiFairy.empty()!! // 妖精取得
             val selectorRayTrace = SelectorRayTrace(world, player, 0.0) // 視線判定
             if (fairyType.isEmpty) return@magic fail(selectorRayTrace.position, 0xFF00FF) // 妖精なし判定
             if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic fail(selectorRayTrace.position, 0xFF0000) // 材料なし判定
@@ -71,7 +71,7 @@ abstract class ItemMiragiumToolBase(
 
                             // 破壊成立
                             itemStack.damageItem(damage, player)
-                            breakBlock(world, player, EnumFacing.UP, itemStack, target, world.rand.randomInt(!fortune), false)
+                            FairyWeaponUtils.breakBlock(world, player, EnumFacing.UP, itemStack, target, world.rand.randomInt(!fortune), false)
                             val blockState = world.getBlockState(target)
                             breakSound = blockState.block.getSoundType(blockState, world, target, player).breakSound
                             count++

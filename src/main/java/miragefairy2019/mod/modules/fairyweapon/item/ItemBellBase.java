@@ -89,7 +89,7 @@ public class ItemBellBase extends ItemFairyWeaponBase {
     private Result getExecutability(World world, ItemStack itemStack, EntityPlayer player) {
 
         // 妖精取得
-        Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
+        Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
         if (fairy == null) {
             return new Result(EnumExecutability.NO_FAIRY);
         }

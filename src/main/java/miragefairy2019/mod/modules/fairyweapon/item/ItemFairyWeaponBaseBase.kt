@@ -49,6 +49,8 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.function.Function
 
+open class ItemFairyWeaponBase : ItemFairyWeaponBaseBase()
+
 abstract class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRepairableItem, IItemFairyWeapon {
     var tier = 0
 
@@ -101,7 +103,7 @@ abstract class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRep
 
         tooltip += formattedText { (!"Durability: ${(getMaxDamage(itemStack) - getDamage(itemStack)).coerceAtLeast(0)} / ${getMaxDamage(itemStack)}").green } // 耐久値
 
-        ItemFairyWeaponBase.getCombinedFairy(itemStack).orNull?.let { tooltip += formattedText { (!"Combined: ${it.displayName}").aqua } } // 搭乗中の妖精
+        FairyWeaponUtils.getCombinedFairy(itemStack).orNull?.let { tooltip += formattedText { (!"Combined: ${it.displayName}").aqua } } // 搭乗中の妖精
 
         // スフィア交換
         if (canManualRepair(itemStack)) {
@@ -112,7 +114,7 @@ abstract class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRep
         }
 
         // 妖精魔法ステータス
-        val fairy = Minecraft.getMinecraft().player?.let { ItemFairyWeaponBase.findFairy(itemStack, it).orNull?.let { t -> Pair(t.x!!, t.y!!) } } ?: Pair(EMPTY_ITEM_STACK, ApiFairy.empty()!!)
+        val fairy = Minecraft.getMinecraft().player?.let { FairyWeaponUtils.findFairy(itemStack, it).orNull?.let { t -> Pair(t.x!!, t.y!!) } } ?: Pair(EMPTY_ITEM_STACK, ApiFairy.empty()!!)
         tooltip += formattedText { (!"Magic with " + (if (fairy.first.isEmpty) !"-" else !fairy.first.displayName).white).blue } // TODO translate
         addInformationFairyWeapon(itemStack, fairy.first, fairy.second, world, tooltip, flag)
 
@@ -174,15 +176,15 @@ abstract class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRep
 
     override fun getMirageFairyCombiningHandler() = FairyCombiningHandler()
     open class FairyCombiningHandler : IFairyCombiningHandler {
-        override fun canCombine(itemStack: ItemStack): Boolean = ItemFairyWeaponBase.getCombinedFairy(itemStack).isEmpty
+        override fun canCombine(itemStack: ItemStack): Boolean = FairyWeaponUtils.getCombinedFairy(itemStack).isEmpty
         override fun canCombineWith(itemStack: ItemStack, itemStackPart: ItemStack) = itemStackPart.item is IItemFairy
-        override fun canUncombine(itemStack: ItemStack): Boolean = !ItemFairyWeaponBase.getCombinedFairy(itemStack).isEmpty
-        override fun getCombinedPart(itemStack: ItemStack): ItemStack = ItemFairyWeaponBase.getCombinedFairy(itemStack)
-        override fun setCombinedPart(itemStack: ItemStack, itemStackPart: ItemStack): Unit = ItemFairyWeaponBase.setCombinedFairy(itemStack, itemStackPart)
+        override fun canUncombine(itemStack: ItemStack): Boolean = !FairyWeaponUtils.getCombinedFairy(itemStack).isEmpty
+        override fun getCombinedPart(itemStack: ItemStack): ItemStack = FairyWeaponUtils.getCombinedFairy(itemStack)
+        override fun setCombinedPart(itemStack: ItemStack, itemStackPart: ItemStack): Unit = FairyWeaponUtils.setCombinedFairy(itemStack, itemStackPart)
     }
 
     override fun hasContainerItem(itemStack: ItemStack) = !getContainerItem(itemStack).isEmpty
-    override fun getContainerItem(itemStack: ItemStack): ItemStack = ItemFairyWeaponBase.getCombinedFairy(itemStack)
+    override fun getContainerItem(itemStack: ItemStack): ItemStack = FairyWeaponUtils.getCombinedFairy(itemStack)
 
 
     // 手修理
@@ -205,7 +207,7 @@ abstract class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRep
         fun damageItem(itemStack: ItemStack, entityLivingBase: EntityLivingBase) {
             itemStack.damageItem(1, entityLivingBase) // アイテムスタックにダメージ
             // 壊れた場合、搭乗している妖精をドロップ
-            if (itemStack.isEmpty) ItemFairyWeaponBase.getCombinedFairy(itemStack).drop(entityLivingBase.world, entityLivingBase.position).setNoPickupDelay()
+            if (itemStack.isEmpty) FairyWeaponUtils.getCombinedFairy(itemStack).drop(entityLivingBase.world, entityLivingBase.position).setNoPickupDelay()
         }
     }
 }
@@ -230,7 +232,7 @@ class TileEntityItemStackRendererFairyWeapon : TileEntityItemStackRenderer() {
         GlStateManager.disableRescaleNormal()
 
         // 搭乗妖精描画
-        val itemStackFairy = ItemFairyWeaponBase.getCombinedFairy(itemStack).orNull
+        val itemStackFairy = FairyWeaponUtils.getCombinedFairy(itemStack).orNull
         if (itemStackFairy != null) {
             val bakedModel = Minecraft.getMinecraft().renderItem.getItemModelWithOverrides(itemStackFairy, null, null)
             GlStateManager.pushMatrix()

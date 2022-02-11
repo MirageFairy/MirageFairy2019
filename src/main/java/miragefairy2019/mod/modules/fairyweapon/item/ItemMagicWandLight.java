@@ -67,7 +67,7 @@ public class ItemMagicWandLight extends ItemFairyWeaponBase {
         if (world.isRemote) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
         // 妖精を取得
-        Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
+        Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
         if (fairy == null) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
         // ステータスを評価
@@ -78,7 +78,7 @@ public class ItemMagicWandLight extends ItemFairyWeaponBase {
         if (itemStackTorch == null) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
         // 視線判定
-        RayTraceResult rayTraceResult = rayTrace(world, player, false, status.additionalReach);
+        RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach);
         if (rayTraceResult == null) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
         if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
         BlockPos blockPos = rayTraceResult.getBlockPos();
@@ -156,11 +156,11 @@ public class ItemMagicWandLight extends ItemFairyWeaponBase {
                 if (ApiMain.side.isClient()) {
 
                     // 妖精がない場合はマゼンタ
-                    Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
+                    Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
                     if (fairy == null) {
-                        spawnParticle(
+                        FairyWeaponUtils.spawnParticle(
                             world,
-                            getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
+                            FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
                             0xFF00FF);
                         return;
                     }
@@ -168,9 +168,9 @@ public class ItemMagicWandLight extends ItemFairyWeaponBase {
                     // 松明検索
                     ItemStack itemStackTorch = findTorch(player).orElse(null);
                     if (itemStackTorch == null) {
-                        spawnParticle(
+                        FairyWeaponUtils.spawnParticle(
                             world,
-                            getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
+                            FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
                             0xFF00FF);
                         return;
                     }
@@ -181,23 +181,23 @@ public class ItemMagicWandLight extends ItemFairyWeaponBase {
                     // 耐久がない場合は赤
                     // 対象が発動対象でない場合は緑
                     // クールタイムの場合は黄色
-                    RayTraceResult rayTraceResult = rayTrace(world, player, false, status.additionalReach);
+                    RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach);
                     if (rayTraceResult == null) {
-                        spawnParticle(
+                        FairyWeaponUtils.spawnParticle(
                             world,
-                            getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach),
+                            FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach),
                             itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }
                     if (!canExecute(world, rayTraceResult)) {
-                        spawnParticle(
+                        FairyWeaponUtils.spawnParticle(
                             world,
                             rayTraceResult.hitVec,
                             itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }
 
-                    spawnParticle(
+                    FairyWeaponUtils.spawnParticle(
                         world,
                         rayTraceResult.hitVec,
                         itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0xFFFF00 : 0xFFFFFF);

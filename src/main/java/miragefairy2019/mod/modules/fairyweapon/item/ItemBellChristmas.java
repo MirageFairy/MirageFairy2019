@@ -105,7 +105,7 @@ public class ItemBellChristmas extends ItemBellBase {
     public MagicExecutor getExecutor(ItemFairyWeaponBase item, World world, ItemStack itemStack, EntityPlayer player) {
 
         // 妖精取得
-        IFairyType fairyType = findFairy(itemStack, player).map(t -> t.y).orElseGet(ApiFairy::empty);
+        IFairyType fairyType = FairyWeaponUtils.findFairy(itemStack, player).map(t -> t.y).orElseGet(ApiFairy::empty);
 
         // 視線判定
         SelectorRayTrace selectorRayTrace = new SelectorRayTrace(world, player, additionalReach.get(fairyType));

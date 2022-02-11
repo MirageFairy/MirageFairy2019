@@ -110,11 +110,11 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
         ItemStack itemStack = player.getHeldItem(hand);
 
         // 妖精を取得
-        Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
+        Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
         if (fairy == null) return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStack);
 
         // 視線判定
-        RayTraceResult rayTraceResult = rayTrace(world, player, false, additionalReach.get(fairy.y));
+        RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, additionalReach.get(fairy.y));
         if (rayTraceResult == null) return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStack);
         if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStack);
         BlockPos blockPos = rayTraceResult.getBlockPos();
@@ -164,7 +164,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
 
                 if (world.rand.nextDouble() < wear.get(fairy.y)) itemStack.damageItem(1, player);
                 power2 -= blockHardness;
-                breakBlock(world, player, rayTraceResult.sideHit, itemStack, blockPos2, fortune.get(fairy.y), collection.get(fairy.y));
+                FairyWeaponUtils.breakBlock(world, player, rayTraceResult.sideHit, itemStack, blockPos2, fortune.get(fairy.y), collection.get(fairy.y));
                 successed++;
 
             }
@@ -202,11 +202,11 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
                 if (ApiMain.side.isClient()) {
 
                     // 妖精がない場合はマゼンタ
-                    Tuple<ItemStack, IFairyType> fairy = findFairy(itemStack, player).orElse(null);
+                    Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
                     if (fairy == null) {
-                        spawnParticle(
+                        FairyWeaponUtils.spawnParticle(
                             world,
-                            getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
+                            FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
                             0xFF00FF);
                         return;
                     }
@@ -214,23 +214,23 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
                     // 耐久がない場合は赤
                     // 対象が発動対象でない場合は緑
                     // クールタイムの場合は黄色
-                    RayTraceResult rayTraceResult = rayTrace(world, player, false, additionalReach.get(fairy.y));
+                    RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, additionalReach.get(fairy.y));
                     if (rayTraceResult == null) {
-                        spawnParticle(
+                        FairyWeaponUtils.spawnParticle(
                             world,
-                            getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + additionalReach.get(fairy.y)),
+                            FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + additionalReach.get(fairy.y)),
                             itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }
                     if (!canExecute(world, rayTraceResult)) {
-                        spawnParticle(
+                        FairyWeaponUtils.spawnParticle(
                             world,
                             rayTraceResult.hitVec,
                             itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }
 
-                    spawnParticle(
+                    FairyWeaponUtils.spawnParticle(
                         world,
                         rayTraceResult.hitVec,
                         itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0xFFFF00 : 0xFFFFFF);
