@@ -57,8 +57,8 @@ class PluginManualRepair : IModPlugin {
             CreativeTabs.CREATIVE_TAB_ARRAY.forEach { creativeTab ->
                 Item.REGISTRY.forEach { item ->
                     (item as Item/* これをしないと謎レシーバ解決不能がCI上で発生する */).getSubItems(creativeTab).forEach a@{ itemStack ->
-                        if (item !is IManualRepairableItem) return@a // 手動修理不可の場合無視
-                        if (!item.canManualRepair(itemStack)) return@a // 手動修理不可の場合無視
+                        if (item !is IManualRepairableItem) return@a // 手入れ不可の場合無視
+                        if (!item.canManualRepair(itemStack)) return@a // 手入れ不可の場合無視
                         if (registered.any { ItemStack.areItemStacksEqualUsingNBTShareTag(itemStack, it) }) return@a // 既に登録済みなら無視
 
                         registered += itemStack

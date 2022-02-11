@@ -103,7 +103,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
 
         FairyWeaponUtils.getCombinedFairy(itemStack).orNull?.let { tooltip += formattedText { (!"Combined: ${it.displayName}").aqua } } // 搭乗中の妖精
 
-        // スフィア交換
+        // 手入れ
         if (canManualRepair(itemStack)) {
             tooltip += formattedText {
                 val value = getManualRepairErgs().entries.map { !it.key.displayName + (if (it.value == 1) !"" else !"x${it.value}") }.concat(!", ")
@@ -124,7 +124,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
     open fun addInformationFeatures(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         if (mirageFairyCombiningHandler.canCombine(itemStack)) tooltip += formattedText { (!"クラフトで妖精を搭乗可能").red } // TODO translate Can be combined with fairy by crafting
         if (mirageFairyCombiningHandler.canUncombine(itemStack)) tooltip += formattedText { (!"クラフトで妖精を分離可能").red } // TODO translate
-        if (canManualRepair(itemStack)) tooltip += formattedText { (!"工作修理可能").red } // TODO translate Can be repaired by crafting with contained sphere
+        if (canManualRepair(itemStack)) tooltip += formattedText { (!"手入れ可能").red } // TODO translate Can be repaired by crafting with contained sphere
         featureInformationList.forEach { tooltip += formattedText { (!it).red } }
     }
 
@@ -186,7 +186,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
     override fun getContainerItem(itemStack: ItemStack): ItemStack = FairyWeaponUtils.getCombinedFairy(itemStack)
 
 
-    // スフィア交換
+    // 手入れ
 
     private val manualRepairErgs = mutableMapOf<EnumErgType, Int>()
     fun getManualRepairErgs() = manualRepairErgs
