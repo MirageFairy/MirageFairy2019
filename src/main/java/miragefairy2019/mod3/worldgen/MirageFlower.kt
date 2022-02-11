@@ -12,13 +12,11 @@ import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.modules.fairycrystal.variantFairyCrystal
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
 import miragefairy2019.mod3.artifacts.FairyMaterials
 import miragefairy2019.mod3.erg.api.EnumErgType
-import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
@@ -153,31 +151,6 @@ fun getGrowthRate(world: World, blockPos: BlockPos): Double {
 }
 
 fun getGrowthRateInFloor(fairyType: IFairyType) = fairyType.shineEfficiency * fairyType.erg(EnumErgType.CRYSTAL) / 100.0 * 3
-
-fun getGrowthRateTableMessage() = textComponent {
-    listOf(
-        !"===== Mirage Flower Grow Rate Table =====\n",
-        FairyTypes.instance.variants
-            .map { it.y.main.type }
-            .map { Pair(it, getGrowthRateInFloor(it)) }
-            .filter { it.second > 1 }
-            .sortedBy { it.second }
-            .flatMap { format("%7.2f%%  ", it.second * 100) + !it.first.displayName + !"\n" },
-        !"===================="
-    ).flatten()
-}
-
-fun getGrowthRateMessage(world: World, pos: BlockPos) = textComponent {
-    listOf(
-        !"===== Mirage Flower Grow Rate =====\n",
-        !"Pos: ${pos.x} ${pos.y} ${pos.z}\n",
-        !"Block: ${world.getBlockState(pos)}\n",
-        !"Floor: ${world.getBlockState(pos.down())}\n",
-        format("%.2f%%\n", getGrowthRate(world, pos) * 100),
-        !"===================="
-    ).flatten()
-}
-
 
 class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidであるマテリアルは耕土を破壊する
     init {

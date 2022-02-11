@@ -21,6 +21,8 @@ import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType
 import miragefairy2019.mod3.oreseeddrop.api.OreSeedDropEnvironment
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill
+import miragefairy2019.mod3.worldgen.getGrowthRate
+import miragefairy2019.mod3.worldgen.getGrowthRateInFloor
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.mana
@@ -61,6 +63,8 @@ object DebugItems {
         r({ ItemDebugGainFairyMasterExp() }, "gain_fairy_master_exp", "Gain Fairy Master Exp", "妖精経験値入手")
         r({ ItemDebugOreSeedStatistics() }, "ore_seed_statistics", "Ore Seed Statistics", "鉱石分布")
         r({ ItemDebugOreSeedDropRate() }, "ore_seed_drop_rate", "Ore Seed Drop Rate", "鉱石生成確率表示")
+        r({ ItemDebugMirageFlowerGrowthRateList() }, "mirage_flower_growth_rate_list", "Mirage Flower Growth Rate List", "ミラージュフラワー地面補正一覧")
+        r({ ItemDebugMirageFlowerGrowthRate() }, "mirage_flower_growth_rate", "Mirage Flower Growth Rate", "ミラージュフラワー成長速度表示")
 
     }
 }
@@ -243,6 +247,36 @@ class ItemDebugOreSeedDropRate : ItemDebug() {
                 player.sendStatusMessage(textComponent { !it.weight.f3 + !": " + !it.item().block.getItem(world, blockPos, it.item()).displayName }, false)
             }
         }
+        player.sendStatusMessage(textComponent { !"====================" }, false)
+
+        return EnumActionResult.SUCCESS
+    }
+}
+
+class ItemDebugMirageFlowerGrowthRateList : ItemDebug() {
+    override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        if (world.isRemote) return EnumActionResult.SUCCESS
+
+        player.sendStatusMessage(textComponent { !"===== Mirage Flower Grow Rate Table =====" }, false)
+        FairyTypes.instance.variants.map { it.y.main.type }.map { Pair(it, getGrowthRateInFloor(it)) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
+            player.sendStatusMessage(textComponent { !((it.second * 100) formatAs "%7.2f%%  ") + !it.first.displayName }, false)
+        }
+        player.sendStatusMessage(textComponent { !"====================" }, false)
+
+        return EnumActionResult.SUCCESS
+    }
+}
+
+class ItemDebugMirageFlowerGrowthRate : ItemDebug() {
+    override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        if (world.isRemote) return EnumActionResult.SUCCESS
+
+        val airBlockPos = if (world.getBlockState(blockPos).isFullBlock) blockPos.up() else blockPos
+        player.sendStatusMessage(textComponent { !"===== Mirage Flower Grow Rate =====" }, false)
+        player.sendStatusMessage(textComponent { !"Pos: ${airBlockPos.x} ${airBlockPos.y} ${airBlockPos.z}" }, false)
+        player.sendStatusMessage(textComponent { !"Block: ${world.getBlockState(airBlockPos)}" }, false)
+        player.sendStatusMessage(textComponent { !"Floor: ${world.getBlockState(airBlockPos.down())}" }, false)
+        player.sendStatusMessage(textComponent { !((getGrowthRate(world, airBlockPos) * 100) formatAs "%.2f%%") }, false)
         player.sendStatusMessage(textComponent { !"====================" }, false)
 
         return EnumActionResult.SUCCESS

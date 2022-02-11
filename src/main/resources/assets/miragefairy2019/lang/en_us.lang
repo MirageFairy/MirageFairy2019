@@ -482,3 +482,5 @@ item.debugPlayerAuraReset.name=Debug: Player Aura Reset
 item.debugGainFairyMasterExp.name=Debug: Gain Fairy Master Exp
 item.debugOreSeedStatistics.name=Debug: Ore Seed Statistics
 item.debugOreSeedDropRate.name=Debug: Ore Seed Drop Rate
+item.debugMirageFlowerGrowthRateList.name=Debug: Mirage Flower Growth Rate List
+item.debugMirageFlowerGrowthRate.name=Debug: Mirage Flower Growth Rate
