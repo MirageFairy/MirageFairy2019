@@ -95,7 +95,7 @@ public class ItemMiragiumAxe extends ItemFairyWeaponBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    protected void addInformationFunctions(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformationFunctions(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 
         tooltip.add(TextFormatting.RED + "Right click to cut whole tree");
 

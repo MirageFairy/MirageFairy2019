@@ -1,19 +1,16 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import com.google.common.base.Predicate;
-import miragefairy2019.mod.api.fairy.ApiFairy;
 import miragefairy2019.mod.api.fairy.IItemFairy;
 import miragefairy2019.mod.api.fairyweapon.formula.ApiFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon;
-import miragefairy2019.mod3.erg.ErgKt;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -32,7 +29,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
@@ -45,128 +41,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-import static miragefairy2019.libkt.MinecraftUtilsKt.canTranslate;
-import static miragefairy2019.libkt.MinecraftUtilsKt.translateToLocal;
-import static net.minecraft.util.text.TextFormatting.AQUA;
 import static net.minecraft.util.text.TextFormatting.BLUE;
-import static net.minecraft.util.text.TextFormatting.GREEN;
-import static net.minecraft.util.text.TextFormatting.LIGHT_PURPLE;
-import static net.minecraft.util.text.TextFormatting.RED;
-import static net.minecraft.util.text.TextFormatting.WHITE;
-import static net.minecraft.util.text.TextFormatting.YELLOW;
 
 public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IItemFairyWeapon {
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public final void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
-
-        // ポエム
-        if (canTranslate(getUnlocalizedName() + ".poem")) {
-            String string = translateToLocal(getUnlocalizedName() + ".poem");
-            if (!string.isEmpty()) {
-                tooltip.add(string);
-            }
-        }
-        if (canTranslate(getUnlocalizedName() + ".author")) {
-            String string = translateToLocal(getUnlocalizedName() + ".author");
-            if (!string.isEmpty()) {
-                tooltip.add(LIGHT_PURPLE + "Author: " + string);
-            }
-        }
-
-        // tier
-        tooltip.add(AQUA + "Tier " + getTier());
-
-        // 機能
-        addInformationFunctions(itemStack, world, tooltip, flag);
-
-        // アイテムステータス
-        tooltip.add(GREEN + "Durability: " + Math.max(getMaxDamage(itemStack) - getDamage(itemStack), 0) + " / " + getMaxDamage(itemStack));
-
-        // 搭乗中の妖精
-        ItemStack itemStackFairy = getCombinedFairy(itemStack);
-        if (!itemStackFairy.isEmpty()) tooltip.add(AQUA + "Combined: " + itemStackFairy.getDisplayName());
-
-        // スフィア交換
-        if (canManualRepair(itemStack)) {
-            TextComponentString a = new TextComponentString("Sphere Replacement: ");
-            a.setStyle(new Style().setColor(YELLOW));
-
-            ISuppliterator.ofIterable(getManualRepairErgs().entrySet())
-                .map(e -> ISuppliterator.of(
-                    ErgKt.getDisplayName(e.getKey()),
-                    new TextComponentString(e.getValue() == 1 ? "" : "×" + e.getValue())
-                ).toList())
-                .sandwich(ISuppliterator.of((ITextComponent) new TextComponentString(", ")).toList())
-                .flatMap(t -> ISuppliterator.ofIterable(t))
-                .forEach(t -> a.appendSibling(t));
-
-            tooltip.add(a.getFormattedText());
-        }
-
-        // 妖精魔法ステータス
-        Tuple<ItemStack, IFairyType> fairy = Optional.ofNullable(Minecraft.getMinecraft().player)
-            .flatMap(p -> findFairy(itemStack, p))
-            .orElseGet(() -> Tuple.of(ItemStack.EMPTY, ApiFairy.empty()));
-        tooltip.add(new TextComponentString("Magic with ")
-            .setStyle(new Style().setColor(BLUE))
-            .appendSibling(new TextComponentString(fairy.x.isEmpty() ? "-" : fairy.x.getDisplayName())
-                .setStyle(new Style().setColor(WHITE)))
-            .getFormattedText());
-        addInformationFairyWeapon(itemStack, fairy.x, fairy.y, world, tooltip, flag);
-
-    }
-
-    //
-
-    protected interface IInformationHandler {
-
-        @SideOnly(Side.CLIENT)
-        public void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag);
-
-    }
-
-    private List<IInformationHandler> informationHandlersFunctions = new ArrayList<>();
-
-    protected void addInformationHandlerFunctions(IInformationHandler informationHandler) {
-        informationHandlersFunctions.add(informationHandler);
-    }
-
-    protected void addInformationHandlerFunctions(String information) {
-        addInformationHandlerFunctions(new IInformationHandler() {
-            @Override
-            @SideOnly(Side.CLIENT)
-            public void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
-                tooltip.add(RED + information);
-            }
-        });
-    }
-
-    @SideOnly(Side.CLIENT)
-    protected void addInformationFunctions(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
-
-        tooltip.add(RED + "Can be combined with fairy by crafting");
-
-        tooltip.add(RED + "Can be repaired by crafting with contained sphere");
-
-        for (IInformationHandler informationHandler : informationHandlersFunctions) {
-            informationHandler.addInformation(itemStack, world, tooltip, flag);
-        }
-
-    }
-
-    //
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
-
-        addInformationMagicStatuses(itemStackFairyWeapon, itemStackFairy, fairyType, world, tooltip, flag);
-
-    }
-
-    //
 
     public static double getFairyAttribute(String attributeName, ItemStack itemStack) {
         if (!itemStack.hasTagCompound()) return 0;
@@ -384,8 +261,9 @@ public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IIte
         return ISuppliterator.ofIterable(magicStatuses);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
-    protected void addInformationMagicStatuses(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformationMagicStatuses(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
         for (IMagicStatus<?> magicStatus : getMagicStatuses()) {
             tooltip.add(magicStatus.getDisplayString(fairyType)
                 .setStyle(new Style().setColor(BLUE))

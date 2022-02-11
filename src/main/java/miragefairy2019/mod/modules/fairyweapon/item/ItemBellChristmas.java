@@ -191,7 +191,7 @@ public class ItemBellChristmas extends ItemBellBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    protected void addInformationFunctions(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformationFunctions(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 
         super.addInformationFunctions(itemStack, world, tooltip, flag);
 

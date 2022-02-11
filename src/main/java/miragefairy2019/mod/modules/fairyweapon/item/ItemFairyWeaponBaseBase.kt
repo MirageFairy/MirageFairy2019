@@ -2,21 +2,36 @@ package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.api.IFairyCombiningHandler
 import miragefairy2019.api.IFairyCombiningItem
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
+import miragefairy2019.libkt.aqua
+import miragefairy2019.libkt.blue
+import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.drop
+import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.green
+import miragefairy2019.libkt.lightPurple
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.oreIngredient
+import miragefairy2019.libkt.red
+import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.unit
+import miragefairy2019.libkt.white
+import miragefairy2019.libkt.yellow
+import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod3.artifacts.getSphereType
 import miragefairy2019.mod3.artifacts.oreName
 import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.erg.displayName
+import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.item.Item
@@ -28,7 +43,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRepairableItem {
+abstract class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRepairableItem {
     var tier = 0
 
     init {
@@ -59,8 +74,63 @@ open class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRepaira
     override fun canHarvestBlock(blockState: IBlockState, itemStack: ItemStack) = isEffective(itemStack, blockState)
 
 
-    // ユーティリティの利用
+    // ツールチップ
 
+    @SideOnly(Side.CLIENT)
+    override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+
+        if (canTranslate("$unlocalizedName.poem")) { // ポエム
+            val string = translateToLocal("$unlocalizedName.poem")
+            if (string.isNotBlank()) tooltip += formattedText { !string }
+        }
+
+        if (canTranslate("$unlocalizedName.author")) { // 著者
+            val string = translateToLocal("$unlocalizedName.author")
+            if (string.isNotBlank()) tooltip += formattedText { (!"Author: $string").lightPurple } // TODO translate
+        }
+
+        tooltip += formattedText { (!"Tier $tier").aqua } // tier
+
+        addInformationFunctions(itemStack, world, tooltip, flag) // 機能
+
+        tooltip += formattedText { (!"Durability: ${(getMaxDamage(itemStack) - getDamage(itemStack)).coerceAtLeast(0)} / ${getMaxDamage(itemStack)}").green } // 耐久値
+
+        ItemFairyWeaponBase.getCombinedFairy(itemStack).orNull?.let { tooltip += formattedText { (!"Combined: ${it.displayName}").aqua } } // 搭乗中の妖精
+
+        // スフィア交換
+        if (canManualRepair(itemStack)) {
+            tooltip += formattedText {
+                val value = getManualRepairErgs().entries.map { !it.key.displayName + (if (it.value == 1) !"" else !"x${it.value}") }.concat(!", ")
+                (!"Sphere Replacement: " + value).yellow // TODO translate
+            }
+        }
+
+        // 妖精魔法ステータス
+        val fairy = Minecraft.getMinecraft().player?.let { ItemFairyWeaponBase.findFairy(itemStack, it).orNull?.let { t -> Pair(t.x!!, t.y!!) } } ?: Pair(EMPTY_ITEM_STACK, ApiFairy.empty()!!)
+        tooltip += formattedText { (!"Magic with " + (if (fairy.first.isEmpty) !"-" else !fairy.first.displayName).white).blue } // TODO translate
+        addInformationFairyWeapon(itemStack, fairy.first, fairy.second, world, tooltip, flag)
+
+    }
+
+    val functionsInformations = mutableListOf<String>()
+
+    @SideOnly(Side.CLIENT)
+    open fun addInformationFunctions(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+        tooltip += formattedText { (!"Can be combined with fairy by crafting").red } // TODO translate
+        tooltip += formattedText { (!"Can be repaired by crafting with contained sphere").red } // TODO translate
+        functionsInformations.forEach { tooltip += formattedText { (!it).red } }
+    }
+
+    @SideOnly(Side.CLIENT)
+    open fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+        addInformationMagicStatuses(itemStackFairyWeapon, itemStackFairy, fairyType, world, tooltip, flag)
+    }
+
+    @SideOnly(Side.CLIENT)
+    abstract fun addInformationMagicStatuses(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag)
+
+
+    // ユーティリティの利用
     override fun isEnchantable(stack: ItemStack) = false // エンチャント不可
     override fun canApplyAtEnchantingTable(stack: ItemStack, enchantment: Enchantment) = false // すべてのエンチャントが不適正
     override fun isBookEnchantable(stack: ItemStack, book: ItemStack) = false // 本を使用したエンチャント不可
