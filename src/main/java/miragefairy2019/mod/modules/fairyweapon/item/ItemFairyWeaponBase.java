@@ -7,18 +7,13 @@ import miragefairy2019.mod.api.fairyweapon.formula.ApiFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IFormula;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon;
-import miragefairy2019.mod.lib.BakedModelBuiltinWrapper;
 import miragefairy2019.mod3.erg.ErgKt;
 import miragefairy2019.mod3.fairy.api.IFairyType;
-import miragefairy2019.mod3.main.api.ApiMain;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -61,64 +56,6 @@ import static net.minecraft.util.text.TextFormatting.WHITE;
 import static net.minecraft.util.text.TextFormatting.YELLOW;
 
 public class ItemFairyWeaponBase extends ItemFairyWeaponBaseBase implements IItemFairyWeapon {
-
-    public ItemFairyWeaponBase() {
-        if (ApiMain.side.isClient()) {
-            new Object() {
-                @SideOnly(Side.CLIENT)
-                public void run() {
-                    setTileEntityItemStackRenderer(new TileEntityItemStackRenderer() {
-                        @Override
-                        public void renderByItem(ItemStack itemStack, float partialTicks) {
-
-                            GlStateManager.disableRescaleNormal();
-
-                            // 本体描画
-                            {
-                                IBakedModel bakedModel = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(itemStack, null, null);
-                                if (bakedModel instanceof BakedModelBuiltinWrapper) {
-
-                                    GlStateManager.pushMatrix();
-                                    try {
-                                        GlStateManager.translate(0.5F, 0.5F, 0.5F);
-
-                                        Minecraft.getMinecraft().getRenderItem().renderItem(itemStack, ((BakedModelBuiltinWrapper) bakedModel).bakedModel);
-
-                                    } finally {
-                                        GlStateManager.popMatrix();
-                                    }
-
-                                }
-                            }
-
-                            GlStateManager.disableRescaleNormal();
-
-                            // 搭乗妖精描画
-                            ItemStack itemStackFairy = getCombinedFairy(itemStack);
-                            if (!itemStackFairy.isEmpty()) {
-                                IBakedModel bakedModel = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(itemStackFairy, null, null);
-
-                                GlStateManager.pushMatrix();
-                                try {
-                                    GlStateManager.translate(0.75F, 0.25F, 0.51F);
-                                    GlStateManager.scale(0.5F, 0.5F, 1.0F);
-
-                                    Minecraft.getMinecraft().getRenderItem().renderItem(itemStackFairy, bakedModel);
-
-                                } finally {
-                                    GlStateManager.popMatrix();
-                                }
-
-                            }
-
-                        }
-                    });
-                }
-            }.run();
-        }
-    }
-
-    //
 
     @Override
     @SideOnly(Side.CLIENT)

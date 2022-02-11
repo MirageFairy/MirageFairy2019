@@ -3,14 +3,20 @@ package miragefairy2019.mod.modules.fairyweapon.item
 import miragefairy2019.api.IFairyCombiningHandler
 import miragefairy2019.api.IFairyCombiningItem
 import miragefairy2019.libkt.drop
+import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.unit
 import miragefairy2019.mod.api.fairy.IItemFairy
+import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod3.artifacts.getSphereType
 import miragefairy2019.mod3.artifacts.oreName
 import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
 import net.minecraft.block.state.IBlockState
+import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.GlStateManager
+import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.item.Item
@@ -27,6 +33,7 @@ open class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRepaira
 
     init {
         setMaxStackSize(1)
+        if (ApiMain.side.isClient) tileEntityItemStackRenderer = TileEntityItemStackRendererFairyWeapon()
     }
 
 
@@ -111,6 +118,41 @@ open class ItemFairyWeaponBaseBase : IFairyCombiningItem, Item(), IManualRepaira
             itemStack.damageItem(1, entityLivingBase) // アイテムスタックにダメージ
             // 壊れた場合、搭乗している妖精をドロップ
             if (itemStack.isEmpty) ItemFairyWeaponBase.getCombinedFairy(itemStack).drop(entityLivingBase.world, entityLivingBase.position).setNoPickupDelay()
+        }
+    }
+}
+
+@SideOnly(Side.CLIENT)
+class TileEntityItemStackRendererFairyWeapon : TileEntityItemStackRenderer() {
+    override fun renderByItem(itemStack: ItemStack, partialTicks: Float) {
+        GlStateManager.disableRescaleNormal()
+
+        // 本体描画
+        val bakedModel = Minecraft.getMinecraft().renderItem.getItemModelWithOverrides(itemStack, null, null)
+        if (bakedModel is BakedModelBuiltinWrapper) {
+            GlStateManager.pushMatrix()
+            try {
+                GlStateManager.translate(0.5f, 0.5f, 0.5f)
+                Minecraft.getMinecraft().renderItem.renderItem(itemStack, bakedModel.bakedModel)
+            } finally {
+                GlStateManager.popMatrix()
+            }
+        }
+
+        GlStateManager.disableRescaleNormal()
+
+        // 搭乗妖精描画
+        val itemStackFairy = ItemFairyWeaponBase.getCombinedFairy(itemStack).orNull
+        if (itemStackFairy != null) {
+            val bakedModel = Minecraft.getMinecraft().renderItem.getItemModelWithOverrides(itemStackFairy, null, null)
+            GlStateManager.pushMatrix()
+            try {
+                GlStateManager.translate(0.75f, 0.25f, 0.51f)
+                GlStateManager.scale(0.5f, 0.5f, 1.0f)
+                Minecraft.getMinecraft().renderItem.renderItem(itemStackFairy, bakedModel)
+            } finally {
+                GlStateManager.popMatrix()
+            }
         }
     }
 }
