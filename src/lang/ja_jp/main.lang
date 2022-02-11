@@ -37,5 +37,3 @@ miragefairy2019.gui.astronomicalObservation.message.completed=完了！
 miragefairy2019.gui.astronomicalObservation.message.gainExp=%s のフェアリーマスター経験値を獲得しました！
 miragefairy2019.gui.astronomicalObservation.message.gainLevel=フェアリーマスターレベルが %s 上昇しました！
 miragefairy2019.gui.astronomicalObservation.message.doNothing=特筆すべき変化は見られなかった…
-
-miragefairy2019.gui.magic.message.rightClick=右クリックで魔法を発動

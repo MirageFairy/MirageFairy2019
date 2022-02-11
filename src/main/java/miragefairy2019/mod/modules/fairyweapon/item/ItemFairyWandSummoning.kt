@@ -1,11 +1,8 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
-import miragefairy2019.libkt.formattedText
-import miragefairy2019.libkt.red
 import miragefairy2019.mod.modules.fairycrystal.ItemFairyCrystal
 import miragefairy2019.mod.modules.fairyweapon.item.FairyWeaponUtils.findItemOptional
 import miragefairy2019.mod3.skill.api.ApiSkill
-import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
@@ -17,14 +14,11 @@ import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.RayTraceResult
 import net.minecraft.world.World
-import net.minecraftforge.fml.relauncher.Side
-import net.minecraftforge.fml.relauncher.SideOnly
 
 class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWand() {
-    @SideOnly(Side.CLIENT)
-    override fun addInformationFeatures(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        tooltip.add(formattedText { (!"Hold right mouse button to use fairy crystals quickly").red }) // TODO translate
-        super.addInformationFeatures(itemStack, world, tooltip, flag)
+
+    init {
+        featureInformationList += "右クリック長押しでフェアリークリスタルを高速消費" // TODO translate Hold right mouse button to use fairy crystals quickly
     }
 
     //

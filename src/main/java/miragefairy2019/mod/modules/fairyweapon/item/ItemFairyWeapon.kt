@@ -83,7 +83,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
     // ツールチップ
 
     @SideOnly(Side.CLIENT)
-    override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+    final override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
 
         if (canTranslate("$unlocalizedName.poem")) { // ポエム
             val string = translateToLocal("$unlocalizedName.poem")
@@ -121,7 +121,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
     val featureInformationList = mutableListOf<String>()
 
     @SideOnly(Side.CLIENT)
-    open fun addInformationFeatures(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+    fun addInformationFeatures(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         if (mirageFairyCombiningHandler.canCombine(itemStack)) tooltip += formattedText { (!"クラフトで妖精を搭乗可能").red } // TODO translate Can be combined with fairy by crafting
         if (mirageFairyCombiningHandler.canUncombine(itemStack)) tooltip += formattedText { (!"クラフトで妖精を分離可能").red } // TODO translate
         if (canManualRepair(itemStack)) tooltip += formattedText { (!"手入れ可能").red } // TODO translate Can be repaired by crafting with contained sphere
@@ -150,7 +150,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
     }
 
     @SideOnly(Side.CLIENT)
-    open fun addInformationMagicStatuses(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+    fun addInformationMagicStatuses(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         magicStatuses.forEach { tooltip += formattedText { !(it.getDisplayString(fairyType)).blue } }
     }
 

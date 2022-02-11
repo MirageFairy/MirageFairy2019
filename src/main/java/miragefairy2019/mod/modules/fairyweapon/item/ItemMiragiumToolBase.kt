@@ -43,7 +43,7 @@ abstract class ItemMiragiumToolBase(
     val wear = "wear"({ percent2.positive }) { 1 / (25.0 + !endurance * 0.25) }.setVisibility(Companion.EnumVisibility.DETAIL)
 
     init {
-        featureInformationList += "Right click: use magic" // TODO translate
+        featureInformationList += "右クリックでブロックを破壊" // TODO translate Right click: use magic
 
         magic {
             val fairyType = FairyWeaponUtils.findFairy(itemStack, player).orNull?.let { it.y!! } ?: ApiFairy.empty()!! // 妖精取得

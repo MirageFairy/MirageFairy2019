@@ -3,7 +3,6 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import mirrg.boron.util.struct.Tuple;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -11,13 +10,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.add;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.cost;
@@ -32,14 +25,12 @@ public class ItemBellBase extends ItemFairyWeapon {
     public IMagicStatus<Double> pitch = registerMagicStatus("pitch", formatterPitch(),
         mul(val(1.0), pow(0.5, add(div(cost(), 50), -1))));
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformationFeatures(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    {
+        getFeatureInformationList().add(getMagicFeatureInformation());
+    }
 
-        tooltip.add(TextFormatting.RED + "Right click to sound");
-
-        super.addInformationFeatures(itemStack, world, tooltip, flag);
-
+    public String getMagicFeatureInformation() {
+        return "右クリックで鳴らす"; // TODO translate
     }
 
     //

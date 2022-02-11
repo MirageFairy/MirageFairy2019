@@ -41,14 +41,8 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
 
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformationFeatures(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
-
-        tooltip.add(TextFormatting.RED + "Right click to use magic");
-
-        super.addInformationFeatures(itemStack, world, tooltip, flag);
-
+    {
+        getFeatureInformationList().add("右クリックで松明を設置"); // TODO translate Right click to use magic
     }
 
     @Override

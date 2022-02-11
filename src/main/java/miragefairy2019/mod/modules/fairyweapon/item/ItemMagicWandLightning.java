@@ -15,7 +15,6 @@ import miragefairy2019.mod3.erg.api.EnumErgType;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
 import mirrg.boron.util.UtilsMath;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -31,14 +30,8 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.ability;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.abilityRaw;
@@ -262,14 +255,8 @@ public class ItemMagicWandLightning extends ItemFairyWeapon {
 
     //
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformationFeatures(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
-
-        super.addInformationFeatures(itemStack, world, tooltip, flag);
-
-        tooltip.add(TextFormatting.RED + "Right click to use magic");
-
+    {
+        getFeatureInformationList().add("右クリックで攻撃"); // TODO translate Right click to use magic
     }
 
     @Override

@@ -11,7 +11,6 @@ import miragefairy2019.mod3.erg.api.EnumErgType;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
 import mirrg.boron.util.UtilsMath;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,13 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.ability;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.add;
@@ -101,6 +94,11 @@ public class ItemBellChristmas extends ItemBellBase {
         }));
 
     //
+
+    @Override
+    public String getMagicFeatureInformation() {
+        return "右クリックで攻撃"; // TODO translate
+    }
 
     public MagicExecutor getExecutor(ItemFairyWeapon item, World world, ItemStack itemStack, EntityPlayer player) {
 
@@ -188,16 +186,6 @@ public class ItemBellChristmas extends ItemBellBase {
     }
 
     //
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformationFeatures(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
-
-        super.addInformationFeatures(itemStack, world, tooltip, flag);
-
-        tooltip.add(TextFormatting.RED + "Right click to use magic");
-
-    }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {

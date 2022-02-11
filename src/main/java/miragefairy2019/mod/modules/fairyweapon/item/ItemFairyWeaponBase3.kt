@@ -172,12 +172,6 @@ abstract class ItemFairyWeaponBase3(
     // Overrides
 
     @SideOnly(Side.CLIENT)
-    override fun addInformationFeatures(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        tooltip += formattedText { translate("$prefix.message.rightClick").red }
-        super.addInformationFeatures(itemStack, world, tooltip, flag)
-    }
-
-    @SideOnly(Side.CLIENT)
     override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val actualFairyType = getActualFairyTypeClient(fairyType)
         magicStatusWrapperList.forEach {

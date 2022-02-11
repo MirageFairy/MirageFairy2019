@@ -47,6 +47,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, maxExtraItemDropRate: 
     val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { skillFunction1(mastery, 0, 100, 0.1, maxExtraItemDropRate) }.setVisibility(ALWAYS)
 
     init {
+        featureInformationList += "右クリックでミラージュフラワーを収穫" // TODO translate
         magic {
 
             // 視線判定

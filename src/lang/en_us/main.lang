@@ -37,5 +37,3 @@ miragefairy2019.gui.astronomicalObservation.message.completed=Completed!
 miragefairy2019.gui.astronomicalObservation.message.gainExp=You have earned %s Fairy Master XP!
 miragefairy2019.gui.astronomicalObservation.message.gainLevel=You have earned %s Fairy Master Level!
 miragefairy2019.gui.astronomicalObservation.message.doNothing=You got nothing...
-
-miragefairy2019.gui.magic.message.rightClick=Right click to use magic

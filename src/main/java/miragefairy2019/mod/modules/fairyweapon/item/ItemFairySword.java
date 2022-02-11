@@ -60,16 +60,6 @@ public class ItemFairySword extends ItemFairyWeapon {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformationFeatures(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
-
-        tooltip.add(TextFormatting.RED + "Great damage when attacking");
-
-        super.addInformationFeatures(itemStack, world, tooltip, flag);
-
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
     public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
         Status status = new Status(fairyType);
         tooltip.add(TextFormatting.BLUE + "Additional Attack Damage: " + String.format("%.1f", status.additionalAttackDamage) + " (Shine, Fire, Wind, Gaia, Aqua, Dark)");

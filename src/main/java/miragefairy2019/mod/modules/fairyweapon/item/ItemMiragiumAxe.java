@@ -10,7 +10,6 @@ import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,13 +19,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.abilityRaw;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.add;
@@ -93,14 +86,8 @@ public class ItemMiragiumAxe extends ItemFairyWeapon {
 
     //
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformationFeatures(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
-
-        tooltip.add(TextFormatting.RED + "Right click to cut whole tree");
-
-        super.addInformationFeatures(itemStack, world, tooltip, flag);
-
+    {
+        getFeatureInformationList().add("右クリックでブロックを破壊"); // TODO translate
     }
 
     //
