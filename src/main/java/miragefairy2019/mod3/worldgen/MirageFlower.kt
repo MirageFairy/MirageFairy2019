@@ -79,7 +79,7 @@ object MirageFlower {
     }
 }
 
-fun getGrowRate(world: World, blockPos: BlockPos): Double {
+fun getGrowthRate(world: World, blockPos: BlockPos): Double {
     var rate = 0.04 // 何もしなくても25回に1回の割合で成長する
 
     // 人工光が当たっているなら加点
@@ -114,9 +114,9 @@ fun getGrowRate(world: World, blockPos: BlockPos): Double {
             if (entries.isEmpty()) return@noFairy // 関連付けられた妖精が居ない場合は無視
 
             // 最も大きな補正値
-            val growRateInFloor = entries.map { getGrowRateInFloor(it.fairy.main.type) }.max()!!
+            val growthRateInFloor = entries.map { getGrowthRateInFloor(it.fairy.main.type) }.max()!!
 
-            bonus = bonus.coerceAtLeast(growRateInFloor)
+            bonus = bonus.coerceAtLeast(growthRateInFloor)
         }
 
         // 特定ブロックによる判定
@@ -152,14 +152,14 @@ fun getGrowRate(world: World, blockPos: BlockPos): Double {
     return rate
 }
 
-fun getGrowRateInFloor(fairyType: IFairyType) = fairyType.shineEfficiency * fairyType.erg(EnumErgType.CRYSTAL) / 100.0 * 3
+fun getGrowthRateInFloor(fairyType: IFairyType) = fairyType.shineEfficiency * fairyType.erg(EnumErgType.CRYSTAL) / 100.0 * 3
 
-fun getGrowRateTableMessage() = textComponent {
+fun getGrowthRateTableMessage() = textComponent {
     listOf(
         !"===== Mirage Flower Grow Rate Table =====\n",
         FairyTypes.instance.variants
             .map { it.y.main.type }
-            .map { Pair(it, getGrowRateInFloor(it)) }
+            .map { Pair(it, getGrowthRateInFloor(it)) }
             .filter { it.second > 1 }
             .sortedBy { it.second }
             .flatMap { format("%7.2f%%  ", it.second * 100) + !it.first.displayName + !"\n" },
@@ -167,13 +167,13 @@ fun getGrowRateTableMessage() = textComponent {
     ).flatten()
 }
 
-fun getGrowRateMessage(world: World, pos: BlockPos) = textComponent {
+fun getGrowthRateMessage(world: World, pos: BlockPos) = textComponent {
     listOf(
         !"===== Mirage Flower Grow Rate =====\n",
         !"Pos: ${pos.x} ${pos.y} ${pos.z}\n",
         !"Block: ${world.getBlockState(pos)}\n",
         !"Floor: ${world.getBlockState(pos.down())}\n",
-        format("%.2f%%\n", getGrowRate(world, pos) * 100),
+        format("%.2f%%\n", getGrowthRate(world, pos) * 100),
         !"===================="
     ).flatten()
 }
@@ -220,11 +220,11 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
     override fun updateTick(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random) {
         super.updateTick(worldIn, pos, state, rand)
         if (!worldIn.isAreaLoaded(pos, 1)) return
-        grow(worldIn, pos, state, rand, getGrowRate(worldIn, pos))
+        grow(worldIn, pos, state, rand, getGrowthRate(worldIn, pos))
     }
 
     // 骨粉をやると低確率で成長する。
-    override fun grow(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = grow(worldIn, pos, state, rand, getGrowRate(worldIn, pos))
+    override fun grow(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = grow(worldIn, pos, state, rand, getGrowthRate(worldIn, pos))
     override fun canGrow(worldIn: World, pos: BlockPos, state: IBlockState, isClient: Boolean) = !isMaxAge(state)
     override fun canUseBonemeal(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = worldIn.rand.nextFloat() < 0.05
 
