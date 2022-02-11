@@ -185,7 +185,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
     override fun getContainerItem(itemStack: ItemStack): ItemStack = FairyWeaponUtils.getCombinedFairy(itemStack)
 
 
-    // 手修理
+    // スフィア交換
 
     private val manualRepairErgs = mutableMapOf<EnumErgType, Int>()
     fun getManualRepairErgs() = manualRepairErgs

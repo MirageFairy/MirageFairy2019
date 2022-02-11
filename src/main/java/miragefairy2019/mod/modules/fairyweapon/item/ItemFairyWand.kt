@@ -59,7 +59,7 @@ open class ItemFairyWand : ItemFairyWeapon() {
 
     // 挙動
 
-    override fun canManualRepair(itemStack: ItemStack) = false // 手修理負荷
+    override fun canManualRepair(itemStack: ItemStack) = false // スフィア交換不可
 
     // 妖精搭乗不可
     override fun getMirageFairyCombiningHandler() = object : FairyCombiningHandler() {
