@@ -17,9 +17,7 @@ import net.minecraft.world.World
 
 class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWand() {
 
-    init {
-        featureInformationList += "右クリック長押しでフェアリークリスタルを高速消費" // TODO translate Hold right mouse button to use fairy crystals quickly
-    }
+    override val magicFeatureInformation get() = "右クリック長押しでフェアリークリスタルを高速消費" // TODO translate Hold right mouse button to use fairy crystals quickly
 
     //
 

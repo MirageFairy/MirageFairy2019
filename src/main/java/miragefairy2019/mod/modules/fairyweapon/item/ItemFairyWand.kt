@@ -14,6 +14,12 @@ import net.minecraft.world.World
 open class ItemFairyWand : ItemFairyWeapon() {
     // フェアリーステッキクラフト関係
 
+    init {
+        featureInformationList += magicFeatureInformation
+    }
+
+    open val magicFeatureInformation get() = "右クリックでフェアリーステッキクラフト" // TODO translate
+
     override fun onItemUse(player: EntityPlayer, worldIn: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
 
         // フェアリーステッキクラフトのレシピを判定
