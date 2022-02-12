@@ -26,7 +26,6 @@ import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemStacks
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.makeRecipe
-import mirrg.kotlin.minus
 import miragefairy2019.libkt.readFromNBT
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.setCreativeTab
@@ -45,6 +44,7 @@ import miragefairy2019.mod3.main.api.ApiMain
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.json
 import mirrg.kotlin.gson.jsonElement
+import mirrg.kotlin.minus
 import mirrg.kotlin.utf8ByteArray
 import mirrg.kotlin.utf8String
 import net.minecraft.block.BlockContainer
@@ -82,6 +82,7 @@ import net.minecraft.world.World
 import net.minecraftforge.common.DimensionManager
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.ServerChatEvent
+import net.minecraftforge.fml.common.eventhandler.Event
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -146,7 +147,16 @@ object ChatWebhook {
         onInit {
             MinecraftForge.EVENT_BUS.register(object {
                 @[Suppress("unused") SubscribeEvent]
+                fun handle(event: IotMessageEvent) {
+                    handle(event.senderName, event.message)
+                }
+
+                @[Suppress("unused") SubscribeEvent]
                 fun handle(event: ServerChatEvent) {
+                    handle(event.player.name, event.message)
+                }
+
+                fun handle(playerName: String, message: String) {
                     val manager = DaemonManager.instance ?: return
 
                     // 本体ブロックが現存しないデーモンを除去する
@@ -196,7 +206,7 @@ object ChatWebhook {
                                 ApiMain.logger.trace("sending")
                                 val json = jsonElement(
                                     "username" to "${daemon.username} @ ${remaining.displayText.unformattedText}".jsonElement,
-                                    "content" to "<${event.player.name}> ${event.message}".jsonElement
+                                    "content" to "<${playerName}> ${message}".jsonElement
                                 ).json
                                 ApiMain.logger.trace(json)
                                 connection.outputStream.use { out -> out.write(json.utf8ByteArray) }
@@ -227,6 +237,10 @@ object ChatWebhook {
 
     }
 }
+
+class IotMessageEvent(val senderName: String, val message: String) : Event()
+
+fun IotMessageEvent.send() = MinecraftForge.EVENT_BUS.post(this)
 
 class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String) : Daemon() {
     val timeLimit: Instant get() = created.plus(Duration.ofDays(30))
