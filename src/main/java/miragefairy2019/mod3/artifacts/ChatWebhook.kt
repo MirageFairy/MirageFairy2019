@@ -206,7 +206,7 @@ object ChatWebhook {
                                 ApiMain.logger.trace("sending")
                                 val json = jsonElement(
                                     "username" to "${daemon.username} @ ${remaining.displayText.unformattedText}".jsonElement,
-                                    "content" to "<${playerName}> ${message}".jsonElement
+                                    "content" to "<$playerName> $message".jsonElement
                                 ).json
                                 ApiMain.logger.trace(json)
                                 connection.outputStream.use { out -> out.write(json.utf8ByteArray) }
