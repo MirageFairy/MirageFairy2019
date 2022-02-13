@@ -26,5 +26,6 @@ object Artifacts {
         ChatWebhook.module(this)
         DaemonSystem.module(this)
         Mfa.module(this)
+        Config.module(this)
     }
 }
