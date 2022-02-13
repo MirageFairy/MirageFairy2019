@@ -93,10 +93,12 @@ import java.time.Instant
 import java.util.Random
 
 object ChatWebhook {
+    lateinit var enableChatWebhook: () -> Boolean
     lateinit var blockChatWebhookTransmitter: () -> BlockChatWebhookTransmitter
     lateinit var itemChatWebhookTransmitter: () -> ItemBlock
     const val guiIdChatWebhookTransmitter = 4
     val module: Module = {
+        enableChatWebhook = configProperty { it.getBoolean("enableChatWebhook", Config.categoryFeatures, true, "Whether the machines that send the in-game chat to the webhook is enabled") }
         blockChatWebhookTransmitter = block({ BlockChatWebhookTransmitter() }, "chat_webhook_transmitter") {
             setUnlocalizedName("chatWebhookTransmitter")
             setCreativeTab { ApiMain.creativeTab }
@@ -148,15 +150,15 @@ object ChatWebhook {
             MinecraftForge.EVENT_BUS.register(object {
                 @[Suppress("unused") SubscribeEvent]
                 fun handle(event: IotMessageEvent) {
-                    handle(event.senderName, event.message)
+                    if (enableChatWebhook()) sendToWebhook(event.senderName, event.message)
                 }
 
                 @[Suppress("unused") SubscribeEvent]
                 fun handle(event: ServerChatEvent) {
-                    handle(event.player.name, event.message)
+                    if (enableChatWebhook()) sendToWebhook(event.player.name, event.message)
                 }
 
-                fun handle(playerName: String, message: String) {
+                fun sendToWebhook(playerName: String, message: String) {
                     val manager = DaemonManager.instance ?: return
 
                     // 本体ブロックが現存しないデーモンを除去する
