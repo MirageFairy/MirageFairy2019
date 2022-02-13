@@ -1,17 +1,17 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.orNull
-import mirrg.kotlin.toUpperCamelCase
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.IItemFairy
-import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod3.main.api.ApiMain.side
 import mirrg.boron.util.UtilsString
+import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.color.IItemColor

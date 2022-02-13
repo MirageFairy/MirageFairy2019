@@ -14,13 +14,13 @@ import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
-import mirrg.kotlin.toUpperCamelCase
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.multi.ItemMultiMaterial
 import miragefairy2019.mod.lib.multi.ItemVariantMaterial
 import miragefairy2019.mod.lib.multi.setCustomModelResourceLocations
 import miragefairy2019.mod3.main.api.ApiMain
 import mirrg.kotlin.castOrNull
+import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound

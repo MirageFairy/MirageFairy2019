@@ -7,8 +7,8 @@ import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.makeRecipe
-import mirrg.kotlin.toUpperCamelCase
 import miragefairy2019.mod.ModMirageFairy2019
+import mirrg.kotlin.toUpperCamelCase
 
 object FairyMetamorphosis {
     val module: Module = {

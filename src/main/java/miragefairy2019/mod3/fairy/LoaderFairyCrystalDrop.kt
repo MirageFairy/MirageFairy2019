@@ -1,7 +1,6 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.Module
-import mirrg.kotlin.toInstantAsUtc
 import miragefairy2019.mod.api.ApiFairyCrystal
 import miragefairy2019.mod.api.fairycrystal.DropCategory
 import miragefairy2019.mod.api.fairycrystal.DropFixed
@@ -9,6 +8,7 @@ import miragefairy2019.mod.api.fairycrystal.IDrop
 import miragefairy2019.mod.api.fairycrystal.IRightClickDrop
 import miragefairy2019.mod3.fairy.relation.FairyRelationEntry
 import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
+import mirrg.kotlin.toInstantAsUtc
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
