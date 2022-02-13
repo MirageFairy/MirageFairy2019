@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent
 
 class InitializerMirageFairy2019 {
 
-    var modInitializer = ModInitializer()
+    var modInitializer = ModInitializer(System.getProperty("miragefairy2019.usePreReleaseFeatures")?.toBoolean() ?: true)
     var erMod = EventRegistryMod()
 
     init {

@@ -34,7 +34,10 @@ import net.minecraftforge.oredict.OreDictionary
 
 typealias Module = ModInitializer.() -> Unit
 
-class ModInitializer {
+class ModInitializer(private val usePreReleaseFeatures: Boolean) {
+    val modVersion = ModMirageFairy2019.VERSION.split(".").getOrNull(2)?.toInt()
+    fun checkModVersion(sinceVersion: Int) = usePreReleaseFeatures || (modVersion != null && modVersion >= sinceVersion)
+
     val onMakeResource = EventRegistry1<ResourceMaker>()
     val onMakeLang = EventRegistry1<LangMaker>()
 

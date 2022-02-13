@@ -8,7 +8,7 @@ import java.io.File
 object MainMakeResource {
     @JvmStatic
     fun main(args: Array<String>) {
-        val modInitializer = ModInitializer()
+        val modInitializer = ModInitializer(true)
         modules.forEach { module -> module(modInitializer) }
 
         modInitializer.onMakeResource(ResourceMaker(File("src/main/resources")))
