@@ -34,7 +34,7 @@ import net.minecraftforge.oredict.OreDictionary
 
 typealias Module = ModInitializer.() -> Unit
 
-class ModInitializer(private val usePreReleaseFeatures: Boolean) {
+class ModInitializer(val usePreReleaseFeatures: Boolean) {
     val modVersion = ModMirageFairy2019.VERSION.split(".").getOrNull(2)?.toInt()
     fun checkModVersion(sinceVersion: Int) = usePreReleaseFeatures || (modVersion != null && modVersion >= sinceVersion)
 

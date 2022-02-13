@@ -4,6 +4,7 @@ import miragefairy2019.libkt.Module
 
 object Artifacts {
     val module: Module = {
+        Main.module(this)
         Dish.module(this)
         Fertilizer.module(this)
         TwinkleStone.module(this)
