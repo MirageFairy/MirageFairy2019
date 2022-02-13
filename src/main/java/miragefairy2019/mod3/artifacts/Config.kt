@@ -4,6 +4,7 @@ import miragefairy2019.libkt.Module
 import net.minecraftforge.common.config.Configuration
 
 object Config {
+    val categoryGeneral = "general"
     val categoryFeatures = "features"
     val module: Module = {
         onPreInit {
