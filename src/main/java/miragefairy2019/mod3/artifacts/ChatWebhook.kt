@@ -150,12 +150,12 @@ object ChatWebhook {
             MinecraftForge.EVENT_BUS.register(object {
                 @[Suppress("unused") SubscribeEvent]
                 fun handle(event: IotMessageEvent) {
-                    if (enableChatWebhook()) sendToWebhook(event.senderName, event.message)
+                    sendToWebhook(event.senderName, event.message)
                 }
 
                 @[Suppress("unused") SubscribeEvent]
                 fun handle(event: ServerChatEvent) {
-                    if (enableChatWebhook()) sendToWebhook(event.player.name, event.message)
+                    sendToWebhook(event.player.name, event.message)
                 }
 
                 fun sendToWebhook(playerName: String, message: String) {
@@ -189,47 +189,49 @@ object ChatWebhook {
                         // 送信処理
                         // TODO 複数のチャットをまとめる
                         // TODO 複数のデーモンに対してDiscordの負荷対策のためディレイ
-                        Thread {
-                            ApiMain.logger.trace("http request start")
-                            try {
+                        Thread({
+                            if (enableChatWebhook()) {
+                                ApiMain.logger.trace("http request start")
+                                try {
 
-                                // 接続設定
-                                val connection = URL(daemon.webhookUrl).openConnection() as HttpURLConnection
-                                connection.requestMethod = "POST"
-                                connection.doOutput = true
-                                connection.setRequestProperty("Content-Type", "application/json")
-                                connection.setRequestProperty("User-Agent", "MirageFairy2019")
+                                    // 接続設定
+                                    val connection = URL(daemon.webhookUrl).openConnection() as HttpURLConnection
+                                    connection.requestMethod = "POST"
+                                    connection.doOutput = true
+                                    connection.setRequestProperty("Content-Type", "application/json")
+                                    connection.setRequestProperty("User-Agent", "MirageFairy2019")
 
-                                // 接続開始
-                                ApiMain.logger.trace("connecting")
-                                connection.connect()
+                                    // 接続開始
+                                    ApiMain.logger.trace("connecting")
+                                    connection.connect()
 
-                                // 入力の送信
-                                ApiMain.logger.trace("sending")
-                                val json = jsonElement(
-                                    "username" to "${daemon.username} @ ${remaining.displayText.unformattedText}".jsonElement,
-                                    "content" to "<$playerName> $message".jsonElement
-                                ).json
-                                ApiMain.logger.trace(json)
-                                connection.outputStream.use { out -> out.write(json.utf8ByteArray) }
+                                    // 入力の送信
+                                    ApiMain.logger.trace("sending")
+                                    val json = jsonElement(
+                                        "username" to "${daemon.username} @ ${remaining.displayText.unformattedText}".jsonElement,
+                                        "content" to "<$playerName> $message".jsonElement
+                                    ).json
+                                    ApiMain.logger.trace(json)
+                                    connection.outputStream.use { out -> out.write(json.utf8ByteArray) }
 
-                                // 出力の受信
-                                ApiMain.logger.trace("receiving")
-                                val responseBody = connection.inputStream.readBytes().utf8String
+                                    // 出力の受信
+                                    ApiMain.logger.trace("receiving")
+                                    val responseBody = connection.inputStream.readBytes().utf8String
 
-                                // 接続終了
-                                ApiMain.logger.trace("disconnecting")
-                                connection.disconnect()
+                                    // 接続終了
+                                    ApiMain.logger.trace("disconnecting")
+                                    connection.disconnect()
 
-                                // 結果表示
-                                ApiMain.logger.trace("${connection.responseCode}")
-                                ApiMain.logger.trace(responseBody)
+                                    // 結果表示
+                                    ApiMain.logger.trace("${connection.responseCode}")
+                                    ApiMain.logger.trace(responseBody)
 
-                            } catch (e: Throwable) {
-                                ApiMain.logger.warn("failure", e)
+                                } catch (e: Throwable) {
+                                    ApiMain.logger.warn("failure", e)
+                                }
+                                ApiMain.logger.trace("http request finished")
                             }
-                            ApiMain.logger.trace("http request finished")
-                        }.start()
+                        }, "ChatWebhook Request Thread").start()
 
                     }
 
