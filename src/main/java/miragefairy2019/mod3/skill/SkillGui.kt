@@ -113,7 +113,7 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
         EnumMastery.values().forEachIndexed { i, mastery ->
             components += component(RectangleInt(4 + 8 * mastery.layer, 24 + 10 * i, xSize - 4 - 4 - 10 - 20 - 20 - 8 * mastery.layer, 10)) {
                 label(::fontRenderer, color = 0xFF000000.toArgb()) { mastery.displayName.unformattedText }
-                tooltip(mastery.displayPoem.unformattedText)
+                mastery.displayPoem.unformattedText.takeIf { it.isNotBlank() }?.let { tooltip(it) }
             }
             // TODO SP→SLv効率表示
             components += component(RectangleInt(xSize - 54, 24 + 10 * i, 20, 10)) {
