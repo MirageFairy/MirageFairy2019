@@ -104,6 +104,6 @@ class TextComponentScope {
 fun textComponent(textComponents: List<ITextComponent>): ITextComponent = textComponents.fold(TextComponentString("") as ITextComponent) { a, b -> a.appendSibling(b) }
 fun textComponent(block: TextComponentScope.() -> List<ITextComponent>): ITextComponent = textComponent(TextComponentScope().block())
 fun textComponent() = textComponent { empty }
-fun formattedText(textComponents: List<ITextComponent>) = textComponent(textComponents).formattedText
-fun formattedText(block: TextComponentScope.() -> List<ITextComponent>) = textComponent(block).formattedText
-fun formattedText() = textComponent().formattedText
+fun formattedText(textComponents: List<ITextComponent>): String = textComponent(textComponents).formattedText
+fun formattedText(block: TextComponentScope.() -> List<ITextComponent>): String = textComponent(block).formattedText
+fun formattedText(): String = textComponent().formattedText
