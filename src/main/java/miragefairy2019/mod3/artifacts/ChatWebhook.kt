@@ -89,7 +89,6 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.net.HttpURLConnection
 import java.net.URL
-import java.time.Duration
 import java.time.Instant
 import java.util.Random
 
@@ -97,9 +96,14 @@ object ChatWebhook {
     lateinit var enableChatWebhook: () -> Boolean
     lateinit var blockChatWebhookTransmitter: () -> BlockChatWebhookTransmitter
     lateinit var itemChatWebhookTransmitter: () -> ItemBlock
+    lateinit var blockCreativeChatWebhookTransmitter: () -> BlockCreativeChatWebhookTransmitter
+    lateinit var itemCreativeChatWebhookTransmitter: () -> ItemBlock
     const val guiIdChatWebhookTransmitter = 4
     val module: Module = {
         enableChatWebhook = configProperty { it.getBoolean("enableChatWebhook", Config.categoryFeatures, true, "Whether the machines that send the in-game chat to the webhook is enabled") }
+
+
+        // 通常
         blockChatWebhookTransmitter = block({ BlockChatWebhookTransmitter() }, "chat_webhook_transmitter") {
             setUnlocalizedName("chatWebhookTransmitter")
             setCreativeTab { ApiMain.creativeTab }
@@ -138,8 +142,37 @@ object ChatWebhook {
             )
         )
         onMakeLang { enJa("tile.chatWebhookTransmitter.name", "Chat Webhook Transmitter", "天耳通の祠") }
+
+
+        // クリエイティブ用
+        if (checkModVersion(21)) {
+            blockCreativeChatWebhookTransmitter = block({ BlockCreativeChatWebhookTransmitter() }, "creative_chat_webhook_transmitter") {
+                setUnlocalizedName("creativeChatWebhookTransmitter")
+                setCreativeTab { ApiMain.creativeTab }
+                makeBlockStates {
+                    DataBlockStates(
+                        variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
+                            "facing=${facing.first}" to DataBlockState(
+                                "miragefairy2019:creative_chat_webhook_transmitter",
+                                y = facing.second
+                            )
+                        }
+                    )
+                }
+            }
+            itemCreativeChatWebhookTransmitter = item({ ItemBlock(blockCreativeChatWebhookTransmitter()) }, "creative_chat_webhook_transmitter") {
+                setCustomModelResourceLocation(variant = "facing=north")
+            }
+        }
+        onMakeLang { enJa("tile.creativeChatWebhookTransmitter.name", "Creative Chat Webhook Transmitter", "アカーシャのお導きによる天耳通の祠") }
+
+
+        // 共通
+
         tileEntity("chat_webhook_transmitter", TileEntityChatWebhookTransmitter::class.java)
         tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java, { TileEntityRendererChatWebhookTransmitter() })
+
+        // Gui
         onInit {
             ApiMain.registerGuiHandler(guiIdChatWebhookTransmitter, object : ISimpleGuiHandler {
                 override fun GuiHandlerContext.onServer() = (tileEntity as? TileEntityChatWebhookTransmitter)?.let { ContainerChatWebhookTransmitter(it, player.inventory, it.inventory) }
@@ -244,21 +277,20 @@ object ChatWebhook {
     }
 }
 
+
 class IotMessageEvent(val senderName: String, val message: String) : Event()
 
 fun IotMessageEvent.send() = MinecraftForge.EVENT_BUS.post(this)
 
-class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String) : Daemon() {
-    val timeLimit: Instant get() = created.plus(Duration.ofDays(30))
+class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String, val durationSeconds: Long) : Daemon() {
+    val timeLimit: Instant get() = created.plusSeconds(durationSeconds)
 }
 
-class BlockChatWebhookTransmitter : BlockContainer(Material.IRON), IBlockDaemon {
+
+abstract class BlockChatWebhookTransmitterBase : BlockContainer(Material.IRON), IBlockDaemon {
     init {
         defaultState = blockState.baseState.withProperty(FACING, EnumFacing.NORTH)
         soundType = SoundType.METAL
-        setHardness(10.0f)
-        setResistance(50.0f)
-        setHarvestLevel("pickaxe", 1)
         tickRandomly = true
     }
 
@@ -326,15 +358,42 @@ class BlockChatWebhookTransmitter : BlockContainer(Material.IRON), IBlockDaemon 
     override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (world.isRemote) return true
         world.getTileEntity(blockPos)?.castOrNull<TileEntityChatWebhookTransmitter>()?.updateDaemon(true) // 契約更新
-        player.openGui(ModMirageFairy2019.instance, ChatWebhook.guiIdChatWebhookTransmitter, world, blockPos.x, blockPos.y, blockPos.z) // GUIを開く
+        if (!requireCreative || player.isCreative) player.openGui(ModMirageFairy2019.instance, ChatWebhook.guiIdChatWebhookTransmitter, world, blockPos.x, blockPos.y, blockPos.z) // GUIを開く
         return true
     }
+
+
+    abstract val durationSeconds: Long
+    abstract val requireCreative: Boolean
 
 
     companion object {
         val FACING: PropertyEnum<EnumFacing> = PropertyEnum.create("facing", EnumFacing::class.java, EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.WEST, EnumFacing.EAST)
     }
 }
+
+class BlockChatWebhookTransmitter : BlockChatWebhookTransmitterBase() {
+    init {
+        setHardness(10.0f)
+        setResistance(50.0f)
+        setHarvestLevel("pickaxe", 1)
+    }
+
+    override val durationSeconds = 60L * 60L * 24L * 30L
+    override val requireCreative = false
+}
+
+class BlockCreativeChatWebhookTransmitter : BlockChatWebhookTransmitterBase() {
+    init {
+        setBlockUnbreakable()
+        setResistance(6000000.0f)
+    }
+
+    override val durationSeconds = 60L * 60L * 24L * 99999L
+    override val requireCreative = true
+    override fun quantityDropped(random: Random) = 0
+}
+
 
 class TileEntityChatWebhookTransmitter : TileEntity() {
     val inventory = InventoryChatWebhookTransmitter(this, "tile.chatWebhookTransmitter.name", false, 2)
@@ -346,12 +405,14 @@ class TileEntityChatWebhookTransmitter : TileEntity() {
     /** サーバーワールドのみ */
     fun updateDaemon(resetTimestamp: Boolean) {
         if (world.isRemote) return
+        val block = world.getBlockState(pos).block as? BlockChatWebhookTransmitterBase ?: return
         val manager = DaemonManager.instance ?: return
         manager.chatWebhook.setOrRemove(dimensionalPos, run fail@{
             ChatWebhookDaemon(
                 (if (resetTimestamp) null else daemon?.created) ?: Instant.now(),
                 username?.let { "$it at ${world.provider.dimensionType.getName()} (${pos.x},${pos.y},${pos.z})" } ?: return@fail null,
-                webhookUrl ?: return@fail null
+                webhookUrl ?: return@fail null,
+                block.durationSeconds
             )
         })
     }

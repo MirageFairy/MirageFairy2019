@@ -30,7 +30,8 @@ object DaemonSystem {
                         dimensionalPos to ChatWebhookDaemon(
                             created = Instant.ofEpochSecond(daemonData["created"].asBigDecimal.toLong()),
                             username = daemonData["username"].asString,
-                            webhookUrl = daemonData["webhookUrl"].asString
+                            webhookUrl = daemonData["webhookUrl"].asString,
+                            durationSeconds = daemonData["duration"].orNull?.asLong ?: (60L * 60L * 24L * 30L)
                         )
                     }.toMap().toMutableMap()
                 )
@@ -55,7 +56,8 @@ object DaemonSystem {
                         dimensionalPos.expression to jsonElement(
                             "created" to daemon.created.epochSecond.jsonElement,
                             "username" to daemon.username.jsonElement,
-                            "webhookUrl" to daemon.webhookUrl.jsonElement
+                            "webhookUrl" to daemon.webhookUrl.jsonElement,
+                            "duration" to daemon.durationSeconds.jsonElement
                         )
                     }.jsonElement
                 ).toJson { setPrettyPrinting() }

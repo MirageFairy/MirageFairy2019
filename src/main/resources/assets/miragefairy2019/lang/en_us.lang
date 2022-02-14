@@ -484,3 +484,4 @@ item.debugOreSeedDropRate.name=Debug: Ore Seed Drop Rate
 item.debugMirageFlowerGrowthRateList.name=Debug: Mirage Flower Growth Rate List
 item.debugMirageFlowerGrowthRate.name=Debug: Mirage Flower Growth Rate
 tile.chatWebhookTransmitter.name=Chat Webhook Transmitter
+tile.creativeChatWebhookTransmitter.name=Creative Chat Webhook Transmitter
