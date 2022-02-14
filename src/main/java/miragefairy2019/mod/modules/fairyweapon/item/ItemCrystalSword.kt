@@ -35,7 +35,7 @@ class ItemCrystalSword : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.clo
     }
 
     init {
-        featureInformationList += "敵を撃破時、フェアリークリスタルを消費して妖精を召喚" // TODO translate
+        featureInformationList += "撃破時、フェアリークリスタルを消費して妖精を召喚" // TODO translate
         magic {
             object : IMagicHandler {
                 override fun hitEntity(target: EntityLivingBase) {
