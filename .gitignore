@@ -27,3 +27,4 @@ run
 eclipse
 fluorite-7
 ~$*.xlsx
+/logs
