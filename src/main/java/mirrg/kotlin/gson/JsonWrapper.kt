@@ -49,6 +49,7 @@ class JsonWrapper(
     // 省略時も例外を出す
     val asUndefined get() = if (isUndefined) null else e("Undefined")
     val asInt get() = if (isNumber) primitiveElement.asInt else e("Number")
+    val asLong get() = if (isNumber) primitiveElement.asLong else e("Number")
     val asDouble get() = if (isNumber) primitiveElement.asDouble else e("Number")
     val asBigDecimal get() = if (isNumber) primitiveElement.asBigDecimal!! else e("Number")
     val asString get() = if (isString) primitiveElement.asString!! else e("String")
