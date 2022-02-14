@@ -37,5 +37,12 @@ If not:
 
 ### Translation files(`*.lang`)
 
+All MFA(`miragefairy2019.mfa.*`) is published under the following licenses:
+
+- (c) 2019 MirageFairy Server
+- [![License](https://img.shields.io/badge/License-CC%20BY--SA%203.0-blue.svg?style=flat-square)](https://creativecommons.org/licenses/by-sa/3.0/)
+
+If not:
+
 - Public Domain
 - [![License](https://img.shields.io/badge/License-No%20Restriction-lightgray.svg?style=flat-square)](https://creativecommons.org/publicdomain/zero/1.0/)
