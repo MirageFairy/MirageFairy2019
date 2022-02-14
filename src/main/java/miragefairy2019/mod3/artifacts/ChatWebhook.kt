@@ -216,7 +216,7 @@ object ChatWebhook {
 
                                     // 出力の受信
                                     ApiMain.logger.trace("receiving")
-                                    val responseBody = connection.inputStream.readBytes().utf8String
+                                    val responseBody = connection.inputStream.use { it.readBytes() }.utf8String
 
                                     // 接続終了
                                     ApiMain.logger.trace("disconnecting")
