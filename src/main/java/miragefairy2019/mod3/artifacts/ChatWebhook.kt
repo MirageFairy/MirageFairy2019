@@ -20,6 +20,7 @@ import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.get
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.item
@@ -136,6 +137,7 @@ object ChatWebhook {
                 )
             )
         )
+        onMakeLang { enJa("tile.chatWebhookTransmitter.name", "Chat Webhook Transmitter", "天耳通の祠") }
         tileEntity("chat_webhook_transmitter", TileEntityChatWebhookTransmitter::class.java)
         tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java, { TileEntityRendererChatWebhookTransmitter() })
         onInit {

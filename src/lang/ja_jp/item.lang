@@ -240,6 +240,4 @@ tile.fairyWoodLog.name=妖精の原木
 tile.fairyBox.name=妖精の家
 tile.fairyResinTapper.name=樹液取り職人スプルーツァの家
 
-tile.chatWebhookTransmitter.name=天耳通の祠
-
 item.forge.bucketFilled.name=%s入りバケツ
