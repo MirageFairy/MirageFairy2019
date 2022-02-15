@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.worldgen
+package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
@@ -17,7 +17,6 @@ import miragefairy2019.mod.lib.WorldGenBush
 import miragefairy2019.mod.modules.fairycrystal.variantFairyCrystal
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
-import miragefairy2019.mod3.artifacts.FairyMaterials
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.relation.FairySelector

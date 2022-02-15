@@ -21,9 +21,6 @@ import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType
 import miragefairy2019.mod3.oreseeddrop.api.OreSeedDropEnvironment
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill
-import miragefairy2019.mod3.worldgen.calculateGrowthRate
-import miragefairy2019.mod3.worldgen.getGrowthRateInFloor
-import miragefairy2019.mod3.worldgen.growthRate
 import miragefairy2019.modkt.impl.fairy.ColorSet
 import miragefairy2019.modkt.impl.fairy.erg
 import miragefairy2019.modkt.impl.fairy.mana

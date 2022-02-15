@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.worldgen
+package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
