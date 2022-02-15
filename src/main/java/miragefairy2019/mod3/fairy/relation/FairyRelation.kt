@@ -3,9 +3,9 @@ package miragefairy2019.mod3.fairy.relation
 import miragefairy2019.libkt.Module
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
+import miragefairy2019.mod3.artifacts.MirageFlower
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.RankedFairyTypeBundle
-import miragefairy2019.mod3.worldgen.MirageFlower
 import net.minecraft.block.Block
 import net.minecraft.block.BlockDoublePlant
 import net.minecraft.block.BlockOldLeaf

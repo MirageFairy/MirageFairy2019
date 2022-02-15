@@ -30,7 +30,6 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.worldgen.MirageFlower
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack

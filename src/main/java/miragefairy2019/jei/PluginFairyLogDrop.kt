@@ -13,7 +13,7 @@ import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod3.worldgen.FairyLog
+import miragefairy2019.mod3.artifacts.FairyLog
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
