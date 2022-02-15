@@ -14,7 +14,6 @@ import miragefairy2019.mod3.manualrepair.ManualRepair
 import miragefairy2019.mod3.pick.Pick
 import miragefairy2019.mod3.playeraura.PlayerAura
 import miragefairy2019.mod3.skill.Skill
-import miragefairy2019.mod3.worldgen.WorldGen
 
 val modules = listOf(
     Jei.module,
@@ -28,7 +27,6 @@ val modules = listOf(
     ManualRepair.module,
     DamageSource.module,
     Ore.module,
-    WorldGen.module,
     Pick.module,
     OreSeed.module,
     FairyCrystal.module
