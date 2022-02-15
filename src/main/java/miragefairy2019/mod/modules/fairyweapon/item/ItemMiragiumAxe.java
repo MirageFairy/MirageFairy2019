@@ -2,6 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.api.fairyweapon.formula.IFormulaDouble;
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus;
+import miragefairy2019.mod3.artifacts.FairyLog;
 import miragefairy2019.mod3.erg.api.EnumErgType;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
