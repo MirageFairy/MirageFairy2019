@@ -7,7 +7,6 @@ import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
-import miragefairy2019.mod3.worldgen.ModuleMirageFlower
 import net.minecraftforge.fml.common.event.FMLConstructionEvent
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent
@@ -31,7 +30,6 @@ class InitializerMirageFairy2019 {
 
 
         miragefairy2019.mod.modules.fairyweapon.recipe.Loader.init(erMod)
-        ModuleMirageFlower.init(erMod)
         ModuleOre.init(erMod)
         ModulePlacedItem.init(erMod)
         ModulePlayerAura.init(erMod)

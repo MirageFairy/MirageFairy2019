@@ -1,19 +1,22 @@
 package miragefairy2019.mod.lib;
 
+import kotlin.jvm.functions.Function1;
 import mirrg.boron.util.UtilsMath;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
-public class BiomeDecoratorFlowers {
+public final class BiomeDecoratorFlowers {
 
     private WorldGenerator worldGenerator;
     private double trialsPerChunk;
+    private Function1<Biome, Boolean> canGenerate;
 
-    public BiomeDecoratorFlowers(WorldGenerator worldGenerator, double trialsPerChunk) {
+    public BiomeDecoratorFlowers(WorldGenerator worldGenerator, double trialsPerChunk, Function1<Biome, Boolean> canGenerate) {
         this.worldGenerator = worldGenerator;
         this.trialsPerChunk = trialsPerChunk;
+        this.canGenerate = canGenerate;
     }
 
     public void decorate(DecorateBiomeEvent.Post event) {
@@ -28,16 +31,12 @@ public class BiomeDecoratorFlowers {
             if (yMax > 0) {
 
                 BlockPos pos3 = pos2.add(0, event.getRand().nextInt(yMax), 0);
-                if (canGenerate(event.getWorld().getBiome(pos3))) {
+                if (canGenerate.invoke(event.getWorld().getBiome(pos3))) {
                     worldGenerator.generate(event.getWorld(), event.getRand(), pos3);
                 }
 
             }
         }
-    }
-
-    protected boolean canGenerate(Biome biome) {
-        return true;
     }
 
 }

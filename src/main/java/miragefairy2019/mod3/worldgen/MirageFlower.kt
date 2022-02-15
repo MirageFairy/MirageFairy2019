@@ -12,6 +12,8 @@ import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.mod.lib.BiomeDecoratorFlowers
+import miragefairy2019.mod.lib.WorldGenBush
 import miragefairy2019.mod.modules.fairycrystal.variantFairyCrystal
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1
@@ -57,12 +59,16 @@ import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
 import net.minecraftforge.common.EnumPlantType
 import net.minecraftforge.common.IPlantable
+import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import java.util.Random
 
 object MirageFlower {
     lateinit var blockMirageFlower: () -> BlockMirageFlower
     lateinit var itemMirageFlowerSeeds: () -> ItemMirageFlowerSeeds<BlockMirageFlower>
     val module: Module = {
+
         blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
             setUnlocalizedName("mirageFlower")
             setCreativeTab { ApiMain.creativeTab }
@@ -74,6 +80,38 @@ object MirageFlower {
             setCreativeTab { ApiMain.creativeTab }
             setCustomModelResourceLocation()
         }
+
+        // 地形生成
+        onHookDecorator {
+            val biomeDecorators = listOf<BiomeDecoratorFlowers>(
+
+                // どこでも湧く
+                BiomeDecoratorFlowers(WorldGenBush(blockMirageFlower(), blockMirageFlower().getState(3)).apply {
+                    blockCountMin = 1
+                    blockCountMax = 3
+                }, 0.01) { true },
+
+                // 山岳のみ
+                BiomeDecoratorFlowers(WorldGenBush(blockMirageFlower(), blockMirageFlower().getState(3)).apply {
+                    blockCountMin = 1
+                    blockCountMax = 10
+                }, 0.1) { BiomeDictionary.hasType(it, BiomeDictionary.Type.MOUNTAIN); },
+
+                // 森林のみ
+                BiomeDecoratorFlowers(WorldGenBush(blockMirageFlower(), blockMirageFlower().getState(3)).apply {
+                    blockCountMin = 1
+                    blockCountMax = 10
+                }, 0.5) { BiomeDictionary.hasType(it, BiomeDictionary.Type.FOREST); }
+
+            )
+            MinecraftForge.EVENT_BUS.register(object {
+                @SubscribeEvent
+                fun handle(event: DecorateBiomeEvent.Post) = biomeDecorators.forEach { it.decorate(event) }
+            })
+        }
+
+        onAddRecipe { MinecraftForge.addGrassSeed(ItemStack(itemMirageFlowerSeeds()), 1) } // 雑草が種をドロップ
+
     }
 }
 

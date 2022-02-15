@@ -10,8 +10,10 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod3.fairy.FairyTypes
+import miragefairy2019.mod3.fairylogdrop.FairyLogDropRegistry
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
+import mirrg.boron.util.UtilsMath
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
 import net.minecraft.block.BlockOldLog
@@ -34,6 +36,9 @@ import net.minecraft.util.Rotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
@@ -41,6 +46,9 @@ object FairyLog {
     lateinit var blockFairyLog: () -> BlockFairyLog
     lateinit var itemBlockFairyLog: () -> ItemBlock
     val module: Module = {
+
+        onPreInit { ApiWorldGen.fairyLogDropRegistry = FairyLogDropRegistry() } // 妖精の樹洞ドロップレジストリー初期化
+
         blockFairyLog = block({ BlockFairyLog() }, "fairy_log") {
             setUnlocalizedName("fairyLog")
             setCreativeTab { ApiMain.creativeTab }
@@ -59,6 +67,38 @@ object FairyLog {
             setCreativeTab { ApiMain.creativeTab }
             setCustomModelResourceLocation(variant = "facing=north,variant=oak")
         }
+
+        // 地形生成
+        onHookDecorator {
+            MinecraftForge.EVENT_BUS.register(object {
+                @SubscribeEvent
+                fun handle(event: DecorateBiomeEvent.Post) {
+                    val times = UtilsMath.randomInt(event.rand, (event.world.height.toDouble() / 16.0) * 50.0) // 1セクションあたり50回判定を行う // TODO
+                    repeat(times) {
+                        val facing = EnumFacing.HORIZONTALS[event.rand.nextInt(4)]
+                        val posLog = event.chunkPos.getBlock(
+                            event.rand.nextInt(16) + 8,
+                            event.rand.nextInt(event.world.height),
+                            event.rand.nextInt(16) + 8
+                        )
+                        val posAir = posLog.offset(facing)
+
+                        if (!event.world.getBlockState(posAir).isSideSolid(event.world, posAir, facing.opposite)) {
+                            when (event.world.getBlockState(posLog)) {
+                                Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK),
+                                Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE),
+                                Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH),
+                                Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE),
+                                Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA),
+                                Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK)
+                                -> event.world.setBlockState(posLog, blockFairyLog().getState(facing), 2)
+                            }
+                        }
+                    }
+                }
+            })
+        }
+
     }
 }
 
