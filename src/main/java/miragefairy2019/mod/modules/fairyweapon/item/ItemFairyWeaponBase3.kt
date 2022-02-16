@@ -186,7 +186,7 @@ abstract class ItemFairyWeaponBase3(
 
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
         val itemStack = player.getHeldItem(hand) // アイテム取得
-        val fairyType = FairyWeaponUtils.findFairy(itemStack, player).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
+        val fairyType = findFairy(itemStack, player)?.second ?: ApiFairy.empty() // 妖精取得
 
         val magicHandler = magic.getMagicHandler(MagicScope(this, player.proxy, world, player, itemStack, fairyType))
         return ActionResult(magicHandler.onItemRightClick(hand), itemStack)
@@ -196,7 +196,7 @@ abstract class ItemFairyWeaponBase3(
         if (!side.isClient) return // クライアントサイドでなければ中止
         if (entity !is EntityPlayer) return // プレイヤー取得
         if (!isSelected && entity.heldItemOffhand != itemStack) return // アイテム取得
-        val fairyType = FairyWeaponUtils.findFairy(itemStack, entity).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
+        val fairyType = findFairy(itemStack, entity)?.second ?: ApiFairy.empty() // 妖精取得
         if (!world.isRemote) return // クライアントワールドでなければ中止
 
         val magicHandler = magic.getMagicHandler(MagicScope(this, entity.proxy, world, entity, itemStack, fairyType))
@@ -206,7 +206,7 @@ abstract class ItemFairyWeaponBase3(
     override fun hitEntity(itemStack: ItemStack, target: EntityLivingBase, attacker: EntityLivingBase): Boolean {
         super.hitEntity(itemStack, target, attacker)
         if (attacker !is EntityPlayer) return true // プレイヤー取得
-        val fairyType = FairyWeaponUtils.findFairy(itemStack, attacker).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
+        val fairyType = findFairy(itemStack, attacker)?.second ?: ApiFairy.empty() // 妖精取得
 
         val magicHandler = magic.getMagicHandler(MagicScope(this, attacker.proxy, attacker.world, attacker, itemStack, fairyType))
         magicHandler.hitEntity(target)

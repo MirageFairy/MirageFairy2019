@@ -45,7 +45,7 @@ class ItemCrystalSword : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.clo
                 if (target.health > 0) return // 撃破時のみ有効
 
                 // クリスタルがないと失敗
-                val itemStackFuel = findItem(player, OreIngredient("mirageFairyCrystal")) ?: run {
+                val itemStackFuel = findItem(player) { OreIngredient("mirageFairyCrystal").test(it) } ?: run {
                     player.sendStatusMessage(textComponent { (!"フェアリークリスタルが足りません！").red }, true) // TODO translate
                     return
                 }

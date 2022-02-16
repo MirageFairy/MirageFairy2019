@@ -69,6 +69,7 @@ public class FairyWeaponUtils {
         itemStack.setTagCompound(nbt);
     }
 
+    @Deprecated // TODO -> findFairy(ItemStack, Player)
     @Nonnull
     public static Optional<Tuple<ItemStack, IFairyType>> findFairy(ItemStack itemStack, EntityPlayer player) {
 
@@ -84,6 +85,7 @@ public class FairyWeaponUtils {
             .map(itemStackFairy -> Tuple.of(itemStackFairy, getFairy(itemStackFairy).get()));
     }
 
+    @Deprecated // TODO -> findItem(EntityPlayer, (ItemStack) -> Boolean)
     @Nonnull
     public static Optional<ItemStack> findItemOptional(EntityPlayer player, Predicate<ItemStack> predicate) {
         ItemStack itemStack;
@@ -104,6 +106,7 @@ public class FairyWeaponUtils {
         return Optional.empty();
     }
 
+    @Deprecated // TODO -> ItemStack.fairyType
     @Nonnull
     public static Optional<IFairyType> getFairy(ItemStack itemStack) {
         Item item = itemStack.getItem();
