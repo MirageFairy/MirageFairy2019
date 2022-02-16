@@ -3,7 +3,6 @@ package miragefairy2019.mod.modules.fairyweapon.item
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.api.fairy.ApiFairy
-import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.MagicScope
 import miragefairy2019.mod.modules.fairyweapon.magic.EnumTargetExecutability
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.magic.UtilsMagic
@@ -48,60 +47,58 @@ abstract class ItemMiragiumToolBase(
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでブロックを破壊" // TODO translate
 
-    init {
-        magic {
-            val fairyType = FairyWeaponUtils.findFairy(itemStack, player).orNull?.let { it.y!! } ?: ApiFairy.empty()!! // 妖精取得
-            val selectorRayTrace = SelectorRayTrace(world, player, 0.0) // 視線判定
-            if (fairyType.isEmpty) return@magic fail(selectorRayTrace.position, 0xFF00FF) // 妖精なし判定
-            if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic fail(selectorRayTrace.position, 0xFF0000) // 材料なし判定
-            val targets = selectorRayTrace.blockPos.let { if (selectorRayTrace.sideHit.isPresent) it.offset(selectorRayTrace.sideHit.get()) else it }.let { iterateTargets(this@magic, it) } // 対象判定
-            if (!targets.hasNext()) return@magic fail(selectorRayTrace.position, 0x00FFFF) // ターゲットなし判定
-            if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic fail(selectorRayTrace.position, 0xFFFF00) // クールダウン判定
+    override val magic = magic {
+        val fairyType = FairyWeaponUtils.findFairy(itemStack, player).orNull?.let { it.y!! } ?: ApiFairy.empty()!! // 妖精取得
+        val selectorRayTrace = SelectorRayTrace(world, player, 0.0) // 視線判定
+        if (fairyType.isEmpty) return@magic fail(selectorRayTrace.position, 0xFF00FF) // 妖精なし判定
+        if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic fail(selectorRayTrace.position, 0xFF0000) // 材料なし判定
+        val targets = selectorRayTrace.blockPos.let { if (selectorRayTrace.sideHit.isPresent) it.offset(selectorRayTrace.sideHit.get()) else it }.let { iterateTargets(this@magic, it) } // 対象判定
+        if (!targets.hasNext()) return@magic fail(selectorRayTrace.position, 0x00FFFF) // ターゲットなし判定
+        if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic fail(selectorRayTrace.position, 0xFFFF00) // クールダウン判定
 
-            object : IMagicHandler { // 行使可能
-                override fun onItemRightClick(hand: EnumHand): EnumActionResult {
-                    if (world.isRemote) { // クライアントワールドの場合、腕を振るだけ
-                        player.swingArm(hand) // エフェクト
-                        return EnumActionResult.SUCCESS
-                    }
-
-                    // 行使
-                    var breakSound: SoundEvent? = null
-                    var count = 0
-                    run breakExecution@{
-                        targets.forEach { target ->
-                            val damage = world.rand.randomInt(!wear) // 耐久コスト
-                            if (itemStack.itemDamage + damage > itemStack.maxDamage) return@breakExecution // 耐久不足なら終了
-
-                            // 破壊成立
-                            itemStack.damageItem(damage, player)
-                            FairyWeaponUtils.breakBlock(world, player, EnumFacing.UP, itemStack, target, world.rand.randomInt(!fortune), false)
-                            val blockState = world.getBlockState(target)
-                            breakSound = blockState.block.getSoundType(blockState, world, target, player).breakSound
-                            count++
-                        }
-                    }
-
-                    // 破壊時
-                    if (count > 0) {
-                        breakSound?.let { world.playSound(null, player.posX, player.posY, player.posZ, it, player.soundCategory, 1.0f, 1.0f) } // エフェクト
-                        player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, (getCoolTime(this@magic)).toInt()) // クールタイム
-                    }
-
-                    // エフェクト
-                    world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, player.soundCategory, 1.0f, 1.0f)
-                    player.spawnSweepParticles()
-
+        object : IMagicHandler { // 行使可能
+            override fun onItemRightClick(hand: EnumHand): EnumActionResult {
+                if (world.isRemote) { // クライアントワールドの場合、腕を振るだけ
+                    player.swingArm(hand) // エフェクト
                     return EnumActionResult.SUCCESS
                 }
 
-                override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
-                    selectorRayTrace.doEffect(0xFFFFFF)
-                    UtilsMagic.spawnParticleTargets(
-                        world,
-                        targets.asSequence().toList().map { Pair(Vec3d(it).addVector(0.5, 0.5, 0.5), EnumTargetExecutability.EFFECTIVE) }
-                    )
+                // 行使
+                var breakSound: SoundEvent? = null
+                var count = 0
+                run breakExecution@{
+                    targets.forEach { target ->
+                        val damage = world.rand.randomInt(!wear) // 耐久コスト
+                        if (itemStack.itemDamage + damage > itemStack.maxDamage) return@breakExecution // 耐久不足なら終了
+
+                        // 破壊成立
+                        itemStack.damageItem(damage, player)
+                        FairyWeaponUtils.breakBlock(world, player, EnumFacing.UP, itemStack, target, world.rand.randomInt(!fortune), false)
+                        val blockState = world.getBlockState(target)
+                        breakSound = blockState.block.getSoundType(blockState, world, target, player).breakSound
+                        count++
+                    }
                 }
+
+                // 破壊時
+                if (count > 0) {
+                    breakSound?.let { world.playSound(null, player.posX, player.posY, player.posZ, it, player.soundCategory, 1.0f, 1.0f) } // エフェクト
+                    player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, (getCoolTime(this@magic)).toInt()) // クールタイム
+                }
+
+                // エフェクト
+                world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, player.soundCategory, 1.0f, 1.0f)
+                player.spawnSweepParticles()
+
+                return EnumActionResult.SUCCESS
+            }
+
+            override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
+                selectorRayTrace.doEffect(0xFFFFFF)
+                UtilsMagic.spawnParticleTargets(
+                    world,
+                    targets.asSequence().toList().map { Pair(Vec3d(it).addVector(0.5, 0.5, 0.5), EnumTargetExecutability.EFFECTIVE) }
+                )
             }
         }
     }

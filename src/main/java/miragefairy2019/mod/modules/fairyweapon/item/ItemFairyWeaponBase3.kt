@@ -58,19 +58,32 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
+
+class MagicScope(
+    val item: ItemFairyWeaponBase3,
+    val playerProxy: PlayerProxy,
+    val world: World,
+    val player: EntityPlayer,
+    val itemStack: ItemStack,
+    val partnerFairyType: IFairyType
+) {
+    operator fun <T> IMagicStatus<T>.not(): T = function.getValue(MagicStatusFunctionArguments({ getSkillLevel(it) }, fairyType))
+    fun getSkillLevel(mastery: IMastery) = playerProxy.skillContainer.getSkillLevel(mastery)
+    val fairyType get() = item.getActualFairyType(playerProxy, partnerFairyType)
+}
+
+typealias Magic = MagicScope.() -> IMagicHandler
+
+fun magic(magic: Magic) = magic
+
+fun Magic?.getMagicHandler(magicScope: MagicScope) = this?.invoke(magicScope) ?: object : IMagicHandler {}
+
+
 abstract class ItemFairyWeaponBase3(
     val weaponManaType: EnumManaType,
     val mastery: IMastery
 ) : ItemFairyWeapon() {
     companion object {
-        private const val prefix = "miragefairy2019.gui.magic"
-
-
-        class MagicScope(val getSkillLevel: (IMastery) -> Int, val world: World, val player: EntityPlayer, val itemStack: ItemStack, val fairyType: IFairyType) {
-            operator fun <T> IMagicStatus<T>.not(): T = function.getValue(MagicStatusFunctionArguments({ getSkillLevel(it) }, fairyType))
-        }
-
-
         enum class EnumVisibility { ALWAYS, DETAIL, NEVER }
         class MagicStatusWrapper<T>(var magicStatus: IMagicStatus<T>) : IMagicStatus<T> {
             @JvmField
@@ -123,15 +136,6 @@ abstract class ItemFairyWeaponBase3(
         }
     }
 
-    // Magic
-
-    private var magicProvider: (MagicScope.() -> IMagicHandler)? = null
-    internal fun magic(magicProvider: MagicScope.() -> IMagicHandler) {
-        if (this.magicProvider != null) throw Exception("Multiple magic definition")
-        this.magicProvider = magicProvider
-    }
-
-    private fun getMagicHandler(magicScope: MagicScope) = magicProvider?.invoke(magicScope) ?: object : IMagicHandler {}
 
     // Magic Status
 
@@ -147,19 +151,6 @@ abstract class ItemFairyWeaponBase3(
         magicStatusWrapperList += magicStatusWrapper
         return magicStatusWrapper
     }
-
-    // Actual Fairy Type
-
-    private fun getActualFairyType(playerProxy: PlayerProxy, fairyTypePartner: IFairyType): IFairyType = object : FairyTypeAdapter(fairyTypePartner) {
-        override fun getManaSet(): IManaSet {
-            val a1 = parent.manaSet
-            val a2 = playerProxy.playerAuraHandler.playerAura * (parent.cost / 50.0)
-            val b1 = 0.001 * playerProxy.skillContainer.getSkillLevel(mastery)
-            return (a1 + a2) * (1.0 + b1)
-        }
-    }
-
-    // Overrides
 
     @SideOnly(Side.CLIENT)
     override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
@@ -188,13 +179,16 @@ abstract class ItemFairyWeaponBase3(
         }
     }
 
+
+    // Magic
+
+    open val magic: Magic? = null
+
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
         val itemStack = player.getHeldItem(hand) // アイテム取得
         val fairyType = FairyWeaponUtils.findFairy(itemStack, player).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
 
-        val playerProxy = player.proxy
-        val actualFairyType = getActualFairyType(playerProxy, fairyType)
-        val magicHandler = getMagicHandler(MagicScope({ playerProxy.skillContainer.getSkillLevel(it) }, world, player, itemStack, actualFairyType))
+        val magicHandler = magic.getMagicHandler(MagicScope(this, player.proxy, world, player, itemStack, fairyType))
         return ActionResult(magicHandler.onItemRightClick(hand), itemStack)
     }
 
@@ -205,9 +199,7 @@ abstract class ItemFairyWeaponBase3(
         val fairyType = FairyWeaponUtils.findFairy(itemStack, entity).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
         if (!world.isRemote) return // クライアントワールドでなければ中止
 
-        val playerProxy = ClientPlayerProxy
-        val actualFairyType = getActualFairyType(playerProxy, fairyType)
-        val magicHandler = getMagicHandler(MagicScope({ playerProxy.skillContainer.getSkillLevel(it) }, world, entity, itemStack, actualFairyType))
+        val magicHandler = magic.getMagicHandler(MagicScope(this, entity.proxy, world, entity, itemStack, fairyType))
         magicHandler.onUpdate(itemSlot, isSelected)
     }
 
@@ -216,11 +208,21 @@ abstract class ItemFairyWeaponBase3(
         if (attacker !is EntityPlayer) return true // プレイヤー取得
         val fairyType = FairyWeaponUtils.findFairy(itemStack, attacker).orElse(null)?.let { it.y!! } ?: ApiFairy.empty() // 妖精取得
 
-        val playerProxy = attacker.proxy
-        val actualFairyType = getActualFairyType(playerProxy, fairyType)
-        val magicHandler = getMagicHandler(MagicScope({ playerProxy.skillContainer.getSkillLevel(it) }, attacker.world, attacker, itemStack, actualFairyType))
+        val magicHandler = magic.getMagicHandler(MagicScope(this, attacker.proxy, attacker.world, attacker, itemStack, fairyType))
         magicHandler.hitEntity(target)
         return true
+    }
+}
+
+
+// Actual Fairy Type
+
+fun ItemFairyWeaponBase3.getActualFairyType(playerProxy: PlayerProxy, fairyTypePartner: IFairyType): IFairyType = object : FairyTypeAdapter(fairyTypePartner) {
+    override fun getManaSet(): IManaSet {
+        val a1 = parent.manaSet
+        val a2 = playerProxy.playerAuraHandler.playerAura * (parent.cost / 50.0)
+        val b1 = 0.001 * playerProxy.skillContainer.getSkillLevel(mastery)
+        return (a1 + a2) * (1.0 + b1)
     }
 }
 

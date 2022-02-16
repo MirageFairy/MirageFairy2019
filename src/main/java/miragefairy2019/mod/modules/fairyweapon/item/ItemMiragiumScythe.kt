@@ -4,7 +4,6 @@ import miragefairy2019.libkt.grow
 import miragefairy2019.libkt.positions
 import miragefairy2019.libkt.range
 import miragefairy2019.libkt.sortedByDistance
-import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.MagicScope
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.mana.api.EnumManaType

@@ -31,7 +31,7 @@ class ItemRyugyoDrill(
         destroySpeed = 8.0f
     }
 
-    override fun iterateTargets(magicScope: Companion.MagicScope, blockPosBase: BlockPos) = iterator {
+    override fun iterateTargets(magicScope: MagicScope, blockPosBase: BlockPos) = iterator {
         magicScope.run {
             blockPosBase.range.grow(!range, !range, !range).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
                 if (canBreak(magicScope, blockPos)) yield(blockPos)
@@ -48,8 +48,8 @@ class ItemRyugyoDrill(
         else -> false
     }
 
-    override fun canBreak(magicScope: Companion.MagicScope, blockPos: BlockPos) = super.canBreak(magicScope, blockPos)
+    override fun canBreak(magicScope: MagicScope, blockPos: BlockPos) = super.canBreak(magicScope, blockPos)
             && magicScope.run { world.getBlockState(blockPos).getBlockHardness(world, blockPos) <= !maxHardness } // 硬すぎてはいけない
 
-    override fun getCoolTime(magicScope: Companion.MagicScope) = magicScope.run { !coolTime }
+    override fun getCoolTime(magicScope: MagicScope) = magicScope.run { !coolTime }
 }
