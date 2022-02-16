@@ -135,7 +135,8 @@ tasks {
             "kotlin",
             "org.intellij.lang.annotations",
             "org.jetbrains.annotations",
-            "mirrg.boron"
+            "mirrg.boron",
+            "mirrg.kotlin"
         ).forEach {
             relocate(it, "${project.group}.$it")
         }
