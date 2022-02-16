@@ -4,9 +4,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 
+import javax.annotation.Nonnull;
+
 public interface IMagicHandler {
 
-    public default EnumActionResult onItemRightClick(EnumHand hand) {
+    @Nonnull
+    public default EnumActionResult onItemRightClick(@Nonnull EnumHand hand) {
         return EnumActionResult.PASS;
     }
 
@@ -14,7 +17,7 @@ public interface IMagicHandler {
 
     }
 
-    public default void hitEntity(EntityLivingBase target) {
+    public default void hitEntity(@Nonnull EntityLivingBase target) {
 
     }
 
