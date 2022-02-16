@@ -32,6 +32,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
 
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.ability;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.abilityRaw;
@@ -255,8 +258,10 @@ public class ItemMagicWandLightning extends ItemFairyWeapon {
 
     //
 
-    {
-        getFeatureInformationList().add("右クリックで攻撃"); // TODO translate Right click to use magic
+    @Nullable
+    @Override
+    public String getMagicDescription(@NotNull ItemStack itemStack) {
+        return "右クリックで攻撃"; // TODO translate
     }
 
     @Override

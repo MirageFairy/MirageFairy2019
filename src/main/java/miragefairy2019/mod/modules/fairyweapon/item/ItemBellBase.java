@@ -11,6 +11,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.add;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.cost;
@@ -25,11 +27,9 @@ public class ItemBellBase extends ItemFairyWeapon {
     public IMagicStatus<Double> pitch = registerMagicStatus("pitch", formatterPitch(),
         mul(val(1.0), pow(0.5, add(div(cost(), 50), -1))));
 
-    {
-        getFeatureInformationList().add(getMagicFeatureInformation());
-    }
-
-    public String getMagicFeatureInformation() {
+    @Nullable
+    @Override
+    public String getMagicDescription(@NotNull ItemStack itemStack) {
         return "右クリックで鳴らす"; // TODO translate
     }
 

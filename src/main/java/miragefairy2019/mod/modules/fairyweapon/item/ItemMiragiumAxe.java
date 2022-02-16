@@ -20,6 +20,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.abilityRaw;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.add;
@@ -86,8 +88,10 @@ public class ItemMiragiumAxe extends ItemFairyWeapon {
 
     //
 
-    {
-        getFeatureInformationList().add("右クリックでブロックを破壊"); // TODO translate
+    @Nullable
+    @Override
+    public String getMagicDescription(@NotNull ItemStack itemStack) {
+        return "右クリックでブロックを破壊"; // TODO translate
     }
 
     //

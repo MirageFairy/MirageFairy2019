@@ -25,6 +25,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -50,8 +51,10 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
 
     }
 
-    {
-        getFeatureInformationList().add("Lv30以上のとき、右クリックでLv消費で村人を満腹化"); // TODO translate Right click to use magic
+    @Nullable
+    @Override
+    public String getMagicDescription(@NotNull ItemStack itemStack) {
+        return "Lv30以上のとき、右クリックでLv消費で村人を満腹化"; // TODO translate
     }
 
     @Override

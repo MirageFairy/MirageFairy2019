@@ -22,6 +22,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -41,8 +42,10 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
 
     }
 
-    {
-        getFeatureInformationList().add("右クリックで松明を設置"); // TODO translate Right click to use magic
+    @Nullable
+    @Override
+    public String getMagicDescription(@NotNull ItemStack itemStack) {
+        return "右クリックで松明を設置"; // TODO translate Right click to use magic
     }
 
     @Override

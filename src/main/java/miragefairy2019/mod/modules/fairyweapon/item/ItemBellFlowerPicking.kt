@@ -25,6 +25,8 @@ import net.minecraft.util.SoundCategory
 import net.minecraft.util.SoundEvent
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.Vec3d
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.pow
@@ -46,8 +48,10 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, maxExtraItemDropRate: 
     val collection = "collection"({ boolean.positiveBoolean }) { !WARP >= 10 }.setVisibility(ALWAYS)
     val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { skillFunction1(mastery, 0, 100, 0.1, maxExtraItemDropRate) }.setVisibility(ALWAYS)
 
+    @SideOnly(Side.CLIENT)
+    override fun getMagicDescription(itemStack: ItemStack) = "右クリックでミラージュフラワーを収穫" // TODO translate
+
     init {
-        featureInformationList += "右クリックでミラージュフラワーを収穫" // TODO translate
         magic {
 
             // 視線判定

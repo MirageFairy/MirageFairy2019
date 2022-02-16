@@ -19,6 +19,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.ability;
 import static miragefairy2019.mod.api.fairyweapon.formula.ApiFormula.add;
@@ -95,8 +97,9 @@ public class ItemBellChristmas extends ItemBellBase {
 
     //
 
+    @Nullable
     @Override
-    public String getMagicFeatureInformation() {
+    public String getMagicDescription(@NotNull ItemStack itemStack) {
         return "右クリックで攻撃"; // TODO translate
     }
 

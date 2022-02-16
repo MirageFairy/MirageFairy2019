@@ -97,7 +97,11 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
 
         tooltip += formattedText { (!"Tier $tier").aqua } // tier // TODO translate
 
-        addInformationFeatures(itemStack, world, tooltip, flag) // 機能
+        // 機能
+        if (mirageFairyCombiningHandler.canCombine(itemStack)) tooltip += formattedText { (!"クラフトで妖精を搭乗可能").red } // TODO translate Can be combined with fairy by crafting
+        if (mirageFairyCombiningHandler.canUncombine(itemStack)) tooltip += formattedText { (!"クラフトで妖精を分離可能").red } // TODO translate
+        if (canManualRepair(itemStack)) tooltip += formattedText { (!"手入れ可能").red } // TODO translate Can be repaired by crafting with contained sphere
+        getMagicDescription(itemStack)?.let { tooltip += formattedText { (!it).red } } // 魔法
 
         tooltip += formattedText { (!"耐久値: ${(getMaxDamage(itemStack) - getDamage(itemStack)).coerceAtLeast(0)} / ${getMaxDamage(itemStack)}").green } // 耐久値 TODO translate
 
@@ -118,15 +122,8 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
 
     }
 
-    val featureInformationList = mutableListOf<String>()
-
     @SideOnly(Side.CLIENT)
-    fun addInformationFeatures(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        if (mirageFairyCombiningHandler.canCombine(itemStack)) tooltip += formattedText { (!"クラフトで妖精を搭乗可能").red } // TODO translate Can be combined with fairy by crafting
-        if (mirageFairyCombiningHandler.canUncombine(itemStack)) tooltip += formattedText { (!"クラフトで妖精を分離可能").red } // TODO translate
-        if (canManualRepair(itemStack)) tooltip += formattedText { (!"手入れ可能").red } // TODO translate Can be repaired by crafting with contained sphere
-        featureInformationList.forEach { tooltip += formattedText { (!it).red } }
-    }
+    open fun getMagicDescription(itemStack: ItemStack): String? = null
 
     @SideOnly(Side.CLIENT)
     override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {

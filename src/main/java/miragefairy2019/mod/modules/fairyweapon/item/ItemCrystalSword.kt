@@ -19,6 +19,8 @@ import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.init.SoundEvents
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemStack
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreIngredient
 
 class ItemCrystalSword : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.closeCombat) {
@@ -34,8 +36,10 @@ class ItemCrystalSword : ItemFairyWeaponBase3(EnumManaType.GAIA, EnumMastery.clo
         return multimap
     }
 
+    @SideOnly(Side.CLIENT)
+    override fun getMagicDescription(itemStack: ItemStack) = "撃破時、フェアリークリスタルを消費して妖精を召喚" // TODO translate
+
     init {
-        featureInformationList += "撃破時、フェアリークリスタルを消費して妖精を召喚" // TODO translate
         magic {
             object : IMagicHandler {
                 override fun hitEntity(target: EntityLivingBase) {

@@ -25,6 +25,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -51,8 +52,10 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
 
     }
 
-    {
-        getFeatureInformationList().add("右クリックでアイテムを回収"); // TODO translate Right click to cut whole tree
+    @Nullable
+    @Override
+    public String getMagicDescription(@NotNull ItemStack itemStack) {
+        return "右クリックでアイテムを回収"; // TODO translate Right click to cut whole tree
     }
 
     @Override

@@ -10,15 +10,14 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.RayTraceResult
 import net.minecraft.world.World
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 
 open class ItemFairyWand : ItemFairyWeapon() {
     // フェアリーステッキクラフト関係
 
-    init {
-        featureInformationList += magicFeatureInformation
-    }
-
-    open val magicFeatureInformation get() = "右クリックでフェアリーステッキクラフト" // TODO translate
+    @SideOnly(Side.CLIENT)
+    override fun getMagicDescription(itemStack: ItemStack) = "右クリックでフェアリーステッキクラフト" // TODO translate
 
     override fun onItemUse(player: EntityPlayer, worldIn: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
 
