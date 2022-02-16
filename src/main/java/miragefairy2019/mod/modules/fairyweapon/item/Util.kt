@@ -1,6 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.libkt.equalsItemDamageTag
+import miragefairy2019.libkt.itemStacks
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
@@ -48,8 +49,6 @@ fun findItem(player: EntityPlayer, ingredient: Predicate<ItemStack>) = findItem(
 fun findItem(player: EntityPlayer, predicate: (ItemStack) -> Boolean): ItemStack? {
     player.getHeldItem(EnumHand.OFF_HAND).let { if (predicate(it)) return it }
     player.getHeldItem(EnumHand.MAIN_HAND).let { if (predicate(it)) return it }
-    (0 until player.inventory.sizeInventory).forEach { i ->
-        player.inventory.getStackInSlot(i).let { if (predicate(it)) return it }
-    }
+    player.inventory.itemStacks.forEach { if (predicate(it)) return it }
     return null
 }
