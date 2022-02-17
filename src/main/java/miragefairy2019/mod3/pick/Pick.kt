@@ -27,7 +27,7 @@ abstract class PickHandler : IPickHandler {
 }
 
 class PickHandlerRegistry : IPickHandlerRegistry {
-    val map = mutableMapOf<Block, IPickHandler>();
+    val map = mutableMapOf<Block, IPickHandler>()
     override fun register(block: Block, pickHandler: IPickHandler) = run { map.put(block, pickHandler); Unit }
     override fun get(block: Block) = map[block]
 }

@@ -27,24 +27,24 @@ class BlockOre<V : IBlockVariantOre>(variantList: BlockVariantList<V>) : BlockMu
         // 挙動
         setHardness(3.0f)
         setResistance(5.0f)
-        variantList.blockVariants.forEach { setHarvestLevel(it!!.harvestTool, it.harvestLevel, getState(it)) }
+        variantList.blockVariants.forEach { setHarvestLevel(it.harvestTool, it.harvestLevel, getState(it)) }
 
     }
 
 
-    override fun getBlockHardness(blockState: IBlockState, worldIn: World, pos: BlockPos) = getVariant(blockState)!!.hardness
-    override fun getExplosionResistance(world: World, pos: BlockPos, exploder: Entity?, explosion: Explosion) = getVariant(world.getBlockState(pos))!!.resistance
+    override fun getBlockHardness(blockState: IBlockState, worldIn: World, pos: BlockPos) = getVariant(blockState).hardness
+    override fun getExplosionResistance(world: World, pos: BlockPos, exploder: Entity?, explosion: Explosion) = getVariant(world.getBlockState(pos)).resistance
 
 
     override fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, blockPos: BlockPos, blockState: IBlockState, fortune: Int) {
         val random = if (world is World) world.rand else RANDOM
-        getVariant(blockState)!!.getDrops(drops, random, this, getMetaFromState(blockState), fortune)
+        getVariant(blockState).getDrops(drops, random, this, getMetaFromState(blockState), fortune)
     }
 
     override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer) = true
     override fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int): Int {
         val random = if (world is World) world.rand else Random()
-        return getVariant(state)!!.getExpDrop(random, fortune)
+        return getVariant(state).getExpDrop(random, fortune)
     }
 
 

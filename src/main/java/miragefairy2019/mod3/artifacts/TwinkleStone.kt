@@ -74,7 +74,7 @@ class BlockTwinkleStone : BlockMulti<EnumVariantTwinkleStone>(Material.ROCK, Enu
 
     override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer) = true
 
-    override fun getLightValue(state: IBlockState, world: IBlockAccess, pos: BlockPos) = getVariant(state)!!.lightValue
+    override fun getLightValue(state: IBlockState, world: IBlockAccess, pos: BlockPos) = getVariant(state).lightValue
     override fun canCreatureSpawn(state: IBlockState, world: IBlockAccess, pos: BlockPos, type: SpawnPlacementType) = false
 }
 

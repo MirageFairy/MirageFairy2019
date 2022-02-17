@@ -3,6 +3,7 @@ package miragefairy2019.mod3.artifacts
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.Module
@@ -146,7 +147,7 @@ object FairyMaterials {
 class ItemVariantFairyMaterial(registryName: String, unlocalizedName: String, val tier: Int) : ItemVariantMaterial(registryName, unlocalizedName) {
     var burnTime: Int? = null
     var containerItemSupplier: (() -> ItemStack)? = null
-    val containerItem get() = containerItemSupplier?.let { it() } ?: ItemStack.EMPTY
+    val containerItem get() = containerItemSupplier?.let { it() } ?: EMPTY_ITEM_STACK
 }
 
 class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
