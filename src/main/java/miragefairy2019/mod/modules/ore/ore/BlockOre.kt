@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.ore.ore
 
-import miragefairy2019.mod.lib.multi.BlockMulti
-import miragefairy2019.mod.lib.multi.BlockVariantList
+import miragefairy2019.mod.lib.BlockMulti
+import miragefairy2019.mod.lib.BlockVariantList
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState

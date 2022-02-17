@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.ore.material
 
-import miragefairy2019.mod.lib.multi.IBlockVariant
+import miragefairy2019.mod.lib.IBlockVariant
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 

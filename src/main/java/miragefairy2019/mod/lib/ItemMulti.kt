@@ -1,4 +1,4 @@
-package miragefairy2019.mod.lib.multi
+package miragefairy2019.mod.lib
 
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.createItemStack

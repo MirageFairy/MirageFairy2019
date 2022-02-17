@@ -1,7 +1,7 @@
 package miragefairy2019.libkt
 
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.lib.multi.ItemMulti
+import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.multi.ItemVariant
 import miragefairy2019.mod3.main.api.ApiMain.side
 import net.minecraft.block.Block

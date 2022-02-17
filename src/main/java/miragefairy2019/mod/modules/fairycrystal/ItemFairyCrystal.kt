@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairycrystal
 
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
-import miragefairy2019.mod.lib.multi.ItemMulti
+import miragefairy2019.mod.lib.ItemMulti
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack

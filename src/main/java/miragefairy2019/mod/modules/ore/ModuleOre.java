@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.ore;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.lib.EventRegistryMod;
-import miragefairy2019.mod.lib.multi.IBlockVariant;
+import miragefairy2019.mod.lib.IBlockVariant;
 import miragefairy2019.mod.modules.ore.material.BlockMaterials;
 import miragefairy2019.mod.modules.ore.material.EnumVariantMaterials1;
 import miragefairy2019.mod.modules.ore.material.ItemBlockMaterials;

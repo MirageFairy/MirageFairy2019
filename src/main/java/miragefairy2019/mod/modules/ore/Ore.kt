@@ -12,9 +12,9 @@ import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeItemVariantModel
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.mod.lib.multi.ItemMultiMaterial
-import miragefairy2019.mod.lib.multi.ItemVariantMaterial
-import miragefairy2019.mod.lib.multi.setCustomModelResourceLocations
+import miragefairy2019.mod.lib.ItemMultiMaterial
+import miragefairy2019.mod.lib.ItemVariantMaterial
+import miragefairy2019.mod.lib.setCustomModelResourceLocations
 import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.material.Material
 import net.minecraft.item.ItemStack

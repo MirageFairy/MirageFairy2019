@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.ore.material
 
-import miragefairy2019.mod.lib.multi.BlockVariantList
+import miragefairy2019.mod.lib.BlockVariantList
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.util.IStringSerializable

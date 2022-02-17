@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.ore.ore;
 
-import miragefairy2019.mod.lib.multi.IBlockVariant;
+import miragefairy2019.mod.lib.IBlockVariant;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

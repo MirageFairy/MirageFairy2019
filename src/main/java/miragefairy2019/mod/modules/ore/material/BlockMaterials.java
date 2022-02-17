@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.ore.material;
 
-import miragefairy2019.mod.lib.multi.BlockMulti;
-import miragefairy2019.mod.lib.multi.BlockVariantList;
+import miragefairy2019.mod.lib.BlockMulti;
+import miragefairy2019.mod.lib.BlockVariantList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.SoundType;

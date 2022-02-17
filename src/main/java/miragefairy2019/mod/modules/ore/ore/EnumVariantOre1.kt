@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.ore.ore
 
 import miragefairy2019.libkt.getItemStack
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.lib.multi.BlockVariantList
+import miragefairy2019.mod.lib.BlockVariantList
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IStringSerializable
