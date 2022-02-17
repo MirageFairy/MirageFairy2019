@@ -10,6 +10,7 @@ import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.makeRecipe
@@ -79,6 +80,7 @@ object FairyCrystalGlass {
             addOreName("blockMirageFairyCrystal")
             setCustomModelResourceLocation(model = ResourceLocation(ModMirageFairy2019.MODID, "fairy_crystal_glass"))
         }
+        onMakeLang { enJa("tile.fairyCrystalGlass.name", "Fairy Crystal Glass", "フェアリークリスタルガラス") }
         makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "fairy_crystal_glass"),
             DataShapedRecipe(
