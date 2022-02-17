@@ -20,7 +20,6 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.api.ore.ApiOre
 import miragefairy2019.mod.lib.ItemMultiMaterial
 import miragefairy2019.mod.lib.ItemVariantMaterial
 import miragefairy2019.mod.lib.setCustomModelResourceLocations
@@ -63,7 +62,7 @@ object FairyMaterials {
             // ガラス棒＋クォーツ→クォーツ棒
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
-                it.conditions += FairyStickCraftConditionConsumeBlock { ApiOre.blockFluidMirageFlowerExtract.defaultState }
+                it.conditions += FairyStickCraftConditionConsumeBlock { FluidMaterials.blockFluidMirageFlowerExtract().defaultState }
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019ManaRodGlass"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("gemQuartz"), 16)
                 it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.manaRodQuartz.createItemStack() }
@@ -72,7 +71,7 @@ object FairyMaterials {
             // ミラ葉＋骨＋燐灰石→ミラ茎
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
-                it.conditions += FairyStickCraftConditionConsumeBlock { ApiOre.blockFluidMiragiumWater.defaultState }
+                it.conditions += FairyStickCraftConditionConsumeBlock { FluidMaterials.blockFluidMiragiumWater().defaultState }
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbilityCrystal"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("leafMirageFlower"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("gemApatite"))

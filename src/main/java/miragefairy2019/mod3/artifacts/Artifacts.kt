@@ -30,5 +30,6 @@ object Artifacts {
         Config.module(this)
         FairyLog.module(this)
         MirageFlower.module(this)
+        FluidMaterials.module(this)
     }
 }

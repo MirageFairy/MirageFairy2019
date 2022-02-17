@@ -16,10 +16,7 @@ import miragefairy2019.mod.lib.ItemMultiMaterial
 import miragefairy2019.mod.lib.ItemVariantMaterial
 import miragefairy2019.mod.lib.setCustomModelResourceLocations
 import miragefairy2019.mod3.main.api.ApiMain
-import net.minecraft.block.material.Material
 import net.minecraft.item.ItemStack
-import net.minecraftforge.fluids.BlockFluidClassic
-import net.minecraftforge.fluids.Fluid
 
 object Ore {
     val module: Module = {
@@ -80,11 +77,4 @@ class ItemSimpleMaterials : ItemMultiMaterial<ItemVariantSimpleMaterials>() {
 
 class ItemVariantSimpleMaterials(registryName: String, unlocalizedName: String) : ItemVariantMaterial(registryName, unlocalizedName) {
     var burnTime: Int? = null
-}
-
-class BlockFluidMiragiumWater(fluid: Fluid) : BlockFluidClassic(fluid, Material.WATER) {
-    init {
-        setHardness(100.0f)
-        setLightOpacity(3)
-    }
 }

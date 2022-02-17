@@ -10,7 +10,6 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod.api.ore.ApiOre
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionNotNether
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionReplaceBlock
@@ -82,7 +81,7 @@ object FairyStick {
             // 水＋ミラジウムの粉→妖水
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
-                it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.WATER.defaultState }, { ApiOre.blockFluidMiragiumWater.defaultState })
+                it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.WATER.defaultState }, { FluidMaterials.blockFluidMiragiumWater().defaultState })
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustMiragium"))
             })
 
