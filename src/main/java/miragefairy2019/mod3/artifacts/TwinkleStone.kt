@@ -12,8 +12,8 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.multi.BlockMulti
+import miragefairy2019.mod.lib.multi.BlockVariantList
 import miragefairy2019.mod.lib.multi.IBlockVariant
-import miragefairy2019.mod.lib.multi.IBlockVariantList
 import miragefairy2019.mod.lib.multi.ItemBlockMulti
 import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.SoundType
@@ -107,17 +107,6 @@ enum class EnumVariantTwinkleStone(
     override fun getName(): String = resourceName
 
     companion object {
-        val variantList: IBlockVariantList<EnumVariantTwinkleStone> = object : IBlockVariantList<EnumVariantTwinkleStone> {
-            private val values = values().toList()
-            private val metaLookup = mutableMapOf<Int, EnumVariantTwinkleStone>().also { map ->
-                values().forEach { variant ->
-                    require(!map.containsKey(variant.metadata))
-                    map[variant.metadata] = variant
-                }
-            }
-
-            override fun byMetadata(metadata: Int) = metaLookup[metadata] ?: values[0]
-            override fun getBlockVariants() = values
-        }
+        val variantList = BlockVariantList(values().toList())
     }
 }

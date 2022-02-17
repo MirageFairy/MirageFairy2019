@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.ore.ore
 
 import miragefairy2019.mod.lib.multi.BlockMulti
-import miragefairy2019.mod.lib.multi.IBlockVariantList
+import miragefairy2019.mod.lib.multi.BlockVariantList
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.Random
 
-class BlockOre<V : IBlockVariantOre>(variantList: IBlockVariantList<V>) : BlockMulti<V>(Material.ROCK, variantList) {
+class BlockOre<V : IBlockVariantOre>(variantList: BlockVariantList<V>) : BlockMulti<V>(Material.ROCK, variantList) {
     init {
 
         // style

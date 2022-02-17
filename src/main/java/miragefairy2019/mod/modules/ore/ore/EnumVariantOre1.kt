@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.ore.ore
 
 import miragefairy2019.libkt.getItemStack
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.lib.multi.IBlockVariantList
+import miragefairy2019.mod.lib.multi.BlockVariantList
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IStringSerializable
@@ -57,17 +57,6 @@ enum class EnumVariantOre1(
     override fun getExpDrop(random: Random, fortune: Int) = MathHelper.getInt(random, gemProvider.expMin, gemProvider.expMax)
 
     companion object {
-        val variantList: IBlockVariantList<EnumVariantOre1> = object : IBlockVariantList<EnumVariantOre1> {
-            private val values = values().toList()
-            private val metaLookup = mutableMapOf<Int, EnumVariantOre1>().also { map ->
-                values().forEach { variant ->
-                    require(!map.containsKey(variant.metadata))
-                    map[variant.metadata] = variant
-                }
-            }
-
-            override fun byMetadata(metadata: Int) = metaLookup[metadata] ?: values[0]
-            override fun getBlockVariants() = values
-        }
+        val variantList = BlockVariantList(values().toList())
     }
 }

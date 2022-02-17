@@ -107,3 +107,23 @@ open class ItemBlockMulti<B : BlockMulti<V>, V : IBlockVariant>(protected var bl
     override fun getMetadata(meta: Int) = meta
     override fun getUnlocalizedName(itemStack: ItemStack) = "tile.${block2.getVariant(itemStack.metadata).unlocalizedName}"
 }
+
+interface IBlockVariant {
+    val metadata: Int
+    val resourceName: String
+    val unlocalizedName: String
+}
+
+class BlockVariantList<V : IBlockVariant>(
+    val blockVariants: List<V>,
+    val defaultMetadata: Int = 0
+) {
+    private val metaLookup = mutableMapOf<Int, V>().also { map ->
+        blockVariants.forEach { variant ->
+            require(!map.containsKey(variant.metadata))
+            map[variant.metadata] = variant
+        }
+    }
+
+    fun byMetadata(metadata: Int) = metaLookup[metadata] ?: blockVariants[defaultMetadata]
+}

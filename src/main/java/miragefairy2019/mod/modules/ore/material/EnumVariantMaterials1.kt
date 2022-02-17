@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.ore.material
 
-import miragefairy2019.mod.lib.multi.IBlockVariantList
+import miragefairy2019.mod.lib.multi.BlockVariantList
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.util.IStringSerializable
@@ -36,17 +36,6 @@ enum class EnumVariantMaterials1(
     override fun getName() = resourceName
 
     companion object {
-        val variantList: IBlockVariantList<EnumVariantMaterials1> = object : IBlockVariantList<EnumVariantMaterials1> {
-            private val values = values().toList()
-            private val metaLookup = mutableMapOf<Int, EnumVariantMaterials1>().also { map ->
-                values().forEach { variant ->
-                    require(!map.containsKey(variant.metadata))
-                    map[variant.metadata] = variant
-                }
-            }
-
-            override fun byMetadata(metadata: Int) = metaLookup[metadata] ?: values[0]
-            override fun getBlockVariants() = values
-        }
+        val variantList = BlockVariantList(values().toList())
     }
 }
