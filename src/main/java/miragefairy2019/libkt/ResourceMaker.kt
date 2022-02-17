@@ -3,7 +3,7 @@ package miragefairy2019.libkt
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
 import miragefairy2019.mod.lib.ItemMulti
-import miragefairy2019.mod.lib.multi.ItemVariant
+import miragefairy2019.mod.lib.ItemVariant
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import java.io.File

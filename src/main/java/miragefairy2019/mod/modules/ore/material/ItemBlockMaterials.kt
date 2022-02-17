@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.ore.material
 
-import miragefairy2019.mod.lib.multi.ItemBlockMulti
+import miragefairy2019.mod.lib.ItemBlockMulti
 import net.minecraft.item.ItemStack
 
 class ItemBlockMaterials<V : IBlockVariantMaterials>(block: BlockMaterials<V>) : ItemBlockMulti<BlockMaterials<V>, V>(block) {
