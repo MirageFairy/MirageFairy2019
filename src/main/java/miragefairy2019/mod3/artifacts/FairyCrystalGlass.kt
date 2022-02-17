@@ -38,7 +38,10 @@ import net.minecraftforge.fml.relauncher.SideOnly
 object FairyCrystalGlass {
     lateinit var blockFairyCrystalGlass: () -> BlockFairyCrystalGlass
     lateinit var itemBlockFairyCrystalGlass: () -> ItemBlock
+    lateinit var blockPureFairyCrystalGlass: () -> BlockFairyCrystalGlass
+    lateinit var itemBlockPureFairyCrystalGlass: () -> ItemBlock
     val module: Module = {
+        // 通常
         blockFairyCrystalGlass = block({ BlockFairyCrystalGlass() }, "fairy_crystal_glass") {
             setUnlocalizedName("fairyCrystalGlass")
             setCreativeTab { ApiMain.creativeTab }
@@ -97,6 +100,70 @@ object FairyCrystalGlass {
                 result = DataResult(
                     item = "${ModMirageFairy2019.MODID}:fairy_crystal",
                     data = 0,
+                    count = 8
+                )
+            )
+        )
+
+        // 高純度
+        blockPureFairyCrystalGlass = block({ BlockFairyCrystalGlass() }, "pure_fairy_crystal_glass") {
+            setUnlocalizedName("pureFairyCrystalGlass")
+            setCreativeTab { ApiMain.creativeTab }
+            makeBlockStates {
+                DataBlockStates(
+                    multipart = listOf(
+                        DataPart(
+                            `when` = mapOf("down" to false),
+                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 180)
+                        ),
+                        DataPart(
+                            `when` = mapOf("up" to false),
+                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame")
+                        ),
+                        DataPart(
+                            `when` = mapOf("north" to false),
+                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90)
+                        ),
+                        DataPart(
+                            `when` = mapOf("south" to false),
+                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = -90)
+                        ),
+                        DataPart(
+                            `when` = mapOf("west" to false),
+                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90, y = -90)
+                        ),
+                        DataPart(
+                            `when` = mapOf("east" to false),
+                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90, y = 90)
+                        ),
+                        DataPart(
+                            apply = DataBlockState("${ModMirageFairy2019.MODID}:pure_fairy_crystal_glass")
+                        )
+                    )
+                )
+            }
+        }
+        itemBlockPureFairyCrystalGlass = item({ ItemBlock(blockPureFairyCrystalGlass()) }, "pure_fairy_crystal_glass") {
+            addOreName("blockMirageFairyCrystalPure")
+            setCustomModelResourceLocation(model = ResourceLocation(ModMirageFairy2019.MODID, "pure_fairy_crystal_glass"))
+        }
+        onMakeLang { enJa("tile.pureFairyCrystalGlass.name", "Pure Fairy Crystal Glass", "高純度フェアリークリスタルガラス") }
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "pure_fairy_crystal_glass"),
+            DataShapelessRecipe(
+                ingredients = (1..8).map { DataOreIngredient(ore = "mirageFairyCrystalPure") },
+                result = DataResult(
+                    item = "${ModMirageFairy2019.MODID}:pure_fairy_crystal_glass"
+                )
+            )
+        )
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "pure_fairy_crystal_from_pure_fairy_crystal_glass"),
+            DataShapelessRecipe(
+                ingredients = listOf(DataOreIngredient(ore = "blockMirageFairyCrystalPure")),
+                result = DataResult(
+                    item = "${ModMirageFairy2019.MODID}:fairy_crystal",
+                    data = 2,
                     count = 8
                 )
             )

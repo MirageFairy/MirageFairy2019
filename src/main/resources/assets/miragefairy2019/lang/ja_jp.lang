@@ -475,6 +475,7 @@ jei.miragefairy2019.foodAura.title=フードオーラ
 jei.miragefairy2019.manualRepair.title=手入れ
 jei.miragefairy2019.mfa.title=MFA
 tile.fairyCrystalGlass.name=フェアリークリスタルガラス
+tile.pureFairyCrystalGlass.name=高純度フェアリークリスタルガラス
 item.debugFairyList.name=デバッグ：妖精一覧
 item.debugOreNameList.name=デバッグ：鉱石辞書名一覧
 item.debugSkillResetUnlock.name=デバッグ：スキルリセット解禁

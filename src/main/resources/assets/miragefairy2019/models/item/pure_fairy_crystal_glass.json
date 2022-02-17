@@ -1,0 +1,224 @@
+{
+  "parent": "block/block",
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#background",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#background",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#background",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#background",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#background",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#background",
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#frame",
+          "cullface": "down",
+          "rotation": 0
+        },
+        "up": {
+          "texture": "#frame",
+          "cullface": "up",
+          "rotation": 0
+        },
+        "north": {
+          "texture": "#frame",
+          "cullface": "north",
+          "rotation": 0
+        },
+        "south": {
+          "texture": "#frame",
+          "cullface": "south",
+          "rotation": 0
+        },
+        "west": {
+          "texture": "#frame",
+          "cullface": "west",
+          "rotation": 0
+        },
+        "east": {
+          "texture": "#frame",
+          "cullface": "east",
+          "rotation": 0
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#frame",
+          "cullface": "down",
+          "rotation": 90
+        },
+        "up": {
+          "texture": "#frame",
+          "cullface": "up",
+          "rotation": 90
+        },
+        "north": {
+          "texture": "#frame",
+          "cullface": "north",
+          "rotation": 90
+        },
+        "south": {
+          "texture": "#frame",
+          "cullface": "south",
+          "rotation": 90
+        },
+        "west": {
+          "texture": "#frame",
+          "cullface": "west",
+          "rotation": 90
+        },
+        "east": {
+          "texture": "#frame",
+          "cullface": "east",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#frame",
+          "cullface": "down",
+          "rotation": 180
+        },
+        "up": {
+          "texture": "#frame",
+          "cullface": "up",
+          "rotation": 180
+        },
+        "north": {
+          "texture": "#frame",
+          "cullface": "north",
+          "rotation": 180
+        },
+        "south": {
+          "texture": "#frame",
+          "cullface": "south",
+          "rotation": 180
+        },
+        "west": {
+          "texture": "#frame",
+          "cullface": "west",
+          "rotation": 180
+        },
+        "east": {
+          "texture": "#frame",
+          "cullface": "east",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#frame",
+          "cullface": "down",
+          "rotation": 270
+        },
+        "up": {
+          "texture": "#frame",
+          "cullface": "up",
+          "rotation": 270
+        },
+        "north": {
+          "texture": "#frame",
+          "cullface": "north",
+          "rotation": 270
+        },
+        "south": {
+          "texture": "#frame",
+          "cullface": "south",
+          "rotation": 270
+        },
+        "west": {
+          "texture": "#frame",
+          "cullface": "west",
+          "rotation": 270
+        },
+        "east": {
+          "texture": "#frame",
+          "cullface": "east",
+          "rotation": 270
+        }
+      }
+    }
+  ],
+  "textures": {
+    "particle": "miragefairy2019:blocks/fairy_crystal_glass_frame",
+    "background": "miragefairy2019:blocks/pure_fairy_crystal_glass_background",
+    "frame": "miragefairy2019:blocks/fairy_crystal_glass_frame"
+  }
+}
