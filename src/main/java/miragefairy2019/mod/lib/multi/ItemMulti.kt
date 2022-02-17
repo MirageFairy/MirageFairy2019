@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
-import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
@@ -15,8 +14,6 @@ import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-
-// Item Multi
 
 open class ItemMulti<V : ItemVariant> : Item() {
     init {
@@ -64,7 +61,7 @@ open class ItemVariant {
 }
 
 
-// Item Material Multi
+// Material
 
 open class ItemMultiMaterial<V : ItemVariantMaterial> : ItemMulti<V>() {
     override fun getUnlocalizedName(itemStack: ItemStack) = getVariant(itemStack)?.let { "item.${it.unlocalizedName}" } ?: "item.null"
@@ -94,36 +91,3 @@ fun <V : ItemVariantMaterial> ItemMultiMaterial<V>.setCustomModelResourceLocatio
 }
 
 open class ItemVariantMaterial(val registryName: String, val unlocalizedName: String) : ItemVariant()
-
-
-// Block Multi
-
-open class ItemBlockMulti<B : BlockMulti<V>, V : IBlockVariant>(protected var block2: B) : ItemBlock(block2) {
-    init {
-        maxDamage = 0
-        setHasSubtypes(true)
-    }
-
-    override fun getMetadata(meta: Int) = meta
-    override fun getUnlocalizedName(itemStack: ItemStack) = "tile.${block2.getVariant(itemStack.metadata).unlocalizedName}"
-}
-
-interface IBlockVariant {
-    val metadata: Int
-    val resourceName: String
-    val unlocalizedName: String
-}
-
-class BlockVariantList<V : IBlockVariant>(
-    val blockVariants: List<V>,
-    val defaultMetadata: Int = 0
-) {
-    private val metaLookup = mutableMapOf<Int, V>().also { map ->
-        blockVariants.forEach { variant ->
-            require(!map.containsKey(variant.metadata))
-            map[variant.metadata] = variant
-        }
-    }
-
-    fun byMetadata(metadata: Int) = metaLookup[metadata] ?: blockVariants[defaultMetadata]
-}
