@@ -67,7 +67,7 @@ private fun <T : ItemFairyWeapon> ModInitializer.fw(
             MinecraftForge.EVENT_BUS.register(object : Any() {
                 @SubscribeEvent
                 fun accept(event: ModelBakeEvent) {
-                    event.modelRegistry.putObject(modelResourceLocation, BakedModelBuiltinWrapper(event.modelRegistry.getObject(modelResourceLocation)))
+                    event.modelRegistry.putObject(modelResourceLocation, BakedModelBuiltinWrapper(event.modelRegistry.getObject(modelResourceLocation)!!))
                 }
             })
             ModelLoader.setCustomModelResourceLocation(item, 0, modelResourceLocation)
