@@ -184,7 +184,7 @@ object Fairy {
                 // 召喚のワンド使用
                 GameRegistry.findRegistry(IRecipe::class.java).register(
                     ShapelessOreRecipe(
-                        ResourceLocation(ModMirageFairy2019.MODID, "mirage_fairy_from_item_$counter"),
+                        null,
                         entry.fairy.main.createItemStack(),
                         OreIngredientComplex("mirageFairy2019CraftingToolFairyWandSummoning"),
                         OreIngredient("mirageFairyCrystal"),
