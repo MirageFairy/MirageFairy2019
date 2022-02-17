@@ -15,8 +15,6 @@ import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.mana.textColor
-import miragefairy2019.modkt.impl.fairy.ColorSet
-import miragefairy2019.modkt.impl.fairy.FairyType
 import mirrg.boron.util.UtilsString
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag

@@ -1,4 +1,4 @@
-package miragefairy2019.modkt.impl.fairy
+package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.buildText
 import miragefairy2019.mod3.erg.ErgSet

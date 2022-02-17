@@ -45,7 +45,7 @@ import miragefairy2019.mod3.mana.times
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
-import miragefairy2019.modkt.impl.fairy.FairyTypeAdapter
+import miragefairy2019.mod3.fairy.FairyTypeAdapter
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase

@@ -21,9 +21,9 @@ import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType
 import miragefairy2019.mod3.oreseeddrop.api.OreSeedDropEnvironment
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill
-import miragefairy2019.modkt.impl.fairy.ColorSet
-import miragefairy2019.modkt.impl.fairy.erg
-import miragefairy2019.modkt.impl.fairy.mana
+import miragefairy2019.mod3.fairy.ColorSet
+import miragefairy2019.mod3.fairy.erg
+import miragefairy2019.mod3.fairy.mana
 import mirrg.kotlin.formatAs
 import mirrg.kotlin.toLowerCamelCase
 import net.minecraft.block.Block

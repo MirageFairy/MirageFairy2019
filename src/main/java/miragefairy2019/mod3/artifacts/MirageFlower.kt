@@ -26,8 +26,8 @@ import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.pick.PickHandler
 import miragefairy2019.mod3.pick.api.IPickHandler
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
-import miragefairy2019.modkt.impl.fairy.erg
-import miragefairy2019.modkt.impl.fairy.shineEfficiency
+import miragefairy2019.mod3.fairy.erg
+import miragefairy2019.mod3.fairy.shineEfficiency
 import mirrg.boron.util.UtilsMath
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.Block
