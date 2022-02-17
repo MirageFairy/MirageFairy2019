@@ -1,16 +1,39 @@
 {
-  "type": "forge:ore_shaped",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystal"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystal"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystal"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystal"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystal"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystal"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystal"
+    },
+    {
       "type": "forge:ore_dict",
       "ore": "mirageFairyCrystal"
     }
-  },
+  ],
   "result": {
     "item": "miragefairy2019:fairy_crystal_glass",
     "count": 1

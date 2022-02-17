@@ -5,7 +5,7 @@ import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataPart
 import miragefairy2019.libkt.DataResult
-import miragefairy2019.libkt.DataShapedRecipe
+import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
@@ -83,15 +83,8 @@ object FairyCrystalGlass {
         onMakeLang { enJa("tile.fairyCrystalGlass.name", "Fairy Crystal Glass", "フェアリークリスタルガラス") }
         makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "fairy_crystal_glass"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "###",
-                    "###",
-                    "###"
-                ),
-                key = mapOf(
-                    "#" to DataOreIngredient(ore = "mirageFairyCrystal")
-                ),
+            DataShapelessRecipe(
+                ingredients = (1..8).map { DataOreIngredient(ore = "mirageFairyCrystal") },
                 result = DataResult(
                     item = "${ModMirageFairy2019.MODID}:fairy_crystal_glass"
                 )
@@ -99,17 +92,12 @@ object FairyCrystalGlass {
         )
         makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "fairy_crystal_from_fairy_crystal_glass"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "#"
-                ),
-                key = mapOf(
-                    "#" to DataOreIngredient(ore = "blockMirageFairyCrystal")
-                ),
+            DataShapelessRecipe(
+                ingredients = listOf(DataOreIngredient(ore = "blockMirageFairyCrystal")),
                 result = DataResult(
                     item = "${ModMirageFairy2019.MODID}:fairy_crystal",
                     data = 0,
-                    count = 9
+                    count = 8
                 )
             )
         )
