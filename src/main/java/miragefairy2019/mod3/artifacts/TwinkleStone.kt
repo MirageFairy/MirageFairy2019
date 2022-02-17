@@ -79,9 +79,9 @@ class BlockTwinkleStone : BlockMulti<EnumVariantTwinkleStone>(Material.ROCK, Enu
 }
 
 enum class EnumVariantTwinkleStone(
-    @JvmField val metadata: Int,
-    @JvmField val resourceName: String,
-    @JvmField val unlocalizedName: String,
+    override val metadata: Int,
+    override val resourceName: String,
+    override val unlocalizedName: String,
     val oreNames: List<String>,
     val lightValue: Int
 ) : IStringSerializable, IBlockVariant {
@@ -105,9 +105,6 @@ enum class EnumVariantTwinkleStone(
 
     override fun toString(): String = resourceName
     override fun getName(): String = resourceName
-    override fun getMetadata(): Int = metadata
-    override fun getResourceName(): String = resourceName
-    override fun getUnlocalizedName(): String = unlocalizedName
 
     companion object {
         val variantList: IBlockVariantList<EnumVariantTwinkleStone> = object : IBlockVariantList<EnumVariantTwinkleStone> {

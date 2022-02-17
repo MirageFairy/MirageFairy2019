@@ -285,7 +285,7 @@ public class ModuleOre {
         });
         erMod.createItemStack.register(ic -> {
             for (EnumVariantMaterials1 variant : EnumVariantMaterials1.values()) {
-                OreDictionary.registerOre(variant.getOreName(), new ItemStack(itemBlockMaterials1, 1, variant.metadata));
+                OreDictionary.registerOre(variant.getOreName(), new ItemStack(itemBlockMaterials1, 1, variant.getMetadata()));
             }
             OreDictionary.registerOre("container1000Water", Items.WATER_BUCKET);
             OreDictionary.registerOre("container1000Lava", Items.LAVA_BUCKET);

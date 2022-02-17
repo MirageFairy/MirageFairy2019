@@ -11,9 +11,9 @@ import net.minecraft.util.math.MathHelper
 import java.util.Random
 
 enum class EnumVariantOre1(
-    @JvmField val metadata: Int,
-    @JvmField val resourceName: String,
-    @JvmField val unlocalizedName: String,
+    override val metadata: Int,
+    override val resourceName: String,
+    override val unlocalizedName: String,
     @JvmField val hardness: Float,
     @JvmField val resistance: Float,
     @JvmField val harvestLevel: Int,
@@ -44,9 +44,6 @@ enum class EnumVariantOre1(
 
     override fun toString() = resourceName
     override fun getName() = resourceName
-    override fun getMetadata() = metadata
-    override fun getResourceName() = resourceName
-    override fun getUnlocalizedName() = unlocalizedName
     override fun getHardness() = hardness
     override fun getResistance() = resistance
     override fun getHarvestLevel() = harvestLevel

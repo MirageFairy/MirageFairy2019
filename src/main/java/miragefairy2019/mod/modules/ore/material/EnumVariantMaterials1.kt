@@ -6,9 +6,9 @@ import net.minecraft.block.material.Material
 import net.minecraft.util.IStringSerializable
 
 enum class EnumVariantMaterials1(
-    @JvmField val metadata: Int,
-    @JvmField val resourceName: String,
-    @JvmField val unlocalizedName: String,
+    override val metadata: Int,
+    override val resourceName: String,
+    override val unlocalizedName: String,
     val oreName: String,
     override val blockHardness: Float,
     override val harvestTool: String,
@@ -34,9 +34,6 @@ enum class EnumVariantMaterials1(
 
     override fun toString() = resourceName
     override fun getName() = resourceName
-    override fun getMetadata() = metadata
-    override fun getResourceName() = resourceName
-    override fun getUnlocalizedName() = unlocalizedName
 
     companion object {
         val variantList: IBlockVariantList<EnumVariantMaterials1> = object : IBlockVariantList<EnumVariantMaterials1> {
