@@ -157,12 +157,12 @@ abstract class ItemFairyWeaponBase3(
         val playerProxy = ClientPlayerProxy
         val actualFairyType = getActualFairyType(playerProxy, fairyType)
         magicStatusWrapperList.forEach {
-            if (when (it.visibility) {
-                    ALWAYS -> true
-                    DETAIL -> flag.isAdvanced
-                    NEVER -> false
-                }
-            ) {
+            val show = when (it.visibility) {
+                ALWAYS -> true
+                DETAIL -> flag.isAdvanced
+                NEVER -> false
+            }
+            if (show) {
                 tooltip += formattedText {
                     fun <T> TextComponentScope.f(magicStatus: IMagicStatus<T>): List<ITextComponent> {
                         val list = magicStatus.function.factors.map { !it }.sandwich { !", " }.flatten()
