@@ -15,6 +15,7 @@ import com.google.gson.JsonPrimitive
 @Deprecated("暗黙のレシーバにより意図せず呼び出される可能性があります。", ReplaceWith("this.jsonElement.toJson()", "mirrg.kotlin.gson.jsonElement"))
 fun Any?.toJson(block: GsonBuilder.() -> Unit): String = GsonBuilder().apply { block() }.create().toJson(this)
 
+@Suppress("KotlinDeprecation")
 @Deprecated("暗黙のレシーバにより意図せず呼び出される可能性があります。", ReplaceWith("this.jsonElement.json", "mirrg.kotlin.gson.jsonElement"))
 val Any?.json
     get() = toJson { }
