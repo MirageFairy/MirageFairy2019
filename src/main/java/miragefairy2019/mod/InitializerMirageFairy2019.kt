@@ -47,6 +47,7 @@ class InitializerMirageFairy2019 {
         modInitializer.onPreInit(event)
         erMod.preInit.trigger().accept(event)
         val initializationContext = InitializationContext(ModMirageFairy2019.MODID, event.side, creativeTab)
+        modInitializer.onRegisterFluid()
         modInitializer.onRegisterBlock()
         erMod.registerBlock.trigger().accept(initializationContext)
         modInitializer.onRegisterItem()

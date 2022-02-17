@@ -46,6 +46,7 @@ class ModInitializer(val usePreReleaseFeatures: Boolean) {
     val onInitCreativeTab = EventRegistry0()
 
     val onPreInit = EventRegistry1<FMLPreInitializationEvent>()
+    val onRegisterFluid = EventRegistry0()
     val onRegisterBlock = EventRegistry0()
     val onRegisterItem = EventRegistry0()
     val onCreateItemStack = EventRegistry0()
