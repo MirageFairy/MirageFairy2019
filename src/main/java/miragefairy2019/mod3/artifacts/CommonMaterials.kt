@@ -5,6 +5,7 @@ import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.setCreativeTab
@@ -76,6 +77,20 @@ object CommonMaterials {
                     item.addOreName(it.oreName, it.metadata)
                 }
             }
+        }
+        onMakeLang {
+            enJa("tile.blockApatite.name", "Block of Apatite", "燐灰石ブロック")
+            enJa("tile.blockFluorite.name", "Block of Fluorite", "蛍石ブロック")
+            enJa("tile.blockSulfur.name", "Block of Sulfur", "硫黄ブロック")
+            enJa("tile.blockCinnabar.name", "Block of Cinnabar", "辰砂ブロック")
+            enJa("tile.blockMoonstone.name", "Block of Moonstone", "月長石ブロック")
+            enJa("tile.blockMagnetite.name", "Block of Magnetite", "磁鉄鉱ブロック")
+            enJa("tile.blockPyrope.name", "Block of Pyrope", "パイロープブロック")
+            enJa("tile.blockSmithsonite.name", "Block of Smithsonite", "スミソナイトブロック")
+            enJa("tile.blockCharcoal.name", "Block of Charcoal", "木炭ブロック")
+            enJa("tile.blockLeafMirageFlower.name", "Block of Mirage Flower Leaf", "ミラージュフラワーの葉ブロック")
+            enJa("tile.blockMiragium.name", "Block of Miragium", "ミラジウムブロック")
+            enJa("tile.blockDustMiragium.name", "Block of Miragium Dust", "ミラジウムの粉ブロック")
         }
 
     }
