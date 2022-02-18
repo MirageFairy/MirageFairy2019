@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandBreaking"
+    },
+    {
+      "item": "minecraft:coal",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:materials",
+    "data": 21,
+    "count": 1
+  }
+}
