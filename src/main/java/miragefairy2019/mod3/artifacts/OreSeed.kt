@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.oreseed
+package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
@@ -6,6 +6,9 @@ import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.mod.modules.oreseed.BlockOreSeed
+import miragefairy2019.mod.modules.oreseed.EnumVariantOreSeed
+import miragefairy2019.mod.modules.oreseed.WorldGenCompoundOreSeed
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType
 import net.minecraft.block.BlockStone

@@ -33,5 +33,6 @@ object Artifacts {
         FluidMaterials.module(this)
         FairySummoningRecipe.module(this)
         WandRecipe.module(this)
+        OreSeed.module(this)
     }
 }

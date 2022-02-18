@@ -10,7 +10,6 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.mod.modules.oreseed.EnumVariantOreSeed
-import miragefairy2019.mod.modules.oreseed.OreSeed
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.main.api.ApiMain
