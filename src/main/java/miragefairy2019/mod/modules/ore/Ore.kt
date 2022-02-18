@@ -183,6 +183,8 @@ object Ore {
             registerAnvilPulverization("gemCinnabar".oreIngredient, 26)
             registerAnvilPulverization("gemMoonstone".oreIngredient, 27)
             registerAnvilPulverization("gemMagnetite".oreIngredient, 28)
+            registerAnvilPulverization(Items.COAL.createItemStack(metadata = 0).ingredient, 21)
+            registerAnvilPulverization(Items.COAL.createItemStack(metadata = 1).ingredient, 22)
         }
 
     }
