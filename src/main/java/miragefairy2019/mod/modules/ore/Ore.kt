@@ -9,6 +9,7 @@ import miragefairy2019.libkt.MakeItemVariantModelScope
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.generated
 import miragefairy2019.libkt.handheld
 import miragefairy2019.libkt.item
@@ -80,7 +81,40 @@ object Ore {
                 if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
             }
         }
+        onMakeLang {
+            enJa("item.gemApatite.name", "Apatite", "燐灰石")
+            enJa("item.gemFluorite.name", "Fluorite", "蛍石")
+            enJa("item.gemSulfur.name", "Sulfur", "硫黄")
+            enJa("item.dustMiragium.name", "Miragium Dust", "ミラジウムの粉")
+            enJa("item.dustTinyMiragium.name", "Tiny Pile of Miragium Dust", "ミラジウムの微粉")
+            enJa("item.ingotMiragium.name", "Miragium Ingot", "ミラジウムインゴット")
+            enJa("item.gemCinnabar.name", "Cinnabar", "辰砂")
+            enJa("item.gemMoonstone.name", "Moonstone", "月長石")
+            enJa("item.gemMagnetite.name", "Magnetite", "磁鉄鉱")
+            enJa("item.gemSaltpeter.name", "Saltpeter", "硝石")
+            enJa("item.gemPyrope.name", "Pyrope", "パイロープ")
+            enJa("item.gemSmithsonite.name", "Smithsonite", "スミソナイト")
+            enJa("item.rodMiragium.name", "Miragium Rod", "ミラジウムの棒")
+            enJa("item.nuggetMiragium.name", "Miragium Nugget", "ミラジウムの塊")
+            enJa("item.gemNephrite.name", "Nephrite", "ネフライト")
+            enJa("item.gemTopaz.name", "Topaz", "トパーズ")
+            enJa("item.gemTourmaline.name", "Tourmaline", "トルマリン")
+            enJa("item.gemHeliolite.name", "Heliolite", "ヘリオライト")
+            enJa("item.gemLabradorite.name", "Labradorite", "ラブラドライト")
+            enJa("item.ingotLilagium.name", "Lilagium Ingot", "リラジウムインゴット")
+            enJa("item.plateMiragium.name", "Miragium Plate", "ミラジウムの板")
+            enJa("item.dustCoal.name", "Coal Dust", "石炭の粉")
+            enJa("item.dustCharcoal.name", "Charcoal Dust", "木炭の粉")
+            enJa("item.dustApatite.name", "Apatite Dust", "燐灰石の粉")
+            enJa("item.dustFluorite.name", "Fluorite Dust", "蛍石の粉")
+            enJa("item.dustSulfur.name", "Sulfur Dust", "硫黄の粉")
+            enJa("item.dustCinnabar.name", "Cinnabar Dust", "辰砂の粉")
+            enJa("item.dustMoonstone.name", "Moonstone Dust", "月長石の粉")
+            enJa("item.dustMagnetite.name", "Magnetite Dust", "磁鉄鉱の粉")
+        }
 
+
+        // レシピ
         fun makeDustRecipe(materialName: String, metadata: Int) {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "${materialName}_dust"),
