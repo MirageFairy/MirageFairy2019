@@ -1,9 +1,11 @@
 package miragefairy2019.mod.modules.ore
 
+import miragefairy2019.libkt.DataIngredient
 import miragefairy2019.libkt.DataItemModel
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapelessRecipe
+import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.MakeItemVariantModelScope
 import miragefairy2019.libkt.Module
@@ -14,6 +16,7 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.generated
 import miragefairy2019.libkt.handheld
+import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeItemVariantModel
@@ -27,8 +30,9 @@ import miragefairy2019.mod.lib.ItemMultiMaterial
 import miragefairy2019.mod.lib.ItemVariantMaterial
 import miragefairy2019.mod.lib.setCustomModelResourceLocations
 import miragefairy2019.mod3.main.api.ApiMain
-import mirrg.kotlin.toUpperCamelCase
+import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
+import net.minecraft.item.crafting.Ingredient
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.AnvilUpdateEvent
 import net.minecraftforge.event.entity.player.ItemTooltipEvent
@@ -126,12 +130,12 @@ object Ore {
         // レシピ
 
         // 破砕のワンドによる粉砕
-        fun makeDustRecipe(materialName: String, metadata: Int) {
+        fun makeDustRecipe(registryName: String, ingredient: DataIngredient, metadata: Int) {
             makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "${materialName}_dust"),
+                ResourceName(ModMirageFairy2019.MODID, registryName),
                 DataShapelessRecipe(
                     ingredients = listOf(
-                        DataOreIngredient(ore = "gem${materialName.toUpperCamelCase()}"),
+                        ingredient,
                         DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandBreaking")
                     ),
                     result = DataResult(
@@ -141,21 +145,22 @@ object Ore {
                 )
             )
         }
-        makeDustRecipe("apatite", 23)
-        makeDustRecipe("fluorite", 24)
-        makeDustRecipe("sulfur", 25)
-        makeDustRecipe("cinnabar", 26)
-        makeDustRecipe("moonstone", 27)
-        makeDustRecipe("magnetite", 28)
+        makeDustRecipe("apatite_dust", DataOreIngredient(ore = "gemApatite"), 23)
+        makeDustRecipe("fluorite_dust", DataOreIngredient(ore = "gemFluorite"), 24)
+        makeDustRecipe("sulfur_dust", DataOreIngredient(ore = "gemSulfur"), 25)
+        makeDustRecipe("cinnabar_dust", DataOreIngredient(ore = "gemCinnabar"), 26)
+        makeDustRecipe("moonstone_dust", DataOreIngredient(ore = "gemMoonstone"), 27)
+        makeDustRecipe("magnetite_dust", DataOreIngredient(ore = "gemMagnetite"), 28)
+
 
         // 金床による粉砕
-        fun registerAnvilPulverization(materialName: String, metadata: Int) {
-            onInit {
+        onInit {
+            fun registerAnvilPulverization(ingredient: Ingredient, metadata: Int) {
                 MinecraftForge.EVENT_BUS.register(object {
                     @SubscribeEvent
                     fun handle(event: AnvilUpdateEvent) {
-                        if (!"gem${materialName.toUpperCamelCase()}".oreIngredient.test(event.left)) return
-                        if (!"gem${materialName.toUpperCamelCase()}".oreIngredient.test(event.right)) return
+                        if (!ingredient.test(event.left)) return
+                        if (!ingredient.test(event.right)) return
                         val count = event.left.count + event.right.count
                         if (count > 64) return
                         event.output = itemMaterials().createItemStack(count = count, metadata = metadata)
@@ -164,19 +169,19 @@ object Ore {
 
                     @SubscribeEvent
                     fun handle(event: ItemTooltipEvent) {
-                        if ("gem${materialName.toUpperCamelCase()}".oreIngredient.test(event.itemStack)) {
+                        if (ingredient.test(event.itemStack)) {
                             event.toolTip += formattedText { (!"金床で同アイテムを組み合わせて粉砕可能").red } // TODO translate
                         }
                     }
                 })
             }
+            registerAnvilPulverization("gemApatite".oreIngredient, 23)
+            registerAnvilPulverization("gemFluorite".oreIngredient, 24)
+            registerAnvilPulverization("gemSulfur".oreIngredient, 25)
+            registerAnvilPulverization("gemCinnabar".oreIngredient, 26)
+            registerAnvilPulverization("gemMoonstone".oreIngredient, 27)
+            registerAnvilPulverization("gemMagnetite".oreIngredient, 28)
         }
-        registerAnvilPulverization("apatite", 23)
-        registerAnvilPulverization("fluorite", 24)
-        registerAnvilPulverization("sulfur", 25)
-        registerAnvilPulverization("cinnabar", 26)
-        registerAnvilPulverization("moonstone", 27)
-        registerAnvilPulverization("magnetite", 28)
 
     }
 }
