@@ -11,6 +11,7 @@ import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.generated
 import miragefairy2019.libkt.handheld
 import miragefairy2019.libkt.item
@@ -18,6 +19,7 @@ import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeItemVariantModel
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.oreIngredient
+import miragefairy2019.libkt.red
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
@@ -29,6 +31,7 @@ import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.item.ItemStack
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.AnvilUpdateEvent
+import net.minecraftforge.event.entity.player.ItemTooltipEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object Ore {
@@ -157,6 +160,13 @@ object Ore {
                         if (count > 64) return
                         event.output = itemMaterials().createItemStack(count = count, metadata = metadata)
                         event.cost = count
+                    }
+
+                    @SubscribeEvent
+                    fun handle(event: ItemTooltipEvent) {
+                        if ("gem${materialName.toUpperCamelCase()}".oreIngredient.test(event.itemStack)) {
+                            event.toolTip += formattedText { (!"金床で同アイテムを組み合わせて粉砕可能").red } // TODO translate
+                        }
                     }
                 })
             }
