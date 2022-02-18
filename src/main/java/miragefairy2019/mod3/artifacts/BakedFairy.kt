@@ -2,6 +2,7 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.copy
+import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.oreIngredient
@@ -143,7 +144,7 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraContainer {
     override fun onItemUseFinish(itemStack: ItemStack, world: World, entity: EntityLivingBase): ItemStack {
         super.onItemUseFinish(itemStack, world, entity)
         return if (!itemStack.isEmpty) {
-            if (!world.isRemote) entity.entityDropItem(ItemStack(Items.BOWL), 0.0f)
+            if (!world.isRemote) ItemStack(Items.BOWL).drop(world, entity.positionVector, motionless = true, noPickupDelay = true)
             itemStack
         } else {
             ItemStack(Items.BOWL)
