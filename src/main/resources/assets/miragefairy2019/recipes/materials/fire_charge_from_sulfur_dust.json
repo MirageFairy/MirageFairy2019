@@ -27,7 +27,11 @@
 				"type": "forge:ore_dict",
 				"ore": "dustCharcoal"
 			}
-		]
+		],
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustTinyMiragium"
+		}
 	],
 	"result": {
 		"item": "minecraft:fire_charge",

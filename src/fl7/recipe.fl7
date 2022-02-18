@@ -768,6 +768,10 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
                     ore = "dustCharcoal";
                 };
 			];
+			{
+				type = "forge:ore_dict";
+				ore = "dustTinyMiragium";
+			};
 		];
 		result = {
 			item = "minecraft:fire_charge";
