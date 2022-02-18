@@ -135,8 +135,8 @@ object Ore {
                 ResourceName(ModMirageFairy2019.MODID, registryName),
                 DataShapelessRecipe(
                     ingredients = listOf(
-                        ingredient,
-                        DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandBreaking")
+                        DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandBreaking"),
+                        ingredient
                     ),
                     result = DataResult(
                         item = "miragefairy2019:materials",

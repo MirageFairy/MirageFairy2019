@@ -2,12 +2,12 @@
   "type": "forge:ore_shapeless",
   "ingredients": [
     {
-      "type": "forge:ore_dict",
-      "ore": "gemMagnetite"
-    },
-    {
       "type": "miragefairy2019:ore_dict_complex",
       "ore": "mirageFairy2019CraftingToolFairyWandBreaking"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "gemMagnetite"
     }
   ],
   "result": {
