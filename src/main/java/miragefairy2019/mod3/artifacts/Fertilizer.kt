@@ -1,10 +1,16 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.DataOreIngredient
+import miragefairy2019.libkt.DataResult
+import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.BlockDispenser
 import net.minecraft.dispenser.IBlockSource
@@ -45,6 +51,19 @@ object Fertilizer {
                 })
             }
         }
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "fertilizer"),
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(ore = "dustApatite"),
+                    DataOreIngredient(ore = "dustTinyMiragium")
+                ),
+                result = DataResult(
+                    item = "miragefairy2019:fertilizer",
+                    count = 4
+                )
+            )
+        )
     }
 }
 
