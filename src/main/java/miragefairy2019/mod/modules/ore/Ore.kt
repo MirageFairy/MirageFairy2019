@@ -1,21 +1,28 @@
 package miragefairy2019.mod.modules.ore
 
 import miragefairy2019.libkt.DataItemModel
+import miragefairy2019.libkt.DataOreIngredient
+import miragefairy2019.libkt.DataResult
+import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.MakeItemVariantModelScope
 import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.generated
 import miragefairy2019.libkt.handheld
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeItemVariantModel
+import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.ItemMultiMaterial
 import miragefairy2019.mod.lib.ItemVariantMaterial
 import miragefairy2019.mod.lib.setCustomModelResourceLocations
 import miragefairy2019.mod3.main.api.ApiMain
+import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.item.ItemStack
 
 object Ore {
@@ -62,11 +69,39 @@ object Ore {
             r(20, "miragium_plate", "plateMiragium", "plateMiragium", { generated })
             r(21, "coal_dust", "dustCoal", "dustCoal", { generated }).fuel(1600)
             r(22, "charcoal_dust", "dustCharcoal", "dustCharcoal", { generated }).fuel(1600)
+            r(23, "apatite_dust", "dustApatite", "dustApatite", { generated })
+            r(24, "fluorite_dust", "dustFluorite", "dustFluorite", { generated })
+            r(25, "sulfur_dust", "dustSulfur", "dustSulfur", { generated })
+            r(26, "cinnabar_dust", "dustCinnabar", "dustCinnabar", { generated })
+            r(27, "moonstone_dust", "dustMoonstone", "dustMoonstone", { generated })
+            r(28, "magnetite_dust", "dustMagnetite", "dustMagnetite", { generated })
 
             onRegisterItem {
                 if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
             }
         }
+
+        fun makeDustRecipe(materialName: String, metadata: Int) {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "${materialName}_dust"),
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        DataOreIngredient(ore = "gem${materialName.toUpperCamelCase()}"),
+                        DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandBreaking")
+                    ),
+                    result = DataResult(
+                        item = "miragefairy2019:materials",
+                        data = metadata
+                    )
+                )
+            )
+        }
+        makeDustRecipe("apatite", 23)
+        makeDustRecipe("fluorite", 24)
+        makeDustRecipe("sulfur", 25)
+        makeDustRecipe("cinnabar", 26)
+        makeDustRecipe("moonstone", 27)
+        makeDustRecipe("magnetite", 28)
 
     }
 }
