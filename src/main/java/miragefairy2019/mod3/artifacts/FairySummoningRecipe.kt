@@ -39,6 +39,17 @@ object FairySummoningRecipe {
                 )
                 counter++
 
+                // 月長石使用
+                GameRegistry.addShapelessRecipe(
+                    ResourceLocation("${ModMirageFairy2019.MODID}:mirage_fairy_from_item_$counter"),
+                    null,
+                    entry.fairy.main.createItemStack(),
+                    OreIngredient("gemMoonstone"),
+                    OreIngredient("mirageFairyCrystal"),
+                    ingredient
+                )
+                counter++
+
             }
 
         }
