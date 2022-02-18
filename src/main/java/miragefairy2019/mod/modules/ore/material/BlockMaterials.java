@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -125,6 +126,11 @@ public class BlockMaterials<V extends IBlockVariantMaterials> extends BlockMulti
                 worldIn.spawnParticle(EnumParticleTypes.FALLING_DUST, x, y, z, 0, 0, 0, Block.getStateId(stateIn));
             }
         }
+    }
+
+    @Override
+    public boolean isBeaconBase(IBlockAccess world, BlockPos blockPos, BlockPos beaconBlockPos) {
+        return getVariant(world.getBlockState(blockPos)).isBeaconBase();
     }
 
 }

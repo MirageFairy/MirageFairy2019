@@ -12,4 +12,5 @@ interface IBlockVariantMaterials : IBlockVariant {
     val soundType: SoundType
     val isFallable: Boolean
     val material: Material?
+    val isBeaconBase: Boolean
 }
