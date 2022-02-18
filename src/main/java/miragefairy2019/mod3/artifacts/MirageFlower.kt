@@ -15,7 +15,6 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers
 import miragefairy2019.mod.lib.WorldGenBush
 import miragefairy2019.mod.modules.fairycrystal.variantFairyCrystal
-import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.erg
@@ -162,12 +161,12 @@ fun calculateGrowthRate(world: World, blockPos: BlockPos): List<Pair<String, Dou
             bonus = bonus.coerceAtLeast(1.2)
             if (blockState.getValue(BlockFarmland.MOISTURE) > 0) bonus = bonus.coerceAtLeast(1.3) // 耕土が湿っているなら加点
         }
-        if (blockState === ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.APATITE_BLOCK)) bonus = bonus.coerceAtLeast(1.5)
-        if (blockState === ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.FLUORITE_BLOCK)) bonus = bonus.coerceAtLeast(2.0)
-        if (blockState === ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.SULFUR_BLOCK)) bonus = bonus.coerceAtLeast(1.5)
-        if (blockState === ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.CINNABAR_BLOCK)) bonus = bonus.coerceAtLeast(2.0)
-        if (blockState === ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.MOONSTONE_BLOCK)) bonus = bonus.coerceAtLeast(3.0)
-        if (blockState === ModuleOre.blockMaterials1.getState(EnumVariantMaterials1.MAGNETITE_BLOCK)) bonus = bonus.coerceAtLeast(1.2)
+        if (blockState === CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.APATITE_BLOCK)) bonus = bonus.coerceAtLeast(1.5)
+        if (blockState === CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.FLUORITE_BLOCK)) bonus = bonus.coerceAtLeast(2.0)
+        if (blockState === CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.SULFUR_BLOCK)) bonus = bonus.coerceAtLeast(1.5)
+        if (blockState === CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.CINNABAR_BLOCK)) bonus = bonus.coerceAtLeast(2.0)
+        if (blockState === CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.MOONSTONE_BLOCK)) bonus = bonus.coerceAtLeast(3.0)
+        if (blockState === CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.MAGNETITE_BLOCK)) bonus = bonus.coerceAtLeast(1.2)
 
         bonus
     }

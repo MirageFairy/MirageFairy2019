@@ -1,10 +1,20 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.DataBlockState
+import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.addOreName
+import miragefairy2019.libkt.block
+import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeBlockStates
+import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setCustomModelResourceLocation
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.BlockMulti
 import miragefairy2019.mod.lib.BlockVariantList
 import miragefairy2019.mod.lib.IBlockVariant
 import miragefairy2019.mod.lib.ItemBlockMulti
+import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.block.Block
 import net.minecraft.block.BlockFalling
 import net.minecraft.block.SoundType
@@ -16,6 +26,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.IStringSerializable
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.Explosion
 import net.minecraft.world.IBlockAccess
@@ -25,7 +36,47 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.Random
 
 object CommonMaterials {
+    lateinit var blockMaterials1: () -> BlockMaterials<EnumVariantMaterials1>
+    lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<EnumVariantMaterials1>
     val module: Module = {
+
+        blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList) }, "materials1") {
+            setCreativeTab { ApiMain.creativeTab }
+            makeBlockStates {
+                DataBlockStates(
+                    variants = listOf(
+                        "miragefairy2019:apatite_block",
+                        "miragefairy2019:fluorite_block",
+                        "miragefairy2019:sulfur_block",
+                        "miragefairy2019:cinnabar_block",
+                        "miragefairy2019:moonstone_block",
+                        "miragefairy2019:magnetite_block",
+                        "miragefairy2019:pyrope_block",
+                        "miragefairy2019:smithsonite_block",
+                        "miragefairy2019:charcoal_block",
+                        "miragefairy2019:mirage_flower_leaf_block",
+                        "miragefairy2019:miragium_ingot_block",
+                        "miragefairy2019:miragium_dust_block",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone"
+                    ).mapIndexed { i, model -> "variant=$i" to DataBlockState(model = model) }.toMap()
+                )
+            }
+        }
+        itemBlockMaterials1 = item({ ItemBlockMaterials(blockMaterials1()) }, "materials1") {
+            onRegisterItem {
+                blockMaterials1().variantList.blockVariants.forEach {
+                    item.setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
+                }
+            }
+            onCreateItemStack {
+                blockMaterials1().variantList.blockVariants.forEach {
+                    item.addOreName(it.oreName, it.metadata)
+                }
+            }
+        }
 
     }
 }

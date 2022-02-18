@@ -3,15 +3,11 @@ package miragefairy2019.mod.modules.ore;
 import miragefairy2019.mod.ModMirageFairy2019;
 import miragefairy2019.mod.api.ore.ApiOre;
 import miragefairy2019.mod.lib.EventRegistryMod;
-import miragefairy2019.mod.lib.IBlockVariant;
 import miragefairy2019.mod.modules.ore.ore.BlockOre;
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1;
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2;
 import miragefairy2019.mod.modules.ore.ore.IBlockVariantOre;
 import miragefairy2019.mod.modules.ore.ore.ItemBlockOre;
-import miragefairy2019.mod3.artifacts.BlockMaterials;
-import miragefairy2019.mod3.artifacts.EnumVariantMaterials1;
-import miragefairy2019.mod3.artifacts.ItemBlockMaterials;
 import miragefairy2019.mod3.main.api.ApiMain;
 import miragefairy2019.mod3.oreseeddrop.OreSeedDropRegistry;
 import miragefairy2019.mod3.oreseeddrop.api.ApiOreSeedDrop;
@@ -28,11 +24,9 @@ public class ModuleOre {
 
     public static BlockOre<EnumVariantOre1> blockOre1;
     public static BlockOre<EnumVariantOre2> blockOre2;
-    public static BlockMaterials<EnumVariantMaterials1> blockMaterials1;
 
     public static ItemBlockOre<EnumVariantOre1> itemBlockOre1;
     public static ItemBlockOre<EnumVariantOre2> itemBlockOre2;
-    public static ItemBlockMaterials<EnumVariantMaterials1> itemBlockMaterials1;
 
     public static void init(EventRegistryMod erMod) {
 
@@ -54,12 +48,6 @@ public class ModuleOre {
             blockOre2.setRegistryName(ModMirageFairy2019.MODID, "ore2");
             blockOre2.setCreativeTab(ApiMain.creativeTab);
             ForgeRegistries.BLOCKS.register(blockOre2);
-
-            // ブロック
-            ApiOre.blockMaterials1 = blockMaterials1 = new BlockMaterials<>(EnumVariantMaterials1.Companion.getVariantList());
-            blockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
-            blockMaterials1.setCreativeTab(ApiMain.creativeTab);
-            ForgeRegistries.BLOCKS.register(blockMaterials1);
 
         });
         erMod.registerItem.register(b -> {
@@ -94,26 +82,8 @@ public class ModuleOre {
                 }
             }
 
-            // ブロック
-            ApiOre.itemBlockMaterials1 = itemBlockMaterials1 = new ItemBlockMaterials<>(blockMaterials1);
-            itemBlockMaterials1.setRegistryName(ModMirageFairy2019.MODID, "materials1");
-            itemBlockMaterials1.setUnlocalizedName("materials1");
-            itemBlockMaterials1.setCreativeTab(ApiMain.creativeTab);
-            ForgeRegistries.ITEMS.register(itemBlockMaterials1);
-            if (ApiMain.side.isClient()) {
-                for (IBlockVariant variant : blockMaterials1.getVariantList().getBlockVariants()) {
-                    ModelLoader.setCustomModelResourceLocation(
-                        itemBlockMaterials1,
-                        variant.getMetadata(),
-                        new ModelResourceLocation(new ResourceLocation(itemBlockMaterials1.getRegistryName().getResourceDomain(), variant.getResourceName()), null));
-                }
-            }
-
         });
         erMod.createItemStack.register(ic -> {
-            for (EnumVariantMaterials1 variant : EnumVariantMaterials1.values()) {
-                OreDictionary.registerOre(variant.getOreName(), new ItemStack(itemBlockMaterials1, 1, variant.getMetadata()));
-            }
             OreDictionary.registerOre("container1000Water", Items.WATER_BUCKET);
             OreDictionary.registerOre("container1000Lava", Items.LAVA_BUCKET);
             OreDictionary.registerOre("wool", new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
