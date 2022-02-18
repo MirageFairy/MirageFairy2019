@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "###",
+    "#f#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "ice"
+    },
+    "f": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandFreezing"
+    }
+  },
+  "result": {
+    "item": "minecraft:packed_ice",
+    "count": 1
+  }
+}

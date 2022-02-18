@@ -32,5 +32,6 @@ object Artifacts {
         MirageFlower.module(this)
         FluidMaterials.module(this)
         FairySummoningRecipe.module(this)
+        WandRecipe.module(this)
     }
 }
