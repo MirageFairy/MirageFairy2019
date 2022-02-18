@@ -770,7 +770,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 			];
 			{
 				type = "forge:ore_dict";
-				ore = "dustTinyMiragium";
+				ore = "dustMiragium";
 			};
 		];
 		result = {

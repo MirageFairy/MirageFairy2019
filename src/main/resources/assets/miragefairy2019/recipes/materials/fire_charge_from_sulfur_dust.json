@@ -30,7 +30,7 @@
 		],
 		{
 			"type": "forge:ore_dict",
-			"ore": "dustTinyMiragium"
+			"ore": "dustMiragium"
 		}
 	],
 	"result": {
