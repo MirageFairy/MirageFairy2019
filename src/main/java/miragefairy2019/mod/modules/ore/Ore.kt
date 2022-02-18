@@ -151,6 +151,8 @@ object Ore {
         makeDustRecipe("cinnabar_dust", DataOreIngredient(ore = "gemCinnabar"), 26)
         makeDustRecipe("moonstone_dust", DataOreIngredient(ore = "gemMoonstone"), 27)
         makeDustRecipe("magnetite_dust", DataOreIngredient(ore = "gemMagnetite"), 28)
+        makeDustRecipe("coal_dust", DataSimpleIngredient(item = "minecraft:coal", data = 0), 21)
+        makeDustRecipe("charcoal_dust", DataSimpleIngredient(item = "minecraft:coal", data = 1), 22)
 
 
         // 金床による粉砕
