@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:sponge",
+      "data": 1
+    },
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
+    }
+  ],
+  "result": {
+    "item": "minecraft:sponge",
+    "data": 0,
+    "count": 1
+  }
+}
