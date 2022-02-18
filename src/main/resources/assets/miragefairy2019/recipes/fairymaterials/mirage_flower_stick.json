@@ -20,7 +20,7 @@
 		},
 		{
 			"type": "forge:ore_dict",
-			"ore": "gemApatite"
+			"ore": "dustApatite"
 		}
 	],
 	"result": {

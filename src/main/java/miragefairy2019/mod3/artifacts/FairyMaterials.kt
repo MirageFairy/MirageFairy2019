@@ -74,7 +74,7 @@ object FairyMaterials {
                 it.conditions += FairyStickCraftConditionConsumeBlock { FluidMaterials.blockFluidMiragiumWater().defaultState }
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbilityCrystal"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("leafMirageFlower"))
-                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("gemApatite"))
+                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"))
                 it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.stickMirageFlower.createItemStack() }
             })
 
