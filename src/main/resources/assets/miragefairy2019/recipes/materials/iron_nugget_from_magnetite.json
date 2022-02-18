@@ -8,31 +8,39 @@
 		},
 		{
 			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandBreaking"
-		},
-		{
-			"item": "minecraft:coal",
-			"data": 1
-		},
-		{
-			"item": "minecraft:coal",
-			"data": 1
-		},
-		{
-			"item": "minecraft:coal",
-			"data": 1
-		},
-		{
-			"item": "minecraft:coal",
-			"data": 1
+			"ore": "mirageFairy2019CraftingToolFairyWandDistortion"
 		},
 		{
 			"type": "forge:ore_dict",
-			"ore": "gemMagnetite"
+			"ore": "dustMagnetite"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustMagnetite"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustMagnetite"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustMagnetite"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustMagnetite"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustMagnetite"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustMagnetite"
 		}
 	],
 	"result": {
-		"item": "minecraft:iron_nugget",
+		"item": "minecraft:iron_ingot",
 		"count": 3
 	}
 }
