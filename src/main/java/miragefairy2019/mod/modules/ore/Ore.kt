@@ -9,6 +9,7 @@ import miragefairy2019.libkt.MakeItemVariantModelScope
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
+import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.generated
 import miragefairy2019.libkt.handheld
@@ -16,6 +17,7 @@ import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeItemVariantModel
 import miragefairy2019.libkt.makeRecipe
+import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
@@ -25,12 +27,16 @@ import miragefairy2019.mod.lib.setCustomModelResourceLocations
 import miragefairy2019.mod3.main.api.ApiMain
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.item.ItemStack
+import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.event.AnvilUpdateEvent
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object Ore {
+    lateinit var itemMaterials: () -> ItemSimpleMaterials
     val module: Module = {
 
         // マテリアルアイテム
-        item({ ItemSimpleMaterials() }, "materials") {
+        itemMaterials = item({ ItemSimpleMaterials() }, "materials") {
             setUnlocalizedName("materials")
             setCreativeTab { ApiMain.creativeTab }
 
@@ -115,6 +121,8 @@ object Ore {
 
 
         // レシピ
+
+        // 破砕のワンドによる粉砕
         fun makeDustRecipe(materialName: String, metadata: Int) {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "${materialName}_dust"),
@@ -136,6 +144,29 @@ object Ore {
         makeDustRecipe("cinnabar", 26)
         makeDustRecipe("moonstone", 27)
         makeDustRecipe("magnetite", 28)
+
+        // 金床による粉砕
+        fun registerAnvilPulverization(materialName: String, metadata: Int) {
+            onInit {
+                MinecraftForge.EVENT_BUS.register(object {
+                    @SubscribeEvent
+                    fun handle(event: AnvilUpdateEvent) {
+                        if (!"gem${materialName.toUpperCamelCase()}".oreIngredient.test(event.left)) return
+                        if (!"gem${materialName.toUpperCamelCase()}".oreIngredient.test(event.right)) return
+                        val count = event.left.count + event.right.count
+                        if (count > 64) return
+                        event.output = itemMaterials().createItemStack(count = count, metadata = metadata)
+                        event.cost = count
+                    }
+                })
+            }
+        }
+        registerAnvilPulverization("apatite", 23)
+        registerAnvilPulverization("fluorite", 24)
+        registerAnvilPulverization("sulfur", 25)
+        registerAnvilPulverization("cinnabar", 26)
+        registerAnvilPulverization("moonstone", 27)
+        registerAnvilPulverization("magnetite", 28)
 
     }
 }
