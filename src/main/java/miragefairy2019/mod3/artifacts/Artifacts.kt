@@ -31,5 +31,6 @@ object Artifacts {
         FairyLog.module(this)
         MirageFlower.module(this)
         FluidMaterials.module(this)
+        FairySummoningRecipe.module(this)
     }
 }

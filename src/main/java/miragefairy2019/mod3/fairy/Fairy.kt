@@ -1,14 +1,9 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.Module
-import miragefairy2019.libkt.OreIngredientComplex
-import miragefairy2019.libkt.ingredient
-import miragefairy2019.libkt.item
 import miragefairy2019.libkt.orNull
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.IItemFairy
-import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
-import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod3.main.api.ApiMain.side
 import mirrg.boron.util.UtilsString
 import mirrg.kotlin.toUpperCamelCase
@@ -17,7 +12,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.color.IItemColor
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.IRecipe
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
@@ -27,8 +21,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
-import net.minecraftforge.oredict.OreIngredient
-import net.minecraftforge.oredict.ShapelessOreRecipe
 
 object Fairy {
     lateinit var creativeTab: CreativeTabs
@@ -163,38 +155,6 @@ object Fairy {
 
                 }
             }
-        }
-
-        // 確定レシピ
-        onAddRecipe {
-            var counter = 0
-
-            // レシピに変換可能な妖精関係の関係性順のリスト
-            // この順序のまま登録すれば競合したレシピが関係性の強いものが優先して使われる
-            // ingredient, entry
-            val pairs = listOf(
-                FairyRelationRegistries.ingredient.entries.withoutPartiallyMatch.map { Pair(it.key, it) },
-                FairyRelationRegistries.item.entries.withoutPartiallyMatch.map { Pair(it.key.ingredient, it) },
-                FairyRelationRegistries.block.entries.withoutPartiallyMatch.mapNotNull { it.key.item?.ingredient?.let { ingredient -> Pair(ingredient, it) } }
-            ).flatten().sortedByDescending { it.second.relevance }
-
-            // 登録
-            pairs.forEach { (ingredient, entry) ->
-
-                // 召喚のワンド使用
-                GameRegistry.findRegistry(IRecipe::class.java).register(
-                    ShapelessOreRecipe(
-                        null,
-                        entry.fairy.main.createItemStack(),
-                        OreIngredientComplex("mirageFairy2019CraftingToolFairyWandSummoning"),
-                        OreIngredient("mirageFairyCrystal"),
-                        ingredient
-                    ).setRegistryName(ModMirageFairy2019.MODID, "mirage_fairy_from_item_$counter")
-                )
-                counter++
-
-            }
-
         }
 
     }
