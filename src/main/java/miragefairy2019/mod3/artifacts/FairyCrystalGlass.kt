@@ -26,6 +26,7 @@ import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
+import net.minecraft.entity.EntityLiving
 import net.minecraft.item.ItemBlock
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumFacing
@@ -209,6 +210,7 @@ class BlockFairyCrystalGlass : Block(Material.GLASS) {
     override fun isOpaqueCube(blockState: IBlockState) = false
     override fun isFullCube(blockState: IBlockState) = false
     override fun isSideSolid(blockState: IBlockState, world: IBlockAccess, blockPos: BlockPos, facing: EnumFacing) = true
+    override fun canCreatureSpawn(state: IBlockState, world: IBlockAccess, pos: BlockPos, type: EntityLiving.SpawnPlacementType) = false
 
 
     // レンダリング
