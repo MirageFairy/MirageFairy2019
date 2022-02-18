@@ -56,7 +56,7 @@ object Fertilizer {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOreIngredient(ore = "dustApatite"),
-                    DataOreIngredient(ore = "dustTinyMiragium")
+                    DataOreIngredient(ore = "dustMiragium")
                 ),
                 result = DataResult(
                     item = "miragefairy2019:fertilizer",
