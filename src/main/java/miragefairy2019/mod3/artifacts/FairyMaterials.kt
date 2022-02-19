@@ -12,6 +12,7 @@ import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
@@ -55,6 +56,29 @@ object FairyMaterials {
             onRegisterItem {
                 if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
             }
+        }
+        onMakeLang {
+            fun r(name: String, enName: String, jaName: String, jaPoem: String) {
+                enJa("item.$name.name", enName, jaName)
+                enJa("item.$name.poem", "", jaPoem)
+            }
+            r("manaRodShine", "Shine Mana Rod", "月長石の魔導芯棒", "真実の心を伝える")
+            r("manaRodFire", "Fire Mana Rod", "辰砂の魔導芯棒", "閃きの心を伝える")
+            r("manaRodWind", "Wind Mana Rod", "蛍石の魔導芯棒", "直感の心を伝える")
+            r("manaRodGaia", "Gaia Mana Rod", "硫黄の魔導芯棒", "工夫の心を伝える")
+            r("manaRodAqua", "Aqua Mana Rod", "燐灰石の魔導芯棒", "優しさの心を伝える")
+            r("manaRodDark", "Dark Mana Rod", "磁鉄鉱の魔導芯棒", "カリスマの心を伝える")
+            r("manaRodQuartz", "Nether Quartz Mana Rod", "ネザークォーツの魔導芯棒", "魔力を導通させる芯の入った棒材")
+            r("stickMirageFlower", "Mirage Flower Stem", "ミラージュフラワーの茎", "叩くとコツコツと鳴る")
+            r("leafMirageFlower", "Mirage Flower Leaf", "ミラージュフラワーの葉", "指を切らないように！")
+            r("stickMirageFairyWood", "Fairy Wood Stick", "妖精の木の棒", "吸い込まれるようだ")
+            r("bottleMiragiumWater", "Miragium Water Bottle", "ミラジウムウォーター入り瓶", "ほんのり甘い香り")
+            r("bottleMirageFlowerExtract", "Mirage Extract Bottle", "ミラージュエキス入り瓶", "飲めそうにはない")
+            r("bottleMirageFlowerOil", "Mirage Oil Bottle", "ミラージュオイル入り瓶", "皮膚に付くとなかなか落ちない")
+            r("manaRodGlass", "Glass Mana Rod", "ガラスの魔導芯棒", "絶縁性は石と同じ")
+            r("mirageFairyLeather", "Fairy Leather", "妖精の革", "エーテルグラウンド")
+            r("fairyWoodResin", "Fairy Wood Resin", "妖精の木の樹液", "くちどけまろやか")
+            r("sphereBase", "Sphere Base", "スフィアベース", "前世が見える。              （らしい）")
         }
 
         // レシピ
