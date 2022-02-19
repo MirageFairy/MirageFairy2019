@@ -139,6 +139,7 @@ object FairyMaterials {
         val manaRodGlass = iv(13, "glass_mana_rod", "manaRodGlass", 2, listOf("mirageFairy2019ManaRodGlass"))
         val mirageFairyLeather = iv(14, "mirage_fairy_leather", "mirageFairyLeather", 4, listOf("mirageFairyLeather"))
         val fairyWoodResin = iv(15, "fairy_wood_resin", "fairyWoodResin", 4, listOf("mirageFairyWoodResin")).fuel(1600)
+        val sphereBase = iv(16, "sphere_base", "sphereBase", 3, listOf("mirageFairy2019SphereBase"))
     }
 }
 

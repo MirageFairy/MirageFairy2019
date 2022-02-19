@@ -378,6 +378,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	handheld("glass_mana_rod");
 	item("mirage_fairy_leather");
 	item("fairy_wood_resin");
+	item("sphere_base");
 
 	# ポット
 	item("pot");
