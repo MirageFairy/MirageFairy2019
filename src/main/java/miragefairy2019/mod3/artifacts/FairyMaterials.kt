@@ -3,6 +3,7 @@ package miragefairy2019.mod3.artifacts
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
+import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemVariantInitializer
@@ -30,6 +31,7 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
 import miragefairy2019.mod3.main.api.ApiMain
+import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
@@ -107,6 +109,23 @@ object FairyMaterials {
                 )
             )
         )
+
+        // スフィアベース
+        fun makeSphereBaseRecipe(materialName: String) = makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "sphere_base_from_$materialName"),
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandPolishing"),
+                    DataOreIngredient(ore = "dustMiragium"),
+                    DataOreIngredient(ore = "gem${materialName.toUpperCamelCase()}")
+                ),
+                result = DataResult(
+                    item = "miragefairy2019:fairy_materials",
+                    data = 16
+                )
+            )
+        )
+        listOf("pyrope", "smithsonite", "nephrite", "topaz", "tourmaline", "heliolite", "labradorite").forEach { makeSphereBaseRecipe(it) }
 
     }
 

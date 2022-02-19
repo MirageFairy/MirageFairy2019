@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustMiragium"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "gemHeliolite"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:fairy_materials",
+    "data": 16,
+    "count": 1
+  }
+}
