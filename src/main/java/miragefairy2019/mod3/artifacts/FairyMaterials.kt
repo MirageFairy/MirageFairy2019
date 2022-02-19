@@ -126,7 +126,8 @@ object FairyMaterials {
                 ),
                 result = DataResult(
                     item = "miragefairy2019:fairy_materials",
-                    data = 16
+                    data = 16,
+                    count = 4
                 )
             )
         )
