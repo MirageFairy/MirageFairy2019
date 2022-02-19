@@ -3,7 +3,6 @@ package miragefairy2019.mod3.artifacts
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
-import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemVariantInitializer
@@ -113,11 +112,17 @@ object FairyMaterials {
         // スフィアベース
         fun makeSphereBaseRecipe(materialName: String) = makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "sphere_base_from_$materialName"),
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandPolishing"),
-                    DataOreIngredient(ore = "dustMiragium"),
-                    DataOreIngredient(ore = "gem${materialName.toUpperCamelCase()}")
+            DataShapedRecipe(
+                pattern = listOf(
+                    " Gp",
+                    "GDG",
+                    "fG "
+                ),
+                key = mapOf(
+                    "p" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandPolishing"),
+                    "f" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandFusion"),
+                    "D" to DataOreIngredient(ore = "dustMiragium"),
+                    "G" to DataOreIngredient(ore = "gem${materialName.toUpperCamelCase()}")
                 ),
                 result = DataResult(
                     item = "miragefairy2019:fairy_materials",
@@ -125,7 +130,15 @@ object FairyMaterials {
                 )
             )
         )
-        listOf("pyrope", "smithsonite", "nephrite", "topaz", "tourmaline", "heliolite", "labradorite").forEach { makeSphereBaseRecipe(it) }
+        makeSphereBaseRecipe("diamond")
+        makeSphereBaseRecipe("emerald")
+        makeSphereBaseRecipe("pyrope")
+        makeSphereBaseRecipe("smithsonite")
+        makeSphereBaseRecipe("nephrite")
+        makeSphereBaseRecipe("topaz")
+        makeSphereBaseRecipe("tourmaline")
+        makeSphereBaseRecipe("heliolite")
+        makeSphereBaseRecipe("labradorite")
 
     }
 
