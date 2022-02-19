@@ -37,13 +37,13 @@
       "model": "miragefairy2019:miragium_dust_block"
     },
     "variant=12": {
-      "model": "minecraft:stone"
+      "model": "miragefairy2019:nephrite_block"
     },
     "variant=13": {
-      "model": "minecraft:stone"
+      "model": "miragefairy2019:topaz_block"
     },
     "variant=14": {
-      "model": "minecraft:stone"
+      "model": "miragefairy2019:tourmaline_block"
     },
     "variant=15": {
       "model": "minecraft:stone"

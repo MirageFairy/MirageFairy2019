@@ -58,9 +58,9 @@ object CommonMaterials {
                         "miragefairy2019:mirage_flower_leaf_block",
                         "miragefairy2019:miragium_ingot_block",
                         "miragefairy2019:miragium_dust_block",
-                        "minecraft:stone",
-                        "minecraft:stone",
-                        "minecraft:stone",
+                        "miragefairy2019:nephrite_block",
+                        "miragefairy2019:topaz_block",
+                        "miragefairy2019:tourmaline_block",
                         "minecraft:stone"
                     ).mapIndexed { i, model -> "variant=$i" to DataBlockState(model = model) }.toMap()
                 )
@@ -91,6 +91,9 @@ object CommonMaterials {
             enJa("tile.blockLeafMirageFlower.name", "Block of Mirage Flower Leaf", "ミラージュフラワーの葉ブロック")
             enJa("tile.blockMiragium.name", "Block of Miragium", "ミラジウムブロック")
             enJa("tile.blockDustMiragium.name", "Block of Miragium Dust", "ミラジウムの粉ブロック")
+            enJa("tile.blockNephrite.name", "Block of Nephrite", "ネフライトブロック")
+            enJa("tile.blockTopaz.name", "Block of Topaz", "トパーズブロック")
+            enJa("tile.blockTourmaline.name", "Block of Tourmaline", "トルマリンブロック")
         }
 
     }
@@ -222,6 +225,9 @@ enum class EnumVariantMaterials1(
     MIRAGE_FLOWER_LEAF_BLOCK(9, "mirage_flower_leaf_block", "blockLeafMirageFlower", "blockLeafMirageFlower", HardnessClass(2.0f, "axe", 0), 0, SoundType.GLASS, false, Material.LEAVES, false),
     MIRAGIUM_INGOT_BLOCK(10, "miragium_ingot_block", "blockMiragium", "blockMiragium", HardnessClass(5.0f, "pickaxe", 1), 0, SoundType.METAL, false, Material.IRON, false),
     MIRAGIUM_DUST_BLOCK(11, "miragium_dust_block", "blockDustMiragium", "blockDustMiragium", HardnessClass(0.5f, "shovel", 0), 0, SoundType.SNOW, true, Material.SAND, false),
+    NEPHRITE_BLOCK(12, "nephrite_block", "blockNephrite", "blockNephrite", HardnessClass.HARD, 0, SoundType.STONE, false, Material.IRON, true),
+    TOPAZ_BLOCK(13, "topaz_block", "blockTopaz", "blockTopaz", HardnessClass.SUPER_HARD, 0, SoundType.STONE, false, Material.IRON, true),
+    TOURMALINE_BLOCK(14, "tourmaline_block", "blockTourmaline", "blockTourmaline", HardnessClass.VERY_HARD, 0, SoundType.STONE, false, Material.IRON, true),
     ;
 
     override fun toString() = resourceName

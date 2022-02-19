@@ -167,6 +167,9 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		block("mirage_flower_leaf_block");
 		block("miragium_ingot_block");
 		block("miragium_dust_block");
+		block("nephrite_block");
+		block("topaz_block");
+		block("tourmaline_block");
 	);
 
 	# 鉱石ブロック
@@ -395,6 +398,9 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	block("mirage_flower_leaf_block");
 	block("miragium_ingot_block");
 	block("miragium_dust_block");
+	block("nephrite_block");
+	block("topaz_block");
+	block("tourmaline_block");
 
 	# 鉱石ブロック
 	block("apatite_ore");
