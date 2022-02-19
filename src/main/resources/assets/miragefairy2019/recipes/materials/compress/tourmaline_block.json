@@ -1,0 +1,19 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "tourmaline_block",
+	"pattern": [
+		"###",
+		"###",
+		"###"
+	],
+	"key": {
+		"#": {
+			"type": "forge:ore_dict",
+			"ore": "gemTourmaline"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:materials1",
+		"data": 14
+	}
+}

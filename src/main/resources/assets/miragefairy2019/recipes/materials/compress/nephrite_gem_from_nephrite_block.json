@@ -1,0 +1,18 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "nephrite_gem",
+	"pattern": [
+		"#"
+	],
+	"key": {
+		"#": {
+			"type": "forge:ore_dict",
+			"ore": "blockNephrite"
+		}
+	},
+	"result": {
+		"item": "miragefairy2019:materials",
+		"count": 9,
+		"data": 14
+	}
+}

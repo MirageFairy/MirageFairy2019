@@ -493,6 +493,9 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	x9("mirage_flower_leaf"; "mirage_flower_leaf_block"; iOre    ("leafMirageFlower" ); iOre("blockLeafMirageFlower"); iSubItem("miragefairy2019:fairy_materials";  8); iSubItem("miragefairy2019:materials1";  9));
 	x9("miragium_ingot"    ; "miragium_ingot_block"    ; iOre    ("ingotMiragium"    ); iOre("blockMiragium"        ); iSubItem("miragefairy2019:materials"      ;  5); iSubItem("miragefairy2019:materials1"; 10));
 	x9("miragium_dust"     ; "miragium_dust_block"     ; iOre    ("dustMiragium"     ); iOre("blockDustMiragium"    ); iSubItem("miragefairy2019:materials"      ;  3); iSubItem("miragefairy2019:materials1"; 11));
+	x9("nephrite_gem"      ; "nephrite_block"          ; iOre    ("gemNephrite"      ); iOre("blockNephrite"        ); iSubItem("miragefairy2019:materials"      ; 14); iSubItem("miragefairy2019:materials1"; 12));
+	x9("topaz_gem"         ; "topaz_block"             ; iOre    ("gemTopaz"         ); iOre("blockTopaz"           ); iSubItem("miragefairy2019:materials"      ; 15); iSubItem("miragefairy2019:materials1"; 13));
+	x9("tourmaline_gem"    ; "tourmaline_block"        ; iOre    ("gemTourmaline"    ); iOre("blockTourmaline"      ); iSubItem("miragefairy2019:materials"      ; 16); iSubItem("miragefairy2019:materials1"; 14));
 
 	x9("miragium_tiny_dust"; "miragium_dust"           ; iOre    ("dustTinyMiragium" ); iOre("dustMiragium"         ); iSubItem("miragefairy2019:materials"      ;  4); iSubItem("miragefairy2019:materials" ;  3));
 	x9("miragium_nugget"   ; "miragium_ingot"          ; iOre    ("nuggetMiragium"   ); iOre("ingotMiragium"        ); iSubItem("miragefairy2019:materials"      ; 13); iSubItem("miragefairy2019:materials" ;  5));
