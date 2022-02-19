@@ -195,8 +195,11 @@ object FairyRelation {
         fairy { pyrope }.register { material("Pyrope") }
         fairy { smithsonite }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.SMITHSONITE_BLOCK) }) }
         fairy { smithsonite }.register { material("Smithsonite") }
+        fairy { nephrite }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.NEPHRITE_BLOCK) }) }
         fairy { nephrite }.register { material("Nephrite") }
+        fairy { tourmaline }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.TOURMALINE_BLOCK) }) }
         fairy { tourmaline }.register { material("Tourmaline") }
+        fairy { topaz }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.TOPAZ_BLOCK) }) }
         fairy { topaz }.register { material("Topaz") }
         fairy { glass }.register { block({ Blocks.GLASS }) }
         fairy { glass }.register { material("Glass") }
