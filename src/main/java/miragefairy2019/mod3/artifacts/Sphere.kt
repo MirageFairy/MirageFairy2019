@@ -98,7 +98,7 @@ lateinit var itemSpheres: () -> ItemSpheres
 object Sphere {
     val module: Module = {
 
-        // スフィアアイテム
+        // アイテム
         itemSpheres = item({ ItemSpheres() }, "spheres") {
             setUnlocalizedName("spheres")
             setCreativeTab { creativeTab }
@@ -110,7 +110,7 @@ object Sphere {
             }
         }
 
-        // スフィアのカスタム色
+        // カスタム色
         onRegisterItemColorHandler {
             object {
                 @SideOnly(Side.CLIENT)
@@ -133,7 +133,7 @@ object Sphere {
             }.run()
         }
 
-        // スフィアの鉱石辞書
+        // 鉱石辞書
         onCreateItemStack {
             EnumErgType.values().forEachIndexed { meta, ergType ->
                 val itemStack = itemSpheres().getVariant(meta)!!.createItemStack()
@@ -142,7 +142,7 @@ object Sphere {
             }
         }
 
-        // スフィアのレシピ登録
+        // レシピ登録
         onAddRecipe {
             EnumErgType.values().forEachIndexed { meta, ergType ->
                 val sphere = getSphereType(ergType)
