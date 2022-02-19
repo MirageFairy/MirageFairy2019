@@ -174,6 +174,7 @@ object Sphere {
                 }
 
                 sphere.catalystSupplier.let { register("with_fluorite", OreIngredient("gemFluorite"), it()) } // 蛍石触媒レシピ
+                sphere.catalystSupplier.let { register("with_sphere_base", OreIngredient("mirageFairy2019SphereBase"), it()) } // スフィアベース触媒レシピ
                 sphere.gemSupplier?.let { register("from_gem", it()) } // 宝石レシピ
 
             }
