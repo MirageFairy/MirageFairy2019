@@ -146,61 +146,35 @@ object Sphere {
         onAddRecipe {
             EnumErgType.values().forEachIndexed { meta, ergType ->
                 val sphere = getSphereType(ergType)
-                val variant = itemSpheres().getVariant(meta)!!
+                val outputItemStack = itemSpheres().getVariant(meta)!!.createItemStack()
 
-                // 蛍石触媒レシピ
-                run {
-                    val ingredient = sphere.catalystSupplier()
+                fun register(suffix: String, vararg additionalIngredients: Ingredient) {
+                    val ingredients = listOf(
+                        OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}"),
+                        *additionalIngredients
+                    )
 
                     // クラフトレシピ
                     GameRegistry.addShapelessRecipe(
-                        ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere_with_fluorite"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere_$suffix"),
                         ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere"),
-                        variant.createItemStack(),
+                        outputItemStack,
                         OreIngredient("mirageFairyStick"),
                         OreIngredient("container1000MiragiumWater"),
-                        OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}"),
-                        OreIngredient("gemFluorite"),
-                        ingredient
+                        *ingredients.toTypedArray()
                     )
 
                     // 妖精のステッキレシピ
                     ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().apply {
                         conditions.add(FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick")))
                         conditions.add(FairyStickCraftConditionConsumeBlock { FluidMaterials.blockFluidMiragiumWater().defaultState })
-                        conditions.add(FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}")))
-                        conditions.add(FairyStickCraftConditionConsumeItem(OreIngredient("gemFluorite")))
-                        conditions.add(FairyStickCraftConditionConsumeItem(ingredient))
-                        conditions.add(FairyStickCraftConditionSpawnItem { variant.createItemStack() })
+                        ingredients.forEach { conditions.add(FairyStickCraftConditionConsumeItem(it)) }
+                        conditions.add(FairyStickCraftConditionSpawnItem { outputItemStack })
                     })
-
                 }
 
-                // 宝石レシピ
-                run a@{
-                    val ingredient = (sphere.gemSupplier ?: return@a)()
-
-                    // クラフトレシピ
-                    GameRegistry.addShapelessRecipe(
-                        ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere_from_gem"),
-                        ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere"),
-                        variant.createItemStack(),
-                        OreIngredient("mirageFairyStick"),
-                        OreIngredient("container1000MiragiumWater"),
-                        OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}"),
-                        ingredient
-                    )
-
-                    // 妖精のステッキレシピ
-                    ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().apply {
-                        conditions.add(FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick")))
-                        conditions.add(FairyStickCraftConditionConsumeBlock { FluidMaterials.blockFluidMiragiumWater().defaultState })
-                        conditions.add(FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}")))
-                        conditions.add(FairyStickCraftConditionConsumeItem(ingredient))
-                        conditions.add(FairyStickCraftConditionSpawnItem { variant.createItemStack() })
-                    })
-
-                }
+                sphere.catalystSupplier.let { register("with_fluorite", OreIngredient("gemFluorite"), it()) } // 蛍石触媒レシピ
+                sphere.gemSupplier?.let { register("from_gem", it()) } // 宝石レシピ
 
             }
 
