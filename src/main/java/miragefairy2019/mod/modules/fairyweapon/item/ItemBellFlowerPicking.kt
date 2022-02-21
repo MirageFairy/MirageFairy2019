@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
@@ -14,6 +15,7 @@ import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import mirrg.boron.util.UtilsMath
+import mirrg.kotlin.atMost
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.item.EntityXPOrb
 import net.minecraft.init.SoundEvents
@@ -31,7 +33,7 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.pow
 
-class ItemBellFlowerPicking(additionalBaseStatus: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase3(EnumManaType.DARK, EnumMastery.flowerPicking) {
+class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFactor: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase3(EnumManaType.DARK, EnumMastery.flowerPicking) {
     val strength = createStrengthStatus(additionalBaseStatus, EnumErgType.SOUND)
     val extent = createExtentStatus(additionalBaseStatus, EnumErgType.SPACE)
     val endurance = createEnduranceStatus(additionalBaseStatus, EnumErgType.SLASH)
@@ -46,7 +48,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, maxExtraItemDropRate: 
     val wear = "wear"({ percent2.negative }) { 1.0 / (1 + !endurance * 0.03) }.setVisibility(Companion.EnumVisibility.DETAIL)
     val coolTime = "coolTime"({ tick.negative }) { cost * 0.5 }.setVisibility(Companion.EnumVisibility.DETAIL)
     val collection = "collection"({ boolean.positiveBoolean }) { !WARP >= 10 }.setVisibility(ALWAYS)
-    val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { skillFunction1(mastery, 0, 100, 0.1, maxExtraItemDropRate) }.setVisibility(ALWAYS)
+    val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { 0.1 + extraItemDropRateFactor * getSkillLevel(mastery) atMost maxExtraItemDropRate }.setVisibility(ALWAYS)
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでミラージュフラワーを収穫" // TODO translate
@@ -146,8 +148,9 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, maxExtraItemDropRate: 
                             if (!result) return@targets
 
                             // 種の追加ドロップ
-                            if (!extraItemDropRate > world.rand.nextDouble()) {
-                                if (!world.isRemote) ItemStack(MirageFlower.itemMirageFlowerSeeds()).drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
+                            if (!world.isRemote) {
+                                val count = UtilsMath.randomInt(world.rand, !extraItemDropRate)
+                                if (count > 0) MirageFlower.itemMirageFlowerSeeds().createItemStack(count = count).drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
                             }
 
                             // 破壊したばかりのブロックの周辺のアイテムを集める
