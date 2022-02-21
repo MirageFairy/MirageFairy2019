@@ -126,7 +126,7 @@ class FairyWeaponLoader(m: ModInitializer) {
     val crystalSword = m.fw(3, ::ItemCrystalSword, "crystal_sword", "crystalSword", listOf(), { miragiumSword }, !CRYSTAL)
     val fairySword = m.fw(3, ::ItemFairySword, "fairy_sword", "fairySword", listOf(), { miragiumSword }, !ATTACK)
 
-    val miragiumAxe = m.fw(2, ::ItemMiragiumAxe, "miragium_axe", "miragiumAxe", listOf(), null, !SLASH, !HARVEST)
+    val miragiumAxe = m.fw(2, ::ItemMiragiumAxe, "miragium_axe", "miragiumAxe", listOf(), null, !SLASH, !HARVEST, !"plateMiragium")
 
     val magicWandBase = m.fw(3, ::ItemFairyWeapon, "magic_wand_base", "magicWandBase", listOf(), null, !KNOWLEDGE)
     val magicWandLight = m.fw(3, ::ItemMagicWandLight, "light_magic_wand", "magicWandLight", listOf(), { magicWandBase }, !LIGHT)
