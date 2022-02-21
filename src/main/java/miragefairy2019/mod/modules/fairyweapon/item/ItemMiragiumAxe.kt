@@ -27,7 +27,7 @@ import miragefairy2019.mod3.mana.api.EnumManaType.FIRE
 import miragefairy2019.mod3.mana.api.EnumManaType.GAIA
 import miragefairy2019.mod3.mana.api.EnumManaType.SHINE
 import miragefairy2019.mod3.mana.api.EnumManaType.WIND
-import miragefairy2019.mod3.skill.EnumMastery.harvest
+import miragefairy2019.mod3.skill.EnumMastery
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.atLeast
 import mirrg.kotlin.atMost
@@ -49,7 +49,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
     val range = status("range", { (3.0 + (!GAIA + +HARVEST) / 5.0).toInt() atMost 100 }, { integer })
     val power = status("power", { 27.0 + (!DARK + +DESTROY) / 1.0 }, { float2 })
     val breakSpeed = status("breakSpeed", { 2.0 + (!AQUA + +SLASH) / 30.0 }, { float2 })
-    val speedBoost = status("speedBoost", { 1.0 + !harvest / 100.0 }, { percent0 })
+    val speedBoost = status("speedBoost", { 1.0 + !EnumMastery.lumbering / 100.0 }, { percent0 })
     val fortune = status("fortune", { 0.0 + (!SHINE + +LIFE) / 20.0 }, { float2 })
     val wear = status("wear", { 0.1 / (1.0 + (!FIRE + +CRAFT) / 20.0) * (cost / 50.0) }, { percent2 })
     val collection = status("collection", { !WARP >= 10 }, { boolean.positive })
