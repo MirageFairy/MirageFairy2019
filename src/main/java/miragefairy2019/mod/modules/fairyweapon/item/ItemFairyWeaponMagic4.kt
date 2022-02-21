@@ -63,7 +63,7 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
         override fun getMana(manaType: EnumManaType): Double {
             val a = partnerFairyType.manaSet // パートナー妖精のマナ
             val b = a + player.proxy.playerAuraHandler.playerAura * (partnerFairyType.cost / 50.0) // 標準化プレイヤーオーラの加算
-            val c = b * (1.0 + 0.001 * player.proxy.skillContainer.getSkillLevel(EnumMastery.harvest)) // スキルレベル補正：100につき1割増加
+            val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(EnumMastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
             return c.getMana(manaType)
         }
 
