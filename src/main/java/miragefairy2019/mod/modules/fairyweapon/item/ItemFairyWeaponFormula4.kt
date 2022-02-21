@@ -5,12 +5,12 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.formula4.MagicStatusContainer
-import miragefairy2019.mod.formula4.api.MagicStatus
 import miragefairy2019.mod.formula4.displayName
 import miragefairy2019.mod.formula4.factors
 import miragefairy2019.mod.formula4.getDisplayValue
 import miragefairy2019.mod.magic4.api.Magic
 import miragefairy2019.mod.magic4.api.MagicArguments
+import miragefairy2019.mod.magic4.api.MagicStatus
 import miragefairy2019.mod.magic4.getMagicHandler
 import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy

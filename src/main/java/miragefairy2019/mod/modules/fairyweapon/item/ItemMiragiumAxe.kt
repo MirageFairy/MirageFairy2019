@@ -2,16 +2,16 @@ package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.libkt.norm1
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
-import miragefairy2019.mod.formula4.boolean
-import miragefairy2019.mod.formula4.float2
-import miragefairy2019.mod.formula4.integer
-import miragefairy2019.mod.formula4.percent0
-import miragefairy2019.mod.formula4.percent2
-import miragefairy2019.mod.formula4.positive
 import miragefairy2019.mod.formula4.status
 import miragefairy2019.mod.magic4.api.MagicArguments
 import miragefairy2019.mod.magic4.api.MagicHandler
+import miragefairy2019.mod.magic4.boolean
+import miragefairy2019.mod.magic4.float2
+import miragefairy2019.mod.magic4.integer
 import miragefairy2019.mod.magic4.magic
+import miragefairy2019.mod.magic4.percent0
+import miragefairy2019.mod.magic4.percent2
+import miragefairy2019.mod.magic4.positive
 import miragefairy2019.mod.magic4.world
 import miragefairy2019.mod3.artifacts.FairyLog
 import miragefairy2019.mod3.erg.api.EnumErgType.CRAFT

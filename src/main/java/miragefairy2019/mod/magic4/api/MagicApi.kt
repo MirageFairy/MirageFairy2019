@@ -1,7 +1,5 @@
 package miragefairy2019.mod.magic4.api
 
-import miragefairy2019.mod.formula4.api.FormulaArguments
-import miragefairy2019.mod.formula4.api.MagicStatus
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponFormula4
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer

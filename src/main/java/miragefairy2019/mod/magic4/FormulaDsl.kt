@@ -3,10 +3,10 @@ package miragefairy2019.mod.formula4
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod.formula4.api.Formula
-import miragefairy2019.mod.formula4.api.FormulaArguments
-import miragefairy2019.mod.formula4.api.FormulaRenderer
-import miragefairy2019.mod.formula4.api.MagicStatus
+import miragefairy2019.mod.magic4.api.Formula
+import miragefairy2019.mod.magic4.api.FormulaArguments
+import miragefairy2019.mod.magic4.api.FormulaRenderer
+import miragefairy2019.mod.magic4.api.MagicStatus
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.erg.displayName

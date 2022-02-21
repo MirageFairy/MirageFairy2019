@@ -1,11 +1,12 @@
-package miragefairy2019.mod.formula4
+package miragefairy2019.mod.magic4
 
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod.formula4.api.Formula
-import miragefairy2019.mod.formula4.api.FormulaArguments
-import miragefairy2019.mod.formula4.api.FormulaRenderer
+import miragefairy2019.mod.formula4.FormulaRendererSelector
+import miragefairy2019.mod.magic4.api.Formula
+import miragefairy2019.mod.magic4.api.FormulaArguments
+import miragefairy2019.mod.magic4.api.FormulaRenderer
 import mirrg.kotlin.formatAs
 import net.minecraft.util.text.ITextComponent
 
