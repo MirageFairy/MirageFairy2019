@@ -18,7 +18,7 @@ class ItemRyugyoDrill(
     additionalBaseStatus: Double
 ) : ItemMiragiumToolBase(
     EnumManaType.GAIA,
-    EnumMastery.harvest,
+    EnumMastery.mining,
     additionalBaseStatus
 ) {
     val maxHardness = "maxHardness"({ double2.positive }) { 2.0 + !strength * 0.02 }.setRange(2.0..20.0).setVisibility(Companion.EnumVisibility.DETAIL)
