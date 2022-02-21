@@ -9,8 +9,8 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
-import miragefairy2019.mod3.artifacts.getSphereType
 import miragefairy2019.mod3.artifacts.oreName
+import miragefairy2019.mod3.artifacts.sphereType
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.EnumErgType.ATTACK
 import miragefairy2019.mod3.erg.api.EnumErgType.CHRISTMAS
@@ -95,7 +95,7 @@ class FairyWeaponLoader(m: ModInitializer) {
         private val fw2 = "mirageFairy2019CraftingToolFairyWand"
     }
 
-    operator fun EnumErgType.not(): () -> Ingredient = { getSphereType(this).oreName.oreIngredient }
+    operator fun EnumErgType.not(): () -> Ingredient = { sphereType.oreName.oreIngredient }
     operator fun String.not(): () -> Ingredient = { oreIngredient }
 
     val fairyWandCrafting = m.fw(1, ::ItemFairyWand, "crafting_fairy_wand", "${fw}Crafting", listOf("${fw2}Crafting"), null)
