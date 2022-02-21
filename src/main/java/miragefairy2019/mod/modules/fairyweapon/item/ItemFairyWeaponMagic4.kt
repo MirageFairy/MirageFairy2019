@@ -39,7 +39,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemFairyWeaponFormula4 : ItemFairyWeapon(), MagicStatusContainer {
+open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
 
     // Magic Status
     override val magicStatusList = mutableListOf<MagicStatus<*>>()
@@ -70,7 +70,7 @@ open class ItemFairyWeaponFormula4 : ItemFairyWeapon(), MagicStatusContainer {
         override fun getErg(ergType: EnumErgType) = partnerFairyType.erg(ergType)
         override val cost get() = partnerFairyType.cost
         override fun getSkillLevel(mastery: IMastery) = player.proxy.skillContainer.getSkillLevel(mastery)
-        override val weaponItem get() = this@ItemFairyWeaponFormula4
+        override val weaponItem get() = this@ItemFairyWeaponMagic4
         override val weaponItemStack get() = weaponItemStack
         override val player get() = player
     }

@@ -44,7 +44,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
-class ItemMiragiumAxe : ItemFairyWeaponFormula4() {
+class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
     val additionalReach = status("additionalReach", { 0.0 + (!WIND + +LEVITATE) / 10.0 atMost 30.0 }, { float2 })
     val range = status("range", { (3.0 + (!GAIA + +HARVEST) / 5.0).toInt() atMost 100 }, { integer })
     val power = status("power", { 27.0 + (!DARK + +DESTROY) / 1.0 }, { float2 })
