@@ -11,12 +11,9 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.lightPurple
 import miragefairy2019.libkt.orNull
-import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.libkt.unit
 import miragefairy2019.libkt.white
-import miragefairy2019.libkt.yellow
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.api.fairyweapon.formula.ApiFormula
@@ -24,10 +21,6 @@ import miragefairy2019.mod.api.fairyweapon.formula.IFormula
 import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
-import miragefairy2019.mod3.artifacts.getSphereType
-import miragefairy2019.mod3.artifacts.oreName
-import miragefairy2019.mod3.erg.api.EnumErgType
-import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
@@ -41,7 +34,6 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
-import net.minecraft.util.NonNullList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
@@ -106,14 +98,6 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
         tooltip += formattedText { (!"耐久値: ${(getMaxDamage(itemStack) - getDamage(itemStack)).coerceAtLeast(0)} / ${getMaxDamage(itemStack)}").green } // 耐久値 TODO translate
 
         FairyWeaponUtils.getCombinedFairy(itemStack).orNull?.let { tooltip += formattedText { (!"搭乗中: ${it.displayName}").aqua } } // 搭乗中の妖精 // TODO translate
-
-        // 手入れ
-        if (canManualRepair(itemStack)) {
-            tooltip += formattedText {
-                val value = getManualRepairErgs().entries.map { !it.key.displayName + (if (it.value == 1) !"" else !"x${it.value}") }.concat(!", ")
-                (!"手入れ用スフィア: " + value).yellow // TODO translate Manual Repair
-            }
-        }
 
         // 妖精魔法ステータス
         val fairy = Minecraft.getMinecraft().player?.let { FairyWeaponUtils.findFairy(itemStack, it).orNull?.let { t -> Pair(t.x!!, t.y!!) } } ?: Pair(EMPTY_ITEM_STACK, ApiFairy.empty()!!)
@@ -184,18 +168,9 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
 
 
     // 手入れ
-
-    private val manualRepairErgs = mutableMapOf<EnumErgType, Int>()
-    fun getManualRepairErgs() = manualRepairErgs
-    fun addManualRepairErg(ergType: EnumErgType) = addManualRepairErg(ergType, 1)
-    fun addManualRepairErg(ergType: EnumErgType, amount: Int) = unit { manualRepairErgs.compute(ergType) { _, amountNow -> (amountNow ?: 0) + amount } }
+    val manualRepairIngredients = mutableListOf<Ingredient>()
     override fun canManualRepair(itemStack: ItemStack) = true
-    override fun getManualRepairSubstitute(itemStack: ItemStack): NonNullList<Ingredient> = manualRepairErgs.entries
-        .filter { it.value > 0 }
-        .sortedBy { it.key }
-        .flatMap { (key, value) -> (0 until value).map { getSphereType(key).oreName.oreIngredient } }
-        .toCollection(NonNullList.create())
-
+    override fun getManualRepairSubstitute(itemStack: ItemStack) = manualRepairIngredients
     override fun getManualRepairedItem(itemStack: ItemStack): ItemStack = itemStack.copy().also { it.itemDamage = 0 }
 
 

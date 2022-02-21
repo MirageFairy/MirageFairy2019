@@ -4,27 +4,25 @@ import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
+import miragefairy2019.mod3.artifacts.getSphereType
+import miragefairy2019.mod3.artifacts.oreName
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.EnumErgType.ATTACK
 import miragefairy2019.mod3.erg.api.EnumErgType.CHRISTMAS
-import miragefairy2019.mod3.erg.api.EnumErgType.CRAFT
 import miragefairy2019.mod3.erg.api.EnumErgType.CRYSTAL
 import miragefairy2019.mod3.erg.api.EnumErgType.DESTROY
 import miragefairy2019.mod3.erg.api.EnumErgType.ENERGY
-import miragefairy2019.mod3.erg.api.EnumErgType.FLAME
-import miragefairy2019.mod3.erg.api.EnumErgType.FREEZE
 import miragefairy2019.mod3.erg.api.EnumErgType.HARVEST
 import miragefairy2019.mod3.erg.api.EnumErgType.KNOWLEDGE
 import miragefairy2019.mod3.erg.api.EnumErgType.LIFE
 import miragefairy2019.mod3.erg.api.EnumErgType.LIGHT
 import miragefairy2019.mod3.erg.api.EnumErgType.SLASH
 import miragefairy2019.mod3.erg.api.EnumErgType.SOUND
-import miragefairy2019.mod3.erg.api.EnumErgType.SPACE
-import miragefairy2019.mod3.erg.api.EnumErgType.SUBMISSION
 import miragefairy2019.mod3.erg.api.EnumErgType.THUNDER
 import miragefairy2019.mod3.erg.api.EnumErgType.WARP
 import miragefairy2019.mod3.erg.api.EnumErgType.WATER
@@ -37,6 +35,7 @@ import miragefairy2019.mod3.main.api.ApiMain.side
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
+import net.minecraft.item.crafting.Ingredient
 import net.minecraftforge.client.event.ModelBakeEvent
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
@@ -59,7 +58,7 @@ private fun <T : ItemFairyWeapon> ModInitializer.fw(
     unlocalizedName: String,
     oreNameList: List<String>,
     parent: (() -> () -> ItemFairyWeapon)?,
-    vararg ergTypeSuppliers: () -> EnumErgType
+    vararg manualRepairIngredientSuppliers: () -> Ingredient
 ) = item(creator, registryName) {
     setUnlocalizedName(unlocalizedName)
     setCreativeTab { creativeTab }
@@ -76,12 +75,12 @@ private fun <T : ItemFairyWeapon> ModInitializer.fw(
         }
     }
     onInit {
-        if (parent != null) parent()().getManualRepairErgs().forEach { (key, value) -> item.addManualRepairErg(key, value) }
-        ergTypeSuppliers.forEach { item.addManualRepairErg(it()) }
         item.maxDamage = getDurability(tier) - 1
         item.tier = tier
     }
     onCreateItemStack {
+        if (parent != null) item.manualRepairIngredients += parent()().manualRepairIngredients
+        manualRepairIngredientSuppliers.forEach { item.manualRepairIngredients += it() }
         oreNameList.forEach { OreDictionary.registerOre(it, ItemStack(item, 1, OreDictionary.WILDCARD_VALUE)) }
     }
 }
@@ -95,6 +94,9 @@ class FairyWeaponLoader(m: ModInitializer) {
         private val fw = "fairyWand"
         private val fw2 = "mirageFairy2019CraftingToolFairyWand"
     }
+
+    operator fun EnumErgType.not(): () -> Ingredient = { getSphereType(this).oreName.oreIngredient }
+    operator fun String.not(): () -> Ingredient = { oreIngredient }
 
     val fairyWandCrafting = m.fw(1, ::ItemFairyWand, "crafting_fairy_wand", "${fw}Crafting", listOf("${fw2}Crafting"), null)
     val fairyWandCrafting2 = m.fw(2, ::ItemFairyWand, "crafting_fairy_wand_2", "${fw}Crafting2", listOf("${fw2}Crafting"), null)
@@ -120,26 +122,26 @@ class FairyWeaponLoader(m: ModInitializer) {
     val fairyWandDistortion = m.fw(4, ::ItemFairyWand, "distortion_fairy_wand", "${fw}Distortion", listOf("${fw2}Distortion"), null)
     val fairyWandFusion = m.fw(4, ::ItemFairyWand, "fusion_fairy_wand", "${fw}Fusion", listOf("${fw2}Fusion"), null)
 
-    val miragiumSword = m.fw(2, ::ItemFairyWeapon, "miragium_sword", "miragiumSword", listOf(), null, { ATTACK }, { SLASH })
-    val crystalSword = m.fw(3, ::ItemCrystalSword, "crystal_sword", "crystalSword", listOf(), { miragiumSword }, { CRYSTAL })
-    val fairySword = m.fw(3, ::ItemFairySword, "fairy_sword", "fairySword", listOf(), { miragiumSword }, { ATTACK })
+    val miragiumSword = m.fw(2, ::ItemFairyWeapon, "miragium_sword", "miragiumSword", listOf(), null, !ATTACK, !SLASH)
+    val crystalSword = m.fw(3, ::ItemCrystalSword, "crystal_sword", "crystalSword", listOf(), { miragiumSword }, !CRYSTAL)
+    val fairySword = m.fw(3, ::ItemFairySword, "fairy_sword", "fairySword", listOf(), { miragiumSword }, !ATTACK)
 
-    val miragiumAxe = m.fw(2, ::ItemMiragiumAxe, "miragium_axe", "miragiumAxe", listOf(), null, { SLASH }, { HARVEST })
+    val miragiumAxe = m.fw(2, ::ItemMiragiumAxe, "miragium_axe", "miragiumAxe", listOf(), null, !SLASH, !HARVEST)
 
-    val magicWandBase = m.fw(3, ::ItemFairyWeapon, "magic_wand_base", "magicWandBase", listOf(), null, { KNOWLEDGE })
-    val magicWandLight = m.fw(3, ::ItemMagicWandLight, "light_magic_wand", "magicWandLight", listOf(), { magicWandBase }, { LIGHT })
-    val magicWandCollecting = m.fw(3, ::ItemMagicWandCollecting, "collecting_magic_wand", "magicWandCollecting", listOf(), { magicWandBase }, { WARP })
-    val magicWandLightning = m.fw(3, ::ItemMagicWandLightning, "lightning_magic_wand", "magicWandLightning", listOf(), { magicWandBase }, { THUNDER }, { ENERGY })
+    val magicWandBase = m.fw(3, ::ItemFairyWeapon, "magic_wand_base", "magicWandBase", listOf(), null, !KNOWLEDGE)
+    val magicWandLight = m.fw(3, ::ItemMagicWandLight, "light_magic_wand", "magicWandLight", listOf(), { magicWandBase }, !LIGHT)
+    val magicWandCollecting = m.fw(3, ::ItemMagicWandCollecting, "collecting_magic_wand", "magicWandCollecting", listOf(), { magicWandBase }, !WARP)
+    val magicWandLightning = m.fw(3, ::ItemMagicWandLightning, "lightning_magic_wand", "magicWandLightning", listOf(), { magicWandBase }, !THUNDER, !ENERGY)
 
-    val ocarinaBase = m.fw(3, ::ItemFairyWeapon, "ocarina_base", "ocarinaBase", listOf(), null, { SOUND })
-    val ocarinaTemptation = m.fw(3, ::ItemOcarinaTemptation, "temptation_ocarina", "ocarinaTemptation", listOf(), { ocarinaBase }, { LIFE })
-    val bellBase = m.fw(2, ::ItemBellBase, "bell_base", "bellBase", listOf(), null, { SOUND })
-    val bellFlowerPicking = m.fw(2, { ItemBellFlowerPicking(0.0, 0.001, 0.2) }, "flower_picking_bell", "bellFlowerPicking", listOf(), { bellBase }, { HARVEST })
-    val bellFlowerPicking2 = m.fw(4, { ItemBellFlowerPicking(10.0, 0.01, 10000.0) }, "flower_picking_bell_2", "bellFlowerPicking2", listOf(), { bellFlowerPicking }, { HARVEST })
-    val bellChristmas = m.fw(3, ::ItemBellChristmas, "christmas_bell", "bellChristmas", listOf(), { bellBase }, { CHRISTMAS }, { ATTACK })
-    val miragiumScythe = m.fw(2, { ItemMiragiumScythe(0.0, 2.0f) }, "miragium_scythe", "miragiumScythe", listOf(), null, { SLASH }, { HARVEST })
-    val lilagiumScythe = m.fw(3, { ItemMiragiumScythe(10.0, 4.0f) }, "lilagium_scythe", "lilagiumScythe", listOf(), { miragiumScythe }, { HARVEST })
-    val ryugyoDrill = m.fw(4, { ItemRyugyoDrill(0.0) }, "ryugyo_drill", "ryugyoDrill", listOf(), null, { DESTROY }, { THUNDER }, { WATER })
+    val ocarinaBase = m.fw(3, ::ItemFairyWeapon, "ocarina_base", "ocarinaBase", listOf(), null, !SOUND)
+    val ocarinaTemptation = m.fw(3, ::ItemOcarinaTemptation, "temptation_ocarina", "ocarinaTemptation", listOf(), { ocarinaBase }, !LIFE)
+    val bellBase = m.fw(2, ::ItemBellBase, "bell_base", "bellBase", listOf(), null, !SOUND)
+    val bellFlowerPicking = m.fw(2, { ItemBellFlowerPicking(0.0, 0.001, 0.2) }, "flower_picking_bell", "bellFlowerPicking", listOf(), { bellBase }, !HARVEST)
+    val bellFlowerPicking2 = m.fw(4, { ItemBellFlowerPicking(10.0, 0.01, 10000.0) }, "flower_picking_bell_2", "bellFlowerPicking2", listOf(), { bellFlowerPicking }, !HARVEST)
+    val bellChristmas = m.fw(3, ::ItemBellChristmas, "christmas_bell", "bellChristmas", listOf(), { bellBase }, !CHRISTMAS, !ATTACK)
+    val miragiumScythe = m.fw(2, { ItemMiragiumScythe(0.0, 2.0f) }, "miragium_scythe", "miragiumScythe", listOf(), null, !SLASH, !HARVEST)
+    val lilagiumScythe = m.fw(3, { ItemMiragiumScythe(10.0, 4.0f) }, "lilagium_scythe", "lilagiumScythe", listOf(), { miragiumScythe }, !HARVEST)
+    val ryugyoDrill = m.fw(4, { ItemRyugyoDrill(0.0) }, "ryugyo_drill", "ryugyoDrill", listOf(), null, !DESTROY, !THUNDER, !WATER)
 }
 
 object FairyWeapon {
