@@ -2,6 +2,7 @@ package miragefairy2019.libkt
 
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3i
+import kotlin.math.abs
 
 
 // BlockPos
@@ -9,6 +10,7 @@ import net.minecraft.util.math.Vec3i
 operator fun BlockPos.plus(other: Vec3i): BlockPos = add(other)
 operator fun BlockPos.minus(other: Vec3i): BlockPos = subtract(other)
 val BlockPos.range get() = BlockRange(this, this)
+infix fun BlockPos.norm1(other: BlockPos) = abs(x - other.x) + abs(y - other.y) + abs(z - other.z)
 
 
 // Iterable<BlockPos>
