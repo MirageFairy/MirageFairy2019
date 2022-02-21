@@ -54,7 +54,7 @@ class RecipeManualRepair : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         } ?: return null
 
         // スフィア探索
-        val ingredientsSubstitutes = matchResult.itemTarget.getManualRepairSubstitute(matchResult.itemStackTarget)
+        val ingredientsSubstitutes = matchResult.itemTarget.getManualRepairIngredients(matchResult.itemStackTarget)
         if (ingredientsSubstitutes.size == 0) return null
         ingredientsSubstitutes.forEach { ingredient -> pull { _, it -> if (ingredient.test(it)) true else null } ?: return null }
 

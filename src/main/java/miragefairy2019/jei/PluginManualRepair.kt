@@ -66,7 +66,7 @@ class PluginManualRepair : IModPlugin {
                         add(object : IRecipeWrapper {
                             override fun getIngredients(ingredients: IIngredients) {
                                 val inputTarget = listOf(listOf(itemStack))
-                                val inputSubstitute = registry.jeiHelpers.stackHelper.expandRecipeItemStackInputs(item.getManualRepairSubstitute(itemStack))
+                                val inputSubstitute = registry.jeiHelpers.stackHelper.expandRecipeItemStackInputs(item.getManualRepairIngredients(itemStack))
                                 ingredients.setInputLists(VanillaTypes.ITEM, listOf(inputTarget, inputSubstitute).flatten())
                             }
 

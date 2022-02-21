@@ -170,7 +170,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
     // 手入れ
     val manualRepairIngredients = mutableListOf<Ingredient>()
     override fun canManualRepair(itemStack: ItemStack) = true
-    override fun getManualRepairSubstitute(itemStack: ItemStack) = manualRepairIngredients
+    override fun getManualRepairIngredients(itemStack: ItemStack) = manualRepairIngredients
     override fun getManualRepairedItem(itemStack: ItemStack): ItemStack = itemStack.copy().also { it.itemDamage = 0 }
 
 
