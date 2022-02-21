@@ -58,7 +58,6 @@ class PluginFairyStickCraft : IModPlugin {
     override fun register(registry: IModRegistry) {
         registry.addRecipes(ApiFairyStickCraft.fairyStickCraftRegistry.recipes.toList(), uid)
         registry.handleRecipes(FairyStickCraftRecipe::class.java, { RecipeWrapperFairyStickCraft(registry, it) }, uid)
-        registry.addRecipeCatalyst(ItemStack(itemFairyStick()), uid)
     }
 
     class RecipeWrapperFairyStickCraft(registry: IModRegistry, recipe: IFairyStickCraftRecipe) : IRecipeWrapper {
