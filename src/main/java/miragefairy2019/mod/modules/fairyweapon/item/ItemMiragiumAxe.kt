@@ -33,6 +33,7 @@ import mirrg.kotlin.atLeast
 import mirrg.kotlin.atMost
 import net.minecraft.block.BlockLeaves
 import net.minecraft.block.BlockLog
+import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
@@ -88,6 +89,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
                 val breakSounds = mutableListOf<SoundEvent>()
                 var remainingPower = power()
                 var nextCoolTime = 0.0
+                var collected = false
 
                 run finishMining@{
                     targets.forEach { targetBlockPos ->
@@ -121,11 +123,15 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
                             UtilsMath.randomInt(world.rand, fortune()),
                             collection()
                         )
+                        if (collection()) collected = true
 
                     }
                 }
 
-                breakSounds.take(4).forEach { world.playSound(null, player.posX, player.posY, player.posZ, it, SoundCategory.PLAYERS, 1.0f, 1.0f) } // 効果音
+                // 効果音
+                if (collected) world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f)
+                breakSounds.take(4).forEach { world.playSound(null, player.posX, player.posY, player.posZ, it, SoundCategory.PLAYERS, 1.0f, 1.0f) }
+
                 player.cooldownTracker.setCooldown(this@ItemMiragiumAxe, ceil(nextCoolTime).toInt() atLeast 20) // クールタイム発生
 
                 return EnumActionResult.SUCCESS
