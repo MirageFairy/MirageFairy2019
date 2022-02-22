@@ -11,20 +11,13 @@ import miragefairy2019.libkt.MakeItemVariantModelScope
 import miragefairy2019.libkt.Module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
-import miragefairy2019.libkt.copy
-import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.generated
-import miragefairy2019.libkt.getItemStack
 import miragefairy2019.libkt.handheld
-import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeItemVariantModel
 import miragefairy2019.libkt.makeRecipe
-import miragefairy2019.libkt.oreIngredient
-import miragefairy2019.libkt.red
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
@@ -32,15 +25,7 @@ import miragefairy2019.mod.lib.ItemMultiMaterial
 import miragefairy2019.mod.lib.ItemVariantMaterial
 import miragefairy2019.mod.lib.setCustomModelResourceLocations
 import miragefairy2019.mod3.main.api.ApiMain
-import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.Ingredient
-import net.minecraftforge.common.MinecraftForge
-import net.minecraftforge.event.AnvilUpdateEvent
-import net.minecraftforge.event.entity.player.ItemTooltipEvent
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.fml.relauncher.Side
-import net.minecraftforge.fml.relauncher.SideOnly
 
 object Ore {
     lateinit var itemMaterials: () -> ItemSimpleMaterials
@@ -157,43 +142,6 @@ object Ore {
         makeDustRecipe("magnetite_dust", DataOreIngredient(ore = "gemMagnetite"), 28)
         makeDustRecipe("coal_dust", DataSimpleIngredient(item = "minecraft:coal", data = 0), 21)
         makeDustRecipe("charcoal_dust", DataSimpleIngredient(item = "minecraft:coal", data = 1), 22)
-
-
-        // 金床による粉砕
-        onInit {
-            fun registerAnvilPulverization(ingredient: Ingredient, outputOreName: String) {
-                MinecraftForge.EVENT_BUS.register(object {
-                    @SubscribeEvent
-                    fun handle(event: AnvilUpdateEvent) {
-                        if (!ingredient.test(event.left)) return
-                        if (!ingredient.test(event.right)) return
-                        val count = event.left.count + event.right.count
-                        if (count > 64) return
-                        event.output = getItemStack(outputOreName).copy(count)
-                        event.cost = count
-                    }
-
-                    @SideOnly(Side.CLIENT)
-                    @SubscribeEvent
-                    fun handle(event: ItemTooltipEvent) {
-                        if (ingredient.test(event.itemStack)) {
-                            event.toolTip += formattedText { (!"金床で同アイテムを組み合わせて粉砕可能").red } // TODO translate
-                        }
-                        if (outputOreName.oreIngredient.test(event.itemStack)) {
-                            event.toolTip += formattedText { (!"金床で${ingredient.matchingStacks[0].displayName}を組み合わせて入手可能").red } // TODO translate TODO 例外処理
-                        }
-                    }
-                })
-            }
-            registerAnvilPulverization("gemApatite".oreIngredient, "dustApatite")
-            registerAnvilPulverization("gemFluorite".oreIngredient, "dustFluorite")
-            registerAnvilPulverization("gemSulfur".oreIngredient, "dustSulfur")
-            registerAnvilPulverization("gemCinnabar".oreIngredient, "dustCinnabar")
-            registerAnvilPulverization("gemMoonstone".oreIngredient, "dustMoonstone")
-            registerAnvilPulverization("gemMagnetite".oreIngredient, "dustMagnetite")
-            registerAnvilPulverization(Items.COAL.createItemStack(metadata = 0).ingredient, "dustCoal")
-            registerAnvilPulverization(Items.COAL.createItemStack(metadata = 1).ingredient, "dustCharcoal")
-        }
 
     }
 }

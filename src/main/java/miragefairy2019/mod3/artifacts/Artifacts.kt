@@ -19,6 +19,7 @@ object Artifacts {
         DebugItems.module(this)
         Sphere.module(this)
         WandPulverizationRecipes.module(this)
+        AnvilPulverizationRecipes.module(this)
         FairyMaterials.module(this)
         FairyStick.module(this)
         SkillBook.module(this)
