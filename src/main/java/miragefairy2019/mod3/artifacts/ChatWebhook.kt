@@ -145,7 +145,9 @@ object ChatWebhook {
 
 
         // クリエイティブ用
-        if (checkModVersion(21)) {
+        ApiMain.logger.info("checkModVersion: ${checkModVersion(21)} $usePreReleaseFeatures $modVersion") // TODO remove
+        if (checkModVersion(21)) { // TODO remove
+            ApiMain.logger.info("creative_chat_webhook_transmitter: ON") // TODO remove
             blockCreativeChatWebhookTransmitter = block({ BlockCreativeChatWebhookTransmitter() }, "creative_chat_webhook_transmitter") {
                 setUnlocalizedName("creativeChatWebhookTransmitter")
                 setCreativeTab { ApiMain.creativeTab }
@@ -163,7 +165,9 @@ object ChatWebhook {
             itemCreativeChatWebhookTransmitter = item({ ItemBlock(blockCreativeChatWebhookTransmitter()) }, "creative_chat_webhook_transmitter") {
                 setCustomModelResourceLocation(variant = "facing=north")
             }
-        }
+        } else { // TODO remove
+            ApiMain.logger.info("creative_chat_webhook_transmitter: OFF") // TODO remove
+        } // TODO remove
         onMakeLang { enJa("tile.creativeChatWebhookTransmitter.name", "Creative Chat Webhook Transmitter", "アカーシャのお導きによる天耳通の祠") }
 
 
