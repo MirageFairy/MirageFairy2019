@@ -85,8 +85,8 @@ dependencies {
 
 tasks {
 
-    named<TaskSourceCopy>("sourceMainJava") {
-        include("ModMirageFairy2019.java")
+    named<TaskSourceCopy>("sourceMainKotlin") {
+        include("ModMirageFairy2019.kt")
         replace("{version}", project.version)
         replace("{acceptableRemoteVersions}", "[${versionZero}.${versionForge}.${versionCompatibility}.0,${versionZero}.${versionForge}.${versionCompatibility + 1}.0)")
     }
