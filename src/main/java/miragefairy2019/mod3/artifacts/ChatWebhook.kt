@@ -145,29 +145,23 @@ object ChatWebhook {
 
 
         // クリエイティブ用
-        ApiMain.logger.info("checkModVersion: ${checkModVersion(21)} $usePreReleaseFeatures $modVersion") // TODO remove
-        if (checkModVersion(21)) { // TODO remove
-            ApiMain.logger.info("creative_chat_webhook_transmitter: ON") // TODO remove
-            blockCreativeChatWebhookTransmitter = block({ BlockCreativeChatWebhookTransmitter() }, "creative_chat_webhook_transmitter") {
-                setUnlocalizedName("creativeChatWebhookTransmitter")
-                setCreativeTab { ApiMain.creativeTab }
-                makeBlockStates {
-                    DataBlockStates(
-                        variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
-                            "facing=${facing.first}" to DataBlockState(
-                                "miragefairy2019:creative_chat_webhook_transmitter",
-                                y = facing.second
-                            )
-                        }
-                    )
-                }
+        blockCreativeChatWebhookTransmitter = block({ BlockCreativeChatWebhookTransmitter() }, "creative_chat_webhook_transmitter") {
+            setUnlocalizedName("creativeChatWebhookTransmitter")
+            setCreativeTab { ApiMain.creativeTab }
+            makeBlockStates {
+                DataBlockStates(
+                    variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
+                        "facing=${facing.first}" to DataBlockState(
+                            "miragefairy2019:creative_chat_webhook_transmitter",
+                            y = facing.second
+                        )
+                    }
+                )
             }
-            itemCreativeChatWebhookTransmitter = item({ ItemBlock(blockCreativeChatWebhookTransmitter()) }, "creative_chat_webhook_transmitter") {
-                setCustomModelResourceLocation(variant = "facing=north")
-            }
-        } else { // TODO remove
-            ApiMain.logger.info("creative_chat_webhook_transmitter: OFF") // TODO remove
-        } // TODO remove
+        }
+        itemCreativeChatWebhookTransmitter = item({ ItemBlock(blockCreativeChatWebhookTransmitter()) }, "creative_chat_webhook_transmitter") {
+            setCustomModelResourceLocation(variant = "facing=north")
+        }
         onMakeLang { enJa("tile.creativeChatWebhookTransmitter.name", "Creative Chat Webhook Transmitter", "アカーシャのお導きによる天耳通の祠") }
 
 
