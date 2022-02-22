@@ -31,11 +31,18 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
+import org.apache.logging.log4j.LogManager
 
 typealias Module = ModInitializer.() -> Unit
 
 class ModInitializer(val usePreReleaseFeatures: Boolean) {
-    val modVersion = ModMirageFairy2019.VERSION.split(".").getOrNull(2)?.toInt()
+    val modVersion = run {
+        val version = ModMirageFairy2019.VERSION
+        val serverVersion = version.split(".").getOrNull(2)?.toInt()
+        LogManager.getLogger(javaClass).info("Version: $version; Server Version: $serverVersion;")
+        serverVersion
+    }
+
     fun checkModVersion(sinceVersion: Int) = usePreReleaseFeatures || (modVersion != null && modVersion >= sinceVersion)
 
     val onMakeResource = EventRegistry1<ResourceMaker>()
