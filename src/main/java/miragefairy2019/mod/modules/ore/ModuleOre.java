@@ -89,6 +89,7 @@ public class ModuleOre {
             OreDictionary.registerOre("wool", new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
             OreDictionary.registerOre("ice", new ItemStack(Blocks.ICE));
             OreDictionary.registerOre("gemCoal", new ItemStack(Items.COAL, 1, 0));
+            OreDictionary.registerOre("gemCharcoal", new ItemStack(Items.COAL, 1, 1));
         });
         erMod.addRecipe.register(() -> {
 
