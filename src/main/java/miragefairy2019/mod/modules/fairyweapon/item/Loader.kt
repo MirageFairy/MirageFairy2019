@@ -1,9 +1,10 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.libkt.ModInitializer
-import miragefairy2019.libkt.module
+import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
@@ -81,7 +82,7 @@ private fun <T : ItemFairyWeapon> ModInitializer.fw(
     onCreateItemStack {
         if (parent != null) item.manualRepairIngredients += parent()().manualRepairIngredients
         manualRepairIngredientSuppliers.forEach { item.manualRepairIngredients += it() }
-        oreNameList.forEach { OreDictionary.registerOre(it, ItemStack(item, 1, OreDictionary.WILDCARD_VALUE)) }
+        oreNameList.forEach { OreDictionary.registerOre(it, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE)) }
     }
 }
 
