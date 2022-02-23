@@ -38,7 +38,7 @@ class BlockOre<V : IBlockVariantOre>(variantList: BlockVariantList<V>) : BlockMu
 
     override fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, blockPos: BlockPos, blockState: IBlockState, fortune: Int) {
         val random = if (world is World) world.rand else RANDOM
-        getVariant(blockState).getDrops(drops, random, this, getMetaFromState(blockState), fortune)
+        drops += getVariant(blockState).getDrops(random, this, getMetaFromState(blockState), fortune)
     }
 
     override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer) = true

@@ -6,7 +6,6 @@ import miragefairy2019.mod.lib.BlockVariantList
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IStringSerializable
-import net.minecraft.util.NonNullList
 import net.minecraft.util.math.MathHelper
 import java.util.Random
 
@@ -14,9 +13,9 @@ enum class EnumVariantOre1(
     override val metadata: Int,
     override val resourceName: String,
     override val unlocalizedName: String,
-    @JvmField val hardness: Float,
-    @JvmField val resistance: Float,
-    @JvmField val harvestLevel: Int,
+    override val hardness: Float,
+    override val resistance: Float,
+    override val harvestLevel: Int,
     private val gemProvider: GemProvider
 ) : IStringSerializable, IBlockVariantOre {
     APATITE_ORE(0, "apatite_ore", "oreApatite", 3f, 5f, 1, GemProvider({ getItemStack("gemApatite") }, 1.0, 1.5, 1, 3)),
@@ -44,13 +43,10 @@ enum class EnumVariantOre1(
 
     override fun toString() = resourceName
     override fun getName() = resourceName
-    override fun getHardness() = hardness
-    override fun getResistance() = resistance
-    override fun getHarvestLevel() = harvestLevel
 
-    override fun getDrops(drops: NonNullList<ItemStack>, random: Random, block: Block, metadata: Int, fortune: Int) {
-        repeat(random.randomInt(gemProvider.amount + random.nextDouble() * gemProvider.amountPerFortune * fortune)) {
-            drops += gemProvider.itemStackSupplier().copy()
+    override fun getDrops(random: Random, block: Block, metadata: Int, fortune: Int): List<ItemStack> {
+        return (0 until random.randomInt(gemProvider.amount + random.nextDouble() * gemProvider.amountPerFortune * fortune)).map {
+            gemProvider.itemStackSupplier().copy()
         }
     }
 
