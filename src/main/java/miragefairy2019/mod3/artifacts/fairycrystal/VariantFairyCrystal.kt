@@ -1,12 +1,22 @@
 package miragefairy2019.mod3.artifacts.fairycrystal
 
+import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.drop
+import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.totalWeight
+import miragefairy2019.mod.lib.ItemVariant
+import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.ApiSkill
+import miragefairy2019.mod3.skill.api.ISkillContainer
+import miragefairy2019.mod3.skill.displayName
+import miragefairy2019.mod3.skill.getSkillLevel
 import mirrg.kotlin.formatAs
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.ItemStack
 import net.minecraft.stats.StatList
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
@@ -15,6 +25,32 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
+
+abstract class VariantFairyCrystalBase(
+    val registryName: String,
+    val unlocalizedName: String,
+    val oreName: String
+) : ItemVariant() {
+    fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+        val mastery = EnumMastery.fairySummoning
+        val skillContainer = ApiSkill.skillManager.clientSkillContainer
+        tooltip += formattedText { (!"スキル: " + !mastery.displayName + !" (${skillContainer.getSkillLevel(mastery)})").gold } // TODO translate
+        tooltip += formattedText { (!"レア判定ブースト: ${getRareBoost(skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
+    }
+
+    open fun getRareBoost(skillContainer: ISkillContainer): Double {
+        val a = itemRareBoost
+        val b = 1.0 + skillContainer.getSkillLevel(EnumMastery.fairySummoning) * 0.01
+        return a * b
+    }
+
+    open val dropRank get() = 0
+    open val itemRareBoost get() = 1.0
+    open val dropper
+        get() = object : FairyCrystalDropper() {
+            override val dropList get() = ApiFairyCrystal.dropsFairyCrystal
+        }
+}
 
 open class VariantFairyCrystal(registryName: String, unlocalizedName: String, oreName: String) : VariantFairyCrystalBase(registryName, unlocalizedName, oreName) {
     fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
@@ -62,4 +98,9 @@ open class VariantFairyCrystal(registryName: String, unlocalizedName: String, or
             return EnumActionResult.SUCCESS
         }
     }
+}
+
+class VariantFairyCrystalPure(registryName: String, unlocalizedName: String, oreName: String) : VariantFairyCrystal(registryName, unlocalizedName, oreName) {
+    override val dropRank get() = 1
+    override val itemRareBoost get() = 2.0
 }
