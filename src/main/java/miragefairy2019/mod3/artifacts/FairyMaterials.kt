@@ -3,10 +3,10 @@ package miragefairy2019.mod3.artifacts
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
+import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemVariantInitializer
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.aqua
@@ -18,6 +18,7 @@ import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeRecipe
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
@@ -170,7 +171,23 @@ object FairyMaterials {
             )
         )
 
-        // スフィアベース
+        // 蛍石→スフィアベース
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "sphere_base"),
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandPolishing"),
+                    DataOreIngredient(ore = "gemFluorite")
+                ),
+                result = DataResult(
+                    item = "miragefairy2019:fairy_materials",
+                    data = 16,
+                    count = 2
+                )
+            )
+        )
+
+        // 宝石→スフィアベース
         fun makeSphereBaseRecipe(materialName: String) = makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "sphere_base_from_$materialName"),
             DataShapedRecipe(
