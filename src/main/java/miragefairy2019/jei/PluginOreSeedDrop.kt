@@ -13,8 +13,8 @@ import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1
 import miragefairy2019.mod3.artifacts.CommonMaterials
+import miragefairy2019.mod3.artifacts.EnumVariantOre1
 import miragefairy2019.mod3.artifacts.oreseed.ApiOreSeedDrop
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
