@@ -132,20 +132,6 @@ tile.twinkleStoneGreen.name=緑色のトゥインクルストーン
 tile.twinkleStoneRed.name=赤色のトゥインクルストーン
 tile.twinkleStoneBlack.name=黒色のトゥインクルストーン
 
-tile.oreApatite.name=燐灰石鉱石
-tile.oreFluorite.name=蛍石鉱石
-tile.oreSulfur.name=硫黄鉱石
-tile.oreCinnabar.name=辰砂鉱石
-tile.oreMoonstone.name=月長石鉱石
-tile.oreMagnetite.name=磁鉄鉱鉱石
-tile.orePyrope.name=パイロープ鉱石
-tile.oreSmithsonite.name=スミソナイト鉱石
-tile.oreNephrite.name=ネフライト鉱石
-tile.oreTopaz.name=トパーズ鉱石
-tile.oreTourmaline.name=トルマリン鉱石
-tile.oreHeliolite.name=ヘリオライト鉱石
-tile.oreLabradorite.name=ラブラドライト鉱石
-
 item.spheres.name=スフィア
 item.spheres.format=%sのスフィア
 

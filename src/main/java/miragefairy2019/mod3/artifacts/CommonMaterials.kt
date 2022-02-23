@@ -77,7 +77,18 @@ object CommonMaterials {
             }
             // TODO register ore name
         }
-        // TODO make lang
+        onMakeLang {
+            enJa("tile.oreApatite.name", "Apatite Ore", "燐灰石鉱石")
+            enJa("tile.oreFluorite.name", "Fluorite Ore", "蛍石鉱石")
+            enJa("tile.oreSulfur.name", "Sulfur Ore", "硫黄鉱石")
+            enJa("tile.oreCinnabar.name", "Cinnabar Ore", "辰砂鉱石")
+            enJa("tile.oreMoonstone.name", "Moonstone Ore", "月長石鉱石")
+            enJa("tile.oreMagnetite.name", "Magnetite Ore", "磁鉄鉱鉱石")
+            enJa("tile.orePyrope.name", "Pyrope Ore", "パイロープ鉱石")
+            enJa("tile.oreSmithsonite.name", "Smithsonite Ore", "スミソナイト鉱石")
+            enJa("tile.oreNephrite.name", "Nephrite Ore", "ネフライト鉱石")
+            enJa("tile.oreTopaz.name", "Topaz Ore", "トパーズ鉱石")
+        }
 
         // 鉱石ブロック2
         blockOre2 = block({ BlockOre(EnumVariantOre2.variantList) }, "ore2") {
@@ -91,7 +102,11 @@ object CommonMaterials {
             }
             // TODO register ore name
         }
-        // TODO make lang
+        onMakeLang {
+            enJa("tile.oreTourmaline.name", "Tourmaline Ore", "トルマリン鉱石")
+            enJa("tile.oreHeliolite.name", "Heliolite Ore", "ヘリオライト鉱石")
+            enJa("tile.oreLabradorite.name", "Labradorite Ore", "ラブラドライト鉱石")
+        }
 
         // アイテム状素材
         itemMaterials = item({ ItemSimpleMaterials() }, "materials") {
