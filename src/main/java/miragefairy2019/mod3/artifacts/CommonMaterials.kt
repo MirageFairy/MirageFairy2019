@@ -2,7 +2,7 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.enJa
@@ -39,7 +39,7 @@ import java.util.Random
 object CommonMaterials {
     lateinit var blockMaterials1: () -> BlockMaterials<EnumVariantMaterials1>
     lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<EnumVariantMaterials1>
-    val module: Module = {
+    val module = module {
 
         blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList) }, "materials1") {
             setCreativeTab { ApiMain.creativeTab }

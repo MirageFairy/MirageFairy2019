@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.manualrepair
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
 import net.minecraft.inventory.InventoryCrafting
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.registries.IForgeRegistryEntry
 
 object ManualRepair {
-    val module: Module = {
+    val module = module {
         onAddRecipe {
             GameRegistry.findRegistry(IRecipe::class.java).register(RecipeManualRepair())
         }

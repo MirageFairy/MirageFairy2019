@@ -3,7 +3,7 @@ package miragefairy2019.mod.modules.fairycrystal
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapelessRecipe
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
@@ -22,7 +22,7 @@ lateinit var variantFairyCrystalChristmas: () -> VariantFairyCrystal
 lateinit var variantFairyCrystalPure: () -> VariantFairyCrystal
 
 object FairyCrystal {
-    val module: Module = {
+    val module = module {
 
         // フェアリークリスタル
         itemFairyCrystal = item({ ItemFairyCrystal() }, "fairy_crystal") {

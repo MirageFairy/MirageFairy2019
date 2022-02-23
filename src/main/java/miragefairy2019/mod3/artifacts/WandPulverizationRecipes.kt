@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.mod.ModMirageFairy2019
@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry
 
 object WandPulverizationRecipes {
-    val module: Module = {
+    val module = module {
         onAddRecipe {
 
             fun r(registryName: String, input: Ingredient, outputOreName: String) {

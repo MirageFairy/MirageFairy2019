@@ -1,7 +1,7 @@
 package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DimensionalPos
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.existsOrNull
 import miragefairy2019.libkt.mkdirsParent
 import miragefairy2019.libkt.onServerSave
@@ -16,7 +16,7 @@ import java.time.Instant
 
 object DaemonSystem {
     private fun getFile(server: MinecraftServer) = server.getWorld(0).saveHandler.worldDirectory.resolve("miragefairy2019/daemon_entities.json")
-    val module: Module = {
+    val module = module {
 
         // セーブデータ読み込みとデーモンマネージャーの初期化
         onServerStarting {

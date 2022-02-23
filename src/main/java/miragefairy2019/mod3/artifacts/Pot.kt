@@ -4,7 +4,7 @@ import miragefairy2019.libkt.CapabilityProviderAdapter
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.createItemStack
@@ -37,7 +37,7 @@ import net.minecraftforge.oredict.OreIngredient
 object Pot {
     lateinit var itemPot: () -> ItemPot
     lateinit var itemFilledBucket: () -> ItemFilledPot
-    val module: Module = {
+    val module = module {
 
         // 中身なしポット
         itemPot = item({ ItemPot() }, "pot") {

@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.oreIngredient
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
 object AnvilPulverizationRecipes {
-    val module: Module = {
+    val module = module {
         onInit {
             fun r(ingredient: Ingredient, outputOreName: String) {
                 MinecraftForge.EVENT_BUS.register(object {

@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.hex
 import miragefairy2019.libkt.item
@@ -41,7 +41,7 @@ import net.minecraftforge.oredict.OreDictionary
 import java.io.File
 
 object DebugItems {
-    val module: Module = {
+    val module = module {
 
         fun r(itemCreator: () -> Item, name: String, english: String, japanese: String) {
             val unlocalizedName = "debug_$name".toLowerCamelCase()

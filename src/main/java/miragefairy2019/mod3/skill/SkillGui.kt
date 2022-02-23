@@ -3,7 +3,7 @@ package miragefairy2019.mod3.skill
 import miragefairy2019.libkt.Component
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.TextAlignment
@@ -34,7 +34,7 @@ import java.time.Instant
 
 object SkillGui {
     const val guiIdSkillGui = 2
-    val module: Module = {
+    val module = module {
         onInit {
             ApiMain.registerGuiHandler(guiIdSkillGui, object : ISimpleGuiHandler {
                 override fun GuiHandlerContext.onServer() = ContainerSkill()

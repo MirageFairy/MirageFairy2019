@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.fairy.relation
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.mod3.artifacts.CommonMaterials
 import miragefairy2019.mod3.artifacts.EnumVariantMaterials1
 import miragefairy2019.mod3.artifacts.MirageFlower
@@ -95,7 +95,7 @@ private fun material(material: String): Registrant = {
 
 
 object FairyRelation {
-    val module: Module = {
+    val module = module {
 
         // バイオーム
         fairy { plains }.register(weight = 0.1) { biomeType({ BiomeDictionary.Type.PLAINS }) }

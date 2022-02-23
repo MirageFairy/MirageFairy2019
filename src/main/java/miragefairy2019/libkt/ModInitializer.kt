@@ -33,7 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import org.apache.logging.log4j.LogManager
 
-typealias Module = ModInitializer.() -> Unit
+fun module(block: ModInitializer.() -> Unit) = block
 
 class ModInitializer(val usePreReleaseFeatures: Boolean) {
     val modVersion = run {

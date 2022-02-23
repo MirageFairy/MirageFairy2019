@@ -2,7 +2,7 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
@@ -22,7 +22,7 @@ import net.minecraft.world.IBlockAccess
 object FairyWoodLog {
     lateinit var blockFairyWoodLog: () -> BlockFairyWoodLog
     lateinit var itemBlockFairyWoodLog: () -> ItemBlock
-    val module: Module = {
+    val module = module {
         blockFairyWoodLog = block({ BlockFairyWoodLog() }, "fairy_wood_log") {
             setUnlocalizedName("fairyWoodLog")
             setCreativeTab { ApiMain.creativeTab }

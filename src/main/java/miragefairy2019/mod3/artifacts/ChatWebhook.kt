@@ -9,7 +9,7 @@ import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.SmartSlot
 import miragefairy2019.libkt.block
@@ -99,7 +99,7 @@ object ChatWebhook {
     lateinit var blockCreativeChatWebhookTransmitter: () -> BlockCreativeChatWebhookTransmitter
     lateinit var itemCreativeChatWebhookTransmitter: () -> ItemBlock
     const val guiIdChatWebhookTransmitter = 4
-    val module: Module = {
+    val module = module {
         enableChatWebhook = configProperty { it.getBoolean("enableChatWebhook", Config.categoryFeatures, true, "Whether the machines that send the in-game chat to the webhook is enabled") }
 
 

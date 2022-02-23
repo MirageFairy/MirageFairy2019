@@ -6,7 +6,7 @@ import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataPart
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapelessRecipe
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
@@ -41,7 +41,7 @@ object FairyCrystalGlass {
     lateinit var itemBlockFairyCrystalGlass: () -> ItemBlock
     lateinit var blockPureFairyCrystalGlass: () -> BlockFairyCrystalGlass
     lateinit var itemBlockPureFairyCrystalGlass: () -> ItemBlock
-    val module: Module = {
+    val module = module {
         // 通常
         blockFairyCrystalGlass = block({ BlockFairyCrystalGlass() }, "fairy_crystal_glass") {
             setUnlocalizedName("fairyCrystalGlass")

@@ -2,7 +2,7 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
@@ -45,7 +45,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 object FairyLog {
     lateinit var blockFairyLog: () -> BlockFairyLog
     lateinit var itemBlockFairyLog: () -> ItemBlock
-    val module: Module = {
+    val module = module {
 
         onPreInit { ApiWorldGen.fairyLogDropRegistry = FairyLogDropRegistry() } // 妖精の樹洞ドロップレジストリー初期化
 

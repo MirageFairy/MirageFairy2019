@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.mod3.fairy.FairyTypes
@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.oredict.OreIngredient
 
 object FairyDilutionRecipe {
-    val module: Module = {
+    val module = module {
         onAddRecipe {
             FairyTypes.instance.variants.forEach { fairyVariant ->
                 val inputFairyBundle = fairyVariant.y

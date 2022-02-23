@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.fairy
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionCanRain
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionHasBiomeType
@@ -9,7 +9,7 @@ import miragefairy2019.mod3.fairylogdrop.FairyLogDropRecipe
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import net.minecraftforge.common.BiomeDictionary
 
-val loaderFairyLogDrop: Module = {
+val loaderFairyLogDrop = module {
     onCreateItemStack {
         fun FairyLogDropRecipe.biome(biome: BiomeDictionary.Type) = also { addCondition(FairyLogDropConditionHasBiomeType(biome)) }
         fun FairyLogDropRecipe.overworld() = also { addCondition(FairyLogDropConditionOverworld()) }

@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
@@ -51,7 +51,7 @@ import kotlin.math.round
 object Dish {
     lateinit var blockDish: () -> BlockDish
     lateinit var itemDish: () -> ItemBlock
-    val module: Module = {
+    val module = module {
         blockDish = block({ BlockDish() }, "dish") {
             setUnlocalizedName("dish")
             setCreativeTab { ApiMain.creativeTab }

@@ -2,7 +2,7 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.getItemStack
@@ -64,7 +64,7 @@ import java.util.Random
 object MirageFlower {
     lateinit var blockMirageFlower: () -> BlockMirageFlower
     lateinit var itemMirageFlowerSeeds: () -> ItemMirageFlowerSeeds<BlockMirageFlower>
-    val module: Module = {
+    val module = module {
 
         blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
             setUnlocalizedName("mirageFlower")

@@ -1,7 +1,7 @@
 package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -97,7 +97,7 @@ val EnumErgType.sphereType
 lateinit var itemSpheres: () -> ItemSpheres
 
 object Sphere {
-    val module: Module = {
+    val module = module {
 
         // アイテム
         itemSpheres = item({ ItemSpheres() }, "spheres") {

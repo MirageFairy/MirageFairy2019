@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.ja
 import miragefairy2019.mod.ModMirageFairy2019
@@ -13,7 +13,7 @@ class MfaPage(val mainIngredient: List<ItemStack>, val subIngredients: List<List
 
 object Mfa {
     val mfaPages = mutableListOf<MfaPage>()
-    val module: Module = {
+    val module = module {
         fun register(key: String, getMainIngredient: () -> List<ItemStack>, vararg subIngredientsGetters: () -> List<ItemStack>, getJapaneseContent: () -> String) {
             onMakeLang {
                 ja("miragefairy2019.mfa.$key", getJapaneseContent().trimIndent().replace("\n", "\\n"))

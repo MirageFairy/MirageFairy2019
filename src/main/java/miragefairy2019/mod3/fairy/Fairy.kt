@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.fairy
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.orNull
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.IItemFairy
@@ -25,7 +25,7 @@ import net.minecraftforge.oredict.OreDictionary
 object Fairy {
     lateinit var creativeTab: CreativeTabs
     lateinit var listItemFairy: List<ItemFairy>
-    val module: Module = {
+    val module = module {
 
         loaderFairyCrystalDrop(this)
         loaderFairyLogDrop(this)

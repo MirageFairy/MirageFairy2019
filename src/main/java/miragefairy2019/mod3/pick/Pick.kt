@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.pick
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.mod3.pick.api.IPickHandler
 import miragefairy2019.mod3.pick.api.IPickHandlerRegistry
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 object Pick {
-    val module: Module = {
+    val module = module {
         onInstantiation {
             ApiWorldGen.pickHandlerRegistry = PickHandlerRegistry()
         }

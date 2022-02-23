@@ -8,7 +8,7 @@ import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.MakeItemVariantModelScope
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.enJa
@@ -29,7 +29,7 @@ import net.minecraft.item.ItemStack
 
 object Ore {
     lateinit var itemMaterials: () -> ItemSimpleMaterials
-    val module: Module = {
+    val module = module {
 
         // マテリアルアイテム
         itemMaterials = item({ ItemSimpleMaterials() }, "materials") {

@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.skill
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.api.ApiMain.logger
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.Side
 import java.io.File
 
 object Skill {
-    val module: Module = {
+    val module = module {
 
         // マネージャー初期化
         onInstantiation {

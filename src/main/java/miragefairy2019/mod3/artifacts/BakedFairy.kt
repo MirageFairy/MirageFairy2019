@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.ingredient
@@ -44,7 +44,7 @@ import java.util.function.Predicate
 object BakedFairy {
     lateinit var creativeTabBakedFairy: () -> CreativeTabs
     lateinit var itemBakedFairy: () -> ItemBakedFairy
-    val module: Module = {
+    val module = module {
 
         // クリエイティブタブ
         onInitCreativeTab {

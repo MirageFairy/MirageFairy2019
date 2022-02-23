@@ -5,13 +5,13 @@ import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
 import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.DataSimpleIngredient
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.mod.ModMirageFairy2019
 
 object WandRecipe {
-    val module: Module = {
+    val module = module {
 
         // 氷8＋氷結のワンド→氷塊
         makeRecipe(

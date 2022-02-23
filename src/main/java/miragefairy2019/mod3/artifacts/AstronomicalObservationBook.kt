@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.darkPurple
@@ -47,7 +47,7 @@ import kotlin.math.sin
 
 object AstronomicalObservationBook {
     lateinit var itemAstronomicalObservationBook: () -> ItemAstronomicalObservationBook
-    val module: Module = {
+    val module = module {
         itemAstronomicalObservationBook = item({ ItemAstronomicalObservationBook() }, "astronomical_observation_book") {
             setUnlocalizedName("astronomicalObservationBook")
             setCreativeTab { ApiMain.creativeTab }

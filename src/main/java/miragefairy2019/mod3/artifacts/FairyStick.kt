@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.formattedText
@@ -39,7 +39,7 @@ import net.minecraftforge.oredict.OreIngredient
 lateinit var itemFairyStick: () -> ItemFairyStick
 
 object FairyStick {
-    val module: Module = {
+    val module = module {
 
         onInstantiation {
             ApiFairyStickCraft.fairyStickCraftRegistry = FairyStickCraftRegistry()

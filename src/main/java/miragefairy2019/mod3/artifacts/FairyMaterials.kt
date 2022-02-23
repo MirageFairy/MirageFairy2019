@@ -6,7 +6,7 @@ import miragefairy2019.libkt.DataShapedRecipe
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemVariantInitializer
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.aqua
@@ -47,7 +47,7 @@ private typealias Ivifm = ItemVariantInitializer<ItemMultiFairyMaterial, ItemVar
 
 
 object FairyMaterials {
-    val module: Module = {
+    val module = module {
 
         // 妖精素材アイテム
         item({ ItemMultiFairyMaterial() }, "fairy_materials") {

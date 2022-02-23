@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.fairy
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.mod.api.ApiFairyCrystal
 import miragefairy2019.mod.api.fairycrystal.DropCategory
 import miragefairy2019.mod.api.fairycrystal.DropFixed
@@ -26,7 +26,7 @@ import kotlin.math.pow
 
 private val FairyRelationEntry<*>.fairyCrystalBaseDropWeight get() = 0.1 * 0.1.pow((fairy.main.rare - 1.0) / 2.0) * weight
 
-val loaderFairyCrystalDrop: Module = {
+val loaderFairyCrystalDrop = module {
     onCreateItemStack {
         fun World.time(min: Int, max: Int) = provider.isSurfaceWorld && min <= (worldTime + 6000) % 24000 && (worldTime + 6000) % 24000 <= max
 

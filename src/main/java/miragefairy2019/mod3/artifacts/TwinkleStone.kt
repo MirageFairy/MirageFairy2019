@@ -2,7 +2,7 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
@@ -30,7 +30,7 @@ import net.minecraft.world.World
 object TwinkleStone {
     lateinit var blockTwinkleStone: () -> BlockTwinkleStone
     lateinit var itemBlockTwinkleStone: () -> ItemBlockMulti<BlockTwinkleStone, EnumVariantTwinkleStone>
-    val module: Module = {
+    val module = module {
         blockTwinkleStone = block({ BlockTwinkleStone() }, "twinkle_stone") {
             setCreativeTab { ApiMain.creativeTab }
             makeBlockStates {

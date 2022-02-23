@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -21,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 object SkillBook {
     lateinit var itemSkillBook: () -> ItemSkillBook
-    val module: Module = {
+    val module = module {
         itemSkillBook = item({ ItemSkillBook() }, "skill_book") {
             setUnlocalizedName("skillBook")
             setCreativeTab { ApiMain.creativeTab }

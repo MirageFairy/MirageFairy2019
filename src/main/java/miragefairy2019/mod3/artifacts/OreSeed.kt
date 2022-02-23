@@ -2,7 +2,7 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.setCreativeTab
@@ -25,7 +25,7 @@ object OreSeed {
     lateinit var blockOreSeed: () -> BlockOreSeed
     lateinit var blockOreSeedNether: () -> BlockOreSeed
     lateinit var blockOreSeedEnd: () -> BlockOreSeed
-    val module: Module = {
+    val module = module {
 
         // 鉱石の種
 

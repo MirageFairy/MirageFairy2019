@@ -1,12 +1,12 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import net.minecraftforge.common.config.Configuration
 
 object Config {
     val categoryGeneral = "general"
     val categoryFeatures = "features"
-    val module: Module = {
+    val module = module {
         onPreInit {
             val configuration = Configuration(suggestedConfigurationFile)
             configProperties.forEach { it.configure(configuration) }

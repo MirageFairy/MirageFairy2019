@@ -1,10 +1,10 @@
 package miragefairy2019.jei
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.enJa
 
 object Jei {
-    val module: Module = {
+    val module = module {
         onMakeLang {
             enJa("jei.miragefairy2019.oreSeedDrop.title", "Ore Seed Mutation", "鉱石の種変化")
             enJa("jei.miragefairy2019.fairyLogDrop.title", "Fairy Log Drop", "妖精の樹洞ドロップ")

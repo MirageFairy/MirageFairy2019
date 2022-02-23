@@ -3,7 +3,7 @@ package miragefairy2019.mod3.playeraura
 import io.netty.buffer.ByteBuf
 import miragefairy2019.libkt.Complex
 import miragefairy2019.libkt.IRgb
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
 import miragefairy2019.libkt.drawTriangle
@@ -198,7 +198,7 @@ object ModulePlayerAura {
 }
 
 object PlayerAura {
-    val module: Module = {
+    val module = module {
 
         // オーラゲージオーバーレイ
         onInit {

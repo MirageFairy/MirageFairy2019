@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.main
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.modules.fairycrystal.variantFairyCrystal
 import miragefairy2019.mod3.main.api.ApiMain
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
 object Main {
-    val module: Module = {
+    val module = module {
 
         onPreInit {
             ApiMain.logger = modLog

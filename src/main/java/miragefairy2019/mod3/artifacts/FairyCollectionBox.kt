@@ -4,7 +4,7 @@ import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.SmartSlot
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.drawGuiBackground
@@ -64,7 +64,7 @@ object FairyCollectionBox {
     lateinit var itemFairyCollectionBox: () -> ItemBlock
 
     const val guiIdFairyCollectionBox = 3
-    val module: Module = {
+    val module = module {
         blockFairyCollectionBox = block({ BlockFairyCollectionBox() }, "fairy_collection_box") {
             setUnlocalizedName("fairyCollectionBox")
             setCreativeTab { ApiMain.creativeTab }

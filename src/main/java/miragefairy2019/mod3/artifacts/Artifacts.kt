@@ -1,9 +1,9 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 
 object Artifacts {
-    val module: Module = {
+    val module = module {
         Main.module(this)
         Dish.module(this)
         Fertilizer.module(this)

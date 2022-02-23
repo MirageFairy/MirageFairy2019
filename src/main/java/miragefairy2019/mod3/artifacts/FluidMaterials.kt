@@ -2,7 +2,7 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.BlockInitializer
 import miragefairy2019.libkt.ModInitializer
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.resourceLocation
@@ -37,7 +37,7 @@ object FluidMaterials {
     lateinit var fluidMirageFlowerOil: () -> Fluid
     lateinit var blockFluidMirageFlowerOil: () -> BlockFluidMiragiumWater
     lateinit var itemFluidMirageFlowerOil: () -> ItemBlock
-    val module: Module = {
+    val module = module {
 
         // ユニバーサルバケツ
         onConstruction { FluidRegistry.enableUniversalBucket() }

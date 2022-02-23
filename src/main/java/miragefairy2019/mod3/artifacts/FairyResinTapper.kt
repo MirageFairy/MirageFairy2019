@@ -2,7 +2,7 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.darkRed
@@ -32,7 +32,7 @@ import net.minecraft.world.World
 object FairyResinTapper {
     lateinit var blockFairyResinTapper: () -> BlockFairyResinTapper
     lateinit var itemBlockFairyResinTapper: () -> ItemBlock
-    val module: Module = {
+    val module = module {
         blockFairyResinTapper = block({ BlockFairyResinTapper() }, "fairy_resin_tapper") {
             setUnlocalizedName("fairyResinTapper")
             setCreativeTab { ApiMain.creativeTab }

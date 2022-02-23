@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.libkt.ModInitializer
-import miragefairy2019.libkt.Module
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.oreIngredient
@@ -145,7 +145,7 @@ class FairyWeaponLoader(m: ModInitializer) {
 }
 
 object FairyWeapon {
-    val module: Module = {
+    val module = module {
 
         fairyWeaponLoader = FairyWeaponLoader(this)
 
