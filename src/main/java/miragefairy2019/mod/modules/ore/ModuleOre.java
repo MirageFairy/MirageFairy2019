@@ -12,13 +12,9 @@ import miragefairy2019.mod3.main.api.ApiMain;
 import miragefairy2019.mod3.oreseeddrop.OreSeedDropRegistry;
 import miragefairy2019.mod3.oreseeddrop.api.ApiOreSeedDrop;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleOre {
 
@@ -82,14 +78,6 @@ public class ModuleOre {
                 }
             }
 
-        });
-        erMod.createItemStack.register(ic -> {
-            OreDictionary.registerOre("container1000Water", Items.WATER_BUCKET);
-            OreDictionary.registerOre("container1000Lava", Items.LAVA_BUCKET);
-            OreDictionary.registerOre("wool", new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
-            OreDictionary.registerOre("ice", new ItemStack(Blocks.ICE));
-            OreDictionary.registerOre("gemCoal", new ItemStack(Items.COAL, 1, 0));
-            OreDictionary.registerOre("gemCharcoal", new ItemStack(Items.COAL, 1, 1));
         });
         erMod.addRecipe.register(() -> {
 
