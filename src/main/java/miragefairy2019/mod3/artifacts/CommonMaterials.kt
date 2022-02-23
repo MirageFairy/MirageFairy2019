@@ -69,7 +69,28 @@ object CommonMaterials {
         // 鉱石ブロック1
         blockOre1 = block({ BlockOre(EnumVariantOre1.variantList) }, "ore1") {
             setCreativeTab { ApiMain.creativeTab }
-            // TODO make blockstates
+            makeBlockStates {
+                DataBlockStates(
+                    variants = listOf(
+                        "miragefairy2019:apatite_ore",
+                        "miragefairy2019:fluorite_ore",
+                        "miragefairy2019:sulfur_ore",
+                        "miragefairy2019:cinnabar_ore",
+                        "miragefairy2019:moonstone_ore",
+                        "miragefairy2019:magnetite_ore",
+                        "miragefairy2019:pyrope_ore",
+                        "miragefairy2019:smithsonite_ore",
+                        "miragefairy2019:netherrack_apatite_ore",
+                        "miragefairy2019:netherrack_fluorite_ore",
+                        "miragefairy2019:netherrack_sulfur_ore",
+                        "miragefairy2019:netherrack_cinnabar_ore",
+                        "miragefairy2019:netherrack_moonstone_ore",
+                        "miragefairy2019:netherrack_magnetite_ore",
+                        "miragefairy2019:nephrite_ore",
+                        "miragefairy2019:topaz_ore"
+                    ).mapIndexed { i, model -> "variant=$i" to DataBlockState(model = model) }.toMap()
+                )
+            }
         }
         itemBlockOre1 = item({ ItemBlockOre(blockOre1()) }, "ore1") {
             onRegisterItem {
@@ -95,6 +116,28 @@ object CommonMaterials {
         // 鉱石ブロック2
         blockOre2 = block({ BlockOre(EnumVariantOre2.variantList) }, "ore2") {
             setCreativeTab { ApiMain.creativeTab }
+            makeBlockStates {
+                DataBlockStates(
+                    variants = listOf(
+                        "miragefairy2019:apatite_block",
+                        "miragefairy2019:fluorite_block",
+                        "miragefairy2019:sulfur_block",
+                        "miragefairy2019:cinnabar_block",
+                        "miragefairy2019:moonstone_block",
+                        "miragefairy2019:magnetite_block",
+                        "miragefairy2019:pyrope_block",
+                        "miragefairy2019:smithsonite_block",
+                        "miragefairy2019:charcoal_block",
+                        "miragefairy2019:mirage_flower_leaf_block",
+                        "miragefairy2019:miragium_ingot_block",
+                        "miragefairy2019:miragium_dust_block",
+                        "miragefairy2019:nephrite_block",
+                        "miragefairy2019:topaz_block",
+                        "miragefairy2019:tourmaline_block",
+                        "minecraft:stone"
+                    ).mapIndexed { i, model -> "variant=$i" to DataBlockState(model = model) }.toMap()
+                )
+            }
         }
         itemBlockOre2 = item({ ItemBlockOre(blockOre2()) }, "ore2") {
             onRegisterItem {
