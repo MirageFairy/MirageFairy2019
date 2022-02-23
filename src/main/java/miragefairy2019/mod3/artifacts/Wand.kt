@@ -3,6 +3,7 @@ package miragefairy2019.mod3.artifacts
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
@@ -44,10 +45,12 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.OreIngredient
 
+private val Int.roman get() = listOf("I", "II", "III", "IV").getOrNull(this - 1) ?: throw IllegalArgumentException()
+
 object Wand {
     val module = module {
 
-        fun <T : ItemFairyWand> fairyWand(tier: Int, type: String, number: Int, creator: () -> T, vararg additionalOreNames: String) {
+        fun <T : ItemFairyWand> fairyWand(tier: Int, type: String, englishType: String, japaneseType: String, number: Int, creator: () -> T, vararg additionalOreNames: String) {
             item(creator, "${type}_fairy_wand${if (number == 1) "" else "_$number"}") {
                 setUnlocalizedName("fairyWand${type.toUpperCamelCase()}${if (number == 1) "" else "$number"}")
                 setCreativeTab { ApiMain.creativeTab }
@@ -62,30 +65,63 @@ object Wand {
                     additionalOreNames.forEach { OreDictionary.registerOre(it, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE)) }
                 }
             }
+            onMakeLang {
+                enJa(
+                    "item.fairyWand${type.toUpperCamelCase()}${if (number == 1) "" else "$number"}.name",
+                    "$englishType Wand${if (number == 1) "" else " ${number.roman}"}",
+                    "${japaneseType}のワンド${if (number == 1) "" else " ${number.roman}"}"
+                )
+            }
         }
-        fairyWand(1, "crafting", 1, { ItemFairyWand() })
-        fairyWand(2, "crafting", 2, { ItemFairyWand() })
-        fairyWand(3, "crafting", 3, { ItemFairyWand() })
-        fairyWand(4, "crafting", 4, { ItemFairyWand() })
-        fairyWand(1, "hydrating", 1, { ItemFairyWand() }, "container1000Water")
-        fairyWand(2, "hydrating", 2, { ItemFairyWand() }, "container1000Water")
-        fairyWand(3, "hydrating", 3, { ItemFairyWand() }, "container1000Water")
-        fairyWand(4, "hydrating", 4, { ItemFairyWand() }, "container1000Water")
-        fairyWand(2, "melting", 1, { ItemFairyWand() })
-        fairyWand(3, "melting", 2, { ItemFairyWand() })
-        fairyWand(4, "melting", 3, { ItemFairyWand() })
-        fairyWand(2, "breaking", 1, { ItemFairyWand() })
-        fairyWand(3, "breaking", 2, { ItemFairyWand() })
-        fairyWand(4, "breaking", 3, { ItemFairyWand() })
-        fairyWand(2, "freezing", 1, { ItemFairyWand() })
-        fairyWand(3, "freezing", 2, { ItemFairyWand() })
-        fairyWand(4, "freezing", 3, { ItemFairyWand() })
-        fairyWand(3, "polishing", 1, { ItemFairyWand() })
-        fairyWand(4, "polishing", 2, { ItemFairyWand() })
-        fairyWand(3, "summoning", 1, { ItemFairyWandSummoning(2) })
-        fairyWand(4, "summoning", 2, { ItemFairyWandSummoning(5) })
-        fairyWand(4, "distortion", 1, { ItemFairyWand() })
-        fairyWand(4, "fusion", 1, { ItemFairyWand() })
+        fairyWand(1, "crafting", "Crafting", "技巧", 1, { ItemFairyWand() })
+        fairyWand(2, "crafting", "Crafting", "技巧", 2, { ItemFairyWand() })
+        fairyWand(3, "crafting", "Crafting", "技巧", 3, { ItemFairyWand() })
+        fairyWand(4, "crafting", "Crafting", "技巧", 4, { ItemFairyWand() })
+        fairyWand(1, "hydrating", "Hydrating", "加水", 1, { ItemFairyWand() }, "container1000Water")
+        fairyWand(2, "hydrating", "Hydrating", "加水", 2, { ItemFairyWand() }, "container1000Water")
+        fairyWand(3, "hydrating", "Hydrating", "加水", 3, { ItemFairyWand() }, "container1000Water")
+        fairyWand(4, "hydrating", "Hydrating", "加水", 4, { ItemFairyWand() }, "container1000Water")
+        fairyWand(2, "melting", "Melting", "紅蓮", 1, { ItemFairyWand() })
+        fairyWand(3, "melting", "Melting", "紅蓮", 2, { ItemFairyWand() })
+        fairyWand(4, "melting", "Melting", "紅蓮", 3, { ItemFairyWand() })
+        fairyWand(2, "breaking", "Breaking", "破砕", 1, { ItemFairyWand() })
+        fairyWand(3, "breaking", "Breaking", "破砕", 2, { ItemFairyWand() })
+        fairyWand(4, "breaking", "Breaking", "破砕", 3, { ItemFairyWand() })
+        fairyWand(2, "freezing", "Freezing", "氷晶", 1, { ItemFairyWand() })
+        fairyWand(3, "freezing", "Freezing", "氷晶", 2, { ItemFairyWand() })
+        fairyWand(4, "freezing", "Freezing", "氷晶", 3, { ItemFairyWand() })
+        fairyWand(3, "polishing", "Polishing", "珠玉", 1, { ItemFairyWand() })
+        fairyWand(4, "polishing", "Polishing", "珠玉", 2, { ItemFairyWand() })
+        fairyWand(3, "summoning", "Wizard's", "冥王", 1, { ItemFairyWandSummoning(2) })
+        fairyWand(4, "summoning", "Wizard's", "冥王", 2, { ItemFairyWandSummoning(5) })
+        fairyWand(4, "distortion", "Distortion", "歪曲", 1, { ItemFairyWand() })
+        fairyWand(4, "fusion", "Fusion", "融合", 1, { ItemFairyWand() })
+
+        onMakeLang {
+            enJa("item.fairyWandCrafting.poem", "", "スフィアから聞こえる、妖精の声")
+            enJa("item.fairyWandCrafting2.poem", "", "靴を作ってくれる妖精さん")
+            enJa("item.fairyWandCrafting3.poem", "", "魔法の鍋掴み")
+            enJa("item.fairyWandCrafting4.poem", "", "妖精の3Dプリンター")
+            enJa("item.fairyWandHydrating.poem", "", "物質生成の初歩")
+            enJa("item.fairyWandHydrating2.poem", "", "先端のこれはぷにぷにしている")
+            enJa("item.fairyWandHydrating3.poem", "", "直射日光を避けて保管してください。")
+            enJa("item.fairyWandHydrating4.poem", "", "マッサージに使うと気持ちよい")
+            enJa("item.fairyWandMelting.poem", "", "金属を溶かすほどの情熱")
+            enJa("item.fairyWandMelting2.poem", "", "高温注意！")
+            enJa("item.fairyWandMelting3.poem", "", "かまどの火とは何かが違う")
+            enJa("item.fairyWandBreaking.poem", "", "これで釘を打たないように")
+            enJa("item.fairyWandBreaking2.poem", "", "振ると衝撃波が迸る")
+            enJa("item.fairyWandBreaking3.poem", "", "実はガラスより脆い")
+            enJa("item.fairyWandFreezing.poem", "", "料理に大活躍")
+            enJa("item.fairyWandFreezing2.poem", "", "物体のフォノンを消滅させる")
+            enJa("item.fairyWandFreezing3.poem", "", "お手軽反エントロピー")
+            enJa("item.fairyWandPolishing.poem", "", "究極に手先の器用な妖精さん")
+            enJa("item.fairyWandPolishing2.poem", "", "分子のセーター")
+            enJa("item.fairyWandSummoning.poem", "The magic of the contract: thia ri me sorie ge Fairy'a zi miyukto", "契約の魔法、シア リ メ ソーリエ ゲ ファイリア ジ ミユクト")
+            enJa("item.fairyWandSummoning2.poem", "The magic of feeding: me Fairy'a ri me Crystal'a zi karto", "給餌の魔法、メ ファイリア リ メ ツリスターラ ジ カルト")
+            enJa("item.fairyWandDistortion.poem", "", "空間がねじれている")
+            enJa("item.fairyWandFusion.poem", "", "4次元折り紙")
+        }
 
         onAddRecipe {
 
