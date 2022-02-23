@@ -37,5 +37,6 @@ object Artifacts {
         OreSeed.module(this)
         CommonMaterials.module(this)
         VanillaOreNames.module(this)
+        Wand.module(this)
     }
 }
