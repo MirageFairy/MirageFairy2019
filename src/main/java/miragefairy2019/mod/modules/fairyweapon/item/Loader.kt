@@ -44,14 +44,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.OreIngredient
 
-private fun getDurability(tier: Int) = when (tier) {
-    1 -> 32
-    2 -> 64
-    3 -> 128
-    4 -> 256
-    else -> throw IllegalArgumentException("Illegal tier: $tier")
-}
-
 private fun <T : ItemFairyWeapon> ModInitializer.fw(
     tier: Int,
     creator: () -> T,
@@ -76,7 +68,8 @@ private fun <T : ItemFairyWeapon> ModInitializer.fw(
         }
     }
     onInit {
-        item.maxDamage = getDurability(tier) - 1
+        val durability = (1..tier).fold(16) { a, b -> a * 2 }
+        item.maxDamage = durability - 1
         item.tier = tier
     }
     onCreateItemStack {
