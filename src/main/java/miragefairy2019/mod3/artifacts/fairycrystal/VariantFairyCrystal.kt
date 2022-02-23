@@ -26,11 +26,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
 
-abstract class VariantFairyCrystalBase(
-    val registryName: String,
-    val unlocalizedName: String,
-    val oreName: String
-) : ItemVariant() {
+open class VariantFairyCrystal(val registryName: String, val unlocalizedName: String, val oreName: String) : ItemVariant() {
     fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val mastery = EnumMastery.fairySummoning
         val skillContainer = ApiSkill.skillManager.clientSkillContainer
@@ -38,7 +34,7 @@ abstract class VariantFairyCrystalBase(
         tooltip += formattedText { (!"レア判定ブースト: ${getRareBoost(skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
     }
 
-    open fun getRareBoost(skillContainer: ISkillContainer): Double {
+    fun getRareBoost(skillContainer: ISkillContainer): Double {
         val a = itemRareBoost
         val b = 1.0 + skillContainer.getSkillLevel(EnumMastery.fairySummoning) * 0.01
         return a * b
@@ -46,13 +42,11 @@ abstract class VariantFairyCrystalBase(
 
     open val dropRank get() = 0
     open val itemRareBoost get() = 1.0
-    open val dropper
+    val dropper
         get() = object : FairyCrystalDropper() {
             override val dropList get() = ApiFairyCrystal.dropsFairyCrystal
         }
-}
 
-open class VariantFairyCrystal(registryName: String, unlocalizedName: String, oreName: String) : VariantFairyCrystalBase(registryName, unlocalizedName, oreName) {
     fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         val crystalItemStack = player.getHeldItem(hand).orNull ?: return EnumActionResult.PASS // アイテムが消えた場合は中止
         if (world.isRemote) return EnumActionResult.SUCCESS // サーバースレッドのみ
