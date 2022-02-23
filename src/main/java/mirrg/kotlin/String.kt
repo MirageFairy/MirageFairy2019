@@ -7,7 +7,7 @@ fun String.toUpperCaseHead() = if (isEmpty()) this else take(1).toUpperCase() + 
 fun String.toLowerCaseHead() = if (isEmpty()) this else take(1).toLowerCase() + drop(1)
 
 /** @receiver スネークケースの文字列 */
-fun String.toUpperCamelCase() = split('_').joinToString("") { it.toUpperCaseHead() }
+fun String.toUpperCamelCase(beforeDelimiter: String = "_", afterDelimiter: String = "") = split(beforeDelimiter).join(afterDelimiter) { it.toUpperCaseHead() }
 
 /** @receiver スネークケースの文字列 */
-fun String.toLowerCamelCase() = toUpperCamelCase().toLowerCaseHead()
+fun String.toLowerCamelCase(beforeDelimiter: String = "_", afterDelimiter: String = "") = toUpperCamelCase(beforeDelimiter, afterDelimiter).toLowerCaseHead()
