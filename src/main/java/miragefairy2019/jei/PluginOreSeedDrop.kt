@@ -15,7 +15,7 @@ import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1
-import miragefairy2019.mod3.oreseeddrop.api.ApiOreSeedDrop
+import miragefairy2019.mod3.artifacts.oreseed.ApiOreSeedDrop
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 

@@ -9,8 +9,6 @@ import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2;
 import miragefairy2019.mod.modules.ore.ore.IBlockVariantOre;
 import miragefairy2019.mod.modules.ore.ore.ItemBlockOre;
 import miragefairy2019.mod3.main.api.ApiMain;
-import miragefairy2019.mod3.oreseeddrop.OreSeedDropRegistry;
-import miragefairy2019.mod3.oreseeddrop.api.ApiOreSeedDrop;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
@@ -25,11 +23,6 @@ public class ModuleOre {
     public static ItemBlockOre<EnumVariantOre2> itemBlockOre2;
 
     public static void init(EventRegistryMod erMod) {
-
-        erMod.initRegistry.register(() -> {
-            ApiOreSeedDrop.oreSeedDropRegistry = new OreSeedDropRegistry();
-            LoaderOreSeedDrop.INSTANCE.loadOreSeedDrop();
-        });
 
         erMod.registerBlock.register(b -> {
 

@@ -2,15 +2,18 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.makeBlockStates
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
-import miragefairy2019.mod.modules.oreseed.BlockOreSeed
-import miragefairy2019.mod.modules.oreseed.EnumVariantOreSeed
-import miragefairy2019.mod.modules.oreseed.WorldGenCompoundOreSeed
+import miragefairy2019.mod3.artifacts.oreseed.ApiOreSeedDrop
+import miragefairy2019.mod3.artifacts.oreseed.BlockOreSeed
+import miragefairy2019.mod3.artifacts.oreseed.EnumOreSeedType
+import miragefairy2019.mod3.artifacts.oreseed.EnumVariantOreSeed
+import miragefairy2019.mod3.artifacts.oreseed.LoaderOreSeedDrop
+import miragefairy2019.mod3.artifacts.oreseed.OreSeedDropRegistry
+import miragefairy2019.mod3.artifacts.oreseed.WorldGenCompoundOreSeed
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType
 import net.minecraft.block.BlockStone
 import net.minecraft.init.Blocks
 import net.minecraft.util.math.ChunkPos
@@ -87,6 +90,13 @@ object OreSeed {
                 }
             })
 
+        }
+
+
+        // 鉱石の種ドロップ
+        onInstantiation {
+            ApiOreSeedDrop.oreSeedDropRegistry = OreSeedDropRegistry()
+            LoaderOreSeedDrop.loadOreSeedDrop()
         }
 
     }

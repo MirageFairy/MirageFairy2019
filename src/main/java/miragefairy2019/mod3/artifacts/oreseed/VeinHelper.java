@@ -1,6 +1,5 @@
-package miragefairy2019.mod3.oreseeddrop;
+package miragefairy2019.mod3.artifacts.oreseed;
 
-import miragefairy2019.mod3.oreseeddrop.api.OreSeedDropEnvironment;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.UtilsString;
 import org.jetbrains.annotations.NotNull;

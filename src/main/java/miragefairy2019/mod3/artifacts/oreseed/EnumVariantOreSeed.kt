@@ -1,6 +1,5 @@
-package miragefairy2019.mod.modules.oreseed
+package miragefairy2019.mod3.artifacts.oreseed
 
-import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedShape
 import net.minecraft.util.IStringSerializable
 
 enum class EnumVariantOreSeed(val metadata: Int, val resourceName: String, val unlocalizedName: String, val shape: EnumOreSeedShape) : IStringSerializable {

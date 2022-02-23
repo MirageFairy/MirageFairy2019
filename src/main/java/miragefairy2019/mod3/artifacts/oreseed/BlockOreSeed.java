@@ -1,8 +1,5 @@
-package miragefairy2019.mod.modules.oreseed;
+package miragefairy2019.mod3.artifacts.oreseed;
 
-import miragefairy2019.mod3.oreseeddrop.api.ApiOreSeedDrop;
-import miragefairy2019.mod3.oreseeddrop.api.EnumOreSeedType;
-import miragefairy2019.mod3.oreseeddrop.api.OreSeedDropEnvironment;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
