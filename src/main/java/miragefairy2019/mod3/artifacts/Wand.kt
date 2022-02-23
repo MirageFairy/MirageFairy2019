@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.createItemStack
@@ -217,8 +218,9 @@ open class ItemFairyWand : Item() {
 
 
     // クラフティングツール関係
+    override fun hasContainerItem(itemStack: ItemStack) = !getContainerItem(itemStack).isEmpty
     override fun getContainerItem(itemStack: ItemStack): ItemStack {
-        if (itemStack.itemDamage >= itemStack.maxDamage) return super.getContainerItem(itemStack) // 耐久を使い果たした場合はデフォルトの挙動
+        if (itemStack.itemDamage >= itemStack.maxDamage) return EMPTY_ITEM_STACK // 耐久を使い果たした
         return itemStack.copy().also { it.itemDamage = it.itemDamage + 1 }
     }
 
