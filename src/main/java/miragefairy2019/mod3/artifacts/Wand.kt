@@ -163,7 +163,7 @@ open class ItemFairyWand : Item() {
         // 機能
         getMagicDescription(itemStack)?.let { tooltip += formattedText { (!it).red } } // 魔法
 
-        tooltip += formattedText { (!"耐久値: ${(getMaxDamage(itemStack) - getDamage(itemStack)).coerceAtLeast(0)} / ${getMaxDamage(itemStack)}").green } // 耐久値 TODO translate
+        tooltip += formattedText { (!"使用可能回数: ${(getMaxDamage(itemStack) - getDamage(itemStack) + 1).coerceAtLeast(0)}").green } // 耐久値 TODO translate
 
     }
 
