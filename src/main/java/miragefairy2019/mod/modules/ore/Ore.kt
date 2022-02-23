@@ -8,9 +8,9 @@ import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.MakeItemVariantModelScope
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
+import miragefairy2019.libkt.block
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.generated
 import miragefairy2019.libkt.handheld
@@ -18,18 +18,61 @@ import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeItemVariantModel
 import miragefairy2019.libkt.makeRecipe
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.ItemMultiMaterial
 import miragefairy2019.mod.lib.ItemVariantMaterial
 import miragefairy2019.mod.lib.setCustomModelResourceLocations
+import miragefairy2019.mod.modules.ore.ore.BlockOre
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1
+import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2
+import miragefairy2019.mod.modules.ore.ore.ItemBlockOre
 import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.item.ItemStack
+import net.minecraft.util.ResourceLocation
 
 object Ore {
+    lateinit var blockOre1: () -> BlockOre<EnumVariantOre1>
+    lateinit var itemBlockOre1: () -> ItemBlockOre<EnumVariantOre1>
+
+    lateinit var blockOre2: () -> BlockOre<EnumVariantOre2>
+    lateinit var itemBlockOre2: () -> ItemBlockOre<EnumVariantOre2>
+
     lateinit var itemMaterials: () -> ItemSimpleMaterials
+
     val module = module {
+
+        // 鉱石1
+        blockOre1 = block({ BlockOre(EnumVariantOre1.variantList) }, "ore1") {
+            setCreativeTab { ApiMain.creativeTab }
+            // TODO make blockstates
+        }
+        itemBlockOre1 = item({ ItemBlockOre(blockOre1()) }, "ore1") {
+            onRegisterItem {
+                blockOre1().variantList.blockVariants.forEach {
+                    item.setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
+                }
+            }
+            // TODO register ore name
+        }
+
+
+        // 鉱石2
+        blockOre2 = block({ BlockOre(EnumVariantOre2.variantList) }, "ore2") {
+            setCreativeTab { ApiMain.creativeTab }
+        }
+        itemBlockOre2 = item({ ItemBlockOre(blockOre2()) }, "ore2") {
+            onRegisterItem {
+                blockOre2().variantList.blockVariants.forEach {
+                    item.setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
+                }
+            }
+            // TODO register ore name
+        }
+
 
         // マテリアルアイテム
         itemMaterials = item({ ItemSimpleMaterials() }, "materials") {

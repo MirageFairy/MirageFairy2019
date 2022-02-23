@@ -3,7 +3,6 @@ package miragefairy2019.mod
 import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod.lib.InitializationContext
-import miragefairy2019.mod.modules.ore.ModuleOre
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
 import miragefairy2019.mod3.playeraura.ModulePlayerAura
@@ -30,7 +29,6 @@ class InitializerMirageFairy2019 {
 
 
         miragefairy2019.mod.modules.fairyweapon.recipe.Loader.init(erMod)
-        ModuleOre.init(erMod)
         ModulePlacedItem.init(erMod)
         ModulePlayerAura.init(erMod)
 

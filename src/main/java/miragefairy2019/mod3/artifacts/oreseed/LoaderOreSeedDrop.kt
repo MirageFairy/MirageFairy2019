@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.artifacts.oreseed
 
-import miragefairy2019.mod.modules.ore.ModuleOre
+import miragefairy2019.mod.modules.ore.Ore
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.APATITE_ORE
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.CINNABAR_ORE
@@ -69,8 +69,8 @@ object LoaderOreSeedDrop {
     fun loadOreSeedDrop() {
         ApiOreSeedDrop.oreSeedDropRegistry {
 
-            fun ore1(variant: EnumVariantOre1) = Pair({ ModuleOre.blockOre1.getState(variant) }, { ItemStack(ModuleOre.blockOre1, 1, variant.metadata) })
-            fun ore2(variant: EnumVariantOre2) = Pair({ ModuleOre.blockOre2.getState(variant) }, { ItemStack(ModuleOre.blockOre2, 1, variant.metadata) })
+            fun ore1(variant: EnumVariantOre1) = Pair({ Ore.blockOre1().getState(variant) }, { ItemStack(Ore.blockOre1(), 1, variant.metadata) })
+            fun ore2(variant: EnumVariantOre2) = Pair({ Ore.blockOre2().getState(variant) }, { ItemStack(Ore.blockOre2(), 1, variant.metadata) })
             fun block(block: Block, meta: Int = 0) = Pair({ block.defaultState }, { ItemStack(block, 1, meta) })
 
             fun OreSeedDropRegistryScope.TypedOreSeedDropRegistryScope.vein(shape: EnumOreSeedShape, weight: Double, output: Pair<() -> IBlockState, () -> ItemStack>, vararg generationConditions: IOreSeedDropRequirement) {
