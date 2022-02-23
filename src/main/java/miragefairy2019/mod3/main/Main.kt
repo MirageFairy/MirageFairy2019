@@ -2,7 +2,7 @@ package miragefairy2019.mod3.main
 
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.artifacts.fairycrystal.variantFairyCrystal
+import miragefairy2019.mod3.artifacts.fairycrystal.FairyCrystal
 import miragefairy2019.mod3.main.api.ApiMain
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
@@ -23,7 +23,7 @@ object Main {
         onInitCreativeTab {
             ApiMain.creativeTab = object : CreativeTabs("mirageFairy2019") {
                 @SideOnly(Side.CLIENT)
-                override fun getTabIconItem() = variantFairyCrystal().createItemStack()
+                override fun getTabIconItem() = FairyCrystal.variantFairyCrystal().createItemStack()
             }
         }
 
