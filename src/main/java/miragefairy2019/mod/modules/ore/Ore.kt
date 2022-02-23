@@ -1,14 +1,8 @@
 package miragefairy2019.mod.modules.ore
 
-import miragefairy2019.libkt.DataIngredient
 import miragefairy2019.libkt.DataItemModel
-import miragefairy2019.libkt.DataOreIngredient
-import miragefairy2019.libkt.DataResult
-import miragefairy2019.libkt.DataShapelessRecipe
-import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.MakeItemVariantModelScope
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.enJa
@@ -17,7 +11,6 @@ import miragefairy2019.libkt.handheld
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeItemVariantModel
-import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -157,34 +150,6 @@ object Ore {
             enJa("item.dustMoonstone.name", "Moonstone Dust", "月長石の粉")
             enJa("item.dustMagnetite.name", "Magnetite Dust", "磁鉄鉱の粉")
         }
-
-
-        // レシピ
-
-        // 破砕のワンドによる粉砕
-        fun makeDustRecipe(registryName: String, ingredient: DataIngredient, metadata: Int) {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, registryName),
-                DataShapelessRecipe(
-                    ingredients = listOf(
-                        DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandBreaking"),
-                        ingredient
-                    ),
-                    result = DataResult(
-                        item = "miragefairy2019:materials",
-                        data = metadata
-                    )
-                )
-            )
-        }
-        makeDustRecipe("apatite_dust", DataOreIngredient(ore = "gemApatite"), 23)
-        makeDustRecipe("fluorite_dust", DataOreIngredient(ore = "gemFluorite"), 24)
-        makeDustRecipe("sulfur_dust", DataOreIngredient(ore = "gemSulfur"), 25)
-        makeDustRecipe("cinnabar_dust", DataOreIngredient(ore = "gemCinnabar"), 26)
-        makeDustRecipe("moonstone_dust", DataOreIngredient(ore = "gemMoonstone"), 27)
-        makeDustRecipe("magnetite_dust", DataOreIngredient(ore = "gemMagnetite"), 28)
-        makeDustRecipe("coal_dust", DataSimpleIngredient(item = "minecraft:coal", data = 0), 21)
-        makeDustRecipe("charcoal_dust", DataSimpleIngredient(item = "minecraft:coal", data = 1), 22)
 
     }
 }
