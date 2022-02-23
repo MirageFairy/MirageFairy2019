@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairycrystal
+package miragefairy2019.mod3.artifacts.fairycrystal
 
 import miragefairy2019.libkt.WeightedItem
 import miragefairy2019.libkt.axisAlignedBB
@@ -7,8 +7,6 @@ import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.itemStacks
 import miragefairy2019.libkt.totalWeight
 import miragefairy2019.libkt.unique
-import miragefairy2019.mod.api.fairycrystal.DropCategory
-import miragefairy2019.mod.api.fairycrystal.IRightClickDrop
 import miragefairy2019.mod3.fairy.FairyTypes
 import mirrg.kotlin.castOrNull
 import net.minecraft.block.Block

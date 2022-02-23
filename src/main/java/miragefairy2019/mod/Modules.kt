@@ -1,7 +1,7 @@
 package miragefairy2019.mod
 
 import miragefairy2019.jei.Jei
-import miragefairy2019.mod.modules.fairycrystal.FairyCrystal
+import miragefairy2019.mod3.artifacts.fairycrystal.FairyCrystal
 import miragefairy2019.mod.modules.fairyweapon.item.FairyWeapon
 import miragefairy2019.mod3.artifacts.Artifacts
 import miragefairy2019.mod3.damagesource.DamageSource

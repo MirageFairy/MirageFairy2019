@@ -1,9 +1,8 @@
-package miragefairy2019.mod.modules.fairycrystal
+package miragefairy2019.mod3.artifacts.fairycrystal
 
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gold
-import miragefairy2019.mod.api.ApiFairyCrystal
 import miragefairy2019.mod.lib.ItemVariant
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.ApiSkill

@@ -1,11 +1,11 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.module
-import miragefairy2019.mod.api.ApiFairyCrystal
-import miragefairy2019.mod.api.fairycrystal.DropCategory
-import miragefairy2019.mod.api.fairycrystal.DropFixed
-import miragefairy2019.mod.api.fairycrystal.IDrop
-import miragefairy2019.mod.api.fairycrystal.IRightClickDrop
+import miragefairy2019.mod3.artifacts.fairycrystal.ApiFairyCrystal
+import miragefairy2019.mod3.artifacts.fairycrystal.DropCategory
+import miragefairy2019.mod3.artifacts.fairycrystal.DropFixed
+import miragefairy2019.mod3.artifacts.fairycrystal.IDrop
+import miragefairy2019.mod3.artifacts.fairycrystal.IRightClickDrop
 import miragefairy2019.mod3.fairy.relation.FairyRelationEntry
 import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
 import mirrg.kotlin.toInstantAsUtc

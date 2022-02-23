@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
-import miragefairy2019.mod.modules.fairycrystal.ItemFairyCrystal
 import miragefairy2019.mod.modules.fairyweapon.item.FairyWeaponUtils.findItemOptional
+import miragefairy2019.mod3.artifacts.fairycrystal.ItemFairyCrystal
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityItem

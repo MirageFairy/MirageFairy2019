@@ -1,4 +1,4 @@
-package miragefairy2019.mod.api.fairycrystal;
+package miragefairy2019.mod3.artifacts.fairycrystal;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

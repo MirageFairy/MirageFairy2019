@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairycrystal
+package miragefairy2019.mod3.artifacts.fairycrystal
 
 class VariantFairyCrystalPure(registryName: String, unlocalizedName: String, oreName: String) : VariantFairyCrystal(registryName, unlocalizedName, oreName) {
     override val dropRank get() = 1

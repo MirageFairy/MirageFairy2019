@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairycrystal
+package miragefairy2019.mod3.artifacts.fairycrystal
 
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.orNull
