@@ -13,8 +13,8 @@ import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod.modules.ore.Ore
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1
+import miragefairy2019.mod3.artifacts.CommonMaterials
 import miragefairy2019.mod3.artifacts.oreseed.ApiOreSeedDrop
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
@@ -39,7 +39,7 @@ class PluginOreSeedDrop : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(Ore.blockOre1(), 1, EnumVariantOre1.APATITE_ORE.metadata))
+            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(CommonMaterials.blockOre1(), 1, EnumVariantOre1.APATITE_ORE.metadata))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 20, 0)
                 recipeLayout.itemStacks.init(1, false, 120, 0)

@@ -1,6 +1,5 @@
 package miragefairy2019.mod3.artifacts.oreseed
 
-import miragefairy2019.mod.modules.ore.Ore
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.APATITE_ORE
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre1.CINNABAR_ORE
@@ -22,6 +21,7 @@ import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.END_STONE_LABRADORITE_ORE
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.HELIOLITE_ORE
 import miragefairy2019.mod.modules.ore.ore.EnumVariantOre2.TOURMALINE_ORE
+import miragefairy2019.mod3.artifacts.CommonMaterials
 import miragefairy2019.mod3.artifacts.oreseed.EnumOreSeedShape.COAL
 import miragefairy2019.mod3.artifacts.oreseed.EnumOreSeedShape.DIAMOND
 import miragefairy2019.mod3.artifacts.oreseed.EnumOreSeedShape.HORIZONTAL
@@ -69,8 +69,8 @@ object LoaderOreSeedDrop {
     fun loadOreSeedDrop() {
         ApiOreSeedDrop.oreSeedDropRegistry {
 
-            fun ore1(variant: EnumVariantOre1) = Pair({ Ore.blockOre1().getState(variant) }, { ItemStack(Ore.blockOre1(), 1, variant.metadata) })
-            fun ore2(variant: EnumVariantOre2) = Pair({ Ore.blockOre2().getState(variant) }, { ItemStack(Ore.blockOre2(), 1, variant.metadata) })
+            fun ore1(variant: EnumVariantOre1) = Pair({ CommonMaterials.blockOre1().getState(variant) }, { ItemStack(CommonMaterials.blockOre1(), 1, variant.metadata) })
+            fun ore2(variant: EnumVariantOre2) = Pair({ CommonMaterials.blockOre2().getState(variant) }, { ItemStack(CommonMaterials.blockOre2(), 1, variant.metadata) })
             fun block(block: Block, meta: Int = 0) = Pair({ block.defaultState }, { ItemStack(block, 1, meta) })
 
             fun OreSeedDropRegistryScope.TypedOreSeedDropRegistryScope.vein(shape: EnumOreSeedShape, weight: Double, output: Pair<() -> IBlockState, () -> ItemStack>, vararg generationConditions: IOreSeedDropRequirement) {

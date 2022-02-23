@@ -3,7 +3,6 @@ package miragefairy2019.mod
 import miragefairy2019.jei.Jei
 import miragefairy2019.mod.modules.fairycrystal.FairyCrystal
 import miragefairy2019.mod.modules.fairyweapon.item.FairyWeapon
-import miragefairy2019.mod.modules.ore.Ore
 import miragefairy2019.mod3.artifacts.Artifacts
 import miragefairy2019.mod3.damagesource.DamageSource
 import miragefairy2019.mod3.fairy.Fairy
@@ -25,7 +24,6 @@ val modules = listOf(
     Artifacts.module,
     ManualRepair.module,
     DamageSource.module,
-    Ore.module,
     Pick.module,
     FairyCrystal.module
 )
