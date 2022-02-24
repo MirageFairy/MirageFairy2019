@@ -57,7 +57,7 @@ object Wand {
                 setCreativeTab { ApiMain.creativeTab }
                 setCustomModelResourceLocation()
                 onInit {
-                    val durability = (1..tier).fold(16) { a, b -> a * 2 }
+                    val durability = (1..tier).fold(16) { a, _ -> a * 2 }
                     item.maxDamage = durability - 1
                     item.tier = tier
                 }
