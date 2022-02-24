@@ -28,7 +28,6 @@ class InitializerMirageFairy2019 {
         modInitializer.onInstantiation()
 
 
-        miragefairy2019.mod.modules.fairyweapon.recipe.Loader.init(erMod)
         ModulePlacedItem.init(erMod)
         ModulePlayerAura.init(erMod)
 
