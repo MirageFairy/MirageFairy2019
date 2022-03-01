@@ -59,8 +59,10 @@ class FairyTypes(private val count: Int) {
             )
         }
 
+        val isDilutable = name != "mina" // TODO
+
         // Create Variants
-        val variants = (1..count).map { VariantFairy(id, colorSet, getType(it), rare, it) }
+        val variants = (1..count).map { VariantFairy(id, colorSet, getType(it), rare, it, isDilutable) }
         val bundle = RankedFairyTypeBundle(variants)
 
         // Register
