@@ -38,7 +38,7 @@ class FairyStickCraftConditionSpawnItem(private val sItemStack: () -> ItemStack)
     override val ingredientsOutput get() = listOf(listOf(sItemStack()))
 }
 
-class FairyStickCraftConditionConsumeItem @JvmOverloads constructor( // TODO remove jvm annotation
+class FairyStickCraftConditionConsumeItem(
     private val ingredient: Ingredient,
     private val count: Int = 1
 ) : IFairyStickCraftCondition {
