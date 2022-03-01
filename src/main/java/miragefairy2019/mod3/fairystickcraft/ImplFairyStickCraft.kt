@@ -32,13 +32,6 @@ class FairyStickCraftRegistry : IFairyStickCraftRegistry {
 
 class FairyStickCraftRecipe : IFairyStickCraftRecipe {
     override val conditions = mutableListOf<IFairyStickCraftCondition>()
-
-    companion object {
-        // TODO remove jvm annotation
-        // TODO return type
-        @JvmStatic
-        fun adderCondition(condition: IFairyStickCraftCondition): Consumer<FairyStickCraftRecipe> = Consumer { it.conditions.add(condition) }
-    }
 }
 
 class FairyStickCraftEnvironment(
