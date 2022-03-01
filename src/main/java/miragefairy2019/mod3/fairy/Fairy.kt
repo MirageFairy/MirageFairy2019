@@ -40,7 +40,7 @@ object Fairy {
                 override fun displayAllRelevantItems(itemStacks: NonNullList<ItemStack>) {
                     FairyTypes.instance.variants.forEach { variant ->
                         listItemFairy.forEachIndexed { i, _ ->
-                            itemStacks.add(variant.y[i].createItemStack())
+                            itemStacks.add(variant.bundle[i].createItemStack())
                         }
                     }
                 }
@@ -60,7 +60,7 @@ object Fairy {
                 item.setRegistryName(ModMirageFairy2019.MODID, if (rank == 1) "mirage_fairy" else "mirage_fairy_r$rank")
                 item.unlocalizedName = "mirageFairyR$rank"
                 item.creativeTab = creativeTab // TODO 冗長説
-                FairyTypes.instance.variants.forEach { item.registerVariant(it.x, it.y[rank - 1]) }
+                FairyTypes.instance.variants.forEach { item.registerVariant(it.id, it.bundle[rank - 1]) }
                 ForgeRegistries.ITEMS.register(item)
                 if (side.isClient) {
                     item.variants.forEach { ModelLoader.setCustomModelResourceLocation(item, it.metadata, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, "fairy"), "normal")) }
@@ -112,12 +112,12 @@ object Fairy {
                 listItemFairy.forEachIndexed { i, _ ->
 
                     // 品種別
-                    OreDictionary.registerOre("mirageFairy2019Fairy${variant.y[i].type.motif!!.resourcePath.toUpperCamelCase()}Rank${i + 1}", variant.y[i].createItemStack())
+                    OreDictionary.registerOre("mirageFairy2019Fairy${variant.bundle[i].type.motif!!.resourcePath.toUpperCamelCase()}Rank${i + 1}", variant.bundle[i].createItemStack())
 
                     // エルグ別
-                    variant.y[i].type.ergSet.entries.forEach {
+                    variant.bundle[i].type.ergSet.entries.forEach {
                         if (it.power >= 10) {
-                            OreDictionary.registerOre("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(it.type.toString())}", variant.y[i].createItemStack())
+                            OreDictionary.registerOre("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(it.type.toString())}", variant.bundle[i].createItemStack())
                         }
                     }
 
@@ -132,25 +132,25 @@ object Fairy {
 
                     // 凝縮
                     GameRegistry.addShapelessRecipe(
-                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.y[i].type.motif!!.resourcePath}"),
-                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.y[i].type.motif!!.resourcePath}"),
-                        variant.y[i + 1].createItemStack(),
-                        Ingredient.fromStacks(variant.y[i].createItemStack()),
-                        Ingredient.fromStacks(variant.y[i].createItemStack()),
-                        Ingredient.fromStacks(variant.y[i].createItemStack()),
-                        Ingredient.fromStacks(variant.y[i].createItemStack()),
-                        Ingredient.fromStacks(variant.y[i].createItemStack()),
-                        Ingredient.fromStacks(variant.y[i].createItemStack()),
-                        Ingredient.fromStacks(variant.y[i].createItemStack()),
-                        Ingredient.fromStacks(variant.y[i].createItemStack())
+                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.bundle[i].type.motif!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.bundle[i].type.motif!!.resourcePath}"),
+                        variant.bundle[i + 1].createItemStack(),
+                        Ingredient.fromStacks(variant.bundle[i].createItemStack()),
+                        Ingredient.fromStacks(variant.bundle[i].createItemStack()),
+                        Ingredient.fromStacks(variant.bundle[i].createItemStack()),
+                        Ingredient.fromStacks(variant.bundle[i].createItemStack()),
+                        Ingredient.fromStacks(variant.bundle[i].createItemStack()),
+                        Ingredient.fromStacks(variant.bundle[i].createItemStack()),
+                        Ingredient.fromStacks(variant.bundle[i].createItemStack()),
+                        Ingredient.fromStacks(variant.bundle[i].createItemStack())
                     )
 
                     // 分解
                     GameRegistry.addShapelessRecipe(
-                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.y[i].type.motif!!.resourcePath}"),
-                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.y[i].type.motif!!.resourcePath}"),
-                        variant.y[i].createItemStack(8),
-                        Ingredient.fromStacks(variant.y[i + 1].createItemStack())
+                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.bundle[i].type.motif!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.bundle[i].type.motif!!.resourcePath}"),
+                        variant.bundle[i].createItemStack(8),
+                        Ingredient.fromStacks(variant.bundle[i + 1].createItemStack())
                     )
 
                 }

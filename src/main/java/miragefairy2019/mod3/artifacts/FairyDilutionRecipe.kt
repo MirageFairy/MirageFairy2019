@@ -12,9 +12,9 @@ object FairyDilutionRecipe {
     val module = module {
         onAddRecipe {
             FairyTypes.instance.variants.forEach { fairyVariant ->
-                val inputFairyBundle = fairyVariant.y
+                val inputFairyBundle = fairyVariant.bundle
                 val inputFairy = inputFairyBundle.main
-                val outputFairyBundle = fairyVariant.y.main.type.parentFairy() ?: return@forEach
+                val outputFairyBundle = fairyVariant.bundle.main.type.parentFairy() ?: return@forEach
                 val outputFairy = outputFairyBundle.main
                 val rankDiff = (outputFairy.rare - inputFairy.rare).coerceAtLeast(0) // 必要凝縮回数
 

@@ -257,7 +257,7 @@ class ItemDebugMirageFlowerGrowthRateList : ItemDebug() {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
         player.sendStatusMessage(textComponent { !"===== Mirage Flower Grow Rate Table =====" }, false)
-        FairyTypes.instance.variants.map { it.y.main.type }.map { Pair(it, getGrowthRateInFloor(it)) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
+        FairyTypes.instance.variants.map { it.bundle.main.type }.map { Pair(it, getGrowthRateInFloor(it)) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
             player.sendStatusMessage(textComponent { !((it.second * 100) formatAs "%7.2f%%  ") + !it.first.displayName }, false)
         }
         player.sendStatusMessage(textComponent { !"====================" }, false)

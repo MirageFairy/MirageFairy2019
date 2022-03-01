@@ -12,7 +12,6 @@ import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.mana.max
 import miragefairy2019.mod3.mana.sum
 import miragefairy2019.mod3.mana.times
-import mirrg.boron.util.struct.Tuple
 import net.minecraft.util.ResourceLocation
 import kotlin.math.pow
 
@@ -21,14 +20,16 @@ class RankedFairyTypeBundle(val variants: List<VariantFairy>) {
     operator fun get(i: Int) = variants[i]
 }
 
+data class FairyEntry(val id: Int, val bundle: RankedFairyTypeBundle)
+
 @Suppress("unused")
 class FairyTypes(private val count: Int) {
     companion object {
         lateinit var instance: FairyTypes
     }
 
-    private val variantsImpl = mutableListOf<Tuple<Int, RankedFairyTypeBundle>>() // TODO Tuple -> Pair
-    val variants: List<Tuple<Int, RankedFairyTypeBundle>> get() = variantsImpl
+    private val variantsImpl = mutableListOf<FairyEntry>()
+    val variants: List<FairyEntry> get() = variantsImpl
 
     private fun m(shine: Double, fire: Double, wind: Double, gaia: Double, aqua: Double, dark: Double) = ManaSet(shine, fire, wind, gaia, aqua, dark)
 
@@ -66,7 +67,7 @@ class FairyTypes(private val count: Int) {
         val bundle = RankedFairyTypeBundle(variants)
 
         // Register
-        variantsImpl += Tuple.of(id, bundle)
+        variantsImpl += FairyEntry(id, bundle)
 
         return bundle
     }
