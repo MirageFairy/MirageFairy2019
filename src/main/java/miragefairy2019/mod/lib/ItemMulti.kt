@@ -56,7 +56,6 @@ open class ItemVariant {
         }
     lateinit var item: Item
 
-    @JvmOverloads // TODO remove
     fun createItemStack(amount: Int = 1) = item.createItemStack(amount, metadata)
 }
 
