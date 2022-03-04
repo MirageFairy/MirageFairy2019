@@ -2,10 +2,12 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.aqua
+import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
@@ -21,8 +23,13 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
 import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.ApiSkill
+import miragefairy2019.mod3.skill.displayName
+import miragefairy2019.mod3.skill.getSkillLevel
+import mirrg.kotlin.formatAs
 import mirrg.kotlin.toUpperCamelCase
+import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.Entity
@@ -45,6 +52,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.OreIngredient
+import kotlin.math.ceil
 
 private val Int.roman get() = listOf("I", "II", "III", "IV").getOrNull(this - 1) ?: throw IllegalArgumentException()
 
@@ -137,7 +145,7 @@ object Wand {
     }
 }
 
-open class ItemFairyWand : Item() {
+open class ItemFairyWand : Item(), IFairyStickCraftItem {
     var tier = 0
 
     init {
@@ -153,6 +161,7 @@ open class ItemFairyWand : Item() {
     // ツールチップ
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+        val player = Minecraft.getMinecraft().player ?: return
 
         if (canTranslate("$unlocalizedName.poem")) { // ポエム
             val string = translateToLocal("$unlocalizedName.poem")
@@ -165,6 +174,9 @@ open class ItemFairyWand : Item() {
         getMagicDescription(itemStack)?.let { tooltip += formattedText { (!it).red } } // 魔法
 
         tooltip += formattedText { (!"使用可能回数: ${(getMaxDamage(itemStack) - getDamage(itemStack) + 1).coerceAtLeast(0)}").green } // 耐久値 TODO translate
+
+        tooltip += formattedText { (!"スキル: " + !EnumMastery.processing.displayName + !" (${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(EnumMastery.processing)})").gold } // TODO translate
+        tooltip += formattedText { (!"クールタイム: ${getCoolTime(player) / 20.0 formatAs "%.2f"} 秒").blue } // TODO translate
 
     }
 
@@ -181,6 +193,8 @@ open class ItemFairyWand : Item() {
     @SideOnly(Side.CLIENT)
     open fun getMagicDescription(itemStack: ItemStack): String? = "右クリックでフェアリーステッキクラフト" // TODO translate
 
+    fun getCoolTime(player: EntityPlayer) = ceil(40.0 / (1.0 + 0.01 * player.proxy.skillContainer.getSkillLevel(EnumMastery.processing))).toInt()
+
     override fun onItemUse(player: EntityPlayer, worldIn: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
 
         // フェアリーステッキクラフトのレシピを判定
@@ -191,6 +205,7 @@ open class ItemFairyWand : Item() {
 
         // クラフトを実行
         executor.onCraft { player.setHeldItem(hand, it) }
+        addFairyStickCraftCoolTime(player, getCoolTime(player))
 
         return EnumActionResult.SUCCESS
     }
@@ -215,6 +230,8 @@ open class ItemFairyWand : Item() {
         executor.onUpdate()
 
     }
+
+    override val isFairyStickCraftItem get() = true
 
 
     // クラフティングツール関係

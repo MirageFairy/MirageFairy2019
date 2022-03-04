@@ -1,10 +1,12 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.addOreName
+import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -19,7 +21,13 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRegistry
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
 import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.skill.EnumMastery
+import miragefairy2019.mod3.skill.api.ApiSkill
+import miragefairy2019.mod3.skill.displayName
+import miragefairy2019.mod3.skill.getSkillLevel
+import mirrg.kotlin.formatAs
 import net.minecraft.block.BlockDynamicLiquid
+import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
@@ -35,6 +43,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreIngredient
+import kotlin.math.ceil
 
 lateinit var itemFairyStick: () -> ItemFairyStick
 
@@ -90,13 +99,15 @@ object FairyStick {
     }
 }
 
-class ItemFairyStick : Item() {
+class ItemFairyStick : Item(), IFairyStickCraftItem {
     @SideOnly(Side.CLIENT)
     override fun isFull3D() = true
 
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+        val player = Minecraft.getMinecraft().player ?: return
+
         // ポエム
         if (canTranslate("$unlocalizedName.poem")) {
             val string = translateToLocal("$unlocalizedName.poem")
@@ -105,8 +116,14 @@ class ItemFairyStick : Item() {
 
         // 機能
         tooltip += formattedText { (!"右クリックでフェアリーステッキクラフト").red } // TODO translate
+
+        tooltip += formattedText { (!"スキル: " + !EnumMastery.processing.displayName + !" (${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(EnumMastery.processing)})").gold } // TODO translate
+        tooltip += formattedText { (!"クールタイム: ${getCoolTime(player) / 20.0 formatAs "%.2f"} 秒").blue } // TODO translate
+
     }
 
+
+    fun getCoolTime(player: EntityPlayer) = ceil(40.0 / (1.0 + 0.01 * player.proxy.skillContainer.getSkillLevel(EnumMastery.processing))).toInt()
 
     override fun onItemUse(player: EntityPlayer, worldIn: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         // レシピ判定
@@ -115,9 +132,9 @@ class ItemFairyStick : Item() {
             ?: return EnumActionResult.PASS
 
         // 成立
-        executor.onCraft { itemStackFairyStick ->
-            player.setHeldItem(hand, itemStackFairyStick)
-        }
+        executor.onCraft { player.setHeldItem(hand, it) }
+        addFairyStickCraftCoolTime(player, getCoolTime(player))
+
         return EnumActionResult.SUCCESS
     }
 
@@ -139,4 +156,6 @@ class ItemFairyStick : Item() {
         // 成立
         executor.onUpdate()
     }
+
+    override val isFairyStickCraftItem get() = true
 }
