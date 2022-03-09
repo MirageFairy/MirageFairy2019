@@ -64,7 +64,18 @@ infix fun <T : Comparable<T>> T.cmp(other: T) = compareTo(other)
 // 文字列
 val ByteArray.utf8String get() = toString(Charsets.UTF_8)
 val String.utf8ByteArray get() = toByteArray()
-val String.urlEncode: String get() = URLEncoder.encode(this, Charsets.UTF_8.name())
+
+@Deprecated("removing", ReplaceWith("urlEncoded"))
+val String.urlEncode
+    get() = urlEncoded
+val String.urlEncoded: String get() = URLEncoder.encode(this, Charsets.UTF_8.name())
+val String.htmlEscaped
+    get() = this
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace("\"", "&quot;")
+        .replace("'", "&#39;")
 
 
 // 数学
