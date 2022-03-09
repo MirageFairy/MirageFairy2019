@@ -11,3 +11,6 @@ fun String.toUpperCamelCase(beforeDelimiter: String = "_", afterDelimiter: Strin
 
 /** @receiver スネークケースの文字列 */
 fun String.toLowerCamelCase(beforeDelimiter: String = "_", afterDelimiter: String = "") = toUpperCamelCase(beforeDelimiter, afterDelimiter).toLowerCaseHead()
+
+val String.notEmptyOrNull get() = ifEmpty { null }
+val String.notBlankOrNull get() = ifBlank { null }
