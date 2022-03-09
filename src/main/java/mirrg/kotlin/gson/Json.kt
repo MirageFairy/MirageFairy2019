@@ -15,7 +15,7 @@ import com.google.gson.JsonPrimitive
 @Deprecated("暗黙のレシーバにより意図せず呼び出される可能性があります。", ReplaceWith("this.jsonElement.toJson()", "mirrg.kotlin.gson.jsonElement"))
 fun Any?.toJson(block: GsonBuilder.() -> Unit): String = GsonBuilder().apply { block() }.create().toJson(this)
 
-@Suppress("KotlinDeprecation")
+@Suppress("DEPRECATION")
 @Deprecated("暗黙のレシーバにより意図せず呼び出される可能性があります。", ReplaceWith("this.jsonElement.json", "mirrg.kotlin.gson.jsonElement"))
 val Any?.json
     get() = toJson { }
@@ -32,13 +32,17 @@ inline fun <reified T : Any> String.fromJson(block: GsonBuilder.() -> Unit): T? 
 // JsonElement化
 
 // List
-fun jsonElement(items: List<JsonElement>) = JsonArray().also { items.forEach { items -> it.add(items) } }
+fun jsonElement(items: List<JsonElement>) = JsonArray().also { items.forEach { item -> it.add(item) } }
+fun jsonElementNotNull(items: List<JsonElement?>) = jsonElement(items.filterNotNull())
 fun jsonElement(vararg items: JsonElement) = jsonElement(items.toList())
+fun jsonElementNotNull(vararg items: JsonElement?) = jsonElementNotNull(items.toList())
 val List<JsonElement>.jsonElement get() = jsonElement(this)
 
 // Map
 fun jsonElement(entries: List<Pair<String, JsonElement>>) = JsonObject().also { entries.forEach { entry -> it.add(entry.first, entry.second) } }
+fun jsonElementNotNull(entries: List<Pair<String, JsonElement>?>) = jsonElement(entries.filterNotNull())
 fun jsonElement(vararg entries: Pair<String, JsonElement>) = jsonElement(entries.toList())
+fun jsonElementNotNull(vararg entries: Pair<String, JsonElement>?) = jsonElementNotNull(entries.toList())
 val List<Pair<String, JsonElement>>.jsonElement get() = jsonElement(this)
 val Map<String, JsonElement>.jsonElement get() = jsonElement(this.entries.map { it.key to it.value })
 
