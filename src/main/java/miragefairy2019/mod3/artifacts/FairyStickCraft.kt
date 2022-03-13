@@ -9,7 +9,7 @@ interface IFairyStickCraftItem {
 
 fun addFairyStickCraftCoolTime(player: EntityPlayer, ticks: Int) {
     Item.REGISTRY.forEach { item ->
-        if (item is IFairyStickCraftItem) {
+        if (item is Item && item is IFairyStickCraftItem) {
             if (item.isFairyStickCraftItem) {
                 player.cooldownTracker.setCooldown(item, ticks)
             }
