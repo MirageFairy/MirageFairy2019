@@ -16,7 +16,7 @@ import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.fairyType
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.div
-import miragefairy2019.mod3.playeraura.api.IFoodAuraContainer
+import miragefairy2019.mod3.playeraura.api.IFoodAuraItem
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.color.IItemColor
@@ -38,7 +38,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.registries.IForgeRegistryEntry
-import java.util.Optional
 import java.util.function.Predicate
 
 object BakedFairy {
@@ -103,7 +102,7 @@ object BakedFairy {
     }
 }
 
-class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraContainer {
+class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraItem {
     companion object {
         fun getFairy(itemStack: ItemStack): ItemStack? {
             if (!itemStack.hasTagCompound()) return null
@@ -152,7 +151,7 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraContainer {
     }
 
 
-    override fun getFoodAura(itemStack: ItemStack) = Optional.ofNullable(getFairy(itemStack)?.fairyType?.let { it.manaSet / (it.cost / 50.0) })
+    override fun getFoodAura(itemStack: ItemStack) = getFairy(itemStack)?.fairyType?.let { it.manaSet / (it.cost / 50.0) }
 }
 
 class RecipeFairyBaking : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {

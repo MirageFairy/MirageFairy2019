@@ -14,7 +14,7 @@ import miragefairy2019.mod3.mana.copy
 import miragefairy2019.mod3.mana.plus
 import miragefairy2019.mod3.mana.times
 import miragefairy2019.mod3.playeraura.api.IClientPlayerAuraHandler
-import miragefairy2019.mod3.playeraura.api.IFoodAuraContainer
+import miragefairy2019.mod3.playeraura.api.IFoodAuraItem
 import miragefairy2019.mod3.playeraura.api.IFoodHistoryEntry
 import miragefairy2019.mod3.playeraura.api.IPlayerAuraHandler
 import miragefairy2019.mod3.playeraura.api.IPlayerAuraManager
@@ -55,8 +55,8 @@ class PlayerAuraManager : IPlayerAuraManager {
 
         if (item !is ItemFood) return null // 食べ物以外は無視
 
-        if (item is IFoodAuraContainer) {
-            return item.getFoodAura(itemStack).orElse(null) // カスタムフードオーラ
+        if (item is IFoodAuraItem) {
+            return item.getFoodAura(itemStack) // カスタムフードオーラ
         } else {
 
             // アイテムスタックに紐づけられた妖精のリスト
