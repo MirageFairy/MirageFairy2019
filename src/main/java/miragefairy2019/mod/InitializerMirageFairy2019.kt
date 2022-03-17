@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.event.FMLServerStoppedEvent
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent
 
 class InitializerMirageFairy2019 {
-    var modInitializer = ModInitializer(System.getProperty("miragefairy2019.usePreReleaseFeatures")?.toBoolean() ?: true)
+    private var modInitializer = ModInitializer(System.getProperty("miragefairy2019.usePreReleaseFeatures")?.toBoolean() ?: true)
 
     init {
         modules.forEach { it(modInitializer) }
