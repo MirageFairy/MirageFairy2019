@@ -5,7 +5,6 @@ import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod.lib.InitializationContext
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.placeditem.ModulePlacedItem
-import miragefairy2019.mod3.playeraura.ModulePlayerAura
 import net.minecraftforge.fml.common.event.FMLConstructionEvent
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent
@@ -29,7 +28,6 @@ class InitializerMirageFairy2019 {
 
 
         ModulePlacedItem.init(erMod)
-        ModulePlayerAura.init(erMod)
 
         erMod.initRegistry.trigger().run()
         modInitializer.onInitCreativeTab()

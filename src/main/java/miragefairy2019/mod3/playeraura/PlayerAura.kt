@@ -9,10 +9,8 @@ import miragefairy2019.libkt.drawTriangle
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
-import miragefairy2019.mod.lib.EventRegistryMod
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.api.ApiMain.logger
-import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.mana.ManaSet
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.api.IManaSet
@@ -42,22 +40,20 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.lang.Math.sin
-import java.util.function.Consumer
 import kotlin.math.PI
 import kotlin.math.cos
 
-object ModulePlayerAura {
-    @JvmStatic // TODO remove jvm
-    fun init(erMod: EventRegistryMod) {
+object PlayerAura {
+    val module = module {
 
         // マネージャー初期化
-        erMod.initRegistry.register(Runnable { ApiPlayerAura.playerAuraManager = PlayerAuraManager() })
+        onInstantiation { ApiPlayerAura.playerAuraManager = PlayerAuraManager() }
 
         // ネットワークメッセージ登録
-        erMod.registerNetworkMessage.register(Runnable { ApiMain.simpleNetworkWrapper.registerMessage(PacketPlayerAura::class.java, MessagePlayerAura::class.java, 1, Side.CLIENT) })
+        onRegisterNetworkMessage { ApiMain.simpleNetworkWrapper.registerMessage(PacketPlayerAura::class.java, MessagePlayerAura::class.java, 1, Side.CLIENT) }
 
         // ログインイベント
-        erMod.init.register(Consumer {
+        onInit {
             MinecraftForge.EVENT_BUS.register(object : Any() {
                 @Suppress("unused")
                 @SubscribeEvent
@@ -66,10 +62,10 @@ object ModulePlayerAura {
                     if (handler is NetHandlerPlayServer) ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(handler.player).send()
                 }
             })
-        })
+        }
 
         // アイテムツールチップイベント
-        erMod.init.register(Consumer {
+        onInit {
             if (side.isClient) {
                 MinecraftForge.EVENT_BUS.register(object : Any() {
                     @Suppress("unused")
@@ -143,10 +139,10 @@ object ModulePlayerAura {
                     }
                 })
             }
-        })
+        }
 
         // アイテム使用イベント
-        erMod.init.register(Consumer {
+        onInit {
             MinecraftForge.EVENT_BUS.register(object : Any() {
                 @Suppress("unused")
                 @SubscribeEvent
@@ -165,10 +161,10 @@ object ModulePlayerAura {
                     }
                 }
             })
-        })
+        }
 
         // 保存イベント
-        erMod.init.register(Consumer {
+        onInit {
             MinecraftForge.EVENT_BUS.register(object : Any() {
                 @Suppress("unused")
                 @SubscribeEvent
@@ -177,10 +173,10 @@ object ModulePlayerAura {
                     if (player is EntityPlayerMP) ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(player).save()
                 }
             })
-        })
+        }
 
         // ワールド停止時にロード済みのデータを破棄
-        erMod.init.register(Consumer {
+        onInit {
             MinecraftForge.EVENT_BUS.register(object : Any() {
                 @SubscribeEvent
                 fun hook(event: WorldEvent.Unload) {
@@ -192,13 +188,7 @@ object ModulePlayerAura {
                     }
                 }
             })
-        })
-
-    }
-}
-
-object PlayerAura {
-    val module = module {
+        }
 
         // オーラゲージオーバーレイ
         onInit {
