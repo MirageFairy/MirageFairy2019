@@ -2,6 +2,7 @@ package miragefairy2019.mod3.playeraura
 
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
+import miragefairy2019.api.IFoodAuraItem
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod3.fairy.relation.FairySelector
@@ -14,7 +15,6 @@ import miragefairy2019.mod3.mana.copy
 import miragefairy2019.mod3.mana.plus
 import miragefairy2019.mod3.mana.times
 import miragefairy2019.mod3.playeraura.api.IClientPlayerAuraHandler
-import miragefairy2019.mod3.playeraura.api.IFoodAuraItem
 import miragefairy2019.mod3.playeraura.api.IFoodHistoryEntry
 import miragefairy2019.mod3.playeraura.api.IPlayerAuraHandler
 import miragefairy2019.mod3.playeraura.api.IPlayerAuraManager
