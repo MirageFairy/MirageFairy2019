@@ -1,7 +1,7 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName

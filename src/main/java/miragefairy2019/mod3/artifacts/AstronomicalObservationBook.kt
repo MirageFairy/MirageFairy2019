@@ -1,6 +1,5 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.darkPurple
@@ -8,6 +7,7 @@ import miragefairy2019.libkt.displayText
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation

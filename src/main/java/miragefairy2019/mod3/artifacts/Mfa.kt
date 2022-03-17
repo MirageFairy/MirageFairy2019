@@ -1,8 +1,8 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.ja
+import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.item.Item

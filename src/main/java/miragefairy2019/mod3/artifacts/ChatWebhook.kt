@@ -9,7 +9,6 @@ import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.SmartSlot
 import miragefairy2019.libkt.block
@@ -27,6 +26,7 @@ import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemStacks
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.makeRecipe
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.readFromNBT
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.setCreativeTab

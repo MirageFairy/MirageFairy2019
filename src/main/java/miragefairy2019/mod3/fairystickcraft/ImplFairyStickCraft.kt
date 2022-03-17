@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import java.util.function.Consumer
 
 class FairyStickCraftRegistry : IFairyStickCraftRegistry {
     override val recipes = mutableListOf<IFairyStickCraftRecipe>()

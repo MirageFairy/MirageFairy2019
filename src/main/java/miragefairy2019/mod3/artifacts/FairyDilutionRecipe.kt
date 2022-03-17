@@ -1,8 +1,8 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.libkt.ingredient
+import miragefairy2019.libkt.module
 import miragefairy2019.mod3.fairy.FairyTypes
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry

@@ -4,9 +4,9 @@ import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.DataSimpleIngredient
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.makeRecipe
+import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.kotlin.toUpperCamelCase
 

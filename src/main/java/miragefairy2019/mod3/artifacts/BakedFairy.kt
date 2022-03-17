@@ -1,10 +1,10 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName

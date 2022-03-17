@@ -1,9 +1,9 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.normal
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.setCreativeTab

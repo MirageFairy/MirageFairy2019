@@ -1,8 +1,8 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.red
 import mirrg.kotlin.toUpperCamelCase

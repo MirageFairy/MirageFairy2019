@@ -3,10 +3,10 @@ package miragefairy2019.mod3.playeraura
 import io.netty.buffer.ByteBuf
 import miragefairy2019.libkt.Complex
 import miragefairy2019.libkt.IRgb
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
 import miragefairy2019.libkt.drawTriangle
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.mod.lib.EventRegistryMod

@@ -3,7 +3,6 @@ package miragefairy2019.mod3.skill
 import miragefairy2019.libkt.Component
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.TextAlignment
@@ -15,6 +14,7 @@ import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.label
 import miragefairy2019.libkt.minus
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.position
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.toArgb

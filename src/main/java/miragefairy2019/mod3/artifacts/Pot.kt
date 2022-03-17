@@ -4,13 +4,13 @@ import miragefairy2019.libkt.CapabilityProviderAdapter
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeRecipe
+import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName

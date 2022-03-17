@@ -16,6 +16,7 @@ import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer
 import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.fairy.FairyTypeAdapter
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.magic.MagicStatus
 import miragefairy2019.mod3.magic.MagicStatusFunctionArguments
@@ -45,7 +46,6 @@ import miragefairy2019.mod3.mana.times
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
-import miragefairy2019.mod3.fairy.FairyTypeAdapter
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
