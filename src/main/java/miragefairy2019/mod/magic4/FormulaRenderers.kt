@@ -1,5 +1,6 @@
 package miragefairy2019.mod.magic4
 
+import miragefairy2019.libkt.color
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
@@ -7,6 +8,7 @@ import miragefairy2019.mod.formula4.FormulaRendererSelector
 import miragefairy2019.mod.magic4.api.Formula
 import miragefairy2019.mod.magic4.api.FormulaArguments
 import miragefairy2019.mod.magic4.api.FormulaRenderer
+import miragefairy2019.mod.modules.fairyweapon.critical.CriticalRate
 import mirrg.kotlin.formatAs
 import net.minecraft.util.text.ITextComponent
 
@@ -24,6 +26,7 @@ private fun <T> FormulaRenderer<T>.map(function: FormulaRendererScope<T>.(ITextC
 }
 
 val FormulaRendererSelector<Int>.integer get() = createSimpleFormulaRenderer { textComponent { !"$value" } }
+val FormulaRendererSelector<Double>.duration get() = createSimpleFormulaRenderer { textComponent { !(value / 20.0 formatAs "%.1f 秒") } } // TODO translate
 val FormulaRendererSelector<Double>.float0 get() = createSimpleFormulaRenderer { textComponent { !(value formatAs "%.0f") } }
 val FormulaRendererSelector<Double>.float1 get() = createSimpleFormulaRenderer { textComponent { !(value formatAs "%.1f") } }
 val FormulaRendererSelector<Double>.float2 get() = createSimpleFormulaRenderer { textComponent { !(value formatAs "%.2f") } }
@@ -33,6 +36,7 @@ val FormulaRendererSelector<Double>.percent1 get() = createSimpleFormulaRenderer
 val FormulaRendererSelector<Double>.percent2 get() = createSimpleFormulaRenderer { textComponent { !(value * 100.0 formatAs "%.2f%%") } }
 val FormulaRendererSelector<Double>.percent3 get() = createSimpleFormulaRenderer { textComponent { !(value * 100.0 formatAs "%.3f%%") } }
 val FormulaRendererSelector<Boolean>.boolean get() = createSimpleFormulaRenderer { textComponent { if (value) !"Yes" else !"No" } }
+val FormulaRendererSelector<CriticalRate>.criticalRate get() = createSimpleFormulaRenderer { textComponent { value.bar.flatMap { (!"|").color(it.color) } + !(value.mean formatAs " (%.2f)") } }
 
 val FormulaRenderer<Boolean>.positive get() = map { textComponent { if (value) (!it).green else (!it).red } }
 val FormulaRenderer<Boolean>.negative get() = map { textComponent { if (value) (!it).red else (!it).green } }
