@@ -38,5 +38,8 @@ val FormulaRendererSelector<Double>.percent3 get() = createSimpleFormulaRenderer
 val FormulaRendererSelector<Boolean>.boolean get() = createSimpleFormulaRenderer { textComponent { if (value) !"Yes" else !"No" } }
 val FormulaRendererSelector<CriticalRate>.criticalRate get() = createSimpleFormulaRenderer { textComponent { value.bar.flatMap { (!"|").color(it.color) } + !(value.mean formatAs " (%.2f)") } }
 
+fun <T> FormulaRenderer<T>.prefix(string: String) = map { textComponent { !string + !it } }
+fun <T> FormulaRenderer<T>.suffix(string: String) = map { textComponent { !it + !string } }
+
 val FormulaRenderer<Boolean>.positive get() = map { textComponent { if (value) (!it).green else (!it).red } }
 val FormulaRenderer<Boolean>.negative get() = map { textComponent { if (value) (!it).red else (!it).green } }
