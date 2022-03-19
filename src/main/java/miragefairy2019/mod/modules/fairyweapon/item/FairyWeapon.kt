@@ -1,14 +1,21 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.libkt.DataOreIngredient
+import miragefairy2019.libkt.DataResult
+import miragefairy2019.libkt.DataShapedRecipe
+import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.ModInitializer
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesCombining
 import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesUncombining
@@ -94,7 +101,8 @@ object FairyWeapon {
         val magicWandBase = fw(3, { ItemFairyWeapon() }, "magic_wand_base", "magicWandBase", listOf(), null, !KNOWLEDGE)
         val magicWandLight = fw(3, { ItemMagicWandLight() }, "light_magic_wand", "magicWandLight", listOf(), magicWandBase, !LIGHT)
         val magicWandCollecting = fw(3, { ItemMagicWandCollecting() }, "collecting_magic_wand", "magicWandCollecting", listOf(), magicWandBase, !WARP)
-        val magicWandLightning = fw(3, { ItemMagicWandLightning() }, "lightning_magic_wand", "magicWandLightning", listOf(), magicWandBase, !THUNDER, !ENERGY)
+        val chargingRod = fw(3, { ItemChargingRod() }, "charging_rod", "chargingRod", listOf(), magicWandBase, !THUNDER, !WARP, !"ingotGold")
+        val magicWandLightning = fw(3, { ItemMagicWandLightning() }, "lightning_magic_wand", "magicWandLightning", listOf(), chargingRod, !ENERGY, !"blockMirageFairyCrystalPure")
 
         val ocarinaBase = fw(3, { ItemFairyWeapon() }, "ocarina_base", "ocarinaBase", listOf(), null, !SOUND)
         val ocarinaTemptation = fw(3, { ItemOcarinaTemptation() }, "temptation_ocarina", "ocarinaTemptation", listOf(), ocarinaBase, !LIFE)
@@ -124,8 +132,10 @@ object FairyWeapon {
             enJa("item.magicWandLight.poem", "", "古代の魔法「ニクトフォビア」、優しい光が洞窟を照らす")
             enJa("item.magicWandCollecting.name", "Magic Wand of Collecting", "収集のロッド")
             enJa("item.magicWandCollecting.poem", "", "新開発の魔法「ソルメローシェ・トリーパ」、魔法のマジックハンド")
+            enJa("item.chargingRod.name", "Charging Rod", "チャージングロッド")
+            enJa("item.chargingRod.poem", "", "電気の力で栄えた文明があったという")
             enJa("item.magicWandLightning.name", "Magic Wand of Lightning", "ライトニングロッド")
-            enJa("item.magicWandLightning.poem", "", "古代の魔法「ライトニングボルト」、電気の力で栄えた文明があったという")
+            enJa("item.magicWandLightning.poem", "", "古代魔法「ライトニングボルト」")
             enJa("item.ocarinaBase.name", "Ocarina Base", "オカリナベース")
             enJa("item.ocarinaBase.poem", "", "適当に吹いても音楽になる笛")
             enJa("item.ocarinaTemptation.name", "Ocarina of Temptation", "魅惑のオカリナ")
@@ -149,6 +159,52 @@ object FairyWeapon {
             enJa("miragefairy2019.magic.${MagicMessage.NO_TARGET.unlocalizedName}.text", "There is no target", "発動対象がありません")
             enJa("miragefairy2019.magic.${MagicMessage.COOL_TIME.unlocalizedName}.text", "Cool time remains", "クールタイムが残っています")
         }
+
+        // チャージングロッド
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "charging_rod"),
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cgw",
+                    "g#g",
+                    "tgm"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:magic_wand_base"),
+                    "g" to DataOreIngredient(ore = "ingotGold"),
+                    "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
+                    "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
+                    "c" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandCrafting"),
+                    "m" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting")
+                ),
+                result = DataResult(
+                    item = "miragefairy2019:charging_rod"
+                )
+            )
+        )
+
+        // ライトニングロッド
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "lightning_magic_wand"),
+            DataShapedRecipe(
+                pattern = listOf(
+                    "gge",
+                    "c#g",
+                    "Gmg"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:charging_rod"),
+                    "g" to DataOreIngredient(ore = "ingotGold"),
+                    "e" to DataOreIngredient(ore = "mirageFairy2019SphereEnergy"),
+                    "c" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandCrafting"),
+                    "m" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
+                    "G" to DataOreIngredient(ore = "blockMirageFairyCrystalPure")
+                ),
+                result = DataResult(
+                    item = "miragefairy2019:lightning_magic_wand"
+                )
+            )
+        )
 
 
         // 妖精搭乗レシピ

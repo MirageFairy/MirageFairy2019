@@ -1,0 +1,37 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "gge",
+    "c#g",
+    "Gmg"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:charging_rod"
+    },
+    "g": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "e": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereEnergy"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "m": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockMirageFairyCrystalPure"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:lightning_magic_wand",
+    "count": 1
+  }
+}

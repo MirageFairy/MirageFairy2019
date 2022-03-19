@@ -135,7 +135,8 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	Achievement::new("magic_wand_base"       ; "magicWandBase"      )::parent("fairy_weapon/root"                  )                    ::write();
 	Achievement::new("light_magic_wand"      ; "magicWandLight"     )::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
 	Achievement::new("collecting_magic_wand" ; "magicWandCollecting")::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
-	Achievement::new("lightning_magic_wand"  ; "magicWandLightning" )::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
+	Achievement::new("charging_rod"          ; "chargingRod"        )::parent("fairy_weapon/magic_wand_base"       )                    ::write();
+	Achievement::new("lightning_magic_wand"  ; "magicWandLightning" )::parent("fairy_weapon/charging_rod"          )::frame("goal"     )::write();
 
 	Achievement::new("ryugyo_drill"          ; "ryugyoDrill"        )::parent("fairy_weapon/root"                  )::frame("goal"     )::write();
 
@@ -466,6 +467,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	fairyWeapon("magic_wand_base");
 	fairyWeapon("light_magic_wand");
 	fairyWeapon("collecting_magic_wand");
+	fairyWeapon("charging_rod");
 	fairyWeapon("lightning_magic_wand");
 	fairyWeapon("crystal_sword");
 	fairyWeapon("ryugyo_drill");
