@@ -84,6 +84,11 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
 
         // 魔法成立
         object : MagicHandler() {
+            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
+                magicSelectorPosition.doEffect(0xFFFFFF)
+                spawnParticleTargets(world, targets, { Vec3d(it).addVector(0.5, 0.5, 0.5) }, { 0x00FF00 })
+            }
+
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
                 if (world.isRemote) return EnumActionResult.SUCCESS
                 val breakSounds = mutableListOf<SoundEvent>()
@@ -135,11 +140,6 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
                 player.cooldownTracker.setCooldown(this@ItemMiragiumAxe, ceil(nextCoolTime).toInt() atLeast 20) // クールタイム発生
 
                 return EnumActionResult.SUCCESS
-            }
-
-            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.doEffect(0xFFFFFF)
-                spawnParticleTargets(world, targets, { Vec3d(it).addVector(0.5, 0.5, 0.5) }, { 0x00FF00 })
             }
         }
     }
