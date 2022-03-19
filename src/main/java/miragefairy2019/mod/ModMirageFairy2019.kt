@@ -1,5 +1,6 @@
 package miragefairy2019.mod
 
+import miragefairy2019.libkt.ModInitializer
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.event.FMLConstructionEvent
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
@@ -29,32 +30,61 @@ class ModMirageFairy2019 {
         var instance: ModMirageFairy2019? = null
     }
 
-    private val initializer = InitializerMirageFairy2019()
+
+    private var modInitializer = ModInitializer(System.getProperty("miragefairy2019.usePreReleaseFeatures")?.toBoolean() ?: true)
+
+    init {
+        modules.forEach { it(modInitializer) }
+    }
+
+
+    init {
+        modInitializer.onInstantiation()
+        modInitializer.onInitCreativeTab()
+    }
 
     @Mod.EventHandler
-    fun handle(event: FMLConstructionEvent) = initializer.construction(event)
+    fun handle(event: FMLConstructionEvent) {
+        modInitializer.onConstruction(event)
+    }
 
     @Mod.EventHandler
-    fun handle(event: FMLPreInitializationEvent) = initializer.preInit(event)
+    fun handle(event: FMLPreInitializationEvent) {
+        modInitializer.onPreInit(event)
+        modInitializer.onRegisterFluid()
+        modInitializer.onRegisterBlock()
+        modInitializer.onRegisterItem()
+        modInitializer.onCreateItemStack()
+        modInitializer.onHookDecorator()
+        modInitializer.onInitKeyBinding()
+    }
 
     @Mod.EventHandler
-    fun handle(event: FMLInitializationEvent) = initializer.init(event)
+    fun handle(event: FMLInitializationEvent) {
+        modInitializer.onInit(event)
+        modInitializer.onAddRecipe()
+        if (event.side.isClient) modInitializer.onRegisterItemColorHandler()
+        modInitializer.onRegisterTileEntity()
+        modInitializer.onRegisterTileEntityRenderer()
+        modInitializer.onInitNetworkChannel()
+        modInitializer.onRegisterNetworkMessage()
+    }
 
     @Mod.EventHandler
-    fun handle(event: FMLPostInitializationEvent) = initializer.postInit(event)
+    fun handle(event: FMLPostInitializationEvent) = modInitializer.onPostInit(event)
 
     @Mod.EventHandler
-    fun handle(event: FMLLoadCompleteEvent) = initializer.loadComplete(event)
+    fun handle(event: FMLLoadCompleteEvent) = modInitializer.onLoadComplete(event)
 
     @Mod.EventHandler
-    fun handle(event: FMLServerStartingEvent) = initializer.serverStarting(event)
+    fun handle(event: FMLServerStartingEvent) = modInitializer.onServerStarting(event)
 
     @Mod.EventHandler
-    fun handle(event: FMLServerStartedEvent) = initializer.serverStarted(event)
+    fun handle(event: FMLServerStartedEvent) = modInitializer.onServerStarted(event)
 
     @Mod.EventHandler
-    fun handle(event: FMLServerStoppingEvent) = initializer.serverStopping(event)
+    fun handle(event: FMLServerStoppingEvent) = modInitializer.onServerStopping(event)
 
     @Mod.EventHandler
-    fun handle(event: FMLServerStoppedEvent) = initializer.serverStopped(event)
+    fun handle(event: FMLServerStoppedEvent) = modInitializer.onServerStopped(event)
 }
