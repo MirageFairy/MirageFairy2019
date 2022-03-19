@@ -67,7 +67,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
         val magicSelectorRayTrace = MagicSelectorRayTrace.createIgnoreEntity(world, player, additionalReach()) // 視線判定
         val magicSelectorPosition = magicSelectorRayTrace.magicSelectorPosition // 視点判定
 
-        fun createErrorCursor(color: Int, magicMessage: MagicMessage) = object : MagicHandler() {
+        fun error(color: Int, magicMessage: MagicMessage) = object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) = magicSelectorPosition.doEffect(color)
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
                 if (!world.isRemote) player.sendStatusMessage(magicMessage.displayText, true)
@@ -75,12 +75,12 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
             }
         }
 
-        if (!hasPartnerFairy) return@magic createErrorCursor(0xFF00FF, MagicMessage.NO_FAIRY) // パートナー妖精判定
-        if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic createErrorCursor(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
-        val blockPos = magicSelectorRayTrace.hitBlockPos ?: return@magic createErrorCursor(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
+        if (!hasPartnerFairy) return@magic error(0xFF00FF, MagicMessage.NO_FAIRY) // パートナー妖精判定
+        if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic error(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
+        val blockPos = magicSelectorRayTrace.hitBlockPos ?: return@magic error(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
         val targets = getTargets(blockPos)
-        if (targets.isEmpty()) return@magic createErrorCursor(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
-        if (player.cooldownTracker.hasCooldown(weaponItem)) return@magic createErrorCursor(0xFFFF00, MagicMessage.COOL_TIME) // クールタイム判定
+        if (targets.isEmpty()) return@magic error(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
+        if (player.cooldownTracker.hasCooldown(weaponItem)) return@magic error(0xFFFF00, MagicMessage.COOL_TIME) // クールタイム判定
 
         // 魔法成立
         object : MagicHandler() {
