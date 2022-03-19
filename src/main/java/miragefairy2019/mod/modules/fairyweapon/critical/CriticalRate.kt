@@ -27,7 +27,7 @@ class CriticalRate(
         WeightedItem(EnumCriticalFactor.CYAN, weightCyan)
     )
     private val totalWeight = weightedItems.totalWeight
-    fun getBar(length: Int = 50) = (0 until length).map { weightedItems.getItem(it / 50.0) }
+    fun getBar(length: Int = 50) = (0 until length).map { weightedItems.getItem(it / 50.0)!! }
     val bar = getBar()
     val mean get() = weightedItems.sumByDouble { it.weight * it.item.coefficient } / totalWeight
     fun get(random: Random) = weightedItems.getRandomItem(random)!!
