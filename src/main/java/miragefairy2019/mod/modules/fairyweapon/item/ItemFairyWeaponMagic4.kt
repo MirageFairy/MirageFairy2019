@@ -18,7 +18,6 @@ import miragefairy2019.mod3.artifacts.skillContainer
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.erg
-import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.mana.plus
@@ -84,14 +83,17 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
     }
 
     final override fun onUpdate(itemStack: ItemStack, world: World, entity: Entity, itemSlot: Int, isSelected: Boolean) {
-        if (!ApiMain.side.isClient) return // クライアントサイドでなければ中止
         if (entity !is EntityPlayer) return // プレイヤー取得
         if (!isSelected && entity.heldItemOffhand != itemStack) return // アイテム取得
         val fairyType = findFairy(itemStack, entity)?.second ?: ApiFairy.empty() // 妖精取得
-        if (!world.isRemote) return // クライアントワールドでなければ中止
 
         val magicHandler = getMagic().getMagicHandler(getMagicArguments(entity, itemStack, fairyType))
-        magicHandler.onClientUpdate(itemSlot, isSelected)
+        magicHandler.onUpdate(itemSlot, isSelected)
+        if (world.isRemote) {
+            magicHandler.onClientUpdate(itemSlot, isSelected)
+        } else {
+            magicHandler.onServerUpdate(itemSlot, isSelected)
+        }
     }
 
     final override fun hitEntity(itemStack: ItemStack, target: EntityLivingBase, attacker: EntityLivingBase): Boolean {

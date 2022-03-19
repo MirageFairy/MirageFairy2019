@@ -16,7 +16,9 @@ interface MagicArguments : FormulaArguments {
 
 open class MagicHandler {
     open fun onItemRightClick(hand: EnumHand): EnumActionResult = EnumActionResult.PASS
+    open fun onUpdate(itemSlot: Int, isSelected: Boolean) = Unit
     open fun onClientUpdate(itemSlot: Int, isSelected: Boolean) = Unit
+    open fun onServerUpdate(itemSlot: Int, isSelected: Boolean) = Unit
     open fun hitEntity(target: EntityLivingBase) = Unit
 }
 
