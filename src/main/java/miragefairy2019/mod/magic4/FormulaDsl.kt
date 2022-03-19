@@ -31,6 +31,7 @@ class FormulaScope(private val formulaArguments: FormulaArguments) {
     /** @return コストによる補正を受けたエルグの値 */
     operator fun EnumErgType.unaryPlus() = formulaArguments.getErg(this) * (formulaArguments.cost / 50.0)
     val cost get() = formulaArguments.cost
+    val costFactor get() = cost / 50.0
     operator fun IMastery.not() = formulaArguments.getSkillLevel(this)
 }
 
