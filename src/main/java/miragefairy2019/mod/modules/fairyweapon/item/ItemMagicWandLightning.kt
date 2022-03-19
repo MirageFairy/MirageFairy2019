@@ -38,7 +38,7 @@ import miragefairy2019.mod3.erg.api.EnumErgType as Erg
 import miragefairy2019.mod3.mana.api.EnumManaType as Mana
 
 class ItemMagicWandLightning : ItemFairyWeaponMagic4() {
-    val damage = status("damage", { 5.0 * costFactor + (!Mana.WIND + +Erg.THUNDER) / 20.0 }, { float2 })
+    val damage = status("damage", { 4.0 * costFactor + (!Mana.WIND + +Erg.THUNDER) / 10.0 }, { float2 })
     val damageBoost = status("damageBoost", { 1.0 + !EnumMastery.magicCombat / 100.0 }, { percent0 })
     val criticalRate = status("criticalRate", { CriticalRate(0.0, 0.0, 0.0, 7.0, 2.0, 1.0, 0.0, 0.0) }, { criticalRate })
     val additionalReach = status("additionalReach", { 5.0 + (!Mana.AQUA + +Erg.LIGHT) / 10.0 atMost 30.0 }, { float2 })
