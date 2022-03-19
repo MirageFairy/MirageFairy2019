@@ -119,6 +119,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 
 	Achievement::new("miragium_sword"        ; "miragiumSword"      )::parent("fairy_weapon/root"                  )                    ::write();
 	Achievement::new("fairy_sword"           ; "fairySword"         )::parent("fairy_weapon/miragium_sword"        )::frame("goal"     )::write();
+	Achievement::new("crystal_sword"         ; "crystalSword"       )::parent("fairy_weapon/miragium_sword"        )::frame("goal"     )::write();
 
 	Achievement::new("miragium_scythe"       ; "miragiumScythe"     )::parent("fairy_weapon/root"                  )                    ::write();
 	Achievement::new("lilagium_scythe"       ; "lilagiumScythe"     )::parent("fairy_weapon/miragium_scythe"       )                    ::write();
@@ -135,7 +136,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	Achievement::new("light_magic_wand"      ; "magicWandLight"     )::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
 	Achievement::new("collecting_magic_wand" ; "magicWandCollecting")::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
 	Achievement::new("lightning_magic_wand"  ; "magicWandLightning" )::parent("fairy_weapon/magic_wand_base"       )::frame("goal"     )::write();
-	Achievement::new("crystal_sword"         ; "crystalSword"       )::parent("fairy_weapon/miragium_sword"        )::frame("goal"     )::write();
 
 	Achievement::new("ryugyo_drill"          ; "ryugyoDrill"        )::parent("fairy_weapon/root"                  )::frame("goal"     )::write();
 
