@@ -3,6 +3,7 @@ package miragefairy2019.mod3.fairy
 import miragefairy2019.libkt.TextComponentBuilder
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
+import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.api.fairy.IItemFairy
@@ -12,7 +13,6 @@ import miragefairy2019.mod.lib.ItemVariant
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.mana.api.EnumManaType
-import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.mana.textColor
 import mirrg.boron.util.UtilsString
@@ -90,7 +90,11 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
             text("マナ: ").color(AQUA) // TODO translate
         }
         if (flag.isAdvanced) {
-            fun f(manaType: EnumManaType) = buildText { format("%s:%.3f", manaType.displayName.unformattedText, variant.type.manaSet.getMana(manaType)).color(manaType.textColor) }
+            fun f(manaType: EnumManaType) = textComponent {
+                val raw = variant.type.manaSet.getMana(manaType) / (variant.type.cost / 50.0)
+                val normalized = variant.type.manaSet.getMana(manaType)
+                (format("%.3f", raw) + !" [" + format("%.3f", normalized) + !"]").color(manaType.textColor)
+            }
             tooltip {
                 text("        ")
                 text(f(EnumManaType.SHINE))
@@ -110,7 +114,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
                 text(f(EnumManaType.DARK))
             }
         } else {
-            fun f(manaType: EnumManaType) = buildText { format("%4d", formatInt(variant.type.manaSet.getMana(manaType))).color(manaType.textColor) }
+            fun f(manaType: EnumManaType) = textComponent { format("%4d", formatInt(variant.type.manaSet.getMana(manaType) / (variant.type.cost / 50.0))).color(manaType.textColor) }
             tooltip {
                 text("    ")
                 text(f(EnumManaType.SHINE))
@@ -149,9 +153,12 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
                     .filter { formatInt(it.power) >= 10 }
                     .sortedByDescending { it.power }
                     .map {
-                        buildText {
-                            text(it.type.displayName)
-                            if (flag.isAdvanced) format("(%.3f)", it.power)
+                        textComponent {
+                            if (flag.isAdvanced) {
+                                !it.type.displayName + format("(%.3f [%.3f])", it.power, it.power * (variant.type.cost / 50.0))
+                            } else {
+                                !it.type.displayName
+                            }
                         }
                     }
                     .sandwich(buildText { text(", ") })
