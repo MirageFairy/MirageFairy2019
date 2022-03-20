@@ -25,7 +25,7 @@ interface MagicStatusContainer {
 }
 
 class FormulaScope(private val formulaArguments: FormulaArguments) {
-    operator fun EnumManaType.not() = formulaArguments.getMana(this)
+    operator fun EnumManaType.unaryPlus() = formulaArguments.getMana(this)
     operator fun EnumErgType.not() = formulaArguments.getErg(this)
 
     /** @return コストによる補正を受けないマナの値 */

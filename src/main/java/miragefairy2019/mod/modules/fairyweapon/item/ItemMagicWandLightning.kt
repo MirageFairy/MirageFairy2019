@@ -38,14 +38,14 @@ import miragefairy2019.mod3.erg.api.EnumErgType as Erg
 import miragefairy2019.mod3.mana.api.EnumManaType as Mana
 
 class ItemMagicWandLightning : ItemFairyWeaponMagic4() {
-    val damage = status("damage", { 4.0 * costFactor + (!Mana.WIND + +Erg.THUNDER) / 10.0 }, { float2 })
+    val damage = status("damage", { 4.0 * costFactor + (+Mana.WIND + +Erg.THUNDER) / 10.0 }, { float2 })
     val damageBoost = status("damageBoost", { 1.0 + !EnumMastery.magicCombat / 100.0 }, { percent0 })
     val criticalRate = status("criticalRate", { CriticalRate(0.0, 0.0, 0.0, 7.0, 2.0, 1.0, 0.0, 0.0) }, { criticalRate })
-    val additionalReach = status("additionalReach", { 5.0 + (!Mana.AQUA + +Erg.LIGHT) / 10.0 atMost 30.0 }, { float2 })
-    val radius = status("radius", { 1.0 + (!Mana.GAIA + +Erg.FLAME) / 20.0 atMost 10.0 }, { float2 })
-    val looting = status("looting", { 0.0 + (!Mana.SHINE + +Erg.KNOWLEDGE) / 50.0 }, { float2 })
-    val wear = status("wear", { (1.0 * costFactor) / (1.0 + (!Mana.FIRE + +Erg.FREEZE) / 20.0) * (cost / 50.0) }, { percent2 })
-    val coolTime = status("coolTime", { (40.0 * costFactor) / (1.0 + (!Mana.DARK + +Erg.ENERGY) / 50.0) }, { duration })
+    val additionalReach = status("additionalReach", { 5.0 + (+Mana.AQUA + +Erg.LIGHT) / 10.0 atMost 30.0 }, { float2 })
+    val radius = status("radius", { 1.0 + (+Mana.GAIA + +Erg.FLAME) / 20.0 atMost 10.0 }, { float2 })
+    val looting = status("looting", { 0.0 + (+Mana.SHINE + +Erg.KNOWLEDGE) / 50.0 }, { float2 })
+    val wear = status("wear", { (1.0 * costFactor) / (1.0 + (+Mana.FIRE + +Erg.FREEZE) / 20.0) * (cost / 50.0) }, { percent2 })
+    val coolTime = status("coolTime", { (40.0 * costFactor) / (1.0 + (+Mana.DARK + +Erg.ENERGY) / 50.0) }, { duration })
     val lightning = status("lightning", { !Erg.THUNDER >= 10.0 }, { boolean.positive })
 
     @SideOnly(Side.CLIENT)
