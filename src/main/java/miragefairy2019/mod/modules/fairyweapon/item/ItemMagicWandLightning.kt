@@ -82,8 +82,6 @@ class ItemMagicWandLightning : ItemFairyWeaponMagic4() {
             }
 
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
-                if (world.isRemote) return EnumActionResult.SUCCESS
-
                 val actualDamage = damage() * damageBoost() * criticalRate().get(world.rand).coefficient // ダメージ計算
 
                 // 効果
