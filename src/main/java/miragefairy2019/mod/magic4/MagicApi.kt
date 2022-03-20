@@ -1,4 +1,4 @@
-package miragefairy2019.mod.magic4.api
+package miragefairy2019.mod.magic4
 
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponMagic4
 import net.minecraft.entity.EntityLivingBase

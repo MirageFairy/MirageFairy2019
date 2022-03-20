@@ -1,4 +1,4 @@
-package miragefairy2019.mod.magic4.api
+package miragefairy2019.mod.magic4
 
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.mana.api.EnumManaType
