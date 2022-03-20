@@ -3,9 +3,11 @@ package miragefairy2019.mod.modules.fairyweapon.item
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.itemStacks
 import miragefairy2019.libkt.orNull
+import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod3.fairy.api.IFairyType
 import mirrg.kotlin.castOrNull
+import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
@@ -15,6 +17,7 @@ import net.minecraft.util.SoundEvent
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
+import net.minecraft.world.WorldServer
 
 fun playSound(world: World, player: EntityPlayer, soundEvent: SoundEvent, volume: Float = 1.0f, pitch: Float = 1.0f) {
     world.playSound(null, player.posX, player.posY, player.posZ, soundEvent, SoundCategory.PLAYERS, volume, pitch)
@@ -41,6 +44,41 @@ fun <T> spawnParticleTargets(
                 (color shr 0 and 0xFF) / 255.0
             )
         }
+    }
+}
+
+fun spawnDamageParticle(world: WorldServer, entity: Entity, damage: Double) {
+    val count = world.rand.randomInt(damage / 2.0)
+    if (count > 0) {
+        world.spawnParticle(
+            EnumParticleTypes.DAMAGE_INDICATOR,
+            entity.posX,
+            entity.posY + entity.height * 0.5,
+            entity.posZ, count,
+            0.1, 0.0, 0.1,
+            0.2
+        )
+    }
+}
+
+fun spawnMagicParticle(world: WorldServer, player: EntityPlayer, target: Entity) = spawnMagicParticle(world, player, target.positionVector.addVector(0.0, (target.height / 2).toDouble(), 0.0))
+fun spawnMagicParticle(world: WorldServer, player: EntityPlayer, end: Vec3d) {
+    val start = Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ).add(player.lookVec.scale(2.0))
+    val delta = end.subtract(start)
+
+    val distance = start.distanceTo(end)
+
+    repeat((distance * 4.0).toInt()) { i ->
+        val pos = start.add(delta.scale(i / (distance * 4.0)))
+        world.spawnParticle(
+            EnumParticleTypes.ENCHANTMENT_TABLE,
+            pos.x + (world.rand.nextDouble() - 0.5) * 0.2,
+            pos.y + (world.rand.nextDouble() - 0.5) * 0.2,
+            pos.z + (world.rand.nextDouble() - 0.5) * 0.2,
+            0,
+            0.0, 0.0, 0.0,
+            0.0
+        )
     }
 }
 

@@ -18,18 +18,14 @@ import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged
 import miragefairy2019.mod3.skill.EnumMastery
 import mirrg.kotlin.atMost
 import mirrg.kotlin.castOrNull
-import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.effect.EntityLightningBolt
 import net.minecraft.entity.monster.EntityCreeper
-import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
-import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.SoundCategory
-import net.minecraft.util.math.Vec3d
 import net.minecraft.world.WorldServer
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -108,40 +104,5 @@ class ItemMagicWandLightning : ItemFairyWeaponMagic4() {
                 return EnumActionResult.SUCCESS
             }
         }
-    }
-}
-
-fun spawnDamageParticle(world: WorldServer, entity: Entity, damage: Double) {
-    val count = world.rand.randomInt(damage / 2.0)
-    if (count > 0) {
-        world.spawnParticle(
-            EnumParticleTypes.DAMAGE_INDICATOR,
-            entity.posX,
-            entity.posY + entity.height * 0.5,
-            entity.posZ, count,
-            0.1, 0.0, 0.1,
-            0.2
-        )
-    }
-}
-
-fun spawnMagicParticle(world: WorldServer, player: EntityPlayer, target: Entity) = spawnMagicParticle(world, player, target.positionVector.addVector(0.0, (target.height / 2).toDouble(), 0.0))
-fun spawnMagicParticle(world: WorldServer, player: EntityPlayer, end: Vec3d) {
-    val start = Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ).add(player.lookVec.scale(2.0))
-    val delta = end.subtract(start)
-
-    val distance = start.distanceTo(end)
-
-    repeat((distance * 4.0).toInt()) { i ->
-        val pos = start.add(delta.scale(i / (distance * 4.0)))
-        world.spawnParticle(
-            EnumParticleTypes.ENCHANTMENT_TABLE,
-            pos.x + (world.rand.nextDouble() - 0.5) * 0.2,
-            pos.y + (world.rand.nextDouble() - 0.5) * 0.2,
-            pos.z + (world.rand.nextDouble() - 0.5) * 0.2,
-            0,
-            0.0, 0.0, 0.0,
-            0.0
-        )
     }
 }
