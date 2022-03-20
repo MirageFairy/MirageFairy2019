@@ -26,7 +26,7 @@ object VanillaItemBlocking {
                             Items.ENDER_PEARL,
                             Items.CHORUS_FRUIT
                             -> {
-                                logger.info("Blocked: ${event.itemStack.displayName}(${event.itemStack}) by ${event.entityPlayer.displayName}")
+                                logger.info("Blocked: ${event.itemStack.displayName}(${event.itemStack}) by ${event.entityPlayer.name}(${event.entityPlayer.uniqueID})")
                                 event.isCanceled = true
                                 event.entityLiving.castOrNull<EntityPlayer>()?.sendStatusMessage(textComponent { !"このアイテムは使用できません" }, true) // TODO translate
                             }
