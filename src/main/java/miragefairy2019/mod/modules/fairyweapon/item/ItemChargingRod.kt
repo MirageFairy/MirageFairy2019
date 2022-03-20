@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.floor
 
 class ItemChargingRod : ItemFairyWeaponMagic4() {
-    val chargeSpeed = status("chargeSpeed", { 20.0 + -WIND / 5.0 + !THUNDER / 2.0 }, { float2.suffix(" AE/t") })
+    val chargeSpeed = status("chargeSpeed", { 20.0 + !WIND / 5.0 + !THUNDER / 2.0 }, { float2.suffix(" AE/t") })
     val speedBoost = status("speedBoost", { 1.0 + !EnumMastery.processing / 100.0 }, { percent0 })
 
     @SideOnly(Side.CLIENT)

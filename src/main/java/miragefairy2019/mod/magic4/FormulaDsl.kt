@@ -29,7 +29,7 @@ class FormulaScope(private val formulaArguments: FormulaArguments) {
     operator fun EnumErgType.not() = formulaArguments.getErg(this)
 
     /** @return コストによる補正を受けないマナの値 */
-    operator fun EnumManaType.unaryMinus() = formulaArguments.getMana(this) / costFactor
+    operator fun EnumManaType.not() = formulaArguments.getMana(this) / costFactor
 
     /** @return コストによる補正を受けたエルグの値 */
     operator fun EnumErgType.unaryPlus() = formulaArguments.getErg(this) * costFactor
