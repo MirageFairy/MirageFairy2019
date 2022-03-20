@@ -37,6 +37,7 @@ class SimpleFormulaArguments(
     private val manaSet: IManaSet,
     private val ergSet: IErgSet,
     override val cost: Double,
+    override val color: Int,
     private val skillContainer: ISkillContainer
 ) : FormulaArguments {
     override fun getRawMana(manaType: EnumManaType) = manaSet.getMana(manaType) / (cost / 50.0)
@@ -73,6 +74,7 @@ val <T> MagicStatus<T>.factors: List<ITextComponent>
             override fun getRawMana(manaType: EnumManaType) = 0.0.also { factorList.add(manaType.displayName) }
             override fun getRawErg(ergType: EnumErgType) = 0.0.also { factorList.add(ergType.displayName) }
             override val cost get() = 0.0.also { factorList.add(textComponent { translate("mirageFairy2019.formula.source.cost.name").darkGray }) }
+            override val color get() = 0x000000
             override fun getSkillLevel(mastery: IMastery) = 0.also { factorList.add(textComponent { (!mastery.displayName).gold }) }
         })
         return factorList.distinctBy { it.unformattedText }

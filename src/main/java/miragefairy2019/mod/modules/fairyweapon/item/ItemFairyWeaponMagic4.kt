@@ -69,6 +69,7 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
 
         override fun getRawErg(ergType: EnumErgType) = partnerFairyType.erg(ergType)
         override val cost get() = partnerFairyType.cost
+        override val color get() = partnerFairyType.color
         override fun getSkillLevel(mastery: IMastery) = player.proxy.skillContainer.getSkillLevel(mastery)
         override val weaponItem get() = this@ItemFairyWeaponMagic4
         override val weaponItemStack get() = weaponItemStack

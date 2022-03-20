@@ -10,6 +10,7 @@ interface FormulaArguments {
     fun getRawMana(manaType: EnumManaType): Double
     fun getRawErg(ergType: EnumErgType): Double
     val cost: Double
+    val color: Int
     fun getSkillLevel(mastery: IMastery): Int
 }
 
