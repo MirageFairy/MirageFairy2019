@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.module
 import net.minecraftforge.common.config.Configuration
 
@@ -26,4 +27,5 @@ private class ConfigPropertyHandler<T : Any>(private val propertySelector: (Conf
     override fun invoke() = value
 }
 
+/** プロパティは[ModInitializer.onPreInit]よりも後で利用できます。 */
 fun <T : Any> configProperty(propertySelector: (Configuration) -> T): () -> T = ConfigPropertyHandler(propertySelector).also { configProperties += it }
