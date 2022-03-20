@@ -82,6 +82,22 @@ fun spawnMagicParticle(world: WorldServer, player: EntityPlayer, end: Vec3d) {
     }
 }
 
+fun spawnMagicSplashParticle(world: WorldServer, position: Vec3d) {
+    repeat(5) { i ->
+        world.spawnParticle(
+            EnumParticleTypes.SPELL_INSTANT,
+            position.x,
+            position.y,
+            position.z,
+            10,
+            (world.rand.nextDouble() - 0.5) * 2.0,
+            (world.rand.nextDouble() - 0.5) * 2.0,
+            (world.rand.nextDouble() - 0.5) * 2.0,
+            0.0
+        )
+    }
+}
+
 
 /** メインハンド、オフハンド、最下段のインベントリスロット、最下段以外のインベントリスロットの順に所持アイテムを返します。 */
 val EntityPlayer.inventoryItems get() = listOf(getHeldItem(EnumHand.MAIN_HAND), getHeldItem(EnumHand.OFF_HAND)) + inventory.itemStacks
