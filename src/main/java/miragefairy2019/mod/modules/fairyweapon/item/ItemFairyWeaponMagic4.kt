@@ -19,6 +19,7 @@ import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.erg
 import miragefairy2019.mod3.mana.api.EnumManaType
+import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.mana.plus
 import miragefairy2019.mod3.mana.times
@@ -59,22 +60,19 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
 
     fun getMagicArguments(player: EntityPlayer, weaponItemStack: ItemStack, partnerFairyType: IFairyType) = object : MagicArguments {
         override val hasPartnerFairy: Boolean get() = !partnerFairyType.isEmpty
-        override fun getRawMana(manaType: EnumManaType) = getNormalizedMana(manaType) / costFactor
-        override fun getNormalizedMana(manaType: EnumManaType): Double {
-            val a = partnerFairyType.manaSet // パートナー妖精のマナ
-            val b = a + player.proxy.playerAuraHandler.playerAura * (partnerFairyType.cost / 50.0) // 標準化プレイヤーオーラの加算
+        override fun getRawMana(manaType: EnumManaType): Double {
+            val a = partnerFairyType.manaSet / (cost / 50.0) // パートナー妖精のマナ
+            val b = a + player.proxy.playerAuraHandler.playerAura // プレイヤーオーラの加算
             val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(EnumMastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
             return c.getMana(manaType)
         }
 
         override fun getRawErg(ergType: EnumErgType) = partnerFairyType.erg(ergType)
-        override fun getNormalizedErg(ergType: EnumErgType) = partnerFairyType.erg(ergType) * costFactor
         override val cost get() = partnerFairyType.cost
         override fun getSkillLevel(mastery: IMastery) = player.proxy.skillContainer.getSkillLevel(mastery)
         override val weaponItem get() = this@ItemFairyWeaponMagic4
         override val weaponItemStack get() = weaponItemStack
         override val player get() = player
-        private val costFactor get() = cost / 50.0
     }
 
     final override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {

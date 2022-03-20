@@ -1,6 +1,5 @@
 package miragefairy2019.mod.formula4
 
-import miragefairy2019.libkt.color
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
@@ -11,12 +10,10 @@ import miragefairy2019.mod.magic4.MagicStatus
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.erg.displayName
-import miragefairy2019.mod3.erg.textColor
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.mana.getMana
-import miragefairy2019.mod3.mana.textColor
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.api.ISkillContainer
 import miragefairy2019.mod3.skill.displayName
@@ -29,9 +26,7 @@ interface MagicStatusContainer {
 
 class FormulaScope(private val formulaArguments: FormulaArguments) {
     operator fun EnumManaType.not() = formulaArguments.getRawMana(this)
-    operator fun EnumManaType.unaryPlus() = formulaArguments.getNormalizedMana(this)
     operator fun EnumErgType.not() = formulaArguments.getRawErg(this)
-    operator fun EnumErgType.unaryPlus() = formulaArguments.getNormalizedErg(this)
     operator fun IMastery.not() = formulaArguments.getSkillLevel(this)
     val cost get() = formulaArguments.cost
     val costFactor get() = cost / 50.0
@@ -44,12 +39,9 @@ class SimpleFormulaArguments(
     override val cost: Double,
     private val skillContainer: ISkillContainer
 ) : FormulaArguments {
-    override fun getRawMana(manaType: EnumManaType) = manaSet.getMana(manaType) / costFactor
-    override fun getNormalizedMana(manaType: EnumManaType) = manaSet.getMana(manaType)
+    override fun getRawMana(manaType: EnumManaType) = manaSet.getMana(manaType) / (cost / 50.0)
     override fun getRawErg(ergType: EnumErgType) = ergSet.getPower(ergType)
-    override fun getNormalizedErg(ergType: EnumErgType) = ergSet.getPower(ergType) * costFactor
     override fun getSkillLevel(mastery: IMastery) = skillContainer.getSkillLevel(mastery)
-    private val costFactor get() = cost / 50.0
 }
 
 class FormulaRendererSelector<T>
@@ -79,9 +71,7 @@ val <T> MagicStatus<T>.factors: List<ITextComponent>
         formula.calculate(object : FormulaArguments {
             override val hasPartnerFairy: Boolean get() = true
             override fun getRawMana(manaType: EnumManaType) = 0.0.also { factorList.add(manaType.displayName) }
-            override fun getNormalizedMana(manaType: EnumManaType) = 0.0.also { factorList.add(textComponent { (!"[" + !manaType.displayName + !"]").color(manaType.textColor) }) }
             override fun getRawErg(ergType: EnumErgType) = 0.0.also { factorList.add(ergType.displayName) }
-            override fun getNormalizedErg(ergType: EnumErgType) = 0.0.also { factorList.add(textComponent { (!"[" + !ergType.displayName + !"]").color(ergType.textColor) }) }
             override val cost get() = 0.0.also { factorList.add(textComponent { translate("mirageFairy2019.formula.source.cost.name").darkGray }) }
             override fun getSkillLevel(mastery: IMastery) = 0.also { factorList.add(textComponent { (!mastery.displayName).gold }) }
         })
