@@ -125,9 +125,9 @@ fun spawnDamageParticle(world: WorldServer, entity: Entity, damage: Double) {
     }
 }
 
-fun spawnMagicParticle(world: WorldServer, player: EntityPlayer, target: Entity) {
+fun spawnMagicParticle(world: WorldServer, player: EntityPlayer, target: Entity) = spawnMagicParticle(world, player, target.positionVector.addVector(0.0, (target.height / 2).toDouble(), 0.0))
+fun spawnMagicParticle(world: WorldServer, player: EntityPlayer, end: Vec3d) {
     val start = Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ).add(player.lookVec.scale(2.0))
-    val end = target.positionVector.addVector(0.0, (target.height / 2).toDouble(), 0.0)
     val delta = end.subtract(start)
 
     val distance = start.distanceTo(end)
