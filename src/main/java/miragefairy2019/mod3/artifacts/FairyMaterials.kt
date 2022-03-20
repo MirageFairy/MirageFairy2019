@@ -81,6 +81,7 @@ object FairyMaterials {
             r("mirageFairyLeather", "Fairy Leather", "妖精の革", "エーテルグラウンド")
             r("fairyWoodResin", "Fairy Wood Resin", "妖精の木の樹液", "くちどけまろやか")
             r("sphereBase", "Sphere Base", "スフィアベース", "前世が見える。              （らしい）")
+            r("fairySyrup", "Fairy Syrup", "妖精のシロップ", "爽やかで心が洗われるような「水色」の香り")
         }
 
         // レシピ
@@ -251,6 +252,7 @@ object FairyMaterials {
         val mirageFairyLeather = iv(14, "mirage_fairy_leather", "mirageFairyLeather", 4, listOf("mirageFairyLeather"))
         val fairyWoodResin = iv(15, "fairy_wood_resin", "fairyWoodResin", 4, listOf("mirageFairyWoodResin")).fuel(1600)
         val sphereBase = iv(16, "sphere_base", "sphereBase", 3, listOf("mirageFairy2019SphereBase"))
+        val fairySyrup = iv(17, "fairy_syrup", "fairySyrup", 4, listOf("mirageFairySyrup"))
     }
 }
 

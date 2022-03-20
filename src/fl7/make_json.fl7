@@ -380,6 +380,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	item("mirage_fairy_leather");
 	item("fairy_wood_resin");
 	item("sphere_base");
+	item("fairy_syrup");
 
 	# ポット
 	item("pot");
