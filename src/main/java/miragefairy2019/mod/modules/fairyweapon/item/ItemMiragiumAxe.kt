@@ -46,11 +46,11 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
 class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
-    val additionalReach = status("additionalReach", { 0.0 + (!WIND + !LEVITATE) / 10.0 atMost 30.0 }, { float2 })
-    val range = status("range", { (3.0 + (!GAIA + !HARVEST) / 5.0).toInt() atMost 100 }, { integer })
     val power = status("power", { 27.0 + (!DARK + !DESTROY) / 1.0 }, { float2 })
     val breakSpeed = status("breakSpeed", { (2.0 + (!AQUA + !SLASH) / 30.0) * costFactor }, { float2 })
     val speedBoost = status("speedBoost", { 1.0 + !EnumMastery.lumbering / 100.0 }, { percent0 })
+    val additionalReach = status("additionalReach", { 0.0 + (!WIND + !LEVITATE) / 10.0 atMost 30.0 }, { float2 })
+    val range = status("range", { (3.0 + (!GAIA + !HARVEST) / 5.0).toInt() atMost 100 }, { integer })
     val fortune = status("fortune", { 0.0 + (!SHINE + !LIFE) / 20.0 }, { float2 })
     val wear = status("wear", { 0.1 / (1.0 + (!FIRE + !CRAFT) / 20.0) * costFactor }, { percent2 })
     val collection = status("collection", { !WARP >= 10 }, { boolean.positive })
