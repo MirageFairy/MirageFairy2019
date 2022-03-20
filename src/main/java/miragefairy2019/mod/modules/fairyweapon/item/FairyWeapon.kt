@@ -98,7 +98,7 @@ object FairyWeapon {
 
         val miragiumAxe = fw(2, { ItemMiragiumAxe() }, "miragium_axe", "miragiumAxe", listOf(), null, !SLASH, !HARVEST, !"plateMiragium")
 
-        val magicWandBase = fw(3, { ItemFairyWeapon() }, "magic_wand_base", "magicWandBase", listOf(), null, !KNOWLEDGE)
+        val magicWandBase = fw(3, { ItemRodBase() }, "magic_wand_base", "magicWandBase", listOf(), null, !KNOWLEDGE)
         val magicWandLight = fw(3, { ItemMagicWandLight() }, "light_magic_wand", "magicWandLight", listOf(), magicWandBase, !LIGHT)
         val magicWandCollecting = fw(3, { ItemMagicWandCollecting() }, "collecting_magic_wand", "magicWandCollecting", listOf(), magicWandBase, !WARP)
         val chargingRod = fw(3, { ItemChargingRod() }, "charging_rod", "chargingRod", listOf(), magicWandBase, !THUNDER, !WARP, !"ingotGold")
