@@ -21,7 +21,7 @@ import miragefairy2019.mod3.erg.api.EnumErgType as Erg
 import miragefairy2019.mod3.mana.api.EnumManaType as Mana
 
 class ItemRodBase : ItemFairyWeaponMagic4() {
-    val additionalReach = status("additionalReach", { 5.0 + (!Mana.WIND + !Erg.KNOWLEDGE) / 4.0 atMost 50.0 }, { float2 })
+    val additionalReach = status("additionalReach", { 10.0 + (!Mana.WIND + !Erg.LEVITATE) / 5.0 atMost 50.0 }, { float2 })
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックで魔法エフェクト" // TODO translate
@@ -36,7 +36,8 @@ class ItemRodBase : ItemFairyWeaponMagic4() {
 
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
                 if (!world.isRemote) {
-                    world.castOrNull<WorldServer>()?.let { spawnMagicParticle(it, player, magicSelectorPosition.position) } // 魔法のエフェクト
+                    world.castOrNull<WorldServer>()?.let { spawnMagicParticle(it, player, magicSelectorPosition.position) } // 線状パーティクル
+                    world.castOrNull<WorldServer>()?.let { spawnMagicSplashParticle(it, magicSelectorPosition.position) } // スプラッシュパーティクル
                     world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.PLAYERS, 1.0f, 1.0f) // 魔法のSE
                 }
                 if (world.isRemote) player.swingArm(hand) // 腕を振る
