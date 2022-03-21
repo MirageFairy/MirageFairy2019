@@ -181,7 +181,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 			writer::write("$name.json"; {
 				parent = "miragefairy2019:block/overlay_block";
 				textures = {
-					particle = "blocks/stone";
+					particle = base;
 					base = base;
 					overlay = "miragefairy2019:$overlay";
 				};

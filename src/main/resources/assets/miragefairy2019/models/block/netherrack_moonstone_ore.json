@@ -1,7 +1,7 @@
 {
 	"parent": "miragefairy2019:block/overlay_block",
 	"textures": {
-		"particle": "blocks/stone",
+		"particle": "blocks/netherrack",
 		"base": "blocks/netherrack",
 		"overlay": "miragefairy2019:blocks/moonstone_ore"
 	}
