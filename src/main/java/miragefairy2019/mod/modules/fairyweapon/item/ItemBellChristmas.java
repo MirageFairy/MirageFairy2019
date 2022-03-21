@@ -274,7 +274,7 @@ public class ItemBellChristmas extends ItemBellBase2 {
                 if (targetCount >= 1) {
 
                     // エフェクト
-                    ItemBellBase.playSound(world, player, pitch.get(fairyType));
+                    ItemBellBase2.playSound(world, player, pitch.get(fairyType));
 
                     // クールタイム
                     player.getCooldownTracker().setCooldown(item, (int) (double) coolTime.get(fairyType));
