@@ -138,6 +138,8 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	Achievement::new("charging_rod"          ; "chargingRod"        )::parent("fairy_weapon/magic_wand_base"       )                    ::write();
 	Achievement::new("lightning_magic_wand"  ; "magicWandLightning" )::parent("fairy_weapon/charging_rod"          )::frame("goal"     )::write();
 
+	Achievement::new("gravity_rod"           ; "gravityRod"         )::parent("fairy_weapon/root"                  )::frame("goal"     )::write();
+
 	Achievement::new("ryugyo_drill"          ; "ryugyoDrill"        )::parent("fairy_weapon/root"                  )::frame("goal"     )::write();
 
 );
@@ -473,6 +475,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	fairyWeapon("crystal_sword");
 	fairyWeapon("ryugyo_drill");
 	fairyWeapon("lilagium_scythe");
+	fairyWeapon("gravity_rod");
 
 	layered("fairy"; [0 .. 4 | "fairy_layer$_"]);
 	layered("sphere"; [0 .. 3 | "sphere_layer$_"]);

@@ -33,6 +33,7 @@ import miragefairy2019.mod3.erg.api.EnumErgType.LIFE
 import miragefairy2019.mod3.erg.api.EnumErgType.LIGHT
 import miragefairy2019.mod3.erg.api.EnumErgType.SLASH
 import miragefairy2019.mod3.erg.api.EnumErgType.SOUND
+import miragefairy2019.mod3.erg.api.EnumErgType.SPACE
 import miragefairy2019.mod3.erg.api.EnumErgType.THUNDER
 import miragefairy2019.mod3.erg.api.EnumErgType.WARP
 import miragefairy2019.mod3.erg.api.EnumErgType.WATER
@@ -104,6 +105,8 @@ object FairyWeapon {
         val chargingRod = fw(3, { ItemChargingRod() }, "charging_rod", "chargingRod", listOf(), magicWandBase, !THUNDER, !WARP, !"ingotGold")
         val magicWandLightning = fw(3, { ItemMagicWandLightning() }, "lightning_magic_wand", "magicWandLightning", listOf(), chargingRod, !ENERGY, !"blockMirageFairyCrystalPure")
 
+        val gravityRod = fw(4, { ItemGravityRod() }, "gravity_rod", "gravityRod", listOf(), null, !KNOWLEDGE, !SPACE, !"gemCinnabar", !"obsidian")
+
         val ocarinaBase = fw(3, { ItemFairyWeapon() }, "ocarina_base", "ocarinaBase", listOf(), null, !SOUND)
         val ocarinaTemptation = fw(3, { ItemOcarinaTemptation() }, "temptation_ocarina", "ocarinaTemptation", listOf(), ocarinaBase, !LIFE)
         val bellBase = fw(2, { ItemBellBase() }, "bell_base", "bellBase", listOf(), null, !SOUND)
@@ -136,6 +139,8 @@ object FairyWeapon {
             enJa("item.chargingRod.poem", "", "電気の力で栄えた文明があったという")
             enJa("item.magicWandLightning.name", "Magic Wand of Lightning", "ライトニングロッド")
             enJa("item.magicWandLightning.poem", "", "古代魔法「ライトニングボルト」")
+            enJa("item.gravityRod.name", "Gravity Rod", "グラビティロッド")
+            enJa("item.gravityRod.poem", "", "局所エーテル超球面歪曲技術")
             enJa("item.ocarinaBase.name", "Ocarina Base", "オカリナベース")
             enJa("item.ocarinaBase.poem", "", "適当に吹いても音楽になる笛")
             enJa("item.ocarinaTemptation.name", "Ocarina of Temptation", "魅惑のオカリナ")
@@ -202,6 +207,30 @@ object FairyWeapon {
                 ),
                 result = DataResult(
                     item = "miragefairy2019:lightning_magic_wand"
+                )
+            )
+        )
+
+        // グラビティロッド
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "gravity_rod"),
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cOs",
+                    "oRO",
+                    "kof"
+                ),
+                key = mapOf(
+                    "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodFire"),
+                    "k" to DataOreIngredient(ore = "mirageFairy2019SphereKnowledge"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace"),
+                    "o" to DataOreIngredient(ore = "obsidian"),
+                    "O" to DataOreIngredient(ore = "container1000MirageFlowerOil"),
+                    "c" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandCrafting"),
+                    "f" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandFusion")
+                ),
+                result = DataResult(
+                    item = "miragefairy2019:gravity_rod"
                 )
             )
         )

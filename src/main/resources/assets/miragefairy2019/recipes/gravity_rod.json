@@ -1,0 +1,42 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cOs",
+    "oRO",
+    "kof"
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019ManaRodFire"
+    },
+    "k": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereKnowledge"
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereSpace"
+    },
+    "o": {
+      "type": "forge:ore_dict",
+      "ore": "obsidian"
+    },
+    "O": {
+      "type": "forge:ore_dict",
+      "ore": "container1000MirageFlowerOil"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "f": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandFusion"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:gravity_rod",
+    "count": 1
+  }
+}
