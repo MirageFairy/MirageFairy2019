@@ -20,6 +20,7 @@ import miragefairy2019.mod.modules.fairyweapon.item.FairyWeaponUtils
 import miragefairy2019.mod3.artifacts.fairycrystal.DropCategory
 import miragefairy2019.mod3.artifacts.fairycrystal.FairyCrystalDropper
 import miragefairy2019.mod3.artifacts.fairycrystal.ItemFairyCrystal
+import miragefairy2019.mod3.artifacts.fairycrystal.getRateBoost
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe

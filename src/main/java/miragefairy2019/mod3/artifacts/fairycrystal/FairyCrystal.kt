@@ -180,14 +180,9 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
     }
 }
 
-class VariantFairyCrystal(
-    val unlocalizedName: String,
-    val dropRank: Int,
-    private val dropCategory: DropCategory,
-    private val rateBoost: Double
-) : ItemVariant() {
-    fun getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = when (dropCategory) {
-        this.dropCategory -> rateBoost * (1.0 + skillContainer.getSkillLevel(EnumMastery.fairySummoning) * 0.01)
-        else -> 1.0
-    }
+class VariantFairyCrystal(val unlocalizedName: String, val dropRank: Int, val dropCategory: DropCategory, val rateBoost: Double) : ItemVariant()
+
+fun VariantFairyCrystal.getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = when (dropCategory) {
+    this.dropCategory -> rateBoost * (1.0 + skillContainer.getSkillLevel(EnumMastery.fairySummoning) * 0.01)
+    else -> 1.0
 }
