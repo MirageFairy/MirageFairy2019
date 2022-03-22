@@ -23,9 +23,7 @@ import net.minecraft.world.World
 import net.minecraft.world.biome.Biome
 import net.minecraftforge.common.BiomeDictionary
 
-abstract class FairyCrystalDropper {
-    /** このメソッドはサーバーワールドのスレッドからしか呼び出せません。 */
-    abstract val dropList: List<IRightClickDrop>
+object FairyCrystalDropper {
 
     /** このメソッドはサーバーワールドのスレッドからしか呼び出せません。 */
     fun getDropTable(
@@ -93,7 +91,7 @@ abstract class FairyCrystalDropper {
 
 
         // リスト作成
-        val dropTable = dropList
+        val dropTable = ApiFairyCrystal.dropsFairyCrystal
             .filter { entry ->
                 when {
                     entry.testUseItem(player, world, pos, hand, facing, hitX, hitY, hitZ) -> true
@@ -142,4 +140,5 @@ abstract class FairyCrystalDropper {
         commonBoost: Double,
         rareBoost: Double
     ) = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, rank, commonBoost, rareBoost).getRandomItem(world.rand)
+
 }

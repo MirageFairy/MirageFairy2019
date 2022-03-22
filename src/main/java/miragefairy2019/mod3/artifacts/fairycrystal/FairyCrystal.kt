@@ -142,11 +142,6 @@ abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName
     open val dropRank get() = 0
     open fun getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = 1.0
 
-    val dropper
-        get() = object : FairyCrystalDropper() {
-            override val dropList get() = ApiFairyCrystal.dropsFairyCrystal
-        }
-
     fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         val crystalItemStack = player.getHeldItem(hand).orNull ?: return EnumActionResult.PASS // アイテムが消えた場合は中止
         if (world.isRemote) return EnumActionResult.SUCCESS // サーバースレッドのみ
@@ -157,7 +152,7 @@ abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName
         if (!player.isSneaking) {
 
             // ガチャを引く
-            val resultItemStack = dropper.drop(player, world, pos, hand, facing, hitX, hitY, hitZ, dropRank, commonBoost, rareBoost)?.orNull ?: return EnumActionResult.SUCCESS
+            val resultItemStack = FairyCrystalDropper.drop(player, world, pos, hand, facing, hitX, hitY, hitZ, dropRank, commonBoost, rareBoost)?.orNull ?: return EnumActionResult.SUCCESS
 
             // ガチャ成立
 
@@ -173,7 +168,7 @@ abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName
         } else {
 
             // ガチャリスト取得
-            val dropTable = dropper.getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, dropRank, commonBoost, rareBoost)
+            val dropTable = FairyCrystalDropper.getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, dropRank, commonBoost, rareBoost)
 
 
             // 表示
