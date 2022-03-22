@@ -133,4 +133,4 @@ abstract class FairyCrystalDropper {
         rank: Int,
         rareBoost: Double
     ) = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, rank, rareBoost).getRandomItem(world.rand)
-
+}
