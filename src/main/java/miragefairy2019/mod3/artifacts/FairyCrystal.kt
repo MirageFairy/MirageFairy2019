@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.artifacts.fairycrystal
+package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
@@ -24,6 +24,8 @@ import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
+import miragefairy2019.mod3.artifacts.fairycrystal.DropCategory
+import miragefairy2019.mod3.artifacts.fairycrystal.FairyCrystalDropper
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.ApiSkill
@@ -105,7 +107,6 @@ object FairyCrystal {
                 "pure_fairy_crystal", "fairyCrystalPure", "mirageFairyCrystalPure",
                 "Pure Fairy Crystal", "高純度フェアリークリスタル",
                 RecipeParameter("blockMirageFairyCrystal", "Polishing")
-            )
             )
 
         }

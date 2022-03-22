@@ -39,5 +39,6 @@ object Artifacts {
         VanillaOreNames.module(this)
         Wand.module(this)
         VanillaItemBlocking.module(this)
+        FairyCrystal.module(this)
     }
 }
