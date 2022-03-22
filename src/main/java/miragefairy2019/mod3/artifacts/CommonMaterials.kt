@@ -3,8 +3,14 @@ package miragefairy2019.mod3.artifacts
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.DataItemModel
+import miragefairy2019.libkt.DataOrIngredient
+import miragefairy2019.libkt.DataOreIngredient
+import miragefairy2019.libkt.DataResult
+import miragefairy2019.libkt.DataShapelessRecipe
+import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.MakeItemVariantModelScope
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.createItemStack
@@ -16,6 +22,7 @@ import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.makeItemVariantModel
+import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.setCreativeTab
@@ -65,6 +72,82 @@ object CommonMaterials {
     lateinit var blockMaterials1: () -> BlockMaterials<EnumVariantMaterials1>
     lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<EnumVariantMaterials1>
     val module = module {
+
+        // 素材レシピ
+
+        // Tier 2 金鉱石 -> 金
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "gold_ore_smelt_tier_2"),
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandBreaking"),
+                    DataSimpleIngredient(item = "minecraft:gold_ore")
+                ),
+                result = DataResult(
+                    item = "minecraft:gold_nugget",
+                    count = 17
+                )
+            )
+        )
+
+        // Tier 2 鉄鉱石 -> 鉄
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "iron_ore_smelt_tier_2"),
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandBreaking"),
+                    DataSimpleIngredient(item = "minecraft:iron_ore")
+                ),
+                result = DataResult(
+                    item = "minecraft:iron_nugget",
+                    count = 17
+                )
+            )
+        )
+
+        // Tier 2 磁鉄鉱の粉 -> 鉄
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "magnetite_smelt_tier_2"),
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
+                    DataOrIngredient(
+                        DataOreIngredient(ore = "dustCoal"),
+                        DataOreIngredient(ore = "dustCharcoal")
+                    ),
+                    DataOreIngredient(ore = "dustMagnetite")
+                ),
+                result = DataResult(
+                    item = "minecraft:iron_nugget",
+                    count = 3
+                )
+            )
+        )
+
+        // Tier 4 磁鉄鉱の粉 -> 鉄
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "magnetite_smelt_tier_4"),
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandDistortion"),
+                    DataOreIngredient(ore = "dustMagnetite"),
+                    DataOreIngredient(ore = "dustMagnetite"),
+                    DataOreIngredient(ore = "dustMagnetite"),
+                    DataOreIngredient(ore = "dustMagnetite"),
+                    DataOreIngredient(ore = "dustMagnetite"),
+                    DataOreIngredient(ore = "dustMagnetite"),
+                    DataOreIngredient(ore = "dustMagnetite")
+                ),
+                result = DataResult(
+                    item = "minecraft:iron_ingot",
+                    count = 3
+                )
+            )
+        )
+
 
         // 鉱石ブロック1
         blockOre1 = block({ BlockOre(EnumVariantOre1.variantList) }, "ore1") {
