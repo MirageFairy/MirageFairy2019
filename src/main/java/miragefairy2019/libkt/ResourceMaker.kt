@@ -89,6 +89,12 @@ class DataSimpleIngredient(
         )
 }
 
+class DataOrIngredient(
+    vararg val ingredients: DataIngredient
+) : DataIngredient() {
+    override val jsonElement get() = ingredients.map { it.jsonElement }.jsonElement
+}
+
 
 class DataResult(
     val item: String,
