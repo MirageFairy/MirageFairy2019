@@ -89,19 +89,19 @@ object FairyCrystal {
             }
 
             variantFairyCrystal = fairyCrystal(
-                0, { VariantFairyCrystalNormal(it, 0, DropCategory.RARE, 1.0) },
+                0, { VariantFairyCrystal(it, 0, DropCategory.RARE, 1.0) },
                 "fairy_crystal", "fairyCrystal", "mirageFairyCrystal",
                 "Fairy Crystal", "フェアリークリスタル",
                 null
             )
             variantFairyCrystalChristmas = fairyCrystal(
-                1, { VariantFairyCrystalNormal(it, 0, DropCategory.RARE, 1.0) },
+                1, { VariantFairyCrystal(it, 0, DropCategory.RARE, 1.0) },
                 "christmas_fairy_crystal", "fairyCrystalChristmas", "mirageFairyCrystalChristmas",
                 "Christmas Fairy Crystal", "聖夜のフェアリークリスタル",
                 null
             )
             variantFairyCrystalPure = fairyCrystal(
-                2, { VariantFairyCrystalNormal(it, 1, DropCategory.RARE, 2.0) },
+                2, { VariantFairyCrystal(it, 1, DropCategory.RARE, 2.0) },
                 "pure_fairy_crystal", "fairyCrystalPure", "mirageFairyCrystalPure",
                 "Pure Fairy Crystal", "高純度フェアリークリスタル",
                 RecipeParameter("blockMirageFairyCrystal", "Polishing")
@@ -180,19 +180,14 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
     }
 }
 
-abstract class VariantFairyCrystal(val unlocalizedName: String) : ItemVariant() {
-    open val dropRank get() = 0
-    open fun getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = 1.0
-}
-
-class VariantFairyCrystalNormal(
-    unlocalizedName: String,
-    override val dropRank: Int,
+class VariantFairyCrystal(
+    val unlocalizedName: String,
+    val dropRank: Int,
     private val dropCategory: DropCategory,
     private val rateBoost: Double
-) : VariantFairyCrystal(unlocalizedName) {
-    override fun getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = when (dropCategory) {
-        dropCategory -> rateBoost * (1.0 + skillContainer.getSkillLevel(EnumMastery.fairySummoning) * 0.01)
-        else -> super.getRateBoost(dropCategory, skillContainer)
+) : ItemVariant() {
+    fun getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = when (dropCategory) {
+        this.dropCategory -> rateBoost * (1.0 + skillContainer.getSkillLevel(EnumMastery.fairySummoning) * 0.01)
+        else -> 1.0
     }
 }
