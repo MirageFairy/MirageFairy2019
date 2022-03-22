@@ -6,6 +6,7 @@ import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.drop
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.item
@@ -69,6 +70,11 @@ object FairyCrystal {
                     OreDictionary.registerOre("mirageFairyCrystalAny", it.createItemStack())
                 }
             }
+        }
+        onMakeLang {
+            enJa("item.fairyCrystal.name", "Fairy Crystal", "フェアリークリスタル")
+            enJa("item.fairyCrystalChristmas.name", "Christmas Fairy Crystal", "聖夜のフェアリークリスタル")
+            enJa("item.fairyCrystalPure.name", "Pure Fairy Crystal", "高純度フェアリークリスタル")
         }
 
         // 高純度フェアリークリスタル
