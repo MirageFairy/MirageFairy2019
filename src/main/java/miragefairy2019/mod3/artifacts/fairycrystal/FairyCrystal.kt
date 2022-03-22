@@ -60,12 +60,12 @@ object FairyCrystal {
             class RecipeParameter(val inputOreName: String, val inputWand: String)
 
             fun fairyCrystal(
-                metadata: Int, creator: (registryName: String, unlocalizedName: String) -> VariantFairyCrystal,
+                metadata: Int, creator: (unlocalizedName: String) -> VariantFairyCrystal,
                 registryName: String, unlocalizedName: String, oreName: String,
                 english: String, japanese: String,
                 recipeParameter: RecipeParameter?
             ): () -> VariantFairyCrystal {
-                return itemVariant(registryName, { creator(registryName, unlocalizedName) }, metadata) {
+                return itemVariant(registryName, { creator(unlocalizedName) }, metadata) {
                     setCustomModelResourceLocation(metadata, model = ResourceLocation(ModMirageFairy2019.MODID, registryName))
                     onCreateItemStack { OreDictionary.registerOre(oreName, itemVariant.createItemStack()) }
                     onCreateItemStack { OreDictionary.registerOre("mirageFairyCrystalAny", itemVariant.createItemStack()) }
@@ -180,14 +180,14 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
     }
 }
 
-abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName: String) : ItemVariant() {
+abstract class VariantFairyCrystal(val unlocalizedName: String) : ItemVariant() {
     open val dropRank get() = 0
     open fun getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = 1.0
 }
 
-class VariantFairyCrystalNormal(registryName: String, unlocalizedName: String) : VariantFairyCrystal(registryName, unlocalizedName)
+class VariantFairyCrystalNormal(unlocalizedName: String) : VariantFairyCrystal(unlocalizedName)
 
-class VariantFairyCrystalPure(registryName: String, unlocalizedName: String) : VariantFairyCrystal(registryName, unlocalizedName) {
+class VariantFairyCrystalPure(unlocalizedName: String) : VariantFairyCrystal(unlocalizedName) {
     override val dropRank get() = 1
     override fun getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = when (dropCategory) {
         DropCategory.RARE -> 2.0 * (1.0 + skillContainer.getSkillLevel(EnumMastery.fairySummoning) * 0.01)
