@@ -1,9 +1,12 @@
 package miragefairy2019.libkt
 
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonElement
 import com.google.gson.annotations.Expose
 import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
+import mirrg.kotlin.gson.jsonElement
+import mirrg.kotlin.gson.jsonElementNotNull
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import java.io.File
@@ -19,50 +22,86 @@ class ResourceMaker(val dirBase: File) {
 fun ResourceMaker.getRecipeFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/recipes/${registryName.path}.json")
 
 fun ModInitializer.makeRecipe(registryName: ResourceName, recipe: DataRecipe) = onMakeResource {
-    getRecipeFile(registryName).place(recipe)
+    getRecipeFile(registryName).place(recipe.jsonElement)
 }
 
 
-abstract class DataRecipe
+abstract class DataRecipe {
+    abstract val jsonElement: JsonElement
+}
 
-data class DataShapedRecipe(
-    @Expose val group: String? = null,
-    @Expose val pattern: List<String>,
-    @Expose val key: Map<String, DataIngredient>,
-    @Expose val result: DataResult
+class DataShapedRecipe(
+    val group: String? = null,
+    val pattern: List<String>,
+    val key: Map<String, DataIngredient>,
+    val result: DataResult
 ) : DataRecipe() {
-    @Expose
     val type = "forge:ore_shaped"
+    override val jsonElement
+        get() = jsonElementNotNull(
+            "type" to type.jsonElement,
+            group?.let { "group" to it.jsonElement },
+            "pattern" to pattern.map { it.jsonElement }.jsonElement,
+            "key" to key.mapValues { it.value.jsonElement }.jsonElement,
+            "result" to result.jsonElement
+        )
 }
 
-data class DataShapelessRecipe(
-    @Expose val group: String? = null,
-    @Expose val ingredients: List<DataIngredient>,
-    @Expose val result: DataResult
+class DataShapelessRecipe(
+    val group: String? = null,
+    val ingredients: List<DataIngredient>,
+    val result: DataResult
 ) : DataRecipe() {
-    @Expose
     val type = "forge:ore_shapeless"
+    override val jsonElement
+        get() = jsonElementNotNull(
+            "type" to type.jsonElement,
+            group?.let { "group" to it.jsonElement },
+            "ingredients" to ingredients.map { it.jsonElement }.jsonElement,
+            "result" to result.jsonElement
+        )
 }
 
 
-abstract class DataIngredient
+abstract class DataIngredient {
+    abstract val jsonElement: JsonElement
+}
 
-data class DataOreIngredient(
-    @Expose val type: String = "forge:ore_dict",
-    @Expose val ore: String
-) : DataIngredient()
+class DataOreIngredient(
+    val type: String = "forge:ore_dict",
+    val ore: String
+) : DataIngredient() {
+    override val jsonElement
+        get() = jsonElement(
+            "type" to type.jsonElement,
+            "ore" to ore.jsonElement
+        )
+}
 
-data class DataSimpleIngredient(
-    @Expose val item: String,
-    @Expose val data: Int? = null
-) : DataIngredient()
+class DataSimpleIngredient(
+    val item: String,
+    val data: Int? = null
+) : DataIngredient() {
+    override val jsonElement
+        get() = jsonElementNotNull(
+            "item" to item.jsonElement,
+            data?.let { "data" to it.jsonElement }
+        )
+}
 
-data class DataResult(
-    @Expose val item: String,
-    @Expose val data: Int? = null,
-    @Expose val count: Int = 1
-)
 
+class DataResult(
+    val item: String,
+    val data: Int? = null,
+    val count: Int = 1
+) {
+    val jsonElement
+        get() = jsonElementNotNull(
+            "item" to item.jsonElement,
+            data?.let { "data" to it.jsonElement },
+            "count" to count.jsonElement
+        )
+}
 
 
 // BlockStates
