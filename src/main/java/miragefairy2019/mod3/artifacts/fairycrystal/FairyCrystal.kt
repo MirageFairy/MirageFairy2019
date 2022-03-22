@@ -128,19 +128,16 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
 
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val variant = getVariant(itemStack) ?: return
-        variant.addInformation(itemStack, world, tooltip, flag)
+        val mastery = EnumMastery.fairySummoning
+        val skillContainer = ApiSkill.skillManager.clientSkillContainer
+        tooltip += formattedText { (!"スキル: " + !mastery.displayName + !" (${skillContainer.getSkillLevel(mastery)})").gold } // TODO translate
+        tooltip += formattedText { (!"ランク: ${variant.dropRank + 1}").blue } // TODO translate
+        tooltip += formattedText { (!"コモン判定ブースト: ${variant.getRateBoost(DropCategory.COMMON, skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
+        tooltip += formattedText { (!"レア判定ブースト: ${variant.getRateBoost(DropCategory.RARE, skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
     }
 }
 
 abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName: String) : ItemVariant() {
-    fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        val mastery = EnumMastery.fairySummoning
-        val skillContainer = ApiSkill.skillManager.clientSkillContainer
-        tooltip += formattedText { (!"スキル: " + !mastery.displayName + !" (${skillContainer.getSkillLevel(mastery)})").gold } // TODO translate
-        tooltip += formattedText { (!"ランク: ${dropRank + 1}").blue } // TODO translate
-        tooltip += formattedText { (!"コモン判定ブースト: ${getRateBoost(DropCategory.COMMON, skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
-        tooltip += formattedText { (!"レア判定ブースト: ${getRateBoost(DropCategory.RARE, skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
-    }
 
     open val dropRank get() = 0
     open fun getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = 1.0
