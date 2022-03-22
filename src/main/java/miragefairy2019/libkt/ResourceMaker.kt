@@ -64,6 +64,7 @@ data class DataResult(
 )
 
 
+
 // BlockStates
 
 fun ResourceMaker.getBlockStatesFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/blockstates/${registryName.path}.json")
