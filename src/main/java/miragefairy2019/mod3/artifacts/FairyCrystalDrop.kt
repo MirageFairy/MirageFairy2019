@@ -26,7 +26,16 @@ import net.minecraftforge.common.BiomeDictionary
 
 object FairyCrystalDrop {
 
-    val dropsFairyCrystal = mutableListOf<IRightClickDrop>()
+    val useItemDropHandlers = mutableListOf<UseItemDropHandler>()
+    val worldDropHandlers = mutableListOf<WorldDropHandler>()
+    val blockDropHandlers = mutableListOf<BlockDropHandler>()
+    val blockStateDropHandlers = mutableListOf<BlockStateDropHandler>()
+    val itemDropHandlers = mutableListOf<ItemDropHandler>()
+    val itemStackDropHandlers = mutableListOf<ItemStackDropHandler>()
+    val biomeDropHandlers = mutableListOf<BiomeDropHandler>()
+    val biomeTypeDropHandlers = mutableListOf<BiomeTypeDropHandler>()
+    val classEntityDropHandlers = mutableListOf<ClassEntityDropHandler>()
+    val entityDropHandlers = mutableListOf<EntityDropHandler>()
 
     /** このメソッドはサーバーワールドのスレッドからしか呼び出せません。 */
     fun getDropTable(
@@ -94,29 +103,26 @@ object FairyCrystalDrop {
 
 
         // リスト作成
-        val dropTable = dropsFairyCrystal
-            .filter { entry ->
-                when {
-                    entry.testUseItem(player, world, pos, hand, facing, hitX, hitY, hitZ) -> true
-                    entry.testWorld(world, pos2) -> true
-                    blocks.any { entry.testBlock(it) } -> true
-                    blockStates.any { entry.testBlockState(world, it.second, it.first) } -> true
-                    items.any { entry.testItem(it) } -> true
-                    itemStacks.any { entry.testItemStack(it) } -> true
-                    biomes.any { entry.testBiome(it) } -> true
-                    biomeTypes.any { entry.testBiomeType(it) } -> true
-                    classEntities.any { entry.testClassEntity(it) } -> true
-                    entities.any { entry.testEntity(it) } -> true
-                    else -> false
-                }
-            }
+        val drops = listOf(
+            useItemDropHandlers.filter { dropHandler -> dropHandler.testUseItem(player, world, pos, hand, facing, hitX, hitY, hitZ) }.map { it.drop },
+            worldDropHandlers.filter { dropHandler -> dropHandler.testWorld(world, pos2) }.map { it.drop },
+            blockDropHandlers.filter { dropHandler -> blocks.any { dropHandler.testBlock(it) } }.map { it.drop },
+            blockStateDropHandlers.filter { dropHandler -> blockStates.any { dropHandler.testBlockState(world, it.second, it.first) } }.map { it.drop },
+            itemDropHandlers.filter { dropHandler -> items.any { dropHandler.testItem(it) } }.map { it.drop },
+            itemStackDropHandlers.filter { dropHandler -> itemStacks.any { dropHandler.testItemStack(it) } }.map { it.drop },
+            biomeDropHandlers.filter { dropHandler -> biomes.any { dropHandler.testBiome(it) } }.map { it.drop },
+            biomeTypeDropHandlers.filter { dropHandler -> biomeTypes.any { dropHandler.testBiomeType(it) } }.map { it.drop },
+            classEntityDropHandlers.filter { dropHandler -> classEntities.any { dropHandler.testClassEntity(it) } }.map { it.drop },
+            entityDropHandlers.filter { dropHandler -> entities.any { dropHandler.testEntity(it) } }.map { it.drop }
+        ).flatten()
+        val dropTable = drops
             .map {
-                val boost = when (it.drop.dropCategory) {
+                val boost = when (it.dropCategory) {
                     DropCategory.COMMON -> commonBoost
                     DropCategory.RARE -> rareBoost
                     else -> 1.0
                 }
-                WeightedItem(it.drop.getItemStack(rank), it.drop.weight * boost)
+                WeightedItem(it.getItemStack(rank), it.weight * boost)
             }
             .unique { a, b -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b) }
 
@@ -165,16 +171,52 @@ class DropFixed(
 }
 
 
-interface IRightClickDrop {
+interface UseItemDropHandler {
     val drop: IDrop
     fun testUseItem(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float) = false
+}
+
+interface WorldDropHandler {
+    val drop: IDrop
     fun testWorld(world: World, pos: BlockPos) = false
+}
+
+interface BlockDropHandler {
+    val drop: IDrop
     fun testBlock(block: Block) = false
+}
+
+interface BlockStateDropHandler {
+    val drop: IDrop
     fun testBlockState(world: World, blockPos: BlockPos, blockState: IBlockState) = false
+}
+
+interface ItemDropHandler {
+    val drop: IDrop
     fun testItem(item: Item) = false
+}
+
+interface ItemStackDropHandler {
+    val drop: IDrop
     fun testItemStack(itemStack: ItemStack) = false
+}
+
+interface BiomeDropHandler {
+    val drop: IDrop
     fun testBiome(biome: Biome) = false
+}
+
+interface BiomeTypeDropHandler {
+    val drop: IDrop
     fun testBiomeType(biomeType: BiomeDictionary.Type) = false
+}
+
+interface ClassEntityDropHandler {
+    val drop: IDrop
     fun testClassEntity(classEntity: Class<out Entity>) = false
+}
+
+interface EntityDropHandler {
+    val drop: IDrop
     fun testEntity(entity: Entity) = false
 }
