@@ -103,7 +103,7 @@ object CommonMaterials {
                 ),
                 result = DataResult(
                     item = "minecraft:gold_ingot",
-                    count = 4
+                    count = 3
                 )
             )
         )
@@ -136,7 +136,7 @@ object CommonMaterials {
                 ),
                 result = DataResult(
                     item = "minecraft:iron_ingot",
-                    count = 4
+                    count = 3
                 )
             )
         )
