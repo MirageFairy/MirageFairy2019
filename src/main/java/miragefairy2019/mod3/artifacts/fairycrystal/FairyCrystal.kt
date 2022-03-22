@@ -119,6 +119,8 @@ abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName
         val mastery = EnumMastery.fairySummoning
         val skillContainer = ApiSkill.skillManager.clientSkillContainer
         tooltip += formattedText { (!"スキル: " + !mastery.displayName + !" (${skillContainer.getSkillLevel(mastery)})").gold } // TODO translate
+        tooltip += formattedText { (!"ランク: ${dropRank + 1}").blue } // TODO translate
+        tooltip += formattedText { (!"コモン判定ブースト: ${getRateBoost(DropCategory.COMMON, skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
         tooltip += formattedText { (!"レア判定ブースト: ${getRateBoost(DropCategory.RARE, skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
     }
 
