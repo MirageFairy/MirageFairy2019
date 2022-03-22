@@ -24,8 +24,6 @@ import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
-import miragefairy2019.mod3.artifacts.fairycrystal.DropCategory
-import miragefairy2019.mod3.artifacts.fairycrystal.FairyCrystalDropper
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.ApiSkill
@@ -128,7 +126,7 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
         if (!player.isSneaking) {
 
             // ガチャを引く
-            val resultItemStack = FairyCrystalDropper.drop(player, world, pos, hand, facing, hitX, hitY, hitZ, variant.dropRank, commonBoost, rareBoost)?.orNull ?: return EnumActionResult.SUCCESS
+            val resultItemStack = FairyCrystalDrop.drop(player, world, pos, hand, facing, hitX, hitY, hitZ, variant.dropRank, commonBoost, rareBoost)?.orNull ?: return EnumActionResult.SUCCESS
 
             // ガチャ成立
 
@@ -144,7 +142,7 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
         } else {
 
             // ガチャリスト取得
-            val dropTable = FairyCrystalDropper.getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, variant.dropRank, commonBoost, rareBoost)
+            val dropTable = FairyCrystalDrop.getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, variant.dropRank, commonBoost, rareBoost)
 
 
             // 表示

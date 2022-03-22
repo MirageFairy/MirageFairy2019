@@ -17,8 +17,6 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.modules.fairyweapon.item.FairyWeaponUtils
-import miragefairy2019.mod3.artifacts.fairycrystal.DropCategory
-import miragefairy2019.mod3.artifacts.fairycrystal.FairyCrystalDropper
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
@@ -284,7 +282,7 @@ class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWand() {
         if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return false // ブロックに当たらなかった場合は無視
 
         // ガチャを引く
-        val itemStackDrop = FairyCrystalDropper.drop(
+        val itemStackDrop = FairyCrystalDrop.drop(
             player,
             player.world,
             rayTraceResult.blockPos,
