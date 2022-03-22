@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
+    },
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandFusion"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustMiragium"
+    },
+    {
+      "item": "minecraft:gold_ore"
+    }
+  ],
+  "result": {
+    "item": "minecraft:gold_ingot",
+    "count": 4
+  }
+}

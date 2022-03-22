@@ -91,6 +91,23 @@ object CommonMaterials {
             )
         )
 
+        // Tier 4 金鉱石 -> 金
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "gold_ore_smelt_tier_4"),
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandFusion"),
+                    DataOreIngredient(ore = "dustMiragium"),
+                    DataSimpleIngredient(item = "minecraft:gold_ore")
+                ),
+                result = DataResult(
+                    item = "minecraft:gold_ingot",
+                    count = 4
+                )
+            )
+        )
+
         // Tier 2 鉄鉱石 -> 鉄
         makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "iron_ore_smelt_tier_2"),
@@ -103,6 +120,23 @@ object CommonMaterials {
                 result = DataResult(
                     item = "minecraft:iron_nugget",
                     count = 17
+                )
+            )
+        )
+
+        // Tier 4 鉄鉱石 -> 鉄
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "iron_ore_smelt_tier_4"),
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
+                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandFusion"),
+                    DataOreIngredient(ore = "dustMiragium"),
+                    DataSimpleIngredient(item = "minecraft:iron_ore")
+                ),
+                result = DataResult(
+                    item = "minecraft:iron_ingot",
+                    count = 4
                 )
             )
         )
