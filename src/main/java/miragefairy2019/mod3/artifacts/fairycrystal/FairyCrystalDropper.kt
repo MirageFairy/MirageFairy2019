@@ -38,6 +38,7 @@ abstract class FairyCrystalDropper {
         hitY: Float,
         hitZ: Float,
         rank: Int,
+        commonBoost: Double,
         rareBoost: Double
     ): List<WeightedItem<ItemStack>> {
         val pos2 = if (world.getBlockState(pos).isFullBlock) pos.offset(facing) else pos
@@ -108,7 +109,14 @@ abstract class FairyCrystalDropper {
                     else -> false
                 }
             }
-            .map { WeightedItem(it.drop.getItemStack(rank), it.drop.weight * if (it.drop.dropCategory == DropCategory.RARE) rareBoost else 1.0) }
+            .map {
+                val boost = when (it.drop.dropCategory) {
+                    DropCategory.COMMON -> commonBoost
+                    DropCategory.RARE -> rareBoost
+                    else -> 1.0
+                }
+                WeightedItem(it.drop.getItemStack(rank), it.drop.weight * boost)
+            }
             .unique { a, b -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b) }
 
 
@@ -131,6 +139,7 @@ abstract class FairyCrystalDropper {
         hitY: Float,
         hitZ: Float,
         rank: Int,
+        commonBoost: Double,
         rareBoost: Double
-    ) = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, rank, rareBoost).getRandomItem(world.rand)
+    ) = getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, rank, commonBoost, rareBoost).getRandomItem(world.rand)
 }

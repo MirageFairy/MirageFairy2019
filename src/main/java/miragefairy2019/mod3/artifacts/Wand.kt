@@ -17,6 +17,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.modules.fairyweapon.item.FairyWeaponUtils
+import miragefairy2019.mod3.artifacts.fairycrystal.DropCategory
 import miragefairy2019.mod3.artifacts.fairycrystal.ItemFairyCrystal
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
@@ -293,7 +294,8 @@ class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWand() {
             rayTraceResult.hitVec.y.toFloat(),
             rayTraceResult.hitVec.z.toFloat(),
             variantFairyCrystal.dropRank,
-            variantFairyCrystal.getRareBoost(ApiSkill.skillManager.getServerSkillContainer(player))
+            variantFairyCrystal.getRateBoost(DropCategory.COMMON, ApiSkill.skillManager.getServerSkillContainer(player)),
+            variantFairyCrystal.getRateBoost(DropCategory.RARE, ApiSkill.skillManager.getServerSkillContainer(player))
         ) ?: return false // ガチャが引けなかった場合は無視
         if (itemStackDrop.isEmpty) return false // ガチャが引けなかった場合は無視
 
