@@ -118,41 +118,16 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
         val itemStackCrystal = player.getHeldItem(hand)
         if (itemStackCrystal.isEmpty) return EnumActionResult.PASS
         val variant = getVariant(itemStackCrystal) ?: return EnumActionResult.PASS
-        return variant.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ)
-    }
-
-    override fun getItemStackDisplayName(itemStack: ItemStack): String {
-        val variant = getVariant(itemStack) ?: return translateToLocal("$unlocalizedName.name")
-        return translateToLocalFormatted("item.${variant.unlocalizedName}.name")
-    }
-
-    override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        val variant = getVariant(itemStack) ?: return
-        val mastery = EnumMastery.fairySummoning
-        val skillContainer = ApiSkill.skillManager.clientSkillContainer
-        tooltip += formattedText { (!"スキル: " + !mastery.displayName + !" (${skillContainer.getSkillLevel(mastery)})").gold } // TODO translate
-        tooltip += formattedText { (!"ランク: ${variant.dropRank + 1}").blue } // TODO translate
-        tooltip += formattedText { (!"コモン判定ブースト: ${variant.getRateBoost(DropCategory.COMMON, skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
-        tooltip += formattedText { (!"レア判定ブースト: ${variant.getRateBoost(DropCategory.RARE, skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
-    }
-}
-
-abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName: String) : ItemVariant() {
-
-    open val dropRank get() = 0
-    open fun getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = 1.0
-
-    fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         val crystalItemStack = player.getHeldItem(hand).orNull ?: return EnumActionResult.PASS // アイテムが消えた場合は中止
         if (world.isRemote) return EnumActionResult.SUCCESS // サーバースレッドのみ
 
-        val commonBoost = getRateBoost(DropCategory.COMMON, ApiSkill.skillManager.getServerSkillContainer(player))
-        val rareBoost = getRateBoost(DropCategory.RARE, ApiSkill.skillManager.getServerSkillContainer(player))
+        val commonBoost = variant.getRateBoost(DropCategory.COMMON, ApiSkill.skillManager.getServerSkillContainer(player))
+        val rareBoost = variant.getRateBoost(DropCategory.RARE, ApiSkill.skillManager.getServerSkillContainer(player))
 
         if (!player.isSneaking) {
 
             // ガチャを引く
-            val resultItemStack = FairyCrystalDropper.drop(player, world, pos, hand, facing, hitX, hitY, hitZ, dropRank, commonBoost, rareBoost)?.orNull ?: return EnumActionResult.SUCCESS
+            val resultItemStack = FairyCrystalDropper.drop(player, world, pos, hand, facing, hitX, hitY, hitZ, variant.dropRank, commonBoost, rareBoost)?.orNull ?: return EnumActionResult.SUCCESS
 
             // ガチャ成立
 
@@ -168,7 +143,7 @@ abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName
         } else {
 
             // ガチャリスト取得
-            val dropTable = FairyCrystalDropper.getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, dropRank, commonBoost, rareBoost)
+            val dropTable = FairyCrystalDropper.getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, variant.dropRank, commonBoost, rareBoost)
 
 
             // 表示
@@ -188,6 +163,26 @@ abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName
             return EnumActionResult.SUCCESS
         }
     }
+
+    override fun getItemStackDisplayName(itemStack: ItemStack): String {
+        val variant = getVariant(itemStack) ?: return translateToLocal("$unlocalizedName.name")
+        return translateToLocalFormatted("item.${variant.unlocalizedName}.name")
+    }
+
+    override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+        val variant = getVariant(itemStack) ?: return
+        val mastery = EnumMastery.fairySummoning
+        val skillContainer = ApiSkill.skillManager.clientSkillContainer
+        tooltip += formattedText { (!"スキル: " + !mastery.displayName + !" (${skillContainer.getSkillLevel(mastery)})").gold } // TODO translate
+        tooltip += formattedText { (!"ランク: ${variant.dropRank + 1}").blue } // TODO translate
+        tooltip += formattedText { (!"コモン判定ブースト: ${variant.getRateBoost(DropCategory.COMMON, skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
+        tooltip += formattedText { (!"レア判定ブースト: ${variant.getRateBoost(DropCategory.RARE, skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
+    }
+}
+
+abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName: String) : ItemVariant() {
+    open val dropRank get() = 0
+    open fun getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = 1.0
 }
 
 class VariantFairyCrystalNormal(registryName: String, unlocalizedName: String) : VariantFairyCrystal(registryName, unlocalizedName)
