@@ -56,41 +56,59 @@ object FairyCrystal {
         itemFairyCrystal = item({ ItemFairyCrystal() }, "fairy_crystal") {
             setUnlocalizedName("fairyCrystal")
             setCreativeTab { ApiMain.creativeTab }
-            variantFairyCrystal = itemVariant("fairy_crystal", { VariantFairyCrystalNormal(it, "fairyCrystal", "mirageFairyCrystal") }, 0)
-            variantFairyCrystalChristmas = itemVariant("christmas_fairy_crystal", { VariantFairyCrystalNormal(it, "fairyCrystalChristmas", "mirageFairyCrystalChristmas") }, 1)
-            variantFairyCrystalPure = itemVariant("pure_fairy_crystal", { VariantFairyCrystalPure(it, "fairyCrystalPure", "mirageFairyCrystalPure") }, 2)
-            onRegisterItem {
-                if (ApiMain.side.isClient) {
-                    item.variants.forEach { item.setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.registryName)) }
-                }
-            }
-            onCreateItemStack {
-                item.variants.forEach {
-                    OreDictionary.registerOre(it.oreName, it.createItemStack())
-                    OreDictionary.registerOre("mirageFairyCrystalAny", it.createItemStack())
-                }
-            }
-        }
-        onMakeLang {
-            enJa("item.fairyCrystal.name", "Fairy Crystal", "フェアリークリスタル")
-            enJa("item.fairyCrystalChristmas.name", "Christmas Fairy Crystal", "聖夜のフェアリークリスタル")
-            enJa("item.fairyCrystalPure.name", "Pure Fairy Crystal", "高純度フェアリークリスタル")
-        }
 
-        // 高純度フェアリークリスタル
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "pure_fairy_crystal"),
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(ore = "blockMirageFairyCrystal"),
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandPolishing")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:fairy_crystal",
-                    data = 2
-                )
+            class RecipeParameter(val inputOreName: String, val inputWand: String)
+
+            fun fairyCrystal(
+                metadata: Int, creator: (registryName: String, unlocalizedName: String) -> VariantFairyCrystal,
+                registryName: String, unlocalizedName: String, oreName: String,
+                english: String, japanese: String,
+                recipeParameter: RecipeParameter?
+            ): () -> VariantFairyCrystal {
+                return itemVariant(registryName, { creator(registryName, unlocalizedName) }, metadata) {
+                    setCustomModelResourceLocation(metadata, model = ResourceLocation(ModMirageFairy2019.MODID, registryName))
+                    onCreateItemStack { OreDictionary.registerOre(oreName, itemVariant.createItemStack()) }
+                    onCreateItemStack { OreDictionary.registerOre("mirageFairyCrystalAny", itemVariant.createItemStack()) }
+                    onMakeLang { enJa("item.$unlocalizedName.name", english, japanese) }
+                    if (recipeParameter != null) {
+                        makeRecipe(
+                            ResourceName(ModMirageFairy2019.MODID, registryName),
+                            DataShapelessRecipe(
+                                ingredients = listOf(
+                                    DataOreIngredient(ore = recipeParameter.inputOreName),
+                                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWand${recipeParameter.inputWand}")
+                                ),
+                                result = DataResult(
+                                    item = "miragefairy2019:fairy_crystal",
+                                    data = metadata
+                                )
+                            )
+                        )
+                    }
+                }
+            }
+
+            variantFairyCrystal = fairyCrystal(
+                0, ::VariantFairyCrystalNormal,
+                "fairy_crystal", "fairyCrystal", "mirageFairyCrystal",
+                "Fairy Crystal", "フェアリークリスタル",
+                null
             )
-        )
+            variantFairyCrystalChristmas = fairyCrystal(
+                1, ::VariantFairyCrystalNormal,
+                "christmas_fairy_crystal", "fairyCrystalChristmas", "mirageFairyCrystalChristmas",
+                "Christmas Fairy Crystal", "聖夜のフェアリークリスタル",
+                null
+            )
+            variantFairyCrystalPure = fairyCrystal(
+                2, ::VariantFairyCrystalPure,
+                "pure_fairy_crystal", "fairyCrystalPure", "mirageFairyCrystalPure",
+                "Pure Fairy Crystal", "高純度フェアリークリスタル",
+                RecipeParameter("blockMirageFairyCrystal", "Polishing")
+            )
+            )
+
+        }
 
     }
 }
@@ -114,7 +132,7 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
     }
 }
 
-abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName: String, val oreName: String) : ItemVariant() {
+abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName: String) : ItemVariant() {
     fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val mastery = EnumMastery.fairySummoning
         val skillContainer = ApiSkill.skillManager.clientSkillContainer
@@ -180,9 +198,9 @@ abstract class VariantFairyCrystal(val registryName: String, val unlocalizedName
     }
 }
 
-class VariantFairyCrystalNormal(registryName: String, unlocalizedName: String, oreName: String) : VariantFairyCrystal(registryName, unlocalizedName, oreName)
+class VariantFairyCrystalNormal(registryName: String, unlocalizedName: String) : VariantFairyCrystal(registryName, unlocalizedName)
 
-class VariantFairyCrystalPure(registryName: String, unlocalizedName: String, oreName: String) : VariantFairyCrystal(registryName, unlocalizedName, oreName) {
+class VariantFairyCrystalPure(registryName: String, unlocalizedName: String) : VariantFairyCrystal(registryName, unlocalizedName) {
     override val dropRank get() = 1
     override fun getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = when (dropCategory) {
         DropCategory.RARE -> 2.0 * (1.0 + skillContainer.getSkillLevel(EnumMastery.fairySummoning) * 0.01)
