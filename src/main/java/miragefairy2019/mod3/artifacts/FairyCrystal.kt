@@ -33,8 +33,11 @@ import miragefairy2019.mod3.skill.api.ISkillContainer
 import miragefairy2019.mod3.skill.displayName
 import miragefairy2019.mod3.skill.getSkillLevel
 import mirrg.kotlin.formatAs
+import net.minecraft.block.BlockDispenser
 import net.minecraft.client.util.ITooltipFlag
+import net.minecraft.dispenser.IBlockSource
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Bootstrap
 import net.minecraft.item.ItemStack
 import net.minecraft.stats.StatList
 import net.minecraft.util.EnumActionResult
@@ -58,6 +61,12 @@ object FairyCrystal {
         itemFairyCrystal = item({ ItemFairyCrystal() }, "fairy_crystal") {
             setUnlocalizedName("fairyCrystal")
             setCreativeTab { ApiMain.creativeTab }
+
+            onInit {
+                BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(item, object : Bootstrap.BehaviorDispenseOptional() {
+                    override fun dispenseStack(blockSource: IBlockSource, itemStack: ItemStack) = item.dispenseStack(blockSource, itemStack)
+                })
+            }
 
             class RecipeParameter(val inputOreName: String, val inputWand: String)
 
@@ -171,6 +180,37 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
         }
     }
 
+    fun dispenseStack(blockSource: IBlockSource, itemStack: ItemStack): ItemStack {
+        val world = blockSource.world
+        val blockPos = blockSource.blockPos.offset(blockSource.blockState.getValue(BlockDispenser.FACING))
+
+        val variant = getVariant(itemStack) ?: return itemStack
+
+        // ガチャ環境計算
+        val environment = FairyCrystalDropEnvironment(null, world, blockPos)
+        environment.insertBlocks(world, BlockRegion(blockPos.add(-2, -2, -2), blockPos.add(2, 2, 2))) // ワールドブロック
+        environment.insertBiome(world.getBiome(blockPos)) // バイオーム
+        environment.insertEntities(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5), 10.0) // エンティティ
+
+        // ガチャリスト取得
+        val commonBoost = variant.getRateBoost(DropCategory.COMMON, null)
+        val rareBoost = variant.getRateBoost(DropCategory.RARE, null)
+        val dropTable = environment.getDropTable(variant.dropRank, commonBoost, rareBoost)
+
+        // ガチャを引く
+        val resultItemStack = dropTable.getRandomItem(world.rand)?.orNull ?: return itemStack
+
+        // ガチャ成立
+
+        // ガチャアイテムを消費
+        itemStack.shrink(1)
+
+        // 妖精をドロップ
+        resultItemStack.drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5), noPickupDelay = true)
+
+        return itemStack
+    }
+
     override fun getItemStackDisplayName(itemStack: ItemStack): String {
         val variant = getVariant(itemStack) ?: return translateToLocal("$unlocalizedName.name")
         return translateToLocalFormatted("item.${variant.unlocalizedName}.name")
@@ -189,7 +229,10 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
 
 class VariantFairyCrystal(val unlocalizedName: String, val dropRank: Int, val dropCategory: DropCategory, val rateBoost: Double) : ItemVariant()
 
-fun VariantFairyCrystal.getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer) = when (dropCategory) {
-    this.dropCategory -> rateBoost * (1.0 + skillContainer.getSkillLevel(EnumMastery.fairySummoning) * 0.01)
+fun VariantFairyCrystal.getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer?) = when (dropCategory) {
+    this.dropCategory -> {
+        val skillFactor = if (skillContainer != null) 1.0 + skillContainer.getSkillLevel(EnumMastery.fairySummoning) * 0.01 else 1.0
+        rateBoost * skillFactor
+    }
     else -> 1.0
 }
