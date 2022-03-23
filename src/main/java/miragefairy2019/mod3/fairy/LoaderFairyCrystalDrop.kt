@@ -1,29 +1,14 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.module
-import miragefairy2019.mod3.artifacts.BiomeTypeDropHandler
-import miragefairy2019.mod3.artifacts.BlockDropHandler
-import miragefairy2019.mod3.artifacts.BlockStateDropHandler
 import miragefairy2019.mod3.artifacts.DropCategory
 import miragefairy2019.mod3.artifacts.DropFixed
-import miragefairy2019.mod3.artifacts.EntityDropHandler
+import miragefairy2019.mod3.artifacts.DropHandler
 import miragefairy2019.mod3.artifacts.FairyCrystalDrop
 import miragefairy2019.mod3.artifacts.IDrop
-import miragefairy2019.mod3.artifacts.ItemDropHandler
-import miragefairy2019.mod3.artifacts.ItemStackDropHandler
-import miragefairy2019.mod3.artifacts.UseItemDropHandler
-import miragefairy2019.mod3.artifacts.WorldDropHandler
 import miragefairy2019.mod3.fairy.relation.FairyRelationEntry
 import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
 import mirrg.kotlin.toInstantAsUtc
-import net.minecraft.block.Block
-import net.minecraft.block.state.IBlockState
-import net.minecraft.entity.Entity
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.util.EnumFacing
-import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
@@ -47,26 +32,9 @@ val loaderFairyCrystalDrop = module {
         // コモン枠
         DropCategory.COMMON {
 
-            fun IDrop.overworld() {
-                FairyCrystalDrop.worldDropHandlers.add(object : WorldDropHandler {
-                    override val drop get() = this@overworld
-                    override fun testWorld(world: World, pos: BlockPos) = world.provider.isSurfaceWorld
-                })
-            }
-
-            fun IDrop.nether() {
-                FairyCrystalDrop.biomeTypeDropHandlers.add(object : BiomeTypeDropHandler {
-                    override val drop get() = this@nether
-                    override fun testBiomeType(biomeType: BiomeDictionary.Type) = biomeType == BiomeDictionary.Type.NETHER
-                })
-            }
-
-            fun IDrop.end() {
-                FairyCrystalDrop.biomeTypeDropHandlers.add(object : BiomeTypeDropHandler {
-                    override val drop get() = this@end
-                    override fun testBiomeType(biomeType: BiomeDictionary.Type) = biomeType == BiomeDictionary.Type.END
-                })
-            }
+            fun IDrop.overworld() = FairyCrystalDrop.dropHandlers.add(DropHandler(this@overworld) { world.provider.isSurfaceWorld })
+            fun IDrop.nether() = FairyCrystalDrop.dropHandlers.add(DropHandler(this@nether) { BiomeDictionary.Type.NETHER in biomeTypes })
+            fun IDrop.end() = FairyCrystalDrop.dropHandlers.add(DropHandler(this@end) { BiomeDictionary.Type.END in biomeTypes })
 
             // 地上
             FairyTypes.instance.water().overworld()
@@ -148,12 +116,7 @@ val loaderFairyCrystalDrop = module {
         FairyTypes.instance.run {
             DropCategory.FIXED {
 
-                fun IDrop.fixed() {
-                    FairyCrystalDrop.useItemDropHandlers.add(object : UseItemDropHandler {
-                        override val drop get() = this@fixed
-                        override fun testUseItem(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float) = true
-                    })
-                }
+                fun IDrop.fixed() = FairyCrystalDrop.dropHandlers.add(DropHandler(this@fixed) { true })
 
                 air(1.0).fixed()
                 time(0.0001).fixed()
@@ -172,55 +135,29 @@ val loaderFairyCrystalDrop = module {
             DropCategory.RARE {
 
                 FairyRelationRegistries.entity.forEach { relation ->
-                    FairyCrystalDrop.entityDropHandlers.add(object : EntityDropHandler {
-                        override val drop get() = DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)
-                        override fun testEntity(entity: Entity) = relation.key(entity)
-                    })
+                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { entities.any { relation.key(it) } })
                 }
                 FairyRelationRegistries.biomeType.forEach { relation ->
-                    FairyCrystalDrop.biomeTypeDropHandlers.add(object : BiomeTypeDropHandler {
-                        override val drop get() = DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)
-                        override fun testBiomeType(biomeType: BiomeDictionary.Type) = biomeType == relation.key
-                    })
+                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in biomeTypes })
                 }
                 FairyRelationRegistries.block.forEach { relation ->
-                    FairyCrystalDrop.blockDropHandlers.add(object : BlockDropHandler {
-                        override val drop get() = DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)
-                        override fun testBlock(block: Block) = block == relation.key
-                    })
+                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in blocks })
                 }
                 FairyRelationRegistries.blockState.forEach { relation ->
-                    FairyCrystalDrop.blockStateDropHandlers.add(object : BlockStateDropHandler {
-                        override val drop get() = DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)
-                        override fun testBlockState(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState == relation.key
-                    })
+                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in blockStates })
                 }
                 FairyRelationRegistries.item.forEach { relation ->
-                    FairyCrystalDrop.itemDropHandlers.add(object : ItemDropHandler {
-                        override val drop get() = DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)
-                        override fun testItem(item: Item) = item == relation.key
-                    })
+                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in items })
                 }
                 FairyRelationRegistries.itemStack.forEach { relation ->
-                    FairyCrystalDrop.itemStackDropHandlers.add(object : ItemStackDropHandler {
-                        override val drop get() = DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)
-                        override fun testItemStack(itemStack: ItemStack) = relation.key(itemStack)
-                    })
+                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { itemStacks.any { relation.key(it) } })
                 }
                 FairyRelationRegistries.ingredient.forEach { relation ->
-                    FairyCrystalDrop.itemStackDropHandlers.add(object : ItemStackDropHandler {
-                        override val drop get() = DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)
-                        override fun testItemStack(itemStack: ItemStack) = relation.key.test(itemStack)
-                    })
+                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { itemStacks.any { relation.key.test(it) } })
                 }
 
 
-                fun IDrop.world(predicate: World.(BlockPos) -> Boolean) {
-                    FairyCrystalDrop.worldDropHandlers.add(object : WorldDropHandler {
-                        override val drop get() = this@world
-                        override fun testWorld(world: World, pos: BlockPos): Boolean = predicate(world, pos)
-                    })
-                }
+                fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = FairyCrystalDrop.dropHandlers.add(DropHandler(this@world) { predicate(world, pos) })
 
                 thunder(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) && isThundering }
                 sun(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && time(6000, 18000) && !isRainingAt(it) }
