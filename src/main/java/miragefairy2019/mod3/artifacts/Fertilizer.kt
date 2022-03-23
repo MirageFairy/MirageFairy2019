@@ -36,7 +36,7 @@ object Fertilizer {
                 BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(item, object : BehaviorDispenseOptional() {
                     override fun dispenseStack(blockSource: IBlockSource, itemStack: ItemStack): ItemStack {
                         val world = blockSource.world
-                        val blockPos = blockSource.blockPos.offset(blockSource.blockState.getValue(BlockDispenser.FACING) as EnumFacing)
+                        val blockPos = blockSource.blockPos.offset(blockSource.blockState.getValue(BlockDispenser.FACING))
 
                         // 実行
                         val result = ItemDye.applyBonemeal(itemStack, world, blockPos)
