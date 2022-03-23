@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.BlockRegion
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapelessRecipe
@@ -8,6 +9,7 @@ import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
@@ -120,13 +122,24 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
         val crystalItemStack = player.getHeldItem(hand).orNull ?: return EnumActionResult.PASS // アイテムが消えた場合は中止
         if (world.isRemote) return EnumActionResult.SUCCESS // サーバースレッドのみ
 
-        val commonBoost = variant.getRateBoost(DropCategory.COMMON, ApiSkill.skillManager.getServerSkillContainer(player))
-        val rareBoost = variant.getRateBoost(DropCategory.RARE, ApiSkill.skillManager.getServerSkillContainer(player))
+
+        // ガチャ環境計算
+        val environment = FairyCrystalDropEnvironment(player, world, pos)
+        environment.insertItemStacks(player) // インベントリ
+        environment.insertBlocks(world, BlockRegion(pos.add(-2, -2, -2), pos.add(2, 2, 2))) // ワールドブロック
+        environment.insertBiome(world.getBiome(pos)) // バイオーム
+        environment.insertEntities(world, player.positionVector, 10.0) // エンティティ
+
+        // ガチャリスト取得
+        val commonBoost = variant.getRateBoost(DropCategory.COMMON, player.proxy.skillContainer)
+        val rareBoost = variant.getRateBoost(DropCategory.RARE, player.proxy.skillContainer)
+        val dropTable = environment.getDropTable(variant.dropRank, commonBoost, rareBoost)
+
 
         if (!player.isSneaking) {
 
             // ガチャを引く
-            val resultItemStack = FairyCrystalDrop.drop(player, world, pos, hand, facing, hitX, hitY, hitZ, variant.dropRank, commonBoost, rareBoost)?.orNull ?: return EnumActionResult.SUCCESS
+            val resultItemStack = dropTable.getRandomItem(world.rand)?.orNull ?: return EnumActionResult.SUCCESS
 
             // ガチャ成立
 
@@ -141,10 +154,6 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
             return EnumActionResult.SUCCESS
         } else {
 
-            // ガチャリスト取得
-            val dropTable = FairyCrystalDrop.getDropTable(player, world, pos, hand, facing, hitX, hitY, hitZ, variant.dropRank, commonBoost, rareBoost)
-
-
             // 表示
 
             fun send(textComponent: ITextComponent) = player.sendStatusMessage(textComponent, false)
@@ -157,7 +166,6 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
             }
 
             send(textComponent { !"====================" })
-
 
             return EnumActionResult.SUCCESS
         }

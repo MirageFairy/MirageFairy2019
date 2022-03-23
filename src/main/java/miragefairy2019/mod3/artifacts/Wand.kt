@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.BlockRegion
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
@@ -7,10 +8,12 @@ import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
+import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -281,21 +284,20 @@ class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWand() {
         val rayTraceResult = rayTrace(player.world, player, false) ?: return false // ブロックに当たらなかった場合は無視
         if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return false // ブロックに当たらなかった場合は無視
 
+        // ガチャ環境計算
+        val environment = FairyCrystalDropEnvironment(player, player.world, rayTraceResult.blockPos)
+        environment.insertItemStacks(player) // インベントリ
+        environment.insertBlocks(player.world, BlockRegion(rayTraceResult.blockPos.add(-2, -2, -2), rayTraceResult.blockPos.add(2, 2, 2))) // ワールドブロック
+        environment.insertBiome(player.world.getBiome(rayTraceResult.blockPos)) // バイオーム
+        environment.insertEntities(player.world, player.positionVector, 10.0) // エンティティ
+
+        // ガチャリスト取得
+        val commonBoost = variantFairyCrystal.getRateBoost(DropCategory.COMMON, player.proxy.skillContainer)
+        val rareBoost = variantFairyCrystal.getRateBoost(DropCategory.RARE, player.proxy.skillContainer)
+        val dropTable = environment.getDropTable(variantFairyCrystal.dropRank, commonBoost, rareBoost)
+
         // ガチャを引く
-        val itemStackDrop = FairyCrystalDrop.drop(
-            player,
-            player.world,
-            rayTraceResult.blockPos,
-            if (player.getHeldItem(EnumHand.MAIN_HAND).item === this) EnumHand.MAIN_HAND else EnumHand.OFF_HAND,
-            rayTraceResult.sideHit,
-            rayTraceResult.hitVec.x.toFloat(),
-            rayTraceResult.hitVec.y.toFloat(),
-            rayTraceResult.hitVec.z.toFloat(),
-            variantFairyCrystal.dropRank,
-            variantFairyCrystal.getRateBoost(DropCategory.COMMON, ApiSkill.skillManager.getServerSkillContainer(player)),
-            variantFairyCrystal.getRateBoost(DropCategory.RARE, ApiSkill.skillManager.getServerSkillContainer(player))
-        ) ?: return false // ガチャが引けなかった場合は無視
-        if (itemStackDrop.isEmpty) return false // ガチャが引けなかった場合は無視
+        val itemStackDrop = dropTable.getRandomItem(player.world.rand)?.orNull ?: return false // ガチャが引けなかった場合は無視
 
         // 成立
 
