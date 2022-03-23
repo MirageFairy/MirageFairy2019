@@ -22,6 +22,16 @@ fun Iterable<BlockPos>.sortedByDistance(from: Vec3i) = sortedBy { it.distanceSq(
 
 data class BlockRegion(val from: BlockPos, val to: BlockPos)
 
+inline fun BlockRegion.forEach(block: (x: Int, y: Int, z: Int) -> Unit) {
+    (from.x..to.x).forEach { x ->
+        (from.y..to.y).forEach { y ->
+            (from.z..to.z).forEach { z ->
+                block(x, y, z)
+            }
+        }
+    }
+}
+
 val BlockRegion.positions get() = (from.x..to.x).flatMap { x -> (from.y..to.y).flatMap { y -> (from.z..to.z).map { z -> BlockPos(x, y, z) } } }
 fun BlockRegion.grow(x: Int, y: Int, z: Int) = BlockRegion(from.add(-x, -y, -z), to.add(x, y, z))
 fun BlockRegion.grow(amount: Int) = grow(amount, amount, amount)
