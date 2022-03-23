@@ -9,7 +9,7 @@ import kotlin.math.abs
 
 operator fun BlockPos.plus(other: Vec3i): BlockPos = add(other)
 operator fun BlockPos.minus(other: Vec3i): BlockPos = subtract(other)
-val BlockPos.range get() = BlockRange(this, this)
+val BlockPos.region get() = BlockRegion(this, this)
 infix fun BlockPos.norm1(other: BlockPos) = abs(x - other.x) + abs(y - other.y) + abs(z - other.z)
 
 
@@ -18,14 +18,14 @@ infix fun BlockPos.norm1(other: BlockPos) = abs(x - other.x) + abs(y - other.y) 
 fun Iterable<BlockPos>.sortedByDistance(from: Vec3i) = sortedBy { it.distanceSq(from) }
 
 
-// BlockRange
+// BlockRegion
 
-data class BlockRange(val from: BlockPos, val to: BlockPos)
+data class BlockRegion(val from: BlockPos, val to: BlockPos)
 
-val BlockRange.positions get() = (from.x..to.x).flatMap { x -> (from.y..to.y).flatMap { y -> (from.z..to.z).map { z -> BlockPos(x, y, z) } } }
-fun BlockRange.grow(x: Int, y: Int, z: Int) = BlockRange(from.add(-x, -y, -z), to.add(x, y, z))
-fun BlockRange.grow(amount: Int) = grow(amount, amount, amount)
-fun BlockRange.grow(vec: Vec3i) = grow(vec.x, vec.y, vec.z)
-fun BlockRange.shrink(x: Int, y: Int, z: Int) = grow(-x, -y, -z)
-fun BlockRange.shrink(amount: Int) = grow(-amount)
-fun BlockRange.shrink(vec: Vec3i) = grow(-vec.x, -vec.y, -vec.z)
+val BlockRegion.positions get() = (from.x..to.x).flatMap { x -> (from.y..to.y).flatMap { y -> (from.z..to.z).map { z -> BlockPos(x, y, z) } } }
+fun BlockRegion.grow(x: Int, y: Int, z: Int) = BlockRegion(from.add(-x, -y, -z), to.add(x, y, z))
+fun BlockRegion.grow(amount: Int) = grow(amount, amount, amount)
+fun BlockRegion.grow(vec: Vec3i) = grow(vec.x, vec.y, vec.z)
+fun BlockRegion.shrink(x: Int, y: Int, z: Int) = grow(-x, -y, -z)
+fun BlockRegion.shrink(amount: Int) = grow(-amount)
+fun BlockRegion.shrink(vec: Vec3i) = grow(-vec.x, -vec.y, -vec.z)
