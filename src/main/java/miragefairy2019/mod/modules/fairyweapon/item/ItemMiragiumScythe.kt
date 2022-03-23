@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.libkt.grow
 import miragefairy2019.libkt.positions
-import miragefairy2019.libkt.range
+import miragefairy2019.libkt.region
 import miragefairy2019.libkt.sortedByDistance
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
@@ -28,7 +28,7 @@ class ItemMiragiumScythe(
 
     override fun iterateTargets(magicScope: MagicScope, blockPosBase: BlockPos) = iterator {
         magicScope.run {
-            blockPosBase.range.grow(!range, 0, !range).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
+            blockPosBase.region.grow(!range, 0, !range).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
                 if (canBreak(magicScope, blockPos)) yield(blockPos)
             }
         }
