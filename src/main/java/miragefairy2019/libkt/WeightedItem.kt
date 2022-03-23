@@ -20,6 +20,7 @@ fun <T : Any> List<WeightedItem<T>>.getItem(d: Double): T? {
 
 val <T : Any> List<WeightedItem<T>>.totalWeight get() = sumByDouble { it.weight }
 
+/** 同一キーのエントリの重みを加算することによってキーをユニークにします。 */
 fun <T : Any> List<WeightedItem<T>>.unique(equals: (T, T) -> Boolean): List<WeightedItem<T>> {
     class Slot(val item: T) {
         override fun hashCode() = 0
