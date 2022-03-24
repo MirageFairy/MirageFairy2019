@@ -128,29 +128,6 @@ val loaderFairyCrystalDrop = module {
         FairyTypes.instance.run {
             DropCategory.RARE {
 
-                FairyRelationRegistries.entity.forEach { relation ->
-                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { entities.any { relation.key(it) } })
-                }
-                FairyRelationRegistries.biomeType.forEach { relation ->
-                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in biomeTypes })
-                }
-                FairyRelationRegistries.block.forEach { relation ->
-                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in blocks })
-                }
-                FairyRelationRegistries.blockState.forEach { relation ->
-                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in blockStates })
-                }
-                FairyRelationRegistries.item.forEach { relation ->
-                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in items })
-                }
-                FairyRelationRegistries.itemStack.forEach { relation ->
-                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { itemStacks.any { relation.key(it) } })
-                }
-                FairyRelationRegistries.ingredient.forEach { relation ->
-                    FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { itemStacks.any { relation.key.test(it) } })
-                }
-
-
                 fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = FairyCrystalDrop.dropHandlers.add(DropHandler(this@world) a@{ predicate(world ?: return@a false, pos ?: return@a false) })
 
                 thunder(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) && isThundering }
@@ -166,6 +143,29 @@ val loaderFairyCrystalDrop = module {
                 rain(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
 
             }
+        }
+
+        // 妖精関係レジストリー
+        FairyRelationRegistries.entity.forEach { relation ->
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { entities.any { relation.key(it) } })
+        }
+        FairyRelationRegistries.biomeType.forEach { relation ->
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in biomeTypes })
+        }
+        FairyRelationRegistries.block.forEach { relation ->
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in blocks })
+        }
+        FairyRelationRegistries.blockState.forEach { relation ->
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in blockStates })
+        }
+        FairyRelationRegistries.item.forEach { relation ->
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in items })
+        }
+        FairyRelationRegistries.itemStack.forEach { relation ->
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { itemStacks.any { relation.key(it) } })
+        }
+        FairyRelationRegistries.ingredient.forEach { relation ->
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { itemStacks.any { relation.key.test(it) } })
         }
 
     }
