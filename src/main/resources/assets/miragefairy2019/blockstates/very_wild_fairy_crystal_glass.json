@@ -1,0 +1,64 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "down": false
+      },
+      "apply": {
+        "model": "miragefairy2019:wild_fairy_crystal_glass_frame",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "up": false
+      },
+      "apply": {
+        "model": "miragefairy2019:wild_fairy_crystal_glass_frame"
+      }
+    },
+    {
+      "when": {
+        "north": false
+      },
+      "apply": {
+        "model": "miragefairy2019:wild_fairy_crystal_glass_frame",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "south": false
+      },
+      "apply": {
+        "model": "miragefairy2019:wild_fairy_crystal_glass_frame",
+        "x": -90
+      }
+    },
+    {
+      "when": {
+        "west": false
+      },
+      "apply": {
+        "model": "miragefairy2019:wild_fairy_crystal_glass_frame",
+        "x": 90,
+        "y": -90
+      }
+    },
+    {
+      "when": {
+        "east": false
+      },
+      "apply": {
+        "model": "miragefairy2019:wild_fairy_crystal_glass_frame",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "apply": {
+        "model": "miragefairy2019:very_pure_fairy_crystal_glass_background"
+      }
+    }
+  ]
+}

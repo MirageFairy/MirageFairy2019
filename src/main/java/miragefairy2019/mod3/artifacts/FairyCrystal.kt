@@ -57,6 +57,9 @@ object FairyCrystal {
     lateinit var variantFairyCrystal: () -> VariantFairyCrystal
     lateinit var variantFairyCrystalChristmas: () -> VariantFairyCrystal
     lateinit var variantFairyCrystalPure: () -> VariantFairyCrystal
+    lateinit var variantFairyCrystalVeryPure: () -> VariantFairyCrystal
+    lateinit var variantFairyCrystalWild: () -> VariantFairyCrystal
+    lateinit var variantFairyCrystalVeryWild: () -> VariantFairyCrystal
     val module = module {
 
         // フェアリークリスタル
@@ -119,6 +122,24 @@ object FairyCrystal {
                 "pure_fairy_crystal", "fairyCrystalPure", "mirageFairyCrystalPure",
                 "Pure Fairy Crystal", "高純度フェアリークリスタル",
                 RecipeParameter("blockMirageFairyCrystal", "Polishing")
+            )
+            variantFairyCrystalVeryPure = fairyCrystal(
+                3, { VariantFairyCrystal(it, 2, DropCategory.RARE, 4.0) },
+                "very_pure_fairy_crystal", "fairyCrystalVeryPure", "mirageFairyCrystalVeryPure",
+                "Very Pure Fairy Crystal", "超高純度フェアリークリスタル",
+                RecipeParameter("blockMirageFairyCrystalPure", "Fusion")
+            )
+            variantFairyCrystalWild = fairyCrystal(
+                4, { VariantFairyCrystal(it, 1, DropCategory.COMMON, 2.0) },
+                "wild_fairy_crystal", "fairyCrystalWild", "mirageFairyCrystalWild",
+                "Wild Fairy Crystal", "野蛮なフェアリークリスタル",
+                RecipeParameter("blockMirageFairyCrystal", "Melting")
+            )
+            variantFairyCrystalVeryWild = fairyCrystal(
+                5, { VariantFairyCrystal(it, 2, DropCategory.COMMON, 4.0) },
+                "very_wild_fairy_crystal", "fairyCrystalVeryWild", "mirageFairyCrystalVeryWild",
+                "Very Wild Fairy Crystal", "超野蛮なフェアリークリスタル",
+                RecipeParameter("blockMirageFairyCrystalWild", "Distortion")
             )
 
         }

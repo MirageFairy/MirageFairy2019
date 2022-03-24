@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "blockMirageFairyCrystalVeryPure"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:fairy_crystal",
+    "data": 3,
+    "count": 8
+  }
+}

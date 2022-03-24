@@ -1,0 +1,41 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystalVeryWild"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystalVeryWild"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystalVeryWild"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystalVeryWild"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystalVeryWild"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystalVeryWild"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystalVeryWild"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystalVeryWild"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:very_wild_fairy_crystal_glass",
+    "count": 1
+  }
+}

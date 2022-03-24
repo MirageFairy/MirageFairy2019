@@ -47,6 +47,12 @@ object FairyCrystalGlass {
     lateinit var itemBlockFairyCrystalGlass: () -> ItemBlock
     lateinit var blockPureFairyCrystalGlass: () -> BlockFairyCrystalGlass
     lateinit var itemBlockPureFairyCrystalGlass: () -> ItemBlock
+    lateinit var blockVeryPureFairyCrystalGlass: () -> BlockFairyCrystalGlass
+    lateinit var itemBlockVeryPureFairyCrystalGlass: () -> ItemBlock
+    lateinit var blockWildFairyCrystalGlass: () -> BlockFairyCrystalGlass
+    lateinit var itemBlockWildFairyCrystalGlass: () -> ItemBlock
+    lateinit var blockVeryWildFairyCrystalGlass: () -> BlockFairyCrystalGlass
+    lateinit var itemBlockVeryWildFairyCrystalGlass: () -> ItemBlock
     val module = module {
         fun surface(texture: String, cullface: String, rotation: Int?) = jsonElementNotNull(
             "texture" to texture.jsonElement,
@@ -229,6 +235,39 @@ object FairyCrystalGlass {
         ).let {
             blockPureFairyCrystalGlass = it.first
             itemBlockPureFairyCrystalGlass = it.second
+        }
+        fairyCrystalGlass(
+            3,
+            "very_pure_fairy_crystal", "very_pure_fairy_crystal_glass",
+            "very_pure_fairy_crystal_glass_background", "fairy_crystal_glass_frame",
+            "very_pure_fairy_crystal_glass_background", "fairy_crystal_glass_frame",
+            "mirageFairyCrystalVeryPure", "blockMirageFairyCrystalVeryPure",
+            "veryPureFairyCrystalGlass", "Very Pure Fairy Crystal Glass", "超高純度フェアリークリスタルガラス"
+        ).let {
+            blockVeryPureFairyCrystalGlass = it.first
+            itemBlockVeryPureFairyCrystalGlass = it.second
+        }
+        fairyCrystalGlass(
+            4,
+            "wild_fairy_crystal", "wild_fairy_crystal_glass",
+            "pure_fairy_crystal_glass_background", "wild_fairy_crystal_glass_frame",
+            "pure_fairy_crystal_glass_background", "wild_fairy_crystal_glass_frame",
+            "mirageFairyCrystalWild", "blockMirageFairyCrystalWild",
+            "wildFairyCrystalGlass", "Wild Fairy Crystal Glass", "野蛮なフェアリークリスタルガラス"
+        ).let {
+            blockWildFairyCrystalGlass = it.first
+            itemBlockWildFairyCrystalGlass = it.second
+        }
+        fairyCrystalGlass(
+            5,
+            "very_wild_fairy_crystal", "very_wild_fairy_crystal_glass",
+            "very_pure_fairy_crystal_glass_background", "wild_fairy_crystal_glass_frame",
+            "very_pure_fairy_crystal_glass_background", "wild_fairy_crystal_glass_frame",
+            "mirageFairyCrystalVeryWild", "blockMirageFairyCrystalVeryWild",
+            "veryWildFairyCrystalGlass", "Very Wild Fairy Crystal Glass", "超野蛮なフェアリークリスタルガラス"
+        ).let {
+            blockVeryWildFairyCrystalGlass = it.first
+            itemBlockVeryWildFairyCrystalGlass = it.second
         }
 
     }
