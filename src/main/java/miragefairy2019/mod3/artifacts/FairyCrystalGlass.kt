@@ -3,6 +3,7 @@ package miragefairy2019.mod3.artifacts
 import miragefairy2019.libkt.BlockInitializer
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
+import miragefairy2019.libkt.DataItemModel
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataPart
 import miragefairy2019.libkt.DataResult
@@ -14,6 +15,7 @@ import miragefairy2019.libkt.block
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
+import miragefairy2019.libkt.makeItemModel
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
@@ -113,6 +115,8 @@ object FairyCrystalGlass {
         fun fairyCrystalGlass(
             crystalMetadata: Int,
             crystalName: String, glassName: String,
+            backgroundModelName: String, frameModelName: String,
+            backgroundTextureName: String, frameTextureName: String,
             crystalOreName: String, glassOreName: String,
             unlocalizedName: String, englishName: String, japaneseName: String
         ): Pair<BlockInitializer<BlockFairyCrystalGlass>, ItemInitializer<ItemBlock>> {
@@ -124,30 +128,30 @@ object FairyCrystalGlass {
                         multipart = listOf(
                             DataPart(
                                 `when` = mapOf("down" to false),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 180)
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$frameModelName", x = 180)
                             ),
                             DataPart(
                                 `when` = mapOf("up" to false),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame")
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$frameModelName")
                             ),
                             DataPart(
                                 `when` = mapOf("north" to false),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90)
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$frameModelName", x = 90)
                             ),
                             DataPart(
                                 `when` = mapOf("south" to false),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = -90)
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$frameModelName", x = -90)
                             ),
                             DataPart(
                                 `when` = mapOf("west" to false),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90, y = -90)
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$frameModelName", x = 90, y = -90)
                             ),
                             DataPart(
                                 `when` = mapOf("east" to false),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90, y = 90)
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$frameModelName", x = 90, y = 90)
                             ),
                             DataPart(
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$glassName")
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$backgroundModelName")
                             )
                         )
                     )
@@ -156,6 +160,23 @@ object FairyCrystalGlass {
             val item = item({ ItemBlock(block()) }, glassName) {
                 addOreName(glassOreName)
                 setCustomModelResourceLocation(model = ResourceLocation(ModMirageFairy2019.MODID, glassName))
+                makeItemModel {
+                    DataItemModel(
+                        parent = "block/block",
+                        elements = jsonElement(
+                            cube("#background", null),
+                            cube("#frame", 0),
+                            cube("#frame", 90),
+                            cube("#frame", 180),
+                            cube("#frame", 270)
+                        ),
+                        textures = mapOf(
+                            "particle" to "miragefairy2019:blocks/$frameTextureName",
+                            "background" to "miragefairy2019:blocks/$backgroundTextureName",
+                            "frame" to "miragefairy2019:blocks/$frameTextureName"
+                        )
+                    )
+                }
             }
 
             onMakeLang { enJa("tile.$unlocalizedName.name", englishName, japaneseName) }
@@ -190,6 +211,8 @@ object FairyCrystalGlass {
         fairyCrystalGlass(
             0,
             "fairy_crystal", "fairy_crystal_glass",
+            "fairy_crystal_glass_background", "fairy_crystal_glass_frame",
+            "fairy_crystal_glass_background", "fairy_crystal_glass_frame",
             "mirageFairyCrystal", "blockMirageFairyCrystal",
             "fairyCrystalGlass", "Fairy Crystal Glass", "フェアリークリスタルガラス"
         ).let {
@@ -199,6 +222,8 @@ object FairyCrystalGlass {
         fairyCrystalGlass(
             2,
             "pure_fairy_crystal", "pure_fairy_crystal_glass",
+            "pure_fairy_crystal_glass_background", "fairy_crystal_glass_frame",
+            "pure_fairy_crystal_glass_background", "fairy_crystal_glass_frame",
             "mirageFairyCrystalPure", "blockMirageFairyCrystalPure",
             "pureFairyCrystalGlass", "Pure Fairy Crystal Glass", "高純度フェアリークリスタルガラス"
         ).let {
