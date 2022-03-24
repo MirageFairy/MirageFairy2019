@@ -22,6 +22,8 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.with
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.main.api.ApiMain
+import mirrg.kotlin.gson.jsonElement
+import mirrg.kotlin.gson.jsonElementNotNull
 import net.minecraft.block.Block
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -44,6 +46,70 @@ object FairyCrystalGlass {
     lateinit var blockPureFairyCrystalGlass: () -> BlockFairyCrystalGlass
     lateinit var itemBlockPureFairyCrystalGlass: () -> ItemBlock
     val module = module {
+        fun surface(texture: String, cullface: String, rotation: Int?) = jsonElementNotNull(
+            "texture" to texture.jsonElement,
+            "cullface" to cullface.jsonElement,
+            rotation?.let { "rotation" to it.jsonElement }
+        )
+
+        fun cube(texture: String, rotation: Int?) = jsonElement(
+            "from" to jsonElement(0.jsonElement, 0.jsonElement, 0.jsonElement),
+            "to" to jsonElement(16.jsonElement, 16.jsonElement, 16.jsonElement),
+            "faces" to jsonElement(
+                "down" to surface(texture, "down", rotation),
+                "up" to surface(texture, "up", rotation),
+                "north" to surface(texture, "north", rotation),
+                "south" to surface(texture, "south", rotation),
+                "west" to surface(texture, "west", rotation),
+                "east" to surface(texture, "east", rotation)
+            )
+        )
+
+
+        fun makeBackgroundModel(name: String) = onMakeResource {
+            dirBase.resolve("assets/${ModMirageFairy2019.MODID}/models/block/$name.json").place(
+                jsonElement(
+                    "parent" to "block/block".jsonElement,
+                    "elements" to jsonElement(
+                        cube("#background", null)
+                    ),
+                    "textures" to jsonElement(
+                        "background" to "miragefairy2019:blocks/$name".jsonElement
+                    )
+                )
+            )
+        }
+        makeBackgroundModel("fairy_crystal_glass_background")
+        makeBackgroundModel("pure_fairy_crystal_glass_background")
+        makeBackgroundModel("very_pure_fairy_crystal_glass_background")
+
+
+        fun makeFrameModel(name: String) = onMakeResource {
+            dirBase.resolve("assets/${ModMirageFairy2019.MODID}/models/block/$name.json").place(
+                jsonElement(
+                    "elements" to jsonElement(
+                        jsonElement(
+                            "from" to jsonElement(0.jsonElement, 0.jsonElement, 0.jsonElement),
+                            "to" to jsonElement(16.jsonElement, 16.jsonElement, 16.jsonElement),
+                            "faces" to jsonElement(
+                                "north" to surface("#frame", "north", null),
+                                "south" to surface("#frame", "south", null),
+                                "west" to surface("#frame", "west", null),
+                                "east" to surface("#frame", "east", null)
+                            )
+                        )
+                    ),
+                    "textures" to jsonElement(
+                        "particle" to "miragefairy2019:blocks/$name".jsonElement,
+                        "frame" to "miragefairy2019:blocks/$name".jsonElement
+                    )
+                )
+            )
+        }
+        makeFrameModel("fairy_crystal_glass_frame")
+        makeFrameModel("wild_fairy_crystal_glass_frame")
+
+
         fun fairyCrystalGlass(
             crystalMetadata: Int,
             crystalName: String, glassName: String,
