@@ -8,12 +8,9 @@ import miragefairy2019.mod3.artifacts.FairyCrystalDrop
 import miragefairy2019.mod3.artifacts.IDrop
 import miragefairy2019.mod3.fairy.relation.FairyRelationEntry
 import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
-import mirrg.kotlin.toInstantAsUtc
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
-import java.time.Instant
-import java.time.LocalDateTime
 import kotlin.math.pow
 
 private val FairyRelationEntry<*>.fairyCrystalBaseDropWeight get() = 0.1 * 0.1.pow((fairy.main.rare - 1.0) / 2.0) * weight
@@ -113,36 +110,32 @@ val loaderFairyCrystalDrop = module {
         }
 
         // 固定枠
-        FairyTypes.instance.run {
-            DropCategory.FIXED {
+        DropCategory.FIXED {
 
-                fun IDrop.fixed() = FairyCrystalDrop.dropHandlers.add(DropHandler(this@fixed) { true })
+            fun IDrop.fixed() = FairyCrystalDrop.dropHandlers.add(DropHandler(this@fixed) { true })
 
-                air(1.0).fixed()
-                time(0.0001).fixed()
+            FairyTypes.instance.air(1.0).fixed()
+            FairyTypes.instance.time(0.0001).fixed()
 
-            }
         }
 
         // レア枠
-        FairyTypes.instance.run {
-            DropCategory.RARE {
+        DropCategory.RARE {
 
-                fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = FairyCrystalDrop.dropHandlers.add(DropHandler(this@world) a@{ predicate(world ?: return@a false, pos ?: return@a false) })
+            fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = FairyCrystalDrop.dropHandlers.add(DropHandler(this@world) a@{ predicate(world ?: return@a false, pos ?: return@a false) })
 
-                thunder(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) && isThundering }
-                sun(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && time(6000, 18000) && !isRainingAt(it) }
-                moon(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) }
-                star(0.0003).world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) }
+            FairyTypes.instance.thunder(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) && isThundering }
+            FairyTypes.instance.sun(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && time(6000, 18000) && !isRainingAt(it) }
+            FairyTypes.instance.moon(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) }
+            FairyTypes.instance.star(0.0003).world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) }
 
-                daytime(0.001).world { time(6000, 18000) }
-                night(0.001).world { time(19000, 24000) || time(0, 5000) }
-                morning(0.001).world { time(5000, 9000) }
-                sunrise(0.001).world { time(5000, 6000) }
-                fine(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) }
-                rain(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
+            FairyTypes.instance.daytime(0.001).world { time(6000, 18000) }
+            FairyTypes.instance.night(0.001).world { time(19000, 24000) || time(0, 5000) }
+            FairyTypes.instance.morning(0.001).world { time(5000, 9000) }
+            FairyTypes.instance.sunrise(0.001).world { time(5000, 6000) }
+            FairyTypes.instance.fine(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) }
+            FairyTypes.instance.rain(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
 
-            }
         }
 
         // 妖精関係レジストリー
