@@ -355,10 +355,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 
 	item("mirage_flower_seeds");
 
-	item("fairy_crystal");
-	item("christmas_fairy_crystal");
-	item("pure_fairy_crystal");
-
 	# 液体
 	fluid("miragium_water");
 	fluid("mirage_flower_extract");
