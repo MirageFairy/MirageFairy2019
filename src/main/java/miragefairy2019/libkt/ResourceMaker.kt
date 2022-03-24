@@ -157,6 +157,7 @@ class MakeItemVariantModelScope<I : ItemMulti<V>, V : ItemVariant>(val itemVaria
 
 data class DataItemModel(
     @Expose val parent: String,
+    @Expose val elements: JsonElement? = null,
     @Expose val textures: Map<String, String>? = null
 )
 
