@@ -161,13 +161,13 @@ data class DataItemModel(
 )
 
 fun <I : Item> MakeItemModelScope<I>.getStandardItemModel(parent: String) = DataItemModel(
-    parent,
-    mapOf("layer0" to "${itemInitializer.registryName.domain}:items/${itemInitializer.registryName.path}")
+    parent = parent,
+    textures = mapOf("layer0" to "${itemInitializer.registryName.domain}:items/${itemInitializer.registryName.path}")
 )
 
 fun <I : ItemMulti<V>, V : ItemVariant> MakeItemVariantModelScope<I, V>.getStandardItemModel(parent: String) = DataItemModel(
-    parent,
-    mapOf("layer0" to "${itemVariantInitializer.registryName.domain}:items/${itemVariantInitializer.registryName.path}")
+    parent = parent,
+    textures = mapOf("layer0" to "${itemVariantInitializer.registryName.domain}:items/${itemVariantInitializer.registryName.path}")
 )
 
 val <I : Item> MakeItemModelScope<I>.generated get() = getStandardItemModel("item/generated")
