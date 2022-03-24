@@ -26,6 +26,8 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.main.api.ApiMain
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
+import mirrg.kotlin.toLowerCaseHead
+import mirrg.kotlin.toSnakeCase
 import net.minecraft.block.Block
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -120,52 +122,52 @@ object FairyCrystalGlass {
 
         fun fairyCrystalGlass(
             crystalMetadata: Int,
-            crystalName: String, glassName: String,
-            backgroundModelName: String, frameModelName: String,
-            backgroundTextureName: String, frameTextureName: String,
-            crystalOreName: String, glassOreName: String,
-            unlocalizedName: String, englishName: String, japaneseName: String
+            prefix: String,
+            backgroundPrefix: String,
+            framePrefix: String,
+            englishPrefix: String,
+            japanesePrefix: String
         ): Pair<BlockInitializer<BlockFairyCrystalGlass>, ItemInitializer<ItemBlock>> {
-            val block = block({ BlockFairyCrystalGlass() }, glassName) {
-                setUnlocalizedName(unlocalizedName)
+            val block = block({ BlockFairyCrystalGlass() }, "${prefix}FairyCrystalGlass".toSnakeCase()) {
+                setUnlocalizedName("${prefix}FairyCrystalGlass".toLowerCaseHead())
                 setCreativeTab { ApiMain.creativeTab }
                 makeBlockStates {
                     DataBlockStates(
                         multipart = listOf(
                             DataPart(
                                 `when` = mapOf("down" to false),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$frameModelName", x = 180)
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 180)
                             ),
                             DataPart(
                                 `when` = mapOf("up" to false),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$frameModelName")
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}")
                             ),
                             DataPart(
                                 `when` = mapOf("north" to false),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$frameModelName", x = 90)
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 90)
                             ),
                             DataPart(
                                 `when` = mapOf("south" to false),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$frameModelName", x = -90)
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = -90)
                             ),
                             DataPart(
                                 `when` = mapOf("west" to false),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$frameModelName", x = 90, y = -90)
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 90, y = -90)
                             ),
                             DataPart(
                                 `when` = mapOf("east" to false),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$frameModelName", x = 90, y = 90)
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 90, y = 90)
                             ),
                             DataPart(
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$backgroundModelName")
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${backgroundPrefix}FairyCrystalGlassBackground".toSnakeCase()}")
                             )
                         )
                     )
                 }
             }
-            val item = item({ ItemBlock(block()) }, glassName) {
-                addOreName(glassOreName)
-                setCustomModelResourceLocation(model = ResourceLocation(ModMirageFairy2019.MODID, glassName))
+            val item = item({ ItemBlock(block()) }, "${prefix}FairyCrystalGlass".toSnakeCase()) {
+                addOreName("blockMirageFairyCrystal$prefix")
+                setCustomModelResourceLocation(model = ResourceLocation(ModMirageFairy2019.MODID, "${prefix}FairyCrystalGlass".toSnakeCase()))
                 makeItemModel {
                     DataItemModel(
                         parent = "block/block",
@@ -177,32 +179,32 @@ object FairyCrystalGlass {
                             cube("#frame", 270)
                         ),
                         textures = mapOf(
-                            "particle" to "miragefairy2019:blocks/$frameTextureName",
-                            "background" to "miragefairy2019:blocks/$backgroundTextureName",
-                            "frame" to "miragefairy2019:blocks/$frameTextureName"
+                            "particle" to "miragefairy2019:blocks/${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}",
+                            "background" to "miragefairy2019:blocks/${"${backgroundPrefix}FairyCrystalGlassBackground".toSnakeCase()}",
+                            "frame" to "miragefairy2019:blocks/${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}"
                         )
                     )
                 }
             }
 
-            onMakeLang { enJa("tile.$unlocalizedName.name", englishName, japaneseName) }
+            onMakeLang { enJa("tile.${"${prefix}FairyCrystalGlass".toLowerCaseHead()}.name", "${englishPrefix}Fairy Crystal Glass", "${japanesePrefix}フェアリークリスタルガラス") }
 
             // 圧縮レシピ
             makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, glassName),
+                ResourceName(ModMirageFairy2019.MODID, "${prefix}FairyCrystalGlass".toSnakeCase()),
                 DataShapelessRecipe(
-                    ingredients = (1..8).map { DataOreIngredient(ore = crystalOreName) },
+                    ingredients = (1..8).map { DataOreIngredient(ore = "mirageFairyCrystal$prefix") },
                     result = DataResult(
-                        item = "${ModMirageFairy2019.MODID}:$glassName"
+                        item = "${ModMirageFairy2019.MODID}:${"${prefix}FairyCrystalGlass".toSnakeCase()}"
                     )
                 )
             )
 
             // 分解レシピ
             makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "${crystalName}_from_${glassName}"),
+                ResourceName(ModMirageFairy2019.MODID, "${"${prefix}FairyCrystal".toSnakeCase()}_from_${"${prefix}FairyCrystalGlass".toSnakeCase()}"),
                 DataShapelessRecipe(
-                    ingredients = listOf(DataOreIngredient(ore = glassOreName)),
+                    ingredients = listOf(DataOreIngredient(ore = "blockMirageFairyCrystal$prefix")),
                     result = DataResult(
                         item = "${ModMirageFairy2019.MODID}:fairy_crystal",
                         data = crystalMetadata,
@@ -214,58 +216,23 @@ object FairyCrystalGlass {
             return Pair(block, item)
         }
 
-        fairyCrystalGlass(
-            0,
-            "fairy_crystal", "fairy_crystal_glass",
-            "fairy_crystal_glass_background", "fairy_crystal_glass_frame",
-            "fairy_crystal_glass_background", "fairy_crystal_glass_frame",
-            "mirageFairyCrystal", "blockMirageFairyCrystal",
-            "fairyCrystalGlass", "Fairy Crystal Glass", "フェアリークリスタルガラス"
-        ).let {
+        fairyCrystalGlass(0, "", "", "", "", "").let {
             blockFairyCrystalGlass = it.first
             itemBlockFairyCrystalGlass = it.second
         }
-        fairyCrystalGlass(
-            2,
-            "pure_fairy_crystal", "pure_fairy_crystal_glass",
-            "pure_fairy_crystal_glass_background", "fairy_crystal_glass_frame",
-            "pure_fairy_crystal_glass_background", "fairy_crystal_glass_frame",
-            "mirageFairyCrystalPure", "blockMirageFairyCrystalPure",
-            "pureFairyCrystalGlass", "Pure Fairy Crystal Glass", "高純度フェアリークリスタルガラス"
-        ).let {
+        fairyCrystalGlass(2, "Pure", "Pure", "", "Pure ", "高純度").let {
             blockPureFairyCrystalGlass = it.first
             itemBlockPureFairyCrystalGlass = it.second
         }
-        fairyCrystalGlass(
-            3,
-            "very_pure_fairy_crystal", "very_pure_fairy_crystal_glass",
-            "very_pure_fairy_crystal_glass_background", "fairy_crystal_glass_frame",
-            "very_pure_fairy_crystal_glass_background", "fairy_crystal_glass_frame",
-            "mirageFairyCrystalVeryPure", "blockMirageFairyCrystalVeryPure",
-            "veryPureFairyCrystalGlass", "Very Pure Fairy Crystal Glass", "超高純度フェアリークリスタルガラス"
-        ).let {
+        fairyCrystalGlass(3, "VeryPure", "VeryPure", "", "Very Pure ", "超高純度").let {
             blockVeryPureFairyCrystalGlass = it.first
             itemBlockVeryPureFairyCrystalGlass = it.second
         }
-        fairyCrystalGlass(
-            4,
-            "wild_fairy_crystal", "wild_fairy_crystal_glass",
-            "pure_fairy_crystal_glass_background", "wild_fairy_crystal_glass_frame",
-            "pure_fairy_crystal_glass_background", "wild_fairy_crystal_glass_frame",
-            "mirageFairyCrystalWild", "blockMirageFairyCrystalWild",
-            "wildFairyCrystalGlass", "Wild Fairy Crystal Glass", "野蛮なフェアリークリスタルガラス"
-        ).let {
+        fairyCrystalGlass(4, "Wild", "Pure", "Wild", "Wild ", "野蛮な").let {
             blockWildFairyCrystalGlass = it.first
             itemBlockWildFairyCrystalGlass = it.second
         }
-        fairyCrystalGlass(
-            5,
-            "very_wild_fairy_crystal", "very_wild_fairy_crystal_glass",
-            "very_pure_fairy_crystal_glass_background", "wild_fairy_crystal_glass_frame",
-            "very_pure_fairy_crystal_glass_background", "wild_fairy_crystal_glass_frame",
-            "mirageFairyCrystalVeryWild", "blockMirageFairyCrystalVeryWild",
-            "veryWildFairyCrystalGlass", "Very Wild Fairy Crystal Glass", "超野蛮なフェアリークリスタルガラス"
-        ).let {
+        fairyCrystalGlass(5, "VeryWild", "VeryPure", "Wild", "Very Wild ", "超野蛮な").let {
             blockVeryWildFairyCrystalGlass = it.first
             itemBlockVeryWildFairyCrystalGlass = it.second
         }
