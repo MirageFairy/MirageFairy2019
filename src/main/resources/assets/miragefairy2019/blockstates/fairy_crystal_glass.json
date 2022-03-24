@@ -57,7 +57,7 @@
     },
     {
       "apply": {
-        "model": "miragefairy2019:fairy_crystal_glass"
+        "model": "miragefairy2019:fairy_crystal_glass_background"
       }
     }
   ]

@@ -41,7 +41,6 @@
     }
   ],
   "textures": {
-    "particle": "miragefairy2019:blocks/fairy_crystal_glass_frame",
     "background": "miragefairy2019:blocks/pure_fairy_crystal_glass_background"
   }
 }
