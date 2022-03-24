@@ -165,11 +165,6 @@ val loaderFairyCrystalDrop = module {
                 fine(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) }
                 rain(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
 
-                if (Instant.now() < LocalDateTime.of(2022, 3, 1, 0, 0, 0).toInstantAsUtc) {
-                    coalDust(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRaining && canSnowAt(it, false) }
-                    diamondDust(0.0003).world { provider.isSurfaceWorld && canSeeSky(it) && isRaining && canSnowAt(it, false) }
-                }
-
             }
         }
 
