@@ -22,4 +22,6 @@ interface FormulaRenderer<T> {
     fun render(formulaArguments: FormulaArguments, formula: Formula<T>): ITextComponent
 }
 
-class MagicStatus<T>(val name: String, val formula: Formula<T>, val renderer: FormulaRenderer<T>)
+class MagicStatus<T>(val name: String, val formula: Formula<T>, val renderer: FormulaRenderer<T>) : (FormulaArguments) -> T {
+    override fun invoke(arguments: FormulaArguments) = formula.calculate(arguments)
+}
