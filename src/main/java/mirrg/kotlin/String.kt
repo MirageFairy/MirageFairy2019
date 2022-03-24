@@ -12,5 +12,10 @@ fun String.toUpperCamelCase(beforeDelimiter: String = "_", afterDelimiter: Strin
 /** @receiver スネークケースの文字列 */
 fun String.toLowerCamelCase(beforeDelimiter: String = "_", afterDelimiter: String = "") = toUpperCamelCase(beforeDelimiter, afterDelimiter).toLowerCaseHead()
 
+private val toSnakeCaseRegex = """(?<=.)(?=[A-Z])""".toRegex()
+
+/** @receiver キャメルケースの文字列 */
+fun String.toSnakeCase(delimiter: String = "_") = split(toSnakeCaseRegex).map { it.toLowerCase() }.join(delimiter)
+
 val String.notEmptyOrNull get() = ifEmpty { null }
 val String.notBlankOrNull get() = ifBlank { null }
