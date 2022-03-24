@@ -174,5 +174,5 @@ val <I : Item> MakeItemModelScope<I>.generated get() = getStandardItemModel("ite
 val <I : ItemMulti<V>, V : ItemVariant> MakeItemVariantModelScope<I, V>.generated get() = getStandardItemModel("item/generated")
 val <I : Item> MakeItemModelScope<I>.handheld get() = getStandardItemModel("item/handheld")
 val <I : ItemMulti<V>, V : ItemVariant> MakeItemVariantModelScope<I, V>.handheld get() = getStandardItemModel("item/handheld")
-val <I : Item> MakeItemModelScope<I>.block get() = DataItemModel("${itemInitializer.registryName.domain}:block/${itemInitializer.registryName.path}")
-val <I : ItemMulti<V>, V : ItemVariant> MakeItemVariantModelScope<I, V>.block get() = DataItemModel("${itemVariantInitializer.registryName.domain}:block/${itemVariantInitializer.registryName.path}")
+val <I : Item> MakeItemModelScope<I>.block get() = DataItemModel(parent = "${itemInitializer.registryName.domain}:block/${itemInitializer.registryName.path}")
+val <I : ItemMulti<V>, V : ItemVariant> MakeItemVariantModelScope<I, V>.block get() = DataItemModel(parent = "${itemVariantInitializer.registryName.domain}:block/${itemVariantInitializer.registryName.path}")
