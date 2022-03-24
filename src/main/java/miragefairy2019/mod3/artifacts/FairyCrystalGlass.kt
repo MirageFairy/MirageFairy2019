@@ -1,11 +1,13 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.BlockInitializer
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataPart
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapelessRecipe
+import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
@@ -42,133 +44,102 @@ object FairyCrystalGlass {
     lateinit var blockPureFairyCrystalGlass: () -> BlockFairyCrystalGlass
     lateinit var itemBlockPureFairyCrystalGlass: () -> ItemBlock
     val module = module {
-        // 通常
-        blockFairyCrystalGlass = block({ BlockFairyCrystalGlass() }, "fairy_crystal_glass") {
-            setUnlocalizedName("fairyCrystalGlass")
-            setCreativeTab { ApiMain.creativeTab }
-            makeBlockStates {
-                DataBlockStates(
-                    multipart = listOf(
-                        DataPart(
-                            `when` = mapOf("down" to false),
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 180)
-                        ),
-                        DataPart(
-                            `when` = mapOf("up" to false),
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame")
-                        ),
-                        DataPart(
-                            `when` = mapOf("north" to false),
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90)
-                        ),
-                        DataPart(
-                            `when` = mapOf("south" to false),
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = -90)
-                        ),
-                        DataPart(
-                            `when` = mapOf("west" to false),
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90, y = -90)
-                        ),
-                        DataPart(
-                            `when` = mapOf("east" to false),
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90, y = 90)
-                        ),
-                        DataPart(
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass")
+        fun fairyCrystalGlass(
+            crystalMetadata: Int,
+            crystalName: String, glassName: String,
+            crystalOreName: String, glassOreName: String,
+            unlocalizedName: String, englishName: String, japaneseName: String
+        ): Pair<BlockInitializer<BlockFairyCrystalGlass>, ItemInitializer<ItemBlock>> {
+            val block = block({ BlockFairyCrystalGlass() }, glassName) {
+                setUnlocalizedName(unlocalizedName)
+                setCreativeTab { ApiMain.creativeTab }
+                makeBlockStates {
+                    DataBlockStates(
+                        multipart = listOf(
+                            DataPart(
+                                `when` = mapOf("down" to false),
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 180)
+                            ),
+                            DataPart(
+                                `when` = mapOf("up" to false),
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame")
+                            ),
+                            DataPart(
+                                `when` = mapOf("north" to false),
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90)
+                            ),
+                            DataPart(
+                                `when` = mapOf("south" to false),
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = -90)
+                            ),
+                            DataPart(
+                                `when` = mapOf("west" to false),
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90, y = -90)
+                            ),
+                            DataPart(
+                                `when` = mapOf("east" to false),
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90, y = 90)
+                            ),
+                            DataPart(
+                                apply = DataBlockState("${ModMirageFairy2019.MODID}:$glassName")
+                            )
                         )
                     )
-                )
+                }
             }
-        }
-        itemBlockFairyCrystalGlass = item({ ItemBlock(blockFairyCrystalGlass()) }, "fairy_crystal_glass") {
-            addOreName("blockMirageFairyCrystal")
-            setCustomModelResourceLocation(model = ResourceLocation(ModMirageFairy2019.MODID, "fairy_crystal_glass"))
-        }
-        onMakeLang { enJa("tile.fairyCrystalGlass.name", "Fairy Crystal Glass", "フェアリークリスタルガラス") }
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "fairy_crystal_glass"),
-            DataShapelessRecipe(
-                ingredients = (1..8).map { DataOreIngredient(ore = "mirageFairyCrystal") },
-                result = DataResult(
-                    item = "${ModMirageFairy2019.MODID}:fairy_crystal_glass"
-                )
-            )
-        )
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "fairy_crystal_from_fairy_crystal_glass"),
-            DataShapelessRecipe(
-                ingredients = listOf(DataOreIngredient(ore = "blockMirageFairyCrystal")),
-                result = DataResult(
-                    item = "${ModMirageFairy2019.MODID}:fairy_crystal",
-                    data = 0,
-                    count = 8
-                )
-            )
-        )
+            val item = item({ ItemBlock(block()) }, glassName) {
+                addOreName(glassOreName)
+                setCustomModelResourceLocation(model = ResourceLocation(ModMirageFairy2019.MODID, glassName))
+            }
 
-        // 高純度
-        blockPureFairyCrystalGlass = block({ BlockFairyCrystalGlass() }, "pure_fairy_crystal_glass") {
-            setUnlocalizedName("pureFairyCrystalGlass")
-            setCreativeTab { ApiMain.creativeTab }
-            makeBlockStates {
-                DataBlockStates(
-                    multipart = listOf(
-                        DataPart(
-                            `when` = mapOf("down" to false),
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 180)
-                        ),
-                        DataPart(
-                            `when` = mapOf("up" to false),
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame")
-                        ),
-                        DataPart(
-                            `when` = mapOf("north" to false),
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90)
-                        ),
-                        DataPart(
-                            `when` = mapOf("south" to false),
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = -90)
-                        ),
-                        DataPart(
-                            `when` = mapOf("west" to false),
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90, y = -90)
-                        ),
-                        DataPart(
-                            `when` = mapOf("east" to false),
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:fairy_crystal_glass_frame", x = 90, y = 90)
-                        ),
-                        DataPart(
-                            apply = DataBlockState("${ModMirageFairy2019.MODID}:pure_fairy_crystal_glass")
-                        )
+            onMakeLang { enJa("tile.$unlocalizedName.name", englishName, japaneseName) }
+
+            // 圧縮レシピ
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, glassName),
+                DataShapelessRecipe(
+                    ingredients = (1..8).map { DataOreIngredient(ore = crystalOreName) },
+                    result = DataResult(
+                        item = "${ModMirageFairy2019.MODID}:$glassName"
                     )
                 )
-            }
-        }
-        itemBlockPureFairyCrystalGlass = item({ ItemBlock(blockPureFairyCrystalGlass()) }, "pure_fairy_crystal_glass") {
-            addOreName("blockMirageFairyCrystalPure")
-            setCustomModelResourceLocation(model = ResourceLocation(ModMirageFairy2019.MODID, "pure_fairy_crystal_glass"))
-        }
-        onMakeLang { enJa("tile.pureFairyCrystalGlass.name", "Pure Fairy Crystal Glass", "高純度フェアリークリスタルガラス") }
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "pure_fairy_crystal_glass"),
-            DataShapelessRecipe(
-                ingredients = (1..8).map { DataOreIngredient(ore = "mirageFairyCrystalPure") },
-                result = DataResult(
-                    item = "${ModMirageFairy2019.MODID}:pure_fairy_crystal_glass"
+            )
+
+            // 分解レシピ
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "${crystalName}_from_${glassName}"),
+                DataShapelessRecipe(
+                    ingredients = listOf(DataOreIngredient(ore = glassOreName)),
+                    result = DataResult(
+                        item = "${ModMirageFairy2019.MODID}:fairy_crystal",
+                        data = crystalMetadata,
+                        count = 8
+                    )
                 )
             )
-        )
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "pure_fairy_crystal_from_pure_fairy_crystal_glass"),
-            DataShapelessRecipe(
-                ingredients = listOf(DataOreIngredient(ore = "blockMirageFairyCrystalPure")),
-                result = DataResult(
-                    item = "${ModMirageFairy2019.MODID}:fairy_crystal",
-                    data = 2,
-                    count = 8
-                )
-            )
-        )
+
+            return Pair(block, item)
+        }
+
+        fairyCrystalGlass(
+            0,
+            "fairy_crystal", "fairy_crystal_glass",
+            "mirageFairyCrystal", "blockMirageFairyCrystal",
+            "fairyCrystalGlass", "Fairy Crystal Glass", "フェアリークリスタルガラス"
+        ).let {
+            blockFairyCrystalGlass = it.first
+            itemBlockFairyCrystalGlass = it.second
+        }
+        fairyCrystalGlass(
+            2,
+            "pure_fairy_crystal", "pure_fairy_crystal_glass",
+            "mirageFairyCrystalPure", "blockMirageFairyCrystalPure",
+            "pureFairyCrystalGlass", "Pure Fairy Crystal Glass", "高純度フェアリークリスタルガラス"
+        ).let {
+            blockPureFairyCrystalGlass = it.first
+            itemBlockPureFairyCrystalGlass = it.second
+        }
+
     }
 }
 
