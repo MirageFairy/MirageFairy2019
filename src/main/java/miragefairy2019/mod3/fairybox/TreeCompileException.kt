@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.artifacts.fairybox
+package miragefairy2019.mod3.fairybox
 
 import net.minecraft.util.text.ITextComponent
 

@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.artifacts.fairybox
+package miragefairy2019.mod3.fairybox
 
 import mirrg.kotlin.castOrNull
 import net.minecraft.block.BlockContainer

@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.artifacts.fairybox
+package miragefairy2019.mod3.fairybox
 
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.darkRed

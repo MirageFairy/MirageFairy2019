@@ -3,7 +3,7 @@ package miragefairy2019.mod
 import miragefairy2019.jei.Jei
 import miragefairy2019.mod.modules.fairyweapon.FairyWeapon
 import miragefairy2019.mod3.artifacts.Artifacts
-import miragefairy2019.mod3.artifacts.fairybox.FairyBox
+import miragefairy2019.mod3.fairybox.FairyBox
 import miragefairy2019.mod3.damagesource.DamageSource
 import miragefairy2019.mod3.fairy.Fairy
 import miragefairy2019.mod3.fairy.relation.FairyRelation
