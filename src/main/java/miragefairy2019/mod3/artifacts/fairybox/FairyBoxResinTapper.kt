@@ -22,60 +22,59 @@ class BlockFairyBoxResinTapper : BlockFairyBoxBase() {
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (worldIn.isRemote) return true
         val tileEntity = worldIn.getTileEntity(pos) as? TileEntityFairyBoxResinTapper ?: return false
-        val executor = tileEntity.executor ?: return false
+        val executor = tileEntity.getExecutor() ?: return false
         return executor.onBlockActivated(playerIn, hand, facing, hitX, hitY, hitZ)
     }
 }
 
 class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
-    override val executor: TileEntityExecutor?
-        get() {
-            val blockState = world.getBlockState(pos)
-            val block = blockState.block as? BlockFairyBoxResinTapper ?: return null
-            val facing = block.getFacing(blockState)
-            val blockPosOutput = pos.offset(facing)
+    override fun getExecutor(): TileEntityExecutor? {
+        val blockState = world.getBlockState(pos)
+        val block = blockState.block as? BlockFairyBoxResinTapper ?: return null
+        val facing = block.getFacing(blockState)
+        val blockPosOutput = pos.offset(facing)
 
-            fun getErrorExecutor(textComponent: ITextComponent) = object : TileEntityExecutor() {
-                override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-                    player.sendStatusMessage(textComponent, true)
-                    return true
-                }
-            }
-
-            // 目の前にアイテムがある場合は行動しない（Lazy Chunk対策）
-            if (world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPosOutput)).isNotEmpty()) return getErrorExecutor(textComponent { (!"制作物があふれています").darkRed }) // TODO translate
-
-            // 排出面が塞がれている場合は行動しない
-            if (world.getBlockState(blockPosOutput).isSideSolid(world, blockPosOutput, facing.opposite)) return getErrorExecutor(textComponent { (!"妖精が入れません").darkRed }) // TODO translate
-
-            // 妖精の木のコンパイルに失敗した場合は抜ける
-            val leaves = try {
-                compileFairyTree(world, pos)
-            } catch (e: TreeCompileException) {
-                return getErrorExecutor(e.description)
-            }
-
-            // 成立
-            return object : TileEntityExecutor() {
-                override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-                    val times = 10000
-
-                    val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times).coerceAtMost(120.0)
-                    val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5).coerceAtLeast(0.0)
-
-                    player.sendStatusMessage(textComponent { (!"オーラ吸収速度: ${auraCollectionSpeed formatAs "%.2f"} Folia, 生産速度: ${baseCount formatAs "%.2f"} 個/分") }, true) // TODO translate
-                    return true
-                }
-
-                override fun onUpdateTick() {
-                    val times = 10
-
-                    val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times).coerceAtMost(120.0)
-                    val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5).coerceAtLeast(0.0)
-
-                    val count = UtilsMath.randomInt(world.rand, baseCount)
-                    if (count > 0) FairyMaterials.itemVariants.fairyWoodResin.createItemStack(count).drop(world, blockPosOutput, motionless = true)
-                }
+        fun getErrorExecutor(textComponent: ITextComponent) = object : TileEntityExecutor() {
+            override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+                player.sendStatusMessage(textComponent, true)
+                return true
             }
         }
+
+        // 目の前にアイテムがある場合は行動しない（Lazy Chunk対策）
+        if (world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPosOutput)).isNotEmpty()) return getErrorExecutor(textComponent { (!"制作物があふれています").darkRed }) // TODO translate
+
+        // 排出面が塞がれている場合は行動しない
+        if (world.getBlockState(blockPosOutput).isSideSolid(world, blockPosOutput, facing.opposite)) return getErrorExecutor(textComponent { (!"妖精が入れません").darkRed }) // TODO translate
+
+        // 妖精の木のコンパイルに失敗した場合は抜ける
+        val leaves = try {
+            compileFairyTree(world, pos)
+        } catch (e: TreeCompileException) {
+            return getErrorExecutor(e.description)
+        }
+
+        // 成立
+        return object : TileEntityExecutor() {
+            override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+                val times = 10000
+
+                val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times).coerceAtMost(120.0)
+                val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5).coerceAtLeast(0.0)
+
+                player.sendStatusMessage(textComponent { (!"オーラ吸収速度: ${auraCollectionSpeed formatAs "%.2f"} Folia, 生産速度: ${baseCount formatAs "%.2f"} 個/分") }, true) // TODO translate
+                return true
+            }
+
+            override fun onUpdateTick() {
+                val times = 10
+
+                val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times).coerceAtMost(120.0)
+                val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5).coerceAtLeast(0.0)
+
+                val count = UtilsMath.randomInt(world.rand, baseCount)
+                if (count > 0) FairyMaterials.itemVariants.fairyWoodResin.createItemStack(count).drop(world, blockPosOutput, motionless = true)
+            }
+        }
+    }
 }

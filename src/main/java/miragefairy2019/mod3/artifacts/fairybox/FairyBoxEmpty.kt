@@ -7,5 +7,5 @@ class BlockFairyBoxEmpty : BlockFairyBoxBase() {
 }
 
 class TileEntityFairyBoxEmpty : TileEntityFairyBoxBase() {
-    override val executor: TileEntityExecutor? = null
+    override fun getExecutor(): TileEntityExecutor? = null
 }

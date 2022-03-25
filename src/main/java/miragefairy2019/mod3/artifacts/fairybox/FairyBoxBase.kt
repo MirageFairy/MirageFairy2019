@@ -101,11 +101,11 @@ abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
             tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
         }
 
-        executor?.onUpdateTick()
+        getExecutor()?.onUpdateTick()
     }
 
 
-    abstract val executor: TileEntityExecutor?
+    abstract fun getExecutor(): TileEntityExecutor?
 }
 
 open class TileEntityExecutor {
