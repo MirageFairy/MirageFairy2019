@@ -1,26 +1,26 @@
 {
-	"display": {
-		"icon": {
-			"item": "miragefairy2019:bell_base"
-		},
-		"title": {
-			"translate": "item.bellBase.name"
-		},
-		"description": {
-			"translate": "advancements.miragefairy2019.fairy_weapon.all.description"
-		}
-	},
-	"parent": "miragefairy2019:fairy_weapon/root",
-	"criteria": {
-		"main": {
-			"trigger": "minecraft:inventory_changed",
-			"conditions": {
-				"items": [
-					{
-						"item": "miragefairy2019:bell_base"
-					}
-				]
-			}
-		}
-	}
+  "display": {
+    "icon": {
+      "item": "miragefairy2019:bell_base"
+    },
+    "title": {
+      "translate": "item.bellBase.name"
+    },
+    "description": {
+      "translate": "advancements.miragefairy2019.fairy_weapon.all.description"
+    }
+  },
+  "parent": "miragefairy2019:fairy_weapon/root",
+  "criteria": {
+    "main": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miragefairy2019:bell_base"
+          }
+        ]
+      }
+    }
+  }
 }

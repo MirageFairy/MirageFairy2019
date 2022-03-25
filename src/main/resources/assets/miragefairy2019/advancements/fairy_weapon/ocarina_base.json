@@ -1,26 +1,26 @@
 {
-	"display": {
-		"icon": {
-			"item": "miragefairy2019:ocarina_base"
-		},
-		"title": {
-			"translate": "item.ocarinaBase.name"
-		},
-		"description": {
-			"translate": "advancements.miragefairy2019.fairy_weapon.all.description"
-		}
-	},
-	"parent": "miragefairy2019:fairy_weapon/root",
-	"criteria": {
-		"main": {
-			"trigger": "minecraft:inventory_changed",
-			"conditions": {
-				"items": [
-					{
-						"item": "miragefairy2019:ocarina_base"
-					}
-				]
-			}
-		}
-	}
+  "display": {
+    "icon": {
+      "item": "miragefairy2019:ocarina_base"
+    },
+    "title": {
+      "translate": "item.ocarinaBase.name"
+    },
+    "description": {
+      "translate": "advancements.miragefairy2019.fairy_weapon.all.description"
+    }
+  },
+  "parent": "miragefairy2019:fairy_weapon/root",
+  "criteria": {
+    "main": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miragefairy2019:ocarina_base"
+          }
+        ]
+      }
+    }
+  }
 }

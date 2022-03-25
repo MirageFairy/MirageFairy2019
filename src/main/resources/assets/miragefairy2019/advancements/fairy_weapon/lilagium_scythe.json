@@ -1,26 +1,26 @@
 {
-	"display": {
-		"icon": {
-			"item": "miragefairy2019:lilagium_scythe"
-		},
-		"title": {
-			"translate": "item.lilagiumScythe.name"
-		},
-		"description": {
-			"translate": "advancements.miragefairy2019.fairy_weapon.all.description"
-		}
-	},
-	"parent": "miragefairy2019:fairy_weapon/miragium_scythe",
-	"criteria": {
-		"main": {
-			"trigger": "minecraft:inventory_changed",
-			"conditions": {
-				"items": [
-					{
-						"item": "miragefairy2019:lilagium_scythe"
-					}
-				]
-			}
-		}
-	}
+  "display": {
+    "icon": {
+      "item": "miragefairy2019:lilagium_scythe"
+    },
+    "title": {
+      "translate": "item.lilagiumScythe.name"
+    },
+    "description": {
+      "translate": "advancements.miragefairy2019.fairy_weapon.all.description"
+    }
+  },
+  "parent": "miragefairy2019:fairy_weapon/miragium_scythe",
+  "criteria": {
+    "main": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miragefairy2019:lilagium_scythe"
+          }
+        ]
+      }
+    }
+  }
 }
