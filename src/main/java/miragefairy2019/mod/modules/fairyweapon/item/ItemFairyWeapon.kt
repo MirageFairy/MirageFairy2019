@@ -16,9 +16,6 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IItemFairy
-import miragefairy2019.mod.api.fairyweapon.formula.ApiFormula
-import miragefairy2019.mod.api.fairyweapon.formula.IFormula
-import miragefairy2019.mod.api.fairyweapon.formula.IMagicStatus
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod3.fairy.api.IFairyType
@@ -35,11 +32,9 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import java.util.function.Function
 
 open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem, IItemFairyWeapon {
     var tier = 0
@@ -111,7 +106,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
 
     @SideOnly(Side.CLIENT)
     override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        addInformationMagicStatuses(itemStackFairyWeapon, itemStackFairy, fairyType, world, tooltip, flag)
+
     }
 
 
@@ -120,20 +115,6 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
     override fun canApplyAtEnchantingTable(stack: ItemStack, enchantment: Enchantment) = false // すべてのエンチャントが不適正
     override fun isBookEnchantable(stack: ItemStack, book: ItemStack) = false // 本を使用したエンチャント不可
     override fun isRepairable() = false // 金床での修理不可
-
-
-    // 旧魔法ステータス
-
-    private val magicStatuses = mutableListOf<IMagicStatus<*>>()
-
-    fun <T> registerMagicStatus(name: String, formatter: Function<T, ITextComponent>, formula: IFormula<T>): IMagicStatus<T> {
-        return ApiFormula.createMagicStatus(name, formatter, formula).also { magicStatuses += it }
-    }
-
-    @SideOnly(Side.CLIENT)
-    fun addInformationMagicStatuses(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        magicStatuses.forEach { tooltip += formattedText { !(it.getDisplayString(fairyType)).blue } }
-    }
 
 
     // 挙動
