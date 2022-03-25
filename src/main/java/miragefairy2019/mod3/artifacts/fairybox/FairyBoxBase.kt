@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.artifacts.fairybox
 
+import mirrg.kotlin.castOrNull
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -77,6 +78,14 @@ abstract class BlockFairyBoxBase : BlockContainer(Material.WOOD) {
     @SideOnly(Side.CLIENT)
     override fun getBlockLayer() = BlockRenderLayer.CUTOUT_MIPPED
     override fun getRenderType(state: IBlockState) = EnumBlockRenderType.MODEL
+
+
+    // Action
+    fun getExecutor(world: World, blockPos: BlockPos) = world.getTileEntity(blockPos)?.castOrNull<TileEntityFairyBoxBase>()?.getExecutor()
+    override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        val executor = getExecutor(worldIn, pos) ?: return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ)
+        return executor.onBlockActivated(playerIn, hand, facing, hitX, hitY, hitZ)
+    }
 
 
     companion object {

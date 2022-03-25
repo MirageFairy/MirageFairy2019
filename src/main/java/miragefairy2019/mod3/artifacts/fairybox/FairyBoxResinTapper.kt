@@ -7,24 +7,16 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod3.artifacts.FairyMaterials
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.formatAs
-import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
-import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
 
 class BlockFairyBoxResinTapper : BlockFairyBoxBase() {
     override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityFairyBoxResinTapper()
-    override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        if (worldIn.isRemote) return true
-        val tileEntity = worldIn.getTileEntity(pos) as? TileEntityFairyBoxResinTapper ?: return false
-        val executor = tileEntity.getExecutor() ?: return false
-        return executor.onBlockActivated(playerIn, hand, facing, hitX, hitY, hitZ)
-    }
 }
 
 class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
@@ -57,6 +49,7 @@ class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
         // 成立
         return object : TileEntityExecutor() {
             override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+                if (world.isRemote) return true
                 val times = 10000
 
                 val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times).coerceAtMost(120.0)
