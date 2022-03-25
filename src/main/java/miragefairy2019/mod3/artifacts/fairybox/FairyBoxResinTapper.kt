@@ -17,21 +17,21 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
 
-class BlockFairyResinTapper : BlockFairyBoxBase() {
-    override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityFairyResinTapper()
+class BlockFairyBoxResinTapper : BlockFairyBoxBase() {
+    override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityFairyBoxResinTapper()
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (worldIn.isRemote) return true
-        val tileEntity = worldIn.getTileEntity(pos) as? TileEntityFairyResinTapper ?: return false
+        val tileEntity = worldIn.getTileEntity(pos) as? TileEntityFairyBoxResinTapper ?: return false
         val executor = tileEntity.executor ?: return false
         return executor.onBlockActivated(playerIn, hand, facing, hitX, hitY, hitZ)
     }
 }
 
-class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
+class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
     override val executor: TileEntityExecutor?
         get() {
             val blockState = world.getBlockState(pos)
-            val block = blockState.block as? BlockFairyResinTapper ?: return null
+            val block = blockState.block as? BlockFairyBoxResinTapper ?: return null
             val facing = block.getFacing(blockState)
             val blockPosOutput = pos.offset(facing)
 
