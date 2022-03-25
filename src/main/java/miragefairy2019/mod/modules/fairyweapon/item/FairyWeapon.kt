@@ -99,7 +99,7 @@ object FairyWeapon {
 
         val miragiumAxe = fw(2, { ItemMiragiumAxe() }, "miragium_axe", "miragiumAxe", listOf(), null, !SLASH, !HARVEST, !"plateMiragium")
 
-        val magicWandBase = fw(3, { ItemRodBase() }, "magic_wand_base", "magicWandBase", listOf(), null, !KNOWLEDGE)
+        val magicWandBase = fw(3, { ItemRodBase() }, "magic_wand_base", "magicWandBase", listOf(), null, !KNOWLEDGE, !"ingotMiragium", !"gemFluorite")
         val magicWandLight = fw(3, { ItemMagicWandLight() }, "light_magic_wand", "magicWandLight", listOf(), magicWandBase, !LIGHT)
         val magicWandCollecting = fw(3, { ItemMagicWandCollecting() }, "collecting_magic_wand", "magicWandCollecting", listOf(), magicWandBase, !WARP)
         val chargingRod = fw(3, { ItemChargingRod() }, "charging_rod", "chargingRod", listOf(), magicWandBase, !THUNDER, !WARP, !"ingotGold")
@@ -109,10 +109,10 @@ object FairyWeapon {
 
         val ocarinaBase = fw(3, { ItemFairyWeapon() }, "ocarina_base", "ocarinaBase", listOf(), null, !SOUND)
         val ocarinaTemptation = fw(3, { ItemOcarinaTemptation() }, "temptation_ocarina", "ocarinaTemptation", listOf(), ocarinaBase, !LIFE)
-        val bellBase = fw(2, { ItemBellBase() }, "bell_base", "bellBase", listOf(), null, !SOUND)
+        val bellBase = fw(2, { ItemBellBase() }, "bell_base", "bellBase", listOf(), null, !SOUND, !"plateMiragium")
         val bellFlowerPicking = fw(2, { ItemBellFlowerPicking(0.0, 0.001, 0.2) }, "flower_picking_bell", "bellFlowerPicking", listOf(), bellBase, !HARVEST)
         val bellFlowerPicking2 = fw(4, { ItemBellFlowerPicking(10.0, 0.01, 10000.0) }, "flower_picking_bell_2", "bellFlowerPicking2", listOf(), bellFlowerPicking, !HARVEST)
-        val bellChristmas = fw(3, { ItemBellChristmas() }, "christmas_bell", "bellChristmas", listOf(), bellBase, !CHRISTMAS, !ATTACK)
+        val bellChristmas = fw(3, { ItemBellChristmas() }, "christmas_bell", "bellChristmas", listOf(), bellBase, !CHRISTMAS, !ATTACK, !"ingotGold", !"gemMagnetite")
         val miragiumScythe = fw(2, { ItemMiragiumScythe(0.0, 2.0f) }, "miragium_scythe", "miragiumScythe", listOf(), null, !SLASH, !HARVEST)
         val lilagiumScythe = fw(3, { ItemMiragiumScythe(10.0, 4.0f) }, "lilagium_scythe", "lilagiumScythe", listOf(), miragiumScythe, !HARVEST)
         val ryugyoDrill = fw(4, { ItemRyugyoDrill(0.0) }, "ryugyo_drill", "ryugyoDrill", listOf(), null, !DESTROY, !THUNDER, !WATER)
