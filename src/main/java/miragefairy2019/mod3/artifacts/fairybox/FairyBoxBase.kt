@@ -26,7 +26,7 @@ import java.util.Random
 import kotlin.math.floor
 import kotlin.math.log
 
-abstract class BlockFairyBoxBase : BlockContainer(Material.WOOD) {
+class BlockFairyBoxBase(private val tileEntityProvider: () -> TileEntityFairyBoxBase) : BlockContainer(Material.WOOD) {
     init {
 
         // meta
@@ -73,8 +73,11 @@ abstract class BlockFairyBoxBase : BlockContainer(Material.WOOD) {
     fun getFacing(blockState: IBlockState): EnumFacing = blockState.getValue(FACING)
 
 
-    // Graphics
+    // Tile Entity
+    override fun createNewTileEntity(worldIn: World, meta: Int) = tileEntityProvider()
 
+
+    // Graphics
     @SideOnly(Side.CLIENT)
     override fun getBlockLayer() = BlockRenderLayer.CUTOUT_MIPPED
     override fun getRenderType(state: IBlockState) = EnumBlockRenderType.MODEL

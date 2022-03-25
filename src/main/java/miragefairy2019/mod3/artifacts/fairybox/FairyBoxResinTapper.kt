@@ -13,16 +13,11 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.text.ITextComponent
-import net.minecraft.world.World
-
-class BlockFairyBoxResinTapper : BlockFairyBoxBase() {
-    override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityFairyBoxResinTapper()
-}
 
 class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
     override fun getExecutor(): TileEntityExecutor? {
         val blockState = world.getBlockState(pos)
-        val block = blockState.block as? BlockFairyBoxResinTapper ?: return null
+        val block = blockState.block as? BlockFairyBoxBase ?: return null
         val facing = block.getFacing(blockState)
         val blockPosOutput = pos.offset(facing)
 
