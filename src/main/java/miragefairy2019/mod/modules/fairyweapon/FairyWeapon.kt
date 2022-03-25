@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.item
+package miragefairy2019.mod.modules.fairyweapon
 
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
@@ -17,6 +17,22 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
+import miragefairy2019.mod.modules.fairyweapon.item.ItemBellBase
+import miragefairy2019.mod.modules.fairyweapon.item.ItemBellChristmas
+import miragefairy2019.mod.modules.fairyweapon.item.ItemBellFlowerPicking
+import miragefairy2019.mod.modules.fairyweapon.item.ItemChargingRod
+import miragefairy2019.mod.modules.fairyweapon.item.ItemCrystalSword
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairySword
+import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeapon
+import miragefairy2019.mod.modules.fairyweapon.item.ItemGravityRod
+import miragefairy2019.mod.modules.fairyweapon.item.ItemMagicWandCollecting
+import miragefairy2019.mod.modules.fairyweapon.item.ItemMagicWandLight
+import miragefairy2019.mod.modules.fairyweapon.item.ItemMagicWandLightning
+import miragefairy2019.mod.modules.fairyweapon.item.ItemMiragiumAxe
+import miragefairy2019.mod.modules.fairyweapon.item.ItemMiragiumScythe
+import miragefairy2019.mod.modules.fairyweapon.item.ItemOcarinaTemptation
+import miragefairy2019.mod.modules.fairyweapon.item.ItemRodBase
+import miragefairy2019.mod.modules.fairyweapon.item.ItemRyugyoDrill
 import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesCombining
 import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesUncombining
 import miragefairy2019.mod3.artifacts.oreName

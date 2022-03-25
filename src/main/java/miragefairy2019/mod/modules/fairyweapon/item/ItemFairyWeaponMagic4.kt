@@ -12,6 +12,7 @@ import miragefairy2019.mod.magic4.Magic
 import miragefairy2019.mod.magic4.MagicArguments
 import miragefairy2019.mod.magic4.MagicStatus
 import miragefairy2019.mod.magic4.getMagicHandler
+import miragefairy2019.mod.modules.fairyweapon.findFairy
 import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer

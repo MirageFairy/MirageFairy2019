@@ -4,6 +4,8 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
+import miragefairy2019.mod.modules.fairyweapon.playSound
+import miragefairy2019.mod.modules.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod3.artifacts.MirageFlower
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.EnumErgType.WARP

@@ -3,6 +3,7 @@ package miragefairy2019.mod.modules.fairyweapon.item
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.api.fairy.ApiFairy
+import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.modules.fairyweapon.magic.EnumTargetExecutability
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.magic.UtilsMagic

@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.item
+package miragefairy2019.mod.modules.fairyweapon
 
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.itemStacks

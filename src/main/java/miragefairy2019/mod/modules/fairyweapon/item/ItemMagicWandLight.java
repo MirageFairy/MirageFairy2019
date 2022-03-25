@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
+import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
 import mirrg.boron.util.struct.Tuple;

@@ -6,6 +6,8 @@ import miragefairy2019.mod.magic4.MagicHandler
 import miragefairy2019.mod.magic4.float2
 import miragefairy2019.mod.magic4.magic
 import miragefairy2019.mod.magic4.world
+import miragefairy2019.mod.modules.fairyweapon.spawnMagicParticle
+import miragefairy2019.mod.modules.fairyweapon.spawnMagicSplashParticle
 import mirrg.kotlin.atMost
 import mirrg.kotlin.castOrNull
 import net.minecraft.entity.EntityLivingBase

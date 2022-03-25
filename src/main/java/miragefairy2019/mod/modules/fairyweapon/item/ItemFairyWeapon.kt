@@ -18,6 +18,7 @@ import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
+import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem

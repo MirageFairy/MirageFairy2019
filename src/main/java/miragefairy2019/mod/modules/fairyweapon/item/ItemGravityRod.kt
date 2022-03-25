@@ -9,6 +9,7 @@ import miragefairy2019.mod.magic4.integer
 import miragefairy2019.mod.magic4.percent0
 import miragefairy2019.mod.magic4.percent2
 import miragefairy2019.mod.magic4.world
+import miragefairy2019.mod.modules.fairyweapon.MagicMessage
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.skill.EnumMastery

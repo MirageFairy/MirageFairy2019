@@ -6,7 +6,11 @@ import miragefairy2019.mod.magic4.FormulaArguments
 import miragefairy2019.mod.magic4.MagicArguments
 import miragefairy2019.mod.magic4.MagicHandler
 import miragefairy2019.mod.magic4.world
+import miragefairy2019.mod.modules.fairyweapon.DamageSourceFairyMagic
+import miragefairy2019.mod.modules.fairyweapon.MagicMessage
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged
+import miragefairy2019.mod.modules.fairyweapon.spawnDamageParticle
+import miragefairy2019.mod.modules.fairyweapon.spawnParticleTargets
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult

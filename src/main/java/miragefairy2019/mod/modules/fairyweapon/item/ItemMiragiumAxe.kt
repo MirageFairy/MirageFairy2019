@@ -13,6 +13,11 @@ import miragefairy2019.mod.magic4.percent0
 import miragefairy2019.mod.magic4.percent2
 import miragefairy2019.mod.magic4.positive
 import miragefairy2019.mod.magic4.world
+import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
+import miragefairy2019.mod.modules.fairyweapon.MagicMessage
+import miragefairy2019.mod.modules.fairyweapon.extendSearch
+import miragefairy2019.mod.modules.fairyweapon.search
+import miragefairy2019.mod.modules.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod3.artifacts.FairyLog
 import miragefairy2019.mod3.erg.api.EnumErgType.CRAFT
 import miragefairy2019.mod3.erg.api.EnumErgType.DESTROY

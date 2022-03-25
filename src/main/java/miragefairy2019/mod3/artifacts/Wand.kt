@@ -19,7 +19,7 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod.modules.fairyweapon.item.FairyWeaponUtils
+import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe

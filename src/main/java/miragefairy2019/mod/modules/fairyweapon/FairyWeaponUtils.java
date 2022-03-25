@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.item;
+package miragefairy2019.mod.modules.fairyweapon;
 
 import com.google.common.base.Predicate;
 import miragefairy2019.mod.api.fairy.IItemFairy;
