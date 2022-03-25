@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.artifacts
+package miragefairy2019.mod3.artifacts.fairybox
 
 import java.util.Random
 

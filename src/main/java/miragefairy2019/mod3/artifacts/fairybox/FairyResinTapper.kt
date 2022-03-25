@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.artifacts
+package miragefairy2019.mod3.artifacts.fairybox
 
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
@@ -14,6 +14,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.tileEntity
+import miragefairy2019.mod3.artifacts.FairyMaterials
 import miragefairy2019.mod3.artifacts.treecompile.TreeCompileException
 import miragefairy2019.mod3.main.api.ApiMain
 import mirrg.boron.util.UtilsMath

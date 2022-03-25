@@ -1,8 +1,9 @@
-package miragefairy2019.mod3.artifacts
+package miragefairy2019.mod3.artifacts.fairybox
 
 import miragefairy2019.libkt.darkRed
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.mod3.artifacts.BlockFairyWoodLog
 import miragefairy2019.mod3.artifacts.treecompile.TreeCompileException
 import miragefairy2019.mod3.artifacts.treecompile.treeSearch
 import net.minecraft.block.BlockLeaves

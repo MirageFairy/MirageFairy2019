@@ -1,6 +1,8 @@
 package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.module
+import miragefairy2019.mod3.artifacts.fairybox.FairyBox
+import miragefairy2019.mod3.artifacts.fairybox.FairyResinTapper
 
 object Artifacts {
     val module = module {

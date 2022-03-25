@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.artifacts
+package miragefairy2019.mod3.artifacts.fairybox
 
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
