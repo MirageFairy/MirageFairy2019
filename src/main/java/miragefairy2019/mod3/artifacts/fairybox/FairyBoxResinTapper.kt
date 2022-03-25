@@ -6,6 +6,8 @@ import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod3.artifacts.FairyMaterials
 import mirrg.boron.util.UtilsMath
+import mirrg.kotlin.atLeast
+import mirrg.kotlin.atMost
 import mirrg.kotlin.formatAs
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
@@ -47,8 +49,8 @@ class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
                 if (world.isRemote) return true
                 val times = 10000
 
-                val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times).coerceAtMost(120.0)
-                val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5).coerceAtLeast(0.0)
+                val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times) atMost 120.0
+                val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5) atLeast 0.0
 
                 player.sendStatusMessage(textComponent { (!"オーラ吸収速度: ${auraCollectionSpeed formatAs "%.2f"} Folia, 生産速度: ${baseCount formatAs "%.2f"} 個/分") }, true) // TODO translate
                 return true
@@ -57,8 +59,8 @@ class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
             override fun onUpdateTick() {
                 val times = 10
 
-                val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times).coerceAtMost(120.0)
-                val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5).coerceAtLeast(0.0)
+                val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times) atMost 120.0
+                val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5) atLeast 0.0
 
                 val count = UtilsMath.randomInt(world.rand, baseCount)
                 if (count > 0) FairyMaterials.itemVariants.fairyWoodResin.createItemStack(count).drop(world, blockPosOutput, motionless = true)
