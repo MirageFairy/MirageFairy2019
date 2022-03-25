@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.artifacts
+package miragefairy2019.mod3.recipe
 
 import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.libkt.module
