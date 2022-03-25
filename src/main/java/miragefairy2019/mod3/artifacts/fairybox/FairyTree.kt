@@ -4,20 +4,11 @@ import miragefairy2019.libkt.darkRed
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod3.artifacts.BlockFairyWoodLog
-import miragefairy2019.mod3.artifacts.treecompile.TreeCompileException
 import miragefairy2019.mod3.artifacts.treecompile.treeSearch
 import net.minecraft.block.BlockLeaves
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.tileentity.TileEntity
-import net.minecraft.util.EnumFacing
-import net.minecraft.util.EnumHand
-import net.minecraft.util.ITickable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3i
 import net.minecraft.world.World
-import java.util.Random
-import kotlin.math.floor
-import kotlin.math.log
 
 // Compile
 
@@ -114,36 +105,3 @@ fun getAuraCollectionSpeed(world: World, leaves: Leaves, times: Int) = (0 until 
 
 /** 葉の数が`24+24+9+9`であるバニラの小さい木が持つオーラ吸収速度 */
 const val smallTreeAuraCollectionSpeed = 30.0
-
-
-// TileEntity
-
-abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
-    private var tick = -1
-    override fun update() {
-        if (world.isRemote) return // サーバーワールドのみ
-
-        // 平均して1分に1回行動する
-        val interval = 20 * 60
-        if (tick < 0) tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
-        if (tick != 0) {
-            tick--
-            return
-        } else {
-            tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
-        }
-
-        executor?.onUpdateTick()
-    }
-
-
-    abstract val executor: TileEntityExecutor?
-}
-
-open class TileEntityExecutor {
-    open fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float) = false
-    open fun onUpdateTick() = Unit
-}
-
-/** @return 0以上の値 */
-fun randomSkipTicks(random: Random, rate: Double) = floor(log(random.nextDouble(), 1 - rate)).toInt()

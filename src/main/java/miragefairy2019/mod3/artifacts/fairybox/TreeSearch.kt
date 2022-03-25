@@ -2,6 +2,7 @@ package miragefairy2019.mod3.artifacts.treecompile
 
 import miragefairy2019.libkt.darkRed
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.mod3.artifacts.fairybox.TreeCompileException
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 

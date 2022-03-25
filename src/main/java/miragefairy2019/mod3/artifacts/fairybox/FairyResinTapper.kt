@@ -1,59 +1,21 @@
 package miragefairy2019.mod3.artifacts.fairybox
 
-import miragefairy2019.libkt.DataBlockState
-import miragefairy2019.libkt.DataBlockStates
-import miragefairy2019.libkt.block
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.darkRed
 import miragefairy2019.libkt.drop
-import miragefairy2019.libkt.item
-import miragefairy2019.libkt.makeBlockStates
-import miragefairy2019.libkt.module
-import miragefairy2019.libkt.setCreativeTab
-import miragefairy2019.libkt.setCustomModelResourceLocation
-import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod3.artifacts.FairyMaterials
-import miragefairy2019.mod3.artifacts.treecompile.TreeCompileException
-import miragefairy2019.mod3.main.api.ApiMain
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.formatAs
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemBlock
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
-
-object FairyResinTapper {
-    lateinit var blockFairyResinTapper: () -> BlockFairyResinTapper
-    lateinit var itemBlockFairyResinTapper: () -> ItemBlock
-    val module = module {
-        blockFairyResinTapper = block({ BlockFairyResinTapper() }, "fairy_resin_tapper") {
-            setUnlocalizedName("fairyResinTapper")
-            setCreativeTab { ApiMain.creativeTab }
-            makeBlockStates {
-                DataBlockStates(
-                    variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
-                        "facing=${facing.first}" to DataBlockState(
-                            "miragefairy2019:fairy_resin_tapper",
-                            y = facing.second
-                        )
-                    }
-                )
-            }
-        }
-        itemBlockFairyResinTapper = item({ ItemBlock(blockFairyResinTapper()) }, "fairy_resin_tapper") {
-            setCustomModelResourceLocation(variant = "facing=north")
-        }
-        tileEntity("fairy_resin_tapper", TileEntityFairyResinTapper::class.java)
-    }
-}
 
 class BlockFairyResinTapper : BlockFairyBoxBase() {
     override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityFairyResinTapper()

@@ -7,16 +7,23 @@ import net.minecraft.block.properties.PropertyEnum
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
+import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumHand
+import net.minecraft.util.ITickable
 import net.minecraft.util.Mirror
 import net.minecraft.util.Rotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+import java.util.Random
+import kotlin.math.floor
+import kotlin.math.log
 
 abstract class BlockFairyBoxBase : BlockContainer(Material.WOOD) {
     init {
@@ -78,3 +85,33 @@ abstract class BlockFairyBoxBase : BlockContainer(Material.WOOD) {
         val FACING: PropertyEnum<EnumFacing> = PropertyEnum.create("facing", EnumFacing::class.java, EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.WEST, EnumFacing.EAST)
     }
 }
+
+abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
+    private var tick = -1
+    override fun update() {
+        if (world.isRemote) return // サーバーワールドのみ
+
+        // 平均して1分に1回行動する
+        val interval = 20 * 60
+        if (tick < 0) tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
+        if (tick != 0) {
+            tick--
+            return
+        } else {
+            tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
+        }
+
+        executor?.onUpdateTick()
+    }
+
+
+    abstract val executor: TileEntityExecutor?
+}
+
+open class TileEntityExecutor {
+    open fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float) = false
+    open fun onUpdateTick() = Unit
+}
+
+/** @return 0以上の値 */
+fun randomSkipTicks(random: Random, rate: Double) = floor(log(random.nextDouble(), 1 - rate)).toInt()
