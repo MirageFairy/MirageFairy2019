@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.mod.formula4.status
 import miragefairy2019.mod.magic4.MagicHandler
-import miragefairy2019.mod.magic4.float2
+import miragefairy2019.mod.magic4.pitch
 import miragefairy2019.mod.magic4.world
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.pow
 
 class ItemBellBase : ItemFairyWeaponMagic4() {
-    val pitch = status("pitch", { 0.5.pow(cost / 50.0 - 1.0) }, { float2 })
+    val pitch = status("pitch", { 0.5.pow(costFactor - 1.0) }, { pitch })
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックで鳴らす" // TODO translate

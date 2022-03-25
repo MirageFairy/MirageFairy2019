@@ -7,6 +7,7 @@ import miragefairy2019.mod.magic4.float2
 import miragefairy2019.mod.magic4.integer
 import miragefairy2019.mod.magic4.percent0
 import miragefairy2019.mod.magic4.percent2
+import miragefairy2019.mod.magic4.pitch
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.mana.api.EnumManaType
 import miragefairy2019.mod3.skill.EnumMastery
@@ -31,7 +32,7 @@ class ItemBellChristmas : ItemAoeWeaponBase() {
     override val wear = status("wear", { 1.0 / (1.0 + (!EnumManaType.FIRE + !EnumErgType.CRYSTAL) / 20.0) * costFactor }, { percent2 })
     override val coolTime = status("coolTime", { (20.0 * 4) / (1.0 + (!EnumManaType.AQUA + !EnumErgType.ENERGY) / 50.0) * costFactor }, { duration })
 
-    val pitch = status("pitch", { 0.5.pow(cost / 50.0 - 1.0) }, { float2 })
+    val pitch = status("pitch", { 0.5.pow(costFactor - 1.0) }, { pitch })
     override fun MagicArguments.onActionEffect(world: WorldServer) {
         world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, pitch().toFloat()) // 鐘の音
     }
