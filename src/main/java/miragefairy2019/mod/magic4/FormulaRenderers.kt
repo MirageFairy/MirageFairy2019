@@ -8,6 +8,7 @@ import miragefairy2019.mod.formula4.FormulaRendererSelector
 import miragefairy2019.mod.modules.fairyweapon.critical.CriticalRate
 import mirrg.kotlin.formatAs
 import net.minecraft.util.text.ITextComponent
+import kotlin.math.log
 
 class FormulaRendererScope<T>(val formulaArguments: FormulaArguments, val formula: Formula<T>) {
     val value by lazy { formula.calculate(formulaArguments) }
@@ -24,6 +25,7 @@ private fun <T> FormulaRenderer<T>.map(function: FormulaRendererScope<T>.(ITextC
 
 val FormulaRendererSelector<Int>.integer get() = createSimpleFormulaRenderer { textComponent { !"$value" } }
 val FormulaRendererSelector<Double>.duration get() = createSimpleFormulaRenderer { textComponent { !(value / 20.0 formatAs "%.1f 秒") } } // TODO translate
+val FormulaRendererSelector<Double>.pitch get() = createSimpleFormulaRenderer { textComponent { !(log(value, 2.0) * 12 formatAs "%.2f") } } // TODO translate
 val FormulaRendererSelector<Double>.float0 get() = createSimpleFormulaRenderer { textComponent { !(value formatAs "%.0f") } }
 val FormulaRendererSelector<Double>.float1 get() = createSimpleFormulaRenderer { textComponent { !(value formatAs "%.1f") } }
 val FormulaRendererSelector<Double>.float2 get() = createSimpleFormulaRenderer { textComponent { !(value formatAs "%.2f") } }
