@@ -1,5 +1,8 @@
 package miragefairy2019.mod3.fairy
 
+import miragefairy2019.api.Mana
+import miragefairy2019.lib.get
+import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.TextComponentBuilder
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
@@ -12,9 +15,6 @@ import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.fairy.api.IFairyType
-import miragefairy2019.api.Mana
-import miragefairy2019.lib.getMana
-import miragefairy2019.lib.textColor
 import mirrg.boron.util.UtilsString
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
@@ -90,10 +90,10 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
             text("マナ: ").color(AQUA) // TODO translate
         }
         if (flag.isAdvanced) {
-            fun f(manaType: Mana) = textComponent {
-                val raw = variant.type.manaSet.getMana(manaType) / (variant.type.cost / 50.0)
-                val normalized = variant.type.manaSet.getMana(manaType)
-                (format("%.3f", raw) + !" [" + format("%.3f", normalized) + !"]").color(manaType.textColor)
+            fun f(mana: Mana) = textComponent {
+                val raw = variant.type.manaSet[mana] / (variant.type.cost / 50.0)
+                val normalized = variant.type.manaSet[mana]
+                (format("%.3f", raw) + !" [" + format("%.3f", normalized) + !"]").color(mana.textColor)
             }
             tooltip {
                 text("        ")
@@ -114,7 +114,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
                 text(f(Mana.DARK))
             }
         } else {
-            fun f(manaType: Mana) = textComponent { format("%4d", formatInt(variant.type.manaSet.getMana(manaType) / (variant.type.cost / 50.0))).color(manaType.textColor) }
+            fun f(mana: Mana) = textComponent { format("%4d", formatInt(variant.type.manaSet[mana] / (variant.type.cost / 50.0))).color(mana.textColor) }
             tooltip {
                 text("    ")
                 text(f(Mana.SHINE))

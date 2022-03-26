@@ -1,24 +1,29 @@
 package miragefairy2019.mod3.playeraura
 
 import com.google.gson.GsonBuilder
-import com.google.gson.annotations.Expose
+import com.google.gson.JsonElement
 import miragefairy2019.api.IFoodAuraItem
+import miragefairy2019.api.ManaSet
+import miragefairy2019.lib.plus
+import miragefairy2019.lib.times
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.lib.ManaSet
-import miragefairy2019.lib.IManaSet
-import miragefairy2019.lib.copy
-import miragefairy2019.lib.plus
-import miragefairy2019.lib.times
 import miragefairy2019.mod3.playeraura.api.IClientPlayerAuraHandler
 import miragefairy2019.mod3.playeraura.api.IFoodHistoryEntry
 import miragefairy2019.mod3.playeraura.api.IPlayerAuraHandler
 import miragefairy2019.mod3.playeraura.api.IPlayerAuraManager
 import miragefairy2019.mod3.playeraura.api.IServerPlayerAuraHandler
+import mirrg.kotlin.gson.JsonWrapper
+import mirrg.kotlin.gson.jsonElement
+import mirrg.kotlin.gson.jsonWrapper
+import mirrg.kotlin.gson.toDouble
+import mirrg.kotlin.gson.toInt
+import mirrg.kotlin.gson.toString
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.Item
@@ -50,7 +55,7 @@ class PlayerAuraManager : IPlayerAuraManager {
         playerAuraModel
     }, player)
 
-    override fun getGlobalFoodAura(itemStack: ItemStack): IManaSet? {
+    override fun getGlobalFoodAura(itemStack: ItemStack): ManaSet? {
         val item = itemStack.item
 
         if (item !is ItemFood) return null // 食べ物以外は無視
@@ -64,7 +69,7 @@ class PlayerAuraManager : IPlayerAuraManager {
             if (entries.isEmpty()) return null // 関連付けられた妖精が居ない場合は無視
 
             // 平均を返す
-            fun f(typeChooser: (IManaSet) -> Double) = entries.map { typeChooser(it.fairy.main.type.manaSet) / it.fairy.main.type.cost * 50 * 0.5 }.average()
+            fun f(typeChooser: (ManaSet) -> Double) = entries.map { typeChooser(it.fairy.main.type.manaSet) / it.fairy.main.type.cost * 50 * 0.5 }.average()
             return ManaSet(f { it.shine }, f { it.fire }, f { it.wind }, f { it.gaia }, f { it.aqua }, f { it.dark })
         }
     }
@@ -73,19 +78,48 @@ class PlayerAuraManager : IPlayerAuraManager {
 }
 
 
-data class ItemStackData(@Expose val item: String, @Expose val metadata: Int)
-data class FoodData(@Expose val itemStack: ItemStackData, @Expose val aura: ManaSet)
-data class PlayerAuraData(@Expose val foods: List<FoodData>)
+// Data Model
 
-fun ItemStack.toJsonObject() = ItemStackData(item.registryName.toString(), metadata)
-fun ItemStackData.fromJsonObject() = run { ItemStack(Item.getByNameOrId(item) ?: return@run ItemStack.EMPTY!!, 1, metadata) }
-fun Food.toJsonObject() = FoodData(itemStack.toJsonObject(), aura.copy())
-fun FoodData.fromJsonObject() = Food(itemStack.fromJsonObject(), aura)
-fun PlayerAuraData.fromJsonObject() = PlayerAuraModel().also { it.fromJsonObject(this) }
+fun ItemStack.toJsonElement() = jsonElement("item" to item.registryName.toString().jsonElement, "metadata" to metadata.jsonElement)
 
-class Food(val itemStack: ItemStack, val aura: IManaSet) {
-    fun copy() = Food(itemStack.copy(), aura.copy())
+fun JsonWrapper.toItemStack(): ItemStack {
+    val item = Item.getByNameOrId(this["item"].toString) ?: return EMPTY_ITEM_STACK
+    val metadata = this["metadata"].toInt
+    return ItemStack(item, 1, metadata)
 }
+
+fun ManaSet.toJsonElement() = jsonElement(
+    "shine" to shine.jsonElement,
+    "fire" to fire.jsonElement,
+    "wind" to wind.jsonElement,
+    "gaia" to gaia.jsonElement,
+    "aqua" to aqua.jsonElement,
+    "dark" to dark.jsonElement
+)
+
+fun JsonWrapper.toManaSet() = ManaSet(
+    this["shine"].toDouble,
+    this["fire"].toDouble,
+    this["wind"].toDouble,
+    this["gaia"].toDouble,
+    this["aqua"].toDouble,
+    this["dark"].toDouble
+)
+
+class Food(val itemStack: ItemStack, val aura: ManaSet) {
+    fun copy() = Food(itemStack.copy(), aura)
+}
+
+fun Food.toJsonElement() = jsonElement("itemStack" to itemStack.toJsonElement(), "aura" to aura.toJsonElement())
+
+fun JsonWrapper.toFood() = Food(this["itemStack"].toItemStack(), this["aura"].toManaSet())
+
+class PlayerAuraData(val foods: List<Food>)
+
+fun PlayerAuraData.toJsonElement() = jsonElement("foods" to jsonElement(foods.map { it.toJsonElement() }))
+
+fun JsonWrapper.toPlayerAuraData() = PlayerAuraData(this["foods"].asList.map { it.toFood() })
+
 
 data class ResettableProperty<T : Any>(private val getter: () -> T) {
     private var value: T? = null
@@ -105,15 +139,15 @@ class PlayerAuraModel {
         auraCache.dirty()
     }
 
-    fun fromJsonObject(data: PlayerAuraData) {
+    fun setData(data: PlayerAuraData) {
         synchronized(lock) {
             reset()
-            data.foods.forEach { foods += it.fromJsonObject() }
+            data.foods.forEach { foods += it.copy() }
             while (foods.size > 100) foods.removeLast()
         }
     }
 
-    fun toJsonObject() = synchronized(lock) { PlayerAuraData(foods.map { it.toJsonObject() }) }
+    fun getData() = synchronized(lock) { PlayerAuraData(foods.map { it.copy() }) }
     fun copy() = synchronized(lock) { PlayerAuraModel().also { model -> foods.forEach { model.foods.add(it.copy()) } } }
 
 
@@ -121,12 +155,12 @@ class PlayerAuraModel {
     val foodHistory get() = synchronized(lock) { foods.mapIndexed { i, food -> FoodHistoryEntry(food.itemStack, food.aura, (100 - i) / 100.0) } }
 
     // 過去100エントリーの回複分について、それ自身のオーラにその寿命割合を乗じたものの合計
-    private val auraCache = ResettableProperty { foods.mapIndexed { i, food -> food.aura * ((100 - i) / 100.0) }.fold<IManaSet, IManaSet>(ManaSet.ZERO) { a, b -> a + b } * (1 / 100.0) * 8.0 }
+    private val auraCache = ResettableProperty { foods.mapIndexed { i, food -> food.aura * ((100 - i) / 100.0) }.fold<ManaSet, ManaSet>(ManaSet.ZERO) { a, b -> a + b } * (1 / 100.0) * 8.0 }
     val aura get() = synchronized(lock) { auraCache.getValue() }
 
 
     // 回復量の分だけ、その都度計算したローカルオーラをキューに追加
-    fun pushFood(globalFoodAura: IManaSet, itemStack: ItemStack, healAmount: Int) {
+    fun pushFood(globalFoodAura: ManaSet, itemStack: ItemStack, healAmount: Int) {
         synchronized(lock) {
             val itemStackNormalized = normalizeItemStack(itemStack)
             repeat(healAmount) {
@@ -150,18 +184,18 @@ class PlayerAuraModel {
     }
 
     // スロットが同じ料理で埋まっている割合に応じて100%から30%まで効果量が線形に減少する
-    fun getLocalFoodAura(globalFoodAura: IManaSet, itemStack: ItemStack) = synchronized(lock) { globalFoodAura * (1.0 - 0.7 * getSaturationRate(itemStack)) }
+    fun getLocalFoodAura(globalFoodAura: ManaSet, itemStack: ItemStack) = synchronized(lock) { globalFoodAura * (1.0 - 0.7 * getSaturationRate(itemStack)) }
 
 
     private val gson by lazy { GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create()!! }
     private fun getFile(player: EntityPlayer) = File(player.world.minecraftServer!!.getWorld(0).saveHandler.worldDirectory, "${ModMirageFairy2019.MODID}/playeraura/${player.cachedUniqueIdString}.json")
 
-    fun toJson() = synchronized(lock) { gson.toJson(toJsonObject())!! }
+    fun toJson() = synchronized(lock) { gson.toJson(getData().toJsonElement())!! }
 
     fun fromJson(json: String) {
         synchronized(lock) {
             reset()
-            fromJsonObject(gson.fromJson(json, PlayerAuraData::class.java))
+            setData(gson.fromJson(json, JsonElement::class.java).jsonWrapper.toPlayerAuraData())
         }
     }
 
@@ -200,7 +234,7 @@ class PlayerAuraModel {
     }
 }
 
-class FoodHistoryEntry(private val food: ItemStack, private val baseLocalFoodAura: IManaSet?, private val health: Double) : IFoodHistoryEntry {
+class FoodHistoryEntry(private val food: ItemStack, private val baseLocalFoodAura: ManaSet?, private val health: Double) : IFoodHistoryEntry {
     override fun getFood() = food
     override fun getBaseLocalFoodAura() = baseLocalFoodAura
     override fun getHealth() = health
@@ -213,7 +247,7 @@ open class PlayerAuraHandler(
     override fun getPlayerAura() = model.aura
     override fun getLocalFoodAura(itemStack: ItemStack) = manager.getGlobalFoodAura(itemStack)?.let { model.getLocalFoodAura(it, itemStack) }
     override fun getSaturationRate(itemStack: ItemStack) = model.getSaturationRate(itemStack)
-    override fun simulatePlayerAura(itemStack: ItemStack, healAmount: Int): IManaSet? = manager.getGlobalFoodAura(itemStack)?.let {
+    override fun simulatePlayerAura(itemStack: ItemStack, healAmount: Int): ManaSet? = manager.getGlobalFoodAura(itemStack)?.let {
         val model2 = model.copy()
         model2.pushFood(it, itemStack, healAmount)
         model2.aura

@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.playeraura.api;
 
-import miragefairy2019.lib.IManaSet;
+import miragefairy2019.api.ManaSet;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,7 +28,7 @@ public interface IPlayerAuraManager {
     public IServerPlayerAuraHandler getServerPlayerAuraHandler(EntityPlayerMP player);
 
     @Nullable
-    public IManaSet getGlobalFoodAura(ItemStack itemStack);
+    public ManaSet getGlobalFoodAura(ItemStack itemStack);
 
     /**
      * Server World Only

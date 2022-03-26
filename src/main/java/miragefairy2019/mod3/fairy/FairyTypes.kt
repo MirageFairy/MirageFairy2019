@@ -1,17 +1,16 @@
 package miragefairy2019.mod3.fairy
 
+import miragefairy2019.api.ManaSet
+import miragefairy2019.lib.div
+import miragefairy2019.lib.max
+import miragefairy2019.lib.sum
+import miragefairy2019.lib.times
 import miragefairy2019.libkt.buildText
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.erg.ErgEntry
 import miragefairy2019.mod3.erg.ErgSet
 import miragefairy2019.mod3.erg.api.EnumErgType.values
 import miragefairy2019.mod3.erg.api.IErgSet
-import miragefairy2019.lib.ManaSet
-import miragefairy2019.lib.IManaSet
-import miragefairy2019.lib.div
-import miragefairy2019.lib.max
-import miragefairy2019.lib.sum
-import miragefairy2019.lib.times
 import net.minecraft.util.ResourceLocation
 import kotlin.math.pow
 
@@ -41,7 +40,7 @@ class FairyTypes(private val count: Int) {
 
     private fun c(skin: Int, bright: Int, dark: Int, hair: Int) = ColorSet(skin, bright, dark, hair)
 
-    private operator fun Int.invoke(name: String, parentFairy: () -> RankedFairyTypeBundle?, rare: Int, cost: Int, rateSpecial: Double, manaSet: IManaSet, ergSet: IErgSet, colorSet: ColorSet): RankedFairyTypeBundle {
+    private operator fun Int.invoke(name: String, parentFairy: () -> RankedFairyTypeBundle?, rare: Int, cost: Int, rateSpecial: Double, manaSet: ManaSet, ergSet: IErgSet, colorSet: ColorSet): RankedFairyTypeBundle {
         val id = this
 
         fun getType(rank: Int): FairyType {

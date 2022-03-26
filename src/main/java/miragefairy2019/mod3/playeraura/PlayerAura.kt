@@ -1,6 +1,12 @@
 package miragefairy2019.mod3.playeraura
 
 import io.netty.buffer.ByteBuf
+import miragefairy2019.api.Mana
+import miragefairy2019.api.ManaSet
+import miragefairy2019.lib.color
+import miragefairy2019.lib.displayName
+import miragefairy2019.lib.get
+import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.Complex
 import miragefairy2019.libkt.IRgb
 import miragefairy2019.libkt.buildText
@@ -11,13 +17,6 @@ import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.api.ApiMain.logger
-import miragefairy2019.lib.ManaSet
-import miragefairy2019.api.Mana
-import miragefairy2019.lib.IManaSet
-import miragefairy2019.lib.color
-import miragefairy2019.lib.displayName
-import miragefairy2019.lib.getMana
-import miragefairy2019.lib.textColor
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayerMP
@@ -104,13 +103,13 @@ object PlayerAura {
                                 translate("miragefairy2019.gui.playerAura.title")
                                 text(":")
                             }.formattedText)
-                            fun f1(manaType: Mana): ITextComponent {
-                                val before = auraBefore.getMana(manaType)
-                                val after = auraAfter.getMana(manaType)
+                            fun f1(mana: Mana): ITextComponent {
+                                val before = auraBefore[mana]
+                                val after = auraAfter[mana]
                                 val difference = after - before
                                 return buildText {
                                     text("  ")
-                                    text(manaType.displayName)
+                                    text(mana.displayName)
                                     text(": ")
                                     format("%3.0f", before)
                                     when {
@@ -126,7 +125,7 @@ object PlayerAura {
                                         difference < -0.1 -> text(" -").color(TextFormatting.RED)
                                         else -> Unit
                                     }
-                                }.color(manaType.textColor)
+                                }.color(mana.textColor)
                             }
                             event.toolTip.add(f1(Mana.SHINE).formattedText)
                             event.toolTip.add(f1(Mana.FIRE).formattedText)
@@ -223,7 +222,7 @@ object PlayerAura {
 
                         fun drawPieces(center: Complex, radius: Double, rgb: IRgb) = repeat(6) { drawPiece(center, radius, it.toDouble(), rgb, 1.0) }
 
-                        fun drawPieces(center: Complex, radius: Double, health: Double, foodAura: IManaSet) {
+                        fun drawPieces(center: Complex, radius: Double, health: Double, foodAura: ManaSet) {
                             drawPiece(center, radius * health, 0.0, Mana.WIND.color.toRgb(), 0.1 * foodAura.wind)
                             drawPiece(center, radius * health, 1.0, Mana.SHINE.color.toRgb(), 0.1 * foodAura.shine)
                             drawPiece(center, radius * health, 2.0, Mana.FIRE.color.toRgb(), 0.1 * foodAura.fire)

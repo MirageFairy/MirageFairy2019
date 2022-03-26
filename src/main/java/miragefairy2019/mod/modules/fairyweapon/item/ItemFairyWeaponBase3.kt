@@ -1,5 +1,16 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.api.Mana
+import miragefairy2019.api.Mana.AQUA
+import miragefairy2019.api.Mana.DARK
+import miragefairy2019.api.Mana.FIRE
+import miragefairy2019.api.Mana.GAIA
+import miragefairy2019.api.Mana.SHINE
+import miragefairy2019.api.Mana.WIND
+import miragefairy2019.api.ManaSet
+import miragefairy2019.lib.get
+import miragefairy2019.lib.plus
+import miragefairy2019.lib.times
 import miragefairy2019.libkt.TextComponentScope
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.formattedText
@@ -33,17 +44,6 @@ import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.ranged
 import miragefairy2019.mod3.main.api.ApiMain.side
-import miragefairy2019.api.Mana
-import miragefairy2019.api.Mana.AQUA
-import miragefairy2019.api.Mana.DARK
-import miragefairy2019.api.Mana.FIRE
-import miragefairy2019.api.Mana.GAIA
-import miragefairy2019.api.Mana.SHINE
-import miragefairy2019.api.Mana.WIND
-import miragefairy2019.lib.IManaSet
-import miragefairy2019.lib.getMana
-import miragefairy2019.lib.plus
-import miragefairy2019.lib.times
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
@@ -81,7 +81,7 @@ fun Magic?.getMagicHandler(magicScope: MagicScope) = this?.invoke(magicScope) ?:
 
 
 abstract class ItemFairyWeaponBase3(
-    val weaponManaType: Mana,
+    val weaponMana: Mana,
     val mastery: IMastery
 ) : ItemFairyWeapon() {
     companion object {
@@ -116,7 +116,7 @@ abstract class ItemFairyWeaponBase3(
         class MagicStatusFormulaScope(val arguments: IMagicStatusFunctionArguments) {
             fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
             val cost get() = arguments.fairyType.cost
-            operator fun Mana.not() = arguments.fairyType.manaSet.getMana(this)
+            operator fun Mana.not() = arguments.fairyType.manaSet[this]
             operator fun EnumErgType.not() = arguments.fairyType.ergSet.getPower(this)
             operator fun <T> IMagicStatus<T>.not(): T = function.getValue(arguments)
         }
@@ -219,7 +219,7 @@ abstract class ItemFairyWeaponBase3(
 // Actual Fairy Type
 
 fun ItemFairyWeaponBase3.getActualFairyType(playerProxy: PlayerProxy, fairyTypePartner: IFairyType): IFairyType = object : FairyTypeAdapter(fairyTypePartner) {
-    override fun getManaSet(): IManaSet {
+    override fun getManaSet(): ManaSet {
         val a1 = parent.manaSet
         val a2 = playerProxy.playerAuraHandler.playerAura * (parent.cost / 50.0)
         val b1 = 0.001 * playerProxy.skillContainer.getSkillLevel(mastery)
@@ -231,7 +231,7 @@ fun ItemFairyWeaponBase3.getActualFairyType(playerProxy: PlayerProxy, fairyTypeP
 // Statuses
 
 fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthErg: EnumErgType) = "strength"({ double0.positive }) {
-    (weaponStrength + !strengthErg + getSkillLevel(mastery) * 0.5) * (cost / 50.0) + when (weaponManaType) {
+    (weaponStrength + !strengthErg + getSkillLevel(mastery) * 0.5) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !SHINE
         FIRE -> !FIRE
         WIND -> !WIND
@@ -242,7 +242,7 @@ fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthEr
 }.setVisibility(ALWAYS)
 
 fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: EnumErgType) = "extent"({ double0.positive }) {
-    (weaponExtent + !extentErg) * (cost / 50.0) + when (weaponManaType) {
+    (weaponExtent + !extentErg) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !GAIA + !WIND
         FIRE -> !GAIA + !WIND
         WIND -> !GAIA * 2
@@ -253,7 +253,7 @@ fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Enu
 }.setVisibility(ALWAYS)
 
 fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranceErg: EnumErgType) = "endurance"({ double0.positive }) {
-    (weaponEndurance + !enduranceErg) * (cost / 50.0) + when (weaponManaType) {
+    (weaponEndurance + !enduranceErg) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !FIRE + !AQUA
         FIRE -> !AQUA * 2
         WIND -> !FIRE + !AQUA
@@ -264,7 +264,7 @@ fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranc
 }.setVisibility(ALWAYS)
 
 fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, productionErg: EnumErgType) = "production"({ double0.positive }) {
-    (weaponProduction + !productionErg) * (cost / 50.0) + when (weaponManaType) {
+    (weaponProduction + !productionErg) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !DARK * 2
         FIRE -> !SHINE + !DARK
         WIND -> !SHINE + !DARK

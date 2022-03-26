@@ -1,13 +1,13 @@
 package miragefairy2019.mod.magic4
 
-import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.api.Mana
+import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.skill.api.IMastery
 import net.minecraft.util.text.ITextComponent
 
 interface FormulaArguments {
     val hasPartnerFairy: Boolean
-    fun getRawMana(manaType: Mana): Double
+    fun getRawMana(mana: Mana): Double
     fun getRawErg(ergType: EnumErgType): Double
     val cost: Double
     val color: Int

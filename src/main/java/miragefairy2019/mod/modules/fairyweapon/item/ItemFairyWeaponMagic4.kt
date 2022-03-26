@@ -1,5 +1,10 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.api.Mana
+import miragefairy2019.lib.div
+import miragefairy2019.lib.get
+import miragefairy2019.lib.plus
+import miragefairy2019.lib.times
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.white
@@ -19,11 +24,6 @@ import miragefairy2019.mod3.artifacts.skillContainer
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.erg
-import miragefairy2019.api.Mana
-import miragefairy2019.lib.div
-import miragefairy2019.lib.getMana
-import miragefairy2019.lib.plus
-import miragefairy2019.lib.times
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
@@ -61,11 +61,11 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
 
     fun getMagicArguments(player: EntityPlayer, weaponItemStack: ItemStack, partnerFairyType: IFairyType) = object : MagicArguments {
         override val hasPartnerFairy: Boolean get() = !partnerFairyType.isEmpty
-        override fun getRawMana(manaType: Mana): Double {
+        override fun getRawMana(mana: Mana): Double {
             val a = partnerFairyType.manaSet / (cost / 50.0) // パートナー妖精のマナ
             val b = a + player.proxy.playerAuraHandler.playerAura // プレイヤーオーラの加算
             val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(EnumMastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
-            return c.getMana(manaType)
+            return c[mana]
         }
 
         override fun getRawErg(ergType: EnumErgType) = partnerFairyType.erg(ergType)

@@ -29,11 +29,11 @@ fun MagicScope.fail(cursor: Vec3d, color: Int) = object : IMagicHandler {
 }
 
 abstract class ItemMiragiumToolBase(
-    weaponManaType: Mana,
+    weaponMana: Mana,
     mastery: IMastery,
     additionalBaseStatus: Double
 ) : ItemFairyWeaponBase3(
-    weaponManaType,
+    weaponMana,
     mastery
 ) {
     val strength = createStrengthStatus(additionalBaseStatus, EnumErgType.SLASH)

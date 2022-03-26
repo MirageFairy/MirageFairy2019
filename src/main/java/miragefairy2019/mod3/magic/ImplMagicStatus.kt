@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.magic
 
+import miragefairy2019.api.ManaSet
 import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
@@ -14,9 +15,6 @@ import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction
 import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
-import miragefairy2019.api.Mana
-import miragefairy2019.lib.IManaSet
-import miragefairy2019.lib.displayName
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.displayName
 import net.minecraft.util.text.ITextComponent
@@ -70,13 +68,9 @@ val <T> IMagicStatusFunction<T>.factors
                 override fun getDisplayName() = throw UnsupportedOperationException()
                 override fun getColor() = throw UnsupportedOperationException()
                 override fun getCost() = add(buildText { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) }) // TODO 色変更
-                override fun getManaSet() = object : IManaSet {
-                    override fun getShine() = add(Mana.SHINE.displayName)
-                    override fun getFire() = add(Mana.FIRE.displayName)
-                    override fun getWind() = add(Mana.WIND.displayName)
-                    override fun getGaia() = add(Mana.GAIA.displayName)
-                    override fun getAqua() = add(Mana.AQUA.displayName)
-                    override fun getDark() = add(Mana.DARK.displayName) // TODO 色変更
+                override fun getManaSet(): ManaSet {
+                    factors.add(textComponent { !"Mana" })
+                    return ManaSet.ZERO
                 }
 
                 override fun getErgSet() = object : IErgSet {

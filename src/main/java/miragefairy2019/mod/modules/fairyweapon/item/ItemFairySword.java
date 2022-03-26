@@ -1,9 +1,9 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import com.google.common.collect.Multimap;
+import miragefairy2019.lib.ManaKt;
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.mod3.fairy.api.IFairyType;
-import miragefairy2019.lib.ManaSetKt;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -48,7 +48,7 @@ public class ItemFairySword extends ItemFairyWeapon {
 
         public Status(IFairyType fairyType) {
 
-            additionalAttackDamage = 6 * ManaSetKt.sum(fairyType.getManaSet(), 1, 1, 1, 1, 1, 1) / 50.0; // 3~6程度
+            additionalAttackDamage = 6 * ManaKt.sum(fairyType.getManaSet(), 1, 1, 1, 1, 1, 1) / 50.0; // 3~6程度
 
             double a = fairyType.getCost() / 100.0;
             additionalAttackSpeed = -4 + Math.min(0.25 / (a * a), 8); // -3.2~-2.4

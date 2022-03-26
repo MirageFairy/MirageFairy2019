@@ -10,13 +10,13 @@ import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
+import miragefairy2019.api.Mana
+import miragefairy2019.lib.color
+import miragefairy2019.lib.get
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.getSubItems
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.api.Mana
-import miragefairy2019.lib.color
-import miragefairy2019.lib.getMana
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Gui
@@ -69,13 +69,13 @@ class PluginFoodAura : IModPlugin {
                         add(object : IRecipeWrapper {
                             override fun getIngredients(ingredients: IIngredients) = ingredients.setInputLists(VanillaTypes.ITEM, listOf(listOf(itemStack)))
                             override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {
-                                fun d(manaType: Mana, x: Int) {
-                                    val value = foodAura.getMana(manaType)
-                                    Gui.drawRect(x + 2, (20 - 20 * value / 50.0).toInt(), x + 18, 20, manaType.color or 0xFF000000.toInt())
+                                fun d(mana: Mana, x: Int) {
+                                    val value = foodAura[mana]
+                                    Gui.drawRect(x + 2, (20 - 20 * value / 50.0).toInt(), x + 18, 20, mana.color or 0xFF000000.toInt())
                                     val string = String.format("%.0f", value)
                                     val stringWidth = minecraft.fontRenderer.getStringWidth(string)
                                     Gui.drawRect(x + 10 - stringWidth / 2 - 1, 10, x + 10 + stringWidth / 2 + 1, 18, 0xFFC6C6C6.toInt())
-                                    minecraft.fontRenderer.drawStringCentered(string, x + 10, 10, manaType.color)
+                                    minecraft.fontRenderer.drawStringCentered(string, x + 10, 10, mana.color)
                                 }
                                 d(Mana.SHINE, 30)
                                 d(Mana.FIRE, 50)

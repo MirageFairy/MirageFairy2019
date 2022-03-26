@@ -43,11 +43,11 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
         public final double coolTime;
 
         public Status(IFairyType fairyType) {
-            radius = UtilsMath.trim(5 + fairyType.getManaSet().getWind() / 5.0, 5, 10);
-            maxTargetCount = UtilsMath.trim(1 + (int) (fairyType.getManaSet().getAqua() / 7.0), 1, 8);
-            wear = UtilsMath.trim(4 * Math.pow(0.5, fairyType.getManaSet().getFire() / 50.0), 0.4, 4);
-            experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManaSet().getGaia() / 50.0 + fairyType.getErgSet().getPower(EnumErgType.LIFE) / 10.0), 0.1, 1);
-            coolTime = fairyType.getCost() * UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManaSet().getDark() / 50.0), 0.1, 1);
+            radius = UtilsMath.trim(5 + fairyType.getManaSet().wind / 5.0, 5, 10);
+            maxTargetCount = UtilsMath.trim(1 + (int) (fairyType.getManaSet().aqua / 7.0), 1, 8);
+            wear = UtilsMath.trim(4 * Math.pow(0.5, fairyType.getManaSet().fire / 50.0), 0.4, 4);
+            experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManaSet().gaia / 50.0 + fairyType.getErgSet().getPower(EnumErgType.LIFE) / 10.0), 0.1, 1);
+            coolTime = fairyType.getCost() * UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManaSet().dark / 50.0), 0.1, 1);
         }
 
     }

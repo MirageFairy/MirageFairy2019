@@ -1,14 +1,13 @@
 package miragefairy2019.mod3.fairy
 
+import miragefairy2019.api.Mana
+import miragefairy2019.api.ManaSet
+import miragefairy2019.lib.get
 import miragefairy2019.libkt.buildText
 import miragefairy2019.mod3.erg.ErgSet
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.fairy.api.IFairyType
-import miragefairy2019.lib.ManaSet
-import miragefairy2019.api.Mana
-import miragefairy2019.lib.IManaSet
-import miragefairy2019.lib.getMana
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 
@@ -18,7 +17,7 @@ class FairyType(
     private val displayName: ITextComponent,
     private val color: Int,
     private val cost: Double,
-    private val manaSet: IManaSet,
+    private val manaSet: ManaSet,
     private val ergSet: IErgSet
 ) : IFairyType {
     override fun isEmpty() = false
@@ -46,12 +45,12 @@ open class FairyTypeAdapter(internal val parent: IFairyType) : IFairyType {
     override fun getDisplayName(): ITextComponent = parent.displayName
     override fun getColor() = parent.color
     override fun getCost() = parent.cost
-    override fun getManaSet(): IManaSet = parent.manaSet
+    override fun getManaSet(): ManaSet = parent.manaSet
     override fun getErgSet(): IErgSet = parent.ergSet
 }
 
 
-fun IFairyType.mana(manaType: Mana) = manaSet.getMana(manaType)
+fun IFairyType.mana(mana: Mana) = manaSet[mana]
 fun IFairyType.erg(ergType: EnumErgType) = ergSet.getPower(ergType)
 
 val IFairyType.shineEfficiency get() = manaSet.shine / (cost / 50.0)

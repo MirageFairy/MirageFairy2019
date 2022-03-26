@@ -37,8 +37,8 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
         public final double coolTime;
 
         public Status(IFairyType fairyType) {
-            additionalReach = Math.min(fairyType.getManaSet().getAqua() / 50.0 * 20, 40);
-            coolTime = fairyType.getCost() * 2 * Math.pow(0.5, fairyType.getManaSet().getGaia() / 30);
+            additionalReach = Math.min(fairyType.getManaSet().aqua / 50.0 * 20, 40);
+            coolTime = fairyType.getCost() * 2 * Math.pow(0.5, fairyType.getManaSet().gaia / 30);
         }
 
     }

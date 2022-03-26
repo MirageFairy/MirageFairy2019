@@ -1,21 +1,21 @@
 package miragefairy2019.mod3.playeraura.api;
 
-import miragefairy2019.lib.IManaSet;
+import miragefairy2019.api.ManaSet;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
 
 public interface IPlayerAuraHandler {
 
-    public IManaSet getPlayerAura();
+    public ManaSet getPlayerAura();
 
     @Nullable
-    public IManaSet getLocalFoodAura(ItemStack itemStack);
+    public ManaSet getLocalFoodAura(ItemStack itemStack);
 
     public double getSaturationRate(ItemStack itemStack);
 
     @Nullable
-    public IManaSet simulatePlayerAura(ItemStack itemStack, int healAmount);
+    public ManaSet simulatePlayerAura(ItemStack itemStack, int healAmount);
 
     /**
      * @return 新しい順
