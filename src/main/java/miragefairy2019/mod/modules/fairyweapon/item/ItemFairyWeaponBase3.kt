@@ -40,10 +40,10 @@ import miragefairy2019.api.Mana.FIRE
 import miragefairy2019.api.Mana.GAIA
 import miragefairy2019.api.Mana.SHINE
 import miragefairy2019.api.Mana.WIND
-import miragefairy2019.mod3.mana.api.IManaSet
-import miragefairy2019.mod3.mana.getMana
-import miragefairy2019.mod3.mana.plus
-import miragefairy2019.mod3.mana.times
+import miragefairy2019.lib.IManaSet
+import miragefairy2019.lib.getMana
+import miragefairy2019.lib.plus
+import miragefairy2019.lib.times
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel

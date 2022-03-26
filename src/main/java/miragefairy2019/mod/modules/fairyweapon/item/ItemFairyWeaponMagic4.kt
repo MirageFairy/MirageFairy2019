@@ -20,10 +20,10 @@ import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.erg
 import miragefairy2019.api.Mana
-import miragefairy2019.mod3.mana.div
-import miragefairy2019.mod3.mana.getMana
-import miragefairy2019.mod3.mana.plus
-import miragefairy2019.mod3.mana.times
+import miragefairy2019.lib.div
+import miragefairy2019.lib.getMana
+import miragefairy2019.lib.plus
+import miragefairy2019.lib.times
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel

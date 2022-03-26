@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.mana
+package miragefairy2019.lib
 
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color

@@ -11,9 +11,9 @@ import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.api.Mana
-import miragefairy2019.mod3.mana.api.IManaSet
-import miragefairy2019.mod3.mana.displayName
-import miragefairy2019.mod3.mana.getMana
+import miragefairy2019.lib.IManaSet
+import miragefairy2019.lib.displayName
+import miragefairy2019.lib.getMana
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.api.ISkillContainer
 import miragefairy2019.mod3.skill.displayName

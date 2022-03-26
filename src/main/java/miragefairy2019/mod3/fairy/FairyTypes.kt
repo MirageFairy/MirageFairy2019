@@ -6,12 +6,12 @@ import miragefairy2019.mod3.erg.ErgEntry
 import miragefairy2019.mod3.erg.ErgSet
 import miragefairy2019.mod3.erg.api.EnumErgType.values
 import miragefairy2019.mod3.erg.api.IErgSet
-import miragefairy2019.mod3.mana.ManaSet
-import miragefairy2019.mod3.mana.api.IManaSet
-import miragefairy2019.mod3.mana.div
-import miragefairy2019.mod3.mana.max
-import miragefairy2019.mod3.mana.sum
-import miragefairy2019.mod3.mana.times
+import miragefairy2019.lib.ManaSet
+import miragefairy2019.lib.IManaSet
+import miragefairy2019.lib.div
+import miragefairy2019.lib.max
+import miragefairy2019.lib.sum
+import miragefairy2019.lib.times
 import net.minecraft.util.ResourceLocation
 import kotlin.math.pow
 

@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.mana.api;
+package miragefairy2019.lib;
 
 /**
  * すべてのマナの値は非負です。

@@ -15,8 +15,8 @@ import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.getSubItems
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.api.Mana
-import miragefairy2019.mod3.mana.color
-import miragefairy2019.mod3.mana.getMana
+import miragefairy2019.lib.color
+import miragefairy2019.lib.getMana
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Gui

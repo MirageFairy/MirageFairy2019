@@ -13,8 +13,8 @@ import miragefairy2019.mod.lib.ItemVariant
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.api.Mana
-import miragefairy2019.mod3.mana.getMana
-import miragefairy2019.mod3.mana.textColor
+import miragefairy2019.lib.getMana
+import miragefairy2019.lib.textColor
 import mirrg.boron.util.UtilsString
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag

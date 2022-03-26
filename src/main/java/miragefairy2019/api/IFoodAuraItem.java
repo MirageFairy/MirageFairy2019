@@ -1,6 +1,6 @@
 package miragefairy2019.api;
 
-import miragefairy2019.mod3.mana.api.IManaSet;
+import miragefairy2019.lib.IManaSet;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;

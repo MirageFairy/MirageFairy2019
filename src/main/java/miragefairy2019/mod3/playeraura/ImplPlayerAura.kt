@@ -9,11 +9,11 @@ import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.mana.ManaSet
-import miragefairy2019.mod3.mana.api.IManaSet
-import miragefairy2019.mod3.mana.copy
-import miragefairy2019.mod3.mana.plus
-import miragefairy2019.mod3.mana.times
+import miragefairy2019.lib.ManaSet
+import miragefairy2019.lib.IManaSet
+import miragefairy2019.lib.copy
+import miragefairy2019.lib.plus
+import miragefairy2019.lib.times
 import miragefairy2019.mod3.playeraura.api.IClientPlayerAuraHandler
 import miragefairy2019.mod3.playeraura.api.IFoodHistoryEntry
 import miragefairy2019.mod3.playeraura.api.IPlayerAuraHandler
