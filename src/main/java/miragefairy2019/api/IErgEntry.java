@@ -1,6 +1,4 @@
-package miragefairy2019.mod3.erg.api;
-
-import miragefairy2019.api.Erg;
+package miragefairy2019.api;
 
 public interface IErgEntry {
 

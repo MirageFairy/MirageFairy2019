@@ -12,7 +12,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
 import miragefairy2019.api.Erg
-import miragefairy2019.mod3.erg.displayName
+import miragefairy2019.lib.displayName
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionSpawnItem

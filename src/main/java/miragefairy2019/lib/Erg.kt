@@ -1,10 +1,10 @@
-package miragefairy2019.mod3.erg
+package miragefairy2019.lib
 
+import miragefairy2019.api.Erg
+import miragefairy2019.api.IErgEntry
+import miragefairy2019.api.IErgSet
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
-import miragefairy2019.api.Erg
-import miragefairy2019.mod3.erg.api.IErgEntry
-import miragefairy2019.mod3.erg.api.IErgSet
 import net.minecraft.util.text.TextFormatting
 
 class ErgSet(private val iterable: Iterable<IErgEntry>) : IErgSet {

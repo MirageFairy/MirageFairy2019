@@ -7,10 +7,10 @@ import miragefairy2019.lib.sum
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.buildText
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.erg.ErgEntry
-import miragefairy2019.mod3.erg.ErgSet
+import miragefairy2019.lib.ErgEntry
+import miragefairy2019.lib.ErgSet
 import miragefairy2019.api.Erg.values
-import miragefairy2019.mod3.erg.api.IErgSet
+import miragefairy2019.api.IErgSet
 import net.minecraft.util.ResourceLocation
 import kotlin.math.pow
 
