@@ -12,7 +12,7 @@ import miragefairy2019.libkt.toRgb
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.api.ApiMain.logger
 import miragefairy2019.mod3.mana.ManaSet
-import miragefairy2019.mod3.mana.api.Mana
+import miragefairy2019.api.Mana
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.color
 import miragefairy2019.mod3.mana.displayName

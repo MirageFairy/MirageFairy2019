@@ -13,7 +13,7 @@ import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
-import miragefairy2019.mod3.mana.api.Mana
+import miragefairy2019.api.Mana
 import miragefairy2019.mod3.skill.EnumMastery
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes

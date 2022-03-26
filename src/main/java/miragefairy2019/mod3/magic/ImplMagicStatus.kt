@@ -14,7 +14,7 @@ import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction
 import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
-import miragefairy2019.mod3.mana.api.Mana
+import miragefairy2019.api.Mana
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.skill.api.IMastery

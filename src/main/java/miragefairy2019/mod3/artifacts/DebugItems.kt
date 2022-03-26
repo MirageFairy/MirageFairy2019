@@ -19,7 +19,7 @@ import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.erg
 import miragefairy2019.mod3.fairy.mana
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.mana.api.Mana
+import miragefairy2019.api.Mana
 import miragefairy2019.mod3.mana.sum
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill

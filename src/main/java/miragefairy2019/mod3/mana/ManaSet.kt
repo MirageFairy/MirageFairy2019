@@ -1,7 +1,7 @@
 package miragefairy2019.mod3.mana
 
 import com.google.gson.annotations.Expose
-import miragefairy2019.mod3.mana.api.Mana
+import miragefairy2019.api.Mana
 import miragefairy2019.mod3.mana.api.IManaSet
 import kotlin.math.max
 

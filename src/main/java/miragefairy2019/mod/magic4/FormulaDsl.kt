@@ -10,7 +10,7 @@ import miragefairy2019.mod.magic4.MagicStatus
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.erg.displayName
-import miragefairy2019.mod3.mana.api.Mana
+import miragefairy2019.api.Mana
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.displayName
 import miragefairy2019.mod3.mana.getMana

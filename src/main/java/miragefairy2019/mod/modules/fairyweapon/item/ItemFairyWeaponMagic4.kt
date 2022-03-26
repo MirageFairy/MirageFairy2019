@@ -19,7 +19,7 @@ import miragefairy2019.mod3.artifacts.skillContainer
 import miragefairy2019.mod3.erg.api.EnumErgType
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.erg
-import miragefairy2019.mod3.mana.api.Mana
+import miragefairy2019.api.Mana
 import miragefairy2019.mod3.mana.div
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.mana.plus

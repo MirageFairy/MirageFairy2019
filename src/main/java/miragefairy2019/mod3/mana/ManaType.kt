@@ -2,7 +2,7 @@ package miragefairy2019.mod3.mana
 
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
-import miragefairy2019.mod3.mana.api.Mana
+import miragefairy2019.api.Mana
 import net.minecraft.util.text.TextFormatting
 
 val Mana.displayName get() = let { manaType -> buildText { translate("mirageFairy2019.mana.$manaType.name").color(textColor) } }

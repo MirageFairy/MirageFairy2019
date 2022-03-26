@@ -13,7 +13,7 @@ import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.positiveBoolean
-import miragefairy2019.mod3.mana.api.Mana
+import miragefairy2019.api.Mana
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import mirrg.boron.util.UtilsMath

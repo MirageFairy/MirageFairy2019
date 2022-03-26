@@ -6,7 +6,7 @@ import miragefairy2019.libkt.region
 import miragefairy2019.libkt.sortedByDistance
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
-import miragefairy2019.mod3.mana.api.Mana
+import miragefairy2019.api.Mana
 import miragefairy2019.mod3.skill.EnumMastery
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState

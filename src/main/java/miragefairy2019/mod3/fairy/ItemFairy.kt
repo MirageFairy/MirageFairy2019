@@ -12,7 +12,7 @@ import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.fairy.api.IFairyType
-import miragefairy2019.mod3.mana.api.Mana
+import miragefairy2019.api.Mana
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.mana.textColor
 import mirrg.boron.util.UtilsString
