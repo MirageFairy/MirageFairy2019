@@ -7,7 +7,7 @@ import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.modules.fairyweapon.magic.EnumTargetExecutability
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.magic.UtilsMagic
-import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.erg.api.Erg
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.api.Mana
@@ -36,10 +36,10 @@ abstract class ItemMiragiumToolBase(
     weaponMana,
     mastery
 ) {
-    val strength = createStrengthStatus(additionalBaseStatus, EnumErgType.SLASH)
-    val extent = createExtentStatus(additionalBaseStatus, EnumErgType.SHOOT)
-    val endurance = createEnduranceStatus(additionalBaseStatus, EnumErgType.SENSE)
-    val production = createProductionStatus(additionalBaseStatus, EnumErgType.HARVEST)
+    val strength = createStrengthStatus(additionalBaseStatus, Erg.SLASH)
+    val extent = createExtentStatus(additionalBaseStatus, Erg.SHOOT)
+    val endurance = createEnduranceStatus(additionalBaseStatus, Erg.SENSE)
+    val production = createProductionStatus(additionalBaseStatus, Erg.HARVEST)
     val cost = createCostStatus()
 
     val fortune = "fortune"({ double2.positive }) { !production * 0.03 }.setRange(0.0..100.0).setVisibility(Companion.EnumVisibility.DETAIL)

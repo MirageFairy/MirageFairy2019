@@ -21,7 +21,7 @@ import miragefairy2019.mod.modules.fairyweapon.findFairy
 import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer
-import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.erg.api.Erg
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.erg
 import miragefairy2019.mod3.skill.EnumMastery
@@ -68,7 +68,7 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
             return c[mana]
         }
 
-        override fun getRawErg(ergType: EnumErgType) = partnerFairyType.erg(ergType)
+        override fun getRawErg(ergType: Erg) = partnerFairyType.erg(ergType)
         override val cost get() = partnerFairyType.cost
         override val color get() = partnerFairyType.color
         override fun getSkillLevel(mastery: IMastery) = player.proxy.skillContainer.getSkillLevel(mastery)

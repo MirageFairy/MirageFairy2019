@@ -7,8 +7,8 @@ import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Compani
 import miragefairy2019.mod.modules.fairyweapon.playSound
 import miragefairy2019.mod.modules.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod3.artifacts.MirageFlower
-import miragefairy2019.mod3.erg.api.EnumErgType
-import miragefairy2019.mod3.erg.api.EnumErgType.WARP
+import miragefairy2019.mod3.erg.api.Erg
+import miragefairy2019.mod3.erg.api.Erg.WARP
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
@@ -36,10 +36,10 @@ import kotlin.math.floor
 import kotlin.math.pow
 
 class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFactor: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase3(Mana.DARK, EnumMastery.flowerPicking) {
-    val strength = createStrengthStatus(additionalBaseStatus, EnumErgType.SOUND)
-    val extent = createExtentStatus(additionalBaseStatus, EnumErgType.SPACE)
-    val endurance = createEnduranceStatus(additionalBaseStatus, EnumErgType.SLASH)
-    val production = createProductionStatus(additionalBaseStatus, EnumErgType.HARVEST)
+    val strength = createStrengthStatus(additionalBaseStatus, Erg.SOUND)
+    val extent = createExtentStatus(additionalBaseStatus, Erg.SPACE)
+    val endurance = createEnduranceStatus(additionalBaseStatus, Erg.SLASH)
+    val production = createProductionStatus(additionalBaseStatus, Erg.HARVEST)
     val cost = createCostStatus()
 
     val pitch = "pitch"({ double2.positive }) { -(cost / 50.0 - 1) * 12 }.setRange(-12.0..12.0).setVisibility(Companion.EnumVisibility.DETAIL)

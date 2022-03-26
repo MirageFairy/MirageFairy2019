@@ -27,7 +27,7 @@ import miragefairy2019.mod3.artifacts.PlayerProxy
 import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer
-import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.erg.api.Erg
 import miragefairy2019.mod3.fairy.FairyTypeAdapter
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.magic.MagicStatus
@@ -117,7 +117,7 @@ abstract class ItemFairyWeaponBase3(
             fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
             val cost get() = arguments.fairyType.cost
             operator fun Mana.not() = arguments.fairyType.manaSet[this]
-            operator fun EnumErgType.not() = arguments.fairyType.ergSet.getPower(this)
+            operator fun Erg.not() = arguments.fairyType.ergSet.getPower(this)
             operator fun <T> IMagicStatus<T>.not(): T = function.getValue(arguments)
         }
 
@@ -230,7 +230,7 @@ fun ItemFairyWeaponBase3.getActualFairyType(playerProxy: PlayerProxy, fairyTypeP
 
 // Statuses
 
-fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthErg: EnumErgType) = "strength"({ double0.positive }) {
+fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthErg: Erg) = "strength"({ double0.positive }) {
     (weaponStrength + !strengthErg + getSkillLevel(mastery) * 0.5) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !SHINE
         FIRE -> !FIRE
@@ -241,7 +241,7 @@ fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthEr
     }
 }.setVisibility(ALWAYS)
 
-fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: EnumErgType) = "extent"({ double0.positive }) {
+fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Erg) = "extent"({ double0.positive }) {
     (weaponExtent + !extentErg) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !GAIA + !WIND
         FIRE -> !GAIA + !WIND
@@ -252,7 +252,7 @@ fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Enu
     }
 }.setVisibility(ALWAYS)
 
-fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranceErg: EnumErgType) = "endurance"({ double0.positive }) {
+fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranceErg: Erg) = "endurance"({ double0.positive }) {
     (weaponEndurance + !enduranceErg) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !FIRE + !AQUA
         FIRE -> !AQUA * 2
@@ -263,7 +263,7 @@ fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranc
     }
 }.setVisibility(ALWAYS)
 
-fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, productionErg: EnumErgType) = "production"({ double0.positive }) {
+fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, productionErg: Erg) = "production"({ double0.positive }) {
     (weaponProduction + !productionErg) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !DARK * 2
         FIRE -> !SHINE + !DARK

@@ -11,7 +11,7 @@ import miragefairy2019.mod.magic4.Formula
 import miragefairy2019.mod.magic4.FormulaArguments
 import miragefairy2019.mod.magic4.FormulaRenderer
 import miragefairy2019.mod.magic4.MagicStatus
-import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.erg.api.Erg
 import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.skill.api.IMastery
@@ -26,7 +26,7 @@ interface MagicStatusContainer {
 
 class FormulaScope(private val formulaArguments: FormulaArguments) {
     operator fun Mana.not() = formulaArguments.getRawMana(this)
-    operator fun EnumErgType.not() = formulaArguments.getRawErg(this)
+    operator fun Erg.not() = formulaArguments.getRawErg(this)
     operator fun IMastery.not() = formulaArguments.getSkillLevel(this)
     val cost get() = formulaArguments.cost
     val costFactor get() = cost / 50.0
@@ -41,7 +41,7 @@ class SimpleFormulaArguments(
     private val skillContainer: ISkillContainer
 ) : FormulaArguments {
     override fun getRawMana(mana: Mana) = manaSet[mana] / (cost / 50.0)
-    override fun getRawErg(ergType: EnumErgType) = ergSet.getPower(ergType)
+    override fun getRawErg(ergType: Erg) = ergSet.getPower(ergType)
     override fun getSkillLevel(mastery: IMastery) = skillContainer.getSkillLevel(mastery)
 }
 
@@ -72,7 +72,7 @@ val <T> MagicStatus<T>.factors: List<ITextComponent>
         formula.calculate(object : FormulaArguments {
             override val hasPartnerFairy: Boolean get() = true
             override fun getRawMana(mana: Mana) = 0.0.also { factorList.add(mana.displayName) }
-            override fun getRawErg(ergType: EnumErgType) = 0.0.also { factorList.add(ergType.displayName) }
+            override fun getRawErg(ergType: Erg) = 0.0.also { factorList.add(ergType.displayName) }
             override val cost get() = 0.0.also { factorList.add(textComponent { translate("mirageFairy2019.formula.source.cost.name").darkGray }) }
             override val color get() = 0x000000
             override fun getSkillLevel(mastery: IMastery) = 0.also { factorList.add(textComponent { (!mastery.displayName).gold }) }

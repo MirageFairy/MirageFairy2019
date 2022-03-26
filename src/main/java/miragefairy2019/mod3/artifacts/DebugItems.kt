@@ -13,7 +13,7 @@ import miragefairy2019.mod3.artifacts.oreseed.ApiOreSeedDrop
 import miragefairy2019.mod3.artifacts.oreseed.EnumOreSeedType
 import miragefairy2019.mod3.artifacts.oreseed.EnumVariantOreSeed
 import miragefairy2019.mod3.artifacts.oreseed.OreSeedDropEnvironment
-import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.erg.api.Erg
 import miragefairy2019.mod3.fairy.ColorSet
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.erg
@@ -128,7 +128,7 @@ class ItemDebugFairyList : ItemDebug() {
                     listOf(
                         "RIGHT:${(fairyTypeRank1.manaSet.sum / fairyTypeRank1.cost * 50).f3}"
                     ),
-                    EnumErgType.values().map {
+                    Erg.values().map {
                         val a1 = fairyTypeRank1.erg(it)
                         val a2 = fairyTypeRank2.erg(it)
                         "${if (a1 >= 10) "BGCOLOR(#FDD):" else if (a2 >= 10) "BGCOLOR(#DDF):" else ""}RIGHT:${a1.f3}"

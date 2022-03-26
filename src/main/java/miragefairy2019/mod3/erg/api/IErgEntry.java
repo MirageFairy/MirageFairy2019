@@ -2,7 +2,7 @@ package miragefairy2019.mod3.erg.api;
 
 public interface IErgEntry {
 
-    public EnumErgType getType();
+    public Erg getType();
 
     /**
      * 非負です。

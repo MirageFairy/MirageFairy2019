@@ -15,7 +15,7 @@ import miragefairy2019.libkt.getSubItems
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod3.artifacts.get
 import miragefairy2019.mod3.artifacts.itemSpheres
-import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.erg.api.Erg
 import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
 import net.minecraft.client.Minecraft
 import net.minecraft.creativetab.CreativeTabs
@@ -42,7 +42,7 @@ class PluginManualRepair : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(itemSpheres[EnumErgType.CRAFT])
+            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(itemSpheres[Erg.CRAFT])
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 1, 1)
                 repeat(8) { recipeLayout.itemStacks.init(1 + it, true, 1 + 18 + 4 + 18 * it, 1) }

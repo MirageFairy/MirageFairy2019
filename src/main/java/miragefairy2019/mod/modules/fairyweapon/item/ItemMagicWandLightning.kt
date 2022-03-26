@@ -22,7 +22,7 @@ import net.minecraft.entity.monster.EntityCreeper
 import net.minecraft.init.SoundEvents
 import net.minecraft.util.SoundCategory
 import net.minecraft.world.WorldServer
-import miragefairy2019.mod3.erg.api.EnumErgType as Erg
+import miragefairy2019.mod3.erg.api.Erg as Erg
 import miragefairy2019.api.Mana
 
 class ItemMagicWandLightning : ItemAoeWeaponBase() {

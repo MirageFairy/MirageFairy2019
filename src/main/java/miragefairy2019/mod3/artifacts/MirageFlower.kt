@@ -14,7 +14,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers
 import miragefairy2019.mod.lib.WorldGenBush
-import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.erg.api.Erg
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.erg
 import miragefairy2019.mod3.fairy.relation.FairySelector
@@ -188,7 +188,7 @@ fun calculateGrowthRate(world: World, blockPos: BlockPos): List<Pair<String, Dou
 
 val List<Pair<String, Double>>.growthRate get() = fold(1.0) { a, b -> a * b.second }
 
-fun getGrowthRateInFloor(fairyType: IFairyType) = fairyType.shineEfficiency * fairyType.erg(EnumErgType.CRYSTAL) / 100.0 * 3
+fun getGrowthRateInFloor(fairyType: IFairyType) = fairyType.shineEfficiency * fairyType.erg(Erg.CRYSTAL) / 100.0 * 3
 
 class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidであるマテリアルは耕土を破壊する
     init {

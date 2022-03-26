@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.erg.api;
 
-public enum EnumErgType {
+public enum Erg {
     ATTACK,
     CRAFT,
     HARVEST,

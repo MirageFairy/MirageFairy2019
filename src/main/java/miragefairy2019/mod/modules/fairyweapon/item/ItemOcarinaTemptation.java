@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.mod3.erg.ErgKt;
-import miragefairy2019.mod3.erg.api.EnumErgType;
+import miragefairy2019.mod3.erg.api.Erg;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
 import mirrg.boron.util.UtilsMath;
@@ -46,7 +46,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
             radius = UtilsMath.trim(5 + fairyType.getManaSet().wind / 5.0, 5, 10);
             maxTargetCount = UtilsMath.trim(1 + (int) (fairyType.getManaSet().aqua / 7.0), 1, 8);
             wear = UtilsMath.trim(4 * Math.pow(0.5, fairyType.getManaSet().fire / 50.0), 0.4, 4);
-            experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManaSet().gaia / 50.0 + fairyType.getErgSet().getPower(EnumErgType.LIFE) / 10.0), 0.1, 1);
+            experienceCost = UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManaSet().gaia / 50.0 + fairyType.getErgSet().getPower(Erg.LIFE) / 10.0), 0.1, 1);
             coolTime = fairyType.getCost() * UtilsMath.trim(1 * Math.pow(0.5, fairyType.getManaSet().dark / 50.0), 0.1, 1);
         }
 
@@ -65,7 +65,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
         tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Wind)");
         tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Aqua)");
         tooltip.add(TextFormatting.BLUE + "Wear: " + String.format("%.1f", status.wear * 100) + "% (Fire)");
-        tooltip.add(TextFormatting.BLUE + "Experience Cost: " + String.format("%.1f", status.experienceCost * 100) + "% (Gaia, " + ErgKt.getDisplayName(EnumErgType.LIFE).getUnformattedText() + ")");
+        tooltip.add(TextFormatting.BLUE + "Experience Cost: " + String.format("%.1f", status.experienceCost * 100) + "% (Gaia, " + ErgKt.getDisplayName(Erg.LIFE).getUnformattedText() + ")");
         tooltip.add(TextFormatting.BLUE + "Cool Time: " + String.format("%.0f", status.coolTime) + "t (Dark, Cost)");
     }
 

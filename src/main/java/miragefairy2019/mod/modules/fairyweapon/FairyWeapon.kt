@@ -38,22 +38,22 @@ import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesCombining
 import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesUncombining
 import miragefairy2019.mod3.artifacts.oreName
 import miragefairy2019.mod3.artifacts.sphereType
-import miragefairy2019.mod3.erg.api.EnumErgType
-import miragefairy2019.mod3.erg.api.EnumErgType.ATTACK
-import miragefairy2019.mod3.erg.api.EnumErgType.CHRISTMAS
-import miragefairy2019.mod3.erg.api.EnumErgType.CRYSTAL
-import miragefairy2019.mod3.erg.api.EnumErgType.DESTROY
-import miragefairy2019.mod3.erg.api.EnumErgType.ENERGY
-import miragefairy2019.mod3.erg.api.EnumErgType.HARVEST
-import miragefairy2019.mod3.erg.api.EnumErgType.KNOWLEDGE
-import miragefairy2019.mod3.erg.api.EnumErgType.LIFE
-import miragefairy2019.mod3.erg.api.EnumErgType.LIGHT
-import miragefairy2019.mod3.erg.api.EnumErgType.SLASH
-import miragefairy2019.mod3.erg.api.EnumErgType.SOUND
-import miragefairy2019.mod3.erg.api.EnumErgType.SPACE
-import miragefairy2019.mod3.erg.api.EnumErgType.THUNDER
-import miragefairy2019.mod3.erg.api.EnumErgType.WARP
-import miragefairy2019.mod3.erg.api.EnumErgType.WATER
+import miragefairy2019.mod3.erg.api.Erg
+import miragefairy2019.mod3.erg.api.Erg.ATTACK
+import miragefairy2019.mod3.erg.api.Erg.CHRISTMAS
+import miragefairy2019.mod3.erg.api.Erg.CRYSTAL
+import miragefairy2019.mod3.erg.api.Erg.DESTROY
+import miragefairy2019.mod3.erg.api.Erg.ENERGY
+import miragefairy2019.mod3.erg.api.Erg.HARVEST
+import miragefairy2019.mod3.erg.api.Erg.KNOWLEDGE
+import miragefairy2019.mod3.erg.api.Erg.LIFE
+import miragefairy2019.mod3.erg.api.Erg.LIGHT
+import miragefairy2019.mod3.erg.api.Erg.SLASH
+import miragefairy2019.mod3.erg.api.Erg.SOUND
+import miragefairy2019.mod3.erg.api.Erg.SPACE
+import miragefairy2019.mod3.erg.api.Erg.THUNDER
+import miragefairy2019.mod3.erg.api.Erg.WARP
+import miragefairy2019.mod3.erg.api.Erg.WATER
 import miragefairy2019.mod3.main.api.ApiMain.creativeTab
 import miragefairy2019.mod3.main.api.ApiMain.side
 import mirrg.kotlin.gson.jsonElement
@@ -109,7 +109,7 @@ object FairyWeapon {
             }
         }
 
-        operator fun EnumErgType.not(): () -> Ingredient = { sphereType.oreName.oreIngredient }
+        operator fun Erg.not(): () -> Ingredient = { sphereType.oreName.oreIngredient }
         operator fun String.not(): () -> Ingredient = { oreIngredient }
 
         val miragiumSword = fw(2, { ItemFairyWeapon() }, "miragium_sword", "miragiumSword", listOf(), null, !ATTACK, !SLASH)

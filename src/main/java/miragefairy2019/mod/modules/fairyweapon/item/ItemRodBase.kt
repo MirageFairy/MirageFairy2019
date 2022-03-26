@@ -20,7 +20,7 @@ import net.minecraft.util.SoundCategory
 import net.minecraft.world.WorldServer
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import miragefairy2019.mod3.erg.api.EnumErgType as Erg
+import miragefairy2019.mod3.erg.api.Erg as Erg
 
 class ItemRodBase : ItemFairyWeaponMagic4() {
     val additionalReach = status("additionalReach", { 10.0 + (!Mana.WIND + !Erg.LEVITATE) / 5.0 atMost 50.0 }, { float2 })

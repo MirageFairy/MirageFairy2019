@@ -10,7 +10,7 @@ import miragefairy2019.mod.magic4.percent0
 import miragefairy2019.mod.magic4.percent2
 import miragefairy2019.mod.magic4.world
 import miragefairy2019.mod.modules.fairyweapon.MagicMessage
-import miragefairy2019.mod3.erg.api.EnumErgType
+import miragefairy2019.mod3.erg.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.mod3.skill.EnumMastery
 import net.minecraft.init.MobEffects
@@ -26,11 +26,11 @@ import kotlin.math.ceil
 import kotlin.math.floor
 
 class ItemGravityRod : ItemFairyWeaponMagic4() {
-    val duration = status("duration", { 20.0 * (5.0 + (!Mana.FIRE + !EnumErgType.SPACE) / 10.0) * costFactor }, { duration })
-    val strength = status("strength", { floor(1.0 + (!Mana.SHINE + !EnumErgType.LEVITATE) / 10.0).toInt() }, { integer })
-    val speedUp = status("speedUp", { floor((!Mana.GAIA + !EnumErgType.THUNDER) / 10.0).toInt() }, { integer })
-    val wear = status("wear", { 1.0 / (1.0 + (!Mana.AQUA + !EnumErgType.KNOWLEDGE) / 20.0) * costFactor }, { percent2 })
-    val coolTime = status("coolTime", { 20.0 * 20.0 / (1.0 + (!Mana.DARK + !EnumErgType.ENERGY) / 50.0) * costFactor }, { duration })
+    val duration = status("duration", { 20.0 * (5.0 + (!Mana.FIRE + !Erg.SPACE) / 10.0) * costFactor }, { duration })
+    val strength = status("strength", { floor(1.0 + (!Mana.SHINE + !Erg.LEVITATE) / 10.0).toInt() }, { integer })
+    val speedUp = status("speedUp", { floor((!Mana.GAIA + !Erg.THUNDER) / 10.0).toInt() }, { integer })
+    val wear = status("wear", { 1.0 / (1.0 + (!Mana.AQUA + !Erg.KNOWLEDGE) / 20.0) * costFactor }, { percent2 })
+    val coolTime = status("coolTime", { 20.0 * 20.0 / (1.0 + (!Mana.DARK + !Erg.ENERGY) / 50.0) * costFactor }, { duration })
     val speedBoost = status("speedBoost", { 1.0 + 0.01 * !EnumMastery.magicCombat }, { percent0 })
 
     @SideOnly(Side.CLIENT)
