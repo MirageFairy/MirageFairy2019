@@ -7,8 +7,8 @@ import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Compani
 import miragefairy2019.mod.modules.fairyweapon.playSound
 import miragefairy2019.mod.modules.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod3.artifacts.MirageFlower
-import miragefairy2019.mod3.erg.api.Erg
-import miragefairy2019.mod3.erg.api.Erg.WARP
+import miragefairy2019.api.Erg
+import miragefairy2019.api.Erg.WARP
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive

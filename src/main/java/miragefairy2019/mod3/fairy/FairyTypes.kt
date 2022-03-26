@@ -9,7 +9,7 @@ import miragefairy2019.libkt.buildText
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.erg.ErgEntry
 import miragefairy2019.mod3.erg.ErgSet
-import miragefairy2019.mod3.erg.api.Erg.values
+import miragefairy2019.api.Erg.values
 import miragefairy2019.mod3.erg.api.IErgSet
 import net.minecraft.util.ResourceLocation
 import kotlin.math.pow

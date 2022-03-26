@@ -7,7 +7,7 @@ import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.modules.fairyweapon.magic.EnumTargetExecutability
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.magic.UtilsMagic
-import miragefairy2019.mod3.erg.api.Erg
+import miragefairy2019.api.Erg
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.api.Mana

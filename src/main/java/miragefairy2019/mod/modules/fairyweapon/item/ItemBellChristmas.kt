@@ -8,7 +8,7 @@ import miragefairy2019.mod.magic4.integer
 import miragefairy2019.mod.magic4.percent0
 import miragefairy2019.mod.magic4.percent2
 import miragefairy2019.mod.magic4.pitch
-import miragefairy2019.mod3.erg.api.Erg
+import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.mod3.skill.EnumMastery
 import mirrg.kotlin.atMost

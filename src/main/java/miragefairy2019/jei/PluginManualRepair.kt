@@ -15,7 +15,7 @@ import miragefairy2019.libkt.getSubItems
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod3.artifacts.get
 import miragefairy2019.mod3.artifacts.itemSpheres
-import miragefairy2019.mod3.erg.api.Erg
+import miragefairy2019.api.Erg
 import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
 import net.minecraft.client.Minecraft
 import net.minecraft.creativetab.CreativeTabs

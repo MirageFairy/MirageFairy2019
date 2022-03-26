@@ -9,7 +9,7 @@ import miragefairy2019.mod.magic4.magic
 import miragefairy2019.mod.magic4.percent0
 import miragefairy2019.mod.magic4.suffix
 import miragefairy2019.mod.magic4.world
-import miragefairy2019.mod3.erg.api.Erg.THUNDER
+import miragefairy2019.api.Erg.THUNDER
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.api.Mana.WIND
 import miragefairy2019.mod3.skill.EnumMastery

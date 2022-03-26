@@ -5,7 +5,7 @@ import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.get
 import miragefairy2019.libkt.buildText
 import miragefairy2019.mod3.erg.ErgSet
-import miragefairy2019.mod3.erg.api.Erg
+import miragefairy2019.api.Erg
 import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.fairy.api.IFairyType
 import net.minecraft.util.ResourceLocation

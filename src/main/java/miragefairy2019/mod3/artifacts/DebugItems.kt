@@ -13,7 +13,7 @@ import miragefairy2019.mod3.artifacts.oreseed.ApiOreSeedDrop
 import miragefairy2019.mod3.artifacts.oreseed.EnumOreSeedType
 import miragefairy2019.mod3.artifacts.oreseed.EnumVariantOreSeed
 import miragefairy2019.mod3.artifacts.oreseed.OreSeedDropEnvironment
-import miragefairy2019.mod3.erg.api.Erg
+import miragefairy2019.api.Erg
 import miragefairy2019.mod3.fairy.ColorSet
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.erg

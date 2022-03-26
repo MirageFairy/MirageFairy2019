@@ -11,7 +11,7 @@ import miragefairy2019.mod.magic4.Formula
 import miragefairy2019.mod.magic4.FormulaArguments
 import miragefairy2019.mod.magic4.FormulaRenderer
 import miragefairy2019.mod.magic4.MagicStatus
-import miragefairy2019.mod3.erg.api.Erg
+import miragefairy2019.api.Erg
 import miragefairy2019.mod3.erg.api.IErgSet
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.skill.api.IMastery

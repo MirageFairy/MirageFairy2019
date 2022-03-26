@@ -1,7 +1,7 @@
 package miragefairy2019.mod.magic4
 
 import miragefairy2019.api.Mana
-import miragefairy2019.mod3.erg.api.Erg
+import miragefairy2019.api.Erg
 import miragefairy2019.mod3.skill.api.IMastery
 import net.minecraft.util.text.ITextComponent
 

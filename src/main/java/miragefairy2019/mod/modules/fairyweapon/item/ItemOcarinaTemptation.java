@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.mod3.erg.ErgKt;
-import miragefairy2019.mod3.erg.api.Erg;
+import miragefairy2019.api.Erg;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
 import mirrg.boron.util.UtilsMath;

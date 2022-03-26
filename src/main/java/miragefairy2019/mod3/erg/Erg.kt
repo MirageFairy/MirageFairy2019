@@ -2,7 +2,7 @@ package miragefairy2019.mod3.erg
 
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
-import miragefairy2019.mod3.erg.api.Erg
+import miragefairy2019.api.Erg
 import miragefairy2019.mod3.erg.api.IErgEntry
 import miragefairy2019.mod3.erg.api.IErgSet
 import net.minecraft.util.text.TextFormatting

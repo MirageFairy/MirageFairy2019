@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.erg.api;
+package miragefairy2019.api;
 
 public enum Erg {
     ATTACK,
