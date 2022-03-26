@@ -1,5 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.api.Erg
+import miragefairy2019.api.Mana
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
 import miragefairy2019.mod.formula4.status
 import miragefairy2019.mod.magic4.MagicHandler
@@ -8,7 +10,6 @@ import miragefairy2019.mod.magic4.magic
 import miragefairy2019.mod.magic4.world
 import miragefairy2019.mod.modules.fairyweapon.spawnMagicParticle
 import miragefairy2019.mod.modules.fairyweapon.spawnMagicSplashParticle
-import miragefairy2019.api.Mana
 import mirrg.kotlin.atMost
 import mirrg.kotlin.castOrNull
 import net.minecraft.entity.EntityLivingBase
@@ -20,7 +21,6 @@ import net.minecraft.util.SoundCategory
 import net.minecraft.world.WorldServer
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import miragefairy2019.mod3.erg.api.Erg as Erg
 
 class ItemRodBase : ItemFairyWeaponMagic4() {
     val additionalReach = status("additionalReach", { 10.0 + (!Mana.WIND + !Erg.LEVITATE) / 5.0 atMost 50.0 }, { float2 })

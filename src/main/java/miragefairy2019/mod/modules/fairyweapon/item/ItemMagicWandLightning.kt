@@ -1,5 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.api.Erg
+import miragefairy2019.api.Mana
 import miragefairy2019.mod.formula4.status
 import miragefairy2019.mod.magic4.FormulaArguments
 import miragefairy2019.mod.magic4.MagicArguments
@@ -22,8 +24,6 @@ import net.minecraft.entity.monster.EntityCreeper
 import net.minecraft.init.SoundEvents
 import net.minecraft.util.SoundCategory
 import net.minecraft.world.WorldServer
-import miragefairy2019.mod3.erg.api.Erg as Erg
-import miragefairy2019.api.Mana
 
 class ItemMagicWandLightning : ItemAoeWeaponBase() {
     override fun MagicArguments.getActualDamage(target: EntityLivingBase) = damage() * damageBoost() * criticalRate().get(world.rand).coefficient
