@@ -1,5 +1,7 @@
 package miragefairy2019.api;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Objects;
  */
 public final class ManaSet {
 
+    @Nonnull
     public static ManaSet ZERO = new ManaSet(0, 0, 0, 0, 0, 0);
 
     public final double shine;
@@ -25,6 +28,7 @@ public final class ManaSet {
         this.dark = dark;
     }
 
+    @Nonnull
     @Override
     public String toString() {
         return "ManaSet{" +
@@ -38,7 +42,7 @@ public final class ManaSet {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(@Nullable Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ManaSet manaSet = (ManaSet) o;

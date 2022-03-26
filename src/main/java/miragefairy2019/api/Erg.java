@@ -1,5 +1,7 @@
 package miragefairy2019.api;
 
+import javax.annotation.Nonnull;
+
 public enum Erg {
     ATTACK,
     CRAFT,
@@ -26,6 +28,7 @@ public enum Erg {
     SENSE,
     ;
 
+    @Nonnull
     @Override
     public String toString() {
         return name().toLowerCase();
