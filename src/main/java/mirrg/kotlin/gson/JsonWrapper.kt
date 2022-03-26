@@ -92,6 +92,18 @@ val JsonWrapper.toString: String
         else -> throw IllegalStateException()
     }
 
+val JsonWrapper.toInt: Int
+    get() = when {
+        isUndefined -> 0
+        isNumber -> asInt
+        isString -> asString.toInt()
+        isBoolean -> if (asBoolean) 1 else 0
+        isNull -> 0
+        isArray -> e("Number")
+        isObject -> e("Number")
+        else -> throw IllegalStateException()
+    }
+
 val JsonWrapper.toDouble: Double
     get() = when {
         isUndefined -> 0.0
@@ -129,4 +141,5 @@ val JsonWrapper.toBoolean: Boolean
     }
 
 // 文字列のJsonWrapper化
-val String.jsonWrapper get() = JsonWrapper(if (this.isBlank()) null else GsonBuilder().create().fromJson(this, JsonElement::class.java), "_")
+val String.jsonWrapper get() = (if (this.isBlank()) null else GsonBuilder().create().fromJson(this, JsonElement::class.java)).jsonWrapper
+val JsonElement?.jsonWrapper get() = JsonWrapper(this, "_")
