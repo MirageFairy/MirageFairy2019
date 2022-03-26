@@ -8,6 +8,7 @@ import miragefairy2019.mod.magic4.magic
 import miragefairy2019.mod.magic4.world
 import miragefairy2019.mod.modules.fairyweapon.spawnMagicParticle
 import miragefairy2019.mod.modules.fairyweapon.spawnMagicSplashParticle
+import miragefairy2019.mod3.mana.api.Mana
 import mirrg.kotlin.atMost
 import mirrg.kotlin.castOrNull
 import net.minecraft.entity.EntityLivingBase
@@ -20,7 +21,6 @@ import net.minecraft.world.WorldServer
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import miragefairy2019.mod3.erg.api.EnumErgType as Erg
-import miragefairy2019.mod3.mana.api.EnumManaType as Mana
 
 class ItemRodBase : ItemFairyWeaponMagic4() {
     val additionalReach = status("additionalReach", { 10.0 + (!Mana.WIND + !Erg.LEVITATE) / 5.0 atMost 50.0 }, { float2 })

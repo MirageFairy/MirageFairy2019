@@ -23,7 +23,7 @@ import net.minecraft.init.SoundEvents
 import net.minecraft.util.SoundCategory
 import net.minecraft.world.WorldServer
 import miragefairy2019.mod3.erg.api.EnumErgType as Erg
-import miragefairy2019.mod3.mana.api.EnumManaType as Mana
+import miragefairy2019.mod3.mana.api.Mana
 
 class ItemMagicWandLightning : ItemAoeWeaponBase() {
     override fun MagicArguments.getActualDamage(target: EntityLivingBase) = damage() * damageBoost() * criticalRate().get(world.rand).coefficient

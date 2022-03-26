@@ -1,6 +1,6 @@
 package miragefairy2019.mod3.mana.api;
 
-public enum EnumManaType {
+public enum Mana {
     SHINE,
     FIRE,
     WIND,

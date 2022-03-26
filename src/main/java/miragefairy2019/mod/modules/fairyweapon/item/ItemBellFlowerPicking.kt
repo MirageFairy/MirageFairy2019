@@ -13,7 +13,7 @@ import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.positiveBoolean
-import miragefairy2019.mod3.mana.api.EnumManaType
+import miragefairy2019.mod3.mana.api.Mana
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import mirrg.boron.util.UtilsMath
@@ -35,7 +35,7 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.pow
 
-class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFactor: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase3(EnumManaType.DARK, EnumMastery.flowerPicking) {
+class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFactor: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase3(Mana.DARK, EnumMastery.flowerPicking) {
     val strength = createStrengthStatus(additionalBaseStatus, EnumErgType.SOUND)
     val extent = createExtentStatus(additionalBaseStatus, EnumErgType.SPACE)
     val endurance = createEnduranceStatus(additionalBaseStatus, EnumErgType.SLASH)

@@ -12,7 +12,7 @@ import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
 import miragefairy2019.mod3.erg.displayName
 import miragefairy2019.mod3.fairy.api.IFairyType
-import miragefairy2019.mod3.mana.api.EnumManaType
+import miragefairy2019.mod3.mana.api.Mana
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.mana.textColor
 import mirrg.boron.util.UtilsString
@@ -90,48 +90,48 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
             text("マナ: ").color(AQUA) // TODO translate
         }
         if (flag.isAdvanced) {
-            fun f(manaType: EnumManaType) = textComponent {
+            fun f(manaType: Mana) = textComponent {
                 val raw = variant.type.manaSet.getMana(manaType) / (variant.type.cost / 50.0)
                 val normalized = variant.type.manaSet.getMana(manaType)
                 (format("%.3f", raw) + !" [" + format("%.3f", normalized) + !"]").color(manaType.textColor)
             }
             tooltip {
                 text("        ")
-                text(f(EnumManaType.SHINE))
+                text(f(Mana.SHINE))
             }
             tooltip {
-                text(f(EnumManaType.FIRE))
+                text(f(Mana.FIRE))
                 text("    ")
-                text(f(EnumManaType.WIND))
+                text(f(Mana.WIND))
             }
             tooltip {
-                text(f(EnumManaType.GAIA))
+                text(f(Mana.GAIA))
                 text("    ")
-                text(f(EnumManaType.AQUA))
+                text(f(Mana.AQUA))
             }
             tooltip {
                 text("        ")
-                text(f(EnumManaType.DARK))
+                text(f(Mana.DARK))
             }
         } else {
-            fun f(manaType: EnumManaType) = textComponent { format("%4d", formatInt(variant.type.manaSet.getMana(manaType) / (variant.type.cost / 50.0))).color(manaType.textColor) }
+            fun f(manaType: Mana) = textComponent { format("%4d", formatInt(variant.type.manaSet.getMana(manaType) / (variant.type.cost / 50.0))).color(manaType.textColor) }
             tooltip {
                 text("    ")
-                text(f(EnumManaType.SHINE))
+                text(f(Mana.SHINE))
             }
             tooltip {
-                text(f(EnumManaType.FIRE))
+                text(f(Mana.FIRE))
                 text("    ")
-                text(f(EnumManaType.WIND))
+                text(f(Mana.WIND))
             }
             tooltip {
-                text(f(EnumManaType.GAIA))
+                text(f(Mana.GAIA))
                 text("    ")
-                text(f(EnumManaType.AQUA))
+                text(f(Mana.AQUA))
             }
             tooltip {
                 text("    ")
-                text(f(EnumManaType.DARK))
+                text(f(Mana.DARK))
             }
         }
 

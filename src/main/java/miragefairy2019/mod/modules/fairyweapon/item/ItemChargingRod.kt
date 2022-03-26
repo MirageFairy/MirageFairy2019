@@ -11,7 +11,7 @@ import miragefairy2019.mod.magic4.suffix
 import miragefairy2019.mod.magic4.world
 import miragefairy2019.mod3.erg.api.EnumErgType.THUNDER
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.mana.api.EnumManaType.WIND
+import miragefairy2019.mod3.mana.api.Mana.WIND
 import miragefairy2019.mod3.skill.EnumMastery
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos

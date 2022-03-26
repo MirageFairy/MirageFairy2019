@@ -19,7 +19,7 @@ import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.erg
 import miragefairy2019.mod3.fairy.mana
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.mana.api.EnumManaType
+import miragefairy2019.mod3.mana.api.Mana
 import miragefairy2019.mod3.mana.sum
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill
@@ -114,13 +114,13 @@ class ItemDebugFairyList : ItemDebug() {
                         "CENTER:${variantRank1.rare}",
                         "RIGHT:${fairyTypeRank1.cost.f0}"
                     ),
-                    EnumManaType.values().map {
+                    Mana.values().map {
                         "RIGHT:${fairyTypeRank1.mana(it).f3}"
                     },
                     listOf(
                         "RIGHT:${fairyTypeRank1.manaSet.sum.f3}"
                     ),
-                    EnumManaType.values().map {
+                    Mana.values().map {
                         val a1 = fairyTypeRank1.mana(it) / fairyTypeRank1.cost * 50
                         val a2 = fairyTypeRank2.mana(it) / fairyTypeRank2.cost * 50
                         "${if (a1 >= 10) "BGCOLOR(#FDD):" else if (a2 >= 10) "BGCOLOR(#DDF):" else ""}RIGHT:${a1.f3}"

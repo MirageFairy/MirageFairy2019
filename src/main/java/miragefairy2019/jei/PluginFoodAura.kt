@@ -14,7 +14,7 @@ import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.getSubItems
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod3.mana.api.EnumManaType
+import miragefairy2019.mod3.mana.api.Mana
 import miragefairy2019.mod3.mana.color
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
@@ -69,7 +69,7 @@ class PluginFoodAura : IModPlugin {
                         add(object : IRecipeWrapper {
                             override fun getIngredients(ingredients: IIngredients) = ingredients.setInputLists(VanillaTypes.ITEM, listOf(listOf(itemStack)))
                             override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {
-                                fun d(manaType: EnumManaType, x: Int) {
+                                fun d(manaType: Mana, x: Int) {
                                     val value = foodAura.getMana(manaType)
                                     Gui.drawRect(x + 2, (20 - 20 * value / 50.0).toInt(), x + 18, 20, manaType.color or 0xFF000000.toInt())
                                     val string = String.format("%.0f", value)
@@ -77,12 +77,12 @@ class PluginFoodAura : IModPlugin {
                                     Gui.drawRect(x + 10 - stringWidth / 2 - 1, 10, x + 10 + stringWidth / 2 + 1, 18, 0xFFC6C6C6.toInt())
                                     minecraft.fontRenderer.drawStringCentered(string, x + 10, 10, manaType.color)
                                 }
-                                d(EnumManaType.SHINE, 30)
-                                d(EnumManaType.FIRE, 50)
-                                d(EnumManaType.WIND, 70)
-                                d(EnumManaType.GAIA, 90)
-                                d(EnumManaType.AQUA, 110)
-                                d(EnumManaType.DARK, 130)
+                                d(Mana.SHINE, 30)
+                                d(Mana.FIRE, 50)
+                                d(Mana.WIND, 70)
+                                d(Mana.GAIA, 90)
+                                d(Mana.AQUA, 110)
+                                d(Mana.DARK, 130)
                             }
                         })
 

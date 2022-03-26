@@ -33,13 +33,13 @@ import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.ranged
 import miragefairy2019.mod3.main.api.ApiMain.side
-import miragefairy2019.mod3.mana.api.EnumManaType
-import miragefairy2019.mod3.mana.api.EnumManaType.AQUA
-import miragefairy2019.mod3.mana.api.EnumManaType.DARK
-import miragefairy2019.mod3.mana.api.EnumManaType.FIRE
-import miragefairy2019.mod3.mana.api.EnumManaType.GAIA
-import miragefairy2019.mod3.mana.api.EnumManaType.SHINE
-import miragefairy2019.mod3.mana.api.EnumManaType.WIND
+import miragefairy2019.mod3.mana.api.Mana
+import miragefairy2019.mod3.mana.api.Mana.AQUA
+import miragefairy2019.mod3.mana.api.Mana.DARK
+import miragefairy2019.mod3.mana.api.Mana.FIRE
+import miragefairy2019.mod3.mana.api.Mana.GAIA
+import miragefairy2019.mod3.mana.api.Mana.SHINE
+import miragefairy2019.mod3.mana.api.Mana.WIND
 import miragefairy2019.mod3.mana.api.IManaSet
 import miragefairy2019.mod3.mana.getMana
 import miragefairy2019.mod3.mana.plus
@@ -81,7 +81,7 @@ fun Magic?.getMagicHandler(magicScope: MagicScope) = this?.invoke(magicScope) ?:
 
 
 abstract class ItemFairyWeaponBase3(
-    val weaponManaType: EnumManaType,
+    val weaponManaType: Mana,
     val mastery: IMastery
 ) : ItemFairyWeapon() {
     companion object {
@@ -116,7 +116,7 @@ abstract class ItemFairyWeaponBase3(
         class MagicStatusFormulaScope(val arguments: IMagicStatusFunctionArguments) {
             fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
             val cost get() = arguments.fairyType.cost
-            operator fun EnumManaType.not() = arguments.fairyType.manaSet.getMana(this)
+            operator fun Mana.not() = arguments.fairyType.manaSet.getMana(this)
             operator fun EnumErgType.not() = arguments.fairyType.ergSet.getPower(this)
             operator fun <T> IMagicStatus<T>.not(): T = function.getValue(arguments)
         }
