@@ -1,5 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.drop
 import miragefairy2019.mod.formula4.status
 import miragefairy2019.mod.magic4.MagicArguments
 import miragefairy2019.mod.magic4.duration
@@ -13,6 +15,7 @@ import miragefairy2019.api.Mana
 import miragefairy2019.mod3.skill.EnumMastery
 import mirrg.kotlin.atMost
 import net.minecraft.entity.EntityLivingBase
+import net.minecraft.init.Items
 import net.minecraft.init.SoundEvents
 import net.minecraft.util.SoundCategory
 import net.minecraft.world.WorldServer
@@ -35,5 +38,9 @@ class ItemBellChristmas : ItemAoeWeaponBase() {
     val pitch = status("pitch", { 0.5.pow(costFactor - 1.0) }, { pitch })
     override fun MagicArguments.onActionEffect(world: WorldServer) {
         world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, pitch().toFloat()) // 鐘の音
+    }
+
+    override fun MagicArguments.onKill(world: WorldServer, target: EntityLivingBase) {
+        if (target.isEntityUndead) Items.COAL.createItemStack().drop(world, target.positionVector)
     }
 }
