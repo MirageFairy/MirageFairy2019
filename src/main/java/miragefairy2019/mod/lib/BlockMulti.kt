@@ -28,7 +28,7 @@ open class BlockMulti<V : IBlockVariant>(material: Material, val variantList: Bl
     fun getVariant(metadata: Int) = variantList.byMetadata(metadata)
     override fun getSubBlocks(creativeTab: CreativeTabs, itemStacks: NonNullList<ItemStack>) {
         variantList.blockVariants.forEach { variant ->
-            itemStacks += ItemStack(this, 1, variant.metadata)
+            if (variant.canSeeOnCreativeTab) itemStacks += ItemStack(this, 1, variant.metadata)
         }
     }
 
@@ -50,6 +50,7 @@ interface IBlockVariant {
     val metadata: Int
     val resourceName: String
     val unlocalizedName: String
+    val canSeeOnCreativeTab get() = true
 }
 
 class BlockVariantList<V : IBlockVariant>(
