@@ -1,22 +1,26 @@
 package miragefairy2019.api;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-/**
- * すべてのマナの値は非負です。
- */
 public final class ManaSet {
 
     @Nonnull
     public static ManaSet ZERO = new ManaSet(0, 0, 0, 0, 0, 0);
 
+    @Nonnegative
     public final double shine;
+    @Nonnegative
     public final double fire;
+    @Nonnegative
     public final double wind;
+    @Nonnegative
     public final double gaia;
+    @Nonnegative
     public final double aqua;
+    @Nonnegative
     public final double dark;
 
     public ManaSet(double shine, double fire, double wind, double gaia, double aqua, double dark) {
