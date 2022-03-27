@@ -40,8 +40,10 @@ object Fairy {
                 @SideOnly(Side.CLIENT)
                 override fun displayAllRelevantItems(itemStacks: NonNullList<ItemStack>) {
                     FairyTypes.instance.variants.forEach { variant ->
-                        listItemFairy.forEachIndexed { i, _ ->
-                            itemStacks.add(variant.bundle[i].createItemStack())
+                        if (variant.bundle.main.canSeeOnCreativeTab) {
+                            listItemFairy.forEachIndexed { i, _ ->
+                                itemStacks.add(variant.bundle[i].createItemStack())
+                            }
                         }
                     }
                 }
