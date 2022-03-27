@@ -23,7 +23,14 @@ public final class ManaSet {
     @Nonnegative
     public final double dark;
 
-    public ManaSet(double shine, double fire, double wind, double gaia, double aqua, double dark) {
+    public ManaSet(
+        @Nonnegative double shine,
+        @Nonnegative double fire,
+        @Nonnegative double wind,
+        @Nonnegative double gaia,
+        @Nonnegative double aqua,
+        @Nonnegative double dark
+    ) {
         this.shine = shine;
         this.fire = fire;
         this.wind = wind;
