@@ -8,7 +8,7 @@ import java.util.Objects;
 public final class ManaSet {
 
     @Nonnull
-    public static ManaSet ZERO = new ManaSet(0, 0, 0, 0, 0, 0);
+    public final static ManaSet ZERO = new ManaSet(0, 0, 0, 0, 0, 0);
 
     @Nonnegative
     public final double shine;
