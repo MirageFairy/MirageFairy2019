@@ -38,8 +38,10 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
     open fun MagicArguments.onHit(world: WorldServer, target: EntityLivingBase) = Unit
 
     /** サーバーワールドでのみ呼び出されます。 */
-    open fun MagicArguments.onHitEffect(world: WorldServer, target: EntityLivingBase) = Unit
+    open fun MagicArguments.onKill(world: WorldServer, target: EntityLivingBase) = Unit
 
+    /** サーバーワールドでのみ呼び出されます。 */
+    open fun MagicArguments.onHitEffect(world: WorldServer, target: EntityLivingBase) = Unit
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックで攻撃" // TODO translate
@@ -63,7 +65,7 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
 
         if (!hasPartnerFairy) return@magic error(0xFF00FF, MagicMessage.NO_FAIRY) // パートナー妖精判定
         if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic error(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
-        val targets = selectorEntityRanged.effectiveEntities.take(maxTargetCount())
+        val targets = selectorEntityRanged.effectiveEntities.take(maxTargetCount()).filter { it.health > 0 }
         if (targets.isEmpty()) return@magic error(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
         if (player.cooldownTracker.hasCooldown(weaponItem)) return@magic error(0xFFFF00, MagicMessage.COOL_TIME) // クールタイム判定
 
@@ -89,6 +91,7 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
                             val actualDamage = getActualDamage(target) // ダメージ計算
                             target.attackEntityFrom(DamageSourceFairyMagic(player, world.rand.randomInt(looting())), actualDamage.toFloat()) // ダメージ発生
                             onHit(worldServer, target)
+                            if (target.health <= 0) onKill(worldServer, target)
 
                             // ターゲットごとの消費
                             weaponItemStack.damageItem(world.rand.randomInt(wear()), player) // 耐久値の消費
