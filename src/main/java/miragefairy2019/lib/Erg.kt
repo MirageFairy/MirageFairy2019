@@ -1,23 +1,14 @@
 package miragefairy2019.lib
 
 import miragefairy2019.api.Erg
-import miragefairy2019.api.IErgEntry
-import miragefairy2019.api.IErgSet
+import miragefairy2019.api.ErgSet
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
 import net.minecraft.util.text.TextFormatting
 
-class ErgSet(private val iterable: Iterable<IErgEntry>) : IErgSet {
-    private val list = iterable.toList()
-    private val map = list.associateBy { it.type }
-    override fun getEntries() = list
-    override fun getPower(type: Erg) = map[type]?.power ?: 0.0
-}
-
-class ErgEntry(private val type: Erg, private val power: Double) : IErgEntry {
-    override fun getPower() = power
-    override fun getType() = type
-}
+operator fun ErgSet.get(erg: Erg) = getValue(erg)
+val ErgSet.ergs get() = (0 until size).map { getErg(it) }
+val ErgSet.entries get() = ergs.map { it to this[it] }
 
 val Erg.textColor
     get() = when (this) {

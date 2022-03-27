@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.fairy
 
+import miragefairy2019.lib.entries
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.orNull
 import miragefairy2019.mod.ModMirageFairy2019
@@ -116,8 +117,8 @@ object Fairy {
 
                     // エルグ別
                     variant.bundle[i].type.ergSet.entries.forEach {
-                        if (it.power >= 10) {
-                            OreDictionary.registerOre("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(it.type.toString())}", variant.bundle[i].createItemStack())
+                        if (it.second >= 10) {
+                            OreDictionary.registerOre("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(it.first.toString())}", variant.bundle[i].createItemStack())
                         }
                     }
 

@@ -1,6 +1,8 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.api.Mana
+import miragefairy2019.lib.displayName
+import miragefairy2019.lib.entries
 import miragefairy2019.lib.get
 import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.TextComponentBuilder
@@ -13,7 +15,6 @@ import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
-import miragefairy2019.lib.displayName
 import miragefairy2019.mod3.fairy.api.IFairyType
 import mirrg.boron.util.UtilsString
 import net.minecraft.client.Minecraft
@@ -150,14 +151,14 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
             text {
                 text("エルグ: ") // TODO translate
                 variant.type.ergSet.entries
-                    .filter { formatInt(it.power) >= 10 }
-                    .sortedByDescending { it.power }
+                    .filter { formatInt(it.second) >= 10 }
+                    .sortedByDescending { it.second }
                     .map {
                         textComponent {
                             if (flag.isAdvanced) {
-                                !it.type.displayName + format("(%.3f [%.3f])", it.power, it.power * (variant.type.cost / 50.0))
+                                !it.first.displayName + format("(%.3f [%.3f])", it.second, it.second * (variant.type.cost / 50.0))
                             } else {
-                                !it.type.displayName
+                                !it.first.displayName
                             }
                         }
                     }

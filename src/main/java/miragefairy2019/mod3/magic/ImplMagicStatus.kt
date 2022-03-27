@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.magic
 
+import miragefairy2019.api.ErgSet
 import miragefairy2019.api.ManaSet
 import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.buildText
@@ -7,9 +8,6 @@ import miragefairy2019.libkt.color
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.fairy.ApiFairy
-import miragefairy2019.api.Erg
-import miragefairy2019.api.IErgSet
-import miragefairy2019.lib.displayName
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
@@ -73,9 +71,10 @@ val <T> IMagicStatusFunction<T>.factors
                     return ManaSet.ZERO
                 }
 
-                override fun getErgSet() = object : IErgSet {
-                    override fun getEntries() = throw UnsupportedOperationException()
-                    override fun getPower(type: Erg) = add(type.displayName)
+                override fun getErgSet(): ErgSet {
+                    //override fun getPower(type: Erg) = add(type.displayName)
+                    factors.add(textComponent { !"Erg" })
+                    return ErgSet.ZERO
                 }
             }
 

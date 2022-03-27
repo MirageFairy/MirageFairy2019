@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.api.Mana.AQUA
 import miragefairy2019.api.Mana.DARK
@@ -27,7 +28,6 @@ import miragefairy2019.mod3.artifacts.PlayerProxy
 import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer
-import miragefairy2019.api.Erg
 import miragefairy2019.mod3.fairy.FairyTypeAdapter
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.magic.MagicStatus
@@ -117,7 +117,7 @@ abstract class ItemFairyWeaponBase3(
             fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
             val cost get() = arguments.fairyType.cost
             operator fun Mana.not() = arguments.fairyType.manaSet[this]
-            operator fun Erg.not() = arguments.fairyType.ergSet.getPower(this)
+            operator fun Erg.not() = arguments.fairyType.ergSet[this]
             operator fun <T> IMagicStatus<T>.not(): T = function.getValue(arguments)
         }
 

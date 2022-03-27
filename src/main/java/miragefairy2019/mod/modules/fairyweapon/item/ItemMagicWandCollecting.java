@@ -1,8 +1,8 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
+import miragefairy2019.api.Erg;
 import miragefairy2019.lib.ErgKt;
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils;
-import miragefairy2019.api.Erg;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
 import mirrg.boron.util.struct.Tuple;
@@ -45,8 +45,8 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
 
         public Status(IFairyType fairyType) {
             additionalReach = Math.min(fairyType.getManaSet().wind / 5.0, 8);
-            radius = Math.min(2 + fairyType.getManaSet().fire / 10.0 + fairyType.getErgSet().getPower(Erg.WARP) / 10.0, 7);
-            maxTargets = (int) (Math.min(1 + fairyType.getManaSet().gaia / 2.0 + fairyType.getErgSet().getPower(Erg.SPACE) / 2.0, 20));
+            radius = Math.min(2 + fairyType.getManaSet().fire / 10.0 + fairyType.getErgSet().getValue(Erg.WARP) / 10.0, 7);
+            maxTargets = (int) (Math.min(1 + fairyType.getManaSet().gaia / 2.0 + fairyType.getErgSet().getValue(Erg.SPACE) / 2.0, 20));
             wear = 0.25 * Math.pow(0.5, fairyType.getManaSet().aqua / 30);
             coolTime = fairyType.getCost() * 3 * Math.pow(0.5, fairyType.getManaSet().dark / 40);
         }

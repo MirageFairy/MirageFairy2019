@@ -1,16 +1,15 @@
 package miragefairy2019.mod3.fairy
 
+import miragefairy2019.api.Erg.values
+import miragefairy2019.api.ErgSet
 import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.div
+import miragefairy2019.lib.entries
 import miragefairy2019.lib.max
 import miragefairy2019.lib.sum
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.buildText
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.lib.ErgEntry
-import miragefairy2019.lib.ErgSet
-import miragefairy2019.api.Erg.values
-import miragefairy2019.api.IErgSet
 import net.minecraft.util.ResourceLocation
 import kotlin.math.pow
 
@@ -32,22 +31,22 @@ class FairyTypes(private val count: Int) {
 
     private fun m(shine: Double, fire: Double, wind: Double, gaia: Double, aqua: Double, dark: Double) = ManaSet(shine, fire, wind, gaia, aqua, dark)
 
-    private fun a(vararg powers: Double): IErgSet {
+    private fun a(vararg powers: Double): ErgSet {
         val types = values().toList()
         if (powers.size != types.size) throw IllegalArgumentException("Illegal erg count: ${powers.size} != ${types.size}")
-        return ErgSet(types.indices.map { i -> ErgEntry(types[i], powers[i]) })
+        return ErgSet(types.withIndex().associate { (i, erg) -> erg to powers[i] })
     }
 
     private fun c(skin: Int, bright: Int, dark: Int, hair: Int) = ColorSet(skin, bright, dark, hair)
 
-    private operator fun Int.invoke(name: String, parentFairy: () -> RankedFairyTypeBundle?, rare: Int, cost: Int, rateSpecial: Double, manaSet: ManaSet, ergSet: IErgSet, colorSet: ColorSet): RankedFairyTypeBundle {
+    private operator fun Int.invoke(name: String, parentFairy: () -> RankedFairyTypeBundle?, rare: Int, cost: Int, rateSpecial: Double, manaSet: ManaSet, ergSet: ErgSet, colorSet: ColorSet): RankedFairyTypeBundle {
         val id = this
 
         fun getType(rank: Int): FairyType {
             val rateRare = 2.0.pow((rare + rank - 2) / 4.0)
             val rateVariance = 0.5.pow(((manaSet / manaSet.max).sum - 1) / 5.0)
             val manaSetReal = manaSet / manaSet.sum * (cost * rateRare * rateVariance * rateSpecial)
-            val ergSetReal = ErgSet(ergSet.entries.map { ErgEntry(it.type, it.power * rateRare) })
+            val ergSetReal = ErgSet(ergSet.entries.associate { (erg, value) -> erg to value * rateRare })
             return FairyType(
                 ResourceLocation(ModMirageFairy2019.MODID, name),
                 parentFairy,
