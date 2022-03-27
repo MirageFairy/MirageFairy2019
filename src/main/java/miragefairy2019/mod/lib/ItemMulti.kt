@@ -42,7 +42,9 @@ open class ItemMulti<V : ItemVariant> : Item() {
 
     override fun getSubItems(tab: CreativeTabs, items: NonNullList<ItemStack>) {
         if (!isInCreativeTab(tab)) return
-        map.keys.forEach { items += createItemStack(1, it) }
+        map.forEach { (metadata, variant) ->
+            if (variant.canSeeOnCreativeTab) items += createItemStack(1, metadata)
+        }
     }
 }
 
@@ -57,6 +59,7 @@ open class ItemVariant {
     lateinit var item: Item
 
     fun createItemStack(amount: Int = 1) = item.createItemStack(amount, metadata)
+    var canSeeOnCreativeTab = true
 }
 
 
