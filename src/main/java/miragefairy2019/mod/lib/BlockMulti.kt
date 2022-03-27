@@ -13,6 +13,7 @@ import net.minecraft.util.NonNullList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import java.time.LocalDateTime
 
 open class BlockMulti<V : IBlockVariant>(material: Material, val variantList: BlockVariantList<V>) : Block(material) {
     init {
@@ -74,5 +75,15 @@ open class ItemBlockMulti<B : BlockMulti<V>, V : IBlockVariant>(protected var bl
     }
 
     override fun getMetadata(meta: Int) = meta
-    override fun getUnlocalizedName(itemStack: ItemStack) = "tile.${block2.getVariant(itemStack.metadata).unlocalizedName}"
+    override fun getUnlocalizedName(itemStack: ItemStack): String {
+
+        // TODO remove
+        if (LocalDateTime.now() < LocalDateTime.of(2022, 4, 2, 0, 0, 0)) {
+            if (block2.getVariant(itemStack.metadata).unlocalizedName == "orePyrite") {
+                return "tile.oreGold"
+            }
+        }
+
+        return "tile.${block2.getVariant(itemStack.metadata).unlocalizedName}"
+    }
 }
