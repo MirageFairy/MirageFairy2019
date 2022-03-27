@@ -7,7 +7,7 @@
       "translate": "item.gravityRod.name"
     },
     "description": {
-      "translate": "advancements.miragefairy2019.fairy_weapon.all.description"
+      "translate": "item.gravityRod.recipe"
     },
     "frame": "goal"
   },

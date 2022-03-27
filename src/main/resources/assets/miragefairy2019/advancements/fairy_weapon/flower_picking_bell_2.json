@@ -7,7 +7,7 @@
       "translate": "item.bellFlowerPicking2.name"
     },
     "description": {
-      "translate": "advancements.miragefairy2019.fairy_weapon.all.description"
+      "translate": "item.bellFlowerPicking2.recipe"
     },
     "frame": "goal"
   },

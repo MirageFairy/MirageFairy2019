@@ -7,7 +7,7 @@
       "translate": "item.fairySword.name"
     },
     "description": {
-      "translate": "advancements.miragefairy2019.fairy_weapon.all.description"
+      "translate": "item.fairySword.recipe"
     },
     "frame": "goal"
   },

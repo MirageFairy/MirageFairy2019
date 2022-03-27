@@ -7,7 +7,7 @@
       "translate": "item.chargingRod.name"
     },
     "description": {
-      "translate": "advancements.miragefairy2019.fairy_weapon.all.description"
+      "translate": "item.chargingRod.recipe"
     }
   },
   "parent": "miragefairy2019:fairy_weapon/magic_wand_base",

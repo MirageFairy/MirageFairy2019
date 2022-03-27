@@ -7,7 +7,7 @@
       "translate": "item.miragiumAxe.name"
     },
     "description": {
-      "translate": "advancements.miragefairy2019.fairy_weapon.all.description"
+      "translate": "item.miragiumAxe.recipe"
     }
   },
   "parent": "miragefairy2019:fairy_weapon/root",
