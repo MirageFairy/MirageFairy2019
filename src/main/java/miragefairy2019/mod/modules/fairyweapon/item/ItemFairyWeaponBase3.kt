@@ -9,7 +9,6 @@ import miragefairy2019.api.Mana.GAIA
 import miragefairy2019.api.Mana.SHINE
 import miragefairy2019.api.Mana.WIND
 import miragefairy2019.api.ManaSet
-import miragefairy2019.lib.get
 import miragefairy2019.lib.plus
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.TextComponentScope
@@ -115,9 +114,9 @@ abstract class ItemFairyWeaponBase3(
 
         class MagicStatusFormulaScope(val arguments: IMagicStatusFunctionArguments) {
             fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
-            val cost get() = arguments.fairyType.cost
-            operator fun Mana.not() = arguments.fairyType.manaSet[this]
-            operator fun Erg.not() = arguments.fairyType.ergSet[this]
+            val cost get() = arguments.cost
+            operator fun Mana.not() = arguments.getManaValue(this)
+            operator fun Erg.not() = arguments.getErgValue(this)
             operator fun <T> IMagicStatus<T>.not(): T = function.getValue(arguments)
         }
 
