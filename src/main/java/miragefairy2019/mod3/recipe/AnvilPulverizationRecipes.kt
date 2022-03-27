@@ -81,6 +81,9 @@ object AnvilPulverizationRecipes {
             r("ruby")
             r("sapphire")
 
+            r("crystalCertusQuartz".oreIngredient, "dustCertusQuartz")
+            r("crystalFluix".oreIngredient, "dustFluix")
+
         }
     }
 }

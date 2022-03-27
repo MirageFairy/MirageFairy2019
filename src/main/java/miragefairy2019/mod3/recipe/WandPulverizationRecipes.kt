@@ -33,6 +33,10 @@ object WandPulverizationRecipes {
             r("wheat_dust", "cropWheat".oreIngredient, "dustWheat")
             r("ender_pearl_dust", "enderpearl".oreIngredient, "dustEnderPearl")
 
+            // 他MODの素材の粉
+            r("certus_quartz_dust", "crystalCertusQuartz".oreIngredient, "dustCertusQuartz")
+            r("fluix_dist", "crystalFluix".oreIngredient, "dustFluix")
+
         }
     }
 }
