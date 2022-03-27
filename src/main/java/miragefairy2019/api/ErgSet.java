@@ -2,6 +2,7 @@ package miragefairy2019.api;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,4 +45,18 @@ public final class ErgSet {
     public String toString() {
         return "ErgSet" + map.toString();
     }
+
+    @Override
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ErgSet ergSet = (ErgSet) o;
+        return map.equals(ergSet.map);
+    }
+
+    @Override
+    public int hashCode() {
+        return map.hashCode();
+    }
+
 }
