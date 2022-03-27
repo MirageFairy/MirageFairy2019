@@ -1,7 +1,9 @@
 package miragefairy2019.mod3.magic
 
-import miragefairy2019.api.ErgSet
-import miragefairy2019.api.ManaSet
+import miragefairy2019.api.Erg
+import miragefairy2019.api.Mana
+import miragefairy2019.lib.displayName
+import miragefairy2019.lib.get
 import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
@@ -36,7 +38,9 @@ data class MagicStatusFunctionArguments(
     private val fairyType: IFairyType
 ) : IMagicStatusFunctionArguments {
     override fun getSkillLevel(mastery: IMastery) = getSkillLevel.invoke(mastery)
-    override fun getFairyType() = fairyType
+    override fun getCost() = fairyType.cost
+    override fun getManaValue(mana: Mana) = fairyType.manaSet[mana]
+    override fun getErgValue(erg: Erg) = fairyType.ergSet[erg]
 }
 
 
@@ -55,29 +59,14 @@ val <T> IMagicStatusFunction<T>.factors
                 return 0
             }
 
-            override fun getFairyType() = object : IFairyType {
-                fun add(textComponent: ITextComponent): Double {
-                    factors.add(textComponent)
-                    return 0.0
-                }
-
-                override fun isEmpty() = throw UnsupportedOperationException()
-                override fun getMotif() = throw UnsupportedOperationException()
-                override fun getDisplayName() = throw UnsupportedOperationException()
-                override fun getColor() = throw UnsupportedOperationException()
-                override fun getCost() = add(buildText { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) }) // TODO 色変更
-                override fun getManaSet(): ManaSet {
-                    factors.add(textComponent { !"Mana" })
-                    return ManaSet.ZERO
-                }
-
-                override fun getErgSet(): ErgSet {
-                    //override fun getPower(type: Erg) = add(type.displayName)
-                    factors.add(textComponent { !"Erg" })
-                    return ErgSet.ZERO
-                }
+            fun add(textComponent: ITextComponent): Double {
+                factors.add(textComponent)
+                return 0.0
             }
 
+            override fun getCost() = add(buildText { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) }) // TODO 色変更
+            override fun getManaValue(mana: Mana) = add(mana.displayName)
+            override fun getErgValue(erg: Erg) = add(erg.displayName)
         })
         return factors
     }
