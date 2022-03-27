@@ -45,6 +45,7 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityFallingBlock
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumParticleTypes
@@ -56,6 +57,7 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.Explosion
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.time.LocalDateTime
@@ -182,6 +184,10 @@ object CommonMaterials {
                 )
             )
         )
+
+        onAddRecipe {
+            GameRegistry.addSmelting(getItemStack("gemPyrite"), Items.IRON_NUGGET.createItemStack(count = 3), 0.7f)
+        }
 
 
         // 鉱石ブロック1
