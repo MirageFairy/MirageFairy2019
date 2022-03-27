@@ -2,10 +2,6 @@ itemGroup.mirageFairy2019=MirageFairy2019
 itemGroup.mirageFairy2019.fairy=MirageFairy2019：妖精
 itemGroup.mirageFairy2019.bakedFairy=MirageFairy2019：焼き妖精
 
-advancements.miragefairy2019.fairy_weapon.root.title=妖精武器
-advancements.miragefairy2019.fairy_weapon.root.description=妖精武器
-advancements.miragefairy2019.fairy_weapon.all.description=所定のアイテムを入手する
-
 mirageFairy2019.formula.source.cost.name=コスト
 
 miragefairy2019.placeItem=アイテムを置く

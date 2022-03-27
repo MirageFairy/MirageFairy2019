@@ -254,6 +254,11 @@ object FairyWeapon {
             )
         )
 
+        onMakeLang {
+            enJa("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器")
+            enJa("advancements.miragefairy2019.fairy_weapon.root.description", "Fairy Weapon", "妖精武器")
+            enJa("advancements.miragefairy2019.fairy_weapon.all.description", "Get a specific item", "所定のアイテムを入手する")
+        }
         onMakeResource {
             fun place(name: String, data: JsonElement) {
                 dirBase.resolve("assets/miragefairy2019/advancements/fairy_weapon/$name.json").place(data)
