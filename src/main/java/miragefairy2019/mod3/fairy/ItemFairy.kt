@@ -8,6 +8,7 @@ import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.TextComponentBuilder
 import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
+import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
@@ -21,6 +22,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextComponentString
 import net.minecraft.util.text.TextFormatting.AQUA
 import net.minecraft.util.text.TextFormatting.BLUE
@@ -35,6 +37,7 @@ import net.minecraft.util.text.TextFormatting.YELLOW
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+import java.time.LocalDateTime
 import java.util.Optional
 
 class VariantFairy(val id: Int, val colorSet: ColorSet, val type: FairyType, val rare: Int, val rank: Int, val isDilutable: Boolean) : ItemVariant()
@@ -45,7 +48,21 @@ fun hasSameId(a: VariantFairy, b: VariantFairy) = a.id == b.id
 
 class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
     override fun getMirageFairy2019Fairy(itemStack: ItemStack): Optional<IFairyType> = Optional.ofNullable(getVariant(itemStack)?.type)
-    override fun getItemStackDisplayName(itemStack: ItemStack): String = getMirageFairy2019Fairy(itemStack).map { translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText) }.orElseGet { translateToLocal("$unlocalizedName.name") }
+    override fun getItemStackDisplayName(itemStack: ItemStack): String = getMirageFairy2019Fairy(itemStack).map {
+
+        // TODO remove
+        // 2022年4月2日0時0分0秒になるまでの間、パイライトと赤スピネル精は名称が金とルビーの妖精
+        if (LocalDateTime.now() < LocalDateTime.of(2022, 4, 2, 0, 0, 0)) {
+            when (it.motif) {
+                ResourceLocation("miragefairy2019:pyrite") -> translateToLocalFormatted("$unlocalizedName.format", formattedText { translate("mirageFairy2019.fairy.gold.name") })
+                ResourceLocation("miragefairy2019:red_spinel") -> translateToLocalFormatted("$unlocalizedName.format", formattedText { translate("mirageFairy2019.fairy.ruby.name") })
+                else -> translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText)
+            }
+        } else {
+            translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText)
+        }
+
+    }.orElseGet { translateToLocal("$unlocalizedName.name") }
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
