@@ -17,8 +17,11 @@ import mirrg.kotlin.atMost
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.init.Items
 import net.minecraft.init.SoundEvents
+import net.minecraft.item.ItemStack
 import net.minecraft.util.SoundCategory
 import net.minecraft.world.WorldServer
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.floor
 import kotlin.math.pow
 
@@ -43,4 +46,7 @@ class ItemBellChristmas : ItemAoeWeaponBase() {
     override fun MagicArguments.onKill(world: WorldServer, target: EntityLivingBase) {
         if (target.isEntityUndead) Items.COAL.createItemStack().drop(world, target.positionVector)
     }
+
+    @SideOnly(Side.CLIENT)
+    override fun getMagicDescription(itemStack: ItemStack) = "右クリックで攻撃、アンデッド撃破時、石炭を入手" // TODO translate
 }

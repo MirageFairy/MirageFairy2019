@@ -12,12 +12,9 @@ import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged
 import miragefairy2019.mod.modules.fairyweapon.spawnDamageParticle
 import miragefairy2019.mod.modules.fairyweapon.spawnParticleTargets
 import net.minecraft.entity.EntityLivingBase
-import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.world.WorldServer
-import net.minecraftforge.fml.relauncher.Side
-import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
 abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
@@ -43,8 +40,6 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
     /** サーバーワールドでのみ呼び出されます。 */
     open fun MagicArguments.onHitEffect(world: WorldServer, target: EntityLivingBase) = Unit
 
-    @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = "右クリックで攻撃" // TODO translate
 
     override fun getMagic() = miragefairy2019.mod.magic4.magic {
         val magicSelectorRayTrace = MagicSelectorRayTrace.createWith(world, player, additionalReach(), EntityLivingBase::class.java) { it != player } // 視線判定

@@ -22,8 +22,11 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.effect.EntityLightningBolt
 import net.minecraft.entity.monster.EntityCreeper
 import net.minecraft.init.SoundEvents
+import net.minecraft.item.ItemStack
 import net.minecraft.util.SoundCategory
 import net.minecraft.world.WorldServer
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 
 class ItemMagicWandLightning : ItemAoeWeaponBase() {
     override fun MagicArguments.getActualDamage(target: EntityLivingBase) = damage() * damageBoost() * criticalRate().get(world.rand).coefficient
@@ -51,4 +54,7 @@ class ItemMagicWandLightning : ItemAoeWeaponBase() {
     override fun MagicArguments.onHitEffect(world: WorldServer, target: EntityLivingBase) {
         spawnMagicParticle(world, player, target)  // 射線エフェクト
     }
+
+    @SideOnly(Side.CLIENT)
+    override fun getMagicDescription(itemStack: ItemStack) = "右クリックで攻撃、雷属性時、クリーパーを帯電" // TODO translate
 }
