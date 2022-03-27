@@ -236,21 +236,21 @@ object CommonMaterials {
             makeBlockStates {
                 DataBlockStates(
                     variants = listOf(
-                        "miragefairy2019:cinnabar_block",
-                        "miragefairy2019:moonstone_block",
-                        "miragefairy2019:magnetite_block",
-                        "miragefairy2019:pyrope_block",
-                        "miragefairy2019:smithsonite_block",
-                        "miragefairy2019:charcoal_block",
-                        "miragefairy2019:mirage_flower_leaf_block",
-                        "miragefairy2019:miragium_ingot_block",
-                        "miragefairy2019:miragium_dust_block",
-                        "miragefairy2019:nephrite_block",
-                        "miragefairy2019:topaz_block",
-                        "miragefairy2019:tourmaline_block",
                         "miragefairy2019:tourmaline_ore",
                         "miragefairy2019:heliolite_ore",
                         "miragefairy2019:end_stone_labradorite_ore",
+                        "miragefairy2019:pyrite_ore",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
                         "minecraft:stone"
                     ).mapIndexed { i, model -> "variant=$i" to DataBlockState(model = model) }.toMap()
                 )
@@ -268,6 +268,7 @@ object CommonMaterials {
             enJa("tile.oreTourmaline.name", "Tourmaline Ore", "トルマリン鉱石")
             enJa("tile.oreHeliolite.name", "Heliolite Ore", "ヘリオライト鉱石")
             enJa("tile.oreLabradorite.name", "Labradorite Ore", "ラブラドライト鉱石")
+            enJa("tile.orePyrite.name", "Pyrite Ore", "パイライト鉱石")
         }
 
         // アイテム状素材
@@ -317,6 +318,7 @@ object CommonMaterials {
             r(26, "cinnabar_dust", "dustCinnabar", "dustCinnabar", { generated })
             r(27, "moonstone_dust", "dustMoonstone", "dustMoonstone", { generated })
             r(28, "magnetite_dust", "dustMagnetite", "dustMagnetite", { generated })
+            r(29, "pyrite_gem", "gemPyrite", "gemPyrite", { generated })
 
             onRegisterItem {
                 if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
@@ -352,6 +354,7 @@ object CommonMaterials {
             enJa("item.dustCinnabar.name", "Cinnabar Dust", "辰砂の粉")
             enJa("item.dustMoonstone.name", "Moonstone Dust", "月長石の粉")
             enJa("item.dustMagnetite.name", "Magnetite Dust", "磁鉄鉱の粉")
+            enJa("item.gemPyrite.name", "Pyrite", "パイライト")
         }
 
         // ブロック状素材
@@ -532,6 +535,7 @@ enum class EnumVariantOre2(
     TOURMALINE_ORE(0, "tourmaline_ore", "oreTourmaline", 3f, 5f, 2, GemProvider({ getItemStack("gemTourmaline") }, 1.0, 0.5, 1, 5)),
     HELIOLITE_ORE(1, "heliolite_ore", "oreHeliolite", 3f, 5f, 2, GemProvider({ getItemStack("gemHeliolite") }, 1.0, 0.5, 10, 20)),
     END_STONE_LABRADORITE_ORE(2, "end_stone_labradorite_ore", "oreLabradorite", 3f, 5f, 2, GemProvider({ getItemStack("gemLabradorite") }, 1.0, 0.5, 15, 30)),
+    PYRITE_ORE(3, "pyrite_ore", "orePyrite", 3f, 5f, 1, GemProvider({ getItemStack("gemPyrite") }, 1.0, 1.5, 1, 3)),
     ;
 
     class GemProvider(val itemStackSupplier: () -> ItemStack, val amount: Double, val amountPerFortune: Double, val expMin: Int, val expMax: Int)

@@ -64,6 +64,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		ore("tourmaline_ore"; "blocks/stone"; "blocks/tourmaline_ore");
 		ore("heliolite_ore"; "blocks/stone"; "blocks/heliolite_ore");
 		ore("end_stone_labradorite_ore"; "blocks/end_stone"; "blocks/labradorite_ore");
+		ore("pyrite_ore"; "blocks/stone"; "blocks/pyrite_ore");
 	);
 
 	# ミラージュの花
@@ -281,6 +282,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	block("tourmaline_ore");
 	block("heliolite_ore");
 	block("end_stone_labradorite_ore");
+	block("pyrite_ore");
 
 	# 妖精の樹洞
 	block("fairy_log");

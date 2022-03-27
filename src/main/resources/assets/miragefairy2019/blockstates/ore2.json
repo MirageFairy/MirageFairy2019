@@ -10,40 +10,40 @@
       "model": "miragefairy2019:end_stone_labradorite_ore"
     },
     "variant=3": {
-      "model": "miragefairy2019:cinnabar_block"
+      "model": "miragefairy2019:pyrite_ore"
     },
     "variant=4": {
-      "model": "miragefairy2019:moonstone_block"
+      "model": "minecraft:stone"
     },
     "variant=5": {
-      "model": "miragefairy2019:magnetite_block"
+      "model": "minecraft:stone"
     },
     "variant=6": {
-      "model": "miragefairy2019:pyrope_block"
+      "model": "minecraft:stone"
     },
     "variant=7": {
-      "model": "miragefairy2019:smithsonite_block"
+      "model": "minecraft:stone"
     },
     "variant=8": {
-      "model": "miragefairy2019:charcoal_block"
+      "model": "minecraft:stone"
     },
     "variant=9": {
-      "model": "miragefairy2019:mirage_flower_leaf_block"
+      "model": "minecraft:stone"
     },
     "variant=10": {
-      "model": "miragefairy2019:miragium_ingot_block"
+      "model": "minecraft:stone"
     },
     "variant=11": {
-      "model": "miragefairy2019:miragium_dust_block"
+      "model": "minecraft:stone"
     },
     "variant=12": {
-      "model": "miragefairy2019:nephrite_block"
+      "model": "minecraft:stone"
     },
     "variant=13": {
-      "model": "miragefairy2019:topaz_block"
+      "model": "minecraft:stone"
     },
     "variant=14": {
-      "model": "miragefairy2019:tourmaline_block"
+      "model": "minecraft:stone"
     },
     "variant=15": {
       "model": "minecraft:stone"
