@@ -328,30 +328,6 @@ object FairyWeapon {
                 }
             }
 
-            val crafting_fairy_wand = Achievement("crafting_fairy_wand", "fairyWandCrafting", null, null)
-            val crafting_fairy_wand_2 = Achievement("crafting_fairy_wand_2", "fairyWandCrafting2", crafting_fairy_wand, null)
-            val crafting_fairy_wand_3 = Achievement("crafting_fairy_wand_3", "fairyWandCrafting3", crafting_fairy_wand_2, null)
-            val crafting_fairy_wand_4 = Achievement("crafting_fairy_wand_4", "fairyWandCrafting4", crafting_fairy_wand_3, null)
-            val hydrating_fairy_wand = Achievement("hydrating_fairy_wand", "fairyWandHydrating", null, null)
-            val hydrating_fairy_wand_2 = Achievement("hydrating_fairy_wand_2", "fairyWandHydrating2", hydrating_fairy_wand, null)
-            val hydrating_fairy_wand_3 = Achievement("hydrating_fairy_wand_3", "fairyWandHydrating3", hydrating_fairy_wand_2, null)
-            val hydrating_fairy_wand_4 = Achievement("hydrating_fairy_wand_4", "fairyWandHydrating4", hydrating_fairy_wand_3, null)
-            val melting_fairy_wand = Achievement("melting_fairy_wand", "fairyWandMelting", null, null)
-            val melting_fairy_wand_2 = Achievement("melting_fairy_wand_2", "fairyWandMelting2", melting_fairy_wand, null)
-            val melting_fairy_wand_3 = Achievement("melting_fairy_wand_3", "fairyWandMelting3", melting_fairy_wand_2, null)
-            val breaking_fairy_wand = Achievement("breaking_fairy_wand", "fairyWandBreaking", null, null)
-            val breaking_fairy_wand_2 = Achievement("breaking_fairy_wand_2", "fairyWandBreaking2", breaking_fairy_wand, null)
-            val breaking_fairy_wand_3 = Achievement("breaking_fairy_wand_3", "fairyWandBreaking3", breaking_fairy_wand_2, null)
-            val freezing_fairy_wand = Achievement("freezing_fairy_wand", "fairyWandFreezing", null, null)
-            val freezing_fairy_wand_2 = Achievement("freezing_fairy_wand_2", "fairyWandFreezing2", freezing_fairy_wand, null)
-            val freezing_fairy_wand_3 = Achievement("freezing_fairy_wand_3", "fairyWandFreezing3", freezing_fairy_wand_2, null)
-            val polishing_fairy_wand = Achievement("polishing_fairy_wand", "fairyWandPolishing", null, null)
-            val polishing_fairy_wand_2 = Achievement("polishing_fairy_wand_2", "fairyWandPolishing2", polishing_fairy_wand, null)
-            val summoning_fairy_wand = Achievement("summoning_fairy_wand", "fairyWandSummoning", null, null)
-            val summoning_fairy_wand_2 = Achievement("summoning_fairy_wand_2", "fairyWandSummoning2", summoning_fairy_wand, null)
-            val distortion_fairy_wand = Achievement("distortion_fairy_wand", "fairyWandDistortion", null, null)
-            val fusion_fairy_wand = Achievement("fusion_fairy_wand", "fairyWandFusion", null, null)
-
             val miragium_axe = Achievement("miragium_axe", "miragiumAxe", null, null)
 
             val miragium_sword = Achievement("miragium_sword", "miragiumSword", null, null)

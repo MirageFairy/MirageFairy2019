@@ -30,6 +30,8 @@ import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.displayName
 import miragefairy2019.mod3.skill.getSkillLevel
 import mirrg.kotlin.formatAs
+import mirrg.kotlin.gson.jsonElement
+import mirrg.kotlin.gson.jsonElementNotNull
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
@@ -132,6 +134,104 @@ object Wand {
             enJa("item.fairyWandSummoning2.poem", "The magic of feeding: me Fairy'a ri me Crystal'a zi karto", "給餌の魔法、メ ファイリア リ メ ツリスターラ ジ カルト")
             enJa("item.fairyWandDistortion.poem", "", "空間がねじれている")
             enJa("item.fairyWandFusion.poem", "", "4次元折り紙")
+        }
+
+        onMakeLang {
+            enJa("advancements.miragefairy2019.wand.root.title", "Wand", "ワンド")
+            enJa("advancements.miragefairy2019.wand.root.description", "Wand", "ワンド")
+            enJa("advancements.miragefairy2019.wand.all.description", "Get a specific item", "所定のアイテムを入手する")
+        }
+        onMakeResource {
+
+            // ルート
+            dirBase.resolve("assets/miragefairy2019/advancements/wand/root.json").place(
+                jsonElement(
+                    "display" to jsonElementNotNull(
+                        "icon" to jsonElement(
+                            "item" to "miragefairy2019:crafting_fairy_wand_4".jsonElement
+                        ),
+                        "title" to jsonElement(
+                            "translate" to "advancements.miragefairy2019.wand.root.title".jsonElement
+                        ),
+                        "description" to jsonElement(
+                            "translate" to "advancements.miragefairy2019.wand.root.description".jsonElement
+                        ),
+                        "background" to "miragefairy2019:textures/blocks/nephrite_block.png".jsonElement
+                    ),
+                    "criteria" to jsonElement(
+                        "main" to jsonElement(
+                            "trigger" to "minecraft:inventory_changed".jsonElement,
+                            "conditions" to jsonElement(
+                                "items" to jsonElement(
+                                    jsonElement(
+                                        "type" to "forge:ore_dict".jsonElement,
+                                        "ore" to "mirageFairy2019SphereAny".jsonElement
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+
+            // 各種
+            class Achievement(val registerName: String, val unlocalizedName: String, val parent: Achievement? = null) {
+                init {
+                    dirBase.resolve("assets/miragefairy2019/advancements/wand/$registerName.json").place(
+                        jsonElement(
+                            "display" to jsonElement(
+                                "icon" to jsonElement(
+                                    "item" to "miragefairy2019:$registerName".jsonElement
+                                ),
+                                "title" to jsonElement(
+                                    "translate" to "item.$unlocalizedName.name".jsonElement
+                                ),
+                                "description" to jsonElement(
+                                    "translate" to "advancements.miragefairy2019.wand.all.description".jsonElement
+                                )
+                            ),
+                            "parent" to "miragefairy2019:wand/${parent?.registerName ?: "root"}".jsonElement,
+                            "criteria" to jsonElement(
+                                "main" to jsonElement(
+                                    "trigger" to "minecraft:inventory_changed".jsonElement,
+                                    "conditions" to jsonElement(
+                                        "items" to jsonElement(
+                                            jsonElement(
+                                                "item" to "miragefairy2019:$registerName".jsonElement
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                }
+            }
+
+            val crafting_fairy_wand = Achievement("crafting_fairy_wand", "fairyWandCrafting", null)
+            val crafting_fairy_wand_2 = Achievement("crafting_fairy_wand_2", "fairyWandCrafting2", crafting_fairy_wand)
+            val crafting_fairy_wand_3 = Achievement("crafting_fairy_wand_3", "fairyWandCrafting3", crafting_fairy_wand_2)
+            val crafting_fairy_wand_4 = Achievement("crafting_fairy_wand_4", "fairyWandCrafting4", crafting_fairy_wand_3)
+            val hydrating_fairy_wand = Achievement("hydrating_fairy_wand", "fairyWandHydrating", null)
+            val hydrating_fairy_wand_2 = Achievement("hydrating_fairy_wand_2", "fairyWandHydrating2", hydrating_fairy_wand)
+            val hydrating_fairy_wand_3 = Achievement("hydrating_fairy_wand_3", "fairyWandHydrating3", hydrating_fairy_wand_2)
+            val hydrating_fairy_wand_4 = Achievement("hydrating_fairy_wand_4", "fairyWandHydrating4", hydrating_fairy_wand_3)
+            val melting_fairy_wand = Achievement("melting_fairy_wand", "fairyWandMelting", null)
+            val melting_fairy_wand_2 = Achievement("melting_fairy_wand_2", "fairyWandMelting2", melting_fairy_wand)
+            val melting_fairy_wand_3 = Achievement("melting_fairy_wand_3", "fairyWandMelting3", melting_fairy_wand_2)
+            val breaking_fairy_wand = Achievement("breaking_fairy_wand", "fairyWandBreaking", null)
+            val breaking_fairy_wand_2 = Achievement("breaking_fairy_wand_2", "fairyWandBreaking2", breaking_fairy_wand)
+            val breaking_fairy_wand_3 = Achievement("breaking_fairy_wand_3", "fairyWandBreaking3", breaking_fairy_wand_2)
+            val freezing_fairy_wand = Achievement("freezing_fairy_wand", "fairyWandFreezing", null)
+            val freezing_fairy_wand_2 = Achievement("freezing_fairy_wand_2", "fairyWandFreezing2", freezing_fairy_wand)
+            val freezing_fairy_wand_3 = Achievement("freezing_fairy_wand_3", "fairyWandFreezing3", freezing_fairy_wand_2)
+            val polishing_fairy_wand = Achievement("polishing_fairy_wand", "fairyWandPolishing", null)
+            val polishing_fairy_wand_2 = Achievement("polishing_fairy_wand_2", "fairyWandPolishing2", polishing_fairy_wand)
+            val summoning_fairy_wand = Achievement("summoning_fairy_wand", "fairyWandSummoning", null)
+            val summoning_fairy_wand_2 = Achievement("summoning_fairy_wand_2", "fairyWandSummoning2", summoning_fairy_wand)
+            val distortion_fairy_wand = Achievement("distortion_fairy_wand", "fairyWandDistortion", null)
+            val fusion_fairy_wand = Achievement("fusion_fairy_wand", "fairyWandFusion", null)
+
         }
 
         onAddRecipe {

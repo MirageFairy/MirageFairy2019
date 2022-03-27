@@ -7,10 +7,10 @@
       "translate": "item.fairyWandCrafting3.name"
     },
     "description": {
-      "translate": "advancements.miragefairy2019.fairy_weapon.all.description"
+      "translate": "advancements.miragefairy2019.wand.all.description"
     }
   },
-  "parent": "miragefairy2019:fairy_weapon/crafting_fairy_wand_2",
+  "parent": "miragefairy2019:wand/crafting_fairy_wand_2",
   "criteria": {
     "main": {
       "trigger": "minecraft:inventory_changed",

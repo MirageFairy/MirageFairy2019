@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "miragefairy2019:crafting_fairy_wand_4"
+    },
+    "title": {
+      "translate": "advancements.miragefairy2019.wand.root.title"
+    },
+    "description": {
+      "translate": "advancements.miragefairy2019.wand.root.description"
+    },
+    "background": "miragefairy2019:textures/blocks/nephrite_block.png"
+  },
+  "criteria": {
+    "main": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "type": "forge:ore_dict",
+            "ore": "mirageFairy2019SphereAny"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -7,10 +7,10 @@
       "translate": "item.fairyWandSummoning2.name"
     },
     "description": {
-      "translate": "advancements.miragefairy2019.fairy_weapon.all.description"
+      "translate": "advancements.miragefairy2019.wand.all.description"
     }
   },
-  "parent": "miragefairy2019:fairy_weapon/summoning_fairy_wand",
+  "parent": "miragefairy2019:wand/summoning_fairy_wand",
   "criteria": {
     "main": {
       "trigger": "minecraft:inventory_changed",

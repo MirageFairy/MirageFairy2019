@@ -7,10 +7,10 @@
       "translate": "item.fairyWandDistortion.name"
     },
     "description": {
-      "translate": "advancements.miragefairy2019.fairy_weapon.all.description"
+      "translate": "advancements.miragefairy2019.wand.all.description"
     }
   },
-  "parent": "miragefairy2019:fairy_weapon/root",
+  "parent": "miragefairy2019:wand/root",
   "criteria": {
     "main": {
       "trigger": "minecraft:inventory_changed",
