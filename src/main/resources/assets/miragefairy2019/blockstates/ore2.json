@@ -1,13 +1,13 @@
 {
   "variants": {
     "variant=0": {
-      "model": "miragefairy2019:apatite_block"
+      "model": "miragefairy2019:tourmaline_ore"
     },
     "variant=1": {
-      "model": "miragefairy2019:fluorite_block"
+      "model": "miragefairy2019:heliolite_ore"
     },
     "variant=2": {
-      "model": "miragefairy2019:sulfur_block"
+      "model": "miragefairy2019:end_stone_labradorite_ore"
     },
     "variant=3": {
       "model": "miragefairy2019:cinnabar_block"

@@ -236,9 +236,6 @@ object CommonMaterials {
             makeBlockStates {
                 DataBlockStates(
                     variants = listOf(
-                        "miragefairy2019:apatite_block",
-                        "miragefairy2019:fluorite_block",
-                        "miragefairy2019:sulfur_block",
                         "miragefairy2019:cinnabar_block",
                         "miragefairy2019:moonstone_block",
                         "miragefairy2019:magnetite_block",
@@ -251,6 +248,9 @@ object CommonMaterials {
                         "miragefairy2019:nephrite_block",
                         "miragefairy2019:topaz_block",
                         "miragefairy2019:tourmaline_block",
+                        "miragefairy2019:tourmaline_ore",
+                        "miragefairy2019:heliolite_ore",
+                        "miragefairy2019:end_stone_labradorite_ore",
                         "minecraft:stone"
                     ).mapIndexed { i, model -> "variant=$i" to DataBlockState(model = model) }.toMap()
                 )
