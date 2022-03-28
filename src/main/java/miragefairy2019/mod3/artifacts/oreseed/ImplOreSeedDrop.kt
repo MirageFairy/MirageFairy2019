@@ -55,13 +55,11 @@ operator fun IOreSeedDropRegistry.invoke(block: OreSeedDropRegistryScope.() -> U
 
 
 object OreSeedDropRequirements {
-    @JvmStatic // todo delete jvm
     fun minY(minY: Int): IOreSeedDropRequirement = object : IOreSeedDropRequirement {
         override fun test(environment: OreSeedDropEnvironment) = environment.blockPos.y >= minY
         override fun getDescriptions() = listOf("Min Y: $minY")
     }
 
-    @JvmStatic // todo delete jvm
     fun maxY(maxY: Int): IOreSeedDropRequirement = object : IOreSeedDropRequirement {
         override fun test(environment: OreSeedDropEnvironment) = environment.blockPos.y <= maxY
         override fun getDescriptions() = listOf("Max Y: $maxY")
