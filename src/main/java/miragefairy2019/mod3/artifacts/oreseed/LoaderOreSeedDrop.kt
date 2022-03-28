@@ -21,6 +21,7 @@ import miragefairy2019.mod3.artifacts.EnumVariantOre1.TOPAZ_ORE
 import miragefairy2019.mod3.artifacts.EnumVariantOre2
 import miragefairy2019.mod3.artifacts.EnumVariantOre2.END_STONE_LABRADORITE_ORE
 import miragefairy2019.mod3.artifacts.EnumVariantOre2.HELIOLITE_ORE
+import miragefairy2019.mod3.artifacts.EnumVariantOre2.PYRITE_ORE
 import miragefairy2019.mod3.artifacts.EnumVariantOre2.TOURMALINE_ORE
 import miragefairy2019.mod3.artifacts.oreseed.EnumOreSeedShape.COAL
 import miragefairy2019.mod3.artifacts.oreseed.EnumOreSeedShape.DIAMOND
@@ -38,6 +39,7 @@ import miragefairy2019.mod3.artifacts.oreseed.EnumOreSeedType.NETHERRACK
 import miragefairy2019.mod3.artifacts.oreseed.EnumOreSeedType.STONE
 import miragefairy2019.mod3.artifacts.oreseed.OreSeedDropRequirements.maxY
 import miragefairy2019.mod3.artifacts.oreseed.OreSeedDropRequirements.minY
+import miragefairy2019.mod3.artifacts.oreseed.OreSeedDropRequirements.since
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks.COAL_ORE
@@ -48,6 +50,9 @@ import net.minecraft.init.Blocks.IRON_ORE
 import net.minecraft.init.Blocks.LAPIS_ORE
 import net.minecraft.init.Blocks.REDSTONE_ORE
 import net.minecraft.item.ItemStack
+import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
 import miragefairy2019.mod3.artifacts.oreseed.Elements as el
 
 /*
@@ -93,6 +98,7 @@ object LoaderOreSeedDrop {
                 register(POINT, 0.05, ore1(CINNABAR_ORE), maxY(15))
                 register(POINT, 0.05, ore1(MAGNETITE_ORE))
                 register(POINT, 0.05, ore1(MOONSTONE_ORE), minY(40), maxY(50))
+                register(LAPIS, 0.10, ore2(PYRITE_ORE), since(OffsetDateTime.of(LocalDateTime.of(2022, 4, 1, 0, 0, 0), ZoneOffset.ofHours(9))))
             }
 
             // 鉱脈天然石
