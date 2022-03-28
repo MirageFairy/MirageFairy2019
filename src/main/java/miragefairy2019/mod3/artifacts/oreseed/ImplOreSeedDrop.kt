@@ -3,6 +3,8 @@ package miragefairy2019.mod3.artifacts.oreseed
 import miragefairy2019.libkt.WeightedItem
 import net.minecraft.block.state.IBlockState
 import net.minecraft.item.ItemStack
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 class OreSeedDropRegistry : IOreSeedDropRegistry {
     override val recipes = mutableListOf<IOreSeedDropHandler>()
@@ -63,5 +65,10 @@ object OreSeedDropRequirements {
     fun maxY(maxY: Int): IOreSeedDropRequirement = object : IOreSeedDropRequirement {
         override fun test(environment: OreSeedDropEnvironment) = environment.blockPos.y <= maxY
         override fun getDescriptions() = listOf("Max Y: $maxY")
+    }
+
+    fun since(offsetDateTime: OffsetDateTime): IOreSeedDropRequirement = object : IOreSeedDropRequirement {
+        override fun test(environment: OreSeedDropEnvironment) = OffsetDateTime.now(offsetDateTime.offset) >= offsetDateTime
+        override fun getDescriptions() = listOf("Since: ${offsetDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)}")
     }
 }
