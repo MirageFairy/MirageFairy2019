@@ -201,6 +201,7 @@ object FairyRelation {
         fairy { tourmaline }.register { material("Tourmaline") }
         fairy { topaz }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.TOPAZ_BLOCK) }) }
         fairy { topaz }.register { material("Topaz") }
+        fairy { pyrite }.register { material("Pyrite") }
         fairy { glass }.register { block({ Blocks.GLASS }) }
         fairy { glass }.register { material("Glass") }
 
