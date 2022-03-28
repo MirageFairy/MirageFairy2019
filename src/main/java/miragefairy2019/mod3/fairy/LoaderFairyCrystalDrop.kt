@@ -11,6 +11,8 @@ import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import kotlin.math.pow
 
 private val FairyRelationEntry<*>.fairyCrystalBaseDropWeight get() = 0.1 * 0.1.pow((fairy.main.rare - 1.0) / 2.0) * weight
@@ -140,6 +142,21 @@ val loaderFairyCrystalDrop = module {
             FairyTypes.instance.rain(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
 
         }
+
+        // TODO remove
+        DropCategory.RARE {
+
+            fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = FairyCrystalDrop.dropHandlers.add(DropHandler(this@world) a@{
+                predicate(world ?: return@a false, (pos ?: return@a false).offset(facing ?: return@a false))
+            })
+
+            FairyTypes.instance.redSpinel(0.00001).world {
+                LocalDateTime.now(ZoneOffset.ofHours(9)) >= LocalDateTime.of(2022, 4, 1, 0, 0, 0) &&
+                        LocalDateTime.now(ZoneOffset.ofHours(9)) < LocalDateTime.of(2022, 5, 1, 0, 0, 0)
+            }
+
+        }
+
 
         // 妖精関係レジストリー
         FairyRelationRegistries.entity.forEach { relation ->
