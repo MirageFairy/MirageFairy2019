@@ -157,7 +157,7 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
 
 
         // ガチャ環境計算
-        val environment = FairyCrystalDropEnvironment(player, world, pos)
+        val environment = FairyCrystalDropEnvironment(player, world, pos, facing)
         environment.insertItemStacks(player) // インベントリ
         environment.insertBlocks(world, BlockRegion(pos.add(-2, -2, -2), pos.add(2, 2, 2))) // ワールドブロック
         environment.insertBiome(world.getBiome(pos)) // バイオーム
@@ -206,12 +206,13 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
 
     fun dispenseStack(blockSource: IBlockSource, itemStack: ItemStack): ItemStack {
         val world = blockSource.world
-        val blockPos = blockSource.blockPos.offset(blockSource.blockState.getValue(BlockDispenser.FACING))
+        val facing = blockSource.blockState.getValue(BlockDispenser.FACING)
+        val blockPos = blockSource.blockPos.offset(facing)
 
         val variant = getVariant(itemStack) ?: return itemStack
 
         // ガチャ環境計算
-        val environment = FairyCrystalDropEnvironment(null, world, blockPos)
+        val environment = FairyCrystalDropEnvironment(null, world, blockPos, facing.opposite)
         environment.insertBlocks(world, BlockRegion(blockPos.add(-2, -2, -2), blockPos.add(2, 2, 2))) // ワールドブロック
         environment.insertBiome(world.getBiome(blockPos)) // バイオーム
         environment.insertEntities(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5), 10.0) // エンティティ

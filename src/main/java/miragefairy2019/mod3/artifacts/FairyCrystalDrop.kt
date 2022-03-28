@@ -18,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
@@ -35,7 +36,8 @@ enum class DropCategory { FIXED, COMMON, RARE }
 class FairyCrystalDropEnvironment(
     val player: EntityPlayer?,
     val world: World?,
-    val pos: BlockPos?
+    val pos: BlockPos?,
+    val facing: EnumFacing?
 ) {
     val blocks = mutableSetOf<Block>()
     val blockStates = mutableSetOf<IBlockState>()

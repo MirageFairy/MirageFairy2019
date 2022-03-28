@@ -122,7 +122,9 @@ val loaderFairyCrystalDrop = module {
         // レア枠
         DropCategory.RARE {
 
-            fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = FairyCrystalDrop.dropHandlers.add(DropHandler(this@world) a@{ predicate(world ?: return@a false, pos ?: return@a false) })
+            fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = FairyCrystalDrop.dropHandlers.add(DropHandler(this@world) a@{
+                predicate(world ?: return@a false, (pos ?: return@a false).offset(facing ?: return@a false))
+            })
 
             FairyTypes.instance.thunder(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) && isThundering }
             FairyTypes.instance.sun(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && time(6000, 18000) && !isRainingAt(it) }
