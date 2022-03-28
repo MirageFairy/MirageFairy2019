@@ -59,7 +59,7 @@ val loaderFairyCrystalDrop = module {
             FairyTypes.instance.nephrite().overworld()
             FairyTypes.instance.tourmaline().overworld()
             FairyTypes.instance.topaz().overworld()
-            FairyTypes.instance.pyrite().overworld()
+            //FairyTypes.instance.pyrite().overworld()
 
             FairyTypes.instance.spider().overworld()
             FairyTypes.instance.chicken().overworld()
