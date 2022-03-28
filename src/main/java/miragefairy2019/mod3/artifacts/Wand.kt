@@ -385,7 +385,7 @@ class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWand() {
         if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return false // ブロックに当たらなかった場合は無視
 
         // ガチャ環境計算
-        val environment = FairyCrystalDropEnvironment(player, player.world, rayTraceResult.blockPos)
+        val environment = FairyCrystalDropEnvironment(player, player.world, rayTraceResult.blockPos, rayTraceResult.sideHit)
         environment.insertItemStacks(player) // インベントリ
         environment.insertBlocks(player.world, BlockRegion(rayTraceResult.blockPos.add(-2, -2, -2), rayTraceResult.blockPos.add(2, 2, 2))) // ワールドブロック
         environment.insertBiome(player.world.getBiome(rayTraceResult.blockPos)) // バイオーム
