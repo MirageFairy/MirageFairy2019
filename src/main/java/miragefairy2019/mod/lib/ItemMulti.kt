@@ -14,7 +14,6 @@ import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import java.time.LocalDateTime
 
 open class ItemMulti<V : ItemVariant> : Item() {
     init {
@@ -69,14 +68,6 @@ open class ItemVariant {
 open class ItemMultiMaterial<V : ItemVariantMaterial> : ItemMulti<V>() {
     override fun getUnlocalizedName(itemStack: ItemStack): String {
         val variant = getVariant(itemStack) ?: return "item.null"
-
-        // TODO remove
-        if (LocalDateTime.now() < LocalDateTime.of(2022, 4, 2, 0, 0, 0)) {
-            if (variant.unlocalizedName == "gemPyrite") {
-                return "item.ingotGold"
-            }
-        }
-
         return "item.${variant.unlocalizedName}"
     }
 

@@ -325,14 +325,7 @@ object CommonMaterials {
             r(26, "cinnabar_dust", "dustCinnabar", "dustCinnabar", { generated })
             r(27, "moonstone_dust", "dustMoonstone", "dustMoonstone", { generated })
             r(28, "magnetite_dust", "dustMagnetite", "dustMagnetite", { generated })
-            r(29, "pyrite_gem", "gemPyrite", "gemPyrite", { generated }).apply {
-                // TODO remove
-                onRegisterItem {
-                    if (LocalDateTime.now() < LocalDateTime.of(2022, 4, 1, 0, 0, 0)) {
-                        itemVariant.canSeeOnCreativeTab = false
-                    }
-                }
-            }
+            r(29, "pyrite_gem", "gemPyrite", "gemPyrite", { generated })
 
             onRegisterItem {
                 if (ApiMain.side.isClient) item.setCustomModelResourceLocations()

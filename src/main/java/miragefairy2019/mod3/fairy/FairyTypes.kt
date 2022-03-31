@@ -11,7 +11,6 @@ import miragefairy2019.lib.times
 import miragefairy2019.libkt.buildText
 import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.util.ResourceLocation
-import java.time.LocalDateTime
 import kotlin.math.pow
 
 class RankedFairyTypeBundle(val variants: List<VariantFairy>) {
@@ -62,22 +61,7 @@ class FairyTypes(private val count: Int) {
         val isDilutable = name != "mina" // TODO
 
         // Create Variants
-        val variants = (1..count).map {
-            val variant = VariantFairy(id, colorSet, getType(it), rare, it, isDilutable)
-
-            // TODO remove
-            // 2022年4月1日0時0分0秒になるまでの間、パイライトと赤スピネル精はクリエイティブタブで非表示
-            if (LocalDateTime.now() < LocalDateTime.of(2022, 4, 1, 0, 0, 0)) {
-                when (variant.type.motif) {
-                    ResourceLocation("miragefairy2019:pyrite"),
-                    ResourceLocation("miragefairy2019:red_spinel") -> {
-                        variant.canSeeOnCreativeTab = false
-                    }
-                }
-            }
-
-            variant
-        }
+        val variants = (1..count).map { VariantFairy(id, colorSet, getType(it), rare, it, isDilutable) }
         val bundle = RankedFairyTypeBundle(variants)
 
         // Register
