@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.api.Erg
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.block
@@ -14,7 +15,6 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers
 import miragefairy2019.mod.lib.WorldGenBush
-import miragefairy2019.api.Erg
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.erg
 import miragefairy2019.mod3.fairy.relation.FairySelector
@@ -26,6 +26,7 @@ import miragefairy2019.mod3.pick.PickHandler
 import miragefairy2019.mod3.pick.api.IPickHandler
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import mirrg.boron.util.UtilsMath
+import mirrg.kotlin.or
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.Block
 import net.minecraft.block.BlockBush
@@ -264,7 +265,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
         // クリスタル
         if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) { drops += FairyCrystal.variantFairyCrystal().createItemStack() }
         // ミラジウム
-        if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) { drops += getItemStack("dustTinyMiragium").copy() }
+        if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) a@{ drops += getItemStack("dustTinyMiragium").or { return@a }.copy() }
     }
 
     // シルクタッチ無効。

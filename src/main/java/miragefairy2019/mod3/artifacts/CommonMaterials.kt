@@ -185,8 +185,8 @@ object CommonMaterials {
             )
         )
 
-        onAddRecipe {
-            GameRegistry.addSmelting(getItemStack("gemPyrite"), Items.IRON_NUGGET.createItemStack(count = 3), 0.7f)
+        onAddRecipe a@{
+            GameRegistry.addSmelting(getItemStack("gemPyrite") ?: return@a, Items.IRON_NUGGET.createItemStack(count = 3), 0.7f)
         }
 
 
@@ -482,6 +482,8 @@ interface IBlockVariantOre : IBlockVariant {
     val resistance: Float
 }
 
+private class GemProvider(val itemStackSupplier: () -> ItemStack?, val amount: Double, val amountPerFortune: Double, val expMin: Int, val expMax: Int)
+
 enum class EnumVariantOre1(
     override val metadata: Int,
     override val resourceName: String,
@@ -512,14 +514,12 @@ enum class EnumVariantOre1(
     TOPAZ_ORE(15, "topaz_ore", "oreTopaz", 3f, 5f, 2, GemProvider({ getItemStack("gemTopaz") }, 1.0, 0.5, 1, 5)),
     ;
 
-    class GemProvider(val itemStackSupplier: () -> ItemStack, val amount: Double, val amountPerFortune: Double, val expMin: Int, val expMax: Int)
-
     override fun toString() = resourceName
     override fun getName() = resourceName
 
     override fun getDrops(random: Random, block: Block, metadata: Int, fortune: Int): List<ItemStack> {
-        return (0 until random.randomInt(gemProvider.amount + random.nextDouble() * gemProvider.amountPerFortune * fortune)).map {
-            gemProvider.itemStackSupplier().copy()
+        return (0 until random.randomInt(gemProvider.amount + random.nextDouble() * gemProvider.amountPerFortune * fortune)).mapNotNull {
+            gemProvider.itemStackSupplier()?.copy()
         }
     }
 
@@ -553,14 +553,12 @@ enum class EnumVariantOre2(
     }),
     ;
 
-    class GemProvider(val itemStackSupplier: () -> ItemStack, val amount: Double, val amountPerFortune: Double, val expMin: Int, val expMax: Int)
-
     override fun toString() = resourceName
     override fun getName() = resourceName
 
     override fun getDrops(random: Random, block: Block, metadata: Int, fortune: Int): List<ItemStack> {
-        return (0 until random.randomInt(gemProvider.amount + random.nextDouble() * gemProvider.amountPerFortune * fortune)).map {
-            gemProvider.itemStackSupplier().copy()
+        return (0 until random.randomInt(gemProvider.amount + random.nextDouble() * gemProvider.amountPerFortune * fortune)).mapNotNull {
+            gemProvider.itemStackSupplier()?.copy()
         }
     }
 
