@@ -23,7 +23,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.io.IOException;
 
 import static mirrg.boron.swing.UtilsComponent.createPanelTitledBorder;
 import static mirrg.boron.swing.UtilsComponent.createSplitPaneHorizontal;
@@ -49,13 +48,7 @@ public class WindowColorMakerSingle extends JFrame {
         this.length = layerSettings.length();
         this.layerSettings = layerSettings;
         this.images = ISuppliterator.range(length)
-            .map(i -> {
-                try {
-                    return new ImageLayer(imageLoader.loadItemImage(layerSettings.get(i).y), new ColorIdentifier("@" + layerSettings.get(i).x));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            })
+            .map(i -> new ImageLayer(imageLoader.loadItemImage(layerSettings.get(i).y), new ColorIdentifier("@" + layerSettings.get(i).x)))
             .toImmutableArray();
         this.schema = schema;
 

@@ -2,7 +2,6 @@ package miragefairy2019.colormaker.core
 
 import java.awt.Color
 import java.awt.image.BufferedImage
-import java.io.IOException
 import javax.imageio.ImageIO
 
 class ColorConstants {
@@ -18,6 +17,5 @@ data class ColorIdentifier(val string: String) {
 class ImageLayer(val image: BufferedImage, val colorIdentifier: ColorIdentifier)
 
 class ImageLoader(private val classLoader: ClassLoader, private val modid: String) {
-    @Throws(IOException::class) // TODO
     fun loadItemImage(name: String): BufferedImage = ImageIO.read(classLoader.getResource("assets/$modid/textures/items/$name.png")!!)
 }
