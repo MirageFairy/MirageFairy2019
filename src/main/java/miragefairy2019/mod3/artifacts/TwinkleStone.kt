@@ -15,7 +15,7 @@ import miragefairy2019.mod.lib.BlockMulti
 import miragefairy2019.mod.lib.BlockVariantList
 import miragefairy2019.mod.lib.IBlockVariant
 import miragefairy2019.mod.lib.ItemBlockMulti
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.ApiMain
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState

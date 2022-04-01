@@ -10,7 +10,7 @@ import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.ApiMain
 import net.minecraft.block.BlockRotatedPillar
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material

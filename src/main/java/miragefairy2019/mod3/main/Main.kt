@@ -3,7 +3,7 @@ package miragefairy2019.mod3.main
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.artifacts.FairyCrystal
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.ApiMain
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.world.World

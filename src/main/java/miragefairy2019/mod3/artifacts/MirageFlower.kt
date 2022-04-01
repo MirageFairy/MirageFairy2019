@@ -21,7 +21,7 @@ import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.lib.shineEfficiency
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.ApiMain
 import miragefairy2019.mod3.pick.PickHandler
 import miragefairy2019.mod3.pick.api.IPickHandler
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen

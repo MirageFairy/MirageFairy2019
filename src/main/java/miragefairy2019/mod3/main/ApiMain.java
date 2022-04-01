@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.main.api;
+package miragefairy2019.mod3.main;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.network.IGuiHandler;

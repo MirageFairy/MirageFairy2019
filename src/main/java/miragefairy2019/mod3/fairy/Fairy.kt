@@ -3,7 +3,7 @@ package miragefairy2019.mod3.fairy
 import miragefairy2019.lib.entries
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.main.api.ApiMain.side
+import miragefairy2019.mod3.main.ApiMain.side
 import mirrg.boron.util.UtilsString
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.Minecraft

@@ -11,7 +11,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropRegistry
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.ApiMain
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import mirrg.boron.util.UtilsMath
 import net.minecraft.block.Block

@@ -36,7 +36,7 @@ import miragefairy2019.mod.lib.ItemBlockMulti
 import miragefairy2019.mod.lib.ItemMultiMaterial
 import miragefairy2019.mod.lib.ItemVariantMaterial
 import miragefairy2019.mod.lib.setCustomModelResourceLocations
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.ApiMain
 import net.minecraft.block.Block
 import net.minecraft.block.BlockFalling
 import net.minecraft.block.SoundType

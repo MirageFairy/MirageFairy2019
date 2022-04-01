@@ -11,7 +11,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.ApiMain
 import miragefairy2019.mod3.playeraura.api.IClientPlayerAuraHandler
 import miragefairy2019.mod3.playeraura.api.IFoodHistoryEntry
 import miragefairy2019.mod3.playeraura.api.IPlayerAuraHandler

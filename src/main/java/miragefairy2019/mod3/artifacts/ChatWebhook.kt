@@ -41,7 +41,7 @@ import miragefairy2019.libkt.writeToNBT
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.ApiMain
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.json
 import mirrg.kotlin.gson.jsonElement

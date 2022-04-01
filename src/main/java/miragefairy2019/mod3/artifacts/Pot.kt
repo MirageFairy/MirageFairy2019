@@ -18,7 +18,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.ItemMultiMaterial
 import miragefairy2019.mod.lib.ItemVariantMaterial
 import miragefairy2019.mod.lib.setCustomModelResourceLocations
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.ApiMain
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.item.Item

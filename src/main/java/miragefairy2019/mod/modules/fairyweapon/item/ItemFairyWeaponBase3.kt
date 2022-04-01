@@ -46,7 +46,7 @@ import miragefairy2019.mod3.magic.getDisplayValue
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.ranged
-import miragefairy2019.mod3.main.api.ApiMain.side
+import miragefairy2019.mod3.main.ApiMain.side
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel

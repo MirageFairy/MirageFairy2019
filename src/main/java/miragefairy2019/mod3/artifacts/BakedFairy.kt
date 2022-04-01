@@ -16,7 +16,7 @@ import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.fairy.Fairy
 import miragefairy2019.mod3.fairy.FairyTypes
-import miragefairy2019.mod3.main.api.ApiMain
+import miragefairy2019.mod3.main.ApiMain
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.color.IItemColor
