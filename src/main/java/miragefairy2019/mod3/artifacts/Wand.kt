@@ -21,10 +21,10 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
+import miragefairy2019.mod3.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
 import miragefairy2019.mod3.main.Main
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.ApiSkill

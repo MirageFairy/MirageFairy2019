@@ -1,5 +1,7 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.api.Erg
+import miragefairy2019.lib.displayName
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
@@ -11,14 +13,12 @@ import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
-import miragefairy2019.api.Erg
-import miragefairy2019.lib.displayName
+import miragefairy2019.mod3.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
 import miragefairy2019.mod3.main.Main.creativeTab
 import mirrg.boron.util.UtilsString
 import net.minecraft.block.Block

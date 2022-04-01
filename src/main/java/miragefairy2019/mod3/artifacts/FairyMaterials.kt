@@ -26,12 +26,12 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.ItemMultiMaterial
 import miragefairy2019.mod.lib.ItemVariantMaterial
 import miragefairy2019.mod.lib.setCustomModelResourceLocations
+import miragefairy2019.mod3.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
 import miragefairy2019.mod3.main.Main
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.util.ITooltipFlag
