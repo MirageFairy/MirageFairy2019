@@ -2,8 +2,8 @@ package miragefairy2019.lib
 
 import miragefairy2019.api.Mana
 import miragefairy2019.api.ManaSet
-import miragefairy2019.libkt.withColor
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.libkt.withColor
 import net.minecraft.util.text.TextFormatting
 import kotlin.math.max
 
@@ -24,12 +24,12 @@ val Mana.color
 
 val Mana.textColor
     get() = when (this) {
-        Mana.SHINE -> TextFormatting.WHITE
+        Mana.SHINE -> TextFormatting.AQUA
         Mana.FIRE -> TextFormatting.RED
         Mana.WIND -> TextFormatting.GREEN
         Mana.GAIA -> TextFormatting.YELLOW
         Mana.AQUA -> TextFormatting.BLUE
-        Mana.DARK -> TextFormatting.DARK_GRAY
+        Mana.DARK -> TextFormatting.DARK_PURPLE
     }
 
 

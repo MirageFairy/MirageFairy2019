@@ -1,5 +1,7 @@
 package miragefairy2019.mod3.fairy
 
+import miragefairy2019.api.IFairyItem
+import miragefairy2019.api.IFairyType
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.entries
@@ -9,7 +11,7 @@ import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.concat
 import miragefairy2019.libkt.concatNotNull
-import miragefairy2019.libkt.darkPurple
+import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.flatten
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gold
@@ -21,11 +23,9 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.libkt.white
 import miragefairy2019.libkt.withColor
-import miragefairy2019.api.IFairyItem
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
-import miragefairy2019.api.IFairyType
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
@@ -116,9 +116,9 @@ class ItemFairy : ItemMulti<VariantFairy>(), IFairyItem {
 
         // コスト
         if (flag.isAdvanced) {
-            tooltip += formattedText { format("コスト: %.3f", variant.type.cost).darkPurple } // TODO translate
+            tooltip += formattedText { format("コスト: %.3f", variant.type.cost).darkGray } // TODO translate
         } else {
-            tooltip += formattedText { format("コスト: %.0f", variant.type.cost).darkPurple } // TODO translate
+            tooltip += formattedText { format("コスト: %.0f", variant.type.cost).darkGray } // TODO translate
         }
 
         // エルグ
