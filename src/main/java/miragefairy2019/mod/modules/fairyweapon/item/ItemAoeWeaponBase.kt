@@ -6,7 +6,7 @@ import miragefairy2019.mod.magic4.FormulaArguments
 import miragefairy2019.mod.magic4.MagicArguments
 import miragefairy2019.mod.magic4.MagicHandler
 import miragefairy2019.mod.magic4.world
-import miragefairy2019.mod.modules.fairyweapon.DamageSourceFairyMagic
+import miragefairy2019.mod.modules.fairyweapon.FairyMagicDamageSource
 import miragefairy2019.mod.modules.fairyweapon.MagicMessage
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged
 import miragefairy2019.mod.modules.fairyweapon.spawnDamageParticle
@@ -84,7 +84,7 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
 
                             // 効果
                             val actualDamage = getActualDamage(target) // ダメージ計算
-                            target.attackEntityFrom(DamageSourceFairyMagic(player, world.rand.randomInt(looting())), actualDamage.toFloat()) // ダメージ発生
+                            target.attackEntityFrom(FairyMagicDamageSource(player, world.rand.randomInt(looting())), actualDamage.toFloat()) // ダメージ発生
                             onHit(worldServer, target)
                             if (target.health <= 0) onKill(worldServer, target)
 
