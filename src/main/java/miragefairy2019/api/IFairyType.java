@@ -3,6 +3,7 @@ package miragefairy2019.api;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public interface IFairyType {
@@ -22,14 +23,20 @@ public interface IFairyType {
     @Nullable
     public ResourceLocation getMotif();
 
+    @Nonnull
     public ITextComponent getDisplayName();
 
+    /**
+     * @return 0xRRGGBB
+     */
     public int getColor();
 
     public double getCost();
 
+    @Nonnull
     public ManaSet getManaSet();
 
+    @Nonnull
     public ErgSet getErgSet();
 
 }
