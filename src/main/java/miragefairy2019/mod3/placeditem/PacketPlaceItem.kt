@@ -1,9 +1,10 @@
 package miragefairy2019.mod3.placeditem
 
 import io.netty.buffer.ByteBuf
+import miragefairy2019.api.IPlaceAcceptorBlock
+import miragefairy2019.api.IPlaceExchanger
 import miragefairy2019.libkt.squared
 import miragefairy2019.mod3.placeditem.api.ApiPlacedItem
-import miragefairy2019.mod3.placeditem.api.IPlaceableBlock
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.init.SoundEvents
@@ -51,7 +52,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
             val blockPos = message.blockPos // 起点座標
             val blockState = world.getBlockState(blockPos) // 指定座標のブロックステート
             val block = blockState.block // 指定座標のブロック
-            if (block !is IPlaceableBlock) return EnumActionResult.PASS // 指定座標はPlaceHandlerでなければならない
+            if (block !is IPlaceAcceptorBlock) return EnumActionResult.PASS // 指定座標はPlaceHandlerでなければならない
 
             // 発動
 
@@ -61,13 +62,17 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
             if (!player.canPlayerEdit(blockPos, EnumFacing.UP, ItemStack.EMPTY)) return EnumActionResult.FAIL // 改変禁止なら中止
 
             // アクションを試行
-            val result = block.doPlaceAction(player, world, blockPos, { itemStack ->
-                if (!player.inventory.addItemStackToInventory(itemStack)) {
-                    player.dropItem(itemStack, false)
+            val result = block.place(world, blockPos, player, object : IPlaceExchanger {
+                override fun harvest(itemStack: ItemStack) {
+                    if (!player.inventory.addItemStackToInventory(itemStack)) {
+                        player.dropItem(itemStack, false)
+                    }
                 }
-            }, {
-                val itemStackHeld = player.getHeldItem(EnumHand.MAIN_HAND)
-                if (itemStackHeld.isEmpty) ItemStack.EMPTY.copy() else itemStackHeld.splitStack(1)
+
+                override fun deploy(): ItemStack {
+                    val itemStackHeld = player.getHeldItem(EnumHand.MAIN_HAND)
+                    return if (itemStackHeld.isEmpty) ItemStack.EMPTY.copy() else itemStackHeld.splitStack(1)
+                }
             })
             if (!result) return EnumActionResult.FAIL // アクションに失敗したなら中止
 

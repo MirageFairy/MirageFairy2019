@@ -1,5 +1,7 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.api.IPlaceAcceptorBlock
+import miragefairy2019.api.IPlaceExchanger
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
@@ -12,7 +14,6 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.placeditem.api.IPlaceableBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
@@ -44,8 +45,6 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import java.util.function.Consumer
-import java.util.function.Supplier
 import kotlin.math.round
 
 object Dish {
@@ -65,7 +64,7 @@ object Dish {
     }
 }
 
-class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceableBlock {
+class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceAcceptorBlock {
     companion object {
         private val AABB = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 2 / 16.0, 14 / 16.0)
     }
@@ -145,12 +144,12 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceableBlock {
     }
 
 
-    override fun doPlaceAction(player: EntityPlayer, world: World, blockPos: BlockPos, consumer: Consumer<ItemStack>, supplier: Supplier<ItemStack>): Boolean {
+    override fun place(world: World, blockPos: BlockPos, player: EntityPlayer, placeExchanger: IPlaceExchanger): Boolean {
         val tileEntity = world.getTileEntity(blockPos)
         if (tileEntity !is TileEntityDish) return false // 異常なTileだった場合は中止
         if (tileEntity.itemStack.isEmpty) { // 設置
 
-            val itemStack = supplier.get()
+            val itemStack = placeExchanger.deploy()
             if (itemStack.isEmpty) return false
 
             // アイテムを設置
@@ -173,7 +172,7 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceableBlock {
             tileEntity.sendUpdatePacket()
 
             // アイテムを増やす
-            consumer.accept(itemStackContained)
+            placeExchanger.harvest(itemStackContained)
 
             return true
         }
