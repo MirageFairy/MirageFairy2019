@@ -49,7 +49,7 @@ fun <T> Iterable<Iterable<T>>.concatWith(separator: Iterable<T>): List<T> {
 @Deprecated(message = "削除予定", replaceWith = ReplaceWith("this.concatWith(separator)"))
 fun <T> Iterable<Iterable<T>>.concat(vararg separator: T) = concatWith(separator.asIterable())
 fun <T> Iterable<Iterable<T>>.concatWith(vararg separator: T) = concatWith(separator.asIterable())
-fun <T> concat(vararg listOfList: Iterable<T>) = listOfList.map { it.asIterable() }.flatten()
+fun <T> concat(vararg listOfList: Iterable<T>) = listOfList.asIterable().flatten()
 fun <T> concatNotNull(vararg listOfList: Iterable<T>?) = listOfList.filterNotNull().flatten()
 
 // 中置format
