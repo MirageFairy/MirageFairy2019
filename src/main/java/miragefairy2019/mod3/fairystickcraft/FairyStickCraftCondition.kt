@@ -4,9 +4,6 @@ import miragefairy2019.libkt.containerItem
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.orEmpty
 import miragefairy2019.libkt.orNull
-import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftCondition
-import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftEnvironment
-import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftExecutor
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.init.Blocks

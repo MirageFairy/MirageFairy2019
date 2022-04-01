@@ -1,10 +1,5 @@
 package miragefairy2019.mod3.fairystickcraft
 
-import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftCondition
-import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftEnvironment
-import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftExecutor
-import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftRecipe
-import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftRegistry
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack

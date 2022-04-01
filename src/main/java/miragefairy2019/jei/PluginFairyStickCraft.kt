@@ -16,7 +16,7 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod3.artifacts.itemFairyStick
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
-import miragefairy2019.mod3.fairystickcraft.api.IFairyStickCraftRecipe
+import miragefairy2019.mod3.fairystickcraft.IFairyStickCraftRecipe
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 
