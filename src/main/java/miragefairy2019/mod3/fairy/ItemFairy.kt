@@ -11,7 +11,7 @@ import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.green
-import miragefairy2019.libkt.setColor
+import miragefairy2019.libkt.withColor
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
@@ -80,12 +80,12 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
                 !"モチーフ: ", // TODO translate
                 (!"★".repeat(variant.rare)).gold,
                 if (flag.isAdvanced) {
-                    (!"★".repeat(variant.rank - 1)).setColor(getRankColor(variant))
+                    (!"★".repeat(variant.rank - 1)).withColor(getRankColor(variant))
                 } else {
                     (!"★".repeat(variant.rank - 1)).gold
                 },
                 if (flag.isAdvanced) (!" レア度.${variant.rare}").gold else null, // TODO translate
-                if (flag.isAdvanced) (!" ランク.${variant.rank}").setColor(getRankColor(variant)) else null, // TODO translate
+                if (flag.isAdvanced) (!" ランク.${variant.rank}").withColor(getRankColor(variant)) else null, // TODO translate
                 (!" ${variant.type.motif?.resourcePath ?: "unknown"}").white
             )
         }
@@ -96,14 +96,14 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
             fun f(mana: Mana) = textComponent {
                 val raw = variant.type.manaSet[mana] / (variant.type.cost / 50.0)
                 val normalized = variant.type.manaSet[mana]
-                (format("%.3f", raw) + !" [" + format("%.3f", normalized) + !"]").setColor(mana.textColor)
+                (format("%.3f", raw) + !" [" + format("%.3f", normalized) + !"]").withColor(mana.textColor)
             }
             tooltip += formattedText { !"        " + !f(Mana.SHINE) }
             tooltip += formattedText { !f(Mana.FIRE) + !"    " + !f(Mana.WIND) }
             tooltip += formattedText { !f(Mana.GAIA) + !"    " + !f(Mana.AQUA) }
             tooltip += formattedText { !"        " + !f(Mana.DARK) }
         } else {
-            fun f(mana: Mana) = textComponent { format("%4d", formatInt(variant.type.manaSet[mana] / (variant.type.cost / 50.0))).setColor(mana.textColor) }
+            fun f(mana: Mana) = textComponent { format("%4d", formatInt(variant.type.manaSet[mana] / (variant.type.cost / 50.0))).withColor(mana.textColor) }
             tooltip += formattedText { !"    " + !f(Mana.SHINE) }
             tooltip += formattedText { !f(Mana.FIRE) + !"    " + !f(Mana.WIND) }
             tooltip += formattedText { !f(Mana.GAIA) + !"    " + !f(Mana.AQUA) }

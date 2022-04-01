@@ -2,7 +2,7 @@ package miragefairy2019.mod.magic4
 
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.red
-import miragefairy2019.libkt.setColor
+import miragefairy2019.libkt.withColor
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.formula4.FormulaRendererSelector
 import miragefairy2019.mod.modules.fairyweapon.critical.CriticalRate
@@ -35,7 +35,7 @@ val FormulaRendererSelector<Double>.percent1 get() = createSimpleFormulaRenderer
 val FormulaRendererSelector<Double>.percent2 get() = createSimpleFormulaRenderer { textComponent { !(value * 100.0 formatAs "%.2f%%") } }
 val FormulaRendererSelector<Double>.percent3 get() = createSimpleFormulaRenderer { textComponent { !(value * 100.0 formatAs "%.3f%%") } }
 val FormulaRendererSelector<Boolean>.boolean get() = createSimpleFormulaRenderer { textComponent { if (value) !"Yes" else !"No" } }
-val FormulaRendererSelector<CriticalRate>.criticalRate get() = createSimpleFormulaRenderer { textComponent { value.bar.flatMap { (!"|").setColor(it.color) } + !(value.mean formatAs " (%.2f)") } }
+val FormulaRendererSelector<CriticalRate>.criticalRate get() = createSimpleFormulaRenderer { textComponent { value.bar.flatMap { (!"|").withColor(it.color) } + !(value.mean formatAs " (%.2f)") } }
 
 fun <T> FormulaRenderer<T>.prefix(string: String) = map { textComponent { !string + !it } }
 fun <T> FormulaRenderer<T>.suffix(string: String) = map { textComponent { !it + !string } }

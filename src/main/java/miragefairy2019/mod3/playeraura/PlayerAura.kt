@@ -13,7 +13,7 @@ import miragefairy2019.libkt.drawTriangle
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.red
-import miragefairy2019.libkt.setColor
+import miragefairy2019.libkt.withColor
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
@@ -127,7 +127,7 @@ object PlayerAura {
                                             difference < -0.1 -> (!" -").red
                                             else -> null
                                         }
-                                    ).setColor(mana.textColor)
+                                    ).withColor(mana.textColor)
                                 }
                             }
                             event.toolTip.add(f1(Mana.SHINE).formattedText)

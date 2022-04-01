@@ -2,7 +2,7 @@ package miragefairy2019.lib
 
 import miragefairy2019.api.Mana
 import miragefairy2019.api.ManaSet
-import miragefairy2019.libkt.setColor
+import miragefairy2019.libkt.withColor
 import miragefairy2019.libkt.textComponent
 import net.minecraft.util.text.TextFormatting
 import kotlin.math.max
@@ -10,7 +10,7 @@ import kotlin.math.max
 
 // Mana
 
-val Mana.displayName get() = let { mana -> textComponent { translate("mirageFairy2019.mana.$mana.name").setColor(textColor) } }
+val Mana.displayName get() = let { mana -> textComponent { translate("mirageFairy2019.mana.$mana.name").withColor(textColor) } }
 
 val Mana.color
     get() = when (this) {

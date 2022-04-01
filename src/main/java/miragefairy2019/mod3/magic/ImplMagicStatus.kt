@@ -7,7 +7,7 @@ import miragefairy2019.lib.get
 import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.gold
-import miragefairy2019.libkt.setColor
+import miragefairy2019.libkt.withColor
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod3.fairy.api.IFairyType
@@ -76,8 +76,8 @@ fun <T : Comparable<T>> IMagicStatusFormatter<T>.coloredBySign(colorPositive: Te
     val defaultValue = function.defaultValue
     val displayValue = this@coloredBySign.getDisplayValue(function, arguments)
     when {
-        value > defaultValue -> textComponent { (!displayValue).setColor(colorPositive) }
-        value < defaultValue -> textComponent { (!displayValue).setColor(colorNegative) }
+        value > defaultValue -> textComponent { (!displayValue).withColor(colorPositive) }
+        value < defaultValue -> textComponent { (!displayValue).withColor(colorNegative) }
         else -> displayValue
     }
 }
@@ -88,7 +88,7 @@ val <T : Comparable<T>> IMagicStatusFormatter<T>.negative get() = coloredBySign(
 fun IMagicStatusFormatter<Boolean>.boolean(isPositive: Boolean) = IMagicStatusFormatter<Boolean> { function, arguments ->
     val value = function.getValue(arguments)
     val displayValue = this@boolean.getDisplayValue(function, arguments)
-    textComponent { (!displayValue).setColor(if (value xor !isPositive) GREEN else RED) }
+    textComponent { (!displayValue).withColor(if (value xor !isPositive) GREEN else RED) }
 }
 
 val IMagicStatusFormatter<Boolean>.positiveBoolean get() = boolean(true)
