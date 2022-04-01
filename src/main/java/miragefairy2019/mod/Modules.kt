@@ -8,12 +8,12 @@ import miragefairy2019.mod3.fairy.Fairy
 import miragefairy2019.mod3.fairy.relation.FairyRelation
 import miragefairy2019.mod3.fairybox.FairyBox
 import miragefairy2019.mod3.main.Main
-import miragefairy2019.mod3.manualrepair.ManualRepair
 import miragefairy2019.mod3.pick.Pick
 import miragefairy2019.mod3.placeditem.PlacedItem
 import miragefairy2019.mod3.playeraura.PlayerAura
 import miragefairy2019.mod3.recipe.Recipe
 import miragefairy2019.mod3.skill.Skill
+import miragefairy2019.mod3.systems.Systems
 
 val modules = listOf(
     Jei.module,
@@ -25,7 +25,7 @@ val modules = listOf(
     FairyWeapon.module,
     FairyRelation.module,
     Artifacts.module,
-    ManualRepair.module,
+    Systems.module,
     DamageSource.module,
     Pick.module,
     FairyBox.module,
