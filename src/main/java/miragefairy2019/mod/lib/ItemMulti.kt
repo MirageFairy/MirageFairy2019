@@ -1,16 +1,12 @@
 package miragefairy2019.mod.lib
 
-import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.createItemStack
-import miragefairy2019.libkt.translateToLocal
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
-import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
-import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -69,20 +65,6 @@ open class ItemMultiMaterial<V : ItemVariantMaterial> : ItemMulti<V>() {
     override fun getUnlocalizedName(itemStack: ItemStack): String {
         val variant = getVariant(itemStack) ?: return "item.null"
         return "item.${variant.unlocalizedName}"
-    }
-
-    // TODO 子クラスに移動
-    @SideOnly(Side.CLIENT)
-    override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        getVariant(itemStack) ?: return
-
-        // ポエム
-        val key = "${getUnlocalizedName(itemStack)}.poem"
-        if (canTranslate(key)) {
-            val string = translateToLocal(key)
-            if (string.isNotEmpty()) tooltip += string
-        }
-
     }
 }
 
