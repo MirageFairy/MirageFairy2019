@@ -6,7 +6,6 @@ import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.mod3.fairy.api.IFairyType;
 import miragefairy2019.mod3.main.api.ApiMain;
 import mirrg.boron.util.struct.Tuple;
-import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -16,10 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
@@ -30,8 +26,10 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
+
+import static miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils.getEntities;
+import static miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange;
+import static miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils.spawnParticleTargets;
 
 public class ItemMagicWandCollecting extends ItemFairyWeapon {
 
@@ -253,116 +251,6 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
 
         }
 
-    }
-
-    //
-
-    public static <E extends Entity> List<E> getEntities(Class<? extends E> classEntity, World world, Vec3d positionCenter, double radius) {
-        return world.getEntitiesWithinAABB(classEntity, new AxisAlignedBB(
-                positionCenter.x - radius,
-                positionCenter.y - radius,
-                positionCenter.z - radius,
-                positionCenter.x + radius,
-                positionCenter.y + radius,
-                positionCenter.z + radius),
-            e -> {
-                if (e.getDistanceSq(positionCenter.x, positionCenter.y, positionCenter.z) > radius * radius) return false;
-                return true;
-            });
-    }
-
-    private static double rotateY = 0;
-
-    // TODO move
-    public static void spawnParticleSphericalRange(World world, Vec3d positionCenter, double radius) {
-
-        // 角度アニメーション更新
-        rotateY += 7.4 / 180.0 * Math.PI;
-        if (rotateY > 2 * Math.PI) rotateY -= 2 * Math.PI;
-
-        for (int i = 0; i < 8; i++) {
-
-            // 横角度
-            double yaw = rotateY + i * 0.25 * Math.PI;
-
-            // 円形パーティクル生成
-            a:
-            for (int j = 0; j < 100; j++) {
-
-                // パーティクル仮出現点
-                double pitch = (-0.5 + Math.random()) * Math.PI;
-                Vec3d offset = new Vec3d(
-                    Math.cos(pitch) * Math.cos(yaw),
-                    Math.sin(pitch),
-                    Math.cos(pitch) * Math.sin(yaw)).scale(radius);
-                Vec3d positionParticle = positionCenter.add(offset);
-
-                // 仮出現点が、真下がブロックな空洞だった場合のみ受理
-                if (!world.getBlockState(new BlockPos(positionParticle)).isFullBlock()) {
-                    if (world.getBlockState(new BlockPos(positionParticle).down()).isFullBlock()) {
-
-                        // パーティクル出現点2
-                        // 高さを地面にくっつけるために、高さを地面の高さに固定した状態で横位置を調整する
-                        double y = Math.floor(positionParticle.y) + 0.15;
-                        double offsetY = y - positionCenter.y;
-                        double r1 = Math.sqrt(offset.x * offset.x + offset.z * offset.z);
-                        if (Double.isNaN(r1)) break a;
-                        double r2 = Math.sqrt(radius * radius - offsetY * offsetY);
-                        if (Double.isNaN(r2)) break a;
-                        double offsetX = offset.x / r1 * r2;
-                        double offsetZ = offset.z / r1 * r2;
-
-                        // パーティクル生成
-                        world.spawnParticle(
-                            EnumParticleTypes.END_ROD,
-                            positionCenter.x + offsetX,
-                            Math.floor(positionParticle.y) + 0.15,
-                            positionCenter.z + offsetZ,
-                            0,
-                            -0.08,
-                            0);
-
-                        break a;
-                    }
-                }
-
-            }
-
-        }
-
-    }
-
-    public static <T> void spawnParticleTargets(World world, Iterable<? extends T> targets, Predicate<? super T> filter, Function<? super T, ? extends Vec3d> fPosition, int maxCount) {
-        List<? extends T> listTargets = ISuppliterator.ofIterable(targets)
-            .toList();
-        double rate = 5 / (double) Math.max(listTargets.size(), 5);
-        for (T target : listTargets) {
-
-            int color;
-            if (filter.test(target)) {
-                if (maxCount > 0) {
-                    maxCount--;
-                    color = 0xFFFFFF;
-                } else {
-                    color = 0x00FFFF;
-                }
-            } else {
-                color = 0xFF0000;
-            }
-
-            if (Math.random() < 0.2 * rate) {
-                Vec3d position = fPosition.apply(target);
-                world.spawnParticle(
-                    EnumParticleTypes.SPELL_MOB,
-                    position.x,
-                    position.y,
-                    position.z,
-                    ((color >> 16) & 0xFF) / 255.0,
-                    ((color >> 8) & 0xFF) / 255.0,
-                    ((color >> 0) & 0xFF) / 255.0);
-            }
-
-        }
     }
 
 }

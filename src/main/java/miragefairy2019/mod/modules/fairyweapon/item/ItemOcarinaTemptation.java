@@ -32,6 +32,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
+import static miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils.getEntities;
+import static miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange;
+import static miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils.spawnParticleTargets;
+
 public class ItemOcarinaTemptation extends ItemFairyWeapon {
 
     protected static class Status {
@@ -157,7 +161,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
             // 範囲
 
             isEntity = false;
-            targetEntities = ItemMagicWandCollecting.getEntities(EntityVillager.class, world, player.getPositionVector(), status.radius);
+            targetEntities = getEntities(EntityVillager.class, world, player.getPositionVector(), status.radius);
 
         }
         List<Tuple<EntityVillager, Boolean>> targets = ISuppliterator.ofIterable(targetEntities)
@@ -289,14 +293,14 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
 
             // 発動範囲にパーティクルを表示
             if (!resultWithFairy.isEntity) {
-                ItemMagicWandCollecting.spawnParticleSphericalRange(
+                spawnParticleSphericalRange(
                     world,
                     player.getPositionVector(),
                     resultWithFairy.status.radius);
             }
 
             // 対象にパーティクルを表示
-            ItemMagicWandCollecting.spawnParticleTargets(
+            spawnParticleTargets(
                 world,
                 resultWithFairy.targets,
                 target -> target.y,

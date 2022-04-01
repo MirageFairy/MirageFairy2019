@@ -1,6 +1,6 @@
 package miragefairy2019.mod.common.magic
 
-import miragefairy2019.mod.modules.fairyweapon.item.ItemMagicWandCollecting
+import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange
 import miragefairy2019.mod.modules.fairyweapon.magic.UtilsMagic
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
@@ -20,7 +20,7 @@ class MagicSelectorPosition(world: World, val position: Vec3d) : MagicSelector(w
 }
 
 class MagicSelectorCircle(world: World, val position: Vec3d, val radius: Double) : MagicSelector(world) {
-    fun doEffect() = ItemMagicWandCollecting.spawnParticleSphericalRange(world, position, radius)
+    fun doEffect() = spawnParticleSphericalRange(world, position, radius)
     class BlockEntry(val blockPos: BlockPos, val distanceSquared: Double)
 
     val blockPosList
@@ -36,7 +36,7 @@ class MagicSelectorCircle(world: World, val position: Vec3d, val radius: Double)
 }
 
 class MagicSelectorSphere(world: World, val position: Vec3d, val radius: Double) : MagicSelector(world) {
-    fun doEffect() = ItemMagicWandCollecting.spawnParticleSphericalRange(world, position, radius)
+    fun doEffect() = spawnParticleSphericalRange(world, position, radius)
 }
 
 /**
