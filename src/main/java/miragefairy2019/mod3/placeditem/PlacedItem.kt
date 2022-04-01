@@ -7,7 +7,7 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.api.ApiMain.side
-import miragefairy2019.mod3.placeditem.api.ApiPlacedItem
+import net.minecraft.block.Block
 import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.client.settings.KeyBinding
 import net.minecraft.entity.player.EntityPlayer
@@ -22,12 +22,14 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import org.lwjgl.input.Keyboard
 
 object PlacedItem {
+    @SideOnly(Side.CLIENT)
+    lateinit var keyBindingPlaceItem: KeyBinding
+    lateinit var blockPlacedItem: () -> Block
     val module = module {
 
         // ブロック
-        block({ BlockPlacedItem() }, "placed_item") {
+        blockPlacedItem = block({ BlockPlacedItem() }, "placed_item") {
             setUnlocalizedName("placedItem")
-            onRegisterItem { ApiPlacedItem.blockPlacedItem = block }
         }
         tileEntity("placed_item", TileEntityPlacedItem::class.java)
         tileEntityRenderer(TileEntityPlacedItem::class.java, { TileEntityRendererPlacedItem() })
@@ -38,7 +40,7 @@ object PlacedItem {
                 object : Any() {
                     @SideOnly(Side.CLIENT)
                     fun run() {
-                        ApiPlacedItem.keyBindingPlaceItem = KeyBinding("miragefairy2019.placeItem", KeyConflictContext.IN_GAME, Keyboard.KEY_Z, "miragefairy2019 (MirageFairy2019)")
+                        keyBindingPlaceItem = KeyBinding("miragefairy2019.placeItem", KeyConflictContext.IN_GAME, Keyboard.KEY_Z, "miragefairy2019 (MirageFairy2019)")
                     }
                 }.run()
             }
@@ -55,11 +57,11 @@ object PlacedItem {
                 object : Any() {
                     @SideOnly(Side.CLIENT)
                     fun run() {
-                        ClientRegistry.registerKeyBinding(ApiPlacedItem.keyBindingPlaceItem)
+                        ClientRegistry.registerKeyBinding(keyBindingPlaceItem)
                         MinecraftForge.EVENT_BUS.register(object : Any() {
                             @SubscribeEvent
                             fun accept(event: InputUpdateEvent) {
-                                while (ApiPlacedItem.keyBindingPlaceItem.isPressed) {
+                                while (keyBindingPlaceItem.isPressed) {
 
                                     // プレイヤー判定
                                     val player = event.entityPlayer
