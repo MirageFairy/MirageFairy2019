@@ -5,7 +5,6 @@ import miragefairy2019.api.Mana
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.get
 import miragefairy2019.libkt.bold
-import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
@@ -64,7 +63,7 @@ val <T> IMagicStatusFunction<T>.factors
                 return 0.0
             }
 
-            override fun getCost() = add(buildText { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) }) // TODO 色変更
+            override fun getCost() = add(textComponent { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) }) // TODO 色変更
             override fun getManaValue(mana: Mana) = add(mana.displayName)
             override fun getErgValue(erg: Erg) = add(erg.displayName)
         })

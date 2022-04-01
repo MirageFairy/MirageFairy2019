@@ -5,7 +5,7 @@ import miragefairy2019.api.ErgSet
 import miragefairy2019.api.Mana
 import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.get
-import miragefairy2019.libkt.buildText
+import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod3.fairy.api.IFairyType
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
@@ -31,7 +31,7 @@ class FairyType(
 class FairyTypeEmpty : IFairyType {
     override fun isEmpty() = true
     override fun getMotif(): ResourceLocation? = null
-    override fun getDisplayName() = buildText { text("Empty") }
+    override fun getDisplayName() = textComponent { !"Empty" }
     override fun getColor() = 0xFFFFFF
     override fun getCost() = 50.0
     override fun getManaSet() = ManaSet.ZERO

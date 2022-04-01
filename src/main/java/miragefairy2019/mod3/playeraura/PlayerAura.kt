@@ -9,15 +9,16 @@ import miragefairy2019.lib.get
 import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.Complex
 import miragefairy2019.libkt.IRgb
-import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.color
 import miragefairy2019.libkt.drawTriangle
 import miragefairy2019.libkt.module
+import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.api.ApiMain.logger
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
+import mirrg.kotlin.concatNotNull
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemFood
@@ -86,7 +87,7 @@ object PlayerAura {
                         if (auraAfter != null) {
 
                             // 飽和率ポエム
-                            event.toolTip.add(buildText {
+                            event.toolTip.add(textComponent {
                                 translate(playerAuraHandler.getSaturationRate(itemStack).let { saturationRate ->
                                     when {
                                         saturationRate > 0.7 -> "miragefairy2019.gui.playerAura.poem.step5"
@@ -99,32 +100,33 @@ object PlayerAura {
                             }.formattedText)
 
                             // 栄養素表示
-                            event.toolTip.add(buildText {
-                                translate("miragefairy2019.gui.playerAura.title")
-                                text(":")
+                            event.toolTip.add(textComponent {
+                                translate("miragefairy2019.gui.playerAura.title") + !":"
                             }.formattedText)
                             fun f1(mana: Mana): ITextComponent {
                                 val before = auraBefore[mana]
                                 val after = auraAfter[mana]
                                 val difference = after - before
-                                return buildText {
-                                    text("  ")
-                                    text(mana.displayName)
-                                    text(": ")
-                                    format("%3.0f", before)
-                                    when {
-                                        difference > 2 -> text(" +++++").color(TextFormatting.GREEN)
-                                        difference < -2 -> text(" -----").color(TextFormatting.RED)
-                                        difference > 1 -> text(" ++++").color(TextFormatting.GREEN)
-                                        difference < -1 -> text(" ----").color(TextFormatting.RED)
-                                        difference > 0.5 -> text(" +++").color(TextFormatting.GREEN)
-                                        difference < -0.5 -> text(" ---").color(TextFormatting.RED)
-                                        difference > 0.2 -> text(" ++").color(TextFormatting.GREEN)
-                                        difference < -0.2 -> text(" --").color(TextFormatting.RED)
-                                        difference > 0.1 -> text(" +").color(TextFormatting.GREEN)
-                                        difference < -0.1 -> text(" -").color(TextFormatting.RED)
-                                        else -> Unit
-                                    }
+                                return textComponent {
+                                    concatNotNull(
+                                        !"  ",
+                                        !mana.displayName,
+                                        !": ",
+                                        format("%3.0f", before),
+                                        when {
+                                            difference > 2 -> (!" +++++").color(TextFormatting.GREEN)
+                                            difference < -2 -> (!" -----").color(TextFormatting.RED)
+                                            difference > 1 -> (!" ++++").color(TextFormatting.GREEN)
+                                            difference < -1 -> (!" ----").color(TextFormatting.RED)
+                                            difference > 0.5 -> (!" +++").color(TextFormatting.GREEN)
+                                            difference < -0.5 -> (!" ---").color(TextFormatting.RED)
+                                            difference > 0.2 -> (!" ++").color(TextFormatting.GREEN)
+                                            difference < -0.2 -> (!" --").color(TextFormatting.RED)
+                                            difference > 0.1 -> (!" +").color(TextFormatting.GREEN)
+                                            difference < -0.1 -> (!" -").color(TextFormatting.RED)
+                                            else -> null
+                                        }
+                                    )
                                 }.color(mana.textColor)
                             }
                             event.toolTip.add(f1(Mana.SHINE).formattedText)

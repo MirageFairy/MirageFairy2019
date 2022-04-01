@@ -1,6 +1,5 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.libkt.buildText
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.displayText
@@ -214,7 +213,7 @@ private enum class EnumQuestStatus { IMPOSSIBLE, INCOMPLETE, COMPLETED }
 
 private val EnumQuestStatus.displayText
     get() = when (this) {
-        EnumQuestStatus.IMPOSSIBLE -> buildText { translate("miragefairy2019.gui.astronomicalObservation.impossible").darkGray }
-        EnumQuestStatus.INCOMPLETE -> buildText { translate("miragefairy2019.gui.astronomicalObservation.incomplete").red }
-        EnumQuestStatus.COMPLETED -> buildText { translate("miragefairy2019.gui.astronomicalObservation.completed").green }
+        EnumQuestStatus.IMPOSSIBLE -> textComponent { translate("miragefairy2019.gui.astronomicalObservation.impossible").darkGray }
+        EnumQuestStatus.INCOMPLETE -> textComponent { translate("miragefairy2019.gui.astronomicalObservation.incomplete").red }
+        EnumQuestStatus.COMPLETED -> textComponent { translate("miragefairy2019.gui.astronomicalObservation.completed").green }
     }

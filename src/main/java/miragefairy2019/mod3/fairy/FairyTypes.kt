@@ -8,7 +8,7 @@ import miragefairy2019.lib.entries
 import miragefairy2019.lib.max
 import miragefairy2019.lib.sum
 import miragefairy2019.lib.times
-import miragefairy2019.libkt.buildText
+import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.util.ResourceLocation
 import kotlin.math.pow
@@ -50,7 +50,7 @@ class FairyTypes(private val count: Int) {
             return FairyType(
                 ResourceLocation(ModMirageFairy2019.MODID, name),
                 parentFairy,
-                buildText { translate("mirageFairy2019.fairy.$name.name") },
+                textComponent { translate("mirageFairy2019.fairy.$name.name") },
                 colorSet.hair,
                 cost.toDouble(),
                 manaSetReal,
