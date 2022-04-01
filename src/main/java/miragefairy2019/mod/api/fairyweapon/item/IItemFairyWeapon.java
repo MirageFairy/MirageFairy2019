@@ -1,6 +1,6 @@
 package miragefairy2019.mod.api.fairyweapon.item;
 
-import miragefairy2019.mod3.fairy.api.IFairyType;
+import miragefairy2019.api.IFairyType;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

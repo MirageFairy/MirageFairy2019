@@ -9,8 +9,8 @@ import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.withColor
-import miragefairy2019.mod.api.fairy.ApiFairy
-import miragefairy2019.mod3.fairy.api.IFairyType
+import miragefairy2019.lib.ApiFairy
+import miragefairy2019.api.IFairyType
 import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction

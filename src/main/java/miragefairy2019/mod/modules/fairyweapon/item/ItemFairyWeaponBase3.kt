@@ -22,7 +22,7 @@ import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
-import miragefairy2019.mod.api.fairy.ApiFairy
+import miragefairy2019.lib.ApiFairy
 import miragefairy2019.mod.modules.fairyweapon.findFairy
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
@@ -33,7 +33,7 @@ import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer
 import miragefairy2019.mod3.fairy.FairyTypeAdapter
-import miragefairy2019.mod3.fairy.api.IFairyType
+import miragefairy2019.api.IFairyType
 import miragefairy2019.mod3.magic.MagicStatus
 import miragefairy2019.mod3.magic.MagicStatusFunctionArguments
 import miragefairy2019.mod3.magic.api.IMagicHandler

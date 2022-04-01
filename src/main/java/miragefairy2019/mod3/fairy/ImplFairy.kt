@@ -6,7 +6,7 @@ import miragefairy2019.api.Mana
 import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.get
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod3.fairy.api.IFairyType
+import miragefairy2019.api.IFairyType
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 

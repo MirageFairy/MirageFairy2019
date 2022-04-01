@@ -1,7 +1,5 @@
-package miragefairy2019.mod3.fairy.api;
+package miragefairy2019.api;
 
-import miragefairy2019.api.ErgSet;
-import miragefairy2019.api.ManaSet;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 

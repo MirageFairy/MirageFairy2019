@@ -12,7 +12,7 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.white
-import miragefairy2019.mod.api.fairy.ApiFairy
+import miragefairy2019.lib.ApiFairy
 import miragefairy2019.mod.formula4.MagicStatusContainer
 import miragefairy2019.mod.formula4.displayName
 import miragefairy2019.mod.formula4.factors
@@ -25,7 +25,7 @@ import miragefairy2019.mod.modules.fairyweapon.findFairy
 import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer
-import miragefairy2019.mod3.fairy.api.IFairyType
+import miragefairy2019.api.IFairyType
 import miragefairy2019.mod3.fairy.erg
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.IMastery

@@ -15,12 +15,12 @@ import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.white
-import miragefairy2019.mod.api.fairy.ApiFairy
-import miragefairy2019.mod.api.fairy.IItemFairy
+import miragefairy2019.lib.ApiFairy
+import miragefairy2019.api.IFairyItem
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
-import miragefairy2019.mod3.fairy.api.IFairyType
+import miragefairy2019.api.IFairyType
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
 import net.minecraft.block.state.IBlockState
@@ -140,7 +140,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
     override fun getMirageFairyCombiningHandler() = FairyCombiningHandler()
     open class FairyCombiningHandler : IFairyCombiningHandler {
         override fun canCombine(itemStack: ItemStack): Boolean = FairyWeaponUtils.getCombinedFairy(itemStack).isEmpty
-        override fun canCombineWith(itemStack: ItemStack, itemStackPart: ItemStack) = itemStackPart.item is IItemFairy
+        override fun canCombineWith(itemStack: ItemStack, itemStackPart: ItemStack) = itemStackPart.item is IFairyItem
         override fun canUncombine(itemStack: ItemStack): Boolean = !FairyWeaponUtils.getCombinedFairy(itemStack).isEmpty
         override fun getCombinedPart(itemStack: ItemStack): ItemStack = FairyWeaponUtils.getCombinedFairy(itemStack)
         override fun setCombinedPart(itemStack: ItemStack, itemStackPart: ItemStack): Unit = FairyWeaponUtils.setCombinedFairy(itemStack, itemStackPart)

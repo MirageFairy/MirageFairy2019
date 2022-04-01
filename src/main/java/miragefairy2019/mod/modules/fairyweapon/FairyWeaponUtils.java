@@ -1,8 +1,8 @@
 package miragefairy2019.mod.modules.fairyweapon;
 
 import com.google.common.base.Predicate;
-import miragefairy2019.mod.api.fairy.IItemFairy;
-import miragefairy2019.mod3.fairy.api.IFairyType;
+import miragefairy2019.api.IFairyItem;
+import miragefairy2019.api.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
@@ -111,8 +111,8 @@ public class FairyWeaponUtils {
     @Nonnull
     public static Optional<IFairyType> getFairy(ItemStack itemStack) {
         Item item = itemStack.getItem();
-        if (!(item instanceof IItemFairy)) return Optional.empty();
-        return ((IItemFairy) item).getMirageFairy2019Fairy(itemStack);
+        if (!(item instanceof IFairyItem)) return Optional.empty();
+        return ((IFairyItem) item).getMirageFairy(itemStack);
     }
 
     @Nonnull

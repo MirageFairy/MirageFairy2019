@@ -21,11 +21,11 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.libkt.white
 import miragefairy2019.libkt.withColor
-import miragefairy2019.mod.api.fairy.IItemFairy
+import miragefairy2019.api.IFairyItem
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
-import miragefairy2019.mod3.fairy.api.IFairyType
+import miragefairy2019.api.IFairyType
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
@@ -49,9 +49,9 @@ val VariantFairy.level get() = rare + rank - 1
 
 fun hasSameId(a: VariantFairy, b: VariantFairy) = a.id == b.id
 
-class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
-    override fun getMirageFairy2019Fairy(itemStack: ItemStack): Optional<IFairyType> = Optional.ofNullable(getVariant(itemStack)?.type)
-    override fun getItemStackDisplayName(itemStack: ItemStack): String = getMirageFairy2019Fairy(itemStack).map {
+class ItemFairy : ItemMulti<VariantFairy>(), IFairyItem {
+    override fun getMirageFairy(itemStack: ItemStack): Optional<IFairyType> = Optional.ofNullable(getVariant(itemStack)?.type)
+    override fun getItemStackDisplayName(itemStack: ItemStack): String = getMirageFairy(itemStack).map {
         translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText)
     }.orElseGet { translateToLocal("$unlocalizedName.name") }
 

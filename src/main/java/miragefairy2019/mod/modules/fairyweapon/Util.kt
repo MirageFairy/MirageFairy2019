@@ -4,8 +4,8 @@ import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.itemStacks
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.api.fairy.IItemFairy
-import miragefairy2019.mod3.fairy.api.IFairyType
+import miragefairy2019.api.IFairyItem
+import miragefairy2019.api.IFairyType
 import mirrg.kotlin.castOrNull
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
@@ -107,7 +107,7 @@ fun findItem(player: EntityPlayer, predicate: (ItemStack) -> Boolean) = player.i
 /** アイテム、メタ、タグを考慮します。 */
 fun findItem(player: EntityPlayer, itemStackTarget: ItemStack) = findItem(player) { itemStackTarget.equalsItemDamageTag(it) }
 
-val ItemStack.fairyType get() = item.castOrNull<IItemFairy>()?.getMirageFairy2019Fairy(this)?.orNull
+val ItemStack.fairyType get() = item.castOrNull<IFairyItem>()?.getMirageFairy(this)?.orNull
 
 /** 搭乗中の妖精を優先します。 */
 fun findFairy(fairyWeaponItemStack: ItemStack, player: EntityPlayer): Pair<ItemStack, IFairyType>? {
