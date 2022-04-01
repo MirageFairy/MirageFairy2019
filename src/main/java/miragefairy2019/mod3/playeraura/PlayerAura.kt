@@ -9,9 +9,11 @@ import miragefairy2019.lib.get
 import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.Complex
 import miragefairy2019.libkt.IRgb
+import miragefairy2019.libkt.concatNotNull
 import miragefairy2019.libkt.drawTriangle
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.module
+import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.times
@@ -20,7 +22,6 @@ import miragefairy2019.libkt.withColor
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.api.ApiMain.logger
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
-import mirrg.kotlin.concatNotNull
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemFood

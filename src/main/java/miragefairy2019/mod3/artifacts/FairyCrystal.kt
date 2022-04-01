@@ -18,6 +18,7 @@ import miragefairy2019.libkt.makeItemVariantModel
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.orNull
+import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName

@@ -8,45 +8,61 @@ import net.minecraft.util.text.event.ClickEvent
 import net.minecraft.util.text.event.HoverEvent
 import java.io.File
 
-// TODO List<ITextComponent> -> 独自コンテナー
+
+class TextComponentWrapper(val textComponents: List<ITextComponent>) {
+    constructor(textComponent: ITextComponent) : this(listOf(textComponent))
+
+    companion object {
+        val EMPTY = TextComponentWrapper(listOf())
+    }
+}
+
+fun TextComponentWrapper.toTextComponent(): ITextComponent = textComponents.fold(TextComponentString("") as ITextComponent) { a, b -> a.appendSibling(b) }
+
+val TextComponentWrapper.isEmpty get() = textComponents.isEmpty()
+val TextComponentWrapper.isNotEmpty get() = textComponents.isNotEmpty()
+operator fun TextComponentWrapper.plus(other: TextComponentWrapper) = TextComponentWrapper(textComponents + other.textComponents)
+fun concat(vararg textComponentWrappers: TextComponentWrapper) = textComponentWrappers.asIterable().flatten()
+fun concatNotNull(vararg textComponentWrappers: TextComponentWrapper?) = textComponentWrappers.filterNotNull().flatten()
+fun Iterable<TextComponentWrapper>.flatten() = TextComponentWrapper(this.map { it.textComponents }.flatten())
 
 // 汎用的なスタイル
-fun List<ITextComponent>.withColor(value: TextFormatting) = listOf(toTextComponent().apply { style.color = value })
-fun List<ITextComponent>.withObfuscated(value: Boolean) = listOf(toTextComponent().apply { style.obfuscated = value })
-fun List<ITextComponent>.withBold(value: Boolean) = listOf(toTextComponent().apply { style.bold = value })
-fun List<ITextComponent>.withStrikethrough(value: Boolean) = listOf(toTextComponent().apply { style.strikethrough = value })
-fun List<ITextComponent>.withUnderline(value: Boolean) = listOf(toTextComponent().apply { style.underlined = value })
-fun List<ITextComponent>.withItalic(value: Boolean) = listOf(toTextComponent().apply { style.italic = value })
-fun List<ITextComponent>.withClickEvent(value: ClickEvent) = listOf(toTextComponent().apply { style.clickEvent = value })
-fun List<ITextComponent>.withHoverEvent(value: HoverEvent) = listOf(toTextComponent().apply { style.hoverEvent = value })
+fun TextComponentWrapper.withColor(value: TextFormatting) = TextComponentWrapper(toTextComponent().apply { style.color = value })
+fun TextComponentWrapper.withObfuscated(value: Boolean) = TextComponentWrapper(toTextComponent().apply { style.obfuscated = value })
+fun TextComponentWrapper.withBold(value: Boolean) = TextComponentWrapper(toTextComponent().apply { style.bold = value })
+fun TextComponentWrapper.withStrikethrough(value: Boolean) = TextComponentWrapper(toTextComponent().apply { style.strikethrough = value })
+fun TextComponentWrapper.withUnderline(value: Boolean) = TextComponentWrapper(toTextComponent().apply { style.underlined = value })
+fun TextComponentWrapper.withItalic(value: Boolean) = TextComponentWrapper(toTextComponent().apply { style.italic = value })
+fun TextComponentWrapper.withClickEvent(value: ClickEvent) = TextComponentWrapper(toTextComponent().apply { style.clickEvent = value })
+fun TextComponentWrapper.withHoverEvent(value: HoverEvent) = TextComponentWrapper(toTextComponent().apply { style.hoverEvent = value })
 
 // 便利なスタイル
-val List<ITextComponent>.black get() = withColor(TextFormatting.BLACK)
-val List<ITextComponent>.darkBlue get() = withColor(TextFormatting.DARK_BLUE)
-val List<ITextComponent>.darkGreen get() = withColor(TextFormatting.DARK_GREEN)
-val List<ITextComponent>.darkAqua get() = withColor(TextFormatting.DARK_AQUA)
-val List<ITextComponent>.darkRed get() = withColor(TextFormatting.DARK_RED)
-val List<ITextComponent>.darkPurple get() = withColor(TextFormatting.DARK_PURPLE)
-val List<ITextComponent>.gold get() = withColor(TextFormatting.GOLD)
-val List<ITextComponent>.gray get() = withColor(TextFormatting.GRAY)
-val List<ITextComponent>.darkGray get() = withColor(TextFormatting.DARK_GRAY)
-val List<ITextComponent>.blue get() = withColor(TextFormatting.BLUE)
-val List<ITextComponent>.green get() = withColor(TextFormatting.GREEN)
-val List<ITextComponent>.aqua get() = withColor(TextFormatting.AQUA)
-val List<ITextComponent>.red get() = withColor(TextFormatting.RED)
-val List<ITextComponent>.lightPurple get() = withColor(TextFormatting.LIGHT_PURPLE)
-val List<ITextComponent>.yellow get() = withColor(TextFormatting.YELLOW)
-val List<ITextComponent>.white get() = withColor(TextFormatting.WHITE)
-val List<ITextComponent>.obfuscated get() = withObfuscated(true)
-val List<ITextComponent>.bold get() = withBold(true)
-val List<ITextComponent>.strikethrough get() = withStrikethrough(true)
-val List<ITextComponent>.underline get() = withUnderline(true)
-val List<ITextComponent>.italic get() = withItalic(true)
+val TextComponentWrapper.black get() = withColor(TextFormatting.BLACK)
+val TextComponentWrapper.darkBlue get() = withColor(TextFormatting.DARK_BLUE)
+val TextComponentWrapper.darkGreen get() = withColor(TextFormatting.DARK_GREEN)
+val TextComponentWrapper.darkAqua get() = withColor(TextFormatting.DARK_AQUA)
+val TextComponentWrapper.darkRed get() = withColor(TextFormatting.DARK_RED)
+val TextComponentWrapper.darkPurple get() = withColor(TextFormatting.DARK_PURPLE)
+val TextComponentWrapper.gold get() = withColor(TextFormatting.GOLD)
+val TextComponentWrapper.gray get() = withColor(TextFormatting.GRAY)
+val TextComponentWrapper.darkGray get() = withColor(TextFormatting.DARK_GRAY)
+val TextComponentWrapper.blue get() = withColor(TextFormatting.BLUE)
+val TextComponentWrapper.green get() = withColor(TextFormatting.GREEN)
+val TextComponentWrapper.aqua get() = withColor(TextFormatting.AQUA)
+val TextComponentWrapper.red get() = withColor(TextFormatting.RED)
+val TextComponentWrapper.lightPurple get() = withColor(TextFormatting.LIGHT_PURPLE)
+val TextComponentWrapper.yellow get() = withColor(TextFormatting.YELLOW)
+val TextComponentWrapper.white get() = withColor(TextFormatting.WHITE)
+val TextComponentWrapper.obfuscated get() = withObfuscated(true)
+val TextComponentWrapper.bold get() = withBold(true)
+val TextComponentWrapper.strikethrough get() = withStrikethrough(true)
+val TextComponentWrapper.underline get() = withUnderline(true)
+val TextComponentWrapper.italic get() = withItalic(true)
 
-// 新DSL
+
 object TextComponentScope {
-    val empty get() = listOf<ITextComponent>()
-    operator fun ITextComponent.invoke() = listOf(this)
+    val empty get() = TextComponentWrapper.EMPTY
+    operator fun ITextComponent.invoke() = TextComponentWrapper(this)
     operator fun String.invoke() = TextComponentString(this)()
     operator fun File.invoke() = name()
         .withHoverEvent(HoverEvent(HoverEvent.Action.SHOW_TEXT, textComponent { absoluteFile.canonicalPath() }))
@@ -56,9 +72,6 @@ object TextComponentScope {
     fun translate(translationKey: String, vararg args: Any?) = TextComponentTranslation(translationKey, *args)()
 }
 
-// List<ITextComponent>のITextComponent化
-fun List<ITextComponent>.toTextComponent(): ITextComponent = this.fold(TextComponentString("") as ITextComponent) { a, b -> a.appendSibling(b) }
-
 // DSLエントリポイント
-inline fun textComponent(block: TextComponentScope.() -> List<ITextComponent>) = TextComponentScope.block().toTextComponent()
-inline fun formattedText(block: TextComponentScope.() -> List<ITextComponent>): String = textComponent(block).formattedText
+inline fun textComponent(block: TextComponentScope.() -> TextComponentWrapper) = TextComponentScope.block().toTextComponent()
+inline fun formattedText(block: TextComponentScope.() -> TextComponentWrapper): String = textComponent(block).formattedText

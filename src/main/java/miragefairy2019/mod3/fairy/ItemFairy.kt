@@ -7,10 +7,15 @@ import miragefairy2019.lib.get
 import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
+import miragefairy2019.libkt.concat
+import miragefairy2019.libkt.concatNotNull
 import miragefairy2019.libkt.darkPurple
+import miragefairy2019.libkt.flatten
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.green
+import miragefairy2019.libkt.plus
+import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
@@ -21,7 +26,6 @@ import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
 import miragefairy2019.mod3.fairy.api.IFairyType
-import mirrg.kotlin.concatNotNull
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
@@ -118,9 +122,8 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
         }
 
         // エルグ
-        fun <T> Iterable<T>.sandwich(separator: T) = mapIndexed { i, it -> if (i == 0) listOf(it) else listOf(separator, it) }.flatten()
         tooltip += formattedText {
-            concatNotNull(
+            concat(
                 "エルグ: "(), // TODO translate
                 variant.type.ergSet.entries
                     .filter { formatInt(it.second) >= 10 }
@@ -132,7 +135,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
                             it.first.displayName()
                         }
                     }
-                    .sandwich(", "())
+                    .sandwich { ", "() }
                     .flatten()
             ).green
         }

@@ -7,6 +7,7 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
+import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation

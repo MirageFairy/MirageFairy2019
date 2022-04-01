@@ -12,8 +12,13 @@ import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.plus
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.TextComponentScope
+import miragefairy2019.libkt.TextComponentWrapper
 import miragefairy2019.libkt.blue
+import miragefairy2019.libkt.concat
+import miragefairy2019.libkt.flatten
 import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.isNotEmpty
+import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
@@ -46,7 +51,6 @@ import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
-import mirrg.kotlin.concat
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
@@ -165,9 +169,9 @@ abstract class ItemFairyWeaponBase3(
             }
             if (show) {
                 tooltip += formattedText {
-                    fun <T> TextComponentScope.f(magicStatus: IMagicStatus<T>): List<ITextComponent> {
+                    fun <T> TextComponentScope.f(magicStatus: IMagicStatus<T>): TextComponentWrapper {
                         val list = magicStatus.function.factors.map { it() }.sandwich { ", "() }.flatten()
-                        return if (list.isNotEmpty()) " ("() + list + ")"() else empty
+                        return if (list.isNotEmpty) " ("() + list + ")"() else empty
                     }
                     concat(
                         it.displayName(),

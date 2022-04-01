@@ -7,7 +7,10 @@ import miragefairy2019.lib.get
 import miragefairy2019.lib.plus
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.blue
+import miragefairy2019.libkt.flatten
 import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.plus
+import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod.formula4.MagicStatusContainer
@@ -27,7 +30,6 @@ import miragefairy2019.mod3.fairy.erg
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
-import mirrg.kotlin.separate
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
@@ -50,7 +52,7 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
         val player = Minecraft.getMinecraft().player ?: return
         magicStatusList.forEach {
             val magicArguments = getMagicArguments(player, itemStackFairyWeapon, fairyType)
-            tooltip += formattedText { (it.displayName() + ": "() + it.getDisplayValue(magicArguments)().white + " ("() + it.factors.separate(", "()) + ")"()).blue }
+            tooltip += formattedText { (it.displayName() + ": "() + it.getDisplayValue(magicArguments)().white + " ("() + it.factors.map { it() }.sandwich { ", "() }.flatten() + ")"()).blue }
         }
     }
 
