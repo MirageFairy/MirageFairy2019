@@ -46,6 +46,7 @@ import miragefairy2019.mod3.main.api.ApiMain.side
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
+import mirrg.kotlin.concat
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
@@ -168,7 +169,7 @@ abstract class ItemFairyWeaponBase3(
                         val list = magicStatus.function.factors.map { !it }.sandwich { !", " }.flatten()
                         return if (list.isNotEmpty()) !" (" + list + !")" else empty
                     }
-                    join(
+                    concat(
                         !it.displayName,
                         !": ",
                         (!it.getDisplayValue(MagicStatusFunctionArguments({ ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it) }, actualFairyType))).white,

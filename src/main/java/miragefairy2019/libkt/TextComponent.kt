@@ -1,6 +1,5 @@
 package miragefairy2019.libkt
 
-import mirrg.kotlin.orNull
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextComponentString
 import net.minecraft.util.text.TextComponentTranslation
@@ -55,9 +54,6 @@ class TextComponentScope { // TODO -> object
 
     fun format(format: String, vararg args: Any?) = !String.format(format, *args)
     fun translate(translationKey: String, vararg args: Any?) = !TextComponentTranslation(translationKey, *args)
-
-    fun List<List<ITextComponent>>.concat(separator: List<ITextComponent>) = orNull?.reduce { a, b -> a + separator + b } ?: empty // TODO remove
-    fun join(vararg textComponents: List<ITextComponent>) = listOf(*textComponents).flatten() // TODO remove: -> mirrg.concat
 }
 
 // List<ITextComponent>のITextComponent化
