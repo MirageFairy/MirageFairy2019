@@ -1,8 +1,8 @@
-package miragefairy2019.mod3.recipe
+package miragefairy2019.mod3.recipes
 
 import miragefairy2019.libkt.module
 
-object Recipe {
+object Recipes {
     val module = module {
         FairyMetamorphosis.module(this)
         WandPulverizationRecipes.module(this)

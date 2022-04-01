@@ -11,7 +11,7 @@ import miragefairy2019.mod3.main.Main
 import miragefairy2019.mod3.pick.Pick
 import miragefairy2019.mod3.placeditem.PlacedItem
 import miragefairy2019.mod3.playeraura.PlayerAura
-import miragefairy2019.mod3.recipe.Recipe
+import miragefairy2019.mod3.recipes.Recipes
 import miragefairy2019.mod3.skill.Skill
 import miragefairy2019.mod3.systems.Systems
 
@@ -29,5 +29,5 @@ val modules = listOf(
     DamageSource.module,
     Pick.module,
     FairyBox.module,
-    Recipe.module
+    Recipes.module
 )

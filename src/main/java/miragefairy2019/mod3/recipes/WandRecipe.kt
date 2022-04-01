@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.recipe
+package miragefairy2019.mod3.recipes
 
 import miragefairy2019.libkt.DataIngredient
 import miragefairy2019.libkt.DataOreIngredient
