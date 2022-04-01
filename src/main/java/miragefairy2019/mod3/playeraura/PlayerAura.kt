@@ -19,8 +19,8 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.libkt.withColor
-import miragefairy2019.mod3.main.ApiMain
-import miragefairy2019.mod3.main.ApiMain.logger
+import miragefairy2019.mod3.main.Main
+import miragefairy2019.mod3.main.Main.logger
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayerMP
@@ -52,7 +52,7 @@ object PlayerAura {
         onInstantiation { ApiPlayerAura.playerAuraManager = PlayerAuraManager() }
 
         // ネットワークメッセージ登録
-        onRegisterNetworkMessage { ApiMain.simpleNetworkWrapper.registerMessage(PacketPlayerAura::class.java, MessagePlayerAura::class.java, 1, Side.CLIENT) }
+        onRegisterNetworkMessage { Main.simpleNetworkWrapper.registerMessage(PacketPlayerAura::class.java, MessagePlayerAura::class.java, 1, Side.CLIENT) }
 
         // ログインイベント
         onInit {

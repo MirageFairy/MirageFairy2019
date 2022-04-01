@@ -16,7 +16,7 @@ import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.fairy.Fairy
 import miragefairy2019.mod3.fairy.FairyTypes
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.color.IItemColor
@@ -61,7 +61,7 @@ object BakedFairy {
             setUnlocalizedName("bakedFairy")
             setCreativeTab { creativeTabBakedFairy() }
             modInitializer.onRegisterItem {
-                if (ApiMain.side.isClient) {
+                if (Main.side.isClient) {
                     ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation(item.registryName!!, "normal"))
                 }
             }

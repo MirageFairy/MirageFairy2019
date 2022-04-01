@@ -54,8 +54,8 @@ import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesCombining
 import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesUncombining
 import miragefairy2019.mod3.artifacts.oreName
 import miragefairy2019.mod3.artifacts.sphereType
-import miragefairy2019.mod3.main.ApiMain.creativeTab
-import miragefairy2019.mod3.main.ApiMain.side
+import miragefairy2019.mod3.main.Main.creativeTab
+import miragefairy2019.mod3.main.Main.side
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
 import net.minecraft.client.renderer.block.model.ModelResourceLocation

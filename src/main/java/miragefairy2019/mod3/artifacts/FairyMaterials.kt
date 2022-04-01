@@ -32,7 +32,7 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.init.Items
@@ -53,10 +53,10 @@ object FairyMaterials {
         // 妖精素材アイテム
         item({ ItemMultiFairyMaterial() }, "fairy_materials") {
             setUnlocalizedName("fairyMaterials")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             itemVariants = ItemVariants(this)
             onRegisterItem {
-                if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
+                if (Main.side.isClient) item.setCustomModelResourceLocations()
             }
         }
         onMakeLang {

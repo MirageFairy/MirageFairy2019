@@ -10,7 +10,7 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -49,7 +49,7 @@ object FluidMaterials {
         }
         blockFluidMiragiumWater = block({ BlockFluidMiragiumWater(fluidMiragiumWater()) }, "miragium_water") {
             setUnlocalizedName("miragiumWater")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             setFluidStateMapper()
         }
         itemFluidMiragiumWater = item({ ItemBlock(blockFluidMiragiumWater()) }, "miragium_water") {
@@ -63,7 +63,7 @@ object FluidMaterials {
         }
         blockFluidMirageFlowerExtract = block({ BlockFluidMiragiumWater(fluidMirageFlowerExtract()) }, "mirage_flower_extract") {
             setUnlocalizedName("mirageFlowerExtract")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             setFluidStateMapper()
         }
         itemFluidMirageFlowerExtract = item({ ItemBlock(blockFluidMirageFlowerExtract()) }, "mirage_flower_extract") {
@@ -77,7 +77,7 @@ object FluidMaterials {
         }
         blockFluidMirageFlowerOil = block({ BlockFluidMiragiumWater(fluidMirageFlowerOil()) }, "mirage_flower_oil") {
             setUnlocalizedName("mirageFlowerOil")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             setFluidStateMapper()
         }
         itemFluidMirageFlowerOil = item({ ItemBlock(blockFluidMirageFlowerOil()) }, "mirage_flower_oil") {
@@ -111,7 +111,7 @@ class FluidStateMapper(val resourceLocation: ResourceLocation) : StateMapperBase
 }
 
 fun <B : Block> BlockInitializer<B>.setFluidStateMapper() = modInitializer.onRegisterBlock {
-    if (ApiMain.side.isClient) ModelLoader.setCustomStateMapper(block, FluidStateMapper(resourceName.resourceLocation))
+    if (Main.side.isClient) ModelLoader.setCustomStateMapper(block, FluidStateMapper(resourceName.resourceLocation))
 }
 
 

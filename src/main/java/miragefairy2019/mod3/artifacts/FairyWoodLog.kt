@@ -10,7 +10,7 @@ import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import net.minecraft.block.BlockRotatedPillar
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -25,7 +25,7 @@ object FairyWoodLog {
     val module = module {
         blockFairyWoodLog = block({ BlockFairyWoodLog() }, "fairy_wood_log") {
             setUnlocalizedName("fairyWoodLog")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             makeBlockStates {
                 DataBlockStates(
                     variants = listOf("y" to Pair(null, null), "z" to Pair(90, null), "x" to Pair(90, 90)).associate { axis ->
@@ -37,7 +37,7 @@ object FairyWoodLog {
         itemBlockFairyWoodLog = item({ ItemBlock(blockFairyWoodLog()) }, "fairy_wood_log") {
             setUnlocalizedName("fairyWoodLog")
             addOreName("logFairyWood")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation(variant = "axis=y")
         }
     }

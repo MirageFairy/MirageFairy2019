@@ -13,7 +13,7 @@ import miragefairy2019.mod3.artifacts.oreseed.EnumVariantOreSeed
 import miragefairy2019.mod3.artifacts.oreseed.LoaderOreSeedDrop
 import miragefairy2019.mod3.artifacts.oreseed.OreSeedDropRegistry
 import miragefairy2019.mod3.artifacts.oreseed.WorldGenCompoundOreSeed
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import net.minecraft.block.BlockStone
 import net.minecraft.init.Blocks
 import net.minecraft.util.math.ChunkPos
@@ -34,19 +34,19 @@ object OreSeed {
 
         // 地上
         blockOreSeed = block({ BlockOreSeed(EnumOreSeedType.STONE) }, "ore_seed") {
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             makeBlockStates { DataBlockStates(variants = EnumVariantOreSeed.values().associate { "variant=$it" to DataBlockState("minecraft:stone") }) }
         }
 
         // ネザー
         blockOreSeedNether = block({ BlockOreSeed(EnumOreSeedType.NETHERRACK) }, "ore_seed_nether") {
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             makeBlockStates { DataBlockStates(variants = EnumVariantOreSeed.values().associate { "variant=$it" to DataBlockState("minecraft:netherrack") }) }
         }
 
         // エンド
         blockOreSeedEnd = block({ BlockOreSeed(EnumOreSeedType.END_STONE) }, "ore_seed_end") {
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             makeBlockStates { DataBlockStates(variants = EnumVariantOreSeed.values().associate { "variant=$it" to DataBlockState("minecraft:end_stone") }) }
         }
 

@@ -2,8 +2,8 @@ package miragefairy2019.mod3.skill
 
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.main.ApiMain
-import miragefairy2019.mod3.main.ApiMain.logger
+import miragefairy2019.mod3.main.Main
+import miragefairy2019.mod3.main.Main.logger
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
@@ -24,16 +24,16 @@ object Skill {
             ApiSkill.skillManager = object : SkillManager() {
                 override fun getFile(player: EntityPlayer): File = player.world.minecraftServer!!.getWorld(0).saveHandler.worldDirectory.resolve("${ModMirageFairy2019.MODID}/skill/${player.cachedUniqueIdString}.json")
                 override fun send(player: EntityPlayerMP, json: String) {
-                    ApiMain.simpleNetworkWrapper.sendTo(MessageSkill(json), player)
+                    Main.simpleNetworkWrapper.sendTo(MessageSkill(json), player)
                 }
             }
         }
 
         // ネットワークメッセージ登録
         onRegisterNetworkMessage {
-            ApiMain.simpleNetworkWrapper.registerMessage(PacketSkill::class.java, MessageSkill::class.java, discriminatorSkill, Side.CLIENT)
-            ApiMain.simpleNetworkWrapper.registerMessage(PacketTrainMastery::class.java, MessageTrainMastery::class.java, discriminatorTrainMastery, Side.SERVER)
-            ApiMain.simpleNetworkWrapper.registerMessage(PacketResetMastery::class.java, MessageResetMastery::class.java, discriminatorResetMastery, Side.SERVER)
+            Main.simpleNetworkWrapper.registerMessage(PacketSkill::class.java, MessageSkill::class.java, discriminatorSkill, Side.CLIENT)
+            Main.simpleNetworkWrapper.registerMessage(PacketTrainMastery::class.java, MessageTrainMastery::class.java, discriminatorTrainMastery, Side.SERVER)
+            Main.simpleNetworkWrapper.registerMessage(PacketResetMastery::class.java, MessageResetMastery::class.java, discriminatorResetMastery, Side.SERVER)
         }
 
         onInit {

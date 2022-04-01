@@ -11,7 +11,7 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import net.minecraft.block.BlockDispenser
 import net.minecraft.dispenser.IBlockSource
 import net.minecraft.entity.player.EntityPlayer
@@ -30,7 +30,7 @@ object Fertilizer {
     val module = module {
         itemFertilizer = item({ ItemFertilizer() }, "fertilizer") {
             setUnlocalizedName("fertilizer")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
             onInit {
                 BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(item, object : BehaviorDispenseOptional() {

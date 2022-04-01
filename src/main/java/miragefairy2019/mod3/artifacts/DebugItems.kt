@@ -21,7 +21,7 @@ import miragefairy2019.mod3.fairy.ColorSet
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.lib.erg
 import miragefairy2019.lib.mana
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill
 import mirrg.kotlin.formatAs
@@ -48,7 +48,7 @@ object DebugItems {
             val unlocalizedName = "debug_$name".toLowerCamelCase()
             item({ itemCreator() }, "debug_$name") {
                 setUnlocalizedName(unlocalizedName)
-                setCreativeTab { ApiMain.creativeTab }
+                setCreativeTab { Main.creativeTab }
                 setCustomModelResourceLocation(model = ResourceLocation("book"))
             }
             onMakeLang { enJa("item.$unlocalizedName.name", "Debug: $english", "デバッグ：$japanese") }

@@ -27,7 +27,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.fairy.fairyVariant
 import miragefairy2019.mod3.fairy.hasSameId
 import miragefairy2019.mod3.fairy.level
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -67,7 +67,7 @@ object FairyCollectionBox {
     val module = module {
         blockFairyCollectionBox = block({ BlockFairyCollectionBox() }, "fairy_collection_box") {
             setUnlocalizedName("fairyCollectionBox")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             makeBlockStates {
                 DataBlockStates(
                     variants = listOf("middle", "bottom").flatMap { context ->
@@ -83,7 +83,7 @@ object FairyCollectionBox {
         }
         tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)
         onInit {
-            ApiMain.registerGuiHandler(guiIdFairyCollectionBox, object : ISimpleGuiHandler {
+            Main.registerGuiHandler(guiIdFairyCollectionBox, object : ISimpleGuiHandler {
                 override fun GuiHandlerContext.onServer() = (tileEntity as? TileEntityFairyCollectionBox)?.let { ContainerFairyCollectionBox(player.inventory, it.inventory) }
                 override fun GuiHandlerContext.onClient() = (tileEntity as? TileEntityFairyCollectionBox)?.let { GuiFairyCollectionBox(ContainerFairyCollectionBox(player.inventory, it.inventory)) }
             }.guiHandler)

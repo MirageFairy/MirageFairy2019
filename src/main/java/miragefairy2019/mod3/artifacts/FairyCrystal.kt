@@ -29,7 +29,7 @@ import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.ISkillContainer
@@ -66,7 +66,7 @@ object FairyCrystal {
         // フェアリークリスタル
         itemFairyCrystal = item({ ItemFairyCrystal() }, "fairy_crystal") {
             setUnlocalizedName("fairyCrystal")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
 
             onInit {
                 BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(item, object : Bootstrap.BehaviorDispenseOptional() {

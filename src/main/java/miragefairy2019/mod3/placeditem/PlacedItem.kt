@@ -5,8 +5,8 @@ import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
-import miragefairy2019.mod3.main.ApiMain
-import miragefairy2019.mod3.main.ApiMain.side
+import miragefairy2019.mod3.main.Main
+import miragefairy2019.mod3.main.Main.side
 import net.minecraft.block.Block
 import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.client.settings.KeyBinding
@@ -48,7 +48,7 @@ object PlacedItem {
 
         // ネットワークメッセージ登録
         onRegisterNetworkMessage {
-            ApiMain.simpleNetworkWrapper.registerMessage(PacketPlaceItem::class.java, MessagePlaceItem::class.java, 0, Side.SERVER)
+            Main.simpleNetworkWrapper.registerMessage(PacketPlaceItem::class.java, MessagePlaceItem::class.java, 0, Side.SERVER)
         }
 
         // キーリスナー
@@ -73,7 +73,7 @@ object PlacedItem {
                                     if (result.typeOfHit != RayTraceResult.Type.BLOCK) return // ブロックにヒットしなければ中止
 
                                     // 成立
-                                    ApiMain.simpleNetworkWrapper.sendToServer(MessagePlaceItem(result.blockPos, result.sideHit))
+                                    Main.simpleNetworkWrapper.sendToServer(MessagePlaceItem(result.blockPos, result.sideHit))
 
                                 }
                             }

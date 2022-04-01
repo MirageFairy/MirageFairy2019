@@ -23,7 +23,7 @@ import miragefairy2019.libkt.white
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
@@ -44,7 +44,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairAcceptorI
 
     init {
         setMaxStackSize(1)
-        if (ApiMain.side.isClient) tileEntityItemStackRenderer = TileEntityItemStackRendererFairyWeapon()
+        if (Main.side.isClient) tileEntityItemStackRenderer = TileEntityItemStackRendererFairyWeapon()
     }
 
 

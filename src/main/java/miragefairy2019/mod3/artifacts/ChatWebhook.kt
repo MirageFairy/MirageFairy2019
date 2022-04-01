@@ -41,7 +41,7 @@ import miragefairy2019.libkt.writeToNBT
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.json
 import mirrg.kotlin.gson.jsonElement
@@ -106,7 +106,7 @@ object ChatWebhook {
         // 通常
         blockChatWebhookTransmitter = block({ BlockChatWebhookTransmitter() }, "chat_webhook_transmitter") {
             setUnlocalizedName("chatWebhookTransmitter")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             makeBlockStates {
                 DataBlockStates(
                     variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
@@ -147,7 +147,7 @@ object ChatWebhook {
         // クリエイティブ用
         blockCreativeChatWebhookTransmitter = block({ BlockCreativeChatWebhookTransmitter() }, "creative_chat_webhook_transmitter") {
             setUnlocalizedName("creativeChatWebhookTransmitter")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             makeBlockStates {
                 DataBlockStates(
                     variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
@@ -172,7 +172,7 @@ object ChatWebhook {
 
         // Gui
         onInit {
-            ApiMain.registerGuiHandler(guiIdChatWebhookTransmitter, object : ISimpleGuiHandler {
+            Main.registerGuiHandler(guiIdChatWebhookTransmitter, object : ISimpleGuiHandler {
                 override fun GuiHandlerContext.onServer() = (tileEntity as? TileEntityChatWebhookTransmitter)?.let { ContainerChatWebhookTransmitter(it, player.inventory, it.inventory) }
                 override fun GuiHandlerContext.onClient() = onServer()?.let { GuiChatWebhookTransmitter(it) }
             }.guiHandler)
@@ -224,7 +224,7 @@ object ChatWebhook {
                         // TODO 複数のデーモンに対してDiscordの負荷対策のためディレイ
                         Thread({
                             if (enableChatWebhook()) {
-                                ApiMain.logger.trace("http request start")
+                                Main.logger.trace("http request start")
                                 try {
 
                                     // 接続設定
@@ -235,34 +235,34 @@ object ChatWebhook {
                                     connection.setRequestProperty("User-Agent", "MirageFairy2019")
 
                                     // 接続開始
-                                    ApiMain.logger.trace("connecting")
+                                    Main.logger.trace("connecting")
                                     connection.connect()
 
                                     // 入力の送信
-                                    ApiMain.logger.trace("sending")
+                                    Main.logger.trace("sending")
                                     val json = jsonElement(
                                         "username" to "${daemon.username} @ ${remaining.displayText.unformattedText}".jsonElement,
                                         "content" to "<$playerName> $message".jsonElement
                                     ).json
-                                    ApiMain.logger.trace(json)
+                                    Main.logger.trace(json)
                                     connection.outputStream.use { out -> out.write(json.utf8ByteArray) }
 
                                     // 出力の受信
-                                    ApiMain.logger.trace("receiving")
+                                    Main.logger.trace("receiving")
                                     val responseBody = connection.inputStream.use { it.readBytes() }.utf8String
 
                                     // 接続終了
-                                    ApiMain.logger.trace("disconnecting")
+                                    Main.logger.trace("disconnecting")
                                     connection.disconnect()
 
                                     // 結果表示
-                                    ApiMain.logger.trace("${connection.responseCode}")
-                                    ApiMain.logger.trace(responseBody)
+                                    Main.logger.trace("${connection.responseCode}")
+                                    Main.logger.trace(responseBody)
 
                                 } catch (e: Throwable) {
-                                    ApiMain.logger.warn("failure", e)
+                                    Main.logger.warn("failure", e)
                                 }
-                                ApiMain.logger.trace("http request finished")
+                                Main.logger.trace("http request finished")
                             }
                         }, "ChatWebhook Request Thread").start()
 

@@ -18,7 +18,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.lib.ItemMultiMaterial
 import miragefairy2019.mod.lib.ItemVariantMaterial
 import miragefairy2019.mod.lib.setCustomModelResourceLocations
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.item.Item
@@ -43,7 +43,7 @@ object Pot {
         itemPot = item({ ItemPot() }, "pot") {
             setUnlocalizedName("mirageFairyPot")
             addOreName("mirageFairyPot")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
         makeRecipe(
@@ -66,7 +66,7 @@ object Pot {
         // 中身入りポット
         itemFilledBucket = item({ ItemFilledPot() }, "filled_bucket") {
             setUnlocalizedName("filledBucket")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
 
             itemVariant("miragium_water_pot", {
                 ItemVariantFilledPot(it, "mirageFairyPotMiragiumWater", "miragium_water")
@@ -88,7 +88,7 @@ object Pot {
             }
 
             onRegisterItem {
-                if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
+                if (Main.side.isClient) item.setCustomModelResourceLocations()
             }
         }
 

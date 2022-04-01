@@ -36,7 +36,7 @@ import miragefairy2019.mod.lib.ItemBlockMulti
 import miragefairy2019.mod.lib.ItemMultiMaterial
 import miragefairy2019.mod.lib.ItemVariantMaterial
 import miragefairy2019.mod.lib.setCustomModelResourceLocations
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import net.minecraft.block.Block
 import net.minecraft.block.BlockFalling
 import net.minecraft.block.SoundType
@@ -192,7 +192,7 @@ object CommonMaterials {
 
         // 鉱石ブロック1
         blockOre1 = block({ BlockOre(EnumVariantOre1.variantList) }, "ore1") {
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             makeBlockStates {
                 DataBlockStates(
                     variants = listOf(
@@ -239,7 +239,7 @@ object CommonMaterials {
 
         // 鉱石ブロック2
         blockOre2 = block({ BlockOre(EnumVariantOre2.variantList) }, "ore2") {
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             makeBlockStates {
                 DataBlockStates(
                     variants = listOf(
@@ -281,7 +281,7 @@ object CommonMaterials {
         // アイテム状素材
         itemMaterials = item({ ItemSimpleMaterials() }, "materials") {
             setUnlocalizedName("materials")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
 
             fun r(
                 metadata: Int,
@@ -328,7 +328,7 @@ object CommonMaterials {
             r(29, "pyrite_gem", "gemPyrite", "gemPyrite", { generated })
 
             onRegisterItem {
-                if (ApiMain.side.isClient) item.setCustomModelResourceLocations()
+                if (Main.side.isClient) item.setCustomModelResourceLocations()
             }
         }
         onMakeLang {
@@ -366,7 +366,7 @@ object CommonMaterials {
 
         // ブロック状素材
         blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList) }, "materials1") {
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             makeBlockStates {
                 DataBlockStates(
                     variants = listOf(

@@ -11,7 +11,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import miragefairy2019.mod3.playeraura.api.IClientPlayerAuraHandler
 import miragefairy2019.mod3.playeraura.api.IFoodHistoryEntry
 import miragefairy2019.mod3.playeraura.api.IPlayerAuraHandler
@@ -265,5 +265,5 @@ class ServerPlayerAuraHandler(
     override fun save() = model.save(player)
     override fun onReset() = model.reset()
     override fun onEat(itemStack: ItemStack, healAmount: Int) = run { manager.getGlobalFoodAura(itemStack)?.let { model.pushFood(it, itemStack, healAmount) }; Unit }
-    override fun send() = ApiMain.simpleNetworkWrapper.sendTo(MessagePlayerAura(model.toJson()), player)
+    override fun send() = Main.simpleNetworkWrapper.sendTo(MessagePlayerAura(model.toJson()), player)
 }

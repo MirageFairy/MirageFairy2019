@@ -19,7 +19,7 @@ import miragefairy2019.libkt.position
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.toArgb
 import miragefairy2019.libkt.tooltip
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import miragefairy2019.mod3.skill.api.ApiSkill
 import mirrg.kotlin.formatAs
 import mirrg.kotlin.minus
@@ -36,7 +36,7 @@ object SkillGui {
     const val guiIdSkillGui = 2
     val module = module {
         onInit {
-            ApiMain.registerGuiHandler(guiIdSkillGui, object : ISimpleGuiHandler {
+            Main.registerGuiHandler(guiIdSkillGui, object : ISimpleGuiHandler {
                 override fun GuiHandlerContext.onServer() = ContainerSkill()
                 override fun GuiHandlerContext.onClient() = GuiSkill()
             }.guiHandler)
@@ -80,7 +80,7 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
                 if (skillContainer.canResetMastery(Instant.now()) && skillContainer.usedSkillPoints > 0) {
                     mc.displayGuiScreen(GuiYesNo({ result, _ ->
                         mc.displayGuiScreen(this@GuiSkill)
-                        if (result) ApiMain.simpleNetworkWrapper.sendToServer(MessageResetMastery())
+                        if (result) Main.simpleNetworkWrapper.sendToServer(MessageResetMastery())
                     }, "マスタリレベル初期化", "すべてのマスタリのレベルをリセットし、スキルポイントに戻しますか？\nこの操作は毎月1度だけ実行できます。", 0)) // TODO translate
                 }
             }
@@ -125,7 +125,7 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
             components += component(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
                 button {
                     if (skillContainer.remainingSkillPoints > 0) {
-                        ApiMain.simpleNetworkWrapper.sendToServer(MessageTrainMastery(mastery.name))
+                        Main.simpleNetworkWrapper.sendToServer(MessageTrainMastery(mastery.name))
                     }
                 }
                 // TODO ホバーで影響するマスタリのレベルを緑色に光らせつつ実行後の値を表示

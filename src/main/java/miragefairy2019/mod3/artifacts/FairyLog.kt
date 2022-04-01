@@ -11,7 +11,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairylogdrop.FairyLogDropRegistry
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import mirrg.boron.util.UtilsMath
 import net.minecraft.block.Block
@@ -51,7 +51,7 @@ object FairyLog {
 
         blockFairyLog = block({ BlockFairyLog() }, "fairy_log") {
             setUnlocalizedName("fairyLog")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             makeBlockStates {
                 DataBlockStates(
                     variants = listOf("oak", "birch", "spruce", "jungle", "acacia", "dark_oak").flatMap { variant ->
@@ -64,7 +64,7 @@ object FairyLog {
         }
         itemBlockFairyLog = item({ ItemBlock(blockFairyLog()) }, "fairy_log") {
             setUnlocalizedName("fairyLog")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation(variant = "facing=north,variant=oak")
         }
 

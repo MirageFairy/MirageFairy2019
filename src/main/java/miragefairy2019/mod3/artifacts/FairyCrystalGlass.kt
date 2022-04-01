@@ -23,7 +23,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.with
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
 import mirrg.kotlin.toLowerCaseHead
@@ -130,7 +130,7 @@ object FairyCrystalGlass {
         ): Pair<BlockInitializer<BlockFairyCrystalGlass>, ItemInitializer<ItemBlock>> {
             val block = block({ BlockFairyCrystalGlass() }, "${prefix}FairyCrystalGlass".toSnakeCase()) {
                 setUnlocalizedName("${prefix}FairyCrystalGlass".toLowerCaseHead())
-                setCreativeTab { ApiMain.creativeTab }
+                setCreativeTab { Main.creativeTab }
                 makeBlockStates {
                     DataBlockStates(
                         multipart = listOf(

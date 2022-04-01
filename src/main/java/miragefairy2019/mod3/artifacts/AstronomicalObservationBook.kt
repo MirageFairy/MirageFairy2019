@@ -14,7 +14,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import miragefairy2019.mod3.skill.api.ApiSkill
 import mirrg.kotlin.minus
 import mirrg.kotlin.startOfDay
@@ -50,7 +50,7 @@ object AstronomicalObservationBook {
     val module = module {
         itemAstronomicalObservationBook = item({ ItemAstronomicalObservationBook() }, "astronomical_observation_book") {
             setUnlocalizedName("astronomicalObservationBook")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
     }

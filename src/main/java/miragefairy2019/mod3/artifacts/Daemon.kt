@@ -5,7 +5,7 @@ import miragefairy2019.libkt.existsOrNull
 import miragefairy2019.libkt.mkdirsParent
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.onServerSave
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonWrapper
 import mirrg.kotlin.gson.toJson
@@ -20,7 +20,7 @@ object DaemonSystem {
 
         // セーブデータ読み込みとデーモンマネージャーの初期化
         onServerStarting {
-            ApiMain.logger.info("DaemonSystem: Loading")
+            Main.logger.info("DaemonSystem: Loading")
             val data = getFile(server).existsOrNull?.readText()?.jsonWrapper?.orNull
             DaemonManager.instance = if (data != null) {
                 DaemonManager(
@@ -45,7 +45,7 @@ object DaemonSystem {
 
         // 保存イベント
         onServerSave {
-            ApiMain.logger.info("DaemonSystem: Saving")
+            Main.logger.info("DaemonSystem: Saving")
             val daemonEntityManager = DaemonManager.instance ?: return@onServerSave
             val server = world.minecraftServer ?: return@onServerSave
             getFile(server).mkdirsParent()
@@ -67,7 +67,7 @@ object DaemonSystem {
         // サーバーが閉じたときにマネージャーをリセット
         onServerStopping {
             DaemonManager.instance = null
-            ApiMain.logger.info("DaemonSystem: Terminated")
+            Main.logger.info("DaemonSystem: Terminated")
         }
 
     }

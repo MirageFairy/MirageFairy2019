@@ -13,7 +13,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
@@ -53,7 +53,7 @@ object Dish {
     val module = module {
         blockDish = block({ BlockDish() }, "dish") {
             setUnlocalizedName("dish")
-            setCreativeTab { ApiMain.creativeTab }
+            setCreativeTab { Main.creativeTab }
             makeBlockStates { normal }
         }
         itemDish = item({ ItemBlock(blockDish()) }, "dish") {

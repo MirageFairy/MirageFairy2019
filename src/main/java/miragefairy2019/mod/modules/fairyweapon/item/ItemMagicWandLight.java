@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.api.IFairyType;
-import miragefairy2019.mod3.main.ApiMain;
+import miragefairy2019.mod3.main.Main;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -151,7 +151,7 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
 
             if (isSelected || player.getHeldItemOffhand() == itemStack) {
 
-                if (ApiMain.side.isClient()) {
+                if (Main.side.isClient()) {
 
                     // 妖精がない場合はマゼンタ
                     Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);

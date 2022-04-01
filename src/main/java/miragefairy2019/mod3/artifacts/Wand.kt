@@ -25,7 +25,7 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.api.ApiFairyStickCraft
-import miragefairy2019.mod3.main.ApiMain
+import miragefairy2019.mod3.main.Main
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.displayName
@@ -67,7 +67,7 @@ object Wand {
         fun <T : ItemFairyWand> fairyWand(tier: Int, type: String, englishType: String, japaneseType: String, number: Int, creator: () -> T, vararg additionalOreNames: String) {
             item(creator, "${type}_fairy_wand${if (number == 1) "" else "_$number"}") {
                 setUnlocalizedName("fairyWand${type.toUpperCamelCase()}${if (number == 1) "" else "$number"}")
-                setCreativeTab { ApiMain.creativeTab }
+                setCreativeTab { Main.creativeTab }
                 setCustomModelResourceLocation()
                 onInit {
                     val durability = (1..tier).fold(16) { a, _ -> a * 2 }
