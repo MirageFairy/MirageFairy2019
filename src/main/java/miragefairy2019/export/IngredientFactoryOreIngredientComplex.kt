@@ -1,4 +1,4 @@
-package miragefairy2019.mod.lib
+package miragefairy2019.export
 
 import com.google.gson.JsonObject
 import miragefairy2019.libkt.OreIngredientComplex
