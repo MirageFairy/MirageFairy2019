@@ -28,16 +28,6 @@ class FairyType(
     override fun getErgSet() = ergSet
 }
 
-class FairyTypeEmpty : IFairyType {
-    override fun isEmpty() = true
-    override fun getMotif(): ResourceLocation? = null
-    override fun getDisplayName() = textComponent { "Empty"() }
-    override fun getColor() = 0xFFFFFF
-    override fun getCost() = 50.0
-    override fun getManaSet() = ManaSet.ZERO
-    override fun getErgSet() = ErgSet.ZERO
-}
-
 open class FairyTypeAdapter(internal val parent: IFairyType) : IFairyType {
     override fun isEmpty() = parent.isEmpty
     override fun getMotif() = parent.motif

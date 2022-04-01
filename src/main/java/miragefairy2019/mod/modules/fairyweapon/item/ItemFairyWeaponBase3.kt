@@ -1,6 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.api.Erg
+import miragefairy2019.api.IFairyType
 import miragefairy2019.api.Mana
 import miragefairy2019.api.Mana.AQUA
 import miragefairy2019.api.Mana.DARK
@@ -9,6 +10,7 @@ import miragefairy2019.api.Mana.GAIA
 import miragefairy2019.api.Mana.SHINE
 import miragefairy2019.api.Mana.WIND
 import miragefairy2019.api.ManaSet
+import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.lib.plus
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.TextComponentScope
@@ -22,7 +24,6 @@ import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
-import miragefairy2019.lib.ApiFairy
 import miragefairy2019.mod.modules.fairyweapon.findFairy
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
 import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
@@ -33,7 +34,6 @@ import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer
 import miragefairy2019.mod3.fairy.FairyTypeAdapter
-import miragefairy2019.api.IFairyType
 import miragefairy2019.mod3.magic.MagicStatus
 import miragefairy2019.mod3.magic.MagicStatusFunctionArguments
 import miragefairy2019.mod3.magic.api.IMagicHandler
@@ -191,7 +191,7 @@ abstract class ItemFairyWeaponBase3(
 
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
         val itemStack = player.getHeldItem(hand) // アイテム取得
-        val fairyType = findFairy(itemStack, player)?.second ?: ApiFairy.empty() // 妖精取得
+        val fairyType = findFairy(itemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
 
         val magicHandler = magic.getMagicHandler(MagicScope(this, player.proxy, world, player, itemStack, fairyType))
         return ActionResult(magicHandler.onItemRightClick(hand), itemStack)
@@ -201,7 +201,7 @@ abstract class ItemFairyWeaponBase3(
         if (!side.isClient) return // クライアントサイドでなければ中止
         if (entity !is EntityPlayer) return // プレイヤー取得
         if (!isSelected && entity.heldItemOffhand != itemStack) return // アイテム取得
-        val fairyType = findFairy(itemStack, entity)?.second ?: ApiFairy.empty() // 妖精取得
+        val fairyType = findFairy(itemStack, entity)?.second ?: EMPTY_FAIRY // 妖精取得
         if (!world.isRemote) return // クライアントワールドでなければ中止
 
         val magicHandler = magic.getMagicHandler(MagicScope(this, entity.proxy, world, entity, itemStack, fairyType))
@@ -211,7 +211,7 @@ abstract class ItemFairyWeaponBase3(
     override fun hitEntity(itemStack: ItemStack, target: EntityLivingBase, attacker: EntityLivingBase): Boolean {
         super.hitEntity(itemStack, target, attacker)
         if (attacker !is EntityPlayer) return true // プレイヤー取得
-        val fairyType = findFairy(itemStack, attacker)?.second ?: ApiFairy.empty() // 妖精取得
+        val fairyType = findFairy(itemStack, attacker)?.second ?: EMPTY_FAIRY // 妖精取得
 
         val magicHandler = magic.getMagicHandler(MagicScope(this, attacker.proxy, attacker.world, attacker, itemStack, fairyType))
         magicHandler.hitEntity(target)

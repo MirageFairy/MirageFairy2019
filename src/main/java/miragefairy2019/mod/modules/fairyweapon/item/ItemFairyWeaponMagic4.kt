@@ -1,7 +1,9 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
 import miragefairy2019.api.Erg
+import miragefairy2019.api.IFairyType
 import miragefairy2019.api.Mana
+import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.lib.div
 import miragefairy2019.lib.get
 import miragefairy2019.lib.plus
@@ -12,7 +14,6 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.white
-import miragefairy2019.lib.ApiFairy
 import miragefairy2019.mod.formula4.MagicStatusContainer
 import miragefairy2019.mod.formula4.displayName
 import miragefairy2019.mod.formula4.factors
@@ -25,7 +26,6 @@ import miragefairy2019.mod.modules.fairyweapon.findFairy
 import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer
-import miragefairy2019.api.IFairyType
 import miragefairy2019.mod3.fairy.erg
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.IMastery
@@ -81,7 +81,7 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
 
     final override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
         val itemStack = player.getHeldItem(hand) // アイテム取得
-        val fairyType = findFairy(itemStack, player)?.second ?: ApiFairy.empty() // 妖精取得
+        val fairyType = findFairy(itemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
 
         val magicHandler = getMagic().getMagicHandler(getMagicArguments(player, itemStack, fairyType))
         return ActionResult(magicHandler.onItemRightClick(hand), itemStack)
@@ -90,7 +90,7 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
     final override fun onUpdate(itemStack: ItemStack, world: World, entity: Entity, itemSlot: Int, isSelected: Boolean) {
         if (entity !is EntityPlayer) return // プレイヤー取得
         if (!isSelected && entity.heldItemOffhand != itemStack) return // アイテム取得
-        val fairyType = findFairy(itemStack, entity)?.second ?: ApiFairy.empty() // 妖精取得
+        val fairyType = findFairy(itemStack, entity)?.second ?: EMPTY_FAIRY // 妖精取得
 
         val magicHandler = getMagic().getMagicHandler(getMagicArguments(entity, itemStack, fairyType))
         magicHandler.onUpdate(itemSlot, isSelected)
@@ -104,7 +104,7 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
     final override fun hitEntity(itemStack: ItemStack, target: EntityLivingBase, attacker: EntityLivingBase): Boolean {
         super.hitEntity(itemStack, target, attacker)
         if (attacker !is EntityPlayer) return true // プレイヤー取得
-        val fairyType = findFairy(itemStack, attacker)?.second ?: ApiFairy.empty() // 妖精取得
+        val fairyType = findFairy(itemStack, attacker)?.second ?: EMPTY_FAIRY // 妖精取得
 
         val magicHandler = getMagic().getMagicHandler(getMagicArguments(attacker, itemStack, fairyType))
         magicHandler.hitEntity(target)

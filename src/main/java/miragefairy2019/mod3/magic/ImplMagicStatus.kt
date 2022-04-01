@@ -1,7 +1,9 @@
 package miragefairy2019.mod3.magic
 
 import miragefairy2019.api.Erg
+import miragefairy2019.api.IFairyType
 import miragefairy2019.api.Mana
+import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.get
 import miragefairy2019.libkt.bold
@@ -9,8 +11,6 @@ import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.withColor
-import miragefairy2019.lib.ApiFairy
-import miragefairy2019.api.IFairyType
 import miragefairy2019.mod3.magic.api.IMagicStatus
 import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
 import miragefairy2019.mod3.magic.api.IMagicStatusFunction
@@ -47,7 +47,7 @@ val <T> IMagicStatus<T>.displayName get() = textComponent { translate("mirageFai
 
 fun <T> IMagicStatus<T>.getDisplayValue(arguments: IMagicStatusFunctionArguments): ITextComponent = formatter.getDisplayValue(function, arguments)
 
-val <T> IMagicStatusFunction<T>.defaultValue: T get() = getValue(MagicStatusFunctionArguments({ 0 }, ApiFairy.empty()))
+val <T> IMagicStatusFunction<T>.defaultValue: T get() = getValue(MagicStatusFunctionArguments({ 0 }, EMPTY_FAIRY))
 
 val <T> IMagicStatusFunction<T>.factors
     get(): Iterable<ITextComponent> {

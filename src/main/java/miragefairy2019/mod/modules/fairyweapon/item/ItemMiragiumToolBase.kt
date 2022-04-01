@@ -1,16 +1,16 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.api.Erg
+import miragefairy2019.api.Mana
+import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.lib.ApiFairy
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.modules.fairyweapon.magic.EnumTargetExecutability
 import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.magic.UtilsMagic
-import miragefairy2019.api.Erg
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
-import miragefairy2019.api.Mana
 import miragefairy2019.mod3.skill.api.IMastery
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
@@ -49,7 +49,7 @@ abstract class ItemMiragiumToolBase(
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでブロックを破壊" // TODO translate
 
     override val magic = magic {
-        val fairyType = FairyWeaponUtils.findFairy(itemStack, player).orNull?.let { it.y!! } ?: ApiFairy.empty()!! // 妖精取得
+        val fairyType = FairyWeaponUtils.findFairy(itemStack, player).orNull?.let { it.y!! } ?: EMPTY_FAIRY // 妖精取得
         val selectorRayTrace = SelectorRayTrace(world, player, 0.0) // 視線判定
         if (fairyType.isEmpty) return@magic fail(selectorRayTrace.position, 0xFF00FF) // 妖精なし判定
         if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic fail(selectorRayTrace.position, 0xFF0000) // 材料なし判定
