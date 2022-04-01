@@ -1,7 +1,7 @@
-package miragefairy2019.mod3.damagesource
+package miragefairy2019.mod3.systems
 
+import miragefairy2019.api.ILootingDamageSource
 import miragefairy2019.libkt.module
-import miragefairy2019.mod3.damagesource.api.IDamageSourceLooting
 import mirrg.kotlin.atLeast
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.living.LootingLevelEvent
@@ -15,7 +15,7 @@ object DamageSource {
             MinecraftForge.EVENT_BUS.register(object : Any() {
                 @SubscribeEvent
                 fun accept(event: LootingLevelEvent) {
-                    val damageSource = event.damageSource as? IDamageSourceLooting ?: return
+                    val damageSource = event.damageSource as? ILootingDamageSource ?: return
                     event.lootingLevel = event.lootingLevel atLeast damageSource.lootingLevel
                 }
             })
