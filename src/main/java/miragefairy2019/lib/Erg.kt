@@ -2,7 +2,7 @@ package miragefairy2019.lib
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.ErgSet
-import miragefairy2019.libkt.color
+import miragefairy2019.libkt.setColor
 import miragefairy2019.libkt.textComponent
 import net.minecraft.util.text.TextFormatting
 
@@ -37,4 +37,4 @@ val Erg.textColor
         Erg.SENSE -> TextFormatting.GREEN
     }
 
-val Erg.displayName get() = let { ergType -> textComponent { translate("mirageFairy2019.erg.$ergType.name").color(textColor) } }
+val Erg.displayName get() = let { ergType -> textComponent { translate("mirageFairy2019.erg.$ergType.name").setColor(textColor) } }

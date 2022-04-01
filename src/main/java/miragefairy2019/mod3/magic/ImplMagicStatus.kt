@@ -5,8 +5,9 @@ import miragefairy2019.api.Mana
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.get
 import miragefairy2019.libkt.bold
-import miragefairy2019.libkt.color
+import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.gold
+import miragefairy2019.libkt.setColor
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod3.fairy.api.IFairyType
@@ -18,7 +19,6 @@ import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.displayName
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting
-import net.minecraft.util.text.TextFormatting.DARK_PURPLE
 import net.minecraft.util.text.TextFormatting.GREEN
 import net.minecraft.util.text.TextFormatting.RED
 
@@ -63,7 +63,7 @@ val <T> IMagicStatusFunction<T>.factors
                 return 0.0
             }
 
-            override fun getCost() = add(textComponent { translate("mirageFairy2019.formula.source.cost.name").color(DARK_PURPLE) }) // TODO 色変更
+            override fun getCost() = add(textComponent { translate("mirageFairy2019.formula.source.cost.name").darkPurple }) // TODO 色変更
             override fun getManaValue(mana: Mana) = add(mana.displayName)
             override fun getErgValue(erg: Erg) = add(erg.displayName)
         })
@@ -76,8 +76,8 @@ fun <T : Comparable<T>> IMagicStatusFormatter<T>.coloredBySign(colorPositive: Te
     val defaultValue = function.defaultValue
     val displayValue = this@coloredBySign.getDisplayValue(function, arguments)
     when {
-        value > defaultValue -> displayValue.color(colorPositive)
-        value < defaultValue -> displayValue.color(colorNegative)
+        value > defaultValue -> textComponent { (!displayValue).setColor(colorPositive) }
+        value < defaultValue -> textComponent { (!displayValue).setColor(colorNegative) }
         else -> displayValue
     }
 }
@@ -88,7 +88,7 @@ val <T : Comparable<T>> IMagicStatusFormatter<T>.negative get() = coloredBySign(
 fun IMagicStatusFormatter<Boolean>.boolean(isPositive: Boolean) = IMagicStatusFormatter<Boolean> { function, arguments ->
     val value = function.getValue(arguments)
     val displayValue = this@boolean.getDisplayValue(function, arguments)
-    displayValue.color(if (value xor !isPositive) GREEN else RED)
+    textComponent { (!displayValue).setColor(if (value xor !isPositive) GREEN else RED) }
 }
 
 val IMagicStatusFormatter<Boolean>.positiveBoolean get() = boolean(true)
@@ -103,8 +103,8 @@ fun <T : Comparable<T>> IMagicStatus<T>.ranged(min: T, max: T) = object : IMagic
         val displayValue = this@ranged.formatter.getDisplayValue(function, arguments)
         when (value) {
             defaultValue -> displayValue
-            min -> displayValue.bold
-            max -> displayValue.bold
+            min -> textComponent { (!displayValue).bold }
+            max -> textComponent { (!displayValue).bold }
             else -> displayValue
         }
     }

@@ -9,9 +9,11 @@ import miragefairy2019.lib.get
 import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.Complex
 import miragefairy2019.libkt.IRgb
-import miragefairy2019.libkt.color
 import miragefairy2019.libkt.drawTriangle
+import miragefairy2019.libkt.green
 import miragefairy2019.libkt.module
+import miragefairy2019.libkt.red
+import miragefairy2019.libkt.setColor
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
@@ -25,7 +27,6 @@ import net.minecraft.item.ItemFood
 import net.minecraft.network.NetHandlerPlayServer
 import net.minecraft.network.PacketBuffer
 import net.minecraft.util.text.ITextComponent
-import net.minecraft.util.text.TextFormatting
 import net.minecraftforge.client.event.RenderGameOverlayEvent
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent
@@ -114,20 +115,20 @@ object PlayerAura {
                                         !": ",
                                         format("%3.0f", before),
                                         when {
-                                            difference > 2 -> (!" +++++").color(TextFormatting.GREEN)
-                                            difference < -2 -> (!" -----").color(TextFormatting.RED)
-                                            difference > 1 -> (!" ++++").color(TextFormatting.GREEN)
-                                            difference < -1 -> (!" ----").color(TextFormatting.RED)
-                                            difference > 0.5 -> (!" +++").color(TextFormatting.GREEN)
-                                            difference < -0.5 -> (!" ---").color(TextFormatting.RED)
-                                            difference > 0.2 -> (!" ++").color(TextFormatting.GREEN)
-                                            difference < -0.2 -> (!" --").color(TextFormatting.RED)
-                                            difference > 0.1 -> (!" +").color(TextFormatting.GREEN)
-                                            difference < -0.1 -> (!" -").color(TextFormatting.RED)
+                                            difference > 2 -> (!" +++++").green
+                                            difference < -2 -> (!" -----").red
+                                            difference > 1 -> (!" ++++").green
+                                            difference < -1 -> (!" ----").red
+                                            difference > 0.5 -> (!" +++").green
+                                            difference < -0.5 -> (!" ---").red
+                                            difference > 0.2 -> (!" ++").green
+                                            difference < -0.2 -> (!" --").red
+                                            difference > 0.1 -> (!" +").green
+                                            difference < -0.1 -> (!" -").red
                                             else -> null
                                         }
-                                    )
-                                }.color(mana.textColor)
+                                    ).setColor(mana.textColor)
+                                }
                             }
                             event.toolTip.add(f1(Mana.SHINE).formattedText)
                             event.toolTip.add(f1(Mana.FIRE).formattedText)

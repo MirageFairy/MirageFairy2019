@@ -5,11 +5,17 @@ import miragefairy2019.lib.displayName
 import miragefairy2019.lib.entries
 import miragefairy2019.lib.get
 import miragefairy2019.lib.textColor
-import miragefairy2019.libkt.color
+import miragefairy2019.libkt.aqua
+import miragefairy2019.libkt.blue
+import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.gold
+import miragefairy2019.libkt.green
+import miragefairy2019.libkt.setColor
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
+import miragefairy2019.libkt.white
 import miragefairy2019.mod.api.fairy.IItemFairy
 import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.ItemMulti
@@ -23,8 +29,6 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.text.TextFormatting.AQUA
 import net.minecraft.util.text.TextFormatting.BLUE
 import net.minecraft.util.text.TextFormatting.DARK_GRAY
-import net.minecraft.util.text.TextFormatting.DARK_PURPLE
-import net.minecraft.util.text.TextFormatting.GOLD
 import net.minecraft.util.text.TextFormatting.GREEN
 import net.minecraft.util.text.TextFormatting.LIGHT_PURPLE
 import net.minecraft.util.text.TextFormatting.RED
@@ -56,7 +60,7 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
 
         // 番号　MOD名
         if (flag.isAdvanced) {
-            tooltip += formattedText { (!"No: ${variant.id} (${variant.type.motif?.resourceDomain ?: "unknown"})").color(GREEN) } // TODO translate
+            tooltip += formattedText { (!"No: ${variant.id} (${variant.type.motif?.resourceDomain ?: "unknown"})").green } // TODO translate
         }
 
         // レア　ランク　品種名
@@ -74,32 +78,32 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
 
             concatNotNull(
                 !"モチーフ: ", // TODO translate
-                (!"★".repeat(variant.rare)).color(GOLD),
+                (!"★".repeat(variant.rare)).gold,
                 if (flag.isAdvanced) {
-                    (!"★".repeat(variant.rank - 1)).color(getRankColor(variant))
+                    (!"★".repeat(variant.rank - 1)).setColor(getRankColor(variant))
                 } else {
-                    (!"★".repeat(variant.rank - 1)).color(GOLD)
+                    (!"★".repeat(variant.rank - 1)).gold
                 },
-                if (flag.isAdvanced) (!" レア度.${variant.rare}").color(GOLD) else null, // TODO translate
-                if (flag.isAdvanced) (!" ランク.${variant.rank}").color(getRankColor(variant)) else null, // TODO translate
-                (!" ${variant.type.motif?.resourcePath ?: "unknown"}").color(WHITE)
+                if (flag.isAdvanced) (!" レア度.${variant.rare}").gold else null, // TODO translate
+                if (flag.isAdvanced) (!" ランク.${variant.rank}").setColor(getRankColor(variant)) else null, // TODO translate
+                (!" ${variant.type.motif?.resourcePath ?: "unknown"}").white
             )
         }
 
         // マナ
-        tooltip += formattedText { (!"マナ: ").color(AQUA) } // TODO translate
+        tooltip += formattedText { (!"マナ: ").aqua } // TODO translate
         if (flag.isAdvanced) {
             fun f(mana: Mana) = textComponent {
                 val raw = variant.type.manaSet[mana] / (variant.type.cost / 50.0)
                 val normalized = variant.type.manaSet[mana]
-                (format("%.3f", raw) + !" [" + format("%.3f", normalized) + !"]").color(mana.textColor)
+                (format("%.3f", raw) + !" [" + format("%.3f", normalized) + !"]").setColor(mana.textColor)
             }
             tooltip += formattedText { !"        " + !f(Mana.SHINE) }
             tooltip += formattedText { !f(Mana.FIRE) + !"    " + !f(Mana.WIND) }
             tooltip += formattedText { !f(Mana.GAIA) + !"    " + !f(Mana.AQUA) }
             tooltip += formattedText { !"        " + !f(Mana.DARK) }
         } else {
-            fun f(mana: Mana) = textComponent { format("%4d", formatInt(variant.type.manaSet[mana] / (variant.type.cost / 50.0))).color(mana.textColor) }
+            fun f(mana: Mana) = textComponent { format("%4d", formatInt(variant.type.manaSet[mana] / (variant.type.cost / 50.0))).setColor(mana.textColor) }
             tooltip += formattedText { !"    " + !f(Mana.SHINE) }
             tooltip += formattedText { !f(Mana.FIRE) + !"    " + !f(Mana.WIND) }
             tooltip += formattedText { !f(Mana.GAIA) + !"    " + !f(Mana.AQUA) }
@@ -108,9 +112,9 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
 
         // コスト
         if (flag.isAdvanced) {
-            tooltip += formattedText { format("コスト: %.3f", variant.type.cost).color(DARK_PURPLE) } // TODO translate
+            tooltip += formattedText { format("コスト: %.3f", variant.type.cost).darkPurple } // TODO translate
         } else {
-            tooltip += formattedText { format("コスト: %.0f", variant.type.cost).color(DARK_PURPLE) } // TODO translate
+            tooltip += formattedText { format("コスト: %.0f", variant.type.cost).darkPurple } // TODO translate
         }
 
         // エルグ
@@ -130,14 +134,14 @@ class ItemFairy : ItemMulti<VariantFairy>(), IItemFairy {
                     }
                     .sandwich(!", ")
                     .flatten()
-            ).color(GREEN)
+            ).green
         }
 
         // 妖精武器のステータス
         Minecraft.getMinecraft().player?.let { player ->
             fun f(itemStackFairyWeapon: ItemStack) {
                 val item = itemStackFairyWeapon.item as? IItemFairyWeapon ?: return
-                tooltip += formattedText { (!"妖精武器: " + (!itemStackFairyWeapon.displayName).color(WHITE)).color(BLUE) } // TODO translate
+                tooltip += formattedText { (!"妖精武器: " + (!itemStackFairyWeapon.displayName).white).blue } // TODO translate
                 item.addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag)
             }
             f(player.getHeldItem(EnumHand.MAIN_HAND))

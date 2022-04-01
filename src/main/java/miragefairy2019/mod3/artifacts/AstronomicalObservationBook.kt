@@ -204,7 +204,7 @@ class ItemAstronomicalObservationBook : Item() {
         tooltip += formattedText { !"  " + translate("$prefix.daily") + !": " + !getDailyStatus(last, now).displayText + !" (" + translate("$prefix.message.remaining", (getLimitDaily(now) - now).displayText) + !")" }
         tooltip += formattedText { !"  " + translate("$prefix.weekly") + !": " + !getWeeklyStatus(last, now).displayText + !" (" + translate("$prefix.message.remaining", (getLimitWeekly(now) - now).displayText) + !")" }
         tooltip += formattedText { !"  " + translate("$prefix.monthly") + !": " + !getMonthlyStatus(last, now).displayText + !" (" + translate("$prefix.message.remaining", (getLimitMonthly(now) - now).displayText) + !")" }
-        tooltip += formattedText()
+        tooltip += formattedText { empty }
         tooltip += formattedText { translate("$prefix.usage").red }
     }
 }
