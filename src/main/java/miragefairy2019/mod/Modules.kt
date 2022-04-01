@@ -16,18 +16,20 @@ import miragefairy2019.mod3.skill.Skill
 import miragefairy2019.mod3.systems.Systems
 
 val modules = listOf(
-    Jei.module,
     Main.module,
+    Jei.module,
+
     PlayerAura.module,
     PlacedItem.module,
     Skill.module,
     Fairy.module,
     FairyWeapon.module,
     FairyRelation.module,
-    Artifacts.module,
-    Systems.module,
     DamageSource.module,
     Pick.module,
     FairyBox.module,
+
+    Artifacts.module,
+    Systems.module,
     Recipes.module
 )
