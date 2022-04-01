@@ -2,9 +2,7 @@ package miragefairy2019.mod3.fairy
 
 import miragefairy2019.lib.entries
 import miragefairy2019.libkt.module
-import miragefairy2019.libkt.orNull
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.api.IFairyItem
 import miragefairy2019.mod3.main.api.ApiMain.side
 import mirrg.boron.util.UtilsString
 import mirrg.kotlin.toUpperCamelCase
@@ -162,5 +160,3 @@ object Fairy {
 
     }
 }
-
-val ItemStack.fairyType get() = (item as? IFairyItem)?.getMirageFairy(this)?.orNull // TODO 移動

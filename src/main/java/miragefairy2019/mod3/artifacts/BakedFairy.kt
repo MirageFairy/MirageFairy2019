@@ -1,6 +1,8 @@
 package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.api.IFoodAuraItem
+import miragefairy2019.lib.div
+import miragefairy2019.lib.fairyType
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.ingredient
@@ -14,9 +16,7 @@ import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.fairy.Fairy
 import miragefairy2019.mod3.fairy.FairyTypes
-import miragefairy2019.mod3.fairy.fairyType
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.lib.div
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.color.IItemColor
