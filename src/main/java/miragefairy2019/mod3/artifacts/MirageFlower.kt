@@ -16,11 +16,11 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers
 import miragefairy2019.mod.lib.WorldGenBush
 import miragefairy2019.api.IFairyType
-import miragefairy2019.mod3.fairy.erg
+import miragefairy2019.lib.erg
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
-import miragefairy2019.mod3.fairy.shineEfficiency
+import miragefairy2019.lib.shineEfficiency
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.pick.PickHandler
 import miragefairy2019.mod3.pick.api.IPickHandler

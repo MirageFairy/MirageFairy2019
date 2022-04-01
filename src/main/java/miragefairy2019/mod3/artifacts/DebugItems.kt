@@ -19,8 +19,8 @@ import miragefairy2019.mod3.artifacts.oreseed.EnumVariantOreSeed
 import miragefairy2019.mod3.artifacts.oreseed.OreSeedDropEnvironment
 import miragefairy2019.mod3.fairy.ColorSet
 import miragefairy2019.mod3.fairy.FairyTypes
-import miragefairy2019.mod3.fairy.erg
-import miragefairy2019.mod3.fairy.mana
+import miragefairy2019.lib.erg
+import miragefairy2019.lib.mana
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill
