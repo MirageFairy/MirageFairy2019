@@ -1,7 +1,10 @@
 package miragefairy2019.mod3.fairy
 
+import miragefairy2019.api.ErgSet
 import miragefairy2019.api.IFairyItem
+import miragefairy2019.api.IFairyType
 import miragefairy2019.api.Mana
+import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.entries
 import miragefairy2019.lib.get
@@ -29,6 +32,8 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
+import net.minecraft.util.ResourceLocation
+import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting.AQUA
 import net.minecraft.util.text.TextFormatting.BLUE
 import net.minecraft.util.text.TextFormatting.DARK_GRAY
@@ -40,6 +45,26 @@ import net.minecraft.util.text.TextFormatting.YELLOW
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+
+class ColorSet(val skin: Int, val bright: Int, val dark: Int, val hair: Int)
+
+class FairyType(
+    private val motif: ResourceLocation?,
+    val parentFairy: () -> RankedFairyTypeBundle?,
+    private val displayName: ITextComponent,
+    private val color: Int,
+    private val cost: Double,
+    private val manaSet: ManaSet,
+    private val ergSet: ErgSet
+) : IFairyType {
+    override fun isEmpty() = false
+    override fun getMotif() = motif
+    override fun getDisplayName() = displayName
+    override fun getColor() = color
+    override fun getCost() = cost
+    override fun getManaSet() = manaSet
+    override fun getErgSet() = ergSet
+}
 
 class VariantFairy(val id: Int, val colorSet: ColorSet, val type: FairyType, val rare: Int, val rank: Int, val isDilutable: Boolean) : ItemVariant()
 

@@ -33,7 +33,6 @@ import miragefairy2019.mod3.artifacts.PlayerProxy
 import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer
-import miragefairy2019.mod3.fairy.FairyTypeAdapter
 import miragefairy2019.mod3.magic.MagicStatus
 import miragefairy2019.mod3.magic.MagicStatusFunctionArguments
 import miragefairy2019.mod3.magic.api.IMagicHandler
@@ -222,13 +221,20 @@ abstract class ItemFairyWeaponBase3(
 
 // Actual Fairy Type
 
-fun ItemFairyWeaponBase3.getActualFairyType(playerProxy: PlayerProxy, fairyTypePartner: IFairyType): IFairyType = object : FairyTypeAdapter(fairyTypePartner) {
+fun ItemFairyWeaponBase3.getActualFairyType(playerProxy: PlayerProxy, fairyTypePartner: IFairyType) = object : IFairyType {
+    override fun isEmpty() = fairyTypePartner.isEmpty
+    override fun getMotif() = fairyTypePartner.motif
+    override fun getDisplayName() = fairyTypePartner.displayName
+    override fun getColor() = fairyTypePartner.color
+    override fun getCost() = fairyTypePartner.cost
     override fun getManaSet(): ManaSet {
-        val a1 = parent.manaSet
-        val a2 = playerProxy.playerAuraHandler.playerAura * (parent.cost / 50.0)
+        val a1 = fairyTypePartner.manaSet
+        val a2 = playerProxy.playerAuraHandler.playerAura * (fairyTypePartner.cost / 50.0)
         val b1 = 0.001 * playerProxy.skillContainer.getSkillLevel(mastery)
         return (a1 + a2) * (1.0 + b1)
     }
+
+    override fun getErgSet() = fairyTypePartner.ergSet
 }
 
 
