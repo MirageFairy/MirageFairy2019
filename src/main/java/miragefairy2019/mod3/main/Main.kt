@@ -20,9 +20,9 @@ object Main {
 
     lateinit var simpleNetworkWrapper: SimpleNetworkWrapper
 
-    val guiHandlers = mutableMapOf<Int, IGuiHandler>()
+    private val guiHandlers = mutableMapOf<Int, IGuiHandler>()
     fun registerGuiHandler(id: Int, guiHandler: IGuiHandler) {
-        if (guiHandlers.containsKey(id)) throw RuntimeException("Duplicated GuiId: $id")
+        if (id in guiHandlers) throw RuntimeException("Duplicated GuiId: $id")
         guiHandlers[id] = guiHandler
     }
 
