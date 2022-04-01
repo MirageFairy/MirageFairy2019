@@ -103,8 +103,8 @@ object FairyWeapon {
                 item.tier = tier
             }
             onCreateItemStack {
-                if (parent != null) item.manualRepairIngredients += parent().manualRepairIngredients
-                manualRepairIngredientSuppliers.forEach { item.manualRepairIngredients += it() }
+                if (parent != null) item.manualRepairRequirements += parent().manualRepairRequirements
+                manualRepairIngredientSuppliers.forEach { item.manualRepairRequirements += it() }
                 oreNameList.forEach { OreDictionary.registerOre(it, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE)) }
             }
         }

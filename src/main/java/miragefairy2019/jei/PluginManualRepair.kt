@@ -10,13 +10,13 @@ import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
+import miragefairy2019.api.Erg
+import miragefairy2019.api.IManualRepairAcceptorItem
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.getSubItems
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod3.artifacts.get
 import miragefairy2019.mod3.artifacts.itemSpheres
-import miragefairy2019.api.Erg
-import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
 import net.minecraft.client.Minecraft
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
@@ -58,7 +58,7 @@ class PluginManualRepair : IModPlugin {
             CreativeTabs.CREATIVE_TAB_ARRAY.forEach { creativeTab ->
                 Item.REGISTRY.forEach { item ->
                     (item as Item/* これをしないと謎レシーバ解決不能がCI上で発生する */).getSubItems(creativeTab).forEach a@{ itemStack ->
-                        if (item !is IManualRepairableItem) return@a // 手入れ不可の場合無視
+                        if (item !is IManualRepairAcceptorItem) return@a // 手入れ不可の場合無視
                         if (!item.canManualRepair(itemStack)) return@a // 手入れ不可の場合無視
                         if (registered.any { ItemStack.areItemStacksEqualUsingNBTShareTag(itemStack, it) }) return@a // 既に登録済みなら無視
 
@@ -66,7 +66,7 @@ class PluginManualRepair : IModPlugin {
                         add(object : IRecipeWrapper {
                             override fun getIngredients(ingredients: IIngredients) {
                                 val inputTarget = listOf(listOf(itemStack))
-                                val inputSubstitute = registry.jeiHelpers.stackHelper.expandRecipeItemStackInputs(item.getManualRepairIngredients(itemStack))
+                                val inputSubstitute = registry.jeiHelpers.stackHelper.expandRecipeItemStackInputs(item.getManualRepairRequirements(itemStack))
                                 ingredients.setInputLists(VanillaTypes.ITEM, listOf(inputTarget, inputSubstitute).flatten())
                             }
 

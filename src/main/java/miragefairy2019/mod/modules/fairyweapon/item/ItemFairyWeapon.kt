@@ -4,7 +4,9 @@ import miragefairy2019.api.IFairyCombiningHandler
 import miragefairy2019.api.IFairyCombiningItem
 import miragefairy2019.api.IFairyItem
 import miragefairy2019.api.IFairyType
+import miragefairy2019.api.IManualRepairAcceptorItem
 import miragefairy2019.lib.EMPTY_FAIRY
+import miragefairy2019.lib.toNonNullList
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
@@ -22,7 +24,6 @@ import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
@@ -38,7 +39,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem, IItemFairyWeapon {
+open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairAcceptorItem, IItemFairyWeapon {
     var tier = 0
 
     init {
@@ -151,9 +152,9 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
 
 
     // 手入れ
-    val manualRepairIngredients = mutableListOf<Ingredient>()
+    val manualRepairRequirements = mutableListOf<Ingredient>()
     override fun canManualRepair(itemStack: ItemStack) = true
-    override fun getManualRepairIngredients(itemStack: ItemStack) = manualRepairIngredients
+    override fun getManualRepairRequirements(itemStack: ItemStack) = manualRepairRequirements.toNonNullList()
     override fun getManualRepairedItem(itemStack: ItemStack): ItemStack = itemStack.copy().also { it.itemDamage = 0 }
 
 

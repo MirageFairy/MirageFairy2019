@@ -1,8 +1,8 @@
 package miragefairy2019.mod3.manualrepair
 
+import miragefairy2019.api.IManualRepairAcceptorItem
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.manualrepair.api.IManualRepairableItem
 import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -28,7 +28,7 @@ class RecipeManualRepair : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         registryName = ResourceLocation(ModMirageFairy2019.MODID, "manual_repair")
     }
 
-    private class MatchResult(val itemTarget: IManualRepairableItem, val itemStackTarget: ItemStack, val slotIndexTarget: Int)
+    private class MatchResult(val itemTarget: IManualRepairAcceptorItem, val itemStackTarget: ItemStack, val slotIndexTarget: Int)
 
     private fun match(inventoryCrafting: InventoryCrafting): MatchResult? {
         val used = BooleanArray(inventoryCrafting.sizeInventory)
@@ -50,11 +50,11 @@ class RecipeManualRepair : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         // 妖精武器探索
         val matchResult = pull { i, itemStack ->
             val item: Item = itemStack.item
-            if (item is IManualRepairableItem && item.canManualRepair(itemStack)) MatchResult(item, itemStack, i) else null
+            if (item is IManualRepairAcceptorItem && item.canManualRepair(itemStack)) MatchResult(item, itemStack, i) else null
         } ?: return null
 
         // スフィア探索
-        val ingredientsSubstitutes = matchResult.itemTarget.getManualRepairIngredients(matchResult.itemStackTarget)
+        val ingredientsSubstitutes = matchResult.itemTarget.getManualRepairRequirements(matchResult.itemStackTarget)
         if (ingredientsSubstitutes.size == 0) return null
         ingredientsSubstitutes.forEach { ingredient -> pull { _, it -> if (ingredient.test(it)) true else null } ?: return null }
 
