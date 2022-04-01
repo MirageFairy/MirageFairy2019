@@ -112,7 +112,7 @@ public class FairyWeaponUtils {
     public static Optional<IFairyType> getFairy(ItemStack itemStack) {
         Item item = itemStack.getItem();
         if (!(item instanceof IFairyItem)) return Optional.empty();
-        return ((IFairyItem) item).getMirageFairy(itemStack);
+        return Optional.ofNullable(((IFairyItem) item).getMirageFairy(itemStack));
     }
 
     @Nonnull

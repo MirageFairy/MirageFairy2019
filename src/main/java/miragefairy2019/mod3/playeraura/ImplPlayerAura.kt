@@ -8,7 +8,6 @@ import miragefairy2019.lib.plus
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.api.IFairyItem
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
@@ -36,10 +35,6 @@ import java.io.File
 import java.util.ArrayDeque
 
 class PlayerAuraManager : IPlayerAuraManager {
-    companion object {
-        private fun getFairyType(itemStackFairy: ItemStack) = itemStackFairy.item.let { if (it is IFairyItem) it.getMirageFairy(itemStackFairy).get() else null }
-    }
-
     private val playerAuraModelClient = PlayerAuraModel()
 
     @SideOnly(Side.CLIENT)

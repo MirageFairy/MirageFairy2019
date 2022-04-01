@@ -1,7 +1,6 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.api.IFairyItem
-import miragefairy2019.api.IFairyType
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.entries
@@ -41,7 +40,6 @@ import net.minecraft.util.text.TextFormatting.YELLOW
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import java.util.Optional
 
 class VariantFairy(val id: Int, val colorSet: ColorSet, val type: FairyType, val rare: Int, val rank: Int, val isDilutable: Boolean) : ItemVariant()
 
@@ -50,10 +48,10 @@ val VariantFairy.level get() = rare + rank - 1
 fun hasSameId(a: VariantFairy, b: VariantFairy) = a.id == b.id
 
 class ItemFairy : ItemMulti<VariantFairy>(), IFairyItem {
-    override fun getMirageFairy(itemStack: ItemStack): Optional<IFairyType> = Optional.ofNullable(getVariant(itemStack)?.type)
-    override fun getItemStackDisplayName(itemStack: ItemStack): String = getMirageFairy(itemStack).map {
+    override fun getMirageFairy(itemStack: ItemStack) = getVariant(itemStack)?.type
+    override fun getItemStackDisplayName(itemStack: ItemStack): String = getMirageFairy(itemStack)?.let {
         translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText)
-    }.orElseGet { translateToLocal("$unlocalizedName.name") }
+    } ?: translateToLocal("$unlocalizedName.name")
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
