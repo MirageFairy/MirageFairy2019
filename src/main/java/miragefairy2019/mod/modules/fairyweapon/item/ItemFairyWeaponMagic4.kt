@@ -1,5 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.div
 import miragefairy2019.lib.get
@@ -21,7 +22,6 @@ import miragefairy2019.mod.modules.fairyweapon.findFairy
 import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer
-import miragefairy2019.api.Erg
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.fairy.erg
 import miragefairy2019.mod3.skill.EnumMastery
@@ -50,7 +50,7 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
         val player = Minecraft.getMinecraft().player ?: return
         magicStatusList.forEach {
             val magicArguments = getMagicArguments(player, itemStackFairyWeapon, fairyType)
-            tooltip += formattedText { (!it.displayName + !": " + (!it.getDisplayValue(magicArguments)).white + !" (" + it.factors.separate(!", ") + !")").blue }
+            tooltip += formattedText { (it.displayName() + ": "() + it.getDisplayValue(magicArguments)().white + " ("() + it.factors.separate(", "()) + ")"()).blue }
         }
     }
 

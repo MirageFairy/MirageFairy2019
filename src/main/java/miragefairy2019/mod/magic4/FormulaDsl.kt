@@ -74,7 +74,7 @@ val <T> MagicStatus<T>.factors: List<ITextComponent>
             override fun getRawErg(erg: Erg) = 0.0.also { factorList.add(erg.displayName) }
             override val cost get() = 0.0.also { factorList.add(textComponent { translate("mirageFairy2019.formula.source.cost.name").darkGray }) }
             override val color get() = 0x000000
-            override fun getSkillLevel(mastery: IMastery) = 0.also { factorList.add(textComponent { (!mastery.displayName).gold }) }
+            override fun getSkillLevel(mastery: IMastery) = 0.also { factorList.add(textComponent { mastery.displayName().gold }) }
         })
         return factorList.distinctBy { it.unformattedText }
     }

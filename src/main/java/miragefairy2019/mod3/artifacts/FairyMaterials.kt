@@ -275,7 +275,7 @@ class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
         }
 
         // Tier
-        tooltip += formattedText { (!"Tier ${variant.tier}").aqua }
+        tooltip += formattedText { "Tier ${variant.tier}"().aqua }
 
     }
 

@@ -2,8 +2,8 @@ package miragefairy2019.mod.magic4
 
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.red
-import miragefairy2019.libkt.withColor
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.libkt.withColor
 import miragefairy2019.mod.formula4.FormulaRendererSelector
 import miragefairy2019.mod.modules.fairyweapon.critical.CriticalRate
 import mirrg.kotlin.formatAs
@@ -23,22 +23,22 @@ private fun <T> FormulaRenderer<T>.map(function: FormulaRendererScope<T>.(ITextC
     override fun render(formulaArguments: FormulaArguments, formula: Formula<T>) = FormulaRendererScope(formulaArguments, formula).function(this@map.render(formulaArguments, formula))
 }
 
-val FormulaRendererSelector<Int>.integer get() = createSimpleFormulaRenderer { textComponent { !"$value" } }
-val FormulaRendererSelector<Double>.duration get() = createSimpleFormulaRenderer { textComponent { !(value / 20.0 formatAs "%.1f 秒") } } // TODO translate
-val FormulaRendererSelector<Double>.pitch get() = createSimpleFormulaRenderer { textComponent { !(log(value, 2.0) * 12 formatAs "%.2f") } } // TODO translate
-val FormulaRendererSelector<Double>.float0 get() = createSimpleFormulaRenderer { textComponent { !(value formatAs "%.0f") } }
-val FormulaRendererSelector<Double>.float1 get() = createSimpleFormulaRenderer { textComponent { !(value formatAs "%.1f") } }
-val FormulaRendererSelector<Double>.float2 get() = createSimpleFormulaRenderer { textComponent { !(value formatAs "%.2f") } }
-val FormulaRendererSelector<Double>.float3 get() = createSimpleFormulaRenderer { textComponent { !(value formatAs "%.3f") } }
-val FormulaRendererSelector<Double>.percent0 get() = createSimpleFormulaRenderer { textComponent { !(value * 100.0 formatAs "%.0f%%") } }
-val FormulaRendererSelector<Double>.percent1 get() = createSimpleFormulaRenderer { textComponent { !(value * 100.0 formatAs "%.1f%%") } }
-val FormulaRendererSelector<Double>.percent2 get() = createSimpleFormulaRenderer { textComponent { !(value * 100.0 formatAs "%.2f%%") } }
-val FormulaRendererSelector<Double>.percent3 get() = createSimpleFormulaRenderer { textComponent { !(value * 100.0 formatAs "%.3f%%") } }
-val FormulaRendererSelector<Boolean>.boolean get() = createSimpleFormulaRenderer { textComponent { if (value) !"Yes" else !"No" } }
-val FormulaRendererSelector<CriticalRate>.criticalRate get() = createSimpleFormulaRenderer { textComponent { value.bar.flatMap { (!"|").withColor(it.color) } + !(value.mean formatAs " (%.2f)") } }
+val FormulaRendererSelector<Int>.integer get() = createSimpleFormulaRenderer { textComponent { "$value"() } }
+val FormulaRendererSelector<Double>.duration get() = createSimpleFormulaRenderer { textComponent { (value / 20.0 formatAs "%.1f 秒")() } } // TODO translate
+val FormulaRendererSelector<Double>.pitch get() = createSimpleFormulaRenderer { textComponent { (log(value, 2.0) * 12 formatAs "%.2f")() } } // TODO translate
+val FormulaRendererSelector<Double>.float0 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.0f")() } }
+val FormulaRendererSelector<Double>.float1 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.1f")() } }
+val FormulaRendererSelector<Double>.float2 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.2f")() } }
+val FormulaRendererSelector<Double>.float3 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.3f")() } }
+val FormulaRendererSelector<Double>.percent0 get() = createSimpleFormulaRenderer { textComponent { (value * 100.0 formatAs "%.0f%%")() } }
+val FormulaRendererSelector<Double>.percent1 get() = createSimpleFormulaRenderer { textComponent { (value * 100.0 formatAs "%.1f%%")() } }
+val FormulaRendererSelector<Double>.percent2 get() = createSimpleFormulaRenderer { textComponent { (value * 100.0 formatAs "%.2f%%")() } }
+val FormulaRendererSelector<Double>.percent3 get() = createSimpleFormulaRenderer { textComponent { (value * 100.0 formatAs "%.3f%%")() } }
+val FormulaRendererSelector<Boolean>.boolean get() = createSimpleFormulaRenderer { textComponent { if (value) "Yes"() else "No"() } }
+val FormulaRendererSelector<CriticalRate>.criticalRate get() = createSimpleFormulaRenderer { textComponent { value.bar.flatMap { "|"().withColor(it.color) } + (value.mean formatAs " (%.2f)")() } }
 
-fun <T> FormulaRenderer<T>.prefix(string: String) = map { textComponent { !string + !it } }
-fun <T> FormulaRenderer<T>.suffix(string: String) = map { textComponent { !it + !string } }
+fun <T> FormulaRenderer<T>.prefix(string: String) = map { textComponent { string() + it() } }
+fun <T> FormulaRenderer<T>.suffix(string: String) = map { textComponent { it() + string() } }
 
-val FormulaRenderer<Boolean>.positive get() = map { textComponent { if (value) (!it).green else (!it).red } }
-val FormulaRenderer<Boolean>.negative get() = map { textComponent { if (value) (!it).red else (!it).green } }
+val FormulaRenderer<Boolean>.positive get() = map { textComponent { if (value) it().green else it().red } }
+val FormulaRenderer<Boolean>.negative get() = map { textComponent { if (value) it().red else it().green } }

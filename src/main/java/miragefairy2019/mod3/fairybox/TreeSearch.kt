@@ -6,8 +6,8 @@ import miragefairy2019.mod3.fairybox.TreeCompileException
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-class PartiallyUnloadedException : TreeCompileException(textComponent { (!"構造物の一部がロード範囲外にあります").darkRed }) // TODO translate
-class TooLargeTreeException : TreeCompileException(textComponent { (!"構造物が大きすぎます").darkRed }) // TODO translate
+class PartiallyUnloadedException : TreeCompileException(textComponent { "構造物の一部がロード範囲外にあります"().darkRed }) // TODO translate
+class TooLargeTreeException : TreeCompileException(textComponent { "構造物が大きすぎます"().darkRed }) // TODO translate
 
 /**
  * @return [startBlockPosList]に含まれる要素を含まない、探索された返却要素のリスト

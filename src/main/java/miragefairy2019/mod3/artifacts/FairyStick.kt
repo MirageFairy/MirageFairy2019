@@ -115,10 +115,10 @@ class ItemFairyStick : Item(), IFairyStickCraftItem {
         }
 
         // 機能
-        tooltip += formattedText { (!"右クリックでフェアリーステッキクラフト").red } // TODO translate
+        tooltip += formattedText { "右クリックでフェアリーステッキクラフト"().red } // TODO translate
 
-        tooltip += formattedText { (!"スキル: " + !EnumMastery.processing.displayName + !" (${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(EnumMastery.processing)})").gold } // TODO translate
-        tooltip += formattedText { (!"クールタイム: ${getCoolTime(player) / 20.0 formatAs "%.2f"} 秒").blue } // TODO translate
+        tooltip += formattedText { ("スキル: "() + EnumMastery.processing.displayName() + " (${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(EnumMastery.processing)})"()).gold } // TODO translate
+        tooltip += formattedText { "クールタイム: ${getCoolTime(player) / 20.0 formatAs "%.2f"} 秒"().blue } // TODO translate
 
     }
 

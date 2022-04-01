@@ -7,8 +7,8 @@ import miragefairy2019.lib.get
 import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.gold
-import miragefairy2019.libkt.withColor
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.libkt.withColor
 import miragefairy2019.mod.api.fairy.ApiFairy
 import miragefairy2019.mod3.fairy.api.IFairyType
 import miragefairy2019.mod3.magic.api.IMagicStatus
@@ -54,7 +54,7 @@ val <T> IMagicStatusFunction<T>.factors
         val factors = mutableListOf<ITextComponent>()
         getValue(object : IMagicStatusFunctionArguments {
             override fun getSkillLevel(mastery: IMastery): Int {
-                factors.add(textComponent { (!mastery.displayName).gold })
+                factors.add(textComponent { mastery.displayName().gold })
                 return 0
             }
 
@@ -76,8 +76,8 @@ fun <T : Comparable<T>> IMagicStatusFormatter<T>.coloredBySign(colorPositive: Te
     val defaultValue = function.defaultValue
     val displayValue = this@coloredBySign.getDisplayValue(function, arguments)
     when {
-        value > defaultValue -> textComponent { (!displayValue).withColor(colorPositive) }
-        value < defaultValue -> textComponent { (!displayValue).withColor(colorNegative) }
+        value > defaultValue -> textComponent { displayValue().withColor(colorPositive) }
+        value < defaultValue -> textComponent { displayValue().withColor(colorNegative) }
         else -> displayValue
     }
 }
@@ -88,7 +88,7 @@ val <T : Comparable<T>> IMagicStatusFormatter<T>.negative get() = coloredBySign(
 fun IMagicStatusFormatter<Boolean>.boolean(isPositive: Boolean) = IMagicStatusFormatter<Boolean> { function, arguments ->
     val value = function.getValue(arguments)
     val displayValue = this@boolean.getDisplayValue(function, arguments)
-    textComponent { (!displayValue).withColor(if (value xor !isPositive) GREEN else RED) }
+    textComponent { displayValue().withColor(if (value xor !isPositive) GREEN else RED) }
 }
 
 val IMagicStatusFormatter<Boolean>.positiveBoolean get() = boolean(true)
@@ -103,8 +103,8 @@ fun <T : Comparable<T>> IMagicStatus<T>.ranged(min: T, max: T) = object : IMagic
         val displayValue = this@ranged.formatter.getDisplayValue(function, arguments)
         when (value) {
             defaultValue -> displayValue
-            min -> textComponent { (!displayValue).bold }
-            max -> textComponent { (!displayValue).bold }
+            min -> textComponent { displayValue().bold }
+            max -> textComponent { displayValue().bold }
             else -> displayValue
         }
     }

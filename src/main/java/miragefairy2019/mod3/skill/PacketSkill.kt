@@ -38,7 +38,7 @@ class PacketTrainMastery : IMessageHandler<MessageTrainMastery, IMessage> {
             if (skillContainer.remainingSkillPoints > 0) {
                 skillContainer.setMasteryLevel(mastery.name, skillContainer.getMasteryLevel(mastery.name) + 1)
                 skillContainer.send(player)
-                player.sendStatusMessage(textComponent { (!mastery.displayName).gold + !" のレベルが 1 上がった！" }, false) // TODO translate
+                player.sendStatusMessage(textComponent { mastery.displayName().gold + " のレベルが 1 上がった！"() }, false) // TODO translate
                 player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_SLIME_JUMP, SoundCategory.PLAYERS, 0.75f, 1.2f)
             }
         }
@@ -71,7 +71,7 @@ class PacketResetMastery : IMessageHandler<MessageResetMastery, IMessage> {
                 skillContainer.variables.lastMasteryResetTime = now
                 skillContainer.masteryList.forEach { skillContainer.setMasteryLevel(it, 0) }
                 skillContainer.send(player)
-                player.sendStatusMessage(textComponent { !"すべてのマスタリレベルをリセットしました。" }, false) // TODO translate
+                player.sendStatusMessage(textComponent { "すべてのマスタリレベルをリセットしました。"() }, false) // TODO translate
                 player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 0.75f, 0.5f)
             }
         }

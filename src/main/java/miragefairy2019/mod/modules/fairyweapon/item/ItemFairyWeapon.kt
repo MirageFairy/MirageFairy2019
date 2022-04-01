@@ -75,29 +75,29 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairableItem,
 
         if (canTranslate("$unlocalizedName.poem")) { // ポエム
             val string = translateToLocal("$unlocalizedName.poem")
-            if (string.isNotBlank()) tooltip += formattedText { !string }
+            if (string.isNotBlank()) tooltip += formattedText { string() }
         }
 
         if (canTranslate("$unlocalizedName.author")) { // 著者
             val string = translateToLocal("$unlocalizedName.author")
-            if (string.isNotBlank()) tooltip += formattedText { (!"作者: $string").lightPurple } // TODO translate Author
+            if (string.isNotBlank()) tooltip += formattedText { "作者: $string"().lightPurple } // TODO translate Author
         }
 
-        tooltip += formattedText { (!"Tier $tier").aqua } // tier // TODO translate
+        tooltip += formattedText { "Tier $tier"().aqua } // tier // TODO translate
 
         // 機能
-        if (mirageFairyCombiningHandler.canCombine(itemStack)) tooltip += formattedText { (!"クラフトで妖精を搭乗可能").red } // TODO translate Can be combined with fairy by crafting
-        if (mirageFairyCombiningHandler.canUncombine(itemStack)) tooltip += formattedText { (!"クラフトで妖精を分離可能").red } // TODO translate
-        if (canManualRepair(itemStack)) tooltip += formattedText { (!"手入れ可能").red } // TODO translate Can be repaired by crafting with contained sphere
-        getMagicDescription(itemStack)?.let { tooltip += formattedText { (!it).red } } // 魔法
+        if (mirageFairyCombiningHandler.canCombine(itemStack)) tooltip += formattedText { "クラフトで妖精を搭乗可能"().red } // TODO translate Can be combined with fairy by crafting
+        if (mirageFairyCombiningHandler.canUncombine(itemStack)) tooltip += formattedText { "クラフトで妖精を分離可能"().red } // TODO translate
+        if (canManualRepair(itemStack)) tooltip += formattedText { "手入れ可能"().red } // TODO translate Can be repaired by crafting with contained sphere
+        getMagicDescription(itemStack)?.let { tooltip += formattedText { it().red } } // 魔法
 
-        tooltip += formattedText { (!"耐久値: ${(getMaxDamage(itemStack) - getDamage(itemStack)).coerceAtLeast(0)} / ${getMaxDamage(itemStack)}").green } // 耐久値 TODO translate
+        tooltip += formattedText { "耐久値: ${(getMaxDamage(itemStack) - getDamage(itemStack)).coerceAtLeast(0)} / ${getMaxDamage(itemStack)}"().green } // 耐久値 TODO translate
 
-        FairyWeaponUtils.getCombinedFairy(itemStack).orNull?.let { tooltip += formattedText { (!"搭乗中: ${it.displayName}").aqua } } // 搭乗中の妖精 // TODO translate
+        FairyWeaponUtils.getCombinedFairy(itemStack).orNull?.let { tooltip += formattedText { "搭乗中: ${it.displayName}"().aqua } } // 搭乗中の妖精 // TODO translate
 
         // 妖精魔法ステータス
         val fairy = Minecraft.getMinecraft().player?.let { FairyWeaponUtils.findFairy(itemStack, it).orNull?.let { t -> Pair(t.x!!, t.y!!) } } ?: Pair(EMPTY_ITEM_STACK, ApiFairy.empty()!!)
-        tooltip += formattedText { (!"パートナー: " + (if (fairy.first.isEmpty) !"-" else !fairy.first.displayName).white).blue } // TODO translate
+        tooltip += formattedText { ("パートナー: "() + (if (fairy.first.isEmpty) "-"() else fairy.first.displayName()).white).blue } // TODO translate
         addInformationFairyWeapon(itemStack, fairy.first, fairy.second, world, tooltip, flag)
 
     }

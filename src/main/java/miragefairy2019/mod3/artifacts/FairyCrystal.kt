@@ -191,14 +191,14 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
 
             fun send(textComponent: ITextComponent) = player.sendStatusMessage(textComponent, false)
 
-            send(textComponent { !"===== " + !crystalItemStack.displayName + !" (${if (world.isRemote) "Client" else "Server"}) =====" })
+            send(textComponent { "===== "() + crystalItemStack.displayName() + " (${if (world.isRemote) "Client" else "Server"}) ====="() })
 
             val totalWeight = dropTable.totalWeight
             dropTable.sortedBy { it.item.displayName }.sortedBy { it.weight }.forEach { weightedItem ->
-                send(textComponent { !"${weightedItem.weight / totalWeight * 100.0 formatAs "%f%%"}: " + !weightedItem.item.displayName })
+                send(textComponent { "${weightedItem.weight / totalWeight * 100.0 formatAs "%f%%"}: "() + weightedItem.item.displayName() })
             }
 
-            send(textComponent { !"====================" })
+            send(textComponent { "===================="() })
 
             return EnumActionResult.SUCCESS
         }
@@ -245,10 +245,10 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
         val variant = getVariant(itemStack) ?: return
         val mastery = EnumMastery.fairySummoning
         val skillContainer = ApiSkill.skillManager.clientSkillContainer
-        tooltip += formattedText { (!"スキル: " + !mastery.displayName + !" (${skillContainer.getSkillLevel(mastery)})").gold } // TODO translate
-        tooltip += formattedText { (!"ランク: ${variant.dropRank + 1}").blue } // TODO translate
-        tooltip += formattedText { (!"コモン判定ブースト: ${variant.getRateBoost(DropCategory.COMMON, skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
-        tooltip += formattedText { (!"レア判定ブースト: ${variant.getRateBoost(DropCategory.RARE, skillContainer) * 100.0 formatAs "%.2f%%"}").blue } // TODO translate
+        tooltip += formattedText { ("スキル: "() + mastery.displayName() + " (${skillContainer.getSkillLevel(mastery)})"()).gold } // TODO translate
+        tooltip += formattedText { "ランク: ${variant.dropRank + 1}"().blue } // TODO translate
+        tooltip += formattedText { "コモン判定ブースト: ${variant.getRateBoost(DropCategory.COMMON, skillContainer) * 100.0 formatAs "%.2f%%"}"().blue } // TODO translate
+        tooltip += formattedText { "レア判定ブースト: ${variant.getRateBoost(DropCategory.RARE, skillContainer) * 100.0 formatAs "%.2f%%"}"().blue } // TODO translate
     }
 }
 

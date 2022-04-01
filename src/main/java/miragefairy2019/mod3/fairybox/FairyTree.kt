@@ -12,7 +12,7 @@ import net.minecraft.world.World
 
 // Compile
 
-class MultipleFairyBoxException : TreeCompileException(textComponent { (!"栄養の取り合いになっています").darkRed }) // TODO translate
+class MultipleFairyBoxException : TreeCompileException(textComponent { "栄養の取り合いになっています"().darkRed }) // TODO translate
 
 data class Leaves(
     /**

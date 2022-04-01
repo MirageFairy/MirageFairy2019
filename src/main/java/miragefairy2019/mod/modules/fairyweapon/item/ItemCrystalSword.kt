@@ -1,6 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
 import com.google.common.collect.Multimap
+import miragefairy2019.api.Mana
 import miragefairy2019.libkt.WeightedItem
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.getRandomItem
@@ -13,7 +14,6 @@ import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
-import miragefairy2019.api.Mana
 import miragefairy2019.mod3.skill.EnumMastery
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes
@@ -48,7 +48,7 @@ class ItemCrystalSword : ItemFairyWeaponBase3(Mana.GAIA, EnumMastery.closeCombat
 
                 // クリスタルがないと失敗
                 val itemStackFuel = findItem(player) { OreIngredient("mirageFairyCrystal").test(it) } ?: run {
-                    player.sendStatusMessage(textComponent { (!"フェアリークリスタルが足りません！").red }, true) // TODO translate
+                    player.sendStatusMessage(textComponent { "フェアリークリスタルが足りません！"().red }, true) // TODO translate
                     return
                 }
 
@@ -65,7 +65,7 @@ class ItemCrystalSword : ItemFairyWeaponBase3(Mana.GAIA, EnumMastery.closeCombat
                     // 効果成立
 
                     itemStackFuel.shrink(1) // クリスタル消費
-                    if (itemStackFuel.isEmpty) player.sendStatusMessage(textComponent { (!"フェアリークリスタルを使い切りました！").red }, true) // TODO translate
+                    if (itemStackFuel.isEmpty) player.sendStatusMessage(textComponent { "フェアリークリスタルを使い切りました！"().red }, true) // TODO translate
                     dropFairy.main.createItemStack().drop(world, target.positionVector).setPickupDelay(20) // ドロップする
                     playSound(world, player, SoundEvents.BLOCK_ANVIL_PLACE, 0.5f, 1.5f) // エフェクト
 

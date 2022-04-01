@@ -1,5 +1,8 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.api.Erg
+import miragefairy2019.api.Mana
+import miragefairy2019.lib.sum
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.hex
 import miragefairy2019.libkt.item
@@ -13,14 +16,11 @@ import miragefairy2019.mod3.artifacts.oreseed.ApiOreSeedDrop
 import miragefairy2019.mod3.artifacts.oreseed.EnumOreSeedType
 import miragefairy2019.mod3.artifacts.oreseed.EnumVariantOreSeed
 import miragefairy2019.mod3.artifacts.oreseed.OreSeedDropEnvironment
-import miragefairy2019.api.Erg
 import miragefairy2019.mod3.fairy.ColorSet
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.mod3.fairy.erg
 import miragefairy2019.mod3.fairy.mana
 import miragefairy2019.mod3.main.api.ApiMain
-import miragefairy2019.api.Mana
-import miragefairy2019.lib.sum
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill
 import mirrg.kotlin.formatAs
@@ -73,7 +73,7 @@ private val Double.f3 get() = this formatAs "%.3f"
 
 private fun writeAction(player: EntityPlayer, fileName: String, text: String) {
     val file = File("debug").resolve(fileName)
-    player.sendStatusMessage(textComponent { !"Saved to " + !file }, false)
+    player.sendStatusMessage(textComponent { "Saved to "() + file() }, false)
     file.parentFile.mkdirs()
     file.writeText(text)
 }
@@ -158,7 +158,7 @@ class ItemDebugSkillResetUnlock : ItemDebug() {
         val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
         skillContainer.variables.lastMasteryResetTime = null
         if (player is EntityPlayerMP) skillContainer.send(player)
-        player.sendStatusMessage(textComponent { !"スキルポイント初期化が可能になりました" }, true) // TODO translate
+        player.sendStatusMessage(textComponent { "スキルポイント初期化が可能になりました"() }, true) // TODO translate
         return EnumActionResult.SUCCESS
     }
 }
@@ -170,7 +170,7 @@ class ItemDebugPlayerAuraReset : ItemDebug() {
         val playerAuraHandler = ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(player)
         playerAuraHandler.onReset()
         playerAuraHandler.send()
-        player.sendStatusMessage(textComponent { !"プレイヤーオーラをリセットしました" }, true) // TODO translate
+        player.sendStatusMessage(textComponent { "プレイヤーオーラをリセットしました"() }, true) // TODO translate
         return EnumActionResult.SUCCESS
     }
 }
@@ -218,11 +218,11 @@ class ItemDebugOreSeedStatistics : ItemDebug() {
         }
 
         // 鉱石生成確率表示
-        player.sendStatusMessage(textComponent { !"===== Ore Seed | Chunk: (${chunkX - 4}, ${chunkZ - 4}) .. (${chunkX + 4}, ${chunkZ + 4}) =====" }, false)
+        player.sendStatusMessage(textComponent { "===== Ore Seed | Chunk: (${chunkX - 4}, ${chunkZ - 4}) .. (${chunkX + 4}, ${chunkZ + 4}) ====="() }, false)
         map.entries.sortedBy { it.key.block.getMetaFromState(it.key) }.sortedBy { Block.getIdFromBlock(it.key.block) }.forEach {
-            player.sendStatusMessage(textComponent { !"${it.key}: ${it.value}" }, false)
+            player.sendStatusMessage(textComponent { "${it.key}: ${it.value}"() }, false)
         }
-        player.sendStatusMessage(textComponent { !"====================" }, false)
+        player.sendStatusMessage(textComponent { "===================="() }, false)
 
         return EnumActionResult.SUCCESS
     }
@@ -239,14 +239,14 @@ class ItemDebugOreSeedDropRate : ItemDebug() {
         }
 
         // 鉱石生成確率表示
-        player.sendStatusMessage(textComponent { !"===== Ore List ($type) =====" }, false)
+        player.sendStatusMessage(textComponent { "===== Ore List ($type) ====="() }, false)
         EnumVariantOreSeed.values().forEach { variant ->
-            player.sendStatusMessage(textComponent { !"----- ${variant.name} -----" }, false)
+            player.sendStatusMessage(textComponent { "----- ${variant.name} -----"() }, false)
             ApiOreSeedDrop.oreSeedDropRegistry.getDropList(OreSeedDropEnvironment(type, variant.shape, world, blockPos)).forEach {
-                player.sendStatusMessage(textComponent { !it.weight.f3 + !": " + !it.item().block.getItem(world, blockPos, it.item()).displayName }, false)
+                player.sendStatusMessage(textComponent { it.weight.f3() + ": "() + it.item().block.getItem(world, blockPos, it.item()).displayName() }, false)
             }
         }
-        player.sendStatusMessage(textComponent { !"====================" }, false)
+        player.sendStatusMessage(textComponent { "===================="() }, false)
 
         return EnumActionResult.SUCCESS
     }
@@ -256,11 +256,11 @@ class ItemDebugMirageFlowerGrowthRateList : ItemDebug() {
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
-        player.sendStatusMessage(textComponent { !"===== Mirage Flower Grow Rate Table =====" }, false)
+        player.sendStatusMessage(textComponent { "===== Mirage Flower Grow Rate Table ====="() }, false)
         FairyTypes.instance.variants.map { it.bundle.main.type }.map { Pair(it, getGrowthRateInFloor(it)) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
-            player.sendStatusMessage(textComponent { !((it.second * 100) formatAs "%7.2f%%  ") + !it.first.displayName }, false)
+            player.sendStatusMessage(textComponent { ((it.second * 100) formatAs "%7.2f%%  ")() + it.first.displayName() }, false)
         }
-        player.sendStatusMessage(textComponent { !"====================" }, false)
+        player.sendStatusMessage(textComponent { "===================="() }, false)
 
         return EnumActionResult.SUCCESS
     }
@@ -271,16 +271,16 @@ class ItemDebugMirageFlowerGrowthRate : ItemDebug() {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
         val airBlockPos = if (world.getBlockState(blockPos).isFullBlock) blockPos.up() else blockPos
-        player.sendStatusMessage(textComponent { !"===== Mirage Flower Grow Rate =====" }, false)
-        player.sendStatusMessage(textComponent { !"Pos: ${airBlockPos.x} ${airBlockPos.y} ${airBlockPos.z}" }, false)
-        player.sendStatusMessage(textComponent { !"Block: ${world.getBlockState(airBlockPos)}" }, false)
-        player.sendStatusMessage(textComponent { !"Floor: ${world.getBlockState(airBlockPos.down())}" }, false)
+        player.sendStatusMessage(textComponent { "===== Mirage Flower Grow Rate ====="() }, false)
+        player.sendStatusMessage(textComponent { "Pos: ${airBlockPos.x} ${airBlockPos.y} ${airBlockPos.z}"() }, false)
+        player.sendStatusMessage(textComponent { "Block: ${world.getBlockState(airBlockPos)}"() }, false)
+        player.sendStatusMessage(textComponent { "Floor: ${world.getBlockState(airBlockPos.down())}"() }, false)
         val result = calculateGrowthRate(world, airBlockPos)
-        player.sendStatusMessage(textComponent { !"Growth Rate: " + !(result.growthRate * 100).f3 + !"%" }, false)
+        player.sendStatusMessage(textComponent { "Growth Rate: "() + (result.growthRate * 100).f3() + "%"() }, false)
         result.forEach { (key, value) ->
-            player.sendStatusMessage(textComponent { !"  $key: " + !(value * 100).f3 + !"%" }, false)
+            player.sendStatusMessage(textComponent { "  $key: "() + (value * 100).f3() + "%"() }, false)
         }
-        player.sendStatusMessage(textComponent { !"====================" }, false)
+        player.sendStatusMessage(textComponent { "===================="() }, false)
 
         return EnumActionResult.SUCCESS
     }

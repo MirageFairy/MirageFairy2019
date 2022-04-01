@@ -44,21 +44,21 @@ val List<ITextComponent>.underline get() = withUnderline(true)
 val List<ITextComponent>.italic get() = withItalic(true)
 
 // 新DSL
-class TextComponentScope { // TODO -> object
+object TextComponentScope {
     val empty get() = listOf<ITextComponent>()
-    operator fun ITextComponent.not() = listOf(this) // TODO !_ -> _()
-    operator fun String.not() = !TextComponentString(this) // TODO !_ -> _()
-    operator fun File.not() = (!name) // TODO !_ -> _()
-        .withHoverEvent(HoverEvent(HoverEvent.Action.SHOW_TEXT, textComponent { !absoluteFile.canonicalPath }))
+    operator fun ITextComponent.invoke() = listOf(this)
+    operator fun String.invoke() = TextComponentString(this)()
+    operator fun File.invoke() = name()
+        .withHoverEvent(HoverEvent(HoverEvent.Action.SHOW_TEXT, textComponent { absoluteFile.canonicalPath() }))
         .withClickEvent(ClickEvent(ClickEvent.Action.OPEN_FILE, absoluteFile.canonicalPath)).underline
 
-    fun format(format: String, vararg args: Any?) = !String.format(format, *args)
-    fun translate(translationKey: String, vararg args: Any?) = !TextComponentTranslation(translationKey, *args)
+    fun format(format: String, vararg args: Any?) = String.format(format, *args)()
+    fun translate(translationKey: String, vararg args: Any?) = TextComponentTranslation(translationKey, *args)()
 }
 
 // List<ITextComponent>のITextComponent化
 fun List<ITextComponent>.toTextComponent(): ITextComponent = this.fold(TextComponentString("") as ITextComponent) { a, b -> a.appendSibling(b) }
 
 // DSLエントリポイント
-inline fun textComponent(block: TextComponentScope.() -> List<ITextComponent>) = TextComponentScope().block().toTextComponent()
+inline fun textComponent(block: TextComponentScope.() -> List<ITextComponent>) = TextComponentScope.block().toTextComponent()
 inline fun formattedText(block: TextComponentScope.() -> List<ITextComponent>): String = textComponent(block).formattedText

@@ -109,7 +109,7 @@ abstract class ItemFairyWeaponBase3(
             val percent1 get() = f<Double> { textComponent { format("%.1f%%", it * 100) } }
             val percent2 get() = f<Double> { textComponent { format("%.2f%%", it * 100) } }
             val percent3 get() = f<Double> { textComponent { format("%.3f%%", it * 100) } }
-            val boolean get() = f<Boolean> { textComponent { if (it) !"Yes" else !"No" } }
+            val boolean get() = f<Boolean> { textComponent { if (it) "Yes"() else "No"() } }
             val tick get() = f<Double> { textComponent { format("%.2f sec", it / 20.0) } }
         }
 
@@ -166,13 +166,13 @@ abstract class ItemFairyWeaponBase3(
             if (show) {
                 tooltip += formattedText {
                     fun <T> TextComponentScope.f(magicStatus: IMagicStatus<T>): List<ITextComponent> {
-                        val list = magicStatus.function.factors.map { !it }.sandwich { !", " }.flatten()
-                        return if (list.isNotEmpty()) !" (" + list + !")" else empty
+                        val list = magicStatus.function.factors.map { it() }.sandwich { ", "() }.flatten()
+                        return if (list.isNotEmpty()) " ("() + list + ")"() else empty
                     }
                     concat(
-                        !it.displayName,
-                        !": ",
-                        (!it.getDisplayValue(MagicStatusFunctionArguments({ ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it) }, actualFairyType))).white,
+                        it.displayName(),
+                        ": "(),
+                        it.getDisplayValue(MagicStatusFunctionArguments({ ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it) }, actualFairyType))().white,
                         f(it)
                     ).blue
                 }

@@ -13,10 +13,10 @@ import miragefairy2019.libkt.drawTriangle
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.red
-import miragefairy2019.libkt.withColor
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
+import miragefairy2019.libkt.withColor
 import miragefairy2019.mod3.main.api.ApiMain
 import miragefairy2019.mod3.main.api.ApiMain.logger
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
@@ -102,7 +102,7 @@ object PlayerAura {
 
                             // 栄養素表示
                             event.toolTip.add(textComponent {
-                                translate("miragefairy2019.gui.playerAura.title") + !":"
+                                translate("miragefairy2019.gui.playerAura.title") + ":"()
                             }.formattedText)
                             fun f1(mana: Mana): ITextComponent {
                                 val before = auraBefore[mana]
@@ -110,21 +110,21 @@ object PlayerAura {
                                 val difference = after - before
                                 return textComponent {
                                     concatNotNull(
-                                        !"  ",
-                                        !mana.displayName,
-                                        !": ",
+                                        "  "(),
+                                        mana.displayName(),
+                                        ": "(),
                                         format("%3.0f", before),
                                         when {
-                                            difference > 2 -> (!" +++++").green
-                                            difference < -2 -> (!" -----").red
-                                            difference > 1 -> (!" ++++").green
-                                            difference < -1 -> (!" ----").red
-                                            difference > 0.5 -> (!" +++").green
-                                            difference < -0.5 -> (!" ---").red
-                                            difference > 0.2 -> (!" ++").green
-                                            difference < -0.2 -> (!" --").red
-                                            difference > 0.1 -> (!" +").green
-                                            difference < -0.1 -> (!" -").red
+                                            difference > 2 -> " +++++"().green
+                                            difference < -2 -> " -----"().red
+                                            difference > 1 -> " ++++"().green
+                                            difference < -1 -> " ----"().red
+                                            difference > 0.5 -> " +++"().green
+                                            difference < -0.5 -> " ---"().red
+                                            difference > 0.2 -> " ++"().green
+                                            difference < -0.2 -> " --"().red
+                                            difference > 0.1 -> " +"().green
+                                            difference < -0.1 -> " -"().red
                                             else -> null
                                         }
                                     ).withColor(mana.textColor)

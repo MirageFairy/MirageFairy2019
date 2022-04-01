@@ -95,14 +95,14 @@ class ItemAstronomicalObservationBook : Item() {
 
         // 現在地平線より上にある天体を見なければならない
         if (player.lookVec.y < 0) {
-            player.sendStatusMessage(textComponent { (!"空がよく見えない").darkPurple }, true) // TODO translate
+            player.sendStatusMessage(textComponent { "空がよく見えない"().darkPurple }, true) // TODO translate
             return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
         }
 
         // 天井が塞がれている場合は失敗
         val selector = MagicSelectorRayTrace.createIgnoreEntity(world, player, 64.0)
         if (selector.isHit) {
-            player.sendStatusMessage(textComponent { (!"空がよく見えない").darkPurple }, true) // TODO translate
+            player.sendStatusMessage(textComponent { "空がよく見えない"().darkPurple }, true) // TODO translate
             return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
         }
 
@@ -114,7 +114,7 @@ class ItemAstronomicalObservationBook : Item() {
         val angleSunDiff = abs(acos(vectorLook.dotProduct(vectorSun))) * 180 / PI
         val angleMoonDiff = abs(acos(vectorLook.dotProduct(vectorMoon))) * 180 / PI
         if (angleSunDiff >= 15 && angleMoonDiff >= 15) {
-            player.sendStatusMessage(textComponent { (!"観測可能な天体が見当たらない").darkPurple }, true) // TODO translate
+            player.sendStatusMessage(textComponent { "観測可能な天体が見当たらない"().darkPurple }, true) // TODO translate
             return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
         }
 
@@ -126,11 +126,11 @@ class ItemAstronomicalObservationBook : Item() {
         if (!player.world.isRemote) {
             if (player is EntityPlayer) {
                 when (count) {
-                    100 -> player.sendStatusMessage(textComponent { (!">>> 5 <<<").darkPurple }, true)
-                    80 -> player.sendStatusMessage(textComponent { (!">>> 4 <<<").darkPurple }, true)
-                    60 -> player.sendStatusMessage(textComponent { (!">>> 3 <<<").darkPurple }, true)
-                    40 -> player.sendStatusMessage(textComponent { (!">>> 2 <<<").darkPurple }, true)
-                    20 -> player.sendStatusMessage(textComponent { (!">>> 1 <<<").darkPurple }, true)
+                    100 -> player.sendStatusMessage(textComponent { ">>> 5 <<<"().darkPurple }, true)
+                    80 -> player.sendStatusMessage(textComponent { ">>> 4 <<<"().darkPurple }, true)
+                    60 -> player.sendStatusMessage(textComponent { ">>> 3 <<<"().darkPurple }, true)
+                    40 -> player.sendStatusMessage(textComponent { ">>> 2 <<<"().darkPurple }, true)
+                    20 -> player.sendStatusMessage(textComponent { ">>> 1 <<<"().darkPurple }, true)
                 }
             }
         }
@@ -198,12 +198,12 @@ class ItemAstronomicalObservationBook : Item() {
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        tooltip += textComponent { translate("$prefix.title") + !":" }.formattedText
+        tooltip += textComponent { translate("$prefix.title") + ":"() }.formattedText
         val last = ApiSkill.skillManager.clientSkillContainer.variables.lastAstronomicalObservationTime
         val now: Instant = Instant.now()
-        tooltip += formattedText { !"  " + translate("$prefix.daily") + !": " + !getDailyStatus(last, now).displayText + !" (" + translate("$prefix.message.remaining", (getLimitDaily(now) - now).displayText) + !")" }
-        tooltip += formattedText { !"  " + translate("$prefix.weekly") + !": " + !getWeeklyStatus(last, now).displayText + !" (" + translate("$prefix.message.remaining", (getLimitWeekly(now) - now).displayText) + !")" }
-        tooltip += formattedText { !"  " + translate("$prefix.monthly") + !": " + !getMonthlyStatus(last, now).displayText + !" (" + translate("$prefix.message.remaining", (getLimitMonthly(now) - now).displayText) + !")" }
+        tooltip += formattedText { "  "() + translate("$prefix.daily") + ": "() + getDailyStatus(last, now).displayText() + " ("() + translate("$prefix.message.remaining", (getLimitDaily(now) - now).displayText) + ")"() }
+        tooltip += formattedText { "  "() + translate("$prefix.weekly") + ": "() + getWeeklyStatus(last, now).displayText() + " ("() + translate("$prefix.message.remaining", (getLimitWeekly(now) - now).displayText) + ")"() }
+        tooltip += formattedText { "  "() + translate("$prefix.monthly") + ": "() + getMonthlyStatus(last, now).displayText() + " ("() + translate("$prefix.message.remaining", (getLimitMonthly(now) - now).displayText) + ")"() }
         tooltip += formattedText { empty }
         tooltip += formattedText { translate("$prefix.usage").red }
     }

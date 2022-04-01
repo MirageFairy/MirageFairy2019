@@ -31,7 +31,7 @@ class FairyType(
 class FairyTypeEmpty : IFairyType {
     override fun isEmpty() = true
     override fun getMotif(): ResourceLocation? = null
-    override fun getDisplayName() = textComponent { !"Empty" }
+    override fun getDisplayName() = textComponent { "Empty"() }
     override fun getColor() = 0xFFFFFF
     override fun getCost() = 50.0
     override fun getManaSet() = ManaSet.ZERO

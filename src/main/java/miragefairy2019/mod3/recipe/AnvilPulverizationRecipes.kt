@@ -37,14 +37,14 @@ object AnvilPulverizationRecipes {
                         // 入力アイテムへのツールチップ
                         if (outputOreName.oreIngredient.matchingStacks.isNotEmpty()) {
                             if (ingredient.test(event.itemStack)) {
-                                event.toolTip += formattedText { (!"金床で同アイテムを組み合わせて粉砕可能").red } // TODO translate
+                                event.toolTip += formattedText { "金床で同アイテムを組み合わせて粉砕可能"().red } // TODO translate
                             }
                         }
 
                         // 出力アイテムへのツールチップ
                         if (ingredient.matchingStacks.isNotEmpty()) {
                             if (outputOreName.oreIngredient.test(event.itemStack)) {
-                                event.toolTip += formattedText { (!"金床で${ingredient.matchingStacks[0].displayName}を組み合わせて入手可能").red } // TODO translate TODO 例外処理
+                                event.toolTip += formattedText { "金床で${ingredient.matchingStacks[0].displayName}を組み合わせて入手可能"().red } // TODO translate TODO 例外処理
                             }
                         }
 

@@ -28,7 +28,7 @@ object VanillaItemBlocking {
                             -> {
                                 logger.info("Blocked: ${event.itemStack.displayName}(${event.itemStack}) by ${event.entityPlayer.name}(${event.entityPlayer.uniqueID})")
                                 event.isCanceled = true
-                                event.entityLiving.castOrNull<EntityPlayer>()?.sendStatusMessage(textComponent { !"このアイテムは使用できません" }, true) // TODO translate
+                                event.entityLiving.castOrNull<EntityPlayer>()?.sendStatusMessage(textComponent { "このアイテムは使用できません"() }, true) // TODO translate
                             }
                         }
                     }

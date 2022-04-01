@@ -267,18 +267,18 @@ open class ItemFairyWand : Item(), IFairyStickCraftItem {
 
         if (canTranslate("$unlocalizedName.poem")) { // ポエム
             val string = translateToLocal("$unlocalizedName.poem")
-            if (string.isNotBlank()) tooltip += formattedText { !string }
+            if (string.isNotBlank()) tooltip += formattedText { string() }
         }
 
-        tooltip += formattedText { (!"Tier $tier").aqua } // tier // TODO translate
+        tooltip += formattedText { "Tier $tier"().aqua } // tier // TODO translate
 
         // 機能
-        getMagicDescription(itemStack)?.let { tooltip += formattedText { (!it).red } } // 魔法
+        getMagicDescription(itemStack)?.let { tooltip += formattedText { it().red } } // 魔法
 
-        tooltip += formattedText { (!"使用可能回数: ${(getMaxDamage(itemStack) - getDamage(itemStack) + 1).coerceAtLeast(0)}").green } // 耐久値 TODO translate
+        tooltip += formattedText { "使用可能回数: ${(getMaxDamage(itemStack) - getDamage(itemStack) + 1).coerceAtLeast(0)}"().green } // 耐久値 TODO translate
 
-        tooltip += formattedText { (!"スキル: " + !EnumMastery.processing.displayName + !" (${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(EnumMastery.processing)})").gold } // TODO translate
-        tooltip += formattedText { (!"クールタイム: ${getCoolTime(player) / 20.0 formatAs "%.2f"} 秒").blue } // TODO translate
+        tooltip += formattedText { ("スキル: "() + EnumMastery.processing.displayName() + " (${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(EnumMastery.processing)})"()).gold } // TODO translate
+        tooltip += formattedText { "クールタイム: ${getCoolTime(player) / 20.0 formatAs "%.2f"} 秒"().blue } // TODO translate
 
     }
 
