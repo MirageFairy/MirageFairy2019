@@ -1,6 +1,12 @@
 package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.api.Erg
+import miragefairy2019.api.IFairyType
+import miragefairy2019.api.IPickExecutor
+import miragefairy2019.api.IPickHandler
+import miragefairy2019.api.PickHandlerRegistry
+import miragefairy2019.lib.erg
+import miragefairy2019.lib.shineEfficiency
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.block
@@ -15,16 +21,10 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.lib.BiomeDecoratorFlowers
 import miragefairy2019.mod.lib.WorldGenBush
-import miragefairy2019.api.IFairyType
-import miragefairy2019.lib.erg
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
-import miragefairy2019.lib.shineEfficiency
 import miragefairy2019.mod3.main.Main
-import miragefairy2019.mod3.pick.PickHandler
-import miragefairy2019.mod3.pick.api.IPickHandler
-import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.or
 import net.minecraft.advancements.CriteriaTriggers
@@ -69,7 +69,14 @@ object MirageFlower {
         blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
             setUnlocalizedName("mirageFlower")
             setCreativeTab { Main.creativeTab }
-            onRegisterBlock { ApiWorldGen.pickHandlerRegistry.register(block, block.pickHandler) }
+            onRegisterBlock {
+                PickHandlerRegistry.pickHandlers += IPickHandler { world, blockPos, player ->
+                    val blockState = world.getBlockState(blockPos)
+                    val block = blockState.block as? BlockMirageFlower ?: return@IPickHandler null
+                    if (!block.isMaxAge(blockState)) return@IPickHandler null
+                    IPickExecutor { fortune -> block.tryPick(world, blockPos, player, fortune) }
+                }
+            }
             makeBlockStates { DataBlockStates(variants = (0..3).associate { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") }) }
         }
         itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower()) }, "mirage_flower_seeds") {
@@ -285,39 +292,34 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
 
 
     // PickHandler関連
+
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        var itemStack = playerIn.heldItemMainhand
-        itemStack = if (itemStack.isEmpty) ItemStack.EMPTY else itemStack.copy()
-        val fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemStack)
-        return pickHandler.tryPick(worldIn, pos, playerIn, fortune)
+        val fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, playerIn.heldItemMainhand)
+        return tryPick(worldIn, pos, playerIn, fortune)
     }
 
-    val pickHandler: IPickHandler
-        get() = object : PickHandler() {
-            override fun getBlock() = this@BlockMirageFlower
-            override fun canPick(blockState: IBlockState) = getAge(blockState) == 3
-            override fun tryPickImpl(world: World, blockPos: BlockPos, player: EntityPlayer?, fortune: Int): Boolean {
-                val blockState = world.getBlockState(blockPos)
+    fun tryPick(world: World, blockPos: BlockPos, player: EntityPlayer?, fortune: Int): Boolean {
+        val blockState = world.getBlockState(blockPos)
+        if (!isMaxAge(blockState)) return false
 
-                // 収穫物計算
-                val drops = NonNullList.create<ItemStack>()
-                getDrops(drops, world, blockPos, blockState, fortune, false)
+        // 収穫物計算
+        val drops = NonNullList.create<ItemStack>()
+        getDrops(drops, world, blockPos, blockState, fortune, false)
 
-                // 収穫物生成
-                drops.forEach { spawnAsEntity(world, blockPos, it) }
+        // 収穫物生成
+        drops.forEach { spawnAsEntity(world, blockPos, it) }
 
-                // 経験値生成
-                blockState.block.dropXpOnBlockBreak(world, blockPos, getExpDrop(blockState, world, blockPos, fortune, false))
+        // 経験値生成
+        blockState.block.dropXpOnBlockBreak(world, blockPos, getExpDrop(blockState, world, blockPos, fortune, false))
 
-                // エフェクト
-                world.playEvent(player, 2001, blockPos, getStateId(blockState))
+        // エフェクト
+        world.playEvent(player, 2001, blockPos, getStateId(blockState))
 
-                // ブロックの置換
-                world.setBlockState(blockPos, defaultState.withProperty(AGE, 1), 2)
+        // ブロックの置換
+        world.setBlockState(blockPos, defaultState.withProperty(AGE, 1), 2)
 
-                return true
-            }
-        }
+        return true
+    }
 
 
     companion object {

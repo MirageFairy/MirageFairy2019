@@ -1,5 +1,9 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
+import miragefairy2019.api.Erg
+import miragefairy2019.api.Erg.WARP
+import miragefairy2019.api.Mana
+import miragefairy2019.api.PickHandlerRegistry
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
@@ -7,15 +11,11 @@ import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Compani
 import miragefairy2019.mod.modules.fairyweapon.playSound
 import miragefairy2019.mod.modules.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod3.artifacts.MirageFlower
-import miragefairy2019.api.Erg
-import miragefairy2019.api.Erg.WARP
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.negative
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.magic.positiveBoolean
-import miragefairy2019.api.Mana
 import miragefairy2019.mod3.skill.EnumMastery
-import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.atMost
 import net.minecraft.entity.item.EntityItem
@@ -75,14 +75,18 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
 
         // 対象計算
         val listTarget = magicSelectorCircle.blockPosList
-            .mapNotNull {
-                val blockState = world.getBlockState(it.blockPos)
-                val pickHandler = ApiWorldGen.pickHandlerRegistry[blockState.block]
-                if (pickHandler != null && pickHandler.canPick(blockState)) Pair(it, pickHandler) else null
+            .sortedBy { it.distanceSquared } // 近い順にソート
+            .map { it.blockPos } // BlockPosだけを抽出
+            .asSequence() // 先頭から順番に判定
+            .mapNotNull a@{ blockPos -> // Executorを取得
+                val pickExecutor = PickHandlerRegistry.pickHandlers.asSequence()
+                    .map { pickHandler -> pickHandler.getExecutor(world, blockPos, player) }
+                    .filterNotNull()
+                    .firstOrNull() ?: return@a null
+                Pair(blockPos, pickExecutor)
             }
-            .sortedBy { it.first.distanceSquared }
-            .take(!maxTargetCount)
-            .map { Pair(it.first.blockPos, it.second) }
+            .take(!maxTargetCount) // 最大個数を制限
+            .toList() // リストにする
 
         // 資源がない場合、中止
         if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic object : IMagicHandler {
@@ -125,7 +129,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                 run targets@{
                     for (pair in listTarget) {
                         val blockPos = pair.first
-                        val pickable = pair.second
+                        val pickExecutor = pair.second
 
                         if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@targets // 耐久が足りないので中止
                         if (targetCount + 1 > !maxTargetCount) return@targets // パワーが足りないので中止
@@ -146,7 +150,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                         run {
 
                             // 収穫試行
-                            val result = pickable.tryPick(world, blockPos, player, UtilsMath.randomInt(world.rand, !fortune))
+                            val result = pickExecutor.tryPick(UtilsMath.randomInt(world.rand, !fortune))
                             if (!result) return@targets
 
                             // 種の追加ドロップ
