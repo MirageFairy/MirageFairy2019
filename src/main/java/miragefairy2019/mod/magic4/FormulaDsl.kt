@@ -29,6 +29,7 @@ class FormulaScope(private val formulaArguments: FormulaArguments) {
     operator fun IMastery.not() = formulaArguments.getSkillLevel(this)
     val cost get() = formulaArguments.cost
     val costFactor get() = cost / 50.0
+    operator fun <T> MagicStatus<T>.not() = this(formulaArguments)
 }
 
 class SimpleFormulaArguments(
