@@ -1,9 +1,9 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import com.google.common.collect.Multimap;
+import miragefairy2019.api.IFairyType;
 import miragefairy2019.lib.ManaKt;
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils;
-import miragefairy2019.api.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -13,13 +13,13 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 public class ItemFairySword extends ItemFairyWeapon {
 
@@ -61,7 +61,7 @@ public class ItemFairySword extends ItemFairyWeapon {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, NonNullList<String> tooltip, ITooltipFlag flag) {
         Status status = new Status(fairyType);
         tooltip.add(TextFormatting.BLUE + "Additional Attack Damage: " + String.format("%.1f", status.additionalAttackDamage) + " (Shine, Fire, Wind, Gaia, Aqua, Dark)");
         tooltip.add(TextFormatting.BLUE + "Additional Attack Speed: " + String.format("%.1f", status.additionalAttackSpeed) + " (Cost)");

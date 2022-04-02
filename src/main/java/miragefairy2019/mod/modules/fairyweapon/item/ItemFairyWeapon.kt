@@ -4,6 +4,7 @@ import miragefairy2019.api.IFairyCombiningHandler
 import miragefairy2019.api.IFairyCombiningItem
 import miragefairy2019.api.IFairyItem
 import miragefairy2019.api.IFairyType
+import miragefairy2019.api.IFairyWeaponItem
 import miragefairy2019.api.IManualRepairAcceptorItem
 import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.lib.toNonNullList
@@ -20,7 +21,6 @@ import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.white
-import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod3.main.Main
@@ -34,12 +34,13 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
+import net.minecraft.util.NonNullList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairAcceptorItem, IItemFairyWeapon {
+open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairAcceptorItem, IFairyWeaponItem {
     var tier = 0
 
     init {
@@ -100,7 +101,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairAcceptorI
         // 妖精魔法ステータス
         val fairy = Minecraft.getMinecraft().player?.let { FairyWeaponUtils.findFairy(itemStack, it).orNull?.let { t -> Pair(t.x!!, t.y!!) } } ?: Pair(EMPTY_ITEM_STACK, EMPTY_FAIRY)
         tooltip += formattedText { ("パートナー: "() + (if (fairy.first.isEmpty) "-"() else fairy.first.displayName()).white).blue } // TODO translate
-        addInformationFairyWeapon(itemStack, fairy.first, fairy.second, world, tooltip, flag)
+        tooltip += NonNullList.create<String>().also { addInformationFairyWeapon(itemStack, fairy.first, fairy.second, world, it, flag) }
 
     }
 
@@ -108,7 +109,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairAcceptorI
     open fun getMagicDescription(itemStack: ItemStack): String? = null
 
     @SideOnly(Side.CLIENT)
-    override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+    override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: NonNullList<String>, flag: ITooltipFlag) {
 
     }
 

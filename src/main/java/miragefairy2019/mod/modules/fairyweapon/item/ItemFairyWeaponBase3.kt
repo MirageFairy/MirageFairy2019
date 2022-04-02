@@ -57,6 +57,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumHand
+import net.minecraft.util.NonNullList
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
@@ -157,7 +158,7 @@ abstract class ItemFairyWeaponBase3(
     }
 
     @SideOnly(Side.CLIENT)
-    override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+    override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: NonNullList<String>, flag: ITooltipFlag) {
         val playerProxy = ClientPlayerProxy
         val actualFairyType = getActualFairyType(playerProxy, fairyType)
         magicStatusWrapperList.forEach {

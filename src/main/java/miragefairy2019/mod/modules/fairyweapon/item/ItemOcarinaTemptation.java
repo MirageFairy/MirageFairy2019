@@ -1,9 +1,9 @@
 package miragefairy2019.mod.modules.fairyweapon.item;
 
 import miragefairy2019.api.Erg;
+import miragefairy2019.api.IFairyType;
 import miragefairy2019.lib.ErgKt;
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils;
-import miragefairy2019.api.IFairyType;
 import miragefairy2019.mod3.main.Main;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
@@ -18,6 +18,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
@@ -64,7 +65,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformationFairyWeapon(ItemStack itemStackFairyWeapon, ItemStack itemStackFairy, IFairyType fairyType, @Nullable World world, NonNullList<String> tooltip, ITooltipFlag flag) {
         Status status = new Status(fairyType);
         tooltip.add(TextFormatting.BLUE + "Radius: " + String.format("%.1f", status.radius) + " (Wind)");
         tooltip.add(TextFormatting.BLUE + "Max Targets: " + String.format("%d", status.maxTargetCount) + " (Aqua)");

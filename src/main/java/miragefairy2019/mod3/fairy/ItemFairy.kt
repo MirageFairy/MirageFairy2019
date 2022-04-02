@@ -3,6 +3,7 @@ package miragefairy2019.mod3.fairy
 import miragefairy2019.api.ErgSet
 import miragefairy2019.api.IFairyItem
 import miragefairy2019.api.IFairyType
+import miragefairy2019.api.IFairyWeaponItem
 import miragefairy2019.api.Mana
 import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.displayName
@@ -25,13 +26,13 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.libkt.white
 import miragefairy2019.libkt.withColor
-import miragefairy2019.mod.api.fairyweapon.item.IItemFairyWeapon
 import miragefairy2019.mod.lib.ItemMulti
 import miragefairy2019.mod.lib.ItemVariant
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
+import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting.AQUA
@@ -166,9 +167,9 @@ class ItemFairy : ItemMulti<VariantFairy>(), IFairyItem {
         // 妖精武器のステータス
         Minecraft.getMinecraft().player?.let { player ->
             fun f(itemStackFairyWeapon: ItemStack) {
-                val item = itemStackFairyWeapon.item as? IItemFairyWeapon ?: return
+                val item = itemStackFairyWeapon.item as? IFairyWeaponItem ?: return
                 tooltip += formattedText { ("妖精武器: "() + itemStackFairyWeapon.displayName().white).blue } // TODO translate
-                item.addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, tooltip, flag)
+                tooltip += NonNullList.create<String>().also { item.addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, it, flag) }
             }
             f(player.getHeldItem(EnumHand.MAIN_HAND))
             f(player.getHeldItem(EnumHand.OFF_HAND))
