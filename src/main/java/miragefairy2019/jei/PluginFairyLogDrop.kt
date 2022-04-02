@@ -10,11 +10,11 @@ import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
+import miragefairy2019.api.FairyLogDropRegistry
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod3.artifacts.FairyLog
-import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 
@@ -48,17 +48,17 @@ class PluginFairyLogDrop : IModPlugin {
     }
 
     override fun register(registry: IModRegistry) {
-        registry.addRecipes(ApiWorldGen.fairyLogDropRegistry.recipes.toList().map { recipe ->
+        registry.addRecipes(FairyLogDropRegistry.fairyLogDropRecipes.map { recipe ->
             object : IRecipeWrapper {
                 override fun getIngredients(ingredients: IIngredients) {
                     ingredients.setInput(VanillaTypes.ITEM, ItemStack(FairyLog.itemBlockFairyLog()))
-                    ingredients.setOutput(VanillaTypes.ITEM, recipe.itemStackOutput)
+                    ingredients.setOutput(VanillaTypes.ITEM, recipe.output)
                 }
 
                 override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {
-                    val descriptions = recipe.conditions.chunked(2).map { it.joinToString(", ") { condition -> condition.localizedDescription } }
+                    val descriptions = recipe.requirements.chunked(2).map { it.joinToString(", ") { condition -> condition.description.unformattedText } }
                     minecraft.fontRenderer.drawStringRightAligned(String.format("%.0f%%", recipe.rate * 100), 45 - 2, 4, 0x444444)
-                    minecraft.fontRenderer.drawString(recipe.itemStackOutput.displayName, 65, 0, 0x444444)
+                    minecraft.fontRenderer.drawString(recipe.output.displayName, 65, 0, 0x444444)
                     descriptions.forEachIndexed { i, it -> minecraft.fontRenderer.drawString(it, 65, 10 + 10 * i, 0x444444) }
                 }
             }

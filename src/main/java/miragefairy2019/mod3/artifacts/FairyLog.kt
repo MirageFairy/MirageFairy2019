@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.lib.selectFairyLogDrop
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.block
@@ -10,9 +11,7 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod3.fairy.FairyTypes
-import miragefairy2019.mod3.fairylogdrop.FairyLogDropRegistry
 import miragefairy2019.mod3.main.Main
-import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import mirrg.boron.util.UtilsMath
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
@@ -46,8 +45,6 @@ object FairyLog {
     lateinit var blockFairyLog: () -> BlockFairyLog
     lateinit var itemBlockFairyLog: () -> ItemBlock
     val module = module {
-
-        onPreInit { ApiWorldGen.fairyLogDropRegistry = FairyLogDropRegistry() } // 妖精の樹洞ドロップレジストリー初期化
 
         blockFairyLog = block({ BlockFairyLog() }, "fairy_log") {
             setUnlocalizedName("fairyLog")
@@ -181,7 +178,7 @@ class BlockFairyLog : Block(Material.WOOD) {
     override fun getDrops(drops: NonNullList<ItemStack>, blockAccess: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) {
         if (blockAccess !is World) return
         repeat(3 + fortune) {
-            drops.add(ApiWorldGen.fairyLogDropRegistry.drop(blockAccess, pos, blockAccess.rand) ?: FairyTypes.instance.air.main.createItemStack())
+            drops.add(selectFairyLogDrop(blockAccess, pos, blockAccess.rand) ?: FairyTypes.instance.air.main.createItemStack())
         }
     }
 

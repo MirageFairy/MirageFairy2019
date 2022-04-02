@@ -1,24 +1,24 @@
 package miragefairy2019.mod3.fairy
 
+import miragefairy2019.api.FairyLogDropRegistry
+import miragefairy2019.lib.FairyLogDropRecipe
+import miragefairy2019.lib.FairyLogDropRequirementCanRain
+import miragefairy2019.lib.FairyLogDropRequirementHasBiomeType
+import miragefairy2019.lib.FairyLogDropRequirementOverworld
 import miragefairy2019.libkt.module
 import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
-import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionCanRain
-import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionHasBiomeType
-import miragefairy2019.mod3.fairylogdrop.FairyLogDropConditionOverworld
-import miragefairy2019.mod3.fairylogdrop.FairyLogDropRecipe
-import miragefairy2019.mod3.worldgen.api.ApiWorldGen
 import net.minecraftforge.common.BiomeDictionary
 
 val loaderFairyLogDrop = module {
     onCreateItemStack {
-        fun FairyLogDropRecipe.biome(biome: BiomeDictionary.Type) = also { addCondition(FairyLogDropConditionHasBiomeType(biome)) }
-        fun FairyLogDropRecipe.overworld() = also { addCondition(FairyLogDropConditionOverworld()) }
-        fun FairyLogDropRecipe.canRain() = also { addCondition(FairyLogDropConditionCanRain()) }
+        fun FairyLogDropRecipe.biome(biome: BiomeDictionary.Type) = also { requirements += FairyLogDropRequirementHasBiomeType(biome) }
+        fun FairyLogDropRecipe.overworld() = also { requirements += FairyLogDropRequirementOverworld() }
+        fun FairyLogDropRecipe.canRain() = also { requirements += FairyLogDropRequirementCanRain() }
 
         operator fun RankedFairyTypeBundle.invoke(weight: Double, block: FairyLogDropRecipe.() -> Unit) {
             val recipe = FairyLogDropRecipe(weight) { main.createItemStack() }
             recipe.block()
-            ApiWorldGen.fairyLogDropRegistry.addRecipe(recipe)
+            FairyLogDropRegistry.fairyLogDropRecipes += recipe
         }
 
         FairyTypes.instance.run {
