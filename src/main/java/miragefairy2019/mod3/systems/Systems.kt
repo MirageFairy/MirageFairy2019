@@ -6,5 +6,6 @@ object Systems {
     val module = module {
         DamageSource.module(this)
         ManualRepair.module(this)
+        Combine.module(this)
     }
 }

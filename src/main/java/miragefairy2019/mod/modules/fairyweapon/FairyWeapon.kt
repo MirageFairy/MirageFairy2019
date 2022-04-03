@@ -50,8 +50,6 @@ import miragefairy2019.mod.modules.fairyweapon.item.ItemMiragiumScythe
 import miragefairy2019.mod.modules.fairyweapon.item.ItemOcarinaTemptation
 import miragefairy2019.mod.modules.fairyweapon.item.ItemRodBase
 import miragefairy2019.mod.modules.fairyweapon.item.ItemRyugyoDrill
-import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesCombining
-import miragefairy2019.mod.modules.fairyweapon.recipe.RecipesUncombining
 import miragefairy2019.mod3.artifacts.oreName
 import miragefairy2019.mod3.artifacts.sphereType
 import miragefairy2019.mod3.main.Main.creativeTab
@@ -59,13 +57,11 @@ import miragefairy2019.mod3.main.Main.side
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
-import net.minecraft.item.crafting.IRecipe
 import net.minecraft.item.crafting.Ingredient
 import net.minecraftforge.client.event.ModelBakeEvent
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.oredict.OreDictionary
 
 object FairyWeapon {
@@ -373,13 +369,6 @@ object FairyWeapon {
 
             val ryugyo_drill = Achievement("ryugyo_drill", "ryugyoDrill", null, "goal")
 
-        }
-
-
-        // 妖精搭乗レシピ
-        onAddRecipe {
-            GameRegistry.findRegistry(IRecipe::class.java).register(RecipesCombining())
-            GameRegistry.findRegistry(IRecipe::class.java).register(RecipesUncombining())
         }
 
     }

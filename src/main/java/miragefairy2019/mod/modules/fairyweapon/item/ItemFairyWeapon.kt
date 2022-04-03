@@ -1,7 +1,8 @@
 package miragefairy2019.mod.modules.fairyweapon.item
 
-import miragefairy2019.api.IFairyCombiningHandler
-import miragefairy2019.api.IFairyCombiningItem
+import miragefairy2019.api.ICombineAcceptorItem
+import miragefairy2019.api.ICombineHandler
+import miragefairy2019.api.ICombineResult
 import miragefairy2019.api.IFairyItem
 import miragefairy2019.api.IFairyType
 import miragefairy2019.api.IFairyWeaponItem
@@ -40,7 +41,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairAcceptorItem, IFairyWeaponItem {
+open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptorItem, IFairyWeaponItem {
     var tier = 0
 
     init {
@@ -89,8 +90,7 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairAcceptorI
         tooltip += formattedText { "Tier $tier"().aqua } // tier // TODO translate
 
         // 機能
-        if (mirageFairyCombiningHandler.canCombine(itemStack)) tooltip += formattedText { "クラフトで妖精を搭乗可能"().red } // TODO translate Can be combined with fairy by crafting
-        if (mirageFairyCombiningHandler.canUncombine(itemStack)) tooltip += formattedText { "クラフトで妖精を分離可能"().red } // TODO translate
+        tooltip += formattedText { "クラフトで妖精を搭乗・分離可能"().red } // TODO translate Can be combined with fairy by crafting
         if (canManualRepair(itemStack)) tooltip += formattedText { "手入れ可能"().red } // TODO translate Can be repaired by crafting with contained sphere
         getMagicDescription(itemStack)?.let { tooltip += formattedText { it().red } } // 魔法
 
@@ -139,17 +139,18 @@ open class ItemFairyWeapon : IFairyCombiningItem, Item(), IManualRepairAcceptorI
 
     // 搭乗
 
-    override fun getMirageFairyCombiningHandler() = FairyCombiningHandler()
-    open class FairyCombiningHandler : IFairyCombiningHandler {
-        override fun canCombine(itemStack: ItemStack): Boolean = FairyWeaponUtils.getCombinedFairy(itemStack).isEmpty
-        override fun canCombineWith(itemStack: ItemStack, itemStackPart: ItemStack) = itemStackPart.item is IFairyItem
-        override fun canUncombine(itemStack: ItemStack): Boolean = !FairyWeaponUtils.getCombinedFairy(itemStack).isEmpty
-        override fun getCombinedPart(itemStack: ItemStack): ItemStack = FairyWeaponUtils.getCombinedFairy(itemStack)
-        override fun setCombinedPart(itemStack: ItemStack, itemStackPart: ItemStack): Unit = FairyWeaponUtils.setCombinedFairy(itemStack, itemStackPart)
+    override fun getCombineHandler(itemStack: ItemStack) = ICombineHandler { otherItemStack ->
+        val fairyItemStack = FairyWeaponUtils.getCombinedFairy(itemStack)
+        if (otherItemStack.isEmpty && fairyItemStack.isEmpty) return@ICombineHandler null // 分解モードで搭乗中の妖精が無い場合は失敗
+        if (!otherItemStack.isEmpty && otherItemStack.item !is IFairyItem) return@ICombineHandler null // 合成モードで合成対象が妖精でない場合は失敗
+        object : ICombineResult {
+            override fun getCombinedItem() = itemStack.copy().also { FairyWeaponUtils.setCombinedFairy(it, otherItemStack) } // 妖精もしくは無を搭乗させて返す
+            override fun getRemainingItem() = fairyItemStack // 搭乗していた妖精
+        }
     }
 
     override fun hasContainerItem(itemStack: ItemStack) = !getContainerItem(itemStack).isEmpty
-    override fun getContainerItem(itemStack: ItemStack): ItemStack = FairyWeaponUtils.getCombinedFairy(itemStack)
+    override fun getContainerItem(itemStack: ItemStack) = FairyWeaponUtils.getCombinedFairy(itemStack)
 
 
     // 手入れ
