@@ -5,7 +5,6 @@ import miragefairy2019.libkt.MessageJson
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.init.SoundEvents
 import net.minecraft.network.PacketBuffer
 import net.minecraft.util.SoundCategory

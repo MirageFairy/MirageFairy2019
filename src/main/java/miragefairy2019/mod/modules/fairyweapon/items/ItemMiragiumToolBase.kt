@@ -11,7 +11,7 @@ import miragefairy2019.mod.modules.fairyweapon.SelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.UtilsMagic
 import miragefairy2019.mod.modules.fairyweapon.IMagicHandler
 import miragefairy2019.mod.modules.fairyweapon.positive
-import miragefairy2019.mod3.skill.api.IMastery
+import miragefairy2019.mod3.skill.IMastery
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult

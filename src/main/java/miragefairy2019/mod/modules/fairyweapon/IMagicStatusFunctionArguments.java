@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon;
 
 import miragefairy2019.api.Erg;
 import miragefairy2019.api.Mana;
-import miragefairy2019.mod3.skill.api.IMastery;
+import miragefairy2019.mod3.skill.IMastery;
 
 public interface IMagicStatusFunctionArguments {
 

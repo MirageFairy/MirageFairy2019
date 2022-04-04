@@ -1,7 +1,5 @@
 package miragefairy2019.mod3.skill
 
-import miragefairy2019.mod3.skill.api.IMastery
-
 @Suppress("EnumEntryName")
 enum class EnumMastery(private val parent: IMastery?, val layer: Int) : IMastery {
     root(null, 0),

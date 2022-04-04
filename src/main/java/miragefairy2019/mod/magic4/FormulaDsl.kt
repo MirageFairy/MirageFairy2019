@@ -13,8 +13,8 @@ import miragefairy2019.mod.magic4.Formula
 import miragefairy2019.mod.magic4.FormulaArguments
 import miragefairy2019.mod.magic4.FormulaRenderer
 import miragefairy2019.mod.magic4.MagicStatus
-import miragefairy2019.mod3.skill.api.IMastery
-import miragefairy2019.mod3.skill.api.ISkillContainer
+import miragefairy2019.mod3.skill.IMastery
+import miragefairy2019.mod3.skill.ISkillContainer
 import miragefairy2019.mod3.skill.displayName
 import miragefairy2019.mod3.skill.getSkillLevel
 import net.minecraft.util.text.ITextComponent

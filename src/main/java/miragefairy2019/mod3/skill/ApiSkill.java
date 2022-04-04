@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.skill.api;
+package miragefairy2019.mod3.skill;
 
 public class ApiSkill {
 

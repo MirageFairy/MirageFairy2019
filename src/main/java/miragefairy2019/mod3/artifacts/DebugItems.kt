@@ -23,7 +23,7 @@ import miragefairy2019.lib.erg
 import miragefairy2019.lib.mana
 import miragefairy2019.mod.Main
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
-import miragefairy2019.mod3.skill.api.ApiSkill
+import miragefairy2019.mod3.skill.ApiSkill
 import mirrg.kotlin.formatAs
 import mirrg.kotlin.toLowerCamelCase
 import net.minecraft.block.Block

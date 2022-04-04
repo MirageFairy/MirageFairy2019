@@ -31,8 +31,8 @@ import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
 import miragefairy2019.mod.Main
 import miragefairy2019.mod3.skill.EnumMastery
-import miragefairy2019.mod3.skill.api.ApiSkill
-import miragefairy2019.mod3.skill.api.ISkillContainer
+import miragefairy2019.mod3.skill.ApiSkill
+import miragefairy2019.mod3.skill.ISkillContainer
 import miragefairy2019.mod3.skill.displayName
 import miragefairy2019.mod3.skill.getSkillLevel
 import mirrg.kotlin.formatAs

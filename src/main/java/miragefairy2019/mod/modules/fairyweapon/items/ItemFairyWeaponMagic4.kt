@@ -28,7 +28,7 @@ import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer
 import miragefairy2019.mod3.skill.EnumMastery
-import miragefairy2019.mod3.skill.api.IMastery
+import miragefairy2019.mod3.skill.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag

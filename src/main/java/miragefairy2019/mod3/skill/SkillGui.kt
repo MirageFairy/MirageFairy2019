@@ -20,7 +20,6 @@ import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.toArgb
 import miragefairy2019.libkt.tooltip
 import miragefairy2019.mod.Main
-import miragefairy2019.mod3.skill.api.ApiSkill
 import mirrg.kotlin.formatAs
 import mirrg.kotlin.minus
 import mirrg.kotlin.startOfMonth
