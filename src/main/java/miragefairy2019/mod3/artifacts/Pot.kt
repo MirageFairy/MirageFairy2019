@@ -15,9 +15,9 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.lib.ItemMultiMaterial
-import miragefairy2019.mod.lib.ItemVariantMaterial
-import miragefairy2019.mod.lib.setCustomModelResourceLocations
+import miragefairy2019.libkt.ItemMultiMaterial
+import miragefairy2019.libkt.ItemVariantMaterial
+import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.mod3.main.Main
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.toUpperCamelCase
