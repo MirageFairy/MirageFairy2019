@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.artifacts
+package miragefairy2019.lib
 
 import miragefairy2019.mod3.playeraura.ApiPlayerAura
 import miragefairy2019.mod3.playeraura.IPlayerAuraHandler

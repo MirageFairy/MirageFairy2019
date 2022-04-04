@@ -24,9 +24,9 @@ import miragefairy2019.mod.magic4.MagicArguments
 import miragefairy2019.mod.magic4.MagicStatus
 import miragefairy2019.mod.magic4.getMagicHandler
 import miragefairy2019.mod.modules.fairyweapon.findFairy
-import miragefairy2019.mod3.artifacts.playerAuraHandler
-import miragefairy2019.mod3.artifacts.proxy
-import miragefairy2019.mod3.artifacts.skillContainer
+import miragefairy2019.lib.playerAuraHandler
+import miragefairy2019.lib.proxy
+import miragefairy2019.lib.skillContainer
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel

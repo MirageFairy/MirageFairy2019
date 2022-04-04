@@ -42,11 +42,11 @@ import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponBase3.Compan
 import miragefairy2019.mod.modules.fairyweapon.negative
 import miragefairy2019.mod.modules.fairyweapon.positive
 import miragefairy2019.mod.modules.fairyweapon.ranged
-import miragefairy2019.mod3.artifacts.ClientPlayerProxy
-import miragefairy2019.mod3.artifacts.PlayerProxy
-import miragefairy2019.mod3.artifacts.playerAuraHandler
-import miragefairy2019.mod3.artifacts.proxy
-import miragefairy2019.mod3.artifacts.skillContainer
+import miragefairy2019.lib.ClientPlayerProxy
+import miragefairy2019.lib.PlayerProxy
+import miragefairy2019.lib.playerAuraHandler
+import miragefairy2019.lib.proxy
+import miragefairy2019.lib.skillContainer
 import miragefairy2019.mod3.skill.ApiSkill
 import miragefairy2019.mod3.skill.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
