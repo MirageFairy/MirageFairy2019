@@ -1,10 +1,6 @@
 package miragefairy2019.colormaker;
 
 import kotlin.Unit;
-import miragefairy2019.colormaker.core.ColorConstants;
-import miragefairy2019.colormaker.core.ImageLayer;
-import miragefairy2019.colormaker.core.LabelImage;
-import miragefairy2019.colormaker.core.PanelColorSlider;
 import mirrg.boron.util.struct.ImmutableArray;
 
 import javax.swing.JFrame;

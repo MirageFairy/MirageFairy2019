@@ -1,4 +1,4 @@
-package miragefairy2019.colormaker.core
+package miragefairy2019.colormaker
 
 import mirrg.boron.util.struct.ImmutableArray
 import java.awt.Color

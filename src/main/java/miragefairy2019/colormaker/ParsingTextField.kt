@@ -1,4 +1,4 @@
-package miragefairy2019.colormaker.core
+package miragefairy2019.colormaker
 
 import java.awt.Color
 import javax.swing.JTextField
