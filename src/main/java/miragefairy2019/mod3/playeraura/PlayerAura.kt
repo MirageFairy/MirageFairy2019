@@ -40,9 +40,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import java.lang.Math.sin
 import kotlin.math.PI
 import kotlin.math.cos
+import kotlin.math.sin
 
 object PlayerAura {
     val module = module {

@@ -24,29 +24,29 @@ import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
-import miragefairy2019.mod.modules.fairyweapon.findFairy
-import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
-import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
-import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.NEVER
-import miragefairy2019.mod3.artifacts.ClientPlayerProxy
-import miragefairy2019.mod3.artifacts.PlayerProxy
-import miragefairy2019.mod3.artifacts.playerAuraHandler
-import miragefairy2019.mod3.artifacts.proxy
-import miragefairy2019.mod3.artifacts.skillContainer
-import miragefairy2019.mod.modules.fairyweapon.MagicStatus
-import miragefairy2019.mod.modules.fairyweapon.MagicStatusFunctionArguments
+import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.modules.fairyweapon.IMagicHandler
 import miragefairy2019.mod.modules.fairyweapon.IMagicStatus
 import miragefairy2019.mod.modules.fairyweapon.IMagicStatusFormatter
 import miragefairy2019.mod.modules.fairyweapon.IMagicStatusFunction
 import miragefairy2019.mod.modules.fairyweapon.IMagicStatusFunctionArguments
+import miragefairy2019.mod.modules.fairyweapon.MagicStatus
+import miragefairy2019.mod.modules.fairyweapon.MagicStatusFunctionArguments
 import miragefairy2019.mod.modules.fairyweapon.displayName
 import miragefairy2019.mod.modules.fairyweapon.factors
+import miragefairy2019.mod.modules.fairyweapon.findFairy
 import miragefairy2019.mod.modules.fairyweapon.getDisplayValue
+import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
+import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
+import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.NEVER
 import miragefairy2019.mod.modules.fairyweapon.negative
 import miragefairy2019.mod.modules.fairyweapon.positive
 import miragefairy2019.mod.modules.fairyweapon.ranged
-import miragefairy2019.mod.Main.side
+import miragefairy2019.mod3.artifacts.ClientPlayerProxy
+import miragefairy2019.mod3.artifacts.PlayerProxy
+import miragefairy2019.mod3.artifacts.playerAuraHandler
+import miragefairy2019.mod3.artifacts.proxy
+import miragefairy2019.mod3.artifacts.skillContainer
 import miragefairy2019.mod3.skill.ApiSkill
 import miragefairy2019.mod3.skill.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel
@@ -146,7 +146,7 @@ abstract class ItemFairyWeaponBase3(
 
     private val magicStatusWrapperList = mutableListOf<MagicStatusWrapper<*>>()
     internal operator fun <T> String.invoke(getFormatter: MagicStatusFormatterScope<T>.() -> IMagicStatusFormatter<T>, function: MagicStatusFormulaScope.() -> T): MagicStatusWrapper<T> {
-        val magicStatusWrapper = MagicStatusWrapper<T>(
+        val magicStatusWrapper = MagicStatusWrapper(
             MagicStatus(
                 this,
                 IMagicStatusFunction<T> { MagicStatusFormulaScope(it).function() },
@@ -176,7 +176,7 @@ abstract class ItemFairyWeaponBase3(
                     concat(
                         it.displayName(),
                         ": "(),
-                        it.getDisplayValue(MagicStatusFunctionArguments({ ApiSkill.skillManager.clientSkillContainer.getSkillLevel(it) }, actualFairyType))().white,
+                        it.getDisplayValue(MagicStatusFunctionArguments({ mastery -> ApiSkill.skillManager.clientSkillContainer.getSkillLevel(mastery) }, actualFairyType))().white,
                         f(it)
                     ).blue
                 }

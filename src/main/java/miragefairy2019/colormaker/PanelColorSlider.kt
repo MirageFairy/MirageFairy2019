@@ -13,7 +13,7 @@ import javax.swing.JPanel
 import javax.swing.JToggleButton
 import javax.swing.Timer
 
-class PanelColorSlider() : JPanel() {
+class PanelColorSlider : JPanel() {
     private lateinit var sliderG: PanelSliderField
     private lateinit var sliderB: PanelSliderField
     private lateinit var sliderR: PanelSliderField

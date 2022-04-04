@@ -7,8 +7,10 @@ import miragefairy2019.api.IPickHandler
 import miragefairy2019.api.PickHandlerRegistry
 import miragefairy2019.lib.erg
 import miragefairy2019.lib.shineEfficiency
+import miragefairy2019.libkt.BiomeDecoratorFlowers
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
+import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.getItemStack
@@ -19,12 +21,10 @@ import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.libkt.BiomeDecoratorFlowers
-import miragefairy2019.libkt.WorldGenBush
+import miragefairy2019.mod.Main
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
-import miragefairy2019.mod.Main
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.or
 import net.minecraft.advancements.CriteriaTriggers
@@ -87,7 +87,7 @@ object MirageFlower {
 
         // 地形生成
         onHookDecorator {
-            val biomeDecorators = listOf<BiomeDecoratorFlowers>(
+            val biomeDecorators = listOf(
 
                 // どこでも湧く
                 BiomeDecoratorFlowers(WorldGenBush(blockMirageFlower(), blockMirageFlower().getState(3)).apply {

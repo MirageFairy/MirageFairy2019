@@ -42,5 +42,5 @@ fun <T : Any> List<WeightedItem<T>>.unique(equals: (T, T) -> Boolean): List<Weig
     this.forEach { item ->
         map[Slot(item.item)] = (map[Slot(item.item)] ?: 0.0) + item.weight
     }
-    return map.entries.map { WeightedItem<T>(it.key.item, it.value) }
+    return map.entries.map { WeightedItem(it.key.item, it.value) }
 }

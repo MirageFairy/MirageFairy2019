@@ -79,7 +79,7 @@ class PacketResetMastery : IMessageHandler<MessageResetMastery, IMessage> {
     }
 }
 
-class MessageResetMastery() : IMessage {
+class MessageResetMastery : IMessage {
     override fun fromBytes(buf: ByteBuf) = Unit
     override fun toBytes(buf: ByteBuf) = Unit
 }

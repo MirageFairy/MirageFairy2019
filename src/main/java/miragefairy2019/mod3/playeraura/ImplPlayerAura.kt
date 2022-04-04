@@ -7,11 +7,11 @@ import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.plus
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
+import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
-import miragefairy2019.mod.Main
 import mirrg.kotlin.gson.JsonWrapper
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonWrapper
@@ -145,7 +145,7 @@ class PlayerAuraModel {
     val foodHistory get() = synchronized(lock) { foods.mapIndexed { i, food -> FoodHistoryEntry(food.itemStack, food.aura, (100 - i) / 100.0) } }
 
     // 過去100エントリーの回複分について、それ自身のオーラにその寿命割合を乗じたものの合計
-    private val auraCache = ResettableProperty { foods.mapIndexed { i, food -> food.aura * ((100 - i) / 100.0) }.fold<ManaSet, ManaSet>(ManaSet.ZERO) { a, b -> a + b } * (1 / 100.0) * 8.0 }
+    private val auraCache = ResettableProperty { foods.mapIndexed { i, food -> food.aura * ((100 - i) / 100.0) }.fold(ManaSet.ZERO) { a, b -> a + b } * (1 / 100.0) * 8.0 }
     val aura get() = synchronized(lock) { auraCache.getValue() }
 
 

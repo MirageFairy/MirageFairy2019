@@ -1,5 +1,7 @@
 package miragefairy2019.mod3.artifacts
 
+import miragefairy2019.libkt.BlockMulti
+import miragefairy2019.libkt.BlockVariantList
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.DataItemModel
@@ -8,7 +10,11 @@ import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.DataSimpleIngredient
+import miragefairy2019.libkt.IBlockVariant
+import miragefairy2019.libkt.ItemBlockMulti
+import miragefairy2019.libkt.ItemMultiMaterial
 import miragefairy2019.libkt.ItemVariantInitializer
+import miragefairy2019.libkt.ItemVariantMaterial
 import miragefairy2019.libkt.MakeItemVariantModelScope
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
@@ -27,16 +33,10 @@ import miragefairy2019.libkt.module
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
-import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.libkt.BlockMulti
-import miragefairy2019.libkt.BlockVariantList
-import miragefairy2019.libkt.IBlockVariant
-import miragefairy2019.libkt.ItemBlockMulti
-import miragefairy2019.libkt.ItemMultiMaterial
-import miragefairy2019.libkt.ItemVariantMaterial
 import miragefairy2019.libkt.setCustomModelResourceLocations
+import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.block.Block
 import net.minecraft.block.BlockFalling
 import net.minecraft.block.SoundType
@@ -572,7 +572,7 @@ class ItemVariantSimpleMaterials(registryName: String, unlocalizedName: String) 
 
 class BlockMaterials<V : IBlockVariantMaterials>(variantList: BlockVariantList<V>) : BlockMulti<V>(Material.IRON, variantList) {
     init {
-        variantList.blockVariants.forEach { it -> setHarvestLevel(it.harvestTool, it.harvestLevel, getState(it)) }
+        variantList.blockVariants.forEach { setHarvestLevel(it.harvestTool, it.harvestLevel, getState(it)) }
     }
 
 

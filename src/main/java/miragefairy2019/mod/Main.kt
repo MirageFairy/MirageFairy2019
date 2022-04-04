@@ -25,8 +25,8 @@ object Main {
         guiHandlers[id] = guiHandler
     }
 
-    val categoryGeneral = "general"
-    val categoryFeatures = "features"
+    const val categoryGeneral = "general"
+    const val categoryFeatures = "features"
 
     val module = module {
         onConstruction {

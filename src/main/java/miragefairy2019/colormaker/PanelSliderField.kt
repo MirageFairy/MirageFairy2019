@@ -6,7 +6,7 @@ import java.awt.Insets
 import javax.swing.JPanel
 import javax.swing.JSlider
 
-class PanelSliderField() : JPanel() {
+class PanelSliderField : JPanel() {
     val listeners = mutableListOf<SetValueEvent.() -> Unit>()
 
     class SetValueEvent(val value: Int, val source: Any?)
