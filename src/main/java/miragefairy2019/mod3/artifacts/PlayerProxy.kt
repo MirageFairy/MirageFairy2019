@@ -1,7 +1,7 @@
 package miragefairy2019.mod3.artifacts
 
-import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
-import miragefairy2019.mod3.playeraura.api.IPlayerAuraHandler
+import miragefairy2019.mod3.playeraura.ApiPlayerAura
+import miragefairy2019.mod3.playeraura.IPlayerAuraHandler
 import miragefairy2019.mod3.skill.ApiSkill
 import miragefairy2019.mod3.skill.ISkillContainer
 import net.minecraft.entity.player.EntityPlayer

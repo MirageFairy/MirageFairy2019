@@ -12,11 +12,6 @@ import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod.Main
-import miragefairy2019.mod3.playeraura.api.IClientPlayerAuraHandler
-import miragefairy2019.mod3.playeraura.api.IFoodHistoryEntry
-import miragefairy2019.mod3.playeraura.api.IPlayerAuraHandler
-import miragefairy2019.mod3.playeraura.api.IPlayerAuraManager
-import miragefairy2019.mod3.playeraura.api.IServerPlayerAuraHandler
 import mirrg.kotlin.gson.JsonWrapper
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonWrapper

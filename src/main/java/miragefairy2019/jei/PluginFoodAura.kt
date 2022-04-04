@@ -17,7 +17,7 @@ import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.getSubItems
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
+import miragefairy2019.mod3.playeraura.ApiPlayerAura
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Gui
 import net.minecraft.creativetab.CreativeTabs

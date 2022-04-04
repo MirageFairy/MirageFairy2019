@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.playeraura.api;
+package miragefairy2019.mod3.playeraura;
 
 import miragefairy2019.api.ManaSet;
 import net.minecraft.item.ItemStack;
