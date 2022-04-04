@@ -11,10 +11,10 @@ import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponBase3.Compan
 import miragefairy2019.mod.modules.fairyweapon.playSound
 import miragefairy2019.mod.modules.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod3.artifacts.MirageFlower
-import miragefairy2019.mod3.magic.api.IMagicHandler
-import miragefairy2019.mod3.magic.negative
-import miragefairy2019.mod3.magic.positive
-import miragefairy2019.mod3.magic.positiveBoolean
+import miragefairy2019.mod.modules.fairyweapon.IMagicHandler
+import miragefairy2019.mod.modules.fairyweapon.negative
+import miragefairy2019.mod.modules.fairyweapon.positive
+import miragefairy2019.mod.modules.fairyweapon.positiveBoolean
 import miragefairy2019.mod3.skill.EnumMastery
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.atMost

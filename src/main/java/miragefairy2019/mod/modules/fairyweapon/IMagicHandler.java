@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.magic.api;
+package miragefairy2019.mod.modules.fairyweapon;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumActionResult;

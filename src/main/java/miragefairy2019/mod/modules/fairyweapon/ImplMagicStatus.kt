@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.magic
+package miragefairy2019.mod.modules.fairyweapon
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.IFairyType
@@ -11,10 +11,6 @@ import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.withColor
-import miragefairy2019.mod3.magic.api.IMagicStatus
-import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
-import miragefairy2019.mod3.magic.api.IMagicStatusFunction
-import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.displayName
 import net.minecraft.util.text.ITextComponent
@@ -23,9 +19,9 @@ import net.minecraft.util.text.TextFormatting.GREEN
 import net.minecraft.util.text.TextFormatting.RED
 
 class MagicStatus<T>(
-    private val name: String,
-    private val function: IMagicStatusFunction<T>,
-    private val formatter: IMagicStatusFormatter<T>
+        private val name: String,
+        private val function: IMagicStatusFunction<T>,
+        private val formatter: IMagicStatusFormatter<T>
 ) : IMagicStatus<T> {
     override fun getName() = name
     override fun getFunction() = function

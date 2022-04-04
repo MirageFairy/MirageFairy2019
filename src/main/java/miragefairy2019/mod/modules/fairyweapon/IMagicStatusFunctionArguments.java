@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.magic.api;
+package miragefairy2019.mod.modules.fairyweapon;
 
 import miragefairy2019.api.Erg;
 import miragefairy2019.api.Mana;

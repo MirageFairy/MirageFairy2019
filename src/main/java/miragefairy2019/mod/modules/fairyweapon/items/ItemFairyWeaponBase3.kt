@@ -33,19 +33,19 @@ import miragefairy2019.mod3.artifacts.PlayerProxy
 import miragefairy2019.mod3.artifacts.playerAuraHandler
 import miragefairy2019.mod3.artifacts.proxy
 import miragefairy2019.mod3.artifacts.skillContainer
-import miragefairy2019.mod3.magic.MagicStatus
-import miragefairy2019.mod3.magic.MagicStatusFunctionArguments
-import miragefairy2019.mod3.magic.api.IMagicHandler
-import miragefairy2019.mod3.magic.api.IMagicStatus
-import miragefairy2019.mod3.magic.api.IMagicStatusFormatter
-import miragefairy2019.mod3.magic.api.IMagicStatusFunction
-import miragefairy2019.mod3.magic.api.IMagicStatusFunctionArguments
-import miragefairy2019.mod3.magic.displayName
-import miragefairy2019.mod3.magic.factors
-import miragefairy2019.mod3.magic.getDisplayValue
-import miragefairy2019.mod3.magic.negative
-import miragefairy2019.mod3.magic.positive
-import miragefairy2019.mod3.magic.ranged
+import miragefairy2019.mod.modules.fairyweapon.MagicStatus
+import miragefairy2019.mod.modules.fairyweapon.MagicStatusFunctionArguments
+import miragefairy2019.mod.modules.fairyweapon.IMagicHandler
+import miragefairy2019.mod.modules.fairyweapon.IMagicStatus
+import miragefairy2019.mod.modules.fairyweapon.IMagicStatusFormatter
+import miragefairy2019.mod.modules.fairyweapon.IMagicStatusFunction
+import miragefairy2019.mod.modules.fairyweapon.IMagicStatusFunctionArguments
+import miragefairy2019.mod.modules.fairyweapon.displayName
+import miragefairy2019.mod.modules.fairyweapon.factors
+import miragefairy2019.mod.modules.fairyweapon.getDisplayValue
+import miragefairy2019.mod.modules.fairyweapon.negative
+import miragefairy2019.mod.modules.fairyweapon.positive
+import miragefairy2019.mod.modules.fairyweapon.ranged
 import miragefairy2019.mod3.main.Main.side
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
@@ -149,7 +149,7 @@ abstract class ItemFairyWeaponBase3(
         val magicStatusWrapper = MagicStatusWrapper<T>(
             MagicStatus(
                 this,
-                IMagicStatusFunction<T> { MagicStatusFormulaScope(it).function() },
+                    IMagicStatusFunction<T> { MagicStatusFormulaScope(it).function() },
                 MagicStatusFormatterScope<T>().getFormatter()
             )
         )
