@@ -4,7 +4,6 @@ import miragefairy2019.libkt.darkRed
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod3.artifacts.BlockFairyWoodLog
-import miragefairy2019.mod3.artifacts.treecompile.treeSearch
 import net.minecraft.block.BlockLeaves
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3i
