@@ -15,8 +15,8 @@ import miragefairy2019.api.IManualRepairAcceptorItem
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.getSubItems
 import miragefairy2019.libkt.translateToLocal
+import miragefairy2019.mod3.artifacts.Sphere.itemSpheres
 import miragefairy2019.mod3.artifacts.get
-import miragefairy2019.mod3.artifacts.itemSpheres
 import net.minecraft.client.Minecraft
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item

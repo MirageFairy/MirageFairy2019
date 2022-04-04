@@ -36,67 +36,8 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.OreIngredient
 
-class ItemSpheres : ItemMulti<VariantSphere>() {
-    override fun getItemStackDisplayName(itemStack: ItemStack): String {
-        val variant = getVariant(itemStack) ?: return translateToLocal("$unlocalizedName.name")
-        return translateToLocalFormatted("$unlocalizedName.format", variant.sphere.ergType.displayName.formattedText)
-    }
-}
-
-operator fun (() -> ItemSpheres).get(ergType: Erg) = this().getVariant(ergType.ordinal)?.createItemStack() ?: EMPTY_ITEM_STACK
-
-class VariantSphere(val sphere: SphereType) : ItemVariant()
-
-
-class SphereType(
-    val ergType: Erg,
-    val colorCore: Int,
-    val colorHighlight: Int,
-    val colorBackground: Int,
-    val colorPlasma: Int,
-    val catalystSupplier: () -> Ingredient,
-    val gemSupplier: (() -> Ingredient)?
-)
-
-val SphereType.oreName: String get() = "mirageFairy2019Sphere${UtilsString.toUpperCaseHead(ergType.toString())}"
-
-val Erg.sphereType
-    get(): SphereType {
-        fun stack(itemStack: () -> ItemStack): () -> Ingredient = { Ingredient.fromStacks(itemStack()) }
-        fun item(item: () -> Item): () -> Ingredient = stack { ItemStack(item()) }
-        fun block(block: () -> Block): () -> Ingredient = stack { ItemStack(block()) }
-        fun ore(oreName: String): () -> Ingredient = { OreIngredient(oreName) }
-        return when (this) {
-            Erg.ATTACK -> SphereType(Erg.ATTACK, 0xFFA0A0, 0xFF6B6B, 0xC70000, 0xFF0000, item { Items.IRON_SWORD }, null)
-            Erg.CRAFT -> SphereType(Erg.CRAFT, 0xF1B772, 0xD3FDCC, 0x92B56A, 0xFFFFFF, ore("workbench"), ore("gemNephrite"))
-            Erg.HARVEST -> SphereType(Erg.HARVEST, 0x00BD00, 0xD09D74, 0x6E4219, 0x2FFF2F, item { Items.IRON_AXE }, null)
-            Erg.LIGHT -> SphereType(Erg.LIGHT, 0xFF8300, 0xFFC9BC, 0xF1C483, 0xFFFF25, ore("torch"), ore("gemTopaz"))
-            Erg.FLAME -> SphereType(Erg.FLAME, 0xFF9F68, 0xFF6800, 0xE2713F, 0xBF1805, item { Items.FIRE_CHARGE }, ore("gemHeliolite"))
-            Erg.WATER -> SphereType(Erg.WATER, 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF, item { Items.WATER_BUCKET }, null)
-            Erg.CRYSTAL -> SphereType(Erg.CRYSTAL, 0xA2FFFF, 0xB6FFFF, 0x36CECE, 0xEBFFFF, ore("gemQuartz"), ore("gemDiamond"))
-            Erg.SOUND -> SphereType(Erg.SOUND, 0x98ACE7, 0xD8DDFF, 0xBFC9D8, 0xC9D0ED, block { Blocks.NOTEBLOCK }, null)
-            Erg.SPACE -> SphereType(Erg.SPACE, 0x000000, 0x4D0065, 0x67009D, 0x001E74, block { Blocks.CHEST }, null)
-            Erg.WARP -> SphereType(Erg.WARP, 0x3A00D3, 0x8CF4E2, 0x349988, 0xD004FB, ore("enderpearl"), null)
-            Erg.SHOOT -> SphereType(Erg.SHOOT, 0x969696, 0x896727, 0x896727, 0xD8D8D8, item { Items.BOW }, null)
-            Erg.DESTROY -> SphereType(Erg.DESTROY, 0xFFFFFF, 0xFF5A35, 0xFF4800, 0x000000, block { Blocks.TNT }, null)
-            Erg.CHEMICAL -> SphereType(Erg.CHEMICAL, 0x0067FF, 0xC9DFEF, 0xB0C4D7, 0x0755FF, item { Items.FERMENTED_SPIDER_EYE }, null)
-            Erg.SLASH -> SphereType(Erg.SLASH, 0xAAAAAA, 0xFFC9B2, 0xD20000, 0xFFFFFF, item { Items.SHEARS }, null)
-            Erg.LIFE -> SphereType(Erg.LIFE, 0xFF0033, 0xFFC9DE, 0xFF8EB2, 0xFF3F67, item { Items.BEEF }, ore("gemPyrope"))
-            Erg.KNOWLEDGE -> SphereType(Erg.KNOWLEDGE, 0xFFFF00, 0x006200, 0x00A000, 0x50DD00, item { Items.BOOK }, null)
-            Erg.ENERGY -> SphereType(Erg.ENERGY, 0xFFED30, 0xFFF472, 0xFFE84C, 0xBFE7FF, ore("gemCoal"), null)
-            Erg.SUBMISSION -> SphereType(Erg.SUBMISSION, 0xFF0000, 0x593232, 0x1E1E1E, 0xA90000, block { Blocks.IRON_BARS }, null)
-            Erg.CHRISTMAS -> SphereType(Erg.CHRISTMAS, 0xFF0000, 0xFFD723, 0x00B900, 0xFF0000, stack { ItemStack(Blocks.SAPLING, 1, 1) }, null)
-            Erg.FREEZE -> SphereType(Erg.FREEZE, 0x5AFFFF, 0xFFFFFF, 0xF6FFFF, 0xACFFFF, ore("ice"), null)
-            Erg.THUNDER -> SphereType(Erg.THUNDER, 0xFFFFB2, 0x359C00, 0xC370A7, 0xFFFF00, item { Items.GOLDEN_SWORD }, ore("gemTourmaline"))
-            Erg.LEVITATE -> SphereType(Erg.LEVITATE, 0x00A2FF, 0xB7ECFF, 0x35366B, 0x8CD0FF, item { Items.FEATHER }, ore("gemLabradorite"))
-            Erg.SENSE -> SphereType(Erg.SENSE, 0x1B3211, 0xD3E6DF, 0x7ACF45, 0x4784A0, item { Items.SPIDER_EYE }, null)
-        }
-    }
-
-
-lateinit var itemSpheres: () -> ItemSpheres
-
 object Sphere {
+    lateinit var itemSpheres: () -> ItemSpheres
     val module = module {
 
         // アイテム
@@ -184,3 +125,61 @@ object Sphere {
 
     }
 }
+
+
+class SphereType(
+    val ergType: Erg,
+    val colorCore: Int,
+    val colorHighlight: Int,
+    val colorBackground: Int,
+    val colorPlasma: Int,
+    val catalystSupplier: () -> Ingredient,
+    val gemSupplier: (() -> Ingredient)?
+)
+
+val SphereType.oreName: String get() = "mirageFairy2019Sphere${UtilsString.toUpperCaseHead(ergType.toString())}"
+
+val Erg.sphereType
+    get(): SphereType {
+        fun stack(itemStack: () -> ItemStack): () -> Ingredient = { Ingredient.fromStacks(itemStack()) }
+        fun item(item: () -> Item): () -> Ingredient = stack { ItemStack(item()) }
+        fun block(block: () -> Block): () -> Ingredient = stack { ItemStack(block()) }
+        fun ore(oreName: String): () -> Ingredient = { OreIngredient(oreName) }
+        return when (this) {
+            Erg.ATTACK -> SphereType(Erg.ATTACK, 0xFFA0A0, 0xFF6B6B, 0xC70000, 0xFF0000, item { Items.IRON_SWORD }, null)
+            Erg.CRAFT -> SphereType(Erg.CRAFT, 0xF1B772, 0xD3FDCC, 0x92B56A, 0xFFFFFF, ore("workbench"), ore("gemNephrite"))
+            Erg.HARVEST -> SphereType(Erg.HARVEST, 0x00BD00, 0xD09D74, 0x6E4219, 0x2FFF2F, item { Items.IRON_AXE }, null)
+            Erg.LIGHT -> SphereType(Erg.LIGHT, 0xFF8300, 0xFFC9BC, 0xF1C483, 0xFFFF25, ore("torch"), ore("gemTopaz"))
+            Erg.FLAME -> SphereType(Erg.FLAME, 0xFF9F68, 0xFF6800, 0xE2713F, 0xBF1805, item { Items.FIRE_CHARGE }, ore("gemHeliolite"))
+            Erg.WATER -> SphereType(Erg.WATER, 0x67E6FF, 0xBDF0FF, 0x00ABFF, 0x83B5FF, item { Items.WATER_BUCKET }, null)
+            Erg.CRYSTAL -> SphereType(Erg.CRYSTAL, 0xA2FFFF, 0xB6FFFF, 0x36CECE, 0xEBFFFF, ore("gemQuartz"), ore("gemDiamond"))
+            Erg.SOUND -> SphereType(Erg.SOUND, 0x98ACE7, 0xD8DDFF, 0xBFC9D8, 0xC9D0ED, block { Blocks.NOTEBLOCK }, null)
+            Erg.SPACE -> SphereType(Erg.SPACE, 0x000000, 0x4D0065, 0x67009D, 0x001E74, block { Blocks.CHEST }, null)
+            Erg.WARP -> SphereType(Erg.WARP, 0x3A00D3, 0x8CF4E2, 0x349988, 0xD004FB, ore("enderpearl"), null)
+            Erg.SHOOT -> SphereType(Erg.SHOOT, 0x969696, 0x896727, 0x896727, 0xD8D8D8, item { Items.BOW }, null)
+            Erg.DESTROY -> SphereType(Erg.DESTROY, 0xFFFFFF, 0xFF5A35, 0xFF4800, 0x000000, block { Blocks.TNT }, null)
+            Erg.CHEMICAL -> SphereType(Erg.CHEMICAL, 0x0067FF, 0xC9DFEF, 0xB0C4D7, 0x0755FF, item { Items.FERMENTED_SPIDER_EYE }, null)
+            Erg.SLASH -> SphereType(Erg.SLASH, 0xAAAAAA, 0xFFC9B2, 0xD20000, 0xFFFFFF, item { Items.SHEARS }, null)
+            Erg.LIFE -> SphereType(Erg.LIFE, 0xFF0033, 0xFFC9DE, 0xFF8EB2, 0xFF3F67, item { Items.BEEF }, ore("gemPyrope"))
+            Erg.KNOWLEDGE -> SphereType(Erg.KNOWLEDGE, 0xFFFF00, 0x006200, 0x00A000, 0x50DD00, item { Items.BOOK }, null)
+            Erg.ENERGY -> SphereType(Erg.ENERGY, 0xFFED30, 0xFFF472, 0xFFE84C, 0xBFE7FF, ore("gemCoal"), null)
+            Erg.SUBMISSION -> SphereType(Erg.SUBMISSION, 0xFF0000, 0x593232, 0x1E1E1E, 0xA90000, block { Blocks.IRON_BARS }, null)
+            Erg.CHRISTMAS -> SphereType(Erg.CHRISTMAS, 0xFF0000, 0xFFD723, 0x00B900, 0xFF0000, stack { ItemStack(Blocks.SAPLING, 1, 1) }, null)
+            Erg.FREEZE -> SphereType(Erg.FREEZE, 0x5AFFFF, 0xFFFFFF, 0xF6FFFF, 0xACFFFF, ore("ice"), null)
+            Erg.THUNDER -> SphereType(Erg.THUNDER, 0xFFFFB2, 0x359C00, 0xC370A7, 0xFFFF00, item { Items.GOLDEN_SWORD }, ore("gemTourmaline"))
+            Erg.LEVITATE -> SphereType(Erg.LEVITATE, 0x00A2FF, 0xB7ECFF, 0x35366B, 0x8CD0FF, item { Items.FEATHER }, ore("gemLabradorite"))
+            Erg.SENSE -> SphereType(Erg.SENSE, 0x1B3211, 0xD3E6DF, 0x7ACF45, 0x4784A0, item { Items.SPIDER_EYE }, null)
+        }
+    }
+
+
+class VariantSphere(val sphere: SphereType) : ItemVariant()
+
+class ItemSpheres : ItemMulti<VariantSphere>() {
+    override fun getItemStackDisplayName(itemStack: ItemStack): String {
+        val variant = getVariant(itemStack) ?: return translateToLocal("$unlocalizedName.name")
+        return translateToLocalFormatted("$unlocalizedName.format", variant.sphere.ergType.displayName.formattedText)
+    }
+}
+
+operator fun (() -> ItemSpheres).get(ergType: Erg) = this().getVariant(ergType.ordinal)?.createItemStack() ?: EMPTY_ITEM_STACK
