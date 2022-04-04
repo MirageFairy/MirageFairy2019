@@ -13,7 +13,7 @@ import miragefairy2019.mod.magic4.percent0
 import miragefairy2019.mod.magic4.percent2
 import miragefairy2019.mod.magic4.positive
 import miragefairy2019.mod.magic4.world
-import miragefairy2019.mod.modules.fairyweapon.critical.CriticalRate
+import miragefairy2019.mod.modules.fairyweapon.CriticalRate
 import miragefairy2019.mod.modules.fairyweapon.spawnMagicParticle
 import miragefairy2019.mod3.skill.EnumMastery
 import mirrg.kotlin.atMost

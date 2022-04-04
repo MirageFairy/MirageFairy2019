@@ -7,7 +7,7 @@ import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.withColor
 import miragefairy2019.mod.formula4.FormulaRendererSelector
-import miragefairy2019.mod.modules.fairyweapon.critical.CriticalRate
+import miragefairy2019.mod.modules.fairyweapon.CriticalRate
 import mirrg.kotlin.formatAs
 import net.minecraft.util.text.ITextComponent
 import kotlin.math.log
