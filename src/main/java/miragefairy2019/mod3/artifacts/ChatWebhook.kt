@@ -199,11 +199,9 @@ object ChatWebhook {
                     val onFinish = mutableListOf<() -> Unit>()
                     manager.chatWebhook.forEach { (dimensionalPos, daemon) ->
                         val isInvalid = run invalidDaemon@{
-                            val world = DimensionManager.getWorld(dimensionalPos.dimension)
-                                ?: return@invalidDaemon false // ディメンションがロードされていない
+                            val world = DimensionManager.getWorld(dimensionalPos.dimension) ?: return@invalidDaemon false // ディメンションがロードされていない
                             if (!world.isBlockLoaded(dimensionalPos.pos)) return@invalidDaemon false // チャンクがロードされていない
-                            val block = world.getBlockState(dimensionalPos.pos).block as? IBlockDaemon
-                                ?: return@invalidDaemon true // ブロックがおかしい
+                            val block = world.getBlockState(dimensionalPos.pos).block as? IBlockDaemon ?: return@invalidDaemon true // ブロックがおかしい
                             if (!block.canSupportDaemon(world, dimensionalPos.pos, daemon)) return@invalidDaemon true // このデーモンをサポートしていない
                             false // 正常
                         }
@@ -411,8 +409,7 @@ class TileEntityChatWebhookTransmitter : TileEntity() {
         manager.chatWebhook.setOrRemove(dimensionalPos, run fail@{
             ChatWebhookDaemon(
                 (if (resetTimestamp) null else daemon?.created) ?: Instant.now(),
-                username?.let { "$it at ${world.provider.dimensionType.getName()} (${pos.x},${pos.y},${pos.z})" }
-                    ?: return@fail null,
+                username?.let { "$it at ${world.provider.dimensionType.getName()} (${pos.x},${pos.y},${pos.z})" } ?: return@fail null,
                 webhookUrl ?: return@fail null,
                 block.durationSeconds
             )
@@ -444,10 +441,8 @@ class TileEntityRendererChatWebhookTransmitter : TileEntitySpecialRenderer<TileE
 
         // ネームプレートを表示
         setLightmapDisabled(true)
-        val y2 = drawBlockNameplateMultiLine(fontRenderer, tileEntity.webhookUrl
-            ?: "", Vec3d(x, y, z), rendererDispatcher.entityYaw, rendererDispatcher.entityPitch)
-        drawBlockNameplateMultiLine(fontRenderer, tileEntity.username
-            ?: "", Vec3d(x, y2, z), rendererDispatcher.entityYaw, rendererDispatcher.entityPitch)
+        val y2 = drawBlockNameplateMultiLine(fontRenderer, tileEntity.webhookUrl ?: "", Vec3d(x, y, z), rendererDispatcher.entityYaw, rendererDispatcher.entityPitch)
+        drawBlockNameplateMultiLine(fontRenderer, tileEntity.username ?: "", Vec3d(x, y2, z), rendererDispatcher.entityYaw, rendererDispatcher.entityPitch)
         setLightmapDisabled(false)
     }
 }
