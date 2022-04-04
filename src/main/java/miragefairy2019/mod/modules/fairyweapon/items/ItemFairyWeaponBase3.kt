@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.item
+package miragefairy2019.mod.modules.fairyweapon.items
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.IFairyType
@@ -25,9 +25,9 @@ import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.modules.fairyweapon.findFairy
-import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
-import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
-import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.NEVER
+import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
+import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
+import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.NEVER
 import miragefairy2019.mod3.artifacts.ClientPlayerProxy
 import miragefairy2019.mod3.artifacts.PlayerProxy
 import miragefairy2019.mod3.artifacts.playerAuraHandler

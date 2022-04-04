@@ -1,6 +1,6 @@
 package miragefairy2019.mod.magic4
 
-import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponMagic4
+import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponMagic4
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack

@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.item
+package miragefairy2019.mod.modules.fairyweapon.items
 
 import miragefairy2019.libkt.grow
 import miragefairy2019.libkt.positions
@@ -14,41 +14,42 @@ import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
-class ItemMiragiumScythe(
-    additionalBaseStatus: Double,
-    override var destroySpeed: Float
+class ItemRyugyoDrill(
+    additionalBaseStatus: Double
 ) : ItemMiragiumToolBase(
     Mana.GAIA,
-    EnumMastery.harvest,
+    EnumMastery.mining,
     additionalBaseStatus
 ) {
-    val maxHardness = "maxHardness"({ double2.positive }) { !strength * 0.01 }.setRange(0.0..10.0).setVisibility(Companion.EnumVisibility.DETAIL)
-    val range = "range"({ int.positive }) { (2 + !extent * 0.02).toInt() }.setRange(2..5).setVisibility(Companion.EnumVisibility.DETAIL)
-    val coolTime = "coolTime"({ tick.negative }) { cost * 0.3 }.setVisibility(Companion.EnumVisibility.DETAIL)
+    val maxHardness = "maxHardness"({ double2.positive }) { 2.0 + !strength * 0.02 }.setRange(2.0..20.0).setVisibility(Companion.EnumVisibility.DETAIL)
+    val range = "range"({ int.positive }) { (1 + !extent * 0.01).toInt() }.setRange(1..5).setVisibility(Companion.EnumVisibility.DETAIL)
+    val coolTime = "coolTime"({ tick.negative }) { cost * 2.0 }.setVisibility(Companion.EnumVisibility.DETAIL)
+
+    init {
+        setHarvestLevel("pickaxe", 3)
+        setHarvestLevel("shovel", 3)
+        destroySpeed = 8.0f
+    }
 
     override fun iterateTargets(magicScope: MagicScope, blockPosBase: BlockPos) = iterator {
         magicScope.run {
-            blockPosBase.region.grow(!range, 0, !range).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
+            blockPosBase.region.grow(!range, !range, !range).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
                 if (canBreak(magicScope, blockPos)) yield(blockPos)
             }
         }
     }
 
     override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = super.isEffective(itemStack, blockState) || when {
-        blockState.block === Blocks.WEB -> true
-        blockState.material === Material.PLANTS -> true
-        blockState.material === Material.VINE -> true
-        blockState.material === Material.CORAL -> true
-        blockState.material === Material.LEAVES -> true
-        blockState.material === Material.GOURD -> true
-        blockState.material === Material.GRASS -> true
-        blockState.material === Material.CACTUS -> true
+        blockState.block === Blocks.SNOW_LAYER -> true
+        blockState.material === Material.IRON -> true
+        blockState.material === Material.ANVIL -> true
+        blockState.material === Material.ROCK -> true
+        blockState.material === Material.SNOW -> true
         else -> false
     }
 
     override fun canBreak(magicScope: MagicScope, blockPos: BlockPos) = super.canBreak(magicScope, blockPos)
             && magicScope.run { world.getBlockState(blockPos).getBlockHardness(world, blockPos) <= !maxHardness } // 硬すぎてはいけない
-            && !magicScope.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない
 
     override fun getCoolTime(magicScope: MagicScope) = magicScope.run { !coolTime }
 }

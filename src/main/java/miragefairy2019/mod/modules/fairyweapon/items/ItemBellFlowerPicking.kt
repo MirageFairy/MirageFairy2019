@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.item
+package miragefairy2019.mod.modules.fairyweapon.items
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Erg.WARP
@@ -7,7 +7,7 @@ import miragefairy2019.api.PickHandlerRegistry
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
-import miragefairy2019.mod.modules.fairyweapon.item.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
+import miragefairy2019.mod.modules.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
 import miragefairy2019.mod.modules.fairyweapon.playSound
 import miragefairy2019.mod.modules.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod3.artifacts.MirageFlower

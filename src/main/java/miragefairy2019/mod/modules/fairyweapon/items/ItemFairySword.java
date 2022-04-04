@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.item;
+package miragefairy2019.mod.modules.fairyweapon.items;
 
 import com.google.common.collect.Multimap;
 import miragefairy2019.api.IFairyType;

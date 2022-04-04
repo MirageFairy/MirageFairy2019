@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.item
+package miragefairy2019.mod.modules.fairyweapon.items
 
 import appeng.api.config.Actionable
 import appeng.api.networking.energy.IAEPowerStorage
