@@ -15,7 +15,7 @@ import miragefairy2019.mod3.skill.displayName
 import miragefairy2019.mod3.skill.getSkillLevel
 import net.minecraft.util.text.ITextComponent
 
-interface MagicStatusContainer {
+interface IMagicStatusContainer {
     val magicStatusList: MutableList<MagicStatus<*>>
 }
 
@@ -43,7 +43,7 @@ class SimpleFormulaArguments(
 
 class FormulaRendererSelector<T>
 
-fun <T> MagicStatusContainer.status(
+fun <T> IMagicStatusContainer.status(
     name: String,
     formula: FormulaScope.() -> T,
     formulaRendererGetter: FormulaRendererSelector<T>.() -> FormulaRenderer<T>

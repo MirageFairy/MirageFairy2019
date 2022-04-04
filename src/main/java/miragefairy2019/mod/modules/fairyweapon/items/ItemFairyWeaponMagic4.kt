@@ -15,7 +15,7 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.white
-import miragefairy2019.mod.magic4.MagicStatusContainer
+import miragefairy2019.mod.magic4.IMagicStatusContainer
 import miragefairy2019.mod.magic4.displayName
 import miragefairy2019.mod.magic4.factors
 import miragefairy2019.mod.magic4.getDisplayValue
@@ -43,7 +43,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), MagicStatusContainer {
+open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), IMagicStatusContainer {
 
     // Magic Status
     override val magicStatusList = mutableListOf<MagicStatus<*>>()
