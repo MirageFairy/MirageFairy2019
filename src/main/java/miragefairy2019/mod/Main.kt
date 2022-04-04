@@ -1,6 +1,11 @@
 package miragefairy2019.mod
 
-import miragefairy2019.libkt.*
+import miragefairy2019.lib.getLogger
+import miragefairy2019.libkt.GuiHandlerContext
+import miragefairy2019.libkt.ISimpleGuiHandler
+import miragefairy2019.libkt.ModInitializer
+import miragefairy2019.libkt.guiHandler
+import miragefairy2019.libkt.module
 import miragefairy2019.mod3.artifacts.FairyCrystal
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraftforge.common.config.Configuration
@@ -9,8 +14,13 @@ import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
+import kotlin.collections.contains
+import kotlin.collections.forEach
+import kotlin.collections.mutableListOf
+import kotlin.collections.mutableMapOf
+import kotlin.collections.plusAssign
+import kotlin.collections.set
 
 object Main {
     lateinit var logger: Logger
@@ -30,7 +40,7 @@ object Main {
 
     val module = module {
         onConstruction {
-            LogManager.getLogger(javaClass).info("Mod Version: $modVersion; Use Pre-Release Features: $usePreReleaseFeatures;")
+            getLogger().info("Mod Version: $modVersion; Use Pre-Release Features: $usePreReleaseFeatures;")
         }
 
         onPreInit {

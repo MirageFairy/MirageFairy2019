@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import miragefairy2019.api.IFoodAuraItem
 import miragefairy2019.api.ManaSet
+import miragefairy2019.lib.getLogger
 import miragefairy2019.lib.plus
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
@@ -25,7 +26,6 @@ import net.minecraft.item.ItemFood
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import org.apache.logging.log4j.LogManager
 import java.io.File
 import java.util.ArrayDeque
 
@@ -119,7 +119,7 @@ data class ResettableProperty<T : Any>(private val getter: () -> T) {
 
 class PlayerAuraModel {
     companion object {
-        private val LOGGER = LogManager.getLogger(PlayerAuraModel::class.java)
+        private val LOGGER = getLogger(PlayerAuraModel::class.java)
     }
 
 

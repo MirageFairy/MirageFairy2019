@@ -1,5 +1,6 @@
 package miragefairy2019.mod3.systems
 
+import miragefairy2019.lib.getLogger
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
@@ -10,11 +11,9 @@ import net.minecraft.init.Items
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
 
 object VanillaItemBlocking {
-    val logger: Logger = LogManager.getLogger(javaClass)
+    val logger = getLogger()
     val module = module {
         val disableVanillaWarpItems = configProperty { it.getBoolean("disableVanillaWarpItems", Main.categoryFeatures, false, "Disables vanilla items that allow warping.") }
 

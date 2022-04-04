@@ -1,7 +1,8 @@
 package miragefairy2019.libkt
 
-import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.lib.getLogger
 import miragefairy2019.mod.Main.side
+import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
@@ -29,7 +30,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
-import org.apache.logging.log4j.LogManager
 
 fun module(block: ModInitializer.() -> Unit) = block
 
@@ -37,7 +37,7 @@ class ModInitializer(val usePreReleaseFeatures: Boolean) {
     val modVersion = run {
         val version = ModMirageFairy2019.VERSION
         val serverVersion = version.split(".").getOrNull(2)?.toInt()
-        LogManager.getLogger(javaClass).info("Version: $version; Server Version: $serverVersion;")
+        getLogger().info("Version: $version; Server Version: $serverVersion;")
         serverVersion
     }
 
