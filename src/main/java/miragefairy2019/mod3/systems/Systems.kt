@@ -8,5 +8,6 @@ object Systems {
         ManualRepair.module(this)
         Combine.module(this)
         VanillaItemBlocking.module(this)
+        VanillaOreNames.module(this)
     }
 }

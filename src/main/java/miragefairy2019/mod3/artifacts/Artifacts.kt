@@ -26,7 +26,6 @@ object Artifacts {
         FluidMaterials.module(this)
         OreSeed.module(this)
         CommonMaterials.module(this)
-        VanillaOreNames.module(this)
         Wand.module(this)
         FairyCrystal.module(this)
     }
