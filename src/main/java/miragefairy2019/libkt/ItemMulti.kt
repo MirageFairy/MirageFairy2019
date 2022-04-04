@@ -1,6 +1,5 @@
-package miragefairy2019.mod.lib
+package miragefairy2019.libkt
 
-import miragefairy2019.libkt.createItemStack
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item

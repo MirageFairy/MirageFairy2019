@@ -1,6 +1,5 @@
-package miragefairy2019.mod.lib
+package miragefairy2019.libkt
 
-import miragefairy2019.libkt.nextInt
 import net.minecraft.block.BlockBush
 import net.minecraft.block.state.IBlockState
 import net.minecraft.util.math.BlockPos

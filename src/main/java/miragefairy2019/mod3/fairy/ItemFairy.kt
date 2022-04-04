@@ -26,8 +26,8 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.libkt.white
 import miragefairy2019.libkt.withColor
-import miragefairy2019.mod.lib.ItemMulti
-import miragefairy2019.mod.lib.ItemVariant
+import miragefairy2019.libkt.ItemMulti
+import miragefairy2019.libkt.ItemVariant
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack

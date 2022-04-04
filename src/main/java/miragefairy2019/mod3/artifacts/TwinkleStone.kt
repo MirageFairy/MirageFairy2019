@@ -11,10 +11,10 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.lib.BlockMulti
-import miragefairy2019.mod.lib.BlockVariantList
-import miragefairy2019.mod.lib.IBlockVariant
-import miragefairy2019.mod.lib.ItemBlockMulti
+import miragefairy2019.libkt.BlockMulti
+import miragefairy2019.libkt.BlockVariantList
+import miragefairy2019.libkt.IBlockVariant
+import miragefairy2019.libkt.ItemBlockMulti
 import miragefairy2019.mod3.main.Main
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material

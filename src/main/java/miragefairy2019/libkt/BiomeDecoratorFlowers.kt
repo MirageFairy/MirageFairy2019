@@ -1,4 +1,4 @@
-package miragefairy2019.mod.lib
+package miragefairy2019.libkt
 
 import mirrg.boron.util.UtilsMath
 import net.minecraft.world.biome.Biome

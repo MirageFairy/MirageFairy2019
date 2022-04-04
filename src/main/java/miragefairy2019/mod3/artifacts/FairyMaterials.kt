@@ -23,9 +23,9 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.lib.ItemMultiMaterial
-import miragefairy2019.mod.lib.ItemVariantMaterial
-import miragefairy2019.mod.lib.setCustomModelResourceLocations
+import miragefairy2019.libkt.ItemMultiMaterial
+import miragefairy2019.libkt.ItemVariantMaterial
+import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.mod3.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeItem

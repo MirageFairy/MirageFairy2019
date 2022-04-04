@@ -19,8 +19,8 @@ import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.mod.lib.BiomeDecoratorFlowers
-import miragefairy2019.mod.lib.WorldGenBush
+import miragefairy2019.libkt.BiomeDecoratorFlowers
+import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch

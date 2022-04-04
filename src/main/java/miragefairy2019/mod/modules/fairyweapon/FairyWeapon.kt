@@ -33,7 +33,7 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.lib.BakedModelBuiltinWrapper
+import miragefairy2019.libkt.BakedModelBuiltinWrapper
 import miragefairy2019.mod.modules.fairyweapon.items.ItemBellBase
 import miragefairy2019.mod.modules.fairyweapon.items.ItemBellChristmas
 import miragefairy2019.mod.modules.fairyweapon.items.ItemBellFlowerPicking

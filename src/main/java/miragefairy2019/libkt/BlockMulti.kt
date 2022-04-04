@@ -1,6 +1,5 @@
-package miragefairy2019.mod.lib
+package miragefairy2019.libkt
 
-import miragefairy2019.libkt.createItemStack
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyInteger

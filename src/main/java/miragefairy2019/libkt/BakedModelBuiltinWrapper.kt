@@ -1,4 +1,4 @@
-package miragefairy2019.mod.lib
+package miragefairy2019.libkt
 
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.renderer.block.model.BakedQuad
