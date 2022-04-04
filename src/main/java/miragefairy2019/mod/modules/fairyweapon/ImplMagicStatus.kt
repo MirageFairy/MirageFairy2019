@@ -19,9 +19,9 @@ import net.minecraft.util.text.TextFormatting.GREEN
 import net.minecraft.util.text.TextFormatting.RED
 
 class MagicStatus<T>(
-        private val name: String,
-        private val function: IMagicStatusFunction<T>,
-        private val formatter: IMagicStatusFormatter<T>
+    private val name: String,
+    private val function: IMagicStatusFunction<T>,
+    private val formatter: IMagicStatusFormatter<T>
 ) : IMagicStatus<T> {
     override fun getName() = name
     override fun getFunction() = function

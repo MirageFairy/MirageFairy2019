@@ -49,7 +49,7 @@ class ItemRyugyoDrill(
     }
 
     override fun canBreak(magicScope: MagicScope, blockPos: BlockPos) = super.canBreak(magicScope, blockPos)
-            && magicScope.run { world.getBlockState(blockPos).getBlockHardness(world, blockPos) <= !maxHardness } // 硬すぎてはいけない
+        && magicScope.run { world.getBlockState(blockPos).getBlockHardness(world, blockPos) <= !maxHardness } // 硬すぎてはいけない
 
     override fun getCoolTime(magicScope: MagicScope) = magicScope.run { !coolTime }
 }

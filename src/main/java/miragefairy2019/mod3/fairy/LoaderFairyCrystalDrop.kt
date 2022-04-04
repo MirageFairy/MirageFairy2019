@@ -152,7 +152,7 @@ val loaderFairyCrystalDrop = module {
 
             FairyTypes.instance.redSpinel(0.00001).world {
                 LocalDateTime.now(ZoneOffset.ofHours(9)) >= LocalDateTime.of(2022, 4, 1, 0, 0, 0) &&
-                        LocalDateTime.now(ZoneOffset.ofHours(9)) < LocalDateTime.of(2022, 5, 1, 0, 0, 0)
+                    LocalDateTime.now(ZoneOffset.ofHours(9)) < LocalDateTime.of(2022, 5, 1, 0, 0, 0)
             }
 
         }

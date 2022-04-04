@@ -281,32 +281,32 @@ object FairyWeapon {
             // 実績ルート
             place(
                 "root", jsonElement(
-                    "display" to jsonElementNotNull(
-                        "icon" to jsonElement(
-                            "item" to "miragefairy2019:miragium_sword".jsonElement
-                        ),
-                        "title" to jsonElement(
-                            "translate" to "advancements.miragefairy2019.fairy_weapon.root.title".jsonElement
-                        ),
-                        "description" to jsonElement(
-                            "translate" to "advancements.miragefairy2019.fairy_weapon.root.description".jsonElement
-                        ),
-                        "background" to "miragefairy2019:textures/blocks/magnetite_block.png".jsonElement
+                "display" to jsonElementNotNull(
+                    "icon" to jsonElement(
+                        "item" to "miragefairy2019:miragium_sword".jsonElement
                     ),
-                    "criteria" to jsonElement(
-                        "main" to jsonElement(
-                            "trigger" to "minecraft:inventory_changed".jsonElement,
-                            "conditions" to jsonElement(
-                                "items" to jsonElement(
-                                    jsonElement(
-                                        "type" to "forge:ore_dict".jsonElement,
-                                        "ore" to "mirageFairy2019SphereAny".jsonElement
-                                    )
+                    "title" to jsonElement(
+                        "translate" to "advancements.miragefairy2019.fairy_weapon.root.title".jsonElement
+                    ),
+                    "description" to jsonElement(
+                        "translate" to "advancements.miragefairy2019.fairy_weapon.root.description".jsonElement
+                    ),
+                    "background" to "miragefairy2019:textures/blocks/magnetite_block.png".jsonElement
+                ),
+                "criteria" to jsonElement(
+                    "main" to jsonElement(
+                        "trigger" to "minecraft:inventory_changed".jsonElement,
+                        "conditions" to jsonElement(
+                            "items" to jsonElement(
+                                jsonElement(
+                                    "type" to "forge:ore_dict".jsonElement,
+                                    "ore" to "mirageFairy2019SphereAny".jsonElement
                                 )
                             )
                         )
                     )
                 )
+            )
             )
 
             // 進捗

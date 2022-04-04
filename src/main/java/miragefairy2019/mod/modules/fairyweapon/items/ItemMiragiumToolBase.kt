@@ -113,6 +113,6 @@ abstract class ItemMiragiumToolBase(
 
     @Suppress("SimplifyBooleanWithConstants")
     open fun canBreak(magicScope: MagicScope, blockPos: BlockPos) = true
-            && magicScope.world.getBlockState(blockPos).getBlockHardness(magicScope.world, blockPos) >= 0 // 岩盤であってはならない
-            && isEffective(magicScope.itemStack, magicScope.world.getBlockState(blockPos)) // 効果的でなければならない
+        && magicScope.world.getBlockState(blockPos).getBlockHardness(magicScope.world, blockPos) >= 0 // 岩盤であってはならない
+        && isEffective(magicScope.itemStack, magicScope.world.getBlockState(blockPos)) // 効果的でなければならない
 }

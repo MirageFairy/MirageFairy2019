@@ -149,7 +149,7 @@ abstract class ItemFairyWeaponBase3(
         val magicStatusWrapper = MagicStatusWrapper<T>(
             MagicStatus(
                 this,
-                    IMagicStatusFunction<T> { MagicStatusFormulaScope(it).function() },
+                IMagicStatusFunction<T> { MagicStatusFormulaScope(it).function() },
                 MagicStatusFormatterScope<T>().getFormatter()
             )
         )

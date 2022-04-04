@@ -47,8 +47,8 @@ class ItemMiragiumScythe(
     }
 
     override fun canBreak(magicScope: MagicScope, blockPos: BlockPos) = super.canBreak(magicScope, blockPos)
-            && magicScope.run { world.getBlockState(blockPos).getBlockHardness(world, blockPos) <= !maxHardness } // 硬すぎてはいけない
-            && !magicScope.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない
+        && magicScope.run { world.getBlockState(blockPos).getBlockHardness(world, blockPos) <= !maxHardness } // 硬すぎてはいけない
+        && !magicScope.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない
 
     override fun getCoolTime(magicScope: MagicScope) = magicScope.run { !coolTime }
 }

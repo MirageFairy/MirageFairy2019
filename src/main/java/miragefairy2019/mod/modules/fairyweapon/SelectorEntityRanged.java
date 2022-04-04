@@ -77,9 +77,9 @@ public class SelectorEntityRanged<E extends Entity> {
 
         // 代入
         this.tuples = ISuppliterator.concat(
-                ISuppliterator.ofIterable(effective).map(e -> Tuple.of(e, EnumTargetExecutability.EFFECTIVE)),
-                ISuppliterator.ofIterable(overflowed).map(e -> Tuple.of(e, EnumTargetExecutability.OVERFLOWED)),
-                ISuppliterator.ofIterable(invalid).map(e -> Tuple.of(e, EnumTargetExecutability.INVALID)))
+            ISuppliterator.ofIterable(effective).map(e -> Tuple.of(e, EnumTargetExecutability.EFFECTIVE)),
+            ISuppliterator.ofIterable(overflowed).map(e -> Tuple.of(e, EnumTargetExecutability.OVERFLOWED)),
+            ISuppliterator.ofIterable(invalid).map(e -> Tuple.of(e, EnumTargetExecutability.INVALID)))
             .toList();
 
     }
