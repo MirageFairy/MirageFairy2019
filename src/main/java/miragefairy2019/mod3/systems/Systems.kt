@@ -9,5 +9,6 @@ object Systems {
         Combine.module(this)
         VanillaItemBlocking.module(this)
         VanillaOreNames.module(this)
+        Ae2SpatialIoBlocking.module(this)
     }
 }
