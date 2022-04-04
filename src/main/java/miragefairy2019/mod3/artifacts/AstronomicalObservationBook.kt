@@ -14,7 +14,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.modules.fairyweapon.MagicSelectorRayTrace
-import miragefairy2019.mod3.main.Main
+import miragefairy2019.mod.Main
 import miragefairy2019.mod3.skill.api.ApiSkill
 import mirrg.kotlin.minus
 import mirrg.kotlin.startOfDay

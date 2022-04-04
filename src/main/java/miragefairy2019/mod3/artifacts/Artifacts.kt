@@ -4,7 +4,6 @@ import miragefairy2019.libkt.module
 
 object Artifacts {
     val module = module {
-        Main.module(this)
         Dish.module(this)
         Fertilizer.module(this)
         TwinkleStone.module(this)
@@ -22,7 +21,6 @@ object Artifacts {
         ChatWebhook.module(this)
         DaemonSystem.module(this)
         Mfa.module(this)
-        Config.module(this)
         FairyLog.module(this)
         MirageFlower.module(this)
         FluidMaterials.module(this)

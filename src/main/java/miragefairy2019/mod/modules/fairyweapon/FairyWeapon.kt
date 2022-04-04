@@ -52,8 +52,8 @@ import miragefairy2019.mod.modules.fairyweapon.items.ItemRodBase
 import miragefairy2019.mod.modules.fairyweapon.items.ItemRyugyoDrill
 import miragefairy2019.mod3.artifacts.oreName
 import miragefairy2019.mod3.artifacts.sphereType
-import miragefairy2019.mod3.main.Main.creativeTab
-import miragefairy2019.mod3.main.Main.side
+import miragefairy2019.mod.Main.creativeTab
+import miragefairy2019.mod.Main.side
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
 import net.minecraft.client.renderer.block.model.ModelResourceLocation

@@ -46,7 +46,7 @@ import miragefairy2019.mod.modules.fairyweapon.getDisplayValue
 import miragefairy2019.mod.modules.fairyweapon.negative
 import miragefairy2019.mod.modules.fairyweapon.positive
 import miragefairy2019.mod.modules.fairyweapon.ranged
-import miragefairy2019.mod3.main.Main.side
+import miragefairy2019.mod.Main.side
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.IMastery
 import miragefairy2019.mod3.skill.getSkillLevel

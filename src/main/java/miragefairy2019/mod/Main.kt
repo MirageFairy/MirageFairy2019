@@ -1,17 +1,15 @@
-package miragefairy2019.mod3.main
+package miragefairy2019.mod
 
-import miragefairy2019.libkt.GuiHandlerContext
-import miragefairy2019.libkt.ISimpleGuiHandler
-import miragefairy2019.libkt.guiHandler
-import miragefairy2019.libkt.module
-import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.libkt.*
 import miragefairy2019.mod3.artifacts.FairyCrystal
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.fml.common.network.IGuiHandler
 import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 
 object Main {
@@ -27,10 +25,16 @@ object Main {
         guiHandlers[id] = guiHandler
     }
 
+    val categoryGeneral = "general"
+    val categoryFeatures = "features"
+
     val module = module {
+        onConstruction {
+            LogManager.getLogger(javaClass).info("Mod Version: $modVersion; Use Pre-Release Features: $usePreReleaseFeatures;")
+        }
 
         onPreInit {
-            Main.logger = modLog
+            logger = modLog
             Main.side = side
         }
 
@@ -53,5 +57,25 @@ object Main {
             }.guiHandler)
         }
 
+        onPreInit {
+            val configuration = Configuration(suggestedConfigurationFile)
+            configProperties.forEach { it.configure(configuration) }
+            configuration.save()
+        }
+
     }
 }
+
+private val configProperties = mutableListOf<ConfigPropertyHandler<*>>()
+
+private class ConfigPropertyHandler<T : Any>(private val propertySelector: (Configuration) -> T) : () -> T {
+    lateinit var value: T
+    fun configure(configuration: Configuration) {
+        value = propertySelector(configuration)
+    }
+
+    override fun invoke() = value
+}
+
+/** プロパティは[ModInitializer.onPreInit]よりも後で利用できます。 */
+fun <T : Any> configProperty(propertySelector: (Configuration) -> T): () -> T = ConfigPropertyHandler(propertySelector).also { configProperties += it }

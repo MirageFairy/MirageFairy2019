@@ -24,7 +24,7 @@ import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.mod3.fairy.relation.FairySelector
 import miragefairy2019.mod3.fairy.relation.primaries
 import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
-import miragefairy2019.mod3.main.Main
+import miragefairy2019.mod.Main
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.or
 import net.minecraft.advancements.CriteriaTriggers

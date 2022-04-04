@@ -19,8 +19,8 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.times
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.libkt.withColor
-import miragefairy2019.mod3.main.Main
-import miragefairy2019.mod3.main.Main.logger
+import miragefairy2019.mod.Main
+import miragefairy2019.mod.Main.logger
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayerMP

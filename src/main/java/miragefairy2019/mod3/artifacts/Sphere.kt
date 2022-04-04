@@ -19,7 +19,7 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.mod3.main.Main.creativeTab
+import miragefairy2019.mod.Main.creativeTab
 import mirrg.boron.util.UtilsString
 import net.minecraft.block.Block
 import net.minecraft.client.Minecraft

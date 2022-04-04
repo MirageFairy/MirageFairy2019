@@ -4,7 +4,7 @@ import miragefairy2019.api.Erg;
 import miragefairy2019.api.IFairyType;
 import miragefairy2019.lib.ErgKt;
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils;
-import miragefairy2019.mod3.main.Main;
+import miragefairy2019.mod.Main;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;

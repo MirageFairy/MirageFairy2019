@@ -24,7 +24,7 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.white
 import miragefairy2019.libkt.BakedModelBuiltinWrapper
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
-import miragefairy2019.mod3.main.Main
+import miragefairy2019.mod.Main
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager

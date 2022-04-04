@@ -1,7 +1,7 @@
 package miragefairy2019.libkt
 
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.main.Main.side
+import miragefairy2019.mod.Main.side
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer

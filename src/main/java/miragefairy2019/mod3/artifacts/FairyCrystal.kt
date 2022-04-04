@@ -29,7 +29,7 @@ import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
-import miragefairy2019.mod3.main.Main
+import miragefairy2019.mod.Main
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.api.ISkillContainer

@@ -13,7 +13,7 @@ import miragefairy2019.mod3.artifacts.oreseed.EnumVariantOreSeed
 import miragefairy2019.mod3.artifacts.oreseed.LoaderOreSeedDrop
 import miragefairy2019.mod3.artifacts.oreseed.OreSeedDropRegistry
 import miragefairy2019.mod3.artifacts.oreseed.WorldGenCompoundOreSeed
-import miragefairy2019.mod3.main.Main
+import miragefairy2019.mod.Main
 import net.minecraft.block.BlockStone
 import net.minecraft.init.Blocks
 import net.minecraft.util.math.ChunkPos

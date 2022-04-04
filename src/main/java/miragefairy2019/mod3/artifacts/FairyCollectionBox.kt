@@ -27,7 +27,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod3.fairy.fairyVariant
 import miragefairy2019.mod3.fairy.hasSameId
 import miragefairy2019.mod3.fairy.level
-import miragefairy2019.mod3.main.Main
+import miragefairy2019.mod.Main
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material

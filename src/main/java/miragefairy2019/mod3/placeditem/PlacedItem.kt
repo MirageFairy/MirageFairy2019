@@ -5,8 +5,8 @@ import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
-import miragefairy2019.mod3.main.Main
-import miragefairy2019.mod3.main.Main.side
+import miragefairy2019.mod.Main
+import miragefairy2019.mod.Main.side
 import net.minecraft.block.Block
 import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.client.settings.KeyBinding

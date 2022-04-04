@@ -2,8 +2,8 @@ package miragefairy2019.mod3.skill
 
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod3.main.Main
-import miragefairy2019.mod3.main.Main.logger
+import miragefairy2019.mod.Main
+import miragefairy2019.mod.Main.logger
 import miragefairy2019.mod3.skill.api.ApiSkill
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP

@@ -21,7 +21,7 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionSpawnBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRegistry
-import miragefairy2019.mod3.main.Main
+import miragefairy2019.mod.Main
 import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.api.ApiSkill
 import miragefairy2019.mod3.skill.displayName

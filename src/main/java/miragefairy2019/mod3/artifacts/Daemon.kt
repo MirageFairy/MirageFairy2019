@@ -5,7 +5,7 @@ import miragefairy2019.libkt.existsOrNull
 import miragefairy2019.libkt.mkdirsParent
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.onServerSave
-import miragefairy2019.mod3.main.Main
+import miragefairy2019.mod.Main
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonWrapper
 import mirrg.kotlin.gson.toJson

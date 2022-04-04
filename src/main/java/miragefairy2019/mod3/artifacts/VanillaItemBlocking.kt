@@ -2,6 +2,8 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.mod.Main
+import miragefairy2019.mod.configProperty
 import mirrg.kotlin.castOrNull
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Items
@@ -14,7 +16,7 @@ import org.apache.logging.log4j.Logger
 object VanillaItemBlocking {
     val logger: Logger = LogManager.getLogger(javaClass)
     val module = module {
-        val disableVanillaWarpItems = configProperty { it.getBoolean("disableVanillaWarpItems", Config.categoryFeatures, false, "Disables vanilla items that allow warping.") }
+        val disableVanillaWarpItems = configProperty { it.getBoolean("disableVanillaWarpItems", Main.categoryFeatures, false, "Disables vanilla items that allow warping.") }
 
         onInit {
             logger.info("disableVanillaWarpItems: ${disableVanillaWarpItems()}")

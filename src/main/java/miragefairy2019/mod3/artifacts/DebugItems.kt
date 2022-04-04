@@ -21,7 +21,7 @@ import miragefairy2019.mod3.fairy.ColorSet
 import miragefairy2019.mod3.fairy.FairyTypes
 import miragefairy2019.lib.erg
 import miragefairy2019.lib.mana
-import miragefairy2019.mod3.main.Main
+import miragefairy2019.mod.Main
 import miragefairy2019.mod3.playeraura.api.ApiPlayerAura
 import miragefairy2019.mod3.skill.api.ApiSkill
 import mirrg.kotlin.formatAs
