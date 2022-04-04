@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.items
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
-import miragefairy2019.mod.formula4.status
+import miragefairy2019.mod.magic4.status
 import miragefairy2019.mod.magic4.FormulaArguments
 import miragefairy2019.mod.magic4.MagicArguments
 import miragefairy2019.mod.magic4.boolean

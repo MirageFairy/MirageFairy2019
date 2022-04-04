@@ -1,6 +1,6 @@
 package miragefairy2019.mod.modules.fairyweapon.items
 
-import miragefairy2019.mod.formula4.status
+import miragefairy2019.mod.magic4.status
 import miragefairy2019.mod.magic4.MagicHandler
 import miragefairy2019.mod.magic4.pitch
 import miragefairy2019.mod.magic4.world

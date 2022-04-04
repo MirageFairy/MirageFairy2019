@@ -15,10 +15,10 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.white
-import miragefairy2019.mod.formula4.MagicStatusContainer
-import miragefairy2019.mod.formula4.displayName
-import miragefairy2019.mod.formula4.factors
-import miragefairy2019.mod.formula4.getDisplayValue
+import miragefairy2019.mod.magic4.MagicStatusContainer
+import miragefairy2019.mod.magic4.displayName
+import miragefairy2019.mod.magic4.factors
+import miragefairy2019.mod.magic4.getDisplayValue
 import miragefairy2019.mod.magic4.Magic
 import miragefairy2019.mod.magic4.MagicArguments
 import miragefairy2019.mod.magic4.MagicStatus

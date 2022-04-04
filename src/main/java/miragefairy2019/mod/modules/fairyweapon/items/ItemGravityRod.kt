@@ -4,7 +4,7 @@ import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.modules.fairyweapon.MagicSelectorRayTrace
-import miragefairy2019.mod.formula4.status
+import miragefairy2019.mod.magic4.status
 import miragefairy2019.mod.magic4.MagicHandler
 import miragefairy2019.mod.magic4.duration
 import miragefairy2019.mod.magic4.integer

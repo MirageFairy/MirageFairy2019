@@ -1,4 +1,4 @@
-package miragefairy2019.mod.formula4
+package miragefairy2019.mod.magic4
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.ErgSet
@@ -9,10 +9,6 @@ import miragefairy2019.lib.get
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod.magic4.Formula
-import miragefairy2019.mod.magic4.FormulaArguments
-import miragefairy2019.mod.magic4.FormulaRenderer
-import miragefairy2019.mod.magic4.MagicStatus
 import miragefairy2019.mod3.skill.IMastery
 import miragefairy2019.mod3.skill.ISkillContainer
 import miragefairy2019.mod3.skill.displayName

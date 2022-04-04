@@ -2,7 +2,7 @@ package miragefairy2019.mod.modules.fairyweapon.items
 
 import appeng.api.config.Actionable
 import appeng.api.networking.energy.IAEPowerStorage
-import miragefairy2019.mod.formula4.status
+import miragefairy2019.mod.magic4.status
 import miragefairy2019.mod.magic4.MagicHandler
 import miragefairy2019.mod.magic4.float2
 import miragefairy2019.mod.magic4.magic
