@@ -537,20 +537,12 @@ enum class EnumVariantOre2(
     override val hardness: Float,
     override val resistance: Float,
     override val harvestLevel: Int,
-    private val gemProvider: GemProvider,
-    override val canSeeOnCreativeTab: Boolean = true
+    private val gemProvider: GemProvider
 ) : IStringSerializable, IBlockVariantOre {
     TOURMALINE_ORE(0, "tourmaline_ore", "oreTourmaline", 3f, 5f, 2, GemProvider({ getItemStack("gemTourmaline") }, 1.0, 0.5, 1, 5)),
     HELIOLITE_ORE(1, "heliolite_ore", "oreHeliolite", 3f, 5f, 2, GemProvider({ getItemStack("gemHeliolite") }, 1.0, 0.5, 10, 20)),
     END_STONE_LABRADORITE_ORE(2, "end_stone_labradorite_ore", "oreLabradorite", 3f, 5f, 2, GemProvider({ getItemStack("gemLabradorite") }, 1.0, 0.5, 15, 30)),
-    PYRITE_ORE(3, "pyrite_ore", "orePyrite", 3f, 5f, 1, GemProvider({ getItemStack("gemPyrite") }, 1.0, 1.5, 1, 3), Unit.run {
-        // TODO remove
-        if (LocalDateTime.now() < LocalDateTime.of(2022, 4, 1, 0, 0, 0)) {
-            false
-        } else {
-            true
-        }
-    }),
+    PYRITE_ORE(3, "pyrite_ore", "orePyrite", 3f, 5f, 1, GemProvider({ getItemStack("gemPyrite") }, 1.0, 1.5, 1, 3)),
     ;
 
     override fun toString() = resourceName
