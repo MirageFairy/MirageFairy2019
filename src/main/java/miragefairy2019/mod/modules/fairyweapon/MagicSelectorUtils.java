@@ -1,4 +1,4 @@
-package miragefairy2019.mod.common.magic;
+package miragefairy2019.mod.modules.fairyweapon;
 
 import com.google.common.base.Predicate;
 import mirrg.boron.util.struct.Tuple;

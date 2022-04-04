@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.magic;
+package miragefairy2019.mod.modules.fairyweapon;
 
 public enum EnumTargetExecutability {
     EFFECTIVE(0x00FF00),

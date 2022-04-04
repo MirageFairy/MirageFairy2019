@@ -1,7 +1,7 @@
 package miragefairy2019.mod.modules.fairyweapon.items
 
 import miragefairy2019.libkt.norm1
-import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
+import miragefairy2019.mod.modules.fairyweapon.MagicSelectorRayTrace
 import miragefairy2019.mod.formula4.status
 import miragefairy2019.mod.magic4.MagicArguments
 import miragefairy2019.mod.magic4.MagicHandler

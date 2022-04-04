@@ -1,4 +1,4 @@
-package miragefairy2019.mod.modules.fairyweapon.magic;
+package miragefairy2019.mod.modules.fairyweapon;
 
 import kotlin.Pair;
 import net.minecraft.util.EnumParticleTypes;

@@ -1,7 +1,6 @@
-package miragefairy2019.mod.common.magic
+package miragefairy2019.mod.modules.fairyweapon
 
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange
-import miragefairy2019.mod.modules.fairyweapon.magic.UtilsMagic
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.util.math.BlockPos

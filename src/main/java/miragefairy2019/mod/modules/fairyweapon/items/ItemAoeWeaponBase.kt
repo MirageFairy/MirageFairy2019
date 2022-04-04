@@ -1,14 +1,14 @@
 package miragefairy2019.mod.modules.fairyweapon.items
 
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.common.magic.MagicSelectorRayTrace
+import miragefairy2019.mod.modules.fairyweapon.MagicSelectorRayTrace
 import miragefairy2019.mod.magic4.FormulaArguments
 import miragefairy2019.mod.magic4.MagicArguments
 import miragefairy2019.mod.magic4.MagicHandler
 import miragefairy2019.mod.magic4.world
 import miragefairy2019.mod.modules.fairyweapon.FairyMagicDamageSource
 import miragefairy2019.mod.modules.fairyweapon.MagicMessage
-import miragefairy2019.mod.modules.fairyweapon.magic.SelectorEntityRanged
+import miragefairy2019.mod.modules.fairyweapon.SelectorEntityRanged
 import miragefairy2019.mod.modules.fairyweapon.spawnDamageParticle
 import miragefairy2019.mod.modules.fairyweapon.spawnParticleTargets
 import net.minecraft.entity.EntityLivingBase

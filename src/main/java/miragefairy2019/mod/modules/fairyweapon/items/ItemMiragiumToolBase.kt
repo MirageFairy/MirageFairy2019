@@ -6,9 +6,9 @@ import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.modules.fairyweapon.FairyWeaponUtils
-import miragefairy2019.mod.modules.fairyweapon.magic.EnumTargetExecutability
-import miragefairy2019.mod.modules.fairyweapon.magic.SelectorRayTrace
-import miragefairy2019.mod.modules.fairyweapon.magic.UtilsMagic
+import miragefairy2019.mod.modules.fairyweapon.EnumTargetExecutability
+import miragefairy2019.mod.modules.fairyweapon.SelectorRayTrace
+import miragefairy2019.mod.modules.fairyweapon.UtilsMagic
 import miragefairy2019.mod3.magic.api.IMagicHandler
 import miragefairy2019.mod3.magic.positive
 import miragefairy2019.mod3.skill.api.IMastery
