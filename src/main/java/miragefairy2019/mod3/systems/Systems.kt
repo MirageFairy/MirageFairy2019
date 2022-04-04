@@ -7,5 +7,6 @@ object Systems {
         DamageSource.module(this)
         ManualRepair.module(this)
         Combine.module(this)
+        VanillaItemBlocking.module(this)
     }
 }
