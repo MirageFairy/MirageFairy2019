@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.artifacts
+package miragefairy2019.mod3.systems
 
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item

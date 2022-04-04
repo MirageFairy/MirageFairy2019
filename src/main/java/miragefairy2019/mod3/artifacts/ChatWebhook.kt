@@ -43,6 +43,9 @@ import miragefairy2019.libkt.y
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.configProperty
+import miragefairy2019.mod3.systems.Daemon
+import miragefairy2019.mod3.systems.DaemonManager
+import miragefairy2019.mod3.systems.IBlockDaemon
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.json
 import mirrg.kotlin.gson.jsonElement

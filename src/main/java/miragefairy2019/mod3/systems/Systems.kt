@@ -10,5 +10,6 @@ object Systems {
         VanillaItemBlocking.module(this)
         VanillaOreNames.module(this)
         Ae2SpatialIoBlocking.module(this)
+        DaemonSystem.module(this)
     }
 }

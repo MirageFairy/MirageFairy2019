@@ -15,6 +15,7 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
+import miragefairy2019.mod.Main
 import miragefairy2019.mod3.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionNotNether
@@ -23,11 +24,12 @@ import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionSpawnBlock
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRegistry
-import miragefairy2019.mod.Main
-import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.ApiSkill
+import miragefairy2019.mod3.skill.EnumMastery
 import miragefairy2019.mod3.skill.displayName
 import miragefairy2019.mod3.skill.getSkillLevel
+import miragefairy2019.mod3.systems.IFairyStickCraftItem
+import miragefairy2019.mod3.systems.addFairyStickCraftCoolTime
 import mirrg.kotlin.formatAs
 import net.minecraft.block.BlockDynamicLiquid
 import net.minecraft.client.Minecraft

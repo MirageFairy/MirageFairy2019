@@ -1,11 +1,11 @@
 package miragefairy2019.mod3.fairy
 
 import miragefairy2019.libkt.module
-import miragefairy2019.mod3.artifacts.DropCategory
-import miragefairy2019.mod3.artifacts.DropFixed
-import miragefairy2019.mod3.artifacts.DropHandler
-import miragefairy2019.mod3.artifacts.FairyCrystalDrop
-import miragefairy2019.mod3.artifacts.IDrop
+import miragefairy2019.mod3.systems.DropCategory
+import miragefairy2019.mod3.systems.DropFixed
+import miragefairy2019.mod3.systems.DropHandler
+import miragefairy2019.mod3.systems.FairyCrystalDrop
+import miragefairy2019.mod3.systems.IDrop
 import miragefairy2019.mod3.fairy.relation.FairyRelationEntry
 import miragefairy2019.mod3.fairy.relation.FairyRelationRegistries
 import net.minecraft.util.math.BlockPos

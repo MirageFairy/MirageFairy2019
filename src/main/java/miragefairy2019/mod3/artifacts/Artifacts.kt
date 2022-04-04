@@ -19,8 +19,6 @@ object Artifacts {
         SkillBook.module(this)
         AstronomicalObservationBook.module(this)
         ChatWebhook.module(this)
-        DaemonSystem.module(this)
-        Mfa.module(this)
         FairyLog.module(this)
         MirageFlower.module(this)
         FluidMaterials.module(this)

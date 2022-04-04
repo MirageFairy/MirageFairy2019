@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.artifacts
+package miragefairy2019.mod3.recipes
 
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.ja

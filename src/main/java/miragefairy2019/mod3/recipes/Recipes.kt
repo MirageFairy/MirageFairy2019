@@ -10,5 +10,6 @@ object Recipes {
         FairyDilutionRecipe.module(this)
         FairySummoningRecipe.module(this)
         WandRecipe.module(this)
+        Mfa.module(this)
     }
 }

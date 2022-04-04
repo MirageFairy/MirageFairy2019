@@ -37,6 +37,13 @@ import miragefairy2019.mod3.skill.ApiSkill
 import miragefairy2019.mod3.skill.ISkillContainer
 import miragefairy2019.mod3.skill.displayName
 import miragefairy2019.mod3.skill.getSkillLevel
+import miragefairy2019.mod3.systems.DropCategory
+import miragefairy2019.mod3.systems.FairyCrystalDropEnvironment
+import miragefairy2019.mod3.systems.getDropTable
+import miragefairy2019.mod3.systems.insertBiome
+import miragefairy2019.mod3.systems.insertBlocks
+import miragefairy2019.mod3.systems.insertEntities
+import miragefairy2019.mod3.systems.insertItemStacks
 import mirrg.kotlin.formatAs
 import net.minecraft.block.BlockDispenser
 import net.minecraft.client.util.ITooltipFlag
