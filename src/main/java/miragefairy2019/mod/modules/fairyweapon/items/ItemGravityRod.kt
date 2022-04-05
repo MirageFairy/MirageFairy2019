@@ -3,15 +3,16 @@ package miragefairy2019.mod.modules.fairyweapon.items
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.modules.fairyweapon.MagicSelectorRayTrace
-import miragefairy2019.mod.magic4.status
 import miragefairy2019.mod.magic4.MagicHandler
 import miragefairy2019.mod.magic4.duration
 import miragefairy2019.mod.magic4.integer
+import miragefairy2019.mod.magic4.magic
 import miragefairy2019.mod.magic4.percent0
 import miragefairy2019.mod.magic4.percent2
+import miragefairy2019.mod.magic4.status
 import miragefairy2019.mod.magic4.world
 import miragefairy2019.mod.modules.fairyweapon.MagicMessage
+import miragefairy2019.mod.modules.fairyweapon.MagicSelectorRayTrace
 import miragefairy2019.mod3.skill.EnumMastery
 import net.minecraft.init.MobEffects
 import net.minecraft.init.SoundEvents
@@ -37,7 +38,7 @@ class ItemGravityRod : ItemFairyWeaponMagic4() {
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックで浮遊" // TODO translate
 
-    override fun getMagic() = miragefairy2019.mod.magic4.magic {
+    override fun getMagic() = magic {
         val magicSelectorRayTrace = MagicSelectorRayTrace.createIgnoreEntity(world, player, 0.0) // 視線判定
         val magicSelectorPosition = magicSelectorRayTrace.magicSelectorPosition // 視点判定
 

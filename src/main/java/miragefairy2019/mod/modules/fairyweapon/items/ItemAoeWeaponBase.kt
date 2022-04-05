@@ -1,13 +1,14 @@
 package miragefairy2019.mod.modules.fairyweapon.items
 
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.modules.fairyweapon.MagicSelectorRayTrace
 import miragefairy2019.mod.magic4.FormulaArguments
 import miragefairy2019.mod.magic4.MagicArguments
 import miragefairy2019.mod.magic4.MagicHandler
+import miragefairy2019.mod.magic4.magic
 import miragefairy2019.mod.magic4.world
 import miragefairy2019.mod.modules.fairyweapon.FairyMagicDamageSource
 import miragefairy2019.mod.modules.fairyweapon.MagicMessage
+import miragefairy2019.mod.modules.fairyweapon.MagicSelectorRayTrace
 import miragefairy2019.mod.modules.fairyweapon.SelectorEntityRanged
 import miragefairy2019.mod.modules.fairyweapon.spawnDamageParticle
 import miragefairy2019.mod.modules.fairyweapon.spawnParticleTargets
@@ -41,7 +42,7 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
     open fun MagicArguments.onHitEffect(world: WorldServer, target: EntityLivingBase) = Unit
 
 
-    override fun getMagic() = miragefairy2019.mod.magic4.magic {
+    override fun getMagic() = magic {
         val magicSelectorRayTrace = MagicSelectorRayTrace.createWith(world, player, additionalReach(), EntityLivingBase::class.java) { it != player } // 視線判定
         val magicSelectorPosition = magicSelectorRayTrace.magicSelectorPosition // 視点判定
         val selectorEntityRanged = SelectorEntityRanged(world, magicSelectorRayTrace.position, EntityLivingBase::class.java, { it != player }, radius(), maxTargetCount()) // 対象判定

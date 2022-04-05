@@ -1,8 +1,9 @@
 package miragefairy2019.mod.modules.fairyweapon.items
 
-import miragefairy2019.mod.magic4.status
 import miragefairy2019.mod.magic4.MagicHandler
+import miragefairy2019.mod.magic4.magic
 import miragefairy2019.mod.magic4.pitch
+import miragefairy2019.mod.magic4.status
 import miragefairy2019.mod.magic4.world
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
@@ -19,7 +20,7 @@ class ItemBellBase : ItemFairyWeaponMagic4() {
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックで鳴らす" // TODO translate
 
-    override fun getMagic() = miragefairy2019.mod.magic4.magic {
+    override fun getMagic() = magic {
         object : MagicHandler() {
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
                 world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, pitch().toFloat())
