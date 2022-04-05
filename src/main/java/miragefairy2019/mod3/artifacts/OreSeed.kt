@@ -127,8 +127,8 @@ object OreSeed {
                  *   /fill ~-90 11 ~-90 ~90 11 ~90 minecraft:air
                  */
 
-                fun ore1(variant: EnumVariantOre1) = Pair({ CommonMaterials.blockOre1().getState(variant) }, { ItemStack(CommonMaterials.blockOre1(), 1, variant.metadata) })
-                fun ore2(variant: EnumVariantOre2) = Pair({ CommonMaterials.blockOre2().getState(variant) }, { ItemStack(CommonMaterials.blockOre2(), 1, variant.metadata) })
+                fun ore1(variant: EnumVariantOre1) = Pair({ Ores.blockOre1().getState(variant) }, { ItemStack(Ores.blockOre1(), 1, variant.metadata) })
+                fun ore2(variant: EnumVariantOre2) = Pair({ Ores.blockOre2().getState(variant) }, { ItemStack(Ores.blockOre2(), 1, variant.metadata) })
                 fun block(block: Block, meta: Int = 0) = Pair({ block.defaultState }, { ItemStack(block, 1, meta) })
 
                 fun OreSeedDropRegistryScope.TypedOreSeedDropRegistryScope.vein(shape: EnumOreSeedShape, weight: Double, output: Pair<() -> IBlockState, () -> ItemStack>, vararg generationConditions: IOreSeedDropRequirement) {
