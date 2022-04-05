@@ -1,6 +1,7 @@
 package miragefairy2019.mod3.systems
 
 import appeng.api.AEApi
+import miragefairy2019.lib.Installed
 import miragefairy2019.lib.getLogger
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.Main
@@ -15,22 +16,27 @@ object Ae2SpatialIoBlocking {
         val disableVanillaAe2SpatialIo = configProperty { it.getBoolean("disableVanillaAe2SpatialIo", Main.categoryFeatures, false, "Disables the movement of some vanilla blocks by Spatial IO.") }
 
         onInit {
-            fun disable(block: Block) = AEApi.instance().registries().movable().blacklistBlock(block)
 
-            logger.info("disableVanillaAe2SpatialIo: ${disableVanillaAe2SpatialIo()}")
-            if (disableVanillaAe2SpatialIo()) {
-                disable(Blocks.BARRIER)
-                disable(Blocks.COMMAND_BLOCK)
-                disable(Blocks.CHAIN_COMMAND_BLOCK)
-                disable(Blocks.END_GATEWAY)
-                disable(Blocks.END_PORTAL)
-                disable(Blocks.END_PORTAL_FRAME)
-                disable(Blocks.REPEATING_COMMAND_BLOCK)
-                disable(Blocks.STRUCTURE_BLOCK)
-                disable(Blocks.STRUCTURE_VOID)
+            logger.info("enabled: ${Installed.ae2}")
+            if (Installed.ae2) {
+                fun disable(block: Block) = AEApi.instance().registries().movable().blacklistBlock(block)
+
+                logger.info("disableVanillaAe2SpatialIo: ${disableVanillaAe2SpatialIo()}")
+                if (disableVanillaAe2SpatialIo()) {
+                    disable(Blocks.BARRIER)
+                    disable(Blocks.COMMAND_BLOCK)
+                    disable(Blocks.CHAIN_COMMAND_BLOCK)
+                    disable(Blocks.END_GATEWAY)
+                    disable(Blocks.END_PORTAL)
+                    disable(Blocks.END_PORTAL_FRAME)
+                    disable(Blocks.REPEATING_COMMAND_BLOCK)
+                    disable(Blocks.STRUCTURE_BLOCK)
+                    disable(Blocks.STRUCTURE_VOID)
+                }
+
+                disable(ChatWebhook.blockCreativeChatWebhookTransmitter())
+
             }
-
-            disable(ChatWebhook.blockCreativeChatWebhookTransmitter())
 
         }
     }
