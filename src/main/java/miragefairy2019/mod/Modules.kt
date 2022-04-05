@@ -1,6 +1,7 @@
 package miragefairy2019.mod
 
 import miragefairy2019.jei.Jei
+import miragefairy2019.libkt.module
 import miragefairy2019.mod.modules.fairyweapon.FairyWeapon
 import miragefairy2019.mod3.artifacts.Artifacts
 import miragefairy2019.mod3.fairy.Fairy
@@ -12,19 +13,21 @@ import miragefairy2019.mod3.recipes.Recipes
 import miragefairy2019.mod3.skill.Skill
 import miragefairy2019.mod3.systems.Systems
 
-val modules = listOf(
-    Main.module,
-    Jei.module,
+val modules = module {
 
-    PlayerAura.module,
-    PlacedItem.module,
-    Skill.module,
-    Fairy.module,
-    FairyWeapon.module,
-    FairyRelation.module,
-    FairyBox.module,
+    Main.module(this)
+    Jei.module(this)
 
-    Artifacts.module,
-    Systems.module,
-    Recipes.module
-)
+    Artifacts.module(this)
+    Systems.module(this)
+    Recipes.module(this)
+
+    PlayerAura.module(this)
+    PlacedItem.module(this)
+    Skill.module(this)
+    Fairy.module(this)
+    FairyWeapon.module(this)
+    FairyRelation.module(this)
+    FairyBox.module(this)
+
+}
