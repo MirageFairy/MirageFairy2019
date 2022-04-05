@@ -2,6 +2,8 @@ package miragefairy2019.mod3.artifacts
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
+import miragefairy2019.lib.erg
+import miragefairy2019.lib.mana
 import miragefairy2019.lib.sum
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.hex
@@ -13,15 +15,13 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toRgb
+import miragefairy2019.mod.Main
 import miragefairy2019.mod3.artifacts.oreseed.ApiOreSeedDrop
 import miragefairy2019.mod3.artifacts.oreseed.EnumOreSeedType
 import miragefairy2019.mod3.artifacts.oreseed.EnumVariantOreSeed
 import miragefairy2019.mod3.artifacts.oreseed.OreSeedDropEnvironment
 import miragefairy2019.mod3.fairy.ColorSet
 import miragefairy2019.mod3.fairy.FairyTypes
-import miragefairy2019.lib.erg
-import miragefairy2019.lib.mana
-import miragefairy2019.mod.Main
 import miragefairy2019.mod3.playeraura.ApiPlayerAura
 import miragefairy2019.mod3.skill.ApiSkill
 import mirrg.kotlin.formatAs
@@ -58,13 +58,11 @@ object DebugItems {
         r({ ItemDebugOreNameList() }, "ore_name_list", "Ore Name List", "鉱石辞書名一覧")
         r({ ItemDebugSkillResetUnlock() }, "skill_reset_unlock", "Skill Reset Unlock", "スキルリセット解禁")
         r({ ItemDebugPlayerAuraReset() }, "player_aura_reset", "Player Aura Reset", "プレイヤーオーラリセット")
-        if (checkModVersion(21)) {
-            r({ ItemDebugGainFairyMasterExp() }, "gain_fairy_master_exp", "Gain Fairy Master Exp", "妖精経験値入手")
-            r({ ItemDebugOreSeedStatistics() }, "ore_seed_statistics", "Ore Seed Statistics", "鉱石分布")
-            r({ ItemDebugOreSeedDropRate() }, "ore_seed_drop_rate", "Ore Seed Drop Rate", "鉱石生成確率表示")
-            r({ ItemDebugMirageFlowerGrowthRateList() }, "mirage_flower_growth_rate_list", "Mirage Flower Growth Rate List", "ミラージュフラワー地面補正一覧")
-            r({ ItemDebugMirageFlowerGrowthRate() }, "mirage_flower_growth_rate", "Mirage Flower Growth Rate", "ミラージュフラワー成長速度表示")
-        }
+        r({ ItemDebugGainFairyMasterExp() }, "gain_fairy_master_exp", "Gain Fairy Master Exp", "妖精経験値入手")
+        r({ ItemDebugOreSeedStatistics() }, "ore_seed_statistics", "Ore Seed Statistics", "鉱石分布")
+        r({ ItemDebugOreSeedDropRate() }, "ore_seed_drop_rate", "Ore Seed Drop Rate", "鉱石生成確率表示")
+        r({ ItemDebugMirageFlowerGrowthRateList() }, "mirage_flower_growth_rate_list", "Mirage Flower Growth Rate List", "ミラージュフラワー地面補正一覧")
+        r({ ItemDebugMirageFlowerGrowthRate() }, "mirage_flower_growth_rate", "Mirage Flower Growth Rate", "ミラージュフラワー成長速度表示")
 
     }
 }
