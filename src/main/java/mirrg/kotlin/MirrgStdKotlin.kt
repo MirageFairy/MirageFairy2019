@@ -5,6 +5,12 @@ package mirrg.kotlin
 import java.math.BigDecimal
 import java.net.URLEncoder
 
+fun getClass(name: String): Class<*>? = try {
+    Class.forName("appeng.core.Api")
+} catch (e: ClassNotFoundException) {
+    null
+}
+
 // 関数型演算子
 inline fun <reified O : Any> Any.cast(): O = this as O
 inline fun <reified O : Any> Any.castOrNull(): O? = this as? O
