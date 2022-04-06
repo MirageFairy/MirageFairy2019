@@ -6,6 +6,7 @@ import miragefairy2019.lib.RecipeMatcher
 import miragefairy2019.lib.div
 import miragefairy2019.lib.fairyType
 import miragefairy2019.lib.toNonNullList
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
@@ -187,10 +188,10 @@ class RecipeFairyBaking : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
     override fun isDynamic() = true
     override fun canFit(width: Int, height: Int) = width * height >= 2
     override fun matches(inventoryCrafting: InventoryCrafting, world: World) = match(inventoryCrafting) != null
-    override fun getRecipeOutput(): ItemStack = ItemStack.EMPTY
+    override fun getRecipeOutput() = EMPTY_ITEM_STACK
 
     override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack {
-        val result = match(inventoryCrafting) ?: return ItemStack.EMPTY
+        val result = match(inventoryCrafting) ?: return EMPTY_ITEM_STACK
         return BakedFairy.itemBakedFairy().createItemStack().also { ItemBakedFairy.setFairy(it, result.fairy.itemStack.copy(1)) }
     }
 
