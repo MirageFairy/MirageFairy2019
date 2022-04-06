@@ -13,7 +13,7 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod.modules.fairyweapon.MagicSelectorRayTrace
+import miragefairy2019.mod.fairyweapon.MagicSelectorRayTrace
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.skill.ApiSkill
 import mirrg.kotlin.minus
