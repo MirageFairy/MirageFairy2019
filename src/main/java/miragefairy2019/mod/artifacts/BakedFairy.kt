@@ -1,22 +1,27 @@
 package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.IFoodAuraItem
+import miragefairy2019.lib.RecipeInput
+import miragefairy2019.lib.RecipeMatcher
 import miragefairy2019.lib.div
 import miragefairy2019.lib.fairyType
+import miragefairy2019.lib.toNonNullList
 import miragefairy2019.libkt.copy
+import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.itemStacks
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
+import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.Fairy
 import miragefairy2019.mod.fairy.FairyTypes
-import miragefairy2019.mod.Main
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.color.IItemColor
@@ -38,7 +43,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.registries.IForgeRegistryEntry
-import java.util.function.Predicate
 
 object BakedFairy {
     lateinit var creativeTabBakedFairy: () -> CreativeTabs
@@ -159,65 +163,42 @@ class RecipeFairyBaking : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         registryName = ResourceLocation(ModMirageFairy2019.MODID, "fairy_baking")
     }
 
-    private data class MatchResult(var itemStackWand: ItemStack, var itemStackFairy: ItemStack)
 
-    private fun match(inventoryCrafting: InventoryCrafting): MatchResult? {
-        val used = (0 until inventoryCrafting.sizeInventory).map { false }.toMutableList()
+    // match
 
-        fun <T : Any> pull(function: (ItemStack) -> T?): T? {
-            repeat(inventoryCrafting.sizeInventory) { i ->
-                if (!used[i]) {
-                    val itemStack: ItemStack = inventoryCrafting.getStackInSlot(i)
-                    val result = function(itemStack)
-                    if (result != null) {
-                        used[i] = true
-                        return result
-                    }
-                }
-            }
-            return null
-        }
+    private class Result(val fairy: RecipeInput<Unit>)
 
-        fun find(predicate: (ItemStack) -> Boolean) = pull { if (predicate(it)) it else null }
-        fun find(predicate: Predicate<ItemStack>) = find { predicate.test(it) }
+    private fun match(inventoryCrafting: InventoryCrafting): Result? {
+        val matcher = RecipeMatcher(inventoryCrafting)
 
-        // 探索
-        val itemStackWand = find("torch".oreIngredient) ?: return null // 松明
-        val itemStackFairy = find { it.item == Fairy.listItemFairy[0] } ?: return null // 妖精
-        find(Items.BOWL.ingredient) ?: return null // ボウル
+        matcher.pullMatched { "torch".oreIngredient.test(it) } ?: return null
+        val fairy = matcher.pullMatched { it.item == Fairy.listItemFairy[0] } ?: return null
+        matcher.pullMatched { Items.BOWL.ingredient.test(it) } ?: return null
 
-        // 余りがあってはならない
-        repeat(inventoryCrafting.sizeInventory) { i ->
-            if (!used[i]) {
-                if (!inventoryCrafting.getStackInSlot(i).isEmpty) {
-                    return null
-                }
-            }
-        }
 
-        return MatchResult(itemStackWand, itemStackFairy)
+        if (matcher.hasRemaining()) return null
+
+        return Result(fairy)
     }
 
 
+    // overrides
+
+    override fun isDynamic() = true
+    override fun canFit(width: Int, height: Int) = width * height >= 2
     override fun matches(inventoryCrafting: InventoryCrafting, world: World) = match(inventoryCrafting) != null
+    override fun getRecipeOutput(): ItemStack = ItemStack.EMPTY
 
     override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack {
         val result = match(inventoryCrafting) ?: return ItemStack.EMPTY
-        val itemStackBakedFairy = ItemStack(BakedFairy.itemBakedFairy())
-        ItemBakedFairy.setFairy(itemStackBakedFairy, result.itemStackFairy.copy(1))
-        return itemStackBakedFairy
+        return BakedFairy.itemBakedFairy().createItemStack().also { ItemBakedFairy.setFairy(it, result.fairy.itemStack.copy(1)) }
     }
 
     override fun getRemainingItems(inventoryCrafting: InventoryCrafting): NonNullList<ItemStack> {
-        val result = match(inventoryCrafting) ?: return NonNullList.create()
-        val list = NonNullList.withSize(inventoryCrafting.sizeInventory, ItemStack.EMPTY)
-        list.forEachIndexed { i, _ ->
-            list[i] = ForgeHooks.getContainerItem(inventoryCrafting.getStackInSlot(i))
-        }
-        return list
+        if (match(inventoryCrafting) == null) return NonNullList.create()
+        return inventoryCrafting.itemStacks.map { itemStack ->
+            ForgeHooks.getContainerItem(itemStack)
+        }.toNonNullList()
     }
 
-    override fun getRecipeOutput(): ItemStack = ItemStack.EMPTY
-    override fun isDynamic() = true
-    override fun canFit(width: Int, height: Int) = width * height >= 2
 }
