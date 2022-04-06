@@ -1,4 +1,4 @@
-package miragefairy2019.mod.artifacts.oreseed
+package miragefairy2019.mod.oreseed
 
 import net.minecraft.block.state.IBlockState
 import net.minecraft.util.math.BlockPos

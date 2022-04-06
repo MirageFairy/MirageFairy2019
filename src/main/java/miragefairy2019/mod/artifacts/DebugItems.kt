@@ -16,10 +16,10 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.artifacts.oreseed.ApiOreSeedDrop
-import miragefairy2019.mod.artifacts.oreseed.EnumOreSeedType
-import miragefairy2019.mod.artifacts.oreseed.EnumVariantOreSeed
-import miragefairy2019.mod.artifacts.oreseed.OreSeedDropEnvironment
+import miragefairy2019.mod.oreseed.ApiOreSeedDrop
+import miragefairy2019.mod.oreseed.EnumOreSeedType
+import miragefairy2019.mod.oreseed.EnumVariantOreSeed
+import miragefairy2019.mod.oreseed.OreSeedDropEnvironment
 import miragefairy2019.mod.fairy.ColorSet
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.playeraura.ApiPlayerAura

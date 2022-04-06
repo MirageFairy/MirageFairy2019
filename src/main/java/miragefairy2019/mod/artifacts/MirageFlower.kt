@@ -22,9 +22,9 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.fairy.relation.FairySelector
-import miragefairy2019.mod.fairy.relation.primaries
-import miragefairy2019.mod.fairy.relation.withoutPartiallyMatch
+import miragefairy2019.mod.fairyrelation.FairySelector
+import miragefairy2019.mod.fairyrelation.primaries
+import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.or
 import net.minecraft.advancements.CriteriaTriggers

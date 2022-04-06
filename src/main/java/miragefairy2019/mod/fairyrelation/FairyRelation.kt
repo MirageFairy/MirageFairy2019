@@ -1,4 +1,4 @@
-package miragefairy2019.mod.fairy.relation
+package miragefairy2019.mod.fairyrelation
 
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.artifacts.CommonMaterials

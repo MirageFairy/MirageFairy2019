@@ -5,8 +5,8 @@ import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.fairy.relation.FairyRelationRegistries
-import miragefairy2019.mod.fairy.relation.withoutPartiallyMatch
+import miragefairy2019.mod.fairyrelation.FairyRelationRegistries
+import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.oredict.OreIngredient

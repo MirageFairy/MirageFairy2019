@@ -6,8 +6,8 @@ import miragefairy2019.mod.systems.DropFixed
 import miragefairy2019.mod.systems.DropHandler
 import miragefairy2019.mod.systems.FairyCrystalDrop
 import miragefairy2019.mod.systems.IDrop
-import miragefairy2019.mod.fairy.relation.FairyRelationEntry
-import miragefairy2019.mod.fairy.relation.FairyRelationRegistries
+import miragefairy2019.mod.fairyrelation.FairyRelationEntry
+import miragefairy2019.mod.fairyrelation.FairyRelationRegistries
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary

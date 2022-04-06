@@ -5,7 +5,7 @@ import miragefairy2019.libkt.module
 import miragefairy2019.mod.modules.fairyweapon.FairyWeapon
 import miragefairy2019.mod.artifacts.Artifacts
 import miragefairy2019.mod.fairy.Fairy
-import miragefairy2019.mod.fairy.relation.FairyRelation
+import miragefairy2019.mod.fairyrelation.FairyRelation
 import miragefairy2019.mod.fairybox.FairyBox
 import miragefairy2019.mod.placeditem.PlacedItem
 import miragefairy2019.mod.playeraura.PlayerAura

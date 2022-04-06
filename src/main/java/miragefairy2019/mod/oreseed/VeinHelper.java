@@ -1,4 +1,4 @@
-package miragefairy2019.mod.artifacts.oreseed;
+package miragefairy2019.mod.oreseed;
 
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.UtilsString;

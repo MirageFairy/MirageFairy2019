@@ -9,9 +9,9 @@ import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.modules.fairyweapon.findItem
 import miragefairy2019.mod.modules.fairyweapon.playSound
-import miragefairy2019.mod.fairy.relation.FairySelector
-import miragefairy2019.mod.fairy.relation.primaries
-import miragefairy2019.mod.fairy.relation.withoutPartiallyMatch
+import miragefairy2019.mod.fairyrelation.FairySelector
+import miragefairy2019.mod.fairyrelation.primaries
+import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.modules.fairyweapon.IMagicHandler
 import miragefairy2019.mod.modules.fairyweapon.positive
 import miragefairy2019.mod.skill.EnumMastery

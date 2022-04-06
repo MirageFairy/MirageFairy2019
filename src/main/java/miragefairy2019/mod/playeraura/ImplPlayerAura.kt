@@ -10,9 +10,9 @@ import miragefairy2019.lib.times
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.fairy.relation.FairySelector
-import miragefairy2019.mod.fairy.relation.primaries
-import miragefairy2019.mod.fairy.relation.withoutPartiallyMatch
+import miragefairy2019.mod.fairyrelation.FairySelector
+import miragefairy2019.mod.fairyrelation.primaries
+import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import mirrg.kotlin.gson.JsonWrapper
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonWrapper

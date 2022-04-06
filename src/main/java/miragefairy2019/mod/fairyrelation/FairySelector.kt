@@ -1,4 +1,4 @@
-package miragefairy2019.mod.fairy.relation
+package miragefairy2019.mod.fairyrelation
 
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState

@@ -1,4 +1,4 @@
-package miragefairy2019.mod.artifacts.oreseed
+package miragefairy2019.mod.oreseed
 
 import miragefairy2019.libkt.WeightedItem
 import miragefairy2019.libkt.getRandomItem

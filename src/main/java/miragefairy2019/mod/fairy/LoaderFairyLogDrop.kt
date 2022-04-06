@@ -6,7 +6,7 @@ import miragefairy2019.lib.FairyLogDropRequirementCanRain
 import miragefairy2019.lib.FairyLogDropRequirementHasBiomeType
 import miragefairy2019.lib.FairyLogDropRequirementOverworld
 import miragefairy2019.libkt.module
-import miragefairy2019.mod.fairy.relation.FairyRelationRegistries
+import miragefairy2019.mod.fairyrelation.FairyRelationRegistries
 import net.minecraftforge.common.BiomeDictionary
 
 val loaderFairyLogDrop = module {
