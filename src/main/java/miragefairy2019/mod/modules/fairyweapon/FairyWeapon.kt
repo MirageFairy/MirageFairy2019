@@ -50,8 +50,8 @@ import miragefairy2019.mod.modules.fairyweapon.items.ItemMiragiumScythe
 import miragefairy2019.mod.modules.fairyweapon.items.ItemOcarinaTemptation
 import miragefairy2019.mod.modules.fairyweapon.items.ItemRodBase
 import miragefairy2019.mod.modules.fairyweapon.items.ItemRyugyoDrill
-import miragefairy2019.mod3.artifacts.oreName
-import miragefairy2019.mod3.artifacts.sphereType
+import miragefairy2019.mod.artifacts.oreName
+import miragefairy2019.mod.artifacts.sphereType
 import miragefairy2019.mod.Main.creativeTab
 import miragefairy2019.mod.Main.side
 import mirrg.kotlin.gson.jsonElement

@@ -9,10 +9,10 @@ import miragefairy2019.lib.get
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod3.skill.IMastery
-import miragefairy2019.mod3.skill.ISkillContainer
-import miragefairy2019.mod3.skill.displayName
-import miragefairy2019.mod3.skill.getSkillLevel
+import miragefairy2019.mod.skill.IMastery
+import miragefairy2019.mod.skill.ISkillContainer
+import miragefairy2019.mod.skill.displayName
+import miragefairy2019.mod.skill.getSkillLevel
 import net.minecraft.util.text.ITextComponent
 
 interface IMagicStatusContainer {

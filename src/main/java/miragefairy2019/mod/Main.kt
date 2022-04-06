@@ -6,7 +6,7 @@ import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.module
-import miragefairy2019.mod3.artifacts.FairyCrystal
+import miragefairy2019.mod.artifacts.FairyCrystal
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.fml.common.network.IGuiHandler

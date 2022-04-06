@@ -7,7 +7,7 @@ import miragefairy2019.libkt.sortedByDistance
 import miragefairy2019.mod.modules.fairyweapon.negative
 import miragefairy2019.mod.modules.fairyweapon.positive
 import miragefairy2019.api.Mana
-import miragefairy2019.mod3.skill.EnumMastery
+import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks

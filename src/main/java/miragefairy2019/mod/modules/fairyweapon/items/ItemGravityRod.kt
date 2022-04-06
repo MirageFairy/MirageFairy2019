@@ -13,7 +13,7 @@ import miragefairy2019.mod.magic4.status
 import miragefairy2019.mod.magic4.world
 import miragefairy2019.mod.modules.fairyweapon.MagicMessage
 import miragefairy2019.mod.modules.fairyweapon.MagicSelectorRayTrace
-import miragefairy2019.mod3.skill.EnumMastery
+import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.init.MobEffects
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack

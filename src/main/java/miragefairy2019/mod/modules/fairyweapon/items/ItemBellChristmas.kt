@@ -12,7 +12,7 @@ import miragefairy2019.mod.magic4.integer
 import miragefairy2019.mod.magic4.percent0
 import miragefairy2019.mod.magic4.percent2
 import miragefairy2019.mod.magic4.pitch
-import miragefairy2019.mod3.skill.EnumMastery
+import miragefairy2019.mod.skill.EnumMastery
 import mirrg.kotlin.atMost
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.init.Items

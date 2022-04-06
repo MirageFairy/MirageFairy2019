@@ -13,10 +13,10 @@ import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod3.artifacts.itemFairyStick
-import miragefairy2019.mod3.fairystickcraft.ApiFairyStickCraft
-import miragefairy2019.mod3.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.mod3.fairystickcraft.IFairyStickCraftRecipe
+import miragefairy2019.mod.artifacts.itemFairyStick
+import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
+import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
+import miragefairy2019.mod.fairystickcraft.IFairyStickCraftRecipe
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 

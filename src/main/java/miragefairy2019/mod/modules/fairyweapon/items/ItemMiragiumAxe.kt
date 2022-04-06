@@ -18,7 +18,7 @@ import miragefairy2019.mod.modules.fairyweapon.MagicMessage
 import miragefairy2019.mod.modules.fairyweapon.extendSearch
 import miragefairy2019.mod.modules.fairyweapon.search
 import miragefairy2019.mod.modules.fairyweapon.spawnParticleTargets
-import miragefairy2019.mod3.artifacts.FairyLog
+import miragefairy2019.mod.artifacts.FairyLog
 import miragefairy2019.api.Erg.CRAFT
 import miragefairy2019.api.Erg.DESTROY
 import miragefairy2019.api.Erg.HARVEST
@@ -32,7 +32,7 @@ import miragefairy2019.api.Mana.FIRE
 import miragefairy2019.api.Mana.GAIA
 import miragefairy2019.api.Mana.SHINE
 import miragefairy2019.api.Mana.WIND
-import miragefairy2019.mod3.skill.EnumMastery
+import miragefairy2019.mod.skill.EnumMastery
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.atLeast
 import mirrg.kotlin.atMost

@@ -3,15 +3,15 @@ package miragefairy2019.mod
 import miragefairy2019.jei.Jei
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.modules.fairyweapon.FairyWeapon
-import miragefairy2019.mod3.artifacts.Artifacts
-import miragefairy2019.mod3.fairy.Fairy
-import miragefairy2019.mod3.fairy.relation.FairyRelation
-import miragefairy2019.mod3.fairybox.FairyBox
-import miragefairy2019.mod3.placeditem.PlacedItem
-import miragefairy2019.mod3.playeraura.PlayerAura
-import miragefairy2019.mod3.recipes.Recipes
-import miragefairy2019.mod3.skill.Skill
-import miragefairy2019.mod3.systems.Systems
+import miragefairy2019.mod.artifacts.Artifacts
+import miragefairy2019.mod.fairy.Fairy
+import miragefairy2019.mod.fairy.relation.FairyRelation
+import miragefairy2019.mod.fairybox.FairyBox
+import miragefairy2019.mod.placeditem.PlacedItem
+import miragefairy2019.mod.playeraura.PlayerAura
+import miragefairy2019.mod.recipes.Recipes
+import miragefairy2019.mod.skill.Skill
+import miragefairy2019.mod.systems.Systems
 
 val modules = module {
 

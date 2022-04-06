@@ -27,9 +27,9 @@ import miragefairy2019.mod.modules.fairyweapon.findFairy
 import miragefairy2019.lib.playerAuraHandler
 import miragefairy2019.lib.proxy
 import miragefairy2019.lib.skillContainer
-import miragefairy2019.mod3.skill.EnumMastery
-import miragefairy2019.mod3.skill.IMastery
-import miragefairy2019.mod3.skill.getSkillLevel
+import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.skill.IMastery
+import miragefairy2019.mod.skill.getSkillLevel
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity

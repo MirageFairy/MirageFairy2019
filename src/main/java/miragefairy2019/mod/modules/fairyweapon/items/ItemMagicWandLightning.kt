@@ -15,7 +15,7 @@ import miragefairy2019.mod.magic4.positive
 import miragefairy2019.mod.magic4.world
 import miragefairy2019.mod.modules.fairyweapon.CriticalRate
 import miragefairy2019.mod.modules.fairyweapon.spawnMagicParticle
-import miragefairy2019.mod3.skill.EnumMastery
+import miragefairy2019.mod.skill.EnumMastery
 import mirrg.kotlin.atMost
 import mirrg.kotlin.castOrNull
 import net.minecraft.entity.EntityLivingBase

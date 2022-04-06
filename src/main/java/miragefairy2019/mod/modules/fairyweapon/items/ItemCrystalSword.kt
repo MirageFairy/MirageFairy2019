@@ -9,12 +9,12 @@ import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.modules.fairyweapon.findItem
 import miragefairy2019.mod.modules.fairyweapon.playSound
-import miragefairy2019.mod3.fairy.relation.FairySelector
-import miragefairy2019.mod3.fairy.relation.primaries
-import miragefairy2019.mod3.fairy.relation.withoutPartiallyMatch
+import miragefairy2019.mod.fairy.relation.FairySelector
+import miragefairy2019.mod.fairy.relation.primaries
+import miragefairy2019.mod.fairy.relation.withoutPartiallyMatch
 import miragefairy2019.mod.modules.fairyweapon.IMagicHandler
 import miragefairy2019.mod.modules.fairyweapon.positive
-import miragefairy2019.mod3.skill.EnumMastery
+import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.ai.attributes.AttributeModifier

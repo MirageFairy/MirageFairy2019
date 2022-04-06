@@ -14,7 +14,7 @@ import miragefairy2019.api.FairyLogDropRegistry
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod3.artifacts.FairyLog
+import miragefairy2019.mod.artifacts.FairyLog
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 

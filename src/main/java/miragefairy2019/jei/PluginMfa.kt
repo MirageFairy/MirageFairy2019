@@ -13,7 +13,7 @@ import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod3.recipes.Mfa
+import miragefairy2019.mod.recipes.Mfa
 import net.minecraft.client.Minecraft
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack

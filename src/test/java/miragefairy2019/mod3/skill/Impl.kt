@@ -1,4 +1,4 @@
-package miragefairy2019.mod3.skill
+package miragefairy2019.mod.skill
 
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP

@@ -12,7 +12,7 @@ import miragefairy2019.mod.magic4.world
 import miragefairy2019.api.Erg.THUNDER
 import miragefairy2019.mod.Main
 import miragefairy2019.api.Mana.WIND
-import miragefairy2019.mod3.skill.EnumMastery
+import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 import net.minecraftforge.fml.relauncher.Side
