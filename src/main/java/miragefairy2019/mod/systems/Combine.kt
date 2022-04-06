@@ -1,13 +1,15 @@
 package miragefairy2019.mod.systems
 
 import miragefairy2019.api.ICombineAcceptorItem
+import miragefairy2019.api.ICombineHandler
 import miragefairy2019.api.ICombineResult
+import miragefairy2019.lib.RecipeInput
+import miragefairy2019.lib.RecipeMatcher
 import miragefairy2019.lib.toNonNullList
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.itemStacks
 import miragefairy2019.libkt.module
-import miragefairy2019.libkt.size
 import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.kotlin.castOrNull
 import net.minecraft.inventory.InventoryCrafting
@@ -36,46 +38,19 @@ class RecipesCombine : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 
     // match
 
-    private class Result(val mainItemStackIndex: Int, val combineResult: ICombineResult)
+    private class Result(val main: RecipeInput<ICombineHandler>, val combineResult: ICombineResult)
 
     private fun match(inventoryCrafting: InventoryCrafting): Result? {
-        val used = Array(inventoryCrafting.size) { false }
+        val matcher = RecipeMatcher(inventoryCrafting)
 
-        // 主体探索
-        val (mainItemStackIndex, combineHandler) = run found@{
-            inventoryCrafting.itemStacks.forEachIndexed next@{ i, itemStack ->
-                if (used[i]) return@next // 使用済みのスロットならスルー
-                if (itemStack.isEmpty) return@next // 空欄ならスルー
-                val combineHandler = itemStack.item.castOrNull<ICombineAcceptorItem>()?.getCombineHandler(itemStack.copy(1)) ?: return@next // 合成非対応ならスルー
-                used[i] = true
-                return@found Pair(i, combineHandler) // ヒットした
-            }
-            return null // ヒットしなかったので中止
-        }
+        val main = matcher.pull { it.item.castOrNull<ICombineAcceptorItem>()?.getCombineHandler(it.copy(1)) } ?: return null
+        val combineResult = matcher.pull { if (it.isEmpty) null else main.tag.combineWith(it.copy(1)) }?.tag
+            ?: main.tag.combineWith(EMPTY_ITEM_STACK) // ヒットしなかったので分解モードを試す
+            ?: return null // 分解も不能なら中止
 
-        // 部品探索
-        val combineResult = run found@{
-            inventoryCrafting.itemStacks.forEachIndexed next@{ i, itemStack ->
-                if (used[i]) return@next // 使用済みのスロットならスルー
-                if (itemStack.isEmpty) return@next // 空欄ならスルー
-                val combineResult = combineHandler.combineWith(itemStack.copy(1)) ?: return@next // 合成不能ならスルー
-                used[i] = true
-                return@found combineResult
-            }
+        if (matcher.hasRemaining()) return null
 
-            // ヒットしなかったので分解モード
-            val combineResult = combineHandler.combineWith(EMPTY_ITEM_STACK) ?: return null // 合成不能なら中止
-            combineResult
-        }
-
-        // 余りがあった場合は中止
-        inventoryCrafting.itemStacks.forEachIndexed next@{ i, itemStack ->
-            if (used[i]) return@next // 使用済みのスロットならスルー
-            if (itemStack.isEmpty) return@next // 空欄ならスルー
-            return null // 余りがあったので中止
-        }
-
-        return Result(mainItemStackIndex, combineResult)
+        return Result(main, combineResult)
     }
 
 
@@ -94,7 +69,7 @@ class RecipesCombine : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
     override fun getRemainingItems(inventoryCrafting: InventoryCrafting): NonNullList<ItemStack> {
         val result = match(inventoryCrafting) ?: return NonNullList.create()
         return inventoryCrafting.itemStacks.mapIndexed { i, itemStack ->
-            if (i == result.mainItemStackIndex) {
+            if (i == result.main.index) {
                 // 主体アイテムの場合
                 // クラフティングアイテムに合成しても耐久が削れたものは残らない
                 // 代わりにそれまで合成されていたパーツが出てくる
