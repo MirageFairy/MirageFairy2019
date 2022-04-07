@@ -17,13 +17,13 @@ import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.text.ITextComponent
 
 class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
-    override fun getExecutor(): TileEntityExecutor? {
+    override fun getExecutor(): IFairyBoxExecutor {
         val blockState = world.getBlockState(pos)
-        val block = blockState.block as? BlockFairyBoxBase ?: return null
+        val block = blockState.block as? BlockFairyBoxBase ?: return super.getExecutor()
         val facing = block.getFacing(blockState)
         val blockPosOutput = pos.offset(facing)
 
-        fun getErrorExecutor(textComponent: ITextComponent) = object : TileEntityExecutor() {
+        fun getErrorExecutor(textComponent: ITextComponent) = object : IFairyBoxExecutor {
             override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
                 player.sendStatusMessage(textComponent, true)
                 return true
@@ -44,7 +44,7 @@ class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
         }
 
         // 成立
-        return object : TileEntityExecutor() {
+        return object : IFairyBoxExecutor {
             override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
                 if (world.isRemote) return true
                 val times = 10000
