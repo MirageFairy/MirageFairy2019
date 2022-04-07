@@ -2,6 +2,7 @@ package miragefairy2019.mod.fairy
 
 import miragefairy2019.lib.entries
 import miragefairy2019.lib.registerItemColorHandler
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setUnlocalizedName
@@ -22,7 +23,8 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 
 object Fairy {
-    lateinit var creativeTab: CreativeTabs
+    lateinit var creativeTabFairyMotif: CreativeTabs
+    lateinit var creativeTabFairyRank: CreativeTabs
     lateinit var listItemFairy: List<() -> ItemFairy>
     val module = module {
 
@@ -31,9 +33,26 @@ object Fairy {
 
         // クリエイティブタブ
         onInitCreativeTab {
-            creativeTab = object : CreativeTabs("mirageFairy2019.fairy") {
+            creativeTabFairyMotif = object : CreativeTabs("mirageFairy2019.fairy.motif") {
                 @SideOnly(Side.CLIENT)
-                override fun getTabIconItem() = FairyTypes.instance.magentaGlazedTerracotta.main.createItemStack()
+                override fun getTabIconItem() = FairyTypes.instance.imperialTopaz.main.createItemStack()
+
+                @SideOnly(Side.CLIENT)
+                override fun displayAllRelevantItems(itemStacks: NonNullList<ItemStack>) {
+                    listItemFairy.forEachIndexed { i, _ ->
+                        FairyTypes.instance.variants.forEach { variant ->
+                            if (variant.bundle.main.canSeeOnCreativeTab) {
+                                itemStacks.add(variant.bundle[i].createItemStack())
+                            }
+                        }
+                    }
+                }
+
+                override fun hasSearchBar() = true
+            }.setBackgroundImageName("item_search.png")
+            creativeTabFairyRank = object : CreativeTabs("mirageFairy2019.fairy.rank") {
+                @SideOnly(Side.CLIENT)
+                override fun getTabIconItem() = FairyTypes.instance.moonstone.main.createItemStack()
 
                 @SideOnly(Side.CLIENT)
                 override fun displayAllRelevantItems(itemStacks: NonNullList<ItemStack>) {
@@ -45,7 +64,13 @@ object Fairy {
                         }
                     }
                 }
-            }
+
+                override fun hasSearchBar() = true
+            }.setBackgroundImageName("item_search.png")
+        }
+        onMakeLang {
+            enJa("itemGroup.mirageFairy2019.fairy.motif", "Fairy: Motif", "妖精：モチーフ")
+            enJa("itemGroup.mirageFairy2019.fairy.rank", "Fairy: Rank", "妖精：ランク")
         }
 
         val rankMax = 7
@@ -71,7 +96,6 @@ object Fairy {
                 setUnlocalizedName("mirageFairyR$rank")
                 onRegisterItem {
                     FairyTypes.instance.variants.forEach { entry -> item.registerVariant(entry.id, entry.bundle[rank - 1]) }
-                    //item.creativeTab = creativeTab // TODO 冗長説
                     if (side.isClient) {
                         item.variants.forEach { variant ->
                             ModelLoader.setCustomModelResourceLocation(item, variant.metadata, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, "fairy"), "normal"))
