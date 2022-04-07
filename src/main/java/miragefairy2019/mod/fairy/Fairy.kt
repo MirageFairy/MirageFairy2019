@@ -28,9 +28,6 @@ object Fairy {
     lateinit var listItemFairy: List<() -> ItemFairy>
     val module = module {
 
-        loaderFairyCrystalDrop(this)
-        loaderFairyLogDrop(this)
-
         // クリエイティブタブ
         onInitCreativeTab {
             creativeTabFairyMotif = object : CreativeTabs("mirageFairy2019.fairy.motif") {

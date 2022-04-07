@@ -11,5 +11,7 @@ object Recipes {
         FairySummoningRecipe.module(this)
         WandRecipe.module(this)
         Mfa.module(this)
+        FairyCrystalDropLoader.module(this)
+        FairyLogDropLoader.module(this)
     }
 }
