@@ -105,6 +105,22 @@ object Fairy {
                 registerItemColorHandler()
             }
         }
+        onMakeLang {
+            enJa("item.mirageFairyR1.name", "Mirage Fairy", "妖精")
+            enJa("item.mirageFairyR1.format", "%s", "%s")
+            enJa("item.mirageFairyR2.name", "Mirage Fairy II", "妖精 II")
+            enJa("item.mirageFairyR2.format", "%s II", "%s II")
+            enJa("item.mirageFairyR3.name", "Mirage Fairy III", "妖精 III")
+            enJa("item.mirageFairyR3.format", "%s III", "%s III")
+            enJa("item.mirageFairyR4.name", "Mirage Fairy IV", "妖精 IV")
+            enJa("item.mirageFairyR4.format", "%s IV", "%s IV")
+            enJa("item.mirageFairyR5.name", "Mirage Fairy V", "妖精 V")
+            enJa("item.mirageFairyR5.format", "%s V", "%s V")
+            enJa("item.mirageFairyR6.name", "Mirage Fairy VI", "妖精 VI")
+            enJa("item.mirageFairyR6.format", "%s VI", "%s VI")
+            enJa("item.mirageFairyR7.name", "Mirage Fairy VII", "妖精 VII")
+            enJa("item.mirageFairyR7.format", "%s VII", "%s VII")
+        }
 
         // 鉱石辞書
         onCreateItemStack {

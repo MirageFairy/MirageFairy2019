@@ -8,21 +8,6 @@ item.mirageFairyPotMiragiumWater.name=ミラジウムウォーター入りポッ
 item.mirageFairyPotMirageFlowerExtract.name=ミラージュエキス入りポット
 item.mirageFairyPotMirageFlowerOil.name=ミラージュオイル入りポット
 
-item.mirageFairyR1.name=ミラージュ妖精
-item.mirageFairyR1.format=%s
-item.mirageFairyR2.name=ミラージュ妖精 II
-item.mirageFairyR2.format=%s II
-item.mirageFairyR3.name=ミラージュ妖精 III
-item.mirageFairyR3.format=%s III
-item.mirageFairyR4.name=ミラージュ妖精 IV
-item.mirageFairyR4.format=%s IV
-item.mirageFairyR5.name=ミラージュ妖精 V
-item.mirageFairyR5.format=%s V
-item.mirageFairyR6.name=ミラージュ妖精 VI
-item.mirageFairyR6.format=%s VI
-item.mirageFairyR7.name=ミラージュ妖精 VII
-item.mirageFairyR7.format=%s VII
-
 item.fairyStick.name=妖精のステッキ
 item.fairyStick.poem=頼みごとをしてみよう
 
