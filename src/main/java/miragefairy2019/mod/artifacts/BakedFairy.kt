@@ -22,7 +22,6 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.fairy.Fairy
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.ItemFairy
 import mirrg.kotlin.castOrNull
@@ -103,7 +102,10 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
     }
 
 
-    override fun getItemStackDisplayName(itemStack: ItemStack): String = getFairy(itemStack)?.fairyType?.let { translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText) } ?: translateToLocal("$unlocalizedName.name")
+    override fun getItemStackDisplayName(itemStack: ItemStack): String {
+        val fairyItemStack = getFairy(itemStack) ?: return translateToLocal("$unlocalizedName.name")
+        return translateToLocalFormatted("$unlocalizedName.format", fairyItemStack.displayName)
+    }
 
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
@@ -113,7 +115,7 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
         return when (tintIndex) {
             0 -> 0xFFFFFF
             1 -> fairyVariant.colorSet.skin
-            2 -> 0xFFFFFF
+            2 -> fairyItem.dressColor
             3 -> fairyVariant.colorSet.dark
             4 -> fairyVariant.colorSet.bright
             5 -> fairyVariant.colorSet.hair
@@ -157,7 +159,7 @@ class RecipeFairyBaking(registryName: ResourceLocation) : RecipeBase<RecipeFairy
     override fun match(matcher: RecipeMatcher): Result? {
 
         matcher.pullMatched { "torch".oreIngredient.test(it) } ?: return null
-        val fairy = matcher.pullMatched { it.item == Fairy.listItemFairy[0]() } ?: return null // TODO
+        val fairy = matcher.pullMatched { it.item is ItemFairy } ?: return null
         matcher.pullMatched { Items.BOWL.ingredient.test(it) } ?: return null
 
 

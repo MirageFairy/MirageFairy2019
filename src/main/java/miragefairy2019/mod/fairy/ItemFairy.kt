@@ -74,7 +74,7 @@ val VariantFairy.level get() = rare + rank - 1
 
 fun hasSameId(a: VariantFairy, b: VariantFairy) = a.id == b.id
 
-class ItemFairy(private val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, IFairyItem {
+class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, IFairyItem {
     override fun getMirageFairy(itemStack: ItemStack) = getVariant(itemStack)?.type
     override fun getItemStackDisplayName(itemStack: ItemStack): String {
         val fairyType = getMirageFairy(itemStack) ?: return translateToLocal("$unlocalizedName.name")
