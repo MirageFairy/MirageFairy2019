@@ -1,12 +1,16 @@
 package miragefairy2019.mod.systems
 
 import miragefairy2019.api.IManualRepairAcceptorItem
+import miragefairy2019.lib.RecipeInput
+import miragefairy2019.lib.RecipeMatcher
+import miragefairy2019.lib.toNonNullList
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
+import miragefairy2019.libkt.itemStacks
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
+import mirrg.kotlin.castOrNull
 import net.minecraft.inventory.InventoryCrafting
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.item.ItemStack.EMPTY
 import net.minecraft.item.crafting.IRecipe
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
@@ -28,52 +32,57 @@ class RecipeManualRepair : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         registryName = ResourceLocation(ModMirageFairy2019.MODID, "manual_repair")
     }
 
-    private class MatchResult(val itemTarget: IManualRepairAcceptorItem, val itemStackTarget: ItemStack, val slotIndexTarget: Int)
 
-    private fun match(inventoryCrafting: InventoryCrafting): MatchResult? {
-        val used = BooleanArray(inventoryCrafting.sizeInventory)
+    // match
 
-        fun <T : Any> pull(predicate: (index: Int, ItemStack) -> T?): T? = run a@{
-            (0 until inventoryCrafting.sizeInventory).forEach { i ->
-                if (!used[i]) {
-                    val itemStack: ItemStack = inventoryCrafting.getStackInSlot(i)
-                    val result = predicate(i, itemStack)
-                    if (result != null) {
-                        used[i] = true
-                        return@a result
-                    }
-                }
-            }
-            return null
-        }
+    private class Result(val target: RecipeInput<IManualRepairAcceptorItem>)
 
-        // 妖精武器探索
-        val matchResult = pull { i, itemStack ->
-            val item: Item = itemStack.item
-            if (item is IManualRepairAcceptorItem && item.canManualRepair(itemStack)) MatchResult(item, itemStack, i) else null
+    private fun match(inventoryCrafting: InventoryCrafting): Result? {
+        val matcher = RecipeMatcher(inventoryCrafting)
+
+        // 手入れ対象
+        val target = matcher.pull { itemStack ->
+            val item = itemStack.item.castOrNull<IManualRepairAcceptorItem>() ?: return@pull null
+            if (!item.canManualRepair(itemStack)) return@pull null
+            item
         } ?: return null
 
-        // スフィア探索
-        val ingredientsSubstitutes = matchResult.itemTarget.getManualRepairRequirements(matchResult.itemStackTarget)
-        if (ingredientsSubstitutes.size == 0) return null
-        ingredientsSubstitutes.forEach { ingredient -> pull { _, it -> if (ingredient.test(it)) true else null } ?: return null }
+        // 手入れ素材のリスト
+        val requirements = target.tag.getManualRepairRequirements(target.itemStack)
+        if (requirements.size == 0) return null // 手入れ用素材が登録されていない
 
-        // 余りがあってはならない
-        (0 until inventoryCrafting.sizeInventory).forEach {
-            if (!used[it] && !inventoryCrafting.getStackInSlot(it).isEmpty) return null
+        // 手入れ素材判定
+        requirements.forEach { requirement ->
+            matcher.pullMatched { requirement.test(it) } ?: return null
         }
 
-        return matchResult
+        if (matcher.hasRemaining()) return null
+
+        return Result(target)
     }
 
-    override fun matches(inventory: InventoryCrafting, world: World) = match(inventory) != null
-    override fun getRecipeOutput(): ItemStack = EMPTY
+
+    // overrides
+
     override fun isDynamic() = true
     override fun canFit(width: Int, height: Int) = width * height >= 1
-    override fun getCraftingResult(inventory: InventoryCrafting): ItemStack = match(inventory)?.let { it.itemTarget.getManualRepairedItem(it.itemStackTarget) } ?: EMPTY
-    override fun getRemainingItems(inventory: InventoryCrafting): NonNullList<ItemStack> = match(inventory)?.let { result ->
-        (0 until inventory.sizeInventory)
-            .map { i -> if (i == result.slotIndexTarget) EMPTY else ForgeHooks.getContainerItem(inventory.getStackInSlot(i)) }
-            .toCollection(NonNullList.create())
-    } ?: NonNullList.create()
+    override fun matches(inventoryCrafting: InventoryCrafting, world: World) = match(inventoryCrafting) != null
+    override fun getRecipeOutput() = EMPTY_ITEM_STACK
+
+    override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack {
+        val result = match(inventoryCrafting) ?: return EMPTY_ITEM_STACK
+        return result.target.tag.getManualRepairedItem(result.target.itemStack)
+    }
+
+    override fun getRemainingItems(inventoryCrafting: InventoryCrafting): NonNullList<ItemStack> {
+        val result = match(inventoryCrafting) ?: return NonNullList.create()
+        return inventoryCrafting.itemStacks.mapIndexed { index, itemStack ->
+            if (index == result.target.index) {
+                EMPTY_ITEM_STACK // 手入れ対象のアイテムはコンテナを残さない
+            } else {
+                ForgeHooks.getContainerItem(itemStack)
+            }
+        }.toNonNullList()
+    }
+
 }
