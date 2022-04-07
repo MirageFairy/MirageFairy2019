@@ -84,10 +84,10 @@ class BlockFairyBoxBase(private val tileEntityProvider: () -> TileEntityFairyBox
 
 
     // Action
-    fun getExecutor(world: World, blockPos: BlockPos) = world.getTileEntity(blockPos)?.castOrNull<TileEntityFairyBoxBase>()?.getExecutor()
-    override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        val executor = getExecutor(worldIn, pos) ?: return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ)
-        return executor.onBlockActivated(playerIn, hand, facing, hitX, hitY, hitZ)
+    fun getTileEntity(world: World, blockPos: BlockPos) = world.getTileEntity(blockPos)?.castOrNull<TileEntityFairyBoxBase>()
+    override fun onBlockActivated(world: World, blockPos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        val tileEntity = getTileEntity(world, blockPos) ?: return super.onBlockActivated(world, blockPos, state, playerIn, hand, facing, hitX, hitY, hitZ)
+        return tileEntity.getExecutor().onBlockActivated(playerIn, hand, facing, hitX, hitY, hitZ)
     }
 
 
@@ -111,16 +111,15 @@ abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
             tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
         }
 
-        getExecutor()?.onUpdateTick()
+        getExecutor().onUpdateTick()
     }
 
-
-    abstract fun getExecutor(): TileEntityExecutor?
+    open fun getExecutor() = object : IFairyBoxExecutor {}
 }
 
-open class TileEntityExecutor {
-    open fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float) = false
-    open fun onUpdateTick() = Unit
+interface IFairyBoxExecutor {
+    fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float) = false
+    fun onUpdateTick() = Unit
 }
 
 /** @return 0以上の値 */
