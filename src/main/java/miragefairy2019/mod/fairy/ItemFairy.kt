@@ -6,10 +6,13 @@ import miragefairy2019.api.IFairyType
 import miragefairy2019.api.IFairyWeaponItem
 import miragefairy2019.api.Mana
 import miragefairy2019.api.ManaSet
+import miragefairy2019.lib.IColoredItem
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.entries
 import miragefairy2019.lib.get
 import miragefairy2019.lib.textColor
+import miragefairy2019.libkt.ItemMulti
+import miragefairy2019.libkt.ItemVariant
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.concat
@@ -26,8 +29,6 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.libkt.white
 import miragefairy2019.libkt.withColor
-import miragefairy2019.libkt.ItemMulti
-import miragefairy2019.libkt.ItemVariant
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
@@ -73,7 +74,7 @@ val VariantFairy.level get() = rare + rank - 1
 
 fun hasSameId(a: VariantFairy, b: VariantFairy) = a.id == b.id
 
-class ItemFairy : ItemMulti<VariantFairy>(), IFairyItem {
+class ItemFairy(private val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, IFairyItem {
     override fun getMirageFairy(itemStack: ItemStack) = getVariant(itemStack)?.type
     override fun getItemStackDisplayName(itemStack: ItemStack): String = getMirageFairy(itemStack)?.let {
         translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText)
@@ -175,6 +176,19 @@ class ItemFairy : ItemMulti<VariantFairy>(), IFairyItem {
             f(player.getHeldItem(EnumHand.OFF_HAND))
         }
 
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
+        val variant = getVariant(itemStack) ?: return 0xFFFFFF
+        return when (tintIndex) {
+            0 -> variant.colorSet.skin
+            1 -> dressColor
+            2 -> variant.colorSet.dark
+            3 -> variant.colorSet.bright
+            4 -> variant.colorSet.hair
+            else -> 0xFFFFFF
+        }
     }
 }
 

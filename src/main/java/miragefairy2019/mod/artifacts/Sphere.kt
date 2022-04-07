@@ -1,8 +1,12 @@
 package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.Erg
+import miragefairy2019.lib.IColoredItem
 import miragefairy2019.lib.displayName
+import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
+import miragefairy2019.libkt.ItemMulti
+import miragefairy2019.libkt.ItemVariant
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
@@ -10,20 +14,16 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
+import miragefairy2019.mod.Main.creativeTab
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.libkt.ItemMulti
-import miragefairy2019.libkt.ItemVariant
 import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeBlock
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.mod.Main.creativeTab
 import mirrg.boron.util.UtilsString
 import net.minecraft.block.Block
-import net.minecraft.client.Minecraft
-import net.minecraft.client.renderer.color.IItemColor
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.Item
@@ -50,29 +50,7 @@ object Sphere {
                     item.setCustomModelResourceLocation(i, model = ResourceLocation(ModMirageFairy2019.MODID, "sphere"))
                 }
             }
-        }
-
-        // カスタム色
-        onRegisterItemColorHandler {
-            object {
-                @SideOnly(Side.CLIENT)
-                fun run() {
-                    @SideOnly(Side.CLIENT)
-                    class ItemColorImpl : IItemColor {
-                        override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
-                            val variant = itemSpheres().getVariant(itemStack) ?: return 0xFFFFFF
-                            return when (tintIndex) {
-                                0 -> variant.sphere.colorBackground
-                                1 -> variant.sphere.colorPlasma
-                                2 -> variant.sphere.colorCore
-                                3 -> variant.sphere.colorHighlight
-                                else -> 0xFFFFFF
-                            }
-                        }
-                    }
-                    Minecraft.getMinecraft().itemColors.registerItemColorHandler(ItemColorImpl(), itemSpheres())
-                }
-            }.run()
+            registerItemColorHandler()
         }
 
         // 鉱石辞書
@@ -175,10 +153,22 @@ val Erg.sphereType
 
 class VariantSphere(val sphere: SphereType) : ItemVariant()
 
-class ItemSpheres : ItemMulti<VariantSphere>() {
+class ItemSpheres : ItemMulti<VariantSphere>(), IColoredItem {
     override fun getItemStackDisplayName(itemStack: ItemStack): String {
         val variant = getVariant(itemStack) ?: return translateToLocal("$unlocalizedName.name")
         return translateToLocalFormatted("$unlocalizedName.format", variant.sphere.ergType.displayName.formattedText)
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
+        val variant = Sphere.itemSpheres().getVariant(itemStack) ?: return 0xFFFFFF
+        return when (tintIndex) {
+            0 -> variant.sphere.colorBackground
+            1 -> variant.sphere.colorPlasma
+            2 -> variant.sphere.colorCore
+            3 -> variant.sphere.colorHighlight
+            else -> 0xFFFFFF
+        }
     }
 }
 

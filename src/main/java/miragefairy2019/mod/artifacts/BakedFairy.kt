@@ -152,7 +152,7 @@ class RecipeFairyBaking(registryName: ResourceLocation) : RecipeBase<RecipeFairy
     override fun match(matcher: RecipeMatcher): Result? {
 
         matcher.pullMatched { "torch".oreIngredient.test(it) } ?: return null
-        val fairy = matcher.pullMatched { it.item == Fairy.listItemFairy[0] } ?: return null
+        val fairy = matcher.pullMatched { it.item == Fairy.listItemFairy[0]() } ?: return null // TODO
         matcher.pullMatched { Items.BOWL.ingredient.test(it) } ?: return null
 
 

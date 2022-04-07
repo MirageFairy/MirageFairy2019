@@ -1,21 +1,21 @@
 package miragefairy2019.mod.fairy
 
 import miragefairy2019.lib.entries
+import miragefairy2019.lib.registerItemColorHandler
+import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
-import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main.side
+import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.boron.util.UtilsString
 import mirrg.kotlin.toUpperCamelCase
-import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
-import net.minecraft.client.renderer.color.IItemColor
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.model.ModelLoader
-import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -23,13 +23,13 @@ import net.minecraftforge.oredict.OreDictionary
 
 object Fairy {
     lateinit var creativeTab: CreativeTabs
-    lateinit var listItemFairy: List<ItemFairy>
+    lateinit var listItemFairy: List<() -> ItemFairy>
     val module = module {
 
         loaderFairyCrystalDrop(this)
         loaderFairyLogDrop(this)
 
-        // 妖精クリエイティブタブ
+        // クリエイティブタブ
         onInitCreativeTab {
             creativeTab = object : CreativeTabs("mirageFairy2019.fairy") {
                 @SideOnly(Side.CLIENT)
@@ -48,66 +48,41 @@ object Fairy {
             }
         }
 
-        // 妖精アイテム
+        val rankMax = 7
+
+        // モチーフ
         onRegisterItem {
-            val rankMax = 7
-
-            // 妖精タイプ登録
             FairyTypes.instance = FairyTypes(rankMax)
+        }
 
-            // 妖精
-            listItemFairy = (1..rankMax).map { rank ->
-                val item = ItemFairy()
-                item.setRegistryName(ModMirageFairy2019.MODID, if (rank == 1) "mirage_fairy" else "mirage_fairy_r$rank")
-                item.unlocalizedName = "mirageFairyR$rank"
-                item.creativeTab = creativeTab // TODO 冗長説
-                FairyTypes.instance.variants.forEach { item.registerVariant(it.id, it.bundle[rank - 1]) }
-                ForgeRegistries.ITEMS.register(item)
-                if (side.isClient) {
-                    item.variants.forEach { ModelLoader.setCustomModelResourceLocation(item, it.metadata, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, "fairy"), "normal")) }
-                }
-                item
+        // アイテム
+        listItemFairy = (1..rankMax).map { rank ->
+            val dressColor = when (rank) {
+                1 -> 0xFF8888
+                2 -> 0x8888FF
+                3 -> 0x88FF88
+                4 -> 0xFFFF88
+                5 -> 0x111111
+                6 -> 0xFFFFFF
+                7 -> 0x88FFFF
+                else -> 0xFFFFFF
             }
-
-        }
-        onRegisterItemColorHandler {
-            object {
-                @SideOnly(Side.CLIENT)
-                fun run() {
-
-                    // 妖精アイテムのカスタム色
-                    listItemFairy.forEachIndexed { i, item ->
-                        @SideOnly(Side.CLIENT)
-                        class ItemColorImpl : IItemColor {
-                            override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
-                                val variant = item.getVariant(itemStack) ?: return 0xFFFFFF
-                                return when (tintIndex) {
-                                    0 -> variant.colorSet.skin
-                                    1 -> when (i) {
-                                        0 -> 0xFF8888
-                                        1 -> 0x8888FF
-                                        2 -> 0x88FF88
-                                        3 -> 0xFFFF88
-                                        4 -> 0x111111
-                                        5 -> 0xFFFFFF
-                                        6 -> 0x88FFFF
-                                        else -> 0xFFFFFF
-                                    }
-                                    2 -> variant.colorSet.dark
-                                    3 -> variant.colorSet.bright
-                                    4 -> variant.colorSet.hair
-                                    else -> 0xFFFFFF
-                                }
-                            }
+            item({ ItemFairy(dressColor) }, if (rank == 1) "mirage_fairy" else "mirage_fairy_r$rank") {
+                setUnlocalizedName("mirageFairyR$rank")
+                onRegisterItem {
+                    FairyTypes.instance.variants.forEach { entry -> item.registerVariant(entry.id, entry.bundle[rank - 1]) }
+                    //item.creativeTab = creativeTab // TODO 冗長説
+                    if (side.isClient) {
+                        item.variants.forEach { variant ->
+                            ModelLoader.setCustomModelResourceLocation(item, variant.metadata, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, "fairy"), "normal"))
                         }
-                        Minecraft.getMinecraft().itemColors.registerItemColorHandler(ItemColorImpl(), item)
                     }
-
                 }
-            }.run()
+                registerItemColorHandler()
+            }
         }
 
-        // 妖精の鉱石辞書
+        // 鉱石辞書
         onCreateItemStack {
             FairyTypes.instance.variants.forEach { variant ->
                 listItemFairy.forEachIndexed { i, _ ->
