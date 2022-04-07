@@ -64,7 +64,7 @@ object FairyCrystalDropLoader {
                 FairyTypes.instance.nephrite().overworld()
                 FairyTypes.instance.tourmaline().overworld()
                 FairyTypes.instance.topaz().overworld()
-                //FairyTypes.instance.pyrite().overworld() // TODO コモン枠にする
+                FairyTypes.instance.pyrite().overworld()
 
                 FairyTypes.instance.spider().overworld()
                 FairyTypes.instance.chicken().overworld()
