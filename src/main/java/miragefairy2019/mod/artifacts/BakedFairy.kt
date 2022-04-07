@@ -109,7 +109,7 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
 
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
-        val fairyItemStack = (ItemBakedFairy.getFairy(itemStack) ?: return 0xFFFFFF)
+        val fairyItemStack = getFairy(itemStack) ?: return 0xFFFFFF
         val fairyItem = fairyItemStack.item.castOrNull<ItemFairy>() ?: return 0xFFFFFF
         val fairyVariant = fairyItem.getVariant(fairyItemStack) ?: return 0xFFFFFF
         return when (tintIndex) {
