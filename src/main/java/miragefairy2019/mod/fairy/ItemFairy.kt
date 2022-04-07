@@ -76,9 +76,10 @@ fun hasSameId(a: VariantFairy, b: VariantFairy) = a.id == b.id
 
 class ItemFairy(private val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, IFairyItem {
     override fun getMirageFairy(itemStack: ItemStack) = getVariant(itemStack)?.type
-    override fun getItemStackDisplayName(itemStack: ItemStack): String = getMirageFairy(itemStack)?.let {
-        translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText)
-    } ?: translateToLocal("$unlocalizedName.name")
+    override fun getItemStackDisplayName(itemStack: ItemStack): String {
+        val fairyType = getMirageFairy(itemStack) ?: return translateToLocal("$unlocalizedName.name")
+        return translateToLocalFormatted("$unlocalizedName.format", fairyType.displayName.formattedText)
+    }
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
