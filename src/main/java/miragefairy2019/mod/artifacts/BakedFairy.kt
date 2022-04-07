@@ -1,18 +1,16 @@
 package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.IFoodAuraItem
+import miragefairy2019.lib.RecipeBase
 import miragefairy2019.lib.RecipeInput
 import miragefairy2019.lib.RecipeMatcher
 import miragefairy2019.lib.div
 import miragefairy2019.lib.fairyType
-import miragefairy2019.lib.toNonNullList
-import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
-import miragefairy2019.libkt.itemStacks
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
@@ -29,21 +27,17 @@ import net.minecraft.client.renderer.color.IItemColor
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.init.Items
-import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.ItemFood
 import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.IRecipe
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
-import net.minecraftforge.common.ForgeHooks
 import net.minecraftforge.common.util.Constants
 import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import net.minecraftforge.registries.IForgeRegistryEntry
 
 object BakedFairy {
     lateinit var creativeTabBakedFairy: () -> CreativeTabs
@@ -101,7 +95,7 @@ object BakedFairy {
 
         // 焼き妖精レシピ
         onAddRecipe {
-            ForgeRegistries.RECIPES.register(RecipeFairyBaking())
+            ForgeRegistries.RECIPES.register(RecipeFairyBaking(ResourceLocation(ModMirageFairy2019.MODID, "fairy_baking")))
         }
 
     }
@@ -159,18 +153,10 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraItem {
     override fun getFoodAura(itemStack: ItemStack) = getFairy(itemStack)?.fairyType?.let { it.manaSet / (it.cost / 50.0) }
 }
 
-class RecipeFairyBaking : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
-    init {
-        registryName = ResourceLocation(ModMirageFairy2019.MODID, "fairy_baking")
-    }
+class RecipeFairyBaking(registryName: ResourceLocation) : RecipeBase<RecipeFairyBaking.Result>(registryName) {
+    class Result(val fairy: RecipeInput<Unit>)
 
-
-    // match
-
-    private class Result(val fairy: RecipeInput<Unit>)
-
-    private fun match(inventoryCrafting: InventoryCrafting): Result? {
-        val matcher = RecipeMatcher(inventoryCrafting)
+    override fun match(matcher: RecipeMatcher): Result? {
 
         matcher.pullMatched { "torch".oreIngredient.test(it) } ?: return null
         val fairy = matcher.pullMatched { it.item == Fairy.listItemFairy[0] } ?: return null
@@ -182,24 +168,6 @@ class RecipeFairyBaking : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         return Result(fairy)
     }
 
-
-    // overrides
-
-    override fun isDynamic() = true
     override fun canFit(width: Int, height: Int) = width * height >= 2
-    override fun matches(inventoryCrafting: InventoryCrafting, world: World) = match(inventoryCrafting) != null
-    override fun getRecipeOutput() = EMPTY_ITEM_STACK
-
-    override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack {
-        val result = match(inventoryCrafting) ?: return EMPTY_ITEM_STACK
-        return BakedFairy.itemBakedFairy().createItemStack().also { ItemBakedFairy.setFairy(it, result.fairy.itemStack.copy(1)) }
-    }
-
-    override fun getRemainingItems(inventoryCrafting: InventoryCrafting): NonNullList<ItemStack> {
-        if (match(inventoryCrafting) == null) return NonNullList.create()
-        return inventoryCrafting.itemStacks.map { itemStack ->
-            ForgeHooks.getContainerItem(itemStack)
-        }.toNonNullList()
-    }
-
+    override fun getCraftingResult(result: Result) = BakedFairy.itemBakedFairy().createItemStack().also { ItemBakedFairy.setFairy(it, result.fairy.itemStack.copy(1)) }
 }
