@@ -11,6 +11,7 @@ import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
@@ -67,6 +68,10 @@ object BakedFairy {
                 }
             }
             registerItemColorHandler()
+        }
+        onMakeLang {
+            enJa("item.bakedFairy.name", "Baked Fairy", "焼き妖精")
+            enJa("item.bakedFairy.format", "Baked %s", "焼き%s")
         }
 
         // 焼き妖精レシピ
