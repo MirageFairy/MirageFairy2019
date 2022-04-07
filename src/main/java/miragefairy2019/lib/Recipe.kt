@@ -1,9 +1,42 @@
 package miragefairy2019.lib
 
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.itemStacks
 import miragefairy2019.libkt.size
 import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.ItemStack
+import net.minecraft.item.crafting.IRecipe
+import net.minecraft.util.NonNullList
+import net.minecraft.util.ResourceLocation
+import net.minecraft.world.World
+import net.minecraftforge.common.ForgeHooks
+import net.minecraftforge.registries.IForgeRegistryEntry
+
+abstract class RecipeBase<R : Any>(registryName: ResourceLocation) : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
+    init {
+        this.registryName = registryName
+    }
+
+    protected abstract fun match(matcher: RecipeMatcher): R?
+
+    override fun isDynamic() = true
+    override fun matches(inventory: InventoryCrafting, world: World) = match(RecipeMatcher(inventory)) != null
+    override fun getRecipeOutput() = EMPTY_ITEM_STACK
+
+    abstract fun getCraftingResult(result: R): ItemStack
+    override fun getCraftingResult(inventory: InventoryCrafting): ItemStack {
+        val result = match(RecipeMatcher(inventory)) ?: return EMPTY_ITEM_STACK
+        return getCraftingResult(result)
+    }
+
+    open fun getRemainingItem(result: R, index: Int, itemStack: ItemStack) = ForgeHooks.getContainerItem(itemStack)
+    override fun getRemainingItems(inventory: InventoryCrafting): NonNullList<ItemStack> {
+        val result = match(RecipeMatcher(inventory)) ?: return NonNullList.create()
+        return inventory.itemStacks.mapIndexed { index, itemStack ->
+            getRemainingItem(result, index, itemStack)
+        }.toNonNullList()
+    }
+}
 
 class RecipeInput<T : Any>(val index: Int, val itemStack: ItemStack, val tag: T, private val consumer: () -> Unit) {
     fun consume() = consumer()
