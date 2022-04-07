@@ -1,11 +1,13 @@
 package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.IFoodAuraItem
+import miragefairy2019.lib.IColoredItem
 import miragefairy2019.lib.RecipeBase
 import miragefairy2019.lib.RecipeInput
 import miragefairy2019.lib.RecipeMatcher
 import miragefairy2019.lib.div
 import miragefairy2019.lib.fairyType
+import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
@@ -21,9 +23,9 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.Fairy
 import miragefairy2019.mod.fairy.FairyTypes
-import net.minecraft.client.Minecraft
+import miragefairy2019.mod.fairy.ItemFairy
+import mirrg.kotlin.castOrNull
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
-import net.minecraft.client.renderer.color.IItemColor
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.init.Items
@@ -64,33 +66,7 @@ object BakedFairy {
                     ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation(item.registryName!!, "normal"))
                 }
             }
-        }
-
-        // 焼き妖精のカスタム色
-        onRegisterItemColorHandler {
-            object {
-                @SideOnly(Side.CLIENT)
-                fun run() {
-                    @SideOnly(Side.CLIENT)
-                    class ItemColorImpl : IItemColor {
-                        override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
-                            val fairyItemStack = (ItemBakedFairy.getFairy(itemStack) ?: return 0xFFFFFF)
-                            val variant = Fairy.listItemFairy[0].getVariant(fairyItemStack) ?: return 0xFFFFFF
-                            return when (tintIndex) {
-                                0 -> 0xFFFFFF
-                                1 -> variant.colorSet.skin
-                                2 -> 0xFFFFFF
-                                3 -> variant.colorSet.dark
-                                4 -> variant.colorSet.bright
-                                5 -> variant.colorSet.hair
-                                6 -> 0xFFFFFF
-                                else -> 0xFFFFFF
-                            }
-                        }
-                    }
-                    Minecraft.getMinecraft().itemColors.registerItemColorHandler(ItemColorImpl(), itemBakedFairy())
-                }
-            }.run()
+            registerItemColorHandler()
         }
 
         // 焼き妖精レシピ
@@ -101,7 +77,7 @@ object BakedFairy {
     }
 }
 
-class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraItem {
+class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
     companion object {
         fun getFairy(itemStack: ItemStack): ItemStack? {
             if (!itemStack.hasTagCompound()) return null
@@ -123,6 +99,23 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IFoodAuraItem {
 
 
     override fun getItemStackDisplayName(itemStack: ItemStack): String = getFairy(itemStack)?.fairyType?.let { translateToLocalFormatted("$unlocalizedName.format", it.displayName.formattedText) } ?: translateToLocal("$unlocalizedName.name")
+
+    @SideOnly(Side.CLIENT)
+    override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
+        val fairyItemStack = (ItemBakedFairy.getFairy(itemStack) ?: return 0xFFFFFF)
+        val fairyItem = fairyItemStack.item.castOrNull<ItemFairy>() ?: return 0xFFFFFF
+        val fairyVariant = fairyItem.getVariant(fairyItemStack) ?: return 0xFFFFFF
+        return when (tintIndex) {
+            0 -> 0xFFFFFF
+            1 -> fairyVariant.colorSet.skin
+            2 -> 0xFFFFFF
+            3 -> fairyVariant.colorSet.dark
+            4 -> fairyVariant.colorSet.bright
+            5 -> fairyVariant.colorSet.hair
+            6 -> 0xFFFFFF
+            else -> 0xFFFFFF
+        }
+    }
 
     override fun getSubItems(tab: CreativeTabs, items: NonNullList<ItemStack>) {
         if (!isInCreativeTab(tab)) return
