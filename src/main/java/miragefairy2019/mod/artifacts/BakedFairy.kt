@@ -7,11 +7,17 @@ import miragefairy2019.lib.RecipeInput
 import miragefairy2019.lib.RecipeMatcher
 import miragefairy2019.lib.div
 import miragefairy2019.lib.fairyType
+import miragefairy2019.lib.get
 import miragefairy2019.lib.registerItemColorHandler
+import miragefairy2019.lib.times
+import miragefairy2019.lib.toItemStack
+import miragefairy2019.lib.toNbt
+import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
@@ -25,21 +31,30 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.ItemFairy
 import mirrg.kotlin.castOrNull
+import mirrg.kotlin.formatAs
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.init.Items
 import net.minecraft.item.ItemFood
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
-import net.minecraftforge.common.util.Constants
+import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.event.entity.player.ItemTooltipEvent
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+
+class Dressing(val ingredient: Ingredient, val quality: Int)
+
+val dressingRegistry = mutableListOf<Dressing>()
+
 
 object BakedFairy {
     lateinit var creativeTabBakedFairy: () -> CreativeTabs
@@ -78,33 +93,51 @@ object BakedFairy {
             ForgeRegistries.RECIPES.register(RecipeFairyBaking(ResourceLocation(ModMirageFairy2019.MODID, "fairy_baking")))
         }
 
+
+        // ドレッシング
+
+        // 登録
+        onAddRecipe {
+            dressingRegistry += Dressing(Items.SUGAR.ingredient, 5)
+            dressingRegistry += Dressing("egg".oreIngredient, 7)
+            dressingRegistry += Dressing(Items.MILK_BUCKET.ingredient, 8)
+            dressingRegistry += Dressing(Items.DYE.createItemStack(metadata = 3).ingredient, 10)
+            dressingRegistry += Dressing("mirageFairySyrup".oreIngredient, 20)
+        }
+
+        // ツールチップ
+        onInit {
+            MinecraftForge.EVENT_BUS.register(object {
+                @SideOnly(Side.CLIENT)
+                @SubscribeEvent
+                fun handle(event: ItemTooltipEvent) {
+                    val dressing = dressingRegistry.firstOrNull { it.ingredient.test(event.itemStack) } ?: return
+                    event.toolTip += formattedText { "品質: ${dressing.quality formatAs "%+d"}"().blue } // TODO translate
+                }
+            })
+        }
+
     }
 }
 
 class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
     companion object {
-        fun getFairy(itemStack: ItemStack): ItemStack? {
-            if (!itemStack.hasTagCompound()) return null
-            val nbt = itemStack.tagCompound!!
-            if (!nbt.hasKey("Fairy", Constants.NBT.TAG_COMPOUND)) return null
-            val fairy = nbt.getCompoundTag("Fairy")
-            if (!fairy.hasKey("CombinedFairy", Constants.NBT.TAG_COMPOUND)) return null
-            return ItemStack(fairy.getCompoundTag("CombinedFairy"))
-        }
-
-        fun setFairy(itemStack: ItemStack, itemStackFairy: ItemStack) {
-            if (!itemStack.hasTagCompound()) itemStack.tagCompound = NBTTagCompound()
-            val nbt = itemStack.tagCompound!!
-            if (!nbt.hasKey("Fairy", Constants.NBT.TAG_COMPOUND)) nbt.setTag("Fairy", NBTTagCompound())
-            val fairy = nbt.getCompoundTag("Fairy")
-            fairy.setTag("CombinedFairy", itemStackFairy.writeToNBT(NBTTagCompound()))
-        }
+        fun getFairy(itemStack: ItemStack) = itemStack["Fairy"]["CombinedFairy"].compound?.toItemStack()
+        fun setFairy(itemStack: ItemStack, fairyItemStack: ItemStack) = itemStack["Fairy"]["CombinedFairy"].setCompound(fairyItemStack.toNbt())
+        fun getQuality(itemStack: ItemStack) = itemStack["Fairy"]["Quality"].int ?: 0
+        fun setQuality(itemStack: ItemStack, quality: Int) = itemStack["Fairy"]["Quality"].setInt(quality)
     }
 
 
     override fun getItemStackDisplayName(itemStack: ItemStack): String {
         val fairyItemStack = getFairy(itemStack) ?: return translateToLocal("$unlocalizedName.name")
         return translateToLocalFormatted("$unlocalizedName.format", fairyItemStack.displayName)
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+        tooltip += formattedText { "品質: ${getQuality(itemStack)}"() }  // TODO translate
+        tooltip += formattedText { "オーラブースト: ${(1 + 0.01 * getQuality(itemStack)) * 100.0 formatAs "%.0f%%"}"() }  // TODO translate
     }
 
     @SideOnly(Side.CLIENT)
@@ -150,11 +183,11 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
     }
 
 
-    override fun getFoodAura(itemStack: ItemStack) = getFairy(itemStack)?.fairyType?.let { it.manaSet / (it.cost / 50.0) }
+    override fun getFoodAura(itemStack: ItemStack) = getFairy(itemStack)?.fairyType?.let { it.manaSet / (it.cost / 50.0) * (1 + 0.01 * getQuality(itemStack)) }
 }
 
 class RecipeFairyBaking(registryName: ResourceLocation) : RecipeBase<RecipeFairyBaking.Result>(registryName) {
-    class Result(val fairy: RecipeInput<Unit>)
+    class Result(val fairy: RecipeInput<Unit>, val quality: Int)
 
     override fun match(matcher: RecipeMatcher): Result? {
 
@@ -162,12 +195,26 @@ class RecipeFairyBaking(registryName: ResourceLocation) : RecipeBase<RecipeFairy
         val fairy = matcher.pullMatched { it.item is ItemFairy } ?: return null
         matcher.pullMatched { Items.BOWL.ingredient.test(it) } ?: return null
 
+        val dressings = mutableListOf<Dressing>()
+        run finish@{
+            dressingRegistry.forEach { dressing ->
+                if (matcher.pullMatched { dressing.ingredient.test(it) } != null) {
+                    dressings += dressing
+                    if (dressings.size >= 3) return@finish
+                }
+            }
+        }
 
         if (matcher.hasRemaining()) return null
 
-        return Result(fairy)
+        return Result(fairy, dressings.sumBy { it.quality })
     }
 
     override fun canFit(width: Int, height: Int) = width * height >= 2
-    override fun getCraftingResult(result: Result) = BakedFairy.itemBakedFairy().createItemStack().also { ItemBakedFairy.setFairy(it, result.fairy.itemStack.copy(1)) }
+    override fun getCraftingResult(result: Result): ItemStack {
+        val itemStack = BakedFairy.itemBakedFairy().createItemStack()
+        ItemBakedFairy.setFairy(itemStack, result.fairy.itemStack.copy(1))
+        ItemBakedFairy.setQuality(itemStack, result.quality)
+        return itemStack
+    }
 }
