@@ -129,6 +129,10 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
     }
 
 
+    init {
+        setAlwaysEdible()
+    }
+
     override fun getItemStackDisplayName(itemStack: ItemStack): String {
         val fairyItemStack = getFairy(itemStack) ?: return translateToLocal("$unlocalizedName.name")
         return translateToLocalFormatted("$unlocalizedName.format", fairyItemStack.displayName)
