@@ -19,8 +19,8 @@ class TextComponentWrapper(val textComponents: List<ITextComponent>) {
 
 fun TextComponentWrapper.toTextComponent(): ITextComponent = textComponents.fold(TextComponentString("") as ITextComponent) { a, b -> a.appendSibling(b) }
 
-val TextComponentWrapper.isEmpty get() = textComponents.isEmpty()
-val TextComponentWrapper.isNotEmpty get() = textComponents.isNotEmpty()
+val TextComponentWrapper.isEmpty get() = textComponents.all { it.unformattedText.isEmpty() }
+val TextComponentWrapper.isNotEmpty get() = !isEmpty
 operator fun TextComponentWrapper.plus(other: TextComponentWrapper) = TextComponentWrapper(textComponents + other.textComponents)
 fun concat(vararg textComponentWrappers: TextComponentWrapper) = textComponentWrappers.asIterable().flatten()
 fun concatNotNull(vararg textComponentWrappers: TextComponentWrapper?) = textComponentWrappers.filterNotNull().flatten()
