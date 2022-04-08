@@ -1,7 +1,7 @@
 package miragefairy2019.mod.systems
 
 import appeng.api.AEApi
-import miragefairy2019.lib.Installed
+import miragefairy2019.lib.Compatibility
 import miragefairy2019.lib.getLogger
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.Main
@@ -17,8 +17,8 @@ object Ae2SpatialIoBlocking {
 
         onInit {
 
-            logger.info("enabled: ${Installed.ae2}")
-            if (Installed.ae2) {
+            logger.info("enabled: ${Compatibility.ae2}")
+            if (Compatibility.ae2) {
                 fun disable(block: Block) = AEApi.instance().registries().movable().blacklistBlock(block)
 
                 logger.info("disableVanillaAe2SpatialIo: ${disableVanillaAe2SpatialIo()}")
