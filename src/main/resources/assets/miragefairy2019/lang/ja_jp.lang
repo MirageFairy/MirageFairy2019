@@ -320,6 +320,7 @@ item.debugOreSeedStatistics.name=デバッグ：鉱石分布
 item.debugOreSeedDropRate.name=デバッグ：鉱石生成確率表示
 item.debugMirageFlowerGrowthRateList.name=デバッグ：ミラージュフラワー地面補正一覧
 item.debugMirageFlowerGrowthRate.name=デバッグ：ミラージュフラワー成長速度表示
+item.debugShowData.name=デバッグ：データ表示
 item.manaRodShine.name=月長石の魔導芯棒
 item.manaRodShine.poem=真実の心を伝える
 item.manaRodFire.name=辰砂の魔導芯棒

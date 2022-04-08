@@ -3,9 +3,12 @@ package miragefairy2019.mod.artifacts
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.erg
+import miragefairy2019.lib.getLogger
 import miragefairy2019.lib.mana
 import miragefairy2019.lib.sum
+import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.hex
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
@@ -15,27 +18,31 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toRgb
+import miragefairy2019.libkt.yellow
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.fairy.ColorSet
+import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.oreseed.ApiOreSeedDrop
 import miragefairy2019.mod.oreseed.EnumOreSeedType
 import miragefairy2019.mod.oreseed.EnumVariantOreSeed
 import miragefairy2019.mod.oreseed.OreSeedDropEnvironment
-import miragefairy2019.mod.fairy.ColorSet
-import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.playeraura.ApiPlayerAura
 import miragefairy2019.mod.skill.ApiSkill
 import mirrg.kotlin.formatAs
+import mirrg.kotlin.join
 import mirrg.kotlin.toLowerCamelCase
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.Item
+import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
 import net.minecraftforge.oredict.OreDictionary
@@ -63,6 +70,7 @@ object DebugItems {
         r({ ItemDebugOreSeedDropRate() }, "ore_seed_drop_rate", "Ore Seed Drop Rate", "鉱石生成確率表示")
         r({ ItemDebugMirageFlowerGrowthRateList() }, "mirage_flower_growth_rate_list", "Mirage Flower Growth Rate List", "ミラージュフラワー地面補正一覧")
         r({ ItemDebugMirageFlowerGrowthRate() }, "mirage_flower_growth_rate", "Mirage Flower Growth Rate", "ミラージュフラワー成長速度表示")
+        r({ ItemDebugShowData() }, "show_data", "Show Data", "データ表示")
 
     }
 }
@@ -280,6 +288,42 @@ class ItemDebugMirageFlowerGrowthRate : ItemDebug() {
             player.sendStatusMessage(textComponent { "  $key: "() + (value * 100).f3() + "%"() }, false)
         }
         player.sendStatusMessage(textComponent { "===================="() }, false)
+
+        return EnumActionResult.SUCCESS
+    }
+}
+
+class ItemDebugShowData : ItemDebug() {
+    override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        if (world.isRemote) return EnumActionResult.SUCCESS
+
+        val list = mutableListOf<ITextComponent>()
+
+        list.add(textComponent { "===== Block Info ====="() })
+
+        list.add(textComponent { "Position: "() + "(${blockPos.x}, ${blockPos.y}, ${blockPos.z})"().gold })
+
+        val blockState = world.getBlockState(blockPos).getActualState(world, blockPos)
+        list.add(textComponent { "Block State: "() + "$blockState"().yellow })
+
+        val block = blockState.block
+        list.add(textComponent { "Block: "() + "${block.registryName}"().gold + " as "() + block.javaClass.simpleName().blue })
+
+        val tileEntity = world.getTileEntity(blockPos)
+        if (tileEntity != null) {
+            list.add(textComponent { "Tile Entity: "() + "${TileEntity.getKey(tileEntity.javaClass)}"().gold + " as "() + tileEntity.javaClass.simpleName().blue })
+            tileEntity.serializeNBT().toString().chunked(80).forEach { string ->
+                list.add(textComponent { string().yellow })
+            }
+        }
+
+        list.add(textComponent { "===================="() })
+
+
+        list.forEach { message ->
+            player.sendStatusMessage(message, false)
+        }
+        getLogger().info(list.map { it.unformattedText }.join("\n"))
 
         return EnumActionResult.SUCCESS
     }

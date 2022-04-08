@@ -319,6 +319,7 @@ item.debugOreSeedStatistics.name=Debug: Ore Seed Statistics
 item.debugOreSeedDropRate.name=Debug: Ore Seed Drop Rate
 item.debugMirageFlowerGrowthRateList.name=Debug: Mirage Flower Growth Rate List
 item.debugMirageFlowerGrowthRate.name=Debug: Mirage Flower Growth Rate
+item.debugShowData.name=Debug: Show Data
 item.manaRodShine.name=Shine Mana Rod
 item.manaRodShine.poem=
 item.manaRodFire.name=Fire Mana Rod
