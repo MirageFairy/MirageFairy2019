@@ -14,7 +14,6 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
-import net.minecraft.util.text.ITextComponent
 
 class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
     override fun getExecutor(): IFairyBoxExecutor {
@@ -23,24 +22,17 @@ class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
         val facing = block.getFacing(blockState)
         val blockPosOutput = pos.offset(facing)
 
-        fun getErrorExecutor(textComponent: ITextComponent) = object : IFairyBoxExecutor {
-            override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-                player.sendStatusMessage(textComponent, true)
-                return true
-            }
-        }
-
         // 目の前にアイテムがある場合は行動しない（Lazy Chunk対策）
-        if (world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPosOutput)).isNotEmpty()) return getErrorExecutor(textComponent { "制作物があふれています"().darkRed }) // TODO translate
+        if (world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPosOutput)).isNotEmpty()) return FailureFairyBoxExecutor(textComponent { "制作物があふれています"().darkRed }) // TODO translate
 
         // 排出面が塞がれている場合は行動しない
-        if (world.getBlockState(blockPosOutput).isSideSolid(world, blockPosOutput, facing.opposite)) return getErrorExecutor(textComponent { "妖精が入れません"().darkRed }) // TODO translate
+        if (world.getBlockState(blockPosOutput).isSideSolid(world, blockPosOutput, facing.opposite)) return FailureFairyBoxExecutor(textComponent { "妖精が入れません"().darkRed }) // TODO translate
 
         // 妖精の木のコンパイルに失敗した場合は抜ける
         val leaves = try {
             compileFairyTree(world, pos)
         } catch (e: TreeCompileException) {
-            return getErrorExecutor(e.description)
+            return FailureFairyBoxExecutor(e.description)
         }
 
         // 成立

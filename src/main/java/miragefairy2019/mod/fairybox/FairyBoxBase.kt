@@ -19,6 +19,7 @@ import net.minecraft.util.ITickable
 import net.minecraft.util.Mirror
 import net.minecraft.util.Rotation
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -120,6 +121,13 @@ abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
 interface IFairyBoxExecutor {
     fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float) = false
     fun onUpdateTick() = Unit
+}
+
+class FailureFairyBoxExecutor(val message: ITextComponent) : IFairyBoxExecutor {
+    override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        player.sendStatusMessage(message, true)
+        return true
+    }
 }
 
 /** @return 0以上の値 */
