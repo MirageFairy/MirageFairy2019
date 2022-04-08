@@ -6,9 +6,10 @@ import miragefairy2019.lib.erg
 import miragefairy2019.lib.getLogger
 import miragefairy2019.lib.mana
 import miragefairy2019.lib.sum
+import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.gold
+import miragefairy2019.libkt.green
 import miragefairy2019.libkt.hex
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
@@ -301,17 +302,17 @@ class ItemDebugShowData : ItemDebug() {
 
         list.add(textComponent { "===== Block Info ====="() })
 
-        list.add(textComponent { "Position: "() + "(${blockPos.x}, ${blockPos.y}, ${blockPos.z})"().gold })
+        list.add(textComponent { "Position: "() + "(${blockPos.x}, ${blockPos.y}, ${blockPos.z})"().aqua })
 
         val blockState = world.getBlockState(blockPos).getActualState(world, blockPos)
         list.add(textComponent { "Block State: "() + "$blockState"().yellow })
 
         val block = blockState.block
-        list.add(textComponent { "Block: "() + "${block.registryName}"().gold + " as "() + block.javaClass.simpleName().blue })
+        list.add(textComponent { "Block: "() + "${block.registryName}"().green + " as "() + block.javaClass.simpleName().blue })
 
         val tileEntity = world.getTileEntity(blockPos)
         if (tileEntity != null) {
-            list.add(textComponent { "Tile Entity: "() + "${TileEntity.getKey(tileEntity.javaClass)}"().gold + " as "() + tileEntity.javaClass.simpleName().blue })
+            list.add(textComponent { "Tile Entity: "() + "${TileEntity.getKey(tileEntity.javaClass)}"().green + " as "() + tileEntity.javaClass.simpleName().blue })
             tileEntity.serializeNBT().toString().chunked(80).forEach { string ->
                 list.add(textComponent { string().yellow })
             }
