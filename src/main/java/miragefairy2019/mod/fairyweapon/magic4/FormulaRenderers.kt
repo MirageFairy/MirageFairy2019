@@ -11,7 +11,7 @@ import mirrg.kotlin.formatAs
 import net.minecraft.util.text.ITextComponent
 import kotlin.math.log
 
-class FormulaRendererScope<T>(val formulaArguments: FormulaArguments, val formula: Formula<T>) {
+class FormulaRendererScope<out T>(val formulaArguments: FormulaArguments, val formula: Formula<T>) {
     val value by lazy { formula.calculate(formulaArguments) }
 }
 

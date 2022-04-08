@@ -2,7 +2,7 @@ package miragefairy2019.libkt
 
 import java.util.Random
 
-class WeightedItem<T : Any>(val item: T, val weight: Double)
+class WeightedItem<out T : Any>(val item: T, val weight: Double)
 
 fun <T : Any> List<WeightedItem<T>>.getRandomItem(random: Random) = getItem(random.nextDouble())
 

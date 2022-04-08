@@ -99,7 +99,7 @@ val ResourceLocation.resourceName get() = ResourceName(resourceDomain, resourceP
 
 
 // Initializer
-abstract class Initializer<T : Any>(private val getter: () -> T) : () -> T {
+abstract class Initializer<out T : Any>(private val getter: () -> T) : () -> T {
     internal val initializingObject get() = getter()
     override operator fun invoke() = initializingObject
 }
@@ -107,7 +107,7 @@ abstract class Initializer<T : Any>(private val getter: () -> T) : () -> T {
 
 // Item
 
-class ItemInitializer<I : Item>(val modInitializer: ModInitializer, val registryName: ResourceName, getter: () -> I) : Initializer<I>(getter) {
+class ItemInitializer<out I : Item>(val modInitializer: ModInitializer, val registryName: ResourceName, getter: () -> I) : Initializer<I>(getter) {
     val item get() = initializingObject
 }
 
@@ -154,7 +154,7 @@ fun <I : Item> I.addOreName(oreName: String, metadata: Int = 0) = OreDictionary.
 
 // ItemVariant
 
-class ItemVariantInitializer<I : ItemMulti<V>, V : ItemVariant>(val itemInitializer: ItemInitializer<I>, val registryName: ResourceName, val metadata: Int, getter: () -> V) : Initializer<V>(getter) {
+class ItemVariantInitializer<out I : ItemMulti<V>, V : ItemVariant>(val itemInitializer: ItemInitializer<I>, val registryName: ResourceName, val metadata: Int, getter: () -> V) : Initializer<V>(getter) {
     val itemVariant get() = initializingObject
 }
 
@@ -181,7 +181,7 @@ fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.createItemS
 
 // Block
 
-class BlockInitializer<B : Block>(val modInitializer: ModInitializer, val resourceName: ResourceName, getter: () -> B) : Initializer<B>(getter) {
+class BlockInitializer<out B : Block>(val modInitializer: ModInitializer, val resourceName: ResourceName, getter: () -> B) : Initializer<B>(getter) {
     val block get() = initializingObject
 }
 

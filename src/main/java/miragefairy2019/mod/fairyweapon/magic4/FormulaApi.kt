@@ -14,11 +14,11 @@ interface FormulaArguments {
     fun getSkillLevel(mastery: IMastery): Int
 }
 
-interface Formula<T> {
+interface Formula<out T> {
     fun calculate(formulaArguments: FormulaArguments): T
 }
 
-interface FormulaRenderer<T> {
+interface FormulaRenderer<in T> {
     fun render(formulaArguments: FormulaArguments, formula: Formula<T>): ITextComponent
 }
 

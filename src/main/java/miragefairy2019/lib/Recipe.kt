@@ -38,7 +38,7 @@ abstract class RecipeBase<R : Any>(registryName: ResourceLocation) : IForgeRegis
     }
 }
 
-class RecipeInput<T : Any>(val index: Int, val itemStack: ItemStack, val tag: T, private val consumer: () -> Unit) {
+class RecipeInput<out T : Any>(val index: Int, val itemStack: ItemStack, val tag: T, private val consumer: () -> Unit) {
     fun consume() = consumer()
 }
 

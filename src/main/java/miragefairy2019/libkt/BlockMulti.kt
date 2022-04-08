@@ -52,7 +52,7 @@ interface IBlockVariant {
     val canSeeOnCreativeTab get() = true
 }
 
-class BlockVariantList<V : IBlockVariant>(
+class BlockVariantList<out V : IBlockVariant>(
     val blockVariants: List<V>,
     val defaultMetadata: Int = 0
 ) {

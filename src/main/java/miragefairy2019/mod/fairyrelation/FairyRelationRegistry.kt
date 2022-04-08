@@ -24,7 +24,7 @@ class FairyRelationRegistry<T> : Iterable<FairyRelationEntry<T>> {
     override fun iterator() = entries.iterator()
 }
 
-class FairyRelationEntry<T>(
+class FairyRelationEntry<out T>(
     private val fairySupplier: () -> RankedFairyTypeBundle,
     private val keySupplier: () -> T,
     /**
