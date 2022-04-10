@@ -1,8 +1,8 @@
 package miragefairy2019.mod.recipes
 
-import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.module
+import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.fairy.FairyTypes
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry
@@ -26,7 +26,7 @@ object FairyDilutionRecipe {
                     ResourceLocation("${inputMotif.resourceDomain}:fairy_dilution/${inputMotif.resourcePath}"),
                     null,
                     outputFairy.createItemStack(),
-                    OreIngredientComplex("mirageFairy2019CraftingToolFairyWandSummoning"),
+                    WandType.SUMMONING.ingredient,
                     OreIngredient("container1000MirageFlowerExtract"),
                     inputFairyBundle[rankDiff].createItemStack().ingredient // レベルが上昇するような希釈はできない
                 )

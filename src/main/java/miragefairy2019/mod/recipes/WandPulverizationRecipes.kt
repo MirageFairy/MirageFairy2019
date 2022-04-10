@@ -1,9 +1,9 @@
 package miragefairy2019.mod.recipes
 
-import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.artifacts.WandType
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry
@@ -18,7 +18,7 @@ object WandPulverizationRecipes {
                     ResourceLocation("${ModMirageFairy2019.MODID}:wand_pulverization/$registryName"),
                     null,
                     output,
-                    OreIngredientComplex("mirageFairy2019CraftingToolFairyWandBreaking"),
+                    WandType.BREAKING.ingredient,
                     input
                 )
             }

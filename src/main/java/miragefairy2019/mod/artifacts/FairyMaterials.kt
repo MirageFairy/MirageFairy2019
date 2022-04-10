@@ -108,7 +108,7 @@ object FairyMaterials {
 
             // 空き瓶＋ミラ葉64個＞破砕→ミラエキス瓶
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019CraftingToolFairyWandBreaking"))
+                it.conditions += FairyStickCraftConditionUseItem(WandType.BREAKING.ingredient)
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
                 it.conditions += FairyStickCraftConditionConsumeItem(itemVariants.leafMirageFlower().createItemStack().ingredient, 64)
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"), 5)
@@ -117,7 +117,7 @@ object FairyMaterials {
 
             // 空き瓶＋ミラ葉50個＞珠玉→ミラエキス瓶
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019CraftingToolFairyWandPolishing"))
+                it.conditions += FairyStickCraftConditionUseItem(WandType.POLISHING.ingredient)
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
                 it.conditions += FairyStickCraftConditionConsumeItem(itemVariants.leafMirageFlower().createItemStack().ingredient, 50)
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"), 4)
@@ -126,7 +126,7 @@ object FairyMaterials {
 
             // 空き瓶＋ミラ葉50個＞歪曲→ミラエキス瓶
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019CraftingToolFairyWandDistortion"))
+                it.conditions += FairyStickCraftConditionUseItem(WandType.DISTORTION.ingredient)
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
                 it.conditions += FairyStickCraftConditionConsumeItem(itemVariants.leafMirageFlower().createItemStack().ingredient, 40)
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"), 3)
@@ -135,7 +135,7 @@ object FairyMaterials {
 
             // 空き瓶＋ミラ種50個＋辰砂の粉4個＞珠玉→ミラオイル瓶
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019CraftingToolFairyWandPolishing"))
+                it.conditions += FairyStickCraftConditionUseItem(WandType.POLISHING.ingredient)
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds()), 50)
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustCinnabar"), 4)
@@ -144,7 +144,7 @@ object FairyMaterials {
 
             // 空き瓶＋ミラ種50個＋辰砂の粉4個＞歪曲→ミラオイル瓶
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019CraftingToolFairyWandDistortion"))
+                it.conditions += FairyStickCraftConditionUseItem(WandType.DISTORTION.ingredient)
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds()), 40)
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustCinnabar"), 3)

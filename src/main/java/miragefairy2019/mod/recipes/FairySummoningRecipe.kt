@@ -1,10 +1,10 @@
 package miragefairy2019.mod.recipes
 
-import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.fairyrelation.FairyRelationRegistries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import net.minecraft.util.ResourceLocation
@@ -33,7 +33,7 @@ object FairySummoningRecipe {
                     ResourceLocation("${ModMirageFairy2019.MODID}:mirage_fairy_from_item_$counter"),
                     null,
                     entry.fairy.main.createItemStack(),
-                    OreIngredientComplex("mirageFairy2019CraftingToolFairyWandSummoning"),
+                    WandType.SUMMONING.ingredient,
                     OreIngredient("mirageFairyCrystal"),
                     ingredient
                 )
