@@ -74,5 +74,37 @@ object WandRecipe {
             )
         )
 
+        // 砂岩＋破砕のワンド→砂
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "sand_from_sandstone"),
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(ore = "sandstone"),
+                    WandType.BREAKING.ingredientData
+                ),
+                result = DataResult(
+                    item = "minecraft:sand",
+                    data = 0
+                )
+            )
+        )
+
+        // 砂岩＋融合のワンド→砂岩
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "sandstone_from_sand"),
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(ore = "sand"),
+                    DataOreIngredient(ore = "sand"),
+                    DataOreIngredient(ore = "sand"),
+                    WandType.FUSION.ingredientData
+                ),
+                result = DataResult(
+                    item = "minecraft:sandstone",
+                    data = 0
+                )
+            )
+        )
+
     }
 }
