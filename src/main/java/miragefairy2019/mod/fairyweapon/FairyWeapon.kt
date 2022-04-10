@@ -17,6 +17,7 @@ import miragefairy2019.api.Erg.SPACE
 import miragefairy2019.api.Erg.THUNDER
 import miragefairy2019.api.Erg.WARP
 import miragefairy2019.api.Erg.WATER
+import miragefairy2019.libkt.BakedModelBuiltinWrapper
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
@@ -32,8 +33,11 @@ import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.mod.Main.creativeTab
+import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.libkt.BakedModelBuiltinWrapper
+import miragefairy2019.mod.artifacts.oreName
+import miragefairy2019.mod.artifacts.sphereType
 import miragefairy2019.mod.fairyweapon.items.ItemBellBase
 import miragefairy2019.mod.fairyweapon.items.ItemBellChristmas
 import miragefairy2019.mod.fairyweapon.items.ItemBellFlowerPicking
@@ -50,10 +54,6 @@ import miragefairy2019.mod.fairyweapon.items.ItemMiragiumScythe
 import miragefairy2019.mod.fairyweapon.items.ItemOcarinaTemptation
 import miragefairy2019.mod.fairyweapon.items.ItemRodBase
 import miragefairy2019.mod.fairyweapon.items.ItemRyugyoDrill
-import miragefairy2019.mod.artifacts.oreName
-import miragefairy2019.mod.artifacts.sphereType
-import miragefairy2019.mod.Main.creativeTab
-import miragefairy2019.mod.Main.side
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
