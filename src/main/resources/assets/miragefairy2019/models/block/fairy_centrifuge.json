@@ -1,0 +1,33 @@
+{
+  "parent": "block/block",
+  "elements": [
+    {   "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "texture": "#end", "cullface": "down" },
+        "up":    { "texture": "#end", "cullface": "up" },
+        "north": { "texture": "#side", "cullface": "north" },
+        "south": { "texture": "#side", "cullface": "south" },
+        "west":  { "texture": "#side", "cullface": "west" },
+        "east":  { "texture": "#side", "cullface": "east" }
+      }
+    },
+    {   "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "north": { "texture": "#entrance", "cullface": "north" },
+        "south": { "input": "#window", "cullface": "south" },
+        "west":  { "output": "#window", "cullface": "west" },
+        "east":  { "input": "#window", "cullface": "east" }
+      }
+    }
+  ],
+  "textures": {
+    "particle": "miragefairy2019:blocks/fairy_wood_log",
+    "end": "miragefairy2019:blocks/fairy_wood_log_top",
+    "side": "miragefairy2019:blocks/fairy_wood_log",
+    "entrance": "miragefairy2019:blocks/fairy_centrifuge_entrance",
+    "input": "miragefairy2019:blocks/fairy_centrifuge_input",
+    "output": "miragefairy2019:blocks/fairy_centrifuge_output"
+  }
+}
