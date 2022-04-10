@@ -3,7 +3,9 @@ package miragefairy2019.mod.artifacts
 import miragefairy2019.lib.proxy
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.BlockRegion
+import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
+import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.canTranslate
@@ -72,12 +74,29 @@ import kotlin.math.ceil
 
 private val Int.roman get() = listOf("I", "II", "III", "IV").getOrNull(this - 1) ?: throw IllegalArgumentException()
 
+enum class WandType(val registryName: String) {
+    CRAFTING("crafting"),
+    HYDRATING("hydrating"),
+    MELTING("melting"),
+    BREAKING("breaking"),
+    FREEZING("freezing"),
+    POLISHING("polishing"),
+    SUMMONING("summoning"),
+    DISTORTION("distortion"),
+    FUSION("fusion"),
+    ;
+
+    val oreName get() = "mirageFairy2019CraftingToolFairyWand${registryName.toUpperCamelCase()}"
+    val ingredient get() = OreIngredientComplex(oreName)
+    val ingredientData get() = DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = oreName)
+}
+
 object Wand {
     val module = module {
 
-        fun <T : ItemFairyWand> fairyWand(tier: Int, type: String, englishType: String, japaneseType: String, number: Int, creator: () -> T, vararg additionalOreNames: String) {
-            item(creator, "${type}_fairy_wand${if (number == 1) "" else "_$number"}") {
-                setUnlocalizedName("fairyWand${type.toUpperCamelCase()}${if (number == 1) "" else "$number"}")
+        fun <T : ItemFairyWand> fairyWand(tier: Int, type: WandType, englishType: String, japaneseType: String, number: Int, creator: () -> T, vararg additionalOreNames: String) {
+            item(creator, "${type.registryName}_fairy_wand${if (number == 1) "" else "_$number"}") {
+                setUnlocalizedName("fairyWand${type.registryName.toUpperCamelCase()}${if (number == 1) "" else "$number"}")
                 setCreativeTab { Main.creativeTab }
                 setCustomModelResourceLocation()
                 onInit {
@@ -86,41 +105,41 @@ object Wand {
                     item.tier = tier
                 }
                 onCreateItemStack {
-                    OreDictionary.registerOre("mirageFairy2019CraftingToolFairyWand${type.toUpperCamelCase()}", item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE))
+                    OreDictionary.registerOre(type.oreName, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE))
                     additionalOreNames.forEach { OreDictionary.registerOre(it, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE)) }
                 }
             }
             onMakeLang {
                 enJa(
-                    "item.fairyWand${type.toUpperCamelCase()}${if (number == 1) "" else "$number"}.name",
+                    "item.fairyWand${type.registryName.toUpperCamelCase()}${if (number == 1) "" else "$number"}.name",
                     "$englishType Wand${if (number == 1) "" else " ${number.roman}"}",
                     "${japaneseType}のワンド${if (number == 1) "" else " ${number.roman}"}"
                 )
             }
         }
-        fairyWand(1, "crafting", "Crafting", "技巧", 1, { ItemFairyWand() })
-        fairyWand(2, "crafting", "Crafting", "技巧", 2, { ItemFairyWand() })
-        fairyWand(3, "crafting", "Crafting", "技巧", 3, { ItemFairyWand() })
-        fairyWand(4, "crafting", "Crafting", "技巧", 4, { ItemFairyWand() })
-        fairyWand(1, "hydrating", "Hydrating", "加水", 1, { ItemFairyWand() }, "container1000Water")
-        fairyWand(2, "hydrating", "Hydrating", "加水", 2, { ItemFairyWand() }, "container1000Water")
-        fairyWand(3, "hydrating", "Hydrating", "加水", 3, { ItemFairyWand() }, "container1000Water")
-        fairyWand(4, "hydrating", "Hydrating", "加水", 4, { ItemFairyWand() }, "container1000Water")
-        fairyWand(2, "melting", "Melting", "紅蓮", 1, { ItemFairyWand() })
-        fairyWand(3, "melting", "Melting", "紅蓮", 2, { ItemFairyWand() })
-        fairyWand(4, "melting", "Melting", "紅蓮", 3, { ItemFairyWand() })
-        fairyWand(2, "breaking", "Breaking", "破砕", 1, { ItemFairyWand() })
-        fairyWand(3, "breaking", "Breaking", "破砕", 2, { ItemFairyWand() })
-        fairyWand(4, "breaking", "Breaking", "破砕", 3, { ItemFairyWand() })
-        fairyWand(2, "freezing", "Freezing", "氷晶", 1, { ItemFairyWand() })
-        fairyWand(3, "freezing", "Freezing", "氷晶", 2, { ItemFairyWand() })
-        fairyWand(4, "freezing", "Freezing", "氷晶", 3, { ItemFairyWand() })
-        fairyWand(3, "polishing", "Polishing", "珠玉", 1, { ItemFairyWand() })
-        fairyWand(4, "polishing", "Polishing", "珠玉", 2, { ItemFairyWand() })
-        fairyWand(3, "summoning", "Wizard's", "冥王", 1, { ItemFairyWandSummoning(2) })
-        fairyWand(4, "summoning", "Wizard's", "冥王", 2, { ItemFairyWandSummoning(5) })
-        fairyWand(4, "distortion", "Distortion", "歪曲", 1, { ItemFairyWand() })
-        fairyWand(4, "fusion", "Fusion", "融合", 1, { ItemFairyWand() })
+        fairyWand(1, WandType.CRAFTING, "Crafting", "技巧", 1, { ItemFairyWand() })
+        fairyWand(2, WandType.CRAFTING, "Crafting", "技巧", 2, { ItemFairyWand() })
+        fairyWand(3, WandType.CRAFTING, "Crafting", "技巧", 3, { ItemFairyWand() })
+        fairyWand(4, WandType.CRAFTING, "Crafting", "技巧", 4, { ItemFairyWand() })
+        fairyWand(1, WandType.HYDRATING, "Hydrating", "加水", 1, { ItemFairyWand() }, "container1000Water")
+        fairyWand(2, WandType.HYDRATING, "Hydrating", "加水", 2, { ItemFairyWand() }, "container1000Water")
+        fairyWand(3, WandType.HYDRATING, "Hydrating", "加水", 3, { ItemFairyWand() }, "container1000Water")
+        fairyWand(4, WandType.HYDRATING, "Hydrating", "加水", 4, { ItemFairyWand() }, "container1000Water")
+        fairyWand(2, WandType.MELTING, "Melting", "紅蓮", 1, { ItemFairyWand() })
+        fairyWand(3, WandType.MELTING, "Melting", "紅蓮", 2, { ItemFairyWand() })
+        fairyWand(4, WandType.MELTING, "Melting", "紅蓮", 3, { ItemFairyWand() })
+        fairyWand(2, WandType.BREAKING, "Breaking", "破砕", 1, { ItemFairyWand() })
+        fairyWand(3, WandType.BREAKING, "Breaking", "破砕", 2, { ItemFairyWand() })
+        fairyWand(4, WandType.BREAKING, "Breaking", "破砕", 3, { ItemFairyWand() })
+        fairyWand(2, WandType.FREEZING, "Freezing", "氷晶", 1, { ItemFairyWand() })
+        fairyWand(3, WandType.FREEZING, "Freezing", "氷晶", 2, { ItemFairyWand() })
+        fairyWand(4, WandType.FREEZING, "Freezing", "氷晶", 3, { ItemFairyWand() })
+        fairyWand(3, WandType.POLISHING, "Polishing", "珠玉", 1, { ItemFairyWand() })
+        fairyWand(4, WandType.POLISHING, "Polishing", "珠玉", 2, { ItemFairyWand() })
+        fairyWand(3, WandType.SUMMONING, "Wizard's", "冥王", 1, { ItemFairyWandSummoning(2) })
+        fairyWand(4, WandType.SUMMONING, "Wizard's", "冥王", 2, { ItemFairyWandSummoning(5) })
+        fairyWand(4, WandType.DISTORTION, "Distortion", "歪曲", 1, { ItemFairyWand() })
+        fairyWand(4, WandType.FUSION, "Fusion", "融合", 1, { ItemFairyWand() })
 
         onMakeLang {
             enJa("item.fairyWandCrafting.poem", "", "スフィアから聞こえる、妖精の声")
