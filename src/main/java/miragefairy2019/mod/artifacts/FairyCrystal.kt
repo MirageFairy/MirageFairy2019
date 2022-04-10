@@ -6,6 +6,8 @@ import miragefairy2019.libkt.BlockRegion
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapelessRecipe
+import miragefairy2019.libkt.ItemMulti
+import miragefairy2019.libkt.ItemVariant
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.drop
@@ -28,12 +30,10 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.totalWeight
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
-import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.libkt.ItemMulti
-import miragefairy2019.libkt.ItemVariant
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.skill.ApiSkill
+import miragefairy2019.mod.skill.EnumMastery
 import miragefairy2019.mod.skill.ISkillContainer
 import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
@@ -83,7 +83,7 @@ object FairyCrystal {
                 })
             }
 
-            class RecipeParameter(val inputOreName: String, val inputWand: String)
+            class RecipeParameter(val inputOreName: String, val inputWand: WandType)
 
             fun fairyCrystal(
                 metadata: Int, creator: (unlocalizedName: String) -> VariantFairyCrystal,
@@ -102,7 +102,7 @@ object FairyCrystal {
                             DataShapelessRecipe(
                                 ingredients = listOf(
                                     DataOreIngredient(ore = recipeParameter.inputOreName),
-                                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWand${recipeParameter.inputWand}")
+                                    recipeParameter.inputWand.ingredientData
                                 ),
                                 result = DataResult(
                                     item = "miragefairy2019:fairy_crystal",
@@ -131,25 +131,25 @@ object FairyCrystal {
                 2, { VariantFairyCrystal(it, 1, DropCategory.RARE, 2.0) },
                 "pure_fairy_crystal", "fairyCrystalPure", "mirageFairyCrystalPure",
                 "Pure Fairy Crystal", "高純度フェアリークリスタル",
-                RecipeParameter("blockMirageFairyCrystal", "Polishing")
+                RecipeParameter("blockMirageFairyCrystal", WandType.POLISHING)
             )
             variantFairyCrystalVeryPure = fairyCrystal(
                 3, { VariantFairyCrystal(it, 2, DropCategory.RARE, 4.0) },
                 "very_pure_fairy_crystal", "fairyCrystalVeryPure", "mirageFairyCrystalVeryPure",
                 "Very Pure Fairy Crystal", "超高純度フェアリークリスタル",
-                RecipeParameter("blockMirageFairyCrystalPure", "Fusion")
+                RecipeParameter("blockMirageFairyCrystalPure", WandType.FUSION)
             )
             variantFairyCrystalWild = fairyCrystal(
                 4, { VariantFairyCrystal(it, 1, DropCategory.COMMON, 2.0) },
                 "wild_fairy_crystal", "fairyCrystalWild", "mirageFairyCrystalWild",
                 "Wild Fairy Crystal", "野蛮なフェアリークリスタル",
-                RecipeParameter("blockMirageFairyCrystal", "Melting")
+                RecipeParameter("blockMirageFairyCrystal", WandType.MELTING)
             )
             variantFairyCrystalVeryWild = fairyCrystal(
                 5, { VariantFairyCrystal(it, 2, DropCategory.COMMON, 4.0) },
                 "very_wild_fairy_crystal", "fairyCrystalVeryWild", "mirageFairyCrystalVeryWild",
                 "Very Wild Fairy Crystal", "超野蛮なフェアリークリスタル",
-                RecipeParameter("blockMirageFairyCrystalWild", "Distortion")
+                RecipeParameter("blockMirageFairyCrystalWild", WandType.DISTORTION)
             )
 
         }
