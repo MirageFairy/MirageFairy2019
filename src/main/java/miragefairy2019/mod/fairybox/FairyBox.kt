@@ -53,7 +53,7 @@ object FairyBox {
             val item = item({ ItemBlock(block()) }, "fairy_resin_tapper") {
                 setCustomModelResourceLocation(variant = "facing=north")
             }
-            onMakeLang { enJa("tile.fairyResinTapper.name", "Fairy Resin Extractor", "樹液取り職人スプルーツァの家") }
+            onMakeLang { enJa("tile.fairyResinTapper.name", "Fairy Resin Tapper", "樹液取り職人スプルーツァの家") }
             tileEntity("fairy_resin_tapper", TileEntityFairyBoxResinTapper::class.java)
         }
 
