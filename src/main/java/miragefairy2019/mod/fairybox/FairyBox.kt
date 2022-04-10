@@ -57,5 +57,25 @@ object FairyBox {
             tileEntity("fairy_resin_tapper", TileEntityFairyBoxResinTapper::class.java)
         }
 
+        // 分離機
+        run {
+            val block = block({ BlockFairyBoxBase { TileEntityFairyBoxCentrifuge() } }, "fairy_centrifuge") {
+                setUnlocalizedName("fairyCentrifuge")
+                setCreativeTab { Main.creativeTab }
+                makeBlockStates {
+                    DataBlockStates(
+                        variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
+                            "facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_centrifuge", y = facing.second)
+                        }
+                    )
+                }
+            }
+            val item = item({ ItemBlock(block()) }, "fairy_centrifuge") {
+                setCustomModelResourceLocation(variant = "facing=north")
+            }
+            onMakeLang { enJa("tile.fairyCentrifuge.name", "Fairy Centrifuge", "錬金術師グラヴィーチャの家") }
+            tileEntity("fairy_centrifuge", TileEntityFairyBoxCentrifuge::class.java)
+        }
+
     }
 }

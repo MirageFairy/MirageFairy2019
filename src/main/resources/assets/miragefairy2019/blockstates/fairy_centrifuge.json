@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "miragefairy2019:fairy_centrifuge"
+    },
+    "facing=south": {
+      "model": "miragefairy2019:fairy_centrifuge",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "miragefairy2019:fairy_centrifuge",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "miragefairy2019:fairy_centrifuge",
+      "y": 90
+    }
+  }
+}
