@@ -3,6 +3,7 @@ package miragefairy2019.mod.fairybox
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.block
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.module
@@ -32,6 +33,7 @@ object FairyBox {
             val item = item({ ItemBlock(block()) }, "fairy_box") {
                 setCustomModelResourceLocation(variant = "facing=north")
             }
+            onMakeLang { enJa("tile.fairyBox.name", "Fairy Box", "妖精の家") }
             tileEntity("fairy_box", TileEntityFairyBoxEmpty::class.java)
         }
 
@@ -54,6 +56,7 @@ object FairyBox {
             val item = item({ ItemBlock(block()) }, "fairy_resin_tapper") {
                 setCustomModelResourceLocation(variant = "facing=north")
             }
+            onMakeLang { enJa("tile.fairyResinTapper.name", "Fairy Resin Extractor", "樹液取り職人スプルーツァの家") }
             tileEntity("fairy_resin_tapper", TileEntityFairyBoxResinTapper::class.java)
         }
 
