@@ -45,10 +45,7 @@ object FairyBox {
                 makeBlockStates {
                     DataBlockStates(
                         variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
-                            "facing=${facing.first}" to DataBlockState(
-                                "miragefairy2019:fairy_resin_tapper",
-                                y = facing.second
-                            )
+                            "facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_resin_tapper", y = facing.second)
                         }
                     )
                 }
