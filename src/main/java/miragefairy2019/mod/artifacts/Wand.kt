@@ -29,9 +29,9 @@ import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.mod.skill.EnumMastery
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.skill.ApiSkill
+import miragefairy2019.mod.skill.EnumMastery
 import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
 import miragefairy2019.mod.systems.DropCategory
