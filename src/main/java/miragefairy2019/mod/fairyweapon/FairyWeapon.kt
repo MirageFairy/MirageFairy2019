@@ -36,6 +36,7 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main.creativeTab
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
 import miragefairy2019.mod.fairyweapon.items.ItemBellBase
@@ -213,8 +214,8 @@ object FairyWeapon {
                     "g" to DataOreIngredient(ore = "ingotGold"),
                     "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
                     "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
-                    "c" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandCrafting"),
-                    "m" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting")
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData
                 ),
                 result = DataResult(
                     item = "miragefairy2019:charging_rod"
@@ -235,8 +236,8 @@ object FairyWeapon {
                     "#" to DataSimpleIngredient(item = "miragefairy2019:charging_rod"),
                     "g" to DataOreIngredient(ore = "ingotGold"),
                     "e" to DataOreIngredient(ore = "mirageFairy2019SphereEnergy"),
-                    "c" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandCrafting"),
-                    "m" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData,
                     "G" to DataOreIngredient(ore = "blockMirageFairyCrystalPure")
                 ),
                 result = DataResult(
@@ -260,8 +261,8 @@ object FairyWeapon {
                     "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace"),
                     "o" to DataOreIngredient(ore = "obsidian"),
                     "O" to DataOreIngredient(ore = "container1000MirageFlowerOil"),
-                    "c" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandCrafting"),
-                    "f" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandFusion")
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "f" to WandType.FUSION.ingredientData
                 ),
                 result = DataResult(
                     item = "miragefairy2019:gravity_rod"

@@ -73,8 +73,8 @@ object CommonMaterials {
             ResourceName(ModMirageFairy2019.MODID, "gold_ore_smelt_tier_2"),
             DataShapelessRecipe(
                 ingredients = listOf(
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandBreaking"),
+                    WandType.MELTING.ingredientData,
+                    WandType.BREAKING.ingredientData,
                     DataSimpleIngredient(item = "minecraft:gold_ore")
                 ),
                 result = DataResult(
@@ -89,8 +89,8 @@ object CommonMaterials {
             ResourceName(ModMirageFairy2019.MODID, "gold_ore_smelt_tier_4"),
             DataShapelessRecipe(
                 ingredients = listOf(
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandFusion"),
+                    WandType.MELTING.ingredientData,
+                    WandType.FUSION.ingredientData,
                     DataOreIngredient(ore = "dustMiragium"),
                     DataSimpleIngredient(item = "minecraft:gold_ore")
                 ),
@@ -106,8 +106,8 @@ object CommonMaterials {
             ResourceName(ModMirageFairy2019.MODID, "iron_ore_smelt_tier_2"),
             DataShapelessRecipe(
                 ingredients = listOf(
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandBreaking"),
+                    WandType.MELTING.ingredientData,
+                    WandType.BREAKING.ingredientData,
                     DataSimpleIngredient(item = "minecraft:iron_ore")
                 ),
                 result = DataResult(
@@ -122,8 +122,8 @@ object CommonMaterials {
             ResourceName(ModMirageFairy2019.MODID, "iron_ore_smelt_tier_4"),
             DataShapelessRecipe(
                 ingredients = listOf(
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandFusion"),
+                    WandType.MELTING.ingredientData,
+                    WandType.FUSION.ingredientData,
                     DataOreIngredient(ore = "dustMiragium"),
                     DataSimpleIngredient(item = "minecraft:iron_ore")
                 ),
@@ -139,7 +139,7 @@ object CommonMaterials {
             ResourceName(ModMirageFairy2019.MODID, "magnetite_smelt_tier_2"),
             DataShapelessRecipe(
                 ingredients = listOf(
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
+                    WandType.MELTING.ingredientData,
                     DataOrIngredient(
                         DataOreIngredient(ore = "dustCoal"),
                         DataOreIngredient(ore = "dustCharcoal")
@@ -158,8 +158,8 @@ object CommonMaterials {
             ResourceName(ModMirageFairy2019.MODID, "magnetite_smelt_tier_4"),
             DataShapelessRecipe(
                 ingredients = listOf(
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting"),
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandDistortion"),
+                    WandType.MELTING.ingredientData,
+                    WandType.DISTORTION.ingredientData,
                     DataOreIngredient(ore = "dustMagnetite"),
                     DataOreIngredient(ore = "dustMagnetite"),
                     DataOreIngredient(ore = "dustMagnetite"),

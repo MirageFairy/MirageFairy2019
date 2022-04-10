@@ -69,7 +69,6 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
-import net.minecraftforge.oredict.OreIngredient
 import kotlin.math.ceil
 
 private val Int.roman get() = listOf("I", "II", "III", "IV").getOrNull(this - 1) ?: throw IllegalArgumentException()
@@ -269,7 +268,7 @@ object Wand {
 
             // 丸石＞紅蓮→焼き石
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairy2019CraftingToolFairyWandMelting"))
+                it.conditions += FairyStickCraftConditionUseItem(WandType.MELTING.ingredient)
                 it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.COBBLESTONE.defaultState }, { Blocks.STONE.defaultState })
             })
 

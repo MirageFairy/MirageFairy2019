@@ -177,7 +177,7 @@ object FairyMaterials {
             ResourceName(ModMirageFairy2019.MODID, "sphere_base"),
             DataShapelessRecipe(
                 ingredients = listOf(
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandPolishing"),
+                    WandType.POLISHING.ingredientData,
                     DataOreIngredient(ore = "gemFluorite")
                 ),
                 result = DataResult(
@@ -198,8 +198,8 @@ object FairyMaterials {
                     "fG "
                 ),
                 key = mapOf(
-                    "p" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandPolishing"),
-                    "f" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandFusion"),
+                    "p" to WandType.POLISHING.ingredientData,
+                    "f" to WandType.FUSION.ingredientData,
                     "D" to DataOreIngredient(ore = "dustMiragium"),
                     "G" to DataOreIngredient(ore = "gem${materialName.toUpperCamelCase()}")
                 ),

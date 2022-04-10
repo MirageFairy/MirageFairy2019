@@ -10,6 +10,7 @@ import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.artifacts.WandType
 
 object WandRecipe {
     val module = module {
@@ -20,7 +21,7 @@ object WandRecipe {
                 ResourceName(ModMirageFairy2019.MODID, registryName),
                 DataShapelessRecipe(
                     ingredients = listOf(
-                        DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandBreaking"),
+                        WandType.BREAKING.ingredientData,
                         ingredient
                     ),
                     result = DataResult(
@@ -50,7 +51,7 @@ object WandRecipe {
                 ),
                 key = mapOf(
                     "#" to DataOreIngredient(ore = "ice"),
-                    "f" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandFreezing")
+                    "f" to WandType.FREEZING.ingredientData
                 ),
                 result = DataResult(
                     item = "minecraft:packed_ice"
@@ -64,7 +65,7 @@ object WandRecipe {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataSimpleIngredient(item = "minecraft:sponge", data = 1),
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandMelting")
+                    WandType.MELTING.ingredientData
                 ),
                 result = DataResult(
                     item = "minecraft:sponge",
