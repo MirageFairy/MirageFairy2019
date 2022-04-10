@@ -16,9 +16,9 @@
       "to": [ 16, 16, 16 ],
       "faces": {
         "north": { "texture": "#entrance", "cullface": "north" },
-        "south": { "input": "#window", "cullface": "south" },
-        "west":  { "output": "#window", "cullface": "west" },
-        "east":  { "input": "#window", "cullface": "east" }
+        "south": { "texture": "#input", "cullface": "south" },
+        "west":  { "texture": "#output", "cullface": "west" },
+        "east":  { "texture": "#input", "cullface": "east" }
       }
     }
   ],
