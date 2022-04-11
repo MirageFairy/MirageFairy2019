@@ -40,12 +40,13 @@ import miragefairy2019.libkt.toUnit
 import miragefairy2019.libkt.writeToNBT
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.configProperty
 import miragefairy2019.mod.systems.Daemon
 import miragefairy2019.mod.systems.DaemonManager
 import miragefairy2019.mod.systems.IBlockDaemon
+import miragefairy2019.util.InventoryTileEntity
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.json
 import mirrg.kotlin.gson.jsonElement
@@ -66,7 +67,6 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.inventory.Container
 import net.minecraft.inventory.IInventory
-import net.minecraft.inventory.InventoryBasic
 import net.minecraft.inventory.InventoryHelper
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemBlock
@@ -450,19 +450,12 @@ class TileEntityRendererChatWebhookTransmitter : TileEntitySpecialRenderer<TileE
     }
 }
 
-class InventoryChatWebhookTransmitter(val tileEntity: TileEntityChatWebhookTransmitter, title: String, customName: Boolean, slotCount: Int) : InventoryBasic(title, customName, slotCount) {
+class InventoryChatWebhookTransmitter(tileEntity: TileEntityChatWebhookTransmitter, title: String, customName: Boolean, slotCount: Int) : InventoryTileEntity<TileEntityChatWebhookTransmitter>(tileEntity, title, customName, slotCount) {
     init {
         addInventoryChangeListener {
-            tileEntity.markDirty()
-
             // スロットの状態が変更された場合、タイルエンティティのデーモンを更新
             if (tileEntity.world.takeIf { true } != null && !tileEntity.world.isRemote) tileEntity.updateDaemon(true)
         }
-    }
-
-    override fun isUsableByPlayer(player: EntityPlayer): Boolean {
-        if (tileEntity.world.getTileEntity(tileEntity.pos) != tileEntity) return false
-        return player.getDistanceSq(tileEntity.pos.x.toDouble() + 0.5, tileEntity.pos.y.toDouble() + 0.5, tileEntity.pos.z.toDouble() + 0.5) <= 64.0
     }
 
     override fun getInventoryStackLimit() = 1

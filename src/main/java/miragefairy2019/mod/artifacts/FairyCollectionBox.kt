@@ -23,11 +23,12 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.writeToNBT
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
+import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.fairyVariant
 import miragefairy2019.mod.fairy.hasSameId
 import miragefairy2019.mod.fairy.level
-import miragefairy2019.mod.Main
+import miragefairy2019.util.InventoryTileEntity
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -39,7 +40,6 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
 import net.minecraft.inventory.IInventory
-import net.minecraft.inventory.InventoryBasic
 import net.minecraft.inventory.InventoryHelper
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemBlock
@@ -200,22 +200,13 @@ class TileEntityFairyCollectionBox : TileEntity() {
     }
 }
 
-class InventoryFairyCollectionBox(val tileEntity: TileEntity, title: String, customName: Boolean, slotCount: Int) : InventoryBasic(title, customName, slotCount) {
-    init {
-        addInventoryChangeListener { tileEntity.markDirty() }
-    }
-
+class InventoryFairyCollectionBox(tileEntity: TileEntityFairyCollectionBox, title: String, customName: Boolean, slotCount: Int) : InventoryTileEntity<TileEntityFairyCollectionBox>(tileEntity, title, customName, slotCount) {
     override fun getInventoryStackLimit() = 1
     override fun isItemValidForSlot(index: Int, itemStack: ItemStack): Boolean {
         val variant = itemStack.fairyVariant ?: return false // スタンダード妖精でないと受け付けない
         return itemStacks
             .filterIndexed { i, _ -> i != index } // 他スロットにおいて
             .all a@{ itemStack2 -> !hasSameId(variant, itemStack2.fairyVariant ?: return@a true) } // 同種の妖精があってはならない
-    }
-
-    override fun isUsableByPlayer(player: EntityPlayer): Boolean {
-        if (tileEntity.world.getTileEntity(tileEntity.pos) != tileEntity) return false
-        return player.getDistanceSq(tileEntity.pos.x.toDouble() + 0.5, tileEntity.pos.y.toDouble() + 0.5, tileEntity.pos.z.toDouble() + 0.5) <= 64.0
     }
 }
 
