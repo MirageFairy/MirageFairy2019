@@ -39,3 +39,8 @@ operator fun ItemStack.get(key: String) = NbtWrapper(object : INbtCompoundProvid
     override fun getOrNull() = if (hasTagCompound()) tagCompound!! else null
     override fun getOrCreate() = if (hasTagCompound()) tagCompound!! else NBTTagCompound().also { tagCompound = it }
 }, key)
+
+operator fun NBTTagCompound.get(key: String) = NbtWrapper(object : INbtCompoundProvider {
+    override fun getOrNull() = this@get
+    override fun getOrCreate() = this@get
+}, key)
