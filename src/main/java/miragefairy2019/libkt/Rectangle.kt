@@ -25,6 +25,7 @@ fun RectangleInt.shrink(amount: Int) = shrink(amount, amount, amount, amount)
 // サイズ上書き
 fun RectangleInt.withWidth(width: Int) = if (width > 0) RectangleInt(left, top, width, height) else RectangleInt(left + this.width + width, top, -width, height)
 fun RectangleInt.withHeight(height: Int) = if (height > 0) RectangleInt(left, top, width, height) else RectangleInt(left, top + this.height + height, width, -height)
+fun RectangleInt.withSize(width: Int, height: Int) = withWidth(width).withHeight(height)
 
 // 内包
 operator fun RectangleInt.contains(point: PointInt) = point.x in left..right && point.y in top..bottom
