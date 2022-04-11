@@ -9,7 +9,11 @@ import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.network.NetworkManager
+import net.minecraft.network.play.server.SPacketUpdateTileEntity
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumBlockRenderType
@@ -98,6 +102,9 @@ class BlockFairyBoxBase(private val tileEntityProvider: () -> TileEntityFairyBox
 }
 
 abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
+
+    // 行動
+
     private var tick = -1
     override fun update() {
         if (world.isRemote) return // サーバーワールドのみ
@@ -116,6 +123,21 @@ abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
     }
 
     open fun getExecutor() = object : IFairyBoxExecutor {}
+
+
+    // データ
+
+    override fun getUpdatePacket() = SPacketUpdateTileEntity(pos, 9, updateTag)
+
+    override fun getUpdateTag(): NBTTagCompound = writeToNBT(NBTTagCompound())
+
+    override fun onDataPacket(net: NetworkManager, pkt: SPacketUpdateTileEntity) {
+        readFromNBT(pkt.nbtCompound)
+        super.onDataPacket(net, pkt)
+    }
+
+    fun sendUpdatePacket() = world.playerEntities.forEach { if (it is EntityPlayerMP) it.connection.sendPacket(updatePacket) }
+
 }
 
 interface IFairyBoxExecutor {
