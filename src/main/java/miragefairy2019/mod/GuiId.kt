@@ -1,7 +1,7 @@
 package miragefairy2019.mod
 
 object GuiId {
-    const val guiIdSkillGui = 2
-    const val guiIdFairyCollectionBox = 3
-    const val guiIdChatWebhookTransmitter = 4
+    const val skillGui = 2
+    const val fairyCollectionBox = 3
+    const val chatWebhookTransmitter = 4
 }

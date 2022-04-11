@@ -176,7 +176,7 @@ object ChatWebhook {
 
         // Gui
         onInit {
-            Main.registerGuiHandler(GuiId.guiIdChatWebhookTransmitter, object : ISimpleGuiHandler {
+            Main.registerGuiHandler(GuiId.chatWebhookTransmitter, object : ISimpleGuiHandler {
                 override fun GuiHandlerContext.onServer() = (tileEntity as? TileEntityChatWebhookTransmitter)?.let { ContainerChatWebhookTransmitter(it, player.inventory, it.inventory) }
                 override fun GuiHandlerContext.onClient() = onServer()?.let { GuiChatWebhookTransmitter(it) }
             }.guiHandler)
@@ -360,7 +360,7 @@ abstract class BlockChatWebhookTransmitterBase : BlockContainer(Material.IRON), 
     override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (world.isRemote) return true
         world.getTileEntity(blockPos)?.castOrNull<TileEntityChatWebhookTransmitter>()?.updateDaemon(true) // 契約更新
-        if (!requireCreative || player.isCreative) player.openGui(ModMirageFairy2019.instance, GuiId.guiIdChatWebhookTransmitter, world, blockPos.x, blockPos.y, blockPos.z) // GUIを開く
+        if (!requireCreative || player.isCreative) player.openGui(ModMirageFairy2019.instance, GuiId.chatWebhookTransmitter, world, blockPos.x, blockPos.y, blockPos.z) // GUIを開く
         return true
     }
 

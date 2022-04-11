@@ -83,7 +83,7 @@ object FairyCollectionBox {
         }
         tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)
         onInit {
-            Main.registerGuiHandler(GuiId.guiIdFairyCollectionBox, object : ISimpleGuiHandler {
+            Main.registerGuiHandler(GuiId.fairyCollectionBox, object : ISimpleGuiHandler {
                 override fun GuiHandlerContext.onServer() = (tileEntity as? TileEntityFairyCollectionBox)?.let { ContainerFairyCollectionBox(player.inventory, it.inventory) }
                 override fun GuiHandlerContext.onClient() = (tileEntity as? TileEntityFairyCollectionBox)?.let { GuiFairyCollectionBox(ContainerFairyCollectionBox(player.inventory, it.inventory)) }
             }.guiHandler)
@@ -167,7 +167,7 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
     // Action
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (worldIn.isRemote) return true
-        playerIn.openGui(ModMirageFairy2019.instance, GuiId.guiIdFairyCollectionBox, worldIn, pos.x, pos.y, pos.z)
+        playerIn.openGui(ModMirageFairy2019.instance, GuiId.fairyCollectionBox, worldIn, pos.x, pos.y, pos.z)
         return true
     }
 
