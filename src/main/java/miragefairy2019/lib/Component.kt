@@ -9,6 +9,7 @@ import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.unit
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
+import mirrg.kotlin.atMost
 import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
@@ -124,4 +125,36 @@ class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color
             Alignment.RIGHT -> gui.fontRenderer.drawStringRightAligned(textSupplier(), x, y, color)
         }
     }
+}
+
+class SlotResult(private val player: EntityPlayer, inventory: IInventory, slotIndex: Int, x: Int, y: Int) : Slot(inventory, slotIndex, x, y) {
+
+    override fun isItemValid(stack: ItemStack) = false
+
+
+    // craft
+
+    private var removeCount = 0
+
+    override fun decrStackSize(amount: Int): ItemStack {
+        if (hasStack) removeCount += amount atMost stack.count
+        return super.decrStackSize(amount)
+    }
+
+    override fun onTake(player: EntityPlayer, itemStack: ItemStack): ItemStack {
+        onCrafting(itemStack)
+        super.onTake(player, itemStack)
+        return itemStack
+    }
+
+    override fun onCrafting(itemStack: ItemStack, amount: Int) {
+        removeCount += amount
+        onCrafting(itemStack)
+    }
+
+    override fun onCrafting(itemStack: ItemStack) {
+        itemStack.onCrafting(player.world, player, removeCount)
+        removeCount = 0
+    }
+
 }
