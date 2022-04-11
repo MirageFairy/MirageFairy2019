@@ -69,10 +69,10 @@ fun ItemStack.drop(world: World, blockPos: BlockPos, motionless: Boolean = false
 
 
 // 同値判定
-fun ItemStack.equalsItem(other: ItemStack) = item == other.item
-fun ItemStack.equalsItemDamage(other: ItemStack) = equalsItem(other) && itemDamage == other.itemDamage
-fun ItemStack.equalsItemDamageTag(other: ItemStack) = equalsItemDamage(other) && ItemStack.areItemStackShareTagsEqual(this, other)
-fun ItemStack.equalsItemDamageTagCount(other: ItemStack) = equalsItemDamageTag(other) && count == other.count
+infix fun ItemStack.equalsItem(other: ItemStack) = item == other.item
+infix fun ItemStack.equalsItemDamage(other: ItemStack) = equalsItem(other) && itemDamage == other.itemDamage
+infix fun ItemStack.equalsItemDamageTag(other: ItemStack) = equalsItemDamage(other) && ItemStack.areItemStackShareTagsEqual(this, other)
+infix fun ItemStack.equalsItemDamageTagCount(other: ItemStack) = equalsItemDamageTag(other) && count == other.count
 
 
 // 相互変換
