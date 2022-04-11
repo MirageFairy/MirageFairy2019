@@ -1,7 +1,6 @@
 package miragefairy2019.lib
 
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
-import miragefairy2019.libkt.SmartSlot
 import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
@@ -105,8 +104,9 @@ fun ContainerComponent.createGui() = GuiComponent(this)
 
 // Utils
 
-class ComponentSlot(val container: ContainerComponent, val x: Int, val y: Int, val inventory: IInventory, val slotIndex: Int) : IComponent {
-    val slot = SmartSlot(inventory, slotIndex, x + 1, y + 1)
+class ComponentSlot(val container: ContainerComponent, val x: Int, val y: Int, slotCreator: (x: Int, y: Int) -> Slot) : IComponent {
+    val slot = slotCreator(x + 1, y + 1)
+
     override fun onInit() = unit { container.addSlotToContainer(slot) }
 
     @SideOnly(Side.CLIENT)
