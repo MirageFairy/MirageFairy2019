@@ -46,21 +46,45 @@ fun RectangleInt.draw(color: IArgb) = Gui.drawRect(left, top, right, bottom, col
 fun RectangleInt.drawGuiBackground() {
 
     // 外枠
-    draw(0xFF000000.toInt().toArgb())
+
+    // 枠線
+    shrink(2, 0, 3, 0).withHeight(1).draw(0xFF000000.toInt().toArgb())
+    shrink(0, 2, 0, 3).withWidth(1).draw(0xFF000000.toInt().toArgb())
+    shrink(3, 0, 2, 0).withHeight(-1).draw(0xFF000000.toInt().toArgb())
+    shrink(0, 3, 0, 2).withWidth(-1).draw(0xFF000000.toInt().toArgb())
+
+    // 左上
+    shrink(1, 1, 0, 0).withSize(1, 1).draw(0xFF000000.toInt().toArgb())
+
+    // 左下
+    shrink(1, 0, 0, 2).withSize(1, -1).draw(0xFF000000.toInt().toArgb())
+    shrink(2, 0, 0, 1).withSize(1, -1).draw(0xFF000000.toInt().toArgb())
+
+    // 右上
+    shrink(0, 1, 2, 0).withSize(-1, 1).draw(0xFF000000.toInt().toArgb())
+    shrink(0, 2, 1, 0).withSize(-1, 1).draw(0xFF000000.toInt().toArgb())
+
+    // 右下
+    shrink(0, 0, 1, 1).withSize(-1, -1).draw(0xFF000000.toInt().toArgb())
+
 
     // 背景
-    shrink(1).draw(0xFFC6C6C6.toInt().toArgb())
+
+    shrink(2).draw(0xFFC6C6C6.toInt().toArgb())
+
 
     // 左上白帯
-    shrink(1, 1, 2, 0).withHeight(1).draw(0xFFFFFFFF.toInt().toArgb())
-    shrink(2, 2, 3, 0).withHeight(1).draw(0xFFFFFFFF.toInt().toArgb())
-    shrink(1, 1, 0, 2).withWidth(1).draw(0xFFFFFFFF.toInt().toArgb())
-    shrink(2, 2, 0, 3).withWidth(1).draw(0xFFFFFFFF.toInt().toArgb())
+
+    shrink(2, 1, 3, 0).withHeight(2).draw(0xFFFFFFFF.toInt().toArgb())
+    shrink(1, 2, 0, 3).withWidth(2).draw(0xFFFFFFFF.toInt().toArgb())
+
+    shrink(3, 3, 0, 0).withSize(1, 1).draw(0xFFFFFFFF.toInt().toArgb())
+
 
     // 右下灰帯
-    shrink(2, 0, 1, 1).withHeight(-1).draw(0xFF555555.toInt().toArgb())
-    shrink(3, 0, 2, 2).withHeight(-1).draw(0xFF555555.toInt().toArgb())
-    shrink(0, 2, 1, 1).withWidth(-1).draw(0xFF555555.toInt().toArgb())
-    shrink(0, 3, 2, 2).withWidth(-1).draw(0xFF555555.toInt().toArgb())
+    shrink(3, 0, 2, 1).withHeight(-2).draw(0xFF555555.toInt().toArgb())
+    shrink(0, 3, 1, 2).withWidth(-2).draw(0xFF555555.toInt().toArgb())
+
+    shrink(0, 0, 3, 3).withSize(-1, -1).draw(0xFF555555.toInt().toArgb())
 
 }
