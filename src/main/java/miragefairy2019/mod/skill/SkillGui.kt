@@ -19,6 +19,7 @@ import miragefairy2019.libkt.position
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.toArgb
 import miragefairy2019.libkt.tooltip
+import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import mirrg.kotlin.formatAs
 import mirrg.kotlin.minus
@@ -32,10 +33,9 @@ import net.minecraft.inventory.Container
 import java.time.Instant
 
 object SkillGui {
-    const val guiIdSkillGui = 2
     val module = module {
         onInit {
-            Main.registerGuiHandler(guiIdSkillGui, object : ISimpleGuiHandler {
+            Main.registerGuiHandler(GuiId.guiIdSkillGui, object : ISimpleGuiHandler {
                 override fun GuiHandlerContext.onServer() = ContainerSkill()
                 override fun GuiHandlerContext.onClient() = GuiSkill()
             }.guiHandler)

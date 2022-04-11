@@ -40,6 +40,7 @@ import miragefairy2019.libkt.toUnit
 import miragefairy2019.libkt.writeToNBT
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
+import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.configProperty
@@ -102,7 +103,6 @@ object ChatWebhook {
     lateinit var itemChatWebhookTransmitter: () -> ItemBlock
     lateinit var blockCreativeChatWebhookTransmitter: () -> BlockCreativeChatWebhookTransmitter
     lateinit var itemCreativeChatWebhookTransmitter: () -> ItemBlock
-    const val guiIdChatWebhookTransmitter = 4
     val module = module {
         enableChatWebhook = configProperty { it.getBoolean("enableChatWebhook", Main.categoryFeatures, true, "Whether the machines that send the in-game chat to the webhook is enabled") }
 
@@ -176,7 +176,7 @@ object ChatWebhook {
 
         // Gui
         onInit {
-            Main.registerGuiHandler(guiIdChatWebhookTransmitter, object : ISimpleGuiHandler {
+            Main.registerGuiHandler(GuiId.guiIdChatWebhookTransmitter, object : ISimpleGuiHandler {
                 override fun GuiHandlerContext.onServer() = (tileEntity as? TileEntityChatWebhookTransmitter)?.let { ContainerChatWebhookTransmitter(it, player.inventory, it.inventory) }
                 override fun GuiHandlerContext.onClient() = onServer()?.let { GuiChatWebhookTransmitter(it) }
             }.guiHandler)
@@ -360,7 +360,7 @@ abstract class BlockChatWebhookTransmitterBase : BlockContainer(Material.IRON), 
     override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (world.isRemote) return true
         world.getTileEntity(blockPos)?.castOrNull<TileEntityChatWebhookTransmitter>()?.updateDaemon(true) // 契約更新
-        if (!requireCreative || player.isCreative) player.openGui(ModMirageFairy2019.instance, ChatWebhook.guiIdChatWebhookTransmitter, world, blockPos.x, blockPos.y, blockPos.z) // GUIを開く
+        if (!requireCreative || player.isCreative) player.openGui(ModMirageFairy2019.instance, GuiId.guiIdChatWebhookTransmitter, world, blockPos.x, blockPos.y, blockPos.z) // GUIを開く
         return true
     }
 

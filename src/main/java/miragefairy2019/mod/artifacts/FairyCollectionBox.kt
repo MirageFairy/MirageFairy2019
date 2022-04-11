@@ -23,6 +23,7 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.writeToNBT
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
+import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.fairyVariant
@@ -63,7 +64,6 @@ object FairyCollectionBox {
     lateinit var blockFairyCollectionBox: () -> BlockFairyCollectionBox
     lateinit var itemFairyCollectionBox: () -> ItemBlock
 
-    const val guiIdFairyCollectionBox = 3
     val module = module {
         blockFairyCollectionBox = block({ BlockFairyCollectionBox() }, "fairy_collection_box") {
             setUnlocalizedName("fairyCollectionBox")
@@ -83,7 +83,7 @@ object FairyCollectionBox {
         }
         tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)
         onInit {
-            Main.registerGuiHandler(guiIdFairyCollectionBox, object : ISimpleGuiHandler {
+            Main.registerGuiHandler(GuiId.guiIdFairyCollectionBox, object : ISimpleGuiHandler {
                 override fun GuiHandlerContext.onServer() = (tileEntity as? TileEntityFairyCollectionBox)?.let { ContainerFairyCollectionBox(player.inventory, it.inventory) }
                 override fun GuiHandlerContext.onClient() = (tileEntity as? TileEntityFairyCollectionBox)?.let { GuiFairyCollectionBox(ContainerFairyCollectionBox(player.inventory, it.inventory)) }
             }.guiHandler)
@@ -167,7 +167,7 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
     // Action
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (worldIn.isRemote) return true
-        playerIn.openGui(ModMirageFairy2019.instance, FairyCollectionBox.guiIdFairyCollectionBox, worldIn, pos.x, pos.y, pos.z)
+        playerIn.openGui(ModMirageFairy2019.instance, GuiId.guiIdFairyCollectionBox, worldIn, pos.x, pos.y, pos.z)
         return true
     }
 

@@ -5,9 +5,9 @@ import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.skill.SkillGui
+import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
@@ -32,7 +32,7 @@ object SkillBook {
 
 class ItemSkillBook : Item() {
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
-        if (!world.isRemote) player.openGui(ModMirageFairy2019.instance, SkillGui.guiIdSkillGui, player.world, player.position.x, player.position.y, player.position.z)
+        if (!world.isRemote) player.openGui(ModMirageFairy2019.instance, GuiId.guiIdSkillGui, player.world, player.position.x, player.position.y, player.position.z)
         return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
     }
 
