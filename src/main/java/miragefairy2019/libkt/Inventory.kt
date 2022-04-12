@@ -11,6 +11,7 @@ val IInventory.size get() = sizeInventory
 operator fun IInventory.get(index: Int): ItemStack = getStackInSlot(index)
 operator fun IInventory.set(index: Int, itemStack: ItemStack) = setInventorySlotContents(index, itemStack)
 
+val IInventory.indices get() = 0 until size
 val IInventory.itemStacks get() = (0 until size).map { this[it] }
 
 fun IInventory.readFromNBT(nbt: NBTTagCompound) {
