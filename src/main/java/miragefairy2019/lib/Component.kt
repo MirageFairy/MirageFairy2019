@@ -14,6 +14,7 @@ import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
+import net.minecraft.inventory.IContainerListener
 import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemStack
@@ -36,9 +37,12 @@ interface IComponent {
 
 // Implements
 
+class WindowProperty(var value: Int = 0, val changeListener: () -> Unit = {})
+
 class ContainerComponent : Container() {
     val components = mutableListOf<IComponent>()
     val interactInventories = mutableListOf<IInventory>()
+    val windowProperties = mutableMapOf<Int, WindowProperty>()
     var width = 0
     var height = 0
 
@@ -54,6 +58,25 @@ class ContainerComponent : Container() {
     // TODO
     override fun transferStackInSlot(playerIn: EntityPlayer, index: Int): ItemStack {
         return EMPTY_ITEM_STACK
+    }
+
+
+    // Window Property
+
+    override fun addListener(listener: IContainerListener) {
+        super.addListener(listener)
+        windowProperties.forEach { (id, windowProperty) ->
+            listener.sendWindowProperty(this, id, windowProperty.value)
+        }
+    }
+
+    // TODO detectAndSendChanges()
+
+    @SideOnly(Side.CLIENT)
+    override fun updateProgressBar(id: Int, data: Int) {
+        val windowProperty = windowProperties.get(id) ?: return
+        windowProperty.value = data
+        windowProperty.changeListener()
     }
 
 
