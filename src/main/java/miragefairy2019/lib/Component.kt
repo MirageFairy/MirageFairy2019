@@ -17,6 +17,7 @@ import net.minecraft.inventory.Container
 import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemStack
+import net.minecraft.util.text.ITextComponent
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
@@ -116,13 +117,13 @@ class ComponentSlot(val container: ContainerComponent, val x: Int, val y: Int, s
 
 enum class Alignment { LEFT, CENTER, RIGHT }
 
-class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> String) : IComponent {
+class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent {
     @SideOnly(Side.CLIENT)
     override fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouseX: Int, mouseY: Int) {
         when (alignment) {
-            Alignment.LEFT -> gui.fontRenderer.drawString(textSupplier(), x, y, color)
-            Alignment.CENTER -> gui.fontRenderer.drawStringCentered(textSupplier(), x, y, color)
-            Alignment.RIGHT -> gui.fontRenderer.drawStringRightAligned(textSupplier(), x, y, color)
+            Alignment.LEFT -> textSupplier()?.let { gui.fontRenderer.drawString(it.formattedText, x, y, color) }
+            Alignment.CENTER -> textSupplier()?.let { gui.fontRenderer.drawStringCentered(it.formattedText, x, y, color) }
+            Alignment.RIGHT -> textSupplier()?.let { gui.fontRenderer.drawStringRightAligned(it.formattedText, x, y, color) }
         }
     }
 }
