@@ -3,6 +3,7 @@ package miragefairy2019.lib
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.itemStacks
 import miragefairy2019.libkt.size
+import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.IRecipe
@@ -42,11 +43,11 @@ class RecipeInput<out T : Any>(val index: Int, val itemStack: ItemStack, val tag
     fun consume() = consumer()
 }
 
-class RecipeMatcher(private val inventoryCrafting: InventoryCrafting) {
-    private val used = Array(inventoryCrafting.size) { false }
+class RecipeMatcher(private val inventory: IInventory) {
+    private val used = Array(inventory.size) { false }
 
     fun <T : Any> findIndexed(tagSupplier: (index: Int, itemStack: ItemStack) -> T?): RecipeInput<T>? {
-        inventoryCrafting.itemStacks.forEachIndexed next@{ index, itemStack ->
+        inventory.itemStacks.forEachIndexed next@{ index, itemStack ->
             if (used[index]) return@next // 使用済みのスロットならスルー
             val tag = tagSupplier(index, itemStack) ?: return@next // マッチしないならスルー
             return RecipeInput(index, itemStack, tag) { used[index] = true } // マッチしたのでそれを返す
