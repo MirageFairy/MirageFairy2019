@@ -19,6 +19,9 @@ import net.minecraft.world.World
 
 val ItemStack.orNull get() = takeIf { !it.isEmpty }
 val ItemStack?.orEmpty: ItemStack get() = this ?: ItemStack.EMPTY
+
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+fun createEmptyItemStack() = ItemStack(null as Item?)
 val EMPTY_ITEM_STACK get() = ItemStack.EMPTY!!
 
 fun ItemStack.copy(count: Int): ItemStack = copy().also { it.count = count }
