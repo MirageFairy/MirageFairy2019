@@ -1,9 +1,13 @@
 package miragefairy2019.mod.fairybox
 
+import miragefairy2019.lib.createGui
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
+import miragefairy2019.libkt.GuiHandlerContext
+import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.module
@@ -11,7 +15,9 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
+import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
+import mirrg.kotlin.castOrNull
 import net.minecraft.item.ItemBlock
 
 object FairyBox {
@@ -75,6 +81,13 @@ object FairyBox {
             }
             onMakeLang { enJa("tile.fairyCentrifuge.name", "Fairy Centrifuge", "錬金術師グラヴィーチャの家") }
             tileEntity("fairy_centrifuge", TileEntityFairyBoxCentrifuge::class.java)
+            onInit {
+                Main.registerGuiHandler(GuiId.fairyBoxCentrifuge, object : ISimpleGuiHandler {
+                    override fun GuiHandlerContext.onServer() = tileEntity?.castOrNull<TileEntityFairyBoxCentrifuge>()?.createContainer(player)
+                    override fun GuiHandlerContext.onClient() = tileEntity?.castOrNull<TileEntityFairyBoxCentrifuge>()?.createContainer(player)?.createGui()
+                }.guiHandler)
+            }
+
         }
 
     }
