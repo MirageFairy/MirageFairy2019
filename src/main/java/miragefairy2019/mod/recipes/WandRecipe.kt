@@ -89,22 +89,5 @@ object WandRecipe {
             )
         )
 
-        // 砂岩＋融合のワンド→砂岩
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "sandstone_from_sand"),
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(ore = "sand"),
-                    DataOreIngredient(ore = "sand"),
-                    DataOreIngredient(ore = "sand"),
-                    WandType.FUSION.ingredientData
-                ),
-                result = DataResult(
-                    item = "minecraft:sandstone",
-                    data = 0
-                )
-            )
-        )
-
     }
 }
