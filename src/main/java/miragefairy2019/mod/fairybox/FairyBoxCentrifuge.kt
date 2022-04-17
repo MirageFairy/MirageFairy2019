@@ -1,22 +1,35 @@
 package miragefairy2019.mod.fairybox
 
+import miragefairy2019.api.Erg
+import miragefairy2019.api.IFairyCentrifugeCraftArguments
+import miragefairy2019.api.IFairyCentrifugeCraftProcess
+import miragefairy2019.api.IFairyCentrifugeCraftRecipe
+import miragefairy2019.api.Mana
 import miragefairy2019.lib.compound
 import miragefairy2019.lib.compoundOrCreate
 import miragefairy2019.lib.container
+import miragefairy2019.lib.factors
+import miragefairy2019.lib.fairyType
 import miragefairy2019.lib.get
+import miragefairy2019.lib.getFairyCentrifugeCraftRecipe
 import miragefairy2019.lib.nbtProvider
 import miragefairy2019.lib.readFromNBT
 import miragefairy2019.lib.readInventory
 import miragefairy2019.lib.writeToNBT
+import miragefairy2019.libkt.flatten
+import miragefairy2019.libkt.sandwich
+import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.util.InventoryTileEntity
 import mirrg.kotlin.atLeast
 import mirrg.kotlin.atMost
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
+import net.minecraft.util.text.ITextComponent
 
 class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
 
@@ -60,6 +73,45 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
     }
 
     fun getFoliaSpeedFactor(folia: Double) = (folia - 30.0) / 30.0 atLeast 0.0
+
+
+    // Recipe
+
+    fun getArguments(fairyItemStack: ItemStack): IFairyCentrifugeCraftArguments? {
+        val fairyType = fairyItemStack.fairyType ?: return null
+        return object : IFairyCentrifugeCraftArguments {
+            override fun getMana(mana: Mana): Double = fairyType.manaSet[mana] / (fairyType.cost / 50.0)
+            override fun getErg(erg: Erg): Double = fairyType.ergSet[erg]
+        }
+    }
+
+    fun match(): RecipeMatchResult? {
+        val recipe = getFairyCentrifugeCraftRecipe(inputInventory) ?: return null
+        return RecipeMatchResult(recipe)
+    }
+
+    inner class RecipeMatchResult(val recipe: IFairyCentrifugeCraftRecipe) {
+        val processeResults = (0 until 3).mapNotNull { index ->
+            val process = recipe.getProcess(index) ?: return@mapNotNull null
+            val factors = textComponent { process.factors.map { it() }.sandwich { "+"() }.flatten() }
+            val arguments = getArguments(fairyInventory[index]) ?: return@mapNotNull ProcessResult(process, factors, false, 0.0, 0.0)
+            ProcessResult(
+                process,
+                factors,
+                true,
+                process.getScore(arguments) / process.norma,
+                0.01 * process.getScore(arguments)
+            )
+        }
+
+        inner class ProcessResult(
+            val process: IFairyCentrifugeCraftProcess,
+            val factors: ITextComponent,
+            val ready: Boolean,
+            val speed: Double,
+            val fortune: Double
+        )
+    }
 
 
     // Action
