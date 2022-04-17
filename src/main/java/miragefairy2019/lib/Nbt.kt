@@ -28,12 +28,12 @@ class NbtWrapper(private val parent: INbtCompoundProvider, private val key: Stri
     val int get() = parent.getOrNull()?.getTag(key)?.castOrNull<NBTPrimitive>()?.int
     fun setCompound(value: NBTTagCompound) = unit { parent.getOrCreate().setTag(key, value) }
     fun setInt(value: Int) = unit { parent.getOrCreate().setInteger(key, value) }
-
-    operator fun get(key: String) = NbtWrapper(object : INbtCompoundProvider {
-        override fun getOrNull() = compound
-        override fun getOrCreate() = compoundOrCreate
-    }, key)
 }
+
+operator fun NbtWrapper.get(key: String) = NbtWrapper(object : INbtCompoundProvider {
+    override fun getOrNull() = compound
+    override fun getOrCreate() = compoundOrCreate
+}, key)
 
 operator fun ItemStack.get(key: String) = NbtWrapper(object : INbtCompoundProvider {
     override fun getOrNull() = if (hasTagCompound()) tagCompound!! else null
