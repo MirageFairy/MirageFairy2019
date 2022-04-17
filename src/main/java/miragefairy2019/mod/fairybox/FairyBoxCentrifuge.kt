@@ -104,6 +104,10 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
             )
         }
 
+        val ready get() = processeResults.all { it.ready }
+        val speed get() = processeResults.map { it.speed }.min() ?: 0.0
+        val fortune get() = processeResults.map { it.fortune }.sum()
+
         inner class ProcessResult(
             val process: IFairyCentrifugeCraftProcess,
             val factors: ITextComponent,
