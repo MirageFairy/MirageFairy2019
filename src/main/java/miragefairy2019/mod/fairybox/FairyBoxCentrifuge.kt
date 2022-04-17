@@ -11,6 +11,8 @@ import miragefairy2019.lib.writeToNBT
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.util.InventoryTileEntity
+import mirrg.kotlin.atLeast
+import mirrg.kotlin.atMost
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
@@ -43,6 +45,21 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
         outputInventory.writeToNBT(nbt.nbtProvider["output"].compoundOrCreate)
         return nbt
     }
+
+
+    // Tree
+
+    fun getLeaves() = try {
+        compileFairyTree(world, pos)
+    } catch (e: TreeCompileException) {
+        null
+    }
+
+    fun getFolia(times: Int): Double {
+        return getAuraCollectionSpeed(world, getLeaves() ?: return 0.0, times) atMost 120.0
+    }
+
+    fun getFoliaSpeedFactor(folia: Double) = (folia - 30.0) / 30.0 atLeast 0.0
 
 
     // Action
