@@ -3,7 +3,7 @@ package miragefairy2019.mod.fairyweapon
 import miragefairy2019.api.IFairyType
 import miragefairy2019.lib.fairyType
 import miragefairy2019.libkt.equalsItemDamageTag
-import miragefairy2019.libkt.itemStacks
+import miragefairy2019.lib.itemStacks
 import miragefairy2019.libkt.randomInt
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer

@@ -20,14 +20,14 @@ import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.get
+import miragefairy2019.lib.get
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.item
-import miragefairy2019.libkt.itemStacks
+import miragefairy2019.lib.itemStacks
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
-import miragefairy2019.libkt.readFromNBT
+import miragefairy2019.lib.readFromNBT
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -37,7 +37,7 @@ import miragefairy2019.libkt.string
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.libkt.toUnit
-import miragefairy2019.libkt.writeToNBT
+import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
 import miragefairy2019.mod.GuiId

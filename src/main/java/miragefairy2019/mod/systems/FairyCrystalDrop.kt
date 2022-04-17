@@ -5,7 +5,7 @@ import miragefairy2019.libkt.WeightedItem
 import miragefairy2019.libkt.axisAlignedBB
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.forEach
-import miragefairy2019.libkt.itemStacks
+import miragefairy2019.lib.itemStacks
 import miragefairy2019.libkt.totalWeight
 import miragefairy2019.libkt.unique
 import miragefairy2019.mod.fairy.FairyTypes

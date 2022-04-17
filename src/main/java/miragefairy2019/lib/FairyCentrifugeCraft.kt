@@ -8,9 +8,9 @@ import miragefairy2019.api.IFairyCentrifugeCraftProcess
 import miragefairy2019.api.IFairyCentrifugeCraftRecipe
 import miragefairy2019.api.Mana
 import miragefairy2019.libkt.copy
-import miragefairy2019.libkt.get
+import miragefairy2019.lib.get
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.libkt.set
+import miragefairy2019.lib.set
 import miragefairy2019.libkt.textComponent
 import mirrg.kotlin.atMost
 import net.minecraft.inventory.IInventory
