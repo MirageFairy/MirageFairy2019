@@ -35,18 +35,18 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
 
     // Inventory
 
-    val fairyInventory = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, 3)
-    val inputInventory = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, 9)
-    var resultInventory = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, 0)
-    val outputInventory = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, 9)
+    fun createInventory(size: Int) = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, size)
+
+    val fairyInventory = createInventory(3)
+    val inputInventory = createInventory(9)
+    var resultInventory = createInventory(0)
+    val outputInventory = createInventory(9)
 
     override fun readFromNBT(nbt: NBTTagCompound) {
         super.readFromNBT(nbt)
         fairyInventory.readFromNBT(nbt.nbtProvider["fairy"].compound ?: NBTTagCompound())
         inputInventory.readFromNBT(nbt.nbtProvider["input"].compound ?: NBTTagCompound())
-        resultInventory = (nbt.nbtProvider["result"].compound ?: NBTTagCompound()).readInventory { size ->
-            InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, size)
-        }
+        resultInventory = (nbt.nbtProvider["result"].compound ?: NBTTagCompound()).readInventory { createInventory(it) }
         outputInventory.readFromNBT(nbt.nbtProvider["output"].compound ?: NBTTagCompound())
     }
 
