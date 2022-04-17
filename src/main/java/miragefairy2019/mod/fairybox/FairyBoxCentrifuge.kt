@@ -12,11 +12,14 @@ import miragefairy2019.lib.factors
 import miragefairy2019.lib.fairyType
 import miragefairy2019.lib.get
 import miragefairy2019.lib.getFairyCentrifugeCraftRecipe
+import miragefairy2019.lib.merge
 import miragefairy2019.lib.nbtProvider
 import miragefairy2019.lib.readFromNBT
 import miragefairy2019.lib.readInventory
+import miragefairy2019.lib.set
 import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.flatten
+import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.GuiId
@@ -129,6 +132,26 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
             }
 
             override fun onUpdateTick() {
+
+                val foliaSpeedFactor = getFoliaSpeedFactor(getFolia(10)) // 妖精の木による速度倍率
+
+                if (!merge(resultInventory, outputInventory)) return // 出力スロットが溢れている場合は中止
+
+                val matchResult = match() ?: return // レシピが無効な場合は中止
+
+                val times = world.rand.randomInt(matchResult.speed * foliaSpeedFactor) // 回数判定
+
+                repeat(times) {
+
+                    val result = matchResult.recipe.craft(world.rand, matchResult.fortune) ?: return // クラフトが失敗した場合は中止
+
+                    // リザルトをインベントリに移す
+                    resultInventory = createInventory(result.size)
+                    result.forEachIndexed { i, itemStack -> resultInventory[i] = itemStack }
+
+                    if (!merge(resultInventory, outputInventory)) return // 出力スロットが溢れている場合は中止
+
+                }
 
             }
         }
