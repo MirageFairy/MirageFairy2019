@@ -18,7 +18,7 @@ operator fun IInventory.set(index: Int, itemStack: ItemStack) = setInventorySlot
 val IInventory.indices get() = 0 until size
 val IInventory.itemStacks get() = (0 until size).map { this[it] }
 
-val NBTTagCompound.inventorySlots: Int
+val NBTTagCompound.inventorySlotCount: Int
     get() {
         val tags = this.nbtProvider["Items"].tags ?: return 0 // Itemsがリスト出ない場合は0
         val maxSlotIndex = tags.mapNotNull { it["Slot"].int }.max() ?: return 0 // Slotに数値を持つタグが1個もなかった場合は0
