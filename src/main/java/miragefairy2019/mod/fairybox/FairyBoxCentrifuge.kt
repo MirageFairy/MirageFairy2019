@@ -8,6 +8,9 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 
 class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
+
+    // Action
+
     override fun getExecutor(): IFairyBoxExecutor {
         return object : IFairyBoxExecutor {
             override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
@@ -22,8 +25,12 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
         }
     }
 
+
+    // Gui
+
     fun createContainer(player: EntityPlayer) = container {
         width = 100
         height = 100
     }
+
 }
