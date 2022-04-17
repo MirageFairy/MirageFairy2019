@@ -11,6 +11,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.NonNullList
 
+// IInventory Integrations
+
 val IInventory.size get() = sizeInventory
 operator fun IInventory.get(index: Int): ItemStack = getStackInSlot(index)
 operator fun IInventory.set(index: Int, itemStack: ItemStack) = setInventorySlotContents(index, itemStack)
@@ -30,9 +32,13 @@ fun IInventory.writeToNBT(nbt: NBTTagCompound) {
     ItemStackHelper.saveAllItems(nbt, list)
 }
 
+
 class SmartSlot(inventory: IInventory, index: Int, xPosition: Int, yPosition: Int) : Slot(inventory, index, xPosition, yPosition) {
     override fun isItemValid(itemStack: ItemStack) = inventory.isItemValidForSlot(slotIndex, itemStack)
 }
+
+
+// NBTTagCompound Integrations
 
 val NBTTagCompound.inventorySlotCount: Int
     get() {
