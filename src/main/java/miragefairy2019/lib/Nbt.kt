@@ -1,10 +1,11 @@
 package miragefairy2019.lib
 
-import miragefairy2019.libkt.unit
 import mirrg.kotlin.castOrNull
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTBase
 import net.minecraft.nbt.NBTPrimitive
 import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.nbt.NBTTagInt
 
 interface INbtCompoundProvider {
     fun getOrNull(): NBTTagCompound?
@@ -12,7 +13,10 @@ interface INbtCompoundProvider {
 }
 
 class NbtWrapper(private val parent: INbtCompoundProvider, private val key: String) {
-    val compound get() = parent.getOrNull()?.getTag(key)?.castOrNull<NBTTagCompound>()
+    val tag get() = parent.getOrNull()?.getTag(key)
+    fun setTag(tag: NBTBase) = parent.getOrCreate().setTag(key, tag)
+
+    val compound get() = tag?.castOrNull<NBTTagCompound>()
     val compoundOrCreate: NBTTagCompound
         get() {
             val parentTag = parent.getOrCreate()
@@ -25,9 +29,9 @@ class NbtWrapper(private val parent: INbtCompoundProvider, private val key: Stri
                 newTag
             }
         }
-    val int get() = parent.getOrNull()?.getTag(key)?.castOrNull<NBTPrimitive>()?.int
-    fun setCompound(value: NBTTagCompound) = unit { parent.getOrCreate().setTag(key, value) }
-    fun setInt(value: Int) = unit { parent.getOrCreate().setInteger(key, value) }
+    val int get() = tag?.castOrNull<NBTPrimitive>()?.int
+    fun setCompound(value: NBTTagCompound) = setTag(value)
+    fun setInt(value: Int) = setTag(NBTTagInt(value))
 }
 
 operator fun NbtWrapper.get(key: String) = NbtWrapper(object : INbtCompoundProvider {
