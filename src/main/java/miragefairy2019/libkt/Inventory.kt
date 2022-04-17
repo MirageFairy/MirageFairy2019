@@ -1,5 +1,9 @@
 package miragefairy2019.libkt
 
+import miragefairy2019.lib.get
+import miragefairy2019.lib.int
+import miragefairy2019.lib.nbtProvider
+import miragefairy2019.lib.tags
 import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.ItemStackHelper
 import net.minecraft.inventory.Slot
@@ -13,6 +17,13 @@ operator fun IInventory.set(index: Int, itemStack: ItemStack) = setInventorySlot
 
 val IInventory.indices get() = 0 until size
 val IInventory.itemStacks get() = (0 until size).map { this[it] }
+
+val NBTTagCompound.inventorySlots: Int
+    get() {
+        val tags = this.nbtProvider["Items"].tags ?: return 0 // Itemsがリスト出ない場合は0
+        val maxSlotIndex = tags.mapNotNull { it["Slot"].int }.max() ?: return 0 // Slotに数値を持つタグが1個もなかった場合は0
+        return maxSlotIndex + 1
+    }
 
 fun IInventory.readFromNBT(nbt: NBTTagCompound) {
     val list = NonNullList.withSize(size, ItemStack.EMPTY)
