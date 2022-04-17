@@ -12,7 +12,6 @@ import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.util.InventoryTileEntity
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.inventory.IInventory
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
@@ -23,7 +22,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
 
     val fairyInventory = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, 3)
     val inputInventory = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, 9)
-    var resultInventory: IInventory? = null
+    var resultInventory = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, 0)
     val outputInventory = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, 9)
 
     override fun readFromNBT(nbt: NBTTagCompound) {
@@ -40,7 +39,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
         super.writeToNBT(nbt)
         fairyInventory.writeToNBT(nbt.nbtProvider["fairy"].compoundOrCreate)
         inputInventory.writeToNBT(nbt.nbtProvider["input"].compoundOrCreate)
-        resultInventory?.writeToNBT(nbt.nbtProvider["result"].compoundOrCreate)
+        resultInventory.writeToNBT(nbt.nbtProvider["result"].compoundOrCreate)
         outputInventory.writeToNBT(nbt.nbtProvider["output"].compoundOrCreate)
         return nbt
     }
