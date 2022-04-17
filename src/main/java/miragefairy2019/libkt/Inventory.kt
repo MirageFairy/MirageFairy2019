@@ -46,3 +46,9 @@ val NBTTagCompound.inventorySlotCount: Int
         val maxSlotIndex = tags.mapNotNull { it["Slot"].int }.max() ?: return 0 // Slotに数値を持つタグが1個もなかった場合は0
         return maxSlotIndex + 1
     }
+
+fun <I : IInventory> NBTTagCompound.readInventory(inventoryCreator: (size: Int) -> I): I {
+    val inventory = inventoryCreator(this.inventorySlotCount)
+    inventory.readFromNBT(this)
+    return inventory
+}
