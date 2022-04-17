@@ -1,13 +1,50 @@
 package miragefairy2019.mod.fairybox
 
+import miragefairy2019.lib.compound
+import miragefairy2019.lib.compoundOrCreate
 import miragefairy2019.lib.container
+import miragefairy2019.lib.get
+import miragefairy2019.lib.nbtProvider
+import miragefairy2019.lib.readFromNBT
+import miragefairy2019.lib.readInventory
+import miragefairy2019.lib.writeToNBT
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.util.InventoryTileEntity
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.inventory.IInventory
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 
 class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
+
+    // Inventory
+
+    val fairyInventory = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, 3)
+    val inputInventory = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, 9)
+    var resultInventory: IInventory? = null
+    val outputInventory = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, 9)
+
+    override fun readFromNBT(nbt: NBTTagCompound) {
+        super.readFromNBT(nbt)
+        fairyInventory.readFromNBT(nbt.nbtProvider["fairy"].compound ?: NBTTagCompound())
+        inputInventory.readFromNBT(nbt.nbtProvider["input"].compound ?: NBTTagCompound())
+        resultInventory = (nbt.nbtProvider["result"].compound ?: NBTTagCompound()).readInventory { size ->
+            InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, size)
+        }
+        outputInventory.readFromNBT(nbt.nbtProvider["output"].compound ?: NBTTagCompound())
+    }
+
+    override fun writeToNBT(nbt: NBTTagCompound): NBTTagCompound {
+        super.writeToNBT(nbt)
+        fairyInventory.writeToNBT(nbt.nbtProvider["fairy"].compoundOrCreate)
+        inputInventory.writeToNBT(nbt.nbtProvider["input"].compoundOrCreate)
+        resultInventory?.writeToNBT(nbt.nbtProvider["result"].compoundOrCreate)
+        outputInventory.writeToNBT(nbt.nbtProvider["output"].compoundOrCreate)
+        return nbt
+    }
+
 
     // Action
 
