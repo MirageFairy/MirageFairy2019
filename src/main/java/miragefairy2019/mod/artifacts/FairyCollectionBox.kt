@@ -4,7 +4,7 @@ import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
-import miragefairy2019.libkt.SmartSlot
+import miragefairy2019.util.SmartSlot
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot

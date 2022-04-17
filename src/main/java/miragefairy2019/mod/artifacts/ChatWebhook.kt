@@ -10,7 +10,7 @@ import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.ResourceName
-import miragefairy2019.libkt.SmartSlot
+import miragefairy2019.util.SmartSlot
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.dimensionalPos
 import miragefairy2019.libkt.displayText
