@@ -16,17 +16,17 @@ operator fun IInventory.get(index: Int): ItemStack = getStackInSlot(index)
 operator fun IInventory.set(index: Int, itemStack: ItemStack) = setInventorySlotContents(index, itemStack)
 
 val IInventory.indices get() = 0 until size
-val IInventory.itemStacks get() = (0 until size).map { this[it] }
+val IInventory.itemStacks get() = indices.map { this[it] }
 
 fun IInventory.readFromNBT(nbt: NBTTagCompound) {
     val list = NonNullList.withSize(size, ItemStack.EMPTY)
     ItemStackHelper.loadAllItems(nbt, list)
-    (0 until size).map { i -> this[i] = list[i] }
+    indices.map { i -> this[i] = list[i] }
 }
 
 fun IInventory.writeToNBT(nbt: NBTTagCompound) {
     val list = NonNullList.withSize(size, ItemStack.EMPTY)
-    (0 until size).map { i -> list[i] = this[i] }
+    indices.map { i -> list[i] = this[i] }
     ItemStackHelper.saveAllItems(nbt, list)
 }
 
