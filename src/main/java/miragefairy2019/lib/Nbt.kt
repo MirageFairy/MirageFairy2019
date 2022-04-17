@@ -4,47 +4,99 @@ import mirrg.kotlin.castOrNull
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTBase
 import net.minecraft.nbt.NBTPrimitive
+import net.minecraft.nbt.NBTTagByte
 import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.nbt.NBTTagDouble
+import net.minecraft.nbt.NBTTagFloat
 import net.minecraft.nbt.NBTTagInt
+import net.minecraft.nbt.NBTTagList
+import net.minecraft.nbt.NBTTagLong
+import net.minecraft.nbt.NBTTagShort
 
-interface INbtCompoundProvider {
-    fun getOrNull(): NBTTagCompound?
-    fun getOrCreate(): NBTTagCompound
+// Api
+
+interface INbtProvider<out T : NBTBase> {
+    fun getTagOrNull(): T?
+    fun getTagOrCreate(): T
 }
 
-class NbtWrapper(private val parent: INbtCompoundProvider, private val key: String) {
-    val tag get() = parent.getOrNull()?.getTag(key)
-    fun setTag(tag: NBTBase) = parent.getOrCreate().setTag(key, tag)
+interface INbtPath {
+    fun getTag(): NBTBase?
+    fun setTag(tag: NBTBase)
+}
 
-    val compound get() = tag?.castOrNull<NBTTagCompound>()
-    val compoundOrCreate: NBTTagCompound
-        get() {
-            val parentTag = parent.getOrCreate()
-            val tag = parentTag.getTag(key)
-            return if (tag is NBTTagCompound) {
-                tag
-            } else {
-                val newTag = NBTTagCompound()
-                parentTag.setTag(key, newTag)
-                newTag
-            }
+
+// Helper
+
+operator fun INbtProvider<NBTTagCompound>.get(key: String): INbtPath = object : INbtPath {
+    override fun getTag() = this@get.getTagOrNull()?.getTag(key)
+    override fun setTag(tag: NBTBase) = this@get.getTagOrCreate().setTag(key, tag)
+}
+
+operator fun INbtProvider<NBTTagList>.get(index: Int): INbtPath = object : INbtPath {
+    override fun getTag() = this@get.getTagOrNull()?.get(index)
+    override fun setTag(tag: NBTBase) = this@get.getTagOrCreate().set(index, tag)
+}
+
+val INbtPath.compound get() = getTag()?.castOrNull<NBTTagCompound>()
+val INbtPath.compoundOrCreate get() = compound ?: NBTTagCompound().also { setCompound(it) }
+val INbtPath.list get() = getTag()?.castOrNull<NBTTagList>()
+val INbtPath.listOrCreate get() = list ?: NBTTagList().also { setList(it) }
+val INbtPath.long get() = getTag()?.castOrNull<NBTPrimitive>()?.long
+val INbtPath.int get() = getTag()?.castOrNull<NBTPrimitive>()?.int
+val INbtPath.short get() = getTag()?.castOrNull<NBTPrimitive>()?.short
+val INbtPath.byte get() = getTag()?.castOrNull<NBTPrimitive>()?.byte
+val INbtPath.double get() = getTag()?.castOrNull<NBTPrimitive>()?.double
+val INbtPath.float get() = getTag()?.castOrNull<NBTPrimitive>()?.float
+
+fun INbtPath.setCompound(value: NBTTagCompound) = setTag(value)
+fun INbtPath.setList(value: NBTTagList) = setTag(value)
+fun INbtPath.setLong(value: Long) = setTag(NBTTagLong(value))
+fun INbtPath.setInt(value: Int) = setTag(NBTTagInt(value))
+fun INbtPath.setShort(value: Short) = setTag(NBTTagShort(value))
+fun INbtPath.setByte(value: Byte) = setTag(NBTTagByte(value))
+fun INbtPath.setDouble(value: Double) = setTag(NBTTagDouble(value))
+fun INbtPath.setFloat(value: Float) = setTag(NBTTagFloat(value))
+
+
+val INbtPath.compoundNbtProvider: INbtProvider<NBTTagCompound>
+    get() = object : INbtProvider<NBTTagCompound> {
+        override fun getTagOrNull() = compound
+        override fun getTagOrCreate() = compoundOrCreate
+    }
+
+val INbtPath.listNbtProvider: INbtProvider<NBTTagList>
+    get() = object : INbtProvider<NBTTagList> {
+        override fun getTagOrNull() = list
+        override fun getTagOrCreate() = listOrCreate
+    }
+
+val ItemStack.nbtProvider: INbtProvider<NBTTagCompound>
+    get() = object : INbtProvider<NBTTagCompound> {
+        override fun getTagOrNull() = if (hasTagCompound()) tagCompound!! else null
+        override fun getTagOrCreate() = if (hasTagCompound()) tagCompound!! else NBTTagCompound().also { tagCompound = it }
+    }
+
+val NBTTagCompound.nbtProvider: INbtProvider<NBTTagCompound>
+    get() = this.let { parent ->
+        object : INbtProvider<NBTTagCompound> {
+            override fun getTagOrNull() = parent
+            override fun getTagOrCreate() = parent
         }
-    val int get() = tag?.castOrNull<NBTPrimitive>()?.int
-    fun setCompound(value: NBTTagCompound) = setTag(value)
-    fun setInt(value: Int) = setTag(NBTTagInt(value))
-}
+    }
 
-operator fun NbtWrapper.get(key: String) = NbtWrapper(object : INbtCompoundProvider {
-    override fun getOrNull() = compound
-    override fun getOrCreate() = compoundOrCreate
-}, key)
+val NBTTagList.nbtProvider: INbtProvider<NBTTagList>
+    get() = this.let { parent ->
+        object : INbtProvider<NBTTagList> {
+            override fun getTagOrNull() = parent
+            override fun getTagOrCreate() = parent
+        }
+    }
 
-operator fun ItemStack.get(key: String) = NbtWrapper(object : INbtCompoundProvider {
-    override fun getOrNull() = if (hasTagCompound()) tagCompound!! else null
-    override fun getOrCreate() = if (hasTagCompound()) tagCompound!! else NBTTagCompound().also { tagCompound = it }
-}, key)
+operator fun INbtPath.get(key: String) = compoundNbtProvider[key]
+operator fun INbtPath.get(index: Int) = listNbtProvider[index]
+val INbtPath.tags get() = list?.let { it.indices.map { i -> this[i] } }
+operator fun ItemStack.get(key: String) = nbtProvider[key]
 
-operator fun NBTTagCompound.get(key: String) = NbtWrapper(object : INbtCompoundProvider {
-    override fun getOrNull() = this@get
-    override fun getOrCreate() = this@get
-}, key)
+val NBTTagList.size get() = tagCount()
+val NBTTagList.indices get() = 0 until size

@@ -5,10 +5,14 @@ import miragefairy2019.lib.IColoredItem
 import miragefairy2019.lib.RecipeBase
 import miragefairy2019.lib.RecipeInput
 import miragefairy2019.lib.RecipeMatcher
+import miragefairy2019.lib.compound
 import miragefairy2019.lib.div
 import miragefairy2019.lib.fairyType
 import miragefairy2019.lib.get
+import miragefairy2019.lib.int
 import miragefairy2019.lib.registerItemColorHandler
+import miragefairy2019.lib.setCompound
+import miragefairy2019.lib.setInt
 import miragefairy2019.lib.times
 import miragefairy2019.lib.toItemStack
 import miragefairy2019.lib.toNbt
