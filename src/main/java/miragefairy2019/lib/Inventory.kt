@@ -27,7 +27,7 @@ fun merge(srcInventory: IInventory, srcSlotIndex: Int, destInventory: IInventory
         }
         else -> Unit // 先に別のアイテムが入っている場合、何もできない
     }
-    return !srcInventory[srcSlotIndex].isEmpty
+    return srcInventory[srcSlotIndex].isEmpty
 }
 
 /**
