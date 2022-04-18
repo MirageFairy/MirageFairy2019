@@ -151,6 +151,17 @@ class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color
     }
 }
 
+class ComponentBackgroundLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent {
+    @SideOnly(Side.CLIENT)
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, partialTicks: Float, mouseX: Int, mouseY: Int) {
+        when (alignment) {
+            Alignment.LEFT -> textSupplier()?.let { gui.fontRenderer.drawString(it.formattedText, x, y, color) }
+            Alignment.CENTER -> textSupplier()?.let { gui.fontRenderer.drawStringCentered(it.formattedText, x, y, color) }
+            Alignment.RIGHT -> textSupplier()?.let { gui.fontRenderer.drawStringRightAligned(it.formattedText, x, y, color) }
+        }
+    }
+}
+
 class SlotResult(private val player: EntityPlayer, inventory: IInventory, slotIndex: Int, x: Int, y: Int) : Slot(inventory, slotIndex, x, y) {
 
     override fun isItemValid(stack: ItemStack) = false
