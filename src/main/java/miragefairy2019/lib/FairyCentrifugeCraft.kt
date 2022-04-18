@@ -7,10 +7,10 @@ import miragefairy2019.api.IFairyCentrifugeCraftHandler
 import miragefairy2019.api.IFairyCentrifugeCraftProcess
 import miragefairy2019.api.IFairyCentrifugeCraftRecipe
 import miragefairy2019.api.Mana
-import miragefairy2019.libkt.copy
 import miragefairy2019.lib.get
-import miragefairy2019.libkt.randomInt
 import miragefairy2019.lib.set
+import miragefairy2019.libkt.copy
+import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import mirrg.kotlin.atMost
 import net.minecraft.inventory.IInventory
@@ -20,7 +20,7 @@ import net.minecraft.util.NonNullList
 import net.minecraft.util.text.ITextComponent
 import java.util.Random
 
-fun getFairyCentrifugeCraftRecipe(inventory: IInventory) = FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers.asSequence().map { it.test(inventory) }.firstOrNull()
+fun getFairyCentrifugeCraftRecipe(inventory: IInventory) = FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers.asSequence().mapNotNull { it.test(inventory) }.firstOrNull()
 
 fun fairyCentrifugeCraftHandler(
     process0: IFairyCentrifugeCraftProcess?,
