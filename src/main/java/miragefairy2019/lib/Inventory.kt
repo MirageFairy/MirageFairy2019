@@ -17,17 +17,23 @@ import net.minecraft.util.NonNullList
  */
 fun merge(srcInventory: IInventory, srcSlotIndex: Int, destInventory: IInventory, destSlotIndex: Int): Boolean {
     when {
-        srcInventory[srcSlotIndex].isEmpty -> Unit // 元が空の場合、何もする必要はない
+        srcInventory[srcSlotIndex].isEmpty -> return true // 元から空なので何もする必要はない
+        !destInventory.isItemValidForSlot(destSlotIndex, srcInventory[srcSlotIndex]) -> return false // 宛先にこの種類のアイテムが入らない
         destInventory[destSlotIndex].isEmpty || srcInventory[srcSlotIndex] equalsItemDamageTag destInventory[destSlotIndex] -> {
             // 先が空もしくは元と同じ種類のアイテムが入っている場合、マージ
+
+            // 個数計算
             val count = srcInventory[srcSlotIndex].count + destInventory[destSlotIndex].count
             val destCount = count atMost destInventory.inventoryStackLimit atMost srcInventory[srcSlotIndex].maxStackSize
+
+            // 移動処理
             destInventory[destSlotIndex] = srcInventory[srcSlotIndex].copy(destCount)
             srcInventory[srcSlotIndex] = srcInventory[srcSlotIndex].copy(count - destCount)
+
+            return srcInventory[srcSlotIndex].isEmpty
         }
-        else -> Unit // 先に別のアイテムが入っている場合、何もできない
+        else -> return false // 宛先に別のアイテムが入っているので何もできない
     }
-    return srcInventory[srcSlotIndex].isEmpty
 }
 
 /**
