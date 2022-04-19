@@ -240,7 +240,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
         yi += 18
 
         // 速度
-        components += ComponentLabel(3 + 4 + 18 * 1 + 9, yi, Alignment.CENTER) { recipeMatchResult?.speed?.let { textComponent { (it * getFoliaSpeedFactor()).formatAs("%.2f/分")() } } }
+        components += ComponentLabel(3 + 4 + 18 * 1 + 9, yi, Alignment.CENTER) { recipeMatchResult?.speed?.let { textComponent { (it * getFoliaSpeedFactor()).formatAs("%.2f/分")() } } } // TODO translate
         components += ComponentLabel(3 + 4 + 18 * 4 + 9, yi, Alignment.CENTER) { recipeMatchResult?.fortune?.let { textComponent { it.formatAs("%.02f" + Symbols.FORTUNE)() } } }
         yi += 9
 
