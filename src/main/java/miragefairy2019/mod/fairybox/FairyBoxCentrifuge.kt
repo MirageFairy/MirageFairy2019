@@ -37,6 +37,7 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.util.InventoryTileEntity
+import miragefairy2019.util.SmartSlot
 import mirrg.kotlin.atLeast
 import mirrg.kotlin.atMost
 import mirrg.kotlin.formatAs
@@ -230,7 +231,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
             val c = 1 + 3 * index
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0, Alignment.CENTER) { getProcessResult()?.process?.name }
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0 + 9, Alignment.CENTER) { getProcessResult()?.factors }
-            components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * 1) { x, y -> Slot(fairyInventory, index, x, y) } belongs FAIRY
+            components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * 1) { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
             components += ComponentBackgroundLabel(3 + 4 + 18 * c + 9, yi + 18 * 1 + 9 - 4, Alignment.CENTER) { textComponent { "F"().gray } }
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2, Alignment.CENTER) { getProcessResult()?.speed?.let { textComponent { (it * getFoliaSpeedFactor()).formatAs("%.2f/分")() } } } // TODO translate
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2 + 9, Alignment.CENTER) { getProcessResult()?.fortune?.let { textComponent { it.formatAs("%.02f" + Symbols.FORTUNE)() } } }
