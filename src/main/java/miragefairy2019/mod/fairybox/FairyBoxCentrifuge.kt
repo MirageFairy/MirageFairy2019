@@ -9,6 +9,7 @@ import miragefairy2019.lib.Alignment
 import miragefairy2019.lib.ComponentBackgroundLabel
 import miragefairy2019.lib.ComponentLabel
 import miragefairy2019.lib.ComponentSlot
+import miragefairy2019.lib.ContainerComponent
 import miragefairy2019.lib.GuiComponent
 import miragefairy2019.lib.IComponent
 import miragefairy2019.lib.SlotResult
@@ -194,6 +195,13 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
         }
 
 
+        val IN = ContainerComponent.SlotGroup()
+        val FAIRY = ContainerComponent.SlotGroup()
+        val OUT = ContainerComponent.SlotGroup()
+        val PLAYER_HOTBAR = ContainerComponent.SlotGroup()
+        val PLAYER = ContainerComponent.SlotGroup()
+
+
         width = 3 + 4 + 18 * 9 + 4 + 3
 
 
@@ -211,7 +219,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
 
         // 入力
         repeat(9) { c ->
-            components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> Slot(inputInventory, c, x, y) }
+            components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> Slot(inputInventory, c, x, y) } belongs IN
             components += ComponentBackgroundLabel(3 + 4 + 18 * c + 9, yi + 9 - 4, Alignment.CENTER) { textComponent { "IN"().gray } }
         }
         yi += 18
@@ -222,7 +230,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
             val c = 1 + 3 * index
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0, Alignment.CENTER) { getProcessResult()?.process?.name }
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0 + 9, Alignment.CENTER) { getProcessResult()?.factors }
-            components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * 1) { x, y -> Slot(fairyInventory, index, x, y) }
+            components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * 1) { x, y -> Slot(fairyInventory, index, x, y) } belongs FAIRY
             components += ComponentBackgroundLabel(3 + 4 + 18 * c + 9, yi + 18 * 1 + 9 - 4, Alignment.CENTER) { textComponent { "F"().gray } }
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2, Alignment.CENTER) { getProcessResult()?.speed?.let { textComponent { (it * getFoliaSpeedFactor()).formatAs("%.2f/分")() } } } // TODO translate
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2 + 9, Alignment.CENTER) { getProcessResult()?.fortune?.let { textComponent { it.formatAs("%.02f" + Symbols.FORTUNE)() } } }
@@ -234,7 +242,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
 
         // 出力
         repeat(9) { c ->
-            components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> SlotResult(player, outputInventory, c, x, y) }
+            components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> SlotResult(player, outputInventory, c, x, y) } belongs OUT
             components += ComponentBackgroundLabel(3 + 4 + 18 * c + 9, yi + 9 - 4, Alignment.CENTER) { textComponent { "OUT"().gray } }
         }
         yi += 18
@@ -257,13 +265,13 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
 
 
         // プレイヤーインベントリメイン
-        repeat(3) { r -> repeat(9) { c -> components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * r) { x, y -> Slot(player.inventory, 9 + 9 * r + c, x, y) } } }
+        repeat(3) { r -> repeat(9) { c -> components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * r) { x, y -> Slot(player.inventory, 9 + 9 * r + c, x, y) } belongs PLAYER } }
         yi += 18 * 3
 
         yi += 4
 
         // プレイヤーインベントリ最下段
-        repeat(9) { c -> components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> Slot(player.inventory, c, x, y) } }
+        repeat(9) { c -> components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> Slot(player.inventory, c, x, y) } belongs PLAYER_HOTBAR }
         yi += 18
 
         yi += 4
@@ -274,6 +282,18 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
 
         interactInventories += inputInventory
         interactInventories += outputInventory
+
+
+        addSlotTransferMapping(IN, PLAYER_HOTBAR, true)
+        addSlotTransferMapping(IN, PLAYER, true)
+        addSlotTransferMapping(FAIRY, PLAYER_HOTBAR, true)
+        addSlotTransferMapping(FAIRY, PLAYER, true)
+        addSlotTransferMapping(OUT, PLAYER_HOTBAR, true)
+        addSlotTransferMapping(OUT, PLAYER, true)
+        addSlotTransferMapping(PLAYER_HOTBAR, FAIRY)
+        addSlotTransferMapping(PLAYER_HOTBAR, IN)
+        addSlotTransferMapping(PLAYER, FAIRY)
+        addSlotTransferMapping(PLAYER, IN)
 
     }
 
