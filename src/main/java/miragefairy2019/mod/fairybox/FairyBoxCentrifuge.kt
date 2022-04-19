@@ -54,7 +54,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
 
     fun createInventory(size: Int) = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, size)
 
-    val fairyInventory = createInventory(3)
+    val fairyInventory = createInventory(3).apply { filter = { it.fairyType != null } }.apply { inventoryStackLimit = 1 }
     val inputInventory = createInventory(9)
     var resultInventory = createInventory(0)
     val outputInventory = createInventory(9)
