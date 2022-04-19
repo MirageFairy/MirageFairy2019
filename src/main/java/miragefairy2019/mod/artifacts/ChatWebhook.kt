@@ -1,5 +1,9 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.lib.get
+import miragefairy2019.lib.itemStacks
+import miragefairy2019.lib.readFromNBT
+import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.DataOreIngredient
@@ -10,7 +14,6 @@ import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.ResourceName
-import miragefairy2019.util.SmartSlot
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.dimensionalPos
 import miragefairy2019.libkt.displayText
@@ -20,14 +23,11 @@ import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.enJa
-import miragefairy2019.lib.get
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.item
-import miragefairy2019.lib.itemStacks
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
-import miragefairy2019.lib.readFromNBT
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -37,7 +37,6 @@ import miragefairy2019.libkt.string
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.libkt.toUnit
-import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
 import miragefairy2019.mod.GuiId
@@ -48,6 +47,7 @@ import miragefairy2019.mod.systems.Daemon
 import miragefairy2019.mod.systems.DaemonManager
 import miragefairy2019.mod.systems.IBlockDaemon
 import miragefairy2019.util.InventoryTileEntity
+import miragefairy2019.util.SmartSlot
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.json
 import mirrg.kotlin.gson.jsonElement
