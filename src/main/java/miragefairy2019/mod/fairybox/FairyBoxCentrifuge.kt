@@ -21,6 +21,7 @@ import miragefairy2019.lib.factors
 import miragefairy2019.lib.fairyType
 import miragefairy2019.lib.get
 import miragefairy2019.lib.getFairyCentrifugeCraftRecipe
+import miragefairy2019.lib.itemStacks
 import miragefairy2019.lib.merge
 import miragefairy2019.lib.nbtProvider
 import miragefairy2019.lib.readFromNBT
@@ -73,6 +74,8 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
         outputInventory.writeToNBT(nbt.nbtProvider["output"].compoundOrCreate)
         return nbt
     }
+
+    override fun getDropItemStacks() = listOf(fairyInventory, inputInventory, resultInventory, outputInventory).map { it.itemStacks }.flatten()
 
 
     // Tree

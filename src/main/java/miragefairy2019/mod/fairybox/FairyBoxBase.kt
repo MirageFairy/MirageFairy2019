@@ -10,6 +10,7 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
+import net.minecraft.inventory.InventoryHelper
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.network.NetworkManager
@@ -89,10 +90,24 @@ class BlockFairyBoxBase(private val tileEntityProvider: () -> TileEntityFairyBox
 
 
     // Action
+
     fun getTileEntity(world: World, blockPos: BlockPos) = world.getTileEntity(blockPos)?.castOrNull<TileEntityFairyBoxBase>()
+
+    // 右クリック
     override fun onBlockActivated(world: World, blockPos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         val tileEntity = getTileEntity(world, blockPos) ?: return super.onBlockActivated(world, blockPos, state, playerIn, hand, facing, hitX, hitY, hitZ)
         return tileEntity.getExecutor().onBlockActivated(playerIn, hand, facing, hitX, hitY, hitZ)
+    }
+
+    // 破壊時ドロップ
+    override fun breakBlock(world: World, blockPos: BlockPos, blockState: IBlockState) {
+        val tileEntity = world.getTileEntity(blockPos)
+        if (tileEntity is TileEntityFairyBoxBase) {
+            val itemStacks = tileEntity.getDropItemStacks()
+            itemStacks.forEach { InventoryHelper.spawnItemStack(world, blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble(), it) }
+            world.updateComparatorOutputLevel(blockPos, this)
+        }
+        super.breakBlock(world, blockPos, blockState)
     }
 
 
@@ -102,6 +117,11 @@ class BlockFairyBoxBase(private val tileEntityProvider: () -> TileEntityFairyBox
 }
 
 abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
+
+    // 特性
+
+    open fun getDropItemStacks() = listOf<ItemStack>()
+
 
     // 行動
 
