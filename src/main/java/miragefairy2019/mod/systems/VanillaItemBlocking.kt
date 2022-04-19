@@ -1,11 +1,11 @@
 package miragefairy2019.mod.systems
 
-import miragefairy2019.lib.getLogger
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.configProperty
 import mirrg.kotlin.castOrNull
+import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Items
 import net.minecraftforge.common.MinecraftForge

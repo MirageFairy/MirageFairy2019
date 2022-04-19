@@ -4,7 +4,6 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import miragefairy2019.api.IFoodAuraItem
 import miragefairy2019.api.ManaSet
-import miragefairy2019.lib.getLogger
 import miragefairy2019.lib.plus
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
@@ -19,6 +18,7 @@ import mirrg.kotlin.gson.jsonWrapper
 import mirrg.kotlin.gson.toDouble
 import mirrg.kotlin.gson.toInt
 import mirrg.kotlin.gson.toString
+import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.Item

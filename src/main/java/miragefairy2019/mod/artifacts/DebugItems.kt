@@ -3,7 +3,6 @@ package miragefairy2019.mod.artifacts
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.erg
-import miragefairy2019.lib.getLogger
 import miragefairy2019.lib.mana
 import miragefairy2019.lib.sum
 import miragefairy2019.libkt.aqua
@@ -31,6 +30,7 @@ import miragefairy2019.mod.playeraura.ApiPlayerAura
 import miragefairy2019.mod.skill.ApiSkill
 import mirrg.kotlin.formatAs
 import mirrg.kotlin.join
+import mirrg.kotlin.log4j.hydrogen.getLogger
 import mirrg.kotlin.toLowerCamelCase
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState

@@ -2,11 +2,11 @@ package miragefairy2019.mod.systems
 
 import appeng.api.AEApi
 import miragefairy2019.lib.Compatibility
-import miragefairy2019.lib.getLogger
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.configProperty
 import miragefairy2019.mod.artifacts.ChatWebhook
+import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
 
