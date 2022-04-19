@@ -4,8 +4,8 @@ import appeng.api.AEApi
 import miragefairy2019.lib.Compatibility
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.configProperty
 import miragefairy2019.mod.artifacts.ChatWebhook
+import miragefairy2019.mod.configProperty
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
