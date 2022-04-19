@@ -41,8 +41,6 @@ class WindowProperty(var value: Int = 0, val changeListener: () -> Unit = {})
 
 class ContainerComponent : Container() {
     val components = mutableListOf<IComponent>()
-    val interactInventories = mutableListOf<IInventory>()
-    val windowProperties = mutableMapOf<Int, WindowProperty>()
     var width = 0
     var height = 0
 
@@ -53,6 +51,11 @@ class ContainerComponent : Container() {
         components.forEach { it.onInit() }
     }
 
+
+    // Interact
+
+    val interactInventories = mutableListOf<IInventory>()
+
     override fun canInteractWith(player: EntityPlayer) = interactInventories.all { it.isUsableByPlayer(player) }
 
     // TODO
@@ -62,6 +65,8 @@ class ContainerComponent : Container() {
 
 
     // Window Property
+
+    val windowProperties = mutableMapOf<Int, WindowProperty>()
 
     override fun addListener(listener: IContainerListener) {
         super.addListener(listener)
