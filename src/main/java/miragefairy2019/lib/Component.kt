@@ -58,9 +58,67 @@ class ContainerComponent : Container() {
 
     override fun canInteractWith(player: EntityPlayer) = interactInventories.all { it.isUsableByPlayer(player) }
 
-    // TODO
+
+    // Transfer
+
+    class SlotGroup
+
+    private val groupToSlots = mutableMapOf<SlotGroup, MutableList<ComponentSlot>>()
+    private val slotToGroup = mutableMapOf<ComponentSlot, SlotGroup>()
+
+    private val mapping = mutableMapOf<SlotGroup, MutableList<Pair<SlotGroup, Boolean>>>()
+
+    fun addSlotTransferMapping(srcSlotGroup: SlotGroup, destSlotGroup: SlotGroup, isReversed: Boolean = false) {
+        mapping.computeIfAbsent(srcSlotGroup) { mutableListOf() } += destSlotGroup to isReversed
+    }
+
+    fun getSlotTransferMapping(srcSlotGroup: SlotGroup): List<Pair<SlotGroup, Boolean>> = mapping[srcSlotGroup] ?: listOf()
+
+    infix fun ComponentSlot.belongs(slotGroup: SlotGroup): ComponentSlot {
+        val list = groupToSlots.computeIfAbsent(slotGroup) { mutableListOf() }
+        list += this
+        slotToGroup[this] = slotGroup
+        return this
+    }
+
+    fun getComponentSlot(index: Int) = components.asSequence().filterIsInstance<ComponentSlot>().find { it.slot.slotNumber == index }
+    fun getComponentSlots(slotGroup: SlotGroup): List<ComponentSlot> = groupToSlots[slotGroup] ?: listOf()
+    fun getSlotGroup(componentSlot: ComponentSlot) = slotToGroup[componentSlot]
+
     override fun transferStackInSlot(playerIn: EntityPlayer, index: Int): ItemStack {
-        return EMPTY_ITEM_STACK
+        val componentSlot = getComponentSlot(index) ?: return EMPTY_ITEM_STACK // スロットが存在しないなら終了
+        if (!componentSlot.slot.hasStack) return EMPTY_ITEM_STACK // スロットが空なら終了
+
+        val itemStack = componentSlot.slot.stack
+        val itemStackOriginal = itemStack.copy()
+
+        // 移動処理
+        // itemStackを改変する
+        val slotGroup = getSlotGroup(componentSlot)
+        if (slotGroup != null) {
+            val destComponentSlots = getSlotTransferMapping(slotGroup).map { (slotGroup, isReversed) ->
+                val componentSlots = getComponentSlots(slotGroup)
+                if (isReversed) componentSlots.reversed() else componentSlots
+            }.flatten().map { it.slot }
+
+            // 移動処理
+            if (!mergeItemStack(itemStack, destComponentSlots).isChanged) return ItemStack.EMPTY
+
+        }
+
+        if (itemStack.isEmpty) { // スタックが丸ごと移動した
+            componentSlot.slot.putStack(ItemStack.EMPTY)
+        } else { // 部分的に残った
+            componentSlot.slot.onSlotChanged()
+        }
+
+        if (itemStack.count == itemStackOriginal.count) return ItemStack.EMPTY // アイテムが何も移動していない場合は終了
+
+        // スロットが改変を受けた場合にここを通過する
+
+        componentSlot.slot.onTake(playerIn, itemStack)
+
+        return itemStackOriginal
     }
 
 
