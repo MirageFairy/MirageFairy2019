@@ -2,6 +2,8 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import net.minecraftforge.gradle.user.TaskSourceCopy
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.io.File
+import java.net.URL
 
 buildscript {
     dependencies {
@@ -85,10 +87,24 @@ dependencies {
 
 tasks {
 
+    register("fetchMirrgKotlin") {
+        fun fetch(fileName: String) {
+            val file = File("src/main/java").resolve(fileName)
+            when {
+                file.parentFile.isDirectory -> Unit
+                file.parentFile.exists() -> throw RuntimeException("Already exists: ${file.parentFile}")
+                !file.parentFile.mkdirs() -> throw RuntimeException("Could not create the directory: ${file.parentFile}")
+            }
+            file.writeBytes(URL("https://raw.githubusercontent.com/MirrgieRiana/mirrg.kotlin/main/src/main/java/$fileName").readBytes())
+        }
+        fetch("mirrg/kotlin/log4j/hydrogen/Logging.kt")
+    }
+
     named<TaskSourceCopy>("sourceMainKotlin") {
         include("ModMirageFairy2019.kt")
         replace("{version}", project.version)
         replace("{acceptableRemoteVersions}", "[${versionZero}.${versionForge}.${versionCompatibility}.0,${versionZero}.${versionForge}.${versionCompatibility + 1}.0)")
+        dependsOn("fetchMirrgKotlin")
     }
 
     register<Exec>("makeJson") {
