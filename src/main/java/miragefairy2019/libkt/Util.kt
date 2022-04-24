@@ -3,13 +3,10 @@ package miragefairy2019.libkt
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.Vec3d
 import java.io.File
-import java.util.Optional
 import java.util.Random
 
 @Suppress("unused")
 fun Any?.toUnit() = Unit
-
-val <T : Any> Optional<T>.orNull: T? get() = orElse(null)
 
 val File.existsOrNull get() = if (exists()) this else null
 fun File.mkdirsParent() = canonicalFile.parentFile.mkdirs()

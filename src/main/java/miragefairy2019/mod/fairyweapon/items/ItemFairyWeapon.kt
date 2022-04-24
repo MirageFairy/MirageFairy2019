@@ -25,6 +25,7 @@ import miragefairy2019.libkt.white
 import miragefairy2019.libkt.BakedModelBuiltinWrapper
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.Main
+import mirrg.kotlin.java.hydrogen.orNull
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager

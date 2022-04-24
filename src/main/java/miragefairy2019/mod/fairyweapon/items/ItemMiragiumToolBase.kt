@@ -3,7 +3,6 @@ package miragefairy2019.mod.fairyweapon.items
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.EMPTY_FAIRY
-import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
@@ -12,6 +11,7 @@ import miragefairy2019.mod.fairyweapon.UtilsMagic
 import miragefairy2019.mod.fairyweapon.IMagicHandler
 import miragefairy2019.mod.fairyweapon.positive
 import miragefairy2019.mod.skill.IMastery
+import mirrg.kotlin.java.hydrogen.orNull
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
