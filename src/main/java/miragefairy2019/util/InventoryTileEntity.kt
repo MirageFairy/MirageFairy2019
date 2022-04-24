@@ -1,6 +1,6 @@
 package miragefairy2019.util
 
-import miragefairy2019.libkt.unit
+import mirrg.kotlin.hydrogen.unit
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.InventoryBasic
 import net.minecraft.item.ItemStack

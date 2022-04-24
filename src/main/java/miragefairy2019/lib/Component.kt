@@ -6,10 +6,10 @@ import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.rectangle
-import miragefairy2019.libkt.unit
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
 import mirrg.kotlin.atMost
+import mirrg.kotlin.hydrogen.unit
 import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
