@@ -98,6 +98,7 @@ tasks {
             file.writeBytes(URL("https://raw.githubusercontent.com/MirrgieRiana/mirrg.kotlin/main/src/main/java/$fileName").readBytes())
         }
         fetch("mirrg/kotlin/log4j/hydrogen/Logging.kt")
+        fetch("mirrg/kotlin/hydrogen/Lang.kt")
     }
 
     named<TaskSourceCopy>("sourceMainKotlin") {
