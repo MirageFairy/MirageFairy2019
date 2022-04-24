@@ -6,7 +6,7 @@ import java.math.BigDecimal
 import java.net.URLEncoder
 
 fun getClass(name: String): Class<*>? = try {
-    Class.forName("appeng.core.Api")
+    Class.forName(name)
 } catch (e: ClassNotFoundException) {
     null
 }
