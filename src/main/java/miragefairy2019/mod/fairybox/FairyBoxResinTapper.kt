@@ -6,8 +6,8 @@ import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.artifacts.FairyMaterials
 import mirrg.boron.util.UtilsMath
-import mirrg.kotlin.atLeast
-import mirrg.kotlin.atMost
+import mirrg.kotlin.hydrogen.atLeast
+import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.formatAs
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer

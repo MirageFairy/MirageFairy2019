@@ -12,7 +12,7 @@ import miragefairy2019.lib.set
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
-import mirrg.kotlin.atMost
+import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient

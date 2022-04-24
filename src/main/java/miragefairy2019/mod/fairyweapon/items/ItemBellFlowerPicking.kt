@@ -17,7 +17,7 @@ import miragefairy2019.mod.fairyweapon.positive
 import miragefairy2019.mod.fairyweapon.positiveBoolean
 import miragefairy2019.mod.skill.EnumMastery
 import mirrg.boron.util.UtilsMath
-import mirrg.kotlin.atMost
+import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.item.EntityXPOrb
 import net.minecraft.init.SoundEvents

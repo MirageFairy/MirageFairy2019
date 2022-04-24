@@ -2,7 +2,7 @@ package miragefairy2019.lib
 
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.equalsItemDamageTag
-import mirrg.kotlin.atMost
+import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.ItemStackHelper
 import net.minecraft.item.ItemStack

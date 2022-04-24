@@ -13,7 +13,7 @@ import miragefairy2019.mod.fairyweapon.magic4.percent0
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.pitch
 import miragefairy2019.mod.skill.EnumMastery
-import mirrg.kotlin.atMost
+import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.init.Items
 import net.minecraft.init.SoundEvents

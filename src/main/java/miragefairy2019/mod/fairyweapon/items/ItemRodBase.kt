@@ -10,7 +10,7 @@ import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.spawnMagicParticle
 import miragefairy2019.mod.fairyweapon.spawnMagicSplashParticle
-import mirrg.kotlin.atMost
+import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.castOrNull
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.init.SoundEvents
