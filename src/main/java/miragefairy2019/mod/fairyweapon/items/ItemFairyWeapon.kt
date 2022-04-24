@@ -9,6 +9,7 @@ import miragefairy2019.api.IFairyWeaponItem
 import miragefairy2019.api.IManualRepairAcceptorItem
 import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.lib.toNonNullList
+import miragefairy2019.libkt.BakedModelBuiltinWrapper
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
@@ -22,9 +23,8 @@ import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.white
-import miragefairy2019.libkt.BakedModelBuiltinWrapper
-import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
 import mirrg.kotlin.java.hydrogen.orNull
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.Minecraft
