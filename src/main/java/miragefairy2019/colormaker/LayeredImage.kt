@@ -1,20 +1,21 @@
 package miragefairy2019.colormaker
 
-import mirrg.boron.util.struct.ImmutableArray
 import java.awt.Color
 import java.awt.image.BufferedImage
 import javax.swing.ImageIcon
 import javax.swing.JLabel
 
-class LabelImage : JLabel() {
-    var colorConstants = ColorConstants()
+class Layer(val image: BufferedImage, val colorExpression: ColorExpression)
+
+class LayeredImage : JLabel() {
+    var colorEvaluator = ColorEvaluator()
     var backgroundColor: Color = Color.black
 
-    fun setImage(arrayList: ImmutableArray<ImageLayer>) {
+    fun render(arrayList: List<Layer>) {
         icon = ImageIcon(createImage(arrayList))
     }
 
-    private fun createImage(imageLayers: ImmutableArray<ImageLayer>): BufferedImage {
+    private fun createImage(layers: List<Layer>): BufferedImage {
         val image = BufferedImage(64, 64, BufferedImage.TYPE_INT_RGB)
         repeat(64) { x ->
             repeat(64) { y ->
@@ -24,13 +25,13 @@ class LabelImage : JLabel() {
                 var g1 = backgroundColor.green
                 var b1 = backgroundColor.blue
 
-                imageLayers.forEach { imageLayer ->
+                layers.forEach { layer ->
 
                     // 乗算する色
-                    val colorMul = colorConstants.getColor(imageLayer.colorIdentifier)
+                    val colorMul = colorEvaluator.evaluate(layer.colorExpression)
 
                     // 画像の色
-                    val argbOver = imageLayer.image.getRGB(x / 4, y / 4)
+                    val argbOver = layer.image.getRGB(x / 4, y / 4)
                     val a2 = (argbOver shr 24) and 0xff
                     var r2 = (argbOver shr 16) and 0xff
                     var g2 = (argbOver shr 8) and 0xff
