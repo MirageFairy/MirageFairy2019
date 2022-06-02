@@ -38,9 +38,9 @@ import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
+import mirrg.kotlin.formatAs
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
-import mirrg.kotlin.formatAs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemStack
