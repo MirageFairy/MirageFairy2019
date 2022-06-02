@@ -91,7 +91,7 @@ public class SelectorEntityRanged<E extends Entity> {
     }
 
     public void effect() {
-        UtilsMagic.spawnParticleSphericalRange(world, position, radius);
+        FairyWeaponUtils.spawnParticleSphericalRange(world, position, radius);
         UtilKt.spawnParticleTargets(world, ISuppliterator.ofIterable(tuples)
             .filter(t -> t.y == EnumTargetExecutability.EFFECTIVE)
             .map(t -> new Pair<>(t.x.getPositionVector(), t.y))
