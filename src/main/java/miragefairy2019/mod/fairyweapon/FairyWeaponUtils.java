@@ -32,8 +32,8 @@ public class FairyWeaponUtils {
         EntityPlayer player,
         boolean useLiquids,
         double additionalReach,
-        Class<? extends E> classEntity,
-        Predicate<? super E> filterEntity) {
+        Class<E> classEntity,
+        Predicate<E> filterEntity) {
         float rotationPitch = player.rotationPitch;
         float rotationYaw = player.rotationYaw;
         double x = player.posX;

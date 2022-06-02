@@ -53,7 +53,7 @@ class MagicSelectorRayTrace private constructor(world: World, val rayTraceResult
         }
 
         fun <E : Entity> createWith(world: World, player: EntityPlayer, additionalReach: Double, classEntity: Class<E>, filterEntity: (E) -> Boolean): MagicSelectorRayTrace {
-            val rayTraceResult = MagicSelectorUtils.rayTrace<E>(world, player, false, additionalReach, classEntity) { filterEntity(it!!) }
+            val rayTraceResult = FairyWeaponUtils.rayTrace<E>(world, player, false, additionalReach, classEntity) { filterEntity(it!!) }
             val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
             return MagicSelectorRayTrace(world, rayTraceResult, position)
         }
