@@ -117,8 +117,11 @@ fun findItem(player: EntityPlayer, itemStackTarget: ItemStack) = findItem(player
 
 /** 搭乗中の妖精を優先します。 */
 fun findFairy(fairyWeaponItemStack: ItemStack, player: EntityPlayer): Pair<ItemStack, IFairyType>? {
-    val items = listOf(getCombinedFairy(fairyWeaponItemStack)) + player.inventoryItems
-    items.forEach { fairyItemStack -> fairyItemStack.fairyType?.let { fairyType -> return Pair(fairyItemStack, fairyType) } }
+    val itemStacks = listOf(getCombinedFairy(fairyWeaponItemStack)) + player.inventoryItems
+    itemStacks.forEach next@{ itemStack ->
+        val fairyType = itemStack.fairyType ?: return@next
+        return Pair(itemStack, fairyType)
+    }
     return null
 }
 
