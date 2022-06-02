@@ -6,11 +6,12 @@ import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
-import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
 import miragefairy2019.mod.fairyweapon.SelectorRayTrace
-import miragefairy2019.mod.fairyweapon.UtilsMagic
-import miragefairy2019.mod.fairyweapon.findFairy
+import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
 import miragefairy2019.mod.fairyweapon.deprecated.positive
+import miragefairy2019.mod.fairyweapon.findFairy
+import miragefairy2019.mod.fairyweapon.spawnParticle
+import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.skill.IMastery
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
@@ -25,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
 fun MagicScope.fail(cursor: Vec3d, color: Int) = object : IMagicHandler {
-    override fun onUpdate(itemSlot: Int, isSelected: Boolean) = UtilsMagic.spawnParticle(world, cursor, color)
+    override fun onUpdate(itemSlot: Int, isSelected: Boolean) = spawnParticle(world, cursor, color)
 }
 
 abstract class ItemMiragiumToolBase(
@@ -96,7 +97,7 @@ abstract class ItemMiragiumToolBase(
 
             override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                 selectorRayTrace.doEffect(0xFFFFFF)
-                UtilsMagic.spawnParticleTargets(
+                spawnParticleTargets(
                     world,
                     targets.asSequence().toList().map { Pair(Vec3d(it).addVector(0.5, 0.5, 0.5), EnumTargetExecutability.EFFECTIVE) }
                 )

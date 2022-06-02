@@ -15,7 +15,7 @@ open class MagicSelector(val world: World)
 class MagicSelectorPosition(world: World, val position: Vec3d) : MagicSelector(world) {
     fun getMagicSelectorCircle(radius: Double) = MagicSelectorCircle(world, position, radius)
     fun getMagicSelectorSphere(radius: Double) = MagicSelectorSphere(world, position, radius)
-    fun doEffect(color: Int) = UtilsMagic.spawnParticle(world, position, color)
+    fun doEffect(color: Int) = spawnParticle(world, position, color)
 }
 
 class MagicSelectorCircle(world: World, val position: Vec3d, val radius: Double) : MagicSelector(world) {

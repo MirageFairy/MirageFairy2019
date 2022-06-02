@@ -15,6 +15,7 @@ import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.randomInt
+import mirrg.kotlin.hydrogen.max
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
@@ -194,3 +195,30 @@ fun getFairyAttribute(attributeName: String, itemStack: ItemStack) = itemStack.n
 fun setFairyAttribute(attributeName: String, itemStack: ItemStack, value: Double) = itemStack.nbtProvider["Fairy"][attributeName].setDouble(value)
 fun getCombinedFairy(itemStack: ItemStack) = itemStack.nbtProvider["Fairy"]["CombinedFairy"].compound?.toItemStack() ?: EMPTY_ITEM_STACK // TODO 戻り型
 fun setCombinedFairy(itemStack: ItemStack, itemStackFairy: ItemStack) = itemStack.nbtProvider["Fairy"]["CombinedFairy"].setCompound(itemStackFairy.copy(1).toNbt())
+
+
+private const val MAX_PARTICLE_COUNT = 1.0
+
+fun spawnParticleTargets(world: World, tuples: List<Pair<Vec3d, EnumTargetExecutability>>) {
+
+    // 1tickに平均MAX_PARTICLE_COUNT個までしかパーティクルを表示しない
+    val rate = MAX_PARTICLE_COUNT / (tuples.size.toDouble() max MAX_PARTICLE_COUNT)
+
+    // パーティクル生成
+    tuples.forEach { tuple ->
+        if (Math.random() < rate) spawnParticleTarget(world, tuple.first, tuple.second)
+    }
+
+}
+
+fun spawnParticleTarget(world: World, position: Vec3d, targetExecutability: EnumTargetExecutability) = spawnParticle(world, position, targetExecutability.color)
+
+fun spawnParticle(world: World, position: Vec3d, color: Int) = world.spawnParticle(
+    EnumParticleTypes.SPELL_MOB,
+    position.x,
+    position.y,
+    position.z,
+    ((color shr 16) and 0xFF) / 255.0,
+    ((color shr 8) and 0xFF) / 255.0,
+    ((color shr 0) and 0xFF) / 255.0
+)

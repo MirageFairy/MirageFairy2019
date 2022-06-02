@@ -96,7 +96,7 @@ public class SelectorRayTrace {
     }
 
     public void doEffect(int color) {
-        UtilsMagic.spawnParticle(world, position, color);
+        UtilKt.spawnParticle(world, position, color);
     }
 
     //

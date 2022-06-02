@@ -1,12 +1,9 @@
 package miragefairy2019.mod.fairyweapon;
 
-import kotlin.Pair;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class UtilsMagic {
 
@@ -68,39 +65,6 @@ public class UtilsMagic {
 
         }
 
-    }
-
-    //
-
-    private static final double MAX_PARTICLE_COUNT = 1;
-
-    public static void spawnParticleTargets(World world, List<Pair<Vec3d, EnumTargetExecutability>> tuples) {
-
-        // 1tickに平均MAX_PARTICLE_COUNT個までしかパーティクルを表示しない
-        double rate = MAX_PARTICLE_COUNT / (double) Math.max(tuples.size(), MAX_PARTICLE_COUNT);
-
-        // パーティクル生成
-        for (Pair<Vec3d, EnumTargetExecutability> tuple : tuples) {
-            if (Math.random() < rate) {
-                spawnParticleTarget(world, tuple.getFirst(), tuple.getSecond());
-            }
-        }
-
-    }
-
-    public static void spawnParticleTarget(World world, Vec3d position, EnumTargetExecutability targetExecutability) {
-        spawnParticle(world, position, targetExecutability.getColor());
-    }
-
-    public static void spawnParticle(World world, Vec3d position, int color) {
-        world.spawnParticle(
-            EnumParticleTypes.SPELL_MOB,
-            position.x,
-            position.y,
-            position.z,
-            ((color >> 16) & 0xFF) / 255.0,
-            ((color >> 8) & 0xFF) / 255.0,
-            ((color >> 0) & 0xFF) / 255.0);
     }
 
 }
