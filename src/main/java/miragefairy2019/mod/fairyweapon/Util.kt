@@ -1,12 +1,18 @@
 package miragefairy2019.mod.fairyweapon
 
 import miragefairy2019.api.IFairyType
+import miragefairy2019.lib.compound
 import miragefairy2019.lib.double
 import miragefairy2019.lib.fairyType
 import miragefairy2019.lib.get
 import miragefairy2019.lib.itemStacks
 import miragefairy2019.lib.nbtProvider
+import miragefairy2019.lib.setCompound
 import miragefairy2019.lib.setDouble
+import miragefairy2019.lib.toItemStack
+import miragefairy2019.lib.toNbt
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
+import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.randomInt
 import net.minecraft.entity.Entity
@@ -111,7 +117,7 @@ fun findItem(player: EntityPlayer, itemStackTarget: ItemStack) = findItem(player
 
 /** 搭乗中の妖精を優先します。 */
 fun findFairy(fairyWeaponItemStack: ItemStack, player: EntityPlayer): Pair<ItemStack, IFairyType>? {
-    val items = listOf(FairyWeaponUtils.getCombinedFairy(fairyWeaponItemStack)) + player.inventoryItems
+    val items = listOf(getCombinedFairy(fairyWeaponItemStack)) + player.inventoryItems
     items.forEach { fairyItemStack -> fairyItemStack.fairyType?.let { fairyType -> return Pair(fairyItemStack, fairyType) } }
     return null
 }
@@ -182,3 +188,5 @@ fun extendSearch(range: Int, visited: MutableList<BlockPos>, zero: List<BlockPos
 
 fun getFairyAttribute(attributeName: String, itemStack: ItemStack) = itemStack.nbtProvider["Fairy"][attributeName].double ?: 0.0
 fun setFairyAttribute(attributeName: String, itemStack: ItemStack, value: Double) = itemStack.nbtProvider["Fairy"][attributeName].setDouble(value)
+fun getCombinedFairy(itemStack: ItemStack) = itemStack.nbtProvider["Fairy"]["CombinedFairy"].compound?.toItemStack() ?: EMPTY_ITEM_STACK // TODO 戻り型
+fun setCombinedFairy(itemStack: ItemStack, itemStackFairy: ItemStack) = itemStack.nbtProvider["Fairy"]["CombinedFairy"].setCompound(itemStackFairy.copy(1).toNbt())
