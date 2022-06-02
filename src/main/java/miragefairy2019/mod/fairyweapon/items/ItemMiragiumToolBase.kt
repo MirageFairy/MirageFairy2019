@@ -5,8 +5,8 @@ import miragefairy2019.api.Mana
 import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
-import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.fairyweapon.SelectorRayTrace
+import miragefairy2019.mod.fairyweapon.breakBlock
 import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
 import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.findFairy
@@ -75,7 +75,7 @@ abstract class ItemMiragiumToolBase(
 
                         // 破壊成立
                         itemStack.damageItem(damage, player)
-                        FairyWeaponUtils.breakBlock(world, player, EnumFacing.UP, itemStack, target, world.rand.randomInt(!fortune), false)
+                        breakBlock(world, player, EnumFacing.UP, itemStack, target, world.rand.randomInt(!fortune), false)
                         val blockState = world.getBlockState(target)
                         breakSound = blockState.block.getSoundType(blockState, world, target, player).breakSound
                         count++

@@ -17,12 +17,16 @@ import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.randomInt
 import mirrg.kotlin.hydrogen.max
 import net.minecraft.entity.Entity
+import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
+import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.SoundCategory
 import net.minecraft.util.SoundEvent
+import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
@@ -222,3 +226,22 @@ fun spawnParticle(world: World, position: Vec3d, color: Int) = world.spawnPartic
     ((color shr 8) and 0xFF) / 255.0,
     ((color shr 0) and 0xFF) / 255.0
 )
+
+
+fun breakBlock(world: World, player: EntityPlayer, facing: EnumFacing, itemStack: ItemStack, blockPos: BlockPos, fortune: Int, collection: Boolean): Boolean {
+    if (!world.isBlockModifiable(player, blockPos)) return false
+    if (!player.canPlayerEdit(blockPos, facing, itemStack)) return false
+
+    val blockState = world.getBlockState(blockPos)
+    val block = blockState.block
+    block.dropBlockAsItem(world, blockPos, blockState, fortune)
+    world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3)
+    if (collection) {
+        world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPos)).forEach { entityItem ->
+            entityItem.setPosition(player.posX, player.posY, player.posZ)
+            entityItem.setNoPickupDelay()
+        }
+    }
+
+    return true
+}

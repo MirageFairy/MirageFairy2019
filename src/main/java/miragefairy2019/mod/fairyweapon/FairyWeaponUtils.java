@@ -45,24 +45,6 @@ public class FairyWeaponUtils {
         return vec2;
     }
 
-    public static boolean breakBlock(World world, EntityPlayer player, EnumFacing facing, ItemStack itemStack, BlockPos blockPos, int fortune, boolean collection) {
-        if (!world.isBlockModifiable(player, blockPos)) return false;
-        if (!player.canPlayerEdit(blockPos, facing, itemStack)) return false;
-
-        IBlockState blockState = world.getBlockState(blockPos);
-        Block block = blockState.getBlock();
-        block.dropBlockAsItem(world, blockPos, blockState, fortune);
-        world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-        if (collection) {
-            for (EntityItem entityItem : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(blockPos))) {
-                entityItem.setPosition(player.posX, player.posY, player.posZ);
-                entityItem.setNoPickupDelay();
-            }
-        }
-
-        return true;
-    }
-
     @Nullable
     public static RayTraceResult rayTrace(World world, EntityPlayer player, boolean useLiquids, double additionalReach) {
         return rayTrace(world, player, useLiquids, additionalReach, Entity.class, e -> true);

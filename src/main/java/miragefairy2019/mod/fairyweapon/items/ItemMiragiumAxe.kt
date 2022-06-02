@@ -3,6 +3,7 @@ package miragefairy2019.mod.fairyweapon.items
 import miragefairy2019.libkt.norm1
 import miragefairy2019.mod.fairyweapon.MagicSelectorRayTrace
 import miragefairy2019.mod.fairyweapon.magic4.status
+import miragefairy2019.mod.fairyweapon.breakBlock
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.boolean
@@ -13,7 +14,6 @@ import miragefairy2019.mod.fairyweapon.magic4.percent0
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.positive
 import miragefairy2019.mod.fairyweapon.magic4.world
-import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.extendSearch
 import miragefairy2019.mod.fairyweapon.search
@@ -124,7 +124,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
                         nextCoolTime += 20.0 * powerCost / breakSpeed() / speedBoost() // クールタイム加算
 
                         // 破壊
-                        FairyWeaponUtils.breakBlock(
+                        breakBlock(
                             world,
                             player,
                             magicSelectorRayTrace.rayTraceResult!!.sideHit,
