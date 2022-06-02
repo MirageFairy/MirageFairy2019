@@ -159,7 +159,7 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
                     if (fairy == null) {
                         UtilKt.spawnParticle(
                             world,
-                            FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
+                            UtilKt.getSight(player, 0),
                             0xFF00FF);
                         return;
                     }
@@ -169,7 +169,7 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
                     if (itemStackTorch == null) {
                         UtilKt.spawnParticle(
                             world,
-                            FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
+                            UtilKt.getSight(player, 0),
                             0xFF00FF);
                         return;
                     }
@@ -184,7 +184,7 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
                     if (rayTraceResult == null) {
                         UtilKt.spawnParticle(
                             world,
-                            FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach),
+                            UtilKt.getSight(player, status.additionalReach),
                             itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }

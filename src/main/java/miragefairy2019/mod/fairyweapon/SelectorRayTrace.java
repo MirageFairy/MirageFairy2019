@@ -36,7 +36,7 @@ public class SelectorRayTrace {
                 ? oRayTraceResult.get().getBlockPos()
                 : new BlockPos(this.position);
         } else {
-            this.position = getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + additionalReach);
+            this.position = UtilKt.getSight(player, additionalReach);
             this.blockPos = new BlockPos(this.position);
         }
     }
@@ -173,23 +173,6 @@ public class SelectorRayTrace {
         } else {
             return null;
         }
-    }
-
-    private static Vec3d getSight(EntityPlayer player, double distance) {
-        float rotationPitch = player.rotationPitch;
-        float rotationYaw = player.rotationYaw;
-        double x = player.posX;
-        double y = player.posY + (double) player.getEyeHeight();
-        double z = player.posZ;
-        Vec3d vec1 = new Vec3d(x, y, z);
-        float f2 = MathHelper.cos(-rotationYaw * 0.017453292F - (float) Math.PI);
-        float f3 = MathHelper.sin(-rotationYaw * 0.017453292F - (float) Math.PI);
-        float f4 = -MathHelper.cos(-rotationPitch * 0.017453292F);
-        float f5 = MathHelper.sin(-rotationPitch * 0.017453292F);
-        float f6 = f3 * f4;
-        float f7 = f2 * f4;
-        Vec3d vec2 = vec1.addVector((double) f6 * distance, (double) f5 * distance, (double) f7 * distance);
-        return vec2;
     }
 
 }

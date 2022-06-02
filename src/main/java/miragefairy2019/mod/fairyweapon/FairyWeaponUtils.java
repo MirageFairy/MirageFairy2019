@@ -3,14 +3,8 @@ package miragefairy2019.mod.fairyweapon;
 import com.google.common.base.Predicate;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -26,24 +20,6 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class FairyWeaponUtils {
-
-    @Nonnull
-    public static Vec3d getSight(EntityPlayer player, double distance) {
-        float rotationPitch = player.rotationPitch;
-        float rotationYaw = player.rotationYaw;
-        double x = player.posX;
-        double y = player.posY + (double) player.getEyeHeight();
-        double z = player.posZ;
-        Vec3d vec1 = new Vec3d(x, y, z);
-        float f2 = MathHelper.cos(-rotationYaw * 0.017453292F - (float) Math.PI);
-        float f3 = MathHelper.sin(-rotationYaw * 0.017453292F - (float) Math.PI);
-        float f4 = -MathHelper.cos(-rotationPitch * 0.017453292F);
-        float f5 = MathHelper.sin(-rotationPitch * 0.017453292F);
-        float f6 = f3 * f4;
-        float f7 = f2 * f4;
-        Vec3d vec2 = vec1.addVector((double) f6 * distance, (double) f5 * distance, (double) f7 * distance);
-        return vec2;
-    }
 
     @Nullable
     public static RayTraceResult rayTrace(World world, EntityPlayer player, boolean useLiquids, double additionalReach) {

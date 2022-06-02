@@ -117,36 +117,4 @@ public class MagicSelectorUtils {
         }
     }
 
-    /**
-     * ブロックやエンティティがあるかに関わらず、視線の先の座標を返します。
-     */
-    @Nonnull
-    public static Vec3d getSight(EntityLivingBase entityLivingBase, double distance) {
-
-        // 最大距離
-        double d = entityLivingBase.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + distance;
-
-        // 起点
-        float rotationPitch = entityLivingBase.rotationPitch;
-        float rotationYaw = entityLivingBase.rotationYaw;
-        double x = entityLivingBase.posX;
-        double y = entityLivingBase.posY + (double) entityLivingBase.getEyeHeight();
-        double z = entityLivingBase.posZ;
-
-        float k = (float) Math.PI / 180.0F;
-        float f2 = MathHelper.cos(-rotationYaw * k - (float) Math.PI);
-        float f3 = MathHelper.sin(-rotationYaw * k - (float) Math.PI);
-        float f4 = -MathHelper.cos(-rotationPitch * k);
-
-        // 視線ベクトル
-        float x2 = f3 * f4;
-        float y2 = MathHelper.sin(-rotationPitch * k);
-        float z2 = f2 * f4;
-
-        // 終点
-        Vec3d vec2 = new Vec3d(x, y, z).addVector((double) x2 * d, (double) y2 * d, (double) z2 * d);
-
-        return vec2;
-    }
-
 }

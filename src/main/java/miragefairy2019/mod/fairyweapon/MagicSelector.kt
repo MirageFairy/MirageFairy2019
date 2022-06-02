@@ -2,7 +2,7 @@ package miragefairy2019.mod.fairyweapon
 
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange
 import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityLivingBase
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.RayTraceResult
 import net.minecraft.util.math.Vec3d
@@ -46,15 +46,15 @@ class MagicSelectorSphere(world: World, val position: Vec3d, val radius: Double)
  */
 class MagicSelectorRayTrace private constructor(world: World, val rayTraceResult: RayTraceResult?, val position: Vec3d) : MagicSelector(world) {
     companion object {
-        fun createIgnoreEntity(world: World, entityLivingBase: EntityLivingBase, additionalReach: Double): MagicSelectorRayTrace {
-            val rayTraceResult = MagicSelectorUtils.rayTrace(world, entityLivingBase, false, additionalReach)
-            val position = rayTraceResult?.hitVec ?: MagicSelectorUtils.getSight(entityLivingBase, additionalReach)
+        fun createIgnoreEntity(world: World, player: EntityPlayer, additionalReach: Double): MagicSelectorRayTrace {
+            val rayTraceResult = MagicSelectorUtils.rayTrace(world, player, false, additionalReach)
+            val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
             return MagicSelectorRayTrace(world, rayTraceResult, position)
         }
 
-        fun <E : Entity> createWith(world: World, entityLivingBase: EntityLivingBase, additionalReach: Double, classEntity: Class<E>, filterEntity: (E) -> Boolean): MagicSelectorRayTrace {
-            val rayTraceResult = MagicSelectorUtils.rayTrace<E>(world, entityLivingBase, false, additionalReach, classEntity) { filterEntity(it!!) }
-            val position = rayTraceResult?.hitVec ?: MagicSelectorUtils.getSight(entityLivingBase, additionalReach)
+        fun <E : Entity> createWith(world: World, player: EntityPlayer, additionalReach: Double, classEntity: Class<E>, filterEntity: (E) -> Boolean): MagicSelectorRayTrace {
+            val rayTraceResult = MagicSelectorUtils.rayTrace<E>(world, player, false, additionalReach, classEntity) { filterEntity(it!!) }
+            val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
             return MagicSelectorRayTrace(world, rayTraceResult, position)
         }
     }

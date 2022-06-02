@@ -7,7 +7,6 @@ import miragefairy2019.lib.ErgKt;
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.mod.Main;
 import miragefairy2019.mod.fairyweapon.UtilKt;
-import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -130,7 +129,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
         // 妖精取得
         Pair<ItemStack, IFairyType> fairy = UtilKt.findFairy(itemStack, player);
         if (fairy == null) {
-            return new Result(EnumExecutability.NO_FAIRY, FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()));
+            return new Result(EnumExecutability.NO_FAIRY, UtilKt.getSight(player, 0));
         }
 
         // ステータスを評価
@@ -140,7 +139,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
         RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach);
         Vec3d positionTarget = rayTraceResult != null
             ? rayTraceResult.hitVec
-            : FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach);
+            : UtilKt.getSight(player, status.additionalReach);
 
         // 対象を取得
         List<EntityItem> entityTargets = UtilKt.getEntities(EntityItem.class, world, positionTarget, status.radius);

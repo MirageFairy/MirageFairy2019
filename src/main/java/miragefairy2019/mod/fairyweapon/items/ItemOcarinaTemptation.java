@@ -137,7 +137,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
             RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, 0);
             Vec3d positionTarget = rayTraceResult != null
                 ? rayTraceResult.hitVec
-                : FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
+                : UtilKt.getSight(player, 0);
             return new Result(
                 EnumExecutability.NO_FAIRY,
                 positionTarget);
@@ -150,7 +150,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
         RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, 0, EntityVillager.class, e -> true);
         Vec3d positionTarget = rayTraceResult != null
             ? rayTraceResult.hitVec
-            : FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
+            : UtilKt.getSight(player, 0);
         boolean isEntity;
         List<EntityVillager> targetEntities;
         if (rayTraceResult != null && rayTraceResult.typeOfHit == Type.ENTITY && rayTraceResult.entityHit instanceof EntityVillager) {
