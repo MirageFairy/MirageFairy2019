@@ -157,7 +157,7 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
                     // 妖精がない場合はマゼンタ
                     Pair<ItemStack, IFairyType> fairy = UtilKt.findFairy(itemStack, player);
                     if (fairy == null) {
-                        FairyWeaponUtils.spawnParticle(
+                        UtilKt.spawnParticle(
                             world,
                             FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
                             0xFF00FF);
@@ -167,7 +167,7 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
                     // 松明検索
                     ItemStack itemStackTorch = findTorch(player).orElse(null);
                     if (itemStackTorch == null) {
-                        FairyWeaponUtils.spawnParticle(
+                        UtilKt.spawnParticle(
                             world,
                             FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()),
                             0xFF00FF);
@@ -182,21 +182,21 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
                     // クールタイムの場合は黄色
                     RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach);
                     if (rayTraceResult == null) {
-                        FairyWeaponUtils.spawnParticle(
+                        UtilKt.spawnParticle(
                             world,
                             FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach),
                             itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }
                     if (!canExecute(world, rayTraceResult)) {
-                        FairyWeaponUtils.spawnParticle(
+                        UtilKt.spawnParticle(
                             world,
                             rayTraceResult.hitVec,
                             itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }
 
-                    FairyWeaponUtils.spawnParticle(
+                    UtilKt.spawnParticle(
                         world,
                         rayTraceResult.hitVec,
                         itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0xFFFF00 : 0xFFFFFF);

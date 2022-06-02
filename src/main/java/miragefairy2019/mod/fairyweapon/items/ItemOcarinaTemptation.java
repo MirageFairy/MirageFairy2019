@@ -289,7 +289,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
         //
 
         // 発動中心点にパーティクルを表示
-        FairyWeaponUtils.spawnParticle(world, result.positionTarget, result.executability.color);
+        UtilKt.spawnParticle(world, result.positionTarget, result.executability.color);
 
         if (result instanceof ResultWithFairy && result.executability.health >= EnumExecutability.NO_TARGET.health) {
             ResultWithFairy resultWithFairy = (ResultWithFairy) result;

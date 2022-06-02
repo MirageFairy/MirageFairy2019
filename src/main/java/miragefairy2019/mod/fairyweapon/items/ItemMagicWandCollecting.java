@@ -233,7 +233,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
         Result result = getExecutability(world, itemStack, player);
 
         // 発動中心点にパーティクルを表示
-        FairyWeaponUtils.spawnParticle(
+        UtilKt.spawnParticle(
             world,
             result.positionTarget,
             result.executability.color);

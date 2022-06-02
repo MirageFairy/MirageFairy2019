@@ -139,17 +139,6 @@ public class FairyWeaponUtils {
         }
     }
 
-    public static void spawnParticle(World world, Vec3d sight, int color) {
-        world.spawnParticle(
-            EnumParticleTypes.SPELL_MOB,
-            sight.x,
-            sight.y,
-            sight.z,
-            ((color >> 16) & 0xFF) / 255.0,
-            ((color >> 8) & 0xFF) / 255.0,
-            ((color >> 0) & 0xFF) / 255.0);
-    }
-
     public static <E extends Entity> List<E> getEntities(Class<? extends E> classEntity, World world, Vec3d positionCenter, double radius) {
         return world.getEntitiesWithinAABB(classEntity, new AxisAlignedBB(
                 positionCenter.x - radius,
