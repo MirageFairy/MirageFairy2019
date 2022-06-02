@@ -79,6 +79,8 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
 
     override fun getDropItemStacks() = listOf(fairyInventory, inputInventory, resultInventory, outputInventory).map { it.itemStacks }.flatten()
 
+    // TODO override fun getSidedInventoryHandler
+
 
     // Tree
 
