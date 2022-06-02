@@ -1,9 +1,10 @@
 package miragefairy2019.mod.fairyweapon.items;
 
+import kotlin.Pair;
 import miragefairy2019.api.IFairyType;
-import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.mod.Main;
-import mirrg.boron.util.struct.Tuple;
+import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
+import miragefairy2019.mod.fairyweapon.UtilKt;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -65,11 +66,11 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
         if (world.isRemote) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
         // 妖精を取得
-        Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
+        Pair<ItemStack, IFairyType> fairy = UtilKt.findFairy(itemStack, player);
         if (fairy == null) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
         // ステータスを評価
-        Status status = new Status(fairy.y);
+        Status status = new Status(fairy.getSecond());
 
         // 松明検索
         ItemStack itemStackTorch = findTorch(player).orElse(null);
@@ -154,7 +155,7 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
                 if (Main.side.isClient()) {
 
                     // 妖精がない場合はマゼンタ
-                    Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
+                    Pair<ItemStack, IFairyType> fairy = UtilKt.findFairy(itemStack, player);
                     if (fairy == null) {
                         FairyWeaponUtils.spawnParticle(
                             world,
@@ -174,7 +175,7 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
                     }
 
                     // ステータスを評価
-                    Status status = new Status(fairy.y);
+                    Status status = new Status(fairy.getSecond());
 
                     // 耐久がない場合は赤
                     // 対象が発動対象でない場合は緑

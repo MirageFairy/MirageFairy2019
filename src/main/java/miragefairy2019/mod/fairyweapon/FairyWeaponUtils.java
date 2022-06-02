@@ -1,8 +1,6 @@
 package miragefairy2019.mod.fairyweapon;
 
 import com.google.common.base.Predicate;
-import miragefairy2019.api.IFairyItem;
-import miragefairy2019.api.IFairyType;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
 import net.minecraft.block.Block;
@@ -11,10 +9,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -30,51 +26,6 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class FairyWeaponUtils {
-
-    @Deprecated // TODO -> findFairy(ItemStack, Player)
-    @Nonnull
-    public static Optional<Tuple<ItemStack, IFairyType>> findFairy(ItemStack itemStack, EntityPlayer player) {
-
-        // 搭乗中の妖精を優先
-        {
-            ItemStack itemStackFairy = UtilKt.getCombinedFairy(itemStack);
-            if (getFairy(itemStackFairy).isPresent()) {
-                return Optional.of(Tuple.of(itemStackFairy, getFairy(itemStackFairy).get()));
-            }
-        }
-
-        return findItemOptional(player, itemStackFairy -> getFairy(itemStackFairy).isPresent())
-            .map(itemStackFairy -> Tuple.of(itemStackFairy, getFairy(itemStackFairy).get()));
-    }
-
-    @Deprecated // TODO -> findItem(EntityPlayer, (ItemStack) -> Boolean)
-    @Nonnull
-    public static Optional<ItemStack> findItemOptional(EntityPlayer player, Predicate<ItemStack> predicate) {
-        ItemStack itemStack;
-
-        itemStack = player.getHeldItem(EnumHand.OFF_HAND);
-        if (predicate.test(itemStack)) return Optional.of(itemStack);
-
-        itemStack = player.getHeldItem(EnumHand.MAIN_HAND);
-        if (predicate.test(itemStack)) return Optional.of(itemStack);
-
-        for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-
-            itemStack = player.inventory.getStackInSlot(i);
-            if (predicate.test(itemStack)) return Optional.of(itemStack);
-
-        }
-
-        return Optional.empty();
-    }
-
-    @Deprecated // TODO -> ItemStack.fairyType
-    @Nonnull
-    public static Optional<IFairyType> getFairy(ItemStack itemStack) {
-        Item item = itemStack.getItem();
-        if (!(item instanceof IFairyItem)) return Optional.empty();
-        return Optional.ofNullable(((IFairyItem) item).getMirageFairy(itemStack));
-    }
 
     @Nonnull
     public static Vec3d getSight(EntityPlayer player, double distance) {

@@ -1,10 +1,12 @@
 package miragefairy2019.mod.fairyweapon.items;
 
+import kotlin.Pair;
 import miragefairy2019.api.Erg;
 import miragefairy2019.api.IFairyType;
 import miragefairy2019.lib.ErgKt;
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.mod.Main;
+import miragefairy2019.mod.fairyweapon.UtilKt;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -127,13 +129,13 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
     private Result getExecutability(World world, ItemStack itemStack, EntityPlayer player) {
 
         // 妖精取得
-        Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
+        Pair<ItemStack, IFairyType> fairy = UtilKt.findFairy(itemStack, player);
         if (fairy == null) {
             return new Result(EnumExecutability.NO_FAIRY, FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue()));
         }
 
         // ステータスを評価
-        Status status = new Status(fairy.y);
+        Status status = new Status(fairy.getSecond());
 
         // 発動座標
         RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach);

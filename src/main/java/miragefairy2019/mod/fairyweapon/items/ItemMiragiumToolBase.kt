@@ -9,9 +9,9 @@ import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.fairyweapon.IMagicHandler
 import miragefairy2019.mod.fairyweapon.SelectorRayTrace
 import miragefairy2019.mod.fairyweapon.UtilsMagic
+import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.positive
 import miragefairy2019.mod.skill.IMastery
-import mirrg.kotlin.java.hydrogen.orNull
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
@@ -49,7 +49,7 @@ abstract class ItemMiragiumToolBase(
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでブロックを破壊" // TODO translate
 
     override val magic = magic {
-        val fairyType = FairyWeaponUtils.findFairy(itemStack, player).orNull?.let { it.y!! } ?: EMPTY_FAIRY // 妖精取得
+        val fairyType = findFairy(itemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
         val selectorRayTrace = SelectorRayTrace(world, player, 0.0) // 視線判定
         if (fairyType.isEmpty) return@magic fail(selectorRayTrace.position, 0xFF00FF) // 妖精なし判定
         if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic fail(selectorRayTrace.position, 0xFF0000) // 材料なし判定

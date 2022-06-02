@@ -1,10 +1,12 @@
 package miragefairy2019.mod.fairyweapon.items;
 
+import kotlin.Pair;
 import miragefairy2019.api.Erg;
 import miragefairy2019.api.IFairyType;
 import miragefairy2019.lib.ErgKt;
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.mod.Main;
+import miragefairy2019.mod.fairyweapon.UtilKt;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
 import mirrg.boron.util.suppliterator.ISuppliterator;
@@ -131,7 +133,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
     private Result getExecutability(World world, ItemStack itemStack, EntityPlayer player) {
 
         // 妖精取得
-        Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
+        Pair<ItemStack, IFairyType> fairy = UtilKt.findFairy(itemStack, player);
         if (fairy == null) {
             RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, 0);
             Vec3d positionTarget = rayTraceResult != null
@@ -143,7 +145,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
         }
 
         // ステータスを評価
-        Status status = new Status(fairy.y);
+        Status status = new Status(fairy.getSecond());
 
         // 発動対象
         RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, 0, EntityVillager.class, e -> true);

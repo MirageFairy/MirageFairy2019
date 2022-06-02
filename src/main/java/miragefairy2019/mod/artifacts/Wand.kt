@@ -30,6 +30,7 @@ import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
+import miragefairy2019.mod.fairyweapon.findItem
 import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.EnumMastery
 import miragefairy2019.mod.skill.displayName
@@ -407,7 +408,7 @@ class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWand() {
     private fun tryUseCrystal(player: EntityPlayer): Boolean {
 
         // 妖晶を得る
-        val itemStackFairyCrystal = FairyWeaponUtils.findItemOptional(player) { itemStack -> itemStack!!.item is ItemFairyCrystal }.orElse(null) ?: return false // クリスタルを持ってない場合は無視
+        val itemStackFairyCrystal = findItem(player) { itemStack -> itemStack.item is ItemFairyCrystal } ?: return false // クリスタルを持ってない場合は無視
         val variantFairyCrystal = (itemStackFairyCrystal.item as ItemFairyCrystal).getVariant(itemStackFairyCrystal) ?: return false // 異常なクリスタルを持っている場合は無視
 
         // プレイヤー視点判定

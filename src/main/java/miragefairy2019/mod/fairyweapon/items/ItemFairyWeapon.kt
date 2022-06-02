@@ -24,10 +24,9 @@ import miragefairy2019.libkt.red
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
+import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.getCombinedFairy
 import miragefairy2019.mod.fairyweapon.setCombinedFairy
-import mirrg.kotlin.java.hydrogen.orNull
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
@@ -102,7 +101,7 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
         getCombinedFairy(itemStack).orNull?.let { tooltip += formattedText { "搭乗中: ${it.displayName}"().aqua } } // 搭乗中の妖精 // TODO translate
 
         // 妖精魔法ステータス
-        val fairy = Minecraft.getMinecraft().player?.let { FairyWeaponUtils.findFairy(itemStack, it).orNull?.let { t -> Pair(t.x!!, t.y!!) } } ?: Pair(EMPTY_ITEM_STACK, EMPTY_FAIRY)
+        val fairy = Minecraft.getMinecraft().player?.let { findFairy(itemStack, it) } ?: Pair(EMPTY_ITEM_STACK, EMPTY_FAIRY)
         tooltip += formattedText { ("パートナー: "() + (if (fairy.first.isEmpty) "-"() else fairy.first.displayName()).white).blue } // TODO translate
         tooltip += NonNullList.create<String>().also { addInformationFairyWeapon(itemStack, fairy.first, fairy.second, world, it, flag) }
 

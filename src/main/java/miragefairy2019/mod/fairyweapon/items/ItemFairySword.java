@@ -1,6 +1,7 @@
 package miragefairy2019.mod.fairyweapon.items;
 
 import com.google.common.collect.Multimap;
+import kotlin.Pair;
 import miragefairy2019.api.IFairyType;
 import miragefairy2019.lib.ManaKt;
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
@@ -76,9 +77,9 @@ public class ItemFairySword extends ItemFairyWeapon {
         if (!(entity instanceof EntityLivingBase)) return;
         EntityPlayer player = (EntityPlayer) entity;
 
-        Tuple<ItemStack, IFairyType> fairy = FairyWeaponUtils.findFairy(itemStack, player).orElse(null);
+        Pair<ItemStack, IFairyType> fairy = UtilKt.findFairy(itemStack, player);
         if (fairy != null) {
-            Status status = new Status(fairy.y);
+            Status status = new Status(fairy.getSecond());
             setAdditionalAttackDamage(itemStack, status.additionalAttackDamage);
             setAdditionalAttackSpeed(itemStack, status.additionalAttackSpeed);
         } else {
