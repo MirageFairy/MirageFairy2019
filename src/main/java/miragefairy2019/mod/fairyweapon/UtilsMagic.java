@@ -89,7 +89,7 @@ public class UtilsMagic {
     }
 
     public static void spawnParticleTarget(World world, Vec3d position, EnumTargetExecutability targetExecutability) {
-        spawnParticle(world, position, targetExecutability.color);
+        spawnParticle(world, position, targetExecutability.getColor());
     }
 
     public static void spawnParticle(World world, Vec3d position, int color) {
