@@ -6,11 +6,11 @@ import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
-import miragefairy2019.mod.fairyweapon.IMagicHandler
+import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
 import miragefairy2019.mod.fairyweapon.SelectorRayTrace
 import miragefairy2019.mod.fairyweapon.UtilsMagic
 import miragefairy2019.mod.fairyweapon.findFairy
-import miragefairy2019.mod.fairyweapon.positive
+import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.skill.IMastery
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack

@@ -1,4 +1,4 @@
-package miragefairy2019.mod.fairyweapon;
+package miragefairy2019.mod.fairyweapon.deprecated;
 
 import miragefairy2019.api.Erg;
 import miragefairy2019.api.Mana;

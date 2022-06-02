@@ -11,10 +11,10 @@ import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponBase3.Companion.Enum
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.artifacts.MirageFlower
-import miragefairy2019.mod.fairyweapon.IMagicHandler
-import miragefairy2019.mod.fairyweapon.negative
-import miragefairy2019.mod.fairyweapon.positive
-import miragefairy2019.mod.fairyweapon.positiveBoolean
+import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
+import miragefairy2019.mod.fairyweapon.deprecated.negative
+import miragefairy2019.mod.fairyweapon.deprecated.positive
+import miragefairy2019.mod.fairyweapon.deprecated.positiveBoolean
 import miragefairy2019.mod.skill.EnumMastery
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.hydrogen.atMost

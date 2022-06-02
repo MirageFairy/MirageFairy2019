@@ -1,4 +1,4 @@
-package miragefairy2019.mod.fairyweapon;
+package miragefairy2019.mod.fairyweapon.deprecated;
 
 import net.minecraft.util.text.ITextComponent;
 

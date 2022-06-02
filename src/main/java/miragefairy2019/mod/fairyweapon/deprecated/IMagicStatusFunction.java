@@ -1,4 +1,4 @@
-package miragefairy2019.mod.fairyweapon;
+package miragefairy2019.mod.fairyweapon.deprecated;
 
 public interface IMagicStatusFunction<T> {
 
