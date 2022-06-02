@@ -30,7 +30,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static miragefairy2019.mod.fairyweapon.FairyWeaponUtils.getEntities;
 import static miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange;
 import static miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleTargets;
 
@@ -144,7 +143,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
             : FairyWeaponUtils.getSight(player, player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + status.additionalReach);
 
         // 対象を取得
-        List<EntityItem> entityTargets = getEntities(EntityItem.class, world, positionTarget, status.radius);
+        List<EntityItem> entityTargets = UtilKt.getEntities(EntityItem.class, world, positionTarget, status.radius);
 
         // 実行可能性を計算
         EnumExecutability executability = itemStack.getItemDamage() >= itemStack.getMaxDamage()

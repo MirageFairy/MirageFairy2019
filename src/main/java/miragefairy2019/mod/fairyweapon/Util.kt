@@ -245,3 +245,20 @@ fun breakBlock(world: World, player: EntityPlayer, facing: EnumFacing, itemStack
 
     return true
 }
+
+fun <E : Entity> getEntities(classEntity: Class<E>, world: World, positionCenter: Vec3d, radius: Double): List<E> {
+    return world.getEntitiesWithinAABB(
+        classEntity, AxisAlignedBB(
+            positionCenter.x - radius,
+            positionCenter.y - radius,
+            positionCenter.z - radius,
+            positionCenter.x + radius,
+            positionCenter.y + radius,
+            positionCenter.z + radius
+        )
+    ) { e ->
+        if (e == null) return@getEntitiesWithinAABB false
+        if (e.getDistanceSq(positionCenter.x, positionCenter.y, positionCenter.z) > radius * radius) return@getEntitiesWithinAABB false
+        true
+    }
+}

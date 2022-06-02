@@ -35,7 +35,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static miragefairy2019.mod.fairyweapon.FairyWeaponUtils.getEntities;
 import static miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange;
 import static miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleTargets;
 
@@ -164,7 +163,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
             // 範囲
 
             isEntity = false;
-            targetEntities = getEntities(EntityVillager.class, world, player.getPositionVector(), status.radius);
+            targetEntities = UtilKt.getEntities(EntityVillager.class, world, player.getPositionVector(), status.radius);
 
         }
         List<Tuple<EntityVillager, Boolean>> targets = ISuppliterator.ofIterable(targetEntities)

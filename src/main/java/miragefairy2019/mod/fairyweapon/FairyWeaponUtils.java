@@ -121,20 +121,6 @@ public class FairyWeaponUtils {
         }
     }
 
-    public static <E extends Entity> List<E> getEntities(Class<? extends E> classEntity, World world, Vec3d positionCenter, double radius) {
-        return world.getEntitiesWithinAABB(classEntity, new AxisAlignedBB(
-                positionCenter.x - radius,
-                positionCenter.y - radius,
-                positionCenter.z - radius,
-                positionCenter.x + radius,
-                positionCenter.y + radius,
-                positionCenter.z + radius),
-            e -> {
-                if (e.getDistanceSq(positionCenter.x, positionCenter.y, positionCenter.z) > radius * radius) return false;
-                return true;
-            });
-    }
-
     private static double rotateY = 0;
 
     public static void spawnParticleSphericalRange(World world, Vec3d positionCenter, double radius) {
