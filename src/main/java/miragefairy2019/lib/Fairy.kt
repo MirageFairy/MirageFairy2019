@@ -21,7 +21,7 @@ val EMPTY_FAIRY = object : IFairyType {
     override fun getErgSet() = ErgSet.ZERO
 }
 
-val ItemStack.fairyType get() = item.castOrNull<IFairyItem>()?.getMirageFairy(this)
+val ItemStack.fairyType get() = this.item.castOrNull<IFairyItem>()?.getMirageFairy(this)
 
 fun IFairyType.mana(mana: Mana) = manaSet[mana]
 fun IFairyType.erg(erg: Erg) = ergSet[erg]
