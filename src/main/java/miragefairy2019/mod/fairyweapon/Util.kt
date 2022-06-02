@@ -189,6 +189,7 @@ fun extendSearch(range: Int, visited: MutableList<BlockPos>, zero: List<BlockPos
     return result
 }
 
+// TODO var
 fun getFairyAttribute(attributeName: String, itemStack: ItemStack) = itemStack.nbtProvider["Fairy"][attributeName].double ?: 0.0
 fun setFairyAttribute(attributeName: String, itemStack: ItemStack, value: Double) = itemStack.nbtProvider["Fairy"][attributeName].setDouble(value)
 fun getCombinedFairy(itemStack: ItemStack) = itemStack.nbtProvider["Fairy"]["CombinedFairy"].compound?.toItemStack() ?: EMPTY_ITEM_STACK // TODO 戻り型
