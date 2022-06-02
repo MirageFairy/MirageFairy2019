@@ -50,7 +50,7 @@ public class FairyWeaponUtils {
         Vec3d vec3d1 = vec3d.addVector((double) f6 * d3, (double) f5 * d3, (double) f7 * d3);
 
         // ブロックのレイトレース
-        RayTraceResult rayTraceResultBlock = world.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
+        RayTraceResult rayTraceResultBlock = rayTraceIgnoreEntity(world, player, useLiquids, additionalReach);
         double squareDistanceBlock = rayTraceResultBlock != null
             ? vec3d.squareDistanceTo(rayTraceResultBlock.hitVec)
             : 0;
@@ -95,6 +95,33 @@ public class FairyWeaponUtils {
         } else {
             return null;
         }
+    }
+
+    @Nullable
+    public static RayTraceResult rayTraceIgnoreEntity(
+        World world,
+        EntityPlayer player,
+        boolean useLiquids,
+        double additionalReach) {
+        float rotationPitch = player.rotationPitch;
+        float rotationYaw = player.rotationYaw;
+        double x = player.posX;
+        double y = player.posY + (double) player.getEyeHeight();
+        double z = player.posZ;
+        Vec3d vec3d = new Vec3d(x, y, z);
+        float f2 = MathHelper.cos(-rotationYaw * 0.017453292F - (float) Math.PI);
+        float f3 = MathHelper.sin(-rotationYaw * 0.017453292F - (float) Math.PI);
+        float f4 = -MathHelper.cos(-rotationPitch * 0.017453292F);
+        float f5 = MathHelper.sin(-rotationPitch * 0.017453292F);
+        float f6 = f3 * f4;
+        float f7 = f2 * f4;
+        double d3 = player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + additionalReach;
+        Vec3d vec3d1 = vec3d.addVector((double) f6 * d3, (double) f5 * d3, (double) f7 * d3);
+
+        // ブロックのレイトレース
+        RayTraceResult rayTraceResultBlock = world.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
+
+        return rayTraceResultBlock;
     }
 
     private static double rotateY = 0;

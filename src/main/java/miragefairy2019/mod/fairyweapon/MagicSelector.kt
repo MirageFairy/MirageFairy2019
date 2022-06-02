@@ -47,7 +47,7 @@ class MagicSelectorSphere(world: World, val position: Vec3d, val radius: Double)
 class MagicSelectorRayTrace private constructor(world: World, val rayTraceResult: RayTraceResult?, val position: Vec3d) : MagicSelector(world) {
     companion object {
         fun createIgnoreEntity(world: World, player: EntityPlayer, additionalReach: Double): MagicSelectorRayTrace {
-            val rayTraceResult = MagicSelectorUtils.rayTrace(world, player, false, additionalReach)
+            val rayTraceResult = FairyWeaponUtils.rayTraceIgnoreEntity(world, player, false, additionalReach)
             val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
             return MagicSelectorRayTrace(world, rayTraceResult, position)
         }
