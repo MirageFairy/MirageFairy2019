@@ -157,37 +157,4 @@ public class FairyWeaponUtils {
 
     }
 
-    public static <T> void spawnParticleTargets(World world, Iterable<? extends T> targets, java.util.function.Predicate<? super T> filter, Function<? super T, ? extends Vec3d> fPosition, int maxCount) {
-        List<? extends T> listTargets = ISuppliterator.ofIterable(targets)
-            .toList();
-        double rate = 5 / (double) Math.max(listTargets.size(), 5);
-        for (T target : listTargets) {
-
-            int color;
-            if (filter.test(target)) {
-                if (maxCount > 0) {
-                    maxCount--;
-                    color = 0xFFFFFF;
-                } else {
-                    color = 0x00FFFF;
-                }
-            } else {
-                color = 0xFF0000;
-            }
-
-            if (Math.random() < 0.2 * rate) {
-                Vec3d position = fPosition.apply(target);
-                world.spawnParticle(
-                    EnumParticleTypes.SPELL_MOB,
-                    position.x,
-                    position.y,
-                    position.z,
-                    ((color >> 16) & 0xFF) / 255.0,
-                    ((color >> 8) & 0xFF) / 255.0,
-                    ((color >> 0) & 0xFF) / 255.0);
-            }
-
-        }
-    }
-
 }

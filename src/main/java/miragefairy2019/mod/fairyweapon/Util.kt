@@ -15,6 +15,7 @@ import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.randomInt
+import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.max
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityItem
@@ -37,26 +38,13 @@ fun playSound(world: World, player: EntityPlayer, soundEvent: SoundEvent, volume
     world.playSound(null, player.posX, player.posY, player.posZ, soundEvent, SoundCategory.PLAYERS, volume, pitch)
 }
 
-fun <T> spawnParticleTargets(
-    world: World,
-    targets: List<T>,
-    fPosition: (T) -> Vec3d,
-    fColor: (T) -> Int
-) {
-    val rate = 5 / targets.size.coerceAtLeast(5).toDouble()
+fun <T> spawnParticleTargets(world: World, targets: List<T>, fPosition: (T) -> Vec3d, fColor: (T) -> Int) {
+    val rate = 5 / (targets.size atLeast 5).toDouble()
     targets.forEach { target ->
         if (Math.random() < 0.2 * rate) {
             val position = fPosition(target)
             val color = fColor(target)
-            world.spawnParticle(
-                EnumParticleTypes.SPELL_MOB,
-                position.x,
-                position.y,
-                position.z,
-                (color shr 16 and 0xFF) / 255.0,
-                (color shr 8 and 0xFF) / 255.0,
-                (color shr 0 and 0xFF) / 255.0
-            )
+            spawnParticle(world, position, color)
         }
     }
 }

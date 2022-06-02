@@ -28,9 +28,9 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange;
-import static miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleTargets;
 
 public class ItemMagicWandCollecting extends ItemFairyWeapon {
 
@@ -243,12 +243,11 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
             spawnParticleSphericalRange(world, result.positionTarget, resultWithFairy.status.radius);
 
             // 対象にパーティクルを表示
-            spawnParticleTargets(
+            UtilKt.spawnParticleTargets(
                 world,
-                resultWithFairy.targets,
-                entityTarget -> entityTarget.getDistanceSq(player) > 0.2 * 0.2,
+                resultWithFairy.targets.stream().filter(entityTarget -> entityTarget.getDistanceSq(player) > 0.2 * 0.2).collect(Collectors.toList()),
                 entityTarget -> entityTarget.getPositionVector(),
-                resultWithFairy.status.maxTargets);
+                e -> 0xFFFFFF);
 
         }
 

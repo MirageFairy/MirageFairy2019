@@ -34,9 +34,9 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import static miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange;
-import static miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleTargets;
 
 public class ItemOcarinaTemptation extends ItemFairyWeapon {
 
@@ -302,12 +302,11 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
             }
 
             // 対象にパーティクルを表示
-            spawnParticleTargets(
+            UtilKt.spawnParticleTargets(
                 world,
-                resultWithFairy.targets,
-                target -> target.y,
+                resultWithFairy.targets.stream().filter(target -> target.y).collect(Collectors.toList()),
                 target -> target.x.getPositionVector(),
-                resultWithFairy.status.maxTargetCount);
+                e -> 0xFFFFFF);
 
         }
 
