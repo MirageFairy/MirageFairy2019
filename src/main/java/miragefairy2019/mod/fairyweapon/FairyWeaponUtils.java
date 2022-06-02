@@ -33,24 +33,6 @@ import java.util.function.Function;
 
 public class FairyWeaponUtils {
 
-    public static double getFairyAttribute(String attributeName, ItemStack itemStack) {
-        if (!itemStack.hasTagCompound()) return 0;
-        NBTTagCompound nbt = itemStack.getTagCompound();
-        if (!nbt.hasKey("Fairy", Constants.NBT.TAG_COMPOUND)) return 0;
-        NBTTagCompound fairy = nbt.getCompoundTag("Fairy");
-        if (!fairy.hasKey(attributeName, Constants.NBT.TAG_DOUBLE)) return 0;
-        return fairy.getDouble(attributeName);
-    }
-
-    public static void setFairyAttribute(String attributeName, ItemStack itemStack, double value) {
-        if (!itemStack.hasTagCompound()) itemStack.setTagCompound(new NBTTagCompound());
-        NBTTagCompound nbt = itemStack.getTagCompound();
-        if (!nbt.hasKey("Fairy", Constants.NBT.TAG_COMPOUND)) nbt.setTag("Fairy", new NBTTagCompound());
-        NBTTagCompound fairy = nbt.getCompoundTag("Fairy");
-        fairy.setDouble(attributeName, value);
-        itemStack.setTagCompound(nbt);
-    }
-
     @Nonnull
     public static ItemStack getCombinedFairy(@Nonnull ItemStack itemStack) {
         if (!itemStack.hasTagCompound()) return ItemStack.EMPTY;

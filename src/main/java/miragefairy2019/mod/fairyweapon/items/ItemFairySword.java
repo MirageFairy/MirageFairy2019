@@ -4,6 +4,7 @@ import com.google.common.collect.Multimap;
 import miragefairy2019.api.IFairyType;
 import miragefairy2019.lib.ManaKt;
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
+import miragefairy2019.mod.fairyweapon.UtilKt;
 import mirrg.boron.util.struct.Tuple;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -24,19 +25,19 @@ import javax.annotation.Nullable;
 public class ItemFairySword extends ItemFairyWeapon {
 
     public double getAdditionalAttackDamage(ItemStack itemStack) {
-        return FairyWeaponUtils.getFairyAttribute("AdditionalAttackDamage", itemStack);
+        return UtilKt.getFairyAttribute("AdditionalAttackDamage", itemStack);
     }
 
     public double getAdditionalAttackSpeed(ItemStack itemStack) {
-        return FairyWeaponUtils.getFairyAttribute("AdditionalAttackSpeed", itemStack);
+        return UtilKt.getFairyAttribute("AdditionalAttackSpeed", itemStack);
     }
 
     public void setAdditionalAttackDamage(ItemStack itemStack, double additionalAttackDamage) {
-        FairyWeaponUtils.setFairyAttribute("AdditionalAttackDamage", itemStack, additionalAttackDamage);
+        UtilKt.setFairyAttribute("AdditionalAttackDamage", itemStack, additionalAttackDamage);
     }
 
     public void setAdditionalAttackSpeed(ItemStack itemStack, double additionalAttackSpeed) {
-        FairyWeaponUtils.setFairyAttribute("AdditionalAttackSpeed", itemStack, additionalAttackSpeed);
+        UtilKt.setFairyAttribute("AdditionalAttackSpeed", itemStack, additionalAttackSpeed);
     }
 
     //

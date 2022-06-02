@@ -1,9 +1,13 @@
 package miragefairy2019.mod.fairyweapon
 
 import miragefairy2019.api.IFairyType
+import miragefairy2019.lib.double
 import miragefairy2019.lib.fairyType
-import miragefairy2019.libkt.equalsItemDamageTag
+import miragefairy2019.lib.get
 import miragefairy2019.lib.itemStacks
+import miragefairy2019.lib.nbtProvider
+import miragefairy2019.lib.setDouble
+import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.randomInt
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
@@ -175,3 +179,6 @@ fun extendSearch(range: Int, visited: MutableList<BlockPos>, zero: List<BlockPos
     }
     return result
 }
+
+fun getFairyAttribute(attributeName: String, itemStack: ItemStack) = itemStack.nbtProvider["Fairy"][attributeName].double ?: 0.0
+fun setFairyAttribute(attributeName: String, itemStack: ItemStack, value: Double) = itemStack.nbtProvider["Fairy"][attributeName].setDouble(value)
