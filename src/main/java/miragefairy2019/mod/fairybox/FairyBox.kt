@@ -1,23 +1,33 @@
 package miragefairy2019.mod.fairybox
 
+import miragefairy2019.api.Erg
+import miragefairy2019.api.FairyCentrifugeCraftRegistry
+import miragefairy2019.api.Mana
 import miragefairy2019.lib.createGui
+import miragefairy2019.lib.fairyCentrifugeCraftHandler
+import miragefairy2019.lib.process
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.block
+import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.guiHandler
+import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.module
+import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.artifacts.FairyMaterials
 import mirrg.kotlin.castOrNull
+import net.minecraft.init.Items
 import net.minecraft.item.ItemBlock
 
 object FairyBox {
@@ -88,6 +98,19 @@ object FairyBox {
                 }.guiHandler)
             }
 
+            onAddRecipe {
+
+                // 樹液16＋ガラス瓶→シロップ
+                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
+                    process("ろ過", 20.0) { !Mana.DARK + !Erg.WATER }, // TODO translate
+                    process("蒸留", 70.0) { !Mana.GAIA + !Erg.FLAME }, // TODO translate
+                    process("調味", 10.0) { !Mana.AQUA + !Erg.LIFE }, // TODO translate
+                    { FairyMaterials.itemVariants.fairySyrup.createItemStack() }, 0.5,
+                    "mirageFairyWoodResin".oreIngredient to 16,
+                    Items.GLASS_BOTTLE.ingredient to 1
+                )
+
+            }
         }
 
     }
