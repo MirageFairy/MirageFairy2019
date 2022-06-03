@@ -46,6 +46,12 @@ class MagicSelectorSphere(world: World, val position: Vec3d, val radius: Double)
  */
 class MagicSelectorRayTrace private constructor(world: World, val rayTraceResult: RayTraceResult?, val position: Vec3d) : MagicSelector(world) {
     companion object {
+        fun createAllEntities(world: World, player: EntityPlayer, additionalReach: Double): MagicSelectorRayTrace {
+            val rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, additionalReach)
+            val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
+            return MagicSelectorRayTrace(world, rayTraceResult, position)
+        }
+
         fun createIgnoreEntity(world: World, player: EntityPlayer, additionalReach: Double): MagicSelectorRayTrace {
             val rayTraceResult = FairyWeaponUtils.rayTraceIgnoreEntity(world, player, false, additionalReach)
             val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
@@ -64,4 +70,5 @@ class MagicSelectorRayTrace private constructor(world: World, val rayTraceResult
     val hitBlockPos get() = rayTraceResult?.blockPos
     val blockPos get() = hitBlockPos ?: BlockPos(position)
     val hitEntity get() = rayTraceResult?.entityHit
+    val sideHit get() = rayTraceResult?.sideHit
 }

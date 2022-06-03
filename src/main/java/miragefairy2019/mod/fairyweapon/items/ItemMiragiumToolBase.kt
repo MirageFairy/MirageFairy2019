@@ -5,7 +5,7 @@ import miragefairy2019.api.Mana
 import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
-import miragefairy2019.mod.fairyweapon.SelectorRayTrace
+import miragefairy2019.mod.fairyweapon.MagicSelectorRayTrace
 import miragefairy2019.mod.fairyweapon.breakBlock
 import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
 import miragefairy2019.mod.fairyweapon.deprecated.positive
@@ -51,10 +51,10 @@ abstract class ItemMiragiumToolBase(
 
     override val magic = magic {
         val fairyType = findFairy(itemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
-        val selectorRayTrace = SelectorRayTrace(world, player, 0.0) // 視線判定
+        val selectorRayTrace = MagicSelectorRayTrace.createAllEntities(world, player, 0.0) // 視線判定
         if (fairyType.isEmpty) return@magic fail(selectorRayTrace.position, 0xFF00FF) // 妖精なし判定
         if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic fail(selectorRayTrace.position, 0xFF0000) // 材料なし判定
-        val targets = selectorRayTrace.blockPos.let { if (selectorRayTrace.sideHit.isPresent) it.offset(selectorRayTrace.sideHit.get()) else it }.let { iterateTargets(this@magic, it) } // 対象判定
+        val targets = selectorRayTrace.blockPos.let { if (selectorRayTrace.sideHit != null) it.offset(selectorRayTrace.sideHit) else it }.let { iterateTargets(this@magic, it) } // 対象判定
         if (!targets.hasNext()) return@magic fail(selectorRayTrace.position, 0x00FFFF) // ターゲットなし判定
         if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic fail(selectorRayTrace.position, 0xFFFF00) // クールダウン判定
 
@@ -96,7 +96,7 @@ abstract class ItemMiragiumToolBase(
             }
 
             override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
-                selectorRayTrace.doEffect(0xFFFFFF)
+                spawnParticle(world, selectorRayTrace.position, 0xFFFFFF)
                 spawnParticleTargets(
                     world,
                     targets.asSequence().toList().map { Pair(Vec3d(it).addVector(0.5, 0.5, 0.5), EnumTargetExecutability.EFFECTIVE) }
