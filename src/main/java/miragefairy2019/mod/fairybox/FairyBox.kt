@@ -35,6 +35,8 @@ import net.minecraft.init.Items
 import net.minecraft.item.ItemBlock
 
 object FairyBox {
+    lateinit var blockFairyCentrifuge: () -> BlockFairyBoxBase
+    lateinit var itemBlockFairyCentrifuge: () -> ItemBlock
     val module = module {
 
         // 妖精の家（空）
@@ -79,7 +81,7 @@ object FairyBox {
 
         // 分離機
         run {
-            val block = block({ BlockFairyBoxBase { TileEntityFairyBoxCentrifuge() } }, "fairy_centrifuge") {
+            blockFairyCentrifuge = block({ BlockFairyBoxBase { TileEntityFairyBoxCentrifuge() } }, "fairy_centrifuge") {
                 setUnlocalizedName("fairyCentrifuge")
                 setCreativeTab { Main.creativeTab }
                 makeBlockStates {
@@ -90,7 +92,7 @@ object FairyBox {
                     )
                 }
             }
-            val item = item({ ItemBlock(block()) }, "fairy_centrifuge") {
+            itemBlockFairyCentrifuge = item({ ItemBlock(blockFairyCentrifuge()) }, "fairy_centrifuge") {
                 setCustomModelResourceLocation(variant = "facing=north")
             }
             onMakeLang { enJa("tile.fairyCentrifuge.name", "Fairy Centrifuge", "錬金術師グラヴィーチャの家") }
