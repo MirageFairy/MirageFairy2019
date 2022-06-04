@@ -15,4 +15,3 @@ public interface IFairyCentrifugeCraftHandler {
     public IFairyCentrifugeCraftRecipe test(@Nonnull IInventory inventory);
 
 }
-
