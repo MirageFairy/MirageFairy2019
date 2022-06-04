@@ -225,6 +225,26 @@ object FairyBox {
                     output(Items.SKULL.createItemStack(metadata = 1), 1.0)
                 }
 
+                // 砂利1＋ボウル→色々
+                fairyCentrifugeCraftHandler {
+                    process("粒度選別", 40.0) { !Mana.GAIA + !Erg.SENSE } // TODO translate
+                    process("比重選別", 40.0) { !Mana.GAIA + !Erg.WATER } // TODO translate
+                    process("乾燥", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
+                    input("gravel".oreIngredient, 1)
+                    input(Items.BOWL.ingredient, 1)
+                    input("container1000Water".oreIngredient, 1)
+                    output(Items.FLINT.createItemStack(), 0.5, 1.0) // 50% フリント
+                    output(Blocks.SAND.createItemStack(), 0.1, 1.0) // 10% 砂
+                    output(Blocks.STONE.createItemStack(metadata = 0), 0.1, 1.0) // 10% 石
+                    output(Blocks.STONE.createItemStack(metadata = 1), 0.1, 1.0) // 10% 花崗岩
+                    output(Blocks.STONE.createItemStack(metadata = 3), 0.1, 1.0) // 10% 閃緑岩
+                    output(Blocks.STONE.createItemStack(metadata = 5), 0.1, 1.0) // 10% 安山岩
+                    output(Items.CLAY_BALL.createItemStack(), 0.07, 1.0) // 7% 粘土
+                    output("dustMagnetite".toOreName().copyItemStack() ?: cancel(), 0.05, 1.0) // 5% 磁鉄鉱
+                    output("crystalCertusQuartz".toOreName().copyItemStack() ?: EMPTY_ITEM_STACK, 0.02, 1.0) // 2% ケルタスクォーツ
+                    output("ingotGold".toOreName().copyItemStack() ?: cancel(), 0.001, 1.0) // 0.1% 金
+                }
+
             }
         }
 
