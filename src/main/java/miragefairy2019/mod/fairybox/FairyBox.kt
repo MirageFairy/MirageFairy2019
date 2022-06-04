@@ -11,8 +11,10 @@ import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.block
+import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.getItemStack
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
@@ -128,6 +130,16 @@ object FairyBox {
                     { Items.GOLD_INGOT.createItemStack(3) }, 0.0,
                     "dustGlowstone".oreIngredient to 10,
                     Items.BOWL.ingredient to 1
+                )
+
+                // 硫黄3＋赤石10→辰砂3
+                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
+                    process("融解", 30.0) { !Mana.GAIA + !Erg.FLAME }, // TODO translate
+                    process("析出", 60.0) { !Mana.FIRE + !Erg.CHEMICAL }, // TODO translate
+                    process("洗浄", 10.0) { !Mana.DARK + !Erg.WATER }, // TODO translate
+                    { getItemStack("dustCinnabar")?.copy(3) }, 0.0,
+                    "dustSulfur".oreIngredient to 3,
+                    "dustRedstone".oreIngredient to 10
                 )
 
             }
