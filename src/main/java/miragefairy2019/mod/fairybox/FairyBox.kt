@@ -29,6 +29,7 @@ import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.FairyMaterials
 import mirrg.kotlin.castOrNull
+import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.ItemBlock
 
@@ -151,6 +152,26 @@ object FairyBox {
                     "dustCoal".oreIngredient to 64,
                     Items.FLINT.ingredient to 8,
                     "obsidian".oreIngredient to 1
+                )
+
+                // マグマクリーム2＋雪玉→スライムボール
+                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
+                    process("混合", 20.0) { !Mana.DARK + !Erg.DESTROY }, // TODO translate
+                    process("凝固", 50.0) { !Mana.FIRE + !Erg.CHEMICAL }, // TODO translate
+                    process("抽出", 30.0) { !Mana.GAIA + !Erg.CRAFT }, // TODO translate
+                    { Items.SLIME_BALL.createItemStack() }, 0.0,
+                    Items.MAGMA_CREAM.ingredient to 2,
+                    Items.SNOWBALL.ingredient to 1
+                )
+
+                // マグマクリーム2＋コンクリートパウダー→ブレイズパウダー
+                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
+                    process("混合", 20.0) { !Mana.DARK + !Erg.DESTROY }, // TODO translate
+                    process("凝固", 50.0) { !Mana.FIRE + !Erg.CHEMICAL }, // TODO translate
+                    process("抽出", 30.0) { !Mana.GAIA + !Erg.CRAFT }, // TODO translate
+                    { Items.BLAZE_POWDER.createItemStack() }, 0.0,
+                    Items.MAGMA_CREAM.ingredient to 2,
+                    Blocks.CONCRETE_POWDER.ingredient!! to 1
                 )
 
             }
