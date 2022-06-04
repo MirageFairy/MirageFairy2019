@@ -7,6 +7,7 @@ import miragefairy2019.api.IFairyCentrifugeCraftHandler
 import miragefairy2019.api.IFairyCentrifugeCraftProcess
 import miragefairy2019.api.IFairyCentrifugeCraftRecipe
 import miragefairy2019.api.Mana
+import miragefairy2019.libkt.containerItem
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.randomInt
@@ -65,11 +66,21 @@ fun fairyCentrifugeCraftHandler(
                         inventory[it.index].shrink(it.tag.second) // 減らす
                     }
 
+                    val outputItemStacks = mutableListOf<ItemStack>()
+
                     // 成果物判定
                     val outputCount = random.randomInt((1.0 + fortuneFactor * fortune) * output.count) atMost 64 // TODO 溢れた場合のアイテム分割
-                    val outputItemStack = output.copy(outputCount)
+                    outputItemStacks += output.copy(outputCount)
 
-                    return listOf(outputItemStack).toNonNullList()
+                    // コンテナ返却
+                    recipeInputs.forEach {
+                        repeat(it.tag.second) { _ ->
+                            val containerItemStack = it.itemStack.copy(1).containerItem
+                            if (containerItemStack != null) outputItemStacks += containerItemStack
+                        }
+                    }
+
+                    return outputItemStacks.toNonNullList()
                 }
             }
         }
