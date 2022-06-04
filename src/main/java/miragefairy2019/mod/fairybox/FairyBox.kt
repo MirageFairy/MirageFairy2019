@@ -12,7 +12,6 @@ import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.block
-import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
