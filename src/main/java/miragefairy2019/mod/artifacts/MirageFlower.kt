@@ -5,6 +5,7 @@ import miragefairy2019.api.IFairyType
 import miragefairy2019.api.IPickExecutor
 import miragefairy2019.api.IPickHandler
 import miragefairy2019.api.PickHandlerRegistry
+import miragefairy2019.common.toOreName
 import miragefairy2019.lib.erg
 import miragefairy2019.lib.shineEfficiency
 import miragefairy2019.libkt.BiomeDecoratorFlowers
@@ -12,8 +13,8 @@ import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.libkt.block
+import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
-import miragefairy2019.libkt.getItemStack
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.module
@@ -272,7 +273,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
         // クリスタル
         if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) { drops += FairyCrystal.variantFairyCrystal().createItemStack() }
         // ミラジウム
-        if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) a@{ drops += getItemStack("dustTinyMiragium").or { return@a }.copy() }
+        if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) a@{ drops += "dustTinyMiragium".toOreName().copyItemStack().or { return@a }.copy() }
     }
 
     // シルクタッチ無効。

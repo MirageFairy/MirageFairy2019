@@ -1,5 +1,6 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.common.toOreName
 import miragefairy2019.libkt.BlockMulti
 import miragefairy2019.libkt.BlockVariantList
 import miragefairy2019.libkt.DataBlockState
@@ -19,10 +20,10 @@ import miragefairy2019.libkt.MakeItemVariantModelScope
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
+import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.generated
-import miragefairy2019.libkt.getItemStack
 import miragefairy2019.libkt.handheld
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
@@ -176,7 +177,7 @@ object CommonMaterials {
         )
 
         onAddRecipe a@{
-            GameRegistry.addSmelting(getItemStack("gemPyrite") ?: return@a, Items.IRON_NUGGET.createItemStack(count = 3), 0.7f)
+            GameRegistry.addSmelting("gemPyrite".toOreName().copyItemStack() ?: return@a, Items.IRON_NUGGET.createItemStack(count = 3), 0.7f)
         }
 
 
