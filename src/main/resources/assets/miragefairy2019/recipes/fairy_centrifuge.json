@@ -1,0 +1,31 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "GPG",
+    "cWc",
+    "P#P"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:fairy_box"
+    },
+    "G": {
+      "item": "miragefairy2019:gravity_rod"
+    },
+    "P": {
+      "item": "miragefairy2019:pot"
+    },
+    "W": {
+      "type": "forge:ore_dict",
+      "ore": "workbench"
+    },
+    "c": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereChemical"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:fairy_centrifuge",
+    "count": 1
+  }
+}

@@ -7,9 +7,14 @@ import miragefairy2019.lib.createGui
 import miragefairy2019.lib.fairyCentrifugeCraftHandler
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
+import miragefairy2019.libkt.DataOreIngredient
+import miragefairy2019.libkt.DataResult
+import miragefairy2019.libkt.DataShapedRecipe
+import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
@@ -18,6 +23,7 @@ import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
+import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
@@ -26,6 +32,7 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.FairyMaterials
 import miragefairy2019.mod.artifacts.Fertilizer
 import miragefairy2019.mod.artifacts.MirageFlower
@@ -105,6 +112,26 @@ object FairyBox {
                     override fun GuiHandlerContext.onClient() = tileEntity?.castOrNull<TileEntityFairyBoxCentrifuge>()?.createContainer(player)?.createGui()
                 }.guiHandler)
             }
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "fairy_centrifuge"),
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "GPG",
+                        "cWc",
+                        "P#P"
+                    ),
+                    key = mapOf(
+                        "#" to DataSimpleIngredient(item = "miragefairy2019:fairy_box"),
+                        "G" to DataSimpleIngredient(item = "miragefairy2019:gravity_rod"),
+                        "P" to DataSimpleIngredient(item = "miragefairy2019:pot"),
+                        "W" to DataOreIngredient(ore = "workbench"),
+                        "c" to DataOreIngredient(ore = "mirageFairy2019SphereChemical")
+                    ),
+                    result = DataResult(
+                        item = "miragefairy2019:fairy_centrifuge"
+                    )
+                )
+            )
 
             onAddRecipe {
 
