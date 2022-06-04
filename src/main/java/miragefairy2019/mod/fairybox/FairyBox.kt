@@ -1,14 +1,13 @@
 package miragefairy2019.mod.fairybox
 
 import miragefairy2019.api.Erg
-import miragefairy2019.api.FairyCentrifugeCraftRegistry
 import miragefairy2019.api.Mana
 import miragefairy2019.common.toOreName
 import miragefairy2019.lib.createGui
 import miragefairy2019.lib.fairyCentrifugeCraftHandler
-import miragefairy2019.lib.process
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.block
@@ -108,123 +107,123 @@ object FairyBox {
                 // 鉱石処理
 
                 // 樹液16＋ガラス瓶→シロップ
-                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
-                    process("ろ過", 20.0) { !Mana.DARK + !Erg.WATER }, // TODO translate
-                    process("蒸留", 70.0) { !Mana.GAIA + !Erg.FLAME }, // TODO translate
-                    process("調味", 10.0) { !Mana.AQUA + !Erg.LIFE }, // TODO translate
-                    { FairyMaterials.itemVariants.fairySyrup.createItemStack() }, 0.5,
-                    "mirageFairyWoodResin".oreIngredient to 16,
-                    Items.GLASS_BOTTLE.ingredient to 1
-                )
+                fairyCentrifugeCraftHandler {
+                    process("ろ過", 20.0) { !Mana.DARK + !Erg.WATER } // TODO translate
+                    process("蒸留", 70.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
+                    process("調味", 10.0) { !Mana.AQUA + !Erg.LIFE } // TODO translate
+                    input("mirageFairyWoodResin".oreIngredient, 16)
+                    input(Items.GLASS_BOTTLE.ingredient, 1)
+                    output(FairyMaterials.itemVariants.fairySyrup.createItemStack(), 1.0, 0.5)
+                }
 
                 // 樹液＋砂糖→砂糖3
-                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
-                    process("ろ過", 20.0) { !Mana.DARK + !Erg.WATER }, // TODO translate
-                    process("結晶化", 60.0) { !Mana.DARK + !Erg.CRYSTAL }, // TODO translate
-                    process("粉砕", 20.0) { !Mana.GAIA + !Erg.DESTROY }, // TODO translate
-                    { Items.SUGAR.createItemStack(3) }, 1.0,
-                    "mirageFairyWoodResin".oreIngredient to 1,
-                    Items.SUGAR.ingredient to 1
-                )
+                fairyCentrifugeCraftHandler {
+                    process("ろ過", 20.0) { !Mana.DARK + !Erg.WATER } // TODO translate
+                    process("結晶化", 60.0) { !Mana.DARK + !Erg.CRYSTAL } // TODO translate
+                    process("粉砕", 20.0) { !Mana.GAIA + !Erg.DESTROY } // TODO translate
+                    input("mirageFairyWoodResin".oreIngredient, 1)
+                    input(Items.SUGAR.ingredient, 1)
+                    output(Items.SUGAR.createItemStack(), 3.0, 1.0)
+                }
 
 
                 // 抽出
 
                 // グロウストーンダスト10＋ボウル→金3
-                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
-                    process("融解", 30.0) { !Mana.GAIA + !Erg.FLAME }, // TODO translate
-                    process("沈殿", 40.0) { !Mana.DARK + !Erg.SPACE }, // TODO translate
-                    process("凝固", 30.0) { !Mana.GAIA + !Erg.FREEZE }, // TODO translate
-                    { "ingotGold".toOreName().copyItemStack(3) }, 0.0,
-                    "dustGlowstone".oreIngredient to 10,
-                    Items.BOWL.ingredient to 1
-                )
+                fairyCentrifugeCraftHandler {
+                    process("融解", 30.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
+                    process("沈殿", 40.0) { !Mana.DARK + !Erg.SPACE } // TODO translate
+                    process("凝固", 30.0) { !Mana.GAIA + !Erg.FREEZE } // TODO translate
+                    input("dustGlowstone".oreIngredient, 10)
+                    input(Items.BOWL.ingredient, 1)
+                    output("ingotGold".toOreName().copyItemStack() ?: cancel(), 3.0)
+                }
 
                 // マグマクリーム2＋雪玉→スライムボール
-                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
-                    process("混合", 20.0) { !Mana.DARK + !Erg.DESTROY }, // TODO translate
-                    process("凝固", 50.0) { !Mana.FIRE + !Erg.CHEMICAL }, // TODO translate
-                    process("抽出", 30.0) { !Mana.GAIA + !Erg.CRAFT }, // TODO translate
-                    { Items.SLIME_BALL.createItemStack() }, 0.0,
-                    Items.MAGMA_CREAM.ingredient to 2,
-                    Items.SNOWBALL.ingredient to 1
-                )
+                fairyCentrifugeCraftHandler {
+                    process("混合", 20.0) { !Mana.DARK + !Erg.DESTROY } // TODO translate
+                    process("凝固", 50.0) { !Mana.FIRE + !Erg.CHEMICAL } // TODO translate
+                    process("抽出", 30.0) { !Mana.GAIA + !Erg.CRAFT } // TODO translate
+                    input(Items.MAGMA_CREAM.ingredient, 2)
+                    input(Items.SNOWBALL.ingredient, 1)
+                    output(Items.SLIME_BALL.createItemStack(), 1.0)
+                }
 
                 // マグマクリーム2＋コンクリートパウダー→ブレイズパウダー
-                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
-                    process("混合", 20.0) { !Mana.DARK + !Erg.DESTROY }, // TODO translate
-                    process("凝固", 50.0) { !Mana.FIRE + !Erg.CHEMICAL }, // TODO translate
-                    process("抽出", 30.0) { !Mana.GAIA + !Erg.CRAFT }, // TODO translate
-                    { Items.BLAZE_POWDER.createItemStack() }, 0.0,
-                    Items.MAGMA_CREAM.ingredient to 2,
-                    Blocks.CONCRETE_POWDER.ingredient!! to 1
-                )
+                fairyCentrifugeCraftHandler {
+                    process("混合", 20.0) { !Mana.DARK + !Erg.DESTROY } // TODO translate
+                    process("凝固", 50.0) { !Mana.FIRE + !Erg.CHEMICAL } // TODO translate
+                    process("抽出", 30.0) { !Mana.GAIA + !Erg.CRAFT } // TODO translate
+                    input(Items.MAGMA_CREAM.ingredient, 2)
+                    input(Blocks.CONCRETE_POWDER.ingredient!!, 1)
+                    output(Items.BLAZE_POWDER.createItemStack(), 1.0)
+                }
 
 
                 // 化合
 
                 // 硫黄3＋赤石10→辰砂3
-                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
-                    process("融解", 30.0) { !Mana.GAIA + !Erg.FLAME }, // TODO translate
-                    process("析出", 60.0) { !Mana.FIRE + !Erg.CHEMICAL }, // TODO translate
-                    process("洗浄", 10.0) { !Mana.DARK + !Erg.WATER }, // TODO translate
-                    { "dustCinnabar".toOreName().copyItemStack(3) }, 0.0,
-                    "dustSulfur".oreIngredient to 3,
-                    "dustRedstone".oreIngredient to 10
-                )
+                fairyCentrifugeCraftHandler {
+                    process("融解", 30.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
+                    process("析出", 60.0) { !Mana.FIRE + !Erg.CHEMICAL } // TODO translate
+                    process("洗浄", 10.0) { !Mana.DARK + !Erg.WATER } // TODO translate
+                    input("dustSulfur".oreIngredient, 3)
+                    input("dustRedstone".oreIngredient, 10)
+                    output("dustCinnabar".toOreName().copyItemStack() ?: cancel(), 3.0)
+                }
 
 
                 // 結晶合成
 
                 // 石炭の粉64＋フリント8＋黒曜石→ダイヤモンド
-                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
-                    process("圧縮", 10.0) { !Mana.GAIA + !Erg.CRAFT }, // TODO translate
-                    process("歪縮", 40.0) { !Mana.FIRE + !Erg.SPACE }, // TODO translate
-                    process("結晶成長", 50.0) { !Mana.SHINE + !Erg.CRYSTAL }, // TODO translate
-                    { "gemDiamond".toOreName().copyItemStack() }, 0.0,
-                    "dustCoal".oreIngredient to 64,
-                    Items.FLINT.ingredient to 8,
-                    "obsidian".oreIngredient to 1
-                )
+                fairyCentrifugeCraftHandler {
+                    process("圧縮", 10.0) { !Mana.GAIA + !Erg.CRAFT } // TODO translate
+                    process("歪縮", 40.0) { !Mana.FIRE + !Erg.SPACE } // TODO translate
+                    process("結晶成長", 50.0) { !Mana.SHINE + !Erg.CRYSTAL } // TODO translate
+                    input("dustCoal".oreIngredient, 64)
+                    input(Items.FLINT.ingredient, 8)
+                    input("obsidian".oreIngredient, 1)
+                    output("gemDiamond".toOreName().copyItemStack() ?: cancel(), 1.0)
+                }
 
 
                 // 妖精変成
 
                 // シュルカー精＋ミラジウムウォーター＋エンドストーン16＋ラブラドライト＋空間のスフィア→シュルカーの殻
-                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
-                    process("形状抽出", 30.0) { !Mana.FIRE + !Erg.KNOWLEDGE }, // TODO translate
-                    process("材料溶解", 30.0) { !Mana.GAIA + !Erg.CHEMICAL }, // TODO translate
-                    process("分子合成", 40.0) { !Mana.SHINE + !Erg.LIFE }, // TODO translate
-                    { Items.SHULKER_SHELL.createItemStack() }, 0.5,
-                    "mirageFairy2019FairyShulkerRank1".oreIngredient to 1,
-                    "container1000MiragiumWater".oreIngredient to 1,
-                    "endstone".oreIngredient to 16,
-                    "gemLabradorite".oreIngredient to 3,
-                    Erg.SPACE.sphereType.oreName.oreIngredient to 1
-                )
+                fairyCentrifugeCraftHandler {
+                    process("形状抽出", 30.0) { !Mana.FIRE + !Erg.KNOWLEDGE } // TODO translate
+                    process("材料溶解", 30.0) { !Mana.GAIA + !Erg.CHEMICAL } // TODO translate
+                    process("分子合成", 40.0) { !Mana.SHINE + !Erg.LIFE } // TODO translate
+                    input("mirageFairy2019FairyShulkerRank1".oreIngredient, 1)
+                    input("container1000MiragiumWater".oreIngredient, 1)
+                    input("endstone".oreIngredient, 16)
+                    input("gemLabradorite".oreIngredient, 3)
+                    input(Erg.SPACE.sphereType.oreName.oreIngredient, 1)
+                    output(Items.SHULKER_SHELL.createItemStack(), 1.0, 0.5)
+                }
 
                 // R2蜘蛛精＋ミラジウムウォーター＋土→蜘蛛の目
-                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
-                    process("形状抽出", 30.0) { !Mana.FIRE + !Erg.KNOWLEDGE }, // TODO translate
-                    process("材料溶解", 30.0) { !Mana.GAIA + !Erg.CHEMICAL }, // TODO translate
-                    process("分子合成", 40.0) { !Mana.SHINE + !Erg.LIFE }, // TODO translate
-                    { Items.SPIDER_EYE.createItemStack() }, 1.0,
-                    "mirageFairy2019FairySpiderRank2".oreIngredient to 1,
-                    "container1000MiragiumWater".oreIngredient to 1,
-                    "dirt".oreIngredient to 1
-                )
+                fairyCentrifugeCraftHandler {
+                    process("形状抽出", 30.0) { !Mana.FIRE + !Erg.KNOWLEDGE } // TODO translate
+                    process("材料溶解", 30.0) { !Mana.GAIA + !Erg.CHEMICAL } // TODO translate
+                    process("分子合成", 40.0) { !Mana.SHINE + !Erg.LIFE } // TODO translate
+                    input("mirageFairy2019FairySpiderRank2".oreIngredient, 1)
+                    input("container1000MiragiumWater".oreIngredient, 1)
+                    input("dirt".oreIngredient, 1)
+                    output(Items.SPIDER_EYE.createItemStack(), 1.0, 1.0)
+                }
 
                 // R2ウィザースケルトン精＋ミラジウムウォーター＋スケルトンの頭＋石炭の粉10→ウィザースケルトンの頭
-                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
-                    process("形状抽出", 30.0) { !Mana.FIRE + !Erg.KNOWLEDGE }, // TODO translate
-                    process("材料溶解", 30.0) { !Mana.GAIA + !Erg.CHEMICAL }, // TODO translate
-                    process("分子合成", 40.0) { !Mana.SHINE + !Erg.LIFE }, // TODO translate
-                    { Items.SKULL.createItemStack(metadata = 1) }, 0.0,
-                    "mirageFairy2019FairyWitherSkeletonRank2".oreIngredient to 1,
-                    "container1000MiragiumWater".oreIngredient to 1,
-                    Items.SKULL.createItemStack(metadata = 0).ingredient to 1,
-                    "dustCoal".oreIngredient to 10
-                )
+                fairyCentrifugeCraftHandler {
+                    process("形状抽出", 30.0) { !Mana.FIRE + !Erg.KNOWLEDGE } // TODO translate
+                    process("材料溶解", 30.0) { !Mana.GAIA + !Erg.CHEMICAL } // TODO translate
+                    process("分子合成", 40.0) { !Mana.SHINE + !Erg.LIFE } // TODO translate
+                    input("mirageFairy2019FairyWitherSkeletonRank2".oreIngredient, 1)
+                    input("container1000MiragiumWater".oreIngredient, 1)
+                    input(Items.SKULL.createItemStack(metadata = 0).ingredient, 1)
+                    input("dustCoal".oreIngredient, 10)
+                    output(Items.SKULL.createItemStack(metadata = 1), 1.0)
+                }
 
             }
         }

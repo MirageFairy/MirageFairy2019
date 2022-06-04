@@ -9,7 +9,6 @@ import miragefairy2019.api.IFairyCentrifugeCraftRecipe
 import miragefairy2019.api.Mana
 import miragefairy2019.libkt.containerItem
 import miragefairy2019.libkt.copy
-import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import mirrg.kotlin.hydrogen.atMost
@@ -22,34 +21,73 @@ import java.util.Random
 
 fun getFairyCentrifugeCraftRecipe(inventory: IInventory) = FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers.asSequence().mapNotNull { it.test(inventory) }.firstOrNull()
 
-fun fairyCentrifugeCraftHandler(
-    process0: IFairyCentrifugeCraftProcess?,
-    process1: IFairyCentrifugeCraftProcess?,
-    process2: IFairyCentrifugeCraftProcess?,
-    outputGetter: () -> ItemStack?,
-    fortuneFactor: Double,
-    ingredientEntryHead: Pair<Ingredient, Int>,
-    vararg ingredientEntryTail: Pair<Ingredient, Int>
-): IFairyCentrifugeCraftHandler {
-    val ingredientEntries = listOf(ingredientEntryHead) + ingredientEntryTail
-    return object : IFairyCentrifugeCraftHandler {
+
+class FairyCentrifugeCraftHandlerScope {
+    val processes = mutableListOf<IFairyCentrifugeCraftProcess>()
+
+    class FairyCentrifugeCraftScoreScope(val arguments: IFairyCentrifugeCraftArguments) {
+        operator fun Mana.not() = arguments.getMana(this)
+        operator fun Erg.not() = arguments.getErg(this)
+    }
+
+    fun process(name: String, norma: Double, scoreFunction: FairyCentrifugeCraftScoreScope.() -> Double) {
+        processes += object : IFairyCentrifugeCraftProcess {
+            override fun getName() = textComponent { name() } // TODO translate
+            override fun getNorma() = norma
+            override fun getScore(arguments: IFairyCentrifugeCraftArguments) = FairyCentrifugeCraftScoreScope(arguments).scoreFunction()
+        }
+    }
+
+
+    class Input(val ingredient: Ingredient, val count: Int)
+
+    val inputs = mutableListOf<Input>()
+
+    fun input(ingredient: Ingredient, count: Int) {
+        inputs += Input(ingredient, count)
+    }
+
+
+    class Output(val itemStack: ItemStack, val count: Double, val fortuneFactor: Double)
+
+    val outputs = mutableListOf<Output>()
+
+    fun output(itemStack: ItemStack, count: Double, fortuneFactor: Double = 0.0) {
+        outputs += Output(itemStack, count, fortuneFactor)
+    }
+
+
+    class Canceled : Throwable()
+
+    fun cancel(): Nothing = throw Canceled()
+}
+
+fun fairyCentrifugeCraftHandler(block: FairyCentrifugeCraftHandlerScope.() -> Unit) {
+    val scope = FairyCentrifugeCraftHandlerScope()
+    try {
+        scope.block()
+    } catch (_: FairyCentrifugeCraftHandlerScope.Canceled) {
+        return
+    }
+    require(scope.processes.size == 3)
+    require(scope.inputs.size >= 1)
+    require(scope.outputs.size >= 1)
+    FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += object : IFairyCentrifugeCraftHandler {
         override fun test(inventory: IInventory): IFairyCentrifugeCraftRecipe? {
             val matcher = RecipeMatcher(inventory)
 
             // 素材判定
-            val recipeInputs = ingredientEntries.map { ingredientEntry ->
+            val recipeInputs = scope.inputs.map { input ->
                 matcher.pull {
-                    if (ingredientEntry.first.test(it) && it.count >= ingredientEntry.second) ingredientEntry else null
+                    if (input.ingredient.test(it) && it.count >= input.count) input else null
                 } ?: return null
             }
 
-            val output = outputGetter()?.orNull ?: return null
-
             return object : IFairyCentrifugeCraftRecipe {
                 override fun getProcess(index: Int) = when (index) {
-                    0 -> process0
-                    1 -> process1
-                    2 -> process2
+                    0 -> scope.processes[0]
+                    1 -> scope.processes[1]
+                    2 -> scope.processes[2]
                     else -> null
                 }
 
@@ -57,25 +95,31 @@ fun fairyCentrifugeCraftHandler(
 
                     // 素材判定
                     recipeInputs.forEach {
-                        if (inventory[it.index].count < it.tag.second) return null // 足りなくなったら失敗
+                        if (inventory[it.index].count < it.tag.count) return null // 足りなくなったら失敗
                     }
 
                     // 消費
                     recipeInputs.forEach {
                         inventory[it.index] = inventory[it.index].copy()
-                        inventory[it.index].shrink(it.tag.second) // 減らす
+                        inventory[it.index].shrink(it.tag.count) // 減らす
                     }
 
                     val outputItemStacks = mutableListOf<ItemStack>()
 
                     // 成果物判定
-                    val outputCount = random.randomInt((1.0 + fortuneFactor * fortune) * output.count) atMost 64 // TODO 溢れた場合のアイテム分割
-                    outputItemStacks += output.copy(outputCount)
+                    scope.outputs.forEach { output ->
+                        var outputCount = random.randomInt(output.itemStack.count * output.count * (1.0 + output.fortuneFactor * fortune))
+                        while (outputCount > 0) {
+                            val count = outputCount atMost output.itemStack.maxStackSize
+                            outputItemStacks += output.itemStack.copy(count)
+                            outputCount -= count
+                        }
+                    }
 
                     // コンテナ返却
-                    recipeInputs.forEach {
-                        repeat(it.tag.second) { _ ->
-                            val containerItemStack = it.itemStack.copy(1).containerItem
+                    recipeInputs.forEach { input ->
+                        repeat(input.tag.count) { _ ->
+                            val containerItemStack = input.itemStack.copy(1).containerItem
                             if (containerItemStack != null) outputItemStacks += containerItemStack
                         }
                     }
@@ -87,16 +131,6 @@ fun fairyCentrifugeCraftHandler(
     }
 }
 
-class FairyCentrifugeCraftScoreScope(val arguments: IFairyCentrifugeCraftArguments) {
-    operator fun Mana.not() = arguments.getMana(this)
-    operator fun Erg.not() = arguments.getErg(this)
-}
-
-fun process(name: String, norma: Double, scoreFunction: FairyCentrifugeCraftScoreScope.() -> Double) = object : IFairyCentrifugeCraftProcess {
-    override fun getName() = textComponent { name() } // TODO translate
-    override fun getNorma() = norma
-    override fun getScore(arguments: IFairyCentrifugeCraftArguments) = FairyCentrifugeCraftScoreScope(arguments).scoreFunction()
-}
 
 val IFairyCentrifugeCraftProcess.factors: List<ITextComponent>
     get() {
