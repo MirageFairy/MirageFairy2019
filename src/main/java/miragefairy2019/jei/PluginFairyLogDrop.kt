@@ -21,7 +21,7 @@ import net.minecraft.item.ItemStack
 @JEIPlugin
 class PluginFairyLogDrop : IModPlugin {
     companion object {
-        const val uid = "miragefairy2019.fairyLogDrop"
+        private const val uid = "miragefairy2019.fairyLogDrop"
     }
 
     override fun registerCategories(registry: IRecipeCategoryRegistration) {

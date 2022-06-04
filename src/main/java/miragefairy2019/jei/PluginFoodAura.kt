@@ -28,7 +28,7 @@ import net.minecraft.item.ItemStack
 @JEIPlugin
 class PluginFoodAura : IModPlugin {
     companion object {
-        const val uid = "miragefairy2019.foodAura"
+        private const val uid = "miragefairy2019.foodAura"
     }
 
     override fun registerCategories(registry: IRecipeCategoryRegistration) {

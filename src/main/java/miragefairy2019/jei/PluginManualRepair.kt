@@ -25,7 +25,7 @@ import net.minecraft.item.ItemStack
 @JEIPlugin
 class PluginManualRepair : IModPlugin {
     companion object {
-        const val uid = "miragefairy2019.manualRepair"
+        private const val uid = "miragefairy2019.manualRepair"
     }
 
     override fun registerCategories(registry: IRecipeCategoryRegistration) {

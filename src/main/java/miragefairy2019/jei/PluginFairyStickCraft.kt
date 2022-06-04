@@ -23,7 +23,7 @@ import net.minecraft.item.ItemStack
 @JEIPlugin
 class PluginFairyStickCraft : IModPlugin {
     companion object {
-        const val uid = "miragefairy2019.fairyStickCraft"
+        private const val uid = "miragefairy2019.fairyStickCraft"
     }
 
     override fun registerCategories(registry: IRecipeCategoryRegistration) {

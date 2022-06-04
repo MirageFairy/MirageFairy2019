@@ -21,7 +21,7 @@ import net.minecraft.item.ItemStack
 @JEIPlugin
 class PluginMfa : IModPlugin {
     companion object {
-        const val uid = "miragefairy2019.mfa"
+        private const val uid = "miragefairy2019.mfa"
     }
 
     override fun registerCategories(registry: IRecipeCategoryRegistration) {

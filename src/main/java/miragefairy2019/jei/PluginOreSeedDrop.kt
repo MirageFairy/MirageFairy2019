@@ -22,7 +22,7 @@ import net.minecraft.item.ItemStack
 @JEIPlugin
 class PluginOreSeedDrop : IModPlugin {
     companion object {
-        const val uid = "miragefairy2019.oreSeedDrop"
+        private const val uid = "miragefairy2019.oreSeedDrop"
     }
 
     override fun registerCategories(registry: IRecipeCategoryRegistration) {
