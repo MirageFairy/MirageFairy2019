@@ -64,5 +64,4 @@ class PluginFairyLogDrop : IModPlugin {
             }
         }, uid)
     }
-
 }
