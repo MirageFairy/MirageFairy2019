@@ -176,10 +176,21 @@ object FairyBox {
                     Blocks.CONCRETE_POWDER.ingredient!! to 1
                 )
 
-                // シュルカーの殻＋エンドストーン64＋ラブラドライト5＋空間のスフィア5→シュルカーの殻2
 
                 // 妖精変成
 
+                // シュルカー精＋ミラジウムウォーター＋エンドストーン16＋ラブラドライト＋空間のスフィア→シュルカーの殻
+                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
+                    process("形状抽出", 30.0) { !Mana.FIRE + !Erg.KNOWLEDGE }, // TODO translate
+                    process("材料溶解", 30.0) { !Mana.GAIA + !Erg.CHEMICAL }, // TODO translate
+                    process("分子合成", 40.0) { !Mana.SHINE + !Erg.LIFE }, // TODO translate
+                    { Items.SHULKER_SHELL.createItemStack() }, 0.5,
+                    "mirageFairy2019FairyShulkerRank1".oreIngredient to 1,
+                    "container1000MiragiumWater".oreIngredient to 1,
+                    "endstone".oreIngredient to 16,
+                    "gemLabradorite".oreIngredient to 3,
+                    Erg.SPACE.sphereType.oreName.oreIngredient to 1
+                )
 
                 // R2蜘蛛精＋ミラジウムウォーター＋土→蜘蛛の目
                 FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
