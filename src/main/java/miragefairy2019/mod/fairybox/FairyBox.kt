@@ -177,15 +177,19 @@ object FairyBox {
                 )
 
                 // シュルカーの殻＋エンドストーン64＋ラブラドライト5＋空間のスフィア5→シュルカーの殻2
+
+                // 妖精変成
+
+
+                // R2蜘蛛精＋ミラジウムウォーター＋土→蜘蛛の目
                 FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
-                    process("粉砕", 10.0) { !Mana.GAIA + !Erg.DESTROY }, // TODO translate
-                    process("合成", 30.0) { !Mana.FIRE + !Erg.CHEMICAL }, // TODO translate
-                    process("培養", 60.0) { !Mana.AQUA + !Erg.LIFE }, // TODO translate
-                    { Items.SHULKER_SHELL.createItemStack(2) }, 0.5,
-                    Items.SHULKER_SHELL.createItemStack().ingredient to 1,
-                    "endstone".oreIngredient to 64,
-                    "gemLabradorite".oreIngredient to 5,
-                    Erg.SPACE.sphereType.oreName.oreIngredient to 5
+                    process("形状抽出", 30.0) { !Mana.FIRE + !Erg.KNOWLEDGE }, // TODO translate
+                    process("材料溶解", 30.0) { !Mana.GAIA + !Erg.CHEMICAL }, // TODO translate
+                    process("分子合成", 40.0) { !Mana.SHINE + !Erg.LIFE }, // TODO translate
+                    { Items.SPIDER_EYE.createItemStack() }, 1.0,
+                    "mirageFairy2019FairySpiderRank2".oreIngredient to 1,
+                    "container1000MiragiumWater".oreIngredient to 1,
+                    "dirt".oreIngredient to 1
                 )
 
             }
