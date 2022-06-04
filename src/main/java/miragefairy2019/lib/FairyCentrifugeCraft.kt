@@ -4,6 +4,7 @@ import miragefairy2019.api.Erg
 import miragefairy2019.api.FairyCentrifugeCraftRegistry
 import miragefairy2019.api.IFairyCentrifugeCraftArguments
 import miragefairy2019.api.IFairyCentrifugeCraftHandler
+import miragefairy2019.api.IFairyCentrifugeCraftInput
 import miragefairy2019.api.IFairyCentrifugeCraftProcess
 import miragefairy2019.api.IFairyCentrifugeCraftRecipe
 import miragefairy2019.api.Mana
@@ -73,6 +74,13 @@ fun fairyCentrifugeCraftHandler(block: FairyCentrifugeCraftHandlerScope.() -> Un
     require(scope.inputs.size >= 1)
     require(scope.outputs.size >= 1)
     FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += object : IFairyCentrifugeCraftHandler {
+        override fun getInputs(): NonNullList<IFairyCentrifugeCraftInput> = scope.inputs.map { input ->
+            object : IFairyCentrifugeCraftInput {
+                override fun getIngredient() = input.ingredient
+                override fun getCount() = input.count
+            }
+        }.toNonNullList()
+
         override fun test(inventory: IInventory): IFairyCentrifugeCraftRecipe? {
             val matcher = RecipeMatcher(inventory)
 
