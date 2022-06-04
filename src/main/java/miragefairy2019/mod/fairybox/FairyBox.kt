@@ -113,8 +113,8 @@ object FairyBox {
                 // 樹液＋砂糖→砂糖3
                 FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
                     process("ろ過", 20.0) { !Mana.DARK + !Erg.WATER }, // TODO translate
-                    process("析出", 40.0) { !Mana.GAIA + !Erg.CRYSTAL }, // TODO translate
-                    process("乾燥", 40.0) { !Mana.DARK + !Erg.FLAME }, // TODO translate
+                    process("結晶化", 60.0) { !Mana.DARK + !Erg.CRYSTAL }, // TODO translate
+                    process("粉砕", 20.0) { !Mana.GAIA + !Erg.DESTROY }, // TODO translate
                     { Items.SUGAR.createItemStack(3) }, 1.0,
                     "mirageFairyWoodResin".oreIngredient to 1,
                     Items.SUGAR.ingredient to 1
