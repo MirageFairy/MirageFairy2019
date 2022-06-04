@@ -27,10 +27,10 @@ fun fairyCentrifugeCraftHandler(
     process2: IFairyCentrifugeCraftProcess?,
     outputGetter: () -> ItemStack?,
     fortuneFactor: Double,
-    ingredientEntry0: Pair<Ingredient, Int>,
-    ingredientEntry1: Pair<Ingredient, Int>? = null
+    ingredientEntryHead: Pair<Ingredient, Int>,
+    vararg ingredientEntryTail: Pair<Ingredient, Int>
 ): IFairyCentrifugeCraftHandler {
-    val ingredientEntries = listOfNotNull(ingredientEntry0, ingredientEntry1)
+    val ingredientEntries = listOf(ingredientEntryHead) + ingredientEntryTail
     return object : IFairyCentrifugeCraftHandler {
         override fun test(inventory: IInventory): IFairyCentrifugeCraftRecipe? {
             val matcher = RecipeMatcher(inventory)
