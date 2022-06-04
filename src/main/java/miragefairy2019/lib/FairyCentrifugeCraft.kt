@@ -66,7 +66,7 @@ fun fairyCentrifugeCraftHandler(
                     }
 
                     // 成果物判定
-                    val outputCount = random.randomInt((1.0 + fortuneFactor * fortune) * output.count) atMost 64
+                    val outputCount = random.randomInt((1.0 + fortuneFactor * fortune) * output.count) atMost 64 // TODO 溢れた場合のアイテム分割
                     val outputItemStack = output.copy(outputCount)
 
                     return listOf(outputItemStack).toNonNullList()

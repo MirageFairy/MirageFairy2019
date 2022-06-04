@@ -128,7 +128,7 @@ object FairyBox {
                     process("融解", 30.0) { !Mana.GAIA + !Erg.FLAME }, // TODO translate
                     process("沈殿", 40.0) { !Mana.DARK + !Erg.SPACE }, // TODO translate
                     process("凝固", 30.0) { !Mana.GAIA + !Erg.FREEZE }, // TODO translate
-                    { Items.GOLD_INGOT.createItemStack(3) }, 0.0,
+                    { "ingotGold".toOreName().copyItemStack(3) }, 0.0,
                     "dustGlowstone".oreIngredient to 10,
                     Items.BOWL.ingredient to 1
                 )
