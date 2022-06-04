@@ -21,7 +21,6 @@ import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.copyItemStack
-import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.generated
 import miragefairy2019.libkt.handheld
@@ -45,7 +44,6 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityFallingBlock
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.IStringSerializable
@@ -177,7 +175,7 @@ object CommonMaterials {
         )
 
         onAddRecipe a@{
-            GameRegistry.addSmelting("gemPyrite".toOreName().copyItemStack() ?: return@a, Items.IRON_NUGGET.createItemStack(count = 3), 0.7f)
+            GameRegistry.addSmelting("gemPyrite".toOreName().copyItemStack() ?: return@a, "nuggetIron".toOreName().copyItemStack(3) ?: return@a, 0.7f)
         }
 
 
