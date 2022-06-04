@@ -7,9 +7,8 @@ import miragefairy2019.api.IFairyCentrifugeCraftHandler
 import miragefairy2019.api.IFairyCentrifugeCraftProcess
 import miragefairy2019.api.IFairyCentrifugeCraftRecipe
 import miragefairy2019.api.Mana
-import miragefairy2019.lib.get
-import miragefairy2019.lib.set
 import miragefairy2019.libkt.copy
+import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import mirrg.kotlin.hydrogen.atMost
@@ -26,7 +25,7 @@ fun fairyCentrifugeCraftHandler(
     process0: IFairyCentrifugeCraftProcess?,
     process1: IFairyCentrifugeCraftProcess?,
     process2: IFairyCentrifugeCraftProcess?,
-    output: () -> ItemStack,
+    outputGetter: () -> ItemStack?,
     fortuneFactor: Double,
     ingredientEntry0: Pair<Ingredient, Int>,
     ingredientEntry1: Pair<Ingredient, Int>? = null
@@ -42,6 +41,8 @@ fun fairyCentrifugeCraftHandler(
                     if (ingredientEntry.first.test(it) && it.count >= ingredientEntry.second) ingredientEntry else null
                 } ?: return null
             }
+
+            val output = outputGetter()?.orNull ?: return null
 
             return object : IFairyCentrifugeCraftRecipe {
                 override fun getProcess(index: Int) = when (index) {
@@ -65,8 +66,8 @@ fun fairyCentrifugeCraftHandler(
                     }
 
                     // 成果物判定
-                    val outputCount = random.randomInt(1.0 + fortuneFactor * fortune) atMost 64
-                    val outputItemStack = output().copy(outputCount)
+                    val outputCount = random.randomInt((1.0 + fortuneFactor * fortune) * output.count) atMost 64
+                    val outputItemStack = output.copy(outputCount)
 
                     return listOf(outputItemStack).toNonNullList()
                 }
