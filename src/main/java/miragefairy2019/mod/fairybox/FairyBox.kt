@@ -142,6 +142,17 @@ object FairyBox {
                     "dustRedstone".oreIngredient to 10
                 )
 
+                // 石炭の粉64＋フリント8＋黒曜石→ダイヤモンド
+                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
+                    process("圧縮", 10.0) { !Mana.GAIA + !Erg.CRAFT }, // TODO translate
+                    process("歪縮", 40.0) { !Mana.FIRE + !Erg.SPACE }, // TODO translate
+                    process("結晶成長", 50.0) { !Mana.SHINE + !Erg.CRYSTAL }, // TODO translate
+                    { "gemDiamond".toOreName().copyItemStack() }, 0.0,
+                    "dustCoal".oreIngredient to 64,
+                    Items.FLINT.ingredient to 8,
+                    "obsidian".oreIngredient to 1
+                )
+
             }
         }
 
