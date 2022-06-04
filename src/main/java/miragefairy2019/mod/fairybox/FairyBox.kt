@@ -27,6 +27,8 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.FairyMaterials
+import miragefairy2019.mod.artifacts.Fertilizer
+import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
 import mirrg.kotlin.castOrNull
@@ -245,6 +247,24 @@ object FairyBox {
                     output("crystalCertusQuartz".toOreName().copyItemStack() ?: EMPTY_ITEM_STACK, 0.02, 2.0) // 2% ケルタスクォーツ
                     output("ingotGold".toOreName().copyItemStack() ?: cancel(), 0.001, 2.0) // 0.1% 金
                 }
+
+                // 土＋ボウル＋水→色々
+                fairyCentrifugeCraftHandler {
+                    process("粒度選別", 40.0) { !Mana.GAIA + !Erg.SENSE } // TODO translate
+                    process("比重選別", 40.0) { !Mana.GAIA + !Erg.WATER } // TODO translate
+                    process("乾燥", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
+                    input("dirt".oreIngredient, 1)
+                    input(Items.BOWL.ingredient, 1)
+                    input("container1000Water".oreIngredient, 1)
+                    output(Blocks.DIRT.createItemStack(metadata = 1), 1.0) // 100% 荒い土
+                    output(Blocks.SAND.createItemStack(), 0.1, 1.0) // 10% 砂
+                    output(Items.CLAY_BALL.createItemStack(), 0.1, 1.0) // 10% 粘土
+                    output(Fertilizer.itemFertilizer().createItemStack(), 0.1, 1.0) // 10% 肥料
+                    output(Items.WHEAT_SEEDS.createItemStack(), 0.05, 2.0) // 5% 小麦の種
+                    output(Items.MELON_SEEDS.createItemStack(), 0.01, 2.0) // 1% スイカの種
+                    output(Items.PUMPKIN_SEEDS.createItemStack(), 0.01, 2.0) // 1% カボチャの種
+                    output(Items.BEETROOT_SEEDS.createItemStack(), 0.01, 2.0) // 1% ビートルートの種
+                    output(MirageFlower.itemMirageFlowerSeeds().createItemStack(), 0.01, 2.0) // 1% ミラージュフラワーの種
                 }
 
             }
