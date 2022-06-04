@@ -5,6 +5,7 @@ import miragefairy2019.api.FairyCentrifugeCraftRegistry
 import miragefairy2019.api.IFairyCentrifugeCraftArguments
 import miragefairy2019.api.IFairyCentrifugeCraftHandler
 import miragefairy2019.api.IFairyCentrifugeCraftInput
+import miragefairy2019.api.IFairyCentrifugeCraftOutput
 import miragefairy2019.api.IFairyCentrifugeCraftProcess
 import miragefairy2019.api.IFairyCentrifugeCraftRecipe
 import miragefairy2019.api.Mana
@@ -49,12 +50,17 @@ class FairyCentrifugeCraftHandlerScope {
     }
 
 
-    class Output(val itemStack: ItemStack, val count: Double, val fortuneFactor: Double)
+    class Output(val itemStack: ItemStack, val count: Double, val fortuneFactor: Double) {
+        init {
+            require(!itemStack.isEmpty)
+            require(itemStack.count == 1)
+        }
+    }
 
     val outputs = mutableListOf<Output>()
 
     fun output(itemStack: ItemStack, count: Double, fortuneFactor: Double = 0.0) {
-        outputs += Output(itemStack, count, fortuneFactor)
+        if (!itemStack.isEmpty) outputs += Output(itemStack, count, fortuneFactor)
     }
 
 
@@ -78,6 +84,14 @@ fun fairyCentrifugeCraftHandler(block: FairyCentrifugeCraftHandlerScope.() -> Un
             object : IFairyCentrifugeCraftInput {
                 override fun getIngredient() = input.ingredient
                 override fun getCount() = input.count
+            }
+        }.toNonNullList()
+
+        override fun getOutputs(): NonNullList<IFairyCentrifugeCraftOutput> = scope.outputs.map { output ->
+            object : IFairyCentrifugeCraftOutput {
+                override fun getItemStack() = output.itemStack
+                override fun getCount() = output.count
+                override fun getFortuneFactor() = output.fortuneFactor
             }
         }.toNonNullList()
 
@@ -116,7 +130,7 @@ fun fairyCentrifugeCraftHandler(block: FairyCentrifugeCraftHandlerScope.() -> Un
 
                     // 成果物判定
                     scope.outputs.forEach { output ->
-                        var outputCount = random.randomInt(output.itemStack.count * output.count * (1.0 + output.fortuneFactor * fortune))
+                        var outputCount = random.randomInt(output.count * (1.0 + output.fortuneFactor * fortune))
                         while (outputCount > 0) {
                             val count = outputCount atMost output.itemStack.maxStackSize
                             outputItemStacks += output.itemStack.copy(count)

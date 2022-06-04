@@ -11,6 +11,9 @@ public interface IFairyCentrifugeCraftHandler {
     @Nonnull
     public NonNullList<IFairyCentrifugeCraftInput> getInputs();
 
+    @Nonnull
+    public NonNullList<IFairyCentrifugeCraftOutput> getOutputs();
+
     @Nullable
     public IFairyCentrifugeCraftRecipe test(@Nonnull IInventory inventory);
 
