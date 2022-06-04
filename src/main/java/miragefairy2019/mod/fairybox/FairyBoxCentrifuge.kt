@@ -94,7 +94,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
         return getAuraCollectionSpeed(world, getLeaves() ?: return 0.0, times) atMost 120.0
     }
 
-    fun getFoliaSpeedFactor(folia: Double) = (folia - 30.0) / 30.0 atLeast 0.0
+    fun getFoliaSpeedFactor(folia: Double) = ((folia atMost 300.0) - 30.0) / 30.0 atLeast 0.0
 
 
     // Recipe
