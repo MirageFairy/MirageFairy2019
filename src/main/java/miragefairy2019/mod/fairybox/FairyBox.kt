@@ -28,6 +28,8 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.FairyMaterials
+import miragefairy2019.mod.artifacts.oreName
+import miragefairy2019.mod.artifacts.sphereType
 import mirrg.kotlin.castOrNull
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
@@ -172,6 +174,18 @@ object FairyBox {
                     { Items.BLAZE_POWDER.createItemStack() }, 0.0,
                     Items.MAGMA_CREAM.ingredient to 2,
                     Blocks.CONCRETE_POWDER.ingredient!! to 1
+                )
+
+                // シュルカーの殻＋エンドストーン64＋ラブラドライト5＋空間のスフィア5→シュルカーの殻2
+                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
+                    process("粉砕", 10.0) { !Mana.GAIA + !Erg.DESTROY }, // TODO translate
+                    process("合成", 30.0) { !Mana.FIRE + !Erg.CHEMICAL }, // TODO translate
+                    process("培養", 60.0) { !Mana.AQUA + !Erg.LIFE }, // TODO translate
+                    { Items.SHULKER_SHELL.createItemStack(2) }, 0.5,
+                    Items.SHULKER_SHELL.createItemStack().ingredient to 1,
+                    "endstone".oreIngredient to 64,
+                    "gemLabradorite".oreIngredient to 5,
+                    Erg.SPACE.sphereType.oreName.oreIngredient to 5
                 )
 
             }
