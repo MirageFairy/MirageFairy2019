@@ -203,6 +203,18 @@ object FairyBox {
                     "dirt".oreIngredient to 1
                 )
 
+                // R2ウィザースケルトン精＋ミラジウムウォーター＋スケルトンの頭＋石炭の粉10→ウィザースケルトンの頭
+                FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += fairyCentrifugeCraftHandler(
+                    process("形状抽出", 30.0) { !Mana.FIRE + !Erg.KNOWLEDGE }, // TODO translate
+                    process("材料溶解", 30.0) { !Mana.GAIA + !Erg.CHEMICAL }, // TODO translate
+                    process("分子合成", 40.0) { !Mana.SHINE + !Erg.LIFE }, // TODO translate
+                    { Items.SKULL.createItemStack(metadata = 1) }, 0.0,
+                    "mirageFairy2019FairyWitherSkeletonRank2".oreIngredient to 1,
+                    "container1000MiragiumWater".oreIngredient to 1,
+                    Items.SKULL.createItemStack(metadata = 0).ingredient to 1,
+                    "dustCoal".oreIngredient to 10
+                )
+
             }
         }
 
