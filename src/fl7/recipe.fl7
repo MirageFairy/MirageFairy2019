@@ -540,31 +540,41 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 			"rodMiragium",
 			"mirageFairy2019ManaRodQuartz",
 			"stickMirageFairyWood",
+			"rodMirageFairyPlastic",
 		];
 
 		fairyWand("crafting_fairy_wand"    ; rs[0]; "Craft");
 		fairyWand("crafting_fairy_wand_2"  ; rs[1]; "Craft");
 		fairyWand("crafting_fairy_wand_3"  ; rs[2]; "Craft");
 		fairyWand("crafting_fairy_wand_4"  ; rs[3]; "Craft");
+		fairyWand("crafting_fairy_wand_5"  ; rs[4]; "Craft");
 		fairyWand("hydrating_fairy_wand"   ; rs[0]; "Water");
 		fairyWand("hydrating_fairy_wand_2" ; rs[1]; "Water");
 		fairyWand("hydrating_fairy_wand_3" ; rs[2]; "Water");
 		fairyWand("hydrating_fairy_wand_4" ; rs[3]; "Water");
+		fairyWand("hydrating_fairy_wand_5" ; rs[4]; "Water");
 		fairyWand("melting_fairy_wand"     ; rs[1]; "Flame");
 		fairyWand("melting_fairy_wand_2"   ; rs[2]; "Flame");
 		fairyWand("melting_fairy_wand_3"   ; rs[3]; "Flame");
+		fairyWand("melting_fairy_wand_4"   ; rs[4]; "Flame");
 		fairyWand("breaking_fairy_wand"    ; rs[1]; "Destroy");
 		fairyWand("breaking_fairy_wand_2"  ; rs[2]; "Destroy");
 		fairyWand("breaking_fairy_wand_3"  ; rs[3]; "Destroy");
+		fairyWand("breaking_fairy_wand_4"  ; rs[4]; "Destroy");
 		fairyWand("freezing_fairy_wand"    ; rs[1]; "Freeze");
 		fairyWand("freezing_fairy_wand_2"  ; rs[2]; "Freeze");
 		fairyWand("freezing_fairy_wand_3"  ; rs[3]; "Freeze");
+		fairyWand("freezing_fairy_wand_4"  ; rs[4]; "Freeze");
 		fairyWand("polishing_fairy_wand"   ; rs[2]; "Crystal");
 		fairyWand("polishing_fairy_wand_2" ; rs[3]; "Crystal");
+		fairyWand("polishing_fairy_wand_3" ; rs[4]; "Crystal");
 		fairyWand("summoning_fairy_wand"   ; rs[2]; "Submission");
 		fairyWand("summoning_fairy_wand_2" ; rs[3]; "Submission");
+		fairyWand("summoning_fairy_wand_3" ; rs[4]; "Submission");
 		fairyWand("distortion_fairy_wand"  ; rs[3]; "Space");
+		fairyWand("distortion_fairy_wand_2"; rs[4]; "Space");
 		fairyWand("fusion_fairy_wand"      ; rs[3]; "Warp");
+		fairyWand("fusion_fairy_wand_2"    ; rs[4]; "Warp");
 	);
 
 	# 糸から技巧杖

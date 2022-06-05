@@ -29,7 +29,6 @@ import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.fairyweapon.findItem
 import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.EnumMastery
@@ -72,7 +71,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import kotlin.math.ceil
 
-private val Int.roman get() = listOf("I", "II", "III", "IV").getOrNull(this - 1) ?: throw IllegalArgumentException()
+private val Int.roman get() = listOf("I", "II", "III", "IV", "V").getOrNull(this - 1) ?: throw IllegalArgumentException()
 
 enum class WandType(val registryName: String) {
     CRAFTING("crafting"),
@@ -117,54 +116,50 @@ object Wand {
                 )
             }
         }
-        fairyWand(1, WandType.CRAFTING, "Crafting", "技巧", 1, { ItemFairyWand() })
-        fairyWand(2, WandType.CRAFTING, "Crafting", "技巧", 2, { ItemFairyWand() })
-        fairyWand(3, WandType.CRAFTING, "Crafting", "技巧", 3, { ItemFairyWand() })
-        fairyWand(4, WandType.CRAFTING, "Crafting", "技巧", 4, { ItemFairyWand() })
-        fairyWand(1, WandType.HYDRATING, "Hydrating", "加水", 1, { ItemFairyWand() }, "container1000Water")
-        fairyWand(2, WandType.HYDRATING, "Hydrating", "加水", 2, { ItemFairyWand() }, "container1000Water")
-        fairyWand(3, WandType.HYDRATING, "Hydrating", "加水", 3, { ItemFairyWand() }, "container1000Water")
-        fairyWand(4, WandType.HYDRATING, "Hydrating", "加水", 4, { ItemFairyWand() }, "container1000Water")
-        fairyWand(2, WandType.MELTING, "Melting", "紅蓮", 1, { ItemFairyWand() })
-        fairyWand(3, WandType.MELTING, "Melting", "紅蓮", 2, { ItemFairyWand() })
-        fairyWand(4, WandType.MELTING, "Melting", "紅蓮", 3, { ItemFairyWand() })
-        fairyWand(2, WandType.BREAKING, "Breaking", "破砕", 1, { ItemFairyWand() })
-        fairyWand(3, WandType.BREAKING, "Breaking", "破砕", 2, { ItemFairyWand() })
-        fairyWand(4, WandType.BREAKING, "Breaking", "破砕", 3, { ItemFairyWand() })
-        fairyWand(2, WandType.FREEZING, "Freezing", "氷晶", 1, { ItemFairyWand() })
-        fairyWand(3, WandType.FREEZING, "Freezing", "氷晶", 2, { ItemFairyWand() })
-        fairyWand(4, WandType.FREEZING, "Freezing", "氷晶", 3, { ItemFairyWand() })
-        fairyWand(3, WandType.POLISHING, "Polishing", "珠玉", 1, { ItemFairyWand() })
-        fairyWand(4, WandType.POLISHING, "Polishing", "珠玉", 2, { ItemFairyWand() })
-        fairyWand(3, WandType.SUMMONING, "Wizard's", "冥王", 1, { ItemFairyWandSummoning(2) })
-        fairyWand(4, WandType.SUMMONING, "Wizard's", "冥王", 2, { ItemFairyWandSummoning(5) })
-        fairyWand(4, WandType.DISTORTION, "Distortion", "歪曲", 1, { ItemFairyWand() })
-        fairyWand(4, WandType.FUSION, "Fusion", "融合", 1, { ItemFairyWand() })
+        (1..5).forEach { fairyWand(it, WandType.CRAFTING, "Crafting", "技巧", it, { ItemFairyWand() }) }
+        (1..5).forEach { fairyWand(it, WandType.HYDRATING, "Hydrating", "加水", it, { ItemFairyWand() }, "container1000Water") }
+        (1..4).forEach { fairyWand(it + 1, WandType.MELTING, "Melting", "紅蓮", it, { ItemFairyWand() }) }
+        (1..4).forEach { fairyWand(it + 1, WandType.BREAKING, "Breaking", "破砕", it, { ItemFairyWand() }) }
+        (1..4).forEach { fairyWand(it + 1, WandType.FREEZING, "Freezing", "氷晶", it, { ItemFairyWand() }) }
+        (1..3).forEach { fairyWand(it + 2, WandType.POLISHING, "Polishing", "珠玉", it, { ItemFairyWand() }) }
+        val a = listOf(-1, 2, 5, 5)
+        (1..3).forEach { fairyWand(it + 2, WandType.SUMMONING, "Wizard's", "冥王", it, { ItemFairyWandSummoning(a[it]) }) }
+        (1..2).forEach { fairyWand(it + 3, WandType.DISTORTION, "Distortion", "歪曲", it, { ItemFairyWand() }) }
+        (1..2).forEach { fairyWand(it + 3, WandType.FUSION, "Fusion", "融合", it, { ItemFairyWand() }) }
 
         onMakeLang {
             enJa("item.fairyWandCrafting.poem", "", "スフィアから聞こえる、妖精の声")
             enJa("item.fairyWandCrafting2.poem", "", "靴を作ってくれる妖精さん")
             enJa("item.fairyWandCrafting3.poem", "", "魔法の鍋掴み")
             enJa("item.fairyWandCrafting4.poem", "", "妖精の3Dプリンター")
+            enJa("item.fairyWandCrafting5.poem", "", "これで料理をすれば手が油まみれにならずに済みます")
             enJa("item.fairyWandHydrating.poem", "", "物質生成の初歩")
             enJa("item.fairyWandHydrating2.poem", "", "先端のこれはぷにぷにしている")
             enJa("item.fairyWandHydrating3.poem", "", "直射日光を避けて保管してください。")
             enJa("item.fairyWandHydrating4.poem", "", "マッサージに使うと気持ちよい")
+            enJa("item.fairyWandHydrating5.poem", "", "なぜか周囲の空気の湿度が下がる")
             enJa("item.fairyWandMelting.poem", "", "金属を溶かすほどの情熱")
             enJa("item.fairyWandMelting2.poem", "", "高温注意！")
             enJa("item.fairyWandMelting3.poem", "", "かまどの火とは何かが違う")
+            enJa("item.fairyWandMelting4.poem", "", "意外とこれ、触っても熱くないんです")
             enJa("item.fairyWandBreaking.poem", "", "これで釘を打たないように")
             enJa("item.fairyWandBreaking2.poem", "", "振ると衝撃波が迸る")
             enJa("item.fairyWandBreaking3.poem", "", "実はガラスより脆い")
+            enJa("item.fairyWandBreaking4.poem", "", "分子間の結合を弱める作用")
             enJa("item.fairyWandFreezing.poem", "", "料理に大活躍")
             enJa("item.fairyWandFreezing2.poem", "", "物体のフォノンを消滅させる")
             enJa("item.fairyWandFreezing3.poem", "", "お手軽反エントロピー")
+            enJa("item.fairyWandFreezing4.poem", "", "消えた熱エネルギーはどこへ？")
             enJa("item.fairyWandPolishing.poem", "", "究極に手先の器用な妖精さん")
             enJa("item.fairyWandPolishing2.poem", "", "分子のセーター")
+            enJa("item.fairyWandPolishing3.poem", "", "2個の宝石をくっつける。いつの間にか結晶の向きが揃っている")
             enJa("item.fairyWandSummoning.poem", "The magic of the contract: thia ri me sorie ge Fairy'a zi miyukto", "契約の魔法、ｼｱ ﾘ ﾒ ｿｰﾘｴ ｹﾞ ﾌｧｲﾘｱ ｼﾞ ﾐﾕｸﾄ")
             enJa("item.fairyWandSummoning2.poem", "The magic of feeding: me Fairy'a ri me Crystal'a zi karto", "給餌の魔法、ﾒ ﾌｧｲﾘｱ ﾘ ﾒ ﾂﾘｽﾀｰﾗ ｼﾞ ｶﾙﾄ")
+            enJa("item.fairyWandSummoning3.poem", "The magic of return: me Fairy'a ri haito", "帰還の魔法、ﾒ ﾌｧｲﾘｱ ﾘ ﾊｲﾄ")
             enJa("item.fairyWandDistortion.poem", "", "空間がねじれている")
+            enJa("item.fairyWandDistortion2.poem", "", "エンダーチェストにエンダーチェストを入れると…？")
             enJa("item.fairyWandFusion.poem", "", "4次元折り紙")
+            enJa("item.fairyWandFusion2.poem", "", "いしのなかにいる")
         }
 
         onMakeLang {
@@ -243,25 +238,34 @@ object Wand {
             val crafting_fairy_wand_2 = Achievement("crafting_fairy_wand_2", "fairyWandCrafting2", crafting_fairy_wand)
             val crafting_fairy_wand_3 = Achievement("crafting_fairy_wand_3", "fairyWandCrafting3", crafting_fairy_wand_2)
             val crafting_fairy_wand_4 = Achievement("crafting_fairy_wand_4", "fairyWandCrafting4", crafting_fairy_wand_3)
+            val crafting_fairy_wand_5 = Achievement("crafting_fairy_wand_5", "fairyWandCrafting5", crafting_fairy_wand_4)
             val hydrating_fairy_wand = Achievement("hydrating_fairy_wand", "fairyWandHydrating", null)
             val hydrating_fairy_wand_2 = Achievement("hydrating_fairy_wand_2", "fairyWandHydrating2", hydrating_fairy_wand)
             val hydrating_fairy_wand_3 = Achievement("hydrating_fairy_wand_3", "fairyWandHydrating3", hydrating_fairy_wand_2)
             val hydrating_fairy_wand_4 = Achievement("hydrating_fairy_wand_4", "fairyWandHydrating4", hydrating_fairy_wand_3)
+            val hydrating_fairy_wand_5 = Achievement("hydrating_fairy_wand_5", "fairyWandHydrating5", hydrating_fairy_wand_4)
             val melting_fairy_wand = Achievement("melting_fairy_wand", "fairyWandMelting", null)
             val melting_fairy_wand_2 = Achievement("melting_fairy_wand_2", "fairyWandMelting2", melting_fairy_wand)
             val melting_fairy_wand_3 = Achievement("melting_fairy_wand_3", "fairyWandMelting3", melting_fairy_wand_2)
+            val melting_fairy_wand_4 = Achievement("melting_fairy_wand_4", "fairyWandMelting4", melting_fairy_wand_3)
             val breaking_fairy_wand = Achievement("breaking_fairy_wand", "fairyWandBreaking", null)
             val breaking_fairy_wand_2 = Achievement("breaking_fairy_wand_2", "fairyWandBreaking2", breaking_fairy_wand)
             val breaking_fairy_wand_3 = Achievement("breaking_fairy_wand_3", "fairyWandBreaking3", breaking_fairy_wand_2)
+            val breaking_fairy_wand_4 = Achievement("breaking_fairy_wand_4", "fairyWandBreaking4", breaking_fairy_wand_3)
             val freezing_fairy_wand = Achievement("freezing_fairy_wand", "fairyWandFreezing", null)
             val freezing_fairy_wand_2 = Achievement("freezing_fairy_wand_2", "fairyWandFreezing2", freezing_fairy_wand)
             val freezing_fairy_wand_3 = Achievement("freezing_fairy_wand_3", "fairyWandFreezing3", freezing_fairy_wand_2)
+            val freezing_fairy_wand_4 = Achievement("freezing_fairy_wand_4", "fairyWandFreezing4", freezing_fairy_wand_3)
             val polishing_fairy_wand = Achievement("polishing_fairy_wand", "fairyWandPolishing", null)
             val polishing_fairy_wand_2 = Achievement("polishing_fairy_wand_2", "fairyWandPolishing2", polishing_fairy_wand)
+            val polishing_fairy_wand_3 = Achievement("polishing_fairy_wand_3", "fairyWandPolishing3", polishing_fairy_wand_2)
             val summoning_fairy_wand = Achievement("summoning_fairy_wand", "fairyWandSummoning", null)
             val summoning_fairy_wand_2 = Achievement("summoning_fairy_wand_2", "fairyWandSummoning2", summoning_fairy_wand)
+            val summoning_fairy_wand_3 = Achievement("summoning_fairy_wand_3", "fairyWandSummoning3", summoning_fairy_wand_2)
             val distortion_fairy_wand = Achievement("distortion_fairy_wand", "fairyWandDistortion", null)
+            val distortion_fairy_wand_2 = Achievement("distortion_fairy_wand_2", "fairyWandDistortion2", distortion_fairy_wand)
             val fusion_fairy_wand = Achievement("fusion_fairy_wand", "fairyWandFusion", null)
+            val fusion_fairy_wand_2 = Achievement("fusion_fairy_wand_2", "fairyWandFusion2", fusion_fairy_wand)
 
         }
 

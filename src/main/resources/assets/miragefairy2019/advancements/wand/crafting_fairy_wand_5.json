@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "miragefairy2019:crafting_fairy_wand_5"
+    },
+    "title": {
+      "translate": "item.fairyWandCrafting5.name"
+    },
+    "description": {
+      "translate": "advancements.miragefairy2019.wand.all.description"
+    }
+  },
+  "parent": "miragefairy2019:wand/crafting_fairy_wand_4",
+  "criteria": {
+    "main": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miragefairy2019:crafting_fairy_wand_5"
+          }
+        ]
+      }
+    }
+  }
+}
