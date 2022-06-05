@@ -1,5 +1,8 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.api.Erg
+import miragefairy2019.api.Mana
+import miragefairy2019.lib.fairyCentrifugeCraftHandler
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
@@ -21,6 +24,7 @@ import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
+import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.libkt.setUnlocalizedName
@@ -133,6 +137,17 @@ object FairyMaterials {
                 it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.bottleMirageFlowerExtract.createItemStack() }
             })
 
+            // ミラの葉30＋燐灰石の粉2＋空き瓶＞錬金の家→ミラエキス瓶
+            fairyCentrifugeCraftHandler {
+                process("粉砕", 20.0) { !Mana.GAIA + !Erg.DESTROY } // TODO translate
+                process("抽出", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
+                process("精製", 60.0) { !Mana.FIRE + !Erg.CHEMICAL } // TODO translate
+                input(itemVariants.leafMirageFlower().createItemStack().ingredient, 30)
+                input("dustApatite".oreIngredient, 2)
+                input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+                output(itemVariants.bottleMirageFlowerExtract.createItemStack(), 1.0)
+            }
+
             // 空き瓶＋ミラ種50個＋辰砂の粉4個＞珠玉→ミラオイル瓶
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(WandType.POLISHING.ingredient)
@@ -150,6 +165,17 @@ object FairyMaterials {
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustCinnabar"), 3)
                 it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.bottleMirageFlowerOil.createItemStack() }
             })
+
+            // ミラの種30＋辰砂の粉2＋空き瓶＞錬金の家→ミラオイル瓶
+            fairyCentrifugeCraftHandler {
+                process("粉砕", 20.0) { !Mana.GAIA + !Erg.DESTROY } // TODO translate
+                process("抽出", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
+                process("精製", 60.0) { !Mana.FIRE + !Erg.CHEMICAL } // TODO translate
+                input(MirageFlower.itemMirageFlowerSeeds().createItemStack().ingredient, 30)
+                input("dustCinnabar".oreIngredient, 2)
+                input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+                output(itemVariants.bottleMirageFlowerOil.createItemStack(), 1.0)
+            }
 
         }
 

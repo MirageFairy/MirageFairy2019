@@ -158,6 +158,28 @@ object FairyBox {
                     output(Items.SUGAR.createItemStack(), 3.0, 1.0)
                 }
 
+                // 樹液64＋燐灰石の粉2＋空き瓶→ミラージュエキス入り瓶
+                fairyCentrifugeCraftHandler {
+                    process("蒸留", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
+                    process("遠心分離", 40.0) { !Mana.GAIA + !Erg.SPACE } // TODO translate
+                    process("オーラ破壊", 40.0) { !Mana.WIND + !Erg.ATTACK } // TODO translate
+                    input("mirageFairyWoodResin".oreIngredient, 64)
+                    input("dustApatite".oreIngredient, 2)
+                    input(Items.GLASS_BOTTLE.ingredient, 1)
+                    output(FairyMaterials.itemVariants.bottleMirageFlowerExtract.createItemStack(), 1.0)
+                }
+
+                // 樹液64＋辰砂の粉2＋空き瓶→ミラージュオイル入り瓶
+                fairyCentrifugeCraftHandler {
+                    process("蒸留", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
+                    process("遠心分離", 40.0) { !Mana.GAIA + !Erg.SPACE } // TODO translate
+                    process("オーラ濃縮", 40.0) { !Mana.WIND + !Erg.LEVITATE } // TODO translate
+                    input("mirageFairyWoodResin".oreIngredient, 64)
+                    input("dustCinnabar".oreIngredient, 2)
+                    input(Items.GLASS_BOTTLE.ingredient, 1)
+                    output(FairyMaterials.itemVariants.bottleMirageFlowerOil.createItemStack(), 1.0)
+                }
+
 
                 // 抽出
 
