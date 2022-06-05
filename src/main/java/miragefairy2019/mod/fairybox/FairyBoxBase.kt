@@ -118,6 +118,13 @@ class BlockFairyBoxBase(private val tileEntityProvider: () -> TileEntityFairyBox
 
 abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
 
+    // ブロック
+
+    fun getBlockState(): IBlockState = world.getBlockState(pos)
+    fun getBlock() = getBlockState().block as? BlockFairyBoxBase
+    fun getFacing() = getBlock()?.getFacing(getBlockState()) ?: EnumFacing.SOUTH
+
+
     // 特性
 
     open fun getDropItemStacks() = listOf<ItemStack>()
