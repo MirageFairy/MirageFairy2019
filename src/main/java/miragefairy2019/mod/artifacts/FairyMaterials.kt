@@ -143,7 +143,7 @@ object FairyMaterials {
             fairyCentrifugeCraftHandler {
                 process("粉砕", 20.0) { !Mana.GAIA + !Erg.DESTROY } // TODO translate
                 process("抽出", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
-                process("精製", 60.0) { !Mana.FIRE + !Erg.CHEMICAL } // TODO translate
+                process("精製", 60.0) { !Mana.WIND + !Erg.CHEMICAL } // TODO translate
                 input(itemVariants.leafMirageFlower().createItemStack().ingredient, 30)
                 input("dustApatite".oreIngredient, 2)
                 input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
@@ -172,7 +172,7 @@ object FairyMaterials {
             fairyCentrifugeCraftHandler {
                 process("粉砕", 20.0) { !Mana.GAIA + !Erg.DESTROY } // TODO translate
                 process("抽出", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
-                process("精製", 60.0) { !Mana.FIRE + !Erg.CHEMICAL } // TODO translate
+                process("精製", 60.0) { !Mana.WIND + !Erg.CHEMICAL } // TODO translate
                 input(MirageFlower.itemMirageFlowerSeeds().createItemStack().ingredient, 30)
                 input("dustCinnabar".oreIngredient, 2)
                 input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
