@@ -1,26 +1,26 @@
 {
-	"type": "forge:ore_shaped",
-	"group": "summoning_fairy_wand_2",
-	"pattern": [
-		" cS",
-		" R ",
-		"R  "
-	],
-	"key": {
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"R": {
-			"type": "forge:ore_dict",
-			"ore": "stickMirageFairyWood"
-		},
-		"S": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereSubmission"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:summoning_fairy_wand_2"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " cS",
+    " R ",
+    "R  "
+  ],
+  "key": {
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "stickMirageFairyWood"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereSubmission"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:summoning_fairy_wand_2",
+    "count": 1
+  }
 }
