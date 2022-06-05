@@ -6,9 +6,9 @@ import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.artifacts.FairyMaterials
 import mirrg.boron.util.UtilsMath
+import mirrg.kotlin.formatAs
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
-import mirrg.kotlin.formatAs
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumFacing
@@ -17,9 +17,7 @@ import net.minecraft.util.math.AxisAlignedBB
 
 class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
     override fun getExecutor(): IFairyBoxExecutor {
-        val blockState = world.getBlockState(pos)
-        val block = blockState.block as? BlockFairyBoxBase ?: return super.getExecutor()
-        val facing = block.getFacing(blockState)
+        val facing = getFacing() ?: return super.getExecutor()
         val blockPosOutput = pos.offset(facing)
 
         // 目の前にアイテムがある場合は行動しない（Lazy Chunk対策）
