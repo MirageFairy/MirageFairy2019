@@ -124,7 +124,7 @@ object FairyMaterials {
                 it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.bottleMirageFlowerExtract.createItemStack() }
             })
 
-            // 空き瓶＋ミラ葉50個＞歪曲→ミラエキス瓶
+            // 空き瓶＋ミラ葉40個＞歪曲→ミラエキス瓶
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(WandType.DISTORTION.ingredient)
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
