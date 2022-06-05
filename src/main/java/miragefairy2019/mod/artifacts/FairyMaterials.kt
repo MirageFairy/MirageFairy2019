@@ -88,6 +88,7 @@ object FairyMaterials {
             r("fairySyrup", "Fairy Syrup", "妖精のシロップ", "爽やかで心が洗われるような「水色」の香り")
             r("fairyPlastic", "Fairy Plastic", "妖精のプラスチック", "熱可塑性有機高分子")
             r("fairyPlasticWithFairy", "Fairy Plastic with Fairy", "妖精入り妖精のプラスチック", "何を見てヨシ！って言ったんですか！？")
+            r("fairyPlasticRod", "Fairy Plastic Rod", "妖精のプラスチックの棒", "魔導性抜群！耐久度抜群！耐水性最悪！")
         }
 
         // レシピ
@@ -248,6 +249,25 @@ object FairyMaterials {
         makeSphereBaseRecipe("heliolite")
         makeSphereBaseRecipe("labradorite")
 
+        // 妖精のプラスチック2→妖精のプラスチックの棒4
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "fairy_plastic_rod"),
+            DataShapedRecipe(
+                pattern = listOf(
+                    "X",
+                    "X"
+                ),
+                key = mapOf(
+                    "X" to DataOreIngredient(ore = "gemMirageFairyPlastic")
+                ),
+                result = DataResult(
+                    item = "miragefairy2019:fairy_materials",
+                    data = 20,
+                    count = 4
+                )
+            )
+        )
+
     }
 
 
@@ -283,6 +303,7 @@ object FairyMaterials {
         val fairySyrup = iv(17, "fairy_syrup", "fairySyrup", 4, listOf("mirageFairySyrup"))
         val fairyPlastic = iv(18, "fairy_plastic", "fairyPlastic", 5, listOf("gemMirageFairyPlastic"))
         val fairyPlasticWithFairy = iv(19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy", 5, listOf("gemMirageFairyPlasticWithFairy"))
+        val fairyPlasticRod = iv(20, "fairy_plastic_rod", "fairyPlasticRod", 5, listOf("rodMirageFairyPlastic"))
     }
 }
 

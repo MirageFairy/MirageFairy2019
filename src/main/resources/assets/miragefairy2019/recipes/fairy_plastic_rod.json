@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "X",
+    "X"
+  ],
+  "key": {
+    "X": {
+      "type": "forge:ore_dict",
+      "ore": "gemMirageFairyPlastic"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:fairy_materials",
+    "data": 20,
+    "count": 4
+  }
+}
