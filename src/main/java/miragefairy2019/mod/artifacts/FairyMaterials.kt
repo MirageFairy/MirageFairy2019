@@ -281,8 +281,8 @@ object FairyMaterials {
         val fairyWoodResin = iv(15, "fairy_wood_resin", "fairyWoodResin", 4, listOf("mirageFairyWoodResin")).fuel(1600)
         val sphereBase = iv(16, "sphere_base", "sphereBase", 3, listOf("mirageFairy2019SphereBase"))
         val fairySyrup = iv(17, "fairy_syrup", "fairySyrup", 4, listOf("mirageFairySyrup"))
-        val fairyPlastic = iv(18, "fairy_plastic", "fairyPlastic", 5, listOf("mirageFairyPlastic"))
-        val fairyPlasticWithFairy = iv(19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy", 5, listOf("mirageFairyPlasticWithFairy"))
+        val fairyPlastic = iv(18, "fairy_plastic", "fairyPlastic", 5, listOf("gemMirageFairyPlastic"))
+        val fairyPlasticWithFairy = iv(19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy", 5, listOf("gemMirageFairyPlasticWithFairy"))
     }
 }
 
