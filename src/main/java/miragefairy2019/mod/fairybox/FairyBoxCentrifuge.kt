@@ -18,6 +18,7 @@ import miragefairy2019.lib.WindowProperty
 import miragefairy2019.lib.compound
 import miragefairy2019.lib.compoundOrCreate
 import miragefairy2019.lib.container
+import miragefairy2019.lib.div
 import miragefairy2019.lib.factors
 import miragefairy2019.lib.fairyType
 import miragefairy2019.lib.get
@@ -29,6 +30,7 @@ import miragefairy2019.lib.readFromNBT
 import miragefairy2019.lib.readInventory
 import miragefairy2019.lib.set
 import miragefairy2019.lib.writeToNBT
+import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.flatten
 import miragefairy2019.libkt.gray
 import miragefairy2019.libkt.randomInt
@@ -42,6 +44,8 @@ import mirrg.kotlin.formatAs
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.inventory.IInventory
+import net.minecraft.inventory.ISidedInventory
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -49,7 +53,7 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.text.ITextComponent
 
-class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
+class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedInventory {
 
     // Inventory
 
@@ -79,7 +83,66 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase() {
 
     override fun getDropItemStacks() = listOf(fairyInventory, inputInventory, resultInventory, outputInventory).flatMap { it.itemStacks }
 
-    // TODO override fun getSidedInventoryHandler
+
+    // IWorldNameable
+
+    override fun getName() = "tile.fairyCentrifuge.name"
+    override fun hasCustomName() = false
+    override fun getDisplayName() = textComponent { translate(getName()) }
+
+
+    // IInventory
+
+    override fun getSizeInventory() = 18
+    override fun isEmpty() = inputInventory.isEmpty && outputInventory.isEmpty
+    override fun getStackInSlot(index: Int): ItemStack = if (index < 9) inputInventory.getStackInSlot(index) else outputInventory.getStackInSlot(index - 9)
+    override fun decrStackSize(index: Int, count: Int): ItemStack = if (index < 9) inputInventory.decrStackSize(index, count) else outputInventory.decrStackSize(index - 9, count)
+    override fun removeStackFromSlot(index: Int): ItemStack = if (index < 9) inputInventory.removeStackFromSlot(index) else outputInventory.removeStackFromSlot(index - 9)
+    override fun setInventorySlotContents(index: Int, itemStack: ItemStack) = if (index < 9) inputInventory.setInventorySlotContents(index, itemStack) else outputInventory.setInventorySlotContents(index - 9, itemStack)
+    override fun getInventoryStackLimit() = 64
+
+    override fun markDirty() = super.markDirty()
+
+    override fun isUsableByPlayer(player: EntityPlayer) = inputInventory.isUsableByPlayer(player) && outputInventory.isUsableByPlayer(player)
+
+    override fun openInventory(player: EntityPlayer) = Unit
+    override fun closeInventory(player: EntityPlayer) = Unit
+
+    override fun isItemValidForSlot(index: Int, itemStack: ItemStack) = when (index) {
+        in 0 until 9 -> inputInventory.isItemValidForSlot(index - 0, itemStack)
+        else -> false
+    }
+
+    override fun getField(id: Int) = 0
+    override fun setField(id: Int, value: Int) = Unit
+    override fun getFieldCount() = 0
+
+    override fun clear() {
+        inputInventory.clear()
+        outputInventory.clear()
+    }
+
+
+    // ISidedInventory
+
+    override fun getSlotsForFace(facing: EnumFacing) = when (facing / getFacing()) {
+        EnumFacing.WEST, EnumFacing.NORTH, EnumFacing.UP -> (0 until 9).toList().toIntArray()
+        EnumFacing.EAST, EnumFacing.DOWN -> (9 until 18).toList().toIntArray()
+        else -> intArrayOf()
+    }
+
+    override fun canInsertItem(index: Int, itemStack: ItemStack, facing: EnumFacing): Boolean {
+        if (!isItemValidForSlot(index, itemStack)) return false
+        if (index >= 9) return true
+        (0 until 9).forEach { i ->
+            if (i != index) {
+                if (inputInventory[i] equalsItemDamageTag itemStack) return false
+            }
+        }
+        return true
+    }
+
+    override fun canExtractItem(index: Int, itemStack: ItemStack, facing: EnumFacing) = true
 
 
     // Tree
