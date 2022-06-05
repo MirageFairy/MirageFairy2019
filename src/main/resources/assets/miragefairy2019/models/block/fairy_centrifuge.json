@@ -15,8 +15,8 @@
     {   "from": [ 0, 0, 0 ],
       "to": [ 16, 16, 16 ],
       "faces": {
-        "down":  { "texture": "#output", "cullface": "down" },
-        "up":    { "texture": "#input", "cullface": "up" },
+        "down":  { "texture": "#vertical_output", "cullface": "down" },
+        "up":    { "texture": "#vertical_input", "cullface": "up" },
         "north": { "texture": "#entrance", "cullface": "north" },
         "south": { "texture": "#input", "cullface": "south" },
         "west":  { "texture": "#output", "cullface": "west" },
@@ -30,6 +30,8 @@
     "side": "miragefairy2019:blocks/fairy_wood_log",
     "entrance": "miragefairy2019:blocks/fairy_centrifuge_entrance",
     "input": "miragefairy2019:blocks/fairy_centrifuge_input",
-    "output": "miragefairy2019:blocks/fairy_centrifuge_output"
+    "output": "miragefairy2019:blocks/fairy_centrifuge_output",
+    "vertical_input": "miragefairy2019:blocks/fairy_box_input",
+    "vertical_output": "miragefairy2019:blocks/fairy_box_output2"
   }
 }
