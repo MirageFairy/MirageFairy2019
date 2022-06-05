@@ -50,7 +50,7 @@ object FairyBox {
 
         // 妖精の家（空）
         run {
-            val block = block({ BlockFairyBoxBase { TileEntityFairyBoxEmpty() } }, "fairy_box") {
+            val block = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxEmpty() } }, "fairy_box") {
                 setUnlocalizedName("fairyBox")
                 setCreativeTab { Main.creativeTab }
                 makeBlockStates {
@@ -71,7 +71,7 @@ object FairyBox {
 
         // 樹液の家
         run {
-            val block = block({ BlockFairyBoxBase { TileEntityFairyBoxResinTapper() } }, "fairy_resin_tapper") {
+            val block = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxResinTapper() } }, "fairy_resin_tapper") {
                 setUnlocalizedName("fairyResinTapper")
                 setCreativeTab { Main.creativeTab }
                 makeBlockStates {
@@ -92,7 +92,7 @@ object FairyBox {
 
         // 分離機
         run {
-            blockFairyCentrifuge = block({ BlockFairyBoxBase { TileEntityFairyBoxCentrifuge() } }, "fairy_centrifuge") {
+            blockFairyCentrifuge = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxCentrifuge() } }, "fairy_centrifuge") {
                 setUnlocalizedName("fairyCentrifuge")
                 setCreativeTab { Main.creativeTab }
                 makeBlockStates {

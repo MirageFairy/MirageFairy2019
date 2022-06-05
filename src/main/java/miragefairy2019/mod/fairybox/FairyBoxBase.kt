@@ -1,5 +1,6 @@
 package miragefairy2019.mod.fairybox
 
+import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.translateToLocal
@@ -36,7 +37,7 @@ import java.util.Random
 import kotlin.math.floor
 import kotlin.math.log
 
-class BlockFairyBoxBase(private val tileEntityProvider: () -> TileEntityFairyBoxBase) : BlockContainer(Material.WOOD) {
+class BlockFairyBoxBase(private val tier: Int, private val tileEntityProvider: () -> TileEntityFairyBoxBase) : BlockContainer(Material.WOOD) {
     init {
 
         // meta
@@ -103,6 +104,8 @@ class BlockFairyBoxBase(private val tileEntityProvider: () -> TileEntityFairyBox
             val string = translateToLocal("$unlocalizedName.poem")
             if (string.isNotBlank()) tooltip += formattedText { string() }
         }
+
+        tooltip += formattedText { "Tier $tier"().aqua } // tier // TODO translate
 
     }
 
