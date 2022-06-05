@@ -238,6 +238,8 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	item("fairy_wood_resin");
 	item("sphere_base");
 	item("fairy_syrup");
+	item("fairy_plastic");
+	item("fairy_plastic_with_fairy");
 
 	# ポット
 	item("pot");

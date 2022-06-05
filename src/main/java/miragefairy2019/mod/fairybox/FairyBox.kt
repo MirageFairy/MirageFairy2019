@@ -162,6 +162,18 @@ object FairyBox {
                     output(Items.SUGAR.createItemStack(), 3.0, 1.0)
                 }
 
+                // 樹液64＋骨粉8＋黒曜石→妖精のプラスチック
+                fairyCentrifugeCraftHandler {
+                    process("蒸留", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
+                    process("歪縮", 50.0) { !Mana.WIND + !Erg.SPACE } // TODO translate
+                    process("重合", 30.0) { !Mana.FIRE + !Erg.CHEMICAL } // TODO translate
+                    input("mirageFairyWoodResin".oreIngredient, 64)
+                    input(Items.DYE.createItemStack(metadata = 15).ingredient, 8)
+                    input("obsidian".oreIngredient, 1)
+                    output(FairyMaterials.itemVariants.fairyPlastic.createItemStack(), 1.0, 1.0)
+                    output(FairyMaterials.itemVariants.fairyPlasticWithFairy.createItemStack(), 0.01)
+                }
+
                 // 樹液64＋燐灰石の粉2＋空き瓶→ミラージュエキス入り瓶
                 fairyCentrifugeCraftHandler {
                     process("蒸留", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
