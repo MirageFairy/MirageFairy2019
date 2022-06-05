@@ -161,8 +161,8 @@ object Wand {
             enJa("item.fairyWandFreezing3.poem", "", "お手軽反エントロピー")
             enJa("item.fairyWandPolishing.poem", "", "究極に手先の器用な妖精さん")
             enJa("item.fairyWandPolishing2.poem", "", "分子のセーター")
-            enJa("item.fairyWandSummoning.poem", "The magic of the contract: thia ri me sorie ge Fairy'a zi miyukto", "契約の魔法、シア リ メ ソーリエ ゲ ファイリア ジ ミユクト")
-            enJa("item.fairyWandSummoning2.poem", "The magic of feeding: me Fairy'a ri me Crystal'a zi karto", "給餌の魔法、メ ファイリア リ メ ツリスターラ ジ カルト")
+            enJa("item.fairyWandSummoning.poem", "The magic of the contract: thia ri me sorie ge Fairy'a zi miyukto", "契約の魔法、ｼｱ ﾘ ﾒ ｿｰﾘｴ ｹﾞ ﾌｧｲﾘｱ ｼﾞ ﾐﾕｸﾄ")
+            enJa("item.fairyWandSummoning2.poem", "The magic of feeding: me Fairy'a ri me Crystal'a zi karto", "給餌の魔法、ﾒ ﾌｧｲﾘｱ ﾘ ﾒ ﾂﾘｽﾀｰﾗ ｼﾞ ｶﾙﾄ")
             enJa("item.fairyWandDistortion.poem", "", "空間がねじれている")
             enJa("item.fairyWandFusion.poem", "", "4次元折り紙")
         }
