@@ -65,6 +65,7 @@ object FairyBox {
                 setCustomModelResourceLocation(variant = "facing=north")
             }
             onMakeLang { enJa("tile.fairyBox.name", "Fairy Box", "妖精の家") }
+            onMakeLang { enJa("tile.fairyBox.poem", "", "大きな刳りの木の中で") }
             tileEntity("fairy_box", TileEntityFairyBoxEmpty::class.java)
         }
 
@@ -85,6 +86,7 @@ object FairyBox {
                 setCustomModelResourceLocation(variant = "facing=north")
             }
             onMakeLang { enJa("tile.fairyResinTapper.name", "Fairy Resin Tapper", "樹液取り職人スプルーツァの家") }
+            onMakeLang { enJa("tile.fairyResinTapper.poem", "", "妖精だから、森に帰ります") }
             tileEntity("fairy_resin_tapper", TileEntityFairyBoxResinTapper::class.java)
         }
 
@@ -105,6 +107,7 @@ object FairyBox {
                 setCustomModelResourceLocation(variant = "facing=north")
             }
             onMakeLang { enJa("tile.fairyCentrifuge.name", "Fairy Centrifuge", "錬金術師グラヴィーチャの家") }
+            onMakeLang { enJa("tile.fairyCentrifuge.poem", "`Super Strange Theory'", "“超変理論”") }
             tileEntity("fairy_centrifuge", TileEntityFairyBoxCentrifuge::class.java)
             onInit {
                 Main.registerGuiHandler(GuiId.fairyBoxCentrifuge, object : ISimpleGuiHandler {

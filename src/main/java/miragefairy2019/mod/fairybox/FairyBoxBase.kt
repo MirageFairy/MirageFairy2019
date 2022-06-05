@@ -1,5 +1,8 @@
 package miragefairy2019.mod.fairybox
 
+import miragefairy2019.libkt.canTranslate
+import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.translateToLocal
 import mirrg.kotlin.castOrNull
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
@@ -7,6 +10,7 @@ import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyEnum
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
@@ -87,6 +91,20 @@ class BlockFairyBoxBase(private val tileEntityProvider: () -> TileEntityFairyBox
     @SideOnly(Side.CLIENT)
     override fun getBlockLayer() = BlockRenderLayer.CUTOUT_MIPPED
     override fun getRenderType(state: IBlockState) = EnumBlockRenderType.MODEL
+
+
+    // View
+
+    @SideOnly(Side.CLIENT)
+    override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, tooltipFlag: ITooltipFlag) {
+        super.addInformation(itemStack, world, tooltip, tooltipFlag)
+
+        if (canTranslate("$unlocalizedName.poem")) { // ポエム
+            val string = translateToLocal("$unlocalizedName.poem")
+            if (string.isNotBlank()) tooltip += formattedText { string() }
+        }
+
+    }
 
 
     // Action
