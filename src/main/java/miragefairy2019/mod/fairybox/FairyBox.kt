@@ -145,7 +145,7 @@ object FairyBox {
                     input("mirageFairyWoodResin".oreIngredient, 16)
                     input("gemCharcoal".oreIngredient, 1)
                     input(Items.GLASS_BOTTLE.ingredient, 1)
-                    output(FairyMaterials.itemVariants.fairySyrup.createItemStack(), 1.0, 0.5)
+                    output(FairyMaterials.itemVariants.fairySyrup.createItemStack(), 1.0)
                 }
 
                 // 樹液＋砂糖→砂糖3
