@@ -116,15 +116,16 @@ object FairyBox {
                 ResourceName(ModMirageFairy2019.MODID, "fairy_centrifuge"),
                 DataShapedRecipe(
                     pattern = listOf(
-                        "GPG",
-                        "cWc",
+                        "GbG",
+                        "cBc",
                         "P#P"
                     ),
                     key = mapOf(
                         "#" to DataSimpleIngredient(item = "miragefairy2019:fairy_box"),
                         "G" to DataSimpleIngredient(item = "miragefairy2019:gravity_rod"),
                         "P" to DataSimpleIngredient(item = "miragefairy2019:pot"),
-                        "W" to DataOreIngredient(ore = "workbench"),
+                        "B" to DataSimpleIngredient(item = "minecraft:bucket"),
+                        "b" to DataSimpleIngredient(item = "minecraft:brewing_stand"),
                         "c" to DataOreIngredient(ore = "mirageFairy2019SphereChemical")
                     ),
                     result = DataResult(

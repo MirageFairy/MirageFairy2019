@@ -1,8 +1,8 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "GPG",
-    "cWc",
+    "GbG",
+    "cBc",
     "P#P"
   ],
   "key": {
@@ -15,9 +15,11 @@
     "P": {
       "item": "miragefairy2019:pot"
     },
-    "W": {
-      "type": "forge:ore_dict",
-      "ore": "workbench"
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "b": {
+      "item": "minecraft:brewing_stand"
     },
     "c": {
       "type": "forge:ore_dict",
