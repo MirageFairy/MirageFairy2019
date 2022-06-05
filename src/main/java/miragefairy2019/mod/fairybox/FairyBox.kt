@@ -137,12 +137,13 @@ object FairyBox {
 
                 // 鉱石処理
 
-                // 樹液16＋ガラス瓶→シロップ
+                // 樹液16＋木炭＋ガラス瓶→シロップ
                 fairyCentrifugeCraftHandler {
                     process("ろ過", 20.0) { !Mana.DARK + !Erg.WATER } // TODO translate
                     process("蒸留", 70.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
                     process("調味", 10.0) { !Mana.AQUA + !Erg.LIFE } // TODO translate
                     input("mirageFairyWoodResin".oreIngredient, 16)
+                    input("gemCharcoal".oreIngredient, 1)
                     input(Items.GLASS_BOTTLE.ingredient, 1)
                     output(FairyMaterials.itemVariants.fairySyrup.createItemStack(), 1.0, 0.5)
                 }
