@@ -27,6 +27,6 @@
     "end": "miragefairy2019:blocks/fairy_wood_log_top",
     "side": "miragefairy2019:blocks/fairy_wood_log",
     "entrance": "miragefairy2019:blocks/fairy_box_entrance",
-    "window": "miragefairy2019:blocks/fairy_box_window"
+    "window": "miragefairy2019:blocks/fairy_box_output"
   }
 }
