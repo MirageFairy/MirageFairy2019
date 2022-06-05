@@ -134,6 +134,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
     override fun canInsertItem(index: Int, itemStack: ItemStack, facing: EnumFacing): Boolean {
         if (!isItemValidForSlot(index, itemStack)) return false
         if (index >= 9) return true
+        if (!inputInventory[index].isEmpty) return true
         (0 until 9).forEach { i ->
             if (i != index) {
                 if (inputInventory[i] equalsItemDamageTag itemStack) return false
