@@ -4,8 +4,12 @@ import miragefairy2019.lib.proxy
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.BlockRegion
 import miragefairy2019.libkt.DataOreIngredient
+import miragefairy2019.libkt.DataResult
+import miragefairy2019.libkt.DataShapedRecipe
+import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.OreIngredientComplex
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.canTranslate
@@ -16,6 +20,7 @@ import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.plus
@@ -25,6 +30,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
@@ -268,6 +274,76 @@ object Wand {
             val fusion_fairy_wand_2 = Achievement("fusion_fairy_wand_2", "fairyWandFusion2", fusion_fairy_wand)
 
         }
+
+        // 普通のワンド
+        fun fairyWand(registerName: String, rod: String, erg: String) = makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, registerName),
+            DataShapedRecipe(
+                pattern = listOf(
+                    " cS",
+                    " R ",
+                    "R  "
+                ),
+                key = mapOf(
+                    "c" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandCrafting"),
+                    "R" to DataOreIngredient(ore = rod),
+                    "S" to DataOreIngredient(ore = "mirageFairy2019Sphere$erg")
+                ),
+                result = DataResult(item = "miragefairy2019:$registerName")
+            )
+        )
+
+        val rs = listOf("stickMirageFlower", "rodMiragium", "mirageFairy2019ManaRodQuartz", "stickMirageFairyWood", "rodMirageFairyPlastic")
+        fairyWand("crafting_fairy_wand", rs[0], "Craft")
+        fairyWand("crafting_fairy_wand_2", rs[1], "Craft")
+        fairyWand("crafting_fairy_wand_3", rs[2], "Craft")
+        fairyWand("crafting_fairy_wand_4", rs[3], "Craft")
+        fairyWand("crafting_fairy_wand_5", rs[4], "Craft")
+        fairyWand("hydrating_fairy_wand", rs[0], "Water")
+        fairyWand("hydrating_fairy_wand_2", rs[1], "Water")
+        fairyWand("hydrating_fairy_wand_3", rs[2], "Water")
+        fairyWand("hydrating_fairy_wand_4", rs[3], "Water")
+        fairyWand("hydrating_fairy_wand_5", rs[4], "Water")
+        fairyWand("melting_fairy_wand", rs[1], "Flame")
+        fairyWand("melting_fairy_wand_2", rs[2], "Flame")
+        fairyWand("melting_fairy_wand_3", rs[3], "Flame")
+        fairyWand("melting_fairy_wand_4", rs[4], "Flame")
+        fairyWand("breaking_fairy_wand", rs[1], "Destroy")
+        fairyWand("breaking_fairy_wand_2", rs[2], "Destroy")
+        fairyWand("breaking_fairy_wand_3", rs[3], "Destroy")
+        fairyWand("breaking_fairy_wand_4", rs[4], "Destroy")
+        fairyWand("freezing_fairy_wand", rs[1], "Freeze")
+        fairyWand("freezing_fairy_wand_2", rs[2], "Freeze")
+        fairyWand("freezing_fairy_wand_3", rs[3], "Freeze")
+        fairyWand("freezing_fairy_wand_4", rs[4], "Freeze")
+        fairyWand("polishing_fairy_wand", rs[2], "Crystal")
+        fairyWand("polishing_fairy_wand_2", rs[3], "Crystal")
+        fairyWand("polishing_fairy_wand_3", rs[4], "Crystal")
+        fairyWand("summoning_fairy_wand", rs[2], "Submission")
+        fairyWand("summoning_fairy_wand_2", rs[3], "Submission")
+        fairyWand("summoning_fairy_wand_3", rs[4], "Submission")
+        fairyWand("distortion_fairy_wand", rs[3], "Space")
+        fairyWand("distortion_fairy_wand_2", rs[4], "Space")
+        fairyWand("fusion_fairy_wand", rs[3], "Warp")
+        fairyWand("fusion_fairy_wand_2", rs[4], "Warp")
+
+        // 糸から技巧杖
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "crafting_fairy_wand_from_string"),
+            DataShapedRecipe(
+                pattern = listOf(
+                    " cS",
+                    " R ",
+                    "R  "
+                ),
+                key = mapOf(
+                    "c" to DataSimpleIngredient(item = "minecraft:string"),
+                    "R" to DataOreIngredient(ore = "stickMirageFlower"),
+                    "S" to DataOreIngredient(ore = "mirageFairy2019SphereCraft")
+                ),
+                result = DataResult(item = "miragefairy2019:crafting_fairy_wand")
+            )
+        )
 
         onAddRecipe {
 
