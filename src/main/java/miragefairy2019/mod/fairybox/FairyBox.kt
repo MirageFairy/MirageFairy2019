@@ -67,6 +67,27 @@ object FairyBox {
             onMakeLang { enJa("tile.fairyBox.name", "Fairy Box", "妖精の家") }
             onMakeLang { enJa("tile.fairyBox.poem", "", "大きな刳りの木の中で") }
             tileEntity("fairy_box", TileEntityFairyBoxEmpty::class.java)
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "fairy_box"),
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "sls",
+                        "PLD",
+                        "sCs"
+                    ),
+                    key = mapOf(
+                        "L" to DataOreIngredient(ore = "logFairyWood"),
+                        "P" to DataOreIngredient(ore = "paneGlass"),
+                        "D" to DataOreIngredient(ore = "doorWood"),
+                        "l" to DataSimpleIngredient(item = "miragefairy2019:light_magic_wand"),
+                        "C" to DataOreIngredient(ore = "mirageFairyLeather"),
+                        "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace")
+                    ),
+                    result = DataResult(
+                        item = "miragefairy2019:fairy_box"
+                    )
+                )
+            )
         }
 
         // 樹液の家
@@ -88,6 +109,27 @@ object FairyBox {
             onMakeLang { enJa("tile.fairyResinTapper.name", "Fairy Resin Tapper", "樹液取り職人スプルーツァの家") }
             onMakeLang { enJa("tile.fairyResinTapper.poem", "", "妖精だから、森に帰ります") }
             tileEntity("fairy_resin_tapper", TileEntityFairyBoxResinTapper::class.java)
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "fairy_resin_tapper"),
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "LsL",
+                        "H#H",
+                        "BcB"
+                    ),
+                    key = mapOf(
+                        "#" to DataSimpleIngredient(item = "miragefairy2019:fairy_box"),
+                        "L" to DataSimpleIngredient(item = "miragefairy2019:lilagium_scythe"),
+                        "s" to DataOreIngredient(ore = "mirageFairy2019SphereSlash"),
+                        "H" to DataSimpleIngredient(item = "minecraft:hopper"),
+                        "B" to DataSimpleIngredient(item = "minecraft:bowl"),
+                        "c" to DataOreIngredient(ore = "mirageFairy2019SphereChemical")
+                    ),
+                    result = DataResult(
+                        item = "miragefairy2019:fairy_resin_tapper"
+                    )
+                )
+            )
         }
 
         // 分離機
