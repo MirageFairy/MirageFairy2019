@@ -319,7 +319,7 @@ object FairyMaterials {
         val mirageFairyLeather = iv(14, "mirage_fairy_leather", "mirageFairyLeather", 4, listOf("mirageFairyLeather"))
         val fairyWoodResin = iv(15, "fairy_wood_resin", "fairyWoodResin", 5, listOf("mirageFairyWoodResin")).fuel(1600)
         val sphereBase = iv(16, "sphere_base", "sphereBase", 3, listOf("mirageFairy2019SphereBase"))
-        val fairySyrup = iv(17, "fairy_syrup", "fairySyrup", 5, listOf("mirageFairySyrup"))
+        val fairySyrup = iv(17, "fairy_syrup", "fairySyrup", 5, listOf("mirageFairySyrup")).bottle()
         val fairyPlastic = iv(18, "fairy_plastic", "fairyPlastic", 5, listOf("gemMirageFairyPlastic"))
         val fairyPlasticWithFairy = iv(19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy", 5, listOf("gemMirageFairyPlasticWithFairy"))
         val fairyPlasticRod = iv(20, "fairy_plastic_rod", "fairyPlasticRod", 5, listOf("rodMirageFairyPlastic"))
