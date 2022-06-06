@@ -20,8 +20,6 @@ object FairyDilutionRecipe {
 
                 val inputMotif = inputFairy.type.motif ?: return@forEach
 
-                if (!inputFairy.isDilutable) return@forEach
-
                 GameRegistry.addShapelessRecipe(
                     ResourceLocation("${inputMotif.resourceDomain}:fairy_dilution/${inputMotif.resourcePath}"),
                     null,

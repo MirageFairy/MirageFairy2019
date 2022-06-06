@@ -68,7 +68,7 @@ class FairyType(
     override fun getErgSet() = ergSet
 }
 
-class VariantFairy(val id: Int, val colorSet: ColorSet, val type: FairyType, val rare: Int, val rank: Int, val isDilutable: Boolean) : ItemVariant()
+class VariantFairy(val id: Int, val colorSet: ColorSet, val type: FairyType, val rare: Int, val rank: Int) : ItemVariant()
 
 val VariantFairy.level get() = rare + rank - 1
 
