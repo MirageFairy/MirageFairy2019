@@ -193,14 +193,14 @@ object FairyBox {
                     output("ingotGold".toOreName().copyItemStack() ?: cancel(), 3.0)
                 }
 
-                // 硫黄3＋赤石10→辰砂3
+                // 硫黄3＋赤石10→辰砂6
                 fairyCentrifugeCraftHandler {
                     process("融解", 30.0) { !Mana.WIND + !Erg.FLAME } // TODO translate
                     process("析出", 60.0) { !Mana.FIRE + !Erg.CHEMICAL } // TODO translate
                     process("洗浄", 10.0) { !Mana.GAIA + !Erg.WATER } // TODO translate
                     input("dustSulfur".oreIngredient, 3)
                     input("dustRedstone".oreIngredient, 10)
-                    output("dustCinnabar".toOreName().copyItemStack() ?: cancel(), 3.0)
+                    output("dustCinnabar".toOreName().copyItemStack() ?: cancel(), 6.0)
                 }
 
                 // 石炭の粉64＋フリント8＋黒曜石→ダイヤモンド
