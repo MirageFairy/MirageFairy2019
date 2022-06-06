@@ -7,6 +7,7 @@ import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
 import miragefairy2019.libkt.DataShapelessRecipe
+import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemMultiMaterial
@@ -89,6 +90,7 @@ object FairyMaterials {
             r("fairyPlastic", "Fairy Plastic", "妖精のプラスチック", "熱可塑性有機高分子")
             r("fairyPlasticWithFairy", "Fairy Plastic with Fairy", "妖精入り妖精のプラスチック", "何を見てヨシ！って言ったんですか！？")
             r("fairyPlasticRod", "Fairy Plastic Rod", "妖精のプラスチックの棒", "魔導性抜群、耐久性抜群、耐水性最悪")
+            r("indiaInk", "India Ink", "墨汁", "司書精はこれをコーヒーの代わりに飲んだらしい")
         }
 
         // レシピ
@@ -268,6 +270,23 @@ object FairyMaterials {
             )
         )
 
+        // 木炭の粉＋樹液＋空き瓶→墨汁
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "india_ink"),
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(ore = "dustCharcoal"),
+                    DataOreIngredient(ore = "mirageFairyWoodResin"),
+                    DataSimpleIngredient(item = "minecraft:glass_bottle")
+                ),
+                result = DataResult(
+                    item = "miragefairy2019:fairy_materials",
+                    data = 21,
+                    count = 1
+                )
+            )
+        )
+
     }
 
 
@@ -304,6 +323,7 @@ object FairyMaterials {
         val fairyPlastic = iv(18, "fairy_plastic", "fairyPlastic", 5, listOf("gemMirageFairyPlastic"))
         val fairyPlasticWithFairy = iv(19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy", 5, listOf("gemMirageFairyPlasticWithFairy"))
         val fairyPlasticRod = iv(20, "fairy_plastic_rod", "fairyPlasticRod", 5, listOf("rodMirageFairyPlastic"))
+        val indiaInk = iv(21, "india_ink", "indiaInk", 0, listOf("dyeBlack")).bottle()
     }
 }
 

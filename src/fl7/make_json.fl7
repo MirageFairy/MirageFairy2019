@@ -241,6 +241,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	item("fairy_plastic");
 	item("fairy_plastic_with_fairy");
 	handheld("fairy_plastic_rod");
+	item("india_ink");
 
 	# ポット
 	item("pot");
