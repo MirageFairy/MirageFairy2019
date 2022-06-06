@@ -26,6 +26,15 @@ object FairyLogDropLoader {
 
             FairyTypes.instance.run {
 
+                // 概念系
+                air(0.01) { }
+                time(0.01) { }
+
+                // 天体系
+                sun(0.01) { overworld() }
+                moon(0.01) { overworld() }
+                star(0.01) { overworld() }
+
                 // 時間帯
                 daytime(0.1) { overworld() }
                 night(0.1) { overworld() }
