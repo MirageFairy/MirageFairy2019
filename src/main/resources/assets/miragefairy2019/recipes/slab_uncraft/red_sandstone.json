@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:stone_slab2",
+      "data": 0
+    },
+    {
+      "item": "minecraft:stone_slab2",
+      "data": 0
+    },
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    }
+  ],
+  "result": {
+    "item": "minecraft:red_sandstone",
+    "data": 0,
+    "count": 1
+  }
+}

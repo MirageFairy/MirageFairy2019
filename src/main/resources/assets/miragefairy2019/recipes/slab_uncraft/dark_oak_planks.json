@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:wooden_slab",
+      "data": 5
+    },
+    {
+      "item": "minecraft:wooden_slab",
+      "data": 5
+    },
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    }
+  ],
+  "result": {
+    "item": "minecraft:planks",
+    "data": 5,
+    "count": 1
+  }
+}

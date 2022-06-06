@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:stone_slab",
+      "data": 4
+    },
+    {
+      "item": "minecraft:stone_slab",
+      "data": 4
+    },
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    }
+  ],
+  "result": {
+    "item": "minecraft:brick_block",
+    "count": 1
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:purpur_slab",
+      "data": 0
+    },
+    {
+      "item": "minecraft:purpur_slab",
+      "data": 0
+    },
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    }
+  ],
+  "result": {
+    "item": "minecraft:purpur_block",
+    "count": 1
+  }
+}
