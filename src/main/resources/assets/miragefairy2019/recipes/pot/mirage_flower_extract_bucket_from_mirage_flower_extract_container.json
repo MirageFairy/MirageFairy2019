@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "mirage_flower_extract_bucket",
   "ingredients": [
     {
       "item": "minecraft:bucket"

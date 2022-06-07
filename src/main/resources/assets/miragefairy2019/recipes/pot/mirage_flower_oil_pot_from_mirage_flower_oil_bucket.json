@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "mirage_flower_oil_bucket",
   "ingredients": [
     {
       "type": "forge:ore_dict",

@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "miragium_water_bottle",
   "ingredients": [
     {
       "item": "minecraft:glass_bottle"

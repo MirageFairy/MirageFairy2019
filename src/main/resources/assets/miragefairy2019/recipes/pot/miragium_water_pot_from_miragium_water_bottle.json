@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "miragium_water_bucket",
   "ingredients": [
     {
       "type": "forge:ore_dict",
