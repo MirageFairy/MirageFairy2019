@@ -90,6 +90,18 @@ object Pot {
                 addOreName("mirageFairyPotMirageFlowerOil")
                 addOreName("container1000MirageFlowerOil")
             }
+            itemVariant("water_pot", {
+                ItemVariantFilledPot(it, "mirageFairyPotWater", "water")
+            }, 3) {
+                addOreName("mirageFairyPotWater")
+                addOreName("container1000Water")
+            }
+            itemVariant("lava_pot", {
+                ItemVariantFilledPot(it, "mirageFairyPotLava", "lava")
+            }, 4) {
+                addOreName("mirageFairyPotLava")
+                addOreName("container1000Lava")
+            }
 
             onRegisterItem {
                 if (Main.side.isClient) item.setCustomModelResourceLocations()

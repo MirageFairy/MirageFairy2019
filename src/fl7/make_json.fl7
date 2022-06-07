@@ -248,6 +248,8 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	item("miragium_water_pot");
 	item("mirage_flower_extract_pot");
 	item("mirage_flower_oil_pot");
+	item("water_pot");
+	item("lava_pot");
 
 	# 汎用素材ブロック
 	block("apatite_block");
