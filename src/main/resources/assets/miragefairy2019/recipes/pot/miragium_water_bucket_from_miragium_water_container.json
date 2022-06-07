@@ -11,6 +11,7 @@
   ],
   "result": {
     "item": "forge:bucketfilled",
+    "count": 1,
     "nbt": {
       "FluidName": "miragium_water",
       "Amount": 1000

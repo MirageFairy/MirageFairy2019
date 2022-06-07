@@ -11,6 +11,7 @@
   ],
   "result": {
     "item": "forge:bucketfilled",
+    "count": 1,
     "nbt": {
       "FluidName": "mirage_flower_oil",
       "Amount": 1000
