@@ -77,13 +77,17 @@ class DataOreIngredient(
 }
 
 class DataSimpleIngredient(
+    val type: String? = null,
     val item: String,
-    val data: Int? = null
+    val data: Int? = null,
+    val nbt: JsonElement? = null
 ) : DataIngredient() {
     override val jsonElement
         get() = jsonElementNotNull(
+            type?.let { "type" to it.jsonElement },
             "item" to item.jsonElement,
-            data?.let { "data" to it.jsonElement }
+            data?.let { "data" to it.jsonElement },
+            nbt?.let { "nbt" to it }
         )
 }
 
@@ -97,13 +101,15 @@ class DataOrIngredient(
 class DataResult(
     val item: String,
     val data: Int? = null,
-    val count: Int = 1
+    val count: Int = 1,
+    val nbt: JsonElement? = null
 ) {
     val jsonElement
         get() = jsonElementNotNull(
             "item" to item.jsonElement,
             data?.let { "data" to it.jsonElement },
-            "count" to count.jsonElement
+            "count" to count.jsonElement,
+            nbt?.let { "nbt" to it }
         )
 }
 
