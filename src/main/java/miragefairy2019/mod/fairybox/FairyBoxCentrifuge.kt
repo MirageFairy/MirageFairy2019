@@ -177,7 +177,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
     }
 
     inner class RecipeMatchResult(val recipe: IFairyCentrifugeCraftRecipe) {
-        val processeResults = (0 until 3).mapNotNull { index ->
+        val processesResults = (0 until 3).mapNotNull { index ->
             val process = recipe.getProcess(index) ?: return@mapNotNull null
             val factors = textComponent { process.factors.map { it() }.sandwich { "+"() }.flatten() }
             val arguments = getArguments(fairyInventory[index]) ?: return@mapNotNull ProcessResult(process, factors, false, 0.0, 0.0)
@@ -190,9 +190,9 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
             )
         }
 
-        val ready get() = processeResults.all { it.ready }
-        val speed get() = processeResults.map { it.speed }.min() ?: 0.0
-        val fortune get() = processeResults.map { it.fortune }.sum()
+        val ready get() = processesResults.all { it.ready }
+        val speed get() = processesResults.map { it.speed }.min() ?: 0.0
+        val fortune get() = processesResults.map { it.fortune }.sum()
 
         inner class ProcessResult(
             val process: IFairyCentrifugeCraftProcess,
@@ -293,7 +293,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
 
         // 妖精
         fun defineProcess(index: Int) {
-            fun getProcessResult() = recipeMatchResult?.processeResults?.getOrNull(index)
+            fun getProcessResult() = recipeMatchResult?.processesResults?.getOrNull(index)
             val c = 1 + 3 * index
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0, Alignment.CENTER) { getProcessResult()?.process?.name }
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0 + 9, Alignment.CENTER) { getProcessResult()?.factors }
