@@ -1,30 +1,30 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "miragium_water_bucket",
-	"ingredients": [
-		{
-			"type": "forge:ore_dict",
-			"ore": "mirageFairyPot"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "container250MiragiumWater"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "container250MiragiumWater"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "container250MiragiumWater"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "container250MiragiumWater"
-		}
-	],
-	"result": {
-		"item": "miragefairy2019:filled_bucket",
-		"data": 0
-	}
+  "type": "forge:ore_shapeless",
+  "group": "miragium_water_bucket",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyPot"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container250MiragiumWater"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container250MiragiumWater"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container250MiragiumWater"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container250MiragiumWater"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:filled_bucket",
+    "data": 0
+  }
 }

@@ -1,22 +1,22 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "mirage_flower_extract_bucket",
-	"ingredients": [
-		{
-			"type": "forge:ore_dict",
-			"ore": "mirageFairyPot"
-		},
-		{
-			"type": "minecraft:item_nbt",
-			"item": "forge:bucketfilled",
-			"nbt": {
-				"FluidName": "mirage_flower_extract",
-				"Amount": 1000
-			}
-		}
-	],
-	"result": {
-		"item": "miragefairy2019:filled_bucket",
-		"data": 1
-	}
+  "type": "forge:ore_shapeless",
+  "group": "mirage_flower_extract_bucket",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyPot"
+    },
+    {
+      "type": "minecraft:item_nbt",
+      "item": "forge:bucketfilled",
+      "nbt": {
+        "FluidName": "mirage_flower_extract",
+        "Amount": 1000
+      }
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:filled_bucket",
+    "data": 1
+  }
 }

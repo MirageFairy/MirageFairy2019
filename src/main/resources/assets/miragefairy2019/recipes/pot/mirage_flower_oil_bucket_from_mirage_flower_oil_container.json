@@ -1,20 +1,20 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "mirage_flower_oil_bucket",
-	"ingredients": [
-		{
-			"item": "minecraft:bucket"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "container1000MirageFlowerOil"
-		}
-	],
-	"result": {
-		"item": "forge:bucketfilled",
-		"nbt": {
-			"FluidName": "mirage_flower_oil",
-			"Amount": 1000
-		}
-	}
+  "type": "forge:ore_shapeless",
+  "group": "mirage_flower_oil_bucket",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container1000MirageFlowerOil"
+    }
+  ],
+  "result": {
+    "item": "forge:bucketfilled",
+    "nbt": {
+      "FluidName": "mirage_flower_oil",
+      "Amount": 1000
+    }
+  }
 }

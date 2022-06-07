@@ -1,27 +1,27 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "mirage_flower_oil_bottle",
-	"ingredients": [
-		{
-			"item": "minecraft:glass_bottle"
-		},
-		{
-			"item": "minecraft:glass_bottle"
-		},
-		{
-			"item": "minecraft:glass_bottle"
-		},
-		{
-			"item": "minecraft:glass_bottle"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "container1000MirageFlowerOil"
-		}
-	],
-	"result": {
-		"item": "miragefairy2019:fairy_materials",
-		"data": 12,
-		"count": 4
-	}
+  "type": "forge:ore_shapeless",
+  "group": "mirage_flower_oil_bottle",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container1000MirageFlowerOil"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:fairy_materials",
+    "data": 12,
+    "count": 4
+  }
 }

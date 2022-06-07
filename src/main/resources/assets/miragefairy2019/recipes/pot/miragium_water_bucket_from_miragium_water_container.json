@@ -1,20 +1,20 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "miragium_water_bucket",
-	"ingredients": [
-		{
-			"item": "minecraft:bucket"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "container1000MiragiumWater"
-		}
-	],
-	"result": {
-		"item": "forge:bucketfilled",
-		"nbt": {
-			"FluidName": "miragium_water",
-			"Amount": 1000
-		}
-	}
+  "type": "forge:ore_shapeless",
+  "group": "miragium_water_bucket",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container1000MiragiumWater"
+    }
+  ],
+  "result": {
+    "item": "forge:bucketfilled",
+    "nbt": {
+      "FluidName": "miragium_water",
+      "Amount": 1000
+    }
+  }
 }
