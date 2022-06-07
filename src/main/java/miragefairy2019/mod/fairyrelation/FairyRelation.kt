@@ -1,5 +1,7 @@
 package miragefairy2019.mod.fairyrelation
 
+import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.artifacts.CommonMaterials
 import miragefairy2019.mod.artifacts.EnumVariantMaterials1
@@ -27,6 +29,7 @@ import net.minecraft.entity.monster.EntitySlime
 import net.minecraft.entity.monster.EntitySpider
 import net.minecraft.entity.monster.EntityWitherSkeleton
 import net.minecraft.entity.monster.EntityZombie
+import net.minecraft.entity.passive.EntityBat
 import net.minecraft.entity.passive.EntityChicken
 import net.minecraft.entity.passive.EntityCow
 import net.minecraft.entity.passive.EntityPig
@@ -134,6 +137,7 @@ object FairyRelation {
         fairy { witherSkeleton }.register(weight = 10.0) { entity<EntityWitherSkeleton>() }
         fairy { shulker }.register(weight = 10.0) { entity<EntityShulker>() }
         fairy { wither }.register(weight = 10.0) { entity<EntityWither>() }
+        fairy { bat }.register(weight = 10.0) { entity<EntityBat>() }
 
         // 滅多に地上に降りてこないエンティティ
         fairy { enderDragon }.register(weight = 20.0) { entity<EntityDragon>() }
@@ -155,6 +159,7 @@ object FairyRelation {
         fairy { sand }.register { block({ Blocks.SAND }) }
         fairy { sand }.register(relevance = 0.5) { block({ Blocks.SANDSTONE }, { Blocks.RED_SANDSTONE }) }
         fairy { gravel }.register { block({ Blocks.GRAVEL }) }
+        fairy { bedrock }.register { block({ Blocks.BEDROCK }) }
 
         // マテリアル
         fairy { iron }.register { block({ Blocks.IRON_BLOCK }) }
@@ -224,6 +229,8 @@ object FairyRelation {
         fairy { seed }.register { item({ Items.WHEAT_SEEDS }) }
         fairy { lilac }.register { blockState({ Blocks.DOUBLE_PLANT.defaultState.withProperty(BlockDoublePlant.VARIANT, BlockDoublePlant.EnumPlantType.SYRINGA) }) }
         fairy { lilac }.register { ingredient({ Ingredient.fromStacks(ItemStack(Blocks.DOUBLE_PLANT, 1, 1)) }) }
+        fairy { peony }.register { blockState({ Blocks.DOUBLE_PLANT.defaultState.withProperty(BlockDoublePlant.VARIANT, BlockDoublePlant.EnumPlantType.PAEONIA) }) }
+        fairy { peony }.register { ingredient({ Ingredient.fromStacks(ItemStack(Blocks.DOUBLE_PLANT, 1, 5)) }) }
         fairy { apple }.register { item({ Items.APPLE }) }
         fairy { apple }.register(relevance = 0.5) { item({ Items.GOLDEN_APPLE }) }
         fairy { melon }.register { block({ Blocks.MELON_BLOCK }) }
@@ -263,6 +270,7 @@ object FairyRelation {
         fairy { cake }.register { item({ Items.CAKE }) }
         fairy { bakedPotato }.register { item({ Items.BAKED_POTATO }) }
         fairy { cookedChicken }.register { item({ Items.COOKED_CHICKEN }) }
+        fairy { cookedCod }.register { ingredient({ Items.COOKED_FISH.createItemStack(metadata = 0).ingredient }) }
         fairy { cookedSalmon }.register { ingredient({ Ingredient.fromStacks(ItemStack(Items.COOKED_FISH, 1, 1)) }) }
         fairy { steak }.register { item({ Items.COOKED_BEEF }) }
         fairy { pumpkinPie }.register { item({ Items.PUMPKIN_PIE }) }
@@ -275,6 +283,8 @@ object FairyRelation {
         fairy { sugar }.register { item({ Items.SUGAR }) }
         fairy { coalDust }.register(relevance = 2.0) { ore("dustCoal") }
         fairy { diamondDust }.register(relevance = 2.0) { ore("dustDiamond") }
+        fairy { book }.register { item({ Items.BOOK }) }
+        fairy { book }.register(relevance = 0.5) { item({ Items.WRITABLE_BOOK }, { Items.WRITTEN_BOOK }, { Items.ENCHANTED_BOOK }) }
 
         // 道具
         fairy { potion }.register { item({ Items.POTIONITEM }) }
@@ -304,6 +314,7 @@ object FairyRelation {
         fairy { note }.register { block({ Blocks.NOTEBLOCK }) }
         fairy { jukebox }.register { block({ Blocks.JUKEBOX }) }
         fairy { netherPortal }.register { block({ Blocks.PORTAL }) }
+        fairy { button }.register { block({ Blocks.WOODEN_BUTTON }) }
 
         // ツール
         fairy { axe }.register { item({ Items.WOODEN_AXE }, { Items.STONE_AXE }, { Items.IRON_AXE }, { Items.GOLDEN_AXE }, { Items.DIAMOND_AXE }) }
@@ -313,6 +324,7 @@ object FairyRelation {
 
         // エンチャント
         fairy { fortune }.register { itemStack { EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, this) > 0 } }
+        fairy { curseOfVanishing }.register { itemStack { EnchantmentHelper.getEnchantmentLevel(Enchantments.VANISHING_CURSE, this) > 0 } }
 
         // レコード
         fairy { eleven }.register { item({ Items.RECORD_11 }) }
@@ -322,6 +334,7 @@ object FairyRelation {
         fairy { enchant }.register { itemStack { isItemEnchanted } }
         fairy { enchant }.register(relevance = 0.5) { block({ Blocks.ENCHANTING_TABLE }) }
         fairy { enchant }.register(relevance = 0.5) { item({ Items.ENCHANTED_BOOK }) }
+        fairy { gravity }.register(relevance = 0.1, weight = 0.3) { item({ Items.APPLE }) }
 
     }
 }

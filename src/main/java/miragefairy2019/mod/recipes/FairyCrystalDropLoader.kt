@@ -65,6 +65,7 @@ object FairyCrystalDropLoader {
                 FairyTypes.instance.tourmaline().overworld()
                 FairyTypes.instance.topaz().overworld()
                 FairyTypes.instance.pyrite().overworld()
+                FairyTypes.instance.bedrock().overworld()
 
                 FairyTypes.instance.spider().overworld()
                 FairyTypes.instance.chicken().overworld()
@@ -81,6 +82,7 @@ object FairyCrystalDropLoader {
                 FairyTypes.instance.pig().overworld()
                 FairyTypes.instance.spiderEye().overworld()
                 FairyTypes.instance.slime().overworld()
+                FairyTypes.instance.bat().overworld()
 
                 FairyTypes.instance.wheat().overworld()
                 FairyTypes.instance.lilac().overworld()
@@ -95,6 +97,7 @@ object FairyCrystalDropLoader {
                 FairyTypes.instance.mirageFlower().overworld()
                 FairyTypes.instance.sugarCane().overworld()
                 FairyTypes.instance.potato().overworld()
+                FairyTypes.instance.peony().overworld()
 
 
                 // ネザー
@@ -102,6 +105,7 @@ object FairyCrystalDropLoader {
                 FairyTypes.instance.fire().nether()
 
                 FairyTypes.instance.glowstone().nether()
+                FairyTypes.instance.bedrock().nether()
 
                 FairyTypes.instance.magmaCube().nether()
                 FairyTypes.instance.blaze().nether()
@@ -122,6 +126,7 @@ object FairyCrystalDropLoader {
 
                 FairyTypes.instance.air(1.0).fixed()
                 FairyTypes.instance.time(0.0001).fixed()
+                FairyTypes.instance.gravity(0.0001).fixed()
 
             }
 

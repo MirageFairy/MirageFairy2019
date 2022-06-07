@@ -29,6 +29,7 @@ object FairyLogDropLoader {
                 // 概念系
                 air(0.01) { }
                 time(0.01) { }
+                gravity(0.01) { }
 
                 // 天体系
                 sun(0.01) { overworld() }
