@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container1000Water"
+    }
+  ],
+  "result": {
+    "item": "minecraft:water_bucket",
+    "count": 1
+  }
+}

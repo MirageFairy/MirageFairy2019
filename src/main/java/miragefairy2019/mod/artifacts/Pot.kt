@@ -211,6 +211,12 @@ object Pot {
         bottleToPot("mirage_flower_oil", "MirageFlowerOil", 2)
         potToBottle("mirage_flower_oil", "MirageFlowerOil", 12)
 
+        potToItem("water", "Water", DataResult(item = "minecraft:water_bucket"))
+        itemToPot("water", 3, DataSimpleIngredient(item = "minecraft:water_bucket"))
+
+        potToItem("lava", "Lava", DataResult(item = "minecraft:lava_bucket"))
+        itemToPot("lava", 4, DataSimpleIngredient(item = "minecraft:lava_bucket"))
+
     }
 }
 
