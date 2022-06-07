@@ -334,6 +334,20 @@ object FairyBox {
                     output(Items.SHULKER_SHELL.createItemStack(), 1.0, 0.5)
                 }
 
+                // ウィザー精＋ミラジウムウォーター＋ウィザースケルトンの頭3＋ソウルサンド4＋鉄格子32＋ダイヤの剣→ネザースター
+                fairyCentrifugeCraftHandler {
+                    process("錬成", 10.0) { !Mana.FIRE + !Erg.LIFE } // TODO translate
+                    process("束縛", 60.0) { !Mana.WIND + !Erg.SUBMISSION } // TODO translate
+                    process("討伐", 30.0) { !Mana.FIRE + !Erg.ATTACK } // TODO translate
+                    input("mirageFairy2019FairyWitherRank1".oreIngredient, 1)
+                    input("container1000MiragiumWater".oreIngredient, 1)
+                    input(Items.SKULL.createItemStack(metadata = 1).ingredient, 3)
+                    input(Blocks.SOUL_SAND.ingredient ?: cancel(), 4)
+                    input(Blocks.IRON_BARS.ingredient ?: cancel(), 32)
+                    input(Items.DIAMOND_SWORD.createItemStack().ingredient, 1)
+                    output(Items.NETHER_STAR.createItemStack(), 1.0)
+                }
+
 
                 // 選鉱
 
