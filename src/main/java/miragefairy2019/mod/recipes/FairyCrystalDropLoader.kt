@@ -154,8 +154,7 @@ object FairyCrystalDropLoader {
                 })
 
                 FairyTypes.instance.cupid(0.00001).world {
-                    val now = LocalDateTime.now(ZoneOffset.ofHours(9))
-                    now < LocalDateTime.of(2022, 8, 1, 0, 0, 0)
+                    LocalDateTime.now(ZoneOffset.UTC) < LocalDateTime.of(2022, 8, 1, 0, 0, 0)
                 }
 
             }
