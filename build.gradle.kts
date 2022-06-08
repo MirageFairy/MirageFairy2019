@@ -25,7 +25,7 @@ plugins {
 // Forge対応バージョンの区別
 // クライアント互換性の区別
 // ビルドバージョンの区別
-val versionTag = "v0.1.22.52"
+val versionTag = "v0.1.23.53"
 val versionZero = versionTag.substring(1).split(".")[0].toInt()
 val versionForge = versionTag.substring(1).split(".")[1].toInt()
 val versionCompatibility = versionTag.substring(1).split(".")[2].toInt()
