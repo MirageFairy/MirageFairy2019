@@ -137,7 +137,7 @@ class ContainerComponent : Container() {
 
     @SideOnly(Side.CLIENT)
     override fun updateProgressBar(id: Int, data: Int) {
-        val windowProperty = windowProperties.get(id) ?: return
+        val windowProperty = windowProperties[id] ?: return
         windowProperty.value = data
         windowProperty.changeListener()
     }
