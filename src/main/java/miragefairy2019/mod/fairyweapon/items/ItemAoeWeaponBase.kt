@@ -1,15 +1,15 @@
 package miragefairy2019.mod.fairyweapon.items
 
 import miragefairy2019.libkt.randomInt
+import miragefairy2019.mod.fairyweapon.FairyMagicDamageSource
+import miragefairy2019.mod.fairyweapon.MagicMessage
+import miragefairy2019.mod.fairyweapon.MagicSelectorRayTrace
+import miragefairy2019.mod.fairyweapon.MagicSelectorEntitiesInSphericalRange
 import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.world
-import miragefairy2019.mod.fairyweapon.FairyMagicDamageSource
-import miragefairy2019.mod.fairyweapon.MagicMessage
-import miragefairy2019.mod.fairyweapon.MagicSelectorRayTrace
-import miragefairy2019.mod.fairyweapon.SelectorEntityRanged
 import miragefairy2019.mod.fairyweapon.spawnDamageParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import net.minecraft.entity.EntityLivingBase
@@ -45,12 +45,12 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
     override fun getMagic() = magic {
         val magicSelectorRayTrace = MagicSelectorRayTrace.createWith(world, player, additionalReach(), EntityLivingBase::class.java) { it != player } // 視線判定
         val magicSelectorPosition = magicSelectorRayTrace.magicSelectorPosition // 視点判定
-        val selectorEntityRanged = SelectorEntityRanged(world, magicSelectorRayTrace.position, EntityLivingBase::class.java, { it != player }, radius(), maxTargetCount()) // 対象判定
+        val magicSelectorEntities = MagicSelectorEntitiesInSphericalRange(world, magicSelectorRayTrace.position, radius(), EntityLivingBase::class.java, { it != player }, maxTargetCount()) // 対象判定
 
         fun error(color: Int, magicMessage: MagicMessage) = object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.doEffect(color)
-                selectorEntityRanged.effect()
+                magicSelectorEntities.effect()
             }
 
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
@@ -61,7 +61,7 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
 
         if (!hasPartnerFairy) return@magic error(0xFF00FF, MagicMessage.NO_FAIRY) // パートナー妖精判定
         if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic error(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
-        val targets = selectorEntityRanged.effectiveEntities.take(maxTargetCount()).filter { it.health > 0 }
+        val targets = magicSelectorEntities.entities.take(maxTargetCount()).filter { it.health > 0 }
         if (targets.isEmpty()) return@magic error(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
         if (player.cooldownTracker.hasCooldown(weaponItem)) return@magic error(0xFFFF00, MagicMessage.COOL_TIME) // クールタイム判定
 
@@ -69,7 +69,7 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
         object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.doEffect(0xFFFFFF)
-                selectorEntityRanged.effect()
+                magicSelectorEntities.effect()
                 spawnParticleTargets(world, targets, { it.positionVector.addVector(0.0, it.height.toDouble(), 0.0) }, { 0x00FF00 })
             }
 

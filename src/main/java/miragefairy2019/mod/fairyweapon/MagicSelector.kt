@@ -1,5 +1,6 @@
 package miragefairy2019.mod.fairyweapon
 
+import miragefairy2019.libkt.axisAlignedBBOf
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
@@ -71,4 +72,37 @@ class MagicSelectorRayTrace private constructor(world: World, val rayTraceResult
     val blockPos get() = hitBlockPos ?: BlockPos(position)
     val hitEntity get() = rayTraceResult?.entityHit
     val sideHit get() = rayTraceResult?.sideHit
+}
+
+/** ある点を中心とした球形の範囲のエンティティを選択します。 */
+class MagicSelectorEntitiesInSphericalRange<E : Entity>(
+    world: World,
+    private val position: Vec3d,
+    private val radius: Double,
+    classEntity: Class<E>,
+    predicate: (E) -> Boolean,
+    maxTargetCount: Int
+) : MagicSelector(world) {
+    val entities = run {
+        fun getAllEntities(): List<E> = world.getEntitiesWithinAABB(classEntity, axisAlignedBBOf(position).grow(radius)) { e ->
+            // 区間との距離
+            fun d(value: Double, min: Double, max: Double) = when {
+                value < min -> min - value
+                value < max -> 0.0
+                else -> value - max
+            }
+
+            e!!
+            val dx = d(position.x, e.posX - e.width / 2.0, e.posX + e.width / 2.0)
+            val dy = d(position.y, e.posY, e.posY + e.width)
+            val dz = d(position.z, e.posZ - e.width / 2.0, e.posZ + e.width / 2.0)
+            dx * dx + dy * dy + dz * dz <= radius * radius
+        }
+        getAllEntities().filter(predicate).sortedBy { it.getDistanceSq(position.x, position.y, position.z) }.take(maxTargetCount)
+    }
+
+    fun effect() {
+        spawnParticleSphericalRange(world, position, radius)
+        spawnParticleTargets(world, entities.map { Pair(it.positionVector, EnumTargetExecutability.EFFECTIVE) })
+    }
 }
