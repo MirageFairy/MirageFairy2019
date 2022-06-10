@@ -14,6 +14,7 @@ import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
+import miragefairy2019.libkt.makeGeneratedItemModel
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
@@ -50,6 +51,7 @@ object Pot {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
+        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "pot"))
         makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "pot"),
             DataShapedRecipe(
@@ -107,6 +109,11 @@ object Pot {
                 if (Main.side.isClient) item.setCustomModelResourceLocations()
             }
         }
+        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_water_pot"))
+        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_extract_pot"))
+        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_oil_pot"))
+        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "water_pot"))
+        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "lava_pot"))
 
 
         // 詰め替えレシピ

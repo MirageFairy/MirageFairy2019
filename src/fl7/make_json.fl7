@@ -23,14 +23,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 
 	item("mirage_flower_seeds");
 
-	# ポット
-	item("pot");
-	item("miragium_water_pot");
-	item("mirage_flower_extract_pot");
-	item("mirage_flower_oil_pot");
-	item("water_pot");
-	item("lava_pot");
-
 	layered("fairy"; [0 .. 4 | "fairy_layer$_"]);
 	layered("sphere"; [0 .. 3 | "sphere_layer$_"]);
 
