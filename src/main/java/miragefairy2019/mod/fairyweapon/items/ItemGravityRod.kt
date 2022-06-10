@@ -3,6 +3,9 @@ package miragefairy2019.mod.fairyweapon.items
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.libkt.randomInt
+import miragefairy2019.mod.fairyweapon.MagicMessage
+import miragefairy2019.mod.fairyweapon.MagicSelector
+import miragefairy2019.mod.fairyweapon.doEffect
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.integer
@@ -11,8 +14,8 @@ import miragefairy2019.mod.fairyweapon.magic4.percent0
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
-import miragefairy2019.mod.fairyweapon.MagicMessage
-import miragefairy2019.mod.fairyweapon.MagicSelectorRayTrace
+import miragefairy2019.mod.fairyweapon.position
+import miragefairy2019.mod.fairyweapon.rayTraceBlock
 import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.init.MobEffects
 import net.minecraft.init.SoundEvents
@@ -39,12 +42,12 @@ class ItemGravityRod : ItemFairyWeaponMagic4() {
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックで浮遊" // TODO translate
 
     override fun getMagic() = magic {
-        val magicSelectorRayTrace = MagicSelectorRayTrace.createIgnoreEntity(world, player, 0.0) // 視線判定
-        val magicSelectorPosition = magicSelectorRayTrace.magicSelectorPosition // 視点判定
+        val magicSelectorRayTrace = MagicSelector.rayTraceBlock(world, player, 0.0) // 視線判定
+        val magicSelectorPosition = magicSelectorRayTrace.position // 視点判定
 
         fun error(color: Int, magicMessage: MagicMessage) = object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.doEffect(color)
+                magicSelectorPosition.item.doEffect(color)
             }
 
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
@@ -60,7 +63,7 @@ class ItemGravityRod : ItemFairyWeaponMagic4() {
         // 魔法成立
         object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.doEffect(0xFFFFFF)
+                magicSelectorPosition.item.doEffect(0xFFFFFF)
             }
 
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {

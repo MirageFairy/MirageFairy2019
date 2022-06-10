@@ -5,11 +5,12 @@ import miragefairy2019.api.Mana
 import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
-import miragefairy2019.mod.fairyweapon.MagicSelectorRayTrace
+import miragefairy2019.mod.fairyweapon.MagicSelector
 import miragefairy2019.mod.fairyweapon.breakBlock
 import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
 import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.findFairy
+import miragefairy2019.mod.fairyweapon.rayTrace
 import miragefairy2019.mod.fairyweapon.spawnParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.skill.IMastery
@@ -51,12 +52,12 @@ abstract class ItemMiragiumToolBase(
 
     override val magic = magic {
         val fairyType = findFairy(itemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
-        val selectorRayTrace = MagicSelectorRayTrace.createAllEntities(world, player, 0.0) // 視線判定
-        if (fairyType.isEmpty) return@magic fail(selectorRayTrace.position, 0xFF00FF) // 妖精なし判定
-        if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic fail(selectorRayTrace.position, 0xFF0000) // 材料なし判定
-        val targets = selectorRayTrace.blockPos.let { if (selectorRayTrace.sideHit != null) it.offset(selectorRayTrace.sideHit) else it }.let { iterateTargets(this@magic, it) } // 対象判定
-        if (!targets.hasNext()) return@magic fail(selectorRayTrace.position, 0x00FFFF) // ターゲットなし判定
-        if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic fail(selectorRayTrace.position, 0xFFFF00) // クールダウン判定
+        val selectorRayTrace = MagicSelector.rayTrace(world, player, 0.0) // 視線判定
+        if (fairyType.isEmpty) return@magic fail(selectorRayTrace.item.position, 0xFF00FF) // 妖精なし判定
+        if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic fail(selectorRayTrace.item.position, 0xFF0000) // 材料なし判定
+        val targets = selectorRayTrace.item.blockPos.let { if (selectorRayTrace.item.sideHit != null) it.offset(selectorRayTrace.item.sideHit!!) else it }.let { iterateTargets(this@magic, it) } // 対象判定
+        if (!targets.hasNext()) return@magic fail(selectorRayTrace.item.position, 0x00FFFF) // ターゲットなし判定
+        if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic fail(selectorRayTrace.item.position, 0xFFFF00) // クールダウン判定
 
         object : IMagicHandler { // 行使可能
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
@@ -96,7 +97,7 @@ abstract class ItemMiragiumToolBase(
             }
 
             override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
-                spawnParticle(world, selectorRayTrace.position, 0xFFFFFF)
+                spawnParticle(world, selectorRayTrace.item.position, 0xFFFFFF)
                 spawnParticleTargets(
                     world,
                     targets.asSequence().toList().map { Pair(Vec3d(it).addVector(0.5, 0.5, 0.5), EnumTargetExecutability.EFFECTIVE) }

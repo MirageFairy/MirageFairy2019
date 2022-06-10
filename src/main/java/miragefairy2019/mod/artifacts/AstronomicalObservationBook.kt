@@ -13,8 +13,9 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod.fairyweapon.MagicSelectorRayTrace
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.fairyweapon.MagicSelector
+import miragefairy2019.mod.fairyweapon.rayTraceBlock
 import miragefairy2019.mod.skill.ApiSkill
 import mirrg.kotlin.minus
 import mirrg.kotlin.startOfDay
@@ -101,8 +102,8 @@ class ItemAstronomicalObservationBook : Item() {
         }
 
         // 天井が塞がれている場合は失敗
-        val selector = MagicSelectorRayTrace.createIgnoreEntity(world, player, 64.0)
-        if (selector.isHit) {
+        val selector = MagicSelector.rayTraceBlock(world, player, 64.0)
+        if (selector.item.isHit) {
             player.sendStatusMessage(textComponent { "空がよく見えない"().darkPurple }, true) // TODO translate
             return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
         }
