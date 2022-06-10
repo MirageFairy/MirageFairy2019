@@ -2,8 +2,10 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.libkt.BlockInitializer
 import miragefairy2019.libkt.ModInitializer
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeFluidItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.resourceLocation
 import miragefairy2019.libkt.setCreativeTab
@@ -55,6 +57,7 @@ object FluidMaterials {
         itemFluidMiragiumWater = item({ ItemBlock(blockFluidMiragiumWater()) }, "miragium_water") {
             setCustomModelResourceLocation()
         }
+        makeFluidItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_water"))
 
 
         // ミラージュエキス
@@ -69,6 +72,7 @@ object FluidMaterials {
         itemFluidMirageFlowerExtract = item({ ItemBlock(blockFluidMirageFlowerExtract()) }, "mirage_flower_extract") {
             setCustomModelResourceLocation()
         }
+        makeFluidItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_extract"))
 
 
         // ミラージュオイル
@@ -83,6 +87,7 @@ object FluidMaterials {
         itemFluidMirageFlowerOil = item({ ItemBlock(blockFluidMirageFlowerOil()) }, "mirage_flower_oil") {
             setCustomModelResourceLocation()
         }
+        makeFluidItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_oil"))
 
     }
 }

@@ -12,12 +12,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 			layer0 = "miragefairy2019:items/$registerName";
 		};
 	});
-	fluid: registerName -> writer::write("$registerName.json"; {
-		parent = "item/generated";
-		textures = {
-			layer0 = "miragefairy2019:blocks/$(registerName)_still";
-		};
-	});
 	layered : registerName, list_layer -> writer::write("$(registerName).json"; {
 		parent = "item/generated";
 		textures = {[i, layer : list_layer[] | {
@@ -28,11 +22,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	item("fertilizer");
 
 	item("mirage_flower_seeds");
-
-	# 液体
-	fluid("miragium_water");
-	fluid("mirage_flower_extract");
-	fluid("mirage_flower_oil");
 
 	# ポット
 	item("pot");
