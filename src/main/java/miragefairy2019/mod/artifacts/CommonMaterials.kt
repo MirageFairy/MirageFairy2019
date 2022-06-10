@@ -26,6 +26,7 @@ import miragefairy2019.libkt.generated
 import miragefairy2019.libkt.handheld
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
+import miragefairy2019.libkt.makeBlockItemModel
 import miragefairy2019.libkt.makeBlockModel
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.makeItemVariantModel
@@ -329,6 +330,24 @@ object CommonMaterials {
                     item.addOreName(it.oreName, it.metadata)
                 }
             }
+        }
+        run {
+            fun makeItemModel(name: String) = makeBlockItemModel(ResourceName(ModMirageFairy2019.MODID, name))
+            makeItemModel("apatite_block")
+            makeItemModel("fluorite_block")
+            makeItemModel("sulfur_block")
+            makeItemModel("cinnabar_block")
+            makeItemModel("moonstone_block")
+            makeItemModel("magnetite_block")
+            makeItemModel("pyrope_block")
+            makeItemModel("smithsonite_block")
+            makeItemModel("charcoal_block")
+            makeItemModel("mirage_flower_leaf_block")
+            makeItemModel("miragium_ingot_block")
+            makeItemModel("miragium_dust_block")
+            makeItemModel("nephrite_block")
+            makeItemModel("topaz_block")
+            makeItemModel("tourmaline_block")
         }
         onMakeLang {
             enJa("tile.blockApatite.name", "Block of Apatite", "燐灰石ブロック")
