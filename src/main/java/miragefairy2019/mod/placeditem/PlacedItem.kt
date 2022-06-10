@@ -36,16 +36,14 @@ object PlacedItem {
         blockPlacedItem = block({ BlockPlacedItem() }, "placed_item") {
             setUnlocalizedName("placedItem")
         }
-        run {
-            makeBlockModel(ResourceName(ModMirageFairy2019.MODID, "placed_item")) {
-                jsonElement(
-                    "ambientocclusion" to false.jsonElement,
-                    "textures" to jsonElement(
-                        "particle" to "minecraft:blocks/glass".jsonElement
-                    ),
-                    "elements" to jsonArray()
-                )
-            }
+        makeBlockModel(ResourceName(ModMirageFairy2019.MODID, "placed_item")) {
+            jsonElement(
+                "ambientocclusion" to false.jsonElement,
+                "textures" to jsonElement(
+                    "particle" to "minecraft:blocks/glass".jsonElement
+                ),
+                "elements" to jsonArray()
+            )
         }
         tileEntity("placed_item", TileEntityPlacedItem::class.java)
         tileEntityRenderer(TileEntityPlacedItem::class.java, { TileEntityRendererPlacedItem() })
