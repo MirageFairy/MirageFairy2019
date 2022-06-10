@@ -82,7 +82,7 @@ object PlayerAura {
                         if (item !is ItemFood) return
 
                         // 食べた後のオーラ表示
-                        val playerAuraHandler = ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler
+                        val playerAuraHandler = ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler()
                         val auraBefore = playerAuraHandler.playerAura
                         val auraAfter = playerAuraHandler.simulatePlayerAura(itemStack, item.getHealAmount(itemStack))
                         if (auraAfter != null) {
@@ -200,7 +200,7 @@ object PlayerAura {
                     fun hook(event: RenderGameOverlayEvent.Post) {
                         if (event.type != RenderGameOverlayEvent.ElementType.POTION_ICONS) return // ポーションアイコンと同時
                         val player = Minecraft.getMinecraft().player ?: return
-                        val playerAuraHandler = ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler
+                        val playerAuraHandler = ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler()
 
                         val (foodAura, healAmount) = run result@{
                             player.heldItemMainhand.let next@{
@@ -237,7 +237,7 @@ object PlayerAura {
                         fun drawAuraGauge(center: Complex, radius: Double) {
                             drawPieces(center, radius, 1 + 0.05 + healAmount / 100.0, foodAura)
                             drawPieces(center, radius * 1.05, 0xFFFFFF.toRgb())
-                            val foodHistory = ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler.foodHistory.toList()
+                            val foodHistory = ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler().foodHistory.toList()
                             foodHistory.forEach { entry ->
                                 drawPieces(center, radius, entry.health, entry.baseLocalFoodAura)
                             }
@@ -273,7 +273,7 @@ class PacketPlayerAura : IMessageHandler<MessagePlayerAura, IMessage> {
 }
 
 class MessagePlayerAura : IMessage {
-    var json: String? = null // TODO メッセージングAPIの整備
+    lateinit var json: String // TODO メッセージングAPIの整備
 
     @Suppress("unused") // リフレクションで呼ばれる
     constructor()
@@ -289,7 +289,7 @@ class MessagePlayerAura : IMessage {
     }
 
     override fun toBytes(buf: ByteBuf) {
-        val json = this.json!!
+        val json = this.json
         if (json.length > 1_000_000) throw Exception("Too long json: ${json.length}")
         val strings = json.chunked(10000)
         val packetBuffer = PacketBuffer(buf)

@@ -18,7 +18,7 @@ val EntityPlayer.proxy get() = if (world.isRemote) ClientPlayerProxy else Server
 
 val PlayerProxy.playerAuraHandler: IPlayerAuraHandler
     get() = when (this) {
-        is ClientPlayerProxy -> ApiPlayerAura.playerAuraManager.clientPlayerAuraHandler
+        is ClientPlayerProxy -> ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler()
         is ServerPlayerProxy -> ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(player)
     }
 

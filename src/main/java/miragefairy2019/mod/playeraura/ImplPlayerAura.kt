@@ -224,17 +224,17 @@ class PlayerAuraModel {
     }
 }
 
-class FoodHistoryEntry(private val food: ItemStack, private val baseLocalFoodAura: ManaSet?, private val health: Double) : IFoodHistoryEntry {
-    override fun getFood() = food
-    override fun getBaseLocalFoodAura() = baseLocalFoodAura
-    override fun getHealth() = health
-}
+class FoodHistoryEntry(
+    override val food: ItemStack,
+    override val baseLocalFoodAura: ManaSet,
+    override val health: Double
+) : IFoodHistoryEntry
 
 open class PlayerAuraHandler(
     protected val manager: IPlayerAuraManager,
     protected val model: PlayerAuraModel
 ) : IPlayerAuraHandler {
-    override fun getPlayerAura() = model.aura
+    override val playerAura get() = model.aura
     override fun getLocalFoodAura(itemStack: ItemStack) = manager.getGlobalFoodAura(itemStack)?.let { model.getLocalFoodAura(it, itemStack) }
     override fun getSaturationRate(itemStack: ItemStack) = model.getSaturationRate(itemStack)
     override fun simulatePlayerAura(itemStack: ItemStack, healAmount: Int): ManaSet? = manager.getGlobalFoodAura(itemStack)?.let {
@@ -243,7 +243,7 @@ open class PlayerAuraHandler(
         model2.aura
     }
 
-    override fun getFoodHistory() = model.foodHistory
+    override val foodHistory get() = model.foodHistory
 }
 
 class ClientPlayerAuraHandler(
