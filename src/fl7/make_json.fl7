@@ -18,12 +18,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 			layer0 = "miragefairy2019:blocks/$(registerName)_still";
 		};
 	});
-	handheld: registerName -> writer::write("\(registerName).json"; {
-		parent: "item/handheld";
-		textures: {
-			layer0: "miragefairy2019:items/\(registerName)";
-		};
-	});
 	layered : registerName, list_layer -> writer::write("$(registerName).json"; {
 		parent = "item/generated";
 		textures = {[i, layer : list_layer[] | {
@@ -47,8 +41,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	item("mirage_flower_oil_pot");
 	item("water_pot");
 	item("lava_pot");
-
-	handheld("fairy_stick");
 
 	layered("fairy"; [0 .. 4 | "fairy_layer$_"]);
 	layered("sphere"; [0 .. 3 | "sphere_layer$_"]);
