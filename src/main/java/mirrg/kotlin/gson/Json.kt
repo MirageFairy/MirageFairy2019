@@ -29,6 +29,7 @@ fun jsonElementNotNull(items: List<JsonElement?>) = jsonElement(items.filterNotN
 fun jsonElement(vararg items: JsonElement) = jsonElement(items.toList())
 fun jsonElementNotNull(vararg items: JsonElement?) = jsonElementNotNull(items.toList())
 val List<JsonElement>.jsonElement get() = jsonElement(this)
+fun jsonArray() = jsonElement(listOf<JsonElement>())
 
 // Map
 fun jsonElement(entries: List<Pair<String, JsonElement>>) = JsonObject().also { entries.forEach { entry -> it.add(entry.first, entry.second) } }
@@ -37,6 +38,7 @@ fun jsonElement(vararg entries: Pair<String, JsonElement>) = jsonElement(entries
 fun jsonElementNotNull(vararg entries: Pair<String, JsonElement>?) = jsonElementNotNull(entries.toList())
 val List<Pair<String, JsonElement>>.jsonElement get() = jsonElement(this)
 val Map<String, JsonElement>.jsonElement get() = jsonElement(this.entries.map { it.key to it.value })
+fun jsonObject() = jsonElement(listOf<Pair<String, JsonElement>>())
 
 // プリミティブ
 val Number.jsonElement get() = JsonPrimitive(this)
