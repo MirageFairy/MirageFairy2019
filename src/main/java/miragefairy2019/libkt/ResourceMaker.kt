@@ -166,11 +166,29 @@ fun ModInitializer.makeItemModel(resourceName: ResourceName, creator: () -> Json
     getItemModelFile(resourceName).place(creator())
 }
 
+fun ModInitializer.makeGeneratedItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { ItemModel.generated(resourceName.map { "items/$it" }) }
+fun ModInitializer.makeHandheldItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { ItemModel.handheld(resourceName.map { "items/$it" }) }
 fun ModInitializer.makeBlockItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { ItemModel.block(resourceName.map { "block/$it" }) }
 
 object ItemModel
 
-fun ItemModel.block(parent: ResourceName) = jsonElement("parent" to parent.toString().jsonElement)
+fun ItemModel.generated(resourceName: ResourceName) = jsonElement(
+    "parent" to "item/generated".jsonElement,
+    "textures" to jsonElement(
+        "layer0" to "$resourceName".jsonElement
+    )
+)
+
+fun ItemModel.handheld(resourceName: ResourceName) = jsonElement(
+    "parent" to "item/handheld".jsonElement,
+    "textures" to jsonElement(
+        "layer0" to "$resourceName".jsonElement
+    )
+)
+
+fun ItemModel.block(parent: ResourceName) = jsonElement(
+    "parent" to "$parent".jsonElement
+)
 
 fun <I : Item> ItemInitializer<I>.makeItemModel(creator: MakeItemModelScope<I>.() -> DataItemModel) = modInitializer.onMakeResource {
     getItemModelFile(registryName).place(MakeItemModelScope(this@makeItemModel).creator())
