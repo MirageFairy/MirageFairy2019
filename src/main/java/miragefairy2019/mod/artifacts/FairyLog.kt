@@ -3,16 +3,20 @@ package miragefairy2019.mod.artifacts
 import miragefairy2019.lib.selectFairyLogDrop
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeBlockModel
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.FairyTypes
 import mirrg.boron.util.UtilsMath
+import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
 import net.minecraft.block.BlockOldLog
@@ -58,6 +62,23 @@ object FairyLog {
                     }.toMap()
                 )
             }
+        }
+        run {
+            fun makeBlockModel(name: String, variant: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
+                jsonElement(
+                    "parent" to "miragefairy2019:block/fairy_log".jsonElement,
+                    "textures" to jsonElement(
+                        "end" to "blocks/log_${variant}_top".jsonElement,
+                        "side" to "blocks/log_$variant".jsonElement
+                    )
+                )
+            }
+            makeBlockModel("acacia_fairy_log", "acacia")
+            makeBlockModel("birch_fairy_log", "birch")
+            makeBlockModel("dark_oak_fairy_log", "big_oak")
+            makeBlockModel("jungle_fairy_log", "jungle")
+            makeBlockModel("oak_fairy_log", "oak")
+            makeBlockModel("spruce_fairy_log", "spruce")
         }
         itemBlockFairyLog = item({ ItemBlock(blockFairyLog()) }, "fairy_log") {
             setUnlocalizedName("fairyLog")

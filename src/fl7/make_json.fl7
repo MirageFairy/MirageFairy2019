@@ -6,25 +6,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
 
-	# 妖精の樹洞
-	(
-		fairy_log: name, variant -> (
-			writer::write("\(name).json"; {
-				parent: "miragefairy2019:block/fairy_log";
-				textures: {
-					end: "blocks/log_\(variant)_top";
-					side: "blocks/log_\(variant)";
-				};
-			});
-		);
-		fairy_log("acacia_fairy_log"; "acacia");
-		fairy_log("birch_fairy_log"; "birch");
-		fairy_log("dark_oak_fairy_log"; "big_oak");
-		fairy_log("jungle_fairy_log"; "jungle");
-		fairy_log("oak_fairy_log"; "oak");
-		fairy_log("spruce_fairy_log"; "spruce");
-	);
-
 	# トゥインクルストーン
 	(
 		${white orange magenta light_blue yellow lime pink gray silver cyan purple blue brown green red black} | (

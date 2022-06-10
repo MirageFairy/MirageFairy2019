@@ -1,7 +1,7 @@
 {
-	"parent": "miragefairy2019:block/fairy_log",
-	"textures": {
-		"end": "blocks/log_big_oak_top",
-		"side": "blocks/log_big_oak"
-	}
+  "parent": "miragefairy2019:block/fairy_log",
+  "textures": {
+    "end": "blocks/log_big_oak_top",
+    "side": "blocks/log_big_oak"
+  }
 }
