@@ -23,6 +23,8 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
+import miragefairy2019.libkt.makeGeneratedItemModel
+import miragefairy2019.libkt.makeHandheldItemModel
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
@@ -63,6 +65,30 @@ object FairyMaterials {
             onRegisterItem {
                 if (Main.side.isClient) item.setCustomModelResourceLocations()
             }
+        }
+        run {
+            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "aqua_mana_rod"))
+            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "wind_mana_rod"))
+            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "gaia_mana_rod"))
+            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "fire_mana_rod"))
+            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "shine_mana_rod"))
+            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "dark_mana_rod"))
+            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "quartz_mana_rod"))
+            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_stick"))
+            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_leaf"))
+            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_fairy_wood_stick"))
+            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_water_bottle"))
+            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_extract_bottle"))
+            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_oil_bottle"))
+            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "glass_mana_rod"))
+            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_fairy_leather"))
+            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_wood_resin"))
+            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "sphere_base"))
+            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_syrup"))
+            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_plastic"))
+            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_plastic_with_fairy"))
+            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_plastic_rod"))
+            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "india_ink"))
         }
         onMakeLang {
             fun r(name: String, enName: String, jaName: String, jaPoem: String) {

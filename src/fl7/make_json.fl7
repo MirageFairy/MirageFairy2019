@@ -40,30 +40,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	fluid("mirage_flower_extract");
 	fluid("mirage_flower_oil");
 
-	# 魔導素材
-	handheld("aqua_mana_rod");
-	handheld("wind_mana_rod");
-	handheld("gaia_mana_rod");
-	handheld("fire_mana_rod");
-	handheld("shine_mana_rod");
-	handheld("dark_mana_rod");
-	handheld("quartz_mana_rod");
-	handheld("mirage_flower_stick");
-	item("mirage_flower_leaf");
-	handheld("mirage_fairy_wood_stick");
-	item("miragium_water_bottle");
-	item("mirage_flower_extract_bottle");
-	item("mirage_flower_oil_bottle");
-	handheld("glass_mana_rod");
-	item("mirage_fairy_leather");
-	item("fairy_wood_resin");
-	item("sphere_base");
-	item("fairy_syrup");
-	item("fairy_plastic");
-	item("fairy_plastic_with_fairy");
-	handheld("fairy_plastic_rod");
-	item("india_ink");
-
 	# ポット
 	item("pot");
 	item("miragium_water_pot");
