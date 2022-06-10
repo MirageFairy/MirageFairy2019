@@ -2,8 +2,10 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeBlockModel
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.normal
@@ -14,6 +16,8 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
+import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
@@ -55,6 +59,49 @@ object Dish {
             setUnlocalizedName("dish")
             setCreativeTab { Main.creativeTab }
             makeBlockStates { normal }
+        }
+        makeBlockModel(ResourceName(ModMirageFairy2019.MODID, "dish")) {
+            fun point(x: Double, y: Double, z: Double) = jsonElement(x.jsonElement, y.jsonElement, z.jsonElement)
+            fun rectangle(x1: Double, y1: Double, x2: Double, y2: Double) = jsonElement(x1.jsonElement, y1.jsonElement, x2.jsonElement, y2.jsonElement)
+            fun texture(name: String) = jsonElement(
+                "uv" to rectangle(0.0, 0.0, 16.0, 16.0),
+                "texture" to name.jsonElement
+            )
+            jsonElement(
+                "parent" to "block/block".jsonElement,
+                "ambientocclusion" to false.jsonElement,
+                "textures" to jsonElement(
+                    "particle" to "minecraft:blocks/quartz_block_top".jsonElement,
+                    "top" to "minecraft:blocks/bone_block_top".jsonElement,
+                    "main" to "minecraft:blocks/quartz_block_top".jsonElement
+                ),
+                "elements" to jsonElement(
+                    jsonElement(
+                        "from" to point(4.0, 1.0, 4.0),
+                        "to" to point(12.0, 1.5, 12.0),
+                        "faces" to jsonElement(
+                            "down" to texture("#main"),
+                            "up" to texture("#top"),
+                            "north" to texture("#main"),
+                            "south" to texture("#main"),
+                            "west" to texture("#main"),
+                            "east" to texture("#main")
+                        )
+                    ),
+                    jsonElement(
+                        "from" to point(6.0, 0.0, 6.0),
+                        "to" to point(10.0, 1.0, 10.0),
+                        "faces" to jsonElement(
+                            "down" to texture("#main"),
+                            "up" to texture("#main"),
+                            "north" to texture("#main"),
+                            "south" to texture("#main"),
+                            "west" to texture("#main"),
+                            "east" to texture("#main")
+                        )
+                    )
+                )
+            )
         }
         itemDish = item({ ItemBlock(blockDish()) }, "dish") {
             setCustomModelResourceLocation()
