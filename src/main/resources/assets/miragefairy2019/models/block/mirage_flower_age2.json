@@ -1,7 +1,7 @@
 {
-	"parent": "block/cross",
-	"textures": {
-		"particle": "miragefairy2019:blocks/mirage_flower_age2",
-		"cross": "miragefairy2019:blocks/mirage_flower_age2"
-	}
+  "parent": "block/cross",
+  "textures": {
+    "particle": "miragefairy2019:blocks/mirage_flower_age2",
+    "cross": "miragefairy2019:blocks/mirage_flower_age2"
+  }
 }

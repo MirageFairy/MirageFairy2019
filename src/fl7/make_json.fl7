@@ -6,23 +6,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
 
-	# ミラージュの花
-	(
-		plant: name -> (
-			writer::write("\(name).json"; {
-				parent: "block/cross";
-				textures: {
-					particle: "miragefairy2019:blocks/\(name)";
-					cross: "miragefairy2019:blocks/\(name)";
-				};
-			});
-		);
-		plant("mirage_flower_age0");
-		plant("mirage_flower_age1");
-		plant("mirage_flower_age2");
-		plant("mirage_flower_age3");
-	);
-
 	# 妖精の樹洞
 	(
 		fairy_log: name, variant -> (

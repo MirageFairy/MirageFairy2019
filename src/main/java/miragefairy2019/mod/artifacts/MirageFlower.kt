@@ -11,11 +11,13 @@ import miragefairy2019.lib.shineEfficiency
 import miragefairy2019.libkt.BiomeDecoratorFlowers
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeBlockModel
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.randomInt
@@ -23,10 +25,12 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import mirrg.boron.util.UtilsMath
+import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.or
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.Block
@@ -79,6 +83,21 @@ object MirageFlower {
                 }
             }
             makeBlockStates { DataBlockStates(variants = (0..3).associate { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") }) }
+        }
+        run {
+            fun makeBlockModel(name: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
+                jsonElement(
+                    "parent" to "block/cross".jsonElement,
+                    "textures" to jsonElement(
+                        "particle" to "miragefairy2019:blocks/$name".jsonElement,
+                        "cross" to "miragefairy2019:blocks/$name".jsonElement
+                    )
+                )
+            }
+            makeBlockModel("mirage_flower_age0")
+            makeBlockModel("mirage_flower_age1")
+            makeBlockModel("mirage_flower_age2")
+            makeBlockModel("mirage_flower_age3")
         }
         itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower()) }, "mirage_flower_seeds") {
             setUnlocalizedName("mirageFlowerSeeds")
