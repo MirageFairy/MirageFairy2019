@@ -20,6 +20,7 @@ import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeItemModel
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.orNull
@@ -100,7 +101,8 @@ object Wand {
     val module = module {
 
         fun <T : ItemFairyWand> fairyWand(tier: Int, type: WandType, englishType: String, japaneseType: String, number: Int, creator: () -> T, vararg additionalOreNames: String) {
-            item(creator, "${type.registryName}_fairy_wand${if (number == 1) "" else "_$number"}") {
+            val registryName = "${type.registryName}_fairy_wand${if (number == 1) "" else "_$number"}"
+            item(creator, registryName) {
                 setUnlocalizedName("fairyWand${type.registryName.toUpperCamelCase()}${if (number == 1) "" else "$number"}")
                 setCreativeTab { Main.creativeTab }
                 setCustomModelResourceLocation()
@@ -113,6 +115,15 @@ object Wand {
                     OreDictionary.registerOre(type.oreName, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE))
                     additionalOreNames.forEach { OreDictionary.registerOre(it, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE)) }
                 }
+            }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, registryName)) {
+                jsonElement(
+                    "parent" to "item/handheld".jsonElement,
+                    "textures" to jsonElement(
+                        "layer0" to "miragefairy2019:items/fairy_wand_rod_$tier".jsonElement,
+                        "layer1" to "miragefairy2019:items/${type.registryName}_fairy_wand".jsonElement
+                    )
+                )
             }
             onMakeLang {
                 enJa(

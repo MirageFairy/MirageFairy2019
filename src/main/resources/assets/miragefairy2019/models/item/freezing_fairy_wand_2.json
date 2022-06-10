@@ -1,7 +1,7 @@
 {
-	"parent": "item/handheld",
-	"textures": {
-		"layer0": "miragefairy2019:items/fairy_wand_rod_3",
-		"layer1": "miragefairy2019:items/freezing_fairy_wand"
-	}
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "miragefairy2019:items/fairy_wand_rod_3",
+    "layer1": "miragefairy2019:items/freezing_fairy_wand"
+  }
 }
