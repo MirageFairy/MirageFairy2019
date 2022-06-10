@@ -6,6 +6,7 @@ import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeBlockItemModel
 import miragefairy2019.libkt.makeBlockModel
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.module
@@ -85,6 +86,7 @@ object FairyLog {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation(variant = "facing=north,variant=oak")
         }
+        makeBlockItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_log"))
 
         // 地形生成
         onHookDecorator {

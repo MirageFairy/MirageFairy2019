@@ -30,9 +30,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 			"layer$i" = "miragefairy2019:items/$layer";
 		}[]]};
 	});
-	block: registerName -> writer::write("\(registerName).json"; {
-		parent: "miragefairy2019:block/\(registerName)";
-	});
 	fairyWeapon : registerName -> writer::write("$registerName.json"; {
 		parent = "item/handheld";
 		textures = {
@@ -48,9 +45,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	});
 
 	item("fertilizer");
-	${white orange magenta light_blue yellow lime pink gray silver cyan purple blue brown green red black} | (
-	  block("$(_)_twinkle_stone");
-	);
 
 	item("mirage_flower_seeds");
 
@@ -90,9 +84,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	item("mirage_flower_oil_pot");
 	item("water_pot");
 	item("lava_pot");
-
-	# 妖精の樹洞
-	block("fairy_log");
 
 	handheld("fairy_stick");
 
@@ -151,9 +142,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 
 	layered("fairy"; [0 .. 4 | "fairy_layer$_"]);
 	layered("sphere"; [0 .. 3 | "sphere_layer$_"]);
-
-    # 皿
-	block("dish");
 
     # メインストリーム
 	item("skill_book");
