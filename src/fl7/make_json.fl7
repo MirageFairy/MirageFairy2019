@@ -6,12 +6,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/item");
 
-	item: registerName -> writer::write("$registerName.json"; {
-		parent = "item/generated";
-		textures = {
-			layer0 = "miragefairy2019:items/$registerName";
-		};
-	});
 	layered : registerName, list_layer -> writer::write("$(registerName).json"; {
 		parent = "item/generated";
 		textures = {[i, layer : list_layer[] | {
@@ -19,16 +13,8 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		}[]]};
 	});
 
-	item("fertilizer");
-
-	item("mirage_flower_seeds");
-
 	layered("fairy"; [0 .. 4 | "fairy_layer$_"]);
 	layered("sphere"; [0 .. 3 | "sphere_layer$_"]);
-
-    # メインストリーム
-	item("skill_book");
-	item("astronomical_observation_book");
 
     # 焼き妖精
     writer::write("baked_fairy.json"; {

@@ -1,6 +1,8 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeGeneratedItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -27,6 +29,7 @@ object SkillBook {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
+        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "skill_book"))
     }
 }
 

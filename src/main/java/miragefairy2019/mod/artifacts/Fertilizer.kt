@@ -5,6 +5,7 @@ import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapelessRecipe
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeGeneratedItemModel
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
@@ -51,6 +52,7 @@ object Fertilizer {
                 })
             }
         }
+        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "fertilizer"))
         makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "fertilizer"),
             DataShapelessRecipe(

@@ -19,6 +19,7 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockModel
 import miragefairy2019.libkt.makeBlockStates
+import miragefairy2019.libkt.makeGeneratedItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.setCreativeTab
@@ -104,6 +105,7 @@ object MirageFlower {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
+        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_seeds"))
 
         // 地形生成
         onHookDecorator {

@@ -2,12 +2,14 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.lib.MagicSelector
 import miragefairy2019.lib.rayTraceBlock
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.displayText
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeGeneratedItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
@@ -16,6 +18,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.skill.ApiSkill
 import mirrg.kotlin.minus
 import mirrg.kotlin.startOfDay
@@ -54,6 +57,7 @@ object AstronomicalObservationBook {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
+        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "astronomical_observation_book"))
     }
 }
 

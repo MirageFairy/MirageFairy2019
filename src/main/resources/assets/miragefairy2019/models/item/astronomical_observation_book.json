@@ -1,6 +1,6 @@
 {
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "miragefairy2019:items/astronomical_observation_book"
-	}
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "miragefairy2019:items/astronomical_observation_book"
+  }
 }
