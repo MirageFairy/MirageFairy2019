@@ -2,13 +2,16 @@ package miragefairy2019.mod.fairy
 
 import miragefairy2019.lib.entries
 import miragefairy2019.lib.registerItemColorHandler
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.boron.util.UtilsString
+import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
@@ -101,6 +104,18 @@ object Fairy {
                 }
                 registerItemColorHandler()
             }
+        }
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy")) {
+            jsonElement(
+                "parent" to "item/generated".jsonElement,
+                "textures" to jsonElement(
+                    "layer0" to "miragefairy2019:items/fairy_layer0".jsonElement,
+                    "layer1" to "miragefairy2019:items/fairy_layer1".jsonElement,
+                    "layer2" to "miragefairy2019:items/fairy_layer2".jsonElement,
+                    "layer3" to "miragefairy2019:items/fairy_layer3".jsonElement,
+                    "layer4" to "miragefairy2019:items/fairy_layer4".jsonElement
+                )
+            )
         }
         onMakeLang {
             enJa("item.mirageFairyR1.name", "Mirage Fairy", "妖精")

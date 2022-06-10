@@ -16,6 +16,7 @@ import miragefairy2019.lib.setInt
 import miragefairy2019.lib.times
 import miragefairy2019.lib.toItemStack
 import miragefairy2019.lib.toNbt
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.createItemStack
@@ -24,6 +25,7 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
@@ -36,6 +38,7 @@ import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.ItemFairy
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.formatAs
+import mirrg.kotlin.gson.jsonElement
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
@@ -86,6 +89,20 @@ object BakedFairy {
                 }
             }
             registerItemColorHandler()
+        }
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "baked_fairy")) {
+            jsonElement(
+                "parent" to "item/generated".jsonElement,
+                "textures" to jsonElement(
+                    "layer0" to "miragefairy2019:items/baked_fairy_front".jsonElement,
+                    "layer1" to "miragefairy2019:items/fairy_layer0".jsonElement,
+                    "layer2" to "miragefairy2019:items/fairy_layer1".jsonElement,
+                    "layer3" to "miragefairy2019:items/fairy_layer2".jsonElement,
+                    "layer4" to "miragefairy2019:items/fairy_layer3".jsonElement,
+                    "layer5" to "miragefairy2019:items/fairy_layer4".jsonElement,
+                    "layer6" to "miragefairy2019:items/baked_fairy_back".jsonElement
+                )
+            )
         }
         onMakeLang {
             enJa("item.bakedFairy.name", "Baked Fairy", "焼き妖精")

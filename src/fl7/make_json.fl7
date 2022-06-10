@@ -1,37 +1,5 @@
 @STRICT;
 
-Writer : USE("src/fl7/Writer.fl7").Writer;
-
-#################### アイテムモデル ####################
-(
-	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/item");
-
-	layered : registerName, list_layer -> writer::write("$(registerName).json"; {
-		parent = "item/generated";
-		textures = {[i, layer : list_layer[] | {
-			"layer$i" = "miragefairy2019:items/$layer";
-		}[]]};
-	});
-
-	layered("fairy"; [0 .. 4 | "fairy_layer$_"]);
-	layered("sphere"; [0 .. 3 | "sphere_layer$_"]);
-
-    # 焼き妖精
-    writer::write("baked_fairy.json"; {
-		parent = "item/generated";
-		textures = {
-            layer0 = "miragefairy2019:items/baked_fairy_front";
-            layer1 = "miragefairy2019:items/fairy_layer0";
-            layer2 = "miragefairy2019:items/fairy_layer1";
-            layer3 = "miragefairy2019:items/fairy_layer2";
-            layer4 = "miragefairy2019:items/fairy_layer3";
-            layer5 = "miragefairy2019:items/fairy_layer4";
-            layer6 = "miragefairy2019:items/baked_fairy_back";
-		};
-	});
-
-);
-
 REQUIRE("src/fl7/recipe.fl7");
 
 "[main] OK" => OUT;
