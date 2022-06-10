@@ -1,7 +1,7 @@
 {
-	"ambientocclusion": false,
-	"textures": {
-		"particle": "minecraft:blocks/glass"
-	},
-	"elements": []
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "minecraft:blocks/glass"
+  },
+  "elements": []
 }

@@ -6,15 +6,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
 
-	# 置かれたアイテム
-	writer::write("placed_item.json"; {
-		ambientocclusion = FALSE;
-		textures = {
-			particle = "minecraft:blocks/glass";
-		};
-		elements = [];
-	});
-
 	# 皿
 	writer::write("dish.json"; {
         parent = "block/block";

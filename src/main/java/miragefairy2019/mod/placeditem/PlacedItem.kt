@@ -1,12 +1,17 @@
 package miragefairy2019.mod.placeditem
 
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
+import miragefairy2019.libkt.makeBlockModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.side
+import miragefairy2019.mod.ModMirageFairy2019
+import mirrg.kotlin.gson.jsonArray
+import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.client.settings.KeyBinding
@@ -30,6 +35,17 @@ object PlacedItem {
         // ブロック
         blockPlacedItem = block({ BlockPlacedItem() }, "placed_item") {
             setUnlocalizedName("placedItem")
+        }
+        run {
+            makeBlockModel(ResourceName(ModMirageFairy2019.MODID, "placed_item")) {
+                jsonElement(
+                    "ambientocclusion" to false.jsonElement,
+                    "textures" to jsonElement(
+                        "particle" to "minecraft:blocks/glass".jsonElement
+                    ),
+                    "elements" to jsonArray()
+                )
+            }
         }
         tileEntity("placed_item", TileEntityPlacedItem::class.java)
         tileEntityRenderer(TileEntityPlacedItem::class.java, { TileEntityRendererPlacedItem() })
