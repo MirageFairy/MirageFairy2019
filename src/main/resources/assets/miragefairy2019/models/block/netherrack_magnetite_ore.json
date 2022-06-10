@@ -1,8 +1,8 @@
 {
-	"parent": "miragefairy2019:block/overlay_block",
-	"textures": {
-		"particle": "blocks/netherrack",
-		"base": "blocks/netherrack",
-		"overlay": "miragefairy2019:blocks/magnetite_ore"
-	}
+  "parent": "miragefairy2019:block/overlay_block",
+  "textures": {
+    "particle": "blocks/netherrack",
+    "base": "blocks/netherrack",
+    "overlay": "miragefairy2019:blocks/magnetite_ore"
+  }
 }
