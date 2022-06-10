@@ -6,33 +6,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
 
-	# 汎用素材ブロック
-	(
-		block: name -> (
-			writer::write("\(name).json"; {
-				parent: "block/cube_all";
-				textures: {
-					all: "miragefairy2019:blocks/\(name)";
-				};
-			});
-		);
-		block("apatite_block");
-		block("fluorite_block");
-		block("sulfur_block");
-		block("cinnabar_block");
-		block("moonstone_block");
-		block("magnetite_block");
-		block("pyrope_block");
-		block("smithsonite_block");
-		block("charcoal_block");
-		block("mirage_flower_leaf_block");
-		block("miragium_ingot_block");
-		block("miragium_dust_block");
-		block("nephrite_block");
-		block("topaz_block");
-		block("tourmaline_block");
-	);
-
 	# 鉱石ブロック
 	(
 		ore: name, base, overlay -> (

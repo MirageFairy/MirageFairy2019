@@ -26,6 +26,7 @@ import miragefairy2019.libkt.generated
 import miragefairy2019.libkt.handheld
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
+import miragefairy2019.libkt.makeBlockModel
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.makeItemVariantModel
 import miragefairy2019.libkt.makeRecipe
@@ -36,6 +37,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.block.BlockFalling
 import net.minecraft.block.SoundType
@@ -290,6 +292,31 @@ object CommonMaterials {
                     ).mapIndexed { i, model -> "variant=$i" to DataBlockState(model = model) }.toMap()
                 )
             }
+        }
+        run {
+            fun makeBlockModel(name: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
+                jsonElement(
+                    "parent" to "block/cube_all".jsonElement,
+                    "textures" to mirrg.kotlin.gson.jsonElement(
+                        "all" to "miragefairy2019:blocks/$name".jsonElement
+                    )
+                )
+            }
+            makeBlockModel("apatite_block")
+            makeBlockModel("fluorite_block")
+            makeBlockModel("sulfur_block")
+            makeBlockModel("cinnabar_block")
+            makeBlockModel("moonstone_block")
+            makeBlockModel("magnetite_block")
+            makeBlockModel("pyrope_block")
+            makeBlockModel("smithsonite_block")
+            makeBlockModel("charcoal_block")
+            makeBlockModel("mirage_flower_leaf_block")
+            makeBlockModel("miragium_ingot_block")
+            makeBlockModel("miragium_dust_block")
+            makeBlockModel("nephrite_block")
+            makeBlockModel("topaz_block")
+            makeBlockModel("tourmaline_block")
         }
         itemBlockMaterials1 = item({ ItemBlockMaterials(blockMaterials1()) }, "materials1") {
             onRegisterItem {
