@@ -13,6 +13,7 @@ import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeBlockItemModel
 import miragefairy2019.libkt.makeBlockModel
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.module
@@ -117,6 +118,29 @@ object Ores {
                 }
             }
             // TODO register ore name
+        }
+        run {
+            fun makeItemModel(name: String) = makeBlockItemModel(ResourceName(ModMirageFairy2019.MODID, name))
+            makeItemModel("apatite_ore")
+            makeItemModel("fluorite_ore")
+            makeItemModel("sulfur_ore")
+            makeItemModel("cinnabar_ore")
+            makeItemModel("moonstone_ore")
+            makeItemModel("magnetite_ore")
+            makeItemModel("pyrope_ore")
+            makeItemModel("smithsonite_ore")
+            makeItemModel("netherrack_apatite_ore")
+            makeItemModel("netherrack_fluorite_ore")
+            makeItemModel("netherrack_sulfur_ore")
+            makeItemModel("netherrack_cinnabar_ore")
+            makeItemModel("netherrack_moonstone_ore")
+            makeItemModel("netherrack_magnetite_ore")
+            makeItemModel("nephrite_ore")
+            makeItemModel("topaz_ore")
+            makeItemModel("tourmaline_ore")
+            makeItemModel("heliolite_ore")
+            makeItemModel("end_stone_labradorite_ore")
+            makeItemModel("pyrite_ore")
         }
         onMakeLang {
             enJa("tile.oreApatite.name", "Apatite Ore", "燐灰石鉱石")
