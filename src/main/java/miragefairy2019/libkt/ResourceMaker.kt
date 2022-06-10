@@ -162,6 +162,16 @@ class MakeBlockModelScope<B : Block>(val blockInitializer: BlockInitializer<B>)
 
 fun ResourceMaker.getItemModelFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/models/item/${registryName.path}.json")
 
+fun ModInitializer.makeItemModel(resourceName: ResourceName, creator: () -> JsonElement) = onMakeResource {
+    getItemModelFile(resourceName).place(creator())
+}
+
+fun ModInitializer.makeBlockItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { ItemModel.block(resourceName.map { "block/$it" }) }
+
+object ItemModel
+
+fun ItemModel.block(parent: ResourceName) = jsonElement("parent" to parent.toString().jsonElement)
+
 fun <I : Item> ItemInitializer<I>.makeItemModel(creator: MakeItemModelScope<I>.() -> DataItemModel) = modInitializer.onMakeResource {
     getItemModelFile(registryName).place(MakeItemModelScope(this@makeItemModel).creator())
 }
