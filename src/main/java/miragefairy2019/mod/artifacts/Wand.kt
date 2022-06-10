@@ -388,7 +388,7 @@ open class ItemFairyWand : Item(), IFairyStickCraftItem {
 
         tooltip += formattedText { "使用可能回数: ${(getMaxDamage(itemStack) - getDamage(itemStack) + 1).coerceAtLeast(0)}"().green } // 耐久値 TODO translate
 
-        tooltip += formattedText { ("スキル: "() + EnumMastery.processing.displayName() + " (${ApiSkill.skillManager.clientSkillContainer.getSkillLevel(EnumMastery.processing)})"()).gold } // TODO translate
+        tooltip += formattedText { ("スキル: "() + EnumMastery.processing.displayName() + " (${ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(EnumMastery.processing)})"()).gold } // TODO translate
         tooltip += formattedText { "クールタイム: ${getCoolTime(player) / 20.0 formatAs "%.2f"} 秒"().blue } // TODO translate
 
     }

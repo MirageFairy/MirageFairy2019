@@ -52,7 +52,7 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
     private val components = mutableListOf<Component>()
 
     private val skillManager get() = ApiSkill.skillManager
-    private val skillContainer get() = skillManager.clientSkillContainer
+    private val skillContainer get() = skillManager.getClientSkillContainer()
 
     init {
 
@@ -60,11 +60,11 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
             label(::fontRenderer, color = 0xFF808080.toArgb()) { "FMLv:" }
         }
         components += component(RectangleInt(4 + 20, 4, 20 - 4, 10)) {
-            label(::fontRenderer, align = TextAlignment.RIGHT) { "${skillManager.getFairyMasterLevel(skillContainer.variables.exp)}" }
+            label(::fontRenderer, align = TextAlignment.RIGHT) { "${skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}" }
             tooltip(
-                "フェアリーマスターレベル: ${skillManager.getFairyMasterLevel(skillContainer.variables.exp)}", // TODO translate
-                "累積経験値: ${skillContainer.variables.exp formatAs "%8d"}", // TODO translate
-                "必要経験値: ${skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.exp) formatAs "%8d"}" // TODO translate
+                "フェアリーマスターレベル: ${skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}", // TODO translate
+                "累積経験値: ${skillContainer.variables.getExp() formatAs "%8d"}", // TODO translate
+                "必要経験値: ${skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.getExp()) formatAs "%8d"}" // TODO translate
             )
         }
         components += component(RectangleInt(4 + 40, 4, 20, 10)) {
@@ -89,7 +89,7 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
                 when {
                     !skillContainer.canResetMastery(Instant.now()) -> listOf(
                         "今月は初期化できません。",
-                        "残り: ${(skillContainer.variables.lastMasteryResetTime!!.utcLocalDateTime.toLocalDate().startOfMonth.plusMonths(1).toInstantAsUtc - Instant.now()).displayText.unformattedText}"
+                        "残り: ${(skillContainer.variables.getLastMasteryResetTime()!!.utcLocalDateTime.toLocalDate().startOfMonth.plusMonths(1).toInstantAsUtc - Instant.now()).displayText.unformattedText}"
                     ) // TODO translate
                     skillContainer.usedSkillPoints == 0 -> listOf("初期化の必要はありません。") // TODO translate
                     else -> listOf("1か月に1度だけ、全マスタリのレベルをリセットしSPに戻せます。") // TODO translate

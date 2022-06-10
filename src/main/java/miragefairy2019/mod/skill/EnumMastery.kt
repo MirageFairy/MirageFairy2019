@@ -1,7 +1,7 @@
 package miragefairy2019.mod.skill
 
 @Suppress("EnumEntryName")
-enum class EnumMastery(private val parent: IMastery?, val layer: Int) : IMastery {
+enum class EnumMastery(override val parent: IMastery?, val layer: Int) : IMastery {
     root(null, 0),
     /**/ combat(root, 1),
     /**/ /**/ closeCombat(combat, 2),
@@ -18,13 +18,12 @@ enum class EnumMastery(private val parent: IMastery?, val layer: Int) : IMastery
     /**/ /**/ /**/ brewing(fabrication, 3),
     ;
 
-    override fun getParent() = parent
-    override fun getName() = name
-    override fun getCoefficient() = when (layer) {
-        0 -> 2
-        1 -> 3
-        2 -> 5
-        3 -> 10
-        else -> throw RuntimeException()
-    }
+    override val coefficient
+        get() = when (layer) {
+            0 -> 2
+            1 -> 3
+            2 -> 5
+            3 -> 10
+            else -> throw RuntimeException()
+        }
 }

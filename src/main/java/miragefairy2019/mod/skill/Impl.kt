@@ -36,7 +36,7 @@ fun ISkillManager.getRequiredFairyMasterExpForNextLevel(exp: Int) = getFairyMast
 
 
 class SkillContainer(private val manager: SkillManager) : ISkillContainer {
-    override fun getSkillManager() = manager
+    override val skillManager get() = manager
     override fun load(player: EntityPlayer) = manager.getFile(player).let { if (it.exists()) json = it.readText() else model = SkillModel() }
     override fun save(player: EntityPlayer) = manager.getFile(player).also { it.parentFile.mkdirs() }.writeText(json)
     override fun send(player: EntityPlayerMP) = manager.send(player, json)
@@ -50,17 +50,17 @@ class SkillContainer(private val manager: SkillManager) : ISkillContainer {
     private var model = SkillModel()
 
 
-    override fun getMasteryList() = model.getMasteryLevels().keys
+    override val masteryList get() = model.getMasteryLevels().keys
     override fun getMasteryLevel(mastery: String) = model.getMasteryLevels()[mastery] ?: 0
     override fun setMasteryLevel(mastery: String, masteryLevel: Int) = run { model.getMasteryLevels()[mastery] = masteryLevel }
 
-    override fun getVariables(): ISkillVariables = model.getVariables()
+    override val variables get(): ISkillVariables = model.getVariables()
 }
 
 fun ISkillContainer.getSkillLevel(mastery: IMastery): Int = getMasteryLevel(mastery.name) * mastery.coefficient + (mastery.parent?.let { getSkillLevel(it) } ?: 0)
 val ISkillContainer.usedSkillPoints get() = masteryList.sumBy { getMasteryLevel(it) }
-val ISkillContainer.remainingSkillPoints get() = skillManager.getFairyMasterLevel(variables.exp) - usedSkillPoints
-fun ISkillContainer.canResetMastery(now: Instant) = variables.lastMasteryResetTime.let { it == null || it < now.utcLocalDateTime.toLocalDate().startOfMonth.toInstantAsUtc }
+val ISkillContainer.remainingSkillPoints get() = skillManager.getFairyMasterLevel(variables.getExp()) - usedSkillPoints
+fun ISkillContainer.canResetMastery(now: Instant) = variables.getLastMasteryResetTime().let { it == null || it < now.utcLocalDateTime.toLocalDate().startOfMonth.toInstantAsUtc }
 
 data class SkillModel(
     @[JvmField Expose] var masteryLevels: MutableMap<String, Int>? = null,
@@ -76,11 +76,11 @@ data class SkillVariables(
     @[JvmField Expose] var lastAstronomicalObservationTime: Long? = null
 ) : ISkillVariables {
     override fun getExp(): Int = exp ?: 0
-    override fun setExp(it: Int) = run { exp = it }
+    override fun setExp(exp: Int) = run { this.exp = exp }
     override fun getLastMasteryResetTime() = lastMasteryResetTime?.let { Instant.ofEpochMilli(it) }
-    override fun setLastMasteryResetTime(it: Instant?) = run { lastMasteryResetTime = it?.toEpochMilli() }
+    override fun setLastMasteryResetTime(lastMasteryResetTime: Instant?) = run { this.lastMasteryResetTime = lastMasteryResetTime?.toEpochMilli() }
     override fun getLastAstronomicalObservationTime() = lastAstronomicalObservationTime?.let { Instant.ofEpochMilli(it) }
-    override fun setLastAstronomicalObservationTime(it: Instant?) = run { lastAstronomicalObservationTime = it?.toEpochMilli() }
+    override fun setLastAstronomicalObservationTime(lastAstronomicalObservationTime: Instant?) = run { this.lastAstronomicalObservationTime = lastAstronomicalObservationTime?.toEpochMilli() }
 }
 
 

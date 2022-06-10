@@ -254,7 +254,7 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val variant = getVariant(itemStack) ?: return
         val mastery = EnumMastery.fairySummoning
-        val skillContainer = ApiSkill.skillManager.clientSkillContainer
+        val skillContainer = ApiSkill.skillManager.getClientSkillContainer()
         tooltip += formattedText { ("スキル: "() + mastery.displayName() + " (${skillContainer.getSkillLevel(mastery)})"()).gold } // TODO translate
         tooltip += formattedText { "ランク: ${variant.dropRank + 1}"().blue } // TODO translate
         tooltip += formattedText { "コモン判定ブースト: ${variant.getRateBoost(DropCategory.COMMON, skillContainer) * 100.0 formatAs "%.2f%%"}"().blue } // TODO translate

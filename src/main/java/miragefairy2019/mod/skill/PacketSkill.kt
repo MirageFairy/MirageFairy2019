@@ -24,7 +24,10 @@ class PacketSkill : IMessageHandler<MessageSkill, IMessage> {
     }
 }
 
-class MessageSkill(json: String? = null) : MessageJson(json)
+class MessageSkill : MessageJson {
+    constructor() : super()
+    constructor(json: String) : super(json)
+}
 
 
 const val discriminatorTrainMastery = 3
@@ -68,7 +71,7 @@ class PacketResetMastery : IMessageHandler<MessageResetMastery, IMessage> {
             val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
             val now = Instant.now()
             if (skillContainer.canResetMastery(now)) {
-                skillContainer.variables.lastMasteryResetTime = now
+                skillContainer.variables.setLastMasteryResetTime(now)
                 skillContainer.masteryList.forEach { skillContainer.setMasteryLevel(it, 0) }
                 skillContainer.send(player)
                 player.sendStatusMessage(textComponent { "すべてのマスタリレベルをリセットしました。"() }, false) // TODO translate

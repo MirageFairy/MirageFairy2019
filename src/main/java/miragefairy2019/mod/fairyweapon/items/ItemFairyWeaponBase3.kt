@@ -176,7 +176,7 @@ abstract class ItemFairyWeaponBase3(
                     concat(
                         it.displayName(),
                         ": "(),
-                        it.getDisplayValue(MagicStatusFunctionArguments({ mastery -> ApiSkill.skillManager.clientSkillContainer.getSkillLevel(mastery) }, actualFairyType))().white,
+                        it.getDisplayValue(MagicStatusFunctionArguments({ mastery -> ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(mastery) }, actualFairyType))().white,
                         f(it)
                     ).blue
                 }
