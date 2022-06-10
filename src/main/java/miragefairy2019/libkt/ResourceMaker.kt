@@ -143,6 +143,21 @@ val <B : Block> MakeBlockStatesScope<B>.normal get() = DataBlockStates(variants 
 data class DataPart(val `when`: Map<String, Any>? = null, val apply: DataBlockState)
 
 
+// Block Model
+
+fun ResourceMaker.getBlockModelFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/models/block/${registryName.path}.json")
+
+fun ModInitializer.makeBlockModel(resourceName: ResourceName, creator: () -> JsonElement) = onMakeResource {
+    getBlockModelFile(resourceName).place(creator())
+}
+
+fun <B : Block> BlockInitializer<B>.makeBlockModel(creator: MakeBlockModelScope<B>.() -> JsonElement) = modInitializer.onMakeResource {
+    getBlockModelFile(resourceName).place(MakeBlockModelScope(this@makeBlockModel).creator())
+}
+
+class MakeBlockModelScope<B : Block>(val blockInitializer: BlockInitializer<B>)
+
+
 // Item Model
 
 fun ResourceMaker.getItemModelFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/models/item/${registryName.path}.json")
