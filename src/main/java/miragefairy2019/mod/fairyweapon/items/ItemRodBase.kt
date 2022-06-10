@@ -2,15 +2,15 @@ package miragefairy2019.mod.fairyweapon.items
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
-import miragefairy2019.mod.fairyweapon.MagicSelector
-import miragefairy2019.mod.fairyweapon.doEffect
+import miragefairy2019.lib.MagicSelector
+import miragefairy2019.lib.doEffect
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
-import miragefairy2019.mod.fairyweapon.position
-import miragefairy2019.mod.fairyweapon.rayTrace
+import miragefairy2019.lib.position
+import miragefairy2019.lib.rayTrace
 import miragefairy2019.mod.fairyweapon.spawnMagicParticle
 import miragefairy2019.mod.fairyweapon.spawnMagicSplashParticle
 import mirrg.kotlin.castOrNull
