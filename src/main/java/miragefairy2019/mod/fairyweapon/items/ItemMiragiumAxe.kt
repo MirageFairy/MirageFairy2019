@@ -13,12 +13,14 @@ import miragefairy2019.api.Mana.FIRE
 import miragefairy2019.api.Mana.GAIA
 import miragefairy2019.api.Mana.SHINE
 import miragefairy2019.api.Mana.WIND
+import miragefairy2019.lib.MagicSelector
+import miragefairy2019.lib.doEffect
+import miragefairy2019.lib.position
+import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.libkt.norm1
 import miragefairy2019.mod.artifacts.FairyLog
 import miragefairy2019.mod.fairyweapon.MagicMessage
-import miragefairy2019.lib.MagicSelector
 import miragefairy2019.mod.fairyweapon.breakBlock
-import miragefairy2019.lib.doEffect
 import miragefairy2019.mod.fairyweapon.extendSearch
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
@@ -31,8 +33,6 @@ import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.positive
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
-import miragefairy2019.lib.position
-import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.mod.fairyweapon.search
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.skill.EnumMastery

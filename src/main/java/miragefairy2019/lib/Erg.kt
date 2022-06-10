@@ -2,8 +2,8 @@ package miragefairy2019.lib
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.ErgSet
-import miragefairy2019.libkt.withColor
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.libkt.withColor
 import net.minecraft.util.text.TextFormatting
 
 operator fun ErgSet.get(erg: Erg) = getValue(erg)

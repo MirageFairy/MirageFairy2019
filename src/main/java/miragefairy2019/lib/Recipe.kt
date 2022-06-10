@@ -1,8 +1,6 @@
 package miragefairy2019.lib
 
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
-import miragefairy2019.lib.itemStacks
-import miragefairy2019.lib.size
 import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.ItemStack

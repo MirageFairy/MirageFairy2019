@@ -2,7 +2,7 @@ package miragefairy2019.mod.fairyweapon.items
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
-import miragefairy2019.mod.fairyweapon.magic4.status
+import miragefairy2019.mod.fairyweapon.CriticalRate
 import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.boolean
@@ -12,12 +12,12 @@ import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.percent0
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.positive
+import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
-import miragefairy2019.mod.fairyweapon.CriticalRate
 import miragefairy2019.mod.fairyweapon.spawnMagicParticle
 import miragefairy2019.mod.skill.EnumMastery
-import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.castOrNull
+import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.effect.EntityLightningBolt
 import net.minecraft.entity.monster.EntityCreeper

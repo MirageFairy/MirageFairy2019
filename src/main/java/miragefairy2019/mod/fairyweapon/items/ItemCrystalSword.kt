@@ -7,13 +7,13 @@ import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.mod.fairyweapon.findItem
-import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
 import miragefairy2019.mod.fairyweapon.deprecated.positive
+import miragefairy2019.mod.fairyweapon.findItem
+import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes

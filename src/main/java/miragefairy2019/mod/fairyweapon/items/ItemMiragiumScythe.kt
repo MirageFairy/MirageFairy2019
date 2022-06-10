@@ -1,12 +1,12 @@
 package miragefairy2019.mod.fairyweapon.items
 
+import miragefairy2019.api.Mana
 import miragefairy2019.libkt.grow
 import miragefairy2019.libkt.positions
 import miragefairy2019.libkt.region
 import miragefairy2019.libkt.sortedByDistance
 import miragefairy2019.mod.fairyweapon.deprecated.negative
 import miragefairy2019.mod.fairyweapon.deprecated.positive
-import miragefairy2019.api.Mana
 import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState

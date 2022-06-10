@@ -4,7 +4,6 @@ import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
-import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.float2
@@ -12,6 +11,7 @@ import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.percent0
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.pitch
+import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.skill.EnumMastery
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.entity.EntityLivingBase

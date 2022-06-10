@@ -2,16 +2,16 @@ package miragefairy2019.mod.fairyweapon.items
 
 import appeng.api.config.Actionable
 import appeng.api.networking.energy.IAEPowerStorage
-import miragefairy2019.mod.fairyweapon.magic4.status
+import miragefairy2019.api.Erg.THUNDER
+import miragefairy2019.api.Mana.WIND
+import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.percent0
+import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.suffix
 import miragefairy2019.mod.fairyweapon.magic4.world
-import miragefairy2019.api.Erg.THUNDER
-import miragefairy2019.mod.Main
-import miragefairy2019.api.Mana.WIND
 import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos

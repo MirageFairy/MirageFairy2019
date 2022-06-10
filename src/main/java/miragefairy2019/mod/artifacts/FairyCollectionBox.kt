@@ -1,26 +1,25 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.lib.itemStacks
+import miragefairy2019.lib.readFromNBT
+import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
-import miragefairy2019.util.SmartSlot
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.item
-import miragefairy2019.lib.itemStacks
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.module
-import miragefairy2019.lib.readFromNBT
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
-import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
 import miragefairy2019.mod.GuiId
@@ -30,6 +29,7 @@ import miragefairy2019.mod.fairy.fairyVariant
 import miragefairy2019.mod.fairy.hasSameId
 import miragefairy2019.mod.fairy.level
 import miragefairy2019.util.InventoryTileEntity
+import miragefairy2019.util.SmartSlot
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material

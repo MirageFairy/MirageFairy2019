@@ -1,5 +1,7 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.lib.MagicSelector
+import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.displayText
@@ -14,8 +16,6 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
-import miragefairy2019.lib.MagicSelector
-import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.mod.skill.ApiSkill
 import mirrg.kotlin.minus
 import mirrg.kotlin.startOfDay

@@ -10,8 +10,8 @@ import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.block.BlockDispenser
 import net.minecraft.dispenser.IBlockSource
 import net.minecraft.entity.player.EntityPlayer

@@ -2,10 +2,12 @@ package miragefairy2019.mod.fairyweapon.items
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
-import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.lib.MagicSelector
 import miragefairy2019.lib.doEffect
+import miragefairy2019.lib.position
+import miragefairy2019.lib.rayTraceBlock
+import miragefairy2019.libkt.randomInt
+import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.integer
@@ -14,8 +16,6 @@ import miragefairy2019.mod.fairyweapon.magic4.percent0
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
-import miragefairy2019.lib.position
-import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.init.MobEffects
 import net.minecraft.init.SoundEvents
