@@ -94,6 +94,7 @@ data class ResourceName(val domain: String, val path: String) {
     override fun toString() = "$domain:$path"
 }
 
+fun ResourceName.map(function: (String) -> String) = ResourceName(domain, function(path))
 val ResourceName.resourceLocation get() = ResourceLocation(domain, path)
 val ResourceLocation.resourceName get() = ResourceName(resourceDomain, resourcePath)
 
