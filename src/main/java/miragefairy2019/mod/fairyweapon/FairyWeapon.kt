@@ -22,11 +22,13 @@ import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
 import miragefairy2019.libkt.DataSimpleIngredient
+import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeItemModel
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
@@ -79,31 +81,42 @@ object FairyWeapon {
             oreNameList: List<String>,
             parent: (() -> ItemFairyWeapon)?,
             vararg manualRepairIngredientSuppliers: () -> Ingredient
-        ) = item(creator, registryName) {
-            setUnlocalizedName(unlocalizedName)
-            setCreativeTab { creativeTab }
-            onRegisterItem {
-                if (side.isClient) {
-                    val modelResourceLocation = ModelResourceLocation(item.registryName!!, "normal")
-                    MinecraftForge.EVENT_BUS.register(object : Any() {
-                        @SubscribeEvent
-                        fun accept(event: ModelBakeEvent) {
-                            event.modelRegistry.putObject(modelResourceLocation, BakedModelBuiltinWrapper(event.modelRegistry.getObject(modelResourceLocation)!!))
-                        }
-                    })
-                    ModelLoader.setCustomModelResourceLocation(item, 0, modelResourceLocation)
+        ): ItemInitializer<T> {
+            val item = item(creator, registryName) {
+                setUnlocalizedName(unlocalizedName)
+                setCreativeTab { creativeTab }
+                onRegisterItem {
+                    if (side.isClient) {
+                        val modelResourceLocation = ModelResourceLocation(item.registryName!!, "normal")
+                        MinecraftForge.EVENT_BUS.register(object : Any() {
+                            @SubscribeEvent
+                            fun accept(event: ModelBakeEvent) {
+                                event.modelRegistry.putObject(modelResourceLocation, BakedModelBuiltinWrapper(event.modelRegistry.getObject(modelResourceLocation)!!))
+                            }
+                        })
+                        ModelLoader.setCustomModelResourceLocation(item, 0, modelResourceLocation)
+                    }
+                }
+                onInit {
+                    val durability = (1..tier).fold(16) { a, _ -> a * 2 }
+                    item.maxDamage = durability - 1
+                    item.tier = tier
+                }
+                onCreateItemStack {
+                    if (parent != null) item.manualRepairRequirements += parent().manualRepairRequirements
+                    manualRepairIngredientSuppliers.forEach { item.manualRepairRequirements += it() }
+                    oreNameList.forEach { OreDictionary.registerOre(it, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE)) }
                 }
             }
-            onInit {
-                val durability = (1..tier).fold(16) { a, _ -> a * 2 }
-                item.maxDamage = durability - 1
-                item.tier = tier
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, registryName)) {
+                jsonElement(
+                    "parent" to "item/handheld".jsonElement,
+                    "textures" to jsonElement(
+                        "layer0" to "miragefairy2019:items/$registryName".jsonElement
+                    )
+                )
             }
-            onCreateItemStack {
-                if (parent != null) item.manualRepairRequirements += parent().manualRepairRequirements
-                manualRepairIngredientSuppliers.forEach { item.manualRepairRequirements += it() }
-                oreNameList.forEach { OreDictionary.registerOre(it, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE)) }
-            }
+            return item
         }
 
         operator fun Erg.not(): () -> Ingredient = { sphereType.oreName.oreIngredient }

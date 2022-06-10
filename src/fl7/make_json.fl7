@@ -30,12 +30,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 			"layer$i" = "miragefairy2019:items/$layer";
 		}[]]};
 	});
-	fairyWeapon : registerName -> writer::write("$registerName.json"; {
-		parent = "item/handheld";
-		textures = {
-			layer0 = "miragefairy2019:items/$registerName";
-		};
-	});
 
 	item("fertilizer");
 
@@ -79,26 +73,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	item("lava_pot");
 
 	handheld("fairy_stick");
-
-	fairyWeapon("miragium_axe");
-	fairyWeapon("miragium_scythe");
-	fairyWeapon("miragium_sword");
-	fairyWeapon("fairy_sword");
-	fairyWeapon("bell_base");
-	fairyWeapon("flower_picking_bell");
-	fairyWeapon("flower_picking_bell_2");
-	fairyWeapon("christmas_bell");
-	fairyWeapon("ocarina_base");
-	fairyWeapon("temptation_ocarina");
-	fairyWeapon("magic_wand_base");
-	fairyWeapon("light_magic_wand");
-	fairyWeapon("collecting_magic_wand");
-	fairyWeapon("charging_rod");
-	fairyWeapon("lightning_magic_wand");
-	fairyWeapon("crystal_sword");
-	fairyWeapon("ryugyo_drill");
-	fairyWeapon("lilagium_scythe");
-	fairyWeapon("gravity_rod");
 
 	layered("fairy"; [0 .. 4 | "fairy_layer$_"]);
 	layered("sphere"; [0 .. 3 | "sphere_layer$_"]);

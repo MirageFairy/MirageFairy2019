@@ -1,6 +1,6 @@
 {
-	"parent": "item/handheld",
-	"textures": {
-		"layer0": "miragefairy2019:items/crystal_sword"
-	}
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "miragefairy2019:items/crystal_sword"
+  }
 }

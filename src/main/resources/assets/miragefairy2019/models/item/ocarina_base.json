@@ -1,6 +1,6 @@
 {
-	"parent": "item/handheld",
-	"textures": {
-		"layer0": "miragefairy2019:items/ocarina_base"
-	}
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "miragefairy2019:items/ocarina_base"
+  }
 }
