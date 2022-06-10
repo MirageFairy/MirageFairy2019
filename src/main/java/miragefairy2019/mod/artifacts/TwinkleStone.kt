@@ -6,9 +6,11 @@ import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.IBlockVariant
 import miragefairy2019.libkt.ItemBlockMulti
+import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.makeBlockModel
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
@@ -16,6 +18,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -42,6 +45,24 @@ object TwinkleStone {
                         "brown", "green", "red", "black"
                     ).mapIndexed { i, it -> "variant=$i" to DataBlockState("miragefairy2019:${it}_twinkle_stone") }.toMap()
                 )
+            }
+        }
+        run {
+            fun makeBlockModel(name: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
+                jsonElement(
+                    "parent" to "block/cube_all".jsonElement,
+                    "textures" to jsonElement(
+                        "all" to "miragefairy2019:blocks/$name".jsonElement
+                    )
+                )
+            }
+            listOf(
+                "white", "orange", "magenta", "light_blue",
+                "yellow", "lime", "pink", "gray",
+                "silver", "cyan", "purple", "blue",
+                "brown", "green", "red", "black"
+            ).forEach {
+                makeBlockModel("${it}_twinkle_stone")
             }
         }
         itemBlockTwinkleStone = item({ ItemBlockMulti(blockTwinkleStone()) }, "twinkle_stone") {

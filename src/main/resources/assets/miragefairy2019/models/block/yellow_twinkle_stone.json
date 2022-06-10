@@ -1,6 +1,6 @@
 {
-	"parent": "block/cube_all",
-	"textures": {
-		"all": "miragefairy2019:blocks/yellow_twinkle_stone"
-	}
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "miragefairy2019:blocks/yellow_twinkle_stone"
+  }
 }

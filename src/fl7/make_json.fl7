@@ -6,18 +6,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/models/block");
 
-	# トゥインクルストーン
-	(
-		${white orange magenta light_blue yellow lime pink gray silver cyan purple blue brown green red black} | (
-			writer::write("$(_)_twinkle_stone.json"; {
-				parent = "block/cube_all";
-				textures = {
-					all = "miragefairy2019:blocks/$(_)_twinkle_stone";
-				};
-			});
-		);
-	);
-
 	# 置かれたアイテム
 	writer::write("placed_item.json"; {
 		ambientocclusion = FALSE;
