@@ -1,41 +1,42 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern": [
-		"cLL",
-		"b#L",
-		"twf"
-	],
-	"key": {
-		"#": {
-			"item": "minecraft:fish",
-			"data": 2
-		},
-		"L": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairyLeather"
-		},
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"f": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandFusion"
-		},
-		"b": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereDestroy"
-		},
-		"t": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereThunder"
-		},
-		"w": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereWater"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:ryugyo_drill"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cLL",
+    "b#L",
+    "twf"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:fish",
+      "data": 2
+    },
+    "L": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyLeather"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "f": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandFusion"
+    },
+    "b": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereDestroy"
+    },
+    "t": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereThunder"
+    },
+    "w": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereWater"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:ryugyo_drill",
+    "count": 1
+  }
 }

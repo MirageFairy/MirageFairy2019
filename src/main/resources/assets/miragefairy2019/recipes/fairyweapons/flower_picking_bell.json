@@ -1,40 +1,41 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern": [
-		"cIh",
-		"o#I",
-		"gom"
-	],
-	"key": {
-		"#": {
-			"item": "miragefairy2019:bell_base"
-		},
-		"g": {
-			"type": "forge:ore_dict",
-			"ore": "ingotGold"
-		},
-		"o": {
-			"type": "forge:ore_dict",
-			"ore": "obsidian"
-		},
-		"I": {
-			"type": "forge:ore_dict",
-			"ore": "ingotLilagium"
-		},
-		"h": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereHarvest"
-		},
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"m": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:flower_picking_bell"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cIh",
+    "o#I",
+    "gom"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:bell_base"
+    },
+    "g": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "o": {
+      "type": "forge:ore_dict",
+      "ore": "obsidian"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotLilagium"
+    },
+    "h": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereHarvest"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "m": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:flower_picking_bell",
+    "count": 1
+  }
 }

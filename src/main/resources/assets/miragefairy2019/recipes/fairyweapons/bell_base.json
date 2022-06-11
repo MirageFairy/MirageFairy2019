@@ -1,37 +1,38 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern": [
-		"cPs",
-		" RP",
-		"I m"
-	],
-	"key": {
-		"R": {
-			"type": "forge:ore_dict",
-			"ore": "rodMiragium"
-		},
-		"I": {
-			"type": "forge:ore_dict",
-			"ore": "ingotMiragium"
-		},
-		"P": {
-			"type": "forge:ore_dict",
-			"ore": "plateMiragium"
-		},
-		"s": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereSound"
-		},
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"m": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:bell_base"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cPs",
+    " RP",
+    "I m"
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "rodMiragium"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotMiragium"
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateMiragium"
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereSound"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "m": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:bell_base",
+    "count": 1
+  }
 }

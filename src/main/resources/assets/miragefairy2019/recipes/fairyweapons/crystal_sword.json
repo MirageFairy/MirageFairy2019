@@ -1,40 +1,41 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern": [
-		"cCC",
-		"S#C",
-		"Rmp"
-	],
-	"key": {
-		"#": {
-			"item": "miragefairy2019:miragium_sword"
-		},
-		"R": {
-			"type": "forge:ore_dict",
-			"ore": "rodMiragium"
-		},
-		"S": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereCrystal"
-		},
-		"C": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairyCrystal"
-		},
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"p": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
-		},
-		"m": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:crystal_sword"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cCC",
+    "S#C",
+    "Rmp"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:miragium_sword"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "rodMiragium"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereCrystal"
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystal"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "p": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+    },
+    "m": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:crystal_sword",
+    "count": 1
+  }
 }

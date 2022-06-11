@@ -1,36 +1,37 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern": [
-		"cGh",
-		"G#G",
-		"RGp"
-	],
-	"key": {
-		"#": {
-			"item": "miragefairy2019:flower_picking_bell"
-		},
-		"R": {
-			"type": "forge:ore_dict",
-			"ore": "stickMirageFairyWood"
-		},
-		"G": {
-			"type": "forge:ore_dict",
-			"ore": "gemPyrope"
-		},
-		"h": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereHarvest"
-		},
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"p": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:flower_picking_bell_2"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cGh",
+    "G#G",
+    "RGp"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:flower_picking_bell"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "stickMirageFairyWood"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gemPyrope"
+    },
+    "h": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereHarvest"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "p": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:flower_picking_bell_2",
+    "count": 1
+  }
 }
