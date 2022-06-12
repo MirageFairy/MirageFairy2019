@@ -1,19 +1,19 @@
 {
-	"type": "forge:ore_shaped",
-	"group": "charcoal_block",
-	"pattern": [
-		"###",
-		"###",
-		"###"
-	],
-	"key": {
-		"#": {
-			"item": "minecraft:coal",
-			"data": 1
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:materials1",
-		"data": 8
-	}
+  "type": "forge:ore_shaped",
+  "group": "charcoal_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:coal",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:materials1",
+    "data": 8
+  }
 }

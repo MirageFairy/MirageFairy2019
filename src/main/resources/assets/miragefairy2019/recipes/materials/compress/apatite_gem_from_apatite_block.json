@@ -1,18 +1,18 @@
 {
-	"type": "forge:ore_shaped",
-	"group": "apatite_gem",
-	"pattern": [
-		"#"
-	],
-	"key": {
-		"#": {
-			"type": "forge:ore_dict",
-			"ore": "blockApatite"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:materials",
-		"count": 9,
-		"data": 0
-	}
+  "type": "forge:ore_shaped",
+  "group": "apatite_gem",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "blockApatite"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:materials",
+    "count": 9,
+    "data": 0
+  }
 }

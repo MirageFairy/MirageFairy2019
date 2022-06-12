@@ -1,19 +1,19 @@
 {
-	"type": "forge:ore_shaped",
-	"group": "sulfur_block",
-	"pattern": [
-		"###",
-		"###",
-		"###"
-	],
-	"key": {
-		"#": {
-			"type": "forge:ore_dict",
-			"ore": "gemSulfur"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:materials1",
-		"data": 2
-	}
+  "type": "forge:ore_shaped",
+  "group": "sulfur_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "gemSulfur"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:materials1",
+    "data": 2
+  }
 }

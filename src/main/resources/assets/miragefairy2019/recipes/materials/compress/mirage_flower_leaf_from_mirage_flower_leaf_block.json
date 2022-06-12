@@ -1,18 +1,18 @@
 {
-	"type": "forge:ore_shaped",
-	"group": "mirage_flower_leaf",
-	"pattern": [
-		"#"
-	],
-	"key": {
-		"#": {
-			"type": "forge:ore_dict",
-			"ore": "blockLeafMirageFlower"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:fairy_materials",
-		"count": 9,
-		"data": 8
-	}
+  "type": "forge:ore_shaped",
+  "group": "mirage_flower_leaf",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "blockLeafMirageFlower"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:fairy_materials",
+    "count": 9,
+    "data": 8
+  }
 }
