@@ -145,6 +145,7 @@ object FairyWeapon {
         val miragiumScythe = fw(2, { ItemMiragiumScythe(0.0, 2.0f) }, "miragium_scythe", "miragiumScythe", listOf(), null, !SLASH, !HARVEST)
         val lilagiumScythe = fw(3, { ItemMiragiumScythe(10.0, 4.0f) }, "lilagium_scythe", "lilagiumScythe", listOf(), miragiumScythe, !HARVEST)
         val ryugyoDrill = fw(4, { ItemRyugyoDrill(0.0) }, "ryugyo_drill", "ryugyoDrill", listOf(), null, !DESTROY, !THUNDER, !WATER)
+        val prayerWheel = fw(3, { ItemFairyWeapon() }, "prayer_wheel", "prayerWheel", listOf(), null/* TODO */)
 
         onMakeLang {
             enJa("item.miragiumSword.name", "Miragium Sword", "ミラジウムの剣")
@@ -206,6 +207,7 @@ object FairyWeapon {
             enJa("item.ryugyoDrill.poem", "Design Contest Work", "デザインコンテスト武器")
             enJa("item.ryugyoDrill.author", "Yoshinon", "よしのん")
             enJa("item.ryugyoDrill.recipe", "Get a specific item", "デザインコンテスト武器")
+            // TODO
 
             enJa("miragefairy2019.magic.${MagicMessage.NO_FAIRY.unlocalizedName}.text", "You don't have a fairy", "妖精を所持していません")
             enJa("miragefairy2019.magic.${MagicMessage.INSUFFICIENT_DURABILITY.unlocalizedName}.text", "Insufficient durability", "耐久値が不足しています")
@@ -412,6 +414,8 @@ object FairyWeapon {
             )
         )
 
+        // TODO
+
         onMakeLang {
             enJa("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器")
             enJa("advancements.miragefairy2019.fairy_weapon.root.description", "Fairy Weapon", "妖精の力を何かに使えないだろうか")
@@ -511,6 +515,8 @@ object FairyWeapon {
             val gravity_rod = Achievement("gravity_rod", "gravityRod", null, "goal")
 
             val ryugyo_drill = Achievement("ryugyo_drill", "ryugyoDrill", null, "goal")
+
+            // TODO
 
         }
 
