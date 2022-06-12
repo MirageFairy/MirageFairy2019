@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shaped",
-  "group": "cinnabar_gem",
   "pattern": [
     "#"
   ],
