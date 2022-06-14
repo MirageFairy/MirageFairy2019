@@ -6,6 +6,7 @@ import miragefairy2019.api.IFairyType;
 import miragefairy2019.lib.ErgKt;
 import miragefairy2019.mod.Main;
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
+import miragefairy2019.mod.fairyweapon.ParticleUtilKt;
 import miragefairy2019.mod.fairyweapon.UtilKt;
 import mirrg.boron.util.UtilsMath;
 import mirrg.boron.util.struct.Tuple;
@@ -288,7 +289,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
         //
 
         // 発動中心点にパーティクルを表示
-        UtilKt.spawnParticle(world, result.positionTarget, result.executability.color);
+        ParticleUtilKt.spawnParticle(world, result.positionTarget, result.executability.color);
 
         if (result instanceof ResultWithFairy && result.executability.health >= EnumExecutability.NO_TARGET.health) {
             ResultWithFairy resultWithFairy = (ResultWithFairy) result;
@@ -302,7 +303,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
             }
 
             // 対象にパーティクルを表示
-            UtilKt.spawnParticleTargets(
+            ParticleUtilKt.spawnParticleTargets(
                 world,
                 resultWithFairy.targets.stream().filter(target -> target.y).collect(Collectors.toList()),
                 target -> target.x.getPositionVector(),

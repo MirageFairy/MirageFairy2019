@@ -4,6 +4,7 @@ import kotlin.Pair;
 import miragefairy2019.api.IFairyType;
 import miragefairy2019.mod.Main;
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
+import miragefairy2019.mod.fairyweapon.ParticleUtilKt;
 import miragefairy2019.mod.fairyweapon.UtilKt;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -157,7 +158,7 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
                     // 妖精がない場合はマゼンタ
                     Pair<ItemStack, IFairyType> fairy = UtilKt.findFairy(itemStack, player);
                     if (fairy == null) {
-                        UtilKt.spawnParticle(
+                        ParticleUtilKt.spawnParticle(
                             world,
                             UtilKt.getSight(player, 0),
                             0xFF00FF);
@@ -167,7 +168,7 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
                     // 松明検索
                     ItemStack itemStackTorch = findTorch(player).orElse(null);
                     if (itemStackTorch == null) {
-                        UtilKt.spawnParticle(
+                        ParticleUtilKt.spawnParticle(
                             world,
                             UtilKt.getSight(player, 0),
                             0xFF00FF);
@@ -182,21 +183,21 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
                     // クールタイムの場合は黄色
                     RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach);
                     if (rayTraceResult == null) {
-                        UtilKt.spawnParticle(
+                        ParticleUtilKt.spawnParticle(
                             world,
                             UtilKt.getSight(player, status.additionalReach),
                             itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }
                     if (!canExecute(world, rayTraceResult)) {
-                        UtilKt.spawnParticle(
+                        ParticleUtilKt.spawnParticle(
                             world,
                             rayTraceResult.hitVec,
                             itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }
 
-                    UtilKt.spawnParticle(
+                    ParticleUtilKt.spawnParticle(
                         world,
                         rayTraceResult.hitVec,
                         itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0xFFFF00 : 0xFFFFFF);

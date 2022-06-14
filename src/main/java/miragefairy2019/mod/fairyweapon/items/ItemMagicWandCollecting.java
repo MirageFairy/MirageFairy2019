@@ -6,6 +6,7 @@ import miragefairy2019.api.IFairyType;
 import miragefairy2019.lib.ErgKt;
 import miragefairy2019.mod.Main;
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
+import miragefairy2019.mod.fairyweapon.ParticleUtilKt;
 import miragefairy2019.mod.fairyweapon.UtilKt;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -231,7 +232,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
         Result result = getExecutability(world, itemStack, player);
 
         // 発動中心点にパーティクルを表示
-        UtilKt.spawnParticle(
+        ParticleUtilKt.spawnParticle(
             world,
             result.positionTarget,
             result.executability.color);
@@ -243,7 +244,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
             spawnParticleSphericalRange(world, result.positionTarget, resultWithFairy.status.radius);
 
             // 対象にパーティクルを表示
-            UtilKt.spawnParticleTargets(
+            ParticleUtilKt.spawnParticleTargets(
                 world,
                 resultWithFairy.targets.stream().filter(entityTarget -> entityTarget.getDistanceSq(player) > 0.2 * 0.2).collect(Collectors.toList()),
                 entityTarget -> entityTarget.getPositionVector(),
