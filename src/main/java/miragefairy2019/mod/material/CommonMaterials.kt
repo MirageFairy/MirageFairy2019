@@ -1,4 +1,4 @@
-package miragefairy2019.mod.artifacts
+package miragefairy2019.mod.material
 
 import miragefairy2019.common.toOreName
 import miragefairy2019.libkt.BlockMulti
@@ -40,6 +40,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.artifacts.WandType
 import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.block.BlockFalling

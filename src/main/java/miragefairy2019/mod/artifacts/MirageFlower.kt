@@ -30,6 +30,8 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
+import miragefairy2019.mod.material.CommonMaterials
+import miragefairy2019.mod.material.EnumVariantMaterials1
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.or

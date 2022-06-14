@@ -7,6 +7,7 @@ import miragefairy2019.mod.fairy.Fairy
 import miragefairy2019.mod.fairybox.FairyBox
 import miragefairy2019.mod.fairyrelation.FairyRelation
 import miragefairy2019.mod.fairyweapon.FairyWeapon
+import miragefairy2019.mod.material.Material
 import miragefairy2019.mod.placeditem.PlacedItem
 import miragefairy2019.mod.playeraura.PlayerAura
 import miragefairy2019.mod.recipes.Recipes
@@ -19,6 +20,7 @@ val modules = module {
     Jei.module(this)
 
     Artifacts.module(this)
+    Material.module(this)
     Systems.module(this)
     Recipes.module(this)
 

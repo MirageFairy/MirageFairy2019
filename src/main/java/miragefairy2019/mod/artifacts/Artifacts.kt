@@ -23,8 +23,6 @@ object Artifacts {
         MirageFlower.module(this)
         FluidMaterials.module(this)
         OreSeed.module(this)
-        CommonMaterials.module(this)
-        Ores.module(this)
         Wand.module(this)
         FairyCrystal.module(this)
     }

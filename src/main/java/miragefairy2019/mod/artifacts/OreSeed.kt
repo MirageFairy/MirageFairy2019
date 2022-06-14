@@ -21,6 +21,9 @@ import miragefairy2019.mod.oreseed.Vein
 import miragefairy2019.mod.oreseed.WorldGenCompoundOreSeed
 import miragefairy2019.mod.oreseed.invoke
 import miragefairy2019.mod.oreseed.register
+import miragefairy2019.mod.material.EnumVariantOre1
+import miragefairy2019.mod.material.EnumVariantOre2
+import miragefairy2019.mod.material.Ores
 import net.minecraft.block.Block
 import net.minecraft.block.BlockStone
 import net.minecraft.block.state.IBlockState
