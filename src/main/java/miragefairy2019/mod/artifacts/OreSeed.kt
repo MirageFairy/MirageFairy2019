@@ -7,6 +7,9 @@ import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.material.EnumVariantOre1
+import miragefairy2019.mod.material.EnumVariantOre2
+import miragefairy2019.mod.material.Ores
 import miragefairy2019.mod.oreseed.ApiOreSeedDrop
 import miragefairy2019.mod.oreseed.BlockOreSeed
 import miragefairy2019.mod.oreseed.Elements
@@ -21,9 +24,6 @@ import miragefairy2019.mod.oreseed.Vein
 import miragefairy2019.mod.oreseed.WorldGenCompoundOreSeed
 import miragefairy2019.mod.oreseed.invoke
 import miragefairy2019.mod.oreseed.register
-import miragefairy2019.mod.material.EnumVariantOre1
-import miragefairy2019.mod.material.EnumVariantOre2
-import miragefairy2019.mod.material.Ores
 import net.minecraft.block.Block
 import net.minecraft.block.BlockStone
 import net.minecraft.block.state.IBlockState
@@ -130,8 +130,8 @@ object OreSeed {
                  *   /fill ~-90 11 ~-90 ~90 11 ~90 minecraft:air
                  */
 
-                fun ore1(variant: EnumVariantOre1) = Pair({ Ores.blockOre1().getState(variant) }, { ItemStack(Ores.blockOre1(), 1, variant.metadata) })
-                fun ore2(variant: EnumVariantOre2) = Pair({ Ores.blockOre2().getState(variant) }, { ItemStack(Ores.blockOre2(), 1, variant.metadata) })
+                fun ore1(variant: EnumVariantOre1) = Pair({ Ores.blockOre1().getState(variant.blockVariant) }, { ItemStack(Ores.blockOre1(), 1, variant.blockVariant.metadata) })
+                fun ore2(variant: EnumVariantOre2) = Pair({ Ores.blockOre2().getState(variant.blockVariant) }, { ItemStack(Ores.blockOre2(), 1, variant.blockVariant.metadata) })
                 fun block(block: Block, meta: Int = 0) = Pair({ block.defaultState }, { ItemStack(block, 1, meta) })
 
                 fun OreSeedDropRegistryScope.TypedOreSeedDropRegistryScope.vein(shape: EnumOreSeedShape, weight: Double, output: Pair<() -> IBlockState, () -> ItemStack>, vararg generationConditions: IOreSeedDropRequirement) {

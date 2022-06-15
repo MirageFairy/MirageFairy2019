@@ -39,7 +39,7 @@ class PluginOreSeedDrop : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(Ores.blockOre1(), 1, EnumVariantOre1.APATITE_ORE.metadata))
+            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(Ores.blockOre1(), 1, EnumVariantOre1.APATITE_ORE.blockVariant.metadata))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 20, 0)
                 recipeLayout.itemStacks.init(1, false, 120, 0)

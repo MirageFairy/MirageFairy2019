@@ -21,18 +21,17 @@ import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
-import net.minecraft.util.IStringSerializable
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.MathHelper
 import java.util.Random
 
 object Ores {
 
-    lateinit var blockOre1: () -> BlockOre<EnumVariantOre1>
-    lateinit var itemBlockOre1: () -> ItemBlockOre<EnumVariantOre1>
+    lateinit var blockOre1: () -> BlockOre<BlockVariantOre>
+    lateinit var itemBlockOre1: () -> ItemBlockOre<BlockVariantOre>
 
-    lateinit var blockOre2: () -> BlockOre<EnumVariantOre2>
-    lateinit var itemBlockOre2: () -> ItemBlockOre<EnumVariantOre2>
+    lateinit var blockOre2: () -> BlockOre<BlockVariantOre>
+    lateinit var itemBlockOre2: () -> ItemBlockOre<BlockVariantOre>
 
     val module = module {
 
@@ -187,81 +186,62 @@ object Ores {
 }
 
 
-private class GemProvider(val itemStackSupplier: () -> ItemStack?, val amount: Double, val amountPerFortune: Double, val expMin: Int, val expMax: Int)
-
-enum class EnumVariantOre1(
+class BlockVariantOre(
     override val metadata: Int,
     override val resourceName: String,
     override val unlocalizedName: String,
     override val hardness: Float,
     override val resistance: Float,
     override val harvestLevel: Int,
-    private val gemProvider: GemProvider
-) : IStringSerializable, IBlockVariantOre {
-    APATITE_ORE(0, "apatite_ore", "oreApatite", 3f, 5f, 1, GemProvider({ "gemApatite".toOreName().copyItemStack() }, 1.0, 1.5, 1, 3)),
-    FLUORITE_ORE(1, "fluorite_ore", "oreFluorite", 3f, 5f, 2, GemProvider({ "gemFluorite".toOreName().copyItemStack() }, 1.0, 1.0, 15, 30)),
-    SULFUR_ORE(2, "sulfur_ore", "oreSulfur", 3f, 5f, 1, GemProvider({ "gemSulfur".toOreName().copyItemStack() }, 1.0, 1.5, 1, 3)),
-    CINNABAR_ORE(3, "cinnabar_ore", "oreCinnabar", 3f, 5f, 2, GemProvider({ "gemCinnabar".toOreName().copyItemStack() }, 1.0, 1.0, 1, 3)),
-    MOONSTONE_ORE(4, "moonstone_ore", "oreMoonstone", 3f, 5f, 2, GemProvider({ "gemMoonstone".toOreName().copyItemStack() }, 1.0, 0.5, 20, 40)),
-    MAGNETITE_ORE(5, "magnetite_ore", "oreMagnetite", 3f, 5f, 1, GemProvider({ "gemMagnetite".toOreName().copyItemStack() }, 1.0, 2.0, 1, 2)),
-
-    PYROPE_ORE(6, "pyrope_ore", "orePyrope", 3f, 5f, 2, GemProvider({ "gemPyrope".toOreName().copyItemStack() }, 1.0, 0.5, 1, 5)),
-    SMITHSONITE_ORE(7, "smithsonite_ore", "oreSmithsonite", 3f, 5f, 1, GemProvider({ "gemSmithsonite".toOreName().copyItemStack() }, 1.0, 1.0, 1, 3)),
-
-    NETHERRACK_APATITE_ORE(8, "netherrack_apatite_ore", "oreApatite", 0.4f, 0.4f, 1, GemProvider({ "gemApatite".toOreName().copyItemStack() }, 1.0, 1.5, 1, 3)),
-    NETHERRACK_FLUORITE_ORE(9, "netherrack_fluorite_ore", "oreFluorite", 0.4f, 0.4f, 2, GemProvider({ "gemFluorite".toOreName().copyItemStack() }, 1.0, 1.0, 15, 30)),
-    NETHERRACK_SULFUR_ORE(10, "netherrack_sulfur_ore", "oreSulfur", 0.4f, 0.4f, 1, GemProvider({ "gemSulfur".toOreName().copyItemStack() }, 1.0, 1.5, 1, 3)),
-    NETHERRACK_CINNABAR_ORE(11, "netherrack_cinnabar_ore", "oreCinnabar", 0.4f, 0.4f, 2, GemProvider({ "gemCinnabar".toOreName().copyItemStack() }, 1.0, 1.0, 1, 3)),
-    NETHERRACK_MOONSTONE_ORE(12, "netherrack_moonstone_ore", "oreMoonstone", 0.4f, 0.4f, 2, GemProvider({ "gemMoonstone".toOreName().copyItemStack() }, 1.0, 0.5, 20, 40)),
-    NETHERRACK_MAGNETITE_ORE(13, "netherrack_magnetite_ore", "oreMagnetite", 0.4f, 0.4f, 1, GemProvider({ "gemMagnetite".toOreName().copyItemStack() }, 1.0, 2.0, 1, 2)),
-
-    NEPHRITE_ORE(14, "nephrite_ore", "oreNephrite", 3f, 5f, 1, GemProvider({ "gemNephrite".toOreName().copyItemStack() }, 1.0, 2.0, 1, 3)),
-    TOPAZ_ORE(15, "topaz_ore", "oreTopaz", 3f, 5f, 2, GemProvider({ "gemTopaz".toOreName().copyItemStack() }, 1.0, 0.5, 1, 5)),
-    ;
-
-    override fun toString() = resourceName
-    override fun getName() = resourceName
-
+    private val itemStackSupplier: () -> ItemStack?,
+    private val amount: Double,
+    private val amountPerFortune: Double,
+    private val exp: IntRange
+) : IBlockVariantOre {
     override fun getDrops(random: Random, block: Block, metadata: Int, fortune: Int): List<ItemStack> {
-        return (0 until random.randomInt(gemProvider.amount + random.nextDouble() * gemProvider.amountPerFortune * fortune)).mapNotNull {
-            gemProvider.itemStackSupplier()?.copy()
+        return (0 until random.randomInt(amount + random.nextDouble() * amountPerFortune * fortune)).mapNotNull {
+            itemStackSupplier()?.copy()
         }
     }
 
-    override fun getExpDrop(random: Random, fortune: Int) = MathHelper.getInt(random, gemProvider.expMin, gemProvider.expMax)
+    override fun getExpDrop(random: Random, fortune: Int) = MathHelper.getInt(random, exp.first, exp.last)
+}
+
+enum class EnumVariantOre1(val blockVariant: BlockVariantOre) {
+    APATITE_ORE(BlockVariantOre(0, "apatite_ore", "oreApatite", 3f, 5f, 1, { "gemApatite".toOreName().copyItemStack() }, 1.0, 1.5, 1..3)),
+    FLUORITE_ORE(BlockVariantOre(1, "fluorite_ore", "oreFluorite", 3f, 5f, 2, { "gemFluorite".toOreName().copyItemStack() }, 1.0, 1.0, 15..30)),
+    SULFUR_ORE(BlockVariantOre(2, "sulfur_ore", "oreSulfur", 3f, 5f, 1, { "gemSulfur".toOreName().copyItemStack() }, 1.0, 1.5, 1..3)),
+    CINNABAR_ORE(BlockVariantOre(3, "cinnabar_ore", "oreCinnabar", 3f, 5f, 2, { "gemCinnabar".toOreName().copyItemStack() }, 1.0, 1.0, 1..3)),
+    MOONSTONE_ORE(BlockVariantOre(4, "moonstone_ore", "oreMoonstone", 3f, 5f, 2, { "gemMoonstone".toOreName().copyItemStack() }, 1.0, 0.5, 20..40)),
+    MAGNETITE_ORE(BlockVariantOre(5, "magnetite_ore", "oreMagnetite", 3f, 5f, 1, { "gemMagnetite".toOreName().copyItemStack() }, 1.0, 2.0, 1..2)),
+
+    PYROPE_ORE(BlockVariantOre(6, "pyrope_ore", "orePyrope", 3f, 5f, 2, { "gemPyrope".toOreName().copyItemStack() }, 1.0, 0.5, 1..5)),
+    SMITHSONITE_ORE(BlockVariantOre(7, "smithsonite_ore", "oreSmithsonite", 3f, 5f, 1, { "gemSmithsonite".toOreName().copyItemStack() }, 1.0, 1.0, 1..3)),
+
+    NETHERRACK_APATITE_ORE(BlockVariantOre(8, "netherrack_apatite_ore", "oreApatite", 0.4f, 0.4f, 1, { "gemApatite".toOreName().copyItemStack() }, 1.0, 1.5, 1..3)),
+    NETHERRACK_FLUORITE_ORE(BlockVariantOre(9, "netherrack_fluorite_ore", "oreFluorite", 0.4f, 0.4f, 2, { "gemFluorite".toOreName().copyItemStack() }, 1.0, 1.0, 15..30)),
+    NETHERRACK_SULFUR_ORE(BlockVariantOre(10, "netherrack_sulfur_ore", "oreSulfur", 0.4f, 0.4f, 1, { "gemSulfur".toOreName().copyItemStack() }, 1.0, 1.5, 1..3)),
+    NETHERRACK_CINNABAR_ORE(BlockVariantOre(11, "netherrack_cinnabar_ore", "oreCinnabar", 0.4f, 0.4f, 2, { "gemCinnabar".toOreName().copyItemStack() }, 1.0, 1.0, 1..3)),
+    NETHERRACK_MOONSTONE_ORE(BlockVariantOre(12, "netherrack_moonstone_ore", "oreMoonstone", 0.4f, 0.4f, 2, { "gemMoonstone".toOreName().copyItemStack() }, 1.0, 0.5, 20..40)),
+    NETHERRACK_MAGNETITE_ORE(BlockVariantOre(13, "netherrack_magnetite_ore", "oreMagnetite", 0.4f, 0.4f, 1, { "gemMagnetite".toOreName().copyItemStack() }, 1.0, 2.0, 1..2)),
+
+    NEPHRITE_ORE(BlockVariantOre(14, "nephrite_ore", "oreNephrite", 3f, 5f, 1, { "gemNephrite".toOreName().copyItemStack() }, 1.0, 2.0, 1..3)),
+    TOPAZ_ORE(BlockVariantOre(15, "topaz_ore", "oreTopaz", 3f, 5f, 2, { "gemTopaz".toOreName().copyItemStack() }, 1.0, 0.5, 1..5)),
+    ;
 
     companion object {
-        val variantList = BlockVariantList(values().toList())
+        val variantList = BlockVariantList(values().map { it.blockVariant })
     }
 }
 
-enum class EnumVariantOre2(
-    override val metadata: Int,
-    override val resourceName: String,
-    override val unlocalizedName: String,
-    override val hardness: Float,
-    override val resistance: Float,
-    override val harvestLevel: Int,
-    private val gemProvider: GemProvider
-) : IStringSerializable, IBlockVariantOre {
-    TOURMALINE_ORE(0, "tourmaline_ore", "oreTourmaline", 3f, 5f, 2, GemProvider({ "gemTourmaline".toOreName().copyItemStack() }, 1.0, 0.5, 1, 5)),
-    HELIOLITE_ORE(1, "heliolite_ore", "oreHeliolite", 3f, 5f, 2, GemProvider({ "gemHeliolite".toOreName().copyItemStack() }, 1.0, 0.5, 10, 20)),
-    END_STONE_LABRADORITE_ORE(2, "end_stone_labradorite_ore", "oreLabradorite", 3f, 5f, 2, GemProvider({ "gemLabradorite".toOreName().copyItemStack() }, 1.0, 0.5, 15, 30)),
-    PYRITE_ORE(3, "pyrite_ore", "orePyrite", 3f, 5f, 1, GemProvider({ "gemPyrite".toOreName().copyItemStack() }, 1.0, 1.5, 1, 3)),
+enum class EnumVariantOre2(val blockVariant: BlockVariantOre) {
+    TOURMALINE_ORE(BlockVariantOre(0, "tourmaline_ore", "oreTourmaline", 3f, 5f, 2, { "gemTourmaline".toOreName().copyItemStack() }, 1.0, 0.5, 1..5)),
+    HELIOLITE_ORE(BlockVariantOre(1, "heliolite_ore", "oreHeliolite", 3f, 5f, 2, { "gemHeliolite".toOreName().copyItemStack() }, 1.0, 0.5, 10..20)),
+    END_STONE_LABRADORITE_ORE(BlockVariantOre(2, "end_stone_labradorite_ore", "oreLabradorite", 3f, 5f, 2, { "gemLabradorite".toOreName().copyItemStack() }, 1.0, 0.5, 15..30)),
+    PYRITE_ORE(BlockVariantOre(3, "pyrite_ore", "orePyrite", 3f, 5f, 1, { "gemPyrite".toOreName().copyItemStack() }, 1.0, 1.5, 1..3)),
     ;
 
-    override fun toString() = resourceName
-    override fun getName() = resourceName
-
-    override fun getDrops(random: Random, block: Block, metadata: Int, fortune: Int): List<ItemStack> {
-        return (0 until random.randomInt(gemProvider.amount + random.nextDouble() * gemProvider.amountPerFortune * fortune)).mapNotNull {
-            gemProvider.itemStackSupplier()?.copy()
-        }
-    }
-
-    override fun getExpDrop(random: Random, fortune: Int) = MathHelper.getInt(random, gemProvider.expMin, gemProvider.expMax)
-
     companion object {
-        val variantList = BlockVariantList(values().toList())
+        val variantList = BlockVariantList(values().map { it.blockVariant })
     }
 }
