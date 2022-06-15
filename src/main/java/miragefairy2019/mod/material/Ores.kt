@@ -62,38 +62,6 @@ object Ores {
                 )
             }
         }
-        run {
-            fun makeBlockModel(name: String, base: String, overlay: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
-                jsonElement(
-                    "parent" to "miragefairy2019:block/overlay_block".jsonElement,
-                    "textures" to jsonElement(
-                        "particle" to base.jsonElement,
-                        "base" to base.jsonElement,
-                        "overlay" to overlay.jsonElement
-                    )
-                )
-            }
-            makeBlockModel("apatite_ore", "blocks/stone", "miragefairy2019:blocks/apatite_ore")
-            makeBlockModel("fluorite_ore", "blocks/stone", "miragefairy2019:blocks/fluorite_ore")
-            makeBlockModel("sulfur_ore", "blocks/stone", "miragefairy2019:blocks/sulfur_ore")
-            makeBlockModel("cinnabar_ore", "blocks/stone", "miragefairy2019:blocks/cinnabar_ore")
-            makeBlockModel("magnetite_ore", "blocks/stone", "miragefairy2019:blocks/magnetite_ore")
-            makeBlockModel("moonstone_ore", "blocks/stone", "miragefairy2019:blocks/moonstone_ore")
-            makeBlockModel("pyrope_ore", "blocks/stone", "miragefairy2019:blocks/pyrope_ore")
-            makeBlockModel("smithsonite_ore", "blocks/stone", "miragefairy2019:blocks/smithsonite_ore")
-            makeBlockModel("netherrack_apatite_ore", "blocks/netherrack", "miragefairy2019:blocks/apatite_ore")
-            makeBlockModel("netherrack_fluorite_ore", "blocks/netherrack", "miragefairy2019:blocks/fluorite_ore")
-            makeBlockModel("netherrack_sulfur_ore", "blocks/netherrack", "miragefairy2019:blocks/sulfur_ore")
-            makeBlockModel("netherrack_cinnabar_ore", "blocks/netherrack", "miragefairy2019:blocks/cinnabar_ore")
-            makeBlockModel("netherrack_magnetite_ore", "blocks/netherrack", "miragefairy2019:blocks/magnetite_ore")
-            makeBlockModel("netherrack_moonstone_ore", "blocks/netherrack", "miragefairy2019:blocks/moonstone_ore")
-            makeBlockModel("nephrite_ore", "blocks/stone", "miragefairy2019:blocks/nephrite_ore")
-            makeBlockModel("topaz_ore", "blocks/stone", "miragefairy2019:blocks/topaz_ore")
-            makeBlockModel("tourmaline_ore", "blocks/stone", "miragefairy2019:blocks/tourmaline_ore")
-            makeBlockModel("heliolite_ore", "blocks/stone", "miragefairy2019:blocks/heliolite_ore")
-            makeBlockModel("end_stone_labradorite_ore", "blocks/end_stone", "miragefairy2019:blocks/labradorite_ore")
-            makeBlockModel("pyrite_ore", "blocks/stone", "miragefairy2019:blocks/pyrite_ore")
-        }
         itemBlockOre1 = item({ ItemBlockOre(blockOre1()) }, "ore1") {
             onRegisterItem {
                 blockOre1().variantList.blockVariants.forEach {
@@ -101,41 +69,6 @@ object Ores {
                 }
             }
             // TODO register ore name
-        }
-        run {
-            fun makeItemModel(name: String) = makeBlockItemModel(ResourceName(ModMirageFairy2019.MODID, name))
-            makeItemModel("apatite_ore")
-            makeItemModel("fluorite_ore")
-            makeItemModel("sulfur_ore")
-            makeItemModel("cinnabar_ore")
-            makeItemModel("moonstone_ore")
-            makeItemModel("magnetite_ore")
-            makeItemModel("pyrope_ore")
-            makeItemModel("smithsonite_ore")
-            makeItemModel("netherrack_apatite_ore")
-            makeItemModel("netherrack_fluorite_ore")
-            makeItemModel("netherrack_sulfur_ore")
-            makeItemModel("netherrack_cinnabar_ore")
-            makeItemModel("netherrack_moonstone_ore")
-            makeItemModel("netherrack_magnetite_ore")
-            makeItemModel("nephrite_ore")
-            makeItemModel("topaz_ore")
-            makeItemModel("tourmaline_ore")
-            makeItemModel("heliolite_ore")
-            makeItemModel("end_stone_labradorite_ore")
-            makeItemModel("pyrite_ore")
-        }
-        onMakeLang {
-            enJa("tile.oreApatite.name", "Apatite Ore", "燐灰石鉱石")
-            enJa("tile.oreFluorite.name", "Fluorite Ore", "蛍石鉱石")
-            enJa("tile.oreSulfur.name", "Sulfur Ore", "硫黄鉱石")
-            enJa("tile.oreCinnabar.name", "Cinnabar Ore", "辰砂鉱石")
-            enJa("tile.oreMoonstone.name", "Moonstone Ore", "月長石鉱石")
-            enJa("tile.oreMagnetite.name", "Magnetite Ore", "磁鉄鉱鉱石")
-            enJa("tile.orePyrope.name", "Pyrope Ore", "パイロープ鉱石")
-            enJa("tile.oreSmithsonite.name", "Smithsonite Ore", "スミソナイト鉱石")
-            enJa("tile.oreNephrite.name", "Nephrite Ore", "ネフライト鉱石")
-            enJa("tile.oreTopaz.name", "Topaz Ore", "トパーズ鉱石")
         }
 
         // 鉱石ブロック2
@@ -172,11 +105,82 @@ object Ores {
             }
             // TODO register ore name
         }
+
+        // 翻訳の生成
         onMakeLang {
+            enJa("tile.oreApatite.name", "Apatite Ore", "燐灰石鉱石")
+            enJa("tile.oreFluorite.name", "Fluorite Ore", "蛍石鉱石")
+            enJa("tile.oreSulfur.name", "Sulfur Ore", "硫黄鉱石")
+            enJa("tile.oreCinnabar.name", "Cinnabar Ore", "辰砂鉱石")
+            enJa("tile.oreMoonstone.name", "Moonstone Ore", "月長石鉱石")
+            enJa("tile.oreMagnetite.name", "Magnetite Ore", "磁鉄鉱鉱石")
+            enJa("tile.orePyrope.name", "Pyrope Ore", "パイロープ鉱石")
+            enJa("tile.oreSmithsonite.name", "Smithsonite Ore", "スミソナイト鉱石")
+            enJa("tile.oreNephrite.name", "Nephrite Ore", "ネフライト鉱石")
+            enJa("tile.oreTopaz.name", "Topaz Ore", "トパーズ鉱石")
             enJa("tile.oreTourmaline.name", "Tourmaline Ore", "トルマリン鉱石")
             enJa("tile.oreHeliolite.name", "Heliolite Ore", "ヘリオライト鉱石")
             enJa("tile.oreLabradorite.name", "Labradorite Ore", "ラブラドライト鉱石")
             enJa("tile.orePyrite.name", "Pyrite Ore", "パイライト鉱石")
+        }
+
+        // ブロックモデルの生成
+        run {
+            fun makeBlockModel(name: String, base: String, overlay: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
+                jsonElement(
+                    "parent" to "miragefairy2019:block/overlay_block".jsonElement,
+                    "textures" to jsonElement(
+                        "particle" to base.jsonElement,
+                        "base" to base.jsonElement,
+                        "overlay" to overlay.jsonElement
+                    )
+                )
+            }
+            makeBlockModel("apatite_ore", "blocks/stone", "miragefairy2019:blocks/apatite_ore")
+            makeBlockModel("fluorite_ore", "blocks/stone", "miragefairy2019:blocks/fluorite_ore")
+            makeBlockModel("sulfur_ore", "blocks/stone", "miragefairy2019:blocks/sulfur_ore")
+            makeBlockModel("cinnabar_ore", "blocks/stone", "miragefairy2019:blocks/cinnabar_ore")
+            makeBlockModel("moonstone_ore", "blocks/stone", "miragefairy2019:blocks/moonstone_ore")
+            makeBlockModel("magnetite_ore", "blocks/stone", "miragefairy2019:blocks/magnetite_ore")
+            makeBlockModel("pyrope_ore", "blocks/stone", "miragefairy2019:blocks/pyrope_ore")
+            makeBlockModel("smithsonite_ore", "blocks/stone", "miragefairy2019:blocks/smithsonite_ore")
+            makeBlockModel("netherrack_apatite_ore", "blocks/netherrack", "miragefairy2019:blocks/apatite_ore")
+            makeBlockModel("netherrack_fluorite_ore", "blocks/netherrack", "miragefairy2019:blocks/fluorite_ore")
+            makeBlockModel("netherrack_sulfur_ore", "blocks/netherrack", "miragefairy2019:blocks/sulfur_ore")
+            makeBlockModel("netherrack_cinnabar_ore", "blocks/netherrack", "miragefairy2019:blocks/cinnabar_ore")
+            makeBlockModel("netherrack_magnetite_ore", "blocks/netherrack", "miragefairy2019:blocks/magnetite_ore")
+            makeBlockModel("netherrack_moonstone_ore", "blocks/netherrack", "miragefairy2019:blocks/moonstone_ore")
+            makeBlockModel("nephrite_ore", "blocks/stone", "miragefairy2019:blocks/nephrite_ore")
+            makeBlockModel("topaz_ore", "blocks/stone", "miragefairy2019:blocks/topaz_ore")
+            makeBlockModel("tourmaline_ore", "blocks/stone", "miragefairy2019:blocks/tourmaline_ore")
+            makeBlockModel("heliolite_ore", "blocks/stone", "miragefairy2019:blocks/heliolite_ore")
+            makeBlockModel("end_stone_labradorite_ore", "blocks/end_stone", "miragefairy2019:blocks/labradorite_ore")
+            makeBlockModel("pyrite_ore", "blocks/stone", "miragefairy2019:blocks/pyrite_ore")
+        }
+
+        // アイテムモデルの生成
+        run {
+            fun makeItemModel(name: String) = makeBlockItemModel(ResourceName(ModMirageFairy2019.MODID, name))
+            makeItemModel("apatite_ore")
+            makeItemModel("fluorite_ore")
+            makeItemModel("sulfur_ore")
+            makeItemModel("cinnabar_ore")
+            makeItemModel("moonstone_ore")
+            makeItemModel("magnetite_ore")
+            makeItemModel("pyrope_ore")
+            makeItemModel("smithsonite_ore")
+            makeItemModel("netherrack_apatite_ore")
+            makeItemModel("netherrack_fluorite_ore")
+            makeItemModel("netherrack_sulfur_ore")
+            makeItemModel("netherrack_cinnabar_ore")
+            makeItemModel("netherrack_moonstone_ore")
+            makeItemModel("netherrack_magnetite_ore")
+            makeItemModel("nephrite_ore")
+            makeItemModel("topaz_ore")
+            makeItemModel("tourmaline_ore")
+            makeItemModel("heliolite_ore")
+            makeItemModel("end_stone_labradorite_ore")
+            makeItemModel("pyrite_ore")
         }
 
     }
