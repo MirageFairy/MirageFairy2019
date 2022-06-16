@@ -73,7 +73,7 @@ class WorldRayTraceResult(
 }
 
 fun MagicSelector.Companion.rayTrace(world: World, player: EntityPlayer, additionalReach: Double): MagicSelector<WorldRayTraceResult> {
-    val rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, additionalReach)
+    val rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, additionalReach, Entity::class.java) { true }
     val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
     return MagicSelector(WorldRayTraceResult(world, rayTraceResult, position))
 }

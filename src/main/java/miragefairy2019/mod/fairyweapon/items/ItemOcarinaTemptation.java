@@ -135,7 +135,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
         // 妖精取得
         Pair<ItemStack, IFairyType> fairy = UtilKt.findFairy(itemStack, player);
         if (fairy == null) {
-            RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, 0);
+            RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, 0, Entity.class, e -> true);
             Vec3d positionTarget = rayTraceResult != null
                 ? rayTraceResult.hitVec
                 : UtilKt.getSight(player, 0);

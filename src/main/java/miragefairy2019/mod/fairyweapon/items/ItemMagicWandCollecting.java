@@ -137,7 +137,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
         Status status = new Status(fairy.getSecond());
 
         // 発動座標
-        RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach);
+        RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach, Entity.class, e -> true);
         Vec3d positionTarget = rayTraceResult != null
             ? rayTraceResult.hitVec
             : UtilKt.getSight(player, status.additionalReach);

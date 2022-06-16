@@ -18,11 +18,6 @@ import java.util.Optional;
 public class FairyWeaponUtils {
 
     @Nullable
-    public static RayTraceResult rayTrace(World world, EntityPlayer player, boolean useLiquids, double additionalReach) {
-        return rayTrace(world, player, useLiquids, additionalReach, Entity.class, e -> true);
-    }
-
-    @Nullable
     public static <E extends Entity> RayTraceResult rayTrace(
         World world,
         EntityPlayer player,

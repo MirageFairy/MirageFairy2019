@@ -78,7 +78,7 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
         if (itemStackTorch == null) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
         // 視線判定
-        RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach);
+        RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach, Entity.class, e -> true);
         if (rayTraceResult == null) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
         if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
         BlockPos blockPos = rayTraceResult.getBlockPos();
@@ -181,7 +181,7 @@ public class ItemMagicWandLight extends ItemFairyWeapon {
                     // 耐久がない場合は赤
                     // 対象が発動対象でない場合は緑
                     // クールタイムの場合は黄色
-                    RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach);
+                    RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, status.additionalReach, Entity.class, e -> true);
                     if (rayTraceResult == null) {
                         ParticleUtilKt.spawnParticle(
                             world,
