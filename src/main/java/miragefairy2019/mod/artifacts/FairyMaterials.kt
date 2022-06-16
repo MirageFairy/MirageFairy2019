@@ -66,6 +66,8 @@ object FairyMaterials {
                 if (Main.side.isClient) item.setCustomModelResourceLocations()
             }
         }
+
+        // アイテムモデルの生成
         run {
             makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "aqua_mana_rod"))
             makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "wind_mana_rod"))
@@ -91,6 +93,8 @@ object FairyMaterials {
             makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "india_ink"))
             makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "ancient_pottery"))
         }
+
+        // 翻訳の生成
         onMakeLang {
             fun r(name: String, enName: String, jaName: String, jaPoem: String) {
                 enJa("item.$name.name", enName, jaName)
@@ -119,6 +123,113 @@ object FairyMaterials {
             r("fairyPlasticRod", "Fairy Plastic Rod", "妖精のプラスチックの棒", "魔導性抜群、耐久性抜群、耐水性最悪")
             r("indiaInk", "India Ink", "墨汁", "司書精はこれをコーヒーの代わりに飲んだらしい")
             r("ancientPottery", "Ancient Pottery", "古代の壺", "「煮る」という発明")
+        }
+
+        // レシピ生成
+        run {
+            // 5棒＋8樹液→松明8
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "torch_from_fairy_wood_resin"),
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "r",
+                        "S"
+                    ),
+                    key = mapOf(
+                        "r" to DataOreIngredient(ore = "mirageFairyWoodResin"),
+                        "S" to DataOreIngredient(ore = "stickWood")
+                    ),
+                    result = DataResult(
+                        item = "minecraft:torch",
+                        count = 8
+                    )
+                )
+            )
+
+            // 蛍石→スフィアベース
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "sphere_base"),
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        WandType.POLISHING.ingredientData,
+                        DataOreIngredient(ore = "gemFluorite")
+                    ),
+                    result = DataResult(
+                        item = "miragefairy2019:fairy_materials",
+                        data = 16,
+                        count = 2
+                    )
+                )
+            )
+
+            // 宝石→スフィアベース
+            fun makeSphereBaseRecipe(materialName: String) = makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "sphere_base_from_$materialName"),
+                DataShapedRecipe(
+                    pattern = listOf(
+                        " Gp",
+                        "GDG",
+                        "fG "
+                    ),
+                    key = mapOf(
+                        "p" to WandType.POLISHING.ingredientData,
+                        "f" to WandType.FUSION.ingredientData,
+                        "D" to DataOreIngredient(ore = "dustMiragium"),
+                        "G" to DataOreIngredient(ore = "gem${materialName.toUpperCamelCase()}")
+                    ),
+                    result = DataResult(
+                        item = "miragefairy2019:fairy_materials",
+                        data = 16,
+                        count = 4
+                    )
+                )
+            )
+            makeSphereBaseRecipe("diamond")
+            makeSphereBaseRecipe("emerald")
+            makeSphereBaseRecipe("pyrope")
+            makeSphereBaseRecipe("smithsonite")
+            makeSphereBaseRecipe("nephrite")
+            makeSphereBaseRecipe("topaz")
+            makeSphereBaseRecipe("tourmaline")
+            makeSphereBaseRecipe("heliolite")
+            makeSphereBaseRecipe("labradorite")
+
+            // 妖精のプラスチック2→妖精のプラスチックの棒4
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "fairy_plastic_rod"),
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "X",
+                        "X"
+                    ),
+                    key = mapOf(
+                        "X" to DataOreIngredient(ore = "gemMirageFairyPlastic")
+                    ),
+                    result = DataResult(
+                        item = "miragefairy2019:fairy_materials",
+                        data = 20,
+                        count = 4
+                    )
+                )
+            )
+
+            // 木炭の粉＋樹液＋空き瓶→墨汁
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "india_ink"),
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        DataOreIngredient(ore = "dustCharcoal"),
+                        DataOreIngredient(ore = "mirageFairyWoodResin"),
+                        DataSimpleIngredient(item = "minecraft:glass_bottle")
+                    ),
+                    result = DataResult(
+                        item = "miragefairy2019:fairy_materials",
+                        data = 21,
+                        count = 1
+                    )
+                )
+            )
+
         }
 
         // レシピ
@@ -212,155 +323,55 @@ object FairyMaterials {
 
         }
 
-        // 5棒＋8樹液→松明8
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "torch_from_fairy_wood_resin"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "r",
-                    "S"
-                ),
-                key = mapOf(
-                    "r" to DataOreIngredient(ore = "mirageFairyWoodResin"),
-                    "S" to DataOreIngredient(ore = "stickWood")
-                ),
-                result = DataResult(
-                    item = "minecraft:torch",
-                    count = 8
-                )
-            )
-        )
-
-        // 蛍石→スフィアベース
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "sphere_base"),
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    WandType.POLISHING.ingredientData,
-                    DataOreIngredient(ore = "gemFluorite")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:fairy_materials",
-                    data = 16,
-                    count = 2
-                )
-            )
-        )
-
-        // 宝石→スフィアベース
-        fun makeSphereBaseRecipe(materialName: String) = makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "sphere_base_from_$materialName"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    " Gp",
-                    "GDG",
-                    "fG "
-                ),
-                key = mapOf(
-                    "p" to WandType.POLISHING.ingredientData,
-                    "f" to WandType.FUSION.ingredientData,
-                    "D" to DataOreIngredient(ore = "dustMiragium"),
-                    "G" to DataOreIngredient(ore = "gem${materialName.toUpperCamelCase()}")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:fairy_materials",
-                    data = 16,
-                    count = 4
-                )
-            )
-        )
-        makeSphereBaseRecipe("diamond")
-        makeSphereBaseRecipe("emerald")
-        makeSphereBaseRecipe("pyrope")
-        makeSphereBaseRecipe("smithsonite")
-        makeSphereBaseRecipe("nephrite")
-        makeSphereBaseRecipe("topaz")
-        makeSphereBaseRecipe("tourmaline")
-        makeSphereBaseRecipe("heliolite")
-        makeSphereBaseRecipe("labradorite")
-
-        // 妖精のプラスチック2→妖精のプラスチックの棒4
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "fairy_plastic_rod"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "X",
-                    "X"
-                ),
-                key = mapOf(
-                    "X" to DataOreIngredient(ore = "gemMirageFairyPlastic")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:fairy_materials",
-                    data = 20,
-                    count = 4
-                )
-            )
-        )
-
-        // 木炭の粉＋樹液＋空き瓶→墨汁
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "india_ink"),
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(ore = "dustCharcoal"),
-                    DataOreIngredient(ore = "mirageFairyWoodResin"),
-                    DataSimpleIngredient(item = "minecraft:glass_bottle")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:fairy_materials",
-                    data = 21,
-                    count = 1
-                )
-            )
-        )
-
     }
 
 
     lateinit var itemVariants: ItemVariants
 
-    class ItemVariants(private val i: Iifm) {
-        private fun iv(metadata: Int, registryName: String, unlocalizedName: String, tier: Int, oreNames: List<String>): Ivifm {
-            return i.itemVariant(registryName, { ItemVariantFairyMaterial(it, unlocalizedName, tier) }, metadata) {
-                oreNames.forEach { addOreName(it) }
-            }
-        }
-
-        private fun Ivifm.bottle() = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.containerItemSupplier = { ItemStack(Items.GLASS_BOTTLE) } } }
-        private fun Ivifm.fuel(burnTime: Int) = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.burnTime = burnTime } }
-
-        val manaRodShine = iv(0, "shine_mana_rod", "manaRodShine", 3, listOf("mirageFairy2019ManaRodShine"))
-        val manaRodFire = iv(1, "fire_mana_rod", "manaRodFire", 3, listOf("mirageFairy2019ManaRodFire"))
-        val manaRodWind = iv(2, "wind_mana_rod", "manaRodWind", 3, listOf("mirageFairy2019ManaRodWind"))
-        val manaRodGaia = iv(3, "gaia_mana_rod", "manaRodGaia", 3, listOf("mirageFairy2019ManaRodGaia"))
-        val manaRodAqua = iv(4, "aqua_mana_rod", "manaRodAqua", 3, listOf("mirageFairy2019ManaRodAqua"))
-        val manaRodDark = iv(5, "dark_mana_rod", "manaRodDark", 3, listOf("mirageFairy2019ManaRodDark"))
-        val manaRodQuartz = iv(6, "quartz_mana_rod", "manaRodQuartz", 3, listOf("mirageFairy2019ManaRodQuartz"))
-        val stickMirageFlower = iv(7, "mirage_flower_stick", "stickMirageFlower", 1, listOf("stickMirageFlower"))
-        val leafMirageFlower = iv(8, "mirage_flower_leaf", "leafMirageFlower", 0, listOf("leafMirageFlower"))
-        val stickMirageFairyWood = iv(9, "mirage_fairy_wood_stick", "stickMirageFairyWood", 4, listOf("stickMirageFairyWood"))
-        val bottleMiragiumWater = iv(10, "miragium_water_bottle", "bottleMiragiumWater", 0, listOf("bottleMiragiumWater", "container250MiragiumWater")).bottle()
-        val bottleMirageFlowerExtract = iv(11, "mirage_flower_extract_bottle", "bottleMirageFlowerExtract", 2, listOf("bottleMirageFlowerExtract", "container250MirageFlowerExtract")).bottle()
-        val bottleMirageFlowerOil = iv(12, "mirage_flower_oil_bottle", "bottleMirageFlowerOil", 4, listOf("bottleMirageFlowerOil", "container250MirageFlowerOil")).bottle()
-        val manaRodGlass = iv(13, "glass_mana_rod", "manaRodGlass", 2, listOf("mirageFairy2019ManaRodGlass"))
-        val mirageFairyLeather = iv(14, "mirage_fairy_leather", "mirageFairyLeather", 4, listOf("mirageFairyLeather"))
-        val fairyWoodResin = iv(15, "fairy_wood_resin", "fairyWoodResin", 5, listOf("mirageFairyWoodResin")).fuel(1600)
-        val sphereBase = iv(16, "sphere_base", "sphereBase", 3, listOf("mirageFairy2019SphereBase"))
-        val fairySyrup = iv(17, "fairy_syrup", "fairySyrup", 5, listOf("mirageFairySyrup")).bottle()
-        val fairyPlastic = iv(18, "fairy_plastic", "fairyPlastic", 5, listOf("gemMirageFairyPlastic"))
-        val fairyPlasticWithFairy = iv(19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy", 5, listOf("gemMirageFairyPlasticWithFairy"))
-        val fairyPlasticRod = iv(20, "fairy_plastic_rod", "fairyPlasticRod", 5, listOf("rodMirageFairyPlastic"))
-        val indiaInk = iv(21, "india_ink", "indiaInk", 0, listOf("dyeBlack")).bottle()
-        val pottery = iv(22, "ancient_pottery", "ancientPottery", 5, listOf("mirageFairyAncientPottery"))
-    }
 }
 
+class ItemVariants(private val i: Iifm) {
+    private fun iv(metadata: Int, registryName: String, unlocalizedName: String, tier: Int, oreNames: List<String>): Ivifm {
+        return i.itemVariant(registryName, { ItemVariantFairyMaterial(it, unlocalizedName, tier) }, metadata) {
+            oreNames.forEach { addOreName(it) }
+        }
+    }
+
+    private fun Ivifm.bottle() = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.containerItemSupplier = { ItemStack(Items.GLASS_BOTTLE) } } }
+    private fun Ivifm.fuel(burnTime: Int) = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.burnTime = burnTime } }
+
+    val manaRodShine = iv(0, "shine_mana_rod", "manaRodShine", 3, listOf("mirageFairy2019ManaRodShine"))
+    val manaRodFire = iv(1, "fire_mana_rod", "manaRodFire", 3, listOf("mirageFairy2019ManaRodFire"))
+    val manaRodWind = iv(2, "wind_mana_rod", "manaRodWind", 3, listOf("mirageFairy2019ManaRodWind"))
+    val manaRodGaia = iv(3, "gaia_mana_rod", "manaRodGaia", 3, listOf("mirageFairy2019ManaRodGaia"))
+    val manaRodAqua = iv(4, "aqua_mana_rod", "manaRodAqua", 3, listOf("mirageFairy2019ManaRodAqua"))
+    val manaRodDark = iv(5, "dark_mana_rod", "manaRodDark", 3, listOf("mirageFairy2019ManaRodDark"))
+    val manaRodQuartz = iv(6, "quartz_mana_rod", "manaRodQuartz", 3, listOf("mirageFairy2019ManaRodQuartz"))
+    val stickMirageFlower = iv(7, "mirage_flower_stick", "stickMirageFlower", 1, listOf("stickMirageFlower"))
+    val leafMirageFlower = iv(8, "mirage_flower_leaf", "leafMirageFlower", 0, listOf("leafMirageFlower"))
+    val stickMirageFairyWood = iv(9, "mirage_fairy_wood_stick", "stickMirageFairyWood", 4, listOf("stickMirageFairyWood"))
+    val bottleMiragiumWater = iv(10, "miragium_water_bottle", "bottleMiragiumWater", 0, listOf("bottleMiragiumWater", "container250MiragiumWater")).bottle()
+    val bottleMirageFlowerExtract = iv(11, "mirage_flower_extract_bottle", "bottleMirageFlowerExtract", 2, listOf("bottleMirageFlowerExtract", "container250MirageFlowerExtract")).bottle()
+    val bottleMirageFlowerOil = iv(12, "mirage_flower_oil_bottle", "bottleMirageFlowerOil", 4, listOf("bottleMirageFlowerOil", "container250MirageFlowerOil")).bottle()
+    val manaRodGlass = iv(13, "glass_mana_rod", "manaRodGlass", 2, listOf("mirageFairy2019ManaRodGlass"))
+    val mirageFairyLeather = iv(14, "mirage_fairy_leather", "mirageFairyLeather", 4, listOf("mirageFairyLeather"))
+    val fairyWoodResin = iv(15, "fairy_wood_resin", "fairyWoodResin", 5, listOf("mirageFairyWoodResin")).fuel(1600)
+    val sphereBase = iv(16, "sphere_base", "sphereBase", 3, listOf("mirageFairy2019SphereBase"))
+    val fairySyrup = iv(17, "fairy_syrup", "fairySyrup", 5, listOf("mirageFairySyrup")).bottle()
+    val fairyPlastic = iv(18, "fairy_plastic", "fairyPlastic", 5, listOf("gemMirageFairyPlastic"))
+    val fairyPlasticWithFairy = iv(19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy", 5, listOf("gemMirageFairyPlasticWithFairy"))
+    val fairyPlasticRod = iv(20, "fairy_plastic_rod", "fairyPlasticRod", 5, listOf("rodMirageFairyPlastic"))
+    val indiaInk = iv(21, "india_ink", "indiaInk", 0, listOf("dyeBlack")).bottle()
+    val pottery = iv(22, "ancient_pottery", "ancientPottery", 5, listOf("mirageFairyAncientPottery"))
+}
+
+
+// ItemMultiMaterial
 
 class ItemVariantFairyMaterial(registryName: String, unlocalizedName: String, val tier: Int) : ItemVariantMaterial(registryName, unlocalizedName) {
     var burnTime: Int? = null
     var containerItemSupplier: (() -> ItemStack)? = null
-    val containerItem get() = containerItemSupplier?.let { it() } ?: EMPTY_ITEM_STACK
+    val containerItem get() = containerItemSupplier?.invoke() ?: EMPTY_ITEM_STACK
 }
 
 class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
