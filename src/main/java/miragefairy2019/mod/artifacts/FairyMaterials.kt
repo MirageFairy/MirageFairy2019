@@ -410,6 +410,13 @@ class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
         // Tier
         tooltip += formattedText { "Tier ${variant.tier}"().aqua }
 
+        // Container Item
+        if (flag.isAdvanced) {
+            getContainerItemStack(itemStack)?.let { containerItemStack ->
+                tooltip += formattedText { ("Has "() + containerItemStack.displayName()).green } // TODO translation
+            }
+        }
+
     }
 
 
