@@ -89,6 +89,7 @@ object FairyMaterials {
             makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_plastic_with_fairy"))
             makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_plastic_rod"))
             makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "india_ink"))
+            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "ancient_pottery"))
         }
         onMakeLang {
             fun r(name: String, enName: String, jaName: String, jaPoem: String) {
@@ -117,6 +118,7 @@ object FairyMaterials {
             r("fairyPlasticWithFairy", "Fairy Plastic with Fairy", "妖精入り妖精のプラスチック", "何を見てヨシ！って言ったんですか！？")
             r("fairyPlasticRod", "Fairy Plastic Rod", "妖精のプラスチックの棒", "魔導性抜群、耐久性抜群、耐水性最悪")
             r("indiaInk", "India Ink", "墨汁", "司書精はこれをコーヒーの代わりに飲んだらしい")
+            r("ancientPottery", "Ancient Pottery", "古代の壺", "「煮る」という発明")
         }
 
         // レシピ
@@ -350,6 +352,7 @@ object FairyMaterials {
         val fairyPlasticWithFairy = iv(19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy", 5, listOf("gemMirageFairyPlasticWithFairy"))
         val fairyPlasticRod = iv(20, "fairy_plastic_rod", "fairyPlasticRod", 5, listOf("rodMirageFairyPlastic"))
         val indiaInk = iv(21, "india_ink", "indiaInk", 0, listOf("dyeBlack")).bottle()
+        val pottery = iv(22, "ancient_pottery", "ancientPottery", 5, listOf("mirageFairyAncientPottery"))
     }
 }
 
