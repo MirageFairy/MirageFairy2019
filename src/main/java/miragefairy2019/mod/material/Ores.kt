@@ -26,13 +26,10 @@ import net.minecraft.util.math.MathHelper
 import java.util.Random
 
 object Ores {
-
     lateinit var blockOre1: () -> BlockOre<BlockVariantOre>
     lateinit var itemBlockOre1: () -> ItemBlockOre<BlockVariantOre>
-
     lateinit var blockOre2: () -> BlockOre<BlockVariantOre>
     lateinit var itemBlockOre2: () -> ItemBlockOre<BlockVariantOre>
-
     val module = module {
 
         // 鉱石ブロック1
@@ -184,7 +181,6 @@ object Ores {
 
     }
 }
-
 
 class BlockVariantOre(
     override val metadata: Int,

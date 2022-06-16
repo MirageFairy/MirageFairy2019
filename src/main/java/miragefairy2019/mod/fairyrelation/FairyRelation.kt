@@ -3,11 +3,11 @@ package miragefairy2019.mod.fairyrelation
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.module
-import miragefairy2019.mod.material.CommonMaterials
-import miragefairy2019.mod.material.EnumVariantMaterials1
 import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.RankedFairyTypeBundle
+import miragefairy2019.mod.material.CompressedMaterials
+import miragefairy2019.mod.material.EnumVariantMaterials1
 import net.minecraft.block.Block
 import net.minecraft.block.BlockDoublePlant
 import net.minecraft.block.BlockOldLeaf
@@ -184,27 +184,27 @@ object FairyRelation {
         fairy { lapislazuli }.register { material("Lapis") }
         fairy { emerald }.register { block({ Blocks.EMERALD_BLOCK }) }
         fairy { emerald }.register { material("Emerald") }
-        fairy { magnetite }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.MAGNETITE_BLOCK) }) }
+        fairy { magnetite }.register { blockState({ CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MAGNETITE_BLOCK) }) }
         fairy { magnetite }.register { material("Magnetite") }
-        fairy { apatite }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.APATITE_BLOCK) }) }
+        fairy { apatite }.register { blockState({ CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.APATITE_BLOCK) }) }
         fairy { apatite }.register { material("Apatite") }
-        fairy { fluorite }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.FLUORITE_BLOCK) }) }
+        fairy { fluorite }.register { blockState({ CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.FLUORITE_BLOCK) }) }
         fairy { fluorite }.register { material("Fluorite") }
-        fairy { sulfur }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.SULFUR_BLOCK) }) }
+        fairy { sulfur }.register { blockState({ CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.SULFUR_BLOCK) }) }
         fairy { sulfur }.register { material("Sulfur") }
-        fairy { cinnabar }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.CINNABAR_BLOCK) }) }
+        fairy { cinnabar }.register { blockState({ CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.CINNABAR_BLOCK) }) }
         fairy { cinnabar }.register { material("Cinnabar") }
-        fairy { moonstone }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.MOONSTONE_BLOCK) }) }
+        fairy { moonstone }.register { blockState({ CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MOONSTONE_BLOCK) }) }
         fairy { moonstone }.register { material("Moonstone") }
-        fairy { pyrope }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.PYROPE_BLOCK) }) }
+        fairy { pyrope }.register { blockState({ CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.PYROPE_BLOCK) }) }
         fairy { pyrope }.register { material("Pyrope") }
-        fairy { smithsonite }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.SMITHSONITE_BLOCK) }) }
+        fairy { smithsonite }.register { blockState({ CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.SMITHSONITE_BLOCK) }) }
         fairy { smithsonite }.register { material("Smithsonite") }
-        fairy { nephrite }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.NEPHRITE_BLOCK) }) }
+        fairy { nephrite }.register { blockState({ CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.NEPHRITE_BLOCK) }) }
         fairy { nephrite }.register { material("Nephrite") }
-        fairy { tourmaline }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.TOURMALINE_BLOCK) }) }
+        fairy { tourmaline }.register { blockState({ CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.TOURMALINE_BLOCK) }) }
         fairy { tourmaline }.register { material("Tourmaline") }
-        fairy { topaz }.register { blockState({ CommonMaterials.blockMaterials1().getState(EnumVariantMaterials1.TOPAZ_BLOCK) }) }
+        fairy { topaz }.register { blockState({ CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.TOPAZ_BLOCK) }) }
         fairy { topaz }.register { material("Topaz") }
         fairy { pyrite }.register { material("Pyrite") }
         fairy { glass }.register { block({ Blocks.GLASS }) }

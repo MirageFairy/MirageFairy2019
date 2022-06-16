@@ -44,126 +44,8 @@ import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry
 
 object CommonMaterials {
-
     lateinit var itemMaterials: () -> ItemSimpleMaterials
-
-    lateinit var blockMaterials1: () -> BlockMaterials<EnumVariantMaterials1>
-    lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<EnumVariantMaterials1>
     val module = module {
-
-        // 素材レシピ
-
-        // Tier 2 金鉱石 -> 金
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "gold_ore_smelt_tier_2"),
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    WandType.MELTING.ingredientData,
-                    WandType.BREAKING.ingredientData,
-                    DataSimpleIngredient(item = "minecraft:gold_ore")
-                ),
-                result = DataResult(
-                    item = "minecraft:gold_nugget",
-                    count = 17
-                )
-            )
-        )
-
-        // Tier 4 金鉱石 -> 金
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "gold_ore_smelt_tier_4"),
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    WandType.MELTING.ingredientData,
-                    WandType.FUSION.ingredientData,
-                    DataOreIngredient(ore = "dustMiragium"),
-                    DataSimpleIngredient(item = "minecraft:gold_ore")
-                ),
-                result = DataResult(
-                    item = "minecraft:gold_ingot",
-                    count = 3
-                )
-            )
-        )
-
-        // Tier 2 鉄鉱石 -> 鉄
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "iron_ore_smelt_tier_2"),
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    WandType.MELTING.ingredientData,
-                    WandType.BREAKING.ingredientData,
-                    DataSimpleIngredient(item = "minecraft:iron_ore")
-                ),
-                result = DataResult(
-                    item = "minecraft:iron_nugget",
-                    count = 17
-                )
-            )
-        )
-
-        // Tier 4 鉄鉱石 -> 鉄
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "iron_ore_smelt_tier_4"),
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    WandType.MELTING.ingredientData,
-                    WandType.FUSION.ingredientData,
-                    DataOreIngredient(ore = "dustMiragium"),
-                    DataSimpleIngredient(item = "minecraft:iron_ore")
-                ),
-                result = DataResult(
-                    item = "minecraft:iron_ingot",
-                    count = 3
-                )
-            )
-        )
-
-        // Tier 2 磁鉄鉱の粉 -> 鉄
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "magnetite_smelt_tier_2"),
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    WandType.MELTING.ingredientData,
-                    DataOrIngredient(
-                        DataOreIngredient(ore = "dustCoal"),
-                        DataOreIngredient(ore = "dustCharcoal")
-                    ),
-                    DataOreIngredient(ore = "dustMagnetite")
-                ),
-                result = DataResult(
-                    item = "minecraft:iron_nugget",
-                    count = 3
-                )
-            )
-        )
-
-        // Tier 4 磁鉄鉱の粉 -> 鉄
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "magnetite_smelt_tier_4"),
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    WandType.MELTING.ingredientData,
-                    WandType.DISTORTION.ingredientData,
-                    DataOreIngredient(ore = "dustMagnetite"),
-                    DataOreIngredient(ore = "dustMagnetite"),
-                    DataOreIngredient(ore = "dustMagnetite"),
-                    DataOreIngredient(ore = "dustMagnetite"),
-                    DataOreIngredient(ore = "dustMagnetite"),
-                    DataOreIngredient(ore = "dustMagnetite"),
-                    DataOreIngredient(ore = "dustMagnetite")
-                ),
-                result = DataResult(
-                    item = "minecraft:iron_ingot",
-                    count = 3
-                )
-            )
-        )
-
-        onAddRecipe a@{
-            GameRegistry.addSmelting("gemPyrite".toOreName().copyItemStack() ?: return@a, "nuggetIron".toOreName().copyItemStack(3) ?: return@a, 0.7f)
-        }
-
 
         // アイテム状素材
         itemMaterials = item({ ItemSimpleMaterials() }, "materials") {
@@ -218,6 +100,8 @@ object CommonMaterials {
                 if (Main.side.isClient) item.setCustomModelResourceLocations()
             }
         }
+
+        // langの生成
         onMakeLang {
             enJa("item.gemApatite.name", "Apatite", "燐灰石")
             enJa("item.gemFluorite.name", "Fluorite", "蛍石")
@@ -251,6 +135,132 @@ object CommonMaterials {
             enJa("item.gemPyrite.name", "Pyrite", "パイライト")
         }
 
+        // レシピの生成
+        run {
+
+            // Tier 2 金鉱石 -> 金
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "gold_ore_smelt_tier_2"),
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        WandType.MELTING.ingredientData,
+                        WandType.BREAKING.ingredientData,
+                        DataSimpleIngredient(item = "minecraft:gold_ore")
+                    ),
+                    result = DataResult(
+                        item = "minecraft:gold_nugget",
+                        count = 17
+                    )
+                )
+            )
+
+            // Tier 4 金鉱石 -> 金
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "gold_ore_smelt_tier_4"),
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        WandType.MELTING.ingredientData,
+                        WandType.FUSION.ingredientData,
+                        DataOreIngredient(ore = "dustMiragium"),
+                        DataSimpleIngredient(item = "minecraft:gold_ore")
+                    ),
+                    result = DataResult(
+                        item = "minecraft:gold_ingot",
+                        count = 3
+                    )
+                )
+            )
+
+            // Tier 2 鉄鉱石 -> 鉄
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "iron_ore_smelt_tier_2"),
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        WandType.MELTING.ingredientData,
+                        WandType.BREAKING.ingredientData,
+                        DataSimpleIngredient(item = "minecraft:iron_ore")
+                    ),
+                    result = DataResult(
+                        item = "minecraft:iron_nugget",
+                        count = 17
+                    )
+                )
+            )
+
+            // Tier 4 鉄鉱石 -> 鉄
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "iron_ore_smelt_tier_4"),
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        WandType.MELTING.ingredientData,
+                        WandType.FUSION.ingredientData,
+                        DataOreIngredient(ore = "dustMiragium"),
+                        DataSimpleIngredient(item = "minecraft:iron_ore")
+                    ),
+                    result = DataResult(
+                        item = "minecraft:iron_ingot",
+                        count = 3
+                    )
+                )
+            )
+
+            // Tier 2 磁鉄鉱の粉 -> 鉄
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "magnetite_smelt_tier_2"),
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        WandType.MELTING.ingredientData,
+                        DataOrIngredient(
+                            DataOreIngredient(ore = "dustCoal"),
+                            DataOreIngredient(ore = "dustCharcoal")
+                        ),
+                        DataOreIngredient(ore = "dustMagnetite")
+                    ),
+                    result = DataResult(
+                        item = "minecraft:iron_nugget",
+                        count = 3
+                    )
+                )
+            )
+
+            // Tier 4 磁鉄鉱の粉 -> 鉄
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "magnetite_smelt_tier_4"),
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        WandType.MELTING.ingredientData,
+                        WandType.DISTORTION.ingredientData,
+                        DataOreIngredient(ore = "dustMagnetite"),
+                        DataOreIngredient(ore = "dustMagnetite"),
+                        DataOreIngredient(ore = "dustMagnetite"),
+                        DataOreIngredient(ore = "dustMagnetite"),
+                        DataOreIngredient(ore = "dustMagnetite"),
+                        DataOreIngredient(ore = "dustMagnetite"),
+                        DataOreIngredient(ore = "dustMagnetite")
+                    ),
+                    result = DataResult(
+                        item = "minecraft:iron_ingot",
+                        count = 3
+                    )
+                )
+            )
+
+        }
+
+        // レシピの登録
+        onAddRecipe a@{
+            GameRegistry.addSmelting("gemPyrite".toOreName().copyItemStack() ?: return@a, "nuggetIron".toOreName().copyItemStack(3) ?: return@a, 0.7f)
+        }
+
+    }
+}
+
+
+object CompressedMaterials {
+    lateinit var blockMaterials1: () -> BlockMaterials<EnumVariantMaterials1>
+    lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<EnumVariantMaterials1>
+    val module = module {
+
         // ブロック状素材
         blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList) }, "materials1") {
             setCreativeTab { Main.creativeTab }
@@ -277,6 +287,39 @@ object CommonMaterials {
                 )
             }
         }
+        itemBlockMaterials1 = item({ ItemBlockMaterials(blockMaterials1()) }, "materials1") {
+            onRegisterItem {
+                blockMaterials1().variantList.blockVariants.forEach {
+                    item.setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
+                }
+            }
+            onCreateItemStack {
+                blockMaterials1().variantList.blockVariants.forEach {
+                    item.addOreName(it.oreName, it.metadata)
+                }
+            }
+        }
+
+        // 翻訳の生成
+        onMakeLang {
+            enJa("tile.blockApatite.name", "Block of Apatite", "燐灰石ブロック")
+            enJa("tile.blockFluorite.name", "Block of Fluorite", "蛍石ブロック")
+            enJa("tile.blockSulfur.name", "Block of Sulfur", "硫黄ブロック")
+            enJa("tile.blockCinnabar.name", "Block of Cinnabar", "辰砂ブロック")
+            enJa("tile.blockMoonstone.name", "Block of Moonstone", "月長石ブロック")
+            enJa("tile.blockMagnetite.name", "Block of Magnetite", "磁鉄鉱ブロック")
+            enJa("tile.blockPyrope.name", "Block of Pyrope", "パイロープブロック")
+            enJa("tile.blockSmithsonite.name", "Block of Smithsonite", "スミソナイトブロック")
+            enJa("tile.blockCharcoal.name", "Block of Charcoal", "木炭ブロック")
+            enJa("tile.blockLeafMirageFlower.name", "Block of Mirage Flower Leaf", "ミラージュフラワーの葉ブロック")
+            enJa("tile.blockMiragium.name", "Block of Miragium", "ミラジウムブロック")
+            enJa("tile.blockDustMiragium.name", "Block of Miragium Dust", "ミラジウムの粉ブロック")
+            enJa("tile.blockNephrite.name", "Block of Nephrite", "ネフライトブロック")
+            enJa("tile.blockTopaz.name", "Block of Topaz", "トパーズブロック")
+            enJa("tile.blockTourmaline.name", "Block of Tourmaline", "トルマリンブロック")
+        }
+
+        // ブロックモデルの生成
         run {
             fun makeBlockModel(name: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
                 jsonElement(
@@ -302,18 +345,8 @@ object CommonMaterials {
             makeBlockModel("topaz_block")
             makeBlockModel("tourmaline_block")
         }
-        itemBlockMaterials1 = item({ ItemBlockMaterials(blockMaterials1()) }, "materials1") {
-            onRegisterItem {
-                blockMaterials1().variantList.blockVariants.forEach {
-                    item.setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
-                }
-            }
-            onCreateItemStack {
-                blockMaterials1().variantList.blockVariants.forEach {
-                    item.addOreName(it.oreName, it.metadata)
-                }
-            }
-        }
+
+        // アイテムモデルの生成
         run {
             fun makeItemModel(name: String) = makeBlockItemModel(ResourceName(ModMirageFairy2019.MODID, name))
             makeItemModel("apatite_block")
@@ -332,24 +365,8 @@ object CommonMaterials {
             makeItemModel("topaz_block")
             makeItemModel("tourmaline_block")
         }
-        onMakeLang {
-            enJa("tile.blockApatite.name", "Block of Apatite", "燐灰石ブロック")
-            enJa("tile.blockFluorite.name", "Block of Fluorite", "蛍石ブロック")
-            enJa("tile.blockSulfur.name", "Block of Sulfur", "硫黄ブロック")
-            enJa("tile.blockCinnabar.name", "Block of Cinnabar", "辰砂ブロック")
-            enJa("tile.blockMoonstone.name", "Block of Moonstone", "月長石ブロック")
-            enJa("tile.blockMagnetite.name", "Block of Magnetite", "磁鉄鉱ブロック")
-            enJa("tile.blockPyrope.name", "Block of Pyrope", "パイロープブロック")
-            enJa("tile.blockSmithsonite.name", "Block of Smithsonite", "スミソナイトブロック")
-            enJa("tile.blockCharcoal.name", "Block of Charcoal", "木炭ブロック")
-            enJa("tile.blockLeafMirageFlower.name", "Block of Mirage Flower Leaf", "ミラージュフラワーの葉ブロック")
-            enJa("tile.blockMiragium.name", "Block of Miragium", "ミラジウムブロック")
-            enJa("tile.blockDustMiragium.name", "Block of Miragium Dust", "ミラジウムの粉ブロック")
-            enJa("tile.blockNephrite.name", "Block of Nephrite", "ネフライトブロック")
-            enJa("tile.blockTopaz.name", "Block of Topaz", "トパーズブロック")
-            enJa("tile.blockTourmaline.name", "Block of Tourmaline", "トルマリンブロック")
-        }
 
+        // レシピの生成
         run {
             fun toi(ingot: String, block: String, ingredientBlock: DataIngredient, resultIngot: DataResult) {
                 makeRecipe(
@@ -420,6 +437,7 @@ object CommonMaterials {
             tob("topaz_block", !"gemTopaz", r(m1, 13, 1))
             tob("tourmaline_block", !"gemTourmaline", r(m1, 14, 1))
         }
+
     }
 }
 
