@@ -11,7 +11,6 @@ import miragefairy2019.libkt.DataSimpleIngredient
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemMultiMaterial
-import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.ItemVariantMaterial
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
@@ -20,6 +19,7 @@ import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.green
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
@@ -27,7 +27,9 @@ import miragefairy2019.libkt.makeGeneratedItemModel
 import miragefairy2019.libkt.makeHandheldItemModel
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
+import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.oreIngredient
+import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.libkt.setUnlocalizedName
@@ -50,18 +52,17 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreIngredient
 
-private typealias Iifm = ItemInitializer<ItemMultiFairyMaterial>
-private typealias Ivifm = ItemVariantInitializer<ItemMultiFairyMaterial, ItemVariantFairyMaterial>
-
-
 object FairyMaterials {
+    lateinit var itemFairyMaterials: () -> ItemMultiFairyMaterial
     val module = module {
 
         // 妖精素材アイテム
-        item({ ItemMultiFairyMaterial() }, "fairy_materials") {
+        itemFairyMaterials = item({ ItemMultiFairyMaterial() }, "fairy_materials") {
             setUnlocalizedName("fairyMaterials")
             setCreativeTab { Main.creativeTab }
-            itemVariants = ItemVariants(this)
+            EnumFairyMaterial.values().forEach {
+                it.fairyMaterial.registerItemVariant(this)
+            }
             onRegisterItem {
                 if (Main.side.isClient) item.setCustomModelResourceLocations()
             }
@@ -241,7 +242,7 @@ object FairyMaterials {
                 it.conditions += FairyStickCraftConditionConsumeBlock { FluidMaterials.blockFluidMirageFlowerExtract().defaultState }
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019ManaRodGlass"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("gemQuartz"), 16)
-                it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.manaRodQuartz.createItemStack() }
+                it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[EnumFairyMaterial.manaRodQuartz].createItemStack() }
             })
 
             // ミラ葉＋骨＋燐灰石→ミラ茎
@@ -251,34 +252,34 @@ object FairyMaterials {
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbilityCrystal"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("leafMirageFlower"))
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"))
-                it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.stickMirageFlower.createItemStack() }
+                it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[EnumFairyMaterial.stickMirageFlower].createItemStack() }
             })
 
             // 空き瓶＋ミラ葉64個＞破砕→ミラエキス瓶
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(WandType.BREAKING.ingredient)
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
-                it.conditions += FairyStickCraftConditionConsumeItem(itemVariants.leafMirageFlower().createItemStack().ingredient, 64)
+                it.conditions += FairyStickCraftConditionConsumeItem(itemFairyMaterials[EnumFairyMaterial.leafMirageFlower].createItemStack().ingredient, 64)
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"), 5)
-                it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.bottleMirageFlowerExtract.createItemStack() }
+                it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[EnumFairyMaterial.bottleMirageFlowerExtract].createItemStack() }
             })
 
             // 空き瓶＋ミラ葉50個＞珠玉→ミラエキス瓶
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(WandType.POLISHING.ingredient)
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
-                it.conditions += FairyStickCraftConditionConsumeItem(itemVariants.leafMirageFlower().createItemStack().ingredient, 50)
+                it.conditions += FairyStickCraftConditionConsumeItem(itemFairyMaterials[EnumFairyMaterial.leafMirageFlower].createItemStack().ingredient, 50)
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"), 4)
-                it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.bottleMirageFlowerExtract.createItemStack() }
+                it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[EnumFairyMaterial.bottleMirageFlowerExtract].createItemStack() }
             })
 
             // 空き瓶＋ミラ葉40個＞歪曲→ミラエキス瓶
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                 it.conditions += FairyStickCraftConditionUseItem(WandType.DISTORTION.ingredient)
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
-                it.conditions += FairyStickCraftConditionConsumeItem(itemVariants.leafMirageFlower().createItemStack().ingredient, 40)
+                it.conditions += FairyStickCraftConditionConsumeItem(itemFairyMaterials[EnumFairyMaterial.leafMirageFlower].createItemStack().ingredient, 40)
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"), 3)
-                it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.bottleMirageFlowerExtract.createItemStack() }
+                it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[EnumFairyMaterial.bottleMirageFlowerExtract].createItemStack() }
             })
 
             // ミラの葉30＋燐灰石の粉2＋空き瓶＞錬金の家→ミラエキス瓶
@@ -286,10 +287,10 @@ object FairyMaterials {
                 process("粉砕", 20.0) { !Mana.GAIA + !Erg.DESTROY } // TODO translate
                 process("抽出", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
                 process("精製", 60.0) { !Mana.WIND + !Erg.CHEMICAL } // TODO translate
-                input(itemVariants.leafMirageFlower().createItemStack().ingredient, 30)
+                input(itemFairyMaterials[EnumFairyMaterial.leafMirageFlower].createItemStack().ingredient, 30)
                 input("dustApatite".oreIngredient, 2)
                 input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
-                output(itemVariants.bottleMirageFlowerExtract.createItemStack(), 1.0)
+                output(itemFairyMaterials[EnumFairyMaterial.bottleMirageFlowerExtract].createItemStack(), 1.0)
             }
 
             // 空き瓶＋ミラ種50個＋辰砂の粉4個＞珠玉→ミラオイル瓶
@@ -298,7 +299,7 @@ object FairyMaterials {
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds()), 50)
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustCinnabar"), 4)
-                it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.bottleMirageFlowerOil.createItemStack() }
+                it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[EnumFairyMaterial.bottleMirageFlowerOil].createItemStack() }
             })
 
             // 空き瓶＋ミラ種50個＋辰砂の粉4個＞歪曲→ミラオイル瓶
@@ -307,7 +308,7 @@ object FairyMaterials {
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
                 it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds()), 40)
                 it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustCinnabar"), 3)
-                it.conditions += FairyStickCraftConditionSpawnItem { itemVariants.bottleMirageFlowerOil.createItemStack() }
+                it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[EnumFairyMaterial.bottleMirageFlowerOil].createItemStack() }
             })
 
             // ミラの種30＋辰砂の粉2＋空き瓶＞錬金の家→ミラオイル瓶
@@ -318,61 +319,82 @@ object FairyMaterials {
                 input(MirageFlower.itemMirageFlowerSeeds().createItemStack().ingredient, 30)
                 input("dustCinnabar".oreIngredient, 2)
                 input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
-                output(itemVariants.bottleMirageFlowerOil.createItemStack(), 1.0)
+                output(itemFairyMaterials[EnumFairyMaterial.bottleMirageFlowerOil].createItemStack(), 1.0)
             }
 
         }
 
     }
-
-
-    lateinit var itemVariants: ItemVariants
-
 }
 
-class ItemVariants(private val i: Iifm) {
-    private fun iv(metadata: Int, registryName: String, unlocalizedName: String, tier: Int, oreNames: List<String>): Ivifm {
-        return i.itemVariant(registryName, { ItemVariantFairyMaterial(it, unlocalizedName, tier) }, metadata) {
-            oreNames.forEach { addOreName(it) }
-        }
-    }
-
-    private fun Ivifm.bottle() = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.containerItemSupplier = { ItemStack(Items.GLASS_BOTTLE) } } }
-    private fun Ivifm.fuel(burnTime: Int) = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.burnTime = burnTime } }
-
-    val manaRodShine = iv(0, "shine_mana_rod", "manaRodShine", 3, listOf("mirageFairy2019ManaRodShine"))
-    val manaRodFire = iv(1, "fire_mana_rod", "manaRodFire", 3, listOf("mirageFairy2019ManaRodFire"))
-    val manaRodWind = iv(2, "wind_mana_rod", "manaRodWind", 3, listOf("mirageFairy2019ManaRodWind"))
-    val manaRodGaia = iv(3, "gaia_mana_rod", "manaRodGaia", 3, listOf("mirageFairy2019ManaRodGaia"))
-    val manaRodAqua = iv(4, "aqua_mana_rod", "manaRodAqua", 3, listOf("mirageFairy2019ManaRodAqua"))
-    val manaRodDark = iv(5, "dark_mana_rod", "manaRodDark", 3, listOf("mirageFairy2019ManaRodDark"))
-    val manaRodQuartz = iv(6, "quartz_mana_rod", "manaRodQuartz", 3, listOf("mirageFairy2019ManaRodQuartz"))
-    val stickMirageFlower = iv(7, "mirage_flower_stick", "stickMirageFlower", 1, listOf("stickMirageFlower"))
-    val leafMirageFlower = iv(8, "mirage_flower_leaf", "leafMirageFlower", 0, listOf("leafMirageFlower"))
-    val stickMirageFairyWood = iv(9, "mirage_fairy_wood_stick", "stickMirageFairyWood", 4, listOf("stickMirageFairyWood"))
-    val bottleMiragiumWater = iv(10, "miragium_water_bottle", "bottleMiragiumWater", 0, listOf("bottleMiragiumWater", "container250MiragiumWater")).bottle()
-    val bottleMirageFlowerExtract = iv(11, "mirage_flower_extract_bottle", "bottleMirageFlowerExtract", 2, listOf("bottleMirageFlowerExtract", "container250MirageFlowerExtract")).bottle()
-    val bottleMirageFlowerOil = iv(12, "mirage_flower_oil_bottle", "bottleMirageFlowerOil", 4, listOf("bottleMirageFlowerOil", "container250MirageFlowerOil")).bottle()
-    val manaRodGlass = iv(13, "glass_mana_rod", "manaRodGlass", 2, listOf("mirageFairy2019ManaRodGlass"))
-    val mirageFairyLeather = iv(14, "mirage_fairy_leather", "mirageFairyLeather", 4, listOf("mirageFairyLeather"))
-    val fairyWoodResin = iv(15, "fairy_wood_resin", "fairyWoodResin", 5, listOf("mirageFairyWoodResin")).fuel(1600)
-    val sphereBase = iv(16, "sphere_base", "sphereBase", 3, listOf("mirageFairy2019SphereBase"))
-    val fairySyrup = iv(17, "fairy_syrup", "fairySyrup", 5, listOf("mirageFairySyrup")).bottle()
-    val fairyPlastic = iv(18, "fairy_plastic", "fairyPlastic", 5, listOf("gemMirageFairyPlastic"))
-    val fairyPlasticWithFairy = iv(19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy", 5, listOf("gemMirageFairyPlasticWithFairy"))
-    val fairyPlasticRod = iv(20, "fairy_plastic_rod", "fairyPlasticRod", 5, listOf("rodMirageFairyPlastic"))
-    val indiaInk = iv(21, "india_ink", "indiaInk", 0, listOf("dyeBlack")).bottle()
-    val pottery = iv(22, "ancient_pottery", "ancientPottery", 5, listOf("mirageFairyAncientPottery"))
+@Suppress("EnumEntryName", "unused")
+enum class EnumFairyMaterial(override val fairyMaterial: FairyMaterial) : IFairyMaterialProvider {
+    manaRodShine(FairyMaterial(0, "shine_mana_rod", "manaRodShine", 3) ore "mirageFairy2019ManaRodShine"),
+    manaRodFire(FairyMaterial(1, "fire_mana_rod", "manaRodFire", 3) ore "mirageFairy2019ManaRodFire"),
+    manaRodWind(FairyMaterial(2, "wind_mana_rod", "manaRodWind", 3) ore "mirageFairy2019ManaRodWind"),
+    manaRodGaia(FairyMaterial(3, "gaia_mana_rod", "manaRodGaia", 3) ore "mirageFairy2019ManaRodGaia"),
+    manaRodAqua(FairyMaterial(4, "aqua_mana_rod", "manaRodAqua", 3) ore "mirageFairy2019ManaRodAqua"),
+    manaRodDark(FairyMaterial(5, "dark_mana_rod", "manaRodDark", 3) ore "mirageFairy2019ManaRodDark"),
+    manaRodQuartz(FairyMaterial(6, "quartz_mana_rod", "manaRodQuartz", 3) ore "mirageFairy2019ManaRodQuartz"),
+    stickMirageFlower(FairyMaterial(7, "mirage_flower_stick", "stickMirageFlower", 1) ore "stickMirageFlower"),
+    leafMirageFlower(FairyMaterial(8, "mirage_flower_leaf", "leafMirageFlower", 0) ore "leafMirageFlower"),
+    stickMirageFairyWood(FairyMaterial(9, "mirage_fairy_wood_stick", "stickMirageFairyWood", 4) ore "stickMirageFairyWood"),
+    bottleMiragiumWater(FairyMaterial(10, "miragium_water_bottle", "bottleMiragiumWater", 0) ore "bottleMiragiumWater" ore "container250MiragiumWater" has bottle),
+    bottleMirageFlowerExtract(FairyMaterial(11, "mirage_flower_extract_bottle", "bottleMirageFlowerExtract", 2) ore "bottleMirageFlowerExtract" ore "container250MirageFlowerExtract" has bottle),
+    bottleMirageFlowerOil(FairyMaterial(12, "mirage_flower_oil_bottle", "bottleMirageFlowerOil", 4) ore "bottleMirageFlowerOil" ore "container250MirageFlowerOil" has bottle),
+    manaRodGlass(FairyMaterial(13, "glass_mana_rod", "manaRodGlass", 2) ore "mirageFairy2019ManaRodGlass"),
+    mirageFairyLeather(FairyMaterial(14, "mirage_fairy_leather", "mirageFairyLeather", 4) ore "mirageFairyLeather"),
+    fairyWoodResin(FairyMaterial(15, "fairy_wood_resin", "fairyWoodResin", 5) ore "mirageFairyWoodResin" fuel 1600),
+    sphereBase(FairyMaterial(16, "sphere_base", "sphereBase", 3) ore "mirageFairy2019SphereBase"),
+    fairySyrup(FairyMaterial(17, "fairy_syrup", "fairySyrup", 5) ore "mirageFairySyrup" has bottle),
+    fairyPlastic(FairyMaterial(18, "fairy_plastic", "fairyPlastic", 5) ore "gemMirageFairyPlastic"),
+    fairyPlasticWithFairy(FairyMaterial(19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy", 5) ore "gemMirageFairyPlasticWithFairy"),
+    fairyPlasticRod(FairyMaterial(20, "fairy_plastic_rod", "fairyPlasticRod", 5) ore "rodMirageFairyPlastic"),
+    indiaInk(FairyMaterial(21, "india_ink", "indiaInk", 0) ore "dyeBlack" has bottle),
+    pottery(FairyMaterial(22, "ancient_pottery", "ancientPottery", 5) ore "mirageFairyAncientPottery"),
 }
 
 
 // ItemMultiMaterial
 
-class ItemVariantFairyMaterial(registryName: String, unlocalizedName: String, val tier: Int) : ItemVariantMaterial(registryName, unlocalizedName) {
+interface IFairyMaterialProvider {
+    val fairyMaterial: FairyMaterial
+}
+
+class FairyMaterial(
+    val metadata: Int,
+    val registryName: String,
+    val unlocalizedName: String,
+    val tier: Int
+) {
+    val oreNames = mutableListOf<String>()
     var burnTime: Int? = null
     var containerItemSupplier: (() -> ItemStack)? = null
-    val containerItem get() = containerItemSupplier?.invoke() ?: EMPTY_ITEM_STACK
+    fun registerItemVariant(itemInitializer: ItemInitializer<ItemMultiFairyMaterial>) = itemInitializer.itemVariant(registryName, {
+        ItemVariantFairyMaterial(
+            registryName = it,
+            unlocalizedName = unlocalizedName,
+            tier = tier,
+            burnTime = burnTime,
+            containerItemSupplier = containerItemSupplier
+        )
+    }, metadata) {
+        oreNames.forEach { addOreName(it) }
+    }
 }
+
+private infix fun FairyMaterial.has(block: (FairyMaterial) -> Unit) = this.also { block(this) }
+private infix fun FairyMaterial.ore(oreName: String) = this has { it.oreNames += oreName }
+private infix fun FairyMaterial.fuel(burnTime: Int) = this has { it.burnTime = burnTime }
+private val bottle: (FairyMaterial) -> Unit get() = { it.containerItemSupplier = { ItemStack(Items.GLASS_BOTTLE) } }
+
+class ItemVariantFairyMaterial(
+    registryName: String,
+    unlocalizedName: String,
+    val tier: Int,
+    val burnTime: Int?,
+    val containerItemSupplier: (() -> ItemStack)?
+) : ItemVariantMaterial(registryName, unlocalizedName)
 
 class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
     @SideOnly(Side.CLIENT)
@@ -394,6 +416,9 @@ class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
     override fun getItemBurnTime(itemStack: ItemStack) = getVariant(itemStack)?.burnTime ?: -1
 
 
-    override fun hasContainerItem(itemStack: ItemStack) = !getContainerItem(itemStack).isEmpty
-    override fun getContainerItem(itemStack: ItemStack): ItemStack = getVariant(itemStack)?.containerItem ?: ItemStack.EMPTY
+    private fun getContainerItemStack(itemStack: ItemStack) = getVariant(itemStack)?.containerItemSupplier?.invoke()?.orNull
+    override fun hasContainerItem(itemStack: ItemStack) = getContainerItemStack(itemStack) != null
+    override fun getContainerItem(itemStack: ItemStack) = getContainerItemStack(itemStack) ?: EMPTY_ITEM_STACK
 }
+
+operator fun (() -> ItemMultiFairyMaterial).get(fairyMaterialProvider: IFairyMaterialProvider) = this().getVariant(fairyMaterialProvider.fairyMaterial.metadata)!!

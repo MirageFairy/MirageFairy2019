@@ -33,9 +33,11 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.artifacts.EnumFairyMaterial
 import miragefairy2019.mod.artifacts.FairyMaterials
 import miragefairy2019.mod.artifacts.Fertilizer
 import miragefairy2019.mod.artifacts.MirageFlower
+import miragefairy2019.mod.artifacts.get
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
 import mirrg.kotlin.castOrNull
@@ -225,7 +227,7 @@ object FairyBox {
                     input("mirageFairyWoodResin".oreIngredient, 16)
                     input("gemCharcoal".oreIngredient, 1)
                     input(Items.GLASS_BOTTLE.ingredient, 1)
-                    output(FairyMaterials.itemVariants.fairySyrup.createItemStack(), 1.0)
+                    output(FairyMaterials.itemFairyMaterials[EnumFairyMaterial.fairySyrup].createItemStack(), 1.0)
                 }
 
                 // 樹液＋砂糖→砂糖3
@@ -246,7 +248,7 @@ object FairyBox {
                     input("mirageFairyWoodResin".oreIngredient, 64)
                     input("dustApatite".oreIngredient, 2)
                     input(Items.GLASS_BOTTLE.ingredient, 1)
-                    output(FairyMaterials.itemVariants.bottleMirageFlowerExtract.createItemStack(), 1.0)
+                    output(FairyMaterials.itemFairyMaterials[EnumFairyMaterial.bottleMirageFlowerExtract].createItemStack(), 1.0)
                 }
 
                 // 樹液64＋辰砂の粉2＋空き瓶→ミラージュオイル入り瓶
@@ -257,7 +259,7 @@ object FairyBox {
                     input("mirageFairyWoodResin".oreIngredient, 64)
                     input("dustCinnabar".oreIngredient, 2)
                     input(Items.GLASS_BOTTLE.ingredient, 1)
-                    output(FairyMaterials.itemVariants.bottleMirageFlowerOil.createItemStack(), 1.0)
+                    output(FairyMaterials.itemFairyMaterials[EnumFairyMaterial.bottleMirageFlowerOil].createItemStack(), 1.0)
                 }
 
                 // 樹液64＋骨粉8＋黒曜石→妖精のプラスチック
@@ -268,8 +270,8 @@ object FairyBox {
                     input("mirageFairyWoodResin".oreIngredient, 64)
                     input(Items.DYE.createItemStack(metadata = 15).ingredient, 8)
                     input("obsidian".oreIngredient, 1)
-                    output(FairyMaterials.itemVariants.fairyPlastic.createItemStack(), 1.0, 1.0)
-                    output(FairyMaterials.itemVariants.fairyPlasticWithFairy.createItemStack(), 0.01)
+                    output(FairyMaterials.itemFairyMaterials[EnumFairyMaterial.fairyPlastic].createItemStack(), 1.0, 1.0)
+                    output(FairyMaterials.itemFairyMaterials[EnumFairyMaterial.fairyPlasticWithFairy].createItemStack(), 0.01)
                 }
 
 

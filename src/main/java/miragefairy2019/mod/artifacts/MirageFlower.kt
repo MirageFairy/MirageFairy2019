@@ -15,7 +15,6 @@ import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.copyItemStack
-import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockModel
 import miragefairy2019.libkt.makeBlockStates
@@ -290,7 +289,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
         // 種1個は確定でドロップ
         if (isBreaking) drops += ItemStack(MirageFlower.itemMirageFlowerSeeds())
         // サイズが2以上なら確定で茎をドロップ
-        if (isBreaking && getAge(state) >= 2) repeat(random.randomInt(1 + fortune * 0.2)) { drops += FairyMaterials.itemVariants.leafMirageFlower.createItemStack() }
+        if (isBreaking && getAge(state) >= 2) repeat(random.randomInt(1 + fortune * 0.2)) { drops += FairyMaterials.itemFairyMaterials[EnumFairyMaterial.leafMirageFlower].createItemStack() }
         // 追加の種
         if (getAge(state) >= 3) repeat(random.randomInt(fortune * 0.01)) { drops += ItemStack(MirageFlower.itemMirageFlowerSeeds()) }
         // クリスタル
