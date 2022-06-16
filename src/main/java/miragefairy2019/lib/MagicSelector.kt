@@ -3,9 +3,9 @@ package miragefairy2019.lib
 import miragefairy2019.libkt.axisAlignedBBOf
 import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
-import miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange
 import miragefairy2019.mod.fairyweapon.getSight
 import miragefairy2019.mod.fairyweapon.spawnParticle
+import miragefairy2019.mod.fairyweapon.spawnParticleSphericalRange
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer

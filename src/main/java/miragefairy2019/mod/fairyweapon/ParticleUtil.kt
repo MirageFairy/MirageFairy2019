@@ -6,9 +6,14 @@ import mirrg.kotlin.hydrogen.max
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumParticleTypes
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import net.minecraft.world.WorldServer
+import kotlin.math.cos
+import kotlin.math.floor
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 fun <T> spawnParticleTargets(world: World, targets: List<T>, fPosition: (T) -> Vec3d, fColor: (T) -> Int) {
     val rate = 5 / (targets.size atLeast 5).toDouble()
@@ -97,3 +102,55 @@ fun spawnParticle(world: World, position: Vec3d, color: Int) = world.spawnPartic
     ((color shr 8) and 0xFF) / 255.0,
     ((color shr 0) and 0xFF) / 255.0
 )
+
+private var rotateY = 0.0
+
+fun spawnParticleSphericalRange(world: World, positionCenter: Vec3d, radius: Double) {
+
+    // 角度アニメーション更新
+    rotateY += 7.4 / 180.0 * Math.PI
+    if (rotateY > 2 * Math.PI) rotateY -= 2 * Math.PI
+
+    // 円形パーティクル生成
+    repeat(8) nextArm@{ i ->
+
+        val yaw = rotateY + i * 0.25 * Math.PI // 横角度
+
+        // 円形パーティクルの腕1部分の生成
+        repeat(100) nextChance@{
+
+            val pitch = (-0.5 + Math.random()) * Math.PI // 縦角度
+            val offset = Vec3d(cos(pitch) * cos(yaw), sin(pitch), cos(pitch) * sin(yaw)).scale(radius)
+            val positionParticle = positionCenter.add(offset) // パーティクル仮出現点
+
+            if (world.getBlockState(BlockPos(positionParticle)).isFullBlock) return@nextChance // 仮出現点が地中なら失敗
+            if (!world.getBlockState(BlockPos(positionParticle).down()).isFullBlock) return@nextChance // 仮出現点の真下が地面でなければ失敗
+
+            // 修正パーティクル出現点
+            // 高さを地面にくっつけるために、高さを地面の高さに固定した状態で横位置を調整する
+            val y = floor(positionParticle.y) + 0.15 // 修正後の地面の高さ
+            val offsetY = y - positionCenter.y // 修正後のZ差分
+            val r1 = sqrt(offset.x * offset.x + offset.z * offset.z) // 元々のオフセットの横の距離
+            if (r1.isNaN()) return@nextArm // 謎エラー対策
+            val r2 = sqrt(radius * radius - offsetY * offsetY) // 修正後の横の距離
+            if (r2.isNaN()) return@nextArm // 謎エラー対策
+            val offsetX = offset.x / r1 * r2 // 修正後のX差分
+            val offsetZ = offset.z / r1 * r2 // 修正後のZ差分
+
+            // パーティクル生成
+            world.spawnParticle(
+                EnumParticleTypes.END_ROD,
+                positionCenter.x + offsetX,
+                positionCenter.y + offsetY,
+                positionCenter.z + offsetZ,
+                0.0,
+                -0.08,
+                0.0
+            )
+
+            return@nextArm
+        }
+
+    }
+
+}

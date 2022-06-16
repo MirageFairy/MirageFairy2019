@@ -31,7 +31,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange;
+import static miragefairy2019.mod.fairyweapon.ParticleUtilKt.spawnParticleSphericalRange;
 
 public class ItemMagicWandCollecting extends ItemFairyWeapon {
 

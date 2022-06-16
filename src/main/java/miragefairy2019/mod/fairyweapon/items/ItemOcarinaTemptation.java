@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static miragefairy2019.mod.fairyweapon.FairyWeaponUtils.spawnParticleSphericalRange;
+import static miragefairy2019.mod.fairyweapon.ParticleUtilKt.spawnParticleSphericalRange;
 
 public class ItemOcarinaTemptation extends ItemFairyWeapon {
 
