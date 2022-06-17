@@ -207,7 +207,9 @@ object FairyWeapon {
             enJa("item.ryugyoDrill.poem", "Design Contest Work", "デザインコンテスト武器")
             enJa("item.ryugyoDrill.author", "Yoshinon", "よしのん")
             enJa("item.ryugyoDrill.recipe", "Get a specific item", "デザインコンテスト武器")
-            // TODO
+            enJa("item.prayerWheel.name", "Prayer Wheel", "収束の地")
+            enJa("item.prayerWheel.poem", "", "重合するアストラル光、吹きあがる大宇宙のジェット")
+            enJa("item.prayerWheel.recipe", "Get a specific item", "シリンダーの内側に妖精語の呪文を刻む（職人芸）")
 
             enJa("miragefairy2019.magic.${MagicMessage.NO_FAIRY.unlocalizedName}.text", "You don't have a fairy", "妖精を所持していません")
             enJa("miragefairy2019.magic.${MagicMessage.INSUFFICIENT_DURABILITY.unlocalizedName}.text", "Insufficient durability", "耐久値が不足しています")
@@ -516,7 +518,7 @@ object FairyWeapon {
 
             val ryugyo_drill = Achievement("ryugyo_drill", "ryugyoDrill", null, "goal")
 
-            // TODO
+            val prayer_wheel = Achievement("prayer_wheel", "prayerWheel", null, "goal")
 
         }
 
