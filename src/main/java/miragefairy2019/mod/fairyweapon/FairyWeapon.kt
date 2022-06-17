@@ -55,6 +55,7 @@ import miragefairy2019.mod.fairyweapon.items.ItemMagicWandLightning
 import miragefairy2019.mod.fairyweapon.items.ItemMiragiumAxe
 import miragefairy2019.mod.fairyweapon.items.ItemMiragiumScythe
 import miragefairy2019.mod.fairyweapon.items.ItemOcarinaTemptation
+import miragefairy2019.mod.fairyweapon.items.ItemPrayerWheel
 import miragefairy2019.mod.fairyweapon.items.ItemRodBase
 import miragefairy2019.mod.fairyweapon.items.ItemRyugyoDrill
 import mirrg.kotlin.gson.jsonElement
@@ -145,7 +146,7 @@ object FairyWeapon {
         val miragiumScythe = fw(2, { ItemMiragiumScythe(0.0, 2.0f) }, "miragium_scythe", "miragiumScythe", listOf(), null, !SLASH, !HARVEST)
         val lilagiumScythe = fw(3, { ItemMiragiumScythe(10.0, 4.0f) }, "lilagium_scythe", "lilagiumScythe", listOf(), miragiumScythe, !HARVEST)
         val ryugyoDrill = fw(4, { ItemRyugyoDrill(0.0) }, "ryugyo_drill", "ryugyoDrill", listOf(), null, !DESTROY, !THUNDER, !WATER)
-        val prayerWheel = fw(3, { ItemFairyWeapon() }, "prayer_wheel", "prayerWheel", listOf(), null/* TODO */)
+        val prayerWheel = fw(3, { ItemPrayerWheel(5) }, "prayer_wheel", "prayerWheel", listOf(), null/* TODO */)
 
         onMakeLang {
             enJa("item.miragiumSword.name", "Miragium Sword", "ミラジウムの剣")

@@ -2,7 +2,6 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.lib.proxy
 import miragefairy2019.lib.skillContainer
-import miragefairy2019.libkt.BlockRegion
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
@@ -16,14 +15,12 @@ import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
-import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeItemModel
 import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
-import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.setCreativeTab
@@ -36,20 +33,12 @@ import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.mod.fairyweapon.findItem
 import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.EnumMastery
 import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
-import miragefairy2019.mod.systems.DropCategory
-import miragefairy2019.mod.systems.FairyCrystalDropEnvironment
 import miragefairy2019.mod.systems.IFairyStickCraftItem
 import miragefairy2019.mod.systems.addFairyStickCraftCoolTime
-import miragefairy2019.mod.systems.getDropTable
-import miragefairy2019.mod.systems.insertBiome
-import miragefairy2019.mod.systems.insertBlocks
-import miragefairy2019.mod.systems.insertEntities
-import miragefairy2019.mod.systems.insertItemStacks
 import mirrg.kotlin.formatAs
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
@@ -58,15 +47,10 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityLivingBase
-import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
-import net.minecraft.item.EnumAction
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.stats.StatList
-import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
@@ -139,8 +123,7 @@ object Wand {
         (1..4).forEach { fairyWand(it + 1, WandType.BREAKING, "Breaking", "破砕", it, { ItemFairyWand() }) }
         (1..4).forEach { fairyWand(it + 1, WandType.FREEZING, "Freezing", "氷晶", it, { ItemFairyWand() }) }
         (1..3).forEach { fairyWand(it + 2, WandType.POLISHING, "Polishing", "珠玉", it, { ItemFairyWand() }) }
-        val a = listOf(-1, 2, 5, 5)
-        (1..3).forEach { fairyWand(it + 2, WandType.SUMMONING, "Wizard's", "冥王", it, { ItemFairyWandSummoning(a[it]) }) }
+        (1..3).forEach { fairyWand(it + 2, WandType.SUMMONING, "Wizard's", "冥王", it, { ItemFairyWand() }) }
         (1..2).forEach { fairyWand(it + 3, WandType.DISTORTION, "Distortion", "歪曲", it, { ItemFairyWand() }) }
         (1..2).forEach { fairyWand(it + 3, WandType.FUSION, "Fusion", "融合", it, { ItemFairyWand() }) }
 
@@ -465,91 +448,4 @@ open class ItemFairyWand : Item(), IFairyStickCraftItem {
         return itemStack.copy().also { it.itemDamage = it.itemDamage + 1 }
     }
 
-}
-
-class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWand() {
-
-    @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = "右クリック長押しでフェアリークリスタルを高速消費" // TODO translate Hold right mouse button to use fairy crystals quickly
-
-    //
-
-    // TODO フェアリーステッキクラフト無効
-    //override fun onItemUse(player: EntityPlayer, worldIn: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float) = EnumActionResult.PASS
-    //override fun onUpdate(itemStack: ItemStack, world: World, entity: Entity, itemSlot: Int, isSelected: Boolean) = Unit
-
-    override fun getItemUseAction(stack: ItemStack) = EnumAction.BOW
-    override fun getMaxItemUseDuration(stack: ItemStack) = 72000 // 永続
-
-    override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
-        player.activeHand = hand
-        return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
-    }
-
-    override fun onUsingTick(stack: ItemStack, entityLivingBase: EntityLivingBase, count: Int) {
-        if (entityLivingBase.world.isRemote) return
-
-        if (entityLivingBase is EntityPlayer) {
-            useCrystal(entityLivingBase, getTryCount(count))
-        }
-    }
-
-    private fun getEnvironment(player: EntityPlayer, rayTraceResult: RayTraceResult) = FairyCrystalDropEnvironment(player, player.world, rayTraceResult.blockPos, rayTraceResult.sideHit).also { environment ->
-        environment.insertItemStacks(player) // インベントリ
-        environment.insertBlocks(player.world, BlockRegion(rayTraceResult.blockPos.add(-2, -2, -2), rayTraceResult.blockPos.add(2, 2, 2))) // ワールドブロック
-        environment.insertBiome(player.world.getBiome(rayTraceResult.blockPos)) // バイオーム
-        environment.insertEntities(player.world, player.positionVector, 10.0) // エンティティ
-    }
-
-    private fun useCrystal(player: EntityPlayer, maxTimes: Int) {
-
-        // プレイヤー視点判定
-        val rayTraceResult = rayTrace(player.world, player, false) ?: return // ブロックに当たらなかった場合は無視
-        if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return // ブロックに当たらなかった場合は無視
-
-        // ガチャ環境計算
-        val environment = getEnvironment(player, rayTraceResult)
-
-        repeat(maxTimes) {
-
-            // 妖晶を得る
-            val itemStackFairyCrystal = findItem(player) { itemStack -> itemStack.item is ItemFairyCrystal } ?: return // クリスタルを持ってない場合は無視
-            val variantFairyCrystal = (itemStackFairyCrystal.item as ItemFairyCrystal).getVariant(itemStackFairyCrystal) ?: return // 異常なクリスタルを持っている場合は無視
-
-            // ガチャリスト取得
-            val commonBoost = variantFairyCrystal.getRateBoost(DropCategory.COMMON, player.proxy.skillContainer)
-            val rareBoost = variantFairyCrystal.getRateBoost(DropCategory.RARE, player.proxy.skillContainer)
-            val dropTable = environment.getDropTable(variantFairyCrystal.dropRank, commonBoost, rareBoost)
-
-            // ガチャを引く
-            val itemStackDrop = dropTable.getRandomItem(player.world.rand)?.orNull ?: return // ガチャが引けなかった場合は無視
-
-            // 成立
-
-            // ガチャアイテムを消費
-            if (!player.isCreative) itemStackFairyCrystal.shrink(1)
-            player.addStat(StatList.getObjectUseStats(itemStackFairyCrystal.item))
-
-            // 妖精をドロップ
-            val blockPos = rayTraceResult.blockPos.offset(rayTraceResult.sideHit)
-            val entityItem = EntityItem(player.world, blockPos.x + 0.5, blockPos.y + 0.5, blockPos.z + 0.5, itemStackDrop.copy())
-            entityItem.setNoPickupDelay()
-            player.world.spawnEntity(entityItem)
-
-        }
-
-    }
-
-    private fun getTryCount(count: Int): Int {
-        val t = 72000 - count
-        return when {
-            t >= 200 -> 5
-            t >= 100 -> 2
-            t >= 60 -> 1
-            t >= 20 -> if (t % 2 == 0) 1 else 0
-            t >= 5 -> if (t % 5 == 0) 1 else 0
-            t == 1 -> 1
-            else -> 0
-        }.coerceAtMost(maxTryCountPerTick)
-    }
 }
