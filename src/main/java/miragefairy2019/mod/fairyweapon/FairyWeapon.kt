@@ -14,6 +14,7 @@ import miragefairy2019.api.Erg.LIGHT
 import miragefairy2019.api.Erg.SLASH
 import miragefairy2019.api.Erg.SOUND
 import miragefairy2019.api.Erg.SPACE
+import miragefairy2019.api.Erg.SUBMISSION
 import miragefairy2019.api.Erg.THUNDER
 import miragefairy2019.api.Erg.WARP
 import miragefairy2019.api.Erg.WATER
@@ -146,7 +147,7 @@ object FairyWeapon {
         val miragiumScythe = fw(2, { ItemMiragiumScythe(0.0, 2.0f) }, "miragium_scythe", "miragiumScythe", listOf(), null, !SLASH, !HARVEST)
         val lilagiumScythe = fw(3, { ItemMiragiumScythe(10.0, 4.0f) }, "lilagium_scythe", "lilagiumScythe", listOf(), miragiumScythe, !HARVEST)
         val ryugyoDrill = fw(4, { ItemRyugyoDrill(0.0) }, "ryugyo_drill", "ryugyoDrill", listOf(), null, !DESTROY, !THUNDER, !WATER)
-        val prayerWheel = fw(3, { ItemPrayerWheel(5) }, "prayer_wheel", "prayerWheel", listOf(), null/* TODO */)
+        val prayerWheel = fw(3, { ItemPrayerWheel(5) }, "prayer_wheel", "prayerWheel", listOf(), null, !SUBMISSION, !SUBMISSION, !"ingotGold", !"dustCinnabar", !"gemDiamond")
 
         onMakeLang {
             enJa("item.miragiumSword.name", "Miragium Sword", "ミラジウムの剣")
@@ -417,7 +418,30 @@ object FairyWeapon {
             )
         )
 
-        // TODO
+        // 収束の地
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "prayer_wheel"),
+            DataShapedRecipe(
+                pattern = listOf(
+                    "sjC",
+                    "cRr",
+                    "wms"
+                ),
+                key = mapOf(
+                    "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodShine"),
+                    "w" to DataOreIngredient(ore = "plankWood"),
+                    "C" to DataSimpleIngredient(item = "minecraft:clock"),
+                    "j" to DataSimpleIngredient(item = "minecraft:jukebox"),
+                    "r" to DataOreIngredient(ore = "dustCinnabar"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSubmission"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData
+                ),
+                result = DataResult(
+                    item = "miragefairy2019:prayer_wheel"
+                )
+            )
+        )
 
         onMakeLang {
             enJa("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器")

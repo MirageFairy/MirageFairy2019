@@ -1,0 +1,44 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "sjC",
+    "cRr",
+    "wms"
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019ManaRodShine"
+    },
+    "w": {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    },
+    "C": {
+      "item": "minecraft:clock"
+    },
+    "j": {
+      "item": "minecraft:jukebox"
+    },
+    "r": {
+      "type": "forge:ore_dict",
+      "ore": "dustCinnabar"
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereSubmission"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "m": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:prayer_wheel",
+    "count": 1
+  }
+}
