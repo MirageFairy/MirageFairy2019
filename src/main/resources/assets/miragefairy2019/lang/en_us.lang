@@ -238,6 +238,7 @@ mirageFairy2019.magic.status.duration.name=Duration
 mirageFairy2019.magic.status.breakSpeed.name=Break Speed
 mirageFairy2019.magic.status.speedUp.name=Speed Up
 mirageFairy2019.magic.status.coverRate.name=Cover Rate
+mirageFairy2019.magic.status.speed.name=Speed
 mirageFairy2019.magic.status.chargeSpeed.name=Charge Speed
 mirageFairy2019.magic.status.speedBoost.name=Speed Boost
 mirageFairy2019.magic.status.damageBoost.name=Damage Boost
