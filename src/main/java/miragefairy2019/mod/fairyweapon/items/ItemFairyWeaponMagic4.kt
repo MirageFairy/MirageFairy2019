@@ -88,6 +88,15 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), IMagicStatusContainer {
         return ActionResult(magicHandler.onItemRightClick(hand), itemStack)
     }
 
+    override fun onUsingTick(itemStack: ItemStack, entityLivingBase: EntityLivingBase, count: Int) {
+        if (entityLivingBase !is EntityPlayer) return // プレイヤー取得
+        if (entityLivingBase.getHeldItem(entityLivingBase.activeHand) != itemStack) return // アイテム取得
+        val fairyType = findFairy(itemStack, entityLivingBase)?.second ?: EMPTY_FAIRY // 妖精取得
+
+        val magicHandler = getMagic().getMagicHandler(getMagicArguments(entityLivingBase, itemStack, fairyType))
+        magicHandler.onUsingTick(count)
+    }
+
     final override fun onUpdate(itemStack: ItemStack, world: World, entity: Entity, itemSlot: Int, isSelected: Boolean) {
         if (entity !is EntityPlayer) return // プレイヤー取得
         if (!isSelected && entity.heldItemOffhand != itemStack) return // アイテム取得
