@@ -147,7 +147,9 @@ object FairyWeapon {
         val miragiumScythe = fw(2, { ItemMiragiumScythe(0.0, 2.0f) }, "miragium_scythe", "miragiumScythe", listOf(), null, !SLASH, !HARVEST)
         val lilagiumScythe = fw(3, { ItemMiragiumScythe(10.0, 4.0f) }, "lilagium_scythe", "lilagiumScythe", listOf(), miragiumScythe, !HARVEST)
         val ryugyoDrill = fw(4, { ItemRyugyoDrill(0.0) }, "ryugyo_drill", "ryugyoDrill", listOf(), null, !DESTROY, !THUNDER, !WATER)
-        val prayerWheel = fw(3, { ItemPrayerWheel(5) }, "prayer_wheel", "prayerWheel", listOf(), null, !SUBMISSION, !SUBMISSION, !"ingotGold", !"dustCinnabar", !"gemDiamond")
+
+        val prayerWheel = fw(1, { ItemPrayerWheel(1) }, "prayer_wheel", "prayerWheel", listOf(), null, !SUBMISSION, !SUBMISSION, !"ingotIron", !"gemDiamond")
+        val prayerWheel2 = fw(3, { ItemPrayerWheel(5) }, "prayer_wheel_2", "prayerWheel2", listOf(), prayerWheel, !"ingotGold", !"dustCinnabar")
 
         onMakeLang {
             enJa("item.miragiumSword.name", "Miragium Sword", "ミラジウムの剣")
@@ -210,8 +212,11 @@ object FairyWeapon {
             enJa("item.ryugyoDrill.author", "Yoshinon", "よしのん")
             enJa("item.ryugyoDrill.recipe", "Get a specific item", "デザインコンテスト武器")
             enJa("item.prayerWheel.name", "Prayer Wheel", "収束の地")
-            enJa("item.prayerWheel.poem", "", "重合するアストラル光、吹きあがる大宇宙のジェット")
-            enJa("item.prayerWheel.recipe", "Get a specific item", "シリンダーの内側に妖精語の呪文を刻む（職人芸）")
+            enJa("item.prayerWheel.poem", "", "重合するアストラル光。吹き荒れる妖精の声。宇宙のジェット")
+            enJa("item.prayerWheel.recipe", "Get a specific item", "ホイールの外側に妖精語の呪文なんか書いて読めるの？")
+            enJa("item.prayerWheel2.name", "Prayer Wheel", "約束の地")
+            enJa("item.prayerWheel2.poem", "", "覚えてるかい？前世、自分が何の妖精だったか")
+            enJa("item.prayerWheel2.recipe", "Get a specific item", "人は死ぬと妖精になるんだって")
 
             enJa("miragefairy2019.magic.${MagicMessage.NO_FAIRY.unlocalizedName}.text", "You don't have a fairy", "妖精を所持していません")
             enJa("miragefairy2019.magic.${MagicMessage.INSUFFICIENT_DURABILITY.unlocalizedName}.text", "Insufficient durability", "耐久値が不足しています")
@@ -423,22 +428,42 @@ object FairyWeapon {
             ResourceName(ModMirageFairy2019.MODID, "prayer_wheel"),
             DataShapedRecipe(
                 pattern = listOf(
-                    "sjC",
-                    "cRr",
-                    "wms"
+                    "JCJ",
+                    "SRS",
+                    "sRs"
                 ),
                 key = mapOf(
-                    "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodShine"),
-                    "w" to DataOreIngredient(ore = "plankWood"),
-                    "C" to DataSimpleIngredient(item = "minecraft:clock"),
-                    "j" to DataSimpleIngredient(item = "minecraft:jukebox"),
-                    "r" to DataOreIngredient(ore = "dustCinnabar"),
-                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSubmission"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "m" to WandType.MELTING.ingredientData
+                    "R" to DataOreIngredient(ore = "stickWood"),
+                    "C" to DataSimpleIngredient(item = "minecraft:compass"),
+                    "J" to DataSimpleIngredient(item = "minecraft:jukebox"),
+                    "S" to DataOreIngredient(ore = "string"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSubmission")
                 ),
                 result = DataResult(
                     item = "miragefairy2019:prayer_wheel"
+                )
+            )
+        )
+
+        // 約束の地
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "prayer_wheel_2"),
+            DataShapedRecipe(
+                pattern = listOf(
+                    "crC",
+                    " #r",
+                    "R s"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:prayer_wheel"),
+                    "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodShine"),
+                    "C" to DataSimpleIngredient(item = "minecraft:clock"),
+                    "r" to DataOreIngredient(ore = "dustCinnabar"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "s" to WandType.SUMMONING.ingredientData
+                ),
+                result = DataResult(
+                    item = "miragefairy2019:prayer_wheel_2"
                 )
             )
         )
@@ -543,7 +568,8 @@ object FairyWeapon {
 
             val ryugyo_drill = Achievement("ryugyo_drill", "ryugyoDrill", null, "goal")
 
-            val prayer_wheel = Achievement("prayer_wheel", "prayerWheel", null, "goal")
+            val prayer_wheel = Achievement("prayer_wheel", "prayerWheel", null, null)
+            val prayer_wheel_2 = Achievement("prayer_wheel_2", "prayerWheel2", prayer_wheel, "goal")
 
         }
 

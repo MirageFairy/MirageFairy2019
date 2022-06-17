@@ -1,0 +1,36 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "crC",
+    " #r",
+    "R s"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:prayer_wheel"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019ManaRodShine"
+    },
+    "C": {
+      "item": "minecraft:clock"
+    },
+    "r": {
+      "type": "forge:ore_dict",
+      "ore": "dustCinnabar"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "s": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandSummoning"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:prayer_wheel_2",
+    "count": 1
+  }
+}

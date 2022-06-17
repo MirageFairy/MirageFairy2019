@@ -1,40 +1,28 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "sjC",
-    "cRr",
-    "wms"
+    "JCJ",
+    "SRS",
+    "sRs"
   ],
   "key": {
     "R": {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019ManaRodShine"
-    },
-    "w": {
-      "type": "forge:ore_dict",
-      "ore": "plankWood"
+      "ore": "stickWood"
     },
     "C": {
-      "item": "minecraft:clock"
+      "item": "minecraft:compass"
     },
-    "j": {
+    "J": {
       "item": "minecraft:jukebox"
     },
-    "r": {
+    "S": {
       "type": "forge:ore_dict",
-      "ore": "dustCinnabar"
+      "ore": "string"
     },
     "s": {
       "type": "forge:ore_dict",
       "ore": "mirageFairy2019SphereSubmission"
-    },
-    "c": {
-      "type": "miragefairy2019:ore_dict_complex",
-      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-    },
-    "m": {
-      "type": "miragefairy2019:ore_dict_complex",
-      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
     }
   },
   "result": {

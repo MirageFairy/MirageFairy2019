@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "miragefairy2019:items/prayer_wheel_2"
+  }
+}

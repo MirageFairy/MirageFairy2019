@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "miragefairy2019:prayer_wheel_2"
+    },
+    "title": {
+      "translate": "item.prayerWheel2.name"
+    },
+    "description": {
+      "translate": "item.prayerWheel2.recipe"
+    },
+    "frame": "goal"
+  },
+  "parent": "miragefairy2019:fairy_weapon/prayer_wheel",
+  "criteria": {
+    "main": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miragefairy2019:prayer_wheel_2"
+          }
+        ]
+      }
+    }
+  }
+}
