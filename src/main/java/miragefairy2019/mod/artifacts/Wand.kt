@@ -490,50 +490,54 @@ class ItemFairyWandSummoning(val maxTryCountPerTick: Int) : ItemFairyWand() {
         if (entityLivingBase.world.isRemote) return
 
         if (entityLivingBase is EntityPlayer) {
-            repeat(getTryCount(count)) a@{
-                if (!tryUseCrystal(entityLivingBase)) return@a
-            }
+            useCrystal(entityLivingBase, getTryCount(count))
         }
     }
 
-    private fun tryUseCrystal(player: EntityPlayer): Boolean {
-
-        // 妖晶を得る
-        val itemStackFairyCrystal = findItem(player) { itemStack -> itemStack.item is ItemFairyCrystal } ?: return false // クリスタルを持ってない場合は無視
-        val variantFairyCrystal = (itemStackFairyCrystal.item as ItemFairyCrystal).getVariant(itemStackFairyCrystal) ?: return false // 異常なクリスタルを持っている場合は無視
-
-        // プレイヤー視点判定
-        val rayTraceResult = rayTrace(player.world, player, false) ?: return false // ブロックに当たらなかった場合は無視
-        if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return false // ブロックに当たらなかった場合は無視
-
-        // ガチャ環境計算
-        val environment = FairyCrystalDropEnvironment(player, player.world, rayTraceResult.blockPos, rayTraceResult.sideHit)
+    private fun getEnvironment(player: EntityPlayer, rayTraceResult: RayTraceResult) = FairyCrystalDropEnvironment(player, player.world, rayTraceResult.blockPos, rayTraceResult.sideHit).also { environment ->
         environment.insertItemStacks(player) // インベントリ
         environment.insertBlocks(player.world, BlockRegion(rayTraceResult.blockPos.add(-2, -2, -2), rayTraceResult.blockPos.add(2, 2, 2))) // ワールドブロック
         environment.insertBiome(player.world.getBiome(rayTraceResult.blockPos)) // バイオーム
         environment.insertEntities(player.world, player.positionVector, 10.0) // エンティティ
+    }
 
-        // ガチャリスト取得
-        val commonBoost = variantFairyCrystal.getRateBoost(DropCategory.COMMON, player.proxy.skillContainer)
-        val rareBoost = variantFairyCrystal.getRateBoost(DropCategory.RARE, player.proxy.skillContainer)
-        val dropTable = environment.getDropTable(variantFairyCrystal.dropRank, commonBoost, rareBoost)
+    private fun useCrystal(player: EntityPlayer, maxTimes: Int) {
 
-        // ガチャを引く
-        val itemStackDrop = dropTable.getRandomItem(player.world.rand)?.orNull ?: return false // ガチャが引けなかった場合は無視
+        // プレイヤー視点判定
+        val rayTraceResult = rayTrace(player.world, player, false) ?: return // ブロックに当たらなかった場合は無視
+        if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return // ブロックに当たらなかった場合は無視
 
-        // 成立
+        // ガチャ環境計算
+        val environment = getEnvironment(player, rayTraceResult)
 
-        // ガチャアイテムを消費
-        if (!player.isCreative) itemStackFairyCrystal.shrink(1)
-        player.addStat(StatList.getObjectUseStats(itemStackFairyCrystal.item))
+        repeat(maxTimes) {
 
-        // 妖精をドロップ
-        val blockPos = rayTraceResult.blockPos.offset(rayTraceResult.sideHit)
-        val entityItem = EntityItem(player.world, blockPos.x + 0.5, blockPos.y + 0.5, blockPos.z + 0.5, itemStackDrop.copy())
-        entityItem.setNoPickupDelay()
-        player.world.spawnEntity(entityItem)
+            // 妖晶を得る
+            val itemStackFairyCrystal = findItem(player) { itemStack -> itemStack.item is ItemFairyCrystal } ?: return // クリスタルを持ってない場合は無視
+            val variantFairyCrystal = (itemStackFairyCrystal.item as ItemFairyCrystal).getVariant(itemStackFairyCrystal) ?: return // 異常なクリスタルを持っている場合は無視
 
-        return true
+            // ガチャリスト取得
+            val commonBoost = variantFairyCrystal.getRateBoost(DropCategory.COMMON, player.proxy.skillContainer)
+            val rareBoost = variantFairyCrystal.getRateBoost(DropCategory.RARE, player.proxy.skillContainer)
+            val dropTable = environment.getDropTable(variantFairyCrystal.dropRank, commonBoost, rareBoost)
+
+            // ガチャを引く
+            val itemStackDrop = dropTable.getRandomItem(player.world.rand)?.orNull ?: return // ガチャが引けなかった場合は無視
+
+            // 成立
+
+            // ガチャアイテムを消費
+            if (!player.isCreative) itemStackFairyCrystal.shrink(1)
+            player.addStat(StatList.getObjectUseStats(itemStackFairyCrystal.item))
+
+            // 妖精をドロップ
+            val blockPos = rayTraceResult.blockPos.offset(rayTraceResult.sideHit)
+            val entityItem = EntityItem(player.world, blockPos.x + 0.5, blockPos.y + 0.5, blockPos.z + 0.5, itemStackDrop.copy())
+            entityItem.setNoPickupDelay()
+            player.world.spawnEntity(entityItem)
+
+        }
+
     }
 
     private fun getTryCount(count: Int): Int {
