@@ -5,14 +5,15 @@ import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.BlockRegion
 import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.orNull
+import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.artifacts.ItemFairyCrystal
 import miragefairy2019.mod.artifacts.getRateBoost
 import miragefairy2019.mod.fairyweapon.findItem
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.magic
+import miragefairy2019.mod.fairyweapon.magic4.map
 import miragefairy2019.mod.fairyweapon.magic4.status
-import miragefairy2019.mod.fairyweapon.magic4.suffix
 import miragefairy2019.mod.systems.DropCategory
 import miragefairy2019.mod.systems.FairyCrystalDropEnvironment
 import miragefairy2019.mod.systems.getDropTable
@@ -33,7 +34,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
 class ItemPrayerWheel(private val maxTryCountPerTick: Int) : ItemFairyWeaponMagic4() {
-    val chargeSpeed = status("speed", { maxTryCountPerTick }, { integer.suffix(" Hz") })
+    val chargeSpeed = status("maxSpeed", { maxTryCountPerTick }, { integer.map { textComponent { "${value * 20} Hz"() } } })
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリック長押しでフェアリークリスタルを高速消費" // TODO translate Hold right mouse button to use fairy crystals quickly

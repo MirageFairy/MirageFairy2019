@@ -20,10 +20,6 @@ private fun <T> FormulaRendererSelector<T>.createSimpleFormulaRenderer(function:
     override fun render(formulaArguments: FormulaArguments, formula: Formula<T>) = FormulaRendererScope(formulaArguments, formula).function()
 }
 
-private fun <T> FormulaRenderer<T>.map(function: FormulaRendererScope<T>.(ITextComponent) -> ITextComponent): FormulaRenderer<T> = object : FormulaRenderer<T> {
-    override fun render(formulaArguments: FormulaArguments, formula: Formula<T>) = FormulaRendererScope(formulaArguments, formula).function(this@map.render(formulaArguments, formula))
-}
-
 val FormulaRendererSelector<Int>.integer get() = createSimpleFormulaRenderer { textComponent { "$value"() } }
 val FormulaRendererSelector<Double>.duration get() = createSimpleFormulaRenderer { textComponent { (value / 20.0 formatAs "%.1f 秒")() } } // TODO translate
 val FormulaRendererSelector<Double>.pitch get() = createSimpleFormulaRenderer { textComponent { (log(value, 2.0) * 12 formatAs "%.2f")() } } // TODO translate
@@ -37,6 +33,10 @@ val FormulaRendererSelector<Double>.percent2 get() = createSimpleFormulaRenderer
 val FormulaRendererSelector<Double>.percent3 get() = createSimpleFormulaRenderer { textComponent { (value * 100.0 formatAs "%.3f%%")() } }
 val FormulaRendererSelector<Boolean>.boolean get() = createSimpleFormulaRenderer { textComponent { if (value) "Yes"() else "No"() } }
 val FormulaRendererSelector<CriticalRate>.criticalRate get() = createSimpleFormulaRenderer { textComponent { value.bar.map { "|"().withColor(it.color) }.flatten() + (value.mean formatAs " (%.2f)")() } }
+
+fun <T> FormulaRenderer<T>.map(function: FormulaRendererScope<T>.(ITextComponent) -> ITextComponent): FormulaRenderer<T> = object : FormulaRenderer<T> {
+    override fun render(formulaArguments: FormulaArguments, formula: Formula<T>) = FormulaRendererScope(formulaArguments, formula).function(this@map.render(formulaArguments, formula))
+}
 
 fun <T> FormulaRenderer<T>.prefix(string: String) = map { textComponent { string() + it() } }
 fun <T> FormulaRenderer<T>.suffix(string: String) = map { textComponent { it() + string() } }

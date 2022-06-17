@@ -241,6 +241,7 @@ mirageFairy2019.magic.status.speedUp.name=加速
 mirageFairy2019.magic.status.coverRate.name=カバー率
 mirageFairy2019.magic.status.chargeSpeed.name=チャージ速度
 mirageFairy2019.magic.status.speed.name=速度
+mirageFairy2019.magic.status.maxSpeed.name=最高速度
 mirageFairy2019.magic.status.speedBoost.name=速度ブースト
 mirageFairy2019.magic.status.damageBoost.name=ダメージブースト
 mirageFairy2019.magic.status.durationBoost.name=持続時間ブースト
