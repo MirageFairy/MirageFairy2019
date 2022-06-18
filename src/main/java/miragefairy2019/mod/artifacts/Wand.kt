@@ -75,7 +75,6 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import kotlin.math.ceil
 
-private val Int.roman get() = listOf("I", "II", "III", "IV", "V").getOrNull(this - 1) ?: throw IllegalArgumentException()
 
 enum class WandType(
     val erg: Erg,
@@ -95,10 +94,6 @@ enum class WandType(
     DISTORTION(Erg.SPACE, 4, "distortion", "Distortion", "歪曲", listOf()),
     FUSION(Erg.WARP, 4, "fusion", "Fusion", "融合", listOf()),
 }
-
-val WandType.oreName get() = "mirageFairy2019CraftingToolFairyWand${registryName.toUpperCamelCase()}"
-val WandType.ingredient get() = OreIngredientComplex(oreName)
-val WandType.ingredientData get() = DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = oreName)
 
 val wandTierToRodOreName = mapOf(
     1 to "stickMirageFlower",
@@ -148,6 +143,13 @@ enum class WandKind(
     FU1(null, FUSION, 1, "", "4次元折り紙"),
     FU2(FU1, FUSION, 2, "", "いしのなかにいる"),
 }
+
+
+private val Int.roman get() = listOf("I", "II", "III", "IV", "V").getOrNull(this - 1) ?: throw IllegalArgumentException()
+
+val WandType.oreName get() = "mirageFairy2019CraftingToolFairyWand${registryName.toUpperCamelCase()}"
+val WandType.ingredient get() = OreIngredientComplex(oreName)
+val WandType.ingredientData get() = DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = oreName)
 
 val WandKind.tier get() = type.tier + (rank - 1)
 val WandKind.registryName get() = "${type.registryName}_fairy_wand${if (rank == 1) "" else "_$rank"}"
