@@ -84,12 +84,11 @@ enum class WandType(val registryName: String) {
     SUMMONING("summoning"),
     DISTORTION("distortion"),
     FUSION("fusion"),
-    ;
-
-    val oreName get() = "mirageFairy2019CraftingToolFairyWand${registryName.toUpperCamelCase()}"
-    val ingredient get() = OreIngredientComplex(oreName)
-    val ingredientData get() = DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = oreName)
 }
+
+val WandType.oreName get() = "mirageFairy2019CraftingToolFairyWand${registryName.toUpperCamelCase()}"
+val WandType.ingredient get() = OreIngredientComplex(oreName)
+val WandType.ingredientData get() = DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = oreName)
 
 enum class WandKind(
     val parent: WandKind?,

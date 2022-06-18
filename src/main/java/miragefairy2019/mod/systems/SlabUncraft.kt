@@ -9,6 +9,7 @@ import miragefairy2019.libkt.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.WandType
+import miragefairy2019.mod.artifacts.ingredientData
 
 object SlabUncraft {
     val module = module {

@@ -26,6 +26,7 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.WandType
+import miragefairy2019.mod.artifacts.ingredientData
 import net.minecraftforge.fml.common.registry.GameRegistry
 
 object CommonMaterials {

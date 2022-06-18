@@ -5,6 +5,7 @@ import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.WandType
+import miragefairy2019.mod.artifacts.ingredient
 import miragefairy2019.mod.fairyrelation.FairyRelationRegistries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import net.minecraft.util.ResourceLocation

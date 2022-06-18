@@ -39,6 +39,7 @@ import miragefairy2019.mod.Main.creativeTab
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.WandType
+import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
 import miragefairy2019.mod.fairyweapon.items.ItemBellBase

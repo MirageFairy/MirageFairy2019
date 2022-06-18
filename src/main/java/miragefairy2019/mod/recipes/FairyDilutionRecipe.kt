@@ -3,6 +3,7 @@ package miragefairy2019.mod.recipes
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.artifacts.WandType
+import miragefairy2019.mod.artifacts.ingredient
 import miragefairy2019.mod.fairy.FairyTypes
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry
