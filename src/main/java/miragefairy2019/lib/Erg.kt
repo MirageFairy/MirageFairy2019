@@ -37,4 +37,5 @@ val Erg.textColor
         Erg.SENSE -> TextFormatting.GREEN
     }
 
+val Erg.registryName get() = this.name.toLowerCase()
 val Erg.displayName get() = let { ergType -> textComponent { translate("mirageFairy2019.erg.$ergType.name").withColor(textColor) } }
