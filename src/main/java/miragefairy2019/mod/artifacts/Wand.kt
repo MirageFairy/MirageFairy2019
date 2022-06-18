@@ -171,15 +171,15 @@ object Wand {
                 )
             }
         }
-        (1..5).forEach { fairyWand(it, WandType.CRAFTING, "Crafting", "技巧", it, { ItemFairyWand() }) }
-        (1..5).forEach { fairyWand(it, WandType.HYDRATING, "Hydrating", "加水", it, { ItemFairyWand() }, "container1000Water") }
-        (1..4).forEach { fairyWand(it + 1, WandType.MELTING, "Melting", "紅蓮", it, { ItemFairyWand() }) }
-        (1..4).forEach { fairyWand(it + 1, WandType.BREAKING, "Breaking", "破砕", it, { ItemFairyWand() }) }
-        (1..4).forEach { fairyWand(it + 1, WandType.FREEZING, "Freezing", "氷晶", it, { ItemFairyWand() }) }
-        (1..3).forEach { fairyWand(it + 2, WandType.POLISHING, "Polishing", "珠玉", it, { ItemFairyWand() }) }
-        (1..3).forEach { fairyWand(it + 2, WandType.SUMMONING, "Wizard's", "冥王", it, { ItemFairyWand() }) }
-        (1..2).forEach { fairyWand(it + 3, WandType.DISTORTION, "Distortion", "歪曲", it, { ItemFairyWand() }) }
-        (1..2).forEach { fairyWand(it + 3, WandType.FUSION, "Fusion", "融合", it, { ItemFairyWand() }) }
+        (1..5).forEach { fairyWand(it, CRAFTING, "Crafting", "技巧", it, { ItemFairyWand() }) }
+        (1..5).forEach { fairyWand(it, HYDRATING, "Hydrating", "加水", it, { ItemFairyWand() }, "container1000Water") }
+        (1..4).forEach { fairyWand(it + 1, MELTING, "Melting", "紅蓮", it, { ItemFairyWand() }) }
+        (1..4).forEach { fairyWand(it + 1, BREAKING, "Breaking", "破砕", it, { ItemFairyWand() }) }
+        (1..4).forEach { fairyWand(it + 1, FREEZING, "Freezing", "氷晶", it, { ItemFairyWand() }) }
+        (1..3).forEach { fairyWand(it + 2, POLISHING, "Polishing", "珠玉", it, { ItemFairyWand() }) }
+        (1..3).forEach { fairyWand(it + 2, SUMMONING, "Wizard's", "冥王", it, { ItemFairyWand() }) }
+        (1..2).forEach { fairyWand(it + 3, DISTORTION, "Distortion", "歪曲", it, { ItemFairyWand() }) }
+        (1..2).forEach { fairyWand(it + 3, FUSION, "Fusion", "融合", it, { ItemFairyWand() }) }
 
         onMakeLang {
             WandKind.values().forEach { wandKind ->
@@ -333,7 +333,7 @@ object Wand {
 
             // 丸石＞紅蓮→焼き石
             ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(WandType.MELTING.ingredient)
+                it.conditions += FairyStickCraftConditionUseItem(MELTING.ingredient)
                 it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.COBBLESTONE.defaultState }, { Blocks.STONE.defaultState })
             })
 
