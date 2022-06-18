@@ -1,6 +1,8 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.api.Erg
 import miragefairy2019.lib.proxy
+import miragefairy2019.lib.registryName
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
@@ -53,6 +55,7 @@ import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
 import mirrg.kotlin.toLowerCamelCase
 import mirrg.kotlin.toUpperCamelCase
+import mirrg.kotlin.toUpperCaseHead
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.enchantment.Enchantment
@@ -75,26 +78,35 @@ import kotlin.math.ceil
 private val Int.roman get() = listOf("I", "II", "III", "IV", "V").getOrNull(this - 1) ?: throw IllegalArgumentException()
 
 enum class WandType(
+    val erg: Erg,
     val registryName: String,
     val tier: Int,
     val englishName: String,
     val japaneseName: String,
     val additionalOreNames: List<String>
 ) {
-    CRAFTING("crafting", 1, "Crafting", "技巧", listOf()),
-    HYDRATING("hydrating", 1, "Hydrating", "加水", listOf("container1000Water")),
-    MELTING("melting", 2, "Melting", "紅蓮", listOf()),
-    BREAKING("breaking", 2, "Breaking", "破砕", listOf()),
-    FREEZING("freezing", 2, "Freezing", "氷晶", listOf()),
-    POLISHING("polishing", 3, "Polishing", "珠玉", listOf()),
-    SUMMONING("summoning", 3, "Wizard's", "冥王", listOf()),
-    DISTORTION("distortion", 4, "Distortion", "歪曲", listOf()),
-    FUSION("fusion", 4, "Fusion", "融合", listOf()),
+    CRAFTING(Erg.CRAFT, "crafting", 1, "Crafting", "技巧", listOf()),
+    HYDRATING(Erg.WATER, "hydrating", 1, "Hydrating", "加水", listOf("container1000Water")),
+    MELTING(Erg.FLAME, "melting", 2, "Melting", "紅蓮", listOf()),
+    BREAKING(Erg.DESTROY, "breaking", 2, "Breaking", "破砕", listOf()),
+    FREEZING(Erg.FREEZE, "freezing", 2, "Freezing", "氷晶", listOf()),
+    POLISHING(Erg.CRYSTAL, "polishing", 3, "Polishing", "珠玉", listOf()),
+    SUMMONING(Erg.SUBMISSION, "summoning", 3, "Wizard's", "冥王", listOf()),
+    DISTORTION(Erg.SPACE, "distortion", 4, "Distortion", "歪曲", listOf()),
+    FUSION(Erg.WARP, "fusion", 4, "Fusion", "融合", listOf()),
 }
 
 val WandType.oreName get() = "mirageFairy2019CraftingToolFairyWand${registryName.toUpperCamelCase()}"
 val WandType.ingredient get() = OreIngredientComplex(oreName)
 val WandType.ingredientData get() = DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = oreName)
+
+val wandTierToRodOreName = mapOf(
+    1 to "stickMirageFlower",
+    2 to "rodMiragium",
+    3 to "mirageFairy2019ManaRodQuartz",
+    4 to "stickMirageFairyWood",
+    5 to "rodMirageFairyPlastic"
+)
 
 enum class WandKind(
     val parent: WandKind?,
@@ -256,56 +268,24 @@ object Wand {
         }
 
         // 普通のワンド
-        fun fairyWand(registerName: String, rod: String, erg: String) = makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, registerName),
-            DataShapedRecipe(
-                pattern = listOf(
-                    " cS",
-                    " R ",
-                    "R  "
-                ),
-                key = mapOf(
-                    "c" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandCrafting"),
-                    "R" to DataOreIngredient(ore = rod),
-                    "S" to DataOreIngredient(ore = "mirageFairy2019Sphere$erg")
-                ),
-                result = DataResult(item = "miragefairy2019:$registerName")
+        WandKind.values().forEach { wandKind ->
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, wandKind.registryName),
+                DataShapedRecipe(
+                    pattern = listOf(
+                        " cS",
+                        " R ",
+                        "R  "
+                    ),
+                    key = mapOf(
+                        "c" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandCrafting"),
+                        "R" to DataOreIngredient(ore = wandTierToRodOreName[wandKind.tier]!!),
+                        "S" to DataOreIngredient(ore = "mirageFairy2019Sphere${wandKind.type.erg.registryName.toUpperCaseHead()}")
+                    ),
+                    result = DataResult(item = "miragefairy2019:${wandKind.registryName}")
+                )
             )
-        )
-
-        val rs = listOf("stickMirageFlower", "rodMiragium", "mirageFairy2019ManaRodQuartz", "stickMirageFairyWood", "rodMirageFairyPlastic")
-        fairyWand("crafting_fairy_wand", rs[0], "Craft")
-        fairyWand("crafting_fairy_wand_2", rs[1], "Craft")
-        fairyWand("crafting_fairy_wand_3", rs[2], "Craft")
-        fairyWand("crafting_fairy_wand_4", rs[3], "Craft")
-        fairyWand("crafting_fairy_wand_5", rs[4], "Craft")
-        fairyWand("hydrating_fairy_wand", rs[0], "Water")
-        fairyWand("hydrating_fairy_wand_2", rs[1], "Water")
-        fairyWand("hydrating_fairy_wand_3", rs[2], "Water")
-        fairyWand("hydrating_fairy_wand_4", rs[3], "Water")
-        fairyWand("hydrating_fairy_wand_5", rs[4], "Water")
-        fairyWand("melting_fairy_wand", rs[1], "Flame")
-        fairyWand("melting_fairy_wand_2", rs[2], "Flame")
-        fairyWand("melting_fairy_wand_3", rs[3], "Flame")
-        fairyWand("melting_fairy_wand_4", rs[4], "Flame")
-        fairyWand("breaking_fairy_wand", rs[1], "Destroy")
-        fairyWand("breaking_fairy_wand_2", rs[2], "Destroy")
-        fairyWand("breaking_fairy_wand_3", rs[3], "Destroy")
-        fairyWand("breaking_fairy_wand_4", rs[4], "Destroy")
-        fairyWand("freezing_fairy_wand", rs[1], "Freeze")
-        fairyWand("freezing_fairy_wand_2", rs[2], "Freeze")
-        fairyWand("freezing_fairy_wand_3", rs[3], "Freeze")
-        fairyWand("freezing_fairy_wand_4", rs[4], "Freeze")
-        fairyWand("polishing_fairy_wand", rs[2], "Crystal")
-        fairyWand("polishing_fairy_wand_2", rs[3], "Crystal")
-        fairyWand("polishing_fairy_wand_3", rs[4], "Crystal")
-        fairyWand("summoning_fairy_wand", rs[2], "Submission")
-        fairyWand("summoning_fairy_wand_2", rs[3], "Submission")
-        fairyWand("summoning_fairy_wand_3", rs[4], "Submission")
-        fairyWand("distortion_fairy_wand", rs[3], "Space")
-        fairyWand("distortion_fairy_wand_2", rs[4], "Space")
-        fairyWand("fusion_fairy_wand", rs[3], "Warp")
-        fairyWand("fusion_fairy_wand_2", rs[4], "Warp")
+        }
 
         // 糸から技巧杖
         makeRecipe(
