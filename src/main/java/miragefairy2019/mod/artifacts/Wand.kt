@@ -145,7 +145,7 @@ enum class WandKind(
 }
 
 
-private val Int.roman get() = listOf("I", "II", "III", "IV", "V").getOrNull(this - 1) ?: throw IllegalArgumentException()
+private fun Int.toRoman() = listOf("I", "II", "III", "IV", "V").getOrNull(this - 1) ?: throw IllegalArgumentException()
 
 val WandType.oreName get() = "mirageFairy2019CraftingToolFairyWand${registryName.toUpperCamelCase()}"
 val WandType.ingredient get() = OreIngredientComplex(oreName)
@@ -185,8 +185,8 @@ object Wand {
             onMakeLang {
                 enJa(
                     "item.fairyWand${wandKind.type.registryName.toUpperCamelCase()}${if (wandKind.rank == 1) "" else "${wandKind.rank}"}.name",
-                    "${wandKind.type.englishName} Wand${if (wandKind.rank == 1) "" else " ${wandKind.rank.roman}"}",
-                    "${wandKind.type.japaneseName}のワンド${if (wandKind.rank == 1) "" else " ${wandKind.rank.roman}"}"
+                    "${wandKind.type.englishName} Wand${if (wandKind.rank == 1) "" else " ${wandKind.rank.toRoman()}"}",
+                    "${wandKind.type.japaneseName}のワンド${if (wandKind.rank == 1) "" else " ${wandKind.rank.toRoman()}"}"
                 )
             }
         }
