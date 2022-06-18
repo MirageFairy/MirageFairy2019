@@ -79,21 +79,21 @@ private val Int.roman get() = listOf("I", "II", "III", "IV", "V").getOrNull(this
 
 enum class WandType(
     val erg: Erg,
-    val registryName: String,
     val tier: Int,
+    val registryName: String,
     val englishName: String,
     val japaneseName: String,
     val additionalOreNames: List<String>
 ) {
-    CRAFTING(Erg.CRAFT, "crafting", 1, "Crafting", "技巧", listOf()),
-    HYDRATING(Erg.WATER, "hydrating", 1, "Hydrating", "加水", listOf("container1000Water")),
-    MELTING(Erg.FLAME, "melting", 2, "Melting", "紅蓮", listOf()),
-    BREAKING(Erg.DESTROY, "breaking", 2, "Breaking", "破砕", listOf()),
-    FREEZING(Erg.FREEZE, "freezing", 2, "Freezing", "氷晶", listOf()),
-    POLISHING(Erg.CRYSTAL, "polishing", 3, "Polishing", "珠玉", listOf()),
-    SUMMONING(Erg.SUBMISSION, "summoning", 3, "Wizard's", "冥王", listOf()),
-    DISTORTION(Erg.SPACE, "distortion", 4, "Distortion", "歪曲", listOf()),
-    FUSION(Erg.WARP, "fusion", 4, "Fusion", "融合", listOf()),
+    CRAFTING(Erg.CRAFT, 1, "crafting", "Crafting", "技巧", listOf()),
+    HYDRATING(Erg.WATER, 1, "hydrating", "Hydrating", "加水", listOf("container1000Water")),
+    MELTING(Erg.FLAME, 2, "melting", "Melting", "紅蓮", listOf()),
+    BREAKING(Erg.DESTROY, 2, "breaking", "Breaking", "破砕", listOf()),
+    FREEZING(Erg.FREEZE, 2, "freezing", "Freezing", "氷晶", listOf()),
+    POLISHING(Erg.CRYSTAL, 3, "polishing", "Polishing", "珠玉", listOf()),
+    SUMMONING(Erg.SUBMISSION, 3, "summoning", "Wizard's", "冥王", listOf()),
+    DISTORTION(Erg.SPACE, 4, "distortion", "Distortion", "歪曲", listOf()),
+    FUSION(Erg.WARP, 4, "fusion", "Fusion", "融合", listOf()),
 }
 
 val WandType.oreName get() = "mirageFairy2019CraftingToolFairyWand${registryName.toUpperCamelCase()}"
