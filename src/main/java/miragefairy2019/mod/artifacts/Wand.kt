@@ -191,6 +191,9 @@ object Wand {
 
         // 翻訳生成
         onMakeLang {
+            enJa("advancements.miragefairy2019.wand.root.title", "Wand", "ワンド")
+            enJa("advancements.miragefairy2019.wand.root.description", "Wand", "ワンド")
+            enJa("advancements.miragefairy2019.wand.all.description", "Get a specific item", "所定のアイテムを入手する")
             WandKind.values().forEach { wandKind ->
                 enJa(
                     "item.fairyWand${wandKind.type.registryName.toUpperCamelCase()}${if (wandKind.rank == 1) "" else "${wandKind.rank}"}.name",
@@ -199,9 +202,6 @@ object Wand {
                 )
                 enJa("item.${wandKind.unlocalizedName}.poem", wandKind.englishPoem, wandKind.japanesePoem)
             }
-            enJa("advancements.miragefairy2019.wand.root.title", "Wand", "ワンド")
-            enJa("advancements.miragefairy2019.wand.root.description", "Wand", "ワンド")
-            enJa("advancements.miragefairy2019.wand.all.description", "Get a specific item", "所定のアイテムを入手する")
         }
 
         // 実績生成
@@ -275,6 +275,24 @@ object Wand {
         // レシピ生成
         run {
 
+            // 糸から技巧杖
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "crafting_fairy_wand_from_string"),
+                DataShapedRecipe(
+                    pattern = listOf(
+                        " cS",
+                        " R ",
+                        "R  "
+                    ),
+                    key = mapOf(
+                        "c" to DataSimpleIngredient(item = "minecraft:string"),
+                        "R" to DataOreIngredient(ore = "stickMirageFlower"),
+                        "S" to DataOreIngredient(ore = "mirageFairy2019SphereCraft")
+                    ),
+                    result = DataResult(item = "miragefairy2019:crafting_fairy_wand")
+                )
+            )
+
             // 一般
             WandKind.values().forEach { wandKind ->
                 makeRecipe(
@@ -294,24 +312,6 @@ object Wand {
                     )
                 )
             }
-
-            // 糸から技巧杖
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "crafting_fairy_wand_from_string"),
-                DataShapedRecipe(
-                    pattern = listOf(
-                        " cS",
-                        " R ",
-                        "R  "
-                    ),
-                    key = mapOf(
-                        "c" to DataSimpleIngredient(item = "minecraft:string"),
-                        "R" to DataOreIngredient(ore = "stickMirageFlower"),
-                        "S" to DataOreIngredient(ore = "mirageFairy2019SphereCraft")
-                    ),
-                    result = DataResult(item = "miragefairy2019:crafting_fairy_wand")
-                )
-            )
 
         }
 
