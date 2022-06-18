@@ -74,16 +74,22 @@ import kotlin.math.ceil
 
 private val Int.roman get() = listOf("I", "II", "III", "IV", "V").getOrNull(this - 1) ?: throw IllegalArgumentException()
 
-enum class WandType(val registryName: String) {
-    CRAFTING("crafting"),
-    HYDRATING("hydrating"),
-    MELTING("melting"),
-    BREAKING("breaking"),
-    FREEZING("freezing"),
-    POLISHING("polishing"),
-    SUMMONING("summoning"),
-    DISTORTION("distortion"),
-    FUSION("fusion"),
+enum class WandType(
+    val registryName: String,
+    val tier: Int,
+    val englishName: String,
+    val japaneseName: String,
+    val additionalOreNames: List<String>
+) {
+    CRAFTING("crafting", 1, "Crafting", "技巧", listOf()),
+    HYDRATING("hydrating", 1, "Hydrating", "加水", listOf("container1000Water")),
+    MELTING("melting", 2, "Melting", "紅蓮", listOf()),
+    BREAKING("breaking", 2, "Breaking", "破砕", listOf()),
+    FREEZING("freezing", 2, "Freezing", "氷晶", listOf()),
+    POLISHING("polishing", 3, "Polishing", "珠玉", listOf()),
+    SUMMONING("summoning", 3, "Wizard's", "冥王", listOf()),
+    DISTORTION("distortion", 4, "Distortion", "歪曲", listOf()),
+    FUSION("fusion", 4, "Fusion", "融合", listOf()),
 }
 
 val WandType.oreName get() = "mirageFairy2019CraftingToolFairyWand${registryName.toUpperCamelCase()}"
@@ -131,54 +137,45 @@ enum class WandKind(
     FU2(FU1, FUSION, 2, "", "いしのなかにいる"),
 }
 
+val WandKind.tier get() = type.tier + (rank - 1)
 val WandKind.registryName get() = "${type.registryName}_fairy_wand${if (rank == 1) "" else "_$rank"}"
 val WandKind.unlocalizedName get() = "fairy_wand_${type.registryName}${if (rank == 1) "" else "_$rank"}".toLowerCamelCase()
 
 object Wand {
     val module = module {
 
-        fun <T : ItemFairyWand> fairyWand(tier: Int, type: WandType, englishType: String, japaneseType: String, number: Int, creator: () -> T, vararg additionalOreNames: String) {
-            val registryName = "${type.registryName}_fairy_wand${if (number == 1) "" else "_$number"}"
-            item(creator, registryName) {
-                setUnlocalizedName("fairyWand${type.registryName.toUpperCamelCase()}${if (number == 1) "" else "$number"}")
+        WandKind.values().forEach { wandKind ->
+            item({ ItemFairyWand() }, wandKind.registryName) {
+                setUnlocalizedName("fairyWand${wandKind.type.registryName.toUpperCamelCase()}${if (wandKind.rank == 1) "" else "${wandKind.rank}"}")
                 setCreativeTab { Main.creativeTab }
                 setCustomModelResourceLocation()
                 onInit {
-                    val durability = (1..tier).fold(16) { a, _ -> a * 2 }
+                    val durability = (1..wandKind.tier).fold(16) { a, _ -> a * 2 }
                     item.maxDamage = durability - 1
-                    item.tier = tier
+                    item.tier = wandKind.tier
                 }
                 onCreateItemStack {
-                    OreDictionary.registerOre(type.oreName, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE))
-                    additionalOreNames.forEach { OreDictionary.registerOre(it, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE)) }
+                    OreDictionary.registerOre(wandKind.type.oreName, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE))
+                    wandKind.type.additionalOreNames.forEach { OreDictionary.registerOre(it, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE)) }
                 }
             }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, registryName)) {
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, wandKind.registryName)) {
                 jsonElement(
                     "parent" to "item/handheld".jsonElement,
                     "textures" to jsonElement(
-                        "layer0" to "miragefairy2019:items/fairy_wand_rod_$tier".jsonElement,
-                        "layer1" to "miragefairy2019:items/${type.registryName}_fairy_wand".jsonElement
+                        "layer0" to "miragefairy2019:items/fairy_wand_rod_${wandKind.tier}".jsonElement,
+                        "layer1" to "miragefairy2019:items/${wandKind.type.registryName}_fairy_wand".jsonElement
                     )
                 )
             }
             onMakeLang {
                 enJa(
-                    "item.fairyWand${type.registryName.toUpperCamelCase()}${if (number == 1) "" else "$number"}.name",
-                    "$englishType Wand${if (number == 1) "" else " ${number.roman}"}",
-                    "${japaneseType}のワンド${if (number == 1) "" else " ${number.roman}"}"
+                    "item.fairyWand${wandKind.type.registryName.toUpperCamelCase()}${if (wandKind.rank == 1) "" else "${wandKind.rank}"}.name",
+                    "${wandKind.type.englishName} Wand${if (wandKind.rank == 1) "" else " ${wandKind.rank.roman}"}",
+                    "${wandKind.type.japaneseName}のワンド${if (wandKind.rank == 1) "" else " ${wandKind.rank.roman}"}"
                 )
             }
         }
-        (1..5).forEach { fairyWand(it, CRAFTING, "Crafting", "技巧", it, { ItemFairyWand() }) }
-        (1..5).forEach { fairyWand(it, HYDRATING, "Hydrating", "加水", it, { ItemFairyWand() }, "container1000Water") }
-        (1..4).forEach { fairyWand(it + 1, MELTING, "Melting", "紅蓮", it, { ItemFairyWand() }) }
-        (1..4).forEach { fairyWand(it + 1, BREAKING, "Breaking", "破砕", it, { ItemFairyWand() }) }
-        (1..4).forEach { fairyWand(it + 1, FREEZING, "Freezing", "氷晶", it, { ItemFairyWand() }) }
-        (1..3).forEach { fairyWand(it + 2, POLISHING, "Polishing", "珠玉", it, { ItemFairyWand() }) }
-        (1..3).forEach { fairyWand(it + 2, SUMMONING, "Wizard's", "冥王", it, { ItemFairyWand() }) }
-        (1..2).forEach { fairyWand(it + 3, DISTORTION, "Distortion", "歪曲", it, { ItemFairyWand() }) }
-        (1..2).forEach { fairyWand(it + 3, FUSION, "Fusion", "融合", it, { ItemFairyWand() }) }
 
         onMakeLang {
             WandKind.values().forEach { wandKind ->
