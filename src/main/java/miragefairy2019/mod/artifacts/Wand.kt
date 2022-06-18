@@ -329,7 +329,7 @@ object Wand {
     }
 }
 
-open class ItemFairyWand : Item(), IFairyStickCraftItem {
+class ItemFairyWand : Item(), IFairyStickCraftItem {
     var tier = 0
 
     init {
