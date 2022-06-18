@@ -29,6 +29,15 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.artifacts.WandType.BREAKING
+import miragefairy2019.mod.artifacts.WandType.CRAFTING
+import miragefairy2019.mod.artifacts.WandType.DISTORTION
+import miragefairy2019.mod.artifacts.WandType.FREEZING
+import miragefairy2019.mod.artifacts.WandType.FUSION
+import miragefairy2019.mod.artifacts.WandType.HYDRATING
+import miragefairy2019.mod.artifacts.WandType.MELTING
+import miragefairy2019.mod.artifacts.WandType.POLISHING
+import miragefairy2019.mod.artifacts.WandType.SUMMONING
 import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionReplaceBlock
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
@@ -42,6 +51,7 @@ import miragefairy2019.mod.systems.addFairyStickCraftCoolTime
 import mirrg.kotlin.formatAs
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
+import mirrg.kotlin.toLowerCamelCase
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
@@ -80,6 +90,50 @@ enum class WandType(val registryName: String) {
     val ingredient get() = OreIngredientComplex(oreName)
     val ingredientData get() = DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = oreName)
 }
+
+@Suppress("EnumEntryName")
+enum class WandKind(
+    val parent: WandKind?,
+    val type: WandType,
+    val rank: Int,
+    val englishPoem: String,
+    val japanesePoem: String
+) {
+    cr1(null, CRAFTING, 1, "", "スフィアから聞こえる、妖精の声"),
+    cr2(cr1, CRAFTING, 2, "", "靴を作ってくれる妖精さん"),
+    cr3(cr2, CRAFTING, 3, "", "魔法の鍋掴み"),
+    cr4(cr3, CRAFTING, 4, "", "妖精の3Dプリンター"),
+    cr5(cr4, CRAFTING, 5, "", "これで料理をすれば手が油まみれにならずに済みます"),
+    hy1(null, HYDRATING, 1, "", "物質生成の初歩"),
+    hy2(hy1, HYDRATING, 2, "", "先端のこれはぷにぷにしている"),
+    hy3(hy2, HYDRATING, 3, "", "直射日光を避けて保管してください。"),
+    hy4(hy3, HYDRATING, 4, "", "マッサージに使うと気持ちよい"),
+    hy5(hy4, HYDRATING, 5, "", "なぜか周囲の空気の湿度が下がる"),
+    me1(null, MELTING, 1, "", "金属を溶かすほどの情熱"),
+    me2(me1, MELTING, 2, "", "高温注意！"),
+    me3(me2, MELTING, 3, "", "かまどの火とは何かが違う"),
+    me4(me3, MELTING, 4, "", "意外とこれ、触っても熱くないんです"),
+    br1(null, BREAKING, 1, "", "これで釘を打たないように"),
+    br2(br1, BREAKING, 2, "", "振ると衝撃波が迸る"),
+    br3(br2, BREAKING, 3, "", "実はガラスより脆い"),
+    br4(br3, BREAKING, 4, "", "分子間の結合を弱める作用"),
+    fr1(null, FREEZING, 1, "", "料理に大活躍"),
+    fr2(fr1, FREEZING, 2, "", "物体のフォノンを消滅させる"),
+    fr3(fr2, FREEZING, 3, "", "お手軽反エントロピー"),
+    fr4(fr3, FREEZING, 4, "", "消えた熱エネルギーはどこへ？"),
+    po1(null, POLISHING, 1, "", "究極に手先の器用な妖精さん"),
+    po2(po1, POLISHING, 2, "", "分子のセーター"),
+    po3(po2, POLISHING, 3, "", "2個の宝石をくっつける。いつの間にか結晶の向きが揃っている"),
+    su1(null, SUMMONING, 1, "The magic of the contract: thia ri me sorie ge Fairy'a zi miyukto", "契約の魔法、ｼｱ ﾘ ﾒ ｿｰﾘｴ ｹﾞ ﾌｧｲﾘｱ ｼﾞ ﾐﾕｸﾄ"),
+    su2(su1, SUMMONING, 2, "The magic of feeding: me Fairy'a ri me Crystal'a zi karto", "給餌の魔法、ﾒ ﾌｧｲﾘｱ ﾘ ﾒ ﾂﾘｽﾀｰﾗ ｼﾞ ｶﾙﾄ"),
+    su3(su2, SUMMONING, 3, "The magic of return: me Fairy'a ri haito", "帰還の魔法、ﾒ ﾌｧｲﾘｱ ﾘ ﾊｲﾄ"),
+    di1(null, DISTORTION, 1, "", "空間がねじれている"),
+    di2(di1, DISTORTION, 2, "", "エンダーチェストにエンダーチェストを入れると…？"),
+    fu1(null, FUSION, 1, "", "4次元折り紙"),
+    fu2(fu1, FUSION, 2, "", "いしのなかにいる"),
+}
+
+val WandKind.unlocalizedName get() = "fairy_wand_${type.registryName}${if (rank == 1) "" else "$rank"}".toLowerCamelCase()
 
 object Wand {
     val module = module {
@@ -128,38 +182,9 @@ object Wand {
         (1..2).forEach { fairyWand(it + 3, WandType.FUSION, "Fusion", "融合", it, { ItemFairyWand() }) }
 
         onMakeLang {
-            enJa("item.fairyWandCrafting.poem", "", "スフィアから聞こえる、妖精の声")
-            enJa("item.fairyWandCrafting2.poem", "", "靴を作ってくれる妖精さん")
-            enJa("item.fairyWandCrafting3.poem", "", "魔法の鍋掴み")
-            enJa("item.fairyWandCrafting4.poem", "", "妖精の3Dプリンター")
-            enJa("item.fairyWandCrafting5.poem", "", "これで料理をすれば手が油まみれにならずに済みます")
-            enJa("item.fairyWandHydrating.poem", "", "物質生成の初歩")
-            enJa("item.fairyWandHydrating2.poem", "", "先端のこれはぷにぷにしている")
-            enJa("item.fairyWandHydrating3.poem", "", "直射日光を避けて保管してください。")
-            enJa("item.fairyWandHydrating4.poem", "", "マッサージに使うと気持ちよい")
-            enJa("item.fairyWandHydrating5.poem", "", "なぜか周囲の空気の湿度が下がる")
-            enJa("item.fairyWandMelting.poem", "", "金属を溶かすほどの情熱")
-            enJa("item.fairyWandMelting2.poem", "", "高温注意！")
-            enJa("item.fairyWandMelting3.poem", "", "かまどの火とは何かが違う")
-            enJa("item.fairyWandMelting4.poem", "", "意外とこれ、触っても熱くないんです")
-            enJa("item.fairyWandBreaking.poem", "", "これで釘を打たないように")
-            enJa("item.fairyWandBreaking2.poem", "", "振ると衝撃波が迸る")
-            enJa("item.fairyWandBreaking3.poem", "", "実はガラスより脆い")
-            enJa("item.fairyWandBreaking4.poem", "", "分子間の結合を弱める作用")
-            enJa("item.fairyWandFreezing.poem", "", "料理に大活躍")
-            enJa("item.fairyWandFreezing2.poem", "", "物体のフォノンを消滅させる")
-            enJa("item.fairyWandFreezing3.poem", "", "お手軽反エントロピー")
-            enJa("item.fairyWandFreezing4.poem", "", "消えた熱エネルギーはどこへ？")
-            enJa("item.fairyWandPolishing.poem", "", "究極に手先の器用な妖精さん")
-            enJa("item.fairyWandPolishing2.poem", "", "分子のセーター")
-            enJa("item.fairyWandPolishing3.poem", "", "2個の宝石をくっつける。いつの間にか結晶の向きが揃っている")
-            enJa("item.fairyWandSummoning.poem", "The magic of the contract: thia ri me sorie ge Fairy'a zi miyukto", "契約の魔法、ｼｱ ﾘ ﾒ ｿｰﾘｴ ｹﾞ ﾌｧｲﾘｱ ｼﾞ ﾐﾕｸﾄ")
-            enJa("item.fairyWandSummoning2.poem", "The magic of feeding: me Fairy'a ri me Crystal'a zi karto", "給餌の魔法、ﾒ ﾌｧｲﾘｱ ﾘ ﾒ ﾂﾘｽﾀｰﾗ ｼﾞ ｶﾙﾄ")
-            enJa("item.fairyWandSummoning3.poem", "The magic of return: me Fairy'a ri haito", "帰還の魔法、ﾒ ﾌｧｲﾘｱ ﾘ ﾊｲﾄ")
-            enJa("item.fairyWandDistortion.poem", "", "空間がねじれている")
-            enJa("item.fairyWandDistortion2.poem", "", "エンダーチェストにエンダーチェストを入れると…？")
-            enJa("item.fairyWandFusion.poem", "", "4次元折り紙")
-            enJa("item.fairyWandFusion2.poem", "", "いしのなかにいる")
+            WandKind.values().forEach { wandKind ->
+                enJa("item.${wandKind.unlocalizedName}.poem", wandKind.englishPoem, wandKind.japanesePoem)
+            }
         }
 
         onMakeLang {
