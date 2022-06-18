@@ -132,7 +132,8 @@ enum class WandKind(
     FU2(FU1, FUSION, 2, "", "いしのなかにいる"),
 }
 
-val WandKind.unlocalizedName get() = "fairy_wand_${type.registryName}${if (rank == 1) "" else "$rank"}".toLowerCamelCase()
+val WandKind.registryName get() = "${type.registryName}_fairy_wand${if (rank == 1) "" else "_$rank"}"
+val WandKind.unlocalizedName get() = "fairy_wand_${type.registryName}${if (rank == 1) "" else "_$rank"}".toLowerCamelCase()
 
 object Wand {
     val module = module {
@@ -225,71 +226,36 @@ object Wand {
             )
 
             // 各種
-            class Achievement(val registerName: String, val unlocalizedName: String, val parent: Achievement? = null) {
-                init {
-                    dirBase.resolve("assets/miragefairy2019/advancements/wand/$registerName.json").place(
-                        jsonElement(
-                            "display" to jsonElement(
-                                "icon" to jsonElement(
-                                    "item" to "miragefairy2019:$registerName".jsonElement
-                                ),
-                                "title" to jsonElement(
-                                    "translate" to "item.$unlocalizedName.name".jsonElement
-                                ),
-                                "description" to jsonElement(
-                                    "translate" to "advancements.miragefairy2019.wand.all.description".jsonElement
-                                )
+            WandKind.values().forEach { wandKind ->
+                dirBase.resolve("assets/miragefairy2019/advancements/wand/${wandKind.registryName}.json").place(
+                    jsonElement(
+                        "display" to jsonElement(
+                            "icon" to jsonElement(
+                                "item" to "miragefairy2019:${wandKind.registryName}".jsonElement
                             ),
-                            "parent" to "miragefairy2019:wand/${parent?.registerName ?: "root"}".jsonElement,
-                            "criteria" to jsonElement(
-                                "main" to jsonElement(
-                                    "trigger" to "minecraft:inventory_changed".jsonElement,
-                                    "conditions" to jsonElement(
-                                        "items" to jsonElement(
-                                            jsonElement(
-                                                "item" to "miragefairy2019:$registerName".jsonElement
-                                            )
+                            "title" to jsonElement(
+                                "translate" to "item.${wandKind.unlocalizedName}.name".jsonElement
+                            ),
+                            "description" to jsonElement(
+                                "translate" to "advancements.miragefairy2019.wand.all.description".jsonElement
+                            )
+                        ),
+                        "parent" to "miragefairy2019:wand/${wandKind.parent?.registryName ?: "root"}".jsonElement,
+                        "criteria" to jsonElement(
+                            "main" to jsonElement(
+                                "trigger" to "minecraft:inventory_changed".jsonElement,
+                                "conditions" to jsonElement(
+                                    "items" to jsonElement(
+                                        jsonElement(
+                                            "item" to "miragefairy2019:${wandKind.registryName}".jsonElement
                                         )
                                     )
                                 )
                             )
                         )
                     )
-                }
+                )
             }
-
-            val crafting_fairy_wand = Achievement("crafting_fairy_wand", "fairyWandCrafting", null)
-            val crafting_fairy_wand_2 = Achievement("crafting_fairy_wand_2", "fairyWandCrafting2", crafting_fairy_wand)
-            val crafting_fairy_wand_3 = Achievement("crafting_fairy_wand_3", "fairyWandCrafting3", crafting_fairy_wand_2)
-            val crafting_fairy_wand_4 = Achievement("crafting_fairy_wand_4", "fairyWandCrafting4", crafting_fairy_wand_3)
-            val crafting_fairy_wand_5 = Achievement("crafting_fairy_wand_5", "fairyWandCrafting5", crafting_fairy_wand_4)
-            val hydrating_fairy_wand = Achievement("hydrating_fairy_wand", "fairyWandHydrating", null)
-            val hydrating_fairy_wand_2 = Achievement("hydrating_fairy_wand_2", "fairyWandHydrating2", hydrating_fairy_wand)
-            val hydrating_fairy_wand_3 = Achievement("hydrating_fairy_wand_3", "fairyWandHydrating3", hydrating_fairy_wand_2)
-            val hydrating_fairy_wand_4 = Achievement("hydrating_fairy_wand_4", "fairyWandHydrating4", hydrating_fairy_wand_3)
-            val hydrating_fairy_wand_5 = Achievement("hydrating_fairy_wand_5", "fairyWandHydrating5", hydrating_fairy_wand_4)
-            val melting_fairy_wand = Achievement("melting_fairy_wand", "fairyWandMelting", null)
-            val melting_fairy_wand_2 = Achievement("melting_fairy_wand_2", "fairyWandMelting2", melting_fairy_wand)
-            val melting_fairy_wand_3 = Achievement("melting_fairy_wand_3", "fairyWandMelting3", melting_fairy_wand_2)
-            val melting_fairy_wand_4 = Achievement("melting_fairy_wand_4", "fairyWandMelting4", melting_fairy_wand_3)
-            val breaking_fairy_wand = Achievement("breaking_fairy_wand", "fairyWandBreaking", null)
-            val breaking_fairy_wand_2 = Achievement("breaking_fairy_wand_2", "fairyWandBreaking2", breaking_fairy_wand)
-            val breaking_fairy_wand_3 = Achievement("breaking_fairy_wand_3", "fairyWandBreaking3", breaking_fairy_wand_2)
-            val breaking_fairy_wand_4 = Achievement("breaking_fairy_wand_4", "fairyWandBreaking4", breaking_fairy_wand_3)
-            val freezing_fairy_wand = Achievement("freezing_fairy_wand", "fairyWandFreezing", null)
-            val freezing_fairy_wand_2 = Achievement("freezing_fairy_wand_2", "fairyWandFreezing2", freezing_fairy_wand)
-            val freezing_fairy_wand_3 = Achievement("freezing_fairy_wand_3", "fairyWandFreezing3", freezing_fairy_wand_2)
-            val freezing_fairy_wand_4 = Achievement("freezing_fairy_wand_4", "fairyWandFreezing4", freezing_fairy_wand_3)
-            val polishing_fairy_wand = Achievement("polishing_fairy_wand", "fairyWandPolishing", null)
-            val polishing_fairy_wand_2 = Achievement("polishing_fairy_wand_2", "fairyWandPolishing2", polishing_fairy_wand)
-            val polishing_fairy_wand_3 = Achievement("polishing_fairy_wand_3", "fairyWandPolishing3", polishing_fairy_wand_2)
-            val summoning_fairy_wand = Achievement("summoning_fairy_wand", "fairyWandSummoning", null)
-            val summoning_fairy_wand_2 = Achievement("summoning_fairy_wand_2", "fairyWandSummoning2", summoning_fairy_wand)
-            val summoning_fairy_wand_3 = Achievement("summoning_fairy_wand_3", "fairyWandSummoning3", summoning_fairy_wand_2)
-            val distortion_fairy_wand = Achievement("distortion_fairy_wand", "fairyWandDistortion", null)
-            val distortion_fairy_wand_2 = Achievement("distortion_fairy_wand_2", "fairyWandDistortion2", distortion_fairy_wand)
-            val fusion_fairy_wand = Achievement("fusion_fairy_wand", "fairyWandFusion", null)
-            val fusion_fairy_wand_2 = Achievement("fusion_fairy_wand_2", "fairyWandFusion2", fusion_fairy_wand)
 
         }
 
