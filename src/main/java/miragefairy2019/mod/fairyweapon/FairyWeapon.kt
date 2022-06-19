@@ -591,46 +591,6 @@ object FairyWeapon {
     @Suppress("UNUSED_VARIABLE")
     val module = module {
 
-        // アイテム登録
-        FairyWeaponKind.values().forEach { fairyWeaponKind ->
-            item(fairyWeaponKind.itemCreator, fairyWeaponKind.registryName) {
-                setUnlocalizedName(fairyWeaponKind.unlocalizedName)
-                setCreativeTab { creativeTab }
-                onRegisterItem {
-                    if (side.isClient) {
-                        val modelResourceLocation = ModelResourceLocation(item.registryName!!, "normal")
-                        MinecraftForge.EVENT_BUS.register(object : Any() {
-                            @SubscribeEvent
-                            fun accept(event: ModelBakeEvent) {
-                                event.modelRegistry.putObject(modelResourceLocation, BakedModelBuiltinWrapper(event.modelRegistry.getObject(modelResourceLocation)!!))
-                            }
-                        })
-                        ModelLoader.setCustomModelResourceLocation(item, 0, modelResourceLocation)
-                    }
-                }
-                onInit {
-                    val durability = (1..fairyWeaponKind.tier).fold(16) { a, _ -> a * 2 }
-                    item.maxDamage = durability - 1
-                    item.tier = fairyWeaponKind.tier
-                }
-                onCreateItemStack {
-                    item.manualRepairRequirements += fairyWeaponKind.manualRepairIngredients
-                }
-            }
-        }
-
-        // アイテムモデル生成
-        FairyWeaponKind.values().forEach { fairyWeaponKind ->
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, fairyWeaponKind.registryName)) {
-                jsonElement(
-                    "parent" to "item/handheld".jsonElement,
-                    "textures" to jsonElement(
-                        "layer0" to "miragefairy2019:items/${fairyWeaponKind.registryName}".jsonElement
-                    )
-                )
-            }
-        }
-
         // 翻訳生成
         onMakeLang {
             enJa("miragefairy2019.magic.${MagicMessage.NO_FAIRY.unlocalizedName}.text", "You don't have a fairy", "妖精を所持していません")
@@ -639,17 +599,6 @@ object FairyWeapon {
             enJa("miragefairy2019.magic.${MagicMessage.COOL_TIME.unlocalizedName}.text", "Cool time remains", "クールタイムが残っています")
             enJa("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器")
             enJa("advancements.miragefairy2019.fairy_weapon.root.description", "Fairy Weapon", "妖精の力を何かに使えないだろうか")
-            FairyWeaponKind.values().forEach { fairyWeaponKind ->
-                enJa("item.${fairyWeaponKind.unlocalizedName}.name", fairyWeaponKind.displayName.english, fairyWeaponKind.displayName.japanese)
-                enJa("item.${fairyWeaponKind.unlocalizedName}.poem", fairyWeaponKind.poem.english, fairyWeaponKind.poem.japanese)
-                if (fairyWeaponKind.author != null) enJa("item.${fairyWeaponKind.unlocalizedName}.author", fairyWeaponKind.author.english, fairyWeaponKind.author.japanese)
-                enJa("item.${fairyWeaponKind.unlocalizedName}.recipe", fairyWeaponKind.advancementText.english, fairyWeaponKind.advancementText.japanese)
-            }
-        }
-
-        // レシピ生成
-        FairyWeaponKind.values().forEach { fairyWeaponKind ->
-            fairyWeaponKind.initializer(this)
         }
 
         // 実績生成
@@ -688,9 +637,63 @@ object FairyWeapon {
                     )
                 )
             )
+        }
 
-            // 進捗
-            FairyWeaponKind.values().forEach { fairyWeaponKind ->
+        // 個別
+        FairyWeaponKind.values().forEach { fairyWeaponKind ->
+
+            // アイテム登録
+            item(fairyWeaponKind.itemCreator, fairyWeaponKind.registryName) {
+                setUnlocalizedName(fairyWeaponKind.unlocalizedName)
+                setCreativeTab { creativeTab }
+                onRegisterItem {
+                    if (side.isClient) {
+                        val modelResourceLocation = ModelResourceLocation(item.registryName!!, "normal")
+                        MinecraftForge.EVENT_BUS.register(object : Any() {
+                            @SubscribeEvent
+                            fun accept(event: ModelBakeEvent) {
+                                event.modelRegistry.putObject(modelResourceLocation, BakedModelBuiltinWrapper(event.modelRegistry.getObject(modelResourceLocation)!!))
+                            }
+                        })
+                        ModelLoader.setCustomModelResourceLocation(item, 0, modelResourceLocation)
+                    }
+                }
+                onInit {
+                    val durability = (1..fairyWeaponKind.tier).fold(16) { a, _ -> a * 2 }
+                    item.maxDamage = durability - 1
+                    item.tier = fairyWeaponKind.tier
+                }
+                onCreateItemStack {
+                    item.manualRepairRequirements += fairyWeaponKind.manualRepairIngredients
+                }
+            }
+
+            // アイテムモデル生成
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, fairyWeaponKind.registryName)) {
+                jsonElement(
+                    "parent" to "item/handheld".jsonElement,
+                    "textures" to jsonElement(
+                        "layer0" to "miragefairy2019:items/${fairyWeaponKind.registryName}".jsonElement
+                    )
+                )
+            }
+
+            // 翻訳生成
+            onMakeLang {
+                enJa("item.${fairyWeaponKind.unlocalizedName}.name", fairyWeaponKind.displayName.english, fairyWeaponKind.displayName.japanese)
+                enJa("item.${fairyWeaponKind.unlocalizedName}.poem", fairyWeaponKind.poem.english, fairyWeaponKind.poem.japanese)
+                if (fairyWeaponKind.author != null) enJa("item.${fairyWeaponKind.unlocalizedName}.author", fairyWeaponKind.author.english, fairyWeaponKind.author.japanese)
+                enJa("item.${fairyWeaponKind.unlocalizedName}.recipe", fairyWeaponKind.advancementText.english, fairyWeaponKind.advancementText.japanese)
+            }
+
+            // レシピ生成
+            fairyWeaponKind.initializer(this)
+
+            // 実績生成
+            onMakeResource {
+                fun place(name: String, data: JsonElement) {
+                    dirBase.resolve("assets/miragefairy2019/advancements/fairy_weapon/$name.json").place(data)
+                }
                 place(fairyWeaponKind.registryName, jsonElement(
                     "display" to jsonElementNotNull(
                         "icon" to jsonElement(
