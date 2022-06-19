@@ -52,7 +52,7 @@ object Pot {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "pot")) { generated }
+        makeItemModel("pot") { generated }
         makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "pot"),
             DataShapedRecipe(
@@ -110,11 +110,11 @@ object Pot {
                 if (Main.side.isClient) item.setCustomModelResourceLocations()
             }
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_water_pot")) { generated }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_extract_pot")) { generated }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_oil_pot")) { generated }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "water_pot")) { generated }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "lava_pot")) { generated }
+        makeItemModel("miragium_water_pot") { generated }
+        makeItemModel("mirage_flower_extract_pot") { generated }
+        makeItemModel("mirage_flower_oil_pot") { generated }
+        makeItemModel("water_pot") { generated }
+        makeItemModel("lava_pot") { generated }
 
 
         // 詰め替えレシピ

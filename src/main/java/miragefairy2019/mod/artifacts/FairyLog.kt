@@ -87,7 +87,7 @@ object FairyLog {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation(variant = "facing=north,variant=oak")
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_log")) { block }
+        makeItemModel("fairy_log") { block }
 
         // 地形生成
         onHookDecorator {

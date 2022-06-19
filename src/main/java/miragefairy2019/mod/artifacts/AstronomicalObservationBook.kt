@@ -58,7 +58,7 @@ object AstronomicalObservationBook {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "astronomical_observation_book")) { generated }
+        makeItemModel("astronomical_observation_book") { generated }
     }
 }
 

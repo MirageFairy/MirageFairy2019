@@ -109,7 +109,7 @@ object MirageFlower {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_seeds")) { generated }
+        makeItemModel("mirage_flower_seeds") { generated }
 
         // 地形生成
         onHookDecorator {

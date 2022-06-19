@@ -667,7 +667,7 @@ object FairyWeapon {
             }
 
             // アイテムモデル生成
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, fairyWeaponKind.registryName)) {
+            makeItemModel(fairyWeaponKind.registryName) {
                 jsonElement(
                     "parent" to "item/handheld".jsonElement,
                     "textures" to jsonElement(

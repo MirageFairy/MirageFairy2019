@@ -121,21 +121,21 @@ object CompressedMaterials {
 
         // アイテムモデルの生成
         run {
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "apatite_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fluorite_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "sulfur_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "cinnabar_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "moonstone_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "magnetite_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "pyrope_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "smithsonite_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "charcoal_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_leaf_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_ingot_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_dust_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "nephrite_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "topaz_block")) { block }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "tourmaline_block")) { block }
+            makeItemModel("apatite_block") { block }
+            makeItemModel("fluorite_block") { block }
+            makeItemModel("sulfur_block") { block }
+            makeItemModel("cinnabar_block") { block }
+            makeItemModel("moonstone_block") { block }
+            makeItemModel("magnetite_block") { block }
+            makeItemModel("pyrope_block") { block }
+            makeItemModel("smithsonite_block") { block }
+            makeItemModel("charcoal_block") { block }
+            makeItemModel("mirage_flower_leaf_block") { block }
+            makeItemModel("miragium_ingot_block") { block }
+            makeItemModel("miragium_dust_block") { block }
+            makeItemModel("nephrite_block") { block }
+            makeItemModel("topaz_block") { block }
+            makeItemModel("tourmaline_block") { block }
         }
 
         // レシピの生成

@@ -55,7 +55,7 @@ object Sphere {
             }
             registerItemColorHandler()
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "sphere")) {
+        makeItemModel("sphere") {
             jsonElement(
                 "parent" to "item/generated".jsonElement,
                 "textures" to jsonElement(

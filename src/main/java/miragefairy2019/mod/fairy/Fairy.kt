@@ -105,7 +105,7 @@ object Fairy {
                 registerItemColorHandler()
             }
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy")) {
+        makeItemModel("fairy") {
             jsonElement(
                 "parent" to "item/generated".jsonElement,
                 "textures" to jsonElement(

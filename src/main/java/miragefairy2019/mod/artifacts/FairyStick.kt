@@ -70,7 +70,7 @@ object FairyStick {
             setCustomModelResourceLocation()
             addOreName("mirageFairyStick")
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_stick")) { handheld }
+        makeItemModel("fairy_stick") { handheld }
 
         // レシピ登録
         onAddRecipe {

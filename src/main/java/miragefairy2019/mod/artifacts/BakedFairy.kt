@@ -90,7 +90,7 @@ object BakedFairy {
             }
             registerItemColorHandler()
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "baked_fairy")) {
+        makeItemModel("baked_fairy") {
             jsonElement(
                 "parent" to "item/generated".jsonElement,
                 "textures" to jsonElement(

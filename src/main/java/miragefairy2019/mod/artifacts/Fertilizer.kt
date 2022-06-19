@@ -53,7 +53,7 @@ object Fertilizer {
                 })
             }
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fertilizer")) { generated }
+        makeItemModel("fertilizer") { generated }
         makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "fertilizer"),
             DataShapelessRecipe(

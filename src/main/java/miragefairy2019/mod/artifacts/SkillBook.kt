@@ -30,7 +30,7 @@ object SkillBook {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "skill_book")) { generated }
+        makeItemModel("skill_book") { generated }
     }
 }
 

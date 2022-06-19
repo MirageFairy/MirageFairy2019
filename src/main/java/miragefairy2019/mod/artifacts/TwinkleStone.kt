@@ -88,7 +88,7 @@ object TwinkleStone {
             "silver", "cyan", "purple", "blue",
             "brown", "green", "red", "black"
         ).forEach {
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "${it}_twinkle_stone")) { block }
+            makeItemModel("${it}_twinkle_stone") { block }
         }
     }
 }

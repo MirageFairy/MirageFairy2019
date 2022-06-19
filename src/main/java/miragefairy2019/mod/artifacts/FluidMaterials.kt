@@ -58,7 +58,7 @@ object FluidMaterials {
         itemFluidMiragiumWater = item({ ItemBlock(blockFluidMiragiumWater()) }, "miragium_water") {
             setCustomModelResourceLocation()
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_water")) { fluid }
+        makeItemModel("miragium_water") { fluid }
 
 
         // ミラージュエキス
@@ -73,7 +73,7 @@ object FluidMaterials {
         itemFluidMirageFlowerExtract = item({ ItemBlock(blockFluidMirageFlowerExtract()) }, "mirage_flower_extract") {
             setCustomModelResourceLocation()
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_extract")) { fluid }
+        makeItemModel("mirage_flower_extract") { fluid }
 
 
         // ミラージュオイル
@@ -88,7 +88,7 @@ object FluidMaterials {
         itemFluidMirageFlowerOil = item({ ItemBlock(blockFluidMirageFlowerOil()) }, "mirage_flower_oil") {
             setCustomModelResourceLocation()
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_oil")) { fluid }
+        makeItemModel("mirage_flower_oil") { fluid }
 
     }
 }

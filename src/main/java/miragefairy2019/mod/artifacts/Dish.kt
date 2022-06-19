@@ -108,7 +108,7 @@ object Dish {
         itemDish = item({ ItemBlock(blockDish()) }, "dish") {
             setCustomModelResourceLocation()
         }
-        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "dish")) { block }
+        makeItemModel("dish") { block }
         tileEntity("dish", TileEntityDish::class.java)
         tileEntityRenderer(TileEntityDish::class.java, { TileEntityRendererDish() })
     }

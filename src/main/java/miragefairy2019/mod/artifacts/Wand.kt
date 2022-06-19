@@ -179,7 +179,7 @@ object Wand {
 
         // アイテムモデル生成
         WandKind.values().forEach { wandKind ->
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, wandKind.registryName)) {
+            makeItemModel(wandKind.registryName) {
                 jsonElement(
                     "parent" to "item/handheld".jsonElement,
                     "textures" to jsonElement(
