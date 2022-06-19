@@ -29,7 +29,6 @@ import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main.creativeTab
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
@@ -726,14 +725,4 @@ object FairyWeapon {
         }
 
     }
-}
-
-enum class MagicMessage(val unlocalizedName: String) {
-    NO_FAIRY("noFairy"),
-    INSUFFICIENT_DURABILITY("insufficientDurability"),
-    NO_TARGET("noTarget"),
-    COOL_TIME("coolTime"),
-    ;
-
-    val displayText get() = textComponent { translate("miragefairy2019.magic.$unlocalizedName.text") }
 }

@@ -9,6 +9,7 @@ import miragefairy2019.lib.sphere
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.FairyMagicDamageSource
 import miragefairy2019.mod.fairyweapon.MagicMessage
+import miragefairy2019.mod.fairyweapon.displayText
 import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler

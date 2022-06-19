@@ -21,6 +21,7 @@ import miragefairy2019.libkt.norm1
 import miragefairy2019.mod.artifacts.FairyLog
 import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.breakBlock
+import miragefairy2019.mod.fairyweapon.displayText
 import miragefairy2019.mod.fairyweapon.extendSearch
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler

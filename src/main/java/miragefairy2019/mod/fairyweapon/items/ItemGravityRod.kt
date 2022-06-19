@@ -8,6 +8,7 @@ import miragefairy2019.lib.position
 import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.MagicMessage
+import miragefairy2019.mod.fairyweapon.displayText
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.integer
