@@ -34,7 +34,7 @@ import net.minecraftforge.oredict.OreDictionary
 
 fun module(block: ModInitializer.() -> Unit) = block
 
-class ModInitializer(val usePreReleaseFeatures: Boolean) {
+class ModInitializer(val modId: String, val usePreReleaseFeatures: Boolean) {
     val modVersion = run {
         val version = ModMirageFairy2019.VERSION
         val serverVersion = version.split(".").getOrNull(2)?.toInt()

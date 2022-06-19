@@ -8,7 +8,7 @@ import java.io.File
 object MainMakeResource {
     @JvmStatic
     fun main(args: Array<String>) {
-        val modInitializer = ModInitializer(true)
+        val modInitializer = ModInitializer(ModMirageFairy2019.MODID, true)
         modules(modInitializer)
 
         modInitializer.onMakeResource(ResourceMaker(File("src/main/resources")))

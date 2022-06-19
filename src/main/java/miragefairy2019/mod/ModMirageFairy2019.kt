@@ -31,7 +31,7 @@ class ModMirageFairy2019 {
     }
 
 
-    private var modInitializer = ModInitializer(System.getProperty("miragefairy2019.usePreReleaseFeatures")?.toBoolean() ?: true)
+    private var modInitializer = ModInitializer(MODID, System.getProperty("miragefairy2019.usePreReleaseFeatures")?.toBoolean() ?: true)
 
     init {
         modules(modInitializer)
