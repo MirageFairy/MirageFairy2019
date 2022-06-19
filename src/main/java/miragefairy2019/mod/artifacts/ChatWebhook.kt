@@ -6,10 +6,10 @@ import miragefairy2019.lib.readFromNBT
 import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
-import miragefairy2019.libkt.DataOreIngredient
-import miragefairy2019.libkt.DataResult
-import miragefairy2019.libkt.DataShapedRecipe
-import miragefairy2019.libkt.DataSimpleIngredient
+import miragefairy2019.resourcemaker.DataOreIngredient
+import miragefairy2019.resourcemaker.DataResult
+import miragefairy2019.resourcemaker.DataShapedRecipe
+import miragefairy2019.resourcemaker.DataSimpleIngredient
 import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
@@ -26,7 +26,7 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
-import miragefairy2019.libkt.makeRecipe
+import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.setCreativeTab

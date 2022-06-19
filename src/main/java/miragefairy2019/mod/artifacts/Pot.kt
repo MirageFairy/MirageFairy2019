@@ -1,12 +1,12 @@
 package miragefairy2019.mod.artifacts
 
 import miragefairy2019.libkt.CapabilityProviderAdapter
-import miragefairy2019.libkt.DataIngredient
-import miragefairy2019.libkt.DataOreIngredient
-import miragefairy2019.libkt.DataResult
-import miragefairy2019.libkt.DataShapedRecipe
-import miragefairy2019.libkt.DataShapelessRecipe
-import miragefairy2019.libkt.DataSimpleIngredient
+import miragefairy2019.resourcemaker.DataIngredient
+import miragefairy2019.resourcemaker.DataOreIngredient
+import miragefairy2019.resourcemaker.DataResult
+import miragefairy2019.resourcemaker.DataShapedRecipe
+import miragefairy2019.resourcemaker.DataShapelessRecipe
+import miragefairy2019.resourcemaker.DataSimpleIngredient
 import miragefairy2019.libkt.ItemMultiMaterial
 import miragefairy2019.libkt.ItemVariantMaterial
 import miragefairy2019.libkt.ResourceName
@@ -15,7 +15,7 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeGeneratedItemModel
-import miragefairy2019.libkt.makeRecipe
+import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation

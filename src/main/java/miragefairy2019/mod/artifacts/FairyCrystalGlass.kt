@@ -4,10 +4,10 @@ import miragefairy2019.libkt.BlockInitializer
 import miragefairy2019.libkt.DataBlockState
 import miragefairy2019.libkt.DataBlockStates
 import miragefairy2019.libkt.DataItemModel
-import miragefairy2019.libkt.DataOreIngredient
+import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.libkt.DataPart
-import miragefairy2019.libkt.DataResult
-import miragefairy2019.libkt.DataShapelessRecipe
+import miragefairy2019.resourcemaker.DataResult
+import miragefairy2019.resourcemaker.DataShapelessRecipe
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
@@ -16,7 +16,7 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockStates
 import miragefairy2019.libkt.makeItemModel
-import miragefairy2019.libkt.makeRecipe
+import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation

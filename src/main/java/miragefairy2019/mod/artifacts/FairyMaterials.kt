@@ -3,11 +3,11 @@ package miragefairy2019.mod.artifacts
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.fairyCentrifugeCraftHandler
-import miragefairy2019.libkt.DataOreIngredient
-import miragefairy2019.libkt.DataResult
-import miragefairy2019.libkt.DataShapedRecipe
-import miragefairy2019.libkt.DataShapelessRecipe
-import miragefairy2019.libkt.DataSimpleIngredient
+import miragefairy2019.resourcemaker.DataOreIngredient
+import miragefairy2019.resourcemaker.DataResult
+import miragefairy2019.resourcemaker.DataShapedRecipe
+import miragefairy2019.resourcemaker.DataShapelessRecipe
+import miragefairy2019.resourcemaker.DataSimpleIngredient
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemMultiMaterial
@@ -25,7 +25,7 @@ import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
 import miragefairy2019.libkt.makeGeneratedItemModel
 import miragefairy2019.libkt.makeHandheldItemModel
-import miragefairy2019.libkt.makeRecipe
+import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.oreIngredient
