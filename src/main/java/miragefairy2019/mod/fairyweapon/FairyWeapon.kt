@@ -89,6 +89,15 @@ enum class FairyWeaponKind(
         LangPair("Get a specific item", "ミラジウムは軟らかいので刃物には向かない"),
         null
     ),
+    crystalSword(
+        miragiumSword,
+        "crystal_sword", "crystalSword",
+        LangPair("Crystal Sword", "クリスタルソード"),
+        LangPair("", "妖精はこれをおやつにするという"),
+        null,
+        LangPair("Get a specific item", "金属質よりも非晶質の方が鋭利だ、って"),
+        "goal"
+    ),
     fairySword(
         miragiumSword,
         "fairy_sword", "fairySword",
@@ -98,6 +107,7 @@ enum class FairyWeaponKind(
         LangPair("Get a specific item", "デザインコンテスト武器"),
         "goal"
     ),
+
     miragiumAxe(
         null,
         "miragium_axe", "miragiumAxe",
@@ -107,24 +117,7 @@ enum class FairyWeaponKind(
         LangPair("Get a specific item", "切断のエルグを真空波にする構造"),
         null
     ),
-    miragiumScythe(
-        null,
-        "miragium_scythe", "miragiumScythe",
-        LangPair("Miragium Scythe", "ミラジウムの大鎌"),
-        LangPair("", "自分を切らないように！"),
-        null,
-        LangPair("Get a specific item", "作物を刈り奪る形をしてるだろ？"),
-        null
-    ),
-    lilagiumScythe(
-        miragiumScythe,
-        "lilagium_scythe", "lilagiumScythe",
-        LangPair("Lilagium Scythe", "リラジウムの大鎌"),
-        LangPair("", "葉っぱが吸い込まれてくる"),
-        null,
-        LangPair("Get a specific item", "植物だって話せばわかる"),
-        null
-    ),
+
     magicWandBase(
         null,
         "magic_wand_base", "magicWandBase",
@@ -170,6 +163,7 @@ enum class FairyWeaponKind(
         LangPair("Get a specific item", "雷電のエルグは金属の中を伝うことが知られている"),
         "goal"
     ),
+
     gravityRod(
         null,
         "gravity_rod", "gravityRod",
@@ -179,6 +173,7 @@ enum class FairyWeaponKind(
         LangPair("Get a specific item", "ミラージュオイルで物体と空間を接着するのだ！"),
         "goal"
     ),
+
     ocarinaBase(
         null,
         "ocarina_base", "ocarinaBase",
@@ -197,6 +192,7 @@ enum class FairyWeaponKind(
         LangPair("Get a specific item", "生物は生命のエルグさえあれば増える"),
         "goal"
     ),
+
     bellBase(
         null,
         "bell_base", "bellBase",
@@ -233,15 +229,26 @@ enum class FairyWeaponKind(
         LangPair("Get a specific item", "金メッキする、輪っかを付ける、木の枝を付ける"),
         "challenge"
     ),
-    crystalSword(
-        miragiumSword,
-        "crystal_sword", "crystalSword",
-        LangPair("Crystal Sword", "クリスタルソード"),
-        LangPair("", "妖精はこれをおやつにするという"),
+
+    miragiumScythe(
         null,
-        LangPair("Get a specific item", "金属質よりも非晶質の方が鋭利だ、って"),
-        "goal"
+        "miragium_scythe", "miragiumScythe",
+        LangPair("Miragium Scythe", "ミラジウムの大鎌"),
+        LangPair("", "自分を切らないように！"),
+        null,
+        LangPair("Get a specific item", "作物を刈り奪る形をしてるだろ？"),
+        null
     ),
+    lilagiumScythe(
+        miragiumScythe,
+        "lilagium_scythe", "lilagiumScythe",
+        LangPair("Lilagium Scythe", "リラジウムの大鎌"),
+        LangPair("", "葉っぱが吸い込まれてくる"),
+        null,
+        LangPair("Get a specific item", "植物だって話せばわかる"),
+        null
+    ),
+
     ryugyoDrill(
         null,
         "ryugyo_drill", "ryugyoDrill",
@@ -251,6 +258,7 @@ enum class FairyWeaponKind(
         LangPair("Get a specific item", "デザインコンテスト武器"),
         "goal"
     ),
+
     prayerWheel(
         null,
         "prayer_wheel", "prayerWheel",
