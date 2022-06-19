@@ -37,7 +37,7 @@ object TwinkleStone {
     val module = module {
         blockTwinkleStone = block({ BlockTwinkleStone() }, "twinkle_stone") {
             setCreativeTab { Main.creativeTab }
-            modInitializer.makeBlockStates(resourceName) {
+            makeBlockStates(resourceName) {
                 DataBlockStates(
                     variants = listOf(
                         "white", "orange", "magenta", "light_blue",

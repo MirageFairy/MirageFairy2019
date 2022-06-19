@@ -134,7 +134,7 @@ object FairyCrystalGlass {
             val block = block({ BlockFairyCrystalGlass() }, "${prefix}FairyCrystalGlass".toSnakeCase()) {
                 setUnlocalizedName("${prefix}FairyCrystalGlass".toLowerCaseHead())
                 setCreativeTab { Main.creativeTab }
-                modInitializer.makeBlockStates(resourceName) {
+                makeBlockStates(resourceName) {
                     DataBlockStates(
                         multipart = listOf(
                             DataPart(

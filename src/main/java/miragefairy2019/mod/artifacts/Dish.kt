@@ -59,7 +59,7 @@ object Dish {
         blockDish = block({ BlockDish() }, "dish") {
             setUnlocalizedName("dish")
             setCreativeTab { Main.creativeTab }
-            modInitializer.makeBlockStates(resourceName) { normal }
+            makeBlockStates(resourceName) { normal }
         }
         makeBlockModel(ResourceName(ModMirageFairy2019.MODID, "dish")) {
             fun point(x: Double, y: Double, z: Double) = jsonElement(x.jsonElement, y.jsonElement, z.jsonElement)

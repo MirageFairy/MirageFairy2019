@@ -111,7 +111,7 @@ object ChatWebhook {
         blockChatWebhookTransmitter = block({ BlockChatWebhookTransmitter() }, "chat_webhook_transmitter") {
             setUnlocalizedName("chatWebhookTransmitter")
             setCreativeTab { Main.creativeTab }
-            modInitializer.makeBlockStates(resourceName) {
+            makeBlockStates(resourceName) {
                 DataBlockStates(
                     variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
                         "facing=${facing.first}" to DataBlockState(
@@ -152,7 +152,7 @@ object ChatWebhook {
         blockCreativeChatWebhookTransmitter = block({ BlockCreativeChatWebhookTransmitter() }, "creative_chat_webhook_transmitter") {
             setUnlocalizedName("creativeChatWebhookTransmitter")
             setCreativeTab { Main.creativeTab }
-            modInitializer.makeBlockStates(resourceName) {
+            makeBlockStates(resourceName) {
                 DataBlockStates(
                     variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
                         "facing=${facing.first}" to DataBlockState(
