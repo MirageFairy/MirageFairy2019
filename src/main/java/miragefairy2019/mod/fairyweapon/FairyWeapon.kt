@@ -66,6 +66,7 @@ class LangPair(val english: String, val japanese: String)
 private operator fun Erg.not(): () -> Ingredient = { this.sphereType.oreName.oreIngredient }
 private operator fun String.not(): () -> Ingredient = { this.oreIngredient }
 
+@Suppress("EnumEntryName")
 enum class FairyWeaponKind(
     val parent: FairyWeaponKind?,
     val registryName: String,
