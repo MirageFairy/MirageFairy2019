@@ -68,6 +68,172 @@ import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
+class LangPair(val english: String, val japanese: String)
+
+enum class FairyWeaponKind(
+    val registryName: String,
+    val unlocalizedName: String,
+    val displayName: LangPair,
+    val poem: LangPair,
+    val author: LangPair?,
+    val advancementText: LangPair
+) {
+    miragiumSword(
+        "?", "miragiumSword",
+        LangPair("Miragium Sword", "ミラジウムの剣"),
+        LangPair("", "その刃で何を切る？"),
+        null,
+        LangPair("Get a specific item", "ミラジウムは軟らかいので刃物には向かない")
+    ),
+    fairySword(
+        "?", "fairySword",
+        LangPair("Fairy Sword", "妖精剣"),
+        LangPair("Design Contest Work", "デザインコンテスト武器"),
+        LangPair("tanun3sei", "たぬん三世"),
+        LangPair("Get a specific item", "デザインコンテスト武器")
+    ),
+    miragiumAxe(
+        "?", "miragiumAxe",
+        LangPair("Miragium Axe", "ミラジウムの斧"),
+        LangPair("", "飛べるって素敵"),
+        null,
+        LangPair("Get a specific item", "切断のエルグを真空波にする構造")
+    ),
+    miragiumScythe(
+        "?", "miragiumScythe",
+        LangPair("Miragium Scythe", "ミラジウムの大鎌"),
+        LangPair("", "自分を切らないように！"),
+        null,
+        LangPair("Get a specific item", "作物を刈り奪る形をしてるだろ？")
+    ),
+    lilagiumScythe(
+        "?", "lilagiumScythe",
+        LangPair("Lilagium Scythe", "リラジウムの大鎌"),
+        LangPair("", "葉っぱが吸い込まれてくる"),
+        null,
+        LangPair("Get a specific item", "植物だって話せばわかる")
+    ),
+    magicWandBase(
+        "?", "magicWandBase",
+        LangPair("Magic Wand Base", "ロッドベース"),
+        LangPair("", "風の心、探求"),
+        null,
+        LangPair("Get a specific item", "妖精→持ち手→魔導芯棒→スフィア→対象物")
+    ),
+    magicWandLight(
+        "?", "magicWandLight",
+        LangPair("Magic Wand of Light", "光のロッド"),
+        LangPair("", "古代の魔法「ニクトフォビア」、優しい光が洞窟を照らす"),
+        null,
+        LangPair("Get a specific item", "パラボラの焦点に発光のスフィア")
+    ),
+    magicWandCollecting(
+        "?", "magicWandCollecting",
+        LangPair("Magic Wand of Collecting", "収集のロッド"),
+        LangPair("", "新開発の魔法「ソルメローシェ・トリーパ」、魔法のマジックハンド"),
+        null,
+        LangPair("Get a specific item", "縮地のエルグが渦を巻いて収束するように")
+    ),
+    chargingRod(
+        "?", "chargingRod",
+        LangPair("Charging Rod", "チャージングロッド"),
+        LangPair("", "電気の力で栄えた文明があったという"),
+        null,
+        LangPair("Get a specific item", "カミナリのエルグなんか集めて何に使うんだろう？")
+    ),
+    magicWandLightning(
+        "?", "magicWandLightning",
+        LangPair("Magic Wand of Lightning", "ライトニングロッド"),
+        LangPair("", "古代魔法「ライトニングボルト」"),
+        null,
+        LangPair("Get a specific item", "雷電のエルグは金属の中を伝うことが知られている")
+    ),
+    gravityRod(
+        "?", "gravityRod",
+        LangPair("Gravity Rod", "グラビティロッド"),
+        LangPair("", "局所エーテル超球面歪曲技術"),
+        null,
+        LangPair("Get a specific item", "ミラージュオイルで物体と空間を接着するのだ！")
+    ),
+    ocarinaBase(
+        "?", "ocarinaBase",
+        LangPair("Ocarina Base", "オカリナベース"),
+        LangPair("", "適当に吹いても音楽になる笛"),
+        null,
+        LangPair("Get a specific item", "カラカラする？音の妖精の魂が入っている")
+    ),
+    ocarinaTemptation(
+        "?", "ocarinaTemptation",
+        LangPair("Ocarina of Temptation", "魅惑のオカリナ"),
+        LangPair("", "その音は人の腹を満たし、淫靡な気分にさせる"),
+        null,
+        LangPair("Get a specific item", "生物は生命のエルグさえあれば増える")
+    ),
+    bellBase(
+        "?", "bellBase",
+        LangPair("Bell Base", "鐘ベース"),
+        LangPair("", "妖精の力を解放せよ"),
+        null,
+        LangPair("Get a specific item", "妖精よ、わずかの間、我に力を与えたまえ")
+    ),
+    bellFlowerPicking(
+        "?", "bellFlowerPicking",
+        LangPair("Bell of Flower Picking", "花摘みの鐘"),
+        LangPair("", "ちょっとお花を摘みに"),
+        null,
+        LangPair("Get a specific item", "リラジウムの音は草花の心に響くという")
+    ),
+    bellFlowerPicking2(
+        "?", "bellFlowerPicking2",
+        LangPair("Bell of Flower Picking II", "花摘みの鐘 II"),
+        LangPair("", "光輝のフェロモン"),
+        null,
+        LangPair("Get a specific item", "妖精の正体はミラージュの花粉、つまり花に魅かれる")
+    ),
+    bellChristmas(
+        "?", "bellChristmas",
+        LangPair("Christmas Bell", "クリスマスの鐘"),
+        LangPair("", "いけない子には"),
+        null,
+        LangPair("Get a specific item", "金メッキする、輪っかを付ける、木の枝を付ける")
+    ),
+    crystalSword(
+        "?", "crystalSword",
+        LangPair("Crystal Sword", "クリスタルソード"),
+        LangPair("", "妖精はこれをおやつにするという"),
+        null,
+        LangPair("Get a specific item", "金属質よりも非晶質の方が鋭利だ、って")
+    ),
+    ryugyoDrill(
+        "?", "ryugyoDrill",
+        LangPair("Ryugyo Drill", "龍魚ドリル"),
+        LangPair("Design Contest Work", "デザインコンテスト武器"),
+        LangPair("Yoshinon", "よしのん"),
+        LangPair("Get a specific item", "デザインコンテスト武器")
+    ),
+    prayerWheel(
+        "?", "prayerWheel",
+        LangPair("Prayer Wheel", "収束の地"),
+        LangPair("", "重合するアストラル光。魂の叫び。"),
+        null,
+        LangPair("Get a specific item", "ホイールの外側に妖精語の呪文なんか書いて読めるの？")
+    ),
+    prayerWheel2(
+        "?", "prayerWheel2",
+        LangPair("Prayer Wheel II", "約束の地"),
+        LangPair("", "吹き荒れる妖精の声、宇宙のジェット"),
+        null,
+        LangPair("Get a specific item", "人は死ぬと妖精になるんだって")
+    ),
+    prayerWheel3(
+        "?", "prayerWheel3",
+        LangPair("Prayer Wheel III", "束縛の地"),
+        LangPair("", "覚えてる？前世、自分が何の妖精だったか"),
+        null,
+        LangPair("Get a specific item", "人、牛、妖精、ゾンビ、植物、土")
+    ),
+}
+
 object FairyWeapon {
     @Suppress("UNUSED_VARIABLE")
     val module = module {
@@ -150,75 +316,12 @@ object FairyWeapon {
         val prayerWheel3 = fw(5, { ItemPrayerWheel(10) }, "prayer_wheel_3", "prayerWheel3", prayerWheel2, !"gemMirageFairyPlastic", !"gemMirageFairyPlastic")
 
         onMakeLang {
-            enJa("item.miragiumSword.name", "Miragium Sword", "ミラジウムの剣")
-            enJa("item.miragiumSword.poem", "", "その刃で何を切る？")
-            enJa("item.miragiumSword.recipe", "Get a specific item", "ミラジウムは軟らかいので刃物には向かない")
-            enJa("item.fairySword.name", "Fairy Sword", "妖精剣")
-            enJa("item.fairySword.poem", "Design Contest Work", "デザインコンテスト武器")
-            enJa("item.fairySword.author", "tanun3sei", "たぬん三世")
-            enJa("item.fairySword.recipe", "Get a specific item", "デザインコンテスト武器")
-            enJa("item.miragiumAxe.name", "Miragium Axe", "ミラジウムの斧")
-            enJa("item.miragiumAxe.poem", "", "飛べるって素敵")
-            enJa("item.miragiumAxe.recipe", "Get a specific item", "切断のエルグを真空波にする構造")
-            enJa("item.miragiumScythe.name", "Miragium Scythe", "ミラジウムの大鎌")
-            enJa("item.miragiumScythe.poem", "", "自分を切らないように！")
-            enJa("item.miragiumScythe.recipe", "Get a specific item", "作物を刈り奪る形をしてるだろ？")
-            enJa("item.lilagiumScythe.name", "Lilagium Scythe", "リラジウムの大鎌")
-            enJa("item.lilagiumScythe.poem", "", "葉っぱが吸い込まれてくる")
-            enJa("item.lilagiumScythe.recipe", "Get a specific item", "植物だって話せばわかる")
-            enJa("item.magicWandBase.name", "Magic Wand Base", "ロッドベース")
-            enJa("item.magicWandBase.poem", "", "風の心、探求")
-            enJa("item.magicWandBase.recipe", "Get a specific item", "妖精→持ち手→魔導芯棒→スフィア→対象物")
-            enJa("item.magicWandLight.name", "Magic Wand of Light", "光のロッド")
-            enJa("item.magicWandLight.poem", "", "古代の魔法「ニクトフォビア」、優しい光が洞窟を照らす")
-            enJa("item.magicWandLight.recipe", "Get a specific item", "パラボラの焦点に発光のスフィア")
-            enJa("item.magicWandCollecting.name", "Magic Wand of Collecting", "収集のロッド")
-            enJa("item.magicWandCollecting.poem", "", "新開発の魔法「ソルメローシェ・トリーパ」、魔法のマジックハンド")
-            enJa("item.magicWandCollecting.recipe", "Get a specific item", "縮地のエルグが渦を巻いて収束するように")
-            enJa("item.chargingRod.name", "Charging Rod", "チャージングロッド")
-            enJa("item.chargingRod.poem", "", "電気の力で栄えた文明があったという")
-            enJa("item.chargingRod.recipe", "Get a specific item", "カミナリのエルグなんか集めて何に使うんだろう？")
-            enJa("item.magicWandLightning.name", "Magic Wand of Lightning", "ライトニングロッド")
-            enJa("item.magicWandLightning.poem", "", "古代魔法「ライトニングボルト」")
-            enJa("item.magicWandLightning.recipe", "Get a specific item", "雷電のエルグは金属の中を伝うことが知られている")
-            enJa("item.gravityRod.name", "Gravity Rod", "グラビティロッド")
-            enJa("item.gravityRod.poem", "", "局所エーテル超球面歪曲技術")
-            enJa("item.gravityRod.recipe", "Get a specific item", "ミラージュオイルで物体と空間を接着するのだ！")
-            enJa("item.ocarinaBase.name", "Ocarina Base", "オカリナベース")
-            enJa("item.ocarinaBase.poem", "", "適当に吹いても音楽になる笛")
-            enJa("item.ocarinaBase.recipe", "Get a specific item", "カラカラする？音の妖精の魂が入っている")
-            enJa("item.ocarinaTemptation.name", "Ocarina of Temptation", "魅惑のオカリナ")
-            enJa("item.ocarinaTemptation.poem", "", "その音は人の腹を満たし、淫靡な気分にさせる")
-            enJa("item.ocarinaTemptation.recipe", "Get a specific item", "生物は生命のエルグさえあれば増える")
-            enJa("item.bellBase.name", "Bell Base", "鐘ベース")
-            enJa("item.bellBase.poem", "", "妖精の力を解放せよ")
-            enJa("item.bellBase.recipe", "Get a specific item", "妖精よ、わずかの間、我に力を与えたまえ")
-            enJa("item.bellFlowerPicking.name", "Bell of Flower Picking", "花摘みの鐘")
-            enJa("item.bellFlowerPicking.poem", "", "ちょっとお花を摘みに")
-            enJa("item.bellFlowerPicking.recipe", "Get a specific item", "リラジウムの音は草花の心に響くという")
-            enJa("item.bellFlowerPicking2.name", "Bell of Flower Picking II", "花摘みの鐘 II")
-            enJa("item.bellFlowerPicking2.poem", "", "光輝のフェロモン")
-            enJa("item.bellFlowerPicking2.recipe", "Get a specific item", "妖精の正体はミラージュの花粉、つまり花に魅かれる")
-            enJa("item.bellChristmas.name", "Christmas Bell", "クリスマスの鐘")
-            enJa("item.bellChristmas.poem", "", "いけない子には")
-            enJa("item.bellChristmas.recipe", "Get a specific item", "金メッキする、輪っかを付ける、木の枝を付ける")
-            enJa("item.crystalSword.name", "Crystal Sword", "クリスタルソード")
-            enJa("item.crystalSword.poem", "", "妖精はこれをおやつにするという")
-            enJa("item.crystalSword.recipe", "Get a specific item", "金属質よりも非晶質の方が鋭利だ、って")
-            enJa("item.ryugyoDrill.name", "Ryugyo Drill", "龍魚ドリル")
-            enJa("item.ryugyoDrill.poem", "Design Contest Work", "デザインコンテスト武器")
-            enJa("item.ryugyoDrill.author", "Yoshinon", "よしのん")
-            enJa("item.ryugyoDrill.recipe", "Get a specific item", "デザインコンテスト武器")
-            enJa("item.prayerWheel.name", "Prayer Wheel", "収束の地")
-            enJa("item.prayerWheel.poem", "", "重合するアストラル光。魂の叫び。")
-            enJa("item.prayerWheel.recipe", "Get a specific item", "ホイールの外側に妖精語の呪文なんか書いて読めるの？")
-            enJa("item.prayerWheel2.name", "Prayer Wheel II", "約束の地")
-            enJa("item.prayerWheel2.poem", "", "吹き荒れる妖精の声、宇宙のジェット")
-            enJa("item.prayerWheel2.recipe", "Get a specific item", "人は死ぬと妖精になるんだって")
-            enJa("item.prayerWheel3.name", "Prayer Wheel III", "束縛の地")
-            enJa("item.prayerWheel3.poem", "", "覚えてる？前世、自分が何の妖精だったか")
-            enJa("item.prayerWheel3.recipe", "Get a specific item", "人、牛、妖精、ゾンビ、植物、土")
-
+            FairyWeaponKind.values().forEach { fairyWeaponKind ->
+                enJa("item.${fairyWeaponKind.unlocalizedName}.name", fairyWeaponKind.displayName.english, fairyWeaponKind.displayName.japanese)
+                enJa("item.${fairyWeaponKind.unlocalizedName}.poem", fairyWeaponKind.poem.english, fairyWeaponKind.poem.japanese)
+                if (fairyWeaponKind.author != null) enJa("item.${fairyWeaponKind.unlocalizedName}.author", fairyWeaponKind.author.english, fairyWeaponKind.author.japanese)
+                enJa("item.${fairyWeaponKind.unlocalizedName}.recipe", fairyWeaponKind.advancementText.english, fairyWeaponKind.advancementText.japanese)
+            }
             enJa("miragefairy2019.magic.${MagicMessage.NO_FAIRY.unlocalizedName}.text", "You don't have a fairy", "妖精を所持していません")
             enJa("miragefairy2019.magic.${MagicMessage.INSUFFICIENT_DURABILITY.unlocalizedName}.text", "Insufficient durability", "耐久値が不足しています")
             enJa("miragefairy2019.magic.${MagicMessage.NO_TARGET.unlocalizedName}.text", "There is no target", "発動対象がありません")
