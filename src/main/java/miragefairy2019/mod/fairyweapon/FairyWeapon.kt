@@ -1,5 +1,6 @@
 package miragefairy2019.mod.fairyweapon
 
+import com.google.gson.JsonElement
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Erg.ATTACK
 import miragefairy2019.api.Erg.CHRISTMAS
@@ -601,8 +602,8 @@ object FairyWeapon {
         }
 
         // 実績生成
-        onMakeResource {
-            val data = jsonElement(
+        makeAdvancement(ResourceName(ModMirageFairy2019.MODID, "fairy_weapon/root")) {
+            jsonElement(
                 "display" to jsonElementNotNull(
                     "icon" to jsonElement(
                         "item" to "miragefairy2019:miragium_sword".jsonElement
@@ -629,7 +630,6 @@ object FairyWeapon {
                     )
                 )
             )
-            dirBase.resolve("assets/miragefairy2019/advancements/fairy_weapon/root.json").place(data)
         }
 
         // 個別
@@ -683,8 +683,8 @@ object FairyWeapon {
             fairyWeaponKind.initializer(this)
 
             // 実績生成
-            onMakeResource {
-                val data = jsonElement(
+            makeAdvancement(ResourceName(ModMirageFairy2019.MODID, "fairy_weapon/${fairyWeaponKind.registryName}")) {
+                jsonElement(
                     "display" to jsonElementNotNull(
                         "icon" to jsonElement(
                             "item" to "miragefairy2019:${fairyWeaponKind.registryName}".jsonElement
@@ -711,10 +711,13 @@ object FairyWeapon {
                         )
                     )
                 )
-                dirBase.resolve("assets/miragefairy2019/advancements/fairy_weapon/${fairyWeaponKind.registryName}.json").place(data)
             }
 
         }
 
     }
+}
+
+fun ModInitializer.makeAdvancement(resourceName: ResourceName, creator: () -> JsonElement) = onMakeResource {
+    dirBase.resolve("assets/${resourceName.domain}/advancements/${resourceName.path}.json").place(creator())
 }
