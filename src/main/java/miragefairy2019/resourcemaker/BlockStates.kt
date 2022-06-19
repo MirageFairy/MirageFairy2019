@@ -1,17 +1,12 @@
 package miragefairy2019.resourcemaker
 
 import com.google.gson.JsonElement
-import miragefairy2019.libkt.BlockInitializer
 import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.ResourceName
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
-import net.minecraft.block.Block
-
-@Deprecated("")
-fun <B : Block> BlockInitializer<B>.makeBlockStates(creator: MakeBlockStatesScope.() -> DataBlockStates) = modInitializer.makeBlockStates(resourceName, creator)
 
 
 fun ModInitializer.makeBlockStates(resourceName: ResourceName, creator: MakeBlockStatesScope.() -> DataBlockStates) = onMakeResource {

@@ -35,7 +35,7 @@ object Ores {
         // 鉱石ブロック1
         blockOre1 = block({ BlockOre(EnumVariantOre1.variantList) }, "ore1") {
             setCreativeTab { Main.creativeTab }
-            makeBlockStates {
+            modInitializer.makeBlockStates(resourceName) {
                 DataBlockStates(
                     variants = listOf(
                         "miragefairy2019:apatite_ore",
@@ -70,7 +70,7 @@ object Ores {
         // 鉱石ブロック2
         blockOre2 = block({ BlockOre(EnumVariantOre2.variantList) }, "ore2") {
             setCreativeTab { Main.creativeTab }
-            makeBlockStates {
+            modInitializer.makeBlockStates(resourceName) {
                 DataBlockStates(
                     variants = listOf(
                         "miragefairy2019:tourmaline_ore",

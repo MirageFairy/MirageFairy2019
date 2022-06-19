@@ -36,7 +36,7 @@ object CompressedMaterials {
         // ブロック状素材
         blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList) }, "materials1") {
             setCreativeTab { Main.creativeTab }
-            makeBlockStates {
+            modInitializer.makeBlockStates(resourceName) {
                 DataBlockStates(
                     variants = listOf(
                         "miragefairy2019:apatite_block",

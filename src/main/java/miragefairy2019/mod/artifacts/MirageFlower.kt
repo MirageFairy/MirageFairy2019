@@ -84,7 +84,9 @@ object MirageFlower {
                     IPickExecutor { fortune -> block.tryPick(world, blockPos, player, fortune) }
                 }
             }
-            makeBlockStates { DataBlockStates(variants = (0..3).associate { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") }) }
+            modInitializer.makeBlockStates(resourceName) {
+                DataBlockStates(variants = (0..3).associate { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") })
+            }
         }
         run {
             fun makeBlockModel(name: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
