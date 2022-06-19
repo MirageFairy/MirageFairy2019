@@ -10,7 +10,7 @@ import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 
 
 fun ModInitializer.makeItemModel(path: String, creator: MakeItemModelScope.() -> DataItemModel) = onMakeResource {
-    place("assets/$modId/models/item/${path}.json", MakeItemModelScope(ResourceName(modId, path)).creator().jsonElement)
+    place("assets/$modId/models/item/$path.json", MakeItemModelScope(ResourceName(modId, path)).creator().jsonElement)
 }
 
 class MakeItemModelScope(val resourceName: ResourceName)
