@@ -13,6 +13,7 @@ import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 import net.minecraft.item.Item
 
+
 fun ModInitializer.makeItemModel(resourceName: ResourceName, creator: () -> JsonElement) = onMakeResource {
     place("assets/${resourceName.domain}/models/item/${resourceName.path}.json", creator())
 }
