@@ -23,8 +23,6 @@ import miragefairy2019.libkt.DataOreIngredient
 import miragefairy2019.libkt.DataResult
 import miragefairy2019.libkt.DataShapedRecipe
 import miragefairy2019.libkt.DataSimpleIngredient
-import miragefairy2019.libkt.ItemInitializer
-import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
@@ -70,240 +68,240 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 class LangPair(val english: String, val japanese: String)
 
+private operator fun Erg.not(): () -> Ingredient = { sphereType.oreName.oreIngredient }
+private operator fun String.not(): () -> Ingredient = { oreIngredient }
+
 enum class FairyWeaponKind(
     val parent: FairyWeaponKind?,
     val registryName: String,
     val unlocalizedName: String,
+    val tier: Int,
+    val itemCreator: () -> ItemFairyWeapon,
     val displayName: LangPair,
     val poem: LangPair,
     val author: LangPair?,
     val advancementText: LangPair,
-    val frame: String?
+    val frame: String?,
+    val ownManualRepairIngredientSuppliers: List<() -> Ingredient>
 ) {
     miragiumSword(
-        null,
-        "miragium_sword", "miragiumSword",
+        null, "miragium_sword", "miragiumSword", 2, { ItemFairyWeapon() },
         LangPair("Miragium Sword", "ミラジウムの剣"),
         LangPair("", "その刃で何を切る？"),
         null,
         LangPair("Get a specific item", "ミラジウムは軟らかいので刃物には向かない"),
-        null
+        null,
+        listOf(!ATTACK, !SLASH)
     ),
     crystalSword(
-        miragiumSword,
-        "crystal_sword", "crystalSword",
+        miragiumSword, "crystal_sword", "crystalSword", 3, { ItemCrystalSword() },
         LangPair("Crystal Sword", "クリスタルソード"),
         LangPair("", "妖精はこれをおやつにするという"),
         null,
         LangPair("Get a specific item", "金属質よりも非晶質の方が鋭利だ、って"),
-        "goal"
+        "goal",
+        listOf(!CRYSTAL)
     ),
     fairySword(
-        miragiumSword,
-        "fairy_sword", "fairySword",
+        miragiumSword, "fairy_sword", "fairySword", 3, { ItemFairySword() },
         LangPair("Fairy Sword", "妖精剣"),
         LangPair("Design Contest Work", "デザインコンテスト武器"),
         LangPair("tanun3sei", "たぬん三世"),
         LangPair("Get a specific item", "デザインコンテスト武器"),
-        "goal"
+        "goal",
+        listOf(!ATTACK)
     ),
 
     miragiumAxe(
-        null,
-        "miragium_axe", "miragiumAxe",
+        null, "miragium_axe", "miragiumAxe", 2, { ItemMiragiumAxe() },
         LangPair("Miragium Axe", "ミラジウムの斧"),
         LangPair("", "飛べるって素敵"),
         null,
         LangPair("Get a specific item", "切断のエルグを真空波にする構造"),
-        null
+        null,
+        listOf(!SLASH, !HARVEST, !"plateMiragium")
     ),
 
     magicWandBase(
-        null,
-        "magic_wand_base", "magicWandBase",
+        null, "magic_wand_base", "magicWandBase", 3, { ItemRodBase() },
         LangPair("Magic Wand Base", "ロッドベース"),
         LangPair("", "風の心、探求"),
         null,
         LangPair("Get a specific item", "妖精→持ち手→魔導芯棒→スフィア→対象物"),
-        null
+        null,
+        listOf(!KNOWLEDGE, !"ingotMiragium", !"gemFluorite")
     ),
     magicWandLight(
-        magicWandBase,
-        "light_magic_wand", "magicWandLight",
+        magicWandBase, "light_magic_wand", "magicWandLight", 3, { ItemMagicWandLight() },
         LangPair("Magic Wand of Light", "光のロッド"),
         LangPair("", "古代の魔法「ニクトフォビア」、優しい光が洞窟を照らす"),
         null,
         LangPair("Get a specific item", "パラボラの焦点に発光のスフィア"),
-        "goal"
+        "goal",
+        listOf(!LIGHT)
     ),
     magicWandCollecting(
-        magicWandBase,
-        "collecting_magic_wand", "magicWandCollecting",
+        magicWandBase, "collecting_magic_wand", "magicWandCollecting", 3, { ItemMagicWandCollecting() },
         LangPair("Magic Wand of Collecting", "収集のロッド"),
         LangPair("", "新開発の魔法「ソルメローシェ・トリーパ」、魔法のマジックハンド"),
         null,
         LangPair("Get a specific item", "縮地のエルグが渦を巻いて収束するように"),
-        "goal"
+        "goal",
+        listOf(!WARP)
     ),
     chargingRod(
-        magicWandBase,
-        "charging_rod", "chargingRod",
+        magicWandBase, "charging_rod", "chargingRod", 3, { ItemChargingRod() },
         LangPair("Charging Rod", "チャージングロッド"),
         LangPair("", "電気の力で栄えた文明があったという"),
         null,
         LangPair("Get a specific item", "カミナリのエルグなんか集めて何に使うんだろう？"),
-        null
+        null,
+        listOf(!THUNDER, !WARP, !"ingotGold")
     ),
     magicWandLightning(
-        chargingRod,
-        "lightning_magic_wand", "magicWandLightning",
+        chargingRod, "lightning_magic_wand", "magicWandLightning", 3, { ItemMagicWandLightning() },
         LangPair("Magic Wand of Lightning", "ライトニングロッド"),
         LangPair("", "古代魔法「ライトニングボルト」"),
         null,
         LangPair("Get a specific item", "雷電のエルグは金属の中を伝うことが知られている"),
-        "goal"
+        "goal",
+        listOf(!ENERGY, !"blockMirageFairyCrystalPure")
     ),
 
     gravityRod(
-        null,
-        "gravity_rod", "gravityRod",
+        null, "gravity_rod", "gravityRod", 4, { ItemGravityRod() },
         LangPair("Gravity Rod", "グラビティロッド"),
         LangPair("", "局所エーテル超球面歪曲技術"),
         null,
         LangPair("Get a specific item", "ミラージュオイルで物体と空間を接着するのだ！"),
-        "goal"
+        "goal",
+        listOf(!KNOWLEDGE, !SPACE, !"gemCinnabar", !"obsidian")
     ),
 
     ocarinaBase(
-        null,
-        "ocarina_base", "ocarinaBase",
+        null, "ocarina_base", "ocarinaBase", 3, { ItemFairyWeapon() },
         LangPair("Ocarina Base", "オカリナベース"),
         LangPair("", "適当に吹いても音楽になる笛"),
         null,
         LangPair("Get a specific item", "カラカラする？音の妖精の魂が入っている"),
-        null
+        null,
+        listOf(!SOUND)
     ),
     ocarinaTemptation(
-        ocarinaBase,
-        "temptation_ocarina", "ocarinaTemptation",
+        ocarinaBase, "temptation_ocarina", "ocarinaTemptation", 3, { ItemOcarinaTemptation() },
         LangPair("Ocarina of Temptation", "魅惑のオカリナ"),
         LangPair("", "その音は人の腹を満たし、淫靡な気分にさせる"),
         null,
         LangPair("Get a specific item", "生物は生命のエルグさえあれば増える"),
-        "goal"
+        "goal",
+        listOf(!LIFE)
     ),
 
     bellBase(
-        null,
-        "bell_base", "bellBase",
+        null, "bell_base", "bellBase", 2, { ItemBellBase() },
         LangPair("Bell Base", "鐘ベース"),
         LangPair("", "妖精の力を解放せよ"),
         null,
         LangPair("Get a specific item", "妖精よ、わずかの間、我に力を与えたまえ"),
-        null
+        null,
+        listOf(!SOUND, !"plateMiragium")
     ),
     bellFlowerPicking(
-        bellBase,
-        "flower_picking_bell", "bellFlowerPicking",
+        bellBase, "flower_picking_bell", "bellFlowerPicking", 2, { ItemBellFlowerPicking(0.0, 0.001, 0.2) },
         LangPair("Bell of Flower Picking", "花摘みの鐘"),
         LangPair("", "ちょっとお花を摘みに"),
         null,
         LangPair("Get a specific item", "リラジウムの音は草花の心に響くという"),
-        null
+        null,
+        listOf(!HARVEST)
     ),
     bellFlowerPicking2(
-        bellFlowerPicking,
-        "flower_picking_bell_2", "bellFlowerPicking2",
+        bellFlowerPicking, "flower_picking_bell_2", "bellFlowerPicking2", 4, { ItemBellFlowerPicking(10.0, 0.01, 10000.0) },
         LangPair("Bell of Flower Picking II", "花摘みの鐘 II"),
         LangPair("", "光輝のフェロモン"),
         null,
         LangPair("Get a specific item", "妖精の正体はミラージュの花粉、つまり花に魅かれる"),
-        "goal"
+        "goal",
+        listOf(!HARVEST)
     ),
     bellChristmas(
-        bellBase,
-        "christmas_bell", "bellChristmas",
+        bellBase, "christmas_bell", "bellChristmas", 3, { ItemBellChristmas() },
         LangPair("Christmas Bell", "クリスマスの鐘"),
         LangPair("", "いけない子には"),
         null,
         LangPair("Get a specific item", "金メッキする、輪っかを付ける、木の枝を付ける"),
-        "challenge"
+        "challenge",
+        listOf(!CHRISTMAS, !ATTACK, !"ingotGold", !"gemMagnetite")
     ),
 
     miragiumScythe(
-        null,
-        "miragium_scythe", "miragiumScythe",
+        null, "miragium_scythe", "miragiumScythe", 2, { ItemMiragiumScythe(0.0, 2.0f) },
         LangPair("Miragium Scythe", "ミラジウムの大鎌"),
         LangPair("", "自分を切らないように！"),
         null,
         LangPair("Get a specific item", "作物を刈り奪る形をしてるだろ？"),
-        null
+        null,
+        listOf(!SLASH, !HARVEST)
     ),
     lilagiumScythe(
-        miragiumScythe,
-        "lilagium_scythe", "lilagiumScythe",
+        miragiumScythe, "lilagium_scythe", "lilagiumScythe", 3, { ItemMiragiumScythe(10.0, 4.0f) },
         LangPair("Lilagium Scythe", "リラジウムの大鎌"),
         LangPair("", "葉っぱが吸い込まれてくる"),
         null,
         LangPair("Get a specific item", "植物だって話せばわかる"),
-        null
+        null,
+        listOf(!HARVEST)
     ),
 
     ryugyoDrill(
-        null,
-        "ryugyo_drill", "ryugyoDrill",
+        null, "ryugyo_drill", "ryugyoDrill", 4, { ItemRyugyoDrill(0.0) },
         LangPair("Ryugyo Drill", "龍魚ドリル"),
         LangPair("Design Contest Work", "デザインコンテスト武器"),
         LangPair("Yoshinon", "よしのん"),
         LangPair("Get a specific item", "デザインコンテスト武器"),
-        "goal"
+        "goal",
+        listOf(!DESTROY, !THUNDER, !WATER)
     ),
 
     prayerWheel(
-        null,
-        "prayer_wheel", "prayerWheel",
+        null, "prayer_wheel", "prayerWheel", 1, { ItemPrayerWheel(1) },
         LangPair("Prayer Wheel", "収束の地"),
         LangPair("", "重合するアストラル光。魂の叫び。"),
         null,
         LangPair("Get a specific item", "ホイールの外側に妖精語の呪文なんか書いて読めるの？"),
-        null
+        null,
+        listOf(!SUBMISSION, !SUBMISSION, !"ingotIron", !"gemDiamond")
     ),
     prayerWheel2(
-        prayerWheel,
-        "prayer_wheel_2", "prayerWheel2",
+        prayerWheel, "prayer_wheel_2", "prayerWheel2", 3, { ItemPrayerWheel(5) },
         LangPair("Prayer Wheel II", "約束の地"),
         LangPair("", "吹き荒れる妖精の声、宇宙のジェット"),
         null,
         LangPair("Get a specific item", "人は死ぬと妖精になるんだって"),
-        null
+        null,
+        listOf(!"ingotGold", !"dustCinnabar")
     ),
     prayerWheel3(
-        prayerWheel2,
-        "prayer_wheel_3", "prayerWheel3",
+        prayerWheel2, "prayer_wheel_3", "prayerWheel3", 5, { ItemPrayerWheel(10) },
         LangPair("Prayer Wheel III", "束縛の地"),
         LangPair("", "覚えてる？前世、自分が何の妖精だったか"),
         null,
         LangPair("Get a specific item", "人、牛、妖精、ゾンビ、植物、土"),
-        "challenge"
+        "challenge",
+        listOf(!"gemMirageFairyPlastic", !"gemMirageFairyPlastic")
     ),
 }
+
+val FairyWeaponKind.manualRepairIngredients: List<Ingredient> get() = if (parent != null) parent.manualRepairIngredients + ownManualRepairIngredientSuppliers.map { it() } else ownManualRepairIngredientSuppliers.map { it() }
 
 object FairyWeapon {
     @Suppress("UNUSED_VARIABLE")
     val module = module {
 
         // 妖精武器
-
-        fun <T : ItemFairyWeapon> ModInitializer.fw(
-            tier: Int,
-            creator: () -> T,
-            registryName: String,
-            unlocalizedName: String,
-            parent: (() -> ItemFairyWeapon)?,
-            vararg manualRepairIngredientSuppliers: () -> Ingredient
-        ): ItemInitializer<T> {
-            val item = item(creator, registryName) {
-                setUnlocalizedName(unlocalizedName)
+        FairyWeaponKind.values().forEach { fairyWeaponKind ->
+            item(fairyWeaponKind.itemCreator, fairyWeaponKind.registryName) {
+                setUnlocalizedName(fairyWeaponKind.unlocalizedName)
                 setCreativeTab { creativeTab }
                 onRegisterItem {
                     if (side.isClient) {
@@ -318,56 +316,23 @@ object FairyWeapon {
                     }
                 }
                 onInit {
-                    val durability = (1..tier).fold(16) { a, _ -> a * 2 }
+                    val durability = (1..fairyWeaponKind.tier).fold(16) { a, _ -> a * 2 }
                     item.maxDamage = durability - 1
-                    item.tier = tier
+                    item.tier = fairyWeaponKind.tier
                 }
                 onCreateItemStack {
-                    if (parent != null) item.manualRepairRequirements += parent().manualRepairRequirements
-                    manualRepairIngredientSuppliers.forEach { item.manualRepairRequirements += it() }
+                    item.manualRepairRequirements += fairyWeaponKind.manualRepairIngredients
                 }
             }
-            makeItemModel(ResourceName(ModMirageFairy2019.MODID, registryName)) {
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, fairyWeaponKind.registryName)) {
                 jsonElement(
                     "parent" to "item/handheld".jsonElement,
                     "textures" to jsonElement(
-                        "layer0" to "miragefairy2019:items/$registryName".jsonElement
+                        "layer0" to "miragefairy2019:items/${fairyWeaponKind.registryName}".jsonElement
                     )
                 )
             }
-            return item
         }
-
-        operator fun Erg.not(): () -> Ingredient = { sphereType.oreName.oreIngredient }
-        operator fun String.not(): () -> Ingredient = { oreIngredient }
-
-        val miragiumSword = fw(2, { ItemFairyWeapon() }, "miragium_sword", "miragiumSword", null, !ATTACK, !SLASH)
-        val crystalSword = fw(3, { ItemCrystalSword() }, "crystal_sword", "crystalSword", miragiumSword, !CRYSTAL)
-        val fairySword = fw(3, { ItemFairySword() }, "fairy_sword", "fairySword", miragiumSword, !ATTACK)
-
-        val miragiumAxe = fw(2, { ItemMiragiumAxe() }, "miragium_axe", "miragiumAxe", null, !SLASH, !HARVEST, !"plateMiragium")
-
-        val magicWandBase = fw(3, { ItemRodBase() }, "magic_wand_base", "magicWandBase", null, !KNOWLEDGE, !"ingotMiragium", !"gemFluorite")
-        val magicWandLight = fw(3, { ItemMagicWandLight() }, "light_magic_wand", "magicWandLight", magicWandBase, !LIGHT)
-        val magicWandCollecting = fw(3, { ItemMagicWandCollecting() }, "collecting_magic_wand", "magicWandCollecting", magicWandBase, !WARP)
-        val chargingRod = fw(3, { ItemChargingRod() }, "charging_rod", "chargingRod", magicWandBase, !THUNDER, !WARP, !"ingotGold")
-        val magicWandLightning = fw(3, { ItemMagicWandLightning() }, "lightning_magic_wand", "magicWandLightning", chargingRod, !ENERGY, !"blockMirageFairyCrystalPure")
-
-        val gravityRod = fw(4, { ItemGravityRod() }, "gravity_rod", "gravityRod", null, !KNOWLEDGE, !SPACE, !"gemCinnabar", !"obsidian")
-
-        val ocarinaBase = fw(3, { ItemFairyWeapon() }, "ocarina_base", "ocarinaBase", null, !SOUND)
-        val ocarinaTemptation = fw(3, { ItemOcarinaTemptation() }, "temptation_ocarina", "ocarinaTemptation", ocarinaBase, !LIFE)
-        val bellBase = fw(2, { ItemBellBase() }, "bell_base", "bellBase", null, !SOUND, !"plateMiragium")
-        val bellFlowerPicking = fw(2, { ItemBellFlowerPicking(0.0, 0.001, 0.2) }, "flower_picking_bell", "bellFlowerPicking", bellBase, !HARVEST)
-        val bellFlowerPicking2 = fw(4, { ItemBellFlowerPicking(10.0, 0.01, 10000.0) }, "flower_picking_bell_2", "bellFlowerPicking2", bellFlowerPicking, !HARVEST)
-        val bellChristmas = fw(3, { ItemBellChristmas() }, "christmas_bell", "bellChristmas", bellBase, !CHRISTMAS, !ATTACK, !"ingotGold", !"gemMagnetite")
-        val miragiumScythe = fw(2, { ItemMiragiumScythe(0.0, 2.0f) }, "miragium_scythe", "miragiumScythe", null, !SLASH, !HARVEST)
-        val lilagiumScythe = fw(3, { ItemMiragiumScythe(10.0, 4.0f) }, "lilagium_scythe", "lilagiumScythe", miragiumScythe, !HARVEST)
-        val ryugyoDrill = fw(4, { ItemRyugyoDrill(0.0) }, "ryugyo_drill", "ryugyoDrill", null, !DESTROY, !THUNDER, !WATER)
-
-        val prayerWheel = fw(1, { ItemPrayerWheel(1) }, "prayer_wheel", "prayerWheel", null, !SUBMISSION, !SUBMISSION, !"ingotIron", !"gemDiamond")
-        val prayerWheel2 = fw(3, { ItemPrayerWheel(5) }, "prayer_wheel_2", "prayerWheel2", prayerWheel, !"ingotGold", !"dustCinnabar")
-        val prayerWheel3 = fw(5, { ItemPrayerWheel(10) }, "prayer_wheel_3", "prayerWheel3", prayerWheel2, !"gemMirageFairyPlastic", !"gemMirageFairyPlastic")
 
         onMakeLang {
             enJa("miragefairy2019.magic.${MagicMessage.NO_FAIRY.unlocalizedName}.text", "You don't have a fairy", "妖精を所持していません")
