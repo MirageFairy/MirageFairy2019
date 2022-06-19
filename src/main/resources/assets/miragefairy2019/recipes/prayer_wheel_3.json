@@ -1,0 +1,33 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " pf",
+    "c#p",
+    "Rc "
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:prayer_wheel_2"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "rodMirageFairyPlastic"
+    },
+    "p": {
+      "type": "forge:ore_dict",
+      "ore": "gemMirageFairyPlastic"
+    },
+    "f": {
+      "type": "forge:ore_dict",
+      "ore": "gemMirageFairyPlasticWithFairy"
+    },
+    "c": {
+      "type": "forge:ore_dict",
+      "ore": "dustCoal"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:prayer_wheel_3",
+    "count": 1
+  }
+}

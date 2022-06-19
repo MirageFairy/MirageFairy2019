@@ -8,8 +8,7 @@
     },
     "description": {
       "translate": "item.prayerWheel2.recipe"
-    },
-    "frame": "goal"
+    }
   },
   "parent": "miragefairy2019:fairy_weapon/prayer_wheel",
   "criteria": {

@@ -147,6 +147,7 @@ object FairyWeapon {
 
         val prayerWheel = fw(1, { ItemPrayerWheel(1) }, "prayer_wheel", "prayerWheel", null, !SUBMISSION, !SUBMISSION, !"ingotIron", !"gemDiamond")
         val prayerWheel2 = fw(3, { ItemPrayerWheel(5) }, "prayer_wheel_2", "prayerWheel2", prayerWheel, !"ingotGold", !"dustCinnabar")
+        val prayerWheel3 = fw(5, { ItemPrayerWheel(10) }, "prayer_wheel_3", "prayerWheel3", prayerWheel2, !"gemMirageFairyPlastic", !"gemMirageFairyPlastic")
 
         onMakeLang {
             enJa("item.miragiumSword.name", "Miragium Sword", "ミラジウムの剣")
@@ -209,11 +210,14 @@ object FairyWeapon {
             enJa("item.ryugyoDrill.author", "Yoshinon", "よしのん")
             enJa("item.ryugyoDrill.recipe", "Get a specific item", "デザインコンテスト武器")
             enJa("item.prayerWheel.name", "Prayer Wheel", "収束の地")
-            enJa("item.prayerWheel.poem", "", "重合するアストラル光。吹き荒れる妖精の声。宇宙のジェット")
+            enJa("item.prayerWheel.poem", "", "重合するアストラル光。魂の叫び。")
             enJa("item.prayerWheel.recipe", "Get a specific item", "ホイールの外側に妖精語の呪文なんか書いて読めるの？")
-            enJa("item.prayerWheel2.name", "Prayer Wheel", "約束の地")
-            enJa("item.prayerWheel2.poem", "", "覚えてるかい？前世、自分が何の妖精だったか")
+            enJa("item.prayerWheel2.name", "Prayer Wheel II", "約束の地")
+            enJa("item.prayerWheel2.poem", "", "吹き荒れる妖精の声、宇宙のジェット")
             enJa("item.prayerWheel2.recipe", "Get a specific item", "人は死ぬと妖精になるんだって")
+            enJa("item.prayerWheel3.name", "Prayer Wheel III", "束縛の地")
+            enJa("item.prayerWheel3.poem", "", "覚えてる？前世、自分が何の妖精だったか")
+            enJa("item.prayerWheel3.recipe", "Get a specific item", "人、牛、妖精、ゾンビ、植物、土")
 
             enJa("miragefairy2019.magic.${MagicMessage.NO_FAIRY.unlocalizedName}.text", "You don't have a fairy", "妖精を所持していません")
             enJa("miragefairy2019.magic.${MagicMessage.INSUFFICIENT_DURABILITY.unlocalizedName}.text", "Insufficient durability", "耐久値が不足しています")
@@ -465,6 +469,28 @@ object FairyWeapon {
             )
         )
 
+        // 束縛の地
+        makeRecipe(
+            ResourceName(ModMirageFairy2019.MODID, "prayer_wheel_3"),
+            DataShapedRecipe(
+                pattern = listOf(
+                    " pf",
+                    "c#p",
+                    "Rc "
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:prayer_wheel_2"),
+                    "R" to DataOreIngredient(ore = "rodMirageFairyPlastic"),
+                    "p" to DataOreIngredient(ore = "gemMirageFairyPlastic"),
+                    "f" to DataOreIngredient(ore = "gemMirageFairyPlasticWithFairy"),
+                    "c" to DataOreIngredient(ore = "dustCoal")
+                ),
+                result = DataResult(
+                    item = "miragefairy2019:prayer_wheel_3"
+                )
+            )
+        )
+
         onMakeLang {
             enJa("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器")
             enJa("advancements.miragefairy2019.fairy_weapon.root.description", "Fairy Weapon", "妖精の力を何かに使えないだろうか")
@@ -566,7 +592,8 @@ object FairyWeapon {
             val ryugyo_drill = Achievement("ryugyo_drill", "ryugyoDrill", null, "goal")
 
             val prayer_wheel = Achievement("prayer_wheel", "prayerWheel", null, null)
-            val prayer_wheel_2 = Achievement("prayer_wheel_2", "prayerWheel2", prayer_wheel, "goal")
+            val prayer_wheel_2 = Achievement("prayer_wheel_2", "prayerWheel2", prayer_wheel, null)
+            val prayer_wheel_3 = Achievement("prayer_wheel_3", "prayerWheel3", prayer_wheel_2, "goal")
 
         }
 
