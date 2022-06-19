@@ -83,7 +83,7 @@ object MirageFlower {
                     IPickExecutor { fortune -> block.tryPick(world, blockPos, player, fortune) }
                 }
             }
-            makeBlockStates(resourceName) {
+            makeBlockStates(resourceName.path) {
                 DataBlockStates(variants = (0..3).associate { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") })
             }
         }

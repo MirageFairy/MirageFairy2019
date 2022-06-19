@@ -9,8 +9,8 @@ import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 
 
-fun ModInitializer.makeBlockStates(resourceName: ResourceName, creator: MakeBlockStatesScope.() -> DataBlockStates) = onMakeResource {
-    place("assets/${resourceName.domain}/blockstates/${resourceName.path}.json", MakeBlockStatesScope(resourceName).creator().jsonElement)
+fun ModInitializer.makeBlockStates(path: String, creator: MakeBlockStatesScope.() -> DataBlockStates) = onMakeResource {
+    place("assets/$modId/blockstates/$path.json", MakeBlockStatesScope(ResourceName(modId, path)).creator().jsonElement)
 }
 
 class MakeBlockStatesScope(val resourceName: ResourceName)

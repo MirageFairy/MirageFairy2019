@@ -68,7 +68,7 @@ object FairyCollectionBox {
         blockFairyCollectionBox = block({ BlockFairyCollectionBox() }, "fairy_collection_box") {
             setUnlocalizedName("fairyCollectionBox")
             setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName) {
+            makeBlockStates(resourceName.path) {
                 DataBlockStates(
                     variants = listOf("middle", "bottom").flatMap { context ->
                         listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->

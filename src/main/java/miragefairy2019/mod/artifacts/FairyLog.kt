@@ -53,7 +53,7 @@ object FairyLog {
         blockFairyLog = block({ BlockFairyLog() }, "fairy_log") {
             setUnlocalizedName("fairyLog")
             setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName) {
+            makeBlockStates(resourceName.path) {
                 DataBlockStates(
                     variants = listOf("oak", "birch", "spruce", "jungle", "acacia", "dark_oak").flatMap { variant ->
                         listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->

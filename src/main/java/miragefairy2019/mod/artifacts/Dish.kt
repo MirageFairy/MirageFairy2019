@@ -58,7 +58,7 @@ object Dish {
         blockDish = block({ BlockDish() }, "dish") {
             setUnlocalizedName("dish")
             setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName) { normal }
+            makeBlockStates(resourceName.path) { normal }
         }
         makeBlockModel("dish") {
             fun point(x: Double, y: Double, z: Double) = jsonElement(x.jsonElement, y.jsonElement, z.jsonElement)

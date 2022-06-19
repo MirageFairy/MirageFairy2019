@@ -55,7 +55,7 @@ object FairyBox {
             val block = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxEmpty() } }, "fairy_box") {
                 setUnlocalizedName("fairyBox")
                 setCreativeTab { Main.creativeTab }
-                makeBlockStates(resourceName) {
+                makeBlockStates(resourceName.path) {
                     DataBlockStates(
                         variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
                             "facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_box", y = facing.second)
@@ -96,7 +96,7 @@ object FairyBox {
             val block = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxResinTapper() } }, "fairy_resin_tapper") {
                 setUnlocalizedName("fairyResinTapper")
                 setCreativeTab { Main.creativeTab }
-                makeBlockStates(resourceName) {
+                makeBlockStates(resourceName.path) {
                     DataBlockStates(
                         variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
                             "facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_resin_tapper", y = facing.second)
@@ -137,7 +137,7 @@ object FairyBox {
             blockFairyCentrifuge = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxCentrifuge() } }, "fairy_centrifuge") {
                 setUnlocalizedName("fairyCentrifuge")
                 setCreativeTab { Main.creativeTab }
-                makeBlockStates(resourceName) {
+                makeBlockStates(resourceName.path) {
                     DataBlockStates(
                         variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
                             "facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_centrifuge", y = facing.second)

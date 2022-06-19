@@ -51,7 +51,7 @@ object OreSeed {
         // 地上
         blockOreSeed = block({ BlockOreSeed(EnumOreSeedType.STONE) }, "ore_seed") {
             setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName) {
+            makeBlockStates(resourceName.path) {
                 DataBlockStates(variants = EnumVariantOreSeed.values().associate { "variant=$it" to DataBlockState("minecraft:stone") })
             }
         }
@@ -59,7 +59,7 @@ object OreSeed {
         // ネザー
         blockOreSeedNether = block({ BlockOreSeed(EnumOreSeedType.NETHERRACK) }, "ore_seed_nether") {
             setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName) {
+            makeBlockStates(resourceName.path) {
                 DataBlockStates(variants = EnumVariantOreSeed.values().associate { "variant=$it" to DataBlockState("minecraft:netherrack") })
             }
         }
@@ -67,7 +67,7 @@ object OreSeed {
         // エンド
         blockOreSeedEnd = block({ BlockOreSeed(EnumOreSeedType.END_STONE) }, "ore_seed_end") {
             setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName) {
+            makeBlockStates(resourceName.path) {
                 DataBlockStates(variants = EnumVariantOreSeed.values().associate { "variant=$it" to DataBlockState("minecraft:end_stone") })
             }
         }
