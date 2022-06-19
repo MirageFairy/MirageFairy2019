@@ -608,7 +608,7 @@ object FairyWeapon {
         }
 
         // 実績生成
-        makeAdvancement(ResourceName(ModMirageFairy2019.MODID, "fairy_weapon/root")) {
+        makeAdvancement("fairy_weapon/root") {
             jsonElement(
                 "display" to jsonElementNotNull(
                     "icon" to jsonElement(
@@ -682,7 +682,7 @@ object FairyWeapon {
             fairyWeaponKind.initializer(this)
 
             // 実績生成
-            makeAdvancement(ResourceName(ModMirageFairy2019.MODID, "fairy_weapon/${fairyWeaponKind.registryName}")) {
+            makeAdvancement("fairy_weapon/${fairyWeaponKind.registryName}") {
                 jsonElement(
                     "display" to jsonElementNotNull(
                         "icon" to jsonElement(
