@@ -171,7 +171,7 @@ object FairyCrystalGlass {
             val item = item({ ItemBlock(block()) }, "${prefix}FairyCrystalGlass".toSnakeCase()) {
                 addOreName("blockMirageFairyCrystal$prefix")
                 setCustomModelResourceLocation(model = ResourceLocation(ModMirageFairy2019.MODID, "${prefix}FairyCrystalGlass".toSnakeCase()))
-                makeItemModel {
+                makeItemModel("${prefix}FairyCrystalGlass".toSnakeCase()) {
                     DataItemModel(
                         parent = "block/block",
                         elements = jsonElement(
@@ -186,7 +186,7 @@ object FairyCrystalGlass {
                             "background" to "miragefairy2019:blocks/${"${backgroundPrefix}FairyCrystalGlassBackground".toSnakeCase()}",
                             "frame" to "miragefairy2019:blocks/${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}"
                         )
-                    )
+                    ).jsonElement
                 }
             }
 

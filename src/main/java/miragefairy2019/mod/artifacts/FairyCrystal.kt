@@ -42,7 +42,7 @@ import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapelessRecipe
 import miragefairy2019.resourcemaker.generated
-import miragefairy2019.resourcemaker.makeItemVariantModel
+import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.formatAs
 import net.minecraft.block.BlockDispenser
@@ -111,7 +111,7 @@ object FairyCrystal {
                             )
                         )
                     }
-                    makeItemVariantModel { generated }
+                    makeItemModel(registryName) { generated }
                 }
             }
 

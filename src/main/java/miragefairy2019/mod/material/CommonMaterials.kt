@@ -1,5 +1,6 @@
 package miragefairy2019.mod.material
 
+import com.google.gson.JsonElement
 import miragefairy2019.common.toOreName
 import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.ResourceName
@@ -16,16 +17,15 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
-import miragefairy2019.resourcemaker.DataItemModel
 import miragefairy2019.resourcemaker.DataOrIngredient
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapelessRecipe
 import miragefairy2019.resourcemaker.DataSimpleIngredient
-import miragefairy2019.resourcemaker.MakeItemVariantModelScope
+import miragefairy2019.resourcemaker.MakeItemModelScope
 import miragefairy2019.resourcemaker.generated
 import miragefairy2019.resourcemaker.handheld
-import miragefairy2019.resourcemaker.makeItemVariantModel
+import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
 import net.minecraftforge.fml.common.registry.GameRegistry
 
@@ -43,10 +43,10 @@ object CommonMaterials {
                 registryName: String,
                 unlocalizedName: String,
                 oreName: String,
-                modelSupplier: MakeItemVariantModelScope<ItemSimpleMaterials, ItemVariantSimpleMaterials>.() -> DataItemModel
+                modelSupplier: MakeItemModelScope.() -> JsonElement
             ) = itemVariant(registryName, { ItemVariantSimpleMaterials(it, unlocalizedName) }, metadata) {
                 addOreName(oreName)
-                makeItemVariantModel { modelSupplier() }
+                makeItemModel(registryName) { modelSupplier() }
             }
 
             fun ItemVariantInitializer<ItemSimpleMaterials, ItemVariantSimpleMaterials>.fuel(burnTime: Int) = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.burnTime = burnTime } }
