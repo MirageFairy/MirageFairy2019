@@ -5,7 +5,7 @@ import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapelessRecipe
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.item
-import miragefairy2019.libkt.makeGeneratedItemModel
+import miragefairy2019.resourcemaker.makeGeneratedItemModel
 import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab

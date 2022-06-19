@@ -8,10 +8,10 @@ import miragefairy2019.libkt.IBlockVariant
 import miragefairy2019.libkt.ItemBlockMulti
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
-import miragefairy2019.libkt.block
+import miragefairy2019.resourcemaker.block
 import miragefairy2019.libkt.item
-import miragefairy2019.libkt.makeBlockItemModel
-import miragefairy2019.libkt.makeBlockModel
+import miragefairy2019.resourcemaker.makeBlockItemModel
+import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab

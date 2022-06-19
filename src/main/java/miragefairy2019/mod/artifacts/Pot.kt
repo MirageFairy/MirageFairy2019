@@ -14,7 +14,7 @@ import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
-import miragefairy2019.libkt.makeGeneratedItemModel
+import miragefairy2019.resourcemaker.makeGeneratedItemModel
 import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab

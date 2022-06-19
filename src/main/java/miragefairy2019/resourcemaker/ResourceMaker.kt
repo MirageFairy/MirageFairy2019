@@ -1,8 +1,16 @@
-package miragefairy2019.libkt
+package miragefairy2019.resourcemaker
 
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import com.google.gson.annotations.Expose
+import miragefairy2019.libkt.BlockInitializer
+import miragefairy2019.libkt.ItemInitializer
+import miragefairy2019.libkt.ItemMulti
+import miragefairy2019.libkt.ItemVariant
+import miragefairy2019.libkt.ItemVariantInitializer
+import miragefairy2019.libkt.ModInitializer
+import miragefairy2019.libkt.ResourceName
+import miragefairy2019.libkt.map
 import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.item.Item

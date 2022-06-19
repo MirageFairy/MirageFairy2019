@@ -15,7 +15,7 @@ import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.ResourceName
-import miragefairy2019.libkt.block
+import miragefairy2019.resourcemaker.block
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa

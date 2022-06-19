@@ -13,12 +13,12 @@ import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
-import miragefairy2019.libkt.generated
+import miragefairy2019.resourcemaker.generated
 import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
-import miragefairy2019.libkt.makeItemVariantModel
+import miragefairy2019.resourcemaker.makeItemVariantModel
 import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.orNull

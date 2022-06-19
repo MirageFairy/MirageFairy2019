@@ -5,7 +5,7 @@ import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
-import miragefairy2019.libkt.makeItemModel
+import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main.side

@@ -22,7 +22,7 @@ import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
-import miragefairy2019.libkt.makeItemModel
+import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
