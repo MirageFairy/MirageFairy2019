@@ -3,7 +3,6 @@ package miragefairy2019.resourcemaker
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import com.google.gson.annotations.Expose
-import miragefairy2019.libkt.BlockInitializer
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
@@ -12,7 +11,6 @@ import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.map
 import mirrg.kotlin.gson.jsonElement
-import net.minecraft.block.Block
 import net.minecraft.item.Item
 import java.io.File
 
@@ -20,21 +18,6 @@ class ResourceMaker(val dirBase: File) {
     private val Any.json get() = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create().toJson(this) + "\n"
     fun File.place(data: Any) = apply { parentFile.mkdirs() }.writeText(data.json)
 }
-
-
-// Block Model
-
-fun ResourceMaker.getBlockModelFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/models/block/${registryName.path}.json")
-
-fun ModInitializer.makeBlockModel(resourceName: ResourceName, creator: () -> JsonElement) = onMakeResource {
-    getBlockModelFile(resourceName).place(creator())
-}
-
-fun <B : Block> BlockInitializer<B>.makeBlockModel(creator: MakeBlockModelScope<B>.() -> JsonElement) = modInitializer.onMakeResource {
-    getBlockModelFile(resourceName).place(MakeBlockModelScope(this@makeBlockModel).creator())
-}
-
-class MakeBlockModelScope<B : Block>(val blockInitializer: BlockInitializer<B>)
 
 
 // Item Model
