@@ -64,8 +64,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 class LangPair(val english: String, val japanese: String)
 
-private operator fun Erg.not(): () -> Ingredient = { sphereType.oreName.oreIngredient }
-private operator fun String.not(): () -> Ingredient = { oreIngredient }
+private operator fun Erg.not(): () -> Ingredient = { this.sphereType.oreName.oreIngredient }
+private operator fun String.not(): () -> Ingredient = { this.oreIngredient }
 
 enum class FairyWeaponKind(
     val parent: FairyWeaponKind?,
