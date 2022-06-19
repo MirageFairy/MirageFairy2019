@@ -276,7 +276,7 @@ enum class FairyWeaponKind(
         LangPair("", "覚えてる？前世、自分が何の妖精だったか"),
         null,
         LangPair("Get a specific item", "人、牛、妖精、ゾンビ、植物、土"),
-        "goal"
+        "challenge"
     ),
 }
 
