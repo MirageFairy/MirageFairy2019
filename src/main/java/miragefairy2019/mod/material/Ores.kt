@@ -2,7 +2,6 @@ package miragefairy2019.mod.material
 
 import miragefairy2019.common.toOreName
 import miragefairy2019.libkt.BlockVariantList
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.enJa
@@ -123,7 +122,7 @@ object Ores {
 
         // ブロックモデルの生成
         run {
-            fun makeBlockModel(name: String, base: String, overlay: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
+            fun makeBlockModel(name: String, base: String, overlay: String) = makeBlockModel(name) {
                 jsonElement(
                     "parent" to "miragefairy2019:block/overlay_block".jsonElement,
                     "textures" to jsonElement(

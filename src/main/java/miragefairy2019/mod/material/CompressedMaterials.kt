@@ -94,7 +94,7 @@ object CompressedMaterials {
 
         // ブロックモデルの生成
         run {
-            fun makeBlockModel(name: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
+            fun makeBlockModel(name: String) = makeBlockModel(name) {
                 jsonElement(
                     "parent" to "block/cube_all".jsonElement,
                     "textures" to mirrg.kotlin.gson.jsonElement(

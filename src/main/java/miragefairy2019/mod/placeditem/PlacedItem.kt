@@ -1,6 +1,5 @@
 package miragefairy2019.mod.placeditem
 
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setUnlocalizedName
@@ -8,7 +7,6 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.side
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.resourcemaker.makeBlockModel
 import mirrg.kotlin.gson.jsonArray
 import mirrg.kotlin.gson.jsonElement
@@ -36,7 +34,7 @@ object PlacedItem {
         blockPlacedItem = block({ BlockPlacedItem() }, "placed_item") {
             setUnlocalizedName("placedItem")
         }
-        makeBlockModel(ResourceName(ModMirageFairy2019.MODID, "placed_item")) {
+        makeBlockModel("placed_item") {
             jsonElement(
                 "ambientocclusion" to false.jsonElement,
                 "textures" to jsonElement(

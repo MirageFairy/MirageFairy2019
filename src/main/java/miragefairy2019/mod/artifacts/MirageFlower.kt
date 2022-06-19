@@ -9,7 +9,6 @@ import miragefairy2019.common.toOreName
 import miragefairy2019.lib.erg
 import miragefairy2019.lib.shineEfficiency
 import miragefairy2019.libkt.BiomeDecoratorFlowers
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.copyItemStack
@@ -20,7 +19,6 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
@@ -90,7 +88,7 @@ object MirageFlower {
             }
         }
         run {
-            fun makeBlockModel(name: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
+            fun makeBlockModel(name: String) = makeBlockModel(name) {
                 jsonElement(
                     "parent" to "block/cross".jsonElement,
                     "textures" to jsonElement(

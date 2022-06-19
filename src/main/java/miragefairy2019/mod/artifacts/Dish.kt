@@ -2,7 +2,6 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
@@ -13,7 +12,6 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
@@ -62,7 +60,7 @@ object Dish {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName) { normal }
         }
-        makeBlockModel(ResourceName(ModMirageFairy2019.MODID, "dish")) {
+        makeBlockModel("dish") {
             fun point(x: Double, y: Double, z: Double) = jsonElement(x.jsonElement, y.jsonElement, z.jsonElement)
             fun rectangle(x1: Double, y1: Double, x2: Double, y2: Double) = jsonElement(x1.jsonElement, y1.jsonElement, x2.jsonElement, y2.jsonElement)
             fun texture(name: String) = jsonElement(

@@ -1,7 +1,6 @@
 package miragefairy2019.mod.artifacts
 
 import miragefairy2019.lib.selectFairyLogDrop
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
@@ -9,7 +8,6 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
@@ -66,7 +64,7 @@ object FairyLog {
             }
         }
         run {
-            fun makeBlockModel(name: String, variant: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
+            fun makeBlockModel(name: String, variant: String) = makeBlockModel(name) {
                 jsonElement(
                     "parent" to "miragefairy2019:block/fairy_log".jsonElement,
                     "textures" to jsonElement(

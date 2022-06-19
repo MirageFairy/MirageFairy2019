@@ -4,7 +4,6 @@ import miragefairy2019.libkt.BlockMulti
 import miragefairy2019.libkt.BlockVariantList
 import miragefairy2019.libkt.IBlockVariant
 import miragefairy2019.libkt.ItemBlockMulti
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
@@ -50,7 +49,7 @@ object TwinkleStone {
             }
         }
         run {
-            fun makeBlockModel(name: String) = makeBlockModel(ResourceName(ModMirageFairy2019.MODID, name)) {
+            fun makeBlockModel(name: String) = makeBlockModel(name) {
                 jsonElement(
                     "parent" to "block/cube_all".jsonElement,
                     "textures" to jsonElement(
