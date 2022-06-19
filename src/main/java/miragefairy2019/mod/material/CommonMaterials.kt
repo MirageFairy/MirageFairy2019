@@ -1,6 +1,5 @@
 package miragefairy2019.mod.material
 
-import com.google.gson.JsonElement
 import miragefairy2019.common.toOreName
 import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.ResourceName
@@ -17,6 +16,7 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
+import miragefairy2019.resourcemaker.DataItemModel
 import miragefairy2019.resourcemaker.DataOrIngredient
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataResult
@@ -43,7 +43,7 @@ object CommonMaterials {
                 registryName: String,
                 unlocalizedName: String,
                 oreName: String,
-                modelSupplier: MakeItemModelScope.() -> JsonElement
+                modelSupplier: MakeItemModelScope.() -> DataItemModel
             ) = itemVariant(registryName, { ItemVariantSimpleMaterials(it, unlocalizedName) }, metadata) {
                 addOreName(oreName)
                 makeItemModel(registryName) { modelSupplier() }

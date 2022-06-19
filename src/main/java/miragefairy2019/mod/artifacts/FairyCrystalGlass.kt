@@ -186,7 +186,7 @@ object FairyCrystalGlass {
                             "background" to "miragefairy2019:blocks/${"${backgroundPrefix}FairyCrystalGlassBackground".toSnakeCase()}",
                             "frame" to "miragefairy2019:blocks/${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}"
                         )
-                    ).jsonElement
+                    )
                 }
             }
 

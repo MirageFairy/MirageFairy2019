@@ -7,7 +7,6 @@ import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
@@ -23,9 +22,9 @@ import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
+import miragefairy2019.resourcemaker.DataItemModel
 import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.boron.util.UtilsString
-import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
@@ -56,13 +55,13 @@ object Sphere {
             registerItemColorHandler()
         }
         makeItemModel("sphere") {
-            jsonElement(
-                "parent" to "item/generated".jsonElement,
-                "textures" to jsonElement(
-                    "layer0" to "miragefairy2019:items/sphere_layer0".jsonElement,
-                    "layer1" to "miragefairy2019:items/sphere_layer1".jsonElement,
-                    "layer2" to "miragefairy2019:items/sphere_layer2".jsonElement,
-                    "layer3" to "miragefairy2019:items/sphere_layer3".jsonElement
+            DataItemModel(
+                parent = "item/generated",
+                textures = mapOf(
+                    "layer0" to "miragefairy2019:items/sphere_layer0",
+                    "layer1" to "miragefairy2019:items/sphere_layer1",
+                    "layer2" to "miragefairy2019:items/sphere_layer2",
+                    "layer3" to "miragefairy2019:items/sphere_layer3"
                 )
             )
         }

@@ -54,6 +54,7 @@ import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapedRecipe
 import miragefairy2019.resourcemaker.DataSimpleIngredient
+import miragefairy2019.resourcemaker.handheld
 import miragefairy2019.resourcemaker.makeAdvancement
 import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
@@ -667,14 +668,7 @@ object FairyWeapon {
             }
 
             // アイテムモデル生成
-            makeItemModel(fairyWeaponKind.registryName) {
-                jsonElement(
-                    "parent" to "item/handheld".jsonElement,
-                    "textures" to jsonElement(
-                        "layer0" to "miragefairy2019:items/${fairyWeaponKind.registryName}".jsonElement
-                    )
-                )
-            }
+            makeItemModel(fairyWeaponKind.registryName) { handheld }
 
             // 翻訳生成
             onMakeLang {

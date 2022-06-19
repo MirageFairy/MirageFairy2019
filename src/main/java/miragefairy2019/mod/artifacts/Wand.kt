@@ -44,6 +44,7 @@ import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
 import miragefairy2019.mod.systems.IFairyStickCraftItem
 import miragefairy2019.mod.systems.addFairyStickCraftCoolTime
+import miragefairy2019.resourcemaker.DataItemModel
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapedRecipe
@@ -180,11 +181,11 @@ object Wand {
         // アイテムモデル生成
         WandKind.values().forEach { wandKind ->
             makeItemModel(wandKind.registryName) {
-                jsonElement(
-                    "parent" to "item/handheld".jsonElement,
-                    "textures" to jsonElement(
-                        "layer0" to "miragefairy2019:items/fairy_wand_rod_${wandKind.tier}".jsonElement,
-                        "layer1" to "miragefairy2019:items/${wandKind.type.registryName}_fairy_wand".jsonElement
+                DataItemModel(
+                    parent = "item/handheld",
+                    textures = mapOf(
+                        "layer0" to "miragefairy2019:items/fairy_wand_rod_${wandKind.tier}",
+                        "layer1" to "miragefairy2019:items/${wandKind.type.registryName}_fairy_wand"
                     )
                 )
             }

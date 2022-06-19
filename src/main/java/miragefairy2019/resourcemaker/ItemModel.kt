@@ -9,8 +9,8 @@ import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 
 
-fun ModInitializer.makeItemModel(path: String, creator: MakeItemModelScope.() -> JsonElement) = onMakeResource {
-    place("assets/$modId/models/item/${path}.json", MakeItemModelScope(ResourceName(modId, path)).creator())
+fun ModInitializer.makeItemModel(path: String, creator: MakeItemModelScope.() -> DataItemModel) = onMakeResource {
+    place("assets/$modId/models/item/${path}.json", MakeItemModelScope(ResourceName(modId, path)).creator().jsonElement)
 }
 
 class MakeItemModelScope(val resourceName: ResourceName)
@@ -29,25 +29,28 @@ data class DataItemModel(
 }
 
 
-val MakeItemModelScope.generated get() = generated(resourceName.map { "items/$it" })
-val MakeItemModelScope.handheld get() = handheld(resourceName.map { "items/$it" })
-val MakeItemModelScope.block get() = block(resourceName.map { "block/$it" })
-val MakeItemModelScope.fluid get() = generated(resourceName.map { "blocks/${it}_still" })
-
-private fun generated(resourceName: ResourceName) = jsonObject(
-    "parent" to "item/generated".jsonElement,
-    "textures" to jsonObject(
-        "layer0" to "$resourceName".jsonElement
+val MakeItemModelScope.generated
+    get() = DataItemModel(
+        parent = "item/generated",
+        textures = mapOf(
+            "layer0" to "${resourceName.map { "items/$it" }}"
+        )
     )
-)
-
-private fun handheld(resourceName: ResourceName) = jsonObject(
-    "parent" to "item/handheld".jsonElement,
-    "textures" to jsonObject(
-        "layer0" to "$resourceName".jsonElement
+val MakeItemModelScope.handheld
+    get() = DataItemModel(
+        parent = "item/handheld",
+        textures = mapOf(
+            "layer0" to "${resourceName.map { "items/$it" }}"
+        )
     )
-)
-
-private fun block(parent: ResourceName) = jsonObject(
-    "parent" to "$parent".jsonElement
-)
+val MakeItemModelScope.block
+    get() = DataItemModel(
+        parent = "${resourceName.map { "block/$it" }}"
+    )
+val MakeItemModelScope.fluid
+    get() = DataItemModel(
+        parent = "item/generated",
+        textures = mapOf(
+            "layer0" to "${resourceName.map { "blocks/${it}_still" }}"
+        )
+    )

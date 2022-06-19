@@ -16,7 +16,6 @@ import miragefairy2019.lib.setInt
 import miragefairy2019.lib.times
 import miragefairy2019.lib.toItemStack
 import miragefairy2019.lib.toNbt
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.createItemStack
@@ -35,10 +34,10 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.ItemFairy
+import miragefairy2019.resourcemaker.DataItemModel
 import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.formatAs
-import mirrg.kotlin.gson.jsonElement
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
@@ -91,16 +90,16 @@ object BakedFairy {
             registerItemColorHandler()
         }
         makeItemModel("baked_fairy") {
-            jsonElement(
-                "parent" to "item/generated".jsonElement,
-                "textures" to jsonElement(
-                    "layer0" to "miragefairy2019:items/baked_fairy_front".jsonElement,
-                    "layer1" to "miragefairy2019:items/fairy_layer0".jsonElement,
-                    "layer2" to "miragefairy2019:items/fairy_layer1".jsonElement,
-                    "layer3" to "miragefairy2019:items/fairy_layer2".jsonElement,
-                    "layer4" to "miragefairy2019:items/fairy_layer3".jsonElement,
-                    "layer5" to "miragefairy2019:items/fairy_layer4".jsonElement,
-                    "layer6" to "miragefairy2019:items/baked_fairy_back".jsonElement
+            DataItemModel(
+                parent = "item/generated",
+                textures = mapOf(
+                    "layer0" to "miragefairy2019:items/baked_fairy_front",
+                    "layer1" to "miragefairy2019:items/fairy_layer0",
+                    "layer2" to "miragefairy2019:items/fairy_layer1",
+                    "layer3" to "miragefairy2019:items/fairy_layer2",
+                    "layer4" to "miragefairy2019:items/fairy_layer3",
+                    "layer5" to "miragefairy2019:items/fairy_layer4",
+                    "layer6" to "miragefairy2019:items/baked_fairy_back"
                 )
             )
         }
