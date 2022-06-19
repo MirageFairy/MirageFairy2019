@@ -19,10 +19,7 @@ import miragefairy2019.api.Erg.THUNDER
 import miragefairy2019.api.Erg.WARP
 import miragefairy2019.api.Erg.WATER
 import miragefairy2019.libkt.BakedModelBuiltinWrapper
-import miragefairy2019.libkt.DataOreIngredient
-import miragefairy2019.libkt.DataResult
-import miragefairy2019.libkt.DataShapedRecipe
-import miragefairy2019.libkt.DataSimpleIngredient
+import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
@@ -36,7 +33,6 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main.creativeTab
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
@@ -82,7 +78,8 @@ enum class FairyWeaponKind(
     val author: LangPair?,
     val advancementText: LangPair,
     val frame: String?,
-    val ownManualRepairIngredientSuppliers: List<() -> Ingredient>
+    val ownManualRepairIngredientSuppliers: List<() -> Ingredient>,
+    val initializer: ModInitializer.() -> Unit
 ) {
     miragiumSword(
         null, "miragium_sword", "miragiumSword", 2, { ItemFairyWeapon() },
@@ -91,7 +88,10 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "ミラジウムは軟らかいので刃物には向かない"),
         null,
-        listOf(!ATTACK, !SLASH)
+        listOf(!ATTACK, !SLASH),
+        {
+            // TODO
+        }
     ),
     crystalSword(
         miragiumSword, "crystal_sword", "crystalSword", 3, { ItemCrystalSword() },
@@ -100,7 +100,29 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "金属質よりも非晶質の方が鋭利だ、って"),
         "goal",
-        listOf(!CRYSTAL)
+        listOf(!CRYSTAL),
+        {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "fairyweapons/crystal_sword"),
+                miragefairy2019.libkt.DataShapedRecipe(
+                    pattern = listOf(
+                        "cCC",
+                        "S#C",
+                        "Rmp"
+                    ),
+                    key = mapOf(
+                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:miragium_sword"),
+                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "rodMiragium"),
+                        "S" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereCrystal"),
+                        "C" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairyCrystal"),
+                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
+                        "p" to miragefairy2019.mod.artifacts.WandType.POLISHING.ingredientData,
+                        "m" to miragefairy2019.mod.artifacts.WandType.MELTING.ingredientData
+                    ),
+                    result = miragefairy2019.libkt.DataResult(item = "miragefairy2019:crystal_sword")
+                )
+            )
+        }
     ),
     fairySword(
         miragiumSword, "fairy_sword", "fairySword", 3, { ItemFairySword() },
@@ -109,7 +131,10 @@ enum class FairyWeaponKind(
         LangPair("tanun3sei", "たぬん三世"),
         LangPair("Get a specific item", "デザインコンテスト武器"),
         "goal",
-        listOf(!ATTACK)
+        listOf(!ATTACK),
+        {
+            // TODO
+        }
     ),
 
     miragiumAxe(
@@ -119,7 +144,10 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "切断のエルグを真空波にする構造"),
         null,
-        listOf(!SLASH, !HARVEST, !"plateMiragium")
+        listOf(!SLASH, !HARVEST, !"plateMiragium"),
+        {
+            // TODO
+        }
     ),
 
     magicWandBase(
@@ -129,7 +157,10 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "妖精→持ち手→魔導芯棒→スフィア→対象物"),
         null,
-        listOf(!KNOWLEDGE, !"ingotMiragium", !"gemFluorite")
+        listOf(!KNOWLEDGE, !"ingotMiragium", !"gemFluorite"),
+        {
+            // TODO
+        }
     ),
     magicWandLight(
         magicWandBase, "light_magic_wand", "magicWandLight", 3, { ItemMagicWandLight() },
@@ -138,7 +169,10 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "パラボラの焦点に発光のスフィア"),
         "goal",
-        listOf(!LIGHT)
+        listOf(!LIGHT),
+        {
+            // TODO
+        }
     ),
     magicWandCollecting(
         magicWandBase, "collecting_magic_wand", "magicWandCollecting", 3, { ItemMagicWandCollecting() },
@@ -147,7 +181,10 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "縮地のエルグが渦を巻いて収束するように"),
         "goal",
-        listOf(!WARP)
+        listOf(!WARP),
+        {
+            // TODO
+        }
     ),
     chargingRod(
         magicWandBase, "charging_rod", "chargingRod", 3, { ItemChargingRod() },
@@ -156,7 +193,30 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "カミナリのエルグなんか集めて何に使うんだろう？"),
         null,
-        listOf(!THUNDER, !WARP, !"ingotGold")
+        listOf(!THUNDER, !WARP, !"ingotGold"),
+        {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "charging_rod"),
+                miragefairy2019.libkt.DataShapedRecipe(
+                    pattern = listOf(
+                        "cgw",
+                        "g#g",
+                        "tgm"
+                    ),
+                    key = mapOf(
+                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:magic_wand_base"),
+                        "g" to miragefairy2019.libkt.DataOreIngredient(ore = "ingotGold"),
+                        "w" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
+                        "t" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
+                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
+                        "m" to miragefairy2019.mod.artifacts.WandType.MELTING.ingredientData
+                    ),
+                    result = miragefairy2019.libkt.DataResult(
+                        item = "miragefairy2019:charging_rod"
+                    )
+                )
+            )
+        }
     ),
     magicWandLightning(
         chargingRod, "lightning_magic_wand", "magicWandLightning", 3, { ItemMagicWandLightning() },
@@ -165,7 +225,30 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "雷電のエルグは金属の中を伝うことが知られている"),
         "goal",
-        listOf(!ENERGY, !"blockMirageFairyCrystalPure")
+        listOf(!ENERGY, !"blockMirageFairyCrystalPure"),
+        {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "lightning_magic_wand"),
+                miragefairy2019.libkt.DataShapedRecipe(
+                    pattern = listOf(
+                        "gge",
+                        "c#g",
+                        "Gmg"
+                    ),
+                    key = mapOf(
+                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:charging_rod"),
+                        "g" to miragefairy2019.libkt.DataOreIngredient(ore = "ingotGold"),
+                        "e" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereEnergy"),
+                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
+                        "m" to miragefairy2019.mod.artifacts.WandType.MELTING.ingredientData,
+                        "G" to miragefairy2019.libkt.DataOreIngredient(ore = "blockMirageFairyCrystalPure")
+                    ),
+                    result = miragefairy2019.libkt.DataResult(
+                        item = "miragefairy2019:lightning_magic_wand"
+                    )
+                )
+            )
+        }
     ),
 
     gravityRod(
@@ -175,7 +258,31 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "ミラージュオイルで物体と空間を接着するのだ！"),
         "goal",
-        listOf(!KNOWLEDGE, !SPACE, !"gemCinnabar", !"obsidian")
+        listOf(!KNOWLEDGE, !SPACE, !"gemCinnabar", !"obsidian"),
+        {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "gravity_rod"),
+                miragefairy2019.libkt.DataShapedRecipe(
+                    pattern = listOf(
+                        "cOs",
+                        "oRO",
+                        "kof"
+                    ),
+                    key = mapOf(
+                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019ManaRodFire"),
+                        "k" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereKnowledge"),
+                        "s" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereSpace"),
+                        "o" to miragefairy2019.libkt.DataOreIngredient(ore = "obsidian"),
+                        "O" to miragefairy2019.libkt.DataOreIngredient(ore = "container1000MirageFlowerOil"),
+                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
+                        "f" to miragefairy2019.mod.artifacts.WandType.FUSION.ingredientData
+                    ),
+                    result = miragefairy2019.libkt.DataResult(
+                        item = "miragefairy2019:gravity_rod"
+                    )
+                )
+            )
+        }
     ),
 
     ocarinaBase(
@@ -185,7 +292,10 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "カラカラする？音の妖精の魂が入っている"),
         null,
-        listOf(!SOUND)
+        listOf(!SOUND),
+        {
+            // TODO
+        }
     ),
     ocarinaTemptation(
         ocarinaBase, "temptation_ocarina", "ocarinaTemptation", 3, { ItemOcarinaTemptation() },
@@ -194,7 +304,10 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "生物は生命のエルグさえあれば増える"),
         "goal",
-        listOf(!LIFE)
+        listOf(!LIFE),
+        {
+            // TODO
+        }
     ),
 
     bellBase(
@@ -204,7 +317,28 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "妖精よ、わずかの間、我に力を与えたまえ"),
         null,
-        listOf(!SOUND, !"plateMiragium")
+        listOf(!SOUND, !"plateMiragium"),
+        {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "fairyweapons/bell_base"),
+                miragefairy2019.libkt.DataShapedRecipe(
+                    pattern = listOf(
+                        "cPs",
+                        " RP",
+                        "I m"
+                    ),
+                    key = mapOf(
+                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "rodMiragium"),
+                        "I" to miragefairy2019.libkt.DataOreIngredient(ore = "ingotMiragium"),
+                        "P" to miragefairy2019.libkt.DataOreIngredient(ore = "plateMiragium"),
+                        "s" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereSound"),
+                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
+                        "m" to miragefairy2019.mod.artifacts.WandType.MELTING.ingredientData
+                    ),
+                    result = miragefairy2019.libkt.DataResult(item = "miragefairy2019:bell_base")
+                )
+            )
+        }
     ),
     bellFlowerPicking(
         bellBase, "flower_picking_bell", "bellFlowerPicking", 2, { ItemBellFlowerPicking(0.0, 0.001, 0.2) },
@@ -213,7 +347,29 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "リラジウムの音は草花の心に響くという"),
         null,
-        listOf(!HARVEST)
+        listOf(!HARVEST),
+        {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "fairyweapons/flower_picking_bell"),
+                miragefairy2019.libkt.DataShapedRecipe(
+                    pattern = listOf(
+                        "cIh",
+                        "o#I",
+                        "gom"
+                    ),
+                    key = mapOf(
+                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:bell_base"),
+                        "g" to miragefairy2019.libkt.DataOreIngredient(ore = "ingotGold"),
+                        "o" to miragefairy2019.libkt.DataOreIngredient(ore = "obsidian"),
+                        "I" to miragefairy2019.libkt.DataOreIngredient(ore = "ingotLilagium"),
+                        "h" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
+                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
+                        "m" to miragefairy2019.mod.artifacts.WandType.MELTING.ingredientData
+                    ),
+                    result = miragefairy2019.libkt.DataResult(item = "miragefairy2019:flower_picking_bell")
+                )
+            )
+        }
     ),
     bellFlowerPicking2(
         bellFlowerPicking, "flower_picking_bell_2", "bellFlowerPicking2", 4, { ItemBellFlowerPicking(10.0, 0.01, 10000.0) },
@@ -222,7 +378,28 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "妖精の正体はミラージュの花粉、つまり花に魅かれる"),
         "goal",
-        listOf(!HARVEST)
+        listOf(!HARVEST),
+        {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "fairyweapons/flower_picking_bell_2"),
+                miragefairy2019.libkt.DataShapedRecipe(
+                    pattern = listOf(
+                        "cGh",
+                        "G#G",
+                        "RGp"
+                    ),
+                    key = mapOf(
+                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:flower_picking_bell"),
+                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "stickMirageFairyWood"),
+                        "G" to miragefairy2019.libkt.DataOreIngredient(ore = "gemPyrope"),
+                        "h" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
+                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
+                        "p" to miragefairy2019.mod.artifacts.WandType.POLISHING.ingredientData
+                    ),
+                    result = miragefairy2019.libkt.DataResult(item = "miragefairy2019:flower_picking_bell_2")
+                )
+            )
+        }
     ),
     bellChristmas(
         bellBase, "christmas_bell", "bellChristmas", 3, { ItemBellChristmas() },
@@ -231,7 +408,10 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "金メッキする、輪っかを付ける、木の枝を付ける"),
         "challenge",
-        listOf(!CHRISTMAS, !ATTACK, !"ingotGold", !"gemMagnetite")
+        listOf(!CHRISTMAS, !ATTACK, !"ingotGold", !"gemMagnetite"),
+        {
+            // TODO
+        }
     ),
 
     miragiumScythe(
@@ -241,7 +421,10 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "作物を刈り奪る形をしてるだろ？"),
         null,
-        listOf(!SLASH, !HARVEST)
+        listOf(!SLASH, !HARVEST),
+        {
+            // TODO
+        }
     ),
     lilagiumScythe(
         miragiumScythe, "lilagium_scythe", "lilagiumScythe", 3, { ItemMiragiumScythe(10.0, 4.0f) },
@@ -250,7 +433,28 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "植物だって話せばわかる"),
         null,
-        listOf(!HARVEST)
+        listOf(!HARVEST),
+        {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "fairyweapons/lilagium_scythe"),
+                miragefairy2019.libkt.DataShapedRecipe(
+                    pattern = listOf(
+                        "hII",
+                        "I#R",
+                        "mcR"
+                    ),
+                    key = mapOf(
+                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:miragium_scythe"),
+                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019ManaRodGaia"),
+                        "I" to miragefairy2019.libkt.DataOreIngredient(ore = "ingotLilagium"),
+                        "h" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
+                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
+                        "m" to miragefairy2019.mod.artifacts.WandType.MELTING.ingredientData
+                    ),
+                    result = miragefairy2019.libkt.DataResult(item = "miragefairy2019:lilagium_scythe")
+                )
+            )
+        }
     ),
 
     ryugyoDrill(
@@ -260,7 +464,29 @@ enum class FairyWeaponKind(
         LangPair("Yoshinon", "よしのん"),
         LangPair("Get a specific item", "デザインコンテスト武器"),
         "goal",
-        listOf(!DESTROY, !THUNDER, !WATER)
+        listOf(!DESTROY, !THUNDER, !WATER),
+        {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "fairyweapons/ryugyo_drill"),
+                miragefairy2019.libkt.DataShapedRecipe(
+                    pattern = listOf(
+                        "cLL",
+                        "b#L",
+                        "twf"
+                    ),
+                    key = mapOf(
+                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "minecraft:fish", data = 2),
+                        "L" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairyLeather"),
+                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
+                        "f" to miragefairy2019.mod.artifacts.WandType.FUSION.ingredientData,
+                        "b" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereDestroy"),
+                        "t" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
+                        "w" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereWater")
+                    ),
+                    result = miragefairy2019.libkt.DataResult(item = "miragefairy2019:ryugyo_drill")
+                )
+            )
+        }
     ),
 
     prayerWheel(
@@ -270,7 +496,29 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "ホイールの外側に妖精語の呪文なんか書いて読めるの？"),
         null,
-        listOf(!SUBMISSION, !SUBMISSION, !"ingotIron", !"gemDiamond")
+        listOf(!SUBMISSION, !SUBMISSION, !"ingotIron", !"gemDiamond"),
+        {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "prayer_wheel"),
+                miragefairy2019.libkt.DataShapedRecipe(
+                    pattern = listOf(
+                        "JCJ",
+                        "SRS",
+                        "sRs"
+                    ),
+                    key = mapOf(
+                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "stickWood"),
+                        "C" to miragefairy2019.libkt.DataSimpleIngredient(item = "minecraft:compass"),
+                        "J" to miragefairy2019.libkt.DataSimpleIngredient(item = "minecraft:jukebox"),
+                        "S" to miragefairy2019.libkt.DataOreIngredient(ore = "string"),
+                        "s" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereSubmission")
+                    ),
+                    result = miragefairy2019.libkt.DataResult(
+                        item = "miragefairy2019:prayer_wheel"
+                    )
+                )
+            )
+        }
     ),
     prayerWheel2(
         prayerWheel, "prayer_wheel_2", "prayerWheel2", 3, { ItemPrayerWheel(5) },
@@ -279,7 +527,30 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "人は死ぬと妖精になるんだって"),
         null,
-        listOf(!"ingotGold", !"dustCinnabar")
+        listOf(!"ingotGold", !"dustCinnabar"),
+        {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "prayer_wheel_2"),
+                miragefairy2019.libkt.DataShapedRecipe(
+                    pattern = listOf(
+                        "crC",
+                        " #r",
+                        "R s"
+                    ),
+                    key = mapOf(
+                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:prayer_wheel"),
+                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019ManaRodShine"),
+                        "C" to miragefairy2019.libkt.DataSimpleIngredient(item = "minecraft:clock"),
+                        "r" to miragefairy2019.libkt.DataOreIngredient(ore = "dustCinnabar"),
+                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
+                        "s" to miragefairy2019.mod.artifacts.WandType.SUMMONING.ingredientData
+                    ),
+                    result = miragefairy2019.libkt.DataResult(
+                        item = "miragefairy2019:prayer_wheel_2"
+                    )
+                )
+            )
+        }
     ),
     prayerWheel3(
         prayerWheel2, "prayer_wheel_3", "prayerWheel3", 5, { ItemPrayerWheel(10) },
@@ -288,7 +559,29 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "人、牛、妖精、ゾンビ、植物、土"),
         "challenge",
-        listOf(!"gemMirageFairyPlastic", !"gemMirageFairyPlastic")
+        listOf(!"gemMirageFairyPlastic", !"gemMirageFairyPlastic"),
+        {
+            makeRecipe(
+                ResourceName(ModMirageFairy2019.MODID, "prayer_wheel_3"),
+                miragefairy2019.libkt.DataShapedRecipe(
+                    pattern = listOf(
+                        " pf",
+                        "c#p",
+                        "Rc "
+                    ),
+                    key = mapOf(
+                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:prayer_wheel_2"),
+                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "rodMirageFairyPlastic"),
+                        "p" to miragefairy2019.libkt.DataOreIngredient(ore = "gemMirageFairyPlastic"),
+                        "f" to miragefairy2019.libkt.DataOreIngredient(ore = "gemMirageFairyPlasticWithFairy"),
+                        "c" to miragefairy2019.libkt.DataOreIngredient(ore = "dustCoal")
+                    ),
+                    result = miragefairy2019.libkt.DataResult(
+                        item = "miragefairy2019:prayer_wheel_3"
+                    )
+                )
+            )
+        }
     ),
 }
 
@@ -347,271 +640,10 @@ object FairyWeapon {
             }
         }
 
-        // リラジウムの大鎌
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "fairyweapons/lilagium_scythe"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "hII",
-                    "I#R",
-                    "mcR"
-                ),
-                key = mapOf(
-                    "#" to DataSimpleIngredient(item = "miragefairy2019:miragium_scythe"),
-                    "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodGaia"),
-                    "I" to DataOreIngredient(ore = "ingotLilagium"),
-                    "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "m" to WandType.MELTING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:lilagium_scythe")
-            )
-        )
-
-        // 鐘ベース
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "fairyweapons/bell_base"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "cPs",
-                    " RP",
-                    "I m"
-                ),
-                key = mapOf(
-                    "R" to DataOreIngredient(ore = "rodMiragium"),
-                    "I" to DataOreIngredient(ore = "ingotMiragium"),
-                    "P" to DataOreIngredient(ore = "plateMiragium"),
-                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSound"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "m" to WandType.MELTING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:bell_base")
-            )
-        )
-
-        // 花摘みの鐘
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "fairyweapons/flower_picking_bell"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "cIh",
-                    "o#I",
-                    "gom"
-                ),
-                key = mapOf(
-                    "#" to DataSimpleIngredient(item = "miragefairy2019:bell_base"),
-                    "g" to DataOreIngredient(ore = "ingotGold"),
-                    "o" to DataOreIngredient(ore = "obsidian"),
-                    "I" to DataOreIngredient(ore = "ingotLilagium"),
-                    "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "m" to WandType.MELTING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:flower_picking_bell")
-            )
-        )
-
-        // 花摘みの鐘2
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "fairyweapons/flower_picking_bell_2"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "cGh",
-                    "G#G",
-                    "RGp"
-                ),
-                key = mapOf(
-                    "#" to DataSimpleIngredient(item = "miragefairy2019:flower_picking_bell"),
-                    "R" to DataOreIngredient(ore = "stickMirageFairyWood"),
-                    "G" to DataOreIngredient(ore = "gemPyrope"),
-                    "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "p" to WandType.POLISHING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:flower_picking_bell_2")
-            )
-        )
-
-        // クリスタルソード
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "fairyweapons/crystal_sword"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "cCC",
-                    "S#C",
-                    "Rmp"
-                ),
-                key = mapOf(
-                    "#" to DataSimpleIngredient(item = "miragefairy2019:miragium_sword"),
-                    "R" to DataOreIngredient(ore = "rodMiragium"),
-                    "S" to DataOreIngredient(ore = "mirageFairy2019SphereCrystal"),
-                    "C" to DataOreIngredient(ore = "mirageFairyCrystal"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "p" to WandType.POLISHING.ingredientData,
-                    "m" to WandType.MELTING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:crystal_sword")
-            )
-        )
-
-        // 龍魚ドリル
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "fairyweapons/ryugyo_drill"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "cLL",
-                    "b#L",
-                    "twf"
-                ),
-                key = mapOf(
-                    "#" to DataSimpleIngredient(item = "minecraft:fish", data = 2),
-                    "L" to DataOreIngredient(ore = "mirageFairyLeather"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "f" to WandType.FUSION.ingredientData,
-                    "b" to DataOreIngredient(ore = "mirageFairy2019SphereDestroy"),
-                    "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
-                    "w" to DataOreIngredient(ore = "mirageFairy2019SphereWater")
-                ),
-                result = DataResult(item = "miragefairy2019:ryugyo_drill")
-            )
-        )
-
-        // チャージングロッド
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "charging_rod"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "cgw",
-                    "g#g",
-                    "tgm"
-                ),
-                key = mapOf(
-                    "#" to DataSimpleIngredient(item = "miragefairy2019:magic_wand_base"),
-                    "g" to DataOreIngredient(ore = "ingotGold"),
-                    "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
-                    "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "m" to WandType.MELTING.ingredientData
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:charging_rod"
-                )
-            )
-        )
-
-        // ライトニングロッド
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "lightning_magic_wand"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "gge",
-                    "c#g",
-                    "Gmg"
-                ),
-                key = mapOf(
-                    "#" to DataSimpleIngredient(item = "miragefairy2019:charging_rod"),
-                    "g" to DataOreIngredient(ore = "ingotGold"),
-                    "e" to DataOreIngredient(ore = "mirageFairy2019SphereEnergy"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "m" to WandType.MELTING.ingredientData,
-                    "G" to DataOreIngredient(ore = "blockMirageFairyCrystalPure")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:lightning_magic_wand"
-                )
-            )
-        )
-
-        // グラビティロッド
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "gravity_rod"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "cOs",
-                    "oRO",
-                    "kof"
-                ),
-                key = mapOf(
-                    "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodFire"),
-                    "k" to DataOreIngredient(ore = "mirageFairy2019SphereKnowledge"),
-                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace"),
-                    "o" to DataOreIngredient(ore = "obsidian"),
-                    "O" to DataOreIngredient(ore = "container1000MirageFlowerOil"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "f" to WandType.FUSION.ingredientData
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:gravity_rod"
-                )
-            )
-        )
-
-        // 収束の地
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "prayer_wheel"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "JCJ",
-                    "SRS",
-                    "sRs"
-                ),
-                key = mapOf(
-                    "R" to DataOreIngredient(ore = "stickWood"),
-                    "C" to DataSimpleIngredient(item = "minecraft:compass"),
-                    "J" to DataSimpleIngredient(item = "minecraft:jukebox"),
-                    "S" to DataOreIngredient(ore = "string"),
-                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSubmission")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:prayer_wheel"
-                )
-            )
-        )
-
-        // 約束の地
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "prayer_wheel_2"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    "crC",
-                    " #r",
-                    "R s"
-                ),
-                key = mapOf(
-                    "#" to DataSimpleIngredient(item = "miragefairy2019:prayer_wheel"),
-                    "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodShine"),
-                    "C" to DataSimpleIngredient(item = "minecraft:clock"),
-                    "r" to DataOreIngredient(ore = "dustCinnabar"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "s" to WandType.SUMMONING.ingredientData
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:prayer_wheel_2"
-                )
-            )
-        )
-
-        // 束縛の地
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "prayer_wheel_3"),
-            DataShapedRecipe(
-                pattern = listOf(
-                    " pf",
-                    "c#p",
-                    "Rc "
-                ),
-                key = mapOf(
-                    "#" to DataSimpleIngredient(item = "miragefairy2019:prayer_wheel_2"),
-                    "R" to DataOreIngredient(ore = "rodMirageFairyPlastic"),
-                    "p" to DataOreIngredient(ore = "gemMirageFairyPlastic"),
-                    "f" to DataOreIngredient(ore = "gemMirageFairyPlasticWithFairy"),
-                    "c" to DataOreIngredient(ore = "dustCoal")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:prayer_wheel_3"
-                )
-            )
-        )
+        // レシピ生成
+        FairyWeaponKind.values().forEach { fairyWeaponKind ->
+            fairyWeaponKind.initializer(this)
+        }
 
         onMakeLang {
             enJa("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器")
