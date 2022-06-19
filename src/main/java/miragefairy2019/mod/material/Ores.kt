@@ -157,27 +157,26 @@ object Ores {
 
         // アイテムモデルの生成
         run {
-            fun makeItemModel(name: String) = makeItemModel(ResourceName(ModMirageFairy2019.MODID, name)) { block }
-            makeItemModel("apatite_ore")
-            makeItemModel("fluorite_ore")
-            makeItemModel("sulfur_ore")
-            makeItemModel("cinnabar_ore")
-            makeItemModel("moonstone_ore")
-            makeItemModel("magnetite_ore")
-            makeItemModel("pyrope_ore")
-            makeItemModel("smithsonite_ore")
-            makeItemModel("netherrack_apatite_ore")
-            makeItemModel("netherrack_fluorite_ore")
-            makeItemModel("netherrack_sulfur_ore")
-            makeItemModel("netherrack_cinnabar_ore")
-            makeItemModel("netherrack_moonstone_ore")
-            makeItemModel("netherrack_magnetite_ore")
-            makeItemModel("nephrite_ore")
-            makeItemModel("topaz_ore")
-            makeItemModel("tourmaline_ore")
-            makeItemModel("heliolite_ore")
-            makeItemModel("end_stone_labradorite_ore")
-            makeItemModel("pyrite_ore")
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "apatite_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fluorite_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "sulfur_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "cinnabar_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "moonstone_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "magnetite_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "pyrope_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "smithsonite_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "netherrack_apatite_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "netherrack_fluorite_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "netherrack_sulfur_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "netherrack_cinnabar_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "netherrack_moonstone_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "netherrack_magnetite_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "nephrite_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "topaz_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "tourmaline_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "heliolite_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "end_stone_labradorite_ore")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "pyrite_ore")) { block }
         }
 
     }

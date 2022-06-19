@@ -121,22 +121,21 @@ object CompressedMaterials {
 
         // アイテムモデルの生成
         run {
-            fun makeItemModel(name: String) = makeItemModel(ResourceName(ModMirageFairy2019.MODID, name)) { block }
-            makeItemModel("apatite_block")
-            makeItemModel("fluorite_block")
-            makeItemModel("sulfur_block")
-            makeItemModel("cinnabar_block")
-            makeItemModel("moonstone_block")
-            makeItemModel("magnetite_block")
-            makeItemModel("pyrope_block")
-            makeItemModel("smithsonite_block")
-            makeItemModel("charcoal_block")
-            makeItemModel("mirage_flower_leaf_block")
-            makeItemModel("miragium_ingot_block")
-            makeItemModel("miragium_dust_block")
-            makeItemModel("nephrite_block")
-            makeItemModel("topaz_block")
-            makeItemModel("tourmaline_block")
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "apatite_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fluorite_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "sulfur_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "cinnabar_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "moonstone_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "magnetite_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "pyrope_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "smithsonite_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "charcoal_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_leaf_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_ingot_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_dust_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "nephrite_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "topaz_block")) { block }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "tourmaline_block")) { block }
         }
 
         // レシピの生成
