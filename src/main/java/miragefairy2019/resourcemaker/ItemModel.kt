@@ -1,7 +1,6 @@
 package miragefairy2019.resourcemaker
 
 import com.google.gson.JsonElement
-import com.google.gson.annotations.Expose
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
@@ -9,7 +8,9 @@ import miragefairy2019.libkt.ItemVariantInitializer
 import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.map
-import mirrg.kotlin.gson.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonObject
+import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 import net.minecraft.item.Item
 
 fun ModInitializer.makeItemModel(resourceName: ResourceName, creator: () -> JsonElement) = onMakeResource {
@@ -24,43 +25,49 @@ fun ModInitializer.makeFluidItemModel(resourceName: ResourceName) = makeItemMode
 
 object ItemModel
 
-fun ItemModel.generated(resourceName: ResourceName) = jsonElement(
+fun ItemModel.generated(resourceName: ResourceName) = jsonObject(
     "parent" to "item/generated".jsonElement,
-    "textures" to jsonElement(
+    "textures" to jsonObject(
         "layer0" to "$resourceName".jsonElement
     )
 )
 
-fun ItemModel.handheld(resourceName: ResourceName) = jsonElement(
+fun ItemModel.handheld(resourceName: ResourceName) = jsonObject(
     "parent" to "item/handheld".jsonElement,
-    "textures" to jsonElement(
+    "textures" to jsonObject(
         "layer0" to "$resourceName".jsonElement
     )
 )
 
-fun ItemModel.block(parent: ResourceName) = jsonElement(
+fun ItemModel.block(parent: ResourceName) = jsonObject(
     "parent" to "$parent".jsonElement
 )
 
 @Deprecated("Deleting")
 fun <I : Item> ItemInitializer<I>.makeItemModel(creator: MakeItemModelScope<I>.() -> DataItemModel) = modInitializer.onMakeResource {
-    dirBase.resolve("assets/${registryName.domain}/models/item/${registryName.path}.json").place(MakeItemModelScope(this@makeItemModel).creator())
+    dirBase.resolve("assets/${registryName.domain}/models/item/${registryName.path}.json").place(MakeItemModelScope(this@makeItemModel).creator().jsonElement)
 }
 
 class MakeItemModelScope<I : Item>(val itemInitializer: ItemInitializer<I>)
 
 @Deprecated("Deleting")
 fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.makeItemVariantModel(creator: MakeItemVariantModelScope<I, V>.() -> DataItemModel) = itemInitializer.modInitializer.onMakeResource {
-    dirBase.resolve("assets/${registryName.domain}/models/item/${registryName.path}.json").place(MakeItemVariantModelScope(this@makeItemVariantModel).creator())
+    dirBase.resolve("assets/${registryName.domain}/models/item/${registryName.path}.json").place(MakeItemVariantModelScope(this@makeItemVariantModel).creator().jsonElement)
 }
 
 class MakeItemVariantModelScope<I : ItemMulti<V>, V : ItemVariant>(val itemVariantInitializer: ItemVariantInitializer<I, V>)
 
 data class DataItemModel(
-    @Expose val parent: String,
-    @Expose val elements: JsonElement? = null,
-    @Expose val textures: Map<String, String>? = null
-)
+    val parent: String,
+    val elements: JsonElement? = null,
+    val textures: Map<String, String>? = null
+) {
+    val jsonElement = jsonObjectNotNull(
+        "parent" to parent.jsonElement,
+        "elements" to elements,
+        "textures" to textures?.mapValues { (_, it) -> it.jsonElement }?.jsonObject
+    )
+}
 
 fun <I : Item> MakeItemModelScope<I>.getStandardItemModel(parent: String) = DataItemModel(
     parent = parent,
