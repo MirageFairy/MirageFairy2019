@@ -1,6 +1,5 @@
 package miragefairy2019.mod.fairyweapon
 
-import com.google.gson.JsonElement
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Erg.ATTACK
 import miragefairy2019.api.Erg.CHRISTMAS
@@ -603,40 +602,34 @@ object FairyWeapon {
 
         // 実績生成
         onMakeResource {
-            fun place(name: String, data: JsonElement) {
-                dirBase.resolve("assets/miragefairy2019/advancements/fairy_weapon/$name.json").place(data)
-            }
-
-            // 実績ルート
-            place(
-                "root", jsonElement(
-                    "display" to jsonElementNotNull(
-                        "icon" to jsonElement(
-                            "item" to "miragefairy2019:miragium_sword".jsonElement
-                        ),
-                        "title" to jsonElement(
-                            "translate" to "advancements.miragefairy2019.fairy_weapon.root.title".jsonElement
-                        ),
-                        "description" to jsonElement(
-                            "translate" to "advancements.miragefairy2019.fairy_weapon.root.description".jsonElement
-                        ),
-                        "background" to "miragefairy2019:textures/blocks/magnetite_block.png".jsonElement
+            val data = jsonElement(
+                "display" to jsonElementNotNull(
+                    "icon" to jsonElement(
+                        "item" to "miragefairy2019:miragium_sword".jsonElement
                     ),
-                    "criteria" to jsonElement(
-                        "main" to jsonElement(
-                            "trigger" to "minecraft:inventory_changed".jsonElement,
-                            "conditions" to jsonElement(
-                                "items" to jsonElement(
-                                    jsonElement(
-                                        "type" to "forge:ore_dict".jsonElement,
-                                        "ore" to "mirageFairy2019SphereAny".jsonElement
-                                    )
+                    "title" to jsonElement(
+                        "translate" to "advancements.miragefairy2019.fairy_weapon.root.title".jsonElement
+                    ),
+                    "description" to jsonElement(
+                        "translate" to "advancements.miragefairy2019.fairy_weapon.root.description".jsonElement
+                    ),
+                    "background" to "miragefairy2019:textures/blocks/magnetite_block.png".jsonElement
+                ),
+                "criteria" to jsonElement(
+                    "main" to jsonElement(
+                        "trigger" to "minecraft:inventory_changed".jsonElement,
+                        "conditions" to jsonElement(
+                            "items" to jsonElement(
+                                jsonElement(
+                                    "type" to "forge:ore_dict".jsonElement,
+                                    "ore" to "mirageFairy2019SphereAny".jsonElement
                                 )
                             )
                         )
                     )
                 )
             )
+            dirBase.resolve("assets/miragefairy2019/advancements/fairy_weapon/root.json").place(data)
         }
 
         // 個別
@@ -691,10 +684,7 @@ object FairyWeapon {
 
             // 実績生成
             onMakeResource {
-                fun place(name: String, data: JsonElement) {
-                    dirBase.resolve("assets/miragefairy2019/advancements/fairy_weapon/$name.json").place(data)
-                }
-                place(fairyWeaponKind.registryName, jsonElement(
+                val data = jsonElement(
                     "display" to jsonElementNotNull(
                         "icon" to jsonElement(
                             "item" to "miragefairy2019:${fairyWeaponKind.registryName}".jsonElement
@@ -720,7 +710,8 @@ object FairyWeapon {
                             )
                         )
                     )
-                ))
+                )
+                dirBase.resolve("assets/miragefairy2019/advancements/fairy_weapon/${fairyWeaponKind.registryName}.json").place(data)
             }
 
         }
