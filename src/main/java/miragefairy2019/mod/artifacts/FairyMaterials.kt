@@ -130,8 +130,7 @@ object FairyMaterials {
         // レシピ生成
         run {
             // 5棒＋8樹液→松明8
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "torch_from_fairy_wood_resin"),
+            makeRecipe("torch_from_fairy_wood_resin") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "r",
@@ -146,11 +145,10 @@ object FairyMaterials {
                         count = 8
                     )
                 )
-            )
+            }
 
             // 蛍石→スフィアベース
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "sphere_base"),
+            makeRecipe("sphere_base") {
                 DataShapelessRecipe(
                     ingredients = listOf(
                         WandType.POLISHING.ingredientData,
@@ -162,11 +160,10 @@ object FairyMaterials {
                         count = 2
                     )
                 )
-            )
+            }
 
             // 宝石→スフィアベース
-            fun makeSphereBaseRecipe(materialName: String) = makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "sphere_base_from_$materialName"),
+            fun makeSphereBaseRecipe(materialName: String) = makeRecipe("sphere_base_from_$materialName") {
                 DataShapedRecipe(
                     pattern = listOf(
                         " Gp",
@@ -185,7 +182,7 @@ object FairyMaterials {
                         count = 4
                     )
                 )
-            )
+            }
             makeSphereBaseRecipe("diamond")
             makeSphereBaseRecipe("emerald")
             makeSphereBaseRecipe("pyrope")
@@ -197,8 +194,7 @@ object FairyMaterials {
             makeSphereBaseRecipe("labradorite")
 
             // 妖精のプラスチック2→妖精のプラスチックの棒4
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "fairy_plastic_rod"),
+            makeRecipe("fairy_plastic_rod") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "X",
@@ -213,11 +209,10 @@ object FairyMaterials {
                         count = 4
                     )
                 )
-            )
+            }
 
             // 木炭の粉＋樹液＋空き瓶→墨汁
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "india_ink"),
+            makeRecipe("india_ink") {
                 DataShapelessRecipe(
                     ingredients = listOf(
                         DataOreIngredient(ore = "dustCharcoal"),
@@ -230,7 +225,7 @@ object FairyMaterials {
                         count = 1
                     )
                 )
-            )
+            }
 
         }
 

@@ -54,8 +54,7 @@ object Fertilizer {
             }
         }
         makeItemModel("fertilizer") { generated }
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "fertilizer"),
+        makeRecipe("fertilizer") {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOreIngredient(ore = "dustApatite"),
@@ -66,7 +65,7 @@ object Fertilizer {
                     count = 4
                 )
             )
-        )
+        }
     }
 }
 

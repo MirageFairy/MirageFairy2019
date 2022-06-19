@@ -1,7 +1,6 @@
 package miragefairy2019.mod.material
 
 import miragefairy2019.libkt.BlockVariantList
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.enJa
@@ -141,8 +140,7 @@ object CompressedMaterials {
         // レシピの生成
         run {
             fun toi(ingot: String, block: String, ingredientBlock: DataIngredient, resultIngot: DataResult) {
-                makeRecipe(
-                    ResourceName(ModMirageFairy2019.MODID, "materials/compress/${ingot}_from_${block}"), // TODO rename
+                makeRecipe("materials/compress/${ingot}_from_${block}") { // TODO rename
                     DataShapedRecipe(
                         pattern = listOf(
                             "#"
@@ -152,12 +150,11 @@ object CompressedMaterials {
                         ),
                         result = resultIngot
                     )
-                )
+                }
             }
 
             fun tob(block: String, ingredientIngot: DataIngredient, resultBlock: DataResult) {
-                makeRecipe(
-                    ResourceName(ModMirageFairy2019.MODID, "materials/compress/$block"),
+                makeRecipe("materials/compress/$block") {
                     DataShapedRecipe(
                         pattern = listOf(
                             "###",
@@ -169,7 +166,7 @@ object CompressedMaterials {
                         ),
                         result = resultBlock
                     )
-                )
+                }
             }
 
             operator fun String.not() = DataOreIngredient(ore = this)

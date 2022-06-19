@@ -200,8 +200,7 @@ object Wand {
 
         // レシピ生成
         // 糸から技巧杖
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "crafting_fairy_wand_from_string"),
+        makeRecipe("crafting_fairy_wand_from_string") {
             DataShapedRecipe(
                 pattern = listOf(
                     " cS",
@@ -215,7 +214,7 @@ object Wand {
                 ),
                 result = DataResult(item = "miragefairy2019:crafting_fairy_wand")
             )
-        )
+        }
 
         // レシピ登録
         // 丸石＞紅蓮→焼き石
@@ -297,8 +296,7 @@ object Wand {
             }
 
             // レシピ生成
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, wandKind.registryName),
+            makeRecipe(wandKind.registryName) {
                 DataShapedRecipe(
                     pattern = listOf(
                         " cS",
@@ -312,7 +310,7 @@ object Wand {
                     ),
                     result = DataResult(item = "miragefairy2019:${wandKind.registryName}")
                 )
-            )
+            }
 
         }
 

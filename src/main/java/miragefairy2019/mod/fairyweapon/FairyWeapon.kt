@@ -19,7 +19,6 @@ import miragefairy2019.api.Erg.WARP
 import miragefairy2019.api.Erg.WATER
 import miragefairy2019.libkt.BakedModelBuiltinWrapper
 import miragefairy2019.libkt.ModInitializer
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
@@ -28,7 +27,6 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main.creativeTab
 import miragefairy2019.mod.Main.side
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.mod.artifacts.oreName
@@ -108,8 +106,7 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!CRYSTAL),
         {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "fairyweapons/crystal_sword"),
+            makeRecipe("fairyweapons/crystal_sword") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "cCC",
@@ -127,7 +124,7 @@ enum class FairyWeaponKind(
                     ),
                     result = DataResult(item = "miragefairy2019:crystal_sword")
                 )
-            )
+            }
         }
     ),
     fairySword(
@@ -201,8 +198,7 @@ enum class FairyWeaponKind(
         null,
         listOf(!THUNDER, !WARP, !"ingotGold"),
         {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "charging_rod"),
+            makeRecipe("charging_rod") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "cgw",
@@ -221,7 +217,7 @@ enum class FairyWeaponKind(
                         item = "miragefairy2019:charging_rod"
                     )
                 )
-            )
+            }
         }
     ),
     magicWandLightning(
@@ -233,8 +229,7 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!ENERGY, !"blockMirageFairyCrystalPure"),
         {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "lightning_magic_wand"),
+            makeRecipe("lightning_magic_wand") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "gge",
@@ -253,7 +248,7 @@ enum class FairyWeaponKind(
                         item = "miragefairy2019:lightning_magic_wand"
                     )
                 )
-            )
+            }
         }
     ),
 
@@ -266,8 +261,7 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!KNOWLEDGE, !SPACE, !"gemCinnabar", !"obsidian"),
         {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "gravity_rod"),
+            makeRecipe("gravity_rod") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "cOs",
@@ -287,7 +281,7 @@ enum class FairyWeaponKind(
                         item = "miragefairy2019:gravity_rod"
                     )
                 )
-            )
+            }
         }
     ),
 
@@ -325,8 +319,7 @@ enum class FairyWeaponKind(
         null,
         listOf(!SOUND, !"plateMiragium"),
         {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "fairyweapons/bell_base"),
+            makeRecipe("fairyweapons/bell_base") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "cPs",
@@ -343,7 +336,7 @@ enum class FairyWeaponKind(
                     ),
                     result = DataResult(item = "miragefairy2019:bell_base")
                 )
-            )
+            }
         }
     ),
     bellFlowerPicking(
@@ -355,8 +348,7 @@ enum class FairyWeaponKind(
         null,
         listOf(!HARVEST),
         {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "fairyweapons/flower_picking_bell"),
+            makeRecipe("fairyweapons/flower_picking_bell") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "cIh",
@@ -374,7 +366,7 @@ enum class FairyWeaponKind(
                     ),
                     result = DataResult(item = "miragefairy2019:flower_picking_bell")
                 )
-            )
+            }
         }
     ),
     bellFlowerPicking2(
@@ -386,8 +378,7 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!HARVEST),
         {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "fairyweapons/flower_picking_bell_2"),
+            makeRecipe("fairyweapons/flower_picking_bell_2") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "cGh",
@@ -404,7 +395,7 @@ enum class FairyWeaponKind(
                     ),
                     result = DataResult(item = "miragefairy2019:flower_picking_bell_2")
                 )
-            )
+            }
         }
     ),
     bellChristmas(
@@ -441,8 +432,7 @@ enum class FairyWeaponKind(
         null,
         listOf(!HARVEST),
         {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "fairyweapons/lilagium_scythe"),
+            makeRecipe("fairyweapons/lilagium_scythe") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "hII",
@@ -459,7 +449,7 @@ enum class FairyWeaponKind(
                     ),
                     result = DataResult(item = "miragefairy2019:lilagium_scythe")
                 )
-            )
+            }
         }
     ),
 
@@ -472,8 +462,7 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!DESTROY, !THUNDER, !WATER),
         {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "fairyweapons/ryugyo_drill"),
+            makeRecipe("fairyweapons/ryugyo_drill") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "cLL",
@@ -491,7 +480,7 @@ enum class FairyWeaponKind(
                     ),
                     result = DataResult(item = "miragefairy2019:ryugyo_drill")
                 )
-            )
+            }
         }
     ),
 
@@ -504,8 +493,7 @@ enum class FairyWeaponKind(
         null,
         listOf(!SUBMISSION, !SUBMISSION, !"ingotIron", !"gemDiamond"),
         {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "prayer_wheel"),
+            makeRecipe("prayer_wheel") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "JCJ",
@@ -523,7 +511,7 @@ enum class FairyWeaponKind(
                         item = "miragefairy2019:prayer_wheel"
                     )
                 )
-            )
+            }
         }
     ),
     prayerWheel2(
@@ -535,8 +523,7 @@ enum class FairyWeaponKind(
         null,
         listOf(!"ingotGold", !"dustCinnabar"),
         {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "prayer_wheel_2"),
+            makeRecipe("prayer_wheel_2") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "crC",
@@ -555,7 +542,7 @@ enum class FairyWeaponKind(
                         item = "miragefairy2019:prayer_wheel_2"
                     )
                 )
-            )
+            }
         }
     ),
     prayerWheel3(
@@ -567,8 +554,7 @@ enum class FairyWeaponKind(
         "challenge",
         listOf(!"gemMirageFairyPlastic", !"gemMirageFairyPlastic"),
         {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "prayer_wheel_3"),
+            makeRecipe("prayer_wheel_3") {
                 DataShapedRecipe(
                     pattern = listOf(
                         " pf",
@@ -586,7 +572,7 @@ enum class FairyWeaponKind(
                         item = "miragefairy2019:prayer_wheel_3"
                     )
                 )
-            )
+            }
         }
     ),
 }

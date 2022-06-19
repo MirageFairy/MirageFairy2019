@@ -3,7 +3,6 @@ package miragefairy2019.mod.artifacts
 import miragefairy2019.libkt.CapabilityProviderAdapter
 import miragefairy2019.libkt.ItemMultiMaterial
 import miragefairy2019.libkt.ItemVariantMaterial
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.item
@@ -53,8 +52,7 @@ object Pot {
             setCustomModelResourceLocation()
         }
         makeItemModel("pot") { generated }
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "pot"),
+        makeRecipe("pot") {
             DataShapedRecipe(
                 pattern = listOf(
                     "   ",
@@ -68,7 +66,7 @@ object Pot {
                     item = "${ModMirageFairy2019.MODID}:pot"
                 )
             )
-        )
+        }
 
         // 中身入りポット
         itemFilledBucket = item({ ItemFilledPot() }, "filled_bucket") {
@@ -119,8 +117,7 @@ object Pot {
 
         // 詰め替えレシピ
 
-        fun potToItem(fluidName: String, fluidOreSuffix: String, result: DataResult) = makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "pot/${fluidName}_bucket_from_${fluidName}_container"), // TODO _pot
+        fun potToItem(fluidName: String, fluidOreSuffix: String, result: DataResult) = makeRecipe("pot/${fluidName}_bucket_from_${fluidName}_container") { // TODO _pot
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataSimpleIngredient(item = "minecraft:bucket"),
@@ -128,7 +125,7 @@ object Pot {
                 ),
                 result = result
             )
-        )
+        }
 
         fun potToBucket(fluidName: String, fluidOreSuffix: String) = potToItem(
             fluidName,
@@ -142,8 +139,7 @@ object Pot {
             )
         )
 
-        fun itemToPot(fluidName: String, potMetadata: Int, input: DataIngredient) = makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "pot/${fluidName}_pot_from_${fluidName}_bucket"),
+        fun itemToPot(fluidName: String, potMetadata: Int, input: DataIngredient) = makeRecipe("pot/${fluidName}_pot_from_${fluidName}_bucket") {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOreIngredient(ore = "mirageFairyPot"),
@@ -154,7 +150,7 @@ object Pot {
                     data = potMetadata
                 )
             )
-        )
+        }
 
         fun bucketToPot(fluidName: String, potMetadata: Int) = itemToPot(
             fluidName,
@@ -169,8 +165,7 @@ object Pot {
             )
         )
 
-        fun bottleToPot(registerName: String, fluidOreSuffix: String, potMetadata: Int) = makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "pot/${registerName}_pot_from_${registerName}_bottle"),
+        fun bottleToPot(registerName: String, fluidOreSuffix: String, potMetadata: Int) = makeRecipe("pot/${registerName}_pot_from_${registerName}_bottle") {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOreIngredient(ore = "mirageFairyPot"),
@@ -184,10 +179,9 @@ object Pot {
                     data = potMetadata
                 )
             )
-        )
+        }
 
-        fun potToBottle(registerName: String, fluidOreSuffix: String, bottleMetadata: Int) = makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "pot/${registerName}_bottle_from_${registerName}_pot"),
+        fun potToBottle(registerName: String, fluidOreSuffix: String, bottleMetadata: Int) = makeRecipe("pot/${registerName}_bottle_from_${registerName}_pot") {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataSimpleIngredient(item = "minecraft:glass_bottle"),
@@ -202,7 +196,7 @@ object Pot {
                     count = 4
                 )
             )
-        )
+        }
 
         potToBucket("miragium_water", "MiragiumWater")
         bucketToPot("miragium_water", 0)

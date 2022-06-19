@@ -7,8 +7,8 @@ import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
 
 
-fun ModInitializer.makeRecipe(resourceName: ResourceName, recipe: DataRecipe) = onMakeResource {
-    place("assets/${resourceName.domain}/recipes/${resourceName.path}.json", recipe.jsonElement)
+fun ModInitializer.makeRecipe(path: String, creator: () -> DataRecipe) = onMakeResource {
+    place("assets/$modId/recipes/$path.json", creator().jsonElement)
 }
 
 

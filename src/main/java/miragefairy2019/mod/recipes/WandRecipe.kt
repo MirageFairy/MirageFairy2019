@@ -18,8 +18,7 @@ object WandRecipe {
 
         // 破砕のワンドによる粉砕
         fun makeDustRecipe(registryName: String, ingredient: DataIngredient, metadata: Int) {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, registryName),
+            makeRecipe(registryName) {
                 DataShapelessRecipe(
                     ingredients = listOf(
                         WandType.BREAKING.ingredientData,
@@ -30,7 +29,7 @@ object WandRecipe {
                         data = metadata
                     )
                 )
-            )
+            }
         }
         makeDustRecipe("apatite_dust", DataOreIngredient(ore = "gemApatite"), 23)
         makeDustRecipe("fluorite_dust", DataOreIngredient(ore = "gemFluorite"), 24)
@@ -42,8 +41,7 @@ object WandRecipe {
         makeDustRecipe("charcoal_dust", DataSimpleIngredient(item = "minecraft:coal", data = 1), 22)
 
         // 氷8＋氷結のワンド→氷塊
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "packed_ice"),
+        makeRecipe("packed_ice") {
             DataShapedRecipe(
                 pattern = listOf(
                     "###",
@@ -58,11 +56,10 @@ object WandRecipe {
                     item = "minecraft:packed_ice"
                 )
             )
-        )
+        }
 
         // 塗れたスポンジ＋紅蓮のワンド→スポンジ
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "sponge_from_wet_sponge"),
+        makeRecipe("sponge_from_wet_sponge") {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataSimpleIngredient(item = "minecraft:sponge", data = 1),
@@ -73,11 +70,10 @@ object WandRecipe {
                     data = 0
                 )
             )
-        )
+        }
 
         // 砂岩＋破砕のワンド→砂
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "sand_from_sandstone"),
+        makeRecipe("sand_from_sandstone") {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOreIngredient(ore = "sandstone"),
@@ -88,7 +84,7 @@ object WandRecipe {
                     data = 0
                 )
             )
-        )
+        }
 
     }
 }

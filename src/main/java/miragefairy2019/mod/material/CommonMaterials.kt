@@ -125,8 +125,7 @@ object CommonMaterials {
         run {
 
             // Tier 2 金鉱石 -> 金
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "gold_ore_smelt_tier_2"),
+            makeRecipe("gold_ore_smelt_tier_2") {
                 DataShapelessRecipe(
                     ingredients = listOf(
                         WandType.MELTING.ingredientData,
@@ -138,11 +137,10 @@ object CommonMaterials {
                         count = 17
                     )
                 )
-            )
+            }
 
             // Tier 4 金鉱石 -> 金
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "gold_ore_smelt_tier_4"),
+            makeRecipe("gold_ore_smelt_tier_4") {
                 DataShapelessRecipe(
                     ingredients = listOf(
                         WandType.MELTING.ingredientData,
@@ -155,11 +153,10 @@ object CommonMaterials {
                         count = 3
                     )
                 )
-            )
+            }
 
             // Tier 2 鉄鉱石 -> 鉄
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "iron_ore_smelt_tier_2"),
+            makeRecipe("iron_ore_smelt_tier_2") {
                 DataShapelessRecipe(
                     ingredients = listOf(
                         WandType.MELTING.ingredientData,
@@ -171,11 +168,10 @@ object CommonMaterials {
                         count = 17
                     )
                 )
-            )
+            }
 
             // Tier 4 鉄鉱石 -> 鉄
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "iron_ore_smelt_tier_4"),
+            makeRecipe("iron_ore_smelt_tier_4") {
                 DataShapelessRecipe(
                     ingredients = listOf(
                         WandType.MELTING.ingredientData,
@@ -188,11 +184,10 @@ object CommonMaterials {
                         count = 3
                     )
                 )
-            )
+            }
 
             // Tier 2 磁鉄鉱の粉 -> 鉄
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "magnetite_smelt_tier_2"),
+            makeRecipe("magnetite_smelt_tier_2") {
                 DataShapelessRecipe(
                     ingredients = listOf(
                         WandType.MELTING.ingredientData,
@@ -207,11 +202,10 @@ object CommonMaterials {
                         count = 3
                     )
                 )
-            )
+            }
 
             // Tier 4 磁鉄鉱の粉 -> 鉄
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "magnetite_smelt_tier_4"),
+            makeRecipe("magnetite_smelt_tier_4") {
                 DataShapelessRecipe(
                     ingredients = listOf(
                         WandType.MELTING.ingredientData,
@@ -229,7 +223,7 @@ object CommonMaterials {
                         count = 3
                     )
                 )
-            )
+            }
 
         }
 

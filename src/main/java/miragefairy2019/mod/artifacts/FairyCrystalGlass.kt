@@ -193,19 +193,17 @@ object FairyCrystalGlass {
             onMakeLang { enJa("tile.${"${prefix}FairyCrystalGlass".toLowerCaseHead()}.name", "${englishPrefix}Fairy Crystal Glass", "${japanesePrefix}フェアリークリスタルガラス") }
 
             // 圧縮レシピ
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "${prefix}FairyCrystalGlass".toSnakeCase()),
+            makeRecipe("${prefix}FairyCrystalGlass".toSnakeCase()) {
                 DataShapelessRecipe(
                     ingredients = (1..8).map { DataOreIngredient(ore = "mirageFairyCrystal$prefix") },
                     result = DataResult(
                         item = "${ModMirageFairy2019.MODID}:${"${prefix}FairyCrystalGlass".toSnakeCase()}"
                     )
                 )
-            )
+            }
 
             // 分解レシピ
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "${"${prefix}FairyCrystal".toSnakeCase()}_from_${"${prefix}FairyCrystalGlass".toSnakeCase()}"),
+            makeRecipe("${"${prefix}FairyCrystal".toSnakeCase()}_from_${"${prefix}FairyCrystalGlass".toSnakeCase()}") {
                 DataShapelessRecipe(
                     ingredients = listOf(DataOreIngredient(ore = "blockMirageFairyCrystal$prefix")),
                     result = DataResult(
@@ -214,7 +212,7 @@ object FairyCrystalGlass {
                         count = 8
                     )
                 )
-            )
+            }
 
             return Pair(block, item)
         }

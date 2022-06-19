@@ -97,8 +97,7 @@ object FairyCrystal {
                     onCreateItemStack { OreDictionary.registerOre("mirageFairyCrystalAny", itemVariant.createItemStack()) }
                     onMakeLang { enJa("item.$unlocalizedName.name", english, japanese) }
                     if (recipeParameter != null) {
-                        makeRecipe(
-                            ResourceName(ModMirageFairy2019.MODID, registryName),
+                        makeRecipe(registryName) {
                             DataShapelessRecipe(
                                 ingredients = listOf(
                                     DataOreIngredient(ore = recipeParameter.inputOreName),
@@ -109,7 +108,7 @@ object FairyCrystal {
                                     data = metadata
                                 )
                             )
-                        )
+                        }
                     }
                     makeItemModel(registryName) { generated }
                 }

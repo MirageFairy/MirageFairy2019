@@ -13,8 +13,7 @@ import miragefairy2019.resourcemaker.makeRecipe
 
 object SlabUncraft {
     val module = module {
-        fun r(resourceName: String, slab: DataIngredient, block: DataResult) = makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "slab_uncraft/$resourceName"),
+        fun r(resourceName: String, slab: DataIngredient, block: DataResult) = makeRecipe("slab_uncraft/$resourceName") {
             DataShapelessRecipe(
                 ingredients = listOf(
                     slab,
@@ -23,7 +22,7 @@ object SlabUncraft {
                 ),
                 result = block
             )
-        )
+        }
         r("stone", DataSimpleIngredient(item = "minecraft:stone_slab", data = 0), DataResult(item = "minecraft:stone", data = 0))
         r("sandstone", DataSimpleIngredient(item = "minecraft:stone_slab", data = 1), DataResult(item = "minecraft:sandstone", data = 0))
         r("cobblestone", DataSimpleIngredient(item = "minecraft:stone_slab", data = 3), DataResult(item = "minecraft:cobblestone"))

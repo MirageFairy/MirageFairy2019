@@ -69,8 +69,7 @@ object FairyBox {
             onMakeLang { enJa("tile.fairyBox.name", "Fairy Box", "妖精の家") }
             onMakeLang { enJa("tile.fairyBox.poem", "", "大きな刳りの木の中で") }
             tileEntity("fairy_box", TileEntityFairyBoxEmpty::class.java)
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "fairy_box"),
+            makeRecipe("fairy_box") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "sls",
@@ -89,7 +88,7 @@ object FairyBox {
                         item = "miragefairy2019:fairy_box"
                     )
                 )
-            )
+            }
         }
 
         // 樹液の家
@@ -111,8 +110,7 @@ object FairyBox {
             onMakeLang { enJa("tile.fairyResinTapper.name", "Fairy Resin Tapper", "樹液取り職人スプルーツァの家") }
             onMakeLang { enJa("tile.fairyResinTapper.poem", "", "妖精だから、森に帰ります") }
             tileEntity("fairy_resin_tapper", TileEntityFairyBoxResinTapper::class.java)
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "fairy_resin_tapper"),
+            makeRecipe("fairy_resin_tapper") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "LsL",
@@ -131,7 +129,7 @@ object FairyBox {
                         item = "miragefairy2019:fairy_resin_tapper"
                     )
                 )
-            )
+            }
         }
 
         // 分離機
@@ -159,8 +157,7 @@ object FairyBox {
                     override fun GuiHandlerContext.onClient() = tileEntity?.castOrNull<TileEntityFairyBoxCentrifuge>()?.createContainer(player)?.createGui()
                 }.guiHandler)
             }
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "fairy_centrifuge"),
+            makeRecipe("fairy_centrifuge") {
                 DataShapedRecipe(
                     pattern = listOf(
                         "GbG",
@@ -179,7 +176,7 @@ object FairyBox {
                         item = "miragefairy2019:fairy_centrifuge"
                     )
                 )
-            )
+            }
 
             onAddRecipe {
 

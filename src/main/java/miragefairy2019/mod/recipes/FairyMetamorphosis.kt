@@ -13,8 +13,7 @@ import mirrg.kotlin.toUpperCamelCase
 object FairyMetamorphosis {
     val module = module {
         fun make(resultName: String, fairyMotif: String, result: DataResult) {
-            makeRecipe(
-                ResourceName(ModMirageFairy2019.MODID, "fairy_metamorphosis/${resultName}_from_${fairyMotif}"),
+            makeRecipe("fairy_metamorphosis/${resultName}_from_${fairyMotif}") {
                 DataShapelessRecipe(
                     ingredients = listOf(
                         DataOreIngredient(
@@ -34,7 +33,7 @@ object FairyMetamorphosis {
                     ),
                     result = result
                 )
-            )
+            }
         }
         make("chicken", "chicken", DataResult(item = "minecraft:chicken"))
         make("beef", "cow", DataResult(item = "minecraft:beef"))

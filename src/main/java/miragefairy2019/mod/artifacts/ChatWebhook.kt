@@ -125,8 +125,7 @@ object ChatWebhook {
         itemChatWebhookTransmitter = item({ ItemBlock(blockChatWebhookTransmitter()) }, "chat_webhook_transmitter") {
             setCustomModelResourceLocation(variant = "facing=north")
         }
-        makeRecipe(
-            ResourceName(ModMirageFairy2019.MODID, "chat_webhook_transmitter"),
+        makeRecipe("chat_webhook_transmitter") {
             DataShapedRecipe(
                 pattern = listOf(
                     "wBw",
@@ -144,7 +143,7 @@ object ChatWebhook {
                     item = "${ModMirageFairy2019.MODID}:chat_webhook_transmitter"
                 )
             )
-        )
+        }
         onMakeLang { enJa("tile.chatWebhookTransmitter.name", "Chat Webhook Transmitter", "天耳通の祠") }
 
 
