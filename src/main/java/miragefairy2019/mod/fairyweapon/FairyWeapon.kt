@@ -591,7 +591,7 @@ object FairyWeapon {
     @Suppress("UNUSED_VARIABLE")
     val module = module {
 
-        // 妖精武器
+        // アイテム登録
         FairyWeaponKind.values().forEach { fairyWeaponKind ->
             item(fairyWeaponKind.itemCreator, fairyWeaponKind.registryName) {
                 setUnlocalizedName(fairyWeaponKind.unlocalizedName)
@@ -617,6 +617,10 @@ object FairyWeapon {
                     item.manualRepairRequirements += fairyWeaponKind.manualRepairIngredients
                 }
             }
+        }
+
+        // アイテムモデル生成
+        FairyWeaponKind.values().forEach { fairyWeaponKind ->
             makeItemModel(ResourceName(ModMirageFairy2019.MODID, fairyWeaponKind.registryName)) {
                 jsonElement(
                     "parent" to "item/handheld".jsonElement,
@@ -627,11 +631,14 @@ object FairyWeapon {
             }
         }
 
+        // 翻訳生成
         onMakeLang {
             enJa("miragefairy2019.magic.${MagicMessage.NO_FAIRY.unlocalizedName}.text", "You don't have a fairy", "妖精を所持していません")
             enJa("miragefairy2019.magic.${MagicMessage.INSUFFICIENT_DURABILITY.unlocalizedName}.text", "Insufficient durability", "耐久値が不足しています")
             enJa("miragefairy2019.magic.${MagicMessage.NO_TARGET.unlocalizedName}.text", "There is no target", "発動対象がありません")
             enJa("miragefairy2019.magic.${MagicMessage.COOL_TIME.unlocalizedName}.text", "Cool time remains", "クールタイムが残っています")
+            enJa("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器")
+            enJa("advancements.miragefairy2019.fairy_weapon.root.description", "Fairy Weapon", "妖精の力を何かに使えないだろうか")
             FairyWeaponKind.values().forEach { fairyWeaponKind ->
                 enJa("item.${fairyWeaponKind.unlocalizedName}.name", fairyWeaponKind.displayName.english, fairyWeaponKind.displayName.japanese)
                 enJa("item.${fairyWeaponKind.unlocalizedName}.poem", fairyWeaponKind.poem.english, fairyWeaponKind.poem.japanese)
@@ -645,10 +652,7 @@ object FairyWeapon {
             fairyWeaponKind.initializer(this)
         }
 
-        onMakeLang {
-            enJa("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器")
-            enJa("advancements.miragefairy2019.fairy_weapon.root.description", "Fairy Weapon", "妖精の力を何かに使えないだろうか")
-        }
+        // 実績生成
         onMakeResource {
             fun place(name: String, data: JsonElement) {
                 dirBase.resolve("assets/miragefairy2019/advancements/fairy_weapon/$name.json").place(data)
