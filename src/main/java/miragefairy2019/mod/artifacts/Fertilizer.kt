@@ -11,7 +11,8 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapelessRecipe
-import miragefairy2019.resourcemaker.makeGeneratedItemModel
+import miragefairy2019.resourcemaker.generated
+import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
 import net.minecraft.block.BlockDispenser
 import net.minecraft.dispenser.IBlockSource
@@ -52,7 +53,7 @@ object Fertilizer {
                 })
             }
         }
-        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "fertilizer"))
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fertilizer")) { generated }
         makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "fertilizer"),
             DataShapelessRecipe(

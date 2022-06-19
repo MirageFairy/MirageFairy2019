@@ -13,9 +13,10 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
-import miragefairy2019.resourcemaker.makeBlockItemModel
+import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
+import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
@@ -86,7 +87,7 @@ object FairyLog {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation(variant = "facing=north,variant=oak")
         }
-        makeBlockItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_log"))
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_log")) { block }
 
         // 地形生成
         onHookDecorator {

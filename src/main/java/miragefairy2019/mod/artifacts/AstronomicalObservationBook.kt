@@ -19,7 +19,8 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.skill.ApiSkill
-import miragefairy2019.resourcemaker.makeGeneratedItemModel
+import miragefairy2019.resourcemaker.generated
+import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.kotlin.minus
 import mirrg.kotlin.startOfDay
 import mirrg.kotlin.startOfMonth
@@ -57,7 +58,7 @@ object AstronomicalObservationBook {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
-        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "astronomical_observation_book"))
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "astronomical_observation_book")) { generated }
     }
 }
 

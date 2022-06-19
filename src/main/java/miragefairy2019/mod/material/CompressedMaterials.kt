@@ -18,9 +18,10 @@ import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapedRecipe
 import miragefairy2019.resourcemaker.DataSimpleIngredient
-import miragefairy2019.resourcemaker.makeBlockItemModel
+import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
+import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.SoundType
@@ -120,7 +121,7 @@ object CompressedMaterials {
 
         // アイテムモデルの生成
         run {
-            fun makeItemModel(name: String) = makeBlockItemModel(ResourceName(ModMirageFairy2019.MODID, name))
+            fun makeItemModel(name: String) = makeItemModel(ResourceName(ModMirageFairy2019.MODID, name)) { block }
             makeItemModel("apatite_block")
             makeItemModel("fluorite_block")
             makeItemModel("sulfur_block")

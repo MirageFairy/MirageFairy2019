@@ -12,7 +12,8 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.resourcemaker.makeFluidItemModel
+import miragefairy2019.resourcemaker.fluid
+import miragefairy2019.resourcemaker.makeItemModel
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -57,7 +58,7 @@ object FluidMaterials {
         itemFluidMiragiumWater = item({ ItemBlock(blockFluidMiragiumWater()) }, "miragium_water") {
             setCustomModelResourceLocation()
         }
-        makeFluidItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_water"))
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_water")) { fluid }
 
 
         // ミラージュエキス
@@ -72,7 +73,7 @@ object FluidMaterials {
         itemFluidMirageFlowerExtract = item({ ItemBlock(blockFluidMirageFlowerExtract()) }, "mirage_flower_extract") {
             setCustomModelResourceLocation()
         }
-        makeFluidItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_extract"))
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_extract")) { fluid }
 
 
         // ミラージュオイル
@@ -87,7 +88,7 @@ object FluidMaterials {
         itemFluidMirageFlowerOil = item({ ItemBlock(blockFluidMirageFlowerOil()) }, "mirage_flower_oil") {
             setCustomModelResourceLocation()
         }
-        makeFluidItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_oil"))
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_oil")) { fluid }
 
     }
 }

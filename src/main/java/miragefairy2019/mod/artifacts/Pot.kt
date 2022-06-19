@@ -21,7 +21,8 @@ import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapedRecipe
 import miragefairy2019.resourcemaker.DataShapelessRecipe
 import miragefairy2019.resourcemaker.DataSimpleIngredient
-import miragefairy2019.resourcemaker.makeGeneratedItemModel
+import miragefairy2019.resourcemaker.generated
+import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.jsonElement
@@ -51,7 +52,7 @@ object Pot {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
-        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "pot"))
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "pot")) { generated }
         makeRecipe(
             ResourceName(ModMirageFairy2019.MODID, "pot"),
             DataShapedRecipe(
@@ -109,11 +110,11 @@ object Pot {
                 if (Main.side.isClient) item.setCustomModelResourceLocations()
             }
         }
-        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_water_pot"))
-        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_extract_pot"))
-        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_oil_pot"))
-        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "water_pot"))
-        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "lava_pot"))
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_water_pot")) { generated }
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_extract_pot")) { generated }
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_oil_pot")) { generated }
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "water_pot")) { generated }
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "lava_pot")) { generated }
 
 
         // 詰め替えレシピ

@@ -16,9 +16,10 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
-import miragefairy2019.resourcemaker.makeBlockItemModel
+import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
+import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -87,7 +88,7 @@ object TwinkleStone {
             "silver", "cyan", "purple", "blue",
             "brown", "green", "red", "black"
         ).forEach {
-            makeBlockItemModel(ResourceName(ModMirageFairy2019.MODID, "${it}_twinkle_stone"))
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "${it}_twinkle_stone")) { block }
         }
     }
 }

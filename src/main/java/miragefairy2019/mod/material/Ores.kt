@@ -15,9 +15,10 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
-import miragefairy2019.resourcemaker.makeBlockItemModel
+import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
+import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
@@ -156,7 +157,7 @@ object Ores {
 
         // アイテムモデルの生成
         run {
-            fun makeItemModel(name: String) = makeBlockItemModel(ResourceName(ModMirageFairy2019.MODID, name))
+            fun makeItemModel(name: String) = makeItemModel(ResourceName(ModMirageFairy2019.MODID, name)) { block }
             makeItemModel("apatite_ore")
             makeItemModel("fluorite_ore")
             makeItemModel("sulfur_ore")

@@ -39,8 +39,9 @@ import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapedRecipe
 import miragefairy2019.resourcemaker.DataShapelessRecipe
 import miragefairy2019.resourcemaker.DataSimpleIngredient
-import miragefairy2019.resourcemaker.makeGeneratedItemModel
-import miragefairy2019.resourcemaker.makeHandheldItemModel
+import miragefairy2019.resourcemaker.generated
+import miragefairy2019.resourcemaker.handheld
+import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.util.ITooltipFlag
@@ -70,29 +71,29 @@ object FairyMaterials {
 
         // アイテムモデルの生成
         run {
-            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "aqua_mana_rod"))
-            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "wind_mana_rod"))
-            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "gaia_mana_rod"))
-            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "fire_mana_rod"))
-            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "shine_mana_rod"))
-            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "dark_mana_rod"))
-            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "quartz_mana_rod"))
-            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_stick"))
-            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_leaf"))
-            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_fairy_wood_stick"))
-            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_water_bottle"))
-            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_extract_bottle"))
-            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_oil_bottle"))
-            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "glass_mana_rod"))
-            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_fairy_leather"))
-            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_wood_resin"))
-            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "sphere_base"))
-            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_syrup"))
-            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_plastic"))
-            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_plastic_with_fairy"))
-            makeHandheldItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_plastic_rod"))
-            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "india_ink"))
-            makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "ancient_pottery"))
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "aqua_mana_rod")) { handheld }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "wind_mana_rod")) { handheld }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "gaia_mana_rod")) { handheld }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fire_mana_rod")) { handheld }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "shine_mana_rod")) { handheld }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "dark_mana_rod")) { handheld }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "quartz_mana_rod")) { handheld }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_stick")) { handheld }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_leaf")) { generated }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_fairy_wood_stick")) { handheld }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "miragium_water_bottle")) { generated }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_extract_bottle")) { generated }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_oil_bottle")) { generated }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "glass_mana_rod")) { handheld }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_fairy_leather")) { generated }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_wood_resin")) { generated }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "sphere_base")) { generated }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_syrup")) { generated }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_plastic")) { generated }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_plastic_with_fairy")) { generated }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "fairy_plastic_rod")) { handheld }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "india_ink")) { generated }
+            makeItemModel(ResourceName(ModMirageFairy2019.MODID, "ancient_pottery")) { generated }
         }
 
         // 翻訳の生成

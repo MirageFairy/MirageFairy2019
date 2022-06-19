@@ -28,9 +28,10 @@ import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.EnumVariantMaterials1
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
+import miragefairy2019.resourcemaker.generated
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
-import miragefairy2019.resourcemaker.makeGeneratedItemModel
+import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.or
@@ -108,7 +109,7 @@ object MirageFlower {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
-        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_seeds"))
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "mirage_flower_seeds")) { generated }
 
         // 地形生成
         onHookDecorator {

@@ -14,9 +14,10 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.resourcemaker.makeBlockItemModel
+import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
+import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.normal
 import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
@@ -107,7 +108,7 @@ object Dish {
         itemDish = item({ ItemBlock(blockDish()) }, "dish") {
             setCustomModelResourceLocation()
         }
-        makeBlockItemModel(ResourceName(ModMirageFairy2019.MODID, "dish"))
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "dish")) { block }
         tileEntity("dish", TileEntityDish::class.java)
         tileEntityRenderer(TileEntityDish::class.java, { TileEntityRendererDish() })
     }

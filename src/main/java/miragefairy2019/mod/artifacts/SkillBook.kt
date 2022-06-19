@@ -9,7 +9,8 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.resourcemaker.makeGeneratedItemModel
+import miragefairy2019.resourcemaker.generated
+import miragefairy2019.resourcemaker.makeItemModel
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
@@ -29,7 +30,7 @@ object SkillBook {
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
         }
-        makeGeneratedItemModel(ResourceName(ModMirageFairy2019.MODID, "skill_book"))
+        makeItemModel(ResourceName(ModMirageFairy2019.MODID, "skill_book")) { generated }
     }
 }
 

@@ -21,11 +21,6 @@ fun ModInitializer.makeItemModel(resourceName: ResourceName, creator: MakeItemMo
 class MakeItemModelScope2(val resourceName: ResourceName)
 
 
-fun ModInitializer.makeGeneratedItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { generated }
-fun ModInitializer.makeHandheldItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { handheld }
-fun ModInitializer.makeBlockItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { block }
-fun ModInitializer.makeFluidItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { fluid }
-
 val MakeItemModelScope2.generated get() = ItemModel.generated(resourceName.map { "items/$it" })
 val MakeItemModelScope2.handheld get() = ItemModel.handheld(resourceName.map { "items/$it" })
 val MakeItemModelScope2.block get() = ItemModel.block(resourceName.map { "block/$it" })
