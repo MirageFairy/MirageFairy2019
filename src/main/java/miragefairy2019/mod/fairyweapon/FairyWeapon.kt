@@ -1,6 +1,5 @@
 package miragefairy2019.mod.fairyweapon
 
-import com.google.gson.JsonElement
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Erg.ATTACK
 import miragefairy2019.api.Erg.CHRISTMAS
@@ -52,6 +51,7 @@ import miragefairy2019.mod.fairyweapon.items.ItemOcarinaTemptation
 import miragefairy2019.mod.fairyweapon.items.ItemPrayerWheel
 import miragefairy2019.mod.fairyweapon.items.ItemRodBase
 import miragefairy2019.mod.fairyweapon.items.ItemRyugyoDrill
+import miragefairy2019.resourcemaker.makeAdvancement
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
@@ -716,8 +716,4 @@ object FairyWeapon {
         }
 
     }
-}
-
-fun ModInitializer.makeAdvancement(resourceName: ResourceName, creator: () -> JsonElement) = onMakeResource {
-    dirBase.resolve("assets/${resourceName.domain}/advancements/${resourceName.path}.json").place(creator())
 }
