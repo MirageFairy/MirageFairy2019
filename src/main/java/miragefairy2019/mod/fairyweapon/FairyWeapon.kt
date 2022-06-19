@@ -23,7 +23,6 @@ import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeItemModel
-import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
@@ -31,6 +30,7 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main.creativeTab
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
@@ -51,7 +51,12 @@ import miragefairy2019.mod.fairyweapon.items.ItemOcarinaTemptation
 import miragefairy2019.mod.fairyweapon.items.ItemPrayerWheel
 import miragefairy2019.mod.fairyweapon.items.ItemRodBase
 import miragefairy2019.mod.fairyweapon.items.ItemRyugyoDrill
+import miragefairy2019.resourcemaker.DataOreIngredient
+import miragefairy2019.resourcemaker.DataResult
+import miragefairy2019.resourcemaker.DataShapedRecipe
+import miragefairy2019.resourcemaker.DataSimpleIngredient
 import miragefairy2019.resourcemaker.makeAdvancement
+import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
@@ -104,22 +109,22 @@ enum class FairyWeaponKind(
         {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "fairyweapons/crystal_sword"),
-                miragefairy2019.libkt.DataShapedRecipe(
+                DataShapedRecipe(
                     pattern = listOf(
                         "cCC",
                         "S#C",
                         "Rmp"
                     ),
                     key = mapOf(
-                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:miragium_sword"),
-                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "rodMiragium"),
-                        "S" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereCrystal"),
-                        "C" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairyCrystal"),
-                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
-                        "p" to miragefairy2019.mod.artifacts.WandType.POLISHING.ingredientData,
-                        "m" to miragefairy2019.mod.artifacts.WandType.MELTING.ingredientData
+                        "#" to DataSimpleIngredient(item = "miragefairy2019:miragium_sword"),
+                        "R" to DataOreIngredient(ore = "rodMiragium"),
+                        "S" to DataOreIngredient(ore = "mirageFairy2019SphereCrystal"),
+                        "C" to DataOreIngredient(ore = "mirageFairyCrystal"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "p" to WandType.POLISHING.ingredientData,
+                        "m" to WandType.MELTING.ingredientData
                     ),
-                    result = miragefairy2019.libkt.DataResult(item = "miragefairy2019:crystal_sword")
+                    result = DataResult(item = "miragefairy2019:crystal_sword")
                 )
             )
         }
@@ -197,21 +202,21 @@ enum class FairyWeaponKind(
         {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "charging_rod"),
-                miragefairy2019.libkt.DataShapedRecipe(
+                DataShapedRecipe(
                     pattern = listOf(
                         "cgw",
                         "g#g",
                         "tgm"
                     ),
                     key = mapOf(
-                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:magic_wand_base"),
-                        "g" to miragefairy2019.libkt.DataOreIngredient(ore = "ingotGold"),
-                        "w" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
-                        "t" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
-                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
-                        "m" to miragefairy2019.mod.artifacts.WandType.MELTING.ingredientData
+                        "#" to DataSimpleIngredient(item = "miragefairy2019:magic_wand_base"),
+                        "g" to DataOreIngredient(ore = "ingotGold"),
+                        "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
+                        "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "m" to WandType.MELTING.ingredientData
                     ),
-                    result = miragefairy2019.libkt.DataResult(
+                    result = DataResult(
                         item = "miragefairy2019:charging_rod"
                     )
                 )
@@ -229,21 +234,21 @@ enum class FairyWeaponKind(
         {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "lightning_magic_wand"),
-                miragefairy2019.libkt.DataShapedRecipe(
+                DataShapedRecipe(
                     pattern = listOf(
                         "gge",
                         "c#g",
                         "Gmg"
                     ),
                     key = mapOf(
-                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:charging_rod"),
-                        "g" to miragefairy2019.libkt.DataOreIngredient(ore = "ingotGold"),
-                        "e" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereEnergy"),
-                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
-                        "m" to miragefairy2019.mod.artifacts.WandType.MELTING.ingredientData,
-                        "G" to miragefairy2019.libkt.DataOreIngredient(ore = "blockMirageFairyCrystalPure")
+                        "#" to DataSimpleIngredient(item = "miragefairy2019:charging_rod"),
+                        "g" to DataOreIngredient(ore = "ingotGold"),
+                        "e" to DataOreIngredient(ore = "mirageFairy2019SphereEnergy"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "m" to WandType.MELTING.ingredientData,
+                        "G" to DataOreIngredient(ore = "blockMirageFairyCrystalPure")
                     ),
-                    result = miragefairy2019.libkt.DataResult(
+                    result = DataResult(
                         item = "miragefairy2019:lightning_magic_wand"
                     )
                 )
@@ -262,22 +267,22 @@ enum class FairyWeaponKind(
         {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "gravity_rod"),
-                miragefairy2019.libkt.DataShapedRecipe(
+                DataShapedRecipe(
                     pattern = listOf(
                         "cOs",
                         "oRO",
                         "kof"
                     ),
                     key = mapOf(
-                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019ManaRodFire"),
-                        "k" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereKnowledge"),
-                        "s" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereSpace"),
-                        "o" to miragefairy2019.libkt.DataOreIngredient(ore = "obsidian"),
-                        "O" to miragefairy2019.libkt.DataOreIngredient(ore = "container1000MirageFlowerOil"),
-                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
-                        "f" to miragefairy2019.mod.artifacts.WandType.FUSION.ingredientData
+                        "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodFire"),
+                        "k" to DataOreIngredient(ore = "mirageFairy2019SphereKnowledge"),
+                        "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace"),
+                        "o" to DataOreIngredient(ore = "obsidian"),
+                        "O" to DataOreIngredient(ore = "container1000MirageFlowerOil"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "f" to WandType.FUSION.ingredientData
                     ),
-                    result = miragefairy2019.libkt.DataResult(
+                    result = DataResult(
                         item = "miragefairy2019:gravity_rod"
                     )
                 )
@@ -321,21 +326,21 @@ enum class FairyWeaponKind(
         {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "fairyweapons/bell_base"),
-                miragefairy2019.libkt.DataShapedRecipe(
+                DataShapedRecipe(
                     pattern = listOf(
                         "cPs",
                         " RP",
                         "I m"
                     ),
                     key = mapOf(
-                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "rodMiragium"),
-                        "I" to miragefairy2019.libkt.DataOreIngredient(ore = "ingotMiragium"),
-                        "P" to miragefairy2019.libkt.DataOreIngredient(ore = "plateMiragium"),
-                        "s" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereSound"),
-                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
-                        "m" to miragefairy2019.mod.artifacts.WandType.MELTING.ingredientData
+                        "R" to DataOreIngredient(ore = "rodMiragium"),
+                        "I" to DataOreIngredient(ore = "ingotMiragium"),
+                        "P" to DataOreIngredient(ore = "plateMiragium"),
+                        "s" to DataOreIngredient(ore = "mirageFairy2019SphereSound"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "m" to WandType.MELTING.ingredientData
                     ),
-                    result = miragefairy2019.libkt.DataResult(item = "miragefairy2019:bell_base")
+                    result = DataResult(item = "miragefairy2019:bell_base")
                 )
             )
         }
@@ -351,22 +356,22 @@ enum class FairyWeaponKind(
         {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "fairyweapons/flower_picking_bell"),
-                miragefairy2019.libkt.DataShapedRecipe(
+                DataShapedRecipe(
                     pattern = listOf(
                         "cIh",
                         "o#I",
                         "gom"
                     ),
                     key = mapOf(
-                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:bell_base"),
-                        "g" to miragefairy2019.libkt.DataOreIngredient(ore = "ingotGold"),
-                        "o" to miragefairy2019.libkt.DataOreIngredient(ore = "obsidian"),
-                        "I" to miragefairy2019.libkt.DataOreIngredient(ore = "ingotLilagium"),
-                        "h" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
-                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
-                        "m" to miragefairy2019.mod.artifacts.WandType.MELTING.ingredientData
+                        "#" to DataSimpleIngredient(item = "miragefairy2019:bell_base"),
+                        "g" to DataOreIngredient(ore = "ingotGold"),
+                        "o" to DataOreIngredient(ore = "obsidian"),
+                        "I" to DataOreIngredient(ore = "ingotLilagium"),
+                        "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "m" to WandType.MELTING.ingredientData
                     ),
-                    result = miragefairy2019.libkt.DataResult(item = "miragefairy2019:flower_picking_bell")
+                    result = DataResult(item = "miragefairy2019:flower_picking_bell")
                 )
             )
         }
@@ -382,21 +387,21 @@ enum class FairyWeaponKind(
         {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "fairyweapons/flower_picking_bell_2"),
-                miragefairy2019.libkt.DataShapedRecipe(
+                DataShapedRecipe(
                     pattern = listOf(
                         "cGh",
                         "G#G",
                         "RGp"
                     ),
                     key = mapOf(
-                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:flower_picking_bell"),
-                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "stickMirageFairyWood"),
-                        "G" to miragefairy2019.libkt.DataOreIngredient(ore = "gemPyrope"),
-                        "h" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
-                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
-                        "p" to miragefairy2019.mod.artifacts.WandType.POLISHING.ingredientData
+                        "#" to DataSimpleIngredient(item = "miragefairy2019:flower_picking_bell"),
+                        "R" to DataOreIngredient(ore = "stickMirageFairyWood"),
+                        "G" to DataOreIngredient(ore = "gemPyrope"),
+                        "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "p" to WandType.POLISHING.ingredientData
                     ),
-                    result = miragefairy2019.libkt.DataResult(item = "miragefairy2019:flower_picking_bell_2")
+                    result = DataResult(item = "miragefairy2019:flower_picking_bell_2")
                 )
             )
         }
@@ -437,21 +442,21 @@ enum class FairyWeaponKind(
         {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "fairyweapons/lilagium_scythe"),
-                miragefairy2019.libkt.DataShapedRecipe(
+                DataShapedRecipe(
                     pattern = listOf(
                         "hII",
                         "I#R",
                         "mcR"
                     ),
                     key = mapOf(
-                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:miragium_scythe"),
-                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019ManaRodGaia"),
-                        "I" to miragefairy2019.libkt.DataOreIngredient(ore = "ingotLilagium"),
-                        "h" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
-                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
-                        "m" to miragefairy2019.mod.artifacts.WandType.MELTING.ingredientData
+                        "#" to DataSimpleIngredient(item = "miragefairy2019:miragium_scythe"),
+                        "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodGaia"),
+                        "I" to DataOreIngredient(ore = "ingotLilagium"),
+                        "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "m" to WandType.MELTING.ingredientData
                     ),
-                    result = miragefairy2019.libkt.DataResult(item = "miragefairy2019:lilagium_scythe")
+                    result = DataResult(item = "miragefairy2019:lilagium_scythe")
                 )
             )
         }
@@ -468,22 +473,22 @@ enum class FairyWeaponKind(
         {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "fairyweapons/ryugyo_drill"),
-                miragefairy2019.libkt.DataShapedRecipe(
+                DataShapedRecipe(
                     pattern = listOf(
                         "cLL",
                         "b#L",
                         "twf"
                     ),
                     key = mapOf(
-                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "minecraft:fish", data = 2),
-                        "L" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairyLeather"),
-                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
-                        "f" to miragefairy2019.mod.artifacts.WandType.FUSION.ingredientData,
-                        "b" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereDestroy"),
-                        "t" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
-                        "w" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereWater")
+                        "#" to DataSimpleIngredient(item = "minecraft:fish", data = 2),
+                        "L" to DataOreIngredient(ore = "mirageFairyLeather"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "f" to WandType.FUSION.ingredientData,
+                        "b" to DataOreIngredient(ore = "mirageFairy2019SphereDestroy"),
+                        "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
+                        "w" to DataOreIngredient(ore = "mirageFairy2019SphereWater")
                     ),
-                    result = miragefairy2019.libkt.DataResult(item = "miragefairy2019:ryugyo_drill")
+                    result = DataResult(item = "miragefairy2019:ryugyo_drill")
                 )
             )
         }
@@ -500,20 +505,20 @@ enum class FairyWeaponKind(
         {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "prayer_wheel"),
-                miragefairy2019.libkt.DataShapedRecipe(
+                DataShapedRecipe(
                     pattern = listOf(
                         "JCJ",
                         "SRS",
                         "sRs"
                     ),
                     key = mapOf(
-                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "stickWood"),
-                        "C" to miragefairy2019.libkt.DataSimpleIngredient(item = "minecraft:compass"),
-                        "J" to miragefairy2019.libkt.DataSimpleIngredient(item = "minecraft:jukebox"),
-                        "S" to miragefairy2019.libkt.DataOreIngredient(ore = "string"),
-                        "s" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019SphereSubmission")
+                        "R" to DataOreIngredient(ore = "stickWood"),
+                        "C" to DataSimpleIngredient(item = "minecraft:compass"),
+                        "J" to DataSimpleIngredient(item = "minecraft:jukebox"),
+                        "S" to DataOreIngredient(ore = "string"),
+                        "s" to DataOreIngredient(ore = "mirageFairy2019SphereSubmission")
                     ),
-                    result = miragefairy2019.libkt.DataResult(
+                    result = DataResult(
                         item = "miragefairy2019:prayer_wheel"
                     )
                 )
@@ -531,21 +536,21 @@ enum class FairyWeaponKind(
         {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "prayer_wheel_2"),
-                miragefairy2019.libkt.DataShapedRecipe(
+                DataShapedRecipe(
                     pattern = listOf(
                         "crC",
                         " #r",
                         "R s"
                     ),
                     key = mapOf(
-                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:prayer_wheel"),
-                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "mirageFairy2019ManaRodShine"),
-                        "C" to miragefairy2019.libkt.DataSimpleIngredient(item = "minecraft:clock"),
-                        "r" to miragefairy2019.libkt.DataOreIngredient(ore = "dustCinnabar"),
-                        "c" to miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredientData,
-                        "s" to miragefairy2019.mod.artifacts.WandType.SUMMONING.ingredientData
+                        "#" to DataSimpleIngredient(item = "miragefairy2019:prayer_wheel"),
+                        "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodShine"),
+                        "C" to DataSimpleIngredient(item = "minecraft:clock"),
+                        "r" to DataOreIngredient(ore = "dustCinnabar"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "s" to WandType.SUMMONING.ingredientData
                     ),
-                    result = miragefairy2019.libkt.DataResult(
+                    result = DataResult(
                         item = "miragefairy2019:prayer_wheel_2"
                     )
                 )
@@ -563,20 +568,20 @@ enum class FairyWeaponKind(
         {
             makeRecipe(
                 ResourceName(ModMirageFairy2019.MODID, "prayer_wheel_3"),
-                miragefairy2019.libkt.DataShapedRecipe(
+                DataShapedRecipe(
                     pattern = listOf(
                         " pf",
                         "c#p",
                         "Rc "
                     ),
                     key = mapOf(
-                        "#" to miragefairy2019.libkt.DataSimpleIngredient(item = "miragefairy2019:prayer_wheel_2"),
-                        "R" to miragefairy2019.libkt.DataOreIngredient(ore = "rodMirageFairyPlastic"),
-                        "p" to miragefairy2019.libkt.DataOreIngredient(ore = "gemMirageFairyPlastic"),
-                        "f" to miragefairy2019.libkt.DataOreIngredient(ore = "gemMirageFairyPlasticWithFairy"),
-                        "c" to miragefairy2019.libkt.DataOreIngredient(ore = "dustCoal")
+                        "#" to DataSimpleIngredient(item = "miragefairy2019:prayer_wheel_2"),
+                        "R" to DataOreIngredient(ore = "rodMirageFairyPlastic"),
+                        "p" to DataOreIngredient(ore = "gemMirageFairyPlastic"),
+                        "f" to DataOreIngredient(ore = "gemMirageFairyPlasticWithFairy"),
+                        "c" to DataOreIngredient(ore = "dustCoal")
                     ),
-                    result = miragefairy2019.libkt.DataResult(
+                    result = DataResult(
                         item = "miragefairy2019:prayer_wheel_3"
                     )
                 )
