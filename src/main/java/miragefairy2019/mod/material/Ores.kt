@@ -2,8 +2,8 @@ package miragefairy2019.mod.material
 
 import miragefairy2019.common.toOreName
 import miragefairy2019.libkt.BlockVariantList
-import miragefairy2019.libkt.DataBlockState
-import miragefairy2019.libkt.DataBlockStates
+import miragefairy2019.resourcemaker.DataBlockState
+import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.copyItemStack
@@ -11,7 +11,7 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockItemModel
 import miragefairy2019.libkt.makeBlockModel
-import miragefairy2019.libkt.makeBlockStates
+import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.setCreativeTab

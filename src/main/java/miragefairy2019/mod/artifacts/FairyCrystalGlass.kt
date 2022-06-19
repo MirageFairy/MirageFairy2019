@@ -1,11 +1,11 @@
 package miragefairy2019.mod.artifacts
 
 import miragefairy2019.libkt.BlockInitializer
-import miragefairy2019.libkt.DataBlockState
-import miragefairy2019.libkt.DataBlockStates
+import miragefairy2019.resourcemaker.DataBlockState
+import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.libkt.DataItemModel
 import miragefairy2019.resourcemaker.DataOreIngredient
-import miragefairy2019.libkt.DataPart
+import miragefairy2019.resourcemaker.DataPart
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapelessRecipe
 import miragefairy2019.libkt.ItemInitializer
@@ -14,7 +14,7 @@ import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
-import miragefairy2019.libkt.makeBlockStates
+import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.libkt.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module

@@ -14,35 +14,6 @@ class ResourceMaker(val dirBase: File) {
 }
 
 
-// BlockStates
-
-fun ResourceMaker.getBlockStatesFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/blockstates/${registryName.path}.json")
-
-fun <B : Block> BlockInitializer<B>.makeBlockStates(creator: MakeBlockStatesScope<B>.() -> DataBlockStates) = modInitializer.onMakeResource {
-    getBlockStatesFile(resourceName).place(MakeBlockStatesScope(this@makeBlockStates).creator())
-}
-
-class MakeBlockStatesScope<B : Block>(val blockInitializer: BlockInitializer<B>)
-
-data class DataBlockStates(
-    @Expose val variants: Map<String, DataBlockState>? = null,
-    @Expose val multipart: List<DataPart>? = null
-)
-
-data class DataBlockState(
-    @Expose val model: String,
-    @Expose val x: Int? = null,
-    @Expose val y: Int? = null,
-    @Expose val z: Int? = null
-) {
-    constructor(model: ResourceName, x: Int? = null, y: Int? = null, z: Int? = null) : this(model.toString(), x, y, z)
-}
-
-val <B : Block> MakeBlockStatesScope<B>.normal get() = DataBlockStates(variants = mapOf("normal" to DataBlockState(blockInitializer.resourceName)))
-
-data class DataPart(val `when`: Map<String, Any>? = null, val apply: DataBlockState)
-
-
 // Block Model
 
 fun ResourceMaker.getBlockModelFile(registryName: ResourceName) = dirBase.resolve("assets/${registryName.domain}/models/block/${registryName.path}.json")

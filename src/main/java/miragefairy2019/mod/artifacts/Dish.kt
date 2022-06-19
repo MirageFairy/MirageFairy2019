@@ -7,9 +7,9 @@ import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.makeBlockItemModel
 import miragefairy2019.libkt.makeBlockModel
-import miragefairy2019.libkt.makeBlockStates
+import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.libkt.module
-import miragefairy2019.libkt.normal
+import miragefairy2019.resourcemaker.normal
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
