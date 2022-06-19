@@ -135,27 +135,27 @@ object FairyCrystalGlass {
                     DataBlockStates(
                         multipart = listOf(
                             DataPart(
-                                `when` = mapOf("down" to false),
+                                `when` = mapOf("down" to false.jsonElement),
                                 apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 180)
                             ),
                             DataPart(
-                                `when` = mapOf("up" to false),
+                                `when` = mapOf("up" to false.jsonElement),
                                 apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}")
                             ),
                             DataPart(
-                                `when` = mapOf("north" to false),
+                                `when` = mapOf("north" to false.jsonElement),
                                 apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 90)
                             ),
                             DataPart(
-                                `when` = mapOf("south" to false),
+                                `when` = mapOf("south" to false.jsonElement),
                                 apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = -90)
                             ),
                             DataPart(
-                                `when` = mapOf("west" to false),
+                                `when` = mapOf("west" to false.jsonElement),
                                 apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 90, y = -90)
                             ),
                             DataPart(
-                                `when` = mapOf("east" to false),
+                                `when` = mapOf("east" to false.jsonElement),
                                 apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 90, y = 90)
                             ),
                             DataPart(
