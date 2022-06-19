@@ -14,15 +14,22 @@ import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 import net.minecraft.item.Item
 
 
-fun ModInitializer.makeItemModel(resourceName: ResourceName, creator: () -> JsonElement) = onMakeResource {
-    place("assets/${resourceName.domain}/models/item/${resourceName.path}.json", creator())
+fun ModInitializer.makeItemModel(resourceName: ResourceName, creator: MakeItemModelScope2.() -> JsonElement) = onMakeResource {
+    place("assets/${resourceName.domain}/models/item/${resourceName.path}.json", MakeItemModelScope2(resourceName).creator())
 }
 
+class MakeItemModelScope2(val resourceName: ResourceName)
 
-fun ModInitializer.makeGeneratedItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { ItemModel.generated(resourceName.map { "items/$it" }) }
-fun ModInitializer.makeHandheldItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { ItemModel.handheld(resourceName.map { "items/$it" }) }
-fun ModInitializer.makeBlockItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { ItemModel.block(resourceName.map { "block/$it" }) }
-fun ModInitializer.makeFluidItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { ItemModel.generated(resourceName.map { "blocks/${it}_still" }) }
+
+fun ModInitializer.makeGeneratedItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { generated }
+fun ModInitializer.makeHandheldItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { handheld }
+fun ModInitializer.makeBlockItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { block }
+fun ModInitializer.makeFluidItemModel(resourceName: ResourceName) = makeItemModel(resourceName) { fluid }
+
+val MakeItemModelScope2.generated get() = ItemModel.generated(resourceName.map { "items/$it" })
+val MakeItemModelScope2.handheld get() = ItemModel.handheld(resourceName.map { "items/$it" })
+val MakeItemModelScope2.block get() = ItemModel.block(resourceName.map { "block/$it" })
+val MakeItemModelScope2.fluid get() = ItemModel.generated(resourceName.map { "blocks/${it}_still" })
 
 object ItemModel
 
