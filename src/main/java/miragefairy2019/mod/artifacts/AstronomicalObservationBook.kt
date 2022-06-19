@@ -9,7 +9,6 @@ import miragefairy2019.libkt.displayText
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
-import miragefairy2019.resourcemaker.makeGeneratedItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
@@ -20,6 +19,7 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.skill.ApiSkill
+import miragefairy2019.resourcemaker.makeGeneratedItemModel
 import mirrg.kotlin.minus
 import mirrg.kotlin.startOfDay
 import mirrg.kotlin.startOfMonth

@@ -2,7 +2,6 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.item
-import miragefairy2019.resourcemaker.makeGeneratedItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -10,6 +9,7 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.resourcemaker.makeGeneratedItemModel
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item

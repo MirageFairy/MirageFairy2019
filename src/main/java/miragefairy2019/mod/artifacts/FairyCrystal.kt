@@ -3,9 +3,6 @@ package miragefairy2019.mod.artifacts
 import miragefairy2019.lib.proxy
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.BlockRegion
-import miragefairy2019.resourcemaker.DataOreIngredient
-import miragefairy2019.resourcemaker.DataResult
-import miragefairy2019.resourcemaker.DataShapelessRecipe
 import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
 import miragefairy2019.libkt.ResourceName
@@ -13,13 +10,10 @@ import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
-import miragefairy2019.resourcemaker.generated
 import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
-import miragefairy2019.resourcemaker.makeItemVariantModel
-import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.plus
@@ -44,6 +38,12 @@ import miragefairy2019.mod.systems.insertBiome
 import miragefairy2019.mod.systems.insertBlocks
 import miragefairy2019.mod.systems.insertEntities
 import miragefairy2019.mod.systems.insertItemStacks
+import miragefairy2019.resourcemaker.DataOreIngredient
+import miragefairy2019.resourcemaker.DataResult
+import miragefairy2019.resourcemaker.DataShapelessRecipe
+import miragefairy2019.resourcemaker.generated
+import miragefairy2019.resourcemaker.makeItemVariantModel
+import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.formatAs
 import net.minecraft.block.BlockDispenser
 import net.minecraft.client.util.ITooltipFlag

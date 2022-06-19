@@ -9,7 +9,6 @@ import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.item
-import miragefairy2019.resourcemaker.makeHandheldItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
@@ -33,6 +32,7 @@ import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
 import miragefairy2019.mod.systems.IFairyStickCraftItem
 import miragefairy2019.mod.systems.addFairyStickCraftCoolTime
+import miragefairy2019.resourcemaker.makeHandheldItemModel
 import mirrg.kotlin.formatAs
 import net.minecraft.block.BlockDynamicLiquid
 import net.minecraft.client.Minecraft

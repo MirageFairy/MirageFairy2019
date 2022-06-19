@@ -25,7 +25,6 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
-import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.setCreativeTab
@@ -36,6 +35,7 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.ItemFairy
+import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.formatAs
 import mirrg.kotlin.gson.jsonElement

@@ -1,9 +1,6 @@
 package miragefairy2019.mod.artifacts
 
-import miragefairy2019.resourcemaker.DataBlockState
-import miragefairy2019.resourcemaker.DataBlockStates
-import miragefairy2019.resourcemaker.block
-import miragefairy2019.resourcemaker.makeBlockStates
+import miragefairy2019.libkt.block
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.mod.Main
@@ -24,6 +21,9 @@ import miragefairy2019.mod.oreseed.Vein
 import miragefairy2019.mod.oreseed.WorldGenCompoundOreSeed
 import miragefairy2019.mod.oreseed.invoke
 import miragefairy2019.mod.oreseed.register
+import miragefairy2019.resourcemaker.DataBlockState
+import miragefairy2019.resourcemaker.DataBlockStates
+import miragefairy2019.resourcemaker.makeBlockStates
 import net.minecraft.block.Block
 import net.minecraft.block.BlockStone
 import net.minecraft.block.state.IBlockState

@@ -4,10 +4,6 @@ import miragefairy2019.api.Erg
 import miragefairy2019.lib.proxy
 import miragefairy2019.lib.registryName
 import miragefairy2019.lib.skillContainer
-import miragefairy2019.resourcemaker.DataOreIngredient
-import miragefairy2019.resourcemaker.DataResult
-import miragefairy2019.resourcemaker.DataShapedRecipe
-import miragefairy2019.resourcemaker.DataSimpleIngredient
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.libkt.ResourceName
@@ -20,8 +16,6 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
-import miragefairy2019.resourcemaker.makeItemModel
-import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
@@ -50,6 +44,12 @@ import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
 import miragefairy2019.mod.systems.IFairyStickCraftItem
 import miragefairy2019.mod.systems.addFairyStickCraftCoolTime
+import miragefairy2019.resourcemaker.DataOreIngredient
+import miragefairy2019.resourcemaker.DataResult
+import miragefairy2019.resourcemaker.DataShapedRecipe
+import miragefairy2019.resourcemaker.DataSimpleIngredient
+import miragefairy2019.resourcemaker.makeItemModel
+import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.formatAs
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull

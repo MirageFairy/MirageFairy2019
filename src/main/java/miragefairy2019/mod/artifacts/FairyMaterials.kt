@@ -3,11 +3,6 @@ package miragefairy2019.mod.artifacts
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.fairyCentrifugeCraftHandler
-import miragefairy2019.resourcemaker.DataOreIngredient
-import miragefairy2019.resourcemaker.DataResult
-import miragefairy2019.resourcemaker.DataShapedRecipe
-import miragefairy2019.resourcemaker.DataShapelessRecipe
-import miragefairy2019.resourcemaker.DataSimpleIngredient
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemInitializer
 import miragefairy2019.libkt.ItemMultiMaterial
@@ -23,9 +18,6 @@ import miragefairy2019.libkt.green
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
-import miragefairy2019.resourcemaker.makeGeneratedItemModel
-import miragefairy2019.resourcemaker.makeHandheldItemModel
-import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.oreIngredient
@@ -42,6 +34,14 @@ import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
+import miragefairy2019.resourcemaker.DataOreIngredient
+import miragefairy2019.resourcemaker.DataResult
+import miragefairy2019.resourcemaker.DataShapedRecipe
+import miragefairy2019.resourcemaker.DataShapelessRecipe
+import miragefairy2019.resourcemaker.DataSimpleIngredient
+import miragefairy2019.resourcemaker.makeGeneratedItemModel
+import miragefairy2019.resourcemaker.makeHandheldItemModel
+import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.init.Items

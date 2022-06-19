@@ -1,12 +1,6 @@
 package miragefairy2019.mod.artifacts
 
 import miragefairy2019.libkt.CapabilityProviderAdapter
-import miragefairy2019.resourcemaker.DataIngredient
-import miragefairy2019.resourcemaker.DataOreIngredient
-import miragefairy2019.resourcemaker.DataResult
-import miragefairy2019.resourcemaker.DataShapedRecipe
-import miragefairy2019.resourcemaker.DataShapelessRecipe
-import miragefairy2019.resourcemaker.DataSimpleIngredient
 import miragefairy2019.libkt.ItemMultiMaterial
 import miragefairy2019.libkt.ItemVariantMaterial
 import miragefairy2019.libkt.ResourceName
@@ -14,8 +8,6 @@ import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.itemVariant
-import miragefairy2019.resourcemaker.makeGeneratedItemModel
-import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -23,6 +15,14 @@ import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.resourcemaker.DataIngredient
+import miragefairy2019.resourcemaker.DataOreIngredient
+import miragefairy2019.resourcemaker.DataResult
+import miragefairy2019.resourcemaker.DataShapedRecipe
+import miragefairy2019.resourcemaker.DataShapelessRecipe
+import miragefairy2019.resourcemaker.DataSimpleIngredient
+import miragefairy2019.resourcemaker.makeGeneratedItemModel
+import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.toUpperCamelCase

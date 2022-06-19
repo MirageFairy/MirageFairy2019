@@ -9,7 +9,6 @@ import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
 import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.item
-import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -24,6 +23,7 @@ import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
+import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.boron.util.UtilsString
 import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block

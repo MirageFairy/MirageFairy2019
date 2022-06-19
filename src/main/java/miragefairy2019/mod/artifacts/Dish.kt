@@ -3,13 +3,9 @@ package miragefairy2019.mod.artifacts
 import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
 import miragefairy2019.libkt.ResourceName
-import miragefairy2019.resourcemaker.block
+import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
-import miragefairy2019.resourcemaker.makeBlockItemModel
-import miragefairy2019.resourcemaker.makeBlockModel
-import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.libkt.module
-import miragefairy2019.resourcemaker.normal
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
@@ -18,6 +14,10 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.resourcemaker.makeBlockItemModel
+import miragefairy2019.resourcemaker.makeBlockModel
+import miragefairy2019.resourcemaker.makeBlockStates
+import miragefairy2019.resourcemaker.normal
 import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
