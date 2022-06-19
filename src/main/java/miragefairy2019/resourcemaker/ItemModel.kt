@@ -14,7 +14,7 @@ import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 import net.minecraft.item.Item
 
 fun ModInitializer.makeItemModel(resourceName: ResourceName, creator: () -> JsonElement) = onMakeResource {
-    dirBase.resolve("assets/${resourceName.domain}/models/item/${resourceName.path}.json").place(creator())
+    place("assets/${resourceName.domain}/models/item/${resourceName.path}.json", creator())
 }
 
 
@@ -45,14 +45,14 @@ fun ItemModel.block(parent: ResourceName) = jsonObject(
 
 @Deprecated("Deleting")
 fun <I : Item> ItemInitializer<I>.makeItemModel(creator: MakeItemModelScope<I>.() -> DataItemModel) = modInitializer.onMakeResource {
-    dirBase.resolve("assets/${registryName.domain}/models/item/${registryName.path}.json").place(MakeItemModelScope(this@makeItemModel).creator().jsonElement)
+    place("assets/${registryName.domain}/models/item/${registryName.path}.json", MakeItemModelScope(this@makeItemModel).creator().jsonElement)
 }
 
 class MakeItemModelScope<I : Item>(val itemInitializer: ItemInitializer<I>)
 
 @Deprecated("Deleting")
 fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.makeItemVariantModel(creator: MakeItemVariantModelScope<I, V>.() -> DataItemModel) = itemInitializer.modInitializer.onMakeResource {
-    dirBase.resolve("assets/${registryName.domain}/models/item/${registryName.path}.json").place(MakeItemVariantModelScope(this@makeItemVariantModel).creator().jsonElement)
+    place("assets/${registryName.domain}/models/item/${registryName.path}.json", MakeItemVariantModelScope(this@makeItemVariantModel).creator().jsonElement)
 }
 
 class MakeItemVariantModelScope<I : ItemMulti<V>, V : ItemVariant>(val itemVariantInitializer: ItemVariantInitializer<I, V>)

@@ -50,6 +50,7 @@ import miragefairy2019.resourcemaker.DataShapedRecipe
 import miragefairy2019.resourcemaker.DataSimpleIngredient
 import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
+import miragefairy2019.resourcemaker.place
 import mirrg.kotlin.formatAs
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
@@ -208,7 +209,8 @@ object Wand {
         onMakeResource {
 
             // ルート
-            dirBase.resolve("assets/miragefairy2019/advancements/wand/root.json").place(
+            place(
+                "assets/miragefairy2019/advancements/wand/root.json",
                 jsonElement(
                     "display" to jsonElementNotNull(
                         "icon" to jsonElement(
@@ -240,7 +242,8 @@ object Wand {
 
             // 一般
             WandKind.values().forEach { wandKind ->
-                dirBase.resolve("assets/miragefairy2019/advancements/wand/${wandKind.registryName}.json").place(
+                place(
+                    "assets/miragefairy2019/advancements/wand/${wandKind.registryName}.json",
                     jsonElement(
                         "display" to jsonElement(
                             "icon" to jsonElement(

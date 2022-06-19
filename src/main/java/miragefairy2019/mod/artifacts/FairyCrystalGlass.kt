@@ -24,6 +24,7 @@ import miragefairy2019.resourcemaker.DataShapelessRecipe
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
+import miragefairy2019.resourcemaker.place
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
 import mirrg.kotlin.toLowerCaseHead
@@ -77,7 +78,8 @@ object FairyCrystalGlass {
 
 
         fun makeBackgroundModel(name: String) = onMakeResource {
-            dirBase.resolve("assets/${ModMirageFairy2019.MODID}/models/block/$name.json").place(
+            place(
+                "assets/${ModMirageFairy2019.MODID}/models/block/$name.json",
                 jsonElement(
                     "parent" to "block/block".jsonElement,
                     "elements" to jsonElement(
@@ -95,7 +97,8 @@ object FairyCrystalGlass {
 
 
         fun makeFrameModel(name: String) = onMakeResource {
-            dirBase.resolve("assets/${ModMirageFairy2019.MODID}/models/block/$name.json").place(
+            place(
+                "assets/${ModMirageFairy2019.MODID}/models/block/$name.json",
                 jsonElement(
                     "elements" to jsonElement(
                         jsonElement(

@@ -15,7 +15,7 @@ fun <B : Block> BlockInitializer<B>.makeBlockStates(creator: MakeBlockStatesScop
 
 
 fun ModInitializer.makeBlockStates(resourceName: ResourceName, creator: MakeBlockStatesScope.() -> DataBlockStates) = onMakeResource {
-    dirBase.resolve("assets/${resourceName.domain}/blockstates/${resourceName.path}.json").place(MakeBlockStatesScope(resourceName).creator().jsonElement)
+    place("assets/${resourceName.domain}/blockstates/${resourceName.path}.json", MakeBlockStatesScope(resourceName).creator().jsonElement)
 }
 
 class MakeBlockStatesScope(val resourceName: ResourceName)
