@@ -577,6 +577,7 @@ enum class FairyWeaponKind(
     ),
 }
 
+
 val FairyWeaponKind.manualRepairIngredients: List<Ingredient> get() = if (parent != null) parent.manualRepairIngredients + ownManualRepairIngredientSuppliers.map { it() } else ownManualRepairIngredientSuppliers.map { it() }
 
 object FairyWeapon {
