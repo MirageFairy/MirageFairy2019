@@ -56,8 +56,10 @@ import miragefairy2019.resourcemaker.handheld
 import miragefairy2019.resourcemaker.makeAdvancement
 import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
-import mirrg.kotlin.gson.jsonElement
-import mirrg.kotlin.gson.jsonElementNotNull
+import mirrg.kotlin.gson.hydrogen.jsonArray
+import mirrg.kotlin.gson.hydrogen.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonObject
+import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.item.crafting.Ingredient
 import net.minecraftforge.client.event.ModelBakeEvent
@@ -596,25 +598,25 @@ object FairyWeapon {
 
         // 実績生成
         makeAdvancement("fairy_weapon/root") {
-            jsonElement(
-                "display" to jsonElementNotNull(
-                    "icon" to jsonElement(
+            jsonObject(
+                "display" to jsonObjectNotNull(
+                    "icon" to jsonObject(
                         "item" to "miragefairy2019:miragium_sword".jsonElement
                     ),
-                    "title" to jsonElement(
+                    "title" to jsonObject(
                         "translate" to "advancements.miragefairy2019.fairy_weapon.root.title".jsonElement
                     ),
-                    "description" to jsonElement(
+                    "description" to jsonObject(
                         "translate" to "advancements.miragefairy2019.fairy_weapon.root.description".jsonElement
                     ),
                     "background" to "miragefairy2019:textures/blocks/magnetite_block.png".jsonElement
                 ),
-                "criteria" to jsonElement(
-                    "main" to jsonElement(
+                "criteria" to jsonObject(
+                    "main" to jsonObject(
                         "trigger" to "minecraft:inventory_changed".jsonElement,
-                        "conditions" to jsonElement(
-                            "items" to jsonElement(
-                                jsonElement(
+                        "conditions" to jsonObject(
+                            "items" to jsonArray(
+                                jsonObject(
                                     "type" to "forge:ore_dict".jsonElement,
                                     "ore" to "mirageFairy2019SphereAny".jsonElement
                                 )
@@ -670,26 +672,26 @@ object FairyWeapon {
 
             // 実績生成
             makeAdvancement("fairy_weapon/${fairyWeaponKind.registryName}") {
-                jsonElement(
-                    "display" to jsonElementNotNull(
-                        "icon" to jsonElement(
+                jsonObject(
+                    "display" to jsonObjectNotNull(
+                        "icon" to jsonObject(
                             "item" to "miragefairy2019:${fairyWeaponKind.registryName}".jsonElement
                         ),
-                        "title" to jsonElement(
+                        "title" to jsonObject(
                             "translate" to "item.${fairyWeaponKind.unlocalizedName}.name".jsonElement
                         ),
-                        "description" to jsonElement(
+                        "description" to jsonObject(
                             "translate" to "item.${fairyWeaponKind.unlocalizedName}.recipe".jsonElement
                         ),
                         fairyWeaponKind.frame?.let { "frame" to it.jsonElement }
                     ),
                     "parent" to "miragefairy2019:fairy_weapon/${fairyWeaponKind.parent?.registryName ?: "root"}".jsonElement,
-                    "criteria" to jsonElement(
-                        "main" to jsonElement(
+                    "criteria" to jsonObject(
+                        "main" to jsonObject(
                             "trigger" to "minecraft:inventory_changed".jsonElement,
-                            "conditions" to jsonElement(
-                                "items" to jsonElement(
-                                    jsonElement(
+                            "conditions" to jsonObject(
+                                "items" to jsonArray(
+                                    jsonObject(
                                         "item" to "miragefairy2019:${fairyWeaponKind.registryName}".jsonElement
                                     )
                                 )

@@ -56,7 +56,7 @@ import miragefairy2019.util.SmartSlot
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
-import mirrg.kotlin.gson.json
+import mirrg.kotlin.gson.hydrogen.toJson
 import mirrg.kotlin.minus
 import mirrg.kotlin.utf8ByteArray
 import mirrg.kotlin.utf8String
@@ -300,7 +300,7 @@ object ChatWebhook {
                                     val json = jsonObject(
                                         "username" to "${daemon.username} @ ${remaining.displayText.unformattedText}".jsonElement,
                                         "content" to "<$playerName> $message".jsonElement
-                                    ).json
+                                    ).toJson()
                                     Main.logger.trace(json)
                                     connection.outputStream.use { out -> out.write(json.utf8ByteArray) }
 

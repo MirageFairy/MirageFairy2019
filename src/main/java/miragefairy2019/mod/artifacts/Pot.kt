@@ -24,7 +24,8 @@ import miragefairy2019.resourcemaker.generated
 import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.castOrNull
-import mirrg.kotlin.gson.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -132,7 +133,7 @@ object Pot {
             fluidOreSuffix,
             DataResult(
                 item = "forge:bucketfilled",
-                nbt = jsonElement(
+                nbt = jsonObject(
                     "FluidName" to fluidName.jsonElement,
                     "Amount" to 1000.jsonElement
                 )
@@ -158,7 +159,7 @@ object Pot {
             DataSimpleIngredient(
                 type = "minecraft:item_nbt",
                 item = "forge:bucketfilled",
-                nbt = jsonElement(
+                nbt = jsonObject(
                     "FluidName" to fluidName.jsonElement,
                     "Amount" to 1000.jsonElement
                 )

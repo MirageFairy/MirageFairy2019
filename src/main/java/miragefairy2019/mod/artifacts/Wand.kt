@@ -51,8 +51,10 @@ import miragefairy2019.resourcemaker.makeAdvancement
 import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.formatAs
-import mirrg.kotlin.gson.jsonElement
-import mirrg.kotlin.gson.jsonElementNotNull
+import mirrg.kotlin.gson.hydrogen.jsonArray
+import mirrg.kotlin.gson.hydrogen.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonObject
+import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 import mirrg.kotlin.toLowerCamelCase
 import mirrg.kotlin.toUpperCamelCase
 import mirrg.kotlin.toUpperCaseHead
@@ -167,25 +169,25 @@ object Wand {
 
         // 実績生成
         makeAdvancement("wand/root") {
-            jsonElement(
-                "display" to jsonElementNotNull(
-                    "icon" to jsonElement(
+            jsonObject(
+                "display" to jsonObjectNotNull(
+                    "icon" to jsonObject(
                         "item" to "miragefairy2019:crafting_fairy_wand_4".jsonElement
                     ),
-                    "title" to jsonElement(
+                    "title" to jsonObject(
                         "translate" to "advancements.miragefairy2019.wand.root.title".jsonElement
                     ),
-                    "description" to jsonElement(
+                    "description" to jsonObject(
                         "translate" to "advancements.miragefairy2019.wand.root.description".jsonElement
                     ),
                     "background" to "miragefairy2019:textures/blocks/nephrite_block.png".jsonElement
                 ),
-                "criteria" to jsonElement(
-                    "main" to jsonElement(
+                "criteria" to jsonObject(
+                    "main" to jsonObject(
                         "trigger" to "minecraft:inventory_changed".jsonElement,
-                        "conditions" to jsonElement(
-                            "items" to jsonElement(
-                                jsonElement(
+                        "conditions" to jsonObject(
+                            "items" to jsonArray(
+                                jsonObject(
                                     "type" to "forge:ore_dict".jsonElement,
                                     "ore" to "mirageFairy2019SphereAny".jsonElement
                                 )
@@ -265,25 +267,25 @@ object Wand {
 
             // 実績生成
             makeAdvancement("wand/${wandKind.registryName}") {
-                jsonElement(
-                    "display" to jsonElement(
-                        "icon" to jsonElement(
+                jsonObject(
+                    "display" to jsonObject(
+                        "icon" to jsonObject(
                             "item" to "miragefairy2019:${wandKind.registryName}".jsonElement
                         ),
-                        "title" to jsonElement(
+                        "title" to jsonObject(
                             "translate" to "item.${wandKind.unlocalizedName}.name".jsonElement
                         ),
-                        "description" to jsonElement(
+                        "description" to jsonObject(
                             "translate" to "advancements.miragefairy2019.wand.all.description".jsonElement
                         )
                     ),
                     "parent" to "miragefairy2019:wand/${wandKind.parent?.registryName ?: "root"}".jsonElement,
-                    "criteria" to jsonElement(
-                        "main" to jsonElement(
+                    "criteria" to jsonObject(
+                        "main" to jsonObject(
                             "trigger" to "minecraft:inventory_changed".jsonElement,
-                            "conditions" to jsonElement(
-                                "items" to jsonElement(
-                                    jsonElement(
+                            "conditions" to jsonObject(
+                                "items" to jsonArray(
+                                    jsonObject(
                                         "item" to "miragefairy2019:${wandKind.registryName}".jsonElement
                                     )
                                 )

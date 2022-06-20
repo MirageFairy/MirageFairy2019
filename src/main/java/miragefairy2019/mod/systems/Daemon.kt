@@ -7,9 +7,10 @@ import miragefairy2019.libkt.module
 import miragefairy2019.libkt.onServerSave
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.ChatWebhookDaemon
-import mirrg.kotlin.gson.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonObject
+import mirrg.kotlin.gson.hydrogen.toJson
 import mirrg.kotlin.gson.jsonWrapper
-import mirrg.kotlin.gson.toJson
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -51,16 +52,16 @@ object DaemonSystem {
             val server = world.minecraftServer ?: return@onServerSave
             getFile(server).mkdirsParent()
             getFile(server).writeText(
-                jsonElement(
+                jsonObject(
                     // TODO 分離
                     "chatWebhook" to daemonEntityManager.chatWebhook.map { (dimensionalPos, daemon) ->
-                        dimensionalPos.expression to jsonElement(
+                        dimensionalPos.expression to jsonObject(
                             "created" to daemon.created.epochSecond.jsonElement,
                             "username" to daemon.username.jsonElement,
                             "webhookUrl" to daemon.webhookUrl.jsonElement,
                             "duration" to daemon.durationSeconds.jsonElement
                         )
-                    }.jsonElement
+                    }.jsonObject
                 ).toJson { setPrettyPrinting() }
             )
         }

@@ -13,7 +13,9 @@ import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import mirrg.kotlin.gson.JsonWrapper
-import mirrg.kotlin.gson.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonArray
+import mirrg.kotlin.gson.hydrogen.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.jsonWrapper
 import mirrg.kotlin.gson.toDouble
 import mirrg.kotlin.gson.toInt
@@ -70,7 +72,7 @@ class PlayerAuraManager : IPlayerAuraManager {
 
 // Data Model
 
-fun ItemStack.toJsonElement() = jsonElement("item" to item.registryName.toString().jsonElement, "metadata" to metadata.jsonElement)
+fun ItemStack.toJsonElement() = jsonObject("item" to item.registryName.toString().jsonElement, "metadata" to metadata.jsonElement)
 
 fun JsonWrapper.toItemStack(): ItemStack {
     val item = Item.getByNameOrId(this["item"].toString) ?: return EMPTY_ITEM_STACK
@@ -78,7 +80,7 @@ fun JsonWrapper.toItemStack(): ItemStack {
     return ItemStack(item, 1, metadata)
 }
 
-fun ManaSet.toJsonElement() = jsonElement(
+fun ManaSet.toJsonElement() = jsonObject(
     "shine" to shine.jsonElement,
     "fire" to fire.jsonElement,
     "wind" to wind.jsonElement,
@@ -100,13 +102,13 @@ class Food(val itemStack: ItemStack, val aura: ManaSet) {
     fun copy() = Food(itemStack.copy(), aura)
 }
 
-fun Food.toJsonElement() = jsonElement("itemStack" to itemStack.toJsonElement(), "aura" to aura.toJsonElement())
+fun Food.toJsonElement() = jsonObject("itemStack" to itemStack.toJsonElement(), "aura" to aura.toJsonElement())
 
 fun JsonWrapper.toFood() = Food(this["itemStack"].toItemStack(), this["aura"].toManaSet())
 
 class PlayerAuraData(val foods: List<Food>)
 
-fun PlayerAuraData.toJsonElement() = jsonElement("foods" to jsonElement(foods.map { it.toJsonElement() }))
+fun PlayerAuraData.toJsonElement() = jsonObject("foods" to foods.map { it.toJsonElement() }.jsonArray)
 
 fun JsonWrapper.toPlayerAuraData() = PlayerAuraData(this["foods"].asList.map { it.toFood() })
 

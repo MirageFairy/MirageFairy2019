@@ -28,7 +28,7 @@ import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
-import mirrg.kotlin.gson.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.toLowerCaseHead
 import mirrg.kotlin.toSnakeCase
 import net.minecraft.block.Block
