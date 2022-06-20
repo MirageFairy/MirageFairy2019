@@ -97,6 +97,8 @@ tasks {
             }
             file.writeBytes(URL("https://raw.githubusercontent.com/MirrgieRiana/mirrg.kotlin/main/src/main/java/$fileName").readBytes())
         }
+        fetch("mirrg/kotlin/hydrogen/String.kt")
+        fetch("mirrg/kotlin/hydrogen/Collection.kt")
         fetch("mirrg/kotlin/hydrogen/Lang.kt")
         fetch("mirrg/kotlin/hydrogen/Number.kt")
         fetch("mirrg/kotlin/java/hydrogen/File.kt")
