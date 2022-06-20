@@ -341,7 +341,7 @@ class ItemFairyWand : Item(), IFairyStickCraftItem {
         tooltip += formattedText { "Tier $tier"().aqua } // tier // TODO translate
 
         // 機能
-        getMagicDescription(itemStack)?.let { tooltip += formattedText { it().red } } // 魔法
+        tooltip += formattedText { "右クリックでフェアリーステッキクラフト"().red } // 魔法 // TODO translate
 
         tooltip += formattedText { "使用可能回数: ${(getMaxDamage(itemStack) - getDamage(itemStack) + 1).coerceAtLeast(0)}"().green } // 耐久値 TODO translate
 
@@ -359,9 +359,6 @@ class ItemFairyWand : Item(), IFairyStickCraftItem {
 
 
     // フェアリーステッキクラフト関係
-
-    @SideOnly(Side.CLIENT)
-    fun getMagicDescription(itemStack: ItemStack): String? = "右クリックでフェアリーステッキクラフト" // TODO translate
 
     private fun getCoolTime(player: EntityPlayer) = ceil(40.0 / (1.0 + 0.01 * player.proxy.skillContainer.getSkillLevel(EnumMastery.processing))).toInt()
 
