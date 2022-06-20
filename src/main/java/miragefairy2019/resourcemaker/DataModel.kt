@@ -5,8 +5,7 @@ import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 
-
-data class DataBlockModel(
+data class DataModel(
     val parent: String? = null,
     val ambientOcclusion: Boolean? = null,
     val elements: List<DataElement>? = null,
@@ -20,19 +19,6 @@ data class DataBlockModel(
             "textures" to textures?.mapValues { (_, it) -> it.jsonElement }?.jsonObject
         )
 }
-
-data class DataItemModel(
-    val parent: String,
-    val elements: List<DataElement>? = null,
-    val textures: Map<String, String>? = null
-) {
-    val jsonElement = jsonObjectNotNull(
-        "parent" to parent.jsonElement,
-        "elements" to elements?.map { it.jsonElement }?.jsonArray,
-        "textures" to textures?.mapValues { (_, it) -> it.jsonElement }?.jsonObject
-    )
-}
-
 
 data class DataElement(
     val from: DataPoint,

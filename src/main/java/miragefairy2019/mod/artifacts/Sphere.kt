@@ -22,7 +22,7 @@ import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.resourcemaker.DataItemModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.boron.util.UtilsString
 import net.minecraft.block.Block
@@ -55,7 +55,7 @@ object Sphere {
             registerItemColorHandler()
         }
         makeItemModel("sphere") {
-            DataItemModel(
+            DataModel(
                 parent = "item/generated",
                 textures = mapOf(
                     "layer0" to "miragefairy2019:items/sphere_layer0",

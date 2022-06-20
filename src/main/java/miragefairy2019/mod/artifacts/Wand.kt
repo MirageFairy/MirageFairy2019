@@ -6,7 +6,6 @@ import miragefairy2019.lib.registryName
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.OreIngredientComplex
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.canTranslate
@@ -24,7 +23,6 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.WandType.BREAKING
 import miragefairy2019.mod.artifacts.WandType.CRAFTING
 import miragefairy2019.mod.artifacts.WandType.DISTORTION
@@ -44,7 +42,7 @@ import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
 import miragefairy2019.mod.systems.IFairyStickCraftItem
 import miragefairy2019.mod.systems.addFairyStickCraftCoolTime
-import miragefairy2019.resourcemaker.DataItemModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapedRecipe
@@ -246,7 +244,7 @@ object Wand {
 
             // アイテムモデル生成
             makeItemModel(wandKind.registryName) {
-                DataItemModel(
+                DataModel(
                     parent = "item/handheld",
                     textures = mapOf(
                         "layer0" to "miragefairy2019:items/fairy_wand_rod_${wandKind.tier}",

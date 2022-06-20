@@ -13,13 +13,12 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.with
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.resourcemaker.DataBlockModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataElement
 import miragefairy2019.resourcemaker.DataFace
 import miragefairy2019.resourcemaker.DataFaces
-import miragefairy2019.resourcemaker.DataItemModel
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataPart
 import miragefairy2019.resourcemaker.DataPoint
@@ -76,7 +75,7 @@ object FairyCrystalGlass {
 
 
         fun makeBackgroundModel(name: String) = makeBlockModel(name) {
-            DataBlockModel(
+            DataModel(
                 parent = "block/block",
                 elements = listOf(
                     cube("#background", null)
@@ -92,7 +91,7 @@ object FairyCrystalGlass {
 
 
         fun makeFrameModel(name: String) = makeBlockModel(name) {
-            DataBlockModel(
+            DataModel(
                 elements = listOf(
                     DataElement(
                         from = DataPoint(0.0, 0.0, 0.0),
@@ -164,7 +163,7 @@ object FairyCrystalGlass {
                 addOreName("blockMirageFairyCrystal$prefix")
                 setCustomModelResourceLocation(model = ResourceLocation(ModMirageFairy2019.MODID, "${prefix}FairyCrystalGlass".toSnakeCase()))
                 makeItemModel("${prefix}FairyCrystalGlass".toSnakeCase()) {
-                    DataItemModel(
+                    DataModel(
                         parent = "block/block",
                         elements = listOf(
                             cube("#background", null),

@@ -25,7 +25,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.fairyVariant
 import miragefairy2019.mod.fairy.hasSameId
 import miragefairy2019.mod.fairy.level
-import miragefairy2019.resourcemaker.DataBlockModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataElement
@@ -95,7 +95,7 @@ object FairyCollectionBox {
             }.guiHandler)
         }
         makeBlockModel("fairy_building_bottom") {
-            DataBlockModel(
+            DataModel(
                 parent = "block/block",
                 textures = mapOf(
                     "particle" to "blocks/log_oak",
@@ -302,7 +302,7 @@ object FairyCollectionBox {
             )
         }
         makeBlockModel("fairy_building_middle") {
-            DataBlockModel(
+            DataModel(
                 parent = "block/block",
                 textures = mapOf(
                     "particle" to "blocks/log_oak",

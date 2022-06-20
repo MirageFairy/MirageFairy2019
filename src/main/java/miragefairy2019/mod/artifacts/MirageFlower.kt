@@ -24,7 +24,7 @@ import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.EnumVariantMaterials1
-import miragefairy2019.resourcemaker.DataBlockModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.generated
@@ -89,7 +89,7 @@ object MirageFlower {
         }
         run {
             fun makeBlockModel(name: String) = makeBlockModel(name) {
-                DataBlockModel(
+                DataModel(
                     parent = "block/cross",
                     textures = mapOf(
                         "particle" to "miragefairy2019:blocks/$name",

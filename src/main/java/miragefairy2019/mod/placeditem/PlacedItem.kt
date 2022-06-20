@@ -7,7 +7,7 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.side
-import miragefairy2019.resourcemaker.DataBlockModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.makeBlockModel
 import net.minecraft.block.Block
 import net.minecraft.client.entity.EntityPlayerSP
@@ -34,7 +34,7 @@ object PlacedItem {
             setUnlocalizedName("placedItem")
         }
         makeBlockModel("placed_item") {
-            DataBlockModel(
+            DataModel(
                 ambientOcclusion = false,
                 textures = mapOf(
                     "particle" to "minecraft:blocks/glass"

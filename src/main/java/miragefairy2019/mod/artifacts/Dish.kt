@@ -12,7 +12,7 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
-import miragefairy2019.resourcemaker.DataBlockModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataElement
 import miragefairy2019.resourcemaker.DataFace
 import miragefairy2019.resourcemaker.DataFaces
@@ -66,7 +66,7 @@ object Dish {
             makeBlockStates(resourceName.path) { normal }
         }
         makeBlockModel("dish") {
-            DataBlockModel(
+            DataModel(
                 parent = "block/block",
                 ambientOcclusion = false,
                 textures = mapOf(

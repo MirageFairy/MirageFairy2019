@@ -34,7 +34,7 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.ItemFairy
-import miragefairy2019.resourcemaker.DataItemModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.formatAs
@@ -90,7 +90,7 @@ object BakedFairy {
             registerItemColorHandler()
         }
         makeItemModel("baked_fairy") {
-            DataItemModel(
+            DataModel(
                 parent = "item/generated",
                 textures = mapOf(
                     "layer0" to "miragefairy2019:items/baked_fairy_front",

@@ -9,7 +9,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairy.FairyTypes
-import miragefairy2019.resourcemaker.DataBlockModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataElement
@@ -67,7 +67,7 @@ object FairyLog {
                 )
             }
             makeBlockModel(resourceName.path) {
-                DataBlockModel(
+                DataModel(
                     parent = "block/block",
                     elements = listOf(
                         DataElement(
@@ -99,7 +99,7 @@ object FairyLog {
         }
         run {
             fun makeBlockModel(name: String, variant: String) = makeBlockModel(name) {
-                DataBlockModel(
+                DataModel(
                     parent = "miragefairy2019:block/fairy_log",
                     textures = mapOf(
                         "end" to "blocks/log_${variant}_top",

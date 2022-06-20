@@ -12,7 +12,7 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.resourcemaker.DataBlockModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataElement
@@ -128,7 +128,7 @@ object Ores {
         // ブロックモデルの生成
         run {
             makeBlockModel("overlay_block") {
-                DataBlockModel(
+                DataModel(
                     parent = "block/block",
                     elements = listOf(
                         DataElement(
@@ -159,7 +159,7 @@ object Ores {
                 )
             }
             fun makeBlockModel(name: String, base: String, overlay: String) = makeBlockModel(name) {
-                DataBlockModel(
+                DataModel(
                     parent = "miragefairy2019:block/overlay_block",
                     textures = mapOf(
                         "particle" to base,

@@ -8,7 +8,7 @@ import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.resourcemaker.DataItemModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.boron.util.UtilsString
 import mirrg.kotlin.toUpperCamelCase
@@ -105,7 +105,7 @@ object Fairy {
             }
         }
         makeItemModel("fairy") {
-            DataItemModel(
+            DataModel(
                 parent = "item/generated",
                 textures = mapOf(
                     "layer0" to "miragefairy2019:items/fairy_layer0",

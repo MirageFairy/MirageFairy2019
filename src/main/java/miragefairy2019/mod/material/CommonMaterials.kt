@@ -2,7 +2,6 @@ package miragefairy2019.mod.material
 
 import miragefairy2019.common.toOreName
 import miragefairy2019.libkt.ItemVariantInitializer
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.enJa
@@ -13,10 +12,9 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
-import miragefairy2019.resourcemaker.DataItemModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataOrIngredient
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataResult
@@ -43,7 +41,7 @@ object CommonMaterials {
                 registryName: String,
                 unlocalizedName: String,
                 oreName: String,
-                modelSupplier: MakeItemModelScope.() -> DataItemModel
+                modelSupplier: MakeItemModelScope.() -> DataModel
             ) = itemVariant(registryName, { ItemVariantSimpleMaterials(it, unlocalizedName) }, metadata) {
                 addOreName(oreName)
                 makeItemModel(registryName) { modelSupplier() }

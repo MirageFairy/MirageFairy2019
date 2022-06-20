@@ -8,7 +8,7 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
-import miragefairy2019.resourcemaker.DataBlockModel
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.makeBlockModel
@@ -36,7 +36,7 @@ object FairyWoodLog {
                 )
             }
             makeBlockModel(resourceName.path) {
-                DataBlockModel(
+                DataModel(
                     parent = "block/cube_column",
                     textures = mapOf(
                         "end" to "miragefairy2019:blocks/fairy_wood_log_top",
