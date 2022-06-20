@@ -1,6 +1,5 @@
 package miragefairy2019.resourcemaker
 
-import com.google.gson.JsonElement
 import miragefairy2019.libkt.ModInitializer
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
@@ -51,22 +50,44 @@ data class DataPoint(
 }
 
 data class DataFaces(
-    val down: JsonElement? = null,
-    val up: JsonElement? = null,
-    val north: JsonElement? = null,
-    val south: JsonElement? = null,
-    val west: JsonElement? = null,
-    val east: JsonElement? = null
+    val down: DataFace? = null,
+    val up: DataFace? = null,
+    val north: DataFace? = null,
+    val south: DataFace? = null,
+    val west: DataFace? = null,
+    val east: DataFace? = null
 ) {
     val jsonElement
         get() = jsonObjectNotNull(
-            "down" to down,
-            "up" to up,
-            "north" to north,
-            "south" to south,
-            "west" to west,
-            "east" to east
+            "down" to down?.jsonElement,
+            "up" to up?.jsonElement,
+            "north" to north?.jsonElement,
+            "south" to south?.jsonElement,
+            "west" to west?.jsonElement,
+            "east" to east?.jsonElement
         )
 }
 
-fun DataFace(vararg content: Pair<String, JsonElement>) = content.toList().jsonObject
+data class DataFace(
+    val uv: DataUv? = null,
+    val texture: String,
+    val tintindex: Int? = null,
+    val cullface: String? = null
+) {
+    val jsonElement
+        get() = jsonObjectNotNull(
+            "uv" to uv?.jsonElement,
+            "texture" to texture.jsonElement,
+            "tintindex" to tintindex?.jsonElement,
+            "cullface" to cullface?.jsonElement
+        )
+}
+
+data class DataUv(
+    val u1: Double,
+    val v1: Double,
+    val u2: Double,
+    val v2: Double
+) {
+    val jsonElement get() = jsonArray(u1.jsonElement, v1.jsonElement, u2.jsonElement, v2.jsonElement)
+}

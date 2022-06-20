@@ -36,7 +36,6 @@ import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
-import mirrg.kotlin.gson.hydrogen.jsonElement
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -116,22 +115,22 @@ object FairyCollectionBox {
                         to = DataPoint(14.0, 16.0, 14.0),
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#top".jsonElement
+                                texture = "#top"
                             ),
                             up = DataFace(
-                                "texture" to "#top".jsonElement
+                                texture = "#top"
                             ),
                             north = DataFace(
-                                "texture" to "#front_background".jsonElement
+                                texture = "#front_background"
                             ),
                             south = DataFace(
-                                "texture" to "#side_background".jsonElement
+                                texture = "#side_background"
                             ),
                             west = DataFace(
-                                "texture" to "#side_background".jsonElement
+                                texture = "#side_background"
                             ),
                             east = DataFace(
-                                "texture" to "#side_background".jsonElement
+                                texture = "#side_background"
                             )
                         )
                     ),
@@ -140,20 +139,20 @@ object FairyCollectionBox {
                         to = DataPoint(14.0, 16.0, 14.0),
                         faces = DataFaces(
                             north = DataFace(
-                                "texture" to "#front_light_1".jsonElement,
-                                "tintindex" to 0.jsonElement
+                                texture = "#front_light_1",
+                                tintindex = 0
                             ),
                             south = DataFace(
-                                "texture" to "#side_light_1".jsonElement,
-                                "tintindex" to 0.jsonElement
+                                texture = "#side_light_1",
+                                tintindex = 0
                             ),
                             west = DataFace(
-                                "texture" to "#side_light_1".jsonElement,
-                                "tintindex" to 0.jsonElement
+                                texture = "#side_light_1",
+                                tintindex = 0
                             ),
                             east = DataFace(
-                                "texture" to "#side_light_1".jsonElement,
-                                "tintindex" to 0.jsonElement
+                                texture = "#side_light_1",
+                                tintindex = 0
                             )
                         )
                     ),
@@ -162,20 +161,20 @@ object FairyCollectionBox {
                         to = DataPoint(14.0, 16.0, 14.0),
                         faces = DataFaces(
                             north = DataFace(
-                                "texture" to "#front_light_2".jsonElement,
-                                "tintindex" to 1.jsonElement
+                                texture = "#front_light_2",
+                                tintindex = 1
                             ),
                             south = DataFace(
-                                "texture" to "#side_light_2".jsonElement,
-                                "tintindex" to 1.jsonElement
+                                texture = "#side_light_2",
+                                tintindex = 1
                             ),
                             west = DataFace(
-                                "texture" to "#side_light_2".jsonElement,
-                                "tintindex" to 1.jsonElement
+                                texture = "#side_light_2",
+                                tintindex = 1
                             ),
                             east = DataFace(
-                                "texture" to "#side_light_2".jsonElement,
-                                "tintindex" to 1.jsonElement
+                                texture = "#side_light_2",
+                                tintindex = 1
                             )
                         )
                     ),
@@ -185,22 +184,22 @@ object FairyCollectionBox {
                         shade = false,
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             up = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             north = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             south = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             west = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             east = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             )
                         )
                     ),
@@ -210,22 +209,22 @@ object FairyCollectionBox {
                         shade = false,
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             up = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             north = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             south = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             west = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             east = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             )
                         )
                     ),
@@ -235,22 +234,22 @@ object FairyCollectionBox {
                         shade = false,
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             up = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             north = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             south = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             west = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             east = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             )
                         )
                     ),
@@ -260,22 +259,22 @@ object FairyCollectionBox {
                         shade = false,
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             up = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             north = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             south = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             west = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             east = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             )
                         )
                     ),
@@ -285,22 +284,22 @@ object FairyCollectionBox {
                         shade = false,
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             up = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             north = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             south = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             west = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             east = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             )
                         )
                     ),
@@ -310,22 +309,22 @@ object FairyCollectionBox {
                         shade = false,
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             up = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             north = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             south = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             west = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             east = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             )
                         )
                     ),
@@ -335,22 +334,22 @@ object FairyCollectionBox {
                         shade = false,
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             up = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             north = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             south = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             west = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             east = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             )
                         )
                     ),
@@ -360,22 +359,22 @@ object FairyCollectionBox {
                         shade = false,
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             up = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             north = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             south = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             west = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             east = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             )
                         )
                     ),
@@ -385,22 +384,22 @@ object FairyCollectionBox {
                         shade = false,
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             up = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             north = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             south = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             west = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             east = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             )
                         )
                     ),
@@ -410,22 +409,22 @@ object FairyCollectionBox {
                         shade = false,
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             up = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             north = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             south = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             west = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             east = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             )
                         )
                     ),
@@ -435,22 +434,22 @@ object FairyCollectionBox {
                         shade = false,
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             up = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             north = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             south = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             west = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             east = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             )
                         )
                     ),
@@ -460,22 +459,22 @@ object FairyCollectionBox {
                         shade = false,
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             up = DataFace(
-                                "texture" to "#log_top".jsonElement
+                                texture = "#log_top"
                             ),
                             north = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             south = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             west = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             ),
                             east = DataFace(
-                                "texture" to "#log_side".jsonElement
+                                texture = "#log_side"
                             )
                         )
                     )
@@ -498,22 +497,22 @@ object FairyCollectionBox {
                         to = DataPoint(14.0, 16.0, 14.0),
                         faces = DataFaces(
                             down = DataFace(
-                                "texture" to "#top".jsonElement
+                                texture = "#top"
                             ),
                             up = DataFace(
-                                "texture" to "#top".jsonElement
+                                texture = "#top"
                             ),
                             north = DataFace(
-                                "texture" to "#side_background".jsonElement
+                                texture = "#side_background"
                             ),
                             south = DataFace(
-                                "texture" to "#side_background".jsonElement
+                                texture = "#side_background"
                             ),
                             west = DataFace(
-                                "texture" to "#side_background".jsonElement
+                                texture = "#side_background"
                             ),
                             east = DataFace(
-                                "texture" to "#side_background".jsonElement
+                                texture = "#side_background"
                             )
                         )
                     ),
@@ -522,20 +521,20 @@ object FairyCollectionBox {
                         to = DataPoint(14.0, 16.0, 14.0),
                         faces = DataFaces(
                             north = DataFace(
-                                "texture" to "#side_light_1".jsonElement,
-                                "tintindex" to 0.jsonElement
+                                texture = "#side_light_1",
+                                tintindex = 0
                             ),
                             south = DataFace(
-                                "texture" to "#side_light_1".jsonElement,
-                                "tintindex" to 0.jsonElement
+                                texture = "#side_light_1",
+                                tintindex = 0
                             ),
                             west = DataFace(
-                                "texture" to "#side_light_1".jsonElement,
-                                "tintindex" to 0.jsonElement
+                                texture = "#side_light_1",
+                                tintindex = 0
                             ),
                             east = DataFace(
-                                "texture" to "#side_light_1".jsonElement,
-                                "tintindex" to 0.jsonElement
+                                texture = "#side_light_1",
+                                tintindex = 0
                             )
                         )
                     ),
@@ -544,20 +543,20 @@ object FairyCollectionBox {
                         to = DataPoint(14.0, 16.0, 14.0),
                         faces = DataFaces(
                             north = DataFace(
-                                "texture" to "#side_light_2".jsonElement,
-                                "tintindex" to 1.jsonElement
+                                texture = "#side_light_2",
+                                tintindex = 1
                             ),
                             south = DataFace(
-                                "texture" to "#side_light_2".jsonElement,
-                                "tintindex" to 1.jsonElement
+                                texture = "#side_light_2",
+                                tintindex = 1
                             ),
                             west = DataFace(
-                                "texture" to "#side_light_2".jsonElement,
-                                "tintindex" to 1.jsonElement
+                                texture = "#side_light_2",
+                                tintindex = 1
                             ),
                             east = DataFace(
-                                "texture" to "#side_light_2".jsonElement,
-                                "tintindex" to 1.jsonElement
+                                texture = "#side_light_2",
+                                tintindex = 1
                             )
                         )
                     )

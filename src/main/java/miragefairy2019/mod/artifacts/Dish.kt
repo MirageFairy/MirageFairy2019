@@ -14,14 +14,15 @@ import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
 import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataElement
+import miragefairy2019.resourcemaker.DataFace
 import miragefairy2019.resourcemaker.DataFaces
 import miragefairy2019.resourcemaker.DataPoint
+import miragefairy2019.resourcemaker.DataUv
 import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.normal
-import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
@@ -65,11 +66,6 @@ object Dish {
             makeBlockStates(resourceName.path) { normal }
         }
         makeBlockModel("dish") {
-            fun rectangle(x1: Double, y1: Double, x2: Double, y2: Double) = jsonElement(x1.jsonElement, y1.jsonElement, x2.jsonElement, y2.jsonElement)
-            fun texture(name: String) = jsonElement(
-                "uv" to rectangle(0.0, 0.0, 16.0, 16.0),
-                "texture" to name.jsonElement
-            )
             DataBlockModel(
                 parent = "block/block",
                 ambientOcclusion = false,
@@ -83,24 +79,24 @@ object Dish {
                         from = DataPoint(4.0, 1.0, 4.0),
                         to = DataPoint(12.0, 1.5, 12.0),
                         faces = DataFaces(
-                            down = texture("#main"),
-                            up = texture("#top"),
-                            north = texture("#main"),
-                            south = texture("#main"),
-                            west = texture("#main"),
-                            east = texture("#main")
+                            down = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            up = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#top"),
+                            north = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            south = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            west = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            east = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main")
                         )
                     ),
                     DataElement(
                         from = DataPoint(6.0, 0.0, 6.0),
                         to = DataPoint(10.0, 1.0, 10.0),
                         faces = DataFaces(
-                            down = texture("#main"),
-                            up = texture("#main"),
-                            north = texture("#main"),
-                            south = texture("#main"),
-                            west = texture("#main"),
-                            east = texture("#main")
+                            down = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            up = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            north = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            south = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            west = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            east = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main")
                         )
                     )
                 )

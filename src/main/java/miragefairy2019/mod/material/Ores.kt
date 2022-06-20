@@ -19,12 +19,11 @@ import miragefairy2019.resourcemaker.DataElement
 import miragefairy2019.resourcemaker.DataFace
 import miragefairy2019.resourcemaker.DataFaces
 import miragefairy2019.resourcemaker.DataPoint
+import miragefairy2019.resourcemaker.DataUv
 import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
-import mirrg.kotlin.gson.hydrogen.jsonArray
-import mirrg.kotlin.gson.hydrogen.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
@@ -137,70 +136,40 @@ object Ores {
                             to = DataPoint(16.0, 16.0, 16.0),
                             faces = DataFaces(
                                 down = DataFace(
-                                    "uv" to jsonArray(
-                                        0.jsonElement,
-                                        0.jsonElement,
-                                        16.jsonElement,
-                                        16.jsonElement
-                                    ),
-                                    "texture" to "#base".jsonElement,
-                                    "tintindex" to 0.jsonElement,
-                                    "cullface" to "down".jsonElement
+                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
+                                    texture = "#base",
+                                    tintindex = 0,
+                                    cullface = "down"
                                 ),
                                 up = DataFace(
-                                    "uv" to jsonArray(
-                                        0.jsonElement,
-                                        0.jsonElement,
-                                        16.jsonElement,
-                                        16.jsonElement
-                                    ),
-                                    "texture" to "#base".jsonElement,
-                                    "tintindex" to 0.jsonElement,
-                                    "cullface" to "up".jsonElement
+                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
+                                    texture = "#base",
+                                    tintindex = 0,
+                                    cullface = "up"
                                 ),
                                 north = DataFace(
-                                    "uv" to jsonArray(
-                                        0.jsonElement,
-                                        0.jsonElement,
-                                        16.jsonElement,
-                                        16.jsonElement
-                                    ),
-                                    "texture" to "#base".jsonElement,
-                                    "tintindex" to 0.jsonElement,
-                                    "cullface" to "north".jsonElement
+                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
+                                    texture = "#base",
+                                    tintindex = 0,
+                                    cullface = "north"
                                 ),
                                 south = DataFace(
-                                    "uv" to jsonArray(
-                                        0.jsonElement,
-                                        0.jsonElement,
-                                        16.jsonElement,
-                                        16.jsonElement
-                                    ),
-                                    "texture" to "#base".jsonElement,
-                                    "tintindex" to 0.jsonElement,
-                                    "cullface" to "south".jsonElement
+                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
+                                    texture = "#base",
+                                    tintindex = 0,
+                                    cullface = "south"
                                 ),
                                 west = DataFace(
-                                    "uv" to jsonArray(
-                                        0.jsonElement,
-                                        0.jsonElement,
-                                        16.jsonElement,
-                                        16.jsonElement
-                                    ),
-                                    "texture" to "#base".jsonElement,
-                                    "tintindex" to 0.jsonElement,
-                                    "cullface" to "west".jsonElement
+                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
+                                    texture = "#base",
+                                    tintindex = 0,
+                                    cullface = "west"
                                 ),
                                 east = DataFace(
-                                    "uv" to jsonArray(
-                                        0.jsonElement,
-                                        0.jsonElement,
-                                        16.jsonElement,
-                                        16.jsonElement
-                                    ),
-                                    "texture" to "#base".jsonElement,
-                                    "tintindex" to 0.jsonElement,
-                                    "cullface" to "east".jsonElement
+                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
+                                    texture = "#base",
+                                    tintindex = 0,
+                                    cullface = "east"
                                 )
                             )
                         ),
@@ -209,70 +178,40 @@ object Ores {
                             to = DataPoint(16.0, 16.0, 16.0),
                             faces = DataFaces(
                                 down = DataFace(
-                                    "uv" to jsonArray(
-                                        0.jsonElement,
-                                        0.jsonElement,
-                                        16.jsonElement,
-                                        16.jsonElement
-                                    ),
-                                    "texture" to "#overlay".jsonElement,
-                                    "tintindex" to 1.jsonElement,
-                                    "cullface" to "down".jsonElement
+                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
+                                    texture = "#overlay",
+                                    tintindex = 1,
+                                    cullface = "down"
                                 ),
                                 up = DataFace(
-                                    "uv" to jsonArray(
-                                        0.jsonElement,
-                                        0.jsonElement,
-                                        16.jsonElement,
-                                        16.jsonElement
-                                    ),
-                                    "texture" to "#overlay".jsonElement,
-                                    "tintindex" to 1.jsonElement,
-                                    "cullface" to "up".jsonElement
+                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
+                                    texture = "#overlay",
+                                    tintindex = 1,
+                                    cullface = "up"
                                 ),
                                 north = DataFace(
-                                    "uv" to jsonArray(
-                                        0.jsonElement,
-                                        0.jsonElement,
-                                        16.jsonElement,
-                                        16.jsonElement
-                                    ),
-                                    "texture" to "#overlay".jsonElement,
-                                    "tintindex" to 1.jsonElement,
-                                    "cullface" to "north".jsonElement
+                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
+                                    texture = "#overlay",
+                                    tintindex = 1,
+                                    cullface = "north"
                                 ),
                                 south = DataFace(
-                                    "uv" to jsonArray(
-                                        0.jsonElement,
-                                        0.jsonElement,
-                                        16.jsonElement,
-                                        16.jsonElement
-                                    ),
-                                    "texture" to "#overlay".jsonElement,
-                                    "tintindex" to 1.jsonElement,
-                                    "cullface" to "south".jsonElement
+                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
+                                    texture = "#overlay",
+                                    tintindex = 1,
+                                    cullface = "south"
                                 ),
                                 west = DataFace(
-                                    "uv" to jsonArray(
-                                        0.jsonElement,
-                                        0.jsonElement,
-                                        16.jsonElement,
-                                        16.jsonElement
-                                    ),
-                                    "texture" to "#overlay".jsonElement,
-                                    "tintindex" to 1.jsonElement,
-                                    "cullface" to "west".jsonElement
+                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
+                                    texture = "#overlay",
+                                    tintindex = 1,
+                                    cullface = "west"
                                 ),
                                 east = DataFace(
-                                    "uv" to jsonArray(
-                                        0.jsonElement,
-                                        0.jsonElement,
-                                        16.jsonElement,
-                                        16.jsonElement
-                                    ),
-                                    "texture" to "#overlay".jsonElement,
-                                    "tintindex" to 1.jsonElement,
-                                    "cullface" to "east".jsonElement
+                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
+                                    texture = "#overlay",
+                                    tintindex = 1,
+                                    cullface = "east"
                                 )
                             )
                         )
