@@ -72,14 +72,16 @@ data class DataFace(
     val uv: DataUv? = null,
     val texture: String,
     val tintindex: Int? = null,
-    val cullface: String? = null
+    val cullface: String? = null,
+    val rotation: Int? = null
 ) {
     val jsonElement
         get() = jsonObjectNotNull(
             "uv" to uv?.jsonElement,
             "texture" to texture.jsonElement,
             "tintindex" to tintindex?.jsonElement,
-            "cullface" to cullface?.jsonElement
+            "cullface" to cullface?.jsonElement,
+            "rotation" to rotation?.jsonElement
         )
 }
 

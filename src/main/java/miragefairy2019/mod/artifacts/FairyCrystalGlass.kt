@@ -2,7 +2,6 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.libkt.BlockInitializer
 import miragefairy2019.libkt.ItemInitializer
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.enJa
@@ -14,19 +13,23 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.with
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
+import miragefairy2019.resourcemaker.DataElement
+import miragefairy2019.resourcemaker.DataFace
+import miragefairy2019.resourcemaker.DataFaces
 import miragefairy2019.resourcemaker.DataItemModel
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataPart
+import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapelessRecipe
+import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
 import miragefairy2019.resourcemaker.makeRecipe
-import miragefairy2019.resourcemaker.place
 import mirrg.kotlin.gson.jsonElement
-import mirrg.kotlin.gson.jsonElementNotNull
 import mirrg.kotlin.toLowerCaseHead
 import mirrg.kotlin.toSnakeCase
 import net.minecraft.block.Block
@@ -57,37 +60,29 @@ object FairyCrystalGlass {
     lateinit var blockVeryWildFairyCrystalGlass: () -> BlockFairyCrystalGlass
     lateinit var itemBlockVeryWildFairyCrystalGlass: () -> ItemBlock
     val module = module {
-        fun surface(texture: String, cullface: String, rotation: Int?) = jsonElementNotNull(
-            "texture" to texture.jsonElement,
-            "cullface" to cullface.jsonElement,
-            rotation?.let { "rotation" to it.jsonElement }
-        )
 
-        fun cube(texture: String, rotation: Int?) = jsonElement(
-            "from" to jsonElement(0.jsonElement, 0.jsonElement, 0.jsonElement),
-            "to" to jsonElement(16.jsonElement, 16.jsonElement, 16.jsonElement),
-            "faces" to jsonElement(
-                "down" to surface(texture, "down", rotation),
-                "up" to surface(texture, "up", rotation),
-                "north" to surface(texture, "north", rotation),
-                "south" to surface(texture, "south", rotation),
-                "west" to surface(texture, "west", rotation),
-                "east" to surface(texture, "east", rotation)
+        fun cube(texture: String, rotation: Int?) = DataElement(
+            from = DataPoint(0.0, 0.0, 0.0),
+            to = DataPoint(16.0, 16.0, 16.0),
+            faces = DataFaces(
+                down = DataFace(texture = texture, cullface = "down", rotation = rotation),
+                up = DataFace(texture = texture, cullface = "up", rotation = rotation),
+                north = DataFace(texture = texture, cullface = "north", rotation = rotation),
+                south = DataFace(texture = texture, cullface = "south", rotation = rotation),
+                west = DataFace(texture = texture, cullface = "west", rotation = rotation),
+                east = DataFace(texture = texture, cullface = "east", rotation = rotation)
             )
         )
 
 
-        fun makeBackgroundModel(name: String) = onMakeResource {
-            place(
-                "assets/${ModMirageFairy2019.MODID}/models/block/$name.json",
-                jsonElement(
-                    "parent" to "block/block".jsonElement,
-                    "elements" to jsonElement(
-                        cube("#background", null)
-                    ),
-                    "textures" to jsonElement(
-                        "background" to "miragefairy2019:blocks/$name".jsonElement
-                    )
+        fun makeBackgroundModel(name: String) = makeBlockModel(name) {
+            DataBlockModel(
+                parent = "block/block",
+                elements = listOf(
+                    cube("#background", null)
+                ),
+                textures = mapOf(
+                    "background" to "miragefairy2019:blocks/$name"
                 )
             )
         }
@@ -96,26 +91,23 @@ object FairyCrystalGlass {
         makeBackgroundModel("very_pure_fairy_crystal_glass_background")
 
 
-        fun makeFrameModel(name: String) = onMakeResource {
-            place(
-                "assets/${ModMirageFairy2019.MODID}/models/block/$name.json",
-                jsonElement(
-                    "elements" to jsonElement(
-                        jsonElement(
-                            "from" to jsonElement(0.jsonElement, 0.jsonElement, 0.jsonElement),
-                            "to" to jsonElement(16.jsonElement, 16.jsonElement, 16.jsonElement),
-                            "faces" to jsonElement(
-                                "north" to surface("#frame", "north", null),
-                                "south" to surface("#frame", "south", null),
-                                "west" to surface("#frame", "west", null),
-                                "east" to surface("#frame", "east", null)
-                            )
+        fun makeFrameModel(name: String) = makeBlockModel(name) {
+            DataBlockModel(
+                elements = listOf(
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 0.0),
+                        to = DataPoint(16.0, 16.0, 16.0),
+                        faces = DataFaces(
+                            north = DataFace(texture = "#frame", cullface = "north", rotation = null),
+                            south = DataFace(texture = "#frame", cullface = "south", rotation = null),
+                            west = DataFace(texture = "#frame", cullface = "west", rotation = null),
+                            east = DataFace(texture = "#frame", cullface = "east", rotation = null)
                         )
-                    ),
-                    "textures" to jsonElement(
-                        "particle" to "miragefairy2019:blocks/$name".jsonElement,
-                        "frame" to "miragefairy2019:blocks/$name".jsonElement
                     )
+                ),
+                textures = mapOf(
+                    "particle" to "miragefairy2019:blocks/$name",
+                    "frame" to "miragefairy2019:blocks/$name"
                 )
             )
         }
@@ -174,7 +166,7 @@ object FairyCrystalGlass {
                 makeItemModel("${prefix}FairyCrystalGlass".toSnakeCase()) {
                     DataItemModel(
                         parent = "block/block",
-                        elements = jsonElement(
+                        elements = listOf(
                             cube("#background", null),
                             cube("#frame", 0),
                             cube("#frame", 90),
