@@ -37,12 +37,12 @@ import miragefairy2019.mod.configProperty
 import miragefairy2019.mod.systems.Daemon
 import miragefairy2019.mod.systems.DaemonManager
 import miragefairy2019.mod.systems.IBlockDaemon
-import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataElement
 import miragefairy2019.resourcemaker.DataFace
 import miragefairy2019.resourcemaker.DataFaces
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.DataResult

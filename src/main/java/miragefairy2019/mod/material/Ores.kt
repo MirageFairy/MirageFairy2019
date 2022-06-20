@@ -12,12 +12,12 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataElement
 import miragefairy2019.resourcemaker.DataFace
 import miragefairy2019.resourcemaker.DataFaces
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.DataUv
 import miragefairy2019.resourcemaker.block

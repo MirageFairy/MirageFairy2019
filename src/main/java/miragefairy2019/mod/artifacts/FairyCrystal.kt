@@ -5,7 +5,6 @@ import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.BlockRegion
 import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.enJa

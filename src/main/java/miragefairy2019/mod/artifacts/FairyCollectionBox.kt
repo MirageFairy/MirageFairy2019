@@ -25,12 +25,12 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.fairyVariant
 import miragefairy2019.mod.fairy.hasSameId
 import miragefairy2019.mod.fairy.level
-import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataElement
 import miragefairy2019.resourcemaker.DataFace
 import miragefairy2019.resourcemaker.DataFaces
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates

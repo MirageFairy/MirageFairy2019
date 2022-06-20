@@ -2,7 +2,6 @@ package miragefairy2019.resourcemaker
 
 import com.google.gson.JsonElement
 import miragefairy2019.libkt.ModInitializer
-import miragefairy2019.libkt.ResourceName
 import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.gson.jsonElementNotNull
 

@@ -12,10 +12,10 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
-import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataElement
 import miragefairy2019.resourcemaker.DataFace
 import miragefairy2019.resourcemaker.DataFaces
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.DataUv
 import miragefairy2019.resourcemaker.block

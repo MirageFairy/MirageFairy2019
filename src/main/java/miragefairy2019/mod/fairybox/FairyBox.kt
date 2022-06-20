@@ -30,12 +30,12 @@ import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.artifacts.get
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
-import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataElement
 import miragefairy2019.resourcemaker.DataFace
 import miragefairy2019.resourcemaker.DataFaces
+import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.DataResult
