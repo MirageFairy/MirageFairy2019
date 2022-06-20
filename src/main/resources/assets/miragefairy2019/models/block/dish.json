@@ -1,11 +1,6 @@
 {
   "parent": "block/block",
   "ambientocclusion": false,
-  "textures": {
-    "particle": "minecraft:blocks/quartz_block_top",
-    "top": "minecraft:blocks/bone_block_top",
-    "main": "minecraft:blocks/quartz_block_top"
-  },
   "elements": [
     {
       "from": [
@@ -143,5 +138,10 @@
         }
       }
     }
-  ]
+  ],
+  "textures": {
+    "particle": "minecraft:blocks/quartz_block_top",
+    "top": "minecraft:blocks/bone_block_top",
+    "main": "minecraft:blocks/quartz_block_top"
+  }
 }

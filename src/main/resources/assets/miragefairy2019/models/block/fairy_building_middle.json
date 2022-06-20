@@ -1,12 +1,5 @@
 {
   "parent": "block/block",
-  "textures": {
-    "particle": "blocks/log_oak",
-    "top": "miragefairy2019:blocks/fairy_building_top",
-    "side_background": "miragefairy2019:blocks/fairy_building_side_background",
-    "side_light_1": "miragefairy2019:blocks/fairy_building_side_light_1",
-    "side_light_2": "miragefairy2019:blocks/fairy_building_side_light_2"
-  },
   "elements": [
     {
       "from": [
@@ -100,5 +93,12 @@
         }
       }
     }
-  ]
+  ],
+  "textures": {
+    "particle": "blocks/log_oak",
+    "top": "miragefairy2019:blocks/fairy_building_top",
+    "side_background": "miragefairy2019:blocks/fairy_building_side_background",
+    "side_light_1": "miragefairy2019:blocks/fairy_building_side_light_1",
+    "side_light_2": "miragefairy2019:blocks/fairy_building_side_light_2"
+  }
 }
