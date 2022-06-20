@@ -15,14 +15,37 @@ fun ModInitializer.makeBlockModel(path: String, creator: () -> DataBlockModel) =
 data class DataBlockModel(
     val parent: String? = null,
     val ambientOcclusion: Boolean? = null,
-    val elements: List<JsonElement>? = null,
+    val elements: List<DataElement>? = null,
     val textures: Map<String, String>? = null
 ) {
     val jsonElement
         get() = jsonObjectNotNull(
             "parent" to parent?.jsonElement,
             "ambientocclusion" to ambientOcclusion?.jsonElement,
-            "elements" to elements?.jsonArray,
+            "elements" to elements?.map { it.jsonElement }?.jsonArray,
             "textures" to textures?.mapValues { (_, it) -> it.jsonElement }?.jsonObject
         )
+}
+
+data class DataElement(
+    val from: DataPoint,
+    val to: DataPoint,
+    val shade: Boolean? = null,
+    val faces: JsonElement
+) {
+    val jsonElement
+        get() = jsonObjectNotNull(
+            "from" to from.jsonElement,
+            "to" to to.jsonElement,
+            "shade" to shade?.jsonElement,
+            "faces" to faces
+        )
+}
+
+data class DataPoint(
+    val x: Double,
+    val y: Double,
+    val z: Double
+) {
+    val jsonElement get() = jsonArray(x.jsonElement, y.jsonElement, z.jsonElement)
 }

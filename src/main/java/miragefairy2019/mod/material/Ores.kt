@@ -15,6 +15,8 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
+import miragefairy2019.resourcemaker.DataElement
+import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
@@ -129,18 +131,10 @@ object Ores {
                 DataBlockModel(
                     parent = "block/block",
                     elements = listOf(
-                        jsonObject(
-                            "from" to jsonArray(
-                                0.jsonElement,
-                                0.jsonElement,
-                                0.jsonElement
-                            ),
-                            "to" to jsonArray(
-                                16.jsonElement,
-                                16.jsonElement,
-                                16.jsonElement
-                            ),
-                            "faces" to jsonObject(
+                        DataElement(
+                            from = DataPoint(0.0, 0.0, 0.0),
+                            to = DataPoint(16.0, 16.0, 16.0),
+                            faces = jsonObject(
                                 "down" to jsonObject(
                                     "uv" to jsonArray(
                                         0.jsonElement,
@@ -209,18 +203,10 @@ object Ores {
                                 )
                             )
                         ),
-                        jsonObject(
-                            "from" to jsonArray(
-                                0.jsonElement,
-                                0.jsonElement,
-                                0.jsonElement
-                            ),
-                            "to" to jsonArray(
-                                16.jsonElement,
-                                16.jsonElement,
-                                16.jsonElement
-                            ),
-                            "faces" to jsonObject(
+                        DataElement(
+                            from = DataPoint(0.0, 0.0, 0.0),
+                            to = DataPoint(16.0, 16.0, 16.0),
+                            faces = jsonObject(
                                 "down" to jsonObject(
                                     "uv" to jsonArray(
                                         0.jsonElement,

@@ -40,7 +40,9 @@ import miragefairy2019.mod.systems.IBlockDaemon
 import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
+import miragefairy2019.resourcemaker.DataElement
 import miragefairy2019.resourcemaker.DataOreIngredient
+import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapedRecipe
 import miragefairy2019.resourcemaker.DataSimpleIngredient
@@ -50,7 +52,6 @@ import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
 import mirrg.kotlin.castOrNull
-import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.json
@@ -128,18 +129,10 @@ object ChatWebhook {
                 DataBlockModel(
                     parent = "block/block",
                     elements = listOf(
-                        jsonObject(
-                            "from" to jsonArray(
-                                0.jsonElement,
-                                0.jsonElement,
-                                0.jsonElement
-                            ),
-                            "to" to jsonArray(
-                                16.jsonElement,
-                                16.jsonElement,
-                                16.jsonElement
-                            ),
-                            "faces" to jsonObject(
+                        DataElement(
+                            from = DataPoint(0.0, 0.0, 0.0),
+                            to = DataPoint(16.0, 16.0, 16.0),
+                            faces = jsonObject(
                                 "down" to jsonObject(
                                     "texture" to "#side".jsonElement,
                                     "cullface" to "down".jsonElement
@@ -218,18 +211,10 @@ object ChatWebhook {
                 DataBlockModel(
                     parent = "block/block",
                     elements = listOf(
-                        jsonObject(
-                            "from" to jsonArray(
-                                0.jsonElement,
-                                0.jsonElement,
-                                0.jsonElement
-                            ),
-                            "to" to jsonArray(
-                                16.jsonElement,
-                                16.jsonElement,
-                                16.jsonElement
-                            ),
-                            "faces" to jsonObject(
+                        DataElement(
+                            from = DataPoint(0.0, 0.0, 0.0),
+                            to = DataPoint(16.0, 16.0, 16.0),
+                            faces = jsonObject(
                                 "down" to jsonObject(
                                     "texture" to "#side".jsonElement,
                                     "cullface" to "down".jsonElement

@@ -28,11 +28,12 @@ import miragefairy2019.mod.fairy.level
 import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
+import miragefairy2019.resourcemaker.DataElement
+import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
-import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import net.minecraft.block.BlockContainer
@@ -109,18 +110,10 @@ object FairyCollectionBox {
                     "log_side" to "blocks/log_oak"
                 ),
                 elements = listOf(
-                    jsonObject(
-                        "from" to jsonArray(
-                            2.jsonElement,
-                            0.jsonElement,
-                            2.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            14.jsonElement,
-                            16.jsonElement,
-                            14.jsonElement
-                        ),
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(2.0, 0.0, 2.0),
+                        to = DataPoint(14.0, 16.0, 14.0),
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#top".jsonElement
                             ),
@@ -141,18 +134,10 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            2.jsonElement,
-                            0.jsonElement,
-                            2.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            14.jsonElement,
-                            16.jsonElement,
-                            14.jsonElement
-                        ),
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(2.0, 0.0, 2.0),
+                        to = DataPoint(14.0, 16.0, 14.0),
+                        faces = jsonObject(
                             "north" to jsonObject(
                                 "texture" to "#front_light_1".jsonElement,
                                 "tintindex" to 0.jsonElement
@@ -171,18 +156,10 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            2.jsonElement,
-                            0.jsonElement,
-                            2.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            14.jsonElement,
-                            16.jsonElement,
-                            14.jsonElement
-                        ),
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(2.0, 0.0, 2.0),
+                        to = DataPoint(14.0, 16.0, 14.0),
+                        faces = jsonObject(
                             "north" to jsonObject(
                                 "texture" to "#front_light_2".jsonElement,
                                 "tintindex" to 1.jsonElement
@@ -201,19 +178,11 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            2.jsonElement,
-                            0.jsonElement,
-                            14.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            12.jsonElement,
-                            2.jsonElement,
-                            16.jsonElement
-                        ),
-                        "shade" to false.jsonElement,
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(2.0, 0.0, 14.0),
+                        to = DataPoint(12.0, 2.0, 16.0),
+                        shade = false,
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#log_top".jsonElement
                             ),
@@ -234,19 +203,11 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            6.jsonElement,
-                            0.jsonElement,
-                            14.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            8.jsonElement,
-                            6.jsonElement,
-                            16.jsonElement
-                        ),
-                        "shade" to false.jsonElement,
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(6.0, 0.0, 14.0),
+                        to = DataPoint(8.0, 6.0, 16.0),
+                        shade = false,
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#log_top".jsonElement
                             ),
@@ -267,19 +228,11 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            10.jsonElement,
-                            0.jsonElement,
-                            14.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            12.jsonElement,
-                            10.jsonElement,
-                            16.jsonElement
-                        ),
-                        "shade" to false.jsonElement,
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(10.0, 0.0, 14.0),
+                        to = DataPoint(12.0, 10.0, 16.0),
+                        shade = false,
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#log_top".jsonElement
                             ),
@@ -300,19 +253,11 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            14.jsonElement,
-                            0.jsonElement,
-                            8.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            16.jsonElement,
-                            2.jsonElement,
-                            14.jsonElement
-                        ),
-                        "shade" to false.jsonElement,
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(14.0, 0.0, 8.0),
+                        to = DataPoint(16.0, 2.0, 14.0),
+                        shade = false,
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#log_top".jsonElement
                             ),
@@ -333,19 +278,11 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            14.jsonElement,
-                            0.jsonElement,
-                            10.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            16.jsonElement,
-                            8.jsonElement,
-                            12.jsonElement
-                        ),
-                        "shade" to false.jsonElement,
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(14.0, 0.0, 10.0),
+                        to = DataPoint(16.0, 8.0, 12.0),
+                        shade = false,
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#log_top".jsonElement
                             ),
@@ -366,19 +303,11 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            14.jsonElement,
-                            0.jsonElement,
-                            0.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            16.jsonElement,
-                            2.jsonElement,
-                            4.jsonElement
-                        ),
-                        "shade" to false.jsonElement,
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(14.0, 0.0, 0.0),
+                        to = DataPoint(16.0, 2.0, 4.0),
+                        shade = false,
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#log_top".jsonElement
                             ),
@@ -399,19 +328,11 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            14.jsonElement,
-                            0.jsonElement,
-                            2.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            16.jsonElement,
-                            4.jsonElement,
-                            4.jsonElement
-                        ),
-                        "shade" to false.jsonElement,
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(14.0, 0.0, 2.0),
+                        to = DataPoint(16.0, 4.0, 4.0),
+                        shade = false,
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#log_top".jsonElement
                             ),
@@ -432,19 +353,11 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            4.jsonElement,
-                            0.jsonElement,
-                            0.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            6.jsonElement,
-                            4.jsonElement,
-                            2.jsonElement
-                        ),
-                        "shade" to false.jsonElement,
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(4.0, 0.0, 0.0),
+                        to = DataPoint(6.0, 4.0, 2.0),
+                        shade = false,
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#log_top".jsonElement
                             ),
@@ -465,19 +378,11 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            0.jsonElement,
-                            0.jsonElement,
-                            4.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            2.jsonElement,
-                            4.jsonElement,
-                            6.jsonElement
-                        ),
-                        "shade" to false.jsonElement,
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 4.0),
+                        to = DataPoint(2.0, 4.0, 6.0),
+                        shade = false,
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#log_top".jsonElement
                             ),
@@ -498,19 +403,11 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            0.jsonElement,
-                            0.jsonElement,
-                            6.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            2.jsonElement,
-                            12.jsonElement,
-                            8.jsonElement
-                        ),
-                        "shade" to false.jsonElement,
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 6.0),
+                        to = DataPoint(2.0, 12.0, 8.0),
+                        shade = false,
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#log_top".jsonElement
                             ),
@@ -531,19 +428,11 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            0.jsonElement,
-                            0.jsonElement,
-                            8.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            2.jsonElement,
-                            6.jsonElement,
-                            10.jsonElement
-                        ),
-                        "shade" to false.jsonElement,
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 8.0),
+                        to = DataPoint(2.0, 6.0, 10.0),
+                        shade = false,
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#log_top".jsonElement
                             ),
@@ -564,19 +453,11 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            0.jsonElement,
-                            0.jsonElement,
-                            10.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            2.jsonElement,
-                            2.jsonElement,
-                            12.jsonElement
-                        ),
-                        "shade" to false.jsonElement,
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 10.0),
+                        to = DataPoint(2.0, 2.0, 12.0),
+                        shade = false,
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#log_top".jsonElement
                             ),
@@ -611,18 +492,10 @@ object FairyCollectionBox {
                     "side_light_2" to "miragefairy2019:blocks/fairy_building_side_light_2"
                 ),
                 elements = listOf(
-                    jsonObject(
-                        "from" to jsonArray(
-                            2.jsonElement,
-                            0.jsonElement,
-                            2.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            14.jsonElement,
-                            16.jsonElement,
-                            14.jsonElement
-                        ),
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(2.0, 0.0, 2.0),
+                        to = DataPoint(14.0, 16.0, 14.0),
+                        faces = jsonObject(
                             "down" to jsonObject(
                                 "texture" to "#top".jsonElement
                             ),
@@ -643,18 +516,10 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            2.jsonElement,
-                            0.jsonElement,
-                            2.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            14.jsonElement,
-                            16.jsonElement,
-                            14.jsonElement
-                        ),
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(2.0, 0.0, 2.0),
+                        to = DataPoint(14.0, 16.0, 14.0),
+                        faces = jsonObject(
                             "north" to jsonObject(
                                 "texture" to "#side_light_1".jsonElement,
                                 "tintindex" to 0.jsonElement
@@ -673,18 +538,10 @@ object FairyCollectionBox {
                             )
                         )
                     ),
-                    jsonObject(
-                        "from" to jsonArray(
-                            2.jsonElement,
-                            0.jsonElement,
-                            2.jsonElement
-                        ),
-                        "to" to jsonArray(
-                            14.jsonElement,
-                            16.jsonElement,
-                            14.jsonElement
-                        ),
-                        "faces" to jsonObject(
+                    DataElement(
+                        from = DataPoint(2.0, 0.0, 2.0),
+                        to = DataPoint(14.0, 16.0, 14.0),
+                        faces = jsonObject(
                             "north" to jsonObject(
                                 "texture" to "#side_light_2".jsonElement,
                                 "tintindex" to 1.jsonElement

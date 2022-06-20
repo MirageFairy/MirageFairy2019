@@ -13,6 +13,8 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
 import miragefairy2019.resourcemaker.DataBlockModel
+import miragefairy2019.resourcemaker.DataElement
+import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
@@ -62,7 +64,6 @@ object Dish {
             makeBlockStates(resourceName.path) { normal }
         }
         makeBlockModel("dish") {
-            fun point(x: Double, y: Double, z: Double) = jsonElement(x.jsonElement, y.jsonElement, z.jsonElement)
             fun rectangle(x1: Double, y1: Double, x2: Double, y2: Double) = jsonElement(x1.jsonElement, y1.jsonElement, x2.jsonElement, y2.jsonElement)
             fun texture(name: String) = jsonElement(
                 "uv" to rectangle(0.0, 0.0, 16.0, 16.0),
@@ -77,10 +78,10 @@ object Dish {
                     "main" to "minecraft:blocks/quartz_block_top"
                 ),
                 elements = listOf(
-                    jsonElement(
-                        "from" to point(4.0, 1.0, 4.0),
-                        "to" to point(12.0, 1.5, 12.0),
-                        "faces" to jsonElement(
+                    DataElement(
+                        from = DataPoint(4.0, 1.0, 4.0),
+                        to = DataPoint(12.0, 1.5, 12.0),
+                        faces = jsonElement(
                             "down" to texture("#main"),
                             "up" to texture("#top"),
                             "north" to texture("#main"),
@@ -89,10 +90,10 @@ object Dish {
                             "east" to texture("#main")
                         )
                     ),
-                    jsonElement(
-                        "from" to point(6.0, 0.0, 6.0),
-                        "to" to point(10.0, 1.0, 10.0),
-                        "faces" to jsonElement(
+                    DataElement(
+                        from = DataPoint(6.0, 0.0, 6.0),
+                        to = DataPoint(10.0, 1.0, 10.0),
+                        faces = jsonElement(
                             "down" to texture("#main"),
                             "up" to texture("#main"),
                             "north" to texture("#main"),
