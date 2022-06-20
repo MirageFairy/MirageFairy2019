@@ -35,7 +35,7 @@ object PlacedItem {
         }
         makeBlockModel("placed_item") {
             DataBlockModel(
-                ambientocclusion = false,
+                ambientOcclusion = false,
                 textures = mapOf(
                     "particle" to "minecraft:blocks/glass"
                 ),

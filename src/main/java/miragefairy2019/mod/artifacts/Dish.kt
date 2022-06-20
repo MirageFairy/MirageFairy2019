@@ -70,7 +70,7 @@ object Dish {
             )
             DataBlockModel(
                 parent = "block/block",
-                ambientocclusion = false,
+                ambientOcclusion = false,
                 textures = mapOf(
                     "particle" to "minecraft:blocks/quartz_block_top",
                     "top" to "minecraft:blocks/bone_block_top",
