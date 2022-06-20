@@ -1,26 +1,80 @@
 {
   "parent": "block/block",
   "elements": [
-    {   "from": [ 0, 0, 0 ],
-      "to": [ 16, 16, 16 ],
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
       "faces": {
-        "down":  { "texture": "#end", "cullface": "down" },
-        "up":    { "texture": "#end", "cullface": "up" },
-        "north": { "texture": "#side", "cullface": "north" },
-        "south": { "texture": "#side", "cullface": "south" },
-        "west":  { "texture": "#side", "cullface": "west" },
-        "east":  { "texture": "#side", "cullface": "east" }
+        "down": {
+          "texture": "#end",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#end",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#side",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#side",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#side",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#side",
+          "cullface": "east"
+        }
       }
     },
-    {   "from": [ 0, 0, 0 ],
-      "to": [ 16, 16, 16 ],
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
       "faces": {
-        "down":  { "texture": "#vertical_output", "cullface": "down" },
-        "up":    { "texture": "#vertical_input", "cullface": "up" },
-        "north": { "texture": "#entrance", "cullface": "north" },
-        "south": { "texture": "#input", "cullface": "south" },
-        "west":  { "texture": "#output", "cullface": "west" },
-        "east":  { "texture": "#input", "cullface": "east" }
+        "down": {
+          "texture": "#vertical_output",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#vertical_input",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#entrance",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#input",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#output",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#input",
+          "cullface": "east"
+        }
       }
     }
   ],
