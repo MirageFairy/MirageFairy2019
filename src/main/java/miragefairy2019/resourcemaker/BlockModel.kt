@@ -31,14 +31,14 @@ data class DataElement(
     val from: DataPoint,
     val to: DataPoint,
     val shade: Boolean? = null,
-    val faces: JsonElement
+    val faces: DataFaces
 ) {
     val jsonElement
         get() = jsonObjectNotNull(
             "from" to from.jsonElement,
             "to" to to.jsonElement,
             "shade" to shade?.jsonElement,
-            "faces" to faces
+            "faces" to faces.jsonElement
         )
 }
 
@@ -49,3 +49,24 @@ data class DataPoint(
 ) {
     val jsonElement get() = jsonArray(x.jsonElement, y.jsonElement, z.jsonElement)
 }
+
+data class DataFaces(
+    val down: JsonElement? = null,
+    val up: JsonElement? = null,
+    val north: JsonElement? = null,
+    val south: JsonElement? = null,
+    val west: JsonElement? = null,
+    val east: JsonElement? = null
+) {
+    val jsonElement
+        get() = jsonObjectNotNull(
+            "down" to down,
+            "up" to up,
+            "north" to north,
+            "south" to south,
+            "west" to west,
+            "east" to east
+        )
+}
+
+fun DataFace(vararg content: Pair<String, JsonElement>) = content.toList().jsonObject

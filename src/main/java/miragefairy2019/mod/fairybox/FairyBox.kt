@@ -34,6 +34,8 @@ import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataElement
+import miragefairy2019.resourcemaker.DataFace
+import miragefairy2019.resourcemaker.DataFaces
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.DataResult
@@ -44,7 +46,6 @@ import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.hydrogen.jsonElement
-import mirrg.kotlin.gson.hydrogen.jsonObject
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.ItemBlock
@@ -73,28 +74,28 @@ object FairyBox {
                             DataElement(
                                 from = DataPoint(0.0, 0.0, 0.0),
                                 to = DataPoint(16.0, 16.0, 16.0),
-                                faces = jsonObject(
-                                    "down" to jsonObject(
+                                faces = DataFaces(
+                                    down = DataFace(
                                         "texture" to "#end".jsonElement,
                                         "cullface" to "down".jsonElement
                                     ),
-                                    "up" to jsonObject(
+                                    up = DataFace(
                                         "texture" to "#end".jsonElement,
                                         "cullface" to "up".jsonElement
                                     ),
-                                    "north" to jsonObject(
+                                    north = DataFace(
                                         "texture" to "#side".jsonElement,
                                         "cullface" to "north".jsonElement
                                     ),
-                                    "south" to jsonObject(
+                                    south = DataFace(
                                         "texture" to "#side".jsonElement,
                                         "cullface" to "south".jsonElement
                                     ),
-                                    "west" to jsonObject(
+                                    west = DataFace(
                                         "texture" to "#side".jsonElement,
                                         "cullface" to "west".jsonElement
                                     ),
-                                    "east" to jsonObject(
+                                    east = DataFace(
                                         "texture" to "#side".jsonElement,
                                         "cullface" to "east".jsonElement
                                     )
@@ -103,20 +104,20 @@ object FairyBox {
                             DataElement(
                                 from = DataPoint(0.0, 0.0, 0.0),
                                 to = DataPoint(16.0, 16.0, 16.0),
-                                faces = jsonObject(
-                                    "north" to jsonObject(
+                                faces = DataFaces(
+                                    north = DataFace(
                                         "texture" to "#entrance".jsonElement,
                                         "cullface" to "north".jsonElement
                                     ),
-                                    "south" to jsonObject(
+                                    south = DataFace(
                                         "texture" to "#window".jsonElement,
                                         "cullface" to "south".jsonElement
                                     ),
-                                    "west" to jsonObject(
+                                    west = DataFace(
                                         "texture" to "#window".jsonElement,
                                         "cullface" to "west".jsonElement
                                     ),
-                                    "east" to jsonObject(
+                                    east = DataFace(
                                         "texture" to "#window".jsonElement,
                                         "cullface" to "east".jsonElement
                                     )
@@ -180,28 +181,28 @@ object FairyBox {
                             DataElement(
                                 from = DataPoint(0.0, 0.0, 0.0),
                                 to = DataPoint(16.0, 16.0, 16.0),
-                                faces = jsonObject(
-                                    "down" to jsonObject(
+                                faces = DataFaces(
+                                    down = DataFace(
                                         "texture" to "#end".jsonElement,
                                         "cullface" to "down".jsonElement
                                     ),
-                                    "up" to jsonObject(
+                                    up = DataFace(
                                         "texture" to "#end".jsonElement,
                                         "cullface" to "up".jsonElement
                                     ),
-                                    "north" to jsonObject(
+                                    north = DataFace(
                                         "texture" to "#side".jsonElement,
                                         "cullface" to "north".jsonElement
                                     ),
-                                    "south" to jsonObject(
+                                    south = DataFace(
                                         "texture" to "#side".jsonElement,
                                         "cullface" to "south".jsonElement
                                     ),
-                                    "west" to jsonObject(
+                                    west = DataFace(
                                         "texture" to "#side".jsonElement,
                                         "cullface" to "west".jsonElement
                                     ),
-                                    "east" to jsonObject(
+                                    east = DataFace(
                                         "texture" to "#side".jsonElement,
                                         "cullface" to "east".jsonElement
                                     )
@@ -210,20 +211,20 @@ object FairyBox {
                             DataElement(
                                 from = DataPoint(0.0, 0.0, 0.0),
                                 to = DataPoint(16.0, 16.0, 16.0),
-                                faces = jsonObject(
-                                    "north" to jsonObject(
+                                faces = DataFaces(
+                                    north = DataFace(
                                         "texture" to "#entrance".jsonElement,
                                         "cullface" to "north".jsonElement
                                     ),
-                                    "south" to jsonObject(
+                                    south = DataFace(
                                         "texture" to "#window".jsonElement,
                                         "cullface" to "south".jsonElement
                                     ),
-                                    "west" to jsonObject(
+                                    west = DataFace(
                                         "texture" to "#window".jsonElement,
                                         "cullface" to "west".jsonElement
                                     ),
-                                    "east" to jsonObject(
+                                    east = DataFace(
                                         "texture" to "#window".jsonElement,
                                         "cullface" to "east".jsonElement
                                     )
@@ -287,28 +288,28 @@ object FairyBox {
                             DataElement(
                                 from = DataPoint(0.0, 0.0, 0.0),
                                 to = DataPoint(16.0, 16.0, 16.0),
-                                faces = jsonObject(
-                                    "down" to jsonObject(
+                                faces = DataFaces(
+                                    down = DataFace(
                                         "texture" to "#end".jsonElement,
                                         "cullface" to "down".jsonElement
                                     ),
-                                    "up" to jsonObject(
+                                    up = DataFace(
                                         "texture" to "#end".jsonElement,
                                         "cullface" to "up".jsonElement
                                     ),
-                                    "north" to jsonObject(
+                                    north = DataFace(
                                         "texture" to "#side".jsonElement,
                                         "cullface" to "north".jsonElement
                                     ),
-                                    "south" to jsonObject(
+                                    south = DataFace(
                                         "texture" to "#side".jsonElement,
                                         "cullface" to "south".jsonElement
                                     ),
-                                    "west" to jsonObject(
+                                    west = DataFace(
                                         "texture" to "#side".jsonElement,
                                         "cullface" to "west".jsonElement
                                     ),
-                                    "east" to jsonObject(
+                                    east = DataFace(
                                         "texture" to "#side".jsonElement,
                                         "cullface" to "east".jsonElement
                                     )
@@ -317,28 +318,28 @@ object FairyBox {
                             DataElement(
                                 from = DataPoint(0.0, 0.0, 0.0),
                                 to = DataPoint(16.0, 16.0, 16.0),
-                                faces = jsonObject(
-                                    "down" to jsonObject(
+                                faces = DataFaces(
+                                    down = DataFace(
                                         "texture" to "#vertical_output".jsonElement,
                                         "cullface" to "down".jsonElement
                                     ),
-                                    "up" to jsonObject(
+                                    up = DataFace(
                                         "texture" to "#vertical_input".jsonElement,
                                         "cullface" to "up".jsonElement
                                     ),
-                                    "north" to jsonObject(
+                                    north = DataFace(
                                         "texture" to "#entrance".jsonElement,
                                         "cullface" to "north".jsonElement
                                     ),
-                                    "south" to jsonObject(
+                                    south = DataFace(
                                         "texture" to "#input".jsonElement,
                                         "cullface" to "south".jsonElement
                                     ),
-                                    "west" to jsonObject(
+                                    west = DataFace(
                                         "texture" to "#output".jsonElement,
                                         "cullface" to "west".jsonElement
                                     ),
-                                    "east" to jsonObject(
+                                    east = DataFace(
                                         "texture" to "#input".jsonElement,
                                         "cullface" to "east".jsonElement
                                     )

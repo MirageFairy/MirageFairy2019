@@ -14,6 +14,7 @@ import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
 import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataElement
+import miragefairy2019.resourcemaker.DataFaces
 import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
@@ -81,25 +82,25 @@ object Dish {
                     DataElement(
                         from = DataPoint(4.0, 1.0, 4.0),
                         to = DataPoint(12.0, 1.5, 12.0),
-                        faces = jsonElement(
-                            "down" to texture("#main"),
-                            "up" to texture("#top"),
-                            "north" to texture("#main"),
-                            "south" to texture("#main"),
-                            "west" to texture("#main"),
-                            "east" to texture("#main")
+                        faces = DataFaces(
+                            down = texture("#main"),
+                            up = texture("#top"),
+                            north = texture("#main"),
+                            south = texture("#main"),
+                            west = texture("#main"),
+                            east = texture("#main")
                         )
                     ),
                     DataElement(
                         from = DataPoint(6.0, 0.0, 6.0),
                         to = DataPoint(10.0, 1.0, 10.0),
-                        faces = jsonElement(
-                            "down" to texture("#main"),
-                            "up" to texture("#main"),
-                            "north" to texture("#main"),
-                            "south" to texture("#main"),
-                            "west" to texture("#main"),
-                            "east" to texture("#main")
+                        faces = DataFaces(
+                            down = texture("#main"),
+                            up = texture("#main"),
+                            north = texture("#main"),
+                            south = texture("#main"),
+                            west = texture("#main"),
+                            east = texture("#main")
                         )
                     )
                 )

@@ -16,6 +16,8 @@ import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataElement
+import miragefairy2019.resourcemaker.DataFace
+import miragefairy2019.resourcemaker.DataFaces
 import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
@@ -23,7 +25,6 @@ import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
-import mirrg.kotlin.gson.hydrogen.jsonObject
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
@@ -134,8 +135,8 @@ object Ores {
                         DataElement(
                             from = DataPoint(0.0, 0.0, 0.0),
                             to = DataPoint(16.0, 16.0, 16.0),
-                            faces = jsonObject(
-                                "down" to jsonObject(
+                            faces = DataFaces(
+                                down = DataFace(
                                     "uv" to jsonArray(
                                         0.jsonElement,
                                         0.jsonElement,
@@ -146,7 +147,7 @@ object Ores {
                                     "tintindex" to 0.jsonElement,
                                     "cullface" to "down".jsonElement
                                 ),
-                                "up" to jsonObject(
+                                up = DataFace(
                                     "uv" to jsonArray(
                                         0.jsonElement,
                                         0.jsonElement,
@@ -157,7 +158,7 @@ object Ores {
                                     "tintindex" to 0.jsonElement,
                                     "cullface" to "up".jsonElement
                                 ),
-                                "north" to jsonObject(
+                                north = DataFace(
                                     "uv" to jsonArray(
                                         0.jsonElement,
                                         0.jsonElement,
@@ -168,7 +169,7 @@ object Ores {
                                     "tintindex" to 0.jsonElement,
                                     "cullface" to "north".jsonElement
                                 ),
-                                "south" to jsonObject(
+                                south = DataFace(
                                     "uv" to jsonArray(
                                         0.jsonElement,
                                         0.jsonElement,
@@ -179,7 +180,7 @@ object Ores {
                                     "tintindex" to 0.jsonElement,
                                     "cullface" to "south".jsonElement
                                 ),
-                                "west" to jsonObject(
+                                west = DataFace(
                                     "uv" to jsonArray(
                                         0.jsonElement,
                                         0.jsonElement,
@@ -190,7 +191,7 @@ object Ores {
                                     "tintindex" to 0.jsonElement,
                                     "cullface" to "west".jsonElement
                                 ),
-                                "east" to jsonObject(
+                                east = DataFace(
                                     "uv" to jsonArray(
                                         0.jsonElement,
                                         0.jsonElement,
@@ -206,8 +207,8 @@ object Ores {
                         DataElement(
                             from = DataPoint(0.0, 0.0, 0.0),
                             to = DataPoint(16.0, 16.0, 16.0),
-                            faces = jsonObject(
-                                "down" to jsonObject(
+                            faces = DataFaces(
+                                down = DataFace(
                                     "uv" to jsonArray(
                                         0.jsonElement,
                                         0.jsonElement,
@@ -218,7 +219,7 @@ object Ores {
                                     "tintindex" to 1.jsonElement,
                                     "cullface" to "down".jsonElement
                                 ),
-                                "up" to jsonObject(
+                                up = DataFace(
                                     "uv" to jsonArray(
                                         0.jsonElement,
                                         0.jsonElement,
@@ -229,7 +230,7 @@ object Ores {
                                     "tintindex" to 1.jsonElement,
                                     "cullface" to "up".jsonElement
                                 ),
-                                "north" to jsonObject(
+                                north = DataFace(
                                     "uv" to jsonArray(
                                         0.jsonElement,
                                         0.jsonElement,
@@ -240,7 +241,7 @@ object Ores {
                                     "tintindex" to 1.jsonElement,
                                     "cullface" to "north".jsonElement
                                 ),
-                                "south" to jsonObject(
+                                south = DataFace(
                                     "uv" to jsonArray(
                                         0.jsonElement,
                                         0.jsonElement,
@@ -251,7 +252,7 @@ object Ores {
                                     "tintindex" to 1.jsonElement,
                                     "cullface" to "south".jsonElement
                                 ),
-                                "west" to jsonObject(
+                                west = DataFace(
                                     "uv" to jsonArray(
                                         0.jsonElement,
                                         0.jsonElement,
@@ -262,7 +263,7 @@ object Ores {
                                     "tintindex" to 1.jsonElement,
                                     "cullface" to "west".jsonElement
                                 ),
-                                "east" to jsonObject(
+                                east = DataFace(
                                     "uv" to jsonArray(
                                         0.jsonElement,
                                         0.jsonElement,

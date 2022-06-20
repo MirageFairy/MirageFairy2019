@@ -41,6 +41,8 @@ import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataElement
+import miragefairy2019.resourcemaker.DataFace
+import miragefairy2019.resourcemaker.DataFaces
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataPoint
 import miragefairy2019.resourcemaker.DataResult
@@ -132,28 +134,28 @@ object ChatWebhook {
                         DataElement(
                             from = DataPoint(0.0, 0.0, 0.0),
                             to = DataPoint(16.0, 16.0, 16.0),
-                            faces = jsonObject(
-                                "down" to jsonObject(
+                            faces = DataFaces(
+                                down = DataFace(
                                     "texture" to "#side".jsonElement,
                                     "cullface" to "down".jsonElement
                                 ),
-                                "up" to jsonObject(
+                                up = DataFace(
                                     "texture" to "#side".jsonElement,
                                     "cullface" to "up".jsonElement
                                 ),
-                                "north" to jsonObject(
+                                north = DataFace(
                                     "texture" to "#front".jsonElement,
                                     "cullface" to "north".jsonElement
                                 ),
-                                "south" to jsonObject(
+                                south = DataFace(
                                     "texture" to "#side".jsonElement,
                                     "cullface" to "south".jsonElement
                                 ),
-                                "west" to jsonObject(
+                                west = DataFace(
                                     "texture" to "#side".jsonElement,
                                     "cullface" to "west".jsonElement
                                 ),
-                                "east" to jsonObject(
+                                east = DataFace(
                                     "texture" to "#side".jsonElement,
                                     "cullface" to "east".jsonElement
                                 )
@@ -214,28 +216,28 @@ object ChatWebhook {
                         DataElement(
                             from = DataPoint(0.0, 0.0, 0.0),
                             to = DataPoint(16.0, 16.0, 16.0),
-                            faces = jsonObject(
-                                "down" to jsonObject(
+                            faces = DataFaces(
+                                down = DataFace(
                                     "texture" to "#side".jsonElement,
                                     "cullface" to "down".jsonElement
                                 ),
-                                "up" to jsonObject(
+                                up = DataFace(
                                     "texture" to "#side".jsonElement,
                                     "cullface" to "up".jsonElement
                                 ),
-                                "north" to jsonObject(
+                                north = DataFace(
                                     "texture" to "#front".jsonElement,
                                     "cullface" to "north".jsonElement
                                 ),
-                                "south" to jsonObject(
+                                south = DataFace(
                                     "texture" to "#side".jsonElement,
                                     "cullface" to "south".jsonElement
                                 ),
-                                "west" to jsonObject(
+                                west = DataFace(
                                     "texture" to "#side".jsonElement,
                                     "cullface" to "west".jsonElement
                                 ),
-                                "east" to jsonObject(
+                                east = DataFace(
                                     "texture" to "#side".jsonElement,
                                     "cullface" to "east".jsonElement
                                 )
