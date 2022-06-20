@@ -18,7 +18,7 @@ import net.minecraft.util.math.AxisAlignedBB
 
 class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
     override fun getExecutor(): IFairyBoxExecutor {
-        val facing = getFacing() ?: return super.getExecutor()
+        val facing = getFacing()
         val blockPosOutput = pos.offset(facing)
 
         // 目の前にアイテムがある場合は行動しない（Lazy Chunk対策）

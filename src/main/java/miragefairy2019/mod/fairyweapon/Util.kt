@@ -130,7 +130,7 @@ fun breakBlock(world: World, player: EntityPlayer, facing: EnumFacing, itemStack
     val blockState = world.getBlockState(blockPos)
     val block = blockState.block
     block.dropBlockAsItem(world, blockPos, blockState, fortune)
-    world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3)
+    world.setBlockState(blockPos, Blocks.AIR.defaultState, 3)
     if (collection) {
         world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPos)).forEach { entityItem ->
             entityItem.setPosition(player.posX, player.posY, player.posZ)

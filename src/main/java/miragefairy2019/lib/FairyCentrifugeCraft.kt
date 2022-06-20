@@ -140,7 +140,7 @@ fun fairyCentrifugeCraftHandler(block: FairyCentrifugeCraftHandlerScope.() -> Un
 
                     // コンテナ返却
                     recipeInputs.forEach { input ->
-                        repeat(input.tag.count) { _ ->
+                        repeat(input.tag.count) {
                             val containerItemStack = input.itemStack.copy(1).containerItem
                             if (containerItemStack != null) outputItemStacks += containerItemStack
                         }

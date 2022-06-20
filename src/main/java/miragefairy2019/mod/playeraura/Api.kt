@@ -25,7 +25,7 @@ interface IPlayerAuraManager {
     fun getGlobalFoodAura(itemStack: ItemStack): ManaSet?
 
     /** Server World Only */
-    fun unloadAllServerPlayerAuraHandlers();
+    fun unloadAllServerPlayerAuraHandlers()
 }
 
 interface IPlayerAuraHandler {

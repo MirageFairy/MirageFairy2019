@@ -88,7 +88,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
 
     override fun getName() = "tile.fairyCentrifuge.name"
     override fun hasCustomName() = false
-    override fun getDisplayName() = textComponent { translate(getName()) }
+    override fun getDisplayName() = textComponent { translate(name) }
 
 
     // IInventory
