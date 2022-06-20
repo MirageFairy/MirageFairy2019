@@ -9,6 +9,7 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairy.FairyTypes
+import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.block
@@ -65,9 +66,9 @@ object FairyLog {
                 )
             }
             makeBlockModel(resourceName.path) {
-                jsonObject(
-                    "parent" to "block/block".jsonElement,
-                    "elements" to jsonArray(
+                DataBlockModel(
+                    parent = "block/block",
+                    elements = listOf(
                         jsonObject(
                             "from" to jsonArray(
                                 0.jsonElement,
@@ -125,20 +126,20 @@ object FairyLog {
                             )
                         )
                     ),
-                    "textures" to jsonObject(
-                        "particle" to "#side".jsonElement,
-                        "overlay" to "miragefairy2019:blocks/log_entrance".jsonElement
+                    textures = mapOf(
+                        "particle" to "#side",
+                        "overlay" to "miragefairy2019:blocks/log_entrance"
                     )
                 )
             }
         }
         run {
             fun makeBlockModel(name: String, variant: String) = makeBlockModel(name) {
-                jsonElement(
-                    "parent" to "miragefairy2019:block/fairy_log".jsonElement,
-                    "textures" to jsonElement(
-                        "end" to "blocks/log_${variant}_top".jsonElement,
-                        "side" to "blocks/log_$variant".jsonElement
+                DataBlockModel(
+                    parent = "miragefairy2019:block/fairy_log",
+                    textures = mapOf(
+                        "end" to "blocks/log_${variant}_top",
+                        "side" to "blocks/log_$variant"
                     )
                 )
             }

@@ -12,6 +12,7 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.block
@@ -125,9 +126,9 @@ object Ores {
         // ブロックモデルの生成
         run {
             makeBlockModel("overlay_block") {
-                jsonObject(
-                    "parent" to "block/block".jsonElement,
-                    "elements" to jsonArray(
+                DataBlockModel(
+                    parent = "block/block",
+                    elements = listOf(
                         jsonObject(
                             "from" to jsonArray(
                                 0.jsonElement,
@@ -292,12 +293,12 @@ object Ores {
                 )
             }
             fun makeBlockModel(name: String, base: String, overlay: String) = makeBlockModel(name) {
-                jsonObject(
-                    "parent" to "miragefairy2019:block/overlay_block".jsonElement,
-                    "textures" to jsonObject(
-                        "particle" to base.jsonElement,
-                        "base" to base.jsonElement,
-                        "overlay" to overlay.jsonElement
+                DataBlockModel(
+                    parent = "miragefairy2019:block/overlay_block",
+                    textures = mapOf(
+                        "particle" to base,
+                        "base" to base,
+                        "overlay" to overlay
                     )
                 )
             }

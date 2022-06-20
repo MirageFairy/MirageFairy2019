@@ -37,6 +37,7 @@ import miragefairy2019.mod.configProperty
 import miragefairy2019.mod.systems.Daemon
 import miragefairy2019.mod.systems.DaemonManager
 import miragefairy2019.mod.systems.IBlockDaemon
+import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataOreIngredient
@@ -124,9 +125,9 @@ object ChatWebhook {
                 )
             }
             makeBlockModel(resourceName.path) {
-                jsonObject(
-                    "parent" to "block/block".jsonElement,
-                    "elements" to jsonArray(
+                DataBlockModel(
+                    parent = "block/block",
+                    elements = listOf(
                         jsonObject(
                             "from" to jsonArray(
                                 0.jsonElement,
@@ -166,10 +167,10 @@ object ChatWebhook {
                             )
                         )
                     ),
-                    "textures" to jsonObject(
-                        "particle" to "miragefairy2019:blocks/fairy_machine".jsonElement,
-                        "front" to "miragefairy2019:blocks/fairy_machine_display".jsonElement,
-                        "side" to "miragefairy2019:blocks/fairy_machine".jsonElement
+                    textures = mapOf(
+                        "particle" to "miragefairy2019:blocks/fairy_machine",
+                        "front" to "miragefairy2019:blocks/fairy_machine_display",
+                        "side" to "miragefairy2019:blocks/fairy_machine"
                     )
                 )
             }
@@ -214,9 +215,9 @@ object ChatWebhook {
                 )
             }
             makeBlockModel(resourceName.path) {
-                jsonObject(
-                    "parent" to "block/block".jsonElement,
-                    "elements" to jsonArray(
+                DataBlockModel(
+                    parent = "block/block",
+                    elements = listOf(
                         jsonObject(
                             "from" to jsonArray(
                                 0.jsonElement,
@@ -256,10 +257,10 @@ object ChatWebhook {
                             )
                         )
                     ),
-                    "textures" to jsonObject(
-                        "particle" to "miragefairy2019:blocks/creative_fairy_machine".jsonElement,
-                        "front" to "miragefairy2019:blocks/creative_fairy_machine_display".jsonElement,
-                        "side" to "miragefairy2019:blocks/creative_fairy_machine".jsonElement
+                    textures = mapOf(
+                        "particle" to "miragefairy2019:blocks/creative_fairy_machine",
+                        "front" to "miragefairy2019:blocks/creative_fairy_machine_display",
+                        "side" to "miragefairy2019:blocks/creative_fairy_machine"
                     )
                 )
             }

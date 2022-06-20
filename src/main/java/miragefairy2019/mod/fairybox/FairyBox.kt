@@ -30,6 +30,7 @@ import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.artifacts.get
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
+import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.DataOreIngredient
@@ -65,9 +66,9 @@ object FairyBox {
                     )
                 }
                 makeBlockModel(resourceName.path) {
-                    jsonObject(
-                        "parent" to "block/block".jsonElement,
-                        "elements" to jsonArray(
+                    DataBlockModel(
+                        parent = "block/block",
+                        elements = listOf(
                             jsonObject(
                                 "from" to jsonArray(
                                     0.jsonElement,
@@ -137,12 +138,12 @@ object FairyBox {
                                 )
                             )
                         ),
-                        "textures" to jsonObject(
-                            "particle" to "miragefairy2019:blocks/fairy_wood_log".jsonElement,
-                            "end" to "miragefairy2019:blocks/fairy_wood_log_top".jsonElement,
-                            "side" to "miragefairy2019:blocks/fairy_wood_log".jsonElement,
-                            "entrance" to "miragefairy2019:blocks/fairy_box_entrance".jsonElement,
-                            "window" to "miragefairy2019:blocks/fairy_box_output".jsonElement
+                        textures = mapOf(
+                            "particle" to "miragefairy2019:blocks/fairy_wood_log",
+                            "end" to "miragefairy2019:blocks/fairy_wood_log_top",
+                            "side" to "miragefairy2019:blocks/fairy_wood_log",
+                            "entrance" to "miragefairy2019:blocks/fairy_box_entrance",
+                            "window" to "miragefairy2019:blocks/fairy_box_output"
                         )
                     )
                 }
@@ -188,9 +189,9 @@ object FairyBox {
                     )
                 }
                 makeBlockModel(resourceName.path) {
-                    jsonObject(
-                        "parent" to "block/block".jsonElement,
-                        "elements" to jsonArray(
+                    DataBlockModel(
+                        parent = "block/block",
+                        elements = listOf(
                             jsonObject(
                                 "from" to jsonArray(
                                     0.jsonElement,
@@ -260,12 +261,12 @@ object FairyBox {
                                 )
                             )
                         ),
-                        "textures" to jsonObject(
-                            "particle" to "miragefairy2019:blocks/fairy_wood_log".jsonElement,
-                            "end" to "miragefairy2019:blocks/fairy_wood_log_top".jsonElement,
-                            "side" to "miragefairy2019:blocks/fairy_wood_log".jsonElement,
-                            "entrance" to "miragefairy2019:blocks/fairy_resin_tapper_entrance".jsonElement,
-                            "window" to "miragefairy2019:blocks/fairy_resin_tapper_window".jsonElement
+                        textures = mapOf(
+                            "particle" to "miragefairy2019:blocks/fairy_wood_log",
+                            "end" to "miragefairy2019:blocks/fairy_wood_log_top",
+                            "side" to "miragefairy2019:blocks/fairy_wood_log",
+                            "entrance" to "miragefairy2019:blocks/fairy_resin_tapper_entrance",
+                            "window" to "miragefairy2019:blocks/fairy_resin_tapper_window"
                         )
                     )
                 }
@@ -311,9 +312,9 @@ object FairyBox {
                     )
                 }
                 makeBlockModel(resourceName.path) {
-                    jsonObject(
-                        "parent" to "block/block".jsonElement,
-                        "elements" to jsonArray(
+                    DataBlockModel(
+                        parent = "block/block",
+                        elements = listOf(
                             jsonObject(
                                 "from" to jsonArray(
                                     0.jsonElement,
@@ -391,15 +392,15 @@ object FairyBox {
                                 )
                             )
                         ),
-                        "textures" to jsonObject(
-                            "particle" to "miragefairy2019:blocks/fairy_wood_log".jsonElement,
-                            "end" to "miragefairy2019:blocks/fairy_wood_log_top".jsonElement,
-                            "side" to "miragefairy2019:blocks/fairy_wood_log".jsonElement,
-                            "entrance" to "miragefairy2019:blocks/fairy_centrifuge_entrance".jsonElement,
-                            "input" to "miragefairy2019:blocks/fairy_centrifuge_input".jsonElement,
-                            "output" to "miragefairy2019:blocks/fairy_centrifuge_output".jsonElement,
-                            "vertical_input" to "miragefairy2019:blocks/fairy_box_input".jsonElement,
-                            "vertical_output" to "miragefairy2019:blocks/fairy_box_output2".jsonElement
+                        textures = mapOf(
+                            "particle" to "miragefairy2019:blocks/fairy_wood_log",
+                            "end" to "miragefairy2019:blocks/fairy_wood_log_top",
+                            "side" to "miragefairy2019:blocks/fairy_wood_log",
+                            "entrance" to "miragefairy2019:blocks/fairy_centrifuge_entrance",
+                            "input" to "miragefairy2019:blocks/fairy_centrifuge_input",
+                            "output" to "miragefairy2019:blocks/fairy_centrifuge_output",
+                            "vertical_input" to "miragefairy2019:blocks/fairy_box_input",
+                            "vertical_output" to "miragefairy2019:blocks/fairy_box_output2"
                         )
                     )
                 }

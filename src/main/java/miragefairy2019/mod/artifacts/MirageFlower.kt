@@ -24,6 +24,7 @@ import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.EnumVariantMaterials1
+import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.generated
@@ -31,7 +32,6 @@ import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.boron.util.UtilsMath
-import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.or
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.Block
@@ -89,11 +89,11 @@ object MirageFlower {
         }
         run {
             fun makeBlockModel(name: String) = makeBlockModel(name) {
-                jsonElement(
-                    "parent" to "block/cross".jsonElement,
-                    "textures" to jsonElement(
-                        "particle" to "miragefairy2019:blocks/$name".jsonElement,
-                        "cross" to "miragefairy2019:blocks/$name".jsonElement
+                DataBlockModel(
+                    parent = "block/cross",
+                    textures = mapOf(
+                        "particle" to "miragefairy2019:blocks/$name",
+                        "cross" to "miragefairy2019:blocks/$name"
                     )
                 )
             }

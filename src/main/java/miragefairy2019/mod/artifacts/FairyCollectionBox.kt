@@ -25,6 +25,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.fairyVariant
 import miragefairy2019.mod.fairy.hasSameId
 import miragefairy2019.mod.fairy.level
+import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.makeBlockModel
@@ -93,21 +94,21 @@ object FairyCollectionBox {
             }.guiHandler)
         }
         makeBlockModel("fairy_building_bottom") {
-            jsonObject(
-                "parent" to "block/block".jsonElement,
-                "textures" to jsonObject(
-                    "particle" to "blocks/log_oak".jsonElement,
-                    "top" to "miragefairy2019:blocks/fairy_building_top".jsonElement,
-                    "side_background" to "miragefairy2019:blocks/fairy_building_side_background".jsonElement,
-                    "side_light_1" to "miragefairy2019:blocks/fairy_building_side_light_1".jsonElement,
-                    "side_light_2" to "miragefairy2019:blocks/fairy_building_side_light_2".jsonElement,
-                    "front_background" to "miragefairy2019:blocks/fairy_building_front_background".jsonElement,
-                    "front_light_1" to "miragefairy2019:blocks/fairy_building_front_light_1".jsonElement,
-                    "front_light_2" to "miragefairy2019:blocks/fairy_building_front_light_2".jsonElement,
-                    "log_top" to "blocks/log_oak_top".jsonElement,
-                    "log_side" to "blocks/log_oak".jsonElement
+            DataBlockModel(
+                parent = "block/block",
+                textures = mapOf(
+                    "particle" to "blocks/log_oak",
+                    "top" to "miragefairy2019:blocks/fairy_building_top",
+                    "side_background" to "miragefairy2019:blocks/fairy_building_side_background",
+                    "side_light_1" to "miragefairy2019:blocks/fairy_building_side_light_1",
+                    "side_light_2" to "miragefairy2019:blocks/fairy_building_side_light_2",
+                    "front_background" to "miragefairy2019:blocks/fairy_building_front_background",
+                    "front_light_1" to "miragefairy2019:blocks/fairy_building_front_light_1",
+                    "front_light_2" to "miragefairy2019:blocks/fairy_building_front_light_2",
+                    "log_top" to "blocks/log_oak_top",
+                    "log_side" to "blocks/log_oak"
                 ),
-                "elements" to jsonArray(
+                elements = listOf(
                     jsonObject(
                         "from" to jsonArray(
                             2.jsonElement,
@@ -600,16 +601,16 @@ object FairyCollectionBox {
             )
         }
         makeBlockModel("fairy_building_middle") {
-            jsonObject(
-                "parent" to "block/block".jsonElement,
-                "textures" to jsonObject(
-                    "particle" to "blocks/log_oak".jsonElement,
-                    "top" to "miragefairy2019:blocks/fairy_building_top".jsonElement,
-                    "side_background" to "miragefairy2019:blocks/fairy_building_side_background".jsonElement,
-                    "side_light_1" to "miragefairy2019:blocks/fairy_building_side_light_1".jsonElement,
-                    "side_light_2" to "miragefairy2019:blocks/fairy_building_side_light_2".jsonElement
+            DataBlockModel(
+                parent = "block/block",
+                textures = mapOf(
+                    "particle" to "blocks/log_oak",
+                    "top" to "miragefairy2019:blocks/fairy_building_top",
+                    "side_background" to "miragefairy2019:blocks/fairy_building_side_background",
+                    "side_light_1" to "miragefairy2019:blocks/fairy_building_side_light_1",
+                    "side_light_2" to "miragefairy2019:blocks/fairy_building_side_light_2"
                 ),
-                "elements" to jsonArray(
+                elements = listOf(
                     jsonObject(
                         "from" to jsonArray(
                             2.jsonElement,

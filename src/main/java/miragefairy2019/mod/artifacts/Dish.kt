@@ -12,6 +12,7 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
+import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
@@ -67,15 +68,15 @@ object Dish {
                 "uv" to rectangle(0.0, 0.0, 16.0, 16.0),
                 "texture" to name.jsonElement
             )
-            jsonElement(
-                "parent" to "block/block".jsonElement,
-                "ambientocclusion" to false.jsonElement,
-                "textures" to jsonElement(
-                    "particle" to "minecraft:blocks/quartz_block_top".jsonElement,
-                    "top" to "minecraft:blocks/bone_block_top".jsonElement,
-                    "main" to "minecraft:blocks/quartz_block_top".jsonElement
+            DataBlockModel(
+                parent = "block/block",
+                ambientocclusion = false,
+                textures = mapOf(
+                    "particle" to "minecraft:blocks/quartz_block_top",
+                    "top" to "minecraft:blocks/bone_block_top",
+                    "main" to "minecraft:blocks/quartz_block_top"
                 ),
-                "elements" to jsonElement(
+                elements = listOf(
                     jsonElement(
                         "from" to point(4.0, 1.0, 4.0),
                         "to" to point(12.0, 1.5, 12.0),

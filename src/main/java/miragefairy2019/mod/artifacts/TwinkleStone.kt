@@ -13,13 +13,13 @@ import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.resourcemaker.DataBlockModel
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
 import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
-import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -50,10 +50,10 @@ object TwinkleStone {
         }
         run {
             fun makeBlockModel(name: String) = makeBlockModel(name) {
-                jsonElement(
-                    "parent" to "block/cube_all".jsonElement,
-                    "textures" to jsonElement(
-                        "all" to "miragefairy2019:blocks/$name".jsonElement
+                DataBlockModel(
+                    parent = "block/cube_all",
+                    textures = mapOf(
+                        "all" to "miragefairy2019:blocks/$name"
                     )
                 )
             }
