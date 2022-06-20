@@ -135,84 +135,24 @@ object Ores {
                             from = DataPoint(0.0, 0.0, 0.0),
                             to = DataPoint(16.0, 16.0, 16.0),
                             faces = DataFaces(
-                                down = DataFace(
-                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
-                                    texture = "#base",
-                                    tintindex = 0,
-                                    cullface = "down"
-                                ),
-                                up = DataFace(
-                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
-                                    texture = "#base",
-                                    tintindex = 0,
-                                    cullface = "up"
-                                ),
-                                north = DataFace(
-                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
-                                    texture = "#base",
-                                    tintindex = 0,
-                                    cullface = "north"
-                                ),
-                                south = DataFace(
-                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
-                                    texture = "#base",
-                                    tintindex = 0,
-                                    cullface = "south"
-                                ),
-                                west = DataFace(
-                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
-                                    texture = "#base",
-                                    tintindex = 0,
-                                    cullface = "west"
-                                ),
-                                east = DataFace(
-                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
-                                    texture = "#base",
-                                    tintindex = 0,
-                                    cullface = "east"
-                                )
+                                down = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#base", tintindex = 0, cullface = "down"),
+                                up = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#base", tintindex = 0, cullface = "up"),
+                                north = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#base", tintindex = 0, cullface = "north"),
+                                south = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#base", tintindex = 0, cullface = "south"),
+                                west = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#base", tintindex = 0, cullface = "west"),
+                                east = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#base", tintindex = 0, cullface = "east")
                             )
                         ),
                         DataElement(
                             from = DataPoint(0.0, 0.0, 0.0),
                             to = DataPoint(16.0, 16.0, 16.0),
                             faces = DataFaces(
-                                down = DataFace(
-                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
-                                    texture = "#overlay",
-                                    tintindex = 1,
-                                    cullface = "down"
-                                ),
-                                up = DataFace(
-                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
-                                    texture = "#overlay",
-                                    tintindex = 1,
-                                    cullface = "up"
-                                ),
-                                north = DataFace(
-                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
-                                    texture = "#overlay",
-                                    tintindex = 1,
-                                    cullface = "north"
-                                ),
-                                south = DataFace(
-                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
-                                    texture = "#overlay",
-                                    tintindex = 1,
-                                    cullface = "south"
-                                ),
-                                west = DataFace(
-                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
-                                    texture = "#overlay",
-                                    tintindex = 1,
-                                    cullface = "west"
-                                ),
-                                east = DataFace(
-                                    uv = DataUv(0.0, 0.0, 16.0, 16.0),
-                                    texture = "#overlay",
-                                    tintindex = 1,
-                                    cullface = "east"
-                                )
+                                down = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#overlay", tintindex = 1, cullface = "down"),
+                                up = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#overlay", tintindex = 1, cullface = "up"),
+                                north = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#overlay", tintindex = 1, cullface = "north"),
+                                south = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#overlay", tintindex = 1, cullface = "south"),
+                                west = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#overlay", tintindex = 1, cullface = "west"),
+                                east = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#overlay", tintindex = 1, cullface = "east")
                             )
                         )
                     )

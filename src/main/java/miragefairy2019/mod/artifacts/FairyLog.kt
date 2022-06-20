@@ -21,7 +21,6 @@ import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.boron.util.UtilsMath
-import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
 import net.minecraft.block.BlockOldLog
@@ -75,40 +74,19 @@ object FairyLog {
                             from = DataPoint(0.0, 0.0, 0.0),
                             to = DataPoint(16.0, 16.0, 16.0),
                             faces = DataFaces(
-                                down = DataFace(
-                                    texture = "#end",
-                                    cullface = "down"
-                                ),
-                                up = DataFace(
-                                    texture = "#end",
-                                    cullface = "up"
-                                ),
-                                north = DataFace(
-                                    texture = "#side",
-                                    cullface = "north"
-                                ),
-                                south = DataFace(
-                                    texture = "#side",
-                                    cullface = "south"
-                                ),
-                                west = DataFace(
-                                    texture = "#side",
-                                    cullface = "west"
-                                ),
-                                east = DataFace(
-                                    texture = "#side",
-                                    cullface = "east"
-                                )
+                                down = DataFace(texture = "#end", cullface = "down"),
+                                up = DataFace(texture = "#end", cullface = "up"),
+                                north = DataFace(texture = "#side", cullface = "north"),
+                                south = DataFace(texture = "#side", cullface = "south"),
+                                west = DataFace(texture = "#side", cullface = "west"),
+                                east = DataFace(texture = "#side", cullface = "east")
                             )
                         ),
                         DataElement(
                             from = DataPoint(0.0, 0.0, 0.0),
                             to = DataPoint(16.0, 16.0, 16.0),
                             faces = DataFaces(
-                                north = DataFace(
-                                    texture = "#overlay",
-                                    cullface = "north"
-                                )
+                                north = DataFace(texture = "#overlay", cullface = "north")
                             )
                         )
                     ),

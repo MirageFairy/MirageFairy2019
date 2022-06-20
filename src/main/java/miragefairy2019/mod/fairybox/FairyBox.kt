@@ -74,52 +74,22 @@ object FairyBox {
                                 from = DataPoint(0.0, 0.0, 0.0),
                                 to = DataPoint(16.0, 16.0, 16.0),
                                 faces = DataFaces(
-                                    down = DataFace(
-                                        texture = "#end",
-                                        cullface = "down"
-                                    ),
-                                    up = DataFace(
-                                        texture = "#end",
-                                        cullface = "up"
-                                    ),
-                                    north = DataFace(
-                                        texture = "#side",
-                                        cullface = "north"
-                                    ),
-                                    south = DataFace(
-                                        texture = "#side",
-                                        cullface = "south"
-                                    ),
-                                    west = DataFace(
-                                        texture = "#side",
-                                        cullface = "west"
-                                    ),
-                                    east = DataFace(
-                                        texture = "#side",
-                                        cullface = "east"
-                                    )
+                                    down = DataFace(texture = "#end", cullface = "down"),
+                                    up = DataFace(texture = "#end", cullface = "up"),
+                                    north = DataFace(texture = "#side", cullface = "north"),
+                                    south = DataFace(texture = "#side", cullface = "south"),
+                                    west = DataFace(texture = "#side", cullface = "west"),
+                                    east = DataFace(texture = "#side", cullface = "east")
                                 )
                             ),
                             DataElement(
                                 from = DataPoint(0.0, 0.0, 0.0),
                                 to = DataPoint(16.0, 16.0, 16.0),
                                 faces = DataFaces(
-                                    north = DataFace(
-                                        texture = "#entrance",
-                                        cullface = "north"
-                                    ),
-                                    south = DataFace(
-                                        texture = "#window",
-                                        cullface = "south"
-                                    ),
-                                    west = DataFace(
-                                        texture = "#window",
-                                        cullface = "west"
-                                    ),
-                                    east = DataFace(
-                                        texture = "#window",
-                                        cullface = "east"
-                                    )
+                                    north = DataFace(texture = "#entrance", cullface = "north"),
+                                    south = DataFace(texture = "#window", cullface = "south"),
+                                    west = DataFace(texture = "#window", cullface = "west"),
+                                    east = DataFace(texture = "#window", cullface = "east")
                                 )
                             )
                         ),
@@ -181,52 +151,22 @@ object FairyBox {
                                 from = DataPoint(0.0, 0.0, 0.0),
                                 to = DataPoint(16.0, 16.0, 16.0),
                                 faces = DataFaces(
-                                    down = DataFace(
-                                        texture = "#end",
-                                        cullface = "down"
-                                    ),
-                                    up = DataFace(
-                                        texture = "#end",
-                                        cullface = "up"
-                                    ),
-                                    north = DataFace(
-                                        texture = "#side",
-                                        cullface = "north"
-                                    ),
-                                    south = DataFace(
-                                        texture = "#side",
-                                        cullface = "south"
-                                    ),
-                                    west = DataFace(
-                                        texture = "#side",
-                                        cullface = "west"
-                                    ),
-                                    east = DataFace(
-                                        texture = "#side",
-                                        cullface = "east"
-                                    )
+                                    down = DataFace(texture = "#end", cullface = "down"),
+                                    up = DataFace(texture = "#end", cullface = "up"),
+                                    north = DataFace(texture = "#side", cullface = "north"),
+                                    south = DataFace(texture = "#side", cullface = "south"),
+                                    west = DataFace(texture = "#side", cullface = "west"),
+                                    east = DataFace(texture = "#side", cullface = "east")
                                 )
                             ),
                             DataElement(
                                 from = DataPoint(0.0, 0.0, 0.0),
                                 to = DataPoint(16.0, 16.0, 16.0),
                                 faces = DataFaces(
-                                    north = DataFace(
-                                        texture = "#entrance",
-                                        cullface = "north"
-                                    ),
-                                    south = DataFace(
-                                        texture = "#window",
-                                        cullface = "south"
-                                    ),
-                                    west = DataFace(
-                                        texture = "#window",
-                                        cullface = "west"
-                                    ),
-                                    east = DataFace(
-                                        texture = "#window",
-                                        cullface = "east"
-                                    )
+                                    north = DataFace(texture = "#entrance", cullface = "north"),
+                                    south = DataFace(texture = "#window", cullface = "south"),
+                                    west = DataFace(texture = "#window", cullface = "west"),
+                                    east = DataFace(texture = "#window", cullface = "east")
                                 )
                             )
                         ),
@@ -288,60 +228,24 @@ object FairyBox {
                                 from = DataPoint(0.0, 0.0, 0.0),
                                 to = DataPoint(16.0, 16.0, 16.0),
                                 faces = DataFaces(
-                                    down = DataFace(
-                                        texture = "#end",
-                                        cullface = "down"
-                                    ),
-                                    up = DataFace(
-                                        texture = "#end",
-                                        cullface = "up"
-                                    ),
-                                    north = DataFace(
-                                        texture = "#side",
-                                        cullface = "north"
-                                    ),
-                                    south = DataFace(
-                                        texture = "#side",
-                                        cullface = "south"
-                                    ),
-                                    west = DataFace(
-                                        texture = "#side",
-                                        cullface = "west"
-                                    ),
-                                    east = DataFace(
-                                        texture = "#side",
-                                        cullface = "east"
-                                    )
+                                    down = DataFace(texture = "#end", cullface = "down"),
+                                    up = DataFace(texture = "#end", cullface = "up"),
+                                    north = DataFace(texture = "#side", cullface = "north"),
+                                    south = DataFace(texture = "#side", cullface = "south"),
+                                    west = DataFace(texture = "#side", cullface = "west"),
+                                    east = DataFace(texture = "#side", cullface = "east")
                                 )
                             ),
                             DataElement(
                                 from = DataPoint(0.0, 0.0, 0.0),
                                 to = DataPoint(16.0, 16.0, 16.0),
                                 faces = DataFaces(
-                                    down = DataFace(
-                                        texture = "#vertical_output",
-                                        cullface = "down"
-                                    ),
-                                    up = DataFace(
-                                        texture = "#vertical_input",
-                                        cullface = "up"
-                                    ),
-                                    north = DataFace(
-                                        texture = "#entrance",
-                                        cullface = "north"
-                                    ),
-                                    south = DataFace(
-                                        texture = "#input",
-                                        cullface = "south"
-                                    ),
-                                    west = DataFace(
-                                        texture = "#output",
-                                        cullface = "west"
-                                    ),
-                                    east = DataFace(
-                                        texture = "#input",
-                                        cullface = "east"
-                                    )
+                                    down = DataFace(texture = "#vertical_output", cullface = "down"),
+                                    up = DataFace(texture = "#vertical_input", cullface = "up"),
+                                    north = DataFace(texture = "#entrance", cullface = "north"),
+                                    south = DataFace(texture = "#input", cullface = "south"),
+                                    west = DataFace(texture = "#output", cullface = "west"),
+                                    east = DataFace(texture = "#input", cullface = "east")
                                 )
                             )
                         ),

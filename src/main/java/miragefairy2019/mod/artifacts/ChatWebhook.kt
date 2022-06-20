@@ -135,30 +135,12 @@ object ChatWebhook {
                             from = DataPoint(0.0, 0.0, 0.0),
                             to = DataPoint(16.0, 16.0, 16.0),
                             faces = DataFaces(
-                                down = DataFace(
-                                    texture = "#side",
-                                    cullface = "down"
-                                ),
-                                up = DataFace(
-                                    texture = "#side",
-                                    cullface = "up"
-                                ),
-                                north = DataFace(
-                                    texture = "#front",
-                                    cullface = "north"
-                                ),
-                                south = DataFace(
-                                    texture = "#side",
-                                    cullface = "south"
-                                ),
-                                west = DataFace(
-                                    texture = "#side",
-                                    cullface = "west"
-                                ),
-                                east = DataFace(
-                                    texture = "#side",
-                                    cullface = "east"
-                                )
+                                down = DataFace(texture = "#side", cullface = "down"),
+                                up = DataFace(texture = "#side", cullface = "up"),
+                                north = DataFace(texture = "#front", cullface = "north"),
+                                south = DataFace(texture = "#side", cullface = "south"),
+                                west = DataFace(texture = "#side", cullface = "west"),
+                                east = DataFace(texture = "#side", cullface = "east")
                             )
                         )
                     ),
@@ -217,30 +199,12 @@ object ChatWebhook {
                             from = DataPoint(0.0, 0.0, 0.0),
                             to = DataPoint(16.0, 16.0, 16.0),
                             faces = DataFaces(
-                                down = DataFace(
-                                    texture = "#side",
-                                    cullface = "down"
-                                ),
-                                up = DataFace(
-                                    texture = "#side",
-                                    cullface = "up"
-                                ),
-                                north = DataFace(
-                                    texture = "#front",
-                                    cullface = "north"
-                                ),
-                                south = DataFace(
-                                    texture = "#side",
-                                    cullface = "south"
-                                ),
-                                west = DataFace(
-                                    texture = "#side",
-                                    cullface = "west"
-                                ),
-                                east = DataFace(
-                                    texture = "#side",
-                                    cullface = "east"
-                                )
+                                down = DataFace(texture = "#side", cullface = "down"),
+                                up = DataFace(texture = "#side", cullface = "up"),
+                                north = DataFace(texture = "#front", cullface = "north"),
+                                south = DataFace(texture = "#side", cullface = "south"),
+                                west = DataFace(texture = "#side", cullface = "west"),
+                                east = DataFace(texture = "#side", cullface = "east")
                             )
                         )
                     ),

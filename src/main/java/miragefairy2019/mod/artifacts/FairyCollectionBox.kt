@@ -114,68 +114,32 @@ object FairyCollectionBox {
                         from = DataPoint(2.0, 0.0, 2.0),
                         to = DataPoint(14.0, 16.0, 14.0),
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#top"
-                            ),
-                            up = DataFace(
-                                texture = "#top"
-                            ),
-                            north = DataFace(
-                                texture = "#front_background"
-                            ),
-                            south = DataFace(
-                                texture = "#side_background"
-                            ),
-                            west = DataFace(
-                                texture = "#side_background"
-                            ),
-                            east = DataFace(
-                                texture = "#side_background"
-                            )
+                            down = DataFace(texture = "#top"),
+                            up = DataFace(texture = "#top"),
+                            north = DataFace(texture = "#front_background"),
+                            south = DataFace(texture = "#side_background"),
+                            west = DataFace(texture = "#side_background"),
+                            east = DataFace(texture = "#side_background")
                         )
                     ),
                     DataElement(
                         from = DataPoint(2.0, 0.0, 2.0),
                         to = DataPoint(14.0, 16.0, 14.0),
                         faces = DataFaces(
-                            north = DataFace(
-                                texture = "#front_light_1",
-                                tintindex = 0
-                            ),
-                            south = DataFace(
-                                texture = "#side_light_1",
-                                tintindex = 0
-                            ),
-                            west = DataFace(
-                                texture = "#side_light_1",
-                                tintindex = 0
-                            ),
-                            east = DataFace(
-                                texture = "#side_light_1",
-                                tintindex = 0
-                            )
+                            north = DataFace(texture = "#front_light_1", tintindex = 0),
+                            south = DataFace(texture = "#side_light_1", tintindex = 0),
+                            west = DataFace(texture = "#side_light_1", tintindex = 0),
+                            east = DataFace(texture = "#side_light_1", tintindex = 0)
                         )
                     ),
                     DataElement(
                         from = DataPoint(2.0, 0.0, 2.0),
                         to = DataPoint(14.0, 16.0, 14.0),
                         faces = DataFaces(
-                            north = DataFace(
-                                texture = "#front_light_2",
-                                tintindex = 1
-                            ),
-                            south = DataFace(
-                                texture = "#side_light_2",
-                                tintindex = 1
-                            ),
-                            west = DataFace(
-                                texture = "#side_light_2",
-                                tintindex = 1
-                            ),
-                            east = DataFace(
-                                texture = "#side_light_2",
-                                tintindex = 1
-                            )
+                            north = DataFace(texture = "#front_light_2", tintindex = 1),
+                            south = DataFace(texture = "#side_light_2", tintindex = 1),
+                            west = DataFace(texture = "#side_light_2", tintindex = 1),
+                            east = DataFace(texture = "#side_light_2", tintindex = 1)
                         )
                     ),
                     DataElement(
@@ -183,24 +147,12 @@ object FairyCollectionBox {
                         to = DataPoint(12.0, 2.0, 16.0),
                         shade = false,
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#log_top"
-                            ),
-                            up = DataFace(
-                                texture = "#log_top"
-                            ),
-                            north = DataFace(
-                                texture = "#log_side"
-                            ),
-                            south = DataFace(
-                                texture = "#log_side"
-                            ),
-                            west = DataFace(
-                                texture = "#log_side"
-                            ),
-                            east = DataFace(
-                                texture = "#log_side"
-                            )
+                            down = DataFace(texture = "#log_top"),
+                            up = DataFace(texture = "#log_top"),
+                            north = DataFace(texture = "#log_side"),
+                            south = DataFace(texture = "#log_side"),
+                            west = DataFace(texture = "#log_side"),
+                            east = DataFace(texture = "#log_side")
                         )
                     ),
                     DataElement(
@@ -208,24 +160,12 @@ object FairyCollectionBox {
                         to = DataPoint(8.0, 6.0, 16.0),
                         shade = false,
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#log_top"
-                            ),
-                            up = DataFace(
-                                texture = "#log_top"
-                            ),
-                            north = DataFace(
-                                texture = "#log_side"
-                            ),
-                            south = DataFace(
-                                texture = "#log_side"
-                            ),
-                            west = DataFace(
-                                texture = "#log_side"
-                            ),
-                            east = DataFace(
-                                texture = "#log_side"
-                            )
+                            down = DataFace(texture = "#log_top"),
+                            up = DataFace(texture = "#log_top"),
+                            north = DataFace(texture = "#log_side"),
+                            south = DataFace(texture = "#log_side"),
+                            west = DataFace(texture = "#log_side"),
+                            east = DataFace(texture = "#log_side")
                         )
                     ),
                     DataElement(
@@ -233,24 +173,12 @@ object FairyCollectionBox {
                         to = DataPoint(12.0, 10.0, 16.0),
                         shade = false,
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#log_top"
-                            ),
-                            up = DataFace(
-                                texture = "#log_top"
-                            ),
-                            north = DataFace(
-                                texture = "#log_side"
-                            ),
-                            south = DataFace(
-                                texture = "#log_side"
-                            ),
-                            west = DataFace(
-                                texture = "#log_side"
-                            ),
-                            east = DataFace(
-                                texture = "#log_side"
-                            )
+                            down = DataFace(texture = "#log_top"),
+                            up = DataFace(texture = "#log_top"),
+                            north = DataFace(texture = "#log_side"),
+                            south = DataFace(texture = "#log_side"),
+                            west = DataFace(texture = "#log_side"),
+                            east = DataFace(texture = "#log_side")
                         )
                     ),
                     DataElement(
@@ -258,24 +186,12 @@ object FairyCollectionBox {
                         to = DataPoint(16.0, 2.0, 14.0),
                         shade = false,
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#log_top"
-                            ),
-                            up = DataFace(
-                                texture = "#log_top"
-                            ),
-                            north = DataFace(
-                                texture = "#log_side"
-                            ),
-                            south = DataFace(
-                                texture = "#log_side"
-                            ),
-                            west = DataFace(
-                                texture = "#log_side"
-                            ),
-                            east = DataFace(
-                                texture = "#log_side"
-                            )
+                            down = DataFace(texture = "#log_top"),
+                            up = DataFace(texture = "#log_top"),
+                            north = DataFace(texture = "#log_side"),
+                            south = DataFace(texture = "#log_side"),
+                            west = DataFace(texture = "#log_side"),
+                            east = DataFace(texture = "#log_side")
                         )
                     ),
                     DataElement(
@@ -283,24 +199,12 @@ object FairyCollectionBox {
                         to = DataPoint(16.0, 8.0, 12.0),
                         shade = false,
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#log_top"
-                            ),
-                            up = DataFace(
-                                texture = "#log_top"
-                            ),
-                            north = DataFace(
-                                texture = "#log_side"
-                            ),
-                            south = DataFace(
-                                texture = "#log_side"
-                            ),
-                            west = DataFace(
-                                texture = "#log_side"
-                            ),
-                            east = DataFace(
-                                texture = "#log_side"
-                            )
+                            down = DataFace(texture = "#log_top"),
+                            up = DataFace(texture = "#log_top"),
+                            north = DataFace(texture = "#log_side"),
+                            south = DataFace(texture = "#log_side"),
+                            west = DataFace(texture = "#log_side"),
+                            east = DataFace(texture = "#log_side")
                         )
                     ),
                     DataElement(
@@ -308,24 +212,12 @@ object FairyCollectionBox {
                         to = DataPoint(16.0, 2.0, 4.0),
                         shade = false,
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#log_top"
-                            ),
-                            up = DataFace(
-                                texture = "#log_top"
-                            ),
-                            north = DataFace(
-                                texture = "#log_side"
-                            ),
-                            south = DataFace(
-                                texture = "#log_side"
-                            ),
-                            west = DataFace(
-                                texture = "#log_side"
-                            ),
-                            east = DataFace(
-                                texture = "#log_side"
-                            )
+                            down = DataFace(texture = "#log_top"),
+                            up = DataFace(texture = "#log_top"),
+                            north = DataFace(texture = "#log_side"),
+                            south = DataFace(texture = "#log_side"),
+                            west = DataFace(texture = "#log_side"),
+                            east = DataFace(texture = "#log_side")
                         )
                     ),
                     DataElement(
@@ -333,24 +225,12 @@ object FairyCollectionBox {
                         to = DataPoint(16.0, 4.0, 4.0),
                         shade = false,
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#log_top"
-                            ),
-                            up = DataFace(
-                                texture = "#log_top"
-                            ),
-                            north = DataFace(
-                                texture = "#log_side"
-                            ),
-                            south = DataFace(
-                                texture = "#log_side"
-                            ),
-                            west = DataFace(
-                                texture = "#log_side"
-                            ),
-                            east = DataFace(
-                                texture = "#log_side"
-                            )
+                            down = DataFace(texture = "#log_top"),
+                            up = DataFace(texture = "#log_top"),
+                            north = DataFace(texture = "#log_side"),
+                            south = DataFace(texture = "#log_side"),
+                            west = DataFace(texture = "#log_side"),
+                            east = DataFace(texture = "#log_side")
                         )
                     ),
                     DataElement(
@@ -358,24 +238,12 @@ object FairyCollectionBox {
                         to = DataPoint(6.0, 4.0, 2.0),
                         shade = false,
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#log_top"
-                            ),
-                            up = DataFace(
-                                texture = "#log_top"
-                            ),
-                            north = DataFace(
-                                texture = "#log_side"
-                            ),
-                            south = DataFace(
-                                texture = "#log_side"
-                            ),
-                            west = DataFace(
-                                texture = "#log_side"
-                            ),
-                            east = DataFace(
-                                texture = "#log_side"
-                            )
+                            down = DataFace(texture = "#log_top"),
+                            up = DataFace(texture = "#log_top"),
+                            north = DataFace(texture = "#log_side"),
+                            south = DataFace(texture = "#log_side"),
+                            west = DataFace(texture = "#log_side"),
+                            east = DataFace(texture = "#log_side")
                         )
                     ),
                     DataElement(
@@ -383,24 +251,12 @@ object FairyCollectionBox {
                         to = DataPoint(2.0, 4.0, 6.0),
                         shade = false,
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#log_top"
-                            ),
-                            up = DataFace(
-                                texture = "#log_top"
-                            ),
-                            north = DataFace(
-                                texture = "#log_side"
-                            ),
-                            south = DataFace(
-                                texture = "#log_side"
-                            ),
-                            west = DataFace(
-                                texture = "#log_side"
-                            ),
-                            east = DataFace(
-                                texture = "#log_side"
-                            )
+                            down = DataFace(texture = "#log_top"),
+                            up = DataFace(texture = "#log_top"),
+                            north = DataFace(texture = "#log_side"),
+                            south = DataFace(texture = "#log_side"),
+                            west = DataFace(texture = "#log_side"),
+                            east = DataFace(texture = "#log_side")
                         )
                     ),
                     DataElement(
@@ -408,24 +264,12 @@ object FairyCollectionBox {
                         to = DataPoint(2.0, 12.0, 8.0),
                         shade = false,
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#log_top"
-                            ),
-                            up = DataFace(
-                                texture = "#log_top"
-                            ),
-                            north = DataFace(
-                                texture = "#log_side"
-                            ),
-                            south = DataFace(
-                                texture = "#log_side"
-                            ),
-                            west = DataFace(
-                                texture = "#log_side"
-                            ),
-                            east = DataFace(
-                                texture = "#log_side"
-                            )
+                            down = DataFace(texture = "#log_top"),
+                            up = DataFace(texture = "#log_top"),
+                            north = DataFace(texture = "#log_side"),
+                            south = DataFace(texture = "#log_side"),
+                            west = DataFace(texture = "#log_side"),
+                            east = DataFace(texture = "#log_side")
                         )
                     ),
                     DataElement(
@@ -433,24 +277,12 @@ object FairyCollectionBox {
                         to = DataPoint(2.0, 6.0, 10.0),
                         shade = false,
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#log_top"
-                            ),
-                            up = DataFace(
-                                texture = "#log_top"
-                            ),
-                            north = DataFace(
-                                texture = "#log_side"
-                            ),
-                            south = DataFace(
-                                texture = "#log_side"
-                            ),
-                            west = DataFace(
-                                texture = "#log_side"
-                            ),
-                            east = DataFace(
-                                texture = "#log_side"
-                            )
+                            down = DataFace(texture = "#log_top"),
+                            up = DataFace(texture = "#log_top"),
+                            north = DataFace(texture = "#log_side"),
+                            south = DataFace(texture = "#log_side"),
+                            west = DataFace(texture = "#log_side"),
+                            east = DataFace(texture = "#log_side")
                         )
                     ),
                     DataElement(
@@ -458,24 +290,12 @@ object FairyCollectionBox {
                         to = DataPoint(2.0, 2.0, 12.0),
                         shade = false,
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#log_top"
-                            ),
-                            up = DataFace(
-                                texture = "#log_top"
-                            ),
-                            north = DataFace(
-                                texture = "#log_side"
-                            ),
-                            south = DataFace(
-                                texture = "#log_side"
-                            ),
-                            west = DataFace(
-                                texture = "#log_side"
-                            ),
-                            east = DataFace(
-                                texture = "#log_side"
-                            )
+                            down = DataFace(texture = "#log_top"),
+                            up = DataFace(texture = "#log_top"),
+                            north = DataFace(texture = "#log_side"),
+                            south = DataFace(texture = "#log_side"),
+                            west = DataFace(texture = "#log_side"),
+                            east = DataFace(texture = "#log_side")
                         )
                     )
                 )
@@ -496,68 +316,32 @@ object FairyCollectionBox {
                         from = DataPoint(2.0, 0.0, 2.0),
                         to = DataPoint(14.0, 16.0, 14.0),
                         faces = DataFaces(
-                            down = DataFace(
-                                texture = "#top"
-                            ),
-                            up = DataFace(
-                                texture = "#top"
-                            ),
-                            north = DataFace(
-                                texture = "#side_background"
-                            ),
-                            south = DataFace(
-                                texture = "#side_background"
-                            ),
-                            west = DataFace(
-                                texture = "#side_background"
-                            ),
-                            east = DataFace(
-                                texture = "#side_background"
-                            )
+                            down = DataFace(texture = "#top"),
+                            up = DataFace(texture = "#top"),
+                            north = DataFace(texture = "#side_background"),
+                            south = DataFace(texture = "#side_background"),
+                            west = DataFace(texture = "#side_background"),
+                            east = DataFace(texture = "#side_background")
                         )
                     ),
                     DataElement(
                         from = DataPoint(2.0, 0.0, 2.0),
                         to = DataPoint(14.0, 16.0, 14.0),
                         faces = DataFaces(
-                            north = DataFace(
-                                texture = "#side_light_1",
-                                tintindex = 0
-                            ),
-                            south = DataFace(
-                                texture = "#side_light_1",
-                                tintindex = 0
-                            ),
-                            west = DataFace(
-                                texture = "#side_light_1",
-                                tintindex = 0
-                            ),
-                            east = DataFace(
-                                texture = "#side_light_1",
-                                tintindex = 0
-                            )
+                            north = DataFace(texture = "#side_light_1", tintindex = 0),
+                            south = DataFace(texture = "#side_light_1", tintindex = 0),
+                            west = DataFace(texture = "#side_light_1", tintindex = 0),
+                            east = DataFace(texture = "#side_light_1", tintindex = 0)
                         )
                     ),
                     DataElement(
                         from = DataPoint(2.0, 0.0, 2.0),
                         to = DataPoint(14.0, 16.0, 14.0),
                         faces = DataFaces(
-                            north = DataFace(
-                                texture = "#side_light_2",
-                                tintindex = 1
-                            ),
-                            south = DataFace(
-                                texture = "#side_light_2",
-                                tintindex = 1
-                            ),
-                            west = DataFace(
-                                texture = "#side_light_2",
-                                tintindex = 1
-                            ),
-                            east = DataFace(
-                                texture = "#side_light_2",
-                                tintindex = 1
-                            )
+                            north = DataFace(texture = "#side_light_2", tintindex = 1),
+                            south = DataFace(texture = "#side_light_2", tintindex = 1),
+                            west = DataFace(texture = "#side_light_2", tintindex = 1),
+                            east = DataFace(texture = "#side_light_2", tintindex = 1)
                         )
                     )
                 )
