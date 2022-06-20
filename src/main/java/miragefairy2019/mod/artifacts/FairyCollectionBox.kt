@@ -27,9 +27,13 @@ import miragefairy2019.mod.fairy.hasSameId
 import miragefairy2019.mod.fairy.level
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
+import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
+import mirrg.kotlin.gson.hydrogen.jsonArray
+import mirrg.kotlin.gson.hydrogen.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonObject
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -87,6 +91,619 @@ object FairyCollectionBox {
                 override fun GuiHandlerContext.onServer() = (tileEntity as? TileEntityFairyCollectionBox)?.let { ContainerFairyCollectionBox(player.inventory, it.inventory) }
                 override fun GuiHandlerContext.onClient() = (tileEntity as? TileEntityFairyCollectionBox)?.let { GuiFairyCollectionBox(ContainerFairyCollectionBox(player.inventory, it.inventory)) }
             }.guiHandler)
+        }
+        makeBlockModel("fairy_building_bottom") {
+            jsonObject(
+                "parent" to "block/block".jsonElement,
+                "textures" to jsonObject(
+                    "particle" to "blocks/log_oak".jsonElement,
+                    "top" to "miragefairy2019:blocks/fairy_building_top".jsonElement,
+                    "side_background" to "miragefairy2019:blocks/fairy_building_side_background".jsonElement,
+                    "side_light_1" to "miragefairy2019:blocks/fairy_building_side_light_1".jsonElement,
+                    "side_light_2" to "miragefairy2019:blocks/fairy_building_side_light_2".jsonElement,
+                    "front_background" to "miragefairy2019:blocks/fairy_building_front_background".jsonElement,
+                    "front_light_1" to "miragefairy2019:blocks/fairy_building_front_light_1".jsonElement,
+                    "front_light_2" to "miragefairy2019:blocks/fairy_building_front_light_2".jsonElement,
+                    "log_top" to "blocks/log_oak_top".jsonElement,
+                    "log_side" to "blocks/log_oak".jsonElement
+                ),
+                "elements" to jsonArray(
+                    jsonObject(
+                        "from" to jsonArray(
+                            2.jsonElement,
+                            0.jsonElement,
+                            2.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            14.jsonElement,
+                            16.jsonElement,
+                            14.jsonElement
+                        ),
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#front_background".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#side_background".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#side_background".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#side_background".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            2.jsonElement,
+                            0.jsonElement,
+                            2.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            14.jsonElement,
+                            16.jsonElement,
+                            14.jsonElement
+                        ),
+                        "faces" to jsonObject(
+                            "north" to jsonObject(
+                                "texture" to "#front_light_1".jsonElement,
+                                "tintindex" to 0.jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#side_light_1".jsonElement,
+                                "tintindex" to 0.jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#side_light_1".jsonElement,
+                                "tintindex" to 0.jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#side_light_1".jsonElement,
+                                "tintindex" to 0.jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            2.jsonElement,
+                            0.jsonElement,
+                            2.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            14.jsonElement,
+                            16.jsonElement,
+                            14.jsonElement
+                        ),
+                        "faces" to jsonObject(
+                            "north" to jsonObject(
+                                "texture" to "#front_light_2".jsonElement,
+                                "tintindex" to 1.jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#side_light_2".jsonElement,
+                                "tintindex" to 1.jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#side_light_2".jsonElement,
+                                "tintindex" to 1.jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#side_light_2".jsonElement,
+                                "tintindex" to 1.jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            2.jsonElement,
+                            0.jsonElement,
+                            14.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            12.jsonElement,
+                            2.jsonElement,
+                            16.jsonElement
+                        ),
+                        "shade" to false.jsonElement,
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            6.jsonElement,
+                            0.jsonElement,
+                            14.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            8.jsonElement,
+                            6.jsonElement,
+                            16.jsonElement
+                        ),
+                        "shade" to false.jsonElement,
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            10.jsonElement,
+                            0.jsonElement,
+                            14.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            12.jsonElement,
+                            10.jsonElement,
+                            16.jsonElement
+                        ),
+                        "shade" to false.jsonElement,
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            14.jsonElement,
+                            0.jsonElement,
+                            8.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            16.jsonElement,
+                            2.jsonElement,
+                            14.jsonElement
+                        ),
+                        "shade" to false.jsonElement,
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            14.jsonElement,
+                            0.jsonElement,
+                            10.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            16.jsonElement,
+                            8.jsonElement,
+                            12.jsonElement
+                        ),
+                        "shade" to false.jsonElement,
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            14.jsonElement,
+                            0.jsonElement,
+                            0.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            16.jsonElement,
+                            2.jsonElement,
+                            4.jsonElement
+                        ),
+                        "shade" to false.jsonElement,
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            14.jsonElement,
+                            0.jsonElement,
+                            2.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            16.jsonElement,
+                            4.jsonElement,
+                            4.jsonElement
+                        ),
+                        "shade" to false.jsonElement,
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            4.jsonElement,
+                            0.jsonElement,
+                            0.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            6.jsonElement,
+                            4.jsonElement,
+                            2.jsonElement
+                        ),
+                        "shade" to false.jsonElement,
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            0.jsonElement,
+                            0.jsonElement,
+                            4.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            2.jsonElement,
+                            4.jsonElement,
+                            6.jsonElement
+                        ),
+                        "shade" to false.jsonElement,
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            0.jsonElement,
+                            0.jsonElement,
+                            6.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            2.jsonElement,
+                            12.jsonElement,
+                            8.jsonElement
+                        ),
+                        "shade" to false.jsonElement,
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            0.jsonElement,
+                            0.jsonElement,
+                            8.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            2.jsonElement,
+                            6.jsonElement,
+                            10.jsonElement
+                        ),
+                        "shade" to false.jsonElement,
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            0.jsonElement,
+                            0.jsonElement,
+                            10.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            2.jsonElement,
+                            2.jsonElement,
+                            12.jsonElement
+                        ),
+                        "shade" to false.jsonElement,
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#log_top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#log_side".jsonElement
+                            )
+                        )
+                    )
+                )
+            )
+        }
+        makeBlockModel("fairy_building_middle") {
+            jsonObject(
+                "parent" to "block/block".jsonElement,
+                "textures" to jsonObject(
+                    "particle" to "blocks/log_oak".jsonElement,
+                    "top" to "miragefairy2019:blocks/fairy_building_top".jsonElement,
+                    "side_background" to "miragefairy2019:blocks/fairy_building_side_background".jsonElement,
+                    "side_light_1" to "miragefairy2019:blocks/fairy_building_side_light_1".jsonElement,
+                    "side_light_2" to "miragefairy2019:blocks/fairy_building_side_light_2".jsonElement
+                ),
+                "elements" to jsonArray(
+                    jsonObject(
+                        "from" to jsonArray(
+                            2.jsonElement,
+                            0.jsonElement,
+                            2.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            14.jsonElement,
+                            16.jsonElement,
+                            14.jsonElement
+                        ),
+                        "faces" to jsonObject(
+                            "down" to jsonObject(
+                                "texture" to "#top".jsonElement
+                            ),
+                            "up" to jsonObject(
+                                "texture" to "#top".jsonElement
+                            ),
+                            "north" to jsonObject(
+                                "texture" to "#side_background".jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#side_background".jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#side_background".jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#side_background".jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            2.jsonElement,
+                            0.jsonElement,
+                            2.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            14.jsonElement,
+                            16.jsonElement,
+                            14.jsonElement
+                        ),
+                        "faces" to jsonObject(
+                            "north" to jsonObject(
+                                "texture" to "#side_light_1".jsonElement,
+                                "tintindex" to 0.jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#side_light_1".jsonElement,
+                                "tintindex" to 0.jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#side_light_1".jsonElement,
+                                "tintindex" to 0.jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#side_light_1".jsonElement,
+                                "tintindex" to 0.jsonElement
+                            )
+                        )
+                    ),
+                    jsonObject(
+                        "from" to jsonArray(
+                            2.jsonElement,
+                            0.jsonElement,
+                            2.jsonElement
+                        ),
+                        "to" to jsonArray(
+                            14.jsonElement,
+                            16.jsonElement,
+                            14.jsonElement
+                        ),
+                        "faces" to jsonObject(
+                            "north" to jsonObject(
+                                "texture" to "#side_light_2".jsonElement,
+                                "tintindex" to 1.jsonElement
+                            ),
+                            "south" to jsonObject(
+                                "texture" to "#side_light_2".jsonElement,
+                                "tintindex" to 1.jsonElement
+                            ),
+                            "west" to jsonObject(
+                                "texture" to "#side_light_2".jsonElement,
+                                "tintindex" to 1.jsonElement
+                            ),
+                            "east" to jsonObject(
+                                "texture" to "#side_light_2".jsonElement,
+                                "tintindex" to 1.jsonElement
+                            )
+                        )
+                    )
+                )
+            )
         }
     }
 }

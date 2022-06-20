@@ -7,7 +7,6 @@ import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.dimensionalPos
 import miragefairy2019.libkt.displayText
@@ -44,13 +43,16 @@ import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapedRecipe
 import miragefairy2019.resourcemaker.DataSimpleIngredient
+import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeRecipe
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
 import mirrg.kotlin.castOrNull
+import mirrg.kotlin.gson.hydrogen.jsonArray
+import mirrg.kotlin.gson.hydrogen.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.json
-import mirrg.kotlin.gson.jsonElement
 import mirrg.kotlin.minus
 import mirrg.kotlin.utf8ByteArray
 import mirrg.kotlin.utf8String
@@ -121,6 +123,56 @@ object ChatWebhook {
                     }
                 )
             }
+            makeBlockModel(resourceName.path) {
+                jsonObject(
+                    "parent" to "block/block".jsonElement,
+                    "elements" to jsonArray(
+                        jsonObject(
+                            "from" to jsonArray(
+                                0.jsonElement,
+                                0.jsonElement,
+                                0.jsonElement
+                            ),
+                            "to" to jsonArray(
+                                16.jsonElement,
+                                16.jsonElement,
+                                16.jsonElement
+                            ),
+                            "faces" to jsonObject(
+                                "down" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "down".jsonElement
+                                ),
+                                "up" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "up".jsonElement
+                                ),
+                                "north" to jsonObject(
+                                    "texture" to "#front".jsonElement,
+                                    "cullface" to "north".jsonElement
+                                ),
+                                "south" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "south".jsonElement
+                                ),
+                                "west" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "west".jsonElement
+                                ),
+                                "east" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "east".jsonElement
+                                )
+                            )
+                        )
+                    ),
+                    "textures" to jsonObject(
+                        "particle" to "miragefairy2019:blocks/fairy_machine".jsonElement,
+                        "front" to "miragefairy2019:blocks/fairy_machine_display".jsonElement,
+                        "side" to "miragefairy2019:blocks/fairy_machine".jsonElement
+                    )
+                )
+            }
         }
         itemChatWebhookTransmitter = item({ ItemBlock(blockChatWebhookTransmitter()) }, "chat_webhook_transmitter") {
             setCustomModelResourceLocation(variant = "facing=north")
@@ -159,6 +211,56 @@ object ChatWebhook {
                             y = facing.second
                         )
                     }
+                )
+            }
+            makeBlockModel(resourceName.path) {
+                jsonObject(
+                    "parent" to "block/block".jsonElement,
+                    "elements" to jsonArray(
+                        jsonObject(
+                            "from" to jsonArray(
+                                0.jsonElement,
+                                0.jsonElement,
+                                0.jsonElement
+                            ),
+                            "to" to jsonArray(
+                                16.jsonElement,
+                                16.jsonElement,
+                                16.jsonElement
+                            ),
+                            "faces" to jsonObject(
+                                "down" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "down".jsonElement
+                                ),
+                                "up" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "up".jsonElement
+                                ),
+                                "north" to jsonObject(
+                                    "texture" to "#front".jsonElement,
+                                    "cullface" to "north".jsonElement
+                                ),
+                                "south" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "south".jsonElement
+                                ),
+                                "west" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "west".jsonElement
+                                ),
+                                "east" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "east".jsonElement
+                                )
+                            )
+                        )
+                    ),
+                    "textures" to jsonObject(
+                        "particle" to "miragefairy2019:blocks/creative_fairy_machine".jsonElement,
+                        "front" to "miragefairy2019:blocks/creative_fairy_machine_display".jsonElement,
+                        "side" to "miragefairy2019:blocks/creative_fairy_machine".jsonElement
+                    )
                 )
             }
         }
@@ -243,7 +345,7 @@ object ChatWebhook {
 
                                     // 入力の送信
                                     Main.logger.trace("sending")
-                                    val json = jsonElement(
+                                    val json = jsonObject(
                                         "username" to "${daemon.username} @ ${remaining.displayText.unformattedText}".jsonElement,
                                         "content" to "<$playerName> $message".jsonElement
                                     ).json

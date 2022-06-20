@@ -10,7 +10,10 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.resourcemaker.DataBlockState
 import miragefairy2019.resourcemaker.DataBlockStates
+import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
+import mirrg.kotlin.gson.hydrogen.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonObject
 import net.minecraft.block.BlockRotatedPillar
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -31,6 +34,15 @@ object FairyWoodLog {
                     variants = listOf("y" to Pair(null, null), "z" to Pair(90, null), "x" to Pair(90, 90)).associate { axis ->
                         "axis=${axis.first}" to DataBlockState("miragefairy2019:fairy_wood_log", x = axis.second.first, y = axis.second.second)
                     }
+                )
+            }
+            makeBlockModel(resourceName.path) {
+                jsonObject(
+                    "parent" to "block/cube_column".jsonElement,
+                    "textures" to jsonObject(
+                        "end" to "miragefairy2019:blocks/fairy_wood_log_top".jsonElement,
+                        "side" to "miragefairy2019:blocks/fairy_wood_log".jsonElement
+                    )
                 )
             }
         }

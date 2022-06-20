@@ -8,7 +8,6 @@ import miragefairy2019.lib.fairyCentrifugeCraftHandler
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
-import miragefairy2019.libkt.ResourceName
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
@@ -24,7 +23,6 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.EnumFairyMaterial
 import miragefairy2019.mod.artifacts.FairyMaterials
 import miragefairy2019.mod.artifacts.Fertilizer
@@ -38,9 +36,13 @@ import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapedRecipe
 import miragefairy2019.resourcemaker.DataSimpleIngredient
+import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeRecipe
 import mirrg.kotlin.castOrNull
+import mirrg.kotlin.gson.hydrogen.jsonArray
+import mirrg.kotlin.gson.hydrogen.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonObject
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.ItemBlock
@@ -60,6 +62,88 @@ object FairyBox {
                         variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
                             "facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_box", y = facing.second)
                         }
+                    )
+                }
+                makeBlockModel(resourceName.path) {
+                    jsonObject(
+                        "parent" to "block/block".jsonElement,
+                        "elements" to jsonArray(
+                            jsonObject(
+                                "from" to jsonArray(
+                                    0.jsonElement,
+                                    0.jsonElement,
+                                    0.jsonElement
+                                ),
+                                "to" to jsonArray(
+                                    16.jsonElement,
+                                    16.jsonElement,
+                                    16.jsonElement
+                                ),
+                                "faces" to jsonObject(
+                                    "down" to jsonObject(
+                                        "texture" to "#end".jsonElement,
+                                        "cullface" to "down".jsonElement
+                                    ),
+                                    "up" to jsonObject(
+                                        "texture" to "#end".jsonElement,
+                                        "cullface" to "up".jsonElement
+                                    ),
+                                    "north" to jsonObject(
+                                        "texture" to "#side".jsonElement,
+                                        "cullface" to "north".jsonElement
+                                    ),
+                                    "south" to jsonObject(
+                                        "texture" to "#side".jsonElement,
+                                        "cullface" to "south".jsonElement
+                                    ),
+                                    "west" to jsonObject(
+                                        "texture" to "#side".jsonElement,
+                                        "cullface" to "west".jsonElement
+                                    ),
+                                    "east" to jsonObject(
+                                        "texture" to "#side".jsonElement,
+                                        "cullface" to "east".jsonElement
+                                    )
+                                )
+                            ),
+                            jsonObject(
+                                "from" to jsonArray(
+                                    0.jsonElement,
+                                    0.jsonElement,
+                                    0.jsonElement
+                                ),
+                                "to" to jsonArray(
+                                    16.jsonElement,
+                                    16.jsonElement,
+                                    16.jsonElement
+                                ),
+                                "faces" to jsonObject(
+                                    "north" to jsonObject(
+                                        "texture" to "#entrance".jsonElement,
+                                        "cullface" to "north".jsonElement
+                                    ),
+                                    "south" to jsonObject(
+                                        "texture" to "#window".jsonElement,
+                                        "cullface" to "south".jsonElement
+                                    ),
+                                    "west" to jsonObject(
+                                        "texture" to "#window".jsonElement,
+                                        "cullface" to "west".jsonElement
+                                    ),
+                                    "east" to jsonObject(
+                                        "texture" to "#window".jsonElement,
+                                        "cullface" to "east".jsonElement
+                                    )
+                                )
+                            )
+                        ),
+                        "textures" to jsonObject(
+                            "particle" to "miragefairy2019:blocks/fairy_wood_log".jsonElement,
+                            "end" to "miragefairy2019:blocks/fairy_wood_log_top".jsonElement,
+                            "side" to "miragefairy2019:blocks/fairy_wood_log".jsonElement,
+                            "entrance" to "miragefairy2019:blocks/fairy_box_entrance".jsonElement,
+                            "window" to "miragefairy2019:blocks/fairy_box_output".jsonElement
+                        )
                     )
                 }
             }
@@ -103,6 +187,88 @@ object FairyBox {
                         }
                     )
                 }
+                makeBlockModel(resourceName.path) {
+                    jsonObject(
+                        "parent" to "block/block".jsonElement,
+                        "elements" to jsonArray(
+                            jsonObject(
+                                "from" to jsonArray(
+                                    0.jsonElement,
+                                    0.jsonElement,
+                                    0.jsonElement
+                                ),
+                                "to" to jsonArray(
+                                    16.jsonElement,
+                                    16.jsonElement,
+                                    16.jsonElement
+                                ),
+                                "faces" to jsonObject(
+                                    "down" to jsonObject(
+                                        "texture" to "#end".jsonElement,
+                                        "cullface" to "down".jsonElement
+                                    ),
+                                    "up" to jsonObject(
+                                        "texture" to "#end".jsonElement,
+                                        "cullface" to "up".jsonElement
+                                    ),
+                                    "north" to jsonObject(
+                                        "texture" to "#side".jsonElement,
+                                        "cullface" to "north".jsonElement
+                                    ),
+                                    "south" to jsonObject(
+                                        "texture" to "#side".jsonElement,
+                                        "cullface" to "south".jsonElement
+                                    ),
+                                    "west" to jsonObject(
+                                        "texture" to "#side".jsonElement,
+                                        "cullface" to "west".jsonElement
+                                    ),
+                                    "east" to jsonObject(
+                                        "texture" to "#side".jsonElement,
+                                        "cullface" to "east".jsonElement
+                                    )
+                                )
+                            ),
+                            jsonObject(
+                                "from" to jsonArray(
+                                    0.jsonElement,
+                                    0.jsonElement,
+                                    0.jsonElement
+                                ),
+                                "to" to jsonArray(
+                                    16.jsonElement,
+                                    16.jsonElement,
+                                    16.jsonElement
+                                ),
+                                "faces" to jsonObject(
+                                    "north" to jsonObject(
+                                        "texture" to "#entrance".jsonElement,
+                                        "cullface" to "north".jsonElement
+                                    ),
+                                    "south" to jsonObject(
+                                        "texture" to "#window".jsonElement,
+                                        "cullface" to "south".jsonElement
+                                    ),
+                                    "west" to jsonObject(
+                                        "texture" to "#window".jsonElement,
+                                        "cullface" to "west".jsonElement
+                                    ),
+                                    "east" to jsonObject(
+                                        "texture" to "#window".jsonElement,
+                                        "cullface" to "east".jsonElement
+                                    )
+                                )
+                            )
+                        ),
+                        "textures" to jsonObject(
+                            "particle" to "miragefairy2019:blocks/fairy_wood_log".jsonElement,
+                            "end" to "miragefairy2019:blocks/fairy_wood_log_top".jsonElement,
+                            "side" to "miragefairy2019:blocks/fairy_wood_log".jsonElement,
+                            "entrance" to "miragefairy2019:blocks/fairy_resin_tapper_entrance".jsonElement,
+                            "window" to "miragefairy2019:blocks/fairy_resin_tapper_window".jsonElement
+                        )
+                    )
+                }
             }
             val item = item({ ItemBlock(block()) }, "fairy_resin_tapper") {
                 setCustomModelResourceLocation(variant = "facing=north")
@@ -142,6 +308,99 @@ object FairyBox {
                         variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
                             "facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_centrifuge", y = facing.second)
                         }
+                    )
+                }
+                makeBlockModel(resourceName.path) {
+                    jsonObject(
+                        "parent" to "block/block".jsonElement,
+                        "elements" to jsonArray(
+                            jsonObject(
+                                "from" to jsonArray(
+                                    0.jsonElement,
+                                    0.jsonElement,
+                                    0.jsonElement
+                                ),
+                                "to" to jsonArray(
+                                    16.jsonElement,
+                                    16.jsonElement,
+                                    16.jsonElement
+                                ),
+                                "faces" to jsonObject(
+                                    "down" to jsonObject(
+                                        "texture" to "#end".jsonElement,
+                                        "cullface" to "down".jsonElement
+                                    ),
+                                    "up" to jsonObject(
+                                        "texture" to "#end".jsonElement,
+                                        "cullface" to "up".jsonElement
+                                    ),
+                                    "north" to jsonObject(
+                                        "texture" to "#side".jsonElement,
+                                        "cullface" to "north".jsonElement
+                                    ),
+                                    "south" to jsonObject(
+                                        "texture" to "#side".jsonElement,
+                                        "cullface" to "south".jsonElement
+                                    ),
+                                    "west" to jsonObject(
+                                        "texture" to "#side".jsonElement,
+                                        "cullface" to "west".jsonElement
+                                    ),
+                                    "east" to jsonObject(
+                                        "texture" to "#side".jsonElement,
+                                        "cullface" to "east".jsonElement
+                                    )
+                                )
+                            ),
+                            jsonObject(
+                                "from" to jsonArray(
+                                    0.jsonElement,
+                                    0.jsonElement,
+                                    0.jsonElement
+                                ),
+                                "to" to jsonArray(
+                                    16.jsonElement,
+                                    16.jsonElement,
+                                    16.jsonElement
+                                ),
+                                "faces" to jsonObject(
+                                    "down" to jsonObject(
+                                        "texture" to "#vertical_output".jsonElement,
+                                        "cullface" to "down".jsonElement
+                                    ),
+                                    "up" to jsonObject(
+                                        "texture" to "#vertical_input".jsonElement,
+                                        "cullface" to "up".jsonElement
+                                    ),
+                                    "north" to jsonObject(
+                                        "texture" to "#entrance".jsonElement,
+                                        "cullface" to "north".jsonElement
+                                    ),
+                                    "south" to jsonObject(
+                                        "texture" to "#input".jsonElement,
+                                        "cullface" to "south".jsonElement
+                                    ),
+                                    "west" to jsonObject(
+                                        "texture" to "#output".jsonElement,
+                                        "cullface" to "west".jsonElement
+                                    ),
+                                    "east" to jsonObject(
+                                        "texture" to "#input".jsonElement,
+                                        "cullface" to "east".jsonElement
+                                    )
+                                )
+                            )
+                        ),
+                        "textures" to jsonObject(
+                            "particle" to "miragefairy2019:blocks/fairy_wood_log".jsonElement,
+                            "end" to "miragefairy2019:blocks/fairy_wood_log_top".jsonElement,
+                            "side" to "miragefairy2019:blocks/fairy_wood_log".jsonElement,
+                            "entrance" to "miragefairy2019:blocks/fairy_centrifuge_entrance".jsonElement,
+                            "input" to "miragefairy2019:blocks/fairy_centrifuge_input".jsonElement,
+                            "output" to "miragefairy2019:blocks/fairy_centrifuge_output".jsonElement,
+                            "vertical_input" to "miragefairy2019:blocks/fairy_box_input".jsonElement,
+                            "vertical_output" to "miragefairy2019:blocks/fairy_box_output2".jsonElement
+                        )
                     )
                 }
             }

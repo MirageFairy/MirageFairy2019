@@ -18,7 +18,9 @@ import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
-import mirrg.kotlin.gson.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonArray
+import mirrg.kotlin.gson.hydrogen.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonObject
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
@@ -122,10 +124,177 @@ object Ores {
 
         // ブロックモデルの生成
         run {
+            makeBlockModel("overlay_block") {
+                jsonObject(
+                    "parent" to "block/block".jsonElement,
+                    "elements" to jsonArray(
+                        jsonObject(
+                            "from" to jsonArray(
+                                0.jsonElement,
+                                0.jsonElement,
+                                0.jsonElement
+                            ),
+                            "to" to jsonArray(
+                                16.jsonElement,
+                                16.jsonElement,
+                                16.jsonElement
+                            ),
+                            "faces" to jsonObject(
+                                "down" to jsonObject(
+                                    "uv" to jsonArray(
+                                        0.jsonElement,
+                                        0.jsonElement,
+                                        16.jsonElement,
+                                        16.jsonElement
+                                    ),
+                                    "texture" to "#base".jsonElement,
+                                    "tintindex" to 0.jsonElement,
+                                    "cullface" to "down".jsonElement
+                                ),
+                                "up" to jsonObject(
+                                    "uv" to jsonArray(
+                                        0.jsonElement,
+                                        0.jsonElement,
+                                        16.jsonElement,
+                                        16.jsonElement
+                                    ),
+                                    "texture" to "#base".jsonElement,
+                                    "tintindex" to 0.jsonElement,
+                                    "cullface" to "up".jsonElement
+                                ),
+                                "north" to jsonObject(
+                                    "uv" to jsonArray(
+                                        0.jsonElement,
+                                        0.jsonElement,
+                                        16.jsonElement,
+                                        16.jsonElement
+                                    ),
+                                    "texture" to "#base".jsonElement,
+                                    "tintindex" to 0.jsonElement,
+                                    "cullface" to "north".jsonElement
+                                ),
+                                "south" to jsonObject(
+                                    "uv" to jsonArray(
+                                        0.jsonElement,
+                                        0.jsonElement,
+                                        16.jsonElement,
+                                        16.jsonElement
+                                    ),
+                                    "texture" to "#base".jsonElement,
+                                    "tintindex" to 0.jsonElement,
+                                    "cullface" to "south".jsonElement
+                                ),
+                                "west" to jsonObject(
+                                    "uv" to jsonArray(
+                                        0.jsonElement,
+                                        0.jsonElement,
+                                        16.jsonElement,
+                                        16.jsonElement
+                                    ),
+                                    "texture" to "#base".jsonElement,
+                                    "tintindex" to 0.jsonElement,
+                                    "cullface" to "west".jsonElement
+                                ),
+                                "east" to jsonObject(
+                                    "uv" to jsonArray(
+                                        0.jsonElement,
+                                        0.jsonElement,
+                                        16.jsonElement,
+                                        16.jsonElement
+                                    ),
+                                    "texture" to "#base".jsonElement,
+                                    "tintindex" to 0.jsonElement,
+                                    "cullface" to "east".jsonElement
+                                )
+                            )
+                        ),
+                        jsonObject(
+                            "from" to jsonArray(
+                                0.jsonElement,
+                                0.jsonElement,
+                                0.jsonElement
+                            ),
+                            "to" to jsonArray(
+                                16.jsonElement,
+                                16.jsonElement,
+                                16.jsonElement
+                            ),
+                            "faces" to jsonObject(
+                                "down" to jsonObject(
+                                    "uv" to jsonArray(
+                                        0.jsonElement,
+                                        0.jsonElement,
+                                        16.jsonElement,
+                                        16.jsonElement
+                                    ),
+                                    "texture" to "#overlay".jsonElement,
+                                    "tintindex" to 1.jsonElement,
+                                    "cullface" to "down".jsonElement
+                                ),
+                                "up" to jsonObject(
+                                    "uv" to jsonArray(
+                                        0.jsonElement,
+                                        0.jsonElement,
+                                        16.jsonElement,
+                                        16.jsonElement
+                                    ),
+                                    "texture" to "#overlay".jsonElement,
+                                    "tintindex" to 1.jsonElement,
+                                    "cullface" to "up".jsonElement
+                                ),
+                                "north" to jsonObject(
+                                    "uv" to jsonArray(
+                                        0.jsonElement,
+                                        0.jsonElement,
+                                        16.jsonElement,
+                                        16.jsonElement
+                                    ),
+                                    "texture" to "#overlay".jsonElement,
+                                    "tintindex" to 1.jsonElement,
+                                    "cullface" to "north".jsonElement
+                                ),
+                                "south" to jsonObject(
+                                    "uv" to jsonArray(
+                                        0.jsonElement,
+                                        0.jsonElement,
+                                        16.jsonElement,
+                                        16.jsonElement
+                                    ),
+                                    "texture" to "#overlay".jsonElement,
+                                    "tintindex" to 1.jsonElement,
+                                    "cullface" to "south".jsonElement
+                                ),
+                                "west" to jsonObject(
+                                    "uv" to jsonArray(
+                                        0.jsonElement,
+                                        0.jsonElement,
+                                        16.jsonElement,
+                                        16.jsonElement
+                                    ),
+                                    "texture" to "#overlay".jsonElement,
+                                    "tintindex" to 1.jsonElement,
+                                    "cullface" to "west".jsonElement
+                                ),
+                                "east" to jsonObject(
+                                    "uv" to jsonArray(
+                                        0.jsonElement,
+                                        0.jsonElement,
+                                        16.jsonElement,
+                                        16.jsonElement
+                                    ),
+                                    "texture" to "#overlay".jsonElement,
+                                    "tintindex" to 1.jsonElement,
+                                    "cullface" to "east".jsonElement
+                                )
+                            )
+                        )
+                    )
+                )
+            }
             fun makeBlockModel(name: String, base: String, overlay: String) = makeBlockModel(name) {
-                jsonElement(
+                jsonObject(
                     "parent" to "miragefairy2019:block/overlay_block".jsonElement,
-                    "textures" to jsonElement(
+                    "textures" to jsonObject(
                         "particle" to base.jsonElement,
                         "base" to base.jsonElement,
                         "overlay" to overlay.jsonElement

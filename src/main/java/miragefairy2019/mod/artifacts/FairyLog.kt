@@ -16,6 +16,8 @@ import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
 import mirrg.boron.util.UtilsMath
+import mirrg.kotlin.gson.hydrogen.jsonArray
+import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.jsonElement
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
@@ -60,6 +62,73 @@ object FairyLog {
                             "facing=${facing.first},variant=$variant" to DataBlockState("miragefairy2019:${variant}_fairy_log", y = facing.second)
                         }
                     }.toMap()
+                )
+            }
+            makeBlockModel(resourceName.path) {
+                jsonObject(
+                    "parent" to "block/block".jsonElement,
+                    "elements" to jsonArray(
+                        jsonObject(
+                            "from" to jsonArray(
+                                0.jsonElement,
+                                0.jsonElement,
+                                0.jsonElement
+                            ),
+                            "to" to jsonArray(
+                                16.jsonElement,
+                                16.jsonElement,
+                                16.jsonElement
+                            ),
+                            "faces" to jsonObject(
+                                "down" to jsonObject(
+                                    "texture" to "#end".jsonElement,
+                                    "cullface" to "down".jsonElement
+                                ),
+                                "up" to jsonObject(
+                                    "texture" to "#end".jsonElement,
+                                    "cullface" to "up".jsonElement
+                                ),
+                                "north" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "north".jsonElement
+                                ),
+                                "south" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "south".jsonElement
+                                ),
+                                "west" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "west".jsonElement
+                                ),
+                                "east" to jsonObject(
+                                    "texture" to "#side".jsonElement,
+                                    "cullface" to "east".jsonElement
+                                )
+                            )
+                        ),
+                        jsonObject(
+                            "from" to jsonArray(
+                                0.jsonElement,
+                                0.jsonElement,
+                                0.jsonElement
+                            ),
+                            "to" to jsonArray(
+                                16.jsonElement,
+                                16.jsonElement,
+                                16.jsonElement
+                            ),
+                            "faces" to jsonObject(
+                                "north" to jsonObject(
+                                    "texture" to "#overlay".jsonElement,
+                                    "cullface" to "north".jsonElement
+                                )
+                            )
+                        )
+                    ),
+                    "textures" to jsonObject(
+                        "particle" to "#side".jsonElement,
+                        "overlay" to "miragefairy2019:blocks/log_entrance".jsonElement
+                    )
                 )
             }
         }
