@@ -1,8 +1,0 @@
-{
-	"parent": "miragefairy2019:block/overlay_block",
-	"textures": {
-		"particle": "blocks/stone",
-		"base": "blocks/stone",
-		"overlay": "miragefairy2019:blocks/labradorite_ore"
-	}
-}
