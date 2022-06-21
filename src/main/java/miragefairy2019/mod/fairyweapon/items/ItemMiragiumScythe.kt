@@ -26,13 +26,13 @@ class ItemMiragiumScythe(
     EnumMastery.harvest,
     additionalBaseStatus
 ) {
-    val maxHardness = status("maxHardness", { !strength.magicStatus * 0.01 }) { float2 }.setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL)
-    val range = status("range", { (2 + !extent.magicStatus * 0.02).toInt() }) { integer }.setRange(2..5).setVisibility(EnumVisibility.DETAIL)
-    val coolTime = status("coolTime", { cost * 0.3 }) { duration }.setVisibility(EnumVisibility.DETAIL)
+    val maxHardness = status("maxHardness", { !strength * 0.01 }, { float2 }) { setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL) }
+    val range = status("range", { (2 + !extent * 0.02).toInt() }, { integer }) { setRange(2..5).setVisibility(EnumVisibility.DETAIL) }
+    val coolTime = status("coolTime", { cost * 0.3 }, { duration }) { setVisibility(EnumVisibility.DETAIL) }
 
     override fun iterateTargets(magicArguments: MagicArguments, blockPosBase: BlockPos) = iterator {
         magicArguments.run {
-            blockPosBase.region.grow(range.magicStatus(), 0, range.magicStatus()).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
+            blockPosBase.region.grow(range(), 0, range()).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
                 if (canBreak(magicArguments, blockPos)) yield(blockPos)
             }
         }
@@ -51,8 +51,8 @@ class ItemMiragiumScythe(
     }
 
     override fun canBreak(magicArguments: MagicArguments, blockPos: BlockPos) = super.canBreak(magicArguments, blockPos)
-        && magicArguments.run { world.getBlockState(blockPos).getBlockHardness(world, blockPos) <= maxHardness.magicStatus() } // 硬すぎてはいけない
+        && magicArguments.run { world.getBlockState(blockPos).getBlockHardness(world, blockPos) <= maxHardness() } // 硬すぎてはいけない
         && !magicArguments.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない
 
-    override fun getCoolTime(magicArguments: MagicArguments) = magicArguments.run { coolTime.magicStatus() }
+    override fun getCoolTime(magicArguments: MagicArguments) = magicArguments.run { coolTime() }
 }

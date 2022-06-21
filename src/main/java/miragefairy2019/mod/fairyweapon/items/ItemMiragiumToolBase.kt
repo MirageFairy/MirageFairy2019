@@ -49,8 +49,8 @@ abstract class ItemMiragiumToolBase(
     val production = createProductionStatus(additionalBaseStatus, Erg.HARVEST)
     val cost = createCostStatus()
 
-    val fortune = status("fortune", { !production.magicStatus * 0.03 }) { float2 }.setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL)
-    val wear = status("wear", { 1 / (25.0 + !endurance.magicStatus * 0.25) }) { percent2 }.setVisibility(EnumVisibility.DETAIL)
+    val fortune = status("fortune", { !production * 0.03 }, { float2 }) { setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL) }
+    val wear = status("wear", { 1 / (25.0 + !endurance * 0.25) }, { percent2 }) { setVisibility(EnumVisibility.DETAIL) }
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでブロックを破壊" // TODO translate
@@ -59,7 +59,7 @@ abstract class ItemMiragiumToolBase(
         val fairyType = findFairy(weaponItemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
         val selectorRayTrace = MagicSelector.rayTrace(world, player, 0.0) // 視線判定
         if (fairyType.isEmpty) return@magic fail(selectorRayTrace.item.position, 0xFF00FF) // 妖精なし判定
-        if (weaponItemStack.itemDamage + ceil(wear.magicStatus()).toInt() > weaponItemStack.maxDamage) return@magic fail(selectorRayTrace.item.position, 0xFF0000) // 材料なし判定
+        if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic fail(selectorRayTrace.item.position, 0xFF0000) // 材料なし判定
         val targets = selectorRayTrace.item.blockPos.let { if (selectorRayTrace.item.sideHit != null) it.offset(selectorRayTrace.item.sideHit!!) else it }.let { iterateTargets(this@magic, it) } // 対象判定
         if (!targets.hasNext()) return@magic fail(selectorRayTrace.item.position, 0x00FFFF) // ターゲットなし判定
         if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic fail(selectorRayTrace.item.position, 0xFFFF00) // クールダウン判定
@@ -76,12 +76,12 @@ abstract class ItemMiragiumToolBase(
                 var count = 0
                 run breakExecution@{
                     targets.forEach { target ->
-                        val damage = world.rand.randomInt(wear.magicStatus()) // 耐久コスト
+                        val damage = world.rand.randomInt(wear()) // 耐久コスト
                         if (weaponItemStack.itemDamage + damage > weaponItemStack.maxDamage) return@breakExecution // 耐久不足なら終了
 
                         // 破壊成立
                         weaponItemStack.damageItem(damage, player)
-                        breakBlock(world, player, EnumFacing.UP, weaponItemStack, target, world.rand.randomInt(fortune.magicStatus()), false)
+                        breakBlock(world, player, EnumFacing.UP, weaponItemStack, target, world.rand.randomInt(fortune()), false)
                         val blockState = world.getBlockState(target)
                         breakSound = blockState.block.getSoundType(blockState, world, target, player).breakSound
                         count++

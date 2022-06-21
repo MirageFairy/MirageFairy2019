@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreIngredient
 
 class ItemCrystalSword : ItemFairyWeaponBase3(Mana.GAIA, EnumMastery.closeCombat) {
-    val extraItemDropRate = status("extraItemDropRate", { (!mastery / 100.0).coerceIn(0.0, 1.0) }) { percent1 }.setVisibility(EnumVisibility.ALWAYS)
+    val extraItemDropRate = status("extraItemDropRate", { (!mastery / 100.0).coerceIn(0.0, 1.0) }, { percent1 }) { setVisibility(EnumVisibility.ALWAYS) }
 
     // 攻撃力は7（ダイヤ剣+1）固定
     override fun getAttributeModifiers(equipmentSlot: EntityEquipmentSlot, itemStack: ItemStack): Multimap<String?, AttributeModifier?>? {
@@ -57,7 +57,7 @@ class ItemCrystalSword : ItemFairyWeaponBase3(Mana.GAIA, EnumMastery.closeCombat
 
                 // 魔法成立
 
-                if (extraItemDropRate.magicStatus() > world.rand.nextDouble()) { // ステータスに基づいた確率で
+                if (extraItemDropRate() > world.rand.nextDouble()) { // ステータスに基づいた確率で
                     // エンティティに紐づけられた妖精のリスト
                     val entries = FairySelector().entity(target).allMatch().withoutPartiallyMatch.primaries
                     if (entries.isEmpty()) return // 関連付けられた妖精が居ない場合は無視

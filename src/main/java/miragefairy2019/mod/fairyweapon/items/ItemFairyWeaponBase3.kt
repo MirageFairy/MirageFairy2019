@@ -36,9 +36,11 @@ import miragefairy2019.mod.fairyweapon.magic4.Formula
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRendererSelector
 import miragefairy2019.mod.fairyweapon.magic4.FormulaScope
+import miragefairy2019.mod.fairyweapon.magic4.IMagicStatusContainer
 import miragefairy2019.mod.fairyweapon.magic4.Magic
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicStatus
+import miragefairy2019.mod.fairyweapon.magic4.MagicStatusBuilder
 import miragefairy2019.mod.fairyweapon.magic4.displayName
 import miragefairy2019.mod.fairyweapon.magic4.factors
 import miragefairy2019.mod.fairyweapon.magic4.float0
@@ -59,41 +61,36 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>)
 
-fun <T> MagicStatusWrapper<T>.setVisibility(visibility: EnumVisibility) = apply { magicStatus = MagicStatus(magicStatus.name, magicStatus.formula, magicStatus.renderer, visibility) }
-fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
-
-fun <T : Comparable<T>> MagicStatus<T>.ranged(min: T, max: T) = MagicStatus(
-    name,
-    Formula { formula.calculate(it).coerceIn(min, max) },
-    FormulaRenderer { arguments, function ->
+fun <T> MagicStatusBuilder<T>.setVisibility(visibility: EnumVisibility) = apply { this.visibility = visibility }
+fun <T : Comparable<T>> MagicStatusBuilder<T>.setRange(range: ClosedRange<T>) = apply {
+    formula = Formula { formula.calculate(it).coerceIn(range.start, range.endInclusive) }
+    renderer = FormulaRenderer { arguments, function ->
         val value = function.calculate(arguments)
         val displayValue = renderer.render(arguments, function)
         when (value) {
-            min -> textComponent { displayValue().bold }
-            max -> textComponent { displayValue().bold }
+            range.start -> textComponent { displayValue().bold }
+            range.endInclusive -> textComponent { displayValue().bold }
             else -> displayValue
         }
-    },
-    visibility
-)
+    }
+}
 
 
 abstract class ItemFairyWeaponBase3(
     val weaponMana: Mana,
     val mastery: IMastery
-) : ItemFairyWeapon() {
+) : ItemFairyWeapon(), IMagicStatusContainer {
 
     // Magic Status
 
-    val magicStatusWrapperList = mutableListOf<MagicStatusWrapper<*>>()
+    override val magicStatusList = mutableListOf<MagicStatus<*>>()
 
     @SideOnly(Side.CLIENT)
     override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: NonNullList<String>, flag: ITooltipFlag) {
         val player = Minecraft.getMinecraft().player ?: return
-        magicStatusWrapperList.forEach {
-            val show = when (it.magicStatus.visibility) {
+        magicStatusList.forEach {
+            val show = when (it.visibility) {
                 EnumVisibility.ALWAYS -> true
                 EnumVisibility.DETAIL -> flag.isAdvanced
                 EnumVisibility.NEVER -> false
@@ -107,10 +104,10 @@ abstract class ItemFairyWeaponBase3(
 
                     val formulaArguments = getMagicArguments(player, itemStackFairyWeapon, fairyType)
                     concat(
-                        it.magicStatus.displayName(),
+                        it.displayName(),
                         ": "(),
-                        it.magicStatus.getDisplayValue(formulaArguments)().white,
-                        f(it.magicStatus)
+                        it.getDisplayValue(formulaArguments)().white,
+                        f(it)
                     ).blue
                 }
             }
@@ -173,18 +170,17 @@ abstract class ItemFairyWeaponBase3(
 fun <T> ItemFairyWeaponBase3.status(
     name: String,
     formula: FormulaScope.() -> T,
-    formulaRendererGetter: FormulaRendererSelector<T>.() -> FormulaRenderer<T>
-): MagicStatusWrapper<T> {
-    val magicStatusWrapper = MagicStatusWrapper(
-        MagicStatus(
-            name,
-            Formula { FormulaScope(it).formula() },
-            FormulaRendererSelector<T>().formulaRendererGetter(),
-            EnumVisibility.NEVER
-        )
-    )
-    magicStatusWrapperList += magicStatusWrapper
-    return magicStatusWrapper
+    formulaRendererGetter: FormulaRendererSelector<T>.() -> FormulaRenderer<T>,
+    configurator: MagicStatusBuilder<T>.() -> Unit = {}
+): MagicStatus<T> {
+    val magicStatus = MagicStatusBuilder(
+        name,
+        Formula { FormulaScope(it).formula() },
+        FormulaRendererSelector<T>().formulaRendererGetter(),
+        EnumVisibility.NEVER
+    ).also { it.configurator() }.build()
+    magicStatusList += magicStatus
+    return magicStatus
 }
 
 
@@ -199,7 +195,7 @@ fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthEr
         AQUA -> !AQUA
         DARK -> !DARK
     }
-}) { float0 }.setVisibility(EnumVisibility.ALWAYS)
+}, { float0 }) { setVisibility(EnumVisibility.ALWAYS) }
 
 fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Erg) = status("extent", {
     (weaponExtent + !extentErg) * (cost / 50.0) + when (weaponMana) {
@@ -210,7 +206,7 @@ fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Erg
         AQUA -> !GAIA + !WIND
         DARK -> !GAIA + !WIND
     }
-}) { float0 }.setVisibility(EnumVisibility.ALWAYS)
+}, { float0 }) { setVisibility(EnumVisibility.ALWAYS) }
 
 fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranceErg: Erg) = status("endurance", {
     (weaponEndurance + !enduranceErg) * (cost / 50.0) + when (weaponMana) {
@@ -221,7 +217,7 @@ fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranc
         AQUA -> !FIRE * 2
         DARK -> !FIRE + !AQUA
     }
-}) { float0 }.setVisibility(EnumVisibility.ALWAYS)
+}, { float0 }) { setVisibility(EnumVisibility.ALWAYS) }
 
 fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, productionErg: Erg) = status("production", {
     (weaponProduction + !productionErg) * (cost / 50.0) + when (weaponMana) {
@@ -232,6 +228,6 @@ fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, produc
         AQUA -> !SHINE + !DARK
         DARK -> !SHINE * 2
     }
-}) { float0 }.setVisibility(EnumVisibility.ALWAYS)
+}, { float0 }) { setVisibility(EnumVisibility.ALWAYS) }
 
-fun ItemFairyWeaponBase3.createCostStatus() = status("cost", { cost / (1.0 + !mastery * 0.002) }) { float0 }.setVisibility(EnumVisibility.ALWAYS)
+fun ItemFairyWeaponBase3.createCostStatus() = status("cost", { cost / (1.0 + !mastery * 0.002) }, { float0 }) { setVisibility(EnumVisibility.ALWAYS) }

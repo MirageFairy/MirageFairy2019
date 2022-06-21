@@ -53,15 +53,15 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
     val production = createProductionStatus(additionalBaseStatus, Erg.HARVEST)
     val cost = createCostStatus()
 
-    val pitch = status("pitch", { -(cost / 50.0 - 1) * 12 }) { float2 }.setRange(-12.0..12.0).setVisibility(EnumVisibility.DETAIL)
-    val maxTargetCount = status("maxTargetCount", { 2 + floor(+!strength.magicStatus * 0.1).toInt() }) { integer }.setRange(1..100).setVisibility(EnumVisibility.DETAIL)
-    val fortune = status("fortune", { 3 + !production.magicStatus * 0.1 }) { float2 }.setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL)
-    val additionalReach = status("additionalReach", { !extent.magicStatus * 0.1 }) { float2 }.setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL)
-    val radius = status("radius", { 4 + !extent.magicStatus * 0.05 }) { float2 }.setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL)
-    val wear = status("wear", { 1.0 / (1 + !endurance.magicStatus * 0.03) }) { percent2 }.setVisibility(EnumVisibility.DETAIL)
-    val coolTime = status("coolTime", { cost * 0.5 }) { duration }.setVisibility(EnumVisibility.DETAIL)
-    val collection = status("collection", { !WARP >= 10 }) { boolean.positive }.setVisibility(EnumVisibility.ALWAYS)
-    val extraItemDropRate = status("extraItemDropRate", { 0.1 + extraItemDropRateFactor * !mastery atMost maxExtraItemDropRate }) { percent1 }.setVisibility(EnumVisibility.ALWAYS)
+    val pitch = status("pitch", { -(cost / 50.0 - 1) * 12 }, { float2 }) { setRange(-12.0..12.0).setVisibility(EnumVisibility.DETAIL) }
+    val maxTargetCount = status("maxTargetCount", { 2 + floor(+!strength * 0.1).toInt() }, { integer }) { setRange(1..100).setVisibility(EnumVisibility.DETAIL) }
+    val fortune = status("fortune", { 3 + !production * 0.1 }, { float2 }) { setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL) }
+    val additionalReach = status("additionalReach", { !extent * 0.1 }, { float2 }) { setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL) }
+    val radius = status("radius", { 4 + !extent * 0.05 }, { float2 }) { setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL) }
+    val wear = status("wear", { 1.0 / (1 + !endurance * 0.03) }, { percent2 }) { setVisibility(EnumVisibility.DETAIL) }
+    val coolTime = status("coolTime", { cost * 0.5 }, { duration }) { setVisibility(EnumVisibility.DETAIL) }
+    val collection = status("collection", { !WARP >= 10 }, { boolean.positive }) { setVisibility(EnumVisibility.ALWAYS) }
+    val extraItemDropRate = status("extraItemDropRate", { 0.1 + extraItemDropRateFactor * !mastery atMost maxExtraItemDropRate }, { percent1 }) { setVisibility(EnumVisibility.ALWAYS) }
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでミラージュフラワーを収穫" // TODO translate
@@ -69,7 +69,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
     override fun getMagic() = magic {
 
         // 視線判定
-        val magicSelectorRayTrace = MagicSelector.rayTraceBlock(world, player, additionalReach.magicStatus())
+        val magicSelectorRayTrace = MagicSelector.rayTraceBlock(world, player, additionalReach())
 
         // 視点判定
         val magicSelectorPosition = magicSelectorRayTrace.position
@@ -82,7 +82,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
         }
 
         // 範囲判定
-        val magicSelectorCircle = magicSelectorPosition.circle(radius.magicStatus())
+        val magicSelectorCircle = magicSelectorPosition.circle(radius())
         val magicSelectorBlocks = magicSelectorCircle.blocks()
 
         // 対象計算
@@ -97,11 +97,11 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                     .firstOrNull() ?: return@a null
                 Pair(blockPos, pickExecutor)
             }
-            .take(maxTargetCount.magicStatus()) // 最大個数を制限
+            .take(maxTargetCount()) // 最大個数を制限
             .toList() // リストにする
 
         // 資源がない場合、中止
-        if (weaponItemStack.itemDamage + ceil(wear.magicStatus()).toInt() > weaponItemStack.maxDamage) return@magic object : MagicHandler() {
+        if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic object : MagicHandler() {
             override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0xFF0000) // 視点
                 magicSelectorCircle.item.doEffect() // 範囲
@@ -143,13 +143,13 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                         val blockPos = pair.first
                         val pickExecutor = pair.second
 
-                        if (weaponItemStack.itemDamage + ceil(wear.magicStatus()).toInt() > weaponItemStack.maxDamage) return@targets // 耐久が足りないので中止
-                        if (targetCount + 1 > maxTargetCount.magicStatus()) return@targets // パワーが足りないので中止
+                        if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@targets // 耐久が足りないので中止
+                        if (targetCount + 1 > maxTargetCount()) return@targets // パワーが足りないので中止
 
                         // 成立
 
                         // 資源消費
-                        weaponItemStack.damageItem(world.rand.randomInt(wear.magicStatus()), player)
+                        weaponItemStack.damageItem(world.rand.randomInt(wear()), player)
                         targetCount++
 
                         // 音取得
@@ -162,17 +162,17 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                         run {
 
                             // 収穫試行
-                            val result = pickExecutor.tryPick(world.rand.randomInt(fortune.magicStatus()))
+                            val result = pickExecutor.tryPick(world.rand.randomInt(fortune()))
                             if (!result) return@targets
 
                             // 種の追加ドロップ
                             if (!world.isRemote) {
-                                val count = world.rand.randomInt(extraItemDropRate.magicStatus())
+                                val count = world.rand.randomInt(extraItemDropRate())
                                 if (count > 0) MirageFlower.itemMirageFlowerSeeds().createItemStack(count = count).drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
                             }
 
                             // 破壊したばかりのブロックの周辺のアイテムを集める
-                            if (collection.magicStatus()) {
+                            if (collection()) {
                                 world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPos)).forEach {
                                     collected = true
                                     it.setPosition(player.posX, player.posY, player.posZ)
@@ -203,12 +203,12 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                 if (targetCount >= 1) {
 
                     // エフェクト
-                    playSound(world, player, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 2.0.pow(pitch.magicStatus() / 12.0).toFloat())
+                    playSound(world, player, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 2.0.pow(pitch() / 12.0).toFloat())
                     world.playSound(null, player.posX, player.posY, player.posZ, breakSound!!, SoundCategory.PLAYERS, 1.0f, 1.0f)
 
                     // クールタイム
-                    val ratio = targetCount / (maxTargetCount.magicStatus()).toDouble()
-                    player.cooldownTracker.setCooldown(this@ItemBellFlowerPicking, (coolTime.magicStatus() * ratio.pow(0.5)).toInt())
+                    val ratio = targetCount / (maxTargetCount()).toDouble()
+                    player.cooldownTracker.setCooldown(this@ItemBellFlowerPicking, (coolTime() * ratio.pow(0.5)).toInt())
 
                 }
                 if (collected) {
