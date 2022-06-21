@@ -20,15 +20,16 @@ import miragefairy2019.lib.times
 import miragefairy2019.libkt.TextComponentScope
 import miragefairy2019.libkt.TextComponentWrapper
 import miragefairy2019.libkt.blue
+import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.concat
 import miragefairy2019.libkt.flatten
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.isNotEmpty
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.sandwich
+import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.Main.side
-import miragefairy2019.mod.fairyweapon.deprecated.ranged
 import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
 import miragefairy2019.mod.fairyweapon.magic4.Formula
@@ -62,6 +63,21 @@ class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>)
 
 fun <T> MagicStatusWrapper<T>.setVisibility(visibility: EnumVisibility) = apply { magicStatus = MagicStatus(magicStatus.name, magicStatus.formula, magicStatus.renderer, visibility) }
 fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
+
+fun <T : Comparable<T>> MagicStatus<T>.ranged(min: T, max: T) = MagicStatus(
+    name,
+    Formula { formula.calculate(it).coerceIn(min, max) },
+    FormulaRenderer { arguments, function ->
+        val value = function.calculate(arguments)
+        val displayValue = renderer.render(arguments, function)
+        when (value) {
+            min -> textComponent { displayValue().bold }
+            max -> textComponent { displayValue().bold }
+            else -> displayValue
+        }
+    },
+    visibility
+)
 
 
 abstract class ItemFairyWeaponBase3(
