@@ -3,16 +3,26 @@ package miragefairy2019.mod.fairyweapon.deprecated
 import miragefairy2019.api.Erg
 import miragefairy2019.api.IFairyType
 import miragefairy2019.api.Mana
+import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.EMPTY_FAIRY
+import miragefairy2019.lib.PlayerProxy
 import miragefairy2019.lib.displayName
+import miragefairy2019.lib.div
+import miragefairy2019.lib.erg
 import miragefairy2019.lib.get
+import miragefairy2019.lib.playerAuraHandler
+import miragefairy2019.lib.plus
+import miragefairy2019.lib.skillContainer
+import miragefairy2019.lib.times
 import miragefairy2019.libkt.bold
 import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.withColor
+import miragefairy2019.mod.skill.EnumMastery
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.displayName
+import miragefairy2019.mod.skill.getSkillLevel
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.util.text.TextFormatting.GREEN
@@ -28,13 +38,24 @@ class MagicStatus<T>(
 }
 
 data class MagicStatusFunctionArguments(
+    private val playerProxy: PlayerProxy?,
     private val getSkillLevel: (IMastery) -> Int,
     private val fairyType: IFairyType
 ) : FormulaArguments {
+    override val hasPartnerFairy: Boolean get() = !fairyType.isEmpty
     override fun getSkillLevel(mastery: IMastery) = getSkillLevel.invoke(mastery)
     override val cost get() = fairyType.cost
+    override val color get() = fairyType.color
     override fun getManaValue(mana: Mana) = fairyType.manaSet[mana]
     override fun getErgValue(erg: Erg) = fairyType.ergSet[erg]
+    override fun getRawMana(mana: Mana): Double {
+        val a = fairyType.manaSet / (cost / 50.0) // パートナー妖精のマナ
+        val b = a + (playerProxy?.playerAuraHandler?.playerAura ?: ManaSet.ZERO) // プレイヤーオーラの加算
+        val c = b * (1.0 + 0.005 * (playerProxy?.skillContainer?.getSkillLevel(EnumMastery.root) ?: 0)) // スキルレベル補正：妖精マスタリ1につき1%増加
+        return c[mana]
+    }
+
+    override fun getRawErg(erg: Erg) = fairyType.erg(erg)
 }
 
 
@@ -42,7 +63,7 @@ val <T> IMagicStatus<T>.displayName get() = textComponent { translate("mirageFai
 
 fun <T> IMagicStatus<T>.getDisplayValue(arguments: FormulaArguments): ITextComponent = renderer.render(arguments, formula)
 
-val <T> Formula<T>.defaultValue: T get() = calculate(MagicStatusFunctionArguments({ 0 }, EMPTY_FAIRY))
+val <T> Formula<T>.defaultValue: T get() = calculate(MagicStatusFunctionArguments(null, { 0 }, EMPTY_FAIRY))
 
 val <T> Formula<T>.factors
     get(): Iterable<ITextComponent> {
@@ -58,8 +79,12 @@ val <T> Formula<T>.factors
                 return 0.0
             }
 
+            override val hasPartnerFairy get() = true
             override val cost get() = add(textComponent { translate("mirageFairy2019.formula.source.cost.name").darkPurple }) // TODO 色変更
+            override val color get() = 0x000000
+            override fun getRawMana(mana: Mana) = add(mana.displayName)
             override fun getManaValue(mana: Mana) = add(mana.displayName)
+            override fun getRawErg(erg: Erg) = add(erg.displayName)
             override fun getErgValue(erg: Erg) = add(erg.displayName)
         })
         return factors

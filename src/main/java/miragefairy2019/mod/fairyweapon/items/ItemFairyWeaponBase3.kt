@@ -72,7 +72,7 @@ class MagicScope(
     val itemStack: ItemStack,
     val partnerFairyType: IFairyType
 ) {
-    operator fun <T> IMagicStatus<T>.not(): T = formula.calculate(MagicStatusFunctionArguments({ getSkillLevel(it) }, fairyType))
+    operator fun <T> IMagicStatus<T>.not(): T = formula.calculate(MagicStatusFunctionArguments(playerProxy, { getSkillLevel(it) }, fairyType))
     fun getSkillLevel(mastery: IMastery) = playerProxy.skillContainer.getSkillLevel(mastery)
     val fairyType get() = item.getActualFairyType(playerProxy, partnerFairyType)
 }
@@ -176,7 +176,7 @@ abstract class ItemFairyWeaponBase3(
                     concat(
                         it.displayName(),
                         ": "(),
-                        it.getDisplayValue(MagicStatusFunctionArguments({ mastery -> ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(mastery) }, actualFairyType))().white,
+                        it.getDisplayValue(MagicStatusFunctionArguments(playerProxy, { mastery -> ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(mastery) }, actualFairyType))().white,
                         f(it)
                     ).blue
                 }

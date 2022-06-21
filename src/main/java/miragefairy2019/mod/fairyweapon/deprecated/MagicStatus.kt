@@ -14,8 +14,12 @@ fun <T> Formula(block: (formulaArguments: FormulaArguments) -> T) = object : For
 }
 
 interface FormulaArguments {
-    fun getSkillLevel(mastery: IMastery): Int
+    val hasPartnerFairy: Boolean
+    fun getRawMana(mana: Mana): Double
+    fun getRawErg(erg: Erg): Double
     val cost: Double
+    val color: Int
+    fun getSkillLevel(mastery: IMastery): Int
     fun getManaValue(mana: Mana): Double
     fun getErgValue(erg: Erg): Double
 }
