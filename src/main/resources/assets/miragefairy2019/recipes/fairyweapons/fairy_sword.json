@@ -1,48 +1,48 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern": [
-		"CaF",
-		"S#A",
-		"MpO"
-	],
-	"key": {
-		"#": {
-			"item": "miragefairy2019:miragium_sword"
-		},
-		"C": {
-			"type": "forge:ore_dict",
-			"ore": "gemCinnabar"
-		},
-		"S": {
-			"type": "forge:ore_dict",
-			"ore": "gemSulfur"
-		},
-		"M": {
-			"type": "forge:ore_dict",
-			"ore": "gemMagnetite"
-		},
-		"F": {
-			"type": "forge:ore_dict",
-			"ore": "gemFluorite"
-		},
-		"A": {
-			"type": "forge:ore_dict",
-			"ore": "gemApatite"
-		},
-		"O": {
-			"type": "forge:ore_dict",
-			"ore": "gemMoonstone"
-		},
-		"a": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereAttack"
-		},
-		"p": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:fairy_sword"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "CaF",
+    "S#A",
+    "MpO"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:miragium_sword"
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "gemCinnabar"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "gemSulfur"
+    },
+    "M": {
+      "type": "forge:ore_dict",
+      "ore": "gemMagnetite"
+    },
+    "F": {
+      "type": "forge:ore_dict",
+      "ore": "gemFluorite"
+    },
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "gemApatite"
+    },
+    "O": {
+      "type": "forge:ore_dict",
+      "ore": "gemMoonstone"
+    },
+    "a": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereAttack"
+    },
+    "p": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:fairy_sword"
+  }
 }

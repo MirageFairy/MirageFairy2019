@@ -1,37 +1,37 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern": [
-		"sP ",
-		"aPm",
-		"cR "
-	],
-	"key": {
-		"R": {
-			"type": "forge:ore_dict",
-			"ore": "stickWood"
-		},
-		"P": {
-			"type": "forge:ore_dict",
-			"ore": "plateMiragium"
-		},
-		"s": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereSlash"
-		},
-		"a": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereAttack"
-		},
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"m": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:miragium_sword"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "sP ",
+    "aPm",
+    "cR "
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateMiragium"
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereSlash"
+    },
+    "a": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereAttack"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "m": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:miragium_sword"
+  }
 }

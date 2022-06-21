@@ -1,48 +1,48 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern": [
-		"c1S",
-		"3#4",
-		"R2m"
-	],
-	"key": {
-		"#": {
-			"item": "miragefairy2019:bell_base"
-		},
-		"R": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019ManaRodDark"
-		},
-		"1": {
-			"type": "forge:ore_dict",
-			"ore": "blockGold"
-		},
-		"2": {
-			"type": "forge:ore_dict",
-			"ore": "ingotGold"
-		},
-		"3": {
-			"item": "minecraft:sapling",
-			"data": 1
-		},
-		"S": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereChristmas"
-		},
-		"4": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereAttack"
-		},
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"m": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:christmas_bell"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "c1S",
+    "3#4",
+    "R2m"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:bell_base"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019ManaRodDark"
+    },
+    "1": {
+      "type": "forge:ore_dict",
+      "ore": "blockGold"
+    },
+    "2": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "3": {
+      "item": "minecraft:sapling",
+      "data": 1
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereChristmas"
+    },
+    "4": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereAttack"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "m": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:christmas_bell"
+  }
 }

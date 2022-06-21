@@ -1,33 +1,33 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern": [
-		"cIk",
-		"IRI",
-		"RIm"
-	],
-	"key": {
-		"R": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019ManaRodWind"
-		},
-		"I": {
-			"type": "forge:ore_dict",
-			"ore": "ingotMiragium"
-		},
-		"k": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereKnowledge"
-		},
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"m": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:magic_wand_base"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cIk",
+    "IRI",
+    "RIm"
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019ManaRodWind"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotMiragium"
+    },
+    "k": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereKnowledge"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "m": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:magic_wand_base"
+  }
 }

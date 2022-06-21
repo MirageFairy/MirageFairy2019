@@ -1,37 +1,37 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern": [
-		"pGm",
-		"GSG",
-		"cGI"
-	],
-	"key": {
-		"G": {
-			"type": "forge:ore_dict",
-			"ore": "gemApatite"
-		},
-		"S": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereSound"
-		},
-		"I": {
-			"type": "forge:ore_dict",
-			"ore": "ingotMiragium"
-		},
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"m": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandMelting"
-		},
-		"p": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:ocarina_base"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "pGm",
+    "GSG",
+    "cGI"
+  ],
+  "key": {
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gemApatite"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereSound"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotMiragium"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "m": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
+    },
+    "p": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:ocarina_base"
+  }
 }
