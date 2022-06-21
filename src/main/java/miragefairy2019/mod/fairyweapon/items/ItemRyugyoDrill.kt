@@ -7,6 +7,9 @@ import miragefairy2019.libkt.region
 import miragefairy2019.libkt.sortedByDistance
 import miragefairy2019.mod.fairyweapon.deprecated.negative
 import miragefairy2019.mod.fairyweapon.deprecated.positive
+import miragefairy2019.mod.fairyweapon.magic4.duration
+import miragefairy2019.mod.fairyweapon.magic4.float2
+import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -21,9 +24,9 @@ class ItemRyugyoDrill(
     EnumMastery.mining,
     additionalBaseStatus
 ) {
-    val maxHardness = status("maxHardness", { 2.0 + !strength * 0.02 }) { double2.positive }.setRange(2.0..20.0).setVisibility(EnumVisibility.DETAIL)
-    val range = status("range", { (1 + !extent * 0.01).toInt() }) { int.positive }.setRange(1..5).setVisibility(EnumVisibility.DETAIL)
-    val coolTime = status("coolTime", { cost * 2.0 }) { tick.negative }.setVisibility(EnumVisibility.DETAIL)
+    val maxHardness = status("maxHardness", { 2.0 + !strength * 0.02 }) { float2.positive }.setRange(2.0..20.0).setVisibility(EnumVisibility.DETAIL)
+    val range = status("range", { (1 + !extent * 0.01).toInt() }) { integer.positive }.setRange(1..5).setVisibility(EnumVisibility.DETAIL)
+    val coolTime = status("coolTime", { cost * 2.0 }) { duration.negative }.setVisibility(EnumVisibility.DETAIL)
 
     init {
         setHarvestLevel("pickaxe", 3)

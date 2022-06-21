@@ -11,6 +11,8 @@ import miragefairy2019.mod.fairyweapon.breakBlock
 import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
+import miragefairy2019.mod.fairyweapon.magic4.float2
+import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.spawnParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.skill.IMastery
@@ -44,7 +46,7 @@ abstract class ItemMiragiumToolBase(
     val production = createProductionStatus(additionalBaseStatus, Erg.HARVEST)
     val cost = createCostStatus()
 
-    val fortune = status("fortune", { !production * 0.03 }) { double2.positive }.setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL)
+    val fortune = status("fortune", { !production * 0.03 }) { float2.positive }.setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL)
     val wear = status("wear", { 1 / (25.0 + !endurance * 0.25) }) { percent2.positive }.setVisibility(EnumVisibility.DETAIL)
 
     @SideOnly(Side.CLIENT)

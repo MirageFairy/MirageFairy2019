@@ -27,7 +27,6 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.isNotEmpty
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.sandwich
-import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.fairyweapon.deprecated.MagicStatusFunctionArguments
@@ -38,15 +37,16 @@ import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.magic4.Formula
 import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
+import miragefairy2019.mod.fairyweapon.magic4.FormulaRendererSelector
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.MagicStatus
 import miragefairy2019.mod.fairyweapon.magic4.displayName
 import miragefairy2019.mod.fairyweapon.magic4.factors
+import miragefairy2019.mod.fairyweapon.magic4.float0
 import miragefairy2019.mod.fairyweapon.magic4.getDisplayValue
 import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.getSkillLevel
-import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
@@ -55,7 +55,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.util.NonNullList
-import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -90,31 +89,6 @@ class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>) {
 }
 
 fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
-
-
-class FormulaRendererSelector<T>
-
-class FormulaRendererScope<out T>(val formulaArguments: FormulaArguments, val formula: Formula<T>) {
-    val value by lazy { formula.calculate(formulaArguments) }
-}
-
-@Suppress("unused")
-private fun <T> FormulaRendererSelector<T>.createSimpleFormulaRenderer(function: FormulaRendererScope<T>.() -> ITextComponent) = FormulaRenderer<T> { formulaArguments, formula ->
-    FormulaRendererScope(formulaArguments, formula).function()
-}
-
-val FormulaRendererSelector<String>.string get() = createSimpleFormulaRenderer { textComponent { value() } }
-val FormulaRendererSelector<Int>.int get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%d")() } }
-val FormulaRendererSelector<Double>.double0 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.0f")() } }
-val FormulaRendererSelector<Double>.double1 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.1f")() } }
-val FormulaRendererSelector<Double>.double2 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.2f")() } }
-val FormulaRendererSelector<Double>.double3 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.3f")() } }
-val FormulaRendererSelector<Double>.percent0 get() = createSimpleFormulaRenderer { textComponent { (value * 100 formatAs "%.0f%%")() } }
-val FormulaRendererSelector<Double>.percent1 get() = createSimpleFormulaRenderer { textComponent { (value * 100 formatAs "%.1f%%")() } }
-val FormulaRendererSelector<Double>.percent2 get() = createSimpleFormulaRenderer { textComponent { (value * 100 formatAs "%.2f%%")() } }
-val FormulaRendererSelector<Double>.percent3 get() = createSimpleFormulaRenderer { textComponent { (value * 100 formatAs "%.3f%%")() } }
-val FormulaRendererSelector<Boolean>.boolean get() = createSimpleFormulaRenderer { textComponent { if (value) "Yes"() else "No"() } }
-val FormulaRendererSelector<Double>.tick get() = createSimpleFormulaRenderer { textComponent { (value / 20.0 formatAs "%.2f sec")() } }
 
 
 class MagicStatusFormulaScope(val arguments: FormulaArguments) {
@@ -260,7 +234,7 @@ fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthEr
         AQUA -> !AQUA
         DARK -> !DARK
     }
-}) { double0.positive }.setVisibility(EnumVisibility.ALWAYS)
+}) { float0.positive }.setVisibility(EnumVisibility.ALWAYS)
 
 fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Erg) = status("extent", {
     (weaponExtent + !extentErg) * (cost / 50.0) + when (weaponMana) {
@@ -271,7 +245,7 @@ fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Erg
         AQUA -> !GAIA + !WIND
         DARK -> !GAIA + !WIND
     }
-}) { double0.positive }.setVisibility(EnumVisibility.ALWAYS)
+}) { float0.positive }.setVisibility(EnumVisibility.ALWAYS)
 
 fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranceErg: Erg) = status("endurance", {
     (weaponEndurance + !enduranceErg) * (cost / 50.0) + when (weaponMana) {
@@ -282,7 +256,7 @@ fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranc
         AQUA -> !FIRE * 2
         DARK -> !FIRE + !AQUA
     }
-}) { double0.positive }.setVisibility(EnumVisibility.ALWAYS)
+}) { float0.positive }.setVisibility(EnumVisibility.ALWAYS)
 
 fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, productionErg: Erg) = status("production", {
     (weaponProduction + !productionErg) * (cost / 50.0) + when (weaponMana) {
@@ -293,6 +267,6 @@ fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, produc
         AQUA -> !SHINE + !DARK
         DARK -> !SHINE * 2
     }
-}) { double0.positive }.setVisibility(EnumVisibility.ALWAYS)
+}) { float0.positive }.setVisibility(EnumVisibility.ALWAYS)
 
-fun ItemFairyWeaponBase3.createCostStatus() = status("cost", { cost / (1.0 + getSkillLevel(mastery) * 0.002) }) { double0.negative }.setVisibility(EnumVisibility.ALWAYS)
+fun ItemFairyWeaponBase3.createCostStatus() = status("cost", { cost / (1.0 + getSkillLevel(mastery) * 0.002) }) { float0.negative }.setVisibility(EnumVisibility.ALWAYS)

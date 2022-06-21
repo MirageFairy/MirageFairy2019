@@ -23,7 +23,6 @@ import miragefairy2019.mod.fairyweapon.magic4.MagicStatus
 import miragefairy2019.mod.skill.EnumMastery
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.getSkillLevel
-import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.util.text.TextFormatting.GREEN
 import net.minecraft.util.text.TextFormatting.RED
@@ -64,15 +63,6 @@ fun <T : Comparable<T>> FormulaRenderer<T>.coloredBySign(colorPositive: TextForm
 
 val <T : Comparable<T>> FormulaRenderer<T>.positive get() = coloredBySign(GREEN, RED)
 val <T : Comparable<T>> FormulaRenderer<T>.negative get() = coloredBySign(RED, GREEN)
-
-fun FormulaRenderer<Boolean>.boolean(isPositive: Boolean) = FormulaRenderer<Boolean> { arguments, function ->
-    val value = function.calculate(arguments)
-    val displayValue = this@boolean.render(arguments, function)
-    textComponent { displayValue().withColor(if (value xor !isPositive) GREEN else RED) }
-}
-
-val FormulaRenderer<Boolean>.positiveBoolean get() = boolean(true)
-val FormulaRenderer<Boolean>.negativeBoolean get() = boolean(false)
 
 fun <T : Comparable<T>> MagicStatus<T>.ranged(min: T, max: T) = MagicStatus(
     name = this@ranged.name,

@@ -13,6 +13,7 @@ import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.findItem
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
+import miragefairy2019.mod.fairyweapon.magic4.percent1
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.entity.EntityLivingBase
