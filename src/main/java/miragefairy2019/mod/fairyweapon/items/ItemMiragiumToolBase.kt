@@ -52,7 +52,7 @@ abstract class ItemMiragiumToolBase(
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでブロックを破壊" // TODO translate
 
-    override val magic = magic {
+    override fun getMagic() = magic {
         val fairyType = findFairy(itemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
         val selectorRayTrace = MagicSelector.rayTrace(world, player, 0.0) // 視線判定
         if (fairyType.isEmpty) return@magic fail(selectorRayTrace.item.position, 0xFF00FF) // 妖精なし判定

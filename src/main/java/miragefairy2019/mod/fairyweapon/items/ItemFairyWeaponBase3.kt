@@ -125,13 +125,13 @@ abstract class ItemFairyWeaponBase3(
 
     // Magic
 
-    open val magic: Magic? = null
+    open fun getMagic(): Magic? = null
 
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
         val itemStack = player.getHeldItem(hand) // アイテム取得
         val fairyType = findFairy(itemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
 
-        val magicHandler = magic.getMagicHandler(MagicScope(this, player.proxy, world, player, itemStack, fairyType))
+        val magicHandler = getMagic().getMagicHandler(MagicScope(this, player.proxy, world, player, itemStack, fairyType))
         return ActionResult(magicHandler.onItemRightClick(hand), itemStack)
     }
 
@@ -142,7 +142,7 @@ abstract class ItemFairyWeaponBase3(
         val fairyType = findFairy(itemStack, entity)?.second ?: EMPTY_FAIRY // 妖精取得
         if (!world.isRemote) return // クライアントワールドでなければ中止
 
-        val magicHandler = magic.getMagicHandler(MagicScope(this, entity.proxy, world, entity, itemStack, fairyType))
+        val magicHandler = getMagic().getMagicHandler(MagicScope(this, entity.proxy, world, entity, itemStack, fairyType))
         magicHandler.onUpdate(itemSlot, isSelected)
     }
 
@@ -151,7 +151,7 @@ abstract class ItemFairyWeaponBase3(
         if (attacker !is EntityPlayer) return true // プレイヤー取得
         val fairyType = findFairy(itemStack, attacker)?.second ?: EMPTY_FAIRY // 妖精取得
 
-        val magicHandler = magic.getMagicHandler(MagicScope(this, attacker.proxy, attacker.world, attacker, itemStack, fairyType))
+        val magicHandler = getMagic().getMagicHandler(MagicScope(this, attacker.proxy, attacker.world, attacker, itemStack, fairyType))
         magicHandler.hitEntity(target)
         return true
     }

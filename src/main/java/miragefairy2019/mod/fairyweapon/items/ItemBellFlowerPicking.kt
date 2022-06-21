@@ -64,7 +64,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでミラージュフラワーを収穫" // TODO translate
 
-    override val magic = magic {
+    override fun getMagic() = magic {
 
         // 視線判定
         val magicSelectorRayTrace = MagicSelector.rayTraceBlock(world, player, !additionalReach)

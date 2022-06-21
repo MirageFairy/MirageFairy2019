@@ -42,7 +42,7 @@ class ItemCrystalSword : ItemFairyWeaponBase3(Mana.GAIA, EnumMastery.closeCombat
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "撃破時、フェアリークリスタルを消費して妖精を召喚" // TODO translate
 
-    override val magic = magic {
+    override fun getMagic() = magic {
         object : MagicHandler() {
             override fun hitEntity(target: EntityLivingBase) {
                 if (target.health > 0) return // 撃破時のみ有効
