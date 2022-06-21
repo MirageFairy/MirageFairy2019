@@ -17,10 +17,12 @@ class MakeBlockStatesScope(val resourceName: ResourceName)
 
 
 data class DataBlockStates(
+    val forgeMarker: Int? = null,
     val variants: Map<String, DataBlockState>? = null,
     val multipart: List<DataPart>? = null
 ) {
     val jsonElement = jsonObjectNotNull(
+        "forge_marker" to forgeMarker?.jsonElement,
         "variants" to variants?.mapValues { (_, it) -> it.jsonElement }?.jsonObject,
         "multipart" to multipart?.map { it.jsonElement }?.jsonArray
     )
@@ -30,7 +32,8 @@ data class DataBlockState(
     val model: String,
     val x: Int? = null,
     val y: Int? = null,
-    val z: Int? = null
+    val z: Int? = null,
+    val custom: JsonElement? = null
 ) {
     constructor(model: ResourceName, x: Int? = null, y: Int? = null, z: Int? = null) : this(model.toString(), x, y, z)
 
@@ -38,7 +41,8 @@ data class DataBlockState(
         "model" to model.jsonElement,
         "x" to x?.jsonElement,
         "y" to y?.jsonElement,
-        "z" to z?.jsonElement
+        "z" to z?.jsonElement,
+        "custom" to custom
     )
 }
 
@@ -54,3 +58,15 @@ data class DataPart(
 
 
 val MakeBlockStatesScope.normal get() = DataBlockStates(variants = mapOf("normal" to DataBlockState(resourceName)))
+val MakeBlockStatesScope.fluid
+    get() = DataBlockStates(
+        forgeMarker = 1,
+        variants = mapOf(
+            "fluid" to DataBlockState(
+                model = "forge:fluid",
+                custom = jsonObject(
+                    "fluid" to resourceName.path.jsonElement
+                )
+            )
+        )
+    )
