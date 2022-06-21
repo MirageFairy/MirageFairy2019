@@ -76,13 +76,22 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), IMagicStatusContainer {
 
     open fun getMagic(): Magic? = null
 
+    open val isOldMana get() = false
+
     private fun getMagicArguments(player: EntityPlayer, weaponItemStack: ItemStack, partnerFairyType: IFairyType) = object : MagicArguments {
         override val hasPartnerFairy get() = !partnerFairyType.isEmpty
         override fun getRawMana(mana: Mana): Double {
-            val a = partnerFairyType.manaSet / (cost / 50.0) // パートナー妖精のマナ
-            val b = a + player.proxy.playerAuraHandler.playerAura // プレイヤーオーラの加算
-            val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(EnumMastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
-            return c[mana]
+            if (isOldMana) {
+                val a = partnerFairyType.manaSet // パートナー妖精のマナ
+                val b = a + player.proxy.playerAuraHandler.playerAura * (partnerFairyType.cost / 50.0) // プレイヤーオーラの加算
+                val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(EnumMastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
+                return c[mana]
+            } else {
+                val a = partnerFairyType.manaSet / (cost / 50.0) // パートナー妖精のマナ
+                val b = a + player.proxy.playerAuraHandler.playerAura // プレイヤーオーラの加算
+                val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(EnumMastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
+                return c[mana]
+            }
         }
 
         override fun getRawErg(erg: Erg) = partnerFairyType.erg(erg)
