@@ -1,7 +1,7 @@
 package miragefairy2019.mod.oreseed;
 
+import kotlin.text.StringsKt;
 import mirrg.boron.util.UtilsMath;
-import mirrg.boron.util.UtilsString;
 import org.jetbrains.annotations.NotNull;
 import scala.util.Random;
 
@@ -160,7 +160,7 @@ public class VeinHelper {
             System.out.println(String.format("%3d %7.5f %s",
                 i,
                 a * 100,
-                UtilsString.repeat('|', (int) (100 * a * 100))));
+                StringsKt.repeat("|", (int) (100 * a * 100))));
         }
 
     }

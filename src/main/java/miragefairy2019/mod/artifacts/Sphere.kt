@@ -24,7 +24,7 @@ import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.makeItemModel
-import mirrg.boron.util.UtilsString
+import mirrg.kotlin.hydrogen.toUpperCaseHead
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
@@ -84,7 +84,7 @@ object Sphere {
 
                 fun register(suffix: String, vararg additionalIngredients: Ingredient) {
                     val ingredients = listOf(
-                        OreIngredient("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(ergType.toString())}"),
+                        OreIngredient("mirageFairy2019FairyAbility${ergType.toString().toUpperCaseHead()}"),
                         *additionalIngredients
                     )
 
@@ -129,7 +129,7 @@ class SphereType(
     val gemSupplier: (() -> Ingredient)?
 )
 
-val SphereType.oreName: String get() = "mirageFairy2019Sphere${UtilsString.toUpperCaseHead(ergType.toString())}"
+val SphereType.oreName: String get() = "mirageFairy2019Sphere${ergType.toString().toUpperCaseHead()}"
 
 val Erg.sphereType
     get(): SphereType {

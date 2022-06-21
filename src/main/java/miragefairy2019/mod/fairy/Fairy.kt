@@ -10,7 +10,7 @@ import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.makeItemModel
-import mirrg.boron.util.UtilsString
+import mirrg.kotlin.hydrogen.toUpperCaseHead
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
@@ -144,7 +144,7 @@ object Fairy {
                     // エルグ別
                     variant.bundle[i].type.ergSet.entries.forEach {
                         if (it.second >= 10) {
-                            OreDictionary.registerOre("mirageFairy2019FairyAbility${UtilsString.toUpperCaseHead(it.first.toString())}", variant.bundle[i].createItemStack())
+                            OreDictionary.registerOre("mirageFairy2019FairyAbility${it.first.toString().toUpperCaseHead()}", variant.bundle[i].createItemStack())
                         }
                     }
 
