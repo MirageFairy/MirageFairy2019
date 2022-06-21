@@ -73,7 +73,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
         val magicSelectorPosition = magicSelectorRayTrace.position
 
         // 妖精を持っていない場合、中止
-        if (fairyType.isEmpty) return@magic object : MagicHandler() {
+        if (!hasPartnerFairy) return@magic object : MagicHandler() {
             override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0xFF00FF) // 視点
             }
@@ -99,7 +99,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
             .toList() // リストにする
 
         // 資源がない場合、中止
-        if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic object : MagicHandler() {
+        if (weaponItemStack.itemDamage + ceil(!wear).toInt() > weaponItemStack.maxDamage) return@magic object : MagicHandler() {
             override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0xFF0000) // 視点
                 magicSelectorCircle.item.doEffect() // 範囲
@@ -141,13 +141,13 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                         val blockPos = pair.first
                         val pickExecutor = pair.second
 
-                        if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@targets // 耐久が足りないので中止
+                        if (weaponItemStack.itemDamage + ceil(!wear).toInt() > weaponItemStack.maxDamage) return@targets // 耐久が足りないので中止
                         if (targetCount + 1 > !maxTargetCount) return@targets // パワーが足りないので中止
 
                         // 成立
 
                         // 資源消費
-                        itemStack.damageItem(world.rand.randomInt(!wear), player)
+                        weaponItemStack.damageItem(world.rand.randomInt(!wear), player)
                         targetCount++
 
                         // 音取得
@@ -185,7 +185,6 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                         }
 
                         // エフェクト
-                        val color = fairyType.color
                         world.spawnParticle(
                             EnumParticleTypes.SPELL_MOB,
                             blockPos.x + 0.5,

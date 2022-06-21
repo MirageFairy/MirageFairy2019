@@ -53,10 +53,10 @@ abstract class ItemMiragiumToolBase(
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでブロックを破壊" // TODO translate
 
     override fun getMagic() = magic {
-        val fairyType = findFairy(itemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
+        val fairyType = findFairy(weaponItemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
         val selectorRayTrace = MagicSelector.rayTrace(world, player, 0.0) // 視線判定
         if (fairyType.isEmpty) return@magic fail(selectorRayTrace.item.position, 0xFF00FF) // 妖精なし判定
-        if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic fail(selectorRayTrace.item.position, 0xFF0000) // 材料なし判定
+        if (weaponItemStack.itemDamage + ceil(!wear).toInt() > weaponItemStack.maxDamage) return@magic fail(selectorRayTrace.item.position, 0xFF0000) // 材料なし判定
         val targets = selectorRayTrace.item.blockPos.let { if (selectorRayTrace.item.sideHit != null) it.offset(selectorRayTrace.item.sideHit!!) else it }.let { iterateTargets(this@magic, it) } // 対象判定
         if (!targets.hasNext()) return@magic fail(selectorRayTrace.item.position, 0x00FFFF) // ターゲットなし判定
         if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic fail(selectorRayTrace.item.position, 0xFFFF00) // クールダウン判定
@@ -74,11 +74,11 @@ abstract class ItemMiragiumToolBase(
                 run breakExecution@{
                     targets.forEach { target ->
                         val damage = world.rand.randomInt(!wear) // 耐久コスト
-                        if (itemStack.itemDamage + damage > itemStack.maxDamage) return@breakExecution // 耐久不足なら終了
+                        if (weaponItemStack.itemDamage + damage > weaponItemStack.maxDamage) return@breakExecution // 耐久不足なら終了
 
                         // 破壊成立
-                        itemStack.damageItem(damage, player)
-                        breakBlock(world, player, EnumFacing.UP, itemStack, target, world.rand.randomInt(!fortune), false)
+                        weaponItemStack.damageItem(damage, player)
+                        breakBlock(world, player, EnumFacing.UP, weaponItemStack, target, world.rand.randomInt(!fortune), false)
                         val blockState = world.getBlockState(target)
                         breakSound = blockState.block.getSoundType(blockState, world, target, player).breakSound
                         count++
@@ -118,5 +118,5 @@ abstract class ItemMiragiumToolBase(
     @Suppress("SimplifyBooleanWithConstants")
     open fun canBreak(magicScope: MagicScope, blockPos: BlockPos) = true
         && magicScope.world.getBlockState(blockPos).getBlockHardness(magicScope.world, blockPos) >= 0 // 岩盤であってはならない
-        && isEffective(magicScope.itemStack, magicScope.world.getBlockState(blockPos)) // 効果的でなければならない
+        && isEffective(magicScope.weaponItemStack, magicScope.world.getBlockState(blockPos)) // 効果的でなければならない
 }

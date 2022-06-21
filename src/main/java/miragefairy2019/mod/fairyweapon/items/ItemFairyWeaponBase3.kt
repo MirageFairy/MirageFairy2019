@@ -60,15 +60,17 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 
 class MagicScope(
-    val item: ItemFairyWeaponBase3,
+    val weaponItem: ItemFairyWeaponBase3,
     val player: EntityPlayer,
-    val itemStack: ItemStack,
+    val weaponItemStack: ItemStack,
     val partnerFairyType: IFairyType
 ) {
+    val hasPartnerFairy get() = !partnerFairyType.isEmpty
     operator fun <T> MagicStatusWrapper<T>.not() = !magicStatus
     operator fun <T> MagicStatus<T>.not(): T = formula.calculate(MagicStatusFunctionArguments(player.proxy, { getSkillLevel(it) }, fairyType))
     fun getSkillLevel(mastery: IMastery) = player.proxy.skillContainer.getSkillLevel(mastery)
-    val fairyType get() = item.getActualFairyType(player.proxy, partnerFairyType)
+    private val fairyType get() = weaponItem.getActualFairyType(player.proxy, partnerFairyType)
+    val color get() = partnerFairyType.color
 }
 
 val MagicScope.world get() = player.world
