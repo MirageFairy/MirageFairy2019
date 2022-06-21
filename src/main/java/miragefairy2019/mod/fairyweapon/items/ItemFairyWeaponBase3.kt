@@ -46,6 +46,7 @@ import miragefairy2019.mod.fairyweapon.magic4.getDisplayValue
 import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.getSkillLevel
+import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
@@ -91,21 +92,29 @@ class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>) {
 fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
 
 
-class MagicStatusFormatterScope<T>
+class FormulaRendererSelector<T>
 
-private fun <T> MagicStatusFormatterScope<T>.f(block: (T) -> ITextComponent) = FormulaRenderer<T> { arguments, function -> block(function.calculate(arguments)) }
-val MagicStatusFormatterScope<String>.string get() = f { textComponent { format("%s", it) } }
-val MagicStatusFormatterScope<Int>.int get() = f { textComponent { format("%d", it) } }
-val MagicStatusFormatterScope<Double>.double0 get() = f { textComponent { format("%.0f", it) } }
-val MagicStatusFormatterScope<Double>.double1 get() = f { textComponent { format("%.1f", it) } }
-val MagicStatusFormatterScope<Double>.double2 get() = f { textComponent { format("%.2f", it) } }
-val MagicStatusFormatterScope<Double>.double3 get() = f { textComponent { format("%.3f", it) } }
-val MagicStatusFormatterScope<Double>.percent0 get() = f { textComponent { format("%.0f%%", it * 100) } }
-val MagicStatusFormatterScope<Double>.percent1 get() = f { textComponent { format("%.1f%%", it * 100) } }
-val MagicStatusFormatterScope<Double>.percent2 get() = f { textComponent { format("%.2f%%", it * 100) } }
-val MagicStatusFormatterScope<Double>.percent3 get() = f { textComponent { format("%.3f%%", it * 100) } }
-val MagicStatusFormatterScope<Boolean>.boolean get() = f { textComponent { if (it) "Yes"() else "No"() } }
-val MagicStatusFormatterScope<Double>.tick get() = f { textComponent { format("%.2f sec", it / 20.0) } }
+class FormulaRendererScope<out T>(val formulaArguments: FormulaArguments, val formula: Formula<T>) {
+    val value by lazy { formula.calculate(formulaArguments) }
+}
+
+@Suppress("unused")
+private fun <T> FormulaRendererSelector<T>.createSimpleFormulaRenderer(function: FormulaRendererScope<T>.() -> ITextComponent) = FormulaRenderer<T> { formulaArguments, formula ->
+    FormulaRendererScope(formulaArguments, formula).function()
+}
+
+val FormulaRendererSelector<String>.string get() = createSimpleFormulaRenderer { textComponent { value() } }
+val FormulaRendererSelector<Int>.int get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%d")() } }
+val FormulaRendererSelector<Double>.double0 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.0f")() } }
+val FormulaRendererSelector<Double>.double1 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.1f")() } }
+val FormulaRendererSelector<Double>.double2 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.2f")() } }
+val FormulaRendererSelector<Double>.double3 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.3f")() } }
+val FormulaRendererSelector<Double>.percent0 get() = createSimpleFormulaRenderer { textComponent { (value * 100 formatAs "%.0f%%")() } }
+val FormulaRendererSelector<Double>.percent1 get() = createSimpleFormulaRenderer { textComponent { (value * 100 formatAs "%.1f%%")() } }
+val FormulaRendererSelector<Double>.percent2 get() = createSimpleFormulaRenderer { textComponent { (value * 100 formatAs "%.2f%%")() } }
+val FormulaRendererSelector<Double>.percent3 get() = createSimpleFormulaRenderer { textComponent { (value * 100 formatAs "%.3f%%")() } }
+val FormulaRendererSelector<Boolean>.boolean get() = createSimpleFormulaRenderer { textComponent { if (value) "Yes"() else "No"() } }
+val FormulaRendererSelector<Double>.tick get() = createSimpleFormulaRenderer { textComponent { (value / 20.0 formatAs "%.2f sec")() } }
 
 
 class MagicStatusFormulaScope(val arguments: FormulaArguments) {
@@ -207,13 +216,13 @@ abstract class ItemFairyWeaponBase3(
 fun <T> ItemFairyWeaponBase3.status(
     name: String,
     formula: MagicStatusFormulaScope.() -> T,
-    formulaRendererGetter: MagicStatusFormatterScope<T>.() -> FormulaRenderer<T>
+    formulaRendererGetter: FormulaRendererSelector<T>.() -> FormulaRenderer<T>
 ): MagicStatusWrapper<T> {
     val magicStatusWrapper = MagicStatusWrapper(
         MagicStatus(
             name,
             Formula { MagicStatusFormulaScope(it).formula() },
-            MagicStatusFormatterScope<T>().formulaRendererGetter()
+            FormulaRendererSelector<T>().formulaRendererGetter()
         )
     )
     magicStatusWrapperList += magicStatusWrapper
