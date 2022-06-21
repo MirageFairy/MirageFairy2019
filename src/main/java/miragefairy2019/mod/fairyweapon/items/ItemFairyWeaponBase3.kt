@@ -91,16 +91,6 @@ class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>) {
 fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
 
 
-class MagicStatusFormulaScope(val arguments: FormulaArguments) {
-    fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
-    val cost get() = arguments.cost
-    operator fun Mana.not() = arguments.getOldMana(this)
-    operator fun Erg.not() = arguments.getRawErg(this)
-    operator fun <T> MagicStatusWrapper<T>.not() = !magicStatus
-    operator fun <T> MagicStatus<T>.not(): T = formula.calculate(arguments)
-}
-
-
 abstract class ItemFairyWeaponBase3(
     val weaponMana: Mana,
     val mastery: IMastery
@@ -172,6 +162,15 @@ abstract class ItemFairyWeaponBase3(
     }
 }
 
+class MagicStatusFormulaScope(val formulaArguments: FormulaArguments) {
+    operator fun Mana.not() = formulaArguments.getOldMana(this)
+    operator fun Erg.not() = formulaArguments.getRawErg(this)
+    operator fun IMastery.not() = formulaArguments.getSkillLevel(this)
+    val cost get() = formulaArguments.cost
+    operator fun <T> MagicStatusWrapper<T>.not() = !magicStatus
+    operator fun <T> MagicStatus<T>.not(): T = this(formulaArguments)
+}
+
 fun <T> ItemFairyWeaponBase3.status(
     name: String,
     formula: MagicStatusFormulaScope.() -> T,
@@ -211,7 +210,7 @@ fun ItemFairyWeaponBase3.getActualFairyType(playerProxy: PlayerProxy, fairyTypeP
 // Statuses
 
 fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthErg: Erg) = status("strength", {
-    (weaponStrength + !strengthErg + getSkillLevel(mastery) * 0.5) * (cost / 50.0) + when (weaponMana) {
+    (weaponStrength + !strengthErg + !mastery * 0.5) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !SHINE
         FIRE -> !FIRE
         WIND -> !WIND
@@ -254,4 +253,4 @@ fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, produc
     }
 }) { float0.positive }.setVisibility(EnumVisibility.ALWAYS)
 
-fun ItemFairyWeaponBase3.createCostStatus() = status("cost", { cost / (1.0 + getSkillLevel(mastery) * 0.002) }) { float0.negative }.setVisibility(EnumVisibility.ALWAYS)
+fun ItemFairyWeaponBase3.createCostStatus() = status("cost", { cost / (1.0 + !mastery * 0.002) }) { float0.negative }.setVisibility(EnumVisibility.ALWAYS)

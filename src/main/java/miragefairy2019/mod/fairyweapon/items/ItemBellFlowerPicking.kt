@@ -59,7 +59,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
     val wear = status("wear", { 1.0 / (1 + !endurance * 0.03) }) { percent2.negative }.setVisibility(EnumVisibility.DETAIL)
     val coolTime = status("coolTime", { cost * 0.5 }) { duration.negative }.setVisibility(EnumVisibility.DETAIL)
     val collection = status("collection", { !WARP >= 10 }) { boolean.positive }.setVisibility(EnumVisibility.ALWAYS)
-    val extraItemDropRate = status("extraItemDropRate", { 0.1 + extraItemDropRateFactor * getSkillLevel(mastery) atMost maxExtraItemDropRate }) { percent1.positive }.setVisibility(EnumVisibility.ALWAYS)
+    val extraItemDropRate = status("extraItemDropRate", { 0.1 + extraItemDropRateFactor * !mastery atMost maxExtraItemDropRate }) { percent1.positive }.setVisibility(EnumVisibility.ALWAYS)
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでミラージュフラワーを収穫" // TODO translate
