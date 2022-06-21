@@ -15,6 +15,7 @@ import miragefairy2019.lib.times
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.flatten
 import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.isNotEmpty
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.white
@@ -53,15 +54,19 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), IMagicStatusContainer {
     @SideOnly(Side.CLIENT)
     override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: NonNullList<String>, flag: ITooltipFlag) {
         val player = Minecraft.getMinecraft().player ?: return
-        magicStatusList.forEach {
-            val show = when (it.visibility) {
+        magicStatusList.forEach { magicStatus ->
+            val show = when (magicStatus.visibility) {
                 EnumVisibility.ALWAYS -> true
                 EnumVisibility.DETAIL -> flag.isAdvanced
                 EnumVisibility.NEVER -> false
             }
             if (show) {
                 val magicArguments = getMagicArguments(player, itemStackFairyWeapon, fairyType)
-                tooltip += formattedText { (it.displayName() + ": "() + it.getDisplayValue(magicArguments)().white + " ("() + it.factors.map { it() }.sandwich { ", "() }.flatten() + ")"()).blue }
+                tooltip += formattedText {
+                    val factors = magicStatus.factors.map { it() }.sandwich { ", "() }.flatten()
+                    val tail = if (factors.isNotEmpty) " ("() + factors + ")"() else empty
+                    (magicStatus.displayName() + ": "() + magicStatus.getDisplayValue(magicArguments)().white + tail).blue
+                }
             }
         }
     }
