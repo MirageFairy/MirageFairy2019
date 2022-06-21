@@ -24,6 +24,7 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setOrRemove
 import miragefairy2019.libkt.setUnlocalizedName
+import miragefairy2019.libkt.sq
 import miragefairy2019.libkt.string
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
@@ -493,7 +494,7 @@ class TileEntityRendererChatWebhookTransmitter : TileEntitySpecialRenderer<TileE
         if (!Minecraft.isGuiEnabled()) return // Guiがオフなら中止
         val blockPosTarget = rendererDispatcher.cameraHitResult?.blockPos ?: return // 何にもヒットしていないなら中止
         if (blockPosTarget != tileEntity.pos) return // このブロックを見ていないなら中止
-        if (tileEntity.getDistanceSq(rendererDispatcher.entity.posX, rendererDispatcher.entity.posY, rendererDispatcher.entity.posZ) > 12 * 12) return // 離れすぎているなら中止
+        if (tileEntity.getDistanceSq(rendererDispatcher.entity.posX, rendererDispatcher.entity.posY, rendererDispatcher.entity.posZ) > 12.sq()) return // 離れすぎているなら中止
 
         // ネームプレートを表示
         setLightmapDisabled(true)

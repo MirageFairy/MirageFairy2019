@@ -246,7 +246,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
             // 対象にパーティクルを表示
             ParticleUtilKt.spawnParticleTargets(
                 world,
-                resultWithFairy.targets.stream().filter(entityTarget -> entityTarget.getDistanceSq(player) > 0.2 * 0.2).collect(Collectors.toList()),
+                resultWithFairy.targets.stream().filter(entityTarget -> entityTarget.getDistanceSq(player) > 0.2.sq()).collect(Collectors.toList()),
                 entityTarget -> entityTarget.getPositionVector(),
                 e -> 0xFFFFFF);
 

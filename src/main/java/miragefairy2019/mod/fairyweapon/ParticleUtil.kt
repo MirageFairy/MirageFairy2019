@@ -1,6 +1,7 @@
 package miragefairy2019.mod.fairyweapon
 
 import miragefairy2019.libkt.randomInt
+import miragefairy2019.libkt.sq
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.max
 import net.minecraft.entity.Entity
@@ -130,9 +131,9 @@ fun spawnParticleSphericalRange(world: World, positionCenter: Vec3d, radius: Dou
             // 高さを地面にくっつけるために、高さを地面の高さに固定した状態で横位置を調整する
             val y = floor(positionParticle.y) + 0.15 // 修正後の地面の高さ
             val offsetY = y - positionCenter.y // 修正後のZ差分
-            val r1 = sqrt(offset.x * offset.x + offset.z * offset.z) // 元々のオフセットの横の距離
+            val r1 = sqrt(offset.x.sq() + offset.z.sq()) // 元々のオフセットの横の距離
             if (r1.isNaN()) return@nextArm // 謎エラー対策
-            val r2 = sqrt(radius * radius - offsetY * offsetY) // 修正後の横の距離
+            val r2 = sqrt(radius.sq() - offsetY.sq()) // 修正後の横の距離
             if (r2.isNaN()) return@nextArm // 謎エラー対策
             val offsetX = offset.x / r1 * r2 // 修正後のX差分
             val offsetZ = offset.z / r1 * r2 // 修正後のZ差分

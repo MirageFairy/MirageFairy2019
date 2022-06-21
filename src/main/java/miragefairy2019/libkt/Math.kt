@@ -3,8 +3,10 @@ package miragefairy2019.libkt
 import java.util.Random
 import kotlin.math.floor
 
-fun Int.squared() = this * this
-fun Double.squared() = this * this
+fun Int.sq() = this * this
+fun Long.sq() = this * this
+fun Float.sq() = this * this
+fun Double.sq() = this * this
 
 /** 期待値がdになるように整数の乱数を生成します。 */
 fun Random.randomInt(d: Double): Int {

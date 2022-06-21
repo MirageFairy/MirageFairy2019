@@ -1,6 +1,7 @@
 package miragefairy2019.lib
 
 import miragefairy2019.libkt.axisAlignedBBOf
+import miragefairy2019.libkt.sq
 import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.fairyweapon.getSight
@@ -41,8 +42,8 @@ fun MagicSelector<WorldCircle>.blocks() = MagicSelector(
             (floor(item.position.z - item.radius).toInt()..ceil(item.position.z + item.radius).toInt()).mapNotNull { z ->
                 val dx = (x + 0.5) - item.position.x
                 val dz = (z + 0.5) - item.position.z
-                val distanceSquared = dx * dx + dz * dz
-                if (distanceSquared <= item.radius * item.radius) Pair(BlockPos(x, y, z), distanceSquared) else null
+                val distanceSquared = dx.sq() + dz.sq()
+                if (distanceSquared <= item.radius.sq()) Pair(BlockPos(x, y, z), distanceSquared) else null
             }
         }
     }
@@ -109,7 +110,7 @@ fun <E : Entity> MagicSelector<WorldSphere>.entities(classEntity: Class<E>, pred
         val dx = d(item.position.x, e.posX - e.width / 2.0, e.posX + e.width / 2.0)
         val dy = d(item.position.y, e.posY, e.posY + e.width)
         val dz = d(item.position.z, e.posZ - e.width / 2.0, e.posZ + e.width / 2.0)
-        dx * dx + dy * dy + dz * dz <= item.radius * item.radius
+        dx.sq() + dy.sq() + dz.sq() <= item.radius.sq()
     }
     getAllEntities().filter(predicate).sortedBy { it.getDistanceSq(item.position.x, item.position.y, item.position.z) }.take(maxTargetCount)
 }))

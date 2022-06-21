@@ -14,6 +14,7 @@ import miragefairy2019.lib.toNbt
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.equalsItemDamageTag
+import miragefairy2019.libkt.sq
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
@@ -153,7 +154,7 @@ fun <E : Entity> getEntities(classEntity: Class<E>, world: World, positionCenter
         )
     ) { e ->
         if (e == null) return@getEntitiesWithinAABB false
-        if (e.getDistanceSq(positionCenter.x, positionCenter.y, positionCenter.z) > radius * radius) return@getEntitiesWithinAABB false
+        if (e.getDistanceSq(positionCenter.x, positionCenter.y, positionCenter.z) > radius.sq()) return@getEntitiesWithinAABB false
         true
     }
 }
