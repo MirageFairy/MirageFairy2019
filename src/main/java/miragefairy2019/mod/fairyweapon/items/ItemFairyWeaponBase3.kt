@@ -94,9 +94,9 @@ abstract class ItemFairyWeaponBase3(
             @JvmField
             var visibility = NEVER
             fun setVisibility(it: EnumVisibility) = apply { this.visibility = it }
-            override fun getName(): String = magicStatus.name
-            override fun getFormula(): Formula<T> = magicStatus.formula
-            override fun getRenderer(): FormulaRenderer<T> = magicStatus.renderer
+            override val name get() = magicStatus.name
+            override val formula get() = magicStatus.formula
+            override val renderer get() = magicStatus.renderer
         }
 
         fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
