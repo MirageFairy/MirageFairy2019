@@ -34,8 +34,8 @@ val FormulaRendererSelector<Double>.percent3 get() = createSimpleFormulaRenderer
 val FormulaRendererSelector<Boolean>.boolean get() = createSimpleFormulaRenderer { textComponent { if (value) "Yes"() else "No"() } }
 val FormulaRendererSelector<CriticalRate>.criticalRate get() = createSimpleFormulaRenderer { textComponent { value.bar.map { "|"().withColor(it.color) }.flatten() + (value.mean formatAs " (%.2f)")() } }
 
-fun <T> FormulaRenderer<T>.map(function: FormulaRendererScope<T>.(ITextComponent) -> ITextComponent): FormulaRenderer<T> = object : FormulaRenderer<T> {
-    override fun render(formulaArguments: FormulaArguments, formula: Formula<T>) = FormulaRendererScope(formulaArguments, formula).function(this@map.render(formulaArguments, formula))
+fun <T> FormulaRenderer<T>.map(function: FormulaRendererScope<T>.(ITextComponent) -> ITextComponent): FormulaRenderer<T> = FormulaRenderer { formulaArguments, formula ->
+    FormulaRendererScope(formulaArguments, formula).function(this@map.render(formulaArguments, formula))
 }
 
 fun <T> FormulaRenderer<T>.prefix(string: String) = map { textComponent { string() + it() } }
