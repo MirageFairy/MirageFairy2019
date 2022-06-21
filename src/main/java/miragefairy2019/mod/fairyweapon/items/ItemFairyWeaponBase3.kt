@@ -91,21 +91,22 @@ class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>) {
 fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
 
 
-class MagicStatusFormatterScope<T> {
-    private fun <T> f(block: (T) -> ITextComponent) = FormulaRenderer<T> { arguments, function -> block(function.calculate(arguments)) }
-    val string get() = f<T> { textComponent { format("%s", it) } }
-    val int get() = f<Int> { textComponent { format("%d", it) } }
-    val double0 get() = f<Double> { textComponent { format("%.0f", it) } }
-    val double1 get() = f<Double> { textComponent { format("%.1f", it) } }
-    val double2 get() = f<Double> { textComponent { format("%.2f", it) } }
-    val double3 get() = f<Double> { textComponent { format("%.3f", it) } }
-    val percent0 get() = f<Double> { textComponent { format("%.0f%%", it * 100) } }
-    val percent1 get() = f<Double> { textComponent { format("%.1f%%", it * 100) } }
-    val percent2 get() = f<Double> { textComponent { format("%.2f%%", it * 100) } }
-    val percent3 get() = f<Double> { textComponent { format("%.3f%%", it * 100) } }
-    val boolean get() = f<Boolean> { textComponent { if (it) "Yes"() else "No"() } }
-    val tick get() = f<Double> { textComponent { format("%.2f sec", it / 20.0) } }
-}
+class MagicStatusFormatterScope<T>
+
+private fun <T> MagicStatusFormatterScope<T>.f(block: (T) -> ITextComponent) = FormulaRenderer<T> { arguments, function -> block(function.calculate(arguments)) }
+val MagicStatusFormatterScope<String>.string get() = f { textComponent { format("%s", it) } }
+val MagicStatusFormatterScope<Int>.int get() = f { textComponent { format("%d", it) } }
+val MagicStatusFormatterScope<Double>.double0 get() = f { textComponent { format("%.0f", it) } }
+val MagicStatusFormatterScope<Double>.double1 get() = f { textComponent { format("%.1f", it) } }
+val MagicStatusFormatterScope<Double>.double2 get() = f { textComponent { format("%.2f", it) } }
+val MagicStatusFormatterScope<Double>.double3 get() = f { textComponent { format("%.3f", it) } }
+val MagicStatusFormatterScope<Double>.percent0 get() = f { textComponent { format("%.0f%%", it * 100) } }
+val MagicStatusFormatterScope<Double>.percent1 get() = f { textComponent { format("%.1f%%", it * 100) } }
+val MagicStatusFormatterScope<Double>.percent2 get() = f { textComponent { format("%.2f%%", it * 100) } }
+val MagicStatusFormatterScope<Double>.percent3 get() = f { textComponent { format("%.3f%%", it * 100) } }
+val MagicStatusFormatterScope<Boolean>.boolean get() = f { textComponent { if (it) "Yes"() else "No"() } }
+val MagicStatusFormatterScope<Double>.tick get() = f { textComponent { format("%.2f sec", it / 20.0) } }
+
 
 class MagicStatusFormulaScope(val arguments: FormulaArguments) {
     fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
