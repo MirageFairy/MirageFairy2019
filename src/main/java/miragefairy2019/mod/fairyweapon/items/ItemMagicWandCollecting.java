@@ -4,6 +4,7 @@ import kotlin.Pair;
 import miragefairy2019.api.Erg;
 import miragefairy2019.api.IFairyType;
 import miragefairy2019.lib.ErgKt;
+import miragefairy2019.libkt.MathKt;
 import miragefairy2019.mod.Main;
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.mod.fairyweapon.ParticleUtilKt;
@@ -246,7 +247,7 @@ public class ItemMagicWandCollecting extends ItemFairyWeapon {
             // 対象にパーティクルを表示
             ParticleUtilKt.spawnParticleTargets(
                 world,
-                resultWithFairy.targets.stream().filter(entityTarget -> entityTarget.getDistanceSq(player) > 0.2.sq()).collect(Collectors.toList()),
+                resultWithFairy.targets.stream().filter(entityTarget -> entityTarget.getDistanceSq(player) > MathKt.sq(0.2)).collect(Collectors.toList()),
                 entityTarget -> entityTarget.getPositionVector(),
                 e -> 0xFFFFFF);
 
