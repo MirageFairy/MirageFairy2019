@@ -9,7 +9,6 @@ import miragefairy2019.api.Mana.FIRE
 import miragefairy2019.api.Mana.GAIA
 import miragefairy2019.api.Mana.SHINE
 import miragefairy2019.api.Mana.WIND
-import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.lib.div
 import miragefairy2019.lib.erg
@@ -61,41 +60,6 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-
-class MagicScope(
-    private val weaponItem3: ItemFairyWeaponBase3,
-    override val player: EntityPlayer,
-    override val weaponItemStack: ItemStack,
-    private val partnerFairyType: IFairyType
-) : MagicArguments {
-    override val weaponItem get() = weaponItem3
-    override val hasPartnerFairy get() = !partnerFairyType.isEmpty
-    operator fun <T> MagicStatusWrapper<T>.not() = !magicStatus
-    operator fun <T> MagicStatus<T>.not() = formula.calculate(this@MagicScope)
-    override fun getSkillLevel(mastery: IMastery) = player.proxy.skillContainer.getSkillLevel(mastery)
-    override val color get() = partnerFairyType.color
-    override val cost get() = partnerFairyType.cost
-
-    private fun getActualManaSet(): ManaSet {
-        val a = partnerFairyType.manaSet // パートナー妖精のマナ
-        val b = a + player.proxy.playerAuraHandler.playerAura * (partnerFairyType.cost / 50.0) // プレイヤーオーラの加算
-        val c = b * (1.0 + 0.001 * player.proxy.skillContainer.getSkillLevel(weaponItem.mastery)) // スキルレベル補正
-        return c
-    }
-
-    override fun getOldMana(mana: Mana) = getActualManaSet()[mana]
-
-    override fun getRawMana(mana: Mana): Double {
-        val a = partnerFairyType.manaSet / (cost / 50.0) // パートナー妖精のマナ
-        val b = a + player.proxy.playerAuraHandler.playerAura // プレイヤーオーラの加算
-        val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(EnumMastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
-        return c[mana]
-    }
-
-    override fun getRawErg(erg: Erg) = partnerFairyType.erg(erg)
-}
-
-
 class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>)
 
 fun <T> MagicStatusWrapper<T>.setVisibility(visibility: EnumVisibility) = apply { magicStatus = MagicStatus(magicStatus.name, magicStatus.formula, magicStatus.renderer, visibility) }
@@ -127,7 +91,7 @@ abstract class ItemFairyWeaponBase3(
                         return if (list.isNotEmpty) " ("() + list + ")"() else empty
                     }
 
-                    val formulaArguments = MagicScope(this@ItemFairyWeaponBase3, player, itemStackFairyWeapon, fairyType)
+                    val formulaArguments = getMagicArguments(player, itemStackFairyWeapon, fairyType)
                     concat(
                         it.magicStatus.displayName(),
                         ": "(),
@@ -144,11 +108,37 @@ abstract class ItemFairyWeaponBase3(
 
     open fun getMagic(): Magic? = null
 
+    fun getMagicArguments(player: EntityPlayer, weaponItemStack: ItemStack, partnerFairyType: IFairyType) = object : MagicArguments {
+        override val hasPartnerFairy get() = !partnerFairyType.isEmpty
+
+        override fun getOldMana(mana: Mana): Double {
+            val a = partnerFairyType.manaSet // パートナー妖精のマナ
+            val b = a + player.proxy.playerAuraHandler.playerAura * (partnerFairyType.cost / 50.0) // プレイヤーオーラの加算
+            val c = b * (1.0 + 0.001 * player.proxy.skillContainer.getSkillLevel(this.weaponItem.mastery)) // スキルレベル補正
+            return c[mana]
+        }
+
+        override fun getRawMana(mana: Mana): Double {
+            val a = partnerFairyType.manaSet / (cost / 50.0) // パートナー妖精のマナ
+            val b = a + player.proxy.playerAuraHandler.playerAura // プレイヤーオーラの加算
+            val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(EnumMastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
+            return c[mana]
+        }
+
+        override fun getRawErg(erg: Erg) = partnerFairyType.erg(erg)
+        override val cost get() = partnerFairyType.cost
+        override val color get() = partnerFairyType.color
+        override fun getSkillLevel(mastery: IMastery) = player.proxy.skillContainer.getSkillLevel(mastery)
+        override val weaponItem get() = this@ItemFairyWeaponBase3
+        override val weaponItemStack get() = weaponItemStack
+        override val player get() = player
+    }
+
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
         val itemStack = player.getHeldItem(hand) // アイテム取得
         val fairyType = findFairy(itemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
 
-        val magicHandler = getMagic().getMagicHandler(MagicScope(this, player, itemStack, fairyType))
+        val magicHandler = getMagic().getMagicHandler(getMagicArguments(player, itemStack, fairyType))
         return ActionResult(magicHandler.onItemRightClick(hand), itemStack)
     }
 
@@ -159,7 +149,7 @@ abstract class ItemFairyWeaponBase3(
         val fairyType = findFairy(itemStack, entity)?.second ?: EMPTY_FAIRY // 妖精取得
         if (!world.isRemote) return // クライアントワールドでなければ中止
 
-        val magicHandler = getMagic().getMagicHandler(MagicScope(this, entity, itemStack, fairyType))
+        val magicHandler = getMagic().getMagicHandler(getMagicArguments(entity, itemStack, fairyType))
         magicHandler.onUpdate(itemSlot, isSelected)
     }
 
@@ -168,7 +158,7 @@ abstract class ItemFairyWeaponBase3(
         if (attacker !is EntityPlayer) return true // プレイヤー取得
         val fairyType = findFairy(itemStack, attacker)?.second ?: EMPTY_FAIRY // 妖精取得
 
-        val magicHandler = getMagic().getMagicHandler(MagicScope(this, attacker, itemStack, fairyType))
+        val magicHandler = getMagic().getMagicHandler(getMagicArguments(attacker, itemStack, fairyType))
         magicHandler.hitEntity(target)
         return true
     }
