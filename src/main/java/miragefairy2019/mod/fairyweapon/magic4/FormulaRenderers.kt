@@ -16,8 +16,8 @@ class FormulaRendererScope<out T>(val formulaArguments: FormulaArguments, val fo
 }
 
 @Suppress("unused")
-private fun <T> FormulaRendererSelector<T>.createSimpleFormulaRenderer(function: FormulaRendererScope<T>.() -> ITextComponent): FormulaRenderer<T> = object : FormulaRenderer<T> {
-    override fun render(formulaArguments: FormulaArguments, formula: Formula<T>) = FormulaRendererScope(formulaArguments, formula).function()
+private fun <T> FormulaRendererSelector<T>.createSimpleFormulaRenderer(function: FormulaRendererScope<T>.() -> ITextComponent): FormulaRenderer<T> = FormulaRenderer { formulaArguments, formula ->
+     FormulaRendererScope(formulaArguments, formula).function()
 }
 
 val FormulaRendererSelector<Int>.integer get() = createSimpleFormulaRenderer { textComponent { "$value"() } }
