@@ -46,6 +46,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), IMagicStatusContainer {
 
     // Magic Status
+
     override val magicStatusList = mutableListOf<MagicStatus<*>>()
 
     @SideOnly(Side.CLIENT)
