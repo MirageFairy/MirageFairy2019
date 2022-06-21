@@ -35,9 +35,6 @@ import miragefairy2019.mod.fairyweapon.deprecated.negative
 import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.deprecated.ranged
 import miragefairy2019.mod.fairyweapon.findFairy
-import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
-import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
-import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.NEVER
 import miragefairy2019.mod.fairyweapon.magic4.Formula
 import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
@@ -71,7 +68,7 @@ class MagicScope(
     val itemStack: ItemStack,
     val partnerFairyType: IFairyType
 ) {
-    operator fun <T> ItemFairyWeaponBase3.Companion.MagicStatusWrapper<T>.not() = !magicStatus
+    operator fun <T> MagicStatusWrapper<T>.not() = !magicStatus
     operator fun <T> MagicStatus<T>.not(): T = formula.calculate(MagicStatusFunctionArguments(playerProxy, { getSkillLevel(it) }, fairyType))
     fun getSkillLevel(mastery: IMastery) = playerProxy.skillContainer.getSkillLevel(mastery)
     val fairyType get() = item.getActualFairyType(playerProxy, partnerFairyType)
@@ -84,61 +81,61 @@ fun magic(magic: Magic) = magic
 fun Magic?.getMagicHandler(magicScope: MagicScope) = this?.invoke(magicScope) ?: object : MagicHandler() {}
 
 
+enum class EnumVisibility { ALWAYS, DETAIL, NEVER }
+class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>) {
+    @JvmField
+    var visibility = EnumVisibility.NEVER
+    fun setVisibility(it: EnumVisibility) = apply { this.visibility = it }
+}
+
+fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
+
+
+class MagicStatusFormatterScope<T> {
+    private fun <T> f(block: (T) -> ITextComponent) = FormulaRenderer<T> { arguments, function -> block(function.calculate(arguments)) }
+    val string get() = f<T> { textComponent { format("%s", it) } }
+    val int get() = f<Int> { textComponent { format("%d", it) } }
+    val double0 get() = f<Double> { textComponent { format("%.0f", it) } }
+    val double1 get() = f<Double> { textComponent { format("%.1f", it) } }
+    val double2 get() = f<Double> { textComponent { format("%.2f", it) } }
+    val double3 get() = f<Double> { textComponent { format("%.3f", it) } }
+    val percent0 get() = f<Double> { textComponent { format("%.0f%%", it * 100) } }
+    val percent1 get() = f<Double> { textComponent { format("%.1f%%", it * 100) } }
+    val percent2 get() = f<Double> { textComponent { format("%.2f%%", it * 100) } }
+    val percent3 get() = f<Double> { textComponent { format("%.3f%%", it * 100) } }
+    val boolean get() = f<Boolean> { textComponent { if (it) "Yes"() else "No"() } }
+    val tick get() = f<Double> { textComponent { format("%.2f sec", it / 20.0) } }
+}
+
+class MagicStatusFormulaScope(val arguments: FormulaArguments) {
+    fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
+    val cost get() = arguments.cost
+    operator fun Mana.not() = arguments.getOldMana(this)
+    operator fun Erg.not() = arguments.getRawErg(this)
+    operator fun <T> MagicStatusWrapper<T>.not() = !magicStatus
+    operator fun <T> MagicStatus<T>.not(): T = formula.calculate(arguments)
+}
+
+/**
+ * @return
+ * スキルレベルが[minSkillLevel]に届かない場合、0。
+ * スキルレベルが[minSkillLevel]から[maxSkillLevel]にかけて、[minValue]と[maxValue]の間を遷移。
+ * スキルレベルが[maxSkillLevel]を超える場合、[maxValue]でリミット。
+ */
+fun MagicStatusFormulaScope.skillFunction1(mastery: IMastery, minSkillLevel: Int, maxSkillLevel: Int, minValue: Double, maxValue: Double): Double {
+    val skillLevel = getSkillLevel(mastery)
+    return when {
+        skillLevel < minSkillLevel -> 0.0
+        skillLevel > maxSkillLevel -> maxValue
+        else -> minValue + (maxValue - minValue) * ((skillLevel - minSkillLevel) / (maxSkillLevel - minSkillLevel))
+    }
+}
+
+
 abstract class ItemFairyWeaponBase3(
     val weaponMana: Mana,
     val mastery: IMastery
 ) : ItemFairyWeapon() {
-    companion object {
-        enum class EnumVisibility { ALWAYS, DETAIL, NEVER }
-        class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>) {
-            @JvmField
-            var visibility = NEVER
-            fun setVisibility(it: EnumVisibility) = apply { this.visibility = it }
-        }
-
-        fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
-
-        class MagicStatusFormatterScope<T> {
-            private fun <T> f(block: (T) -> ITextComponent) = FormulaRenderer<T> { arguments, function -> block(function.calculate(arguments)) }
-            val string get() = f<T> { textComponent { format("%s", it) } }
-            val int get() = f<Int> { textComponent { format("%d", it) } }
-            val double0 get() = f<Double> { textComponent { format("%.0f", it) } }
-            val double1 get() = f<Double> { textComponent { format("%.1f", it) } }
-            val double2 get() = f<Double> { textComponent { format("%.2f", it) } }
-            val double3 get() = f<Double> { textComponent { format("%.3f", it) } }
-            val percent0 get() = f<Double> { textComponent { format("%.0f%%", it * 100) } }
-            val percent1 get() = f<Double> { textComponent { format("%.1f%%", it * 100) } }
-            val percent2 get() = f<Double> { textComponent { format("%.2f%%", it * 100) } }
-            val percent3 get() = f<Double> { textComponent { format("%.3f%%", it * 100) } }
-            val boolean get() = f<Boolean> { textComponent { if (it) "Yes"() else "No"() } }
-            val tick get() = f<Double> { textComponent { format("%.2f sec", it / 20.0) } }
-        }
-
-        class MagicStatusFormulaScope(val arguments: FormulaArguments) {
-            fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
-            val cost get() = arguments.cost
-            operator fun Mana.not() = arguments.getOldMana(this)
-            operator fun Erg.not() = arguments.getRawErg(this)
-            operator fun <T> MagicStatusWrapper<T>.not() = !magicStatus
-            operator fun <T> MagicStatus<T>.not(): T = formula.calculate(arguments)
-        }
-
-        /**
-         * @return
-         * スキルレベルが[minSkillLevel]に届かない場合、0。
-         * スキルレベルが[minSkillLevel]から[maxSkillLevel]にかけて、[minValue]と[maxValue]の間を遷移。
-         * スキルレベルが[maxSkillLevel]を超える場合、[maxValue]でリミット。
-         */
-        fun MagicStatusFormulaScope.skillFunction1(mastery: IMastery, minSkillLevel: Int, maxSkillLevel: Int, minValue: Double, maxValue: Double): Double {
-            val skillLevel = getSkillLevel(mastery)
-            return when {
-                skillLevel < minSkillLevel -> 0.0
-                skillLevel > maxSkillLevel -> maxValue
-                else -> minValue + (maxValue - minValue) * ((skillLevel - minSkillLevel) / (maxSkillLevel - minSkillLevel))
-            }
-        }
-    }
-
 
     // Magic Status
 
@@ -150,9 +147,9 @@ abstract class ItemFairyWeaponBase3(
         val actualFairyType = getActualFairyType(playerProxy, fairyType)
         magicStatusWrapperList.forEach {
             val show = when (it.visibility) {
-                ALWAYS -> true
-                DETAIL -> flag.isAdvanced
-                NEVER -> false
+                EnumVisibility.ALWAYS -> true
+                EnumVisibility.DETAIL -> flag.isAdvanced
+                EnumVisibility.NEVER -> false
             }
             if (show) {
                 tooltip += formattedText {
@@ -208,14 +205,14 @@ abstract class ItemFairyWeaponBase3(
 
 fun <T> ItemFairyWeaponBase3.status(
     name: String,
-    formula: ItemFairyWeaponBase3.Companion.MagicStatusFormulaScope.() -> T,
-    formulaRendererGetter: ItemFairyWeaponBase3.Companion.MagicStatusFormatterScope<T>.() -> FormulaRenderer<T>
-): ItemFairyWeaponBase3.Companion.MagicStatusWrapper<T> {
-    val magicStatusWrapper = ItemFairyWeaponBase3.Companion.MagicStatusWrapper(
+    formula: MagicStatusFormulaScope.() -> T,
+    formulaRendererGetter: MagicStatusFormatterScope<T>.() -> FormulaRenderer<T>
+): MagicStatusWrapper<T> {
+    val magicStatusWrapper = MagicStatusWrapper(
         MagicStatus(
             name,
-            Formula { ItemFairyWeaponBase3.Companion.MagicStatusFormulaScope(it).formula() },
-            ItemFairyWeaponBase3.Companion.MagicStatusFormatterScope<T>().formulaRendererGetter()
+            Formula { MagicStatusFormulaScope(it).formula() },
+            MagicStatusFormatterScope<T>().formulaRendererGetter()
         )
     )
     magicStatusWrapperList += magicStatusWrapper
@@ -253,7 +250,7 @@ fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthEr
         AQUA -> !AQUA
         DARK -> !DARK
     }
-}) { double0.positive }.setVisibility(ALWAYS)
+}) { double0.positive }.setVisibility(EnumVisibility.ALWAYS)
 
 fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Erg) = status("extent", {
     (weaponExtent + !extentErg) * (cost / 50.0) + when (weaponMana) {
@@ -264,7 +261,7 @@ fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Erg
         AQUA -> !GAIA + !WIND
         DARK -> !GAIA + !WIND
     }
-}) { double0.positive }.setVisibility(ALWAYS)
+}) { double0.positive }.setVisibility(EnumVisibility.ALWAYS)
 
 fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranceErg: Erg) = status("endurance", {
     (weaponEndurance + !enduranceErg) * (cost / 50.0) + when (weaponMana) {
@@ -275,7 +272,7 @@ fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranc
         AQUA -> !FIRE * 2
         DARK -> !FIRE + !AQUA
     }
-}) { double0.positive }.setVisibility(ALWAYS)
+}) { double0.positive }.setVisibility(EnumVisibility.ALWAYS)
 
 fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, productionErg: Erg) = status("production", {
     (weaponProduction + !productionErg) * (cost / 50.0) + when (weaponMana) {
@@ -286,6 +283,6 @@ fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, produc
         AQUA -> !SHINE + !DARK
         DARK -> !SHINE * 2
     }
-}) { double0.positive }.setVisibility(ALWAYS)
+}) { double0.positive }.setVisibility(EnumVisibility.ALWAYS)
 
-fun ItemFairyWeaponBase3.createCostStatus() = status("cost", { cost / (1.0 + getSkillLevel(mastery) * 0.002) }) { double0.negative }.setVisibility(ALWAYS)
+fun ItemFairyWeaponBase3.createCostStatus() = status("cost", { cost / (1.0 + getSkillLevel(mastery) * 0.002) }) { double0.negative }.setVisibility(EnumVisibility.ALWAYS)
