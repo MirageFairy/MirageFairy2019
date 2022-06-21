@@ -126,8 +126,8 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
     // 挙動
 
     // エンティティを殴ると1/8の確率で削れる
-    override fun hitEntity(stack: ItemStack, target: EntityLivingBase, attacker: EntityLivingBase): Boolean {
-        if (itemRand.nextDouble() < 1.0 / 8.0) damageItem(stack, attacker)
+    override fun hitEntity(itemStack: ItemStack, target: EntityLivingBase, attacker: EntityLivingBase): Boolean {
+        if (itemRand.nextDouble() < 1.0 / 8.0) damageItem(itemStack, attacker)
         return true
     }
 
