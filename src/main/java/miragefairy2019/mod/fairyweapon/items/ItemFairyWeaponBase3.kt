@@ -32,7 +32,6 @@ import miragefairy2019.libkt.white
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.fairyweapon.deprecated.MagicStatusFunctionArguments
 import miragefairy2019.mod.fairyweapon.deprecated.displayName
-import miragefairy2019.mod.fairyweapon.deprecated.factors
 import miragefairy2019.mod.fairyweapon.deprecated.getDisplayValue
 import miragefairy2019.mod.fairyweapon.deprecated.negative
 import miragefairy2019.mod.fairyweapon.deprecated.positive
@@ -46,6 +45,7 @@ import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.MagicStatus
+import miragefairy2019.mod.fairyweapon.magic4.factors
 import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.getSkillLevel
@@ -168,7 +168,7 @@ abstract class ItemFairyWeaponBase3(
             if (show) {
                 tooltip += formattedText {
                     fun <T> TextComponentScope.f(magicStatus: MagicStatus<T>): TextComponentWrapper {
-                        val list = magicStatus.formula.factors.map { it() }.sandwich { ", "() }.flatten()
+                        val list = magicStatus.factors.map { it() }.sandwich { ", "() }.flatten()
                         return if (list.isNotEmpty) " ("() + list + ")"() else empty
                     }
                     concat(
