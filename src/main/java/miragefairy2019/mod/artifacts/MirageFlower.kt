@@ -31,7 +31,6 @@ import miragefairy2019.resourcemaker.generated
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
-import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.or
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.Block
@@ -254,7 +253,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solid„Åß„Å
     fun getAge(state: IBlockState): Int = state.getValue(AGE)
     fun isMaxAge(state: IBlockState) = getAge(state) == 3
     fun grow(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random, rate: Double) {
-        repeat(UtilsMath.randomInt(rand, rate)) {
+        repeat(rand.randomInt(rate)) {
             if (!isMaxAge(state)) worldIn.setBlockState(pos, defaultState.withProperty(AGE, getAge(state) + 1), 2)
         }
     }

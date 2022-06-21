@@ -18,6 +18,7 @@ import miragefairy2019.lib.doEffect
 import miragefairy2019.lib.position
 import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.libkt.norm1
+import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.artifacts.FairyLog
 import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.breakBlock
@@ -37,7 +38,6 @@ import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.search
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.skill.EnumMastery
-import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.block.BlockLeaves
@@ -118,7 +118,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
                         // 成立
 
                         remainingPower -= powerCost // パワー消費
-                        weaponItemStack.damageItem(UtilsMath.randomInt(world.rand, wear()), player) // 耐久消費
+                        weaponItemStack.damageItem(world.rand.randomInt(wear()), player) // 耐久消費
 
                         // 音取得
                         blockState.block.getSoundType(blockState, world, blockPos, player).breakSound.let {
@@ -134,7 +134,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
                             magicSelectorRayTrace.item.rayTraceResult!!.sideHit,
                             weaponItemStack,
                             targetBlockPos,
-                            UtilsMath.randomInt(world.rand, fortune()),
+                            world.rand.randomInt(fortune()),
                             collection()
                         )
                         if (collection()) collected = true

@@ -4,6 +4,7 @@ import kotlin.Pair;
 import miragefairy2019.api.Erg;
 import miragefairy2019.api.IFairyType;
 import miragefairy2019.lib.ErgKt;
+import miragefairy2019.libkt.MathKt;
 import miragefairy2019.mod.Main;
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.mod.fairyweapon.ParticleUtilKt;
@@ -224,7 +225,7 @@ public class ItemOcarinaTemptation extends ItemFairyWeapon {
 
                 // 行使
                 {
-                    int damage = UtilsMath.randomInt(world.rand, resultWithFairy.status.wear);
+                    int damage = MathKt.randomInt(world.rand, resultWithFairy.status.wear);
                     System.out.println(damage);
                     for (int i = 0; i < damage; i++) {
                         itemStack.damageItem(1, player);

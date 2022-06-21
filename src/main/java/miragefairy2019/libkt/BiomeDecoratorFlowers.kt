@@ -1,6 +1,5 @@
 package miragefairy2019.libkt
 
-import mirrg.boron.util.UtilsMath
 import net.minecraft.world.biome.Biome
 import net.minecraft.world.gen.feature.WorldGenerator
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent
@@ -11,7 +10,7 @@ class BiomeDecoratorFlowers(
     private val canGenerate: (Biome) -> Boolean
 ) {
     fun decorate(event: DecorateBiomeEvent.Post) {
-        repeat(UtilsMath.randomInt(event.rand, chancesPerChunk)) {
+        repeat(event.rand.randomInt(chancesPerChunk)) {
             val pos = event.chunkPos.getBlock(
                 8 + event.rand.nextInt(16),
                 0,

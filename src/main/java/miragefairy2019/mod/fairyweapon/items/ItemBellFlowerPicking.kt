@@ -12,6 +12,7 @@ import miragefairy2019.lib.position
 import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
+import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
 import miragefairy2019.mod.fairyweapon.deprecated.negative
@@ -21,7 +22,6 @@ import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponBase3.Companion.Enum
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.skill.EnumMastery
-import mirrg.boron.util.UtilsMath
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.item.EntityXPOrb
@@ -143,7 +143,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                         // 成立
 
                         // 資源消費
-                        itemStack.damageItem(UtilsMath.randomInt(world.rand, !wear), player)
+                        itemStack.damageItem(world.rand.randomInt(!wear), player)
                         targetCount++
 
                         // 音取得
@@ -156,12 +156,12 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                         run {
 
                             // 収穫試行
-                            val result = pickExecutor.tryPick(UtilsMath.randomInt(world.rand, !fortune))
+                            val result = pickExecutor.tryPick(world.rand.randomInt(!fortune))
                             if (!result) return@targets
 
                             // 種の追加ドロップ
                             if (!world.isRemote) {
-                                val count = UtilsMath.randomInt(world.rand, !extraItemDropRate)
+                                val count = world.rand.randomInt(!extraItemDropRate)
                                 if (count > 0) MirageFlower.itemMirageFlowerSeeds().createItemStack(count = count).drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
                             }
 

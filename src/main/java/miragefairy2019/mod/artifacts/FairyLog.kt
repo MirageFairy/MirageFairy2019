@@ -4,6 +4,7 @@ import miragefairy2019.lib.selectFairyLogDrop
 import miragefairy2019.libkt.block
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
+import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
@@ -20,7 +21,6 @@ import miragefairy2019.resourcemaker.block
 import miragefairy2019.resourcemaker.makeBlockModel
 import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
-import mirrg.boron.util.UtilsMath
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
 import net.minecraft.block.BlockOldLog
@@ -126,7 +126,7 @@ object FairyLog {
             MinecraftForge.EVENT_BUS.register(object {
                 @SubscribeEvent
                 fun handle(event: DecorateBiomeEvent.Post) {
-                    val times = UtilsMath.randomInt(event.rand, (event.world.height.toDouble() / 16.0) * 50.0) // 1セクションあたり50回判定を行う // TODO
+                    val times = event.rand.randomInt((event.world.height.toDouble() / 16.0) * 50.0) // 1セクションあたり50回判定を行う // TODO
                     repeat(times) {
                         val facing = EnumFacing.HORIZONTALS[event.rand.nextInt(4)]
                         val posLog = event.chunkPos.getBlock(
