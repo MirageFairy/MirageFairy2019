@@ -77,7 +77,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
 
         // 妖精を持っていない場合、中止
         if (!hasPartnerFairy) return@magic object : MagicHandler() {
-            override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
+            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0xFF00FF) // 視点
             }
         }
@@ -103,7 +103,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
 
         // 資源がない場合、中止
         if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic object : MagicHandler() {
-            override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
+            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0xFF0000) // 視点
                 magicSelectorCircle.item.doEffect() // 範囲
             }
@@ -111,7 +111,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
 
         // 発動対象がない場合、中止
         if (listTarget.isEmpty()) return@magic object : MagicHandler() {
-            override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
+            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0x00FFFF) // 視点
                 magicSelectorCircle.item.doEffect() // 範囲
             }
@@ -119,7 +119,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
 
         // クールタイムが残っている場合、中止
         if (player.cooldownTracker.hasCooldown(this@ItemBellFlowerPicking)) return@magic object : MagicHandler() {
-            override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
+            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0xFFFF00) // 視点
                 magicSelectorCircle.item.doEffect() // 範囲
                 spawnParticleTargets(world, listTarget, { Vec3d(it.first).addVector(0.5, 0.5, 0.5) }, { 0xFFFF00 }) // 対象
@@ -128,7 +128,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
 
         // 魔法成立
         object : MagicHandler() {
-            override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
+            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0x00FF00) // 視点
                 magicSelectorCircle.item.doEffect() // 範囲
                 spawnParticleTargets(world, listTarget, { Vec3d(it.first).addVector(0.5, 0.5, 0.5) }, { 0x00FF00 }) // 対象

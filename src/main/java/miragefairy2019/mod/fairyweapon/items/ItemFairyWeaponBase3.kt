@@ -26,7 +26,6 @@ import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
-import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
 import miragefairy2019.mod.fairyweapon.magic4.Formula
@@ -125,7 +124,7 @@ abstract class ItemFairyWeaponBase3(
         override val player get() = player
     }
 
-    override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
+    final override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
         val itemStack = player.getHeldItem(hand) // アイテム取得
         val fairyType = findFairy(itemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
 
@@ -133,18 +132,21 @@ abstract class ItemFairyWeaponBase3(
         return ActionResult(magicHandler.onItemRightClick(hand), itemStack)
     }
 
-    override fun onUpdate(itemStack: ItemStack, world: World, entity: Entity, itemSlot: Int, isSelected: Boolean) {
-        if (!side.isClient) return // クライアントサイドでなければ中止
+    final override fun onUpdate(itemStack: ItemStack, world: World, entity: Entity, itemSlot: Int, isSelected: Boolean) {
         if (entity !is EntityPlayer) return // プレイヤー取得
         if (!isSelected && entity.heldItemOffhand != itemStack) return // アイテム取得
         val fairyType = findFairy(itemStack, entity)?.second ?: EMPTY_FAIRY // 妖精取得
-        if (!world.isRemote) return // クライアントワールドでなければ中止
 
         val magicHandler = getMagic().getMagicHandler(getMagicArguments(entity, itemStack, fairyType))
         magicHandler.onUpdate(itemSlot, isSelected)
+        if (world.isRemote) {
+            magicHandler.onClientUpdate(itemSlot, isSelected)
+        } else {
+            magicHandler.onServerUpdate(itemSlot, isSelected)
+        }
     }
 
-    override fun hitEntity(itemStack: ItemStack, target: EntityLivingBase, attacker: EntityLivingBase): Boolean {
+    final override fun hitEntity(itemStack: ItemStack, target: EntityLivingBase, attacker: EntityLivingBase): Boolean {
         super.hitEntity(itemStack, target, attacker)
         if (attacker !is EntityPlayer) return true // プレイヤー取得
         val fairyType = findFairy(itemStack, attacker)?.second ?: EMPTY_FAIRY // 妖精取得

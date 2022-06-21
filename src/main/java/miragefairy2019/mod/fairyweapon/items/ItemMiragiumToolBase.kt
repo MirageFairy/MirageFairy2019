@@ -33,7 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
 fun MagicArguments.fail(cursor: Vec3d, color: Int) = object : MagicHandler() {
-    override fun onUpdate(itemSlot: Int, isSelected: Boolean) = spawnParticle(world, cursor, color)
+    override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) = spawnParticle(world, cursor, color)
 }
 
 abstract class ItemMiragiumToolBase(
@@ -102,7 +102,7 @@ abstract class ItemMiragiumToolBase(
                 return EnumActionResult.SUCCESS
             }
 
-            override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
+            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
                 spawnParticle(world, selectorRayTrace.item.position, 0xFFFFFF)
                 spawnParticleTargets(
                     world,
