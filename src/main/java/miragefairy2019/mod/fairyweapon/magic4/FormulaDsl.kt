@@ -28,14 +28,15 @@ class FormulaRendererSelector<T>
 fun <T> IMagicStatusContainer.status(
     name: String,
     formula: FormulaScope.() -> T,
-    formulaRendererGetter: FormulaRendererSelector<T>.() -> FormulaRenderer<T>
+    formulaRendererGetter: FormulaRendererSelector<T>.() -> FormulaRenderer<T>,
+    configurator: MagicStatusBuilder<T>.() -> Unit = {}
 ): MagicStatus<T> {
-    val magicStatus = MagicStatus(
+    val magicStatus = MagicStatusBuilder(
         name,
         Formula { FormulaScope(it).formula() },
         FormulaRendererSelector<T>().formulaRendererGetter(),
         EnumVisibility.ALWAYS
-    )
+    ).also { it.configurator() }.build()
     magicStatusList += magicStatus
     return magicStatus
 }

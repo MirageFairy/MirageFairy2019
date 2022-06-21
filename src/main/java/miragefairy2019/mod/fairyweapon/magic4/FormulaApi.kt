@@ -32,6 +32,15 @@ fun <T> FormulaRenderer(block: (formulaArguments: FormulaArguments, formula: For
 
 enum class EnumVisibility { ALWAYS, DETAIL, NEVER }
 
+class MagicStatusBuilder<T>(
+    var name: String,
+    var formula: Formula<T>,
+    var renderer: FormulaRenderer<T>,
+    var visibility: EnumVisibility
+) {
+    fun build() = MagicStatus(name, formula, renderer, visibility)
+}
+
 class MagicStatus<T>(
     val name: String,
     val formula: Formula<T>,
