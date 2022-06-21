@@ -100,21 +100,6 @@ class MagicStatusFormulaScope(val arguments: FormulaArguments) {
     operator fun <T> MagicStatus<T>.not(): T = formula.calculate(arguments)
 }
 
-/**
- * @return
- * スキルレベルが[minSkillLevel]に届かない場合、0。
- * スキルレベルが[minSkillLevel]から[maxSkillLevel]にかけて、[minValue]と[maxValue]の間を遷移。
- * スキルレベルが[maxSkillLevel]を超える場合、[maxValue]でリミット。
- */
-fun MagicStatusFormulaScope.skillFunction1(mastery: IMastery, minSkillLevel: Int, maxSkillLevel: Int, minValue: Double, maxValue: Double): Double {
-    val skillLevel = getSkillLevel(mastery)
-    return when {
-        skillLevel < minSkillLevel -> 0.0
-        skillLevel > maxSkillLevel -> maxValue
-        else -> minValue + (maxValue - minValue) * ((skillLevel - minSkillLevel) / (maxSkillLevel - minSkillLevel))
-    }
-}
-
 
 abstract class ItemFairyWeaponBase3(
     val weaponMana: Mana,
