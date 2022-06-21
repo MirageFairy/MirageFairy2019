@@ -1,6 +1,5 @@
 {
 	"type": "forge:ore_shaped",
-	"group": "crafting_fairy_wand",
 	"pattern": [
 		"sPI",
 		"fPR",

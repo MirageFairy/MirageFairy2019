@@ -1,6 +1,5 @@
 {
 	"type": "forge:ore_shaped",
-	"group": "light_magic_wand",
 	"pattern": [
 		"cal",
 		" #a",
