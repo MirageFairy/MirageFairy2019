@@ -30,9 +30,6 @@ import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.Main.side
-import miragefairy2019.mod.fairyweapon.deprecated.Formula
-import miragefairy2019.mod.fairyweapon.deprecated.FormulaArguments
-import miragefairy2019.mod.fairyweapon.deprecated.FormulaRenderer
 import miragefairy2019.mod.fairyweapon.deprecated.IMagicStatus
 import miragefairy2019.mod.fairyweapon.deprecated.MagicStatus
 import miragefairy2019.mod.fairyweapon.deprecated.MagicStatusFunctionArguments
@@ -46,6 +43,9 @@ import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
 import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
 import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.NEVER
+import miragefairy2019.mod.fairyweapon.magic4.Formula
+import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
+import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.IMastery
@@ -120,8 +120,8 @@ abstract class ItemFairyWeaponBase3(
         class MagicStatusFormulaScope(val arguments: FormulaArguments) {
             fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
             val cost get() = arguments.cost
-            operator fun Mana.not() = arguments.getManaValue(this)
-            operator fun Erg.not() = arguments.getErgValue(this)
+            operator fun Mana.not() = arguments.getOldMana(this)
+            operator fun Erg.not() = arguments.getRawErg(this)
             operator fun <T> IMagicStatus<T>.not(): T = formula.calculate(arguments)
         }
 

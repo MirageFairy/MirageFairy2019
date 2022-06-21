@@ -7,6 +7,7 @@ import net.minecraft.util.text.ITextComponent
 
 interface FormulaArguments {
     val hasPartnerFairy: Boolean
+    fun getOldMana(mana: Mana): Double = getRawMana(mana) * (cost / 50.0) // TODO remove
     fun getRawMana(mana: Mana): Double
     fun getRawErg(erg: Erg): Double
     val cost: Double

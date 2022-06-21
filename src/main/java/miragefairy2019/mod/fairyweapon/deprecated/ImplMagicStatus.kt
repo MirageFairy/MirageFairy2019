@@ -19,6 +19,9 @@ import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.withColor
+import miragefairy2019.mod.fairyweapon.magic4.Formula
+import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
+import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
 import miragefairy2019.mod.skill.EnumMastery
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.displayName
@@ -46,8 +49,7 @@ data class MagicStatusFunctionArguments(
     override fun getSkillLevel(mastery: IMastery) = getSkillLevel.invoke(mastery)
     override val cost get() = fairyType.cost
     override val color get() = fairyType.color
-    override fun getManaValue(mana: Mana) = fairyType.manaSet[mana]
-    override fun getErgValue(erg: Erg) = fairyType.ergSet[erg]
+    override fun getOldMana(mana: Mana) = fairyType.manaSet[mana]
     override fun getRawMana(mana: Mana): Double {
         val a = fairyType.manaSet / (cost / 50.0) // パートナー妖精のマナ
         val b = a + (playerProxy?.playerAuraHandler?.playerAura ?: ManaSet.ZERO) // プレイヤーオーラの加算
@@ -83,9 +85,7 @@ val <T> Formula<T>.factors
             override val cost get() = add(textComponent { translate("mirageFairy2019.formula.source.cost.name").darkPurple }) // TODO 色変更
             override val color get() = 0x000000
             override fun getRawMana(mana: Mana) = add(mana.displayName)
-            override fun getManaValue(mana: Mana) = add(mana.displayName)
             override fun getRawErg(erg: Erg) = add(erg.displayName)
-            override fun getErgValue(erg: Erg) = add(erg.displayName)
         })
         return factors
     }
