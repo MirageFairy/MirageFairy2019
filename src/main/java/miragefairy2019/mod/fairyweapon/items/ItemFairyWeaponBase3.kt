@@ -77,7 +77,7 @@ typealias Magic = MagicScope.() -> MagicHandler
 
 fun magic(magic: Magic) = magic
 
-fun Magic?.getMagicHandler(magicScope: MagicScope) = this?.invoke(magicScope) ?: object : MagicHandler() {}
+fun Magic?.getMagicHandler(magicScope: MagicScope) = this?.invoke(magicScope) ?: MagicHandler()
 
 
 class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>)
