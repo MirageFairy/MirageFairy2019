@@ -1,5 +1,6 @@
 package miragefairy2019.libkt
 
+import miragefairy2019.common.ResourceName
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.resourcemaker.ResourceMaker
@@ -87,17 +88,6 @@ class EventRegistry1<E> {
     operator fun invoke(listener: E.() -> Unit) = run { list += listener }
     operator fun invoke(event: E) = list.forEach { it(event) }
 }
-
-
-// ResourceName
-
-data class ResourceName(val domain: String, val path: String) {
-    override fun toString() = "$domain:$path"
-}
-
-fun ResourceName.map(function: (String) -> String) = ResourceName(domain, function(path))
-val ResourceName.resourceLocation get() = ResourceLocation(domain, path)
-val ResourceLocation.resourceName get() = ResourceName(resourceDomain, resourcePath)
 
 
 // Initializer
