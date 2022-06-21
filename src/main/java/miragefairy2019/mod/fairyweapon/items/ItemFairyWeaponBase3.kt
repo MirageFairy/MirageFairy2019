@@ -61,17 +61,17 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 class MagicScope(
     val item: ItemFairyWeaponBase3,
-    val playerProxy: PlayerProxy,
-    val world: World,
     val player: EntityPlayer,
     val itemStack: ItemStack,
     val partnerFairyType: IFairyType
 ) {
     operator fun <T> MagicStatusWrapper<T>.not() = !magicStatus
-    operator fun <T> MagicStatus<T>.not(): T = formula.calculate(MagicStatusFunctionArguments(playerProxy, { getSkillLevel(it) }, fairyType))
-    fun getSkillLevel(mastery: IMastery) = playerProxy.skillContainer.getSkillLevel(mastery)
-    val fairyType get() = item.getActualFairyType(playerProxy, partnerFairyType)
+    operator fun <T> MagicStatus<T>.not(): T = formula.calculate(MagicStatusFunctionArguments(player.proxy, { getSkillLevel(it) }, fairyType))
+    fun getSkillLevel(mastery: IMastery) = player.proxy.skillContainer.getSkillLevel(mastery)
+    val fairyType get() = item.getActualFairyType(player.proxy, partnerFairyType)
 }
+
+val MagicScope.world get() = player.world
 
 typealias Magic = MagicScope.() -> MagicHandler
 
@@ -131,7 +131,7 @@ abstract class ItemFairyWeaponBase3(
         val itemStack = player.getHeldItem(hand) // アイテム取得
         val fairyType = findFairy(itemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
 
-        val magicHandler = getMagic().getMagicHandler(MagicScope(this, player.proxy, world, player, itemStack, fairyType))
+        val magicHandler = getMagic().getMagicHandler(MagicScope(this, player, itemStack, fairyType))
         return ActionResult(magicHandler.onItemRightClick(hand), itemStack)
     }
 
@@ -142,7 +142,7 @@ abstract class ItemFairyWeaponBase3(
         val fairyType = findFairy(itemStack, entity)?.second ?: EMPTY_FAIRY // 妖精取得
         if (!world.isRemote) return // クライアントワールドでなければ中止
 
-        val magicHandler = getMagic().getMagicHandler(MagicScope(this, entity.proxy, world, entity, itemStack, fairyType))
+        val magicHandler = getMagic().getMagicHandler(MagicScope(this, entity, itemStack, fairyType))
         magicHandler.onUpdate(itemSlot, isSelected)
     }
 
@@ -151,7 +151,7 @@ abstract class ItemFairyWeaponBase3(
         if (attacker !is EntityPlayer) return true // プレイヤー取得
         val fairyType = findFairy(itemStack, attacker)?.second ?: EMPTY_FAIRY // 妖精取得
 
-        val magicHandler = getMagic().getMagicHandler(MagicScope(this, attacker.proxy, attacker.world, attacker, itemStack, fairyType))
+        val magicHandler = getMagic().getMagicHandler(MagicScope(this, attacker, itemStack, fairyType))
         magicHandler.hitEntity(target)
         return true
     }
