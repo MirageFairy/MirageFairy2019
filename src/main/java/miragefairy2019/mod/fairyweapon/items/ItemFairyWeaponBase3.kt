@@ -30,8 +30,6 @@ import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.Main.side
-import miragefairy2019.mod.fairyweapon.deprecated.IMagicStatus
-import miragefairy2019.mod.fairyweapon.deprecated.MagicStatus
 import miragefairy2019.mod.fairyweapon.deprecated.MagicStatusFunctionArguments
 import miragefairy2019.mod.fairyweapon.deprecated.displayName
 import miragefairy2019.mod.fairyweapon.deprecated.factors
@@ -47,6 +45,7 @@ import miragefairy2019.mod.fairyweapon.magic4.Formula
 import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
+import miragefairy2019.mod.fairyweapon.magic4.MagicStatus
 import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.getSkillLevel
@@ -72,7 +71,8 @@ class MagicScope(
     val itemStack: ItemStack,
     val partnerFairyType: IFairyType
 ) {
-    operator fun <T> IMagicStatus<T>.not(): T = formula.calculate(MagicStatusFunctionArguments(playerProxy, { getSkillLevel(it) }, fairyType))
+    operator fun <T> ItemFairyWeaponBase3.Companion.MagicStatusWrapper<T>.not() = !magicStatus
+    operator fun <T> MagicStatus<T>.not(): T = formula.calculate(MagicStatusFunctionArguments(playerProxy, { getSkillLevel(it) }, fairyType))
     fun getSkillLevel(mastery: IMastery) = playerProxy.skillContainer.getSkillLevel(mastery)
     val fairyType get() = item.getActualFairyType(playerProxy, partnerFairyType)
 }
@@ -90,13 +90,10 @@ abstract class ItemFairyWeaponBase3(
 ) : ItemFairyWeapon() {
     companion object {
         enum class EnumVisibility { ALWAYS, DETAIL, NEVER }
-        class MagicStatusWrapper<T>(var magicStatus: IMagicStatus<T>) : IMagicStatus<T> {
+        class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>) {
             @JvmField
             var visibility = NEVER
             fun setVisibility(it: EnumVisibility) = apply { this.visibility = it }
-            override val name get() = magicStatus.name
-            override val formula get() = magicStatus.formula
-            override val renderer get() = magicStatus.renderer
         }
 
         fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
@@ -122,7 +119,8 @@ abstract class ItemFairyWeaponBase3(
             val cost get() = arguments.cost
             operator fun Mana.not() = arguments.getOldMana(this)
             operator fun Erg.not() = arguments.getRawErg(this)
-            operator fun <T> IMagicStatus<T>.not(): T = formula.calculate(arguments)
+            operator fun <T> MagicStatusWrapper<T>.not() = !magicStatus
+            operator fun <T> MagicStatus<T>.not(): T = formula.calculate(arguments)
         }
 
         /**
@@ -169,15 +167,15 @@ abstract class ItemFairyWeaponBase3(
             }
             if (show) {
                 tooltip += formattedText {
-                    fun <T> TextComponentScope.f(magicStatus: IMagicStatus<T>): TextComponentWrapper {
+                    fun <T> TextComponentScope.f(magicStatus: MagicStatus<T>): TextComponentWrapper {
                         val list = magicStatus.formula.factors.map { it() }.sandwich { ", "() }.flatten()
                         return if (list.isNotEmpty) " ("() + list + ")"() else empty
                     }
                     concat(
-                        it.displayName(),
+                        it.magicStatus.displayName(),
                         ": "(),
-                        it.getDisplayValue(MagicStatusFunctionArguments(playerProxy, { mastery -> ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(mastery) }, actualFairyType))().white,
-                        f(it)
+                        it.magicStatus.getDisplayValue(MagicStatusFunctionArguments(playerProxy, { mastery -> ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(mastery) }, actualFairyType))().white,
+                        f(it.magicStatus)
                     ).blue
                 }
             }

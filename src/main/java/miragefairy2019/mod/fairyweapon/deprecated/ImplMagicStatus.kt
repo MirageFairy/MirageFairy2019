@@ -22,6 +22,7 @@ import miragefairy2019.libkt.withColor
 import miragefairy2019.mod.fairyweapon.magic4.Formula
 import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
+import miragefairy2019.mod.fairyweapon.magic4.MagicStatus
 import miragefairy2019.mod.skill.EnumMastery
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.displayName
@@ -30,15 +31,6 @@ import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.util.text.TextFormatting.GREEN
 import net.minecraft.util.text.TextFormatting.RED
-
-class MagicStatus<T>(
-    override val name: String,
-    private val function: Formula<T>,
-    private val formatter: FormulaRenderer<T>
-) : IMagicStatus<T> {
-    override val formula get() = function
-    override val renderer get() = formatter
-}
 
 data class MagicStatusFunctionArguments(
     private val playerProxy: PlayerProxy?,
@@ -61,9 +53,9 @@ data class MagicStatusFunctionArguments(
 }
 
 
-val <T> IMagicStatus<T>.displayName get() = textComponent { translate("mirageFairy2019.magic.status.$name.name") }
+val <T> MagicStatus<T>.displayName get() = textComponent { translate("mirageFairy2019.magic.status.$name.name") }
 
-fun <T> IMagicStatus<T>.getDisplayValue(arguments: FormulaArguments): ITextComponent = renderer.render(arguments, formula)
+fun <T> MagicStatus<T>.getDisplayValue(arguments: FormulaArguments): ITextComponent = renderer.render(arguments, formula)
 
 val <T> Formula<T>.defaultValue: T get() = calculate(MagicStatusFunctionArguments(null, { 0 }, EMPTY_FAIRY))
 
@@ -114,19 +106,18 @@ fun FormulaRenderer<Boolean>.boolean(isPositive: Boolean) = FormulaRenderer<Bool
 val FormulaRenderer<Boolean>.positiveBoolean get() = boolean(true)
 val FormulaRenderer<Boolean>.negativeBoolean get() = boolean(false)
 
-fun <T : Comparable<T>> IMagicStatus<T>.ranged(min: T, max: T) = object : IMagicStatus<T> {
-    override val name get() = this@ranged.name
-    override val formula get() = Formula { this@ranged.formula.calculate(it).coerceIn(min, max) }
-    override val renderer
-        get() = FormulaRenderer<T> { arguments, function ->
-            val value = function.calculate(arguments)
-            val defaultValue = function.defaultValue
-            val displayValue = this@ranged.renderer.render(arguments, function)
-            when (value) {
-                defaultValue -> displayValue
-                min -> textComponent { displayValue().bold }
-                max -> textComponent { displayValue().bold }
-                else -> displayValue
-            }
+fun <T : Comparable<T>> MagicStatus<T>.ranged(min: T, max: T) = MagicStatus(
+    name = this@ranged.name,
+    formula = Formula { this@ranged.formula.calculate(it).coerceIn(min, max) },
+    renderer = FormulaRenderer<T> { arguments, function ->
+        val value = function.calculate(arguments)
+        val defaultValue = function.defaultValue
+        val displayValue = this@ranged.renderer.render(arguments, function)
+        when (value) {
+            defaultValue -> displayValue
+            min -> textComponent { displayValue().bold }
+            max -> textComponent { displayValue().bold }
+            else -> displayValue
         }
-}
+    }
+)
