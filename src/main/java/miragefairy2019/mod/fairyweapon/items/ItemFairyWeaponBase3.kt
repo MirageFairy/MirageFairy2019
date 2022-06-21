@@ -32,9 +32,9 @@ import miragefairy2019.libkt.white
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
 import miragefairy2019.mod.fairyweapon.deprecated.IMagicStatus
-import miragefairy2019.mod.fairyweapon.deprecated.IMagicStatusFormatter
-import miragefairy2019.mod.fairyweapon.deprecated.IMagicStatusFunction
-import miragefairy2019.mod.fairyweapon.deprecated.IMagicStatusFunctionArguments
+import miragefairy2019.mod.fairyweapon.deprecated.FormulaRenderer
+import miragefairy2019.mod.fairyweapon.deprecated.Formula
+import miragefairy2019.mod.fairyweapon.deprecated.FormulaArguments
 import miragefairy2019.mod.fairyweapon.deprecated.MagicStatus
 import miragefairy2019.mod.fairyweapon.deprecated.MagicStatusFunctionArguments
 import miragefairy2019.mod.fairyweapon.deprecated.displayName
@@ -72,7 +72,7 @@ class MagicScope(
     val itemStack: ItemStack,
     val partnerFairyType: IFairyType
 ) {
-    operator fun <T> IMagicStatus<T>.not(): T = function.getValue(MagicStatusFunctionArguments({ getSkillLevel(it) }, fairyType))
+    operator fun <T> IMagicStatus<T>.not(): T = formula.calculate(MagicStatusFunctionArguments({ getSkillLevel(it) }, fairyType))
     fun getSkillLevel(mastery: IMastery) = playerProxy.skillContainer.getSkillLevel(mastery)
     val fairyType get() = item.getActualFairyType(playerProxy, partnerFairyType)
 }
@@ -95,14 +95,14 @@ abstract class ItemFairyWeaponBase3(
             var visibility = NEVER
             fun setVisibility(it: EnumVisibility) = apply { this.visibility = it }
             override fun getName(): String = magicStatus.name
-            override fun getFunction(): IMagicStatusFunction<T> = magicStatus.function
-            override fun getFormatter(): IMagicStatusFormatter<T> = magicStatus.formatter
+            override fun getFormula(): Formula<T> = magicStatus.formula
+            override fun getRenderer(): FormulaRenderer<T> = magicStatus.renderer
         }
 
         fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
 
         class MagicStatusFormatterScope<T> {
-            private fun <T> f(block: (T) -> ITextComponent) = IMagicStatusFormatter<T> { function, arguments -> block(function.getValue(arguments)) }
+            private fun <T> f(block: (T) -> ITextComponent) = FormulaRenderer<T> { arguments, function -> block(function.calculate(arguments)) }
             val string get() = f<T> { textComponent { format("%s", it) } }
             val int get() = f<Int> { textComponent { format("%d", it) } }
             val double0 get() = f<Double> { textComponent { format("%.0f", it) } }
@@ -117,12 +117,12 @@ abstract class ItemFairyWeaponBase3(
             val tick get() = f<Double> { textComponent { format("%.2f sec", it / 20.0) } }
         }
 
-        class MagicStatusFormulaScope(val arguments: IMagicStatusFunctionArguments) {
+        class MagicStatusFormulaScope(val arguments: FormulaArguments) {
             fun getSkillLevel(mastery: IMastery) = arguments.getSkillLevel(mastery)
             val cost get() = arguments.cost
             operator fun Mana.not() = arguments.getManaValue(this)
             operator fun Erg.not() = arguments.getErgValue(this)
-            operator fun <T> IMagicStatus<T>.not(): T = function.getValue(arguments)
+            operator fun <T> IMagicStatus<T>.not(): T = formula.calculate(arguments)
         }
 
         /**
@@ -145,11 +145,11 @@ abstract class ItemFairyWeaponBase3(
     // Magic Status
 
     private val magicStatusWrapperList = mutableListOf<MagicStatusWrapper<*>>()
-    internal operator fun <T> String.invoke(getFormatter: MagicStatusFormatterScope<T>.() -> IMagicStatusFormatter<T>, function: MagicStatusFormulaScope.() -> T): MagicStatusWrapper<T> {
+    internal operator fun <T> String.invoke(getFormatter: MagicStatusFormatterScope<T>.() -> FormulaRenderer<T>, function: MagicStatusFormulaScope.() -> T): MagicStatusWrapper<T> {
         val magicStatusWrapper = MagicStatusWrapper(
             MagicStatus(
                 this,
-                IMagicStatusFunction<T> { MagicStatusFormulaScope(it).function() },
+                Formula<T> { MagicStatusFormulaScope(it).function() },
                 MagicStatusFormatterScope<T>().getFormatter()
             )
         )
@@ -170,7 +170,7 @@ abstract class ItemFairyWeaponBase3(
             if (show) {
                 tooltip += formattedText {
                     fun <T> TextComponentScope.f(magicStatus: IMagicStatus<T>): TextComponentWrapper {
-                        val list = magicStatus.function.factors.map { it() }.sandwich { ", "() }.flatten()
+                        val list = magicStatus.formula.factors.map { it() }.sandwich { ", "() }.flatten()
                         return if (list.isNotEmpty) " ("() + list + ")"() else empty
                     }
                     concat(

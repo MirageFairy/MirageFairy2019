@@ -20,18 +20,18 @@ import net.minecraft.util.text.TextFormatting.RED
 
 class MagicStatus<T>(
     private val name: String,
-    private val function: IMagicStatusFunction<T>,
-    private val formatter: IMagicStatusFormatter<T>
+    private val function: Formula<T>,
+    private val formatter: FormulaRenderer<T>
 ) : IMagicStatus<T> {
     override fun getName() = name
-    override fun getFunction() = function
-    override fun getFormatter() = formatter
+    override fun getFormula() = function
+    override fun getRenderer() = formatter
 }
 
 data class MagicStatusFunctionArguments(
     private val getSkillLevel: (IMastery) -> Int,
     private val fairyType: IFairyType
-) : IMagicStatusFunctionArguments {
+) : FormulaArguments {
     override fun getSkillLevel(mastery: IMastery) = getSkillLevel.invoke(mastery)
     override fun getCost() = fairyType.cost
     override fun getManaValue(mana: Mana) = fairyType.manaSet[mana]
@@ -41,14 +41,14 @@ data class MagicStatusFunctionArguments(
 
 val <T> IMagicStatus<T>.displayName get() = textComponent { translate("mirageFairy2019.magic.status.$name.name") }
 
-fun <T> IMagicStatus<T>.getDisplayValue(arguments: IMagicStatusFunctionArguments): ITextComponent = formatter.getDisplayValue(function, arguments)
+fun <T> IMagicStatus<T>.getDisplayValue(arguments: FormulaArguments): ITextComponent = renderer.render(arguments, formula)
 
-val <T> IMagicStatusFunction<T>.defaultValue: T get() = getValue(MagicStatusFunctionArguments({ 0 }, EMPTY_FAIRY))
+val <T> Formula<T>.defaultValue: T get() = calculate(MagicStatusFunctionArguments({ 0 }, EMPTY_FAIRY))
 
-val <T> IMagicStatusFunction<T>.factors
+val <T> Formula<T>.factors
     get(): Iterable<ITextComponent> {
         val factors = mutableListOf<ITextComponent>()
-        getValue(object : IMagicStatusFunctionArguments {
+        calculate(object : FormulaArguments {
             override fun getSkillLevel(mastery: IMastery): Int {
                 factors.add(textComponent { mastery.displayName().gold })
                 return 0
@@ -67,10 +67,10 @@ val <T> IMagicStatusFunction<T>.factors
     }
 
 
-fun <T : Comparable<T>> IMagicStatusFormatter<T>.coloredBySign(colorPositive: TextFormatting, colorNegative: TextFormatting) = IMagicStatusFormatter<T> { function, arguments ->
-    val value = function.getValue(arguments)
+fun <T : Comparable<T>> FormulaRenderer<T>.coloredBySign(colorPositive: TextFormatting, colorNegative: TextFormatting) = FormulaRenderer<T> { arguments, function ->
+    val value = function.calculate(arguments)
     val defaultValue = function.defaultValue
-    val displayValue = this@coloredBySign.getDisplayValue(function, arguments)
+    val displayValue = this@coloredBySign.render(arguments, function)
     when {
         value > defaultValue -> textComponent { displayValue().withColor(colorPositive) }
         value < defaultValue -> textComponent { displayValue().withColor(colorNegative) }
@@ -78,25 +78,25 @@ fun <T : Comparable<T>> IMagicStatusFormatter<T>.coloredBySign(colorPositive: Te
     }
 }
 
-val <T : Comparable<T>> IMagicStatusFormatter<T>.positive get() = coloredBySign(GREEN, RED)
-val <T : Comparable<T>> IMagicStatusFormatter<T>.negative get() = coloredBySign(RED, GREEN)
+val <T : Comparable<T>> FormulaRenderer<T>.positive get() = coloredBySign(GREEN, RED)
+val <T : Comparable<T>> FormulaRenderer<T>.negative get() = coloredBySign(RED, GREEN)
 
-fun IMagicStatusFormatter<Boolean>.boolean(isPositive: Boolean) = IMagicStatusFormatter<Boolean> { function, arguments ->
-    val value = function.getValue(arguments)
-    val displayValue = this@boolean.getDisplayValue(function, arguments)
+fun FormulaRenderer<Boolean>.boolean(isPositive: Boolean) = FormulaRenderer<Boolean> { arguments, function ->
+    val value = function.calculate(arguments)
+    val displayValue = this@boolean.render(arguments, function)
     textComponent { displayValue().withColor(if (value xor !isPositive) GREEN else RED) }
 }
 
-val IMagicStatusFormatter<Boolean>.positiveBoolean get() = boolean(true)
-val IMagicStatusFormatter<Boolean>.negativeBoolean get() = boolean(false)
+val FormulaRenderer<Boolean>.positiveBoolean get() = boolean(true)
+val FormulaRenderer<Boolean>.negativeBoolean get() = boolean(false)
 
 fun <T : Comparable<T>> IMagicStatus<T>.ranged(min: T, max: T) = object : IMagicStatus<T> {
     override fun getName() = this@ranged.name
-    override fun getFunction() = IMagicStatusFunction { this@ranged.function.getValue(it).coerceIn(min, max) }
-    override fun getFormatter() = IMagicStatusFormatter<T> { function, arguments ->
-        val value = function.getValue(arguments)
+    override fun getFormula() = Formula { this@ranged.formula.calculate(it).coerceIn(min, max) }
+    override fun getRenderer() = FormulaRenderer<T> { arguments, function ->
+        val value = function.calculate(arguments)
         val defaultValue = function.defaultValue
-        val displayValue = this@ranged.formatter.getDisplayValue(function, arguments)
+        val displayValue = this@ranged.renderer.render(arguments, function)
         when (value) {
             defaultValue -> displayValue
             min -> textComponent { displayValue().bold }

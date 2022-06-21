@@ -4,8 +4,8 @@ public interface IMagicStatus<T> {
 
     public String getName();
 
-    public IMagicStatusFunction<T> getFunction();
+    public Formula<T> getFormula();
 
-    public IMagicStatusFormatter<T> getFormatter();
+    public FormulaRenderer<T> getRenderer();
 
 }
