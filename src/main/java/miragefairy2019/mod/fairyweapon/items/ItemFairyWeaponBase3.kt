@@ -63,7 +63,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
 
-data class MagicStatusFunctionArguments(
+data class OldFormulaArguments(
     private val playerProxy: PlayerProxy?,
     private val getSkillLevel: (IMastery) -> Int,
     private val fairyType: IFairyType
@@ -91,7 +91,7 @@ class MagicScope(
 ) {
     val hasPartnerFairy get() = !partnerFairyType.isEmpty
     operator fun <T> MagicStatusWrapper<T>.not() = !magicStatus
-    operator fun <T> MagicStatus<T>.not(): T = formula.calculate(MagicStatusFunctionArguments(player.proxy, { getSkillLevel(it) }, fairyType))
+    operator fun <T> MagicStatus<T>.not(): T = formula.calculate(OldFormulaArguments(player.proxy, { getSkillLevel(it) }, fairyType))
     fun getSkillLevel(mastery: IMastery) = player.proxy.skillContainer.getSkillLevel(mastery)
     private val fairyType get() = weaponItem.getActualFairyType(player.proxy, partnerFairyType)
     val color get() = partnerFairyType.color
@@ -140,7 +140,7 @@ abstract class ItemFairyWeaponBase3(
                     concat(
                         it.magicStatus.displayName(),
                         ": "(),
-                        it.magicStatus.getDisplayValue(MagicStatusFunctionArguments(playerProxy, { mastery -> ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(mastery) }, actualFairyType))().white,
+                        it.magicStatus.getDisplayValue(OldFormulaArguments(playerProxy, { mastery -> ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(mastery) }, actualFairyType))().white,
                         f(it.magicStatus)
                     ).blue
                 }
