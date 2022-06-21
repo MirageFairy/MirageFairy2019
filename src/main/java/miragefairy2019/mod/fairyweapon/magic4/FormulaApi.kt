@@ -18,8 +18,16 @@ interface Formula<out T> {
     fun calculate(formulaArguments: FormulaArguments): T
 }
 
+fun <T> Formula(block: (formulaArguments: FormulaArguments) -> T) = object : Formula<T> {
+    override fun calculate(formulaArguments: FormulaArguments) = block(formulaArguments)
+}
+
 interface FormulaRenderer<in T> {
     fun render(formulaArguments: FormulaArguments, formula: Formula<T>): ITextComponent
+}
+
+fun <T> FormulaRenderer(block: (formulaArguments: FormulaArguments, formula: Formula<T>) -> ITextComponent) = object : FormulaRenderer<T> {
+    override fun render(formulaArguments: FormulaArguments, formula: Formula<T>) = block(formulaArguments, formula)
 }
 
 class MagicStatus<T>(val name: String, val formula: Formula<T>, val renderer: FormulaRenderer<T>) : (FormulaArguments) -> T {
