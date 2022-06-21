@@ -9,6 +9,8 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.side
 import miragefairy2019.resourcemaker.DataModel
 import miragefairy2019.resourcemaker.makeBlockModel
+import miragefairy2019.resourcemaker.makeBlockStates
+import miragefairy2019.resourcemaker.normal
 import net.minecraft.block.Block
 import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.client.settings.KeyBinding
@@ -32,6 +34,7 @@ object PlacedItem {
         // ブロック
         blockPlacedItem = block({ BlockPlacedItem() }, "placed_item") {
             setUnlocalizedName("placedItem")
+            makeBlockStates(resourceName.path) { normal }
         }
         makeBlockModel("placed_item") {
             DataModel(

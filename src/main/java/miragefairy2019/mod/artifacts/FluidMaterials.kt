@@ -12,6 +12,7 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.resourcemaker.fluid
+import miragefairy2019.resourcemaker.makeBlockStates
 import miragefairy2019.resourcemaker.makeItemModel
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
@@ -53,6 +54,7 @@ object FluidMaterials {
             setUnlocalizedName("miragiumWater")
             setCreativeTab { Main.creativeTab }
             setFluidStateMapper()
+            makeBlockStates(resourceName.path) { fluid }
         }
         itemFluidMiragiumWater = item({ ItemBlock(blockFluidMiragiumWater()) }, "miragium_water") {
             setCustomModelResourceLocation()
@@ -68,6 +70,7 @@ object FluidMaterials {
             setUnlocalizedName("mirageFlowerExtract")
             setCreativeTab { Main.creativeTab }
             setFluidStateMapper()
+            makeBlockStates(resourceName.path) { fluid }
         }
         itemFluidMirageFlowerExtract = item({ ItemBlock(blockFluidMirageFlowerExtract()) }, "mirage_flower_extract") {
             setCustomModelResourceLocation()
@@ -83,6 +86,7 @@ object FluidMaterials {
             setUnlocalizedName("mirageFlowerOil")
             setCreativeTab { Main.creativeTab }
             setFluidStateMapper()
+            makeBlockStates(resourceName.path) { fluid }
         }
         itemFluidMirageFlowerOil = item({ ItemBlock(blockFluidMirageFlowerOil()) }, "mirage_flower_oil") {
             setCustomModelResourceLocation()
