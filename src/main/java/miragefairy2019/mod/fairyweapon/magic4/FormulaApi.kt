@@ -31,6 +31,13 @@ fun <T> FormulaRenderer(block: (formulaArguments: FormulaArguments, formula: For
     override fun render(formulaArguments: FormulaArguments, formula: Formula<T>) = block(formulaArguments, formula)
 }
 
-class MagicStatus<T>(val name: String, val formula: Formula<T>, val renderer: FormulaRenderer<T>) : (FormulaArguments) -> T {
+enum class EnumVisibility { ALWAYS, DETAIL, NEVER }
+
+class MagicStatus<T>(
+    val name: String,
+    val formula: Formula<T>,
+    val renderer: FormulaRenderer<T>,
+    val visibility: EnumVisibility
+) : (FormulaArguments) -> T {
     override fun invoke(arguments: FormulaArguments) = formula.calculate(arguments)
 }

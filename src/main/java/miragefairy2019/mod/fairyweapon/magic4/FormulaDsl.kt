@@ -1,18 +1,13 @@
 package miragefairy2019.mod.fairyweapon.magic4
 
 import miragefairy2019.api.Erg
-import miragefairy2019.api.ErgSet
 import miragefairy2019.api.Mana
-import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.displayName
-import miragefairy2019.lib.get
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.skill.IMastery
-import miragefairy2019.mod.skill.ISkillContainer
 import miragefairy2019.mod.skill.displayName
-import miragefairy2019.mod.skill.getSkillLevel
 import net.minecraft.util.text.ITextComponent
 
 interface IMagicStatusContainer {
@@ -48,7 +43,8 @@ fun <T> IMagicStatusContainer.status(
     val magicStatus = MagicStatus(
         name,
         Formula { FormulaScope(it).formula() },
-        FormulaRendererSelector<T>().formulaRendererGetter()
+        FormulaRendererSelector<T>().formulaRendererGetter(),
+        EnumVisibility.ALWAYS
     )
     magicStatusList += magicStatus
     return magicStatus

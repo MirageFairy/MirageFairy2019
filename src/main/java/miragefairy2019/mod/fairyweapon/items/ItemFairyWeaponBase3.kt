@@ -32,6 +32,7 @@ import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.fairyweapon.deprecated.MagicStatusFunctionArguments
 import miragefairy2019.mod.fairyweapon.deprecated.ranged
 import miragefairy2019.mod.fairyweapon.findFairy
+import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
 import miragefairy2019.mod.fairyweapon.magic4.Formula
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRendererSelector
@@ -79,13 +80,9 @@ fun magic(magic: Magic) = magic
 fun Magic?.getMagicHandler(magicScope: MagicScope) = this?.invoke(magicScope) ?: object : MagicHandler() {}
 
 
-enum class EnumVisibility { ALWAYS, DETAIL, NEVER }
-class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>) {
-    @JvmField
-    var visibility = EnumVisibility.NEVER
-    fun setVisibility(it: EnumVisibility) = apply { this.visibility = it }
-}
+class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>)
 
+fun <T> MagicStatusWrapper<T>.setVisibility(visibility: EnumVisibility) = apply { magicStatus = MagicStatus(magicStatus.name, magicStatus.formula, magicStatus.renderer, visibility) }
 fun <T : Comparable<T>> MagicStatusWrapper<T>.setRange(range: ClosedRange<T>) = apply { magicStatus = magicStatus.ranged(range.start, range.endInclusive) }
 
 
@@ -103,7 +100,7 @@ abstract class ItemFairyWeaponBase3(
         val playerProxy = ClientPlayerProxy
         val actualFairyType = getActualFairyType(playerProxy, fairyType)
         magicStatusWrapperList.forEach {
-            val show = when (it.visibility) {
+            val show = when (it.magicStatus.visibility) {
                 EnumVisibility.ALWAYS -> true
                 EnumVisibility.DETAIL -> flag.isAdvanced
                 EnumVisibility.NEVER -> false
@@ -169,7 +166,8 @@ fun <T> ItemFairyWeaponBase3.status(
         MagicStatus(
             name,
             Formula { OldFormulaScope(it).formula() },
-            FormulaRendererSelector<T>().formulaRendererGetter()
+            FormulaRendererSelector<T>().formulaRendererGetter(),
+            EnumVisibility.NEVER
         )
     )
     magicStatusWrapperList += magicStatusWrapper
