@@ -38,19 +38,6 @@ class OldFormulaScope(val formulaArguments: FormulaArguments) {
     operator fun <T> MagicStatus<T>.not() = this(formulaArguments)
 }
 
-class SimpleFormulaArguments(
-    override val hasPartnerFairy: Boolean,
-    private val manaSet: ManaSet,
-    private val ergSet: ErgSet,
-    override val cost: Double,
-    override val color: Int,
-    private val skillContainer: ISkillContainer
-) : FormulaArguments {
-    override fun getRawMana(mana: Mana) = manaSet[mana] / (cost / 50.0)
-    override fun getRawErg(erg: Erg) = ergSet[erg]
-    override fun getSkillLevel(mastery: IMastery) = skillContainer.getSkillLevel(mastery)
-}
-
 class FormulaRendererSelector<T>
 
 fun <T> IMagicStatusContainer.status(
