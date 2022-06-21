@@ -10,7 +10,6 @@ import miragefairy2019.api.Mana.GAIA
 import miragefairy2019.api.Mana.SHINE
 import miragefairy2019.api.Mana.WIND
 import miragefairy2019.lib.EMPTY_FAIRY
-import miragefairy2019.lib.div
 import miragefairy2019.lib.erg
 import miragefairy2019.lib.get
 import miragefairy2019.lib.playerAuraHandler
@@ -35,16 +34,15 @@ import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
 import miragefairy2019.mod.fairyweapon.magic4.Formula
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRendererSelector
+import miragefairy2019.mod.fairyweapon.magic4.FormulaScope
 import miragefairy2019.mod.fairyweapon.magic4.Magic
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicStatus
-import miragefairy2019.mod.fairyweapon.magic4.OldFormulaScope
 import miragefairy2019.mod.fairyweapon.magic4.displayName
 import miragefairy2019.mod.fairyweapon.magic4.factors
 import miragefairy2019.mod.fairyweapon.magic4.float0
 import miragefairy2019.mod.fairyweapon.magic4.getDisplayValue
 import miragefairy2019.mod.fairyweapon.magic4.getMagicHandler
-import miragefairy2019.mod.skill.EnumMastery
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.getSkillLevel
 import net.minecraft.client.Minecraft
@@ -110,18 +108,10 @@ abstract class ItemFairyWeaponBase3(
 
     fun getMagicArguments(player: EntityPlayer, weaponItemStack: ItemStack, partnerFairyType: IFairyType) = object : MagicArguments {
         override val hasPartnerFairy get() = !partnerFairyType.isEmpty
-
-        override fun getOldMana(mana: Mana): Double {
+        override fun getRawMana(mana: Mana): Double {
             val a = partnerFairyType.manaSet // パートナー妖精のマナ
             val b = a + player.proxy.playerAuraHandler.playerAura * (partnerFairyType.cost / 50.0) // プレイヤーオーラの加算
             val c = b * (1.0 + 0.001 * player.proxy.skillContainer.getSkillLevel(this.weaponItem.mastery)) // スキルレベル補正
-            return c[mana]
-        }
-
-        override fun getRawMana(mana: Mana): Double {
-            val a = partnerFairyType.manaSet / (cost / 50.0) // パートナー妖精のマナ
-            val b = a + player.proxy.playerAuraHandler.playerAura // プレイヤーオーラの加算
-            val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(EnumMastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
             return c[mana]
         }
 
@@ -166,13 +156,13 @@ abstract class ItemFairyWeaponBase3(
 
 fun <T> ItemFairyWeaponBase3.status(
     name: String,
-    formula: OldFormulaScope.() -> T,
+    formula: FormulaScope.() -> T,
     formulaRendererGetter: FormulaRendererSelector<T>.() -> FormulaRenderer<T>
 ): MagicStatusWrapper<T> {
     val magicStatusWrapper = MagicStatusWrapper(
         MagicStatus(
             name,
-            Formula { OldFormulaScope(it).formula() },
+            Formula { FormulaScope(it).formula() },
             FormulaRendererSelector<T>().formulaRendererGetter(),
             EnumVisibility.NEVER
         )
