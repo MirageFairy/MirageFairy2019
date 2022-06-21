@@ -48,9 +48,9 @@ data class MagicStatusFunctionArguments(
 }
 
 fun <T : Comparable<T>> MagicStatus<T>.ranged(min: T, max: T) = MagicStatus(
-    name = this@ranged.name,
-    formula = Formula { this@ranged.formula.calculate(it).coerceIn(min, max) },
-    renderer = FormulaRenderer<T> { arguments, function ->
+    this@ranged.name,
+    Formula { this@ranged.formula.calculate(it).coerceIn(min, max) },
+    FormulaRenderer { arguments, function ->
         val value = function.calculate(arguments)
         val displayValue = this@ranged.renderer.render(arguments, function)
         when (value) {
