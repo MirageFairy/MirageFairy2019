@@ -72,7 +72,7 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), IMagicStatusContainer {
     open fun getMagic(): Magic? = null
 
     fun getMagicArguments(player: EntityPlayer, weaponItemStack: ItemStack, partnerFairyType: IFairyType) = object : MagicArguments {
-        override val hasPartnerFairy: Boolean get() = !partnerFairyType.isEmpty
+        override val hasPartnerFairy get() = !partnerFairyType.isEmpty
         override fun getRawMana(mana: Mana): Double {
             val a = partnerFairyType.manaSet / (cost / 50.0) // パートナー妖精のマナ
             val b = a + player.proxy.playerAuraHandler.playerAura // プレイヤーオーラの加算
