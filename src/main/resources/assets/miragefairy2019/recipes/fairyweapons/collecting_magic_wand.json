@@ -1,36 +1,36 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern": [
-		"cow",
-		" #o",
-		"f p"
-	],
-	"key": {
-		"#": {
-			"item": "miragefairy2019:magic_wand_base"
-		},
-		"o": {
-			"type": "forge:ore_dict",
-			"ore": "obsidian"
-		},
-		"f": {
-			"type": "forge:ore_dict",
-			"ore": "gemFluorite"
-		},
-		"w": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019SphereWarp"
-		},
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"p": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:collecting_magic_wand"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cow",
+    " #o",
+    "f p"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:magic_wand_base"
+    },
+    "o": {
+      "type": "forge:ore_dict",
+      "ore": "obsidian"
+    },
+    "f": {
+      "type": "forge:ore_dict",
+      "ore": "gemFluorite"
+    },
+    "w": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereWarp"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "p": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:collecting_magic_wand"
+  }
 }
