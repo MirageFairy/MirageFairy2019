@@ -8,7 +8,6 @@ import miragefairy2019.lib.rayTrace
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
 import miragefairy2019.mod.fairyweapon.breakBlock
-import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.float2
@@ -46,8 +45,8 @@ abstract class ItemMiragiumToolBase(
     val production = createProductionStatus(additionalBaseStatus, Erg.HARVEST)
     val cost = createCostStatus()
 
-    val fortune = status("fortune", { !production.magicStatus * 0.03 }) { float2.positive }.setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL)
-    val wear = status("wear", { 1 / (25.0 + !endurance.magicStatus * 0.25) }) { percent2.positive }.setVisibility(EnumVisibility.DETAIL)
+    val fortune = status("fortune", { !production.magicStatus * 0.03 }) { float2 }.setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL)
+    val wear = status("wear", { 1 / (25.0 + !endurance.magicStatus * 0.25) }) { percent2 }.setVisibility(EnumVisibility.DETAIL)
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでブロックを破壊" // TODO translate

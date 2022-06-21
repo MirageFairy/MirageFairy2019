@@ -5,8 +5,6 @@ import miragefairy2019.libkt.grow
 import miragefairy2019.libkt.positions
 import miragefairy2019.libkt.region
 import miragefairy2019.libkt.sortedByDistance
-import miragefairy2019.mod.fairyweapon.deprecated.negative
-import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
@@ -25,9 +23,9 @@ class ItemMiragiumScythe(
     EnumMastery.harvest,
     additionalBaseStatus
 ) {
-    val maxHardness = status("maxHardness", { !strength.magicStatus * 0.01 }) { float2.positive }.setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL)
-    val range = status("range", { (2 + !extent.magicStatus * 0.02).toInt() }) { integer.positive }.setRange(2..5).setVisibility(EnumVisibility.DETAIL)
-    val coolTime = status("coolTime", { cost * 0.3 }) { duration.negative }.setVisibility(EnumVisibility.DETAIL)
+    val maxHardness = status("maxHardness", { !strength.magicStatus * 0.01 }) { float2 }.setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL)
+    val range = status("range", { (2 + !extent.magicStatus * 0.02).toInt() }) { integer }.setRange(2..5).setVisibility(EnumVisibility.DETAIL)
+    val coolTime = status("coolTime", { cost * 0.3 }) { duration }.setVisibility(EnumVisibility.DETAIL)
 
     override fun iterateTargets(magicScope: MagicScope, blockPosBase: BlockPos) = iterator {
         magicScope.run {

@@ -10,7 +10,6 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
-import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.findItem
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.percent1
@@ -27,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreIngredient
 
 class ItemCrystalSword : ItemFairyWeaponBase3(Mana.GAIA, EnumMastery.closeCombat) {
-    val extraItemDropRate = status("extraItemDropRate", { (!mastery / 100.0).coerceIn(0.0, 1.0) }) { percent1.positive }.setVisibility(EnumVisibility.ALWAYS)
+    val extraItemDropRate = status("extraItemDropRate", { (!mastery / 100.0).coerceIn(0.0, 1.0) }) { percent1 }.setVisibility(EnumVisibility.ALWAYS)
 
     // 攻撃力は7（ダイヤ剣+1）固定
     override fun getAttributeModifiers(equipmentSlot: EntityEquipmentSlot, itemStack: ItemStack): Multimap<String?, AttributeModifier?>? {

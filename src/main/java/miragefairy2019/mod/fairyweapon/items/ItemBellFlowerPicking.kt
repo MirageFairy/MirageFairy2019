@@ -14,8 +14,6 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.artifacts.MirageFlower
-import miragefairy2019.mod.fairyweapon.deprecated.negative
-import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.boolean
 import miragefairy2019.mod.fairyweapon.magic4.duration
@@ -23,6 +21,7 @@ import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.percent1
 import miragefairy2019.mod.fairyweapon.magic4.percent2
+import miragefairy2019.mod.fairyweapon.magic4.positive
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.skill.EnumMastery
@@ -51,15 +50,15 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
     val production = createProductionStatus(additionalBaseStatus, Erg.HARVEST)
     val cost = createCostStatus()
 
-    val pitch = status("pitch", { -(cost / 50.0 - 1) * 12 }) { float2.positive }.setRange(-12.0..12.0).setVisibility(EnumVisibility.DETAIL)
-    val maxTargetCount = status("maxTargetCount", { 2 + floor(+!strength.magicStatus * 0.1).toInt() }) { integer.positive }.setRange(1..100).setVisibility(EnumVisibility.DETAIL)
-    val fortune = status("fortune", { 3 + !production.magicStatus * 0.1 }) { float2.positive }.setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL)
-    val additionalReach = status("additionalReach", { !extent.magicStatus * 0.1 }) { float2.positive }.setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL)
-    val radius = status("radius", { 4 + !extent.magicStatus * 0.05 }) { float2.positive }.setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL)
-    val wear = status("wear", { 1.0 / (1 + !endurance.magicStatus * 0.03) }) { percent2.negative }.setVisibility(EnumVisibility.DETAIL)
-    val coolTime = status("coolTime", { cost * 0.5 }) { duration.negative }.setVisibility(EnumVisibility.DETAIL)
+    val pitch = status("pitch", { -(cost / 50.0 - 1) * 12 }) { float2 }.setRange(-12.0..12.0).setVisibility(EnumVisibility.DETAIL)
+    val maxTargetCount = status("maxTargetCount", { 2 + floor(+!strength.magicStatus * 0.1).toInt() }) { integer }.setRange(1..100).setVisibility(EnumVisibility.DETAIL)
+    val fortune = status("fortune", { 3 + !production.magicStatus * 0.1 }) { float2 }.setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL)
+    val additionalReach = status("additionalReach", { !extent.magicStatus * 0.1 }) { float2 }.setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL)
+    val radius = status("radius", { 4 + !extent.magicStatus * 0.05 }) { float2 }.setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL)
+    val wear = status("wear", { 1.0 / (1 + !endurance.magicStatus * 0.03) }) { percent2 }.setVisibility(EnumVisibility.DETAIL)
+    val coolTime = status("coolTime", { cost * 0.5 }) { duration }.setVisibility(EnumVisibility.DETAIL)
     val collection = status("collection", { !WARP >= 10 }) { boolean.positive }.setVisibility(EnumVisibility.ALWAYS)
-    val extraItemDropRate = status("extraItemDropRate", { 0.1 + extraItemDropRateFactor * !mastery atMost maxExtraItemDropRate }) { percent1.positive }.setVisibility(EnumVisibility.ALWAYS)
+    val extraItemDropRate = status("extraItemDropRate", { 0.1 + extraItemDropRateFactor * !mastery atMost maxExtraItemDropRate }) { percent1 }.setVisibility(EnumVisibility.ALWAYS)
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでミラージュフラワーを収穫" // TODO translate
