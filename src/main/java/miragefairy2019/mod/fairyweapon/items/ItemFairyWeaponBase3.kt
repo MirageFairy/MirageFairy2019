@@ -30,7 +30,6 @@ import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.fairyweapon.deprecated.MagicStatusFunctionArguments
-import miragefairy2019.mod.fairyweapon.deprecated.negative
 import miragefairy2019.mod.fairyweapon.deprecated.ranged
 import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.magic4.Formula
@@ -243,4 +242,4 @@ fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, produc
     }
 }) { float0 }.setVisibility(EnumVisibility.ALWAYS)
 
-fun ItemFairyWeaponBase3.createCostStatus() = status("cost", { cost / (1.0 + !mastery * 0.002) }) { float0.negative }.setVisibility(EnumVisibility.ALWAYS)
+fun ItemFairyWeaponBase3.createCostStatus() = status("cost", { cost / (1.0 + !mastery * 0.002) }) { float0 }.setVisibility(EnumVisibility.ALWAYS)
