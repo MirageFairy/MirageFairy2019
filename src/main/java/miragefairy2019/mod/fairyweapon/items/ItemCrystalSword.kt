@@ -13,7 +13,9 @@ import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.fairyweapon.findItem
 import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
+import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.percent1
+import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.entity.EntityLivingBase
@@ -55,7 +57,7 @@ class ItemCrystalSword : ItemFairyWeaponBase3(Mana.GAIA, EnumMastery.closeCombat
 
                 // 魔法成立
 
-                if (!extraItemDropRate > world.rand.nextDouble()) { // ステータスに基づいた確率で
+                if (extraItemDropRate.magicStatus() > world.rand.nextDouble()) { // ステータスに基づいた確率で
                     // エンティティに紐づけられた妖精のリスト
                     val entries = FairySelector().entity(target).allMatch().withoutPartiallyMatch.primaries
                     if (entries.isEmpty()) return // 関連付けられた妖精が居ない場合は無視

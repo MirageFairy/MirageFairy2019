@@ -10,9 +10,12 @@ import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
 import miragefairy2019.mod.fairyweapon.breakBlock
 import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
+import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.float2
+import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.percent2
+import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.spawnParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.skill.IMastery
@@ -28,7 +31,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
-fun MagicScope.fail(cursor: Vec3d, color: Int) = object : MagicHandler() {
+fun MagicArguments.fail(cursor: Vec3d, color: Int) = object : MagicHandler() {
     override fun onUpdate(itemSlot: Int, isSelected: Boolean) = spawnParticle(world, cursor, color)
 }
 
@@ -56,7 +59,7 @@ abstract class ItemMiragiumToolBase(
         val fairyType = findFairy(weaponItemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
         val selectorRayTrace = MagicSelector.rayTrace(world, player, 0.0) // 視線判定
         if (fairyType.isEmpty) return@magic fail(selectorRayTrace.item.position, 0xFF00FF) // 妖精なし判定
-        if (weaponItemStack.itemDamage + ceil(!wear).toInt() > weaponItemStack.maxDamage) return@magic fail(selectorRayTrace.item.position, 0xFF0000) // 材料なし判定
+        if (weaponItemStack.itemDamage + ceil(wear.magicStatus()).toInt() > weaponItemStack.maxDamage) return@magic fail(selectorRayTrace.item.position, 0xFF0000) // 材料なし判定
         val targets = selectorRayTrace.item.blockPos.let { if (selectorRayTrace.item.sideHit != null) it.offset(selectorRayTrace.item.sideHit!!) else it }.let { iterateTargets(this@magic, it) } // 対象判定
         if (!targets.hasNext()) return@magic fail(selectorRayTrace.item.position, 0x00FFFF) // ターゲットなし判定
         if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic fail(selectorRayTrace.item.position, 0xFFFF00) // クールダウン判定
@@ -73,12 +76,12 @@ abstract class ItemMiragiumToolBase(
                 var count = 0
                 run breakExecution@{
                     targets.forEach { target ->
-                        val damage = world.rand.randomInt(!wear) // 耐久コスト
+                        val damage = world.rand.randomInt(wear.magicStatus()) // 耐久コスト
                         if (weaponItemStack.itemDamage + damage > weaponItemStack.maxDamage) return@breakExecution // 耐久不足なら終了
 
                         // 破壊成立
                         weaponItemStack.damageItem(damage, player)
-                        breakBlock(world, player, EnumFacing.UP, weaponItemStack, target, world.rand.randomInt(!fortune), false)
+                        breakBlock(world, player, EnumFacing.UP, weaponItemStack, target, world.rand.randomInt(fortune.magicStatus()), false)
                         val blockState = world.getBlockState(target)
                         breakSound = blockState.block.getSoundType(blockState, world, target, player).breakSound
                         count++
@@ -112,11 +115,11 @@ abstract class ItemMiragiumToolBase(
      * このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。
      * 内部で必ず[canBreak]による破壊可能判定を行わなければなりません。
      */
-    abstract fun iterateTargets(magicScope: MagicScope, blockPosBase: BlockPos): Iterator<BlockPos>
-    abstract fun getCoolTime(magicScope: MagicScope): Double
+    abstract fun iterateTargets(magicArguments: MagicArguments, blockPosBase: BlockPos): Iterator<BlockPos>
+    abstract fun getCoolTime(magicArguments: MagicArguments): Double
 
     @Suppress("SimplifyBooleanWithConstants")
-    open fun canBreak(magicScope: MagicScope, blockPos: BlockPos) = true
-        && magicScope.world.getBlockState(blockPos).getBlockHardness(magicScope.world, blockPos) >= 0 // 岩盤であってはならない
-        && isEffective(magicScope.weaponItemStack, magicScope.world.getBlockState(blockPos)) // 効果的でなければならない
+    open fun canBreak(magicArguments: MagicArguments, blockPos: BlockPos) = true
+        && magicArguments.world.getBlockState(blockPos).getBlockHardness(magicArguments.world, blockPos) >= 0 // 岩盤であってはならない
+        && isEffective(magicArguments.weaponItemStack, magicArguments.world.getBlockState(blockPos)) // 効果的でなければならない
 }

@@ -20,9 +20,11 @@ import miragefairy2019.mod.fairyweapon.magic4.boolean
 import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
+import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.percent1
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.positive
+import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.skill.EnumMastery
@@ -67,7 +69,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
     override fun getMagic() = magic {
 
         // 視線判定
-        val magicSelectorRayTrace = MagicSelector.rayTraceBlock(world, player, !additionalReach)
+        val magicSelectorRayTrace = MagicSelector.rayTraceBlock(world, player, additionalReach.magicStatus())
 
         // 視点判定
         val magicSelectorPosition = magicSelectorRayTrace.position
@@ -80,7 +82,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
         }
 
         // 範囲判定
-        val magicSelectorCircle = magicSelectorPosition.circle(!radius)
+        val magicSelectorCircle = magicSelectorPosition.circle(radius.magicStatus())
         val magicSelectorBlocks = magicSelectorCircle.blocks()
 
         // 対象計算
@@ -95,11 +97,11 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                     .firstOrNull() ?: return@a null
                 Pair(blockPos, pickExecutor)
             }
-            .take(!maxTargetCount) // 最大個数を制限
+            .take(maxTargetCount.magicStatus()) // 最大個数を制限
             .toList() // リストにする
 
         // 資源がない場合、中止
-        if (weaponItemStack.itemDamage + ceil(!wear).toInt() > weaponItemStack.maxDamage) return@magic object : MagicHandler() {
+        if (weaponItemStack.itemDamage + ceil(wear.magicStatus()).toInt() > weaponItemStack.maxDamage) return@magic object : MagicHandler() {
             override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0xFF0000) // 視点
                 magicSelectorCircle.item.doEffect() // 範囲
@@ -141,13 +143,13 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                         val blockPos = pair.first
                         val pickExecutor = pair.second
 
-                        if (weaponItemStack.itemDamage + ceil(!wear).toInt() > weaponItemStack.maxDamage) return@targets // 耐久が足りないので中止
-                        if (targetCount + 1 > !maxTargetCount) return@targets // パワーが足りないので中止
+                        if (weaponItemStack.itemDamage + ceil(wear.magicStatus()).toInt() > weaponItemStack.maxDamage) return@targets // 耐久が足りないので中止
+                        if (targetCount + 1 > maxTargetCount.magicStatus()) return@targets // パワーが足りないので中止
 
                         // 成立
 
                         // 資源消費
-                        weaponItemStack.damageItem(world.rand.randomInt(!wear), player)
+                        weaponItemStack.damageItem(world.rand.randomInt(wear.magicStatus()), player)
                         targetCount++
 
                         // 音取得
@@ -160,17 +162,17 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                         run {
 
                             // 収穫試行
-                            val result = pickExecutor.tryPick(world.rand.randomInt(!fortune))
+                            val result = pickExecutor.tryPick(world.rand.randomInt(fortune.magicStatus()))
                             if (!result) return@targets
 
                             // 種の追加ドロップ
                             if (!world.isRemote) {
-                                val count = world.rand.randomInt(!extraItemDropRate)
+                                val count = world.rand.randomInt(extraItemDropRate.magicStatus())
                                 if (count > 0) MirageFlower.itemMirageFlowerSeeds().createItemStack(count = count).drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
                             }
 
                             // 破壊したばかりのブロックの周辺のアイテムを集める
-                            if (!collection) {
+                            if (collection.magicStatus()) {
                                 world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPos)).forEach {
                                     collected = true
                                     it.setPosition(player.posX, player.posY, player.posZ)
@@ -201,12 +203,12 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
                 if (targetCount >= 1) {
 
                     // エフェクト
-                    playSound(world, player, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 2.0.pow(!pitch / 12.0).toFloat())
+                    playSound(world, player, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 2.0.pow(pitch.magicStatus() / 12.0).toFloat())
                     world.playSound(null, player.posX, player.posY, player.posZ, breakSound!!, SoundCategory.PLAYERS, 1.0f, 1.0f)
 
                     // クールタイム
-                    val ratio = targetCount / (!maxTargetCount).toDouble()
-                    player.cooldownTracker.setCooldown(this@ItemBellFlowerPicking, (!coolTime * ratio.pow(0.5)).toInt())
+                    val ratio = targetCount / (maxTargetCount.magicStatus()).toDouble()
+                    player.cooldownTracker.setCooldown(this@ItemBellFlowerPicking, (coolTime.magicStatus() * ratio.pow(0.5)).toInt())
 
                 }
                 if (collected) {

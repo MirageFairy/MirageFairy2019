@@ -36,14 +36,15 @@ import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
 import miragefairy2019.mod.fairyweapon.magic4.Formula
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRendererSelector
+import miragefairy2019.mod.fairyweapon.magic4.Magic
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
-import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.MagicStatus
 import miragefairy2019.mod.fairyweapon.magic4.OldFormulaScope
 import miragefairy2019.mod.fairyweapon.magic4.displayName
 import miragefairy2019.mod.fairyweapon.magic4.factors
 import miragefairy2019.mod.fairyweapon.magic4.float0
 import miragefairy2019.mod.fairyweapon.magic4.getDisplayValue
+import miragefairy2019.mod.fairyweapon.magic4.getMagicHandler
 import miragefairy2019.mod.skill.EnumMastery
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.getSkillLevel
@@ -93,14 +94,6 @@ class MagicScope(
 
     override fun getRawErg(erg: Erg) = partnerFairyType.erg(erg)
 }
-
-val MagicScope.world: World get() = player.world
-
-typealias Magic = MagicScope.() -> MagicHandler
-
-fun magic(magic: Magic) = magic
-
-fun Magic?.getMagicHandler(magicScope: MagicScope) = this?.invoke(magicScope) ?: MagicHandler()
 
 
 class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>)
