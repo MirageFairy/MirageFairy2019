@@ -34,8 +34,6 @@ import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
 import miragefairy2019.mod.fairyweapon.magic4.Formula
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
-import miragefairy2019.mod.fairyweapon.magic4.FormulaRendererSelector
-import miragefairy2019.mod.fairyweapon.magic4.FormulaScope
 import miragefairy2019.mod.fairyweapon.magic4.IMagicStatusContainer
 import miragefairy2019.mod.fairyweapon.magic4.Magic
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
@@ -46,6 +44,7 @@ import miragefairy2019.mod.fairyweapon.magic4.factors
 import miragefairy2019.mod.fairyweapon.magic4.float0
 import miragefairy2019.mod.fairyweapon.magic4.getDisplayValue
 import miragefairy2019.mod.fairyweapon.magic4.getMagicHandler
+import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.getSkillLevel
 import net.minecraft.client.Minecraft
@@ -165,22 +164,6 @@ abstract class ItemFairyWeaponBase3(
         magicHandler.hitEntity(target)
         return true
     }
-}
-
-fun <T> ItemFairyWeaponBase3.status(
-    name: String,
-    formula: FormulaScope.() -> T,
-    formulaRendererGetter: FormulaRendererSelector<T>.() -> FormulaRenderer<T>,
-    configurator: MagicStatusBuilder<T>.() -> Unit = {}
-): MagicStatus<T> {
-    val magicStatus = MagicStatusBuilder(
-        name,
-        Formula { FormulaScope(it).formula() },
-        FormulaRendererSelector<T>().formulaRendererGetter(),
-        EnumVisibility.NEVER
-    ).also { it.configurator() }.build()
-    magicStatusList += magicStatus
-    return magicStatus
 }
 
 

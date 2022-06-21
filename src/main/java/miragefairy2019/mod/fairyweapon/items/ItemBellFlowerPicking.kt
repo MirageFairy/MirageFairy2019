@@ -24,6 +24,7 @@ import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.percent1
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.positive
+import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets

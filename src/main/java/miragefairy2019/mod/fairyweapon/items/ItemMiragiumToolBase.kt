@@ -15,6 +15,7 @@ import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.percent2
+import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.spawnParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
