@@ -142,18 +142,7 @@ abstract class ItemFairyWeaponBase3(
 
     // Magic Status
 
-    private val magicStatusWrapperList = mutableListOf<MagicStatusWrapper<*>>()
-    internal operator fun <T> String.invoke(getFormatter: MagicStatusFormatterScope<T>.() -> FormulaRenderer<T>, function: MagicStatusFormulaScope.() -> T): MagicStatusWrapper<T> {
-        val magicStatusWrapper = MagicStatusWrapper(
-            MagicStatus(
-                this,
-                Formula<T> { MagicStatusFormulaScope(it).function() },
-                MagicStatusFormatterScope<T>().getFormatter()
-            )
-        )
-        magicStatusWrapperList += magicStatusWrapper
-        return magicStatusWrapper
-    }
+    val magicStatusWrapperList = mutableListOf<MagicStatusWrapper<*>>()
 
     @SideOnly(Side.CLIENT)
     override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: NonNullList<String>, flag: ITooltipFlag) {
@@ -217,6 +206,22 @@ abstract class ItemFairyWeaponBase3(
     }
 }
 
+fun <T> ItemFairyWeaponBase3.status(
+    name: String,
+    formula: ItemFairyWeaponBase3.Companion.MagicStatusFormulaScope.() -> T,
+    formulaRendererGetter: ItemFairyWeaponBase3.Companion.MagicStatusFormatterScope<T>.() -> FormulaRenderer<T>
+): ItemFairyWeaponBase3.Companion.MagicStatusWrapper<T> {
+    val magicStatusWrapper = ItemFairyWeaponBase3.Companion.MagicStatusWrapper(
+        MagicStatus(
+            name,
+            Formula { ItemFairyWeaponBase3.Companion.MagicStatusFormulaScope(it).formula() },
+            ItemFairyWeaponBase3.Companion.MagicStatusFormatterScope<T>().formulaRendererGetter()
+        )
+    )
+    magicStatusWrapperList += magicStatusWrapper
+    return magicStatusWrapper
+}
+
 
 // Actual Fairy Type
 
@@ -239,7 +244,7 @@ fun ItemFairyWeaponBase3.getActualFairyType(playerProxy: PlayerProxy, fairyTypeP
 
 // Statuses
 
-fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthErg: Erg) = "strength"({ double0.positive }) {
+fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthErg: Erg) = status("strength", {
     (weaponStrength + !strengthErg + getSkillLevel(mastery) * 0.5) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !SHINE
         FIRE -> !FIRE
@@ -248,9 +253,9 @@ fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthEr
         AQUA -> !AQUA
         DARK -> !DARK
     }
-}.setVisibility(ALWAYS)
+}) { double0.positive }.setVisibility(ALWAYS)
 
-fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Erg) = "extent"({ double0.positive }) {
+fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Erg) = status("extent", {
     (weaponExtent + !extentErg) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !GAIA + !WIND
         FIRE -> !GAIA + !WIND
@@ -259,9 +264,9 @@ fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Erg
         AQUA -> !GAIA + !WIND
         DARK -> !GAIA + !WIND
     }
-}.setVisibility(ALWAYS)
+}) { double0.positive }.setVisibility(ALWAYS)
 
-fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranceErg: Erg) = "endurance"({ double0.positive }) {
+fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranceErg: Erg) = status("endurance", {
     (weaponEndurance + !enduranceErg) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !FIRE + !AQUA
         FIRE -> !AQUA * 2
@@ -270,9 +275,9 @@ fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranc
         AQUA -> !FIRE * 2
         DARK -> !FIRE + !AQUA
     }
-}.setVisibility(ALWAYS)
+}) { double0.positive }.setVisibility(ALWAYS)
 
-fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, productionErg: Erg) = "production"({ double0.positive }) {
+fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, productionErg: Erg) = status("production", {
     (weaponProduction + !productionErg) * (cost / 50.0) + when (weaponMana) {
         SHINE -> !DARK * 2
         FIRE -> !SHINE + !DARK
@@ -281,6 +286,6 @@ fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, produc
         AQUA -> !SHINE + !DARK
         DARK -> !SHINE * 2
     }
-}.setVisibility(ALWAYS)
+}) { double0.positive }.setVisibility(ALWAYS)
 
-fun ItemFairyWeaponBase3.createCostStatus() = "cost"({ double0.negative }) { cost / (1.0 + getSkillLevel(mastery) * 0.002) }.setVisibility(ALWAYS)
+fun ItemFairyWeaponBase3.createCostStatus() = status("cost", { cost / (1.0 + getSkillLevel(mastery) * 0.002) }) { double0.negative }.setVisibility(ALWAYS)

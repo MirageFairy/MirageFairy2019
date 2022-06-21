@@ -44,8 +44,8 @@ abstract class ItemMiragiumToolBase(
     val production = createProductionStatus(additionalBaseStatus, Erg.HARVEST)
     val cost = createCostStatus()
 
-    val fortune = "fortune"({ double2.positive }) { !production * 0.03 }.setRange(0.0..100.0).setVisibility(Companion.EnumVisibility.DETAIL)
-    val wear = "wear"({ percent2.positive }) { 1 / (25.0 + !endurance * 0.25) }.setVisibility(Companion.EnumVisibility.DETAIL)
+    val fortune = status("fortune", { !production * 0.03 }) { double2.positive }.setRange(0.0..100.0).setVisibility(Companion.EnumVisibility.DETAIL)
+    val wear = status("wear", { 1 / (25.0 + !endurance * 0.25) }) { percent2.positive }.setVisibility(Companion.EnumVisibility.DETAIL)
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでブロックを破壊" // TODO translate

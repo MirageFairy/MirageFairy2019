@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreIngredient
 
 class ItemCrystalSword : ItemFairyWeaponBase3(Mana.GAIA, EnumMastery.closeCombat) {
-    val extraItemDropRate = "extraItemDropRate"({ percent1.positive }) { (getSkillLevel(mastery) / 100.0).coerceIn(0.0, 1.0) }.setVisibility(Companion.EnumVisibility.ALWAYS)
+    val extraItemDropRate = status("extraItemDropRate", { (getSkillLevel(mastery) / 100.0).coerceIn(0.0, 1.0) }) { percent1.positive }.setVisibility(Companion.EnumVisibility.ALWAYS)
 
     // 攻撃力は7（ダイヤ剣+1）固定
     override fun getAttributeModifiers(equipmentSlot: EntityEquipmentSlot, itemStack: ItemStack): Multimap<String?, AttributeModifier?>? {

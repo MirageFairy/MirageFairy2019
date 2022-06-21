@@ -21,9 +21,9 @@ class ItemRyugyoDrill(
     EnumMastery.mining,
     additionalBaseStatus
 ) {
-    val maxHardness = "maxHardness"({ double2.positive }) { 2.0 + !strength * 0.02 }.setRange(2.0..20.0).setVisibility(Companion.EnumVisibility.DETAIL)
-    val range = "range"({ int.positive }) { (1 + !extent * 0.01).toInt() }.setRange(1..5).setVisibility(Companion.EnumVisibility.DETAIL)
-    val coolTime = "coolTime"({ tick.negative }) { cost * 2.0 }.setVisibility(Companion.EnumVisibility.DETAIL)
+    val maxHardness = status("maxHardness", { 2.0 + !strength * 0.02 }) { double2.positive }.setRange(2.0..20.0).setVisibility(Companion.EnumVisibility.DETAIL)
+    val range = status("range", { (1 + !extent * 0.01).toInt() }) { int.positive }.setRange(1..5).setVisibility(Companion.EnumVisibility.DETAIL)
+    val coolTime = status("coolTime", { cost * 2.0 }) { tick.negative }.setVisibility(Companion.EnumVisibility.DETAIL)
 
     init {
         setHarvestLevel("pickaxe", 3)
