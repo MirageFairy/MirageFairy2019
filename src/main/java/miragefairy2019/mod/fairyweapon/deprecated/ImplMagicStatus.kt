@@ -48,11 +48,6 @@ data class MagicStatusFunctionArguments(
     override fun getRawErg(erg: Erg) = fairyType.erg(erg)
 }
 
-
-val <T> MagicStatus<T>.displayName get() = textComponent { translate("mirageFairy2019.magic.status.$name.name") }
-
-fun <T> MagicStatus<T>.getDisplayValue(arguments: FormulaArguments): ITextComponent = renderer.render(arguments, formula)
-
 val <T> Formula<T>.defaultValue: T get() = calculate(MagicStatusFunctionArguments(null, { 0 }, EMPTY_FAIRY))
 
 
