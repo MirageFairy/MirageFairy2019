@@ -106,6 +106,23 @@ fun magic(magic: Magic) = magic
 fun Magic?.getMagicHandler(magicScope: MagicScope) = this?.invoke(magicScope) ?: MagicHandler()
 
 
+fun ItemFairyWeaponBase3.getActualFairyType(playerProxy: PlayerProxy, fairyTypePartner: IFairyType) = object : IFairyType {
+    override fun isEmpty() = fairyTypePartner.isEmpty
+    override fun getMotif() = fairyTypePartner.motif
+    override fun getDisplayName() = fairyTypePartner.displayName
+    override fun getColor() = fairyTypePartner.color
+    override fun getCost() = fairyTypePartner.cost
+    override fun getManaSet(): ManaSet {
+        val a1 = fairyTypePartner.manaSet
+        val a2 = playerProxy.playerAuraHandler.playerAura * (fairyTypePartner.cost / 50.0)
+        val b1 = 0.001 * playerProxy.skillContainer.getSkillLevel(mastery)
+        return (a1 + a2) * (1.0 + b1)
+    }
+
+    override fun getErgSet() = fairyTypePartner.ergSet
+}
+
+
 class MagicStatusWrapper<T>(var magicStatus: MagicStatus<T>)
 
 fun <T> MagicStatusWrapper<T>.setVisibility(visibility: EnumVisibility) = apply { magicStatus = MagicStatus(magicStatus.name, magicStatus.formula, magicStatus.renderer, visibility) }
@@ -198,25 +215,6 @@ fun <T> ItemFairyWeaponBase3.status(
     )
     magicStatusWrapperList += magicStatusWrapper
     return magicStatusWrapper
-}
-
-
-// Actual Fairy Type
-
-fun ItemFairyWeaponBase3.getActualFairyType(playerProxy: PlayerProxy, fairyTypePartner: IFairyType) = object : IFairyType {
-    override fun isEmpty() = fairyTypePartner.isEmpty
-    override fun getMotif() = fairyTypePartner.motif
-    override fun getDisplayName() = fairyTypePartner.displayName
-    override fun getColor() = fairyTypePartner.color
-    override fun getCost() = fairyTypePartner.cost
-    override fun getManaSet(): ManaSet {
-        val a1 = fairyTypePartner.manaSet
-        val a2 = playerProxy.playerAuraHandler.playerAura * (fairyTypePartner.cost / 50.0)
-        val b1 = 0.001 * playerProxy.skillContainer.getSkillLevel(mastery)
-        return (a1 + a2) * (1.0 + b1)
-    }
-
-    override fun getErgSet() = fairyTypePartner.ergSet
 }
 
 
