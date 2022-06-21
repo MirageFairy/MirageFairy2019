@@ -18,7 +18,6 @@ import miragefairy2019.api.Erg.THUNDER
 import miragefairy2019.api.Erg.WARP
 import miragefairy2019.api.Erg.WATER
 import miragefairy2019.libkt.BakedModelBuiltinWrapper
-import miragefairy2019.libkt.ModInitializer
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.item
 import miragefairy2019.libkt.module
@@ -85,7 +84,7 @@ enum class FairyWeaponKind(
     val advancementText: LangPair,
     val frame: String?,
     val ownManualRepairIngredientSuppliers: List<() -> Ingredient>,
-    val initializer: ModInitializer.() -> Unit
+    val recipeDataSupplier: () -> DataShapedRecipe
 ) {
     miragiumSword(
         null, "miragium_sword", "miragiumSword", 2, { ItemFairyWeapon() },
@@ -96,7 +95,22 @@ enum class FairyWeaponKind(
         null,
         listOf(!ATTACK, !SLASH),
         {
-            // TODO
+            DataShapedRecipe(
+                pattern = listOf(
+                    "sP ",
+                    "aPm",
+                    "cR "
+                ),
+                key = mapOf(
+                    "R" to DataOreIngredient(ore = "stickWood"),
+                    "P" to DataOreIngredient(ore = "plateMiragium"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSlash"),
+                    "a" to DataOreIngredient(ore = "mirageFairy2019SphereAttack"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:miragium_sword")
+            )
         }
     ),
     crystalSword(
@@ -108,25 +122,23 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!CRYSTAL),
         {
-            makeRecipe("fairyweapons/crystal_sword") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "cCC",
-                        "S#C",
-                        "Rmp"
-                    ),
-                    key = mapOf(
-                        "#" to DataSimpleIngredient(item = "miragefairy2019:miragium_sword"),
-                        "R" to DataOreIngredient(ore = "rodMiragium"),
-                        "S" to DataOreIngredient(ore = "mirageFairy2019SphereCrystal"),
-                        "C" to DataOreIngredient(ore = "mirageFairyCrystal"),
-                        "c" to WandType.CRAFTING.ingredientData,
-                        "p" to WandType.POLISHING.ingredientData,
-                        "m" to WandType.MELTING.ingredientData
-                    ),
-                    result = DataResult(item = "miragefairy2019:crystal_sword")
-                )
-            }
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cCC",
+                    "S#C",
+                    "Rmp"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:miragium_sword"),
+                    "R" to DataOreIngredient(ore = "rodMiragium"),
+                    "S" to DataOreIngredient(ore = "mirageFairy2019SphereCrystal"),
+                    "C" to DataOreIngredient(ore = "mirageFairyCrystal"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "p" to WandType.POLISHING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:crystal_sword")
+            )
         }
     ),
     fairySword(
@@ -138,7 +150,25 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!ATTACK),
         {
-            // TODO
+            DataShapedRecipe(
+                pattern = listOf(
+                    "CaF",
+                    "S#A",
+                    "MpO"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:miragium_sword"),
+                    "C" to DataOreIngredient(ore = "gemCinnabar"),
+                    "S" to DataOreIngredient(ore = "gemSulfur"),
+                    "M" to DataOreIngredient(ore = "gemMagnetite"),
+                    "F" to DataOreIngredient(ore = "gemFluorite"),
+                    "A" to DataOreIngredient(ore = "gemApatite"),
+                    "O" to DataOreIngredient(ore = "gemMoonstone"),
+                    "a" to DataOreIngredient(ore = "mirageFairy2019SphereAttack"),
+                    "p" to WandType.POLISHING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:fairy_sword")
+            )
         }
     ),
 
@@ -151,7 +181,23 @@ enum class FairyWeaponKind(
         null,
         listOf(!SLASH, !HARVEST, !"plateMiragium"),
         {
-            // TODO
+            DataShapedRecipe(
+                pattern = listOf(
+                    "sPI",
+                    "fPR",
+                    "cmR"
+                ),
+                key = mapOf(
+                    "R" to DataOreIngredient(ore = "stickWood"),
+                    "I" to DataOreIngredient(ore = "ingotMiragium"),
+                    "P" to DataOreIngredient(ore = "plateMiragium"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSlash"),
+                    "f" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:miragium_axe")
+            )
         }
     ),
 
@@ -164,7 +210,21 @@ enum class FairyWeaponKind(
         null,
         listOf(!KNOWLEDGE, !"ingotMiragium", !"gemFluorite"),
         {
-            // TODO
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cIk",
+                    "IRI",
+                    "RIm"
+                ),
+                key = mapOf(
+                    "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodWind"),
+                    "I" to DataOreIngredient(ore = "ingotMiragium"),
+                    "k" to DataOreIngredient(ore = "mirageFairy2019SphereKnowledge"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:magic_wand_base")
+            )
         }
     ),
     magicWandLight(
@@ -176,7 +236,21 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!LIGHT),
         {
-            // TODO
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cal",
+                    " #a",
+                    "a p"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:magic_wand_base"),
+                    "a" to DataOreIngredient(ore = "gemApatite"),
+                    "l" to DataOreIngredient(ore = "mirageFairy2019SphereLight"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "p" to WandType.POLISHING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:light_magic_wand")
+            )
         }
     ),
     magicWandCollecting(
@@ -188,7 +262,22 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!WARP),
         {
-            // TODO
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cow",
+                    " #o",
+                    "f p"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:magic_wand_base"),
+                    "o" to DataOreIngredient(ore = "obsidian"),
+                    "f" to DataOreIngredient(ore = "gemFluorite"),
+                    "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "p" to WandType.POLISHING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:collecting_magic_wand")
+            )
         }
     ),
     chargingRod(
@@ -200,26 +289,22 @@ enum class FairyWeaponKind(
         null,
         listOf(!THUNDER, !WARP, !"ingotGold"),
         {
-            makeRecipe("charging_rod") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "cgw",
-                        "g#g",
-                        "tgm"
-                    ),
-                    key = mapOf(
-                        "#" to DataSimpleIngredient(item = "miragefairy2019:magic_wand_base"),
-                        "g" to DataOreIngredient(ore = "ingotGold"),
-                        "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
-                        "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
-                        "c" to WandType.CRAFTING.ingredientData,
-                        "m" to WandType.MELTING.ingredientData
-                    ),
-                    result = DataResult(
-                        item = "miragefairy2019:charging_rod"
-                    )
-                )
-            }
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cgw",
+                    "g#g",
+                    "tgm"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:magic_wand_base"),
+                    "g" to DataOreIngredient(ore = "ingotGold"),
+                    "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
+                    "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:charging_rod")
+            )
         }
     ),
     magicWandLightning(
@@ -231,26 +316,22 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!ENERGY, !"blockMirageFairyCrystalPure"),
         {
-            makeRecipe("lightning_magic_wand") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "gge",
-                        "c#g",
-                        "Gmg"
-                    ),
-                    key = mapOf(
-                        "#" to DataSimpleIngredient(item = "miragefairy2019:charging_rod"),
-                        "g" to DataOreIngredient(ore = "ingotGold"),
-                        "e" to DataOreIngredient(ore = "mirageFairy2019SphereEnergy"),
-                        "c" to WandType.CRAFTING.ingredientData,
-                        "m" to WandType.MELTING.ingredientData,
-                        "G" to DataOreIngredient(ore = "blockMirageFairyCrystalPure")
-                    ),
-                    result = DataResult(
-                        item = "miragefairy2019:lightning_magic_wand"
-                    )
-                )
-            }
+            DataShapedRecipe(
+                pattern = listOf(
+                    "gge",
+                    "c#g",
+                    "Gmg"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:charging_rod"),
+                    "g" to DataOreIngredient(ore = "ingotGold"),
+                    "e" to DataOreIngredient(ore = "mirageFairy2019SphereEnergy"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData,
+                    "G" to DataOreIngredient(ore = "blockMirageFairyCrystalPure")
+                ),
+                result = DataResult(item = "miragefairy2019:lightning_magic_wand")
+            )
         }
     ),
 
@@ -263,27 +344,23 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!KNOWLEDGE, !SPACE, !"gemCinnabar", !"obsidian"),
         {
-            makeRecipe("gravity_rod") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "cOs",
-                        "oRO",
-                        "kof"
-                    ),
-                    key = mapOf(
-                        "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodFire"),
-                        "k" to DataOreIngredient(ore = "mirageFairy2019SphereKnowledge"),
-                        "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace"),
-                        "o" to DataOreIngredient(ore = "obsidian"),
-                        "O" to DataOreIngredient(ore = "container1000MirageFlowerOil"),
-                        "c" to WandType.CRAFTING.ingredientData,
-                        "f" to WandType.FUSION.ingredientData
-                    ),
-                    result = DataResult(
-                        item = "miragefairy2019:gravity_rod"
-                    )
-                )
-            }
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cOs",
+                    "oRO",
+                    "kof"
+                ),
+                key = mapOf(
+                    "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodFire"),
+                    "k" to DataOreIngredient(ore = "mirageFairy2019SphereKnowledge"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace"),
+                    "o" to DataOreIngredient(ore = "obsidian"),
+                    "O" to DataOreIngredient(ore = "container1000MirageFlowerOil"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "f" to WandType.FUSION.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:gravity_rod")
+            )
         }
     ),
 
@@ -296,7 +373,22 @@ enum class FairyWeaponKind(
         null,
         listOf(!SOUND),
         {
-            // TODO
+            DataShapedRecipe(
+                pattern = listOf(
+                    "pGm",
+                    "GSG",
+                    "cGI"
+                ),
+                key = mapOf(
+                    "G" to DataOreIngredient(ore = "gemApatite"),
+                    "S" to DataOreIngredient(ore = "mirageFairy2019SphereSound"),
+                    "I" to DataOreIngredient(ore = "ingotMiragium"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData,
+                    "p" to WandType.POLISHING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:ocarina_base")
+            )
         }
     ),
     ocarinaTemptation(
@@ -308,7 +400,21 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!LIFE),
         {
-            // TODO
+            DataShapedRecipe(
+                pattern = listOf(
+                    "pGS",
+                    "G#G",
+                    "cG "
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:ocarina_base"),
+                    "G" to DataOreIngredient(ore = "gemPyrope"),
+                    "S" to DataOreIngredient(ore = "mirageFairy2019SphereLife"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "p" to WandType.POLISHING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:temptation_ocarina")
+            )
         }
     ),
 
@@ -321,24 +427,22 @@ enum class FairyWeaponKind(
         null,
         listOf(!SOUND, !"plateMiragium"),
         {
-            makeRecipe("fairyweapons/bell_base") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "cPs",
-                        " RP",
-                        "I m"
-                    ),
-                    key = mapOf(
-                        "R" to DataOreIngredient(ore = "rodMiragium"),
-                        "I" to DataOreIngredient(ore = "ingotMiragium"),
-                        "P" to DataOreIngredient(ore = "plateMiragium"),
-                        "s" to DataOreIngredient(ore = "mirageFairy2019SphereSound"),
-                        "c" to WandType.CRAFTING.ingredientData,
-                        "m" to WandType.MELTING.ingredientData
-                    ),
-                    result = DataResult(item = "miragefairy2019:bell_base")
-                )
-            }
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cPs",
+                    " RP",
+                    "I m"
+                ),
+                key = mapOf(
+                    "R" to DataOreIngredient(ore = "rodMiragium"),
+                    "I" to DataOreIngredient(ore = "ingotMiragium"),
+                    "P" to DataOreIngredient(ore = "plateMiragium"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSound"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:bell_base")
+            )
         }
     ),
     bellFlowerPicking(
@@ -350,25 +454,23 @@ enum class FairyWeaponKind(
         null,
         listOf(!HARVEST),
         {
-            makeRecipe("fairyweapons/flower_picking_bell") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "cIh",
-                        "o#I",
-                        "gom"
-                    ),
-                    key = mapOf(
-                        "#" to DataSimpleIngredient(item = "miragefairy2019:bell_base"),
-                        "g" to DataOreIngredient(ore = "ingotGold"),
-                        "o" to DataOreIngredient(ore = "obsidian"),
-                        "I" to DataOreIngredient(ore = "ingotLilagium"),
-                        "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
-                        "c" to WandType.CRAFTING.ingredientData,
-                        "m" to WandType.MELTING.ingredientData
-                    ),
-                    result = DataResult(item = "miragefairy2019:flower_picking_bell")
-                )
-            }
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cIh",
+                    "o#I",
+                    "gom"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:bell_base"),
+                    "g" to DataOreIngredient(ore = "ingotGold"),
+                    "o" to DataOreIngredient(ore = "obsidian"),
+                    "I" to DataOreIngredient(ore = "ingotLilagium"),
+                    "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:flower_picking_bell")
+            )
         }
     ),
     bellFlowerPicking2(
@@ -380,24 +482,22 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!HARVEST),
         {
-            makeRecipe("fairyweapons/flower_picking_bell_2") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "cGh",
-                        "G#G",
-                        "RGp"
-                    ),
-                    key = mapOf(
-                        "#" to DataSimpleIngredient(item = "miragefairy2019:flower_picking_bell"),
-                        "R" to DataOreIngredient(ore = "stickMirageFairyWood"),
-                        "G" to DataOreIngredient(ore = "gemPyrope"),
-                        "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
-                        "c" to WandType.CRAFTING.ingredientData,
-                        "p" to WandType.POLISHING.ingredientData
-                    ),
-                    result = DataResult(item = "miragefairy2019:flower_picking_bell_2")
-                )
-            }
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cGh",
+                    "G#G",
+                    "RGp"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:flower_picking_bell"),
+                    "R" to DataOreIngredient(ore = "stickMirageFairyWood"),
+                    "G" to DataOreIngredient(ore = "gemPyrope"),
+                    "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "p" to WandType.POLISHING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:flower_picking_bell_2")
+            )
         }
     ),
     bellChristmas(
@@ -409,7 +509,25 @@ enum class FairyWeaponKind(
         "challenge",
         listOf(!CHRISTMAS, !ATTACK, !"ingotGold", !"gemMagnetite"),
         {
-            // TODO
+            DataShapedRecipe(
+                pattern = listOf(
+                    "c1S",
+                    "3#4",
+                    "R2m"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:bell_base"),
+                    "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodDark"),
+                    "1" to DataOreIngredient(ore = "blockGold"),
+                    "2" to DataOreIngredient(ore = "ingotGold"),
+                    "3" to DataSimpleIngredient(item = "minecraft:sapling", data = 1),
+                    "S" to DataOreIngredient(ore = "mirageFairy2019SphereChristmas"),
+                    "4" to DataOreIngredient(ore = "mirageFairy2019SphereAttack"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:christmas_bell")
+            )
         }
     ),
 
@@ -422,7 +540,23 @@ enum class FairyWeaponKind(
         null,
         listOf(!SLASH, !HARVEST),
         {
-            // TODO
+            DataShapedRecipe(
+                pattern = listOf(
+                    "fPI",
+                    "PsR",
+                    "mcR"
+                ),
+                key = mapOf(
+                    "R" to DataOreIngredient(ore = "stickWood"),
+                    "I" to DataOreIngredient(ore = "ingotMiragium"),
+                    "P" to DataOreIngredient(ore = "plateMiragium"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSlash"),
+                    "f" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:miragium_scythe")
+            )
         }
     ),
     lilagiumScythe(
@@ -434,24 +568,22 @@ enum class FairyWeaponKind(
         null,
         listOf(!HARVEST),
         {
-            makeRecipe("fairyweapons/lilagium_scythe") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "hII",
-                        "I#R",
-                        "mcR"
-                    ),
-                    key = mapOf(
-                        "#" to DataSimpleIngredient(item = "miragefairy2019:miragium_scythe"),
-                        "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodGaia"),
-                        "I" to DataOreIngredient(ore = "ingotLilagium"),
-                        "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
-                        "c" to WandType.CRAFTING.ingredientData,
-                        "m" to WandType.MELTING.ingredientData
-                    ),
-                    result = DataResult(item = "miragefairy2019:lilagium_scythe")
-                )
-            }
+            DataShapedRecipe(
+                pattern = listOf(
+                    "hII",
+                    "I#R",
+                    "mcR"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:miragium_scythe"),
+                    "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodGaia"),
+                    "I" to DataOreIngredient(ore = "ingotLilagium"),
+                    "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:lilagium_scythe")
+            )
         }
     ),
 
@@ -464,25 +596,23 @@ enum class FairyWeaponKind(
         "goal",
         listOf(!DESTROY, !THUNDER, !WATER),
         {
-            makeRecipe("fairyweapons/ryugyo_drill") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "cLL",
-                        "b#L",
-                        "twf"
-                    ),
-                    key = mapOf(
-                        "#" to DataSimpleIngredient(item = "minecraft:fish", data = 2),
-                        "L" to DataOreIngredient(ore = "mirageFairyLeather"),
-                        "c" to WandType.CRAFTING.ingredientData,
-                        "f" to WandType.FUSION.ingredientData,
-                        "b" to DataOreIngredient(ore = "mirageFairy2019SphereDestroy"),
-                        "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
-                        "w" to DataOreIngredient(ore = "mirageFairy2019SphereWater")
-                    ),
-                    result = DataResult(item = "miragefairy2019:ryugyo_drill")
-                )
-            }
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cLL",
+                    "b#L",
+                    "twf"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "minecraft:fish", data = 2),
+                    "L" to DataOreIngredient(ore = "mirageFairyLeather"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "f" to WandType.FUSION.ingredientData,
+                    "b" to DataOreIngredient(ore = "mirageFairy2019SphereDestroy"),
+                    "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
+                    "w" to DataOreIngredient(ore = "mirageFairy2019SphereWater")
+                ),
+                result = DataResult(item = "miragefairy2019:ryugyo_drill")
+            )
         }
     ),
 
@@ -495,25 +625,21 @@ enum class FairyWeaponKind(
         null,
         listOf(!SUBMISSION, !SUBMISSION, !"ingotIron", !"gemDiamond"),
         {
-            makeRecipe("prayer_wheel") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "JCJ",
-                        "SRS",
-                        "sRs"
-                    ),
-                    key = mapOf(
-                        "R" to DataOreIngredient(ore = "stickWood"),
-                        "C" to DataSimpleIngredient(item = "minecraft:compass"),
-                        "J" to DataSimpleIngredient(item = "minecraft:jukebox"),
-                        "S" to DataOreIngredient(ore = "string"),
-                        "s" to DataOreIngredient(ore = "mirageFairy2019SphereSubmission")
-                    ),
-                    result = DataResult(
-                        item = "miragefairy2019:prayer_wheel"
-                    )
-                )
-            }
+            DataShapedRecipe(
+                pattern = listOf(
+                    "JCJ",
+                    "SRS",
+                    "sRs"
+                ),
+                key = mapOf(
+                    "R" to DataOreIngredient(ore = "stickWood"),
+                    "C" to DataSimpleIngredient(item = "minecraft:compass"),
+                    "J" to DataSimpleIngredient(item = "minecraft:jukebox"),
+                    "S" to DataOreIngredient(ore = "string"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSubmission")
+                ),
+                result = DataResult(item = "miragefairy2019:prayer_wheel")
+            )
         }
     ),
     prayerWheel2(
@@ -525,26 +651,22 @@ enum class FairyWeaponKind(
         null,
         listOf(!"ingotGold", !"dustCinnabar"),
         {
-            makeRecipe("prayer_wheel_2") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "crC",
-                        " #r",
-                        "R s"
-                    ),
-                    key = mapOf(
-                        "#" to DataSimpleIngredient(item = "miragefairy2019:prayer_wheel"),
-                        "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodShine"),
-                        "C" to DataSimpleIngredient(item = "minecraft:clock"),
-                        "r" to DataOreIngredient(ore = "dustCinnabar"),
-                        "c" to WandType.CRAFTING.ingredientData,
-                        "s" to WandType.SUMMONING.ingredientData
-                    ),
-                    result = DataResult(
-                        item = "miragefairy2019:prayer_wheel_2"
-                    )
-                )
-            }
+            DataShapedRecipe(
+                pattern = listOf(
+                    "crC",
+                    " #r",
+                    "R s"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:prayer_wheel"),
+                    "R" to DataOreIngredient(ore = "mirageFairy2019ManaRodShine"),
+                    "C" to DataSimpleIngredient(item = "minecraft:clock"),
+                    "r" to DataOreIngredient(ore = "dustCinnabar"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "s" to WandType.SUMMONING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:prayer_wheel_2")
+            )
         }
     ),
     prayerWheel3(
@@ -556,25 +678,21 @@ enum class FairyWeaponKind(
         "challenge",
         listOf(!"gemMirageFairyPlastic", !"gemMirageFairyPlastic"),
         {
-            makeRecipe("prayer_wheel_3") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        " pf",
-                        "c#p",
-                        "Rc "
-                    ),
-                    key = mapOf(
-                        "#" to DataSimpleIngredient(item = "miragefairy2019:prayer_wheel_2"),
-                        "R" to DataOreIngredient(ore = "rodMirageFairyPlastic"),
-                        "p" to DataOreIngredient(ore = "gemMirageFairyPlastic"),
-                        "f" to DataOreIngredient(ore = "gemMirageFairyPlasticWithFairy"),
-                        "c" to DataOreIngredient(ore = "dustCoal")
-                    ),
-                    result = DataResult(
-                        item = "miragefairy2019:prayer_wheel_3"
-                    )
-                )
-            }
+            DataShapedRecipe(
+                pattern = listOf(
+                    " pf",
+                    "c#p",
+                    "Rc "
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:prayer_wheel_2"),
+                    "R" to DataOreIngredient(ore = "rodMirageFairyPlastic"),
+                    "p" to DataOreIngredient(ore = "gemMirageFairyPlastic"),
+                    "f" to DataOreIngredient(ore = "gemMirageFairyPlasticWithFairy"),
+                    "c" to DataOreIngredient(ore = "dustCoal")
+                ),
+                result = DataResult(item = "miragefairy2019:prayer_wheel_3")
+            )
         }
     ),
 }
@@ -668,7 +786,9 @@ object FairyWeapon {
             }
 
             // レシピ生成
-            fairyWeaponKind.initializer(this)
+            makeRecipe("fairy_weapon/${fairyWeaponKind.registryName}") {
+                fairyWeaponKind.recipeDataSupplier()
+            }
 
             // 実績生成
             makeAdvancement("fairy_weapon/${fairyWeaponKind.registryName}") {
