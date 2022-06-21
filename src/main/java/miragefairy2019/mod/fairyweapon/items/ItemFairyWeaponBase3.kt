@@ -31,7 +31,6 @@ import miragefairy2019.libkt.white
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.fairyweapon.deprecated.MagicStatusFunctionArguments
 import miragefairy2019.mod.fairyweapon.deprecated.negative
-import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.deprecated.ranged
 import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.magic4.Formula
@@ -209,7 +208,7 @@ fun ItemFairyWeaponBase3.createStrengthStatus(weaponStrength: Double, strengthEr
         AQUA -> !AQUA
         DARK -> !DARK
     }
-}) { float0.positive }.setVisibility(EnumVisibility.ALWAYS)
+}) { float0 }.setVisibility(EnumVisibility.ALWAYS)
 
 fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Erg) = status("extent", {
     (weaponExtent + !extentErg) * (cost / 50.0) + when (weaponMana) {
@@ -220,7 +219,7 @@ fun ItemFairyWeaponBase3.createExtentStatus(weaponExtent: Double, extentErg: Erg
         AQUA -> !GAIA + !WIND
         DARK -> !GAIA + !WIND
     }
-}) { float0.positive }.setVisibility(EnumVisibility.ALWAYS)
+}) { float0 }.setVisibility(EnumVisibility.ALWAYS)
 
 fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranceErg: Erg) = status("endurance", {
     (weaponEndurance + !enduranceErg) * (cost / 50.0) + when (weaponMana) {
@@ -231,7 +230,7 @@ fun ItemFairyWeaponBase3.createEnduranceStatus(weaponEndurance: Double, enduranc
         AQUA -> !FIRE * 2
         DARK -> !FIRE + !AQUA
     }
-}) { float0.positive }.setVisibility(EnumVisibility.ALWAYS)
+}) { float0 }.setVisibility(EnumVisibility.ALWAYS)
 
 fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, productionErg: Erg) = status("production", {
     (weaponProduction + !productionErg) * (cost / 50.0) + when (weaponMana) {
@@ -242,6 +241,6 @@ fun ItemFairyWeaponBase3.createProductionStatus(weaponProduction: Double, produc
         AQUA -> !SHINE + !DARK
         DARK -> !SHINE * 2
     }
-}) { float0.positive }.setVisibility(EnumVisibility.ALWAYS)
+}) { float0 }.setVisibility(EnumVisibility.ALWAYS)
 
 fun ItemFairyWeaponBase3.createCostStatus() = status("cost", { cost / (1.0 + !mastery * 0.002) }) { float0.negative }.setVisibility(EnumVisibility.ALWAYS)

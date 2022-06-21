@@ -47,32 +47,13 @@ data class MagicStatusFunctionArguments(
     override fun getRawErg(erg: Erg) = fairyType.erg(erg)
 }
 
-val <T> Formula<T>.defaultValue: T get() = calculate(MagicStatusFunctionArguments(null, { 0 }, EMPTY_FAIRY))
-
-
-fun <T : Comparable<T>> FormulaRenderer<T>.coloredBySign(colorPositive: TextFormatting, colorNegative: TextFormatting) = FormulaRenderer<T> { arguments, function ->
-    val value = function.calculate(arguments)
-    val defaultValue = function.defaultValue
-    val displayValue = this@coloredBySign.render(arguments, function)
-    when {
-        value > defaultValue -> textComponent { displayValue().withColor(colorPositive) }
-        value < defaultValue -> textComponent { displayValue().withColor(colorNegative) }
-        else -> displayValue
-    }
-}
-
-val <T : Comparable<T>> FormulaRenderer<T>.positive get() = coloredBySign(GREEN, RED)
-val <T : Comparable<T>> FormulaRenderer<T>.negative get() = coloredBySign(RED, GREEN)
-
 fun <T : Comparable<T>> MagicStatus<T>.ranged(min: T, max: T) = MagicStatus(
     name = this@ranged.name,
     formula = Formula { this@ranged.formula.calculate(it).coerceIn(min, max) },
     renderer = FormulaRenderer<T> { arguments, function ->
         val value = function.calculate(arguments)
-        val defaultValue = function.defaultValue
         val displayValue = this@ranged.renderer.render(arguments, function)
         when (value) {
-            defaultValue -> displayValue
             min -> textComponent { displayValue().bold }
             max -> textComponent { displayValue().bold }
             else -> displayValue
