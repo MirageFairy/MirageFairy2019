@@ -14,11 +14,11 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.artifacts.MirageFlower
-import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
 import miragefairy2019.mod.fairyweapon.deprecated.negative
 import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.deprecated.positiveBoolean
 import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
+import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.skill.EnumMastery
@@ -69,7 +69,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
         val magicSelectorPosition = magicSelectorRayTrace.position
 
         // 妖精を持っていない場合、中止
-        if (fairyType.isEmpty) return@magic object : IMagicHandler {
+        if (fairyType.isEmpty) return@magic object : MagicHandler() {
             override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0xFF00FF) // 視点
             }
@@ -95,7 +95,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
             .toList() // リストにする
 
         // 資源がない場合、中止
-        if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic object : IMagicHandler {
+        if (itemStack.itemDamage + ceil(!wear).toInt() > itemStack.maxDamage) return@magic object : MagicHandler() {
             override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0xFF0000) // 視点
                 magicSelectorCircle.item.doEffect() // 範囲
@@ -103,7 +103,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
         }
 
         // 発動対象がない場合、中止
-        if (listTarget.isEmpty()) return@magic object : IMagicHandler {
+        if (listTarget.isEmpty()) return@magic object : MagicHandler() {
             override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0x00FFFF) // 視点
                 magicSelectorCircle.item.doEffect() // 範囲
@@ -111,7 +111,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
         }
 
         // クールタイムが残っている場合、中止
-        if (player.cooldownTracker.hasCooldown(this@ItemBellFlowerPicking)) return@magic object : IMagicHandler {
+        if (player.cooldownTracker.hasCooldown(this@ItemBellFlowerPicking)) return@magic object : MagicHandler() {
             override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0xFFFF00) // 視点
                 magicSelectorCircle.item.doEffect() // 範囲
@@ -120,7 +120,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
         }
 
         // 魔法成立
-        object : IMagicHandler {
+        object : MagicHandler() {
             override fun onUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0x00FF00) // 視点
                 magicSelectorCircle.item.doEffect() // 範囲

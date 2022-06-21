@@ -10,9 +10,9 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
-import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
 import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.findItem
+import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.skill.EnumMastery
 import net.minecraft.entity.EntityLivingBase
@@ -42,7 +42,7 @@ class ItemCrystalSword : ItemFairyWeaponBase3(Mana.GAIA, EnumMastery.closeCombat
     override fun getMagicDescription(itemStack: ItemStack) = "撃破時、フェアリークリスタルを消費して妖精を召喚" // TODO translate
 
     override val magic = magic {
-        object : IMagicHandler {
+        object : MagicHandler() {
             override fun hitEntity(target: EntityLivingBase) {
                 if (target.health > 0) return // 撃破時のみ有効
 

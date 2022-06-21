@@ -8,9 +8,9 @@ import miragefairy2019.lib.rayTrace
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
 import miragefairy2019.mod.fairyweapon.breakBlock
-import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
 import miragefairy2019.mod.fairyweapon.deprecated.positive
 import miragefairy2019.mod.fairyweapon.findFairy
+import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.spawnParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.skill.IMastery
@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
-fun MagicScope.fail(cursor: Vec3d, color: Int) = object : IMagicHandler {
+fun MagicScope.fail(cursor: Vec3d, color: Int) = object : MagicHandler() {
     override fun onUpdate(itemSlot: Int, isSelected: Boolean) = spawnParticle(world, cursor, color)
 }
 
@@ -59,7 +59,7 @@ abstract class ItemMiragiumToolBase(
         if (!targets.hasNext()) return@magic fail(selectorRayTrace.item.position, 0x00FFFF) // ターゲットなし判定
         if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic fail(selectorRayTrace.item.position, 0xFFFF00) // クールダウン判定
 
-        object : IMagicHandler { // 行使可能
+        object : MagicHandler() { // 行使可能
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
                 if (world.isRemote) { // クライアントワールドの場合、腕を振るだけ
                     player.swingArm(hand) // エフェクト

@@ -30,11 +30,10 @@ import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.white
 import miragefairy2019.mod.Main.side
-import miragefairy2019.mod.fairyweapon.deprecated.IMagicHandler
-import miragefairy2019.mod.fairyweapon.deprecated.IMagicStatus
-import miragefairy2019.mod.fairyweapon.deprecated.FormulaRenderer
 import miragefairy2019.mod.fairyweapon.deprecated.Formula
 import miragefairy2019.mod.fairyweapon.deprecated.FormulaArguments
+import miragefairy2019.mod.fairyweapon.deprecated.FormulaRenderer
+import miragefairy2019.mod.fairyweapon.deprecated.IMagicStatus
 import miragefairy2019.mod.fairyweapon.deprecated.MagicStatus
 import miragefairy2019.mod.fairyweapon.deprecated.MagicStatusFunctionArguments
 import miragefairy2019.mod.fairyweapon.deprecated.displayName
@@ -47,6 +46,7 @@ import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.ALWAYS
 import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.DETAIL
 import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponBase3.Companion.EnumVisibility.NEVER
+import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.getSkillLevel
@@ -77,11 +77,11 @@ class MagicScope(
     val fairyType get() = item.getActualFairyType(playerProxy, partnerFairyType)
 }
 
-typealias Magic = MagicScope.() -> IMagicHandler
+typealias Magic = MagicScope.() -> MagicHandler
 
 fun magic(magic: Magic) = magic
 
-fun Magic?.getMagicHandler(magicScope: MagicScope) = this?.invoke(magicScope) ?: object : IMagicHandler {}
+fun Magic?.getMagicHandler(magicScope: MagicScope) = this?.invoke(magicScope) ?: object : MagicHandler() {}
 
 
 abstract class ItemFairyWeaponBase3(
