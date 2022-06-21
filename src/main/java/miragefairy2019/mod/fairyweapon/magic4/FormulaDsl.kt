@@ -50,9 +50,7 @@ fun <T> IMagicStatusContainer.status(
 ): MagicStatus<T> {
     val magicStatus = MagicStatus(
         name,
-        object : Formula<T> {
-            override fun calculate(formulaArguments: FormulaArguments) = FormulaScope(formulaArguments).formula()
-        },
+        Formula { FormulaScope(it).formula() },
         FormulaRendererSelector<T>().formulaRendererGetter()
     )
     magicStatusList += magicStatus
