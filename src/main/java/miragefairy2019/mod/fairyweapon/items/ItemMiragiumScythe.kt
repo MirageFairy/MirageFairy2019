@@ -25,8 +25,8 @@ class ItemMiragiumScythe(
     EnumMastery.harvest,
     additionalBaseStatus
 ) {
-    val maxHardness = status("maxHardness", { !strength * 0.01 }) { float2.positive }.setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL)
-    val range = status("range", { (2 + !extent * 0.02).toInt() }) { integer.positive }.setRange(2..5).setVisibility(EnumVisibility.DETAIL)
+    val maxHardness = status("maxHardness", { !strength.magicStatus * 0.01 }) { float2.positive }.setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL)
+    val range = status("range", { (2 + !extent.magicStatus * 0.02).toInt() }) { integer.positive }.setRange(2..5).setVisibility(EnumVisibility.DETAIL)
     val coolTime = status("coolTime", { cost * 0.3 }) { duration.negative }.setVisibility(EnumVisibility.DETAIL)
 
     override fun iterateTargets(magicScope: MagicScope, blockPosBase: BlockPos) = iterator {

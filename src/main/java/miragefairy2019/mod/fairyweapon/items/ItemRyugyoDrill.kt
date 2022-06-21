@@ -24,8 +24,8 @@ class ItemRyugyoDrill(
     EnumMastery.mining,
     additionalBaseStatus
 ) {
-    val maxHardness = status("maxHardness", { 2.0 + !strength * 0.02 }) { float2.positive }.setRange(2.0..20.0).setVisibility(EnumVisibility.DETAIL)
-    val range = status("range", { (1 + !extent * 0.01).toInt() }) { integer.positive }.setRange(1..5).setVisibility(EnumVisibility.DETAIL)
+    val maxHardness = status("maxHardness", { 2.0 + !strength.magicStatus * 0.02 }) { float2.positive }.setRange(2.0..20.0).setVisibility(EnumVisibility.DETAIL)
+    val range = status("range", { (1 + !extent.magicStatus * 0.01).toInt() }) { integer.positive }.setRange(1..5).setVisibility(EnumVisibility.DETAIL)
     val coolTime = status("coolTime", { cost * 2.0 }) { duration.negative }.setVisibility(EnumVisibility.DETAIL)
 
     init {

@@ -28,6 +28,16 @@ class FormulaScope(private val formulaArguments: FormulaArguments) {
     operator fun <T> MagicStatus<T>.not() = this(formulaArguments)
 }
 
+// TODO remove
+class OldFormulaScope(val formulaArguments: FormulaArguments) {
+    operator fun Mana.not() = formulaArguments.getOldMana(this)
+    operator fun Erg.not() = formulaArguments.getRawErg(this)
+    operator fun IMastery.not() = formulaArguments.getSkillLevel(this)
+    val cost get() = formulaArguments.cost
+    val costFactor get() = cost / 50.0
+    operator fun <T> MagicStatus<T>.not() = this(formulaArguments)
+}
+
 class SimpleFormulaArguments(
     override val hasPartnerFairy: Boolean,
     private val manaSet: ManaSet,
