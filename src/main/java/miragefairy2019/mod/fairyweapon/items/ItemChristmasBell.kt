@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.floor
 import kotlin.math.pow
 
-class ItemBellChristmas : ItemAoeWeaponBase() {
+class ItemChristmasBell : ItemAoeWeaponBase() {
     override fun MagicArguments.getActualDamage(target: EntityLivingBase) = damage() * damageBoost() * (if (target.isEntityUndead) 1.5 else 1.0)
     val damage = status("damage", { (3.0 + (!Mana.SHINE + !Erg.CHRISTMAS) / 10.0) * costFactor }, { float2 })
     val damageBoost = status("damageBoost", { 1.0 + !Mastery.rangedCombat / 100.0 }, { percent0 })

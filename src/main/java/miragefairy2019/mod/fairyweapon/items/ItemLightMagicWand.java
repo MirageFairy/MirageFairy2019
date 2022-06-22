@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class ItemMagicWandLight extends ItemFairyWeapon {
+public class ItemLightMagicWand extends ItemFairyWeapon {
 
     protected static class Status {
 

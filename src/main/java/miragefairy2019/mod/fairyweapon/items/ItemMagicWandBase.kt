@@ -25,7 +25,7 @@ import net.minecraft.world.WorldServer
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-class ItemRodBase : ItemFairyWeaponMagic4() {
+class ItemMagicWandBase : ItemFairyWeaponMagic4() {
     val additionalReach = status("additionalReach", { 10.0 + (!Mana.WIND + !Erg.LEVITATE) / 5.0 atMost 50.0 }, { float2 })
 
     @SideOnly(Side.CLIENT)

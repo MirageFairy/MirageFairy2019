@@ -32,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 import kotlin.math.floor
 
-class ItemMagicWandCollecting : ItemFairyWeaponMagic4() {
+class ItemCollectingMagicWand : ItemFairyWeaponMagic4() {
     val speed = status("speed", { (5.0 + !Mana.WIND / 5.0 + !Erg.WARP / 2.0) }, { float2 })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.magicCombat / 100 }, { percent0 })
     val additionalReach = status("additionalReach", { 0.0 + (!Mana.GAIA + !Erg.SHOOT) / 5.0 atMost 30.0 }, { float2 })
@@ -113,7 +113,7 @@ class ItemMagicWandCollecting : ItemFairyWeaponMagic4() {
                     if (successed > 0) {
 
                         // 行使ごとの消費
-                        player.cooldownTracker.setCooldown(this@ItemMagicWandCollecting, ceil(successed * 20.0 / (speed() * speedBoost())).toInt()) // クールタイム
+                        player.cooldownTracker.setCooldown(this@ItemCollectingMagicWand, ceil(successed * 20.0 / (speed() * speedBoost())).toInt()) // クールタイム
 
                         // 行使ごとのエフェクト
                         world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F) // 音

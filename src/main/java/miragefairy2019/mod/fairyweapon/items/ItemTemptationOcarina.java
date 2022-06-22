@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 
 import static miragefairy2019.mod.fairyweapon.ParticleUtilKt.spawnParticleSphericalRange;
 
-public class ItemOcarinaTemptation extends ItemFairyWeapon {
+public class ItemTemptationOcarina extends ItemFairyWeapon {
 
     protected static class Status {
 

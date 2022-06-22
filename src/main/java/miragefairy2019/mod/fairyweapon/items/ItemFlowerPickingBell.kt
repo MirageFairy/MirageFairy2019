@@ -47,7 +47,7 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.pow
 
-class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFactor: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase3(Mana.DARK, Mastery.flowerPicking) {
+class ItemFlowerPickingBell(additionalBaseStatus: Double, extraItemDropRateFactor: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase3(Mana.DARK, Mastery.flowerPicking) {
     val strength = createStrengthStatus(additionalBaseStatus, Erg.SOUND)
     val extent = createExtentStatus(additionalBaseStatus, Erg.SPACE)
     val endurance = createEnduranceStatus(additionalBaseStatus, Erg.SLASH)
@@ -118,7 +118,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
         }
 
         // クールタイムが残っている場合、中止
-        if (player.cooldownTracker.hasCooldown(this@ItemBellFlowerPicking)) return@magic object : MagicHandler() {
+        if (player.cooldownTracker.hasCooldown(this@ItemFlowerPickingBell)) return@magic object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
                 magicSelectorPosition.item.doEffect(0xFFFF00) // 視点
                 magicSelectorCircle.item.doEffect() // 範囲
@@ -209,7 +209,7 @@ class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFacto
 
                     // クールタイム
                     val ratio = targetCount / (maxTargetCount()).toDouble()
-                    player.cooldownTracker.setCooldown(this@ItemBellFlowerPicking, (coolTime() * ratio.pow(0.5)).toInt())
+                    player.cooldownTracker.setCooldown(this@ItemFlowerPickingBell, (coolTime() * ratio.pow(0.5)).toInt())
 
                 }
                 if (collected) {

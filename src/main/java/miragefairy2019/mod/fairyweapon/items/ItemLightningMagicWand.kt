@@ -28,7 +28,7 @@ import net.minecraft.world.WorldServer
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-class ItemMagicWandLightning : ItemAoeWeaponBase() {
+class ItemLightningMagicWand : ItemAoeWeaponBase() {
     override fun MagicArguments.getActualDamage(target: EntityLivingBase) = damage() * damageBoost() * criticalRate().get(world.rand).coefficient
     val damage = status("damage", { (5.0 + (!Mana.WIND + !Erg.THUNDER) / 10.0) * costFactor }, { float2 })
     val damageBoost = status("damageBoost", { 1.0 + !Mastery.magicCombat / 100.0 }, { percent0 })

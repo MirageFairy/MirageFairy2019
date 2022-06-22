@@ -31,22 +31,22 @@ import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
 import miragefairy2019.mod.fairyweapon.items.ItemBellBase
-import miragefairy2019.mod.fairyweapon.items.ItemBellChristmas
-import miragefairy2019.mod.fairyweapon.items.ItemBellFlowerPicking
 import miragefairy2019.mod.fairyweapon.items.ItemChargingRod
+import miragefairy2019.mod.fairyweapon.items.ItemChristmasBell
+import miragefairy2019.mod.fairyweapon.items.ItemCollectingMagicWand
 import miragefairy2019.mod.fairyweapon.items.ItemCrystalSword
 import miragefairy2019.mod.fairyweapon.items.ItemFairySword
 import miragefairy2019.mod.fairyweapon.items.ItemFairyWeapon
+import miragefairy2019.mod.fairyweapon.items.ItemFlowerPickingBell
 import miragefairy2019.mod.fairyweapon.items.ItemGravityRod
-import miragefairy2019.mod.fairyweapon.items.ItemMagicWandCollecting
-import miragefairy2019.mod.fairyweapon.items.ItemMagicWandLight
-import miragefairy2019.mod.fairyweapon.items.ItemMagicWandLightning
+import miragefairy2019.mod.fairyweapon.items.ItemLightMagicWand
+import miragefairy2019.mod.fairyweapon.items.ItemLightningMagicWand
+import miragefairy2019.mod.fairyweapon.items.ItemMagicWandBase
 import miragefairy2019.mod.fairyweapon.items.ItemMiragiumAxe
 import miragefairy2019.mod.fairyweapon.items.ItemMiragiumScythe
-import miragefairy2019.mod.fairyweapon.items.ItemOcarinaTemptation
 import miragefairy2019.mod.fairyweapon.items.ItemPrayerWheel
-import miragefairy2019.mod.fairyweapon.items.ItemRodBase
 import miragefairy2019.mod.fairyweapon.items.ItemRyugyoDrill
+import miragefairy2019.mod.fairyweapon.items.ItemTemptationOcarina
 import miragefairy2019.resourcemaker.DataOreIngredient
 import miragefairy2019.resourcemaker.DataResult
 import miragefairy2019.resourcemaker.DataShapedRecipe
@@ -202,7 +202,7 @@ enum class FairyWeaponKind(
     ),
 
     magicWandBase(
-        null, "magic_wand_base", "magicWandBase", 3, { ItemRodBase() },
+        null, "magic_wand_base", "magicWandBase", 3, { ItemMagicWandBase() },
         LangPair("Magic Wand Base", "ロッドベース"),
         LangPair("", "風の心、探求"),
         null,
@@ -228,7 +228,7 @@ enum class FairyWeaponKind(
         }
     ),
     magicWandLight(
-        magicWandBase, "light_magic_wand", "magicWandLight", 3, { ItemMagicWandLight() },
+        magicWandBase, "light_magic_wand", "magicWandLight", 3, { ItemLightMagicWand() },
         LangPair("Magic Wand of Light", "光のロッド"),
         LangPair("", "古代の魔法「ニクトフォビア」、優しい光が洞窟を照らす"),
         null,
@@ -254,7 +254,7 @@ enum class FairyWeaponKind(
         }
     ),
     magicWandCollecting(
-        magicWandBase, "collecting_magic_wand", "magicWandCollecting", 3, { ItemMagicWandCollecting() },
+        magicWandBase, "collecting_magic_wand", "magicWandCollecting", 3, { ItemCollectingMagicWand() },
         LangPair("Magic Wand of Collecting", "収集のロッド"),
         LangPair("", "新開発の魔法「ソルメローシェ・トリーパ」、魔法のマジックハンド"),
         null,
@@ -308,7 +308,7 @@ enum class FairyWeaponKind(
         }
     ),
     magicWandLightning(
-        chargingRod, "lightning_magic_wand", "magicWandLightning", 3, { ItemMagicWandLightning() },
+        chargingRod, "lightning_magic_wand", "magicWandLightning", 3, { ItemLightningMagicWand() },
         LangPair("Magic Wand of Lightning", "ライトニングロッド"),
         LangPair("", "古代魔法「ライトニングボルト」"),
         null,
@@ -392,7 +392,7 @@ enum class FairyWeaponKind(
         }
     ),
     ocarinaTemptation(
-        ocarinaBase, "temptation_ocarina", "ocarinaTemptation", 3, { ItemOcarinaTemptation() },
+        ocarinaBase, "temptation_ocarina", "ocarinaTemptation", 3, { ItemTemptationOcarina() },
         LangPair("Ocarina of Temptation", "魅惑のオカリナ"),
         LangPair("", "その音は人の腹を満たし、淫靡な気分にさせる"),
         null,
@@ -446,7 +446,7 @@ enum class FairyWeaponKind(
         }
     ),
     bellFlowerPicking(
-        bellBase, "flower_picking_bell", "bellFlowerPicking", 2, { ItemBellFlowerPicking(0.0, 0.001, 0.2) },
+        bellBase, "flower_picking_bell", "bellFlowerPicking", 2, { ItemFlowerPickingBell(0.0, 0.001, 0.2) },
         LangPair("Bell of Flower Picking", "花摘みの鐘"),
         LangPair("", "ちょっとお花を摘みに"),
         null,
@@ -474,7 +474,7 @@ enum class FairyWeaponKind(
         }
     ),
     bellFlowerPicking2(
-        bellFlowerPicking, "flower_picking_bell_2", "bellFlowerPicking2", 4, { ItemBellFlowerPicking(10.0, 0.01, 10000.0) },
+        bellFlowerPicking, "flower_picking_bell_2", "bellFlowerPicking2", 4, { ItemFlowerPickingBell(10.0, 0.01, 10000.0) },
         LangPair("Bell of Flower Picking II", "花摘みの鐘 II"),
         LangPair("", "光輝のフェロモン"),
         null,
@@ -501,7 +501,7 @@ enum class FairyWeaponKind(
         }
     ),
     bellChristmas(
-        bellBase, "christmas_bell", "bellChristmas", 3, { ItemBellChristmas() },
+        bellBase, "christmas_bell", "bellChristmas", 3, { ItemChristmasBell() },
         LangPair("Christmas Bell", "クリスマスの鐘"),
         LangPair("", "いけない子には"),
         null,
