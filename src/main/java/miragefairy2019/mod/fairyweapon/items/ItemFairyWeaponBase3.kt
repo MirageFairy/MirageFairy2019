@@ -30,10 +30,10 @@ abstract class ItemFairyWeaponBase3(val weaponMana: Mana, val mastery: IMastery)
 fun <T> MagicStatusBuilder<T>.setVisibility(visibility: EnumVisibility) = apply { this.visibility = visibility }
 
 fun <T : Comparable<T>> MagicStatusBuilder<T>.setRange(range: ClosedRange<T>) = apply {
-    formula = Formula { formula.calculate(it).coerceIn(range.start, range.endInclusive) }
+    formula = Formula { this@setRange.formula.calculate(it).coerceIn(range.start, range.endInclusive) }
     renderer = FormulaRenderer { arguments, function ->
         val value = function.calculate(arguments)
-        val displayValue = renderer.render(arguments, function)
+        val displayValue = this@setRange.renderer.render(arguments, function)
         when (value) {
             range.start -> textComponent { displayValue().bold }
             range.endInclusive -> textComponent { displayValue().bold }
