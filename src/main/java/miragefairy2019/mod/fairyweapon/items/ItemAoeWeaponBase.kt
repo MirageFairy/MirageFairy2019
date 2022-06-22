@@ -51,7 +51,8 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
         val magicSelectorRayTrace = MagicSelector.rayTrace(world, player, additionalReach(), EntityLivingBase::class.java) { it != player } // 視線判定
         val magicSelectorPosition = magicSelectorRayTrace.position // 視点判定
         val magicSelectorSphere = MagicSelector.sphere(world, magicSelectorRayTrace.item.position, radius())
-        val magicSelectorEntities = magicSelectorSphere.entities(EntityLivingBase::class.java, { it != player }, maxTargetCount()) // 対象判定
+        val magicSelectorEntities = magicSelectorSphere.entities(EntityLivingBase::class.java, { it != player && it.health > 0 }, maxTargetCount()) // 対象判定
+        val targets = magicSelectorEntities.item.entities
 
         fun error(color: Int, magicMessage: MagicMessage) = object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
@@ -68,7 +69,6 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
 
         if (!hasPartnerFairy) return@magic error(0xFF00FF, MagicMessage.NO_FAIRY) // パートナー妖精判定
         if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic error(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
-        val targets = magicSelectorEntities.item.entities.take(maxTargetCount()).filter { it.health > 0 }
         if (targets.isEmpty()) return@magic error(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
         if (player.cooldownTracker.hasCooldown(weaponItem)) return@magic error(0xFFFF00, MagicMessage.COOL_TIME) // クールタイム判定
 
