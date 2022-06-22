@@ -1,7 +1,7 @@
 package miragefairy2019.mod.skill
 
 @Suppress("EnumEntryName")
-enum class EnumMastery(override val parent: IMastery?, val layer: Int) : IMastery {
+enum class Mastery(override val parent: IMastery?, val layer: Int) : IMastery {
     root(null, 0),
     /**/ combat(root, 1),
     /**/ /**/ closeCombat(combat, 2),

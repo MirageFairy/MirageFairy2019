@@ -109,7 +109,7 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
             tooltip("スキルレベルは個々のアクションの強さです。") // TODO translate
         }
 
-        EnumMastery.values().forEachIndexed { i, mastery ->
+        Mastery.values().forEachIndexed { i, mastery ->
             components += component(RectangleInt(4 + 8 * mastery.layer, 24 + 10 * i, xSize - 4 - 4 - 10 - 20 - 20 - 8 * mastery.layer, 10)) {
                 label(::fontRenderer, color = 0xFF000000.toArgb()) { mastery.displayName.unformattedText }
                 mastery.displayPoem.unformattedText.takeIf { it.isNotBlank() }?.let { tooltip(it) }

@@ -12,7 +12,7 @@ import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
-import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.skill.Mastery
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
@@ -23,7 +23,7 @@ class ItemRyugyoDrill(
     additionalBaseStatus: Double
 ) : ItemMiragiumToolBase(
     Mana.GAIA,
-    EnumMastery.mining,
+    Mastery.mining,
     additionalBaseStatus
 ) {
     val maxHardness = status("maxHardness", { 2.0 + !strength * 0.02 }, { float2 }) { setRange(2.0..20.0).setVisibility(EnumVisibility.DETAIL) }

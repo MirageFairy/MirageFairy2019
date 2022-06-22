@@ -12,7 +12,7 @@ import miragefairy2019.mod.fairyweapon.magic4.percent0
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.pitch
 import miragefairy2019.mod.fairyweapon.magic4.status
-import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.skill.Mastery
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.init.Items
@@ -28,7 +28,7 @@ import kotlin.math.pow
 class ItemBellChristmas : ItemAoeWeaponBase() {
     override fun MagicArguments.getActualDamage(target: EntityLivingBase) = damage() * damageBoost() * (if (target.isEntityUndead) 1.5 else 1.0)
     val damage = status("damage", { (3.0 + (!Mana.SHINE + !Erg.CHRISTMAS) / 10.0) * costFactor }, { float2 })
-    val damageBoost = status("damageBoost", { 1.0 + !EnumMastery.rangedCombat / 100.0 }, { percent0 })
+    val damageBoost = status("damageBoost", { 1.0 + !Mastery.rangedCombat / 100.0 }, { percent0 })
 
     override val additionalReach = status("additionalReach", { 3.0 + (!Mana.WIND + !Erg.LEVITATE) / 10.0 atMost 30.0 }, { float2 })
     override val radius = status("radius", { 4.0 + (!Mana.GAIA + !Erg.SOUND) / 20.0 atMost 10.0 }, { float2 })

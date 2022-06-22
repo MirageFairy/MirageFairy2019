@@ -37,7 +37,7 @@ class PacketTrainMastery : IMessageHandler<MessageTrainMastery, IMessage> {
         if (messageContext.side == Side.SERVER) {
             val player = messageContext.serverHandler.player
             val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
-            val mastery = EnumMastery.valueOf(message.masteryName!!)
+            val mastery = Mastery.valueOf(message.masteryName!!)
             if (skillContainer.remainingSkillPoints > 0) {
                 skillContainer.setMasteryLevel(mastery.name, skillContainer.getMasteryLevel(mastery.name) + 1)
                 skillContainer.send(player)

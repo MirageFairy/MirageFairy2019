@@ -26,7 +26,7 @@ import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.skill.ApiSkill
-import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.ISkillContainer
 import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
@@ -251,7 +251,7 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
 
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val variant = getVariant(itemStack) ?: return
-        val mastery = EnumMastery.fairySummoning
+        val mastery = Mastery.fairySummoning
         val skillContainer = ApiSkill.skillManager.getClientSkillContainer()
         tooltip += formattedText { ("スキル: "() + mastery.displayName() + " (${skillContainer.getSkillLevel(mastery)})"()).gold } // TODO translate
         tooltip += formattedText { "ランク: ${variant.dropRank + 1}"().blue } // TODO translate
@@ -264,7 +264,7 @@ class VariantFairyCrystal(val unlocalizedName: String, val dropRank: Int, val dr
 
 fun VariantFairyCrystal.getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer?) = when (dropCategory) {
     this.dropCategory -> {
-        val skillFactor = if (skillContainer != null) 1.0 + skillContainer.getSkillLevel(EnumMastery.fairySummoning) * 0.01 else 1.0
+        val skillFactor = if (skillContainer != null) 1.0 + skillContainer.getSkillLevel(Mastery.fairySummoning) * 0.01 else 1.0
         rateBoost * skillFactor
     }
     else -> 1.0

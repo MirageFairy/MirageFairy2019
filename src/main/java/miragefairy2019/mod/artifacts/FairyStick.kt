@@ -25,7 +25,7 @@ import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRegistry
 import miragefairy2019.mod.skill.ApiSkill
-import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
 import miragefairy2019.mod.systems.IFairyStickCraftItem
@@ -125,13 +125,13 @@ class ItemFairyStick : Item(), IFairyStickCraftItem {
         // 機能
         tooltip += formattedText { "右クリックでフェアリーステッキクラフト"().red } // TODO translate
 
-        tooltip += formattedText { ("スキル: "() + EnumMastery.processing.displayName() + " (${ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(EnumMastery.processing)})"()).gold } // TODO translate
+        tooltip += formattedText { ("スキル: "() + Mastery.processing.displayName() + " (${ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(Mastery.processing)})"()).gold } // TODO translate
         tooltip += formattedText { "クールタイム: ${getCoolTime(player) / 20.0 formatAs "%.2f"} 秒"().blue } // TODO translate
 
     }
 
 
-    fun getCoolTime(player: EntityPlayer) = ceil(40.0 / (1.0 + 0.01 * player.proxy.skillContainer.getSkillLevel(EnumMastery.processing))).toInt()
+    fun getCoolTime(player: EntityPlayer) = ceil(40.0 / (1.0 + 0.01 * player.proxy.skillContainer.getSkillLevel(Mastery.processing))).toInt()
 
     override fun onItemUse(player: EntityPlayer, worldIn: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         // レシピ判定

@@ -29,7 +29,7 @@ import miragefairy2019.mod.fairyweapon.magic4.displayName
 import miragefairy2019.mod.fairyweapon.magic4.factors
 import miragefairy2019.mod.fairyweapon.magic4.getDisplayValue
 import miragefairy2019.mod.fairyweapon.magic4.getMagicHandler
-import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.getSkillLevel
 import net.minecraft.client.Minecraft
@@ -84,12 +84,12 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), IMagicStatusContainer {
             if (isOldMana) {
                 val a = partnerFairyType.manaSet // パートナー妖精のマナ
                 val b = a + player.proxy.playerAuraHandler.playerAura * (partnerFairyType.cost / 50.0) // プレイヤーオーラの加算
-                val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(EnumMastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
+                val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(Mastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
                 return c[mana]
             } else {
                 val a = partnerFairyType.manaSet / (cost / 50.0) // パートナー妖精のマナ
                 val b = a + player.proxy.playerAuraHandler.playerAura // プレイヤーオーラの加算
-                val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(EnumMastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
+                val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(Mastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
                 return c[mana]
             }
         }

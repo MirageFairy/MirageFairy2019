@@ -12,7 +12,7 @@ import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
-import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.skill.Mastery
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
@@ -24,7 +24,7 @@ class ItemMiragiumScythe(
     override var destroySpeed: Float
 ) : ItemMiragiumToolBase(
     Mana.GAIA,
-    EnumMastery.harvest,
+    Mastery.harvest,
     additionalBaseStatus
 ) {
     val maxHardness = status("maxHardness", { !strength * 0.01 }, { float2 }) { setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL) }

@@ -28,7 +28,7 @@ import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
-import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.skill.Mastery
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.item.EntityXPOrb
@@ -47,7 +47,7 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.pow
 
-class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFactor: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase3(Mana.DARK, EnumMastery.flowerPicking) {
+class ItemBellFlowerPicking(additionalBaseStatus: Double, extraItemDropRateFactor: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase3(Mana.DARK, Mastery.flowerPicking) {
     val strength = createStrengthStatus(additionalBaseStatus, Erg.SOUND)
     val extent = createExtentStatus(additionalBaseStatus, Erg.SPACE)
     val endurance = createEnduranceStatus(additionalBaseStatus, Erg.SLASH)

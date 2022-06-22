@@ -18,7 +18,7 @@ import miragefairy2019.mod.fairyweapon.magic4.percent1
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.playSound
-import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.skill.Mastery
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.ai.attributes.AttributeModifier
@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreIngredient
 
-class ItemCrystalSword : ItemFairyWeaponBase3(Mana.GAIA, EnumMastery.closeCombat) {
+class ItemCrystalSword : ItemFairyWeaponBase3(Mana.GAIA, Mastery.closeCombat) {
     val extraItemDropRate = status("extraItemDropRate", { (!mastery / 100.0).coerceIn(0.0, 1.0) }, { percent1 })
 
     // 攻撃力は7（ダイヤ剣+1）固定

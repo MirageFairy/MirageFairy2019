@@ -37,7 +37,7 @@ import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.search
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
-import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.skill.Mastery
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.block.BlockLeaves
@@ -57,7 +57,7 @@ import kotlin.math.ceil
 class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
     val power = status("power", { 27.0 + (!DARK + !DESTROY) / 1.0 }, { float2 })
     val breakSpeed = status("breakSpeed", { (2.0 + (!AQUA + !SLASH) / 30.0) * costFactor }, { float2 })
-    val speedBoost = status("speedBoost", { 1.0 + !EnumMastery.lumbering / 100.0 }, { percent0 })
+    val speedBoost = status("speedBoost", { 1.0 + !Mastery.lumbering / 100.0 }, { percent0 })
     val additionalReach = status("additionalReach", { 0.0 + (!WIND + !LEVITATE) / 10.0 atMost 30.0 }, { float2 })
     val range = status("range", { (3.0 + (!GAIA + !HARVEST) / 5.0).toInt() atMost 100 }, { integer })
     val fortune = status("fortune", { 0.0 + (!SHINE + !LIFE) / 20.0 }, { float2 })

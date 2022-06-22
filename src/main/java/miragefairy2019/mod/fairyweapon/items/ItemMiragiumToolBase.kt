@@ -19,7 +19,7 @@ import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.spawnParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
-import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.skill.Mastery
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
@@ -38,7 +38,7 @@ fun MagicArguments.fail(cursor: Vec3d, color: Int) = object : MagicHandler() {
 
 abstract class ItemMiragiumToolBase(
     weaponMana: Mana,
-    mastery: EnumMastery,
+    mastery: Mastery,
     additionalBaseStatus: Double
 ) : ItemFairyWeaponBase3(
     weaponMana,

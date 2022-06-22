@@ -15,7 +15,7 @@ import miragefairy2019.mod.fairyweapon.magic4.positive
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.spawnMagicParticle
-import miragefairy2019.mod.skill.EnumMastery
+import miragefairy2019.mod.skill.Mastery
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.entity.EntityLivingBase
@@ -31,7 +31,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 class ItemMagicWandLightning : ItemAoeWeaponBase() {
     override fun MagicArguments.getActualDamage(target: EntityLivingBase) = damage() * damageBoost() * criticalRate().get(world.rand).coefficient
     val damage = status("damage", { (5.0 + (!Mana.WIND + !Erg.THUNDER) / 10.0) * costFactor }, { float2 })
-    val damageBoost = status("damageBoost", { 1.0 + !EnumMastery.magicCombat / 100.0 }, { percent0 })
+    val damageBoost = status("damageBoost", { 1.0 + !Mastery.magicCombat / 100.0 }, { percent0 })
     val criticalRate = status("criticalRate", { CriticalRate(0.0, 0.0, 0.0, 7.0, 2.0, 1.0, 0.0, 0.0) }, { criticalRate })
 
     override val additionalReach = status("additionalReach", { 5.0 + (!Mana.AQUA + !Erg.LIGHT) / 10.0 atMost 30.0 }, { float2 })
