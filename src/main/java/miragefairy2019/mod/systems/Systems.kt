@@ -4,6 +4,9 @@ import miragefairy2019.libkt.module
 
 object Systems {
     val module = module {
+        manaModule(this)
+        ergModule(this)
+        masteryModule(this)
         DamageSource.module(this)
         ManualRepair.module(this)
         Combine.module(this)
