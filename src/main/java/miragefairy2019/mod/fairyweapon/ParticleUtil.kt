@@ -80,19 +80,17 @@ fun spawnMagicSplashParticle(world: WorldServer, position: Vec3d) {
 
 private const val MAX_PARTICLE_COUNT = 1.0
 
-fun spawnParticleTargets(world: World, tuples: List<Pair<Vec3d, EnumTargetExecutability>>) {
+fun spawnParticleTargets(world: World, positions: List<Vec3d>) {
 
     // 1tickに平均MAX_PARTICLE_COUNT個までしかパーティクルを表示しない
-    val rate = MAX_PARTICLE_COUNT / (tuples.size.toDouble() max MAX_PARTICLE_COUNT)
+    val rate = MAX_PARTICLE_COUNT / (positions.size.toDouble() max MAX_PARTICLE_COUNT)
 
     // パーティクル生成
-    tuples.forEach { tuple ->
-        if (Math.random() < rate) spawnParticleTarget(world, tuple.first, tuple.second)
+    positions.forEach {
+        if (Math.random() < rate) spawnParticle(world, it, 0x00FF00)
     }
 
 }
-
-fun spawnParticleTarget(world: World, position: Vec3d, targetExecutability: EnumTargetExecutability) = spawnParticle(world, position, targetExecutability.color)
 
 fun spawnParticle(world: World, position: Vec3d, color: Int) = world.spawnParticle(
     EnumParticleTypes.SPELL_MOB,

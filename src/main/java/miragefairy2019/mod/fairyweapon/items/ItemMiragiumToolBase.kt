@@ -6,7 +6,6 @@ import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.lib.MagicSelector
 import miragefairy2019.lib.rayTrace
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
 import miragefairy2019.mod.fairyweapon.breakBlock
 import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
@@ -104,10 +103,7 @@ abstract class ItemMiragiumToolBase(
 
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
                 spawnParticle(world, selectorRayTrace.item.position, 0xFFFFFF)
-                spawnParticleTargets(
-                    world,
-                    targets.asSequence().toList().map { Pair(Vec3d(it).addVector(0.5, 0.5, 0.5), EnumTargetExecutability.EFFECTIVE) }
-                )
+                spawnParticleTargets(world, targets.asSequence().toList().map { Vec3d(it).addVector(0.5, 0.5, 0.5) })
             }
         }
     }

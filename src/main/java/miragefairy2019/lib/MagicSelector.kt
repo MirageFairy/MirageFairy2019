@@ -2,7 +2,6 @@ package miragefairy2019.lib
 
 import miragefairy2019.libkt.axisAlignedBBOf
 import miragefairy2019.libkt.sq
-import miragefairy2019.mod.fairyweapon.EnumTargetExecutability
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.fairyweapon.getSight
 import miragefairy2019.mod.fairyweapon.spawnParticle
@@ -115,4 +114,4 @@ fun <E : Entity> MagicSelector<WorldSphere>.entities(classEntity: Class<E>, pred
     getAllEntities().filter(predicate).sortedBy { it.getDistanceSq(item.position.x, item.position.y, item.position.z) }.take(maxTargetCount)
 }))
 
-fun <E : Entity> WorldEntities<E>.doEffect() = spawnParticleTargets(world, entities.map { Pair(it.positionVector, EnumTargetExecutability.EFFECTIVE) })
+fun <E : Entity> WorldEntities<E>.doEffect() = spawnParticleTargets(world, entities.map { it.positionVector })
