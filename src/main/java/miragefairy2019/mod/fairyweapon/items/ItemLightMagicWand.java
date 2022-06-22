@@ -2,6 +2,7 @@ package miragefairy2019.mod.fairyweapon.items;
 
 import kotlin.Pair;
 import miragefairy2019.api.IFairyType;
+import miragefairy2019.lib.RayTraceKt;
 import miragefairy2019.mod.Main;
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
 import miragefairy2019.mod.fairyweapon.ParticleUtilKt;
@@ -160,7 +161,7 @@ public class ItemLightMagicWand extends ItemFairyWeapon {
                     if (fairy == null) {
                         ParticleUtilKt.spawnParticle(
                             world,
-                            UtilKt.getSight(player, 0),
+                            RayTraceKt.getSight(player, 0),
                             0xFF00FF);
                         return;
                     }
@@ -170,7 +171,7 @@ public class ItemLightMagicWand extends ItemFairyWeapon {
                     if (itemStackTorch == null) {
                         ParticleUtilKt.spawnParticle(
                             world,
-                            UtilKt.getSight(player, 0),
+                            RayTraceKt.getSight(player, 0),
                             0xFF00FF);
                         return;
                     }
@@ -185,7 +186,7 @@ public class ItemLightMagicWand extends ItemFairyWeapon {
                     if (rayTraceResult == null) {
                         ParticleUtilKt.spawnParticle(
                             world,
-                            UtilKt.getSight(player, status.additionalReach),
+                            RayTraceKt.getSight(player, status.additionalReach),
                             itemStack.getItemDamage() >= itemStack.getMaxDamage() ? 0xFF0000 : player.getCooldownTracker().hasCooldown(this) ? 0x00FF00 : 0x00FFFF);
                         return;
                     }

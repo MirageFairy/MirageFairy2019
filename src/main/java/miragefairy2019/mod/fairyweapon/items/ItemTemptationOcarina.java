@@ -4,6 +4,7 @@ import kotlin.Pair;
 import miragefairy2019.api.Erg;
 import miragefairy2019.api.IFairyType;
 import miragefairy2019.lib.ErgKt;
+import miragefairy2019.lib.RayTraceKt;
 import miragefairy2019.libkt.MathKt;
 import miragefairy2019.mod.Main;
 import miragefairy2019.mod.fairyweapon.FairyWeaponUtils;
@@ -139,7 +140,7 @@ public class ItemTemptationOcarina extends ItemFairyWeapon {
             RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, 0, Entity.class, e -> true);
             Vec3d positionTarget = rayTraceResult != null
                 ? rayTraceResult.hitVec
-                : UtilKt.getSight(player, 0);
+                : RayTraceKt.getSight(player, 0);
             return new Result(
                 EnumExecutability.NO_FAIRY,
                 positionTarget);
@@ -152,7 +153,7 @@ public class ItemTemptationOcarina extends ItemFairyWeapon {
         RayTraceResult rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, 0, EntityVillager.class, e -> true);
         Vec3d positionTarget = rayTraceResult != null
             ? rayTraceResult.hitVec
-            : UtilKt.getSight(player, 0);
+            : RayTraceKt.getSight(player, 0);
         boolean isEntity;
         List<EntityVillager> targetEntities;
         if (rayTraceResult != null && rayTraceResult.typeOfHit == Type.ENTITY && rayTraceResult.entityHit instanceof EntityVillager) {
