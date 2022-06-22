@@ -16,9 +16,9 @@ import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
 import miragefairy2019.mod.fairyweapon.magic4.MagicStatusBuilder
 import miragefairy2019.mod.fairyweapon.magic4.float0
 import miragefairy2019.mod.fairyweapon.magic4.status
-import miragefairy2019.mod.skill.Mastery
+import miragefairy2019.mod.skill.IMastery
 
-abstract class ItemFairyWeaponBase3(val weaponMana: Mana, val mastery: Mastery) : ItemFairyWeaponMagic4() {
+abstract class ItemFairyWeaponBase3(val weaponMana: Mana, val mastery: IMastery) : ItemFairyWeaponMagic4() {
     override val isOldMana: Boolean get() = true
 }
 
