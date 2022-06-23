@@ -40,7 +40,7 @@ object FluidMaterials {
     lateinit var fluidMirageFlowerOil: () -> Fluid
     lateinit var blockFluidMirageFlowerOil: () -> BlockFluidMiragiumWater
     lateinit var itemFluidMirageFlowerOil: () -> ItemBlock
-    val module = module {
+    val fluidMaterialsModule = module {
 
         // ユニバーサルバケツ
         onConstruction { FluidRegistry.enableUniversalBucket() }

@@ -70,7 +70,7 @@ object FairyCollectionBox {
     lateinit var blockFairyCollectionBox: () -> BlockFairyCollectionBox
     lateinit var itemFairyCollectionBox: () -> ItemBlock
 
-    val module = module {
+    val fairyCollectionBoxModule = module {
         blockFairyCollectionBox = block({ BlockFairyCollectionBox() }, "fairy_collection_box") {
             setUnlocalizedName("fairyCollectionBox")
             setCreativeTab { Main.creativeTab }

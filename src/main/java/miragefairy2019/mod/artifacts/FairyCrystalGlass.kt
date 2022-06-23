@@ -58,7 +58,7 @@ object FairyCrystalGlass {
     lateinit var itemBlockWildFairyCrystalGlass: () -> ItemBlock
     lateinit var blockVeryWildFairyCrystalGlass: () -> BlockFairyCrystalGlass
     lateinit var itemBlockVeryWildFairyCrystalGlass: () -> ItemBlock
-    val module = module {
+    val fairyCrystalGlassModule = module {
 
         fun cube(texture: String, rotation: Int?) = DataElement(
             from = DataPoint(0.0, 0.0, 0.0),

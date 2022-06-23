@@ -53,7 +53,7 @@ import net.minecraftforge.oredict.OreIngredient
 
 object FairyMaterials {
     lateinit var itemFairyMaterials: () -> ItemMultiFairyMaterial
-    val module = module {
+    val fairyMaterialsModule = module {
 
         // 妖精素材アイテム
         itemFairyMaterials = item({ ItemMultiFairyMaterial() }, "fairy_materials") {

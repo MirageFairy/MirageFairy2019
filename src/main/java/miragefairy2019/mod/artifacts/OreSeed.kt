@@ -44,7 +44,7 @@ object OreSeed {
     lateinit var blockOreSeed: () -> BlockOreSeed
     lateinit var blockOreSeedNether: () -> BlockOreSeed
     lateinit var blockOreSeedEnd: () -> BlockOreSeed
-    val module = module {
+    val oreSeedModule = module {
 
         // 鉱石の種
 

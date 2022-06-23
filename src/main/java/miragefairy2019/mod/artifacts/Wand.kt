@@ -157,39 +157,135 @@ val WandKind.tier get() = type.tier + (rank - 1)
 val WandKind.registryName get() = "${type.registryName}_fairy_wand${if (rank == 1) "" else "_$rank"}"
 val WandKind.unlocalizedName get() = "fairy_wand_${type.registryName}${if (rank == 1) "" else "_$rank"}".toLowerCamelCase()
 
-object Wand {
-    val module = module {
+val wandModule = module {
+
+    // 翻訳生成
+    onMakeLang {
+        enJa("advancements.miragefairy2019.wand.root.title", "Wand", "ワンド")
+        enJa("advancements.miragefairy2019.wand.root.description", "Wand", "ワンド")
+        enJa("advancements.miragefairy2019.wand.all.description", "Get a specific item", "所定のアイテムを入手する")
+    }
+
+    // 実績生成
+    makeAdvancement("wand/root") {
+        jsonObject(
+            "display" to jsonObjectNotNull(
+                "icon" to jsonObject(
+                    "item" to "miragefairy2019:crafting_fairy_wand_4".jsonElement
+                ),
+                "title" to jsonObject(
+                    "translate" to "advancements.miragefairy2019.wand.root.title".jsonElement
+                ),
+                "description" to jsonObject(
+                    "translate" to "advancements.miragefairy2019.wand.root.description".jsonElement
+                ),
+                "background" to "miragefairy2019:textures/blocks/nephrite_block.png".jsonElement
+            ),
+            "criteria" to jsonObject(
+                "main" to jsonObject(
+                    "trigger" to "minecraft:inventory_changed".jsonElement,
+                    "conditions" to jsonObject(
+                        "items" to jsonArray(
+                            jsonObject(
+                                "type" to "forge:ore_dict".jsonElement,
+                                "ore" to "mirageFairy2019SphereAny".jsonElement
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    }
+
+    // レシピ生成
+    // 糸から技巧杖
+    makeRecipe("crafting_fairy_wand_from_string") {
+        DataShapedRecipe(
+            pattern = listOf(
+                " cS",
+                " R ",
+                "R  "
+            ),
+            key = mapOf(
+                "c" to DataSimpleIngredient(item = "minecraft:string"),
+                "R" to DataOreIngredient(ore = "stickMirageFlower"),
+                "S" to DataOreIngredient(ore = "mirageFairy2019SphereCraft")
+            ),
+            result = DataResult(item = "miragefairy2019:crafting_fairy_wand")
+        )
+    }
+
+    // レシピ登録
+    // 丸石＞紅蓮→焼き石
+    onAddRecipe {
+        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+            it.conditions += FairyStickCraftConditionUseItem(MELTING.ingredient)
+            it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.COBBLESTONE.defaultState }, { Blocks.STONE.defaultState })
+        })
+    }
+
+    // 個別
+    WandKind.values().forEach { wandKind ->
+
+        // アイテム登録
+        item({ ItemFairyWand() }, wandKind.registryName) {
+            setUnlocalizedName("fairyWand${wandKind.type.registryName.toUpperCamelCase()}${if (wandKind.rank == 1) "" else "${wandKind.rank}"}")
+            setCreativeTab { Main.creativeTab }
+            setCustomModelResourceLocation()
+            onInit {
+                val durability = (1..wandKind.tier).fold(16) { a, _ -> a * 2 }
+                item.maxDamage = durability - 1
+                item.tier = wandKind.tier
+            }
+            onCreateItemStack {
+                OreDictionary.registerOre(wandKind.type.oreName, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE))
+                wandKind.type.additionalOreNames.forEach { OreDictionary.registerOre(it, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE)) }
+            }
+        }
+
+        // アイテムモデル生成
+        makeItemModel(wandKind.registryName) {
+            DataModel(
+                parent = "item/handheld",
+                textures = mapOf(
+                    "layer0" to "miragefairy2019:items/fairy_wand_rod_${wandKind.tier}",
+                    "layer1" to "miragefairy2019:items/${wandKind.type.registryName}_fairy_wand"
+                )
+            )
+        }
 
         // 翻訳生成
         onMakeLang {
-            enJa("advancements.miragefairy2019.wand.root.title", "Wand", "ワンド")
-            enJa("advancements.miragefairy2019.wand.root.description", "Wand", "ワンド")
-            enJa("advancements.miragefairy2019.wand.all.description", "Get a specific item", "所定のアイテムを入手する")
+            enJa(
+                "item.fairyWand${wandKind.type.registryName.toUpperCamelCase()}${if (wandKind.rank == 1) "" else "${wandKind.rank}"}.name",
+                "${wandKind.type.englishName} Wand${if (wandKind.rank == 1) "" else " ${wandKind.rank.toRoman()}"}",
+                "${wandKind.type.japaneseName}のワンド${if (wandKind.rank == 1) "" else " ${wandKind.rank.toRoman()}"}"
+            )
+            enJa("item.${wandKind.unlocalizedName}.poem", wandKind.englishPoem, wandKind.japanesePoem)
         }
 
         // 実績生成
-        makeAdvancement("wand/root") {
+        makeAdvancement("wand/${wandKind.registryName}") {
             jsonObject(
-                "display" to jsonObjectNotNull(
+                "display" to jsonObject(
                     "icon" to jsonObject(
-                        "item" to "miragefairy2019:crafting_fairy_wand_4".jsonElement
+                        "item" to "miragefairy2019:${wandKind.registryName}".jsonElement
                     ),
                     "title" to jsonObject(
-                        "translate" to "advancements.miragefairy2019.wand.root.title".jsonElement
+                        "translate" to "item.${wandKind.unlocalizedName}.name".jsonElement
                     ),
                     "description" to jsonObject(
-                        "translate" to "advancements.miragefairy2019.wand.root.description".jsonElement
-                    ),
-                    "background" to "miragefairy2019:textures/blocks/nephrite_block.png".jsonElement
+                        "translate" to "advancements.miragefairy2019.wand.all.description".jsonElement
+                    )
                 ),
+                "parent" to "miragefairy2019:wand/${wandKind.parent?.registryName ?: "root"}".jsonElement,
                 "criteria" to jsonObject(
                     "main" to jsonObject(
                         "trigger" to "minecraft:inventory_changed".jsonElement,
                         "conditions" to jsonObject(
                             "items" to jsonArray(
                                 jsonObject(
-                                    "type" to "forge:ore_dict".jsonElement,
-                                    "ore" to "mirageFairy2019SphereAny".jsonElement
+                                    "item" to "miragefairy2019:${wandKind.registryName}".jsonElement
                                 )
                             )
                         )
@@ -199,8 +295,7 @@ object Wand {
         }
 
         // レシピ生成
-        // 糸から技巧杖
-        makeRecipe("crafting_fairy_wand_from_string") {
+        makeRecipe(wandKind.registryName) {
             DataShapedRecipe(
                 pattern = listOf(
                     " cS",
@@ -208,113 +303,16 @@ object Wand {
                     "R  "
                 ),
                 key = mapOf(
-                    "c" to DataSimpleIngredient(item = "minecraft:string"),
-                    "R" to DataOreIngredient(ore = "stickMirageFlower"),
-                    "S" to DataOreIngredient(ore = "mirageFairy2019SphereCraft")
+                    "c" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandCrafting"),
+                    "R" to DataOreIngredient(ore = wandTierToRodOreName[wandKind.tier]!!),
+                    "S" to DataOreIngredient(ore = "mirageFairy2019Sphere${wandKind.type.erg.registryName.toUpperCaseHead()}")
                 ),
-                result = DataResult(item = "miragefairy2019:crafting_fairy_wand")
+                result = DataResult(item = "miragefairy2019:${wandKind.registryName}")
             )
         }
 
-        // レシピ登録
-        // 丸石＞紅蓮→焼き石
-        onAddRecipe {
-            ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(MELTING.ingredient)
-                it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.COBBLESTONE.defaultState }, { Blocks.STONE.defaultState })
-            })
-        }
-
-        // 個別
-        WandKind.values().forEach { wandKind ->
-
-            // アイテム登録
-            item({ ItemFairyWand() }, wandKind.registryName) {
-                setUnlocalizedName("fairyWand${wandKind.type.registryName.toUpperCamelCase()}${if (wandKind.rank == 1) "" else "${wandKind.rank}"}")
-                setCreativeTab { Main.creativeTab }
-                setCustomModelResourceLocation()
-                onInit {
-                    val durability = (1..wandKind.tier).fold(16) { a, _ -> a * 2 }
-                    item.maxDamage = durability - 1
-                    item.tier = wandKind.tier
-                }
-                onCreateItemStack {
-                    OreDictionary.registerOre(wandKind.type.oreName, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE))
-                    wandKind.type.additionalOreNames.forEach { OreDictionary.registerOre(it, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE)) }
-                }
-            }
-
-            // アイテムモデル生成
-            makeItemModel(wandKind.registryName) {
-                DataModel(
-                    parent = "item/handheld",
-                    textures = mapOf(
-                        "layer0" to "miragefairy2019:items/fairy_wand_rod_${wandKind.tier}",
-                        "layer1" to "miragefairy2019:items/${wandKind.type.registryName}_fairy_wand"
-                    )
-                )
-            }
-
-            // 翻訳生成
-            onMakeLang {
-                enJa(
-                    "item.fairyWand${wandKind.type.registryName.toUpperCamelCase()}${if (wandKind.rank == 1) "" else "${wandKind.rank}"}.name",
-                    "${wandKind.type.englishName} Wand${if (wandKind.rank == 1) "" else " ${wandKind.rank.toRoman()}"}",
-                    "${wandKind.type.japaneseName}のワンド${if (wandKind.rank == 1) "" else " ${wandKind.rank.toRoman()}"}"
-                )
-                enJa("item.${wandKind.unlocalizedName}.poem", wandKind.englishPoem, wandKind.japanesePoem)
-            }
-
-            // 実績生成
-            makeAdvancement("wand/${wandKind.registryName}") {
-                jsonObject(
-                    "display" to jsonObject(
-                        "icon" to jsonObject(
-                            "item" to "miragefairy2019:${wandKind.registryName}".jsonElement
-                        ),
-                        "title" to jsonObject(
-                            "translate" to "item.${wandKind.unlocalizedName}.name".jsonElement
-                        ),
-                        "description" to jsonObject(
-                            "translate" to "advancements.miragefairy2019.wand.all.description".jsonElement
-                        )
-                    ),
-                    "parent" to "miragefairy2019:wand/${wandKind.parent?.registryName ?: "root"}".jsonElement,
-                    "criteria" to jsonObject(
-                        "main" to jsonObject(
-                            "trigger" to "minecraft:inventory_changed".jsonElement,
-                            "conditions" to jsonObject(
-                                "items" to jsonArray(
-                                    jsonObject(
-                                        "item" to "miragefairy2019:${wandKind.registryName}".jsonElement
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            }
-
-            // レシピ生成
-            makeRecipe(wandKind.registryName) {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        " cS",
-                        " R ",
-                        "R  "
-                    ),
-                    key = mapOf(
-                        "c" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandCrafting"),
-                        "R" to DataOreIngredient(ore = wandTierToRodOreName[wandKind.tier]!!),
-                        "S" to DataOreIngredient(ore = "mirageFairy2019Sphere${wandKind.type.erg.registryName.toUpperCaseHead()}")
-                    ),
-                    result = DataResult(item = "miragefairy2019:${wandKind.registryName}")
-                )
-            }
-
-        }
-
     }
+
 }
 
 class ItemFairyWand : Item(), IFairyStickCraftItem {

@@ -59,7 +59,7 @@ import kotlin.math.round
 object Dish {
     lateinit var blockDish: () -> BlockDish
     lateinit var itemDish: () -> ItemBlock
-    val module = module {
+    val dishModule = module {
         blockDish = block({ BlockDish() }, "dish") {
             setUnlocalizedName("dish")
             setCreativeTab { Main.creativeTab }

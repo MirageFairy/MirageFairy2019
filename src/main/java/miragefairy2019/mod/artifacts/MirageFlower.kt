@@ -69,7 +69,7 @@ import java.util.Random
 object MirageFlower {
     lateinit var blockMirageFlower: () -> BlockMirageFlower
     lateinit var itemMirageFlowerSeeds: () -> ItemMirageFlowerSeeds<BlockMirageFlower>
-    val module = module {
+    val mirageFlowerModule = module {
 
         blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
             setUnlocalizedName("mirageFlower")

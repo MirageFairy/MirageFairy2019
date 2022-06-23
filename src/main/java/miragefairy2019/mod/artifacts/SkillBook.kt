@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 object SkillBook {
     lateinit var itemSkillBook: () -> ItemSkillBook
-    val module = module {
+    val skillBookModule = module {
         itemSkillBook = item({ ItemSkillBook() }, "skill_book") {
             setUnlocalizedName("skillBook")
             setCreativeTab { Main.creativeTab }

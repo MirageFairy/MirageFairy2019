@@ -2,17 +2,15 @@ package miragefairy2019.mod.recipes
 
 import miragefairy2019.libkt.module
 
-object Recipes {
-    val module = module {
-        FairyMetamorphosis.module(this)
-        WandPulverizationRecipes.module(this)
-        AnvilPulverizationRecipes.module(this)
-        FairyDilutionRecipe.module(this)
-        FairySummoningRecipe.module(this)
-        WandRecipe.module(this)
-        Mfa.module(this)
-        FairyCrystalDropLoader.module(this)
-        FairyLogDropLoader.module(this)
-        SlabUncraft.module(this)
-    }
+val recipesModule = module {
+    fairyMetamorphosisModule(this)
+    wandPulverizationRecipesModule(this)
+    anvilPulverizationRecipesModule(this)
+    fairyDilutionRecipeModule(this)
+    fairySummoningRecipeModule(this)
+    wandRecipeModule(this)
+    Mfa.mfaModule(this)
+    fairyCrystalDropLoaderModule(this)
+    fairyLogDropLoaderModule(this)
+    slabUncraftModule(this)
 }

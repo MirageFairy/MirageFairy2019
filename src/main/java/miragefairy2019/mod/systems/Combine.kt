@@ -16,11 +16,9 @@ import net.minecraft.item.crafting.IRecipe
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry
 
-object Combine {
-    val module = module {
-        onAddRecipe {
-            GameRegistry.findRegistry(IRecipe::class.java).register(RecipesCombine(ResourceLocation(ModMirageFairy2019.MODID, "combine")))
-        }
+val combineModule = module {
+    onAddRecipe {
+        GameRegistry.findRegistry(IRecipe::class.java).register(RecipesCombine(ResourceLocation(ModMirageFairy2019.MODID, "combine")))
     }
 }
 

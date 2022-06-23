@@ -12,7 +12,7 @@ import net.minecraft.init.Blocks
 
 object Ae2SpatialIoBlocking {
     val logger = getLogger()
-    val module = module {
+    val ae2SpatialIoBlockingModule = module {
         val disableVanillaAe2SpatialIo = configProperty { it.getBoolean("disableVanillaAe2SpatialIo", Main.categoryFeatures, false, "Disables the movement of some vanilla blocks by Spatial IO.") }
 
         onInit {

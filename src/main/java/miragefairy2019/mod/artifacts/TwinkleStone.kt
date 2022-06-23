@@ -34,7 +34,7 @@ import net.minecraft.world.World
 object TwinkleStone {
     lateinit var blockTwinkleStone: () -> BlockTwinkleStone
     lateinit var itemBlockTwinkleStone: () -> ItemBlockMulti<BlockTwinkleStone, EnumVariantTwinkleStone>
-    val module = module {
+    val twinkleStoneModule = module {
         blockTwinkleStone = block({ BlockTwinkleStone() }, "twinkle_stone") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {

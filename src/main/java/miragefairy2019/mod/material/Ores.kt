@@ -35,7 +35,7 @@ object Ores {
     lateinit var itemBlockOre1: () -> ItemBlockOre<BlockVariantOre>
     lateinit var blockOre2: () -> BlockOre<BlockVariantOre>
     lateinit var itemBlockOre2: () -> ItemBlockOre<BlockVariantOre>
-    val module = module {
+    val oresModule = module {
 
         // 鉱石ブロック1
         blockOre1 = block({ BlockOre(EnumVariantOre1.variantList) }, "ore1") {

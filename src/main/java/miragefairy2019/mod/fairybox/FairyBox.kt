@@ -52,7 +52,7 @@ import net.minecraft.item.ItemBlock
 object FairyBox {
     lateinit var blockFairyCentrifuge: () -> BlockFairyBoxBase
     lateinit var itemBlockFairyCentrifuge: () -> ItemBlock
-    val module = module {
+    val fairyBoxModule = module {
 
         // 妖精の家（空）
         run {

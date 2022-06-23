@@ -31,7 +31,7 @@ import net.minecraft.util.ResourceLocation
 object CompressedMaterials {
     lateinit var blockMaterials1: () -> BlockMaterials<EnumVariantMaterials1>
     lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<EnumVariantMaterials1>
-    val module = module {
+    val compressedMaterialsModule = module {
 
         // ブロック状素材
         blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList) }, "materials1") {

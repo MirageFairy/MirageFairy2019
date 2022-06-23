@@ -110,7 +110,7 @@ object ChatWebhook {
     lateinit var itemChatWebhookTransmitter: () -> ItemBlock
     lateinit var blockCreativeChatWebhookTransmitter: () -> BlockCreativeChatWebhookTransmitter
     lateinit var itemCreativeChatWebhookTransmitter: () -> ItemBlock
-    val module = module {
+    val chatWebhookModule = module {
         enableChatWebhook = configProperty { it.getBoolean("enableChatWebhook", Main.categoryFeatures, true, "Whether the machines that send the in-game chat to the webhook is enabled") }
 
 

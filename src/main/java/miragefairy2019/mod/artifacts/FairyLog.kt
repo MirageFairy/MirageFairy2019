@@ -52,7 +52,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 object FairyLog {
     lateinit var blockFairyLog: () -> BlockFairyLog
     lateinit var itemBlockFairyLog: () -> ItemBlock
-    val module = module {
+    val fairyLogModule = module {
 
         blockFairyLog = block({ BlockFairyLog() }, "fairy_log") {
             setUnlocalizedName("fairyLog")

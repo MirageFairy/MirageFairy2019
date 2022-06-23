@@ -18,7 +18,7 @@ import java.time.Instant
 
 object DaemonSystem {
     private fun getFile(server: MinecraftServer) = server.getWorld(0).saveHandler.worldDirectory.resolve("miragefairy2019/daemon_entities.json")
-    val module = module {
+    val daemonSystemModule = module {
 
         // セーブデータ読み込みとデーモンマネージャーの初期化
         onServerStarting {

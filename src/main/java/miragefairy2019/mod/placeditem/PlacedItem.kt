@@ -29,7 +29,7 @@ object PlacedItem {
     @SideOnly(Side.CLIENT)
     lateinit var keyBindingPlaceItem: KeyBinding
     lateinit var blockPlacedItem: () -> Block
-    val module = module {
+    val placedItemMdule = module {
 
         // ブロック
         blockPlacedItem = block({ BlockPlacedItem() }, "placed_item") {

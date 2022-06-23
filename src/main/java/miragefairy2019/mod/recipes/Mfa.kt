@@ -13,7 +13,7 @@ class MfaPage(val mainIngredient: List<ItemStack>, val subIngredients: List<List
 
 object Mfa {
     val mfaPages = mutableListOf<MfaPage>()
-    val module = module {
+    val mfaModule = module {
         fun register(key: String, getMainIngredient: () -> List<ItemStack>, vararg subIngredientsGetters: () -> List<ItemStack>, getJapaneseContent: () -> String) {
             onMakeLang {
                 ja("miragefairy2019.mfa.$key", getJapaneseContent().trimIndent().replace("\n", "\\n"))

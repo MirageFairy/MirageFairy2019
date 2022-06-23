@@ -29,7 +29,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 
 object CommonMaterials {
     lateinit var itemMaterials: () -> ItemSimpleMaterials
-    val module = module {
+    val commonMaterialsModule = module {
 
         // アイテム状素材
         itemMaterials = item({ ItemSimpleMaterials() }, "materials") {

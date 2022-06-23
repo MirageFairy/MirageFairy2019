@@ -13,11 +13,9 @@ import net.minecraft.item.crafting.IRecipe
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry
 
-object ManualRepair {
-    val module = module {
-        onAddRecipe {
-            GameRegistry.findRegistry(IRecipe::class.java).register(RecipeManualRepair(ResourceLocation(ModMirageFairy2019.MODID, "manual_repair")))
-        }
+val manualRepairModule = module {
+    onAddRecipe {
+        GameRegistry.findRegistry(IRecipe::class.java).register(RecipeManualRepair(ResourceLocation(ModMirageFairy2019.MODID, "manual_repair")))
     }
 }
 

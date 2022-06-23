@@ -1,35 +1,35 @@
 package miragefairy2019.mod
 
-import miragefairy2019.jei.Jei
+import miragefairy2019.jei.jeiModule
 import miragefairy2019.libkt.module
-import miragefairy2019.mod.artifacts.Artifacts
+import miragefairy2019.mod.artifacts.artifactsModule
 import miragefairy2019.mod.fairy.Fairy
 import miragefairy2019.mod.fairybox.FairyBox
-import miragefairy2019.mod.fairyrelation.FairyRelation
+import miragefairy2019.mod.fairyrelation.fairyRelationModule
 import miragefairy2019.mod.fairyweapon.FairyWeapon
-import miragefairy2019.mod.material.Material
+import miragefairy2019.mod.material.materialModule
 import miragefairy2019.mod.placeditem.PlacedItem
-import miragefairy2019.mod.playeraura.PlayerAura
-import miragefairy2019.mod.recipes.Recipes
-import miragefairy2019.mod.skill.Skill
-import miragefairy2019.mod.systems.Systems
+import miragefairy2019.mod.playeraura.playerAuraModule
+import miragefairy2019.mod.recipes.recipesModule
+import miragefairy2019.mod.skill.skillModule
+import miragefairy2019.mod.systems.systemsModule
 
 val modules = module {
 
-    Main.module(this)
-    Jei.module(this)
+    Main.mainModule(this)
+    jeiModule(this)
 
-    Artifacts.module(this)
-    Material.module(this)
-    Systems.module(this)
-    Recipes.module(this)
+    artifactsModule(this)
+    materialModule(this)
+    systemsModule(this)
+    recipesModule(this)
 
-    PlayerAura.module(this)
-    PlacedItem.module(this)
-    Skill.module(this)
-    Fairy.module(this)
-    FairyWeapon.module(this)
-    FairyRelation.module(this)
-    FairyBox.module(this)
+    playerAuraModule(this)
+    PlacedItem.placedItemMdule(this)
+    skillModule(this)
+    Fairy.fairyModule(this)
+    FairyWeapon.fairyWeaponModule(this)
+    fairyRelationModule(this)
+    FairyBox.fairyBoxModule(this)
 
 }

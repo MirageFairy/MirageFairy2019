@@ -32,14 +32,12 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
 import java.time.Instant
 
-object SkillGui {
-    val module = module {
-        onInit {
-            Main.registerGuiHandler(GuiId.skillGui, object : ISimpleGuiHandler {
-                override fun GuiHandlerContext.onServer() = ContainerSkill()
-                override fun GuiHandlerContext.onClient() = GuiSkill()
-            }.guiHandler)
-        }
+val skillGuiModule = module {
+    onInit {
+        Main.registerGuiHandler(GuiId.skillGui, object : ISimpleGuiHandler {
+            override fun GuiHandlerContext.onServer() = ContainerSkill()
+            override fun GuiHandlerContext.onClient() = GuiSkill()
+        }.guiHandler)
     }
 }
 

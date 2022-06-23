@@ -69,7 +69,7 @@ object FairyCrystal {
     lateinit var variantFairyCrystalVeryPure: () -> VariantFairyCrystal
     lateinit var variantFairyCrystalWild: () -> VariantFairyCrystal
     lateinit var variantFairyCrystalVeryWild: () -> VariantFairyCrystal
-    val module = module {
+    val fairyCrystalModule = module {
 
         // フェアリークリスタル
         itemFairyCrystal = item({ ItemFairyCrystal() }, "fairy_crystal") {

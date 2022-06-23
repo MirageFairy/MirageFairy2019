@@ -27,7 +27,7 @@ import net.minecraft.world.World
 
 object Fertilizer {
     lateinit var itemFertilizer: () -> ItemFertilizer
-    val module = module {
+    val fertilizerModule = module {
         itemFertilizer = item({ ItemFertilizer() }, "fertilizer") {
             setUnlocalizedName("fertilizer")
             setCreativeTab { Main.creativeTab }

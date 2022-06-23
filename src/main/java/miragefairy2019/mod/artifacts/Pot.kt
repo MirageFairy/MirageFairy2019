@@ -43,7 +43,7 @@ import net.minecraftforge.oredict.OreIngredient
 object Pot {
     lateinit var itemPot: () -> ItemPot
     lateinit var itemFilledBucket: () -> ItemFilledPot
-    val module = module {
+    val potModule = module {
 
         // 中身なしポット
         itemPot = item({ ItemPot() }, "pot") {

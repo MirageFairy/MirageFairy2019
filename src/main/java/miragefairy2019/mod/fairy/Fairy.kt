@@ -28,7 +28,7 @@ object Fairy {
     lateinit var creativeTabFairyMotif: CreativeTabs
     lateinit var creativeTabFairyRank: CreativeTabs
     lateinit var listItemFairy: List<() -> ItemFairy>
-    val module = module {
+    val fairyModule = module {
 
         // クリエイティブタブ
         onInitCreativeTab {

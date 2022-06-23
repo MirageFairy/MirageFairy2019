@@ -65,7 +65,7 @@ val dressingRegistry = mutableListOf<Dressing>()
 object BakedFairy {
     lateinit var creativeTabBakedFairy: () -> CreativeTabs
     lateinit var itemBakedFairy: () -> ItemBakedFairy
-    val module = module {
+    val bakedFairyModule = module {
 
         // クリエイティブタブ
         onInitCreativeTab {

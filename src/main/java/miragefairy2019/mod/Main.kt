@@ -32,7 +32,7 @@ object Main {
     const val categoryGeneral = "general"
     const val categoryFeatures = "features"
 
-    val module = module {
+    val mainModule = module {
         onConstruction {
             getLogger().info("Mod Version: $modVersion; Use Pre-Release Features: $usePreReleaseFeatures;")
         }

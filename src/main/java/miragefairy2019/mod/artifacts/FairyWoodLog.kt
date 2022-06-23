@@ -24,7 +24,7 @@ import net.minecraft.world.IBlockAccess
 object FairyWoodLog {
     lateinit var blockFairyWoodLog: () -> BlockFairyWoodLog
     lateinit var itemBlockFairyWoodLog: () -> ItemBlock
-    val module = module {
+    val fairyWoodLogModule = module {
         blockFairyWoodLog = block({ BlockFairyWoodLog() }, "fairy_wood_log") {
             setUnlocalizedName("fairyWoodLog")
             setCreativeTab { Main.creativeTab }

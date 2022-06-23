@@ -702,7 +702,7 @@ val FairyWeaponKind.manualRepairIngredients: List<Ingredient> get() = if (parent
 
 object FairyWeapon {
     @Suppress("UNUSED_VARIABLE")
-    val module = module {
+    val fairyWeaponModule = module {
 
         // 翻訳生成
         onMakeLang {

@@ -54,57 +54,55 @@ import kotlin.math.ceil
 
 lateinit var itemFairyStick: () -> ItemFairyStick
 
-object FairyStick {
-    val module = module {
+val fairyStickModule = module {
 
-        onInstantiation {
-            ApiFairyStickCraft.fairyStickCraftRegistry = FairyStickCraftRegistry()
-        }
+    onInstantiation {
+        ApiFairyStickCraft.fairyStickCraftRegistry = FairyStickCraftRegistry()
+    }
 
-        // 妖精のステッキ
-        itemFairyStick = item({ ItemFairyStick() }, "fairy_stick") {
-            setUnlocalizedName("fairyStick")
-            setCreativeTab { Main.creativeTab }
-            setCustomModelResourceLocation()
-            addOreName("mirageFairyStick")
-        }
-        makeItemModel("fairy_stick") { handheld }
+    // 妖精のステッキ
+    itemFairyStick = item({ ItemFairyStick() }, "fairy_stick") {
+        setUnlocalizedName("fairyStick")
+        setCreativeTab { Main.creativeTab }
+        setCustomModelResourceLocation()
+        addOreName("mirageFairyStick")
+    }
+    makeItemModel("fairy_stick") { handheld }
 
-        // レシピ登録
-        onAddRecipe {
+    // レシピ登録
+    onAddRecipe {
 
-            // 水精→水源
-            ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(WandType.CRAFTING.ingredient)
-                it.conditions += FairyStickCraftConditionNotNether()
-                it.conditions += FairyStickCraftConditionSpawnBlock { Blocks.WATER.defaultState }
-                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyWaterRank1"))
-            })
+        // 水精→水源
+        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+            it.conditions += FairyStickCraftConditionUseItem(WandType.CRAFTING.ingredient)
+            it.conditions += FairyStickCraftConditionNotNether()
+            it.conditions += FairyStickCraftConditionSpawnBlock { Blocks.WATER.defaultState }
+            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyWaterRank1"))
+        })
 
-            // 溶岩精→溶岩流
-            ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(WandType.CRAFTING.ingredient)
-                it.conditions += FairyStickCraftConditionSpawnBlock { Blocks.FLOWING_LAVA.defaultState.withProperty(BlockDynamicLiquid.LEVEL, 15) }
-                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyLavaRank1"))
-            })
+        // 溶岩精→溶岩流
+        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+            it.conditions += FairyStickCraftConditionUseItem(WandType.CRAFTING.ingredient)
+            it.conditions += FairyStickCraftConditionSpawnBlock { Blocks.FLOWING_LAVA.defaultState.withProperty(BlockDynamicLiquid.LEVEL, 15) }
+            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyLavaRank1"))
+        })
 
-            // 蜘蛛精→糸ブロック
-            ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(WandType.CRAFTING.ingredient)
-                it.conditions += FairyStickCraftConditionSpawnBlock { Blocks.WEB.defaultState }
-                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairySpiderRank1"))
-            })
+        // 蜘蛛精→糸ブロック
+        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+            it.conditions += FairyStickCraftConditionUseItem(WandType.CRAFTING.ingredient)
+            it.conditions += FairyStickCraftConditionSpawnBlock { Blocks.WEB.defaultState }
+            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairySpiderRank1"))
+        })
 
-            // 水＋ミラジウムの粉→妖水
-            ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
-                it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.WATER.defaultState }, { FluidMaterials.blockFluidMiragiumWater().defaultState })
-                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustMiragium"))
-            })
-
-        }
+        // 水＋ミラジウムの粉→妖水
+        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+            it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
+            it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.WATER.defaultState }, { FluidMaterials.blockFluidMiragiumWater().defaultState })
+            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustMiragium"))
+        })
 
     }
+
 }
 
 class ItemFairyStick : Item(), IFairyStickCraftItem {

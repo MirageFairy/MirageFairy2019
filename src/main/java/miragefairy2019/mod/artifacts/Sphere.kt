@@ -40,7 +40,7 @@ import net.minecraftforge.oredict.OreIngredient
 
 object Sphere {
     lateinit var itemSpheres: () -> ItemSpheres
-    val module = module {
+    val sphereModule = module {
 
         // アイテム
         itemSpheres = item({ ItemSpheres() }, "spheres") {

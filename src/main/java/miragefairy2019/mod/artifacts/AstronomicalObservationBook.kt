@@ -50,7 +50,7 @@ import kotlin.math.sin
 
 object AstronomicalObservationBook {
     lateinit var itemAstronomicalObservationBook: () -> ItemAstronomicalObservationBook
-    val module = module {
+    val astronomicalObservationBookModule = module {
         itemAstronomicalObservationBook = item({ ItemAstronomicalObservationBook() }, "astronomical_observation_book") {
             setUnlocalizedName("astronomicalObservationBook")
             setCreativeTab { Main.creativeTab }

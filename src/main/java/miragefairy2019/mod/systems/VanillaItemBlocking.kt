@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object VanillaItemBlocking {
     val logger = getLogger()
-    val module = module {
+    val vanillaItemBlockingModule = module {
         val disableVanillaWarpItems = configProperty { it.getBoolean("disableVanillaWarpItems", Main.categoryFeatures, false, "Disables vanilla items that allow warping.") }
 
         onInit {

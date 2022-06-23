@@ -49,31 +49,29 @@ import net.minecraftforge.common.BiomeDictionary
 import net.minecraftforge.oredict.OreDictionary
 import java.io.File
 
-object DebugItems {
-    val module = module {
+val debugItemsModule = module {
 
-        fun r(itemCreator: () -> Item, name: String, english: String, japanese: String) {
-            val unlocalizedName = "debug_$name".toLowerCamelCase()
-            item({ itemCreator() }, "debug_$name") {
-                setUnlocalizedName(unlocalizedName)
-                setCreativeTab { Main.creativeTab }
-                setCustomModelResourceLocation(model = ResourceLocation("book"))
-            }
-            onMakeLang { enJa("item.$unlocalizedName.name", "Debug: $english", "デバッグ：$japanese") }
+    fun r(itemCreator: () -> Item, name: String, english: String, japanese: String) {
+        val unlocalizedName = "debug_$name".toLowerCamelCase()
+        item({ itemCreator() }, "debug_$name") {
+            setUnlocalizedName(unlocalizedName)
+            setCreativeTab { Main.creativeTab }
+            setCustomModelResourceLocation(model = ResourceLocation("book"))
         }
-
-        r({ ItemDebugFairyList() }, "fairy_list", "Fairy List", "妖精一覧")
-        r({ ItemDebugOreNameList() }, "ore_name_list", "Ore Name List", "鉱石辞書名一覧")
-        r({ ItemDebugSkillResetUnlock() }, "skill_reset_unlock", "Skill Reset Unlock", "スキルリセット解禁")
-        r({ ItemDebugPlayerAuraReset() }, "player_aura_reset", "Player Aura Reset", "プレイヤーオーラリセット")
-        r({ ItemDebugGainFairyMasterExp() }, "gain_fairy_master_exp", "Gain Fairy Master Exp", "妖精経験値入手")
-        r({ ItemDebugOreSeedStatistics() }, "ore_seed_statistics", "Ore Seed Statistics", "鉱石分布")
-        r({ ItemDebugOreSeedDropRate() }, "ore_seed_drop_rate", "Ore Seed Drop Rate", "鉱石生成確率表示")
-        r({ ItemDebugMirageFlowerGrowthRateList() }, "mirage_flower_growth_rate_list", "Mirage Flower Growth Rate List", "ミラージュフラワー地面補正一覧")
-        r({ ItemDebugMirageFlowerGrowthRate() }, "mirage_flower_growth_rate", "Mirage Flower Growth Rate", "ミラージュフラワー成長速度表示")
-        r({ ItemDebugShowData() }, "show_data", "Show Data", "データ表示")
-
+        onMakeLang { enJa("item.$unlocalizedName.name", "Debug: $english", "デバッグ：$japanese") }
     }
+
+    r({ ItemDebugFairyList() }, "fairy_list", "Fairy List", "妖精一覧")
+    r({ ItemDebugOreNameList() }, "ore_name_list", "Ore Name List", "鉱石辞書名一覧")
+    r({ ItemDebugSkillResetUnlock() }, "skill_reset_unlock", "Skill Reset Unlock", "スキルリセット解禁")
+    r({ ItemDebugPlayerAuraReset() }, "player_aura_reset", "Player Aura Reset", "プレイヤーオーラリセット")
+    r({ ItemDebugGainFairyMasterExp() }, "gain_fairy_master_exp", "Gain Fairy Master Exp", "妖精経験値入手")
+    r({ ItemDebugOreSeedStatistics() }, "ore_seed_statistics", "Ore Seed Statistics", "鉱石分布")
+    r({ ItemDebugOreSeedDropRate() }, "ore_seed_drop_rate", "Ore Seed Drop Rate", "鉱石生成確率表示")
+    r({ ItemDebugMirageFlowerGrowthRateList() }, "mirage_flower_growth_rate_list", "Mirage Flower Growth Rate List", "ミラージュフラワー地面補正一覧")
+    r({ ItemDebugMirageFlowerGrowthRate() }, "mirage_flower_growth_rate", "Mirage Flower Growth Rate", "ミラージュフラワー成長速度表示")
+    r({ ItemDebugShowData() }, "show_data", "Show Data", "データ表示")
+
 }
 
 private val Double.f0 get() = this formatAs "%.0f"
