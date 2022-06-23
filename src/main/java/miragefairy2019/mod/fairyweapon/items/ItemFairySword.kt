@@ -22,6 +22,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.min
 
+// TODO magic4
 class ItemFairySword : ItemFairyWeapon() {
     private fun getAdditionalAttackDamage(itemStack: ItemStack) = getFairyAttribute("AdditionalAttackDamage", itemStack)
     private fun getAdditionalAttackSpeed(itemStack: ItemStack) = getFairyAttribute("AdditionalAttackSpeed", itemStack)

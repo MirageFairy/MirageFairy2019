@@ -18,10 +18,12 @@ import miragefairy2019.mod.fairyweapon.magic4.float0
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.skill.IMastery
 
+// TODO remove
 abstract class ItemFairyWeaponBase2 : ItemFairyWeaponMagic4() {
     override val isOldMana: Boolean get() = true
 }
 
+// TODO remove
 abstract class ItemFairyWeaponBase3(val weaponMana: Mana, val mastery: IMastery) : ItemFairyWeaponBase2()
 
 

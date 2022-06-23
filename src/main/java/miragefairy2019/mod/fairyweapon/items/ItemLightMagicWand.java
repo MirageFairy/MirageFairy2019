@@ -32,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
+// TODO magic4
 public class ItemLightMagicWand extends ItemFairyWeapon {
 
     protected static class Status {

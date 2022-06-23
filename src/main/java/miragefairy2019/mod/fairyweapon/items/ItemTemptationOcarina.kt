@@ -37,11 +37,11 @@ import kotlin.math.ceil
 import kotlin.math.pow
 
 class ItemTemptationOcarina : ItemFairyWeaponMagic4() {
-    val radius = status("radius", { 5.0 + !Mana.WIND / 5.0 atMost 5.0 atLeast 10.0 }, { float2 })
-    val maxTargetCount = status("maxTargetCount", { 1 + (!Mana.AQUA / 7.0).toInt() atMost 1 atLeast 8 }, { integer })
-    val wear = status("wear", { 4.0 * 0.5.pow(!Mana.FIRE / 50.0) atMost 0.4 atLeast 4.0 }, { percent0 })
-    val levelCost = status("levelCost", { 1.0 * 0.5.pow(!Mana.GAIA / 50.0 + !Erg.LIFE / 10.0) atMost 0.1 atLeast 1.0 }, { float2 })
-    val coolTime = status("coolTime", { cost * (1.0 * 0.5.pow(!Mana.DARK / 50.0) atMost 0.1 atLeast 1.0) }, { duration })
+    val radius = status("radius", { 5.0 + !Mana.WIND / 5.0 atMost 5.0 atLeast 10.0 }, { float2 }) // TODO 調整
+    val maxTargetCount = status("maxTargetCount", { 1 + (!Mana.AQUA / 7.0).toInt() atMost 1 atLeast 8 }, { integer }) // TODO 調整
+    val wear = status("wear", { 4.0 * 0.5.pow(!Mana.FIRE / 50.0) atMost 0.4 atLeast 4.0 }, { percent0 }) // TODO 調整
+    val levelCost = status("levelCost", { 1.0 * 0.5.pow(!Mana.GAIA / 50.0 + !Erg.LIFE / 10.0) atMost 0.1 atLeast 1.0 }, { float2 }) // TODO 調整
+    val coolTime = status("coolTime", { cost * (1.0 * 0.5.pow(!Mana.DARK / 50.0) atMost 0.1 atLeast 1.0) }, { duration }) // TODO 調整
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "Lv30以上のとき、右クリックでLv消費で村人を満腹化" // TODO translate
