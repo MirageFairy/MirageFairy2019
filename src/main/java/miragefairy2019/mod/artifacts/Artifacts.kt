@@ -3,7 +3,7 @@ package miragefairy2019.mod.artifacts
 import miragefairy2019.libkt.module
 
 val artifactsModule = module {
-    Dish.dishModule(this)
+    dishModule(this)
     Fertilizer.fertilizerModule(this)
     TwinkleStone.twinkleStoneModule(this)
     FairyCollectionBox.fairyCollectionBoxModule(this)
