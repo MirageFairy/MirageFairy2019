@@ -29,8 +29,8 @@ import miragefairy2019.mod.fairyweapon.magic4.displayName
 import miragefairy2019.mod.fairyweapon.magic4.factors
 import miragefairy2019.mod.fairyweapon.magic4.getDisplayValue
 import miragefairy2019.mod.fairyweapon.magic4.getMagicHandler
-import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.IMastery
+import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.getSkillLevel
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
