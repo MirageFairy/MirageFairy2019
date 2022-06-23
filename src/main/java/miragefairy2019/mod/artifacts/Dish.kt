@@ -63,48 +63,48 @@ val dishModule = module {
         setUnlocalizedName("dish")
         setCreativeTab { Main.creativeTab }
         makeBlockStates(resourceName.path) { normal }
-    }
-    makeBlockModel("dish") {
-        DataModel(
-            parent = "block/block",
-            ambientOcclusion = false,
-            textures = mapOf(
-                "particle" to "minecraft:blocks/quartz_block_top",
-                "top" to "minecraft:blocks/bone_block_top",
-                "main" to "minecraft:blocks/quartz_block_top"
-            ),
-            elements = listOf(
-                DataElement(
-                    from = DataPoint(4.0, 1.0, 4.0),
-                    to = DataPoint(12.0, 1.5, 12.0),
-                    faces = DataFaces(
-                        down = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
-                        up = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#top"),
-                        north = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
-                        south = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
-                        west = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
-                        east = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main")
-                    )
+        makeBlockModel(resourceName.path) {
+            DataModel(
+                parent = "block/block",
+                ambientOcclusion = false,
+                textures = mapOf(
+                    "particle" to "minecraft:blocks/quartz_block_top",
+                    "top" to "minecraft:blocks/bone_block_top",
+                    "main" to "minecraft:blocks/quartz_block_top"
                 ),
-                DataElement(
-                    from = DataPoint(6.0, 0.0, 6.0),
-                    to = DataPoint(10.0, 1.0, 10.0),
-                    faces = DataFaces(
-                        down = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
-                        up = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
-                        north = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
-                        south = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
-                        west = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
-                        east = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main")
+                elements = listOf(
+                    DataElement(
+                        from = DataPoint(4.0, 1.0, 4.0),
+                        to = DataPoint(12.0, 1.5, 12.0),
+                        faces = DataFaces(
+                            down = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            up = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#top"),
+                            north = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            south = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            west = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            east = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main")
+                        )
+                    ),
+                    DataElement(
+                        from = DataPoint(6.0, 0.0, 6.0),
+                        to = DataPoint(10.0, 1.0, 10.0),
+                        faces = DataFaces(
+                            down = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            up = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            north = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            south = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            west = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main"),
+                            east = DataFace(uv = DataUv(0.0, 0.0, 16.0, 16.0), texture = "#main")
+                        )
                     )
                 )
             )
-        )
+        }
     }
     itemDish = item({ ItemBlock(blockDish()) }, "dish") {
         setCustomModelResourceLocation()
+        makeItemModel(resourceName.path) { block }
     }
-    makeItemModel("dish") { block }
     tileEntity("dish", TileEntityDish::class.java)
     tileEntityRenderer(TileEntityDish::class.java, { TileEntityRendererDish() })
 }
