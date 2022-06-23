@@ -4,10 +4,10 @@
       "item": "miragefairy2019:lightning_magic_wand"
     },
     "title": {
-      "translate": "item.magicWandLightning.name"
+      "translate": "item.lightningMagicWand.name"
     },
     "description": {
-      "translate": "item.magicWandLightning.recipe"
+      "translate": "item.lightningMagicWand.recipe"
     },
     "frame": "goal"
   },

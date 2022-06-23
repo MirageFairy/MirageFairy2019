@@ -227,9 +227,9 @@ enum class FairyWeaponKind(
             )
         }
     ),
-    magicWandLight(
-        magicWandBase, "light_magic_wand", "magicWandLight", 3, { ItemLightMagicWand() },
-        LangPair("Magic Wand of Light", "光のロッド"),
+    lightMagicWand(
+        magicWandBase, "light_magic_wand", "lightMagicWand", 3, { ItemLightMagicWand() },
+        LangPair("Light Magic Wand", "光のロッド"),
         LangPair("", "古代の魔法「ニクトフォビア」、優しい光が洞窟を照らす"),
         null,
         LangPair("Get a specific item", "パラボラの焦点に発光のスフィア"),
@@ -253,9 +253,9 @@ enum class FairyWeaponKind(
             )
         }
     ),
-    magicWandCollecting(
-        magicWandBase, "collecting_magic_wand", "magicWandCollecting", 3, { ItemCollectingMagicWand() },
-        LangPair("Magic Wand of Collecting", "収集のロッド"),
+    collectingMagicWand(
+        magicWandBase, "collecting_magic_wand", "collectingMagicWand", 3, { ItemCollectingMagicWand() },
+        LangPair("Collecting Magic Wand", "収集のロッド"),
         LangPair("", "新開発の魔法「ソルメローシェ・トリーパ」、魔法のマジックハンド"),
         null,
         LangPair("Get a specific item", "縮地のエルグが渦を巻いて収束するように"),
@@ -307,9 +307,9 @@ enum class FairyWeaponKind(
             )
         }
     ),
-    magicWandLightning(
-        chargingRod, "lightning_magic_wand", "magicWandLightning", 3, { ItemLightningMagicWand() },
-        LangPair("Magic Wand of Lightning", "ライトニングロッド"),
+    lightningMagicWand(
+        chargingRod, "lightning_magic_wand", "lightningMagicWand", 3, { ItemLightningMagicWand() },
+        LangPair("Lightning Magic Wand", "ライトニングロッド"),
         LangPair("", "古代魔法「ライトニングボルト」"),
         null,
         LangPair("Get a specific item", "雷電のエルグは金属の中を伝うことが知られている"),
@@ -391,8 +391,8 @@ enum class FairyWeaponKind(
             )
         }
     ),
-    ocarinaTemptation(
-        ocarinaBase, "temptation_ocarina", "ocarinaTemptation", 3, { ItemTemptationOcarina() },
+    temptationOcarina(
+        ocarinaBase, "temptation_ocarina", "temptationOcarina", 3, { ItemTemptationOcarina() },
         LangPair("Ocarina of Temptation", "魅惑のオカリナ"),
         LangPair("", "その音は人の腹を満たし、淫靡な気分にさせる"),
         null,
@@ -445,9 +445,9 @@ enum class FairyWeaponKind(
             )
         }
     ),
-    bellFlowerPicking(
-        bellBase, "flower_picking_bell", "bellFlowerPicking", 2, { ItemFlowerPickingBell(0.0, 0.001, 0.2) },
-        LangPair("Bell of Flower Picking", "花摘みの鐘"),
+    flowerPickingBell(
+        bellBase, "flower_picking_bell", "flowerPickingBell", 2, { ItemFlowerPickingBell(0.0, 0.001, 0.2) },
+        LangPair("Flower Picking Bell", "花摘みの鐘"),
         LangPair("", "ちょっとお花を摘みに"),
         null,
         LangPair("Get a specific item", "リラジウムの音は草花の心に響くという"),
@@ -473,9 +473,9 @@ enum class FairyWeaponKind(
             )
         }
     ),
-    bellFlowerPicking2(
-        bellFlowerPicking, "flower_picking_bell_2", "bellFlowerPicking2", 4, { ItemFlowerPickingBell(10.0, 0.01, 10000.0) },
-        LangPair("Bell of Flower Picking II", "花摘みの鐘 II"),
+    flowerPickingBell2(
+        flowerPickingBell, "flower_picking_bell_2", "flowerPickingBell2", 4, { ItemFlowerPickingBell(10.0, 0.01, 10000.0) },
+        LangPair("Flower Picking Bell II", "花摘みの鐘 II"),
         LangPair("", "光輝のフェロモン"),
         null,
         LangPair("Get a specific item", "妖精の正体はミラージュの花粉、つまり花に魅かれる"),
@@ -500,8 +500,8 @@ enum class FairyWeaponKind(
             )
         }
     ),
-    bellChristmas(
-        bellBase, "christmas_bell", "bellChristmas", 3, { ItemChristmasBell() },
+    christmasBell(
+        bellBase, "christmas_bell", "christmasBell", 3, { ItemChristmasBell() },
         LangPair("Christmas Bell", "クリスマスの鐘"),
         LangPair("", "いけない子には"),
         null,

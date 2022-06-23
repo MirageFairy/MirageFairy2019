@@ -4,10 +4,10 @@
       "item": "miragefairy2019:flower_picking_bell"
     },
     "title": {
-      "translate": "item.bellFlowerPicking.name"
+      "translate": "item.flowerPickingBell.name"
     },
     "description": {
-      "translate": "item.bellFlowerPicking.recipe"
+      "translate": "item.flowerPickingBell.recipe"
     }
   },
   "parent": "miragefairy2019:fairy_weapon/bell_base",

@@ -4,10 +4,10 @@
       "item": "miragefairy2019:temptation_ocarina"
     },
     "title": {
-      "translate": "item.ocarinaTemptation.name"
+      "translate": "item.temptationOcarina.name"
     },
     "description": {
-      "translate": "item.ocarinaTemptation.recipe"
+      "translate": "item.temptationOcarina.recipe"
     },
     "frame": "goal"
   },

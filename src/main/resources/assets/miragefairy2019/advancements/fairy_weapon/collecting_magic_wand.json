@@ -4,10 +4,10 @@
       "item": "miragefairy2019:collecting_magic_wand"
     },
     "title": {
-      "translate": "item.magicWandCollecting.name"
+      "translate": "item.collectingMagicWand.name"
     },
     "description": {
-      "translate": "item.magicWandCollecting.recipe"
+      "translate": "item.collectingMagicWand.recipe"
     },
     "frame": "goal"
   },

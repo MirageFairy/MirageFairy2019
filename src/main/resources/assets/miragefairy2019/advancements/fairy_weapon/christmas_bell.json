@@ -4,10 +4,10 @@
       "item": "miragefairy2019:christmas_bell"
     },
     "title": {
-      "translate": "item.bellChristmas.name"
+      "translate": "item.christmasBell.name"
     },
     "description": {
-      "translate": "item.bellChristmas.recipe"
+      "translate": "item.christmasBell.recipe"
     },
     "frame": "challenge"
   },

@@ -4,10 +4,10 @@
       "item": "miragefairy2019:flower_picking_bell_2"
     },
     "title": {
-      "translate": "item.bellFlowerPicking2.name"
+      "translate": "item.flowerPickingBell2.name"
     },
     "description": {
-      "translate": "item.bellFlowerPicking2.recipe"
+      "translate": "item.flowerPickingBell2.recipe"
     },
     "frame": "goal"
   },

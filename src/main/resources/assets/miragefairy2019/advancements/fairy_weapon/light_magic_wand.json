@@ -4,10 +4,10 @@
       "item": "miragefairy2019:light_magic_wand"
     },
     "title": {
-      "translate": "item.magicWandLight.name"
+      "translate": "item.lightMagicWand.name"
     },
     "description": {
-      "translate": "item.magicWandLight.recipe"
+      "translate": "item.lightMagicWand.recipe"
     },
     "frame": "goal"
   },
