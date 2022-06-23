@@ -32,9 +32,8 @@ fun spawnDamageParticle(world: WorldServer, entity: Entity, damage: Double) {
     if (count > 0) {
         world.spawnParticle(
             EnumParticleTypes.DAMAGE_INDICATOR,
-            entity.posX,
-            entity.posY + entity.height * 0.5,
-            entity.posZ, count,
+            entity.posX, entity.posY + entity.height * 0.5, entity.posZ,
+            count,
             0.1, 0.0, 0.1,
             0.2
         )
