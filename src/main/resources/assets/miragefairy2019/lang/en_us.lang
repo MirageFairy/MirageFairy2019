@@ -218,6 +218,7 @@ mirageFairy2019.magic.status.coverRate.name=Cover Rate
 mirageFairy2019.magic.status.chargeSpeed.name=Charge Speed
 mirageFairy2019.magic.status.speed.name=Speed
 mirageFairy2019.magic.status.maxSpeed.name=Max Speed
+mirageFairy2019.magic.status.levelCost.name=Level Cost
 mirageFairy2019.magic.status.speedBoost.name=Speed Boost
 mirageFairy2019.magic.status.damageBoost.name=Damage Boost
 mirageFairy2019.magic.status.durationBoost.name=Duration Boost
