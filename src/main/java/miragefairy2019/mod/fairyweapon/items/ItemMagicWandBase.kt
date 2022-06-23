@@ -32,17 +32,17 @@ class ItemMagicWandBase : ItemFairyWeaponMagic4() {
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックで魔法エフェクト" // TODO translate
 
     override fun getMagic() = magic {
-        val magicSelectorRayTrace = MagicSelector.rayTrace(world, player, additionalReach(), EntityLivingBase::class.java) { it != player } // 視線判定
-        val magicSelectorPosition = magicSelectorRayTrace.position // 視点判定
+        val rayTraceMagicSelector = MagicSelector.rayTrace(world, player, additionalReach(), EntityLivingBase::class.java) { it != player } // 視線判定
+        val cursorMagicSelector = rayTraceMagicSelector.position // 視点判定
         object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.item.doEffect(0xFFFFFF)
+                cursorMagicSelector.item.doEffect(0xFFFFFF)
             }
 
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
                 if (!world.isRemote) {
-                    world.castOrNull<WorldServer>()?.let { spawnMagicParticle(it, player, magicSelectorPosition.item.position) } // 線状パーティクル
-                    world.castOrNull<WorldServer>()?.let { spawnMagicSplashParticle(it, magicSelectorPosition.item.position) } // スプラッシュパーティクル
+                    world.castOrNull<WorldServer>()?.let { spawnMagicParticle(it, player, cursorMagicSelector.item.position) } // 線状パーティクル
+                    world.castOrNull<WorldServer>()?.let { spawnMagicSplashParticle(it, cursorMagicSelector.item.position) } // スプラッシュパーティクル
                     world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.PLAYERS, 1.0f, 1.0f) // 魔法のSE
                 }
                 if (world.isRemote) player.swingArm(hand) // 腕を振る

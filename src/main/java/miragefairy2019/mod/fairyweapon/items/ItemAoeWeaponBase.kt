@@ -48,17 +48,17 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
 
 
     override fun getMagic() = magic {
-        val magicSelectorRayTrace = MagicSelector.rayTrace(world, player, additionalReach(), EntityLivingBase::class.java) { it != player } // 視線判定
-        val magicSelectorPosition = magicSelectorRayTrace.position // 視点判定
-        val magicSelectorSphere = MagicSelector.sphere(world, magicSelectorRayTrace.item.position, radius())
-        val magicSelectorEntities = magicSelectorSphere.entities(EntityLivingBase::class.java, { it != player && it.health > 0 }, maxTargetCount()) // 対象判定
-        val targets = magicSelectorEntities.item.entities
+        val rayTraceMagicSelector = MagicSelector.rayTrace(world, player, additionalReach(), EntityLivingBase::class.java) { it != player } // 視線判定
+        val cursorMagicSelector = rayTraceMagicSelector.position // 視点判定
+        val rangeMagicSelector = cursorMagicSelector.sphere(radius())
+        val targetsMagicSelector = rangeMagicSelector.entities(EntityLivingBase::class.java, { it != player && it.health > 0 }, maxTargetCount()) // 対象判定
+        val targets = targetsMagicSelector.item.entities
 
         fun error(color: Int, magicMessage: MagicMessage) = object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.item.doEffect(color)
-                magicSelectorSphere.item.doEffect()
-                magicSelectorEntities.item.doEffect()
+                cursorMagicSelector.item.doEffect(color)
+                rangeMagicSelector.item.doEffect()
+                targetsMagicSelector.item.doEffect()
             }
 
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
@@ -75,9 +75,9 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
         // 魔法成立
         object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.item.doEffect(0xFFFFFF)
-                magicSelectorSphere.item.doEffect()
-                magicSelectorEntities.item.doEffect()
+                cursorMagicSelector.item.doEffect(0xFFFFFF)
+                rangeMagicSelector.item.doEffect()
+                targetsMagicSelector.item.doEffect()
                 spawnParticleTargets(world, targets, { it.positionVector.addVector(0.0, it.height.toDouble(), 0.0) }, { 0x00FF00 })
             }
 

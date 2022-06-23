@@ -57,12 +57,12 @@ abstract class ItemMiragiumToolBase(
 
     override fun getMagic() = magic {
         val fairyType = findFairy(weaponItemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
-        val selectorRayTrace = MagicSelector.rayTrace(world, player, 0.0) // 視線判定
-        if (fairyType.isEmpty) return@magic fail(selectorRayTrace.item.position, 0xFF00FF) // 妖精なし判定
-        if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic fail(selectorRayTrace.item.position, 0xFF0000) // 材料なし判定
-        val targets = selectorRayTrace.item.blockPos.let { if (selectorRayTrace.item.sideHit != null) it.offset(selectorRayTrace.item.sideHit!!) else it }.let { iterateTargets(this@magic, it) } // 対象判定
-        if (!targets.hasNext()) return@magic fail(selectorRayTrace.item.position, 0x00FFFF) // ターゲットなし判定
-        if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic fail(selectorRayTrace.item.position, 0xFFFF00) // クールダウン判定
+        val rayTraceMagicSelector = MagicSelector.rayTrace(world, player, 0.0) // 視線判定
+        if (fairyType.isEmpty) return@magic fail(rayTraceMagicSelector.item.position, 0xFF00FF) // 妖精なし判定
+        if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic fail(rayTraceMagicSelector.item.position, 0xFF0000) // 材料なし判定
+        val targets = rayTraceMagicSelector.item.blockPos.let { if (rayTraceMagicSelector.item.sideHit != null) it.offset(rayTraceMagicSelector.item.sideHit!!) else it }.let { iterateTargets(this@magic, it) } // 対象判定
+        if (!targets.hasNext()) return@magic fail(rayTraceMagicSelector.item.position, 0x00FFFF) // ターゲットなし判定
+        if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic fail(rayTraceMagicSelector.item.position, 0xFFFF00) // クールダウン判定
 
         object : MagicHandler() { // 行使可能
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
@@ -102,7 +102,7 @@ abstract class ItemMiragiumToolBase(
             }
 
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                spawnParticle(world, selectorRayTrace.item.position, 0xFFFFFF)
+                spawnParticle(world, rayTraceMagicSelector.item.position, 0xFFFFFF)
                 spawnParticleTargets(world, targets.asSequence().toList().map { Vec3d(it).addVector(0.5, 0.5, 0.5) })
             }
         }

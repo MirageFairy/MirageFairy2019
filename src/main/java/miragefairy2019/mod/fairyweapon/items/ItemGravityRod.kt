@@ -43,12 +43,12 @@ class ItemGravityRod : ItemFairyWeaponMagic4() {
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックで浮遊" // TODO translate
 
     override fun getMagic() = magic {
-        val magicSelectorRayTrace = MagicSelector.rayTraceBlock(world, player, 0.0) // 視線判定
-        val magicSelectorPosition = magicSelectorRayTrace.position // 視点判定
+        val rayTraceMagicSelector = MagicSelector.rayTraceBlock(world, player, 0.0) // 視線判定
+        val cursorMagicSelector = rayTraceMagicSelector.position // 視点判定
 
         fun error(color: Int, magicMessage: MagicMessage) = object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.item.doEffect(color)
+                cursorMagicSelector.item.doEffect(color)
             }
 
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
@@ -64,7 +64,7 @@ class ItemGravityRod : ItemFairyWeaponMagic4() {
         // 魔法成立
         object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.item.doEffect(0xFFFFFF)
+                cursorMagicSelector.item.doEffect(0xFFFFFF)
             }
 
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {

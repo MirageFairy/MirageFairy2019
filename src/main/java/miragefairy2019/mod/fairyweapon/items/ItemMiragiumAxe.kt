@@ -73,11 +73,11 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでブロックを破壊" // TODO translate
 
     override fun getMagic() = magic {
-        val magicSelectorRayTrace = MagicSelector.rayTraceBlock(world, player, additionalReach()) // 視線判定
-        val magicSelectorPosition = magicSelectorRayTrace.position // 視点判定
+        val rayTraceMagicSelector = MagicSelector.rayTraceBlock(world, player, additionalReach()) // 視線判定
+        val cursorMagicSelector = rayTraceMagicSelector.position // 視点判定
 
         fun error(color: Int, magicMessage: MagicMessage) = object : MagicHandler() {
-            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) = magicSelectorPosition.item.doEffect(color)
+            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) = cursorMagicSelector.item.doEffect(color)
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
                 if (!world.isRemote) player.sendStatusMessage(magicMessage.displayText, true)
                 return EnumActionResult.FAIL
@@ -86,7 +86,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
 
         if (!hasPartnerFairy) return@magic error(0xFF00FF, MagicMessage.NO_FAIRY) // パートナー妖精判定
         if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic error(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
-        val blockPos = magicSelectorRayTrace.item.hitBlockPos ?: return@magic error(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
+        val blockPos = rayTraceMagicSelector.item.hitBlockPos ?: return@magic error(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
         val targets = getTargets(blockPos)
         if (targets.isEmpty()) return@magic error(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
         if (player.cooldownTracker.hasCooldown(weaponItem)) return@magic error(0xFFFF00, MagicMessage.COOL_TIME) // クールタイム判定
@@ -94,7 +94,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
         // 魔法成立
         object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.item.doEffect(0xFFFFFF)
+                cursorMagicSelector.item.doEffect(0xFFFFFF)
                 spawnParticleTargets(world, targets, { Vec3d(it).addVector(0.5, 0.5, 0.5) }, { 0x00FF00 })
             }
 
@@ -131,7 +131,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
                         breakBlock(
                             world,
                             player,
-                            magicSelectorRayTrace.item.rayTraceResult!!.sideHit,
+                            rayTraceMagicSelector.item.rayTraceResult!!.sideHit,
                             weaponItemStack,
                             targetBlockPos,
                             world.rand.randomInt(fortune()),

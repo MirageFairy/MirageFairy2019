@@ -70,24 +70,24 @@ class ItemFlowerPickingBell(additionalBaseStatus: Double, extraItemDropRateFacto
     override fun getMagic() = magic {
 
         // 視線判定
-        val magicSelectorRayTrace = MagicSelector.rayTraceBlock(world, player, additionalReach())
+        val rayTraceMagicSelector = MagicSelector.rayTraceBlock(world, player, additionalReach())
 
         // 視点判定
-        val magicSelectorPosition = magicSelectorRayTrace.position
+        val cursorMagicSelector = rayTraceMagicSelector.position
 
         // 妖精を持っていない場合、中止
         if (!hasPartnerFairy) return@magic object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.item.doEffect(0xFF00FF) // 視点
+                cursorMagicSelector.item.doEffect(0xFF00FF) // 視点
             }
         }
 
         // 範囲判定
-        val magicSelectorCircle = magicSelectorPosition.circle(radius())
-        val magicSelectorBlocks = magicSelectorCircle.blocks()
+        val rangeMagicSelector = cursorMagicSelector.circle(radius())
+        val targetsMagicSelector = rangeMagicSelector.blocks()
 
         // 対象計算
-        val listTarget = magicSelectorBlocks.item
+        val listTarget = targetsMagicSelector.item
             .sortedBy { it.second } // 近い順にソート
             .map { it.first } // BlockPosだけを抽出
             .asSequence() // 先頭から順番に判定
@@ -104,24 +104,24 @@ class ItemFlowerPickingBell(additionalBaseStatus: Double, extraItemDropRateFacto
         // 資源がない場合、中止
         if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.item.doEffect(0xFF0000) // 視点
-                magicSelectorCircle.item.doEffect() // 範囲
+                cursorMagicSelector.item.doEffect(0xFF0000) // 視点
+                rangeMagicSelector.item.doEffect() // 範囲
             }
         }
 
         // 発動対象がない場合、中止
         if (listTarget.isEmpty()) return@magic object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.item.doEffect(0x00FFFF) // 視点
-                magicSelectorCircle.item.doEffect() // 範囲
+                cursorMagicSelector.item.doEffect(0x00FFFF) // 視点
+                rangeMagicSelector.item.doEffect() // 範囲
             }
         }
 
         // クールタイムが残っている場合、中止
         if (player.cooldownTracker.hasCooldown(this@ItemFlowerPickingBell)) return@magic object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.item.doEffect(0xFFFF00) // 視点
-                magicSelectorCircle.item.doEffect() // 範囲
+                cursorMagicSelector.item.doEffect(0xFFFF00) // 視点
+                rangeMagicSelector.item.doEffect() // 範囲
                 spawnParticleTargets(world, listTarget, { Vec3d(it.first).addVector(0.5, 0.5, 0.5) }, { 0xFFFF00 }) // 対象
             }
         }
@@ -129,8 +129,8 @@ class ItemFlowerPickingBell(additionalBaseStatus: Double, extraItemDropRateFacto
         // 魔法成立
         object : MagicHandler() {
             override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                magicSelectorPosition.item.doEffect(0x00FF00) // 視点
-                magicSelectorCircle.item.doEffect() // 範囲
+                cursorMagicSelector.item.doEffect(0x00FF00) // 視点
+                rangeMagicSelector.item.doEffect() // 範囲
                 spawnParticleTargets(world, listTarget, { Vec3d(it.first).addVector(0.5, 0.5, 0.5) }, { 0x00FF00 }) // 対象
             }
 
