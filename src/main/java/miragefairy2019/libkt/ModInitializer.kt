@@ -99,7 +99,7 @@ abstract class Initializer<out T : Any>(private val getter: () -> T) : () -> T {
 
 // Item
 
-class ItemInitializer<out I : Item>(val modInitializer: ModInitializer, val registryName: ResourceName, getter: () -> I) : Initializer<I>(getter) {
+class ItemInitializer<out I : Item>(val modInitializer: ModInitializer, val resourceName: ResourceName, getter: () -> I) : Initializer<I>(getter) {
     val item get() = initializingObject
 }
 
