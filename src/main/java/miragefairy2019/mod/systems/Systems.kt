@@ -14,6 +14,5 @@ object Systems {
         VanillaOreNames.module(this)
         Ae2SpatialIoBlocking.module(this)
         DaemonSystem.module(this)
-        SlabUncraft.module(this)
     }
 }

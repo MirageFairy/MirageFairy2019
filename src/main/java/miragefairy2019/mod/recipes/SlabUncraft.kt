@@ -1,4 +1,4 @@
-package miragefairy2019.mod.systems
+package miragefairy2019.mod.recipes
 
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.artifacts.WandType

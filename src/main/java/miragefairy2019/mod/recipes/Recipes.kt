@@ -13,5 +13,6 @@ object Recipes {
         Mfa.module(this)
         FairyCrystalDropLoader.module(this)
         FairyLogDropLoader.module(this)
+        SlabUncraft.module(this)
     }
 }
