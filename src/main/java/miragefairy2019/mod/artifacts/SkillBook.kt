@@ -29,11 +29,11 @@ object SkillBook {
             setUnlocalizedName("skillBook")
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
+            makeItemModel { generated }
         }
         onMakeLang {
             enJa("item.skillBook.name", "Skill Book", "スキルブック")
         }
-        makeItemModel("skill_book") { generated }
     }
 }
 
