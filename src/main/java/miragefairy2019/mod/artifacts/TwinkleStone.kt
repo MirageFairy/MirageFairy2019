@@ -27,6 +27,7 @@ import miragefairy2019.libkt.ItemBlockMulti
 import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import mirrg.kotlin.hydrogen.toUpperCaseHead
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -38,41 +39,59 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
-object TwinkleStone {
-    lateinit var blockTwinkleStone: () -> BlockTwinkleStone
-    lateinit var itemBlockTwinkleStone: () -> ItemBlockMulti<BlockTwinkleStone, EnumVariantTwinkleStone>
-    val twinkleStoneModule = module {
+enum class TwinkleStoneCard(
+    val metadata: Int,
+    val registryName: String,
+    val unlocalizedName: String,
+    val oreName: String,
+    val englishName: String,
+    val japaneseName: String,
+    val lightValue: Int
+) : IStringSerializable {
+    WHITE(0, "white", "white", "white", "White", "白色", 15),
+    ORANGE(1, "orange", "orange", "orange", "Orange", "橙色", 15),
+    MAGENTA(2, "magenta", "magenta", "magenta", "Magenta", "赤紫色", 11),
+    LIGHT_BLUE(3, "light_blue", "lightBlue", "lightBlue", "Light Blue", "空色", 15),
+    YELLOW(4, "yellow", "yellow", "yellow", "Yellow", "黄色", 15),
+    LIME(5, "lime", "lime", "lime", "Lime", "黄緑色", 15),
+    PINK(6, "pink", "pink", "pink", "Pink", "桃色", 15),
+    GRAY(7, "gray", "gray", "gray", "Gray", "灰色", 11),
+    LIGHT_GRAY(8, "light_gray", "lightGray", "lightGray", "Light Gray", "薄灰色", 15),
+    CYAN(9, "cyan", "cyan", "cyan", "Cyan", "青緑色", 11),
+    PURPLE(10, "purple", "purple", "purple", "Purple", "紫色", 15),
+    BLUE(11, "blue", "blue", "blue", "Blue", "青色", 11),
+    BROWN(12, "brown", "brown", "brown", "Brown", "茶色", 11),
+    GREEN(13, "green", "green", "green", "Green", "緑色", 11),
+    RED(14, "red", "Red", "red", "Red", "赤色", 11),
+    BLACK(15, "black", "black", "black", "Black", "黒色", 3),
+    ;
+
+    override fun toString(): String = registryName
+    override fun getName(): String = registryName
+}
+
+val TwinkleStoneCard.oreNames get() = listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStone${oreName.toUpperCaseHead()}")
+
+
+lateinit var blockTwinkleStone: () -> BlockTwinkleStone
+lateinit var itemBlockTwinkleStone: () -> ItemBlockMulti<BlockTwinkleStone, BlockVariantTwinkleStone>
+
+val twinkleStoneModule = module {
+
+    // 全体
+    run {
+
+        // ブロック登録
         blockTwinkleStone = block({ BlockTwinkleStone() }, "twinkle_stone") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
                 DataBlockStates(
-                    variants = listOf(
-                        "white", "orange", "magenta", "light_blue",
-                        "yellow", "lime", "pink", "gray",
-                        "silver", "cyan", "purple", "blue",
-                        "brown", "green", "red", "black"
-                    ).mapIndexed { i, it -> "variant=$i" to DataBlockState("miragefairy2019:${it}_twinkle_stone") }.toMap()
+                    variants = TwinkleStoneCard.values().map { "variant=${it.metadata}" to DataBlockState("miragefairy2019:${it.registryName}_twinkle_stone") }.toMap()
                 )
             }
         }
-        run {
-            fun makeBlockModel(name: String) = makeBlockModel(name) {
-                DataModel(
-                    parent = "block/cube_all",
-                    textures = mapOf(
-                        "all" to "miragefairy2019:blocks/$name"
-                    )
-                )
-            }
-            listOf(
-                "white", "orange", "magenta", "light_blue",
-                "yellow", "lime", "pink", "gray",
-                "silver", "cyan", "purple", "blue",
-                "brown", "green", "red", "black"
-            ).forEach {
-                makeBlockModel("${it}_twinkle_stone")
-            }
-        }
+
+        // アイテム登録
         itemBlockTwinkleStone = item({ ItemBlockMulti(blockTwinkleStone()) }, "twinkle_stone") {
             setUnlocalizedName("twinkleStone")
             onRegisterItem {
@@ -82,38 +101,14 @@ object TwinkleStone {
             }
             onCreateItemStack {
                 blockTwinkleStone().variantList.blockVariants.forEach { variant ->
-                    variant.oreNames.forEach { oreName ->
+                    variant.card.oreNames.forEach { oreName ->
                         item.addOreName(oreName, variant.metadata)
                     }
                 }
             }
         }
-        listOf(
-            "white", "orange", "magenta", "light_blue",
-            "yellow", "lime", "pink", "gray",
-            "silver", "cyan", "purple", "blue",
-            "brown", "green", "red", "black"
-        ).forEach {
-            makeItemModel("${it}_twinkle_stone") { block }
-        }
-        onMakeLang {
-            enJa("tile.twinkleStoneWhite.name", "White Twinkle Stone", "白色のトゥインクルストーン")
-            enJa("tile.twinkleStoneOrange.name", "Orange Twinkle Stone", "橙色のトゥインクルストーン")
-            enJa("tile.twinkleStoneMagenta.name", "Magenta Twinkle Stone", "赤紫色のトゥインクルストーン")
-            enJa("tile.twinkleStoneLightBlue.name", "Light Blue Twinkle Stone", "空色のトゥインクルストーン")
-            enJa("tile.twinkleStoneYellow.name", "Yellow Twinkle Stone", "黄色のトゥインクルストーン")
-            enJa("tile.twinkleStoneLime.name", "Lime Twinkle Stone", "黄緑色のトゥインクルストーン")
-            enJa("tile.twinkleStonePink.name", "Pink Twinkle Stone", "桃色のトゥインクルストーン")
-            enJa("tile.twinkleStoneGray.name", "Gray Twinkle Stone", "灰色のトゥインクルストーン")
-            enJa("tile.twinkleStoneSilver.name", "Silver Twinkle Stone", "薄灰色のトゥインクルストーン")
-            enJa("tile.twinkleStoneCyan.name", "Cyan Twinkle Stone", "青緑色のトゥインクルストーン")
-            enJa("tile.twinkleStonePurple.name", "Purple Twinkle Stone", "紫色のトゥインクルストーン")
-            enJa("tile.twinkleStoneBlue.name", "Blue Twinkle Stone", "青色のトゥインクルストーン")
-            enJa("tile.twinkleStoneBrown.name", "Brown Twinkle Stone", "茶色のトゥインクルストーン")
-            enJa("tile.twinkleStoneGreen.name", "Green Twinkle Stone", "緑色のトゥインクルストーン")
-            enJa("tile.twinkleStoneRed.name", "Red Twinkle Stone", "赤色のトゥインクルストーン")
-            enJa("tile.twinkleStoneBlack.name", "Black Twinkle Stone", "黒色のトゥインクルストーン")
-        }
+
+        // 水色のトゥインクルストーンのレシピ生成
         makeRecipe("twinkle_stone") {
             DataShapedRecipe(
                 pattern = listOf(
@@ -131,35 +126,56 @@ object TwinkleStone {
                 result = DataResult(item = "miragefairy2019:twinkle_stone", data = 3, count = 4)
             )
         }
-        fun f(metadata: Int, colorRegistryNameSuffix: String, colorOreNameSuffix: String) = makeRecipe("${colorRegistryNameSuffix}_twinkle_stone") {
+
+    }
+
+    // それぞれ
+    TwinkleStoneCard.values().forEach {
+
+        // ブロックモデル生成
+        makeBlockModel("${it.registryName}_twinkle_stone") {
+            DataModel(
+                parent = "block/cube_all",
+                textures = mapOf(
+                    "all" to "miragefairy2019:blocks/${it.registryName}_twinkle_stone"
+                )
+            )
+        }
+
+        // アイテムモデル生成
+        makeItemModel("${it.registryName}_twinkle_stone") { block }
+
+        // 翻訳生成
+        onMakeLang {
+            enJa(
+                "tile.twinkleStone${it.unlocalizedName.toUpperCaseHead()}.name",
+                "${it.englishName} Twinkle Stone",
+                "${it.japaneseName}のトゥインクルストーン"
+            )
+        }
+
+        // レシピ生成
+        makeRecipe("${it.registryName}_twinkle_stone") {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOreIngredient(ore = "mirageFairy2019TwinkleStone"),
-                    DataOreIngredient(ore = "dye$colorOreNameSuffix")
+                    DataOreIngredient(ore = "dye${it.unlocalizedName.toUpperCaseHead()}")
                 ),
-                result = DataResult(item = "miragefairy2019:twinkle_stone", data = metadata)
+                result = DataResult(item = "miragefairy2019:twinkle_stone", data = it.metadata)
             )
         }
-        f(0, "white", "White")
-        f(1, "orange", "Orange")
-        f(2, "magenta", "Magenta")
-        f(3, "light_blue", "LightBlue")
-        f(4, "yellow", "Yellow")
-        f(5, "lime", "Lime")
-        f(6, "pink", "Pink")
-        f(7, "gray", "Gray")
-        f(8, "silver", "LightGray")
-        f(9, "cyan", "Cyan")
-        f(10, "purple", "Purple")
-        f(11, "blue", "Blue")
-        f(12, "brown", "Brown")
-        f(13, "green", "Green")
-        f(14, "red", "Red")
-        f(15, "black", "Black")
+
     }
+
 }
 
-class BlockTwinkleStone : BlockMulti<EnumVariantTwinkleStone>(Material.ROCK, EnumVariantTwinkleStone.variantList) {
+class BlockVariantTwinkleStone(val card: TwinkleStoneCard) : IBlockVariant {
+    override val metadata: Int get() = card.metadata
+    override val resourceName: String get() = "${card.registryName}_twinkle_stone"
+    override val unlocalizedName: String get() = "twinkleStone${card.unlocalizedName.toUpperCaseHead()}"
+}
+
+class BlockTwinkleStone : BlockMulti<BlockVariantTwinkleStone>(Material.ROCK, BlockVariantList(TwinkleStoneCard.values().map { BlockVariantTwinkleStone(it) })) {
     init {
         // style
         soundType = SoundType.STONE
@@ -171,39 +187,6 @@ class BlockTwinkleStone : BlockMulti<EnumVariantTwinkleStone>(Material.ROCK, Enu
 
     override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer) = true
 
-    override fun getLightValue(state: IBlockState, world: IBlockAccess, pos: BlockPos) = getVariant(state).lightValue
+    override fun getLightValue(state: IBlockState, world: IBlockAccess, pos: BlockPos) = getVariant(state).card.lightValue
     override fun canCreatureSpawn(state: IBlockState, world: IBlockAccess, pos: BlockPos, type: SpawnPlacementType) = false
-}
-
-enum class EnumVariantTwinkleStone(
-    override val metadata: Int,
-    override val resourceName: String,
-    override val unlocalizedName: String,
-    val oreNames: List<String>,
-    val lightValue: Int
-) : IStringSerializable, IBlockVariant {
-    WHITE(0, "white_twinkle_stone", "twinkleStoneWhite", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneWhite"), 15),
-    ORANGE(1, "orange_twinkle_stone", "twinkleStoneOrange", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneOrange"), 15),
-    MAGENTA(2, "magenta_twinkle_stone", "twinkleStoneMagenta", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneMagenta"), 11),
-    LIGHT_BLUE(3, "light_blue_twinkle_stone", "twinkleStoneLightBlue", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneLightBlue"), 15),
-    YELLOW(4, "yellow_twinkle_stone", "twinkleStoneYellow", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneYellow"), 15),
-    LIME(5, "lime_twinkle_stone", "twinkleStoneLime", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneLime"), 15),
-    PINK(6, "pink_twinkle_stone", "twinkleStonePink", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStonePink"), 15),
-    GRAY(7, "gray_twinkle_stone", "twinkleStoneGray", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneGray"), 11),
-    SILVER(8, "silver_twinkle_stone", "twinkleStoneSilver", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneSilver"), 15),
-    CYAN(9, "cyan_twinkle_stone", "twinkleStoneCyan", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneCyan"), 11),
-    PURPLE(10, "purple_twinkle_stone", "twinkleStonePurple", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStonePurple"), 15),
-    BLUE(11, "blue_twinkle_stone", "twinkleStoneBlue", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneBlue"), 11),
-    BROWN(12, "brown_twinkle_stone", "twinkleStoneBrown", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneBrown"), 11),
-    GREEN(13, "green_twinkle_stone", "twinkleStoneGreen", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneGreen"), 11),
-    RED(14, "red_twinkle_stone", "twinkleStoneRed", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneRed"), 11),
-    BLACK(15, "black_twinkle_stone", "twinkleStoneBlack", listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStoneBlack"), 3),
-    ;
-
-    override fun toString(): String = resourceName
-    override fun getName(): String = resourceName
-
-    companion object {
-        val variantList = BlockVariantList(values().toList())
-    }
 }
