@@ -120,7 +120,7 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "金属質よりも非晶質の方が鋭利だ、って"),
         "goal",
-        listOf(!CRYSTAL),
+        listOf(!CRYSTAL, !"ingotMiragium", !"mirageFairyCrystal"),
         {
             DataShapedRecipe(
                 pattern = listOf(
