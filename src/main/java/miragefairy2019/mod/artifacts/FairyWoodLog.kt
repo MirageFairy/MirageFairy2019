@@ -1,6 +1,5 @@
 package miragefairy2019.mod.artifacts
 
-import miragefairy2019.mod.Main
 import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -13,6 +12,7 @@ import miragefairy2019.lib.resourcemaker.DataBlockStates
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
+import miragefairy2019.mod.Main
 import net.minecraft.block.BlockRotatedPillar
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material

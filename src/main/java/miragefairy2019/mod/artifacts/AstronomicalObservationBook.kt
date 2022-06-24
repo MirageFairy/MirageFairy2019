@@ -7,6 +7,8 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.rayTraceBlock
+import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.displayText
@@ -18,8 +20,6 @@ import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.skill.ApiSkill
-import miragefairy2019.lib.resourcemaker.generated
-import miragefairy2019.lib.resourcemaker.makeItemModel
 import mirrg.kotlin.minus
 import mirrg.kotlin.startOfDay
 import mirrg.kotlin.startOfMonth

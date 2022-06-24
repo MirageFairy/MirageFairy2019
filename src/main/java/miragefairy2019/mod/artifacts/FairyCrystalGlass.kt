@@ -1,9 +1,5 @@
 package miragefairy2019.mod.artifacts
 
-import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.with
-import miragefairy2019.mod.Main
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.lib.modinitializer.BlockInitializer
 import miragefairy2019.lib.modinitializer.ItemInitializer
 import miragefairy2019.lib.modinitializer.addOreName
@@ -28,6 +24,10 @@ import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
+import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.with
+import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.toLowerCaseHead
 import mirrg.kotlin.toSnakeCase

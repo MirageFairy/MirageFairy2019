@@ -2,8 +2,6 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
-import miragefairy2019.libkt.orNull
-import miragefairy2019.mod.Main
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -23,6 +21,8 @@ import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.normal
+import miragefairy2019.libkt.orNull
+import miragefairy2019.mod.Main
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType

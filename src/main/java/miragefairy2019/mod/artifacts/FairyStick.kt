@@ -7,6 +7,8 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.proxy
+import miragefairy2019.lib.resourcemaker.handheld
+import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.canTranslate
@@ -30,8 +32,6 @@ import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
 import miragefairy2019.mod.systems.IFairyStickCraftItem
 import miragefairy2019.mod.systems.addFairyStickCraftCoolTime
-import miragefairy2019.lib.resourcemaker.handheld
-import miragefairy2019.lib.resourcemaker.makeItemModel
 import mirrg.kotlin.formatAs
 import net.minecraft.block.BlockDynamicLiquid
 import net.minecraft.client.Minecraft

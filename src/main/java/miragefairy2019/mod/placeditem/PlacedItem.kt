@@ -1,7 +1,5 @@
 package miragefairy2019.mod.placeditem
 
-import miragefairy2019.mod.Main
-import miragefairy2019.mod.Main.side
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
@@ -11,6 +9,8 @@ import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.normal
+import miragefairy2019.mod.Main
+import miragefairy2019.mod.Main.side
 import net.minecraft.block.Block
 import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.client.settings.KeyBinding

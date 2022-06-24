@@ -1,11 +1,5 @@
 package miragefairy2019.mod.artifacts
 
-import miragefairy2019.libkt.BlockMulti
-import miragefairy2019.libkt.BlockVariantList
-import miragefairy2019.libkt.IBlockVariant
-import miragefairy2019.libkt.ItemBlockMulti
-import miragefairy2019.mod.Main
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -20,6 +14,12 @@ import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.libkt.BlockMulti
+import miragefairy2019.libkt.BlockVariantList
+import miragefairy2019.libkt.IBlockVariant
+import miragefairy2019.libkt.ItemBlockMulti
+import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState

@@ -13,6 +13,13 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
+import miragefairy2019.lib.resourcemaker.DataBlockState
+import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.makeBlockModel
+import miragefairy2019.lib.resourcemaker.makeBlockStates
+import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.shineEfficiency
 import miragefairy2019.libkt.BiomeDecoratorFlowers
 import miragefairy2019.libkt.WorldGenBush
@@ -24,13 +31,6 @@ import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.EnumVariantMaterials1
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
-import miragefairy2019.lib.resourcemaker.DataModel
-import miragefairy2019.lib.resourcemaker.generated
-import miragefairy2019.lib.resourcemaker.makeBlockModel
-import miragefairy2019.lib.resourcemaker.makeBlockStates
-import miragefairy2019.lib.resourcemaker.makeItemModel
 import mirrg.kotlin.or
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.Block

@@ -1,12 +1,6 @@
 package miragefairy2019.mod.material
 
 import miragefairy2019.common.toOreName
-import miragefairy2019.libkt.BlockVariantList
-import miragefairy2019.libkt.copyItemStack
-import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.Main
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -24,6 +18,12 @@ import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.libkt.BlockVariantList
+import miragefairy2019.libkt.copyItemStack
+import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.randomInt
+import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation

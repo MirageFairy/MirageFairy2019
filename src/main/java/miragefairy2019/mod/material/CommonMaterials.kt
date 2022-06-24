@@ -1,12 +1,6 @@
 package miragefairy2019.mod.material
 
 import miragefairy2019.common.toOreName
-import miragefairy2019.libkt.copyItemStack
-import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.mod.Main
-import miragefairy2019.mod.artifacts.WandType
-import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.lib.modinitializer.ItemVariantInitializer
 import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.item
@@ -25,6 +19,12 @@ import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.handheld
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
+import miragefairy2019.libkt.copyItemStack
+import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.setCustomModelResourceLocations
+import miragefairy2019.mod.Main
+import miragefairy2019.mod.artifacts.WandType
+import miragefairy2019.mod.artifacts.ingredientData
 import net.minecraftforge.fml.common.registry.GameRegistry
 
 object CommonMaterials {

@@ -15,6 +15,8 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.registerItemColorHandler
+import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.setCompound
 import miragefairy2019.lib.setInt
 import miragefairy2019.lib.times
@@ -34,8 +36,6 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.ItemFairy
-import miragefairy2019.lib.resourcemaker.DataModel
-import miragefairy2019.lib.resourcemaker.makeItemModel
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.formatAs
 import net.minecraft.client.renderer.block.model.ModelResourceLocation

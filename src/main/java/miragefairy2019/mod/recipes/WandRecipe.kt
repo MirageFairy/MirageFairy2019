@@ -1,7 +1,5 @@
 package miragefairy2019.mod.recipes
 
-import miragefairy2019.mod.artifacts.WandType
-import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.resourcemaker.DataIngredient
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
@@ -10,6 +8,8 @@ import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.makeRecipe
+import miragefairy2019.mod.artifacts.WandType
+import miragefairy2019.mod.artifacts.ingredientData
 
 val wandRecipeModule = module {
 

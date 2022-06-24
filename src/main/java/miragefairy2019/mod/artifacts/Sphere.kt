@@ -9,6 +9,8 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.registerItemColorHandler
+import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
@@ -22,8 +24,6 @@ import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.lib.resourcemaker.DataModel
-import miragefairy2019.lib.resourcemaker.makeItemModel
 import mirrg.kotlin.hydrogen.toUpperCaseHead
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks

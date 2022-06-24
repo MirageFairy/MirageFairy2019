@@ -1,12 +1,5 @@
 package miragefairy2019.mod.artifacts
 
-import miragefairy2019.libkt.CapabilityProviderAdapter
-import miragefairy2019.libkt.ItemMultiMaterial
-import miragefairy2019.libkt.ItemVariantMaterial
-import miragefairy2019.libkt.createItemStack
-import miragefairy2019.libkt.setCustomModelResourceLocations
-import miragefairy2019.mod.Main
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.itemVariant
@@ -23,6 +16,13 @@ import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
+import miragefairy2019.libkt.CapabilityProviderAdapter
+import miragefairy2019.libkt.ItemMultiMaterial
+import miragefairy2019.libkt.ItemVariantMaterial
+import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.setCustomModelResourceLocations
+import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject

@@ -7,6 +7,12 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.proxy
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
+import miragefairy2019.lib.resourcemaker.DataResult
+import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
+import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.BlockRegion
 import miragefairy2019.libkt.ItemMulti
@@ -26,8 +32,8 @@ import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.skill.ApiSkill
-import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.ISkillContainer
+import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
 import miragefairy2019.mod.systems.DropCategory
@@ -37,12 +43,6 @@ import miragefairy2019.mod.systems.insertBiome
 import miragefairy2019.mod.systems.insertBlocks
 import miragefairy2019.mod.systems.insertEntities
 import miragefairy2019.mod.systems.insertItemStacks
-import miragefairy2019.lib.resourcemaker.DataOreIngredient
-import miragefairy2019.lib.resourcemaker.DataResult
-import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
-import miragefairy2019.lib.resourcemaker.generated
-import miragefairy2019.lib.resourcemaker.makeItemModel
-import miragefairy2019.lib.resourcemaker.makeRecipe
 import mirrg.kotlin.formatAs
 import net.minecraft.block.BlockDispenser
 import net.minecraft.client.util.ITooltipFlag

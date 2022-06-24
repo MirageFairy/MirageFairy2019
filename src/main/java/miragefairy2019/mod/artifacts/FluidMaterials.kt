@@ -1,8 +1,5 @@
 package miragefairy2019.mod.artifacts
 
-import miragefairy2019.libkt.resourceLocation
-import miragefairy2019.mod.Main
-import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.lib.modinitializer.BlockInitializer
 import miragefairy2019.lib.modinitializer.ModInitializer
 import miragefairy2019.lib.modinitializer.block
@@ -14,6 +11,9 @@ import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.resourcemaker.fluid
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.libkt.resourceLocation
+import miragefairy2019.mod.Main
+import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState

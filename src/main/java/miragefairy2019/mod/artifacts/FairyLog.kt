@@ -1,9 +1,5 @@
 package miragefairy2019.mod.artifacts
 
-import miragefairy2019.lib.selectFairyLogDrop
-import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.Main
-import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -21,6 +17,10 @@ import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.lib.selectFairyLogDrop
+import miragefairy2019.libkt.randomInt
+import miragefairy2019.mod.Main
+import miragefairy2019.mod.fairy.FairyTypes
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
 import net.minecraft.block.BlockOldLog
