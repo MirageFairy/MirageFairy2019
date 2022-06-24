@@ -700,43 +700,117 @@ enum class FairyWeaponKind(
 
 val FairyWeaponKind.manualRepairIngredients: List<Ingredient> get() = if (parent != null) parent.manualRepairIngredients + ownManualRepairIngredientSuppliers.map { it() } else ownManualRepairIngredientSuppliers.map { it() }
 
-object FairyWeapon {
-    @Suppress("UNUSED_VARIABLE")
-    val fairyWeaponModule = module {
+val fairyWeaponModule = module {
+
+    // 翻訳生成
+    onMakeLang {
+        enJa("miragefairy2019.magic.${MagicMessage.NO_FAIRY.unlocalizedName}.text", "You don't have a fairy", "妖精を所持していません")
+        enJa("miragefairy2019.magic.${MagicMessage.INSUFFICIENT_DURABILITY.unlocalizedName}.text", "Insufficient durability", "耐久値が不足しています")
+        enJa("miragefairy2019.magic.${MagicMessage.NO_TARGET.unlocalizedName}.text", "There is no target", "発動対象がありません")
+        enJa("miragefairy2019.magic.${MagicMessage.COOL_TIME.unlocalizedName}.text", "Cool time remains", "クールタイムが残っています")
+        enJa("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器")
+        enJa("advancements.miragefairy2019.fairy_weapon.root.description", "Fairy Weapon", "妖精の力を何かに使えないだろうか")
+    }
+
+    // 実績生成
+    makeAdvancement("fairy_weapon/root") {
+        jsonObject(
+            "display" to jsonObjectNotNull(
+                "icon" to jsonObject(
+                    "item" to "miragefairy2019:miragium_sword".jsonElement
+                ),
+                "title" to jsonObject(
+                    "translate" to "advancements.miragefairy2019.fairy_weapon.root.title".jsonElement
+                ),
+                "description" to jsonObject(
+                    "translate" to "advancements.miragefairy2019.fairy_weapon.root.description".jsonElement
+                ),
+                "background" to "miragefairy2019:textures/blocks/magnetite_block.png".jsonElement
+            ),
+            "criteria" to jsonObject(
+                "main" to jsonObject(
+                    "trigger" to "minecraft:inventory_changed".jsonElement,
+                    "conditions" to jsonObject(
+                        "items" to jsonArray(
+                            jsonObject(
+                                "type" to "forge:ore_dict".jsonElement,
+                                "ore" to "mirageFairy2019SphereAny".jsonElement
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    }
+
+    // 個別
+    FairyWeaponKind.values().forEach { fairyWeaponKind ->
+
+        // アイテム登録
+        item(fairyWeaponKind.itemCreator, fairyWeaponKind.registryName) {
+            setUnlocalizedName(fairyWeaponKind.unlocalizedName)
+            setCreativeTab { creativeTab }
+            onRegisterItem {
+                if (side.isClient) {
+                    val modelResourceLocation = ModelResourceLocation(item.registryName!!, "normal")
+                    MinecraftForge.EVENT_BUS.register(object : Any() {
+                        @SubscribeEvent
+                        fun accept(event: ModelBakeEvent) {
+                            event.modelRegistry.putObject(modelResourceLocation, BakedModelBuiltinWrapper(event.modelRegistry.getObject(modelResourceLocation)!!))
+                        }
+                    })
+                    ModelLoader.setCustomModelResourceLocation(item, 0, modelResourceLocation)
+                }
+            }
+            onInit {
+                val durability = (1..fairyWeaponKind.tier).fold(16) { a, _ -> a * 2 }
+                item.maxDamage = durability - 1
+                item.tier = fairyWeaponKind.tier
+            }
+            onCreateItemStack {
+                item.manualRepairRequirements += fairyWeaponKind.manualRepairIngredients
+            }
+        }
+
+        // アイテムモデル生成
+        makeItemModel(fairyWeaponKind.registryName) { handheld }
 
         // 翻訳生成
         onMakeLang {
-            enJa("miragefairy2019.magic.${MagicMessage.NO_FAIRY.unlocalizedName}.text", "You don't have a fairy", "妖精を所持していません")
-            enJa("miragefairy2019.magic.${MagicMessage.INSUFFICIENT_DURABILITY.unlocalizedName}.text", "Insufficient durability", "耐久値が不足しています")
-            enJa("miragefairy2019.magic.${MagicMessage.NO_TARGET.unlocalizedName}.text", "There is no target", "発動対象がありません")
-            enJa("miragefairy2019.magic.${MagicMessage.COOL_TIME.unlocalizedName}.text", "Cool time remains", "クールタイムが残っています")
-            enJa("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器")
-            enJa("advancements.miragefairy2019.fairy_weapon.root.description", "Fairy Weapon", "妖精の力を何かに使えないだろうか")
+            enJa("item.${fairyWeaponKind.unlocalizedName}.name", fairyWeaponKind.displayName.english, fairyWeaponKind.displayName.japanese)
+            enJa("item.${fairyWeaponKind.unlocalizedName}.poem", fairyWeaponKind.poem.english, fairyWeaponKind.poem.japanese)
+            if (fairyWeaponKind.author != null) enJa("item.${fairyWeaponKind.unlocalizedName}.author", fairyWeaponKind.author.english, fairyWeaponKind.author.japanese)
+            enJa("item.${fairyWeaponKind.unlocalizedName}.recipe", fairyWeaponKind.advancementText.english, fairyWeaponKind.advancementText.japanese)
+        }
+
+        // レシピ生成
+        makeRecipe("fairy_weapon/${fairyWeaponKind.registryName}") {
+            fairyWeaponKind.recipeDataSupplier()
         }
 
         // 実績生成
-        makeAdvancement("fairy_weapon/root") {
+        makeAdvancement("fairy_weapon/${fairyWeaponKind.registryName}") {
             jsonObject(
                 "display" to jsonObjectNotNull(
                     "icon" to jsonObject(
-                        "item" to "miragefairy2019:miragium_sword".jsonElement
+                        "item" to "miragefairy2019:${fairyWeaponKind.registryName}".jsonElement
                     ),
                     "title" to jsonObject(
-                        "translate" to "advancements.miragefairy2019.fairy_weapon.root.title".jsonElement
+                        "translate" to "item.${fairyWeaponKind.unlocalizedName}.name".jsonElement
                     ),
                     "description" to jsonObject(
-                        "translate" to "advancements.miragefairy2019.fairy_weapon.root.description".jsonElement
+                        "translate" to "item.${fairyWeaponKind.unlocalizedName}.recipe".jsonElement
                     ),
-                    "background" to "miragefairy2019:textures/blocks/magnetite_block.png".jsonElement
+                    fairyWeaponKind.frame?.let { "frame" to it.jsonElement }
                 ),
+                "parent" to "miragefairy2019:fairy_weapon/${fairyWeaponKind.parent?.registryName ?: "root"}".jsonElement,
                 "criteria" to jsonObject(
                     "main" to jsonObject(
                         "trigger" to "minecraft:inventory_changed".jsonElement,
                         "conditions" to jsonObject(
                             "items" to jsonArray(
                                 jsonObject(
-                                    "type" to "forge:ore_dict".jsonElement,
-                                    "ore" to "mirageFairy2019SphereAny".jsonElement
+                                    "item" to "miragefairy2019:${fairyWeaponKind.registryName}".jsonElement
                                 )
                             )
                         )
@@ -745,83 +819,6 @@ object FairyWeapon {
             )
         }
 
-        // 個別
-        FairyWeaponKind.values().forEach { fairyWeaponKind ->
-
-            // アイテム登録
-            item(fairyWeaponKind.itemCreator, fairyWeaponKind.registryName) {
-                setUnlocalizedName(fairyWeaponKind.unlocalizedName)
-                setCreativeTab { creativeTab }
-                onRegisterItem {
-                    if (side.isClient) {
-                        val modelResourceLocation = ModelResourceLocation(item.registryName!!, "normal")
-                        MinecraftForge.EVENT_BUS.register(object : Any() {
-                            @SubscribeEvent
-                            fun accept(event: ModelBakeEvent) {
-                                event.modelRegistry.putObject(modelResourceLocation, BakedModelBuiltinWrapper(event.modelRegistry.getObject(modelResourceLocation)!!))
-                            }
-                        })
-                        ModelLoader.setCustomModelResourceLocation(item, 0, modelResourceLocation)
-                    }
-                }
-                onInit {
-                    val durability = (1..fairyWeaponKind.tier).fold(16) { a, _ -> a * 2 }
-                    item.maxDamage = durability - 1
-                    item.tier = fairyWeaponKind.tier
-                }
-                onCreateItemStack {
-                    item.manualRepairRequirements += fairyWeaponKind.manualRepairIngredients
-                }
-            }
-
-            // アイテムモデル生成
-            makeItemModel(fairyWeaponKind.registryName) { handheld }
-
-            // 翻訳生成
-            onMakeLang {
-                enJa("item.${fairyWeaponKind.unlocalizedName}.name", fairyWeaponKind.displayName.english, fairyWeaponKind.displayName.japanese)
-                enJa("item.${fairyWeaponKind.unlocalizedName}.poem", fairyWeaponKind.poem.english, fairyWeaponKind.poem.japanese)
-                if (fairyWeaponKind.author != null) enJa("item.${fairyWeaponKind.unlocalizedName}.author", fairyWeaponKind.author.english, fairyWeaponKind.author.japanese)
-                enJa("item.${fairyWeaponKind.unlocalizedName}.recipe", fairyWeaponKind.advancementText.english, fairyWeaponKind.advancementText.japanese)
-            }
-
-            // レシピ生成
-            makeRecipe("fairy_weapon/${fairyWeaponKind.registryName}") {
-                fairyWeaponKind.recipeDataSupplier()
-            }
-
-            // 実績生成
-            makeAdvancement("fairy_weapon/${fairyWeaponKind.registryName}") {
-                jsonObject(
-                    "display" to jsonObjectNotNull(
-                        "icon" to jsonObject(
-                            "item" to "miragefairy2019:${fairyWeaponKind.registryName}".jsonElement
-                        ),
-                        "title" to jsonObject(
-                            "translate" to "item.${fairyWeaponKind.unlocalizedName}.name".jsonElement
-                        ),
-                        "description" to jsonObject(
-                            "translate" to "item.${fairyWeaponKind.unlocalizedName}.recipe".jsonElement
-                        ),
-                        fairyWeaponKind.frame?.let { "frame" to it.jsonElement }
-                    ),
-                    "parent" to "miragefairy2019:fairy_weapon/${fairyWeaponKind.parent?.registryName ?: "root"}".jsonElement,
-                    "criteria" to jsonObject(
-                        "main" to jsonObject(
-                            "trigger" to "minecraft:inventory_changed".jsonElement,
-                            "conditions" to jsonObject(
-                                "items" to jsonArray(
-                                    jsonObject(
-                                        "item" to "miragefairy2019:${fairyWeaponKind.registryName}".jsonElement
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            }
-
-        }
-
     }
+
 }

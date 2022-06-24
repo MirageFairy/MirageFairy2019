@@ -6,7 +6,6 @@ import miragefairy2019.mod.artifacts.artifactsModule
 import miragefairy2019.mod.fairy.Fairy
 import miragefairy2019.mod.fairybox.FairyBox
 import miragefairy2019.mod.fairyrelation.fairyRelationModule
-import miragefairy2019.mod.fairyweapon.FairyWeapon
 import miragefairy2019.mod.material.materialModule
 import miragefairy2019.mod.placeditem.PlacedItem
 import miragefairy2019.mod.playeraura.playerAuraModule
@@ -28,7 +27,7 @@ val modules = module {
     PlacedItem.placedItemMdule(this)
     skillModule(this)
     Fairy.fairyModule(this)
-    FairyWeapon.fairyWeaponModule(this)
+    fairyWeaponModule(this)
     fairyRelationModule(this)
     FairyBox.fairyBoxModule(this)
 
