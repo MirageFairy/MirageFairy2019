@@ -18,6 +18,7 @@ import miragefairy2019.libkt.BlockMulti
 import miragefairy2019.libkt.BlockVariantList
 import miragefairy2019.libkt.IBlockVariant
 import miragefairy2019.libkt.ItemBlockMulti
+import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.block.SoundType
@@ -88,6 +89,24 @@ object TwinkleStone {
             "brown", "green", "red", "black"
         ).forEach {
             makeItemModel("${it}_twinkle_stone") { block }
+        }
+        onMakeLang {
+            enJa("tile.twinkleStoneWhite.name", "White Twinkle Stone", "白色のトゥインクルストーン")
+            enJa("tile.twinkleStoneOrange.name", "Orange Twinkle Stone", "橙色のトゥインクルストーン")
+            enJa("tile.twinkleStoneMagenta.name", "Magenta Twinkle Stone", "赤紫色のトゥインクルストーン")
+            enJa("tile.twinkleStoneLightBlue.name", "Light Blue Twinkle Stone", "空色のトゥインクルストーン")
+            enJa("tile.twinkleStoneYellow.name", "Yellow Twinkle Stone", "黄色のトゥインクルストーン")
+            enJa("tile.twinkleStoneLime.name", "Lime Twinkle Stone", "黄緑色のトゥインクルストーン")
+            enJa("tile.twinkleStonePink.name", "Pink Twinkle Stone", "桃色のトゥインクルストーン")
+            enJa("tile.twinkleStoneGray.name", "Gray Twinkle Stone", "灰色のトゥインクルストーン")
+            enJa("tile.twinkleStoneSilver.name", "Silver Twinkle Stone", "薄灰色のトゥインクルストーン")
+            enJa("tile.twinkleStoneCyan.name", "Cyan Twinkle Stone", "青緑色のトゥインクルストーン")
+            enJa("tile.twinkleStonePurple.name", "Purple Twinkle Stone", "紫色のトゥインクルストーン")
+            enJa("tile.twinkleStoneBlue.name", "Blue Twinkle Stone", "青色のトゥインクルストーン")
+            enJa("tile.twinkleStoneBrown.name", "Brown Twinkle Stone", "茶色のトゥインクルストーン")
+            enJa("tile.twinkleStoneGreen.name", "Green Twinkle Stone", "緑色のトゥインクルストーン")
+            enJa("tile.twinkleStoneRed.name", "Red Twinkle Stone", "赤色のトゥインクルストーン")
+            enJa("tile.twinkleStoneBlack.name", "Black Twinkle Stone", "黒色のトゥインクルストーン")
         }
     }
 }

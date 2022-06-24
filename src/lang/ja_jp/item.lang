@@ -14,22 +14,6 @@ item.fairyStick.name=妖精のステッキ
 item.fairyStick.poem=頼みごとをしてみよう
 
 item.fertilizer.name=肥料
-tile.twinkleStoneWhite.name=白色のトゥインクルストーン
-tile.twinkleStoneOrange.name=橙色のトゥインクルストーン
-tile.twinkleStoneMagenta.name=赤紫色のトゥインクルストーン
-tile.twinkleStoneLightBlue.name=空色のトゥインクルストーン
-tile.twinkleStoneYellow.name=黄色のトゥインクルストーン
-tile.twinkleStoneLime.name=黄緑色のトゥインクルストーン
-tile.twinkleStonePink.name=桃色のトゥインクルストーン
-tile.twinkleStoneGray.name=灰色のトゥインクルストーン
-tile.twinkleStoneSilver.name=薄灰色のトゥインクルストーン
-tile.twinkleStoneCyan.name=青緑色のトゥインクルストーン
-tile.twinkleStonePurple.name=紫色のトゥインクルストーン
-tile.twinkleStoneBlue.name=青色のトゥインクルストーン
-tile.twinkleStoneBrown.name=茶色のトゥインクルストーン
-tile.twinkleStoneGreen.name=緑色のトゥインクルストーン
-tile.twinkleStoneRed.name=赤色のトゥインクルストーン
-tile.twinkleStoneBlack.name=黒色のトゥインクルストーン
 
 item.spheres.name=スフィア
 item.spheres.format=%sのスフィア

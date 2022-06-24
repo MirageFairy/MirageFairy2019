@@ -14,22 +14,6 @@ item.fairyStick.name=Fairy Stick
 item.fairyStick.poem=
 
 item.fertilizer.name=Fertilizer
-tile.twinkleStoneWhite.name=White Twinkle Stone
-tile.twinkleStoneOrange.name=Orange Twinkle Stone
-tile.twinkleStoneMagenta.name=Magenta Twinkle Stone
-tile.twinkleStoneLightBlue.name=Light Blue Twinkle Stone
-tile.twinkleStoneYellow.name=Yellow Twinkle Stone
-tile.twinkleStoneLime.name=Lime Twinkle Stone
-tile.twinkleStonePink.name=Pink Twinkle Stone
-tile.twinkleStoneGray.name=Gray Twinkle Stone
-tile.twinkleStoneSilver.name=Silver Twinkle Stone
-tile.twinkleStoneCyan.name=Cyan Twinkle Stone
-tile.twinkleStonePurple.name=Purple Twinkle Stone
-tile.twinkleStoneBlue.name=Blue Twinkle Stone
-tile.twinkleStoneBrown.name=Brown Twinkle Stone
-tile.twinkleStoneGreen.name=Green Twinkle Stone
-tile.twinkleStoneRed.name=Red Twinkle Stone
-tile.twinkleStoneBlack.name=Black Twinkle Stone
 
 item.spheres.name=Sphere
 item.spheres.format=Sphere of %s
