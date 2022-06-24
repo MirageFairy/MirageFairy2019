@@ -28,14 +28,16 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreIngredient
 
-class ItemCrystalSword : ItemFairyWeaponBase3(Mana.GAIA, Mastery.closeCombat) {
-    val extraItemDropRate = status("extraItemDropRate", { (!mastery / 100.0).coerceIn(0.0, 1.0) }, { percent1 })
+class ItemCrystalSword(
+    private val additionalDamage: Double,
+    private val boost: Double
+) : ItemFairyWeaponBase3(Mana.GAIA, Mastery.closeCombat) {
+    val extraItemDropRate = status("extraItemDropRate", { (!mastery / 100.0 + +boost).coerceIn(0.0, 1.0) }, { percent1 })
 
-    // 攻撃力は7（ダイヤ剣+1）固定
     override fun getAttributeModifiers(equipmentSlot: EntityEquipmentSlot, itemStack: ItemStack): Multimap<String?, AttributeModifier?>? {
         val multimap = super.getAttributeModifiers(equipmentSlot, itemStack)
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.name, AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 7.0, 0))
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.name, AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", additionalDamage, 0))
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.name, AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4, 0))
         }
         return multimap

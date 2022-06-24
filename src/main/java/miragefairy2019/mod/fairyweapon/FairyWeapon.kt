@@ -114,7 +114,7 @@ enum class FairyWeaponKind(
         }
     ),
     crystalSword(
-        miragiumSword, "crystal_sword", "crystalSword", 3, { ItemCrystalSword() },
+        miragiumSword, "crystal_sword", "crystalSword", 3, { ItemCrystalSword(7.0 /* ダイヤ剣+1 */, 0.0) },
         LangPair("Crystal Sword", "クリスタルソード"),
         LangPair("", "妖精はこれをおやつにするという"),
         null,
