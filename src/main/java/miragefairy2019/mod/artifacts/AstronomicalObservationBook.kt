@@ -5,9 +5,11 @@ import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.displayText
+import miragefairy2019.libkt.en
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
+import miragefairy2019.libkt.ja
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
@@ -57,6 +59,35 @@ object AstronomicalObservationBook {
             setCustomModelResourceLocation()
         }
         makeItemModel("astronomical_observation_book") { generated }
+        onMakeLang {
+            val prefix = "miragefairy2019.gui.astronomicalObservation"
+            ja("$prefix.title", "天体観測クエスト")
+            ja("$prefix.daily", "日間")
+            ja("$prefix.weekly", "週間")
+            ja("$prefix.monthly", "月間")
+            ja("$prefix.impossible", "不可能")
+            ja("$prefix.incomplete", "未完了")
+            ja("$prefix.completed", "完了")
+            ja("$prefix.usage", "天体観測を行うには、天体観測ブックを太陽もしくは月に向かって右クリック長押しします。")
+            ja("$prefix.message.remaining", "残り %s で更新")
+            ja("$prefix.message.completed", "完了！")
+            ja("$prefix.message.gainExp", "%s のフェアリーマスター経験値を獲得しました！")
+            ja("$prefix.message.gainLevel", "フェアリーマスターレベルが %s 上昇しました！")
+            ja("$prefix.message.doNothing", "特筆すべき変化は見られなかった…")
+            en("$prefix.title", "Astronomical Observation Quest")
+            en("$prefix.daily", "Daily")
+            en("$prefix.weekly", "Weekly")
+            en("$prefix.monthly", "Monthly")
+            en("$prefix.impossible", "Impossible")
+            en("$prefix.incomplete", "Incomplete")
+            en("$prefix.completed", "Completed")
+            en("$prefix.usage", "Right-click and hold AO-Book toward the sun or the moon for Astronomical Observation.")
+            en("$prefix.message.remaining", "Updated with %s left")
+            en("$prefix.message.completed", "Completed!")
+            en("$prefix.message.gainExp", "You have earned %s Fairy Master XP!")
+            en("$prefix.message.gainLevel", "You have earned %s Fairy Master Level!")
+            en("$prefix.message.doNothing", "You got nothing...")
+        }
     }
 }
 
