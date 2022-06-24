@@ -7,6 +7,7 @@ import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
@@ -28,6 +29,9 @@ object SkillBook {
             setUnlocalizedName("skillBook")
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
+        }
+        onMakeLang {
+            enJa("item.skillBook.name", "Skill Book", "スキルブック")
         }
         makeItemModel("skill_book") { generated }
     }
