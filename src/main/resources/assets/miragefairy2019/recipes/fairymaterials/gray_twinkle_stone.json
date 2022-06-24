@@ -1,18 +1,18 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "gray_twinkle_stone",
-	"ingredients": [
-		{
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019TwinkleStone"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "dyeGray"
-		}
-	],
-	"result": {
-		"item": "miragefairy2019:twinkle_stone",
-		"data": 7
-	}
+  "type": "forge:ore_shapeless",
+  "group": "gray_twinkle_stone",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019TwinkleStone"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dyeGray"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:twinkle_stone",
+    "data": 7
+  }
 }
