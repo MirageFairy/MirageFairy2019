@@ -40,187 +40,186 @@ import net.minecraftforge.fluids.capability.FluidTankProperties
 import net.minecraftforge.fluids.capability.IFluidHandlerItem
 import net.minecraftforge.oredict.OreIngredient
 
-object Pot {
-    lateinit var itemPot: () -> ItemPot
-    lateinit var itemFilledBucket: () -> ItemFilledPot
-    val potModule = module {
+lateinit var itemPot: () -> ItemPot
+lateinit var itemFilledPot: () -> ItemFilledPot
 
-        // 中身なしポット
-        itemPot = item({ ItemPot() }, "pot") {
-            setUnlocalizedName("mirageFairyPot")
-            addOreName("mirageFairyPot")
-            setCreativeTab { Main.creativeTab }
-            setCustomModelResourceLocation()
-        }
-        makeItemModel("pot") { generated }
-        makeRecipe("pot") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    "   ",
-                    "# #",
-                    " # "
-                ),
-                key = mapOf(
-                    "#" to DataOreIngredient(ore = "blockMirageFairyCrystal")
-                ),
-                result = DataResult(
-                    item = "${ModMirageFairy2019.MODID}:pot"
-                )
-            )
-        }
+val potModule = module {
 
-        // 中身入りポット
-        itemFilledBucket = item({ ItemFilledPot() }, "filled_bucket") {
-            setUnlocalizedName("filledBucket")
-            setCreativeTab { Main.creativeTab }
-
-            itemVariant("miragium_water_pot", {
-                ItemVariantFilledPot(it, "mirageFairyPotMiragiumWater", "miragium_water")
-            }, 0) {
-                addOreName("mirageFairyPotMiragiumWater")
-                addOreName("container1000MiragiumWater")
-            }
-            itemVariant("mirage_flower_extract_pot", {
-                ItemVariantFilledPot(it, "mirageFairyPotMirageFlowerExtract", "mirage_flower_extract")
-            }, 1) {
-                addOreName("mirageFairyPotMirageFlowerExtract")
-                addOreName("container1000MirageFlowerExtract")
-            }
-            itemVariant("mirage_flower_oil_pot", {
-                ItemVariantFilledPot(it, "mirageFairyPotMirageFlowerOil", "mirage_flower_oil")
-            }, 2) {
-                addOreName("mirageFairyPotMirageFlowerOil")
-                addOreName("container1000MirageFlowerOil")
-            }
-            itemVariant("water_pot", {
-                ItemVariantFilledPot(it, "mirageFairyPotWater", "water")
-            }, 3) {
-                addOreName("mirageFairyPotWater")
-                addOreName("container1000Water")
-            }
-            itemVariant("lava_pot", {
-                ItemVariantFilledPot(it, "mirageFairyPotLava", "lava")
-            }, 4) {
-                addOreName("mirageFairyPotLava")
-                addOreName("container1000Lava")
-            }
-
-            onRegisterItem {
-                if (Main.side.isClient) item.setCustomModelResourceLocations()
-            }
-        }
-        makeItemModel("miragium_water_pot") { generated }
-        makeItemModel("mirage_flower_extract_pot") { generated }
-        makeItemModel("mirage_flower_oil_pot") { generated }
-        makeItemModel("water_pot") { generated }
-        makeItemModel("lava_pot") { generated }
-
-
-        // 詰め替えレシピ
-
-        fun potToItem(fluidName: String, fluidOreSuffix: String, result: DataResult) = makeRecipe("pot/${fluidName}_bucket_from_${fluidName}_container") { // TODO _pot
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataSimpleIngredient(item = "minecraft:bucket"),
-                    DataOreIngredient(ore = "container1000$fluidOreSuffix")
-                ),
-                result = result
-            )
-        }
-
-        fun potToBucket(fluidName: String, fluidOreSuffix: String) = potToItem(
-            fluidName,
-            fluidOreSuffix,
-            DataResult(
-                item = "forge:bucketfilled",
-                nbt = jsonObject(
-                    "FluidName" to fluidName.jsonElement,
-                    "Amount" to 1000.jsonElement
-                )
-            )
-        )
-
-        fun itemToPot(fluidName: String, potMetadata: Int, input: DataIngredient) = makeRecipe("pot/${fluidName}_pot_from_${fluidName}_bucket") {
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(ore = "mirageFairyPot"),
-                    input
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:filled_bucket",
-                    data = potMetadata
-                )
-            )
-        }
-
-        fun bucketToPot(fluidName: String, potMetadata: Int) = itemToPot(
-            fluidName,
-            potMetadata,
-            DataSimpleIngredient(
-                type = "minecraft:item_nbt",
-                item = "forge:bucketfilled",
-                nbt = jsonObject(
-                    "FluidName" to fluidName.jsonElement,
-                    "Amount" to 1000.jsonElement
-                )
-            )
-        )
-
-        fun bottleToPot(registerName: String, fluidOreSuffix: String, potMetadata: Int) = makeRecipe("pot/${registerName}_pot_from_${registerName}_bottle") {
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(ore = "mirageFairyPot"),
-                    DataOreIngredient(ore = "container250$fluidOreSuffix"),
-                    DataOreIngredient(ore = "container250$fluidOreSuffix"),
-                    DataOreIngredient(ore = "container250$fluidOreSuffix"),
-                    DataOreIngredient(ore = "container250$fluidOreSuffix")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:filled_bucket",
-                    data = potMetadata
-                )
-            )
-        }
-
-        fun potToBottle(registerName: String, fluidOreSuffix: String, bottleMetadata: Int) = makeRecipe("pot/${registerName}_bottle_from_${registerName}_pot") {
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataSimpleIngredient(item = "minecraft:glass_bottle"),
-                    DataSimpleIngredient(item = "minecraft:glass_bottle"),
-                    DataSimpleIngredient(item = "minecraft:glass_bottle"),
-                    DataSimpleIngredient(item = "minecraft:glass_bottle"),
-                    DataOreIngredient(ore = "container1000$fluidOreSuffix")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:fairy_materials",
-                    data = bottleMetadata,
-                    count = 4
-                )
-            )
-        }
-
-        potToBucket("miragium_water", "MiragiumWater")
-        bucketToPot("miragium_water", 0)
-        bottleToPot("miragium_water", "MiragiumWater", 0)
-        potToBottle("miragium_water", "MiragiumWater", 10)
-
-        potToBucket("mirage_flower_extract", "MirageFlowerExtract")
-        bucketToPot("mirage_flower_extract", 1)
-        bottleToPot("mirage_flower_extract", "MirageFlowerExtract", 1)
-        potToBottle("mirage_flower_extract", "MirageFlowerExtract", 11)
-
-        potToBucket("mirage_flower_oil", "MirageFlowerOil")
-        bucketToPot("mirage_flower_oil", 2)
-        bottleToPot("mirage_flower_oil", "MirageFlowerOil", 2)
-        potToBottle("mirage_flower_oil", "MirageFlowerOil", 12)
-
-        potToItem("water", "Water", DataResult(item = "minecraft:water_bucket"))
-        itemToPot("water", 3, DataSimpleIngredient(item = "minecraft:water_bucket"))
-
-        potToItem("lava", "Lava", DataResult(item = "minecraft:lava_bucket"))
-        itemToPot("lava", 4, DataSimpleIngredient(item = "minecraft:lava_bucket"))
-
+    // 中身なしポット
+    itemPot = item({ ItemPot() }, "pot") {
+        setUnlocalizedName("mirageFairyPot")
+        addOreName("mirageFairyPot")
+        setCreativeTab { Main.creativeTab }
+        setCustomModelResourceLocation()
     }
+    makeItemModel("pot") { generated }
+    makeRecipe("pot") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "   ",
+                "# #",
+                " # "
+            ),
+            key = mapOf(
+                "#" to DataOreIngredient(ore = "blockMirageFairyCrystal")
+            ),
+            result = DataResult(
+                item = "${ModMirageFairy2019.MODID}:pot"
+            )
+        )
+    }
+
+    // 中身入りポット
+    itemFilledPot = item({ ItemFilledPot() }, "filled_bucket") {
+        setUnlocalizedName("filledBucket")
+        setCreativeTab { Main.creativeTab }
+
+        itemVariant("miragium_water_pot", {
+            ItemVariantFilledPot(it, "mirageFairyPotMiragiumWater", "miragium_water")
+        }, 0) {
+            addOreName("mirageFairyPotMiragiumWater")
+            addOreName("container1000MiragiumWater")
+        }
+        itemVariant("mirage_flower_extract_pot", {
+            ItemVariantFilledPot(it, "mirageFairyPotMirageFlowerExtract", "mirage_flower_extract")
+        }, 1) {
+            addOreName("mirageFairyPotMirageFlowerExtract")
+            addOreName("container1000MirageFlowerExtract")
+        }
+        itemVariant("mirage_flower_oil_pot", {
+            ItemVariantFilledPot(it, "mirageFairyPotMirageFlowerOil", "mirage_flower_oil")
+        }, 2) {
+            addOreName("mirageFairyPotMirageFlowerOil")
+            addOreName("container1000MirageFlowerOil")
+        }
+        itemVariant("water_pot", {
+            ItemVariantFilledPot(it, "mirageFairyPotWater", "water")
+        }, 3) {
+            addOreName("mirageFairyPotWater")
+            addOreName("container1000Water")
+        }
+        itemVariant("lava_pot", {
+            ItemVariantFilledPot(it, "mirageFairyPotLava", "lava")
+        }, 4) {
+            addOreName("mirageFairyPotLava")
+            addOreName("container1000Lava")
+        }
+
+        onRegisterItem {
+            if (Main.side.isClient) item.setCustomModelResourceLocations()
+        }
+    }
+    makeItemModel("miragium_water_pot") { generated }
+    makeItemModel("mirage_flower_extract_pot") { generated }
+    makeItemModel("mirage_flower_oil_pot") { generated }
+    makeItemModel("water_pot") { generated }
+    makeItemModel("lava_pot") { generated }
+
+
+    // 詰め替えレシピ
+
+    fun potToItem(fluidName: String, fluidOreSuffix: String, result: DataResult) = makeRecipe("pot/${fluidName}_bucket_from_${fluidName}_container") { // TODO _pot
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataSimpleIngredient(item = "minecraft:bucket"),
+                DataOreIngredient(ore = "container1000$fluidOreSuffix")
+            ),
+            result = result
+        )
+    }
+
+    fun potToBucket(fluidName: String, fluidOreSuffix: String) = potToItem(
+        fluidName,
+        fluidOreSuffix,
+        DataResult(
+            item = "forge:bucketfilled",
+            nbt = jsonObject(
+                "FluidName" to fluidName.jsonElement,
+                "Amount" to 1000.jsonElement
+            )
+        )
+    )
+
+    fun itemToPot(fluidName: String, potMetadata: Int, input: DataIngredient) = makeRecipe("pot/${fluidName}_pot_from_${fluidName}_bucket") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "mirageFairyPot"),
+                input
+            ),
+            result = DataResult(
+                item = "miragefairy2019:filled_bucket",
+                data = potMetadata
+            )
+        )
+    }
+
+    fun bucketToPot(fluidName: String, potMetadata: Int) = itemToPot(
+        fluidName,
+        potMetadata,
+        DataSimpleIngredient(
+            type = "minecraft:item_nbt",
+            item = "forge:bucketfilled",
+            nbt = jsonObject(
+                "FluidName" to fluidName.jsonElement,
+                "Amount" to 1000.jsonElement
+            )
+        )
+    )
+
+    fun bottleToPot(registerName: String, fluidOreSuffix: String, potMetadata: Int) = makeRecipe("pot/${registerName}_pot_from_${registerName}_bottle") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "mirageFairyPot"),
+                DataOreIngredient(ore = "container250$fluidOreSuffix"),
+                DataOreIngredient(ore = "container250$fluidOreSuffix"),
+                DataOreIngredient(ore = "container250$fluidOreSuffix"),
+                DataOreIngredient(ore = "container250$fluidOreSuffix")
+            ),
+            result = DataResult(
+                item = "miragefairy2019:filled_bucket",
+                data = potMetadata
+            )
+        )
+    }
+
+    fun potToBottle(registerName: String, fluidOreSuffix: String, bottleMetadata: Int) = makeRecipe("pot/${registerName}_bottle_from_${registerName}_pot") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataSimpleIngredient(item = "minecraft:glass_bottle"),
+                DataSimpleIngredient(item = "minecraft:glass_bottle"),
+                DataSimpleIngredient(item = "minecraft:glass_bottle"),
+                DataSimpleIngredient(item = "minecraft:glass_bottle"),
+                DataOreIngredient(ore = "container1000$fluidOreSuffix")
+            ),
+            result = DataResult(
+                item = "miragefairy2019:fairy_materials",
+                data = bottleMetadata,
+                count = 4
+            )
+        )
+    }
+
+    potToBucket("miragium_water", "MiragiumWater")
+    bucketToPot("miragium_water", 0)
+    bottleToPot("miragium_water", "MiragiumWater", 0)
+    potToBottle("miragium_water", "MiragiumWater", 10)
+
+    potToBucket("mirage_flower_extract", "MirageFlowerExtract")
+    bucketToPot("mirage_flower_extract", 1)
+    bottleToPot("mirage_flower_extract", "MirageFlowerExtract", 1)
+    potToBottle("mirage_flower_extract", "MirageFlowerExtract", 11)
+
+    potToBucket("mirage_flower_oil", "MirageFlowerOil")
+    bucketToPot("mirage_flower_oil", 2)
+    bottleToPot("mirage_flower_oil", "MirageFlowerOil", 2)
+    potToBottle("mirage_flower_oil", "MirageFlowerOil", 12)
+
+    potToItem("water", "Water", DataResult(item = "minecraft:water_bucket"))
+    itemToPot("water", 3, DataSimpleIngredient(item = "minecraft:water_bucket"))
+
+    potToItem("lava", "Lava", DataResult(item = "minecraft:lava_bucket"))
+    itemToPot("lava", 4, DataSimpleIngredient(item = "minecraft:lava_bucket"))
+
 }
 
 interface IPot {
@@ -246,7 +245,7 @@ class ItemVariantFilledPot(
 
 class ItemFilledPot : ItemMultiMaterial<ItemVariantFilledPot>(), IPot {
     override fun hasContainerItem(itemStack: ItemStack) = true
-    override fun getContainerItem(itemStack: ItemStack) = ItemStack(Pot.itemPot.invoke())
+    override fun getContainerItem(itemStack: ItemStack) = ItemStack(itemPot.invoke())
     override fun initCapabilities(itemStack: ItemStack, nbt: NBTTagCompound?) = object : CapabilityProviderAdapter() {
         override fun <T> getCapabilityImpl(capability: Capability<T>, facing: EnumFacing?): (() -> T)? = when (capability) {
             CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY -> ({ CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY.cast(FluidHandlerPot(itemStack)) })
@@ -277,7 +276,7 @@ class FluidHandlerPot(@JvmField var container: ItemStack) : IFluidHandlerItem {
         val fluid = getFluid() ?: return null // 中身が空の場合は不可
         if (resource.fluid != fluid || resource.tag != null) return null // 液体の種類が異なる場合は不可
 
-        if (doDrain) container = Pot.itemPot().createItemStack()
+        if (doDrain) container = itemPot().createItemStack()
         return FluidStack(fluid, 1000)
     }
 
@@ -286,7 +285,7 @@ class FluidHandlerPot(@JvmField var container: ItemStack) : IFluidHandlerItem {
         if (maxDrain < 1000) return null // 一括で取り出せない場合は不可
         val fluid = getFluid() ?: return null // 中身が空の場合は不可
 
-        if (doDrain) container = Pot.itemPot().createItemStack()
+        if (doDrain) container = itemPot().createItemStack()
         return FluidStack(fluid, 1000)
     }
 }
