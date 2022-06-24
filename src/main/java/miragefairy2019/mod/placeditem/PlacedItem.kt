@@ -7,10 +7,10 @@ import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.side
-import miragefairy2019.resourcemaker.DataModel
-import miragefairy2019.resourcemaker.makeBlockModel
-import miragefairy2019.resourcemaker.makeBlockStates
-import miragefairy2019.resourcemaker.normal
+import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.makeBlockModel
+import miragefairy2019.lib.resourcemaker.makeBlockStates
+import miragefairy2019.lib.resourcemaker.normal
 import net.minecraft.block.Block
 import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.client.settings.KeyBinding

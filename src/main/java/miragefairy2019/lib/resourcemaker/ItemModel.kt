@@ -1,4 +1,4 @@
-package miragefairy2019.resourcemaker
+package miragefairy2019.lib.resourcemaker
 
 import miragefairy2019.common.ResourceName
 import miragefairy2019.common.map

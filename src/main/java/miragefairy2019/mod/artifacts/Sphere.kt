@@ -22,8 +22,8 @@ import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
-import miragefairy2019.resourcemaker.DataModel
-import miragefairy2019.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.makeItemModel
 import mirrg.kotlin.hydrogen.toUpperCaseHead
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks

@@ -1,4 +1,4 @@
-package miragefairy2019.resourcemaker
+package miragefairy2019.lib.resourcemaker
 
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement

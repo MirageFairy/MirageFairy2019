@@ -3,13 +3,13 @@ package miragefairy2019.mod.recipes
 import miragefairy2019.libkt.module
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
-import miragefairy2019.resourcemaker.DataIngredient
-import miragefairy2019.resourcemaker.DataOreIngredient
-import miragefairy2019.resourcemaker.DataResult
-import miragefairy2019.resourcemaker.DataShapedRecipe
-import miragefairy2019.resourcemaker.DataShapelessRecipe
-import miragefairy2019.resourcemaker.DataSimpleIngredient
-import miragefairy2019.resourcemaker.makeRecipe
+import miragefairy2019.lib.resourcemaker.DataIngredient
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
+import miragefairy2019.lib.resourcemaker.DataResult
+import miragefairy2019.lib.resourcemaker.DataShapedRecipe
+import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
+import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
+import miragefairy2019.lib.resourcemaker.makeRecipe
 
 val wandRecipeModule = module {
 

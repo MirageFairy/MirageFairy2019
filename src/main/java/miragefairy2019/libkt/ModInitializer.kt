@@ -3,7 +3,7 @@ package miragefairy2019.libkt
 import miragefairy2019.common.ResourceName
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.resourcemaker.ResourceMaker
+import miragefairy2019.lib.resourcemaker.ResourceMaker
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation

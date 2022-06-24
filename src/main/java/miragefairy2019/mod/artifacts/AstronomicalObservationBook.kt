@@ -18,8 +18,8 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.skill.ApiSkill
-import miragefairy2019.resourcemaker.generated
-import miragefairy2019.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.makeItemModel
 import mirrg.kotlin.minus
 import mirrg.kotlin.startOfDay
 import mirrg.kotlin.startOfMonth

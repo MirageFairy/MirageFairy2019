@@ -1,4 +1,4 @@
-package miragefairy2019.resourcemaker
+package miragefairy2019.lib.resourcemaker
 
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement

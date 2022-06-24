@@ -8,11 +8,11 @@ import miragefairy2019.libkt.setCreativeTab
 import miragefairy2019.libkt.setCustomModelResourceLocation
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
-import miragefairy2019.resourcemaker.DataBlockState
-import miragefairy2019.resourcemaker.DataBlockStates
-import miragefairy2019.resourcemaker.DataModel
-import miragefairy2019.resourcemaker.makeBlockModel
-import miragefairy2019.resourcemaker.makeBlockStates
+import miragefairy2019.lib.resourcemaker.DataBlockState
+import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.makeBlockModel
+import miragefairy2019.lib.resourcemaker.makeBlockStates
 import net.minecraft.block.BlockRotatedPillar
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material

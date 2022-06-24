@@ -30,8 +30,8 @@ import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
 import miragefairy2019.mod.systems.IFairyStickCraftItem
 import miragefairy2019.mod.systems.addFairyStickCraftCoolTime
-import miragefairy2019.resourcemaker.handheld
-import miragefairy2019.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.handheld
+import miragefairy2019.lib.resourcemaker.makeItemModel
 import mirrg.kotlin.formatAs
 import net.minecraft.block.BlockDynamicLiquid
 import net.minecraft.client.Minecraft

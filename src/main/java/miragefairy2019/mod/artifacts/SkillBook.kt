@@ -8,8 +8,8 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.resourcemaker.generated
-import miragefairy2019.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.makeItemModel
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item

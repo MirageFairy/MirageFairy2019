@@ -14,17 +14,17 @@ import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
-import miragefairy2019.resourcemaker.DataModel
-import miragefairy2019.resourcemaker.DataOrIngredient
-import miragefairy2019.resourcemaker.DataOreIngredient
-import miragefairy2019.resourcemaker.DataResult
-import miragefairy2019.resourcemaker.DataShapelessRecipe
-import miragefairy2019.resourcemaker.DataSimpleIngredient
-import miragefairy2019.resourcemaker.MakeItemModelScope
-import miragefairy2019.resourcemaker.generated
-import miragefairy2019.resourcemaker.handheld
-import miragefairy2019.resourcemaker.makeItemModel
-import miragefairy2019.resourcemaker.makeRecipe
+import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.DataOrIngredient
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
+import miragefairy2019.lib.resourcemaker.DataResult
+import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
+import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
+import miragefairy2019.lib.resourcemaker.MakeItemModelScope
+import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.handheld
+import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.makeRecipe
 import net.minecraftforge.fml.common.registry.GameRegistry
 
 object CommonMaterials {

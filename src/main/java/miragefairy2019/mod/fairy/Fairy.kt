@@ -8,8 +8,8 @@ import miragefairy2019.libkt.module
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.resourcemaker.DataModel
-import miragefairy2019.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.makeItemModel
 import mirrg.kotlin.hydrogen.toUpperCaseHead
 import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
