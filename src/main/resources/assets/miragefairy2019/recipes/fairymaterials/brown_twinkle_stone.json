@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "brown_twinkle_stone",
   "ingredients": [
     {
       "type": "forge:ore_dict",
@@ -13,6 +12,7 @@
   ],
   "result": {
     "item": "miragefairy2019:twinkle_stone",
-    "data": 12
+    "data": 12,
+    "count": 1
   }
 }

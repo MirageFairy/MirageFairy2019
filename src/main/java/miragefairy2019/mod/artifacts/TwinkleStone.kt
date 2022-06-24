@@ -10,10 +10,16 @@ import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.resourcemaker.DataBlockState
 import miragefairy2019.lib.resourcemaker.DataBlockStates
 import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
+import miragefairy2019.lib.resourcemaker.DataResult
+import miragefairy2019.lib.resourcemaker.DataShapedRecipe
+import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
+import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.BlockMulti
 import miragefairy2019.libkt.BlockVariantList
 import miragefairy2019.libkt.IBlockVariant
@@ -108,6 +114,48 @@ object TwinkleStone {
             enJa("tile.twinkleStoneRed.name", "Red Twinkle Stone", "赤色のトゥインクルストーン")
             enJa("tile.twinkleStoneBlack.name", "Black Twinkle Stone", "黒色のトゥインクルストーン")
         }
+        makeRecipe("fairymaterials/twinkle_stone") {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "ScS",
+                    "PlP",
+                    "SmS"
+                ),
+                key = mapOf(
+                    "S" to DataSimpleIngredient(item = "minecraft:stone", data = 0),
+                    "P" to DataOreIngredient(ore = "plateMiragium"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "m" to WandType.MELTING.ingredientData,
+                    "l" to DataOreIngredient(ore = "mirageFairy2019SphereLight")
+                ),
+                result = DataResult(item = "miragefairy2019:twinkle_stone", data = 3, count = 4)
+            )
+        }
+        fun f(metadata: Int, colorRegistryNameSuffix: String, colorOreNameSuffix: String) = makeRecipe("fairymaterials/${colorRegistryNameSuffix}_twinkle_stone") {
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(ore = "mirageFairy2019TwinkleStone"),
+                    DataOreIngredient(ore = "dye$colorOreNameSuffix")
+                ),
+                result = DataResult(item = "miragefairy2019:twinkle_stone", data = metadata)
+            )
+        }
+        f(0, "white", "White")
+        f(1, "orange", "Orange")
+        f(2, "magenta", "Magenta")
+        f(3, "light_blue", "LightBlue")
+        f(4, "yellow", "Yellow")
+        f(5, "lime", "Lime")
+        f(6, "pink", "Pink")
+        f(7, "gray", "Gray")
+        f(8, "silver", "LightGray")
+        f(9, "cyan", "Cyan")
+        f(10, "purple", "Purple")
+        f(11, "blue", "Blue")
+        f(12, "brown", "Brown")
+        f(13, "green", "Green")
+        f(14, "red", "Red")
+        f(15, "black", "Black")
     }
 }
 
