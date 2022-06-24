@@ -89,6 +89,11 @@ class EventRegistry1<E> {
     operator fun invoke(event: E) = list.forEach { it(event) }
 }
 
+interface NamedInitializer {
+    val modInitializer: ModInitializer
+    val resourceName: ResourceName
+}
+
 
 // Initializer
 abstract class Initializer<out T : Any>(private val getter: () -> T) : () -> T {
@@ -99,7 +104,7 @@ abstract class Initializer<out T : Any>(private val getter: () -> T) : () -> T {
 
 // Item
 
-class ItemInitializer<out I : Item>(val modInitializer: ModInitializer, val resourceName: ResourceName, getter: () -> I) : Initializer<I>(getter) {
+class ItemInitializer<out I : Item>(override val modInitializer: ModInitializer, override val resourceName: ResourceName, getter: () -> I) : Initializer<I>(getter), NamedInitializer {
     val item get() = initializingObject
 }
 
@@ -146,7 +151,8 @@ fun <I : Item> I.addOreName(oreName: String, metadata: Int = 0) = OreDictionary.
 
 // ItemVariant
 
-class ItemVariantInitializer<out I : ItemMulti<V>, V : ItemVariant>(val itemInitializer: ItemInitializer<I>, val registryName: ResourceName, val metadata: Int, getter: () -> V) : Initializer<V>(getter) {
+class ItemVariantInitializer<out I : ItemMulti<V>, V : ItemVariant>(val itemInitializer: ItemInitializer<I>, override val resourceName: ResourceName, val metadata: Int, getter: () -> V) : Initializer<V>(getter), NamedInitializer {
+    override val modInitializer get() = itemInitializer.modInitializer
     val itemVariant get() = initializingObject
 }
 
@@ -173,7 +179,7 @@ fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.createItemS
 
 // Block
 
-class BlockInitializer<out B : Block>(val modInitializer: ModInitializer, val resourceName: ResourceName, getter: () -> B) : Initializer<B>(getter) {
+class BlockInitializer<out B : Block>(override val modInitializer: ModInitializer, override val resourceName: ResourceName, getter: () -> B) : Initializer<B>(getter), NamedInitializer {
     val block get() = initializingObject
 }
 
