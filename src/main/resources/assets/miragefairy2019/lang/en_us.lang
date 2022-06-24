@@ -603,6 +603,7 @@ item.prayerWheel3.name=Prayer Wheel III
 item.prayerWheel3.poem=
 item.prayerWheel3.recipe=Get a specific item
 miragefairy2019.magic.noFairy.text=You don't have a fairy
+miragefairy2019.magic.insufficientResource.text=Insufficient resources
 miragefairy2019.magic.insufficientDurability.text=Insufficient durability
 miragefairy2019.magic.noTarget.text=There is no target
 miragefairy2019.magic.coolTime.text=Cool time remains

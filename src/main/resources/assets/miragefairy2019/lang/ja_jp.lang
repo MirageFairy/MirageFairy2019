@@ -616,6 +616,7 @@ item.prayerWheel3.name=束縛の地
 item.prayerWheel3.poem=覚えてる？前世、自分が何の妖精だったか
 item.prayerWheel3.recipe=人、牛、妖精、ゾンビ、植物、土
 miragefairy2019.magic.noFairy.text=妖精を所持していません
+miragefairy2019.magic.insufficientResource.text=資源が不足しています
 miragefairy2019.magic.insufficientDurability.text=耐久値が不足しています
 miragefairy2019.magic.noTarget.text=発動対象がありません
 miragefairy2019.magic.coolTime.text=クールタイムが残っています
