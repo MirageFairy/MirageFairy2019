@@ -10,6 +10,10 @@ import miragefairy2019.lib.div
 import miragefairy2019.lib.fairyType
 import miragefairy2019.lib.get
 import miragefairy2019.lib.int
+import miragefairy2019.lib.modinitializer.item
+import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.modinitializer.setCreativeTab
+import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.lib.setCompound
 import miragefairy2019.lib.setInt
@@ -23,11 +27,7 @@ import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.ingredient
-import miragefairy2019.libkt.item
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
-import miragefairy2019.libkt.setCreativeTab
-import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.Main

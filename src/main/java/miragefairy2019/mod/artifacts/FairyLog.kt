@@ -1,15 +1,15 @@
 package miragefairy2019.mod.artifacts
 
 import miragefairy2019.lib.selectFairyLogDrop
-import miragefairy2019.libkt.block
-import miragefairy2019.libkt.item
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.libkt.setCreativeTab
-import miragefairy2019.libkt.setCustomModelResourceLocation
-import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairy.FairyTypes
+import miragefairy2019.lib.modinitializer.block
+import miragefairy2019.lib.modinitializer.item
+import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.modinitializer.setCreativeTab
+import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
+import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.resourcemaker.DataBlockState
 import miragefairy2019.lib.resourcemaker.DataBlockStates
 import miragefairy2019.lib.resourcemaker.DataElement

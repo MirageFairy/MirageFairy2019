@@ -2,7 +2,7 @@ package miragefairy2019.mod.systems
 
 import appeng.api.AEApi
 import miragefairy2019.lib.Compatibility
-import miragefairy2019.libkt.module
+import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.ChatWebhook
 import miragefairy2019.mod.configProperty

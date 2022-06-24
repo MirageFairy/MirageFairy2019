@@ -1,7 +1,7 @@
 package miragefairy2019.mod.systems
 
+import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.createItemStack
-import miragefairy2019.libkt.module
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraftforge.oredict.OreDictionary

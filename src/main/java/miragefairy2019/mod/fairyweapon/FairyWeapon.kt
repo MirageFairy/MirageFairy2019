@@ -17,13 +17,13 @@ import miragefairy2019.api.Erg.SUBMISSION
 import miragefairy2019.api.Erg.THUNDER
 import miragefairy2019.api.Erg.WARP
 import miragefairy2019.api.Erg.WATER
+import miragefairy2019.lib.modinitializer.item
+import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.modinitializer.setCreativeTab
+import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.libkt.BakedModelBuiltinWrapper
 import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.item
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.oreIngredient
-import miragefairy2019.libkt.setCreativeTab
-import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main.creativeTab
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.artifacts.WandType

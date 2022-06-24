@@ -1,8 +1,8 @@
 package miragefairy2019.mod.systems
 
 import miragefairy2019.api.Mana
+import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.module
 
 val manaModule = module {
     onMakeLang {

@@ -1,8 +1,8 @@
 package miragefairy2019.mod.artifacts
 
-import miragefairy2019.libkt.block
-import miragefairy2019.libkt.module
-import miragefairy2019.libkt.setCreativeTab
+import miragefairy2019.lib.modinitializer.block
+import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.material.EnumVariantOre1
 import miragefairy2019.mod.material.EnumVariantOre2

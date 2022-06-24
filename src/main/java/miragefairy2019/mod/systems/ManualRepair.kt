@@ -4,8 +4,8 @@ import miragefairy2019.api.IManualRepairAcceptorItem
 import miragefairy2019.lib.RecipeBase
 import miragefairy2019.lib.RecipeInput
 import miragefairy2019.lib.RecipeMatcher
+import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
-import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.kotlin.castOrNull
 import net.minecraft.item.ItemStack

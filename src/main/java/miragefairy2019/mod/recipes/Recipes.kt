@@ -1,6 +1,6 @@
 package miragefairy2019.mod.recipes
 
-import miragefairy2019.libkt.module
+import miragefairy2019.lib.modinitializer.module
 
 val recipesModule = module {
     fairyMetamorphosisModule(this)

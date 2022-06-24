@@ -1,7 +1,7 @@
 package miragefairy2019.mod
 
 import miragefairy2019.libkt.LangMaker
-import miragefairy2019.libkt.ModInitializer
+import miragefairy2019.lib.modinitializer.ModInitializer
 import miragefairy2019.lib.resourcemaker.ResourceMaker
 import java.io.File
 

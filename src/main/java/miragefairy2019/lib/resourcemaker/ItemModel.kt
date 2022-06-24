@@ -2,8 +2,8 @@ package miragefairy2019.lib.resourcemaker
 
 import miragefairy2019.common.ResourceName
 import miragefairy2019.common.map
-import miragefairy2019.libkt.ModInitializer
-import miragefairy2019.libkt.NamedInitializer
+import miragefairy2019.lib.modinitializer.ModInitializer
+import miragefairy2019.lib.modinitializer.NamedInitializer
 
 
 fun ModInitializer.makeItemModel(path: String, creator: MakeItemModelScope.() -> DataModel) = onMakeResource {

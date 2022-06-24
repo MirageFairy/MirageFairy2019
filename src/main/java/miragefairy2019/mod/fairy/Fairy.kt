@@ -1,11 +1,11 @@
 package miragefairy2019.mod.fairy
 
 import miragefairy2019.lib.entries
+import miragefairy2019.lib.modinitializer.item
+import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.item
-import miragefairy2019.libkt.module
-import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.lib.resourcemaker.DataModel

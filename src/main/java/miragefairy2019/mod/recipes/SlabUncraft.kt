@@ -1,8 +1,8 @@
 package miragefairy2019.mod.recipes
 
-import miragefairy2019.libkt.module
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
+import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.resourcemaker.DataIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe

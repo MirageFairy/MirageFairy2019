@@ -1,12 +1,12 @@
 package miragefairy2019.mod.placeditem
 
-import miragefairy2019.libkt.block
-import miragefairy2019.libkt.module
-import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.libkt.tileEntity
-import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.side
+import miragefairy2019.lib.modinitializer.block
+import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.modinitializer.setUnlocalizedName
+import miragefairy2019.lib.modinitializer.tileEntity
+import miragefairy2019.lib.modinitializer.tileEntityRenderer
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates

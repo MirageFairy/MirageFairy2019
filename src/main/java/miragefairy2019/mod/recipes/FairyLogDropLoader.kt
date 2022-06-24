@@ -5,7 +5,7 @@ import miragefairy2019.lib.FairyLogDropRecipe
 import miragefairy2019.lib.FairyLogDropRequirementCanRain
 import miragefairy2019.lib.FairyLogDropRequirementHasBiomeType
 import miragefairy2019.lib.FairyLogDropRequirementOverworld
-import miragefairy2019.libkt.module
+import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.RankedFairyTypeBundle
 import miragefairy2019.mod.fairyrelation.FairyRelationRegistries

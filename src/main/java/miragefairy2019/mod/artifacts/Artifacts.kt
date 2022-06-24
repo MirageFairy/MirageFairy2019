@@ -1,6 +1,6 @@
 package miragefairy2019.mod.artifacts
 
-import miragefairy2019.libkt.module
+import miragefairy2019.lib.modinitializer.module
 
 val artifactsModule = module {
     dishModule(this)

@@ -1,8 +1,8 @@
 package miragefairy2019.mod.fairyrelation
 
+import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.ingredient
-import miragefairy2019.libkt.module
 import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.RankedFairyTypeBundle

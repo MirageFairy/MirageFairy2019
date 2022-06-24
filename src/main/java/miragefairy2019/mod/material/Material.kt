@@ -1,6 +1,6 @@
 package miragefairy2019.mod.material
 
-import miragefairy2019.libkt.module
+import miragefairy2019.lib.modinitializer.module
 
 val materialModule = module {
     CommonMaterials.commonMaterialsModule(this)

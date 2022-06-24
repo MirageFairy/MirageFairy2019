@@ -1,7 +1,7 @@
 package miragefairy2019.jei
 
+import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.module
 
 val jeiModule = module {
     onMakeLang {

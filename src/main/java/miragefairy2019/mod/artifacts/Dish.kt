@@ -2,16 +2,16 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
-import miragefairy2019.libkt.block
-import miragefairy2019.libkt.item
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.orNull
-import miragefairy2019.libkt.setCreativeTab
-import miragefairy2019.libkt.setCustomModelResourceLocation
-import miragefairy2019.libkt.setUnlocalizedName
-import miragefairy2019.libkt.tileEntity
-import miragefairy2019.libkt.tileEntityRenderer
 import miragefairy2019.mod.Main
+import miragefairy2019.lib.modinitializer.block
+import miragefairy2019.lib.modinitializer.item
+import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.modinitializer.setCreativeTab
+import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
+import miragefairy2019.lib.modinitializer.setUnlocalizedName
+import miragefairy2019.lib.modinitializer.tileEntity
+import miragefairy2019.lib.modinitializer.tileEntityRenderer
 import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces

@@ -1,6 +1,6 @@
 package miragefairy2019.lib
 
-import miragefairy2019.libkt.ItemInitializer
+import miragefairy2019.lib.modinitializer.ItemInitializer
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.color.IItemColor
 import net.minecraft.item.Item

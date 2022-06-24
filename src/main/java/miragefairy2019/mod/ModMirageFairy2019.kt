@@ -1,6 +1,6 @@
 package miragefairy2019.mod
 
-import miragefairy2019.libkt.ModInitializer
+import miragefairy2019.lib.modinitializer.ModInitializer
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.event.FMLConstructionEvent
 import net.minecraftforge.fml.common.event.FMLInitializationEvent

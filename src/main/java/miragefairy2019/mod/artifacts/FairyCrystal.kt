@@ -1,5 +1,11 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.lib.modinitializer.item
+import miragefairy2019.lib.modinitializer.itemVariant
+import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.modinitializer.setCreativeTab
+import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
+import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.proxy
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.BlockRegion
@@ -11,14 +17,8 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.gold
-import miragefairy2019.libkt.item
-import miragefairy2019.libkt.itemVariant
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.orNull
 import miragefairy2019.libkt.plus
-import miragefairy2019.libkt.setCreativeTab
-import miragefairy2019.libkt.setCustomModelResourceLocation
-import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.totalWeight
 import miragefairy2019.libkt.translateToLocal

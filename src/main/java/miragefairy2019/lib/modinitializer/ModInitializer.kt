@@ -1,6 +1,10 @@
-package miragefairy2019.libkt
+package miragefairy2019.lib.modinitializer
 
 import miragefairy2019.common.ResourceName
+import miragefairy2019.libkt.ItemMulti
+import miragefairy2019.libkt.ItemVariant
+import miragefairy2019.libkt.LangMaker
+import miragefairy2019.libkt.resourceLocation
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.lib.resourcemaker.ResourceMaker

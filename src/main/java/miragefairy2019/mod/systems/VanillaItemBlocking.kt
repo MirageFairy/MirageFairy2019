@@ -1,6 +1,6 @@
 package miragefairy2019.mod.systems
 
-import miragefairy2019.libkt.module
+import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.configProperty

@@ -6,13 +6,13 @@ import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.color
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.get
+import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.Complex
 import miragefairy2019.libkt.IRgb
 import miragefairy2019.libkt.concatNotNull
 import miragefairy2019.libkt.drawTriangle
 import miragefairy2019.libkt.green
-import miragefairy2019.libkt.module
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent

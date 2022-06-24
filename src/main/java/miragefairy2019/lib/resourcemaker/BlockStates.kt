@@ -2,8 +2,8 @@ package miragefairy2019.lib.resourcemaker
 
 import com.google.gson.JsonElement
 import miragefairy2019.common.ResourceName
-import miragefairy2019.libkt.ModInitializer
-import miragefairy2019.libkt.NamedInitializer
+import miragefairy2019.lib.modinitializer.ModInitializer
+import miragefairy2019.lib.modinitializer.NamedInitializer
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject

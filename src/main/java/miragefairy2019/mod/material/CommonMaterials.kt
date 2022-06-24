@@ -1,19 +1,19 @@
 package miragefairy2019.mod.material
 
 import miragefairy2019.common.toOreName
-import miragefairy2019.libkt.ItemVariantInitializer
-import miragefairy2019.libkt.addOreName
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.item
-import miragefairy2019.libkt.itemVariant
-import miragefairy2019.libkt.module
-import miragefairy2019.libkt.setCreativeTab
-import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.libkt.setUnlocalizedName
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
+import miragefairy2019.lib.modinitializer.ItemVariantInitializer
+import miragefairy2019.lib.modinitializer.addOreName
+import miragefairy2019.lib.modinitializer.item
+import miragefairy2019.lib.modinitializer.itemVariant
+import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.modinitializer.setCreativeTab
+import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.DataOrIngredient
 import miragefairy2019.lib.resourcemaker.DataOreIngredient

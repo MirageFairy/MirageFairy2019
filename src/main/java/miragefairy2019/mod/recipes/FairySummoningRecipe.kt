@@ -1,8 +1,8 @@
 package miragefairy2019.mod.recipes
 
+import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.item
-import miragefairy2019.libkt.module
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredient
