@@ -3,6 +3,7 @@ package miragefairy2019.resourcemaker
 import com.google.gson.JsonElement
 import miragefairy2019.common.ResourceName
 import miragefairy2019.libkt.ModInitializer
+import miragefairy2019.libkt.NamedInitializer
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
@@ -11,6 +12,10 @@ import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 
 fun ModInitializer.makeBlockStates(path: String, creator: MakeBlockStatesScope.() -> DataBlockStates) = onMakeResource {
     place("assets/$modId/blockstates/$path.json", MakeBlockStatesScope(ResourceName(modId, path)).creator().jsonElement)
+}
+
+fun NamedInitializer.makeBlockStates(creator: MakeBlockStatesScope.() -> DataBlockStates) = modInitializer.onMakeResource {
+    place("assets/${resourceName.domain}/blockstates/${resourceName.path}.json", MakeBlockStatesScope(resourceName).creator().jsonElement)
 }
 
 class MakeBlockStatesScope(val resourceName: ResourceName)

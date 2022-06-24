@@ -2,6 +2,7 @@ package miragefairy2019.resourcemaker
 
 import com.google.gson.JsonElement
 import miragefairy2019.libkt.ModInitializer
+import miragefairy2019.libkt.NamedInitializer
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
@@ -10,6 +11,10 @@ import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 
 fun ModInitializer.makeRecipe(path: String, creator: () -> DataRecipe) = onMakeResource {
     place("assets/$modId/recipes/$path.json", creator().jsonElement)
+}
+
+fun NamedInitializer.makeRecipe(creator: () -> DataRecipe) = modInitializer.onMakeResource {
+    place("assets/${resourceName.domain}/recipes/${resourceName.path}.json", creator().jsonElement)
 }
 
 
