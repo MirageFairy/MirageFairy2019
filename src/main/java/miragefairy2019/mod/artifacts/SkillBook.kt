@@ -37,24 +37,23 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.time.Instant
 
-object SkillBook {
-    lateinit var itemSkillBook: () -> ItemSkillBook
-    val skillBookModule = module {
-        itemSkillBook = item({ ItemSkillBook() }, "skill_book") {
-            setUnlocalizedName("skillBook")
-            setCreativeTab { Main.creativeTab }
-            setCustomModelResourceLocation()
-            makeItemModel { generated }
-        }
-        onMakeLang {
-            enJa("item.skillBook.name", "Skill Book", "スキルブック")
-            enJa("skill_book.fairyMasterLevel", "Fairy Master Level", "フェアリーマスターレベル")
-            enJa("skill_book.requiredFairyMasterXp", "Required Fairy Master XP", "必要経験値")
-            enJa("skill_book.sp", "SP", "SP")
-            enJa("skill_book.masteryLevelReset", "Mastery Level Reset", "マスタリレベル初期化")
-            enJa("skill_book.possible", "Possible", "可能")
-            enJa("skill_book.impossible", "Impossible", "不可能")
-        }
+lateinit var itemSkillBook: () -> ItemSkillBook
+
+val skillBookModule = module {
+    itemSkillBook = item({ ItemSkillBook() }, "skill_book") {
+        setUnlocalizedName("skillBook")
+        setCreativeTab { Main.creativeTab }
+        setCustomModelResourceLocation()
+        makeItemModel { generated }
+    }
+    onMakeLang {
+        enJa("item.skillBook.name", "Skill Book", "スキルブック")
+        enJa("skill_book.fairyMasterLevel", "Fairy Master Level", "フェアリーマスターレベル")
+        enJa("skill_book.requiredFairyMasterXp", "Required Fairy Master XP", "必要経験値")
+        enJa("skill_book.sp", "SP", "SP")
+        enJa("skill_book.masteryLevelReset", "Mastery Level Reset", "マスタリレベル初期化")
+        enJa("skill_book.possible", "Possible", "可能")
+        enJa("skill_book.impossible", "Impossible", "不可能")
     }
 }
 

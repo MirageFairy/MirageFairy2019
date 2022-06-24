@@ -15,7 +15,7 @@ val artifactsModule = module {
     Sphere.sphereModule(this)
     FairyMaterials.fairyMaterialsModule(this)
     fairyStickModule(this)
-    SkillBook.skillBookModule(this)
+    skillBookModule(this)
     astronomicalObservationBookModule(this)
     ChatWebhook.chatWebhookModule(this)
     FairyLog.fairyLogModule(this)
