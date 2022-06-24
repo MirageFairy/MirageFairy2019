@@ -119,7 +119,7 @@ enum class FairyWeaponKind(
         LangPair("", "妖精はこれをおやつにするという"),
         null,
         LangPair("Get a specific item", "金属質よりも非晶質の方が鋭利だ、って"),
-        "goal",
+        null,
         listOf(!CRYSTAL, !"ingotMiragium", !"mirageFairyCrystal"),
         {
             DataShapedRecipe(
@@ -138,6 +138,32 @@ enum class FairyWeaponKind(
                     "m" to WandType.MELTING.ingredientData
                 ),
                 result = DataResult(item = "miragefairy2019:crystal_sword")
+            )
+        }
+    ),
+    plasticSword(
+        crystalSword, "plastic_sword", "plasticSword", 5, { ItemCrystalSword(12.0, 0.2) },
+        LangPair("Plastic Sword", "プラスチックソード"),
+        LangPair("", "これは妖精をおやつにするという"),
+        null,
+        LangPair("Get a specific item", "77億年のチカラ"),
+        "goal",
+        listOf(!SUBMISSION, !SUBMISSION, !"gemMirageFairyPlastic"),
+        {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "sGG",
+                    "c#G",
+                    "Rcs"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:crystal_sword"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSubmission"),
+                    "c" to DataOreIngredient(ore = "dustCinnabar"),
+                    "R" to DataOreIngredient(ore = "rodMirageFairyPlastic"),
+                    "G" to DataOreIngredient(ore = "gemMirageFairyPlastic")
+                ),
+                result = DataResult(item = "miragefairy2019:plastic_sword")
             )
         }
     ),

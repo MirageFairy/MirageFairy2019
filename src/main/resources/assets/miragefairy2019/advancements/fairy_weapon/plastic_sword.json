@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "miragefairy2019:plastic_sword"
+    },
+    "title": {
+      "translate": "item.plasticSword.name"
+    },
+    "description": {
+      "translate": "item.plasticSword.recipe"
+    },
+    "frame": "goal"
+  },
+  "parent": "miragefairy2019:fairy_weapon/crystal_sword",
+  "criteria": {
+    "main": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miragefairy2019:plastic_sword"
+          }
+        ]
+      }
+    }
+  }
+}

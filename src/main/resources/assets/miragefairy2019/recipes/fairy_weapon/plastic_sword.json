@@ -1,0 +1,33 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "sGG",
+    "c#G",
+    "Rcs"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:crystal_sword"
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereSubmission"
+    },
+    "c": {
+      "type": "forge:ore_dict",
+      "ore": "dustCinnabar"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "rodMirageFairyPlastic"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gemMirageFairyPlastic"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:plastic_sword",
+    "count": 1
+  }
+}

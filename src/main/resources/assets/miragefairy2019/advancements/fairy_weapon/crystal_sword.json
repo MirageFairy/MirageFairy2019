@@ -8,8 +8,7 @@
     },
     "description": {
       "translate": "item.crystalSword.recipe"
-    },
-    "frame": "goal"
+    }
   },
   "parent": "miragefairy2019:fairy_weapon/miragium_sword",
   "criteria": {
