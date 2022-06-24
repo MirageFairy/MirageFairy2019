@@ -27,8 +27,8 @@ import kotlin.math.ceil
 import kotlin.math.pow
 
 class ItemLightMagicWand : ItemFairyWeaponMagic4() {
-    val additionalReach = status("", { !Mana.AQUA / 50.0 * 20.0 atMost 40.0 }, { float2 }) // TODO 調整
-    val coolTime = status("", { cost * 2.0 * 0.5.pow(!Mana.GAIA / 30.0) }, { duration }) // TODO 調整
+    val additionalReach = status("additionalReach", { !Mana.AQUA / 50.0 * 20.0 atMost 40.0 }, { float2 }) // TODO 調整
+    val coolTime = status("coolTime", { cost * 2.0 * 0.5.pow(!Mana.GAIA / 30.0) }, { duration }) // TODO 調整
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックで松明を設置" // TODO translate Right click to use magic
