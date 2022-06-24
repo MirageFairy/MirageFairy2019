@@ -41,7 +41,7 @@ import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
-import mirrg.kotlin.toUpperCamelCase
+import mirrg.kotlin.hydrogen.toUpperCamelCase
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack

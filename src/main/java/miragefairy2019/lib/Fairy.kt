@@ -7,7 +7,7 @@ import miragefairy2019.api.IFairyType
 import miragefairy2019.api.Mana
 import miragefairy2019.api.ManaSet
 import miragefairy2019.libkt.textComponent
-import mirrg.kotlin.castOrNull
+import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 

@@ -6,7 +6,7 @@ import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import mirrg.kotlin.toUpperCamelCase
+import mirrg.kotlin.hydrogen.toUpperCamelCase
 
 val fairyMetamorphosisModule = module {
     fun make(resultName: String, fairyMotif: String, result: DataResult) {

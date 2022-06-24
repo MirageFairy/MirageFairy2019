@@ -5,7 +5,7 @@ import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.red
-import mirrg.kotlin.toUpperCamelCase
+import mirrg.kotlin.hydrogen.toUpperCamelCase
 import net.minecraft.item.crafting.Ingredient
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.AnvilUpdateEvent

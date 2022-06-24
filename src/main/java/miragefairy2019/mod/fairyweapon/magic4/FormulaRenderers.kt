@@ -7,7 +7,7 @@ import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.withColor
 import miragefairy2019.mod.fairyweapon.CriticalRate
-import mirrg.kotlin.formatAs
+import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.util.text.ITextComponent
 import kotlin.math.log
 

@@ -29,7 +29,7 @@ import miragefairy2019.libkt.with
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.kotlin.gson.hydrogen.jsonElement
-import mirrg.kotlin.toLowerCaseHead
+import mirrg.kotlin.hydrogen.toLowerCaseHead
 import mirrg.kotlin.toSnakeCase
 import net.minecraft.block.Block
 import net.minecraft.block.SoundType

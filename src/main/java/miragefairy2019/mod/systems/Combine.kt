@@ -10,7 +10,7 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.copy
 import miragefairy2019.mod.ModMirageFairy2019
-import mirrg.kotlin.castOrNull
+import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.IRecipe
 import net.minecraft.util.ResourceLocation

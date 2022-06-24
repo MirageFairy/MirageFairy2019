@@ -4,7 +4,7 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.ja
 import miragefairy2019.mod.ModMirageFairy2019
-import mirrg.kotlin.toUpperCamelCase
+import mirrg.kotlin.hydrogen.toUpperCamelCase
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreIngredient

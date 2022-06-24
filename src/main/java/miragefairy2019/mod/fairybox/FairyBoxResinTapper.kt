@@ -7,9 +7,9 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.artifacts.EnumFairyMaterial
 import miragefairy2019.mod.artifacts.FairyMaterials
 import miragefairy2019.mod.artifacts.get
-import mirrg.kotlin.formatAs
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
+import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumFacing

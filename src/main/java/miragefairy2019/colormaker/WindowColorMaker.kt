@@ -2,8 +2,8 @@ package miragefairy2019.colormaker
 
 import mirrg.boron.swing.UtilsComponent
 import mirrg.boron.swing.UtilsComponent.createPanelTitledBorder
-import mirrg.kotlin.formatAs
-import mirrg.kotlin.join
+import mirrg.kotlin.hydrogen.formatAs
+import mirrg.kotlin.hydrogen.join
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridBagConstraints

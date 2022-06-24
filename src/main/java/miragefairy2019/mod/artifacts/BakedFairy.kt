@@ -36,8 +36,8 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.ItemFairy
-import mirrg.kotlin.castOrNull
-import mirrg.kotlin.formatAs
+import mirrg.kotlin.hydrogen.castOrNull
+import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs

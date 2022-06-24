@@ -21,7 +21,7 @@ import miragefairy2019.libkt.toArgb
 import miragefairy2019.libkt.tooltip
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
-import mirrg.kotlin.formatAs
+import mirrg.kotlin.hydrogen.formatAs
 import mirrg.kotlin.minus
 import mirrg.kotlin.startOfMonth
 import mirrg.kotlin.toInstantAsUtc

@@ -1,6 +1,6 @@
 package miragefairy2019.libkt
 
-import mirrg.kotlin.join
+import mirrg.kotlin.hydrogen.join
 import java.io.File
 
 class LangMaker(val langDir: File) {

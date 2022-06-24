@@ -23,10 +23,10 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
-import mirrg.kotlin.toUpperCamelCase
+import mirrg.kotlin.hydrogen.castOrNull
+import mirrg.kotlin.hydrogen.toUpperCamelCase
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound

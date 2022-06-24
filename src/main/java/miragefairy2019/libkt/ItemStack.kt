@@ -1,6 +1,6 @@
 package miragefairy2019.libkt
 
-import mirrg.kotlin.castOrNull
+import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.Block
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.item.EntityItem

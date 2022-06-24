@@ -4,7 +4,7 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.configProperty
-import mirrg.kotlin.castOrNull
+import mirrg.kotlin.hydrogen.castOrNull
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Items

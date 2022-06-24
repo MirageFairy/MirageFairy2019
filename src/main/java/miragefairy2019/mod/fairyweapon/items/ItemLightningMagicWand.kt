@@ -16,8 +16,8 @@ import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.spawnMagicParticle
 import miragefairy2019.mod.skill.Mastery
-import mirrg.kotlin.castOrNull
 import mirrg.kotlin.hydrogen.atMost
+import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.effect.EntityLightningBolt
 import net.minecraft.entity.monster.EntityCreeper

@@ -10,7 +10,7 @@ import miragefairy2019.libkt.totalWeight
 import miragefairy2019.libkt.unique
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.RankedFairyTypeBundle
-import mirrg.kotlin.castOrNull
+import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity

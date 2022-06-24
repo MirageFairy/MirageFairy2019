@@ -55,10 +55,10 @@ import miragefairy2019.mod.systems.DaemonManager
 import miragefairy2019.mod.systems.IBlockDaemon
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
-import mirrg.kotlin.castOrNull
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.toJson
+import mirrg.kotlin.hydrogen.castOrNull
 import mirrg.kotlin.minus
 import mirrg.kotlin.utf8ByteArray
 import mirrg.kotlin.utf8String

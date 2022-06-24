@@ -32,7 +32,7 @@ import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
 import miragefairy2019.mod.systems.IFairyStickCraftItem
 import miragefairy2019.mod.systems.addFairyStickCraftCoolTime
-import mirrg.kotlin.formatAs
+import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.block.BlockDynamicLiquid
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag

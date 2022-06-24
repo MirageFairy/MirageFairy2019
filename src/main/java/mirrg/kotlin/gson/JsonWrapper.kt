@@ -8,9 +8,9 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonNull
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
-import mirrg.kotlin.castOrNull
+import mirrg.kotlin.hydrogen.castOrNull
+import mirrg.kotlin.hydrogen.join
 import mirrg.kotlin.isNotSameAs
-import mirrg.kotlin.join
 import java.math.BigDecimal
 
 // 本体

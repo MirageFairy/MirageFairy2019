@@ -45,7 +45,7 @@ import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.artifacts.get
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
-import mirrg.kotlin.castOrNull
+import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.ItemBlock

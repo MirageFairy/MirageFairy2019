@@ -1,6 +1,6 @@
 package miragefairy2019.libkt
 
-import mirrg.kotlin.formatAs
+import mirrg.kotlin.hydrogen.formatAs
 import kotlin.math.roundToInt
 
 interface IRgb {

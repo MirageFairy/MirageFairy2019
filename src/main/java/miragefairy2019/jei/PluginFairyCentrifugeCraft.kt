@@ -22,7 +22,7 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gray
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.fairybox.FairyBox
-import mirrg.kotlin.formatAs
+import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.Minecraft
 
 @JEIPlugin

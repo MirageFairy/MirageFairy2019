@@ -1,7 +1,7 @@
 package miragefairy2019.mod.placeditem
 
 import miragefairy2019.libkt.orEmpty
-import mirrg.kotlin.castOrNull
+import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType

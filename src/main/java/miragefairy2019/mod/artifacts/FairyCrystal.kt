@@ -43,7 +43,7 @@ import miragefairy2019.mod.systems.insertBiome
 import miragefairy2019.mod.systems.insertBlocks
 import miragefairy2019.mod.systems.insertEntities
 import miragefairy2019.mod.systems.insertItemStacks
-import mirrg.kotlin.formatAs
+import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.block.BlockDispenser
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.dispenser.IBlockSource

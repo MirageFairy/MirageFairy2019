@@ -10,8 +10,8 @@ import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
+import mirrg.kotlin.hydrogen.toUpperCamelCase
 import mirrg.kotlin.hydrogen.toUpperCaseHead
-import mirrg.kotlin.toUpperCamelCase
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.ItemStack

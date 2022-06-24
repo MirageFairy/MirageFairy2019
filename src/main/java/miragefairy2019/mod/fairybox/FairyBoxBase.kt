@@ -4,7 +4,7 @@ import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.translateToLocal
-import mirrg.kotlin.castOrNull
+import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material

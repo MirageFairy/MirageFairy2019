@@ -28,10 +28,10 @@ import miragefairy2019.mod.oreseed.EnumVariantOreSeed
 import miragefairy2019.mod.oreseed.OreSeedDropEnvironment
 import miragefairy2019.mod.playeraura.ApiPlayerAura
 import miragefairy2019.mod.skill.ApiSkill
-import mirrg.kotlin.formatAs
-import mirrg.kotlin.join
+import mirrg.kotlin.hydrogen.formatAs
+import mirrg.kotlin.hydrogen.join
+import mirrg.kotlin.hydrogen.toLowerCamelCase
 import mirrg.kotlin.log4j.hydrogen.getLogger
-import mirrg.kotlin.toLowerCamelCase
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
