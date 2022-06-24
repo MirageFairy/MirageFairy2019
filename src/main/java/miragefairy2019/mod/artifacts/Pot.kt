@@ -118,7 +118,7 @@ val potModule = module {
 
     // 詰め替えレシピ
 
-    fun potToItem(fluidName: String, fluidOreSuffix: String, result: DataResult) = makeRecipe("pot/${fluidName}_bucket_from_${fluidName}_container") { // TODO _pot
+    fun containerToBucket(fluidName: String, fluidOreSuffix: String, result: DataResult) = makeRecipe("pot/${fluidName}_container_to_${fluidName}_bucket") {
         DataShapelessRecipe(
             ingredients = listOf(
                 DataSimpleIngredient(item = "minecraft:bucket"),
@@ -128,7 +128,7 @@ val potModule = module {
         )
     }
 
-    fun potToBucket(fluidName: String, fluidOreSuffix: String) = potToItem(
+    fun containerToUniversalBucket(fluidName: String, fluidOreSuffix: String) = containerToBucket(
         fluidName,
         fluidOreSuffix,
         DataResult(
@@ -153,7 +153,7 @@ val potModule = module {
         )
     }
 
-    fun bucketToPot(fluidName: String, potMetadata: Int) = itemToPot(
+    fun universalBucketToPot(fluidName: String, potMetadata: Int) = itemToPot(
         fluidName,
         potMetadata,
         DataSimpleIngredient(
@@ -166,7 +166,7 @@ val potModule = module {
         )
     )
 
-    fun bottleToPot(registerName: String, fluidOreSuffix: String, potMetadata: Int) = makeRecipe("pot/${registerName}_pot_from_${registerName}_bottle") {
+    fun bottleToPot(registerName: String, fluidOreSuffix: String, potMetadata: Int) = makeRecipe("pot/${registerName}_bottle_to_${registerName}_pot") {
         DataShapelessRecipe(
             ingredients = listOf(
                 DataOreIngredient(ore = "mirageFairyPot"),
@@ -182,7 +182,7 @@ val potModule = module {
         )
     }
 
-    fun potToBottle(registerName: String, fluidOreSuffix: String, bottleMetadata: Int) = makeRecipe("pot/${registerName}_bottle_from_${registerName}_pot") {
+    fun potToBottle(registerName: String, fluidOreSuffix: String, bottleMetadata: Int) = makeRecipe("pot/${registerName}_pot_to_${registerName}_bottle") {
         DataShapelessRecipe(
             ingredients = listOf(
                 DataSimpleIngredient(item = "minecraft:glass_bottle"),
@@ -199,25 +199,25 @@ val potModule = module {
         )
     }
 
-    potToBucket("miragium_water", "MiragiumWater")
-    bucketToPot("miragium_water", 0)
+    containerToUniversalBucket("miragium_water", "MiragiumWater")
+    universalBucketToPot("miragium_water", 0)
     bottleToPot("miragium_water", "MiragiumWater", 0)
     potToBottle("miragium_water", "MiragiumWater", 10)
 
-    potToBucket("mirage_flower_extract", "MirageFlowerExtract")
-    bucketToPot("mirage_flower_extract", 1)
+    containerToUniversalBucket("mirage_flower_extract", "MirageFlowerExtract")
+    universalBucketToPot("mirage_flower_extract", 1)
     bottleToPot("mirage_flower_extract", "MirageFlowerExtract", 1)
     potToBottle("mirage_flower_extract", "MirageFlowerExtract", 11)
 
-    potToBucket("mirage_flower_oil", "MirageFlowerOil")
-    bucketToPot("mirage_flower_oil", 2)
+    containerToUniversalBucket("mirage_flower_oil", "MirageFlowerOil")
+    universalBucketToPot("mirage_flower_oil", 2)
     bottleToPot("mirage_flower_oil", "MirageFlowerOil", 2)
     potToBottle("mirage_flower_oil", "MirageFlowerOil", 12)
 
-    potToItem("water", "Water", DataResult(item = "minecraft:water_bucket"))
+    containerToBucket("water", "Water", DataResult(item = "minecraft:water_bucket"))
     itemToPot("water", 3, DataSimpleIngredient(item = "minecraft:water_bucket"))
 
-    potToItem("lava", "Lava", DataResult(item = "minecraft:lava_bucket"))
+    containerToBucket("lava", "Lava", DataResult(item = "minecraft:lava_bucket"))
     itemToPot("lava", 4, DataSimpleIngredient(item = "minecraft:lava_bucket"))
 
 }
