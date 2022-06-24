@@ -114,7 +114,7 @@ object TwinkleStone {
             enJa("tile.twinkleStoneRed.name", "Red Twinkle Stone", "赤色のトゥインクルストーン")
             enJa("tile.twinkleStoneBlack.name", "Black Twinkle Stone", "黒色のトゥインクルストーン")
         }
-        makeRecipe("fairymaterials/twinkle_stone") {
+        makeRecipe("twinkle_stone") {
             DataShapedRecipe(
                 pattern = listOf(
                     "ScS",
@@ -131,7 +131,7 @@ object TwinkleStone {
                 result = DataResult(item = "miragefairy2019:twinkle_stone", data = 3, count = 4)
             )
         }
-        fun f(metadata: Int, colorRegistryNameSuffix: String, colorOreNameSuffix: String) = makeRecipe("fairymaterials/${colorRegistryNameSuffix}_twinkle_stone") {
+        fun f(metadata: Int, colorRegistryNameSuffix: String, colorOreNameSuffix: String) = makeRecipe("${colorRegistryNameSuffix}_twinkle_stone") {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOreIngredient(ore = "mirageFairy2019TwinkleStone"),
