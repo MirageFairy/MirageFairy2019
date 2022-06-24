@@ -40,9 +40,9 @@ import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.EnumFairyMaterial
 import miragefairy2019.mod.artifacts.FairyMaterials
-import miragefairy2019.mod.artifacts.Fertilizer
 import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.artifacts.get
+import miragefairy2019.mod.artifacts.itemFertilizer
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
 import mirrg.kotlin.hydrogen.castOrNull
@@ -498,7 +498,7 @@ object FairyBox {
                     output(Blocks.DIRT.createItemStack(metadata = 1), 1.0) // 100% 荒い土
                     output(Blocks.SAND.createItemStack(), 0.1, 1.0) // 10% 砂
                     output(Items.CLAY_BALL.createItemStack(), 0.1, 1.0) // 10% 粘土
-                    output(Fertilizer.itemFertilizer().createItemStack(), 0.1, 1.0) // 10% 肥料
+                    output(itemFertilizer().createItemStack(), 0.1, 1.0) // 10% 肥料
                     output(Items.WHEAT_SEEDS.createItemStack(), 0.05, 2.0) // 5% 小麦の種
                     output(Items.MELON_SEEDS.createItemStack(), 0.01, 2.0) // 1% スイカの種
                     output(Items.PUMPKIN_SEEDS.createItemStack(), 0.01, 2.0) // 1% カボチャの種

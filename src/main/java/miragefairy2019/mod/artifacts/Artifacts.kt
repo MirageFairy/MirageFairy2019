@@ -4,7 +4,7 @@ import miragefairy2019.lib.modinitializer.module
 
 val artifactsModule = module {
     dishModule(this)
-    Fertilizer.fertilizerModule(this)
+    fertilizerModule(this)
     twinkleStoneModule(this)
     FairyCollectionBox.fairyCollectionBoxModule(this)
     FairyWoodLog.fairyWoodLogModule(this)

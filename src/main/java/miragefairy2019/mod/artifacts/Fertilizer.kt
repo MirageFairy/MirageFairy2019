@@ -11,6 +11,7 @@ import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
+import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import net.minecraft.block.BlockDispenser
 import net.minecraft.dispenser.IBlockSource
@@ -25,34 +26,33 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-object Fertilizer {
-    lateinit var itemFertilizer: () -> ItemFertilizer
-    val fertilizerModule = module {
-        itemFertilizer = item({ ItemFertilizer() }, "fertilizer") {
-            setUnlocalizedName("fertilizer")
-            setCreativeTab { Main.creativeTab }
-            setCustomModelResourceLocation()
-            onInit {
-                BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(item, object : BehaviorDispenseOptional() {
-                    override fun dispenseStack(blockSource: IBlockSource, itemStack: ItemStack): ItemStack {
-                        val world = blockSource.world
-                        val blockPos = blockSource.blockPos.offset(blockSource.blockState.getValue(BlockDispenser.FACING))
+lateinit var itemFertilizer: () -> ItemFertilizer
 
-                        // 実行
-                        val result = ItemDye.applyBonemeal(itemStack, world, blockPos)
-                        successful = result
-                        if (!result) return itemStack
+val fertilizerModule = module {
+    itemFertilizer = item({ ItemFertilizer() }, "fertilizer") {
+        setUnlocalizedName("fertilizer")
+        setCreativeTab { Main.creativeTab }
+        setCustomModelResourceLocation()
+        onInit {
+            BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(item, object : BehaviorDispenseOptional() {
+                override fun dispenseStack(blockSource: IBlockSource, itemStack: ItemStack): ItemStack {
+                    val world = blockSource.world
+                    val blockPos = blockSource.blockPos.offset(blockSource.blockState.getValue(BlockDispenser.FACING))
 
-                        // エフェクト
-                        if (!world.isRemote) world.playEvent(2005, blockPos, 0)
+                    // 実行
+                    val result = ItemDye.applyBonemeal(itemStack, world, blockPos)
+                    successful = result
+                    if (!result) return itemStack
 
-                        return itemStack
-                    }
-                })
-            }
+                    // エフェクト
+                    if (!world.isRemote) world.playEvent(2005, blockPos, 0)
+
+                    return itemStack
+                }
+            })
         }
-        makeItemModel("fertilizer") { generated }
-        makeRecipe("fertilizer") {
+        makeItemModel { generated }
+        makeRecipe {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOreIngredient(ore = "dustApatite"),
@@ -65,6 +65,7 @@ object Fertilizer {
             )
         }
     }
+    onMakeLang { enJa("item.fertilizer.name", "Fertilizer", "肥料") }
 }
 
 class ItemFertilizer : Item() {
