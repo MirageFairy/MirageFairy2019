@@ -5,11 +5,10 @@ import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.displayText
-import miragefairy2019.libkt.en
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.item
-import miragefairy2019.libkt.ja
 import miragefairy2019.libkt.module
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
@@ -50,33 +49,32 @@ import kotlin.math.acos
 import kotlin.math.cos
 import kotlin.math.sin
 
-object AstronomicalObservationBook {
-    lateinit var itemAstronomicalObservationBook: () -> ItemAstronomicalObservationBook
-    val astronomicalObservationBookModule = module {
-        itemAstronomicalObservationBook = item({ ItemAstronomicalObservationBook() }, "astronomical_observation_book") {
-            setUnlocalizedName("astronomicalObservationBook")
-            setCreativeTab { Main.creativeTab }
-            setCustomModelResourceLocation()
-        }
-        makeItemModel("astronomical_observation_book") { generated }
-        onMakeLang {
-            val prefix = "miragefairy2019.gui.astronomicalObservation"
-            enJa("$prefix.title", "Astronomical Observation Quest", "天体観測クエスト")
-            enJa("$prefix.daily", "Daily", "日間")
-            enJa("$prefix.weekly", "Weekly", "週間")
-            enJa("$prefix.monthly", "Monthly", "月間")
-            enJa("$prefix.impossible", "Impossible", "不可能")
-            enJa("$prefix.incomplete", "Incomplete", "未完了")
-            enJa("$prefix.completed", "Completed", "完了")
-            enJa("$prefix.usage", "Right-click and hold AO-Book toward the sun or the moon for Astronomical Observation.", "天体観測を行うには、天体観測ブックを太陽もしくは月に向かって右クリック長押しします。")
-            enJa("$prefix.message.remaining", "Updated with %s left", "残り %s で更新")
-            enJa("$prefix.message.completed", "Completed!", "完了！")
-            enJa("$prefix.message.gainExp", "You have earned %s Fairy Master XP!", "%s のフェアリーマスター経験値を獲得しました！")
-            enJa("$prefix.message.gainLevel", "You have earned %s Fairy Master Level!", "フェアリーマスターレベルが %s 上昇しました！")
-            enJa("$prefix.message.doNothing", "You got nothing...", "特筆すべき変化は見られなかった…")
-        }
+val astronomicalObservationBookModule = module {
+    itemAstronomicalObservationBook = item({ ItemAstronomicalObservationBook() }, "astronomical_observation_book") {
+        setUnlocalizedName("astronomicalObservationBook")
+        setCreativeTab { Main.creativeTab }
+        setCustomModelResourceLocation()
+        makeItemModel { generated }
+    }
+    onMakeLang {
+        val prefix = "miragefairy2019.gui.astronomicalObservation"
+        enJa("$prefix.title", "Astronomical Observation Quest", "天体観測クエスト")
+        enJa("$prefix.daily", "Daily", "日間")
+        enJa("$prefix.weekly", "Weekly", "週間")
+        enJa("$prefix.monthly", "Monthly", "月間")
+        enJa("$prefix.impossible", "Impossible", "不可能")
+        enJa("$prefix.incomplete", "Incomplete", "未完了")
+        enJa("$prefix.completed", "Completed", "完了")
+        enJa("$prefix.usage", "Right-click and hold AO-Book toward the sun or the moon for Astronomical Observation.", "天体観測を行うには、天体観測ブックを太陽もしくは月に向かって右クリック長押しします。")
+        enJa("$prefix.message.remaining", "Updated with %s left", "残り %s で更新")
+        enJa("$prefix.message.completed", "Completed!", "完了！")
+        enJa("$prefix.message.gainExp", "You have earned %s Fairy Master XP!", "%s のフェアリーマスター経験値を獲得しました！")
+        enJa("$prefix.message.gainLevel", "You have earned %s Fairy Master Level!", "フェアリーマスターレベルが %s 上昇しました！")
+        enJa("$prefix.message.doNothing", "You got nothing...", "特筆すべき変化は見られなかった…")
     }
 }
+
+lateinit var itemAstronomicalObservationBook: () -> ItemAstronomicalObservationBook
 
 class ItemAstronomicalObservationBook : Item() {
     companion object {

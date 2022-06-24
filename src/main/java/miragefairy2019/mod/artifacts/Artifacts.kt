@@ -16,7 +16,7 @@ val artifactsModule = module {
     FairyMaterials.fairyMaterialsModule(this)
     fairyStickModule(this)
     SkillBook.skillBookModule(this)
-    AstronomicalObservationBook.astronomicalObservationBookModule(this)
+    astronomicalObservationBookModule(this)
     ChatWebhook.chatWebhookModule(this)
     FairyLog.fairyLogModule(this)
     MirageFlower.mirageFlowerModule(this)
