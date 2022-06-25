@@ -22,6 +22,7 @@ import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.normal
 import miragefairy2019.libkt.notEmptyOrNull
+import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
@@ -103,6 +104,7 @@ val dishModule = module {
         setCustomModelResourceLocation()
         makeItemModel { block }
     }
+    onMakeLang { enJa("tile.dish.name", "Dish", "皿") }
     tileEntity("dish", TileEntityDish::class.java)
     tileEntityRenderer(TileEntityDish::class.java, { TileEntityRendererDish() })
 }
