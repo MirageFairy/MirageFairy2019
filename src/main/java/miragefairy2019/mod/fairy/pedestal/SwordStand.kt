@@ -33,7 +33,6 @@ import miragefairy2019.mod.placeditem.PlacedItem
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
-import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlock
@@ -112,7 +111,7 @@ val swordStandModule = module {
     }
     onMakeLang { enJa("tile.stoneSwordStand.name", "Stone Sword Stand", "ガルガーノの岩") }
     tileEntity("stone_sword_stand", TileEntitySwordStand::class.java)
-    tileEntityRenderer(TileEntitySwordStand::class.java, { TileEntityRendererSwordStand() })
+    tileEntityRenderer(TileEntitySwordStand::class.java, { TileEntityRendererPedestal() })
 }
 
 class BlockSwordStand : BlockPedestal<TileEntitySwordStand>(Material.CIRCUITS, { it as? TileEntitySwordStand }) {
@@ -187,23 +186,19 @@ class TileEntitySwordStand : TileEntityPedestal() {
         rotation = nbt.getDouble("rotation")
         reversed = nbt.getInteger("reversed")
     }
-}
 
-@SideOnly(Side.CLIENT)
-class TileEntityRendererSwordStand : TileEntityRendererPedestal<TileEntitySwordStand>() {
-    override fun transform(tileEntity: TileEntitySwordStand) {
-        GlStateManager.translate(0.5, 9.0 / 16.0, 0.5)
-        //GlStateManager.translate(0.0, 0.25, 0.0)
-        GlStateManager.rotate((-tileEntity.rotation).toFloat(), 0f, 1f, 0f)
-        when (tileEntity.reversed) {
-            0 -> GlStateManager.rotate(-45.0f + 180.0f, 0f, 0f, 1f)
-            1 -> GlStateManager.rotate(-45.0f + 0.0f, 0f, 0f, 1f)
-            2 -> GlStateManager.rotate(-45.0f + 90.0f, 0f, 0f, 1f)
-            3 -> GlStateManager.rotate(-45.0f + 270.0f, 0f, 0f, 1f)
-            4 -> GlStateManager.rotate(90.0f, 0f, 0f, 1f)
-            5 -> GlStateManager.rotate(0.0f, 0f, 0f, 1f)
-            6 -> GlStateManager.rotate(180.0f, 0f, 0f, 1f)
-            7 -> GlStateManager.rotate(270.0f, 0f, 0f, 1f)
+    override fun transform(transformProxy: ITransformProxy) {
+        transformProxy.translate(0.5, 9.0 / 16.0, 0.5)
+        transformProxy.rotate((-rotation).toFloat(), 0f, 1f, 0f)
+        when (reversed) {
+            0 -> transformProxy.rotate(-45.0f + 180.0f, 0f, 0f, 1f)
+            1 -> transformProxy.rotate(-45.0f + 0.0f, 0f, 0f, 1f)
+            2 -> transformProxy.rotate(-45.0f + 90.0f, 0f, 0f, 1f)
+            3 -> transformProxy.rotate(-45.0f + 270.0f, 0f, 0f, 1f)
+            4 -> transformProxy.rotate(90.0f, 0f, 0f, 1f)
+            5 -> transformProxy.rotate(0.0f, 0f, 0f, 1f)
+            6 -> transformProxy.rotate(180.0f, 0f, 0f, 1f)
+            7 -> transformProxy.rotate(270.0f, 0f, 0f, 1f)
             else -> Unit
         }
     }

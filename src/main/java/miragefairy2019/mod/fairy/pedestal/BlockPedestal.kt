@@ -116,6 +116,14 @@ abstract class BlockPlacedPedestal<T : TileEntityPedestal>(material: Material, v
     }
 }
 
+interface ITransformProxy {
+    fun translate(x: Float, y: Float, z: Float)
+    fun translate(x: Double, y: Double, z: Double)
+    fun rotate(angle: Float, x: Float, y: Float, z: Float)
+    fun scale(x: Float, y: Float, z: Float)
+    fun scale(x: Double, y: Double, z: Double)
+}
+
 abstract class TileEntityPedestal : TileEntity() {
     var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(1, ItemStack.EMPTY)
     var itemStack: ItemStack
@@ -145,15 +153,24 @@ abstract class TileEntityPedestal : TileEntity() {
     }
 
     fun sendUpdatePacket() = world.playerEntities.forEach { if (it is EntityPlayerMP) it.connection.sendPacket(updatePacket) }
+
+
+    abstract fun transform(transformProxy: ITransformProxy)
 }
 
 @SideOnly(Side.CLIENT)
-abstract class TileEntityRendererPedestal<T : TileEntityPedestal> : TileEntitySpecialRenderer<T>() {
+class TileEntityRendererPedestal<T : TileEntityPedestal> : TileEntitySpecialRenderer<T>() {
     override fun render(tileEntity: T, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int, alpha: Float) {
         val itemStack = tileEntity.itemStack.notEmptyOrNull ?: return
         matrix {
             GlStateManager.translate(x, y, z)
-            transform(tileEntity)
+            tileEntity.transform(object : ITransformProxy {
+                override fun translate(x: Float, y: Float, z: Float) = GlStateManager.translate(x, y, z)
+                override fun translate(x: Double, y: Double, z: Double) = GlStateManager.translate(x, y, z)
+                override fun rotate(angle: Float, x: Float, y: Float, z: Float) = GlStateManager.rotate(angle, x, y, z)
+                override fun scale(x: Float, y: Float, z: Float) = GlStateManager.scale(x, y, z)
+                override fun scale(x: Double, y: Double, z: Double) = GlStateManager.scale(x, y, z)
+            })
             renderItem(itemStack)
         }
     }
@@ -166,8 +183,6 @@ abstract class TileEntityRendererPedestal<T : TileEntityPedestal> : TileEntitySp
             GlStateManager.popMatrix()
         }
     }
-
-    abstract fun transform(tileEntity: T)
 
     private fun renderItem(itemStack: ItemStack) {
         if (itemStack.isEmpty) return

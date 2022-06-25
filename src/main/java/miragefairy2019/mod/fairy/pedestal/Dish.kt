@@ -34,7 +34,6 @@ import miragefairy2019.mod.placeditem.PlacedItem
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
-import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlock
@@ -113,7 +112,7 @@ val dishModule = module {
     }
     onMakeLang { enJa("tile.dish.name", "Dish", "皿") }
     tileEntity("dish", TileEntityDish::class.java)
-    tileEntityRenderer(TileEntityDish::class.java, { TileEntityRendererDish() })
+    tileEntityRenderer(TileEntityDish::class.java, { TileEntityRendererPedestal() })
 }
 
 class BlockDish : BlockPlacedPedestal<TileEntityDish>(Material.CIRCUITS, { it as? TileEntityDish }) {
@@ -186,17 +185,14 @@ class TileEntityDish : TileEntityPedestal() {
         rotation = nbt.getDouble("rotation")
         standing = nbt.getBoolean("standing")
     }
-}
 
-@SideOnly(Side.CLIENT)
-class TileEntityRendererDish : TileEntityRendererPedestal<TileEntityDish>() {
-    override fun transform(tileEntity: TileEntityDish) {
-        GlStateManager.translate(0.5, 1.5 / 16.0 + 1 / 64.0, 0.5)
-        GlStateManager.rotate((-tileEntity.rotation).toFloat(), 0f, 1f, 0f)
-        if (tileEntity.standing) {
-            GlStateManager.translate(0.0, 0.25, 0.0)
+    override fun transform(transformProxy: ITransformProxy) {
+        transformProxy.translate(0.5, 1.5 / 16.0 + 1 / 64.0, 0.5)
+        transformProxy.rotate((-rotation).toFloat(), 0f, 1f, 0f)
+        if (standing) {
+            transformProxy.translate(0.0, 0.25, 0.0)
         } else {
-            GlStateManager.rotate(90f, 1f, 0f, 0f)
+            transformProxy.rotate(90f, 1f, 0f, 0f)
         }
     }
 }
