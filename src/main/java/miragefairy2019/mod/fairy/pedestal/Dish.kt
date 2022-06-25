@@ -1,4 +1,4 @@
-package miragefairy2019.mod.artifacts
+package miragefairy2019.mod.fairy.pedestal
 
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -28,6 +28,8 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.artifacts.WandType
+import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.mod.placeditem.PlacedItem
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material

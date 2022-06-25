@@ -4,6 +4,7 @@ import miragefairy2019.jei.jeiModule
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.mod.artifacts.artifactsModule
 import miragefairy2019.mod.fairy.Fairy
+import miragefairy2019.mod.fairy.pedestal.pedestalModule
 import miragefairy2019.mod.fairybox.FairyBox
 import miragefairy2019.mod.fairyrelation.fairyRelationModule
 import miragefairy2019.mod.fairyweapon.fairyWeaponModule
@@ -20,6 +21,7 @@ val modules = module {
     jeiModule(this)
 
     artifactsModule(this)
+    pedestalModule(this)
     materialModule(this)
     systemsModule(this)
     recipesModule(this)
