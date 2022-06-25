@@ -22,12 +22,18 @@ import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.resourcemaker.normal
+import miragefairy2019.libkt.TextComponentScope.invoke
 import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.plus
+import miragefairy2019.libkt.red
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.placeditem.PlacedItem
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.renderer.GlStateManager
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
@@ -36,6 +42,7 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.text.TextComponentKeybind
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
@@ -118,6 +125,14 @@ class BlockSwordStand : BlockPedestal<TileEntitySwordStand>(Material.CIRCUITS, {
     }
 
     override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntitySwordStand()
+
+
+    @SideOnly(Side.CLIENT)
+    override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+        tooltip += formattedText { (TextComponentKeybind(PlacedItem.keyBindingPlaceItem.keyDescription)() + "キーでアイテムを展示"()).red } // TODO translate
+        tooltip += formattedText { ("右クリックで展示物を回転"()).red } // TODO translate
+        tooltip += formattedText { ("Shift+右クリックで展示方法を変更"()).red } // TODO translate
+    }
 
 
     // 当たり判定
