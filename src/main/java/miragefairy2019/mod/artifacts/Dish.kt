@@ -160,6 +160,7 @@ class BlockDish : BlockPlacedPedestal<TileEntityDish>(Material.CIRCUITS, { it as
                 tileEntity.rotation -= 360.0
             }
         }
+
         tileEntity.markDirty()
         tileEntity.sendUpdatePacket()
         return true
