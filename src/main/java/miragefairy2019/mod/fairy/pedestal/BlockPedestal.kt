@@ -69,7 +69,14 @@ abstract class BlockPedestal<T : TileEntityPedestal>(material: Material, private
         if (world.isRemote) return true
         val tileEntity = getTileEntity(world, blockPos) ?: return true
 
-        onAdjust(world, blockPos, tileEntity, player)
+        if (tileEntity.itemStack.isEmpty) {
+            val heldItemStack = player.heldItemMainhand.notEmptyOrNull
+            if (heldItemStack != null) {
+                tileEntity.itemStack = heldItemStack.splitStack(1)
+            }
+        } else {
+            onAdjust(world, blockPos, tileEntity, player)
+        }
 
         tileEntity.markDirty()
         tileEntity.sendUpdatePacket()
