@@ -24,6 +24,7 @@ import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumHand
 import net.minecraft.util.NonNullList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
@@ -64,6 +65,17 @@ abstract class BlockPedestal<T : TileEntityPedestal>(material: Material, private
 
     // アクション
 
+    override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        if (world.isRemote) return true
+        val tileEntity = getTileEntity(world, blockPos) ?: return true
+
+        onAdjust(world, blockPos, tileEntity, player)
+
+        tileEntity.markDirty()
+        tileEntity.sendUpdatePacket()
+        return true
+    }
+
     override fun place(world: World, blockPos: BlockPos, player: EntityPlayer, placeExchanger: IPlaceExchanger): Boolean {
         val tileEntity = getTileEntity(world, blockPos) ?: return false // 異常なTileだった場合は中止
         if (tileEntity.itemStack.isEmpty) { // 設置
@@ -98,6 +110,7 @@ abstract class BlockPedestal<T : TileEntityPedestal>(material: Material, private
         }
     }
 
+    open fun onAdjust(world: World, blockPos: BlockPos, tileEntity: T, player: EntityPlayer) = Unit
     open fun onDeploy(world: World, blockPos: BlockPos, tileEntity: T, player: EntityPlayer, itemStack: ItemStack) = Unit
     open fun onHarvest(world: World, blockPos: BlockPos, tileEntity: T, player: EntityPlayer) = Unit
 }

@@ -38,8 +38,6 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.EnumFacing
-import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.TextComponentKeybind
@@ -145,11 +143,8 @@ class BlockSwordStand : BlockPedestal<TileEntitySwordStand>(Material.CIRCUITS, {
 
     // アクション
 
-    override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        if (worldIn.isRemote) return true
-        val tileEntity = getTileEntity(worldIn, pos) ?: return true
-
-        if (playerIn.isSneaking) {
+    override fun onAdjust(world: World, blockPos: BlockPos, tileEntity: TileEntitySwordStand, player: EntityPlayer) {
+        if (player.isSneaking) {
             tileEntity.reversed = (tileEntity.reversed + 1) % 8
         } else {
             tileEntity.rotation += 45.0
@@ -157,10 +152,6 @@ class BlockSwordStand : BlockPedestal<TileEntitySwordStand>(Material.CIRCUITS, {
                 tileEntity.rotation -= 360.0
             }
         }
-
-        tileEntity.markDirty()
-        tileEntity.sendUpdatePacket()
-        return true
     }
 
     override fun onDeploy(world: World, blockPos: BlockPos, tileEntity: TileEntitySwordStand, player: EntityPlayer, itemStack: ItemStack) {
