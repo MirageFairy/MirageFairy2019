@@ -107,7 +107,7 @@ val dishModule = module {
     tileEntityRenderer(TileEntityDish::class.java, { TileEntityRendererDish() })
 }
 
-class BlockDish : BlockPedestal<TileEntityDish>(Material.CIRCUITS, { it as? TileEntityDish }) {
+class BlockDish : BlockPlacedPedestal<TileEntityDish>(Material.CIRCUITS, { it as? TileEntityDish }) {
     init {
         // style
         soundType = SoundType.STONE
@@ -125,23 +125,6 @@ class BlockDish : BlockPedestal<TileEntityDish>(Material.CIRCUITS, { it as? Tile
     private val boundingBox = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 2 / 16.0, 14 / 16.0)
     override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) = boundingBox
     override fun getCollisionBoundingBox(blockState: IBlockState, worldIn: IBlockAccess, pos: BlockPos) = NULL_AABB
-
-
-    // 床上判定
-
-    override fun canPlaceBlockAt(worldIn: World, pos: BlockPos) = canSustain(worldIn, pos)
-    override fun onBlockAdded(worldIn: World, pos: BlockPos, state: IBlockState) = checkForDrop(worldIn, pos, state)
-    override fun neighborChanged(state: IBlockState, worldIn: World, pos: BlockPos, blockIn: Block, fromPos: BlockPos) = checkForDrop(worldIn, pos, state)
-
-    private fun checkForDrop(world: World, blockPos: BlockPos, blockState: IBlockState) {
-        if (blockState.block !== this) return // 呼び出されたブロックが自分でない場合は無視
-        if (canSustain(world, blockPos)) return // その場に存在できる場合は何もしない
-        if (world.getBlockState(blockPos).block !== this) return // 指定座標に自ブロックが居ない場合は無視
-        dropBlockAsItem(world, blockPos, blockState, 0)
-        world.setBlockToAir(blockPos)
-    }
-
-    private fun canSustain(world: IBlockAccess, blockPos: BlockPos): Boolean = world.getBlockState(blockPos.down()).isSideSolid(world, blockPos.down(), EnumFacing.UP)
 
 
     // アクション
@@ -271,6 +254,20 @@ abstract class BlockPedestal<T : TileEntityPedestal>(material: Material, private
 
     open fun onDeploy(world: World, blockPos: BlockPos, tileEntity: T, player: EntityPlayer, itemStack: ItemStack) = Unit
     open fun onHarvest(world: World, blockPos: BlockPos, tileEntity: T, player: EntityPlayer) = Unit
+}
+
+abstract class BlockPlacedPedestal<T : TileEntityPedestal>(material: Material, validator: (TileEntity) -> T?) : BlockPedestal<T>(material, validator) {
+    override fun canPlaceBlockAt(worldIn: World, pos: BlockPos) = super.canPlaceBlockAt(worldIn, pos) && canSustain(worldIn, pos)
+    override fun onBlockAdded(worldIn: World, pos: BlockPos, state: IBlockState) = checkForDrop(worldIn, pos, state)
+    override fun neighborChanged(state: IBlockState, worldIn: World, pos: BlockPos, blockIn: Block, fromPos: BlockPos) = checkForDrop(worldIn, pos, state)
+    private fun canSustain(world: IBlockAccess, blockPos: BlockPos): Boolean = world.getBlockState(blockPos.down()).isSideSolid(world, blockPos.down(), EnumFacing.UP)
+    private fun checkForDrop(world: World, blockPos: BlockPos, blockState: IBlockState) {
+        if (blockState.block !== this) return // 呼び出されたブロックが自分でない場合は無視
+        if (canSustain(world, blockPos)) return // その場に存在できる場合は何もしない
+        if (world.getBlockState(blockPos).block !== this) return // 指定座標に自ブロックが居ない場合は無視
+        dropBlockAsItem(world, blockPos, blockState, 0)
+        world.setBlockToAir(blockPos)
+    }
 }
 
 abstract class TileEntityPedestal : TileEntity() {
