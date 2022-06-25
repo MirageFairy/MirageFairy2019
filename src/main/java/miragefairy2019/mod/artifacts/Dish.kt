@@ -95,7 +95,7 @@ val dishModule = module {
     item({ ItemBlock(blockDish()) }, "dish") {
         setCustomModelResourceLocation()
         makeItemModel { block }
-        makeRecipe("fairymaterials/dish") { // TODO
+        makeRecipe {
             DataShapedRecipe(
                 pattern = listOf(
                     " p ",
