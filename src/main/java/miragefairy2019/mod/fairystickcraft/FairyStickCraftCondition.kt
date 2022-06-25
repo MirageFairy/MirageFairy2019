@@ -2,8 +2,8 @@ package miragefairy2019.mod.fairystickcraft
 
 import miragefairy2019.libkt.containerItem
 import miragefairy2019.libkt.drop
-import miragefairy2019.libkt.orEmpty
 import miragefairy2019.libkt.notEmptyOrNull
+import miragefairy2019.libkt.orEmpty
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.init.Blocks

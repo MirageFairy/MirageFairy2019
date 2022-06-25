@@ -22,7 +22,6 @@ import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.resourcemaker.normal
-import miragefairy2019.libkt.TextComponentScope.invoke
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.plus
