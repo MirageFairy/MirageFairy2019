@@ -150,7 +150,8 @@ class BlockDish : BlockPlacedPedestal<TileEntityDish>(Material.CIRCUITS, { it as
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (worldIn.isRemote) return true
-        val tileEntity = worldIn.getTileEntity(pos) as? TileEntityDish ?: return true
+        val tileEntity = getTileEntity(worldIn, pos) ?: return true
+
         if (playerIn.isSneaking) {
             tileEntity.standing = !tileEntity.standing
         } else {
