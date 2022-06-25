@@ -56,14 +56,12 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.round
 
-lateinit var blockDish: () -> BlockDish
-lateinit var itemDish: () -> ItemBlock
 val dishModule = module {
-    blockDish = block({ BlockDish() }, "dish") {
+    val blockDish = block({ BlockDish() }, "dish") {
         setUnlocalizedName("dish")
         setCreativeTab { Main.creativeTab }
-        makeBlockStates(resourceName.path) { normal }
-        makeBlockModel(resourceName.path) {
+        makeBlockStates { normal }
+        makeBlockModel {
             DataModel(
                 parent = "block/block",
                 ambientOcclusion = false,
@@ -101,19 +99,15 @@ val dishModule = module {
             )
         }
     }
-    itemDish = item({ ItemBlock(blockDish()) }, "dish") {
+    item({ ItemBlock(blockDish()) }, "dish") {
         setCustomModelResourceLocation()
-        makeItemModel(resourceName.path) { block }
+        makeItemModel { block }
     }
     tileEntity("dish", TileEntityDish::class.java)
     tileEntityRenderer(TileEntityDish::class.java, { TileEntityRendererDish() })
 }
 
-class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceAcceptorBlock {
-    companion object {
-        private val AABB = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 2 / 16.0, 14 / 16.0)
-    }
-
+class BlockDish : BlockPedestal<TileEntityDish>(Material.CIRCUITS, { it as? TileEntityDish }) {
     init {
         // style
         soundType = SoundType.STONE
@@ -125,36 +119,15 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceAcceptorBlock {
 
     override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityDish()
 
-    // ドロップ
 
-    // クリエイティブピックでの取得アイテム
-    @Suppress("DEPRECATION")
-    override fun getItem(world: World, pos: BlockPos, state: IBlockState): ItemStack = (world.getTileEntity(pos) as? TileEntityDish)?.itemStack?.orNull ?: super.getItem(world, pos, state)
+    // 当たり判定
 
-    // 破壊時ドロップ
-    override fun breakBlock(world: World, blockPos: BlockPos, blockState: IBlockState) {
-        val tileEntity = world.getTileEntity(blockPos)
-        if (tileEntity is TileEntityDish) {
-            InventoryHelper.spawnItemStack(world, blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble(), tileEntity.itemStack)
-            world.updateComparatorOutputLevel(blockPos, this)
-        }
-        super.breakBlock(world, blockPos, blockState)
-    }
-
-    // シルクタッチ無効
-    override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer) = false
-
-
-    @SideOnly(Side.CLIENT)
-    override fun getBlockLayer() = BlockRenderLayer.CUTOUT_MIPPED
-    override fun getRenderType(state: IBlockState) = EnumBlockRenderType.MODEL
-    override fun isOpaqueCube(state: IBlockState) = false
-    override fun isFullCube(state: IBlockState) = false
-
-
-    override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) = AABB
+    private val boundingBox = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 2 / 16.0, 14 / 16.0)
+    override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) = boundingBox
     override fun getCollisionBoundingBox(blockState: IBlockState, worldIn: IBlockAccess, pos: BlockPos) = NULL_AABB
 
+
+    // 床上判定
 
     override fun canPlaceBlockAt(worldIn: World, pos: BlockPos) = canSustain(worldIn, pos)
     override fun onBlockAdded(worldIn: World, pos: BlockPos, state: IBlockState) = checkForDrop(worldIn, pos, state)
@@ -171,10 +144,11 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceAcceptorBlock {
     private fun canSustain(world: IBlockAccess, blockPos: BlockPos): Boolean = world.getBlockState(blockPos.down()).isSideSolid(world, blockPos.down(), EnumFacing.UP)
 
 
+    // アクション
+
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (worldIn.isRemote) return true
-        val tileEntity = worldIn.getTileEntity(pos)
-        if (tileEntity !is TileEntityDish) return true
+        val tileEntity = worldIn.getTileEntity(pos) as? TileEntityDish ?: return true
         if (playerIn.isSneaking) {
             tileEntity.standing = !tileEntity.standing
         } else {
@@ -188,10 +162,81 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceAcceptorBlock {
         return true
     }
 
+    override fun onDeploy(world: World, blockPos: BlockPos, tileEntity: TileEntityDish, player: EntityPlayer, itemStack: ItemStack) {
+        tileEntity.rotation = round(player.rotationYawHead.toDouble() / 45) * 45 // 角度調整
+    }
+
+}
+
+class TileEntityDish : TileEntityPedestal() {
+    var rotation = 0.0
+    var standing = false
+
+    override fun writeToNBT(nbt: NBTTagCompound): NBTTagCompound {
+        super.writeToNBT(nbt)
+        nbt.setDouble("rotation", rotation)
+        nbt.setBoolean("standing", standing)
+        return nbt
+    }
+
+    override fun readFromNBT(nbt: NBTTagCompound) {
+        super.readFromNBT(nbt)
+        rotation = nbt.getDouble("rotation")
+        standing = nbt.getBoolean("standing")
+    }
+}
+
+@SideOnly(Side.CLIENT)
+class TileEntityRendererDish : TileEntityRendererPedestal<TileEntityDish>() {
+    override fun transform(tileEntity: TileEntityDish) {
+        GlStateManager.translate(0.5, 1.5 / 16.0 + 1 / 64.0, 0.5)
+        GlStateManager.rotate((-tileEntity.rotation).toFloat(), 0f, 1f, 0f)
+        if (tileEntity.standing) {
+            GlStateManager.translate(0.0, 0.25, 0.0)
+        } else {
+            GlStateManager.rotate(90f, 1f, 0f, 0f)
+        }
+    }
+}
+
+
+// Common
+
+abstract class BlockPedestal<T : TileEntityPedestal>(material: Material, private val validator: (TileEntity) -> T?) : BlockContainer(material), IPlaceAcceptorBlock {
+    private fun getTileEntity(world: World, blockPos: BlockPos) = world.getTileEntity(blockPos)?.let { validator(it) }
+    private fun getItemStack(world: World, blockPos: BlockPos) = getTileEntity(world, blockPos)?.itemStack
+
+
+    // ドロップ
+
+    // クリエイティブピックでの取得アイテム
+    @Deprecated("Deprecated in Java")
+    override fun getItem(world: World, blockPos: BlockPos, blockState: IBlockState): ItemStack = getItemStack(world, blockPos)?.orNull ?: super.getItem(world, blockPos, blockState)
+
+    // 破壊時ドロップ
+    override fun breakBlock(world: World, blockPos: BlockPos, blockState: IBlockState) {
+        val tileEntity = getTileEntity(world, blockPos) ?: return super.breakBlock(world, blockPos, blockState)
+        InventoryHelper.spawnItemStack(world, blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble(), tileEntity.itemStack)
+        world.updateComparatorOutputLevel(blockPos, this)
+    }
+
+    // シルクタッチ無効
+    override fun canSilkHarvest(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer) = false
+
+
+    // レンダリング
+
+    @SideOnly(Side.CLIENT)
+    override fun getBlockLayer() = BlockRenderLayer.CUTOUT_MIPPED
+    override fun getRenderType(state: IBlockState) = EnumBlockRenderType.MODEL
+    override fun isOpaqueCube(state: IBlockState) = false
+    override fun isFullCube(state: IBlockState) = false
+
+
+    // アクション
 
     override fun place(world: World, blockPos: BlockPos, player: EntityPlayer, placeExchanger: IPlaceExchanger): Boolean {
-        val tileEntity = world.getTileEntity(blockPos)
-        if (tileEntity !is TileEntityDish) return false // 異常なTileだった場合は中止
+        val tileEntity = getTileEntity(world, blockPos) ?: return false // 異常なTileだった場合は中止
         if (tileEntity.itemStack.isEmpty) { // 設置
 
             val itemStack = placeExchanger.deploy()
@@ -200,8 +245,7 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceAcceptorBlock {
             // アイテムを設置
             tileEntity.itemStack = itemStack
 
-            // 角度調整
-            tileEntity.rotation = round(player.rotationYawHead.toDouble() / 45) * 45
+            onDeploy(world, blockPos, tileEntity, player, itemStack)
 
             tileEntity.markDirty()
             tileEntity.sendUpdatePacket()
@@ -213,6 +257,8 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceAcceptorBlock {
             val itemStackContained = tileEntity.itemStack
             tileEntity.itemStack = ItemStack.EMPTY
 
+            onHarvest(world, blockPos, tileEntity, player)
+
             tileEntity.markDirty()
             tileEntity.sendUpdatePacket()
 
@@ -222,18 +268,20 @@ class BlockDish : BlockContainer(Material.CIRCUITS), IPlaceAcceptorBlock {
             return true
         }
     }
+
+    open fun onDeploy(world: World, blockPos: BlockPos, tileEntity: T, player: EntityPlayer, itemStack: ItemStack) = Unit
+    open fun onHarvest(world: World, blockPos: BlockPos, tileEntity: T, player: EntityPlayer) = Unit
 }
 
-class TileEntityDish : TileEntity() {
+abstract class TileEntityPedestal : TileEntity() {
     var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(1, ItemStack.EMPTY)
-    var rotation = 0.0
-    var standing = false
+    var itemStack: ItemStack
+        get() = itemStacks[0]
+        set(itemStack) = run { itemStacks[0] = itemStack }
 
     override fun writeToNBT(nbt: NBTTagCompound): NBTTagCompound {
         super.writeToNBT(nbt)
         ItemStackHelper.saveAllItems(nbt, itemStacks)
-        nbt.setDouble("rotation", rotation)
-        nbt.setBoolean("standing", standing)
         return nbt
     }
 
@@ -241,9 +289,8 @@ class TileEntityDish : TileEntity() {
         super.readFromNBT(nbt)
         itemStacks.fill(ItemStack.EMPTY)
         ItemStackHelper.loadAllItems(nbt, itemStacks)
-        rotation = nbt.getDouble("rotation")
-        standing = nbt.getBoolean("standing")
     }
+
 
     override fun getUpdatePacket() = SPacketUpdateTileEntity(pos, 9, updateTag)
 
@@ -255,31 +302,29 @@ class TileEntityDish : TileEntity() {
     }
 
     fun sendUpdatePacket() = world.playerEntities.forEach { if (it is EntityPlayerMP) it.connection.sendPacket(updatePacket) }
-
-
-    var itemStack: ItemStack
-        get() = itemStacks[0]
-        set(itemStack) = run { itemStacks[0] = itemStack }
 }
 
 @SideOnly(Side.CLIENT)
-class TileEntityRendererDish : TileEntitySpecialRenderer<TileEntityDish>() {
-    override fun render(tileEntity: TileEntityDish, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int, alpha: Float) {
-        val itemStack = tileEntity.itemStack
-        if (!itemStack.isEmpty) {
-            GlStateManager.pushMatrix()
+abstract class TileEntityRendererPedestal<T : TileEntityPedestal> : TileEntitySpecialRenderer<T>() {
+    override fun render(tileEntity: T, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int, alpha: Float) {
+        val itemStack = tileEntity.itemStack.orNull ?: return
+        matrix {
             GlStateManager.translate(x, y, z)
-            GlStateManager.translate(0.5, 1.5 / 16.0 + 1 / 64.0, 0.5)
-            GlStateManager.rotate((-tileEntity.rotation).toFloat(), 0f, 1f, 0f)
-            if (tileEntity.standing) {
-                GlStateManager.translate(0.0, 0.25, 0.0)
-            } else {
-                GlStateManager.rotate(90f, 1f, 0f, 0f)
-            }
+            transform(tileEntity)
             renderItem(itemStack)
+        }
+    }
+
+    private inline fun <O> matrix(block: () -> O): O {
+        GlStateManager.pushMatrix()
+        try {
+            return block()
+        } finally {
             GlStateManager.popMatrix()
         }
     }
+
+    abstract fun transform(tileEntity: T)
 
     private fun renderItem(itemStack: ItemStack) {
         if (itemStack.isEmpty) return
