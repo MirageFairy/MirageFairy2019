@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-val ItemStack.orNull get() = takeIf { !it.isEmpty }
+val ItemStack.notEmptyOrNull get() = takeIf { !it.isEmpty }
 val ItemStack?.orEmpty: ItemStack get() = this ?: ItemStack.EMPTY
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -29,7 +29,7 @@ fun ItemStack.copy(count: Int): ItemStack = copy().also { it.count = count }
 
 fun Item.getSubItems(creativeTab: CreativeTabs): List<ItemStack> = NonNullList.create<ItemStack>().also { getSubItems(creativeTab, it) }
 
-val ItemStack.containerItem get() = if (item.hasContainerItem(this)) item.getContainerItem(this).orNull else null
+val ItemStack.containerItem get() = if (item.hasContainerItem(this)) item.getContainerItem(this).notEmptyOrNull else null
 
 /** このアイテムにカスタム名が存在する場合のみ、それを返します。 */
 val ItemStack.customName get() = if (hasDisplayName()) displayName else null

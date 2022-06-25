@@ -3,7 +3,7 @@ package miragefairy2019.mod.fairystickcraft
 import miragefairy2019.libkt.containerItem
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.orEmpty
-import miragefairy2019.libkt.orNull
+import miragefairy2019.libkt.notEmptyOrNull
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.init.Blocks
@@ -201,7 +201,7 @@ class FairyStickCraftConditionUseItem(private val ingredient: Ingredient) : IFai
             val itemStackFairyStickOriginal = environment.itemStackFairyStick // 可変プロパティなので一時変数に確保
             val itemStackFairyStick = itemStackFairyStickOriginal.copy() // ツールのアイテムスタックのMutableなコピー
             val itemStackContainer = itemStackFairyStick.splitStack(1).containerItem // 使用分の耐久の削れたツール
-            val itemStackFairyStickRemaining = itemStackFairyStick.orNull // 未使用分のツールのスタック
+            val itemStackFairyStickRemaining = itemStackFairyStick.notEmptyOrNull // 未使用分のツールのスタック
 
             // ツールの消費
             if (itemStackFairyStickRemaining != null) { // スタックが残っているとき

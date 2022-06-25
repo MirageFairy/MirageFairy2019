@@ -21,7 +21,7 @@ import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.normal
-import miragefairy2019.libkt.orNull
+import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.mod.Main
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
@@ -211,7 +211,7 @@ abstract class BlockPedestal<T : TileEntityPedestal>(material: Material, private
 
     // クリエイティブピックでの取得アイテム
     @Deprecated("Deprecated in Java")
-    override fun getItem(world: World, blockPos: BlockPos, blockState: IBlockState): ItemStack = getItemStack(world, blockPos)?.orNull ?: super.getItem(world, blockPos, blockState)
+    override fun getItem(world: World, blockPos: BlockPos, blockState: IBlockState): ItemStack = getItemStack(world, blockPos)?.notEmptyOrNull ?: super.getItem(world, blockPos, blockState)
 
     // 破壊時ドロップ
     override fun breakBlock(world: World, blockPos: BlockPos, blockState: IBlockState) {
@@ -307,7 +307,7 @@ abstract class TileEntityPedestal : TileEntity() {
 @SideOnly(Side.CLIENT)
 abstract class TileEntityRendererPedestal<T : TileEntityPedestal> : TileEntitySpecialRenderer<T>() {
     override fun render(tileEntity: T, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int, alpha: Float) {
-        val itemStack = tileEntity.itemStack.orNull ?: return
+        val itemStack = tileEntity.itemStack.notEmptyOrNull ?: return
         matrix {
             GlStateManager.translate(x, y, z)
             transform(tileEntity)

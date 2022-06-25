@@ -4,7 +4,7 @@ import miragefairy2019.lib.proxy
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.BlockRegion
 import miragefairy2019.libkt.getRandomItem
-import miragefairy2019.libkt.orNull
+import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.artifacts.ItemFairyCrystal
 import miragefairy2019.mod.artifacts.getRateBoost
@@ -85,7 +85,7 @@ class ItemPrayerWheel(private val maxTryCountPerTick: Int) : ItemFairyWeaponMagi
             val dropTable = environment.getDropTable(variantFairyCrystal.dropRank, commonBoost, rareBoost)
 
             // ガチャを引く
-            val itemStackDrop = dropTable.getRandomItem(player.world.rand)?.orNull ?: return // ガチャが引けなかった場合は無視
+            val itemStackDrop = dropTable.getRandomItem(player.world.rand)?.notEmptyOrNull ?: return // ガチャが引けなかった場合は無視
 
             // 成立
 

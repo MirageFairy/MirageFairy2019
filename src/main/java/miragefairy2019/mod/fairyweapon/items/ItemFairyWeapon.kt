@@ -18,7 +18,7 @@ import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.lightPurple
-import miragefairy2019.libkt.orNull
+import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.translateToLocal
@@ -98,7 +98,7 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
 
         tooltip += formattedText { "耐久値: ${(getMaxDamage(itemStack) - getDamage(itemStack)).coerceAtLeast(0)} / ${getMaxDamage(itemStack)}"().green } // 耐久値 TODO translate
 
-        getCombinedFairy(itemStack).orNull?.let { tooltip += formattedText { "搭乗中: ${it.displayName}"().aqua } } // 搭乗中の妖精 // TODO translate
+        getCombinedFairy(itemStack).notEmptyOrNull?.let { tooltip += formattedText { "搭乗中: ${it.displayName}"().aqua } } // 搭乗中の妖精 // TODO translate
 
         // 妖精魔法ステータス
         val fairy = Minecraft.getMinecraft().player?.let { findFairy(itemStack, it) } ?: Pair(EMPTY_ITEM_STACK, EMPTY_FAIRY)
@@ -193,7 +193,7 @@ class TileEntityItemStackRendererFairyWeapon : TileEntityItemStackRenderer() {
         GlStateManager.disableRescaleNormal()
 
         // 搭乗妖精描画
-        val itemStackFairy = getCombinedFairy(itemStack).orNull
+        val itemStackFairy = getCombinedFairy(itemStack).notEmptyOrNull
         if (itemStackFairy != null) {
             val bakedModel = Minecraft.getMinecraft().renderItem.getItemModelWithOverrides(itemStackFairy, null, null)
             GlStateManager.pushMatrix()

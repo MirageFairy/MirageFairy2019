@@ -29,7 +29,7 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.ingredient
-import miragefairy2019.libkt.orNull
+import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.setCustomModelResourceLocations
@@ -417,7 +417,7 @@ class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
     override fun getItemBurnTime(itemStack: ItemStack) = getVariant(itemStack)?.burnTime ?: -1
 
 
-    private fun getContainerItemStack(itemStack: ItemStack) = getVariant(itemStack)?.containerItemSupplier?.invoke()?.orNull
+    private fun getContainerItemStack(itemStack: ItemStack) = getVariant(itemStack)?.containerItemSupplier?.invoke()?.notEmptyOrNull
     override fun hasContainerItem(itemStack: ItemStack) = getContainerItemStack(itemStack) != null
     override fun getContainerItem(itemStack: ItemStack) = getContainerItemStack(itemStack) ?: EMPTY_ITEM_STACK
 }

@@ -23,7 +23,7 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.gold
-import miragefairy2019.libkt.orNull
+import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.totalWeight
@@ -160,7 +160,7 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
         val itemStackCrystal = player.getHeldItem(hand)
         if (itemStackCrystal.isEmpty) return EnumActionResult.PASS
         val variant = getVariant(itemStackCrystal) ?: return EnumActionResult.PASS
-        val crystalItemStack = player.getHeldItem(hand).orNull ?: return EnumActionResult.PASS // アイテムが消えた場合は中止
+        val crystalItemStack = player.getHeldItem(hand).notEmptyOrNull ?: return EnumActionResult.PASS // アイテムが消えた場合は中止
         if (world.isRemote) return EnumActionResult.SUCCESS // サーバースレッドのみ
 
 
@@ -180,7 +180,7 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
         if (!player.isSneaking) {
 
             // ガチャを引く
-            val resultItemStack = dropTable.getRandomItem(world.rand)?.orNull ?: return EnumActionResult.SUCCESS
+            val resultItemStack = dropTable.getRandomItem(world.rand)?.notEmptyOrNull ?: return EnumActionResult.SUCCESS
 
             // ガチャ成立
 
@@ -231,7 +231,7 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
         val dropTable = environment.getDropTable(variant.dropRank, commonBoost, rareBoost)
 
         // ガチャを引く
-        val resultItemStack = dropTable.getRandomItem(world.rand)?.orNull ?: return itemStack
+        val resultItemStack = dropTable.getRandomItem(world.rand)?.notEmptyOrNull ?: return itemStack
 
         // ガチャ成立
 
