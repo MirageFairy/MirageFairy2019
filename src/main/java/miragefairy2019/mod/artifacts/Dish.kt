@@ -14,12 +14,16 @@ import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
 import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataPoint
+import miragefairy2019.lib.resourcemaker.DataResult
+import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataUv
 import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.resourcemaker.normal
 import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.libkt.enJa
@@ -103,6 +107,19 @@ val dishModule = module {
     item({ ItemBlock(blockDish()) }, "dish") {
         setCustomModelResourceLocation()
         makeItemModel { block }
+        makeRecipe("fairymaterials/dish") { // TODO
+            DataShapedRecipe(
+                pattern = listOf(
+                    " p ",
+                    "qqq"
+                ),
+                key = mapOf(
+                    "q" to DataOreIngredient(ore = "gemQuartz"),
+                    "p" to WandType.POLISHING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:dish")
+            )
+        }
     }
     onMakeLang { enJa("tile.dish.name", "Dish", "皿") }
     tileEntity("dish", TileEntityDish::class.java)
