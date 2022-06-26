@@ -5,4 +5,5 @@ import miragefairy2019.lib.modinitializer.module
 val pedestalModule = module {
     dishModule(this)
     swordStandModule(this)
+    mortarModule(this)
 }

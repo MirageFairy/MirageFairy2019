@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " G ",
+    "#G#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "gemDiamond"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "rodMirageFairyPlastic"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:mortar",
+    "data": 3,
+    "count": 1
+  }
+}

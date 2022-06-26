@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " G ",
+    "#G#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "gemQuartz"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019ManaRodQuartz"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:mortar",
+    "data": 2,
+    "count": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=stone": {
+      "model": "miragefairy2019:stone_mortar"
+    },
+    "variant=iron": {
+      "model": "miragefairy2019:iron_mortar"
+    },
+    "variant=quartz": {
+      "model": "miragefairy2019:quartz_mortar"
+    },
+    "variant=diamond": {
+      "model": "miragefairy2019:diamond_mortar"
+    }
+  }
+}
