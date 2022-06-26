@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:item_frame"
+    },
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:item_frame",
+    "count": 1
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "miragefairy2019:item_frame"
+    },
+    "facing=south": {
+      "model": "miragefairy2019:item_frame",
+      "x": 90
+    },
+    "facing=west": {
+      "model": "miragefairy2019:item_frame",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "miragefairy2019:item_frame",
+      "x": 90,
+      "y": 180
+    },
+    "facing=east": {
+      "model": "miragefairy2019:item_frame",
+      "x": 90,
+      "y": 270
+    },
+    "facing=up": {
+      "model": "miragefairy2019:item_frame",
+      "x": 180
+    }
+  }
+}

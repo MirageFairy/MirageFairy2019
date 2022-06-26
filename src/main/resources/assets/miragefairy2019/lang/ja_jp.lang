@@ -407,6 +407,7 @@ tile.stoneMortar.name=石の乳鉢
 tile.ironMortar.name=鉄の乳鉢
 tile.quartzMortar.name=ネザークォーツの乳鉢
 tile.diamondMortar.name=ダイヤモンドの乳鉢
+tile.itemFrame.name=額縁ブロック
 item.gemApatite.name=燐灰石
 item.gemFluorite.name=蛍石
 item.gemSulfur.name=硫黄

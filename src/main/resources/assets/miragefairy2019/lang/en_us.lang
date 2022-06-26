@@ -406,6 +406,7 @@ tile.stoneMortar.name=Stone Mortar
 tile.ironMortar.name=Iron Mortar
 tile.quartzMortar.name=Nether Quartz Mortar
 tile.diamondMortar.name=Diamond Mortar
+tile.itemFrame.name=Item Frame Block
 item.gemApatite.name=Apatite
 item.gemFluorite.name=Fluorite
 item.gemSulfur.name=Sulfur

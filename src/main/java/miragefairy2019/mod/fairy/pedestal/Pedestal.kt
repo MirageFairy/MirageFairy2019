@@ -6,4 +6,5 @@ val pedestalModule = module {
     dishModule(this)
     swordStandModule(this)
     mortarModule(this)
+    itemFrameModule(this)
 }
