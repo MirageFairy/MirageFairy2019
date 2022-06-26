@@ -11,5 +11,6 @@ val jeiModule = module {
         enJa("jei.miragefairy2019.foodAura.title", "Food Aura", "フードオーラ")
         enJa("jei.miragefairy2019.manualRepair.title", "Manual Repair", "手入れ")
         enJa("jei.miragefairy2019.mfa.title", "MFA", "MFA")
+        enJa("jei.miragefairy2019.mortar.title", "Mortar", "乳鉢")
     }
 }
