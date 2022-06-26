@@ -1,10 +1,6 @@
 package miragefairy2019.mod.fairy.pedestal
 
-import miragefairy2019.api.IMortarRecipe
 import miragefairy2019.api.IPlaceExchanger
-import miragefairy2019.api.MortarRecipeRegistry
-import miragefairy2019.common.toOreName
-import miragefairy2019.lib.MortarRecipe
 import miragefairy2019.lib.getMortarRecipe
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -31,11 +27,9 @@ import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
-import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
-import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.white
@@ -44,8 +38,6 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.placeditem.PlacedItem
 import mirrg.kotlin.hydrogen.castOrNull
 import mirrg.kotlin.hydrogen.formatAs
-import mirrg.kotlin.hydrogen.toUpperCamelCase
-import mirrg.kotlin.hydrogen.unit
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyEnum
@@ -226,45 +218,6 @@ val mortarModule = module {
 
         // 翻訳生成
         onMakeLang { enJa("tile.${variant.blockUnlocalizedName}.name", "${variant.englishName} Mortar", "${variant.japaneseName}の乳鉢") }
-
-    }
-
-    // TODO move -> recipe
-    // 対応レシピ登録
-    onAddRecipe {
-        fun r(recipe: IMortarRecipe) = unit { MortarRecipeRegistry.mortarRecipes += recipe }
-        fun r(level: Int, inputOreName: String, outputOreName: String) = r(MortarRecipe(level, inputOreName.oreIngredient) { outputOreName.toOreName().copyItemStack()!! })
-        fun r(level: Int, materialName: String) = r(level, "gem${materialName.toUpperCamelCase()}", "dust${materialName.toUpperCamelCase()}")
-
-        r(1, "coal")
-        r(1, "charcoal")
-        r(4, "diamond")
-        r(2, "lapis")
-        r(3, "emerald")
-        r(2, "quartz")
-        r(1, "enderpearl", "dustEnderPearl")
-
-        r(1, "apatite")
-        r(1, "fluorite")
-        r(1, "sulfur")
-        r(1, "cinnabar")
-        r(2, "moonstone")
-        r(1, "magnetite")
-
-        r(1, "saltpeter")
-        r(3, "pyrope")
-        r(1, "smithsonite")
-        r(2, "nephrite")
-        r(4, "topaz")
-        r(3, "tourmaline")
-        r(2, "heliolite")
-        r(2, "labradorite")
-        r(3, "peridot")
-        r(4, "ruby")
-        r(4, "sapphire")
-
-        r(2, "crystalCertusQuartz", "dustCertusQuartz")
-        r(2, "crystalFluix", "dustFluix")
 
     }
 
