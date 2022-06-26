@@ -14,6 +14,7 @@ import miragefairy2019.api.MortarRecipeRegistry
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.translateToLocal
+import miragefairy2019.mod.fairy.pedestal.MortarVariant
 import miragefairy2019.mod.fairy.pedestal.itemBlockMortar
 import net.minecraft.client.Minecraft
 
@@ -29,29 +30,32 @@ class PluginMortar : IModPlugin {
             override fun getTitle() = translateToLocal("jei.$uid.title")
             override fun getModName() = "MirageFairy2019"
             override fun getBackground() = object : IDrawable {
-                override fun getWidth() = 18 + 4 + 18
+                override fun getWidth() = 18 + 4 + 18 + 4 + 18
                 override fun getHeight() = 18 * 1
                 override fun draw(minecraft: Minecraft, xOffset: Int, yOffset: Int) {
                     drawSlot(0f, 0f)
                     drawSlot(18f + 4f, 0f)
+                    drawSlot(18f + 4f + 18f + 4f, 0f)
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(itemBlockMortar().createItemStack())
+            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(itemBlockMortar().createItemStack(metadata = MortarVariant.DIAMOND.metadata))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 0, 0)
-                recipeLayout.itemStacks.init(1, false, 18 + 4, 0)
+                recipeLayout.itemStacks.init(1, true, 18 + 4, 0)
+                recipeLayout.itemStacks.init(2, false, 18 + 4 + 18 + 4, 0)
                 recipeLayout.itemStacks.set(ingredients)
             }
         })
     }
 
     override fun register(registry: IModRegistry) {
-        registry.addRecipeCatalyst(itemBlockMortar().createItemStack(), uid)
         registry.addRecipes(MortarRecipeRegistry.mortarRecipes.map { recipe ->
             IRecipeWrapper { ingredients ->
-                ingredients.setInputLists(VanillaTypes.ITEM, listOf(registry.jeiHelpers.stackHelper.toItemStackList(recipe.getInput())))
-                ingredients.setOutputLists(VanillaTypes.ITEM, listOf(listOf(recipe.getOutput())))
+                val inputList = registry.jeiHelpers.stackHelper.toItemStackList(recipe.input)
+                val machineList = MortarVariant.values().filter { it.level >= recipe.level }.map { itemBlockMortar().createItemStack(metadata = it.metadata) }
+                ingredients.setInputLists(VanillaTypes.ITEM, listOf(inputList, machineList))
+                ingredients.setOutputLists(VanillaTypes.ITEM, listOf(listOf(recipe.output)))
             }
         }, uid)
     }

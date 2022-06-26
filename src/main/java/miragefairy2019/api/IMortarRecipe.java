@@ -7,6 +7,16 @@ import javax.annotation.Nonnull;
 
 public interface IMortarRecipe {
 
+    /**
+     * @return <ul>
+     * <li>1: 石</li>
+     * <li>2: 鉄</li>
+     * <li>3: クォーツ</li>
+     * <li>4: ダイヤモンド</li>
+     * </ul>
+     */
+    public int getLevel();
+
     @Nonnull
     public Ingredient getInput();
 
