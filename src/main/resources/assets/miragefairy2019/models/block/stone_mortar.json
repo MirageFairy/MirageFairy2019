@@ -164,7 +164,7 @@
     }
   ],
   "textures": {
-    "particle": "minecraft:blocks/stone_diorite_smooth",
-    "main": "minecraft:blocks/stone_diorite_smooth"
+    "particle": "minecraft:blocks/cobblestone",
+    "main": "minecraft:blocks/cobblestone"
   }
 }

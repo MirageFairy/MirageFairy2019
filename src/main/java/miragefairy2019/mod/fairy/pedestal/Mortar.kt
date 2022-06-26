@@ -79,7 +79,7 @@ enum class MortarVariant(
 ) : IStringSerializable {
     STONE(
         "stone", "stone", "Stone", "石",
-        "minecraft:blocks/stone_diorite_smooth", "stone", "mirageFairyCrystal",
+        "minecraft:blocks/cobblestone", "cobblestone", "mirageFairyCrystal",
         0, 1, 0.03
     ),
     IRON(
