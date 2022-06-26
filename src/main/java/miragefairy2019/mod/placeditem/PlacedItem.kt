@@ -46,7 +46,7 @@ object PlacedItem {
             )
         }
         tileEntity("placed_item", TileEntityPlacedItem::class.java)
-        tileEntityRenderer(TileEntityPlacedItem::class.java, { TileEntityRendererPlacedItem() })
+        tileEntityRenderer(TileEntityPlacedItem::class.java) { TileEntityRendererPlacedItem() }
 
         // キーバインディング
         onInitKeyBinding {

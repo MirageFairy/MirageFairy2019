@@ -148,7 +148,7 @@ val mortarModule = module {
 
         // タイルエンティティ登録
         tileEntity("mortar", TileEntityMortar::class.java)
-        tileEntityRenderer(TileEntityMortar::class.java, { TileEntityRendererPedestal() })
+        tileEntityRenderer(TileEntityMortar::class.java) { TileEntityRendererPedestal() }
 
     }
 

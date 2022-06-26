@@ -111,7 +111,7 @@ val dishModule = module {
     }
     onMakeLang { enJa("tile.dish.name", "Dish", "皿") }
     tileEntity("dish", TileEntityDish::class.java)
-    tileEntityRenderer(TileEntityDish::class.java, { TileEntityRendererPedestal() })
+    tileEntityRenderer(TileEntityDish::class.java) { TileEntityRendererPedestal() }
 }
 
 class BlockDish : BlockPlacedPedestal<TileEntityDish>(Material.CIRCUITS, { it as? TileEntityDish }) {

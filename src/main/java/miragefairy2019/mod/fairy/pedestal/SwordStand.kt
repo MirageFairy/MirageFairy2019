@@ -110,7 +110,7 @@ val swordStandModule = module {
     }
     onMakeLang { enJa("tile.stoneSwordStand.name", "Stone Sword Stand", "ガルガーノの岩") }
     tileEntity("stone_sword_stand", TileEntitySwordStand::class.java)
-    tileEntityRenderer(TileEntitySwordStand::class.java, { TileEntityRendererPedestal() })
+    tileEntityRenderer(TileEntitySwordStand::class.java) { TileEntityRendererPedestal() }
 }
 
 class BlockSwordStand : BlockPedestal<TileEntitySwordStand>(Material.CIRCUITS, { it as? TileEntitySwordStand }) {

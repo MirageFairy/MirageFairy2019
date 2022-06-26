@@ -227,7 +227,7 @@ object ChatWebhook {
         // 共通
 
         tileEntity("chat_webhook_transmitter", TileEntityChatWebhookTransmitter::class.java)
-        tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java, { TileEntityRendererChatWebhookTransmitter() })
+        tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java) { TileEntityRendererChatWebhookTransmitter() }
 
         // Gui
         onInit {
