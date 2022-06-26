@@ -5,7 +5,6 @@ import miragefairy2019.lib.modinitializer.module
 val recipesModule = module {
     fairyMetamorphosisModule(this)
     wandPulverizationRecipesModule(this)
-    anvilPulverizationRecipesModule(this)
     fairyDilutionRecipeModule(this)
     fairySummoningRecipeModule(this)
     wandRecipeModule(this)
