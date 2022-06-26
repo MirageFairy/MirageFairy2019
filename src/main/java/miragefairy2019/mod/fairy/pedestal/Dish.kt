@@ -1,5 +1,6 @@
 package miragefairy2019.mod.fairy.pedestal
 
+import miragefairy2019.api.IPlaceExchanger
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -140,24 +141,6 @@ class BlockDish : BlockPlacedPedestal<TileEntityDish>(Material.CIRCUITS, { it as
     override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) = boundingBox
     override fun getCollisionBoundingBox(blockState: IBlockState, worldIn: IBlockAccess, pos: BlockPos) = NULL_AABB
 
-
-    // アクション
-
-    override fun onAdjust(world: World, blockPos: BlockPos, tileEntity: TileEntityDish, player: EntityPlayer) {
-        if (player.isSneaking) {
-            tileEntity.standing = !tileEntity.standing
-        } else {
-            tileEntity.rotation += 45.0
-            if (tileEntity.rotation >= 360) {
-                tileEntity.rotation -= 360.0
-            }
-        }
-    }
-
-    override fun onDeploy(world: World, blockPos: BlockPos, tileEntity: TileEntityDish, player: EntityPlayer, itemStack: ItemStack) {
-        tileEntity.rotation = round(player.rotationYawHead.toDouble() / 45) * 45 // 角度調整
-    }
-
 }
 
 class TileEntityDish : TileEntityPedestal() {
@@ -185,5 +168,27 @@ class TileEntityDish : TileEntityPedestal() {
         } else {
             transformProxy.rotate(90f, 1f, 0f, 0f)
         }
+    }
+
+
+    override fun onAdjust(player: EntityPlayer, placeExchanger: IPlaceExchanger): Boolean {
+        if (super.onAdjust(player, placeExchanger)) return true
+
+        // 角度の調整
+        if (player.isSneaking) {
+            standing = !standing
+        } else {
+            rotation += 45.0
+            if (rotation >= 360) {
+                rotation -= 360.0
+            }
+        }
+
+        return true
+    }
+
+    override fun onDeploy(player: EntityPlayer) {
+        rotation = round(player.rotationYawHead.toDouble() / 45) * 45 // 角度調整
+        standing = false
     }
 }

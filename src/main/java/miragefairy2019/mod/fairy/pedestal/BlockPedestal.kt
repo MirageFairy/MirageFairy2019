@@ -2,6 +2,7 @@ package miragefairy2019.mod.fairy.pedestal
 
 import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.notEmptyOrNull
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
@@ -14,6 +15,7 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
+import net.minecraft.init.SoundEvents
 import net.minecraft.inventory.InventoryHelper
 import net.minecraft.inventory.ItemStackHelper
 import net.minecraft.item.ItemStack
@@ -26,6 +28,7 @@ import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.NonNullList
+import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -34,19 +37,19 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 abstract class BlockPedestal<T : TileEntityPedestal>(material: Material, private val validator: (TileEntity) -> T?) : BlockContainer(material), IPlaceAcceptorBlock {
     fun getTileEntity(world: World, blockPos: BlockPos) = world.getTileEntity(blockPos)?.let { validator(it) }
-    fun getItemStack(world: World, blockPos: BlockPos) = getTileEntity(world, blockPos)?.itemStack
+    fun getItemStack(world: World, blockPos: BlockPos) = getTileEntity(world, blockPos)?.itemStackOrNull
 
 
     // ドロップ
 
     // クリエイティブピックでの取得アイテム
     @Deprecated("Deprecated in Java")
-    override fun getItem(world: World, blockPos: BlockPos, blockState: IBlockState): ItemStack = getItemStack(world, blockPos)?.notEmptyOrNull ?: super.getItem(world, blockPos, blockState)
+    override fun getItem(world: World, blockPos: BlockPos, blockState: IBlockState): ItemStack = getItemStack(world, blockPos) ?: super.getItem(world, blockPos, blockState)
 
     // 破壊時ドロップ
     override fun breakBlock(world: World, blockPos: BlockPos, blockState: IBlockState) {
         val tileEntity = getTileEntity(world, blockPos) ?: return super.breakBlock(world, blockPos, blockState)
-        InventoryHelper.spawnItemStack(world, blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble(), tileEntity.itemStack)
+        InventoryHelper.spawnItemStack(world, blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble(), tileEntity.itemStackOrNull ?: EMPTY_ITEM_STACK)
         world.updateComparatorOutputLevel(blockPos, this)
     }
 
@@ -67,15 +70,70 @@ abstract class BlockPedestal<T : TileEntityPedestal>(material: Material, private
 
     override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (world.isRemote) return true
-        val tileEntity = getTileEntity(world, blockPos) ?: return true
+        val tileEntity = getTileEntity(world, blockPos) ?: return true // 異常なTileだった場合は中止
 
-        if (tileEntity.itemStack.isEmpty) {
-            val heldItemStack = player.heldItemMainhand.notEmptyOrNull
-            if (heldItemStack != null) {
-                tileEntity.itemStack = heldItemStack.splitStack(1)
+        val placeExchanger = object : IPlaceExchanger {
+            override fun harvest(itemStack: ItemStack) {
+                world.playSound(
+                    null,
+                    blockPos,
+                    SoundEvents.ENTITY_ITEM_PICKUP,
+                    SoundCategory.PLAYERS,
+                    0.2f,
+                    ((Math.random() - Math.random()) * 1.4 + 2.0).toFloat()
+                )
+                if (!player.inventory.addItemStackToInventory(itemStack)) {
+                    player.dropItem(itemStack, false)
+                }
             }
-        } else {
-            onAdjust(world, blockPos, tileEntity, player)
+
+            override fun deploy(): ItemStack? {
+                val splitItemStack = player.heldItemMainhand.notEmptyOrNull?.splitStack(1)
+                if (splitItemStack != null) {
+                    world.playSound(
+                        null,
+                        blockPos,
+                        SoundEvents.ENTITY_ITEM_PICKUP,
+                        SoundCategory.PLAYERS,
+                        0.2f,
+                        ((Math.random() - Math.random()) * 1.4 + 2.0).toFloat()
+                    )
+                }
+                return splitItemStack
+            }
+        }
+
+        if (tileEntity.onAdjust(player, placeExchanger)) {
+            tileEntity.markDirty()
+            tileEntity.sendUpdatePacket()
+        }
+
+        return true
+    }
+
+    override fun place(world: World, blockPos: BlockPos, player: EntityPlayer, placeExchanger: IPlaceExchanger): Boolean {
+        val tileEntity = getTileEntity(world, blockPos) ?: return false // 異常なTileだった場合は中止
+
+        if (tileEntity.itemStackOrNull == null) { // 設置
+
+            val itemStack = placeExchanger.deploy() ?: return false
+
+            // アイテムを設置
+            tileEntity.itemStackOrNull = itemStack
+
+            tileEntity.onDeploy(player)
+
+        } else { // 撤去
+
+            // アイテムを回収
+            val itemStackContained = tileEntity.itemStackOrNull!!
+            tileEntity.itemStackOrNull = null
+
+            tileEntity.onHarvest(player)
+
+            // アイテムを増やす
+            placeExchanger.harvest(itemStackContained)
+
         }
 
         tileEntity.markDirty()
@@ -83,43 +141,6 @@ abstract class BlockPedestal<T : TileEntityPedestal>(material: Material, private
         return true
     }
 
-    override fun place(world: World, blockPos: BlockPos, player: EntityPlayer, placeExchanger: IPlaceExchanger): Boolean {
-        val tileEntity = getTileEntity(world, blockPos) ?: return false // 異常なTileだった場合は中止
-        if (tileEntity.itemStack.isEmpty) { // 設置
-
-            val itemStack = placeExchanger.deploy()
-            if (itemStack.isEmpty) return false
-
-            // アイテムを設置
-            tileEntity.itemStack = itemStack
-
-            onDeploy(world, blockPos, tileEntity, player, itemStack)
-
-            tileEntity.markDirty()
-            tileEntity.sendUpdatePacket()
-
-            return true
-        } else { // 撤去
-
-            // アイテムを回収
-            val itemStackContained = tileEntity.itemStack
-            tileEntity.itemStack = ItemStack.EMPTY
-
-            onHarvest(world, blockPos, tileEntity, player)
-
-            tileEntity.markDirty()
-            tileEntity.sendUpdatePacket()
-
-            // アイテムを増やす
-            placeExchanger.harvest(itemStackContained)
-
-            return true
-        }
-    }
-
-    open fun onAdjust(world: World, blockPos: BlockPos, tileEntity: T, player: EntityPlayer) = Unit
-    open fun onDeploy(world: World, blockPos: BlockPos, tileEntity: T, player: EntityPlayer, itemStack: ItemStack) = Unit
-    open fun onHarvest(world: World, blockPos: BlockPos, tileEntity: T, player: EntityPlayer) = Unit
 }
 
 abstract class BlockPlacedPedestal<T : TileEntityPedestal>(material: Material, validator: (TileEntity) -> T?) : BlockPedestal<T>(material, validator) {
@@ -146,9 +167,9 @@ interface ITransformProxy {
 
 abstract class TileEntityPedestal : TileEntity() {
     var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(1, ItemStack.EMPTY)
-    var itemStack: ItemStack
-        get() = itemStacks[0]
-        set(itemStack) = run { itemStacks[0] = itemStack }
+    var itemStackOrNull: ItemStack?
+        get() = itemStacks[0].notEmptyOrNull
+        set(itemStack) = run { itemStacks[0] = itemStack ?: EMPTY_ITEM_STACK }
 
     override fun writeToNBT(nbt: NBTTagCompound): NBTTagCompound {
         super.writeToNBT(nbt)
@@ -176,12 +197,32 @@ abstract class TileEntityPedestal : TileEntity() {
 
 
     abstract fun transform(transformProxy: ITransformProxy)
+
+
+    /** @return アクションが行われた場合true。 */
+    open fun onAdjust(player: EntityPlayer, placeExchanger: IPlaceExchanger): Boolean {
+
+        // アイテムが空で、アイテムを持っている場合、それを展示する
+        if (itemStackOrNull == null) {
+            val heldItemStack = placeExchanger.deploy()
+            if (heldItemStack != null) {
+                itemStackOrNull = heldItemStack
+                onDeploy(player)
+                return true
+            }
+        }
+
+        return false
+    }
+
+    open fun onDeploy(player: EntityPlayer) = Unit
+    open fun onHarvest(player: EntityPlayer) = Unit
 }
 
 @SideOnly(Side.CLIENT)
 class TileEntityRendererPedestal<T : TileEntityPedestal> : TileEntitySpecialRenderer<T>() {
     override fun render(tileEntity: T, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int, alpha: Float) {
-        val itemStack = tileEntity.itemStack.notEmptyOrNull ?: return
+        val itemStack = tileEntity.itemStackOrNull ?: return
         matrix {
             GlStateManager.translate(x, y, z)
             tileEntity.transform(object : ITransformProxy {

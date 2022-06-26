@@ -3,6 +3,7 @@ package miragefairy2019.mod.placeditem
 import io.netty.buffer.ByteBuf
 import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
+import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.libkt.sq
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
@@ -68,10 +69,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
                     }
                 }
 
-                override fun deploy(): ItemStack {
-                    val itemStackHeld = player.getHeldItem(EnumHand.MAIN_HAND)
-                    return if (itemStackHeld.isEmpty) ItemStack.EMPTY.copy() else itemStackHeld.splitStack(1)
-                }
+                override fun deploy() = player.heldItemMainhand.notEmptyOrNull?.splitStack(1)
             })
             if (!result) return EnumActionResult.FAIL // アクションに失敗したなら中止
 

@@ -3,6 +3,7 @@ package miragefairy2019.api;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public interface IPlaceExchanger {
 
@@ -14,10 +15,10 @@ public interface IPlaceExchanger {
     /**
      * 手元のアイテムをブロック側に移動させます。
      *
-     * @return スプリットされた新しいItemStackのインスタンス。
-     * ただし何も持っていない場合はItemStack.EMPTYをcopyして返す。
+     * @return 空でない、スプリットされた新しいItemStackのインスタンス。
+     * 何も持っていない場合はnull。
      */
-    @Nonnull
+    @Nullable
     public ItemStack deploy();
 
 }

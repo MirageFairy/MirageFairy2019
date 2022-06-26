@@ -1,5 +1,6 @@
 package miragefairy2019.mod.fairy.pedestal
 
+import miragefairy2019.api.IPlaceExchanger
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -140,25 +141,6 @@ class BlockSwordStand : BlockPedestal<TileEntitySwordStand>(Material.CIRCUITS, {
     private val collisionBoundingBox = AxisAlignedBB(4 / 16.0, 0 / 16.0, 4 / 16.0, 12 / 16.0, 6 / 16.0, 12 / 16.0)
     override fun getCollisionBoundingBox(blockState: IBlockState, worldIn: IBlockAccess, pos: BlockPos) = collisionBoundingBox
 
-
-    // アクション
-
-    override fun onAdjust(world: World, blockPos: BlockPos, tileEntity: TileEntitySwordStand, player: EntityPlayer) {
-        if (player.isSneaking) {
-            tileEntity.reversed = (tileEntity.reversed + 1) % 8
-        } else {
-            tileEntity.rotation += 45.0
-            if (tileEntity.rotation >= 360) {
-                tileEntity.rotation -= 360.0
-            }
-        }
-    }
-
-    override fun onDeploy(world: World, blockPos: BlockPos, tileEntity: TileEntitySwordStand, player: EntityPlayer, itemStack: ItemStack) {
-        tileEntity.rotation = round(player.rotationYawHead.toDouble() / 45) * 45 // 角度調整
-        tileEntity.reversed = 0
-    }
-
 }
 
 class TileEntitySwordStand : TileEntityPedestal() {
@@ -192,5 +174,27 @@ class TileEntitySwordStand : TileEntityPedestal() {
             7 -> transformProxy.rotate(270.0f, 0f, 0f, 1f)
             else -> Unit
         }
+    }
+
+
+    override fun onAdjust(player: EntityPlayer, placeExchanger: IPlaceExchanger): Boolean {
+        if (super.onAdjust(player, placeExchanger)) return true
+
+        // 角度の調整
+        if (player.isSneaking) {
+            reversed = (reversed + 1) % 8
+        } else {
+            rotation += 45.0
+            if (rotation >= 360) {
+                rotation -= 360.0
+            }
+        }
+
+        return true
+    }
+
+    override fun onDeploy(player: EntityPlayer) {
+        rotation = round(player.rotationYawHead.toDouble() / 45) * 45 // 角度調整
+        reversed = 0
     }
 }
