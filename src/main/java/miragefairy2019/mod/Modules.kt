@@ -4,11 +4,11 @@ import miragefairy2019.jei.jeiModule
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.mod.artifacts.artifactsModule
 import miragefairy2019.mod.fairy.Fairy
-import miragefairy2019.mod.fairy.pedestal.pedestalModule
 import miragefairy2019.mod.fairybox.FairyBox
 import miragefairy2019.mod.fairyrelation.fairyRelationModule
 import miragefairy2019.mod.fairyweapon.fairyWeaponModule
 import miragefairy2019.mod.material.materialModule
+import miragefairy2019.mod.pedestal.pedestalModule
 import miragefairy2019.mod.placeditem.PlacedItem
 import miragefairy2019.mod.playeraura.playerAuraModule
 import miragefairy2019.mod.recipes.recipesModule

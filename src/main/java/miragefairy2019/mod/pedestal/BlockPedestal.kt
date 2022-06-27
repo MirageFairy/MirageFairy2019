@@ -1,4 +1,4 @@
-package miragefairy2019.mod.fairy.pedestal
+package miragefairy2019.mod.pedestal
 
 import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger

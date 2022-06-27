@@ -14,8 +14,8 @@ import miragefairy2019.api.MortarRecipeRegistry
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod.fairy.pedestal.MortarVariant
-import miragefairy2019.mod.fairy.pedestal.itemBlockMortar
+import miragefairy2019.mod.pedestal.MortarVariant
+import miragefairy2019.mod.pedestal.itemBlockMortar
 import net.minecraft.client.Minecraft
 
 @JEIPlugin
