@@ -17,6 +17,7 @@ plugins {
     kotlin("jvm")
     id("net.minecraftforge.gradle.forge")
     id("com.github.johnrengelman.shadow")
+    id("com.dorongold.task-tree") version "1.5"
 }
 
 // 各数字は上位のバージョンが増えてもリセットしない
