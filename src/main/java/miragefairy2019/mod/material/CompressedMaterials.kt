@@ -205,6 +205,13 @@ object CompressedMaterials {
             toBlock("nephrite_block", !"gemNephrite", r(m1, 12, 1))
             toBlock("topaz_block", !"gemTopaz", r(m1, 13, 1))
             toBlock("tourmaline_block", !"gemTourmaline", r(m1, 14, 1))
+
+            // TODO move
+            fromBlock("miragium_tiny_dust", "miragium_dust", !"dustMiragium", r(m, 4, 9))
+            fromBlock("miragium_nugget", "miragium_ingot", !"ingotMiragium", r(m, 13, 9))
+            toBlock("miragium_dust", !"dustTinyMiragium", r(m, 3, 1))
+            toBlock("miragium_ingot", !"nuggetMiragium", r(m, 5, 1))
+
         }
 
     }
