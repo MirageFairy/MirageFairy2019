@@ -3,7 +3,7 @@
 Writer : {
 	new : class, dir -> class {
 		dir;
-		indent = "\t";
+		indent = "  ";
 	};
 	write : this, file, data -> (
 		EXEC("mkdir"; "-p", RESOLVE("$(this.dir)/$file", ".."));

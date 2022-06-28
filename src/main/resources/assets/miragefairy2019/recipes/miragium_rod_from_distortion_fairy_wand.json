@@ -1,22 +1,22 @@
 {
-	"type": "forge:ore_shaped",
-	"group": "miragium_rod_from_distortion_fairy_wand",
-	"pattern": [
-		"d ",
-		" I"
-	],
-	"key": {
-		"I": {
-			"type": "forge:ore_dict",
-			"ore": "ingotMiragium"
-		},
-		"d": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandDistortion"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:materials",
-		"data": 12
-	}
+  "type": "forge:ore_shaped",
+  "group": "miragium_rod_from_distortion_fairy_wand",
+  "pattern": [
+    "d ",
+    " I"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotMiragium"
+    },
+    "d": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandDistortion"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:materials",
+    "data": 12
+  }
 }

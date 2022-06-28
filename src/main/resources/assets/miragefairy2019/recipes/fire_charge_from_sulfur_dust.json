@@ -1,40 +1,40 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "astronomical_observation_book",
-	"ingredients": [
-		{
-			"type": "forge:ore_dict",
-			"ore": "gunpowder"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "dustSulfur"
-		},
-		[
-			{
-				"item": "minecraft:coal",
-				"data": 0
-			},
-			{
-				"item": "minecraft:coal",
-				"data": 1
-			},
-			{
-				"type": "forge:ore_dict",
-				"ore": "dustCoal"
-			},
-			{
-				"type": "forge:ore_dict",
-				"ore": "dustCharcoal"
-			}
-		],
-		{
-			"type": "forge:ore_dict",
-			"ore": "dustMiragium"
-		}
-	],
-	"result": {
-		"item": "minecraft:fire_charge",
-		"count": 3
-	}
+  "type": "forge:ore_shapeless",
+  "group": "astronomical_observation_book",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "gunpowder"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustSulfur"
+    },
+    [
+      {
+        "item": "minecraft:coal",
+        "data": 0
+      },
+      {
+        "item": "minecraft:coal",
+        "data": 1
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "dustCoal"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "dustCharcoal"
+      }
+    ],
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustMiragium"
+    }
+  ],
+  "result": {
+    "item": "minecraft:fire_charge",
+    "count": 3
+  }
 }

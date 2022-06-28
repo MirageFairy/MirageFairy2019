@@ -1,26 +1,26 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "lilagium_ingot_from_fusion_fairy_wand",
-	"ingredients": [
-		{
-			"type": "forge:ore_dict",
-			"ore": "ingotMiragium"
-		},
-		{
-			"item": "minecraft:double_plant",
-			"data": 1
-		},
-		{
-			"item": "minecraft:double_plant",
-			"data": 1
-		},
-		{
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandFusion"
-		}
-	],
-	"result": {
-		"item": "miragefairy2019:materials",
-		"data": 19
-	}
+  "type": "forge:ore_shapeless",
+  "group": "lilagium_ingot_from_fusion_fairy_wand",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "ingotMiragium"
+    },
+    {
+      "item": "minecraft:double_plant",
+      "data": 1
+    },
+    {
+      "item": "minecraft:double_plant",
+      "data": 1
+    },
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandFusion"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:materials",
+    "data": 19
+  }
 }

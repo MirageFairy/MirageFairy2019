@@ -1,18 +1,18 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "mirage_fairy_leather",
-	"ingredients": [
-		{
-			"type": "forge:ore_dict",
-			"ore": "leather"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "container1000MirageFlowerOil"
-		}
-	],
-	"result": {
-		"item": "miragefairy2019:fairy_materials",
-		"data": 14
-	}
+  "type": "forge:ore_shapeless",
+  "group": "mirage_fairy_leather",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "leather"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container1000MirageFlowerOil"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:fairy_materials",
+    "data": 14
+  }
 }
