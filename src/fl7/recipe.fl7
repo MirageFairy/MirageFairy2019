@@ -4,7 +4,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 
 #################### 素材 ####################
 (
-	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials");
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes");
 
     # ミラジウムの板
     writer::write("miragium_plate.json"; {
@@ -413,7 +413,7 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 
 #################### その他 ####################
 (
-	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials");
+	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes");
 
     # 硫黄の粉→ファイヤーチャージ
 	writer::write("fire_charge_from_sulfur_dust.json"; {
