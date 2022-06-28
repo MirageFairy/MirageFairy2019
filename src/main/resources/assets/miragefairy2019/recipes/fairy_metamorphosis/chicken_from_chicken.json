@@ -19,7 +19,6 @@
     }
   ],
   "result": {
-    "item": "minecraft:chicken",
-    "count": 1
+    "item": "minecraft:chicken"
   }
 }

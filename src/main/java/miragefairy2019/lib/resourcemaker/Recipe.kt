@@ -102,7 +102,7 @@ class DataResult(
         get() = jsonObjectNotNull(
             "item" to item.jsonElement,
             data?.let { "data" to it.jsonElement },
-            "count" to count.jsonElement,
+            count.takeIf { it != 1 }?.let { "count" to count.jsonElement },
             nbt?.let { "nbt" to it }
         )
 }
