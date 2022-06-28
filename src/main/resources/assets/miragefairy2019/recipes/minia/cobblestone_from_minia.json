@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shaped",
-  "group": "cobblestone_from_minia",
   "pattern": [
     "#  ",
     " s ",

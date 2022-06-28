@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shaped",
-  "group": "iron_ingot_from_minia",
   "pattern": [
     "#  ",
     " s ",

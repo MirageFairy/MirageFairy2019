@@ -9,7 +9,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     # ミラジウムの板
     writer::write("miragium_plate.json"; {
         type = "forge:ore_shaped";
-        group = "miragium_plate";
         pattern = [
             "mm";
             "II";
@@ -34,7 +33,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     # 歪曲杖からミラジウムの板
     writer::write("miragium_plate_from_distortion_fairy_wand.json"; {
         type = "forge:ore_shaped";
-        group = "miragium_plate_from_distortion_fairy_wand";
         pattern = [
             "d";
             "I";
@@ -59,7 +57,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     # リラジウム
     writer::write("lilagium_ingot.json"; {
         type = "forge:ore_shaped";
-        group = "lilagium_ingot";
         pattern = [
             "mLm";
             "LIL";
@@ -88,7 +85,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     # 融合のワンドからリラジウム
     writer::write("lilagium_ingot_from_fusion_fairy_wand.json"; {
         type = "forge:ore_shapeless";
-        group = "lilagium_ingot_from_fusion_fairy_wand";
         ingredients = [
             {
                 type = "forge:ore_dict";
@@ -116,7 +112,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     # 妖精の革
     writer::write("mirage_fairy_leather.json"; {
         type: "forge:ore_shapeless";
-        group: "mirage_fairy_leather";
         ingredients: [
             {
                 type = "forge:ore_dict";
@@ -136,7 +131,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     # 歪曲のワンドからミラジウムの棒
     writer::write("miragium_rod_from_distortion_fairy_wand.json"; {
         type = "forge:ore_shaped";
-        group = "miragium_rod_from_distortion_fairy_wand";
         pattern = [
             "d ";
             " I";
@@ -160,7 +154,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     # 妖精蒐集箱
     writer::write("fairy_collection_box.json"; {
         type = "forge:ore_shaped";
-        group: "fairy_collection_box";
         pattern = [
             "sls";
             "PLD";
@@ -200,7 +193,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     # ブレイズロッドからブレイズパウダー　高効率
 	writer::write("blaze_powder_from_blaze_rod.json"; {
         type: "forge:ore_shapeless";
-        group: "blaze_powder";
         ingredients: [
             {
                 type: "miragefairy2019:ore_dict_complex";
@@ -219,7 +211,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     # 妖精の原木
     writer::write("fairy_wood_log.json"; {
         type = "forge:ore_shaped";
-        group: "fairy_wood_log";
         pattern = [
             "ooo";
             "oLo";
@@ -248,7 +239,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 
     f : name, pattern, in, out -> writer::write("$(name)_from_minia.json"; {
         type = "forge:ore_shaped";
-        group = "$(name)_from_minia";
         pattern = pattern;
         key = {
             s = {
@@ -378,7 +368,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 	x9 : ingot, block, ingredientIngot, ingredientBlock, resultIngot, resultBlock -> (
 		writer::write("$(ingot)_from_$(block).json"; {
 			type = "forge:ore_shaped";
-			group = ingot;
 			pattern = [
 				"#";
 			];
@@ -393,7 +382,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 		});
 		writer::write("$(block).json"; {
 			type = "forge:ore_shaped";
-			group = block;
 			pattern = [
 				"###";
 				"###";
@@ -418,7 +406,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     # 硫黄の粉→ファイヤーチャージ
 	writer::write("fire_charge_from_sulfur_dust.json"; {
 		type = "forge:ore_shapeless";
-		group = "astronomical_observation_book";
 		ingredients = [
 			{
 				type = "forge:ore_dict";
@@ -460,7 +447,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
     # エリトラ
 	writer::write("elytra_from_mirage_fairy_leather.json"; {
 		type = "forge:ore_shaped";
-		group = "elytra_from_mirage_fairy_leather";
 		pattern = [
 			"SLS",
 			"LLL",

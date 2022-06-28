@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "astronomical_observation_book",
   "ingredients": [
     {
       "type": "forge:ore_dict",

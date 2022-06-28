@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "lilagium_ingot_from_fusion_fairy_wand",
   "ingredients": [
     {
       "type": "forge:ore_dict",

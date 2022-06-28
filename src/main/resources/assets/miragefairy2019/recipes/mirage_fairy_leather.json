@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "mirage_fairy_leather",
   "ingredients": [
     {
       "type": "forge:ore_dict",
