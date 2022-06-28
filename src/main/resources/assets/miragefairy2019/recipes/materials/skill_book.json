@@ -1,24 +1,24 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "skill_book",
-	"ingredients": [
-		{
-			"item": "minecraft:writable_book"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "mirageFairyCrystal"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "dustRedstone"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "ingotGold"
-		}
-	],
-	"result": {
-		"item": "miragefairy2019:skill_book"
-	}
+  "type": "forge:ore_shapeless",
+  "group": "skill_book",
+  "ingredients": [
+    {
+      "item": "minecraft:writable_book"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystal"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:skill_book"
+  }
 }
