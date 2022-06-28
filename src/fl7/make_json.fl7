@@ -1,5 +1,0 @@
-@STRICT;
-
-REQUIRE("src/fl7/recipe.fl7");
-
-"[main] OK" => OUT;

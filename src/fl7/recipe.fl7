@@ -1,5 +1,0 @@
-@STRICT;
-
-Writer : USE("src/fl7/Writer.fl7").Writer;
-
-"[recipe] OK" => OUT;

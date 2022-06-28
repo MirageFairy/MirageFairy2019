@@ -115,14 +115,6 @@ tasks {
         dependsOn("fetchMirrgKotlin")
     }
 
-    register<Exec>("makeJson") {
-        executable = "bash"
-        args("make_json.sh")
-    }
-    getByName("processResources") {
-        dependsOn("makeJson")
-    }
-
     named<ProcessResources>("processResources") {
         inputs.property("version", project.version)
         inputs.property("mcversion", project.minecraft.version)
