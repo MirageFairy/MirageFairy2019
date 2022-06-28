@@ -415,58 +415,6 @@ Writer : USE("src/fl7/Writer.fl7").Writer;
 (
 	writer: Writer::new("src/main/resources/assets/miragefairy2019/recipes/materials");
 
-    # スキルブック
-	writer::write("skill_book.json"; {
-		type = "forge:ore_shapeless";
-		group = "skill_book";
-		ingredients = [
-			{
-				item = "minecraft:writable_book";
-			};
-			{
-				type = "forge:ore_dict";
-				ore = "mirageFairyCrystal";
-			};
-			{
-				type = "forge:ore_dict";
-				ore = "dustRedstone";
-			};
-			{
-				type = "forge:ore_dict";
-				ore = "ingotGold";
-			};
-		];
-		result = {
-			item = "miragefairy2019:skill_book";
-		};
-	});
-
-    # 天体観測ノート
-	writer::write("astronomical_observation_book.json"; {
-		type = "forge:ore_shapeless";
-		group = "astronomical_observation_book";
-		ingredients = [
-			{
-				item = "minecraft:writable_book";
-			};
-			{
-				type = "forge:ore_dict";
-				ore = "mirageFairyCrystal";
-			};
-			{
-				type = "forge:ore_dict";
-				ore = "obsidian";
-			};
-			{
-				type = "forge:ore_dict";
-				ore = "mirageFairy2019SphereSense";
-			};
-		];
-		result = {
-			item = "miragefairy2019:astronomical_observation_book";
-		};
-	});
-
     # 硫黄の粉→ファイヤーチャージ
 	writer::write("fire_charge_from_sulfur_dust.json"; {
 		type = "forge:ore_shapeless";

@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "skill_book",
   "ingredients": [
     {
       "item": "minecraft:writable_book"
@@ -19,6 +18,7 @@
     }
   ],
   "result": {
-    "item": "miragefairy2019:skill_book"
+    "item": "miragefairy2019:skill_book",
+    "count": 1
   }
 }

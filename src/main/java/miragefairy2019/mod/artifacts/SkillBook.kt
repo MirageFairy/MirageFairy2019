@@ -6,8 +6,13 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.proxy
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
+import miragefairy2019.lib.resourcemaker.DataResult
+import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
+import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.TextComponentScope
 import miragefairy2019.libkt.TextComponentWrapper
@@ -45,6 +50,17 @@ val skillBookModule = module {
         setCreativeTab { Main.creativeTab }
         setCustomModelResourceLocation()
         makeItemModel { generated }
+        makeRecipe {
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataSimpleIngredient(item = "minecraft:writable_book"),
+                    DataOreIngredient(ore = "mirageFairyCrystal"),
+                    DataOreIngredient(ore = "dustRedstone"),
+                    DataOreIngredient(ore = "ingotGold")
+                ),
+                result = DataResult(item = "miragefairy2019:skill_book")
+            )
+        }
     }
     onMakeLang {
         enJa("item.skillBook.name", "Skill Book", "スキルブック")

@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "astronomical_observation_book",
   "ingredients": [
     {
       "item": "minecraft:writable_book"
@@ -19,6 +18,7 @@
     }
   ],
   "result": {
-    "item": "miragefairy2019:astronomical_observation_book"
+    "item": "miragefairy2019:astronomical_observation_book",
+    "count": 1
   }
 }

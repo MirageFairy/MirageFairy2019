@@ -7,8 +7,13 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.rayTraceBlock
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
+import miragefairy2019.lib.resourcemaker.DataResult
+import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
+import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.displayText
@@ -55,8 +60,20 @@ val astronomicalObservationBookModule = module {
         setCreativeTab { Main.creativeTab }
         setCustomModelResourceLocation()
         makeItemModel { generated }
+        makeRecipe {
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataSimpleIngredient(item = "minecraft:writable_book"),
+                    DataOreIngredient(ore = "mirageFairyCrystal"),
+                    DataOreIngredient(ore = "obsidian"),
+                    DataOreIngredient(ore = "mirageFairy2019SphereSense")
+                ),
+                result = DataResult(item = "miragefairy2019:astronomical_observation_book")
+            )
+        }
     }
     onMakeLang {
+        enJa("item.astronomicalObservationBook.name", "Astronomical Observation Note", "天体観測ノート")
         val prefix = "miragefairy2019.gui.astronomicalObservation"
         enJa("$prefix.title", "Astronomical Observation Quest", "天体観測クエスト")
         enJa("$prefix.daily", "Daily", "日間")
