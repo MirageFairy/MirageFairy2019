@@ -32,6 +32,8 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.mod.placeditem.PlacedItem
+import miragefairy2019.mod.systems.ApiFacedCursor
+import miragefairy2019.mod.systems.IFacedCursorHandler
 import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -42,6 +44,7 @@ import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
+import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -52,6 +55,7 @@ import net.minecraft.util.Rotation
 import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.RayTraceResult
 import net.minecraft.util.text.TextComponentKeybind
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -144,6 +148,11 @@ val itemFrameModule = module {
                 result = DataResult(item = "miragefairy2019:item_frame")
             )
         }
+        onInit {
+            ApiFacedCursor.facedCursorHandlers[item] = object : IFacedCursorHandler {
+                override fun hasFacedCursor(item: Item, itemStack: ItemStack, world: World, blockPos: BlockPos, player: EntityPlayer, rayTraceResult: RayTraceResult) = true
+            }
+        }
     }
 
     // 翻訳生成
@@ -182,7 +191,42 @@ class BlockItemFrame : BlockPedestal<TileEntityItemFrame>(Material.WOOD, { it as
     override fun getMetaFromState(blockState: IBlockState) = getFacing(blockState).index
     override fun withRotation(blockState: IBlockState, rotation: Rotation) = getBlockState(rotation.rotate(getFacing(blockState)))
     override fun withMirror(blockState: IBlockState, mirror: Mirror) = getBlockState(mirror.mirror(getFacing(blockState)))
-    override fun getStateForPlacement(world: World, blockPos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, metadata: Int, placer: EntityLivingBase, hand: EnumHand) = getBlockState(facing.opposite)
+    override fun getStateForPlacement(world: World, blockPos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, metadata: Int, placer: EntityLivingBase, hand: EnumHand): IBlockState {
+
+        // 角をクリック
+        val opposite = when (facing) {
+            EnumFacing.WEST, EnumFacing.EAST -> (hitY <= 0.25 || hitY >= 0.75) && (hitZ <= 0.25 || hitZ >= 0.75)
+            EnumFacing.DOWN, EnumFacing.UP -> (hitX <= 0.25 || hitX >= 0.75) && (hitZ <= 0.25 || hitZ >= 0.75)
+            EnumFacing.NORTH, EnumFacing.SOUTH -> (hitX <= 0.25 || hitX >= 0.75) && (hitY <= 0.25 || hitY >= 0.75)
+        }
+        if (opposite) return getBlockState(facing)
+
+        // 辺をクリック
+        when (facing) {
+            EnumFacing.DOWN, EnumFacing.UP, EnumFacing.NORTH, EnumFacing.SOUTH -> {
+                if (hitX <= 0.25) return getBlockState(EnumFacing.WEST)
+                if (hitX >= 0.75) return getBlockState(EnumFacing.EAST)
+            }
+            else -> Unit
+        }
+        when (facing) {
+            EnumFacing.WEST, EnumFacing.EAST, EnumFacing.NORTH, EnumFacing.SOUTH -> {
+                if (hitY <= 0.25) return getBlockState(EnumFacing.DOWN)
+                if (hitY >= 0.75) return getBlockState(EnumFacing.UP)
+            }
+            else -> Unit
+        }
+        when (facing) {
+            EnumFacing.WEST, EnumFacing.EAST, EnumFacing.DOWN, EnumFacing.UP -> {
+                if (hitZ <= 0.25) return getBlockState(EnumFacing.NORTH)
+                if (hitZ >= 0.75) return getBlockState(EnumFacing.SOUTH)
+            }
+            else -> Unit
+        }
+
+        // 中央部分をクリック
+        return getBlockState(facing.opposite)
+    }
 
 
     @SideOnly(Side.CLIENT)
