@@ -247,9 +247,9 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
 
         // Guiを開いたときにサーバー側でフォリアを計測する機能
         val propertyMilliFolia = WindowProperty()
-        if (!world.isRemote) propertyMilliFolia.value = (getFolia(10000) * 1000.0).toInt()
+        if (!world.isRemote) propertyMilliFolia.value = (getFolia(10000) * 10.0).toInt() // TODO 桁数を増やす（内部的に通信時にshortにされるので普通にやるとオーバーフローする）
         windowProperties[0] = propertyMilliFolia
-        fun getFolia() = propertyMilliFolia.value / 1000.0 // ローカル変数にすると計測したフォリアを同期できない
+        fun getFolia() = propertyMilliFolia.value / 10.0 // ローカル変数にすると計測したフォリアを同期できない
         fun getFoliaSpeedFactor() = getFoliaSpeedFactor(getFolia())
 
 
@@ -320,7 +320,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
         yi += 9
 
         // フォリア表示
-        components += ComponentLabel(width - 3 - 4, yi, Alignment.RIGHT) { textComponent { "${getFolia() formatAs "%.2f"} Folia, 速度ブースト: ${getFoliaSpeedFactor() * 100.0 formatAs "%.2f"}%"() } }
+        components += ComponentLabel(width - 3 - 4, yi, Alignment.RIGHT) { textComponent { "${getFolia() formatAs "%.1f"} Folia, 速度ブースト: ${getFoliaSpeedFactor() * 100.0 formatAs "%.2f"}%"() } }
         yi += 9
 
 
