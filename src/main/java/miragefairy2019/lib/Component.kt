@@ -11,13 +11,16 @@ import miragefairy2019.libkt.y
 import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.hydrogen.unit
 import net.minecraft.client.gui.FontRenderer
+import net.minecraft.client.gui.Gui
 import net.minecraft.client.gui.inventory.GuiContainer
+import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
 import net.minecraft.inventory.IContainerListener
 import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemStack
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -222,6 +225,22 @@ class ComponentBackgroundLabel(val x: Int, val y: Int, val alignment: Alignment,
             Alignment.CENTER -> textSupplier()?.let { gui.fontRenderer.drawStringCentered(it.formattedText, gui.x + x, gui.y + y, color) }
             Alignment.RIGHT -> textSupplier()?.let { gui.fontRenderer.drawStringRightAligned(it.formattedText, gui.x + x, gui.y + y, color) }
         }
+    }
+}
+
+class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFFFF.toInt(), val textureSupplier: () -> ResourceLocation) : IComponent {
+    @SideOnly(Side.CLIENT)
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, partialTicks: Float, mouseX: Int, mouseY: Int) {
+        GlStateManager.color(
+            (color and 0xFF0000 shr 16) / 255.0f,
+            (color and 0xFF00 shr 8) / 255.0f,
+            (color and 0xFF shr 0) / 255.0f,
+            (color and 0xFF000000.toInt() shr 24) / 255.0f
+        )
+        GlStateManager.enableBlend()
+        gui.mc.textureManager.bindTexture(textureSupplier())
+        Gui.drawModalRectWithCustomSizedTexture(gui.x + x, gui.y + y, 0.0f, 0.0f, 16, 16, 16.0f, 16.0f)
+        GlStateManager.disableBlend()
     }
 }
 
