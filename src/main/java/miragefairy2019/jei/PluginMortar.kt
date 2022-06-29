@@ -50,12 +50,15 @@ class PluginMortar : IModPlugin {
     }
 
     override fun register(registry: IModRegistry) {
-        registry.addRecipes(MortarRecipeRegistry.mortarRecipes.map { recipe ->
-            IRecipeWrapper { ingredients ->
+        registry.addRecipes(MortarRecipeRegistry.mortarRecipeHandlers.flatMap { handler ->
+            handler.recipes.mapNotNull invalidRecipe@{ recipe ->
                 val inputList = registry.jeiHelpers.stackHelper.toItemStackList(recipe.input)
+                if (inputList.isEmpty()) return@invalidRecipe null
                 val machineList = MortarVariant.values().filter { it.level >= recipe.level }.map { itemBlockMortar().createItemStack(metadata = it.metadata) }
-                ingredients.setInputLists(VanillaTypes.ITEM, listOf(inputList, machineList))
-                ingredients.setOutputLists(VanillaTypes.ITEM, listOf(listOf(recipe.output)))
+                IRecipeWrapper { ingredients ->
+                    ingredients.setInputLists(VanillaTypes.ITEM, listOf(inputList, machineList))
+                    ingredients.setOutputLists(VanillaTypes.ITEM, listOf(listOf(recipe.output)))
+                }
             }
         }, uid)
     }

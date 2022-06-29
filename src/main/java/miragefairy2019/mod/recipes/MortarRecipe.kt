@@ -1,9 +1,9 @@
 package miragefairy2019.mod.recipes
 
-import miragefairy2019.api.IMortarRecipe
+import miragefairy2019.api.IMortarRecipeHandler
 import miragefairy2019.api.MortarRecipeRegistry
 import miragefairy2019.common.toOreName
-import miragefairy2019.lib.MortarRecipe
+import miragefairy2019.lib.MortarRecipeHandler
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.oreIngredient
@@ -12,8 +12,8 @@ import mirrg.kotlin.hydrogen.unit
 
 val mortarRecipeModule = module {
     onAddRecipe {
-        fun r(recipe: IMortarRecipe) = unit { MortarRecipeRegistry.mortarRecipes += recipe }
-        fun r(level: Int, inputOreName: String, outputOreName: String) = r(MortarRecipe(level, inputOreName.oreIngredient) { outputOreName.toOreName().copyItemStack()!! })
+        fun r(recipe: IMortarRecipeHandler) = unit { MortarRecipeRegistry.mortarRecipeHandlers += recipe }
+        fun r(level: Int, inputOreName: String, outputOreName: String) = r(MortarRecipeHandler(level, inputOreName.oreIngredient) { outputOreName.toOreName().copyItemStack() })
         fun r(level: Int, materialName: String) = r(level, "gem${materialName.toUpperCamelCase()}", "dust${materialName.toUpperCamelCase()}")
 
         r(1, "coal")

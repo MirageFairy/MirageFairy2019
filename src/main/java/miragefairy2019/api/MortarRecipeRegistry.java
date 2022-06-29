@@ -7,6 +7,6 @@ import javax.annotation.Nonnull;
 public class MortarRecipeRegistry {
 
     @Nonnull
-    public static final NonNullList<IMortarRecipe> mortarRecipes = NonNullList.create();
+    public static final NonNullList<IMortarRecipeHandler> mortarRecipeHandlers = NonNullList.create();
 
 }

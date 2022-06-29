@@ -368,7 +368,7 @@ class TileEntityMortar : TileEntityPedestal() {
             // 加工完了した場合、状態を加工完了済みにしてアイテムをセット
             if (finished) {
                 progress = 1
-                itemStackOrNull = recipe.getOutput()
+                itemStackOrNull = recipe.output.copy()
             }
 
             return true
