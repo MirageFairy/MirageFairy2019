@@ -52,6 +52,9 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
+import net.minecraftforge.common.capabilities.Capability
+import net.minecraftforge.items.CapabilityItemHandler
+import net.minecraftforge.items.wrapper.SidedInvWrapper
 
 val TEXTURE_INPUT_SLOT = ResourceLocation("miragefairy2019", "textures/gui/input_slot.png")
 val TEXTURE_OUTPUT_SLOT = ResourceLocation("miragefairy2019", "textures/gui/output_slot.png")
@@ -148,6 +151,18 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
     }
 
     override fun canExtractItem(index: Int, itemStack: ItemStack, facing: EnumFacing) = true
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T> getCapability(capability: Capability<T>, facing: EnumFacing?): T? {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (facing != null) {
+                return SidedInvWrapper(this, facing) as T
+            }
+        }
+        return super.getCapability(capability, facing)
+    }
+
+    override fun hasCapability(capability: Capability<*>, facing: EnumFacing?) = capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing)
 
 
     // Tree
