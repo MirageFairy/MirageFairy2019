@@ -6,7 +6,7 @@ import miragefairy2019.api.IFairyCentrifugeCraftProcess
 import miragefairy2019.api.IFairyCentrifugeCraftRecipe
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.Alignment
-import miragefairy2019.lib.ComponentBackgroundLabel
+import miragefairy2019.lib.ComponentBackgroundImage
 import miragefairy2019.lib.ComponentLabel
 import miragefairy2019.lib.ComponentSlot
 import miragefairy2019.lib.ContainerComponent
@@ -32,7 +32,6 @@ import miragefairy2019.lib.set
 import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.flatten
-import miragefairy2019.libkt.gray
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
@@ -51,7 +50,12 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
+
+val TEXTURE_INPUT_SLOT = ResourceLocation("miragefairy2019", "textures/gui/input_slot.png")
+val TEXTURE_OUTPUT_SLOT = ResourceLocation("miragefairy2019", "textures/gui/output_slot.png")
+val TEXTURE_FAIRY_SLOT = ResourceLocation("miragefairy2019", "textures/gui/fairy_slot.png")
 
 class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedInventory {
 
@@ -287,7 +291,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
         // 入力
         repeat(9) { c ->
             components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> Slot(inputInventory, c, x, y) } belongs IN
-            components += ComponentBackgroundLabel(3 + 4 + 18 * c + 9, yi + 9 - 4, Alignment.CENTER) { textComponent { "IN"().gray } }
+            components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 1, 0x40FFFFFF.toInt()) { TEXTURE_INPUT_SLOT }
         }
         yi += 18
 
@@ -298,7 +302,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0, Alignment.CENTER) { getProcessResult()?.process?.name }
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0 + 9, Alignment.CENTER) { getProcessResult()?.factors }
             components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * 1) { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
-            components += ComponentBackgroundLabel(3 + 4 + 18 * c + 9, yi + 18 * 1 + 9 - 4, Alignment.CENTER) { textComponent { "F"().gray } }
+            components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 18 * 1 + 1, 0x40FFFFFF.toInt()) { TEXTURE_FAIRY_SLOT }
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2, Alignment.CENTER) { getProcessResult()?.speed?.let { textComponent { (it * getFoliaSpeedFactor()).formatAs("%.2f/分")() } } } // TODO translate
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2 + 9, Alignment.CENTER) { getProcessResult()?.fortune?.let { textComponent { it.formatAs("%.02f" + Symbols.FORTUNE)() } } }
         }
@@ -310,7 +314,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
         // 出力
         repeat(9) { c ->
             components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> SlotResult(player, outputInventory, c, x, y) } belongs OUT
-            components += ComponentBackgroundLabel(3 + 4 + 18 * c + 9, yi + 9 - 4, Alignment.CENTER) { textComponent { "OUT"().gray } }
+            components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 1, 0x40FFFFFF.toInt()) { TEXTURE_OUTPUT_SLOT }
         }
         yi += 18
 
