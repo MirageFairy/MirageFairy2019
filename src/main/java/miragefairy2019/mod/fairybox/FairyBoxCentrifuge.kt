@@ -306,7 +306,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
         // 入力
         repeat(9) { c ->
             components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> Slot(inputInventory, c, x, y) } belongs IN
-            components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 1, 0x40FFFFFF.toInt()) { TEXTURE_INPUT_SLOT }
+            components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 1, 0x60FFFFFF) { TEXTURE_INPUT_SLOT }
         }
         yi += 18
 
@@ -317,7 +317,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0, Alignment.CENTER) { getProcessResult()?.process?.name }
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0 + 9, Alignment.CENTER) { getProcessResult()?.factors }
             components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * 1) { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
-            components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 18 * 1 + 1, 0x40FFFFFF.toInt()) { TEXTURE_FAIRY_SLOT }
+            components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 18 * 1 + 1, 0x60FFFFFF) { TEXTURE_FAIRY_SLOT }
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2, Alignment.CENTER) { getProcessResult()?.speed?.let { textComponent { (it * getFoliaSpeedFactor()).formatAs("%.2f/分")() } } } // TODO translate
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2 + 9, Alignment.CENTER) { getProcessResult()?.fortune?.let { textComponent { it.formatAs("%.02f" + Symbols.FORTUNE)() } } }
         }
@@ -329,7 +329,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
         // 出力
         repeat(9) { c ->
             components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> SlotResult(player, outputInventory, c, x, y) } belongs OUT
-            components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 1, 0x40FFFFFF.toInt()) { TEXTURE_OUTPUT_SLOT }
+            components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 1, 0x60FFFFFF) { TEXTURE_OUTPUT_SLOT }
         }
         yi += 18
 
