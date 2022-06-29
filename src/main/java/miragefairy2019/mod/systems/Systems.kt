@@ -13,4 +13,5 @@ val systemsModule = module {
     vanillaOreNamesModule(this)
     Ae2SpatialIoBlocking.ae2SpatialIoBlockingModule(this)
     DaemonSystem.daemonSystemModule(this)
+    facedCursorModule(this)
 }
