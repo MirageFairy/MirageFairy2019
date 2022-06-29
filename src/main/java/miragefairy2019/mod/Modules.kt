@@ -30,25 +30,33 @@ val modules = module {
 
     // TODO move
     onMakeLang {
+
         enJa("tile.fairyLog.name", "Fairy Log", "妖精の樹洞")
+
         enJa("item.mirageFlowerSeeds.name", "Mirage Flower Seeds", "ミラージュフラワーの種")
+
         enJa("item.mirageFairyPot.name", "Fairy Pot", "妖精のポット")
         enJa("item.mirageFairyPotMiragiumWater.name", "Miragium Water Pot", "ミラジウムウォーター入りポット")
         enJa("item.mirageFairyPotMirageFlowerExtract.name", "Mirage Extract Pot", "ミラージュエキス入りポット")
         enJa("item.mirageFairyPotMirageFlowerOil.name", "Mirage Oil Pot", "ミラージュオイル入りポット")
         enJa("item.mirageFairyPotWater.name", "Water Pot", "水入りポット")
         enJa("item.mirageFairyPotLava.name", "Lava Pot", "溶岩入りポット")
+
         enJa("item.fairyStick.name", "Fairy Stick", "妖精のステッキ")
         enJa("item.fairyStick.poem", "", "頼みごとをしてみよう")
+
         enJa("item.spheres.name", "Sphere", "スフィア")
         enJa("item.spheres.format", "Sphere of %s", "%sのスフィア")
+
         enJa("fluid.miragium_water", "Miragium Water", "ミラジウムウォーター")
         enJa("tile.miragiumWater.name", "Miragium Water", "ミラジウムウォーター")
         enJa("fluid.mirage_flower_extract", "Mirage Extract", "ミラージュエキス")
         enJa("tile.mirageFlowerExtract.name", "Mirage Extract", "ミラージュエキス")
         enJa("fluid.mirage_flower_oil", "Mirage Oil", "ミラージュオイル")
         enJa("tile.mirageFlowerOil.name", "Mirage Oil", "ミラージュオイル")
+
         enJa("tile.fairyCollectionBox.name", "Fairy Collection Box", "妖精蒐集箱")
+
         enJa("tile.fairyWoodLog.name", "Fairy Wood Log", "妖精の原木")
 
         ja("item.forge.bucketFilled.name", "%s入りバケツ")
@@ -89,9 +97,13 @@ val modules = module {
         enJa("mirageFairy2019.magic.status.durationBoost.name", "Duration Boost", "持続時間ブースト")
 
         enJa("itemGroup.mirageFairy2019", "MirageFairy2019", "MirageFairy2019")
+
         enJa("itemGroup.mirageFairy2019.bakedFairy", "MirageFairy2019: Baked Fairy", "MirageFairy2019：焼き妖精")
+
         enJa("mirageFairy2019.formula.source.cost.name", "Cost", "コスト")
+
         enJa("miragefairy2019.placeItem", "Place Item", "アイテムを置く")
+
         enJa("miragefairy2019.gui.duration.days", "days", "日")
         enJa("miragefairy2019.gui.duration.hours", "hours", "時間")
         enJa("miragefairy2019.gui.duration.minutes", "minutes", "分")
@@ -103,6 +115,7 @@ val modules = module {
         enJa("miragefairy2019.gui.playerAura.poem.step3", "I'm getting tired of this taste...", "この味にも飽きてきたな…")
         enJa("miragefairy2019.gui.playerAura.poem.step4", "The nutrition is biased...", "栄養が偏り気味だ…")
         enJa("miragefairy2019.gui.playerAura.poem.step5", "I want to eat something else...", "そろそろ他のものが食べたい…")
+
     }
 
     Main.mainModule(this)
