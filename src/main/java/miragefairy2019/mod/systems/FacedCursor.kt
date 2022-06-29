@@ -33,14 +33,16 @@ val facedCursorModule = module {
             MinecraftForge.EVENT_BUS.register(object {
                 @SubscribeEvent
                 fun hook(event: DrawBlockHighlightEvent) {
+                    if (event.subID != 0) return // 謎判定
+                    if (event.target.typeOfHit != RayTraceResult.Type.BLOCK) return // ブロックをターゲットしている場合のみ
+
+                    // 有効なアイテムを所持している場合のみ
                     fun hasFacedCursor(itemStack: ItemStack): Boolean {
                         val item = itemStack.item
                         val handler = ApiFacedCursor.facedCursorHandlers[item] ?: return false
                         return handler.hasFacedCursor(item, itemStack, event.player.world, event.target.blockPos, event.player, event.target)
                     }
                     if (!(hasFacedCursor(event.player.heldItemMainhand) || hasFacedCursor(event.player.heldItemOffhand))) return
-                    if (event.subID != 0) return
-                    if (event.target.typeOfHit != RayTraceResult.Type.BLOCK) return
 
                     GlStateManager.enableBlend()
                     GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO)
@@ -61,8 +63,8 @@ val facedCursorModule = module {
                             EnumFacing.NORTH -> 1 - (event.target.hitVec.z - blockPos.z)
                         }
 
-                        if (blockState.material == Material.AIR) return
-                        if (!event.player.world.worldBorder.contains(blockPos)) return
+                        if (blockState.material == Material.AIR) return // 水中では非表示
+                        if (!event.player.world.worldBorder.contains(blockPos)) return // ワールドボーダー外では非表示
 
                         GlStateManager.pushMatrix()
                         try {
