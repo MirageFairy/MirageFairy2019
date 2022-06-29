@@ -39,7 +39,7 @@ class PluginMortar : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(itemBlockMortar().createItemStack(metadata = MortarVariant.DIAMOND.metadata))
+            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(itemBlockMortar().createItemStack(metadata = MortarVariant.QUARTZ.metadata))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 0, 0)
                 recipeLayout.itemStacks.init(1, true, 18 + 4, 0)
