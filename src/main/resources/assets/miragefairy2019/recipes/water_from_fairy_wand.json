@@ -14,7 +14,6 @@
     }
   ],
   "result": {
-    "item": "minecraft:water_bucket",
-    "count": 1
+    "item": "minecraft:water_bucket"
   }
 }
