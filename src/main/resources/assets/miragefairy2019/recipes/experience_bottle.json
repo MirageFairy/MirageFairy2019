@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "experience_bottle",
   "ingredients": [
     {
       "type": "forge:ore_dict",

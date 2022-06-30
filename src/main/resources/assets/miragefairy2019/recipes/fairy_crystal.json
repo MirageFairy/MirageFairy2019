@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "fairy_crystal",
   "ingredients": [
     {
       "type": "forge:ore_dict",

@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "mirage_flower_stick",
   "ingredients": [
     {
       "type": "forge:ore_dict",

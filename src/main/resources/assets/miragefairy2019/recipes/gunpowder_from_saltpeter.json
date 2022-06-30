@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "minecraft:gunpowder",
   "ingredients": [
     [
       {
