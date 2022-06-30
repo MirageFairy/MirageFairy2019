@@ -795,7 +795,7 @@ val modules = module {
     }
 
     // 氷→水
-    makeRecipe("water_from_fairy_wand") { // TODO レシピ入れ替わり
+    makeRecipe("water_from_ice") {
         DataShapelessRecipe(
             ingredients = listOf(
                 WandType.MELTING.ingredientData,
@@ -807,7 +807,7 @@ val modules = module {
     }
 
     // 加水のワンド→水
-    makeRecipe("water_from_ice") { // TODO レシピ入れ替わり
+    makeRecipe("water_from_fairy_wand") {
         DataShapelessRecipe(
             ingredients = listOf(
                 WandType.HYDRATING.ingredientData,
