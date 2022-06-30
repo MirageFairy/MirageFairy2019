@@ -51,6 +51,7 @@ class ModInitializer(val modId: String, val usePreReleaseFeatures: Boolean) {
 
     val onMakeResource = EventRegistry1<ResourceMaker>()
     val onMakeLang = EventRegistry1<LangMaker>()
+    val onMakeIngredientFactory = EventRegistry1<MutableMap<String, Class<*>>>()
 
     val onConstruction = EventRegistry1<FMLConstructionEvent>()
     val onInstantiation = EventRegistry0()
