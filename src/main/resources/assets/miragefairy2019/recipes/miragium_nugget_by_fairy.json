@@ -14,7 +14,7 @@
       "ore": "mirageFairyCrystal"
     },
     {
-      "type": "miragefairy2019:ore_dict_complex",
+      "type": "forge:ore_dict",
       "ore": "mirageFairy2019FairyAbilityFlame"
     }
   ],
