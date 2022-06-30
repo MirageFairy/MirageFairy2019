@@ -13,7 +13,7 @@ class LangMaker(val langDir: File) {
         langs.entries.forEach { (language, translations) ->
             val file = langDir.resolve("$language.lang")
             file.mkdirsParent()
-            file.writeText(translations.join("") { (key, value) -> "$key=$value\n" })
+            file.writeText(translations.sortedBy { it.first }.join("") { (key, value) -> "$key=$value\n" })
         }
     }
 }
