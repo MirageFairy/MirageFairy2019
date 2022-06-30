@@ -363,4 +363,476 @@ val modules = module {
         )
     }
 
+    // 燐灰石の魔導芯棒
+    makeRecipe("aqua_mana_rod") {
+        DataShapedRecipe(
+            pattern = listOf(
+                " Gp",
+                "GRG",
+                "cG "
+            ),
+            key = mapOf(
+                "R" to DataOreIngredient(ore = "rodMiragium"),
+                "G" to DataOreIngredient(ore = "gemApatite"),
+                "c" to WandType.CRAFTING.ingredientData,
+                "p" to WandType.POLISHING.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = 4)
+        )
+    }
+
+    // 骨＞破砕のワンド→骨粉
+    makeRecipe("bone_meal_from_bone") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataOreIngredient(ore = "bone")
+            ),
+            result = DataResult(item = "minecraft:dye", data = 15, count = 4)
+        )
+    }
+
+    // 粘土ブロック→粘土
+    makeRecipe("clay_ball_from_clay") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.CRAFTING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:clay")
+            ),
+            result = DataResult(item = "minecraft:clay_ball", count = 4)
+        )
+    }
+
+    // 石→丸石
+    makeRecipe("cobblestone_from_stone") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataOreIngredient(ore = "stone")
+            ),
+            result = DataResult(item = "minecraft:cobblestone", count = 1)
+        )
+    }
+
+    // 磁鉄鉱の魔導芯棒
+    makeRecipe("dark_mana_rod") {
+        DataShapedRecipe(
+            pattern = listOf(
+                " Gp",
+                "GRG",
+                "cG "
+            ),
+            key = mapOf(
+                "R" to DataOreIngredient(ore = "rodMiragium"),
+                "G" to DataOreIngredient(ore = "gemMagnetite"),
+                "c" to WandType.CRAFTING.ingredientData,
+                "p" to WandType.POLISHING.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = 5)
+        )
+    }
+
+    // エンチャントの瓶
+    makeRecipe("experience_bottle") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "container250MirageFlowerExtract"),
+                WandType.BREAKING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:ender_eye")
+            ),
+            result = DataResult(item = "minecraft:experience_bottle")
+        )
+    }
+
+    // 任意のフェアリークリスタル→原種のフェアリークリスタル
+    makeRecipe("fairy_crystal") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "mirageFairyCrystalAny")
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_crystal", data = 0)
+        )
+    }
+
+    // 妖精のステッキ
+    makeRecipe("fairy_stick") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "  c",
+                " s ",
+                "s  "
+            ),
+            key = mapOf(
+                "s" to DataOreIngredient(ore = "stickWood"),
+                "c" to DataOreIngredient(ore = "mirageFairyCrystal")
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_stick")
+        )
+    }
+
+    // 辰砂の魔導芯棒
+    makeRecipe("fire_mana_rod") {
+        DataShapedRecipe(
+            pattern = listOf(
+                " Gp",
+                "GRG",
+                "cG "
+            ),
+            key = mapOf(
+                "R" to DataOreIngredient(ore = "rodMiragium"),
+                "G" to DataOreIngredient(ore = "gemCinnabar"),
+                "c" to WandType.CRAFTING.ingredientData,
+                "p" to WandType.POLISHING.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = 1)
+        )
+    }
+
+    // 硫黄の魔導芯棒
+    makeRecipe("gaia_mana_rod") {
+        DataShapedRecipe(
+            pattern = listOf(
+                " Gp",
+                "GRG",
+                "cG "
+            ),
+            key = mapOf(
+                "R" to DataOreIngredient(ore = "rodMiragium"),
+                "G" to DataOreIngredient(ore = "gemSulfur"),
+                "c" to WandType.CRAFTING.ingredientData,
+                "p" to WandType.POLISHING.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = 3)
+        )
+    }
+
+    // ガラスの魔導芯棒
+    makeRecipe("glass_mana_rod") {
+        DataShapedRecipe(
+            pattern = listOf(
+                " G ",
+                "GRG",
+                "cG "
+            ),
+            key = mapOf(
+                "R" to DataOreIngredient(ore = "rodMiragium"),
+                "G" to DataOreIngredient(ore = "blockGlass"),
+                "c" to WandType.CRAFTING.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = 13)
+        )
+    }
+
+    // グロウストーン→グロウストーンダスト
+    makeRecipe("glowstone_dust_from_glowstone") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataOreIngredient(ore = "glowstone")
+            ),
+            result = DataResult(item = "minecraft:glowstone_dust", count = 4)
+        )
+    }
+
+    // 丸石→砂利
+    makeRecipe("gravel_from_cobblestone") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataOreIngredient(ore = "cobblestone")
+            ),
+            result = DataResult(item = "minecraft:gravel", count = 1)
+        )
+    }
+
+    // 火薬
+    makeRecipe("gunpowder_from_saltpeter") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOrIngredient(
+                    DataSimpleIngredient(item = "minecraft:coal", data = 1),
+                    DataOreIngredient(ore = "dustCharcoal")
+                ),
+                DataOreIngredient(ore = "dustSulfur"),
+                DataOreIngredient(ore = "gemSaltpeter"),
+                DataOreIngredient(ore = "dustMiragium")
+            ),
+            result = DataResult(item = "minecraft:gunpowder", count = 3)
+        )
+    }
+
+    // 水→氷
+    makeRecipe("ice_from_water") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.FREEZING.ingredientData,
+                DataOreIngredient(ore = "container1000Water")
+            ),
+            result = DataResult(item = "minecraft:ice", count = 1)
+        )
+    }
+
+    // 黒曜石→溶岩
+    makeRecipe("lava_from_obsidian") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.MELTING.ingredientData,
+                DataOreIngredient(ore = "obsidian"),
+                DataSimpleIngredient(item = "minecraft:bucket")
+            ),
+            result = DataResult(item = "minecraft:lava_bucket", count = 1)
+        )
+    }
+
+    // 妖精の木の棒
+    makeRecipe("mirage_fairy_wood_stick") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "stickWood"),
+                DataOreIngredient(ore = "container250MirageFlowerOil")
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = 9)
+        )
+    }
+
+    // ミラージュフラワーの茎
+    makeRecipe("mirage_flower_stick") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "mirageFairyStick"),
+                DataOreIngredient(ore = "container1000MiragiumWater"),
+                DataOreIngredient(ore = "mirageFairy2019FairyAbilityCrystal"),
+                DataOreIngredient(ore = "leafMirageFlower"),
+                DataOreIngredient(ore = "dustApatite")
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = 7)
+        )
+    }
+
+    // ミラジウムの粉＋妖精→ミラジウムナゲット
+    makeRecipe("miragium_nugget_by_fairy") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.CRAFTING.ingredientData,
+                DataOreIngredient(ore = "dustMiragium"),
+                DataOreIngredient(ore = "mirageFairyCrystal"),
+                DataOreIngredient(ore = "mirageFairy2019FairyAbilityFlame")
+            ),
+            result = DataResult(item = "miragefairy2019:materials", data = 13, count = 2)
+        )
+    }
+
+    // ミラジウムの粉＋紅蓮のワンド→ミラジウムナゲット
+    makeRecipe("miragium_nugget_by_fairy_wand") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.MELTING.ingredientData,
+                DataOreIngredient(ore = "dustMiragium")
+            ),
+            result = DataResult(item = "miragefairy2019:materials", data = 13, count = 3)
+        )
+    }
+
+    // ミラジウムインゴット＋紅蓮のワンド→ミラジウムの棒
+    makeRecipe("miragium_rod_by_fairy_wand") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "mI",
+                "I "
+            ),
+            key = mapOf(
+                "I" to DataOreIngredient(ore = "ingotMiragium"),
+                "m" to WandType.MELTING.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:materials", data = 12)
+        )
+    }
+
+    // ミラジウムインゴット→ミラジウムの棒
+    makeRecipe("miragium_rod_by_hand") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "  I",
+                " I ",
+                "I  "
+            ),
+            key = mapOf(
+                "I" to DataOreIngredient(ore = "ingotMiragium")
+            ),
+            result = DataResult(item = "miragefairy2019:materials", data = 12)
+        )
+    }
+
+    // ミラジウムウォーター入りポット
+    makeRecipe("miragium_water_pot") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "mirageFairyPot"),
+                DataOreIngredient(ore = "container1000Water"),
+                DataOreIngredient(ore = "dustMiragium")
+            ),
+            result = DataResult(item = "miragefairy2019:filled_bucket", data = 0)
+        )
+    }
+
+    // ネザーウォートブロック→ネザーウォート
+    makeRecipe("nether_wart_from_nether_wart_block") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.CRAFTING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:nether_wart_block")
+            ),
+            result = DataResult(item = "minecraft:nether_wart", count = 9)
+        )
+    }
+
+    // 溶岩→黒曜石
+    makeRecipe("obsidian_from_lava") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.HYDRATING.ingredientData,
+                DataOreIngredient(ore = "container1000Lava")
+            ),
+            result = DataResult(item = "minecraft:obsidian", count = 1)
+        )
+    }
+
+    // ネザークォーツブロック→ネザークォーツ
+    makeRecipe("quartz_from_quartz_block") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataOreIngredient(ore = "blockQuartz")
+            ),
+            result = DataResult(item = "minecraft:quartz", count = 4)
+        )
+    }
+
+    // ネザークォーツの魔導芯棒
+    makeRecipe("quartz_mana_rod") {
+        DataShapedRecipe(
+            pattern = listOf(
+                " Gp",
+                "GRG",
+                "cG "
+            ),
+            key = mapOf(
+                "R" to DataOreIngredient(ore = "rodMiragium"),
+                "G" to DataOreIngredient(ore = "gemQuartz"),
+                "c" to WandType.CRAFTING.ingredientData,
+                "p" to WandType.POLISHING.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = 6)
+        )
+    }
+
+    // 硝石
+    makeRecipe("saltpeter") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "m",
+                "D",
+                "B"
+            ),
+            key = mapOf(
+                "m" to WandType.MELTING.ingredientData,
+                "D" to DataSimpleIngredient(item = "minecraft:dirt", data = 0),
+                "B" to DataOreIngredient(ore = "container1000Water")
+            ),
+            result = DataResult(item = "miragefairy2019:materials", count = 1, data = 9)
+        )
+    }
+
+    // 月長石の魔導芯棒
+    makeRecipe("shine_mana_rod") {
+        DataShapedRecipe(
+            pattern = listOf(
+                " Gp",
+                "GRG",
+                "cG "
+            ),
+            key = mapOf(
+                "R" to DataOreIngredient(ore = "rodMiragium"),
+                "G" to DataOreIngredient(ore = "gemMoonstone"),
+                "c" to WandType.CRAFTING.ingredientData,
+                "p" to WandType.POLISHING.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = 0)
+        )
+    }
+
+    // 氷→雪
+    makeRecipe("snow_from_ice") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataOreIngredient(ore = "ice")
+            ),
+            result = DataResult(item = "minecraft:snow", count = 1)
+        )
+    }
+
+    // 雪ブロック→雪玉
+    makeRecipe("snowball_from_snow") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.CRAFTING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:snow")
+            ),
+            result = DataResult(item = "minecraft:snowball", count = 4)
+        )
+    }
+
+    // 羊毛→糸
+    makeRecipe("string_from_wool") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.CRAFTING.ingredientData,
+                DataOreIngredient(ore = "wool")
+            ),
+            result = DataResult(item = "minecraft:string", count = 4)
+        )
+    }
+
+    // 氷→水
+    makeRecipe("water_from_fairy_wand") { // TODO レシピ入れ替わり
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.MELTING.ingredientData,
+                DataOreIngredient(ore = "ice"),
+                DataSimpleIngredient(item = "minecraft:bucket")
+            ),
+            result = DataResult(item = "minecraft:water_bucket", count = 1)
+        )
+    }
+
+    // 加水のワンド→水
+    makeRecipe("water_from_ice") { // TODO レシピ入れ替わり
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.HYDRATING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:bucket")
+            ),
+            result = DataResult(item = "minecraft:water_bucket", count = 1)
+        )
+    }
+
+    // 蛍石の魔導芯棒
+    makeRecipe("wind_mana_rod") {
+        DataShapedRecipe(
+            pattern = listOf(
+                " Gp",
+                "GRG",
+                "cG "
+            ),
+            key = mapOf(
+                "R" to DataOreIngredient(ore = "rodMiragium"),
+                "G" to DataOreIngredient(ore = "gemFluorite"),
+                "c" to WandType.CRAFTING.ingredientData,
+                "p" to WandType.POLISHING.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = 2)
+        )
+    }
+
 }
