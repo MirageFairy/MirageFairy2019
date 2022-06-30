@@ -1,16 +1,18 @@
 [
-{
-  "modid": "miragefairy2019",
-  "name": "MirageFairy2019",
-  "description": "MirageFairy's mod started in 2019.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "https://github.com/MirrgieRiana/MirageFairy2019",
-  "updateUrl": "",
-  "authorList": ["MirageFairy Server"],
-  "credits": "The Forge and FML guys, for making this mod",
-  "logoFile": "icon.png",
-  "screenshots": [],
-  "dependencies": []
-}
+  {
+    "modid": "miragefairy2019",
+    "name": "MirageFairy2019",
+    "description": "MirageFairy's mod started in 2019.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/MirrgieRiana/MirageFairy2019",
+    "updateUrl": "",
+    "authorList": [
+      "MirageFairy Server"
+    ],
+    "credits": "The Forge and FML guys, for making this mod",
+    "logoFile": "icon.png",
+    "screenshots": [],
+    "dependencies": []
+  }
 ]
