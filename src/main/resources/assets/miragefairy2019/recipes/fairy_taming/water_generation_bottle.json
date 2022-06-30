@@ -1,6 +1,5 @@
 {
 	"type": "forge:ore_shapeless",
-	"group": "water_generation_bottle",
 	"ingredients": [
 		{
 			"type": "forge:ore_dict",

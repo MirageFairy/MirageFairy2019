@@ -1,6 +1,5 @@
 {
 	"type": "forge:ore_shapeless",
-	"group": "string_generation",
 	"ingredients": [
 		{
 			"type": "forge:ore_dict",
