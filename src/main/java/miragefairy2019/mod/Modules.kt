@@ -29,6 +29,23 @@ import miragefairy2019.mod.systems.systemsModule
 
 val modules = module {
 
+    Main.mainModule(this)
+    jeiModule(this)
+
+    artifactsModule(this)
+    pedestalModule(this)
+    materialModule(this)
+    systemsModule(this)
+    recipesModule(this)
+
+    playerAuraModule(this)
+    PlacedItem.placedItemMdule(this)
+    skillModule(this)
+    Fairy.fairyModule(this)
+    fairyWeaponModule(this)
+    fairyRelationModule(this)
+    FairyBox.fairyBoxModule(this)
+
     // TODO move
     onMakeIngredientFactory {
         this["ore_dict_complex"] = IngredientFactoryOreIngredientComplex::class.java
@@ -123,23 +140,6 @@ val modules = module {
         enJa("miragefairy2019.gui.playerAura.poem.step5", "I want to eat something else...", "そろそろ他のものが食べたい…")
 
     }
-
-    Main.mainModule(this)
-    jeiModule(this)
-
-    artifactsModule(this)
-    pedestalModule(this)
-    materialModule(this)
-    systemsModule(this)
-    recipesModule(this)
-
-    playerAuraModule(this)
-    PlacedItem.placedItemMdule(this)
-    skillModule(this)
-    Fairy.fairyModule(this)
-    fairyWeaponModule(this)
-    fairyRelationModule(this)
-    FairyBox.fairyBoxModule(this)
 
     // TODO move
 
