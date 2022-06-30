@@ -1,32 +1,32 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "minecraft:gunpowder",
-	"ingredients": [
-		[
-			{
-				"item": "minecraft:coal",
-				"data": 1
-			},
-			{
-				"type": "forge:ore_dict",
-				"ore": "dustCharcoal"
-			}
-		],
-		{
-			"type": "forge:ore_dict",
-			"ore": "dustSulfur"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "gemSaltpeter"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "dustMiragium"
-		}
-	],
-	"result": {
-		"item": "minecraft:gunpowder",
-		"count": 3
-	}
+  "type": "forge:ore_shapeless",
+  "group": "minecraft:gunpowder",
+  "ingredients": [
+    [
+      {
+        "item": "minecraft:coal",
+        "data": 1
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "dustCharcoal"
+      }
+    ],
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustSulfur"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "gemSaltpeter"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustMiragium"
+    }
+  ],
+  "result": {
+    "item": "minecraft:gunpowder",
+    "count": 3
+  }
 }

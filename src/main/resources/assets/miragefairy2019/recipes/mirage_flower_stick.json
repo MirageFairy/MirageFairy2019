@@ -1,30 +1,30 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "mirage_flower_stick",
-	"ingredients": [
-		{
-			"type": "forge:ore_dict",
-			"ore": "mirageFairyStick"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "container1000MiragiumWater"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "mirageFairy2019FairyAbilityCrystal"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "leafMirageFlower"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "dustApatite"
-		}
-	],
-	"result": {
-		"item": "miragefairy2019:fairy_materials",
-		"data": 7
-	}
+  "type": "forge:ore_shapeless",
+  "group": "mirage_flower_stick",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyStick"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container1000MiragiumWater"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyAbilityCrystal"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "leafMirageFlower"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustApatite"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:fairy_materials",
+    "data": 7
+  }
 }

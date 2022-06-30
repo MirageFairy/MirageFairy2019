@@ -1,22 +1,22 @@
 {
-	"type": "forge:ore_shaped",
-	"group": "fairy_stick",
-	"pattern": [
-		"  c",
-		" s ",
-		"s  "
-	],
-	"key": {
-		"s": {
-			"type": "forge:ore_dict",
-			"ore": "stickWood"
-		},
-		"c": {
-			"type": "forge:ore_dict",
-			"ore": "mirageFairyCrystal"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:fairy_stick"
-	}
+  "type": "forge:ore_shaped",
+  "group": "fairy_stick",
+  "pattern": [
+    "  c",
+    " s ",
+    "s  "
+  ],
+  "key": {
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "c": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystal"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:fairy_stick"
+  }
 }

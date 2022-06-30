@@ -1,20 +1,20 @@
 {
-	"type": "forge:ore_shapeless",
-	"group": "experience_bottle",
-	"ingredients": [
-		{
-			"type": "forge:ore_dict",
-			"ore": "container250MirageFlowerExtract"
-		},
-		{
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandBreaking"
-		},
-		{
-			"item": "minecraft:ender_eye"
-		}
-	],
-	"result": {
-		"item": "minecraft:experience_bottle"
-	}
+  "type": "forge:ore_shapeless",
+  "group": "experience_bottle",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "container250MirageFlowerExtract"
+    },
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandBreaking"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    }
+  ],
+  "result": {
+    "item": "minecraft:experience_bottle"
+  }
 }

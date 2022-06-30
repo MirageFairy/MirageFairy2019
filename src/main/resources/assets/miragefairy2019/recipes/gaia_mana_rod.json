@@ -1,31 +1,31 @@
 {
-	"type": "forge:ore_shaped",
-	"group": "gaia_mana_rod",
-	"pattern": [
-		" Gp",
-		"GRG",
-		"cG "
-	],
-	"key": {
-		"R": {
-			"type": "forge:ore_dict",
-			"ore": "rodMiragium"
-		},
-		"G": {
-			"type": "forge:ore_dict",
-			"ore": "gemSulfur"
-		},
-		"c": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandCrafting"
-		},
-		"p": {
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019CraftingToolFairyWandPolishing"
-		}
-	},
-	"result": {
-		"item": "miragefairy2019:fairy_materials",
-		"data": 3
-	}
+  "type": "forge:ore_shaped",
+  "group": "gaia_mana_rod",
+  "pattern": [
+    " Gp",
+    "GRG",
+    "cG "
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "rodMiragium"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gemSulfur"
+    },
+    "c": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "p": {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:fairy_materials",
+    "data": 3
+  }
 }
