@@ -6,7 +6,7 @@
       "ore": "mirageFairy2019CraftingToolFairyWandFreezing"
     },
     {
-      "type": "miragefairy2019:ore_dict_complex",
+      "type": "forge:ore_dict",
       "ore": "container1000Water"
     }
   ],
