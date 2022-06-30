@@ -1,19 +1,19 @@
 {
-	"type": "forge:ore_shapeless",
-	"ingredients": [
-		{
-			"type": "forge:ore_dict",
-			"ore": "mirageFairyStick"
-		},
-		{
-			"type": "miragefairy2019:ore_dict_complex",
-			"ore": "mirageFairy2019FairyWaterRank1"
-		},
-		{
-			"item": "minecraft:bucket"
-		}
-	],
-	"result": {
-		"item": "minecraft:water_bucket"
-	}
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyStick"
+    },
+    {
+      "type": "miragefairy2019:ore_dict_complex",
+      "ore": "mirageFairy2019FairyWaterRank1"
+    },
+    {
+      "item": "minecraft:bucket"
+    }
+  ],
+  "result": {
+    "item": "minecraft:water_bucket"
+  }
 }
