@@ -6,6 +6,7 @@ import net.minecraft.util.JsonUtils
 import net.minecraftforge.common.crafting.IIngredientFactory
 import net.minecraftforge.common.crafting.JsonContext
 
+// TODO move: ResourceMakerによりexportではなくなった
 /**
  * 耐久が削れたクラフティングツールを鉱石辞書名にマッチさせるためのIngredient
  */
