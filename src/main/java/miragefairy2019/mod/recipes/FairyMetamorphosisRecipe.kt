@@ -8,7 +8,7 @@ import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import mirrg.kotlin.hydrogen.toUpperCamelCase
 
-val fairyMetamorphosisModule = module {
+val fairyMetamorphosisRecipeModule = module {
     fun make(resultName: String, fairyMotif: String, result: DataResult) {
         makeRecipe("fairy_metamorphosis/${resultName}_from_${fairyMotif}") {
             DataShapelessRecipe(

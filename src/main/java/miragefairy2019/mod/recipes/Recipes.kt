@@ -3,7 +3,7 @@ package miragefairy2019.mod.recipes
 import miragefairy2019.lib.modinitializer.module
 
 val recipesModule = module {
-    fairyMetamorphosisModule(this)
+    fairyMetamorphosisRecipeModule(this)
     wandPulverizationRecipesModule(this)
     mortarRecipeModule(this)
     fairyDilutionRecipeModule(this)
