@@ -63,9 +63,7 @@ val potModule = module {
             key = mapOf(
                 "#" to DataOreIngredient(ore = "blockMirageFairyCrystal")
             ),
-            result = DataResult(
-                item = "${ModMirageFairy2019.MODID}:pot"
-            )
+            result = DataResult(item = "${ModMirageFairy2019.MODID}:pot")
         )
     }
 
@@ -146,10 +144,7 @@ val potModule = module {
                 DataOreIngredient(ore = "mirageFairyPot"),
                 input
             ),
-            result = DataResult(
-                item = "miragefairy2019:filled_bucket",
-                data = potMetadata
-            )
+            result = DataResult(item = "miragefairy2019:filled_bucket", data = potMetadata)
         )
     }
 
@@ -175,10 +170,7 @@ val potModule = module {
                 DataOreIngredient(ore = "container250$fluidOreSuffix"),
                 DataOreIngredient(ore = "container250$fluidOreSuffix")
             ),
-            result = DataResult(
-                item = "miragefairy2019:filled_bucket",
-                data = potMetadata
-            )
+            result = DataResult(item = "miragefairy2019:filled_bucket", data = potMetadata)
         )
     }
 
@@ -191,11 +183,7 @@ val potModule = module {
                 DataSimpleIngredient(item = "minecraft:glass_bottle"),
                 DataOreIngredient(ore = "container1000$fluidOreSuffix")
             ),
-            result = DataResult(
-                item = "miragefairy2019:fairy_materials",
-                data = bottleMetadata,
-                count = 4
-            )
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = bottleMetadata, count = 4)
         )
     }
 

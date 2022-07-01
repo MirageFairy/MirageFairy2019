@@ -58,10 +58,7 @@ val fertilizerModule = module {
                     DataOreIngredient(ore = "dustApatite"),
                     DataOreIngredient(ore = "dustMiragium")
                 ),
-                result = DataResult(
-                    item = "miragefairy2019:fertilizer",
-                    count = 4
-                )
+                result = DataResult(item = "miragefairy2019:fertilizer", count = 4)
             )
         }
     }

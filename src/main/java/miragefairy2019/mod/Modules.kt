@@ -155,10 +155,7 @@ val modules = module {
                 "I" to DataOreIngredient(ore = "ingotMiragium"),
                 "m" to WandType.MELTING.ingredientData
             ),
-            result = DataResult(
-                item = "miragefairy2019:materials",
-                data = 20
-            )
+            result = DataResult(item = "miragefairy2019:materials", data = 20)
         )
     }
 
@@ -174,10 +171,7 @@ val modules = module {
                 "I" to DataOreIngredient(ore = "ingotMiragium"),
                 "d" to WandType.DISTORTION.ingredientData
             ),
-            result = DataResult(
-                item = "miragefairy2019:materials",
-                data = 20
-            )
+            result = DataResult(item = "miragefairy2019:materials", data = 20)
         )
     }
 
@@ -191,16 +185,10 @@ val modules = module {
             ),
             key = mapOf(
                 "I" to DataOreIngredient(ore = "ingotMiragium"),
-                "L" to DataSimpleIngredient(
-                    item = "minecraft:double_plant",
-                    data = 1
-                ),
+                "L" to DataSimpleIngredient(item = "minecraft:double_plant", data = 1),
                 "m" to WandType.MELTING.ingredientData
             ),
-            result = DataResult(
-                item = "miragefairy2019:materials",
-                data = 19
-            )
+            result = DataResult(item = "miragefairy2019:materials", data = 19)
         )
     }
 
@@ -209,20 +197,11 @@ val modules = module {
         DataShapelessRecipe(
             ingredients = listOf(
                 DataOreIngredient(ore = "ingotMiragium"),
-                DataSimpleIngredient(
-                    item = "minecraft:double_plant",
-                    data = 1
-                ),
-                DataSimpleIngredient(
-                    item = "minecraft:double_plant",
-                    data = 1
-                ),
+                DataSimpleIngredient(item = "minecraft:double_plant", data = 1),
+                DataSimpleIngredient(item = "minecraft:double_plant", data = 1),
                 WandType.FUSION.ingredientData
             ),
-            result = DataResult(
-                item = "miragefairy2019:materials",
-                data = 19
-            )
+            result = DataResult(item = "miragefairy2019:materials", data = 19)
         )
     }
 
@@ -237,10 +216,7 @@ val modules = module {
                 "I" to DataOreIngredient(ore = "ingotMiragium"),
                 "d" to WandType.DISTORTION.ingredientData
             ),
-            result = DataResult(
-                item = "miragefairy2019:materials",
-                data = 12
-            )
+            result = DataResult(item = "miragefairy2019:materials", data = 12)
         )
     }
 
@@ -257,15 +233,10 @@ val modules = module {
                 "P" to DataOreIngredient(ore = "paneGlass"),
                 "D" to DataOreIngredient(ore = "doorWood"),
                 "l" to DataOreIngredient(ore = "torch"),
-                "C" to DataSimpleIngredient(
-                    item = "minecraft:carpet",
-                    data = 14
-                ),
+                "C" to DataSimpleIngredient(item = "minecraft:carpet", data = 14),
                 "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace")
             ),
-            result = DataResult(
-                item = "miragefairy2019:fairy_collection_box"
-            )
+            result = DataResult(item = "miragefairy2019:fairy_collection_box")
         )
     }
 
@@ -274,14 +245,9 @@ val modules = module {
         DataShapelessRecipe(
             ingredients = listOf(
                 WandType.BREAKING.ingredientData,
-                DataSimpleIngredient(
-                    item = "minecraft:blaze_rod"
-                )
+                DataSimpleIngredient(item = "minecraft:blaze_rod")
             ),
-            result = DataResult(
-                item = "minecraft:blaze_powder",
-                count = 3
-            )
+            result = DataResult(item = "minecraft:blaze_powder", count = 3)
         )
     }
 
@@ -297,9 +263,7 @@ val modules = module {
                 "L" to DataOreIngredient(ore = "logWood"),
                 "o" to DataOreIngredient(ore = "container1000MirageFlowerOil")
             ),
-            result = DataResult(
-                item = "miragefairy2019:fairy_wood_log"
-            )
+            result = DataResult(item = "miragefairy2019:fairy_wood_log")
         )
     }
 
@@ -310,23 +274,14 @@ val modules = module {
                 DataOreIngredient(ore = "gunpowder"),
                 DataOreIngredient(ore = "dustSulfur"),
                 DataOrIngredient(
-                    DataSimpleIngredient(
-                        item = "minecraft:coal",
-                        data = 0
-                    ),
-                    DataSimpleIngredient(
-                        item = "minecraft:coal",
-                        data = 1
-                    ),
+                    DataSimpleIngredient(item = "minecraft:coal", data = 0),
+                    DataSimpleIngredient(item = "minecraft:coal", data = 1),
                     DataOreIngredient(ore = "dustCoal"),
                     DataOreIngredient(ore = "dustCharcoal")
                 ),
                 DataOreIngredient(ore = "dustMiragium")
             ),
-            result = DataResult(
-                item = "minecraft:fire_charge",
-                count = 3
-            )
+            result = DataResult(item = "minecraft:fire_charge", count = 3)
         )
     }
 

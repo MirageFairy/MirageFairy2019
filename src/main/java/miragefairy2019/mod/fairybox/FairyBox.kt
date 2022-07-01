@@ -125,9 +125,7 @@ object FairyBox {
                         "C" to DataOreIngredient(ore = "mirageFairyLeather"),
                         "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace")
                     ),
-                    result = DataResult(
-                        item = "miragefairy2019:fairy_box"
-                    )
+                    result = DataResult(item = "miragefairy2019:fairy_box")
                 )
             }
         }
@@ -202,9 +200,7 @@ object FairyBox {
                         "B" to DataSimpleIngredient(item = "minecraft:bowl"),
                         "c" to DataOreIngredient(ore = "mirageFairy2019SphereChemical")
                     ),
-                    result = DataResult(
-                        item = "miragefairy2019:fairy_resin_tapper"
-                    )
+                    result = DataResult(item = "miragefairy2019:fairy_resin_tapper")
                 )
             }
         }
@@ -290,9 +286,7 @@ object FairyBox {
                         "b" to DataSimpleIngredient(item = "minecraft:brewing_stand"),
                         "c" to DataOreIngredient(ore = "mirageFairy2019SphereChemical")
                     ),
-                    result = DataResult(
-                        item = "miragefairy2019:fairy_centrifuge"
-                    )
+                    result = DataResult(item = "miragefairy2019:fairy_centrifuge")
                 )
             }
 

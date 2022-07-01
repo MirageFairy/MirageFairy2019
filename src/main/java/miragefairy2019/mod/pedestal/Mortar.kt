@@ -209,10 +209,7 @@ val mortarModule = module {
                     "#" to DataOreIngredient(ore = variant.bodyOreName),
                     "G" to DataOreIngredient(ore = variant.handleOreName)
                 ),
-                result = DataResult(
-                    item = "miragefairy2019:mortar",
-                    data = variant.metadata
-                )
+                result = DataResult(item = "miragefairy2019:mortar", data = variant.metadata)
             )
         }
 

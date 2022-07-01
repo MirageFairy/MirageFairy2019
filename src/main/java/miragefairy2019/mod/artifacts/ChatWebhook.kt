@@ -171,9 +171,7 @@ object ChatWebhook {
                     "#" to DataOreIngredient(ore = "blockMiragium"),
                     "m" to DataOreIngredient(ore = "mirageFairy2019FairyMirageRank1")
                 ),
-                result = DataResult(
-                    item = "${ModMirageFairy2019.MODID}:chat_webhook_transmitter"
-                )
+                result = DataResult(item = "${ModMirageFairy2019.MODID}:chat_webhook_transmitter")
             )
         }
         onMakeLang { enJa("tile.chatWebhookTransmitter.name", "Chat Webhook Transmitter", "天耳通の祠") }

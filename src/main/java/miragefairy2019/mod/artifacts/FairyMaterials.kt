@@ -303,10 +303,7 @@ object FairyMaterials {
                         DataOreIngredient(ore = "leather"),
                         DataOreIngredient(ore = "container1000MirageFlowerOil")
                     ),
-                    result = DataResult(
-                        item = "miragefairy2019:fairy_materials",
-                        data = 14
-                    )
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 14)
                 )
             }
 
@@ -317,11 +314,7 @@ object FairyMaterials {
                         WandType.POLISHING.ingredientData,
                         DataOreIngredient(ore = "gemFluorite")
                     ),
-                    result = DataResult(
-                        item = "miragefairy2019:fairy_materials",
-                        data = 16,
-                        count = 2
-                    )
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 16, count = 2)
                 )
             }
 

@@ -21,10 +21,7 @@ val wandRecipeModule = module {
                     WandType.BREAKING.ingredientData,
                     ingredient
                 ),
-                result = DataResult(
-                    item = "miragefairy2019:materials",
-                    data = metadata
-                )
+                result = DataResult(item = "miragefairy2019:materials", data = metadata)
             )
         }
     }
@@ -49,9 +46,7 @@ val wandRecipeModule = module {
                 "#" to DataOreIngredient(ore = "ice"),
                 "f" to WandType.FREEZING.ingredientData
             ),
-            result = DataResult(
-                item = "minecraft:packed_ice"
-            )
+            result = DataResult(item = "minecraft:packed_ice")
         )
     }
 
@@ -62,10 +57,7 @@ val wandRecipeModule = module {
                 DataSimpleIngredient(item = "minecraft:sponge", data = 1),
                 WandType.MELTING.ingredientData
             ),
-            result = DataResult(
-                item = "minecraft:sponge",
-                data = 0
-            )
+            result = DataResult(item = "minecraft:sponge", data = 0)
         )
     }
 
@@ -76,10 +68,7 @@ val wandRecipeModule = module {
                 DataOreIngredient(ore = "sandstone"),
                 WandType.BREAKING.ingredientData
             ),
-            result = DataResult(
-                item = "minecraft:sand",
-                data = 0
-            )
+            result = DataResult(item = "minecraft:sand", data = 0)
         )
     }
 

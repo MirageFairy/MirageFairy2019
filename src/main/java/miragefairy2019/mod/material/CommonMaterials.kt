@@ -130,10 +130,7 @@ object CommonMaterials {
                         WandType.BREAKING.ingredientData,
                         DataSimpleIngredient(item = "minecraft:gold_ore")
                     ),
-                    result = DataResult(
-                        item = "minecraft:gold_nugget",
-                        count = 17
-                    )
+                    result = DataResult(item = "minecraft:gold_nugget", count = 17)
                 )
             }
 
@@ -146,10 +143,7 @@ object CommonMaterials {
                         DataOreIngredient(ore = "dustMiragium"),
                         DataSimpleIngredient(item = "minecraft:gold_ore")
                     ),
-                    result = DataResult(
-                        item = "minecraft:gold_ingot",
-                        count = 3
-                    )
+                    result = DataResult(item = "minecraft:gold_ingot", count = 3)
                 )
             }
 
@@ -161,10 +155,7 @@ object CommonMaterials {
                         WandType.BREAKING.ingredientData,
                         DataSimpleIngredient(item = "minecraft:iron_ore")
                     ),
-                    result = DataResult(
-                        item = "minecraft:iron_nugget",
-                        count = 17
-                    )
+                    result = DataResult(item = "minecraft:iron_nugget", count = 17)
                 )
             }
 
@@ -177,10 +168,7 @@ object CommonMaterials {
                         DataOreIngredient(ore = "dustMiragium"),
                         DataSimpleIngredient(item = "minecraft:iron_ore")
                     ),
-                    result = DataResult(
-                        item = "minecraft:iron_ingot",
-                        count = 3
-                    )
+                    result = DataResult(item = "minecraft:iron_ingot", count = 3)
                 )
             }
 
@@ -189,16 +177,10 @@ object CommonMaterials {
                 DataShapelessRecipe(
                     ingredients = listOf(
                         WandType.MELTING.ingredientData,
-                        DataOrIngredient(
-                            DataOreIngredient(ore = "dustCoal"),
-                            DataOreIngredient(ore = "dustCharcoal")
-                        ),
+                        DataOrIngredient(DataOreIngredient(ore = "dustCoal"), DataOreIngredient(ore = "dustCharcoal")),
                         DataOreIngredient(ore = "dustMagnetite")
                     ),
-                    result = DataResult(
-                        item = "minecraft:iron_nugget",
-                        count = 3
-                    )
+                    result = DataResult(item = "minecraft:iron_nugget", count = 3)
                 )
             }
 
@@ -216,10 +198,7 @@ object CommonMaterials {
                         DataOreIngredient(ore = "dustMagnetite"),
                         DataOreIngredient(ore = "dustMagnetite")
                     ),
-                    result = DataResult(
-                        item = "minecraft:iron_ingot",
-                        count = 3
-                    )
+                    result = DataResult(item = "minecraft:iron_ingot", count = 3)
                 )
             }
 

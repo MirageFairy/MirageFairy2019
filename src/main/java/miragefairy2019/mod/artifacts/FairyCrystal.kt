@@ -102,10 +102,7 @@ object FairyCrystal {
                                     DataOreIngredient(ore = recipeParameter.inputOreName),
                                     recipeParameter.inputWand.ingredientData
                                 ),
-                                result = DataResult(
-                                    item = "miragefairy2019:fairy_crystal",
-                                    data = metadata
-                                )
+                                result = DataResult(item = "miragefairy2019:fairy_crystal", data = metadata)
                             )
                         }
                     }

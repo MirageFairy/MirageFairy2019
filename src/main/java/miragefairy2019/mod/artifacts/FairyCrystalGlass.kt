@@ -187,9 +187,7 @@ object FairyCrystalGlass {
             makeRecipe("${prefix}FairyCrystalGlass".toSnakeCase()) {
                 DataShapelessRecipe(
                     ingredients = (1..8).map { DataOreIngredient(ore = "mirageFairyCrystal$prefix") },
-                    result = DataResult(
-                        item = "${ModMirageFairy2019.MODID}:${"${prefix}FairyCrystalGlass".toSnakeCase()}"
-                    )
+                    result = DataResult(item = "${ModMirageFairy2019.MODID}:${"${prefix}FairyCrystalGlass".toSnakeCase()}")
                 )
             }
 
@@ -197,11 +195,7 @@ object FairyCrystalGlass {
             makeRecipe("${"${prefix}FairyCrystal".toSnakeCase()}_from_${"${prefix}FairyCrystalGlass".toSnakeCase()}") {
                 DataShapelessRecipe(
                     ingredients = listOf(DataOreIngredient(ore = "blockMirageFairyCrystal$prefix")),
-                    result = DataResult(
-                        item = "${ModMirageFairy2019.MODID}:fairy_crystal",
-                        data = crystalMetadata,
-                        count = 8
-                    )
+                    result = DataResult(item = "${ModMirageFairy2019.MODID}:fairy_crystal", data = crystalMetadata, count = 8)
                 )
             }
 
