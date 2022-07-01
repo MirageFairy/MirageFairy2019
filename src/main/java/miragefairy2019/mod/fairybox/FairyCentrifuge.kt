@@ -106,17 +106,19 @@ lateinit var blockFairyCentrifuge: () -> BlockFairyBoxBase
 lateinit var itemBlockFairyCentrifuge: () -> ItemBlock
 
 val fairyCentrifugeModule = module {
+
+    // ブロック登録
     blockFairyCentrifuge = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxCentrifuge() } }, "fairy_centrifuge") {
         setUnlocalizedName("fairyCentrifuge")
         setCreativeTab { Main.creativeTab }
-        makeBlockStates(resourceName.path) {
+        makeBlockStates {
             DataBlockStates(
                 variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
                     "facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_centrifuge", y = facing.second)
                 }
             )
         }
-        makeBlockModel(resourceName.path) {
+        makeBlockModel {
             DataModel(
                 parent = "block/block",
                 elements = listOf(
@@ -158,36 +160,48 @@ val fairyCentrifugeModule = module {
             )
         }
     }
+
+    // アイテム登録
     itemBlockFairyCentrifuge = item({ ItemBlock(blockFairyCentrifuge()) }, "fairy_centrifuge") {
         setCustomModelResourceLocation(variant = "facing=north")
+        makeRecipe {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "GbG",
+                    "cBc",
+                    "P#P"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:fairy_box"),
+                    "G" to DataSimpleIngredient(item = "miragefairy2019:gravity_rod"),
+                    "P" to DataSimpleIngredient(item = "miragefairy2019:pot"),
+                    "B" to DataSimpleIngredient(item = "minecraft:bucket"),
+                    "b" to DataSimpleIngredient(item = "minecraft:brewing_stand"),
+                    "c" to DataOreIngredient(ore = "mirageFairy2019SphereChemical")
+                ),
+                result = DataResult(item = "miragefairy2019:fairy_centrifuge")
+            )
+        }
     }
-    onMakeLang { enJa("tile.fairyCentrifuge.name", "Fairy Centrifuge", "錬金術師グラヴィーチャの家") }
-    onMakeLang { enJa("tile.fairyCentrifuge.poem", "`Super Strange Theory'", "“超変理論”") }
+
+    // タイルエンティティ登録
     tileEntity("fairy_centrifuge", TileEntityFairyBoxCentrifuge::class.java)
+
+    // Gui登録
     onInit {
         Main.registerGuiHandler(GuiId.fairyBoxCentrifuge, object : ISimpleGuiHandler {
             override fun GuiHandlerContext.onServer() = tileEntity?.castOrNull<TileEntityFairyBoxCentrifuge>()?.createContainer(player)
             override fun GuiHandlerContext.onClient() = tileEntity?.castOrNull<TileEntityFairyBoxCentrifuge>()?.createContainer(player)?.createGui()
         }.guiHandler)
     }
-    makeRecipe("fairy_centrifuge") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "GbG",
-                "cBc",
-                "P#P"
-            ),
-            key = mapOf(
-                "#" to DataSimpleIngredient(item = "miragefairy2019:fairy_box"),
-                "G" to DataSimpleIngredient(item = "miragefairy2019:gravity_rod"),
-                "P" to DataSimpleIngredient(item = "miragefairy2019:pot"),
-                "B" to DataSimpleIngredient(item = "minecraft:bucket"),
-                "b" to DataSimpleIngredient(item = "minecraft:brewing_stand"),
-                "c" to DataOreIngredient(ore = "mirageFairy2019SphereChemical")
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_centrifuge")
-        )
+
+    // 翻訳生成
+    onMakeLang {
+        enJa("tile.fairyCentrifuge.name", "Fairy Centrifuge", "錬金術師グラヴィーチャの家")
+        enJa("tile.fairyCentrifuge.poem", "`Super Strange Theory'", "“超変理論”")
     }
+
+    // 対応レシピ登録
     onAddRecipe {
 
         // 錬金術

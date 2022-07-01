@@ -44,17 +44,19 @@ lateinit var blockFairyResinTapper: () -> BlockFairyBoxBase
 lateinit var itemBlockFairyResinTapper: () -> ItemBlock
 
 val fairyResinTapperModule = module {
+
+    // ブロック登録
     blockFairyResinTapper = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxResinTapper() } }, "fairy_resin_tapper") {
         setUnlocalizedName("fairyResinTapper")
         setCreativeTab { Main.creativeTab }
-        makeBlockStates(resourceName.path) {
+        makeBlockStates {
             DataBlockStates(
                 variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
                     "facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_resin_tapper", y = facing.second)
                 }
             )
         }
-        makeBlockModel(resourceName.path) {
+        makeBlockModel {
             DataModel(
                 parent = "block/block",
                 elements = listOf(
@@ -91,30 +93,39 @@ val fairyResinTapperModule = module {
             )
         }
     }
+
+    // アイテム登録
     itemBlockFairyResinTapper = item({ ItemBlock(blockFairyResinTapper()) }, "fairy_resin_tapper") {
         setCustomModelResourceLocation(variant = "facing=north")
+        makeRecipe {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "LsL",
+                    "H#H",
+                    "BcB"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:fairy_box"),
+                    "L" to DataSimpleIngredient(item = "miragefairy2019:lilagium_scythe"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSlash"),
+                    "H" to DataSimpleIngredient(item = "minecraft:hopper"),
+                    "B" to DataSimpleIngredient(item = "minecraft:bowl"),
+                    "c" to DataOreIngredient(ore = "mirageFairy2019SphereChemical")
+                ),
+                result = DataResult(item = "miragefairy2019:fairy_resin_tapper")
+            )
+        }
     }
-    onMakeLang { enJa("tile.fairyResinTapper.name", "Fairy Resin Tapper", "樹液取り職人スプルーツァの家") }
-    onMakeLang { enJa("tile.fairyResinTapper.poem", "", "妖精だから、森に帰ります") }
+
+    // タイルエンティティ登録
     tileEntity("fairy_resin_tapper", TileEntityFairyBoxResinTapper::class.java)
-    makeRecipe("fairy_resin_tapper") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "LsL",
-                "H#H",
-                "BcB"
-            ),
-            key = mapOf(
-                "#" to DataSimpleIngredient(item = "miragefairy2019:fairy_box"),
-                "L" to DataSimpleIngredient(item = "miragefairy2019:lilagium_scythe"),
-                "s" to DataOreIngredient(ore = "mirageFairy2019SphereSlash"),
-                "H" to DataSimpleIngredient(item = "minecraft:hopper"),
-                "B" to DataSimpleIngredient(item = "minecraft:bowl"),
-                "c" to DataOreIngredient(ore = "mirageFairy2019SphereChemical")
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_resin_tapper")
-        )
+
+    // 翻訳生成
+    onMakeLang {
+        enJa("tile.fairyResinTapper.name", "Fairy Resin Tapper", "樹液取り職人スプルーツァの家")
+        enJa("tile.fairyResinTapper.poem", "", "妖精だから、森に帰ります")
     }
+
 }
 
 class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {

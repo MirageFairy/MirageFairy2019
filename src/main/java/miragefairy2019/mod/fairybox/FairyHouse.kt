@@ -29,17 +29,19 @@ lateinit var blockFairyHouse: () -> BlockFairyBoxBase
 lateinit var itemBlockFairyHouse: () -> ItemBlock
 
 val fairyHouseModule = module {
+
+    // ブロック登録
     blockFairyHouse = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxEmpty() } }, "fairy_box") {
         setUnlocalizedName("fairyHouse")
         setCreativeTab { Main.creativeTab }
-        makeBlockStates(resourceName.path) {
+        makeBlockStates {
             DataBlockStates(
                 variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
                     "facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_box", y = facing.second)
                 }
             )
         }
-        makeBlockModel(resourceName.path) {
+        makeBlockModel {
             DataModel(
                 parent = "block/block",
                 elements = listOf(
@@ -76,30 +78,39 @@ val fairyHouseModule = module {
             )
         }
     }
+
+    // アイテム登録
     itemBlockFairyHouse = item({ ItemBlock(blockFairyHouse()) }, "fairy_box") {
         setCustomModelResourceLocation(variant = "facing=north")
+        makeRecipe {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "sls",
+                    "PLD",
+                    "sCs"
+                ),
+                key = mapOf(
+                    "L" to DataOreIngredient(ore = "logFairyWood"),
+                    "P" to DataOreIngredient(ore = "paneGlass"),
+                    "D" to DataOreIngredient(ore = "doorWood"),
+                    "l" to DataSimpleIngredient(item = "miragefairy2019:light_magic_wand"),
+                    "C" to DataOreIngredient(ore = "mirageFairyLeather"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace")
+                ),
+                result = DataResult(item = "miragefairy2019:fairy_box")
+            )
+        }
     }
-    onMakeLang { enJa("tile.fairyHouse.name", "Fairy Box", "妖精の家") }
-    onMakeLang { enJa("tile.fairyHouse.poem", "", "大きな刳りの木の中で") }
+
+    // タイルエンティティ登録
     tileEntity("fairy_box", TileEntityFairyBoxEmpty::class.java)
-    makeRecipe("fairy_box") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "sls",
-                "PLD",
-                "sCs"
-            ),
-            key = mapOf(
-                "L" to DataOreIngredient(ore = "logFairyWood"),
-                "P" to DataOreIngredient(ore = "paneGlass"),
-                "D" to DataOreIngredient(ore = "doorWood"),
-                "l" to DataSimpleIngredient(item = "miragefairy2019:light_magic_wand"),
-                "C" to DataOreIngredient(ore = "mirageFairyLeather"),
-                "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace")
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_box")
-        )
+
+    // 翻訳生成
+    onMakeLang {
+        enJa("tile.fairyHouse.name", "Fairy Box", "妖精の家")
+        enJa("tile.fairyHouse.poem", "", "大きな刳りの木の中で")
     }
+
 }
 
 class TileEntityFairyBoxEmpty : TileEntityFairyBoxBase()
