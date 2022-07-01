@@ -77,7 +77,7 @@ object CommonMaterials {
     lateinit var itemMaterials: () -> ItemSimpleMaterials
     val commonMaterialsModule = module {
 
-        // アイテム状素材
+        // アイテム登録
         itemMaterials = item({ ItemSimpleMaterials() }, "materials") {
             setUnlocalizedName("materials")
             setCreativeTab { Main.creativeTab }
