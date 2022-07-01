@@ -72,4 +72,182 @@ val wandRecipeModule = module {
         )
     }
 
+    // ブレイズロッドからブレイズパウダー　高効率
+    makeRecipe("blaze_powder_from_blaze_rod") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:blaze_rod")
+            ),
+            result = DataResult(item = "minecraft:blaze_powder", count = 3)
+        )
+    }
+
+    // 骨＞破砕のワンド→骨粉
+    makeRecipe("bone_meal_from_bone") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataOreIngredient(ore = "bone")
+            ),
+            result = DataResult(item = "minecraft:dye", data = 15, count = 4)
+        )
+    }
+
+    // 粘土ブロック→粘土
+    makeRecipe("clay_ball_from_clay") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.CRAFTING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:clay")
+            ),
+            result = DataResult(item = "minecraft:clay_ball", count = 4)
+        )
+    }
+
+    // 石→丸石
+    makeRecipe("cobblestone_from_stone") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataOreIngredient(ore = "stone")
+            ),
+            result = DataResult(item = "minecraft:cobblestone", count = 1)
+        )
+    }
+
+    // グロウストーン→グロウストーンダスト
+    makeRecipe("glowstone_dust_from_glowstone") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataOreIngredient(ore = "glowstone")
+            ),
+            result = DataResult(item = "minecraft:glowstone_dust", count = 4)
+        )
+    }
+
+    // 丸石→砂利
+    makeRecipe("gravel_from_cobblestone") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataOreIngredient(ore = "cobblestone")
+            ),
+            result = DataResult(item = "minecraft:gravel", count = 1)
+        )
+    }
+
+    // 水→氷
+    makeRecipe("ice_from_water") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.FREEZING.ingredientData,
+                DataOreIngredient(ore = "container1000Water")
+            ),
+            result = DataResult(item = "minecraft:ice", count = 1)
+        )
+    }
+
+    // 黒曜石→溶岩
+    makeRecipe("lava_from_obsidian") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.MELTING.ingredientData,
+                DataOreIngredient(ore = "obsidian"),
+                DataSimpleIngredient(item = "minecraft:bucket")
+            ),
+            result = DataResult(item = "minecraft:lava_bucket", count = 1)
+        )
+    }
+
+    // ネザーウォートブロック→ネザーウォート
+    makeRecipe("nether_wart_from_nether_wart_block") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.CRAFTING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:nether_wart_block")
+            ),
+            result = DataResult(item = "minecraft:nether_wart", count = 9)
+        )
+    }
+
+    // 溶岩→黒曜石
+    makeRecipe("obsidian_from_lava") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.HYDRATING.ingredientData,
+                DataOreIngredient(ore = "container1000Lava")
+            ),
+            result = DataResult(item = "minecraft:obsidian", count = 1)
+        )
+    }
+
+    // ネザークォーツブロック→ネザークォーツ
+    makeRecipe("quartz_from_quartz_block") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataOreIngredient(ore = "blockQuartz")
+            ),
+            result = DataResult(item = "minecraft:quartz", count = 4)
+        )
+    }
+
+    // 氷→雪
+    makeRecipe("snow_from_ice") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.BREAKING.ingredientData,
+                DataOreIngredient(ore = "ice")
+            ),
+            result = DataResult(item = "minecraft:snow", count = 1)
+        )
+    }
+
+    // 雪ブロック→雪玉
+    makeRecipe("snowball_from_snow") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.CRAFTING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:snow")
+            ),
+            result = DataResult(item = "minecraft:snowball", count = 4)
+        )
+    }
+
+    // 羊毛→糸
+    makeRecipe("string_from_wool") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.CRAFTING.ingredientData,
+                DataOreIngredient(ore = "wool")
+            ),
+            result = DataResult(item = "minecraft:string", count = 4)
+        )
+    }
+
+    // 氷→水
+    makeRecipe("water_from_ice") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.MELTING.ingredientData,
+                DataOreIngredient(ore = "ice"),
+                DataSimpleIngredient(item = "minecraft:bucket")
+            ),
+            result = DataResult(item = "minecraft:water_bucket", count = 1)
+        )
+    }
+
+    // 加水のワンド→水
+    makeRecipe("water_from_fairy_wand") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.HYDRATING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:bucket")
+            ),
+            result = DataResult(item = "minecraft:water_bucket", count = 1)
+        )
+    }
+
 }
