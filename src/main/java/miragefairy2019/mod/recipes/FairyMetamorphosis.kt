@@ -13,7 +13,7 @@ val fairyMetamorphosisModule = module {
         makeRecipe("fairy_metamorphosis/${resultName}_from_${fairyMotif}") {
             DataShapelessRecipe(
                 ingredients = listOf(
-                    DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairyStick"),
+                    DataOreIngredient(ore = "mirageFairyStick"),
                     DataOreIngredient(ore = "container250MiragiumWater"),
                     DataOreIngredient(ore = "mirageFairy2019Fairy${fairyMotif.toUpperCamelCase()}Rank1"),
                     DataSimpleIngredient(item = "minecraft:dirt", data = 0)
