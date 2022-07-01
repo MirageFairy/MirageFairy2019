@@ -307,6 +307,24 @@ object FairyMaterials {
                 )
             }
 
+            // 5棒＋8樹液→松明8
+            makeRecipe("torch_from_fairy_wood_resin") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "r",
+                        "S"
+                    ),
+                    key = mapOf(
+                        "r" to DataOreIngredient(ore = "mirageFairyWoodResin"),
+                        "S" to DataOreIngredient(ore = "stickWood")
+                    ),
+                    result = DataResult(
+                        item = "minecraft:torch",
+                        count = 8
+                    )
+                )
+            }
+
             // 蛍石→スフィアベース
             makeRecipe("sphere_base") {
                 DataShapelessRecipe(
@@ -379,27 +397,6 @@ object FairyMaterials {
                         item = "miragefairy2019:fairy_materials",
                         data = 21,
                         count = 1
-                    )
-                )
-            }
-
-
-
-
-            // 5棒＋8樹液→松明8
-            makeRecipe("torch_from_fairy_wood_resin") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "r",
-                        "S"
-                    ),
-                    key = mapOf(
-                        "r" to DataOreIngredient(ore = "mirageFairyWoodResin"),
-                        "S" to DataOreIngredient(ore = "stickWood")
-                    ),
-                    result = DataResult(
-                        item = "minecraft:torch",
-                        count = 8
                     )
                 )
             }
