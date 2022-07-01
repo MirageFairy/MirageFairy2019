@@ -9,7 +9,7 @@ import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
 
-val slabUncraftModule = module {
+val slabUncraftRecipeModule = module {
     fun r(resourceName: String, slab: DataIngredient, block: DataResult) = makeRecipe("slab_uncraft/$resourceName") {
         DataShapelessRecipe(
             ingredients = listOf(

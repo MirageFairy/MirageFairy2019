@@ -12,7 +12,7 @@ val recipesModule = module {
     Mfa.mfaModule(this)
     fairyCrystalDropLoaderModule(this)
     fairyLogDropLoaderModule(this)
-    slabUncraftModule(this)
+    slabUncraftRecipeModule(this)
     miniaRecipe(this)
     fairyTamingRecipeModule(this)
 }
