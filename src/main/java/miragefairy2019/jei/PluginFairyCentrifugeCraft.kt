@@ -21,7 +21,7 @@ import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gray
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod.fairybox.FairyBox
+import miragefairy2019.mod.fairybox.blockFairyCentrifuge
 import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.Minecraft
 
@@ -51,7 +51,7 @@ class PluginFairyCentrifugeCraft : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(FairyBox.blockFairyCentrifuge().createItemStack())
+            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(blockFairyCentrifuge().createItemStack())
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 repeat(9) { c -> recipeLayout.itemStacks.init(c, true, 18 * c, 0) }
                 repeat(9) { c -> recipeLayout.itemStacks.init(9 + c, false, 18 * c, 18) }
@@ -61,7 +61,7 @@ class PluginFairyCentrifugeCraft : IModPlugin {
     }
 
     override fun register(registry: IModRegistry) {
-        registry.addRecipeCatalyst(FairyBox.blockFairyCentrifuge().createItemStack(), uid)
+        registry.addRecipeCatalyst(blockFairyCentrifuge().createItemStack(), uid)
         registry.addRecipes(FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers.map { handler ->
             object : IRecipeWrapper {
                 override fun getIngredients(ingredients: IIngredients) {

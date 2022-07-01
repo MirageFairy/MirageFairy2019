@@ -3,7 +3,6 @@ package miragefairy2019.mod
 import miragefairy2019.export.IngredientFactoryOreIngredientComplex
 import miragefairy2019.jei.jeiModule
 import miragefairy2019.lib.modinitializer.module
-import miragefairy2019.lib.resourcemaker.DataOrIngredient
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
@@ -12,11 +11,9 @@ import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.ja
-import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.artifactsModule
-import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.mod.fairy.Fairy
-import miragefairy2019.mod.fairybox.FairyBox
+import miragefairy2019.mod.fairybox.fairyBoxModule
 import miragefairy2019.mod.fairyrelation.fairyRelationModule
 import miragefairy2019.mod.fairyweapon.fairyWeaponModule
 import miragefairy2019.mod.material.materialModule
@@ -44,7 +41,7 @@ val modules = module {
     Fairy.fairyModule(this)
     fairyWeaponModule(this)
     fairyRelationModule(this)
-    FairyBox.fairyBoxModule(this)
+    fairyBoxModule(this)
 
     // TODO move
     onMakeIngredientFactory {
