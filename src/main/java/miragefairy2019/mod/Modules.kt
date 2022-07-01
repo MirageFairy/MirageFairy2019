@@ -226,20 +226,6 @@ val modules = module {
         )
     }
 
-    // 妖精の革
-    makeRecipe("mirage_fairy_leather") {
-        DataShapelessRecipe(
-            ingredients = listOf(
-                DataOreIngredient(ore = "leather"),
-                DataOreIngredient(ore = "container1000MirageFlowerOil")
-            ),
-            result = DataResult(
-                item = "miragefairy2019:fairy_materials",
-                data = 14
-            )
-        )
-    }
-
     // 歪曲のワンドからミラジウムの棒
     makeRecipe("miragium_rod_from_distortion_fairy_wand") {
         DataShapedRecipe(
@@ -363,24 +349,6 @@ val modules = module {
         )
     }
 
-    // 燐灰石の魔導芯棒
-    makeRecipe("aqua_mana_rod") {
-        DataShapedRecipe(
-            pattern = listOf(
-                " Gp",
-                "GRG",
-                "cG "
-            ),
-            key = mapOf(
-                "R" to DataOreIngredient(ore = "rodMiragium"),
-                "G" to DataOreIngredient(ore = "gemApatite"),
-                "c" to WandType.CRAFTING.ingredientData,
-                "p" to WandType.POLISHING.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_materials", data = 4)
-        )
-    }
-
     // 骨＞破砕のワンド→骨粉
     makeRecipe("bone_meal_from_bone") {
         DataShapelessRecipe(
@@ -411,24 +379,6 @@ val modules = module {
                 DataOreIngredient(ore = "stone")
             ),
             result = DataResult(item = "minecraft:cobblestone", count = 1)
-        )
-    }
-
-    // 磁鉄鉱の魔導芯棒
-    makeRecipe("dark_mana_rod") {
-        DataShapedRecipe(
-            pattern = listOf(
-                " Gp",
-                "GRG",
-                "cG "
-            ),
-            key = mapOf(
-                "R" to DataOreIngredient(ore = "rodMiragium"),
-                "G" to DataOreIngredient(ore = "gemMagnetite"),
-                "c" to WandType.CRAFTING.ingredientData,
-                "p" to WandType.POLISHING.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_materials", data = 5)
         )
     }
 
@@ -467,59 +417,6 @@ val modules = module {
                 "c" to DataOreIngredient(ore = "mirageFairyCrystal")
             ),
             result = DataResult(item = "miragefairy2019:fairy_stick")
-        )
-    }
-
-    // 辰砂の魔導芯棒
-    makeRecipe("fire_mana_rod") {
-        DataShapedRecipe(
-            pattern = listOf(
-                " Gp",
-                "GRG",
-                "cG "
-            ),
-            key = mapOf(
-                "R" to DataOreIngredient(ore = "rodMiragium"),
-                "G" to DataOreIngredient(ore = "gemCinnabar"),
-                "c" to WandType.CRAFTING.ingredientData,
-                "p" to WandType.POLISHING.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_materials", data = 1)
-        )
-    }
-
-    // 硫黄の魔導芯棒
-    makeRecipe("gaia_mana_rod") {
-        DataShapedRecipe(
-            pattern = listOf(
-                " Gp",
-                "GRG",
-                "cG "
-            ),
-            key = mapOf(
-                "R" to DataOreIngredient(ore = "rodMiragium"),
-                "G" to DataOreIngredient(ore = "gemSulfur"),
-                "c" to WandType.CRAFTING.ingredientData,
-                "p" to WandType.POLISHING.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_materials", data = 3)
-        )
-    }
-
-    // ガラスの魔導芯棒
-    makeRecipe("glass_mana_rod") {
-        DataShapedRecipe(
-            pattern = listOf(
-                " G ",
-                "GRG",
-                "cG "
-            ),
-            key = mapOf(
-                "R" to DataOreIngredient(ore = "rodMiragium"),
-                "G" to DataOreIngredient(ore = "blockGlass"),
-                "c" to WandType.CRAFTING.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_materials", data = 13)
         )
     }
 
@@ -581,31 +478,6 @@ val modules = module {
                 DataSimpleIngredient(item = "minecraft:bucket")
             ),
             result = DataResult(item = "minecraft:lava_bucket", count = 1)
-        )
-    }
-
-    // 妖精の木の棒
-    makeRecipe("mirage_fairy_wood_stick") {
-        DataShapelessRecipe(
-            ingredients = listOf(
-                DataOreIngredient(ore = "stickWood"),
-                DataOreIngredient(ore = "container250MirageFlowerOil")
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_materials", data = 9)
-        )
-    }
-
-    // ミラージュフラワーの茎
-    makeRecipe("mirage_flower_stick") {
-        DataShapelessRecipe(
-            ingredients = listOf(
-                DataOreIngredient(ore = "mirageFairyStick"),
-                DataOreIngredient(ore = "container1000MiragiumWater"),
-                DataOreIngredient(ore = "mirageFairy2019FairyAbilityCrystal"),
-                DataOreIngredient(ore = "leafMirageFlower"),
-                DataOreIngredient(ore = "dustApatite")
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_materials", data = 7)
         )
     }
 
@@ -708,24 +580,6 @@ val modules = module {
         )
     }
 
-    // ネザークォーツの魔導芯棒
-    makeRecipe("quartz_mana_rod") {
-        DataShapedRecipe(
-            pattern = listOf(
-                " Gp",
-                "GRG",
-                "cG "
-            ),
-            key = mapOf(
-                "R" to DataOreIngredient(ore = "rodMiragium"),
-                "G" to DataOreIngredient(ore = "gemQuartz"),
-                "c" to WandType.CRAFTING.ingredientData,
-                "p" to WandType.POLISHING.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_materials", data = 6)
-        )
-    }
-
     // 硝石
     makeRecipe("saltpeter") {
         DataShapedRecipe(
@@ -740,24 +594,6 @@ val modules = module {
                 "B" to DataOreIngredient(ore = "container1000Water")
             ),
             result = DataResult(item = "miragefairy2019:materials", count = 1, data = 9)
-        )
-    }
-
-    // 月長石の魔導芯棒
-    makeRecipe("shine_mana_rod") {
-        DataShapedRecipe(
-            pattern = listOf(
-                " Gp",
-                "GRG",
-                "cG "
-            ),
-            key = mapOf(
-                "R" to DataOreIngredient(ore = "rodMiragium"),
-                "G" to DataOreIngredient(ore = "gemMoonstone"),
-                "c" to WandType.CRAFTING.ingredientData,
-                "p" to WandType.POLISHING.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_materials", data = 0)
         )
     }
 
@@ -814,24 +650,6 @@ val modules = module {
                 DataSimpleIngredient(item = "minecraft:bucket")
             ),
             result = DataResult(item = "minecraft:water_bucket", count = 1)
-        )
-    }
-
-    // 蛍石の魔導芯棒
-    makeRecipe("wind_mana_rod") {
-        DataShapedRecipe(
-            pattern = listOf(
-                " Gp",
-                "GRG",
-                "cG "
-            ),
-            key = mapOf(
-                "R" to DataOreIngredient(ore = "rodMiragium"),
-                "G" to DataOreIngredient(ore = "gemFluorite"),
-                "c" to WandType.CRAFTING.ingredientData,
-                "p" to WandType.POLISHING.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_materials", data = 2)
         )
     }
 
