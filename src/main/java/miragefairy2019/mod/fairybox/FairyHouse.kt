@@ -25,11 +25,11 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import net.minecraft.item.ItemBlock
 
-lateinit var blockFairyBoxEmpty: () -> BlockFairyBoxBase
-lateinit var itemBlockFairyBoxEmpty: () -> ItemBlock
+lateinit var blockFairyHouse: () -> BlockFairyBoxBase
+lateinit var itemBlockFairyHouse: () -> ItemBlock
 
-val fairyBoxEmptyModule = module {
-    blockFairyBoxEmpty = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxEmpty() } }, "fairy_box") {
+val fairyHouseModule = module {
+    blockFairyHouse = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxEmpty() } }, "fairy_box") {
         setUnlocalizedName("fairyBox") // TODO rename
         setCreativeTab { Main.creativeTab }
         makeBlockStates(resourceName.path) {
@@ -76,7 +76,7 @@ val fairyBoxEmptyModule = module {
             )
         }
     }
-    itemBlockFairyBoxEmpty = item({ ItemBlock(blockFairyBoxEmpty()) }, "fairy_box") {
+    itemBlockFairyHouse = item({ ItemBlock(blockFairyHouse()) }, "fairy_box") {
         setCustomModelResourceLocation(variant = "facing=north")
     }
     onMakeLang { enJa("tile.fairyBox.name", "Fairy Box", "妖精の家") }
