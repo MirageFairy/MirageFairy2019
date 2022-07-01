@@ -51,17 +51,17 @@ import net.minecraft.init.Items
 import net.minecraft.item.ItemBlock
 
 val fairyBoxModule = module {
-    fairyBoxBaseModule(this)
+    fairyBoxEmptyModule(this)
     fairyResinTapperModule(this)
     fairyCentrifugeModule(this)
 }
 
-lateinit var blockFairyBox: () -> BlockFairyBoxBase
-lateinit var itemBlockFairyBox: () -> ItemBlock
+lateinit var blockFairyBoxEmpty: () -> BlockFairyBoxBase
+lateinit var itemBlockFairyBoxEmpty: () -> ItemBlock
 
-val fairyBoxBaseModule = module {
-    blockFairyBox = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxEmpty() } }, "fairy_box") {
-        setUnlocalizedName("fairyBox")
+val fairyBoxEmptyModule = module {
+    blockFairyBoxEmpty = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxEmpty() } }, "fairy_box") {
+        setUnlocalizedName("fairyBox") // TODO rename
         setCreativeTab { Main.creativeTab }
         makeBlockStates(resourceName.path) {
             DataBlockStates(
@@ -107,7 +107,7 @@ val fairyBoxBaseModule = module {
             )
         }
     }
-    itemBlockFairyBox = item({ ItemBlock(blockFairyBox()) }, "fairy_box") {
+    itemBlockFairyBoxEmpty = item({ ItemBlock(blockFairyBoxEmpty()) }, "fairy_box") {
         setCustomModelResourceLocation(variant = "facing=north")
     }
     onMakeLang { enJa("tile.fairyBox.name", "Fairy Box", "妖精の家") }
