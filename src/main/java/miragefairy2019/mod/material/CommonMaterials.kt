@@ -28,6 +28,51 @@ import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
 import net.minecraftforge.fml.common.registry.GameRegistry
 
+enum class CommonMaterialCard(
+    val metadata: Int,
+    val registryName: String,
+    val unlocalizedName: String,
+    val englishName: String,
+    val japaneseName: String,
+    val oreName: String,
+    val isHandheld: Boolean,
+    val initializer: ItemVariantInitializer<ItemSimpleMaterials, ItemVariantSimpleMaterials>.() -> Unit
+) {
+    APATITE_GEM(0, "apatite_gem", "gemApatite", "Apatite", "燐灰石", "gemApatite", false, { }),
+    FLUORITE_GEM(1, "fluorite_gem", "gemFluorite", "Fluorite", "蛍石", "gemFluorite", false, { }),
+    SULFUR_GEM(2, "sulfur_gem", "gemSulfur", "Sulfur", "硫黄", "gemSulfur", false, { }),
+    MIRAGIUM_DUST(3, "miragium_dust", "dustMiragium", "Miragium Dust", "ミラジウムの粉", "dustMiragium", false, { }),
+    MIRAGIUM_TINY_DUST(4, "miragium_tiny_dust", "dustTinyMiragium", "Tiny Pile of Miragium Dust", "ミラジウムの微粉", "dustTinyMiragium", false, { }),
+    MIRAGIUM_INGOT(5, "miragium_ingot", "ingotMiragium", "Miragium Ingot", "ミラジウムインゴット", "ingotMiragium", false, { }),
+    CINNABAR_GEM(6, "cinnabar_gem", "gemCinnabar", "Cinnabar", "辰砂", "gemCinnabar", false, { }),
+    MOONSTONE_GEM(7, "moonstone_gem", "gemMoonstone", "Moonstone", "月長石", "gemMoonstone", false, { }),
+    MAGNETITE_GEM(8, "magnetite_gem", "gemMagnetite", "Magnetite", "磁鉄鉱", "gemMagnetite", false, { }),
+    SALTPETER_GEM(9, "saltpeter_gem", "gemSaltpeter", "Saltpeter", "硝石", "gemSaltpeter", false, { }),
+    PYROPE_GEM(10, "pyrope_gem", "gemPyrope", "Pyrope", "パイロープ", "gemPyrope", false, { }),
+    SMITHSONITE_GEM(11, "smithsonite_gem", "gemSmithsonite", "Smithsonite", "スミソナイト", "gemSmithsonite", false, { }),
+    MIRAGIUM_ROD(12, "miragium_rod", "rodMiragium", "Miragium Rod", "ミラジウムの棒", "rodMiragium", true, { }),
+    MIRAGIUM_NUGGET(13, "miragium_nugget", "nuggetMiragium", "Miragium Nugget", "ミラジウムの塊", "nuggetMiragium", false, { }),
+    NEPHRITE_GEM(14, "nephrite_gem", "gemNephrite", "Nephrite", "ネフライト", "gemNephrite", false, { }),
+    TOPAZ_GEM(15, "topaz_gem", "gemTopaz", "Topaz", "トパーズ", "gemTopaz", false, { }),
+    TOURMALINE_GEM(16, "tourmaline_gem", "gemTourmaline", "Tourmaline", "トルマリン", "gemTourmaline", false, { }),
+    HELIOLITE_GEM(17, "heliolite_gem", "gemHeliolite", "Heliolite", "ヘリオライト", "gemHeliolite", false, { }),
+    LABRADORITE_GEM(18, "labradorite_gem", "gemLabradorite", "Labradorite", "ラブラドライト", "gemLabradorite", false, { }),
+    LILAGIUM_INGOT(19, "lilagium_ingot", "ingotLilagium", "Lilagium Ingot", "リラジウムインゴット", "ingotLilagium", false, { }),
+    MIRAGIUM_PLATE(20, "miragium_plate", "plateMiragium", "Miragium Plate", "ミラジウムの板", "plateMiragium", false, { }),
+    COAL_DUST(21, "coal_dust", "dustCoal", "Coal Dust", "石炭の粉", "dustCoal", false, { fuel(1600) }),
+    CHARCOAL_DUST(22, "charcoal_dust", "dustCharcoal", "Charcoal Dust", "木炭の粉", "dustCharcoal", false, { fuel(1600) }),
+    APATITE_DUST(23, "apatite_dust", "dustApatite", "Apatite Dust", "燐灰石の粉", "dustApatite", false, { }),
+    FLUORITE_DUST(24, "fluorite_dust", "dustFluorite", "Fluorite Dust", "蛍石の粉", "dustFluorite", false, { }),
+    SULFUR_DUST(25, "sulfur_dust", "dustSulfur", "Sulfur Dust", "硫黄の粉", "dustSulfur", false, { }),
+    CINNABAR_DUST(26, "cinnabar_dust", "dustCinnabar", "Cinnabar Dust", "辰砂の粉", "dustCinnabar", false, { }),
+    MOONSTONE_DUST(27, "moonstone_dust", "dustMoonstone", "Moonstone Dust", "月長石の粉", "dustMoonstone", false, { }),
+    MAGNETITE_DUST(28, "magnetite_dust", "dustMagnetite", "Magnetite Dust", "磁鉄鉱の粉", "dustMagnetite", false, { }),
+    PYRITE_GEM(29, "pyrite_gem", "gemPyrite", "Pyrite", "パイライト", "gemPyrite", false, { }),
+}
+
+private fun ItemVariantInitializer<ItemSimpleMaterials, ItemVariantSimpleMaterials>.fuel(burnTime: Int) = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.burnTime = burnTime } }
+
+
 object CommonMaterials {
     lateinit var itemMaterials: () -> ItemSimpleMaterials
     val commonMaterialsModule = module {
@@ -37,49 +82,13 @@ object CommonMaterials {
             setUnlocalizedName("materials")
             setCreativeTab { Main.creativeTab }
 
-            fun r(
-                metadata: Int,
-                registryName: String,
-                unlocalizedName: String,
-                oreName: String,
-                modelSupplier: MakeItemModelScope.() -> DataModel
-            ) = itemVariant(registryName, { ItemVariantSimpleMaterials(it, unlocalizedName) }, metadata) {
-                addOreName(oreName)
-                makeItemModel(registryName) { modelSupplier() }
+            CommonMaterialCard.values().forEach { card ->
+                val itemVariant = itemVariant(card.registryName, { ItemVariantSimpleMaterials(it, card.unlocalizedName) }, card.metadata) {
+                    addOreName(card.oreName)
+                    makeItemModel { if (card.isHandheld) handheld else generated }
+                }
+                card.initializer(itemVariant)
             }
-
-            fun ItemVariantInitializer<ItemSimpleMaterials, ItemVariantSimpleMaterials>.fuel(burnTime: Int) = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.burnTime = burnTime } }
-
-            r(0, "apatite_gem", "gemApatite", "gemApatite", { generated })
-            r(1, "fluorite_gem", "gemFluorite", "gemFluorite", { generated })
-            r(2, "sulfur_gem", "gemSulfur", "gemSulfur", { generated })
-            r(3, "miragium_dust", "dustMiragium", "dustMiragium", { generated })
-            r(4, "miragium_tiny_dust", "dustTinyMiragium", "dustTinyMiragium", { generated })
-            r(5, "miragium_ingot", "ingotMiragium", "ingotMiragium", { generated })
-            r(6, "cinnabar_gem", "gemCinnabar", "gemCinnabar", { generated })
-            r(7, "moonstone_gem", "gemMoonstone", "gemMoonstone", { generated })
-            r(8, "magnetite_gem", "gemMagnetite", "gemMagnetite", { generated })
-            r(9, "saltpeter_gem", "gemSaltpeter", "gemSaltpeter", { generated })
-            r(10, "pyrope_gem", "gemPyrope", "gemPyrope", { generated })
-            r(11, "smithsonite_gem", "gemSmithsonite", "gemSmithsonite", { generated })
-            r(12, "miragium_rod", "rodMiragium", "rodMiragium", { handheld })
-            r(13, "miragium_nugget", "nuggetMiragium", "nuggetMiragium", { generated })
-            r(14, "nephrite_gem", "gemNephrite", "gemNephrite", { generated })
-            r(15, "topaz_gem", "gemTopaz", "gemTopaz", { generated })
-            r(16, "tourmaline_gem", "gemTourmaline", "gemTourmaline", { generated })
-            r(17, "heliolite_gem", "gemHeliolite", "gemHeliolite", { generated })
-            r(18, "labradorite_gem", "gemLabradorite", "gemLabradorite", { generated })
-            r(19, "lilagium_ingot", "ingotLilagium", "ingotLilagium", { generated })
-            r(20, "miragium_plate", "plateMiragium", "plateMiragium", { generated })
-            r(21, "coal_dust", "dustCoal", "dustCoal", { generated }).fuel(1600)
-            r(22, "charcoal_dust", "dustCharcoal", "dustCharcoal", { generated }).fuel(1600)
-            r(23, "apatite_dust", "dustApatite", "dustApatite", { generated })
-            r(24, "fluorite_dust", "dustFluorite", "dustFluorite", { generated })
-            r(25, "sulfur_dust", "dustSulfur", "dustSulfur", { generated })
-            r(26, "cinnabar_dust", "dustCinnabar", "dustCinnabar", { generated })
-            r(27, "moonstone_dust", "dustMoonstone", "dustMoonstone", { generated })
-            r(28, "magnetite_dust", "dustMagnetite", "dustMagnetite", { generated })
-            r(29, "pyrite_gem", "gemPyrite", "gemPyrite", { generated })
 
             onRegisterItem {
                 if (Main.side.isClient) item.setCustomModelResourceLocations()
@@ -88,36 +97,9 @@ object CommonMaterials {
 
         // langの生成
         onMakeLang {
-            enJa("item.gemApatite.name", "Apatite", "燐灰石")
-            enJa("item.gemFluorite.name", "Fluorite", "蛍石")
-            enJa("item.gemSulfur.name", "Sulfur", "硫黄")
-            enJa("item.dustMiragium.name", "Miragium Dust", "ミラジウムの粉")
-            enJa("item.dustTinyMiragium.name", "Tiny Pile of Miragium Dust", "ミラジウムの微粉")
-            enJa("item.ingotMiragium.name", "Miragium Ingot", "ミラジウムインゴット")
-            enJa("item.gemCinnabar.name", "Cinnabar", "辰砂")
-            enJa("item.gemMoonstone.name", "Moonstone", "月長石")
-            enJa("item.gemMagnetite.name", "Magnetite", "磁鉄鉱")
-            enJa("item.gemSaltpeter.name", "Saltpeter", "硝石")
-            enJa("item.gemPyrope.name", "Pyrope", "パイロープ")
-            enJa("item.gemSmithsonite.name", "Smithsonite", "スミソナイト")
-            enJa("item.rodMiragium.name", "Miragium Rod", "ミラジウムの棒")
-            enJa("item.nuggetMiragium.name", "Miragium Nugget", "ミラジウムの塊")
-            enJa("item.gemNephrite.name", "Nephrite", "ネフライト")
-            enJa("item.gemTopaz.name", "Topaz", "トパーズ")
-            enJa("item.gemTourmaline.name", "Tourmaline", "トルマリン")
-            enJa("item.gemHeliolite.name", "Heliolite", "ヘリオライト")
-            enJa("item.gemLabradorite.name", "Labradorite", "ラブラドライト")
-            enJa("item.ingotLilagium.name", "Lilagium Ingot", "リラジウムインゴット")
-            enJa("item.plateMiragium.name", "Miragium Plate", "ミラジウムの板")
-            enJa("item.dustCoal.name", "Coal Dust", "石炭の粉")
-            enJa("item.dustCharcoal.name", "Charcoal Dust", "木炭の粉")
-            enJa("item.dustApatite.name", "Apatite Dust", "燐灰石の粉")
-            enJa("item.dustFluorite.name", "Fluorite Dust", "蛍石の粉")
-            enJa("item.dustSulfur.name", "Sulfur Dust", "硫黄の粉")
-            enJa("item.dustCinnabar.name", "Cinnabar Dust", "辰砂の粉")
-            enJa("item.dustMoonstone.name", "Moonstone Dust", "月長石の粉")
-            enJa("item.dustMagnetite.name", "Magnetite Dust", "磁鉄鉱の粉")
-            enJa("item.gemPyrite.name", "Pyrite", "パイライト")
+            CommonMaterialCard.values().forEach { card ->
+                enJa("item.${card.unlocalizedName}.name", card.englishName, card.japaneseName)
+            }
         }
 
         // レシピの生成
