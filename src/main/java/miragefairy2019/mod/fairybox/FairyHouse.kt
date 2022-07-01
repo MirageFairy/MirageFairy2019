@@ -30,7 +30,7 @@ lateinit var itemBlockFairyHouse: () -> ItemBlock
 
 val fairyHouseModule = module {
     blockFairyHouse = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxEmpty() } }, "fairy_box") {
-        setUnlocalizedName("fairyBox") // TODO rename
+        setUnlocalizedName("fairyHouse")
         setCreativeTab { Main.creativeTab }
         makeBlockStates(resourceName.path) {
             DataBlockStates(
@@ -79,8 +79,8 @@ val fairyHouseModule = module {
     itemBlockFairyHouse = item({ ItemBlock(blockFairyHouse()) }, "fairy_box") {
         setCustomModelResourceLocation(variant = "facing=north")
     }
-    onMakeLang { enJa("tile.fairyBox.name", "Fairy Box", "妖精の家") }
-    onMakeLang { enJa("tile.fairyBox.poem", "", "大きな刳りの木の中で") }
+    onMakeLang { enJa("tile.fairyHouse.name", "Fairy Box", "妖精の家") }
+    onMakeLang { enJa("tile.fairyHouse.poem", "", "大きな刳りの木の中で") }
     tileEntity("fairy_box", TileEntityFairyBoxEmpty::class.java)
     makeRecipe("fairy_box") {
         DataShapedRecipe(
