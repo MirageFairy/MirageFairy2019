@@ -143,83 +143,6 @@ val modules = module {
 
     // TODO move
 
-    // ミラジウムの板
-    makeRecipe("miragium_plate") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "mm",
-                "II",
-                "II"
-            ),
-            key = mapOf(
-                "I" to DataOreIngredient(ore = "ingotMiragium"),
-                "m" to WandType.MELTING.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:materials", data = 20)
-        )
-    }
-
-    // 歪曲杖からミラジウムの板
-    makeRecipe("miragium_plate_from_distortion_fairy_wand") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "d",
-                "I",
-                "I"
-            ),
-            key = mapOf(
-                "I" to DataOreIngredient(ore = "ingotMiragium"),
-                "d" to WandType.DISTORTION.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:materials", data = 20)
-        )
-    }
-
-    // リラジウム
-    makeRecipe("lilagium_ingot") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "mLm",
-                "LIL",
-                "mLm"
-            ),
-            key = mapOf(
-                "I" to DataOreIngredient(ore = "ingotMiragium"),
-                "L" to DataSimpleIngredient(item = "minecraft:double_plant", data = 1),
-                "m" to WandType.MELTING.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:materials", data = 19)
-        )
-    }
-
-    // 融合のワンドからリラジウム
-    makeRecipe("lilagium_ingot_from_fusion_fairy_wand") {
-        DataShapelessRecipe(
-            ingredients = listOf(
-                DataOreIngredient(ore = "ingotMiragium"),
-                DataSimpleIngredient(item = "minecraft:double_plant", data = 1),
-                DataSimpleIngredient(item = "minecraft:double_plant", data = 1),
-                WandType.FUSION.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:materials", data = 19)
-        )
-    }
-
-    // 歪曲のワンドからミラジウムの棒
-    makeRecipe("miragium_rod_from_distortion_fairy_wand") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "d ",
-                " I"
-            ),
-            key = mapOf(
-                "I" to DataOreIngredient(ore = "ingotMiragium"),
-                "d" to WandType.DISTORTION.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:materials", data = 12)
-        )
-    }
-
     // 妖精蒐集箱
     makeRecipe("fairy_collection_box") {
         DataShapedRecipe(
@@ -256,24 +179,6 @@ val modules = module {
         )
     }
 
-    // 硫黄の粉→ファイヤーチャージ
-    makeRecipe("fire_charge_from_sulfur_dust") {
-        DataShapelessRecipe(
-            ingredients = listOf(
-                DataOreIngredient(ore = "gunpowder"),
-                DataOreIngredient(ore = "dustSulfur"),
-                DataOrIngredient(
-                    DataSimpleIngredient(item = "minecraft:coal", data = 0),
-                    DataSimpleIngredient(item = "minecraft:coal", data = 1),
-                    DataOreIngredient(ore = "dustCoal"),
-                    DataOreIngredient(ore = "dustCharcoal")
-                ),
-                DataOreIngredient(ore = "dustMiragium")
-            ),
-            result = DataResult(item = "minecraft:fire_charge", count = 3)
-        )
-    }
-
     // 任意のフェアリークリスタル→原種のフェアリークリスタル
     makeRecipe("fairy_crystal") {
         DataShapelessRecipe(
@@ -300,76 +205,6 @@ val modules = module {
         )
     }
 
-    // 火薬
-    makeRecipe("gunpowder_from_saltpeter") {
-        DataShapelessRecipe(
-            ingredients = listOf(
-                DataOrIngredient(
-                    DataSimpleIngredient(item = "minecraft:coal", data = 1),
-                    DataOreIngredient(ore = "dustCharcoal")
-                ),
-                DataOreIngredient(ore = "dustSulfur"),
-                DataOreIngredient(ore = "gemSaltpeter"),
-                DataOreIngredient(ore = "dustMiragium")
-            ),
-            result = DataResult(item = "minecraft:gunpowder", count = 3)
-        )
-    }
-
-    // ミラジウムの粉＋妖精→ミラジウムナゲット
-    makeRecipe("miragium_nugget_by_fairy") {
-        DataShapelessRecipe(
-            ingredients = listOf(
-                WandType.CRAFTING.ingredientData,
-                DataOreIngredient(ore = "dustMiragium"),
-                DataOreIngredient(ore = "mirageFairyCrystal"),
-                DataOreIngredient(ore = "mirageFairy2019FairyAbilityFlame")
-            ),
-            result = DataResult(item = "miragefairy2019:materials", data = 13, count = 2)
-        )
-    }
-
-    // ミラジウムの粉＋紅蓮のワンド→ミラジウムナゲット
-    makeRecipe("miragium_nugget_by_fairy_wand") {
-        DataShapelessRecipe(
-            ingredients = listOf(
-                WandType.MELTING.ingredientData,
-                DataOreIngredient(ore = "dustMiragium")
-            ),
-            result = DataResult(item = "miragefairy2019:materials", data = 13, count = 3)
-        )
-    }
-
-    // ミラジウムインゴット＋紅蓮のワンド→ミラジウムの棒
-    makeRecipe("miragium_rod_by_fairy_wand") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "mI",
-                "I "
-            ),
-            key = mapOf(
-                "I" to DataOreIngredient(ore = "ingotMiragium"),
-                "m" to WandType.MELTING.ingredientData
-            ),
-            result = DataResult(item = "miragefairy2019:materials", data = 12)
-        )
-    }
-
-    // ミラジウムインゴット→ミラジウムの棒
-    makeRecipe("miragium_rod_by_hand") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "  I",
-                " I ",
-                "I  "
-            ),
-            key = mapOf(
-                "I" to DataOreIngredient(ore = "ingotMiragium")
-            ),
-            result = DataResult(item = "miragefairy2019:materials", data = 12)
-        )
-    }
-
     // ミラジウムウォーター入りポット
     makeRecipe("miragium_water_pot") {
         DataShapelessRecipe(
@@ -379,23 +214,6 @@ val modules = module {
                 DataOreIngredient(ore = "dustMiragium")
             ),
             result = DataResult(item = "miragefairy2019:filled_bucket", data = 0)
-        )
-    }
-
-    // 硝石
-    makeRecipe("saltpeter") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "m",
-                "D",
-                "B"
-            ),
-            key = mapOf(
-                "m" to WandType.MELTING.ingredientData,
-                "D" to DataSimpleIngredient(item = "minecraft:dirt", data = 0),
-                "B" to DataOreIngredient(ore = "container1000Water")
-            ),
-            result = DataResult(item = "miragefairy2019:materials", count = 1, data = 9)
         )
     }
 
