@@ -240,7 +240,12 @@ enum class CommonMaterialCard(
     }),
 }
 
-private fun ItemVariantInitializer<ItemSimpleMaterials, ItemVariantSimpleMaterials>.fuel(burnTime: Int) = also { itemInitializer.modInitializer.onRegisterItem { itemVariant.burnTime = burnTime } }
+private fun ItemVariantInitializer<ItemSimpleMaterials, ItemVariantSimpleMaterials>.fuel(burnTime: Int): ItemVariantInitializer<ItemSimpleMaterials, ItemVariantSimpleMaterials> {
+    itemInitializer.modInitializer.onRegisterItem {
+        itemVariant.burnTime = burnTime
+    }
+    return this
+}
 
 
 lateinit var itemMaterials: () -> ItemSimpleMaterials
