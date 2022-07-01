@@ -1,9 +1,32 @@
 package miragefairy2019.mod.fairybox
 
+import miragefairy2019.lib.modinitializer.block
+import miragefairy2019.lib.modinitializer.item
+import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.modinitializer.setCreativeTab
+import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
+import miragefairy2019.lib.modinitializer.setUnlocalizedName
+import miragefairy2019.lib.modinitializer.tileEntity
+import miragefairy2019.lib.resourcemaker.DataBlockState
+import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataElement
+import miragefairy2019.lib.resourcemaker.DataFace
+import miragefairy2019.lib.resourcemaker.DataFaces
+import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
+import miragefairy2019.lib.resourcemaker.DataPoint
+import miragefairy2019.lib.resourcemaker.DataResult
+import miragefairy2019.lib.resourcemaker.DataShapedRecipe
+import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
+import miragefairy2019.lib.resourcemaker.makeBlockModel
+import miragefairy2019.lib.resourcemaker.makeBlockStates
+import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.darkRed
 import miragefairy2019.libkt.drop
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.EnumFairyMaterial
 import miragefairy2019.mod.artifacts.FairyMaterials
 import miragefairy2019.mod.artifacts.get
@@ -12,9 +35,87 @@ import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.ItemBlock
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
+
+lateinit var blockFairyResinTapper: () -> BlockFairyBoxBase
+lateinit var itemBlockFairyResinTapper: () -> ItemBlock
+
+val fairyResinTapperModule = module {
+    blockFairyResinTapper = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxResinTapper() } }, "fairy_resin_tapper") {
+        setUnlocalizedName("fairyResinTapper")
+        setCreativeTab { Main.creativeTab }
+        makeBlockStates(resourceName.path) {
+            DataBlockStates(
+                variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
+                    "facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_resin_tapper", y = facing.second)
+                }
+            )
+        }
+        makeBlockModel(resourceName.path) {
+            DataModel(
+                parent = "block/block",
+                elements = listOf(
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 0.0),
+                        to = DataPoint(16.0, 16.0, 16.0),
+                        faces = DataFaces(
+                            down = DataFace(texture = "#end", cullface = "down"),
+                            up = DataFace(texture = "#end", cullface = "up"),
+                            north = DataFace(texture = "#side", cullface = "north"),
+                            south = DataFace(texture = "#side", cullface = "south"),
+                            west = DataFace(texture = "#side", cullface = "west"),
+                            east = DataFace(texture = "#side", cullface = "east")
+                        )
+                    ),
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 0.0),
+                        to = DataPoint(16.0, 16.0, 16.0),
+                        faces = DataFaces(
+                            north = DataFace(texture = "#entrance", cullface = "north"),
+                            south = DataFace(texture = "#window", cullface = "south"),
+                            west = DataFace(texture = "#window", cullface = "west"),
+                            east = DataFace(texture = "#window", cullface = "east")
+                        )
+                    )
+                ),
+                textures = mapOf(
+                    "particle" to "miragefairy2019:blocks/fairy_wood_log",
+                    "end" to "miragefairy2019:blocks/fairy_wood_log_top",
+                    "side" to "miragefairy2019:blocks/fairy_wood_log",
+                    "entrance" to "miragefairy2019:blocks/fairy_resin_tapper_entrance",
+                    "window" to "miragefairy2019:blocks/fairy_resin_tapper_window"
+                )
+            )
+        }
+    }
+    itemBlockFairyResinTapper = item({ ItemBlock(blockFairyResinTapper()) }, "fairy_resin_tapper") {
+        setCustomModelResourceLocation(variant = "facing=north")
+    }
+    onMakeLang { enJa("tile.fairyResinTapper.name", "Fairy Resin Tapper", "樹液取り職人スプルーツァの家") }
+    onMakeLang { enJa("tile.fairyResinTapper.poem", "", "妖精だから、森に帰ります") }
+    tileEntity("fairy_resin_tapper", TileEntityFairyBoxResinTapper::class.java)
+    makeRecipe("fairy_resin_tapper") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "LsL",
+                "H#H",
+                "BcB"
+            ),
+            key = mapOf(
+                "#" to DataSimpleIngredient(item = "miragefairy2019:fairy_box"),
+                "L" to DataSimpleIngredient(item = "miragefairy2019:lilagium_scythe"),
+                "s" to DataOreIngredient(ore = "mirageFairy2019SphereSlash"),
+                "H" to DataSimpleIngredient(item = "minecraft:hopper"),
+                "B" to DataSimpleIngredient(item = "minecraft:bowl"),
+                "c" to DataOreIngredient(ore = "mirageFairy2019SphereChemical")
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_resin_tapper")
+        )
+    }
+}
 
 class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
     override fun getExecutor(): IFairyBoxExecutor {
