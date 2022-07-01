@@ -274,37 +274,6 @@ val modules = module {
         )
     }
 
-    // エリトラ
-    makeRecipe("elytra_from_mirage_fairy_leather") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "SLS",
-                "LLL",
-                "LcL"
-            ),
-            key = mapOf(
-                "c" to WandType.CRAFTING.ingredientData,
-                "S" to DataOreIngredient(ore = "mirageFairy2019SphereLevitate"),
-                "L" to DataOreIngredient(ore = "mirageFairyLeather")
-            ),
-            result = DataResult(
-                item = "minecraft:elytra"
-            )
-        )
-    }
-
-    // エンチャントの瓶
-    makeRecipe("experience_bottle") {
-        DataShapelessRecipe(
-            ingredients = listOf(
-                DataOreIngredient(ore = "container250MirageFlowerExtract"),
-                WandType.BREAKING.ingredientData,
-                DataSimpleIngredient(item = "minecraft:ender_eye")
-            ),
-            result = DataResult(item = "minecraft:experience_bottle")
-        )
-    }
-
     // 任意のフェアリークリスタル→原種のフェアリークリスタル
     makeRecipe("fairy_crystal") {
         DataShapelessRecipe(
