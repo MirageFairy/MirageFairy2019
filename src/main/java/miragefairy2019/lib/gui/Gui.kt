@@ -1,5 +1,13 @@
-package miragefairy2019.libkt
+package miragefairy2019.lib.gui
 
+import miragefairy2019.libkt.IArgb
+import miragefairy2019.libkt.PointInt
+import miragefairy2019.libkt.RectangleInt
+import miragefairy2019.libkt.contains
+import miragefairy2019.libkt.drawString
+import miragefairy2019.libkt.drawStringCentered
+import miragefairy2019.libkt.drawStringRightAligned
+import miragefairy2019.libkt.toArgb
 import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.inventory.GuiContainer
 

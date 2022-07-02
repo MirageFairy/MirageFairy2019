@@ -25,10 +25,10 @@ import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.guiHandler
-import miragefairy2019.libkt.rectangle
+import miragefairy2019.lib.gui.rectangle
 import miragefairy2019.libkt.tileEntity
-import miragefairy2019.libkt.x
-import miragefairy2019.libkt.y
+import miragefairy2019.lib.gui.x
+import miragefairy2019.lib.gui.y
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019

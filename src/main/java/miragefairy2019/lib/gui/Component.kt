@@ -1,5 +1,6 @@
-package miragefairy2019.lib
+package miragefairy2019.lib.gui
 
+import miragefairy2019.lib.mergeItemStack
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
@@ -8,10 +9,7 @@ import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
-import miragefairy2019.libkt.rectangle
 import miragefairy2019.libkt.translate
-import miragefairy2019.libkt.x
-import miragefairy2019.libkt.y
 import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.hydrogen.unit
 import net.minecraft.client.gui.FontRenderer
