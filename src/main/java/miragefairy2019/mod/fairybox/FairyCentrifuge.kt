@@ -586,7 +586,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         return object : IFairyBoxExecutor {
             override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
                 if (world.isRemote) return true
-                player.openGui(ModMirageFairy2019.instance, GuiId.fairyBoxCentrifuge, world, pos.x, pos.y, pos.z)
+                player.openGui(ModMirageFairy2019.instance!!, GuiId.fairyBoxCentrifuge, world, pos.x, pos.y, pos.z)
                 return true
             }
 
