@@ -40,12 +40,27 @@ interface IComponent {
 
 // Implements
 
+interface GuiFactory {
+    @SideOnly(Side.CLIENT)
+    operator fun invoke(component: ContainerComponent): GuiComponent
+}
+
+inline fun GuiFactory(crossinline function: (component: ContainerComponent) -> GuiComponent) = object : GuiFactory {
+    override fun invoke(component: ContainerComponent) = function(component)
+}
+
 class WindowProperty(var value: Int = 0, val changeListener: () -> Unit = {})
 
-class ContainerComponent : Container() {
+class ContainerComponent(private val guiFactory: GuiFactory) : Container() {
     val components = mutableListOf<IComponent>()
     var width = 0
     var height = 0
+
+
+    // Gui
+
+    @SideOnly(Side.CLIENT)
+    fun createGui() = guiFactory(this)
 
 
     // Overrides
@@ -151,15 +166,15 @@ class ContainerComponent : Container() {
 
 }
 
-fun container(block: ContainerComponent.() -> Unit): ContainerComponent {
-    val container = ContainerComponent()
+fun container(guiFactory: GuiFactory, block: ContainerComponent.() -> Unit): ContainerComponent {
+    val container = ContainerComponent(guiFactory)
     container.block()
     container.init()
     return container
 }
 
 @SideOnly(Side.CLIENT)
-class GuiComponent(val container: ContainerComponent) : GuiContainer(container) {
+abstract class GuiComponent(val container: ContainerComponent) : GuiContainer(container) {
 
     // Overrides
 
@@ -188,9 +203,6 @@ class GuiComponent(val container: ContainerComponent) : GuiContainer(container) 
     val fontRenderer: FontRenderer get() = super.fontRenderer
 
 }
-
-@SideOnly(Side.CLIENT)
-fun ContainerComponent.createGui() = GuiComponent(this)
 
 
 // Utils

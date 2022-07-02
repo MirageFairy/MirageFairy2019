@@ -12,6 +12,7 @@ import miragefairy2019.lib.ComponentLabel
 import miragefairy2019.lib.ComponentSlot
 import miragefairy2019.lib.ContainerComponent
 import miragefairy2019.lib.GuiComponent
+import miragefairy2019.lib.GuiFactory
 import miragefairy2019.lib.IComponent
 import miragefairy2019.lib.SlotResult
 import miragefairy2019.lib.Symbols
@@ -19,7 +20,6 @@ import miragefairy2019.lib.WindowProperty
 import miragefairy2019.lib.compound
 import miragefairy2019.lib.compoundOrCreate
 import miragefairy2019.lib.container
-import miragefairy2019.lib.createGui
 import miragefairy2019.lib.div
 import miragefairy2019.lib.factors
 import miragefairy2019.lib.fairyCentrifugeCraftHandler
@@ -99,6 +99,8 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 import net.minecraftforge.common.capabilities.Capability
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.wrapper.SidedInvWrapper
 
@@ -621,7 +623,7 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
 
     // Gui
 
-    fun createContainer(player: EntityPlayer) = container {
+    fun createContainer(player: EntityPlayer) = container(GuiFactory { GuiContainerFairyCentrifuge(it) }) {
 
         // Guiを開いたときにサーバー側でフォリアを計測する機能
         val propertyMilliFolia = WindowProperty()
@@ -743,3 +745,6 @@ class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISide
     }
 
 }
+
+@SideOnly(Side.CLIENT)
+class GuiContainerFairyCentrifuge(container: ContainerComponent) : GuiComponent(container)

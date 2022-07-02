@@ -21,6 +21,7 @@ import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gray
 import miragefairy2019.libkt.translateToLocal
+import miragefairy2019.mod.fairybox.GuiContainerFairyCentrifuge
 import miragefairy2019.mod.fairybox.blockFairyCentrifuge
 import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.Minecraft
@@ -61,6 +62,7 @@ class PluginFairyCentrifugeCraft : IModPlugin {
     }
 
     override fun register(registry: IModRegistry) {
+        registry.addRecipeClickArea(GuiContainerFairyCentrifuge::class.java, 0, 0, 3 + 4 + 18 * 9 + 4 + 3, 13, uid)
         registry.addRecipeCatalyst(blockFairyCentrifuge().createItemStack(), uid)
         registry.addRecipes(FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers.map { handler ->
             object : IRecipeWrapper {
