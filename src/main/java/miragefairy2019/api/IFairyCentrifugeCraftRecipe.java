@@ -9,6 +9,7 @@ import java.util.Random;
 
 public interface IFairyCentrifugeCraftRecipe {
 
+    @Nonnull
     public IFairyCentrifugeCraftHandler getHandler();
 
     /**
