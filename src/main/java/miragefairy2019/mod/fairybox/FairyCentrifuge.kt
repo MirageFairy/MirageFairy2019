@@ -574,7 +574,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
             val ready: Boolean,
             val score: Double
         ) {
-            val speed = score / recipe.handler.cost
+            val speed = score / recipe.handler.norma
             val fortune = score / 100.0
         }
     }

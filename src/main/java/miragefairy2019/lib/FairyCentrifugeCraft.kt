@@ -64,7 +64,7 @@ class FairyCentrifugeCraftHandlerScope {
     fun cancel(): Nothing = throw Canceled()
 }
 
-fun fairyCentrifugeCraftHandler(cost: Double, block: FairyCentrifugeCraftHandlerScope.() -> Unit) {
+fun fairyCentrifugeCraftHandler(norma: Double, block: FairyCentrifugeCraftHandlerScope.() -> Unit) {
     val scope = FairyCentrifugeCraftHandlerScope()
     try {
         scope.block()
@@ -75,7 +75,7 @@ fun fairyCentrifugeCraftHandler(cost: Double, block: FairyCentrifugeCraftHandler
     require(scope.inputs.size >= 1)
     require(scope.outputs.size >= 1)
     class FairyCentrifugeCraftHandler : IFairyCentrifugeCraftHandler {
-        override fun getCost() = cost
+        override fun getNorma() = norma
 
         override fun getInputs(): NonNullList<IFairyCentrifugeCraftInput> = scope.inputs.map { input ->
             object : IFairyCentrifugeCraftInput {
