@@ -417,10 +417,6 @@ val fairyCentrifugeModule = module {
     }
 }
 
-val TEXTURE_INPUT_SLOT = ResourceLocation("miragefairy2019", "textures/gui/input_slot.png")
-val TEXTURE_OUTPUT_SLOT = ResourceLocation("miragefairy2019", "textures/gui/output_slot.png")
-val TEXTURE_FAIRY_SLOT = ResourceLocation("miragefairy2019", "textures/gui/fairy_slot.png")
-
 class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedInventory {
 
     // Inventory
