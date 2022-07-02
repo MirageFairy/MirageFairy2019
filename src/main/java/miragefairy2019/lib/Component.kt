@@ -1,11 +1,15 @@
 package miragefairy2019.lib
 
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
+import miragefairy2019.libkt.PointInt
+import miragefairy2019.libkt.RectangleInt
+import miragefairy2019.libkt.contains
 import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.rectangle
+import miragefairy2019.libkt.translate
 import miragefairy2019.libkt.x
 import miragefairy2019.libkt.y
 import mirrg.kotlin.hydrogen.atMost
@@ -35,6 +39,9 @@ interface IComponent {
 
     @SideOnly(Side.CLIENT)
     fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouseX: Int, mouseY: Int) = Unit
+
+    @SideOnly(Side.CLIENT)
+    fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
 }
 
 
@@ -187,6 +194,7 @@ abstract class GuiComponent(val container: ContainerComponent) : GuiContainer(co
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
         renderHoveredToolTip(mouseX, mouseY)
+        container.components.forEach { it.drawScreen(this, PointInt(mouseX, mouseY), partialTicks) }
     }
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
@@ -253,6 +261,15 @@ class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFF
         gui.mc.textureManager.bindTexture(textureSupplier())
         Gui.drawModalRectWithCustomSizedTexture(gui.x + x, gui.y + y, 0.0f, 0.0f, 16, 16, 16.0f, 16.0f)
         GlStateManager.disableBlend()
+    }
+}
+
+class ComponentTooltip(private val rectangle: RectangleInt, private val textSupplier: () -> List<String>?) : IComponent {
+    @SideOnly(Side.CLIENT)
+    override fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
+        if (mouse !in rectangle.translate(gui.x, gui.y)) return
+        val text = textSupplier() ?: return
+        gui.drawHoveringText(text, mouse.x, mouse.y)
     }
 }
 
