@@ -110,7 +110,7 @@ lateinit var itemBlockFairyCentrifuge: () -> ItemBlock
 val fairyCentrifugeModule = module {
 
     // ブロック登録
-    blockFairyCentrifuge = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxCentrifuge() } }, "fairy_centrifuge") {
+    blockFairyCentrifuge = block({ BlockFairyBoxBase(4) { TileEntityFairyCentrifuge() } }, "fairy_centrifuge") {
         setUnlocalizedName("fairyCentrifuge")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {
@@ -187,13 +187,13 @@ val fairyCentrifugeModule = module {
     }
 
     // タイルエンティティ登録
-    tileEntity("fairy_centrifuge", TileEntityFairyBoxCentrifuge::class.java)
+    tileEntity("fairy_centrifuge", TileEntityFairyCentrifuge::class.java)
 
     // Gui登録
     onInit {
         Main.registerGuiHandler(GuiId.fairyBoxCentrifuge, object : ISimpleGuiHandler {
-            override fun GuiHandlerContext.onServer() = tileEntity?.castOrNull<TileEntityFairyBoxCentrifuge>()?.createContainer(player)
-            override fun GuiHandlerContext.onClient() = tileEntity?.castOrNull<TileEntityFairyBoxCentrifuge>()?.createContainer(player)?.createGui()
+            override fun GuiHandlerContext.onServer() = tileEntity?.castOrNull<TileEntityFairyCentrifuge>()?.createContainer(player)
+            override fun GuiHandlerContext.onClient() = tileEntity?.castOrNull<TileEntityFairyCentrifuge>()?.createContainer(player)?.createGui()
         }.guiHandler)
     }
 
@@ -421,7 +421,7 @@ val TEXTURE_INPUT_SLOT = ResourceLocation("miragefairy2019", "textures/gui/input
 val TEXTURE_OUTPUT_SLOT = ResourceLocation("miragefairy2019", "textures/gui/output_slot.png")
 val TEXTURE_FAIRY_SLOT = ResourceLocation("miragefairy2019", "textures/gui/fairy_slot.png")
 
-class TileEntityFairyBoxCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedInventory {
+class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedInventory {
 
     // Inventory
 

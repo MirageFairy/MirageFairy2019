@@ -46,7 +46,7 @@ lateinit var itemBlockFairyResinTapper: () -> ItemBlock
 val fairyResinTapperModule = module {
 
     // ブロック登録
-    blockFairyResinTapper = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxResinTapper() } }, "fairy_resin_tapper") {
+    blockFairyResinTapper = block({ BlockFairyBoxBase(4) { TileEntityFairyResinTapper() } }, "fairy_resin_tapper") {
         setUnlocalizedName("fairyResinTapper")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {
@@ -118,7 +118,7 @@ val fairyResinTapperModule = module {
     }
 
     // タイルエンティティ登録
-    tileEntity("fairy_resin_tapper", TileEntityFairyBoxResinTapper::class.java)
+    tileEntity("fairy_resin_tapper", TileEntityFairyResinTapper::class.java)
 
     // 翻訳生成
     onMakeLang {
@@ -128,7 +128,7 @@ val fairyResinTapperModule = module {
 
 }
 
-class TileEntityFairyBoxResinTapper : TileEntityFairyBoxBase() {
+class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
     override fun getExecutor(): IFairyBoxExecutor {
         val facing = getFacing()
         val blockPosOutput = pos.offset(facing)

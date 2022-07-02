@@ -31,7 +31,7 @@ lateinit var itemBlockFairyHouse: () -> ItemBlock
 val fairyHouseModule = module {
 
     // ブロック登録
-    blockFairyHouse = block({ BlockFairyBoxBase(4) { TileEntityFairyBoxEmpty() } }, "fairy_box") {
+    blockFairyHouse = block({ BlockFairyBoxBase(4) { TileEntityFairyHouse() } }, "fairy_box") {
         setUnlocalizedName("fairyHouse")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {
@@ -103,7 +103,7 @@ val fairyHouseModule = module {
     }
 
     // タイルエンティティ登録
-    tileEntity("fairy_box", TileEntityFairyBoxEmpty::class.java)
+    tileEntity("fairy_box", TileEntityFairyHouse::class.java)
 
     // 翻訳生成
     onMakeLang {
@@ -113,4 +113,4 @@ val fairyHouseModule = module {
 
 }
 
-class TileEntityFairyBoxEmpty : TileEntityFairyBoxBase()
+class TileEntityFairyHouse : TileEntityFairyBoxBase()
