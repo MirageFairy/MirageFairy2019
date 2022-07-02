@@ -561,12 +561,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
             val process = recipe.getProcess(index) ?: return@mapNotNull null
             val factors = textComponent { process.factors.map { it() }.sandwich { "+"() }.flatten() } // TODO icon
             val arguments = getArguments(fairyInventory[index]) ?: return@mapNotNull ProcessResult(process, factors, false, 0.0)
-            ProcessResult(
-                process,
-                factors,
-                true,
-                process.getScore(arguments)
-            )
+            ProcessResult(process, factors, true, process.getScore(arguments))
         }
 
         val ready get() = processesResults.all { it.ready }
