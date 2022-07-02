@@ -10,6 +10,7 @@ import miragefairy2019.lib.Alignment
 import miragefairy2019.lib.ComponentBackgroundImage
 import miragefairy2019.lib.ComponentLabel
 import miragefairy2019.lib.ComponentSlot
+import miragefairy2019.lib.ComponentTooltip
 import miragefairy2019.lib.ContainerComponent
 import miragefairy2019.lib.GuiComponent
 import miragefairy2019.lib.GuiFactory
@@ -57,11 +58,14 @@ import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
+import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.darkBlue
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.flatten
+import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
@@ -69,6 +73,7 @@ import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.tileEntity
+import miragefairy2019.libkt.underline
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
@@ -675,7 +680,18 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0 + 9, Alignment.CENTER) { getProcessResult()?.factors }
             components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * 1) { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
             components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 18 * 1 + 1, 0x60FFFFFF) { TEXTURE_FAIRY_SLOT }
-            components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2, Alignment.CENTER) { getProcessResult()?.score?.let { textComponent { (it formatAs "%.1f")() } } } // TODO translate
+            components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2, Alignment.CENTER) {
+                val processResult = getProcessResult() ?: return@ComponentLabel null
+                textComponent { (processResult.score formatAs "%.0f")().darkBlue.underline }
+            }
+            components += ComponentTooltip(RectangleInt(3 + 4 + 18 * c, yi + 18 * 2, 18, 9)) {
+                val processResult = getProcessResult() ?: return@ComponentTooltip null
+                listOf(
+                    formattedText { "速度: ${processResult.speed * getFoliaSpeedFactor() formatAs "%.2f"}"() }, // TODO translate
+                    formattedText { "幸運: ${processResult.fortune formatAs "%+.2f"}"() } // TODO translate
+                )
+            }
+            // TODO 幸運が消えた分の整頓
         }
         defineProcess(0)
         defineProcess(1)
@@ -690,12 +706,20 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         yi += 18
 
         // 速度
-        components += ComponentLabel(3 + 4 + 18 * 1 + 9, yi, Alignment.CENTER) { recipeMatchResult?.speed?.let { textComponent { (it * getFoliaSpeedFactor()).formatAs("%.2f/分")() } } } // TODO translate
-        components += ComponentLabel(3 + 4 + 18 * 4 + 9, yi, Alignment.CENTER) { recipeMatchResult?.fortune?.let { textComponent { it.formatAs("%.02f" + Symbols.FORTUNE)() } } }
+        components += ComponentLabel(3 + 4 + 18 * 1 + 9, yi, Alignment.CENTER) {
+            val recipeMatchResult = recipeMatchResult ?: return@ComponentLabel null
+            textComponent { (recipeMatchResult.speed * getFoliaSpeedFactor() formatAs "%.2f/分")() } // TODO translate
+        }
+        components += ComponentLabel(3 + 4 + 18 * 4 + 9, yi, Alignment.CENTER) {
+            val recipeMatchResult = recipeMatchResult ?: return@ComponentLabel null
+            textComponent { (recipeMatchResult.fortune formatAs "%.2f" + Symbols.FORTUNE)() } // TODO translate
+        }
         yi += 9
 
         // フォリア表示
-        components += ComponentLabel(width - 3 - 4, yi, Alignment.RIGHT) { textComponent { "${getFolia() formatAs "%.1f"} Folia, 速度ブースト: ${getFoliaSpeedFactor() * 100.0 formatAs "%.2f"}%"() } }
+        components += ComponentLabel(width - 3 - 4, yi, Alignment.RIGHT) {
+            textComponent { "${getFolia() formatAs "%.1f"} Folia, 加工速度: ${getFoliaSpeedFactor() * 100.0 formatAs "%.2f"}%"() } // TODO translate
+        }
         yi += 9
 
 
