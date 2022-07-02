@@ -12,7 +12,6 @@ import miragefairy2019.api.Mana
 import miragefairy2019.libkt.containerItem
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.libkt.textComponent
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
@@ -32,9 +31,8 @@ class FairyCentrifugeCraftHandlerScope {
         operator fun Erg.not() = arguments.getErg(this)
     }
 
-    fun process(name: String, norma: Double, scoreFunction: FairyCentrifugeCraftScoreScope.() -> Double) {
+    fun process(norma: Double, scoreFunction: FairyCentrifugeCraftScoreScope.() -> Double) {
         processes += object : IFairyCentrifugeCraftProcess {
-            override fun getName() = textComponent { name() } // TODO translate
             override fun getNorma() = norma
             override fun getScore(arguments: IFairyCentrifugeCraftArguments) = FairyCentrifugeCraftScoreScope(arguments).scoreFunction()
         }

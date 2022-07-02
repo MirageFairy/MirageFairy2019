@@ -485,9 +485,9 @@ object FairyMaterials {
 
             // ミラの葉30＋燐灰石の粉2＋空き瓶＞錬金の家→ミラエキス瓶
             fairyCentrifugeCraftHandler {
-                process("粉砕", 20.0) { !Mana.GAIA + !Erg.DESTROY } // TODO translate
-                process("抽出", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
-                process("精製", 60.0) { !Mana.WIND + !Erg.CHEMICAL } // TODO translate
+                process(20.0) { !Mana.GAIA + !Erg.DESTROY }
+                process(20.0) { !Mana.GAIA + !Erg.FLAME }
+                process(60.0) { !Mana.WIND + !Erg.CHEMICAL }
                 input(itemFairyMaterials[EnumFairyMaterial.leafMirageFlower].createItemStack().ingredient, 30)
                 input("dustApatite".oreIngredient, 2)
                 input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
@@ -514,9 +514,9 @@ object FairyMaterials {
 
             // ミラの種30＋辰砂の粉2＋空き瓶＞錬金の家→ミラオイル瓶
             fairyCentrifugeCraftHandler {
-                process("粉砕", 20.0) { !Mana.GAIA + !Erg.DESTROY } // TODO translate
-                process("抽出", 20.0) { !Mana.GAIA + !Erg.FLAME } // TODO translate
-                process("精製", 60.0) { !Mana.WIND + !Erg.CHEMICAL } // TODO translate
+                process(20.0) { !Mana.GAIA + !Erg.DESTROY }
+                process(20.0) { !Mana.GAIA + !Erg.FLAME }
+                process(60.0) { !Mana.WIND + !Erg.CHEMICAL }
                 input(MirageFlower.itemMirageFlowerSeeds().createItemStack().ingredient, 30)
                 input("dustCinnabar".oreIngredient, 2)
                 input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
