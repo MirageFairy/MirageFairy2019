@@ -669,12 +669,15 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
         // 妖精
         fun defineProcess(index: Int) {
+            fun getNorma() = recipeMatchResult?.recipe?.handler?.norma ?: 0.0
             fun getProcessResult() = recipeMatchResult?.processesResults?.getOrNull(index)
             val c = 1 + 3 * index
-            // TODO 名前が消えた分の整頓
+
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0 + 9, Alignment.CENTER) { getProcessResult()?.factors }
+
             components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * 1) { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
             components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 18 * 1 + 1) { TEXTURE_FAIRY_SLOT }
+
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2, Alignment.CENTER) {
                 val processResult = getProcessResult() ?: return@ComponentLabel null
                 textComponent { (processResult.score formatAs "%.0f")().darkBlue.underline }
@@ -682,11 +685,15 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
             components += ComponentTooltip(RectangleInt(3 + 4 + 18 * c, yi + 18 * 2, 18, 9)) {
                 val processResult = getProcessResult() ?: return@ComponentTooltip null
                 listOf(
-                    formattedText { "速度: ${processResult.speed * getFoliaSpeedFactor() formatAs "%.2f"}"() }, // TODO translate
-                    formattedText { "幸運: ${processResult.fortune formatAs "%+.2f"}"() } // TODO translate
+                    formattedText { "スコア: ${processResult.score formatAs "%.2f"}"() }, // TODO translate
+                    formattedText { "ノルマ: ${getNorma() formatAs "%.2f"}"() }, // TODO translate
+                    formattedText { "加工速度: ${processResult.speed * getFoliaSpeedFactor() formatAs "%.2f"} 回/分"() }, // TODO translate
+                    formattedText { "  妖精の効率: ${processResult.speed formatAs "%.2f"}"() }, // TODO translate
+                    formattedText { "  Folia倍率: ${getFoliaSpeedFactor() * 100.0 formatAs "%.2f"}% (${getFolia() formatAs "%.1f"} Folia)"() }, // TODO translate
+                    formattedText { "幸運値: ${Symbols.FORTUNE}${processResult.fortune formatAs "%.2f"}"() } // TODO translate
                 )
             }
-            // TODO 幸運が消えた分の整頓
+
         }
         defineProcess(0)
         defineProcess(1)
@@ -700,23 +707,19 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         }
         yi += 18
 
-        // 速度
+        // 加工速度・幸運値・フォリア
         components += ComponentLabel(3 + 4 + 18 * 1 + 9, yi, Alignment.CENTER) {
             val recipeMatchResult = recipeMatchResult ?: return@ComponentLabel null
-            textComponent { (recipeMatchResult.speed * getFoliaSpeedFactor() formatAs "%.2f/分")() } // TODO translate
+            textComponent { (recipeMatchResult.speed * getFoliaSpeedFactor() formatAs "%.2f 回/分")() } // TODO translate
         }
         components += ComponentLabel(3 + 4 + 18 * 4 + 9, yi, Alignment.CENTER) {
             val recipeMatchResult = recipeMatchResult ?: return@ComponentLabel null
-            textComponent { (recipeMatchResult.fortune formatAs "%.2f" + Symbols.FORTUNE)() } // TODO translate
+            textComponent { "${Symbols.FORTUNE}${recipeMatchResult.fortune formatAs "%.2f"}"() } // TODO translate
+        }
+        components += ComponentLabel(3 + 4 + 18 * 7 + 9, yi, Alignment.CENTER) {
+            textComponent { "${getFolia() formatAs "%.2f"} Folia"() } // TODO translate
         }
         yi += 9
-
-        // フォリア表示
-        components += ComponentLabel(width - 3 - 4, yi, Alignment.RIGHT) {
-            textComponent { "${getFolia() formatAs "%.1f"} Folia, 加工速度: ${getFoliaSpeedFactor() * 100.0 formatAs "%.2f"}%"() } // TODO translate
-        }
-        yi += 9
-
 
         // プレイヤーインベントリタイトル
         yi += 2
