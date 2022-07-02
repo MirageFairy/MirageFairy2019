@@ -31,7 +31,7 @@ interface IComponent {
     fun onInit() = Unit
 
     @SideOnly(Side.CLIENT)
-    fun drawGuiContainerBackgroundLayer(gui: GuiComponent, partialTicks: Float, mouseX: Int, mouseY: Int) = Unit
+    fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouseY: Int, mouseX: Int, partialTicks: Float) = Unit
 
     @SideOnly(Side.CLIENT)
     fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouseX: Int, mouseY: Int) = Unit
@@ -191,7 +191,7 @@ abstract class GuiComponent(val container: ContainerComponent) : GuiContainer(co
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
         rectangle.drawGuiBackground()
-        container.components.forEach { it.drawGuiContainerBackgroundLayer(this, partialTicks, mouseX, mouseY) }
+        container.components.forEach { it.drawGuiContainerBackgroundLayer(this, mouseY, mouseX, partialTicks) }
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
@@ -213,7 +213,7 @@ class ComponentSlot(val container: ContainerComponent, val x: Int, val y: Int, s
     override fun onInit() = unit { container.addSlotToContainer(slot) }
 
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, partialTicks: Float, mouseX: Int, mouseY: Int) = drawSlot(gui.x + x.toFloat(), gui.y + y.toFloat())
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouseY: Int, mouseX: Int, partialTicks: Float) = drawSlot(gui.x + x.toFloat(), gui.y + y.toFloat())
 }
 
 enum class Alignment { LEFT, CENTER, RIGHT }
@@ -231,7 +231,7 @@ class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color
 
 class ComponentBackgroundLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent {
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, partialTicks: Float, mouseX: Int, mouseY: Int) {
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouseY: Int, mouseX: Int, partialTicks: Float) {
         when (alignment) {
             Alignment.LEFT -> textSupplier()?.let { gui.fontRenderer.drawString(it.formattedText, gui.x + x, gui.y + y, color) }
             Alignment.CENTER -> textSupplier()?.let { gui.fontRenderer.drawStringCentered(it.formattedText, gui.x + x, gui.y + y, color) }
@@ -242,7 +242,7 @@ class ComponentBackgroundLabel(val x: Int, val y: Int, val alignment: Alignment,
 
 class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFFFF.toInt(), val textureSupplier: () -> ResourceLocation) : IComponent {
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, partialTicks: Float, mouseX: Int, mouseY: Int) {
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouseY: Int, mouseX: Int, partialTicks: Float) {
         GlStateManager.color(
             (color and 0xFF0000 shr 16) / 255.0f,
             (color and 0xFF00 shr 8) / 255.0f,
