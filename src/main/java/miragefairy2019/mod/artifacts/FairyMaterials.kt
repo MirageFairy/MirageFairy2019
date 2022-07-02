@@ -124,7 +124,7 @@ object FairyMaterials {
             r("fairyPlasticRod", "Fairy Plastic Rod", "妖精のプラスチックの棒", "魔導性抜群、耐久性抜群、耐水性最悪")
             r("indiaInk", "India Ink", "墨汁", "司書精はこれをコーヒーの代わりに飲んだらしい")
             r("ancientPottery", "Ancient Pottery", "古代の壺", "「煮る」という発明")
-            r("annihilationPottery", "Annihilation Pottery", "渇きの壺", "呑み込んだ水がどこかから出て来るとしたら？")
+            r("annihilationPottery", "Annihilation Pottery", "渇きの壺", "実際は「どこか」に排出しているらしい")
         }
 
         // レシピ生成
