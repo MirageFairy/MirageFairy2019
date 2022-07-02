@@ -39,23 +39,23 @@ class PluginFairyCentrifugeCraft : IModPlugin {
             override fun getModName() = "MirageFairy2019"
             override fun getBackground() = object : IDrawable {
                 override fun getWidth() = 18 * 9
-                override fun getHeight() = 18 * 2 + 20
+                override fun getHeight() = 10 + 18 * 2 + 10
                 override fun draw(minecraft: Minecraft, xOffset: Int, yOffset: Int) {
                     repeat(9) { c ->
-                        drawSlot(18f * c, 0f)
-                        minecraft.fontRenderer.drawStringCentered(formattedText { "IN"().gray }, 18 * c + 9, 9 - 4, 0x000000)
+                        drawSlot(18f * c, 10f)
+                        minecraft.fontRenderer.drawStringCentered(formattedText { "IN"().gray }, 18 * c + 9, 10 + 9 - 4, 0x000000)
                     }
                     repeat(9) { c ->
-                        drawSlot(18f * c, 18f)
-                        minecraft.fontRenderer.drawStringCentered(formattedText { "OUT"().gray }, 18 * c + 9, 18 + 9 - 4, 0x000000)
+                        drawSlot(18f * c, 10f + 18f)
+                        minecraft.fontRenderer.drawStringCentered(formattedText { "OUT"().gray }, 18 * c + 9, 10 + 18 + 9 - 4, 0x000000)
                     }
                 }
             }
 
             override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(blockFairyCentrifuge().createItemStack())
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
-                repeat(9) { c -> recipeLayout.itemStacks.init(c, true, 18 * c, 0) }
-                repeat(9) { c -> recipeLayout.itemStacks.init(9 + c, false, 18 * c, 18) }
+                repeat(9) { c -> recipeLayout.itemStacks.init(c, true, 18 * c, 10) }
+                repeat(9) { c -> recipeLayout.itemStacks.init(9 + c, false, 18 * c, 10 + 18) }
                 recipeLayout.itemStacks.set(ingredients)
             }
         })
@@ -75,35 +75,32 @@ class PluginFairyCentrifugeCraft : IModPlugin {
                 val tooltipListeners = mutableListOf<Pair<RectangleInt, () -> List<String>>>()
 
                 init {
+
+                    // 成果物情報
                     handler.outputs.forEachIndexed next@{ c, output ->
                         if (c >= 9) return@next
 
-                        // 個数
-                        run {
-                            val rectangle = RectangleInt(18 * c, 18 * 2, 18, 10)
-                            drawListeners += { minecraft ->
-                                val countPercentage = output.count * 100
-                                val string = if (countPercentage < 1.0) countPercentage formatAs "%.1f%%" else countPercentage formatAs "%.0f%%"
-                                minecraft.fontRenderer.drawStringCentered(string, rectangle, 0x000000)
+                        val rectangle = RectangleInt(18 * c, 10 + 18 * 2, 18, 10)
+                        drawListeners += { minecraft ->
+                            val countPercentage = output.count * 100
+                            val string = if (countPercentage < 1.0) countPercentage formatAs "%.1f%%" else countPercentage formatAs "%.0f%%"
+                            val color = when {
+                                output.fortuneFactor <= 0 -> 0x000000 // 幸運が無効
+                                output.fortuneFactor < 1.0 -> 0x0000FF // 弱い幸運
+                                output.fortuneFactor == 1.0 -> 0x006600 // 通常の幸運
+                                else -> 0xFF0000 // 強い幸運
                             }
-                            tooltipListeners += Pair(rectangle) { listOf(output.count * 100 formatAs "%.6f%%") }
+                            minecraft.fontRenderer.drawStringCentered(formattedText { string().underline }, rectangle, color)
                         }
-
-                        // 幸運係数
-                        if (output.fortuneFactor != 0.0) {
-                            val rectangle = RectangleInt(18 * c, 18 * 2 + 10, 18, 10)
-                            drawListeners += { minecraft ->
-                                val color = when {
-                                    output.fortuneFactor < 1.0 -> 0x888888
-                                    output.fortuneFactor == 1.0 -> 0x000000
-                                    else -> 0xFF0000
-                                }
-                                minecraft.fontRenderer.drawStringCentered("幸運", rectangle, color) // TODO translate
-                            }
-                            tooltipListeners += Pair(rectangle) { listOf("幸運係数: ${output.fortuneFactor * 100 formatAs "%.6f%%"}") } // TODO translate
+                        tooltipListeners += Pair(rectangle) {
+                            listOf(
+                                "入手確率: ${output.count * 100 formatAs "%.2f%%"}", // TODO translate
+                                "幸運係数: ${output.fortuneFactor * 100 formatAs "%.2f%%"}" // TODO translate
+                            )
                         }
 
                     }
+
                 }
 
                 override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) = drawListeners.forEach { it(minecraft) }
