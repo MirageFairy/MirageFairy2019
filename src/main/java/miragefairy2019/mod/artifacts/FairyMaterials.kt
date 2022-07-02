@@ -92,6 +92,7 @@ object FairyMaterials {
             makeItemModel("fairy_plastic_rod") { handheld }
             makeItemModel("india_ink") { generated }
             makeItemModel("ancient_pottery") { generated }
+            makeItemModel("annihilation_pottery") { generated }
         }
 
         // 翻訳の生成
@@ -123,6 +124,7 @@ object FairyMaterials {
             r("fairyPlasticRod", "Fairy Plastic Rod", "妖精のプラスチックの棒", "魔導性抜群、耐久性抜群、耐水性最悪")
             r("indiaInk", "India Ink", "墨汁", "司書精はこれをコーヒーの代わりに飲んだらしい")
             r("ancientPottery", "Ancient Pottery", "古代の壺", "「煮る」という発明")
+            r("annihilationPottery", "Annihilation Pottery", "渇きの壺", "呑み込んだ水がどこかから出て来るとしたら？")
         }
 
         // レシピ生成
@@ -553,6 +555,7 @@ enum class EnumFairyMaterial(override val fairyMaterial: FairyMaterial) : IFairy
     fairyPlasticRod(FairyMaterial(20, "fairy_plastic_rod", "fairyPlasticRod", 5) ore "rodMirageFairyPlastic"),
     indiaInk(FairyMaterial(21, "india_ink", "indiaInk", 0) ore "dyeBlack" has bottle),
     pottery(FairyMaterial(22, "ancient_pottery", "ancientPottery", 5) ore "mirageFairyAncientPottery"),
+    annihilationPottery(FairyMaterial(23, "annihilation_pottery", "annihilationPottery", 5) ore "mirageFairyAnnihilationPottery"),
 }
 
 
