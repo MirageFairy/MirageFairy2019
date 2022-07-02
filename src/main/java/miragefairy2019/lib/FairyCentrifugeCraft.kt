@@ -31,11 +31,8 @@ class FairyCentrifugeCraftHandlerScope {
         operator fun Erg.not() = arguments.getErg(this)
     }
 
-    fun process(norma: Double, scoreFunction: FairyCentrifugeCraftScoreScope.() -> Double) {
-        processes += object : IFairyCentrifugeCraftProcess {
-            override fun getNorma() = norma
-            override fun getScore(arguments: IFairyCentrifugeCraftArguments) = FairyCentrifugeCraftScoreScope(arguments).scoreFunction()
-        }
+    fun process(scoreFunction: FairyCentrifugeCraftScoreScope.() -> Double) {
+        processes += IFairyCentrifugeCraftProcess { arguments -> FairyCentrifugeCraftScoreScope(arguments).scoreFunction() }
     }
 
 
@@ -67,7 +64,7 @@ class FairyCentrifugeCraftHandlerScope {
     fun cancel(): Nothing = throw Canceled()
 }
 
-fun fairyCentrifugeCraftHandler(block: FairyCentrifugeCraftHandlerScope.() -> Unit) {
+fun fairyCentrifugeCraftHandler(cost: Double, block: FairyCentrifugeCraftHandlerScope.() -> Unit) {
     val scope = FairyCentrifugeCraftHandlerScope()
     try {
         scope.block()

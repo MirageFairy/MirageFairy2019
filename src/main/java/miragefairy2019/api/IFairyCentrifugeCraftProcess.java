@@ -4,8 +4,6 @@ import javax.annotation.Nonnull;
 
 public interface IFairyCentrifugeCraftProcess {
 
-    public double getNorma();
-
     public double getScore(@Nonnull IFairyCentrifugeCraftArguments arguments);
 
 }

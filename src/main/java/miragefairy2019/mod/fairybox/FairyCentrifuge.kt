@@ -208,30 +208,30 @@ val fairyCentrifugeModule = module {
         // 錬金術
 
         // グロウストーンダスト10＋ボウル→金3
-        fairyCentrifugeCraftHandler {
-            process(30.0 * 2.0) { !Mana.WIND + !Erg.FLAME }
-            process(40.0 * 2.0) { !Mana.DARK + !Erg.SPACE }
-            process(30.0 * 2.0) { !Mana.GAIA + !Erg.FREEZE }
+        fairyCentrifugeCraftHandler(2.0) {
+            process { !Mana.WIND + !Erg.FLAME }
+            process { !Mana.DARK + !Erg.SPACE }
+            process { !Mana.GAIA + !Erg.FREEZE }
             input("dustGlowstone".oreIngredient, 10)
             input(Items.BOWL.ingredient, 1)
             output("ingotGold".toOreName().copyItemStack() ?: cancel(), 3.0)
         }
 
         // 硫黄3＋赤石10→辰砂6
-        fairyCentrifugeCraftHandler {
-            process(30.0 * 2.0) { !Mana.WIND + !Erg.FLAME }
-            process(60.0 * 2.0) { !Mana.FIRE + !Erg.CHEMICAL }
-            process(10.0 * 2.0) { !Mana.GAIA + !Erg.WATER }
+        fairyCentrifugeCraftHandler(2.0) {
+            process { !Mana.WIND + !Erg.FLAME }
+            process { !Mana.FIRE + !Erg.CHEMICAL }
+            process { !Mana.GAIA + !Erg.WATER }
             input("dustSulfur".oreIngredient, 3)
             input("dustRedstone".oreIngredient, 10)
             output("dustCinnabar".toOreName().copyItemStack() ?: cancel(), 6.0)
         }
 
         // 石炭の粉64＋フリント8＋黒曜石→ダイヤモンド
-        fairyCentrifugeCraftHandler {
-            process(10.0 * 10.0) { !Mana.GAIA + !Erg.CRAFT }
-            process(40.0 * 10.0) { !Mana.FIRE + !Erg.SPACE }
-            process(50.0 * 10.0) { !Mana.SHINE + !Erg.CRYSTAL }
+        fairyCentrifugeCraftHandler(10.0) {
+            process { !Mana.GAIA + !Erg.CRAFT }
+            process { !Mana.FIRE + !Erg.SPACE }
+            process { !Mana.SHINE + !Erg.CRYSTAL }
             input("dustCoal".oreIngredient, 64)
             input(Items.FLINT.ingredient, 8)
             input("obsidian".oreIngredient, 1)
@@ -242,10 +242,10 @@ val fairyCentrifugeModule = module {
         // 樹液蒸留
 
         // 樹液16＋木炭＋ガラス瓶→シロップ
-        fairyCentrifugeCraftHandler {
-            process(20.0 * 2.0) { !Mana.DARK + !Erg.WATER }
-            process(70.0 * 2.0) { !Mana.GAIA + !Erg.FLAME }
-            process(10.0 * 2.0) { !Mana.AQUA + !Erg.LIFE }
+        fairyCentrifugeCraftHandler(2.0) {
+            process { !Mana.DARK + !Erg.WATER }
+            process { !Mana.GAIA + !Erg.FLAME }
+            process { !Mana.AQUA + !Erg.LIFE }
             input("mirageFairyWoodResin".oreIngredient, 16)
             input("gemCharcoal".oreIngredient, 1)
             input(Items.GLASS_BOTTLE.ingredient, 1)
@@ -253,20 +253,20 @@ val fairyCentrifugeModule = module {
         }
 
         // 樹液＋砂糖→砂糖3
-        fairyCentrifugeCraftHandler {
-            process(20.0 * 1.0) { !Mana.DARK + !Erg.WATER }
-            process(60.0 * 1.0) { !Mana.WIND + !Erg.CRYSTAL }
-            process(20.0 * 1.0) { !Mana.GAIA + !Erg.DESTROY }
+        fairyCentrifugeCraftHandler(1.0) {
+            process { !Mana.DARK + !Erg.WATER }
+            process { !Mana.WIND + !Erg.CRYSTAL }
+            process { !Mana.GAIA + !Erg.DESTROY }
             input("mirageFairyWoodResin".oreIngredient, 1)
             input(Items.SUGAR.ingredient, 1)
             output(Items.SUGAR.createItemStack(), 3.0, 1.0)
         }
 
         // 樹液64＋燐灰石の粉2＋空き瓶→ミラージュエキス入り瓶
-        fairyCentrifugeCraftHandler {
-            process(20.0 * 3.0) { !Mana.GAIA + !Erg.FLAME }
-            process(40.0 * 3.0) { !Mana.GAIA + !Erg.SPACE }
-            process(40.0 * 3.0) { !Mana.SHINE + !Erg.ATTACK }
+        fairyCentrifugeCraftHandler(3.0) {
+            process { !Mana.GAIA + !Erg.FLAME }
+            process { !Mana.GAIA + !Erg.SPACE }
+            process { !Mana.SHINE + !Erg.ATTACK }
             input("mirageFairyWoodResin".oreIngredient, 64)
             input("dustApatite".oreIngredient, 2)
             input(Items.GLASS_BOTTLE.ingredient, 1)
@@ -274,10 +274,10 @@ val fairyCentrifugeModule = module {
         }
 
         // 樹液64＋辰砂の粉2＋空き瓶→ミラージュオイル入り瓶
-        fairyCentrifugeCraftHandler {
-            process(20.0 * 3.0) { !Mana.GAIA + !Erg.FLAME }
-            process(40.0 * 3.0) { !Mana.GAIA + !Erg.SPACE }
-            process(40.0 * 3.0) { !Mana.SHINE + !Erg.LEVITATE }
+        fairyCentrifugeCraftHandler(3.0) {
+            process { !Mana.GAIA + !Erg.FLAME }
+            process { !Mana.GAIA + !Erg.SPACE }
+            process { !Mana.SHINE + !Erg.LEVITATE }
             input("mirageFairyWoodResin".oreIngredient, 64)
             input("dustCinnabar".oreIngredient, 2)
             input(Items.GLASS_BOTTLE.ingredient, 1)
@@ -285,10 +285,10 @@ val fairyCentrifugeModule = module {
         }
 
         // 樹液64＋骨粉8＋黒曜石→妖精のプラスチック
-        fairyCentrifugeCraftHandler {
-            process(20.0 * 5.0) { !Mana.GAIA + !Erg.FLAME }
-            process(50.0 * 5.0) { !Mana.FIRE + !Erg.SPACE }
-            process(30.0 * 5.0) { !Mana.FIRE + !Erg.CHEMICAL }
+        fairyCentrifugeCraftHandler(5.0) {
+            process { !Mana.GAIA + !Erg.FLAME }
+            process { !Mana.FIRE + !Erg.SPACE }
+            process { !Mana.FIRE + !Erg.CHEMICAL }
             input("mirageFairyWoodResin".oreIngredient, 64)
             input(Items.DYE.createItemStack(metadata = 15).ingredient, 8)
             input("obsidian".oreIngredient, 1)
@@ -300,20 +300,20 @@ val fairyCentrifugeModule = module {
         // マグマクリーム分解
 
         // マグマクリーム2＋雪玉→スライムボール
-        fairyCentrifugeCraftHandler {
-            process(20.0 * 1.0) { !Mana.GAIA + !Erg.DESTROY }
-            process(50.0 * 1.0) { !Mana.WIND + !Erg.CHEMICAL }
-            process(30.0 * 1.0) { !Mana.GAIA + !Erg.CRAFT }
+        fairyCentrifugeCraftHandler(1.0) {
+            process { !Mana.GAIA + !Erg.DESTROY }
+            process { !Mana.WIND + !Erg.CHEMICAL }
+            process { !Mana.GAIA + !Erg.CRAFT }
             input(Items.MAGMA_CREAM.ingredient, 2)
             input(Items.SNOWBALL.ingredient, 1)
             output(Items.SLIME_BALL.createItemStack(), 1.0)
         }
 
         // マグマクリーム2＋コンクリートパウダー→ブレイズパウダー
-        fairyCentrifugeCraftHandler {
-            process(20.0 * 1.0) { !Mana.GAIA + !Erg.DESTROY }
-            process(50.0 * 1.0) { !Mana.WIND + !Erg.CHEMICAL }
-            process(30.0 * 1.0) { !Mana.GAIA + !Erg.CRAFT }
+        fairyCentrifugeCraftHandler(1.0) {
+            process { !Mana.GAIA + !Erg.DESTROY }
+            process { !Mana.WIND + !Erg.CHEMICAL }
+            process { !Mana.GAIA + !Erg.CRAFT }
             input(Items.MAGMA_CREAM.ingredient, 2)
             input(Blocks.CONCRETE_POWDER.ingredient!!, 1)
             output(Items.BLAZE_POWDER.createItemStack(), 1.0)
@@ -323,10 +323,10 @@ val fairyCentrifugeModule = module {
         // 妖精変成
 
         // R2蜘蛛精＋ミラジウムウォーター＋土→蜘蛛の目
-        fairyCentrifugeCraftHandler {
-            process(30.0 * 1.0) { !Mana.SHINE + !Erg.KNOWLEDGE }
-            process(30.0 * 1.0) { !Mana.WIND + !Erg.CHEMICAL }
-            process(40.0 * 1.0) { !Mana.SHINE + !Erg.LIFE }
+        fairyCentrifugeCraftHandler(1.0) {
+            process { !Mana.SHINE + !Erg.KNOWLEDGE }
+            process { !Mana.WIND + !Erg.CHEMICAL }
+            process { !Mana.SHINE + !Erg.LIFE }
             input("mirageFairy2019FairySpiderRank2".oreIngredient, 1)
             input("container1000MiragiumWater".oreIngredient, 1)
             input("dirt".oreIngredient, 1)
@@ -334,10 +334,10 @@ val fairyCentrifugeModule = module {
         }
 
         // R2ウィザースケルトン精＋ミラジウムウォーター＋スケルトンの頭＋石炭の粉10→ウィザースケルトンの頭
-        fairyCentrifugeCraftHandler {
-            process(30.0 * 10.0) { !Mana.SHINE + !Erg.KNOWLEDGE }
-            process(30.0 * 10.0) { !Mana.WIND + !Erg.CHEMICAL }
-            process(40.0 * 10.0) { !Mana.SHINE + !Erg.LIFE }
+        fairyCentrifugeCraftHandler(10.0) {
+            process { !Mana.SHINE + !Erg.KNOWLEDGE }
+            process { !Mana.WIND + !Erg.CHEMICAL }
+            process { !Mana.SHINE + !Erg.LIFE }
             input("mirageFairy2019FairyWitherSkeletonRank2".oreIngredient, 1)
             input("container1000MiragiumWater".oreIngredient, 1)
             input(Items.SKULL.createItemStack(metadata = 0).ingredient, 1)
@@ -346,10 +346,10 @@ val fairyCentrifugeModule = module {
         }
 
         // シュルカー精＋ミラジウムウォーター＋エンドストーン16＋ラブラドライト＋空間のスフィア→シュルカーの殻
-        fairyCentrifugeCraftHandler {
-            process(30.0 * 5.0) { !Mana.SHINE + !Erg.KNOWLEDGE }
-            process(30.0 * 5.0) { !Mana.WIND + !Erg.CHEMICAL }
-            process(40.0 * 5.0) { !Mana.SHINE + !Erg.LIFE }
+        fairyCentrifugeCraftHandler(5.0) {
+            process { !Mana.SHINE + !Erg.KNOWLEDGE }
+            process { !Mana.WIND + !Erg.CHEMICAL }
+            process { !Mana.SHINE + !Erg.LIFE }
             input("mirageFairy2019FairyShulkerRank1".oreIngredient, 1)
             input("container1000MiragiumWater".oreIngredient, 1)
             input("endstone".oreIngredient, 16)
@@ -359,10 +359,10 @@ val fairyCentrifugeModule = module {
         }
 
         // ウィザー精＋ミラジウムウォーター＋ウィザースケルトンの頭3＋ソウルサンド4＋鉄格子32＋ダイヤの剣→ネザースター
-        fairyCentrifugeCraftHandler {
-            process(10.0 * 10.0) { !Mana.FIRE + !Erg.LIFE }
-            process(60.0 * 10.0) { !Mana.WIND + !Erg.SUBMISSION }
-            process(30.0 * 10.0) { !Mana.FIRE + !Erg.ATTACK }
+        fairyCentrifugeCraftHandler(10.0) {
+            process { !Mana.FIRE + !Erg.LIFE }
+            process { !Mana.WIND + !Erg.SUBMISSION }
+            process { !Mana.FIRE + !Erg.ATTACK }
             input("mirageFairy2019FairyWitherRank1".oreIngredient, 1)
             input("container1000MiragiumWater".oreIngredient, 1)
             input(Items.SKULL.createItemStack(metadata = 1).ingredient, 3)
@@ -376,10 +376,10 @@ val fairyCentrifugeModule = module {
         // 選鉱
 
         // 砂利＋ボウル＋水→色々
-        fairyCentrifugeCraftHandler {
-            process(40.0 * 0.5) { !Mana.DARK + !Erg.SENSE }
-            process(40.0 * 0.5) { !Mana.GAIA + !Erg.WATER }
-            process(20.0 * 0.5) { !Mana.GAIA + !Erg.FLAME }
+        fairyCentrifugeCraftHandler(0.5) {
+            process { !Mana.DARK + !Erg.SENSE }
+            process { !Mana.GAIA + !Erg.WATER }
+            process { !Mana.GAIA + !Erg.FLAME }
             input("gravel".oreIngredient, 1)
             input(Items.BOWL.ingredient, 1)
             input("container1000Water".oreIngredient, 1)
@@ -395,10 +395,10 @@ val fairyCentrifugeModule = module {
         }
 
         // 土＋ボウル＋水→色々
-        fairyCentrifugeCraftHandler {
-            process(40.0 * 0.5) { !Mana.DARK + !Erg.SENSE }
-            process(40.0 * 0.5) { !Mana.GAIA + !Erg.WATER }
-            process(20.0 * 0.5) { !Mana.GAIA + !Erg.FLAME }
+        fairyCentrifugeCraftHandler(0.5) {
+            process { !Mana.DARK + !Erg.SENSE }
+            process { !Mana.GAIA + !Erg.WATER }
+            process { !Mana.GAIA + !Erg.FLAME }
             input("dirt".oreIngredient, 1)
             input(Items.BOWL.ingredient, 1)
             input("container1000Water".oreIngredient, 1)
@@ -555,26 +555,24 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         val processesResults = (0 until 3).mapNotNull { index ->
             val process = recipe.getProcess(index) ?: return@mapNotNull null
             val factors = textComponent { process.factors.map { it() }.sandwich { "+"() }.flatten() }
-            val arguments = getArguments(fairyInventory[index]) ?: return@mapNotNull ProcessResult(process, factors, false, 0.0, 0.0)
+            val arguments = getArguments(fairyInventory[index]) ?: return@mapNotNull ProcessResult(process, factors, false, 0.0)
             ProcessResult(
                 process,
                 factors,
                 true,
-                process.getScore(arguments) / process.norma,
-                0.01 * process.getScore(arguments)
+                process.getScore(arguments)
             )
         }
 
         val ready get() = processesResults.all { it.ready }
-        val speed get() = processesResults.map { it.speed }.min() ?: 0.0
-        val fortune get() = processesResults.map { it.fortune }.sum()
+        val speed get() = processesResults.map { it.score * 0.01 }.min() ?: 0.0
+        val fortune get() = processesResults.map { it.score * 0.01 }.sum()
 
         inner class ProcessResult(
             val process: IFairyCentrifugeCraftProcess,
             val factors: ITextComponent,
             val ready: Boolean,
-            val speed: Double,
-            val fortune: Double
+            val score: Double
         )
     }
 
@@ -674,8 +672,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0 + 9, Alignment.CENTER) { getProcessResult()?.factors }
             components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * 1) { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
             components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 18 * 1 + 1, 0x60FFFFFF) { TEXTURE_FAIRY_SLOT }
-            components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2, Alignment.CENTER) { getProcessResult()?.speed?.let { textComponent { (it * getFoliaSpeedFactor()).formatAs("%.2f/分")() } } } // TODO translate
-            components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2 + 9, Alignment.CENTER) { getProcessResult()?.fortune?.let { textComponent { it.formatAs("%.02f" + Symbols.FORTUNE)() } } }
+            components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2, Alignment.CENTER) { getProcessResult()?.score?.let { textComponent { (it formatAs "%.1f")() } } } // TODO translate
         }
         defineProcess(0)
         defineProcess(1)
