@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 
 public interface IFairyCentrifugeCraftHandler {
 
+    public double getCost();
+
     @Nonnull
     public NonNullList<IFairyCentrifugeCraftInput> getInputs();
 

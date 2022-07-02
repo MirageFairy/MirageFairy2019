@@ -74,7 +74,9 @@ fun fairyCentrifugeCraftHandler(cost: Double, block: FairyCentrifugeCraftHandler
     require(scope.processes.size == 3)
     require(scope.inputs.size >= 1)
     require(scope.outputs.size >= 1)
-    FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += object : IFairyCentrifugeCraftHandler {
+    class FairyCentrifugeCraftHandler : IFairyCentrifugeCraftHandler {
+        override fun getCost() = cost
+
         override fun getInputs(): NonNullList<IFairyCentrifugeCraftInput> = scope.inputs.map { input ->
             object : IFairyCentrifugeCraftInput {
                 override fun getIngredient() = input.ingredient
@@ -101,6 +103,8 @@ fun fairyCentrifugeCraftHandler(cost: Double, block: FairyCentrifugeCraftHandler
             }
 
             return object : IFairyCentrifugeCraftRecipe {
+                override fun getHandler() = this@FairyCentrifugeCraftHandler
+
                 override fun getProcess(index: Int) = when (index) {
                     0 -> scope.processes[0]
                     1 -> scope.processes[1]
@@ -146,6 +150,7 @@ fun fairyCentrifugeCraftHandler(cost: Double, block: FairyCentrifugeCraftHandler
             }
         }
     }
+    FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += FairyCentrifugeCraftHandler()
 }
 
 
