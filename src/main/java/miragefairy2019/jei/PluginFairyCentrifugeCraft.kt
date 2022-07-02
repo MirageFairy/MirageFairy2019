@@ -17,10 +17,12 @@ import miragefairy2019.libkt.contains
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drawSlot
+import miragefairy2019.libkt.drawString
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gray
 import miragefairy2019.libkt.translateToLocal
+import miragefairy2019.libkt.underline
 import miragefairy2019.mod.fairybox.GuiContainerFairyCentrifuge
 import miragefairy2019.mod.fairybox.blockFairyCentrifuge
 import mirrg.kotlin.hydrogen.formatAs
@@ -75,6 +77,11 @@ class PluginFairyCentrifugeCraft : IModPlugin {
                 val tooltipListeners = mutableListOf<Pair<RectangleInt, () -> List<String>>>()
 
                 init {
+
+                    // レシピ情報
+                    drawListeners += { minecraft ->
+                        minecraft.fontRenderer.drawString("ノルマ: ${handler.norma formatAs "%.0f"}", RectangleInt(0, 0, 18 * 9, 10), 0x000000) // TODO translate
+                    }
 
                     // 成果物情報
                     handler.outputs.forEachIndexed next@{ c, output ->
