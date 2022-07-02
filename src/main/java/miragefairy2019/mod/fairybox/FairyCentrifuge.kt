@@ -247,6 +247,55 @@ val fairyCentrifugeModule = module {
             output("gemDiamond".toOreName().copyItemStack() ?: cancel(), 1.0)
         }
 
+        // 金→クッキー
+        fairyCentrifugeCraftHandler(150.0) {
+            process { !Mana.GAIA + !Erg.FLAME * 2.0 }
+            process { !Mana.FIRE + !Erg.CHEMICAL * 2.0 }
+            process { !Mana.AQUA + !Erg.LIFE * 2.0 }
+            input("dirt".oreIngredient, 4)
+            input("ingotGold".oreIngredient, 1)
+            input("container1000MiragiumWater".oreIngredient, 1)
+            output(Items.COOKIE.createItemStack(), 64.0)
+        }
+
+        // 葉ブロック→緑染料
+        fairyCentrifugeCraftHandler(30.0) {
+            process { !Mana.GAIA + !Erg.FLAME * 2.0 }
+            process { !Mana.DARK + !Erg.WATER * 2.0 }
+            process { !Mana.FIRE + !Erg.CHEMICAL * 2.0 }
+            input("treeLeaves".oreIngredient, 1)
+            output(Items.DYE.createItemStack(metadata = 2), 1.0, 1.0)
+        }
+
+        // ネザーウォート→レッドストーン
+        fairyCentrifugeCraftHandler(60.0) {
+            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+            process { !Mana.WIND + !Erg.THUNDER * 2.0 }
+            process { !Mana.WIND + !Erg.FREEZE * 2.0 }
+            input("netherrack".oreIngredient, 1)
+            input("cropNetherWart".oreIngredient, 16)
+            input("container1000MiragiumWater".oreIngredient, 1)
+            output("dustRedstone".toOreName().copyItemStack() ?: cancel(), 1.0, 1.0)
+        }
+
+        // 鉄の剣分解
+        fairyCentrifugeCraftHandler(60.0) {
+            process { !Mana.DARK + !Erg.DESTROY * 2.0 }
+            process { !Mana.WIND + !Erg.SENSE * 2.0 }
+            process { !Mana.GAIA + !Erg.FLAME * 2.0 }
+            input(Items.IRON_SWORD.createItemStack().ingredient, 1)
+            output("nuggetIron".toOreName().copyItemStack() ?: cancel(), 17.0)
+        }
+
+        // 金の剣分解
+        fairyCentrifugeCraftHandler(60.0) {
+            process { !Mana.DARK + !Erg.DESTROY * 2.0 }
+            process { !Mana.WIND + !Erg.SENSE * 2.0 }
+            process { !Mana.GAIA + !Erg.FLAME * 2.0 }
+            input(Items.GOLDEN_SWORD.createItemStack().ingredient, 1)
+            output("nuggetGold".toOreName().copyItemStack() ?: cancel(), 17.0)
+        }
+
 
         // 樹液蒸留
 
