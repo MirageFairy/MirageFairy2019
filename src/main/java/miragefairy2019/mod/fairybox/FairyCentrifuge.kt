@@ -565,15 +565,18 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         }
 
         val ready get() = processesResults.all { it.ready }
-        val speed get() = processesResults.map { it.score * 0.01 }.min() ?: 0.0
-        val fortune get() = processesResults.map { it.score * 0.01 }.sum()
+        val speed get() = processesResults.map { it.speed }.min() ?: 0.0
+        val fortune get() = processesResults.map { it.fortune }.sum()
 
         inner class ProcessResult(
             val process: IFairyCentrifugeCraftProcess,
             val factors: ITextComponent,
             val ready: Boolean,
             val score: Double
-        )
+        ) {
+            val speed = score * 0.01
+            val fortune = score * 0.01
+        }
     }
 
 
