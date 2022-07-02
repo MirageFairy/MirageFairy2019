@@ -213,7 +213,7 @@ val fairyCentrifugeModule = module {
         // 錬金術
 
         // グロウストーンダスト10＋ボウル→金3
-        fairyCentrifugeCraftHandler(2.0) {
+        fairyCentrifugeCraftHandler(60.0) {
             process { !Mana.WIND + !Erg.FLAME * 2.0 }
             process { !Mana.DARK + !Erg.SPACE * 2.0 }
             process { !Mana.GAIA + !Erg.FREEZE * 2.0 }
@@ -223,7 +223,7 @@ val fairyCentrifugeModule = module {
         }
 
         // 硫黄3＋赤石10→辰砂6
-        fairyCentrifugeCraftHandler(2.0) {
+        fairyCentrifugeCraftHandler(60.0) {
             process { !Mana.WIND + !Erg.FLAME * 2.0 }
             process { !Mana.FIRE + !Erg.CHEMICAL * 2.0 }
             process { !Mana.GAIA + !Erg.WATER * 2.0 }
@@ -233,7 +233,7 @@ val fairyCentrifugeModule = module {
         }
 
         // 石炭の粉64＋フリント8＋黒曜石→ダイヤモンド
-        fairyCentrifugeCraftHandler(10.0) {
+        fairyCentrifugeCraftHandler(300.0) {
             process { !Mana.GAIA + !Erg.CRAFT * 2.0 }
             process { !Mana.FIRE + !Erg.SPACE * 2.0 }
             process { !Mana.SHINE + !Erg.CRYSTAL * 2.0 }
@@ -247,7 +247,7 @@ val fairyCentrifugeModule = module {
         // 樹液蒸留
 
         // 樹液16＋木炭＋ガラス瓶→シロップ
-        fairyCentrifugeCraftHandler(2.0) {
+        fairyCentrifugeCraftHandler(60.0) {
             process { !Mana.DARK + !Erg.WATER * 2.0 }
             process { !Mana.GAIA + !Erg.FLAME * 2.0 }
             process { !Mana.AQUA + !Erg.LIFE * 2.0 }
@@ -258,7 +258,7 @@ val fairyCentrifugeModule = module {
         }
 
         // 樹液＋砂糖→砂糖3
-        fairyCentrifugeCraftHandler(1.0) {
+        fairyCentrifugeCraftHandler(30.0) {
             process { !Mana.DARK + !Erg.WATER * 2.0 }
             process { !Mana.WIND + !Erg.CRYSTAL * 2.0 }
             process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
@@ -268,7 +268,7 @@ val fairyCentrifugeModule = module {
         }
 
         // 樹液64＋燐灰石の粉2＋空き瓶→ミラージュエキス入り瓶
-        fairyCentrifugeCraftHandler(3.0) {
+        fairyCentrifugeCraftHandler(90.0) {
             process { !Mana.GAIA + !Erg.FLAME * 2.0 }
             process { !Mana.GAIA + !Erg.SPACE * 2.0 }
             process { !Mana.SHINE + !Erg.ATTACK * 2.0 }
@@ -279,7 +279,7 @@ val fairyCentrifugeModule = module {
         }
 
         // 樹液64＋辰砂の粉2＋空き瓶→ミラージュオイル入り瓶
-        fairyCentrifugeCraftHandler(3.0) {
+        fairyCentrifugeCraftHandler(90.0) {
             process { !Mana.GAIA + !Erg.FLAME * 2.0 }
             process { !Mana.GAIA + !Erg.SPACE * 2.0 }
             process { !Mana.SHINE + !Erg.LEVITATE * 2.0 }
@@ -290,7 +290,7 @@ val fairyCentrifugeModule = module {
         }
 
         // 樹液64＋骨粉8＋黒曜石→妖精のプラスチック
-        fairyCentrifugeCraftHandler(5.0) {
+        fairyCentrifugeCraftHandler(150.0) {
             process { !Mana.GAIA + !Erg.FLAME * 2.0 }
             process { !Mana.FIRE + !Erg.SPACE * 2.0 }
             process { !Mana.FIRE + !Erg.CHEMICAL * 2.0 }
@@ -305,7 +305,7 @@ val fairyCentrifugeModule = module {
         // マグマクリーム分解
 
         // マグマクリーム2＋雪玉→スライムボール
-        fairyCentrifugeCraftHandler(1.0) {
+        fairyCentrifugeCraftHandler(30.0) {
             process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
             process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
             process { !Mana.GAIA + !Erg.CRAFT * 2.0 }
@@ -315,7 +315,7 @@ val fairyCentrifugeModule = module {
         }
 
         // マグマクリーム2＋コンクリートパウダー→ブレイズパウダー
-        fairyCentrifugeCraftHandler(1.0) {
+        fairyCentrifugeCraftHandler(30.0) {
             process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
             process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
             process { !Mana.GAIA + !Erg.CRAFT * 2.0 }
@@ -328,7 +328,7 @@ val fairyCentrifugeModule = module {
         // 妖精変成
 
         // R2蜘蛛精＋ミラジウムウォーター＋土→蜘蛛の目
-        fairyCentrifugeCraftHandler(1.0) {
+        fairyCentrifugeCraftHandler(30.0) {
             process { !Mana.SHINE + !Erg.KNOWLEDGE * 2.0 }
             process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
             process { !Mana.SHINE + !Erg.LIFE * 2.0 }
@@ -339,7 +339,7 @@ val fairyCentrifugeModule = module {
         }
 
         // R2ウィザースケルトン精＋ミラジウムウォーター＋スケルトンの頭＋石炭の粉10→ウィザースケルトンの頭
-        fairyCentrifugeCraftHandler(10.0) {
+        fairyCentrifugeCraftHandler(300.0) {
             process { !Mana.SHINE + !Erg.KNOWLEDGE * 2.0 }
             process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
             process { !Mana.SHINE + !Erg.LIFE * 2.0 }
@@ -351,7 +351,7 @@ val fairyCentrifugeModule = module {
         }
 
         // シュルカー精＋ミラジウムウォーター＋エンドストーン16＋ラブラドライト＋空間のスフィア→シュルカーの殻
-        fairyCentrifugeCraftHandler(5.0) {
+        fairyCentrifugeCraftHandler(150.0) {
             process { !Mana.SHINE + !Erg.KNOWLEDGE * 2.0 }
             process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
             process { !Mana.SHINE + !Erg.LIFE * 2.0 }
@@ -364,7 +364,7 @@ val fairyCentrifugeModule = module {
         }
 
         // ウィザー精＋ミラジウムウォーター＋ウィザースケルトンの頭3＋ソウルサンド4＋鉄格子32＋ダイヤの剣→ネザースター
-        fairyCentrifugeCraftHandler(10.0) {
+        fairyCentrifugeCraftHandler(300.0) {
             process { !Mana.FIRE + !Erg.LIFE * 2.0 }
             process { !Mana.WIND + !Erg.SUBMISSION * 2.0 }
             process { !Mana.FIRE + !Erg.ATTACK * 2.0 }
@@ -381,7 +381,7 @@ val fairyCentrifugeModule = module {
         // 選鉱
 
         // 砂利＋ボウル＋水→色々
-        fairyCentrifugeCraftHandler(0.5) {
+        fairyCentrifugeCraftHandler(15.0) {
             process { !Mana.DARK + !Erg.SENSE * 2.0 }
             process { !Mana.GAIA + !Erg.WATER * 2.0 }
             process { !Mana.GAIA + !Erg.FLAME * 2.0 }
@@ -400,7 +400,7 @@ val fairyCentrifugeModule = module {
         }
 
         // 土＋ボウル＋水→色々
-        fairyCentrifugeCraftHandler(0.5) {
+        fairyCentrifugeCraftHandler(15.0) {
             process { !Mana.DARK + !Erg.SENSE * 2.0 }
             process { !Mana.GAIA + !Erg.WATER * 2.0 }
             process { !Mana.GAIA + !Erg.FLAME * 2.0 }

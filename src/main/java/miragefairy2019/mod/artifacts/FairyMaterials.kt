@@ -486,7 +486,7 @@ object FairyMaterials {
             })
 
             // ミラの葉30＋燐灰石の粉2＋空き瓶＞錬金の家→ミラエキス瓶
-            fairyCentrifugeCraftHandler(1.0) {
+            fairyCentrifugeCraftHandler(30.0) {
                 process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
                 process { !Mana.GAIA + !Erg.FLAME * 2.0 }
                 process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
@@ -515,7 +515,7 @@ object FairyMaterials {
             })
 
             // ミラの種30＋辰砂の粉2＋空き瓶＞錬金の家→ミラオイル瓶
-            fairyCentrifugeCraftHandler(1.0) {
+            fairyCentrifugeCraftHandler(30.0) {
                 process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
                 process { !Mana.GAIA + !Erg.FLAME * 2.0 }
                 process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
