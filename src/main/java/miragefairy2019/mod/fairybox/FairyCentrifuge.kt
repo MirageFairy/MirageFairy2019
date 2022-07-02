@@ -21,8 +21,8 @@ import miragefairy2019.lib.WindowProperty
 import miragefairy2019.lib.compound
 import miragefairy2019.lib.compoundOrCreate
 import miragefairy2019.lib.container
+import miragefairy2019.lib.displayName
 import miragefairy2019.lib.div
-import miragefairy2019.lib.factors
 import miragefairy2019.lib.fairyCentrifugeCraftHandler
 import miragefairy2019.lib.fairyType
 import miragefairy2019.lib.get
@@ -74,6 +74,8 @@ import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.underline
+import miragefairy2019.libkt.x
+import miragefairy2019.libkt.y
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
@@ -90,6 +92,8 @@ import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.hydrogen.castOrNull
 import mirrg.kotlin.hydrogen.formatAs
+import net.minecraft.client.gui.Gui
+import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
@@ -559,18 +563,27 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
     inner class RecipeMatchResult(val recipe: IFairyCentrifugeCraftRecipe) {
         val processesResults = (0 until 3).mapNotNull { index ->
             val process = recipe.getProcess(index) ?: return@mapNotNull null
-            val factors = textComponent { process.factors.map { it() }.sandwich { "+"() }.flatten() } // TODO icon
-            val arguments = getArguments(fairyInventory[index]) ?: return@mapNotNull ProcessResult(process, factors, false, 0.0)
-            ProcessResult(process, factors, true, process.getScore(arguments))
+
+            val elements = mutableListOf<Element>()
+            process.getScore(object : IFairyCentrifugeCraftArguments {
+                override fun getMana(mana: Mana) = 0.0.also { elements += Element(mana.toTextureElement(), mana.displayName) }
+                override fun getErg(erg: Erg) = 0.0.also { elements += Element(erg.toTextureElement(), erg.displayName) }
+            })
+
+            val arguments = getArguments(fairyInventory[index]) ?: return@mapNotNull ProcessResult(process, elements, false, 0.0)
+
+            ProcessResult(process, elements, true, process.getScore(arguments))
         }
 
         val ready get() = processesResults.all { it.ready }
         val speed get() = processesResults.map { it.speed }.min() ?: 0.0
         val fortune get() = processesResults.map { it.fortune }.sum()
 
+        inner class Element(val texture: TextureElement, val text: ITextComponent)
+
         inner class ProcessResult(
             val process: IFairyCentrifugeCraftProcess,
-            val factors: ITextComponent,
+            val elements: List<Element>,
             val ready: Boolean,
             val score: Double
         ) {
@@ -673,7 +686,30 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
             fun getProcessResult() = recipeMatchResult?.processesResults?.getOrNull(index)
             val c = 1 + 3 * index
 
-            components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 0 + 9, Alignment.CENTER) { getProcessResult()?.factors }
+            val elementsY = yi + 7
+            components += object : IComponent {
+                @SideOnly(Side.CLIENT)
+                override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouseY: Int, mouseX: Int, partialTicks: Float) {
+                    val elements = getProcessResult()?.elements ?: listOf()
+                    val elementX = 3 + 4 + 18 * c + 9 - (11 * elements.size) / 2
+
+                    GlStateManager.enableBlend()
+                    gui.mc.textureManager.bindTexture(TEXTURE_ELEMENTS)
+                    elements.forEachIndexed { elementsIndex, element ->
+                        Gui.drawModalRectWithCustomSizedTexture(
+                            gui.x + elementX + 11 * elementsIndex, gui.y + elementsY,
+                            element.texture.x, element.texture.y,
+                            10, 10,
+                            element.texture.width, element.texture.height
+                        )
+                    }
+                    GlStateManager.disableBlend()
+                }
+            }
+            components += ComponentTooltip(RectangleInt(3 + 4 + 18 * c - 18, yi + 9, 18 * 3, 9)) {
+                val processResult = getProcessResult() ?: return@ComponentTooltip null
+                listOf(formattedText { processResult.elements.map { it.text() }.sandwich { ", "() }.flatten() })
+            }
 
             components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * 1) { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
             components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 18 * 1 + 1) { TEXTURE_FAIRY_SLOT }

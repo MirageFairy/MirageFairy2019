@@ -17,7 +17,6 @@ import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.NonNullList
-import net.minecraft.util.text.ITextComponent
 import java.util.Random
 
 fun getFairyCentrifugeCraftRecipe(inventory: IInventory) = FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers.asSequence().mapNotNull { it.test(inventory) }.firstOrNull()
@@ -152,14 +151,3 @@ fun fairyCentrifugeCraftHandler(norma: Double, block: FairyCentrifugeCraftHandle
     }
     FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers += FairyCentrifugeCraftHandler()
 }
-
-
-val IFairyCentrifugeCraftProcess.factors: List<ITextComponent>
-    get() {
-        val factors = mutableListOf<ITextComponent>()
-        getScore(object : IFairyCentrifugeCraftArguments {
-            override fun getMana(mana: Mana) = 0.0.also { factors.add(mana.displayName) }
-            override fun getErg(erg: Erg) = 0.0.also { factors.add(erg.displayName) }
-        })
-        return factors
-    }
