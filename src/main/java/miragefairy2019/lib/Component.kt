@@ -252,10 +252,10 @@ class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFF
     @SideOnly(Side.CLIENT)
     override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouseY: Int, mouseX: Int, partialTicks: Float) {
         GlStateManager.color(
-            (color and 0xFF0000 shr 16) / 255.0f,
-            (color and 0xFF00 shr 8) / 255.0f,
-            (color and 0xFF shr 0) / 255.0f,
-            (color and 0xFF000000.toInt() shr 24) / 255.0f
+            (color shr 16 and 0xFF) / 255.0f,
+            (color shr 8 and 0xFF) / 255.0f,
+            (color shr 0 and 0xFF) / 255.0f,
+            (color shr 24 and 0xFF) / 255.0f
         )
         GlStateManager.enableBlend()
         gui.mc.textureManager.bindTexture(textureSupplier())
