@@ -559,7 +559,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
     inner class RecipeMatchResult(val recipe: IFairyCentrifugeCraftRecipe) {
         val processesResults = (0 until 3).mapNotNull { index ->
             val process = recipe.getProcess(index) ?: return@mapNotNull null
-            val factors = textComponent { process.factors.map { it() }.sandwich { "+"() }.flatten() }
+            val factors = textComponent { process.factors.map { it() }.sandwich { "+"() }.flatten() } // TODO icon
             val arguments = getArguments(fairyInventory[index]) ?: return@mapNotNull ProcessResult(process, factors, false, 0.0)
             ProcessResult(
                 process,
