@@ -92,6 +92,10 @@ abstract class GuiComponentBase(container: Container) : GuiContainer(container) 
         components.forEach { it.mouseClicked(this, PointInt(mouseX, mouseY), mouseButton) }
         super.mouseClicked(mouseX, mouseY, mouseButton)
     }
+
+    // Public化
+    val fontRenderer: FontRenderer get() = super.fontRenderer
+
 }
 
 fun GuiComponentBase.component(rectangle: RectangleInt, block: ComponentEventDistributor.() -> Unit) {
@@ -102,12 +106,12 @@ fun GuiComponentBase.component(rectangle: RectangleInt, block: ComponentEventDis
 enum class TextAlignment { LEFT, CENTER, RIGHT }
 
 
-fun ComponentEventDistributor.label(sFontRenderer: () -> FontRenderer, color: IArgb = 0xFF000000.toArgb(), align: TextAlignment = TextAlignment.LEFT, getText: () -> String) {
-    onForegroundDraw { _, _ ->
+fun ComponentEventDistributor.label(color: IArgb = 0xFF000000.toArgb(), align: TextAlignment = TextAlignment.LEFT, getText: () -> String) {
+    onForegroundDraw { gui, _ ->
         when (align) {
-            TextAlignment.LEFT -> sFontRenderer().drawString(getText(), rectangle, color.argb)
-            TextAlignment.CENTER -> sFontRenderer().drawStringCentered(getText(), rectangle, color.argb)
-            TextAlignment.RIGHT -> sFontRenderer().drawStringRightAligned(getText(), rectangle, color.argb)
+            TextAlignment.LEFT -> gui.fontRenderer.drawString(getText(), rectangle, color.argb)
+            TextAlignment.CENTER -> gui.fontRenderer.drawStringCentered(getText(), rectangle, color.argb)
+            TextAlignment.RIGHT -> gui.fontRenderer.drawStringRightAligned(getText(), rectangle, color.argb)
         }
     }
 }
