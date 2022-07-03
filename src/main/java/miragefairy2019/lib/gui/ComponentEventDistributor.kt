@@ -82,8 +82,14 @@ fun ComponentEventDistributor.label(color: IArgb = 0xFF000000.toArgb(), align: T
     }
 }
 
-fun ComponentEventDistributor.tooltip(vararg text: String) = tooltip { listOf(*text) }
 
-fun ComponentEventDistributor.tooltip(getText: () -> List<String>) = onScreenDraw { gui, mouse, _ ->
-    if (mouse in rectangle) gui.drawHoveringText(getText(), mouse.x + gui.x, mouse.y + gui.y)
+class ComponentTooltip(container: ContainerComponent, rectangle: RectangleInt, private val textSupplier: () -> List<String>?) : ComponentRectangleBase(container, rectangle) {
+    @SideOnly(Side.CLIENT)
+    override fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
+        if (mouse - gui.position !in rectangle) return
+        val text = textSupplier() ?: return
+        gui.drawHoveringText(text, mouse.x, mouse.y)
+    }
 }
+
+fun RectangleContext.tooltip(textSupplier: () -> List<String>?) = unit { container.components += ComponentTooltip(container, rectangle, textSupplier) }

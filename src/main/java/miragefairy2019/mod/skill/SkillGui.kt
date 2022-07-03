@@ -52,18 +52,24 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
         }
         component(RectangleInt(4 + 20, 4, 20 - 4, 10)) {
             label(align = TextAlignment.RIGHT) { "${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}" }
-            tooltip(
-                "フェアリーマスターレベル: ${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}", // TODO translate
-                "累積経験値: ${skillContainer.variables.getExp() formatAs "%8d"}", // TODO translate
-                "必要経験値: ${ApiSkill.skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.getExp()) formatAs "%8d"}" // TODO translate
-            )
+        }
+        rectangle(RectangleInt(4 + 20, 4, 20 - 4, 10)) {
+            tooltip {
+                listOf(
+                    "フェアリーマスターレベル: ${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}", // TODO translate
+                    "累積経験値: ${skillContainer.variables.getExp() formatAs "%8d"}", // TODO translate
+                    "必要経験値: ${ApiSkill.skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.getExp()) formatAs "%8d"}" // TODO translate
+                )
+            }
         }
         component(RectangleInt(4 + 40, 4, 20, 10)) {
             label(color = 0xFF808080.toArgb()) { "SP:" }
         }
         component(RectangleInt(4 + 60, 4, 20 - 4, 10)) {
             label(align = TextAlignment.RIGHT) { "${skillContainer.remainingSkillPoints}" }
-            tooltip("スキルポイントはフェアリーマスターレベル上昇時に入手します。") // TODO translate
+        }
+        rectangle(RectangleInt(4 + 60, 4, 20 - 4, 10)) {
+            tooltip { listOf("スキルポイントはフェアリーマスターレベル上昇時に入手します。") } // TODO translate
         }
         rectangle(RectangleInt(xSize - 34, 4, 30, 10)) {
             button { gui, _, _ ->
@@ -78,6 +84,8 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
         component(RectangleInt(xSize - 34, 4, 30, 10)) {
             // TODO クリックできないときは灰色にする
             label(color = 0xFF0000FF.toArgb(), align = TextAlignment.CENTER) { "初期化" } // TODO translate
+        }
+        rectangle(RectangleInt(xSize - 34, 4, 30, 10)) {
             tooltip {
                 when {
                     !skillContainer.canResetMastery(Instant.now()) -> listOf(
@@ -95,17 +103,23 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
         }
         component(RectangleInt(xSize - 54, 14, 20, 10)) {
             label(color = argb(0xFF808080.toInt()), align = TextAlignment.RIGHT) { "MLv" } // TODO translate
-            tooltip("マスタリレベルはある領域に関する理解の深さです。") // TODO translate
+        }
+        rectangle(RectangleInt(xSize - 54, 14, 20, 10)) {
+            tooltip { listOf("マスタリレベルはある領域に関する理解の深さです。") } // TODO translate
         }
         component(RectangleInt(xSize - 34, 14, 20, 10)) {
             label(color = argb(0xFF808080.toInt()), align = TextAlignment.RIGHT) { "SLv" } // TODO translate
-            tooltip("スキルレベルは個々のアクションの強さです。") // TODO translate
+        }
+        rectangle(RectangleInt(xSize - 34, 14, 20, 10)) {
+            tooltip { listOf("スキルレベルは個々のアクションの強さです。") } // TODO translate
         }
 
         Mastery.values().forEachIndexed { i, mastery ->
             component(RectangleInt(4 + 8 * mastery.layer, 24 + 10 * i, xSize - 4 - 4 - 10 - 20 - 20 - 8 * mastery.layer, 10)) {
                 label(color = 0xFF000000.toArgb()) { mastery.displayName.unformattedText }
-                mastery.displayPoem.unformattedText.takeIf { it.isNotBlank() }?.let { tooltip(it) }
+            }
+            rectangle(RectangleInt(4 + 8 * mastery.layer, 24 + 10 * i, xSize - 4 - 4 - 10 - 20 - 20 - 8 * mastery.layer, 10)) {
+                mastery.displayPoem.unformattedText.takeIf { it.isNotBlank() }?.let { tooltip { listOf(it) } }
             }
             // TODO SP→SLv効率表示
             component(RectangleInt(xSize - 54, 24 + 10 * i, 20, 10)) {
@@ -124,6 +138,8 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
             component(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
                 // TODO ホバーで影響するマスタリのレベルを緑色に光らせつつ実行後の値を表示
                 label(color = 0xFF0000FF.toArgb(), align = TextAlignment.CENTER) { "*" } // TODO icon
+            }
+            rectangle(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
                 tooltip { listOf(if (skillContainer.remainingSkillPoints > 0) "このマスタリにスキルポイントを割り振ります。" else "スキルポイントが足りません。") } // TODO translate
             }
         }

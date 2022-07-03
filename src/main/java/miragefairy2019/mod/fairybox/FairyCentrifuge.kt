@@ -19,15 +19,16 @@ import miragefairy2019.lib.gui.Alignment
 import miragefairy2019.lib.gui.ComponentBackgroundImage
 import miragefairy2019.lib.gui.ComponentLabel
 import miragefairy2019.lib.gui.ComponentSlot
-import miragefairy2019.lib.gui.ComponentTooltip
 import miragefairy2019.lib.gui.ContainerIntegrated
-import miragefairy2019.lib.gui.GuiIntegrated
 import miragefairy2019.lib.gui.GuiComponent
 import miragefairy2019.lib.gui.GuiFactory
+import miragefairy2019.lib.gui.GuiIntegrated
 import miragefairy2019.lib.gui.IComponent
 import miragefairy2019.lib.gui.SlotResult
 import miragefairy2019.lib.gui.WindowProperty
 import miragefairy2019.lib.gui.container
+import miragefairy2019.lib.gui.rectangle
+import miragefairy2019.lib.gui.tooltip
 import miragefairy2019.lib.gui.x
 import miragefairy2019.lib.gui.y
 import miragefairy2019.lib.itemStacks
@@ -757,9 +758,11 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
                     GlStateManager.disableBlend()
                 }
             }
-            components += ComponentTooltip(RectangleInt(3 + 4 + 18 * c - 18, yi + 9, 18 * 3, 9)) {
-                val processResult = getProcessResult() ?: return@ComponentTooltip null
-                listOf(formattedText { processResult.elements.map { it.text() }.sandwich { ", "() }.flatten() })
+            rectangle(RectangleInt(3 + 4 + 18 * c - 18, yi + 9, 18 * 3, 9)) {
+                tooltip {
+                    val processResult = getProcessResult() ?: return@tooltip null
+                    listOf(formattedText { processResult.elements.map { it.text() }.sandwich { ", "() }.flatten() })
+                }
             }
 
             components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * 1) { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
@@ -769,16 +772,18 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
                 val processResult = getProcessResult() ?: return@ComponentLabel null
                 textComponent { (processResult.score formatAs "%.0f")().darkBlue.underline }
             }
-            components += ComponentTooltip(RectangleInt(3 + 4 + 18 * c, yi + 18 * 2, 18, 9)) {
-                val processResult = getProcessResult() ?: return@ComponentTooltip null
-                listOf(
-                    formattedText { "スコア: ${processResult.score formatAs "%.2f"}"() }, // TODO translate
-                    formattedText { "ノルマ: ${getNorma() formatAs "%.2f"}"() }, // TODO translate
-                    formattedText { "加工速度: ${processResult.speed * getFoliaSpeedFactor() formatAs "%.2f"} 回/分"() }, // TODO translate
-                    formattedText { "  妖精の効率: ${processResult.speed formatAs "%.2f"}"() }, // TODO translate
-                    formattedText { "  Folia倍率: ${getFoliaSpeedFactor() * 100.0 formatAs "%.2f"}% (${getFolia() formatAs "%.1f"} Folia)"() }, // TODO translate
-                    formattedText { "幸運値: ${Symbols.FORTUNE}${processResult.fortune formatAs "%.2f"}"() } // TODO translate
-                )
+            rectangle(RectangleInt(3 + 4 + 18 * c, yi + 18 * 2, 18, 9)) {
+                tooltip {
+                    val processResult = getProcessResult() ?: return@tooltip null
+                    listOf(
+                        formattedText { "スコア: ${processResult.score formatAs "%.2f"}"() }, // TODO translate
+                        formattedText { "ノルマ: ${getNorma() formatAs "%.2f"}"() }, // TODO translate
+                        formattedText { "加工速度: ${processResult.speed * getFoliaSpeedFactor() formatAs "%.2f"} 回/分"() }, // TODO translate
+                        formattedText { "  妖精の効率: ${processResult.speed formatAs "%.2f"}"() }, // TODO translate
+                        formattedText { "  Folia倍率: ${getFoliaSpeedFactor() * 100.0 formatAs "%.2f"}% (${getFolia() formatAs "%.1f"} Folia)"() }, // TODO translate
+                        formattedText { "幸運値: ${Symbols.FORTUNE}${processResult.fortune formatAs "%.2f"}"() } // TODO translate
+                    )
+                }
             }
 
         }
