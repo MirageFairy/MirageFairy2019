@@ -30,7 +30,7 @@ abstract class ContainerComponent2 : Container() {
 }
 
 class ContainerComponent(private val guiFactory: GuiFactory) : ContainerComponent2() {
-    val components = mutableListOf<IComponent<GuiComponent>>()
+    val components = mutableListOf<IComponent>()
     var width = 0
     var height = 0
 

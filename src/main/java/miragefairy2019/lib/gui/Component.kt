@@ -23,41 +23,41 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 // Api
 
-interface IComponent<T> {
+interface IComponent {
 
     fun onContainerInit() = Unit
 
     @SideOnly(Side.CLIENT)
-    fun drawGuiContainerBackgroundLayer(gui: T, mouse: PointInt, partialTicks: Float) = Unit
+    fun drawGuiContainerBackgroundLayer(gui: GuiComponent2, mouse: PointInt, partialTicks: Float) = Unit
 
     @SideOnly(Side.CLIENT)
-    fun drawGuiContainerForegroundLayer(gui: T, mouse: PointInt) = Unit
+    fun drawGuiContainerForegroundLayer(gui: GuiComponent2, mouse: PointInt) = Unit
 
     @SideOnly(Side.CLIENT)
-    fun drawScreen(gui: T, mouse: PointInt, partialTicks: Float) = Unit
+    fun drawScreen(gui: GuiComponent2, mouse: PointInt, partialTicks: Float) = Unit
 
     @SideOnly(Side.CLIENT)
-    fun mouseClicked(gui: T, mouse: PointInt, mouseButton: Int) = Unit
+    fun mouseClicked(gui: GuiComponent2, mouse: PointInt, mouseButton: Int) = Unit
 
 }
 
 
 // Implementations
 
-class ComponentSlot(val container: ContainerComponent, val x: Int, val y: Int, slotCreator: (x: Int, y: Int) -> Slot) : IComponent<GuiComponent> {
+class ComponentSlot(val container: ContainerComponent, val x: Int, val y: Int, slotCreator: (x: Int, y: Int) -> Slot) : IComponent {
     val slot = slotCreator(x + 1, y + 1)
 
     override fun onContainerInit() = unit { container.addSlotToContainer(slot) }
 
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = drawSlot(gui.x + x.toFloat(), gui.y + y.toFloat())
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent2, mouse: PointInt, partialTicks: Float) = drawSlot(gui.x + x.toFloat(), gui.y + y.toFloat())
 }
 
 enum class Alignment { LEFT, CENTER, RIGHT }
 
-class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent<GuiComponent> {
+class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent {
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) {
+    override fun drawGuiContainerForegroundLayer(gui: GuiComponent2, mouse: PointInt) {
         when (alignment) {
             Alignment.LEFT -> textSupplier()?.let { gui.fontRenderer.drawString(it.formattedText, x, y, color) }
             Alignment.CENTER -> textSupplier()?.let { gui.fontRenderer.drawStringCentered(it.formattedText, x, y, color) }
@@ -66,9 +66,9 @@ class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color
     }
 }
 
-class ComponentBackgroundLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent<GuiComponent> {
+class ComponentBackgroundLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent {
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent2, mouse: PointInt, partialTicks: Float) {
         when (alignment) {
             Alignment.LEFT -> textSupplier()?.let { gui.fontRenderer.drawString(it.formattedText, gui.x + x, gui.y + y, color) }
             Alignment.CENTER -> textSupplier()?.let { gui.fontRenderer.drawStringCentered(it.formattedText, gui.x + x, gui.y + y, color) }
@@ -77,9 +77,9 @@ class ComponentBackgroundLabel(val x: Int, val y: Int, val alignment: Alignment,
     }
 }
 
-class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFFFF.toInt(), val textureSupplier: () -> ResourceLocation) : IComponent<GuiComponent> {
+class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFFFF.toInt(), val textureSupplier: () -> ResourceLocation) : IComponent {
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent2, mouse: PointInt, partialTicks: Float) {
         GlStateManager.color(
             (color shr 16 and 0xFF) / 255.0f,
             (color shr 8 and 0xFF) / 255.0f,
@@ -93,9 +93,9 @@ class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFF
     }
 }
 
-class ComponentTooltip(private val rectangle: RectangleInt, private val textSupplier: () -> List<String>?) : IComponent<GuiComponent> {
+class ComponentTooltip(private val rectangle: RectangleInt, private val textSupplier: () -> List<String>?) : IComponent {
     @SideOnly(Side.CLIENT)
-    override fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
+    override fun drawScreen(gui: GuiComponent2, mouse: PointInt, partialTicks: Float) {
         if (mouse !in rectangle.translate(gui.x, gui.y)) return
         val text = textSupplier() ?: return
         gui.drawHoveringText(text, mouse.x, mouse.y)

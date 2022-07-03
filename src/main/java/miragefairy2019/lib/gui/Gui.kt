@@ -3,12 +3,11 @@ package miragefairy2019.lib.gui
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.drawGuiBackground
-import net.minecraft.client.gui.FontRenderer
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
 abstract class ContainerComponentBase : ContainerComponent2() {
-    val components = mutableListOf<IComponent<GuiComponentBase>>()
+    val components = mutableListOf<IComponent>()
 
     fun init() {
         components.forEach { it.onContainerInit() }

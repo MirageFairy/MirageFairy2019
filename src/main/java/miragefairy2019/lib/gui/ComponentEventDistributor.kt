@@ -19,28 +19,28 @@ class EventContainer<T> {
     fun fire(invoker: (T) -> Unit) = listeners.forEach { invoker(it) }
 }
 
-class ComponentEventDistributor(val rectangle: RectangleInt) : IComponent<GuiComponentBase> {
+class ComponentEventDistributor(val rectangle: RectangleInt) : IComponent {
 
-    val onScreenDraw = EventContainer<(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float) -> Unit>()
-
-    @SideOnly(Side.CLIENT)
-    override fun drawScreen(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float) = onScreenDraw.fire { it(gui, mouse - gui.position, partialTicks) }
-
-
-    val onForegroundDraw = EventContainer<(gui: GuiComponentBase, mouse: PointInt) -> Unit>()
+    val onScreenDraw = EventContainer<(gui: GuiComponent2, mouse: PointInt, partialTicks: Float) -> Unit>()
 
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerForegroundLayer(gui: GuiComponentBase, mouse: PointInt) = onForegroundDraw.fire { it(gui, mouse - gui.position) }
+    override fun drawScreen(gui: GuiComponent2, mouse: PointInt, partialTicks: Float) = onScreenDraw.fire { it(gui, mouse - gui.position, partialTicks) }
+
+
+    val onForegroundDraw = EventContainer<(gui: GuiComponent2, mouse: PointInt) -> Unit>()
+
+    @SideOnly(Side.CLIENT)
+    override fun drawGuiContainerForegroundLayer(gui: GuiComponent2, mouse: PointInt) = onForegroundDraw.fire { it(gui, mouse - gui.position) }
 
 
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerBackgroundLayer(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float) = Unit
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent2, mouse: PointInt, partialTicks: Float) = Unit
 
 
-    val onMouseClicked = EventContainer<(gui: GuiComponentBase, mouse: PointInt, mouseButton: Int) -> Unit>()
+    val onMouseClicked = EventContainer<(gui: GuiComponent2, mouse: PointInt, mouseButton: Int) -> Unit>()
 
     @SideOnly(Side.CLIENT)
-    override fun mouseClicked(gui: GuiComponentBase, mouse: PointInt, mouseButton: Int) = onMouseClicked.fire { it(gui, mouse - gui.position, mouseButton) }
+    override fun mouseClicked(gui: GuiComponent2, mouse: PointInt, mouseButton: Int) = onMouseClicked.fire { it(gui, mouse - gui.position, mouseButton) }
 
 }
 
@@ -63,6 +63,6 @@ fun ComponentEventDistributor.tooltip(getText: () -> List<String>) = onScreenDra
     if (mouse in rectangle) gui.drawHoveringText(getText(), mouse.x + gui.x, mouse.y + gui.y)
 }
 
-fun ComponentEventDistributor.button(onClick: (gui: GuiComponentBase, mouseButton: Int) -> Unit) = onMouseClicked { gui, mouse, mouseButton ->
+fun ComponentEventDistributor.button(onClick: (gui: GuiComponent2, mouseButton: Int) -> Unit) = onMouseClicked { gui, mouse, mouseButton ->
     if (mouse in rectangle) onClick(gui, mouseButton)
 } // TODO 枠

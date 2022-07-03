@@ -22,6 +22,7 @@ import miragefairy2019.lib.gui.ComponentSlot
 import miragefairy2019.lib.gui.ComponentTooltip
 import miragefairy2019.lib.gui.ContainerComponent
 import miragefairy2019.lib.gui.GuiComponent
+import miragefairy2019.lib.gui.GuiComponent2
 import miragefairy2019.lib.gui.GuiFactory
 import miragefairy2019.lib.gui.IComponent
 import miragefairy2019.lib.gui.SlotResult
@@ -694,8 +695,8 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
         // レシピ判定機能
         var recipeMatchResult: RecipeMatchResult? = null
-        components += object : IComponent<GuiComponent> {
-            override fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) {
+        components += object : IComponent {
+            override fun drawGuiContainerForegroundLayer(gui: GuiComponent2, mouse: PointInt) {
                 recipeMatchResult = match()
             }
         }
@@ -737,9 +738,9 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
             val c = 1 + 3 * index
 
             val elementsY = yi + 7
-            components += object : IComponent<GuiComponent> {
+            components += object : IComponent {
                 @SideOnly(Side.CLIENT)
-                override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
+                override fun drawGuiContainerBackgroundLayer(gui: GuiComponent2, mouse: PointInt, partialTicks: Float) {
                     val elements = getProcessResult()?.elements ?: listOf()
                     val elementX = 3 + 4 + 18 * c + 9 - (11 * elements.size) / 2
 
