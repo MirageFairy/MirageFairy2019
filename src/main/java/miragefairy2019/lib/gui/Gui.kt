@@ -69,29 +69,30 @@ class ComponentEventDistributor(val rectangle: RectangleInt) : IComponent2 {
 
 }
 
-abstract class ContainerComponentBase : Container()
+abstract class ContainerComponentBase : Container() {
+    val components = mutableListOf<IComponent2>()
+}
 
 @SideOnly(Side.CLIENT)
-abstract class GuiComponentBase(container: ContainerComponentBase) : GuiContainer(container) {
-    val components = mutableListOf<IComponent2>()
+abstract class GuiComponentBase(val containerComponent: ContainerComponentBase) : GuiContainer(containerComponent) {
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
-        components.forEach { it.drawScreen(this, PointInt(mouseX, mouseY), partialTicks) }
+        containerComponent.components.forEach { it.drawScreen(this, PointInt(mouseX, mouseY), partialTicks) }
     }
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
         rectangle.drawGuiBackground()
-        components.forEach { it.drawGuiContainerBackgroundLayer(this, PointInt(mouseX, mouseY), partialTicks) }
+        containerComponent.components.forEach { it.drawGuiContainerBackgroundLayer(this, PointInt(mouseX, mouseY), partialTicks) }
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
-        components.forEach { it.drawGuiContainerForegroundLayer(this, PointInt(mouseX, mouseY)) }
+        containerComponent.components.forEach { it.drawGuiContainerForegroundLayer(this, PointInt(mouseX, mouseY)) }
     }
 
     override fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) {
-        components.forEach { it.mouseClicked(this, PointInt(mouseX, mouseY), mouseButton) }
+        containerComponent.components.forEach { it.mouseClicked(this, PointInt(mouseX, mouseY), mouseButton) }
         super.mouseClicked(mouseX, mouseY, mouseButton)
     }
 
@@ -101,7 +102,7 @@ abstract class GuiComponentBase(container: ContainerComponentBase) : GuiContaine
 }
 
 fun GuiComponentBase.component(rectangle: RectangleInt, block: ComponentEventDistributor.() -> Unit) {
-    components += ComponentEventDistributor(rectangle).apply { block() }
+    containerComponent.components += ComponentEventDistributor(rectangle).apply { block() }
 }
 
 
