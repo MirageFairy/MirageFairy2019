@@ -16,7 +16,6 @@ import miragefairy2019.lib.fairyType
 import miragefairy2019.lib.get
 import miragefairy2019.lib.getFairyCentrifugeCraftRecipe
 import miragefairy2019.lib.gui.Alignment
-import miragefairy2019.lib.gui.ComponentBackgroundImage
 import miragefairy2019.lib.gui.ContainerIntegrated
 import miragefairy2019.lib.gui.GuiComponent
 import miragefairy2019.lib.gui.GuiIntegrated
@@ -28,6 +27,7 @@ import miragefairy2019.lib.gui.label
 import miragefairy2019.lib.gui.point
 import miragefairy2019.lib.gui.rectangle
 import miragefairy2019.lib.gui.slot
+import miragefairy2019.lib.gui.slotIcon
 import miragefairy2019.lib.gui.tooltip
 import miragefairy2019.lib.gui.x
 import miragefairy2019.lib.gui.y
@@ -719,8 +719,10 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
         // 入力
         repeat(9) { c ->
-            point(3 + 4 + 18 * c, yi).slot { x, y -> Slot(inputInventory, c, x, y) } belongs IN
-            components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 1) { TEXTURE_INPUT_SLOT }
+            point(3 + 4 + 18 * c, yi) {
+                slot { x, y -> Slot(inputInventory, c, x, y) } belongs IN
+                slotIcon { TEXTURE_INPUT_SLOT }
+            }
         }
         yi += 18
 
@@ -755,8 +757,10 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
                 listOf(formattedText { processResult.elements.map { it.text() }.sandwich { ", "() }.flatten() })
             }
 
-            point(3 + 4 + 18 * c, yi + 18 * 1).slot { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
-            components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 18 * 1 + 1) { TEXTURE_FAIRY_SLOT }
+            point(3 + 4 + 18 * c, yi + 18 * 1) {
+                slot { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
+                slotIcon { TEXTURE_FAIRY_SLOT }
+            }
 
             point(3 + 4 + 18 * c + 9, yi + 18 * 2).label(Alignment.CENTER) {
                 val processResult = getProcessResult() ?: return@label null
@@ -782,8 +786,10 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
         // 出力
         repeat(9) { c ->
-            point(3 + 4 + 18 * c, yi).slot { x, y -> SlotResult(player, outputInventory, c, x, y) } belongs OUT
-            components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 1) { TEXTURE_OUTPUT_SLOT }
+            point(3 + 4 + 18 * c, yi) {
+                slot { x, y -> SlotResult(player, outputInventory, c, x, y) } belongs OUT
+                slotIcon { TEXTURE_OUTPUT_SLOT }
+            }
         }
         yi += 18
 

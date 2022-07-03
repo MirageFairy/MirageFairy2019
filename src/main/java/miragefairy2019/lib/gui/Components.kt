@@ -105,7 +105,7 @@ class ComponentRectangleLabel(
 fun RectangleContext.label(alignment: Alignment, color: IArgb = 0x404040.toArgb(), textSupplier: () -> ITextComponent?) = ComponentRectangleLabel(container, rectangle, alignment, color, textSupplier).also { container.components += it }
 
 
-class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFFFF.toInt(), val textureSupplier: () -> ResourceLocation) : IComponent {
+class ComponentSlotIcon(container: ContainerComponent, point: PointInt, val color: Int, val textureSupplier: () -> ResourceLocation) : ComponentPointBase(container, point) {
     @SideOnly(Side.CLIENT)
     override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
         GlStateManager.color(
@@ -116,7 +116,9 @@ class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFF
         )
         GlStateManager.enableBlend()
         gui.mc.textureManager.bindTexture(textureSupplier())
-        Gui.drawModalRectWithCustomSizedTexture(gui.x + x, gui.y + y, 0.0f, 0.0f, 16, 16, 16.0f, 16.0f)
+        Gui.drawModalRectWithCustomSizedTexture(gui.x + point.x + 1, gui.y + point.y + 1, 0.0f, 0.0f, 16, 16, 16.0f, 16.0f)
         GlStateManager.disableBlend()
     }
 }
+
+fun PointContext.slotIcon(color: Int = 0xFFFFFFFF.toInt(), textureSupplier: () -> ResourceLocation) = ComponentSlotIcon(container, point, color, textureSupplier).also { container.components += it }
