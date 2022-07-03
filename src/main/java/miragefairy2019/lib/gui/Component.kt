@@ -199,7 +199,7 @@ abstract class GuiComponent(val container: ContainerComponent) : GuiContainer(co
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
         rectangle.drawGuiBackground()
-        container.components.forEach { it.drawGuiContainerBackgroundLayer(this, PointInt(mouseY, mouseX), partialTicks) }
+        container.components.forEach { it.drawGuiContainerBackgroundLayer(this, PointInt(mouseX, mouseY), partialTicks) }
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
