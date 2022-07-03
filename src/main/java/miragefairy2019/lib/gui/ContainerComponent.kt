@@ -154,6 +154,9 @@ fun container(guiFactory: GuiFactory, block: ContainerComponent.() -> Unit): Con
 @SideOnly(Side.CLIENT)
 abstract class GuiComponent2(container: ContainerComponent2) : GuiContainer(container) {
 
+    // Public化
+    val fontRenderer: FontRenderer get() = super.fontRenderer
+
 }
 
 @SideOnly(Side.CLIENT)
@@ -189,9 +192,5 @@ abstract class GuiComponent(val container: ContainerComponent) : GuiComponent2(c
         container.components.forEach { it.mouseClicked(this, PointInt(mouseX, mouseY), mouseButton) }
         super.mouseClicked(mouseX, mouseY, mouseButton)
     }
-
-
-    // Public化
-    val fontRenderer: FontRenderer get() = super.fontRenderer
 
 }

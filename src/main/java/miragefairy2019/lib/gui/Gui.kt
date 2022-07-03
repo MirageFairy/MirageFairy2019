@@ -41,10 +41,6 @@ abstract class GuiComponentBase(private val container: ContainerComponentBase) :
         super.mouseClicked(mouseX, mouseY, mouseButton)
     }
 
-
-    // Public化
-    val fontRenderer: FontRenderer get() = super.fontRenderer
-
 }
 
 fun ContainerComponentBase.component(rectangle: RectangleInt, block: ComponentEventDistributor.() -> Unit) {
