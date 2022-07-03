@@ -4,12 +4,10 @@ import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.drawGuiBackground
 import net.minecraft.client.gui.FontRenderer
-import net.minecraft.client.gui.inventory.GuiContainer
-import net.minecraft.inventory.Container
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-abstract class ContainerComponentBase : Container() {
+abstract class ContainerComponentBase : ContainerComponent2() {
     val components = mutableListOf<IComponent<GuiComponentBase>>()
 
     fun init() {
@@ -18,7 +16,7 @@ abstract class ContainerComponentBase : Container() {
 }
 
 @SideOnly(Side.CLIENT)
-abstract class GuiComponentBase(private val container: ContainerComponentBase) : GuiContainer(container) {
+abstract class GuiComponentBase(private val container: ContainerComponentBase) : GuiComponent2(container) {
 
     // イベント
 
