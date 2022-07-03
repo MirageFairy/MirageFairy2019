@@ -25,7 +25,11 @@ inline fun GuiFactory(crossinline function: (component: ContainerComponent) -> G
 
 class WindowProperty(var value: Int = 0, val changeListener: () -> Unit = {})
 
-class ContainerComponent(private val guiFactory: GuiFactory) : Container() {
+abstract class ContainerComponent2 : Container() {
+
+}
+
+class ContainerComponent(private val guiFactory: GuiFactory) : ContainerComponent2() {
     val components = mutableListOf<IComponent<GuiComponent>>()
     var width = 0
     var height = 0
@@ -148,7 +152,12 @@ fun container(guiFactory: GuiFactory, block: ContainerComponent.() -> Unit): Con
 }
 
 @SideOnly(Side.CLIENT)
-abstract class GuiComponent(val container: ContainerComponent) : GuiContainer(container) {
+abstract class GuiComponent2(container: ContainerComponent) : GuiContainer(container) {
+
+}
+
+@SideOnly(Side.CLIENT)
+abstract class GuiComponent(val container: ContainerComponent) : GuiComponent2(container) {
 
     // Overrides
 
