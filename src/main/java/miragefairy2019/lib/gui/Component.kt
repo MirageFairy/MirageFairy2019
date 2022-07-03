@@ -30,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 // Api
 
 interface IComponent {
-    fun onInit() = Unit
+    fun onContainerInit() = Unit
 
     @SideOnly(Side.CLIENT)
     fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
@@ -71,7 +71,7 @@ class ContainerComponent(private val guiFactory: GuiFactory) : Container() {
     // Overrides
 
     fun init() {
-        components.forEach { it.onInit() }
+        components.forEach { it.onContainerInit() }
     }
 
 
@@ -216,7 +216,7 @@ abstract class GuiComponent(val container: ContainerComponent) : GuiContainer(co
 class ComponentSlot(val container: ContainerComponent, val x: Int, val y: Int, slotCreator: (x: Int, y: Int) -> Slot) : IComponent {
     val slot = slotCreator(x + 1, y + 1)
 
-    override fun onInit() = unit { container.addSlotToContainer(slot) }
+    override fun onContainerInit() = unit { container.addSlotToContainer(slot) }
 
     @SideOnly(Side.CLIENT)
     override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = drawSlot(gui.x + x.toFloat(), gui.y + y.toFloat())
