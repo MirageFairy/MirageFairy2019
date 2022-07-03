@@ -68,10 +68,10 @@ class GuiSkill : GuiComponentBase(ContainerSkill()) {
             tooltip("スキルポイントはフェアリーマスターレベル上昇時に入手します。") // TODO translate
         }
         component(RectangleInt(xSize - 34, 4, 30, 10)) {
-            button {
+            button { gui, _ ->
                 if (skillContainer.canResetMastery(Instant.now()) && skillContainer.usedSkillPoints > 0) {
-                    mc.displayGuiScreen(GuiYesNo({ result, _ ->
-                        mc.displayGuiScreen(this@GuiSkill)
+                    gui.mc.displayGuiScreen(GuiYesNo({ result, _ ->
+                        gui.mc.displayGuiScreen(gui)
                         if (result) Main.simpleNetworkWrapper.sendToServer(MessageResetMastery())
                     }, "マスタリレベル初期化", "すべてのマスタリのレベルをリセットし、スキルポイントに戻しますか？\nこの操作は毎月1度だけ実行できます。", 0)) // TODO translate
                 }
@@ -115,7 +115,7 @@ class GuiSkill : GuiComponentBase(ContainerSkill()) {
                 label(color = 0xFF000000.toArgb(), align = TextAlignment.RIGHT) { "${skillContainer.getSkillLevel(mastery)}" }
             }
             component(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
-                button {
+                button { _, _ ->
                     if (skillContainer.remainingSkillPoints > 0) {
                         Main.simpleNetworkWrapper.sendToServer(MessageTrainMastery(mastery.name))
                     }

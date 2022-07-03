@@ -122,6 +122,6 @@ fun ComponentEventDistributor.tooltip(getText: () -> List<String>) = onScreenDra
     if (mouse in rectangle) gui.drawHoveringText(getText(), mouse.x + gui.x, mouse.y + gui.y)
 }
 
-fun ComponentEventDistributor.button(onClick: (mouseButton: Int) -> Unit) = onMouseClicked { _, mouse, mouseButton ->
-    if (mouse in rectangle) onClick(mouseButton)
+fun ComponentEventDistributor.button(onClick: (gui: GuiComponentBase, mouseButton: Int) -> Unit) = onMouseClicked { gui, mouse, mouseButton ->
+    if (mouse in rectangle) onClick(gui, mouseButton)
 } // TODO 枠
