@@ -64,26 +64,6 @@ fun RectangleContext.tooltip(textSupplier: () -> List<String>?) = ComponentToolt
 
 enum class Alignment { LEFT, CENTER, RIGHT }
 
-class ComponentLabel(
-    container: ContainerComponent,
-    point: PointInt,
-    private val alignment: Alignment,
-    private val color: IArgb,
-    private val textSupplier: () -> ITextComponent?
-) : ComponentPointBase(container, point) {
-    @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) {
-        val text = textSupplier() ?: return
-        when (alignment) {
-            Alignment.LEFT -> gui.fontRenderer.drawString(text.formattedText, point.x, point.y, color.argb)
-            Alignment.CENTER -> gui.fontRenderer.drawStringCentered(text.formattedText, point.x, point.y, color.argb)
-            Alignment.RIGHT -> gui.fontRenderer.drawStringRightAligned(text.formattedText, point.x, point.y, color.argb)
-        }
-    }
-}
-
-fun PointContext.label(alignment: Alignment, color: IArgb = 0x404040.toArgb(), textSupplier: () -> ITextComponent?) = ComponentLabel(container, point, alignment, color, textSupplier).also { container.components += it }
-
 class ComponentRectangleLabel(
     container: ContainerComponent,
     rectangle: RectangleInt,

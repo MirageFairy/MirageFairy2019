@@ -63,7 +63,6 @@ import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
 import miragefairy2019.libkt.PointInt
-import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.darkBlue
@@ -712,7 +711,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
 
         // Guiタイトル
-        point(width / 2, yi).label(Alignment.CENTER) { inputInventory.displayName }
+        rectangle(0, yi, width, 8).label(Alignment.CENTER) { inputInventory.displayName }
         yi += 8
         yi += 2
 
@@ -752,7 +751,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
                     GlStateManager.disableBlend()
                 }
             }
-            rectangle(RectangleInt(3 + 4 + 18 * c - 18, yi + 9, 18 * 3, 9)).tooltip {
+            rectangle(3 + 4 + 18 * c - 18, yi + 9, 18 * 3, 9).tooltip {
                 val processResult = getProcessResult() ?: return@tooltip null
                 listOf(formattedText { processResult.elements.map { it.text() }.sandwich { ", "() }.flatten() })
             }
@@ -762,11 +761,11 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
                 slotIcon { TEXTURE_FAIRY_SLOT }
             }
 
-            point(3 + 4 + 18 * c + 9, yi + 18 * 2).label(Alignment.CENTER) {
+            rectangle(3 + 4 + 18 * (c - 1), yi + 18 * 2, 18 * 3, 8).label(Alignment.CENTER) {
                 val processResult = getProcessResult() ?: return@label null
                 textComponent { (processResult.score formatAs "%.0f")().darkBlue.underline }
             }
-            rectangle(RectangleInt(3 + 4 + 18 * c, yi + 18 * 2, 18, 9)).tooltip {
+            rectangle(3 + 4 + 18 * c, yi + 18 * 2, 18, 9).tooltip {
                 val processResult = getProcessResult() ?: return@tooltip null
                 listOf(
                     formattedText { "スコア: ${processResult.score formatAs "%.2f"}"() }, // TODO translate
@@ -794,22 +793,22 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         yi += 18
 
         // 加工速度・幸運値・フォリア
-        point(3 + 4 + 18 * 1 + 9, yi).label(Alignment.CENTER) {
+        rectangle(3 + 4 + 18 * 0, yi, 18 * 3, 8).label(Alignment.CENTER) {
             val recipeMatchResult = recipeMatchResult ?: return@label null
             textComponent { (recipeMatchResult.speed * getFoliaSpeedFactor() formatAs "%.2f 回/分")() } // TODO translate
         }
-        point(3 + 4 + 18 * 4 + 9, yi).label(Alignment.CENTER) {
+        rectangle(3 + 4 + 18 * 3, yi, 18 * 3, 8).label(Alignment.CENTER) {
             val recipeMatchResult = recipeMatchResult ?: return@label null
             textComponent { "${Symbols.FORTUNE}${recipeMatchResult.fortune formatAs "%.2f"}"() } // TODO translate
         }
-        point(3 + 4 + 18 * 7 + 9, yi).label(Alignment.CENTER) {
+        rectangle(3 + 4 + 18 * 6, yi, 18 * 3, 8).label(Alignment.CENTER) {
             textComponent { "${getFolia() formatAs "%.2f"} Folia"() } // TODO translate
         }
         yi += 9
 
         // プレイヤーインベントリタイトル
         yi += 2
-        point(3 + 4, yi).label(Alignment.LEFT) { player.inventory.displayName }
+        rectangle(3 + 4, yi, width - 3 - 4 - 4 - 3, 8).label(Alignment.LEFT) { player.inventory.displayName }
         yi += 8
         yi += 2
 
