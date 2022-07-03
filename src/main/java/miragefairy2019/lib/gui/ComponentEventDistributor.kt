@@ -49,14 +49,6 @@ fun ContainerComponent.component(rectangle: RectangleInt, block: ComponentEventD
 }
 
 
-class RectangleContext(val container: ContainerComponent, val rectangle: RectangleInt)
-
-class PointContext(val container: ContainerComponent, val point: PointInt)
-
-fun ContainerComponent.rectangle(rectangle: RectangleInt, block: RectangleContext.() -> Unit) = block(RectangleContext(this, rectangle))
-
-fun ContainerComponent.point(x: Int, y: Int, block: PointContext.() -> Unit) = block(PointContext(this, PointInt(x, y)))
-
 abstract class ComponentBase(val container: ContainerComponent) : IComponent
 
 abstract class ComponentRectangleBase(container: ContainerComponent, val rectangle: RectangleInt) : ComponentBase(container)
