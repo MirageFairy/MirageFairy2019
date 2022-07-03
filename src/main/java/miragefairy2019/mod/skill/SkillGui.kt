@@ -1,5 +1,6 @@
 package miragefairy2019.mod.skill
 
+import miragefairy2019.lib.gui.ContainerComponentBase
 import miragefairy2019.lib.gui.GuiComponentBase
 import miragefairy2019.lib.gui.TextAlignment
 import miragefairy2019.lib.gui.button
@@ -25,7 +26,6 @@ import mirrg.kotlin.toInstantAsUtc
 import mirrg.kotlin.utcLocalDateTime
 import net.minecraft.client.gui.GuiYesNo
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.inventory.Container
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.time.Instant
@@ -39,7 +39,7 @@ val skillGuiModule = module {
     }
 }
 
-class ContainerSkill(val player: EntityPlayer) : Container() {
+class ContainerSkill(val player: EntityPlayer) : ContainerComponentBase() {
     override fun canInteractWith(playerIn: EntityPlayer) = true
 }
 

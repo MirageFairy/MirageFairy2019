@@ -69,8 +69,10 @@ class ComponentEventDistributor(val rectangle: RectangleInt) : IComponent2 {
 
 }
 
+abstract class ContainerComponentBase : Container()
+
 @SideOnly(Side.CLIENT)
-abstract class GuiComponentBase(container: Container) : GuiContainer(container) {
+abstract class GuiComponentBase(container: ContainerComponentBase) : GuiContainer(container) {
     val components = mutableListOf<IComponent2>()
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
