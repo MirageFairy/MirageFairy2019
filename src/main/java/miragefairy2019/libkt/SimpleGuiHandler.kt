@@ -23,6 +23,4 @@ val ISimpleGuiHandler.guiHandler
     }
 
 
-interface ISimpleGuiHandlerTileEntity {
-    val guiHandler: ISimpleGuiHandler
-}
+interface ISimpleGuiHandlerTileEntity : ISimpleGuiHandler

@@ -23,7 +23,6 @@ import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.GuiHandlerEvent
-import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
 import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
@@ -452,11 +451,8 @@ class TileEntityFairyCollectionBox : TileEntity(), ISimpleGuiHandlerTileEntity {
         return nbt
     }
 
-    override val guiHandler: ISimpleGuiHandler
-        get() = object : ISimpleGuiHandler {
-            override fun onServer(event: GuiHandlerEvent) = ContainerFairyCollectionBox(event.player.inventory, inventory)
-            override fun onClient(event: GuiHandlerEvent) = GuiFairyCollectionBox(onServer(event))
-        }
+    override fun onServer(event: GuiHandlerEvent) = ContainerFairyCollectionBox(event.player.inventory, inventory)
+    override fun onClient(event: GuiHandlerEvent) = GuiFairyCollectionBox(onServer(event))
 }
 
 class InventoryFairyCollectionBox(tileEntity: TileEntityFairyCollectionBox, title: String, customName: Boolean, slotCount: Int) : InventoryTileEntity<TileEntityFairyCollectionBox>(tileEntity, title, customName, slotCount) {

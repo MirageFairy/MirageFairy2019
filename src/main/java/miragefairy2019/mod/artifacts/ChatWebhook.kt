@@ -31,7 +31,6 @@ import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.GuiHandlerEvent
-import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
 import miragefairy2019.libkt.dimensionalPos
 import miragefairy2019.libkt.displayText
@@ -475,11 +474,8 @@ class TileEntityChatWebhookTransmitter : TileEntity(), ISimpleGuiHandlerTileEnti
     }
 
     // Gui
-    override val guiHandler: ISimpleGuiHandler
-        get() = object : ISimpleGuiHandler {
-            override fun onServer(event: GuiHandlerEvent) = ContainerChatWebhookTransmitter(this@TileEntityChatWebhookTransmitter, event.player.inventory, inventory)
-            override fun onClient(event: GuiHandlerEvent) = GuiChatWebhookTransmitter(onServer(event))
-        }
+    override fun onServer(event: GuiHandlerEvent) = ContainerChatWebhookTransmitter(this, event.player.inventory, inventory)
+    override fun onClient(event: GuiHandlerEvent) = GuiChatWebhookTransmitter(onServer(event))
 }
 
 @SideOnly(Side.CLIENT)

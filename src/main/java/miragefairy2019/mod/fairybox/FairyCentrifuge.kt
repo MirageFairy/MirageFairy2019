@@ -62,7 +62,6 @@ import miragefairy2019.lib.set
 import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.GuiHandlerEvent
-import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
@@ -675,11 +674,8 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
     // Gui
 
-    override val guiHandler: ISimpleGuiHandler
-        get() = object : ISimpleGuiHandler {
-            override fun onServer(event: GuiHandlerEvent) = createContainer(event.player)
-            override fun onClient(event: GuiHandlerEvent) = onServer(event).createGui()
-        }
+    override fun onServer(event: GuiHandlerEvent) = createContainer(event.player)
+    override fun onClient(event: GuiHandlerEvent) = onServer(event).createGui()
 
     fun createContainer(player: EntityPlayer) = container(GuiFactory { GuiContainerFairyCentrifuge(it) }) {
 
