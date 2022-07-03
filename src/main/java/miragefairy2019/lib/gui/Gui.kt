@@ -34,11 +34,9 @@ class Component(val container: GuiContainer, val rectangle: RectangleInt) {
     val onMouseClicked = EventContainer<(mouse: PointInt, mouseButton: Int) -> Unit>()
 }
 
-fun GuiContainer.component(rectangle: RectangleInt, block: Component.() -> Unit) = Component(this, rectangle).apply { block() }
-
 @SideOnly(Side.CLIENT)
 abstract class GuiComponentBase(container: Container) : GuiContainer(container) {
-    protected val components = mutableListOf<Component>()
+    val components = mutableListOf<Component>()
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
@@ -58,6 +56,10 @@ abstract class GuiComponentBase(container: Container) : GuiContainer(container) 
         components.forEach { it.onMouseClicked.fire { it(PointInt(mouseX, mouseY) - position, mouseButton) } }
         super.mouseClicked(mouseX, mouseY, mouseButton)
     }
+}
+
+fun GuiComponentBase.component(rectangle: RectangleInt, block: Component.() -> Unit) {
+    components += Component(this, rectangle).apply { block() }
 }
 
 

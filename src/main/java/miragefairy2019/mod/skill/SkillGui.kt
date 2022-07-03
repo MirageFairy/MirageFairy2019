@@ -49,10 +49,10 @@ class GuiSkill : GuiComponentBase(ContainerSkill()) {
 
     init {
 
-        components += component(RectangleInt(4 + 0, 4, 20, 10)) {
+        component(RectangleInt(4 + 0, 4, 20, 10)) {
             label(::fontRenderer, color = 0xFF808080.toArgb()) { "FMLv:" }
         }
-        components += component(RectangleInt(4 + 20, 4, 20 - 4, 10)) {
+        component(RectangleInt(4 + 20, 4, 20 - 4, 10)) {
             label(::fontRenderer, align = TextAlignment.RIGHT) { "${skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}" }
             tooltip(
                 "フェアリーマスターレベル: ${skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}", // TODO translate
@@ -60,14 +60,14 @@ class GuiSkill : GuiComponentBase(ContainerSkill()) {
                 "必要経験値: ${skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.getExp()) formatAs "%8d"}" // TODO translate
             )
         }
-        components += component(RectangleInt(4 + 40, 4, 20, 10)) {
+        component(RectangleInt(4 + 40, 4, 20, 10)) {
             label(::fontRenderer, color = 0xFF808080.toArgb()) { "SP:" }
         }
-        components += component(RectangleInt(4 + 60, 4, 20 - 4, 10)) {
+        component(RectangleInt(4 + 60, 4, 20 - 4, 10)) {
             label(::fontRenderer, align = TextAlignment.RIGHT) { "${skillContainer.remainingSkillPoints}" }
             tooltip("スキルポイントはフェアリーマスターレベル上昇時に入手します。") // TODO translate
         }
-        components += component(RectangleInt(xSize - 34, 4, 30, 10)) {
+        component(RectangleInt(xSize - 34, 4, 30, 10)) {
             button {
                 if (skillContainer.canResetMastery(Instant.now()) && skillContainer.usedSkillPoints > 0) {
                     mc.displayGuiScreen(GuiYesNo({ result, _ ->
@@ -90,31 +90,31 @@ class GuiSkill : GuiComponentBase(ContainerSkill()) {
             }
         }
 
-        components += component(RectangleInt(4, 14, xSize - 4 - 4 - 10 - 20 - 20, 10)) {
+        component(RectangleInt(4, 14, xSize - 4 - 4 - 10 - 20 - 20, 10)) {
             label(::fontRenderer, color = 0xFF808080.toArgb()) { "マスタリ名" }// TODO translate
         }
-        components += component(RectangleInt(xSize - 54, 14, 20, 10)) {
+        component(RectangleInt(xSize - 54, 14, 20, 10)) {
             label(::fontRenderer, color = argb(0xFF808080.toInt()), align = TextAlignment.RIGHT) { "MLv" } // TODO translate
             tooltip("マスタリレベルはある領域に関する理解の深さです。") // TODO translate
         }
-        components += component(RectangleInt(xSize - 34, 14, 20, 10)) {
+        component(RectangleInt(xSize - 34, 14, 20, 10)) {
             label(::fontRenderer, color = argb(0xFF808080.toInt()), align = TextAlignment.RIGHT) { "SLv" } // TODO translate
             tooltip("スキルレベルは個々のアクションの強さです。") // TODO translate
         }
 
         Mastery.values().forEachIndexed { i, mastery ->
-            components += component(RectangleInt(4 + 8 * mastery.layer, 24 + 10 * i, xSize - 4 - 4 - 10 - 20 - 20 - 8 * mastery.layer, 10)) {
+            component(RectangleInt(4 + 8 * mastery.layer, 24 + 10 * i, xSize - 4 - 4 - 10 - 20 - 20 - 8 * mastery.layer, 10)) {
                 label(::fontRenderer, color = 0xFF000000.toArgb()) { mastery.displayName.unformattedText }
                 mastery.displayPoem.unformattedText.takeIf { it.isNotBlank() }?.let { tooltip(it) }
             }
             // TODO SP→SLv効率表示
-            components += component(RectangleInt(xSize - 54, 24 + 10 * i, 20, 10)) {
+            component(RectangleInt(xSize - 54, 24 + 10 * i, 20, 10)) {
                 label(::fontRenderer, color = 0xFF000000.toArgb(), align = TextAlignment.RIGHT) { "${skillContainer.getMasteryLevel(mastery.name)}" }
             }
-            components += component(RectangleInt(xSize - 34, 24 + 10 * i, 20, 10)) {
+            component(RectangleInt(xSize - 34, 24 + 10 * i, 20, 10)) {
                 label(::fontRenderer, color = 0xFF000000.toArgb(), align = TextAlignment.RIGHT) { "${skillContainer.getSkillLevel(mastery)}" }
             }
-            components += component(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
+            component(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
                 button {
                     if (skillContainer.remainingSkillPoints > 0) {
                         Main.simpleNetworkWrapper.sendToServer(MessageTrainMastery(mastery.name))
