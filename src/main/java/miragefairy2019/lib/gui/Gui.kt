@@ -31,41 +31,41 @@ class EventContainer<T> {
 interface IComponent2 {
 
     @SideOnly(Side.CLIENT)
-    fun drawScreen(gui: GuiContainer, mouse: PointInt, partialTicks: Float)
+    fun drawScreen(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float)
 
     @SideOnly(Side.CLIENT)
-    fun drawGuiContainerForegroundLayer(gui: GuiContainer, mouse: PointInt)
+    fun drawGuiContainerForegroundLayer(gui: GuiComponentBase, mouse: PointInt)
 
     @SideOnly(Side.CLIENT)
-    fun drawGuiContainerBackgroundLayer(gui: GuiContainer, mouse: PointInt, partialTicks: Float)
+    fun drawGuiContainerBackgroundLayer(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float)
 
     @SideOnly(Side.CLIENT)
-    fun mouseClicked(gui: GuiContainer, mouse: PointInt, mouseButton: Int)
+    fun mouseClicked(gui: GuiComponentBase, mouse: PointInt, mouseButton: Int)
 
 }
 
 class ComponentEventDistributor(val rectangle: RectangleInt) : IComponent2 {
 
-    val onScreenDraw = EventContainer<(gui: GuiContainer, mouse: PointInt, partialTicks: Float) -> Unit>()
+    val onScreenDraw = EventContainer<(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float) -> Unit>()
 
     @SideOnly(Side.CLIENT)
-    override fun drawScreen(gui: GuiContainer, mouse: PointInt, partialTicks: Float) = onScreenDraw.fire { it(gui, mouse - gui.position, partialTicks) }
+    override fun drawScreen(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float) = onScreenDraw.fire { it(gui, mouse - gui.position, partialTicks) }
 
 
-    val onForegroundDraw = EventContainer<(gui: GuiContainer, mouse: PointInt) -> Unit>()
-
-    @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerForegroundLayer(gui: GuiContainer, mouse: PointInt) = onForegroundDraw.fire { it(gui, mouse - gui.position) }
-
+    val onForegroundDraw = EventContainer<(gui: GuiComponentBase, mouse: PointInt) -> Unit>()
 
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerBackgroundLayer(gui: GuiContainer, mouse: PointInt, partialTicks: Float) = Unit
+    override fun drawGuiContainerForegroundLayer(gui: GuiComponentBase, mouse: PointInt) = onForegroundDraw.fire { it(gui, mouse - gui.position) }
 
-
-    val onMouseClicked = EventContainer<(gui: GuiContainer, mouse: PointInt, mouseButton: Int) -> Unit>()
 
     @SideOnly(Side.CLIENT)
-    override fun mouseClicked(gui: GuiContainer, mouse: PointInt, mouseButton: Int) = onMouseClicked.fire { it(gui, mouse - gui.position, mouseButton) }
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float) = Unit
+
+
+    val onMouseClicked = EventContainer<(gui: GuiComponentBase, mouse: PointInt, mouseButton: Int) -> Unit>()
+
+    @SideOnly(Side.CLIENT)
+    override fun mouseClicked(gui: GuiComponentBase, mouse: PointInt, mouseButton: Int) = onMouseClicked.fire { it(gui, mouse - gui.position, mouseButton) }
 
 }
 
