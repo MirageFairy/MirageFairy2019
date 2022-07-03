@@ -83,6 +83,7 @@ abstract class ContainerComponentBase : Container() {
 abstract class GuiComponentBase(private val container: ContainerComponentBase) : GuiContainer(container) {
 
     // イベント
+
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)

@@ -190,6 +190,9 @@ abstract class GuiComponent(val container: ContainerComponent) : GuiContainer(co
         ySize = container.height
     }
 
+
+    // イベント
+
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
