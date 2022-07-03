@@ -33,13 +33,13 @@ interface IComponent2 {
     fun onContainerInit() = Unit
 
     @SideOnly(Side.CLIENT)
-    fun drawScreen(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float)
+    fun drawGuiContainerBackgroundLayer(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float)
 
     @SideOnly(Side.CLIENT)
     fun drawGuiContainerForegroundLayer(gui: GuiComponentBase, mouse: PointInt)
 
     @SideOnly(Side.CLIENT)
-    fun drawGuiContainerBackgroundLayer(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float)
+    fun drawScreen(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float)
 
     @SideOnly(Side.CLIENT)
     fun mouseClicked(gui: GuiComponentBase, mouse: PointInt, mouseButton: Int)

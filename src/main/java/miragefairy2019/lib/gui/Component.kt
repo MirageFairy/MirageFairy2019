@@ -30,6 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 // Api
 
 interface IComponent {
+
     fun onContainerInit() = Unit
 
     @SideOnly(Side.CLIENT)
@@ -40,6 +41,7 @@ interface IComponent {
 
     @SideOnly(Side.CLIENT)
     fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
+
 }
 
 
