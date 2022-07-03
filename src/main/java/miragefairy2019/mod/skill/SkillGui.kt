@@ -30,6 +30,8 @@ import net.minecraft.client.gui.GuiYesNo
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import java.time.Instant
 
 val skillGuiModule = module {
@@ -48,6 +50,7 @@ class ContainerSkill : Container() {
 class GuiSkill : GuiContainer(ContainerSkill()) {
 
     private val components = mutableListOf<Component>()
+@SideOnly(Side.CLIENT)
 
     private val skillManager get() = ApiSkill.skillManager
     private val skillContainer get() = skillManager.getClientSkillContainer()
