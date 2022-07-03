@@ -5,6 +5,11 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fml.common.network.IGuiHandler
 
+class GuiHandlerEvent(val id: Int, val player: EntityPlayer, val world: World, val x: Int, val y: Int, val z: Int)
+
+val GuiHandlerEvent.tileEntity get() = world.getTileEntity(BlockPos(x, y, z))
+
+
 interface ISimpleGuiHandler {
     fun onServer(event: GuiHandlerEvent): Any?
     fun onClient(event: GuiHandlerEvent): Any?
@@ -17,6 +22,3 @@ val ISimpleGuiHandler.guiHandler
     }
 
 
-class GuiHandlerEvent(val id: Int, val player: EntityPlayer, val world: World, val x: Int, val y: Int, val z: Int)
-
-val GuiHandlerEvent.tileEntity get() = world.getTileEntity(BlockPos(x, y, z))
