@@ -42,6 +42,9 @@ interface IComponent {
     @SideOnly(Side.CLIENT)
     fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
 
+    @SideOnly(Side.CLIENT)
+    fun mouseClicked(gui: GuiComponent, mouse: PointInt, mouseButton: Int) = Unit
+
 }
 
 
@@ -207,6 +210,11 @@ abstract class GuiComponent(val container: ContainerComponent) : GuiContainer(co
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         container.components.forEach { it.drawGuiContainerForegroundLayer(this, PointInt(mouseX, mouseY)) }
+    }
+
+    override fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) {
+        container.components.forEach { it.mouseClicked(this, PointInt(mouseX, mouseY), mouseButton) }
+        super.mouseClicked(mouseX, mouseY, mouseButton)
     }
 
 
