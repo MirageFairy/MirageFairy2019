@@ -19,7 +19,6 @@ import miragefairy2019.lib.gui.Alignment
 import miragefairy2019.lib.gui.ComponentBackgroundImage
 import miragefairy2019.lib.gui.ContainerIntegrated
 import miragefairy2019.lib.gui.GuiComponent
-import miragefairy2019.lib.gui.GuiFactory
 import miragefairy2019.lib.gui.GuiIntegrated
 import miragefairy2019.lib.gui.IComponent
 import miragefairy2019.lib.gui.SlotResult
@@ -675,9 +674,9 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
     // Gui
 
     override fun onServer(event: GuiHandlerEvent) = createContainer(event.player)
-    override fun onClient(event: GuiHandlerEvent) = onServer(event).createGui()
+    override fun onClient(event: GuiHandlerEvent) = GuiContainerFairyCentrifuge(onServer(event))
 
-    fun createContainer(player: EntityPlayer) = container(GuiFactory { GuiContainerFairyCentrifuge(it) }) {
+    private fun createContainer(player: EntityPlayer) = container {
 
         // Guiを開いたときにサーバー側でフォリアを計測する機能
         val propertyMilliFolia = WindowProperty()

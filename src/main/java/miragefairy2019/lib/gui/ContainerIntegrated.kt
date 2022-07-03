@@ -8,26 +8,11 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-interface GuiFactory {
-    @SideOnly(Side.CLIENT)
-    operator fun invoke(component: ContainerIntegrated): GuiIntegrated
-}
-
-inline fun GuiFactory(crossinline function: (component: ContainerIntegrated) -> GuiIntegrated) = object : GuiFactory {
-    override fun invoke(component: ContainerIntegrated) = function(component)
-}
-
 class WindowProperty(var value: Int = 0, val changeListener: () -> Unit = {})
 
-class ContainerIntegrated(private val guiFactory: GuiFactory) : ContainerComponent() {
+class ContainerIntegrated : ContainerComponent() {
     var width = 0
     var height = 0
-
-
-    // Gui
-
-    @SideOnly(Side.CLIENT)
-    fun createGui() = guiFactory(this)
 
 
     // Interact
@@ -122,8 +107,8 @@ class ContainerIntegrated(private val guiFactory: GuiFactory) : ContainerCompone
 
 }
 
-fun container(guiFactory: GuiFactory, block: ContainerIntegrated.() -> Unit): ContainerIntegrated {
-    val container = ContainerIntegrated(guiFactory)
+fun container(block: ContainerIntegrated.() -> Unit): ContainerIntegrated {
+    val container = ContainerIntegrated()
     container.block()
     container.init()
     return container
