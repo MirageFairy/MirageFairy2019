@@ -48,14 +48,12 @@ fun ContainerComponent.component(rectangle: RectangleInt, block: ComponentEventD
 }
 
 
-enum class TextAlignment { LEFT, CENTER, RIGHT }
-
-fun ComponentEventDistributor.label(color: IArgb = 0xFF000000.toArgb(), align: TextAlignment = TextAlignment.LEFT, getText: () -> String) {
+fun ComponentEventDistributor.label(color: IArgb = 0xFF000000.toArgb(), align: Alignment = Alignment.LEFT, getText: () -> String) {
     onForegroundDraw { gui, _ ->
         when (align) {
-            TextAlignment.LEFT -> gui.fontRenderer.drawString(getText(), rectangle, color.argb)
-            TextAlignment.CENTER -> gui.fontRenderer.drawStringCentered(getText(), rectangle, color.argb)
-            TextAlignment.RIGHT -> gui.fontRenderer.drawStringRightAligned(getText(), rectangle, color.argb)
+            Alignment.LEFT -> gui.fontRenderer.drawString(getText(), rectangle, color.argb)
+            Alignment.CENTER -> gui.fontRenderer.drawStringCentered(getText(), rectangle, color.argb)
+            Alignment.RIGHT -> gui.fontRenderer.drawStringRightAligned(getText(), rectangle, color.argb)
         }
     }
 }
