@@ -18,7 +18,6 @@ import miragefairy2019.lib.getFairyCentrifugeCraftRecipe
 import miragefairy2019.lib.gui.Alignment
 import miragefairy2019.lib.gui.ComponentBackgroundImage
 import miragefairy2019.lib.gui.ComponentLabel
-import miragefairy2019.lib.gui.ComponentSlot
 import miragefairy2019.lib.gui.ContainerIntegrated
 import miragefairy2019.lib.gui.GuiComponent
 import miragefairy2019.lib.gui.GuiFactory
@@ -27,7 +26,9 @@ import miragefairy2019.lib.gui.IComponent
 import miragefairy2019.lib.gui.SlotResult
 import miragefairy2019.lib.gui.WindowProperty
 import miragefairy2019.lib.gui.container
+import miragefairy2019.lib.gui.point
 import miragefairy2019.lib.gui.rectangle
+import miragefairy2019.lib.gui.slot
 import miragefairy2019.lib.gui.tooltip
 import miragefairy2019.lib.gui.x
 import miragefairy2019.lib.gui.y
@@ -727,7 +728,9 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
         // 入力
         repeat(9) { c ->
-            components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> Slot(inputInventory, c, x, y) } belongs IN
+            point(3 + 4 + 18 * c, yi) {
+                slot { x, y -> Slot(inputInventory, c, x, y) } belongs IN
+            }
             components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 1) { TEXTURE_INPUT_SLOT }
         }
         yi += 18
@@ -765,7 +768,9 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
                 }
             }
 
-            components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * 1) { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
+            point(3 + 4 + 18 * c, yi + 18 * 1) {
+                slot { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
+            }
             components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 18 * 1 + 1) { TEXTURE_FAIRY_SLOT }
 
             components += ComponentLabel(3 + 4 + 18 * c + 9, yi + 18 * 2, Alignment.CENTER) {
@@ -794,7 +799,9 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
         // 出力
         repeat(9) { c ->
-            components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> SlotResult(player, outputInventory, c, x, y) } belongs OUT
+            point(3 + 4 + 18 * c, yi) {
+                slot { x, y -> SlotResult(player, outputInventory, c, x, y) } belongs OUT
+            }
             components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 1) { TEXTURE_OUTPUT_SLOT }
         }
         yi += 18
@@ -821,13 +828,23 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
 
         // プレイヤーインベントリメイン
-        repeat(3) { r -> repeat(9) { c -> components += ComponentSlot(this, 3 + 4 + 18 * c, yi + 18 * r) { x, y -> Slot(player.inventory, 9 + 9 * r + c, x, y) } belongs PLAYER } }
+        repeat(3) { r ->
+            repeat(9) { c ->
+                point(3 + 4 + 18 * c, yi + 18 * r) {
+                    slot { x, y -> Slot(player.inventory, 9 + 9 * r + c, x, y) } belongs PLAYER
+                }
+            }
+        }
         yi += 18 * 3
 
         yi += 4
 
         // プレイヤーインベントリ最下段
-        repeat(9) { c -> components += ComponentSlot(this, 3 + 4 + 18 * c, yi) { x, y -> Slot(player.inventory, c, x, y) } belongs PLAYER_HOTBAR }
+        repeat(9) { c ->
+            point(3 + 4 + 18 * c, yi) {
+                slot { x, y -> Slot(player.inventory, c, x, y) } belongs PLAYER_HOTBAR
+            }
+        }
         yi += 18
 
         yi += 4

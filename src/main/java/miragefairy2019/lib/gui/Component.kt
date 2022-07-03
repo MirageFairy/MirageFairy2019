@@ -41,14 +41,17 @@ interface IComponent {
 
 // Implementations
 
-class ComponentSlot(val container: ContainerIntegrated, val x: Int, val y: Int, slotCreator: (x: Int, y: Int) -> Slot) : IComponent {
-    val slot = slotCreator(x + 1, y + 1)
+class ComponentSlot(container: ContainerComponent, point: PointInt, slotFactory: (x: Int, y: Int) -> Slot) : ComponentPointBase(container, point) {
+    val slot = slotFactory(point.x + 1, point.y + 1)
 
     override fun onContainerInit() = unit { container.addSlotToContainer(slot) }
 
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = drawSlot(gui.x + x.toFloat(), gui.y + y.toFloat())
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = drawSlot(gui.x + point.x.toFloat(), gui.y + point.y.toFloat())
 }
+
+fun PointContext.slot(slotFactory: (x: Int, y: Int) -> Slot) = ComponentSlot(container, point, slotFactory).also { container.components += it }
+
 
 enum class Alignment { LEFT, CENTER, RIGHT }
 
