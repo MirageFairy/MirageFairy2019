@@ -12,7 +12,6 @@ import miragefairy2019.lib.proxy
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
-import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.displayText
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.textComponent
@@ -47,12 +46,12 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
         val xSize = 176
 
         // フェアリーマスターレベルラベル
-        rectangle(RectangleInt(4 + 0, 4, 20, 10)) {
+        rectangle(4 + 0, 4, 20, 10) {
             label(Alignment.LEFT, color = 0xFF808080.toArgb()) { textComponent { "FMLv:"() } }
         }
 
         // フェアリーマスターレベル
-        rectangle(RectangleInt(4 + 20, 4, 20 - 4, 10)) {
+        rectangle(4 + 20, 4, 20 - 4, 10) {
             label(Alignment.RIGHT) { textComponent { "${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}"() } }
             tooltip {
                 listOf(
@@ -64,18 +63,18 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
         }
 
         // SPラベル
-        rectangle(RectangleInt(4 + 40, 4, 20, 10)) {
+        rectangle(4 + 40, 4, 20, 10) {
             label(Alignment.LEFT, color = 0xFF808080.toArgb()) { textComponent { "SP:"() } }
         }
 
         // SP
-        rectangle(RectangleInt(4 + 60, 4, 20 - 4, 10)) {
+        rectangle(4 + 60, 4, 20 - 4, 10) {
             label(Alignment.RIGHT) { textComponent { "${skillContainer.remainingSkillPoints}"() } }
             tooltip { listOf("スキルポイントはフェアリーマスターレベル上昇時に入手します。") } // TODO translate
         }
 
         // マスタリレベル初期化ボタン
-        rectangle(RectangleInt(xSize - 34, 4, 30, 10)) {
+        rectangle(xSize - 34, 4, 30, 10) {
             button { gui, _, _ ->
                 if (skillContainer.canResetMastery(Instant.now()) && skillContainer.usedSkillPoints > 0) {
                     gui.mc.displayGuiScreen(GuiYesNo({ result, _ ->
@@ -99,18 +98,18 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
         }
 
         // マスタリ名列ラベル
-        rectangle(RectangleInt(4, 14, xSize - 4 - 4 - 10 - 20 - 20, 10)) {
+        rectangle(4, 14, xSize - 4 - 4 - 10 - 20 - 20, 10) {
             label(Alignment.LEFT, color = 0xFF808080.toArgb()) { textComponent { "マスタリ名"() } }// TODO translate
         }
 
         // マスタリレベル列ラベル
-        rectangle(RectangleInt(xSize - 54, 14, 20, 10)) {
+        rectangle(xSize - 54, 14, 20, 10) {
             label(Alignment.RIGHT, color = 0xFF808080.toArgb()) { textComponent { "MLv"() } } // TODO translate
             tooltip { listOf("マスタリレベルはある領域に関する理解の深さです。") } // TODO translate
         }
 
         // スキルレベル列ラベル
-        rectangle(RectangleInt(xSize - 34, 14, 20, 10)) {
+        rectangle(xSize - 34, 14, 20, 10) {
             label(Alignment.RIGHT, color = 0xFF808080.toArgb()) { textComponent { "SLv"() } } // TODO translate
             tooltip { listOf("スキルレベルは個々のアクションの強さです。") } // TODO translate
         }
@@ -119,7 +118,7 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
         Mastery.values().forEachIndexed { i, mastery ->
 
             // マスタリ名
-            rectangle(RectangleInt(4 + 8 * mastery.layer, 24 + 10 * i, xSize - 4 - 4 - 10 - 20 - 20 - 8 * mastery.layer, 10)) {
+            rectangle(4 + 8 * mastery.layer, 24 + 10 * i, xSize - 4 - 4 - 10 - 20 - 20 - 8 * mastery.layer, 10) {
                 label(Alignment.LEFT) { mastery.displayName }
                 mastery.displayPoem.unformattedText.takeIf { it.isNotBlank() }?.let { tooltip { listOf(it) } }
             }
@@ -127,17 +126,17 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
             // TODO SP→SLv効率表示
 
             // マスタリレベル
-            rectangle(RectangleInt(xSize - 54, 24 + 10 * i, 20, 10)) {
+            rectangle(xSize - 54, 24 + 10 * i, 20, 10) {
                 label(Alignment.RIGHT) { textComponent { "${skillContainer.getMasteryLevel(mastery.name)}"() } }
             }
 
             // スキルレベル
-            rectangle(RectangleInt(xSize - 34, 24 + 10 * i, 20, 10)) {
+            rectangle(xSize - 34, 24 + 10 * i, 20, 10) {
                 label(Alignment.RIGHT) { textComponent { "${skillContainer.getSkillLevel(mastery)}"() } }
             }
 
             // 昇級ボタン
-            rectangle(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
+            rectangle(xSize - 14, 24 + 10 * i, 10, 10) {
                 button { _, _, _ ->
                     if (skillContainer.remainingSkillPoints > 0) {
                         Main.simpleNetworkWrapper.sendToServer(MessageTrainMastery(mastery.name))

@@ -5,7 +5,7 @@ import miragefairy2019.libkt.RectangleInt
 
 class RectangleContext(val container: ContainerComponent, val rectangle: RectangleInt)
 
-fun ContainerComponent.rectangle(rectangle: RectangleInt, block: RectangleContext.() -> Unit = {}) = RectangleContext(this, rectangle).also { block(it) }
+fun ContainerComponent.rectangle(left: Int, top: Int, width: Int, height: Int, block: RectangleContext.() -> Unit = {}) = RectangleContext(this, RectangleInt(left, top, width, height)).also { block(it) }
 
 
 class PointContext(val container: ContainerComponent, val point: PointInt)
