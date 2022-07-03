@@ -1,13 +1,8 @@
 package miragefairy2019.lib.gui
 
-import miragefairy2019.libkt.IArgb
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
-import miragefairy2019.libkt.drawString
-import miragefairy2019.libkt.drawStringCentered
-import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.minus
-import miragefairy2019.libkt.toArgb
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
@@ -45,15 +40,4 @@ class ComponentEventDistributor(val rectangle: RectangleInt) : IComponent {
 
 fun ContainerComponent.component(rectangle: RectangleInt, block: ComponentEventDistributor.() -> Unit) {
     components += ComponentEventDistributor(rectangle).apply { block() }
-}
-
-
-fun ComponentEventDistributor.label(color: IArgb = 0xFF000000.toArgb(), align: Alignment = Alignment.LEFT, getText: () -> String) {
-    onForegroundDraw { gui, _ ->
-        when (align) {
-            Alignment.LEFT -> gui.fontRenderer.drawString(getText(), rectangle, color.argb)
-            Alignment.CENTER -> gui.fontRenderer.drawStringCentered(getText(), rectangle, color.argb)
-            Alignment.RIGHT -> gui.fontRenderer.drawStringRightAligned(getText(), rectangle, color.argb)
-        }
-    }
 }

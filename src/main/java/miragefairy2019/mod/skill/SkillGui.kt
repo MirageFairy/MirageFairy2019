@@ -1,10 +1,9 @@
 package miragefairy2019.mod.skill
 
+import miragefairy2019.lib.gui.Alignment
 import miragefairy2019.lib.gui.ContainerComponent
 import miragefairy2019.lib.gui.GuiComponent
-import miragefairy2019.lib.gui.Alignment
 import miragefairy2019.lib.gui.button
-import miragefairy2019.lib.gui.component
 import miragefairy2019.lib.gui.label
 import miragefairy2019.lib.gui.rectangle
 import miragefairy2019.lib.gui.tooltip
@@ -14,9 +13,9 @@ import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.RectangleInt
-import miragefairy2019.libkt.argb
 import miragefairy2019.libkt.displayText
 import miragefairy2019.libkt.guiHandler
+import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toArgb
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
@@ -47,11 +46,11 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
     init {
         val xSize = 176
 
-        component(RectangleInt(4 + 0, 4, 20, 10)) {
-            label(color = 0xFF808080.toArgb()) { "FMLv:" }
+        rectangle(RectangleInt(4 + 0, 4, 20, 10)) {
+            label(Alignment.LEFT, color = 0xFF808080.toArgb()) { textComponent { "FMLv:"() } }
         }
-        component(RectangleInt(4 + 20, 4, 20 - 4, 10)) {
-            label(align = Alignment.RIGHT) { "${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}" }
+        rectangle(RectangleInt(4 + 20, 4, 20 - 4, 10)) {
+            label(Alignment.RIGHT) { textComponent { "${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}"() } }
         }
         rectangle(RectangleInt(4 + 20, 4, 20 - 4, 10)) {
             tooltip {
@@ -62,11 +61,11 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
                 )
             }
         }
-        component(RectangleInt(4 + 40, 4, 20, 10)) {
-            label(color = 0xFF808080.toArgb()) { "SP:" }
+        rectangle(RectangleInt(4 + 40, 4, 20, 10)) {
+            label(Alignment.LEFT, color = 0xFF808080.toArgb()) { textComponent { "SP:"() } }
         }
-        component(RectangleInt(4 + 60, 4, 20 - 4, 10)) {
-            label(align = Alignment.RIGHT) { "${skillContainer.remainingSkillPoints}" }
+        rectangle(RectangleInt(4 + 60, 4, 20 - 4, 10)) {
+            label(Alignment.RIGHT) { textComponent { "${skillContainer.remainingSkillPoints}"() } }
         }
         rectangle(RectangleInt(4 + 60, 4, 20 - 4, 10)) {
             tooltip { listOf("スキルポイントはフェアリーマスターレベル上昇時に入手します。") } // TODO translate
@@ -81,9 +80,9 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
                 }
             }
         }
-        component(RectangleInt(xSize - 34, 4, 30, 10)) {
+        rectangle(RectangleInt(xSize - 34, 4, 30, 10)) {
             // TODO クリックできないときは灰色にする
-            label(color = 0xFF0000FF.toArgb(), align = Alignment.CENTER) { "初期化" } // TODO translate
+            label(Alignment.CENTER, color = 0xFF0000FF.toArgb()) { textComponent { "初期化"() } } // TODO translate
         }
         rectangle(RectangleInt(xSize - 34, 4, 30, 10)) {
             tooltip {
@@ -98,35 +97,35 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
             }
         }
 
-        component(RectangleInt(4, 14, xSize - 4 - 4 - 10 - 20 - 20, 10)) {
-            label(color = 0xFF808080.toArgb()) { "マスタリ名" }// TODO translate
+        rectangle(RectangleInt(4, 14, xSize - 4 - 4 - 10 - 20 - 20, 10)) {
+            label(Alignment.LEFT, color = 0xFF808080.toArgb()) { textComponent { "マスタリ名"() } }// TODO translate
         }
-        component(RectangleInt(xSize - 54, 14, 20, 10)) {
-            label(color = argb(0xFF808080.toInt()), align = Alignment.RIGHT) { "MLv" } // TODO translate
+        rectangle(RectangleInt(xSize - 54, 14, 20, 10)) {
+            label(Alignment.RIGHT, color = 0xFF808080.toArgb()) { textComponent { "MLv"() } } // TODO translate
         }
         rectangle(RectangleInt(xSize - 54, 14, 20, 10)) {
             tooltip { listOf("マスタリレベルはある領域に関する理解の深さです。") } // TODO translate
         }
-        component(RectangleInt(xSize - 34, 14, 20, 10)) {
-            label(color = argb(0xFF808080.toInt()), align = Alignment.RIGHT) { "SLv" } // TODO translate
+        rectangle(RectangleInt(xSize - 34, 14, 20, 10)) {
+            label(Alignment.RIGHT, color = 0xFF808080.toArgb()) { textComponent { "SLv"() } } // TODO translate
         }
         rectangle(RectangleInt(xSize - 34, 14, 20, 10)) {
             tooltip { listOf("スキルレベルは個々のアクションの強さです。") } // TODO translate
         }
 
         Mastery.values().forEachIndexed { i, mastery ->
-            component(RectangleInt(4 + 8 * mastery.layer, 24 + 10 * i, xSize - 4 - 4 - 10 - 20 - 20 - 8 * mastery.layer, 10)) {
-                label(color = 0xFF000000.toArgb()) { mastery.displayName.unformattedText }
+            rectangle(RectangleInt(4 + 8 * mastery.layer, 24 + 10 * i, xSize - 4 - 4 - 10 - 20 - 20 - 8 * mastery.layer, 10)) {
+                label(Alignment.LEFT) { mastery.displayName }
             }
             rectangle(RectangleInt(4 + 8 * mastery.layer, 24 + 10 * i, xSize - 4 - 4 - 10 - 20 - 20 - 8 * mastery.layer, 10)) {
                 mastery.displayPoem.unformattedText.takeIf { it.isNotBlank() }?.let { tooltip { listOf(it) } }
             }
             // TODO SP→SLv効率表示
-            component(RectangleInt(xSize - 54, 24 + 10 * i, 20, 10)) {
-                label(color = 0xFF000000.toArgb(), align = Alignment.RIGHT) { "${skillContainer.getMasteryLevel(mastery.name)}" }
+            rectangle(RectangleInt(xSize - 54, 24 + 10 * i, 20, 10)) {
+                label(Alignment.RIGHT) { textComponent { "${skillContainer.getMasteryLevel(mastery.name)}"() } }
             }
-            component(RectangleInt(xSize - 34, 24 + 10 * i, 20, 10)) {
-                label(color = 0xFF000000.toArgb(), align = Alignment.RIGHT) { "${skillContainer.getSkillLevel(mastery)}" }
+            rectangle(RectangleInt(xSize - 34, 24 + 10 * i, 20, 10)) {
+                label(Alignment.RIGHT) { textComponent { "${skillContainer.getSkillLevel(mastery)}"() } }
             }
             rectangle(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
                 button { _, _, _ ->
@@ -135,9 +134,9 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
                     }
                 }
             }
-            component(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
+            rectangle(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
                 // TODO ホバーで影響するマスタリのレベルを緑色に光らせつつ実行後の値を表示
-                label(color = 0xFF0000FF.toArgb(), align = Alignment.CENTER) { "*" } // TODO icon
+                label(Alignment.CENTER, color = 0xFF0000FF.toArgb()) { textComponent { "*"() } } // TODO icon
             }
             rectangle(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
                 tooltip { listOf(if (skillContainer.remainingSkillPoints > 0) "このマスタリにスキルポイントを割り振ります。" else "スキルポイントが足りません。") } // TODO translate
