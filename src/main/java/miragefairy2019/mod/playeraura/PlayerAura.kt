@@ -51,7 +51,7 @@ val playerAuraModule = module {
     onInstantiation { ApiPlayerAura.playerAuraManager = PlayerAuraManager() }
 
     // ネットワークメッセージ登録
-    onRegisterNetworkMessage { Main.simpleNetworkWrapper.registerMessage(PacketPlayerAura::class.java, MessagePlayerAura::class.java, PacketId.discriminatorPlayerAura, Side.CLIENT) }
+    onRegisterNetworkMessage { Main.simpleNetworkWrapper.registerMessage(PacketPlayerAura::class.java, MessagePlayerAura::class.java, PacketId.playerAura, Side.CLIENT) }
 
     // ログインイベント
     onInit {

@@ -63,7 +63,7 @@ object PlacedItem {
 
         // ネットワークメッセージ登録
         onRegisterNetworkMessage {
-            Main.simpleNetworkWrapper.registerMessage(PacketPlaceItem::class.java, MessagePlaceItem::class.java, PacketId.discriminatorPlacedItem, Side.SERVER)
+            Main.simpleNetworkWrapper.registerMessage(PacketPlaceItem::class.java, MessagePlaceItem::class.java, PacketId.placedItem, Side.SERVER)
         }
 
         // キーリスナー

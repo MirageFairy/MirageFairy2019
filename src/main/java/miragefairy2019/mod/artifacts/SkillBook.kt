@@ -75,7 +75,7 @@ val skillBookModule = module {
 
 class ItemSkillBook : Item() {
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
-        if (!world.isRemote) player.openGui(ModMirageFairy2019.instance, GuiId.skillGui, player.world, player.position.x, player.position.y, player.position.z)
+        if (!world.isRemote) player.openGui(ModMirageFairy2019.instance, GuiId.skill, player.world, player.position.x, player.position.y, player.position.z)
         return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
     }
 

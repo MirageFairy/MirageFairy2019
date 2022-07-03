@@ -66,7 +66,7 @@ object Main {
 
         // TileEntity共有GuiId
         onInit {
-            registerGuiHandler(GuiId.commonTileEntityGui, object : ISimpleGuiHandler {
+            registerGuiHandler(GuiId.commonTileEntity, object : ISimpleGuiHandler {
                 override fun onServer(event: GuiHandlerEvent) = event.tileEntity?.castOrNull<ISimpleGuiHandlerTileEntity>()?.onServer(event)
                 override fun onClient(event: GuiHandlerEvent) = event.tileEntity?.castOrNull<ISimpleGuiHandlerTileEntity>()?.onClient(event)
             }.guiHandler)

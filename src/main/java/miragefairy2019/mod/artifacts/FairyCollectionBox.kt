@@ -419,7 +419,7 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
     // Action
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (worldIn.isRemote) return true
-        playerIn.openGui(ModMirageFairy2019.instance, GuiId.commonTileEntityGui, worldIn, pos.x, pos.y, pos.z)
+        playerIn.openGui(ModMirageFairy2019.instance, GuiId.commonTileEntity, worldIn, pos.x, pos.y, pos.z)
         return true
     }
 

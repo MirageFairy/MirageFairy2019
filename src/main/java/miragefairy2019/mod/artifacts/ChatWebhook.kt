@@ -403,7 +403,7 @@ abstract class BlockChatWebhookTransmitterBase : BlockContainer(Material.IRON), 
     override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (world.isRemote) return true
         world.getTileEntity(blockPos)?.castOrNull<TileEntityChatWebhookTransmitter>()?.updateDaemon(true) // 契約更新
-        if (!requireCreative || player.isCreative) player.openGui(ModMirageFairy2019.instance, GuiId.commonTileEntityGui, world, blockPos.x, blockPos.y, blockPos.z) // GUIを開く
+        if (!requireCreative || player.isCreative) player.openGui(ModMirageFairy2019.instance, GuiId.commonTileEntity, world, blockPos.x, blockPos.y, blockPos.z) // GUIを開く
         return true
     }
 

@@ -30,9 +30,9 @@ val skillModule = module {
 
     // ネットワークメッセージ登録
     onRegisterNetworkMessage {
-        Main.simpleNetworkWrapper.registerMessage(PacketSkill::class.java, MessageSkill::class.java, PacketId.discriminatorSkill, Side.CLIENT)
-        Main.simpleNetworkWrapper.registerMessage(PacketTrainMastery::class.java, MessageTrainMastery::class.java, PacketId.discriminatorTrainMastery, Side.SERVER)
-        Main.simpleNetworkWrapper.registerMessage(PacketResetMastery::class.java, MessageResetMastery::class.java, PacketId.discriminatorResetMastery, Side.SERVER)
+        Main.simpleNetworkWrapper.registerMessage(PacketSkill::class.java, MessageSkill::class.java, PacketId.skill, Side.CLIENT)
+        Main.simpleNetworkWrapper.registerMessage(PacketTrainMastery::class.java, MessageTrainMastery::class.java, PacketId.trainMastery, Side.SERVER)
+        Main.simpleNetworkWrapper.registerMessage(PacketResetMastery::class.java, MessageResetMastery::class.java, PacketId.resetMastery, Side.SERVER)
     }
 
     onInit {
