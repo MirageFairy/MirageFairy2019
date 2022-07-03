@@ -3,7 +3,7 @@ package miragefairy2019.mod
 import miragefairy2019.lib.modinitializer.ModInitializer
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.GuiHandlerEvent
-import miragefairy2019.libkt.IGuiHandlerTileEntity
+import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.tileEntity
@@ -67,8 +67,8 @@ object Main {
         // TileEntity共有GuiId
         onInit {
             registerGuiHandler(GuiId.commonTileEntityGui, object : ISimpleGuiHandler {
-                override fun onServer(event: GuiHandlerEvent) = event.tileEntity?.castOrNull<IGuiHandlerTileEntity>()?.guiHandler?.onServer(event)
-                override fun onClient(event: GuiHandlerEvent) = event.tileEntity?.castOrNull<IGuiHandlerTileEntity>()?.guiHandler?.onClient(event)
+                override fun onServer(event: GuiHandlerEvent) = event.tileEntity?.castOrNull<ISimpleGuiHandlerTileEntity>()?.guiHandler?.onServer(event)
+                override fun onClient(event: GuiHandlerEvent) = event.tileEntity?.castOrNull<ISimpleGuiHandlerTileEntity>()?.guiHandler?.onClient(event)
             }.guiHandler)
         }
 
