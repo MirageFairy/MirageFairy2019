@@ -7,14 +7,10 @@ import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.minus
-import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.hydrogen.unit
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.renderer.GlStateManager
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.Slot
-import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 import net.minecraftforge.fml.relauncher.Side
@@ -113,36 +109,4 @@ class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFF
         Gui.drawModalRectWithCustomSizedTexture(gui.x + x, gui.y + y, 0.0f, 0.0f, 16, 16, 16.0f, 16.0f)
         GlStateManager.disableBlend()
     }
-}
-
-class SlotResult(private val player: EntityPlayer, inventory: IInventory, slotIndex: Int, x: Int, y: Int) : Slot(inventory, slotIndex, x, y) {
-
-    override fun isItemValid(stack: ItemStack) = false
-
-
-    // craft
-
-    private var removeCount = 0
-
-    override fun decrStackSize(amount: Int): ItemStack {
-        if (hasStack) removeCount += amount atMost stack.count
-        return super.decrStackSize(amount)
-    }
-
-    override fun onTake(player: EntityPlayer, itemStack: ItemStack): ItemStack {
-        onCrafting(itemStack)
-        super.onTake(player, itemStack)
-        return itemStack
-    }
-
-    override fun onCrafting(itemStack: ItemStack, amount: Int) {
-        removeCount += amount
-        onCrafting(itemStack)
-    }
-
-    override fun onCrafting(itemStack: ItemStack) {
-        itemStack.onCrafting(player.world, player, removeCount)
-        removeCount = 0
-    }
-
 }
