@@ -2,9 +2,11 @@ package miragefairy2019.lib.gui
 
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
+import miragefairy2019.libkt.contains
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
+import miragefairy2019.libkt.minus
 import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.hydrogen.unit
 import net.minecraft.client.gui.Gui
@@ -59,6 +61,29 @@ class ComponentSlot(container: ContainerComponent, point: PointInt, slotFactory:
 }
 
 fun PointContext.slot(slotFactory: (x: Int, y: Int) -> Slot) = ComponentSlot(container, point, slotFactory).also { container.components += it }
+
+
+class ComponentButton(container: ContainerComponent, rectangle: RectangleInt, private val action: (gui: GuiComponent, mouse: PointInt, mouseButton: Int) -> Unit) : ComponentRectangleBase(container, rectangle) {
+    @SideOnly(Side.CLIENT)
+    override fun mouseClicked(gui: GuiComponent, mouse: PointInt, mouseButton: Int) {
+        if (mouse - gui.position in rectangle) action(gui, mouse, mouseButton)
+    }
+    // TODO 枠の描画
+}
+
+fun RectangleContext.button(action: (gui: GuiComponent, mouse: PointInt, mouseButton: Int) -> Unit) = ComponentButton(container, rectangle, action).also { container.components += it }
+
+
+class ComponentTooltip(container: ContainerComponent, rectangle: RectangleInt, private val textSupplier: () -> List<String>?) : ComponentRectangleBase(container, rectangle) {
+    @SideOnly(Side.CLIENT)
+    override fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
+        if (mouse - gui.position !in rectangle) return
+        val text = textSupplier() ?: return
+        gui.drawHoveringText(text, mouse.x, mouse.y)
+    }
+}
+
+fun RectangleContext.tooltip(textSupplier: () -> List<String>?) = ComponentTooltip(container, rectangle, textSupplier).also { container.components += it }
 
 
 enum class Alignment { LEFT, CENTER, RIGHT }

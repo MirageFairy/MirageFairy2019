@@ -3,7 +3,6 @@ package miragefairy2019.lib.gui
 import miragefairy2019.libkt.IArgb
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
-import miragefairy2019.libkt.contains
 import miragefairy2019.libkt.drawString
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
@@ -49,17 +48,6 @@ fun ContainerComponent.component(rectangle: RectangleInt, block: ComponentEventD
 }
 
 
-class ComponentButton(container: ContainerComponent, rectangle: RectangleInt, private val action: (gui: GuiComponent, mouse: PointInt, mouseButton: Int) -> Unit) : ComponentRectangleBase(container, rectangle) {
-    @SideOnly(Side.CLIENT)
-    override fun mouseClicked(gui: GuiComponent, mouse: PointInt, mouseButton: Int) {
-        if (mouse - gui.position in rectangle) action(gui, mouse, mouseButton)
-    }
-    // TODO 枠の描画
-}
-
-fun RectangleContext.button(action: (gui: GuiComponent, mouse: PointInt, mouseButton: Int) -> Unit) = ComponentButton(container, rectangle, action).also { container.components += it }
-
-
 enum class TextAlignment { LEFT, CENTER, RIGHT }
 
 fun ComponentEventDistributor.label(color: IArgb = 0xFF000000.toArgb(), align: TextAlignment = TextAlignment.LEFT, getText: () -> String) {
@@ -71,15 +59,3 @@ fun ComponentEventDistributor.label(color: IArgb = 0xFF000000.toArgb(), align: T
         }
     }
 }
-
-
-class ComponentTooltip(container: ContainerComponent, rectangle: RectangleInt, private val textSupplier: () -> List<String>?) : ComponentRectangleBase(container, rectangle) {
-    @SideOnly(Side.CLIENT)
-    override fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
-        if (mouse - gui.position !in rectangle) return
-        val text = textSupplier() ?: return
-        gui.drawHoveringText(text, mouse.x, mouse.y)
-    }
-}
-
-fun RectangleContext.tooltip(textSupplier: () -> List<String>?) = ComponentTooltip(container, rectangle, textSupplier).also { container.components += it }
