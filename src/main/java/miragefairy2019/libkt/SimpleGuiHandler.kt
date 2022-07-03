@@ -6,17 +6,17 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.common.network.IGuiHandler
 
 interface ISimpleGuiHandler {
-    fun GuiHandlerContext.onServer(): Any?
-    fun GuiHandlerContext.onClient(): Any?
+    fun onServer(event: GuiHandlerEvent): Any?
+    fun onClient(event: GuiHandlerEvent): Any?
 }
 
 val ISimpleGuiHandler.guiHandler
     get() = object : IGuiHandler {
-        override fun getServerGuiElement(id: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int) = GuiHandlerContext(id, player, world, x, y, z).onServer()
-        override fun getClientGuiElement(id: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int) = GuiHandlerContext(id, player, world, x, y, z).onClient()
+        override fun getServerGuiElement(id: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int) = onServer(GuiHandlerEvent(id, player, world, x, y, z))
+        override fun getClientGuiElement(id: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int) = onClient(GuiHandlerEvent(id, player, world, x, y, z))
     }
 
 
-data class GuiHandlerContext(val id: Int, val player: EntityPlayer, val world: World, val x: Int, val y: Int, val z: Int)
+class GuiHandlerEvent(val id: Int, val player: EntityPlayer, val world: World, val x: Int, val y: Int, val z: Int)
 
-val GuiHandlerContext.tileEntity get() = world.getTileEntity(BlockPos(x, y, z))
+val GuiHandlerEvent.tileEntity get() = world.getTileEntity(BlockPos(x, y, z))

@@ -61,7 +61,7 @@ import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.set
 import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
-import miragefairy2019.libkt.GuiHandlerContext
+import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
@@ -204,8 +204,8 @@ val fairyCentrifugeModule = module {
     // Gui登録
     onInit {
         Main.registerGuiHandler(GuiId.fairyBoxCentrifuge, object : ISimpleGuiHandler {
-            override fun GuiHandlerContext.onServer() = tileEntity?.castOrNull<TileEntityFairyCentrifuge>()?.createContainer(player)
-            override fun GuiHandlerContext.onClient() = tileEntity?.castOrNull<TileEntityFairyCentrifuge>()?.createContainer(player)?.createGui()
+            override fun onServer(event: GuiHandlerEvent) = event.tileEntity?.castOrNull<TileEntityFairyCentrifuge>()?.createContainer(event.player)
+            override fun onClient(event: GuiHandlerEvent) = onServer(event)?.createGui()
         }.guiHandler)
     }
 

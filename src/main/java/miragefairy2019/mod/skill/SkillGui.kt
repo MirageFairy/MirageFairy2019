@@ -10,7 +10,7 @@ import miragefairy2019.lib.gui.tooltip
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.proxy
 import miragefairy2019.lib.skillContainer
-import miragefairy2019.libkt.GuiHandlerContext
+import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.displayText
@@ -33,8 +33,8 @@ import java.time.Instant
 val skillGuiModule = module {
     onInit {
         Main.registerGuiHandler(GuiId.skillGui, object : ISimpleGuiHandler {
-            override fun GuiHandlerContext.onServer() = ContainerSkill(player).also { it.init() }
-            override fun GuiHandlerContext.onClient() = GuiSkill(ContainerSkill(player).also { it.init() })
+            override fun onServer(event: GuiHandlerEvent) = ContainerSkill(event.player).also { it.init() }
+            override fun onClient(event: GuiHandlerEvent) = GuiSkill(onServer(event))
         }.guiHandler)
     }
 }

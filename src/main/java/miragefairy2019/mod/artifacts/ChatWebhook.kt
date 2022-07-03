@@ -30,7 +30,7 @@ import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.DimensionalPos
-import miragefairy2019.libkt.GuiHandlerContext
+import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.dimensionalPos
 import miragefairy2019.libkt.displayText
@@ -230,8 +230,8 @@ object ChatWebhook {
         // Gui
         onInit {
             Main.registerGuiHandler(GuiId.chatWebhookTransmitter, object : ISimpleGuiHandler {
-                override fun GuiHandlerContext.onServer() = (tileEntity as? TileEntityChatWebhookTransmitter)?.let { ContainerChatWebhookTransmitter(it, player.inventory, it.inventory) }
-                override fun GuiHandlerContext.onClient() = onServer()?.let { GuiChatWebhookTransmitter(it) }
+                override fun onServer(event: GuiHandlerEvent) = (event.tileEntity as? TileEntityChatWebhookTransmitter)?.let { ContainerChatWebhookTransmitter(it, event.player.inventory, it.inventory) }
+                override fun onClient(event: GuiHandlerEvent) = onServer(event)?.let { GuiChatWebhookTransmitter(it) }
             }.guiHandler)
         }
 

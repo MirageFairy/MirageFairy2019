@@ -22,7 +22,7 @@ import miragefairy2019.lib.resourcemaker.DataPoint
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.writeToNBT
-import miragefairy2019.libkt.GuiHandlerContext
+import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
@@ -91,8 +91,8 @@ object FairyCollectionBox {
         tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)
         onInit {
             Main.registerGuiHandler(GuiId.fairyCollectionBox, object : ISimpleGuiHandler {
-                override fun GuiHandlerContext.onServer() = (tileEntity as? TileEntityFairyCollectionBox)?.let { ContainerFairyCollectionBox(player.inventory, it.inventory) }
-                override fun GuiHandlerContext.onClient() = (tileEntity as? TileEntityFairyCollectionBox)?.let { GuiFairyCollectionBox(ContainerFairyCollectionBox(player.inventory, it.inventory)) }
+                override fun onServer(event: GuiHandlerEvent) = (event.tileEntity as? TileEntityFairyCollectionBox)?.let { ContainerFairyCollectionBox(event.player.inventory, it.inventory) }
+                override fun onClient(event: GuiHandlerEvent) = onServer(event)?.let { GuiFairyCollectionBox(it) }
             }.guiHandler)
         }
         makeBlockModel("fairy_building_bottom") {

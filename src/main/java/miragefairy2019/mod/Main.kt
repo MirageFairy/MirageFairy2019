@@ -2,7 +2,7 @@ package miragefairy2019.mod
 
 import miragefairy2019.lib.modinitializer.ModInitializer
 import miragefairy2019.lib.modinitializer.module
-import miragefairy2019.libkt.GuiHandlerContext
+import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.mod.artifacts.FairyCrystal
@@ -56,8 +56,8 @@ object Main {
         // Gui Handler
         onInit {
             NetworkRegistry.INSTANCE.registerGuiHandler(ModMirageFairy2019.instance, object : ISimpleGuiHandler {
-                override fun GuiHandlerContext.onServer() = guiHandlers[id]?.getServerGuiElement(id, player, world, x, y, z)
-                override fun GuiHandlerContext.onClient() = guiHandlers[id]?.getClientGuiElement(id, player, world, x, y, z)
+                override fun onServer(event: GuiHandlerEvent) = guiHandlers[event.id]?.getServerGuiElement(event.id, event.player, event.world, event.x, event.y, event.z)
+                override fun onClient(event: GuiHandlerEvent) = guiHandlers[event.id]?.getClientGuiElement(event.id, event.player, event.world, event.x, event.y, event.z)
             }.guiHandler)
         }
 
