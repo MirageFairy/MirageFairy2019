@@ -31,18 +31,18 @@ import java.time.Instant
 val skillGuiModule = module {
     onInit {
         Main.registerGuiHandler(GuiId.skillGui, object : ISimpleGuiHandler {
-            override fun GuiHandlerContext.onServer() = ContainerSkill()
-            override fun GuiHandlerContext.onClient() = GuiSkill()
+            override fun GuiHandlerContext.onServer() = ContainerSkill(player)
+            override fun GuiHandlerContext.onClient() = GuiSkill(player)
         }.guiHandler)
     }
 }
 
-class ContainerSkill : Container() {
+class ContainerSkill(val player: EntityPlayer) : Container() {
     override fun canInteractWith(playerIn: EntityPlayer) = true
 }
 
 @SideOnly(Side.CLIENT)
-class GuiSkill : GuiComponentBase(ContainerSkill()) {
+class GuiSkill(player: EntityPlayer) : GuiComponentBase(ContainerSkill(player)) {
 
     private val skillManager get() = ApiSkill.skillManager
     private val skillContainer get() = skillManager.getClientSkillContainer()
