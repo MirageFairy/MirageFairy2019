@@ -82,9 +82,11 @@ abstract class ContainerComponentBase : Container() {
 @SideOnly(Side.CLIENT)
 abstract class GuiComponentBase(private val container: ContainerComponentBase) : GuiContainer(container) {
 
+    // イベント
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
+        renderHoveredToolTip(mouseX, mouseY)
         container.components.forEach { it.drawScreen(this, PointInt(mouseX, mouseY), partialTicks) }
     }
 
@@ -101,6 +103,7 @@ abstract class GuiComponentBase(private val container: ContainerComponentBase) :
         container.components.forEach { it.mouseClicked(this, PointInt(mouseX, mouseY), mouseButton) }
         super.mouseClicked(mouseX, mouseY, mouseButton)
     }
+
 
     // Public化
     val fontRenderer: FontRenderer get() = super.fontRenderer
