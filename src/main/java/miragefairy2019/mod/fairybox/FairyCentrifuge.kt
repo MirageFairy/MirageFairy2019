@@ -721,18 +721,14 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
 
         // Guiタイトル
-        point(width / 2, yi) {
-            label(Alignment.CENTER) { inputInventory.displayName }
-        }
+        point(width / 2, yi).label(Alignment.CENTER) { inputInventory.displayName }
         yi += 8
         yi += 2
 
 
         // 入力
         repeat(9) { c ->
-            point(3 + 4 + 18 * c, yi) {
-                slot { x, y -> Slot(inputInventory, c, x, y) } belongs IN
-            }
+            point(3 + 4 + 18 * c, yi).slot { x, y -> Slot(inputInventory, c, x, y) } belongs IN
             components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 1) { TEXTURE_INPUT_SLOT }
         }
         yi += 18
@@ -763,36 +759,28 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
                     GlStateManager.disableBlend()
                 }
             }
-            rectangle(RectangleInt(3 + 4 + 18 * c - 18, yi + 9, 18 * 3, 9)) {
-                tooltip {
-                    val processResult = getProcessResult() ?: return@tooltip null
-                    listOf(formattedText { processResult.elements.map { it.text() }.sandwich { ", "() }.flatten() })
-                }
+            rectangle(RectangleInt(3 + 4 + 18 * c - 18, yi + 9, 18 * 3, 9)).tooltip {
+                val processResult = getProcessResult() ?: return@tooltip null
+                listOf(formattedText { processResult.elements.map { it.text() }.sandwich { ", "() }.flatten() })
             }
 
-            point(3 + 4 + 18 * c, yi + 18 * 1) {
-                slot { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
-            }
+            point(3 + 4 + 18 * c, yi + 18 * 1).slot { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
             components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 18 * 1 + 1) { TEXTURE_FAIRY_SLOT }
 
-            point(3 + 4 + 18 * c + 9, yi + 18 * 2) {
-                label(Alignment.CENTER) {
-                    val processResult = getProcessResult() ?: return@label null
-                    textComponent { (processResult.score formatAs "%.0f")().darkBlue.underline }
-                }
+            point(3 + 4 + 18 * c + 9, yi + 18 * 2).label(Alignment.CENTER) {
+                val processResult = getProcessResult() ?: return@label null
+                textComponent { (processResult.score formatAs "%.0f")().darkBlue.underline }
             }
-            rectangle(RectangleInt(3 + 4 + 18 * c, yi + 18 * 2, 18, 9)) {
-                tooltip {
-                    val processResult = getProcessResult() ?: return@tooltip null
-                    listOf(
-                        formattedText { "スコア: ${processResult.score formatAs "%.2f"}"() }, // TODO translate
-                        formattedText { "ノルマ: ${getNorma() formatAs "%.2f"}"() }, // TODO translate
-                        formattedText { "加工速度: ${processResult.speed * getFoliaSpeedFactor() formatAs "%.2f"} 回/分"() }, // TODO translate
-                        formattedText { "  妖精の効率: ${processResult.speed formatAs "%.2f"}"() }, // TODO translate
-                        formattedText { "  Folia倍率: ${getFoliaSpeedFactor() * 100.0 formatAs "%.2f"}% (${getFolia() formatAs "%.1f"} Folia)"() }, // TODO translate
-                        formattedText { "幸運値: ${Symbols.FORTUNE}${processResult.fortune formatAs "%.2f"}"() } // TODO translate
-                    )
-                }
+            rectangle(RectangleInt(3 + 4 + 18 * c, yi + 18 * 2, 18, 9)).tooltip {
+                val processResult = getProcessResult() ?: return@tooltip null
+                listOf(
+                    formattedText { "スコア: ${processResult.score formatAs "%.2f"}"() }, // TODO translate
+                    formattedText { "ノルマ: ${getNorma() formatAs "%.2f"}"() }, // TODO translate
+                    formattedText { "加工速度: ${processResult.speed * getFoliaSpeedFactor() formatAs "%.2f"} 回/分"() }, // TODO translate
+                    formattedText { "  妖精の効率: ${processResult.speed formatAs "%.2f"}"() }, // TODO translate
+                    formattedText { "  Folia倍率: ${getFoliaSpeedFactor() * 100.0 formatAs "%.2f"}% (${getFolia() formatAs "%.1f"} Folia)"() }, // TODO translate
+                    formattedText { "幸運値: ${Symbols.FORTUNE}${processResult.fortune formatAs "%.2f"}"() } // TODO translate
+                )
             }
 
         }
@@ -803,38 +791,28 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
         // 出力
         repeat(9) { c ->
-            point(3 + 4 + 18 * c, yi) {
-                slot { x, y -> SlotResult(player, outputInventory, c, x, y) } belongs OUT
-            }
+            point(3 + 4 + 18 * c, yi).slot { x, y -> SlotResult(player, outputInventory, c, x, y) } belongs OUT
             components += ComponentBackgroundImage(3 + 4 + 18 * c + 1, yi + 1) { TEXTURE_OUTPUT_SLOT }
         }
         yi += 18
 
         // 加工速度・幸運値・フォリア
-        point(3 + 4 + 18 * 1 + 9, yi) {
-            label(Alignment.CENTER) {
-                val recipeMatchResult = recipeMatchResult ?: return@label null
-                textComponent { (recipeMatchResult.speed * getFoliaSpeedFactor() formatAs "%.2f 回/分")() } // TODO translate
-            }
+        point(3 + 4 + 18 * 1 + 9, yi).label(Alignment.CENTER) {
+            val recipeMatchResult = recipeMatchResult ?: return@label null
+            textComponent { (recipeMatchResult.speed * getFoliaSpeedFactor() formatAs "%.2f 回/分")() } // TODO translate
         }
-        point(3 + 4 + 18 * 4 + 9, yi) {
-            label(Alignment.CENTER) {
-                val recipeMatchResult = recipeMatchResult ?: return@label null
-                textComponent { "${Symbols.FORTUNE}${recipeMatchResult.fortune formatAs "%.2f"}"() } // TODO translate
-            }
+        point(3 + 4 + 18 * 4 + 9, yi).label(Alignment.CENTER) {
+            val recipeMatchResult = recipeMatchResult ?: return@label null
+            textComponent { "${Symbols.FORTUNE}${recipeMatchResult.fortune formatAs "%.2f"}"() } // TODO translate
         }
-        point(3 + 4 + 18 * 7 + 9, yi) {
-            label(Alignment.CENTER) {
-                textComponent { "${getFolia() formatAs "%.2f"} Folia"() } // TODO translate
-            }
+        point(3 + 4 + 18 * 7 + 9, yi).label(Alignment.CENTER) {
+            textComponent { "${getFolia() formatAs "%.2f"} Folia"() } // TODO translate
         }
         yi += 9
 
         // プレイヤーインベントリタイトル
         yi += 2
-        point(3 + 4, yi) {
-            label(Alignment.LEFT) { player.inventory.displayName }
-        }
+        point(3 + 4, yi).label(Alignment.LEFT) { player.inventory.displayName }
         yi += 8
         yi += 2
 
@@ -842,9 +820,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         // プレイヤーインベントリメイン
         repeat(3) { r ->
             repeat(9) { c ->
-                point(3 + 4 + 18 * c, yi + 18 * r) {
-                    slot { x, y -> Slot(player.inventory, 9 + 9 * r + c, x, y) } belongs PLAYER
-                }
+                point(3 + 4 + 18 * c, yi + 18 * r).slot { x, y -> Slot(player.inventory, 9 + 9 * r + c, x, y) } belongs PLAYER
             }
         }
         yi += 18 * 3
@@ -853,9 +829,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
         // プレイヤーインベントリ最下段
         repeat(9) { c ->
-            point(3 + 4 + 18 * c, yi) {
-                slot { x, y -> Slot(player.inventory, c, x, y) } belongs PLAYER_HOTBAR
-            }
+            point(3 + 4 + 18 * c, yi).slot { x, y -> Slot(player.inventory, c, x, y) } belongs PLAYER_HOTBAR
         }
         yi += 18
 
