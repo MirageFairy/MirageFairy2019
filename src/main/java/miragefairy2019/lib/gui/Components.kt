@@ -64,7 +64,7 @@ fun RectangleContext.tooltip(textSupplier: () -> List<String>?) = ComponentToolt
 
 enum class Alignment { LEFT, CENTER, RIGHT }
 
-class ComponentRectangleLabel(
+class ComponentLabel(
     container: ContainerComponent,
     rectangle: RectangleInt,
     private val alignment: Alignment,
@@ -82,7 +82,7 @@ class ComponentRectangleLabel(
     }
 }
 
-fun RectangleContext.label(alignment: Alignment, color: IArgb = 0x404040.toArgb(), textSupplier: () -> ITextComponent?) = ComponentRectangleLabel(container, rectangle, alignment, color, textSupplier).also { container.components += it }
+fun RectangleContext.label(alignment: Alignment, color: IArgb = 0x404040.toArgb(), textSupplier: () -> ITextComponent?) = ComponentLabel(container, rectangle, alignment, color, textSupplier).also { container.components += it }
 
 
 class ComponentSlotIcon(container: ContainerComponent, point: PointInt, val color: Int, val textureSupplier: () -> ResourceLocation) : ComponentPointBase(container, point) {
