@@ -55,9 +55,9 @@ class GuiSkill : GuiComponentBase(ContainerSkill()) {
         component(RectangleInt(4 + 20, 4, 20 - 4, 10)) {
             label(align = TextAlignment.RIGHT) { "${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}" }
             tooltip(
-                "フェアリーマスターレベル: ${skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}", // TODO translate
+                "フェアリーマスターレベル: ${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}", // TODO translate
                 "累積経験値: ${skillContainer.variables.getExp() formatAs "%8d"}", // TODO translate
-                "必要経験値: ${skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.getExp()) formatAs "%8d"}" // TODO translate
+                "必要経験値: ${ApiSkill.skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.getExp()) formatAs "%8d"}" // TODO translate
             )
         }
         component(RectangleInt(4 + 40, 4, 20, 10)) {
