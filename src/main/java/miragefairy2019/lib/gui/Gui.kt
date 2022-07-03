@@ -30,6 +30,8 @@ class EventContainer<T> {
 
 interface IComponent2 {
 
+    fun onContainerInit() = Unit
+
     @SideOnly(Side.CLIENT)
     fun drawScreen(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float)
 
@@ -71,6 +73,10 @@ class ComponentEventDistributor(val rectangle: RectangleInt) : IComponent2 {
 
 abstract class ContainerComponentBase : Container() {
     val components = mutableListOf<IComponent2>()
+
+    fun init() {
+        components.forEach { it.onContainerInit() }
+    }
 }
 
 @SideOnly(Side.CLIENT)

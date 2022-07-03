@@ -33,8 +33,8 @@ import java.time.Instant
 val skillGuiModule = module {
     onInit {
         Main.registerGuiHandler(GuiId.skillGui, object : ISimpleGuiHandler {
-            override fun GuiHandlerContext.onServer() = ContainerSkill(player)
-            override fun GuiHandlerContext.onClient() = GuiSkill(ContainerSkill(player))
+            override fun GuiHandlerContext.onServer() = ContainerSkill(player).also { it.init() }
+            override fun GuiHandlerContext.onClient() = GuiSkill(ContainerSkill(player).also { it.init() })
         }.guiHandler)
     }
 }
