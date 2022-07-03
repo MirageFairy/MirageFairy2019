@@ -33,10 +33,10 @@ interface IComponent {
     fun onInit() = Unit
 
     @SideOnly(Side.CLIENT)
-    fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouseY: Int, mouseX: Int, partialTicks: Float) = Unit
+    fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
 
     @SideOnly(Side.CLIENT)
-    fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouseX: Int, mouseY: Int) = Unit
+    fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) = Unit
 
     @SideOnly(Side.CLIENT)
     fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
@@ -197,11 +197,11 @@ abstract class GuiComponent(val container: ContainerComponent) : GuiContainer(co
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
         rectangle.drawGuiBackground()
-        container.components.forEach { it.drawGuiContainerBackgroundLayer(this, mouseY, mouseX, partialTicks) }
+        container.components.forEach { it.drawGuiContainerBackgroundLayer(this, PointInt(mouseY, mouseX), partialTicks) }
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
-        container.components.forEach { it.drawGuiContainerForegroundLayer(this, mouseX, mouseY) }
+        container.components.forEach { it.drawGuiContainerForegroundLayer(this, PointInt(mouseX, mouseY)) }
     }
 
 
@@ -219,14 +219,14 @@ class ComponentSlot(val container: ContainerComponent, val x: Int, val y: Int, s
     override fun onInit() = unit { container.addSlotToContainer(slot) }
 
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouseY: Int, mouseX: Int, partialTicks: Float) = drawSlot(gui.x + x.toFloat(), gui.y + y.toFloat())
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = drawSlot(gui.x + x.toFloat(), gui.y + y.toFloat())
 }
 
 enum class Alignment { LEFT, CENTER, RIGHT }
 
 class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent {
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouseX: Int, mouseY: Int) {
+    override fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) {
         when (alignment) {
             Alignment.LEFT -> textSupplier()?.let { gui.fontRenderer.drawString(it.formattedText, x, y, color) }
             Alignment.CENTER -> textSupplier()?.let { gui.fontRenderer.drawStringCentered(it.formattedText, x, y, color) }
@@ -237,7 +237,7 @@ class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color
 
 class ComponentBackgroundLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent {
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouseY: Int, mouseX: Int, partialTicks: Float) {
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
         when (alignment) {
             Alignment.LEFT -> textSupplier()?.let { gui.fontRenderer.drawString(it.formattedText, gui.x + x, gui.y + y, color) }
             Alignment.CENTER -> textSupplier()?.let { gui.fontRenderer.drawStringCentered(it.formattedText, gui.x + x, gui.y + y, color) }
@@ -248,7 +248,7 @@ class ComponentBackgroundLabel(val x: Int, val y: Int, val alignment: Alignment,
 
 class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFFFF.toInt(), val textureSupplier: () -> ResourceLocation) : IComponent {
     @SideOnly(Side.CLIENT)
-    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouseY: Int, mouseX: Int, partialTicks: Float) {
+    override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
         GlStateManager.color(
             (color shr 16 and 0xFF) / 255.0f,
             (color shr 8 and 0xFF) / 255.0f,

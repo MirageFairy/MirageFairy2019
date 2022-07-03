@@ -60,6 +60,7 @@ import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
+import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
@@ -694,7 +695,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         // レシピ判定機能
         var recipeMatchResult: RecipeMatchResult? = null
         components += object : IComponent {
-            override fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouseX: Int, mouseY: Int) {
+            override fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) {
                 recipeMatchResult = match()
             }
         }
@@ -738,7 +739,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
             val elementsY = yi + 7
             components += object : IComponent {
                 @SideOnly(Side.CLIENT)
-                override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouseY: Int, mouseX: Int, partialTicks: Float) {
+                override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
                     val elements = getProcessResult()?.elements ?: listOf()
                     val elementX = 3 + 4 + 18 * c + 9 - (11 * elements.size) / 2
 
