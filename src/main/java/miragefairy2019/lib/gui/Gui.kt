@@ -28,34 +28,50 @@ class EventContainer<T> {
     fun fire(invoker: (T) -> Unit) = listeners.forEach { invoker(it) }
 }
 
-class Component(val container: GuiContainer, val rectangle: RectangleInt) {
-
-    val onScreenDraw = EventContainer<(mouse: PointInt, partialTicks: Float) -> Unit>()
+interface IComponent2 {
 
     @SideOnly(Side.CLIENT)
-    fun drawScreen(gui: GuiContainer, mouse: PointInt, partialTicks: Float) = onScreenDraw.fire { it(mouse - gui.position, partialTicks) }
-
-
-    val onForegroundDraw = EventContainer<(mouse: PointInt) -> Unit>()
+    fun drawScreen(gui: GuiContainer, mouse: PointInt, partialTicks: Float)
 
     @SideOnly(Side.CLIENT)
-    fun drawGuiContainerForegroundLayer(gui: GuiContainer, mouse: PointInt) = onForegroundDraw.fire { it(mouse - gui.position) }
+    fun drawGuiContainerForegroundLayer(gui: GuiContainer, mouse: PointInt)
+
+    @SideOnly(Side.CLIENT)
+    fun drawGuiContainerBackgroundLayer(gui: GuiContainer, mouse: PointInt, partialTicks: Float)
+
+    @SideOnly(Side.CLIENT)
+    fun mouseClicked(gui: GuiContainer, mouse: PointInt, mouseButton: Int)
+
+}
+
+class ComponentEventDistributor(val rectangle: RectangleInt) : IComponent2 {
+
+    val onScreenDraw = EventContainer<(gui: GuiContainer, mouse: PointInt, partialTicks: Float) -> Unit>()
+
+    @SideOnly(Side.CLIENT)
+    override fun drawScreen(gui: GuiContainer, mouse: PointInt, partialTicks: Float) = onScreenDraw.fire { it(gui, mouse - gui.position, partialTicks) }
+
+
+    val onForegroundDraw = EventContainer<(gui: GuiContainer, mouse: PointInt) -> Unit>()
+
+    @SideOnly(Side.CLIENT)
+    override fun drawGuiContainerForegroundLayer(gui: GuiContainer, mouse: PointInt) = onForegroundDraw.fire { it(gui, mouse - gui.position) }
 
 
     @SideOnly(Side.CLIENT)
-    fun drawGuiContainerBackgroundLayer(gui: GuiContainer, mouse: PointInt, partialTicks: Float) = Unit
+    override fun drawGuiContainerBackgroundLayer(gui: GuiContainer, mouse: PointInt, partialTicks: Float) = Unit
 
 
-    val onMouseClicked = EventContainer<(mouse: PointInt, mouseButton: Int) -> Unit>()
+    val onMouseClicked = EventContainer<(gui: GuiContainer, mouse: PointInt, mouseButton: Int) -> Unit>()
 
     @SideOnly(Side.CLIENT)
-    fun mouseClicked(gui: GuiContainer, mouse: PointInt, mouseButton: Int) = onMouseClicked.fire { it(mouse - gui.position, mouseButton) }
+    override fun mouseClicked(gui: GuiContainer, mouse: PointInt, mouseButton: Int) = onMouseClicked.fire { it(gui, mouse - gui.position, mouseButton) }
 
 }
 
 @SideOnly(Side.CLIENT)
 abstract class GuiComponentBase(container: Container) : GuiContainer(container) {
-    val components = mutableListOf<Component>()
+    val components = mutableListOf<IComponent2>()
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
@@ -78,16 +94,16 @@ abstract class GuiComponentBase(container: Container) : GuiContainer(container) 
     }
 }
 
-fun GuiComponentBase.component(rectangle: RectangleInt, block: Component.() -> Unit) {
-    components += Component(this, rectangle).apply { block() }
+fun GuiComponentBase.component(rectangle: RectangleInt, block: ComponentEventDistributor.() -> Unit) {
+    components += ComponentEventDistributor(rectangle).apply { block() }
 }
 
 
 enum class TextAlignment { LEFT, CENTER, RIGHT }
 
 
-fun Component.label(sFontRenderer: () -> FontRenderer, color: IArgb = 0xFF000000.toArgb(), align: TextAlignment = TextAlignment.LEFT, getText: () -> String) {
-    onForegroundDraw {
+fun ComponentEventDistributor.label(sFontRenderer: () -> FontRenderer, color: IArgb = 0xFF000000.toArgb(), align: TextAlignment = TextAlignment.LEFT, getText: () -> String) {
+    onForegroundDraw { _, _ ->
         when (align) {
             TextAlignment.LEFT -> sFontRenderer().drawString(getText(), rectangle, color.argb)
             TextAlignment.CENTER -> sFontRenderer().drawStringCentered(getText(), rectangle, color.argb)
@@ -96,12 +112,12 @@ fun Component.label(sFontRenderer: () -> FontRenderer, color: IArgb = 0xFF000000
     }
 }
 
-fun Component.tooltip(vararg text: String) = tooltip { listOf(*text) }
+fun ComponentEventDistributor.tooltip(vararg text: String) = tooltip { listOf(*text) }
 
-fun Component.tooltip(getText: () -> List<String>) = onScreenDraw { mouse, _ ->
-    if (mouse in rectangle) container.drawHoveringText(getText(), mouse.x + container.x, mouse.y + container.y)
+fun ComponentEventDistributor.tooltip(getText: () -> List<String>) = onScreenDraw { gui, mouse, _ ->
+    if (mouse in rectangle) gui.drawHoveringText(getText(), mouse.x + gui.x, mouse.y + gui.y)
 }
 
-fun Component.button(onClick: (mouseButton: Int) -> Unit) = onMouseClicked { mouse, mouseButton ->
+fun ComponentEventDistributor.button(onClick: (mouseButton: Int) -> Unit) = onMouseClicked { _, mouse, mouseButton ->
     if (mouse in rectangle) onClick(mouseButton)
 } // TODO 枠
