@@ -1,5 +1,6 @@
 package miragefairy2019.mod.skill
 
+import miragefairy2019.lib.gui.GuiComponentBase
 import miragefairy2019.lib.gui.TextAlignment
 import miragefairy2019.lib.gui.button
 import miragefairy2019.lib.gui.component
@@ -8,16 +9,10 @@ import miragefairy2019.lib.gui.tooltip
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
-import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.argb
-import miragefairy2019.lib.gui.component
 import miragefairy2019.libkt.displayText
-import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.guiHandler
-import miragefairy2019.libkt.minus
-import miragefairy2019.lib.gui.position
-import miragefairy2019.lib.gui.rectangle
 import miragefairy2019.libkt.toArgb
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
@@ -27,7 +22,6 @@ import mirrg.kotlin.startOfMonth
 import mirrg.kotlin.toInstantAsUtc
 import mirrg.kotlin.utcLocalDateTime
 import net.minecraft.client.gui.GuiYesNo
-import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
 import net.minecraftforge.fml.relauncher.Side
@@ -47,10 +41,8 @@ class ContainerSkill : Container() {
     override fun canInteractWith(playerIn: EntityPlayer) = true
 }
 
-class GuiSkill : GuiContainer(ContainerSkill()) {
-
-    private val components = mutableListOf<Component>()
 @SideOnly(Side.CLIENT)
+class GuiSkill : GuiComponentBase(ContainerSkill()) {
 
     private val skillManager get() = ApiSkill.skillManager
     private val skillContainer get() = skillManager.getClientSkillContainer()
@@ -136,22 +128,4 @@ class GuiSkill : GuiContainer(ContainerSkill()) {
 
     }
 
-    override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
-        drawDefaultBackground()
-        super.drawScreen(mouseX, mouseY, partialTicks)
-        components.forEach { it.onScreenDraw.fire { it(PointInt(mouseX, mouseY) - position, partialTicks) } }
-    }
-
-    override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
-        rectangle.drawGuiBackground()
-    }
-
-    override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
-        components.forEach { it.onForegroundDraw.fire { it(PointInt(mouseX, mouseY) - position) } }
-    }
-
-    override fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) {
-        components.forEach { it.onMouseClicked.fire { it(PointInt(mouseX, mouseY) - position, mouseButton) } }
-        super.mouseClicked(mouseX, mouseY, mouseButton)
-    }
 }

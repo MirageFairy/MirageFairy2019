@@ -4,12 +4,17 @@ import miragefairy2019.libkt.IArgb
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.contains
+import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawString
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
+import miragefairy2019.libkt.minus
 import miragefairy2019.libkt.toArgb
 import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.inventory.GuiContainer
+import net.minecraft.inventory.Container
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 
 val GuiContainer.x get() = (width - xSize) / 2
 val GuiContainer.y get() = (height - ySize) / 2
@@ -30,6 +35,30 @@ class Component(val container: GuiContainer, val rectangle: RectangleInt) {
 }
 
 fun GuiContainer.component(rectangle: RectangleInt, block: Component.() -> Unit) = Component(this, rectangle).apply { block() }
+
+@SideOnly(Side.CLIENT)
+abstract class GuiComponentBase(container: Container) : GuiContainer(container) {
+    protected val components = mutableListOf<Component>()
+
+    override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
+        drawDefaultBackground()
+        super.drawScreen(mouseX, mouseY, partialTicks)
+        components.forEach { it.onScreenDraw.fire { it(PointInt(mouseX, mouseY) - position, partialTicks) } }
+    }
+
+    override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
+        rectangle.drawGuiBackground()
+    }
+
+    override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
+        components.forEach { it.onForegroundDraw.fire { it(PointInt(mouseX, mouseY) - position) } }
+    }
+
+    override fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) {
+        components.forEach { it.onMouseClicked.fire { it(PointInt(mouseX, mouseY) - position, mouseButton) } }
+        super.mouseClicked(mouseX, mouseY, mouseButton)
+    }
+}
 
 
 enum class TextAlignment { LEFT, CENTER, RIGHT }
