@@ -12,10 +12,11 @@ import miragefairy2019.lib.proxy
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
+import miragefairy2019.libkt.darkBlue
 import miragefairy2019.libkt.displayText
 import miragefairy2019.libkt.guiHandler
+import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.libkt.toArgb
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import mirrg.kotlin.hydrogen.formatAs
@@ -47,7 +48,7 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
 
         // フェアリーマスターレベルラベル
         rectangle(4 + 0, 4, 20, 10) {
-            label(Alignment.LEFT, color = 0xFF808080.toArgb()) { textComponent { "FMLv:"() } }
+            label(Alignment.LEFT) { textComponent { "FMLv:"().darkBlue } }
         }
 
         // フェアリーマスターレベル
@@ -64,7 +65,7 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
 
         // SPラベル
         rectangle(4 + 40, 4, 20, 10) {
-            label(Alignment.LEFT, color = 0xFF808080.toArgb()) { textComponent { "SP:"() } }
+            label(Alignment.LEFT) { textComponent { "SP:"().darkBlue } }
         }
 
         // SP
@@ -84,7 +85,7 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
                 }
             }
             // TODO クリックできないときは灰色にする
-            label(Alignment.CENTER, color = 0xFF0000FF.toArgb()) { textComponent { "初期化"() } } // TODO translate
+            label(Alignment.CENTER) { textComponent { "初期化"().red } } // TODO translate
             tooltip {
                 when {
                     !skillContainer.canResetMastery(Instant.now()) -> listOf(
@@ -99,18 +100,18 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
 
         // マスタリ名列ラベル
         rectangle(4, 14, xSize - 4 - 4 - 10 - 20 - 20, 10) {
-            label(Alignment.LEFT, color = 0xFF808080.toArgb()) { textComponent { "マスタリ名"() } }// TODO translate
+            label(Alignment.LEFT) { textComponent { "マスタリ名"().darkBlue } }// TODO translate
         }
 
         // マスタリレベル列ラベル
         rectangle(xSize - 54, 14, 20, 10) {
-            label(Alignment.RIGHT, color = 0xFF808080.toArgb()) { textComponent { "MLv"() } } // TODO translate
+            label(Alignment.RIGHT) { textComponent { "MLv"().darkBlue } } // TODO translate
             tooltip { listOf("マスタリレベルはある領域に関する理解の深さです。") } // TODO translate
         }
 
         // スキルレベル列ラベル
         rectangle(xSize - 34, 14, 20, 10) {
-            label(Alignment.RIGHT, color = 0xFF808080.toArgb()) { textComponent { "SLv"() } } // TODO translate
+            label(Alignment.RIGHT) { textComponent { "SLv"().darkBlue } } // TODO translate
             tooltip { listOf("スキルレベルは個々のアクションの強さです。") } // TODO translate
         }
 
@@ -143,7 +144,7 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
                     }
                 }
                 // TODO ホバーで影響するマスタリのレベルを緑色に光らせつつ実行後の値を表示
-                label(Alignment.CENTER, color = 0xFF0000FF.toArgb()) { textComponent { "*"() } } // TODO icon
+                label(Alignment.CENTER) { textComponent { "*"().red } } // TODO icon
                 tooltip { listOf(if (skillContainer.remainingSkillPoints > 0) "このマスタリにスキルポイントを割り振ります。" else "スキルポイントが足りません。") } // TODO translate
             }
 
