@@ -29,21 +29,21 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 // Api
 
-interface IComponent {
+interface IComponent<T> {
 
     fun onContainerInit() = Unit
 
     @SideOnly(Side.CLIENT)
-    fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
+    fun drawGuiContainerBackgroundLayer(gui: T, mouse: PointInt, partialTicks: Float) = Unit
 
     @SideOnly(Side.CLIENT)
-    fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) = Unit
+    fun drawGuiContainerForegroundLayer(gui: T, mouse: PointInt) = Unit
 
     @SideOnly(Side.CLIENT)
-    fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
+    fun drawScreen(gui: T, mouse: PointInt, partialTicks: Float) = Unit
 
     @SideOnly(Side.CLIENT)
-    fun mouseClicked(gui: GuiComponent, mouse: PointInt, mouseButton: Int) = Unit
+    fun mouseClicked(gui: T, mouse: PointInt, mouseButton: Int) = Unit
 
 }
 
@@ -62,7 +62,7 @@ inline fun GuiFactory(crossinline function: (component: ContainerComponent) -> G
 class WindowProperty(var value: Int = 0, val changeListener: () -> Unit = {})
 
 class ContainerComponent(private val guiFactory: GuiFactory) : Container() {
-    val components = mutableListOf<IComponent>()
+    val components = mutableListOf<IComponent<GuiComponent>>()
     var width = 0
     var height = 0
 
@@ -226,7 +226,7 @@ abstract class GuiComponent(val container: ContainerComponent) : GuiContainer(co
 
 // Utils
 
-class ComponentSlot(val container: ContainerComponent, val x: Int, val y: Int, slotCreator: (x: Int, y: Int) -> Slot) : IComponent {
+class ComponentSlot(val container: ContainerComponent, val x: Int, val y: Int, slotCreator: (x: Int, y: Int) -> Slot) : IComponent<GuiComponent> {
     val slot = slotCreator(x + 1, y + 1)
 
     override fun onContainerInit() = unit { container.addSlotToContainer(slot) }
@@ -237,7 +237,7 @@ class ComponentSlot(val container: ContainerComponent, val x: Int, val y: Int, s
 
 enum class Alignment { LEFT, CENTER, RIGHT }
 
-class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent {
+class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent<GuiComponent> {
     @SideOnly(Side.CLIENT)
     override fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) {
         when (alignment) {
@@ -248,7 +248,7 @@ class ComponentLabel(val x: Int, val y: Int, val alignment: Alignment, val color
     }
 }
 
-class ComponentBackgroundLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent {
+class ComponentBackgroundLabel(val x: Int, val y: Int, val alignment: Alignment, val color: Int = 0x404040, val textSupplier: () -> ITextComponent?) : IComponent<GuiComponent> {
     @SideOnly(Side.CLIENT)
     override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
         when (alignment) {
@@ -259,7 +259,7 @@ class ComponentBackgroundLabel(val x: Int, val y: Int, val alignment: Alignment,
     }
 }
 
-class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFFFF.toInt(), val textureSupplier: () -> ResourceLocation) : IComponent {
+class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFFFF.toInt(), val textureSupplier: () -> ResourceLocation) : IComponent<GuiComponent> {
     @SideOnly(Side.CLIENT)
     override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
         GlStateManager.color(
@@ -275,7 +275,7 @@ class ComponentBackgroundImage(val x: Int, val y: Int, val color: Int = 0xFFFFFF
     }
 }
 
-class ComponentTooltip(private val rectangle: RectangleInt, private val textSupplier: () -> List<String>?) : IComponent {
+class ComponentTooltip(private val rectangle: RectangleInt, private val textSupplier: () -> List<String>?) : IComponent<GuiComponent> {
     @SideOnly(Side.CLIENT)
     override fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
         if (mouse !in rectangle.translate(gui.x, gui.y)) return

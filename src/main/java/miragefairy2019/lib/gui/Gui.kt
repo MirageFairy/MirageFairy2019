@@ -28,25 +28,7 @@ class EventContainer<T> {
     fun fire(invoker: (T) -> Unit) = listeners.forEach { invoker(it) }
 }
 
-interface IComponent2 {
-
-    fun onContainerInit() = Unit
-
-    @SideOnly(Side.CLIENT)
-    fun drawGuiContainerBackgroundLayer(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float) = Unit
-
-    @SideOnly(Side.CLIENT)
-    fun drawGuiContainerForegroundLayer(gui: GuiComponentBase, mouse: PointInt) = Unit
-
-    @SideOnly(Side.CLIENT)
-    fun drawScreen(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float) = Unit
-
-    @SideOnly(Side.CLIENT)
-    fun mouseClicked(gui: GuiComponentBase, mouse: PointInt, mouseButton: Int) = Unit
-
-}
-
-class ComponentEventDistributor(val rectangle: RectangleInt) : IComponent2 {
+class ComponentEventDistributor(val rectangle: RectangleInt) : IComponent<GuiComponentBase> {
 
     val onScreenDraw = EventContainer<(gui: GuiComponentBase, mouse: PointInt, partialTicks: Float) -> Unit>()
 
@@ -72,7 +54,7 @@ class ComponentEventDistributor(val rectangle: RectangleInt) : IComponent2 {
 }
 
 abstract class ContainerComponentBase : Container() {
-    val components = mutableListOf<IComponent2>()
+    val components = mutableListOf<IComponent<GuiComponentBase>>()
 
     fun init() {
         components.forEach { it.onContainerInit() }

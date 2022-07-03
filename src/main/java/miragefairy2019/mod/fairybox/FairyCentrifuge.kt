@@ -694,7 +694,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
         // レシピ判定機能
         var recipeMatchResult: RecipeMatchResult? = null
-        components += object : IComponent {
+        components += object : IComponent<GuiComponent> {
             override fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) {
                 recipeMatchResult = match()
             }
@@ -737,7 +737,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
             val c = 1 + 3 * index
 
             val elementsY = yi + 7
-            components += object : IComponent {
+            components += object : IComponent<GuiComponent> {
                 @SideOnly(Side.CLIENT)
                 override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
                     val elements = getProcessResult()?.elements ?: listOf()
