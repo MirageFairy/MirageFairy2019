@@ -9,12 +9,6 @@ import net.minecraft.inventory.Container
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-val GuiContainer.x get() = (width - xSize) / 2
-val GuiContainer.y get() = (height - ySize) / 2
-val GuiContainer.rectangle get() = RectangleInt(x, y, xSize, ySize)
-val GuiContainer.position get() = PointInt(x, y)
-
-
 abstract class ContainerComponentBase : Container() {
     val components = mutableListOf<IComponent<GuiComponentBase>>()
 
