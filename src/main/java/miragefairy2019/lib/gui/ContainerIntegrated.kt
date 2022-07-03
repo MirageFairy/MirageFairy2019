@@ -4,7 +4,6 @@ import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IContainerListener
 import net.minecraft.inventory.IInventory
-import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -120,10 +119,6 @@ class ContainerIntegrated(private val guiFactory: GuiFactory) : ContainerCompone
         windowProperty.value = data
         windowProperty.changeListener()
     }
-
-
-    // Public化
-    public override fun addSlotToContainer(slot: Slot): Slot = super.addSlotToContainer(slot)
 
 }
 

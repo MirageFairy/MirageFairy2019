@@ -7,6 +7,7 @@ import miragefairy2019.libkt.drawGuiBackground
 import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.inventory.Container
+import net.minecraft.inventory.Slot
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
@@ -16,6 +17,11 @@ abstract class ContainerComponent : Container() {
     fun init() {
         components.forEach { it.onContainerInit() }
     }
+
+
+    // Public化
+    public override fun addSlotToContainer(slot: Slot): Slot = super.addSlotToContainer(slot)
+
 }
 
 @SideOnly(Side.CLIENT)
