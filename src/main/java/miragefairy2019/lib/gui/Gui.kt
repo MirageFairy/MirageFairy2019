@@ -74,25 +74,25 @@ abstract class ContainerComponentBase : Container() {
 }
 
 @SideOnly(Side.CLIENT)
-abstract class GuiComponentBase(val containerComponent: ContainerComponentBase) : GuiContainer(containerComponent) {
+abstract class GuiComponentBase(private val container: ContainerComponentBase) : GuiContainer(container) {
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
-        containerComponent.components.forEach { it.drawScreen(this, PointInt(mouseX, mouseY), partialTicks) }
+        container.components.forEach { it.drawScreen(this, PointInt(mouseX, mouseY), partialTicks) }
     }
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
         rectangle.drawGuiBackground()
-        containerComponent.components.forEach { it.drawGuiContainerBackgroundLayer(this, PointInt(mouseX, mouseY), partialTicks) }
+        container.components.forEach { it.drawGuiContainerBackgroundLayer(this, PointInt(mouseX, mouseY), partialTicks) }
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
-        containerComponent.components.forEach { it.drawGuiContainerForegroundLayer(this, PointInt(mouseX, mouseY)) }
+        container.components.forEach { it.drawGuiContainerForegroundLayer(this, PointInt(mouseX, mouseY)) }
     }
 
     override fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) {
-        containerComponent.components.forEach { it.mouseClicked(this, PointInt(mouseX, mouseY), mouseButton) }
+        container.components.forEach { it.mouseClicked(this, PointInt(mouseX, mouseY), mouseButton) }
         super.mouseClicked(mouseX, mouseY, mouseButton)
     }
 

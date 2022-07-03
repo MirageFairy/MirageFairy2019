@@ -127,4 +127,4 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponentBase() {
 }
 
 @SideOnly(Side.CLIENT)
-class GuiSkill(private val container: ContainerSkill) : GuiComponentBase(container)
+class GuiSkill(container: ContainerComponentBase) : GuiComponentBase(container)
