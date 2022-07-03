@@ -29,9 +29,28 @@ class EventContainer<T> {
 }
 
 class Component(val container: GuiContainer, val rectangle: RectangleInt) {
+
     val onScreenDraw = EventContainer<(mouse: PointInt, partialTicks: Float) -> Unit>()
+
+    @SideOnly(Side.CLIENT)
+    fun drawScreen(gui: GuiContainer, mouse: PointInt, partialTicks: Float) = onScreenDraw.fire { it(mouse - gui.position, partialTicks) }
+
+
     val onForegroundDraw = EventContainer<(mouse: PointInt) -> Unit>()
+
+    @SideOnly(Side.CLIENT)
+    fun drawGuiContainerForegroundLayer(gui: GuiContainer, mouse: PointInt) = onForegroundDraw.fire { it(mouse - gui.position) }
+
+
+    @SideOnly(Side.CLIENT)
+    fun drawGuiContainerBackgroundLayer(gui: GuiContainer, mouse: PointInt, partialTicks: Float) = Unit
+
+
     val onMouseClicked = EventContainer<(mouse: PointInt, mouseButton: Int) -> Unit>()
+
+    @SideOnly(Side.CLIENT)
+    fun mouseClicked(gui: GuiContainer, mouse: PointInt, mouseButton: Int) = onMouseClicked.fire { it(mouse - gui.position, mouseButton) }
+
 }
 
 @SideOnly(Side.CLIENT)
@@ -41,19 +60,20 @@ abstract class GuiComponentBase(container: Container) : GuiContainer(container) 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
-        components.forEach { it.onScreenDraw.fire { it(PointInt(mouseX, mouseY) - position, partialTicks) } }
+        components.forEach { it.drawScreen(this, PointInt(mouseX, mouseY), partialTicks) }
     }
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
         rectangle.drawGuiBackground()
+        components.forEach { it.drawGuiContainerBackgroundLayer(this, PointInt(mouseX, mouseY), partialTicks) }
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
-        components.forEach { it.onForegroundDraw.fire { it(PointInt(mouseX, mouseY) - position) } }
+        components.forEach { it.drawGuiContainerForegroundLayer(this, PointInt(mouseX, mouseY)) }
     }
 
     override fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) {
-        components.forEach { it.onMouseClicked.fire { it(PointInt(mouseX, mouseY) - position, mouseButton) } }
+        components.forEach { it.mouseClicked(this, PointInt(mouseX, mouseY), mouseButton) }
         super.mouseClicked(mouseX, mouseY, mouseButton)
     }
 }
