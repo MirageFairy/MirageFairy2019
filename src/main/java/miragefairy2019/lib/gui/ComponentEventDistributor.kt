@@ -59,7 +59,7 @@ abstract class ComponentBase(val container: ContainerComponent) : IComponent
 abstract class ComponentRectangleBase(container: ContainerComponent, val rectangle: RectangleInt) : ComponentBase(container)
 
 
-class ComponentButton(container: ContainerComponent, rectangle: RectangleInt, val action: (gui: GuiComponent, mouse: PointInt, mouseButton: Int) -> Unit) : ComponentRectangleBase(container, rectangle) {
+class ComponentButton(container: ContainerComponent, rectangle: RectangleInt, private val action: (gui: GuiComponent, mouse: PointInt, mouseButton: Int) -> Unit) : ComponentRectangleBase(container, rectangle) {
     @SideOnly(Side.CLIENT)
     override fun mouseClicked(gui: GuiComponent, mouse: PointInt, mouseButton: Int) {
         if (mouse - gui.position in rectangle) action(gui, mouse, mouseButton)
