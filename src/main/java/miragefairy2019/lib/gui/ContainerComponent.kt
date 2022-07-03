@@ -26,11 +26,14 @@ inline fun GuiFactory(crossinline function: (component: ContainerComponent) -> G
 class WindowProperty(var value: Int = 0, val changeListener: () -> Unit = {})
 
 abstract class ContainerComponent2 : Container() {
+    val components = mutableListOf<IComponent>()
 
+    fun init() {
+        components.forEach { it.onContainerInit() }
+    }
 }
 
 class ContainerComponent(private val guiFactory: GuiFactory) : ContainerComponent2() {
-    val components = mutableListOf<IComponent>()
     var width = 0
     var height = 0
 
@@ -39,13 +42,6 @@ class ContainerComponent(private val guiFactory: GuiFactory) : ContainerComponen
 
     @SideOnly(Side.CLIENT)
     fun createGui() = guiFactory(this)
-
-
-    // Overrides
-
-    fun init() {
-        components.forEach { it.onContainerInit() }
-    }
 
 
     // Interact
@@ -152,23 +148,7 @@ fun container(guiFactory: GuiFactory, block: ContainerComponent.() -> Unit): Con
 }
 
 @SideOnly(Side.CLIENT)
-abstract class GuiComponent2(container: ContainerComponent2) : GuiContainer(container) {
-
-    // Public化
-    val fontRenderer: FontRenderer get() = super.fontRenderer
-
-}
-
-@SideOnly(Side.CLIENT)
-abstract class GuiComponent(val container: ContainerComponent) : GuiComponent2(container) {
-
-    // Overrides
-
-    init {
-        xSize = container.width
-        ySize = container.height
-    }
-
+abstract class GuiComponent2(private val container: ContainerComponent2) : GuiContainer(container) {
 
     // イベント
 
@@ -193,4 +173,16 @@ abstract class GuiComponent(val container: ContainerComponent) : GuiComponent2(c
         super.mouseClicked(mouseX, mouseY, mouseButton)
     }
 
+
+    // Public化
+    val fontRenderer: FontRenderer get() = super.fontRenderer
+
+}
+
+@SideOnly(Side.CLIENT)
+abstract class GuiComponent(container: ContainerComponent) : GuiComponent2(container) {
+    init {
+        xSize = container.width
+        ySize = container.height
+    }
 }
