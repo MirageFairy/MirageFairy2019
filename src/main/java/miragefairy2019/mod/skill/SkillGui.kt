@@ -7,6 +7,8 @@ import miragefairy2019.lib.gui.component
 import miragefairy2019.lib.gui.label
 import miragefairy2019.lib.gui.tooltip
 import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.proxy
+import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.GuiHandlerContext
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.RectangleInt
@@ -44,8 +46,7 @@ class ContainerSkill(val player: EntityPlayer) : Container() {
 @SideOnly(Side.CLIENT)
 class GuiSkill(container: ContainerSkill) : GuiComponentBase(container) {
 
-    private val skillManager get() = ApiSkill.skillManager
-    private val skillContainer get() = skillManager.getClientSkillContainer()
+    private val skillContainer get() = container.player.proxy.skillContainer
 
     init {
 
