@@ -44,6 +44,10 @@ class ComponentEventDistributor(val rectangle: RectangleInt) : IComponent {
 
 }
 
+fun ContainerComponent2.component(rectangle: RectangleInt, block: ComponentEventDistributor.() -> Unit) {
+    components += ComponentEventDistributor(rectangle).apply { block() }
+}
+
 
 enum class TextAlignment { LEFT, CENTER, RIGHT }
 

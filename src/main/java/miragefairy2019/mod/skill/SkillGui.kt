@@ -1,7 +1,7 @@
 package miragefairy2019.mod.skill
 
-import miragefairy2019.lib.gui.ContainerComponentBase
-import miragefairy2019.lib.gui.GuiComponentBase
+import miragefairy2019.lib.gui.ContainerComponent2
+import miragefairy2019.lib.gui.GuiComponent2
 import miragefairy2019.lib.gui.TextAlignment
 import miragefairy2019.lib.gui.button
 import miragefairy2019.lib.gui.component
@@ -39,7 +39,7 @@ val skillGuiModule = module {
     }
 }
 
-class ContainerSkill(val player: EntityPlayer) : ContainerComponentBase() {
+class ContainerSkill(val player: EntityPlayer) : ContainerComponent2() {
     override fun canInteractWith(playerIn: EntityPlayer) = true
     private val skillContainer get() = player.proxy.skillContainer
 
@@ -127,4 +127,4 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponentBase() {
 }
 
 @SideOnly(Side.CLIENT)
-class GuiSkill(container: ContainerComponentBase) : GuiComponentBase(container)
+class GuiSkill(container: ContainerComponent2) : GuiComponent2(container)
