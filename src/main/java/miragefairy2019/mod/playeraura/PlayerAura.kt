@@ -21,6 +21,7 @@ import miragefairy2019.libkt.toRgb
 import miragefairy2019.libkt.withColor
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.logger
+import miragefairy2019.mod.PacketId
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemFood
@@ -50,7 +51,7 @@ val playerAuraModule = module {
     onInstantiation { ApiPlayerAura.playerAuraManager = PlayerAuraManager() }
 
     // ネットワークメッセージ登録
-    onRegisterNetworkMessage { Main.simpleNetworkWrapper.registerMessage(PacketPlayerAura::class.java, MessagePlayerAura::class.java, 1, Side.CLIENT) }
+    onRegisterNetworkMessage { Main.simpleNetworkWrapper.registerMessage(PacketPlayerAura::class.java, MessagePlayerAura::class.java, PacketId.discriminatorPlayerAura, Side.CLIENT) }
 
     // ログインイベント
     onInit {

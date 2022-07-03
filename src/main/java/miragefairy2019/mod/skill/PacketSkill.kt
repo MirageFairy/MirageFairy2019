@@ -15,8 +15,6 @@ import net.minecraftforge.fml.relauncher.Side
 import java.time.Instant
 
 
-const val discriminatorSkill = 2
-
 class PacketSkill : IMessageHandler<MessageSkill, IMessage> {
     override fun onMessage(message: MessageSkill, messageContext: MessageContext): IMessage? {
         if (messageContext.side == Side.CLIENT) ApiSkill.skillManager.receive(message.json)
@@ -29,8 +27,6 @@ class MessageSkill : MessageJson {
     constructor(json: String) : super(json)
 }
 
-
-const val discriminatorTrainMastery = 3
 
 class PacketTrainMastery : IMessageHandler<MessageTrainMastery, IMessage> {
     override fun onMessage(message: MessageTrainMastery, messageContext: MessageContext): IMessage? {
@@ -61,8 +57,6 @@ class MessageTrainMastery(var masteryName: String? = null) : IMessage {
     }
 }
 
-
-const val discriminatorResetMastery = 4
 
 class PacketResetMastery : IMessageHandler<MessageResetMastery, IMessage> {
     override fun onMessage(message: MessageResetMastery, messageContext: MessageContext): IMessage? {

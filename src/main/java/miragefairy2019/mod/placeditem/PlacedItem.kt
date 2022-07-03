@@ -11,6 +11,7 @@ import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.normal
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.side
+import miragefairy2019.mod.PacketId
 import net.minecraft.block.Block
 import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.client.settings.KeyBinding
@@ -62,7 +63,7 @@ object PlacedItem {
 
         // ネットワークメッセージ登録
         onRegisterNetworkMessage {
-            Main.simpleNetworkWrapper.registerMessage(PacketPlaceItem::class.java, MessagePlaceItem::class.java, 0, Side.SERVER)
+            Main.simpleNetworkWrapper.registerMessage(PacketPlaceItem::class.java, MessagePlaceItem::class.java, PacketId.discriminatorPlacedItem, Side.SERVER)
         }
 
         // キーリスナー

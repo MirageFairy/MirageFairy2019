@@ -4,6 +4,7 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.logger
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.PacketId
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.network.NetHandlerPlayServer
@@ -29,9 +30,9 @@ val skillModule = module {
 
     // ネットワークメッセージ登録
     onRegisterNetworkMessage {
-        Main.simpleNetworkWrapper.registerMessage(PacketSkill::class.java, MessageSkill::class.java, discriminatorSkill, Side.CLIENT)
-        Main.simpleNetworkWrapper.registerMessage(PacketTrainMastery::class.java, MessageTrainMastery::class.java, discriminatorTrainMastery, Side.SERVER)
-        Main.simpleNetworkWrapper.registerMessage(PacketResetMastery::class.java, MessageResetMastery::class.java, discriminatorResetMastery, Side.SERVER)
+        Main.simpleNetworkWrapper.registerMessage(PacketSkill::class.java, MessageSkill::class.java, PacketId.discriminatorSkill, Side.CLIENT)
+        Main.simpleNetworkWrapper.registerMessage(PacketTrainMastery::class.java, MessageTrainMastery::class.java, PacketId.discriminatorTrainMastery, Side.SERVER)
+        Main.simpleNetworkWrapper.registerMessage(PacketResetMastery::class.java, MessageResetMastery::class.java, PacketId.discriminatorResetMastery, Side.SERVER)
     }
 
     onInit {
