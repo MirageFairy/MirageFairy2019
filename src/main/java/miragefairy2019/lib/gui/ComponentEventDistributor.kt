@@ -9,7 +9,6 @@ import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.minus
 import miragefairy2019.libkt.toArgb
-import mirrg.kotlin.hydrogen.unit
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
@@ -73,7 +72,7 @@ class ComponentButton(container: ContainerComponent, rectangle: RectangleInt, pr
     // TODO 枠の描画
 }
 
-fun RectangleContext.button(action: (gui: GuiComponent, mouse: PointInt, mouseButton: Int) -> Unit) = unit { container.components += ComponentButton(container, rectangle, action) }
+fun RectangleContext.button(action: (gui: GuiComponent, mouse: PointInt, mouseButton: Int) -> Unit) = ComponentButton(container, rectangle, action).also { container.components += it }
 
 
 enum class TextAlignment { LEFT, CENTER, RIGHT }
@@ -98,4 +97,4 @@ class ComponentTooltip(container: ContainerComponent, rectangle: RectangleInt, p
     }
 }
 
-fun RectangleContext.tooltip(textSupplier: () -> List<String>?) = unit { container.components += ComponentTooltip(container, rectangle, textSupplier) }
+fun RectangleContext.tooltip(textSupplier: () -> List<String>?) = ComponentTooltip(container, rectangle, textSupplier).also { container.components += it }
