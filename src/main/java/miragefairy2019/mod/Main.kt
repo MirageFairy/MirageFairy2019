@@ -3,9 +3,12 @@ package miragefairy2019.mod
 import miragefairy2019.lib.modinitializer.ModInitializer
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.GuiHandlerEvent
+import miragefairy2019.libkt.IGuiHandlerTileEntity
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.guiHandler
+import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod.artifacts.FairyCrystal
+import mirrg.kotlin.hydrogen.castOrNull
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraftforge.common.config.Configuration
@@ -58,6 +61,14 @@ object Main {
             NetworkRegistry.INSTANCE.registerGuiHandler(ModMirageFairy2019.instance, object : ISimpleGuiHandler {
                 override fun onServer(event: GuiHandlerEvent) = guiHandlers[event.id]?.getServerGuiElement(event.id, event.player, event.world, event.x, event.y, event.z)
                 override fun onClient(event: GuiHandlerEvent) = guiHandlers[event.id]?.getClientGuiElement(event.id, event.player, event.world, event.x, event.y, event.z)
+            }.guiHandler)
+        }
+
+        // TileEntity共有GuiId
+        onInit {
+            registerGuiHandler(GuiId.commonTileEntityGui, object : ISimpleGuiHandler {
+                override fun onServer(event: GuiHandlerEvent) = event.tileEntity?.castOrNull<IGuiHandlerTileEntity>()?.guiHandler?.onServer(event)
+                override fun onClient(event: GuiHandlerEvent) = event.tileEntity?.castOrNull<IGuiHandlerTileEntity>()?.guiHandler?.onClient(event)
             }.guiHandler)
         }
 
