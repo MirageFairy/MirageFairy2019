@@ -44,7 +44,7 @@ class ContainerSkill(val player: EntityPlayer) : Container() {
 }
 
 @SideOnly(Side.CLIENT)
-class GuiSkill(container: ContainerSkill) : GuiComponentBase(container) {
+class GuiSkill(private val container: ContainerSkill) : GuiComponentBase(container) {
 
     private val skillContainer get() = container.player.proxy.skillContainer
 
