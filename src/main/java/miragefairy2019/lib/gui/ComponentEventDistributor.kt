@@ -9,6 +9,7 @@ import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.minus
 import miragefairy2019.libkt.toArgb
+import mirrg.kotlin.hydrogen.unit
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
@@ -49,6 +50,26 @@ fun ContainerComponent.component(rectangle: RectangleInt, block: ComponentEventD
 }
 
 
+class RectangleContext(val container: ContainerComponent, val rectangle: RectangleInt)
+
+fun ContainerComponent.rectangle(rectangle: RectangleInt, block: RectangleContext.() -> Unit) = block(RectangleContext(this, rectangle))
+
+abstract class ComponentBase(val container: ContainerComponent) : IComponent
+
+abstract class ComponentRectangleBase(container: ContainerComponent, val rectangle: RectangleInt) : ComponentBase(container)
+
+
+class ComponentButton(container: ContainerComponent, rectangle: RectangleInt, val action: (gui: GuiComponent, mouse: PointInt, mouseButton: Int) -> Unit) : ComponentRectangleBase(container, rectangle) {
+    @SideOnly(Side.CLIENT)
+    override fun mouseClicked(gui: GuiComponent, mouse: PointInt, mouseButton: Int) {
+        if (mouse - gui.position in rectangle) action(gui, mouse, mouseButton)
+    }
+    // TODO 枠の描画
+}
+
+fun RectangleContext.button(action: (gui: GuiComponent, mouse: PointInt, mouseButton: Int) -> Unit) = unit { container.components += ComponentButton(container, rectangle, action) }
+
+
 enum class TextAlignment { LEFT, CENTER, RIGHT }
 
 fun ComponentEventDistributor.label(color: IArgb = 0xFF000000.toArgb(), align: TextAlignment = TextAlignment.LEFT, getText: () -> String) {
@@ -66,7 +87,3 @@ fun ComponentEventDistributor.tooltip(vararg text: String) = tooltip { listOf(*t
 fun ComponentEventDistributor.tooltip(getText: () -> List<String>) = onScreenDraw { gui, mouse, _ ->
     if (mouse in rectangle) gui.drawHoveringText(getText(), mouse.x + gui.x, mouse.y + gui.y)
 }
-
-fun ComponentEventDistributor.button(onClick: (gui: GuiComponent, mouseButton: Int) -> Unit) = onMouseClicked { gui, mouse, mouseButton ->
-    if (mouse in rectangle) onClick(gui, mouseButton)
-} // TODO 枠

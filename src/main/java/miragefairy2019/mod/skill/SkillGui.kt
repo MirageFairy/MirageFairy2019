@@ -6,6 +6,7 @@ import miragefairy2019.lib.gui.TextAlignment
 import miragefairy2019.lib.gui.button
 import miragefairy2019.lib.gui.component
 import miragefairy2019.lib.gui.label
+import miragefairy2019.lib.gui.rectangle
 import miragefairy2019.lib.gui.tooltip
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.proxy
@@ -64,8 +65,8 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
             label(align = TextAlignment.RIGHT) { "${skillContainer.remainingSkillPoints}" }
             tooltip("スキルポイントはフェアリーマスターレベル上昇時に入手します。") // TODO translate
         }
-        component(RectangleInt(xSize - 34, 4, 30, 10)) {
-            button { gui, _ ->
+        rectangle(RectangleInt(xSize - 34, 4, 30, 10)) {
+            button { gui, _, _ ->
                 if (skillContainer.canResetMastery(Instant.now()) && skillContainer.usedSkillPoints > 0) {
                     gui.mc.displayGuiScreen(GuiYesNo({ result, _ ->
                         gui.mc.displayGuiScreen(gui)
@@ -73,6 +74,8 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
                     }, "マスタリレベル初期化", "すべてのマスタリのレベルをリセットし、スキルポイントに戻しますか？\nこの操作は毎月1度だけ実行できます。", 0)) // TODO translate
                 }
             }
+        }
+        component(RectangleInt(xSize - 34, 4, 30, 10)) {
             // TODO クリックできないときは灰色にする
             label(color = 0xFF0000FF.toArgb(), align = TextAlignment.CENTER) { "初期化" } // TODO translate
             tooltip {
@@ -111,12 +114,14 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
             component(RectangleInt(xSize - 34, 24 + 10 * i, 20, 10)) {
                 label(color = 0xFF000000.toArgb(), align = TextAlignment.RIGHT) { "${skillContainer.getSkillLevel(mastery)}" }
             }
-            component(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
-                button { _, _ ->
+            rectangle(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
+                button { _, _, _ ->
                     if (skillContainer.remainingSkillPoints > 0) {
                         Main.simpleNetworkWrapper.sendToServer(MessageTrainMastery(mastery.name))
                     }
                 }
+            }
+            component(RectangleInt(xSize - 14, 24 + 10 * i, 10, 10)) {
                 // TODO ホバーで影響するマスタリのレベルを緑色に光らせつつ実行後の値を表示
                 label(color = 0xFF0000FF.toArgb(), align = TextAlignment.CENTER) { "*" } // TODO icon
                 tooltip { listOf(if (skillContainer.remainingSkillPoints > 0) "このマスタリにスキルポイントを割り振ります。" else "スキルポイントが足りません。") } // TODO translate
