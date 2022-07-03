@@ -32,7 +32,7 @@ val skillGuiModule = module {
     onInit {
         Main.registerGuiHandler(GuiId.skillGui, object : ISimpleGuiHandler {
             override fun GuiHandlerContext.onServer() = ContainerSkill(player)
-            override fun GuiHandlerContext.onClient() = GuiSkill(player)
+            override fun GuiHandlerContext.onClient() = GuiSkill(ContainerSkill(player))
         }.guiHandler)
     }
 }
@@ -42,7 +42,7 @@ class ContainerSkill(val player: EntityPlayer) : Container() {
 }
 
 @SideOnly(Side.CLIENT)
-class GuiSkill(player: EntityPlayer) : GuiComponentBase(ContainerSkill(player)) {
+class GuiSkill(container: ContainerSkill) : GuiComponentBase(container) {
 
     private val skillManager get() = ApiSkill.skillManager
     private val skillContainer get() = skillManager.getClientSkillContainer()
