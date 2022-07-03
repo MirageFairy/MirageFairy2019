@@ -24,11 +24,10 @@ import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
+import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
 import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringRightAligned
-import miragefairy2019.libkt.guiHandler
-import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
@@ -89,12 +88,6 @@ object FairyCollectionBox {
             setCustomModelResourceLocation(variant = "context=bottom,facing=north")
         }
         tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)
-        onInit {
-            Main.registerGuiHandler(GuiId.fairyCollectionBox, object : ISimpleGuiHandler {
-                override fun onServer(event: GuiHandlerEvent) = (event.tileEntity as? TileEntityFairyCollectionBox)?.let { ContainerFairyCollectionBox(event.player.inventory, it.inventory) }
-                override fun onClient(event: GuiHandlerEvent) = onServer(event)?.let { GuiFairyCollectionBox(it) }
-            }.guiHandler)
-        }
         makeBlockModel("fairy_building_bottom") {
             DataModel(
                 parent = "block/block",
@@ -427,7 +420,7 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
     // Action
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (worldIn.isRemote) return true
-        playerIn.openGui(ModMirageFairy2019.instance, GuiId.fairyCollectionBox, worldIn, pos.x, pos.y, pos.z)
+        playerIn.openGui(ModMirageFairy2019.instance, GuiId.commonTileEntityGui, worldIn, pos.x, pos.y, pos.z)
         return true
     }
 
@@ -445,7 +438,7 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
     }
 }
 
-class TileEntityFairyCollectionBox : TileEntity() {
+class TileEntityFairyCollectionBox : TileEntity(), ISimpleGuiHandlerTileEntity {
     val inventory = InventoryFairyCollectionBox(this, "tile.fairyCollectionBox.name", false, 50)
 
     override fun readFromNBT(nbt: NBTTagCompound) {
@@ -458,6 +451,12 @@ class TileEntityFairyCollectionBox : TileEntity() {
         inventory.writeToNBT(nbt)
         return nbt
     }
+
+    override val guiHandler: ISimpleGuiHandler
+        get() = object : ISimpleGuiHandler {
+            override fun onServer(event: GuiHandlerEvent) = ContainerFairyCollectionBox(event.player.inventory, inventory)
+            override fun onClient(event: GuiHandlerEvent) = GuiFairyCollectionBox(onServer(event))
+        }
 }
 
 class InventoryFairyCollectionBox(tileEntity: TileEntityFairyCollectionBox, title: String, customName: Boolean, slotCount: Int) : InventoryTileEntity<TileEntityFairyCollectionBox>(tileEntity, title, customName, slotCount) {

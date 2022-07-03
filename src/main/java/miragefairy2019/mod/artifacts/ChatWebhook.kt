@@ -32,6 +32,7 @@ import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
+import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
 import miragefairy2019.libkt.dimensionalPos
 import miragefairy2019.libkt.displayText
 import miragefairy2019.libkt.drawBlockNameplateMultiLine
@@ -40,11 +41,9 @@ import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.setOrRemove
 import miragefairy2019.libkt.sq
 import miragefairy2019.libkt.string
-import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.toUnit
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
@@ -227,14 +226,6 @@ object ChatWebhook {
         tileEntity("chat_webhook_transmitter", TileEntityChatWebhookTransmitter::class.java)
         tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java) { TileEntityRendererChatWebhookTransmitter() }
 
-        // Gui
-        onInit {
-            Main.registerGuiHandler(GuiId.chatWebhookTransmitter, object : ISimpleGuiHandler {
-                override fun onServer(event: GuiHandlerEvent) = (event.tileEntity as? TileEntityChatWebhookTransmitter)?.let { ContainerChatWebhookTransmitter(it, event.player.inventory, it.inventory) }
-                override fun onClient(event: GuiHandlerEvent) = onServer(event)?.let { GuiChatWebhookTransmitter(it) }
-            }.guiHandler)
-        }
-
         // チャット監視ルーチン
         onInit {
             MinecraftForge.EVENT_BUS.register(object {
@@ -413,7 +404,7 @@ abstract class BlockChatWebhookTransmitterBase : BlockContainer(Material.IRON), 
     override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (world.isRemote) return true
         world.getTileEntity(blockPos)?.castOrNull<TileEntityChatWebhookTransmitter>()?.updateDaemon(true) // 契約更新
-        if (!requireCreative || player.isCreative) player.openGui(ModMirageFairy2019.instance, GuiId.chatWebhookTransmitter, world, blockPos.x, blockPos.y, blockPos.z) // GUIを開く
+        if (!requireCreative || player.isCreative) player.openGui(ModMirageFairy2019.instance, GuiId.commonTileEntityGui, world, blockPos.x, blockPos.y, blockPos.z) // GUIを開く
         return true
     }
 
@@ -450,7 +441,7 @@ class BlockCreativeChatWebhookTransmitter : BlockChatWebhookTransmitterBase() {
 }
 
 
-class TileEntityChatWebhookTransmitter : TileEntity() {
+class TileEntityChatWebhookTransmitter : TileEntity(), ISimpleGuiHandlerTileEntity {
     val inventory = InventoryChatWebhookTransmitter(this, "tile.chatWebhookTransmitter.name", false, 2)
 
     val daemon get() = DaemonManager.instance?.chatWebhook?.get(dimensionalPos)
@@ -482,6 +473,13 @@ class TileEntityChatWebhookTransmitter : TileEntity() {
         readFromNBT(pkt.nbtCompound)
         super.onDataPacket(net, pkt)
     }
+
+    // Gui
+    override val guiHandler: ISimpleGuiHandler
+        get() = object : ISimpleGuiHandler {
+            override fun onServer(event: GuiHandlerEvent) = ContainerChatWebhookTransmitter(this@TileEntityChatWebhookTransmitter, event.player.inventory, inventory)
+            override fun onClient(event: GuiHandlerEvent) = GuiChatWebhookTransmitter(onServer(event))
+        }
 }
 
 @SideOnly(Side.CLIENT)

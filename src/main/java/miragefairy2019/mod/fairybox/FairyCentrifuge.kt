@@ -63,6 +63,7 @@ import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
+import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
 import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.copyItemStack
@@ -72,13 +73,11 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.flatten
 import miragefairy2019.libkt.formattedText
-import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
-import miragefairy2019.libkt.tileEntity
 import miragefairy2019.libkt.underline
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
@@ -94,7 +93,6 @@ import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
-import mirrg.kotlin.hydrogen.castOrNull
 import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.renderer.GlStateManager
@@ -200,14 +198,6 @@ val fairyCentrifugeModule = module {
 
     // タイルエンティティ登録
     tileEntity("fairy_centrifuge", TileEntityFairyCentrifuge::class.java)
-
-    // Gui登録
-    onInit {
-        Main.registerGuiHandler(GuiId.fairyBoxCentrifuge, object : ISimpleGuiHandler {
-            override fun onServer(event: GuiHandlerEvent) = event.tileEntity?.castOrNull<TileEntityFairyCentrifuge>()?.createContainer(event.player)
-            override fun onClient(event: GuiHandlerEvent) = onServer(event)?.createGui()
-        }.guiHandler)
-    }
 
     // 翻訳生成
     onMakeLang {
@@ -478,7 +468,7 @@ val fairyCentrifugeModule = module {
     }
 }
 
-class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedInventory {
+class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedInventory, ISimpleGuiHandlerTileEntity {
 
     // Inventory
 
@@ -652,7 +642,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         return object : IFairyBoxExecutor {
             override fun onBlockActivated(player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
                 if (world.isRemote) return true
-                player.openGui(ModMirageFairy2019.instance!!, GuiId.fairyBoxCentrifuge, world, pos.x, pos.y, pos.z)
+                player.openGui(ModMirageFairy2019.instance!!, GuiId.commonTileEntityGui, world, pos.x, pos.y, pos.z)
                 return true
             }
 
@@ -684,6 +674,12 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
 
     // Gui
+
+    override val guiHandler: ISimpleGuiHandler
+        get() = object : ISimpleGuiHandler {
+            override fun onServer(event: GuiHandlerEvent) = createContainer(event.player)
+            override fun onClient(event: GuiHandlerEvent) = onServer(event).createGui()
+        }
 
     fun createContainer(player: EntityPlayer) = container(GuiFactory { GuiContainerFairyCentrifuge(it) }) {
 
