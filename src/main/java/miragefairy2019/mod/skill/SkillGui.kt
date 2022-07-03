@@ -41,14 +41,10 @@ val skillGuiModule = module {
 
 class ContainerSkill(val player: EntityPlayer) : ContainerComponentBase() {
     override fun canInteractWith(playerIn: EntityPlayer) = true
-}
-
-@SideOnly(Side.CLIENT)
-class GuiSkill(private val container: ContainerSkill) : GuiComponentBase(container) {
-
-    private val skillContainer get() = container.player.proxy.skillContainer
+    private val skillContainer get() = player.proxy.skillContainer
 
     init {
+        val xSize = 176
 
         component(RectangleInt(4 + 0, 4, 20, 10)) {
             label(color = 0xFF808080.toArgb()) { "FMLv:" }
@@ -128,5 +124,7 @@ class GuiSkill(private val container: ContainerSkill) : GuiComponentBase(contain
         }
 
     }
-
 }
+
+@SideOnly(Side.CLIENT)
+class GuiSkill(private val container: ContainerSkill) : GuiComponentBase(container)

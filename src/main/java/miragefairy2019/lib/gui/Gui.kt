@@ -101,8 +101,8 @@ abstract class GuiComponentBase(val containerComponent: ContainerComponentBase) 
 
 }
 
-fun GuiComponentBase.component(rectangle: RectangleInt, block: ComponentEventDistributor.() -> Unit) {
-    containerComponent.components += ComponentEventDistributor(rectangle).apply { block() }
+fun ContainerComponentBase.component(rectangle: RectangleInt, block: ComponentEventDistributor.() -> Unit) {
+    components += ComponentEventDistributor(rectangle).apply { block() }
 }
 
 
