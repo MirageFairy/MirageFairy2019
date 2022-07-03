@@ -1,5 +1,8 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.lib.gui.rectangle
+import miragefairy2019.lib.gui.x
+import miragefairy2019.lib.gui.y
 import miragefairy2019.lib.itemStacks
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -25,10 +28,7 @@ import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.guiHandler
-import miragefairy2019.lib.gui.rectangle
 import miragefairy2019.libkt.tileEntity
-import miragefairy2019.lib.gui.x
-import miragefairy2019.lib.gui.y
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
