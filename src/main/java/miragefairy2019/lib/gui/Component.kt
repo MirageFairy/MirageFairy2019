@@ -1,6 +1,7 @@
 package miragefairy2019.lib.gui
 
 import miragefairy2019.libkt.PointInt
+import miragefairy2019.libkt.RectangleInt
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
@@ -40,6 +41,13 @@ interface IComponent {
 
 
 // Implementations
+
+abstract class ComponentBase(val container: ContainerComponent) : IComponent
+
+abstract class ComponentRectangleBase(container: ContainerComponent, val rectangle: RectangleInt) : ComponentBase(container)
+
+abstract class ComponentPointBase(container: ContainerComponent, val point: PointInt) : ComponentBase(container)
+
 
 class ComponentSlot(container: ContainerComponent, point: PointInt, slotFactory: (x: Int, y: Int) -> Slot) : ComponentPointBase(container, point) {
     val slot = slotFactory(point.x + 1, point.y + 1)
