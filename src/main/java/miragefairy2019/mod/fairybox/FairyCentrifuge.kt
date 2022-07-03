@@ -20,9 +20,9 @@ import miragefairy2019.lib.gui.ComponentBackgroundImage
 import miragefairy2019.lib.gui.ComponentLabel
 import miragefairy2019.lib.gui.ComponentSlot
 import miragefairy2019.lib.gui.ComponentTooltip
-import miragefairy2019.lib.gui.ContainerComponent
+import miragefairy2019.lib.gui.ContainerIntegrated
+import miragefairy2019.lib.gui.GuiIntegrated
 import miragefairy2019.lib.gui.GuiComponent
-import miragefairy2019.lib.gui.GuiComponent2
 import miragefairy2019.lib.gui.GuiFactory
 import miragefairy2019.lib.gui.IComponent
 import miragefairy2019.lib.gui.SlotResult
@@ -696,17 +696,17 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         // レシピ判定機能
         var recipeMatchResult: RecipeMatchResult? = null
         components += object : IComponent {
-            override fun drawGuiContainerForegroundLayer(gui: GuiComponent2, mouse: PointInt) {
+            override fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) {
                 recipeMatchResult = match()
             }
         }
 
 
-        val IN = ContainerComponent.SlotGroup()
-        val FAIRY = ContainerComponent.SlotGroup()
-        val OUT = ContainerComponent.SlotGroup()
-        val PLAYER_HOTBAR = ContainerComponent.SlotGroup()
-        val PLAYER = ContainerComponent.SlotGroup()
+        val IN = ContainerIntegrated.SlotGroup()
+        val FAIRY = ContainerIntegrated.SlotGroup()
+        val OUT = ContainerIntegrated.SlotGroup()
+        val PLAYER_HOTBAR = ContainerIntegrated.SlotGroup()
+        val PLAYER = ContainerIntegrated.SlotGroup()
 
 
         width = 3 + 4 + 18 * 9 + 4 + 3
@@ -740,7 +740,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
             val elementsY = yi + 7
             components += object : IComponent {
                 @SideOnly(Side.CLIENT)
-                override fun drawGuiContainerBackgroundLayer(gui: GuiComponent2, mouse: PointInt, partialTicks: Float) {
+                override fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
                     val elements = getProcessResult()?.elements ?: listOf()
                     val elementX = 3 + 4 + 18 * c + 9 - (11 * elements.size) / 2
 
@@ -851,4 +851,4 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 }
 
 @SideOnly(Side.CLIENT)
-class GuiContainerFairyCentrifuge(container: ContainerComponent) : GuiComponent(container)
+class GuiContainerFairyCentrifuge(container: ContainerIntegrated) : GuiIntegrated(container)

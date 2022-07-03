@@ -1,3 +1,5 @@
+@file:JvmName("ContainerIntegratedKt")
+
 package miragefairy2019.lib.gui
 
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
@@ -16,16 +18,16 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 interface GuiFactory {
     @SideOnly(Side.CLIENT)
-    operator fun invoke(component: ContainerComponent): GuiComponent
+    operator fun invoke(component: ContainerIntegrated): GuiIntegrated
 }
 
-inline fun GuiFactory(crossinline function: (component: ContainerComponent) -> GuiComponent) = object : GuiFactory {
-    override fun invoke(component: ContainerComponent) = function(component)
+inline fun GuiFactory(crossinline function: (component: ContainerIntegrated) -> GuiIntegrated) = object : GuiFactory {
+    override fun invoke(component: ContainerIntegrated) = function(component)
 }
 
 class WindowProperty(var value: Int = 0, val changeListener: () -> Unit = {})
 
-abstract class ContainerComponent2 : Container() {
+abstract class ContainerComponent : Container() {
     val components = mutableListOf<IComponent>()
 
     fun init() {
@@ -33,7 +35,7 @@ abstract class ContainerComponent2 : Container() {
     }
 }
 
-class ContainerComponent(private val guiFactory: GuiFactory) : ContainerComponent2() {
+class ContainerIntegrated(private val guiFactory: GuiFactory) : ContainerComponent() {
     var width = 0
     var height = 0
 
@@ -140,15 +142,15 @@ class ContainerComponent(private val guiFactory: GuiFactory) : ContainerComponen
 
 }
 
-fun container(guiFactory: GuiFactory, block: ContainerComponent.() -> Unit): ContainerComponent {
-    val container = ContainerComponent(guiFactory)
+fun container(guiFactory: GuiFactory, block: ContainerIntegrated.() -> Unit): ContainerIntegrated {
+    val container = ContainerIntegrated(guiFactory)
     container.block()
     container.init()
     return container
 }
 
 @SideOnly(Side.CLIENT)
-abstract class GuiComponent2(private val container: ContainerComponent2) : GuiContainer(container) {
+abstract class GuiComponent(private val container: ContainerComponent) : GuiContainer(container) {
 
     // イベント
 
@@ -180,7 +182,7 @@ abstract class GuiComponent2(private val container: ContainerComponent2) : GuiCo
 }
 
 @SideOnly(Side.CLIENT)
-abstract class GuiComponent(container: ContainerComponent) : GuiComponent2(container) {
+abstract class GuiIntegrated(container: ContainerIntegrated) : GuiComponent(container) {
     init {
         xSize = container.width
         ySize = container.height
