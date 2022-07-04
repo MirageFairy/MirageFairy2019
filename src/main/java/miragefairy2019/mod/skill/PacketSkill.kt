@@ -65,7 +65,7 @@ class PacketResetMastery : IMessageHandler<MessageResetMastery, IMessage> {
             val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
             val now = Instant.now()
             if (skillContainer.canResetMastery(now)) {
-                skillContainer.variables.setLastMasteryResetTime(now)
+                skillContainer.variables.lastMasteryResetTime = now
                 skillContainer.masteryList.forEach { skillContainer.setMasteryLevel(it, 0) }
                 skillContainer.send(player)
                 player.sendStatusMessage(textComponent { "すべてのマスタリレベルをリセットしました。"() }, false) // TODO translate

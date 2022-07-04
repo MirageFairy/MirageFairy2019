@@ -1,5 +1,7 @@
 package miragefairy2019.mod.skill
 
+import mirrg.kotlin.gson.hydrogen.toJson
+import mirrg.kotlin.gson.jsonWrapper
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import org.junit.Assert.assertEquals
@@ -7,6 +9,36 @@ import org.junit.Test
 import java.io.File
 
 class TestSkill {
+    @Test
+    fun io() {
+
+        assertEquals("""{"masteryLevels":{},"variables":{"exp":0}}""", SkillModel().toJsonElement().toJson())
+
+        val json = """
+        {
+          "masteryLevels": {
+            "flowerPicking": 10,
+            "production": 4,
+            "combat": 4,
+            "mining": 6
+          },
+          "variables": {
+            "exp": 1595,
+            "lastMasteryResetTime": 1644817686123,
+            "lastAstronomicalObservationTime": 1648530170686
+          }
+        }
+        """.trimIndent()
+        val skillModel = json.jsonWrapper.toSkillModel()
+        assertEquals(4, skillModel.masteryLevels.size)
+        assertEquals(10, skillModel.masteryLevels["flowerPicking"])
+        assertEquals(1595, skillModel.variables.exp)
+        assertEquals(1644817686123L, skillModel.variables.lastMasteryResetTime?.toEpochMilli())
+        assertEquals(1648530170686L, skillModel.variables.lastAstronomicalObservationTime?.toEpochMilli())
+        assertEquals(json, skillModel.toJsonElement().toJson { setPrettyPrinting() })
+
+    }
+
     @Test
     fun test() {
         val skillManager = object : SkillManager() {

@@ -87,8 +87,8 @@ class ItemSkillBook : Item() {
         fun parameter(key: String, valueSupplier: TextComponentScope.() -> TextComponentWrapper) {
             tooltip += formattedText { (translate(key) + ": "() + valueSupplier().white).blue }
         }
-        parameter("skill_book.fairyMasterLevel") { "${skillContainer.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}"() }
-        parameter("skill_book.requiredFairyMasterXp") { "${skillContainer.skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.getExp())}"() }
+        parameter("skill_book.fairyMasterLevel") { "${skillContainer.skillManager.getFairyMasterLevel(skillContainer.variables.exp)}"() }
+        parameter("skill_book.requiredFairyMasterXp") { "${skillContainer.skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.exp)}"() }
         parameter("skill_book.sp") { "${skillContainer.remainingSkillPoints}"() }
         parameter("skill_book.masteryLevelReset") {
             when (skillContainer.canResetMastery(Instant.now())) {

@@ -162,7 +162,7 @@ class ItemDebugSkillResetUnlock : ItemDebug() {
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
         val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
-        skillContainer.variables.setLastMasteryResetTime(null)
+        skillContainer.variables.lastMasteryResetTime = null
         if (player is EntityPlayerMP) skillContainer.send(player)
         player.sendStatusMessage(textComponent { "スキルポイント初期化が可能になりました"() }, true) // TODO translate
         return EnumActionResult.SUCCESS

@@ -105,11 +105,11 @@ class ItemAstronomicalObservationBook : Item() {
             val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
 
             // 獲得処理
-            val expOld = skillContainer.variables.getExp()
-            val lvOld = skillContainer.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())
-            skillContainer.variables.setExp((skillContainer.variables.getExp() + exp).coerceAtLeast(0))
-            val expNew = skillContainer.variables.getExp()
-            val lvNew = skillContainer.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())
+            val expOld = skillContainer.variables.exp
+            val lvOld = skillContainer.skillManager.getFairyMasterLevel(skillContainer.variables.exp)
+            skillContainer.variables.exp = (skillContainer.variables.exp + exp).coerceAtLeast(0)
+            val expNew = skillContainer.variables.exp
+            val lvNew = skillContainer.skillManager.getFairyMasterLevel(skillContainer.variables.exp)
             val lvDiff = lvNew - lvOld
             val expDiff = expNew - expOld
 
@@ -179,11 +179,11 @@ class ItemAstronomicalObservationBook : Item() {
         if (!world.isRemote) {
             if (player is EntityPlayerMP) {
                 val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
-                val oldLast = skillContainer.variables.getLastAstronomicalObservationTime()
+                val oldLast = skillContainer.variables.lastAstronomicalObservationTime
 
                 // クエスト完了済みマーク
                 val now = Instant.now()
-                skillContainer.variables.setLastAstronomicalObservationTime(now)
+                skillContainer.variables.lastAstronomicalObservationTime = now
 
                 val canDaily = getDailyStatus(oldLast, now) == EnumQuestStatus.INCOMPLETE
                 val canWeekly = getWeeklyStatus(oldLast, now) == EnumQuestStatus.INCOMPLETE
@@ -237,7 +237,7 @@ class ItemAstronomicalObservationBook : Item() {
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         tooltip += textComponent { translate("$prefix.title") + ":"() }.formattedText
-        val last = ApiSkill.skillManager.getClientSkillContainer().variables.getLastAstronomicalObservationTime()
+        val last = ApiSkill.skillManager.getClientSkillContainer().variables.lastAstronomicalObservationTime
         val now: Instant = Instant.now()
         tooltip += formattedText { "  "() + translate("$prefix.daily") + ": "() + getDailyStatus(last, now).displayText() + " ("() + translate("$prefix.message.remaining", (getLimitDaily(now) - now).displayText) + ")"() }
         tooltip += formattedText { "  "() + translate("$prefix.weekly") + ": "() + getWeeklyStatus(last, now).displayText() + " ("() + translate("$prefix.message.remaining", (getLimitWeekly(now) - now).displayText) + ")"() }

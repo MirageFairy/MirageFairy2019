@@ -53,12 +53,12 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
 
         // フェアリーマスターレベル
         rectangle(4 + 20, 4, 20 - 4, 10) {
-            label(Alignment.RIGHT) { textComponent { "${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}"() } }
+            label(Alignment.RIGHT) { textComponent { "${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.exp)}"() } }
             tooltip {
                 listOf(
-                    "フェアリーマスターレベル: ${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.getExp())}", // TODO translate
-                    "累積経験値: ${skillContainer.variables.getExp() formatAs "%8d"}", // TODO translate
-                    "必要経験値: ${ApiSkill.skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.getExp()) formatAs "%8d"}" // TODO translate
+                    "フェアリーマスターレベル: ${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.exp)}", // TODO translate
+                    "累積経験値: ${skillContainer.variables.exp formatAs "%8d"}", // TODO translate
+                    "必要経験値: ${ApiSkill.skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.exp) formatAs "%8d"}" // TODO translate
                 )
             }
         }
@@ -90,7 +90,7 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
                 when {
                     !skillContainer.canResetMastery(Instant.now()) -> listOf(
                         "今月は初期化できません。",
-                        "残り: ${(skillContainer.variables.getLastMasteryResetTime()!!.utcLocalDateTime.toLocalDate().startOfMonth.plusMonths(1).toInstantAsUtc - Instant.now()).displayText.unformattedText}"
+                        "残り: ${(skillContainer.variables.lastMasteryResetTime!!.utcLocalDateTime.toLocalDate().startOfMonth.plusMonths(1).toInstantAsUtc - Instant.now()).displayText.unformattedText}"
                     ) // TODO translate
                     skillContainer.usedSkillPoints == 0 -> listOf("初期化の必要はありません。") // TODO translate
                     else -> listOf("1か月に1度だけ、全マスタリのレベルをリセットしSPに戻せます。") // TODO translate

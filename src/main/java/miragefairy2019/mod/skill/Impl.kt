@@ -1,8 +1,15 @@
 package miragefairy2019.mod.skill
 
-import com.google.gson.GsonBuilder
-import com.google.gson.annotations.Expose
 import miragefairy2019.libkt.textComponent
+import mirrg.kotlin.gson.JsonWrapper
+import mirrg.kotlin.gson.hydrogen.jsonElement
+import mirrg.kotlin.gson.hydrogen.jsonObject
+import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
+import mirrg.kotlin.gson.hydrogen.toJson
+import mirrg.kotlin.gson.hydrogen.toJsonElement
+import mirrg.kotlin.gson.jsonWrapper
+import mirrg.kotlin.gson.toInt
+import mirrg.kotlin.gson.toLong
 import mirrg.kotlin.startOfMonth
 import mirrg.kotlin.toInstantAsUtc
 import mirrg.kotlin.utcLocalDateTime
@@ -42,46 +49,64 @@ class SkillContainer(private val manager: SkillManager) : ISkillContainer {
     override fun send(player: EntityPlayerMP) = manager.send(player, json)
 
 
-    private val gson = GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create()!!
     var json: String
-        get() = gson.toJson(model)
-        set(json) = run { model = gson.fromJson(json, SkillModel::class.java) }
+        get() = model.toJsonElement().toJson { setPrettyPrinting() }
+        set(json) = run { model = json.toJsonElement().jsonWrapper.toSkillModel() }
 
     private var model = SkillModel()
 
 
-    override val masteryList get() = model.getMasteryLevels().keys
-    override fun getMasteryLevel(mastery: String) = model.getMasteryLevels()[mastery] ?: 0
-    override fun setMasteryLevel(mastery: String, masteryLevel: Int) = run { model.getMasteryLevels()[mastery] = masteryLevel }
+    override val masteryList get() = model.masteryLevels.keys
+    override fun getMasteryLevel(mastery: String) = model.masteryLevels[mastery] ?: 0
+    override fun setMasteryLevel(mastery: String, masteryLevel: Int) = run { model.masteryLevels[mastery] = masteryLevel }
 
-    override val variables get(): ISkillVariables = model.getVariables()
+    override val variables get(): ISkillVariables = model.variables
 }
 
 fun ISkillContainer.getSkillLevel(mastery: IMastery): Int = getMasteryLevel(mastery.name) * mastery.coefficient + (mastery.parent?.let { getSkillLevel(it) } ?: 0)
 val ISkillContainer.usedSkillPoints get() = masteryList.sumBy { getMasteryLevel(it) }
-val ISkillContainer.remainingSkillPoints get() = skillManager.getFairyMasterLevel(variables.getExp()) - usedSkillPoints
-fun ISkillContainer.canResetMastery(now: Instant) = variables.getLastMasteryResetTime().let { it == null || it < now.utcLocalDateTime.toLocalDate().startOfMonth.toInstantAsUtc }
+val ISkillContainer.remainingSkillPoints get() = skillManager.getFairyMasterLevel(variables.exp) - usedSkillPoints
+fun ISkillContainer.canResetMastery(now: Instant) = variables.lastMasteryResetTime.let { it == null || it < now.utcLocalDateTime.toLocalDate().startOfMonth.toInstantAsUtc }
 
-data class SkillModel(
-    @[JvmField Expose] var masteryLevels: MutableMap<String, Int>? = null,
-    @[JvmField Expose] var variables: SkillVariables? = null
+
+class SkillModel(
+    masteryLevels: Map<String, Int>? = null,
+    variables: SkillVariables? = null
 ) {
-    fun getMasteryLevels() = masteryLevels ?: mutableMapOf<String, Int>().also { masteryLevels = it }
-    fun getVariables() = variables ?: SkillVariables().also { variables = it }
+    val masteryLevels = masteryLevels?.toMutableMap() ?: mutableMapOf()
+    val variables = variables ?: SkillVariables()
 }
 
-data class SkillVariables(
-    @[JvmField Expose] var exp: Int? = null,
-    @[JvmField Expose] var lastMasteryResetTime: Long? = null,
-    @[JvmField Expose] var lastAstronomicalObservationTime: Long? = null
+fun JsonWrapper.toSkillModel() = SkillModel(
+    masteryLevels = this["masteryLevels"].asMap.mapValues { it.value.toInt }.toMutableMap(),
+    variables = this["variables"].toSkillVariables()
+)
+
+fun SkillModel.toJsonElement() = jsonObjectNotNull(
+    "masteryLevels" to masteryLevels.map { it.key to it.value.jsonElement }.jsonObject,
+    "variables" to variables.toJsonElement()
+)
+
+
+class SkillVariables(
+    exp: Int? = null,
+    override var lastMasteryResetTime: Instant? = null,
+    override var lastAstronomicalObservationTime: Instant? = null
 ) : ISkillVariables {
-    override fun getExp(): Int = exp ?: 0
-    override fun setExp(exp: Int) = run { this.exp = exp }
-    override fun getLastMasteryResetTime() = lastMasteryResetTime?.let { Instant.ofEpochMilli(it) }
-    override fun setLastMasteryResetTime(lastMasteryResetTime: Instant?) = run { this.lastMasteryResetTime = lastMasteryResetTime?.toEpochMilli() }
-    override fun getLastAstronomicalObservationTime() = lastAstronomicalObservationTime?.let { Instant.ofEpochMilli(it) }
-    override fun setLastAstronomicalObservationTime(lastAstronomicalObservationTime: Instant?) = run { this.lastAstronomicalObservationTime = lastAstronomicalObservationTime?.toEpochMilli() }
+    override var exp = exp ?: 0
 }
+
+fun JsonWrapper.toSkillVariables() = SkillVariables(
+    exp = this["exp"].orNull?.toInt,
+    lastMasteryResetTime = this["lastMasteryResetTime"].orNull?.toLong?.let { Instant.ofEpochMilli(it) },
+    lastAstronomicalObservationTime = this["lastAstronomicalObservationTime"].orNull?.toLong?.let { Instant.ofEpochMilli(it) }
+)
+
+fun SkillVariables.toJsonElement() = jsonObjectNotNull(
+    "exp" to exp.jsonElement,
+    "lastMasteryResetTime" to lastMasteryResetTime?.toEpochMilli()?.jsonElement,
+    "lastAstronomicalObservationTime" to lastAstronomicalObservationTime?.toEpochMilli()?.jsonElement
+)
 
 
 val IMastery.displayName get() = textComponent { translate("mirageFairy2019.mastery.$name.name") }

@@ -48,12 +48,9 @@ interface ISkillContainer {
 }
 
 interface ISkillVariables {
-    fun getExp(): Int
-    fun setExp(exp: Int)
-    fun getLastMasteryResetTime(): Instant?
-    fun setLastMasteryResetTime(lastMasteryResetTime: Instant?)
-    fun getLastAstronomicalObservationTime(): Instant?
-    fun setLastAstronomicalObservationTime(lastAstronomicalObservationTime: Instant?)
+    var exp: Int
+    var lastMasteryResetTime: Instant?
+    var lastAstronomicalObservationTime: Instant?
 }
 
 
