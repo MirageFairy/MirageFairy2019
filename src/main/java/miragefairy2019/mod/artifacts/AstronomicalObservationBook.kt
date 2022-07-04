@@ -25,6 +25,7 @@ import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.skill.ApiSkill
+import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.minus
 import mirrg.kotlin.startOfDay
 import mirrg.kotlin.startOfMonth
@@ -107,7 +108,7 @@ class ItemAstronomicalObservationBook : Item() {
             // 獲得処理
             val expOld = skillContainer.variables.exp
             val lvOld = skillContainer.skillManager.getFairyMasterLevel(skillContainer.variables.exp)
-            skillContainer.variables.exp = (skillContainer.variables.exp + exp).coerceAtLeast(0)
+            skillContainer.variables.exp = (skillContainer.variables.exp + exp) atLeast 0
             val expNew = skillContainer.variables.exp
             val lvNew = skillContainer.skillManager.getFairyMasterLevel(skillContainer.variables.exp)
             val lvDiff = lvNew - lvOld

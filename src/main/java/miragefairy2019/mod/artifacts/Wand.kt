@@ -54,6 +54,7 @@ import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
+import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.formatAs
 import mirrg.kotlin.hydrogen.toLowerCamelCase
 import mirrg.kotlin.hydrogen.toUpperCamelCase
@@ -343,7 +344,7 @@ class ItemFairyWand : Item(), IFairyStickCraftItem {
         // 機能
         tooltip += formattedText { "右クリックでフェアリーステッキクラフト"().red } // 魔法 // TODO translate
 
-        tooltip += formattedText { "使用可能回数: ${(getMaxDamage(itemStack) - getDamage(itemStack) + 1).coerceAtLeast(0)}"().green } // 耐久値 TODO translate
+        tooltip += formattedText { "使用可能回数: ${(getMaxDamage(itemStack) - getDamage(itemStack) + 1) atLeast 0}"().green } // 耐久値 TODO translate
 
         tooltip += formattedText { ("スキル: "() + Mastery.processing.displayName() + " (${ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(Mastery.processing)})"()).gold } // TODO translate
         tooltip += formattedText { "クールタイム: ${getCoolTime(player) / 20.0 formatAs "%.2f"} 秒"().blue } // TODO translate

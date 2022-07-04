@@ -5,6 +5,7 @@ import miragefairy2019.libkt.ingredient
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredient
 import miragefairy2019.mod.fairy.FairyTypes
+import mirrg.kotlin.hydrogen.atLeast
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.oredict.OreIngredient
@@ -16,7 +17,7 @@ val fairyDilutionRecipeModule = module {
             val inputFairy = inputFairyBundle.main
             val outputFairyBundle = fairyVariant.bundle.main.type.parentFairy() ?: return@forEach
             val outputFairy = outputFairyBundle.main
-            val rankDiff = (outputFairy.rare - inputFairy.rare).coerceAtLeast(0) // 必要凝縮回数
+            val rankDiff = (outputFairy.rare - inputFairy.rare) atLeast 0 // 必要凝縮回数
 
             val inputMotif = inputFairy.type.motif ?: return@forEach
 

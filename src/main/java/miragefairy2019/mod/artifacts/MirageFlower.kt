@@ -31,6 +31,7 @@ import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.EnumVariantMaterials1
+import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.or
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.Block
@@ -181,22 +182,22 @@ fun calculateGrowthRate(world: World, blockPos: BlockPos): List<Pair<String, Dou
             // 最も大きな補正値
             val growthRateInFloor = entries.map { getGrowthRateInFloor(it.fairy.main.type) }.max()!!
 
-            bonus = bonus.coerceAtLeast(growthRateInFloor)
+            bonus = bonus atLeast growthRateInFloor
         }
 
         // 特定ブロックによる判定
-        if (blockState.block === Blocks.GRASS) bonus = bonus.coerceAtLeast(1.0)
-        if (blockState.block === Blocks.DIRT) bonus = bonus.coerceAtLeast(1.1)
+        if (blockState.block === Blocks.GRASS) bonus = bonus atLeast 1.0
+        if (blockState.block === Blocks.DIRT) bonus = bonus atLeast 1.1
         if (blockState.block === Blocks.FARMLAND) {
-            bonus = bonus.coerceAtLeast(1.2)
-            if (blockState.getValue(BlockFarmland.MOISTURE) > 0) bonus = bonus.coerceAtLeast(1.3) // 耕土が湿っているなら加点
+            bonus = bonus atLeast 1.2
+            if (blockState.getValue(BlockFarmland.MOISTURE) > 0) bonus = bonus atLeast 1.3 // 耕土が湿っているなら加点
         }
-        if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.APATITE_BLOCK)) bonus = bonus.coerceAtLeast(1.5)
-        if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.FLUORITE_BLOCK)) bonus = bonus.coerceAtLeast(2.0)
-        if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.SULFUR_BLOCK)) bonus = bonus.coerceAtLeast(1.5)
-        if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.CINNABAR_BLOCK)) bonus = bonus.coerceAtLeast(2.0)
-        if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MOONSTONE_BLOCK)) bonus = bonus.coerceAtLeast(3.0)
-        if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MAGNETITE_BLOCK)) bonus = bonus.coerceAtLeast(1.2)
+        if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.APATITE_BLOCK)) bonus = bonus atLeast 1.5
+        if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.FLUORITE_BLOCK)) bonus = bonus atLeast 2.0
+        if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.SULFUR_BLOCK)) bonus = bonus atLeast 1.5
+        if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.CINNABAR_BLOCK)) bonus = bonus atLeast 2.0
+        if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MOONSTONE_BLOCK)) bonus = bonus atLeast 3.0
+        if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MAGNETITE_BLOCK)) bonus = bonus atLeast 1.2
 
         bonus
     }

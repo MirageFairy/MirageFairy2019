@@ -4,6 +4,7 @@ import miragefairy2019.libkt.darkRed
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.artifacts.BlockFairyWoodLog
+import mirrg.kotlin.hydrogen.atLeast
 import net.minecraft.block.BlockLeaves
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3i
@@ -42,7 +43,7 @@ fun compileFairyTree(world: World, originBlockPos: BlockPos): Leaves {
     // 基点幹の葉
     val leavesResult = treeSearch(world, originalStemResult.map { it.first }, maxSize = 1000) { world2, blockPos, distance ->
         when (world2.getBlockState(blockPos).block) {
-            is BlockLeaves -> Pair(blockPos, (5 - distance).coerceAtLeast(0))
+            is BlockLeaves -> Pair(blockPos, (5 - distance) atLeast 0)
             else -> null
         }
     }
