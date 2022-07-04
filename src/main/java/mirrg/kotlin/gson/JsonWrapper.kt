@@ -104,6 +104,18 @@ val JsonWrapper.toInt: Int
         else -> throw IllegalStateException()
     }
 
+val JsonWrapper.toLong: Long
+    get() = when {
+        isUndefined -> 0L
+        isNumber -> asLong
+        isString -> asString.toLong()
+        isBoolean -> if (asBoolean) 1L else 0L
+        isNull -> 0L
+        isArray -> e("Number")
+        isObject -> e("Number")
+        else -> throw IllegalStateException()
+    }
+
 val JsonWrapper.toDouble: Double
     get() = when {
         isUndefined -> 0.0
