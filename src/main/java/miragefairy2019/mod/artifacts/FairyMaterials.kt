@@ -53,32 +53,36 @@ import net.minecraftforge.oredict.OreIngredient
 
 enum class FairyMaterialCard(
     val registryName: String,
-    val isHandheld: Boolean
+    val isHandheld: Boolean,
+    val unlocalizedName: String,
+    val enName: String,
+    val jaName: String,
+    val jaPoem: String
 ) {
-    AQUA_MANA_ROD("aqua_mana_rod", true),
-    WIND_MANA_ROD("wind_mana_rod", true),
-    GAIA_MANA_ROD("gaia_mana_rod", true),
-    FIRE_MANA_ROD("fire_mana_rod", true),
-    SHINE_MANA_ROD("shine_mana_rod", true),
-    DARK_MANA_ROD("dark_mana_rod", true),
-    QUARTZ_MANA_ROD("quartz_mana_rod", true),
-    MIRAGE_FLOWER_STICK("mirage_flower_stick", true),
-    MIRAGE_FLOWER_LEAF("mirage_flower_leaf", false),
-    MIRAGE_FAIRY_WOOD_STICK("mirage_fairy_wood_stick", true),
-    MIRAGIUM_WATER_BOTTLE("miragium_water_bottle", false),
-    MIRAGE_FLOWER_EXTRACT_BOTTLE("mirage_flower_extract_bottle", false),
-    MIRAGE_FLOWER_OIL_BOTTLE("mirage_flower_oil_bottle", false),
-    GLASS_MANA_ROD("glass_mana_rod", true),
-    MIRAGE_FAIRY_LEATHER("mirage_fairy_leather", false),
-    FAIRY_WOOD_RESIN("fairy_wood_resin", false),
-    SPHERE_BASE("sphere_base", false),
-    FAIRY_SYRUP("fairy_syrup", false),
-    FAIRY_PLASTIC("fairy_plastic", false),
-    FAIRY_PLASTIC_WITH_FAIRY("fairy_plastic_with_fairy", false),
-    FAIRY_PLASTIC_ROD("fairy_plastic_rod", true),
-    INDIA_INK("india_ink", false),
-    ANCIENT_POTTERY("ancient_pottery", false),
-    ANNIHILATION_POTTERY("annihilation_pottery", false),
+    AQUA_MANA_ROD("aqua_mana_rod", true, "manaRodAqua", "Aqua Mana Rod", "燐灰石の魔導芯棒", "優しさの心を伝える"),
+    WIND_MANA_ROD("wind_mana_rod", true, "manaRodWind", "Wind Mana Rod", "蛍石の魔導芯棒", "直感の心を伝える"),
+    GAIA_MANA_ROD("gaia_mana_rod", true, "manaRodGaia", "Gaia Mana Rod", "硫黄の魔導芯棒", "工夫の心を伝える"),
+    FIRE_MANA_ROD("fire_mana_rod", true, "manaRodFire", "Fire Mana Rod", "辰砂の魔導芯棒", "閃きの心を伝える"),
+    SHINE_MANA_ROD("shine_mana_rod", true, "manaRodShine", "Shine Mana Rod", "月長石の魔導芯棒", "真実の心を伝える"),
+    DARK_MANA_ROD("dark_mana_rod", true, "manaRodDark", "Dark Mana Rod", "磁鉄鉱の魔導芯棒", "カリスマの心を伝える"),
+    QUARTZ_MANA_ROD("quartz_mana_rod", true, "manaRodQuartz", "Nether Quartz Mana Rod", "ネザークォーツの魔導芯棒", "魔力を導通させる芯の入った棒材"),
+    MIRAGE_FLOWER_STICK("mirage_flower_stick", true, "stickMirageFlower", "Mirage Flower Stem", "ミラージュフラワーの茎", "叩くとコツコツと鳴る"),
+    MIRAGE_FLOWER_LEAF("mirage_flower_leaf", false, "leafMirageFlower", "Mirage Flower Leaf", "ミラージュフラワーの葉", "指を切らないように！"),
+    MIRAGE_FAIRY_WOOD_STICK("mirage_fairy_wood_stick", true, "stickMirageFairyWood", "Fairy Wood Stick", "妖精の木の棒", "吸い込まれるようだ"),
+    MIRAGIUM_WATER_BOTTLE("miragium_water_bottle", false, "bottleMiragiumWater", "Miragium Water Bottle", "ミラジウムウォーター入り瓶", "ほんのり甘い香り"),
+    MIRAGE_FLOWER_EXTRACT_BOTTLE("mirage_flower_extract_bottle", false, "bottleMirageFlowerExtract", "Mirage Extract Bottle", "ミラージュエキス入り瓶", "飲めそうにはない"),
+    MIRAGE_FLOWER_OIL_BOTTLE("mirage_flower_oil_bottle", false, "bottleMirageFlowerOil", "Mirage Oil Bottle", "ミラージュオイル入り瓶", "皮膚に付くとなかなか落ちない"),
+    GLASS_MANA_ROD("glass_mana_rod", true, "manaRodGlass", "Glass Mana Rod", "ガラスの魔導芯棒", "絶縁性は石と同じ"),
+    MIRAGE_FAIRY_LEATHER("mirage_fairy_leather", false, "mirageFairyLeather", "Fairy Leather", "妖精の革", "エーテルグラウンド"),
+    FAIRY_WOOD_RESIN("fairy_wood_resin", false, "fairyWoodResin", "Fairy Wood Resin", "妖精の木の樹液", "くちどけまろやか"),
+    SPHERE_BASE("sphere_base", false, "sphereBase", "Sphere Base", "スフィアベース", "前世が見える。              （らしい）"),
+    FAIRY_SYRUP("fairy_syrup", false, "fairySyrup", "Fairy Syrup", "妖精のシロップ", "爽やかで心が洗われるような「水色」の香り"),
+    FAIRY_PLASTIC("fairy_plastic", false, "fairyPlastic", "Fairy Plastic", "妖精のプラスチック", "熱可塑性有機高分子"),
+    FAIRY_PLASTIC_WITH_FAIRY("fairy_plastic_with_fairy", false, "fairyPlasticWithFairy", "Fairy Plastic with Fairy", "妖精入り妖精のプラスチック", "何を見てヨシ！って言ったんですか！？"),
+    FAIRY_PLASTIC_ROD("fairy_plastic_rod", true, "fairyPlasticRod", "Fairy Plastic Rod", "妖精のプラスチックの棒", "魔導性抜群、耐久性抜群、耐水性最悪"),
+    INDIA_INK("india_ink", false, "indiaInk", "India Ink", "墨汁", "司書精はこれをコーヒーの代わりに飲んだらしい"),
+    ANCIENT_POTTERY("ancient_pottery", false, "ancientPottery", "Ancient Pottery", "古代の壺", "「煮る」という発明"),
+    ANNIHILATION_POTTERY("annihilation_pottery", false, "annihilationPottery", "Annihilation Pottery", "渇きの壺", "無限の水を吸い込む壺"),
 }
 
 object FairyMaterials {
@@ -103,35 +107,11 @@ object FairyMaterials {
         }
 
         // 翻訳の生成
-        onMakeLang {
-            fun r(name: String, enName: String, jaName: String, jaPoem: String) {
-                enJa("item.$name.name", enName, jaName)
-                enJa("item.$name.poem", "", jaPoem)
+        FairyMaterialCard.values().forEach { fairyMaterialCard ->
+            onMakeLang {
+                enJa("item.${fairyMaterialCard.unlocalizedName}.name", fairyMaterialCard.enName, fairyMaterialCard.jaName)
+                enJa("item.${fairyMaterialCard.unlocalizedName}.poem", "", fairyMaterialCard.jaPoem)
             }
-            r("manaRodShine", "Shine Mana Rod", "月長石の魔導芯棒", "真実の心を伝える")
-            r("manaRodFire", "Fire Mana Rod", "辰砂の魔導芯棒", "閃きの心を伝える")
-            r("manaRodWind", "Wind Mana Rod", "蛍石の魔導芯棒", "直感の心を伝える")
-            r("manaRodGaia", "Gaia Mana Rod", "硫黄の魔導芯棒", "工夫の心を伝える")
-            r("manaRodAqua", "Aqua Mana Rod", "燐灰石の魔導芯棒", "優しさの心を伝える")
-            r("manaRodDark", "Dark Mana Rod", "磁鉄鉱の魔導芯棒", "カリスマの心を伝える")
-            r("manaRodQuartz", "Nether Quartz Mana Rod", "ネザークォーツの魔導芯棒", "魔力を導通させる芯の入った棒材")
-            r("stickMirageFlower", "Mirage Flower Stem", "ミラージュフラワーの茎", "叩くとコツコツと鳴る")
-            r("leafMirageFlower", "Mirage Flower Leaf", "ミラージュフラワーの葉", "指を切らないように！")
-            r("stickMirageFairyWood", "Fairy Wood Stick", "妖精の木の棒", "吸い込まれるようだ")
-            r("bottleMiragiumWater", "Miragium Water Bottle", "ミラジウムウォーター入り瓶", "ほんのり甘い香り")
-            r("bottleMirageFlowerExtract", "Mirage Extract Bottle", "ミラージュエキス入り瓶", "飲めそうにはない")
-            r("bottleMirageFlowerOil", "Mirage Oil Bottle", "ミラージュオイル入り瓶", "皮膚に付くとなかなか落ちない")
-            r("manaRodGlass", "Glass Mana Rod", "ガラスの魔導芯棒", "絶縁性は石と同じ")
-            r("mirageFairyLeather", "Fairy Leather", "妖精の革", "エーテルグラウンド")
-            r("fairyWoodResin", "Fairy Wood Resin", "妖精の木の樹液", "くちどけまろやか")
-            r("sphereBase", "Sphere Base", "スフィアベース", "前世が見える。              （らしい）")
-            r("fairySyrup", "Fairy Syrup", "妖精のシロップ", "爽やかで心が洗われるような「水色」の香り")
-            r("fairyPlastic", "Fairy Plastic", "妖精のプラスチック", "熱可塑性有機高分子")
-            r("fairyPlasticWithFairy", "Fairy Plastic with Fairy", "妖精入り妖精のプラスチック", "何を見てヨシ！って言ったんですか！？")
-            r("fairyPlasticRod", "Fairy Plastic Rod", "妖精のプラスチックの棒", "魔導性抜群、耐久性抜群、耐水性最悪")
-            r("indiaInk", "India Ink", "墨汁", "司書精はこれをコーヒーの代わりに飲んだらしい")
-            r("ancientPottery", "Ancient Pottery", "古代の壺", "「煮る」という発明")
-            r("annihilationPottery", "Annihilation Pottery", "渇きの壺", "無限の水を吸い込む壺")
         }
 
         // レシピ生成
