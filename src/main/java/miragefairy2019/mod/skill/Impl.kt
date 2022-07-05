@@ -78,7 +78,7 @@ class SkillModel(
 }
 
 fun JsonWrapper.toSkillModel() = SkillModel(
-    masteryLevels = this["masteryLevels"].asMap.mapValues { it.value.toInt }.toMutableMap(),
+    masteryLevels = this["masteryLevels"].asMap().mapValues { it.value.toInt }.toMutableMap(),
     variables = this["variables"].toSkillVariables()
 )
 

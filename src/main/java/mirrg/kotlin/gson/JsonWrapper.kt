@@ -39,31 +39,31 @@ class JsonWrapper(
 
     // キャスト
     // キャストできない場合は特殊化例外
-    val primitiveElement get() = jsonElement as? JsonPrimitive ?: e("JsonPrimitive")
-    val nullElement get() = jsonElement as? JsonNull ?: e("JsonNull")
-    val arrayElement get() = jsonElement as? JsonArray ?: e("JsonArray")
-    val objectElement get() = jsonElement as? JsonObject ?: e("JsonObject")
+    fun asJsonPrimitive() = jsonElement as? JsonPrimitive ?: e("JsonPrimitive")
+    fun asJsonNull() = jsonElement as? JsonNull ?: e("JsonNull")
+    fun asJsonArray() = jsonElement as? JsonArray ?: e("JsonArray")
+    fun asJsonObject() = jsonElement as? JsonObject ?: e("JsonObject")
 
     // 取得プロパティ
     // キャストできない場合に発生する例外は必ず特殊化クラス
     // 省略時も例外を出す
-    val asUndefined get() = if (isUndefined) null else e("Undefined")
-    val asInt get() = if (isNumber) primitiveElement.asInt else e("Number")
-    val asLong get() = if (isNumber) primitiveElement.asLong else e("Number")
-    val asDouble get() = if (isNumber) primitiveElement.asDouble else e("Number")
-    val asBigDecimal get() = if (isNumber) primitiveElement.asBigDecimal!! else e("Number")
-    val asString get() = if (isString) primitiveElement.asString!! else e("String")
-    val asBoolean get() = if (isBoolean) primitiveElement.asBoolean else e("Boolean")
-    val asNull get() = if (isNull) null else e("Null")
-    val asList: List<JsonWrapper> get() = if (isArray) arrayElement.toList().mapIndexed { index, item -> JsonWrapper(item, "$path[$index]") } else e("Array")
-    val asMap: Map<String, JsonWrapper> get() = if (isObject) objectElement.entrySet().associate { (key, value) -> key to JsonWrapper(value, "$path.$key") } else e("Object")
+    fun asUndefined() = if (isUndefined) null else e("Undefined")
+    fun asInt() = if (isNumber) asJsonPrimitive().asInt else e("Number")
+    fun asLong() = if (isNumber) asJsonPrimitive().asLong else e("Number")
+    fun asDouble() = if (isNumber) asJsonPrimitive().asDouble else e("Number")
+    fun asBigDecimal() = if (isNumber) asJsonPrimitive().asBigDecimal!! else e("Number")
+    fun asString() = if (isString) asJsonPrimitive().asString!! else e("String")
+    fun asBoolean() = if (isBoolean) asJsonPrimitive().asBoolean else e("Boolean")
+    fun asNull() = if (isNull) null else e("Null")
+    fun asList(): List<JsonWrapper> = if (isArray) asJsonArray().toList().mapIndexed { index, item -> JsonWrapper(item, "$path[$index]") } else e("Array")
+    fun asMap(): Map<String, JsonWrapper> = if (isObject) asJsonObject().entrySet().associate { (key, value) -> key to JsonWrapper(value, "$path.$key") } else e("Object")
 
     // 「undefinedもしくはnullのときに」nullを返す
     val orNull get() = if (isUndefined || isNull) null else this
 
     // オブジェクトと配列は子要素をJsonWrapperで覆って返す
-    operator fun get(index: Int) = JsonWrapper(if (index >= 0 && index < arrayElement.size()) arrayElement.get(index) else null, "$path[$index]")
-    operator fun get(key: String) = JsonWrapper(objectElement.get(key), "$path.$key")
+    operator fun get(index: Int) = JsonWrapper(if (index >= 0 && index < asJsonArray().size()) asJsonArray().get(index) else null, "$path[$index]")
+    operator fun get(key: String) = JsonWrapper(asJsonObject().get(key), "$path.$key")
 }
 
 private val JsonWrapper.type
@@ -83,21 +83,21 @@ private fun JsonWrapper.e(expectedType: String): Nothing = throw JsonDecompositi
 val JsonWrapper.toString: String
     get() = when {
         isUndefined -> "undefined"
-        isNumber -> asBigDecimal.toString()
-        isString -> asString
-        isBoolean -> asBoolean.toString()
+        isNumber -> asBigDecimal().toString()
+        isString -> asString()
+        isBoolean -> asBoolean().toString()
         isNull -> "null"
-        isArray -> "[" + asList.join { it.toString } + "]"
-        isObject -> "{" + asMap.entries.join { it.key + "=" + it.value.toString } + "}"
+        isArray -> "[" + asList().join { it.toString } + "]"
+        isObject -> "{" + asMap().entries.join { it.key + "=" + it.value.toString } + "}"
         else -> throw IllegalStateException()
     }
 
 val JsonWrapper.toInt: Int
     get() = when {
         isUndefined -> 0
-        isNumber -> asInt
-        isString -> asString.toInt()
-        isBoolean -> if (asBoolean) 1 else 0
+        isNumber -> asInt()
+        isString -> asString().toInt()
+        isBoolean -> if (asBoolean()) 1 else 0
         isNull -> 0
         isArray -> e("Number")
         isObject -> e("Number")
@@ -107,9 +107,9 @@ val JsonWrapper.toInt: Int
 val JsonWrapper.toLong: Long
     get() = when {
         isUndefined -> 0L
-        isNumber -> asLong
-        isString -> asString.toLong()
-        isBoolean -> if (asBoolean) 1L else 0L
+        isNumber -> asLong()
+        isString -> asString().toLong()
+        isBoolean -> if (asBoolean()) 1L else 0L
         isNull -> 0L
         isArray -> e("Number")
         isObject -> e("Number")
@@ -119,9 +119,9 @@ val JsonWrapper.toLong: Long
 val JsonWrapper.toDouble: Double
     get() = when {
         isUndefined -> 0.0
-        isNumber -> asDouble
-        isString -> asString.toDouble()
-        isBoolean -> if (asBoolean) 1.0 else 0.0
+        isNumber -> asDouble()
+        isString -> asString().toDouble()
+        isBoolean -> if (asBoolean()) 1.0 else 0.0
         isNull -> 0.0
         isArray -> e("Number")
         isObject -> e("Number")
@@ -131,9 +131,9 @@ val JsonWrapper.toDouble: Double
 val JsonWrapper.toBigDecimal: BigDecimal
     get() = when {
         isUndefined -> BigDecimal.ZERO
-        isNumber -> asBigDecimal
-        isString -> asString.toBigDecimal()
-        isBoolean -> if (asBoolean) BigDecimal.ONE else BigDecimal.ZERO
+        isNumber -> asBigDecimal()
+        isString -> asString().toBigDecimal()
+        isBoolean -> if (asBoolean()) BigDecimal.ONE else BigDecimal.ZERO
         isNull -> BigDecimal.ZERO
         isArray -> e("Number")
         isObject -> e("Number")
@@ -143,9 +143,9 @@ val JsonWrapper.toBigDecimal: BigDecimal
 val JsonWrapper.toBoolean: Boolean
     get() = when {
         isUndefined -> false
-        isNumber -> asBigDecimal isNotSameAs BigDecimal.ZERO
-        isString -> asString.isNotEmpty()
-        isBoolean -> asBoolean
+        isNumber -> asBigDecimal() isNotSameAs BigDecimal.ZERO
+        isString -> asString().isNotEmpty()
+        isBoolean -> asBoolean()
         isNull -> false
         isArray -> true
         isObject -> true

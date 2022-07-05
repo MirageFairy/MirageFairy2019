@@ -27,13 +27,13 @@ object DaemonSystem {
             DaemonManager.instance = if (data != null) {
                 DaemonManager(
                     // TODO 分離
-                    chatWebhook = data["chatWebhook"].asMap.map { (dimensionalPosExpression, daemonData) ->
+                    chatWebhook = data["chatWebhook"].asMap().map { (dimensionalPosExpression, daemonData) ->
                         val dimensionalPos = DimensionalPos.parse(dimensionalPosExpression)
                         dimensionalPos to ChatWebhookDaemon(
-                            created = Instant.ofEpochSecond(daemonData["created"].asBigDecimal.toLong()),
-                            username = daemonData["username"].asString,
-                            webhookUrl = daemonData["webhookUrl"].asString,
-                            durationSeconds = daemonData["duration"].orNull?.asLong ?: (60L * 60L * 24L * 30L)
+                            created = Instant.ofEpochSecond(daemonData["created"].asBigDecimal().toLong()),
+                            username = daemonData["username"].asString(),
+                            webhookUrl = daemonData["webhookUrl"].asString(),
+                            durationSeconds = daemonData["duration"].orNull?.asLong() ?: (60L * 60L * 24L * 30L)
                         )
                     }.toMap().toMutableMap()
                 )
