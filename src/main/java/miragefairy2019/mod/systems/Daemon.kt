@@ -11,7 +11,7 @@ import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.toJson
 import mirrg.kotlin.gson.hydrogen.toJsonElement
-import mirrg.kotlin.gson.hydrogen.toJsonWrapper2
+import mirrg.kotlin.gson.hydrogen.toJsonWrapper
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -24,7 +24,7 @@ object DaemonSystem {
         // セーブデータ読み込みとデーモンマネージャーの初期化
         onServerStarting {
             Main.logger.info("DaemonSystem: Loading")
-            val data = getFile(server).existsOrNull?.readText()?.toJsonElement().toJsonWrapper2().orNull
+            val data = getFile(server).existsOrNull?.readText()?.toJsonElement().toJsonWrapper().orNull
             DaemonManager.instance = if (data != null) {
                 DaemonManager(
                     // TODO 分離
