@@ -106,6 +106,7 @@ tasks {
         fetch("mirrg/kotlin/java/hydrogen/Optional.kt")
         fetch("mirrg/kotlin/log4j/hydrogen/Logging.kt")
         fetch("mirrg/kotlin/gson/hydrogen/Gson.kt")
+        fetch("mirrg/kotlin/gson/hydrogen/JsonWrapper.kt")
     }
 
     named<TaskSourceCopy>("sourceMainKotlin") {
