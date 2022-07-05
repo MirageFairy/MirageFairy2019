@@ -16,6 +16,7 @@ class JsonWrapper2(
     val jsonElement: JsonElement?,
     val path: String = "$"
 ) {
+
     override fun toString(): String = jsonElement.toString()
 
     val isUndefined get() = jsonElement == null
@@ -46,21 +47,22 @@ class JsonWrapper2(
 
     operator fun get(index: Int) = JsonWrapper2(if (index >= 0 && index < asJsonArray().size()) asJsonArray().get(index) else null, "$path[$index]")
     operator fun get(key: String) = JsonWrapper2(asJsonObject().get(key), "$path.$key")
+
+    private val JsonWrapper2.type
+        get() = when {
+            isUndefined -> "Undefined"
+            isNumber -> "Number"
+            isString -> "String"
+            isBoolean -> "Boolean"
+            isNull -> "Null"
+            isArray -> "Array"
+            isObject -> "Object"
+            else -> throw IllegalStateException()
+        }
+
+    private fun JsonWrapper2.e(expectedType: String): Nothing = throw JsonDecompositionException("Expected $expectedType, but is a $type: $path")
+
 }
-
-private val JsonWrapper2.type
-    get() = when {
-        isUndefined -> "Undefined"
-        isNumber -> "Number"
-        isString -> "String"
-        isBoolean -> "Boolean"
-        isNull -> "Null"
-        isArray -> "Array"
-        isObject -> "Object"
-        else -> throw IllegalStateException()
-    }
-
-private fun JsonWrapper2.e(expectedType: String): Nothing = throw JsonDecompositionException("Expected $expectedType, but is a $type: $path")
 
 val String.jsonWrapper2 get() = (if (this.isBlank()) null else GsonBuilder().create().fromJson(this, JsonElement::class.java)).jsonWrapper2
 val JsonElement?.jsonWrapper2 get() = JsonWrapper2(this, "_")
