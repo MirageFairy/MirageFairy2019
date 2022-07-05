@@ -254,7 +254,7 @@ class BlockMortar : BlockPedestal<TileEntityMortar>(Material.CIRCUITS, { it as? 
 
     override fun damageDropped(blockState: IBlockState) = getMetaFromState(blockState)
     fun getItem(blockState: IBlockState) = createItemStack(metadata = damageDropped(blockState))
-    override fun getItem(world: World, blockPos: BlockPos, blockState: IBlockState) = getItem(blockState)
+    override fun getItem(world: World, blockPos: BlockPos, blockState: IBlockState) = getItemStack(world, blockPos) ?: getItem(blockState)
     override fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, blockPos: BlockPos, blockState: IBlockState, fortune: Int) {
         drops += getItem(blockState)
     }
