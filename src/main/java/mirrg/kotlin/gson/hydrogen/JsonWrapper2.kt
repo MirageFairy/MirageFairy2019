@@ -14,7 +14,7 @@ class JsonDecompositionException(message: String) : IllegalStateException(messag
 
 class JsonWrapper2(
     val jsonElement: JsonElement?,
-    val path: String
+    val path: String = "$"
 ) {
     override fun toString(): String = jsonElement.toString()
 
