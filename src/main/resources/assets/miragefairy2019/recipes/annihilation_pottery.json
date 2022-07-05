@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "O#O",
+    "OwO",
+    "sOs"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyAncientPottery"
+    },
+    "w": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereWarp"
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereSpace"
+    },
+    "O": {
+      "type": "forge:ore_dict",
+      "ore": "obsidian"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:fairy_materials",
+    "data": 23
+  }
+}

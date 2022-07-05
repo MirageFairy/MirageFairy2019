@@ -617,7 +617,22 @@ enum class FairyMaterialCard(
         "Annihilation Pottery", "渇きの壺", "無限の水を吸い込む壺",
         5, false, { ore("mirageFairyAnnihilationPottery") },
         {
-
+            makeRecipe("annihilation_pottery") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "O#O",
+                        "OwO",
+                        "sOs"
+                    ),
+                    key = mapOf(
+                        "#" to DataOreIngredient(ore = "mirageFairyAncientPottery"),
+                        "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
+                        "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace"),
+                        "O" to DataOreIngredient(ore = "obsidian")
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 23)
+                )
+            }
         }
     ),
     ;
