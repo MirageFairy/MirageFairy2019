@@ -64,7 +64,7 @@ class JsonWrapper2(
     operator fun get(index: Int) = JsonWrapper2(if (index >= 0 && index < asJsonArray().size()) asJsonArray().get(index) else null, "$path[$index]")
     operator fun get(key: String) = JsonWrapper2(asJsonObject().get(key), "$path.$key")
 
-    
+
     override fun toString(): String = jsonElement.toString()
 
 }
