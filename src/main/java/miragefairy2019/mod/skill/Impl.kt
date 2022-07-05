@@ -1,13 +1,12 @@
 package miragefairy2019.mod.skill
 
 import miragefairy2019.libkt.textComponent
-import mirrg.kotlin.gson.JsonWrapper
+import mirrg.kotlin.gson.JsonWrapper2
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 import mirrg.kotlin.gson.hydrogen.toJson
 import mirrg.kotlin.gson.hydrogen.toJsonElement
-import mirrg.kotlin.gson.jsonWrapper
 import mirrg.kotlin.startOfMonth
 import mirrg.kotlin.toInstantAsUtc
 import mirrg.kotlin.utcLocalDateTime
@@ -75,7 +74,7 @@ class SkillModel(
     val variables = variables ?: SkillVariables()
 }
 
-fun JsonWrapper.toSkillModel() = SkillModel(
+fun JsonWrapper2.toSkillModel() = SkillModel(
     masteryLevels = this["masteryLevels"].asMap().mapValues { it.value.asInt() }.toMutableMap(),
     variables = this["variables"].toSkillVariables()
 )
@@ -94,7 +93,7 @@ class SkillVariables(
     override var exp = exp ?: 0
 }
 
-fun JsonWrapper.toSkillVariables() = SkillVariables(
+fun JsonWrapper2.toSkillVariables() = SkillVariables(
     exp = this["exp"].orNull?.asInt(),
     lastMasteryResetTime = this["lastMasteryResetTime"].orNull?.asLong()?.let { Instant.ofEpochMilli(it) },
     lastAstronomicalObservationTime = this["lastAstronomicalObservationTime"].orNull?.asLong()?.let { Instant.ofEpochMilli(it) }

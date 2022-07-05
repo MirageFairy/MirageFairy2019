@@ -10,7 +10,7 @@ import miragefairy2019.mod.artifacts.ChatWebhookDaemon
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.toJson
-import mirrg.kotlin.gson.jsonWrapper
+import mirrg.kotlin.gson.jsonWrapper2
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -23,7 +23,7 @@ object DaemonSystem {
         // セーブデータ読み込みとデーモンマネージャーの初期化
         onServerStarting {
             Main.logger.info("DaemonSystem: Loading")
-            val data = getFile(server).existsOrNull?.readText()?.jsonWrapper?.orNull
+            val data = getFile(server).existsOrNull?.readText()?.jsonWrapper2?.orNull
             DaemonManager.instance = if (data != null) {
                 DaemonManager(
                     // TODO 分離

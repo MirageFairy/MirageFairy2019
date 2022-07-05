@@ -12,11 +12,10 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
-import mirrg.kotlin.gson.JsonWrapper
+import mirrg.kotlin.gson.JsonWrapper2
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
-import mirrg.kotlin.gson.jsonWrapper
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
@@ -71,7 +70,7 @@ class PlayerAuraManager : IPlayerAuraManager {
 
 fun ItemStack.toJsonElement() = jsonObject("item" to item.registryName.toString().jsonElement, "metadata" to metadata.jsonElement)
 
-fun JsonWrapper.toItemStack(): ItemStack {
+fun JsonWrapper2.toItemStack(): ItemStack {
     val item = Item.getByNameOrId(this["item"].asString()) ?: return EMPTY_ITEM_STACK
     val metadata = this["metadata"].asInt()
     return ItemStack(item, 1, metadata)
@@ -86,7 +85,7 @@ fun ManaSet.toJsonElement() = jsonObject(
     "dark" to dark.jsonElement
 )
 
-fun JsonWrapper.toManaSet() = ManaSet(
+fun JsonWrapper2.toManaSet() = ManaSet(
     this["shine"].asDouble(),
     this["fire"].asDouble(),
     this["wind"].asDouble(),
@@ -101,13 +100,13 @@ class Food(val itemStack: ItemStack, val aura: ManaSet) {
 
 fun Food.toJsonElement() = jsonObject("itemStack" to itemStack.toJsonElement(), "aura" to aura.toJsonElement())
 
-fun JsonWrapper.toFood() = Food(this["itemStack"].toItemStack(), this["aura"].toManaSet())
+fun JsonWrapper2.toFood() = Food(this["itemStack"].toItemStack(), this["aura"].toManaSet())
 
 class PlayerAuraData(val foods: List<Food>)
 
 fun PlayerAuraData.toJsonElement() = jsonObject("foods" to foods.map { it.toJsonElement() }.jsonArray)
 
-fun JsonWrapper.toPlayerAuraData() = PlayerAuraData(this["foods"].asList().map { it.toFood() })
+fun JsonWrapper2.toPlayerAuraData() = PlayerAuraData(this["foods"].asList().map { it.toFood() })
 
 
 data class ResettableProperty<out T : Any>(private val getter: () -> T) {

@@ -9,9 +9,6 @@ import com.google.gson.JsonNull
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import mirrg.kotlin.hydrogen.castOrNull
-import mirrg.kotlin.hydrogen.join
-import mirrg.kotlin.isNotSameAs
-import java.math.BigDecimal
 
 // 本体
 
@@ -21,7 +18,7 @@ class JsonDecompositionException(message: String) : IllegalStateException(messag
  * @param jsonElement nullの場合、存在しない要素を表します。
  * Json内でnullが明示された場合はJsonNullの状態を持ちます。
  */
-class JsonWrapper(
+class JsonWrapper2(
     val jsonElement: JsonElement?,
     val path: String
 ) {
@@ -55,18 +52,18 @@ class JsonWrapper(
     fun asString() = if (isString) asJsonPrimitive().asString!! else e("String")
     fun asBoolean() = if (isBoolean) asJsonPrimitive().asBoolean else e("Boolean")
     fun asNull() = if (isNull) null else e("Null")
-    fun asList(): List<JsonWrapper> = if (isArray) asJsonArray().toList().mapIndexed { index, item -> JsonWrapper(item, "$path[$index]") } else e("Array")
-    fun asMap(): Map<String, JsonWrapper> = if (isObject) asJsonObject().entrySet().associate { (key, value) -> key to JsonWrapper(value, "$path.$key") } else e("Object")
+    fun asList(): List<JsonWrapper2> = if (isArray) asJsonArray().toList().mapIndexed { index, item -> JsonWrapper2(item, "$path[$index]") } else e("Array")
+    fun asMap(): Map<String, JsonWrapper2> = if (isObject) asJsonObject().entrySet().associate { (key, value) -> key to JsonWrapper2(value, "$path.$key") } else e("Object")
 
     // 「undefinedもしくはnullのときに」nullを返す
     val orNull get() = if (isUndefined || isNull) null else this
 
     // オブジェクトと配列は子要素をJsonWrapperで覆って返す
-    operator fun get(index: Int) = JsonWrapper(if (index >= 0 && index < asJsonArray().size()) asJsonArray().get(index) else null, "$path[$index]")
-    operator fun get(key: String) = JsonWrapper(asJsonObject().get(key), "$path.$key")
+    operator fun get(index: Int) = JsonWrapper2(if (index >= 0 && index < asJsonArray().size()) asJsonArray().get(index) else null, "$path[$index]")
+    operator fun get(key: String) = JsonWrapper2(asJsonObject().get(key), "$path.$key")
 }
 
-private val JsonWrapper.type
+private val JsonWrapper2.type
     get() = when {
         isUndefined -> "Undefined"
         isNumber -> "Number"
@@ -78,8 +75,8 @@ private val JsonWrapper.type
         else -> throw IllegalStateException()
     }
 
-private fun JsonWrapper.e(expectedType: String): Nothing = throw JsonDecompositionException("Expected $expectedType, but is a $type: $path")
+private fun JsonWrapper2.e(expectedType: String): Nothing = throw JsonDecompositionException("Expected $expectedType, but is a $type: $path")
 
 // 文字列のJsonWrapper化
-val String.jsonWrapper get() = (if (this.isBlank()) null else GsonBuilder().create().fromJson(this, JsonElement::class.java)).jsonWrapper
-val JsonElement?.jsonWrapper get() = JsonWrapper(this, "_")
+val String.jsonWrapper2 get() = (if (this.isBlank()) null else GsonBuilder().create().fromJson(this, JsonElement::class.java)).jsonWrapper2
+val JsonElement?.jsonWrapper2 get() = JsonWrapper2(this, "_")

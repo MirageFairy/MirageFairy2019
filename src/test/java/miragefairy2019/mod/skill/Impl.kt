@@ -1,7 +1,7 @@
 package miragefairy2019.mod.skill
 
 import mirrg.kotlin.gson.hydrogen.toJson
-import mirrg.kotlin.gson.jsonWrapper
+import mirrg.kotlin.gson.jsonWrapper2
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import org.junit.Assert.assertEquals
@@ -29,7 +29,7 @@ class TestSkill {
           }
         }
         """.trimIndent()
-        val skillModel = json.jsonWrapper.toSkillModel()
+        val skillModel = json.jsonWrapper2.toSkillModel()
         assertEquals(4, skillModel.masteryLevels.size)
         assertEquals(10, skillModel.masteryLevels["flowerPicking"])
         assertEquals(1595, skillModel.variables.exp)
