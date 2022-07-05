@@ -59,8 +59,22 @@ class JsonWrapper2(val jsonElement: JsonElement?, val path: String = "$") {
     operator fun get(key: String) = JsonWrapper(asJsonObject().get(key), "$path.$key")
 
 
-    override fun toString(): String = jsonElement.toString()
+    private fun getString(jsonElement: JsonElement?): String = when (jsonElement) {
+        null -> "undefined"
+        is JsonArray -> "[${jsonElement.joinToString(",") { getString(it) }}]"
+        is JsonObject -> "{${jsonElement.entrySet().joinToString(",") { """${it.key}:${getString(it.value)}""" }}}"
+        is JsonPrimitive -> when {
+            jsonElement.isNumber -> jsonElement.asNumber.toString()
+            jsonElement.isString -> jsonElement.asString
+            jsonElement.isBoolean -> jsonElement.asBoolean.toString()
+            else -> throw IllegalStateException()
+        }
+        is JsonNull -> "null"
+        else -> throw IllegalStateException()
+    }
+
+    override fun toString() = getString(jsonElement)
 
 }
 
-fun JsonElement?.toJsonWrapper2() = JsonWrapper2(this, "_")
+fun JsonElement?.toJsonWrapper2() = JsonWrapper2(this)
