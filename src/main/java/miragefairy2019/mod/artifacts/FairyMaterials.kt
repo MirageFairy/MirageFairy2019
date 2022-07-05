@@ -51,6 +51,36 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreIngredient
 
+enum class FairyMaterialCard(
+    val registryName: String,
+    val isHandheld: Boolean
+) {
+    AQUA_MANA_ROD("aqua_mana_rod", true),
+    WIND_MANA_ROD("wind_mana_rod", true),
+    GAIA_MANA_ROD("gaia_mana_rod", true),
+    FIRE_MANA_ROD("fire_mana_rod", true),
+    SHINE_MANA_ROD("shine_mana_rod", true),
+    DARK_MANA_ROD("dark_mana_rod", true),
+    QUARTZ_MANA_ROD("quartz_mana_rod", true),
+    MIRAGE_FLOWER_STICK("mirage_flower_stick", true),
+    MIRAGE_FLOWER_LEAF("mirage_flower_leaf", false),
+    MIRAGE_FAIRY_WOOD_STICK("mirage_fairy_wood_stick", true),
+    MIRAGIUM_WATER_BOTTLE("miragium_water_bottle", false),
+    MIRAGE_FLOWER_EXTRACT_BOTTLE("mirage_flower_extract_bottle", false),
+    MIRAGE_FLOWER_OIL_BOTTLE("mirage_flower_oil_bottle", false),
+    GLASS_MANA_ROD("glass_mana_rod", true),
+    MIRAGE_FAIRY_LEATHER("mirage_fairy_leather", false),
+    FAIRY_WOOD_RESIN("fairy_wood_resin", false),
+    SPHERE_BASE("sphere_base", false),
+    FAIRY_SYRUP("fairy_syrup", false),
+    FAIRY_PLASTIC("fairy_plastic", false),
+    FAIRY_PLASTIC_WITH_FAIRY("fairy_plastic_with_fairy", false),
+    FAIRY_PLASTIC_ROD("fairy_plastic_rod", true),
+    INDIA_INK("india_ink", false),
+    ANCIENT_POTTERY("ancient_pottery", false),
+    ANNIHILATION_POTTERY("annihilation_pottery", false),
+}
+
 object FairyMaterials {
     lateinit var itemFairyMaterials: () -> ItemMultiFairyMaterial
     val fairyMaterialsModule = module {
@@ -68,31 +98,8 @@ object FairyMaterials {
         }
 
         // アイテムモデルの生成
-        run {
-            makeItemModel("aqua_mana_rod") { handheld }
-            makeItemModel("wind_mana_rod") { handheld }
-            makeItemModel("gaia_mana_rod") { handheld }
-            makeItemModel("fire_mana_rod") { handheld }
-            makeItemModel("shine_mana_rod") { handheld }
-            makeItemModel("dark_mana_rod") { handheld }
-            makeItemModel("quartz_mana_rod") { handheld }
-            makeItemModel("mirage_flower_stick") { handheld }
-            makeItemModel("mirage_flower_leaf") { generated }
-            makeItemModel("mirage_fairy_wood_stick") { handheld }
-            makeItemModel("miragium_water_bottle") { generated }
-            makeItemModel("mirage_flower_extract_bottle") { generated }
-            makeItemModel("mirage_flower_oil_bottle") { generated }
-            makeItemModel("glass_mana_rod") { handheld }
-            makeItemModel("mirage_fairy_leather") { generated }
-            makeItemModel("fairy_wood_resin") { generated }
-            makeItemModel("sphere_base") { generated }
-            makeItemModel("fairy_syrup") { generated }
-            makeItemModel("fairy_plastic") { generated }
-            makeItemModel("fairy_plastic_with_fairy") { generated }
-            makeItemModel("fairy_plastic_rod") { handheld }
-            makeItemModel("india_ink") { generated }
-            makeItemModel("ancient_pottery") { generated }
-            makeItemModel("annihilation_pottery") { generated }
+        FairyMaterialCard.values().forEach { fairyMaterialCard ->
+            makeItemModel(fairyMaterialCard.registryName) { if (fairyMaterialCard.isHandheld) handheld else generated }
         }
 
         // 翻訳の生成
