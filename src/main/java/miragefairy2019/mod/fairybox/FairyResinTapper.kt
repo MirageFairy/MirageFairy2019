@@ -28,8 +28,8 @@ import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.FairyMaterialCard
-import miragefairy2019.mod.artifacts.FairyMaterials
 import miragefairy2019.mod.artifacts.get
+import miragefairy2019.mod.artifacts.itemFairyMaterials
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.hydrogen.formatAs
@@ -166,7 +166,7 @@ class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
                 val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5) atLeast 0.0
 
                 val count = world.rand.randomInt(baseCount)
-                if (count > 0) FairyMaterials.itemFairyMaterials[FairyMaterialCard.FAIRY_WOOD_RESIN].createItemStack(count).drop(world, blockPosOutput, motionless = true)
+                if (count > 0) itemFairyMaterials[FairyMaterialCard.FAIRY_WOOD_RESIN].createItemStack(count).drop(world, blockPosOutput, motionless = true)
             }
         }
     }

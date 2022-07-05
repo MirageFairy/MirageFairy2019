@@ -12,7 +12,7 @@ val artifactsModule = module {
     potModule(this)
     debugItemsModule(this)
     Sphere.sphereModule(this)
-    FairyMaterials.fairyMaterialsModule(this)
+    fairyMaterialsModule(this)
     fairyStickModule(this)
     skillBookModule(this)
     astronomicalObservationBookModule(this)
