@@ -68,7 +68,22 @@ enum class FairyMaterialCard(
         "Shine Mana Rod", "月長石の魔導芯棒", "真実の心を伝える",
         3, true, { ore("mirageFairy2019ManaRodShine") },
         {
-
+            makeRecipe("shine_mana_rod") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        " Gp",
+                        "GRG",
+                        "cG "
+                    ),
+                    key = mapOf(
+                        "R" to DataOreIngredient(ore = "rodMiragium"),
+                        "G" to DataOreIngredient(ore = "gemMoonstone"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "p" to WandType.POLISHING.ingredientData
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 0)
+                )
+            }
         }
     ),
     FIRE_MANA_ROD(
@@ -76,7 +91,22 @@ enum class FairyMaterialCard(
         "Fire Mana Rod", "辰砂の魔導芯棒", "閃きの心を伝える",
         3, true, { ore("mirageFairy2019ManaRodFire") },
         {
-
+            makeRecipe("fire_mana_rod") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        " Gp",
+                        "GRG",
+                        "cG "
+                    ),
+                    key = mapOf(
+                        "R" to DataOreIngredient(ore = "rodMiragium"),
+                        "G" to DataOreIngredient(ore = "gemCinnabar"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "p" to WandType.POLISHING.ingredientData
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 1)
+                )
+            }
         }
     ),
     WIND_MANA_ROD(
@@ -84,7 +114,22 @@ enum class FairyMaterialCard(
         "Wind Mana Rod", "蛍石の魔導芯棒", "直感の心を伝える",
         3, true, { ore("mirageFairy2019ManaRodWind") },
         {
-
+            makeRecipe("wind_mana_rod") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        " Gp",
+                        "GRG",
+                        "cG "
+                    ),
+                    key = mapOf(
+                        "R" to DataOreIngredient(ore = "rodMiragium"),
+                        "G" to DataOreIngredient(ore = "gemFluorite"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "p" to WandType.POLISHING.ingredientData
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 2)
+                )
+            }
         }
     ),
     GAIA_MANA_ROD(
@@ -92,7 +137,22 @@ enum class FairyMaterialCard(
         "Gaia Mana Rod", "硫黄の魔導芯棒", "工夫の心を伝える",
         3, true, { ore("mirageFairy2019ManaRodGaia") },
         {
-
+            makeRecipe("gaia_mana_rod") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        " Gp",
+                        "GRG",
+                        "cG "
+                    ),
+                    key = mapOf(
+                        "R" to DataOreIngredient(ore = "rodMiragium"),
+                        "G" to DataOreIngredient(ore = "gemSulfur"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "p" to WandType.POLISHING.ingredientData
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 3)
+                )
+            }
         }
     ),
     AQUA_MANA_ROD(
@@ -100,7 +160,22 @@ enum class FairyMaterialCard(
         "Aqua Mana Rod", "燐灰石の魔導芯棒", "優しさの心を伝える",
         3, true, { ore("mirageFairy2019ManaRodAqua") },
         {
-
+            makeRecipe("aqua_mana_rod") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        " Gp",
+                        "GRG",
+                        "cG "
+                    ),
+                    key = mapOf(
+                        "R" to DataOreIngredient(ore = "rodMiragium"),
+                        "G" to DataOreIngredient(ore = "gemApatite"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "p" to WandType.POLISHING.ingredientData
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 4)
+                )
+            }
         }
     ),
     DARK_MANA_ROD(
@@ -108,7 +183,22 @@ enum class FairyMaterialCard(
         "Dark Mana Rod", "磁鉄鉱の魔導芯棒", "カリスマの心を伝える",
         3, true, { ore("mirageFairy2019ManaRodDark") },
         {
-
+            makeRecipe("dark_mana_rod") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        " Gp",
+                        "GRG",
+                        "cG "
+                    ),
+                    key = mapOf(
+                        "R" to DataOreIngredient(ore = "rodMiragium"),
+                        "G" to DataOreIngredient(ore = "gemMagnetite"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "p" to WandType.POLISHING.ingredientData
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 5)
+                )
+            }
         }
     ),
     QUARTZ_MANA_ROD(
@@ -116,7 +206,34 @@ enum class FairyMaterialCard(
         "Nether Quartz Mana Rod", "ネザークォーツの魔導芯棒", "魔力を導通させる芯の入った棒材",
         3, true, { ore("mirageFairy2019ManaRodQuartz") },
         {
+            // ガラス棒＋クォーツ→クォーツ棒
+            onAddRecipe {
+                ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+                    it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
+                    it.conditions += FairyStickCraftConditionConsumeBlock { FluidMaterials.blockFluidMirageFlowerExtract().defaultState }
+                    it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019ManaRodGlass"))
+                    it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("gemQuartz"), 16)
+                    it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[QUARTZ_MANA_ROD].createItemStack() }
+                })
+            }
 
+            // 通常レシピ
+            makeRecipe("quartz_mana_rod") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        " Gp",
+                        "GRG",
+                        "cG "
+                    ),
+                    key = mapOf(
+                        "R" to DataOreIngredient(ore = "rodMiragium"),
+                        "G" to DataOreIngredient(ore = "gemQuartz"),
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "p" to WandType.POLISHING.ingredientData
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 6)
+                )
+            }
         }
     ),
     MIRAGE_FLOWER_STICK(
@@ -124,7 +241,31 @@ enum class FairyMaterialCard(
         "Mirage Flower Stem", "ミラージュフラワーの茎", "叩くとコツコツと鳴る",
         1, true, { ore("stickMirageFlower") },
         {
+            // ミラ葉＋骨＋燐灰石→ミラ茎
+            onAddRecipe {
+                ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+                    it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
+                    it.conditions += FairyStickCraftConditionConsumeBlock { FluidMaterials.blockFluidMiragiumWater().defaultState }
+                    it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbilityCrystal"))
+                    it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("leafMirageFlower"))
+                    it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"))
+                    it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[MIRAGE_FLOWER_STICK].createItemStack() }
+                })
+            }
 
+            // 通常レシピ
+            makeRecipe("mirage_flower_stick") {
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        DataOreIngredient(ore = "mirageFairyStick"),
+                        DataOreIngredient(ore = "container1000MiragiumWater"),
+                        DataOreIngredient(ore = "mirageFairy2019FairyAbilityCrystal"),
+                        DataOreIngredient(ore = "leafMirageFlower"),
+                        DataOreIngredient(ore = "dustApatite")
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 7)
+                )
+            }
         }
     ),
     MIRAGE_FLOWER_LEAF(
@@ -140,7 +281,15 @@ enum class FairyMaterialCard(
         "Fairy Wood Stick", "妖精の木の棒", "吸い込まれるようだ",
         4, true, { ore("stickMirageFairyWood") },
         {
-
+            makeRecipe("mirage_fairy_wood_stick") {
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        DataOreIngredient(ore = "stickWood"),
+                        DataOreIngredient(ore = "container250MirageFlowerOil")
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 9)
+                )
+            }
         }
     ),
     MIRAGIUM_WATER_BOTTLE(
@@ -156,7 +305,63 @@ enum class FairyMaterialCard(
         "Mirage Extract Bottle", "ミラージュエキス入り瓶", "飲めそうにはない",
         2, false, { ore("bottleMirageFlowerExtract").ore("container250MirageFlowerExtract").bottle() },
         {
+            // 空き瓶＋ミラ葉64個＞破砕→ミラエキス瓶
+            onAddRecipe {
+                ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+                    it.conditions += FairyStickCraftConditionUseItem(WandType.BREAKING.ingredient)
+                    it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
+                    it.conditions += FairyStickCraftConditionConsumeItem(itemFairyMaterials[MIRAGE_FLOWER_LEAF].createItemStack().ingredient, 64)
+                    it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"), 5)
+                    it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[MIRAGE_FLOWER_EXTRACT_BOTTLE].createItemStack() }
+                })
+            }
 
+            // 空き瓶＋ミラ葉50個＞珠玉→ミラエキス瓶
+            onAddRecipe {
+                ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+                    it.conditions += FairyStickCraftConditionUseItem(WandType.POLISHING.ingredient)
+                    it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
+                    it.conditions += FairyStickCraftConditionConsumeItem(itemFairyMaterials[MIRAGE_FLOWER_LEAF].createItemStack().ingredient, 50)
+                    it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"), 4)
+                    it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[MIRAGE_FLOWER_EXTRACT_BOTTLE].createItemStack() }
+                })
+            }
+
+            // 空き瓶＋ミラ葉40個＞歪曲→ミラエキス瓶
+            onAddRecipe {
+                ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+                    it.conditions += FairyStickCraftConditionUseItem(WandType.DISTORTION.ingredient)
+                    it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
+                    it.conditions += FairyStickCraftConditionConsumeItem(itemFairyMaterials[MIRAGE_FLOWER_LEAF].createItemStack().ingredient, 40)
+                    it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"), 3)
+                    it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[MIRAGE_FLOWER_EXTRACT_BOTTLE].createItemStack() }
+                })
+            }
+
+            // ミラの葉30＋燐灰石の粉2＋空き瓶＞錬金の家→ミラエキス瓶
+            onAddRecipe {
+                fairyCentrifugeCraftHandler(30.0) {
+                    process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+                    process { !Mana.GAIA + !Erg.FLAME * 2.0 }
+                    process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
+                    input(itemFairyMaterials[MIRAGE_FLOWER_LEAF].createItemStack().ingredient, 30)
+                    input("dustApatite".oreIngredient, 2)
+                    input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+                    output(itemFairyMaterials[MIRAGE_FLOWER_EXTRACT_BOTTLE].createItemStack(), 1.0)
+                }
+            }
+
+            // エンチャントの瓶
+            makeRecipe("experience_bottle") {
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        DataOreIngredient(ore = "container250MirageFlowerExtract"),
+                        WandType.BREAKING.ingredientData,
+                        DataSimpleIngredient(item = "minecraft:ender_eye")
+                    ),
+                    result = DataResult(item = "minecraft:experience_bottle")
+                )
+            }
         }
     ),
     MIRAGE_FLOWER_OIL_BOTTLE(
@@ -164,7 +369,40 @@ enum class FairyMaterialCard(
         "Mirage Oil Bottle", "ミラージュオイル入り瓶", "皮膚に付くとなかなか落ちない",
         4, false, { ore("bottleMirageFlowerOil").ore("container250MirageFlowerOil").bottle() },
         {
+            // 空き瓶＋ミラ種50個＋辰砂の粉4個＞珠玉→ミラオイル瓶
+            onAddRecipe {
+                ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+                    it.conditions += FairyStickCraftConditionUseItem(WandType.POLISHING.ingredient)
+                    it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
+                    it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds()), 50)
+                    it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustCinnabar"), 4)
+                    it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[MIRAGE_FLOWER_OIL_BOTTLE].createItemStack() }
+                })
+            }
 
+            // 空き瓶＋ミラ種50個＋辰砂の粉4個＞歪曲→ミラオイル瓶
+            onAddRecipe {
+                ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+                    it.conditions += FairyStickCraftConditionUseItem(WandType.DISTORTION.ingredient)
+                    it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
+                    it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds()), 40)
+                    it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustCinnabar"), 3)
+                    it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[MIRAGE_FLOWER_OIL_BOTTLE].createItemStack() }
+                })
+            }
+
+            // ミラの種30＋辰砂の粉2＋空き瓶＞錬金の家→ミラオイル瓶
+            onAddRecipe {
+                fairyCentrifugeCraftHandler(30.0) {
+                    process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+                    process { !Mana.GAIA + !Erg.FLAME * 2.0 }
+                    process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
+                    input(MirageFlower.itemMirageFlowerSeeds().createItemStack().ingredient, 30)
+                    input("dustCinnabar".oreIngredient, 2)
+                    input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+                    output(itemFairyMaterials[MIRAGE_FLOWER_OIL_BOTTLE].createItemStack(), 1.0)
+                }
+            }
         }
     ),
     GLASS_MANA_ROD(
@@ -172,7 +410,21 @@ enum class FairyMaterialCard(
         "Glass Mana Rod", "ガラスの魔導芯棒", "絶縁性は石と同じ",
         2, true, { ore("mirageFairy2019ManaRodGlass") },
         {
-
+            makeRecipe("glass_mana_rod") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        " G ",
+                        "GRG",
+                        "cG "
+                    ),
+                    key = mapOf(
+                        "R" to DataOreIngredient(ore = "rodMiragium"),
+                        "G" to DataOreIngredient(ore = "blockGlass"),
+                        "c" to WandType.CRAFTING.ingredientData
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 13)
+                )
+            }
         }
     ),
     MIRAGE_FAIRY_LEATHER(
@@ -180,7 +432,34 @@ enum class FairyMaterialCard(
         "Fairy Leather", "妖精の革", "エーテルグラウンド",
         4, false, { ore("mirageFairyLeather") },
         {
+            makeRecipe("mirage_fairy_leather") {
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        DataOreIngredient(ore = "leather"),
+                        DataOreIngredient(ore = "container1000MirageFlowerOil")
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 14)
+                )
+            }
 
+            // エリトラ
+            makeRecipe("elytra_from_mirage_fairy_leather") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "SLS",
+                        "LLL",
+                        "LcL"
+                    ),
+                    key = mapOf(
+                        "c" to WandType.CRAFTING.ingredientData,
+                        "S" to DataOreIngredient(ore = "mirageFairy2019SphereLevitate"),
+                        "L" to DataOreIngredient(ore = "mirageFairyLeather")
+                    ),
+                    result = DataResult(
+                        item = "minecraft:elytra"
+                    )
+                )
+            }
         }
     ),
     FAIRY_WOOD_RESIN(
@@ -188,7 +467,23 @@ enum class FairyMaterialCard(
         "Fairy Wood Resin", "妖精の木の樹液", "くちどけまろやか",
         5, false, { ore("mirageFairyWoodResin").fuel(1600) },
         {
-
+            // 5棒＋8樹液→松明8
+            makeRecipe("torch_from_fairy_wood_resin") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "r",
+                        "S"
+                    ),
+                    key = mapOf(
+                        "r" to DataOreIngredient(ore = "mirageFairyWoodResin"),
+                        "S" to DataOreIngredient(ore = "stickWood")
+                    ),
+                    result = DataResult(
+                        item = "minecraft:torch",
+                        count = 8
+                    )
+                )
+            }
         }
     ),
     SPHERE_BASE(
@@ -196,7 +491,47 @@ enum class FairyMaterialCard(
         "Sphere Base", "スフィアベース", "前世が見える。              （らしい）",
         3, false, { ore("mirageFairy2019SphereBase") },
         {
+            // 蛍石→
+            makeRecipe("sphere_base") {
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        WandType.POLISHING.ingredientData,
+                        DataOreIngredient(ore = "gemFluorite")
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 16, count = 2)
+                )
+            }
 
+            // 宝石→
+            fun makeSphereBaseRecipe(materialName: String) = makeRecipe("sphere_base_from_$materialName") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        " Gp",
+                        "GDG",
+                        "fG "
+                    ),
+                    key = mapOf(
+                        "p" to WandType.POLISHING.ingredientData,
+                        "f" to WandType.FUSION.ingredientData,
+                        "D" to DataOreIngredient(ore = "dustMiragium"),
+                        "G" to DataOreIngredient(ore = "gem${materialName.toUpperCamelCase()}")
+                    ),
+                    result = DataResult(
+                        item = "miragefairy2019:fairy_materials",
+                        data = 16,
+                        count = 4
+                    )
+                )
+            }
+            makeSphereBaseRecipe("diamond")
+            makeSphereBaseRecipe("emerald")
+            makeSphereBaseRecipe("pyrope")
+            makeSphereBaseRecipe("smithsonite")
+            makeSphereBaseRecipe("nephrite")
+            makeSphereBaseRecipe("topaz")
+            makeSphereBaseRecipe("tourmaline")
+            makeSphereBaseRecipe("heliolite")
+            makeSphereBaseRecipe("labradorite")
         }
     ),
     FAIRY_SYRUP(
@@ -228,7 +563,23 @@ enum class FairyMaterialCard(
         "Fairy Plastic Rod", "妖精のプラスチックの棒", "魔導性抜群、耐久性抜群、耐水性最悪",
         5, true, { ore("rodMirageFairyPlastic") },
         {
-
+            // 妖精のプラスチック2→妖精のプラスチックの棒4
+            makeRecipe("fairy_plastic_rod") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "X",
+                        "X"
+                    ),
+                    key = mapOf(
+                        "X" to DataOreIngredient(ore = "gemMirageFairyPlastic")
+                    ),
+                    result = DataResult(
+                        item = "miragefairy2019:fairy_materials",
+                        data = 20,
+                        count = 4
+                    )
+                )
+            }
         }
     ),
     INDIA_INK(
@@ -236,7 +587,21 @@ enum class FairyMaterialCard(
         "India Ink", "墨汁", "司書精はこれをコーヒーの代わりに飲んだらしい",
         0, false, { ore("dyeBlack").bottle() },
         {
-
+            // 木炭の粉＋樹液＋空き瓶→墨汁
+            makeRecipe("india_ink") {
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        DataOreIngredient(ore = "dustCharcoal"),
+                        DataOreIngredient(ore = "mirageFairyWoodResin"),
+                        DataSimpleIngredient(item = "minecraft:glass_bottle")
+                    ),
+                    result = DataResult(
+                        item = "miragefairy2019:fairy_materials",
+                        data = 21,
+                        count = 1
+                    )
+                )
+            }
         }
     ),
     ANCIENT_POTTERY(
@@ -305,406 +670,6 @@ val fairyMaterialsModule = module {
 
         // アイテム固有の初期化処理
         fairyMaterialCard.initializer(this)
-
-    }
-
-    // レシピ生成
-    run {
-
-        // 月長石の魔導芯棒
-        makeRecipe("shine_mana_rod") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    " Gp",
-                    "GRG",
-                    "cG "
-                ),
-                key = mapOf(
-                    "R" to DataOreIngredient(ore = "rodMiragium"),
-                    "G" to DataOreIngredient(ore = "gemMoonstone"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "p" to WandType.POLISHING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:fairy_materials", data = 0)
-            )
-        }
-
-        // 辰砂の魔導芯棒
-        makeRecipe("fire_mana_rod") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    " Gp",
-                    "GRG",
-                    "cG "
-                ),
-                key = mapOf(
-                    "R" to DataOreIngredient(ore = "rodMiragium"),
-                    "G" to DataOreIngredient(ore = "gemCinnabar"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "p" to WandType.POLISHING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:fairy_materials", data = 1)
-            )
-        }
-
-        // 蛍石の魔導芯棒
-        makeRecipe("wind_mana_rod") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    " Gp",
-                    "GRG",
-                    "cG "
-                ),
-                key = mapOf(
-                    "R" to DataOreIngredient(ore = "rodMiragium"),
-                    "G" to DataOreIngredient(ore = "gemFluorite"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "p" to WandType.POLISHING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:fairy_materials", data = 2)
-            )
-        }
-
-        // 硫黄の魔導芯棒
-        makeRecipe("gaia_mana_rod") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    " Gp",
-                    "GRG",
-                    "cG "
-                ),
-                key = mapOf(
-                    "R" to DataOreIngredient(ore = "rodMiragium"),
-                    "G" to DataOreIngredient(ore = "gemSulfur"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "p" to WandType.POLISHING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:fairy_materials", data = 3)
-            )
-        }
-
-        // 燐灰石の魔導芯棒
-        makeRecipe("aqua_mana_rod") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    " Gp",
-                    "GRG",
-                    "cG "
-                ),
-                key = mapOf(
-                    "R" to DataOreIngredient(ore = "rodMiragium"),
-                    "G" to DataOreIngredient(ore = "gemApatite"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "p" to WandType.POLISHING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:fairy_materials", data = 4)
-            )
-        }
-
-        // 磁鉄鉱の魔導芯棒
-        makeRecipe("dark_mana_rod") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    " Gp",
-                    "GRG",
-                    "cG "
-                ),
-                key = mapOf(
-                    "R" to DataOreIngredient(ore = "rodMiragium"),
-                    "G" to DataOreIngredient(ore = "gemMagnetite"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "p" to WandType.POLISHING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:fairy_materials", data = 5)
-            )
-        }
-
-        // ネザークォーツの魔導芯棒
-        makeRecipe("quartz_mana_rod") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    " Gp",
-                    "GRG",
-                    "cG "
-                ),
-                key = mapOf(
-                    "R" to DataOreIngredient(ore = "rodMiragium"),
-                    "G" to DataOreIngredient(ore = "gemQuartz"),
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "p" to WandType.POLISHING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:fairy_materials", data = 6)
-            )
-        }
-
-        // ミラージュフラワーの茎
-        makeRecipe("mirage_flower_stick") {
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(ore = "mirageFairyStick"),
-                    DataOreIngredient(ore = "container1000MiragiumWater"),
-                    DataOreIngredient(ore = "mirageFairy2019FairyAbilityCrystal"),
-                    DataOreIngredient(ore = "leafMirageFlower"),
-                    DataOreIngredient(ore = "dustApatite")
-                ),
-                result = DataResult(item = "miragefairy2019:fairy_materials", data = 7)
-            )
-        }
-
-        // 妖精の木の棒
-        makeRecipe("mirage_fairy_wood_stick") {
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(ore = "stickWood"),
-                    DataOreIngredient(ore = "container250MirageFlowerOil")
-                ),
-                result = DataResult(item = "miragefairy2019:fairy_materials", data = 9)
-            )
-        }
-
-        // エンチャントの瓶
-        makeRecipe("experience_bottle") {
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(ore = "container250MirageFlowerExtract"),
-                    WandType.BREAKING.ingredientData,
-                    DataSimpleIngredient(item = "minecraft:ender_eye")
-                ),
-                result = DataResult(item = "minecraft:experience_bottle")
-            )
-        }
-
-        // ガラスの魔導芯棒
-        makeRecipe("glass_mana_rod") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    " G ",
-                    "GRG",
-                    "cG "
-                ),
-                key = mapOf(
-                    "R" to DataOreIngredient(ore = "rodMiragium"),
-                    "G" to DataOreIngredient(ore = "blockGlass"),
-                    "c" to WandType.CRAFTING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:fairy_materials", data = 13)
-            )
-        }
-
-        // 妖精の革
-        makeRecipe("mirage_fairy_leather") {
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(ore = "leather"),
-                    DataOreIngredient(ore = "container1000MirageFlowerOil")
-                ),
-                result = DataResult(item = "miragefairy2019:fairy_materials", data = 14)
-            )
-        }
-
-        // エリトラ
-        makeRecipe("elytra_from_mirage_fairy_leather") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    "SLS",
-                    "LLL",
-                    "LcL"
-                ),
-                key = mapOf(
-                    "c" to WandType.CRAFTING.ingredientData,
-                    "S" to DataOreIngredient(ore = "mirageFairy2019SphereLevitate"),
-                    "L" to DataOreIngredient(ore = "mirageFairyLeather")
-                ),
-                result = DataResult(
-                    item = "minecraft:elytra"
-                )
-            )
-        }
-
-        // 5棒＋8樹液→松明8
-        makeRecipe("torch_from_fairy_wood_resin") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    "r",
-                    "S"
-                ),
-                key = mapOf(
-                    "r" to DataOreIngredient(ore = "mirageFairyWoodResin"),
-                    "S" to DataOreIngredient(ore = "stickWood")
-                ),
-                result = DataResult(
-                    item = "minecraft:torch",
-                    count = 8
-                )
-            )
-        }
-
-        // 蛍石→スフィアベース
-        makeRecipe("sphere_base") {
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    WandType.POLISHING.ingredientData,
-                    DataOreIngredient(ore = "gemFluorite")
-                ),
-                result = DataResult(item = "miragefairy2019:fairy_materials", data = 16, count = 2)
-            )
-        }
-
-        // 宝石→スフィアベース
-        fun makeSphereBaseRecipe(materialName: String) = makeRecipe("sphere_base_from_$materialName") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    " Gp",
-                    "GDG",
-                    "fG "
-                ),
-                key = mapOf(
-                    "p" to WandType.POLISHING.ingredientData,
-                    "f" to WandType.FUSION.ingredientData,
-                    "D" to DataOreIngredient(ore = "dustMiragium"),
-                    "G" to DataOreIngredient(ore = "gem${materialName.toUpperCamelCase()}")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:fairy_materials",
-                    data = 16,
-                    count = 4
-                )
-            )
-        }
-        makeSphereBaseRecipe("diamond")
-        makeSphereBaseRecipe("emerald")
-        makeSphereBaseRecipe("pyrope")
-        makeSphereBaseRecipe("smithsonite")
-        makeSphereBaseRecipe("nephrite")
-        makeSphereBaseRecipe("topaz")
-        makeSphereBaseRecipe("tourmaline")
-        makeSphereBaseRecipe("heliolite")
-        makeSphereBaseRecipe("labradorite")
-
-        // 妖精のプラスチック2→妖精のプラスチックの棒4
-        makeRecipe("fairy_plastic_rod") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    "X",
-                    "X"
-                ),
-                key = mapOf(
-                    "X" to DataOreIngredient(ore = "gemMirageFairyPlastic")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:fairy_materials",
-                    data = 20,
-                    count = 4
-                )
-            )
-        }
-
-        // 木炭の粉＋樹液＋空き瓶→墨汁
-        makeRecipe("india_ink") {
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(ore = "dustCharcoal"),
-                    DataOreIngredient(ore = "mirageFairyWoodResin"),
-                    DataSimpleIngredient(item = "minecraft:glass_bottle")
-                ),
-                result = DataResult(
-                    item = "miragefairy2019:fairy_materials",
-                    data = 21,
-                    count = 1
-                )
-            )
-        }
-
-    }
-
-    // レシピ
-    onAddRecipe {
-
-        // ガラス棒＋クォーツ→クォーツ棒
-        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-            it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
-            it.conditions += FairyStickCraftConditionConsumeBlock { FluidMaterials.blockFluidMirageFlowerExtract().defaultState }
-            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019ManaRodGlass"))
-            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("gemQuartz"), 16)
-            it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[FairyMaterialCard.QUARTZ_MANA_ROD].createItemStack() }
-        })
-
-        // ミラ葉＋骨＋燐灰石→ミラ茎
-        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-            it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
-            it.conditions += FairyStickCraftConditionConsumeBlock { FluidMaterials.blockFluidMiragiumWater().defaultState }
-            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyAbilityCrystal"))
-            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("leafMirageFlower"))
-            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"))
-            it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_STICK].createItemStack() }
-        })
-
-        // 空き瓶＋ミラ葉64個＞破砕→ミラエキス瓶
-        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-            it.conditions += FairyStickCraftConditionUseItem(WandType.BREAKING.ingredient)
-            it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
-            it.conditions += FairyStickCraftConditionConsumeItem(itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_LEAF].createItemStack().ingredient, 64)
-            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"), 5)
-            it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_EXTRACT_BOTTLE].createItemStack() }
-        })
-
-        // 空き瓶＋ミラ葉50個＞珠玉→ミラエキス瓶
-        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-            it.conditions += FairyStickCraftConditionUseItem(WandType.POLISHING.ingredient)
-            it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
-            it.conditions += FairyStickCraftConditionConsumeItem(itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_LEAF].createItemStack().ingredient, 50)
-            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"), 4)
-            it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_EXTRACT_BOTTLE].createItemStack() }
-        })
-
-        // 空き瓶＋ミラ葉40個＞歪曲→ミラエキス瓶
-        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-            it.conditions += FairyStickCraftConditionUseItem(WandType.DISTORTION.ingredient)
-            it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
-            it.conditions += FairyStickCraftConditionConsumeItem(itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_LEAF].createItemStack().ingredient, 40)
-            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustApatite"), 3)
-            it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_EXTRACT_BOTTLE].createItemStack() }
-        })
-
-        // ミラの葉30＋燐灰石の粉2＋空き瓶＞錬金の家→ミラエキス瓶
-        fairyCentrifugeCraftHandler(30.0) {
-            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
-            process { !Mana.GAIA + !Erg.FLAME * 2.0 }
-            process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
-            input(itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_LEAF].createItemStack().ingredient, 30)
-            input("dustApatite".oreIngredient, 2)
-            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
-            output(itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_EXTRACT_BOTTLE].createItemStack(), 1.0)
-        }
-
-        // 空き瓶＋ミラ種50個＋辰砂の粉4個＞珠玉→ミラオイル瓶
-        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-            it.conditions += FairyStickCraftConditionUseItem(WandType.POLISHING.ingredient)
-            it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
-            it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds()), 50)
-            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustCinnabar"), 4)
-            it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_OIL_BOTTLE].createItemStack() }
-        })
-
-        // 空き瓶＋ミラ種50個＋辰砂の粉4個＞歪曲→ミラオイル瓶
-        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-            it.conditions += FairyStickCraftConditionUseItem(WandType.DISTORTION.ingredient)
-            it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
-            it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds()), 40)
-            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustCinnabar"), 3)
-            it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_OIL_BOTTLE].createItemStack() }
-        })
-
-        // ミラの種30＋辰砂の粉2＋空き瓶＞錬金の家→ミラオイル瓶
-        fairyCentrifugeCraftHandler(30.0) {
-            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
-            process { !Mana.GAIA + !Erg.FLAME * 2.0 }
-            process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
-            input(MirageFlower.itemMirageFlowerSeeds().createItemStack().ingredient, 30)
-            input("dustCinnabar".oreIngredient, 2)
-            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
-            output(itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_OIL_BOTTLE].createItemStack(), 1.0)
-        }
 
     }
 
