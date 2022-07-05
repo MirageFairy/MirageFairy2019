@@ -10,7 +10,7 @@ import miragefairy2019.mod.artifacts.ChatWebhookDaemon
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.toJson
-import mirrg.kotlin.gson.jsonWrapper2
+import mirrg.kotlin.gson.hydrogen.jsonWrapper2
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World

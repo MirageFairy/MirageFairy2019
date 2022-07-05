@@ -1,6 +1,6 @@
 @file:Suppress("MemberVisibilityCanBePrivate", "unused")
 
-package mirrg.kotlin.gson
+package mirrg.kotlin.gson.hydrogen
 
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonArray

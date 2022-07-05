@@ -1,7 +1,7 @@
 package miragefairy2019.mod.skill
 
 import mirrg.kotlin.gson.hydrogen.toJson
-import mirrg.kotlin.gson.jsonWrapper2
+import mirrg.kotlin.gson.hydrogen.jsonWrapper2
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import org.junit.Assert.assertEquals
