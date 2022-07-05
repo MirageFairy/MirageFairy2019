@@ -108,6 +108,12 @@ class FairyMaterial(
     }
 }
 
+private infix fun FairyMaterial.has(block: (FairyMaterial) -> Unit) = this.also { block(this) }
+private infix fun FairyMaterial.ore(oreName: String) = this has { it.oreNames += oreName }
+private infix fun FairyMaterial.fuel(burnTime: Int) = this has { it.burnTime = burnTime }
+private val bottle: (FairyMaterial) -> Unit get() = { it.containerItemSupplier = { ItemStack(Items.GLASS_BOTTLE) } }
+
+
 object FairyMaterials {
     lateinit var itemFairyMaterials: () -> ItemMultiFairyMaterial
     val fairyMaterialsModule = module {
@@ -542,11 +548,6 @@ object FairyMaterials {
 
 
 // ItemMultiMaterial
-
-private infix fun FairyMaterial.has(block: (FairyMaterial) -> Unit) = this.also { block(this) }
-private infix fun FairyMaterial.ore(oreName: String) = this has { it.oreNames += oreName }
-private infix fun FairyMaterial.fuel(burnTime: Int) = this has { it.burnTime = burnTime }
-private val bottle: (FairyMaterial) -> Unit get() = { it.containerItemSupplier = { ItemStack(Items.GLASS_BOTTLE) } }
 
 class ItemVariantFairyMaterial(
     registryName: String,
