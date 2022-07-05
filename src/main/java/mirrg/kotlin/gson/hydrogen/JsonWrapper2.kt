@@ -10,8 +10,6 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import mirrg.kotlin.hydrogen.castOrNull
 
-class JsonDecompositionException(message: String) : IllegalStateException(message)
-
 class JsonWrapper2(
     val jsonElement: JsonElement?,
     val path: String = "$"
@@ -41,7 +39,7 @@ class JsonWrapper2(
     val orNull get() = if (isUndefined || isNull) null else this
 
 
-    private fun JsonWrapper2.e(expectedType: String): Nothing = throw JsonDecompositionException("Expected $expectedType, but is a $type: $path")
+    private fun JsonWrapper2.e(expectedType: String): Nothing = throw JsonTypeMismatchException("Expected $expectedType, but is a $type: $path")
 
     fun asUndefined() = if (isUndefined) null else e("Undefined")
     fun asJsonArray() = jsonElement as? JsonArray ?: e("JsonArray")
