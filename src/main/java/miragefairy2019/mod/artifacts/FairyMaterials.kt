@@ -105,7 +105,7 @@ object FairyMaterials {
     lateinit var itemFairyMaterials: () -> ItemMultiFairyMaterial
     val fairyMaterialsModule = module {
 
-        // 妖精素材アイテム
+        // アイテム登録
         itemFairyMaterials = item({ ItemMultiFairyMaterial() }, "fairy_materials") {
             setUnlocalizedName("fairyMaterials")
             setCreativeTab { Main.creativeTab }
@@ -121,17 +121,18 @@ object FairyMaterials {
             }
         }
 
-        // アイテムモデルの生成
+        // 種類ごと
         FairyMaterialCard.values().forEach { fairyMaterialCard ->
-            makeItemModel(fairyMaterialCard.registryName) { if (fairyMaterialCard.isHandheld) handheld else generated }
-        }
 
-        // 翻訳の生成
-        FairyMaterialCard.values().forEach { fairyMaterialCard ->
+            // アイテムモデル生成
+            makeItemModel(fairyMaterialCard.registryName) { if (fairyMaterialCard.isHandheld) handheld else generated }
+
+            // 翻訳生成
             onMakeLang {
                 enJa("item.${fairyMaterialCard.unlocalizedName}.name", fairyMaterialCard.enName, fairyMaterialCard.jaName)
                 enJa("item.${fairyMaterialCard.unlocalizedName}.poem", "", fairyMaterialCard.jaPoem)
             }
+
         }
 
         // レシピ生成
