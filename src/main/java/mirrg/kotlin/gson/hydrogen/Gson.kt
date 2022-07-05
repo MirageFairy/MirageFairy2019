@@ -27,8 +27,8 @@ import com.google.gson.JsonPrimitive
 
 
 // Conversion
-fun String.toJsonElement(configurator: GsonBuilder.() -> Unit = {}): JsonElement = GsonBuilder().also { configurator(it) }.create().fromJson(this, JsonElement::class.java)
-fun JsonElement.toJson(configurator: GsonBuilder.() -> Unit = {}): String = GsonBuilder().also { configurator(it) }.create().toJson(this)
+fun String.toJsonElement(configurator: GsonBuilder.() -> Unit = {}) = if (this.isBlank()) null else GsonBuilder().also { configurator(it) }.create().fromJson(this, JsonElement::class.java)
+fun JsonElement?.toJson(configurator: GsonBuilder.() -> Unit = {}): String = if (this == null) "" else GsonBuilder().also { configurator(it) }.create().toJson(this)
 
 
 // to JsonElement
