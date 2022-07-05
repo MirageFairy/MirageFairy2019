@@ -16,7 +16,7 @@ import mirrg.kotlin.gson.hydrogen.JsonWrapper2
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
-import mirrg.kotlin.gson.hydrogen.jsonWrapper2
+import mirrg.kotlin.gson.hydrogen.toJsonWrapper2
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
@@ -184,7 +184,7 @@ class PlayerAuraModel {
     fun fromJson(json: String) {
         synchronized(lock) {
             reset()
-            setData(gson.fromJson(json, JsonElement::class.java).jsonWrapper2.toPlayerAuraData())
+            setData(gson.fromJson(json, JsonElement::class.java).toJsonWrapper2().toPlayerAuraData())
         }
     }
 

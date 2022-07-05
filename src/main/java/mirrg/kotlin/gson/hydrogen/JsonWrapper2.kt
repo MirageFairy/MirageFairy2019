@@ -2,7 +2,6 @@
 
 package mirrg.kotlin.gson.hydrogen
 
-import com.google.gson.GsonBuilder
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonNull
@@ -67,5 +66,4 @@ class JsonWrapper2(
 
 }
 
-val String.jsonWrapper2 get() = (if (this.isBlank()) null else GsonBuilder().create().fromJson(this, JsonElement::class.java)).jsonWrapper2
-val JsonElement?.jsonWrapper2 get() = JsonWrapper2(this, "_")
+fun JsonElement?.toJsonWrapper2() = JsonWrapper2(this, "_")

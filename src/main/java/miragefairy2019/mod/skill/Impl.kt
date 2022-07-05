@@ -5,7 +5,7 @@ import mirrg.kotlin.gson.hydrogen.JsonWrapper2
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
-import mirrg.kotlin.gson.hydrogen.jsonWrapper2
+import mirrg.kotlin.gson.hydrogen.toJsonWrapper2
 import mirrg.kotlin.gson.hydrogen.toJson
 import mirrg.kotlin.gson.hydrogen.toJsonElement
 import mirrg.kotlin.startOfMonth
@@ -49,7 +49,7 @@ class SkillContainer(private val manager: SkillManager) : ISkillContainer {
 
     var json: String
         get() = model.toJsonElement().toJson { setPrettyPrinting() }
-        set(json) = run { model = json.toJsonElement().jsonWrapper2.toSkillModel() }
+        set(json) = run { model = json.toJsonElement().toJsonWrapper2().toSkillModel() }
 
     private var model = SkillModel()
 
