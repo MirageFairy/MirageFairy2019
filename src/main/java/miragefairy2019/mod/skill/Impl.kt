@@ -8,8 +8,6 @@ import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 import mirrg.kotlin.gson.hydrogen.toJson
 import mirrg.kotlin.gson.hydrogen.toJsonElement
 import mirrg.kotlin.gson.jsonWrapper
-import mirrg.kotlin.gson.toInt
-import mirrg.kotlin.gson.toLong
 import mirrg.kotlin.startOfMonth
 import mirrg.kotlin.toInstantAsUtc
 import mirrg.kotlin.utcLocalDateTime
@@ -78,7 +76,7 @@ class SkillModel(
 }
 
 fun JsonWrapper.toSkillModel() = SkillModel(
-    masteryLevels = this["masteryLevels"].asMap().mapValues { it.value.toInt }.toMutableMap(),
+    masteryLevels = this["masteryLevels"].asMap().mapValues { it.value.asInt() }.toMutableMap(),
     variables = this["variables"].toSkillVariables()
 )
 
@@ -97,9 +95,9 @@ class SkillVariables(
 }
 
 fun JsonWrapper.toSkillVariables() = SkillVariables(
-    exp = this["exp"].orNull?.toInt,
-    lastMasteryResetTime = this["lastMasteryResetTime"].orNull?.toLong?.let { Instant.ofEpochMilli(it) },
-    lastAstronomicalObservationTime = this["lastAstronomicalObservationTime"].orNull?.toLong?.let { Instant.ofEpochMilli(it) }
+    exp = this["exp"].orNull?.asInt(),
+    lastMasteryResetTime = this["lastMasteryResetTime"].orNull?.asLong()?.let { Instant.ofEpochMilli(it) },
+    lastAstronomicalObservationTime = this["lastAstronomicalObservationTime"].orNull?.asLong()?.let { Instant.ofEpochMilli(it) }
 )
 
 fun SkillVariables.toJsonElement() = jsonObjectNotNull(

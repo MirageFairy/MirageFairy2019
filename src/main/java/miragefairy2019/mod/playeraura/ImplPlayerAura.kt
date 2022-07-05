@@ -17,9 +17,6 @@ import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.jsonWrapper
-import mirrg.kotlin.gson.toDouble
-import mirrg.kotlin.gson.toInt
-import mirrg.kotlin.gson.toString
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
@@ -75,8 +72,8 @@ class PlayerAuraManager : IPlayerAuraManager {
 fun ItemStack.toJsonElement() = jsonObject("item" to item.registryName.toString().jsonElement, "metadata" to metadata.jsonElement)
 
 fun JsonWrapper.toItemStack(): ItemStack {
-    val item = Item.getByNameOrId(this["item"].toString) ?: return EMPTY_ITEM_STACK
-    val metadata = this["metadata"].toInt
+    val item = Item.getByNameOrId(this["item"].asString()) ?: return EMPTY_ITEM_STACK
+    val metadata = this["metadata"].asInt()
     return ItemStack(item, 1, metadata)
 }
 
@@ -90,12 +87,12 @@ fun ManaSet.toJsonElement() = jsonObject(
 )
 
 fun JsonWrapper.toManaSet() = ManaSet(
-    this["shine"].toDouble,
-    this["fire"].toDouble,
-    this["wind"].toDouble,
-    this["gaia"].toDouble,
-    this["aqua"].toDouble,
-    this["dark"].toDouble
+    this["shine"].asDouble(),
+    this["fire"].asDouble(),
+    this["wind"].asDouble(),
+    this["gaia"].asDouble(),
+    this["aqua"].asDouble(),
+    this["dark"].asDouble()
 )
 
 class Food(val itemStack: ItemStack, val aura: ManaSet) {
