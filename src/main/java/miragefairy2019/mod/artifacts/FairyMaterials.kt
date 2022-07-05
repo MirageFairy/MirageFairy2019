@@ -59,44 +59,46 @@ enum class FairyMaterialCard(
     val enName: String,
     val jaName: String,
     val jaPoem: String,
-    val fairyMaterial: FairyMaterial
+    initializer: FairyMaterialCard.() -> Unit
 ) {
-    SHINE_MANA_ROD(0, 3, "shine_mana_rod", true, "manaRodShine", "Shine Mana Rod", "月長石の魔導芯棒", "真実の心を伝える", FairyMaterial() ore "mirageFairy2019ManaRodShine"),
-    FIRE_MANA_ROD(1, 3, "fire_mana_rod", true, "manaRodFire", "Fire Mana Rod", "辰砂の魔導芯棒", "閃きの心を伝える", FairyMaterial() ore "mirageFairy2019ManaRodFire"),
-    WIND_MANA_ROD(2, 3, "wind_mana_rod", true, "manaRodWind", "Wind Mana Rod", "蛍石の魔導芯棒", "直感の心を伝える", FairyMaterial() ore "mirageFairy2019ManaRodWind"),
-    GAIA_MANA_ROD(3, 3, "gaia_mana_rod", true, "manaRodGaia", "Gaia Mana Rod", "硫黄の魔導芯棒", "工夫の心を伝える", FairyMaterial() ore "mirageFairy2019ManaRodGaia"),
-    AQUA_MANA_ROD(4, 3, "aqua_mana_rod", true, "manaRodAqua", "Aqua Mana Rod", "燐灰石の魔導芯棒", "優しさの心を伝える", FairyMaterial() ore "mirageFairy2019ManaRodAqua"),
-    DARK_MANA_ROD(5, 3, "dark_mana_rod", true, "manaRodDark", "Dark Mana Rod", "磁鉄鉱の魔導芯棒", "カリスマの心を伝える", FairyMaterial() ore "mirageFairy2019ManaRodDark"),
-    QUARTZ_MANA_ROD(6, 3, "quartz_mana_rod", true, "manaRodQuartz", "Nether Quartz Mana Rod", "ネザークォーツの魔導芯棒", "魔力を導通させる芯の入った棒材", FairyMaterial() ore "mirageFairy2019ManaRodQuartz"),
-    MIRAGE_FLOWER_STICK(7, 1, "mirage_flower_stick", true, "stickMirageFlower", "Mirage Flower Stem", "ミラージュフラワーの茎", "叩くとコツコツと鳴る", FairyMaterial() ore "stickMirageFlower"),
-    MIRAGE_FLOWER_LEAF(8, 0, "mirage_flower_leaf", false, "leafMirageFlower", "Mirage Flower Leaf", "ミラージュフラワーの葉", "指を切らないように！", FairyMaterial() ore "leafMirageFlower"),
-    MIRAGE_FAIRY_WOOD_STICK(9, 4, "mirage_fairy_wood_stick", true, "stickMirageFairyWood", "Fairy Wood Stick", "妖精の木の棒", "吸い込まれるようだ", FairyMaterial() ore "stickMirageFairyWood"),
-    MIRAGIUM_WATER_BOTTLE(10, 0, "miragium_water_bottle", false, "bottleMiragiumWater", "Miragium Water Bottle", "ミラジウムウォーター入り瓶", "ほんのり甘い香り", FairyMaterial() ore "bottleMiragiumWater" ore "container250MiragiumWater" has bottle),
-    MIRAGE_FLOWER_EXTRACT_BOTTLE(11, 2, "mirage_flower_extract_bottle", false, "bottleMirageFlowerExtract", "Mirage Extract Bottle", "ミラージュエキス入り瓶", "飲めそうにはない", FairyMaterial() ore "bottleMirageFlowerExtract" ore "container250MirageFlowerExtract" has bottle),
-    MIRAGE_FLOWER_OIL_BOTTLE(12, 4, "mirage_flower_oil_bottle", false, "bottleMirageFlowerOil", "Mirage Oil Bottle", "ミラージュオイル入り瓶", "皮膚に付くとなかなか落ちない", FairyMaterial() ore "bottleMirageFlowerOil" ore "container250MirageFlowerOil" has bottle),
-    GLASS_MANA_ROD(13, 2, "glass_mana_rod", true, "manaRodGlass", "Glass Mana Rod", "ガラスの魔導芯棒", "絶縁性は石と同じ", FairyMaterial() ore "mirageFairy2019ManaRodGlass"),
-    MIRAGE_FAIRY_LEATHER(14, 4, "mirage_fairy_leather", false, "mirageFairyLeather", "Fairy Leather", "妖精の革", "エーテルグラウンド", FairyMaterial() ore "mirageFairyLeather"),
-    FAIRY_WOOD_RESIN(15, 5, "fairy_wood_resin", false, "fairyWoodResin", "Fairy Wood Resin", "妖精の木の樹液", "くちどけまろやか", FairyMaterial() ore "mirageFairyWoodResin" fuel 1600),
-    SPHERE_BASE(16, 3, "sphere_base", false, "sphereBase", "Sphere Base", "スフィアベース", "前世が見える。              （らしい）", FairyMaterial() ore "mirageFairy2019SphereBase"),
-    FAIRY_SYRUP(17, 5, "fairy_syrup", false, "fairySyrup", "Fairy Syrup", "妖精のシロップ", "爽やかで心が洗われるような「水色」の香り", FairyMaterial() ore "mirageFairySyrup" has bottle),
-    FAIRY_PLASTIC(18, 5, "fairy_plastic", false, "fairyPlastic", "Fairy Plastic", "妖精のプラスチック", "熱可塑性有機高分子", FairyMaterial() ore "gemMirageFairyPlastic"),
-    FAIRY_PLASTIC_WITH_FAIRY(19, 5, "fairy_plastic_with_fairy", false, "fairyPlasticWithFairy", "Fairy Plastic with Fairy", "妖精入り妖精のプラスチック", "何を見てヨシ！って言ったんですか！？", FairyMaterial() ore "gemMirageFairyPlasticWithFairy"),
-    FAIRY_PLASTIC_ROD(20, 5, "fairy_plastic_rod", true, "fairyPlasticRod", "Fairy Plastic Rod", "妖精のプラスチックの棒", "魔導性抜群、耐久性抜群、耐水性最悪", FairyMaterial() ore "rodMirageFairyPlastic"),
-    INDIA_INK(21, 0, "india_ink", false, "indiaInk", "India Ink", "墨汁", "司書精はこれをコーヒーの代わりに飲んだらしい", FairyMaterial() ore "dyeBlack" has bottle),
-    ANCIENT_POTTERY(22, 5, "ancient_pottery", false, "ancientPottery", "Ancient Pottery", "古代の壺", "「煮る」という発明", FairyMaterial() ore "mirageFairyAncientPottery"),
-    ANNIHILATION_POTTERY(23, 5, "annihilation_pottery", false, "annihilationPottery", "Annihilation Pottery", "渇きの壺", "無限の水を吸い込む壺", FairyMaterial() ore "mirageFairyAnnihilationPottery"),
-}
+    SHINE_MANA_ROD(0, 3, "shine_mana_rod", true, "manaRodShine", "Shine Mana Rod", "月長石の魔導芯棒", "真実の心を伝える", { ore("mirageFairy2019ManaRodShine") }),
+    FIRE_MANA_ROD(1, 3, "fire_mana_rod", true, "manaRodFire", "Fire Mana Rod", "辰砂の魔導芯棒", "閃きの心を伝える", { ore("mirageFairy2019ManaRodFire") }),
+    WIND_MANA_ROD(2, 3, "wind_mana_rod", true, "manaRodWind", "Wind Mana Rod", "蛍石の魔導芯棒", "直感の心を伝える", { ore("mirageFairy2019ManaRodWind") }),
+    GAIA_MANA_ROD(3, 3, "gaia_mana_rod", true, "manaRodGaia", "Gaia Mana Rod", "硫黄の魔導芯棒", "工夫の心を伝える", { ore("mirageFairy2019ManaRodGaia") }),
+    AQUA_MANA_ROD(4, 3, "aqua_mana_rod", true, "manaRodAqua", "Aqua Mana Rod", "燐灰石の魔導芯棒", "優しさの心を伝える", { ore("mirageFairy2019ManaRodAqua") }),
+    DARK_MANA_ROD(5, 3, "dark_mana_rod", true, "manaRodDark", "Dark Mana Rod", "磁鉄鉱の魔導芯棒", "カリスマの心を伝える", { ore("mirageFairy2019ManaRodDark") }),
+    QUARTZ_MANA_ROD(6, 3, "quartz_mana_rod", true, "manaRodQuartz", "Nether Quartz Mana Rod", "ネザークォーツの魔導芯棒", "魔力を導通させる芯の入った棒材", { ore("mirageFairy2019ManaRodQuartz") }),
+    MIRAGE_FLOWER_STICK(7, 1, "mirage_flower_stick", true, "stickMirageFlower", "Mirage Flower Stem", "ミラージュフラワーの茎", "叩くとコツコツと鳴る", { ore("stickMirageFlower") }),
+    MIRAGE_FLOWER_LEAF(8, 0, "mirage_flower_leaf", false, "leafMirageFlower", "Mirage Flower Leaf", "ミラージュフラワーの葉", "指を切らないように！", { ore("leafMirageFlower") }),
+    MIRAGE_FAIRY_WOOD_STICK(9, 4, "mirage_fairy_wood_stick", true, "stickMirageFairyWood", "Fairy Wood Stick", "妖精の木の棒", "吸い込まれるようだ", { ore("stickMirageFairyWood") }),
+    MIRAGIUM_WATER_BOTTLE(10, 0, "miragium_water_bottle", false, "bottleMiragiumWater", "Miragium Water Bottle", "ミラジウムウォーター入り瓶", "ほんのり甘い香り", { ore("bottleMiragiumWater").ore("container250MiragiumWater").bottle() }),
+    MIRAGE_FLOWER_EXTRACT_BOTTLE(11, 2, "mirage_flower_extract_bottle", false, "bottleMirageFlowerExtract", "Mirage Extract Bottle", "ミラージュエキス入り瓶", "飲めそうにはない", { ore("bottleMirageFlowerExtract").ore("container250MirageFlowerExtract").bottle() }),
+    MIRAGE_FLOWER_OIL_BOTTLE(12, 4, "mirage_flower_oil_bottle", false, "bottleMirageFlowerOil", "Mirage Oil Bottle", "ミラージュオイル入り瓶", "皮膚に付くとなかなか落ちない", { ore("bottleMirageFlowerOil").ore("container250MirageFlowerOil").bottle() }),
+    GLASS_MANA_ROD(13, 2, "glass_mana_rod", true, "manaRodGlass", "Glass Mana Rod", "ガラスの魔導芯棒", "絶縁性は石と同じ", { ore("mirageFairy2019ManaRodGlass") }),
+    MIRAGE_FAIRY_LEATHER(14, 4, "mirage_fairy_leather", false, "mirageFairyLeather", "Fairy Leather", "妖精の革", "エーテルグラウンド", { ore("mirageFairyLeather") }),
+    FAIRY_WOOD_RESIN(15, 5, "fairy_wood_resin", false, "fairyWoodResin", "Fairy Wood Resin", "妖精の木の樹液", "くちどけまろやか", { ore("mirageFairyWoodResin").fuel(1600) }),
+    SPHERE_BASE(16, 3, "sphere_base", false, "sphereBase", "Sphere Base", "スフィアベース", "前世が見える。              （らしい）", { ore("mirageFairy2019SphereBase") }),
+    FAIRY_SYRUP(17, 5, "fairy_syrup", false, "fairySyrup", "Fairy Syrup", "妖精のシロップ", "爽やかで心が洗われるような「水色」の香り", { ore("mirageFairySyrup").bottle() }),
+    FAIRY_PLASTIC(18, 5, "fairy_plastic", false, "fairyPlastic", "Fairy Plastic", "妖精のプラスチック", "熱可塑性有機高分子", { ore("gemMirageFairyPlastic") }),
+    FAIRY_PLASTIC_WITH_FAIRY(19, 5, "fairy_plastic_with_fairy", false, "fairyPlasticWithFairy", "Fairy Plastic with Fairy", "妖精入り妖精のプラスチック", "何を見てヨシ！って言ったんですか！？", { ore("gemMirageFairyPlasticWithFairy") }),
+    FAIRY_PLASTIC_ROD(20, 5, "fairy_plastic_rod", true, "fairyPlasticRod", "Fairy Plastic Rod", "妖精のプラスチックの棒", "魔導性抜群、耐久性抜群、耐水性最悪", { ore("rodMirageFairyPlastic") }),
+    INDIA_INK(21, 0, "india_ink", false, "indiaInk", "India Ink", "墨汁", "司書精はこれをコーヒーの代わりに飲んだらしい", { ore("dyeBlack").bottle() }),
+    ANCIENT_POTTERY(22, 5, "ancient_pottery", false, "ancientPottery", "Ancient Pottery", "古代の壺", "「煮る」という発明", { ore("mirageFairyAncientPottery") }),
+    ANNIHILATION_POTTERY(23, 5, "annihilation_pottery", false, "annihilationPottery", "Annihilation Pottery", "渇きの壺", "無限の水を吸い込む壺", { ore("mirageFairyAnnihilationPottery") }),
+    ;
 
-class FairyMaterial {
     val oreNames = mutableListOf<String>()
     var burnTime: Int? = null
     var containerItemSupplier: (() -> ItemStack)? = null
+
+    init {
+        initializer()
+    }
 }
 
-private infix fun FairyMaterial.has(block: (FairyMaterial) -> Unit) = this.also { block(this) }
-private infix fun FairyMaterial.ore(oreName: String) = this has { it.oreNames += oreName }
-private infix fun FairyMaterial.fuel(burnTime: Int) = this has { it.burnTime = burnTime }
-private val bottle: (FairyMaterial) -> Unit get() = { it.containerItemSupplier = { ItemStack(Items.GLASS_BOTTLE) } }
+private fun FairyMaterialCard.ore(oreName: String) = apply { this.oreNames += oreName }
+private fun FairyMaterialCard.fuel(burnTime: Int) = apply { this.burnTime = burnTime }
+private fun FairyMaterialCard.bottle() = apply { this.containerItemSupplier = { ItemStack(Items.GLASS_BOTTLE) } }
 
 
 object FairyMaterials {
@@ -109,7 +111,7 @@ object FairyMaterials {
             setCreativeTab { Main.creativeTab }
             FairyMaterialCard.values().forEach { fairyMaterialCard ->
                 itemVariant(fairyMaterialCard.registryName, { ItemVariantFairyMaterial(registryName = it, fairyMaterialCard = fairyMaterialCard) }, fairyMaterialCard.metadata) {
-                    fairyMaterialCard.fairyMaterial.oreNames.forEach {
+                    fairyMaterialCard.oreNames.forEach {
                         addOreName(it)
                     }
                 }
@@ -564,10 +566,10 @@ class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
     }
 
 
-    override fun getItemBurnTime(itemStack: ItemStack) = getVariant(itemStack)?.fairyMaterialCard?.fairyMaterial?.burnTime ?: -1
+    override fun getItemBurnTime(itemStack: ItemStack) = getVariant(itemStack)?.fairyMaterialCard?.burnTime ?: -1
 
 
-    private fun getContainerItemStack(itemStack: ItemStack) = getVariant(itemStack)?.fairyMaterialCard?.fairyMaterial?.containerItemSupplier?.invoke()?.notEmptyOrNull
+    private fun getContainerItemStack(itemStack: ItemStack) = getVariant(itemStack)?.fairyMaterialCard?.containerItemSupplier?.invoke()?.notEmptyOrNull
     override fun hasContainerItem(itemStack: ItemStack) = getContainerItemStack(itemStack) != null
     override fun getContainerItem(itemStack: ItemStack) = getContainerItemStack(itemStack) ?: EMPTY_ITEM_STACK
 }
