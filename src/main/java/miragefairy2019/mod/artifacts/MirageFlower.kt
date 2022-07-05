@@ -290,7 +290,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
         // 種1個は確定でドロップ
         if (isBreaking) drops += ItemStack(MirageFlower.itemMirageFlowerSeeds())
         // サイズが2以上なら確定で茎をドロップ
-        if (isBreaking && getAge(state) >= 2) repeat(random.randomInt(1 + fortune * 0.2)) { drops += FairyMaterials.itemFairyMaterials[EnumFairyMaterial.leafMirageFlower].createItemStack() }
+        if (isBreaking && getAge(state) >= 2) repeat(random.randomInt(1 + fortune * 0.2)) { drops += FairyMaterials.itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_LEAF].createItemStack() }
         // 追加の種
         if (getAge(state) >= 3) repeat(random.randomInt(fortune * 0.01)) { drops += ItemStack(MirageFlower.itemMirageFlowerSeeds()) }
         // クリスタル

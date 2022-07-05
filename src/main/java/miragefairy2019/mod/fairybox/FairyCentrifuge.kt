@@ -79,7 +79,7 @@ import miragefairy2019.libkt.underline
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.artifacts.EnumFairyMaterial
+import miragefairy2019.mod.artifacts.FairyMaterialCard
 import miragefairy2019.mod.artifacts.FairyMaterials
 import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.artifacts.get
@@ -298,7 +298,7 @@ val fairyCentrifugeModule = module {
             input("mirageFairyWoodResin".oreIngredient, 16)
             input("gemCharcoal".oreIngredient, 1)
             input(Items.GLASS_BOTTLE.ingredient, 1)
-            output(FairyMaterials.itemFairyMaterials[EnumFairyMaterial.fairySyrup].createItemStack(), 1.0)
+            output(FairyMaterials.itemFairyMaterials[FairyMaterialCard.FAIRY_SYRUP].createItemStack(), 1.0)
         }
 
         // 樹液＋砂糖→砂糖3
@@ -319,7 +319,7 @@ val fairyCentrifugeModule = module {
             input("mirageFairyWoodResin".oreIngredient, 64)
             input("dustApatite".oreIngredient, 2)
             input(Items.GLASS_BOTTLE.ingredient, 1)
-            output(FairyMaterials.itemFairyMaterials[EnumFairyMaterial.bottleMirageFlowerExtract].createItemStack(), 1.0)
+            output(FairyMaterials.itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_EXTRACT_BOTTLE].createItemStack(), 1.0)
         }
 
         // 樹液64＋辰砂の粉2＋空き瓶→ミラージュオイル入り瓶
@@ -330,7 +330,7 @@ val fairyCentrifugeModule = module {
             input("mirageFairyWoodResin".oreIngredient, 64)
             input("dustCinnabar".oreIngredient, 2)
             input(Items.GLASS_BOTTLE.ingredient, 1)
-            output(FairyMaterials.itemFairyMaterials[EnumFairyMaterial.bottleMirageFlowerOil].createItemStack(), 1.0)
+            output(FairyMaterials.itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_OIL_BOTTLE].createItemStack(), 1.0)
         }
 
         // 樹液64＋骨粉8＋黒曜石→妖精のプラスチック
@@ -341,8 +341,8 @@ val fairyCentrifugeModule = module {
             input("mirageFairyWoodResin".oreIngredient, 64)
             input(Items.DYE.createItemStack(metadata = 15).ingredient, 8)
             input("obsidian".oreIngredient, 1)
-            output(FairyMaterials.itemFairyMaterials[EnumFairyMaterial.fairyPlastic].createItemStack(), 1.0, 1.0)
-            output(FairyMaterials.itemFairyMaterials[EnumFairyMaterial.fairyPlasticWithFairy].createItemStack(), 0.01)
+            output(FairyMaterials.itemFairyMaterials[FairyMaterialCard.FAIRY_PLASTIC].createItemStack(), 1.0, 1.0)
+            output(FairyMaterials.itemFairyMaterials[FairyMaterialCard.FAIRY_PLASTIC_WITH_FAIRY].createItemStack(), 0.01)
         }
 
 
