@@ -9,10 +9,7 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import mirrg.kotlin.hydrogen.castOrNull
 
-class JsonWrapper2(
-    val jsonElement: JsonElement?,
-    val path: String = "$"
-) {
+class JsonWrapper2(val jsonElement: JsonElement?, val path: String = "$") {
 
     val isUndefined get() = jsonElement == null
     val isArray get() = jsonElement?.castOrNull<JsonArray>()?.let { true } ?: false
@@ -25,12 +22,12 @@ class JsonWrapper2(
     private val JsonWrapper2.type
         get() = when {
             isUndefined -> "Undefined"
+            isArray -> "Array"
+            isObject -> "Object"
             isNumber -> "Number"
             isString -> "String"
             isBoolean -> "Boolean"
             isNull -> "Null"
-            isArray -> "Array"
-            isObject -> "Object"
             else -> throw IllegalStateException()
         }
 
