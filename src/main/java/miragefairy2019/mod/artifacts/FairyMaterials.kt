@@ -85,6 +85,60 @@ enum class FairyMaterialCard(
     ANNIHILATION_POTTERY("annihilation_pottery", false, "annihilationPottery", "Annihilation Pottery", "渇きの壺", "無限の水を吸い込む壺"),
 }
 
+@Suppress("EnumEntryName", "unused")
+enum class EnumFairyMaterial(override val fairyMaterial: FairyMaterial) : IFairyMaterialProvider {
+    manaRodShine(FairyMaterial(0, "shine_mana_rod", "manaRodShine", 3) ore "mirageFairy2019ManaRodShine"),
+    manaRodFire(FairyMaterial(1, "fire_mana_rod", "manaRodFire", 3) ore "mirageFairy2019ManaRodFire"),
+    manaRodWind(FairyMaterial(2, "wind_mana_rod", "manaRodWind", 3) ore "mirageFairy2019ManaRodWind"),
+    manaRodGaia(FairyMaterial(3, "gaia_mana_rod", "manaRodGaia", 3) ore "mirageFairy2019ManaRodGaia"),
+    manaRodAqua(FairyMaterial(4, "aqua_mana_rod", "manaRodAqua", 3) ore "mirageFairy2019ManaRodAqua"),
+    manaRodDark(FairyMaterial(5, "dark_mana_rod", "manaRodDark", 3) ore "mirageFairy2019ManaRodDark"),
+    manaRodQuartz(FairyMaterial(6, "quartz_mana_rod", "manaRodQuartz", 3) ore "mirageFairy2019ManaRodQuartz"),
+    stickMirageFlower(FairyMaterial(7, "mirage_flower_stick", "stickMirageFlower", 1) ore "stickMirageFlower"),
+    leafMirageFlower(FairyMaterial(8, "mirage_flower_leaf", "leafMirageFlower", 0) ore "leafMirageFlower"),
+    stickMirageFairyWood(FairyMaterial(9, "mirage_fairy_wood_stick", "stickMirageFairyWood", 4) ore "stickMirageFairyWood"),
+    bottleMiragiumWater(FairyMaterial(10, "miragium_water_bottle", "bottleMiragiumWater", 0) ore "bottleMiragiumWater" ore "container250MiragiumWater" has bottle),
+    bottleMirageFlowerExtract(FairyMaterial(11, "mirage_flower_extract_bottle", "bottleMirageFlowerExtract", 2) ore "bottleMirageFlowerExtract" ore "container250MirageFlowerExtract" has bottle),
+    bottleMirageFlowerOil(FairyMaterial(12, "mirage_flower_oil_bottle", "bottleMirageFlowerOil", 4) ore "bottleMirageFlowerOil" ore "container250MirageFlowerOil" has bottle),
+    manaRodGlass(FairyMaterial(13, "glass_mana_rod", "manaRodGlass", 2) ore "mirageFairy2019ManaRodGlass"),
+    mirageFairyLeather(FairyMaterial(14, "mirage_fairy_leather", "mirageFairyLeather", 4) ore "mirageFairyLeather"),
+    fairyWoodResin(FairyMaterial(15, "fairy_wood_resin", "fairyWoodResin", 5) ore "mirageFairyWoodResin" fuel 1600),
+    sphereBase(FairyMaterial(16, "sphere_base", "sphereBase", 3) ore "mirageFairy2019SphereBase"),
+    fairySyrup(FairyMaterial(17, "fairy_syrup", "fairySyrup", 5) ore "mirageFairySyrup" has bottle),
+    fairyPlastic(FairyMaterial(18, "fairy_plastic", "fairyPlastic", 5) ore "gemMirageFairyPlastic"),
+    fairyPlasticWithFairy(FairyMaterial(19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy", 5) ore "gemMirageFairyPlasticWithFairy"),
+    fairyPlasticRod(FairyMaterial(20, "fairy_plastic_rod", "fairyPlasticRod", 5) ore "rodMirageFairyPlastic"),
+    indiaInk(FairyMaterial(21, "india_ink", "indiaInk", 0) ore "dyeBlack" has bottle),
+    ancientPottery(FairyMaterial(22, "ancient_pottery", "ancientPottery", 5) ore "mirageFairyAncientPottery"),
+    annihilationPottery(FairyMaterial(23, "annihilation_pottery", "annihilationPottery", 5) ore "mirageFairyAnnihilationPottery"),
+}
+
+interface IFairyMaterialProvider {
+    val fairyMaterial: FairyMaterial
+}
+
+class FairyMaterial(
+    val metadata: Int,
+    val registryName: String,
+    val unlocalizedName: String,
+    val tier: Int
+) {
+    val oreNames = mutableListOf<String>()
+    var burnTime: Int? = null
+    var containerItemSupplier: (() -> ItemStack)? = null
+    fun registerItemVariant(itemInitializer: ItemInitializer<ItemMultiFairyMaterial>) = itemInitializer.itemVariant(registryName, {
+        ItemVariantFairyMaterial(
+            registryName = it,
+            unlocalizedName = unlocalizedName,
+            tier = tier,
+            burnTime = burnTime,
+            containerItemSupplier = containerItemSupplier
+        )
+    }, metadata) {
+        oreNames.forEach { addOreName(it) }
+    }
+}
+
 object FairyMaterials {
     lateinit var itemFairyMaterials: () -> ItemMultiFairyMaterial
     val fairyMaterialsModule = module {
@@ -517,62 +571,8 @@ object FairyMaterials {
     }
 }
 
-@Suppress("EnumEntryName", "unused")
-enum class EnumFairyMaterial(override val fairyMaterial: FairyMaterial) : IFairyMaterialProvider {
-    manaRodShine(FairyMaterial(0, "shine_mana_rod", "manaRodShine", 3) ore "mirageFairy2019ManaRodShine"),
-    manaRodFire(FairyMaterial(1, "fire_mana_rod", "manaRodFire", 3) ore "mirageFairy2019ManaRodFire"),
-    manaRodWind(FairyMaterial(2, "wind_mana_rod", "manaRodWind", 3) ore "mirageFairy2019ManaRodWind"),
-    manaRodGaia(FairyMaterial(3, "gaia_mana_rod", "manaRodGaia", 3) ore "mirageFairy2019ManaRodGaia"),
-    manaRodAqua(FairyMaterial(4, "aqua_mana_rod", "manaRodAqua", 3) ore "mirageFairy2019ManaRodAqua"),
-    manaRodDark(FairyMaterial(5, "dark_mana_rod", "manaRodDark", 3) ore "mirageFairy2019ManaRodDark"),
-    manaRodQuartz(FairyMaterial(6, "quartz_mana_rod", "manaRodQuartz", 3) ore "mirageFairy2019ManaRodQuartz"),
-    stickMirageFlower(FairyMaterial(7, "mirage_flower_stick", "stickMirageFlower", 1) ore "stickMirageFlower"),
-    leafMirageFlower(FairyMaterial(8, "mirage_flower_leaf", "leafMirageFlower", 0) ore "leafMirageFlower"),
-    stickMirageFairyWood(FairyMaterial(9, "mirage_fairy_wood_stick", "stickMirageFairyWood", 4) ore "stickMirageFairyWood"),
-    bottleMiragiumWater(FairyMaterial(10, "miragium_water_bottle", "bottleMiragiumWater", 0) ore "bottleMiragiumWater" ore "container250MiragiumWater" has bottle),
-    bottleMirageFlowerExtract(FairyMaterial(11, "mirage_flower_extract_bottle", "bottleMirageFlowerExtract", 2) ore "bottleMirageFlowerExtract" ore "container250MirageFlowerExtract" has bottle),
-    bottleMirageFlowerOil(FairyMaterial(12, "mirage_flower_oil_bottle", "bottleMirageFlowerOil", 4) ore "bottleMirageFlowerOil" ore "container250MirageFlowerOil" has bottle),
-    manaRodGlass(FairyMaterial(13, "glass_mana_rod", "manaRodGlass", 2) ore "mirageFairy2019ManaRodGlass"),
-    mirageFairyLeather(FairyMaterial(14, "mirage_fairy_leather", "mirageFairyLeather", 4) ore "mirageFairyLeather"),
-    fairyWoodResin(FairyMaterial(15, "fairy_wood_resin", "fairyWoodResin", 5) ore "mirageFairyWoodResin" fuel 1600),
-    sphereBase(FairyMaterial(16, "sphere_base", "sphereBase", 3) ore "mirageFairy2019SphereBase"),
-    fairySyrup(FairyMaterial(17, "fairy_syrup", "fairySyrup", 5) ore "mirageFairySyrup" has bottle),
-    fairyPlastic(FairyMaterial(18, "fairy_plastic", "fairyPlastic", 5) ore "gemMirageFairyPlastic"),
-    fairyPlasticWithFairy(FairyMaterial(19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy", 5) ore "gemMirageFairyPlasticWithFairy"),
-    fairyPlasticRod(FairyMaterial(20, "fairy_plastic_rod", "fairyPlasticRod", 5) ore "rodMirageFairyPlastic"),
-    indiaInk(FairyMaterial(21, "india_ink", "indiaInk", 0) ore "dyeBlack" has bottle),
-    ancientPottery(FairyMaterial(22, "ancient_pottery", "ancientPottery", 5) ore "mirageFairyAncientPottery"),
-    annihilationPottery(FairyMaterial(23, "annihilation_pottery", "annihilationPottery", 5) ore "mirageFairyAnnihilationPottery"),
-}
-
 
 // ItemMultiMaterial
-
-interface IFairyMaterialProvider {
-    val fairyMaterial: FairyMaterial
-}
-
-class FairyMaterial(
-    val metadata: Int,
-    val registryName: String,
-    val unlocalizedName: String,
-    val tier: Int
-) {
-    val oreNames = mutableListOf<String>()
-    var burnTime: Int? = null
-    var containerItemSupplier: (() -> ItemStack)? = null
-    fun registerItemVariant(itemInitializer: ItemInitializer<ItemMultiFairyMaterial>) = itemInitializer.itemVariant(registryName, {
-        ItemVariantFairyMaterial(
-            registryName = it,
-            unlocalizedName = unlocalizedName,
-            tier = tier,
-            burnTime = burnTime,
-            containerItemSupplier = containerItemSupplier
-        )
-    }, metadata) {
-        oreNames.forEach { addOreName(it) }
-    }
-}
 
 private infix fun FairyMaterial.has(block: (FairyMaterial) -> Unit) = this.also { block(this) }
 private infix fun FairyMaterial.ore(oreName: String) = this has { it.oreNames += oreName }
