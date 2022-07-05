@@ -588,4 +588,4 @@ class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
     override fun getContainerItem(itemStack: ItemStack) = getContainerItemStack(itemStack) ?: EMPTY_ITEM_STACK
 }
 
-operator fun (() -> ItemMultiFairyMaterial).get(fairyMaterialProvider: FairyMaterialCard) = this().getVariant(fairyMaterialProvider.fairyMaterial.metadata)!!
+operator fun (() -> ItemMultiFairyMaterial).get(fairyMaterialCard: FairyMaterialCard) = this().getVariant(fairyMaterialCard.metadata)!!
