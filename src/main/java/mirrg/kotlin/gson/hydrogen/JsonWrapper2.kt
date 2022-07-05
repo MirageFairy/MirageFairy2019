@@ -19,7 +19,7 @@ class JsonWrapper2(val jsonElement: JsonElement?, val path: String = "$") {
     val isBoolean get() = jsonElement?.castOrNull<JsonPrimitive>()?.isBoolean ?: false
     val isNull get() = jsonElement?.castOrNull<JsonNull>()?.let { true } ?: false
 
-    private val JsonWrapper2.type
+    val type
         get() = when {
             isUndefined -> "Undefined"
             isArray -> "Array"
@@ -35,28 +35,28 @@ class JsonWrapper2(val jsonElement: JsonElement?, val path: String = "$") {
     val orNull get() = if (isUndefined || isNull) null else this
 
 
-    private fun JsonWrapper2.e(expectedType: String): Nothing = throw JsonTypeMismatchException("Expected $expectedType, but is a $type: $path")
+    private fun typeMismatch(expectedType: String): Nothing = throw JsonTypeMismatchException("Expected $expectedType, but is $type: $path")
 
-    fun asUndefined() = if (isUndefined) null else e("Undefined")
-    fun asJsonArray() = jsonElement as? JsonArray ?: e("JsonArray")
-    fun asJsonObject() = jsonElement as? JsonObject ?: e("JsonObject")
-    fun asJsonPrimitive() = jsonElement as? JsonPrimitive ?: e("JsonPrimitive")
-    fun asJsonNull() = jsonElement as? JsonNull ?: e("JsonNull")
+    fun asUndefined() = if (isUndefined) null else typeMismatch("Undefined")
+    fun asJsonArray() = jsonElement as? JsonArray ?: typeMismatch("JsonArray")
+    fun asJsonObject() = jsonElement as? JsonObject ?: typeMismatch("JsonObject")
+    fun asJsonPrimitive() = jsonElement as? JsonPrimitive ?: typeMismatch("JsonPrimitive")
+    fun asJsonNull() = jsonElement as? JsonNull ?: typeMismatch("JsonNull")
 
-    fun asBigDecimal() = if (isNumber) asJsonPrimitive().asBigDecimal!! else e("Number")
-    fun asString() = if (isString) asJsonPrimitive().asString!! else e("String")
-    fun asBoolean() = if (isBoolean) asJsonPrimitive().asBoolean else e("Boolean")
-    fun asNull() = if (isNull) null else e("Null")
+    fun asBigDecimal() = if (isNumber) asJsonPrimitive().asBigDecimal!! else typeMismatch("Number")
+    fun asString() = if (isString) asJsonPrimitive().asString!! else typeMismatch("String")
+    fun asBoolean() = if (isBoolean) asJsonPrimitive().asBoolean else typeMismatch("Boolean")
+    fun asNull() = if (isNull) null else typeMismatch("Null")
 
-    fun asList(): List<JsonWrapper2> = if (isArray) asJsonArray().toList().mapIndexed { index, item -> JsonWrapper2(item, "$path[$index]") } else e("Array")
-    fun asMap(): Map<String, JsonWrapper2> = if (isObject) asJsonObject().entrySet().associate { (key, value) -> key to JsonWrapper2(value, "$path.$key") } else e("Object")
-    fun asInt() = if (isNumber) asJsonPrimitive().asInt else e("Number")
-    fun asLong() = if (isNumber) asJsonPrimitive().asLong else e("Number")
-    fun asDouble() = if (isNumber) asJsonPrimitive().asDouble else e("Number")
+    fun asList(): List<JsonWrapper2> = if (isArray) asJsonArray().toList().mapIndexed { index, item -> JsonWrapper2(item, "$path[$index]") } else typeMismatch("Array")
+    fun asMap(): Map<String, JsonWrapper2> = if (isObject) asJsonObject().entrySet().associate { (key, value) -> key to JsonWrapper2(value, "$path.$key") } else typeMismatch("Object")
+    fun asInt() = if (isNumber) asJsonPrimitive().asInt else typeMismatch("Number")
+    fun asLong() = if (isNumber) asJsonPrimitive().asLong else typeMismatch("Number")
+    fun asDouble() = if (isNumber) asJsonPrimitive().asDouble else typeMismatch("Number")
 
 
-    operator fun get(index: Int) = JsonWrapper2(if (index >= 0 && index < asJsonArray().size()) asJsonArray().get(index) else null, "$path[$index]")
-    operator fun get(key: String) = JsonWrapper2(asJsonObject().get(key), "$path.$key")
+    operator fun get(index: Int) = asJsonArray().let { JsonWrapper2(if (index >= 0 && index < it.size()) it[index] else null, "$path[$index]") }
+    operator fun get(key: String) = JsonWrapper(asJsonObject().get(key), "$path.$key")
 
 
     override fun toString(): String = jsonElement.toString()
