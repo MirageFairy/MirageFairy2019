@@ -84,6 +84,7 @@ object Fairy {
             enJa("itemGroup.mirageFairy2019.fairy.rank", "Fairy: Rank", "妖精：ランク")
         }
 
+
         val rankMax = 7
 
         // アイテム登録
