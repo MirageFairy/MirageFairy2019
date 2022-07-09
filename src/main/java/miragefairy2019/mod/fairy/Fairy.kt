@@ -34,7 +34,7 @@ object Fairy {
         onInitCreativeTab {
             creativeTabFairyMotif = object : CreativeTabs("mirageFairy2019.fairy.motif") {
                 @SideOnly(Side.CLIENT)
-                override fun getTabIconItem() = FairyTypes.instance.IMPERIAL_TOPAZ.createItemStack()
+                override fun getTabIconItem() = FairyCard.IMPERIAL_TOPAZ.createItemStack()
 
                 @SideOnly(Side.CLIENT)
                 override fun displayAllRelevantItems(itemStacks: NonNullList<ItemStack>) {
@@ -51,7 +51,7 @@ object Fairy {
             }.setBackgroundImageName("item_search.png")
             creativeTabFairyRank = object : CreativeTabs("mirageFairy2019.fairy.rank") {
                 @SideOnly(Side.CLIENT)
-                override fun getTabIconItem() = FairyTypes.instance.MOONSTONE.createItemStack()
+                override fun getTabIconItem() = FairyCard.MOONSTONE.createItemStack()
 
                 @SideOnly(Side.CLIENT)
                 override fun displayAllRelevantItems(itemStacks: NonNullList<ItemStack>) {

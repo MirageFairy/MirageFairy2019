@@ -20,7 +20,7 @@ import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.selectFairyLogDrop
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.fairy.FairyTypes
+import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.fairy.createItemStack
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
@@ -235,7 +235,7 @@ class BlockFairyLog : Block(Material.WOOD) {
     override fun getDrops(drops: NonNullList<ItemStack>, blockAccess: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) {
         if (blockAccess !is World) return
         repeat(3 + fortune) {
-            drops.add(selectFairyLogDrop(blockAccess, pos, blockAccess.rand) ?: FairyTypes.instance.AIR.createItemStack())
+            drops.add(selectFairyLogDrop(blockAccess, pos, blockAccess.rand) ?: FairyCard.AIR.createItemStack())
         }
     }
 

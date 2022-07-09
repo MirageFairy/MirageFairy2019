@@ -6,7 +6,6 @@ import miragefairy2019.lib.FairyLogDropRequirementCanRain
 import miragefairy2019.lib.FairyLogDropRequirementHasBiomeType
 import miragefairy2019.lib.FairyLogDropRequirementOverworld
 import miragefairy2019.lib.modinitializer.module
-import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.fairy.createItemStack
 import miragefairy2019.mod.fairyrelation.FairyRelationRegistries
@@ -24,34 +23,31 @@ val fairyLogDropLoaderModule = module {
             FairyLogDropRegistry.fairyLogDropRecipes += recipe
         }
 
-        FairyTypes.instance.run {
+        // 概念系
+        FairyCard.AIR(0.01) { }
+        FairyCard.TIME(0.01) { }
+        FairyCard.GRAVITY(0.01) { }
 
-            // 概念系
-            AIR(0.01) { }
-            TIME(0.01) { }
-            GRAVITY(0.01) { }
+        // 天体系
+        FairyCard.SUN(0.01) { overworld() }
+        FairyCard.MOON(0.01) { overworld() }
+        FairyCard.STAR(0.01) { overworld() }
 
-            // 天体系
-            SUN(0.01) { overworld() }
-            MOON(0.01) { overworld() }
-            STAR(0.01) { overworld() }
+        // 時間帯
+        FairyCard.DAYTIME(0.1) { overworld() }
+        FairyCard.NIGHT(0.1) { overworld() }
+        FairyCard.MORNING(0.1) { overworld() }
+        FairyCard.SUNRISE(0.02) { overworld() }
 
-            // 時間帯
-            DAYTIME(0.1) { overworld() }
-            NIGHT(0.1) { overworld() }
-            MORNING(0.1) { overworld() }
-            SUNRISE(0.02) { overworld() }
+        // 天候
+        FairyCard.FINE(0.1) { overworld() }
+        FairyCard.RAIN(0.1) { overworld().canRain() }
+        FairyCard.THUNDER(0.02) { overworld().canRain() }
 
-            // 天候
-            FINE(0.1) { overworld() }
-            RAIN(0.1) { overworld().canRain() }
-            THUNDER(0.02) { overworld().canRain() }
-
-            // バイオーム
-            FairyRelationRegistries.biomeType.forEach { relation ->
-                relation.fairyCard(relation.relevance * relation.weight) { biome(relation.key) }
-            }
-
+        // バイオーム
+        FairyRelationRegistries.biomeType.forEach { relation ->
+            relation.fairyCard(relation.relevance * relation.weight) { biome(relation.key) }
         }
+
     }
 }

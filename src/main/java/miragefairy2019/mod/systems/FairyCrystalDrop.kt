@@ -9,7 +9,6 @@ import miragefairy2019.libkt.forEach
 import miragefairy2019.libkt.totalWeight
 import miragefairy2019.libkt.unique
 import miragefairy2019.mod.fairy.FairyCard
-import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.createItemStack
 import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.Block
@@ -112,7 +111,7 @@ fun FairyCrystalDropEnvironment.getDropTable(rank: Int, commonBoost: Double, rar
         .unique { a, b -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b) }
     val totalWeight = dropTable.totalWeight
     return if (totalWeight < 1) {// 1に満たない場合はairを入れて詰める
-        dropTable + WeightedItem(FairyTypes.instance.AIR.createItemStack(), 1 - totalWeight)
+        dropTable + WeightedItem(FairyCard.AIR.createItemStack(), 1 - totalWeight)
     } else {
         dropTable
     }

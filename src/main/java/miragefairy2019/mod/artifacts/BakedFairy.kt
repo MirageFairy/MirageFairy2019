@@ -35,7 +35,6 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.FairyCard
-import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.ItemFairy
 import miragefairy2019.mod.fairy.createItemStack
 import mirrg.kotlin.hydrogen.castOrNull
@@ -72,7 +71,7 @@ object BakedFairy {
             val creativeTab = object : CreativeTabs("mirageFairy2019.bakedFairy") {
                 @SideOnly(Side.CLIENT)
                 override fun getTabIconItem() = ItemStack(itemBakedFairy()).also {
-                    ItemBakedFairy.setFairy(it, FairyTypes.instance.MAGENTA_GLAZED_TERRACOTTA.createItemStack())
+                    ItemBakedFairy.setFairy(it, FairyCard.MAGENTA_GLAZED_TERRACOTTA.createItemStack())
                 }
             }
             creativeTabBakedFairy = { creativeTab }
