@@ -17,6 +17,9 @@ class FairyCard(val variants: List<VariantFairy>) {
     companion object {
         fun values() = FairyTypes.instance.variants.map { it.bundle }
     }
+
+    val parentFairy get() = getVariant().type.parentFairy
+    val rare get() = getVariant().rare
 }
 
 fun FairyCard.getVariant(rank: Int = 1) = variants[rank - 1]
