@@ -129,7 +129,7 @@ class DropFixed(
     override val dropCategory: DropCategory,
     override val weight: Double
 ) : IDrop {
-    override fun getItemStack(rank: Int) = bundle.getVariant(rank + 1).createItemStack()
+    override fun getItemStack(rank: Int) = bundle.createItemStack(rank + 1)
 }
 
 
