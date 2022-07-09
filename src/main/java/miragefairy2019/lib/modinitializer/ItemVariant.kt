@@ -16,7 +16,7 @@ fun <I : ItemMulti<V>, V : ItemVariant> ItemInitializer<I>.itemVariant(
     registryName: String,
     creator: (String) -> V,
     metadata: Int,
-    block: (ItemVariantInitializer<I, V>.() -> Unit)? = null
+    initializer: (ItemVariantInitializer<I, V>.() -> Unit)? = null
 ): ItemVariantInitializer<I, V> {
     lateinit var itemVariant: V
     modInitializer.onRegisterItem {
@@ -24,7 +24,7 @@ fun <I : ItemMulti<V>, V : ItemVariant> ItemInitializer<I>.itemVariant(
         item.registerVariant(metadata, itemVariant)
     }
     return ItemVariantInitializer(this, ResourceName(ModMirageFairy2019.MODID, registryName), metadata) { itemVariant }.also {
-        if (block != null) it.block()
+        if (initializer != null) it.initializer()
     }
 }
 

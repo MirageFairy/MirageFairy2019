@@ -16,7 +16,7 @@ class ItemInitializer<out I : Item>(override val modInitializer: ModInitializer,
     val item get() = initializingObject
 }
 
-fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, block: (ItemInitializer<I>.() -> Unit)? = null): ItemInitializer<I> {
+fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, initializer: (ItemInitializer<I>.() -> Unit)? = null): ItemInitializer<I> {
     lateinit var item: I
     onRegisterItem {
         item = creator()
@@ -24,7 +24,7 @@ fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, block
         ForgeRegistries.ITEMS.register(item)
     }
     return ItemInitializer(this, ResourceName(ModMirageFairy2019.MODID, registryName)) { item }.also {
-        if (block != null) it.block()
+        if (initializer != null) it.initializer()
     }
 }
 

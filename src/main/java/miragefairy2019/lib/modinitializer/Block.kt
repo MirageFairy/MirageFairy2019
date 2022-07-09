@@ -10,15 +10,15 @@ class BlockInitializer<out B : Block>(override val modInitializer: ModInitialize
     val block get() = initializingObject
 }
 
-fun <B : Block> ModInitializer.block(creator: () -> B, registryName: String, block: (BlockInitializer<B>.() -> Unit)? = null): BlockInitializer<B> {
-    lateinit var block2: B
+fun <B : Block> ModInitializer.block(creator: () -> B, registryName: String, initializer: (BlockInitializer<B>.() -> Unit)? = null): BlockInitializer<B> {
+    lateinit var block: B
     onRegisterBlock {
-        block2 = creator()
-        block2.setRegistryName(ModMirageFairy2019.MODID, registryName)
-        ForgeRegistries.BLOCKS.register(block2)
+        block = creator()
+        block.setRegistryName(ModMirageFairy2019.MODID, registryName)
+        ForgeRegistries.BLOCKS.register(block)
     }
-    return BlockInitializer(this, ResourceName(ModMirageFairy2019.MODID, registryName)) { block2 }.also {
-        if (block != null) it.block()
+    return BlockInitializer(this, ResourceName(ModMirageFairy2019.MODID, registryName)) { block }.also {
+        if (initializer != null) it.initializer()
     }
 }
 

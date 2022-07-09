@@ -11,16 +11,16 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-fun <T : TileEntity> ModInitializer.tileEntity(registerName: String, clazz: Class<T>) = onRegisterTileEntity {
-    GameRegistry.registerTileEntity(clazz, ResourceName(ModMirageFairy2019.MODID, registerName).resourceLocation)
+fun <T : TileEntity> ModInitializer.tileEntity(registerName: String, tileEntityClass: Class<T>) = onRegisterTileEntity {
+    GameRegistry.registerTileEntity(tileEntityClass, ResourceName(ModMirageFairy2019.MODID, registerName).resourceLocation)
 }
 
-fun <T : TileEntity, R : TileEntitySpecialRenderer<T>> ModInitializer.tileEntityRenderer(classTileEntity: Class<T>, creatorRenderer: () -> R) = onRegisterTileEntityRenderer {
+fun <T : TileEntity, R : TileEntitySpecialRenderer<T>> ModInitializer.tileEntityRenderer(tileEntityClass: Class<T>, rendererCreator: () -> R) = onRegisterTileEntityRenderer {
     if (Main.side.isClient) {
         object : Any() {
             @SideOnly(Side.CLIENT)
             fun run() {
-                ClientRegistry.bindTileEntitySpecialRenderer(classTileEntity, creatorRenderer())
+                ClientRegistry.bindTileEntitySpecialRenderer(tileEntityClass, rendererCreator())
             }
         }.run()
     }
