@@ -72,7 +72,7 @@ object BakedFairy {
             val creativeTab = object : CreativeTabs("mirageFairy2019.bakedFairy") {
                 @SideOnly(Side.CLIENT)
                 override fun getTabIconItem() = ItemStack(itemBakedFairy()).also {
-                    ItemBakedFairy.setFairy(it, FairyTypes.instance.magentaGlazedTerracotta.createItemStack())
+                    ItemBakedFairy.setFairy(it, FairyTypes.instance.MAGENTA_GLAZED_TERRACOTTA.createItemStack())
                 }
             }
             creativeTabBakedFairy = { creativeTab }

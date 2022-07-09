@@ -27,25 +27,25 @@ val fairyLogDropLoaderModule = module {
         FairyTypes.instance.run {
 
             // 概念系
-            air(0.01) { }
-            time(0.01) { }
-            gravity(0.01) { }
+            AIR(0.01) { }
+            TIME(0.01) { }
+            GRAVITY(0.01) { }
 
             // 天体系
-            sun(0.01) { overworld() }
-            moon(0.01) { overworld() }
-            star(0.01) { overworld() }
+            SUN(0.01) { overworld() }
+            MOON(0.01) { overworld() }
+            STAR(0.01) { overworld() }
 
             // 時間帯
-            daytime(0.1) { overworld() }
-            night(0.1) { overworld() }
-            morning(0.1) { overworld() }
-            sunrise(0.02) { overworld() }
+            DAYTIME(0.1) { overworld() }
+            NIGHT(0.1) { overworld() }
+            MORNING(0.1) { overworld() }
+            SUNRISE(0.02) { overworld() }
 
             // 天候
-            fine(0.1) { overworld() }
-            rain(0.1) { overworld().canRain() }
-            thunder(0.02) { overworld().canRain() }
+            FINE(0.1) { overworld() }
+            RAIN(0.1) { overworld().canRain() }
+            THUNDER(0.02) { overworld().canRain() }
 
             // バイオーム
             FairyRelationRegistries.biomeType.forEach { relation ->
