@@ -45,54 +45,55 @@ import net.minecraft.util.ResourceLocation
 import net.minecraftforge.common.BiomeDictionary
 import net.minecraftforge.oredict.OreIngredient
 
-private class RegistrantScope(val fairySupplier: () -> FairyCard, val relevance: Double, val weight: Double)
+private class RegistrantScope(val fairyCard: () -> FairyCard, val relevance: Double, val weight: Double)
 private typealias Registrant = RegistrantScope.() -> Unit
 
 private fun fairy(fairySelector: FairyTypes.() -> FairyCard): () -> FairyCard = { fairySelector(FairyTypes.instance) }
 private fun (() -> FairyCard).register(relevance: Double = 1.0, weight: Double = 1.0, actionGetter: () -> Registrant) = actionGetter()(RegistrantScope(this, relevance, weight))
-private fun <T> FairyRelationRegistry<T>.register(fairySupplier: () -> FairyCard, keySupplier: () -> T, relevance: Double, weight: Double) {
-    entries += FairyRelationEntry(fairySupplier, keySupplier, relevance, weight)
+private fun <T> FairyRelationRegistry<T>.register(fairyCard: () -> FairyCard, keySupplier: () -> T, relevance: Double, weight: Double) {
+    entries += FairyRelationEntry(fairyCard, keySupplier, relevance, weight)
 }
 
+
 private inline fun <reified E : Entity> entity(): Registrant = {
-    FairyRelationRegistries.entity.register(fairySupplier, { { it is E } }, relevance, weight)
+    FairyRelationRegistries.entity.register(fairyCard, { { it is E } }, relevance, weight)
 }
 
 private inline fun <reified E : Entity> entity(crossinline predicate: E.() -> Boolean): Registrant = {
-    FairyRelationRegistries.entity.register(fairySupplier, { { it is E && predicate(it) } }, relevance, weight)
+    FairyRelationRegistries.entity.register(fairyCard, { { it is E && predicate(it) } }, relevance, weight)
 }
 
 private fun biomeType(vararg biomeTypeGetters: () -> BiomeDictionary.Type): Registrant = {
-    biomeTypeGetters.forEach { FairyRelationRegistries.biomeType.register(fairySupplier, it, relevance, weight) }
+    biomeTypeGetters.forEach { FairyRelationRegistries.biomeType.register(fairyCard, it, relevance, weight) }
 }
 
 private fun block(vararg blockGetters: () -> Block): Registrant = {
-    blockGetters.forEach { FairyRelationRegistries.block.register(fairySupplier, it, relevance, weight) }
+    blockGetters.forEach { FairyRelationRegistries.block.register(fairyCard, it, relevance, weight) }
 }
 
 private fun blockState(vararg blockStateGetter: () -> IBlockState): Registrant = {
-    blockStateGetter.forEach { FairyRelationRegistries.blockState.register(fairySupplier, it, relevance, weight) }
+    blockStateGetter.forEach { FairyRelationRegistries.blockState.register(fairyCard, it, relevance, weight) }
 }
 
 private fun item(vararg itemGetter: () -> Item): Registrant = {
-    itemGetter.forEach { FairyRelationRegistries.item.register(fairySupplier, it, relevance, weight) }
+    itemGetter.forEach { FairyRelationRegistries.item.register(fairyCard, it, relevance, weight) }
 }
 
 private fun itemStack(predicate: ItemStack.() -> Boolean): Registrant = {
-    FairyRelationRegistries.itemStack.register(fairySupplier, { { predicate(it) } }, relevance, weight)
+    FairyRelationRegistries.itemStack.register(fairyCard, { { predicate(it) } }, relevance, weight)
 }
 
 private fun ingredient(vararg ingredientGetter: () -> Ingredient): Registrant = {
-    ingredientGetter.forEach { FairyRelationRegistries.ingredient.register(fairySupplier, it, relevance, weight) }
+    ingredientGetter.forEach { FairyRelationRegistries.ingredient.register(fairyCard, it, relevance, weight) }
 }
 
 private fun ore(vararg oreName: String): Registrant = {
-    oreName.forEach { FairyRelationRegistries.ingredient.register(fairySupplier, { OreIngredient(it) }, relevance, weight) }
+    oreName.forEach { FairyRelationRegistries.ingredient.register(fairyCard, { OreIngredient(it) }, relevance, weight) }
 }
 
 private fun material(material: String): Registrant = {
     listOf("ingot" to 1.0, "nugget" to 0.5, "gem" to 1.0, "dust" to 1.0, "dustTiny" to 0.5, "block" to 0.5, "rod" to 0.5, "plate" to 0.5, "ore" to 0.5).forEach {
-        FairyRelationRegistries.ingredient.register(fairySupplier, { OreIngredient("${it.first}$material") }, relevance * it.second, weight)
+        FairyRelationRegistries.ingredient.register(fairyCard, { OreIngredient("${it.first}$material") }, relevance * it.second, weight)
     }
 }
 
