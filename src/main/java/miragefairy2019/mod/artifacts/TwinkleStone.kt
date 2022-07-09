@@ -41,11 +41,11 @@ import net.minecraft.world.World
 
 enum class TwinkleStoneCard(
     val metadata: Int,
-    val registryName: String,
-    val unlocalizedName: String,
-    val oreName: String,
-    val englishName: String,
-    val japaneseName: String,
+    val colorRegistryName: String,
+    val colorUnlocalizedName: String,
+    val colorOreName: String,
+    val colorEnglishName: String,
+    val colorJapaneseName: String,
     val lightValue: Int
 ) : IStringSerializable {
     WHITE(0, "white", "white", "white", "White", "白色", 15),
@@ -66,11 +66,11 @@ enum class TwinkleStoneCard(
     BLACK(15, "black", "black", "black", "Black", "黒色", 3),
     ;
 
-    override fun toString(): String = registryName
-    override fun getName(): String = registryName
+    override fun toString(): String = colorRegistryName
+    override fun getName(): String = colorRegistryName
 }
 
-val TwinkleStoneCard.oreNames get() = listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStone${oreName.toUpperCaseHead()}")
+val TwinkleStoneCard.oreNames get() = listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStone${colorOreName.toUpperCaseHead()}")
 
 
 lateinit var blockTwinkleStone: () -> BlockTwinkleStone
@@ -86,7 +86,7 @@ val twinkleStoneModule = module {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
                 DataBlockStates(
-                    variants = TwinkleStoneCard.values().map { "variant=${it.metadata}" to DataBlockState("miragefairy2019:${it.registryName}_twinkle_stone") }.toMap()
+                    variants = TwinkleStoneCard.values().map { "variant=${it.metadata}" to DataBlockState("miragefairy2019:${it.colorRegistryName}_twinkle_stone") }.toMap()
                 )
             }
         }
@@ -133,33 +133,33 @@ val twinkleStoneModule = module {
     TwinkleStoneCard.values().forEach {
 
         // ブロックモデル生成
-        makeBlockModel("${it.registryName}_twinkle_stone") {
+        makeBlockModel("${it.colorRegistryName}_twinkle_stone") {
             DataModel(
                 parent = "block/cube_all",
                 textures = mapOf(
-                    "all" to "miragefairy2019:blocks/${it.registryName}_twinkle_stone"
+                    "all" to "miragefairy2019:blocks/${it.colorRegistryName}_twinkle_stone"
                 )
             )
         }
 
         // アイテムモデル生成
-        makeItemModel("${it.registryName}_twinkle_stone") { block }
+        makeItemModel("${it.colorRegistryName}_twinkle_stone") { block }
 
         // 翻訳生成
         onMakeLang {
             enJa(
-                "tile.twinkleStone${it.unlocalizedName.toUpperCaseHead()}.name",
-                "${it.englishName} Twinkle Stone",
-                "${it.japaneseName}のトゥインクルストーン"
+                "tile.twinkleStone${it.colorUnlocalizedName.toUpperCaseHead()}.name",
+                "${it.colorEnglishName} Twinkle Stone",
+                "${it.colorJapaneseName}のトゥインクルストーン"
             )
         }
 
         // レシピ生成
-        makeRecipe("${it.registryName}_twinkle_stone") {
+        makeRecipe("${it.colorRegistryName}_twinkle_stone") {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOreIngredient(ore = "mirageFairy2019TwinkleStone"),
-                    DataOreIngredient(ore = "dye${it.unlocalizedName.toUpperCaseHead()}")
+                    DataOreIngredient(ore = "dye${it.colorUnlocalizedName.toUpperCaseHead()}")
                 ),
                 result = DataResult(item = "miragefairy2019:twinkle_stone", data = it.metadata)
             )
@@ -171,8 +171,8 @@ val twinkleStoneModule = module {
 
 class BlockVariantTwinkleStone(val card: TwinkleStoneCard) : IBlockVariant {
     override val metadata: Int get() = card.metadata
-    override val resourceName: String get() = "${card.registryName}_twinkle_stone"
-    override val unlocalizedName: String get() = "twinkleStone${card.unlocalizedName.toUpperCaseHead()}"
+    override val resourceName: String get() = "${card.colorRegistryName}_twinkle_stone"
+    override val unlocalizedName: String get() = "twinkleStone${card.colorUnlocalizedName.toUpperCaseHead()}"
 }
 
 class BlockTwinkleStone : BlockMulti<BlockVariantTwinkleStone>(Material.ROCK, BlockVariantList(TwinkleStoneCard.values().map { BlockVariantTwinkleStone(it) })) {
