@@ -65,13 +65,13 @@ class ItemCrystalSword(
                     if (entries.isEmpty()) return // 関連付けられた妖精が居ない場合は無視
 
                     // relevanceを重みとして抽選
-                    val dropFairy = entries.map { WeightedItem(it.fairyCard, it.relevance) }.getRandomItem(world.rand) ?: return
+                    val dropFairyCard = entries.map { WeightedItem(it.fairyCard, it.relevance) }.getRandomItem(world.rand) ?: return
 
                     // 効果成立
 
                     itemStackFuel.shrink(1) // クリスタル消費
                     if (itemStackFuel.isEmpty) player.sendStatusMessage(textComponent { "フェアリークリスタルを使い切りました！"().red }, true) // TODO translate
-                    dropFairy.createItemStack().drop(world, target.positionVector).setPickupDelay(20) // ドロップする
+                    dropFairyCard.createItemStack().drop(world, target.positionVector).setPickupDelay(20) // ドロップする
                     playSound(world, player, SoundEvents.BLOCK_ANVIL_PLACE, 0.5f, 1.5f) // エフェクト
 
                 }
