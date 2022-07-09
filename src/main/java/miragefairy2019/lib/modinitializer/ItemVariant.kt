@@ -27,10 +27,8 @@ fun <I : ItemMulti<V>, V : ItemVariant> ItemInitializer<I>.itemVariant(
     }
 }
 
-fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.addOreName(oreName: String) = itemInitializer.modInitializer.onCreateItemStack { itemVariant.addOreName(oreName) }
-
-// TODO remove
-@Deprecated("removing")
-fun <V : ItemVariant> V.addOreName(oreName: String) = OreDictionary.registerOre(oreName, ItemStack(item, 1, metadata))
+fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.addOreName(oreName: String) = itemInitializer.modInitializer.onCreateItemStack {
+    OreDictionary.registerOre(oreName, ItemStack(itemVariant.item, 1, metadata))
+}
 
 fun <I : ItemMulti<V>, V : ItemVariant> ItemVariantInitializer<I, V>.createItemStack(amount: Int = 1): ItemStack = itemVariant.createItemStack(amount)
