@@ -77,6 +77,8 @@ object Fairy {
                 override fun hasSearchBar() = true
             }.setBackgroundImageName("item_search.png")
         }
+
+        // 翻訳生成
         onMakeLang {
             enJa("itemGroup.mirageFairy2019.fairy.motif", "Fairy: Motif", "妖精：モチーフ")
             enJa("itemGroup.mirageFairy2019.fairy.rank", "Fairy: Rank", "妖精：ランク")
@@ -84,7 +86,7 @@ object Fairy {
 
         val rankMax = 7
 
-        // アイテム
+        // アイテム登録
         listItemFairy = (1..rankMax).map { rank ->
             val dressColor = when (rank) {
                 1 -> 0xFF8888
@@ -126,6 +128,8 @@ object Fairy {
                 registerItemColorHandler()
             }
         }
+
+        // アイテムモデル生成
         makeItemModel("fairy") {
             DataModel(
                 parent = "item/generated",
@@ -138,6 +142,8 @@ object Fairy {
                 )
             )
         }
+
+        // 翻訳生成
         onMakeLang {
             enJa("item.mirageFairyR1.name", "Mirage Fairy", "妖精")
             enJa("item.mirageFairyR1.format", "%s", "%s")
@@ -160,7 +166,7 @@ object Fairy {
 
             // 鉱石辞書
             onCreateItemStack {
-                listItemFairy.forEachIndexed { i, _ ->
+                listItemFairy.indices.forEach { i ->
                     val rank = i + 1
 
                     // 品種別
