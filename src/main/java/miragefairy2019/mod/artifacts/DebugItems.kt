@@ -106,7 +106,7 @@ class ItemDebugFairyList : ItemDebug() {
 
         writeAction(player, "fairyList.txt", FairyCard.values().joinToString("") { fairyCard ->
             val variantRank1 = fairyCard.getVariant(1)
-            val variantRank2 = fairyCard.getVariant(1 + 1)
+            val variantRank2 = fairyCard.getVariant(2)
             val fairyTypeRank1 = variantRank1.type
             val fairyTypeRank2 = variantRank2.type
             fun color(selector: ColorSet.() -> Int) = variantRank1.colorSet.selector().toRgb().hex
@@ -114,7 +114,7 @@ class ItemDebugFairyList : ItemDebug() {
             "|${
                 listOf(
                     listOf(
-                        fairyCard.getVariant().id,
+                        fairyCard.id,
                         "&bold(){!FairyImage(#${color { skin }},#${color { bright }},#${color { dark }},#${color { hair }})}",
                         "CENTER:$motif&br()${enUs["mirageFairy2019.fairy.$motif.name"]!!}",
                         "CENTER:${jaJp["mirageFairy2019.fairy.$motif.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
