@@ -54,9 +54,6 @@ fun <I : Item> I.setCustomModelResourceLocation(
     }
 }
 
-
-fun <I : Item> ItemInitializer<I>.addOreName(oreName: String, metadata: Int = 0) = modInitializer.onCreateItemStack { item.addOreName(oreName, metadata) }
-
-// TODO remove
-@Deprecated("removing")
-fun <I : Item> I.addOreName(oreName: String, metadata: Int = 0) = OreDictionary.registerOre(oreName, ItemStack(this, 1, metadata))
+fun <I : Item> ItemInitializer<I>.addOreName(oreName: String, metadata: Int = 0) = modInitializer.onCreateItemStack {
+    OreDictionary.registerOre(oreName, ItemStack(item, 1, metadata))
+}
