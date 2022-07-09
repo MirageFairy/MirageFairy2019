@@ -74,11 +74,6 @@ object Fairy {
 
         val rankMax = 7
 
-        // モチーフ
-        onRegisterItem {
-            FairyTypes.instance = FairyTypes(rankMax)
-        }
-
         // アイテム
         listItemFairy = (1..rankMax).map { rank ->
             val dressColor = when (rank) {
@@ -95,7 +90,7 @@ object Fairy {
                 setUnlocalizedName("mirageFairyR$rank")
                 onRegisterItem {
                     FairyCard.values().forEach { fairyCard ->
-                        item.registerVariant(fairyCard.getVariant().id, fairyCard.getVariant(rank - 1 + 1))
+                        item.registerVariant(fairyCard.id, fairyCard.id(rank, fairyCard))
                     }
                     if (side.isClient) {
                         item.variants.forEach { variant ->
