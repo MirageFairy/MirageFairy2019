@@ -18,12 +18,12 @@ val fairyDilutionRecipeModule = module {
             val outputFairyCard = inputFairyCard.parentFairy() ?: return@forEach
             val rankDiff = (outputFairyCard.rare - inputFairyCard.rare) atLeast 0 // 必要凝縮回数
 
-            val inputMotif = inputFairyCard.getVariant(1).type.motif ?: return@forEach
+            val inputMotif = inputFairyCard.getVariant().type.motif ?: return@forEach
 
             GameRegistry.addShapelessRecipe(
                 ResourceLocation("${inputMotif.resourceDomain}:fairy_dilution/${inputMotif.resourcePath}"),
                 null,
-                outputFairyCard.getVariant(1).createItemStack(),
+                outputFairyCard.createItemStack(1),
                 WandType.SUMMONING.ingredient,
                 OreIngredient("container1000MirageFlowerExtract"),
                 inputFairyCard.createItemStack(1 + rankDiff).ingredient // レベルが上昇するような希釈はできない
