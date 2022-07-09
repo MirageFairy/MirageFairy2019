@@ -34,6 +34,7 @@ import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.ItemFairy
 import miragefairy2019.mod.fairy.createItemStack
@@ -179,9 +180,9 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
     override fun getSubItems(tab: CreativeTabs, items: NonNullList<ItemStack>) {
         if (!isInCreativeTab(tab)) return
 
-        FairyTypes.instance.variants.forEach { (_, fairy) ->
+        FairyCard.values().forEach { fairyCard ->
             items += ItemStack(this).also {
-                setFairy(it, fairy.createItemStack())
+                setFairy(it, fairyCard.createItemStack())
             }
         }
 

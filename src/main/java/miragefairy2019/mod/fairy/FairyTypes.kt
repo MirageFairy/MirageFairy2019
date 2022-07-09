@@ -13,7 +13,11 @@ import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.util.ResourceLocation
 import kotlin.math.pow
 
-class FairyCard(val variants: List<VariantFairy>)
+class FairyCard(val variants: List<VariantFairy>) {
+    companion object {
+        fun values() = FairyTypes.instance.variants.map { it.bundle }
+    }
+}
 
 fun FairyCard.getVariant(rank: Int = 1) = variants[rank - 1]
 fun FairyCard.createItemStack(rank: Int = 1, count: Int = 1) = getVariant(rank).createItemStack(count)

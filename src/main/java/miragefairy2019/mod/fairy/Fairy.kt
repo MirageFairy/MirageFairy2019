@@ -39,9 +39,9 @@ object Fairy {
                 @SideOnly(Side.CLIENT)
                 override fun displayAllRelevantItems(itemStacks: NonNullList<ItemStack>) {
                     listItemFairy.forEachIndexed { i, _ ->
-                        FairyTypes.instance.variants.forEach { variant ->
-                            if (variant.bundle.getVariant().canSeeOnCreativeTab) {
-                                itemStacks.add(variant.bundle.getVariant(i + 1).createItemStack())
+                        FairyCard.values().forEach { fairyCard ->
+                            if (fairyCard.getVariant().canSeeOnCreativeTab) {
+                                itemStacks.add(fairyCard.getVariant(i + 1).createItemStack())
                             }
                         }
                     }
@@ -55,10 +55,10 @@ object Fairy {
 
                 @SideOnly(Side.CLIENT)
                 override fun displayAllRelevantItems(itemStacks: NonNullList<ItemStack>) {
-                    FairyTypes.instance.variants.forEach { variant ->
-                        if (variant.bundle.getVariant().canSeeOnCreativeTab) {
+                    FairyCard.values().forEach { fairyCard ->
+                        if (fairyCard.getVariant().canSeeOnCreativeTab) {
                             listItemFairy.forEachIndexed { i, _ ->
-                                itemStacks.add(variant.bundle.getVariant(i + 1).createItemStack())
+                                itemStacks.add(fairyCard.getVariant(i + 1).createItemStack())
                             }
                         }
                     }
@@ -94,8 +94,8 @@ object Fairy {
             item({ ItemFairy(dressColor) }, if (rank == 1) "mirage_fairy" else "mirage_fairy_r$rank") {
                 setUnlocalizedName("mirageFairyR$rank")
                 onRegisterItem {
-                    FairyTypes.instance.variants.forEach { variant ->
-                        item.registerVariant(variant.id, variant.bundle.getVariant(rank - 1 + 1))
+                    FairyCard.values().forEach { fairyCard ->
+                        item.registerVariant(fairyCard.getVariant().id, fairyCard.getVariant(rank - 1 + 1))
                     }
                     if (side.isClient) {
                         item.variants.forEach { variant ->
@@ -137,16 +137,16 @@ object Fairy {
 
         // 鉱石辞書
         onCreateItemStack {
-            FairyTypes.instance.variants.forEach { variant ->
+            FairyCard.values().forEach { fairyCard ->
                 listItemFairy.forEachIndexed { i, _ ->
 
                     // 品種別
-                    OreDictionary.registerOre("mirageFairy2019Fairy${variant.bundle.getVariant(i + 1).type.motif!!.resourcePath.toUpperCamelCase()}Rank${i + 1}", variant.bundle.getVariant(i + 1).createItemStack())
+                    OreDictionary.registerOre("mirageFairy2019Fairy${fairyCard.getVariant(i + 1).type.motif!!.resourcePath.toUpperCamelCase()}Rank${i + 1}", fairyCard.getVariant(i + 1).createItemStack())
 
                     // エルグ別
-                    variant.bundle.getVariant(i + 1).type.ergSet.entries.forEach {
+                    fairyCard.getVariant(i + 1).type.ergSet.entries.forEach {
                         if (it.second >= 10) {
-                            OreDictionary.registerOre("mirageFairy2019FairyAbility${it.first.toString().toUpperCaseHead()}", variant.bundle.getVariant(i + 1).createItemStack())
+                            OreDictionary.registerOre("mirageFairy2019FairyAbility${it.first.toString().toUpperCaseHead()}", fairyCard.getVariant(i + 1).createItemStack())
                         }
                     }
 
@@ -156,30 +156,30 @@ object Fairy {
 
         // 凝縮・分散レシピ
         onAddRecipe {
-            FairyTypes.instance.variants.forEach { variant ->
+            FairyCard.values().forEach { fairyCard ->
                 (0 until listItemFairy.size - 1).forEach { i ->
 
                     // 凝縮
                     GameRegistry.addShapelessRecipe(
-                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.bundle.getVariant(i + 1).type.motif!!.resourcePath}"),
-                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${variant.bundle.getVariant(i + 1).type.motif!!.resourcePath}"),
-                        variant.bundle.getVariant(i + 1 + 1).createItemStack(),
-                        Ingredient.fromStacks(variant.bundle.getVariant(i + 1).createItemStack()),
-                        Ingredient.fromStacks(variant.bundle.getVariant(i + 1).createItemStack()),
-                        Ingredient.fromStacks(variant.bundle.getVariant(i + 1).createItemStack()),
-                        Ingredient.fromStacks(variant.bundle.getVariant(i + 1).createItemStack()),
-                        Ingredient.fromStacks(variant.bundle.getVariant(i + 1).createItemStack()),
-                        Ingredient.fromStacks(variant.bundle.getVariant(i + 1).createItemStack()),
-                        Ingredient.fromStacks(variant.bundle.getVariant(i + 1).createItemStack()),
-                        Ingredient.fromStacks(variant.bundle.getVariant(i + 1).createItemStack())
+                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${fairyCard.getVariant(i + 1).type.motif!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${fairyCard.getVariant(i + 1).type.motif!!.resourcePath}"),
+                        fairyCard.getVariant(i + 1 + 1).createItemStack(),
+                        Ingredient.fromStacks(fairyCard.getVariant(i + 1).createItemStack()),
+                        Ingredient.fromStacks(fairyCard.getVariant(i + 1).createItemStack()),
+                        Ingredient.fromStacks(fairyCard.getVariant(i + 1).createItemStack()),
+                        Ingredient.fromStacks(fairyCard.getVariant(i + 1).createItemStack()),
+                        Ingredient.fromStacks(fairyCard.getVariant(i + 1).createItemStack()),
+                        Ingredient.fromStacks(fairyCard.getVariant(i + 1).createItemStack()),
+                        Ingredient.fromStacks(fairyCard.getVariant(i + 1).createItemStack()),
+                        Ingredient.fromStacks(fairyCard.getVariant(i + 1).createItemStack())
                     )
 
                     // 分解
                     GameRegistry.addShapelessRecipe(
-                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.bundle.getVariant(i + 1).type.motif!!.resourcePath}"),
-                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${variant.bundle.getVariant(i + 1).type.motif!!.resourcePath}"),
-                        variant.bundle.getVariant(i + 1).createItemStack(8),
-                        Ingredient.fromStacks(variant.bundle.getVariant(i + 1 + 1).createItemStack())
+                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${fairyCard.getVariant(i + 1).type.motif!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${fairyCard.getVariant(i + 1).type.motif!!.resourcePath}"),
+                        fairyCard.getVariant(i + 1).createItemStack(8),
+                        Ingredient.fromStacks(fairyCard.getVariant(i + 1 + 1).createItemStack())
                     )
 
                 }

@@ -21,7 +21,7 @@ import miragefairy2019.libkt.toRgb
 import miragefairy2019.libkt.yellow
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairy.ColorSet
-import miragefairy2019.mod.fairy.FairyTypes
+import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.oreseed.ApiOreSeedDrop
 import miragefairy2019.mod.oreseed.EnumOreSeedType
@@ -104,9 +104,9 @@ class ItemDebugFairyList : ItemDebug() {
         val enUs = getLang("en_us")
         val jaJp = getLang("ja_jp")
 
-        writeAction(player, "fairyList.txt", FairyTypes.instance.variants.joinToString("") { (id, bundle) ->
-            val variantRank1 = bundle.getVariant(1)
-            val variantRank2 = bundle.getVariant(1 + 1)
+        writeAction(player, "fairyList.txt", FairyCard.values().joinToString("") { fairyCard ->
+            val variantRank1 = fairyCard.getVariant(1)
+            val variantRank2 = fairyCard.getVariant(1 + 1)
             val fairyTypeRank1 = variantRank1.type
             val fairyTypeRank2 = variantRank2.type
             fun color(selector: ColorSet.() -> Int) = variantRank1.colorSet.selector().toRgb().hex
@@ -114,7 +114,7 @@ class ItemDebugFairyList : ItemDebug() {
             "|${
                 listOf(
                     listOf(
-                        id,
+                        fairyCard.getVariant().id,
                         "&bold(){!FairyImage(#${color { skin }},#${color { bright }},#${color { dark }},#${color { hair }})}",
                         "CENTER:$motif&br()${enUs["mirageFairy2019.fairy.$motif.name"]!!}",
                         "CENTER:${jaJp["mirageFairy2019.fairy.$motif.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
@@ -264,7 +264,7 @@ class ItemDebugMirageFlowerGrowthRateList : ItemDebug() {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
         player.sendStatusMessage(textComponent { "===== Mirage Flower Grow Rate Table ====="() }, false)
-        FairyTypes.instance.variants.map { it.bundle.getVariant().type }.map { Pair(it, getGrowthRateInFloor(it)) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
+        FairyCard.values().map { it.getVariant().type }.map { Pair(it, getGrowthRateInFloor(it)) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
             player.sendStatusMessage(textComponent { ((it.second * 100) formatAs "%7.2f%%  ")() + it.first.displayName() }, false)
         }
         player.sendStatusMessage(textComponent { "===================="() }, false)

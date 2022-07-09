@@ -4,7 +4,7 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredient
-import miragefairy2019.mod.fairy.FairyTypes
+import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.fairy.createItemStack
 import miragefairy2019.mod.fairy.getVariant
 import mirrg.kotlin.hydrogen.atLeast
@@ -14,10 +14,10 @@ import net.minecraftforge.oredict.OreIngredient
 
 val fairyDilutionRecipeModule = module {
     onAddRecipe {
-        FairyTypes.instance.variants.forEach { fairyVariant ->
-            val inputFairyBundle = fairyVariant.bundle
+        FairyCard.values().forEach { fairyCard ->
+            val inputFairyBundle = fairyCard
             val inputFairy = inputFairyBundle.getVariant(1)
-            val outputFairyBundle = fairyVariant.bundle.getVariant(1).type.parentFairy() ?: return@forEach
+            val outputFairyBundle = fairyCard.getVariant(1).type.parentFairy() ?: return@forEach
             val outputFairy = outputFairyBundle.getVariant(1)
             val rankDiff = (outputFairy.rare - inputFairy.rare) atLeast 0 // 必要凝縮回数
 
