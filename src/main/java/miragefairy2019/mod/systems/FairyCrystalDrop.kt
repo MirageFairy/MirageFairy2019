@@ -126,11 +126,11 @@ interface IDrop {
 }
 
 class DropFixed(
-    val bundle: FairyCard,
+    val fairyCard: FairyCard,
     override val dropCategory: DropCategory,
     override val weight: Double
 ) : IDrop {
-    override fun getItemStack(rank: Int) = bundle.createItemStack(rank)
+    override fun getItemStack(rank: Int) = fairyCard.createItemStack(rank)
 }
 
 
