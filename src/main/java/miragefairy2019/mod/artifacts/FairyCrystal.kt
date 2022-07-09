@@ -111,37 +111,37 @@ object FairyCrystal {
             }
 
             variantFairyCrystal = fairyCrystal(
-                0, { VariantFairyCrystal(it, 0, DropCategory.RARE, 1.0) },
+                0, { VariantFairyCrystal(it, 1, DropCategory.RARE, 1.0) },
                 "fairy_crystal", "fairyCrystal", "mirageFairyCrystal",
                 "Fairy Crystal", "フェアリークリスタル",
                 null
             )
             variantFairyCrystalChristmas = fairyCrystal(
-                1, { VariantFairyCrystal(it, 0, DropCategory.RARE, 1.0) },
+                1, { VariantFairyCrystal(it, 1, DropCategory.RARE, 1.0) },
                 "christmas_fairy_crystal", "fairyCrystalChristmas", "mirageFairyCrystalChristmas",
                 "Christmas Fairy Crystal", "聖夜のフェアリークリスタル",
                 null
             )
             variantFairyCrystalPure = fairyCrystal(
-                2, { VariantFairyCrystal(it, 1, DropCategory.RARE, 2.0) },
+                2, { VariantFairyCrystal(it, 2, DropCategory.RARE, 2.0) },
                 "pure_fairy_crystal", "fairyCrystalPure", "mirageFairyCrystalPure",
                 "Pure Fairy Crystal", "高純度フェアリークリスタル",
                 RecipeParameter("blockMirageFairyCrystal", WandType.POLISHING)
             )
             variantFairyCrystalVeryPure = fairyCrystal(
-                3, { VariantFairyCrystal(it, 2, DropCategory.RARE, 4.0) },
+                3, { VariantFairyCrystal(it, 3, DropCategory.RARE, 4.0) },
                 "very_pure_fairy_crystal", "fairyCrystalVeryPure", "mirageFairyCrystalVeryPure",
                 "Very Pure Fairy Crystal", "超高純度フェアリークリスタル",
                 RecipeParameter("blockMirageFairyCrystalPure", WandType.FUSION)
             )
             variantFairyCrystalWild = fairyCrystal(
-                4, { VariantFairyCrystal(it, 1, DropCategory.COMMON, 2.0) },
+                4, { VariantFairyCrystal(it, 2, DropCategory.COMMON, 2.0) },
                 "wild_fairy_crystal", "fairyCrystalWild", "mirageFairyCrystalWild",
                 "Wild Fairy Crystal", "野蛮なフェアリークリスタル",
                 RecipeParameter("blockMirageFairyCrystal", WandType.MELTING)
             )
             variantFairyCrystalVeryWild = fairyCrystal(
-                5, { VariantFairyCrystal(it, 2, DropCategory.COMMON, 4.0) },
+                5, { VariantFairyCrystal(it, 3, DropCategory.COMMON, 4.0) },
                 "very_wild_fairy_crystal", "fairyCrystalVeryWild", "mirageFairyCrystalVeryWild",
                 "Very Wild Fairy Crystal", "超野蛮なフェアリークリスタル",
                 RecipeParameter("blockMirageFairyCrystalWild", WandType.DISTORTION)
@@ -251,7 +251,7 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
         val mastery = Mastery.fairySummoning
         val skillContainer = ApiSkill.skillManager.getClientSkillContainer()
         tooltip += formattedText { ("スキル: "() + mastery.displayName() + " (${skillContainer.getSkillLevel(mastery)})"()).gold } // TODO translate
-        tooltip += formattedText { "ランク: ${variant.dropRank + 1}"().blue } // TODO translate
+        tooltip += formattedText { "ランク: ${variant.dropRank}"().blue } // TODO translate
         tooltip += formattedText { "コモン判定ブースト: ${variant.getRateBoost(DropCategory.COMMON, skillContainer) * 100.0 formatAs "%.2f%%"}"().blue } // TODO translate
         tooltip += formattedText { "レア判定ブースト: ${variant.getRateBoost(DropCategory.RARE, skillContainer) * 100.0 formatAs "%.2f%%"}"().blue } // TODO translate
     }
