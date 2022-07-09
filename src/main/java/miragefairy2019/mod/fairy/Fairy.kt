@@ -155,9 +155,11 @@ object Fairy {
             enJa("item.mirageFairyR7.format", "%s VII", "%s VII")
         }
 
-        // 鉱石辞書
-        onCreateItemStack {
-            FairyCard.values().forEach { fairyCard ->
+        // 妖精ごと
+        FairyCard.values().forEach { fairyCard ->
+
+            // 鉱石辞書
+            onCreateItemStack {
                 listItemFairy.forEachIndexed { i, _ ->
                     val rank = i + 1
 
@@ -173,11 +175,9 @@ object Fairy {
 
                 }
             }
-        }
 
-        // 凝縮・分散レシピ
-        onAddRecipe {
-            FairyCard.values().forEach { fairyCard ->
+            // 凝縮・分散レシピ
+            onAddRecipe {
                 (0 until listItemFairy.size - 1).forEach { i ->
                     val rank = i + 1
 
@@ -206,13 +206,12 @@ object Fairy {
 
                 }
             }
-        }
 
-        // 翻訳生成
-        onMakeLang {
-            FairyCard.values().forEach { fairyCard ->
+            // 翻訳生成
+            onMakeLang {
                 enJa("mirageFairy2019.fairy.${fairyCard.unlocalizedName}.name", fairyCard.englishName, fairyCard.japaneseName)
             }
+
         }
 
     }
