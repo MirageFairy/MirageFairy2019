@@ -109,7 +109,6 @@ object Fairy {
                         val ergSetReal = ErgSet(fairyCard.ergSet.entries.associate { (erg, value) -> erg to value * rateRare })
                         val type = FairyType(
                             ResourceLocation(ModMirageFairy2019.MODID, fairyCard.registryName),
-                            fairyCard.parentFairy,
                             textComponent { translate("mirageFairy2019.fairy.${fairyCard.unlocalizedName}.name") },
                             fairyCard.colorSet.hair,
                             fairyCard.cost.toDouble(),
