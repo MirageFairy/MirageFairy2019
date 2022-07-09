@@ -10,6 +10,7 @@ import miragefairy2019.libkt.totalWeight
 import miragefairy2019.libkt.unique
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.FairyCard
+import miragefairy2019.mod.fairy.createItemStack
 import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState

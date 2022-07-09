@@ -26,6 +26,7 @@ import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch

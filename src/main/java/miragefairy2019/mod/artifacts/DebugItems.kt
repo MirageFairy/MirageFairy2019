@@ -22,6 +22,7 @@ import miragefairy2019.libkt.yellow
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairy.ColorSet
 import miragefairy2019.mod.fairy.FairyTypes
+import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.oreseed.ApiOreSeedDrop
 import miragefairy2019.mod.oreseed.EnumOreSeedType
 import miragefairy2019.mod.oreseed.EnumVariantOreSeed

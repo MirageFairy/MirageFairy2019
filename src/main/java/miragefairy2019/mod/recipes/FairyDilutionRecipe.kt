@@ -5,6 +5,8 @@ import miragefairy2019.libkt.ingredient
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredient
 import miragefairy2019.mod.fairy.FairyTypes
+import miragefairy2019.mod.fairy.createItemStack
+import miragefairy2019.mod.fairy.getVariant
 import mirrg.kotlin.hydrogen.atLeast
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry

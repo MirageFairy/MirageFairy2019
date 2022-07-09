@@ -7,6 +7,7 @@ import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
+import miragefairy2019.mod.fairy.createItemStack
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch

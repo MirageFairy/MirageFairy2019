@@ -8,6 +8,7 @@ import miragefairy2019.lib.FairyLogDropRequirementOverworld
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.FairyCard
+import miragefairy2019.mod.fairy.createItemStack
 import miragefairy2019.mod.fairyrelation.FairyRelationRegistries
 import net.minecraftforge.common.BiomeDictionary
 

@@ -21,6 +21,7 @@ import miragefairy2019.lib.selectFairyLogDrop
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairy.FairyTypes
+import miragefairy2019.mod.fairy.createItemStack
 import net.minecraft.block.Block
 import net.minecraft.block.BlockNewLog
 import net.minecraft.block.BlockOldLog

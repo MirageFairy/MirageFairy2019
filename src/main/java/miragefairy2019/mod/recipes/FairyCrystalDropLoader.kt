@@ -3,6 +3,7 @@ package miragefairy2019.mod.recipes
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.FairyCard
+import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.fairyrelation.FairyRelationEntry
 import miragefairy2019.mod.fairyrelation.FairyRelationRegistries
 import miragefairy2019.mod.systems.DropCategory
