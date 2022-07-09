@@ -48,7 +48,7 @@ val fairyLogDropLoaderModule = module {
 
             // バイオーム
             FairyRelationRegistries.biomeType.forEach { relation ->
-                relation.fairy(relation.relevance * relation.weight) { biome(relation.key) }
+                relation.fairyCard(relation.relevance * relation.weight) { biome(relation.key) }
             }
 
         }

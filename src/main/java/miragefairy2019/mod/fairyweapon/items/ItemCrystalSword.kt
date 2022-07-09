@@ -65,7 +65,7 @@ class ItemCrystalSword(
                     if (entries.isEmpty()) return // 関連付けられた妖精が居ない場合は無視
 
                     // relevanceを重みとして抽選
-                    val dropFairy = entries.map { WeightedItem(it.fairy, it.relevance) }.getRandomItem(world.rand) ?: return
+                    val dropFairy = entries.map { WeightedItem(it.fairyCard, it.relevance) }.getRandomItem(world.rand) ?: return
 
                     // 効果成立
 

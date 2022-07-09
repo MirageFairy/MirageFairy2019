@@ -17,7 +17,7 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 import kotlin.math.pow
 
-private val FairyRelationEntry<*>.fairyCrystalBaseDropWeight get() = 0.1 * 0.1.pow((fairy.getVariant().rare - 1.0) / 2.0) * weight
+private val FairyRelationEntry<*>.fairyCrystalBaseDropWeight get() = 0.1 * 0.1.pow((fairyCard.getVariant().rare - 1.0) / 2.0) * weight
 
 val fairyCrystalDropLoaderModule = module {
     onCreateItemStack {
@@ -166,25 +166,25 @@ val fairyCrystalDropLoaderModule = module {
 
         // 妖精関係レジストリー
         FairyRelationRegistries.entity.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { entities.any { relation.key(it) } })
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { entities.any { relation.key(it) } })
         }
         FairyRelationRegistries.biomeType.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in biomeTypes })
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in biomeTypes })
         }
         FairyRelationRegistries.block.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in blocks })
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in blocks })
         }
         FairyRelationRegistries.blockState.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in blockStates })
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in blockStates })
         }
         FairyRelationRegistries.item.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in items })
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in items })
         }
         FairyRelationRegistries.itemStack.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { itemStacks.any { relation.key(it) } })
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { itemStacks.any { relation.key(it) } })
         }
         FairyRelationRegistries.ingredient.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairy, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { itemStacks.any { relation.key.test(it) } })
+            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { itemStacks.any { relation.key.test(it) } })
         }
 
     }

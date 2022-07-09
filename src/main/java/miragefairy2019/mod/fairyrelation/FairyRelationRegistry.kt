@@ -49,6 +49,6 @@ class FairyRelationEntry<out T>(
      */
     val weight: Double
 ) {
-    val fairy get() = fairySupplier()
+    val fairyCard get() = fairySupplier()
     val key get() = keySupplier()
 }
