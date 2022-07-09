@@ -20,6 +20,7 @@ class FairyCard(val variants: List<VariantFairy>) {
 
     val parentFairy get() = getVariant().type.parentFairy
     val rare get() = getVariant().rare
+    val id get() = getVariant().id
 }
 
 fun FairyCard.getVariant(rank: Int = 1) = variants[rank - 1]
