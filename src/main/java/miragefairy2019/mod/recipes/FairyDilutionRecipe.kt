@@ -17,9 +17,9 @@ val fairyDilutionRecipeModule = module {
         FairyCard.values().forEach { inputFairyCard ->
             val inputFairyCard = inputFairyCard
             val inputFairyVariant = inputFairyCard.getVariant(1)
-            val outputFairyCard = inputFairyCard.getVariant(1).type.parentFairy() ?: return@forEach
+            val outputFairyCard = inputFairyCard.parentFairy() ?: return@forEach
             val outputFairyVariant = outputFairyCard.getVariant(1)
-            val rankDiff = (outputFairyVariant.rare - inputFairyVariant.rare) atLeast 0 // 必要凝縮回数
+            val rankDiff = (outputFairyCard.rare - inputFairyCard.rare) atLeast 0 // 必要凝縮回数
 
             val inputMotif = inputFairyVariant.type.motif ?: return@forEach
 
