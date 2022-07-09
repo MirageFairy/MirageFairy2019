@@ -32,25 +32,9 @@ fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, initi
 fun <I : Item> ItemInitializer<I>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { item.unlocalizedName = unlocalizedName }
 fun <I : Item> ItemInitializer<I>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { item.creativeTab = creativeTab() }
 
-fun <I : Item> ItemInitializer<I>.setCustomModelResourceLocation(
-    metadata: Int = 0,
-    @Suppress("UNUSED_PARAMETER") vararg vs: Void,
-    model: ResourceLocation? = null,
-    variant: String = "normal"
-) = modInitializer.onRegisterItem {
-    item.setCustomModelResourceLocation(metadata, model = model, variant = variant)
-}
-
-// TODO remove
-@Deprecated("removing")
-fun <I : Item> I.setCustomModelResourceLocation(
-    metadata: Int = 0,
-    @Suppress("UNUSED_PARAMETER") vararg vs: Void,
-    model: ResourceLocation? = null,
-    variant: String = "normal"
-) {
+fun <I : Item> ItemInitializer<I>.setCustomModelResourceLocation(metadata: Int = 0, model: ResourceLocation? = null, variant: String = "normal") = modInitializer.onRegisterItem {
     if (Main.side.isClient) {
-        ModelLoader.setCustomModelResourceLocation(this, metadata, ModelResourceLocation(model ?: registryName!!, variant))
+        ModelLoader.setCustomModelResourceLocation(item, metadata, ModelResourceLocation(model ?: item.registryName!!, variant))
     }
 }
 
