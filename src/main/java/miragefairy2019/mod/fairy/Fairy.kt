@@ -1,13 +1,19 @@
 package miragefairy2019.mod.fairy
 
+import miragefairy2019.api.ErgSet
+import miragefairy2019.lib.div
 import miragefairy2019.lib.entries
+import miragefairy2019.lib.max
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.lib.sum
+import miragefairy2019.lib.times
 import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.kotlin.hydrogen.toUpperCamelCase
@@ -23,6 +29,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
+import kotlin.math.pow
+
+fun FairyCard.getVariant(rank: Int = 1) = Fairy.listItemFairy[rank - 1]().getVariant(id)!!
+fun FairyCard.createItemStack(rank: Int = 1, count: Int = 1) = getVariant(rank).createItemStack(count)
 
 object Fairy {
     lateinit var creativeTabFairyMotif: CreativeTabs
@@ -90,7 +100,33 @@ object Fairy {
                 setUnlocalizedName("mirageFairyR$rank")
                 onRegisterItem {
                     FairyCard.values().forEach { fairyCard ->
-                        item.registerVariant(fairyCard.id, fairyCard.id(rank, fairyCard))
+                        operator fun Int.invoke(rank: Int, fairyCard: FairyCard): VariantFairy {
+                            val id = this
+
+                            fun getType(rank: Int): FairyType {
+                                val rateRare = 2.0.pow((fairyCard.rare + rank - 2) / 4.0)
+                                val rateVariance = 0.5.pow(((fairyCard.manaSet / fairyCard.manaSet.max).sum - 1) / 5.0)
+                                val manaSetReal = fairyCard.manaSet / fairyCard.manaSet.sum * (fairyCard.cost * rateRare * rateVariance * fairyCard.rateSpecial)
+                                val ergSetReal = ErgSet(fairyCard.ergSet.entries.associate { (erg, value) -> erg to value * rateRare })
+                                return FairyType(
+                                    ResourceLocation(ModMirageFairy2019.MODID, fairyCard.registryName),
+                                    fairyCard.parentFairy,
+                                    textComponent { translate("mirageFairy2019.fairy.${fairyCard.registryName}.name") },
+                                    fairyCard.colorSet.hair,
+                                    fairyCard.cost.toDouble(),
+                                    manaSetReal,
+                                    ergSetReal
+                                )
+                            }
+
+                            val variant = VariantFairy(id, fairyCard.colorSet, getType(rank), fairyCard.rare, rank)
+
+                            return variant
+                        }
+
+                        val variant = fairyCard.id(rank, fairyCard)
+
+                        item.registerVariant(fairyCard.id, variant)
                     }
                     if (side.isClient) {
                         item.variants.forEach { variant ->
