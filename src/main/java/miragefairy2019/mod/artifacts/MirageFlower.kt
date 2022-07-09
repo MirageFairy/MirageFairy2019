@@ -180,7 +180,7 @@ fun calculateGrowthRate(world: World, blockPos: BlockPos): List<Pair<String, Dou
             if (entries.isEmpty()) return@noFairy // 関連付けられた妖精が居ない場合は無視
 
             // 最も大きな補正値
-            val growthRateInFloor = entries.map { getGrowthRateInFloor(it.fairy.main.type) }.max()!!
+            val growthRateInFloor = entries.map { getGrowthRateInFloor(it.fairy.getVariant().type) }.max()!!
 
             bonus = bonus atLeast growthRateInFloor
         }

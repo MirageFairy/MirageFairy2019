@@ -104,8 +104,8 @@ class ItemDebugFairyList : ItemDebug() {
         val jaJp = getLang("ja_jp")
 
         writeAction(player, "fairyList.txt", FairyTypes.instance.variants.joinToString("") { (id, bundle) ->
-            val variantRank1 = bundle.main
-            val variantRank2 = bundle[1]
+            val variantRank1 = bundle.getVariant(1)
+            val variantRank2 = bundle.getVariant(1 + 1)
             val fairyTypeRank1 = variantRank1.type
             val fairyTypeRank2 = variantRank2.type
             fun color(selector: ColorSet.() -> Int) = variantRank1.colorSet.selector().toRgb().hex
@@ -263,7 +263,7 @@ class ItemDebugMirageFlowerGrowthRateList : ItemDebug() {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
         player.sendStatusMessage(textComponent { "===== Mirage Flower Grow Rate Table ====="() }, false)
-        FairyTypes.instance.variants.map { it.bundle.main.type }.map { Pair(it, getGrowthRateInFloor(it)) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
+        FairyTypes.instance.variants.map { it.bundle.getVariant().type }.map { Pair(it, getGrowthRateInFloor(it)) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
             player.sendStatusMessage(textComponent { ((it.second * 100) formatAs "%7.2f%%  ")() + it.first.displayName() }, false)
         }
         player.sendStatusMessage(textComponent { "===================="() }, false)

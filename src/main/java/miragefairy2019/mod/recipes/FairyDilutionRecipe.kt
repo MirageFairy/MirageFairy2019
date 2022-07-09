@@ -14,9 +14,9 @@ val fairyDilutionRecipeModule = module {
     onAddRecipe {
         FairyTypes.instance.variants.forEach { fairyVariant ->
             val inputFairyBundle = fairyVariant.bundle
-            val inputFairy = inputFairyBundle.main
-            val outputFairyBundle = fairyVariant.bundle.main.type.parentFairy() ?: return@forEach
-            val outputFairy = outputFairyBundle.main
+            val inputFairy = inputFairyBundle.getVariant(1)
+            val outputFairyBundle = fairyVariant.bundle.getVariant(1).type.parentFairy() ?: return@forEach
+            val outputFairy = outputFairyBundle.getVariant(1)
             val rankDiff = (outputFairy.rare - inputFairy.rare) atLeast 0 // 必要凝縮回数
 
             val inputMotif = inputFairy.type.motif ?: return@forEach
@@ -27,7 +27,7 @@ val fairyDilutionRecipeModule = module {
                 outputFairy.createItemStack(),
                 WandType.SUMMONING.ingredient,
                 OreIngredient("container1000MirageFlowerExtract"),
-                inputFairyBundle[rankDiff].createItemStack().ingredient // レベルが上昇するような希釈はできない
+                inputFairyBundle.createItemStack(1 + rankDiff).ingredient // レベルが上昇するような希釈はできない
             )
         }
     }

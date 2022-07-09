@@ -71,7 +71,7 @@ class ItemCrystalSword(
 
                     itemStackFuel.shrink(1) // クリスタル消費
                     if (itemStackFuel.isEmpty) player.sendStatusMessage(textComponent { "フェアリークリスタルを使い切りました！"().red }, true) // TODO translate
-                    dropFairy.main.createItemStack().drop(world, target.positionVector).setPickupDelay(20) // ドロップする
+                    dropFairy.createItemStack().drop(world, target.positionVector).setPickupDelay(20) // ドロップする
                     playSound(world, player, SoundEvents.BLOCK_ANVIL_PLACE, 0.5f, 1.5f) // エフェクト
 
                 }

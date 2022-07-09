@@ -18,7 +18,7 @@ val fairyLogDropLoaderModule = module {
         fun FairyLogDropRecipe.canRain() = also { requirements += FairyLogDropRequirementCanRain() }
 
         operator fun RankedFairyTypeBundle.invoke(weight: Double, block: FairyLogDropRecipe.() -> Unit) {
-            val recipe = FairyLogDropRecipe(weight) { main.createItemStack() }
+            val recipe = FairyLogDropRecipe(weight) { createItemStack() }
             recipe.block()
             FairyLogDropRegistry.fairyLogDropRecipes += recipe
         }

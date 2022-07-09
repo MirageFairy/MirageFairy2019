@@ -32,7 +32,7 @@ val fairySummoningRecipeModule = module {
             GameRegistry.addShapelessRecipe(
                 ResourceLocation("${ModMirageFairy2019.MODID}:mirage_fairy_from_item_$counter"),
                 null,
-                entry.fairy.main.createItemStack(),
+                entry.fairy.createItemStack(),
                 WandType.SUMMONING.ingredient,
                 OreIngredient("mirageFairyCrystal"),
                 ingredient
@@ -43,7 +43,7 @@ val fairySummoningRecipeModule = module {
             GameRegistry.addShapelessRecipe(
                 ResourceLocation("${ModMirageFairy2019.MODID}:mirage_fairy_from_item_$counter"),
                 null,
-                entry.fairy.main.createItemStack(),
+                entry.fairy.createItemStack(),
                 OreIngredient("gemMoonstone"),
                 OreIngredient("mirageFairyCrystal"),
                 ingredient

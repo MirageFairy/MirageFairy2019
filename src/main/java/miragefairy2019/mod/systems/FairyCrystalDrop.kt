@@ -111,7 +111,7 @@ fun FairyCrystalDropEnvironment.getDropTable(rank: Int, commonBoost: Double, rar
         .unique { a, b -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b) }
     val totalWeight = dropTable.totalWeight
     return if (totalWeight < 1) {// 1に満たない場合はairを入れて詰める
-        dropTable + WeightedItem(FairyTypes.instance.air.main.createItemStack(), 1 - totalWeight)
+        dropTable + WeightedItem(FairyTypes.instance.air.createItemStack(), 1 - totalWeight)
     } else {
         dropTable
     }
@@ -129,7 +129,7 @@ class DropFixed(
     override val dropCategory: DropCategory,
     override val weight: Double
 ) : IDrop {
-    override fun getItemStack(rank: Int) = bundle[rank].createItemStack()
+    override fun getItemStack(rank: Int) = bundle.getVariant(rank + 1).createItemStack()
 }
 
 

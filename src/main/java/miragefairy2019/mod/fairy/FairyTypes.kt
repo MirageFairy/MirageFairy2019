@@ -14,8 +14,8 @@ import net.minecraft.util.ResourceLocation
 import kotlin.math.pow
 
 class RankedFairyTypeBundle(val variants: List<VariantFairy>) {
-    val main get() = variants[0]
-    operator fun get(i: Int) = variants[i]
+    fun getVariant(rank: Int = 1) = variants[rank - 1]
+    fun createItemStack(rank: Int = 1, count: Int = 1) = getVariant(rank).createItemStack(count)
 }
 
 data class FairyEntry(val id: Int, val bundle: RankedFairyTypeBundle)
