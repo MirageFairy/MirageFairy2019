@@ -18,14 +18,14 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 import kotlin.math.pow
 
-private val FairyRelationEntry<*>.fairyCrystalBaseDropWeight get() = 0.1 * 0.1.pow((fairyCard.getVariant().rare - 1.0) / 2.0) * weight
+private val FairyRelationEntry<*>.fairyCrystalBaseDropWeight get() = 0.1 * 0.1.pow((fairyCard.rare - 1.0) / 2.0) * weight
 
 val fairyCrystalDropLoaderModule = module {
     onCreateItemStack {
         fun World.time(min: Int, max: Int) = provider.isSurfaceWorld && min <= (worldTime + 6000) % 24000 && (worldTime + 6000) % 24000 <= max
 
         class WithDropCategory(val dropCategory: DropCategory) {
-            operator fun FairyCard.invoke(weight: Double? = null) = DropFixed(this, dropCategory, weight ?: (0.1 * 0.1.pow((getVariant().rare - 1).toDouble())))
+            operator fun FairyCard.invoke(weight: Double? = null) = DropFixed(this, dropCategory, weight ?: (0.1 * 0.1.pow((rare - 1).toDouble())))
         }
 
         operator fun DropCategory.invoke(block: WithDropCategory.() -> Unit) = WithDropCategory(this).block()
