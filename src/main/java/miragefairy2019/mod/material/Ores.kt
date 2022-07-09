@@ -64,10 +64,8 @@ object Ores {
             }
         }
         itemBlockOre1 = item({ ItemBlockOre(blockOre1()) }, "ore1") {
-            onRegisterItem {
-                blockOre1().variantList.blockVariants.forEach {
-                    item.setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
-                }
+            EnumVariantOre1.values().forEach {
+                setCustomModelResourceLocation(it.blockVariant.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.blockVariant.resourceName))
             }
             // TODO register ore name
         }
@@ -99,10 +97,8 @@ object Ores {
             }
         }
         itemBlockOre2 = item({ ItemBlockOre(blockOre2()) }, "ore2") {
-            onRegisterItem {
-                blockOre2().variantList.blockVariants.forEach {
-                    item.setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
-                }
+            EnumVariantOre2.values().forEach {
+                setCustomModelResourceLocation(it.blockVariant.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.blockVariant.resourceName))
             }
             // TODO register ore name
         }

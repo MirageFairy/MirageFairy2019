@@ -46,11 +46,11 @@ object Sphere {
         itemSpheres = item({ ItemSpheres() }, "spheres") {
             setUnlocalizedName("spheres")
             setCreativeTab { creativeTab }
-            onRegisterItem {
-                Erg.values().forEachIndexed { i, ergType ->
+            Erg.values().forEachIndexed { i, ergType ->
+                onRegisterItem {
                     item.registerVariant(i, VariantSphere(ergType.sphereType))
-                    item.setCustomModelResourceLocation(i, model = ResourceLocation(ModMirageFairy2019.MODID, "sphere"))
                 }
+                setCustomModelResourceLocation(i, model = ResourceLocation(ModMirageFairy2019.MODID, "sphere"))
             }
             registerItemColorHandler()
         }
