@@ -100,31 +100,20 @@ object Fairy {
                 setUnlocalizedName("mirageFairyR$rank")
                 onRegisterItem {
                     FairyCard.values().forEach { fairyCard ->
-                        operator fun Int.invoke(rank: Int, fairyCard: FairyCard): VariantFairy {
-                            val id = this
-
-                            fun getType(rank: Int): FairyType {
-                                val rateRare = 2.0.pow((fairyCard.rare + rank - 2) / 4.0)
-                                val rateVariance = 0.5.pow(((fairyCard.manaSet / fairyCard.manaSet.max).sum - 1) / 5.0)
-                                val manaSetReal = fairyCard.manaSet / fairyCard.manaSet.sum * (fairyCard.cost * rateRare * rateVariance * fairyCard.rateSpecial)
-                                val ergSetReal = ErgSet(fairyCard.ergSet.entries.associate { (erg, value) -> erg to value * rateRare })
-                                return FairyType(
-                                    ResourceLocation(ModMirageFairy2019.MODID, fairyCard.registryName),
-                                    fairyCard.parentFairy,
-                                    textComponent { translate("mirageFairy2019.fairy.${fairyCard.registryName}.name") },
-                                    fairyCard.colorSet.hair,
-                                    fairyCard.cost.toDouble(),
-                                    manaSetReal,
-                                    ergSetReal
-                                )
-                            }
-
-                            val variant = VariantFairy(id, fairyCard.colorSet, getType(rank), fairyCard.rare, rank)
-
-                            return variant
-                        }
-
-                        val variant = fairyCard.id(rank, fairyCard)
+                        val rateRare = 2.0.pow((fairyCard.rare + rank - 2) / 4.0)
+                        val rateVariance = 0.5.pow(((fairyCard.manaSet / fairyCard.manaSet.max).sum - 1) / 5.0)
+                        val manaSetReal = fairyCard.manaSet / fairyCard.manaSet.sum * (fairyCard.cost * rateRare * rateVariance * fairyCard.rateSpecial)
+                        val ergSetReal = ErgSet(fairyCard.ergSet.entries.associate { (erg, value) -> erg to value * rateRare })
+                        val type = FairyType(
+                            ResourceLocation(ModMirageFairy2019.MODID, fairyCard.registryName),
+                            fairyCard.parentFairy,
+                            textComponent { translate("mirageFairy2019.fairy.${fairyCard.registryName}.name") },
+                            fairyCard.colorSet.hair,
+                            fairyCard.cost.toDouble(),
+                            manaSetReal,
+                            ergSetReal
+                        )
+                        val variant = VariantFairy(fairyCard.id, fairyCard.colorSet, type, fairyCard.rare, rank)
 
                         item.registerVariant(fairyCard.id, variant)
                     }
