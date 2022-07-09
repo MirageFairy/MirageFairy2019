@@ -94,7 +94,9 @@ object Fairy {
             item({ ItemFairy(dressColor) }, if (rank == 1) "mirage_fairy" else "mirage_fairy_r$rank") {
                 setUnlocalizedName("mirageFairyR$rank")
                 onRegisterItem {
-                    FairyTypes.instance.variants.forEach { entry -> item.registerVariant(entry.id, entry.bundle[rank - 1]) }
+                    FairyTypes.instance.variants.forEach { variant ->
+                        item.registerVariant(variant.id, variant.bundle[rank - 1])
+                    }
                     if (side.isClient) {
                         item.variants.forEach { variant ->
                             ModelLoader.setCustomModelResourceLocation(item, variant.metadata, ModelResourceLocation(ResourceLocation(ModMirageFairy2019.MODID, "fairy"), "normal"))
