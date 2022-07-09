@@ -28,9 +28,9 @@ fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, initi
     }
 }
 
+
 fun <I : Item> ItemInitializer<I>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { item.unlocalizedName = unlocalizedName }
 fun <I : Item> ItemInitializer<I>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { item.creativeTab = creativeTab() }
-
 
 fun <I : Item> ItemInitializer<I>.setCustomModelResourceLocation(
     metadata: Int = 0,
