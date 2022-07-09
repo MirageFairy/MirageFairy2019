@@ -13,6 +13,7 @@ import miragefairy2019.lib.int
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
+import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.lib.resourcemaker.DataModel
@@ -32,13 +33,11 @@ import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
-import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.FairyTypes
 import miragefairy2019.mod.fairy.ItemFairy
 import mirrg.kotlin.hydrogen.castOrNull
 import mirrg.kotlin.hydrogen.formatAs
-import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
@@ -49,7 +48,6 @@ import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
-import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.ItemTooltipEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -82,11 +80,7 @@ object BakedFairy {
         itemBakedFairy = item({ ItemBakedFairy() }, "baked_fairy") {
             setUnlocalizedName("bakedFairy")
             setCreativeTab { creativeTabBakedFairy() }
-            modInitializer.onRegisterItem {
-                if (Main.side.isClient) {
-                    ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation(item.registryName!!, "normal"))
-                }
-            }
+            setCustomModelResourceLocation()
             registerItemColorHandler()
         }
         makeItemModel("baked_fairy") {
