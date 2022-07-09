@@ -17,7 +17,7 @@ fun <B : Block> ModInitializer.block(creator: () -> B, registryName: String, ini
         block.setRegistryName(ModMirageFairy2019.MODID, registryName)
         ForgeRegistries.BLOCKS.register(block)
     }
-    return BlockInitializer(this, ResourceName(ModMirageFairy2019.MODID, registryName)) { block }.also {
+    return BlockInitializer(this, ResourceName(modId, registryName)) { block }.also {
         if (initializer != null) it.initializer()
     }
 }

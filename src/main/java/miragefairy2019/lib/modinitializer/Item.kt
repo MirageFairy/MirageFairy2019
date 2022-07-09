@@ -23,7 +23,7 @@ fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, initi
         item.setRegistryName(ModMirageFairy2019.MODID, registryName)
         ForgeRegistries.ITEMS.register(item)
     }
-    return ItemInitializer(this, ResourceName(ModMirageFairy2019.MODID, registryName)) { item }.also {
+    return ItemInitializer(this, ResourceName(modId, registryName)) { item }.also {
         if (initializer != null) it.initializer()
     }
 }
