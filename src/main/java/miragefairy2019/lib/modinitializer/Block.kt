@@ -1,9 +1,13 @@
 package miragefairy2019.lib.modinitializer
 
 import miragefairy2019.common.ResourceName
+import miragefairy2019.libkt.resourceLocation
+import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.artifacts.FluidStateMapper
 import net.minecraft.block.Block
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.fml.common.registry.ForgeRegistries
 
 class BlockInitializer<out B : Block>(override val modInitializer: ModInitializer, override val resourceName: ResourceName, getter: () -> B) : Initializer<B>(getter), NamedInitializer {
@@ -25,3 +29,9 @@ fun <B : Block> ModInitializer.block(creator: () -> B, registryName: String, ini
 
 fun <B : Block> BlockInitializer<B>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { block.unlocalizedName = unlocalizedName }
 fun <B : Block> BlockInitializer<B>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { block.setCreativeTab(creativeTab()) }
+
+fun <B : Block> BlockInitializer<B>.setFluidStateMapper() = modInitializer.onRegisterBlock {
+    if (Main.side.isClient) {
+        ModelLoader.setCustomStateMapper(block, FluidStateMapper(resourceName.resourceLocation))
+    }
+}
