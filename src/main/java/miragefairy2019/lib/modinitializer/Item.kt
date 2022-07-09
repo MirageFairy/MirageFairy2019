@@ -41,6 +41,8 @@ fun <I : Item> ItemInitializer<I>.setCustomModelResourceLocation(
     item.setCustomModelResourceLocation(metadata, model = model, variant = variant)
 }
 
+// TODO remove
+@Deprecated("removing")
 fun <I : Item> I.setCustomModelResourceLocation(
     metadata: Int = 0,
     @Suppress("UNUSED_PARAMETER") vararg vs: Void,
@@ -54,4 +56,7 @@ fun <I : Item> I.setCustomModelResourceLocation(
 
 
 fun <I : Item> ItemInitializer<I>.addOreName(oreName: String, metadata: Int = 0) = modInitializer.onCreateItemStack { item.addOreName(oreName, metadata) }
+
+// TODO remove
+@Deprecated("removing")
 fun <I : Item> I.addOreName(oreName: String, metadata: Int = 0) = OreDictionary.registerOre(oreName, ItemStack(this, 1, metadata))
