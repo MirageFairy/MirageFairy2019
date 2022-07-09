@@ -178,4 +178,4 @@ enum class FairyCard(
 }
 
 val FairyCard.registryName get() = name.toLowerCase()
-val FairyCard.unlocalizedName get() = name.toLowerCase().toLowerCamelCase() // TODO 切り替え
+val FairyCard.unlocalizedName get() = name.toLowerCase().toLowerCamelCase()
