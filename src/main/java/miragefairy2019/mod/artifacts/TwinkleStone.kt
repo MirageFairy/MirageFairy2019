@@ -70,6 +70,8 @@ enum class TwinkleStoneCard(
     override fun getName(): String = colorRegistryName
 }
 
+val TwinkleStoneCard.registryName get() = "${colorRegistryName}_twinkle_stone"
+val TwinkleStoneCard.unlocalizedName get() = "twinkleStone${colorUnlocalizedName.toUpperCaseHead()}"
 val TwinkleStoneCard.oreNames get() = listOf("mirageFairy2019TwinkleStone", "mirageFairy2019TwinkleStone${colorOreName.toUpperCaseHead()}")
 
 
@@ -86,7 +88,7 @@ val twinkleStoneModule = module {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
                 DataBlockStates(
-                    variants = TwinkleStoneCard.values().map { "variant=${it.metadata}" to DataBlockState("miragefairy2019:${it.colorRegistryName}_twinkle_stone") }.toMap()
+                    variants = TwinkleStoneCard.values().map { "variant=${it.metadata}" to DataBlockState("miragefairy2019:${it.registryName}") }.toMap()
                 )
             }
         }
@@ -133,29 +135,29 @@ val twinkleStoneModule = module {
     TwinkleStoneCard.values().forEach {
 
         // ブロックモデル生成
-        makeBlockModel("${it.colorRegistryName}_twinkle_stone") {
+        makeBlockModel(it.registryName) {
             DataModel(
                 parent = "block/cube_all",
                 textures = mapOf(
-                    "all" to "miragefairy2019:blocks/${it.colorRegistryName}_twinkle_stone"
+                    "all" to "miragefairy2019:blocks/${it.registryName}"
                 )
             )
         }
 
         // アイテムモデル生成
-        makeItemModel("${it.colorRegistryName}_twinkle_stone") { block }
+        makeItemModel(it.registryName) { block }
 
         // 翻訳生成
         onMakeLang {
             enJa(
-                "tile.twinkleStone${it.colorUnlocalizedName.toUpperCaseHead()}.name",
+                "tile.${it.unlocalizedName}.name",
                 "${it.colorEnglishName} Twinkle Stone",
                 "${it.colorJapaneseName}のトゥインクルストーン"
             )
         }
 
         // レシピ生成
-        makeRecipe("${it.colorRegistryName}_twinkle_stone") {
+        makeRecipe(it.registryName) {
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOreIngredient(ore = "mirageFairy2019TwinkleStone"),
@@ -171,8 +173,8 @@ val twinkleStoneModule = module {
 
 class BlockVariantTwinkleStone(val card: TwinkleStoneCard) : IBlockVariant {
     override val metadata: Int get() = card.metadata
-    override val resourceName: String get() = "${card.colorRegistryName}_twinkle_stone"
-    override val unlocalizedName: String get() = "twinkleStone${card.colorUnlocalizedName.toUpperCaseHead()}"
+    override val resourceName: String get() = card.registryName
+    override val unlocalizedName: String get() = card.unlocalizedName
 }
 
 class BlockTwinkleStone : BlockMulti<BlockVariantTwinkleStone>(Material.ROCK, BlockVariantList(TwinkleStoneCard.values().map { BlockVariantTwinkleStone(it) })) {
