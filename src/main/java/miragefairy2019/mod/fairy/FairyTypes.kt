@@ -13,12 +13,12 @@ import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.util.ResourceLocation
 import kotlin.math.pow
 
-class RankedFairyTypeBundle(val variants: List<VariantFairy>) {
+class FairyCard(val variants: List<VariantFairy>) {
     fun getVariant(rank: Int = 1) = variants[rank - 1]
     fun createItemStack(rank: Int = 1, count: Int = 1) = getVariant(rank).createItemStack(count)
 }
 
-data class FairyEntry(val id: Int, val bundle: RankedFairyTypeBundle)
+data class FairyEntry(val id: Int, val bundle: FairyCard)
 
 @Suppress("unused")
 class FairyTypes(private val count: Int) {
@@ -39,7 +39,7 @@ class FairyTypes(private val count: Int) {
 
     private fun c(skin: Int, bright: Int, dark: Int, hair: Int) = ColorSet(skin, bright, dark, hair)
 
-    private operator fun Int.invoke(name: String, parentFairy: () -> RankedFairyTypeBundle?, rare: Int, cost: Int, rateSpecial: Double, manaSet: ManaSet, ergSet: ErgSet, colorSet: ColorSet): RankedFairyTypeBundle {
+    private operator fun Int.invoke(name: String, parentFairy: () -> FairyCard?, rare: Int, cost: Int, rateSpecial: Double, manaSet: ManaSet, ergSet: ErgSet, colorSet: ColorSet): FairyCard {
         val id = this
 
         fun getType(rank: Int): FairyType {
@@ -60,7 +60,7 @@ class FairyTypes(private val count: Int) {
 
         // Create Variants
         val variants = (1..count).map { VariantFairy(id, colorSet, getType(it), rare, it) }
-        val bundle = RankedFairyTypeBundle(variants)
+        val bundle = FairyCard(variants)
 
         // Register
         variantsImpl += FairyEntry(id, bundle)

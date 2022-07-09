@@ -52,7 +52,7 @@ class ColorSet(val skin: Int, val bright: Int, val dark: Int, val hair: Int)
 
 class FairyType(
     private val motif: ResourceLocation?,
-    val parentFairy: () -> RankedFairyTypeBundle?,
+    val parentFairy: () -> FairyCard?,
     private val displayName: ITextComponent,
     private val color: Int,
     private val cost: Double,

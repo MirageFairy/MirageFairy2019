@@ -2,7 +2,7 @@ package miragefairy2019.mod.recipes
 
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.mod.fairy.FairyTypes
-import miragefairy2019.mod.fairy.RankedFairyTypeBundle
+import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.fairyrelation.FairyRelationEntry
 import miragefairy2019.mod.fairyrelation.FairyRelationRegistries
 import miragefairy2019.mod.systems.DropCategory
@@ -24,7 +24,7 @@ val fairyCrystalDropLoaderModule = module {
         fun World.time(min: Int, max: Int) = provider.isSurfaceWorld && min <= (worldTime + 6000) % 24000 && (worldTime + 6000) % 24000 <= max
 
         class WithDropCategory(val dropCategory: DropCategory) {
-            operator fun RankedFairyTypeBundle.invoke(weight: Double? = null) = DropFixed(this, dropCategory, weight ?: (0.1 * 0.1.pow((getVariant().rare - 1).toDouble())))
+            operator fun FairyCard.invoke(weight: Double? = null) = DropFixed(this, dropCategory, weight ?: (0.1 * 0.1.pow((getVariant().rare - 1).toDouble())))
         }
 
         operator fun DropCategory.invoke(block: WithDropCategory.() -> Unit) = WithDropCategory(this).block()

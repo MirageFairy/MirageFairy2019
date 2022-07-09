@@ -7,7 +7,7 @@ import miragefairy2019.lib.FairyLogDropRequirementHasBiomeType
 import miragefairy2019.lib.FairyLogDropRequirementOverworld
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.mod.fairy.FairyTypes
-import miragefairy2019.mod.fairy.RankedFairyTypeBundle
+import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.fairyrelation.FairyRelationRegistries
 import net.minecraftforge.common.BiomeDictionary
 
@@ -17,7 +17,7 @@ val fairyLogDropLoaderModule = module {
         fun FairyLogDropRecipe.overworld() = also { requirements += FairyLogDropRequirementOverworld() }
         fun FairyLogDropRecipe.canRain() = also { requirements += FairyLogDropRequirementCanRain() }
 
-        operator fun RankedFairyTypeBundle.invoke(weight: Double, block: FairyLogDropRecipe.() -> Unit) {
+        operator fun FairyCard.invoke(weight: Double, block: FairyLogDropRecipe.() -> Unit) {
             val recipe = FairyLogDropRecipe(weight) { createItemStack() }
             recipe.block()
             FairyLogDropRegistry.fairyLogDropRecipes += recipe

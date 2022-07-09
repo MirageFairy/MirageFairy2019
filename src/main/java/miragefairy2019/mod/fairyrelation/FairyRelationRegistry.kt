@@ -1,6 +1,6 @@
 package miragefairy2019.mod.fairyrelation
 
-import miragefairy2019.mod.fairy.RankedFairyTypeBundle
+import miragefairy2019.mod.fairy.FairyCard
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
@@ -25,7 +25,7 @@ class FairyRelationRegistry<T> : Iterable<FairyRelationEntry<T>> {
 }
 
 class FairyRelationEntry<out T>(
-    private val fairySupplier: () -> RankedFairyTypeBundle,
+    private val fairySupplier: () -> FairyCard,
     private val keySupplier: () -> T,
     /**
      * キーと妖精の概念的な近さ（関係性）を表す値です。

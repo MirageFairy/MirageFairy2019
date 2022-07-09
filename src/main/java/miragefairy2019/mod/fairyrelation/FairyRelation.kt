@@ -5,7 +5,7 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.fairy.FairyTypes
-import miragefairy2019.mod.fairy.RankedFairyTypeBundle
+import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.EnumVariantMaterials1
 import net.minecraft.block.Block
@@ -45,12 +45,12 @@ import net.minecraft.util.ResourceLocation
 import net.minecraftforge.common.BiomeDictionary
 import net.minecraftforge.oredict.OreIngredient
 
-private class RegistrantScope(val fairySupplier: () -> RankedFairyTypeBundle, val relevance: Double, val weight: Double)
+private class RegistrantScope(val fairySupplier: () -> FairyCard, val relevance: Double, val weight: Double)
 private typealias Registrant = RegistrantScope.() -> Unit
 
-private fun fairy(fairySelector: FairyTypes.() -> RankedFairyTypeBundle): () -> RankedFairyTypeBundle = { fairySelector(FairyTypes.instance) }
-private fun (() -> RankedFairyTypeBundle).register(relevance: Double = 1.0, weight: Double = 1.0, actionGetter: () -> Registrant) = actionGetter()(RegistrantScope(this, relevance, weight))
-private fun <T> FairyRelationRegistry<T>.register(fairySupplier: () -> RankedFairyTypeBundle, keySupplier: () -> T, relevance: Double, weight: Double) {
+private fun fairy(fairySelector: FairyTypes.() -> FairyCard): () -> FairyCard = { fairySelector(FairyTypes.instance) }
+private fun (() -> FairyCard).register(relevance: Double = 1.0, weight: Double = 1.0, actionGetter: () -> Registrant) = actionGetter()(RegistrantScope(this, relevance, weight))
+private fun <T> FairyRelationRegistry<T>.register(fairySupplier: () -> FairyCard, keySupplier: () -> T, relevance: Double, weight: Double) {
     entries += FairyRelationEntry(fairySupplier, keySupplier, relevance, weight)
 }
 
