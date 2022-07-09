@@ -25,7 +25,7 @@ class FairyRelationRegistry<T> : Iterable<FairyRelationEntry<T>> {
 }
 
 class FairyRelationEntry<out T>(
-    private val fairySupplier: () -> FairyCard,
+    val fairyCard: FairyCard,
     private val keySupplier: () -> T,
     /**
      * キーと妖精の概念的な近さ（関係性）を表す値です。
@@ -49,6 +49,5 @@ class FairyRelationEntry<out T>(
      */
     val weight: Double
 ) {
-    val fairyCard get() = fairySupplier()
     val key get() = keySupplier()
 }
