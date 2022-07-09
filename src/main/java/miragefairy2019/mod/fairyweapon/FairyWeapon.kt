@@ -20,6 +20,7 @@ import miragefairy2019.api.Erg.WATER
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
+import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
@@ -62,7 +63,6 @@ import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.item.crafting.Ingredient
 import net.minecraftforge.client.event.ModelBakeEvent
-import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
@@ -774,16 +774,16 @@ val fairyWeaponModule = module {
             setCreativeTab { creativeTab }
             onRegisterItem {
                 if (side.isClient) {
-                    val modelResourceLocation = ModelResourceLocation(item.registryName!!, "normal")
                     MinecraftForge.EVENT_BUS.register(object : Any() {
                         @SubscribeEvent
                         fun accept(event: ModelBakeEvent) {
+                            val modelResourceLocation = ModelResourceLocation(item.registryName!!, "normal")
                             event.modelRegistry.putObject(modelResourceLocation, BakedModelBuiltinWrapper(event.modelRegistry.getObject(modelResourceLocation)!!))
                         }
                     })
-                    ModelLoader.setCustomModelResourceLocation(item, 0, modelResourceLocation)
                 }
             }
+            setCustomModelResourceLocation(variant = "normal")
             onInit {
                 val durability = (1..fairyWeaponKind.tier).fold(16) { a, _ -> a * 2 }
                 item.maxDamage = durability - 1
