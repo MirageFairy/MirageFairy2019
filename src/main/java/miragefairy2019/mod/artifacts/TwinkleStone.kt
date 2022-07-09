@@ -96,16 +96,10 @@ val twinkleStoneModule = module {
         // アイテム登録
         itemBlockTwinkleStone = item({ ItemBlockMulti(blockTwinkleStone()) }, "twinkle_stone") {
             setUnlocalizedName("twinkleStone")
-            onRegisterItem {
-                blockTwinkleStone().variantList.blockVariants.forEach { variant ->
-                    item.setCustomModelResourceLocation(variant.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, variant.resourceName))
-                }
-            }
-            onCreateItemStack {
-                blockTwinkleStone().variantList.blockVariants.forEach { variant ->
-                    variant.card.oreNames.forEach { oreName ->
-                        item.addOreName(oreName, variant.metadata)
-                    }
+            TwinkleStoneCard.values().forEach { twinkleStoneCard ->
+                setCustomModelResourceLocation(twinkleStoneCard.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, twinkleStoneCard.registryName))
+                twinkleStoneCard.oreNames.forEach { oreName ->
+                    addOreName(oreName, twinkleStoneCard.metadata)
                 }
             }
         }
