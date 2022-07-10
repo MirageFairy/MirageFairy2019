@@ -12,32 +12,32 @@ import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.oredict.OreDictionary
 
-class ItemInitializer<out I : Item>(override val modInitializer: ModInitializer, override val resourceName: ResourceName, getter: () -> I) : Initializer<I>(getter), NamedInitializer {
+class ItemScope<out I : Item>(override val modScope: ModScope, override val resourceName: ResourceName, getter: () -> I) : ObjectScope<I>(getter), NamedScope {
     val item get() = initializingObject
 }
 
-fun <I : Item> ModInitializer.item(creator: () -> I, registryName: String, initializer: (ItemInitializer<I>.() -> Unit)? = null): ItemInitializer<I> {
+fun <I : Item> ModScope.item(creator: () -> I, registryName: String, initializer: (ItemScope<I>.() -> Unit)? = null): ItemScope<I> {
     lateinit var item: I
     onRegisterItem {
         item = creator()
         item.setRegistryName(ModMirageFairy2019.MODID, registryName)
         ForgeRegistries.ITEMS.register(item)
     }
-    return ItemInitializer(this, ResourceName(modId, registryName)) { item }.also {
+    return ItemScope(this, ResourceName(modId, registryName)) { item }.also {
         if (initializer != null) it.initializer()
     }
 }
 
 
-fun <I : Item> ItemInitializer<I>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { item.unlocalizedName = unlocalizedName }
-fun <I : Item> ItemInitializer<I>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { item.creativeTab = creativeTab() }
+fun <I : Item> ItemScope<I>.setUnlocalizedName(unlocalizedName: String) = modScope.onRegisterItem { item.unlocalizedName = unlocalizedName }
+fun <I : Item> ItemScope<I>.setCreativeTab(creativeTab: () -> CreativeTabs) = modScope.onRegisterItem { item.creativeTab = creativeTab() }
 
-fun <I : Item> ItemInitializer<I>.setCustomModelResourceLocation(metadata: Int = 0, model: ResourceLocation? = null, variant: String = "normal") = modInitializer.onRegisterItem {
+fun <I : Item> ItemScope<I>.setCustomModelResourceLocation(metadata: Int = 0, model: ResourceLocation? = null, variant: String = "normal") = modScope.onRegisterItem {
     if (Main.side.isClient) {
         ModelLoader.setCustomModelResourceLocation(item, metadata, ModelResourceLocation(model ?: item.registryName!!, variant))
     }
 }
 
-fun <I : Item> ItemInitializer<I>.addOreName(oreName: String, metadata: Int = 0) = modInitializer.onCreateItemStack {
+fun <I : Item> ItemScope<I>.addOreName(oreName: String, metadata: Int = 0) = modScope.onCreateItemStack {
     OreDictionary.registerOre(oreName, ItemStack(item, 1, metadata))
 }

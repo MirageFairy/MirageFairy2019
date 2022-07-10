@@ -1,19 +1,19 @@
 package miragefairy2019.lib.resourcemaker
 
 import com.google.gson.JsonElement
-import miragefairy2019.lib.modinitializer.ModInitializer
-import miragefairy2019.lib.modinitializer.NamedInitializer
+import miragefairy2019.lib.modinitializer.ModScope
+import miragefairy2019.lib.modinitializer.NamedScope
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 
 
-fun ModInitializer.makeRecipe(path: String, creator: () -> DataRecipe) = onMakeResource {
+fun ModScope.makeRecipe(path: String, creator: () -> DataRecipe) = onMakeResource {
     place("assets/$modId/recipes/$path.json", creator().jsonElement)
 }
 
-fun NamedInitializer.makeRecipe(creator: () -> DataRecipe) = modInitializer.onMakeResource {
+fun NamedScope.makeRecipe(creator: () -> DataRecipe) = modScope.onMakeResource {
     place("assets/${resourceName.domain}/recipes/${resourceName.path}.json", creator().jsonElement)
 }
 

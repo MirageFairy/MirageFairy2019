@@ -10,27 +10,27 @@ import net.minecraft.creativetab.CreativeTabs
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.fml.common.registry.ForgeRegistries
 
-class BlockInitializer<out B : Block>(override val modInitializer: ModInitializer, override val resourceName: ResourceName, getter: () -> B) : Initializer<B>(getter), NamedInitializer {
+class BlockScope<out B : Block>(override val modScope: ModScope, override val resourceName: ResourceName, getter: () -> B) : ObjectScope<B>(getter), NamedScope {
     val block get() = initializingObject
 }
 
-fun <B : Block> ModInitializer.block(creator: () -> B, registryName: String, initializer: (BlockInitializer<B>.() -> Unit)? = null): BlockInitializer<B> {
+fun <B : Block> ModScope.block(creator: () -> B, registryName: String, initializer: (BlockScope<B>.() -> Unit)? = null): BlockScope<B> {
     lateinit var block: B
     onRegisterBlock {
         block = creator()
         block.setRegistryName(ModMirageFairy2019.MODID, registryName)
         ForgeRegistries.BLOCKS.register(block)
     }
-    return BlockInitializer(this, ResourceName(modId, registryName)) { block }.also {
+    return BlockScope(this, ResourceName(modId, registryName)) { block }.also {
         if (initializer != null) it.initializer()
     }
 }
 
 
-fun <B : Block> BlockInitializer<B>.setUnlocalizedName(unlocalizedName: String) = modInitializer.onRegisterItem { block.unlocalizedName = unlocalizedName }
-fun <B : Block> BlockInitializer<B>.setCreativeTab(creativeTab: () -> CreativeTabs) = modInitializer.onRegisterItem { block.setCreativeTab(creativeTab()) }
+fun <B : Block> BlockScope<B>.setUnlocalizedName(unlocalizedName: String) = modScope.onRegisterItem { block.unlocalizedName = unlocalizedName }
+fun <B : Block> BlockScope<B>.setCreativeTab(creativeTab: () -> CreativeTabs) = modScope.onRegisterItem { block.setCreativeTab(creativeTab()) }
 
-fun <B : Block> BlockInitializer<B>.setFluidStateMapper() = modInitializer.onRegisterBlock {
+fun <B : Block> BlockScope<B>.setFluidStateMapper() = modScope.onRegisterBlock {
     if (Main.side.isClient) {
         ModelLoader.setCustomStateMapper(block, FluidStateMapper(resourceName.resourceLocation))
     }

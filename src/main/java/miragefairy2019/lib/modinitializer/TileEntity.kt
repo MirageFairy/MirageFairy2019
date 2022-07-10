@@ -10,11 +10,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-fun <T : TileEntity> ModInitializer.tileEntity(registerName: String, tileEntityClass: Class<T>) = onRegisterTileEntity {
+fun <T : TileEntity> ModScope.tileEntity(registerName: String, tileEntityClass: Class<T>) = onRegisterTileEntity {
     GameRegistry.registerTileEntity(tileEntityClass, ResourceName(modId, registerName).resourceLocation)
 }
 
-fun <T : TileEntity, R : TileEntitySpecialRenderer<T>> ModInitializer.tileEntityRenderer(tileEntityClass: Class<T>, rendererCreator: () -> R) = onRegisterTileEntityRenderer {
+fun <T : TileEntity, R : TileEntitySpecialRenderer<T>> ModScope.tileEntityRenderer(tileEntityClass: Class<T>, rendererCreator: () -> R) = onRegisterTileEntityRenderer {
     if (Main.side.isClient) {
         object : Any() {
             @SideOnly(Side.CLIENT)

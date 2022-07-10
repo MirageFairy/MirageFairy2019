@@ -17,9 +17,9 @@ import net.minecraftforge.fml.common.event.FMLServerStoppedEvent
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
-fun module(block: ModInitializer.() -> Unit) = block
+fun module(block: ModScope.() -> Unit) = block
 
-class ModInitializer(val modId: String, val usePreReleaseFeatures: Boolean) {
+class ModScope(val modId: String, val usePreReleaseFeatures: Boolean) {
     val modVersion = run {
         val version = ModMirageFairy2019.VERSION
         val serverVersion = version.split(".").getOrNull(2)?.toInt()
@@ -75,7 +75,7 @@ class EventRegistry1<E> {
 }
 
 
-fun ModInitializer.onServerSave(listener: WorldEvent.Save.() -> Unit) = onInit {
+fun ModScope.onServerSave(listener: WorldEvent.Save.() -> Unit) = onInit {
     MinecraftForge.EVENT_BUS.register(object {
         @[Suppress("unused") SubscribeEvent]
         fun handle(event: WorldEvent.Save) {

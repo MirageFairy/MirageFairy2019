@@ -2,15 +2,15 @@ package miragefairy2019.lib.resourcemaker
 
 import miragefairy2019.common.ResourceName
 import miragefairy2019.common.map
-import miragefairy2019.lib.modinitializer.ModInitializer
-import miragefairy2019.lib.modinitializer.NamedInitializer
+import miragefairy2019.lib.modinitializer.ModScope
+import miragefairy2019.lib.modinitializer.NamedScope
 
 
-fun ModInitializer.makeItemModel(path: String, creator: MakeItemModelScope.() -> DataModel) = onMakeResource {
+fun ModScope.makeItemModel(path: String, creator: MakeItemModelScope.() -> DataModel) = onMakeResource {
     place("assets/$modId/models/item/$path.json", MakeItemModelScope(ResourceName(modId, path)).creator().jsonElement)
 }
 
-fun NamedInitializer.makeItemModel(creator: MakeItemModelScope.() -> DataModel) = modInitializer.onMakeResource {
+fun NamedScope.makeItemModel(creator: MakeItemModelScope.() -> DataModel) = modScope.onMakeResource {
     place("assets/${resourceName.domain}/models/item/${resourceName.path}.json", MakeItemModelScope(resourceName).creator().jsonElement)
 }
 

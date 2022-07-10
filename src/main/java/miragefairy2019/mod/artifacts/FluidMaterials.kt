@@ -1,6 +1,6 @@
 package miragefairy2019.mod.artifacts
 
-import miragefairy2019.lib.modinitializer.ModInitializer
+import miragefairy2019.lib.modinitializer.ModScope
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -94,7 +94,7 @@ object FluidMaterials {
 }
 
 
-fun ModInitializer.fluid(name: String, initializer: Fluid.() -> Unit = {}): () -> Fluid {
+fun ModScope.fluid(name: String, initializer: Fluid.() -> Unit = {}): () -> Fluid {
     lateinit var fluid: Fluid
     onRegisterFluid {
         fluid = Fluid(

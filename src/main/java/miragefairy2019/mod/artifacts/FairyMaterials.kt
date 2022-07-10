@@ -3,7 +3,7 @@ package miragefairy2019.mod.artifacts
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.fairyCentrifugeCraftHandler
-import miragefairy2019.lib.modinitializer.ModInitializer
+import miragefairy2019.lib.modinitializer.ModScope
 import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.itemVariant
@@ -61,7 +61,7 @@ enum class FairyMaterialCard(
     val tier: Int,
     val isHandheld: Boolean,
     onCreate: FairyMaterialCard.() -> Unit,
-    val initializer: ModInitializer.() -> Unit
+    val initializer: ModScope.() -> Unit
 ) {
     SHINE_MANA_ROD(
         0, "shine_mana_rod", "manaRodShine",

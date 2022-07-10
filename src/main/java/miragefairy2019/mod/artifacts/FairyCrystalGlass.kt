@@ -1,7 +1,7 @@
 package miragefairy2019.mod.artifacts
 
-import miragefairy2019.lib.modinitializer.BlockInitializer
-import miragefairy2019.lib.modinitializer.ItemInitializer
+import miragefairy2019.lib.modinitializer.BlockScope
+import miragefairy2019.lib.modinitializer.ItemScope
 import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -121,7 +121,7 @@ object FairyCrystalGlass {
             framePrefix: String,
             englishPrefix: String,
             japanesePrefix: String
-        ): Pair<BlockInitializer<BlockFairyCrystalGlass>, ItemInitializer<ItemBlock>> {
+        ): Pair<BlockScope<BlockFairyCrystalGlass>, ItemScope<ItemBlock>> {
             val block = block({ BlockFairyCrystalGlass() }, "${prefix}FairyCrystalGlass".toSnakeCase()) {
                 setUnlocalizedName("${prefix}FairyCrystalGlass".toLowerCaseHead())
                 setCreativeTab { Main.creativeTab }

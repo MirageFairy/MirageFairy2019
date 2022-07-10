@@ -1,6 +1,6 @@
 package miragefairy2019.mod
 
-import miragefairy2019.lib.modinitializer.ModInitializer
+import miragefairy2019.lib.modinitializer.ModScope
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
@@ -92,5 +92,5 @@ private class ConfigPropertyHandler<T : Any>(private val propertySelector: (Conf
     override fun invoke() = value
 }
 
-/** プロパティは[ModInitializer.onPreInit]よりも後で利用できます。 */
+/** プロパティは[ModScope.onPreInit]よりも後で利用できます。 */
 fun <T : Any> configProperty(propertySelector: (Configuration) -> T): () -> T = ConfigPropertyHandler(propertySelector).also { configProperties += it }

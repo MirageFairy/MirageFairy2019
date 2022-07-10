@@ -1,6 +1,6 @@
 package miragefairy2019.mod
 
-import miragefairy2019.lib.modinitializer.ModInitializer
+import miragefairy2019.lib.modinitializer.ModScope
 import miragefairy2019.lib.resourcemaker.ResourceMaker
 import miragefairy2019.lib.resourcemaker.place
 import miragefairy2019.libkt.LangMaker
@@ -11,22 +11,22 @@ import java.io.File
 object MainMakeResource {
     @JvmStatic
     fun main(args: Array<String>) {
-        val modInitializer = ModInitializer(ModMirageFairy2019.MODID, true)
-        modules(modInitializer)
+        val modScope = ModScope(ModMirageFairy2019.MODID, true)
+        modules(modScope)
 
         val ingredientMap = mutableMapOf<String, Class<*>>()
-        modInitializer.onMakeIngredientFactory(ingredientMap)
-        modInitializer.onMakeResource {
+        modScope.onMakeIngredientFactory(ingredientMap)
+        modScope.onMakeResource {
             val data = jsonObject(
                 "ingredients" to ingredientMap.map { it.key to it.value.canonicalName.jsonElement }.jsonObject
             )
             place("assets/${ModMirageFairy2019.MODID}/recipes/_factories.json", data)
         }
 
-        modInitializer.onMakeResource(ResourceMaker(File("src/main/resources")))
+        modScope.onMakeResource(ResourceMaker(File("src/main/resources")))
 
         val langMaker = LangMaker(File("src/main/resources/assets/miragefairy2019/lang"))
-        modInitializer.onMakeLang(langMaker)
+        modScope.onMakeLang(langMaker)
         langMaker.make()
 
     }

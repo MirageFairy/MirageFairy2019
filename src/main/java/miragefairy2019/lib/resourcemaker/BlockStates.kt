@@ -2,19 +2,19 @@ package miragefairy2019.lib.resourcemaker
 
 import com.google.gson.JsonElement
 import miragefairy2019.common.ResourceName
-import miragefairy2019.lib.modinitializer.ModInitializer
-import miragefairy2019.lib.modinitializer.NamedInitializer
+import miragefairy2019.lib.modinitializer.ModScope
+import miragefairy2019.lib.modinitializer.NamedScope
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 
 
-fun ModInitializer.makeBlockStates(path: String, creator: MakeBlockStatesScope.() -> DataBlockStates) = onMakeResource {
+fun ModScope.makeBlockStates(path: String, creator: MakeBlockStatesScope.() -> DataBlockStates) = onMakeResource {
     place("assets/$modId/blockstates/$path.json", MakeBlockStatesScope(ResourceName(modId, path)).creator().jsonElement)
 }
 
-fun NamedInitializer.makeBlockStates(creator: MakeBlockStatesScope.() -> DataBlockStates) = modInitializer.onMakeResource {
+fun NamedScope.makeBlockStates(creator: MakeBlockStatesScope.() -> DataBlockStates) = modScope.onMakeResource {
     place("assets/${resourceName.domain}/blockstates/${resourceName.path}.json", MakeBlockStatesScope(resourceName).creator().jsonElement)
 }
 

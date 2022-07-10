@@ -1,6 +1,6 @@
 package miragefairy2019.mod
 
-import miragefairy2019.lib.modinitializer.ModInitializer
+import miragefairy2019.lib.modinitializer.ModScope
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.event.FMLConstructionEvent
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
@@ -31,60 +31,60 @@ class ModMirageFairy2019 {
     }
 
 
-    private var modInitializer = ModInitializer(MODID, System.getProperty("miragefairy2019.usePreReleaseFeatures")?.toBoolean() ?: true)
+    private var modScope = ModScope(MODID, System.getProperty("miragefairy2019.usePreReleaseFeatures")?.toBoolean() ?: true)
 
     init {
-        modules(modInitializer)
+        modules(modScope)
     }
 
 
     init {
-        modInitializer.onInstantiation()
-        modInitializer.onInitCreativeTab()
+        modScope.onInstantiation()
+        modScope.onInitCreativeTab()
     }
 
     @Mod.EventHandler
     fun handle(event: FMLConstructionEvent) {
-        modInitializer.onConstruction(event)
+        modScope.onConstruction(event)
     }
 
     @Mod.EventHandler
     fun handle(event: FMLPreInitializationEvent) {
-        modInitializer.onPreInit(event)
-        modInitializer.onRegisterFluid()
-        modInitializer.onRegisterBlock()
-        modInitializer.onRegisterItem()
-        modInitializer.onCreateItemStack()
-        modInitializer.onHookDecorator()
-        modInitializer.onInitKeyBinding()
+        modScope.onPreInit(event)
+        modScope.onRegisterFluid()
+        modScope.onRegisterBlock()
+        modScope.onRegisterItem()
+        modScope.onCreateItemStack()
+        modScope.onHookDecorator()
+        modScope.onInitKeyBinding()
     }
 
     @Mod.EventHandler
     fun handle(event: FMLInitializationEvent) {
-        modInitializer.onInit(event)
-        modInitializer.onAddRecipe()
-        if (event.side.isClient) modInitializer.onRegisterItemColorHandler()
-        modInitializer.onRegisterTileEntity()
-        modInitializer.onRegisterTileEntityRenderer()
-        modInitializer.onInitNetworkChannel()
-        modInitializer.onRegisterNetworkMessage()
+        modScope.onInit(event)
+        modScope.onAddRecipe()
+        if (event.side.isClient) modScope.onRegisterItemColorHandler()
+        modScope.onRegisterTileEntity()
+        modScope.onRegisterTileEntityRenderer()
+        modScope.onInitNetworkChannel()
+        modScope.onRegisterNetworkMessage()
     }
 
     @Mod.EventHandler
-    fun handle(event: FMLPostInitializationEvent) = modInitializer.onPostInit(event)
+    fun handle(event: FMLPostInitializationEvent) = modScope.onPostInit(event)
 
     @Mod.EventHandler
-    fun handle(event: FMLLoadCompleteEvent) = modInitializer.onLoadComplete(event)
+    fun handle(event: FMLLoadCompleteEvent) = modScope.onLoadComplete(event)
 
     @Mod.EventHandler
-    fun handle(event: FMLServerStartingEvent) = modInitializer.onServerStarting(event)
+    fun handle(event: FMLServerStartingEvent) = modScope.onServerStarting(event)
 
     @Mod.EventHandler
-    fun handle(event: FMLServerStartedEvent) = modInitializer.onServerStarted(event)
+    fun handle(event: FMLServerStartedEvent) = modScope.onServerStarted(event)
 
     @Mod.EventHandler
-    fun handle(event: FMLServerStoppingEvent) = modInitializer.onServerStopping(event)
+    fun handle(event: FMLServerStoppingEvent) = modScope.onServerStopping(event)
 
     @Mod.EventHandler
-    fun handle(event: FMLServerStoppedEvent) = modInitializer.onServerStopped(event)
+    fun handle(event: FMLServerStoppedEvent) = modScope.onServerStopped(event)
 }

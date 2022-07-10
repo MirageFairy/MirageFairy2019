@@ -1,7 +1,7 @@
 package miragefairy2019.mod.material
 
 import miragefairy2019.common.toOreName
-import miragefairy2019.lib.modinitializer.ItemVariantInitializer
+import miragefairy2019.lib.modinitializer.ItemVariantScope
 import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.itemVariant
@@ -34,7 +34,7 @@ enum class CommonMaterialCard(
     val japaneseName: String,
     val oreName: String,
     val isHandheld: Boolean,
-    val initializer: ItemVariantInitializer<ItemSimpleMaterials, ItemVariantSimpleMaterials>.() -> Unit
+    val initializer: ItemVariantScope<ItemSimpleMaterials, ItemVariantSimpleMaterials>.() -> Unit
 ) {
     APATITE_GEM(0, "apatite_gem", "gemApatite", "Apatite", "燐灰石", "gemApatite", false, { }),
     FLUORITE_GEM(1, "fluorite_gem", "gemFluorite", "Fluorite", "蛍石", "gemFluorite", false, { }),
@@ -46,7 +46,7 @@ enum class CommonMaterialCard(
     MOONSTONE_GEM(7, "moonstone_gem", "gemMoonstone", "Moonstone", "月長石", "gemMoonstone", false, { }),
     MAGNETITE_GEM(8, "magnetite_gem", "gemMagnetite", "Magnetite", "磁鉄鉱", "gemMagnetite", false, { }),
     SALTPETER_GEM(9, "saltpeter_gem", "gemSaltpeter", "Saltpeter", "硝石", "gemSaltpeter", false, {
-        modInitializer.makeRecipe("saltpeter") {
+        modScope.makeRecipe("saltpeter") {
             DataShapedRecipe(
                 pattern = listOf(
                     "m",
@@ -65,7 +65,7 @@ enum class CommonMaterialCard(
     PYROPE_GEM(10, "pyrope_gem", "gemPyrope", "Pyrope", "パイロープ", "gemPyrope", false, { }),
     SMITHSONITE_GEM(11, "smithsonite_gem", "gemSmithsonite", "Smithsonite", "スミソナイト", "gemSmithsonite", false, { }),
     MIRAGIUM_ROD(12, "miragium_rod", "rodMiragium", "Miragium Rod", "ミラジウムの棒", "rodMiragium", true, {
-        modInitializer.makeRecipe("miragium_rod_by_hand") { // TODO rename
+        modScope.makeRecipe("miragium_rod_by_hand") { // TODO rename
             DataShapedRecipe(
                 pattern = listOf(
                     "  I",
@@ -78,7 +78,7 @@ enum class CommonMaterialCard(
                 result = DataResult(item = "miragefairy2019:materials", data = 12)
             )
         }
-        modInitializer.makeRecipe("miragium_rod_by_fairy_wand") { // TODO move -> wand recipe
+        modScope.makeRecipe("miragium_rod_by_fairy_wand") { // TODO move -> wand recipe
             DataShapedRecipe(
                 pattern = listOf(
                     "mI",
@@ -91,7 +91,7 @@ enum class CommonMaterialCard(
                 result = DataResult(item = "miragefairy2019:materials", data = 12)
             )
         }
-        modInitializer.makeRecipe("miragium_rod_from_distortion_fairy_wand") { // TODO move -> wand recipe
+        modScope.makeRecipe("miragium_rod_from_distortion_fairy_wand") { // TODO move -> wand recipe
             DataShapedRecipe(
                 pattern = listOf(
                     "d ",
@@ -106,7 +106,7 @@ enum class CommonMaterialCard(
         }
     }),
     MIRAGIUM_NUGGET(13, "miragium_nugget", "nuggetMiragium", "Miragium Nugget", "ミラジウムの塊", "nuggetMiragium", false, {
-        modInitializer.makeRecipe("miragium_nugget_by_fairy") { // 妖精→
+        modScope.makeRecipe("miragium_nugget_by_fairy") { // 妖精→
             DataShapelessRecipe(
                 ingredients = listOf(
                     WandType.CRAFTING.ingredientData,
@@ -117,7 +117,7 @@ enum class CommonMaterialCard(
                 result = DataResult(item = "miragefairy2019:materials", data = 13, count = 2)
             )
         }
-        modInitializer.makeRecipe("miragium_nugget_by_fairy_wand") { // TODO rename
+        modScope.makeRecipe("miragium_nugget_by_fairy_wand") { // TODO rename
             DataShapelessRecipe(
                 ingredients = listOf(
                     WandType.MELTING.ingredientData,
@@ -148,7 +148,7 @@ enum class CommonMaterialCard(
                 result = DataResult(item = "miragefairy2019:materials", data = 19)
             )
         }
-        modInitializer.makeRecipe("lilagium_ingot_from_fusion_fairy_wand") { // TODO move -> wand recipe
+        modScope.makeRecipe("lilagium_ingot_from_fusion_fairy_wand") { // TODO move -> wand recipe
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOreIngredient(ore = "ingotMiragium"),
@@ -175,7 +175,7 @@ enum class CommonMaterialCard(
                 result = DataResult(item = "miragefairy2019:materials", data = 20)
             )
         }
-        modInitializer.makeRecipe("miragium_plate_from_distortion_fairy_wand") { // TODO move -> wand recipe
+        modScope.makeRecipe("miragium_plate_from_distortion_fairy_wand") { // TODO move -> wand recipe
             DataShapedRecipe(
                 pattern = listOf(
                     "d",
@@ -199,7 +199,7 @@ enum class CommonMaterialCard(
     APATITE_DUST(23, "apatite_dust", "dustApatite", "Apatite Dust", "燐灰石の粉", "dustApatite", false, { }),
     FLUORITE_DUST(24, "fluorite_dust", "dustFluorite", "Fluorite Dust", "蛍石の粉", "dustFluorite", false, { }),
     SULFUR_DUST(25, "sulfur_dust", "dustSulfur", "Sulfur Dust", "硫黄の粉", "dustSulfur", false, {
-        modInitializer.makeRecipe("fire_charge_from_sulfur_dust") { // →ファイヤーチャージ
+        modScope.makeRecipe("fire_charge_from_sulfur_dust") { // →ファイヤーチャージ
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOreIngredient(ore = "gunpowder"),
@@ -215,7 +215,7 @@ enum class CommonMaterialCard(
                 result = DataResult(item = "minecraft:fire_charge", count = 3)
             )
         }
-        modInitializer.makeRecipe("gunpowder_from_saltpeter") { // →火薬
+        modScope.makeRecipe("gunpowder_from_saltpeter") { // →火薬
             DataShapelessRecipe(
                 ingredients = listOf(
                     DataOrIngredient(
@@ -234,14 +234,14 @@ enum class CommonMaterialCard(
     MOONSTONE_DUST(27, "moonstone_dust", "dustMoonstone", "Moonstone Dust", "月長石の粉", "dustMoonstone", false, { }),
     MAGNETITE_DUST(28, "magnetite_dust", "dustMagnetite", "Magnetite Dust", "磁鉄鉱の粉", "dustMagnetite", false, { }),
     PYRITE_GEM(29, "pyrite_gem", "gemPyrite", "Pyrite", "パイライト", "gemPyrite", false, {
-        modInitializer.onAddRecipe a@{
+        modScope.onAddRecipe a@{
             GameRegistry.addSmelting("gemPyrite".toOreName().copyItemStack() ?: return@a, "nuggetIron".toOreName().copyItemStack(3) ?: return@a, 0.7f)
         }
     }),
 }
 
-private fun ItemVariantInitializer<ItemSimpleMaterials, ItemVariantSimpleMaterials>.fuel(burnTime: Int): ItemVariantInitializer<ItemSimpleMaterials, ItemVariantSimpleMaterials> {
-    itemInitializer.modInitializer.onRegisterItem {
+private fun ItemVariantScope<ItemSimpleMaterials, ItemVariantSimpleMaterials>.fuel(burnTime: Int): ItemVariantScope<ItemSimpleMaterials, ItemVariantSimpleMaterials> {
+    itemScope.modScope.onRegisterItem {
         itemVariant.burnTime = burnTime
     }
     return this

@@ -1,6 +1,6 @@
 package miragefairy2019.lib
 
-import miragefairy2019.lib.modinitializer.ItemInitializer
+import miragefairy2019.lib.modinitializer.ItemScope
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.color.IItemColor
 import net.minecraft.item.Item
@@ -13,8 +13,8 @@ interface IColoredItem {
     fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int
 }
 
-fun <I> ItemInitializer<I>.registerItemColorHandler() where  I : Item, I : IColoredItem {
-    modInitializer.onRegisterItemColorHandler {
+fun <I> ItemScope<I>.registerItemColorHandler() where  I : Item, I : IColoredItem {
+    modScope.onRegisterItemColorHandler {
         @SideOnly(Side.CLIENT)
         class ItemColorImpl : IItemColor {
             override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int) = item.colorMultiplier(itemStack, tintIndex)
