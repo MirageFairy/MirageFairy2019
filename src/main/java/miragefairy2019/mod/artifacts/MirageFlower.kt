@@ -1,7 +1,7 @@
 package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.Erg
-import miragefairy2019.api.IFairyType
+import miragefairy2019.api.IFairySpec
 import miragefairy2019.api.IPickExecutor
 import miragefairy2019.api.IPickHandler
 import miragefairy2019.api.PickHandlerRegistry
@@ -221,7 +221,7 @@ fun calculateGrowthRate(world: World, blockPos: BlockPos): List<Pair<String, Dou
 
 val List<Pair<String, Double>>.growthRate get() = fold(1.0) { a, b -> a * b.second }
 
-fun getGrowthRateInFloor(fairyType: IFairyType) = fairyType.shineEfficiency * fairyType.erg(Erg.CRYSTAL) / 100.0 * 3
+fun getGrowthRateInFloor(fairySpec: IFairySpec) = fairySpec.shineEfficiency * fairySpec.erg(Erg.CRYSTAL) / 100.0 * 3
 
 class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidであるマテリアルは耕土を破壊する
     init {

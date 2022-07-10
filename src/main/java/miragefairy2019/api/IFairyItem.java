@@ -8,6 +8,6 @@ import javax.annotation.Nullable;
 public interface IFairyItem {
 
     @Nullable
-    public IFairyType getMirageFairy(@Nonnull ItemStack itemStack);
+    public IFairySpec getMirageFairy(@Nonnull ItemStack itemStack);
 
 }

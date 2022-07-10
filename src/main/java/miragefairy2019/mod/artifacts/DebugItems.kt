@@ -109,10 +109,10 @@ class ItemDebugFairyList : ItemDebug() {
         writeAction(player, "fairyList.txt", FairyCard.values().joinToString("") { fairyCard ->
             val variantRank1 = fairyCard.getVariant(1)
             val variantRank2 = fairyCard.getVariant(2)
-            val fairyTypeRank1 = variantRank1
-            val fairyTypeRank2 = variantRank2
+            val fairySpecRank1 = variantRank1
+            val fairySpecRank2 = variantRank2
             fun color(selector: ColorSet.() -> Int) = variantRank1.colorSet.selector().toRgb().hex
-            val motif = fairyTypeRank1.motif!!.resourcePath
+            val motif = fairySpecRank1.motif!!.resourcePath
             "|${
                 listOf(
                     listOf(
@@ -121,25 +121,25 @@ class ItemDebugFairyList : ItemDebug() {
                         "CENTER:$motif&br()${enUs["mirageFairy2019.fairy.$motif.name"]!!}",
                         "CENTER:${jaJp["mirageFairy2019.fairy.$motif.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
                         "CENTER:${variantRank1.rare}",
-                        "RIGHT:${fairyTypeRank1.cost.f0}"
+                        "RIGHT:${fairySpecRank1.cost.f0}"
                     ),
                     Mana.values().map {
-                        "RIGHT:${fairyTypeRank1.mana(it).f3}"
+                        "RIGHT:${fairySpecRank1.mana(it).f3}"
                     },
                     listOf(
-                        "RIGHT:${fairyTypeRank1.manaSet.sum.f3}"
+                        "RIGHT:${fairySpecRank1.manaSet.sum.f3}"
                     ),
                     Mana.values().map {
-                        val a1 = fairyTypeRank1.mana(it) / fairyTypeRank1.cost * 50
-                        val a2 = fairyTypeRank2.mana(it) / fairyTypeRank2.cost * 50
+                        val a1 = fairySpecRank1.mana(it) / fairySpecRank1.cost * 50
+                        val a2 = fairySpecRank2.mana(it) / fairySpecRank2.cost * 50
                         "${if (a1 >= 10) "BGCOLOR(#FDD):" else if (a2 >= 10) "BGCOLOR(#DDF):" else ""}RIGHT:${a1.f3}"
                     },
                     listOf(
-                        "RIGHT:${(fairyTypeRank1.manaSet.sum / fairyTypeRank1.cost * 50).f3}"
+                        "RIGHT:${(fairySpecRank1.manaSet.sum / fairySpecRank1.cost * 50).f3}"
                     ),
                     Erg.values().map {
-                        val a1 = fairyTypeRank1.erg(it)
-                        val a2 = fairyTypeRank2.erg(it)
+                        val a1 = fairySpecRank1.erg(it)
+                        val a2 = fairySpecRank2.erg(it)
                         "${if (a1 >= 10) "BGCOLOR(#FDD):" else if (a2 >= 10) "BGCOLOR(#DDF):" else ""}RIGHT:${a1.f3}"
                     }
                 ).flatten().joinToString("|")

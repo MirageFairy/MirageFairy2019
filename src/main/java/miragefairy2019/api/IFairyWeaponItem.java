@@ -16,7 +16,7 @@ public interface IFairyWeaponItem {
     public void addInformationFairyWeapon(
         @Nonnull ItemStack itemStackFairyWeapon,
         @Nonnull ItemStack itemStackFairy,
-        @Nonnull IFairyType fairyType,
+        @Nonnull IFairySpec fairySpec,
         @Nullable World world,
         @Nonnull NonNullList<String> tooltip,
         @Nonnull ITooltipFlag flag

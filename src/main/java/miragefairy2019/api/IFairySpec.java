@@ -6,7 +6,7 @@ import net.minecraft.util.text.ITextComponent;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public interface IFairyType {
+public interface IFairySpec {
 
     /**
      * @return この妖精タイプに妖精が「不在」か否か。

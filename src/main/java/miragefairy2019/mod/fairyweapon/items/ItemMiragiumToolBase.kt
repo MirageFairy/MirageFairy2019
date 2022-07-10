@@ -56,9 +56,9 @@ abstract class ItemMiragiumToolBase(
     override fun getMagicDescription(itemStack: ItemStack) = "右クリックでブロックを破壊" // TODO translate
 
     override fun getMagic() = magic {
-        val fairyType = findFairy(weaponItemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
+        val fairySpec = findFairy(weaponItemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
         val rayTraceMagicSelector = MagicSelector.rayTrace(world, player, 0.0) // 視線判定
-        if (fairyType.isEmpty) return@magic fail(rayTraceMagicSelector.item.position, 0xFF00FF) // 妖精なし判定
+        if (fairySpec.isEmpty) return@magic fail(rayTraceMagicSelector.item.position, 0xFF00FF) // 妖精なし判定
         if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic fail(rayTraceMagicSelector.item.position, 0xFF0000) // 材料なし判定
         val targets = rayTraceMagicSelector.item.blockPos.let { if (rayTraceMagicSelector.item.sideHit != null) it.offset(rayTraceMagicSelector.item.sideHit!!) else it }.let { iterateTargets(this@magic, it) } // 対象判定
         if (!targets.hasNext()) return@magic fail(rayTraceMagicSelector.item.position, 0x00FFFF) // ターゲットなし判定

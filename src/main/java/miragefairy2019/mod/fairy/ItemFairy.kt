@@ -2,7 +2,7 @@ package miragefairy2019.mod.fairy
 
 import miragefairy2019.api.ErgSet
 import miragefairy2019.api.IFairyItem
-import miragefairy2019.api.IFairyType
+import miragefairy2019.api.IFairySpec
 import miragefairy2019.api.IFairyWeaponItem
 import miragefairy2019.api.Mana
 import miragefairy2019.api.ManaSet
@@ -55,7 +55,7 @@ class VariantFairy(
     private val manaSet: ManaSet,
     private val ergSet: ErgSet,
     val rank: Int
-) : ItemVariant(), IFairyType {
+) : ItemVariant(), IFairySpec {
     override fun isEmpty() = false
     override fun getMotif() = motif
     override fun getDisplayName() = displayName
@@ -76,8 +76,8 @@ fun hasSameId(a: VariantFairy, b: VariantFairy) = a.id == b.id
 class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, IFairyItem {
     override fun getMirageFairy(itemStack: ItemStack) = getVariant(itemStack)
     override fun getItemStackDisplayName(itemStack: ItemStack): String {
-        val fairyType = getMirageFairy(itemStack) ?: return translateToLocal("$unlocalizedName.name")
-        return translateToLocalFormatted("$unlocalizedName.format", fairyType.displayName.formattedText)
+        val fairySpec = getMirageFairy(itemStack) ?: return translateToLocal("$unlocalizedName.name")
+        return translateToLocalFormatted("$unlocalizedName.format", fairySpec.displayName.formattedText)
     }
 
     @SideOnly(Side.CLIENT)

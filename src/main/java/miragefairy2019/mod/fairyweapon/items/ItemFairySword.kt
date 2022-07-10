@@ -1,7 +1,7 @@
 package miragefairy2019.mod.fairyweapon.items
 
 import com.google.common.collect.Multimap
-import miragefairy2019.api.IFairyType
+import miragefairy2019.api.IFairySpec
 import miragefairy2019.lib.sum
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.formattedText
@@ -29,10 +29,10 @@ class ItemFairySword : ItemFairyWeapon() {
     private fun setAdditionalAttackDamage(itemStack: ItemStack, additionalAttackDamage: Double) = setFairyAttribute("AdditionalAttackDamage", itemStack, additionalAttackDamage)
     private fun setAdditionalAttackSpeed(itemStack: ItemStack, additionalAttackSpeed: Double) = setFairyAttribute("AdditionalAttackSpeed", itemStack, additionalAttackSpeed)
 
-    private class Status(fairyType: IFairyType) {
-        val additionalAttackDamage = 6.0 * fairyType.manaSet.sum(1.0, 1.0, 1.0, 1.0, 1.0, 1.0) / 50.0 // 3~6程度
+    private class Status(fairySped: IFairySpec) {
+        val additionalAttackDamage = 6.0 * fairySped.manaSet.sum(1.0, 1.0, 1.0, 1.0, 1.0, 1.0) / 50.0 // 3~6程度
         val additionalAttackSpeed = run {
-            val a = fairyType.cost / 100.0
+            val a = fairySped.cost / 100.0
             -4 + min(0.25 / (a * a), 8.0) // -3.2~-2.4
             // コスト50のときに斧より少し早い程度（-3.0）
             // コスト0のときに+3
@@ -40,8 +40,8 @@ class ItemFairySword : ItemFairyWeapon() {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: NonNullList<String>, flag: ITooltipFlag) {
-        val status = Status(fairyType)
+    override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairySpec: IFairySpec, world: World?, tooltip: NonNullList<String>, flag: ITooltipFlag) {
+        val status = Status(fairySpec)
         tooltip += formattedText { ("Additional Attack Damage: "() + format("%.1f", status.additionalAttackDamage) + " (Shine, Fire, Wind, Gaia, Aqua, Dark)"()).blue }
         tooltip += formattedText { ("Additional Attack Speed: "() + format("%.1f", status.additionalAttackSpeed) + " (Cost)"()).blue }
     }

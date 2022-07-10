@@ -1,9 +1,9 @@
 package miragefairy2019.mod.fairyweapon
 
-import miragefairy2019.api.IFairyType
+import miragefairy2019.api.IFairySpec
 import miragefairy2019.lib.compound
 import miragefairy2019.lib.double
-import miragefairy2019.lib.fairyType
+import miragefairy2019.lib.fairySpec
 import miragefairy2019.lib.get
 import miragefairy2019.lib.itemStacks
 import miragefairy2019.lib.nbtProvider
@@ -36,11 +36,11 @@ fun findItem(player: EntityPlayer, predicate: (ItemStack) -> Boolean) = player.i
 fun findItem(player: EntityPlayer, itemStackTarget: ItemStack) = findItem(player) { itemStackTarget.equalsItemDamageTag(it) }
 
 /** 搭乗中の妖精を優先します。 */
-fun findFairy(fairyWeaponItemStack: ItemStack, player: EntityPlayer): Pair<ItemStack, IFairyType>? {
+fun findFairy(fairyWeaponItemStack: ItemStack, player: EntityPlayer): Pair<ItemStack, IFairySpec>? {
     val itemStacks = listOf(getCombinedFairy(fairyWeaponItemStack)) + player.inventoryItems
     itemStacks.forEach next@{ itemStack ->
-        val fairyType = itemStack.fairyType ?: return@next
-        return Pair(itemStack, fairyType)
+        val fairySpec = itemStack.fairySpec ?: return@next
+        return Pair(itemStack, fairySpec)
     }
     return null
 }

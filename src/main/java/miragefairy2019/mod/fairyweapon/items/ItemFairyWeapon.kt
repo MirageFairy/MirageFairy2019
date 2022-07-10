@@ -4,7 +4,7 @@ import miragefairy2019.api.ICombineAcceptorItem
 import miragefairy2019.api.ICombineHandler
 import miragefairy2019.api.ICombineResult
 import miragefairy2019.api.IFairyItem
-import miragefairy2019.api.IFairyType
+import miragefairy2019.api.IFairySpec
 import miragefairy2019.api.IFairyWeaponItem
 import miragefairy2019.api.IManualRepairAcceptorItem
 import miragefairy2019.lib.EMPTY_FAIRY
@@ -112,7 +112,7 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
     open fun getMagicDescription(itemStack: ItemStack): String? = null
 
     @SideOnly(Side.CLIENT)
-    override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairyType: IFairyType, world: World?, tooltip: NonNullList<String>, flag: ITooltipFlag) {
+    override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairySpec: IFairySpec, world: World?, tooltip: NonNullList<String>, flag: ITooltipFlag) {
 
     }
 

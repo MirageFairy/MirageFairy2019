@@ -12,7 +12,7 @@ import miragefairy2019.lib.compoundOrCreate
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.div
 import miragefairy2019.lib.fairyCentrifugeCraftHandler
-import miragefairy2019.lib.fairyType
+import miragefairy2019.lib.fairySpec
 import miragefairy2019.lib.get
 import miragefairy2019.lib.getFairyCentrifugeCraftRecipe
 import miragefairy2019.lib.gui.Alignment
@@ -471,7 +471,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
     fun createInventory(size: Int) = InventoryTileEntity(this, "tile.fairyCentrifuge.name", false, size)
 
-    val fairyInventory = createInventory(3).apply { filter = { it.fairyType != null } }.apply { inventoryStackLimit = 1 }
+    val fairyInventory = createInventory(3).apply { filter = { it.fairySpec != null } }.apply { inventoryStackLimit = 1 }
     val inputInventory = createInventory(9)
     var resultInventory = createInventory(0)
     val outputInventory = createInventory(9)
@@ -588,10 +588,10 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
     // Recipe
 
     fun getArguments(fairyItemStack: ItemStack): IFairyCentrifugeCraftArguments? {
-        val fairyType = fairyItemStack.fairyType ?: return null
+        val fairySpec = fairyItemStack.fairySpec ?: return null
         return object : IFairyCentrifugeCraftArguments {
-            override fun getMana(mana: Mana): Double = fairyType.manaSet[mana] / (fairyType.cost / 50.0)
-            override fun getErg(erg: Erg): Double = fairyType.ergSet[erg]
+            override fun getMana(mana: Mana): Double = fairySpec.manaSet[mana] / (fairySpec.cost / 50.0)
+            override fun getErg(erg: Erg): Double = fairySpec.ergSet[erg]
         }
     }
 
