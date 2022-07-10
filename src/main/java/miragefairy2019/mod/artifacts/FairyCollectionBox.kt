@@ -348,7 +348,9 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
     init {
 
         // meta
-        defaultState = blockState.baseState.withProperty(FACING, EnumFacing.NORTH).withProperty(CONTEXT, EnumFairyCollectionBoxContext.BOTTOM)
+        defaultState = blockState.baseState
+            .withProperty(FACING, EnumFacing.NORTH)
+            .withProperty(CONTEXT, EnumFairyCollectionBoxContext.BOTTOM)
 
         // style
         soundType = SoundType.WOOD
