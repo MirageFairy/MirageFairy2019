@@ -36,6 +36,7 @@ import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.fairy.ItemFairy
+import miragefairy2019.mod.fairy.colorSet
 import miragefairy2019.mod.fairy.createItemStack
 import mirrg.kotlin.hydrogen.castOrNull
 import mirrg.kotlin.hydrogen.formatAs
@@ -166,11 +167,11 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
         val fairyVariant = fairyItem.getVariant(fairyItemStack) ?: return 0xFFFFFF
         return when (tintIndex) {
             0 -> 0xFFFFFF
-            1 -> fairyVariant.fairyCard.colorSet.skin
+            1 -> fairyVariant.colorSet.skin
             2 -> fairyItem.dressColor
-            3 -> fairyVariant.fairyCard.colorSet.dark
-            4 -> fairyVariant.fairyCard.colorSet.bright
-            5 -> fairyVariant.fairyCard.colorSet.hair
+            3 -> fairyVariant.colorSet.dark
+            4 -> fairyVariant.colorSet.bright
+            5 -> fairyVariant.colorSet.hair
             6 -> 0xFFFFFF
             else -> 0xFFFFFF
         }

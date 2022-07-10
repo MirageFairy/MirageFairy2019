@@ -22,7 +22,9 @@ import miragefairy2019.libkt.yellow
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairy.ColorSet
 import miragefairy2019.mod.fairy.FairyCard
+import miragefairy2019.mod.fairy.colorSet
 import miragefairy2019.mod.fairy.getVariant
+import miragefairy2019.mod.fairy.rare
 import miragefairy2019.mod.oreseed.ApiOreSeedDrop
 import miragefairy2019.mod.oreseed.EnumOreSeedType
 import miragefairy2019.mod.oreseed.EnumVariantOreSeed
@@ -109,7 +111,7 @@ class ItemDebugFairyList : ItemDebug() {
             val variantRank2 = fairyCard.getVariant(2)
             val fairyTypeRank1 = variantRank1
             val fairyTypeRank2 = variantRank2
-            fun color(selector: ColorSet.() -> Int) = variantRank1.fairyCard.colorSet.selector().toRgb().hex
+            fun color(selector: ColorSet.() -> Int) = variantRank1.colorSet.selector().toRgb().hex
             val motif = fairyTypeRank1.motif!!.resourcePath
             "|${
                 listOf(
@@ -118,7 +120,7 @@ class ItemDebugFairyList : ItemDebug() {
                         "&bold(){!FairyImage(#${color { skin }},#${color { bright }},#${color { dark }},#${color { hair }})}",
                         "CENTER:$motif&br()${enUs["mirageFairy2019.fairy.$motif.name"]!!}",
                         "CENTER:${jaJp["mirageFairy2019.fairy.$motif.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
-                        "CENTER:${variantRank1.fairyCard.rare}",
+                        "CENTER:${variantRank1.rare}",
                         "RIGHT:${fairyTypeRank1.cost.f0}"
                     ),
                     Mana.values().map {

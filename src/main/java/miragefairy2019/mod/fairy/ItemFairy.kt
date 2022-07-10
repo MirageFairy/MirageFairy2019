@@ -67,6 +67,7 @@ class VariantFairy(
 
 val VariantFairy.id get() = fairyCard.id
 val VariantFairy.rare get() = fairyCard.rare
+val VariantFairy.colorSet get() = fairyCard.colorSet
 
 val VariantFairy.level get() = rare + rank - 1
 
@@ -181,11 +182,11 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
     override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
         val variant = getVariant(itemStack) ?: return 0xFFFFFF
         return when (tintIndex) {
-            0 -> variant.fairyCard.colorSet.skin
+            0 -> variant.colorSet.skin
             1 -> dressColor
-            2 -> variant.fairyCard.colorSet.dark
-            3 -> variant.fairyCard.colorSet.bright
-            4 -> variant.fairyCard.colorSet.hair
+            2 -> variant.colorSet.dark
+            3 -> variant.colorSet.bright
+            4 -> variant.colorSet.hair
             else -> 0xFFFFFF
         }
     }
