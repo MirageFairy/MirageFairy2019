@@ -12,7 +12,7 @@ import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.ja
 import miragefairy2019.mod.artifacts.artifactsModule
-import miragefairy2019.mod.fairy.Fairy
+import miragefairy2019.mod.fairy.fairyModule
 import miragefairy2019.mod.fairybox.fairyBoxModule
 import miragefairy2019.mod.fairyrelation.fairyRelationModule
 import miragefairy2019.mod.fairyweapon.fairyWeaponModule
@@ -38,7 +38,7 @@ val modules = module {
     playerAuraModule(this)
     PlacedItem.placedItemMdule(this)
     skillModule(this)
-    Fairy.fairyModule(this)
+    fairyModule(this)
     fairyWeaponModule(this)
     fairyRelationModule(this)
     fairyBoxModule(this)
