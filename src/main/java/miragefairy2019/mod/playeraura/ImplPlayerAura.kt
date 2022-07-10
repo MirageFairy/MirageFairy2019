@@ -59,7 +59,7 @@ class PlayerAuraManager : IPlayerAuraManager {
             if (entries.isEmpty()) return null // 関連付けられた妖精が居ない場合は無視
 
             // 平均を返す
-            fun f(typeChooser: (ManaSet) -> Double) = entries.map { typeChooser(it.fairyCard.getVariant().type.manaSet) / it.fairyCard.getVariant().type.cost * 50 * 0.5 }.average()
+            fun f(typeChooser: (ManaSet) -> Double) = entries.map { typeChooser(it.fairyCard.getVariant().manaSet) / it.fairyCard.getVariant().cost * 50 * 0.5 }.average()
             return ManaSet(f { it.shine }, f { it.fire }, f { it.wind }, f { it.gaia }, f { it.aqua }, f { it.dark })
         }
     }

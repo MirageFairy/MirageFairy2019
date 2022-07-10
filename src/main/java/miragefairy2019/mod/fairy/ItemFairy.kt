@@ -48,31 +48,32 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-class FairyType(
+class VariantFairy(
+    val fairyCard: FairyCard,
     private val motif: ResourceLocation?,
     private val displayName: ITextComponent,
-    private val color: Int,
-    private val cost: Double,
     private val manaSet: ManaSet,
-    private val ergSet: ErgSet
-) : IFairyType {
+    private val ergSet: ErgSet,
+    val rank: Int
+) : ItemVariant(), IFairyType {
     override fun isEmpty() = false
     override fun getMotif() = motif
     override fun getDisplayName() = displayName
-    override fun getColor() = color
-    override fun getCost() = cost
+    override fun getColor() = fairyCard.colorSet.hair
+    override fun getCost() = fairyCard.cost.toDouble()
     override fun getManaSet() = manaSet
     override fun getErgSet() = ergSet
 }
 
-class VariantFairy(val id: Int, val colorSet: ColorSet, val type: FairyType, val rare: Int, val rank: Int) : ItemVariant()
+val VariantFairy.id get() = fairyCard.id
+val VariantFairy.rare get() = fairyCard.rare
 
 val VariantFairy.level get() = rare + rank - 1
 
 fun hasSameId(a: VariantFairy, b: VariantFairy) = a.id == b.id
 
 class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, IFairyItem {
-    override fun getMirageFairy(itemStack: ItemStack) = getVariant(itemStack)?.type
+    override fun getMirageFairy(itemStack: ItemStack) = getVariant(itemStack)
     override fun getItemStackDisplayName(itemStack: ItemStack): String {
         val fairyType = getMirageFairy(itemStack) ?: return translateToLocal("$unlocalizedName.name")
         return translateToLocalFormatted("$unlocalizedName.format", fairyType.displayName.formattedText)
@@ -87,7 +88,7 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
 
         // 番号　MOD名
         if (flag.isAdvanced) {
-            tooltip += formattedText { "No: ${variant.id} (${variant.type.motif?.resourceDomain ?: "unknown"})"().green } // TODO translate
+            tooltip += formattedText { "No: ${variant.id} (${variant.motif?.resourceDomain ?: "unknown"})"().green } // TODO translate
         }
 
         // レア　ランク　品種名
@@ -113,7 +114,7 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
                 },
                 if (flag.isAdvanced) " レア度.${variant.rare}"().gold else null, // TODO translate
                 if (flag.isAdvanced) " ランク.${variant.rank}"().withColor(getRankColor(variant)) else null, // TODO translate
-                " ${variant.type.motif?.resourcePath ?: "unknown"}"().white
+                " ${variant.motif?.resourcePath ?: "unknown"}"().white
             )
         }
 
@@ -121,8 +122,8 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
         tooltip += formattedText { "マナ: "().aqua } // TODO translate
         if (flag.isAdvanced) {
             fun f(mana: Mana) = textComponent {
-                val raw = variant.type.manaSet[mana] / (variant.type.cost / 50.0)
-                val normalized = variant.type.manaSet[mana]
+                val raw = variant.manaSet[mana] / (variant.cost / 50.0)
+                val normalized = variant.manaSet[mana]
                 (format("%.3f", raw) + " ["() + format("%.3f", normalized) + "]"()).withColor(mana.textColor)
             }
             tooltip += formattedText { "        "() + f(Mana.SHINE)() }
@@ -130,7 +131,7 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
             tooltip += formattedText { f(Mana.GAIA)() + "    "() + f(Mana.AQUA)() }
             tooltip += formattedText { "        "() + f(Mana.DARK)() }
         } else {
-            fun f(mana: Mana) = textComponent { format("%4d", formatInt(variant.type.manaSet[mana] / (variant.type.cost / 50.0))).withColor(mana.textColor) }
+            fun f(mana: Mana) = textComponent { format("%4d", formatInt(variant.manaSet[mana] / (variant.cost / 50.0))).withColor(mana.textColor) }
             tooltip += formattedText { "    "() + f(Mana.SHINE)() }
             tooltip += formattedText { f(Mana.FIRE)() + "    "() + f(Mana.WIND)() }
             tooltip += formattedText { f(Mana.GAIA)() + "    "() + f(Mana.AQUA)() }
@@ -139,21 +140,21 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
 
         // コスト
         if (flag.isAdvanced) {
-            tooltip += formattedText { format("コスト: %.3f", variant.type.cost).darkGray } // TODO translate
+            tooltip += formattedText { format("コスト: %.3f", variant.cost).darkGray } // TODO translate
         } else {
-            tooltip += formattedText { format("コスト: %.0f", variant.type.cost).darkGray } // TODO translate
+            tooltip += formattedText { format("コスト: %.0f", variant.cost).darkGray } // TODO translate
         }
 
         // エルグ
         tooltip += formattedText {
             concat(
                 "エルグ: "(), // TODO translate
-                variant.type.ergSet.entries
+                variant.ergSet.entries
                     .filter { formatInt(it.second) >= 10 }
                     .sortedByDescending { it.second }
                     .map {
                         if (flag.isAdvanced) {
-                            it.first.displayName() + format("(%.3f [%.3f])", it.second, it.second * (variant.type.cost / 50.0))
+                            it.first.displayName() + format("(%.3f [%.3f])", it.second, it.second * (variant.cost / 50.0))
                         } else {
                             it.first.displayName()
                         }
@@ -168,7 +169,7 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
             fun f(itemStackFairyWeapon: ItemStack) {
                 val item = itemStackFairyWeapon.item as? IFairyWeaponItem ?: return
                 tooltip += formattedText { ("妖精武器: "() + itemStackFairyWeapon.displayName().white).blue } // TODO translate
-                tooltip += NonNullList.create<String>().also { item.addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant.type, world, it, flag) }
+                tooltip += NonNullList.create<String>().also { item.addInformationFairyWeapon(itemStackFairyWeapon, itemStack, variant, world, it, flag) }
             }
             f(player.getHeldItem(EnumHand.MAIN_HAND))
             f(player.getHeldItem(EnumHand.OFF_HAND))
@@ -180,11 +181,11 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
     override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
         val variant = getVariant(itemStack) ?: return 0xFFFFFF
         return when (tintIndex) {
-            0 -> variant.colorSet.skin
+            0 -> variant.fairyCard.colorSet.skin
             1 -> dressColor
-            2 -> variant.colorSet.dark
-            3 -> variant.colorSet.bright
-            4 -> variant.colorSet.hair
+            2 -> variant.fairyCard.colorSet.dark
+            3 -> variant.fairyCard.colorSet.bright
+            4 -> variant.fairyCard.colorSet.hair
             else -> 0xFFFFFF
         }
     }

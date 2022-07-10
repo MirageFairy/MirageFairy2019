@@ -32,6 +32,7 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairy.fairyVariant
 import miragefairy2019.mod.fairy.hasSameId
+import miragefairy2019.mod.fairy.id
 import miragefairy2019.mod.fairy.level
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot

@@ -107,15 +107,14 @@ object Fairy {
                         val rateVariance = 0.5.pow(((fairyCard.manaSet / fairyCard.manaSet.max).sum - 1) / 5.0)
                         val manaSetReal = fairyCard.manaSet / fairyCard.manaSet.sum * (fairyCard.cost * rateRare * rateVariance * fairyCard.rateSpecial)
                         val ergSetReal = ErgSet(fairyCard.ergSet.entries.associate { (erg, value) -> erg to value * rateRare })
-                        val type = FairyType(
+                        val variant = VariantFairy(
+                            fairyCard,
                             ResourceLocation(ModMirageFairy2019.MODID, fairyCard.registryName),
                             textComponent { translate("mirageFairy2019.fairy.${fairyCard.unlocalizedName}.name") },
-                            fairyCard.colorSet.hair,
-                            fairyCard.cost.toDouble(),
                             manaSetReal,
-                            ergSetReal
+                            ergSetReal,
+                            rank
                         )
-                        val variant = VariantFairy(fairyCard.id, fairyCard.colorSet, type, fairyCard.rare, rank)
 
                         item.registerVariant(fairyCard.id, variant)
                     }
@@ -170,10 +169,10 @@ object Fairy {
                     val rank = i + 1
 
                     // 品種別
-                    OreDictionary.registerOre("mirageFairy2019Fairy${fairyCard.getVariant(rank).type.motif!!.resourcePath.toUpperCamelCase()}Rank$rank", fairyCard.createItemStack(rank))
+                    OreDictionary.registerOre("mirageFairy2019Fairy${fairyCard.getVariant(rank).motif!!.resourcePath.toUpperCamelCase()}Rank$rank", fairyCard.createItemStack(rank))
 
                     // エルグ別
-                    fairyCard.getVariant(rank).type.ergSet.entries.forEach {
+                    fairyCard.getVariant(rank).ergSet.entries.forEach {
                         if (it.second >= 10) {
                             OreDictionary.registerOre("mirageFairy2019FairyAbility${it.first.toString().toUpperCaseHead()}", fairyCard.createItemStack(rank))
                         }
@@ -189,8 +188,8 @@ object Fairy {
 
                     // 凝縮
                     GameRegistry.addShapelessRecipe(
-                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${fairyCard.getVariant(rank).type.motif!!.resourcePath}"),
-                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${fairyCard.getVariant(rank).type.motif!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${fairyCard.getVariant(rank).motif!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:condense_r${i}_fairy_${fairyCard.getVariant(rank).motif!!.resourcePath}"),
                         fairyCard.createItemStack(rank + 1),
                         Ingredient.fromStacks(fairyCard.createItemStack(rank)),
                         Ingredient.fromStacks(fairyCard.createItemStack(rank)),
@@ -204,8 +203,8 @@ object Fairy {
 
                     // 分解
                     GameRegistry.addShapelessRecipe(
-                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${fairyCard.getVariant(rank).type.motif!!.resourcePath}"),
-                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${fairyCard.getVariant(rank).type.motif!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${fairyCard.getVariant(rank).motif!!.resourcePath}"),
+                        ResourceLocation("${ModMirageFairy2019.MODID}:decondense_r${i}_fairy_${fairyCard.getVariant(rank).motif!!.resourcePath}"),
                         fairyCard.createItemStack(rank, 8),
                         Ingredient.fromStacks(fairyCard.createItemStack(rank + 1))
                     )

@@ -107,9 +107,9 @@ class ItemDebugFairyList : ItemDebug() {
         writeAction(player, "fairyList.txt", FairyCard.values().joinToString("") { fairyCard ->
             val variantRank1 = fairyCard.getVariant(1)
             val variantRank2 = fairyCard.getVariant(2)
-            val fairyTypeRank1 = variantRank1.type
-            val fairyTypeRank2 = variantRank2.type
-            fun color(selector: ColorSet.() -> Int) = variantRank1.colorSet.selector().toRgb().hex
+            val fairyTypeRank1 = variantRank1
+            val fairyTypeRank2 = variantRank2
+            fun color(selector: ColorSet.() -> Int) = variantRank1.fairyCard.colorSet.selector().toRgb().hex
             val motif = fairyTypeRank1.motif!!.resourcePath
             "|${
                 listOf(
@@ -118,7 +118,7 @@ class ItemDebugFairyList : ItemDebug() {
                         "&bold(){!FairyImage(#${color { skin }},#${color { bright }},#${color { dark }},#${color { hair }})}",
                         "CENTER:$motif&br()${enUs["mirageFairy2019.fairy.$motif.name"]!!}",
                         "CENTER:${jaJp["mirageFairy2019.fairy.$motif.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
-                        "CENTER:${variantRank1.rare}",
+                        "CENTER:${variantRank1.fairyCard.rare}",
                         "RIGHT:${fairyTypeRank1.cost.f0}"
                     ),
                     Mana.values().map {
@@ -264,7 +264,7 @@ class ItemDebugMirageFlowerGrowthRateList : ItemDebug() {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
         player.sendStatusMessage(textComponent { "===== Mirage Flower Grow Rate Table ====="() }, false)
-        FairyCard.values().map { it.getVariant().type }.map { Pair(it, getGrowthRateInFloor(it)) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
+        FairyCard.values().map { it.getVariant() }.map { Pair(it, getGrowthRateInFloor(it)) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
             player.sendStatusMessage(textComponent { ((it.second * 100) formatAs "%7.2f%%  ")() + it.first.displayName() }, false)
         }
         player.sendStatusMessage(textComponent { "===================="() }, false)

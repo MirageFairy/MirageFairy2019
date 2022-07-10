@@ -18,7 +18,7 @@ val fairyDilutionRecipeModule = module {
             val outputFairyCard = inputFairyCard.parentFairy() ?: return@forEach
             val rankDiff = (outputFairyCard.rare - inputFairyCard.rare) atLeast 0 // 必要凝縮回数
 
-            val inputMotif = inputFairyCard.getVariant().type.motif ?: return@forEach
+            val inputMotif = inputFairyCard.getVariant().motif ?: return@forEach
 
             GameRegistry.addShapelessRecipe(
                 ResourceLocation("${inputMotif.resourceDomain}:fairy_dilution/${inputMotif.resourcePath}"),
