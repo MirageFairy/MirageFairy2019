@@ -6,6 +6,8 @@ import miragefairy2019.api.IPickExecutor
 import miragefairy2019.api.IPickHandler
 import miragefairy2019.api.PickHandlerRegistry
 import miragefairy2019.common.toOreName
+import miragefairy2019.lib.EnumFireSpreadSpeed
+import miragefairy2019.lib.EnumFlammability
 import miragefairy2019.lib.erg
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -230,6 +232,9 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solid„Åß„Å
         // style
         soundType = SoundType.GLASS
     }
+
+    override fun getFlammability(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFlammability.VERY_FAST.value
+    override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFireSpreadSpeed.FAST.value
 
 
     // state

@@ -1,5 +1,7 @@
 package miragefairy2019.mod.material
 
+import miragefairy2019.lib.EnumFireSpreadSpeed
+import miragefairy2019.lib.EnumFlammability
 import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -230,23 +232,25 @@ enum class EnumVariantMaterials1(
     private val soundTypeSupplier: () -> SoundType,
     override val isFallable: Boolean,
     private val materialSupplier: () -> Material,
-    override val isBeaconBase: Boolean
+    override val isBeaconBase: Boolean,
+    override val flammability: Int,
+    override val fireSpreadSpeed: Int
 ) : IStringSerializable, IBlockVariantMaterials {
-    APATITE_BLOCK(0, "apatite_block", "blockApatite", "blockApatite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true),
-    FLUORITE_BLOCK(1, "fluorite_block", "blockFluorite", "blockFluorite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true),
-    SULFUR_BLOCK(2, "sulfur_block", "blockSulfur", "blockSulfur", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true),
-    CINNABAR_BLOCK(3, "cinnabar_block", "blockCinnabar", "blockCinnabar", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true),
-    MOONSTONE_BLOCK(4, "moonstone_block", "blockMoonstone", "blockMoonstone", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true),
-    MAGNETITE_BLOCK(5, "magnetite_block", "blockMagnetite", "blockMagnetite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true),
-    PYROPE_BLOCK(6, "pyrope_block", "blockPyrope", "blockPyrope", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true),
-    SMITHSONITE_BLOCK(7, "smithsonite_block", "blockSmithsonite", "blockSmithsonite", HardnessClass.SOFT, 0, { SoundType.STONE }, false, { Material.IRON }, true),
-    CHARCOAL_BLOCK(8, "charcoal_block", "blockCharcoal", "blockCharcoal", HardnessClass(5.0f, "pickaxe", 0), 20 * 10 * 8 * 9, { SoundType.STONE }, false, { Material.ROCK }, false),
-    MIRAGE_FLOWER_LEAF_BLOCK(9, "mirage_flower_leaf_block", "blockLeafMirageFlower", "blockLeafMirageFlower", HardnessClass(2.0f, "axe", 0), 0, { SoundType.GLASS }, false, { Material.LEAVES }, false),
-    MIRAGIUM_INGOT_BLOCK(10, "miragium_ingot_block", "blockMiragium", "blockMiragium", HardnessClass(5.0f, "pickaxe", 1), 0, { SoundType.METAL }, false, { Material.IRON }, false),
-    MIRAGIUM_DUST_BLOCK(11, "miragium_dust_block", "blockDustMiragium", "blockDustMiragium", HardnessClass(0.5f, "shovel", 0), 0, { SoundType.SNOW }, true, { Material.SAND }, false),
-    NEPHRITE_BLOCK(12, "nephrite_block", "blockNephrite", "blockNephrite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true),
-    TOPAZ_BLOCK(13, "topaz_block", "blockTopaz", "blockTopaz", HardnessClass.SUPER_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true),
-    TOURMALINE_BLOCK(14, "tourmaline_block", "blockTourmaline", "blockTourmaline", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true),
+    APATITE_BLOCK(0, "apatite_block", "blockApatite", "blockApatite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0),
+    FLUORITE_BLOCK(1, "fluorite_block", "blockFluorite", "blockFluorite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0),
+    SULFUR_BLOCK(2, "sulfur_block", "blockSulfur", "blockSulfur", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0),
+    CINNABAR_BLOCK(3, "cinnabar_block", "blockCinnabar", "blockCinnabar", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0),
+    MOONSTONE_BLOCK(4, "moonstone_block", "blockMoonstone", "blockMoonstone", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0),
+    MAGNETITE_BLOCK(5, "magnetite_block", "blockMagnetite", "blockMagnetite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0),
+    PYROPE_BLOCK(6, "pyrope_block", "blockPyrope", "blockPyrope", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0),
+    SMITHSONITE_BLOCK(7, "smithsonite_block", "blockSmithsonite", "blockSmithsonite", HardnessClass.SOFT, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0),
+    CHARCOAL_BLOCK(8, "charcoal_block", "blockCharcoal", "blockCharcoal", HardnessClass(5.0f, "pickaxe", 0), 20 * 10 * 8 * 9, { SoundType.STONE }, false, { Material.ROCK }, false, EnumFlammability.VERY_SLOW.value, EnumFireSpreadSpeed.VERY_SLOW.value),
+    MIRAGE_FLOWER_LEAF_BLOCK(9, "mirage_flower_leaf_block", "blockLeafMirageFlower", "blockLeafMirageFlower", HardnessClass(2.0f, "axe", 0), 0, { SoundType.GLASS }, false, { Material.LEAVES }, false, EnumFlammability.SLIGHTLY_SLOW.value, EnumFireSpreadSpeed.FAST.value),
+    MIRAGIUM_INGOT_BLOCK(10, "miragium_ingot_block", "blockMiragium", "blockMiragium", HardnessClass(5.0f, "pickaxe", 1), 0, { SoundType.METAL }, false, { Material.IRON }, false, 0, 0),
+    MIRAGIUM_DUST_BLOCK(11, "miragium_dust_block", "blockDustMiragium", "blockDustMiragium", HardnessClass(0.5f, "shovel", 0), 0, { SoundType.SNOW }, true, { Material.SAND }, false, 0, 0),
+    NEPHRITE_BLOCK(12, "nephrite_block", "blockNephrite", "blockNephrite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0),
+    TOPAZ_BLOCK(13, "topaz_block", "blockTopaz", "blockTopaz", HardnessClass.SUPER_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0),
+    TOURMALINE_BLOCK(14, "tourmaline_block", "blockTourmaline", "blockTourmaline", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0),
     ;
 
     override fun toString() = resourceName

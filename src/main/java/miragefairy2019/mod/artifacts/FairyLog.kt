@@ -1,5 +1,7 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.lib.EnumFireSpreadSpeed
+import miragefairy2019.lib.EnumFlammability
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -175,6 +177,9 @@ class BlockFairyLog : Block(Material.WOOD) {
         setHarvestLevel("axe", 0)
 
     }
+
+    override fun getFlammability(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFlammability.SLIGHTLY_SLOW.value
+    override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFireSpreadSpeed.VERY_SLOW.value
 
     override fun getMetaFromState(state: IBlockState) = when (state.getValue(FACING)) {
         EnumFacing.NORTH -> 0

@@ -1,5 +1,7 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.lib.EnumFireSpreadSpeed
+import miragefairy2019.lib.EnumFlammability
 import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -18,6 +20,7 @@ import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.item.ItemBlock
+import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 
@@ -65,6 +68,9 @@ class BlockFairyWoodLog : BlockRotatedPillar(Material.WOOD) {
         setHarvestLevel("axe", 0)
 
     }
+
+    override fun getFlammability(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFlammability.VERY_SLOW.value
+    override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFireSpreadSpeed.VERY_SLOW.value
 
     override fun canSustainLeaves(state: IBlockState, world: IBlockAccess, pos: BlockPos) = true
 }

@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityFallingBlock
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
+import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.Explosion
@@ -31,12 +32,17 @@ interface IBlockVariantMaterials : IBlockVariant {
     val isFallable: Boolean
     val material: Material
     val isBeaconBase: Boolean
+    val flammability: Int
+    val fireSpreadSpeed: Int
 }
 
 class BlockMaterials<V : IBlockVariantMaterials>(variantList: BlockVariantList<V>) : BlockMulti<V>(Material.IRON, variantList) {
     init {
         variantList.blockVariants.forEach { setHarvestLevel(it.harvestTool, it.harvestLevel, getState(it)) }
     }
+
+    override fun getFlammability(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = getVariant(world.getBlockState(pos)).flammability
+    override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = getVariant(world.getBlockState(pos)).fireSpreadSpeed
 
 
     // 一般
