@@ -13,6 +13,8 @@ private fun e(vararg powers: Double): ErgSet {
     return ErgSet(types.withIndex().associate { (i, erg) -> erg to powers[i] })
 }
 
+class ColorSet(val skin: Int, val bright: Int, val dark: Int, val hair: Int)
+
 private fun c(skin: Int, bright: Int, dark: Int, hair: Int) = ColorSet(skin, bright, dark, hair)
 
 enum class FairyCard(

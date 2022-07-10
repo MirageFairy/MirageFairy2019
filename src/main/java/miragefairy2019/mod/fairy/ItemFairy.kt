@@ -48,8 +48,6 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-class ColorSet(val skin: Int, val bright: Int, val dark: Int, val hair: Int)
-
 class FairyType(
     private val motif: ResourceLocation?,
     private val displayName: ITextComponent,
