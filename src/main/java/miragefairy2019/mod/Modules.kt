@@ -95,6 +95,7 @@ val modules = module {
         enJa("mirageFairy2019.magic.status.additionalReach.name", "Additional Reach", "追加リーチ")
         enJa("mirageFairy2019.magic.status.collection.name", "Collection", "収集")
         enJa("mirageFairy2019.magic.status.damage.name", "Damage", "ダメージ")
+        enJa("mirageFairy2019.magic.status.additionalDamage.name", "Additional Damage", "追加ダメージ")
         enJa("mirageFairy2019.magic.status.radius.name", "Radius", "半径")
         enJa("mirageFairy2019.magic.status.range.name", "Range", "範囲")
         enJa("mirageFairy2019.magic.status.maxTargetCount.name", "Max Target Count", "最大ターゲット数")
