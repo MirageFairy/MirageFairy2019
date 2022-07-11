@@ -50,7 +50,10 @@ class ItemCrystalSword(
     override fun getMagic() = magic {
         object : MagicHandler() {
             override fun hitEntity(target: EntityLivingBase) {
-                if (target.health > 0) return // 撃破時のみ有効
+                if (target.health <= 0) onKill(target)
+            }
+
+            fun onKill(target: EntityLivingBase) {
 
                 // クリスタルがないと失敗
                 val itemStackFuel = findItem(player) { OreIngredient("mirageFairyCrystal").test(it) } ?: run {
