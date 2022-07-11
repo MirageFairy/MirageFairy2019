@@ -130,17 +130,27 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
 
     // エンティティを殴ると1/8の確率で削れる
     override fun hitEntity(itemStack: ItemStack, target: EntityLivingBase, attacker: EntityLivingBase): Boolean {
-        if (itemRand.nextDouble() < 1.0 / 8.0) damageItem(itemStack, attacker)
+        if (wearWhenHitEntity) {
+            if (itemRand.nextDouble() < 1.0 / 8.0) {
+                damageItem(itemStack, attacker)
+            }
+        }
         return true
     }
 
     // 固さのあるブロックを壊すと1/8の確率で削れる
     override fun onBlockDestroyed(stack: ItemStack, worldIn: World, state: IBlockState, pos: BlockPos, entityLiving: EntityLivingBase): Boolean {
         if (worldIn.isRemote || state.getBlockHardness(worldIn, pos).toDouble() == 0.0) return true
-        if (itemRand.nextDouble() < 1.0 / 8.0) damageItem(stack, entityLiving)
+        if (wearWhenDestroyBlock) {
+            if (itemRand.nextDouble() < 1.0 / 8.0) {
+                damageItem(stack, entityLiving)
+            }
+        }
         return true
     }
 
+    open val wearWhenHitEntity get() = true
+    open val wearWhenDestroyBlock get() = true
 
     // 搭乗
 
