@@ -91,6 +91,7 @@ val modules = module {
         enJa("mirageFairy2019.magic.status.power.name", "Power", "パワー")
         enJa("mirageFairy2019.magic.status.fortune.name", "Fortune", "幸運")
         enJa("mirageFairy2019.magic.status.coolTime.name", "Cool Time", "クールタイム")
+        enJa("mirageFairy2019.magic.status.dps.name", "DPS", "DPS")
         enJa("mirageFairy2019.magic.status.wear.name", "Wear", "摩耗")
         enJa("mirageFairy2019.magic.status.additionalReach.name", "Additional Reach", "追加リーチ")
         enJa("mirageFairy2019.magic.status.collection.name", "Collection", "収集")

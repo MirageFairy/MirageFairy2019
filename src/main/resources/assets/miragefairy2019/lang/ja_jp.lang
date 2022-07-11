@@ -463,6 +463,7 @@ mirageFairy2019.magic.status.coverRate.name=カバー率
 mirageFairy2019.magic.status.criticalRate.name=クリティカル率
 mirageFairy2019.magic.status.damage.name=ダメージ
 mirageFairy2019.magic.status.damageBoost.name=ダメージブースト
+mirageFairy2019.magic.status.dps.name=DPS
 mirageFairy2019.magic.status.duration.name=持続時間
 mirageFairy2019.magic.status.durationBoost.name=持続時間ブースト
 mirageFairy2019.magic.status.endurance.name=持久力
