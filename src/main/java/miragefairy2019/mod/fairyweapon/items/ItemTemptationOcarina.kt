@@ -44,7 +44,7 @@ class ItemTemptationOcarina : ItemFairyWeaponMagic4() {
     val coolTime = status("coolTime", { cost * (1.0 * 0.5.pow(!Mana.DARK / 50.0) atMost 0.1 atLeast 1.0) }, { duration }) // TODO 調整
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = "Lv30以上のとき、右クリックでLv消費で村人を満腹化" // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("Lv30以上のとき、右クリックでLv消費で村人を満腹化") // TODO translate
 
     override fun getMagic() = magic {
         val rayTraceMagicSelector = MagicSelector.rayTrace(world, player, 0.0, EntityLivingBase::class.java) { it != player } // 視線判定

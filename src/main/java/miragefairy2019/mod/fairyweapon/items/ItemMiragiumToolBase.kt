@@ -53,7 +53,7 @@ abstract class ItemMiragiumToolBase(
     val wear = status("wear", { 1 / (25.0 + !endurance * 0.25) }, { percent2 }) { setVisibility(EnumVisibility.DETAIL) }
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = "右クリックでブロックを破壊" // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TODO translate
 
     override fun getMagic() = magic {
         val fairySpec = findFairy(weaponItemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得

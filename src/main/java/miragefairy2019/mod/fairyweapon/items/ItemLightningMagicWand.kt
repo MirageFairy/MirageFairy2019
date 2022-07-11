@@ -56,5 +56,5 @@ class ItemLightningMagicWand : ItemAoeWeaponBase() {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = "右クリックで攻撃、雷属性時、クリーパーを帯電" // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックで攻撃、雷属性時、クリーパーを帯電") // TODO translate
 }

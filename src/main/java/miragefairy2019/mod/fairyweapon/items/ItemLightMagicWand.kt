@@ -31,7 +31,7 @@ class ItemLightMagicWand : ItemFairyWeaponMagic4() {
     val coolTime = status("coolTime", { cost * 2.0 * 0.5.pow(!Mana.GAIA / 30.0) }, { duration }) // TODO 調整
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = "右クリックで松明を設置" // TODO translate Right click to use magic
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックで松明を設置") // TODO translate Right click to use magic
 
     override fun getMagic() = magic {
         val rayTraceMagicSelector = MagicSelector.rayTraceBlock(world, player, additionalReach()) // 視線判定

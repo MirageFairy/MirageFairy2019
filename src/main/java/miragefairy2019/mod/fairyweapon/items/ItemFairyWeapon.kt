@@ -95,7 +95,9 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
         // 機能
         tooltip += formattedText { "クラフトで妖精を搭乗・分離可能"().red } // TODO translate Can be combined with fairy by crafting
         if (canManualRepair(itemStack)) tooltip += formattedText { "手入れ可能"().red } // TODO translate Can be repaired by crafting with contained sphere
-        getMagicDescription(itemStack)?.let { tooltip += formattedText { it().red } } // 魔法
+        getMagicDescription(itemStack).forEach {
+            tooltip += formattedText { it().red } // 魔法
+        }
 
         tooltip += formattedText { "耐久値: ${(getMaxDamage(itemStack) - getDamage(itemStack)) atLeast 0} / ${getMaxDamage(itemStack)}"().green } // 耐久値 TODO translate
 
@@ -109,7 +111,7 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
     }
 
     @SideOnly(Side.CLIENT)
-    open fun getMagicDescription(itemStack: ItemStack): String? = null
+    open fun getMagicDescription(itemStack: ItemStack) = listOf<String>()
 
     @SideOnly(Side.CLIENT)
     override fun addInformationFairyWeapon(itemStackFairyWeapon: ItemStack, itemStackFairy: ItemStack, fairySpec: IFairySpec, world: World?, tooltip: NonNullList<String>, flag: ITooltipFlag) {

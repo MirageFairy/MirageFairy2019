@@ -29,7 +29,7 @@ class ItemMagicWandBase : ItemFairyWeaponMagic4() {
     val additionalReach = status("additionalReach", { 10.0 + (!Mana.WIND + !Erg.LEVITATE) / 5.0 atMost 50.0 }, { float2 })
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = "右クリックで魔法エフェクト" // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックで魔法エフェクト") // TODO translate
 
     override fun getMagic() = magic {
         val rayTraceMagicSelector = MagicSelector.rayTrace(world, player, additionalReach(), EntityLivingBase::class.java) { it != player } // 視線判定

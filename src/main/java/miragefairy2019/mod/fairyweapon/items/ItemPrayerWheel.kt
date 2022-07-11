@@ -37,7 +37,7 @@ class ItemPrayerWheel(private val maxTryCountPerTick: Int) : ItemFairyWeaponMagi
     val chargeSpeed = status("maxSpeed", { maxTryCountPerTick }, { integer.map { textComponent { "${value * 20} Hz"() } } })
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = "右クリック長押しでフェアリークリスタルを高速消費" // TODO translate Hold right mouse button to use fairy crystals quickly
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリック長押しでフェアリークリスタルを高速消費") // TODO translate Hold right mouse button to use fairy crystals quickly
 
 
     override fun getItemUseAction(stack: ItemStack) = EnumAction.BOW

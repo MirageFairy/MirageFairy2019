@@ -40,7 +40,7 @@ class ItemGravityRod : ItemFairyWeaponMagic4() {
     val coverRate = status("coverRate", { !duration / (!coolTime / !speedBoost) }, { percent0 })
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = "右クリックで浮遊" // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックで浮遊") // TODO translate
 
     override fun getMagic() = magic {
         val rayTraceMagicSelector = MagicSelector.rayTraceBlock(world, player, 0.0) // 視線判定
