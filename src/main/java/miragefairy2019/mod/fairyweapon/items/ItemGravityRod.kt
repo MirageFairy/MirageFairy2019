@@ -36,7 +36,7 @@ class ItemGravityRod : ItemFairyWeaponMagic4() {
     val speedUp = status("speedUp", { floor((!Mana.GAIA + !Erg.THUNDER) / 10.0).toInt() }, { integer })
     val wear = status("wear", { 1.0 / (1.0 + (!Mana.AQUA + !Erg.KNOWLEDGE) / 20.0) * costFactor }, { percent2 })
     val coolTime = status("coolTime", { 20.0 * 20.0 / (1.0 + (!Mana.DARK + !Erg.ENERGY) / 50.0) * costFactor }, { duration })
-    val speedBoost = status("speedBoost", { 1.0 + 0.01 * !Mastery.magicCombat }, { percent0 })
+    val speedBoost = status("speedBoost", { 1.0 + !Mastery.magicCombat / 100.0 }, { percent0 })
     val coverRate = status("coverRate", { !duration / (!coolTime / !speedBoost) }, { percent0 })
 
     @SideOnly(Side.CLIENT)
