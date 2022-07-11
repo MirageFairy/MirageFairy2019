@@ -34,7 +34,7 @@ import kotlin.math.floor
 
 class ItemCollectingMagicWand : ItemFairyWeaponMagic4() {
     val speed = status("speed", { (5.0 + !Mana.WIND / 5.0 + !Erg.WARP / 2.0) }, { float2 })
-    val speedBoost = status("speedBoost", { 1.0 + !Mastery.magicCombat / 100 }, { percent0 })
+    val speedBoost = status("speedBoost", { 1.0 + !Mastery.magicCombat / 100.0 }, { percent0 })
     val additionalReach = status("additionalReach", { 0.0 + (!Mana.GAIA + !Erg.LIGHT) / 8.0 atMost 30.0 }, { float2 })
     val radius = status("radius", { 4.0 + (!Mana.AQUA + !Erg.SENSE) / 30.0 atMost 20.0 }, { float2 })
     val maxTargetCount = status("maxTargetCount", { floor(20.0 * costFactor * costFactor).toInt() atLeast 1 }, { integer })
