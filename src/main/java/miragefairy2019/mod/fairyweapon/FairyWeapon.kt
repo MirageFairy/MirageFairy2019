@@ -114,7 +114,7 @@ enum class FairyWeaponKind(
         }
     ),
     crystalSword(
-        miragiumSword, "crystal_sword", "crystalSword", 3, { ItemCrystalSword(2.0, 0.0, 0.0) },
+        miragiumSword, "crystal_sword", "crystalSword", 3, { ItemCrystalSword(0.0, 5.0, 1.0) },
         LangPair("Crystal Sword", "クリスタルソード"),
         LangPair("", "妖精はこれをおやつにするという"),
         null,
@@ -142,7 +142,7 @@ enum class FairyWeaponKind(
         }
     ),
     plasticSword(
-        crystalSword, "plastic_sword", "plasticSword", 5, { ItemCrystalSword(5.0, 0.2, 0.2) },
+        crystalSword, "plastic_sword", "plasticSword", 5, { ItemCrystalSword(1.0, 6.0, 1.2) },
         LangPair("Plastic Sword", "プラスチックソード"),
         LangPair("", "これは妖精をおやつにするという"),
         null,

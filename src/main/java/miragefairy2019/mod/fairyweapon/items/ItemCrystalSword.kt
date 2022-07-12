@@ -36,15 +36,15 @@ import kotlin.math.ceil
 
 class ItemCrystalSword(
     private val weaponDamage: Double,
-    private val additionalDamageBoost: Double,
-    private val additionalDropRate: Double
+    private val baseDamage: Double,
+    private val baseDropRate: Double
 ) : ItemFairyWeaponMagic4() {
-    val additionalDamage = status("additionalDamage", { (2.0 + !Mana.DARK / 20.0 + !Erg.ATTACK / 10.0) * costFactor }, { float2 })
-    val damageBoost = status("damageBoost", { 1.0 + !Mastery.closeCombat / 100.0 + additionalDamageBoost }, { percent0 })
-    val extraItemDropRate = status("extraItemDropRate", { 1.0 + !Mastery.fairySummoning / 100.0 + additionalDropRate }, { percent1 })
-    val coolTime = status("coolTime", { 20.0 / (1.0 + !Mana.GAIA / 40.0 + !Erg.SLASH / 10.0) * costFactor }, { duration })
+    val damage = status("damage", { (baseDamage + !Mana.DARK / 20.0 + !Erg.ATTACK / 10.0) * costFactor }, { float2 })
+    val damageBoost = status("damageBoost", { 1.0 + !Mastery.closeCombat / 100.0 }, { percent0 })
+    val extraItemDropRate = status("extraItemDropRate", { baseDropRate + !Mastery.fairySummoning / 100.0 }, { percent1 })
+    val coolTime = status("coolTime", { 20.0 * 2.0 / (1.0 + !Mana.GAIA / 40.0 + !Erg.SLASH / 10.0) * costFactor }, { duration })
     val wear = status("wear", { 0.5 / (1.0 + (!Mana.WIND + !Erg.DESTROY) / 20.0) * costFactor }, { percent2 })
-    val dps = status("dps", { (!additionalDamage * !damageBoost) / (!coolTime / 20.0) }, { float2 })
+    val dps = status("dps", { (!damage * !damageBoost) / (!coolTime / 20.0) }, { float2 })
 
     override fun getAttributeModifiers(equipmentSlot: EntityEquipmentSlot, itemStack: ItemStack): Multimap<String?, AttributeModifier?>? {
         val multimap = super.getAttributeModifiers(equipmentSlot, itemStack)
@@ -87,7 +87,7 @@ class ItemCrystalSword(
 
                 // 効果
                 target.hurtResistantTime = 0 // 物理部分と競合するのを防ぐために無敵時間をリセットする
-                target.attackEntityFrom(DamageSource.causePlayerDamage(player), (additionalDamage() * damageBoost()).toFloat()) // 追加ダメージ
+                target.attackEntityFrom(DamageSource.causePlayerDamage(player), (damage() * damageBoost()).toFloat()) // 追加ダメージ
 
             }
 
