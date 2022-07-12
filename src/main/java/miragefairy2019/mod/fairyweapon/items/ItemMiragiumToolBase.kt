@@ -1,6 +1,5 @@
 package miragefairy2019.mod.fairyweapon.items
 
-import miragefairy2019.api.Mana
 import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.lib.MagicSelector
 import miragefairy2019.lib.rayTrace
@@ -18,7 +17,6 @@ import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.spawnParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
-import miragefairy2019.mod.skill.IMastery
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
@@ -35,11 +33,7 @@ fun MagicArguments.fail(cursor: Vec3d, color: Int) = object : MagicHandler() {
     override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) = spawnParticle(world, cursor, color)
 }
 
-abstract class ItemMiragiumToolBase(
-    public val weaponMana: Mana,
-    public val mastery: IMastery,
-    additionalBaseStatus: Double
-) : ItemFairyWeaponMagic4() {
+abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     abstract val strength: FormulaArguments.() -> Double // TODO remove
     abstract val extent: FormulaArguments.() -> Double // TODO remove
     abstract val endurance: FormulaArguments.() -> Double // TODO remove

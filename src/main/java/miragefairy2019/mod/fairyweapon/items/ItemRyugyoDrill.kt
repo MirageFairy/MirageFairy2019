@@ -21,53 +21,11 @@ import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
-class ItemRyugyoDrill(
-    additionalBaseStatus: Double
-) : ItemMiragiumToolBase(
-    Mana.GAIA,
-    Mastery.mining,
-    additionalBaseStatus
-) {
-    override val strength = status("strength", {
-        (additionalBaseStatus + !Erg.SLASH + !this@ItemRyugyoDrill.mastery * 0.5) * costFactor + when (this@ItemRyugyoDrill.weaponMana) {
-            Mana.SHINE -> !Mana.SHINE
-            Mana.FIRE -> !Mana.FIRE
-            Mana.WIND -> !Mana.WIND
-            Mana.GAIA -> !Mana.GAIA
-            Mana.AQUA -> !Mana.AQUA
-            Mana.DARK -> !Mana.DARK
-        }
-    }, { float0 })
-    override val extent = status("extent", {
-        (additionalBaseStatus + !Erg.SHOOT) * costFactor + when (this@ItemRyugyoDrill.weaponMana) {
-            Mana.SHINE -> !Mana.GAIA + !Mana.WIND
-            Mana.FIRE -> !Mana.GAIA + !Mana.WIND
-            Mana.WIND -> !Mana.GAIA * 2
-            Mana.GAIA -> !Mana.WIND * 2
-            Mana.AQUA -> !Mana.GAIA + !Mana.WIND
-            Mana.DARK -> !Mana.GAIA + !Mana.WIND
-        }
-    }, { float0 })
-    override val endurance = status("endurance", {
-        (additionalBaseStatus + !Erg.SENSE) * costFactor + when (this@ItemRyugyoDrill.weaponMana) {
-            Mana.SHINE -> !Mana.FIRE + !Mana.AQUA
-            Mana.FIRE -> !Mana.AQUA * 2
-            Mana.WIND -> !Mana.FIRE + !Mana.AQUA
-            Mana.GAIA -> !Mana.FIRE + !Mana.AQUA
-            Mana.AQUA -> !Mana.FIRE * 2
-            Mana.DARK -> !Mana.FIRE + !Mana.AQUA
-        }
-    }, { float0 })
-    override val production = status("production", {
-        (additionalBaseStatus + !Erg.HARVEST) * costFactor + when (this@ItemRyugyoDrill.weaponMana) {
-            Mana.SHINE -> !Mana.DARK * 2
-            Mana.FIRE -> !Mana.SHINE + !Mana.DARK
-            Mana.WIND -> !Mana.SHINE + !Mana.DARK
-            Mana.GAIA -> !Mana.SHINE + !Mana.DARK
-            Mana.AQUA -> !Mana.SHINE + !Mana.DARK
-            Mana.DARK -> !Mana.SHINE * 2
-        }
-    }, { float0 })
+class ItemRyugyoDrill(private val additionalBaseStatus: Double) : ItemMiragiumToolBase() {
+    override val strength = status("strength", { (additionalBaseStatus + !Erg.SLASH + !Mastery.mining * 0.5) * costFactor + !Mana.GAIA }, { float0 })
+    override val extent = status("extent", { (additionalBaseStatus + !Erg.SHOOT) * costFactor + !Mana.WIND * 2 }, { float0 })
+    override val endurance = status("endurance", { (additionalBaseStatus + !Erg.SENSE) * costFactor + !Mana.FIRE + !Mana.AQUA }, { float0 })
+    override val production = status("production", { (additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE + !Mana.DARK }, { float0 })
     val maxHardness = status("maxHardness", { 2.0 + !strength * 0.02 }, { float2 }) { setRange(2.0..20.0).setVisibility(EnumVisibility.DETAIL) }
     val range = status("range", { (1 + !extent * 0.01).toInt() }, { integer }) { setRange(1..5).setVisibility(EnumVisibility.DETAIL) }
     val coolTime = status("coolTime", { 100.0 * costFactor }, { duration }) { setVisibility(EnumVisibility.DETAIL) }
