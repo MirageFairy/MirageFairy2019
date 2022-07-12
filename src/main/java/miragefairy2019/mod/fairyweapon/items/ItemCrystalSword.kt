@@ -30,10 +30,10 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreIngredient
 
 class ItemCrystalSword(
+    private val weaponDamage: Double,
     private val boost: Double
 ) : ItemFairyWeaponBase3(Mana.GAIA, Mastery.closeCombat) {
     val extraItemDropRate = status("extraItemDropRate", { (!mastery / 100.0 + +boost).coerceIn(0.0, 1.0) }, { percent1 })
-    private val weaponDamage: Double,
 
     override fun getAttributeModifiers(equipmentSlot: EntityEquipmentSlot, itemStack: ItemStack): Multimap<String?, AttributeModifier?>? {
         val multimap = super.getAttributeModifiers(equipmentSlot, itemStack)
