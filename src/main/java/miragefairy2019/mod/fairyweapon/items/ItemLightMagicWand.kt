@@ -1,5 +1,6 @@
 package miragefairy2019.mod.fairyweapon.items
 
+import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.MagicSelector
 import miragefairy2019.lib.doEffect
@@ -9,11 +10,13 @@ import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.displayText
 import miragefairy2019.mod.fairyweapon.findItem
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
+import miragefairy2019.mod.fairyweapon.magic4.boost
 import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
+import miragefairy2019.mod.skill.Mastery
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
@@ -24,11 +27,11 @@ import net.minecraft.util.math.RayTraceResult
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
-import kotlin.math.pow
 
 class ItemLightMagicWand : ItemFairyWeaponMagic4() {
-    val additionalReach = status("additionalReach", { !Mana.AQUA / 50.0 * 20.0 atMost 40.0 }, { float2 }) // TODO 調整
-    val coolTime = status("coolTime", { cost * 2.0 * 0.5.pow(!Mana.GAIA / 30.0) }, { duration }) // TODO 調整
+    val additionalReach = status("additionalReach", { 0.0 + !Mana.WIND / 5.0 + !Erg.LIGHT / 2.0 atMost 40.0 }, { float2 })
+    val coolTime = status("coolTime", { 100.0 / (1.0 + !Mana.GAIA / 30.0 + !Erg.FLAME / 20.0) }, { duration })
+    val speedBoost = status("speedBoost", { 1.0 + !Mastery.magicCombat / 100.0 }, { boost })
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックで松明を設置") // TODO translate Right click to use magic
@@ -105,7 +108,7 @@ class ItemLightMagicWand : ItemFairyWeaponMagic4() {
                 //消費
                 weaponItemStack.damageItem(1, player)
                 torchItemStack.shrink(1)
-                player.cooldownTracker.setCooldown(this@ItemLightMagicWand, coolTime().toInt())
+                player.cooldownTracker.setCooldown(this@ItemLightMagicWand, (coolTime() / speedBoost()).toInt())
 
                 // エフェクト
                 val newBlockState = world.getBlockState(blockPos)
