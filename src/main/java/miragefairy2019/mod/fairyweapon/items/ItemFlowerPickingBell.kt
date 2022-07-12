@@ -49,12 +49,12 @@ import kotlin.math.pow
 
 class ItemFlowerPickingBell(additionalBaseStatus: Double, extraItemDropRateFactor: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase2() {
     val pitch = status("pitch", { 0.5.pow(costFactor - 1.0) }, { pitch })
-    val maxTargetCount = status("maxTargetCount", { 2 + floor(((additionalBaseStatus + !Erg.SOUND + !Mastery.flowerPicking * 0.5) * (costFactor * 50.0 / 50.0) + !Mana.DARK) * 0.1).toInt() }, { integer }) { setRange(1..100) }
-    val fortune = status("fortune", { 3 + ((additionalBaseStatus + !Erg.HARVEST) * (costFactor * 50.0 / 50.0) + !Mana.SHINE * 2) * 0.1 }, { float2 }) { setRange(0.0..100.0) }
-    val additionalReach = status("additionalReach", { ((additionalBaseStatus + !Erg.SPACE) * (costFactor * 50.0 / 50.0) + !Mana.GAIA + !Mana.WIND) * 0.1 }, { float2 }) { setRange(0.0..10.0) }
-    val radius = status("radius", { 4 + ((additionalBaseStatus + !Erg.SPACE) * (costFactor * 50.0 / 50.0) + !Mana.GAIA + !Mana.WIND) * 0.05 }, { float2 }) { setRange(0.0..10.0) }
-    val wear = status("wear", { 1.0 / (1 + ((additionalBaseStatus + !Erg.SLASH) * (costFactor * 50.0 / 50.0) + !Mana.FIRE + !Mana.AQUA) * 0.03) }, { percent2 })
-    val coolTime = status("coolTime", { costFactor * 50.0 * 0.5 }, { duration })
+    val maxTargetCount = status("maxTargetCount", { 2 + floor(((additionalBaseStatus + !Erg.SOUND + !Mastery.flowerPicking * 0.5) * costFactor + !Mana.DARK) * 0.1).toInt() }, { integer }) { setRange(1..100) }
+    val fortune = status("fortune", { 3 + ((additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE * 2) * 0.1 }, { float2 }) { setRange(0.0..100.0) }
+    val additionalReach = status("additionalReach", { ((additionalBaseStatus + !Erg.SPACE) * costFactor + !Mana.GAIA + !Mana.WIND) * 0.1 }, { float2 }) { setRange(0.0..10.0) }
+    val radius = status("radius", { 4 + ((additionalBaseStatus + !Erg.SPACE) * costFactor + !Mana.GAIA + !Mana.WIND) * 0.05 }, { float2 }) { setRange(0.0..10.0) }
+    val wear = status("wear", { 1.0 / (1 + ((additionalBaseStatus + !Erg.SLASH) * costFactor + !Mana.FIRE + !Mana.AQUA) * 0.03) }, { percent2 })
+    val coolTime = status("coolTime", { 25.0 * costFactor }, { duration })
     val collection = status("collection", { !WARP >= 10 }, { boolean.positive })
     val extraItemDropRate = status("extraItemDropRate", { 0.1 + extraItemDropRateFactor * !Mastery.flowerPicking atMost maxExtraItemDropRate }, { percent1 })
 
