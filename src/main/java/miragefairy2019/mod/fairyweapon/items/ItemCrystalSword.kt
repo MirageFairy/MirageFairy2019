@@ -49,12 +49,19 @@ class ItemCrystalSword(
     override fun wearWhenHitEntity(itemStack: ItemStack) = itemStack.itemDamage + 1 <= itemStack.maxDamage
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = lsitOf("撃破時、フェアリークリスタルを消費して妖精を召喚") // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf(
+        "撃破時、フェアリークリスタルを消費して妖精を召喚" // TODO translate
+    )
 
     override fun getMagic() = magic {
         object : MagicHandler() {
             override fun hitEntity(target: EntityLivingBase) {
+                onHit(target)
                 if (target.health <= 0) onKill(target)
+            }
+
+            fun onHit(target: EntityLivingBase) {
+
             }
 
             fun onKill(target: EntityLivingBase) {
