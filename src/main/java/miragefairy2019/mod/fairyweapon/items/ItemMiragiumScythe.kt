@@ -29,7 +29,7 @@ class ItemMiragiumScythe(
 ) {
     val maxHardness = status("maxHardness", { !strength * 0.01 }, { float2 }) { setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL) }
     val range = status("range", { (2 + !extent * 0.02).toInt() }, { integer }) { setRange(2..5).setVisibility(EnumVisibility.DETAIL) }
-    val coolTime = status("coolTime", { cost * 0.3 }, { duration }) { setVisibility(EnumVisibility.DETAIL) }
+    val coolTime = status("coolTime", { costFactor * 50.0 * 0.3 }, { duration }) { setVisibility(EnumVisibility.DETAIL) }
 
     override fun iterateTargets(magicArguments: MagicArguments, blockPosBase: BlockPos) = iterator {
         magicArguments.run {

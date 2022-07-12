@@ -42,7 +42,7 @@ abstract class ItemMiragiumToolBase(
     additionalBaseStatus: Double
 ) : ItemFairyWeaponBase2() {
     val strength = status("strength", {
-        (additionalBaseStatus + !Erg.SLASH + !this@ItemMiragiumToolBase.mastery * 0.5) * (cost / 50.0) + when (this@ItemMiragiumToolBase.weaponMana) {
+        (additionalBaseStatus + !Erg.SLASH + !this@ItemMiragiumToolBase.mastery * 0.5) * (costFactor * 50.0 / 50.0) + when (this@ItemMiragiumToolBase.weaponMana) {
             Mana.SHINE -> !Mana.SHINE
             Mana.FIRE -> !Mana.FIRE
             Mana.WIND -> !Mana.WIND
@@ -52,7 +52,7 @@ abstract class ItemMiragiumToolBase(
         }
     }, { float0 })
     val extent = status("extent", {
-        (additionalBaseStatus + !Erg.SHOOT) * (cost / 50.0) + when (this@ItemMiragiumToolBase.weaponMana) {
+        (additionalBaseStatus + !Erg.SHOOT) * (costFactor * 50.0 / 50.0) + when (this@ItemMiragiumToolBase.weaponMana) {
             Mana.SHINE -> !Mana.GAIA + !Mana.WIND
             Mana.FIRE -> !Mana.GAIA + !Mana.WIND
             Mana.WIND -> !Mana.GAIA * 2
@@ -62,7 +62,7 @@ abstract class ItemMiragiumToolBase(
         }
     }, { float0 })
     val endurance = status("endurance", {
-        (additionalBaseStatus + !Erg.SENSE) * (cost / 50.0) + when (this@ItemMiragiumToolBase.weaponMana) {
+        (additionalBaseStatus + !Erg.SENSE) * (costFactor * 50.0 / 50.0) + when (this@ItemMiragiumToolBase.weaponMana) {
             Mana.SHINE -> !Mana.FIRE + !Mana.AQUA
             Mana.FIRE -> !Mana.AQUA * 2
             Mana.WIND -> !Mana.FIRE + !Mana.AQUA
@@ -72,7 +72,7 @@ abstract class ItemMiragiumToolBase(
         }
     }, { float0 })
     val production = status("production", {
-        (additionalBaseStatus + !Erg.HARVEST) * (cost / 50.0) + when (this@ItemMiragiumToolBase.weaponMana) {
+        (additionalBaseStatus + !Erg.HARVEST) * (costFactor * 50.0 / 50.0) + when (this@ItemMiragiumToolBase.weaponMana) {
             Mana.SHINE -> !Mana.DARK * 2
             Mana.FIRE -> !Mana.SHINE + !Mana.DARK
             Mana.WIND -> !Mana.SHINE + !Mana.DARK
@@ -81,7 +81,7 @@ abstract class ItemMiragiumToolBase(
             Mana.DARK -> !Mana.SHINE * 2
         }
     }, { float0 })
-    val cost = status("cost", { cost / (1.0 + !this@ItemMiragiumToolBase.mastery * 0.002) }, { float0 })
+    val cost = status("cost", { costFactor * 50.0 / (1.0 + !this@ItemMiragiumToolBase.mastery * 0.002) }, { float0 })
 
     val fortune = status("fortune", { !production * 0.03 }, { float2 }) { setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL) }
     val wear = status("wear", { 1 / (25.0 + !endurance * 0.25) }, { percent2 }) { setVisibility(EnumVisibility.DETAIL) }
