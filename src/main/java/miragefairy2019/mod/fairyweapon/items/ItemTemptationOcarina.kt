@@ -12,6 +12,7 @@ import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.displayText
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
+import miragefairy2019.mod.fairyweapon.magic4.boost
 import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
@@ -20,7 +21,7 @@ import miragefairy2019.mod.fairyweapon.magic4.percent0
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
-import mirrg.kotlin.hydrogen.atLeast
+import miragefairy2019.mod.skill.Mastery
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.passive.EntityVillager
@@ -34,14 +35,14 @@ import net.minecraft.world.WorldServer
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
-import kotlin.math.pow
 
 class ItemTemptationOcarina : ItemFairyWeaponMagic4() {
-    val radius = status("radius", { 5.0 + !Mana.WIND / 5.0 atMost 5.0 atLeast 10.0 }, { float2 }) // TODO 調整
-    val maxTargetCount = status("maxTargetCount", { 1 + (!Mana.AQUA / 7.0).toInt() atMost 1 atLeast 8 }, { integer }) // TODO 調整
-    val wear = status("wear", { 4.0 * 0.5.pow(!Mana.FIRE / 50.0) atMost 0.4 atLeast 4.0 }, { percent0 }) // TODO 調整
-    val levelCost = status("levelCost", { 1.0 * 0.5.pow(!Mana.GAIA / 50.0 + !Erg.LIFE / 10.0) atMost 0.1 atLeast 1.0 }, { float2 }) // TODO 調整
-    val coolTime = status("coolTime", { cost * (1.0 * 0.5.pow(!Mana.DARK / 50.0) atMost 0.1 atLeast 1.0) }, { duration }) // TODO 調整
+    val radius = status("radius", { 2.0 + !Mana.WIND / 10.0 + !Erg.SOUND / 5.0 atMost 20.0 }, { float2 })
+    val maxTargetCount = status("maxTargetCount", { 1 + (!Mana.AQUA / 20.0 + !Erg.LIFE / 10.0).toInt() }, { integer })
+    val wear = status("wear", { 4.0 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SPACE / 10.0) }, { percent0 })
+    val levelCost = status("levelCost", { 1.0 / (1.0 + !Mana.GAIA / 20.0 + !Erg.KNOWLEDGE / 10.0) }, { float2 })
+    val coolTime = status("coolTime", { 100.0 / (1.0 + !Mana.DARK / 20.0 + !Erg.LEVITATE / 10.0) }, { duration })
+    val speedBoost = status("speedBoost", { 1.0 + !Mastery.rangedCombat / 100.0 }, { boost })
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("Lv30以上のとき、右クリックでLv消費で村人を満腹化") // TODO translate
