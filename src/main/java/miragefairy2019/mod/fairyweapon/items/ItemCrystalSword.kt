@@ -37,12 +37,16 @@ class ItemCrystalSword(
 
     override fun getAttributeModifiers(equipmentSlot: EntityEquipmentSlot, itemStack: ItemStack): Multimap<String?, AttributeModifier?>? {
         val multimap = super.getAttributeModifiers(equipmentSlot, itemStack)
-        if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.name, AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", additionalDamage, 0))
-            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.name, AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4, 0))
+        if (itemStack.itemDamage + 1 <= itemStack.maxDamage) {
+            if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
+                multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.name, AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", additionalDamage, 0))
+                multimap.put(SharedMonsterAttributes.ATTACK_SPEED.name, AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4, 0))
+            }
         }
         return multimap
     }
+
+    override fun wearWhenHitEntity(itemStack: ItemStack) = itemStack.itemDamage + 1 <= itemStack.maxDamage
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = lsitOf("撃破時、フェアリークリスタルを消費して妖精を召喚") // TODO translate
