@@ -33,7 +33,7 @@ class ItemCrystalSword(
     private val weaponDamage: Double,
     private val additionalDropRate: Double
 ) : ItemFairyWeaponMagic4() {
-    val extraItemDropRate = status("extraItemDropRate", { (!Mastery.combat / 100.0 + additionalDropRate).coerceIn(0.0, 1.0) }, { percent1 })
+    val extraItemDropRate = status("extraItemDropRate", { (!Mastery.closeCombat / 100.0 + additionalDropRate).coerceIn(0.0, 1.0) }, { percent1 })
 
     override fun getAttributeModifiers(equipmentSlot: EntityEquipmentSlot, itemStack: ItemStack): Multimap<String?, AttributeModifier?>? {
         val multimap = super.getAttributeModifiers(equipmentSlot, itemStack)
