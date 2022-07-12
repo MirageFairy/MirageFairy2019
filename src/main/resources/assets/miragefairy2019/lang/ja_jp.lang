@@ -548,6 +548,7 @@ miragefairy2019.gui.playerAura.title=プレイヤーオーラ
 miragefairy2019.magic.coolTime.text=クールタイムが残っています
 miragefairy2019.magic.insufficientDurability.text=耐久値が不足しています
 miragefairy2019.magic.insufficientResource.text=資源が不足しています
+miragefairy2019.magic.invalidTarget.text=非対応の対象です
 miragefairy2019.magic.noFairy.text=妖精を所持していません
 miragefairy2019.magic.noTarget.text=発動対象がありません
 miragefairy2019.mfa.00000461=【MFA-00000461：おかず】\nｳ˝ｪｱｰｰ「来たぞ……」\nｹﾞｪｪｪｪｪ「任せろ、支度はできている」\n\nﾑﾞｩｩｩｩｩ「――待て、様子が違う」\nｳ˝ｪｱｰｰ「馬鹿な」\nｳ˝ｪｱｰｰ「なぜ人間が刀を持っている？」\nﾑﾞｩｩｩｩｩ「ｹﾞｪｪｪｪｪ、戻ってこい！」\n\nｹﾞｪｪｪｪｪ「ｧﾞｴｴ！」

@@ -547,6 +547,7 @@ miragefairy2019.gui.playerAura.title=Player Aura
 miragefairy2019.magic.coolTime.text=Cool time remains
 miragefairy2019.magic.insufficientDurability.text=Insufficient durability
 miragefairy2019.magic.insufficientResource.text=Insufficient resources
+miragefairy2019.magic.invalidTarget.text=This target is not supported
 miragefairy2019.magic.noFairy.text=You don't have a fairy
 miragefairy2019.magic.noTarget.text=There is no target
 miragefairy2019.placeItem=Place Item
