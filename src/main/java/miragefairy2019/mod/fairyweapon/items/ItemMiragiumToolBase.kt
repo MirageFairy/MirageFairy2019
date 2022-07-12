@@ -1,6 +1,5 @@
 package miragefairy2019.mod.fairyweapon.items
 
-import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.lib.MagicSelector
@@ -9,9 +8,9 @@ import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.breakBlock
 import miragefairy2019.mod.fairyweapon.findFairy
 import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
+import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
-import miragefairy2019.mod.fairyweapon.magic4.float0
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.percent2
@@ -37,55 +36,18 @@ fun MagicArguments.fail(cursor: Vec3d, color: Int) = object : MagicHandler() {
 }
 
 abstract class ItemMiragiumToolBase(
-    private val weaponMana: Mana,
-    private val mastery: IMastery,
+    public val weaponMana: Mana,
+    public val mastery: IMastery,
     additionalBaseStatus: Double
 ) : ItemFairyWeaponMagic4() {
-    val strength = status("strength", {
-        (additionalBaseStatus + !Erg.SLASH + !this@ItemMiragiumToolBase.mastery * 0.5) * costFactor + when (this@ItemMiragiumToolBase.weaponMana) {
-            Mana.SHINE -> !Mana.SHINE
-            Mana.FIRE -> !Mana.FIRE
-            Mana.WIND -> !Mana.WIND
-            Mana.GAIA -> !Mana.GAIA
-            Mana.AQUA -> !Mana.AQUA
-            Mana.DARK -> !Mana.DARK
-        }
-    }, { float0 })
-    val extent = status("extent", {
-        (additionalBaseStatus + !Erg.SHOOT) * costFactor + when (this@ItemMiragiumToolBase.weaponMana) {
-            Mana.SHINE -> !Mana.GAIA + !Mana.WIND
-            Mana.FIRE -> !Mana.GAIA + !Mana.WIND
-            Mana.WIND -> !Mana.GAIA * 2
-            Mana.GAIA -> !Mana.WIND * 2
-            Mana.AQUA -> !Mana.GAIA + !Mana.WIND
-            Mana.DARK -> !Mana.GAIA + !Mana.WIND
-        }
-    }, { float0 })
-    val endurance = status("endurance", {
-        (additionalBaseStatus + !Erg.SENSE) * costFactor + when (this@ItemMiragiumToolBase.weaponMana) {
-            Mana.SHINE -> !Mana.FIRE + !Mana.AQUA
-            Mana.FIRE -> !Mana.AQUA * 2
-            Mana.WIND -> !Mana.FIRE + !Mana.AQUA
-            Mana.GAIA -> !Mana.FIRE + !Mana.AQUA
-            Mana.AQUA -> !Mana.FIRE * 2
-            Mana.DARK -> !Mana.FIRE + !Mana.AQUA
-        }
-    }, { float0 })
-    val production = status("production", {
-        (additionalBaseStatus + !Erg.HARVEST) * costFactor + when (this@ItemMiragiumToolBase.weaponMana) {
-            Mana.SHINE -> !Mana.DARK * 2
-            Mana.FIRE -> !Mana.SHINE + !Mana.DARK
-            Mana.WIND -> !Mana.SHINE + !Mana.DARK
-            Mana.GAIA -> !Mana.SHINE + !Mana.DARK
-            Mana.AQUA -> !Mana.SHINE + !Mana.DARK
-            Mana.DARK -> !Mana.SHINE * 2
-        }
-    }, { float0 })
-
+    abstract val strength: FormulaArguments.() -> Double // TODO remove
+    abstract val extent: FormulaArguments.() -> Double // TODO remove
+    abstract val endurance: FormulaArguments.() -> Double // TODO remove
+    abstract val production: FormulaArguments.() -> Double // TODO remove
     val fortune = status("fortune", { !production * 0.03 }, { float2 }) { setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL) }
     val wear = status("wear", { 1 / (25.0 + !endurance * 0.25) }, { percent2 }) { setVisibility(EnumVisibility.DETAIL) }
 
-    override val isOldMana: Boolean get() = true
+    override val isOldMana: Boolean get() = true // TODO remove
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TODO translate

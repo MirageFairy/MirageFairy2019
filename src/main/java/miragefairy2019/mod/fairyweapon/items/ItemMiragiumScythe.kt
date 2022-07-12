@@ -1,5 +1,6 @@
 package miragefairy2019.mod.fairyweapon.items
 
+import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.libkt.grow
 import miragefairy2019.libkt.positions
@@ -8,6 +9,7 @@ import miragefairy2019.libkt.sortedByDistance
 import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.duration
+import miragefairy2019.mod.fairyweapon.magic4.float0
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.status
@@ -27,6 +29,46 @@ class ItemMiragiumScythe(
     Mastery.harvest,
     additionalBaseStatus
 ) {
+    override val strength = status("strength", {
+        (additionalBaseStatus + !Erg.SLASH + !this@ItemMiragiumScythe.mastery * 0.5) * costFactor + when (this@ItemMiragiumScythe.weaponMana) {
+            Mana.SHINE -> !Mana.SHINE
+            Mana.FIRE -> !Mana.FIRE
+            Mana.WIND -> !Mana.WIND
+            Mana.GAIA -> !Mana.GAIA
+            Mana.AQUA -> !Mana.AQUA
+            Mana.DARK -> !Mana.DARK
+        }
+    }, { float0 })
+    override val extent = status("extent", {
+        (additionalBaseStatus + !Erg.SHOOT) * costFactor + when (this@ItemMiragiumScythe.weaponMana) {
+            Mana.SHINE -> !Mana.GAIA + !Mana.WIND
+            Mana.FIRE -> !Mana.GAIA + !Mana.WIND
+            Mana.WIND -> !Mana.GAIA * 2
+            Mana.GAIA -> !Mana.WIND * 2
+            Mana.AQUA -> !Mana.GAIA + !Mana.WIND
+            Mana.DARK -> !Mana.GAIA + !Mana.WIND
+        }
+    }, { float0 })
+    override val endurance = status("endurance", {
+        (additionalBaseStatus + !Erg.SENSE) * costFactor + when (this@ItemMiragiumScythe.weaponMana) {
+            Mana.SHINE -> !Mana.FIRE + !Mana.AQUA
+            Mana.FIRE -> !Mana.AQUA * 2
+            Mana.WIND -> !Mana.FIRE + !Mana.AQUA
+            Mana.GAIA -> !Mana.FIRE + !Mana.AQUA
+            Mana.AQUA -> !Mana.FIRE * 2
+            Mana.DARK -> !Mana.FIRE + !Mana.AQUA
+        }
+    }, { float0 })
+    override val production = status("production", {
+        (additionalBaseStatus + !Erg.HARVEST) * costFactor + when (this@ItemMiragiumScythe.weaponMana) {
+            Mana.SHINE -> !Mana.DARK * 2
+            Mana.FIRE -> !Mana.SHINE + !Mana.DARK
+            Mana.WIND -> !Mana.SHINE + !Mana.DARK
+            Mana.GAIA -> !Mana.SHINE + !Mana.DARK
+            Mana.AQUA -> !Mana.SHINE + !Mana.DARK
+            Mana.DARK -> !Mana.SHINE * 2
+        }
+    }, { float0 })
     val maxHardness = status("maxHardness", { !strength * 0.01 }, { float2 }) { setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL) }
     val range = status("range", { (2 + !extent * 0.02).toInt() }, { integer }) { setRange(2..5).setVisibility(EnumVisibility.DETAIL) }
     val coolTime = status("coolTime", { 15.0 * costFactor }, { duration }) { setVisibility(EnumVisibility.DETAIL) }
