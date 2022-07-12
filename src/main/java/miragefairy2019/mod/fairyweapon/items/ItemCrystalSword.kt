@@ -77,14 +77,14 @@ class ItemCrystalSword(
                 if (target.health <= 0) onKill(target)
             }
 
-            fun fail(magicMessage: MagicMessage) {
-                if (!world.isRemote) player.sendStatusMessage(magicMessage.displayText, true)
+            fun fail(magicMessage: MagicMessage, actionBar: Boolean) {
+                if (!world.isRemote) player.sendStatusMessage(magicMessage.displayText, actionBar)
             }
 
             fun onHit(target: EntityLivingBase) {
-                if (!hasPartnerFairy) return fail(MagicMessage.NO_FAIRY) // 妖精を持っていない
-                if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return fail(MagicMessage.INSUFFICIENT_DURABILITY) // 耐久不足
-                if (player.cooldownTracker.hasCooldown(weaponItem)) return fail(MagicMessage.COOL_TIME) // クールタイムが終わっていない
+                if (!hasPartnerFairy) return fail(MagicMessage.NO_FAIRY, true) // 妖精を持っていない
+                if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return fail(MagicMessage.INSUFFICIENT_DURABILITY, true) // 耐久不足
+                if (player.cooldownTracker.hasCooldown(weaponItem)) return fail(MagicMessage.COOL_TIME, true) // クールタイムが終わっていない
 
                 // 消費
                 player.cooldownTracker.setCooldown(weaponItem, coolTime().toInt()) // クールタイム
@@ -97,7 +97,7 @@ class ItemCrystalSword(
             }
 
             fun onKill(target: EntityLivingBase) {
-                if (weaponItemStack.itemDamage + 1 > weaponItemStack.maxDamage) return fail(MagicMessage.INSUFFICIENT_DURABILITY)// 耐久値が足りないと失敗
+                if (weaponItemStack.itemDamage + 1 > weaponItemStack.maxDamage) return fail(MagicMessage.INSUFFICIENT_DURABILITY, false) // 耐久値が足りないと失敗
 
 
                 // 魔法成立
