@@ -82,7 +82,7 @@ class ItemCrystalSword(
                 if (player.cooldownTracker.hasCooldown(weaponItem)) return fail(MagicMessage.COOL_TIME, true) // クールタイムが終わっていない
 
                 // 消費
-                player.cooldownTracker.setCooldown(weaponItem, coolTime().toInt()) // クールタイム
+                player.cooldownTracker.setCooldown(weaponItem, ceil(coolTime()).toInt()) // クールタイム
                 weaponItemStack.damageItem(world.rand.randomInt(wear()), player) // 耐久
 
                 // 効果

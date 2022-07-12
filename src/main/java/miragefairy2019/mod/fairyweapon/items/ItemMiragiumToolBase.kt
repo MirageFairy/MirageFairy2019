@@ -91,7 +91,7 @@ abstract class ItemMiragiumToolBase(
                 // 破壊時
                 if (count > 0) {
                     breakSound?.let { world.playSound(null, player.posX, player.posY, player.posZ, it, player.soundCategory, 1.0f, 1.0f) } // エフェクト
-                    player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, (getCoolTime(this@magic)).toInt()) // クールタイム
+                    player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, ceil(getCoolTime(this@magic)).toInt()) // クールタイム
                 }
 
                 // エフェクト

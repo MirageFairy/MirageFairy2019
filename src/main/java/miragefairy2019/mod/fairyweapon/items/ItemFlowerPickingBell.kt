@@ -209,7 +209,7 @@ class ItemFlowerPickingBell(additionalBaseStatus: Double, extraItemDropRateFacto
 
                     // クールタイム
                     val ratio = targetCount / (maxTargetCount()).toDouble()
-                    player.cooldownTracker.setCooldown(this@ItemFlowerPickingBell, (coolTime() * ratio.pow(0.5)).toInt())
+                    player.cooldownTracker.setCooldown(this@ItemFlowerPickingBell, ceil(coolTime() * ratio.pow(0.5)).toInt())
 
                 }
                 if (collected) {

@@ -140,7 +140,7 @@ class ItemTemptationOcarina : ItemFairyWeaponMagic4() {
                     if (success >= 1) {
 
                         // 行使ごとの消費
-                        player.cooldownTracker.setCooldown(this@ItemTemptationOcarina, ceil(coolTime()).toInt()) // クールタイム
+                        player.cooldownTracker.setCooldown(this@ItemTemptationOcarina, ceil(coolTime() / speedBoost()).toInt()) // クールタイム
 
                         // 行使ごとのエフェクト
                         if (experienceCosted) worldServer.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 0.2F, 0.5F)

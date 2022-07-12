@@ -108,7 +108,7 @@ class ItemLightMagicWand : ItemFairyWeaponMagic4() {
                 //消費
                 weaponItemStack.damageItem(1, player)
                 torchItemStack.shrink(1)
-                player.cooldownTracker.setCooldown(this@ItemLightMagicWand, (coolTime() / speedBoost()).toInt())
+                player.cooldownTracker.setCooldown(this@ItemLightMagicWand, ceil(coolTime() / speedBoost()).toInt())
 
                 // エフェクト
                 val newBlockState = world.getBlockState(blockPos)
