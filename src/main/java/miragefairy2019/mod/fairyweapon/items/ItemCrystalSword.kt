@@ -7,15 +7,11 @@ import miragefairy2019.libkt.WeightedItem
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.libkt.red
-import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.fairy.createItemStack
 import miragefairy2019.mod.fairyrelation.FairySelector
-import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.displayText
-import miragefairy2019.mod.fairyweapon.findItem
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.float2
@@ -36,7 +32,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.DamageSource
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import net.minecraftforge.oredict.OreIngredient
 import kotlin.math.ceil
 
 class ItemCrystalSword(
@@ -98,27 +93,19 @@ class ItemCrystalSword(
 
             fun onKill(target: EntityLivingBase) {
                 if (weaponItemStack.itemDamage + 1 > weaponItemStack.maxDamage) return fail(MagicMessage.INSUFFICIENT_DURABILITY, false) // 耐久値が足りないと失敗
+                if (extraItemDropRate() <= world.rand.nextDouble()) return // ステータスに基づいた確率で成功
+                val dropFairyCard = FairySelector().entity(target).allMatch() // エンティティに紐づけられた妖精のリスト
+                    .withoutPartiallyMatch // 抽象的な妖精を除外
+                    .map { WeightedItem(it.fairyCard, it.weight) } // relevanceを重みとする
+                    .getRandomItem(world.rand) ?: return fail(MagicMessage.INVALID_TARGET, false) // 抽選
 
+                // 成立
 
-                // 魔法成立
+                weaponItemStack.damageItem(1, player) // 耐久消費
 
-                if (extraItemDropRate() > world.rand.nextDouble()) { // ステータスに基づいた確率で
-                    // エンティティに紐づけられた妖精のリスト
-                    val entries = FairySelector().entity(target).allMatch().withoutPartiallyMatch.primaries
-                    if (entries.isEmpty()) return // 関連付けられた妖精が居ない場合は無視
+                dropFairyCard.createItemStack().drop(world, target.positionVector).setPickupDelay(20) // ドロップする
 
-                    // relevanceを重みとして抽選
-                    val dropFairyCard = entries.map { WeightedItem(it.fairyCard, it.relevance) }.getRandomItem(world.rand) ?: return
-
-                    // 効果成立
-
-                    weaponItemStack.damageItem(1, player) // 耐久消費
-
-                    dropFairyCard.createItemStack().drop(world, target.positionVector).setPickupDelay(20) // ドロップする
-
-                    playSound(world, player, SoundEvents.BLOCK_ANVIL_PLACE, 0.5f, 1.5f) // エフェクト
-
-                }
+                playSound(world, player, SoundEvents.BLOCK_ANVIL_PLACE, 0.5f, 1.5f) // エフェクト
 
             }
         }
