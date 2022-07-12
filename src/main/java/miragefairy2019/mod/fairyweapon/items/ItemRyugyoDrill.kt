@@ -8,7 +8,6 @@ import miragefairy2019.libkt.region
 import miragefairy2019.libkt.sortedByDistance
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.duration
-import miragefairy2019.mod.fairyweapon.magic4.float0
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.percent2
@@ -23,17 +22,11 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
 class ItemRyugyoDrill(private val additionalBaseStatus: Double) : ItemMiragiumToolBase() {
-    val strength = status("strength", { (additionalBaseStatus + !Erg.SLASH + !Mastery.mining * 0.5) * costFactor + !Mana.GAIA }, { float0 })
-    val extent = status("extent", { (additionalBaseStatus + !Erg.SHOOT) * costFactor + !Mana.WIND * 2 }, { float0 })
-    val endurance = status("endurance", { (additionalBaseStatus + !Erg.SENSE) * costFactor + !Mana.FIRE + !Mana.AQUA }, { float0 })
-    val production = status("production", { (additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE + !Mana.DARK }, { float0 })
-    val maxHardness = status("maxHardness", { 2.0 + !strength * 0.02 atMost 20.0 }, { float2 })
-    val range = status("range", { (1 + !extent * 0.01).toInt() atMost 5 }, { integer })
+    val maxHardness = status("maxHardness", { 2.0 + ((additionalBaseStatus + !Erg.SLASH + !Mastery.mining * 0.5) * costFactor + !Mana.GAIA) * 0.02 atMost 20.0 }, { float2 })
+    val range = status("range", { (1 + ((additionalBaseStatus + !Erg.SHOOT) * costFactor + !Mana.WIND * 2) * 0.01).toInt() atMost 5 }, { integer })
     val coolTime = status("coolTime", { 100.0 * costFactor }, { duration })
-    override val fortune = status("fortune", { !production * 0.03 }, { float2 })
-    override val wear = status("wear", { 1 / (25.0 + !endurance * 0.25) }, { percent2 })
-
-    override val isOldMana: Boolean get() = true // TODO remove
+    override val fortune = status("fortune", { ((additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE + !Mana.DARK) * 0.03 }, { float2 })
+    override val wear = status("wear", { 1 / (25.0 + ((additionalBaseStatus + !Erg.SENSE) * costFactor + !Mana.FIRE + !Mana.AQUA) * 0.25) }, { percent2 })
 
     init {
         setHarvestLevel("pickaxe", 3)
