@@ -13,6 +13,7 @@ import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.displayText
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
+import miragefairy2019.mod.fairyweapon.magic4.boost
 import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.magic
@@ -39,7 +40,7 @@ class ItemCrystalSword(
     private val baseDropRate: Double
 ) : ItemFairyWeaponMagic4() {
     val damage = status("damage", { (baseDamage + !Mana.DARK / 20.0 + !Erg.ATTACK / 10.0) * costFactor }, { float2 })
-    val damageBoost = status("damageBoost", { 1.0 + !Mastery.closeCombat / 100.0 }, { percent0 })
+    val damageBoost = status("damageBoost", { 1.0 + !Mastery.closeCombat / 100.0 }, { boost })
     val extraItemDropRate = status("extraItemDropRate", { baseDropRate + !Mastery.fairySummoning / 100.0 }, { percent0 })
     val coolTime = status("coolTime", { 20.0 * 2.0 / (1.0 + !Mana.GAIA / 40.0 + !Erg.SLASH / 10.0) * costFactor }, { duration })
     val wear = status("wear", { 0.5 / (1.0 + (!Mana.WIND + !Erg.DESTROY) / 20.0) * costFactor }, { percent2 })

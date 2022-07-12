@@ -6,9 +6,9 @@ import miragefairy2019.api.Erg.THUNDER
 import miragefairy2019.api.Mana.WIND
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
+import miragefairy2019.mod.fairyweapon.magic4.boost
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.magic
-import miragefairy2019.mod.fairyweapon.magic4.percent0
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.suffix
 import miragefairy2019.mod.fairyweapon.magic4.world
@@ -21,7 +21,7 @@ import kotlin.math.floor
 
 class ItemChargingRod : ItemFairyWeaponMagic4() {
     val chargeSpeed = status("chargeSpeed", { 20.0 + !WIND / 5.0 + !THUNDER / 2.0 }, { float2.suffix(" AE/t") })
-    val speedBoost = status("speedBoost", { 1.0 + !Mastery.processing / 100.0 }, { percent0 })
+    val speedBoost = status("speedBoost", { 1.0 + !Mastery.processing / 100.0 }, { boost })
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("AE2エネルギーセルの上に乗るとチャージ") // TODO translate

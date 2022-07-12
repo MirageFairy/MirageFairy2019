@@ -32,6 +32,7 @@ val FormulaRendererSelector<Double>.percent0 get() = createSimpleFormulaRenderer
 val FormulaRendererSelector<Double>.percent1 get() = createSimpleFormulaRenderer { textComponent { (value * 100.0 formatAs "%.1f%%")() } }
 val FormulaRendererSelector<Double>.percent2 get() = createSimpleFormulaRenderer { textComponent { (value * 100.0 formatAs "%.2f%%")() } }
 val FormulaRendererSelector<Double>.percent3 get() = createSimpleFormulaRenderer { textComponent { (value * 100.0 formatAs "%.3f%%")() } }
+val FormulaRendererSelector<Double>.boost get() = createSimpleFormulaRenderer { textComponent { ((value - 1) * 100.0 formatAs "%+.0f%%")() } }
 val FormulaRendererSelector<Boolean>.boolean get() = createSimpleFormulaRenderer { textComponent { if (value) "Yes"() else "No"() } }
 val FormulaRendererSelector<CriticalRate>.criticalRate get() = createSimpleFormulaRenderer { textComponent { value.bar.map { "|"().withColor(it.color) }.flatten() + (value.mean formatAs " (%.2f)")() } }
 
