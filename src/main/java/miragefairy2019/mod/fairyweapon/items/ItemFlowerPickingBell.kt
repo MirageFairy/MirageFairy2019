@@ -1,7 +1,6 @@
 package miragefairy2019.mod.fairyweapon.items
 
 import miragefairy2019.api.Erg
-import miragefairy2019.api.Erg.WARP
 import miragefairy2019.api.Mana
 import miragefairy2019.api.PickHandlerRegistry
 import miragefairy2019.lib.MagicSelector
@@ -16,11 +15,12 @@ import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.boolean
+import miragefairy2019.mod.fairyweapon.magic4.boost
 import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.magic
-import miragefairy2019.mod.fairyweapon.magic4.percent1
+import miragefairy2019.mod.fairyweapon.magic4.percent0
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.pitch
 import miragefairy2019.mod.fairyweapon.magic4.positive
@@ -29,6 +29,7 @@ import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.skill.Mastery
+import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.item.EntityXPOrb
@@ -47,16 +48,18 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.pow
 
-class ItemFlowerPickingBell(additionalBaseStatus: Double, extraItemDropRateFactor: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase2() {
+class ItemFlowerPickingBell(baseFortune: Double, extraItemDropRateFactor: Double) : ItemFairyWeaponMagic4() {
     val pitch = status("pitch", { 0.5.pow(costFactor - 1.0) }, { pitch })
-    val maxTargetCount = status("maxTargetCount", { 2 + floor(((additionalBaseStatus + !Erg.SOUND + !Mastery.flowerPicking * 0.5) * costFactor + !Mana.DARK) * 0.1).toInt() }, { integer }) { setRange(1..100) }
-    val fortune = status("fortune", { 3 + ((additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE * 2) * 0.1 }, { float2 }) { setRange(0.0..100.0) }
-    val additionalReach = status("additionalReach", { ((additionalBaseStatus + !Erg.SPACE) * costFactor + !Mana.GAIA + !Mana.WIND) * 0.1 }, { float2 }) { setRange(0.0..10.0) }
-    val radius = status("radius", { 4 + ((additionalBaseStatus + !Erg.SPACE) * costFactor + !Mana.GAIA + !Mana.WIND) * 0.05 }, { float2 }) { setRange(0.0..10.0) }
-    val wear = status("wear", { 1.0 / (1 + ((additionalBaseStatus + !Erg.SLASH) * costFactor + !Mana.FIRE + !Mana.AQUA) * 0.03) }, { percent2 })
+    val maxTargetCount = status("maxTargetCount", { floor((8.0 + !Mana.DARK / 10.0 + !Erg.SUBMISSION / 5.0) * costFactor).toInt() atLeast 1 }, { integer })
+    val fortune = status("fortune", { baseFortune + !Mana.SHINE / 5.0 + !Erg.HARVEST / 10.0 }, { float2 })
+    val additionalReach = status("additionalReach", { 0.0 + !Mana.WIND / 20.0 + !Erg.SPACE / 10.0 atMost 30.0 }, { float2 })
+    val radius = status("radius", { 4 + !Mana.GAIA / 20.0 + !Erg.SOUND / 10.0 atMost 20.0 }, { float2 })
+    val wear = status("wear", { 0.25 / (1 + !Mana.FIRE / 40.0 + !Erg.SLASH / 20.0) }, { percent2 })
     val coolTime = status("coolTime", { 25.0 * costFactor }, { duration })
-    val collection = status("collection", { !WARP >= 10 }, { boolean.positive })
-    val extraItemDropRate = status("extraItemDropRate", { 0.1 + extraItemDropRateFactor * !Mastery.flowerPicking atMost maxExtraItemDropRate }, { percent1 })
+    val speedBoost = status("speedBoost", { 1.0 + !Mastery.flowerPicking / 100.0 }, { boost })
+    val collection = status("collection", { !Erg.WARP >= 10 }, { boolean.positive })
+    val extraItemDropRate = status("extraItemDropRate", { extraItemDropRateFactor }, { percent0 })
+    val productionBoost = status("productionBoost", { 1.0 + !Mastery.flowerPicking / 100.0 }, { boost })
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでミラージュフラワーを収穫") // TODO translate
@@ -162,7 +165,7 @@ class ItemFlowerPickingBell(additionalBaseStatus: Double, extraItemDropRateFacto
 
                             // 種の追加ドロップ
                             if (!world.isRemote) {
-                                val count = world.rand.randomInt(extraItemDropRate())
+                                val count = world.rand.randomInt(extraItemDropRate() * productionBoost())
                                 if (count > 0) MirageFlower.itemMirageFlowerSeeds().createItemStack(count = count).drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
                             }
 
@@ -203,7 +206,7 @@ class ItemFlowerPickingBell(additionalBaseStatus: Double, extraItemDropRateFacto
 
                     // クールタイム
                     val ratio = targetCount / (maxTargetCount()).toDouble()
-                    player.cooldownTracker.setCooldown(this@ItemFlowerPickingBell, ceil(coolTime() * ratio.pow(0.5)).toInt())
+                    player.cooldownTracker.setCooldown(this@ItemFlowerPickingBell, ceil(coolTime() / speedBoost() * ratio.pow(0.5)).toInt())
 
                 }
                 if (collected) {

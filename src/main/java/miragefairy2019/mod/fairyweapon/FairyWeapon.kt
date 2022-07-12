@@ -472,7 +472,7 @@ enum class FairyWeaponKind(
         }
     ),
     flowerPickingBell(
-        bellBase, "flower_picking_bell", "flowerPickingBell", 2, { ItemFlowerPickingBell(0.0, 0.001, 0.2) },
+        bellBase, "flower_picking_bell", "flowerPickingBell", 2, { ItemFlowerPickingBell(3.0, 0.1) },
         LangPair("Flower Picking Bell", "花摘みの鐘"),
         LangPair("", "ちょっとお花を摘みに"),
         null,
@@ -500,7 +500,7 @@ enum class FairyWeaponKind(
         }
     ),
     flowerPickingBell2(
-        flowerPickingBell, "flower_picking_bell_2", "flowerPickingBell2", 4, { ItemFlowerPickingBell(10.0, 0.01, 10000.0) },
+        flowerPickingBell, "flower_picking_bell_2", "flowerPickingBell2", 4, { ItemFlowerPickingBell(4.0, 1.0) },
         LangPair("Flower Picking Bell II", "花摘みの鐘 II"),
         LangPair("", "光輝のフェロモン"),
         null,
