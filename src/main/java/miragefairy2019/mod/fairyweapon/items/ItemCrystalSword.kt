@@ -99,11 +99,6 @@ class ItemCrystalSword(
             fun onKill(target: EntityLivingBase) {
                 if (weaponItemStack.itemDamage + 1 > weaponItemStack.maxDamage) return fail(MagicMessage.INSUFFICIENT_DURABILITY)// 耐久値が足りないと失敗
 
-                // クリスタルがないと失敗
-                val itemStackFuel = findItem(player) { OreIngredient("mirageFairyCrystal").test(it) } ?: run {
-                    player.sendStatusMessage(textComponent { "フェアリークリスタルが足りません！"().red }, true) // TODO translate
-                    return
-                }
 
                 // 魔法成立
 
@@ -117,8 +112,6 @@ class ItemCrystalSword(
 
                     // 効果成立
 
-                    itemStackFuel.shrink(1) // クリスタル消費
-                    if (itemStackFuel.isEmpty) player.sendStatusMessage(textComponent { "フェアリークリスタルを使い切りました！"().red }, true) // TODO translate
                     weaponItemStack.damageItem(1, player) // 耐久消費
 
                     dropFairyCard.createItemStack().drop(world, target.positionVector).setPickupDelay(20) // ドロップする
