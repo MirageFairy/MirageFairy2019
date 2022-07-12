@@ -81,7 +81,6 @@ abstract class ItemMiragiumToolBase(
             Mana.DARK -> !Mana.SHINE * 2
         }
     }, { float0 })
-    val cost = status("cost", { 50.0 / (1.0 + !this@ItemMiragiumToolBase.mastery * 0.002) * costFactor }, { float0 })
 
     val fortune = status("fortune", { !production * 0.03 }, { float2 }) { setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL) }
     val wear = status("wear", { 1 / (25.0 + !endurance * 0.25) }, { percent2 }) { setVisibility(EnumVisibility.DETAIL) }
