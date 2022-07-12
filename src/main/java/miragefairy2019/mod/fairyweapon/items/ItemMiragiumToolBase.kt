@@ -40,7 +40,7 @@ abstract class ItemMiragiumToolBase(
     private val weaponMana: Mana,
     private val mastery: IMastery,
     additionalBaseStatus: Double
-) : ItemFairyWeaponBase2() {
+) : ItemFairyWeaponMagic4() {
     val strength = status("strength", {
         (additionalBaseStatus + !Erg.SLASH + !this@ItemMiragiumToolBase.mastery * 0.5) * costFactor + when (this@ItemMiragiumToolBase.weaponMana) {
             Mana.SHINE -> !Mana.SHINE
@@ -84,6 +84,8 @@ abstract class ItemMiragiumToolBase(
 
     val fortune = status("fortune", { !production * 0.03 }, { float2 }) { setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL) }
     val wear = status("wear", { 1 / (25.0 + !endurance * 0.25) }, { percent2 }) { setVisibility(EnumVisibility.DETAIL) }
+
+    override val isOldMana: Boolean get() = true
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TODO translate

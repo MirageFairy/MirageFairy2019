@@ -7,11 +7,6 @@ import miragefairy2019.mod.fairyweapon.magic4.Formula
 import miragefairy2019.mod.fairyweapon.magic4.FormulaRenderer
 import miragefairy2019.mod.fairyweapon.magic4.MagicStatusBuilder
 
-// TODO remove
-abstract class ItemFairyWeaponBase2 : ItemFairyWeaponMagic4() {
-    override val isOldMana: Boolean get() = true
-}
-
 
 // Magic Status
 
