@@ -6,14 +6,10 @@ import miragefairy2019.lib.rayTrace
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.breakBlock
 import miragefairy2019.mod.fairyweapon.findFairy
-import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
 import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
-import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.magic
-import miragefairy2019.mod.fairyweapon.magic4.percent2
-import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.spawnParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
@@ -34,14 +30,8 @@ fun MagicArguments.fail(cursor: Vec3d, color: Int) = object : MagicHandler() {
 }
 
 abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
-    abstract val strength: FormulaArguments.() -> Double // TODO remove
-    abstract val extent: FormulaArguments.() -> Double // TODO remove
-    abstract val endurance: FormulaArguments.() -> Double // TODO remove
-    abstract val production: FormulaArguments.() -> Double // TODO remove
-    val fortune = status("fortune", { !production * 0.03 }, { float2 }) { setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL) }
-    val wear = status("wear", { 1 / (25.0 + !endurance * 0.25) }, { percent2 }) { setVisibility(EnumVisibility.DETAIL) }
-
-    override val isOldMana: Boolean get() = true // TODO remove
+    abstract val fortune: FormulaArguments.() -> Double
+    abstract val wear: FormulaArguments.() -> Double
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TODO translate

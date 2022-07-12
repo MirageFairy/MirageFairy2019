@@ -12,6 +12,7 @@ import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.float0
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
+import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.skill.Mastery
@@ -22,13 +23,17 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
 class ItemRyugyoDrill(private val additionalBaseStatus: Double) : ItemMiragiumToolBase() {
-    override val strength = status("strength", { (additionalBaseStatus + !Erg.SLASH + !Mastery.mining * 0.5) * costFactor + !Mana.GAIA }, { float0 })
-    override val extent = status("extent", { (additionalBaseStatus + !Erg.SHOOT) * costFactor + !Mana.WIND * 2 }, { float0 })
-    override val endurance = status("endurance", { (additionalBaseStatus + !Erg.SENSE) * costFactor + !Mana.FIRE + !Mana.AQUA }, { float0 })
-    override val production = status("production", { (additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE + !Mana.DARK }, { float0 })
+    val strength = status("strength", { (additionalBaseStatus + !Erg.SLASH + !Mastery.mining * 0.5) * costFactor + !Mana.GAIA }, { float0 })
+    val extent = status("extent", { (additionalBaseStatus + !Erg.SHOOT) * costFactor + !Mana.WIND * 2 }, { float0 })
+    val endurance = status("endurance", { (additionalBaseStatus + !Erg.SENSE) * costFactor + !Mana.FIRE + !Mana.AQUA }, { float0 })
+    val production = status("production", { (additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE + !Mana.DARK }, { float0 })
     val maxHardness = status("maxHardness", { 2.0 + !strength * 0.02 }, { float2 }) { setRange(2.0..20.0).setVisibility(EnumVisibility.DETAIL) }
     val range = status("range", { (1 + !extent * 0.01).toInt() }, { integer }) { setRange(1..5).setVisibility(EnumVisibility.DETAIL) }
     val coolTime = status("coolTime", { 100.0 * costFactor }, { duration }) { setVisibility(EnumVisibility.DETAIL) }
+    override val fortune = status("fortune", { !production * 0.03 }, { float2 }) { setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL) }
+    override val wear = status("wear", { 1 / (25.0 + !endurance * 0.25) }, { percent2 }) { setVisibility(EnumVisibility.DETAIL) }
+
+    override val isOldMana: Boolean get() = true // TODO remove
 
     init {
         setHarvestLevel("pickaxe", 3)
