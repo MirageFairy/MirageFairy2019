@@ -15,6 +15,7 @@ import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.skill.Mastery
+import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
@@ -26,10 +27,10 @@ class ItemRyugyoDrill(private val additionalBaseStatus: Double) : ItemMiragiumTo
     val extent = status("extent", { (additionalBaseStatus + !Erg.SHOOT) * costFactor + !Mana.WIND * 2 }, { float0 })
     val endurance = status("endurance", { (additionalBaseStatus + !Erg.SENSE) * costFactor + !Mana.FIRE + !Mana.AQUA }, { float0 })
     val production = status("production", { (additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE + !Mana.DARK }, { float0 })
-    val maxHardness = status("maxHardness", { 2.0 + !strength * 0.02 }, { float2 }) { setRange(2.0..20.0) }
-    val range = status("range", { (1 + !extent * 0.01).toInt() }, { integer }) { setRange(1..5) }
+    val maxHardness = status("maxHardness", { 2.0 + !strength * 0.02 atMost 20.0 }, { float2 })
+    val range = status("range", { (1 + !extent * 0.01).toInt() atMost 5 }, { integer })
     val coolTime = status("coolTime", { 100.0 * costFactor }, { duration })
-    override val fortune = status("fortune", { !production * 0.03 }, { float2 }) { setRange(0.0..100.0) }
+    override val fortune = status("fortune", { !production * 0.03 }, { float2 })
     override val wear = status("wear", { 1 / (25.0 + !endurance * 0.25) }, { percent2 })
 
     override val isOldMana: Boolean get() = true // TODO remove
