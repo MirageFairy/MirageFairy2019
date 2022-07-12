@@ -41,7 +41,7 @@ class ItemCrystalSword(
 ) : ItemFairyWeaponMagic4() {
     val additionalDamage = status("additionalDamage", { (2.0 + !Mana.DARK / 20.0 + !Erg.ATTACK / 10.0) * costFactor }, { float2 })
     val damageBoost = status("damageBoost", { 1.0 + !Mastery.closeCombat / 100.0 + additionalDamageBoost }, { percent0 })
-    val extraItemDropRate = status("extraItemDropRate", { (!Mastery.closeCombat / 100.0 + additionalDropRate).coerceIn(0.0, 1.0) }, { percent1 })
+    val extraItemDropRate = status("extraItemDropRate", { 1.0 + !Mastery.fairySummoning / 100.0 + additionalDropRate }, { percent1 })
     val coolTime = status("coolTime", { 20.0 / (1.0 + !Mana.GAIA / 40.0 + !Erg.SLASH / 10.0) * costFactor }, { duration })
     val wear = status("wear", { 0.5 / (1.0 + (!Mana.WIND + !Erg.DESTROY) / 20.0) * costFactor }, { percent2 })
     val dps = status("dps", { (!additionalDamage * !damageBoost) / (!coolTime / 20.0) }, { float2 })
@@ -92,21 +92,22 @@ class ItemCrystalSword(
             }
 
             fun onKill(target: EntityLivingBase) {
-                if (weaponItemStack.itemDamage + 1 > weaponItemStack.maxDamage) return fail(MagicMessage.INSUFFICIENT_DURABILITY, false) // 耐久値が足りないと失敗
-                if (extraItemDropRate() <= world.rand.nextDouble()) return // ステータスに基づいた確率で成功
-                val dropFairyCard = FairySelector().entity(target).allMatch() // エンティティに紐づけられた妖精のリスト
+                val times = world.rand.randomInt(extraItemDropRate()) // ステータスに基づいた回数
+                val table = FairySelector().entity(target).allMatch() // エンティティに紐づけられた妖精のリスト
                     .withoutPartiallyMatch // 抽象的な妖精を除外
                     .map { WeightedItem(it.fairyCard, it.weight) } // relevanceを重みとする
-                    .getRandomItem(world.rand) ?: return fail(MagicMessage.INVALID_TARGET, false) // 抽選
 
-                // 成立
+                repeat(times) {
+                    if (weaponItemStack.itemDamage + 1 > weaponItemStack.maxDamage) return fail(MagicMessage.INSUFFICIENT_DURABILITY, false) // 耐久値が足りないと失敗
+                    val dropFairyCard = table.getRandomItem(world.rand) ?: return fail(MagicMessage.INVALID_TARGET, false) // 抽選
 
-                weaponItemStack.damageItem(1, player) // 耐久消費
+                    // 成立
 
-                dropFairyCard.createItemStack().drop(world, target.positionVector).setPickupDelay(20) // ドロップする
+                    weaponItemStack.damageItem(1, player) // 耐久消費
+                    dropFairyCard.createItemStack().drop(world, target.positionVector).setPickupDelay(20) // ドロップする
+                    playSound(world, player, SoundEvents.BLOCK_ANVIL_PLACE, 0.5f, 1.5f) // エフェクト
 
-                playSound(world, player, SoundEvents.BLOCK_ANVIL_PLACE, 0.5f, 1.5f) // エフェクト
-
+                }
             }
         }
     }
