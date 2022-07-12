@@ -480,6 +480,7 @@ mirageFairy2019.magic.status.maxTargetCount.name=最大ターゲット数
 mirageFairy2019.magic.status.pitch.name=音程
 mirageFairy2019.magic.status.power.name=パワー
 mirageFairy2019.magic.status.production.name=生産力
+mirageFairy2019.magic.status.productionBoost.name=生産力ブースト
 mirageFairy2019.magic.status.radius.name=半径
 mirageFairy2019.magic.status.range.name=範囲
 mirageFairy2019.magic.status.speed.name=速度

@@ -479,6 +479,7 @@ mirageFairy2019.magic.status.maxTargetCount.name=Max Target Count
 mirageFairy2019.magic.status.pitch.name=Pitch
 mirageFairy2019.magic.status.power.name=Power
 mirageFairy2019.magic.status.production.name=Production
+mirageFairy2019.magic.status.productionBoost.name=Production Boost
 mirageFairy2019.magic.status.radius.name=Radius
 mirageFairy2019.magic.status.range.name=Range
 mirageFairy2019.magic.status.speed.name=Speed

@@ -117,6 +117,7 @@ val modules = module {
         enJa("mirageFairy2019.magic.status.speedBoost.name", "Speed Boost", "速度ブースト")
         enJa("mirageFairy2019.magic.status.damageBoost.name", "Damage Boost", "ダメージブースト")
         enJa("mirageFairy2019.magic.status.durationBoost.name", "Duration Boost", "持続時間ブースト")
+        enJa("mirageFairy2019.magic.status.productionBoost.name", "Production Boost", "生産力ブースト")
 
         enJa("itemGroup.mirageFairy2019", "MirageFairy2019", "MirageFairy2019")
 
