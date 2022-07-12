@@ -14,16 +14,15 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.artifacts.MirageFlower
-import miragefairy2019.mod.fairyweapon.magic4.EnumVisibility
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.boolean
 import miragefairy2019.mod.fairyweapon.magic4.duration
-import miragefairy2019.mod.fairyweapon.magic4.float0
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.percent1
 import miragefairy2019.mod.fairyweapon.magic4.percent2
+import miragefairy2019.mod.fairyweapon.magic4.pitch
 import miragefairy2019.mod.fairyweapon.magic4.positive
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
@@ -49,19 +48,13 @@ import kotlin.math.floor
 import kotlin.math.pow
 
 class ItemFlowerPickingBell(additionalBaseStatus: Double, extraItemDropRateFactor: Double, maxExtraItemDropRate: Double) : ItemFairyWeaponBase2() {
-    val strength = status("strength", { (additionalBaseStatus + !Erg.SOUND + !Mastery.flowerPicking * 0.5) * (cost / 50.0) + !Mana.DARK }, { float0 })
-    val extent = status("extent", { (additionalBaseStatus + !Erg.SPACE) * (cost / 50.0) + !Mana.GAIA + !Mana.WIND }, { float0 })
-    val endurance = status("endurance", { (additionalBaseStatus + !Erg.SLASH) * (cost / 50.0) + !Mana.FIRE + !Mana.AQUA }, { float0 })
-    val production = status("production", { (additionalBaseStatus + !Erg.HARVEST) * (cost / 50.0) + !Mana.SHINE * 2 }, { float0 })
-    val cost = status("cost", { cost / (1.0 + !Mastery.flowerPicking * 0.002) }, { float0 })
-
-    val pitch = status("pitch", { -(cost / 50.0 - 1) * 12 }, { float2 }) { setRange(-12.0..12.0).setVisibility(EnumVisibility.DETAIL) }
-    val maxTargetCount = status("maxTargetCount", { 2 + floor(+!strength * 0.1).toInt() }, { integer }) { setRange(1..100).setVisibility(EnumVisibility.DETAIL) }
-    val fortune = status("fortune", { 3 + !production * 0.1 }, { float2 }) { setRange(0.0..100.0).setVisibility(EnumVisibility.DETAIL) }
-    val additionalReach = status("additionalReach", { !extent * 0.1 }, { float2 }) { setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL) }
-    val radius = status("radius", { 4 + !extent * 0.05 }, { float2 }) { setRange(0.0..10.0).setVisibility(EnumVisibility.DETAIL) }
-    val wear = status("wear", { 1.0 / (1 + !endurance * 0.03) }, { percent2 }) { setVisibility(EnumVisibility.DETAIL) }
-    val coolTime = status("coolTime", { cost * 0.5 }, { duration }) { setVisibility(EnumVisibility.DETAIL) }
+    val pitch = status("pitch", { 0.5.pow(costFactor - 1.0) }, { pitch })
+    val maxTargetCount = status("maxTargetCount", { 2 + floor(((additionalBaseStatus + !Erg.SOUND + !Mastery.flowerPicking * 0.5) * (cost / 50.0) + !Mana.DARK) * 0.1).toInt() }, { integer }) { setRange(1..100) }
+    val fortune = status("fortune", { 3 + ((additionalBaseStatus + !Erg.HARVEST) * (cost / 50.0) + !Mana.SHINE * 2) * 0.1 }, { float2 }) { setRange(0.0..100.0) }
+    val additionalReach = status("additionalReach", { ((additionalBaseStatus + !Erg.SPACE) * (cost / 50.0) + !Mana.GAIA + !Mana.WIND) * 0.1 }, { float2 }) { setRange(0.0..10.0) }
+    val radius = status("radius", { 4 + ((additionalBaseStatus + !Erg.SPACE) * (cost / 50.0) + !Mana.GAIA + !Mana.WIND) * 0.05 }, { float2 }) { setRange(0.0..10.0) }
+    val wear = status("wear", { 1.0 / (1 + ((additionalBaseStatus + !Erg.SLASH) * (cost / 50.0) + !Mana.FIRE + !Mana.AQUA) * 0.03) }, { percent2 })
+    val coolTime = status("coolTime", { cost * 0.5 }, { duration })
     val collection = status("collection", { !WARP >= 10 }, { boolean.positive })
     val extraItemDropRate = status("extraItemDropRate", { 0.1 + extraItemDropRateFactor * !Mastery.flowerPicking atMost maxExtraItemDropRate }, { percent1 })
 
@@ -205,7 +198,7 @@ class ItemFlowerPickingBell(additionalBaseStatus: Double, extraItemDropRateFacto
                 if (targetCount >= 1) {
 
                     // エフェクト
-                    playSound(world, player, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 2.0.pow(pitch() / 12.0).toFloat())
+                    playSound(world, player, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, pitch().toFloat())
                     world.playSound(null, player.posX, player.posY, player.posZ, breakSound!!, SoundCategory.PLAYERS, 1.0f, 1.0f)
 
                     // クールタイム
