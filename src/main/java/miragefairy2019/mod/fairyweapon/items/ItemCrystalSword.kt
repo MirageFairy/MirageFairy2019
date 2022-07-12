@@ -86,13 +86,13 @@ class ItemCrystalSword(
                 if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return fail(MagicMessage.INSUFFICIENT_DURABILITY) // 耐久不足
                 if (player.cooldownTracker.hasCooldown(weaponItem)) return fail(MagicMessage.COOL_TIME) // クールタイムが終わっていない
 
-                // 効果
-                target.hurtResistantTime = 0 // 物理部分と競合するのを防ぐために無敵時間をリセットする
-                target.attackEntityFrom(DamageSource.causePlayerDamage(player), (additionalDamage() * damageBoost()).toFloat()) // 追加ダメージ
-
                 // 消費
                 player.cooldownTracker.setCooldown(weaponItem, coolTime().toInt()) // クールタイム
                 weaponItemStack.damageItem(world.rand.randomInt(wear()), player) // 耐久
+
+                // 効果
+                target.hurtResistantTime = 0 // 物理部分と競合するのを防ぐために無敵時間をリセットする
+                target.attackEntityFrom(DamageSource.causePlayerDamage(player), (additionalDamage() * damageBoost()).toFloat()) // 追加ダメージ
 
             }
 
