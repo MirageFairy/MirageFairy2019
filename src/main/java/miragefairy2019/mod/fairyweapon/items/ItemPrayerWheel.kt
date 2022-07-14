@@ -85,23 +85,17 @@ class ItemPrayerWheel(baseFortune: Double, private val maxTryCountPerTick: Int) 
                     val rareBoost = variantFairyCrystal.getRateBoost(DropCategory.RARE, player.proxy.skillContainer)
                     val dropTable = environment.getDropTable(variantFairyCrystal.dropRank, commonBoost, rareBoost)
 
-                    repeat(world.rand.randomInt(1.0 + fortune())) {
-
-                        // ガチャを引く
-                        val itemStackDrop = dropTable.getRandomItem(world.rand)?.notEmptyOrNull ?: FairyCard.AIR.createItemStack(variantFairyCrystal.dropRank) // ガチャが引けなかった場合はアイリャ
-
-                        // 成立
-
-                        // 妖精をドロップ
-                        val blockPos =
-                            itemStackDrop.drop(world, Vec3d(rayTraceResult.blockPos.offset(rayTraceResult.sideHit)).addVector(0.5, 0.5, 0.5), noPickupDelay = true)
-
-                    }
-
                     // 消費
                     weaponItemStack.damageItem(world.rand.randomInt(wear()), player) // 耐久
                     if (!player.isCreative) itemStackFairyCrystal.shrink(1) // クリスタル
                     player.addStat(StatList.getObjectUseStats(itemStackFairyCrystal.item)!!)
+
+                    // ドロップ
+                    repeat(world.rand.randomInt(1.0 + fortune())) {
+                        val itemStackDrop = dropTable.getRandomItem(world.rand)?.notEmptyOrNull ?: FairyCard.AIR.createItemStack(variantFairyCrystal.dropRank) // ガチャを引く
+                        val blockPos = rayTraceResult.blockPos.offset(rayTraceResult.sideHit) // 出現座標
+                        itemStackDrop.drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5), noPickupDelay = true) // 妖精をドロップ
+                    }
 
                 }
 
