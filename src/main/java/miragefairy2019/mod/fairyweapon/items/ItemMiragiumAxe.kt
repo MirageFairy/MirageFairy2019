@@ -129,13 +129,13 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
 
                         // 破壊
                         breakBlock(
-                            world,
-                            player,
-                            rayTraceMagicSelector.item.rayTraceResult!!.sideHit,
-                            weaponItemStack,
-                            targetBlockPos,
-                            world.rand.randomInt(fortune()),
-                            collection()
+                            world = world,
+                            player = player,
+                            itemStack = weaponItemStack,
+                            blockPos = targetBlockPos,
+                            facing = rayTraceMagicSelector.item.rayTraceResult!!.sideHit,
+                            fortune = world.rand.randomInt(fortune()),
+                            collection = collection()
                         )
                         if (collection()) collected = true
 
