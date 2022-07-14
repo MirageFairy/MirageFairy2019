@@ -7,10 +7,13 @@ import miragefairy2019.libkt.positions
 import miragefairy2019.libkt.region
 import miragefairy2019.libkt.sortedByDistance
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
+import miragefairy2019.mod.fairyweapon.magic4.boolean
+import miragefairy2019.mod.fairyweapon.magic4.boost
 import miragefairy2019.mod.fairyweapon.magic4.duration
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.percent2
+import miragefairy2019.mod.fairyweapon.magic4.positive
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.skill.Mastery
@@ -20,17 +23,20 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
+import kotlin.math.floor
 
-class ItemMiragiumScythe(private val additionalBaseStatus: Double, override var destroySpeed: Float) : ItemMiragiumToolBase() {
-    override val maxHardness = status("maxHardness", { ((additionalBaseStatus + !Erg.SLASH + !Mastery.harvest / 2.0) * costFactor + !Mana.GAIA) / 100.0 atMost 10.0 }, { float2 })
-    val range = status("range", { (2 + ((additionalBaseStatus + !Erg.SHOOT) * costFactor + !Mana.WIND * 2) / 50.0).toInt() atMost 5 }, { integer })
-    val coolTime = status("coolTime", { 15.0 * costFactor }, { duration })
-    override val fortune = status("fortune", { ((additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE + !Mana.DARK) / 33.3 }, { float2 })
-    override val wear = status("wear", { 1 / (25.0 + ((additionalBaseStatus + !Erg.SENSE) * costFactor + !Mana.FIRE + !Mana.AQUA) / 4.0) }, { percent2 })
+class ItemMiragiumScythe(private val baseFortune: Double, override var destroySpeed: Float) : ItemMiragiumToolBase() {
+    override val maxHardness = status("maxHardness", { 0.0 + !Mana.GAIA / 50.0 + !Erg.SLASH / 25.0 + !Mastery.harvest / 100.0 / 2.0 atMost 10.0 }, { float2 })
+    val range = status("range", { floor(2.0 + !Mana.WIND / 20.0 + !Erg.HARVEST / 20.0).toInt() atMost 5 }, { integer })
+    val coolTime = status("coolTime", { 20.0 * 0.1 / costFactor }, { duration })
+    val speedBoost = status("speedBoost", { 1.0 + !Mastery.harvest / 100.0 }, { boost })
+    override val fortune = status("fortune", { baseFortune + !Mana.AQUA / 30.0 + !Erg.LIFE / 15.0 }, { float2 })
+    override val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SENSE / 10.0) * costFactor }, { percent2 })
+    override val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
 
     override fun iterateTargets(magicArguments: MagicArguments, blockPosBase: BlockPos) = iterator {
         magicArguments.run {
-            blockPosBase.region.grow(range(), 0, range()).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
+            blockPosBase.region.grow(range(), 1, range()).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
                 if (canBreak(magicArguments, blockPos)) yield(blockPos)
             }
         }
@@ -48,7 +54,7 @@ class ItemMiragiumScythe(private val additionalBaseStatus: Double, override var 
         else -> false
     }
 
-    override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = magicArguments.run { coolTime() }
+    override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = magicArguments.run { coolTime() / speedBoost() }
 
     override fun canBreak(magicArguments: MagicArguments, blockPos: BlockPos) = super.canBreak(magicArguments, blockPos)
         && !magicArguments.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない

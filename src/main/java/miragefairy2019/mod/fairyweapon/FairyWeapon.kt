@@ -558,7 +558,7 @@ enum class FairyWeaponKind(
     ),
 
     miragiumScythe(
-        null, "miragium_scythe", "miragiumScythe", 2, { ItemMiragiumScythe(0.0, 2.0f) },
+        null, "miragium_scythe", "miragiumScythe", 2, { ItemMiragiumScythe(2.0, 2.0f) },
         LangPair("Miragium Scythe", "ミラジウムの大鎌"),
         LangPair("", "自分を切らないように！"),
         null,
@@ -586,7 +586,7 @@ enum class FairyWeaponKind(
         }
     ),
     lilagiumScythe(
-        miragiumScythe, "lilagium_scythe", "lilagiumScythe", 3, { ItemMiragiumScythe(10.0, 4.0f) },
+        miragiumScythe, "lilagium_scythe", "lilagiumScythe", 3, { ItemMiragiumScythe(3.0, 4.0f) },
         LangPair("Lilagium Scythe", "リラジウムの大鎌"),
         LangPair("", "葉っぱが吸い込まれてくる"),
         null,
