@@ -20,6 +20,7 @@ import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.map
+import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.systems.DropCategory
@@ -40,10 +41,12 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.math.RayTraceResult
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+import kotlin.math.ceil
 
 class ItemPrayerWheel(baseFortune: Double, private val maxTryCountPerTick: Int) : ItemFairyWeaponMagic4() {
     val chargeSpeed = status("maxSpeed", { maxTryCountPerTick }, { integer.map { textComponent { "${value * 20} Hz"() } } })
     val fortune = status("fortune", { baseFortune + !Mana.SHINE / 100.0 + !Erg.CRYSTAL / 50.0 + !Erg.SUBMISSION / 25.0 }, { float2 })
+    val wear = status("wear", { 0.01 / (1.0 + !Mana.FIRE / 40.0 + !Erg.SOUND / 20.0) }, { percent2 })
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリック長押しでフェアリークリスタルを高速消費") // TODO translate Hold right mouse button to use fairy crystals quickly
@@ -84,6 +87,8 @@ class ItemPrayerWheel(baseFortune: Double, private val maxTryCountPerTick: Int) 
 
         repeat(maxTimes) {
 
+            if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return // 耐久がないなら中断
+
             // フェアリークリスタルを得る
             val itemStackFairyCrystal = findItem(player) { itemStack -> itemStack.item is ItemFairyCrystal } ?: return // クリスタルを持ってない場合は無視
             val variantFairyCrystal = (itemStackFairyCrystal.item as ItemFairyCrystal).getVariant(itemStackFairyCrystal) ?: return // 異常なクリスタルを持っている場合は無視
@@ -109,8 +114,9 @@ class ItemPrayerWheel(baseFortune: Double, private val maxTryCountPerTick: Int) 
 
             }
 
-            // ガチャアイテムを消費
-            if (!player.isCreative) itemStackFairyCrystal.shrink(1)
+            // 消費
+            weaponItemStack.damageItem(world.rand.randomInt(wear()), player) // 耐久
+            if (!player.isCreative) itemStackFairyCrystal.shrink(1) // クリスタル
             player.addStat(StatList.getObjectUseStats(itemStackFairyCrystal.item)!!)
 
         }
