@@ -669,7 +669,7 @@ enum class FairyWeaponKind(
         }
     ),
     prayerWheel2(
-        prayerWheel, "prayer_wheel_2", "prayerWheel2", 3, { ItemPrayerWheel(0.1, 5) },
+        prayerWheel, "prayer_wheel_2", "prayerWheel2", 3, { ItemPrayerWheel(0.2, 5) },
         LangPair("Prayer Wheel II", "約束の地"),
         LangPair("", "吹き荒れる妖精の声、宇宙のジェット"),
         null,
@@ -696,7 +696,7 @@ enum class FairyWeaponKind(
         }
     ),
     prayerWheel3(
-        prayerWheel2, "prayer_wheel_3", "prayerWheel3", 5, { ItemPrayerWheel(0.2, 10) },
+        prayerWheel2, "prayer_wheel_3", "prayerWheel3", 5, { ItemPrayerWheel(0.4, 10) },
         LangPair("Prayer Wheel III", "束縛の地"),
         LangPair("", "覚えてる？前世、自分が何の妖精だったか"),
         null,

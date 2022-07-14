@@ -45,7 +45,7 @@ import kotlin.math.ceil
 
 class ItemPrayerWheel(baseFortune: Double, private val maxTryCountPerTick: Int) : ItemFairyWeaponMagic4() {
     val maxTryCount = status("maxSpeed", { maxTryCountPerTick }, { integer.map { textComponent { "${value * 20} Hz"() } } })
-    val fortune = status("fortune", { baseFortune + !Mana.SHINE / 100.0 + !Erg.CRYSTAL / 50.0 + !Erg.SUBMISSION / 25.0 }, { float2 })
+    val fortune = status("fortune", { baseFortune + !Mana.SHINE / 100.0 + !Erg.CRYSTAL / 100.0 + !Erg.SUBMISSION / 50.0 }, { float2 })
     val wear = status("wear", { 0.01 / (1.0 + !Mana.FIRE / 40.0 + !Erg.SOUND / 20.0) }, { percent2 })
 
     @SideOnly(Side.CLIENT)
