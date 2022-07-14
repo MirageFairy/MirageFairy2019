@@ -223,8 +223,8 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
         environment.insertEntities(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5), 10.0) // エンティティ
 
         // ガチャリスト取得
-        val commonBoost = variant.getRateBoost(DropCategory.COMMON, null)
-        val rareBoost = variant.getRateBoost(DropCategory.RARE, null)
+        val commonBoost = variant.getRateBoost(DropCategory.COMMON)
+        val rareBoost = variant.getRateBoost(DropCategory.RARE)
         val dropTable = environment.getDropTable(variant.dropRank, commonBoost, rareBoost)
 
         // ガチャを引く
@@ -259,10 +259,10 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
 
 class VariantFairyCrystal(val unlocalizedName: String, val dropRank: Int, val dropCategory: DropCategory, val rateBoost: Double) : ItemVariant()
 
-fun VariantFairyCrystal.getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer?) = when (dropCategory) {
+fun VariantFairyCrystal.getRateBoost(dropCategory: DropCategory, skillContainer: ISkillContainer? = null, additionalBoost: Double = 1.0) = when (dropCategory) {
     this.dropCategory -> {
-        val skillFactor = if (skillContainer != null) 1.0 + skillContainer.getSkillLevel(Mastery.fairySummoning) * 0.01 else 1.0
-        rateBoost * skillFactor
+        val skillBonus = skillContainer?.getSkillLevel(Mastery.fairySummoning)?.let { it * 0.01 } ?: 0.0
+        rateBoost * (1.0 + skillBonus) * additionalBoost
     }
     else -> 1.0
 }
