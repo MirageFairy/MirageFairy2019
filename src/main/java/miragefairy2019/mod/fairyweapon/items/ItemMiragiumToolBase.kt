@@ -1,23 +1,25 @@
 package miragefairy2019.mod.fairyweapon.items
 
-import miragefairy2019.lib.EMPTY_FAIRY
 import miragefairy2019.lib.MagicSelector
+import miragefairy2019.lib.doEffect
+import miragefairy2019.lib.position
 import miragefairy2019.lib.rayTrace
 import miragefairy2019.libkt.randomInt
+import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.breakBlock
-import miragefairy2019.mod.fairyweapon.findFairy
+import miragefairy2019.mod.fairyweapon.displayText
 import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.world
-import miragefairy2019.mod.fairyweapon.spawnParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
+import mirrg.kotlin.hydrogen.atLeast
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
-import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
+import net.minecraft.util.SoundCategory
 import net.minecraft.util.SoundEvent
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
@@ -25,27 +27,45 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
-fun MagicArguments.fail(cursor: Vec3d, color: Int) = object : MagicHandler() {
-    override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) = spawnParticle(world, cursor, color)
-}
-
 abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
+    abstract val maxHardness: FormulaArguments.() -> Double
     abstract val fortune: FormulaArguments.() -> Double
     abstract val wear: FormulaArguments.() -> Double
+    open val collection: FormulaArguments.() -> Boolean = { false }
+    open val silkTouch: FormulaArguments.() -> Boolean = { false }
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TODO translate
 
     override fun getMagic() = magic {
-        val fairySpec = findFairy(weaponItemStack, player)?.second ?: EMPTY_FAIRY // 妖精取得
         val rayTraceMagicSelector = MagicSelector.rayTrace(world, player, 0.0) // 視線判定
-        if (fairySpec.isEmpty) return@magic fail(rayTraceMagicSelector.item.position, 0xFF00FF) // 妖精なし判定
-        if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic fail(rayTraceMagicSelector.item.position, 0xFF0000) // 材料なし判定
-        val targets = rayTraceMagicSelector.item.blockPos.let { if (rayTraceMagicSelector.item.sideHit != null) it.offset(rayTraceMagicSelector.item.sideHit!!) else it }.let { iterateTargets(this@magic, it) } // 対象判定
-        if (!targets.hasNext()) return@magic fail(rayTraceMagicSelector.item.position, 0x00FFFF) // ターゲットなし判定
-        if (player.cooldownTracker.hasCooldown(this@ItemMiragiumToolBase)) return@magic fail(rayTraceMagicSelector.item.position, 0xFFFF00) // クールダウン判定
+        val cursorMagicSelector = rayTraceMagicSelector.position // 視点判定
 
-        object : MagicHandler() { // 行使可能
+        fun fail(color: Int, magicMessage: MagicMessage) = object : MagicHandler() {
+            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
+                cursorMagicSelector.item.doEffect(color)
+            }
+
+            override fun onItemRightClick(hand: EnumHand): EnumActionResult {
+                if (!world.isRemote) player.sendStatusMessage(magicMessage.displayText, true)
+                return EnumActionResult.FAIL
+            }
+        }
+
+        if (!hasPartnerFairy) return@magic fail(0xFF00FF, MagicMessage.NO_FAIRY) // パートナー妖精判定
+        if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic fail(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
+        val blockPos = if (rayTraceMagicSelector.item.sideHit != null) rayTraceMagicSelector.item.blockPos.offset(rayTraceMagicSelector.item.sideHit!!) else rayTraceMagicSelector.item.blockPos
+        val targets = iterateTargets(this, blockPos) // 対象判定
+        if (!targets.hasNext()) return@magic fail(0x00FFFF, MagicMessage.NO_TARGET) // ターゲットなし判定
+        if (player.cooldownTracker.hasCooldown(weaponItem)) return@magic fail(0xFFFF00, MagicMessage.COOL_TIME) // クールタイム判定
+
+        // 魔法成立
+        object : MagicHandler() {
+            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
+                cursorMagicSelector.item.doEffect(0xFFFFFF)
+                spawnParticleTargets(world, targets.asSequence().toList().map { Vec3d(it).addVector(0.5, 0.5, 0.5) })
+            }
+
             override fun onItemRightClick(hand: EnumHand): EnumActionResult {
                 if (world.isRemote) { // クライアントワールドの場合、腕を振るだけ
                     player.swingArm(hand) // エフェクト
@@ -53,8 +73,10 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
                 }
 
                 // 行使
+                val actualCoolTimePerBlock = getActualCoolTimePerBlock(this@magic)
                 var breakSound: SoundEvent? = null
                 var count = 0
+                var actualCoolTime = 0.0
                 run breakExecution@{
                     targets.forEach { target ->
                         val damage = world.rand.randomInt(wear()) // 耐久コスト
@@ -62,29 +84,34 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
 
                         // 破壊成立
                         weaponItemStack.damageItem(damage, player)
-                        breakBlock(world, player, EnumFacing.UP, weaponItemStack, target, world.rand.randomInt(fortune()), false)
                         val blockState = world.getBlockState(target)
+                        actualCoolTime += actualCoolTimePerBlock * (blockState.getBlockHardness(world, target).toDouble() atLeast 1.0)
                         breakSound = blockState.block.getSoundType(blockState, world, target, player).breakSound
+                        breakBlock(
+                            world = world,
+                            player = player,
+                            itemStack = weaponItemStack,
+                            blockPos = target,
+                            fortune = world.rand.randomInt(fortune()),
+                            silkTouch = silkTouch(),
+                            collection = collection()
+                        )
                         count++
                     }
                 }
 
                 // 破壊時
                 if (count > 0) {
+                    if (collection()) world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f)
                     breakSound?.let { world.playSound(null, player.posX, player.posY, player.posZ, it, player.soundCategory, 1.0f, 1.0f) } // エフェクト
-                    player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, ceil(getCoolTime(this@magic)).toInt()) // クールタイム
+                    player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, ceil(actualCoolTime).toInt()) // クールタイム
                 }
 
                 // エフェクト
-                world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, player.soundCategory, 1.0f, 1.0f)
-                player.spawnSweepParticles()
+                world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, player.soundCategory, 1.0f, 1.0f) // 魔法のSE
+                player.spawnSweepParticles() // スイングのパーティクル
 
                 return EnumActionResult.SUCCESS
-            }
-
-            override fun onClientUpdate(itemSlot: Int, isSelected: Boolean) {
-                spawnParticle(world, rayTraceMagicSelector.item.position, 0xFFFFFF)
-                spawnParticleTargets(world, targets.asSequence().toList().map { Vec3d(it).addVector(0.5, 0.5, 0.5) })
             }
         }
     }
@@ -94,10 +121,11 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
      * 内部で必ず[canBreak]による破壊可能判定を行わなければなりません。
      */
     abstract fun iterateTargets(magicArguments: MagicArguments, blockPosBase: BlockPos): Iterator<BlockPos>
-    abstract fun getCoolTime(magicArguments: MagicArguments): Double
+    abstract fun getActualCoolTimePerBlock(magicArguments: MagicArguments): Double
 
     @Suppress("SimplifyBooleanWithConstants")
     open fun canBreak(magicArguments: MagicArguments, blockPos: BlockPos) = true
         && magicArguments.world.getBlockState(blockPos).getBlockHardness(magicArguments.world, blockPos) >= 0 // 岩盤であってはならない
         && isEffective(magicArguments.weaponItemStack, magicArguments.world.getBlockState(blockPos)) // 効果的でなければならない
+        && magicArguments.world.getBlockState(blockPos).getBlockHardness(magicArguments.world, blockPos) <= magicArguments.maxHardness() // 硬すぎてはいけない
 }

@@ -22,7 +22,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
 class ItemMiragiumScythe(private val additionalBaseStatus: Double, override var destroySpeed: Float) : ItemMiragiumToolBase() {
-    val maxHardness = status("maxHardness", { ((additionalBaseStatus + !Erg.SLASH + !Mastery.harvest / 2.0) * costFactor + !Mana.GAIA) / 100.0 atMost 10.0 }, { float2 })
+    override val maxHardness = status("maxHardness", { ((additionalBaseStatus + !Erg.SLASH + !Mastery.harvest / 2.0) * costFactor + !Mana.GAIA) / 100.0 atMost 10.0 }, { float2 })
     val range = status("range", { (2 + ((additionalBaseStatus + !Erg.SHOOT) * costFactor + !Mana.WIND * 2) / 50.0).toInt() atMost 5 }, { integer })
     val coolTime = status("coolTime", { 15.0 * costFactor }, { duration })
     override val fortune = status("fortune", { ((additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE + !Mana.DARK) / 33.3 }, { float2 })
@@ -48,9 +48,8 @@ class ItemMiragiumScythe(private val additionalBaseStatus: Double, override var 
         else -> false
     }
 
-    override fun canBreak(magicArguments: MagicArguments, blockPos: BlockPos) = super.canBreak(magicArguments, blockPos)
-        && magicArguments.run { world.getBlockState(blockPos).getBlockHardness(world, blockPos) <= maxHardness() } // 硬すぎてはいけない
-        && !magicArguments.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない
+    override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = magicArguments.run { coolTime() }
 
-    override fun getCoolTime(magicArguments: MagicArguments) = magicArguments.run { coolTime() }
+    override fun canBreak(magicArguments: MagicArguments, blockPos: BlockPos) = super.canBreak(magicArguments, blockPos)
+        && !magicArguments.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない
 }
