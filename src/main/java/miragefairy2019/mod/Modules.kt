@@ -114,6 +114,7 @@ val modules = module {
         enJa("mirageFairy2019.magic.status.speed.name", "Speed", "速度")
         enJa("mirageFairy2019.magic.status.maxSpeed.name", "Max Speed", "最高速度")
         enJa("mirageFairy2019.magic.status.levelCost.name", "Level Cost", "レベルコスト")
+        enJa("mirageFairy2019.magic.status.silkTouch.name", "Silk Touch", "シルクタッチ")
         enJa("mirageFairy2019.magic.status.speedBoost.name", "Speed Boost", "速度ブースト")
         enJa("mirageFairy2019.magic.status.damageBoost.name", "Damage Boost", "ダメージブースト")
         enJa("mirageFairy2019.magic.status.durationBoost.name", "Duration Boost", "持続時間ブースト")
