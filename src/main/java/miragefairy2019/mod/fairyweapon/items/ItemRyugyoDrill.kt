@@ -20,13 +20,14 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
+import kotlin.math.floor
 
-class ItemRyugyoDrill(private val additionalBaseStatus: Double) : ItemMiragiumToolBase() {
-    val maxHardness = status("maxHardness", { 2.0 + ((additionalBaseStatus + !Erg.SLASH + !Mastery.mining * 0.5) * costFactor + !Mana.GAIA) * 0.02 atMost 20.0 }, { float2 })
-    val range = status("range", { (1 + ((additionalBaseStatus + !Erg.SHOOT) * costFactor + !Mana.WIND * 2) * 0.01).toInt() atMost 5 }, { integer })
-    val coolTime = status("coolTime", { 100.0 * costFactor }, { duration })
-    override val fortune = status("fortune", { ((additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE + !Mana.DARK) * 0.03 }, { float2 })
-    override val wear = status("wear", { 1 / (25.0 + ((additionalBaseStatus + !Erg.SENSE) * costFactor + !Mana.FIRE + !Mana.AQUA) * 0.25) }, { percent2 })
+class ItemRyugyoDrill() : ItemMiragiumToolBase() {
+    val maxHardness = status("maxHardness", { 2.0 + !Mana.GAIA / 50.0 + !Erg.DESTROY / 25.0 + !Mastery.mining / 25.0 atMost 20.0 }, { float2 })
+    val range = status("range", { floor(1.0 + !Mana.WIND / 50.0 + !Erg.THUNDER / 25.0).toInt() atMost 5 }, { integer })
+    val coolTime = status("coolTime", { 100.0 / costFactor }, { duration })
+    override val fortune = status("fortune", { !Mana.SHINE / 15.0 + !Mana.DARK / 30.0 + !Erg.HARVEST / 15.0 }, { float2 })
+    override val wear = status("wear", { 25.0 / (1.0 + !Mana.FIRE / 50.0 + !Erg.LEVITATE / 25.0) * costFactor }, { percent2 })
 
     init {
         setHarvestLevel("pickaxe", 3)

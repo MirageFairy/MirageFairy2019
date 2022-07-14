@@ -22,11 +22,11 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
 class ItemMiragiumScythe(private val additionalBaseStatus: Double, override var destroySpeed: Float) : ItemMiragiumToolBase() {
-    val maxHardness = status("maxHardness", { ((additionalBaseStatus + !Erg.SLASH + !Mastery.harvest * 0.5) * costFactor + !Mana.GAIA) * 0.01 atMost 10.0 }, { float2 })
-    val range = status("range", { (2 + ((additionalBaseStatus + !Erg.SHOOT) * costFactor + !Mana.WIND * 2) * 0.02).toInt() atMost 5 }, { integer })
+    val maxHardness = status("maxHardness", { ((additionalBaseStatus + !Erg.SLASH + !Mastery.harvest / 2.0) * costFactor + !Mana.GAIA) / 100.0 atMost 10.0 }, { float2 })
+    val range = status("range", { (2 + ((additionalBaseStatus + !Erg.SHOOT) * costFactor + !Mana.WIND * 2) / 50.0).toInt() atMost 5 }, { integer })
     val coolTime = status("coolTime", { 15.0 * costFactor }, { duration })
-    override val fortune = status("fortune", { ((additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE + !Mana.DARK) * 0.03 }, { float2 })
-    override val wear = status("wear", { 1 / (25.0 + ((additionalBaseStatus + !Erg.SENSE) * costFactor + !Mana.FIRE + !Mana.AQUA) * 0.25) }, { percent2 })
+    override val fortune = status("fortune", { ((additionalBaseStatus + !Erg.HARVEST) * costFactor + !Mana.SHINE + !Mana.DARK) / 33.3 }, { float2 })
+    override val wear = status("wear", { 1 / (25.0 + ((additionalBaseStatus + !Erg.SENSE) * costFactor + !Mana.FIRE + !Mana.AQUA) / 4.0) }, { percent2 })
 
     override fun iterateTargets(magicArguments: MagicArguments, blockPosBase: BlockPos) = iterator {
         magicArguments.run {

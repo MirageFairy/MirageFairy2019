@@ -614,7 +614,7 @@ enum class FairyWeaponKind(
     ),
 
     ryugyoDrill(
-        null, "ryugyo_drill", "ryugyoDrill", 4, { ItemRyugyoDrill(0.0) },
+        null, "ryugyo_drill", "ryugyoDrill", 4, { ItemRyugyoDrill() },
         LangPair("Ryugyo Drill", "龍魚ドリル"),
         LangPair("Design Contest Work", "デザインコンテスト武器"),
         LangPair("Yoshinon", "よしのん"),
