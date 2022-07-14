@@ -1,19 +1,27 @@
 package miragefairy2019.mod.fairyweapon.items
 
+import miragefairy2019.api.Erg
+import miragefairy2019.api.Mana
 import miragefairy2019.lib.proxy
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.BlockRegion
 import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.notEmptyOrNull
+import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.artifacts.ItemFairyCrystal
 import miragefairy2019.mod.artifacts.getRateBoost
+import miragefairy2019.mod.fairy.FairyCard
+import miragefairy2019.mod.fairy.createItemStack
 import miragefairy2019.mod.fairyweapon.findItem
+import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
+import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.map
 import miragefairy2019.mod.fairyweapon.magic4.status
+import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.systems.DropCategory
 import miragefairy2019.mod.systems.FairyCrystalDropEnvironment
 import miragefairy2019.mod.systems.getDropTable
@@ -33,8 +41,9 @@ import net.minecraft.util.math.RayTraceResult
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-class ItemPrayerWheel(private val maxTryCountPerTick: Int) : ItemFairyWeaponMagic4() {
+class ItemPrayerWheel(baseFortune: Double, private val maxTryCountPerTick: Int) : ItemFairyWeaponMagic4() {
     val chargeSpeed = status("maxSpeed", { maxTryCountPerTick }, { integer.map { textComponent { "${value * 20} Hz"() } } })
+    val fortune = status("fortune", { baseFortune + !Mana.SHINE / 100.0 + !Erg.CRYSTAL / 50.0 + !Erg.SUBMISSION / 25.0 }, { float2 })
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリック長押しでフェアリークリスタルを高速消費") // TODO translate Hold right mouse button to use fairy crystals quickly
@@ -51,8 +60,8 @@ class ItemPrayerWheel(private val maxTryCountPerTick: Int) : ItemFairyWeaponMagi
             }
 
             override fun onUsingTick(count: Int) {
-                if (player.world.isRemote) return
-                useCrystal(player, getTryCount(count) atMost chargeSpeed())
+                if (world.isRemote) return
+                useCrystal(this@magic, getTryCount(count) atMost chargeSpeed())
             }
         }
     }
@@ -64,10 +73,10 @@ class ItemPrayerWheel(private val maxTryCountPerTick: Int) : ItemFairyWeaponMagi
         environment.insertEntities(player.world, player.positionVector, 10.0) // エンティティ
     }
 
-    private fun useCrystal(player: EntityPlayer, maxTimes: Int) {
+    private fun useCrystal(magicArguments: MagicArguments, maxTimes: Int) = magicArguments.run {
 
         // プレイヤー視点判定
-        val rayTraceResult = rayTrace(player.world, player, false) ?: return // ブロックに当たらなかった場合は無視
+        val rayTraceResult = rayTrace(world, player, false) ?: return // ブロックに当たらなかった場合は無視
         if (rayTraceResult.typeOfHit != RayTraceResult.Type.BLOCK) return // ブロックに当たらなかった場合は無視
 
         // ガチャ環境計算
@@ -75,7 +84,7 @@ class ItemPrayerWheel(private val maxTryCountPerTick: Int) : ItemFairyWeaponMagi
 
         repeat(maxTimes) {
 
-            // 妖晶を得る
+            // フェアリークリスタルを得る
             val itemStackFairyCrystal = findItem(player) { itemStack -> itemStack.item is ItemFairyCrystal } ?: return // クリスタルを持ってない場合は無視
             val variantFairyCrystal = (itemStackFairyCrystal.item as ItemFairyCrystal).getVariant(itemStackFairyCrystal) ?: return // 異常なクリスタルを持っている場合は無視
 
@@ -84,20 +93,25 @@ class ItemPrayerWheel(private val maxTryCountPerTick: Int) : ItemFairyWeaponMagi
             val rareBoost = variantFairyCrystal.getRateBoost(DropCategory.RARE, player.proxy.skillContainer)
             val dropTable = environment.getDropTable(variantFairyCrystal.dropRank, commonBoost, rareBoost)
 
-            // ガチャを引く
-            val itemStackDrop = dropTable.getRandomItem(player.world.rand)?.notEmptyOrNull ?: return // ガチャが引けなかった場合は無視
+            val times = world.rand.randomInt(1.0 + fortune())
+            repeat(times) {
 
-            // 成立
+                // ガチャを引く
+                val itemStackDrop = dropTable.getRandomItem(world.rand)?.notEmptyOrNull ?: FairyCard.AIR.createItemStack(variantFairyCrystal.dropRank) // ガチャが引けなかった場合はアイリャ
+
+                // 成立
+
+                // 妖精をドロップ
+                val blockPos = rayTraceResult.blockPos.offset(rayTraceResult.sideHit)
+                val entityItem = EntityItem(world, blockPos.x + 0.5, blockPos.y + 0.5, blockPos.z + 0.5, itemStackDrop.copy())
+                entityItem.setNoPickupDelay()
+                world.spawnEntity(entityItem)
+
+            }
 
             // ガチャアイテムを消費
             if (!player.isCreative) itemStackFairyCrystal.shrink(1)
-            player.addStat(StatList.getObjectUseStats(itemStackFairyCrystal.item))
-
-            // 妖精をドロップ
-            val blockPos = rayTraceResult.blockPos.offset(rayTraceResult.sideHit)
-            val entityItem = EntityItem(player.world, blockPos.x + 0.5, blockPos.y + 0.5, blockPos.z + 0.5, itemStackDrop.copy())
-            entityItem.setNoPickupDelay()
-            player.world.spawnEntity(entityItem)
+            player.addStat(StatList.getObjectUseStats(itemStackFairyCrystal.item)!!)
 
         }
 
