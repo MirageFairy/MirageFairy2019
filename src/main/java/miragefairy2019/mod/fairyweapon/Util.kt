@@ -13,12 +13,16 @@ import miragefairy2019.lib.toItemStack
 import miragefairy2019.lib.toNbt
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.copy
+import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.sq
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.init.Enchantments
+import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
@@ -116,14 +120,30 @@ fun getCombinedFairy(itemStack: ItemStack) = itemStack.nbtProvider["Fairy"]["Com
 fun setCombinedFairy(itemStack: ItemStack, itemStackFairy: ItemStack) = itemStack.nbtProvider["Fairy"]["CombinedFairy"].setCompound(itemStackFairy.copy(1).toNbt())
 
 
-fun breakBlock(world: World, player: EntityPlayer, facing: EnumFacing, itemStack: ItemStack, blockPos: BlockPos, fortune: Int, collection: Boolean): Boolean {
+fun breakBlock(
+    world: World,
+    player: EntityPlayer,
+    itemStack: ItemStack,
+    blockPos: BlockPos,
+    facing: EnumFacing = EnumFacing.UP,
+    fortune: Int = 0,
+    silkTouch: Boolean = false,
+    collection: Boolean = false
+): Boolean {
     if (!world.isBlockModifiable(player, blockPos)) return false
     if (!player.canPlayerEdit(blockPos, facing, itemStack)) return false
 
     val blockState = world.getBlockState(blockPos)
     val block = blockState.block
-    block.dropBlockAsItem(world, blockPos, blockState, fortune)
+
+    val dummyItemStack = Items.STICK.createItemStack()
+    if (fortune > 0) EnchantmentHelper.setEnchantments(mapOf(Enchantments.FORTUNE to fortune), dummyItemStack)
+    if (silkTouch) EnchantmentHelper.setEnchantments(mapOf(Enchantments.SILK_TOUCH to 1), dummyItemStack)
+
+    block.harvestBlock(world, player, blockPos, blockState, world.getTileEntity(blockPos), dummyItemStack)
+
     world.setBlockState(blockPos, Blocks.AIR.defaultState, 3)
+
     if (collection) {
         world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPos)).forEach { entityItem ->
             entityItem.setPosition(player.posX, player.posY, player.posZ)
