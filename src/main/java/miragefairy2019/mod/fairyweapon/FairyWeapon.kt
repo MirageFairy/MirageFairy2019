@@ -152,7 +152,7 @@ enum class FairyWeaponKind(
         {
             DataShapedRecipe(
                 pattern = listOf(
-                    "sGG",
+                    "sGF",
                     "c#G",
                     "Rcs"
                 ),
@@ -161,7 +161,8 @@ enum class FairyWeaponKind(
                     "s" to DataOreIngredient(ore = "mirageFairy2019SphereSubmission"),
                     "c" to DataOreIngredient(ore = "dustCinnabar"),
                     "R" to DataOreIngredient(ore = "rodMirageFairyPlastic"),
-                    "G" to DataOreIngredient(ore = "gemMirageFairyPlastic")
+                    "G" to DataOreIngredient(ore = "gemMirageFairyPlastic"),
+                    "F" to DataOreIngredient(ore = "gemMirageFairyPlasticWithFairy")
                 ),
                 result = DataResult(item = "miragefairy2019:plastic_sword")
             )
