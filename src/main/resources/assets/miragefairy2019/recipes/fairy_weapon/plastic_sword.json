@@ -1,7 +1,7 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "sGG",
+    "sGF",
     "c#G",
     "Rcs"
   ],
@@ -24,6 +24,10 @@
     "G": {
       "type": "forge:ore_dict",
       "ore": "gemMirageFairyPlastic"
+    },
+    "F": {
+      "type": "forge:ore_dict",
+      "ore": "gemMirageFairyPlasticWithFairy"
     }
   },
   "result": {
