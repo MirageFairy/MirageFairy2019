@@ -9,7 +9,7 @@
     "description": {
       "translate": "item.plasticSword.recipe"
     },
-    "frame": "goal"
+    "frame": "challenge"
   },
   "parent": "miragefairy2019:fairy_weapon/crystal_sword",
   "criteria": {

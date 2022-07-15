@@ -148,8 +148,8 @@ enum class FairyWeaponKind(
         LangPair("Plastic Sword", "プラスチックソード"),
         LangPair("", "これは妖精をおやつにするという"),
         null,
-        LangPair("Get a specific item", "77億年のチカラ"),
-        "goal",
+        LangPair("Get a specific item", "17億年のチカラ"),
+        "challenge",
         listOf(!SUBMISSION, !SUBMISSION, !"gemMirageFairyPlastic"),
         {
             DataShapedRecipe(
