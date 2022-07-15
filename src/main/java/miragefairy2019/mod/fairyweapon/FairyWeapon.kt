@@ -32,6 +32,7 @@ import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.BakedModelBuiltinWrapper
 import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.mod.Main.creativeTab
 import miragefairy2019.mod.Main.side
@@ -61,6 +62,7 @@ import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.init.Items
 import net.minecraft.item.crafting.Ingredient
 import net.minecraftforge.client.event.ModelBakeEvent
 import net.minecraftforge.common.MinecraftForge
@@ -93,7 +95,7 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "ミラジウムは軟らかいので刃物には向かない"),
         null,
-        listOf(!ATTACK, !SLASH),
+        listOf(!ATTACK, !SLASH, !"plateMiragium"),
         {
             DataShapedRecipe(
                 pattern = listOf(
@@ -120,7 +122,7 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "金属質よりも非晶質の方が鋭利だ、って"),
         null,
-        listOf(!CRYSTAL, !"ingotMiragium", !"mirageFairyCrystal"),
+        listOf(!CRYSTAL, !"mirageFairyCrystal"),
         {
             DataShapedRecipe(
                 pattern = listOf(
@@ -261,7 +263,7 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "パラボラの焦点に発光のスフィア"),
         "goal",
-        listOf(!LIGHT),
+        listOf(!LIGHT, !"gemApatite"),
         {
             DataShapedRecipe(
                 pattern = listOf(
@@ -287,7 +289,7 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "縮地のエルグが渦を巻いて収束するように"),
         "goal",
-        listOf(!WARP),
+        listOf(!WARP, !"obsidian"),
         {
             DataShapedRecipe(
                 pattern = listOf(
@@ -398,7 +400,7 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "カラカラする？音の妖精の魂が入っている"),
         null,
-        listOf(!SOUND),
+        listOf(!SOUND, !"gemApatite"),
         {
             DataShapedRecipe(
                 pattern = listOf(
@@ -425,7 +427,7 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "生物は生命のエルグさえあれば増える"),
         "goal",
-        listOf(!LIFE),
+        listOf(!LIFE, !"gemPyrope"),
         {
             DataShapedRecipe(
                 pattern = listOf(
@@ -479,7 +481,7 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "リラジウムの音は草花の心に響くという"),
         null,
-        listOf(!HARVEST),
+        listOf(!HARVEST, !"ingotLilagium", !"obsidian"),
         {
             DataShapedRecipe(
                 pattern = listOf(
@@ -507,7 +509,7 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "妖精の正体はミラージュの花粉、つまり花に魅かれる"),
         "goal",
-        listOf(!HARVEST),
+        listOf(!HARVEST, !"gemPyrope", !"container250MirageFlowerOil"),
         {
             DataShapedRecipe(
                 pattern = listOf(
@@ -565,7 +567,7 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "作物を刈り奪る形をしてるだろ？"),
         null,
-        listOf(!SLASH, !HARVEST),
+        listOf(!SLASH, !HARVEST, !"plateMiragium"),
         {
             DataShapedRecipe(
                 pattern = listOf(
@@ -593,7 +595,7 @@ enum class FairyWeaponKind(
         null,
         LangPair("Get a specific item", "植物だって話せばわかる"),
         null,
-        listOf(!HARVEST),
+        listOf(!HARVEST, !"ingotLilagium", !"gemSulfur"),
         {
             DataShapedRecipe(
                 pattern = listOf(
@@ -621,7 +623,7 @@ enum class FairyWeaponKind(
         LangPair("Yoshinon", "よしのん"),
         LangPair("Get a specific item", "デザインコンテスト武器"),
         "goal",
-        listOf(!DESTROY, !THUNDER, !WATER),
+        listOf(!DESTROY, !THUNDER, !WATER, !"mirageFairyLeather", { Items.BREAD.ingredient }),
         {
             DataShapedRecipe(
                 pattern = listOf(
