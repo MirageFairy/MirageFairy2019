@@ -29,10 +29,10 @@ class ItemFairySword : ItemFairyWeapon() {
     private fun setAdditionalAttackDamage(itemStack: ItemStack, additionalAttackDamage: Double) = setFairyAttribute("AdditionalAttackDamage", itemStack, additionalAttackDamage)
     private fun setAdditionalAttackSpeed(itemStack: ItemStack, additionalAttackSpeed: Double) = setFairyAttribute("AdditionalAttackSpeed", itemStack, additionalAttackSpeed)
 
-    private class Status(fairySped: IFairySpec) {
-        val additionalAttackDamage = 6.0 * fairySped.manaSet.sum(1.0, 1.0, 1.0, 1.0, 1.0, 1.0) * fairySped.cost / 50.0 / 50.0 // 3~6程度
+    private class Status(fairySpec: IFairySpec) {
+        val additionalAttackDamage = 6.0 * fairySpec.manaSet.sum(1.0, 1.0, 1.0, 1.0, 1.0, 1.0) * fairySpec.cost / 50.0 / 50.0 // 3~6程度
         val additionalAttackSpeed = run {
-            val a = fairySped.cost / 100.0
+            val a = fairySpec.cost / 100.0
             -4 + min(0.25 / (a * a), 8.0) // -3.2~-2.4
             // コスト50のときに斧より少し早い程度（-3.0）
             // コスト0のときに+3
