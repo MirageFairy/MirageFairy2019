@@ -17,18 +17,18 @@ val EMPTY_FAIRY = object : IFairySpec {
     override fun getDisplayName() = textComponent { "Empty"() } // TODO translate
     override fun getColor() = 0xFFFFFF
     override fun getCost() = 50.0
-    override fun getBaseManaSet() = ManaSet.ZERO
+    override fun getManaSet() = ManaSet.ZERO
     override fun getErgSet() = ErgSet.ZERO
 }
 
 val ItemStack.fairySpec get() = this.item.castOrNull<IFairyItem>()?.getMirageFairy(this)
 
-fun IFairySpec.baseMana(mana: Mana) = baseManaSet[mana]
+fun IFairySpec.mana(mana: Mana) = manaSet[mana]
 fun IFairySpec.erg(erg: Erg) = ergSet[erg]
 
-val IFairySpec.shineEfficiency get() = baseManaSet.shine
-val IFairySpec.fireEfficiency get() = baseManaSet.fire
-val IFairySpec.windEfficiency get() = baseManaSet.wind
-val IFairySpec.gaiaEfficiency get() = baseManaSet.gaia
-val IFairySpec.aquaEfficiency get() = baseManaSet.aqua
-val IFairySpec.darkEfficiency get() = baseManaSet.dark
+val IFairySpec.shine get() = manaSet.shine
+val IFairySpec.fire get() = manaSet.fire
+val IFairySpec.wind get() = manaSet.wind
+val IFairySpec.gaia get() = manaSet.gaia
+val IFairySpec.aqua get() = manaSet.aqua
+val IFairySpec.dark get() = manaSet.dark

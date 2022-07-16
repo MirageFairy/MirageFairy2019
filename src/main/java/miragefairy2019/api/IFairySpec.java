@@ -34,7 +34,7 @@ public interface IFairySpec {
     public double getCost();
 
     @Nonnull
-    public ManaSet getBaseManaSet();
+    public ManaSet getManaSet();
 
     @Nonnull
     public ErgSet getErgSet();

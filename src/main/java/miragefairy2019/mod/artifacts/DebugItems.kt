@@ -2,7 +2,7 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
-import miragefairy2019.lib.baseMana
+import miragefairy2019.lib.mana
 import miragefairy2019.lib.erg
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -125,18 +125,18 @@ class ItemDebugFairyList : ItemDebug() {
                         "RIGHT:${fairySpecRank1.cost.f0}"
                     ),
                     Mana.values().map {
-                        "RIGHT:${(fairySpecRank1.baseMana(it) * fairySpecRank2.cost / 50.0).f3}"
+                        "RIGHT:${(fairySpecRank1.mana(it) * fairySpecRank2.cost / 50.0).f3}"
                     },
                     listOf(
-                        "RIGHT:${(fairySpecRank1.baseManaSet.sum * fairySpecRank2.cost / 50.0).f3}"
+                        "RIGHT:${(fairySpecRank1.manaSet.sum * fairySpecRank2.cost / 50.0).f3}"
                     ),
                     Mana.values().map {
-                        val a1 = fairySpecRank1.baseMana(it)
-                        val a2 = fairySpecRank2.baseMana(it)
+                        val a1 = fairySpecRank1.mana(it)
+                        val a2 = fairySpecRank2.mana(it)
                         "${if (a1 >= 10) "BGCOLOR(#FDD):" else if (a2 >= 10) "BGCOLOR(#DDF):" else ""}RIGHT:${a1.f3}"
                     },
                     listOf(
-                        "RIGHT:${(fairySpecRank1.baseManaSet.sum).f3}"
+                        "RIGHT:${(fairySpecRank1.manaSet.sum).f3}"
                     ),
                     Erg.values().map {
                         val a1 = fairySpecRank1.erg(it)

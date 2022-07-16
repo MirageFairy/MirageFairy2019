@@ -202,7 +202,7 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
     }
 
 
-    override fun getFoodAura(itemStack: ItemStack) = getFairy(itemStack)?.fairySpec?.let { it.baseManaSet * (1 + 0.01 * getQuality(itemStack)) }
+    override fun getFoodAura(itemStack: ItemStack) = getFairy(itemStack)?.fairySpec?.let { it.manaSet * (1 + 0.01 * getQuality(itemStack)) }
 }
 
 class RecipeFairyBaking(registryName: ResourceLocation) : RecipeBase<RecipeFairyBaking.Result>(registryName) {
