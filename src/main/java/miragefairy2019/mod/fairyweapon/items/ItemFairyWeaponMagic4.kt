@@ -4,7 +4,6 @@ import miragefairy2019.api.Erg
 import miragefairy2019.api.IFairySpec
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.EMPTY_FAIRY
-import miragefairy2019.lib.div
 import miragefairy2019.lib.erg
 import miragefairy2019.lib.get
 import miragefairy2019.lib.playerAuraHandler
@@ -79,7 +78,7 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), IMagicStatusContainer {
     private fun getMagicArguments(player: EntityPlayer, weaponItemStack: ItemStack, partnerFairySpec: IFairySpec) = object : MagicArguments {
         override val hasPartnerFairy get() = !partnerFairySpec.isEmpty
         override fun getRawMana(mana: Mana): Double {
-            val a = partnerFairySpec.manaSet / (cost / 50.0) // パートナー妖精のマナ
+            val a = partnerFairySpec.baseManaSet // パートナー妖精のマナ
             val b = a + player.proxy.playerAuraHandler.playerAura // プレイヤーオーラの加算
             val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(Mastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
             return c[mana]

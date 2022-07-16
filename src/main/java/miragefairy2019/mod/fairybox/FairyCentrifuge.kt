@@ -590,7 +590,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
     fun getArguments(fairyItemStack: ItemStack): IFairyCentrifugeCraftArguments? {
         val fairySpec = fairyItemStack.fairySpec ?: return null
         return object : IFairyCentrifugeCraftArguments {
-            override fun getMana(mana: Mana): Double = fairySpec.manaSet[mana] / (fairySpec.cost / 50.0)
+            override fun getMana(mana: Mana): Double = fairySpec.baseManaSet[mana]
             override fun getErg(erg: Erg): Double = fairySpec.ergSet[erg]
         }
     }

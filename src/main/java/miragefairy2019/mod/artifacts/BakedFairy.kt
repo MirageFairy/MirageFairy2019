@@ -6,7 +6,6 @@ import miragefairy2019.lib.RecipeBase
 import miragefairy2019.lib.RecipeInput
 import miragefairy2019.lib.RecipeMatcher
 import miragefairy2019.lib.compound
-import miragefairy2019.lib.div
 import miragefairy2019.lib.fairySpec
 import miragefairy2019.lib.get
 import miragefairy2019.lib.int
@@ -203,7 +202,7 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
     }
 
 
-    override fun getFoodAura(itemStack: ItemStack) = getFairy(itemStack)?.fairySpec?.let { it.manaSet / (it.cost / 50.0) * (1 + 0.01 * getQuality(itemStack)) }
+    override fun getFoodAura(itemStack: ItemStack) = getFairy(itemStack)?.fairySpec?.let { it.baseManaSet * (1 + 0.01 * getQuality(itemStack)) }
 }
 
 class RecipeFairyBaking(registryName: ResourceLocation) : RecipeBase<RecipeFairyBaking.Result>(registryName) {
