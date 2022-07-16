@@ -11,6 +11,7 @@ import miragefairy2019.lib.compound
 import miragefairy2019.lib.compoundOrCreate
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.div
+import miragefairy2019.lib.erg
 import miragefairy2019.lib.fairyCentrifugeCraftHandler
 import miragefairy2019.lib.fairySpec
 import miragefairy2019.lib.get
@@ -32,6 +33,7 @@ import miragefairy2019.lib.gui.tooltip
 import miragefairy2019.lib.gui.x
 import miragefairy2019.lib.gui.y
 import miragefairy2019.lib.itemStacks
+import miragefairy2019.lib.mana
 import miragefairy2019.lib.merge
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -590,8 +592,8 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
     fun getArguments(fairyItemStack: ItemStack): IFairyCentrifugeCraftArguments? {
         val fairySpec = fairyItemStack.fairySpec ?: return null
         return object : IFairyCentrifugeCraftArguments {
-            override fun getMana(mana: Mana): Double = fairySpec.manaSet[mana]
-            override fun getErg(erg: Erg): Double = fairySpec.ergSet[erg]
+            override fun getMana(mana: Mana): Double = fairySpec.mana(mana)
+            override fun getErg(erg: Erg): Double = fairySpec.erg(erg)
         }
     }
 

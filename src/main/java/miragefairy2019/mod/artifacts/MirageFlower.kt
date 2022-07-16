@@ -4,11 +4,13 @@ import miragefairy2019.api.Erg
 import miragefairy2019.api.IFairySpec
 import miragefairy2019.api.IPickExecutor
 import miragefairy2019.api.IPickHandler
+import miragefairy2019.api.Mana
 import miragefairy2019.api.PickHandlerRegistry
 import miragefairy2019.common.toOreName
 import miragefairy2019.lib.EnumFireSpreadSpeed
 import miragefairy2019.lib.EnumFlammability
 import miragefairy2019.lib.erg
+import miragefairy2019.lib.mana
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -22,7 +24,6 @@ import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
-import miragefairy2019.lib.shine
 import miragefairy2019.libkt.BiomeDecoratorFlowers
 import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.libkt.copyItemStack
@@ -223,7 +224,7 @@ fun calculateGrowthRate(world: World, blockPos: BlockPos): List<Pair<String, Dou
 
 val List<Pair<String, Double>>.growthRate get() = fold(1.0) { a, b -> a * b.second }
 
-fun getGrowthRateInFloor(fairySpec: IFairySpec) = fairySpec.shine * fairySpec.erg(Erg.CRYSTAL) / 100.0 * 3
+fun getGrowthRateInFloor(fairySpec: IFairySpec) = fairySpec.mana(Mana.SHINE) * fairySpec.erg(Erg.CRYSTAL) / 100.0 * 3
 
 class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidであるマテリアルは耕土を破壊する
     init {

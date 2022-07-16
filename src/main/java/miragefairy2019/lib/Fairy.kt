@@ -25,10 +25,3 @@ val ItemStack.fairySpec get() = this.item.castOrNull<IFairyItem>()?.getMirageFai
 
 fun IFairySpec.mana(mana: Mana) = manaSet[mana]
 fun IFairySpec.erg(erg: Erg) = ergSet[erg]
-
-val IFairySpec.shine get() = manaSet.shine
-val IFairySpec.fire get() = manaSet.fire
-val IFairySpec.wind get() = manaSet.wind
-val IFairySpec.gaia get() = manaSet.gaia
-val IFairySpec.aqua get() = manaSet.aqua
-val IFairySpec.dark get() = manaSet.dark

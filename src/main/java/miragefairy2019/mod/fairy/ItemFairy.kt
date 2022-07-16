@@ -9,7 +9,7 @@ import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.IColoredItem
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.entries
-import miragefairy2019.lib.get
+import miragefairy2019.lib.mana
 import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
@@ -122,13 +122,13 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
         // マナ
         tooltip += formattedText { "マナ: "().aqua } // TODO translate
         if (flag.isAdvanced) {
-            fun f(mana: Mana) = textComponent { (format("%.3f", variant.manaSet[mana])).withColor(mana.textColor) }
+            fun f(mana: Mana) = textComponent { (format("%.3f", variant.mana(mana))).withColor(mana.textColor) }
             tooltip += formattedText { "        "() + f(Mana.SHINE)() }
             tooltip += formattedText { f(Mana.FIRE)() + "          "() + f(Mana.WIND)() }
             tooltip += formattedText { f(Mana.GAIA)() + "          "() + f(Mana.AQUA)() }
             tooltip += formattedText { "        "() + f(Mana.DARK)() }
         } else {
-            fun f(mana: Mana) = textComponent { format("%4d", formatInt(variant.manaSet[mana])).withColor(mana.textColor) }
+            fun f(mana: Mana) = textComponent { format("%4d", formatInt(variant.mana(mana))).withColor(mana.textColor) }
             tooltip += formattedText { "    "() + f(Mana.SHINE)() }
             tooltip += formattedText { f(Mana.FIRE)() + "    "() + f(Mana.WIND)() }
             tooltip += formattedText { f(Mana.GAIA)() + "    "() + f(Mana.AQUA)() }
