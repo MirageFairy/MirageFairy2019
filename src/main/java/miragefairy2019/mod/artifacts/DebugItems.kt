@@ -113,13 +113,14 @@ class ItemDebugFairyList : ItemDebug() {
             val fairySpecRank2 = variantRank2
             fun color(selector: ColorSet.() -> Int) = variantRank1.colorSet.selector().toRgb().hex
             val motif = fairySpecRank1.motif!!.resourcePath
+            val motifUnlocalizedName = fairySpecRank1.motif!!.resourcePath.toLowerCamelCase()
             "|${
                 listOf(
                     listOf(
                         fairyCard.id,
                         "&bold(){!FairyImage(#${color { skin }},#${color { bright }},#${color { dark }},#${color { hair }})}",
-                        "CENTER:$motif&br()${enUs["mirageFairy2019.fairy.$motif.name"]!!}",
-                        "CENTER:${jaJp["mirageFairy2019.fairy.$motif.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
+                        "CENTER:$motif&br()${enUs["mirageFairy2019.fairy.$motifUnlocalizedName.name"]!!}",
+                        "CENTER:${jaJp["mirageFairy2019.fairy.$motifUnlocalizedName.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
                         "CENTER:${variantRank1.rare}",
                         "RIGHT:${fairySpecRank1.cost.f0}"
                     ),
