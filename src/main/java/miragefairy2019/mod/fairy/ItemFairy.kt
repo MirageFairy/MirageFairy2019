@@ -151,7 +151,7 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
                     .sortedByDescending { it.second }
                     .map {
                         if (flag.isAdvanced) {
-                            it.first.displayName() + format("(%.3f [%.3f])", it.second, it.second * (variant.cost / 50.0))
+                            it.first.displayName() + format("(%.3f)", it.second)
                         } else {
                             it.first.displayName()
                         }
