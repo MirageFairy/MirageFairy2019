@@ -2,8 +2,8 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
-import miragefairy2019.lib.mana
 import miragefairy2019.lib.erg
+import miragefairy2019.lib.mana
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
@@ -123,12 +123,6 @@ class ItemDebugFairyList : ItemDebug() {
                         "CENTER:${jaJp["mirageFairy2019.fairy.$motifUnlocalizedName.name"]!!.replace("""(?<![ァ-ヶー])(?=[ァ-ヶー])""".toRegex(), "&br()")}",
                         "CENTER:${variantRank1.rare}",
                         "RIGHT:${fairySpecRank1.cost.f0}"
-                    ),
-                    Mana.values().map {
-                        "RIGHT:${(fairySpecRank1.mana(it) * fairySpecRank2.cost / 50.0).f3}"
-                    },
-                    listOf(
-                        "RIGHT:${(fairySpecRank1.manaSet.sum * fairySpecRank2.cost / 50.0).f3}"
                     ),
                     Mana.values().map {
                         val a1 = fairySpecRank1.mana(it)
