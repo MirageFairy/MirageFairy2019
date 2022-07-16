@@ -36,10 +36,6 @@ public interface IFairySpec {
     @Nonnull
     public ManaSet getBaseManaSet();
 
-    @Deprecated
-    @Nonnull
-    public ManaSet getManaSet();
-
     @Nonnull
     public ErgSet getErgSet();
 

@@ -18,13 +18,11 @@ val EMPTY_FAIRY = object : IFairySpec {
     override fun getColor() = 0xFFFFFF
     override fun getCost() = 50.0
     override fun getBaseManaSet() = ManaSet.ZERO
-    override fun getManaSet() = ManaSet.ZERO
     override fun getErgSet() = ErgSet.ZERO
 }
 
 val ItemStack.fairySpec get() = this.item.castOrNull<IFairyItem>()?.getMirageFairy(this)
 
-fun IFairySpec.mana(mana: Mana) = manaSet[mana]
 fun IFairySpec.baseMana(mana: Mana) = baseManaSet[mana]
 fun IFairySpec.erg(erg: Erg) = ergSet[erg]
 
