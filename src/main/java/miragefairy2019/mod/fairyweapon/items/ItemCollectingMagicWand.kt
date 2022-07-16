@@ -17,6 +17,7 @@ import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.percent0
+import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.skill.Mastery
@@ -39,7 +40,7 @@ class ItemCollectingMagicWand : ItemFairyWeaponMagic4() {
     val additionalReach = status("additionalReach", { 0.0 + (!Mana.GAIA + !Erg.LIGHT) / 8.0 atMost 30.0 }, { float2 })
     val radius = status("radius", { 4.0 + (!Mana.AQUA + !Erg.SENSE) / 30.0 atMost 20.0 }, { float2 })
     val maxTargetCount = status("maxTargetCount", { floor(20.0 * costFactor * costFactor).toInt() atLeast 1 }, { integer })
-    val wear = status("wear", { 0.1 / (1.0 + (!Mana.FIRE + !Erg.SPACE) / 20.0) }, { percent0 })
+    val wear = status("wear", { 0.1 / (1.0 + (!Mana.FIRE + !Erg.SPACE) / 20.0) }, { percent2 })
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでアイテムを回収") // TODO translate
