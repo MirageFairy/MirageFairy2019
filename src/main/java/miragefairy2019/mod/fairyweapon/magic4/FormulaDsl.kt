@@ -15,8 +15,8 @@ interface IMagicStatusContainer {
 }
 
 class FormulaScope(private val formulaArguments: FormulaArguments) {
-    operator fun Mana.not() = formulaArguments.getRawMana(this)
-    operator fun Erg.not() = formulaArguments.getRawErg(this)
+    operator fun Mana.not() = formulaArguments.getMana(this)
+    operator fun Erg.not() = formulaArguments.getErg(this)
     operator fun IMastery.not() = formulaArguments.getSkillLevel(this)
     val costFactor get() = formulaArguments.cost / 50.0
     operator fun <T> (FormulaArguments.() -> T).not() = this(formulaArguments)
@@ -48,8 +48,8 @@ val <T> MagicStatus<T>.factors: List<ITextComponent>
         val factorList = mutableListOf<ITextComponent>()
         formula.calculate(object : FormulaArguments {
             override val hasPartnerFairy: Boolean get() = true
-            override fun getRawMana(mana: Mana) = 0.0.also { factorList.add(mana.displayName) }
-            override fun getRawErg(erg: Erg) = 0.0.also { factorList.add(erg.displayName) }
+            override fun getMana(mana: Mana) = 0.0.also { factorList.add(mana.displayName) }
+            override fun getErg(erg: Erg) = 0.0.also { factorList.add(erg.displayName) }
             override val cost get() = 0.0.also { factorList.add(textComponent { translate("mirageFairy2019.formula.source.cost.name").darkGray }) }
             override val color get() = 0x000000
             override fun getSkillLevel(mastery: IMastery) = 0.also { factorList.add(textComponent { mastery.displayName().gold }) }

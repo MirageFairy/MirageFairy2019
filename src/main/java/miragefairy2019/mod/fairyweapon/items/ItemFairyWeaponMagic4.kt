@@ -77,14 +77,14 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), IMagicStatusContainer {
 
     private fun getMagicArguments(player: EntityPlayer, weaponItemStack: ItemStack, partnerFairySpec: IFairySpec) = object : MagicArguments {
         override val hasPartnerFairy get() = !partnerFairySpec.isEmpty
-        override fun getRawMana(mana: Mana): Double {
+        override fun getMana(mana: Mana): Double {
             val a = partnerFairySpec.manaSet // パートナー妖精のマナ
             val b = a + player.proxy.playerAuraHandler.playerAura // プレイヤーオーラの加算
             val c = b * (1.0 + 0.005 * player.proxy.skillContainer.getSkillLevel(Mastery.root)) // スキルレベル補正：妖精マスタリ1につき1%増加
             return c[mana]
         }
 
-        override fun getRawErg(erg: Erg) = partnerFairySpec.erg(erg)
+        override fun getErg(erg: Erg) = partnerFairySpec.erg(erg)
         override val cost get() = partnerFairySpec.cost
         override val color get() = partnerFairySpec.color
         override fun getSkillLevel(mastery: IMastery) = player.proxy.skillContainer.getSkillLevel(mastery)

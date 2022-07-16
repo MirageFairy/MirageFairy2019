@@ -7,8 +7,8 @@ import net.minecraft.util.text.ITextComponent
 
 interface FormulaArguments {
     val hasPartnerFairy: Boolean
-    fun getRawMana(mana: Mana): Double
-    fun getRawErg(erg: Erg): Double
+    fun getMana(mana: Mana): Double
+    fun getErg(erg: Erg): Double
     val cost: Double
     val color: Int
     fun getSkillLevel(mastery: IMastery): Int
