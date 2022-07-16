@@ -124,8 +124,8 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
         if (flag.isAdvanced) {
             fun f(mana: Mana) = textComponent { (format("%.3f", variant.manaSet[mana])).withColor(mana.textColor) }
             tooltip += formattedText { "        "() + f(Mana.SHINE)() }
-            tooltip += formattedText { f(Mana.FIRE)() + "    "() + f(Mana.WIND)() }
-            tooltip += formattedText { f(Mana.GAIA)() + "    "() + f(Mana.AQUA)() }
+            tooltip += formattedText { f(Mana.FIRE)() + "          "() + f(Mana.WIND)() }
+            tooltip += formattedText { f(Mana.GAIA)() + "          "() + f(Mana.AQUA)() }
             tooltip += formattedText { "        "() + f(Mana.DARK)() }
         } else {
             fun f(mana: Mana) = textComponent { format("%4d", formatInt(variant.manaSet[mana])).withColor(mana.textColor) }
