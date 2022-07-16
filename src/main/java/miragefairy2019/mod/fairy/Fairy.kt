@@ -105,12 +105,14 @@ val fairyModule = module {
                 FairyCard.values().forEach { fairyCard ->
                     val rateRare = 2.0.pow((fairyCard.rare + rank - 2) / 4.0)
                     val rateVariance = 0.5.pow(((fairyCard.manaSet / fairyCard.manaSet.max).sum - 1) / 5.0)
+                    val manaSetBase = fairyCard.manaSet / fairyCard.manaSet.sum * (50 * rateRare * rateVariance * fairyCard.rateSpecial)
                     val manaSetReal = fairyCard.manaSet / fairyCard.manaSet.sum * (fairyCard.cost * rateRare * rateVariance * fairyCard.rateSpecial)
                     val ergSetReal = ErgSet(fairyCard.ergSet.entries.associate { (erg, value) -> erg to value * rateRare })
                     val variant = VariantFairy(
                         fairyCard,
                         ResourceLocation(ModMirageFairy2019.MODID, fairyCard.registryName),
                         textComponent { translate("mirageFairy2019.fairy.${fairyCard.unlocalizedName}.name") },
+                        manaSetBase,
                         manaSetReal,
                         ergSetReal,
                         rank

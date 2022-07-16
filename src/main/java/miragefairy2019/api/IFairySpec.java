@@ -34,6 +34,10 @@ public interface IFairySpec {
     public double getCost();
 
     @Nonnull
+    public ManaSet getBaseManaSet();
+
+    @Deprecated
+    @Nonnull
     public ManaSet getManaSet();
 
     @Nonnull
