@@ -25,6 +25,7 @@ val EMPTY_FAIRY = object : IFairySpec {
 val ItemStack.fairySpec get() = this.item.castOrNull<IFairyItem>()?.getMirageFairy(this)
 
 fun IFairySpec.mana(mana: Mana) = manaSet[mana]
+fun IFairySpec.baseMana(mana: Mana) = baseManaSet[mana]
 fun IFairySpec.erg(erg: Erg) = ergSet[erg]
 
 val IFairySpec.shineEfficiency get() = baseManaSet.shine

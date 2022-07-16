@@ -53,7 +53,6 @@ class VariantFairy(
     private val motif: ResourceLocation?,
     private val displayName: ITextComponent,
     private val baseManaSet: ManaSet,
-    private val manaSet: ManaSet,
     private val ergSet: ErgSet,
     val rank: Int
 ) : ItemVariant(), IFairySpec {
@@ -63,7 +62,6 @@ class VariantFairy(
     override fun getColor() = fairyCard.colorSet.hair
     override fun getCost() = fairyCard.cost.toDouble()
     override fun getBaseManaSet() = baseManaSet
-    override fun getManaSet() = manaSet
     override fun getErgSet() = ergSet
 }
 
@@ -126,7 +124,7 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
         if (flag.isAdvanced) {
             fun f(mana: Mana) = textComponent {
                 val raw = variant.baseManaSet[mana]
-                val normalized = variant.manaSet[mana]
+                val normalized = variant.baseManaSet[mana] * variant.cost / 50.0
                 (format("%.3f", raw) + " ["() + format("%.3f", normalized) + "]"()).withColor(mana.textColor)
             }
             tooltip += formattedText { "        "() + f(Mana.SHINE)() }
@@ -134,7 +132,7 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
             tooltip += formattedText { f(Mana.GAIA)() + "    "() + f(Mana.AQUA)() }
             tooltip += formattedText { "        "() + f(Mana.DARK)() }
         } else {
-            fun f(mana: Mana) = textComponent { format("%4d", formatInt(variant.manaSet[mana] / (variant.cost / 50.0))).withColor(mana.textColor) }
+            fun f(mana: Mana) = textComponent { format("%4d", formatInt(variant.baseManaSet[mana])).withColor(mana.textColor) }
             tooltip += formattedText { "    "() + f(Mana.SHINE)() }
             tooltip += formattedText { f(Mana.FIRE)() + "    "() + f(Mana.WIND)() }
             tooltip += formattedText { f(Mana.GAIA)() + "    "() + f(Mana.AQUA)() }
