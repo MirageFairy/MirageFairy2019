@@ -108,7 +108,7 @@ class PlayerAuraData(val foods: List<Food>)
 
 fun PlayerAuraData.toJsonElement() = jsonObject("foods" to foods.map { it.toJsonElement() }.jsonArray)
 
-fun JsonWrapper.toPlayerAuraData() = PlayerAuraData(this["foods"].asList().map { it.toFood() })
+fun JsonWrapper.toPlayerAuraData() = PlayerAuraData(this["foods"].orNull?.asList()?.map { it.toFood() } ?: listOf())
 
 
 data class ResettableProperty<out T : Any>(private val getter: () -> T) {
