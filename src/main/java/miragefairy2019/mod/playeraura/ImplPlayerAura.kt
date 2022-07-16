@@ -3,7 +3,9 @@ package miragefairy2019.mod.playeraura
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import miragefairy2019.api.IFoodAuraItem
+import miragefairy2019.api.Mana
 import miragefairy2019.api.ManaSet
+import miragefairy2019.lib.mana
 import miragefairy2019.lib.plus
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
@@ -59,8 +61,8 @@ class PlayerAuraManager : IPlayerAuraManager {
             if (entries.isEmpty()) return null // 関連付けられた妖精が居ない場合は無視
 
             // 平均を返す
-            fun f(typeChooser: (ManaSet) -> Double) = entries.map { typeChooser(it.fairyCard.getVariant().manaSet) * 0.5 }.average()
-            return ManaSet(f { it.shine }, f { it.fire }, f { it.wind }, f { it.gaia }, f { it.aqua }, f { it.dark })
+            fun f(mana: Mana) = entries.map { it.fairyCard.getVariant().mana(mana) * 0.5 }.average()
+            return ManaSet(f(Mana.SHINE), f(Mana.FIRE), f(Mana.WIND), f(Mana.GAIA), f(Mana.AQUA), f(Mana.DARK))
         }
     }
 
