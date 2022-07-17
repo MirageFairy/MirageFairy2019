@@ -10,7 +10,6 @@ import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.ja
 import miragefairy2019.mod.artifacts.artifactsModule
 import miragefairy2019.mod.fairy.fairyModule
 import miragefairy2019.mod.fairybox.fairyBoxModule
@@ -55,31 +54,15 @@ val modules = module {
 
         enJa("item.mirageFlowerSeeds.name", "Mirage Flower Seeds", "ミラージュフラワーの種")
 
-        enJa("item.mirageFairyPot.name", "Fairy Pot", "妖精のポット")
-        enJa("item.mirageFairyPotMiragiumWater.name", "Miragium Water Pot", "ミラジウムウォーター入りポット")
-        enJa("item.mirageFairyPotMirageFlowerExtract.name", "Mirage Extract Pot", "ミラージュエキス入りポット")
-        enJa("item.mirageFairyPotMirageFlowerOil.name", "Mirage Oil Pot", "ミラージュオイル入りポット")
-        enJa("item.mirageFairyPotWater.name", "Water Pot", "水入りポット")
-        enJa("item.mirageFairyPotLava.name", "Lava Pot", "溶岩入りポット")
-
         enJa("item.fairyStick.name", "Fairy Stick", "妖精のステッキ")
         enJa("item.fairyStick.poem", "", "頼みごとをしてみよう")
 
         enJa("item.spheres.name", "Sphere", "スフィア")
         enJa("item.spheres.format", "Sphere of %s", "%sのスフィア")
 
-        enJa("fluid.miragium_water", "Miragium Water", "ミラジウムウォーター")
-        enJa("tile.miragiumWater.name", "Miragium Water", "ミラジウムウォーター")
-        enJa("fluid.mirage_flower_extract", "Mirage Extract", "ミラージュエキス")
-        enJa("tile.mirageFlowerExtract.name", "Mirage Extract", "ミラージュエキス")
-        enJa("fluid.mirage_flower_oil", "Mirage Oil", "ミラージュオイル")
-        enJa("tile.mirageFlowerOil.name", "Mirage Oil", "ミラージュオイル")
-
         enJa("tile.fairyCollectionBox.name", "Fairy Collection Box", "妖精蒐集箱")
 
         enJa("tile.fairyWoodLog.name", "Fairy Wood Log", "妖精の原木")
-
-        ja("item.forge.bucketFilled.name", "%s入りバケツ")
 
         enJa("mirageFairy2019.magic.status.strength.name", "Strength", "効果値")
         enJa("mirageFairy2019.magic.status.extent.name", "Extent", "拡散力")
@@ -203,18 +186,6 @@ val modules = module {
                 "c" to DataOreIngredient(ore = "mirageFairyCrystal")
             ),
             result = DataResult(item = "miragefairy2019:fairy_stick")
-        )
-    }
-
-    // ミラジウムウォーター入りポット
-    makeRecipe("miragium_water_pot") {
-        DataShapelessRecipe(
-            ingredients = listOf(
-                DataOreIngredient(ore = "mirageFairyPot"),
-                DataOreIngredient(ore = "container1000Water"),
-                DataOreIngredient(ore = "dustMiragium")
-            ),
-            result = DataResult(item = "miragefairy2019:filled_bucket", data = 0)
         )
     }
 

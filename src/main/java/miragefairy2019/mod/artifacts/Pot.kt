@@ -20,6 +20,7 @@ import miragefairy2019.libkt.CapabilityProviderAdapter
 import miragefairy2019.libkt.ItemMultiMaterial
 import miragefairy2019.libkt.ItemVariantMaterial
 import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
@@ -66,6 +67,10 @@ val potModule = module {
             result = DataResult(item = "${ModMirageFairy2019.MODID}:pot")
         )
     }
+    onMakeLang {
+        enJa("item.mirageFairyPot.name", "Fairy Pot", "妖精のポット")
+    }
+
 
     // 中身入りポット
     itemFilledPot = item({ ItemFilledPot() }, "filled_bucket") {
@@ -112,6 +117,13 @@ val potModule = module {
     makeItemModel("mirage_flower_oil_pot") { generated }
     makeItemModel("water_pot") { generated }
     makeItemModel("lava_pot") { generated }
+    onMakeLang {
+        enJa("item.mirageFairyPotMiragiumWater.name", "Miragium Water Pot", "ミラジウムウォーター入りポット")
+        enJa("item.mirageFairyPotMirageFlowerExtract.name", "Mirage Extract Pot", "ミラージュエキス入りポット")
+        enJa("item.mirageFairyPotMirageFlowerOil.name", "Mirage Oil Pot", "ミラージュオイル入りポット")
+        enJa("item.mirageFairyPotWater.name", "Water Pot", "水入りポット")
+        enJa("item.mirageFairyPotLava.name", "Lava Pot", "溶岩入りポット")
+    }
 
 
     // 詰め替えレシピ

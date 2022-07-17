@@ -8,9 +8,15 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setFluidStateMapper
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
+import miragefairy2019.lib.resourcemaker.DataResult
+import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.fluid
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.makeRecipe
+import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.ja
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.block.material.Material
@@ -41,6 +47,7 @@ object FluidMaterials {
 
         // ユニバーサルバケツ
         onConstruction { FluidRegistry.enableUniversalBucket() }
+        onMakeLang { ja("item.forge.bucketFilled.name", "%s入りバケツ") }
 
 
         // ミラジウムウォーター
@@ -57,6 +64,20 @@ object FluidMaterials {
             setCustomModelResourceLocation()
         }
         makeItemModel("miragium_water") { fluid }
+        onMakeLang {
+            enJa("fluid.miragium_water", "Miragium Water", "ミラジウムウォーター")
+            enJa("tile.miragiumWater.name", "Miragium Water", "ミラジウムウォーター")
+        }
+        makeRecipe("miragium_water_pot") {
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(ore = "mirageFairyPot"),
+                    DataOreIngredient(ore = "container1000Water"),
+                    DataOreIngredient(ore = "dustMiragium")
+                ),
+                result = DataResult(item = "miragefairy2019:filled_bucket", data = 0)
+            )
+        }
 
 
         // ミラージュエキス
@@ -73,6 +94,10 @@ object FluidMaterials {
             setCustomModelResourceLocation()
         }
         makeItemModel("mirage_flower_extract") { fluid }
+        onMakeLang {
+            enJa("fluid.mirage_flower_extract", "Mirage Extract", "ミラージュエキス")
+            enJa("tile.mirageFlowerExtract.name", "Mirage Extract", "ミラージュエキス")
+        }
 
 
         // ミラージュオイル
@@ -89,6 +114,10 @@ object FluidMaterials {
             setCustomModelResourceLocation()
         }
         makeItemModel("mirage_flower_oil") { fluid }
+        onMakeLang {
+            enJa("fluid.mirage_flower_oil", "Mirage Oil", "ミラージュオイル")
+            enJa("tile.mirageFlowerOil.name", "Mirage Oil", "ミラージュオイル")
+        }
 
     }
 }
