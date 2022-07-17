@@ -265,7 +265,7 @@ val fairyCentrifugeModule = module {
             process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
             process { !Mana.WIND + !Erg.THUNDER * 2.0 }
             process { !Mana.WIND + !Erg.FREEZE * 2.0 }
-            input("netherrack".oreIngredient, 1)
+            input("netherrack".oreIngredient, 4)
             input("cropNetherWart".oreIngredient, 16)
             input("container1000MiragiumWater".oreIngredient, 1)
             output("dustRedstone".toOreName().copyItemStack() ?: cancel(), 1.0, 1.0)
