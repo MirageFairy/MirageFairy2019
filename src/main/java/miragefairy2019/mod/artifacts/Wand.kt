@@ -84,18 +84,17 @@ enum class WandType(
     val tier: Int,
     val registryName: String,
     val englishName: String,
-    val japaneseName: String,
-    val additionalOreNames: List<String>
+    val japaneseName: String
 ) {
-    CRAFTING(Erg.CRAFT, 1, "crafting", "Crafting", "技巧", listOf()),
-    HYDRATING(Erg.WATER, 1, "hydrating", "Hydrating", "加水", listOf()),
-    MELTING(Erg.FLAME, 2, "melting", "Melting", "紅蓮", listOf()),
-    BREAKING(Erg.DESTROY, 2, "breaking", "Breaking", "破砕", listOf()),
-    FREEZING(Erg.FREEZE, 2, "freezing", "Freezing", "氷晶", listOf()),
-    POLISHING(Erg.CRYSTAL, 3, "polishing", "Polishing", "珠玉", listOf()),
-    SUMMONING(Erg.SUBMISSION, 3, "summoning", "Wizard's", "冥王", listOf()),
-    DISTORTION(Erg.SPACE, 4, "distortion", "Distortion", "歪曲", listOf()),
-    FUSION(Erg.WARP, 4, "fusion", "Fusion", "融合", listOf()),
+    CRAFTING(Erg.CRAFT, 1, "crafting", "Crafting", "技巧"),
+    HYDRATING(Erg.WATER, 1, "hydrating", "Hydrating", "加水"),
+    MELTING(Erg.FLAME, 2, "melting", "Melting", "紅蓮"),
+    BREAKING(Erg.DESTROY, 2, "breaking", "Breaking", "破砕"),
+    FREEZING(Erg.FREEZE, 2, "freezing", "Freezing", "氷晶"),
+    POLISHING(Erg.CRYSTAL, 3, "polishing", "Polishing", "珠玉"),
+    SUMMONING(Erg.SUBMISSION, 3, "summoning", "Wizard's", "冥王"),
+    DISTORTION(Erg.SPACE, 4, "distortion", "Distortion", "歪曲"),
+    FUSION(Erg.WARP, 4, "fusion", "Fusion", "融合"),
 }
 
 val wandTierToRodOreName = mapOf(
@@ -240,7 +239,6 @@ val wandModule = module {
             }
             onCreateItemStack {
                 OreDictionary.registerOre(wandKind.type.oreName, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE))
-                wandKind.type.additionalOreNames.forEach { OreDictionary.registerOre(it, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE)) }
             }
         }
 
