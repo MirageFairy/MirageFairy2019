@@ -597,8 +597,7 @@ enum class FairyMaterialCard(
                     ),
                     result = DataResult(
                         item = "miragefairy2019:fairy_materials",
-                        data = 21,
-                        count = 1
+                        data = 21
                     )
                 )
             }

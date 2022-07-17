@@ -58,7 +58,7 @@ enum class CommonMaterialCard(
                     "D" to DataSimpleIngredient(item = "minecraft:dirt", data = 0),
                     "B" to DataOreIngredient(ore = "container1000Water")
                 ),
-                result = DataResult(item = "miragefairy2019:materials", count = 1, data = 9)
+                result = DataResult(item = "miragefairy2019:materials", data = 9)
             )
         }
     }),

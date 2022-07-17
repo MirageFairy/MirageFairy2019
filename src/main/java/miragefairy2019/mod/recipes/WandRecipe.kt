@@ -112,7 +112,7 @@ val wandRecipeModule = module {
                 WandType.BREAKING.ingredientData,
                 DataOreIngredient(ore = "stone")
             ),
-            result = DataResult(item = "minecraft:cobblestone", count = 1)
+            result = DataResult(item = "minecraft:cobblestone")
         )
     }
 
@@ -134,7 +134,7 @@ val wandRecipeModule = module {
                 WandType.BREAKING.ingredientData,
                 DataOreIngredient(ore = "cobblestone")
             ),
-            result = DataResult(item = "minecraft:gravel", count = 1)
+            result = DataResult(item = "minecraft:gravel")
         )
     }
 
@@ -145,7 +145,7 @@ val wandRecipeModule = module {
                 WandType.FREEZING.ingredientData,
                 DataOreIngredient(ore = "container1000Water")
             ),
-            result = DataResult(item = "minecraft:ice", count = 1)
+            result = DataResult(item = "minecraft:ice")
         )
     }
 
@@ -157,7 +157,7 @@ val wandRecipeModule = module {
                 DataOreIngredient(ore = "obsidian"),
                 DataSimpleIngredient(item = "minecraft:bucket")
             ),
-            result = DataResult(item = "minecraft:lava_bucket", count = 1)
+            result = DataResult(item = "minecraft:lava_bucket")
         )
     }
 
@@ -179,7 +179,7 @@ val wandRecipeModule = module {
                 WandType.HYDRATING.ingredientData,
                 DataOreIngredient(ore = "container1000Lava")
             ),
-            result = DataResult(item = "minecraft:obsidian", count = 1)
+            result = DataResult(item = "minecraft:obsidian")
         )
     }
 
@@ -201,7 +201,7 @@ val wandRecipeModule = module {
                 WandType.BREAKING.ingredientData,
                 DataOreIngredient(ore = "ice")
             ),
-            result = DataResult(item = "minecraft:snow", count = 1)
+            result = DataResult(item = "minecraft:snow")
         )
     }
 
@@ -235,7 +235,7 @@ val wandRecipeModule = module {
                 DataOreIngredient(ore = "ice"),
                 DataSimpleIngredient(item = "minecraft:bucket")
             ),
-            result = DataResult(item = "minecraft:water_bucket", count = 1)
+            result = DataResult(item = "minecraft:water_bucket")
         )
     }
 
