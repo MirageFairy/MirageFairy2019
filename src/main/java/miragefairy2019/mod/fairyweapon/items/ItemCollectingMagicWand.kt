@@ -3,6 +3,7 @@ package miragefairy2019.mod.fairyweapon.items
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.MagicSelector
+import miragefairy2019.lib.collides
 import miragefairy2019.lib.doEffect
 import miragefairy2019.lib.entities
 import miragefairy2019.lib.position
@@ -16,7 +17,6 @@ import miragefairy2019.mod.fairyweapon.magic4.boost
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.magic
-import miragefairy2019.mod.fairyweapon.magic4.percent0
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
@@ -49,7 +49,7 @@ class ItemCollectingMagicWand : ItemFairyWeaponMagic4() {
         val rayTraceMagicSelector = MagicSelector.rayTraceBlock(world, player, additionalReach()) // 視線判定
         val cursorMagicSelector = rayTraceMagicSelector.position // 視点判定
         val rangeMagicSelector = cursorMagicSelector.sphere(radius())
-        val targetsMagicSelector = rangeMagicSelector.entities(EntityItem::class.java, { true }, maxTargetCount())
+        val targetsMagicSelector = rangeMagicSelector.entities(EntityItem::class.java, { !(it collides player) }, maxTargetCount())
         val targets = targetsMagicSelector.item.entities
 
         fun pass(color: Int, magicMessage: MagicMessage) = object : MagicHandler() {
