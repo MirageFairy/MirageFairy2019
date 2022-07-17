@@ -513,7 +513,7 @@ val wandModule = module {
     makeRecipe("obsidian_from_lava") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.HYDRATING.ingredientData,
+                FREEZING.ingredientData,
                 DataOreIngredient(ore = "container1000Lava")
             ),
             result = DataResult(item = "minecraft:obsidian")
