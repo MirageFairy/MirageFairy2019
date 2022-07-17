@@ -64,7 +64,7 @@ val debugItemsModule = module {
         onMakeLang { enJa("item.$unlocalizedName.name", "Debug: $english", "デバッグ：$japanese") }
     }
 
-    r({ ItemDebugFairyList() }, "fairy_list", "Fairy List", "妖精一覧")
+    r({ ItemDebugFairyList() }, "fairy_list", "MirageFairy2019非公式Wiki: Generate Fairy List", "MirageFairy2019非公式Wiki：妖精一覧生成")
     r({ ItemDebugOreNameList() }, "ore_name_list", "Ore Name List", "鉱石辞書名一覧")
     r({ ItemDebugSkillResetUnlock() }, "skill_reset_unlock", "Skill Reset Unlock", "スキルリセット解禁")
     r({ ItemDebugPlayerAuraReset() }, "player_aura_reset", "Player Aura Reset", "プレイヤーオーラリセット")
