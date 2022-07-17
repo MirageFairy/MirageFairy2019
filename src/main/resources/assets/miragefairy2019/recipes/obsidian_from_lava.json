@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "type": "miragefairy2019:ore_dict_complex",
-      "ore": "mirageFairy2019CraftingToolFairyWandHydrating"
+      "ore": "mirageFairy2019CraftingToolFairyWandFreezing"
     },
     {
       "type": "forge:ore_dict",
