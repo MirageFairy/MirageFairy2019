@@ -88,7 +88,7 @@ enum class WandType(
     val additionalOreNames: List<String>
 ) {
     CRAFTING(Erg.CRAFT, 1, "crafting", "Crafting", "技巧", listOf()),
-    HYDRATING(Erg.WATER, 1, "hydrating", "Hydrating", "加水", listOf("container1000Water")),
+    HYDRATING(Erg.WATER, 1, "hydrating", "Hydrating", "加水", listOf()),
     MELTING(Erg.FLAME, 2, "melting", "Melting", "紅蓮", listOf()),
     BREAKING(Erg.DESTROY, 2, "breaking", "Breaking", "破砕", listOf()),
     FREEZING(Erg.FREEZE, 2, "freezing", "Freezing", "氷晶", listOf()),
