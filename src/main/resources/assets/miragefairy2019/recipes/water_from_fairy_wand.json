@@ -6,10 +6,12 @@
       "ore": "mirageFairy2019CraftingToolFairyWandHydrating"
     },
     {
-      "item": "minecraft:bucket"
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyPot"
     }
   ],
   "result": {
-    "item": "minecraft:water_bucket"
+    "item": "miragefairy2019:filled_bucket",
+    "data": 3
   }
 }

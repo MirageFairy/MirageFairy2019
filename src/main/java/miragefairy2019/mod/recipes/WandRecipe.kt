@@ -239,14 +239,15 @@ val wandRecipeModule = module {
         )
     }
 
+    // TODO バケツ・瓶
     // 加水のワンド→水
     makeRecipe("water_from_fairy_wand") {
         DataShapelessRecipe(
             ingredients = listOf(
                 WandType.HYDRATING.ingredientData,
-                DataSimpleIngredient(item = "minecraft:bucket")
+                DataOreIngredient(ore = "mirageFairyPot")
             ),
-            result = DataResult(item = "minecraft:water_bucket", count = 1)
+            result = DataResult(item = "miragefairy2019:filled_bucket", data = 3)
         )
     }
 
