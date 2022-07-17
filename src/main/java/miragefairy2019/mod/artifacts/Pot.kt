@@ -28,6 +28,7 @@ import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.hydrogen.castOrNull
 import mirrg.kotlin.hydrogen.toUpperCamelCase
+import mirrg.kotlin.hydrogen.toUpperCaseHead
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -40,6 +41,20 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler
 import net.minecraftforge.fluids.capability.FluidTankProperties
 import net.minecraftforge.fluids.capability.IFluidHandlerItem
 import net.minecraftforge.oredict.OreIngredient
+
+enum class PotCard(
+    val fluidRegistryName: String,
+    val fluidUnlocalizedName: String,
+    val fluidEnglishName: String,
+    val fluidJapaneseName: String
+) {
+    MIRAGIUM_WATER_POT("miragium_water", "miragiumWater", "Miragium Water", "ミラジウムウォーター"),
+    MIRAGE_FLOWER_EXTRACT_POT("mirage_flower_extract", "mirageFlowerExtract", "Mirage Extract", "ミラージュエキス"),
+    MIRAGE_FLOWER_OIL_POT("mirage_flower_oil", "mirageFlowerOil", "Mirage Oil", "ミラージュオイル"),
+    WATER_POT("water", "water", "Water", "水"),
+    LAVA_POT("lava", "lava", "Lava", "溶岩"),
+}
+
 
 lateinit var itemPot: () -> ItemPot
 lateinit var itemFilledPot: () -> ItemFilledPot
@@ -112,17 +127,9 @@ val potModule = module {
             if (Main.side.isClient) item.setCustomModelResourceLocations()
         }
     }
-    makeItemModel("miragium_water_pot") { generated }
-    makeItemModel("mirage_flower_extract_pot") { generated }
-    makeItemModel("mirage_flower_oil_pot") { generated }
-    makeItemModel("water_pot") { generated }
-    makeItemModel("lava_pot") { generated }
-    onMakeLang {
-        enJa("item.mirageFairyPotMiragiumWater.name", "Miragium Water Pot", "ミラジウムウォーター入りポット")
-        enJa("item.mirageFairyPotMirageFlowerExtract.name", "Mirage Extract Pot", "ミラージュエキス入りポット")
-        enJa("item.mirageFairyPotMirageFlowerOil.name", "Mirage Oil Pot", "ミラージュオイル入りポット")
-        enJa("item.mirageFairyPotWater.name", "Water Pot", "水入りポット")
-        enJa("item.mirageFairyPotLava.name", "Lava Pot", "溶岩入りポット")
+    PotCard.values().forEach { potCard ->
+        makeItemModel("${potCard.fluidRegistryName}_pot") { generated }
+        onMakeLang { enJa("item.mirageFairyPot${potCard.fluidUnlocalizedName.toUpperCaseHead()}.name", "${potCard.fluidEnglishName} Pot", "${potCard.fluidJapaneseName}入りポット") }
     }
 
 
