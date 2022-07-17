@@ -326,7 +326,7 @@ val wandModule = module {
         makeRecipe(registryName) {
             DataShapelessRecipe(
                 ingredients = listOf(
-                    WandType.BREAKING.ingredientData,
+                    BREAKING.ingredientData,
                     ingredient
                 ),
                 result = DataResult(item = "miragefairy2019:materials", data = metadata)
@@ -350,7 +350,7 @@ val wandModule = module {
                 ResourceLocation("${ModMirageFairy2019.MODID}:wand_pulverization/$registryName"),
                 null,
                 output,
-                WandType.BREAKING.ingredient,
+                BREAKING.ingredient,
                 input
             )
         }
@@ -381,7 +381,7 @@ val wandModule = module {
             ),
             key = mapOf(
                 "#" to DataOreIngredient(ore = "ice"),
-                "f" to WandType.FREEZING.ingredientData
+                "f" to FREEZING.ingredientData
             ),
             result = DataResult(item = "minecraft:packed_ice")
         )
@@ -392,7 +392,7 @@ val wandModule = module {
         DataShapelessRecipe(
             ingredients = listOf(
                 DataSimpleIngredient(item = "minecraft:sponge", data = 1),
-                WandType.MELTING.ingredientData
+                MELTING.ingredientData
             ),
             result = DataResult(item = "minecraft:sponge", data = 0)
         )
@@ -403,7 +403,7 @@ val wandModule = module {
         DataShapelessRecipe(
             ingredients = listOf(
                 DataOreIngredient(ore = "sandstone"),
-                WandType.BREAKING.ingredientData
+                BREAKING.ingredientData
             ),
             result = DataResult(item = "minecraft:sand", data = 0)
         )
@@ -413,7 +413,7 @@ val wandModule = module {
     makeRecipe("blaze_powder_from_blaze_rod") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.BREAKING.ingredientData,
+                BREAKING.ingredientData,
                 DataSimpleIngredient(item = "minecraft:blaze_rod")
             ),
             result = DataResult(item = "minecraft:blaze_powder", count = 3)
@@ -424,7 +424,7 @@ val wandModule = module {
     makeRecipe("bone_meal_from_bone") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.BREAKING.ingredientData,
+                BREAKING.ingredientData,
                 DataOreIngredient(ore = "bone")
             ),
             result = DataResult(item = "minecraft:dye", data = 15, count = 4)
@@ -435,7 +435,7 @@ val wandModule = module {
     makeRecipe("clay_ball_from_clay") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.CRAFTING.ingredientData,
+                CRAFTING.ingredientData,
                 DataSimpleIngredient(item = "minecraft:clay")
             ),
             result = DataResult(item = "minecraft:clay_ball", count = 4)
@@ -446,7 +446,7 @@ val wandModule = module {
     makeRecipe("cobblestone_from_stone") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.BREAKING.ingredientData,
+                BREAKING.ingredientData,
                 DataOreIngredient(ore = "stone")
             ),
             result = DataResult(item = "minecraft:cobblestone")
@@ -457,7 +457,7 @@ val wandModule = module {
     makeRecipe("glowstone_dust_from_glowstone") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.BREAKING.ingredientData,
+                BREAKING.ingredientData,
                 DataOreIngredient(ore = "glowstone")
             ),
             result = DataResult(item = "minecraft:glowstone_dust", count = 4)
@@ -468,7 +468,7 @@ val wandModule = module {
     makeRecipe("gravel_from_cobblestone") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.BREAKING.ingredientData,
+                BREAKING.ingredientData,
                 DataOreIngredient(ore = "cobblestone")
             ),
             result = DataResult(item = "minecraft:gravel")
@@ -479,7 +479,7 @@ val wandModule = module {
     makeRecipe("ice_from_water") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.FREEZING.ingredientData,
+                FREEZING.ingredientData,
                 DataOreIngredient(ore = "container1000Water")
             ),
             result = DataResult(item = "minecraft:ice")
@@ -490,7 +490,7 @@ val wandModule = module {
     makeRecipe("lava_from_obsidian") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.MELTING.ingredientData,
+                MELTING.ingredientData,
                 DataOreIngredient(ore = "obsidian"),
                 DataSimpleIngredient(item = "minecraft:bucket")
             ),
@@ -502,7 +502,7 @@ val wandModule = module {
     makeRecipe("nether_wart_from_nether_wart_block") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.CRAFTING.ingredientData,
+                CRAFTING.ingredientData,
                 DataSimpleIngredient(item = "minecraft:nether_wart_block")
             ),
             result = DataResult(item = "minecraft:nether_wart", count = 9)
@@ -524,7 +524,7 @@ val wandModule = module {
     makeRecipe("quartz_from_quartz_block") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.BREAKING.ingredientData,
+                BREAKING.ingredientData,
                 DataOreIngredient(ore = "blockQuartz")
             ),
             result = DataResult(item = "minecraft:quartz", count = 4)
@@ -535,7 +535,7 @@ val wandModule = module {
     makeRecipe("snow_from_ice") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.BREAKING.ingredientData,
+                BREAKING.ingredientData,
                 DataOreIngredient(ore = "ice")
             ),
             result = DataResult(item = "minecraft:snow")
@@ -546,7 +546,7 @@ val wandModule = module {
     makeRecipe("snowball_from_snow") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.CRAFTING.ingredientData,
+                CRAFTING.ingredientData,
                 DataSimpleIngredient(item = "minecraft:snow")
             ),
             result = DataResult(item = "minecraft:snowball", count = 4)
@@ -557,7 +557,7 @@ val wandModule = module {
     makeRecipe("string_from_wool") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.CRAFTING.ingredientData,
+                CRAFTING.ingredientData,
                 DataOreIngredient(ore = "wool")
             ),
             result = DataResult(item = "minecraft:string", count = 4)
@@ -568,7 +568,7 @@ val wandModule = module {
     makeRecipe("water_from_ice") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.MELTING.ingredientData,
+                MELTING.ingredientData,
                 DataOreIngredient(ore = "ice"),
                 DataSimpleIngredient(item = "minecraft:bucket")
             ),
@@ -580,7 +580,7 @@ val wandModule = module {
     makeRecipe("water_pot_from_fairy_wand") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.HYDRATING.ingredientData,
+                HYDRATING.ingredientData,
                 DataOreIngredient(ore = "mirageFairyPot")
             ),
             result = DataResult(item = "miragefairy2019:filled_bucket", data = 3)
@@ -589,7 +589,7 @@ val wandModule = module {
     makeRecipe("water_bucket_from_fairy_wand") {
         DataShapelessRecipe(
             ingredients = listOf(
-                WandType.HYDRATING.ingredientData,
+                HYDRATING.ingredientData,
                 DataSimpleIngredient(item = "minecraft:bucket")
             ),
             result = DataResult(item = "minecraft:water_bucket")
