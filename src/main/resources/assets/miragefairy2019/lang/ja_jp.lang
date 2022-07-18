@@ -42,6 +42,7 @@ item.debugOreNameList.name=デバッグ：鉱石辞書名一覧
 item.debugOreSeedDropRate.name=デバッグ：鉱石生成確率表示
 item.debugOreSeedStatistics.name=デバッグ：鉱石分布
 item.debugPlayerAuraReset.name=デバッグ：プレイヤーオーラリセット
+item.debugSelectLanguage.name=デバッグ：言語選択
 item.debugShowData.name=デバッグ：データ表示
 item.debugSkillResetUnlock.name=デバッグ：スキルリセット解禁
 item.dustApatite.name=燐灰石の粉

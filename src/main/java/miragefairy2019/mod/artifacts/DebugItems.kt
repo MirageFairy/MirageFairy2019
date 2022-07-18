@@ -12,6 +12,7 @@ import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.sum
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
+import miragefairy2019.libkt.customName
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.hex
@@ -37,6 +38,8 @@ import mirrg.kotlin.hydrogen.toLowerCamelCase
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
+import net.minecraft.client.Minecraft
+import net.minecraft.client.resources.Language
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.Item
@@ -48,7 +51,9 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
+import net.minecraftforge.client.resource.VanillaResourceType
 import net.minecraftforge.common.BiomeDictionary
+import net.minecraftforge.fml.client.FMLClientHandler
 import net.minecraftforge.oredict.OreDictionary
 import java.io.File
 
@@ -74,6 +79,7 @@ val debugItemsModule = module {
     r({ ItemDebugMirageFlowerGrowthRateList() }, "mirage_flower_growth_rate_list", "Mirage Flower Growth Rate List", "ミラージュフラワー地面補正一覧")
     r({ ItemDebugMirageFlowerGrowthRate() }, "mirage_flower_growth_rate", "Mirage Flower Growth Rate", "ミラージュフラワー成長速度表示")
     r({ ItemDebugShowData() }, "show_data", "Show Data", "データ表示")
+    r({ ItemDebugSelectLanguage() }, "select_language", "Select Language", "言語選択")
 
 }
 
@@ -321,6 +327,32 @@ class ItemDebugShowData : ItemDebug() {
             player.sendStatusMessage(message, false)
         }
         getLogger().info(list.map { it.unformattedText }.join("\n"))
+
+        return EnumActionResult.SUCCESS
+    }
+}
+
+class ItemDebugSelectLanguage : ItemDebug() {
+    override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        if (!world.isRemote) return EnumActionResult.SUCCESS
+
+        val languageManager = Minecraft.getMinecraft().languageManager
+        val fontRenderer = Minecraft.getMinecraft().fontRenderer
+        val gameSettings = Minecraft.getMinecraft().gameSettings
+
+        val itemStack = player.getHeldItem(hand)
+        val languageName = itemStack.customName ?: "en_us"
+        val language: Language? = languageManager.getLanguage(languageName)
+        if (language == null) {
+            player.sendStatusMessage(textComponent { "Unknown language: $languageName"() }, false)
+            return EnumActionResult.SUCCESS
+        }
+
+        languageManager.currentLanguage = language
+        FMLClientHandler.instance().refreshResources(VanillaResourceType.LANGUAGES)
+        fontRenderer.unicodeFlag = languageManager.isCurrentLocaleUnicode
+        fontRenderer.bidiFlag = languageManager.isCurrentLanguageBidirectional
+        gameSettings.saveOptions()
 
         return EnumActionResult.SUCCESS
     }
