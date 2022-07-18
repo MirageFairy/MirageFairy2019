@@ -14,6 +14,9 @@ interface IComponent {
     fun onContainerInit() = Unit
 
     @SideOnly(Side.CLIENT)
+    fun preRender(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
+
+    @SideOnly(Side.CLIENT)
     fun drawGuiContainerBackgroundLayer(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
 
     @SideOnly(Side.CLIENT)
@@ -49,6 +52,7 @@ abstract class GuiComponent(private val container: ContainerComponent) : GuiCont
     // イベント
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
+        container.components.forEach { it.preRender(this, PointInt(mouseX, mouseY), partialTicks) }
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
         container.components.forEach { it.drawSlotOverlay(this, PointInt(mouseX, mouseY), partialTicks) }
