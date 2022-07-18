@@ -2,7 +2,6 @@ package miragefairy2019.lib
 
 import miragefairy2019.libkt.axisAlignedBBOf
 import miragefairy2019.libkt.sq
-import miragefairy2019.mod.fairyweapon.FairyWeaponUtils
 import miragefairy2019.mod.fairyweapon.spawnParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleSphericalRange
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
@@ -72,19 +71,19 @@ class WorldRayTraceResult(
 }
 
 fun MagicSelector.Companion.rayTrace(world: World, player: EntityPlayer, additionalReach: Double): MagicSelector<WorldRayTraceResult> {
-    val rayTraceResult = FairyWeaponUtils.rayTrace(world, player, false, additionalReach, Entity::class.java) { true }
+    val rayTraceResult = rayTrace(world, player, false, additionalReach, Entity::class.java) { true }
     val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
     return MagicSelector(WorldRayTraceResult(world, rayTraceResult, position))
 }
 
 fun MagicSelector.Companion.rayTraceBlock(world: World, player: EntityPlayer, additionalReach: Double): MagicSelector<WorldRayTraceResult> {
-    val rayTraceResult = FairyWeaponUtils.rayTraceIgnoreEntity(world, player, false, additionalReach)
+    val rayTraceResult = rayTraceIgnoreEntity(world, player, false, additionalReach)
     val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
     return MagicSelector(WorldRayTraceResult(world, rayTraceResult, position))
 }
 
 fun <E : Entity> MagicSelector.Companion.rayTrace(world: World, player: EntityPlayer, additionalReach: Double, classEntity: Class<E>, filterEntity: (E) -> Boolean): MagicSelector<WorldRayTraceResult> {
-    val rayTraceResult = FairyWeaponUtils.rayTrace<E>(world, player, false, additionalReach, classEntity) { filterEntity(it!!) }
+    val rayTraceResult = rayTrace(world, player, false, additionalReach, classEntity, filterEntity)
     val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
     return MagicSelector(WorldRayTraceResult(world, rayTraceResult, position))
 }
