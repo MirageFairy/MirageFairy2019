@@ -846,5 +846,5 @@ val fairyWeaponModule = module {
 
     }
 
-    magicMessageModule(this)
+    magicMessageModule()
 }

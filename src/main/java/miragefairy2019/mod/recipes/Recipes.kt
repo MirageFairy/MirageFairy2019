@@ -3,14 +3,14 @@ package miragefairy2019.mod.recipes
 import miragefairy2019.lib.modinitializer.module
 
 val recipesModule = module {
-    fairyMetamorphosisRecipeModule(this)
-    mortarRecipeModule(this)
-    fairyDilutionRecipeModule(this)
-    fairySummoningRecipeModule(this)
+    fairyMetamorphosisRecipeModule()
+    mortarRecipeModule()
+    fairyDilutionRecipeModule()
+    fairySummoningRecipeModule()
     Mfa.mfaModule(this)
-    fairyCrystalDropLoaderModule(this)
-    fairyLogDropLoaderModule(this)
-    slabUncraftRecipeModule(this)
+    fairyCrystalDropLoaderModule()
+    fairyLogDropLoaderModule()
+    slabUncraftRecipeModule()
     miniaRecipe(this)
-    fairyTamingRecipeModule(this)
+    fairyTamingRecipeModule()
 }

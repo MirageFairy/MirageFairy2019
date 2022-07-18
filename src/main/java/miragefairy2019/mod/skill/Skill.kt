@@ -64,5 +64,5 @@ val skillModule = module {
         })
     }
 
-    skillGuiModule(this)
+    skillGuiModule()
 }

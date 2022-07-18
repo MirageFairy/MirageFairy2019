@@ -27,22 +27,22 @@ import miragefairy2019.mod.systems.systemsModule
 val modules = module {
 
     Main.mainModule(this)
-    jeiModule(this)
+    jeiModule()
 
-    artifactsModule(this)
-    pedestalModule(this)
-    materialModule(this)
-    systemsModule(this)
-    recipesModule(this)
+    artifactsModule()
+    pedestalModule()
+    materialModule()
+    systemsModule()
+    recipesModule()
 
-    playerAuraModule(this)
+    playerAuraModule()
     PlacedItem.placedItemMdule(this)
-    skillModule(this)
-    fairyModule(this)
-    fairyWeaponModule(this)
-    fairyRelationModule(this)
-    fairyBoxModule(this)
-    magicPlantModule(this)
+    skillModule()
+    fairyModule()
+    fairyWeaponModule()
+    fairyRelationModule()
+    fairyBoxModule()
+    magicPlantModule()
 
     // TODO move
     onMakeIngredientFactory {

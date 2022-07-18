@@ -3,15 +3,15 @@ package miragefairy2019.mod.systems
 import miragefairy2019.lib.modinitializer.module
 
 val systemsModule = module {
-    manaModule(this)
-    ergModule(this)
-    masteryModule(this)
-    damageSourceModule(this)
-    manualRepairModule(this)
-    combineModule(this)
+    manaModule()
+    ergModule()
+    masteryModule()
+    damageSourceModule()
+    manualRepairModule()
+    combineModule()
     VanillaItemBlocking.vanillaItemBlockingModule(this)
-    vanillaOreNamesModule(this)
+    vanillaOreNamesModule()
     Ae2SpatialIoBlocking.ae2SpatialIoBlockingModule(this)
     DaemonSystem.daemonSystemModule(this)
-    facedCursorModule(this)
+    facedCursorModule()
 }
