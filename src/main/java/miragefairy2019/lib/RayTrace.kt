@@ -8,6 +8,32 @@ import net.minecraft.util.math.RayTraceResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
+
+sealed class RayTraceWrapper(val targetPosition: Vec3d)
+
+sealed class HitRayTraceWrapper(val rayTraceResult: RayTraceResult) : RayTraceWrapper(rayTraceResult.hitVec)
+
+class BlockRayTraceWrapper(rayTraceResult: RayTraceResult) : HitRayTraceWrapper(rayTraceResult) {
+    init {
+        require(rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK)
+    }
+}
+
+class EntityRayTraceWrapper(rayTraceResult: RayTraceResult) : HitRayTraceWrapper(rayTraceResult) {
+    init {
+        require(rayTraceResult.typeOfHit == RayTraceResult.Type.ENTITY)
+    }
+}
+
+class MissRayTraceWrapper(targetPosition: Vec3d) : RayTraceWrapper(targetPosition)
+
+fun RayTraceResult.toRayTraceWrapper() = when (this.typeOfHit) {
+    RayTraceResult.Type.BLOCK -> BlockRayTraceWrapper(this)
+    RayTraceResult.Type.ENTITY -> EntityRayTraceWrapper(this)
+    else -> error("Invalid type: ${this.typeOfHit}")
+}
+
+
 fun <E : Entity> rayTrace(
     world: World,
     player: EntityPlayer,
