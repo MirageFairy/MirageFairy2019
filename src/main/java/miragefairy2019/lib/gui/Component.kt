@@ -20,6 +20,9 @@ interface IComponent {
     fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) = Unit
 
     @SideOnly(Side.CLIENT)
+    fun drawSlotOverlay(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
+
+    @SideOnly(Side.CLIENT)
     fun drawTooltip(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
 
     @SideOnly(Side.CLIENT)
@@ -48,6 +51,7 @@ abstract class GuiComponent(private val container: ContainerComponent) : GuiCont
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
+        container.components.forEach { it.drawSlotOverlay(this, PointInt(mouseX, mouseY), partialTicks) }
         container.components.forEach { it.drawTooltip(this, PointInt(mouseX, mouseY), partialTicks) }
         renderHoveredToolTip(mouseX, mouseY)
     }
