@@ -12,7 +12,6 @@ import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.boolean
 import miragefairy2019.mod.fairyweapon.magic4.boost
@@ -28,6 +27,7 @@ import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
+import miragefairy2019.mod.magicplant.itemMirageFlowerSeeds
 import miragefairy2019.mod.skill.Mastery
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
@@ -166,7 +166,7 @@ class ItemFlowerPickingBell(baseFortune: Double, extraItemDropRateFactor: Double
                             // 種の追加ドロップ
                             if (!world.isRemote) {
                                 val count = world.rand.randomInt(extraItemDropRate() * productionBoost())
-                                if (count > 0) MirageFlower.itemMirageFlowerSeeds().createItemStack(count = count).drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
+                                if (count > 0) itemMirageFlowerSeeds().createItemStack(count = count).drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
                             }
 
                             // 破壊したばかりのブロックの周辺のアイテムを集める

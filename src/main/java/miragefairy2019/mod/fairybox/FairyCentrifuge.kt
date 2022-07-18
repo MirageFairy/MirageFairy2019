@@ -91,12 +91,12 @@ import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.FairyMaterialCard
-import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.artifacts.get
 import miragefairy2019.mod.artifacts.itemFairyMaterials
 import miragefairy2019.mod.artifacts.itemFertilizer
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
+import miragefairy2019.mod.magicplant.itemMirageFlowerSeeds
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
 import mirrg.kotlin.hydrogen.atLeast
@@ -470,7 +470,7 @@ val fairyCentrifugeModule = module {
             output(Items.MELON_SEEDS.createItemStack(), 0.01, 2.0) // 1% スイカの種
             output(Items.PUMPKIN_SEEDS.createItemStack(), 0.01, 2.0) // 1% カボチャの種
             output(Items.BEETROOT_SEEDS.createItemStack(), 0.01, 2.0) // 1% ビートルートの種
-            output(MirageFlower.itemMirageFlowerSeeds().createItemStack(), 0.01, 2.0) // 1% ミラージュフラワーの種
+            output(itemMirageFlowerSeeds().createItemStack(), 0.01, 2.0) // 1% ミラージュフラワーの種
         }
 
     }

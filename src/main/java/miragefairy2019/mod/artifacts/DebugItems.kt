@@ -26,6 +26,9 @@ import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.fairy.colorSet
 import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.fairy.rare
+import miragefairy2019.mod.magicplant.calculateGrowthRate
+import miragefairy2019.mod.magicplant.getGrowthRateInFloor
+import miragefairy2019.mod.magicplant.growthRate
 import miragefairy2019.mod.oreseed.ApiOreSeedDrop
 import miragefairy2019.mod.oreseed.EnumOreSeedType
 import miragefairy2019.mod.oreseed.EnumVariantOreSeed

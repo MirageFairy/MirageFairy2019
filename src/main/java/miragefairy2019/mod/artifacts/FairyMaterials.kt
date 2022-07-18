@@ -41,6 +41,7 @@ import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionSpawnItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
+import miragefairy2019.mod.magicplant.itemMirageFlowerSeeds
 import mirrg.kotlin.hydrogen.toUpperCamelCase
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.init.Items
@@ -374,7 +375,7 @@ enum class FairyMaterialCard(
                 ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                     it.conditions += FairyStickCraftConditionUseItem(WandType.POLISHING.ingredient)
                     it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
-                    it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds()), 50)
+                    it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(itemMirageFlowerSeeds()), 50)
                     it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustCinnabar"), 4)
                     it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[MIRAGE_FLOWER_OIL_BOTTLE].createItemStack() }
                 })
@@ -385,7 +386,7 @@ enum class FairyMaterialCard(
                 ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
                     it.conditions += FairyStickCraftConditionUseItem(WandType.DISTORTION.ingredient)
                     it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(Items.GLASS_BOTTLE))
-                    it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(MirageFlower.itemMirageFlowerSeeds()), 40)
+                    it.conditions += FairyStickCraftConditionConsumeItem(Ingredient.fromItem(itemMirageFlowerSeeds()), 40)
                     it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustCinnabar"), 3)
                     it.conditions += FairyStickCraftConditionSpawnItem { itemFairyMaterials[MIRAGE_FLOWER_OIL_BOTTLE].createItemStack() }
                 })
@@ -397,7 +398,7 @@ enum class FairyMaterialCard(
                     process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
                     process { !Mana.GAIA + !Erg.FLAME * 2.0 }
                     process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
-                    input(MirageFlower.itemMirageFlowerSeeds().createItemStack().ingredient, 30)
+                    input(itemMirageFlowerSeeds().createItemStack().ingredient, 30)
                     input("dustCinnabar".oreIngredient, 2)
                     input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
                     output(itemFairyMaterials[MIRAGE_FLOWER_OIL_BOTTLE].createItemStack(), 1.0)

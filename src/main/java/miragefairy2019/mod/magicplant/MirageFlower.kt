@@ -1,4 +1,4 @@
-package miragefairy2019.mod.artifacts
+package miragefairy2019.mod.magicplant
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.IFairySpec
@@ -29,6 +29,10 @@ import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.artifacts.FairyCrystal
+import miragefairy2019.mod.artifacts.FairyMaterialCard
+import miragefairy2019.mod.artifacts.get
+import miragefairy2019.mod.artifacts.itemFairyMaterials
 import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
@@ -71,80 +75,79 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import java.util.Random
 
-object MirageFlower {
-    lateinit var blockMirageFlower: () -> BlockMirageFlower
-    lateinit var itemMirageFlowerSeeds: () -> ItemMirageFlowerSeeds<BlockMirageFlower>
-    val mirageFlowerModule = module {
+lateinit var blockMirageFlower: () -> BlockMirageFlower
+lateinit var itemMirageFlowerSeeds: () -> ItemMirageFlowerSeeds<BlockMirageFlower>
 
-        blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
-            setUnlocalizedName("mirageFlower")
-            setCreativeTab { Main.creativeTab }
-            onRegisterBlock {
-                PickHandlerRegistry.pickHandlers += IPickHandler { world, blockPos, player ->
-                    val blockState = world.getBlockState(blockPos)
-                    val block = blockState.block as? BlockMirageFlower ?: return@IPickHandler null
-                    if (!block.isMaxAge(blockState)) return@IPickHandler null
-                    IPickExecutor { fortune -> block.tryPick(world, blockPos, player, fortune) }
-                }
-            }
-            makeBlockStates(resourceName.path) {
-                DataBlockStates(variants = (0..3).associate { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") })
+val mirageFlowerModule = module {
+
+    blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
+        setUnlocalizedName("mirageFlower")
+        setCreativeTab { Main.creativeTab }
+        onRegisterBlock {
+            PickHandlerRegistry.pickHandlers += IPickHandler { world, blockPos, player ->
+                val blockState = world.getBlockState(blockPos)
+                val block = blockState.block as? BlockMirageFlower ?: return@IPickHandler null
+                if (!block.isMaxAge(blockState)) return@IPickHandler null
+                IPickExecutor { fortune -> block.tryPick(world, blockPos, player, fortune) }
             }
         }
-        run {
-            fun makeBlockModel(name: String) = makeBlockModel(name) {
-                DataModel(
-                    parent = "block/cross",
-                    textures = mapOf(
-                        "particle" to "miragefairy2019:blocks/$name",
-                        "cross" to "miragefairy2019:blocks/$name"
-                    )
-                )
-            }
-            makeBlockModel("mirage_flower_age0")
-            makeBlockModel("mirage_flower_age1")
-            makeBlockModel("mirage_flower_age2")
-            makeBlockModel("mirage_flower_age3")
+        makeBlockStates(resourceName.path) {
+            DataBlockStates(variants = (0..3).associate { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") })
         }
-        itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower()) }, "mirage_flower_seeds") {
-            setUnlocalizedName("mirageFlowerSeeds")
-            setCreativeTab { Main.creativeTab }
-            setCustomModelResourceLocation()
-        }
-        makeItemModel("mirage_flower_seeds") { generated }
-
-        // 地形生成
-        onHookDecorator {
-            val biomeDecorators = listOf(
-
-                // どこでも湧く
-                BiomeDecoratorFlowers(WorldGenBush(blockMirageFlower(), blockMirageFlower().getState(3)).apply {
-                    blockCountMin = 1
-                    blockCountMax = 3
-                }, 0.01) { true },
-
-                // 山岳のみ
-                BiomeDecoratorFlowers(WorldGenBush(blockMirageFlower(), blockMirageFlower().getState(3)).apply {
-                    blockCountMin = 1
-                    blockCountMax = 10
-                }, 0.1) { BiomeDictionary.hasType(it, BiomeDictionary.Type.MOUNTAIN); },
-
-                // 森林のみ
-                BiomeDecoratorFlowers(WorldGenBush(blockMirageFlower(), blockMirageFlower().getState(3)).apply {
-                    blockCountMin = 1
-                    blockCountMax = 10
-                }, 0.5) { BiomeDictionary.hasType(it, BiomeDictionary.Type.FOREST); }
-
-            )
-            MinecraftForge.EVENT_BUS.register(object {
-                @SubscribeEvent
-                fun handle(event: DecorateBiomeEvent.Post) = biomeDecorators.forEach { it.decorate(event) }
-            })
-        }
-
-        onAddRecipe { MinecraftForge.addGrassSeed(ItemStack(itemMirageFlowerSeeds()), 1) } // 雑草が種をドロップ
-
     }
+    run {
+        fun makeBlockModel(name: String) = makeBlockModel(name) {
+            DataModel(
+                parent = "block/cross",
+                textures = mapOf(
+                    "particle" to "miragefairy2019:blocks/$name",
+                    "cross" to "miragefairy2019:blocks/$name"
+                )
+            )
+        }
+        makeBlockModel("mirage_flower_age0")
+        makeBlockModel("mirage_flower_age1")
+        makeBlockModel("mirage_flower_age2")
+        makeBlockModel("mirage_flower_age3")
+    }
+    itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower()) }, "mirage_flower_seeds") {
+        setUnlocalizedName("mirageFlowerSeeds")
+        setCreativeTab { Main.creativeTab }
+        setCustomModelResourceLocation()
+    }
+    makeItemModel("mirage_flower_seeds") { generated }
+
+    // 地形生成
+    onHookDecorator {
+        val biomeDecorators = listOf(
+
+            // どこでも湧く
+            BiomeDecoratorFlowers(WorldGenBush(blockMirageFlower(), blockMirageFlower().getState(3)).apply {
+                blockCountMin = 1
+                blockCountMax = 3
+            }, 0.01) { true },
+
+            // 山岳のみ
+            BiomeDecoratorFlowers(WorldGenBush(blockMirageFlower(), blockMirageFlower().getState(3)).apply {
+                blockCountMin = 1
+                blockCountMax = 10
+            }, 0.1) { BiomeDictionary.hasType(it, BiomeDictionary.Type.MOUNTAIN); },
+
+            // 森林のみ
+            BiomeDecoratorFlowers(WorldGenBush(blockMirageFlower(), blockMirageFlower().getState(3)).apply {
+                blockCountMin = 1
+                blockCountMax = 10
+            }, 0.5) { BiomeDictionary.hasType(it, BiomeDictionary.Type.FOREST); }
+
+        )
+        MinecraftForge.EVENT_BUS.register(object {
+            @SubscribeEvent
+            fun handle(event: DecorateBiomeEvent.Post) = biomeDecorators.forEach { it.decorate(event) }
+        })
+    }
+
+    onAddRecipe { MinecraftForge.addGrassSeed(ItemStack(itemMirageFlowerSeeds()), 1) } // 雑草が種をドロップ
+
 }
 
 fun calculateGrowthRate(world: World, blockPos: BlockPos): List<Pair<String, Double>> {
@@ -282,7 +285,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
     // ドロップ
 
     // クリエイティブピックでの取得アイテム。
-    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(MirageFlower.itemMirageFlowerSeeds())
+    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(itemMirageFlowerSeeds())
 
     /*
      * Ageが最大のとき、種を1個ドロップする。
@@ -295,11 +298,11 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
         val random = if (world is World) world.rand else Random()
 
         // 種1個は確定でドロップ
-        if (isBreaking) drops += ItemStack(MirageFlower.itemMirageFlowerSeeds())
+        if (isBreaking) drops += ItemStack(itemMirageFlowerSeeds())
         // サイズが2以上なら確定で茎をドロップ
         if (isBreaking && getAge(state) >= 2) repeat(random.randomInt(1 + fortune * 0.2)) { drops += itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_LEAF].createItemStack() }
         // 追加の種
-        if (getAge(state) >= 3) repeat(random.randomInt(fortune * 0.01)) { drops += ItemStack(MirageFlower.itemMirageFlowerSeeds()) }
+        if (getAge(state) >= 3) repeat(random.randomInt(fortune * 0.01)) { drops += ItemStack(itemMirageFlowerSeeds()) }
         // クリスタル
         if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) { drops += FairyCrystal.variantFairyCrystal().createItemStack() }
         // ミラジウム
@@ -379,5 +382,5 @@ class ItemMirageFlowerSeeds<T>(private val block: T) : Item(), IPlantable where 
     }
 
     override fun getPlantType(world: IBlockAccess, pos: BlockPos) = EnumPlantType.Plains // 常に草の上に蒔ける
-    override fun getPlant(world: IBlockAccess, pos: BlockPos): IBlockState = MirageFlower.blockMirageFlower().defaultState // 常にAge0のミラ花を与える
+    override fun getPlant(world: IBlockAccess, pos: BlockPos): IBlockState = blockMirageFlower().defaultState // 常にAge0のミラ花を与える
 }

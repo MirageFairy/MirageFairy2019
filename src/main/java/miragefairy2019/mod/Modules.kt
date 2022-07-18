@@ -15,6 +15,7 @@ import miragefairy2019.mod.fairy.fairyModule
 import miragefairy2019.mod.fairybox.fairyBoxModule
 import miragefairy2019.mod.fairyrelation.fairyRelationModule
 import miragefairy2019.mod.fairyweapon.fairyWeaponModule
+import miragefairy2019.mod.magicplant.magicPlantModule
 import miragefairy2019.mod.material.materialModule
 import miragefairy2019.mod.pedestal.pedestalModule
 import miragefairy2019.mod.placeditem.PlacedItem
@@ -41,6 +42,7 @@ val modules = module {
     fairyWeaponModule(this)
     fairyRelationModule(this)
     fairyBoxModule(this)
+    magicPlantModule(this)
 
     // TODO move
     onMakeIngredientFactory {

@@ -3,8 +3,8 @@ package miragefairy2019.mod.fairyrelation
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.ingredient
-import miragefairy2019.mod.artifacts.MirageFlower
 import miragefairy2019.mod.fairy.FairyCard
+import miragefairy2019.mod.magicplant.blockMirageFlower
 import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.EnumVariantMaterials1
 import net.minecraft.block.Block
@@ -255,7 +255,7 @@ val fairyRelationModule = module {
             { Ingredient.fromStacks(ItemStack(Blocks.SAPLING, 1, 1)) }
         )
     }
-    FairyCard.MIRAGE_FLOWER.register { block({ MirageFlower.blockMirageFlower() }) }
+    FairyCard.MIRAGE_FLOWER.register { block({ blockMirageFlower() }) }
     FairyCard.SUGAR_CANE.register { block({ Blocks.REEDS }) }
     FairyCard.SUGAR_CANE.register { item({ Items.REEDS }) }
     FairyCard.POTATO.register { block({ Blocks.POTATOES }) }
