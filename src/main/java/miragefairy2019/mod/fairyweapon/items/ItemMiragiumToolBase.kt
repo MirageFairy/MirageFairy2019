@@ -3,7 +3,7 @@ package miragefairy2019.mod.fairyweapon.items
 import miragefairy2019.lib.MagicSelector
 import miragefairy2019.lib.doEffect
 import miragefairy2019.lib.position
-import miragefairy2019.lib.rayTrace
+import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.breakBlock
@@ -38,7 +38,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TODO translate
 
     override fun getMagic() = magic {
-        val rayTraceMagicSelector = MagicSelector.rayTrace(world, player, 0.0) // 視線判定
+        val rayTraceMagicSelector = MagicSelector.rayTraceBlock(world, player, 0.0) // 視線判定
         val cursorMagicSelector = rayTraceMagicSelector.position // 視点判定
 
         fun fail(color: Int, magicMessage: MagicMessage) = object : MagicHandler() {

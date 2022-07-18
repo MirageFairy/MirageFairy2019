@@ -70,12 +70,6 @@ class WorldRayTraceResult(
     val sideHit get() = rayTraceResult?.sideHit
 }
 
-fun MagicSelector.Companion.rayTrace(world: World, player: EntityPlayer, additionalReach: Double): MagicSelector<WorldRayTraceResult> {
-    val rayTraceResult = rayTrace(world, player, false, additionalReach, Entity::class.java) { true }
-    val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
-    return MagicSelector(WorldRayTraceResult(world, rayTraceResult, position))
-}
-
 fun MagicSelector.Companion.rayTraceBlock(world: World, player: EntityPlayer, additionalReach: Double): MagicSelector<WorldRayTraceResult> {
     val rayTraceResult = rayTraceIgnoreEntity(world, player, false, additionalReach)
     val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
