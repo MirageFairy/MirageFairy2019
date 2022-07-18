@@ -52,7 +52,7 @@ fun RectangleContext.button(action: (gui: GuiComponent, mouse: PointInt, mouseBu
 
 class ComponentTooltip(container: ContainerComponent, rectangle: RectangleInt, private val textSupplier: () -> List<String>?) : ComponentRectangleBase(container, rectangle) {
     @SideOnly(Side.CLIENT)
-    override fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
+    override fun drawTooltip(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
         if (mouse - gui.position !in rectangle) return
         val text = textSupplier() ?: return
         gui.drawHoveringText(text, mouse.x, mouse.y)

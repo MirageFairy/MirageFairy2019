@@ -20,7 +20,7 @@ interface IComponent {
     fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) = Unit
 
     @SideOnly(Side.CLIENT)
-    fun drawScreen(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
+    fun drawTooltip(gui: GuiComponent, mouse: PointInt, partialTicks: Float) = Unit
 
     @SideOnly(Side.CLIENT)
     fun mouseClicked(gui: GuiComponent, mouse: PointInt, mouseButton: Int) = Unit
@@ -48,8 +48,8 @@ abstract class GuiComponent(private val container: ContainerComponent) : GuiCont
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
+        container.components.forEach { it.drawTooltip(this, PointInt(mouseX, mouseY), partialTicks) }
         renderHoveredToolTip(mouseX, mouseY)
-        container.components.forEach { it.drawScreen(this, PointInt(mouseX, mouseY), partialTicks) }
     }
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
