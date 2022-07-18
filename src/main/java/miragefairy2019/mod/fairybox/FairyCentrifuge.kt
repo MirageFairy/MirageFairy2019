@@ -17,6 +17,9 @@ import miragefairy2019.lib.fairySpec
 import miragefairy2019.lib.get
 import miragefairy2019.lib.getFairyCentrifugeCraftRecipe
 import miragefairy2019.lib.gui.Alignment
+import miragefairy2019.lib.gui.ComponentPointBase
+import miragefairy2019.lib.gui.ComponentSlot
+import miragefairy2019.lib.gui.ContainerComponent
 import miragefairy2019.lib.gui.ContainerIntegrated
 import miragefairy2019.lib.gui.GuiComponent
 import miragefairy2019.lib.gui.GuiIntegrated
@@ -26,6 +29,7 @@ import miragefairy2019.lib.gui.WindowProperty
 import miragefairy2019.lib.gui.container
 import miragefairy2019.lib.gui.label
 import miragefairy2019.lib.gui.point
+import miragefairy2019.lib.gui.position
 import miragefairy2019.lib.gui.rectangle
 import miragefairy2019.lib.gui.slot
 import miragefairy2019.lib.gui.slotIcon
@@ -68,16 +72,21 @@ import miragefairy2019.libkt.PointInt
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.darkBlue
+import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.flatten
 import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.green
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
+import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.randomInt
+import miragefairy2019.libkt.red
 import miragefairy2019.libkt.sandwich
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.underline
+import miragefairy2019.libkt.white
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
@@ -721,8 +730,9 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         // 入力
         repeat(9) { c ->
             point(3 + 4 + 18 * c, yi) {
-                slot { x, y -> Slot(inputInventory, c, x, y) } belongs IN
+                val slot = slot { x, y -> Slot(inputInventory, c, x, y) } belongs IN
                 slotIcon { TEXTURE_INPUT_SLOT }
+                container.components += ComponentFairyScore(container, point, slot)
             }
         }
         yi += 18
@@ -759,7 +769,15 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
             }
 
             point(3 + 4 + 18 * c, yi + 18 * 1) {
-                slot { x, y -> SmartSlot(fairyInventory, index, x, y) } belongs FAIRY
+                slot { x, y ->
+                    object : FairySlot(fairyInventory, index, x, y) {
+                        override fun getScore(itemStack: ItemStack): Double? {
+                            val process = recipeMatchResult?.recipe?.getProcess(index) ?: return null
+                            val arguments = getArguments(itemStack) ?: return null
+                            return process.getScore(arguments)
+                        }
+                    }
+                } belongs FAIRY
                 slotIcon { TEXTURE_FAIRY_SLOT }
             }
 
@@ -788,8 +806,9 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         // 出力
         repeat(9) { c ->
             point(3 + 4 + 18 * c, yi) {
-                slot { x, y -> SlotResult(player, outputInventory, c, x, y) } belongs OUT
+                val slot = slot { x, y -> SlotResult(player, outputInventory, c, x, y) } belongs OUT
                 slotIcon { TEXTURE_OUTPUT_SLOT }
+                container.components += ComponentFairyScore(container, point, slot)
             }
         }
         yi += 18
@@ -818,7 +837,10 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         // プレイヤーインベントリメイン
         repeat(3) { r ->
             repeat(9) { c ->
-                point(3 + 4 + 18 * c, yi + 18 * r).slot { x, y -> Slot(player.inventory, 9 + 9 * r + c, x, y) } belongs PLAYER
+                point(3 + 4 + 18 * c, yi + 18 * r) {
+                    val slot = slot { x, y -> Slot(player.inventory, 9 + 9 * r + c, x, y) } belongs PLAYER
+                    container.components += ComponentFairyScore(container, point, slot)
+                }
             }
         }
         yi += 18 * 3
@@ -827,7 +849,10 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
         // プレイヤーインベントリ最下段
         repeat(9) { c ->
-            point(3 + 4 + 18 * c, yi).slot { x, y -> Slot(player.inventory, c, x, y) } belongs PLAYER_HOTBAR
+            point(3 + 4 + 18 * c, yi) {
+                val slot = slot { x, y -> Slot(player.inventory, c, x, y) } belongs PLAYER_HOTBAR
+                container.components += ComponentFairyScore(container, point, slot)
+            }
         }
         yi += 18
 
@@ -854,6 +879,39 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
     }
 
+}
+
+abstract class FairySlot(inventory: IInventory, index: Int, xPosition: Int, yPosition: Int) : SmartSlot(inventory, index, xPosition, yPosition) {
+    abstract fun getScore(itemStack: ItemStack): Double?
+}
+
+class ComponentFairyScore(container: ContainerComponent, point: PointInt, private val slot: ComponentSlot) : ComponentPointBase(container, point) {
+    override fun drawSlotOverlay(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
+        val fairySlot = gui.slotUnderMouse
+        if (fairySlot is FairySlot) {
+            val oldScore = fairySlot.getScore(fairySlot.stack) ?: 0.0
+            val newScore = fairySlot.getScore(slot.slot.stack) ?: return
+            val text = when {
+                newScore < oldScore -> formattedText { (newScore formatAs "%.0f")().red }
+                newScore > oldScore -> formattedText { (newScore formatAs "%.0f")().green }
+                else -> formattedText { (newScore formatAs "%.0f")().white }
+            }
+            val basePoint = gui.position + point + PointInt(9, 0)
+            val width = gui.fontRenderer.getStringWidth(text)
+            val height = gui.fontRenderer.FONT_HEIGHT
+
+            GlStateManager.disableLighting()
+            GlStateManager.disableDepth()
+            try {
+                Gui.drawRect(basePoint.x - 8, basePoint.y + 1, basePoint.x + 8, basePoint.y + height + 1, 0xC0000000.toInt())
+                gui.fontRenderer.drawStringCentered(text, basePoint.x, basePoint.y + 2, 0xFFFFFF)
+            } finally {
+                GlStateManager.enableLighting()
+                GlStateManager.enableDepth()
+            }
+
+        }
+    }
 }
 
 @SideOnly(Side.CLIENT)
