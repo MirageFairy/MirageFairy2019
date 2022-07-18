@@ -2,6 +2,7 @@ package miragefairy2019.mod.fairyweapon.items
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
+import miragefairy2019.lib.BlockRayTraceWrapper
 import miragefairy2019.lib.MagicSelector
 import miragefairy2019.lib.doEffect
 import miragefairy2019.lib.position
@@ -23,13 +24,12 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.util.SoundCategory
-import net.minecraft.util.math.RayTraceResult
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
 class ItemLightMagicWand : ItemFairyWeaponMagic4() {
-    val additionalReach = status("additionalReach", { 0.0 + !Mana.WIND / 5.0 + !Erg.LIGHT / 2.0 atMost 40.0 }, { float2 })
+    val additionalReach = status("additionalReach", { 5.0 + !Mana.WIND / 5.0 + !Erg.LIGHT / 2.0 atMost 40.0 }, { float2 })
     val coolTime = status("coolTime", { 100.0 / (1.0 + !Mana.GAIA / 30.0 + !Erg.FLAME / 20.0) }, { duration })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.magicCombat / 100.0 }, { boost })
 
@@ -78,10 +78,10 @@ class ItemLightMagicWand : ItemFairyWeaponMagic4() {
                 if (world.isRemote) return EnumActionResult.SUCCESS
 
                 // 視線判定
-                if (rayTraceMagicSelector.item.rayTraceResult?.typeOfHit != RayTraceResult.Type.BLOCK) return EnumActionResult.SUCCESS
-                var blockPos = rayTraceMagicSelector.item.hitBlockPos!!
-                val side = rayTraceMagicSelector.item.sideHit!!
-                val position = rayTraceMagicSelector.item.targetPosition
+                if (rayTraceMagicSelector.item.rayTraceWrapper !is BlockRayTraceWrapper) return EnumActionResult.SUCCESS
+                var blockPos = rayTraceMagicSelector.item.rayTraceWrapper.blockPos
+                val side = rayTraceMagicSelector.item.rayTraceWrapper.side
+                val position = rayTraceMagicSelector.item.rayTraceWrapper.targetPosition
 
                 // 置換不可能な場合はそのブロックの表面に対象を変更
                 val blockState = world.getBlockState(blockPos)

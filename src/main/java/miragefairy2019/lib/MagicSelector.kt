@@ -55,31 +55,13 @@ fun MagicSelector.Companion.sphere(world: World, position: Vec3d, radius: Double
 fun WorldSphere.doEffect() = spawnParticleSphericalRange(world, position, radius)
 
 
-class WorldRayTrace(
-    val world: World,
-    val rayTraceWrapper: RayTraceWrapper
-) {
-    val rayTraceResult = rayTraceWrapper.rayTraceResult
-    val targetPosition = rayTraceWrapper.targetPosition
-    val isHit get() = rayTraceWrapper.isHit
+class WorldRayTrace(val world: World, val rayTraceWrapper: RayTraceWrapper)
 
-    val hitBlockPos get() = rayTraceResult?.blockPos
-    val blockPos get() = hitBlockPos ?: BlockPos(targetPosition)
-    val hitEntity get() = rayTraceResult?.entityHit
-    val sideHit get() = rayTraceResult?.sideHit
-}
+fun MagicSelector.Companion.rayTraceBlock(world: World, player: EntityPlayer, additionalReach: Double) = MagicSelector(WorldRayTrace(world, rayTraceBlock(world, player, false, additionalReach)))
 
-fun MagicSelector.Companion.rayTraceBlock(world: World, player: EntityPlayer, additionalReach: Double): MagicSelector<WorldRayTrace> {
-    val rayTraceWrapper = rayTraceBlock(world, player, false, additionalReach)
-    return MagicSelector(WorldRayTrace(world, rayTraceWrapper))
-}
+fun <E : Entity> MagicSelector.Companion.rayTrace(world: World, player: EntityPlayer, additionalReach: Double, classEntity: Class<E>, filterEntity: (E) -> Boolean) = MagicSelector(WorldRayTrace(world, rayTrace(world, player, false, additionalReach, classEntity, filterEntity)))
 
-fun <E : Entity> MagicSelector.Companion.rayTrace(world: World, player: EntityPlayer, additionalReach: Double, classEntity: Class<E>, filterEntity: (E) -> Boolean): MagicSelector<WorldRayTrace> {
-    val rayTraceWrapper = rayTrace(world, player, false, additionalReach, classEntity, filterEntity)
-    return MagicSelector(WorldRayTrace(world, rayTraceWrapper))
-}
-
-val MagicSelector<WorldRayTrace>.position get() = MagicSelector.position(item.world, item.targetPosition)
+val MagicSelector<WorldRayTrace>.position get() = MagicSelector.position(item.world, item.rayTraceWrapper.targetPosition)
 
 
 class WorldEntities<out E : Entity>(val world: World, val entities: List<E>)

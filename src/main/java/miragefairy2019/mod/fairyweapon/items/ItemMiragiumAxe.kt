@@ -13,6 +13,7 @@ import miragefairy2019.api.Mana.FIRE
 import miragefairy2019.api.Mana.GAIA
 import miragefairy2019.api.Mana.SHINE
 import miragefairy2019.api.Mana.WIND
+import miragefairy2019.lib.BlockRayTraceWrapper
 import miragefairy2019.lib.MagicSelector
 import miragefairy2019.lib.doEffect
 import miragefairy2019.lib.position
@@ -86,8 +87,8 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
 
         if (!hasPartnerFairy) return@magic error(0xFF00FF, MagicMessage.NO_FAIRY) // パートナー妖精判定
         if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic error(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
-        val blockPos = rayTraceMagicSelector.item.hitBlockPos ?: return@magic error(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
-        val targets = getTargets(blockPos)
+        if (rayTraceMagicSelector.item.rayTraceWrapper !is BlockRayTraceWrapper) return@magic error(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
+        val targets = getTargets(rayTraceMagicSelector.item.rayTraceWrapper.blockPos)
         if (targets.isEmpty()) return@magic error(0xFF8800, MagicMessage.NO_TARGET) // 対象判定
         if (player.cooldownTracker.hasCooldown(weaponItem)) return@magic error(0xFFFF00, MagicMessage.COOL_TIME) // クールタイム判定
 
@@ -121,7 +122,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
                         weaponItemStack.damageItem(world.rand.randomInt(wear()), player) // 耐久消費
 
                         // 音取得
-                        blockState.block.getSoundType(blockState, world, blockPos, player).breakSound.let {
+                        blockState.block.getSoundType(blockState, world, rayTraceMagicSelector.item.rayTraceWrapper.blockPos, player).breakSound.let {
                             if (it !in breakSounds) breakSounds += it
                         }
 
@@ -133,7 +134,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
                             player = player,
                             itemStack = weaponItemStack,
                             blockPos = targetBlockPos,
-                            facing = rayTraceMagicSelector.item.rayTraceResult!!.sideHit,
+                            facing = rayTraceMagicSelector.item.rayTraceWrapper.side,
                             fortune = world.rand.randomInt(fortune()),
                             collection = collection()
                         )

@@ -3,6 +3,8 @@ package miragefairy2019.lib
 import miragefairy2019.libkt.axisAlignedBBOf
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.util.EnumFacing
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RayTraceResult
 import net.minecraft.util.math.Vec3d
@@ -10,35 +12,50 @@ import net.minecraft.world.World
 
 
 sealed class RayTraceWrapper {
-    abstract val rayTraceResult: RayTraceResult?
+    /** ヒットした座標、もしくは空中の座標を返します。 */
     abstract val targetPosition: Vec3d
     abstract val isHit: Boolean
+
+    /** ターゲットしているブロック座標、もしくは空中のブロック座標を返します。 */
+    abstract val blockPos: BlockPos
+
+    /** ターゲットしているブロックの手前の座標、もしくは空中のブロック座標を返します。 */
+    abstract val surfaceBlockPos: BlockPos
 }
 
 sealed class HitRayTraceWrapper(
-    override val rayTraceResult: RayTraceResult
+    protected val rayTraceResult: RayTraceResult
 ) : RayTraceWrapper() {
     override val targetPosition: Vec3d get() = rayTraceResult.hitVec
-    override val isHit = true
+    override val isHit get() = true
 }
 
 class BlockRayTraceWrapper(rayTraceResult: RayTraceResult) : HitRayTraceWrapper(rayTraceResult) {
     init {
         require(rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK)
     }
+
+    override val blockPos: BlockPos get() = rayTraceResult.blockPos
+    override val surfaceBlockPos: BlockPos get() = blockPos.offset(side)
+    val side: EnumFacing get() = rayTraceResult.sideHit
 }
 
 class EntityRayTraceWrapper(rayTraceResult: RayTraceResult) : HitRayTraceWrapper(rayTraceResult) {
     init {
         require(rayTraceResult.typeOfHit == RayTraceResult.Type.ENTITY)
     }
+
+    override val blockPos get() = BlockPos(targetPosition)
+    override val surfaceBlockPos get() = BlockPos(targetPosition)
+    val entity: Entity get() = rayTraceResult.entityHit
 }
 
 class MissRayTraceWrapper(
     override val targetPosition: Vec3d
 ) : RayTraceWrapper() {
-    override val rayTraceResult: Nothing? = null
-    override val isHit = false
+    override val isHit get() = false
+    override val blockPos get() = BlockPos(targetPosition)
+    override val surfaceBlockPos get() = BlockPos(targetPosition)
 }
 
 fun RayTraceResult.toRayTraceWrapper() = when (this.typeOfHit) {

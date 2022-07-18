@@ -140,7 +140,7 @@ class ItemAstronomicalObservationBook : Item() {
 
         // 天井が塞がれている場合は失敗
         val selector = MagicSelector.rayTraceBlock(world, player, 64.0)
-        if (selector.item.isHit) {
+        if (selector.item.rayTraceWrapper.isHit) {
             player.sendStatusMessage(textComponent { "空がよく見えない"().darkPurple }, true) // TODO translate
             return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
         }
