@@ -5,11 +5,9 @@ import miragefairy2019.libkt.sq
 import miragefairy2019.mod.fairyweapon.spawnParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleSphericalRange
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
-import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.RayTraceResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import kotlin.math.ceil
@@ -59,13 +57,12 @@ fun WorldSphere.doEffect() = spawnParticleSphericalRange(world, position, radius
 
 class WorldRayTraceResult(
     val world: World,
-    val rayTraceWrapper: RayTraceWrapper,
-    /** 空中の場合、null。 */
-    val rayTraceResult: RayTraceResult?
+    val rayTraceWrapper: RayTraceWrapper
 ) {
-    /** 何もヒットしなかった場合、空中の座標。 */
-    val targetPosition: Vec3d = rayTraceWrapper.targetPosition
-    val isHit get() = rayTraceResult != null
+    val rayTraceResult = rayTraceWrapper.rayTraceResult
+    val targetPosition = rayTraceWrapper.targetPosition
+    val isHit get() = rayTraceWrapper.isHit
+
     val hitBlockPos get() = rayTraceResult?.blockPos
     val blockPos get() = hitBlockPos ?: BlockPos(targetPosition)
     val hitEntity get() = rayTraceResult?.entityHit
@@ -74,12 +71,12 @@ class WorldRayTraceResult(
 
 fun MagicSelector.Companion.rayTraceBlock(world: World, player: EntityPlayer, additionalReach: Double): MagicSelector<WorldRayTraceResult> {
     val rayTraceWrapper = rayTraceBlock(world, player, false, additionalReach)
-    return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper, rayTraceWrapper.castOrNull<HitRayTraceWrapper>()?.rayTraceResult))
+    return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper))
 }
 
 fun <E : Entity> MagicSelector.Companion.rayTrace(world: World, player: EntityPlayer, additionalReach: Double, classEntity: Class<E>, filterEntity: (E) -> Boolean): MagicSelector<WorldRayTraceResult> {
     val rayTraceWrapper = rayTrace(world, player, false, additionalReach, classEntity, filterEntity)
-    return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper, rayTraceWrapper.castOrNull<HitRayTraceWrapper>()?.rayTraceResult))
+    return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper))
 }
 
 val MagicSelector<WorldRayTraceResult>.position get() = MagicSelector.position(item.world, item.targetPosition)

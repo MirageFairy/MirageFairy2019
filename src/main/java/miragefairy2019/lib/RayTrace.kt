@@ -9,9 +9,18 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 
-sealed class RayTraceWrapper(val targetPosition: Vec3d)
+sealed class RayTraceWrapper {
+    abstract val rayTraceResult: RayTraceResult?
+    abstract val targetPosition: Vec3d
+    abstract val isHit: Boolean
+}
 
-sealed class HitRayTraceWrapper(val rayTraceResult: RayTraceResult) : RayTraceWrapper(rayTraceResult.hitVec)
+sealed class HitRayTraceWrapper(
+    override val rayTraceResult: RayTraceResult
+) : RayTraceWrapper() {
+    override val targetPosition: Vec3d get() = rayTraceResult.hitVec
+    override val isHit = true
+}
 
 class BlockRayTraceWrapper(rayTraceResult: RayTraceResult) : HitRayTraceWrapper(rayTraceResult) {
     init {
@@ -25,7 +34,12 @@ class EntityRayTraceWrapper(rayTraceResult: RayTraceResult) : HitRayTraceWrapper
     }
 }
 
-class MissRayTraceWrapper(targetPosition: Vec3d) : RayTraceWrapper(targetPosition)
+class MissRayTraceWrapper(
+    override val targetPosition: Vec3d
+) : RayTraceWrapper() {
+    override val rayTraceResult: Nothing? = null
+    override val isHit = false
+}
 
 fun RayTraceResult.toRayTraceWrapper() = when (this.typeOfHit) {
     RayTraceResult.Type.BLOCK -> BlockRayTraceWrapper(this)
