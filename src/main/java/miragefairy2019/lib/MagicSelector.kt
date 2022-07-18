@@ -55,7 +55,7 @@ fun MagicSelector.Companion.sphere(world: World, position: Vec3d, radius: Double
 fun WorldSphere.doEffect() = spawnParticleSphericalRange(world, position, radius)
 
 
-class WorldRayTraceResult(
+class WorldRayTrace(
     val world: World,
     val rayTraceWrapper: RayTraceWrapper
 ) {
@@ -69,17 +69,17 @@ class WorldRayTraceResult(
     val sideHit get() = rayTraceResult?.sideHit
 }
 
-fun MagicSelector.Companion.rayTraceBlock(world: World, player: EntityPlayer, additionalReach: Double): MagicSelector<WorldRayTraceResult> {
+fun MagicSelector.Companion.rayTraceBlock(world: World, player: EntityPlayer, additionalReach: Double): MagicSelector<WorldRayTrace> {
     val rayTraceWrapper = rayTraceBlock(world, player, false, additionalReach)
-    return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper))
+    return MagicSelector(WorldRayTrace(world, rayTraceWrapper))
 }
 
-fun <E : Entity> MagicSelector.Companion.rayTrace(world: World, player: EntityPlayer, additionalReach: Double, classEntity: Class<E>, filterEntity: (E) -> Boolean): MagicSelector<WorldRayTraceResult> {
+fun <E : Entity> MagicSelector.Companion.rayTrace(world: World, player: EntityPlayer, additionalReach: Double, classEntity: Class<E>, filterEntity: (E) -> Boolean): MagicSelector<WorldRayTrace> {
     val rayTraceWrapper = rayTrace(world, player, false, additionalReach, classEntity, filterEntity)
-    return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper))
+    return MagicSelector(WorldRayTrace(world, rayTraceWrapper))
 }
 
-val MagicSelector<WorldRayTraceResult>.position get() = MagicSelector.position(item.world, item.targetPosition)
+val MagicSelector<WorldRayTrace>.position get() = MagicSelector.position(item.world, item.targetPosition)
 
 
 class WorldEntities<out E : Entity>(val world: World, val entities: List<E>)
