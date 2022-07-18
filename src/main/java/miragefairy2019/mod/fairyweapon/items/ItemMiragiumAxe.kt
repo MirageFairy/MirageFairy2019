@@ -55,6 +55,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
+// TODO -> : miragefairy2019.mod.fairyweapon.items.ItemMiragiumToolBase
 class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
     val power = status("power", { 27.0 + (!DARK + !DESTROY) / 1.0 }, { float2 })
     val breakSpeed = status("breakSpeed", { (2.0 + (!AQUA + !SLASH) / 30.0) * costFactor }, { float2 })
