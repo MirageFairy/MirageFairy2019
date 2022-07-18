@@ -1,8 +1,8 @@
 package miragefairy2019.lib
 
+import miragefairy2019.libkt.axisAlignedBBOf
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RayTraceResult
 import net.minecraft.util.math.Vec3d
@@ -20,47 +20,22 @@ fun <E : Entity> rayTrace(
     val eyePosition = Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ)
     val targetPosition = getTargetPosition(eyePosition, player.rotationPitch, player.rotationYaw, reachDistance)
 
+    val entries = mutableListOf<Pair<RayTraceResult, Double>>()
+
     // ブロックのレイトレース
-    val blockRayTraceResult = rayTraceIgnoreEntity(world, player, useLiquids, additionalReach)
-    val blockSquareDistance: Double = if (blockRayTraceResult != null) eyePosition.squareDistanceTo(blockRayTraceResult.hitVec) else 0.0
+    val blockRayTraceResult = world.rayTraceBlocks(eyePosition, targetPosition, useLiquids, !useLiquids, false)
+    if (blockRayTraceResult != null) entries += Pair(blockRayTraceResult, eyePosition.squareDistanceTo(blockRayTraceResult.hitVec))
 
     // エンティティのレイトレース
-    val entityRayTraceResult: RayTraceResult?
-    val entitySquareDistance: Double
-    run {
-        val entities: List<E> = world.getEntitiesWithinAABB(
-            classEntity,
-            AxisAlignedBB(
-                eyePosition.x,
-                eyePosition.y,
-                eyePosition.z,
-                targetPosition.x,
-                targetPosition.y,
-                targetPosition.z
-            )
-        ) { it != null && filterEntity(it) }
-
-        val pair: Pair<RayTraceResult, Double>? = entities
-            .mapNotNull { entity ->
-                if (entity == player) return@mapNotNull null
-                val aabb: AxisAlignedBB = entity.entityBoundingBox
-                val rayTraceResult = aabb.calculateIntercept(eyePosition, targetPosition) ?: return@mapNotNull null
-                Pair(RayTraceResult(entity, rayTraceResult.hitVec), eyePosition.squareDistanceTo(rayTraceResult.hitVec))
-            }
-            .minBy { it.second }
-        entityRayTraceResult = pair?.first
-        entitySquareDistance = pair?.second ?: 0.0
+    val boundingBox = axisAlignedBBOf(eyePosition, targetPosition)
+    val entities: List<E> = world.getEntitiesWithinAABB(classEntity, boundingBox) { it != null && filterEntity(it) }
+    entities.forEach { entity ->
+        if (entity == player) return@forEach
+        val rayTraceResult = entity.entityBoundingBox.calculateIntercept(eyePosition, targetPosition) ?: return@forEach
+        entries += Pair(RayTraceResult(entity, rayTraceResult.hitVec), eyePosition.squareDistanceTo(rayTraceResult.hitVec))
     }
 
-    return when {
-        blockRayTraceResult != null && entityRayTraceResult != null -> when {
-            blockSquareDistance < entitySquareDistance -> blockRayTraceResult
-            else -> entityRayTraceResult
-        }
-        blockRayTraceResult != null -> blockRayTraceResult
-        entityRayTraceResult != null -> entityRayTraceResult
-        else -> null
-    }
+    return entries.minBy { it.second }?.first
 }
 
 fun rayTraceIgnoreEntity(
@@ -74,9 +49,7 @@ fun rayTraceIgnoreEntity(
     val targetPosition = getTargetPosition(eyePosition, player.rotationPitch, player.rotationYaw, reachDistance)
 
     // ブロックのレイトレース
-    val blockRayTraceResult = world.rayTraceBlocks(eyePosition, targetPosition, useLiquids, !useLiquids, false)
-
-    return blockRayTraceResult
+    return world.rayTraceBlocks(eyePosition, targetPosition, useLiquids, !useLiquids, false)
 }
 
 /** ブロックやエンティティがあるかに関わらず、視線の先の座標を返します。 */
