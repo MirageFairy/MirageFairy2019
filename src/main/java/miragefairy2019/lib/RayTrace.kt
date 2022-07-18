@@ -41,16 +41,16 @@ fun <E : Entity> rayTrace(
     additionalReach: Double,
     classEntity: Class<E>,
     filterEntity: (E) -> Boolean
-): RayTraceResult? {
+): RayTraceWrapper {
     val reachDistance = player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue + additionalReach
     val eyePosition = Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ)
     val targetPosition = getTargetPosition(eyePosition, player.rotationPitch, player.rotationYaw, reachDistance)
 
-    val entries = mutableListOf<Pair<RayTraceResult, Double>>()
+    val entries = mutableListOf<Pair<RayTraceWrapper, Double>>()
 
     // ブロックのレイトレース
     val blockRayTraceResult = world.rayTraceBlocks(eyePosition, targetPosition, useLiquids, !useLiquids, false)
-    if (blockRayTraceResult != null) entries += Pair(blockRayTraceResult, eyePosition.squareDistanceTo(blockRayTraceResult.hitVec))
+    if (blockRayTraceResult != null) entries += Pair(BlockRayTraceWrapper(blockRayTraceResult), eyePosition.squareDistanceTo(blockRayTraceResult.hitVec))
 
     // エンティティのレイトレース
     val boundingBox = axisAlignedBBOf(eyePosition, targetPosition)
@@ -58,10 +58,10 @@ fun <E : Entity> rayTrace(
     entities.forEach { entity ->
         if (entity == player) return@forEach
         val rayTraceResult = entity.entityBoundingBox.calculateIntercept(eyePosition, targetPosition) ?: return@forEach
-        entries += Pair(RayTraceResult(entity, rayTraceResult.hitVec), eyePosition.squareDistanceTo(rayTraceResult.hitVec))
+        entries += Pair(EntityRayTraceWrapper(RayTraceResult(entity, rayTraceResult.hitVec)), eyePosition.squareDistanceTo(rayTraceResult.hitVec))
     }
 
-    return entries.minBy { it.second }?.first
+    return entries.minBy { it.second }?.first ?: MissRayTraceWrapper(targetPosition)
 }
 
 fun rayTraceIgnoreEntity(
@@ -69,23 +69,15 @@ fun rayTraceIgnoreEntity(
     player: EntityPlayer,
     useLiquids: Boolean,
     additionalReach: Double
-): RayTraceResult? {
+): RayTraceWrapper {
     val reachDistance = player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue + additionalReach
     val eyePosition = Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ)
     val targetPosition = getTargetPosition(eyePosition, player.rotationPitch, player.rotationYaw, reachDistance)
 
     // ブロックのレイトレース
-    return world.rayTraceBlocks(eyePosition, targetPosition, useLiquids, !useLiquids, false)
-}
+    val blockRayTraceResult = world.rayTraceBlocks(eyePosition, targetPosition, useLiquids, !useLiquids, false) ?: return MissRayTraceWrapper(targetPosition)
 
-/** ブロックやエンティティがあるかに関わらず、視線の先の座標を返します。 */
-fun getSight(
-    player: EntityPlayer,
-    additionalReach: Double
-): Vec3d {
-    val reachDistance = player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue + additionalReach
-    val eyePosition = Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ)
-    return getTargetPosition(eyePosition, player.rotationPitch, player.rotationYaw, reachDistance)
+    return BlockRayTraceWrapper(blockRayTraceResult)
 }
 
 fun getTargetPosition(eyePosition: Vec3d, rotationPitch: Float, rotationYaw: Float, distance: Double): Vec3d {

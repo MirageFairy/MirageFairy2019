@@ -5,6 +5,7 @@ import miragefairy2019.libkt.sq
 import miragefairy2019.mod.fairyweapon.spawnParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleSphericalRange
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
+import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.math.BlockPos
@@ -71,15 +72,13 @@ class WorldRayTraceResult(
 }
 
 fun MagicSelector.Companion.rayTraceBlock(world: World, player: EntityPlayer, additionalReach: Double): MagicSelector<WorldRayTraceResult> {
-    val rayTraceResult = rayTraceIgnoreEntity(world, player, false, additionalReach)
-    val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
-    return MagicSelector(WorldRayTraceResult(world, rayTraceResult, position))
+    val rayTraceWrapper = rayTraceIgnoreEntity(world, player, false, additionalReach)
+    return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper.castOrNull<HitRayTraceWrapper>()?.rayTraceResult, rayTraceWrapper.targetPosition))
 }
 
 fun <E : Entity> MagicSelector.Companion.rayTrace(world: World, player: EntityPlayer, additionalReach: Double, classEntity: Class<E>, filterEntity: (E) -> Boolean): MagicSelector<WorldRayTraceResult> {
-    val rayTraceResult = rayTrace(world, player, false, additionalReach, classEntity, filterEntity)
-    val position = rayTraceResult?.hitVec ?: getSight(player, additionalReach)
-    return MagicSelector(WorldRayTraceResult(world, rayTraceResult, position))
+    val rayTraceWrapper = rayTrace(world, player, false, additionalReach, classEntity, filterEntity)
+    return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper.castOrNull<HitRayTraceWrapper>()?.rayTraceResult, rayTraceWrapper.targetPosition))
 }
 
 val MagicSelector<WorldRayTraceResult>.position get() = MagicSelector.position(item.world, item.position)
