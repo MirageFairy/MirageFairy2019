@@ -699,7 +699,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         // レシピ判定機能
         var recipeMatchResult: RecipeMatchResult? = null
         components += object : IComponent {
-            override fun drawGuiContainerForegroundLayer(gui: GuiComponent, mouse: PointInt) {
+            override fun preRender(gui: GuiComponent, mouse: PointInt, partialTicks: Float) {
                 recipeMatchResult = match()
             }
         }
