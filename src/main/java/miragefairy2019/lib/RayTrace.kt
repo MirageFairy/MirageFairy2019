@@ -65,7 +65,7 @@ fun <E : Entity> rayTrace(
     return entries.minBy { it.second }?.first ?: MissRayTraceWrapper(targetPosition)
 }
 
-fun rayTraceIgnoreEntity(
+fun rayTraceBlock(
     world: World,
     player: EntityPlayer,
     useLiquids: Boolean,

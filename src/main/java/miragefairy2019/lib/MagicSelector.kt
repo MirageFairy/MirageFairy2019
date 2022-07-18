@@ -72,7 +72,7 @@ class WorldRayTraceResult(
 }
 
 fun MagicSelector.Companion.rayTraceBlock(world: World, player: EntityPlayer, additionalReach: Double): MagicSelector<WorldRayTraceResult> {
-    val rayTraceWrapper = rayTraceIgnoreEntity(world, player, false, additionalReach)
+    val rayTraceWrapper = rayTraceBlock(world, player, false, additionalReach)
     return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper.castOrNull<HitRayTraceWrapper>()?.rayTraceResult, rayTraceWrapper.targetPosition))
 }
 
