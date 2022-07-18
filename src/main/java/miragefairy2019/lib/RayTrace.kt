@@ -16,25 +16,9 @@ fun <E : Entity> rayTrace(
     classEntity: Class<E>,
     filterEntity: (E) -> Boolean
 ): RayTraceResult? {
-
-    // 最大距離
     val reachDistance = player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue + additionalReach
-
-    // 起点
     val eyePosition = Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ)
-
-    // 視点
-    val rotationPitch = player.rotationPitch
-    val rotationYaw = player.rotationYaw
-    val k = Math.PI.toFloat() / 180.0f
-    val x1 = MathHelper.sin(-rotationYaw * k - Math.PI.toFloat())
-    val z1 = MathHelper.cos(-rotationYaw * k - Math.PI.toFloat())
-    val xz1 = -MathHelper.cos(-rotationPitch * k)
-    val targetPosition: Vec3d = eyePosition.addVector(
-        x1 * xz1 * reachDistance,
-        MathHelper.sin(-rotationPitch * k) * reachDistance,
-        z1 * xz1 * reachDistance
-    )
+    val targetPosition = getTargetPosition(eyePosition, player.rotationPitch, player.rotationYaw, reachDistance)
 
     // ブロックのレイトレース
     val blockRayTraceResult = rayTraceIgnoreEntity(world, player, useLiquids, additionalReach)
@@ -85,25 +69,9 @@ fun rayTraceIgnoreEntity(
     useLiquids: Boolean,
     additionalReach: Double
 ): RayTraceResult? {
-
-    // 最大距離
     val reachDistance = player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue + additionalReach
-
-    // 起点
     val eyePosition = Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ)
-
-    // 視点
-    val rotationPitch = player.rotationPitch
-    val rotationYaw = player.rotationYaw
-    val k = Math.PI.toFloat() / 180.0f
-    val x1 = MathHelper.sin(-rotationYaw * k - Math.PI.toFloat())
-    val z1 = MathHelper.cos(-rotationYaw * k - Math.PI.toFloat())
-    val xz1 = -MathHelper.cos(-rotationPitch * k)
-    val targetPosition: Vec3d = eyePosition.addVector(
-        x1 * xz1 * reachDistance,
-        MathHelper.sin(-rotationPitch * k) * reachDistance,
-        z1 * xz1 * reachDistance
-    )
+    val targetPosition = getTargetPosition(eyePosition, player.rotationPitch, player.rotationYaw, reachDistance)
 
     // ブロックのレイトレース
     val blockRayTraceResult = world.rayTraceBlocks(eyePosition, targetPosition, useLiquids, !useLiquids, false)
@@ -116,25 +84,19 @@ fun getSight(
     player: EntityPlayer,
     additionalReach: Double
 ): Vec3d {
-
-    // 最大距離
     val reachDistance = player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue + additionalReach
-
-    // 起点
     val eyePosition = Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ)
+    return getTargetPosition(eyePosition, player.rotationPitch, player.rotationYaw, reachDistance)
+}
 
-    // 視点
-    val rotationPitch = player.rotationPitch
-    val rotationYaw = player.rotationYaw
+fun getTargetPosition(eyePosition: Vec3d, rotationPitch: Float, rotationYaw: Float, distance: Double): Vec3d {
     val k = Math.PI.toFloat() / 180.0f
     val x1 = MathHelper.sin(-rotationYaw * k - Math.PI.toFloat())
     val z1 = MathHelper.cos(-rotationYaw * k - Math.PI.toFloat())
     val xz1 = -MathHelper.cos(-rotationPitch * k)
-    val targetPosition: Vec3d = eyePosition.addVector(
-        x1 * xz1 * reachDistance,
-        MathHelper.sin(-rotationPitch * k) * reachDistance,
-        z1 * xz1 * reachDistance
+    return eyePosition.addVector(
+        x1 * xz1 * distance,
+        MathHelper.sin(-rotationPitch * k) * distance,
+        z1 * xz1 * distance
     )
-
-    return targetPosition
 }
