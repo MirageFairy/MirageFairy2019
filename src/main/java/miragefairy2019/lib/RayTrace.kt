@@ -30,6 +30,7 @@ class MissRayTraceWrapper(targetPosition: Vec3d) : RayTraceWrapper(targetPositio
 fun RayTraceResult.toRayTraceWrapper() = when (this.typeOfHit) {
     RayTraceResult.Type.BLOCK -> BlockRayTraceWrapper(this)
     RayTraceResult.Type.ENTITY -> EntityRayTraceWrapper(this)
+    RayTraceResult.Type.MISS -> MissRayTraceWrapper(this.hitVec)
     else -> error("Invalid type: ${this.typeOfHit}")
 }
 
