@@ -59,29 +59,30 @@ fun WorldSphere.doEffect() = spawnParticleSphericalRange(world, position, radius
 
 class WorldRayTraceResult(
     val world: World,
+    val rayTraceWrapper: RayTraceWrapper,
     /** 空中の場合、null。 */
-    val rayTraceResult: RayTraceResult?,
-    /** 何もヒットしなかった場合、空中の座標。 */
-    val position: Vec3d
+    val rayTraceResult: RayTraceResult?
 ) {
+    /** 何もヒットしなかった場合、空中の座標。 */
+    val targetPosition: Vec3d = rayTraceWrapper.targetPosition
     val isHit get() = rayTraceResult != null
     val hitBlockPos get() = rayTraceResult?.blockPos
-    val blockPos get() = hitBlockPos ?: BlockPos(position)
+    val blockPos get() = hitBlockPos ?: BlockPos(targetPosition)
     val hitEntity get() = rayTraceResult?.entityHit
     val sideHit get() = rayTraceResult?.sideHit
 }
 
 fun MagicSelector.Companion.rayTraceBlock(world: World, player: EntityPlayer, additionalReach: Double): MagicSelector<WorldRayTraceResult> {
     val rayTraceWrapper = rayTraceBlock(world, player, false, additionalReach)
-    return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper.castOrNull<HitRayTraceWrapper>()?.rayTraceResult, rayTraceWrapper.targetPosition))
+    return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper, rayTraceWrapper.castOrNull<HitRayTraceWrapper>()?.rayTraceResult))
 }
 
 fun <E : Entity> MagicSelector.Companion.rayTrace(world: World, player: EntityPlayer, additionalReach: Double, classEntity: Class<E>, filterEntity: (E) -> Boolean): MagicSelector<WorldRayTraceResult> {
     val rayTraceWrapper = rayTrace(world, player, false, additionalReach, classEntity, filterEntity)
-    return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper.castOrNull<HitRayTraceWrapper>()?.rayTraceResult, rayTraceWrapper.targetPosition))
+    return MagicSelector(WorldRayTraceResult(world, rayTraceWrapper, rayTraceWrapper.castOrNull<HitRayTraceWrapper>()?.rayTraceResult))
 }
 
-val MagicSelector<WorldRayTraceResult>.position get() = MagicSelector.position(item.world, item.position)
+val MagicSelector<WorldRayTraceResult>.position get() = MagicSelector.position(item.world, item.targetPosition)
 
 
 class WorldEntities<out E : Entity>(val world: World, val entities: List<E>)

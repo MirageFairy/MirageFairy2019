@@ -81,7 +81,7 @@ class ItemLightMagicWand : ItemFairyWeaponMagic4() {
                 if (rayTraceMagicSelector.item.rayTraceResult?.typeOfHit != RayTraceResult.Type.BLOCK) return EnumActionResult.SUCCESS
                 var blockPos = rayTraceMagicSelector.item.hitBlockPos!!
                 val side = rayTraceMagicSelector.item.sideHit!!
-                val position = rayTraceMagicSelector.item.position
+                val position = rayTraceMagicSelector.item.targetPosition
 
                 // 置換不可能な場合はそのブロックの表面に対象を変更
                 val blockState = world.getBlockState(blockPos)
