@@ -2,10 +2,7 @@ package miragefairy2019.mod.magicplant
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.IFairySpec
-import miragefairy2019.api.IPickExecutor
-import miragefairy2019.api.IPickHandler
 import miragefairy2019.api.Mana
-import miragefairy2019.api.PickHandlerRegistry
 import miragefairy2019.common.toOreName
 import miragefairy2019.lib.EnumFireSpreadSpeed
 import miragefairy2019.lib.EnumFlammability
@@ -43,11 +40,8 @@ import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.or
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.Block
-import net.minecraft.block.BlockBush
 import net.minecraft.block.BlockFarmland
-import net.minecraft.block.IGrowable
 import net.minecraft.block.SoundType
-import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyInteger
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
@@ -83,14 +77,6 @@ val mirageFlowerModule = module {
     // ブロック登録
     blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
         setUnlocalizedName("mirageFlower")
-        onRegisterBlock {
-            PickHandlerRegistry.pickHandlers += IPickHandler { world, blockPos, player ->
-                val blockState = world.getBlockState(blockPos)
-                val block = blockState.block as? BlockMirageFlower ?: return@IPickHandler null
-                if (!block.isMaxAge(blockState)) return@IPickHandler null
-                IPickExecutor { fortune -> block.tryPick(world, blockPos, player, fortune) }
-            }
-        }
         makeBlockStates {
             DataBlockStates(variants = (0..3).associate { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") })
         }
@@ -234,7 +220,7 @@ val List<Pair<String, Double>>.growthRate get() = fold(1.0) { a, b -> a * b.seco
 
 fun getGrowthRateInFloor(fairySpec: IFairySpec) = fairySpec.mana(Mana.SHINE) * fairySpec.erg(Erg.CRYSTAL) / 100.0 * 3
 
-class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidであるマテリアルは耕土を破壊する
+class BlockMirageFlower : BlockMagicPlant() {
     init {
         // meta
         defaultState = blockState.baseState.withProperty(AGE, 0)
@@ -267,7 +253,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
 
     override fun canSustainBush(state: IBlockState) = state.isFullBlock || state.block === Blocks.FARMLAND
     fun getAge(state: IBlockState): Int = state.getValue(AGE)
-    fun isMaxAge(state: IBlockState) = getAge(state) == 3
+    override fun isMaxAge(state: IBlockState) = getAge(state) == 3
     fun grow(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random, rate: Double) {
         repeat(rand.randomInt(rate)) {
             if (!isMaxAge(state)) worldIn.setBlockState(pos, defaultState.withProperty(AGE, getAge(state) + 1), 2)
@@ -337,7 +323,7 @@ class BlockMirageFlower : BlockBush(Material.PLANTS), IGrowable {  // Solidで�
         return tryPick(worldIn, pos, playerIn, fortune)
     }
 
-    fun tryPick(world: World, blockPos: BlockPos, player: EntityPlayer?, fortune: Int): Boolean {
+    override fun tryPick(world: World, blockPos: BlockPos, player: EntityPlayer?, fortune: Int): Boolean {
         val blockState = world.getBlockState(blockPos)
         if (!isMaxAge(blockState)) return false
 
