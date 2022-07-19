@@ -80,9 +80,9 @@ lateinit var itemMirageFlowerSeeds: () -> ItemMirageFlowerSeeds<BlockMirageFlowe
 
 val mirageFlowerModule = module {
 
+    // ブロック登録
     blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
         setUnlocalizedName("mirageFlower")
-        setCreativeTab { Main.creativeTab }
         onRegisterBlock {
             PickHandlerRegistry.pickHandlers += IPickHandler { world, blockPos, player ->
                 val blockState = world.getBlockState(blockPos)
@@ -91,10 +91,12 @@ val mirageFlowerModule = module {
                 IPickExecutor { fortune -> block.tryPick(world, blockPos, player, fortune) }
             }
         }
-        makeBlockStates(resourceName.path) {
+        makeBlockStates {
             DataBlockStates(variants = (0..3).associate { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") })
         }
     }
+
+    // ブロックモデル生成
     run {
         fun makeBlockModel(name: String) = makeBlockModel(name) {
             DataModel(
@@ -110,12 +112,14 @@ val mirageFlowerModule = module {
         makeBlockModel("mirage_flower_age2")
         makeBlockModel("mirage_flower_age3")
     }
+
+    // 種アイテム登録
     itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower()) }, "mirage_flower_seeds") {
         setUnlocalizedName("mirageFlowerSeeds")
         setCreativeTab { Main.creativeTab }
         setCustomModelResourceLocation()
+        makeItemModel { generated }
     }
-    makeItemModel("mirage_flower_seeds") { generated }
 
     // 地形生成
     onHookDecorator {
@@ -146,7 +150,8 @@ val mirageFlowerModule = module {
         })
     }
 
-    onAddRecipe { MinecraftForge.addGrassSeed(ItemStack(itemMirageFlowerSeeds()), 1) } // 雑草が種をドロップ
+    // 雑草が種をドロップ
+    onAddRecipe { MinecraftForge.addGrassSeed(ItemStack(itemMirageFlowerSeeds()), 1) }
 
 }
 
