@@ -376,7 +376,7 @@ val fairyCentrifugeModule = module {
             process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
             process { !Mana.GAIA + !Erg.CRAFT * 2.0 }
             input(Items.MAGMA_CREAM.ingredient, 2)
-            input(Items.SNOWBALL.ingredient, 1)
+            input(Blocks.SNOW.ingredient!!, 1)
             output(Items.SLIME_BALL.createItemStack(), 1.0)
         }
 
