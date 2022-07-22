@@ -10,7 +10,6 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.Complex
 import miragefairy2019.libkt.IRgb
-import miragefairy2019.libkt.concatNotNull
 import miragefairy2019.libkt.drawTriangle
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.plus
@@ -22,6 +21,7 @@ import miragefairy2019.libkt.withColor
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.logger
 import miragefairy2019.mod.PacketId
+import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemFood
@@ -81,63 +81,57 @@ val playerAuraModule = module {
                     val item = itemStack.item
                     if (item !is ItemFood) return
 
+                    val foodAura = ApiPlayerAura.playerAuraManager.getGlobalFoodAura(itemStack) ?: return
+
                     // 食べた後のオーラ表示
                     val playerAuraHandler = ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler()
                     val auraBefore = playerAuraHandler.playerAura
-                    val auraAfter = playerAuraHandler.simulatePlayerAura(itemStack, item.getHealAmount(itemStack))
-                    if (auraAfter != null) {
+                    val auraAfter = playerAuraHandler.simulatePlayerAura(itemStack, item.getHealAmount(itemStack)) ?: return
 
-                        // 飽和率ポエム
-                        event.toolTip.add(textComponent {
-                            translate(playerAuraHandler.getSaturationRate(itemStack).let { saturationRate ->
-                                when {
-                                    saturationRate > 0.7 -> "miragefairy2019.gui.playerAura.poem.step5"
-                                    saturationRate > 0.5 -> "miragefairy2019.gui.playerAura.poem.step4"
-                                    saturationRate > 0.3 -> "miragefairy2019.gui.playerAura.poem.step3"
-                                    saturationRate > 0.1 -> "miragefairy2019.gui.playerAura.poem.step2"
-                                    else -> "miragefairy2019.gui.playerAura.poem.step1"
-                                }
-                            })
-                        }.formattedText)
-
-                        // 栄養素表示
-                        event.toolTip.add(textComponent {
-                            translate("miragefairy2019.gui.playerAura.title") + ":"()
-                        }.formattedText)
-                        fun f1(mana: Mana): ITextComponent {
-                            val before = auraBefore[mana]
-                            val after = auraAfter[mana]
-                            val difference = after - before
-                            return textComponent {
-                                concatNotNull(
-                                    "  "(),
-                                    mana.displayName(),
-                                    ": "(),
-                                    format("%3.0f", before),
-                                    when {
-                                        difference > 2 -> " +++++"().green
-                                        difference < -2 -> " -----"().red
-                                        difference > 1 -> " ++++"().green
-                                        difference < -1 -> " ----"().red
-                                        difference > 0.5 -> " +++"().green
-                                        difference < -0.5 -> " ---"().red
-                                        difference > 0.2 -> " ++"().green
-                                        difference < -0.2 -> " --"().red
-                                        difference > 0.1 -> " +"().green
-                                        difference < -0.1 -> " -"().red
-                                        else -> null
-                                    }
-                                ).withColor(mana.textColor)
+                    // 飽和率ポエム
+                    event.toolTip.add(textComponent {
+                        translate(playerAuraHandler.getSaturationRate(itemStack).let { saturationRate ->
+                            when {
+                                saturationRate > 0.7 -> "miragefairy2019.gui.playerAura.poem.step5"
+                                saturationRate > 0.5 -> "miragefairy2019.gui.playerAura.poem.step4"
+                                saturationRate > 0.3 -> "miragefairy2019.gui.playerAura.poem.step3"
+                                saturationRate > 0.1 -> "miragefairy2019.gui.playerAura.poem.step2"
+                                else -> "miragefairy2019.gui.playerAura.poem.step1"
                             }
-                        }
-                        event.toolTip.add(f1(Mana.SHINE).formattedText)
-                        event.toolTip.add(f1(Mana.FIRE).formattedText)
-                        event.toolTip.add(f1(Mana.WIND).formattedText)
-                        event.toolTip.add(f1(Mana.GAIA).formattedText)
-                        event.toolTip.add(f1(Mana.AQUA).formattedText)
-                        event.toolTip.add(f1(Mana.DARK).formattedText)
+                        })
+                    }.formattedText)
 
+                    // 栄養素表示
+                    event.toolTip.add(textComponent {
+                        translate("miragefairy2019.gui.playerAura.title") + ":"()
+                    }.formattedText)
+                    fun f1(mana: Mana): ITextComponent {
+                        val before = auraBefore[mana]
+                        val after = auraAfter[mana]
+                        val difference = after - before
+                        return textComponent {
+                            ("  "() + mana.displayName() + ": "() + format("%3.0f", before) + (if (event.flags.isAdvanced) " (${foodAura[mana] formatAs "%7.3f"})"() else ""()) + when {
+                                difference > 2 -> " +++++"().green
+                                difference < -2 -> " -----"().red
+                                difference > 1 -> " ++++"().green
+                                difference < -1 -> " ----"().red
+                                difference > 0.5 -> " +++"().green
+                                difference < -0.5 -> " ---"().red
+                                difference > 0.2 -> " ++"().green
+                                difference < -0.2 -> " --"().red
+                                difference > 0.1 -> " +"().green
+                                difference < -0.1 -> " -"().red
+                                else -> ""()
+                            }).withColor(mana.textColor)
+                        }
                     }
+                    event.toolTip.add(f1(Mana.SHINE).formattedText)
+                    event.toolTip.add(f1(Mana.FIRE).formattedText)
+                    event.toolTip.add(f1(Mana.WIND).formattedText)
+                    event.toolTip.add(f1(Mana.GAIA).formattedText)
+                    event.toolTip.add(f1(Mana.AQUA).formattedText)
+                    event.toolTip.add(f1(Mana.DARK).formattedText)
+
                 }
             })
         }
