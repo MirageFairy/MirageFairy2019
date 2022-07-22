@@ -280,6 +280,17 @@ val fairyCentrifugeModule = module {
             output("dustRedstone".toOreName().copyItemStack() ?: cancel(), 1.0, 1.0)
         }
 
+        // ブレイズパウダー→硫黄
+        fairyCentrifugeCraftHandler(60.0) {
+            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+            process { !Mana.WIND + !Erg.WATER * 2.0 }
+            process { !Mana.SHINE + !Erg.CRYSTAL * 2.0 }
+            input("endstone".oreIngredient, 4)
+            input(Items.BLAZE_POWDER.ingredient, 16)
+            input("container1000Lava".oreIngredient, 1)
+            output("dustSulfur".toOreName().copyItemStack() ?: cancel(), 1.0, 1.0)
+        }
+
         // 鉄の剣分解
         fairyCentrifugeCraftHandler(60.0) {
             process { !Mana.DARK + !Erg.DESTROY * 2.0 }
