@@ -15,7 +15,7 @@ interface IGrowthHandler {
     fun getGrowthRateModifiers(world: World, blockPos: BlockPos): List<GrowthRateModifier>
 }
 
-fun List<IGrowthHandler>.calculateGrowthRate(world: World, blockPos: BlockPos) = this.flatMap { it.getGrowthRateModifiers(world, blockPos) }
+fun List<IGrowthHandler>.getGrowthRateModifiers(world: World, blockPos: BlockPos) = this.flatMap { it.getGrowthRateModifiers(world, blockPos) }
 
 val List<GrowthRateModifier>.growthRate get() = fold(1.0) { a, b -> a * b.factor }
 

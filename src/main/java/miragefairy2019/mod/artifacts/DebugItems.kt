@@ -26,7 +26,7 @@ import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.fairy.colorSet
 import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.fairy.rare
-import miragefairy2019.mod.magicplant.calculateGrowthRate
+import miragefairy2019.mod.magicplant.getGrowthRateModifiers
 import miragefairy2019.mod.magicplant.getGrowthRateInFloor
 import miragefairy2019.mod.magicplant.growthRate
 import miragefairy2019.mod.magicplant.mirageFlowerGrowthHandlers
@@ -289,7 +289,7 @@ class ItemDebugMirageFlowerGrowthRate : ItemDebug() {
         player.sendStatusMessage(textComponent { "Pos: ${airBlockPos.x} ${airBlockPos.y} ${airBlockPos.z}"() }, false)
         player.sendStatusMessage(textComponent { "Block: ${world.getBlockState(airBlockPos)}"() }, false)
         player.sendStatusMessage(textComponent { "Floor: ${world.getBlockState(airBlockPos.down())}"() }, false)
-        val result = mirageFlowerGrowthHandlers.calculateGrowthRate(world, airBlockPos)
+        val result = mirageFlowerGrowthHandlers.getGrowthRateModifiers(world, airBlockPos)
         player.sendStatusMessage(textComponent { "Growth Rate: "() + (result.growthRate * 100).f3() + "%"() }, false)
         result.forEach {
             player.sendStatusMessage(textComponent { "  "() + it.title() + ": "() + (it.factor * 100).f3() + "%"() }, false)
