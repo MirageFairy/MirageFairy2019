@@ -29,6 +29,7 @@ import miragefairy2019.mod.fairy.rare
 import miragefairy2019.mod.magicplant.calculateGrowthRate
 import miragefairy2019.mod.magicplant.getGrowthRateInFloor
 import miragefairy2019.mod.magicplant.growthRate
+import miragefairy2019.mod.magicplant.mirageFlowerGrowthHandlers
 import miragefairy2019.mod.oreseed.ApiOreSeedDrop
 import miragefairy2019.mod.oreseed.EnumOreSeedType
 import miragefairy2019.mod.oreseed.EnumVariantOreSeed
@@ -288,10 +289,10 @@ class ItemDebugMirageFlowerGrowthRate : ItemDebug() {
         player.sendStatusMessage(textComponent { "Pos: ${airBlockPos.x} ${airBlockPos.y} ${airBlockPos.z}"() }, false)
         player.sendStatusMessage(textComponent { "Block: ${world.getBlockState(airBlockPos)}"() }, false)
         player.sendStatusMessage(textComponent { "Floor: ${world.getBlockState(airBlockPos.down())}"() }, false)
-        val result = calculateGrowthRate(world, airBlockPos)
+        val result = mirageFlowerGrowthHandlers.calculateGrowthRate(world, airBlockPos)
         player.sendStatusMessage(textComponent { "Growth Rate: "() + (result.growthRate * 100).f3() + "%"() }, false)
-        result.forEach { (key, value) ->
-            player.sendStatusMessage(textComponent { "  $key: "() + (value * 100).f3() + "%"() }, false)
+        result.forEach {
+            player.sendStatusMessage(textComponent { "  "() + it.title() + ": "() + (it.factor * 100).f3() + "%"() }, false)
         }
         player.sendStatusMessage(textComponent { "===================="() }, false)
 

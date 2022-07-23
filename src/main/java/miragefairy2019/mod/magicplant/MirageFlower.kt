@@ -171,11 +171,11 @@ class BlockMirageFlower : BlockMagicPlant() {
     override fun updateTick(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random) {
         super.updateTick(worldIn, pos, state, rand)
         if (!worldIn.isAreaLoaded(pos, 1)) return
-        grow(worldIn, pos, state, rand, calculateGrowthRate(worldIn, pos).growthRate)
+        grow(worldIn, pos, state, rand, mirageFlowerGrowthHandlers.calculateGrowthRate(worldIn, pos).growthRate)
     }
 
     // 骨粉をやると低確率で成長する。
-    override fun grow(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = grow(worldIn, pos, state, rand, calculateGrowthRate(worldIn, pos).growthRate)
+    override fun grow(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = grow(worldIn, pos, state, rand, mirageFlowerGrowthHandlers.calculateGrowthRate(worldIn, pos).growthRate)
     override fun canGrow(worldIn: World, pos: BlockPos, state: IBlockState, isClient: Boolean) = !isMaxAge(state)
     override fun canUseBonemeal(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = worldIn.rand.nextFloat() < 0.05
 
