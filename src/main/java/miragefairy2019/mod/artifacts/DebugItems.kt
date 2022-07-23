@@ -27,7 +27,7 @@ import miragefairy2019.mod.fairy.colorSet
 import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.fairy.rare
 import miragefairy2019.mod.magicplant.getGrowthRateModifiers
-import miragefairy2019.mod.magicplant.growthRateInFloor
+import miragefairy2019.mod.magicplant.mirageFlowerGrowthFactorInFloor
 import miragefairy2019.mod.magicplant.growthRate
 import miragefairy2019.mod.magicplant.mirageFlowerGrowthHandlers
 import miragefairy2019.mod.oreseed.ApiOreSeedDrop
@@ -271,7 +271,7 @@ class ItemDebugMirageFlowerGrowthRateList : ItemDebug() {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
         player.sendStatusMessage(textComponent { "===== Mirage Flower Grow Rate Table ====="() }, false)
-        FairyCard.values().map { it.getVariant() }.map { Pair(it, it.growthRateInFloor) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
+        FairyCard.values().map { it.getVariant() }.map { Pair(it, it.mirageFlowerGrowthFactorInFloor) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
             player.sendStatusMessage(textComponent { ((it.second * 100) formatAs "%7.2f%%  ")() + it.first.displayName() }, false)
         }
         player.sendStatusMessage(textComponent { "===================="() }, false)

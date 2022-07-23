@@ -1,10 +1,5 @@
 package miragefairy2019.mod.magicplant
 
-import miragefairy2019.api.Erg
-import miragefairy2019.api.IFairySpec
-import miragefairy2019.api.Mana
-import miragefairy2019.lib.erg
-import miragefairy2019.lib.mana
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
@@ -18,5 +13,3 @@ interface IGrowthHandler {
 fun List<IGrowthHandler>.getGrowthRateModifiers(world: World, blockPos: BlockPos) = this.flatMap { it.getGrowthRateModifiers(world, blockPos) }
 
 val List<GrowthRateModifier>.growthRate get() = fold(1.0) { a, b -> a * b.factor }
-
-val IFairySpec.growthRateInFloor get() = mana(Mana.SHINE) * erg(Erg.CRYSTAL) / 100.0 * 3

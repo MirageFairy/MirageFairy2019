@@ -1,8 +1,13 @@
 package miragefairy2019.mod.magicplant
 
+import miragefairy2019.api.Erg
+import miragefairy2019.api.IFairySpec
+import miragefairy2019.api.Mana
 import miragefairy2019.common.toOreName
 import miragefairy2019.lib.EnumFireSpreadSpeed
 import miragefairy2019.lib.EnumFlammability
+import miragefairy2019.lib.erg
+import miragefairy2019.lib.mana
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -137,6 +142,8 @@ val mirageFlowerModule = module {
 
 }
 
+val IFairySpec.mirageFlowerGrowthFactorInFloor get() = mana(Mana.SHINE) * erg(Erg.CRYSTAL) / 100.0 * 3
+
 val mirageFlowerGrowthHandlers = listOf(
 
     // 何もしなくても25回に1回の割合で成長する
@@ -193,7 +200,7 @@ val mirageFlowerGrowthHandlers = listOf(
                     if (entries.isEmpty()) return@noFairy // 関連付けられた妖精が居ない場合は無視
 
                     // 最も大きな補正値
-                    val growthRateInFloor = entries.map { it.fairyCard.getVariant().growthRateInFloor }.max()!!
+                    val growthRateInFloor = entries.map { it.fairyCard.getVariant().mirageFlowerGrowthFactorInFloor }.max()!!
 
                     bonus = bonus atLeast growthRateInFloor
                 }
