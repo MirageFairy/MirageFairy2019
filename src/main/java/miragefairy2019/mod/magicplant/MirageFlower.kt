@@ -66,7 +66,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import java.util.Random
 
 lateinit var blockMirageFlower: () -> BlockMirageFlower
-lateinit var itemMirageFlowerSeeds: () -> ItemMirageFlowerSeeds<BlockMirageFlower>
+lateinit var itemMirageFlowerSeeds: () -> ItemMirageFlowerSeed
 
 val mirageFlowerModule = module {
 
@@ -96,7 +96,7 @@ val mirageFlowerModule = module {
     }
 
     // 種アイテム登録
-    itemMirageFlowerSeeds = item({ ItemMirageFlowerSeeds(blockMirageFlower()) }, "mirage_flower_seeds") {
+    itemMirageFlowerSeeds = item({ ItemMirageFlowerSeed(blockMirageFlower()) }, "mirage_flower_seeds") {
         setUnlocalizedName("mirageFlowerSeeds")
         setCreativeTab { Main.creativeTab }
         setCustomModelResourceLocation()
@@ -321,7 +321,7 @@ class BlockMirageFlower : BlockMagicPlant() {
 
 }
 
-class ItemMirageFlowerSeeds<T>(private val block: T) : Item(), IPlantable where T : Block, T : IPlantable {
+abstract class ItemMagicPlantSeed<B>(private val block: B) : Item(), IPlantable where B : Block, B : IPlantable {
     // 使われるとその場に植物を設置する。
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         val itemStack = player.getHeldItem(hand)
@@ -329,7 +329,7 @@ class ItemMirageFlowerSeeds<T>(private val block: T) : Item(), IPlantable where 
         if (facing != EnumFacing.UP) return EnumActionResult.FAIL // ブロックの上面にのみ使用可能
         if (!player.canPlayerEdit(pos.offset(facing), facing, itemStack)) return EnumActionResult.FAIL // プレイヤーが編集不可能な場合は失敗
         if (!blockState.block.canSustainPlant(blockState, world, pos, EnumFacing.UP, block)) return EnumActionResult.FAIL // ブロックがその場所に滞在できないとだめ
-        if (!world.isAirBlock(pos.up())) return EnumActionResult.FAIL // 真上が空気出ないとだめ
+        if (!world.isAirBlock(pos.up())) return EnumActionResult.FAIL // 真上が空気でないとだめ
 
         world.setBlockState(pos.up(), getPlant(world, pos))
         if (player is EntityPlayerMP) CriteriaTriggers.PLACED_BLOCK.trigger(player, pos.up(), itemStack)
@@ -338,5 +338,7 @@ class ItemMirageFlowerSeeds<T>(private val block: T) : Item(), IPlantable where 
     }
 
     override fun getPlantType(world: IBlockAccess, pos: BlockPos) = EnumPlantType.Plains // 常に草の上に蒔ける
-    override fun getPlant(world: IBlockAccess, pos: BlockPos): IBlockState = blockMirageFlower().defaultState // 常にAge0のミラ花を与える
+    override fun getPlant(world: IBlockAccess, pos: BlockPos): IBlockState = block.defaultState // 常にAge0のミラ花を与える
 }
+
+class ItemMirageFlowerSeed(block: BlockMirageFlower) : ItemMagicPlantSeed<BlockMirageFlower>(block)
