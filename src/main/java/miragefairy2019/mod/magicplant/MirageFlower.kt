@@ -4,8 +4,6 @@ import miragefairy2019.api.Erg
 import miragefairy2019.api.IFairySpec
 import miragefairy2019.api.Mana
 import miragefairy2019.common.toOreName
-import miragefairy2019.lib.EnumFireSpreadSpeed
-import miragefairy2019.lib.EnumFlammability
 import miragefairy2019.lib.erg
 import miragefairy2019.lib.mana
 import miragefairy2019.lib.modinitializer.block
@@ -42,15 +40,12 @@ import mirrg.kotlin.hydrogen.or
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.Block
 import net.minecraft.block.BlockFarmland
-import net.minecraft.block.SoundType
 import net.minecraft.block.properties.PropertyInteger
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
-import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.init.Blocks
-import net.minecraft.init.Enchantments
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
@@ -244,18 +239,22 @@ val mirageFlowerGrowthHandlers = listOf(
 )
 
 class BlockMirageFlower : BlockMagicPlant() {
-    init {
-        // meta
-        defaultState = blockState.baseState.withProperty(AGE, 0)
-        // style
-        soundType = SoundType.GLASS
+    companion object {
+        val AGE: PropertyInteger = PropertyInteger.create("age", 0, 3)
+        private val AABB_STAGE0 = AxisAlignedBB(5 / 16.0, 0 / 16.0, 5 / 16.0, 11 / 16.0, 5 / 16.0, 11 / 16.0)
+        private val AABB_STAGE1 = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 12 / 16.0, 14 / 16.0)
+        private val AABB_STAGE2 = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0)
+        private val AABB_STAGE3 = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0)
     }
 
-    override fun getFlammability(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFlammability.VERY_FAST.value
-    override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFireSpreadSpeed.FAST.value
+
+    init {
+        defaultState = blockState.baseState.withProperty(AGE, 0)
+    }
 
 
     // state
+
     override fun getMetaFromState(state: IBlockState) = state.getValue(AGE).coerceIn(0, 3)
     override fun getStateFromMeta(meta: Int): IBlockState = defaultState.withProperty(AGE, meta.coerceIn(0, 3))
     override fun createBlockState() = BlockStateContainer(this, AGE)
@@ -263,6 +262,7 @@ class BlockMirageFlower : BlockMagicPlant() {
 
 
     // 当たり判定
+
     override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) = when (getAge(state)) {
         0 -> AABB_STAGE0
         1 -> AABB_STAGE1
@@ -274,41 +274,28 @@ class BlockMirageFlower : BlockMagicPlant() {
 
     // 動作
 
-    override fun canSustainBush(state: IBlockState) = state.isFullBlock || state.block === Blocks.FARMLAND
     fun getAge(state: IBlockState): Int = state.getValue(AGE)
+
     override fun isMaxAge(state: IBlockState) = getAge(state) == 3
-    fun grow(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random, rate: Double) {
+
+    override fun grow(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random) {
+        val rate = mirageFlowerGrowthHandlers.getGrowthRateModifiers(worldIn, pos).growthRate
         repeat(rand.randomInt(rate)) {
             if (!isMaxAge(state)) worldIn.setBlockState(pos, defaultState.withProperty(AGE, getAge(state) + 1), 2)
         }
     }
 
-    // UpdateTickごとにAgeが1ずつ最大3まで増える。
-    override fun updateTick(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random) {
-        super.updateTick(worldIn, pos, state, rand)
-        if (!worldIn.isAreaLoaded(pos, 1)) return
-        grow(worldIn, pos, state, rand, mirageFlowerGrowthHandlers.getGrowthRateModifiers(worldIn, pos).growthRate)
-    }
-
-    // 骨粉をやると低確率で成長する。
-    override fun grow(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = grow(worldIn, pos, state, rand, mirageFlowerGrowthHandlers.getGrowthRateModifiers(worldIn, pos).growthRate)
-    override fun canGrow(worldIn: World, pos: BlockPos, state: IBlockState, isClient: Boolean) = !isMaxAge(state)
-    override fun canUseBonemeal(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = worldIn.rand.nextFloat() < 0.05
-
 
     // ドロップ
 
-    // クリエイティブピックでの取得アイテム。
-    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(itemMirageFlowerSeeds())
+    override fun getSeed() = ItemStack(itemMirageFlowerSeeds())
 
     /*
      * Ageが最大のとき、種を1個ドロップする。
      * 幸運Lv1につき種のドロップ数が1%増える。
      * 地面破壊ドロップでも適用される。
      */
-    override fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) = getDrops(drops, world, pos, state, fortune, true)
-
-    private fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int, isBreaking: Boolean) {
+    override fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int, isBreaking: Boolean) {
         val random = if (world is World) world.rand else Random()
 
         // 種1個は確定でドロップ
@@ -323,13 +310,7 @@ class BlockMirageFlower : BlockMagicPlant() {
         if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) a@{ drops += "dustTinyMiragium".toOreName().copyItemStack().or { return@a }.copy() }
     }
 
-    // シルクタッチ無効。
-    override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer) = false
-
-
-    // 経験値ドロップ
-    override fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int) = getExpDrop(state, world, pos, fortune, true)
-    private fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int, isBreaking: Boolean) = if (isBreaking) when {
+    override fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int, isBreaking: Boolean) = if (isBreaking) when {
         getAge(state) >= 3 -> 2
         getAge(state) >= 2 -> 1
         else -> 0
@@ -338,45 +319,6 @@ class BlockMirageFlower : BlockMagicPlant() {
         else -> 0
     }
 
-
-    // PickHandler関連
-
-    override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        val fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, playerIn.heldItemMainhand)
-        return tryPick(worldIn, pos, playerIn, fortune)
-    }
-
-    override fun tryPick(world: World, blockPos: BlockPos, player: EntityPlayer?, fortune: Int): Boolean {
-        val blockState = world.getBlockState(blockPos)
-        if (!isMaxAge(blockState)) return false
-
-        // 収穫物計算
-        val drops = NonNullList.create<ItemStack>()
-        getDrops(drops, world, blockPos, blockState, fortune, false)
-
-        // 収穫物生成
-        drops.forEach { spawnAsEntity(world, blockPos, it) }
-
-        // 経験値生成
-        blockState.block.dropXpOnBlockBreak(world, blockPos, getExpDrop(blockState, world, blockPos, fortune, false))
-
-        // エフェクト
-        world.playEvent(player, 2001, blockPos, getStateId(blockState))
-
-        // ブロックの置換
-        world.setBlockState(blockPos, defaultState.withProperty(AGE, 1), 2)
-
-        return true
-    }
-
-
-    companion object {
-        val AGE: PropertyInteger = PropertyInteger.create("age", 0, 3)
-        private val AABB_STAGE0 = AxisAlignedBB(5 / 16.0, 0 / 16.0, 5 / 16.0, 11 / 16.0, 5 / 16.0, 11 / 16.0)
-        private val AABB_STAGE1 = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 12 / 16.0, 14 / 16.0)
-        private val AABB_STAGE2 = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0)
-        private val AABB_STAGE3 = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0)
-    }
 }
 
 class ItemMirageFlowerSeeds<T>(private val block: T) : Item(), IPlantable where T : Block, T : IPlantable {
