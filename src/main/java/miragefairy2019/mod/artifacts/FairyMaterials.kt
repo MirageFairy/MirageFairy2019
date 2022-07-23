@@ -653,7 +653,7 @@ private fun FairyMaterialCard.bottle() = apply { this.containerItemSupplier = { 
 
 lateinit var itemFairyMaterials: () -> ItemMultiFairyMaterial
 
-fun FairyMaterialCard.createItemStack(count: Int = 1) = itemFairyMaterials[this].createItemStack(count)
+fun FairyMaterialCard.createItemStack(count: Int = 1) = itemFairyMaterials().getVariant(this)!!.createItemStack(count)
 
 val fairyMaterialsModule = module {
 
@@ -728,5 +728,3 @@ class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
     override fun hasContainerItem(itemStack: ItemStack) = getContainerItemStack(itemStack) != null
     override fun getContainerItem(itemStack: ItemStack) = getContainerItemStack(itemStack) ?: EMPTY_ITEM_STACK
 }
-
-operator fun (() -> ItemMultiFairyMaterial).get(fairyMaterialCard: FairyMaterialCard) = this().getVariant(fairyMaterialCard.metadata)!!
