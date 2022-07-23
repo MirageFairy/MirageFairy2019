@@ -6,11 +6,16 @@ import miragefairy2019.api.PickHandlerRegistry
 import miragefairy2019.lib.EnumFireSpreadSpeed
 import miragefairy2019.lib.EnumFlammability
 import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.libkt.randomInt
+import mirrg.kotlin.hydrogen.atLeast
+import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.BlockBush
 import net.minecraft.block.IGrowable
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
+import net.minecraft.block.properties.PropertyInteger
+import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.player.EntityPlayer
@@ -46,9 +51,7 @@ val magicPlantModule = module {
 
 }
 
-abstract class BlockMagicPlant : BlockBush(Material.PLANTS), IGrowable { // Solidであるマテリアルは耕土を破壊する
-
-    // 特性
+abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IGrowable { // Solidであるマテリアルは耕土を破壊する
 
     init {
         soundType = SoundType.GLASS
@@ -56,6 +59,21 @@ abstract class BlockMagicPlant : BlockBush(Material.PLANTS), IGrowable { // Soli
 
     override fun getFlammability(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFlammability.VERY_FAST.value
     override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFireSpreadSpeed.FAST.value
+
+
+    // State
+
+    @Suppress("PropertyName")
+    val AGE: PropertyInteger = PropertyInteger.create("age", 0, maxAge)
+
+    init {
+        defaultState = blockState.baseState.withProperty(AGE, 0)
+    }
+
+    override fun getMetaFromState(state: IBlockState) = state.getValue(AGE) atLeast 0 atMost maxAge
+    override fun getStateFromMeta(meta: Int): IBlockState = defaultState.withProperty(AGE, meta atLeast 0 atMost maxAge)
+    override fun createBlockState() = BlockStateContainer(this, AGE)
+    fun getState(age: Int): IBlockState = defaultState.withProperty(AGE, age)
 
 
     // 当たり判定
@@ -73,9 +91,9 @@ abstract class BlockMagicPlant : BlockBush(Material.PLANTS), IGrowable { // Soli
 
     // 成長
 
-    abstract fun getAge(state: IBlockState): Int
+    fun getAge(state: IBlockState): Int = state.getValue(AGE)
 
-    abstract fun isMaxAge(state: IBlockState): Boolean
+    fun isMaxAge(state: IBlockState) = getAge(state) == maxAge
 
     abstract fun grow(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random)
 
@@ -96,19 +114,20 @@ abstract class BlockMagicPlant : BlockBush(Material.PLANTS), IGrowable { // Soli
 
     abstract fun getSeed(): ItemStack
 
-    // TODO 戻り値
-    abstract fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int, isBreaking: Boolean)
+    abstract fun getDrops(age: Int, random: Random, fortune: Int, isBreaking: Boolean): List<ItemStack>
 
-    abstract fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int, isBreaking: Boolean): Int
+    abstract fun getExpDrop(age: Int, random: Random, fortune: Int, isBreaking: Boolean): Int
 
     // クリエイティブピックでの取得アイテム。
     override fun getItem(world: World, pos: BlockPos, state: IBlockState) = getSeed()
 
     // 破壊時ドロップ
-    override fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) = getDrops(drops, world, pos, state, fortune, true)
+    override fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) {
+        drops += getDrops(getAge(state), if (world is World) world.rand else Random(), fortune, true)
+    }
 
     // 破壊時経験値ドロップ
-    override fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int) = getExpDrop(state, world, pos, fortune, true)
+    override fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int) = getExpDrop(getAge(state), if (world is World) world.rand else Random(), fortune, true)
 
     // シルクタッチ無効
     override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer) = false
@@ -125,8 +144,7 @@ abstract class BlockMagicPlant : BlockBush(Material.PLANTS), IGrowable { // Soli
         if (!isMaxAge(blockState)) return false
 
         // 収穫物計算
-        val drops = NonNullList.create<ItemStack>()
-        getDrops(drops, world, blockPos, blockState, fortune, false)
+        val drops = getDrops(getAge(blockState), world.rand, fortune, false)
 
         // 収穫物生成
         drops.forEach {
@@ -134,13 +152,13 @@ abstract class BlockMagicPlant : BlockBush(Material.PLANTS), IGrowable { // Soli
         }
 
         // 経験値生成
-        blockState.block.dropXpOnBlockBreak(world, blockPos, getExpDrop(blockState, world, blockPos, fortune, false))
+        blockState.block.dropXpOnBlockBreak(world, blockPos, getExpDrop(getAge(blockState), world.rand, fortune, false))
 
         // エフェクト
         world.playEvent(player, 2001, blockPos, getStateId(blockState))
 
         // ブロックの置換
-        world.setBlockState(blockPos, defaultState.withProperty(BlockMirageFlower.AGE, 1), 2)
+        world.setBlockState(blockPos, defaultState.withProperty(AGE, 1), 2)
 
         return true
     }
@@ -165,4 +183,12 @@ abstract class ItemMagicPlantSeed(private val block: BlockMagicPlant) : Item(), 
 
     override fun getPlantType(world: IBlockAccess, pos: BlockPos) = EnumPlantType.Plains // 常に草の上に蒔ける
     override fun getPlant(world: IBlockAccess, pos: BlockPos): IBlockState = block.defaultState // 常にAge0のミラ花を与える
+}
+
+fun MutableList<ItemStack>.drop(random: Random, chance: Double, creator: (Int) -> ItemStack?) {
+    val count = random.randomInt(chance)
+    if (count >= 1) {
+        val itemStack = creator(count)
+        if (itemStack != null) this += itemStack
+    }
 }

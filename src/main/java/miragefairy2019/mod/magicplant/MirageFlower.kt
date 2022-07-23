@@ -22,13 +22,13 @@ import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.libkt.BiomeDecoratorFlowers
 import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.libkt.copyItemStack
+import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.FairyCrystal
 import miragefairy2019.mod.artifacts.FairyMaterialCard
-import miragefairy2019.mod.artifacts.get
-import miragefairy2019.mod.artifacts.itemFairyMaterials
+import miragefairy2019.mod.artifacts.createItemStack
 import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
@@ -36,18 +36,13 @@ import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.EnumVariantMaterials1
 import mirrg.kotlin.hydrogen.atLeast
-import mirrg.kotlin.hydrogen.or
 import net.minecraft.block.BlockFarmland
-import net.minecraft.block.properties.PropertyInteger
-import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
-import net.minecraft.util.NonNullList
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.EnumSkyBlock
-import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
 import net.minecraftforge.common.MinecraftForge
@@ -228,24 +223,7 @@ val mirageFlowerGrowthHandlers = listOf(
 
 )
 
-class BlockMirageFlower : BlockMagicPlant() {
-    companion object {
-        val AGE: PropertyInteger = PropertyInteger.create("age", 0, 3)
-    }
-
-
-    init {
-        defaultState = blockState.baseState.withProperty(AGE, 0)
-    }
-
-
-    // state
-
-    override fun getMetaFromState(state: IBlockState) = state.getValue(AGE).coerceIn(0, 3)
-    override fun getStateFromMeta(meta: Int): IBlockState = defaultState.withProperty(AGE, meta.coerceIn(0, 3))
-    override fun createBlockState() = BlockStateContainer(this, AGE)
-    fun getState(age: Int): IBlockState = defaultState.withProperty(AGE, age)
-
+class BlockMirageFlower : BlockMagicPlant(3) {
 
     override val boundingBoxList = listOf(
         AxisAlignedBB(5 / 16.0, 0 / 16.0, 5 / 16.0, 11 / 16.0, 5 / 16.0, 11 / 16.0),
@@ -254,51 +232,25 @@ class BlockMirageFlower : BlockMagicPlant() {
         AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0)
     )
 
-
-    // 動作
-
-    override fun getAge(state: IBlockState) = state.getValue(AGE)
-
-    override fun isMaxAge(state: IBlockState) = getAge(state) == 3
-
     override fun grow(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random) {
-        val rate = mirageFlowerGrowthHandlers.getGrowthRateModifiers(worldIn, pos).growthRate
-        repeat(rand.randomInt(rate)) {
+        repeat(rand.randomInt(mirageFlowerGrowthHandlers.getGrowthRateModifiers(worldIn, pos).growthRate)) {
             if (!isMaxAge(state)) worldIn.setBlockState(pos, defaultState.withProperty(AGE, getAge(state) + 1), 2)
         }
     }
 
-
-    // ドロップ
-
     override fun getSeed() = ItemStack(itemMirageFlowerSeeds())
 
-    /*
-     * Ageが最大のとき、種を1個ドロップする。
-     * 幸運Lv1につき種のドロップ数が1%増える。
-     * 地面破壊ドロップでも適用される。
-     */
-    override fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int, isBreaking: Boolean) {
-        val random = if (world is World) world.rand else Random()
-
-        // 種1個は確定でドロップ
-        if (isBreaking) drops += ItemStack(itemMirageFlowerSeeds())
-        // サイズが2以上なら確定で茎をドロップ
-        if (isBreaking && getAge(state) >= 2) repeat(random.randomInt(1 + fortune * 0.2)) { drops += itemFairyMaterials[FairyMaterialCard.MIRAGE_FLOWER_LEAF].createItemStack() }
-        // 追加の種
-        if (getAge(state) >= 3) repeat(random.randomInt(fortune * 0.01)) { drops += ItemStack(itemMirageFlowerSeeds()) }
-        // クリスタル
-        if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) { drops += FairyCrystal.variantFairyCrystal().createItemStack() }
-        // ミラジウム
-        if (getAge(state) >= 3) repeat(random.randomInt(1 + fortune * 0.5)) a@{ drops += "dustTinyMiragium".toOreName().copyItemStack().or { return@a }.copy() }
+    override fun getDrops(age: Int, random: Random, fortune: Int, isBreaking: Boolean) = mutableListOf<ItemStack>().also { drops ->
+        if (isBreaking) drops.drop(random, 1.0) { itemMirageFlowerSeeds().createItemStack(it) } // 破壊時、確定で種1個ドロップ
+        if (isBreaking && age >= 2) drops.drop(random, 1 + fortune * 0.2) { FairyMaterialCard.MIRAGE_FLOWER_LEAF.createItemStack(it) } // 破壊時、サイズ2以上で茎
+        if (age >= 3) drops.drop(random, fortune * 0.01) { itemMirageFlowerSeeds().createItemStack(it) } // 完全成長時、低確率で追加の種
+        if (age >= 3) drops.drop(random, 1 + fortune * 0.5) { FairyCrystal.variantFairyCrystal().createItemStack(it) } // 完全成長時、フェアリークリスタル
+        if (age >= 3) drops.drop(random, 1 + fortune * 0.5) { "dustTinyMiragium".toOreName().copyItemStack(it) } // 完全成長時、ミラジウムの微粉
     }
 
-    override fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int, isBreaking: Boolean) = if (isBreaking) when {
-        getAge(state) >= 3 -> 2
-        getAge(state) >= 2 -> 1
-        else -> 0
-    } else when {
-        getAge(state) >= 3 -> 1
+    override fun getExpDrop(age: Int, random: Random, fortune: Int, isBreaking: Boolean) = when (age) {
+        3 -> if (isBreaking) 2 else 1
+        2 -> if (isBreaking) 1 else 0
         else -> 0
     }
 

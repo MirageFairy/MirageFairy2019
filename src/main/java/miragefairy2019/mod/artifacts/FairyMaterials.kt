@@ -653,6 +653,8 @@ private fun FairyMaterialCard.bottle() = apply { this.containerItemSupplier = { 
 
 lateinit var itemFairyMaterials: () -> ItemMultiFairyMaterial
 
+fun FairyMaterialCard.createItemStack(count: Int) = itemFairyMaterials[this].createItemStack(count)
+
 val fairyMaterialsModule = module {
 
     // アイテム登録
