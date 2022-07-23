@@ -231,10 +231,6 @@ val mirageFlowerGrowthHandlers = listOf(
 class BlockMirageFlower : BlockMagicPlant() {
     companion object {
         val AGE: PropertyInteger = PropertyInteger.create("age", 0, 3)
-        private val AABB_STAGE0 = AxisAlignedBB(5 / 16.0, 0 / 16.0, 5 / 16.0, 11 / 16.0, 5 / 16.0, 11 / 16.0)
-        private val AABB_STAGE1 = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 12 / 16.0, 14 / 16.0)
-        private val AABB_STAGE2 = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0)
-        private val AABB_STAGE3 = AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0)
     }
 
 
@@ -251,20 +247,17 @@ class BlockMirageFlower : BlockMagicPlant() {
     fun getState(age: Int): IBlockState = defaultState.withProperty(AGE, age)
 
 
-    // 当たり判定
-
-    override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) = when (getAge(state)) {
-        0 -> AABB_STAGE0
-        1 -> AABB_STAGE1
-        2 -> AABB_STAGE2
-        3 -> AABB_STAGE3
-        else -> AABB_STAGE3
-    }
+    override val boundingBoxList = listOf(
+        AxisAlignedBB(5 / 16.0, 0 / 16.0, 5 / 16.0, 11 / 16.0, 5 / 16.0, 11 / 16.0),
+        AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 12 / 16.0, 14 / 16.0),
+        AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0),
+        AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0)
+    )
 
 
     // 動作
 
-    fun getAge(state: IBlockState): Int = state.getValue(AGE)
+    override fun getAge(state: IBlockState) = state.getValue(AGE)
 
     override fun isMaxAge(state: IBlockState) = getAge(state) == 3
 
@@ -311,4 +304,4 @@ class BlockMirageFlower : BlockMagicPlant() {
 
 }
 
-class ItemMirageFlowerSeed(block: BlockMirageFlower) : ItemMagicPlantSeed<BlockMirageFlower>(block)
+class ItemMirageFlowerSeed(block: BlockMirageFlower) : ItemMagicPlantSeed(block)

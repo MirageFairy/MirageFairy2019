@@ -7,7 +7,6 @@ import miragefairy2019.lib.EnumFireSpreadSpeed
 import miragefairy2019.lib.EnumFlammability
 import miragefairy2019.lib.modinitializer.module
 import net.minecraft.advancements.CriteriaTriggers
-import net.minecraft.block.Block
 import net.minecraft.block.BlockBush
 import net.minecraft.block.IGrowable
 import net.minecraft.block.SoundType
@@ -24,6 +23,7 @@ import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.NonNullList
+import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -58,6 +58,13 @@ abstract class BlockMagicPlant : BlockBush(Material.PLANTS), IGrowable { // Soli
     override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFireSpreadSpeed.FAST.value
 
 
+    // 当たり判定
+
+    abstract val boundingBoxList: List<AxisAlignedBB>
+
+    override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) = boundingBoxList.getOrNull(getAge(state)) ?: boundingBoxList.last()
+
+
     // 動作
 
     // 任意の固体ブロックか農地の上に置ける
@@ -65,6 +72,8 @@ abstract class BlockMagicPlant : BlockBush(Material.PLANTS), IGrowable { // Soli
 
 
     // 成長
+
+    abstract fun getAge(state: IBlockState): Int
 
     abstract fun isMaxAge(state: IBlockState): Boolean
 
@@ -138,7 +147,7 @@ abstract class BlockMagicPlant : BlockBush(Material.PLANTS), IGrowable { // Soli
 
 }
 
-abstract class ItemMagicPlantSeed<B>(private val block: B) : Item(), IPlantable where B : Block, B : IPlantable {
+abstract class ItemMagicPlantSeed(private val block: BlockMagicPlant) : Item(), IPlantable {
     // 使われるとその場に植物を設置する。
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         val itemStack = player.getHeldItem(hand)
