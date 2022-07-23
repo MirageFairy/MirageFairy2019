@@ -57,8 +57,8 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
         soundType = SoundType.GLASS
     }
 
-    override fun getFlammability(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFlammability.VERY_FAST.value
-    override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = EnumFireSpreadSpeed.FAST.value
+    override fun getFlammability(world: IBlockAccess, blockPos: BlockPos, face: EnumFacing) = EnumFlammability.VERY_FAST.value
+    override fun getFireSpreadSpeed(world: IBlockAccess, blockPos: BlockPos, face: EnumFacing) = EnumFireSpreadSpeed.FAST.value
 
 
     // State
@@ -70,7 +70,7 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
         defaultState = blockState.baseState.withProperty(AGE, 0)
     }
 
-    override fun getMetaFromState(state: IBlockState) = state.getValue(AGE) atLeast 0 atMost maxAge
+    override fun getMetaFromState(blockState: IBlockState) = blockState.getValue(AGE) atLeast 0 atMost maxAge
     override fun getStateFromMeta(meta: Int): IBlockState = defaultState.withProperty(AGE, meta atLeast 0 atMost maxAge)
     override fun createBlockState() = BlockStateContainer(this, AGE)
     fun getState(age: Int): IBlockState = defaultState.withProperty(AGE, age)
@@ -80,34 +80,34 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
 
     abstract val boundingBoxList: List<AxisAlignedBB>
 
-    override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) = boundingBoxList.getOrNull(getAge(state)) ?: boundingBoxList.last()
+    override fun getBoundingBox(blockState: IBlockState, source: IBlockAccess, blockPos: BlockPos) = boundingBoxList.getOrNull(getAge(blockState)) ?: boundingBoxList.last()
 
 
     // 動作
 
     // 任意の固体ブロックか農地の上に置ける
-    override fun canSustainBush(state: IBlockState) = state.isFullBlock || state.block === Blocks.FARMLAND
+    override fun canSustainBush(blockState: IBlockState) = blockState.isFullBlock || blockState.block === Blocks.FARMLAND
 
 
     // 成長
 
-    fun getAge(state: IBlockState): Int = state.getValue(AGE)
+    fun getAge(blockState: IBlockState): Int = blockState.getValue(AGE)
 
-    fun isMaxAge(state: IBlockState) = getAge(state) == maxAge
+    fun isMaxAge(blockState: IBlockState) = getAge(blockState) == maxAge
 
-    abstract fun grow(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random)
+    abstract fun grow(world: World, blockPos: BlockPos, blockState: IBlockState, random: Random)
 
     // 自然成長
-    override fun updateTick(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random) {
-        super.updateTick(worldIn, pos, state, rand)
-        if (!worldIn.isAreaLoaded(pos, 1)) return
-        grow(worldIn, pos, state, rand)
+    override fun updateTick(world: World, blockPos: BlockPos, blockState: IBlockState, random: Random) {
+        super.updateTick(world, blockPos, blockState, random)
+        if (!world.isAreaLoaded(blockPos, 1)) return
+        grow(world, blockPos, blockState, random)
     }
 
     // 骨粉
-    override fun grow(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = grow(worldIn, pos, state, rand)
-    override fun canGrow(worldIn: World, pos: BlockPos, state: IBlockState, isClient: Boolean) = !isMaxAge(state)
-    override fun canUseBonemeal(worldIn: World, rand: Random, pos: BlockPos, state: IBlockState) = worldIn.rand.nextFloat() < 0.05
+    override fun grow(world: World, random: Random, blockPos: BlockPos, blockState: IBlockState) = grow(world, blockPos, blockState, random)
+    override fun canGrow(world: World, blockPos: BlockPos, blockState: IBlockState, isClient: Boolean) = !isMaxAge(blockState)
+    override fun canUseBonemeal(world: World, random: Random, blockPos: BlockPos, blockState: IBlockState) = world.rand.nextFloat() < 0.05
 
 
     //ドロップ
@@ -119,23 +119,23 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
     abstract fun getExpDrop(age: Int, random: Random, fortune: Int, isBreaking: Boolean): Int
 
     // クリエイティブピックでの取得アイテム。
-    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = getSeed()
+    override fun getItem(world: World, blockPos: BlockPos, blockState: IBlockState) = getSeed()
 
     // 破壊時ドロップ
-    override fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) {
-        drops += getDrops(getAge(state), if (world is World) world.rand else Random(), fortune, true)
+    override fun getDrops(drops: NonNullList<ItemStack>, world: IBlockAccess, blockPos: BlockPos, blockState: IBlockState, fortune: Int) {
+        drops += getDrops(getAge(blockState), if (world is World) world.rand else Random(), fortune, true)
     }
 
     // 破壊時経験値ドロップ
-    override fun getExpDrop(state: IBlockState, world: IBlockAccess, pos: BlockPos, fortune: Int) = getExpDrop(getAge(state), if (world is World) world.rand else Random(), fortune, true)
+    override fun getExpDrop(blockState: IBlockState, world: IBlockAccess, blockPos: BlockPos, fortune: Int) = getExpDrop(getAge(blockState), if (world is World) world.rand else Random(), fortune, true)
 
     // シルクタッチ無効
-    override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer) = false
+    override fun canSilkHarvest(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer) = false
 
     // 使用すると収穫
-    override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+    override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         val fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, playerIn.heldItemMainhand)
-        return tryPick(worldIn, pos, playerIn, fortune)
+        return tryPick(world, blockPos, playerIn, fortune)
     }
 
     // 収穫
@@ -167,22 +167,22 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
 
 abstract class ItemMagicPlantSeed(private val block: BlockMagicPlant) : Item(), IPlantable {
     // 使われるとその場に植物を設置する。
-    override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+    override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         val itemStack = player.getHeldItem(hand)
-        val blockState = world.getBlockState(pos)
+        val blockState = world.getBlockState(blockPos)
         if (facing != EnumFacing.UP) return EnumActionResult.FAIL // ブロックの上面にのみ使用可能
-        if (!player.canPlayerEdit(pos.offset(facing), facing, itemStack)) return EnumActionResult.FAIL // プレイヤーが編集不可能な場合は失敗
-        if (!blockState.block.canSustainPlant(blockState, world, pos, EnumFacing.UP, block)) return EnumActionResult.FAIL // ブロックがその場所に滞在できないとだめ
-        if (!world.isAirBlock(pos.up())) return EnumActionResult.FAIL // 真上が空気でないとだめ
+        if (!player.canPlayerEdit(blockPos.offset(facing), facing, itemStack)) return EnumActionResult.FAIL // プレイヤーが編集不可能な場合は失敗
+        if (!blockState.block.canSustainPlant(blockState, world, blockPos, EnumFacing.UP, block)) return EnumActionResult.FAIL // ブロックがその場所に滞在できないとだめ
+        if (!world.isAirBlock(blockPos.up())) return EnumActionResult.FAIL // 真上が空気でないとだめ
 
-        world.setBlockState(pos.up(), getPlant(world, pos))
-        if (player is EntityPlayerMP) CriteriaTriggers.PLACED_BLOCK.trigger(player, pos.up(), itemStack)
+        world.setBlockState(blockPos.up(), getPlant(world, blockPos))
+        if (player is EntityPlayerMP) CriteriaTriggers.PLACED_BLOCK.trigger(player, blockPos.up(), itemStack)
         itemStack.shrink(1)
         return EnumActionResult.SUCCESS
     }
 
-    override fun getPlantType(world: IBlockAccess, pos: BlockPos) = EnumPlantType.Plains // 常に草の上に蒔ける
-    override fun getPlant(world: IBlockAccess, pos: BlockPos): IBlockState = block.defaultState // 常にAge0のミラ花を与える
+    override fun getPlantType(world: IBlockAccess, blockPos: BlockPos) = EnumPlantType.Plains // 常に草の上に蒔ける
+    override fun getPlant(world: IBlockAccess, blockPos: BlockPos): IBlockState = block.defaultState // 常にAge0のミラ花を与える
 }
 
 fun MutableList<ItemStack>.drop(random: Random, chance: Double, creator: (Int) -> ItemStack?) {

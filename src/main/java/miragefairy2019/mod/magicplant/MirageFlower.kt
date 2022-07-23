@@ -232,9 +232,9 @@ class BlockMirageFlower : BlockMagicPlant(3) {
         AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0)
     )
 
-    override fun grow(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random) {
-        repeat(rand.randomInt(mirageFlowerGrowthHandlers.getGrowthRateModifiers(worldIn, pos).growthRate)) {
-            if (!isMaxAge(state)) worldIn.setBlockState(pos, defaultState.withProperty(AGE, getAge(state) + 1), 2)
+    override fun grow(world: World, blockPos: BlockPos, blockState: IBlockState, random: Random) {
+        repeat(random.randomInt(mirageFlowerGrowthHandlers.getGrowthRateModifiers(world, blockPos).growthRate)) {
+            if (!isMaxAge(blockState)) world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState) + 1), 2)
         }
     }
 
