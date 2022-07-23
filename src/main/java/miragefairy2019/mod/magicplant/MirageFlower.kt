@@ -193,7 +193,7 @@ val mirageFlowerGrowthHandlers = listOf(
                     if (entries.isEmpty()) return@noFairy // 関連付けられた妖精が居ない場合は無視
 
                     // 最も大きな補正値
-                    val growthRateInFloor = entries.map { getGrowthRateInFloor(it.fairyCard.getVariant()) }.max()!!
+                    val growthRateInFloor = entries.map { it.fairyCard.getVariant().growthRateInFloor }.max()!!
 
                     bonus = bonus atLeast growthRateInFloor
                 }

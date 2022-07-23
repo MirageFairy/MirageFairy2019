@@ -19,4 +19,4 @@ fun List<IGrowthHandler>.getGrowthRateModifiers(world: World, blockPos: BlockPos
 
 val List<GrowthRateModifier>.growthRate get() = fold(1.0) { a, b -> a * b.factor }
 
-fun getGrowthRateInFloor(fairySpec: IFairySpec) = fairySpec.mana(Mana.SHINE) * fairySpec.erg(Erg.CRYSTAL) / 100.0 * 3
+val IFairySpec.growthRateInFloor get() = mana(Mana.SHINE) * erg(Erg.CRYSTAL) / 100.0 * 3
