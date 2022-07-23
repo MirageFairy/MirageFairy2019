@@ -65,8 +65,7 @@ val mirageFlowerGrowthHandlers = listOf(
     // 空が見えるなら加点
     object : IGrowthHandler {
         override fun getGrowthRateModifiers(world: World, blockPos: BlockPos): List<GrowthRateModifier> {
-            if (world.canSeeSky(blockPos)) return listOf(GrowthRateModifier(textComponent { "Sky Bonus"() }, 1.1))
-            return listOf()
+            return listOf(GrowthRateModifier(textComponent { "Sky Bonus"() }, if (world.canSeeSky(blockPos)) 1.1 else 1.0))
         }
     },
 
