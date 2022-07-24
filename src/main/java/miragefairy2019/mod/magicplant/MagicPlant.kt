@@ -52,6 +52,10 @@ val magicPlantModule = module {
 }
 
 abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IGrowable { // Solidであるマテリアルは耕土を破壊する
+    companion object {
+        val AGE: PropertyInteger = PropertyInteger.create("age", 0, 15)
+    }
+
 
     init {
         soundType = SoundType.GLASS
@@ -63,17 +67,16 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
 
     // State
 
-    @Suppress("PropertyName")
-    val AGE: PropertyInteger = PropertyInteger.create("age", 0, maxAge)
-
     init {
         defaultState = blockState.baseState.withProperty(AGE, 0)
     }
 
-    override fun getMetaFromState(blockState: IBlockState) = blockState.getValue(AGE) atLeast 0 atMost maxAge
-    override fun getStateFromMeta(meta: Int): IBlockState = defaultState.withProperty(AGE, meta atLeast 0 atMost maxAge)
+    fun getState(age: Int): IBlockState = defaultState.withProperty(AGE, age atLeast 0 atMost maxAge)
+    fun getAge(blockState: IBlockState): Int = blockState.getValue(AGE) atLeast 0 atMost maxAge
+
     override fun createBlockState() = BlockStateContainer(this, AGE)
-    fun getState(age: Int): IBlockState = defaultState.withProperty(AGE, age)
+    override fun getMetaFromState(blockState: IBlockState) = getAge(blockState)
+    override fun getStateFromMeta(meta: Int): IBlockState = getState(meta)
 
 
     // 当たり判定
@@ -91,7 +94,6 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
 
     // 成長
 
-    fun getAge(blockState: IBlockState): Int = blockState.getValue(AGE)
 
     fun isMaxAge(blockState: IBlockState) = getAge(blockState) == maxAge
 
