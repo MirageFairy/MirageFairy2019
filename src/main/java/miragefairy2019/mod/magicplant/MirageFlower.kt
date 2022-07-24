@@ -122,8 +122,6 @@ val mirageFlowerModule = module {
 
 }
 
-val IFairySpec.mirageFlowerGrowthFactorInFloor get() = mana(Mana.SHINE) * erg(Erg.CRYSTAL) / 100.0 * 3
-
 val mirageFlowerGrowthHandlers = listOf(
 
     // 何もしなくても25回に1回の割合で成長する
@@ -165,13 +163,15 @@ val mirageFlowerGrowthHandlers = listOf(
 
             // 妖精による判定
             run noFairy@{
+                val block = blockState.block
+                if (block !is BlockMagicPlant) return@noFairy
 
                 // 真下のブロックに紐づけられた妖精のリスト
                 val entries = FairySelector().blockState(blockState).allMatch().withoutPartiallyMatch.primaries
                 if (entries.isEmpty()) return@noFairy // 関連付けられた妖精が居ない場合は無視
 
                 // 最も大きな補正値
-                val growthRateInFloor = entries.map { it.fairyCard.getVariant().mirageFlowerGrowthFactorInFloor }.max()!!
+                val growthRateInFloor = entries.map { block.getGrowthFactorInFloor(it.fairyCard.getVariant()) }.max()!!
 
                 bonus = bonus atLeast growthRateInFloor
             }
@@ -219,6 +219,8 @@ class BlockMirageFlower : BlockMagicPlant(3) {
         AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0),
         AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0)
     )
+
+    override fun getGrowthFactorInFloor(fairySpec: IFairySpec) = fairySpec.mana(Mana.SHINE) * fairySpec.erg(Erg.CRYSTAL) / 100.0 * 3
 
     override fun grow(world: World, blockPos: BlockPos, blockState: IBlockState, random: Random) {
         repeat(random.randomInt(mirageFlowerGrowthHandlers.getGrowthRateModifiers(world, blockPos).growthRate)) {

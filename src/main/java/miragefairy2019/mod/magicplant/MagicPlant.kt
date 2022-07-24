@@ -1,5 +1,6 @@
 package miragefairy2019.mod.magicplant
 
+import miragefairy2019.api.IFairySpec
 import miragefairy2019.api.IPickExecutor
 import miragefairy2019.api.IPickHandler
 import miragefairy2019.api.PickHandlerRegistry
@@ -94,6 +95,7 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
 
     // 成長
 
+    abstract fun getGrowthFactorInFloor(fairySpec: IFairySpec): Double
 
     fun isMaxAge(blockState: IBlockState) = getAge(blockState) == maxAge
 
