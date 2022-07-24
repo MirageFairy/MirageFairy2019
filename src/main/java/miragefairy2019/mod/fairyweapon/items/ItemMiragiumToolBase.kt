@@ -104,7 +104,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
                 if (count > 0) {
                     if (collection()) world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f)
                     breakSound?.let { world.playSound(null, player.posX, player.posY, player.posZ, it, player.soundCategory, 1.0f, 1.0f) } // エフェクト
-                    player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, ceil(actualCoolTime).toInt()) // クールタイム
+                    player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, ceil(actualCoolTime + 10.0).toInt()) // クールタイム
                 }
 
                 // エフェクト

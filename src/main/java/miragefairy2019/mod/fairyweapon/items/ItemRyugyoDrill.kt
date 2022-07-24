@@ -27,7 +27,7 @@ import kotlin.math.floor
 class ItemRyugyoDrill() : ItemMiragiumToolBase() {
     override val maxHardness = status("maxHardness", { 2.0 + !Mana.GAIA / 50.0 + !Erg.DESTROY / 25.0 + !Mastery.mining / 25.0 atMost 20.0 }, { float2 })
     val range = status("range", { floor(1.0 + !Mana.WIND / 50.0 + !Erg.LEVITATE / 25.0).toInt() atMost 5 }, { integer })
-    val coolTime = status("coolTime", { 20.0 * 0.1 / costFactor }, { duration })
+    val coolTime = status("coolTime", { 20.0 * 0.025 / costFactor }, { duration })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
     override val fortune = status("fortune", { !Mana.SHINE / 15.0 + !Mana.DARK / 30.0 + !Erg.THUNDER / 15.0 }, { float2 })
     override val wear = status("wear", { 0.04 / (1.0 + !Mana.FIRE / 50.0 + !Erg.LIFE / 25.0) * costFactor }, { percent2 })
