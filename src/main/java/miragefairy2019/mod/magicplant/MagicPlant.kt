@@ -139,9 +139,9 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
     override fun canSilkHarvest(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer) = false
 
     // 使用すると収穫
-    override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        val fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, playerIn.heldItemMainhand)
-        return tryPick(world, blockPos, playerIn, fortune)
+    override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        val fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, player.heldItemMainhand)
+        return tryPick(world, blockPos, player, fortune)
     }
 
     // 収穫
