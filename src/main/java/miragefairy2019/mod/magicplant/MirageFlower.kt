@@ -228,8 +228,9 @@ class BlockMirageFlower : BlockMagicPlant(3) {
 
     override fun grow(world: World, blockPos: BlockPos, blockState: IBlockState, random: Random) {
         repeat(random.randomInt(mirageFlowerGrowthHandlers.getGrowthRateModifiers(world, blockPos).growthRate)) {
-            if (!canGrow(getAge(blockState))) return
-            world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState) + 1), 2)
+            val blockState2 = world.getBlockState(blockPos)
+            if (!canGrow(getAge(blockState2))) return
+            world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState2) + 1), 2)
         }
     }
 
