@@ -171,7 +171,7 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
 
 }
 
-abstract class ItemMagicPlantSeed(private val block: BlockMagicPlant) : Item(), IPlantable {
+class ItemMagicPlantSeed(private val block: BlockMagicPlant) : Item(), IPlantable {
     // 使われるとその場に植物を設置する。
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         val itemStack = player.getHeldItem(hand)
