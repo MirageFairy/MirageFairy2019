@@ -45,7 +45,7 @@ val magicPlantModule = module {
         PickHandlerRegistry.pickHandlers += IPickHandler { world, blockPos, player ->
             val blockState = world.getBlockState(blockPos)
             val block = blockState.block as? BlockMagicPlant ?: return@IPickHandler null
-            if (!block.isMaxAge(blockState)) return@IPickHandler null
+            if (!block.canPick(block.getAge(blockState))) return@IPickHandler null
             IPickExecutor { fortune -> block.tryPick(world, blockPos, player, fortune) }
         }
     }
@@ -97,7 +97,9 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
 
     abstract fun getGrowthFactorInFloor(fairySpec: IFairySpec): Double
 
-    fun isMaxAge(blockState: IBlockState) = getAge(blockState) == maxAge
+    abstract fun canPick(age: Int): Boolean
+
+    abstract fun canGrow(age: Int): Boolean
 
     abstract fun grow(world: World, blockPos: BlockPos, blockState: IBlockState, random: Random)
 
@@ -110,7 +112,7 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
 
     // 骨粉
     override fun grow(world: World, random: Random, blockPos: BlockPos, blockState: IBlockState) = grow(world, blockPos, blockState, random)
-    override fun canGrow(world: World, blockPos: BlockPos, blockState: IBlockState, isClient: Boolean) = !isMaxAge(blockState)
+    override fun canGrow(world: World, blockPos: BlockPos, blockState: IBlockState, isClient: Boolean) = canGrow(getAge(blockState))
     override fun canUseBonemeal(world: World, random: Random, blockPos: BlockPos, blockState: IBlockState) = world.rand.nextFloat() < 0.05
 
 
@@ -145,7 +147,7 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
     // 収穫
     fun tryPick(world: World, blockPos: BlockPos, player: EntityPlayer?, fortune: Int): Boolean {
         val blockState = world.getBlockState(blockPos)
-        if (!isMaxAge(blockState)) return false
+        if (!canPick(getAge(blockState))) return false
 
         // 収穫物計算
         val drops = getDrops(getAge(blockState), world.rand, fortune, false)

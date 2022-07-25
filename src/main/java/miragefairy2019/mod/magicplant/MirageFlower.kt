@@ -222,14 +222,18 @@ class BlockMirageFlower : BlockMagicPlant(3) {
 
     override fun getGrowthFactorInFloor(fairySpec: IFairySpec) = fairySpec.mana(Mana.SHINE) * fairySpec.erg(Erg.CRYSTAL) / 100.0 * 3
 
+    override fun canPick(age: Int) = age == maxAge
+
+    override fun canGrow(age: Int) = age != maxAge
+
     override fun grow(world: World, blockPos: BlockPos, blockState: IBlockState, random: Random) {
         repeat(random.randomInt(mirageFlowerGrowthHandlers.getGrowthRateModifiers(world, blockPos).growthRate)) {
-            if (isMaxAge(blockState)) return
+            if (!canGrow(getAge(blockState))) return
             world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState) + 1), 2)
         }
     }
 
-    override fun getSeed() = ItemStack(itemMirageFlowerSeeds())
+    override fun getSeed() = itemMirageFlowerSeeds().createItemStack()
 
     override fun getDrops(age: Int, random: Random, fortune: Int, isBreaking: Boolean) = mutableListOf<ItemStack>().also { drops ->
         if (isBreaking) drops.drop(random, 1.0) { itemMirageFlowerSeeds().createItemStack(it) } // 破壊時、確定で種1個ドロップ
