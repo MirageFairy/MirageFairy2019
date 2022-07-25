@@ -3,70 +3,130 @@ package miragefairy2019.mod.magicplant
 import miragefairy2019.api.Erg
 import miragefairy2019.api.IFairySpec
 import miragefairy2019.api.Mana
-import miragefairy2019.common.toOreName
 import miragefairy2019.lib.erg
 import miragefairy2019.lib.mana
+import miragefairy2019.lib.modinitializer.block
+import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
-import miragefairy2019.libkt.copyItemStack
+import miragefairy2019.lib.modinitializer.setCreativeTab
+import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
+import miragefairy2019.lib.modinitializer.setUnlocalizedName
+import miragefairy2019.lib.resourcemaker.DataBlockState
+import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.makeBlockModel
+import miragefairy2019.lib.resourcemaker.makeBlockStates
+import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.artifacts.FairyCrystal
-import miragefairy2019.mod.artifacts.FairyMaterialCard
-import miragefairy2019.mod.artifacts.createItemStack
+import miragefairy2019.libkt.textComponent
+import miragefairy2019.mod.Main
 import net.minecraft.block.state.IBlockState
+import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
+import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.Random
 
+lateinit var blockMandrake: () -> BlockMandrake
+lateinit var itemMandrakeSeeds: () -> ItemMagicPlantSeed
+
 val mandrakeModule = module {
+
+    // ブロック登録
+    blockMandrake = block({ BlockMandrake() }, "mandrake") {
+        setUnlocalizedName("mandrake")
+        makeBlockStates {
+            DataBlockStates(variants = (0..4).associate { age -> "age=$age" to DataBlockState("miragefairy2019:mandrake_age$age") })
+        }
+    }
+
+    // ブロックモデル生成
+    run {
+        fun makeBlockModel(name: String) = makeBlockModel(name) {
+            DataModel(
+                parent = "block/cross",
+                textures = mapOf(
+                    "particle" to "miragefairy2019:blocks/$name",
+                    "cross" to "miragefairy2019:blocks/$name"
+                )
+            )
+        }
+        makeBlockModel("mandrake_age0")
+        makeBlockModel("mandrake_age1")
+        makeBlockModel("mandrake_age2")
+        makeBlockModel("mandrake_age3")
+        makeBlockModel("mandrake_age4")
+    }
+
+    // 種アイテム登録
+    itemMandrakeSeeds = item({ ItemMagicPlantSeed(blockMandrake()) }, "mandrake_seeds") {
+        setUnlocalizedName("mandrakeSeeds")
+        setCreativeTab { Main.creativeTab }
+        setCustomModelResourceLocation()
+        makeItemModel { generated }
+    }
 
 }
 
+val mandrakeGrowthHandlers = listOf(
+
+    // 何もしなくても25回に1回の割合で成長する
+    IGrowthHandler { world, blockPos ->
+        listOf(GrowthRateModifier(textComponent { "Base Rate"() }, 0.04))
+    }
+
+)
+
 class BlockMandrake : BlockMagicPlant(4) {
 
-    // TODO
     override val boundingBoxList = listOf(
+        AxisAlignedBB(1 / 16.0, 0 / 16.0, 1 / 16.0, 15 / 16.0, 1 / 16.0, 15 / 16.0),
         AxisAlignedBB(5 / 16.0, 0 / 16.0, 5 / 16.0, 11 / 16.0, 5 / 16.0, 11 / 16.0),
-        AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 12 / 16.0, 14 / 16.0),
-        AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0),
-        AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0),
-        AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 16 / 16.0, 14 / 16.0)
+        AxisAlignedBB(3 / 16.0, 0 / 16.0, 3 / 16.0, 13 / 16.0, 6 / 16.0, 13 / 16.0),
+        AxisAlignedBB(2 / 16.0, 0 / 16.0, 2 / 16.0, 14 / 16.0, 7 / 16.0, 14 / 16.0),
+        AxisAlignedBB(0 / 16.0, 0 / 16.0, 0 / 16.0, 16 / 16.0, 12 / 16.0, 16 / 16.0)
     )
 
-    // TODO
-    override fun getGrowthFactorInFloor(fairySpec: IFairySpec) = fairySpec.mana(Mana.SHINE) * fairySpec.erg(Erg.CRYSTAL) / 100.0 * 3
+    override fun getGrowthFactorInFloor(fairySpec: IFairySpec) = fairySpec.mana(Mana.FIRE) * fairySpec.erg(Erg.KNOWLEDGE) / 100.0 * 3
 
     override fun canPick(age: Int) = age == maxAge
 
     override fun canGrow(age: Int) = age != maxAge && age != 0
 
     override fun grow(world: World, blockPos: BlockPos, blockState: IBlockState, random: Random) {
-        repeat(random.randomInt(mirageFlowerGrowthHandlers.getGrowthRateModifiers(world, blockPos).growthRate)) {
+        repeat(random.randomInt(mandrakeGrowthHandlers.getGrowthRateModifiers(world, blockPos).growthRate)) {
             val blockState2 = world.getBlockState(blockPos)
             if (!canGrow(getAge(blockState2))) return
             world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState2) + 1), 2)
         }
     }
 
-    // TODO
-    override fun getSeed() = itemMirageFlowerSeeds().createItemStack()
+    override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        if (getAge(blockState) == 0) {
+            val itemStack = player.getHeldItem(hand)
+            if ("ingotIron".oreIngredient.test(itemStack)) { // TODO
+                itemStack.shrink(1)
+                world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState) + 1), 2)
+                return true
+            }
+        }
+        return super.onBlockActivated(world, blockPos, blockState, player, hand, facing, hitX, hitY, hitZ)
+    }
 
-    // TODO
+    override fun getSeed() = itemMandrakeSeeds().createItemStack()
+
     override fun getDrops(age: Int, random: Random, fortune: Int, isBreaking: Boolean) = mutableListOf<ItemStack>().also { drops ->
-        if (isBreaking) drops.drop(random, 1.0) { itemMirageFlowerSeeds().createItemStack(it) } // 破壊時、確定で種1個ドロップ
-        if (isBreaking && age >= 2) drops.drop(random, 1 + fortune * 0.2) { FairyMaterialCard.MIRAGE_FLOWER_LEAF.createItemStack(it) } // 破壊時、サイズ2以上で茎
-        if (age >= 3) drops.drop(random, fortune * 0.01) { itemMirageFlowerSeeds().createItemStack(it) } // 完全成長時、低確率で追加の種
-        if (age >= 3) drops.drop(random, 1 + fortune * 0.5) { FairyCrystal.variantFairyCrystal().createItemStack(it) } // 完全成長時、フェアリークリスタル
-        if (age >= 3) drops.drop(random, 1 + fortune * 0.5) { "dustTinyMiragium".toOreName().copyItemStack(it) } // 完全成長時、ミラジウムの微粉
+        if (isBreaking) drops.drop(random, 1.0) { itemMandrakeSeeds().createItemStack(it) } // 破壊時、確定で種1個ドロップ
+        if (age >= 4) drops.drop(random, fortune * 1.0) { Items.BEETROOT.createItemStack(it) } // 完全成長時、収穫物 // TODO
     }
 
-    // TODO
-    override fun getExpDrop(age: Int, random: Random, fortune: Int, isBreaking: Boolean) = when (age) {
-        3 -> if (isBreaking) 2 else 1
-        2 -> if (isBreaking) 1 else 0
-        else -> 0
-    }
+    override fun getExpDrop(age: Int, random: Random, fortune: Int, isBreaking: Boolean) = if (age == 4) 1 else 0
 
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "particle": "miragefairy2019:blocks/mandrake_age4",
+    "cross": "miragefairy2019:blocks/mandrake_age4"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "miragefairy2019:mandrake_age0"
+    },
+    "age=1": {
+      "model": "miragefairy2019:mandrake_age1"
+    },
+    "age=2": {
+      "model": "miragefairy2019:mandrake_age2"
+    },
+    "age=3": {
+      "model": "miragefairy2019:mandrake_age3"
+    },
+    "age=4": {
+      "model": "miragefairy2019:mandrake_age4"
+    }
+  }
+}
