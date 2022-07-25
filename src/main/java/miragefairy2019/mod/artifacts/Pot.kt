@@ -72,7 +72,6 @@ val potModule = module {
     makeRecipe("pot") {
         DataShapedRecipe(
             pattern = listOf(
-                "   ",
                 "# #",
                 " # "
             ),
