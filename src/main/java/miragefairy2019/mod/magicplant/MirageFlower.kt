@@ -51,7 +51,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import java.util.Random
 
 lateinit var blockMirageFlower: () -> BlockMirageFlower
-lateinit var itemMirageFlowerSeeds: () -> ItemMirageFlowerSeed
+lateinit var itemMirageFlowerSeeds: () -> ItemMagicPlantSeed
 
 val mirageFlowerModule = module {
 
@@ -81,7 +81,7 @@ val mirageFlowerModule = module {
     }
 
     // 種アイテム登録
-    itemMirageFlowerSeeds = item({ ItemMirageFlowerSeed(blockMirageFlower()) }, "mirage_flower_seeds") {
+    itemMirageFlowerSeeds = item({ ItemMagicPlantSeed(blockMirageFlower()) }, "mirage_flower_seeds") {
         setUnlocalizedName("mirageFlowerSeeds")
         setCreativeTab { Main.creativeTab }
         setCustomModelResourceLocation()
@@ -228,8 +228,9 @@ class BlockMirageFlower : BlockMagicPlant(3) {
 
     override fun grow(world: World, blockPos: BlockPos, blockState: IBlockState, random: Random) {
         repeat(random.randomInt(mirageFlowerGrowthHandlers.getGrowthRateModifiers(world, blockPos).growthRate)) {
-            if (!canGrow(getAge(blockState))) return
-            world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState) + 1), 2)
+            val blockState2 = world.getBlockState(blockPos)
+            if (!canGrow(getAge(blockState2))) return
+            world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState2) + 1), 2)
         }
     }
 
@@ -250,5 +251,3 @@ class BlockMirageFlower : BlockMagicPlant(3) {
     }
 
 }
-
-class ItemMirageFlowerSeed(block: BlockMirageFlower) : ItemMagicPlantSeed(block)
