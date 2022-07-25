@@ -51,7 +51,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import java.util.Random
 
 lateinit var blockMirageFlower: () -> BlockMirageFlower
-lateinit var itemMirageFlowerSeeds: () -> ItemMirageFlowerSeed
+lateinit var itemMirageFlowerSeeds: () -> ItemMagicPlantSeed
 
 val mirageFlowerModule = module {
 
@@ -81,7 +81,7 @@ val mirageFlowerModule = module {
     }
 
     // 種アイテム登録
-    itemMirageFlowerSeeds = item({ ItemMirageFlowerSeed(blockMirageFlower()) }, "mirage_flower_seeds") {
+    itemMirageFlowerSeeds = item({ ItemMagicPlantSeed(blockMirageFlower()) }, "mirage_flower_seeds") {
         setUnlocalizedName("mirageFlowerSeeds")
         setCreativeTab { Main.creativeTab }
         setCustomModelResourceLocation()
@@ -250,5 +250,3 @@ class BlockMirageFlower : BlockMagicPlant(3) {
     }
 
 }
-
-class ItemMirageFlowerSeed(block: BlockMirageFlower) : ItemMagicPlantSeed(block)
