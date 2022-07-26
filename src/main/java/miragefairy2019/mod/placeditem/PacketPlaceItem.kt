@@ -3,6 +3,7 @@ package miragefairy2019.mod.placeditem
 import io.netty.buffer.ByteBuf
 import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
+import miragefairy2019.lib.obtain
 import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.libkt.sq
 import net.minecraft.entity.player.EntityPlayer
@@ -63,12 +64,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
 
             // アクションを試行
             val result = block.place(world, blockPos, player, object : IPlaceExchanger {
-                override fun harvest(itemStack: ItemStack) {
-                    if (!player.inventory.addItemStackToInventory(itemStack)) {
-                        player.dropItem(itemStack, false)
-                    }
-                }
-
+                override fun harvest(itemStack: ItemStack) = player.obtain(itemStack)
                 override fun deploy() = player.heldItemMainhand.notEmptyOrNull?.splitStack(1)
             })
             if (!result) return EnumActionResult.FAIL // アクションに失敗したなら中止
@@ -101,9 +97,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
             tileEntity.markDirty()
 
             // アイテムを増やす
-            if (!player.inventory.addItemStackToInventory(itemStackContained)) {
-                player.dropItem(itemStackContained, false)
-            }
+            player.obtain(itemStackContained)
 
             // ブロックを削除
             val res = world.setBlockState(blockPos, Blocks.AIR.defaultState, 11)

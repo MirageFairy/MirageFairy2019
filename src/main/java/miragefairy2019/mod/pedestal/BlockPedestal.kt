@@ -2,6 +2,7 @@ package miragefairy2019.mod.pedestal
 
 import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
+import miragefairy2019.lib.obtain
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.notEmptyOrNull
 import net.minecraft.block.Block
@@ -82,9 +83,7 @@ abstract class BlockPedestal<T : TileEntityPedestal>(material: Material, private
                     0.2f,
                     ((Math.random() - Math.random()) * 1.4 + 2.0).toFloat()
                 )
-                if (!player.inventory.addItemStackToInventory(itemStack)) {
-                    player.dropItem(itemStack, false)
-                }
+                player.obtain(itemStack)
             }
 
             override fun deploy(): ItemStack? {

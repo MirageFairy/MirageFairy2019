@@ -3,6 +3,7 @@ package miragefairy2019.lib
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.equalsItemDamageTag
 import mirrg.kotlin.hydrogen.atMost
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.ItemStackHelper
 import net.minecraft.item.ItemStack
@@ -94,4 +95,12 @@ fun <I : IInventory> NBTTagCompound.readInventory(inventoryCreator: (size: Int) 
     val inventory = inventoryCreator(this.inventorySlotCount)
     inventory.readFromNBT(this)
     return inventory
+}
+
+
+/** @param itemStack 破壊的 */
+fun EntityPlayer.obtain(itemStack: ItemStack) {
+    if (!this.inventory.addItemStackToInventory(itemStack)) {
+        this.dropItem(itemStack, false)
+    }
 }
