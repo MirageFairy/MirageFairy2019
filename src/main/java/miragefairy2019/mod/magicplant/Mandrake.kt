@@ -137,9 +137,9 @@ class BlockMandrake : BlockMagicPlant(4) {
 
     override fun getDrops(age: Int, random: Random, fortune: Int, isBreaking: Boolean) = mutableListOf<ItemStack>().also { drops ->
         if (isBreaking) drops.drop(random, 1.0) { itemMandrakeSeeds().createItemStack(it) } // 破壊時、確定で種1個ドロップ
-        if (age >= 4) drops.drop(random, 1.0 + fortune * 0.5) { FairyMaterialCard.MANDRAKE.createItemStack(it) } // 完全成長時、収穫物
+        if (age == maxAge) drops.drop(random, 1.0 + fortune * 0.5) { FairyMaterialCard.MANDRAKE.createItemStack(it) } // 完全成長時、収穫物
     }
 
-    override fun getExpDrop(age: Int, random: Random, fortune: Int, isBreaking: Boolean) = if (age == 4) 1 else 0
+    override fun getExpDrop(age: Int, random: Random, fortune: Int, isBreaking: Boolean) = if (age == maxAge) 1 else 0
 
 }
