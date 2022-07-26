@@ -68,10 +68,9 @@ class VariantFairy(
 val VariantFairy.id get() = fairyCard.id
 val VariantFairy.rare get() = fairyCard.rare
 val VariantFairy.colorSet get() = fairyCard.colorSet
-
 val VariantFairy.level get() = rare + rank - 1
+infix fun VariantFairy.hasSameId(b: VariantFairy) = id == b.id
 
-fun hasSameId(a: VariantFairy, b: VariantFairy) = a.id == b.id
 
 class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, IFairyItem {
     override fun getMirageFairy(itemStack: ItemStack) = getVariant(itemStack)

@@ -464,7 +464,7 @@ class InventoryFairyCollectionBox(tileEntity: TileEntityFairyCollectionBox, titl
         val variant = itemStack.fairyVariant ?: return false // スタンダード妖精でないと受け付けない
         return itemStacks
             .filterIndexed { i, _ -> i != index } // 他スロットにおいて
-            .all a@{ itemStack2 -> !hasSameId(variant, itemStack2.fairyVariant ?: return@a true) } // 同種の妖精があってはならない
+            .all a@{ itemStack2 -> !(variant hasSameId (itemStack2.fairyVariant ?: return@a true)) } // 同種の妖精があってはならない
     }
 }
 
