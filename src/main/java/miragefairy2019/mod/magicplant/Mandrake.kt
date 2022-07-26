@@ -11,6 +11,7 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
+import miragefairy2019.lib.obtain
 import miragefairy2019.lib.resourcemaker.DataBlockState
 import miragefairy2019.lib.resourcemaker.DataBlockStates
 import miragefairy2019.lib.resourcemaker.DataModel
@@ -18,15 +19,17 @@ import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.libkt.containerItem
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.artifacts.FairyMaterialCard
+import miragefairy2019.mod.artifacts.createItemStack
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
@@ -134,7 +137,7 @@ class BlockMandrake : BlockMagicPlant(4) {
 
     override fun getDrops(age: Int, random: Random, fortune: Int, isBreaking: Boolean) = mutableListOf<ItemStack>().also { drops ->
         if (isBreaking) drops.drop(random, 1.0) { itemMandrakeSeeds().createItemStack(it) } // 破壊時、確定で種1個ドロップ
-        if (age >= 4) drops.drop(random, 1.0 + fortune * 0.5) { Items.BEETROOT.createItemStack(it) } // 完全成長時、収穫物 // TODO
+        if (age >= 4) drops.drop(random, 1.0 + fortune * 0.5) { FairyMaterialCard.MANDRAKE.createItemStack(it) } // 完全成長時、収穫物
     }
 
     override fun getExpDrop(age: Int, random: Random, fortune: Int, isBreaking: Boolean) = if (age == 4) 1 else 0
