@@ -54,8 +54,6 @@ val modules = module {
 
         enJa("tile.fairyLog.name", "Fairy Log", "妖精の樹洞")
 
-        enJa("item.mirageFlowerSeeds.name", "Mirage Flower Seeds", "ミラージュフラワーの種")
-
         enJa("item.fairyStick.name", "Fairy Stick", "妖精のステッキ")
         enJa("item.fairyStick.poem", "", "頼みごとをしてみよう")
 

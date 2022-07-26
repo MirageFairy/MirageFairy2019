@@ -19,6 +19,7 @@ import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
@@ -72,6 +73,9 @@ val mandrakeModule = module {
         setCustomModelResourceLocation()
         makeItemModel { generated }
     }
+
+    // 翻訳生成
+    onMakeLang { enJa("item.mandrakeSeeds.name", "Mandrake Seed", "マンドレイクの種") }
 
 }
 

@@ -23,6 +23,7 @@ import miragefairy2019.libkt.BiomeDecoratorFlowers
 import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
@@ -87,6 +88,9 @@ val mirageFlowerModule = module {
         setCustomModelResourceLocation()
         makeItemModel { generated }
     }
+
+    // 翻訳生成
+    onMakeLang { enJa("item.mirageFlowerSeeds.name", "Mirage Flower Seed", "ミラージュフラワーの種") }
 
     // 地形生成
     onHookDecorator {
