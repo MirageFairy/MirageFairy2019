@@ -27,6 +27,8 @@ import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
+import miragefairy2019.mod.magicplant.BlockMirageFlower
+import miragefairy2019.mod.magicplant.blockMirageFlower
 import miragefairy2019.mod.magicplant.itemMirageFlowerSeeds
 import miragefairy2019.mod.skill.Mastery
 import mirrg.kotlin.hydrogen.atLeast
@@ -146,13 +148,14 @@ class ItemFlowerPickingBell(baseFortune: Double, extraItemDropRateFactor: Double
 
                         // 成立
 
+                        val blockState = world.getBlockState(blockPos)
+
                         // 資源消費
                         weaponItemStack.damageItem(world.rand.randomInt(wear()), player)
                         targetCount++
 
                         // 音取得
                         run {
-                            val blockState = world.getBlockState(blockPos)
                             breakSound = blockState.block.getSoundType(blockState, world, blockPos, player).breakSound
                         }
 
@@ -165,8 +168,10 @@ class ItemFlowerPickingBell(baseFortune: Double, extraItemDropRateFactor: Double
 
                             // 種の追加ドロップ
                             if (!world.isRemote) {
-                                val count = world.rand.randomInt(extraItemDropRate() * productionBoost())
-                                if (count > 0) itemMirageFlowerSeeds().createItemStack(count = count).drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
+                                if (blockState.block is BlockMirageFlower) {
+                                    val count = world.rand.randomInt(extraItemDropRate() * productionBoost())
+                                    if (count > 0) itemMirageFlowerSeeds().createItemStack(count = count).drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5)).setNoPickupDelay()
+                                }
                             }
 
                             // 破壊したばかりのブロックの周辺のアイテムを集める
