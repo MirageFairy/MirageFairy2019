@@ -45,7 +45,7 @@ val magicPlantModule = module {
         PickHandlerRegistry.pickHandlers += IPickHandler { world, blockPos, player ->
             val blockState = world.getBlockState(blockPos)
             val block = blockState.block as? BlockMagicPlant ?: return@IPickHandler null
-            if (!block.canPick(block.getAge(blockState))) return@IPickHandler null
+            if (block.getAgeAfterPick(block.getAge(blockState)) == null) return@IPickHandler null
             IPickExecutor { fortune -> block.tryPick(world, blockPos, player, fortune) }
         }
     }
@@ -97,7 +97,7 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
 
     abstract fun getGrowthFactorInFloor(fairySpec: IFairySpec): Double
 
-    abstract fun canPick(age: Int): Boolean
+    abstract fun getAgeAfterPick(age: Int): Int?
 
     abstract fun canGrow(age: Int): Boolean
 
@@ -147,7 +147,7 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
     // 収穫
     fun tryPick(world: World, blockPos: BlockPos, player: EntityPlayer?, fortune: Int): Boolean {
         val blockState = world.getBlockState(blockPos)
-        if (!canPick(getAge(blockState))) return false
+        val ageAfterPick = getAgeAfterPick(getAge(blockState)) ?: return false
 
         // 収穫物計算
         val drops = getDrops(getAge(blockState), world.rand, fortune, false)
@@ -164,7 +164,7 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
         world.playEvent(player, 2001, blockPos, getStateId(blockState))
 
         // ブロックの置換
-        world.setBlockState(blockPos, defaultState.withProperty(AGE, 1), 2)
+        world.setBlockState(blockPos, defaultState.withProperty(AGE, ageAfterPick), 2)
 
         return true
     }

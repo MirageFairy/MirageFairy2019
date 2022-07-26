@@ -96,7 +96,7 @@ class BlockMandrake : BlockMagicPlant(4) {
 
     override fun getGrowthFactorInFloor(fairySpec: IFairySpec) = fairySpec.mana(Mana.FIRE) * fairySpec.erg(Erg.KNOWLEDGE) / 100.0 * 3
 
-    override fun canPick(age: Int) = age == maxAge
+    override fun getAgeAfterPick(age: Int) = if (age == maxAge) 0 else null
 
     override fun canGrow(age: Int) = age != maxAge && age != 0
 

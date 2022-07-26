@@ -222,7 +222,7 @@ class BlockMirageFlower : BlockMagicPlant(3) {
 
     override fun getGrowthFactorInFloor(fairySpec: IFairySpec) = fairySpec.mana(Mana.SHINE) * fairySpec.erg(Erg.CRYSTAL) / 100.0 * 3
 
-    override fun canPick(age: Int) = age == maxAge
+    override fun getAgeAfterPick(age: Int) = if (age == maxAge) 1 else null
 
     override fun canGrow(age: Int) = age != maxAge
 
