@@ -40,6 +40,7 @@ import java.util.Random
 val magicPlantModule = module {
     mirageFlowerModule()
     mandrakeModule()
+    velopedaModule()
 
     onRegisterBlock {
         PickHandlerRegistry.pickHandlers += IPickHandler { world, blockPos, player ->

@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "miragefairy2019:velopeda_age0"
+    },
+    "age=1": {
+      "model": "miragefairy2019:velopeda_age1"
+    },
+    "age=2": {
+      "model": "miragefairy2019:velopeda_age2"
+    },
+    "age=3": {
+      "model": "miragefairy2019:velopeda_age3"
+    },
+    "age=4": {
+      "model": "miragefairy2019:velopeda_age4"
+    },
+    "age=5": {
+      "model": "miragefairy2019:velopeda_age5"
+    }
+  }
+}

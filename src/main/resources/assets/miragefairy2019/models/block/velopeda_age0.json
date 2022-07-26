@@ -1,0 +1,7 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "particle": "miragefairy2019:blocks/velopeda_age0",
+    "cross": "miragefairy2019:blocks/velopeda_age0"
+  }
+}
