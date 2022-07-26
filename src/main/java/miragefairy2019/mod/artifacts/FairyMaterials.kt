@@ -645,6 +645,12 @@ enum class FairyMaterialCard(
             }
         }
     ),
+    MANDRAKE(
+        25, "mandrake", "mandrake",
+        "Mandrake", "マンドレイク", "妖精から抽出した液体を吸って成長する",
+        5, false, { ore("mirageFairyMandrake") },
+        { }
+    ),
     ;
 
     val oreNames = mutableListOf<String>()
