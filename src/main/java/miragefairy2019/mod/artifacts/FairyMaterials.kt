@@ -625,6 +625,26 @@ enum class FairyMaterialCard(
             }
         }
     ),
+    FAIRY_BLOOD(
+        24, "fairy_blood", "fairyBlood",
+        "Fairy Blood", "妖精の血", "太古の宮廷では液状のガーネットと考えられていた",
+        5, false, { ore("mirageFairyBlood").bottle() },
+        {
+            onAddRecipe {
+                fairyCentrifugeCraftHandler(150.0) {
+                    process { !Mana.WIND + !Erg.LIFE * 2.0 }
+                    process { !Mana.SHINE + !Erg.LIFE * 2.0 }
+                    process { !Mana.FIRE + !Erg.LIFE * 2.0 }
+                    input("mirageFairy2019FairyAbilityLife".oreIngredient, 1)
+                    input("container1000MiragiumWater".oreIngredient, 1)
+                    input("mirageFairySyrup".oreIngredient, 1)
+                    input("dustCinnabar".oreIngredient, 1)
+                    input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+                    output(FAIRY_BLOOD.createItemStack(), 1.0)
+                }
+            }
+        }
+    ),
     ;
 
     val oreNames = mutableListOf<String>()
