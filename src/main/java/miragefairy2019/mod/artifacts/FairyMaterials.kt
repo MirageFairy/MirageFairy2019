@@ -651,6 +651,12 @@ enum class FairyMaterialCard(
         5, false, { ore("mirageFairyMandrake") },
         { }
     ),
+    VELOPEDA_LEAF(
+        26, "velopeda_leaf", "velopedaLeaf",
+        "Velopeda Leaf", "ヴェロペーダの葉", "悪魔の魂が宿ることで知られている",
+        5, false, { ore("mirageFairyLeafVelopeda") },
+        { }
+    ),
     ;
 
     val oreNames = mutableListOf<String>()
