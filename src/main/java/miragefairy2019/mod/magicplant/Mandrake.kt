@@ -115,9 +115,15 @@ class BlockMandrake : BlockMagicPlant(4) {
     override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (getAge(blockState) == 0) {
             val itemStack = player.getHeldItem(hand)
-            if ("ingotIron".oreIngredient.test(itemStack)) { // TODO
+            if ("mirageFairyBlood".oreIngredient.test(itemStack)) {
+
+                val containerItem = itemStack.containerItem
+                if (containerItem != null) player.obtain(containerItem)
+
                 itemStack.shrink(1)
+
                 world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState) + 1), 2)
+
                 return true
             }
         }
