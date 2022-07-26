@@ -273,9 +273,7 @@ enum class FairyMaterialCard(
         8, "mirage_flower_leaf", "leafMirageFlower",
         "Mirage Flower Leaf", "ミラージュフラワーの葉", "指を切らないように！",
         0, false, { ore("leafMirageFlower") },
-        {
-
-        }
+        { }
     ),
     MIRAGE_FAIRY_WOOD_STICK(
         9, "mirage_fairy_wood_stick", "stickMirageFairyWood",
@@ -297,9 +295,7 @@ enum class FairyMaterialCard(
         10, "miragium_water_bottle", "bottleMiragiumWater",
         "Miragium Water Bottle", "ミラジウムウォーター入り瓶", "ほんのり甘い香り",
         0, false, { ore("bottleMiragiumWater").ore("container250MiragiumWater").bottle() },
-        {
-
-        }
+        { }
     ),
     MIRAGE_FLOWER_EXTRACT_BOTTLE(
         11, "mirage_flower_extract_bottle", "bottleMirageFlowerExtract",
@@ -539,25 +535,19 @@ enum class FairyMaterialCard(
         17, "fairy_syrup", "fairySyrup",
         "Fairy Syrup", "妖精のシロップ", "爽やかで心が洗われるような「水色」の香り",
         5, false, { ore("mirageFairySyrup").bottle() },
-        {
-
-        }
+        { }
     ),
     FAIRY_PLASTIC(
         18, "fairy_plastic", "fairyPlastic",
         "Fairy Plastic", "妖精のプラスチック", "熱可塑性有機高分子",
         5, false, { ore("gemMirageFairyPlastic") },
-        {
-
-        }
+        { }
     ),
     FAIRY_PLASTIC_WITH_FAIRY(
         19, "fairy_plastic_with_fairy", "fairyPlasticWithFairy",
         "Fairy Plastic with Fairy", "妖精入り妖精のプラスチック", "何を見てヨシ！って言ったんですか！？",
         5, false, { ore("gemMirageFairyPlasticWithFairy") },
-        {
-
-        }
+        { }
     ),
     FAIRY_PLASTIC_ROD(
         20, "fairy_plastic_rod", "fairyPlasticRod",
