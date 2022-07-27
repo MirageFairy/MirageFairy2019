@@ -113,9 +113,9 @@ class BlockVelopeda : BlockMagicPlant(5) {
 
     override fun getGrowthFactorInFloor(fairySpec: IFairySpec) = fairySpec.mana(Mana.FIRE) * fairySpec.erg(Erg.ATTACK) / 100.0 * 3
 
-    override fun getAgeAfterPick(age: Int) = if (age == maxAge) 0 else null
+    override fun getAgeAfterPick(age: Int) = if (age == maxAge) 1 else null
 
-    override fun canGrow(age: Int) = age != maxAge && age != 0
+    override fun canGrow(age: Int) = age != maxAge && age != 3
 
     override val growthHandlers = listOf(
 
@@ -135,7 +135,7 @@ class BlockVelopeda : BlockMagicPlant(5) {
     }
 
     override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        if (getAge(blockState) == 0) {
+        if (getAge(blockState) == 3) {
             val itemStack = player.getHeldItem(hand)
             if ("mirageFairyBlood".oreIngredient.test(itemStack)) {
 
