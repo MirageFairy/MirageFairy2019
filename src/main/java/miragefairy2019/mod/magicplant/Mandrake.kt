@@ -180,12 +180,14 @@ class BlockMandrake : BlockMagicPlant(4) {
         if (getAge(blockState) != 4) return
         if (random.nextInt(200) != 0) return
         world.playSound(
-            null,
-            blockPos,
+            blockPos.x + 0.5,
+            blockPos.y + 0.5,
+            blockPos.z + 0.5,
             SoundEvents.ENTITY_GHAST_AMBIENT,
             SoundCategory.BLOCKS,
             (1.0f + world.rand.nextFloat()) / 2.0f,
-            random.nextFloat() * 0.7f + 0.3f
+            random.nextFloat() * 0.7f + 0.3f,
+            false
         )
     }
 
