@@ -56,7 +56,7 @@ object CompressedMaterials {
                         "miragefairy2019:nephrite_block",
                         "miragefairy2019:topaz_block",
                         "miragefairy2019:tourmaline_block",
-                        "minecraft:stone"
+                        "miragefairy2019:velopeda_block"
                     ).mapIndexed { i, model -> "variant=$i" to DataBlockState(model = model) }.toMap()
                 )
             }
@@ -85,6 +85,7 @@ object CompressedMaterials {
             enJa("tile.blockNephrite.name", "Block of Nephrite", "ネフライトブロック")
             enJa("tile.blockTopaz.name", "Block of Topaz", "トパーズブロック")
             enJa("tile.blockTourmaline.name", "Block of Tourmaline", "トルマリンブロック")
+            enJa("tile.blockVelopeda.name", "Block of Velopeda Leaf", "呪いの布")
         }
 
         // ブロックモデルの生成
@@ -112,6 +113,7 @@ object CompressedMaterials {
             makeBlockModel("nephrite_block")
             makeBlockModel("topaz_block")
             makeBlockModel("tourmaline_block")
+            makeBlockModel("velopeda_block")
         }
 
         // アイテムモデルの生成
@@ -131,6 +133,7 @@ object CompressedMaterials {
             makeItemModel("nephrite_block") { block }
             makeItemModel("topaz_block") { block }
             makeItemModel("tourmaline_block") { block }
+            makeItemModel("velopeda_block") { block }
         }
 
         // レシピの生成
@@ -186,6 +189,7 @@ object CompressedMaterials {
             fromBlock("nephrite_gem", "nephrite_block", !"blockNephrite", r(m, 14, 9))
             fromBlock("topaz_gem", "topaz_block", !"blockTopaz", r(m, 15, 9))
             fromBlock("tourmaline_gem", "tourmaline_block", !"blockTourmaline", r(m, 16, 9))
+            fromBlock("velopeda_leaf", "velopeda_block", !"blockVelopeda", r(fm, 26, 9))
             toBlock("apatite_block", !"gemApatite", r(m1, 0, 1))
             toBlock("fluorite_block", !"gemFluorite", r(m1, 1, 1))
             toBlock("sulfur_block", !"gemSulfur", r(m1, 2, 1))
@@ -201,6 +205,7 @@ object CompressedMaterials {
             toBlock("nephrite_block", !"gemNephrite", r(m1, 12, 1))
             toBlock("topaz_block", !"gemTopaz", r(m1, 13, 1))
             toBlock("tourmaline_block", !"gemTourmaline", r(m1, 14, 1))
+            toBlock("velopeda_block", !"mirageFairyLeafVelopeda", r(m1, 15, 1))
 
             // TODO move
             fromBlock("miragium_tiny_dust", "miragium_dust", !"dustMiragium", r(m, 4, 9))
@@ -252,6 +257,7 @@ enum class EnumVariantMaterials1(
     NEPHRITE_BLOCK(12, "nephrite_block", "blockNephrite", "blockNephrite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
     TOPAZ_BLOCK(13, "topaz_block", "blockTopaz", "blockTopaz", HardnessClass.SUPER_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
     TOURMALINE_BLOCK(14, "tourmaline_block", "blockTourmaline", "blockTourmaline", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    VELOPEDA_BLOCK(15, "velopeda_block", "blockVelopeda", "blockVelopeda", HardnessClass(0.8f, "shovel", 0), 0, { SoundType.CLOTH }, false, { Material.CLOTH }, false, EnumFlammability.FAST.value, EnumFireSpreadSpeed.MEDIUM.value, 1.0f),
     ;
 
     override fun toString() = resourceName
