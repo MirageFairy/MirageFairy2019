@@ -38,6 +38,7 @@ import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.EnumVariantMaterials1
 import mirrg.kotlin.hydrogen.atLeast
 import net.minecraft.block.BlockFarmland
+import net.minecraft.block.SoundType
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
@@ -127,6 +128,10 @@ val mirageFlowerModule = module {
 }
 
 class BlockMirageFlower : BlockMagicPlant(3) {
+
+    init {
+        soundType = SoundType.GLASS
+    }
 
     override val boundingBoxList = listOf(
         AxisAlignedBB(5 / 16.0, 0 / 16.0, 5 / 16.0, 11 / 16.0, 5 / 16.0, 11 / 16.0),

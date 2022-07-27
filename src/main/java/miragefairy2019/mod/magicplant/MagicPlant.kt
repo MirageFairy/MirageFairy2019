@@ -60,7 +60,7 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
 
 
     init {
-        soundType = SoundType.GLASS
+        soundType = SoundType.PLANT
     }
 
     override fun getFlammability(world: IBlockAccess, blockPos: BlockPos, face: EnumFacing) = EnumFlammability.VERY_FAST.value
