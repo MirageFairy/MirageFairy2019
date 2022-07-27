@@ -1,8 +1,11 @@
 package miragefairy2019.mod.fairy
 
+import miragefairy2019.api.Erg
 import miragefairy2019.api.ErgSet
+import miragefairy2019.api.Mana
 import miragefairy2019.lib.div
 import miragefairy2019.lib.entries
+import miragefairy2019.lib.fairyCentrifugeCraftHandler
 import miragefairy2019.lib.max
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
