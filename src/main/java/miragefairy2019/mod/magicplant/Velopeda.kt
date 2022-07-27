@@ -82,16 +82,8 @@ val velopedaModule = module {
     onMakeLang { enJa("item.velopedaSeeds.name", "Velopeda Seed", "ヴェロペーダの種") }
 
 }
-
-// TODO
-val velopedaGrowthHandlers = listOf(
-
-    // 何もしなくても25回に1回の割合で成長する
-    IGrowthHandler { world, blockPos ->
-        listOf(GrowthRateModifier(textComponent { "Base Rate"() }, 0.04))
     }
 
-)
 
 class BlockVelopeda : BlockMagicPlant(5) {
 
@@ -111,8 +103,17 @@ class BlockVelopeda : BlockMagicPlant(5) {
 
     override fun canGrow(age: Int) = age != maxAge && age != 0
 
+    override val growthHandlers = listOf(
+
+        // 何もしなくても25回に1回の割合で成長する
+        IGrowthHandler { world, blockPos ->
+            listOf(GrowthRateModifier(textComponent { "Base Rate"() }, 0.04))
+        }
+
+    )
+
     override fun grow(world: World, blockPos: BlockPos, blockState: IBlockState, random: Random) {
-        repeat(random.randomInt(velopedaGrowthHandlers.getGrowthRateModifiers(world, blockPos).growthRate)) {
+        repeat(random.randomInt(growthHandlers.getGrowthRateModifiers(world, blockPos).growthRate)) {
             val blockState2 = world.getBlockState(blockPos)
             if (!canGrow(getAge(blockState2))) return
             world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState2) + 1), 2)

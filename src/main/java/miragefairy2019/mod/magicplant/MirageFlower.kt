@@ -126,95 +126,6 @@ val mirageFlowerModule = module {
 
 }
 
-val mirageFlowerGrowthHandlers = listOf(
-
-    // 何もしなくても25回に1回の割合で成長する
-    IGrowthHandler { world, blockPos ->
-        listOf(GrowthRateModifier(textComponent { "Base Rate"() }, 0.04))
-    },
-
-    // 人工光が当たっているなら加点
-    IGrowthHandler { world, blockPos ->
-        listOf(GrowthRateModifier(textComponent { "Block Light Bonus"() }, world.getLightFor(EnumSkyBlock.BLOCK, blockPos).let {
-            when {
-                it >= 13 -> 1.2
-                it >= 9 -> 1.1
-                else -> 1.0
-            }
-        }))
-    },
-
-    // 太陽光が当たっているなら加点
-    IGrowthHandler { world, blockPos ->
-        listOf(GrowthRateModifier(textComponent { "Sky Light Bonus"() }, world.getLightFor(EnumSkyBlock.SKY, blockPos).let {
-            when {
-                it >= 15 -> 1.1
-                it >= 9 -> 1.05
-                else -> 1.0
-            }
-        }))
-    },
-
-    // 空が見えるなら加点
-    IGrowthHandler { world, blockPos ->
-        listOf(GrowthRateModifier(textComponent { "Sky Bonus"() }, if (world.canSeeSky(blockPos)) 1.1 else 1.0))
-    },
-
-    // 地面加点
-    IGrowthHandler { world, blockPos ->
-        listOf(GrowthRateModifier(textComponent { "Ground Bonus"() }, world.getBlockState(blockPos.down()).let { blockState ->
-            var bonus = 0.5
-
-            // 妖精による判定
-            run noFairy@{
-                val block = blockState.block
-                if (block !is BlockMagicPlant) return@noFairy
-
-                // 真下のブロックに紐づけられた妖精のリスト
-                val entries = FairySelector().blockState(blockState).allMatch().withoutPartiallyMatch.primaries
-                if (entries.isEmpty()) return@noFairy // 関連付けられた妖精が居ない場合は無視
-
-                // 最も大きな補正値
-                val growthRateInFloor = entries.map { block.getGrowthFactorInFloor(it.fairyCard.getVariant()) }.max()!!
-
-                bonus = bonus atLeast growthRateInFloor
-            }
-
-            // 特定ブロックによる判定
-            if (blockState.block === Blocks.GRASS) bonus = bonus atLeast 1.0
-            if (blockState.block === Blocks.DIRT) bonus = bonus atLeast 1.1
-            if (blockState.block === Blocks.FARMLAND) {
-                bonus = bonus atLeast 1.2
-                if (blockState.getValue(BlockFarmland.MOISTURE) > 0) bonus = bonus atLeast 1.3 // 耕土が湿っているなら加点
-            }
-            if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.APATITE_BLOCK)) bonus = bonus atLeast 1.5
-            if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.FLUORITE_BLOCK)) bonus = bonus atLeast 2.0
-            if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.SULFUR_BLOCK)) bonus = bonus atLeast 1.5
-            if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.CINNABAR_BLOCK)) bonus = bonus atLeast 2.0
-            if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MOONSTONE_BLOCK)) bonus = bonus atLeast 3.0
-            if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MAGNETITE_BLOCK)) bonus = bonus atLeast 1.2
-
-            bonus
-        }))
-    },
-
-    // バイオーム加点
-    IGrowthHandler { world, blockPos ->
-        listOf(GrowthRateModifier(textComponent { "Biome Bonus"() }, world.getBiome(blockPos).let { biome ->
-            when {
-                BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST) -> 1.3
-                BiomeDictionary.hasType(biome, BiomeDictionary.Type.MAGICAL) -> 1.3
-                BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) -> 1.2
-                BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE) -> 1.2
-                BiomeDictionary.hasType(biome, BiomeDictionary.Type.PLAINS) -> 1.1
-                BiomeDictionary.hasType(biome, BiomeDictionary.Type.SWAMP) -> 1.1
-                else -> 1.0
-            }
-        }))
-    }
-
-)
-
 class BlockMirageFlower : BlockMagicPlant(3) {
 
     override val boundingBoxList = listOf(
@@ -230,8 +141,97 @@ class BlockMirageFlower : BlockMagicPlant(3) {
 
     override fun canGrow(age: Int) = age != maxAge
 
+    override val growthHandlers = listOf(
+
+        // 何もしなくても25回に1回の割合で成長する
+        IGrowthHandler { world, blockPos ->
+            listOf(GrowthRateModifier(textComponent { "Base Rate"() }, 0.04))
+        },
+
+        // 人工光が当たっているなら加点
+        IGrowthHandler { world, blockPos ->
+            listOf(GrowthRateModifier(textComponent { "Block Light Bonus"() }, world.getLightFor(EnumSkyBlock.BLOCK, blockPos).let {
+                when {
+                    it >= 13 -> 1.2
+                    it >= 9 -> 1.1
+                    else -> 1.0
+                }
+            }))
+        },
+
+        // 太陽光が当たっているなら加点
+        IGrowthHandler { world, blockPos ->
+            listOf(GrowthRateModifier(textComponent { "Sky Light Bonus"() }, world.getLightFor(EnumSkyBlock.SKY, blockPos).let {
+                when {
+                    it >= 15 -> 1.1
+                    it >= 9 -> 1.05
+                    else -> 1.0
+                }
+            }))
+        },
+
+        // 空が見えるなら加点
+        IGrowthHandler { world, blockPos ->
+            listOf(GrowthRateModifier(textComponent { "Sky Bonus"() }, if (world.canSeeSky(blockPos)) 1.1 else 1.0))
+        },
+
+        // 地面加点
+        IGrowthHandler { world, blockPos ->
+            listOf(GrowthRateModifier(textComponent { "Ground Bonus"() }, world.getBlockState(blockPos.down()).let { blockState ->
+                var bonus = 0.5
+
+                // 妖精による判定
+                run noFairy@{
+                    val block = blockState.block
+                    if (block !is BlockMagicPlant) return@noFairy
+
+                    // 真下のブロックに紐づけられた妖精のリスト
+                    val entries = FairySelector().blockState(blockState).allMatch().withoutPartiallyMatch.primaries
+                    if (entries.isEmpty()) return@noFairy // 関連付けられた妖精が居ない場合は無視
+
+                    // 最も大きな補正値
+                    val growthRateInFloor = entries.map { block.getGrowthFactorInFloor(it.fairyCard.getVariant()) }.max()!!
+
+                    bonus = bonus atLeast growthRateInFloor
+                }
+
+                // 特定ブロックによる判定
+                if (blockState.block === Blocks.GRASS) bonus = bonus atLeast 1.0
+                if (blockState.block === Blocks.DIRT) bonus = bonus atLeast 1.1
+                if (blockState.block === Blocks.FARMLAND) {
+                    bonus = bonus atLeast 1.2
+                    if (blockState.getValue(BlockFarmland.MOISTURE) > 0) bonus = bonus atLeast 1.3 // 耕土が湿っているなら加点
+                }
+                if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.APATITE_BLOCK)) bonus = bonus atLeast 1.5
+                if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.FLUORITE_BLOCK)) bonus = bonus atLeast 2.0
+                if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.SULFUR_BLOCK)) bonus = bonus atLeast 1.5
+                if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.CINNABAR_BLOCK)) bonus = bonus atLeast 2.0
+                if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MOONSTONE_BLOCK)) bonus = bonus atLeast 3.0
+                if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MAGNETITE_BLOCK)) bonus = bonus atLeast 1.2
+
+                bonus
+            }))
+        },
+
+        // バイオーム加点
+        IGrowthHandler { world, blockPos ->
+            listOf(GrowthRateModifier(textComponent { "Biome Bonus"() }, world.getBiome(blockPos).let { biome ->
+                when {
+                    BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST) -> 1.3
+                    BiomeDictionary.hasType(biome, BiomeDictionary.Type.MAGICAL) -> 1.3
+                    BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) -> 1.2
+                    BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE) -> 1.2
+                    BiomeDictionary.hasType(biome, BiomeDictionary.Type.PLAINS) -> 1.1
+                    BiomeDictionary.hasType(biome, BiomeDictionary.Type.SWAMP) -> 1.1
+                    else -> 1.0
+                }
+            }))
+        }
+
+    )
+
     override fun grow(world: World, blockPos: BlockPos, blockState: IBlockState, random: Random) {
-        repeat(random.randomInt(mirageFlowerGrowthHandlers.getGrowthRateModifiers(world, blockPos).growthRate)) {
+        repeat(random.randomInt(growthHandlers.getGrowthRateModifiers(world, blockPos).growthRate)) {
             val blockState2 = world.getBlockState(blockPos)
             if (!canGrow(getAge(blockState2))) return
             world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState2) + 1), 2)

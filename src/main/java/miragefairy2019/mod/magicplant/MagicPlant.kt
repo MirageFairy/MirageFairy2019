@@ -102,6 +102,8 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
 
     abstract fun canGrow(age: Int): Boolean
 
+    abstract val growthHandlers: List<IGrowthHandler>
+
     abstract fun grow(world: World, blockPos: BlockPos, blockState: IBlockState, random: Random)
 
     // 自然成長
