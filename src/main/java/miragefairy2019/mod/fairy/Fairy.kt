@@ -13,6 +13,7 @@ import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.sum
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
@@ -215,6 +216,37 @@ val fairyModule = module {
         // 翻訳生成
         onMakeLang {
             enJa("mirageFairy2019.fairy.${fairyCard.unlocalizedName}.name", fairyCard.englishName, fairyCard.japaneseName)
+        }
+
+    }
+
+    // 妖精合成レシピ
+    onAddRecipe {
+
+        // マンドレイク
+        fairyCentrifugeCraftHandler(90.0) {
+            process { !Mana.FIRE + !Erg.DESTROY * 2.0 }
+            process { !Mana.WIND + !Erg.WARP * 2.0 }
+            process { !Mana.FIRE + !Erg.LIFE * 2.0 }
+            input("mirageFairy2019FairyMirageFlowerRank1".oreIngredient, 1)
+            input("container1000MirageFlowerExtract".oreIngredient, 1)
+            input("mirageFairyCrystalVeryPure".oreIngredient, 1)
+            input("mirageFairy2019FairyVillagerRank1".oreIngredient, 1)
+            input("mirageFairy2019FairyGoldenAppleRank1".oreIngredient, 1)
+            output(FairyCard.MANDRAKE.createItemStack(), 1.0, 1.0)
+        }
+
+        // ヴェロペーダ
+        fairyCentrifugeCraftHandler(90.0) {
+            process { !Mana.FIRE + !Erg.DESTROY * 2.0 }
+            process { !Mana.WIND + !Erg.WARP * 2.0 }
+            process { !Mana.FIRE + !Erg.ATTACK * 2.0 }
+            input("mirageFairy2019FairyMirageFlowerRank1".oreIngredient, 1)
+            input("container1000MirageFlowerExtract".oreIngredient, 1)
+            input("mirageFairyCrystalVeryPure".oreIngredient, 1)
+            input("mirageFairy2019FairyCurseOfVanishingRank1".oreIngredient, 1)
+            input("mirageFairy2019FairyCinnabarRank1".oreIngredient, 1)
+            output(FairyCard.VELOPEDA.createItemStack(), 1.0, 1.0)
         }
 
     }
