@@ -46,6 +46,7 @@ class BlockMaterials<V : IBlockVariantMaterials>(variantList: BlockVariantList<V
     override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = getVariant(world.getBlockState(pos)).fireSpreadSpeed
     override fun getEnchantPowerBonus(world: World, pos: BlockPos) = getVariant(world.getBlockState(pos)).enchantPowerBonus
 
+
     // 一般
     override fun getMaterial(blockState: IBlockState) = getVariant(blockState).material
     override fun getBlockHardness(blockState: IBlockState, world: World, blockPos: BlockPos) = getVariant(blockState).blockHardness
