@@ -34,6 +34,7 @@ interface IBlockVariantMaterials : IBlockVariant {
     val isBeaconBase: Boolean
     val flammability: Int
     val fireSpreadSpeed: Int
+    val enchantPowerBonus: Float
 }
 
 class BlockMaterials<V : IBlockVariantMaterials>(variantList: BlockVariantList<V>) : BlockMulti<V>(Material.IRON, variantList) {
@@ -43,7 +44,7 @@ class BlockMaterials<V : IBlockVariantMaterials>(variantList: BlockVariantList<V
 
     override fun getFlammability(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = getVariant(world.getBlockState(pos)).flammability
     override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing) = getVariant(world.getBlockState(pos)).fireSpreadSpeed
-
+    override fun getEnchantPowerBonus(world: World, pos: BlockPos) = getVariant(world.getBlockState(pos)).enchantPowerBonus
 
     // 一般
     override fun getMaterial(blockState: IBlockState) = getVariant(blockState).material
