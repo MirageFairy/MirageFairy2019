@@ -4,6 +4,7 @@ import miragefairy2019.api.Erg
 import miragefairy2019.api.IFairySpec
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.erg
+import miragefairy2019.lib.fairyCentrifugeCraftHandler
 import miragefairy2019.lib.mana
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -22,6 +23,7 @@ import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.libkt.containerItem
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
@@ -80,9 +82,21 @@ val mandrakeModule = module {
     // 翻訳生成
     onMakeLang { enJa("item.mandrakeSeeds.name", "Mandrake Seed", "マンドレイクの種") }
 
-}
+    // 種レシピ
+    onAddRecipe {
+        fairyCentrifugeCraftHandler(300.0) {
+            process { !Mana.SHINE + !Erg.KNOWLEDGE * 2.0 }
+            process { !Mana.FIRE + !Erg.LIFE * 2.0 }
+            process { !Mana.SHINE + !Erg.LIFE * 2.0 }
+            input("mirageFairy2019FairyMandrakeRank1".oreIngredient, 1)
+            input("container1000MiragiumWater".oreIngredient, 1)
+            input("dirt".oreIngredient, 1)
+            input(itemMirageFlowerSeeds().createItemStack().ingredient, 1)
+            output(itemMandrakeSeeds().createItemStack(), 1.0, 1.0)
+        }
     }
 
+}
 
 class BlockMandrake : BlockMagicPlant(4) {
 

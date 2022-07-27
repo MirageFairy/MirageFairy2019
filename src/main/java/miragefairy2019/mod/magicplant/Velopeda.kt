@@ -4,6 +4,7 @@ import miragefairy2019.api.Erg
 import miragefairy2019.api.IFairySpec
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.erg
+import miragefairy2019.lib.fairyCentrifugeCraftHandler
 import miragefairy2019.lib.mana
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -22,6 +23,7 @@ import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.libkt.containerItem
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
@@ -81,9 +83,21 @@ val velopedaModule = module {
     // 翻訳生成
     onMakeLang { enJa("item.velopedaSeeds.name", "Velopeda Seed", "ヴェロペーダの種") }
 
-}
+    // 種レシピ
+    onAddRecipe {
+        fairyCentrifugeCraftHandler(300.0) {
+            process { !Mana.SHINE + !Erg.KNOWLEDGE * 2.0 }
+            process { !Mana.FIRE + !Erg.ATTACK * 2.0 }
+            process { !Mana.SHINE + !Erg.LIFE * 2.0 }
+            input("mirageFairy2019FairyVelopedaRank1".oreIngredient, 1)
+            input("container1000MiragiumWater".oreIngredient, 1)
+            input("dirt".oreIngredient, 1)
+            input(itemMirageFlowerSeeds().createItemStack().ingredient, 1)
+            output(itemVelopedaSeeds().createItemStack(), 1.0, 1.0)
+        }
     }
 
+}
 
 class BlockVelopeda : BlockMagicPlant(5) {
 
