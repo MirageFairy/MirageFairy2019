@@ -123,7 +123,7 @@ class BlockVelopeda : BlockMagicPlant(5) {
     override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (getAge(blockState) == 0) {
             val itemStack = player.getHeldItem(hand)
-            if ("mirageFairyBlood".oreIngredient.test(itemStack)) { // TODO
+            if ("mirageFairyBlood".oreIngredient.test(itemStack)) {
 
                 val containerItem = itemStack.containerItem
                 if (containerItem != null) player.obtain(containerItem)
