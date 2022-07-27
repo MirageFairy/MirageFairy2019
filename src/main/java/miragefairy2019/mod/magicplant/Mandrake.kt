@@ -36,6 +36,7 @@ import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
+import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
@@ -148,6 +149,16 @@ class BlockMandrake : BlockMagicPlant(4) {
                 }
 
                 world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState) + 1), 2)
+
+                repeat(5) {
+                    world.spawnParticle(
+                        EnumParticleTypes.VILLAGER_HAPPY,
+                        blockPos.x + world.rand.nextDouble(),
+                        blockPos.y + world.rand.nextDouble(),
+                        blockPos.z + world.rand.nextDouble(),
+                        0.0, 0.0, 0.0
+                    )
+                }
 
                 return true
             }
