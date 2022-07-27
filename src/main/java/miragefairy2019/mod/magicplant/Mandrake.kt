@@ -32,12 +32,16 @@ import miragefairy2019.mod.artifacts.FairyMaterialCard
 import miragefairy2019.mod.artifacts.createItemStack
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
+import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.Random
 
 lateinit var blockMandrake: () -> BlockMandrake
@@ -157,5 +161,44 @@ class BlockMandrake : BlockMagicPlant(4) {
     }
 
     override fun getExpDrop(age: Int, random: Random, fortune: Int, isBreaking: Boolean) = if (age == maxAge) 1 else 0
+
+    @SideOnly(Side.CLIENT)
+    override fun randomDisplayTick(blockState: IBlockState, world: World, blockPos: BlockPos, random: Random) {
+        if (getAge(blockState) != 4) return
+        if (random.nextInt(200) != 0) return
+        world.playSound(
+            blockPos.x + 0.5, blockPos.y + 0.5, blockPos.z + 0.5,
+            SoundEvents.ENTITY_GHAST_AMBIENT, SoundCategory.BLOCKS,
+            1.0f + random.nextFloat(), random.nextFloat() * 0.7f + 0.3f,
+            false
+        )
+    }
+
+    override fun breakBlock(world: World, blockPos: BlockPos, blockState: IBlockState) {
+        super.breakBlock(world, blockPos, blockState)
+        if (world.isRemote) return
+        if (getAge(blockState) != 4) return
+        world.playSound(
+            null,
+            blockPos,
+            SoundEvents.ENTITY_GHAST_HURT,
+            SoundCategory.BLOCKS,
+            1.0f + world.rand.nextFloat(),
+            world.rand.nextFloat() * 0.7f + 0.3f
+        )
+    }
+
+    override fun onPick(world: World, blockPos: BlockPos, player: EntityPlayer?) {
+        if (world.isRemote) return
+        if (getAge(world.getBlockState(blockPos)) != 4) return
+        world.playSound(
+            null,
+            blockPos,
+            SoundEvents.ENTITY_GHAST_HURT,
+            SoundCategory.BLOCKS,
+            1.0f + world.rand.nextFloat(),
+            world.rand.nextFloat() * 0.7f + 0.3f
+        )
+    }
 
 }
