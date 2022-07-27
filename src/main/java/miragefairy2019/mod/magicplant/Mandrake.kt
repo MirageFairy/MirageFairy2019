@@ -112,7 +112,7 @@ class BlockMandrake : BlockMagicPlant(4) {
         AxisAlignedBB(0 / 16.0, 0 / 16.0, 0 / 16.0, 16 / 16.0, 12 / 16.0, 16 / 16.0)
     )
 
-    override fun getGrowthFactorInFloor(fairySpec: IFairySpec) = fairySpec.mana(Mana.FIRE) * fairySpec.erg(Erg.KNOWLEDGE) / 100.0 * 3
+    override fun getGrowthFactorInFloor(fairySpec: IFairySpec) = fairySpec.mana(Mana.FIRE) * fairySpec.erg(Erg.LIFE) / 100.0 * 3
 
     override fun getAgeAfterPick(age: Int) = if (age == maxAge) 0 else null
 
