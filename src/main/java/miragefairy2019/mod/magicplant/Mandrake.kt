@@ -140,10 +140,12 @@ class BlockMandrake : BlockMagicPlant(4) {
             val itemStack = player.getHeldItem(hand)
             if ("mirageFairyBlood".oreIngredient.test(itemStack)) {
 
-                val containerItem = itemStack.containerItem
-                if (containerItem != null) player.obtain(containerItem)
+                if (!player.isCreative) {
+                    val containerItem = itemStack.containerItem
+                    if (containerItem != null) player.obtain(containerItem)
 
-                itemStack.shrink(1)
+                    itemStack.shrink(1)
+                }
 
                 world.setBlockState(blockPos, defaultState.withProperty(AGE, getAge(blockState) + 1), 2)
 
