@@ -147,10 +147,14 @@ abstract class BlockMagicPlant(val maxAge: Int) : BlockBush(Material.PLANTS), IG
         return tryPick(world, blockPos, player, fortune)
     }
 
+    open fun onPick(world: World, blockPos: BlockPos, player: EntityPlayer?) = Unit
+
     // 収穫
     fun tryPick(world: World, blockPos: BlockPos, player: EntityPlayer?, fortune: Int): Boolean {
         val blockState = world.getBlockState(blockPos)
         val ageAfterPick = getAgeAfterPick(getAge(blockState)) ?: return false
+
+        onPick(world, blockPos, player)
 
         // 収穫物計算
         val drops = getDrops(getAge(blockState), world.rand, fortune, false)
