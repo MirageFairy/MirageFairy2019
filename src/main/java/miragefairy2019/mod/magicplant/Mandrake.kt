@@ -180,10 +180,12 @@ class BlockMandrake : BlockMagicPlant(4) {
         if (getAge(blockState) != 4) return
         if (random.nextInt(200) != 0) return
         world.playSound(
-            blockPos.x + 0.5, blockPos.y + 0.5, blockPos.z + 0.5,
-            SoundEvents.ENTITY_GHAST_AMBIENT, SoundCategory.BLOCKS,
-            1.0f + random.nextFloat(), random.nextFloat() * 0.7f + 0.3f,
-            false
+            null,
+            blockPos,
+            SoundEvents.ENTITY_GHAST_AMBIENT,
+            SoundCategory.BLOCKS,
+            (1.0f + world.rand.nextFloat()) / 2.0f,
+            random.nextFloat() * 0.7f + 0.3f
         )
     }
 
@@ -196,7 +198,7 @@ class BlockMandrake : BlockMagicPlant(4) {
             blockPos,
             SoundEvents.ENTITY_GHAST_HURT,
             SoundCategory.BLOCKS,
-            1.0f + world.rand.nextFloat(),
+            (1.0f + world.rand.nextFloat()) / 2.0f,
             world.rand.nextFloat() * 0.7f + 0.3f
         )
     }
@@ -209,7 +211,7 @@ class BlockMandrake : BlockMagicPlant(4) {
             blockPos,
             SoundEvents.ENTITY_GHAST_HURT,
             SoundCategory.BLOCKS,
-            1.0f + world.rand.nextFloat(),
+            (1.0f + world.rand.nextFloat()) / 2.0f,
             world.rand.nextFloat() * 0.7f + 0.3f
         )
     }
