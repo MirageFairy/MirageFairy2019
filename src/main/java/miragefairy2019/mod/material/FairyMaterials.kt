@@ -628,10 +628,10 @@ enum class FairyMaterialCard(
             }
         }
     ),
-    FAIRY_BLOOD(
-        24, "fairy_blood", "fairyBlood",
-        "Fairy Blood", "妖精の血", "太古の宮廷では液状のガーネットと考えられていた",
-        5, false, { ore("mirageFairyBlood").bottle() },
+    MIRAGE_FAIRY_BLOOD_BOTTLE(
+        24, "mirage_fairy_blood_bottle", "bottleMirageFairyBlood",
+        "Mirage Fairy Blood", "妖精の血", "太古の宮廷では液状のガーネットと考えられていた",
+        5, false, { ore("bottleMirageFairyBlood").ore("container250MirageFairyBlood").bottle() },
         {
             onAddRecipe {
                 fairyCentrifugeCraftHandler(150.0) {
@@ -643,7 +643,7 @@ enum class FairyMaterialCard(
                     input("mirageFairySyrup".oreIngredient, 1)
                     input("dustCinnabar".oreIngredient, 1)
                     input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
-                    output(FAIRY_BLOOD.createItemStack(), 1.0)
+                    output(MIRAGE_FAIRY_BLOOD_BOTTLE.createItemStack(), 1.0)
                 }
             }
         }
