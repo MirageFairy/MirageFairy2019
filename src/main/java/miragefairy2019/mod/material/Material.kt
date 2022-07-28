@@ -6,4 +6,6 @@ val materialModule = module {
     commonMaterialsModule()
     CompressedMaterials.compressedMaterialsModule(this)
     Ores.oresModule(this)
+    fairyMaterialsModule()
+    FluidMaterials.fluidMaterialsModule(this)
 }

@@ -27,8 +27,8 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.artifacts.FairyMaterialCard
-import miragefairy2019.mod.artifacts.createItemStack
+import miragefairy2019.mod.material.FairyMaterialCard
+import miragefairy2019.mod.material.createItemStack
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.hydrogen.formatAs

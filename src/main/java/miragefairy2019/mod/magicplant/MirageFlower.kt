@@ -28,8 +28,8 @@ import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.FairyCrystal
-import miragefairy2019.mod.artifacts.FairyMaterialCard
-import miragefairy2019.mod.artifacts.createItemStack
+import miragefairy2019.mod.material.FairyMaterialCard
+import miragefairy2019.mod.material.createItemStack
 import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries

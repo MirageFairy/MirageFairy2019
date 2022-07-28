@@ -28,8 +28,8 @@ import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.artifacts.FairyMaterialCard
-import miragefairy2019.mod.artifacts.createItemStack
+import miragefairy2019.mod.material.FairyMaterialCard
+import miragefairy2019.mod.material.createItemStack
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack

@@ -1,4 +1,4 @@
-package miragefairy2019.mod.artifacts
+package miragefairy2019.mod.material
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
@@ -35,6 +35,9 @@ import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.artifacts.WandType
+import miragefairy2019.mod.artifacts.ingredient
+import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeBlock
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeItem

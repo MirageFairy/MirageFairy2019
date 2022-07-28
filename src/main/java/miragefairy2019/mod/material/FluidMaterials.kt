@@ -1,4 +1,4 @@
-package miragefairy2019.mod.artifacts
+package miragefairy2019.mod.material
 
 import miragefairy2019.lib.modinitializer.ModScope
 import miragefairy2019.lib.modinitializer.block

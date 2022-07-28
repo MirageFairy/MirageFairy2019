@@ -90,8 +90,8 @@ import miragefairy2019.libkt.white
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.artifacts.FairyMaterialCard
-import miragefairy2019.mod.artifacts.createItemStack
+import miragefairy2019.mod.material.FairyMaterialCard
+import miragefairy2019.mod.material.createItemStack
 import miragefairy2019.mod.artifacts.itemFertilizer
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType

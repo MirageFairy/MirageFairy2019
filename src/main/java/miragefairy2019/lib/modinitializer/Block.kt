@@ -4,7 +4,7 @@ import miragefairy2019.common.ResourceName
 import miragefairy2019.libkt.resourceLocation
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.artifacts.FluidStateMapper
+import miragefairy2019.mod.material.FluidStateMapper
 import net.minecraft.block.Block
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraftforge.client.model.ModelLoader

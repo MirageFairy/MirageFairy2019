@@ -26,6 +26,7 @@ import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionSpawnBlock
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRegistry
+import miragefairy2019.mod.material.FluidMaterials
 import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.displayName
