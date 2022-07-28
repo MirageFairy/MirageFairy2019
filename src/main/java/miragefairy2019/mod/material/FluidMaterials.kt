@@ -43,6 +43,11 @@ object FluidMaterials {
     lateinit var fluidMirageFlowerOil: () -> Fluid
     lateinit var blockFluidMirageFlowerOil: () -> BlockFluidMiragiumWater
     lateinit var itemFluidMirageFlowerOil: () -> ItemBlock
+
+    lateinit var fluidMirageFairyBlood: () -> Fluid
+    lateinit var blockFluidMirageFairyBlood: () -> BlockFluidMiragiumWater
+    lateinit var itemFluidMirageFairyBlood: () -> ItemBlock
+
     val fluidMaterialsModule = module {
 
         // ユニバーサルバケツ
@@ -117,6 +122,26 @@ object FluidMaterials {
         onMakeLang {
             enJa("fluid.mirage_flower_oil", "Mirage Oil", "ミラージュオイル")
             enJa("tile.mirageFlowerOil.name", "Mirage Oil", "ミラージュオイル")
+        }
+
+
+        // 妖精の血
+        fluidMirageFairyBlood = fluid("mirage_fairy_blood") {
+            viscosity = 1000
+        }
+        blockFluidMirageFairyBlood = block({ BlockFluidMiragiumWater(fluidMirageFairyBlood()) }, "mirage_fairy_blood") {
+            setUnlocalizedName("mirageFairyBlood")
+            setCreativeTab { Main.creativeTab }
+            setFluidStateMapper()
+            makeBlockStates(resourceName.path) { fluid }
+        }
+        itemFluidMirageFairyBlood = item({ ItemBlock(blockFluidMirageFairyBlood()) }, "mirage_fairy_blood") {
+            setCustomModelResourceLocation()
+        }
+        makeItemModel("mirage_fairy_blood") { fluid }
+        onMakeLang {
+            enJa("fluid.mirage_fairy_blood", "Mirage Fairy Blood", "妖精の血")
+            enJa("tile.mirageFairyBlood.name", "irage Fairy Blood", "妖精の血")
         }
 
     }
