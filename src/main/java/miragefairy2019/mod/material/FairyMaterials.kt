@@ -634,14 +634,23 @@ enum class FairyMaterialCard(
         5, false, { ore("bottleMirageFairyBlood").ore("container250MirageFairyBlood").bottle() },
         {
             onAddRecipe {
-                fairyCentrifugeCraftHandler(150.0) {
-                    process { !Mana.WIND + !Erg.LIFE * 2.0 }
-                    process { !Mana.SHINE + !Erg.LIFE * 2.0 }
+                fairyCentrifugeCraftHandler(30.0) {
+                    process { !Mana.WIND + !Erg.WATER * 2.0 }
+                    process { !Mana.GAIA + !Erg.HARVEST * 2.0 }
                     process { !Mana.FIRE + !Erg.LIFE * 2.0 }
-                    input("mirageFairy2019FairyAbilityLife".oreIngredient, 1)
-                    input("container1000MiragiumWater".oreIngredient, 1)
                     input("mirageFairySyrup".oreIngredient, 1)
-                    input("dustCinnabar".oreIngredient, 1)
+                    input("mirageFairy2019FairyAbilityLife".oreIngredient, 16)
+                    input(Items.COOKIE.ingredient, 16)
+                    input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+                    output(MIRAGE_FAIRY_BLOOD_BOTTLE.createItemStack(), 1.0)
+                }
+                fairyCentrifugeCraftHandler(150.0) {
+                    process { !Mana.SHINE + !Erg.SUBMISSION * 2.0 }
+                    process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+                    process { !Mana.FIRE + !Erg.LIFE * 2.0 }
+                    input("mirageFairySyrup".oreIngredient, 1)
+                    input("mirageFairy2019FairyAbilityLife".oreIngredient, 1)
+                    input("mirageFairyCrystal".oreIngredient, 1)
                     input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
                     output(MIRAGE_FAIRY_BLOOD_BOTTLE.createItemStack(), 1.0)
                 }
