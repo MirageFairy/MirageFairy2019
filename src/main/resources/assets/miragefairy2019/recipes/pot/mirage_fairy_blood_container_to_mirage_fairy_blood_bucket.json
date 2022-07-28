@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container1000MirageFairyBlood"
+    }
+  ],
+  "result": {
+    "item": "forge:bucketfilled",
+    "nbt": {
+      "FluidName": "mirage_fairy_blood",
+      "Amount": 1000
+    }
+  }
+}

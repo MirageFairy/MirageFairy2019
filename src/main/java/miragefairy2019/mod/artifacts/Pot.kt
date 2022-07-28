@@ -53,6 +53,7 @@ enum class PotCard(
     MIRAGE_FLOWER_OIL_POT("mirage_flower_oil", "mirageFlowerOil", "Mirage Oil", "ミラージュオイル"),
     WATER_POT("water", "water", "Water", "水"),
     LAVA_POT("lava", "lava", "Lava", "溶岩"),
+    MIRAGE_FAIRY_BLOOD_POT("mirage_fairy_blood", "mirageFairyBlood", "Mirage Fairy Blood", "妖精の血"),
 }
 
 
@@ -120,6 +121,12 @@ val potModule = module {
         }, 4) {
             addOreName("mirageFairyPotLava")
             addOreName("container1000Lava")
+        }
+        itemVariant("mirage_fairy_blood_pot", {
+            ItemVariantFilledPot(it, "mirageFairyPotMirageFairyBlood", "mirage_fairy_blood")
+        }, 5) {
+            addOreName("mirageFairyPotMirageFairyBlood")
+            addOreName("container1000MirageFairyBlood")
         }
 
         onRegisterItem {
@@ -225,6 +232,11 @@ val potModule = module {
 
     containerToBucket("lava", "Lava", DataResult(item = "minecraft:lava_bucket"))
     itemToPot("lava", 4, DataSimpleIngredient(item = "minecraft:lava_bucket"))
+
+    containerToUniversalBucket("mirage_fairy_blood", "MirageFairyBlood")
+    universalBucketToPot("mirage_fairy_blood", 5)
+    bottleToPot("mirage_fairy_blood", "MirageFairyBlood", 5)
+    potToBottle("mirage_fairy_blood", "MirageFairyBlood", 24)
 
 }
 
