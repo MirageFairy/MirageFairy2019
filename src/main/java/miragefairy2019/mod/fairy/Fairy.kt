@@ -232,8 +232,7 @@ val fairyModule = module {
             process { !Mana.WIND + !Erg.WARP * 2.0 }
             process { !Mana.FIRE + !Erg.LIFE * 2.0 }
             input("mirageFairy2019FairyMirageFlowerRank1".oreIngredient, 1)
-            input("container1000MirageFlowerExtract".oreIngredient, 1)
-            input("mirageFairyCrystalVeryPure".oreIngredient, 1)
+            input("container1000MirageFairyBlood".oreIngredient, 1)
             input("mirageFairy2019FairyVillagerRank1".oreIngredient, 1)
             input("mirageFairy2019FairyGoldenAppleRank1".oreIngredient, 1)
             output(FairyCard.MANDRAKE.createItemStack(), 1.0, 1.0)
@@ -245,8 +244,7 @@ val fairyModule = module {
             process { !Mana.WIND + !Erg.WARP * 2.0 }
             process { !Mana.FIRE + !Erg.ATTACK * 2.0 }
             input("mirageFairy2019FairyMirageFlowerRank1".oreIngredient, 1)
-            input("container1000MirageFlowerExtract".oreIngredient, 1)
-            input("mirageFairyCrystalVeryPure".oreIngredient, 1)
+            input("container1000MirageFairyBlood".oreIngredient, 1)
             input("mirageFairy2019FairyCurseOfVanishingRank1".oreIngredient, 1)
             input("mirageFairy2019FairyCinnabarRank1".oreIngredient, 1)
             output(FairyCard.VELOPEDA.createItemStack(), 1.0, 1.0)
