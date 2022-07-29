@@ -6,7 +6,7 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.boost
-import miragefairy2019.mod.fairyweapon.magic4.duration
+import miragefairy2019.mod.fairyweapon.magic4.duration2
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.percent2
@@ -36,7 +36,7 @@ class ItemChristmasBell : ItemAoeWeaponBase() {
 
     override val looting = status("looting", { 3.0 + (!Mana.DARK + !Erg.SUBMISSION) / 30.0 }, { float2 })
     override val wear = status("wear", { 1.0 / (1.0 + (!Mana.FIRE + !Erg.CRYSTAL) / 20.0) * costFactor }, { percent2 })
-    override val coolTime = status("coolTime", { (20.0 * 4) / (1.0 + (!Mana.AQUA + !Erg.ENERGY) / 50.0) * costFactor }, { duration })
+    override val coolTime = status("coolTime", { (20.0 * 4) / (1.0 + (!Mana.AQUA + !Erg.ENERGY) / 50.0) * costFactor }, { duration2 })
 
     val pitch = status("pitch", { 0.5.pow(costFactor - 1.0) }, { pitch })
     override fun MagicArguments.onActionEffect(world: WorldServer) {

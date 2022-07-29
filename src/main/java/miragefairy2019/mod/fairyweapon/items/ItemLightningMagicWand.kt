@@ -8,7 +8,7 @@ import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.boolean
 import miragefairy2019.mod.fairyweapon.magic4.boost
 import miragefairy2019.mod.fairyweapon.magic4.criticalRate
-import miragefairy2019.mod.fairyweapon.magic4.duration
+import miragefairy2019.mod.fairyweapon.magic4.duration2
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.positive
@@ -40,7 +40,7 @@ class ItemLightningMagicWand : ItemAoeWeaponBase() {
 
     override val looting = status("looting", { 0.0 + (!Mana.SHINE + !Erg.KNOWLEDGE) / 10.0 }, { float2 })
     override val wear = status("wear", { 1.0 / (1.0 + (!Mana.FIRE + !Erg.FREEZE) / 20.0) * costFactor }, { percent2 })
-    override val coolTime = status("coolTime", { (20.0 * 2) / (1.0 + (!Mana.DARK + !Erg.ENERGY) / 50.0) * costFactor }, { duration })
+    override val coolTime = status("coolTime", { (20.0 * 2) / (1.0 + (!Mana.DARK + !Erg.ENERGY) / 50.0) * costFactor }, { duration2 })
 
     override fun MagicArguments.onActionEffect(world: WorldServer) {
         world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_LIGHTNING_IMPACT, SoundCategory.PLAYERS, 0.2f, 1.0f) // 爆発音

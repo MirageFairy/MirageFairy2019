@@ -15,7 +15,7 @@ import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.boolean
 import miragefairy2019.mod.fairyweapon.magic4.boost
-import miragefairy2019.mod.fairyweapon.magic4.duration
+import miragefairy2019.mod.fairyweapon.magic4.duration2
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.magic
@@ -57,7 +57,7 @@ class ItemFlowerPickingBell(baseFortune: Double, extraItemDropRateFactor: Double
     val additionalReach = status("additionalReach", { 0.0 + !Mana.WIND / 20.0 + !Erg.SPACE / 10.0 atMost 30.0 }, { float2 })
     val radius = status("radius", { 4 + !Mana.GAIA / 20.0 + !Erg.SOUND / 10.0 atMost 20.0 }, { float2 })
     val wear = status("wear", { 0.25 / (1 + !Mana.FIRE / 40.0 + !Erg.SLASH / 20.0) }, { percent2 })
-    val coolTime = status("coolTime", { 25.0 * costFactor }, { duration })
+    val coolTime = status("coolTime", { 25.0 * costFactor }, { duration2 })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.flowerPicking / 100.0 }, { boost })
     val collection = status("collection", { !Erg.WARP >= 10 }, { boolean.positive })
     val extraItemDropRate = status("extraItemDropRate", { extraItemDropRateFactor }, { percent0 })

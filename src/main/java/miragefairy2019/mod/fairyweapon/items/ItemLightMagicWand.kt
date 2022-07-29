@@ -12,7 +12,7 @@ import miragefairy2019.mod.fairyweapon.displayText
 import miragefairy2019.mod.fairyweapon.findItem
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.boost
-import miragefairy2019.mod.fairyweapon.magic4.duration
+import miragefairy2019.mod.fairyweapon.magic4.duration2
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.status
@@ -30,7 +30,7 @@ import kotlin.math.ceil
 
 class ItemLightMagicWand : ItemFairyWeaponMagic4() {
     val additionalReach = status("additionalReach", { 5.0 + !Mana.WIND / 5.0 + !Erg.LIGHT / 2.0 atMost 40.0 }, { float2 })
-    val coolTime = status("coolTime", { 100.0 / (1.0 + !Mana.GAIA / 30.0 + !Erg.FLAME / 20.0) }, { duration })
+    val coolTime = status("coolTime", { 100.0 / (1.0 + !Mana.GAIA / 30.0 + !Erg.FLAME / 20.0) }, { duration2 })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.magicCombat / 100.0 }, { boost })
 
     @SideOnly(Side.CLIENT)

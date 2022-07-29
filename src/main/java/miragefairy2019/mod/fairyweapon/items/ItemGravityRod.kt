@@ -11,7 +11,7 @@ import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.displayText
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.boost
-import miragefairy2019.mod.fairyweapon.magic4.duration
+import miragefairy2019.mod.fairyweapon.magic4.duration2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.percent0
@@ -32,11 +32,11 @@ import kotlin.math.ceil
 import kotlin.math.floor
 
 class ItemGravityRod : ItemFairyWeaponMagic4() {
-    val duration = status("duration", { 20.0 * (5.0 + (!Mana.FIRE + !Erg.SPACE) / 10.0) * costFactor }, { duration })
+    val duration = status("duration", { 20.0 * (5.0 + (!Mana.FIRE + !Erg.SPACE) / 10.0) * costFactor }, { duration2 })
     val strength = status("strength", { floor(1.0 + (!Mana.SHINE + !Erg.LEVITATE) / 10.0).toInt() }, { integer })
     val speedUp = status("speedUp", { floor((!Mana.GAIA + !Erg.THUNDER) / 10.0).toInt() }, { integer })
     val wear = status("wear", { 1.0 / (1.0 + (!Mana.AQUA + !Erg.KNOWLEDGE) / 20.0) * costFactor }, { percent2 })
-    val coolTime = status("coolTime", { 20.0 * 20.0 / (1.0 + (!Mana.DARK + !Erg.ENERGY) / 50.0) * costFactor }, { duration })
+    val coolTime = status("coolTime", { 20.0 * 20.0 / (1.0 + (!Mana.DARK + !Erg.ENERGY) / 50.0) * costFactor }, { duration2 })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.magicCombat / 100.0 }, { boost })
     val coverRate = status("coverRate", { !duration / (!coolTime / !speedBoost) }, { percent0 })
 

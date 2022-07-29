@@ -13,7 +13,7 @@ import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.displayText
 import miragefairy2019.mod.fairyweapon.magic4.MagicHandler
 import miragefairy2019.mod.fairyweapon.magic4.boost
-import miragefairy2019.mod.fairyweapon.magic4.duration
+import miragefairy2019.mod.fairyweapon.magic4.duration2
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.magic
@@ -41,7 +41,7 @@ class ItemTemptationOcarina : ItemFairyWeaponMagic4() {
     val maxTargetCount = status("maxTargetCount", { 1 + (!Mana.AQUA / 20.0 + !Erg.LIFE / 10.0).toInt() }, { integer })
     val wear = status("wear", { 4.0 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SPACE / 10.0) }, { percent0 })
     val levelCost = status("levelCost", { 1.0 / (1.0 + !Mana.GAIA / 20.0 + !Erg.KNOWLEDGE / 10.0) }, { float2 })
-    val coolTime = status("coolTime", { 100.0 / (1.0 + !Mana.DARK / 20.0 + !Erg.LEVITATE / 10.0) }, { duration })
+    val coolTime = status("coolTime", { 100.0 / (1.0 + !Mana.DARK / 20.0 + !Erg.LEVITATE / 10.0) }, { duration2 })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.rangedCombat / 100.0 }, { boost })
 
     @SideOnly(Side.CLIENT)
