@@ -186,14 +186,15 @@ class ItemAstronomicalObservationBook : Item() {
                 val now = Instant.now()
                 skillContainer.variables.lastAstronomicalObservationTime = now
 
-                val canDaily = getDailyStatus(oldLast, now) == EnumQuestStatus.INCOMPLETE
-                val canWeekly = getWeeklyStatus(oldLast, now) == EnumQuestStatus.INCOMPLETE
-                val canMonthly = getMonthlyStatus(oldLast, now) == EnumQuestStatus.INCOMPLETE
+                // 獲得Exp量
+                val exp = 0 +
+                    (if (getDailyStatus(oldLast, now) == EnumQuestStatus.INCOMPLETE) 15 else 0) +
+                    (if (getWeeklyStatus(oldLast, now) == EnumQuestStatus.INCOMPLETE) 75 else 0) +
+                    (if (getMonthlyStatus(oldLast, now) == EnumQuestStatus.INCOMPLETE) 250 else 0)
 
-                // 報酬獲得
-                if (canDaily) gainExp(player, 15)
-                if (canWeekly) gainExp(player, 75)
-                if (canMonthly) gainExp(player, 250)
+                if (exp != 0) {
+                    gainExp(player, exp) // Exp獲得
+                }
 
                 skillContainer.send(player) // 同期
 
@@ -201,7 +202,7 @@ class ItemAstronomicalObservationBook : Item() {
 
                 // 完了メッセージ
                 player.sendStatusMessage(textComponent { translate("$prefix.message.completed").darkPurple }, true)
-                if (!canDaily && !canWeekly && !canMonthly) player.sendStatusMessage(textComponent { translate("$prefix.message.doNothing") }, false)
+                if (exp == 0) player.sendStatusMessage(textComponent { translate("$prefix.message.doNothing") }, false)
 
             }
         }
