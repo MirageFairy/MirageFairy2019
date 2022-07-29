@@ -8,8 +8,7 @@
     },
     "description": {
       "translate": "item.ryugyoDrill.recipe"
-    },
-    "frame": "goal"
+    }
   },
   "parent": "miragefairy2019:fairy_weapon/root",
   "criteria": {

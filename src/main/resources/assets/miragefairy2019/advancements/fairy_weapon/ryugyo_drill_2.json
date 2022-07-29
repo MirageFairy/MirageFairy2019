@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "miragefairy2019:ryugyo_drill_2"
+    },
+    "title": {
+      "translate": "item.ryugyoDrill2.name"
+    },
+    "description": {
+      "translate": "item.ryugyoDrill2.recipe"
+    },
+    "frame": "goal"
+  },
+  "parent": "miragefairy2019:fairy_weapon/ryugyo_drill",
+  "criteria": {
+    "main": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miragefairy2019:ryugyo_drill_2"
+          }
+        ]
+      }
+    }
+  }
+}

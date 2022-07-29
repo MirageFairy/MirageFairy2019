@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "miragefairy2019:items/ryugyo_drill_2"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " vv",
+    "p#v",
+    "tp "
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:ryugyo_drill"
+    },
+    "v": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyLeafVelopeda"
+    },
+    "t": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereThunder"
+    },
+    "p": {
+      "type": "forge:ore_dict",
+      "ore": "blockPrismarineBrick"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:ryugyo_drill_2"
+  }
+}

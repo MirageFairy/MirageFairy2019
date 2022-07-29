@@ -622,7 +622,7 @@ enum class FairyWeaponKind(
         LangPair("Design Contest Work", "デザインコンテスト武器"),
         LangPair("Yoshinon", "よしのん"),
         LangPair("Get a specific item", "デザインコンテスト武器"),
-        "goal",
+        null,
         listOf(!DESTROY, !THUNDER, !WATER, !"mirageFairyLeather", { Items.BREAD.ingredient }),
         {
             DataShapedRecipe(
@@ -641,6 +641,31 @@ enum class FairyWeaponKind(
                     "w" to DataOreIngredient(ore = "mirageFairy2019SphereWater")
                 ),
                 result = DataResult(item = "miragefairy2019:ryugyo_drill")
+            )
+        }
+    ),
+    ryugyoDrill2(
+        ryugyoDrill, "ryugyo_drill_2", "ryugyoDrill2", 5, { ItemRyugyoDrill(4.0) },
+        LangPair("Ryugyo Drill II", "龍魚の一撃"),
+        LangPair("Design Contest Work", "デザインコンテスト武器（派生作品）"),
+        LangPair("Yoshinon", "よしのん（原作者）"),
+        LangPair("Get a specific item", "デザインコンテスト武器（派生作品）"),
+        "goal",
+        listOf(!THUNDER, !"mirageFairyLeafVelopeda", !"blockPrismarineBrick"),
+        {
+            DataShapedRecipe(
+                pattern = listOf(
+                    " vv",
+                    "p#v",
+                    "tp "
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:ryugyo_drill"),
+                    "v" to DataOreIngredient(ore = "mirageFairyLeafVelopeda"),
+                    "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
+                    "p" to DataOreIngredient(ore = "blockPrismarineBrick")
+                ),
+                result = DataResult(item = "miragefairy2019:ryugyo_drill_2")
             )
         }
     ),
