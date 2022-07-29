@@ -10,7 +10,7 @@ import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.boolean
 import miragefairy2019.mod.fairyweapon.magic4.boost
-import miragefairy2019.mod.fairyweapon.magic4.duration
+import miragefairy2019.mod.fairyweapon.magic4.duration4
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.percent2
@@ -25,10 +25,10 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 import kotlin.math.floor
 
-class ItemRyugyoDrill() : ItemMiragiumToolBase() {
+class ItemRyugyoDrill(val baseBreakHardnessPerTick: Double) : ItemMiragiumToolBase() {
     override val maxHardness = status("maxHardness", { 2.0 + !Mana.GAIA / 50.0 + !Erg.DESTROY / 25.0 + !Mastery.mining / 25.0 atMost 20.0 }, { float2 })
     val range = status("range", { floor(1.0 + !Mana.WIND / 50.0 + !Erg.LEVITATE / 25.0).toInt() atMost 5 }, { integer })
-    val coolTime = status("coolTime", { 20.0 * 0.025 / costFactor }, { duration })
+    val coolTime = status("coolTime", { 1.0 / baseBreakHardnessPerTick / costFactor }, { duration4 })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
     val fortune = status("fortune", { !Mana.SHINE / 50.0 + !Mana.DARK / 100.0 + !Erg.THUNDER / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
