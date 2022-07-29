@@ -28,7 +28,6 @@ import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.playSound
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.magicplant.BlockMirageFlower
-import miragefairy2019.mod.magicplant.blockMirageFlower
 import miragefairy2019.mod.magicplant.itemMirageFlowerSeeds
 import miragefairy2019.mod.skill.Mastery
 import mirrg.kotlin.hydrogen.atLeast
