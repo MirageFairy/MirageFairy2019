@@ -493,6 +493,7 @@ mirageFairy2019.magic.status.endurance.name=持久力
 mirageFairy2019.magic.status.extent.name=拡散力
 mirageFairy2019.magic.status.extraItemDropRate.name=追加ドロップ率
 mirageFairy2019.magic.status.fortune.name=幸運
+mirageFairy2019.magic.status.fortuneBoost.name=幸運ブースト
 mirageFairy2019.magic.status.levelCost.name=レベルコスト
 mirageFairy2019.magic.status.lightning.name=雷属性
 mirageFairy2019.magic.status.looting.name=ドロップ増加
