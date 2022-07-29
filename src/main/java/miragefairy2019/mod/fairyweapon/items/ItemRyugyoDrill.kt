@@ -6,6 +6,7 @@ import miragefairy2019.libkt.grow
 import miragefairy2019.libkt.positions
 import miragefairy2019.libkt.region
 import miragefairy2019.libkt.sortedByDistance
+import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.boolean
 import miragefairy2019.mod.fairyweapon.magic4.boost
@@ -29,7 +30,9 @@ class ItemRyugyoDrill() : ItemMiragiumToolBase() {
     val range = status("range", { floor(1.0 + !Mana.WIND / 50.0 + !Erg.LEVITATE / 25.0).toInt() atMost 5 }, { integer })
     val coolTime = status("coolTime", { 20.0 * 0.025 / costFactor }, { duration })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
-    override val actualFortune = status("fortune", { !Mana.SHINE / 15.0 + !Mana.DARK / 30.0 + !Erg.THUNDER / 15.0 }, { float2 })
+    val fortune = status("fortune", { !Mana.SHINE / 50.0 + !Mana.DARK / 100.0 + !Erg.THUNDER / 50.0 }, { float2 })
+    val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
+    override val actualFortune: FormulaArguments.() -> Double get() = { fortune(this) * fortuneBoost(this) }
     override val wear = status("wear", { 0.04 / (1.0 + !Mana.FIRE / 50.0 + !Erg.LIFE / 25.0) * costFactor }, { percent2 })
     override val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
     override val silkTouch = status("silkTouch", { !Erg.WATER >= 10.0 }, { boolean.positive })
