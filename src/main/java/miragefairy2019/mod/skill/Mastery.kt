@@ -9,13 +9,14 @@ enum class Mastery(override val parent: IMastery?, val layer: Int) : IMastery {
     /**/ /**/ magicCombat(combat, 2),
     /**/ production(root, 1),
     /**/ /**/ harvest(production, 2),
+    /**/ /**/ /**/ agriculture(harvest, 3),
     /**/ /**/ /**/ mining(harvest, 3),
     /**/ /**/ /**/ lumbering(harvest, 3),
     /**/ /**/ /**/ flowerPicking(harvest, 3),
     /**/ /**/ processing(production, 2),
     /**/ /**/ /**/ fairySummoning(processing, 3),
     /**/ /**/ fabrication(production, 2),
-    /**/ /**/ /**/ brewing(fabrication, 3),
+    ///**/ /**/ /**/ brewing(fabrication, 3),
     ;
 
     override val coefficient
