@@ -24,6 +24,8 @@ import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.fairy.FairyCard
+import miragefairy2019.mod.fairy.obtainFairy
 import miragefairy2019.mod.skill.ApiSkill
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.minus
@@ -194,6 +196,7 @@ class ItemAstronomicalObservationBook : Item() {
 
                 if (exp != 0) {
                     gainExp(player, exp) // Exp獲得
+                    player.obtainFairy(FairyCard.MINA, 8 * 8 * 8 * exp) // ミーニャ獲得
                 }
 
                 skillContainer.send(player) // 同期
