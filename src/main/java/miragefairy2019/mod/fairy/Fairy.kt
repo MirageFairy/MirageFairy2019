@@ -10,6 +10,7 @@ import miragefairy2019.lib.max
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
+import miragefairy2019.lib.obtain
 import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.makeItemModel
@@ -24,6 +25,7 @@ import mirrg.kotlin.hydrogen.toUpperCamelCase
 import mirrg.kotlin.hydrogen.toUpperCaseHead
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.NonNullList
@@ -37,6 +39,24 @@ import kotlin.math.pow
 
 fun FairyCard.getVariant(rank: Int = 1) = listItemFairy[rank - 1]().getVariant(id)!!
 fun FairyCard.createItemStack(rank: Int = 1, count: Int = 1) = getVariant(rank).createItemStack(count)
+
+fun EntityPlayer.obtainFairy(fairyCard: FairyCard, count: Int) {
+    var remainingCount = count // どんどんスケールが下がっていく残り妖精数
+    var rank = 1
+
+    // まだ上がある間
+    while (rank < rankMax) {
+        this.obtain(fairyCard.createItemStack(rank = rank, count = remainingCount % 8)) // そのランクの妖精を余りの分だけ排出
+        remainingCount /= 8 // スケールダウン
+        rank++
+    }
+
+    // もう上がない
+    this.obtain(fairyCard.createItemStack(rank = rank, count = remainingCount)) // 最高ランクの妖精を残り個数全部排出
+
+}
+
+private val rankMax get() = listItemFairy.size
 
 lateinit var creativeTabFairyMotif: CreativeTabs
 lateinit var creativeTabFairyRank: CreativeTabs
