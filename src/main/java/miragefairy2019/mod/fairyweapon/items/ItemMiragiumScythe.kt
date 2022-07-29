@@ -27,12 +27,12 @@ import net.minecraft.util.math.BlockPos
 import kotlin.math.floor
 
 class ItemMiragiumScythe(private val baseFortune: Double, override var destroySpeed: Float) : ItemMiragiumToolBase() {
-    override val maxHardness = status("maxHardness", { 0.0 + !Mana.GAIA / 50.0 + !Erg.SLASH / 25.0 + !Mastery.harvest / 100.0 / 2.0 atMost 10.0 }, { float2 })
+    override val maxHardness = status("maxHardness", { 0.0 + !Mana.GAIA / 50.0 + !Erg.SLASH / 25.0 + !Mastery.agriculture / 100.0 / 2.0 atMost 10.0 }, { float2 })
     val range = status("range", { floor(2.0 + !Mana.WIND / 20.0 + !Erg.HARVEST / 20.0).toInt() atMost 5 }, { integer })
     val coolTime = status("coolTime", { 20.0 * 0.1 / costFactor }, { duration })
-    val speedBoost = status("speedBoost", { 1.0 + !Mastery.harvest / 100.0 }, { boost })
-    val fortune = status("fortune", { baseFortune + !Mana.AQUA / 50.0 + !Erg.LIFE / 25.0 }, { float2 })
-    val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.harvest / 100.0 }, { boost })
+    val speedBoost = status("speedBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })
+    val fortune = status("fortune", { baseFortune + !Mana.AQUA / 100.0 + !Erg.LIFE / 50.0 }, { float2 })
+    val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })
     override val actualFortune: FormulaArguments.() -> Double get() = { fortune(this) * fortuneBoost(this) }
     override val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SENSE / 10.0) * costFactor }, { percent2 })
     override val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
