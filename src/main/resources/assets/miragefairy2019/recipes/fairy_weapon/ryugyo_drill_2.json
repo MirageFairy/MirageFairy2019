@@ -11,7 +11,7 @@
     },
     "v": {
       "type": "forge:ore_dict",
-      "ore": "mirageFairyLeafVelopeda"
+      "ore": "blockLeafMirageFairyVelopeda"
     },
     "t": {
       "type": "forge:ore_dict",

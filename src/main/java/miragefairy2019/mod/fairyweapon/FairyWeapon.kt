@@ -651,7 +651,7 @@ enum class FairyWeaponKind(
         LangPair("Yoshinon", "よしのん（原作者）"),
         LangPair("Get a specific item", "デザインコンテスト武器（派生作品）"),
         "goal",
-        listOf(!THUNDER, !"mirageFairyLeafVelopeda", !"blockPrismarineBrick"),
+        listOf(!THUNDER, !"blockLeafMirageFairyVelopeda", !"blockPrismarineBrick"),
         {
             DataShapedRecipe(
                 pattern = listOf(
@@ -661,7 +661,7 @@ enum class FairyWeaponKind(
                 ),
                 key = mapOf(
                     "#" to DataSimpleIngredient(item = "miragefairy2019:ryugyo_drill"),
-                    "v" to DataOreIngredient(ore = "mirageFairyLeafVelopeda"),
+                    "v" to DataOreIngredient(ore = "blockLeafMirageFairyVelopeda"),
                     "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
                     "p" to DataOreIngredient(ore = "blockPrismarineBrick")
                 ),
