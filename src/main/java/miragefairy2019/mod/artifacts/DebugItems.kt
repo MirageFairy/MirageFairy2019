@@ -2,6 +2,7 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
+import miragefairy2019.lib.IColoredItem
 import miragefairy2019.lib.erg
 import miragefairy2019.lib.mana
 import miragefairy2019.lib.modinitializer.item
@@ -9,7 +10,9 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
+import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.lib.sum
+import miragefairy2019.libkt.IRgb
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.customName
@@ -47,6 +50,7 @@ import net.minecraft.client.resources.Language
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
@@ -63,12 +67,13 @@ import java.io.File
 
 val debugItemsModule = module {
 
-    fun r(itemCreator: () -> Item, name: String, english: String, japanese: String) {
+    fun r(itemCreator: () -> ItemDebug, name: String, english: String, japanese: String) {
         val unlocalizedName = "debug_$name".toLowerCamelCase()
         item({ itemCreator() }, "debug_$name") {
             setUnlocalizedName(unlocalizedName)
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation(model = ResourceLocation("book"))
+            registerItemColorHandler()
         }
         onMakeLang { enJa("item.$unlocalizedName.name", "Debug: $english", "デバッグ：$japanese") }
     }
@@ -97,13 +102,15 @@ private fun writeAction(player: EntityPlayer, fileName: String, text: String) {
     file.writeText(text)
 }
 
-open class ItemDebug : Item() {
+open class ItemDebug(val color: IRgb) : Item(), IColoredItem {
     init {
         maxStackSize = 1
     }
+
+    override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int) = color.rgb
 }
 
-class ItemDebugFairyList : ItemDebug() {
+class ItemDebugFairyList : ItemDebug(0xFF0000.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (!world.isRemote) return EnumActionResult.SUCCESS
 
@@ -155,7 +162,7 @@ class ItemDebugFairyList : ItemDebug() {
     }
 }
 
-class ItemDebugOreNameList : ItemDebug() {
+class ItemDebugOreNameList : ItemDebug(0xFF6000.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (!world.isRemote) return EnumActionResult.SUCCESS
         writeAction(player, "oreNameList.txt", OreDictionary.getOreNames()
@@ -166,7 +173,7 @@ class ItemDebugOreNameList : ItemDebug() {
     }
 }
 
-class ItemDebugSkillResetUnlock : ItemDebug() {
+class ItemDebugSkillResetUnlock : ItemDebug(0xFFBF00.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
         val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
@@ -177,7 +184,7 @@ class ItemDebugSkillResetUnlock : ItemDebug() {
     }
 }
 
-class ItemDebugPlayerAuraReset : ItemDebug() {
+class ItemDebugPlayerAuraReset : ItemDebug(0xDFFF00.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
         if (player !is EntityPlayerMP) return EnumActionResult.SUCCESS
@@ -189,7 +196,7 @@ class ItemDebugPlayerAuraReset : ItemDebug() {
     }
 }
 
-class ItemDebugGainFairyMasterExp : ItemDebug() {
+class ItemDebugGainFairyMasterExp : ItemDebug(0x80FF00.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
         if (player !is EntityPlayerMP) return EnumActionResult.SUCCESS
@@ -200,7 +207,7 @@ class ItemDebugGainFairyMasterExp : ItemDebug() {
     }
 }
 
-class ItemDebugOreSeedStatistics : ItemDebug() {
+class ItemDebugOreSeedStatistics : ItemDebug(0x20FF00.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
         val map = mutableMapOf<IBlockState, Int>()
@@ -242,7 +249,7 @@ class ItemDebugOreSeedStatistics : ItemDebug() {
     }
 }
 
-class ItemDebugOreSeedDropRate : ItemDebug() {
+class ItemDebugOreSeedDropRate : ItemDebug(0x00FF40.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
@@ -266,7 +273,7 @@ class ItemDebugOreSeedDropRate : ItemDebug() {
     }
 }
 
-class ItemDebugMirageFlowerGrowthRateList : ItemDebug() {
+class ItemDebugMirageFlowerGrowthRateList : ItemDebug(0x00FF9F.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
@@ -282,7 +289,7 @@ class ItemDebugMirageFlowerGrowthRateList : ItemDebug() {
     }
 }
 
-class ItemDebugMirageFlowerGrowthRate : ItemDebug() {
+class ItemDebugMirageFlowerGrowthRate : ItemDebug(0x00FFFF.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
@@ -302,7 +309,7 @@ class ItemDebugMirageFlowerGrowthRate : ItemDebug() {
     }
 }
 
-class ItemDebugShowData : ItemDebug() {
+class ItemDebugShowData : ItemDebug(0x009FFF.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
@@ -338,7 +345,7 @@ class ItemDebugShowData : ItemDebug() {
     }
 }
 
-class ItemDebugSelectLanguage : ItemDebug() {
+class ItemDebugSelectLanguage : ItemDebug(0x0040FF.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (!world.isRemote) return EnumActionResult.SUCCESS
 
@@ -363,3 +370,9 @@ class ItemDebugSelectLanguage : ItemDebug() {
         return EnumActionResult.SUCCESS
     }
 }
+
+//0x2000FF
+//0x8000FF
+//0xDF00FF
+//0xFF00BF
+//0xFF0060
