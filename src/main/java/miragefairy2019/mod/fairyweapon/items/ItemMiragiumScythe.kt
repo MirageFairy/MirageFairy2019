@@ -6,6 +6,7 @@ import miragefairy2019.libkt.grow
 import miragefairy2019.libkt.positions
 import miragefairy2019.libkt.region
 import miragefairy2019.libkt.sortedByDistance
+import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.boolean
 import miragefairy2019.mod.fairyweapon.magic4.boost
@@ -30,7 +31,9 @@ class ItemMiragiumScythe(private val baseFortune: Double, override var destroySp
     val range = status("range", { floor(2.0 + !Mana.WIND / 20.0 + !Erg.HARVEST / 20.0).toInt() atMost 5 }, { integer })
     val coolTime = status("coolTime", { 20.0 * 0.1 / costFactor }, { duration })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.harvest / 100.0 }, { boost })
-    override val fortune = status("fortune", { baseFortune + !Mana.AQUA / 30.0 + !Erg.LIFE / 15.0 }, { float2 })
+    val fortune = status("fortune", { baseFortune + !Mana.AQUA / 30.0 + !Erg.LIFE / 15.0 }, { float2 })
+    val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.harvest / 100.0 }, { boost })
+    override val actualFortune: FormulaArguments.() -> Double get() = { fortune(this) * fortuneBoost(this) }
     override val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SENSE / 10.0) * costFactor }, { percent2 })
     override val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
 

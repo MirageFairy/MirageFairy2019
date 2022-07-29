@@ -29,7 +29,7 @@ import kotlin.math.ceil
 
 abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     abstract val maxHardness: FormulaArguments.() -> Double
-    abstract val fortune: FormulaArguments.() -> Double
+    abstract val actualFortune: FormulaArguments.() -> Double
     abstract val wear: FormulaArguments.() -> Double
     open val collection: FormulaArguments.() -> Boolean = { false }
     open val silkTouch: FormulaArguments.() -> Boolean = { false }
@@ -92,7 +92,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
                             player = player,
                             itemStack = weaponItemStack,
                             blockPos = target,
-                            fortune = world.rand.randomInt(fortune()),
+                            fortune = world.rand.randomInt(actualFortune()),
                             silkTouch = silkTouch(),
                             collection = collection()
                         )
