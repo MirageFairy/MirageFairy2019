@@ -20,4 +20,5 @@ val artifactsModule = module {
     OreSeed.oreSeedModule(this)
     wandModule()
     FairyCrystal.fairyCrystalModule(this)
+    potionModule()
 }
