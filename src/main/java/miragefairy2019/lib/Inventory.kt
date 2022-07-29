@@ -98,9 +98,19 @@ fun <I : IInventory> NBTTagCompound.readInventory(inventoryCreator: (size: Int) 
 }
 
 
-/** @param itemStack 破壊的 */
-fun EntityPlayer.obtain(itemStack: ItemStack) {
-    if (!this.inventory.addItemStackToInventory(itemStack)) {
-        this.dropItem(itemStack, false)
+/**
+ * @param itemStack 非破壊的
+ * @param count 指定時、itemStackの個数を無視する。最大スタック数を超える値を指定可能
+ */
+fun EntityPlayer.obtain(itemStack: ItemStack, count: Int = itemStack.count) {
+    val maxStackSize = itemStack.item.getItemStackLimit(itemStack)
+    var remainingCount = count
+    while (remainingCount > 0) {
+        val nextCount = remainingCount atMost maxStackSize
+        val nextItemStack = itemStack.copy(nextCount)
+        if (!this.inventory.addItemStackToInventory(nextItemStack)) {
+            this.dropItem(nextItemStack, false)
+        }
+        remainingCount -= nextCount
     }
 }
