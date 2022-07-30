@@ -63,6 +63,8 @@ enum class PotionCard(
             listOf(
                 PotionEffect(MobEffects.RESISTANCE, 1200, 0),
                 PotionEffect(MobEffects.ABSORPTION, 1200, 1),
+                PotionEffect(MobEffects.REGENERATION, 1200, 0),
+                PotionEffect(MobEffects.HASTE, 1200, 1)
             )
         }
     ),
