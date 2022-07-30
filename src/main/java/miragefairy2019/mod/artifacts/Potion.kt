@@ -177,7 +177,11 @@ class ItemPotion : ItemMultiMaterial<ItemVariantPotion>() {
         // 効果
         if (!world.isRemote) {
             variant.potionCard.potionEffects().forEach { potionEffect ->
-                player.addPotionEffect(potionEffect)
+                if (potionEffect.potion.isInstant) {
+                    potionEffect.potion.affectEntity(player, player, player, potionEffect.amplifier, 1.0)
+                } else {
+                    player.addPotionEffect(PotionEffect(potionEffect))
+                }
             }
         }
 
