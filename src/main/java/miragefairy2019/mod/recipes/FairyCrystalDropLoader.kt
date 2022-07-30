@@ -8,7 +8,9 @@ import miragefairy2019.mod.systems.DropCategory
 import miragefairy2019.mod.systems.DropFixed
 import miragefairy2019.mod.systems.DropHandler
 import miragefairy2019.mod.systems.FairyCrystalDrop
+import miragefairy2019.mod.systems.FairyCrystalDropEnvironment
 import miragefairy2019.mod.systems.IDrop
+import mirrg.kotlin.hydrogen.or
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
@@ -20,6 +22,7 @@ private val FairyRelationEntry<*>.fairyCrystalBaseDropWeight get() = 0.1 * 0.1.p
 
 val fairyCrystalDropLoaderModule = module {
     onCreateItemStack {
+        fun IDrop.register(predicate: FairyCrystalDropEnvironment.() -> Boolean) = FairyCrystalDrop.dropHandlers.add(DropHandler(this, predicate))
         fun World.time(min: Int, max: Int) = provider.isSurfaceWorld && min <= (worldTime + 6000) % 24000 && (worldTime + 6000) % 24000 <= max
 
         class WithDropCategory(val dropCategory: DropCategory) {
@@ -32,9 +35,9 @@ val fairyCrystalDropLoaderModule = module {
         // コモン枠
         DropCategory.COMMON {
 
-            fun IDrop.overworld() = FairyCrystalDrop.dropHandlers.add(DropHandler(this@overworld) a@{ (world ?: return@a false).provider.isSurfaceWorld })
-            fun IDrop.nether() = FairyCrystalDrop.dropHandlers.add(DropHandler(this@nether) { BiomeDictionary.Type.NETHER in biomeTypes })
-            fun IDrop.end() = FairyCrystalDrop.dropHandlers.add(DropHandler(this@end) { BiomeDictionary.Type.END in biomeTypes })
+            fun IDrop.overworld() = this.register a@{ world.or { return@a false }.provider.isSurfaceWorld }
+            fun IDrop.nether() = this.register { BiomeDictionary.Type.NETHER in biomeTypes }
+            fun IDrop.end() = this.register { BiomeDictionary.Type.END in biomeTypes }
 
             // 地上
             FairyCard.WATER().overworld()
@@ -120,20 +123,18 @@ val fairyCrystalDropLoaderModule = module {
         // 固定枠
         DropCategory.FIXED {
 
-            fun IDrop.fixed() = FairyCrystalDrop.dropHandlers.add(DropHandler(this@fixed) { true })
-
-            FairyCard.AIR(1.0).fixed()
-            FairyCard.TIME(0.0001).fixed()
-            FairyCard.GRAVITY(0.0001).fixed()
+            FairyCard.AIR(1.0).register { true }
+            FairyCard.TIME(0.0001).register { true }
+            FairyCard.GRAVITY(0.0001).register { true }
 
         }
 
         // レア枠
         DropCategory.RARE {
 
-            fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = FairyCrystalDrop.dropHandlers.add(DropHandler(this@world) a@{
+            fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = this.register a@{
                 predicate(world ?: return@a false, (pos ?: return@a false).offset(facing ?: return@a false))
-            })
+            }
 
             FairyCard.THUNDER(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) && isThundering }
             FairyCard.SUN(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && time(6000, 18000) && !isRainingAt(it) }
@@ -144,6 +145,7 @@ val fairyCrystalDropLoaderModule = module {
             FairyCard.NIGHT(0.001).world { time(19000, 24000) || time(0, 5000) }
             FairyCard.MORNING(0.001).world { time(5000, 9000) }
             FairyCard.SUNRISE(0.001).world { time(5000, 6000) }
+
             FairyCard.FINE(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) }
             FairyCard.RAIN(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
 
@@ -152,11 +154,7 @@ val fairyCrystalDropLoaderModule = module {
         // TODO remove
         DropCategory.RARE {
 
-            fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = FairyCrystalDrop.dropHandlers.add(DropHandler(this@world) a@{
-                predicate(world ?: return@a false, (pos ?: return@a false).offset(facing ?: return@a false))
-            })
-
-            FairyCard.CUPID(0.00001).world {
+            FairyCard.CUPID(0.00001).register {
                 LocalDateTime.now(ZoneOffset.UTC) < LocalDateTime.of(2022, 8, 1, 0, 0, 0)
             }
 
@@ -165,25 +163,25 @@ val fairyCrystalDropLoaderModule = module {
 
         // 妖精関係レジストリー
         FairyRelationRegistries.entity.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { entities.any { relation.key(it) } })
+            DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight).register { entities.any { relation.key(it) } }
         }
         FairyRelationRegistries.biomeType.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in biomeTypes })
+            DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight).register { relation.key in biomeTypes }
         }
         FairyRelationRegistries.block.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in blocks })
+            DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight).register { relation.key in blocks }
         }
         FairyRelationRegistries.blockState.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in blockStates })
+            DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight).register { relation.key in blockStates }
         }
         FairyRelationRegistries.item.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { relation.key in items })
+            DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight).register { relation.key in items }
         }
         FairyRelationRegistries.itemStack.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { itemStacks.any { relation.key(it) } })
+            DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight).register { itemStacks.any { relation.key(it) } }
         }
         FairyRelationRegistries.ingredient.forEach { relation ->
-            FairyCrystalDrop.dropHandlers.add(DropHandler(DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight)) { itemStacks.any { relation.key.test(it) } })
+            DropFixed(relation.fairyCard, DropCategory.RARE, relation.fairyCrystalBaseDropWeight).register { itemStacks.any { relation.key.test(it) } }
         }
 
     }
