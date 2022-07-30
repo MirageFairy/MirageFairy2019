@@ -21,7 +21,6 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
-import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.withColor
