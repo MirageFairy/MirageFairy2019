@@ -61,8 +61,8 @@ enum class PotionCard(
         true,
         {
             listOf(
-                PotionEffect(MobEffects.RESISTANCE, 1800, 0),
-                PotionEffect(MobEffects.ABSORPTION, 1800, 1)
+                PotionEffect(MobEffects.RESISTANCE, 1200, 0),
+                PotionEffect(MobEffects.ABSORPTION, 1200, 1),
             )
         }
     ),
