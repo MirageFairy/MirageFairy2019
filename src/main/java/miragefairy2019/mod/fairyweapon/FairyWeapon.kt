@@ -8,6 +8,7 @@ import miragefairy2019.api.Erg.DESTROY
 import miragefairy2019.api.Erg.ENERGY
 import miragefairy2019.api.Erg.HARVEST
 import miragefairy2019.api.Erg.KNOWLEDGE
+import miragefairy2019.api.Erg.LEVITATE
 import miragefairy2019.api.Erg.LIFE
 import miragefairy2019.api.Erg.LIGHT
 import miragefairy2019.api.Erg.SLASH
@@ -651,18 +652,18 @@ enum class FairyWeaponKind(
         LangPair("Yoshinon", "よしのん（原作者）"),
         LangPair("Get a specific item", "デザインコンテスト武器（派生作品）"),
         "goal",
-        listOf(!THUNDER, !"blockLeafMirageFairyVelopeda", !"blockPrismarineBrick"),
+        listOf(!LEVITATE, !"blockLeafMirageFairyVelopeda", !"blockPrismarineBrick"),
         {
             DataShapedRecipe(
                 pattern = listOf(
                     " vv",
                     "p#v",
-                    "tp "
+                    "lp "
                 ),
                 key = mapOf(
                     "#" to DataSimpleIngredient(item = "miragefairy2019:ryugyo_drill"),
                     "v" to DataOreIngredient(ore = "blockLeafMirageFairyVelopeda"),
-                    "t" to DataOreIngredient(ore = "mirageFairy2019SphereThunder"),
+                    "l" to DataOreIngredient(ore = "mirageFairy2019SphereLevitate"),
                     "p" to DataOreIngredient(ore = "blockPrismarineBrick")
                 ),
                 result = DataResult(item = "miragefairy2019:ryugyo_drill_2")

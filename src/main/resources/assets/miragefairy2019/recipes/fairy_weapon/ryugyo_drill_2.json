@@ -3,7 +3,7 @@
   "pattern": [
     " vv",
     "p#v",
-    "tp "
+    "lp "
   ],
   "key": {
     "#": {
@@ -13,9 +13,9 @@
       "type": "forge:ore_dict",
       "ore": "blockLeafMirageFairyVelopeda"
     },
-    "t": {
+    "l": {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019SphereThunder"
+      "ore": "mirageFairy2019SphereLevitate"
     },
     "p": {
       "type": "forge:ore_dict",
