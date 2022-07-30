@@ -67,6 +67,48 @@ enum class PotionCard(
             )
         }
     ),
+    CACTUS_JUICE(
+        1, "cactus_juice", "cactusJuice",
+        "Cactus Juice", "サボテンジュース", "",
+        false,
+        {
+            listOf(
+                PotionEffect(MobEffects.REGENERATION, 1200, 0)
+            )
+        }
+    ),
+    APPLE_JUICE(
+        2, "apple_juice", "appleJuice",
+        "Apple Juice", "リンゴジュース", "",
+        false,
+        {
+            listOf(
+                PotionEffect(MobEffects.SPEED, 12000, 0)
+            )
+        }
+    ),
+    GREEN_JUICE(
+        3, "green_juice", "greenJuice",
+        "Green Juice", "青汁", "",
+        false,
+        {
+            listOf(
+                PotionEffect(MobEffects.STRENGTH, 12000, 0)
+            )
+        }
+    ),
+    POISON_JUICE(
+        4, "poison_juice", "poisonJuice",
+        "Poison Juice", "毒薬", "",
+        false,
+        {
+            listOf(
+                PotionEffect(MobEffects.INSTANT_DAMAGE, 0, 19),
+                PotionEffect(MobEffects.WITHER, 1200, 9),
+                PotionEffect(MobEffects.HUNGER, 1200, 9)
+            )
+        }
+    ),
 }
 
 
@@ -106,6 +148,58 @@ val potionModule = module {
             input("mirageFairyMandrake".oreIngredient, 1)
             input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
             output(PotionCard.MANDRAKE_JUICE.createItemStack(), 1.0)
+        }
+    }
+
+    // サボテンジュース
+    onAddRecipe {
+        fairyCentrifugeCraftHandler(30.0) {
+            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+            process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
+            process { !Mana.AQUA + !Erg.LIFE * 2.0 }
+            input("mirageFairySyrup".oreIngredient, 1)
+            input("blockCactus".oreIngredient, 1)
+            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+            output(PotionCard.CACTUS_JUICE.createItemStack(), 1.0)
+        }
+    }
+
+    // リンゴジュース
+    onAddRecipe {
+        fairyCentrifugeCraftHandler(30.0) {
+            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+            process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
+            process { !Mana.AQUA + !Erg.LIFE * 2.0 }
+            input("mirageFairySyrup".oreIngredient, 1)
+            input(Items.APPLE.ingredient, 1)
+            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+            output(PotionCard.APPLE_JUICE.createItemStack(), 1.0)
+        }
+    }
+
+    // 青汁
+    onAddRecipe {
+        fairyCentrifugeCraftHandler(30.0) {
+            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+            process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
+            process { !Mana.AQUA + !Erg.LIFE * 2.0 }
+            input("mirageFairySyrup".oreIngredient, 1)
+            input("treeLeaves".oreIngredient, 1)
+            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+            output(PotionCard.GREEN_JUICE.createItemStack(), 1.0)
+        }
+    }
+
+    // 毒薬
+    onAddRecipe {
+        fairyCentrifugeCraftHandler(30.0) {
+            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+            process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
+            process { !Mana.AQUA + !Erg.LIFE * 2.0 }
+            input("mirageFairySyrup".oreIngredient, 1)
+            input(Items.FISH.createItemStack(metadata = 3).ingredient, 1)
+            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 8)
+            output(PotionCard.POISON_JUICE.createItemStack(), 8.0)
         }
     }
 
