@@ -1,4 +1,4 @@
-package miragefairy2019.mod.recipes
+package miragefairy2019.mod.systems
 
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.resourcemaker.DataOreIngredient

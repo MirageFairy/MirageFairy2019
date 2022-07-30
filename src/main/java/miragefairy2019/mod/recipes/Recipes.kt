@@ -11,6 +11,5 @@ val recipesModule = module {
     fairyCrystalDropLoaderModule()
     fairyLogDropLoaderModule()
     slabUncraftRecipeModule()
-    miniaRecipe(this)
     fairyTamingRecipeModule()
 }
