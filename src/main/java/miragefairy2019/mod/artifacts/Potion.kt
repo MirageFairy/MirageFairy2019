@@ -127,7 +127,7 @@ class ItemPotion : ItemMultiMaterial<ItemVariantPotion>() {
             tooltip += formattedText {
                 concat(
                     translate(potionEffect.effectName),
-                    if (potionEffect.amplifier > 0) " "() + translate("potion.potency.${potionEffect.amplifier}") else ""(),
+                    " Lv.${potionEffect.amplifier + 1}"(),
                     if (potionEffect.duration > 20) " (${Potion.getPotionDurationString(potionEffect, 1.0f)})"() else ""()
                 ).withColor(if (potionEffect.potion.isBadEffect) TextFormatting.RED else TextFormatting.BLUE)
             }
