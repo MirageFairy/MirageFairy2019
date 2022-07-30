@@ -149,6 +149,10 @@ val fairyCrystalDropLoaderModule = module {
             FairyCard.FINE(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) }
             FairyCard.RAIN(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
 
+            FairyCard.AUTUMN(0.001).register { LocalDateTime.now(ZoneOffset.UTC).monthValue in 8..12 }
+
+            FairyCard.VOID(0.01).register a@{ player.or { return@a false }.posY < 0 }
+
         }
 
         // TODO remove
@@ -156,6 +160,14 @@ val fairyCrystalDropLoaderModule = module {
 
             FairyCard.CUPID(0.00001).register {
                 LocalDateTime.now(ZoneOffset.UTC) < LocalDateTime.of(2022, 8, 1, 0, 0, 0)
+            }
+
+            FairyCard.AVALON(0.00001).register {
+                LocalDateTime.now(ZoneOffset.UTC) < LocalDateTime.of(2022, 10, 1, 0, 0, 0)
+            }
+            FairyCard.AVALON(0.00001).register {
+                LocalDateTime.now(ZoneOffset.UTC) < LocalDateTime.of(2022, 10, 1, 0, 0, 0) &&
+                    BiomeDictionary.Type.MUSHROOM in this.biomeTypes
             }
 
         }

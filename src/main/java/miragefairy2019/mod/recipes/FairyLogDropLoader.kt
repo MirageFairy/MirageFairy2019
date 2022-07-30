@@ -39,6 +39,9 @@ val fairyLogDropLoaderModule = module {
         FairyCard.MORNING(0.1) { overworld() }
         FairyCard.SUNRISE(0.02) { overworld() }
 
+        // 季節
+        FairyCard.AUTUMN(0.1) { overworld() }
+
         // 天候
         FairyCard.FINE(0.1) { overworld() }
         FairyCard.RAIN(0.1) { overworld().canRain() }

@@ -260,6 +260,8 @@ val fairyRelationModule = module {
     FairyCard.SUGAR_CANE.register { item({ Items.REEDS }) }
     FairyCard.POTATO.register { block({ Blocks.POTATOES }) }
     FairyCard.POTATO.register { item({ Items.POTATO }) }
+    FairyCard.MANDRAKE.register(relevance = 0.5, weight = 0.01) { ore("mirageFairyMandrake") } // TODO クラフト不可属性
+    FairyCard.VELOPEDA.register(relevance = 0.5, weight = 0.01) { ore("leafMirageFairyVelopeda") } // TODO クラフト不可属性
 
     // 料理
     FairyCard.BREAD.register { item({ Items.BREAD }) }
@@ -268,6 +270,10 @@ val fairyRelationModule = module {
     FairyCard.CAKE.register { item({ Items.CAKE }) }
     FairyCard.BAKED_POTATO.register { item({ Items.BAKED_POTATO }) }
     FairyCard.COOKED_CHICKEN.register { item({ Items.COOKED_CHICKEN }) }
+    FairyCard.COOKED_PORKCHOP.register { item({ Items.COOKED_PORKCHOP }) }
+    FairyCard.COOKED_MUTTON.register { item({ Items.COOKED_MUTTON }) }
+    FairyCard.COOKED_RABBIT.register { item({ Items.COOKED_RABBIT }) }
+    FairyCard.RABBIT_STEW.register { item({ Items.RABBIT_STEW }) }
     FairyCard.COOKED_COD.register { ingredient({ Items.COOKED_FISH.createItemStack(metadata = 0).ingredient }) }
     FairyCard.COOKED_SALMON.register { ingredient({ Ingredient.fromStacks(ItemStack(Items.COOKED_FISH, 1, 1)) }) }
     FairyCard.STEAK.register { item({ Items.COOKED_BEEF }) }
@@ -311,6 +317,7 @@ val fairyRelationModule = module {
     FairyCard.MAGENTA_GLAZED_TERRACOTTA.register { block({ Blocks.MAGENTA_GLAZED_TERRACOTTA }) }
     FairyCard.NOTE.register { block({ Blocks.NOTEBLOCK }) }
     FairyCard.JUKEBOX.register { block({ Blocks.JUKEBOX }) }
+    FairyCard.TRINITROTOLUENE.register { block({ Blocks.TNT }) }
     FairyCard.NETHER_PORTAL.register { block({ Blocks.PORTAL }) }
     FairyCard.BUTTON.register { block({ Blocks.WOODEN_BUTTON }) }
 
