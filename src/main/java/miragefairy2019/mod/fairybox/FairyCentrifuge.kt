@@ -90,12 +90,12 @@ import miragefairy2019.libkt.white
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
-import miragefairy2019.mod.material.FairyMaterialCard
-import miragefairy2019.mod.material.createItemStack
 import miragefairy2019.mod.artifacts.itemFertilizer
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
 import miragefairy2019.mod.magicplant.itemMirageFlowerSeeds
+import miragefairy2019.mod.material.FairyMaterialCard
+import miragefairy2019.mod.material.createItemStack
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
 import mirrg.kotlin.hydrogen.atLeast
@@ -616,6 +616,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         }
     }
 
+    // TODO matchを呼び出した際にスロットを記憶してしまうので一度に複数のスロットを利用できない問題
     fun match(): RecipeMatchResult? {
         val recipe = getFairyCentrifugeCraftRecipe(inputInventory) ?: return null
         return RecipeMatchResult(recipe)
@@ -670,13 +671,15 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
 
                 if (!merge(resultInventory, outputInventory)) return // 出力スロットが溢れている場合は中止
 
-                val matchResult = match() ?: return // レシピが無効な場合は中止
-
-                val times = world.rand.randomInt(matchResult.speed * foliaSpeedFactor) // 回数判定
+                val firstMatchResult = match() ?: return // レシピが無効な場合は中止
+                val times = world.rand.randomInt(firstMatchResult.speed * foliaSpeedFactor) // 回数判定
 
                 repeat(times) {
 
-                    val result = matchResult.recipe.craft(world.rand, matchResult.fortune) ?: return // クラフトが失敗した場合は中止
+                    val actualMatchResult = match() ?: return // レシピが無効な場合は中止
+                    if (firstMatchResult.recipe.handler != actualMatchResult.recipe.handler) return // レシピが初期と異なる場合は中止
+
+                    val result = actualMatchResult.recipe.craft(world.rand, actualMatchResult.fortune) ?: return // クラフトが失敗した場合は中止
 
                     // リザルトをインベントリに移す
                     resultInventory = createInventory(result.size)
