@@ -8,7 +8,7 @@ import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.mod.artifacts.ingredientData
 import mirrg.kotlin.hydrogen.unit
 
-val miniaRecipe = module {
+val miniaRecipeModule = module {
 
     class PatternBuilder {
         val list = mutableListOf<String>()
