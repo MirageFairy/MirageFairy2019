@@ -52,11 +52,13 @@ enum class PotionCard(
     val englishName: String,
     val japaneseName: String,
     val japanesePoem: String,
+    val hasEffect: Boolean,
     val potionEffects: () -> List<PotionEffect>
 ) {
     MANDRAKE_JUICE(
         0, "mandrake_juice", "mandrakeJuice",
         "Mandrake Juice", "アルラウンＥ  ２５０ｍｌ", "負傷の防止と恢復に！",
+        true,
         {
             listOf(
                 PotionEffect(MobEffects.RESISTANCE, 1800, 0),
@@ -136,7 +138,7 @@ class ItemPotion : ItemMultiMaterial<ItemVariantPotion>() {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun hasEffect(itemStack: ItemStack) = true
+    override fun hasEffect(itemStack: ItemStack) = getVariant(itemStack)?.potionCard?.hasEffect ?: false
 
 
     // 瓶
