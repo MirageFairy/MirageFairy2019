@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " g ",
+    "g#g",
+    " g "
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyStick"
+    },
+    "g": {
+      "type": "forge:ore_dict",
+      "ore": "nuggetGold"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:apostle_stick"
+  }
+}

@@ -1,14 +1,56 @@
 package miragefairy2019.mod.systems
 
+import miragefairy2019.lib.modinitializer.addOreName
+import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.modinitializer.setCreativeTab
+import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
+import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
+import miragefairy2019.lib.resourcemaker.handheld
+import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.mod.artifacts.ingredientData
+import miragefairy2019.libkt.enJa
+import miragefairy2019.mod.Main
 import mirrg.kotlin.hydrogen.unit
+import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
+
+lateinit var itemApostleStick: () -> ItemApostleStick
 
 val miniaRecipeModule = module {
+
+    // 使徒のステッキ
+    itemApostleStick = item({ ItemApostleStick() }, "apostle_stick") {
+        setUnlocalizedName("apostleStick")
+        setCreativeTab { Main.creativeTab }
+        setCustomModelResourceLocation()
+        addOreName("mirageFairyApostleStick")
+        makeItemModel { handheld }
+        makeRecipe {
+            DataShapedRecipe(
+                pattern = listOf(
+                    " g ",
+                    "g#g",
+                    " g "
+                ),
+                key = mapOf(
+                    "#" to DataOreIngredient(ore = "mirageFairyStick"),
+                    "g" to DataOreIngredient(ore = "nuggetGold")
+                ),
+                result = DataResult(item = "miragefairy2019:apostle_stick")
+            )
+        }
+    }
+
+    // 翻訳生成
+    onMakeLang { enJa("item.apostleStick.name", "Apostle Stick", "使徒のステッキ") }
+
 
     class PatternBuilder {
         val list = mutableListOf<String>()
@@ -77,4 +119,11 @@ val miniaRecipeModule = module {
         !"###"
     }
 
+}
+
+class ItemApostleStick : Item() {
+    @SideOnly(Side.CLIENT)
+    override fun isFull3D() = true
+    override fun hasContainerItem(stack: ItemStack) = true
+    override fun getContainerItem(itemStack: ItemStack): ItemStack = itemStack.copy()
 }
