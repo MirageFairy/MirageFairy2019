@@ -1,22 +1,22 @@
 {
-  "type": "forge:ore_shaped",
-  "pattern": [
-    "   ",
-    " s ",
-    " # "
-  ],
-  "key": {
-    "s": {
-      "type": "miragefairy2019:ore_dict_complex",
-      "ore": "mirageFairy2019CraftingToolFairyWandSummoning"
-    },
-    "#": {
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank5"
+      "ore": "oreMagnetite"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyApostleStick"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyMinaRank4"
     }
-  },
+  ],
   "result": {
-    "item": "miragefairy2019:materials",
-    "data": 8
+    "item": "miragefairy2019:ore1",
+    "data": 5,
+    "count": 2
   }
 }

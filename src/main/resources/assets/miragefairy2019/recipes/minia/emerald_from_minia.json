@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "type": "forge:ore_dict",
-      "ore": "oreCoal"
+      "ore": "oreEmerald"
     },
     {
       "type": "forge:ore_dict",
@@ -11,11 +11,11 @@
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank3"
+      "ore": "mirageFairy2019FairyMinaRank4"
     }
   ],
   "result": {
-    "item": "minecraft:coal_ore",
+    "item": "minecraft:emerald_ore",
     "count": 2
   }
 }

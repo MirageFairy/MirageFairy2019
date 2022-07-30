@@ -1,21 +1,21 @@
 {
-  "type": "forge:ore_shaped",
-  "pattern": [
-    "#  ",
-    " s ",
-    "   "
-  ],
-  "key": {
-    "s": {
-      "type": "miragefairy2019:ore_dict_complex",
-      "ore": "mirageFairy2019CraftingToolFairyWandSummoning"
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "oreIron"
     },
-    "#": {
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyApostleStick"
+    },
+    {
       "type": "forge:ore_dict",
       "ore": "mirageFairy2019FairyMinaRank3"
     }
-  },
+  ],
   "result": {
-    "item": "minecraft:iron_ingot"
+    "item": "minecraft:iron_ore",
+    "count": 2
   }
 }

@@ -6,13 +6,14 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
+import miragefairy2019.lib.resourcemaker.DataIngredient
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
+import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.handheld
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import mirrg.kotlin.hydrogen.unit
@@ -57,67 +58,31 @@ val miniaRecipeModule = module {
         operator fun String.not() = unit { list += this }
     }
 
-    fun register(name: String, output: DataResult, inputRank: Int, pattern: PatternBuilder.() -> Unit) = makeRecipe("minia/${name}_from_minia") {
-        DataShapedRecipe(
-            pattern = PatternBuilder().also { pattern(it) }.list,
-            key = mapOf(
-                "s" to miragefairy2019.mod.artifacts.WandType.SUMMONING.ingredientData,
-                "#" to DataOreIngredient(ore = "mirageFairy2019FairyMinaRank$inputRank")
+    fun register(name: String, input: DataIngredient, output: DataResult, inputRank: Int, count: Int) = makeRecipe("minia/${name}_from_minia") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                input,
+                DataOreIngredient(ore = "mirageFairyApostleStick"),
+                *(0 until count).map { DataOreIngredient(ore = "mirageFairy2019FairyMinaRank$inputRank") }.toTypedArray()
             ),
             result = output
         )
     }
 
-    register("cobblestone", DataResult(item = "minecraft:cobblestone"), 2) { // 丸石
-        !"#  "
-        !" s "
-        !"   "
-    }
-    register("charcoal", DataResult(item = "minecraft:coal", data = 1), 3) { // 木炭
-        !"   "
-        !" s "
-        !"  #"
-    }
-    register("iron_ingot", DataResult(item = "minecraft:iron_ingot"), 3) { // 鉄
-        !"#  "
-        !" s "
-        !"   "
-    }
-    register("gold_ingot", DataResult(item = "minecraft:gold_ingot"), 3) { // 金
-        !"## "
-        !" s "
-        !"   "
-    }
-    register("magnetite", DataResult(item = "miragefairy2019:materials", data = 8), 5) { // 磁鉄鉱
-        !"   "
-        !" s "
-        !" # "
-    }
-    register("sulfur", DataResult(item = "miragefairy2019:materials", data = 2), 5) { // 硫黄
-        !"   "
-        !" s "
-        !"## "
-    }
-    register("apatite", DataResult(item = "miragefairy2019:materials", data = 0), 5) { // 燐灰石
-        !"   "
-        !" s "
-        !" ##"
-    }
-    register("cinnabar", DataResult(item = "miragefairy2019:materials", data = 6), 5) { // 辰砂
-        !"#  "
-        !"#s "
-        !"## "
-    }
-    register("fluorite", DataResult(item = "miragefairy2019:materials", data = 1), 5) { // 蛍石
-        !"  #"
-        !" s#"
-        !" ##"
-    }
-    register("moonstone", DataResult(item = "miragefairy2019:materials", data = 7), 5) { // 月長石
-        !"###"
-        !"#s#"
-        !"###"
-    }
+    register("cobblestone", DataOreIngredient(ore = "cobblestone"), DataResult(item = "minecraft:cobblestone", data = null, count = 2), 2, 1) // 丸石
+    register("charcoal", DataOreIngredient(ore = "oreCoal"), DataResult(item = "minecraft:coal_ore", data = null, count = 2), 3, 1) // 石炭
+    register("iron_ingot", DataOreIngredient(ore = "oreIron"), DataResult(item = "minecraft:iron_ore", data = null, count = 2), 3, 1) // 鉄
+    register("gold_ingot", DataOreIngredient(ore = "oreGold"), DataResult(item = "minecraft:gold_ore", data = null, count = 2), 3, 4) // 金
+    register("redstone", DataOreIngredient(ore = "oreRedstone"), DataResult(item = "minecraft:redstone_ore", data = null, count = 2), 3, 2) // 赤石
+    register("lapis", DataOreIngredient(ore = "oreLapis"), DataResult(item = "minecraft:lapis_ore", data = null, count = 2), 4, 2) // ラピスラズリ
+    register("emerald", DataOreIngredient(ore = "oreEmerald"), DataResult(item = "minecraft:emerald_ore", data = null, count = 2), 4, 1) // エメラルド
+    register("diamond", DataOreIngredient(ore = "oreDiamond"), DataResult(item = "minecraft:diamond_ore", data = null, count = 2), 4, 4) // ダイヤモンド
+    register("magnetite", DataOreIngredient(ore = "oreMagnetite"), DataResult(item = "miragefairy2019:ore1", data = 5, count = 2), 4, 1) // 磁鉄鉱
+    register("sulfur", DataOreIngredient(ore = "oreSulfur"), DataResult(item = "miragefairy2019:ore1", data = 2, count = 2), 4, 1) // 硫黄
+    register("apatite", DataOreIngredient(ore = "oreApatite"), DataResult(item = "miragefairy2019:ore1", data = 0, count = 2), 4, 1) // 燐灰石
+    register("cinnabar", DataOreIngredient(ore = "oreCinnabar"), DataResult(item = "miragefairy2019:ore1", data = 3, count = 2), 4, 1) // 辰砂
+    register("fluorite", DataOreIngredient(ore = "oreFluorite"), DataResult(item = "miragefairy2019:ore1", data = 1, count = 2), 4, 1) // 蛍石
+    register("moonstone", DataOreIngredient(ore = "oreMoonstone"), DataResult(item = "miragefairy2019:ore1", data = 4, count = 2), 4, 2) // 月長石
 
 }
 

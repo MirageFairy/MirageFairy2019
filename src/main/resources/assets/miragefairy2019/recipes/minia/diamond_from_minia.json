@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "type": "forge:ore_dict",
-      "ore": "oreGold"
+      "ore": "oreDiamond"
     },
     {
       "type": "forge:ore_dict",
@@ -11,23 +11,23 @@
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank3"
+      "ore": "mirageFairy2019FairyMinaRank4"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank3"
+      "ore": "mirageFairy2019FairyMinaRank4"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank3"
+      "ore": "mirageFairy2019FairyMinaRank4"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank3"
+      "ore": "mirageFairy2019FairyMinaRank4"
     }
   ],
   "result": {
-    "item": "minecraft:gold_ore",
+    "item": "minecraft:diamond_ore",
     "count": 2
   }
 }
