@@ -100,7 +100,7 @@ val potionModule = module {
     // アルラウンE
     onAddRecipe {
         fairyCentrifugeCraftHandler(30.0) {
-            process { !Mana.GAIA + !Erg.FLAME * 2.0 }
+            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
             process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
             process { !Mana.AQUA + !Erg.LIFE * 2.0 }
             input("mirageFairySyrup".oreIngredient, 1)
