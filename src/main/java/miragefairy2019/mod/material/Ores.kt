@@ -1,6 +1,7 @@
 package miragefairy2019.mod.material
 
 import miragefairy2019.common.toOreName
+import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -67,7 +68,22 @@ object Ores {
             EnumVariantOre1.values().forEach {
                 setCustomModelResourceLocation(it.blockVariant.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.blockVariant.resourceName))
             }
-            // TODO register ore name
+            addOreName("oreApatite", 0)
+            addOreName("oreFluorite", 1)
+            addOreName("oreSulfur", 2)
+            addOreName("oreCinnabar", 3)
+            addOreName("oreMoonstone", 4)
+            addOreName("oreMagnetite", 5)
+            addOreName("orePyrope", 6)
+            addOreName("oreSmithsonite", 7)
+            addOreName("oreApatite", 8)
+            addOreName("oreFluorite", 9)
+            addOreName("oreSulfur", 10)
+            addOreName("oreCinnabar", 11)
+            addOreName("oreMoonstone", 12)
+            addOreName("oreMagnetite", 13)
+            addOreName("oreNephrite", 14)
+            addOreName("oreTopaz", 15)
         }
 
         // 鉱石ブロック2
@@ -100,7 +116,10 @@ object Ores {
             EnumVariantOre2.values().forEach {
                 setCustomModelResourceLocation(it.blockVariant.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.blockVariant.resourceName))
             }
-            // TODO register ore name
+            addOreName("oreTourmaline", 0)
+            addOreName("oreHeliolite", 1)
+            addOreName("oreLabradorite", 2)
+            addOreName("orePyrite", 3)
         }
 
         // 翻訳の生成
