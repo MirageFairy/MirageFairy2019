@@ -95,7 +95,7 @@ val potionModule = module {
     }
 
 
-    // マンドレイク→全耐性のポーション
+    // アルラウンE
     onAddRecipe {
         fairyCentrifugeCraftHandler(30.0) {
             process { !Mana.GAIA + !Erg.FLAME * 2.0 }
