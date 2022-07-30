@@ -4,7 +4,9 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.mod.fairy.FairyCard
+import miragefairy2019.mod.magicplant.blockMandrake
 import miragefairy2019.mod.magicplant.blockMirageFlower
+import miragefairy2019.mod.magicplant.blockVelopeda
 import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.EnumVariantMaterials1
 import net.minecraft.block.Block
@@ -256,12 +258,14 @@ val fairyRelationModule = module {
         )
     }
     FairyCard.MIRAGE_FLOWER.register { block({ blockMirageFlower() }) }
+    FairyCard.MANDRAKE.register(relevance = 0.5, weight = 0.01) { block({ blockMandrake() }) } // TODO クラフト不可属性
+    FairyCard.MANDRAKE.register(relevance = 0.5, weight = 0.01) { ore("mirageFairyMandrake") } // TODO クラフト不可属性
+    FairyCard.VELOPEDA.register(relevance = 0.5, weight = 0.01) { block({ blockVelopeda() }) } // TODO クラフト不可属性
+    FairyCard.VELOPEDA.register(relevance = 0.5, weight = 0.01) { ore("leafMirageFairyVelopeda") } // TODO クラフト不可属性
     FairyCard.SUGAR_CANE.register { block({ Blocks.REEDS }) }
     FairyCard.SUGAR_CANE.register { item({ Items.REEDS }) }
     FairyCard.POTATO.register { block({ Blocks.POTATOES }) }
     FairyCard.POTATO.register { item({ Items.POTATO }) }
-    FairyCard.MANDRAKE.register(relevance = 0.5, weight = 0.01) { ore("mirageFairyMandrake") } // TODO クラフト不可属性
-    FairyCard.VELOPEDA.register(relevance = 0.5, weight = 0.01) { ore("leafMirageFairyVelopeda") } // TODO クラフト不可属性
 
     // 料理
     FairyCard.BREAD.register { item({ Items.BREAD }) }
