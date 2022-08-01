@@ -83,7 +83,7 @@ val twinkleStoneModule = module {
     // 全体
     run {
 
-        // ブロック登録
+        // ブロック
         blockTwinkleStone = block({ BlockTwinkleStone() }, "twinkle_stone") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
@@ -93,7 +93,7 @@ val twinkleStoneModule = module {
             }
         }
 
-        // アイテム登録
+        // アイテム
         itemBlockTwinkleStone = item({ ItemBlockMulti(blockTwinkleStone()) }, "twinkle_stone") {
             setUnlocalizedName("twinkleStone")
             TwinkleStoneCard.values().forEach { twinkleStoneCard ->

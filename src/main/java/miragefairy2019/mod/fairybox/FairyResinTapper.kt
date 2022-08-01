@@ -44,7 +44,7 @@ lateinit var itemBlockFairyResinTapper: () -> ItemBlock
 
 val fairyResinTapperModule = module {
 
-    // ブロック登録
+    // ブロック
     blockFairyResinTapper = block({ BlockFairyBoxBase(4) { TileEntityFairyResinTapper() } }, "fairy_resin_tapper") {
         setUnlocalizedName("fairyResinTapper")
         setCreativeTab { Main.creativeTab }
@@ -93,7 +93,7 @@ val fairyResinTapperModule = module {
         }
     }
 
-    // アイテム登録
+    // アイテム
     itemBlockFairyResinTapper = item({ ItemBlock(blockFairyResinTapper()) }, "fairy_resin_tapper") {
         setCustomModelResourceLocation(variant = "facing=north")
         makeRecipe {

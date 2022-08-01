@@ -30,7 +30,7 @@ lateinit var itemBlockFairyHouse: () -> ItemBlock
 
 val fairyHouseModule = module {
 
-    // ブロック登録
+    // ブロック
     blockFairyHouse = block({ BlockFairyBoxBase(4) { TileEntityFairyHouse() } }, "fairy_box") {
         setUnlocalizedName("fairyHouse")
         setCreativeTab { Main.creativeTab }
@@ -79,7 +79,7 @@ val fairyHouseModule = module {
         }
     }
 
-    // アイテム登録
+    // アイテム
     itemBlockFairyHouse = item({ ItemBlock(blockFairyHouse()) }, "fairy_box") {
         setCustomModelResourceLocation(variant = "facing=north")
         makeRecipe {

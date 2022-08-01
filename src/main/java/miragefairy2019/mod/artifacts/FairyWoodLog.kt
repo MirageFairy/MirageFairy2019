@@ -34,7 +34,7 @@ lateinit var itemBlockFairyWoodLog: () -> ItemBlock
 
 val fairyWoodLogModule = module {
 
-    // ブロック登録
+    // ブロック
     blockFairyWoodLog = block({ BlockFairyWoodLog() }, "fairy_wood_log") {
         setUnlocalizedName("fairyWoodLog")
         setCreativeTab { Main.creativeTab }
@@ -56,7 +56,7 @@ val fairyWoodLogModule = module {
         }
     }
 
-    // アイテム登録
+    // アイテム
     itemBlockFairyWoodLog = item({ ItemBlock(blockFairyWoodLog()) }, "fairy_wood_log") {
         setUnlocalizedName("fairyWoodLog")
         addOreName("logFairyWood")

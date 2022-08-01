@@ -225,7 +225,7 @@ val wandModule = module {
     // 個別
     WandKind.values().forEach { wandKind ->
 
-        // アイテム登録
+        // アイテム
         item({ ItemFairyWand() }, wandKind.registryName) {
             setUnlocalizedName("fairyWand${wandKind.type.registryName.toUpperCamelCase()}${if (wandKind.rank == 1) "" else "${wandKind.rank}"}")
             setCreativeTab { Main.creativeTab }

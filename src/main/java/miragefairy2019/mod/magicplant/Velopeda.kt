@@ -46,7 +46,7 @@ lateinit var itemVelopedaSeeds: () -> ItemMagicPlantSeed
 
 val velopedaModule = module {
 
-    // ブロック登録
+    // ブロック
     blockVelopeda = block({ BlockVelopeda() }, "velopeda") {
         setUnlocalizedName("velopeda")
         makeBlockStates {
@@ -73,7 +73,7 @@ val velopedaModule = module {
         makeBlockModel("velopeda_age5")
     }
 
-    // 種アイテム登録
+    // 種アイテム
     itemVelopedaSeeds = item({ ItemMagicPlantSeed(blockVelopeda()) }, "velopeda_seeds") {
         setUnlocalizedName("velopedaSeeds")
         setCreativeTab { Main.creativeTab }

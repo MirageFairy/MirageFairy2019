@@ -797,7 +797,7 @@ val fairyWeaponModule = module {
     // 個別
     FairyWeaponKind.values().forEach { fairyWeaponKind ->
 
-        // アイテム登録
+        // アイテム
         item(fairyWeaponKind.itemCreator, fairyWeaponKind.registryName) {
             setUnlocalizedName(fairyWeaponKind.unlocalizedName)
             setCreativeTab { creativeTab }

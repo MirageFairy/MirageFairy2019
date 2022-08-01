@@ -64,7 +64,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 val itemFrameModule = module {
 
-    // ブロック登録
+    // ブロック
     val blockItemFrame = block({ BlockItemFrame() }, "item_frame") {
         setUnlocalizedName("itemFrame")
         setCreativeTab { Main.creativeTab }
@@ -135,7 +135,7 @@ val itemFrameModule = module {
         }
     }
 
-    // アイテム登録
+    // アイテム
     item({ ItemBlock(blockItemFrame()) }, "item_frame") {
         setCustomModelResourceLocation(variant = "facing=down")
         makeItemModel { block }

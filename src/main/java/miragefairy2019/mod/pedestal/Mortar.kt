@@ -118,7 +118,7 @@ val mortarModule = module {
     // 全般
     run {
 
-        // ブロック登録
+        // ブロック
         blockMortar = block({ BlockMortar() }, "mortar") {
             setUnlocalizedName("mortar")
             setCreativeTab { Main.creativeTab }
@@ -131,7 +131,7 @@ val mortarModule = module {
             }
         }
 
-        // アイテム登録
+        // アイテム
         itemBlockMortar = item({ ItemBlockMortar(blockMortar()) }, "mortar") {
             MortarVariant.values().forEach { variant ->
                 setCustomModelResourceLocation(variant.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, variant.blockRegistryName))

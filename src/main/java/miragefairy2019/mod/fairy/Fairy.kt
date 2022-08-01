@@ -121,7 +121,7 @@ val fairyModule = module {
 
     val rankMax = 7
 
-    // アイテム登録
+    // アイテム
     listItemFairy = (1..rankMax).map { rank ->
         val dressColor = when (rank) {
             1 -> 0xFF8888

@@ -50,7 +50,7 @@ lateinit var itemMandrakeSeeds: () -> ItemMagicPlantSeed
 
 val mandrakeModule = module {
 
-    // ブロック登録
+    // ブロック
     blockMandrake = block({ BlockMandrake() }, "mandrake") {
         setUnlocalizedName("mandrake")
         makeBlockStates {
@@ -76,7 +76,7 @@ val mandrakeModule = module {
         makeBlockModel("mandrake_age4")
     }
 
-    // 種アイテム登録
+    // 種アイテム
     itemMandrakeSeeds = item({ ItemMagicPlantSeed(blockMandrake()) }, "mandrake_seeds") {
         setUnlocalizedName("mandrakeSeeds")
         setCreativeTab { Main.creativeTab }

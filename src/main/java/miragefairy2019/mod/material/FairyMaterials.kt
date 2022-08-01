@@ -691,7 +691,7 @@ fun FairyMaterialCard.createItemStack(count: Int = 1) = itemFairyMaterials().get
 
 val fairyMaterialsModule = module {
 
-    // アイテム登録
+    // アイテム
     itemFairyMaterials = item({ ItemMultiFairyMaterial() }, "fairy_materials") {
         setUnlocalizedName("fairyMaterials")
         setCreativeTab { Main.creativeTab }

@@ -118,7 +118,7 @@ fun PotionCard.createItemStack(count: Int = 1) = itemPotion().getVariant(this.me
 
 val potionModule = module {
 
-    // アイテム登録
+    // アイテム
     itemPotion = item({ ItemPotion() }, "potion") {
         setUnlocalizedName("potion")
         setCreativeTab { Main.creativeTab }

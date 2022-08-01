@@ -57,7 +57,7 @@ lateinit var itemMirageFlowerSeeds: () -> ItemMagicPlantSeed
 
 val mirageFlowerModule = module {
 
-    // ブロック登録
+    // ブロック
     blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
         setUnlocalizedName("mirageFlower")
         makeBlockStates {
@@ -82,7 +82,7 @@ val mirageFlowerModule = module {
         makeBlockModel("mirage_flower_age3")
     }
 
-    // 種アイテム登録
+    // 種アイテム
     itemMirageFlowerSeeds = item({ ItemMagicPlantSeed(blockMirageFlower()) }, "mirage_flower_seeds") {
         setUnlocalizedName("mirageFlowerSeeds")
         setCreativeTab { Main.creativeTab }

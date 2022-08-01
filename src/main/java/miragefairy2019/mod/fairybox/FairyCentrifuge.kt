@@ -126,7 +126,7 @@ lateinit var itemBlockFairyCentrifuge: () -> ItemBlock
 
 val fairyCentrifugeModule = module {
 
-    // ブロック登録
+    // ブロック
     blockFairyCentrifuge = block({ BlockFairyBoxBase(4) { TileEntityFairyCentrifuge() } }, "fairy_centrifuge") {
         setUnlocalizedName("fairyCentrifuge")
         setCreativeTab { Main.creativeTab }
@@ -180,7 +180,7 @@ val fairyCentrifugeModule = module {
         }
     }
 
-    // アイテム登録
+    // アイテム
     itemBlockFairyCentrifuge = item({ ItemBlock(blockFairyCentrifuge()) }, "fairy_centrifuge") {
         setCustomModelResourceLocation(variant = "facing=north")
         makeRecipe {

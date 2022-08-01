@@ -51,7 +51,7 @@ lateinit var itemFairyStick: () -> ItemFairyStick
 
 val fairyStickModule = module {
 
-    // アイテム登録
+    // アイテム
     itemFairyStick = item({ ItemFairyStick() }, "fairy_stick") {
         setUnlocalizedName("fairyStick")
         setCreativeTab { Main.creativeTab }
