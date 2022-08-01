@@ -137,70 +137,74 @@ val potionModule = module {
         onMakeLang { enJa("item.${potionCard.unlocalizedName}.poem", "", potionCard.japanesePoem) }
     }
 
+    // レシピ登録
+    run {
 
-    // アルラウンE
-    onAddRecipe {
-        fairyCentrifugeCraftHandler(30.0) {
-            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
-            process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
-            process { !Mana.AQUA + !Erg.LIFE * 2.0 }
-            input("mirageFairySyrup".oreIngredient, 1)
-            input("mirageFairyMandrake".oreIngredient, 1)
-            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
-            output(PotionCard.MANDRAKE_JUICE.createItemStack(), 1.0)
+        // アルラウンE
+        onAddRecipe {
+            fairyCentrifugeCraftHandler(30.0) {
+                process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+                process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
+                process { !Mana.AQUA + !Erg.LIFE * 2.0 }
+                input("mirageFairySyrup".oreIngredient, 1)
+                input("mirageFairyMandrake".oreIngredient, 1)
+                input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+                output(PotionCard.MANDRAKE_JUICE.createItemStack(), 1.0)
+            }
         }
-    }
 
-    // サボテンジュース
-    onAddRecipe {
-        fairyCentrifugeCraftHandler(30.0) {
-            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
-            process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
-            process { !Mana.AQUA + !Erg.LIFE * 2.0 }
-            input("mirageFairySyrup".oreIngredient, 1)
-            input("blockCactus".oreIngredient, 1)
-            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
-            output(PotionCard.CACTUS_JUICE.createItemStack(), 1.0)
+        // サボテンジュース
+        onAddRecipe {
+            fairyCentrifugeCraftHandler(30.0) {
+                process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+                process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
+                process { !Mana.AQUA + !Erg.LIFE * 2.0 }
+                input("mirageFairySyrup".oreIngredient, 1)
+                input("blockCactus".oreIngredient, 1)
+                input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+                output(PotionCard.CACTUS_JUICE.createItemStack(), 1.0)
+            }
         }
-    }
 
-    // リンゴジュース
-    onAddRecipe {
-        fairyCentrifugeCraftHandler(30.0) {
-            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
-            process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
-            process { !Mana.AQUA + !Erg.LIFE * 2.0 }
-            input("mirageFairySyrup".oreIngredient, 1)
-            input(Items.APPLE.ingredient, 1)
-            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
-            output(PotionCard.APPLE_JUICE.createItemStack(), 1.0)
+        // リンゴジュース
+        onAddRecipe {
+            fairyCentrifugeCraftHandler(30.0) {
+                process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+                process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
+                process { !Mana.AQUA + !Erg.LIFE * 2.0 }
+                input("mirageFairySyrup".oreIngredient, 1)
+                input(Items.APPLE.ingredient, 1)
+                input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+                output(PotionCard.APPLE_JUICE.createItemStack(), 1.0)
+            }
         }
-    }
 
-    // 青汁
-    onAddRecipe {
-        fairyCentrifugeCraftHandler(30.0) {
-            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
-            process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
-            process { !Mana.AQUA + !Erg.LIFE * 2.0 }
-            input("mirageFairySyrup".oreIngredient, 1)
-            input("treeLeaves".oreIngredient, 1)
-            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
-            output(PotionCard.GREEN_JUICE.createItemStack(), 1.0)
+        // 青汁
+        onAddRecipe {
+            fairyCentrifugeCraftHandler(30.0) {
+                process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+                process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
+                process { !Mana.AQUA + !Erg.LIFE * 2.0 }
+                input("mirageFairySyrup".oreIngredient, 1)
+                input("treeLeaves".oreIngredient, 1)
+                input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+                output(PotionCard.GREEN_JUICE.createItemStack(), 1.0)
+            }
         }
-    }
 
-    // 毒薬
-    onAddRecipe {
-        fairyCentrifugeCraftHandler(30.0) {
-            process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
-            process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
-            process { !Mana.AQUA + !Erg.LIFE * 2.0 }
-            input("mirageFairySyrup".oreIngredient, 1)
-            input(Items.FISH.createItemStack(metadata = 3).ingredient, 1)
-            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 8)
-            output(PotionCard.POISON_JUICE.createItemStack(), 8.0)
+        // 毒薬
+        onAddRecipe {
+            fairyCentrifugeCraftHandler(30.0) {
+                process { !Mana.GAIA + !Erg.DESTROY * 2.0 }
+                process { !Mana.WIND + !Erg.CHEMICAL * 2.0 }
+                process { !Mana.AQUA + !Erg.LIFE * 2.0 }
+                input("mirageFairySyrup".oreIngredient, 1)
+                input(Items.FISH.createItemStack(metadata = 3).ingredient, 1)
+                input(Items.GLASS_BOTTLE.createItemStack().ingredient, 8)
+                output(PotionCard.POISON_JUICE.createItemStack(), 8.0)
+            }
         }
+
     }
 
 }
