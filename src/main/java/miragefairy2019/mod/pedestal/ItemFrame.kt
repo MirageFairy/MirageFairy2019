@@ -164,6 +164,7 @@ val itemFrameModule = module {
 
 }
 
+// TODO 地図の表示
 class BlockItemFrame : BlockPedestal<TileEntityItemFrame>(Material.WOOD, { it as? TileEntityItemFrame }) {
     companion object {
         val FACING: PropertyEnum<EnumFacing> = PropertyEnum.create("facing", EnumFacing::class.java)
