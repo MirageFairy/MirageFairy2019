@@ -155,12 +155,8 @@ val fairyCrystalDropLoaderModule = module {
 
         }
 
-        // TODO remove
+        // TODO イベントが終了したら削除
         DropCategory.RARE {
-
-            FairyCard.CUPID(0.00001).register {
-                LocalDateTime.now(ZoneOffset.UTC) < LocalDateTime.of(2022, 8, 1, 0, 0, 0)
-            }
 
             FairyCard.AVALON(0.00001).register {
                 LocalDateTime.now(ZoneOffset.UTC) < LocalDateTime.of(2022, 10, 1, 0, 0, 0)
