@@ -31,7 +31,7 @@ import miragefairy2019.libkt.red
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
-import miragefairy2019.mod.placeditem.PlacedItem
+import miragefairy2019.mod.placeditem.keyBindingPlaceItem
 import miragefairy2019.mod.systems.ApiFacedCursor
 import miragefairy2019.mod.systems.IFacedCursorHandler
 import mirrg.kotlin.hydrogen.castOrNull
@@ -231,7 +231,7 @@ class BlockItemFrame : BlockPedestal<TileEntityItemFrame>(Material.WOOD, { it as
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        tooltip += formattedText { (TextComponentKeybind(PlacedItem.keyBindingPlaceItem.keyDescription)() + "キーでアイテムを展示"()).red } // TODO translate
+        tooltip += formattedText { (TextComponentKeybind(keyBindingPlaceItem.keyDescription)() + "キーでアイテムを展示"()).red } // TODO translate
         tooltip += formattedText { ("右クリックで展示物を回転"()).red } // TODO translate
     }
 

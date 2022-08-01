@@ -30,7 +30,7 @@ import miragefairy2019.libkt.red
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
-import miragefairy2019.mod.placeditem.PlacedItem
+import miragefairy2019.mod.placeditem.keyBindingPlaceItem
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -128,7 +128,7 @@ class BlockSwordStand : BlockPedestal<TileEntitySwordStand>(Material.CIRCUITS, {
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        tooltip += formattedText { (TextComponentKeybind(PlacedItem.keyBindingPlaceItem.keyDescription)() + "キーでアイテムを展示"()).red } // TODO translate
+        tooltip += formattedText { (TextComponentKeybind(keyBindingPlaceItem.keyDescription)() + "キーでアイテムを展示"()).red } // TODO translate
         tooltip += formattedText { ("右クリックで展示物を回転"()).red } // TODO translate
         tooltip += formattedText { ("Shift+右クリックで展示方法を変更"()).red } // TODO translate
     }

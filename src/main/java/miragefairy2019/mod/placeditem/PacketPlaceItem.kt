@@ -79,7 +79,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
         fun tryBreak(): EnumActionResult { // 撤去
             val blockPos = message.blockPos // 起点座標
             val blockState = world.getBlockState(blockPos) // 指定座標のブロック
-            if (blockState !== PlacedItem.blockPlacedItem().defaultState) return EnumActionResult.PASS // 指定座標は置かれたアイテムでなければならない
+            if (blockState !== blockPlacedItem().defaultState) return EnumActionResult.PASS // 指定座標は置かれたアイテムでなければならない
 
             // 発動
 
@@ -118,7 +118,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
             val itemStackHeld = player.getHeldItem(EnumHand.MAIN_HAND)
             if (itemStackHeld.isEmpty) return EnumActionResult.PASS // 何も持っていない場合は中止
 
-            if (!world.mayPlace(PlacedItem.blockPlacedItem(), blockPos, false, EnumFacing.UP, player)) return EnumActionResult.PASS // 設置不可能なら中止
+            if (!world.mayPlace(blockPlacedItem(), blockPos, false, EnumFacing.UP, player)) return EnumActionResult.PASS // 設置不可能なら中止
 
             // 発動
 
@@ -128,7 +128,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
             if (!player.canPlayerEdit(blockPos, EnumFacing.UP, itemStackHeld)) return EnumActionResult.FAIL // 改変禁止なら中止
 
             // ブロックを設置
-            val res = world.setBlockState(blockPos, PlacedItem.blockPlacedItem().defaultState, 11)
+            val res = world.setBlockState(blockPos, blockPlacedItem().defaultState, 11)
             if (!res) return EnumActionResult.FAIL // 設置に失敗したら中止
 
             val tileEntity = world.getTileEntity(blockPos)
