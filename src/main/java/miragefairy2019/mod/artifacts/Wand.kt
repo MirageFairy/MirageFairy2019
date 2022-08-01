@@ -677,6 +677,65 @@ val wandModule = module {
         )
     }
 
+    // ミラジウムの棒（紅蓮のワンド）
+    makeRecipe("miragium_rod_by_fairy_wand") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "mI",
+                "I "
+            ),
+            key = mapOf(
+                "I" to DataOreIngredient(ore = "ingotMiragium"),
+                "m" to WandType.MELTING.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:materials", data = 12)
+        )
+    }
+
+    // ミラジウムの棒（歪曲のワンド）
+    makeRecipe("miragium_rod_from_distortion_fairy_wand") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "d ",
+                " I"
+            ),
+            key = mapOf(
+                "I" to DataOreIngredient(ore = "ingotMiragium"),
+                "d" to WandType.DISTORTION.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:materials", data = 12)
+        )
+    }
+
+    // ミラジウムの板（歪曲のワンド）
+    makeRecipe("miragium_plate_from_distortion_fairy_wand") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "d",
+                "I",
+                "I"
+            ),
+            key = mapOf(
+                "I" to DataOreIngredient(ore = "ingotMiragium"),
+                "d" to WandType.DISTORTION.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:materials", data = 20)
+        )
+    }
+
+    // リラジウムインゴット（融合のワンド）
+    makeRecipe("lilagium_ingot_from_fusion_fairy_wand") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "ingotMiragium"),
+                DataSimpleIngredient(item = "minecraft:double_plant", data = 1),
+                DataSimpleIngredient(item = "minecraft:double_plant", data = 1),
+                WandType.FUSION.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:materials", data = 19)
+        )
+    }
+
 }
 
 class ItemFairyWand : Item(), IFairyStickCraftItem {

@@ -78,32 +78,6 @@ enum class CommonMaterialCard(
                 result = DataResult(item = "miragefairy2019:materials", data = 12)
             )
         }
-        modScope.makeRecipe("miragium_rod_by_fairy_wand") { // TODO move -> wand recipe
-            DataShapedRecipe(
-                pattern = listOf(
-                    "mI",
-                    "I "
-                ),
-                key = mapOf(
-                    "I" to DataOreIngredient(ore = "ingotMiragium"),
-                    "m" to WandType.MELTING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:materials", data = 12)
-            )
-        }
-        modScope.makeRecipe("miragium_rod_from_distortion_fairy_wand") { // TODO move -> wand recipe
-            DataShapedRecipe(
-                pattern = listOf(
-                    "d ",
-                    " I"
-                ),
-                key = mapOf(
-                    "I" to DataOreIngredient(ore = "ingotMiragium"),
-                    "d" to WandType.DISTORTION.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:materials", data = 12)
-            )
-        }
     }),
     MIRAGIUM_NUGGET(13, "miragium_nugget", "nuggetMiragium", "Miragium Nugget", "ミラジウムの塊", "nuggetMiragium", false, {
         modScope.makeRecipe("miragium_nugget_by_fairy") { // 妖精→
@@ -117,7 +91,7 @@ enum class CommonMaterialCard(
                 result = DataResult(item = "miragefairy2019:materials", data = 13, count = 2)
             )
         }
-        modScope.makeRecipe("miragium_nugget_by_fairy_wand") { // TODO rename
+        modScope.makeRecipe("miragium_nugget_by_fairy_wand") {
             DataShapelessRecipe(
                 ingredients = listOf(
                     WandType.MELTING.ingredientData,
@@ -148,17 +122,6 @@ enum class CommonMaterialCard(
                 result = DataResult(item = "miragefairy2019:materials", data = 19)
             )
         }
-        modScope.makeRecipe("lilagium_ingot_from_fusion_fairy_wand") { // TODO move -> wand recipe
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(ore = "ingotMiragium"),
-                    DataSimpleIngredient(item = "minecraft:double_plant", data = 1),
-                    DataSimpleIngredient(item = "minecraft:double_plant", data = 1),
-                    WandType.FUSION.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:materials", data = 19)
-            )
-        }
     }),
     MIRAGIUM_PLATE(20, "miragium_plate", "plateMiragium", "Miragium Plate", "ミラジウムの板", "plateMiragium", false, {
         makeRecipe {
@@ -171,20 +134,6 @@ enum class CommonMaterialCard(
                 key = mapOf(
                     "I" to DataOreIngredient(ore = "ingotMiragium"),
                     "m" to WandType.MELTING.ingredientData
-                ),
-                result = DataResult(item = "miragefairy2019:materials", data = 20)
-            )
-        }
-        modScope.makeRecipe("miragium_plate_from_distortion_fairy_wand") { // TODO move -> wand recipe
-            DataShapedRecipe(
-                pattern = listOf(
-                    "d",
-                    "I",
-                    "I"
-                ),
-                key = mapOf(
-                    "I" to DataOreIngredient(ore = "ingotMiragium"),
-                    "d" to WandType.DISTORTION.ingredientData
                 ),
                 result = DataResult(item = "miragefairy2019:materials", data = 20)
             )
