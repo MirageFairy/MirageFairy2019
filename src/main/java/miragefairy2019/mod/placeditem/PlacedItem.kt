@@ -9,6 +9,7 @@ import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.normal
+import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.PacketId
@@ -98,6 +99,11 @@ val placedItemModule = module {
                 }
             }.run()
         }
+    }
+
+    // 翻訳生成
+    onMakeLang {
+        enJa("miragefairy2019.placeItem", "Place Item", "アイテムを置く")
     }
 
 }
