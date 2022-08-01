@@ -117,8 +117,8 @@ val wandTierToRodOreName = mapOf(
     5 to "rodMirageFairyPlastic"
 )
 
-enum class WandKind(
-    val parent: WandKind?,
+enum class WandCard(
+    val parent: WandCard?,
     val type: WandType,
     val rank: Int,
     val englishPoem: String,
@@ -165,9 +165,9 @@ val WandType.oreName get() = "mirageFairy2019CraftingToolFairyWand${registryName
 val WandType.ingredient get() = WandIngredient(oreName)
 val WandType.ingredientData get() = DataOreIngredient(type = "miragefairy2019:wand", ore = oreName)
 
-val WandKind.tier get() = type.tier + (rank - 1)
-val WandKind.registryName get() = "${type.registryName}_fairy_wand${if (rank == 1) "" else "_$rank"}"
-val WandKind.unlocalizedName get() = "fairy_wand_${type.registryName}${if (rank == 1) "" else "_$rank"}".toLowerCamelCase()
+val WandCard.tier get() = type.tier + (rank - 1)
+val WandCard.registryName get() = "${type.registryName}_fairy_wand${if (rank == 1) "" else "_$rank"}"
+val WandCard.unlocalizedName get() = "fairy_wand_${type.registryName}${if (rank == 1) "" else "_$rank"}".toLowerCamelCase()
 
 val wandModule = module {
 
@@ -234,30 +234,30 @@ val wandModule = module {
     }
 
     // 個別
-    WandKind.values().forEach { wandKind ->
+    WandCard.values().forEach { wandCard ->
 
         // アイテム
-        item({ ItemFairyWand() }, wandKind.registryName) {
-            setUnlocalizedName("fairyWand${wandKind.type.registryName.toUpperCamelCase()}${if (wandKind.rank == 1) "" else "${wandKind.rank}"}")
+        item({ ItemFairyWand() }, wandCard.registryName) {
+            setUnlocalizedName("fairyWand${wandCard.type.registryName.toUpperCamelCase()}${if (wandCard.rank == 1) "" else "${wandCard.rank}"}")
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation()
             onInit {
-                val durability = (1..wandKind.tier).fold(16) { a, _ -> a * 2 }
+                val durability = (1..wandCard.tier).fold(16) { a, _ -> a * 2 }
                 item.maxDamage = durability - 1
-                item.tier = wandKind.tier
+                item.tier = wandCard.tier
             }
             onCreateItemStack {
-                OreDictionary.registerOre(wandKind.type.oreName, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE))
+                OreDictionary.registerOre(wandCard.type.oreName, item.createItemStack(metadata = OreDictionary.WILDCARD_VALUE))
             }
         }
 
         // アイテムモデル生成
-        makeItemModel(wandKind.registryName) {
+        makeItemModel(wandCard.registryName) {
             DataModel(
                 parent = "item/handheld",
                 textures = mapOf(
-                    "layer0" to "miragefairy2019:items/fairy_wand_rod_${wandKind.tier}",
-                    "layer1" to "miragefairy2019:items/${wandKind.type.registryName}_fairy_wand"
+                    "layer0" to "miragefairy2019:items/fairy_wand_rod_${wandCard.tier}",
+                    "layer1" to "miragefairy2019:items/${wandCard.type.registryName}_fairy_wand"
                 )
             )
         }
@@ -265,35 +265,35 @@ val wandModule = module {
         // 翻訳生成
         onMakeLang {
             enJa(
-                "item.fairyWand${wandKind.type.registryName.toUpperCamelCase()}${if (wandKind.rank == 1) "" else "${wandKind.rank}"}.name",
-                "${wandKind.type.englishName} Wand${if (wandKind.rank == 1) "" else " ${wandKind.rank.toRoman()}"}",
-                "${wandKind.type.japaneseName}のワンド${if (wandKind.rank == 1) "" else " ${wandKind.rank.toRoman()}"}"
+                "item.fairyWand${wandCard.type.registryName.toUpperCamelCase()}${if (wandCard.rank == 1) "" else "${wandCard.rank}"}.name",
+                "${wandCard.type.englishName} Wand${if (wandCard.rank == 1) "" else " ${wandCard.rank.toRoman()}"}",
+                "${wandCard.type.japaneseName}のワンド${if (wandCard.rank == 1) "" else " ${wandCard.rank.toRoman()}"}"
             )
-            enJa("item.${wandKind.unlocalizedName}.poem", wandKind.englishPoem, wandKind.japanesePoem)
+            enJa("item.${wandCard.unlocalizedName}.poem", wandCard.englishPoem, wandCard.japanesePoem)
         }
 
         // 実績生成
-        makeAdvancement("wand/${wandKind.registryName}") {
+        makeAdvancement("wand/${wandCard.registryName}") {
             jsonObject(
                 "display" to jsonObject(
                     "icon" to jsonObject(
-                        "item" to "miragefairy2019:${wandKind.registryName}".jsonElement
+                        "item" to "miragefairy2019:${wandCard.registryName}".jsonElement
                     ),
                     "title" to jsonObject(
-                        "translate" to "item.${wandKind.unlocalizedName}.name".jsonElement
+                        "translate" to "item.${wandCard.unlocalizedName}.name".jsonElement
                     ),
                     "description" to jsonObject(
                         "translate" to "advancements.miragefairy2019.wand.all.description".jsonElement
                     )
                 ),
-                "parent" to "miragefairy2019:wand/${wandKind.parent?.registryName ?: "root"}".jsonElement,
+                "parent" to "miragefairy2019:wand/${wandCard.parent?.registryName ?: "root"}".jsonElement,
                 "criteria" to jsonObject(
                     "main" to jsonObject(
                         "trigger" to "minecraft:inventory_changed".jsonElement,
                         "conditions" to jsonObject(
                             "items" to jsonArray(
                                 jsonObject(
-                                    "item" to "miragefairy2019:${wandKind.registryName}".jsonElement
+                                    "item" to "miragefairy2019:${wandCard.registryName}".jsonElement
                                 )
                             )
                         )
@@ -303,7 +303,7 @@ val wandModule = module {
         }
 
         // レシピ生成
-        makeRecipe(wandKind.registryName) {
+        makeRecipe(wandCard.registryName) {
             DataShapedRecipe(
                 pattern = listOf(
                     " cS",
@@ -312,10 +312,10 @@ val wandModule = module {
                 ),
                 key = mapOf(
                     "c" to WandType.CRAFTING.ingredientData,
-                    "R" to DataOreIngredient(ore = wandTierToRodOreName[wandKind.tier]!!),
-                    "S" to DataOreIngredient(ore = "mirageFairy2019Sphere${wandKind.type.erg.registryName.toUpperCaseHead()}")
+                    "R" to DataOreIngredient(ore = wandTierToRodOreName[wandCard.tier]!!),
+                    "S" to DataOreIngredient(ore = "mirageFairy2019Sphere${wandCard.type.erg.registryName.toUpperCaseHead()}")
                 ),
-                result = DataResult(item = "miragefairy2019:${wandKind.registryName}")
+                result = DataResult(item = "miragefairy2019:${wandCard.registryName}")
             )
         }
 
