@@ -24,7 +24,6 @@ import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
-import miragefairy2019.libkt.OreIngredientComplex
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.canTranslate
@@ -88,6 +87,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
+import net.minecraftforge.oredict.OreIngredient
 import kotlin.math.ceil
 
 
@@ -748,10 +748,17 @@ val wandModule = module {
 
 }
 
+
+class OreIngredientComplex(ore: String) : OreIngredient(ore) {
+    // これがtrueになっていると、subItemsを参照するようになるのでクラフティングツールが反応しなくなる
+    override fun isSimple(): Boolean = false
+}
+
 /** 耐久が削れたクラフティングツールを鉱石辞書名にマッチさせるためのIngredient */
 class IngredientFactoryOreIngredientComplex : IIngredientFactory {
     override fun parse(context: JsonContext, json: JsonObject) = OreIngredientComplex(JsonUtils.getString(json, "ore"))
 }
+
 
 class ItemFairyWand : Item(), IFairyStickCraftItem {
     var tier = 0
