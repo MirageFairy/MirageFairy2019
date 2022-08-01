@@ -54,9 +54,6 @@ val modules = module {
 
         enJa("tile.fairyLog.name", "Fairy Log", "妖精の樹洞")
 
-        enJa("item.fairyStick.name", "Fairy Stick", "妖精のステッキ")
-        enJa("item.fairyStick.poem", "", "頼みごとをしてみよう")
-
         enJa("item.spheres.name", "Sphere", "スフィア")
         enJa("item.spheres.format", "Sphere of %s", "%sのスフィア")
 
@@ -171,22 +168,6 @@ val modules = module {
                 DataOreIngredient(ore = "mirageFairyCrystalAny")
             ),
             result = DataResult(item = "miragefairy2019:fairy_crystal", data = 0)
-        )
-    }
-
-    // 妖精のステッキ
-    makeRecipe("fairy_stick") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "  c",
-                " s ",
-                "s  "
-            ),
-            key = mapOf(
-                "s" to DataOreIngredient(ore = "stickWood"),
-                "c" to DataOreIngredient(ore = "mirageFairyCrystal")
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_stick")
         )
     }
 

@@ -7,11 +7,16 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.proxy
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
+import miragefairy2019.lib.resourcemaker.DataResult
+import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.handheld
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.canTranslate
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.plus
@@ -61,13 +66,27 @@ val fairyStickModule = module {
         ApiFairyStickCraft.fairyStickCraftRegistry = FairyStickCraftRegistry()
     }
 
-    // 妖精のステッキ
+    // アイテム登録
     itemFairyStick = item({ ItemFairyStick() }, "fairy_stick") {
         setUnlocalizedName("fairyStick")
         setCreativeTab { Main.creativeTab }
         setCustomModelResourceLocation()
         addOreName("mirageFairyStick")
         makeItemModel { handheld }
+        makeRecipe {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "  c",
+                    " s ",
+                    "s  "
+                ),
+                key = mapOf(
+                    "s" to DataOreIngredient(ore = "stickWood"),
+                    "c" to DataOreIngredient(ore = "mirageFairyCrystal")
+                ),
+                result = DataResult(item = "miragefairy2019:fairy_stick")
+            )
+        }
     }
 
     // レシピ登録
@@ -102,6 +121,12 @@ val fairyStickModule = module {
             it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustMiragium"))
         })
 
+    }
+
+    // 翻訳生成
+    onMakeLang {
+        enJa("item.fairyStick.name", "Fairy Stick", "妖精のステッキ")
+        enJa("item.fairyStick.poem", "", "頼みごとをしてみよう")
     }
 
 }
