@@ -54,94 +54,98 @@ object FluidMaterials {
         onConstruction { FluidRegistry.enableUniversalBucket() }
         onMakeLang { ja("item.forge.bucketFilled.name", "%s入りバケツ") }
 
-
         // ミラジウムウォーター
-        fluidMiragiumWater = fluid("miragium_water") {
-            viscosity = 600
+        run {
+            fluidMiragiumWater = fluid("miragium_water") {
+                viscosity = 600
+            }
+            blockFluidMiragiumWater = block({ BlockFluidMiragiumWater(fluidMiragiumWater()) }, "miragium_water") {
+                setUnlocalizedName("miragiumWater")
+                setCreativeTab { Main.creativeTab }
+                setFluidStateMapper()
+                makeBlockStates(resourceName.path) { fluid }
+            }
+            itemFluidMiragiumWater = item({ ItemBlock(blockFluidMiragiumWater()) }, "miragium_water") {
+                setCustomModelResourceLocation()
+            }
+            makeItemModel("miragium_water") { fluid }
+            onMakeLang {
+                enJa("fluid.miragium_water", "Miragium Water", "ミラジウムウォーター")
+                enJa("tile.miragiumWater.name", "Miragium Water", "ミラジウムウォーター")
+            }
+            makeRecipe("miragium_water_pot") {
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        DataOreIngredient(ore = "mirageFairyPot"),
+                        DataOreIngredient(ore = "container1000Water"),
+                        DataOreIngredient(ore = "dustMiragium")
+                    ),
+                    result = DataResult(item = "miragefairy2019:filled_bucket", data = 0)
+                )
+            }
         }
-        blockFluidMiragiumWater = block({ BlockFluidMiragiumWater(fluidMiragiumWater()) }, "miragium_water") {
-            setUnlocalizedName("miragiumWater")
-            setCreativeTab { Main.creativeTab }
-            setFluidStateMapper()
-            makeBlockStates(resourceName.path) { fluid }
-        }
-        itemFluidMiragiumWater = item({ ItemBlock(blockFluidMiragiumWater()) }, "miragium_water") {
-            setCustomModelResourceLocation()
-        }
-        makeItemModel("miragium_water") { fluid }
-        onMakeLang {
-            enJa("fluid.miragium_water", "Miragium Water", "ミラジウムウォーター")
-            enJa("tile.miragiumWater.name", "Miragium Water", "ミラジウムウォーター")
-        }
-        makeRecipe("miragium_water_pot") {
-            DataShapelessRecipe(
-                ingredients = listOf(
-                    DataOreIngredient(ore = "mirageFairyPot"),
-                    DataOreIngredient(ore = "container1000Water"),
-                    DataOreIngredient(ore = "dustMiragium")
-                ),
-                result = DataResult(item = "miragefairy2019:filled_bucket", data = 0)
-            )
-        }
-
 
         // ミラージュエキス
-        fluidMirageFlowerExtract = fluid("mirage_flower_extract") {
-            viscosity = 1000
+        run {
+            fluidMirageFlowerExtract = fluid("mirage_flower_extract") {
+                viscosity = 1000
+            }
+            blockFluidMirageFlowerExtract = block({ BlockFluidMiragiumWater(fluidMirageFlowerExtract()) }, "mirage_flower_extract") {
+                setUnlocalizedName("mirageFlowerExtract")
+                setCreativeTab { Main.creativeTab }
+                setFluidStateMapper()
+                makeBlockStates(resourceName.path) { fluid }
+            }
+            itemFluidMirageFlowerExtract = item({ ItemBlock(blockFluidMirageFlowerExtract()) }, "mirage_flower_extract") {
+                setCustomModelResourceLocation()
+            }
+            makeItemModel("mirage_flower_extract") { fluid }
+            onMakeLang {
+                enJa("fluid.mirage_flower_extract", "Mirage Extract", "ミラージュエキス")
+                enJa("tile.mirageFlowerExtract.name", "Mirage Extract", "ミラージュエキス")
+            }
         }
-        blockFluidMirageFlowerExtract = block({ BlockFluidMiragiumWater(fluidMirageFlowerExtract()) }, "mirage_flower_extract") {
-            setUnlocalizedName("mirageFlowerExtract")
-            setCreativeTab { Main.creativeTab }
-            setFluidStateMapper()
-            makeBlockStates(resourceName.path) { fluid }
-        }
-        itemFluidMirageFlowerExtract = item({ ItemBlock(blockFluidMirageFlowerExtract()) }, "mirage_flower_extract") {
-            setCustomModelResourceLocation()
-        }
-        makeItemModel("mirage_flower_extract") { fluid }
-        onMakeLang {
-            enJa("fluid.mirage_flower_extract", "Mirage Extract", "ミラージュエキス")
-            enJa("tile.mirageFlowerExtract.name", "Mirage Extract", "ミラージュエキス")
-        }
-
 
         // ミラージュオイル
-        fluidMirageFlowerOil = fluid("mirage_flower_oil") {
-            viscosity = 1500
+        run {
+            fluidMirageFlowerOil = fluid("mirage_flower_oil") {
+                viscosity = 1500
+            }
+            blockFluidMirageFlowerOil = block({ BlockFluidMiragiumWater(fluidMirageFlowerOil()) }, "mirage_flower_oil") {
+                setUnlocalizedName("mirageFlowerOil")
+                setCreativeTab { Main.creativeTab }
+                setFluidStateMapper()
+                makeBlockStates(resourceName.path) { fluid }
+            }
+            itemFluidMirageFlowerOil = item({ ItemBlock(blockFluidMirageFlowerOil()) }, "mirage_flower_oil") {
+                setCustomModelResourceLocation()
+            }
+            makeItemModel("mirage_flower_oil") { fluid }
+            onMakeLang {
+                enJa("fluid.mirage_flower_oil", "Mirage Oil", "ミラージュオイル")
+                enJa("tile.mirageFlowerOil.name", "Mirage Oil", "ミラージュオイル")
+            }
         }
-        blockFluidMirageFlowerOil = block({ BlockFluidMiragiumWater(fluidMirageFlowerOil()) }, "mirage_flower_oil") {
-            setUnlocalizedName("mirageFlowerOil")
-            setCreativeTab { Main.creativeTab }
-            setFluidStateMapper()
-            makeBlockStates(resourceName.path) { fluid }
-        }
-        itemFluidMirageFlowerOil = item({ ItemBlock(blockFluidMirageFlowerOil()) }, "mirage_flower_oil") {
-            setCustomModelResourceLocation()
-        }
-        makeItemModel("mirage_flower_oil") { fluid }
-        onMakeLang {
-            enJa("fluid.mirage_flower_oil", "Mirage Oil", "ミラージュオイル")
-            enJa("tile.mirageFlowerOil.name", "Mirage Oil", "ミラージュオイル")
-        }
-
 
         // 妖精の血
-        fluidMirageFairyBlood = fluid("mirage_fairy_blood") {
-            viscosity = 1000
-        }
-        blockFluidMirageFairyBlood = block({ BlockFluidMiragiumWater(fluidMirageFairyBlood()) }, "mirage_fairy_blood") {
-            setUnlocalizedName("mirageFairyBlood")
-            setCreativeTab { Main.creativeTab }
-            setFluidStateMapper()
-            makeBlockStates(resourceName.path) { fluid }
-        }
-        itemFluidMirageFairyBlood = item({ ItemBlock(blockFluidMirageFairyBlood()) }, "mirage_fairy_blood") {
-            setCustomModelResourceLocation()
-        }
-        makeItemModel("mirage_fairy_blood") { fluid }
-        onMakeLang {
-            enJa("fluid.mirage_fairy_blood", "Mirage Fairy Blood", "妖精の血")
-            enJa("tile.mirageFairyBlood.name", "irage Fairy Blood", "妖精の血")
+        run {
+            fluidMirageFairyBlood = fluid("mirage_fairy_blood") {
+                viscosity = 1000
+            }
+            blockFluidMirageFairyBlood = block({ BlockFluidMiragiumWater(fluidMirageFairyBlood()) }, "mirage_fairy_blood") {
+                setUnlocalizedName("mirageFairyBlood")
+                setCreativeTab { Main.creativeTab }
+                setFluidStateMapper()
+                makeBlockStates(resourceName.path) { fluid }
+            }
+            itemFluidMirageFairyBlood = item({ ItemBlock(blockFluidMirageFairyBlood()) }, "mirage_fairy_blood") {
+                setCustomModelResourceLocation()
+            }
+            makeItemModel("mirage_fairy_blood") { fluid }
+            onMakeLang {
+                enJa("fluid.mirage_fairy_blood", "Mirage Fairy Blood", "妖精の血")
+                enJa("tile.mirageFairyBlood.name", "irage Fairy Blood", "妖精の血")
+            }
         }
 
     }
