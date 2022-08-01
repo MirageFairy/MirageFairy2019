@@ -21,11 +21,20 @@ import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.artifacts.ingredient
+import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
+import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeItem
+import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionNotNether
+import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionSpawnBlock
+import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
+import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
 import mirrg.kotlin.hydrogen.toUpperCamelCase
 import mirrg.kotlin.hydrogen.toUpperCaseHead
+import net.minecraft.block.BlockDynamicLiquid
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.NonNullList
@@ -35,6 +44,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
+import net.minecraftforge.oredict.OreIngredient
 import kotlin.math.pow
 
 fun FairyCard.getVariant(rank: Int = 1) = listItemFairy[rank - 1]().getVariant(id)!!
@@ -240,6 +250,33 @@ val fairyModule = module {
         onMakeLang {
             enJa("mirageFairy2019.fairy.${fairyCard.unlocalizedName}.name", fairyCard.englishName, fairyCard.japaneseName)
         }
+
+    }
+
+    // 妖精使役レシピ
+    onAddRecipe {
+
+        // 水精→水源
+        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+            it.conditions += FairyStickCraftConditionUseItem(miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredient)
+            it.conditions += FairyStickCraftConditionNotNether()
+            it.conditions += FairyStickCraftConditionSpawnBlock { Blocks.WATER.defaultState }
+            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyWaterRank1"))
+        })
+
+        // 溶岩精→溶岩流
+        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+            it.conditions += FairyStickCraftConditionUseItem(miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredient)
+            it.conditions += FairyStickCraftConditionSpawnBlock { Blocks.FLOWING_LAVA.defaultState.withProperty(BlockDynamicLiquid.LEVEL, 15) }
+            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairyLavaRank1"))
+        })
+
+        // 蜘蛛精→糸ブロック
+        ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+            it.conditions += FairyStickCraftConditionUseItem(miragefairy2019.mod.artifacts.WandType.CRAFTING.ingredient)
+            it.conditions += FairyStickCraftConditionSpawnBlock { Blocks.WEB.defaultState }
+            it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("mirageFairy2019FairySpiderRank1"))
+        })
 
     }
 
