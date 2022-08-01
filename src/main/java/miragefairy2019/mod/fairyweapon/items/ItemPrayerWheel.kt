@@ -49,7 +49,7 @@ class ItemPrayerWheel(baseFortune: Double, private val maxTryCountPerTick: Int) 
     val wear = status("wear", { 0.01 / (1.0 + !Mana.FIRE / 40.0 + !Erg.SOUND / 20.0) }, { percent2 })
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリック長押しでフェアリークリスタルを高速消費") // TODO translate Hold right mouse button to use fairy crystals quickly
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリック長押しでフェアリークリスタルを高速消費") // TRANSLATE Hold right mouse button to use fairy crystals quickly
 
 
     override fun getItemUseAction(stack: ItemStack) = EnumAction.BOW

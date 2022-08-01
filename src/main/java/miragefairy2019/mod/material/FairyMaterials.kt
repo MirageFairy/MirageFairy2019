@@ -748,7 +748,7 @@ class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
         // Container Item
         if (flag.isAdvanced) {
             getContainerItemStack(itemStack)?.let { containerItemStack ->
-                tooltip += formattedText { ("Has "() + containerItemStack.displayName()).green } // TODO translation
+                tooltip += formattedText { ("Has "() + containerItemStack.displayName()).green } // TRANSLATE
             }
         }
 

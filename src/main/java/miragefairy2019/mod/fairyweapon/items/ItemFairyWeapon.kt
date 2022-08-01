@@ -87,14 +87,14 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
 
         if (canTranslate("$unlocalizedName.author")) { // 著者
             val string = translateToLocal("$unlocalizedName.author")
-            if (string.isNotBlank()) tooltip += formattedText { "作者: $string"().lightPurple } // TODO translate Author
+            if (string.isNotBlank()) tooltip += formattedText { "作者: $string"().lightPurple } // TRANSLATE Author
         }
 
         tooltip += formattedText { "Tier $tier"().aqua } // tier // TRANSLATE
 
         // 機能
-        tooltip += formattedText { "クラフトで妖精を搭乗・分離可能"().red } // TODO translate Can be combined with fairy by crafting
-        if (canManualRepair(itemStack)) tooltip += formattedText { "手入れ可能"().red } // TODO translate Can be repaired by crafting with contained sphere
+        tooltip += formattedText { "クラフトで妖精を搭乗・分離可能"().red } // TRANSLATE Can be combined with fairy by crafting
+        if (canManualRepair(itemStack)) tooltip += formattedText { "手入れ可能"().red } // TRANSLATE Can be repaired by crafting with contained sphere
         getMagicDescription(itemStack).forEach {
             tooltip += formattedText { it().red } // 魔法
         }
