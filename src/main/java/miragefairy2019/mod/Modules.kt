@@ -3,11 +3,6 @@ package miragefairy2019.mod
 import miragefairy2019.export.IngredientFactoryOreIngredientComplex
 import miragefairy2019.jei.jeiModule
 import miragefairy2019.lib.modinitializer.module
-import miragefairy2019.lib.resourcemaker.DataOreIngredient
-import miragefairy2019.lib.resourcemaker.DataResult
-import miragefairy2019.lib.resourcemaker.DataShapedRecipe
-import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
-import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.artifacts.artifactsModule
 import miragefairy2019.mod.fairy.fairyModule
@@ -55,8 +50,6 @@ val modules = module {
 
         enJa("item.spheres.name", "Sphere", "スフィア")
         enJa("item.spheres.format", "Sphere of %s", "%sのスフィア")
-
-        enJa("tile.fairyCollectionBox.name", "Fairy Collection Box", "妖精蒐集箱")
 
         enJa("mirageFairy2019.magic.status.strength.name", "Strength", "効果値")
         enJa("mirageFairy2019.magic.status.extent.name", "Extent", "拡散力")
@@ -118,28 +111,6 @@ val modules = module {
         enJa("miragefairy2019.gui.playerAura.poem.step4", "The nutrition is biased...", "栄養が偏り気味だ…")
         enJa("miragefairy2019.gui.playerAura.poem.step5", "I want to eat something else...", "そろそろ他のものが食べたい…")
 
-    }
-
-    // TODO move
-
-    // 妖精蒐集箱
-    makeRecipe("fairy_collection_box") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "sls",
-                "PLD",
-                "sCs"
-            ),
-            key = mapOf(
-                "L" to DataOreIngredient(ore = "logWood"),
-                "P" to DataOreIngredient(ore = "paneGlass"),
-                "D" to DataOreIngredient(ore = "doorWood"),
-                "l" to DataOreIngredient(ore = "torch"),
-                "C" to DataSimpleIngredient(item = "minecraft:carpet", data = 14),
-                "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace")
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_collection_box")
-        )
     }
 
 }

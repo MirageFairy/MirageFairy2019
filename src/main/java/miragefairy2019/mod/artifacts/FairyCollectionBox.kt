@@ -17,16 +17,19 @@ import miragefairy2019.lib.resourcemaker.DataBlockStates
 import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
-import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.*
 import miragefairy2019.lib.resourcemaker.DataPoint
+import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
+import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
 import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringRightAligned
+import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
@@ -71,6 +74,8 @@ object FairyCollectionBox {
     lateinit var itemFairyCollectionBox: () -> ItemBlock
 
     val fairyCollectionBoxModule = module {
+
+        // ブロック
         blockFairyCollectionBox = block({ BlockFairyCollectionBox() }, "fairy_collection_box") {
             setUnlocalizedName("fairyCollectionBox")
             setCreativeTab { Main.creativeTab }
@@ -84,10 +89,39 @@ object FairyCollectionBox {
                 )
             }
         }
+
+        // アイテム
         itemFairyCollectionBox = item({ ItemBlock(blockFairyCollectionBox()) }, "fairy_collection_box") {
             setCustomModelResourceLocation(variant = "context=bottom,facing=north")
+            makeRecipe("fairy_collection_box") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "sls",
+                        "PLD",
+                        "sCs"
+                    ),
+                    key = mapOf(
+                        "L" to DataOreIngredient(ore = "logWood"),
+                        "P" to DataOreIngredient(ore = "paneGlass"),
+                        "D" to DataOreIngredient(ore = "doorWood"),
+                        "l" to DataOreIngredient(ore = "torch"),
+                        "C" to DataSimpleIngredient(item = "minecraft:carpet", data = 14),
+                        "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace")
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_collection_box")
+                )
+            }
         }
+
+        // タイルエンティティ
         tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)
+
+        // 翻訳生成
+        onMakeLang {
+            enJa("tile.fairyCollectionBox.name", "Fairy Collection Box", "妖精蒐集箱")
+        }
+
+        // 最下部のブロックモデル生成
         makeBlockModel("fairy_building_bottom") {
             DataModel(
                 parent = "block/block",
@@ -295,6 +329,8 @@ object FairyCollectionBox {
                 )
             )
         }
+
+        // 上段のブロックモデル生成
         makeBlockModel("fairy_building_middle") {
             DataModel(
                 parent = "block/block",
@@ -341,6 +377,7 @@ object FairyCollectionBox {
                 )
             )
         }
+
     }
 }
 
