@@ -15,4 +15,5 @@ val systemsModule = module {
     DaemonSystem.daemonSystemModule(this)
     facedCursorModule()
     miniaRecipeModule()
+    fairyStickCraftModule()
 }

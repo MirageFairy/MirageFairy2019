@@ -24,7 +24,6 @@ import miragefairy2019.libkt.red
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
-import miragefairy2019.mod.fairystickcraft.FairyStickCraftRegistry
 import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.displayName
@@ -51,10 +50,6 @@ import kotlin.math.ceil
 lateinit var itemFairyStick: () -> ItemFairyStick
 
 val fairyStickModule = module {
-
-    onInstantiation {
-        ApiFairyStickCraft.fairyStickCraftRegistry = FairyStickCraftRegistry()
-    }
 
     // アイテム登録
     itemFairyStick = item({ ItemFairyStick() }, "fairy_stick") {
