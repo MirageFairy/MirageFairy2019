@@ -1,6 +1,7 @@
 package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.Erg
+import miragefairy2019.api.IFairyStickCraftItem
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
@@ -52,7 +53,6 @@ import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
-import miragefairy2019.mod.systems.IFairyStickCraftItem
 import miragefairy2019.mod.systems.addFairyStickCraftCoolTime
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
@@ -681,7 +681,7 @@ class ItemFairyWand : Item(), IFairyStickCraftItem {
 
     }
 
-    override val isFairyStickCraftItem get() = true
+    override fun isFairyStickCraftItem() = true
 
 
     // クラフティングツール関係
