@@ -53,120 +53,119 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-object FairyLog {
-    lateinit var blockFairyLog: () -> BlockFairyLog
-    lateinit var itemBlockFairyLog: () -> ItemBlock
-    val fairyLogModule = module {
+lateinit var blockFairyLog: () -> BlockFairyLog
+lateinit var itemBlockFairyLog: () -> ItemBlock
 
-        // ブロック
-        blockFairyLog = block({ BlockFairyLog() }, "fairy_log") {
-            setUnlocalizedName("fairyLog")
-            setCreativeTab { Main.creativeTab }
-            makeBlockStates {
-                DataBlockStates(
-                    variants = listOf("oak", "birch", "spruce", "jungle", "acacia", "dark_oak").flatMap { variant ->
-                        listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
-                            "facing=${facing.first},variant=$variant" to DataBlockState("miragefairy2019:${variant}_fairy_log", y = facing.second)
-                        }
-                    }.toMap()
-                )
-            }
-            makeBlockModel {
-                DataModel(
-                    parent = "block/block",
-                    elements = listOf(
-                        DataElement(
-                            from = DataPoint(0.0, 0.0, 0.0),
-                            to = DataPoint(16.0, 16.0, 16.0),
-                            faces = DataFaces(
-                                down = DataFace(texture = "#end", cullface = "down"),
-                                up = DataFace(texture = "#end", cullface = "up"),
-                                north = DataFace(texture = "#side", cullface = "north"),
-                                south = DataFace(texture = "#side", cullface = "south"),
-                                west = DataFace(texture = "#side", cullface = "west"),
-                                east = DataFace(texture = "#side", cullface = "east")
-                            )
-                        ),
-                        DataElement(
-                            from = DataPoint(0.0, 0.0, 0.0),
-                            to = DataPoint(16.0, 16.0, 16.0),
-                            faces = DataFaces(
-                                north = DataFace(texture = "#overlay", cullface = "north")
-                            )
+val fairyLogModule = module {
+
+    // ブロック
+    blockFairyLog = block({ BlockFairyLog() }, "fairy_log") {
+        setUnlocalizedName("fairyLog")
+        setCreativeTab { Main.creativeTab }
+        makeBlockStates {
+            DataBlockStates(
+                variants = listOf("oak", "birch", "spruce", "jungle", "acacia", "dark_oak").flatMap { variant ->
+                    listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
+                        "facing=${facing.first},variant=$variant" to DataBlockState("miragefairy2019:${variant}_fairy_log", y = facing.second)
+                    }
+                }.toMap()
+            )
+        }
+        makeBlockModel {
+            DataModel(
+                parent = "block/block",
+                elements = listOf(
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 0.0),
+                        to = DataPoint(16.0, 16.0, 16.0),
+                        faces = DataFaces(
+                            down = DataFace(texture = "#end", cullface = "down"),
+                            up = DataFace(texture = "#end", cullface = "up"),
+                            north = DataFace(texture = "#side", cullface = "north"),
+                            south = DataFace(texture = "#side", cullface = "south"),
+                            west = DataFace(texture = "#side", cullface = "west"),
+                            east = DataFace(texture = "#side", cullface = "east")
                         )
                     ),
-                    textures = mapOf(
-                        "particle" to "#side",
-                        "overlay" to "miragefairy2019:blocks/log_entrance"
-                    )
-                )
-            }
-        }
-
-        // ブロックモデル
-        run {
-            fun makeBlockModel(name: String, variant: String) = makeBlockModel(name) {
-                DataModel(
-                    parent = "miragefairy2019:block/fairy_log",
-                    textures = mapOf(
-                        "end" to "blocks/log_${variant}_top",
-                        "side" to "blocks/log_$variant"
-                    )
-                )
-            }
-            makeBlockModel("acacia_fairy_log", "acacia")
-            makeBlockModel("birch_fairy_log", "birch")
-            makeBlockModel("dark_oak_fairy_log", "big_oak")
-            makeBlockModel("jungle_fairy_log", "jungle")
-            makeBlockModel("oak_fairy_log", "oak")
-            makeBlockModel("spruce_fairy_log", "spruce")
-        }
-
-        // アイテム
-        itemBlockFairyLog = item({ ItemBlock(blockFairyLog()) }, "fairy_log") {
-            setUnlocalizedName("fairyLog")
-            setCreativeTab { Main.creativeTab }
-            setCustomModelResourceLocation(variant = "facing=north,variant=oak")
-            makeItemModel { block }
-        }
-        
-        // 翻訳生成
-        onMakeLang {
-            enJa("tile.fairyLog.name", "Fairy Log", "妖精の樹洞")
-        }
-
-        // 地形生成
-        onHookDecorator {
-            MinecraftForge.EVENT_BUS.register(object {
-                @SubscribeEvent
-                fun handle(event: DecorateBiomeEvent.Post) {
-                    val times = event.rand.randomInt((event.world.height.toDouble() / 16.0) * 50.0) // 1セクションあたり50回判定を行う // TODO
-                    repeat(times) {
-                        val facing = EnumFacing.HORIZONTALS[event.rand.nextInt(4)]
-                        val posLog = event.chunkPos.getBlock(
-                            event.rand.nextInt(16) + 8,
-                            event.rand.nextInt(event.world.height),
-                            event.rand.nextInt(16) + 8
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 0.0),
+                        to = DataPoint(16.0, 16.0, 16.0),
+                        faces = DataFaces(
+                            north = DataFace(texture = "#overlay", cullface = "north")
                         )
-                        val posAir = posLog.offset(facing)
+                    )
+                ),
+                textures = mapOf(
+                    "particle" to "#side",
+                    "overlay" to "miragefairy2019:blocks/log_entrance"
+                )
+            )
+        }
+    }
 
-                        if (!event.world.getBlockState(posAir).isSideSolid(event.world, posAir, facing.opposite)) {
-                            when (event.world.getBlockState(posLog)) {
-                                Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK),
-                                Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE),
-                                Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH),
-                                Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE),
-                                Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA),
-                                Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK)
-                                -> event.world.setBlockState(posLog, blockFairyLog().getState(facing), 2)
-                            }
+    // ブロックモデル
+    run {
+        fun makeBlockModel(name: String, variant: String) = makeBlockModel(name) {
+            DataModel(
+                parent = "miragefairy2019:block/fairy_log",
+                textures = mapOf(
+                    "end" to "blocks/log_${variant}_top",
+                    "side" to "blocks/log_$variant"
+                )
+            )
+        }
+        makeBlockModel("acacia_fairy_log", "acacia")
+        makeBlockModel("birch_fairy_log", "birch")
+        makeBlockModel("dark_oak_fairy_log", "big_oak")
+        makeBlockModel("jungle_fairy_log", "jungle")
+        makeBlockModel("oak_fairy_log", "oak")
+        makeBlockModel("spruce_fairy_log", "spruce")
+    }
+
+    // アイテム
+    itemBlockFairyLog = item({ ItemBlock(blockFairyLog()) }, "fairy_log") {
+        setUnlocalizedName("fairyLog")
+        setCreativeTab { Main.creativeTab }
+        setCustomModelResourceLocation(variant = "facing=north,variant=oak")
+        makeItemModel { block }
+    }
+
+    // 翻訳生成
+    onMakeLang {
+        enJa("tile.fairyLog.name", "Fairy Log", "妖精の樹洞")
+    }
+
+    // 地形生成
+    onHookDecorator {
+        MinecraftForge.EVENT_BUS.register(object {
+            @SubscribeEvent
+            fun handle(event: DecorateBiomeEvent.Post) {
+                val times = event.rand.randomInt((event.world.height.toDouble() / 16.0) * 50.0) // 1セクションあたり50回判定を行う // TODO
+                repeat(times) {
+                    val facing = EnumFacing.HORIZONTALS[event.rand.nextInt(4)]
+                    val posLog = event.chunkPos.getBlock(
+                        event.rand.nextInt(16) + 8,
+                        event.rand.nextInt(event.world.height),
+                        event.rand.nextInt(16) + 8
+                    )
+                    val posAir = posLog.offset(facing)
+
+                    if (!event.world.getBlockState(posAir).isSideSolid(event.world, posAir, facing.opposite)) {
+                        when (event.world.getBlockState(posLog)) {
+                            Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK),
+                            Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE),
+                            Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH),
+                            Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE),
+                            Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA),
+                            Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK)
+                            -> event.world.setBlockState(posLog, blockFairyLog().getState(facing), 2)
                         }
                     }
                 }
-            })
-        }
-
+            }
+        })
     }
+
 }
 
 class BlockFairyLog : Block(Material.WOOD) {
@@ -246,7 +245,7 @@ class BlockFairyLog : Block(Material.WOOD) {
     /**
      * クリエイティブピックでの取得アイテム。
      */
-    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(FairyLog.itemBlockFairyLog())
+    override fun getItem(world: World, pos: BlockPos, state: IBlockState) = ItemStack(itemBlockFairyLog())
 
     override fun getDrops(drops: NonNullList<ItemStack>, blockAccess: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) {
         if (blockAccess !is World) return

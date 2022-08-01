@@ -14,7 +14,7 @@ import miragefairy2019.api.FairyLogDropRegistry
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringRightAligned
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod.artifacts.FairyLog
+import miragefairy2019.mod.artifacts.itemBlockFairyLog
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 
@@ -38,7 +38,7 @@ class PluginFairyLogDrop : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(FairyLog.itemBlockFairyLog()))
+            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(itemBlockFairyLog()))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 0, 0)
                 recipeLayout.itemStacks.init(1, false, 45, 0)
@@ -51,7 +51,7 @@ class PluginFairyLogDrop : IModPlugin {
         registry.addRecipes(FairyLogDropRegistry.fairyLogDropRecipes.map { recipe ->
             object : IRecipeWrapper {
                 override fun getIngredients(ingredients: IIngredients) {
-                    ingredients.setInput(VanillaTypes.ITEM, ItemStack(FairyLog.itemBlockFairyLog()))
+                    ingredients.setInput(VanillaTypes.ITEM, ItemStack(itemBlockFairyLog()))
                     ingredients.setOutput(VanillaTypes.ITEM, recipe.output)
                 }
 

@@ -20,7 +20,7 @@ import miragefairy2019.lib.position
 import miragefairy2019.lib.rayTraceBlock
 import miragefairy2019.libkt.norm1
 import miragefairy2019.libkt.randomInt
-import miragefairy2019.mod.artifacts.FairyLog
+import miragefairy2019.mod.artifacts.blockFairyLog
 import miragefairy2019.mod.fairyweapon.MagicMessage
 import miragefairy2019.mod.fairyweapon.breakBlock
 import miragefairy2019.mod.fairyweapon.displayText
@@ -166,7 +166,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
 
     private fun MagicArguments.isLog(blockPos: BlockPos) = when (world.getBlockState(blockPos).block) {
         is BlockLog -> true
-        FairyLog.blockFairyLog() -> true
+        blockFairyLog() -> true
         else -> false
     }
 
