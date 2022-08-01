@@ -63,12 +63,12 @@ object FluidMaterials {
                 setUnlocalizedName("miragiumWater")
                 setCreativeTab { Main.creativeTab }
                 setFluidStateMapper()
-                makeBlockStates(resourceName.path) { fluid }
+                makeBlockStates { fluid }
             }
             itemFluidMiragiumWater = item({ ItemBlock(blockFluidMiragiumWater()) }, "miragium_water") {
                 setCustomModelResourceLocation()
+                makeItemModel { fluid }
             }
-            makeItemModel("miragium_water") { fluid }
             onMakeLang {
                 enJa("fluid.miragium_water", "Miragium Water", "ミラジウムウォーター")
                 enJa("tile.miragiumWater.name", "Miragium Water", "ミラジウムウォーター")
@@ -94,12 +94,12 @@ object FluidMaterials {
                 setUnlocalizedName("mirageFlowerExtract")
                 setCreativeTab { Main.creativeTab }
                 setFluidStateMapper()
-                makeBlockStates(resourceName.path) { fluid }
+                makeBlockStates { fluid }
             }
             itemFluidMirageFlowerExtract = item({ ItemBlock(blockFluidMirageFlowerExtract()) }, "mirage_flower_extract") {
                 setCustomModelResourceLocation()
+                makeItemModel { fluid }
             }
-            makeItemModel("mirage_flower_extract") { fluid }
             onMakeLang {
                 enJa("fluid.mirage_flower_extract", "Mirage Extract", "ミラージュエキス")
                 enJa("tile.mirageFlowerExtract.name", "Mirage Extract", "ミラージュエキス")
@@ -115,12 +115,12 @@ object FluidMaterials {
                 setUnlocalizedName("mirageFlowerOil")
                 setCreativeTab { Main.creativeTab }
                 setFluidStateMapper()
-                makeBlockStates(resourceName.path) { fluid }
+                makeBlockStates { fluid }
             }
             itemFluidMirageFlowerOil = item({ ItemBlock(blockFluidMirageFlowerOil()) }, "mirage_flower_oil") {
                 setCustomModelResourceLocation()
+                makeItemModel { fluid }
             }
-            makeItemModel("mirage_flower_oil") { fluid }
             onMakeLang {
                 enJa("fluid.mirage_flower_oil", "Mirage Oil", "ミラージュオイル")
                 enJa("tile.mirageFlowerOil.name", "Mirage Oil", "ミラージュオイル")
@@ -136,12 +136,12 @@ object FluidMaterials {
                 setUnlocalizedName("mirageFairyBlood")
                 setCreativeTab { Main.creativeTab }
                 setFluidStateMapper()
-                makeBlockStates(resourceName.path) { fluid }
+                makeBlockStates { fluid }
             }
             itemFluidMirageFairyBlood = item({ ItemBlock(blockFluidMirageFairyBlood()) }, "mirage_fairy_blood") {
                 setCustomModelResourceLocation()
+                makeItemModel { fluid }
             }
-            makeItemModel("mirage_fairy_blood") { fluid }
             onMakeLang {
                 enJa("fluid.mirage_fairy_blood", "Mirage Fairy Blood", "妖精の血")
                 enJa("tile.mirageFairyBlood.name", "irage Fairy Blood", "妖精の血")
