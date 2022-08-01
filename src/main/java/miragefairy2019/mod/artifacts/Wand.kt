@@ -162,7 +162,7 @@ enum class WandKind(
 private fun Int.toRoman() = listOf("I", "II", "III", "IV", "V").getOrNull(this - 1) ?: throw IllegalArgumentException()
 
 val WandType.oreName get() = "mirageFairy2019CraftingToolFairyWand${registryName.toUpperCamelCase()}"
-val WandType.ingredient get() = OreIngredientComplex(oreName)
+val WandType.ingredient get() = WandIngredient(oreName)
 val WandType.ingredientData get() = DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = oreName)
 
 val WandKind.tier get() = type.tier + (rank - 1)
@@ -173,7 +173,7 @@ val wandModule = module {
 
     // IngredientFactory
     onMakeIngredientFactory {
-        this["ore_dict_complex"] = IngredientFactoryOreIngredientComplex::class.java
+        this["ore_dict_complex"] = WandIngredientFactory::class.java
     }
 
 
@@ -749,14 +749,14 @@ val wandModule = module {
 }
 
 
-class OreIngredientComplex(ore: String) : OreIngredient(ore) {
+class WandIngredient(ore: String) : OreIngredient(ore) {
     // これがtrueになっていると、subItemsを参照するようになるのでクラフティングツールが反応しなくなる
     override fun isSimple(): Boolean = false
 }
 
 /** 耐久が削れたクラフティングツールを鉱石辞書名にマッチさせるためのIngredient */
-class IngredientFactoryOreIngredientComplex : IIngredientFactory {
-    override fun parse(context: JsonContext, json: JsonObject) = OreIngredientComplex(JsonUtils.getString(json, "ore"))
+class WandIngredientFactory : IIngredientFactory {
+    override fun parse(context: JsonContext, json: JsonObject) = WandIngredient(JsonUtils.getString(json, "ore"))
 }
 
 
