@@ -59,8 +59,6 @@ val modules = module {
 
         enJa("tile.fairyCollectionBox.name", "Fairy Collection Box", "妖精蒐集箱")
 
-        enJa("tile.fairyWoodLog.name", "Fairy Wood Log", "妖精の原木")
-
         enJa("mirageFairy2019.magic.status.strength.name", "Strength", "効果値")
         enJa("mirageFairy2019.magic.status.extent.name", "Extent", "拡散力")
         enJa("mirageFairy2019.magic.status.endurance.name", "Endurance", "持久力")
@@ -142,22 +140,6 @@ val modules = module {
                 "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace")
             ),
             result = DataResult(item = "miragefairy2019:fairy_collection_box")
-        )
-    }
-
-    // 妖精の原木
-    makeRecipe("fairy_wood_log") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "ooo",
-                "oLo",
-                "ooo"
-            ),
-            key = mapOf(
-                "L" to DataOreIngredient(ore = "logWood"),
-                "o" to DataOreIngredient(ore = "container1000MirageFlowerOil")
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_wood_log")
         )
     }
 

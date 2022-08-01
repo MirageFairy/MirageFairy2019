@@ -12,8 +12,13 @@ import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.resourcemaker.DataBlockState
 import miragefairy2019.lib.resourcemaker.DataBlockStates
 import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
+import miragefairy2019.lib.resourcemaker.DataResult
+import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
+import miragefairy2019.lib.resourcemaker.makeRecipe
+import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import net.minecraft.block.BlockRotatedPillar
 import net.minecraft.block.SoundType
@@ -25,9 +30,13 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 
 object FairyWoodLog {
+
     lateinit var blockFairyWoodLog: () -> BlockFairyWoodLog
     lateinit var itemBlockFairyWoodLog: () -> ItemBlock
+
     val fairyWoodLogModule = module {
+
+        // ブロック登録
         blockFairyWoodLog = block({ BlockFairyWoodLog() }, "fairy_wood_log") {
             setUnlocalizedName("fairyWoodLog")
             setCreativeTab { Main.creativeTab }
@@ -48,13 +57,36 @@ object FairyWoodLog {
                 )
             }
         }
+
+        // アイテム登録
         itemBlockFairyWoodLog = item({ ItemBlock(blockFairyWoodLog()) }, "fairy_wood_log") {
             setUnlocalizedName("fairyWoodLog")
             addOreName("logFairyWood")
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation(variant = "axis=y")
+            makeRecipe {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "ooo",
+                        "oLo",
+                        "ooo"
+                    ),
+                    key = mapOf(
+                        "L" to DataOreIngredient(ore = "logWood"),
+                        "o" to DataOreIngredient(ore = "container1000MirageFlowerOil")
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_wood_log")
+                )
+            }
         }
+
+        // 翻訳生成
+        onMakeLang {
+            enJa("tile.fairyWoodLog.name", "Fairy Wood Log", "妖精の原木")
+        }
+
     }
+
 }
 
 class BlockFairyWoodLog : BlockRotatedPillar(Material.WOOD) {
