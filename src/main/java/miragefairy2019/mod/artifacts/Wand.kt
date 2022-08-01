@@ -311,7 +311,7 @@ val wandModule = module {
                     "R  "
                 ),
                 key = mapOf(
-                    "c" to DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = "mirageFairy2019CraftingToolFairyWandCrafting"),
+                    "c" to WandType.CRAFTING.ingredientData,
                     "R" to DataOreIngredient(ore = wandTierToRodOreName[wandKind.tier]!!),
                     "S" to DataOreIngredient(ore = "mirageFairy2019Sphere${wandKind.type.erg.registryName.toUpperCaseHead()}")
                 ),
