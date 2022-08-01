@@ -1,6 +1,7 @@
 package miragefairy2019.mod.artifacts
 
 import miragefairy2019.api.IFairyStickCraftItem
+import miragefairy2019.lib.addFairyStickCraftCoolTime
 import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -29,7 +30,6 @@ import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
-import miragefairy2019.mod.systems.addFairyStickCraftCoolTime
 import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
