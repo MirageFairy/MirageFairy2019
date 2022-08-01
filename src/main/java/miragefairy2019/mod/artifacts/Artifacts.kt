@@ -6,7 +6,7 @@ val artifactsModule = module {
     fertilizerModule()
     twinkleStoneModule()
     FairyCollectionBox.fairyCollectionBoxModule(this)
-    FairyWoodLog.fairyWoodLogModule(this)
+    fairyWoodLogModule(this)
     BakedFairy.bakedFairyModule(this)
     FairyCrystalGlass.fairyCrystalGlassModule(this)
     potModule()

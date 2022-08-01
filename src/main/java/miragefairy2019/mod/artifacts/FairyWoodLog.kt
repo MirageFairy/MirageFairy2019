@@ -29,62 +29,58 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 
-object FairyWoodLog {
+lateinit var blockFairyWoodLog: () -> BlockFairyWoodLog
+lateinit var itemBlockFairyWoodLog: () -> ItemBlock
 
-    lateinit var blockFairyWoodLog: () -> BlockFairyWoodLog
-    lateinit var itemBlockFairyWoodLog: () -> ItemBlock
+val fairyWoodLogModule = module {
 
-    val fairyWoodLogModule = module {
-
-        // ブロック登録
-        blockFairyWoodLog = block({ BlockFairyWoodLog() }, "fairy_wood_log") {
-            setUnlocalizedName("fairyWoodLog")
-            setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName.path) {
-                DataBlockStates(
-                    variants = listOf("y" to Pair(null, null), "z" to Pair(90, null), "x" to Pair(90, 90)).associate { axis ->
-                        "axis=${axis.first}" to DataBlockState("miragefairy2019:fairy_wood_log", x = axis.second.first, y = axis.second.second)
-                    }
-                )
-            }
-            makeBlockModel(resourceName.path) {
-                DataModel(
-                    parent = "block/cube_column",
-                    textures = mapOf(
-                        "end" to "miragefairy2019:blocks/fairy_wood_log_top",
-                        "side" to "miragefairy2019:blocks/fairy_wood_log"
-                    )
-                )
-            }
+    // ブロック登録
+    blockFairyWoodLog = block({ BlockFairyWoodLog() }, "fairy_wood_log") {
+        setUnlocalizedName("fairyWoodLog")
+        setCreativeTab { Main.creativeTab }
+        makeBlockStates {
+            DataBlockStates(
+                variants = listOf("y" to Pair(null, null), "z" to Pair(90, null), "x" to Pair(90, 90)).associate { axis ->
+                    "axis=${axis.first}" to DataBlockState("miragefairy2019:fairy_wood_log", x = axis.second.first, y = axis.second.second)
+                }
+            )
         }
-
-        // アイテム登録
-        itemBlockFairyWoodLog = item({ ItemBlock(blockFairyWoodLog()) }, "fairy_wood_log") {
-            setUnlocalizedName("fairyWoodLog")
-            addOreName("logFairyWood")
-            setCreativeTab { Main.creativeTab }
-            setCustomModelResourceLocation(variant = "axis=y")
-            makeRecipe {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "ooo",
-                        "oLo",
-                        "ooo"
-                    ),
-                    key = mapOf(
-                        "L" to DataOreIngredient(ore = "logWood"),
-                        "o" to DataOreIngredient(ore = "container1000MirageFlowerOil")
-                    ),
-                    result = DataResult(item = "miragefairy2019:fairy_wood_log")
+        makeBlockModel {
+            DataModel(
+                parent = "block/cube_column",
+                textures = mapOf(
+                    "end" to "miragefairy2019:blocks/fairy_wood_log_top",
+                    "side" to "miragefairy2019:blocks/fairy_wood_log"
                 )
-            }
+            )
         }
+    }
 
-        // 翻訳生成
-        onMakeLang {
-            enJa("tile.fairyWoodLog.name", "Fairy Wood Log", "妖精の原木")
+    // アイテム登録
+    itemBlockFairyWoodLog = item({ ItemBlock(blockFairyWoodLog()) }, "fairy_wood_log") {
+        setUnlocalizedName("fairyWoodLog")
+        addOreName("logFairyWood")
+        setCreativeTab { Main.creativeTab }
+        setCustomModelResourceLocation(variant = "axis=y")
+        makeRecipe {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "ooo",
+                    "oLo",
+                    "ooo"
+                ),
+                key = mapOf(
+                    "L" to DataOreIngredient(ore = "logWood"),
+                    "o" to DataOreIngredient(ore = "container1000MirageFlowerOil")
+                ),
+                result = DataResult(item = "miragefairy2019:fairy_wood_log")
+            )
         }
+    }
 
+    // 翻訳生成
+    onMakeLang {
+        enJa("tile.fairyWoodLog.name", "Fairy Wood Log", "妖精の原木")
     }
 
 }
