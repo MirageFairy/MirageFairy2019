@@ -99,7 +99,7 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
             tooltip += formattedText { it().red } // 魔法
         }
 
-        tooltip += formattedText { "耐久値: ${(getMaxDamage(itemStack) - getDamage(itemStack)) atLeast 0} / ${getMaxDamage(itemStack)}"().green } // 耐久値 TODO translate
+        tooltip += formattedText { "耐久値: ${(getMaxDamage(itemStack) - getDamage(itemStack)) atLeast 0} / ${getMaxDamage(itemStack)}"().green } // 耐久値 // TRANSLATE
 
         getCombinedFairy(itemStack).notEmptyOrNull?.let { tooltip += formattedText { "搭乗中: ${it.displayName}"().aqua } } // 搭乗中の妖精 // TRANSLATE
 
