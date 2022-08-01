@@ -22,9 +22,9 @@ private fun <T> FormulaRendererSelector<T>.createSimpleFormulaRenderer(function:
 
 val FormulaRendererSelector<String>.string get() = createSimpleFormulaRenderer { textComponent { value() } }
 val FormulaRendererSelector<Int>.integer get() = createSimpleFormulaRenderer { textComponent { "$value"() } }
-val FormulaRendererSelector<Double>.duration2 get() = createSimpleFormulaRenderer { textComponent { (value / 20.0 formatAs "%.2f 秒")() } } // TODO translate
-val FormulaRendererSelector<Double>.duration4 get() = createSimpleFormulaRenderer { textComponent { (value / 20.0 formatAs "%.4f 秒")() } } // TODO translate
-val FormulaRendererSelector<Double>.pitch get() = createSimpleFormulaRenderer { textComponent { (log(value, 2.0) * 12 formatAs "%.2f")() } } // TODO translate
+val FormulaRendererSelector<Double>.duration2 get() = createSimpleFormulaRenderer { textComponent { (value / 20.0 formatAs "%.2f 秒")() } } // TRANSLATE
+val FormulaRendererSelector<Double>.duration4 get() = createSimpleFormulaRenderer { textComponent { (value / 20.0 formatAs "%.4f 秒")() } } // TRANSLATE
+val FormulaRendererSelector<Double>.pitch get() = createSimpleFormulaRenderer { textComponent { (log(value, 2.0) * 12 formatAs "%.2f")() } } // TRANSLATE
 val FormulaRendererSelector<Double>.float0 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.0f")() } }
 val FormulaRendererSelector<Double>.float1 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.1f")() } }
 val FormulaRendererSelector<Double>.float2 get() = createSimpleFormulaRenderer { textComponent { (value formatAs "%.2f")() } }

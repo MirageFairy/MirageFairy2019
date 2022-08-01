@@ -621,15 +621,15 @@ class ItemFairyWand : Item(), IFairyStickCraftItem {
             if (string.isNotBlank()) tooltip += formattedText { string() }
         }
 
-        tooltip += formattedText { "Tier $tier"().aqua } // tier // TODO translate
+        tooltip += formattedText { "Tier $tier"().aqua } // tier // TRANSLATE
 
         // 機能
-        tooltip += formattedText { "右クリックでフェアリーステッキクラフト"().red } // 魔法 // TODO translate
+        tooltip += formattedText { "右クリックでフェアリーステッキクラフト"().red } // 魔法 // TRANSLATE
 
         tooltip += formattedText { "使用可能回数: ${(getMaxDamage(itemStack) - getDamage(itemStack) + 1) atLeast 0}"().green } // 耐久値 TODO translate
 
-        tooltip += formattedText { ("スキル: "() + Mastery.processing.displayName() + " (${ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(Mastery.processing)})"()).gold } // TODO translate
-        tooltip += formattedText { "クールタイム: ${getCoolTime(player) / 20.0 formatAs "%.2f"} 秒"().blue } // TODO translate
+        tooltip += formattedText { ("スキル: "() + Mastery.processing.displayName() + " (${ApiSkill.skillManager.getClientSkillContainer().getSkillLevel(Mastery.processing)})"()).gold } // TRANSLATE
+        tooltip += formattedText { "クールタイム: ${getCoolTime(player) / 20.0 formatAs "%.2f"} 秒"().blue } // TRANSLATE
 
     }
 

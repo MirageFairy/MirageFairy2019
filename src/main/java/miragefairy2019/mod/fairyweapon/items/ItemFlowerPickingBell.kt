@@ -63,7 +63,7 @@ class ItemFlowerPickingBell(baseFortune: Double, extraItemDropRateFactor: Double
     val productionBoost = status("productionBoost", { 1.0 + !Mastery.flowerPicking / 100.0 }, { boost })
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでミラージュフラワーを収穫") // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでミラージュフラワーを収穫") // TRANSLATE
 
     override fun getMagic() = magic {
 

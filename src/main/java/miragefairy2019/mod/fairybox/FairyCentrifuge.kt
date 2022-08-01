@@ -801,12 +801,12 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
             rectangle(3 + 4 + 18 * c, yi + 18 * 2, 18, 9).tooltip {
                 val processResult = getProcessResult() ?: return@tooltip null
                 listOf(
-                    formattedText { "スコア: ${processResult.score formatAs "%.2f"}"() }, // TODO translate
-                    formattedText { "ノルマ: ${getNorma() formatAs "%.2f"}"() }, // TODO translate
-                    formattedText { "加工速度: ${processResult.speed * getFoliaSpeedFactor() formatAs "%.2f"} 回/分"() }, // TODO translate
-                    formattedText { "  妖精の効率: ${processResult.speed formatAs "%.2f"}"() }, // TODO translate
-                    formattedText { "  Folia倍率: ${getFoliaSpeedFactor() * 100.0 formatAs "%.2f"}% (${getFolia() formatAs "%.1f"} Folia)"() }, // TODO translate
-                    formattedText { "幸運値: ${Symbols.FORTUNE}${processResult.fortune formatAs "%.2f"}"() } // TODO translate
+                    formattedText { "スコア: ${processResult.score formatAs "%.2f"}"() }, // TRANSLATE
+                    formattedText { "ノルマ: ${getNorma() formatAs "%.2f"}"() }, // TRANSLATE
+                    formattedText { "加工速度: ${processResult.speed * getFoliaSpeedFactor() formatAs "%.2f"} 回/分"() }, // TRANSLATE
+                    formattedText { "  妖精の効率: ${processResult.speed formatAs "%.2f"}"() }, // TRANSLATE
+                    formattedText { "  Folia倍率: ${getFoliaSpeedFactor() * 100.0 formatAs "%.2f"}% (${getFolia() formatAs "%.1f"} Folia)"() }, // TRANSLATE
+                    formattedText { "幸運値: ${Symbols.FORTUNE}${processResult.fortune formatAs "%.2f"}"() } // TRANSLATE
                 )
             }
 
@@ -829,14 +829,14 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         // 加工速度・幸運値・フォリア
         rectangle(3 + 4 + 18 * 0, yi, 18 * 3, 8).label(Alignment.CENTER) {
             val recipeMatchResult = recipeMatchResult ?: return@label null
-            textComponent { (recipeMatchResult.speed * getFoliaSpeedFactor() formatAs "%.2f 回/分")() } // TODO translate
+            textComponent { (recipeMatchResult.speed * getFoliaSpeedFactor() formatAs "%.2f 回/分")() } // TRANSLATE
         }
         rectangle(3 + 4 + 18 * 3, yi, 18 * 3, 8).label(Alignment.CENTER) {
             val recipeMatchResult = recipeMatchResult ?: return@label null
-            textComponent { "${Symbols.FORTUNE}${recipeMatchResult.fortune formatAs "%.2f"}"() } // TODO translate
+            textComponent { "${Symbols.FORTUNE}${recipeMatchResult.fortune formatAs "%.2f"}"() } // TRANSLATE
         }
         rectangle(3 + 4 + 18 * 6, yi, 18 * 3, 8).label(Alignment.CENTER) {
-            textComponent { "${getFolia() formatAs "%.2f"} Folia"() } // TODO translate
+            textComponent { "${getFolia() formatAs "%.2f"} Folia"() } // TRANSLATE
         }
         yi += 9
 

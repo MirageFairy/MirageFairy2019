@@ -136,14 +136,14 @@ class ItemAstronomicalObservationBook : Item() {
 
         // 現在地平線より上にある天体を見なければならない
         if (player.lookVec.y < 0) {
-            player.sendStatusMessage(textComponent { "空がよく見えない"().darkPurple }, true) // TODO translate
+            player.sendStatusMessage(textComponent { "空がよく見えない"().darkPurple }, true) // TRANSLATE
             return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
         }
 
         // 天井が塞がれている場合は失敗
         val selector = MagicSelector.rayTraceBlock(world, player, 64.0)
         if (selector.item.rayTraceWrapper.isHit) {
-            player.sendStatusMessage(textComponent { "空がよく見えない"().darkPurple }, true) // TODO translate
+            player.sendStatusMessage(textComponent { "空がよく見えない"().darkPurple }, true) // TRANSLATE
             return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
         }
 
@@ -155,7 +155,7 @@ class ItemAstronomicalObservationBook : Item() {
         val angleSunDiff = abs(acos(vectorLook.dotProduct(vectorSun))) * 180 / PI
         val angleMoonDiff = abs(acos(vectorLook.dotProduct(vectorMoon))) * 180 / PI
         if (angleSunDiff >= 15 && angleMoonDiff >= 15) {
-            player.sendStatusMessage(textComponent { "観測可能な天体が見当たらない"().darkPurple }, true) // TODO translate
+            player.sendStatusMessage(textComponent { "観測可能な天体が見当たらない"().darkPurple }, true) // TRANSLATE
             return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
         }
 

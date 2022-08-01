@@ -72,7 +72,7 @@ class ItemMiragiumAxe : ItemFairyWeaponMagic4() {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TRANSLATE
 
     override fun getMagic() = magic {
         val rayTraceMagicSelector = MagicSelector.rayTraceBlock(world, player, additionalReach()) // 視線判定

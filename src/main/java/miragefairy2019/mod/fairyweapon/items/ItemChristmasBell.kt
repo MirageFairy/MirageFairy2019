@@ -48,5 +48,5 @@ class ItemChristmasBell : ItemAoeWeaponBase() {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックで攻撃、アンデッド撃破時、石炭を入手") // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックで攻撃、アンデッド撃破時、石炭を入手") // TRANSLATE
 }

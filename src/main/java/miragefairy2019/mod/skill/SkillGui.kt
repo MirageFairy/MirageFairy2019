@@ -56,9 +56,9 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
             label(Alignment.RIGHT) { textComponent { "${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.exp)}"() } }
             tooltip {
                 listOf(
-                    "フェアリーマスターレベル: ${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.exp)}", // TODO translate
-                    "累積経験値: ${skillContainer.variables.exp formatAs "%8d"}", // TODO translate
-                    "必要経験値: ${ApiSkill.skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.exp) formatAs "%8d"}" // TODO translate
+                    "フェアリーマスターレベル: ${ApiSkill.skillManager.getFairyMasterLevel(skillContainer.variables.exp)}", // TRANSLATE
+                    "累積経験値: ${skillContainer.variables.exp formatAs "%8d"}", // TRANSLATE
+                    "必要経験値: ${ApiSkill.skillManager.getRequiredFairyMasterExpForNextLevel(skillContainer.variables.exp) formatAs "%8d"}" // TRANSLATE
                 )
             }
         }
@@ -71,7 +71,7 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
         // SP
         rectangle(4 + 60, 4, 20 - 4, 10) {
             label(Alignment.RIGHT) { textComponent { "${skillContainer.remainingSkillPoints}"() } }
-            tooltip { listOf("スキルポイントはフェアリーマスターレベル上昇時に入手します。") } // TODO translate
+            tooltip { listOf("スキルポイントはフェアリーマスターレベル上昇時に入手します。") } // TRANSLATE
         }
 
         // マスタリレベル初期化ボタン
@@ -81,38 +81,38 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
                     gui.mc.displayGuiScreen(GuiYesNo({ result, _ ->
                         gui.mc.displayGuiScreen(gui)
                         if (result) Main.simpleNetworkWrapper.sendToServer(MessageResetMastery())
-                    }, "マスタリレベル初期化", "すべてのマスタリのレベルをリセットし、スキルポイントに戻しますか？\nこの操作は毎月1度だけ実行できます。", 0)) // TODO translate
+                    }, "マスタリレベル初期化", "すべてのマスタリのレベルをリセットし、スキルポイントに戻しますか？\nこの操作は毎月1度だけ実行できます。", 0)) // TRANSLATE
                 }
             }
             // TODO クリックできないときは灰色にする
-            label(Alignment.CENTER) { textComponent { "初期化"().red } } // TODO translate
+            label(Alignment.CENTER) { textComponent { "初期化"().red } } // TRANSLATE
             tooltip {
                 when {
                     !skillContainer.canResetMastery(Instant.now()) -> listOf(
                         "今月は初期化できません。",
                         "残り: ${(skillContainer.variables.lastMasteryResetTime!!.utcLocalDateTime.toLocalDate().startOfMonth.plusMonths(1).toInstantAsUtc - Instant.now()).displayText.unformattedText}"
-                    ) // TODO translate
-                    skillContainer.usedSkillPoints == 0 -> listOf("初期化の必要はありません。") // TODO translate
-                    else -> listOf("1か月に1度だけ、全マスタリのレベルをリセットしSPに戻せます。") // TODO translate
+                    ) // TRANSLATE
+                    skillContainer.usedSkillPoints == 0 -> listOf("初期化の必要はありません。") // TRANSLATE
+                    else -> listOf("1か月に1度だけ、全マスタリのレベルをリセットしSPに戻せます。") // TRANSLATE
                 }
             }
         }
 
         // マスタリ名列ラベル
         rectangle(4, 14, xSize - 4 - 4 - 10 - 20 - 20, 10) {
-            label(Alignment.LEFT) { textComponent { "マスタリ名"().darkBlue } }// TODO translate
+            label(Alignment.LEFT) { textComponent { "マスタリ名"().darkBlue } }// TRANSLATE
         }
 
         // マスタリレベル列ラベル
         rectangle(xSize - 54, 14, 20, 10) {
-            label(Alignment.RIGHT) { textComponent { "MLv"().darkBlue } } // TODO translate
-            tooltip { listOf("マスタリレベルはある領域に関する理解の深さです。") } // TODO translate
+            label(Alignment.RIGHT) { textComponent { "MLv"().darkBlue } } // TRANSLATE
+            tooltip { listOf("マスタリレベルはある領域に関する理解の深さです。") } // TRANSLATE
         }
 
         // スキルレベル列ラベル
         rectangle(xSize - 34, 14, 20, 10) {
-            label(Alignment.RIGHT) { textComponent { "SLv"().darkBlue } } // TODO translate
-            tooltip { listOf("スキルレベルは個々のアクションの強さです。") } // TODO translate
+            label(Alignment.RIGHT) { textComponent { "SLv"().darkBlue } } // TRANSLATE
+            tooltip { listOf("スキルレベルは個々のアクションの強さです。") } // TRANSLATE
         }
 
         // マスタリごと
@@ -145,7 +145,7 @@ class ContainerSkill(val player: EntityPlayer) : ContainerComponent() {
                 }
                 // TODO ホバーで影響するマスタリのレベルを緑色に光らせつつ実行後の値を表示
                 label(Alignment.CENTER) { textComponent { "*"().red } } // TODO icon
-                tooltip { listOf(if (skillContainer.remainingSkillPoints > 0) "このマスタリにスキルポイントを割り振ります。" else "スキルポイントが足りません。") } // TODO translate
+                tooltip { listOf(if (skillContainer.remainingSkillPoints > 0) "このマスタリにスキルポイントを割り振ります。" else "スキルポイントが足りません。") } // TRANSLATE
             }
 
         }

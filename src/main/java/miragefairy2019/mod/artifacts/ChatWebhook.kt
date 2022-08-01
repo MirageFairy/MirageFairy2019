@@ -587,12 +587,12 @@ class GuiChatWebhookTransmitter(val container: ContainerChatWebhookTransmitter) 
 
         fontRenderer.drawStringCentered(container.inventoryTileEntity.displayName.unformattedText, xSize / 2, yi, 0x404040)
         val remaining = container.tileEntity.daemon?.timeLimit?.let { it - Instant.now() }
-        if (remaining != null) fontRenderer.drawStringRightAligned("残り${remaining.displayText.unformattedText}", xSize - 3 - 3, yi, 0x000088) // TODO translate
+        if (remaining != null) fontRenderer.drawStringRightAligned("残り${remaining.displayText.unformattedText}", xSize - 3 - 3, yi, 0x000088) // TRANSLATE
         yi += 8
 
         yi += 3
 
-        fontRenderer.drawString("Bot名", 7 + 1, yi, 0x8B8B8B) // TODO translate
+        fontRenderer.drawString("Bot名", 7 + 1, yi, 0x8B8B8B) // TRANSLATE
         yi += 8
 
         yi += 3
@@ -602,7 +602,7 @@ class GuiChatWebhookTransmitter(val container: ContainerChatWebhookTransmitter) 
 
         yi += 3
 
-        fontRenderer.drawString("Webhook URL", 7 + 1, yi, 0x8B8B8B) // TODO translate
+        fontRenderer.drawString("Webhook URL", 7 + 1, yi, 0x8B8B8B) // TRANSLATE
         yi += 8
 
         yi += 3

@@ -18,7 +18,7 @@ class ItemBellBase : ItemFairyWeaponMagic4() {
     val pitch = status("pitch", { 0.5.pow(costFactor - 1.0) }, { pitch })
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックで鳴らす") // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックで鳴らす") // TRANSLATE
 
     override fun getMagic() = magic {
         object : MagicHandler() {

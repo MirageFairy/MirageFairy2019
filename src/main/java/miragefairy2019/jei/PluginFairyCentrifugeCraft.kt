@@ -80,7 +80,7 @@ class PluginFairyCentrifugeCraft : IModPlugin {
 
                     // レシピ情報
                     drawListeners += { minecraft ->
-                        minecraft.fontRenderer.drawString("ノルマ: ${handler.norma formatAs "%.0f"}", RectangleInt(0, 0, 18 * 9, 10), 0x000000) // TODO translate
+                        minecraft.fontRenderer.drawString("ノルマ: ${handler.norma formatAs "%.0f"}", RectangleInt(0, 0, 18 * 9, 10), 0x000000) // TRANSLATE
                     }
 
                     // 成果物情報
@@ -101,8 +101,8 @@ class PluginFairyCentrifugeCraft : IModPlugin {
                         }
                         tooltipListeners += Pair(rectangle) {
                             listOf(
-                                "入手確率: ${output.count * 100 formatAs "%.2f%%"}", // TODO translate
-                                "幸運係数: ${output.fortuneFactor * 100 formatAs "%.2f%%"}" // TODO translate
+                                "入手確率: ${output.count * 100 formatAs "%.2f%%"}", // TRANSLATE
+                                "幸運係数: ${output.fortuneFactor * 100 formatAs "%.2f%%"}" // TRANSLATE
                             )
                         }
 

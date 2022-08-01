@@ -105,7 +105,7 @@ class BlockFairyBoxBase(private val tier: Int, private val tileEntityProvider: (
             if (string.isNotBlank()) tooltip += formattedText { string() }
         }
 
-        tooltip += formattedText { "Tier $tier"().aqua } // tier // TODO translate
+        tooltip += formattedText { "Tier $tier"().aqua } // tier // TRANSLATE
 
     }
 

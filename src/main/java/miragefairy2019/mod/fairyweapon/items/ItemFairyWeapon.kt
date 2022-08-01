@@ -90,7 +90,7 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
             if (string.isNotBlank()) tooltip += formattedText { "作者: $string"().lightPurple } // TODO translate Author
         }
 
-        tooltip += formattedText { "Tier $tier"().aqua } // tier // TODO translate
+        tooltip += formattedText { "Tier $tier"().aqua } // tier // TRANSLATE
 
         // 機能
         tooltip += formattedText { "クラフトで妖精を搭乗・分離可能"().red } // TODO translate Can be combined with fairy by crafting
@@ -101,11 +101,11 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
 
         tooltip += formattedText { "耐久値: ${(getMaxDamage(itemStack) - getDamage(itemStack)) atLeast 0} / ${getMaxDamage(itemStack)}"().green } // 耐久値 TODO translate
 
-        getCombinedFairy(itemStack).notEmptyOrNull?.let { tooltip += formattedText { "搭乗中: ${it.displayName}"().aqua } } // 搭乗中の妖精 // TODO translate
+        getCombinedFairy(itemStack).notEmptyOrNull?.let { tooltip += formattedText { "搭乗中: ${it.displayName}"().aqua } } // 搭乗中の妖精 // TRANSLATE
 
         // 妖精魔法ステータス
         val fairy = Minecraft.getMinecraft().player?.let { findFairy(itemStack, it) } ?: Pair(EMPTY_ITEM_STACK, EMPTY_FAIRY)
-        tooltip += formattedText { ("パートナー: "() + (if (fairy.first.isEmpty) "-"() else fairy.first.displayName()).white).blue } // TODO translate
+        tooltip += formattedText { ("パートナー: "() + (if (fairy.first.isEmpty) "-"() else fairy.first.displayName()).white).blue } // TRANSLATE
         tooltip += NonNullList.create<String>().also { addInformationFairyWeapon(itemStack, fairy.first, fairy.second, world, it, flag) }
 
     }

@@ -127,7 +127,7 @@ object BakedFairy {
                 @SubscribeEvent
                 fun handle(event: ItemTooltipEvent) {
                     val dressing = dressingRegistry.firstOrNull { it.ingredient.test(event.itemStack) } ?: return
-                    event.toolTip += formattedText { "品質: ${dressing.quality formatAs "%+d"}"().blue } // TODO translate
+                    event.toolTip += formattedText { "品質: ${dressing.quality formatAs "%+d"}"().blue } // TRANSLATE
                 }
             })
         }
@@ -155,8 +155,8 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        tooltip += formattedText { "品質: ${getQuality(itemStack)}"() }  // TODO translate
-        tooltip += formattedText { "オーラブースト: ${(1 + 0.01 * getQuality(itemStack)) * 100.0 formatAs "%.0f%%"}"() }  // TODO translate
+        tooltip += formattedText { "品質: ${getQuality(itemStack)}"() }  // TRANSLATE
+        tooltip += formattedText { "オーラブースト: ${(1 + 0.01 * getQuality(itemStack)) * 100.0 formatAs "%.0f%%"}"() }  // TRANSLATE
     }
 
     @SideOnly(Side.CLIENT)

@@ -133,10 +133,10 @@ class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
         val blockPosOutput = pos.offset(facing)
 
         // 目の前にアイテムがある場合は行動しない（Lazy Chunk対策）
-        if (world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPosOutput)).isNotEmpty()) return FailureFairyBoxExecutor(textComponent { "制作物があふれています"().darkRed }) // TODO translate
+        if (world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPosOutput)).isNotEmpty()) return FailureFairyBoxExecutor(textComponent { "制作物があふれています"().darkRed }) // TRANSLATE
 
         // 排出面が塞がれている場合は行動しない
-        if (world.getBlockState(blockPosOutput).isSideSolid(world, blockPosOutput, facing.opposite)) return FailureFairyBoxExecutor(textComponent { "妖精が入れません"().darkRed }) // TODO translate
+        if (world.getBlockState(blockPosOutput).isSideSolid(world, blockPosOutput, facing.opposite)) return FailureFairyBoxExecutor(textComponent { "妖精が入れません"().darkRed }) // TRANSLATE
 
         // 妖精の木のコンパイルに失敗した場合は抜ける
         val leaves = try {
@@ -154,7 +154,7 @@ class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
                 val auraCollectionSpeed = getAuraCollectionSpeed(world, leaves, times) atMost 120.0
                 val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5) atLeast 0.0
 
-                player.sendStatusMessage(textComponent { "オーラ吸収速度: ${auraCollectionSpeed formatAs "%.2f"} Folia, 生産速度: ${baseCount formatAs "%.2f"} 個/分"() }, true) // TODO translate
+                player.sendStatusMessage(textComponent { "オーラ吸収速度: ${auraCollectionSpeed formatAs "%.2f"} Folia, 生産速度: ${baseCount formatAs "%.2f"} 個/分"() }, true) // TRANSLATE
                 return true
             }
 

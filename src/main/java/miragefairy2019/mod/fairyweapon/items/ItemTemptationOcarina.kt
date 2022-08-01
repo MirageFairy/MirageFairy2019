@@ -45,7 +45,7 @@ class ItemTemptationOcarina : ItemFairyWeaponMagic4() {
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.rangedCombat / 100.0 }, { boost })
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = listOf("Lv30以上のとき、右クリックでLv消費で村人を満腹化") // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("Lv30以上のとき、右クリックでLv消費で村人を満腹化") // TRANSLATE
 
     override fun getMagic() = magic {
         val rayTraceMagicSelector = MagicSelector.rayTrace(world, player, 0.0, EntityLivingBase::class.java) { it != player } // 視線判定

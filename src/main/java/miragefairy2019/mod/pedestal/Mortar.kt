@@ -262,10 +262,10 @@ class BlockMortar : BlockPedestal<TileEntityMortar>(Material.CIRCUITS, { it as? 
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        tooltip += formattedText { "Tier ${getVariant(itemStack.metadata).tier}"().aqua } // TODO translate
-        tooltip += formattedText { (TextComponentKeybind(keyBindingPlaceItem.keyDescription)() + "キーでアイテムを展示"()).red } // TODO translate
-        tooltip += formattedText { ("右クリックで粉砕"()).red } // TODO translate
-        tooltip += formattedText { ("成功率: "() + (getVariant(itemStack.metadata).successRate * 100 formatAs "%.0f%%")().white).blue } // TODO translate
+        tooltip += formattedText { "Tier ${getVariant(itemStack.metadata).tier}"().aqua } // TRANSLATE
+        tooltip += formattedText { (TextComponentKeybind(keyBindingPlaceItem.keyDescription)() + "キーでアイテムを展示"()).red } // TRANSLATE
+        tooltip += formattedText { ("右クリックで粉砕"()).red } // TRANSLATE
+        tooltip += formattedText { ("成功率: "() + (getVariant(itemStack.metadata).successRate * 100 formatAs "%.0f%%")().white).blue } // TRANSLATE
     }
 
 

@@ -179,7 +179,7 @@ class ItemDebugSkillResetUnlock : ItemDebug(0xFFBF00.toRgb()) {
         val skillContainer = ApiSkill.skillManager.getServerSkillContainer(player)
         skillContainer.variables.lastMasteryResetTime = null
         if (player is EntityPlayerMP) skillContainer.send(player)
-        player.sendStatusMessage(textComponent { "スキルポイント初期化が可能になりました"() }, true) // TODO translate
+        player.sendStatusMessage(textComponent { "スキルポイント初期化が可能になりました"() }, true) // TRANSLATE
         return EnumActionResult.SUCCESS
     }
 }
@@ -191,7 +191,7 @@ class ItemDebugPlayerAuraReset : ItemDebug(0xDFFF00.toRgb()) {
         val playerAuraHandler = ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(player)
         playerAuraHandler.onReset()
         playerAuraHandler.send()
-        player.sendStatusMessage(textComponent { "プレイヤーオーラをリセットしました"() }, true) // TODO translate
+        player.sendStatusMessage(textComponent { "プレイヤーオーラをリセットしました"() }, true) // TRANSLATE
         return EnumActionResult.SUCCESS
     }
 }

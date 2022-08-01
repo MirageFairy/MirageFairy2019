@@ -259,10 +259,10 @@ class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {
         val variant = getVariant(itemStack) ?: return
         val mastery = Mastery.fairySummoning
         val skillContainer = ApiSkill.skillManager.getClientSkillContainer()
-        tooltip += formattedText { ("スキル: "() + mastery.displayName() + " (${skillContainer.getSkillLevel(mastery)})"()).gold } // TODO translate
-        tooltip += formattedText { "ランク: ${variant.dropRank}"().blue } // TODO translate
-        tooltip += formattedText { "コモン判定ブースト: ${variant.getRateBoost(DropCategory.COMMON, skillContainer) * 100.0 formatAs "%.2f%%"}"().blue } // TODO translate
-        tooltip += formattedText { "レア判定ブースト: ${variant.getRateBoost(DropCategory.RARE, skillContainer) * 100.0 formatAs "%.2f%%"}"().blue } // TODO translate
+        tooltip += formattedText { ("スキル: "() + mastery.displayName() + " (${skillContainer.getSkillLevel(mastery)})"()).gold } // TRANSLATE
+        tooltip += formattedText { "ランク: ${variant.dropRank}"().blue } // TRANSLATE
+        tooltip += formattedText { "コモン判定ブースト: ${variant.getRateBoost(DropCategory.COMMON, skillContainer) * 100.0 formatAs "%.2f%%"}"().blue } // TRANSLATE
+        tooltip += formattedText { "レア判定ブースト: ${variant.getRateBoost(DropCategory.RARE, skillContainer) * 100.0 formatAs "%.2f%%"}"().blue } // TRANSLATE
     }
 }
 

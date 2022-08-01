@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation
 val EMPTY_FAIRY = object : IFairySpec {
     override fun isEmpty() = true
     override fun getMotif(): ResourceLocation? = null
-    override fun getDisplayName() = textComponent { "Empty"() } // TODO translate
+    override fun getDisplayName() = textComponent { "Empty"() } // TRANSLATE
     override fun getColor() = 0xFFFFFF
     override fun getCost() = 50.0
     override fun getManaSet() = ManaSet.ZERO

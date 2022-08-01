@@ -60,7 +60,7 @@ class PluginMfa : IModPlugin {
                             minecraft.fontRenderer.drawString(it, 4, 21 + 10 * i, 0x444444)
                         }
                     } else {
-                        // TODO translate
+                        // TRANSLATE
                         minecraft.fontRenderer.drawString("The fairy laboratory failed", 4, 21 + 10 * 0, 0x444444)
                         minecraft.fontRenderer.drawString("to decipher this article.", 4, 21 + 10 * 1, 0x444444)
                     }

@@ -43,7 +43,7 @@ class ItemCollectingMagicWand : ItemFairyWeaponMagic4() {
     val wear = status("wear", { 0.1 / (1.0 + (!Mana.FIRE + !Erg.SPACE) / 20.0) }, { percent2 })
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでアイテムを回収") // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでアイテムを回収") // TRANSLATE
 
     override fun getMagic() = magic {
         val rayTraceMagicSelector = MagicSelector.rayTraceBlock(world, player, additionalReach()) // 視線判定

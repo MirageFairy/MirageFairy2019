@@ -129,9 +129,9 @@ class BlockDish : BlockPlacedPedestal<TileEntityDish>(Material.CIRCUITS, { it as
 
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
-        tooltip += formattedText { (TextComponentKeybind(keyBindingPlaceItem.keyDescription)() + "キーでアイテムを展示"()).red } // TODO translate
-        tooltip += formattedText { ("右クリックで展示物を回転"()).red } // TODO translate
-        tooltip += formattedText { ("Shift+右クリックで展示方法を変更"()).red } // TODO translate
+        tooltip += formattedText { (TextComponentKeybind(keyBindingPlaceItem.keyDescription)() + "キーでアイテムを展示"()).red } // TRANSLATE
+        tooltip += formattedText { ("右クリックで展示物を回転"()).red } // TRANSLATE
+        tooltip += formattedText { ("Shift+右クリックで展示方法を変更"()).red } // TRANSLATE
     }
 
 

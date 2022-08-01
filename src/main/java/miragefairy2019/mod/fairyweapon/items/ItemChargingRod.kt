@@ -24,7 +24,7 @@ class ItemChargingRod : ItemFairyWeaponMagic4() {
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.processing / 100.0 }, { boost })
 
     @SideOnly(Side.CLIENT)
-    override fun getMagicDescription(itemStack: ItemStack) = listOf("AE2エネルギーセルの上に乗るとチャージ") // TODO translate
+    override fun getMagicDescription(itemStack: ItemStack) = listOf("AE2エネルギーセルの上に乗るとチャージ") // TRANSLATE
 
     override fun getMagic() = magic {
         object : MagicHandler() {
