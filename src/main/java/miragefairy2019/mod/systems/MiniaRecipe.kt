@@ -53,11 +53,6 @@ val miniaRecipeModule = module {
     onMakeLang { enJa("item.apostleStick.name", "Apostle Stick", "使徒のステッキ") }
 
 
-    class PatternBuilder {
-        val list = mutableListOf<String>()
-        operator fun String.not() = unit { list += this }
-    }
-
     fun register(name: String, input: DataIngredient, output: DataResult, inputRank: Int, count: Int) = makeRecipe("minia/$name") {
         DataShapelessRecipe(
             ingredients = listOf(
