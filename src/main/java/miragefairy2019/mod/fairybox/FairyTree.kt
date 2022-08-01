@@ -41,7 +41,7 @@ fun compileFairyTree(world: World, originBlockPos: BlockPos): Leaves {
     }
 
     // 基点幹の葉
-    val leavesResult = treeSearch(world, originalStemResult.map { it.first }, maxSize = 1000) { world2, blockPos, distance ->
+    val leavesResult = treeSearch(world, originalStemResult.map { it.first }, maxSize = 2000) { world2, blockPos, distance ->
         when (world2.getBlockState(blockPos).block) {
             is BlockLeaves -> Pair(blockPos, (5 - distance) atLeast 0)
             else -> null
