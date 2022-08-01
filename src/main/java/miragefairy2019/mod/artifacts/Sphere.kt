@@ -14,6 +14,7 @@ import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.Main.creativeTab
@@ -55,6 +56,8 @@ object Sphere {
             }
             registerItemColorHandler()
         }
+
+        // アイテムモデル
         makeItemModel("sphere") {
             DataModel(
                 parent = "item/generated",
@@ -67,6 +70,11 @@ object Sphere {
             )
         }
 
+        // 翻訳生成
+        onMakeLang {
+            enJa("item.spheres.name", "Sphere", "スフィア")
+            enJa("item.spheres.format", "Sphere of %s", "%sのスフィア")
+        }
 
         // 鉱石辞書
         onCreateItemStack {
