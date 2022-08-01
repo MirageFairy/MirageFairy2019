@@ -6,7 +6,6 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
-import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.enJa
@@ -140,16 +139,6 @@ val modules = module {
                 "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace")
             ),
             result = DataResult(item = "miragefairy2019:fairy_collection_box")
-        )
-    }
-
-    // 任意のフェアリークリスタル→原種のフェアリークリスタル
-    makeRecipe("fairy_crystal") {
-        DataShapelessRecipe(
-            ingredients = listOf(
-                DataOreIngredient(ore = "mirageFairyCrystalAny")
-            ),
-            result = DataResult(item = "miragefairy2019:fairy_crystal", data = 0)
         )
     }
 

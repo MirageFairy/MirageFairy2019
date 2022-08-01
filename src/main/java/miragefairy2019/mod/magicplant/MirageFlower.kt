@@ -27,15 +27,15 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.artifacts.FairyCrystal
-import miragefairy2019.mod.material.FairyMaterialCard
-import miragefairy2019.mod.material.createItemStack
+import miragefairy2019.mod.artifacts.variantFairyCrystal
 import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.EnumVariantMaterials1
+import miragefairy2019.mod.material.FairyMaterialCard
+import miragefairy2019.mod.material.createItemStack
 import mirrg.kotlin.hydrogen.atLeast
 import net.minecraft.block.BlockFarmland
 import net.minecraft.block.SoundType
@@ -249,7 +249,7 @@ class BlockMirageFlower : BlockMagicPlant(3) {
         if (isBreaking) drops.drop(random, 1.0) { itemMirageFlowerSeeds().createItemStack(it) } // 破壊時、確定で種1個ドロップ
         if (isBreaking && age >= 2) drops.drop(random, 1 + fortune * 0.2) { FairyMaterialCard.MIRAGE_FLOWER_LEAF.createItemStack(it) } // 破壊時、サイズ2以上で茎
         if (age >= 3) drops.drop(random, fortune * 0.01) { itemMirageFlowerSeeds().createItemStack(it) } // 完全成長時、低確率で追加の種
-        if (age >= 3) drops.drop(random, 1 + fortune * 0.5) { FairyCrystal.variantFairyCrystal().createItemStack(it) } // 完全成長時、フェアリークリスタル
+        if (age >= 3) drops.drop(random, 1 + fortune * 0.5) { variantFairyCrystal().createItemStack(it) } // 完全成長時、フェアリークリスタル
         if (age >= 3) drops.drop(random, 1 + fortune * 0.5) { "dustTinyMiragium".toOreName().copyItemStack(it) } // 完全成長時、ミラジウムの微粉
     }
 

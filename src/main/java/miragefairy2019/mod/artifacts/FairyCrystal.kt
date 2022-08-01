@@ -61,95 +61,104 @@ import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
 import net.minecraftforge.oredict.OreDictionary
 
-object FairyCrystal {
-    lateinit var itemFairyCrystal: () -> ItemFairyCrystal
-    lateinit var variantFairyCrystal: () -> VariantFairyCrystal
-    lateinit var variantFairyCrystalChristmas: () -> VariantFairyCrystal
-    lateinit var variantFairyCrystalPure: () -> VariantFairyCrystal
-    lateinit var variantFairyCrystalVeryPure: () -> VariantFairyCrystal
-    lateinit var variantFairyCrystalWild: () -> VariantFairyCrystal
-    lateinit var variantFairyCrystalVeryWild: () -> VariantFairyCrystal
-    val fairyCrystalModule = module {
+lateinit var itemFairyCrystal: () -> ItemFairyCrystal
+lateinit var variantFairyCrystal: () -> VariantFairyCrystal
+lateinit var variantFairyCrystalChristmas: () -> VariantFairyCrystal
+lateinit var variantFairyCrystalPure: () -> VariantFairyCrystal
+lateinit var variantFairyCrystalVeryPure: () -> VariantFairyCrystal
+lateinit var variantFairyCrystalWild: () -> VariantFairyCrystal
+lateinit var variantFairyCrystalVeryWild: () -> VariantFairyCrystal
 
-        // フェアリークリスタル
-        itemFairyCrystal = item({ ItemFairyCrystal() }, "fairy_crystal") {
-            setUnlocalizedName("fairyCrystal")
-            setCreativeTab { Main.creativeTab }
+val fairyCrystalModule = module {
 
-            onInit {
-                BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(item, object : Bootstrap.BehaviorDispenseOptional() {
-                    override fun dispenseStack(blockSource: IBlockSource, itemStack: ItemStack) = item.dispenseStack(blockSource, itemStack)
-                })
-            }
+    // フェアリークリスタル
+    itemFairyCrystal = item({ ItemFairyCrystal() }, "fairy_crystal") {
+        setUnlocalizedName("fairyCrystal")
+        setCreativeTab { Main.creativeTab }
 
-            class RecipeParameter(val inputOreName: String, val inputWand: WandType)
-
-            fun fairyCrystal(
-                metadata: Int, creator: (unlocalizedName: String) -> VariantFairyCrystal,
-                registryName: String, unlocalizedName: String, oreName: String,
-                english: String, japanese: String,
-                recipeParameter: RecipeParameter?
-            ): () -> VariantFairyCrystal {
-                return itemVariant(registryName, { creator(unlocalizedName) }, metadata) {
-                    setCustomModelResourceLocation(metadata, model = ResourceLocation(ModMirageFairy2019.MODID, registryName))
-                    onCreateItemStack { OreDictionary.registerOre(oreName, itemVariant.createItemStack()) }
-                    onCreateItemStack { OreDictionary.registerOre("mirageFairyCrystalAny", itemVariant.createItemStack()) }
-                    onMakeLang { enJa("item.$unlocalizedName.name", english, japanese) }
-                    if (recipeParameter != null) {
-                        makeRecipe(registryName) {
-                            DataShapelessRecipe(
-                                ingredients = listOf(
-                                    DataOreIngredient(ore = recipeParameter.inputOreName),
-                                    recipeParameter.inputWand.ingredientData
-                                ),
-                                result = DataResult(item = "miragefairy2019:fairy_crystal", data = metadata)
-                            )
-                        }
-                    }
-                    makeItemModel(registryName) { generated }
-                }
-            }
-
-            variantFairyCrystal = fairyCrystal(
-                0, { VariantFairyCrystal(it, 1, DropCategory.RARE, 1.0) },
-                "fairy_crystal", "fairyCrystal", "mirageFairyCrystal",
-                "Fairy Crystal", "フェアリークリスタル",
-                null
-            )
-            variantFairyCrystalChristmas = fairyCrystal(
-                1, { VariantFairyCrystal(it, 1, DropCategory.RARE, 1.0) },
-                "christmas_fairy_crystal", "fairyCrystalChristmas", "mirageFairyCrystalChristmas",
-                "Christmas Fairy Crystal", "聖夜のフェアリークリスタル",
-                null
-            )
-            variantFairyCrystalPure = fairyCrystal(
-                2, { VariantFairyCrystal(it, 2, DropCategory.RARE, 2.0) },
-                "pure_fairy_crystal", "fairyCrystalPure", "mirageFairyCrystalPure",
-                "Pure Fairy Crystal", "高純度フェアリークリスタル",
-                RecipeParameter("blockMirageFairyCrystal", WandType.POLISHING)
-            )
-            variantFairyCrystalVeryPure = fairyCrystal(
-                3, { VariantFairyCrystal(it, 3, DropCategory.RARE, 4.0) },
-                "very_pure_fairy_crystal", "fairyCrystalVeryPure", "mirageFairyCrystalVeryPure",
-                "Very Pure Fairy Crystal", "超高純度フェアリークリスタル",
-                RecipeParameter("blockMirageFairyCrystalPure", WandType.FUSION)
-            )
-            variantFairyCrystalWild = fairyCrystal(
-                4, { VariantFairyCrystal(it, 2, DropCategory.COMMON, 2.0) },
-                "wild_fairy_crystal", "fairyCrystalWild", "mirageFairyCrystalWild",
-                "Wild Fairy Crystal", "野蛮なフェアリークリスタル",
-                RecipeParameter("blockMirageFairyCrystal", WandType.MELTING)
-            )
-            variantFairyCrystalVeryWild = fairyCrystal(
-                5, { VariantFairyCrystal(it, 3, DropCategory.COMMON, 4.0) },
-                "very_wild_fairy_crystal", "fairyCrystalVeryWild", "mirageFairyCrystalVeryWild",
-                "Very Wild Fairy Crystal", "超野蛮なフェアリークリスタル",
-                RecipeParameter("blockMirageFairyCrystalWild", WandType.DISTORTION)
-            )
-
+        onInit {
+            BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(item, object : Bootstrap.BehaviorDispenseOptional() {
+                override fun dispenseStack(blockSource: IBlockSource, itemStack: ItemStack) = item.dispenseStack(blockSource, itemStack)
+            })
         }
 
+        class RecipeParameter(val inputOreName: String, val inputWand: WandType)
+
+        fun fairyCrystal(
+            metadata: Int, creator: (unlocalizedName: String) -> VariantFairyCrystal,
+            registryName: String, unlocalizedName: String, oreName: String,
+            english: String, japanese: String,
+            recipeParameter: RecipeParameter?
+        ): () -> VariantFairyCrystal {
+            return itemVariant(registryName, { creator(unlocalizedName) }, metadata) {
+                setCustomModelResourceLocation(metadata, model = ResourceLocation(ModMirageFairy2019.MODID, registryName))
+                onCreateItemStack { OreDictionary.registerOre(oreName, itemVariant.createItemStack()) }
+                onCreateItemStack { OreDictionary.registerOre("mirageFairyCrystalAny", itemVariant.createItemStack()) }
+                onMakeLang { enJa("item.$unlocalizedName.name", english, japanese) }
+                if (recipeParameter != null) {
+                    makeRecipe(registryName) {
+                        DataShapelessRecipe(
+                            ingredients = listOf(
+                                DataOreIngredient(ore = recipeParameter.inputOreName),
+                                recipeParameter.inputWand.ingredientData
+                            ),
+                            result = DataResult(item = "miragefairy2019:fairy_crystal", data = metadata)
+                        )
+                    }
+                }
+                makeItemModel(registryName) { generated }
+            }
+        }
+
+        variantFairyCrystal = fairyCrystal(
+            0, { VariantFairyCrystal(it, 1, DropCategory.RARE, 1.0) },
+            "fairy_crystal", "fairyCrystal", "mirageFairyCrystal",
+            "Fairy Crystal", "フェアリークリスタル",
+            null
+        )
+        variantFairyCrystalChristmas = fairyCrystal(
+            1, { VariantFairyCrystal(it, 1, DropCategory.RARE, 1.0) },
+            "christmas_fairy_crystal", "fairyCrystalChristmas", "mirageFairyCrystalChristmas",
+            "Christmas Fairy Crystal", "聖夜のフェアリークリスタル",
+            null
+        )
+        variantFairyCrystalPure = fairyCrystal(
+            2, { VariantFairyCrystal(it, 2, DropCategory.RARE, 2.0) },
+            "pure_fairy_crystal", "fairyCrystalPure", "mirageFairyCrystalPure",
+            "Pure Fairy Crystal", "高純度フェアリークリスタル",
+            RecipeParameter("blockMirageFairyCrystal", WandType.POLISHING)
+        )
+        variantFairyCrystalVeryPure = fairyCrystal(
+            3, { VariantFairyCrystal(it, 3, DropCategory.RARE, 4.0) },
+            "very_pure_fairy_crystal", "fairyCrystalVeryPure", "mirageFairyCrystalVeryPure",
+            "Very Pure Fairy Crystal", "超高純度フェアリークリスタル",
+            RecipeParameter("blockMirageFairyCrystalPure", WandType.FUSION)
+        )
+        variantFairyCrystalWild = fairyCrystal(
+            4, { VariantFairyCrystal(it, 2, DropCategory.COMMON, 2.0) },
+            "wild_fairy_crystal", "fairyCrystalWild", "mirageFairyCrystalWild",
+            "Wild Fairy Crystal", "野蛮なフェアリークリスタル",
+            RecipeParameter("blockMirageFairyCrystal", WandType.MELTING)
+        )
+        variantFairyCrystalVeryWild = fairyCrystal(
+            5, { VariantFairyCrystal(it, 3, DropCategory.COMMON, 4.0) },
+            "very_wild_fairy_crystal", "fairyCrystalVeryWild", "mirageFairyCrystalVeryWild",
+            "Very Wild Fairy Crystal", "超野蛮なフェアリークリスタル",
+            RecipeParameter("blockMirageFairyCrystalWild", WandType.DISTORTION)
+        )
+
     }
+
+    // 任意のフェアリークリスタル→原種のフェアリークリスタル
+    makeRecipe("fairy_crystal") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "mirageFairyCrystalAny")
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_crystal", data = 0)
+        )
+    }
+
 }
 
 class ItemFairyCrystal : ItemMulti<VariantFairyCrystal>() {

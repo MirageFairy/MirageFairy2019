@@ -7,7 +7,7 @@ import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.tileEntity
-import miragefairy2019.mod.artifacts.FairyCrystal
+import miragefairy2019.mod.artifacts.variantFairyCrystal
 import mirrg.kotlin.hydrogen.castOrNull
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.creativetab.CreativeTabs
@@ -48,7 +48,7 @@ object Main {
         onInitCreativeTab {
             creativeTab = object : CreativeTabs("mirageFairy2019") {
                 @SideOnly(Side.CLIENT)
-                override fun getTabIconItem() = FairyCrystal.variantFairyCrystal().createItemStack()
+                override fun getTabIconItem() = variantFairyCrystal().createItemStack()
             }
         }
 
