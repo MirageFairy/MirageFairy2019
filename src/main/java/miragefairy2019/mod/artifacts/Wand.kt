@@ -12,6 +12,7 @@ import miragefairy2019.lib.proxy
 import miragefairy2019.lib.registryName
 import miragefairy2019.lib.resourcemaker.DataIngredient
 import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.DataOrIngredient
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
@@ -593,6 +594,86 @@ val wandModule = module {
                 DataSimpleIngredient(item = "minecraft:bucket")
             ),
             result = DataResult(item = "minecraft:water_bucket")
+        )
+    }
+
+    // Tier 2 金鉱石 -> 金
+    makeRecipe("gold_ore_smelt_tier_2") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.MELTING.ingredientData,
+                WandType.BREAKING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:gold_ore")
+            ),
+            result = DataResult(item = "minecraft:gold_nugget", count = 17)
+        )
+    }
+
+    // Tier 4 金鉱石 -> 金
+    makeRecipe("gold_ore_smelt_tier_4") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.MELTING.ingredientData,
+                WandType.FUSION.ingredientData,
+                DataOreIngredient(ore = "dustMiragium"),
+                DataSimpleIngredient(item = "minecraft:gold_ore")
+            ),
+            result = DataResult(item = "minecraft:gold_ingot", count = 3)
+        )
+    }
+
+    // Tier 2 鉄鉱石 -> 鉄
+    makeRecipe("iron_ore_smelt_tier_2") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.MELTING.ingredientData,
+                WandType.BREAKING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:iron_ore")
+            ),
+            result = DataResult(item = "minecraft:iron_nugget", count = 17)
+        )
+    }
+
+    // Tier 4 鉄鉱石 -> 鉄
+    makeRecipe("iron_ore_smelt_tier_4") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.MELTING.ingredientData,
+                WandType.FUSION.ingredientData,
+                DataOreIngredient(ore = "dustMiragium"),
+                DataSimpleIngredient(item = "minecraft:iron_ore")
+            ),
+            result = DataResult(item = "minecraft:iron_ingot", count = 3)
+        )
+    }
+
+    // Tier 2 磁鉄鉱の粉 -> 鉄
+    makeRecipe("magnetite_smelt_tier_2") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.MELTING.ingredientData,
+                DataOrIngredient(DataOreIngredient(ore = "dustCoal"), DataOreIngredient(ore = "dustCharcoal")),
+                DataOreIngredient(ore = "dustMagnetite")
+            ),
+            result = DataResult(item = "minecraft:iron_nugget", count = 3)
+        )
+    }
+
+    // Tier 4 磁鉄鉱の粉 -> 鉄
+    makeRecipe("magnetite_smelt_tier_4") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                WandType.MELTING.ingredientData,
+                WandType.DISTORTION.ingredientData,
+                DataOreIngredient(ore = "dustMagnetite"),
+                DataOreIngredient(ore = "dustMagnetite"),
+                DataOreIngredient(ore = "dustMagnetite"),
+                DataOreIngredient(ore = "dustMagnetite"),
+                DataOreIngredient(ore = "dustMagnetite"),
+                DataOreIngredient(ore = "dustMagnetite"),
+                DataOreIngredient(ore = "dustMagnetite")
+            ),
+            result = DataResult(item = "minecraft:iron_ingot", count = 3)
         )
     }
 
