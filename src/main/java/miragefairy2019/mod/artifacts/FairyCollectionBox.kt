@@ -72,316 +72,314 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-object FairyCollectionBox {
-    lateinit var blockFairyCollectionBox: () -> BlockFairyCollectionBox
-    lateinit var itemFairyCollectionBox: () -> ItemBlock
+lateinit var blockFairyCollectionBox: () -> BlockFairyCollectionBox
+lateinit var itemFairyCollectionBox: () -> ItemBlock
 
-    val fairyCollectionBoxModule = module {
+val fairyCollectionBoxModule = module {
 
-        // ブロック
-        blockFairyCollectionBox = block({ BlockFairyCollectionBox() }, "fairy_collection_box") {
-            setUnlocalizedName("fairyCollectionBox")
-            setCreativeTab { Main.creativeTab }
-            makeBlockStates {
-                DataBlockStates(
-                    variants = listOf("middle", "bottom").flatMap { context ->
-                        listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
-                            "context=$context,facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_building_$context", y = facing.second)
-                        }
-                    }.toMap()
-                )
-            }
-        }
-
-        // アイテム
-        itemFairyCollectionBox = item({ ItemBlock(blockFairyCollectionBox()) }, "fairy_collection_box") {
-            setCustomModelResourceLocation(variant = "context=bottom,facing=north")
-            makeRecipe {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "sls",
-                        "PLD",
-                        "sCs"
-                    ),
-                    key = mapOf(
-                        "L" to DataOreIngredient(ore = "logWood"),
-                        "P" to DataOreIngredient(ore = "paneGlass"),
-                        "D" to DataOreIngredient(ore = "doorWood"),
-                        "l" to DataOreIngredient(ore = "torch"),
-                        "C" to DataSimpleIngredient(item = "minecraft:carpet", data = 14),
-                        "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace")
-                    ),
-                    result = DataResult(item = "miragefairy2019:fairy_collection_box")
-                )
-            }
-        }
-
-        // タイルエンティティ
-        tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)
-
-        // 翻訳生成
-        onMakeLang {
-            enJa("tile.fairyCollectionBox.name", "Fairy Collection Box", "妖精蒐集箱")
-        }
-
-        // 最下部のブロックモデル生成
-        makeBlockModel("fairy_building_bottom") {
-            DataModel(
-                parent = "block/block",
-                textures = mapOf(
-                    "particle" to "blocks/log_oak",
-                    "top" to "miragefairy2019:blocks/fairy_building_top",
-                    "side_background" to "miragefairy2019:blocks/fairy_building_side_background",
-                    "side_light_1" to "miragefairy2019:blocks/fairy_building_side_light_1",
-                    "side_light_2" to "miragefairy2019:blocks/fairy_building_side_light_2",
-                    "front_background" to "miragefairy2019:blocks/fairy_building_front_background",
-                    "front_light_1" to "miragefairy2019:blocks/fairy_building_front_light_1",
-                    "front_light_2" to "miragefairy2019:blocks/fairy_building_front_light_2",
-                    "log_top" to "blocks/log_oak_top",
-                    "log_side" to "blocks/log_oak"
-                ),
-                elements = listOf(
-                    DataElement(
-                        from = DataPoint(2.0, 0.0, 2.0),
-                        to = DataPoint(14.0, 16.0, 14.0),
-                        faces = DataFaces(
-                            down = DataFace(texture = "#top"),
-                            up = DataFace(texture = "#top"),
-                            north = DataFace(texture = "#front_background"),
-                            south = DataFace(texture = "#side_background"),
-                            west = DataFace(texture = "#side_background"),
-                            east = DataFace(texture = "#side_background")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(2.0, 0.0, 2.0),
-                        to = DataPoint(14.0, 16.0, 14.0),
-                        faces = DataFaces(
-                            north = DataFace(texture = "#front_light_1", tintindex = 0),
-                            south = DataFace(texture = "#side_light_1", tintindex = 0),
-                            west = DataFace(texture = "#side_light_1", tintindex = 0),
-                            east = DataFace(texture = "#side_light_1", tintindex = 0)
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(2.0, 0.0, 2.0),
-                        to = DataPoint(14.0, 16.0, 14.0),
-                        faces = DataFaces(
-                            north = DataFace(texture = "#front_light_2", tintindex = 1),
-                            south = DataFace(texture = "#side_light_2", tintindex = 1),
-                            west = DataFace(texture = "#side_light_2", tintindex = 1),
-                            east = DataFace(texture = "#side_light_2", tintindex = 1)
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(2.0, 0.0, 14.0),
-                        to = DataPoint(12.0, 2.0, 16.0),
-                        shade = false,
-                        faces = DataFaces(
-                            down = DataFace(texture = "#log_top"),
-                            up = DataFace(texture = "#log_top"),
-                            north = DataFace(texture = "#log_side"),
-                            south = DataFace(texture = "#log_side"),
-                            west = DataFace(texture = "#log_side"),
-                            east = DataFace(texture = "#log_side")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(6.0, 0.0, 14.0),
-                        to = DataPoint(8.0, 6.0, 16.0),
-                        shade = false,
-                        faces = DataFaces(
-                            down = DataFace(texture = "#log_top"),
-                            up = DataFace(texture = "#log_top"),
-                            north = DataFace(texture = "#log_side"),
-                            south = DataFace(texture = "#log_side"),
-                            west = DataFace(texture = "#log_side"),
-                            east = DataFace(texture = "#log_side")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(10.0, 0.0, 14.0),
-                        to = DataPoint(12.0, 10.0, 16.0),
-                        shade = false,
-                        faces = DataFaces(
-                            down = DataFace(texture = "#log_top"),
-                            up = DataFace(texture = "#log_top"),
-                            north = DataFace(texture = "#log_side"),
-                            south = DataFace(texture = "#log_side"),
-                            west = DataFace(texture = "#log_side"),
-                            east = DataFace(texture = "#log_side")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(14.0, 0.0, 8.0),
-                        to = DataPoint(16.0, 2.0, 14.0),
-                        shade = false,
-                        faces = DataFaces(
-                            down = DataFace(texture = "#log_top"),
-                            up = DataFace(texture = "#log_top"),
-                            north = DataFace(texture = "#log_side"),
-                            south = DataFace(texture = "#log_side"),
-                            west = DataFace(texture = "#log_side"),
-                            east = DataFace(texture = "#log_side")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(14.0, 0.0, 10.0),
-                        to = DataPoint(16.0, 8.0, 12.0),
-                        shade = false,
-                        faces = DataFaces(
-                            down = DataFace(texture = "#log_top"),
-                            up = DataFace(texture = "#log_top"),
-                            north = DataFace(texture = "#log_side"),
-                            south = DataFace(texture = "#log_side"),
-                            west = DataFace(texture = "#log_side"),
-                            east = DataFace(texture = "#log_side")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(14.0, 0.0, 0.0),
-                        to = DataPoint(16.0, 2.0, 4.0),
-                        shade = false,
-                        faces = DataFaces(
-                            down = DataFace(texture = "#log_top"),
-                            up = DataFace(texture = "#log_top"),
-                            north = DataFace(texture = "#log_side"),
-                            south = DataFace(texture = "#log_side"),
-                            west = DataFace(texture = "#log_side"),
-                            east = DataFace(texture = "#log_side")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(14.0, 0.0, 2.0),
-                        to = DataPoint(16.0, 4.0, 4.0),
-                        shade = false,
-                        faces = DataFaces(
-                            down = DataFace(texture = "#log_top"),
-                            up = DataFace(texture = "#log_top"),
-                            north = DataFace(texture = "#log_side"),
-                            south = DataFace(texture = "#log_side"),
-                            west = DataFace(texture = "#log_side"),
-                            east = DataFace(texture = "#log_side")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(4.0, 0.0, 0.0),
-                        to = DataPoint(6.0, 4.0, 2.0),
-                        shade = false,
-                        faces = DataFaces(
-                            down = DataFace(texture = "#log_top"),
-                            up = DataFace(texture = "#log_top"),
-                            north = DataFace(texture = "#log_side"),
-                            south = DataFace(texture = "#log_side"),
-                            west = DataFace(texture = "#log_side"),
-                            east = DataFace(texture = "#log_side")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(0.0, 0.0, 4.0),
-                        to = DataPoint(2.0, 4.0, 6.0),
-                        shade = false,
-                        faces = DataFaces(
-                            down = DataFace(texture = "#log_top"),
-                            up = DataFace(texture = "#log_top"),
-                            north = DataFace(texture = "#log_side"),
-                            south = DataFace(texture = "#log_side"),
-                            west = DataFace(texture = "#log_side"),
-                            east = DataFace(texture = "#log_side")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(0.0, 0.0, 6.0),
-                        to = DataPoint(2.0, 12.0, 8.0),
-                        shade = false,
-                        faces = DataFaces(
-                            down = DataFace(texture = "#log_top"),
-                            up = DataFace(texture = "#log_top"),
-                            north = DataFace(texture = "#log_side"),
-                            south = DataFace(texture = "#log_side"),
-                            west = DataFace(texture = "#log_side"),
-                            east = DataFace(texture = "#log_side")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(0.0, 0.0, 8.0),
-                        to = DataPoint(2.0, 6.0, 10.0),
-                        shade = false,
-                        faces = DataFaces(
-                            down = DataFace(texture = "#log_top"),
-                            up = DataFace(texture = "#log_top"),
-                            north = DataFace(texture = "#log_side"),
-                            south = DataFace(texture = "#log_side"),
-                            west = DataFace(texture = "#log_side"),
-                            east = DataFace(texture = "#log_side")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(0.0, 0.0, 10.0),
-                        to = DataPoint(2.0, 2.0, 12.0),
-                        shade = false,
-                        faces = DataFaces(
-                            down = DataFace(texture = "#log_top"),
-                            up = DataFace(texture = "#log_top"),
-                            north = DataFace(texture = "#log_side"),
-                            south = DataFace(texture = "#log_side"),
-                            west = DataFace(texture = "#log_side"),
-                            east = DataFace(texture = "#log_side")
-                        )
-                    )
-                )
+    // ブロック
+    blockFairyCollectionBox = block({ BlockFairyCollectionBox() }, "fairy_collection_box") {
+        setUnlocalizedName("fairyCollectionBox")
+        setCreativeTab { Main.creativeTab }
+        makeBlockStates {
+            DataBlockStates(
+                variants = listOf("middle", "bottom").flatMap { context ->
+                    listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
+                        "context=$context,facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_building_$context", y = facing.second)
+                    }
+                }.toMap()
             )
         }
-
-        // 上段のブロックモデル生成
-        makeBlockModel("fairy_building_middle") {
-            DataModel(
-                parent = "block/block",
-                textures = mapOf(
-                    "particle" to "blocks/log_oak",
-                    "top" to "miragefairy2019:blocks/fairy_building_top",
-                    "side_background" to "miragefairy2019:blocks/fairy_building_side_background",
-                    "side_light_1" to "miragefairy2019:blocks/fairy_building_side_light_1",
-                    "side_light_2" to "miragefairy2019:blocks/fairy_building_side_light_2"
-                ),
-                elements = listOf(
-                    DataElement(
-                        from = DataPoint(2.0, 0.0, 2.0),
-                        to = DataPoint(14.0, 16.0, 14.0),
-                        faces = DataFaces(
-                            down = DataFace(texture = "#top"),
-                            up = DataFace(texture = "#top"),
-                            north = DataFace(texture = "#side_background"),
-                            south = DataFace(texture = "#side_background"),
-                            west = DataFace(texture = "#side_background"),
-                            east = DataFace(texture = "#side_background")
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(2.0, 0.0, 2.0),
-                        to = DataPoint(14.0, 16.0, 14.0),
-                        faces = DataFaces(
-                            north = DataFace(texture = "#side_light_1", tintindex = 0),
-                            south = DataFace(texture = "#side_light_1", tintindex = 0),
-                            west = DataFace(texture = "#side_light_1", tintindex = 0),
-                            east = DataFace(texture = "#side_light_1", tintindex = 0)
-                        )
-                    ),
-                    DataElement(
-                        from = DataPoint(2.0, 0.0, 2.0),
-                        to = DataPoint(14.0, 16.0, 14.0),
-                        faces = DataFaces(
-                            north = DataFace(texture = "#side_light_2", tintindex = 1),
-                            south = DataFace(texture = "#side_light_2", tintindex = 1),
-                            west = DataFace(texture = "#side_light_2", tintindex = 1),
-                            east = DataFace(texture = "#side_light_2", tintindex = 1)
-                        )
-                    )
-                )
-            )
-        }
-
     }
+
+    // アイテム
+    itemFairyCollectionBox = item({ ItemBlock(blockFairyCollectionBox()) }, "fairy_collection_box") {
+        setCustomModelResourceLocation(variant = "context=bottom,facing=north")
+        makeRecipe {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "sls",
+                    "PLD",
+                    "sCs"
+                ),
+                key = mapOf(
+                    "L" to DataOreIngredient(ore = "logWood"),
+                    "P" to DataOreIngredient(ore = "paneGlass"),
+                    "D" to DataOreIngredient(ore = "doorWood"),
+                    "l" to DataOreIngredient(ore = "torch"),
+                    "C" to DataSimpleIngredient(item = "minecraft:carpet", data = 14),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace")
+                ),
+                result = DataResult(item = "miragefairy2019:fairy_collection_box")
+            )
+        }
+    }
+
+    // タイルエンティティ
+    tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)
+
+    // 翻訳生成
+    onMakeLang {
+        enJa("tile.fairyCollectionBox.name", "Fairy Collection Box", "妖精蒐集箱")
+    }
+
+    // 最下部のブロックモデル生成
+    makeBlockModel("fairy_building_bottom") {
+        DataModel(
+            parent = "block/block",
+            textures = mapOf(
+                "particle" to "blocks/log_oak",
+                "top" to "miragefairy2019:blocks/fairy_building_top",
+                "side_background" to "miragefairy2019:blocks/fairy_building_side_background",
+                "side_light_1" to "miragefairy2019:blocks/fairy_building_side_light_1",
+                "side_light_2" to "miragefairy2019:blocks/fairy_building_side_light_2",
+                "front_background" to "miragefairy2019:blocks/fairy_building_front_background",
+                "front_light_1" to "miragefairy2019:blocks/fairy_building_front_light_1",
+                "front_light_2" to "miragefairy2019:blocks/fairy_building_front_light_2",
+                "log_top" to "blocks/log_oak_top",
+                "log_side" to "blocks/log_oak"
+            ),
+            elements = listOf(
+                DataElement(
+                    from = DataPoint(2.0, 0.0, 2.0),
+                    to = DataPoint(14.0, 16.0, 14.0),
+                    faces = DataFaces(
+                        down = DataFace(texture = "#top"),
+                        up = DataFace(texture = "#top"),
+                        north = DataFace(texture = "#front_background"),
+                        south = DataFace(texture = "#side_background"),
+                        west = DataFace(texture = "#side_background"),
+                        east = DataFace(texture = "#side_background")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(2.0, 0.0, 2.0),
+                    to = DataPoint(14.0, 16.0, 14.0),
+                    faces = DataFaces(
+                        north = DataFace(texture = "#front_light_1", tintindex = 0),
+                        south = DataFace(texture = "#side_light_1", tintindex = 0),
+                        west = DataFace(texture = "#side_light_1", tintindex = 0),
+                        east = DataFace(texture = "#side_light_1", tintindex = 0)
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(2.0, 0.0, 2.0),
+                    to = DataPoint(14.0, 16.0, 14.0),
+                    faces = DataFaces(
+                        north = DataFace(texture = "#front_light_2", tintindex = 1),
+                        south = DataFace(texture = "#side_light_2", tintindex = 1),
+                        west = DataFace(texture = "#side_light_2", tintindex = 1),
+                        east = DataFace(texture = "#side_light_2", tintindex = 1)
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(2.0, 0.0, 14.0),
+                    to = DataPoint(12.0, 2.0, 16.0),
+                    shade = false,
+                    faces = DataFaces(
+                        down = DataFace(texture = "#log_top"),
+                        up = DataFace(texture = "#log_top"),
+                        north = DataFace(texture = "#log_side"),
+                        south = DataFace(texture = "#log_side"),
+                        west = DataFace(texture = "#log_side"),
+                        east = DataFace(texture = "#log_side")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(6.0, 0.0, 14.0),
+                    to = DataPoint(8.0, 6.0, 16.0),
+                    shade = false,
+                    faces = DataFaces(
+                        down = DataFace(texture = "#log_top"),
+                        up = DataFace(texture = "#log_top"),
+                        north = DataFace(texture = "#log_side"),
+                        south = DataFace(texture = "#log_side"),
+                        west = DataFace(texture = "#log_side"),
+                        east = DataFace(texture = "#log_side")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(10.0, 0.0, 14.0),
+                    to = DataPoint(12.0, 10.0, 16.0),
+                    shade = false,
+                    faces = DataFaces(
+                        down = DataFace(texture = "#log_top"),
+                        up = DataFace(texture = "#log_top"),
+                        north = DataFace(texture = "#log_side"),
+                        south = DataFace(texture = "#log_side"),
+                        west = DataFace(texture = "#log_side"),
+                        east = DataFace(texture = "#log_side")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(14.0, 0.0, 8.0),
+                    to = DataPoint(16.0, 2.0, 14.0),
+                    shade = false,
+                    faces = DataFaces(
+                        down = DataFace(texture = "#log_top"),
+                        up = DataFace(texture = "#log_top"),
+                        north = DataFace(texture = "#log_side"),
+                        south = DataFace(texture = "#log_side"),
+                        west = DataFace(texture = "#log_side"),
+                        east = DataFace(texture = "#log_side")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(14.0, 0.0, 10.0),
+                    to = DataPoint(16.0, 8.0, 12.0),
+                    shade = false,
+                    faces = DataFaces(
+                        down = DataFace(texture = "#log_top"),
+                        up = DataFace(texture = "#log_top"),
+                        north = DataFace(texture = "#log_side"),
+                        south = DataFace(texture = "#log_side"),
+                        west = DataFace(texture = "#log_side"),
+                        east = DataFace(texture = "#log_side")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(14.0, 0.0, 0.0),
+                    to = DataPoint(16.0, 2.0, 4.0),
+                    shade = false,
+                    faces = DataFaces(
+                        down = DataFace(texture = "#log_top"),
+                        up = DataFace(texture = "#log_top"),
+                        north = DataFace(texture = "#log_side"),
+                        south = DataFace(texture = "#log_side"),
+                        west = DataFace(texture = "#log_side"),
+                        east = DataFace(texture = "#log_side")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(14.0, 0.0, 2.0),
+                    to = DataPoint(16.0, 4.0, 4.0),
+                    shade = false,
+                    faces = DataFaces(
+                        down = DataFace(texture = "#log_top"),
+                        up = DataFace(texture = "#log_top"),
+                        north = DataFace(texture = "#log_side"),
+                        south = DataFace(texture = "#log_side"),
+                        west = DataFace(texture = "#log_side"),
+                        east = DataFace(texture = "#log_side")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(4.0, 0.0, 0.0),
+                    to = DataPoint(6.0, 4.0, 2.0),
+                    shade = false,
+                    faces = DataFaces(
+                        down = DataFace(texture = "#log_top"),
+                        up = DataFace(texture = "#log_top"),
+                        north = DataFace(texture = "#log_side"),
+                        south = DataFace(texture = "#log_side"),
+                        west = DataFace(texture = "#log_side"),
+                        east = DataFace(texture = "#log_side")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(0.0, 0.0, 4.0),
+                    to = DataPoint(2.0, 4.0, 6.0),
+                    shade = false,
+                    faces = DataFaces(
+                        down = DataFace(texture = "#log_top"),
+                        up = DataFace(texture = "#log_top"),
+                        north = DataFace(texture = "#log_side"),
+                        south = DataFace(texture = "#log_side"),
+                        west = DataFace(texture = "#log_side"),
+                        east = DataFace(texture = "#log_side")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(0.0, 0.0, 6.0),
+                    to = DataPoint(2.0, 12.0, 8.0),
+                    shade = false,
+                    faces = DataFaces(
+                        down = DataFace(texture = "#log_top"),
+                        up = DataFace(texture = "#log_top"),
+                        north = DataFace(texture = "#log_side"),
+                        south = DataFace(texture = "#log_side"),
+                        west = DataFace(texture = "#log_side"),
+                        east = DataFace(texture = "#log_side")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(0.0, 0.0, 8.0),
+                    to = DataPoint(2.0, 6.0, 10.0),
+                    shade = false,
+                    faces = DataFaces(
+                        down = DataFace(texture = "#log_top"),
+                        up = DataFace(texture = "#log_top"),
+                        north = DataFace(texture = "#log_side"),
+                        south = DataFace(texture = "#log_side"),
+                        west = DataFace(texture = "#log_side"),
+                        east = DataFace(texture = "#log_side")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(0.0, 0.0, 10.0),
+                    to = DataPoint(2.0, 2.0, 12.0),
+                    shade = false,
+                    faces = DataFaces(
+                        down = DataFace(texture = "#log_top"),
+                        up = DataFace(texture = "#log_top"),
+                        north = DataFace(texture = "#log_side"),
+                        south = DataFace(texture = "#log_side"),
+                        west = DataFace(texture = "#log_side"),
+                        east = DataFace(texture = "#log_side")
+                    )
+                )
+            )
+        )
+    }
+
+    // 上段のブロックモデル生成
+    makeBlockModel("fairy_building_middle") {
+        DataModel(
+            parent = "block/block",
+            textures = mapOf(
+                "particle" to "blocks/log_oak",
+                "top" to "miragefairy2019:blocks/fairy_building_top",
+                "side_background" to "miragefairy2019:blocks/fairy_building_side_background",
+                "side_light_1" to "miragefairy2019:blocks/fairy_building_side_light_1",
+                "side_light_2" to "miragefairy2019:blocks/fairy_building_side_light_2"
+            ),
+            elements = listOf(
+                DataElement(
+                    from = DataPoint(2.0, 0.0, 2.0),
+                    to = DataPoint(14.0, 16.0, 14.0),
+                    faces = DataFaces(
+                        down = DataFace(texture = "#top"),
+                        up = DataFace(texture = "#top"),
+                        north = DataFace(texture = "#side_background"),
+                        south = DataFace(texture = "#side_background"),
+                        west = DataFace(texture = "#side_background"),
+                        east = DataFace(texture = "#side_background")
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(2.0, 0.0, 2.0),
+                    to = DataPoint(14.0, 16.0, 14.0),
+                    faces = DataFaces(
+                        north = DataFace(texture = "#side_light_1", tintindex = 0),
+                        south = DataFace(texture = "#side_light_1", tintindex = 0),
+                        west = DataFace(texture = "#side_light_1", tintindex = 0),
+                        east = DataFace(texture = "#side_light_1", tintindex = 0)
+                    )
+                ),
+                DataElement(
+                    from = DataPoint(2.0, 0.0, 2.0),
+                    to = DataPoint(14.0, 16.0, 14.0),
+                    faces = DataFaces(
+                        north = DataFace(texture = "#side_light_2", tintindex = 1),
+                        south = DataFace(texture = "#side_light_2", tintindex = 1),
+                        west = DataFace(texture = "#side_light_2", tintindex = 1),
+                        east = DataFace(texture = "#side_light_2", tintindex = 1)
+                    )
+                )
+            )
+        )
+    }
+
 }
 
 class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
