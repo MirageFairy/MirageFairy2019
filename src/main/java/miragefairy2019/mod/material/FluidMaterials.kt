@@ -19,10 +19,16 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.ja
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
+import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionConsumeItem
+import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionReplaceBlock
+import miragefairy2019.mod.fairystickcraft.FairyStickCraftConditionUseItem
+import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.block.statemap.StateMapperBase
+import net.minecraft.init.Blocks
 import net.minecraft.item.ItemBlock
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fluids.BlockFluidClassic
@@ -30,6 +36,7 @@ import net.minecraftforge.fluids.Fluid
 import net.minecraftforge.fluids.FluidRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+import net.minecraftforge.oredict.OreIngredient
 
 object FluidMaterials {
     lateinit var fluidMiragiumWater: () -> Fluid
@@ -73,6 +80,8 @@ object FluidMaterials {
                 enJa("fluid.miragium_water", "Miragium Water", "ミラジウムウォーター")
                 enJa("tile.miragiumWater.name", "Miragium Water", "ミラジウムウォーター")
             }
+
+            // 作業台クラフト
             makeRecipe("miragium_water_pot") {
                 DataShapelessRecipe(
                     ingredients = listOf(
@@ -83,6 +92,14 @@ object FluidMaterials {
                     result = DataResult(item = "miragefairy2019:filled_bucket", data = 0)
                 )
             }
+
+            // フェアリーステッキクラフト
+            ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
+                it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.WATER.defaultState }, { blockFluidMiragiumWater().defaultState })
+                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustMiragium"))
+            })
+
         }
 
         // ミラージュエキス
