@@ -75,8 +75,8 @@ private operator fun Erg.not(): () -> Ingredient = { this.sphereType.oreName.ore
 private operator fun String.not(): () -> Ingredient = { this.oreIngredient }
 
 @Suppress("EnumEntryName")
-enum class FairyWeaponKind(
-    val parent: FairyWeaponKind?,
+enum class FairyWeaponCard(
+    val parent: FairyWeaponCard?,
     val registryName: String,
     val unlocalizedName: String,
     val tier: Int,
@@ -753,7 +753,7 @@ enum class FairyWeaponKind(
 }
 
 
-val FairyWeaponKind.manualRepairIngredients: List<Ingredient> get() = if (parent != null) parent.manualRepairIngredients + ownManualRepairIngredientSuppliers.map { it() } else ownManualRepairIngredientSuppliers.map { it() }
+val FairyWeaponCard.manualRepairIngredients: List<Ingredient> get() = if (parent != null) parent.manualRepairIngredients + ownManualRepairIngredientSuppliers.map { it() } else ownManualRepairIngredientSuppliers.map { it() }
 
 val fairyWeaponModule = module {
 
@@ -835,11 +835,11 @@ val fairyWeaponModule = module {
     }
 
     // 個別
-    FairyWeaponKind.values().forEach { fairyWeaponKind ->
+    FairyWeaponCard.values().forEach { fairyWeaponCard ->
 
         // アイテム
-        item(fairyWeaponKind.itemCreator, fairyWeaponKind.registryName) {
-            setUnlocalizedName(fairyWeaponKind.unlocalizedName)
+        item(fairyWeaponCard.itemCreator, fairyWeaponCard.registryName) {
+            setUnlocalizedName(fairyWeaponCard.unlocalizedName)
             setCreativeTab { creativeTab }
             onRegisterItem {
                 if (side.isClient) {
@@ -854,54 +854,54 @@ val fairyWeaponModule = module {
             }
             setCustomModelResourceLocation(variant = "normal")
             onInit {
-                val durability = (1..fairyWeaponKind.tier).fold(16) { a, _ -> a * 2 }
+                val durability = (1..fairyWeaponCard.tier).fold(16) { a, _ -> a * 2 }
                 item.maxDamage = durability - 1
-                item.tier = fairyWeaponKind.tier
+                item.tier = fairyWeaponCard.tier
             }
             onCreateItemStack {
-                item.manualRepairRequirements += fairyWeaponKind.manualRepairIngredients
+                item.manualRepairRequirements += fairyWeaponCard.manualRepairIngredients
             }
         }
 
         // アイテムモデル生成
-        makeItemModel(fairyWeaponKind.registryName) { handheld }
+        makeItemModel(fairyWeaponCard.registryName) { handheld }
 
         // 翻訳生成
         onMakeLang {
-            enJa("item.${fairyWeaponKind.unlocalizedName}.name", fairyWeaponKind.displayName.english, fairyWeaponKind.displayName.japanese)
-            enJa("item.${fairyWeaponKind.unlocalizedName}.poem", fairyWeaponKind.poem.english, fairyWeaponKind.poem.japanese)
-            if (fairyWeaponKind.author != null) enJa("item.${fairyWeaponKind.unlocalizedName}.author", fairyWeaponKind.author.english, fairyWeaponKind.author.japanese)
-            enJa("item.${fairyWeaponKind.unlocalizedName}.recipe", fairyWeaponKind.advancementText.english, fairyWeaponKind.advancementText.japanese)
+            enJa("item.${fairyWeaponCard.unlocalizedName}.name", fairyWeaponCard.displayName.english, fairyWeaponCard.displayName.japanese)
+            enJa("item.${fairyWeaponCard.unlocalizedName}.poem", fairyWeaponCard.poem.english, fairyWeaponCard.poem.japanese)
+            if (fairyWeaponCard.author != null) enJa("item.${fairyWeaponCard.unlocalizedName}.author", fairyWeaponCard.author.english, fairyWeaponCard.author.japanese)
+            enJa("item.${fairyWeaponCard.unlocalizedName}.recipe", fairyWeaponCard.advancementText.english, fairyWeaponCard.advancementText.japanese)
         }
 
         // レシピ生成
-        makeRecipe("fairy_weapon/${fairyWeaponKind.registryName}") {
-            fairyWeaponKind.recipeDataSupplier()
+        makeRecipe("fairy_weapon/${fairyWeaponCard.registryName}") {
+            fairyWeaponCard.recipeDataSupplier()
         }
 
         // 実績生成
-        makeAdvancement("fairy_weapon/${fairyWeaponKind.registryName}") {
+        makeAdvancement("fairy_weapon/${fairyWeaponCard.registryName}") {
             jsonObject(
                 "display" to jsonObjectNotNull(
                     "icon" to jsonObject(
-                        "item" to "miragefairy2019:${fairyWeaponKind.registryName}".jsonElement
+                        "item" to "miragefairy2019:${fairyWeaponCard.registryName}".jsonElement
                     ),
                     "title" to jsonObject(
-                        "translate" to "item.${fairyWeaponKind.unlocalizedName}.name".jsonElement
+                        "translate" to "item.${fairyWeaponCard.unlocalizedName}.name".jsonElement
                     ),
                     "description" to jsonObject(
-                        "translate" to "item.${fairyWeaponKind.unlocalizedName}.recipe".jsonElement
+                        "translate" to "item.${fairyWeaponCard.unlocalizedName}.recipe".jsonElement
                     ),
-                    fairyWeaponKind.frame?.let { "frame" to it.jsonElement }
+                    fairyWeaponCard.frame?.let { "frame" to it.jsonElement }
                 ),
-                "parent" to "miragefairy2019:fairy_weapon/${fairyWeaponKind.parent?.registryName ?: "root"}".jsonElement,
+                "parent" to "miragefairy2019:fairy_weapon/${fairyWeaponCard.parent?.registryName ?: "root"}".jsonElement,
                 "criteria" to jsonObject(
                     "main" to jsonObject(
                         "trigger" to "minecraft:inventory_changed".jsonElement,
                         "conditions" to jsonObject(
                             "items" to jsonArray(
                                 jsonObject(
-                                    "item" to "miragefairy2019:${fairyWeaponKind.registryName}".jsonElement
+                                    "item" to "miragefairy2019:${fairyWeaponCard.registryName}".jsonElement
                                 )
                             )
                         )
