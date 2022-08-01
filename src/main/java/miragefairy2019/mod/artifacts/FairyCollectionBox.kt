@@ -17,9 +17,12 @@ import miragefairy2019.lib.resourcemaker.DataBlockStates
 import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
-import miragefairy2019.lib.resourcemaker.*
+import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataPoint
+import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
+import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
@@ -79,7 +82,7 @@ object FairyCollectionBox {
         blockFairyCollectionBox = block({ BlockFairyCollectionBox() }, "fairy_collection_box") {
             setUnlocalizedName("fairyCollectionBox")
             setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName.path) {
+            makeBlockStates {
                 DataBlockStates(
                     variants = listOf("middle", "bottom").flatMap { context ->
                         listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
@@ -93,7 +96,7 @@ object FairyCollectionBox {
         // アイテム
         itemFairyCollectionBox = item({ ItemBlock(blockFairyCollectionBox()) }, "fairy_collection_box") {
             setCustomModelResourceLocation(variant = "context=bottom,facing=north")
-            makeRecipe("fairy_collection_box") {
+            makeRecipe {
                 DataShapedRecipe(
                     pattern = listOf(
                         "sls",
