@@ -139,7 +139,7 @@ object CompressedMaterials {
         // レシピの生成
         run {
             fun fromBlock(ingot: String, block: String, ingredientBlock: DataIngredient, resultIngot: DataResult) {
-                makeRecipe("materials/compress/${ingot}_from_${block}") { // TODO rename
+                makeRecipe("materials/compress/${block}_to_${ingot}") {
                     DataShapedRecipe(
                         pattern = listOf(
                             "#"
