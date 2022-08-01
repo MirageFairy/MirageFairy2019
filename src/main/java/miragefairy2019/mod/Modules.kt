@@ -46,8 +46,6 @@ val modules = module {
     // TODO move
     onMakeLang {
 
-        enJa("tile.fairyLog.name", "Fairy Log", "妖精の樹洞")
-
         enJa("item.spheres.name", "Sphere", "スフィア")
         enJa("item.spheres.format", "Sphere of %s", "%sのスフィア")
 

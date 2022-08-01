@@ -20,6 +20,7 @@ import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.selectFairyLogDrop
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairy.FairyCard
@@ -57,10 +58,11 @@ object FairyLog {
     lateinit var itemBlockFairyLog: () -> ItemBlock
     val fairyLogModule = module {
 
+        // ブロック
         blockFairyLog = block({ BlockFairyLog() }, "fairy_log") {
             setUnlocalizedName("fairyLog")
             setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName.path) {
+            makeBlockStates {
                 DataBlockStates(
                     variants = listOf("oak", "birch", "spruce", "jungle", "acacia", "dark_oak").flatMap { variant ->
                         listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
@@ -69,7 +71,7 @@ object FairyLog {
                     }.toMap()
                 )
             }
-            makeBlockModel(resourceName.path) {
+            makeBlockModel {
                 DataModel(
                     parent = "block/block",
                     elements = listOf(
@@ -100,6 +102,8 @@ object FairyLog {
                 )
             }
         }
+
+        // ブロックモデル
         run {
             fun makeBlockModel(name: String, variant: String) = makeBlockModel(name) {
                 DataModel(
@@ -117,12 +121,19 @@ object FairyLog {
             makeBlockModel("oak_fairy_log", "oak")
             makeBlockModel("spruce_fairy_log", "spruce")
         }
+
+        // アイテム
         itemBlockFairyLog = item({ ItemBlock(blockFairyLog()) }, "fairy_log") {
             setUnlocalizedName("fairyLog")
             setCreativeTab { Main.creativeTab }
             setCustomModelResourceLocation(variant = "facing=north,variant=oak")
+            makeItemModel { block }
         }
-        makeItemModel("fairy_log") { block }
+        
+        // 翻訳生成
+        onMakeLang {
+            enJa("tile.fairyLog.name", "Fairy Log", "妖精の樹洞")
+        }
 
         // 地形生成
         onHookDecorator {
