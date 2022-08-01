@@ -163,7 +163,7 @@ private fun Int.toRoman() = listOf("I", "II", "III", "IV", "V").getOrNull(this -
 
 val WandType.oreName get() = "mirageFairy2019CraftingToolFairyWand${registryName.toUpperCamelCase()}"
 val WandType.ingredient get() = WandIngredient(oreName)
-val WandType.ingredientData get() = DataOreIngredient(type = "miragefairy2019:ore_dict_complex", ore = oreName)
+val WandType.ingredientData get() = DataOreIngredient(type = "miragefairy2019:wand", ore = oreName)
 
 val WandKind.tier get() = type.tier + (rank - 1)
 val WandKind.registryName get() = "${type.registryName}_fairy_wand${if (rank == 1) "" else "_$rank"}"
@@ -173,7 +173,7 @@ val wandModule = module {
 
     // IngredientFactory
     onMakeIngredientFactory {
-        this["ore_dict_complex"] = WandIngredientFactory::class.java
+        this["wand"] = WandIngredientFactory::class.java
     }
 
 

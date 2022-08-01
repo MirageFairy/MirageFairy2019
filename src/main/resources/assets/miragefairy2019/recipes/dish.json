@@ -10,7 +10,7 @@
       "ore": "gemQuartz"
     },
     "p": {
-      "type": "miragefairy2019:ore_dict_complex",
+      "type": "miragefairy2019:wand",
       "ore": "mirageFairy2019CraftingToolFairyWandPolishing"
     }
   },

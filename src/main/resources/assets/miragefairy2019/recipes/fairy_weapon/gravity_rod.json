@@ -27,11 +27,11 @@
       "ore": "container1000MirageFlowerOil"
     },
     "c": {
-      "type": "miragefairy2019:ore_dict_complex",
+      "type": "miragefairy2019:wand",
       "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
     },
     "f": {
-      "type": "miragefairy2019:ore_dict_complex",
+      "type": "miragefairy2019:wand",
       "ore": "mirageFairy2019CraftingToolFairyWandFusion"
     }
   },
