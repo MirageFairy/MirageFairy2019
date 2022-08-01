@@ -40,91 +40,90 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.OreIngredient
 
-object Sphere {
-    lateinit var itemSpheres: () -> ItemSpheres
-    val sphereModule = module {
+lateinit var itemSpheres: () -> ItemSpheres
 
-        // アイテム
-        itemSpheres = item({ ItemSpheres() }, "spheres") {
-            setUnlocalizedName("spheres")
-            setCreativeTab { creativeTab }
-            Erg.values().forEachIndexed { i, ergType ->
-                onRegisterItem {
-                    item.registerVariant(i, VariantSphere(ergType.sphereType))
-                }
-                setCustomModelResourceLocation(i, model = ResourceLocation(ModMirageFairy2019.MODID, "sphere"))
+val sphereModule = module {
+
+    // アイテム
+    itemSpheres = item({ ItemSpheres() }, "spheres") {
+        setUnlocalizedName("spheres")
+        setCreativeTab { creativeTab }
+        Erg.values().forEachIndexed { i, ergType ->
+            onRegisterItem {
+                item.registerVariant(i, VariantSphere(ergType.sphereType))
             }
-            registerItemColorHandler()
+            setCustomModelResourceLocation(i, model = ResourceLocation(ModMirageFairy2019.MODID, "sphere"))
         }
+        registerItemColorHandler()
+    }
 
-        // アイテムモデル
-        makeItemModel("sphere") {
-            DataModel(
-                parent = "item/generated",
-                textures = mapOf(
-                    "layer0" to "miragefairy2019:items/sphere_layer0",
-                    "layer1" to "miragefairy2019:items/sphere_layer1",
-                    "layer2" to "miragefairy2019:items/sphere_layer2",
-                    "layer3" to "miragefairy2019:items/sphere_layer3"
-                )
+    // アイテムモデル
+    makeItemModel("sphere") {
+        DataModel(
+            parent = "item/generated",
+            textures = mapOf(
+                "layer0" to "miragefairy2019:items/sphere_layer0",
+                "layer1" to "miragefairy2019:items/sphere_layer1",
+                "layer2" to "miragefairy2019:items/sphere_layer2",
+                "layer3" to "miragefairy2019:items/sphere_layer3"
             )
-        }
+        )
+    }
 
-        // 翻訳生成
-        onMakeLang {
-            enJa("item.spheres.name", "Sphere", "スフィア")
-            enJa("item.spheres.format", "Sphere of %s", "%sのスフィア")
-        }
+    // 翻訳生成
+    onMakeLang {
+        enJa("item.spheres.name", "Sphere", "スフィア")
+        enJa("item.spheres.format", "Sphere of %s", "%sのスフィア")
+    }
 
-        // 鉱石辞書
-        onCreateItemStack {
-            Erg.values().forEachIndexed { meta, ergType ->
-                val itemStack = itemSpheres().getVariant(meta)!!.createItemStack()
-                OreDictionary.registerOre(ergType.sphereType.oreName, itemStack)
-                OreDictionary.registerOre("mirageFairy2019SphereAny", itemStack)
+    // 鉱石辞書
+    onCreateItemStack {
+        Erg.values().forEachIndexed { meta, ergType ->
+            val itemStack = itemSpheres().getVariant(meta)!!.createItemStack()
+            OreDictionary.registerOre(ergType.sphereType.oreName, itemStack)
+            OreDictionary.registerOre("mirageFairy2019SphereAny", itemStack)
+        }
+    }
+
+    // レシピ登録
+    onAddRecipe {
+        Erg.values().forEachIndexed { meta, ergType ->
+            val sphere = ergType.sphereType
+            val outputItemStack = itemSpheres().getVariant(meta)!!.createItemStack()
+
+            fun register(suffix: String, vararg additionalIngredients: Ingredient) {
+                val ingredients = listOf(
+                    OreIngredient("mirageFairy2019FairyAbility${ergType.toString().toUpperCaseHead()}"),
+                    *additionalIngredients
+                )
+
+                // クラフトレシピ
+                GameRegistry.addShapelessRecipe(
+                    ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere_$suffix"),
+                    ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere"),
+                    outputItemStack,
+                    OreIngredient("mirageFairyStick"),
+                    OreIngredient("container1000MiragiumWater"),
+                    *ingredients.toTypedArray()
+                )
+
+                // 妖精のステッキレシピ
+                ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().apply {
+                    conditions.add(FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick")))
+                    conditions.add(FairyStickCraftConditionConsumeBlock { FluidMaterials.blockFluidMiragiumWater().defaultState })
+                    ingredients.forEach { conditions.add(FairyStickCraftConditionConsumeItem(it)) }
+                    conditions.add(FairyStickCraftConditionSpawnItem { outputItemStack })
+                })
             }
-        }
 
-        // レシピ登録
-        onAddRecipe {
-            Erg.values().forEachIndexed { meta, ergType ->
-                val sphere = ergType.sphereType
-                val outputItemStack = itemSpheres().getVariant(meta)!!.createItemStack()
-
-                fun register(suffix: String, vararg additionalIngredients: Ingredient) {
-                    val ingredients = listOf(
-                        OreIngredient("mirageFairy2019FairyAbility${ergType.toString().toUpperCaseHead()}"),
-                        *additionalIngredients
-                    )
-
-                    // クラフトレシピ
-                    GameRegistry.addShapelessRecipe(
-                        ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere_$suffix"),
-                        ResourceLocation("${ModMirageFairy2019.MODID}:${ergType}_sphere"),
-                        outputItemStack,
-                        OreIngredient("mirageFairyStick"),
-                        OreIngredient("container1000MiragiumWater"),
-                        *ingredients.toTypedArray()
-                    )
-
-                    // 妖精のステッキレシピ
-                    ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().apply {
-                        conditions.add(FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick")))
-                        conditions.add(FairyStickCraftConditionConsumeBlock { FluidMaterials.blockFluidMiragiumWater().defaultState })
-                        ingredients.forEach { conditions.add(FairyStickCraftConditionConsumeItem(it)) }
-                        conditions.add(FairyStickCraftConditionSpawnItem { outputItemStack })
-                    })
-                }
-
-                sphere.catalystSupplier.let { register("with_fluorite", OreIngredient("gemFluorite"), it()) } // 蛍石触媒レシピ
-                sphere.catalystSupplier.let { register("with_sphere_base", OreIngredient("mirageFairy2019SphereBase"), it()) } // スフィアベース触媒レシピ
-                sphere.gemSupplier?.let { register("from_gem", it()) } // 宝石レシピ
-
-            }
+            sphere.catalystSupplier.let { register("with_fluorite", OreIngredient("gemFluorite"), it()) } // 蛍石触媒レシピ
+            sphere.catalystSupplier.let { register("with_sphere_base", OreIngredient("mirageFairy2019SphereBase"), it()) } // スフィアベース触媒レシピ
+            sphere.gemSupplier?.let { register("from_gem", it()) } // 宝石レシピ
 
         }
 
     }
+
 }
 
 
@@ -184,7 +183,7 @@ class ItemSpheres : ItemMulti<VariantSphere>(), IColoredItem {
 
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int): Int {
-        val variant = Sphere.itemSpheres().getVariant(itemStack) ?: return 0xFFFFFF
+        val variant = itemSpheres().getVariant(itemStack) ?: return 0xFFFFFF
         return when (tintIndex) {
             0 -> variant.sphere.colorBackground
             1 -> variant.sphere.colorPlasma

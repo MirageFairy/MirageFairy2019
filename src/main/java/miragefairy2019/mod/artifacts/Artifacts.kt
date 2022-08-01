@@ -11,7 +11,7 @@ val artifactsModule = module {
     FairyCrystalGlass.fairyCrystalGlassModule(this)
     potModule()
     debugItemsModule()
-    Sphere.sphereModule(this)
+    sphereModule(this)
     fairyStickModule()
     skillBookModule()
     astronomicalObservationBookModule()
