@@ -67,8 +67,8 @@ val fairyStickModule = module {
         setCreativeTab { Main.creativeTab }
         setCustomModelResourceLocation()
         addOreName("mirageFairyStick")
+        makeItemModel { handheld }
     }
-    makeItemModel("fairy_stick") { handheld }
 
     // レシピ登録
     onAddRecipe {
