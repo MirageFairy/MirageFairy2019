@@ -1,6 +1,5 @@
 package miragefairy2019.mod
 
-import miragefairy2019.export.IngredientFactoryOreIngredientComplex
 import miragefairy2019.jei.jeiModule
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.enJa
@@ -37,11 +36,6 @@ val modules = module {
     fairyRelationModule()
     fairyBoxModule()
     magicPlantModule()
-
-    // TODO move
-    onMakeIngredientFactory {
-        this["ore_dict_complex"] = IngredientFactoryOreIngredientComplex::class.java
-    }
 
     // TODO move
     onMakeLang {

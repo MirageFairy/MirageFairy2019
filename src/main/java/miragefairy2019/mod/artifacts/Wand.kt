@@ -1,5 +1,6 @@
 package miragefairy2019.mod.artifacts
 
+import com.google.gson.JsonObject
 import miragefairy2019.api.Erg
 import miragefairy2019.api.IFairyStickCraftItem
 import miragefairy2019.lib.addFairyStickCraftCoolTime
@@ -76,10 +77,13 @@ import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
+import net.minecraft.util.JsonUtils
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.RayTraceResult
 import net.minecraft.world.World
+import net.minecraftforge.common.crafting.IIngredientFactory
+import net.minecraftforge.common.crafting.JsonContext
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -166,6 +170,12 @@ val WandKind.registryName get() = "${type.registryName}_fairy_wand${if (rank == 
 val WandKind.unlocalizedName get() = "fairy_wand_${type.registryName}${if (rank == 1) "" else "_$rank"}".toLowerCamelCase()
 
 val wandModule = module {
+
+    // IngredientFactory
+    onMakeIngredientFactory {
+        this["ore_dict_complex"] = IngredientFactoryOreIngredientComplex::class.java
+    }
+
 
     // 翻訳生成
     onMakeLang {
@@ -736,6 +746,11 @@ val wandModule = module {
         )
     }
 
+}
+
+/** 耐久が削れたクラフティングツールを鉱石辞書名にマッチさせるためのIngredient */
+class IngredientFactoryOreIngredientComplex : IIngredientFactory {
+    override fun parse(context: JsonContext, json: JsonObject) = OreIngredientComplex(JsonUtils.getString(json, "ore"))
 }
 
 class ItemFairyWand : Item(), IFairyStickCraftItem {

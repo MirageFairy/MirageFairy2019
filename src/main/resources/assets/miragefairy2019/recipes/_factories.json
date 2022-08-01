@@ -1,5 +1,5 @@
 {
   "ingredients": {
-    "ore_dict_complex": "miragefairy2019.export.IngredientFactoryOreIngredientComplex"
+    "ore_dict_complex": "miragefairy2019.mod.artifacts.IngredientFactoryOreIngredientComplex"
   }
 }
