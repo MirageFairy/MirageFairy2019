@@ -94,11 +94,13 @@ object FluidMaterials {
             }
 
             // フェアリーステッキクラフト
-            ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
-                it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
-                it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.WATER.defaultState }, { blockFluidMiragiumWater().defaultState })
-                it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustMiragium"))
-            })
+            onAddRecipe {
+                ApiFairyStickCraft.fairyStickCraftRegistry.addRecipe(FairyStickCraftRecipe().also {
+                    it.conditions += FairyStickCraftConditionUseItem(OreIngredient("mirageFairyStick"))
+                    it.conditions += FairyStickCraftConditionReplaceBlock({ Blocks.WATER.defaultState }, { blockFluidMiragiumWater().defaultState })
+                    it.conditions += FairyStickCraftConditionConsumeItem(OreIngredient("dustMiragium"))
+                })
+            }
 
         }
 
