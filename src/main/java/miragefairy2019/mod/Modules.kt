@@ -53,7 +53,6 @@ val modules = module {
 
         enJa("itemGroup.mirageFairy2019", "MirageFairy2019", "MirageFairy2019")
 
-        enJa("itemGroup.mirageFairy2019.bakedFairy", "MirageFairy2019: Baked Fairy", "MirageFairy2019：焼き妖精")
 
         enJa("mirageFairy2019.formula.source.cost.name", "Cost", "コスト")
 

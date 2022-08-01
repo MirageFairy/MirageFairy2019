@@ -76,6 +76,9 @@ object BakedFairy {
             }
             creativeTabBakedFairy = { creativeTab }
         }
+        onMakeLang {
+            enJa("itemGroup.mirageFairy2019.bakedFairy", "MirageFairy2019: Baked Fairy", "MirageFairy2019：焼き妖精")
+        }
 
         // 焼き妖精
         itemBakedFairy = item({ ItemBakedFairy() }, "baked_fairy") {
