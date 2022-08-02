@@ -182,40 +182,40 @@ class BlockMirageFlower : BlockMagicPlant(3) {
 
         // 地面加点
         IGrowthHandler { world, blockPos ->
-            listOf(GrowthRateModifier(textComponent { "Ground Bonus"() }, world.getBlockState(blockPos.down()).let { blockState ->
-                var bonus = 0.5
+            val floorBlockState = world.getBlockState(blockPos.down())
 
-                // 妖精による判定
-                run noFairy@{
-                    val block = blockState.block
-                    if (block !is BlockMagicPlant) return@noFairy
+            var bonus = 0.5
 
-                    // 真下のブロックに紐づけられた妖精のリスト
-                    val entries = FairySelector().blockState(blockState).allMatch().withoutPartiallyMatch.primaries
-                    if (entries.isEmpty()) return@noFairy // 関連付けられた妖精が居ない場合は無視
+            // 妖精による判定
+            run noFairy@{
+                val block = world.getBlockState(blockPos).block
+                if (block !is BlockMagicPlant) return@noFairy
 
-                    // 最も大きな補正値
-                    val growthRateInFloor = entries.map { block.getGrowthFactorInFloor(it.fairyCard.getVariant()) }.max()!!
+                // 真下のブロックに紐づけられた妖精のリスト
+                val entries = FairySelector().blockState(floorBlockState).allMatch().withoutPartiallyMatch.primaries
+                if (entries.isEmpty()) return@noFairy // 関連付けられた妖精が居ない場合は無視
 
-                    bonus = bonus atLeast growthRateInFloor
-                }
+                // 最も大きな補正値
+                val growthRateInFloor = entries.map { block.getGrowthFactorInFloor(it.fairyCard.getVariant()) }.max()!!
 
-                // 特定ブロックによる判定
-                if (blockState.block === Blocks.GRASS) bonus = bonus atLeast 1.0
-                if (blockState.block === Blocks.DIRT) bonus = bonus atLeast 1.1
-                if (blockState.block === Blocks.FARMLAND) {
-                    bonus = bonus atLeast 1.2
-                    if (blockState.getValue(BlockFarmland.MOISTURE) > 0) bonus = bonus atLeast 1.3 // 耕土が湿っているなら加点
-                }
-                if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.APATITE_BLOCK)) bonus = bonus atLeast 1.5
-                if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.FLUORITE_BLOCK)) bonus = bonus atLeast 2.0
-                if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.SULFUR_BLOCK)) bonus = bonus atLeast 1.5
-                if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.CINNABAR_BLOCK)) bonus = bonus atLeast 2.0
-                if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MOONSTONE_BLOCK)) bonus = bonus atLeast 3.0
-                if (blockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MAGNETITE_BLOCK)) bonus = bonus atLeast 1.2
+                bonus = bonus atLeast growthRateInFloor
+            }
 
-                bonus
-            }))
+            // 特定ブロックによる判定
+            if (floorBlockState.block === Blocks.GRASS) bonus = bonus atLeast 1.0
+            if (floorBlockState.block === Blocks.DIRT) bonus = bonus atLeast 1.1
+            if (floorBlockState.block === Blocks.FARMLAND) {
+                bonus = bonus atLeast 1.2
+                if (floorBlockState.getValue(BlockFarmland.MOISTURE) > 0) bonus = bonus atLeast 1.3 // 耕土が湿っているなら加点
+            }
+            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.APATITE_BLOCK)) bonus = bonus atLeast 1.5
+            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.FLUORITE_BLOCK)) bonus = bonus atLeast 2.0
+            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.SULFUR_BLOCK)) bonus = bonus atLeast 1.5
+            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.CINNABAR_BLOCK)) bonus = bonus atLeast 2.0
+            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MOONSTONE_BLOCK)) bonus = bonus atLeast 3.0
+            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MAGNETITE_BLOCK)) bonus = bonus atLeast 1.2
+
+            listOf(GrowthRateModifier(textComponent { "Ground Bonus"() }, bonus))
         },
 
         // バイオーム加点
