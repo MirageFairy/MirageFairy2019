@@ -85,8 +85,8 @@ val debugItemsModule = module {
     r({ ItemDebugGainFairyMasterExp() }, "gain_fairy_master_exp", "Gain Fairy Master Exp", "妖精経験値入手")
     r({ ItemDebugOreSeedStatistics() }, "ore_seed_statistics", "Ore Seed Statistics", "鉱石分布")
     r({ ItemDebugOreSeedDropRate() }, "ore_seed_drop_rate", "Ore Seed Drop Rate", "鉱石生成確率表示")
-    r({ ItemDebugMirageFlowerGrowthRateList() }, "mirage_flower_growth_rate_list", "Mirage Flower Growth Rate List", "ミラージュフラワー地面補正一覧")
-    r({ ItemDebugMirageFlowerGrowthRate() }, "mirage_flower_growth_rate", "Mirage Flower Growth Rate", "ミラージュフラワー成長速度表示")
+    r({ ItemDebugMirageFlowerGrowthRateList() }, "mirage_flower_growth_rate_list", "Magic Plant Growth Rate List", "魔法植物地面補正一覧")
+    r({ ItemDebugMirageFlowerGrowthRate() }, "mirage_flower_growth_rate", "Magic Plant Growth Rate", "魔法植物成長速度表示")
     r({ ItemDebugShowData() }, "show_data", "Show Data", "データ表示")
     r({ ItemDebugSelectLanguage() }, "select_language", "Select Language", "言語選択")
 
