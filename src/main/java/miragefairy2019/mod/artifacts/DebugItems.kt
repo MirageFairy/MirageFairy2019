@@ -293,12 +293,13 @@ class ItemDebugMirageFlowerGrowthRate : ItemDebug(0x00FFFF.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
-        val airBlockPos = if (world.getBlockState(blockPos).isFullBlock) blockPos.up() else blockPos
+        val block = world.getBlockState(blockPos).block as? BlockMagicPlant ?: return EnumActionResult.SUCCESS // 対象が魔法植物でない
+
         player.sendStatusMessage(textComponent { "===== Mirage Flower Grow Rate ====="() }, false)
-        player.sendStatusMessage(textComponent { "Pos: ${airBlockPos.x} ${airBlockPos.y} ${airBlockPos.z}"() }, false)
-        player.sendStatusMessage(textComponent { "Block: ${world.getBlockState(airBlockPos)}"() }, false)
-        player.sendStatusMessage(textComponent { "Floor: ${world.getBlockState(airBlockPos.down())}"() }, false)
-        val result = blockMirageFlower().growthHandlers.getGrowthRateModifiers(world, airBlockPos)
+        player.sendStatusMessage(textComponent { "Pos: ${blockPos.x} ${blockPos.y} ${blockPos.z}"() }, false)
+        player.sendStatusMessage(textComponent { "Plant: ${world.getBlockState(blockPos)}"() }, false)
+        player.sendStatusMessage(textComponent { "Floor: ${world.getBlockState(blockPos.down())}"() }, false)
+        val result = block.growthHandlers.getGrowthRateModifiers(world, blockPos)
         player.sendStatusMessage(textComponent { "Growth Rate: "() + (result.growthRate * 100).f3() + "%"() }, false)
         result.forEach {
             player.sendStatusMessage(textComponent { "  "() + it.title() + ": "() + (it.factor * 100).f3() + "%"() }, false)
