@@ -277,7 +277,7 @@ class ItemDebugMirageFlowerGrowthRateList : ItemDebug(0x00FF9F.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
 
-        val block = world.getBlockState(blockPos).block as? BlockMagicPlant ?: return EnumActionResult.SUCCESS
+        val block = world.getBlockState(blockPos).block as? BlockMagicPlant ?: return EnumActionResult.SUCCESS // 対象が魔法植物でない
 
         player.sendStatusMessage(textComponent { "===== Mirage Flower Grow Rate Table ====="() }, false)
         FairyCard.values().map { it.getVariant() }.map { Pair(it, block.getGrowthFactorInFloor(it)) }.filter { it.second > 1 }.sortedBy { it.second }.forEach {
