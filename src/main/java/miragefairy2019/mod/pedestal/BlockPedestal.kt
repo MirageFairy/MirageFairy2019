@@ -8,6 +8,7 @@ import miragefairy2019.libkt.notEmptyOrNull
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
+import net.minecraft.block.state.BlockFaceShape
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
@@ -65,6 +66,7 @@ abstract class BlockPedestal<T : TileEntityPedestal>(material: Material, private
     override fun getRenderType(state: IBlockState) = EnumBlockRenderType.MODEL
     override fun isOpaqueCube(state: IBlockState) = false
     override fun isFullCube(state: IBlockState) = false
+    override fun getBlockFaceShape(world: IBlockAccess, blockState: IBlockState, blockPos: BlockPos, facing: EnumFacing) = BlockFaceShape.UNDEFINED
 
 
     // アクション

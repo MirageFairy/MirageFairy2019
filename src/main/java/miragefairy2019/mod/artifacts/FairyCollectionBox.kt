@@ -47,6 +47,7 @@ import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyEnum
+import net.minecraft.block.state.BlockFaceShape
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.gui.inventory.GuiContainer
@@ -445,6 +446,7 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
     override fun getRenderType(state: IBlockState) = EnumBlockRenderType.MODEL
     override fun isOpaqueCube(state: IBlockState) = false
     override fun isFullCube(state: IBlockState) = false
+    override fun getBlockFaceShape(world: IBlockAccess, blockState: IBlockState, blockPos: BlockPos, facing: EnumFacing) = BlockFaceShape.UNDEFINED
 
 
     // Drop
