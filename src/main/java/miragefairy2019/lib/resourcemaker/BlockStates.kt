@@ -21,6 +21,7 @@ fun NamedScope.makeBlockStates(creator: MakeBlockStatesScope.() -> DataBlockStat
 class MakeBlockStatesScope(val resourceName: ResourceName)
 
 
+/** [net.minecraft.client.renderer.block.model.ModelBlockDefinition] */
 data class DataBlockStates(
     val forgeMarker: Int? = null,
     val variants: Map<String, DataBlockState>? = null,
@@ -37,6 +38,7 @@ abstract class DataVariantList {
     abstract val jsonElement: JsonElement
 }
 
+/** [net.minecraft.client.renderer.block.model.VariantList] */
 data class DataArrayVariantList(
     val variants: List<DataBlockState>
 ) : DataVariantList() {
@@ -45,12 +47,14 @@ data class DataArrayVariantList(
     override val jsonElement = variants.map { it.jsonElement }.jsonArray
 }
 
+/** [net.minecraft.client.renderer.block.model.VariantList] */
 data class DataSingleVariantList(
     val variant: DataBlockState
 ) : DataVariantList() {
     override val jsonElement = variant.jsonElement
 }
 
+/** [net.minecraft.client.renderer.block.model.Variant] */
 data class DataBlockState(
     val model: String,
     val x: Int? = null,
@@ -67,6 +71,7 @@ data class DataBlockState(
     )
 }
 
+/** [net.minecraft.client.renderer.block.model.multipart.Selector] */
 data class DataPart(
     val `when`: Map<String, JsonElement>? = null,
     val apply: DataBlockState
