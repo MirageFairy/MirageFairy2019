@@ -54,7 +54,6 @@ open class BlockBeanstalk : Block(Material.WOOD) {
     }
 
 
-    override fun getBlockFaceShape(world: IBlockAccess, blockState: IBlockState, blockPos: BlockPos, facing: EnumFacing) = BlockFaceShape.UNDEFINED
 
 
     // レンダリング
@@ -64,5 +63,6 @@ open class BlockBeanstalk : Block(Material.WOOD) {
     override fun getRenderType(state: IBlockState) = EnumBlockRenderType.MODEL
     override fun isOpaqueCube(state: IBlockState) = false
     override fun isFullCube(state: IBlockState) = false
+    override fun getBlockFaceShape(world: IBlockAccess, blockState: IBlockState, blockPos: BlockPos, facing: EnumFacing) = BlockFaceShape.UNDEFINED
 
 }
