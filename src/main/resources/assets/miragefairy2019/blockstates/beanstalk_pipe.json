@@ -1,0 +1,129 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_elbow"
+      }
+    },
+    {
+      "when": {
+        "facing": "down"
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_down",
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "up"
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_down",
+        "x": 180,
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_down",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_down",
+        "x": 90,
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_down",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_down",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "down": true
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_up",
+        "x": 180,
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "up": true
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_up",
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "north": true
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_up",
+        "x": 90,
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "south": true
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_up",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "west": true
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_up",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "east": true
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_up",
+        "x": 90,
+        "y": 90
+      }
+    }
+  ]
+}

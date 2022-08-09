@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " v ",
+    "vmv",
+    " v "
+  ],
+  "key": {
+    "v": {
+      "type": "forge:ore_dict",
+      "ore": "vine"
+    },
+    "m": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyMandrake"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:beanstalk_pipe"
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "parent": "block/block",
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "from": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "to": [
+        16.0,
+        16.0,
+        16.0
+      ],
+      "faces": {
+        "down": {
+          "texture": "#top"
+        },
+        "up": {
+          "texture": "#top"
+        }
+      }
+    },
+    {
+      "from": [
+        0.0,
+        0.0,
+        5.0
+      ],
+      "to": [
+        16.0,
+        16.0,
+        5.0
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#main"
+        },
+        "south": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ],
+          "texture": "#main"
+        }
+      }
+    },
+    {
+      "from": [
+        0.0,
+        0.0,
+        11.0
+      ],
+      "to": [
+        16.0,
+        16.0,
+        11.0
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ],
+          "texture": "#main"
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#main"
+        }
+      }
+    },
+    {
+      "from": [
+        5.0,
+        0.0,
+        0.0
+      ],
+      "to": [
+        5.0,
+        16.0,
+        16.0
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#main"
+        },
+        "east": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ],
+          "texture": "#main"
+        }
+      }
+    },
+    {
+      "from": [
+        11.0,
+        0.0,
+        0.0
+      ],
+      "to": [
+        11.0,
+        16.0,
+        16.0
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ],
+          "texture": "#main"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#main"
+        }
+      }
+    }
+  ],
+  "textures": {
+    "particle": "miragefairy2019:blocks/beanstalk",
+    "main": "miragefairy2019:blocks/beanstalk",
+    "top": "miragefairy2019:blocks/beanstalk_top"
+  }
+}
