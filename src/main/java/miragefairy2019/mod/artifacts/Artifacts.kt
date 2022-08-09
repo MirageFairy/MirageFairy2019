@@ -21,4 +21,5 @@ val artifactsModule = module {
     wandModule()
     fairyCrystalModule(this)
     potionModule()
+    beanstalkModule()
 }
