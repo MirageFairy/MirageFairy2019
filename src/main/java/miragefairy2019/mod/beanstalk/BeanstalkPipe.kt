@@ -39,7 +39,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 
-lateinit var blockBeanstalkPipe: () -> BlockBeanstalk
+lateinit var blockBeanstalkPipe: () -> BlockBeanstalkPipe
 lateinit var itemBlockBeanstalkPipe: () -> ItemBlock
 
 val beanstalkPipeModule = module {
