@@ -65,4 +65,9 @@ open class BlockBeanstalk : Block(Material.WOOD) {
     override fun isFullCube(state: IBlockState) = false
     override fun getBlockFaceShape(world: IBlockAccess, blockState: IBlockState, blockPos: BlockPos, facing: EnumFacing) = BlockFaceShape.UNDEFINED
 
+
+    // 性質
+
+    override fun isLadder(blockState: IBlockState, world: IBlockAccess, blockPos: BlockPos, entity: EntityLivingBase) = true
+
 }

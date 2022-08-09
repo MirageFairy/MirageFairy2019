@@ -33,11 +33,14 @@ import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.block.statemap.StateMapperBase
+import net.minecraft.entity.Entity
 import net.minecraft.item.ItemBlock
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.ResourceLocation
+import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
+import net.minecraft.world.World
 
 lateinit var blockBeanstalkPipe: () -> BlockBeanstalkPipe
 lateinit var itemBlockBeanstalkPipe: () -> ItemBlock
@@ -328,5 +331,27 @@ class BlockBeanstalkPipe : BlockBeanstalk() {
     }
 
     fun isEnd(blockState: IBlockState) = !blockState[DOWN] && !blockState[UP] && !blockState[NORTH] && !blockState[SOUTH] && !blockState[WEST] && !blockState[EAST]
+
+
+    // Box
+
+    private val collisionBoundingBoxElbow = AxisAlignedBB(5 / 16.0, 5 / 16.0, 5 / 16.0, 11 / 16.0, 11 / 16.0, 11 / 16.0)
+    private val collisionBoundingBoxDown = AxisAlignedBB(5 / 16.0, 0 / 16.0, 5 / 16.0, 11 / 16.0, 5 / 16.0, 11 / 16.0)
+    private val collisionBoundingBoxUp = AxisAlignedBB(5 / 16.0, 11 / 16.0, 5 / 16.0, 11 / 16.0, 16 / 16.0, 11 / 16.0)
+    private val collisionBoundingBoxNorth = AxisAlignedBB(5 / 16.0, 5 / 16.0, 0 / 16.0, 11 / 16.0, 11 / 16.0, 5 / 16.0)
+    private val collisionBoundingBoxSouth = AxisAlignedBB(5 / 16.0, 5 / 16.0, 11 / 16.0, 11 / 16.0, 11 / 16.0, 16 / 16.0)
+    private val collisionBoundingBoxWest = AxisAlignedBB(0 / 16.0, 5 / 16.0, 5 / 16.0, 5 / 16.0, 11 / 16.0, 11 / 16.0)
+    private val collisionBoundingBoxEast = AxisAlignedBB(11 / 16.0, 5 / 16.0, 5 / 16.0, 16 / 16.0, 11 / 16.0, 11 / 16.0)
+    override fun addCollisionBoxToList(blockState: IBlockState, world: World, blockPos: BlockPos, entityBox: AxisAlignedBB, collidingBoxes: MutableList<AxisAlignedBB>, entity: Entity?, isActualState: Boolean) {
+        val actualBlockState = if (!isActualState) getActualState(blockState, world, blockPos) else blockState
+        addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxElbow)
+        val facing = getFacing(blockState)
+        if (facing == EnumFacing.DOWN || actualBlockState[DOWN]) addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxDown)
+        if (facing == EnumFacing.UP || actualBlockState[UP]) addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxUp)
+        if (facing == EnumFacing.NORTH || actualBlockState[NORTH]) addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxNorth)
+        if (facing == EnumFacing.SOUTH || actualBlockState[SOUTH]) addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxSouth)
+        if (facing == EnumFacing.WEST || actualBlockState[WEST]) addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxWest)
+        if (facing == EnumFacing.EAST || actualBlockState[EAST]) addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxEast)
+    }
 
 }
