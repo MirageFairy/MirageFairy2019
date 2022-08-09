@@ -55,16 +55,14 @@ data class DataBlockState(
     val model: String,
     val x: Int? = null,
     val y: Int? = null,
-    val z: Int? = null,
     val custom: JsonElement? = null
 ) {
-    constructor(model: ResourceName, x: Int? = null, y: Int? = null, z: Int? = null) : this(model.toString(), x, y, z)
+    constructor(model: ResourceName, x: Int? = null, y: Int? = null) : this(model.toString(), x, y)
 
     val jsonElement = jsonObjectNotNull(
         "model" to model.jsonElement,
         "x" to x?.jsonElement,
         "y" to y?.jsonElement,
-        "z" to z?.jsonElement,
         "custom" to custom
     )
 }
