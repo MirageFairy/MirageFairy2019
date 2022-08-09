@@ -33,6 +33,24 @@ data class DataBlockStates(
     )
 }
 
+abstract class DataVariantList {
+    abstract val jsonElement: JsonElement
+}
+
+data class DataArrayVariantList(
+    val variants: List<DataBlockState>
+) : DataVariantList() {
+    constructor(vararg variants: DataBlockState) : this(variants.toList())
+
+    override val jsonElement = variants.map { it.jsonElement }.jsonArray
+}
+
+data class DataSingleVariantList(
+    val variant: DataBlockState
+) : DataVariantList() {
+    override val jsonElement = variant.jsonElement
+}
+
 data class DataBlockState(
     val model: String,
     val x: Int? = null,
