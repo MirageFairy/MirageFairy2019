@@ -610,6 +610,7 @@ skill_book.possible=可能
 skill_book.requiredFairyMasterXp=必要経験値
 skill_book.sp=SP
 tile.beanstalkPipe.name=豆の木パイプ
+tile.beanstalkRoot.name=豆の木の根
 tile.blockApatite.name=燐灰石ブロック
 tile.blockCharcoal.name=木炭ブロック
 tile.blockCinnabar.name=辰砂ブロック

@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "#",
+    "m"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:beanstalk_pipe"
+    },
+    "m": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyMandrake"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:beanstalk_root"
+  }
+}

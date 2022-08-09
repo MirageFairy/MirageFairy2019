@@ -597,6 +597,7 @@ skill_book.possible=Possible
 skill_book.requiredFairyMasterXp=Required Fairy Master XP
 skill_book.sp=SP
 tile.beanstalkPipe.name=Beanstalk Pipe
+tile.beanstalkRoot.name=Beanstalk Root
 tile.blockApatite.name=Block of Apatite
 tile.blockCharcoal.name=Block of Charcoal
 tile.blockCinnabar.name=Block of Cinnabar

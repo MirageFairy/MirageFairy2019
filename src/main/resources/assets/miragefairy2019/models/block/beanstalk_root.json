@@ -1,0 +1,222 @@
+{
+  "parent": "block/block",
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "from": [
+        5.0,
+        16.0,
+        5.0
+      ],
+      "to": [
+        11.0,
+        16.0,
+        11.0
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            11.0,
+            5.0,
+            5.0,
+            11.0
+          ],
+          "texture": "#top"
+        },
+        "up": {
+          "uv": [
+            5.0,
+            5.0,
+            11.0,
+            11.0
+          ],
+          "texture": "#top"
+        }
+      }
+    },
+    {
+      "from": [
+        0.0,
+        0.0,
+        5.0
+      ],
+      "to": [
+        16.0,
+        16.0,
+        5.0
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#main"
+        },
+        "south": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ],
+          "texture": "#main"
+        }
+      }
+    },
+    {
+      "from": [
+        0.0,
+        0.0,
+        11.0
+      ],
+      "to": [
+        16.0,
+        16.0,
+        11.0
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ],
+          "texture": "#main"
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#main"
+        }
+      }
+    },
+    {
+      "from": [
+        5.0,
+        0.0,
+        0.0
+      ],
+      "to": [
+        5.0,
+        16.0,
+        16.0
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#main"
+        },
+        "east": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ],
+          "texture": "#main"
+        }
+      }
+    },
+    {
+      "from": [
+        11.0,
+        0.0,
+        0.0
+      ],
+      "to": [
+        11.0,
+        16.0,
+        16.0
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ],
+          "texture": "#main"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#main"
+        }
+      }
+    },
+    {
+      "from": [
+        4.0,
+        0.0,
+        4.0
+      ],
+      "to": [
+        12.0,
+        2.0,
+        12.0
+      ],
+      "faces": {
+        "up": {
+          "texture": "#background"
+        },
+        "north": {
+          "texture": "#background"
+        },
+        "south": {
+          "texture": "#background"
+        },
+        "west": {
+          "texture": "#background"
+        },
+        "east": {
+          "texture": "#background"
+        }
+      }
+    },
+    {
+      "from": [
+        0.0,
+        0.01,
+        0.0
+      ],
+      "to": [
+        16.0,
+        0.01,
+        16.0
+      ],
+      "faces": {
+        "down": {
+          "texture": "#ground"
+        },
+        "up": {
+          "texture": "#ground"
+        }
+      }
+    }
+  ],
+  "textures": {
+    "particle": "miragefairy2019:blocks/beanstalk",
+    "top": "miragefairy2019:blocks/beanstalk_top",
+    "main": "miragefairy2019:blocks/beanstalk_root",
+    "background": "miragefairy2019:blocks/beanstalk_root_background",
+    "ground": "miragefairy2019:blocks/beanstalk_root_ground"
+  }
+}
