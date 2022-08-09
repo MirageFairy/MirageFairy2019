@@ -54,8 +54,6 @@ open class BlockBeanstalk : Block(Material.WOOD) {
     }
 
 
-
-
     // レンダリング
 
     @SideOnly(Side.CLIENT)
