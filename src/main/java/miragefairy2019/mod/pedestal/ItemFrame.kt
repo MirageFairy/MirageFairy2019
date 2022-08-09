@@ -19,6 +19,7 @@ import miragefairy2019.lib.resourcemaker.DataPoint
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
+import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
@@ -71,12 +72,12 @@ val itemFrameModule = module {
         makeBlockStates {
             DataBlockStates(
                 variants = mapOf(
-                    "facing=down" to DataBlockState(model = "miragefairy2019:item_frame"),
-                    "facing=south" to DataBlockState(model = "miragefairy2019:item_frame", x = 90),
-                    "facing=west" to DataBlockState(model = "miragefairy2019:item_frame", x = 90, y = 90),
-                    "facing=north" to DataBlockState(model = "miragefairy2019:item_frame", x = 90, y = 180),
-                    "facing=east" to DataBlockState(model = "miragefairy2019:item_frame", x = 90, y = 270),
-                    "facing=up" to DataBlockState(model = "miragefairy2019:item_frame", x = 180)
+                    "facing=down" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:item_frame")),
+                    "facing=south" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:item_frame", x = 90)),
+                    "facing=west" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:item_frame", x = 90, y = 90)),
+                    "facing=north" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:item_frame", x = 90, y = 180)),
+                    "facing=east" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:item_frame", x = 90, y = 270)),
+                    "facing=up" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:item_frame", x = 180))
                 )
             )
         }

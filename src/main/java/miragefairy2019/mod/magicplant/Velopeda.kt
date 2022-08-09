@@ -16,6 +16,7 @@ import miragefairy2019.lib.obtain
 import miragefairy2019.lib.resourcemaker.DataBlockState
 import miragefairy2019.lib.resourcemaker.DataBlockStates
 import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
@@ -50,7 +51,7 @@ val velopedaModule = module {
     blockVelopeda = block({ BlockVelopeda() }, "velopeda") {
         setUnlocalizedName("velopeda")
         makeBlockStates {
-            DataBlockStates(variants = (0..5).associate { age -> "age=$age" to DataBlockState("miragefairy2019:velopeda_age$age") })
+            DataBlockStates(variants = (0..5).associate { age -> "age=$age" to DataSingleVariantList(DataBlockState("miragefairy2019:velopeda_age$age")) })
         }
     }
 

@@ -16,6 +16,7 @@ import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
+import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
@@ -57,7 +58,7 @@ object CompressedMaterials {
                         "miragefairy2019:topaz_block",
                         "miragefairy2019:tourmaline_block",
                         "miragefairy2019:velopeda_block"
-                    ).mapIndexed { i, model -> "variant=$i" to DataBlockState(model = model) }.toMap()
+                    ).mapIndexed { i, model -> "variant=$i" to DataSingleVariantList(DataBlockState(model = model)) }.toMap()
                 )
             }
         }

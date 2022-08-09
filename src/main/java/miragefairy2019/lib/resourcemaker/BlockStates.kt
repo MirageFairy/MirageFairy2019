@@ -24,7 +24,7 @@ class MakeBlockStatesScope(val resourceName: ResourceName)
 /** [net.minecraft.client.renderer.block.model.ModelBlockDefinition] */
 data class DataBlockStates(
     val forgeMarker: Int? = null,
-    val variants: Map<String, DataBlockState>? = null,
+    val variants: Map<String, DataVariantList>? = null,
     val multipart: List<DataPart>? = null
 ) {
     val jsonElement = jsonObjectNotNull(
@@ -83,15 +83,17 @@ data class DataPart(
 }
 
 
-val MakeBlockStatesScope.normal get() = DataBlockStates(variants = mapOf("normal" to DataBlockState(resourceName)))
+val MakeBlockStatesScope.normal get() = DataBlockStates(variants = mapOf("normal" to DataSingleVariantList(DataBlockState(resourceName))))
 val MakeBlockStatesScope.fluid
     get() = DataBlockStates(
         forgeMarker = 1,
         variants = mapOf(
-            "fluid" to DataBlockState(
-                model = "forge:fluid",
-                custom = jsonObject(
-                    "fluid" to resourceName.path.jsonElement
+            "fluid" to DataSingleVariantList(
+                DataBlockState(
+                    model = "forge:fluid",
+                    custom = jsonObject(
+                        "fluid" to resourceName.path.jsonElement
+                    )
                 )
             )
         )

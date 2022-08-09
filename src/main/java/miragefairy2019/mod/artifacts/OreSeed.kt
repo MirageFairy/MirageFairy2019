@@ -5,6 +5,7 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.resourcemaker.DataBlockState
 import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.material.EnumVariantOre1
@@ -52,7 +53,7 @@ object OreSeed {
         blockOreSeed = block({ BlockOreSeed(EnumOreSeedType.STONE) }, "ore_seed") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
-                DataBlockStates(variants = EnumVariantOreSeed.values().associate { "variant=$it" to DataBlockState("minecraft:stone") })
+                DataBlockStates(variants = EnumVariantOreSeed.values().associate { "variant=$it" to DataSingleVariantList(DataBlockState("minecraft:stone")) })
             }
         }
 
@@ -60,7 +61,7 @@ object OreSeed {
         blockOreSeedNether = block({ BlockOreSeed(EnumOreSeedType.NETHERRACK) }, "ore_seed_nether") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
-                DataBlockStates(variants = EnumVariantOreSeed.values().associate { "variant=$it" to DataBlockState("minecraft:netherrack") })
+                DataBlockStates(variants = EnumVariantOreSeed.values().associate { "variant=$it" to DataSingleVariantList(DataBlockState("minecraft:netherrack")) })
             }
         }
 
@@ -68,7 +69,7 @@ object OreSeed {
         blockOreSeedEnd = block({ BlockOreSeed(EnumOreSeedType.END_STONE) }, "ore_seed_end") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
-                DataBlockStates(variants = EnumVariantOreSeed.values().associate { "variant=$it" to DataBlockState("minecraft:end_stone") })
+                DataBlockStates(variants = EnumVariantOreSeed.values().associate { "variant=$it" to DataSingleVariantList(DataBlockState("minecraft:end_stone")) })
             }
         }
 

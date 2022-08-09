@@ -15,6 +15,7 @@ import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
+import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
@@ -41,7 +42,7 @@ val fairyWoodLogModule = module {
         makeBlockStates {
             DataBlockStates(
                 variants = listOf("y" to Pair(null, null), "z" to Pair(90, null), "x" to Pair(90, 90)).associate { axis ->
-                    "axis=${axis.first}" to DataBlockState("miragefairy2019:fairy_wood_log", x = axis.second.first, y = axis.second.second)
+                    "axis=${axis.first}" to DataSingleVariantList(DataBlockState("miragefairy2019:fairy_wood_log", x = axis.second.first, y = axis.second.second))
                 }
             )
         }

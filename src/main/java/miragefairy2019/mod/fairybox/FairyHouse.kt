@@ -18,6 +18,7 @@ import miragefairy2019.lib.resourcemaker.DataPoint
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
+import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
@@ -37,7 +38,7 @@ val fairyHouseModule = module {
         makeBlockStates {
             DataBlockStates(
                 variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
-                    "facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_box", y = facing.second)
+                    "facing=${facing.first}" to DataSingleVariantList(DataBlockState("miragefairy2019:fairy_box", y = facing.second))
                 }
             )
         }

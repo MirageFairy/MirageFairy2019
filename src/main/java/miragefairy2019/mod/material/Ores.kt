@@ -14,6 +14,7 @@ import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.DataPoint
+import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataUv
 import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.makeBlockModel
@@ -60,7 +61,7 @@ object Ores {
                         "miragefairy2019:netherrack_magnetite_ore",
                         "miragefairy2019:nephrite_ore",
                         "miragefairy2019:topaz_ore"
-                    ).mapIndexed { i, model -> "variant=$i" to DataBlockState(model = model) }.toMap()
+                    ).mapIndexed { i, model -> "variant=$i" to DataSingleVariantList(DataBlockState(model = model)) }.toMap()
                 )
             }
         }
@@ -108,7 +109,7 @@ object Ores {
                         "minecraft:stone",
                         "minecraft:stone",
                         "minecraft:stone"
-                    ).mapIndexed { i, model -> "variant=$i" to DataBlockState(model = model) }.toMap()
+                    ).mapIndexed { i, model -> "variant=$i" to DataSingleVariantList(DataBlockState(model = model)) }.toMap()
                 )
             }
         }

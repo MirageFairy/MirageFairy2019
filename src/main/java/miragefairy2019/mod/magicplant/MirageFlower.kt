@@ -15,6 +15,7 @@ import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.resourcemaker.DataBlockState
 import miragefairy2019.lib.resourcemaker.DataBlockStates
 import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
@@ -61,7 +62,7 @@ val mirageFlowerModule = module {
     blockMirageFlower = block({ BlockMirageFlower() }, "mirage_flower") {
         setUnlocalizedName("mirageFlower")
         makeBlockStates {
-            DataBlockStates(variants = (0..3).associate { age -> "age=$age" to DataBlockState("miragefairy2019:mirage_flower_age$age") })
+            DataBlockStates(variants = (0..3).associate { age -> "age=$age" to DataSingleVariantList(DataBlockState("miragefairy2019:mirage_flower_age$age")) })
         }
     }
 

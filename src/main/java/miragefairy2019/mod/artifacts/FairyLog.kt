@@ -15,6 +15,7 @@ import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.DataPoint
+import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
@@ -66,7 +67,7 @@ val fairyLogModule = module {
             DataBlockStates(
                 variants = listOf("oak", "birch", "spruce", "jungle", "acacia", "dark_oak").flatMap { variant ->
                     listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
-                        "facing=${facing.first},variant=$variant" to DataBlockState("miragefairy2019:${variant}_fairy_log", y = facing.second)
+                        "facing=${facing.first},variant=$variant" to DataSingleVariantList(DataBlockState("miragefairy2019:${variant}_fairy_log", y = facing.second))
                     }
                 }.toMap()
             )

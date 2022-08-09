@@ -20,6 +20,7 @@ import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataPoint
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
+import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
@@ -125,7 +126,7 @@ val mortarModule = module {
             makeBlockStates {
                 DataBlockStates(
                     variants = MortarVariant.values().associate { variant ->
-                        "variant=${variant.registryName}" to DataBlockState(model = "miragefairy2019:${variant.blockRegistryName}")
+                        "variant=${variant.registryName}" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:${variant.blockRegistryName}"))
                     }
                 )
             }

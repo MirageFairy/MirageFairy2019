@@ -15,6 +15,7 @@ import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
+import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
@@ -88,7 +89,7 @@ val twinkleStoneModule = module {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
                 DataBlockStates(
-                    variants = TwinkleStoneCard.values().map { "variant=${it.metadata}" to DataBlockState("miragefairy2019:${it.registryName}") }.toMap()
+                    variants = TwinkleStoneCard.values().map { "variant=${it.metadata}" to DataSingleVariantList(DataBlockState("miragefairy2019:${it.registryName}")) }.toMap()
                 )
             }
         }

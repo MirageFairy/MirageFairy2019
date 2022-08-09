@@ -23,6 +23,7 @@ import miragefairy2019.lib.resourcemaker.DataPoint
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
+import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
@@ -85,7 +86,7 @@ val fairyCollectionBoxModule = module {
             DataBlockStates(
                 variants = listOf("middle", "bottom").flatMap { context ->
                     listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
-                        "context=$context,facing=${facing.first}" to DataBlockState("miragefairy2019:fairy_building_$context", y = facing.second)
+                        "context=$context,facing=${facing.first}" to DataSingleVariantList(DataBlockState("miragefairy2019:fairy_building_$context", y = facing.second))
                     }
                 }.toMap()
             )
