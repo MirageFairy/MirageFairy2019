@@ -9,8 +9,8 @@ import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.modinitializer.tileEntity
 import miragefairy2019.lib.modinitializer.tileEntityRenderer
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
@@ -70,14 +70,14 @@ val itemFrameModule = module {
         setUnlocalizedName("itemFrame")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {
-            DataBlockStates(
+            DataModelBlockDefinition(
                 variants = mapOf(
-                    "facing=down" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:item_frame")),
-                    "facing=south" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:item_frame", x = 90)),
-                    "facing=west" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:item_frame", x = 90, y = 90)),
-                    "facing=north" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:item_frame", x = 90, y = 180)),
-                    "facing=east" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:item_frame", x = 90, y = 270)),
-                    "facing=up" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:item_frame", x = 180))
+                    "facing=down" to DataSingleVariantList(DataVariant(model = "miragefairy2019:item_frame")),
+                    "facing=south" to DataSingleVariantList(DataVariant(model = "miragefairy2019:item_frame", x = 90)),
+                    "facing=west" to DataSingleVariantList(DataVariant(model = "miragefairy2019:item_frame", x = 90, y = 90)),
+                    "facing=north" to DataSingleVariantList(DataVariant(model = "miragefairy2019:item_frame", x = 90, y = 180)),
+                    "facing=east" to DataSingleVariantList(DataVariant(model = "miragefairy2019:item_frame", x = 90, y = 270)),
+                    "facing=up" to DataSingleVariantList(DataVariant(model = "miragefairy2019:item_frame", x = 180))
                 )
             )
         }

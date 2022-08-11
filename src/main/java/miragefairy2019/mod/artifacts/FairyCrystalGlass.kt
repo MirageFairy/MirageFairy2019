@@ -9,14 +9,14 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
-import miragefairy2019.lib.resourcemaker.DataPart
+import miragefairy2019.lib.resourcemaker.DataSelector
 import miragefairy2019.lib.resourcemaker.DataPoint
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
@@ -126,34 +126,34 @@ object FairyCrystalGlass {
                 setUnlocalizedName("${prefix}FairyCrystalGlass".toLowerCaseHead())
                 setCreativeTab { Main.creativeTab }
                 makeBlockStates(resourceName.path) {
-                    DataBlockStates(
+                    DataModelBlockDefinition(
                         multipart = listOf(
-                            DataPart(
+                            DataSelector(
                                 `when` = mapOf("down" to false.jsonElement),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 180)
+                                apply = DataVariant("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 180)
                             ),
-                            DataPart(
+                            DataSelector(
                                 `when` = mapOf("up" to false.jsonElement),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}")
+                                apply = DataVariant("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}")
                             ),
-                            DataPart(
+                            DataSelector(
                                 `when` = mapOf("north" to false.jsonElement),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 90)
+                                apply = DataVariant("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 90)
                             ),
-                            DataPart(
+                            DataSelector(
                                 `when` = mapOf("south" to false.jsonElement),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = -90)
+                                apply = DataVariant("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = -90)
                             ),
-                            DataPart(
+                            DataSelector(
                                 `when` = mapOf("west" to false.jsonElement),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 90, y = -90)
+                                apply = DataVariant("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 90, y = -90)
                             ),
-                            DataPart(
+                            DataSelector(
                                 `when` = mapOf("east" to false.jsonElement),
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 90, y = 90)
+                                apply = DataVariant("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 90, y = 90)
                             ),
-                            DataPart(
-                                apply = DataBlockState("${ModMirageFairy2019.MODID}:${"${backgroundPrefix}FairyCrystalGlassBackground".toSnakeCase()}")
+                            DataSelector(
+                                apply = DataVariant("${ModMirageFairy2019.MODID}:${"${backgroundPrefix}FairyCrystalGlassBackground".toSnakeCase()}")
                             )
                         )
                     )

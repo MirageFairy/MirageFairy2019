@@ -8,8 +8,8 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
@@ -64,10 +64,10 @@ val fairyLogModule = module {
         setUnlocalizedName("fairyLog")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {
-            DataBlockStates(
+            DataModelBlockDefinition(
                 variants = listOf("oak", "birch", "spruce", "jungle", "acacia", "dark_oak").flatMap { variant ->
                     listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).map { facing ->
-                        "facing=${facing.first},variant=$variant" to DataSingleVariantList(DataBlockState("miragefairy2019:${variant}_fairy_log", y = facing.second))
+                        "facing=${facing.first},variant=$variant" to DataSingleVariantList(DataVariant("miragefairy2019:${variant}_fairy_log", y = facing.second))
                     }
                 }.toMap()
             )

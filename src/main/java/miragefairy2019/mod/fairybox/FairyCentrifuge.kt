@@ -49,8 +49,8 @@ import miragefairy2019.lib.modinitializer.tileEntity
 import miragefairy2019.lib.nbtProvider
 import miragefairy2019.lib.readFromNBT
 import miragefairy2019.lib.readInventory
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
@@ -132,9 +132,9 @@ val fairyCentrifugeModule = module {
         setUnlocalizedName("fairyCentrifuge")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {
-            DataBlockStates(
+            DataModelBlockDefinition(
                 variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
-                    "facing=${facing.first}" to DataSingleVariantList(DataBlockState("miragefairy2019:fairy_centrifuge", y = facing.second))
+                    "facing=${facing.first}" to DataSingleVariantList(DataVariant("miragefairy2019:fairy_centrifuge", y = facing.second))
                 }
             )
         }

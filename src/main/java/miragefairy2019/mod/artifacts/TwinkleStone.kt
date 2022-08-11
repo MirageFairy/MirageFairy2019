@@ -7,8 +7,8 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
@@ -88,8 +88,8 @@ val twinkleStoneModule = module {
         blockTwinkleStone = block({ BlockTwinkleStone() }, "twinkle_stone") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
-                DataBlockStates(
-                    variants = TwinkleStoneCard.values().map { "variant=${it.metadata}" to DataSingleVariantList(DataBlockState("miragefairy2019:${it.registryName}")) }.toMap()
+                DataModelBlockDefinition(
+                    variants = TwinkleStoneCard.values().map { "variant=${it.metadata}" to DataSingleVariantList(DataVariant("miragefairy2019:${it.registryName}")) }.toMap()
                 )
             }
         }

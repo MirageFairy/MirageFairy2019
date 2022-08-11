@@ -8,14 +8,14 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setStateMapper
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
-import miragefairy2019.lib.resourcemaker.DataPart
+import miragefairy2019.lib.resourcemaker.DataSelector
 import miragefairy2019.lib.resourcemaker.DataPoint
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
@@ -66,72 +66,72 @@ val beanstalkPipeModule = module {
 
     // ブロックステート生成
     makeBlockStates("beanstalk_pipe_straight") {
-        DataBlockStates(
+        DataModelBlockDefinition(
             variants = Facing.values().associate { facing ->
-                "facing=$facing" to DataSingleVariantList(DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_straight"), x = facing.x, y = facing.y))
+                "facing=$facing" to DataSingleVariantList(DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_straight"), x = facing.x, y = facing.y))
             }
         )
     }
     makeBlockStates("beanstalk_pipe_end") {
-        DataBlockStates(
+        DataModelBlockDefinition(
             variants = Facing.values().associate { facing ->
-                "facing=$facing" to DataSingleVariantList(DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_end"), x = facing.x, y = facing.y))
+                "facing=$facing" to DataSingleVariantList(DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_end"), x = facing.x, y = facing.y))
             }
         )
     }
     makeBlockStates("beanstalk_pipe") {
-        DataBlockStates(
+        DataModelBlockDefinition(
             multipart = listOf(
-                DataPart(
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_elbow"))
+                DataSelector(
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_elbow"))
                 ),
-                DataPart(
+                DataSelector(
                     `when` = mapOf("facing" to "down".jsonElement),
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_down"), x = Facing.DOWN.x, y = Facing.DOWN.y)
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_down"), x = Facing.DOWN.x, y = Facing.DOWN.y)
                 ),
-                DataPart(
+                DataSelector(
                     `when` = mapOf("facing" to "up".jsonElement),
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_down"), x = Facing.UP.x, y = Facing.UP.y)
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_down"), x = Facing.UP.x, y = Facing.UP.y)
                 ),
-                DataPart(
+                DataSelector(
                     `when` = mapOf("facing" to "north".jsonElement),
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_down"), x = Facing.NORTH.x, y = Facing.NORTH.y)
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_down"), x = Facing.NORTH.x, y = Facing.NORTH.y)
                 ),
-                DataPart(
+                DataSelector(
                     `when` = mapOf("facing" to "south".jsonElement),
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_down"), x = Facing.SOUTH.x, y = Facing.SOUTH.y)
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_down"), x = Facing.SOUTH.x, y = Facing.SOUTH.y)
                 ),
-                DataPart(
+                DataSelector(
                     `when` = mapOf("facing" to "west".jsonElement),
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_down"), x = Facing.WEST.x, y = Facing.WEST.y)
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_down"), x = Facing.WEST.x, y = Facing.WEST.y)
                 ),
-                DataPart(
+                DataSelector(
                     `when` = mapOf("facing" to "east".jsonElement),
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_down"), x = Facing.EAST.x, y = Facing.EAST.y)
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_down"), x = Facing.EAST.x, y = Facing.EAST.y)
                 ),
-                DataPart(
+                DataSelector(
                     `when` = mapOf("down" to true.jsonElement),
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_up"), x = Facing.DOWN.opposite.x, y = Facing.DOWN.opposite.y)
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_up"), x = Facing.DOWN.opposite.x, y = Facing.DOWN.opposite.y)
                 ),
-                DataPart(
+                DataSelector(
                     `when` = mapOf("up" to true.jsonElement),
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_up"), x = Facing.UP.opposite.x, y = Facing.UP.opposite.y)
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_up"), x = Facing.UP.opposite.x, y = Facing.UP.opposite.y)
                 ),
-                DataPart(
+                DataSelector(
                     `when` = mapOf("north" to true.jsonElement),
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_up"), x = Facing.NORTH.opposite.x, y = Facing.NORTH.opposite.y)
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_up"), x = Facing.NORTH.opposite.x, y = Facing.NORTH.opposite.y)
                 ),
-                DataPart(
+                DataSelector(
                     `when` = mapOf("south" to true.jsonElement),
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_up"), x = Facing.SOUTH.opposite.x, y = Facing.SOUTH.opposite.y)
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_up"), x = Facing.SOUTH.opposite.x, y = Facing.SOUTH.opposite.y)
                 ),
-                DataPart(
+                DataSelector(
                     `when` = mapOf("west" to true.jsonElement),
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_up"), x = Facing.WEST.opposite.x, y = Facing.WEST.opposite.y)
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_up"), x = Facing.WEST.opposite.x, y = Facing.WEST.opposite.y)
                 ),
-                DataPart(
+                DataSelector(
                     `when` = mapOf("east" to true.jsonElement),
-                    apply = DataBlockState(model = ResourceName("miragefairy2019", "beanstalk_pipe_up"), x = Facing.EAST.opposite.x, y = Facing.EAST.opposite.y)
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_up"), x = Facing.EAST.opposite.x, y = Facing.EAST.opposite.y)
                 )
             )
         )

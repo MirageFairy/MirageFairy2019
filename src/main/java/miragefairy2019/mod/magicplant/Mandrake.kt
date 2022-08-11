@@ -13,8 +13,8 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.obtain
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.generated
@@ -55,7 +55,7 @@ val mandrakeModule = module {
     blockMandrake = block({ BlockMandrake() }, "mandrake") {
         setUnlocalizedName("mandrake")
         makeBlockStates {
-            DataBlockStates(variants = (0..4).associate { age -> "age=$age" to DataSingleVariantList(DataBlockState("miragefairy2019:mandrake_age$age")) })
+            DataModelBlockDefinition(variants = (0..4).associate { age -> "age=$age" to DataSingleVariantList(DataVariant("miragefairy2019:mandrake_age$age")) })
         }
     }
 

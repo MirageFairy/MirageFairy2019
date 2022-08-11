@@ -10,8 +10,8 @@ import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.modinitializer.tileEntity
 import miragefairy2019.lib.modinitializer.tileEntityRenderer
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
@@ -124,9 +124,9 @@ val mortarModule = module {
             setUnlocalizedName("mortar")
             setCreativeTab { Main.creativeTab }
             makeBlockStates {
-                DataBlockStates(
+                DataModelBlockDefinition(
                     variants = MortarVariant.values().associate { variant ->
-                        "variant=${variant.registryName}" to DataSingleVariantList(DataBlockState(model = "miragefairy2019:${variant.blockRegistryName}"))
+                        "variant=${variant.registryName}" to DataSingleVariantList(DataVariant(model = "miragefairy2019:${variant.blockRegistryName}"))
                     }
                 )
             }

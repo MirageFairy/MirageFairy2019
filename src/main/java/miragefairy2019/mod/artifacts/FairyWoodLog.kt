@@ -9,8 +9,8 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
@@ -40,9 +40,9 @@ val fairyWoodLogModule = module {
         setUnlocalizedName("fairyWoodLog")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {
-            DataBlockStates(
+            DataModelBlockDefinition(
                 variants = listOf("y" to Pair(null, null), "z" to Pair(90, null), "x" to Pair(90, 90)).associate { axis ->
-                    "axis=${axis.first}" to DataSingleVariantList(DataBlockState("miragefairy2019:fairy_wood_log", x = axis.second.first, y = axis.second.second))
+                    "axis=${axis.first}" to DataSingleVariantList(DataVariant("miragefairy2019:fairy_wood_log", x = axis.second.first, y = axis.second.second))
                 }
             )
         }

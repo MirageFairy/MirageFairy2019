@@ -6,8 +6,8 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
@@ -37,9 +37,9 @@ val beanstalkRootModule = module {
         setUnlocalizedName("beanstalkRoot")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {
-            DataBlockStates(
+            DataModelBlockDefinition(
                 variants = Facing.values().associate { facing ->
-                    "facing=$facing" to DataSingleVariantList(DataBlockState(model = resourceName, x = facing.x, y = facing.y))
+                    "facing=$facing" to DataSingleVariantList(DataVariant(model = resourceName, x = facing.x, y = facing.y))
                 }
             )
         }

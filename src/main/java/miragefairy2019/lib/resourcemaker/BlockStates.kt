@@ -10,11 +10,11 @@ import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 
 
-fun ModScope.makeBlockStates(path: String, creator: MakeBlockStatesScope.() -> DataBlockStates) = onMakeResource {
+fun ModScope.makeBlockStates(path: String, creator: MakeBlockStatesScope.() -> DataModelBlockDefinition) = onMakeResource {
     place("assets/$modId/blockstates/$path.json", MakeBlockStatesScope(ResourceName(modId, path)).creator().jsonElement)
 }
 
-fun NamedScope.makeBlockStates(creator: MakeBlockStatesScope.() -> DataBlockStates) = modScope.onMakeResource {
+fun NamedScope.makeBlockStates(creator: MakeBlockStatesScope.() -> DataModelBlockDefinition) = modScope.onMakeResource {
     place("assets/${resourceName.domain}/blockstates/${resourceName.path}.json", MakeBlockStatesScope(resourceName).creator().jsonElement)
 }
 
@@ -22,10 +22,10 @@ class MakeBlockStatesScope(val resourceName: ResourceName)
 
 
 /** [net.minecraft.client.renderer.block.model.ModelBlockDefinition] */
-data class DataBlockStates(
+data class DataModelBlockDefinition(
     val forgeMarker: Int? = null,
     val variants: Map<String, DataVariantList>? = null,
-    val multipart: List<DataPart>? = null
+    val multipart: List<DataSelector>? = null
 ) {
     val jsonElement = jsonObjectNotNull(
         "forge_marker" to forgeMarker?.jsonElement,
@@ -39,23 +39,23 @@ abstract class DataVariantList {
 }
 
 /** [net.minecraft.client.renderer.block.model.VariantList] */
-data class DataArrayVariantList(
-    val variants: List<DataBlockState>
+data class DataRandomVariantList(
+    val variants: List<DataVariant>
 ) : DataVariantList() {
-    constructor(vararg variants: DataBlockState) : this(variants.toList())
+    constructor(vararg variants: DataVariant) : this(variants.toList())
 
     override val jsonElement = variants.map { it.jsonElement }.jsonArray
 }
 
 /** [net.minecraft.client.renderer.block.model.VariantList] */
 data class DataSingleVariantList(
-    val variant: DataBlockState
+    val variant: DataVariant
 ) : DataVariantList() {
     override val jsonElement = variant.jsonElement
 }
 
 /** [net.minecraft.client.renderer.block.model.Variant] */
-data class DataBlockState(
+data class DataVariant(
     val model: String,
     val x: Int? = null,
     val y: Int? = null,
@@ -72,9 +72,9 @@ data class DataBlockState(
 }
 
 /** [net.minecraft.client.renderer.block.model.multipart.Selector] */
-data class DataPart(
+data class DataSelector(
     val `when`: Map<String, JsonElement>? = null,
-    val apply: DataBlockState
+    val apply: DataVariant
 ) {
     val jsonElement = jsonObjectNotNull(
         "when" to `when`?.jsonObject,
@@ -83,13 +83,13 @@ data class DataPart(
 }
 
 
-val MakeBlockStatesScope.normal get() = DataBlockStates(variants = mapOf("normal" to DataSingleVariantList(DataBlockState(resourceName))))
+val MakeBlockStatesScope.normal get() = DataModelBlockDefinition(variants = mapOf("normal" to DataSingleVariantList(DataVariant(resourceName))))
 val MakeBlockStatesScope.fluid
-    get() = DataBlockStates(
+    get() = DataModelBlockDefinition(
         forgeMarker = 1,
         variants = mapOf(
             "fluid" to DataSingleVariantList(
-                DataBlockState(
+                DataVariant(
                     model = "forge:fluid",
                     custom = jsonObject(
                         "fluid" to resourceName.path.jsonElement

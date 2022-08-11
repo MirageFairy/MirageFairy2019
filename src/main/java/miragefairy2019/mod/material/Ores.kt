@@ -7,8 +7,8 @@ import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
@@ -43,7 +43,7 @@ object Ores {
         blockOre1 = block({ BlockOre(EnumVariantOre1.variantList) }, "ore1") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
-                DataBlockStates(
+                DataModelBlockDefinition(
                     variants = listOf(
                         "miragefairy2019:apatite_ore",
                         "miragefairy2019:fluorite_ore",
@@ -61,7 +61,7 @@ object Ores {
                         "miragefairy2019:netherrack_magnetite_ore",
                         "miragefairy2019:nephrite_ore",
                         "miragefairy2019:topaz_ore"
-                    ).mapIndexed { i, model -> "variant=$i" to DataSingleVariantList(DataBlockState(model = model)) }.toMap()
+                    ).mapIndexed { i, model -> "variant=$i" to DataSingleVariantList(DataVariant(model = model)) }.toMap()
                 )
             }
         }
@@ -91,7 +91,7 @@ object Ores {
         blockOre2 = block({ BlockOre(EnumVariantOre2.variantList) }, "ore2") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
-                DataBlockStates(
+                DataModelBlockDefinition(
                     variants = listOf(
                         "miragefairy2019:tourmaline_ore",
                         "miragefairy2019:heliolite_ore",
@@ -109,7 +109,7 @@ object Ores {
                         "minecraft:stone",
                         "minecraft:stone",
                         "minecraft:stone"
-                    ).mapIndexed { i, model -> "variant=$i" to DataSingleVariantList(DataBlockState(model = model)) }.toMap()
+                    ).mapIndexed { i, model -> "variant=$i" to DataSingleVariantList(DataVariant(model = model)) }.toMap()
                 )
             }
         }

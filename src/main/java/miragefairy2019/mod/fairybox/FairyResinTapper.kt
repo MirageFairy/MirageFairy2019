@@ -7,8 +7,8 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.modinitializer.tileEntity
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
@@ -50,9 +50,9 @@ val fairyResinTapperModule = module {
         setUnlocalizedName("fairyResinTapper")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {
-            DataBlockStates(
+            DataModelBlockDefinition(
                 variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
-                    "facing=${facing.first}" to DataSingleVariantList(DataBlockState("miragefairy2019:fairy_resin_tapper", y = facing.second))
+                    "facing=${facing.first}" to DataSingleVariantList(DataVariant("miragefairy2019:fairy_resin_tapper", y = facing.second))
                 }
             )
         }

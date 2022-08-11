@@ -8,8 +8,8 @@ import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
-import miragefairy2019.lib.resourcemaker.DataBlockState
-import miragefairy2019.lib.resourcemaker.DataBlockStates
+import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataIngredient
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
@@ -40,7 +40,7 @@ object CompressedMaterials {
         blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList) }, "materials1") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
-                DataBlockStates(
+                DataModelBlockDefinition(
                     variants = listOf(
                         "miragefairy2019:apatite_block",
                         "miragefairy2019:fluorite_block",
@@ -58,7 +58,7 @@ object CompressedMaterials {
                         "miragefairy2019:topaz_block",
                         "miragefairy2019:tourmaline_block",
                         "miragefairy2019:velopeda_block"
-                    ).mapIndexed { i, model -> "variant=$i" to DataSingleVariantList(DataBlockState(model = model)) }.toMap()
+                    ).mapIndexed { i, model -> "variant=$i" to DataSingleVariantList(DataVariant(model = model)) }.toMap()
                 )
             }
         }
