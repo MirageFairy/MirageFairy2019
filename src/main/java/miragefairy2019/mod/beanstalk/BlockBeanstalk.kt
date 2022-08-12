@@ -22,7 +22,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class BlockBeanstalk : Block(Material.WOOD) {
+abstract class BlockBeanstalk : Block(Material.WOOD) {
     companion object {
         val FACING: PropertyEnum<EnumFacing> = PropertyEnum.create("facing", EnumFacing::class.java)
     }
@@ -67,5 +67,9 @@ open class BlockBeanstalk : Block(Material.WOOD) {
     // 性質
 
     override fun isLadder(blockState: IBlockState, world: IBlockAccess, blockPos: BlockPos, entity: EntityLivingBase) = true
+
+}
+
+class BlockBeanstalkEnd : BlockBeanstalk() {
 
 }

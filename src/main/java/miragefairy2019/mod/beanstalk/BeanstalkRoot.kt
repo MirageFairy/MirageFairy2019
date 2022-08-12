@@ -33,7 +33,7 @@ lateinit var itemBlockBeanstalkRoot: () -> ItemBlock
 val beanstalkRootModule = module {
 
     // ブロック
-    blockBeanstalkRoot = block({ BlockBeanstalk() }, "beanstalk_root") {
+    blockBeanstalkRoot = block({ BlockBeanstalkEnd() }, "beanstalk_root") {
         setUnlocalizedName("beanstalkRoot")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {
