@@ -1,5 +1,6 @@
 package miragefairy2019.mod.systems
 
+import miragefairy2019.lib.modinitializer.ItemScope
 import miragefairy2019.lib.modinitializer.module
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -26,6 +27,14 @@ interface IFacedCursorHandler {
 object ApiFacedCursor {
     val facedCursorHandlers = mutableMapOf<Item, IFacedCursorHandler>()
 }
+
+
+fun <I : Item> ItemScope<I>.setFacedCursor() = modScope.onInit {
+    ApiFacedCursor.facedCursorHandlers[item] = object : IFacedCursorHandler {
+        override fun hasFacedCursor(item: Item, itemStack: ItemStack, world: World, blockPos: BlockPos, player: EntityPlayer, rayTraceResult: RayTraceResult) = true
+    }
+}
+
 
 val facedCursorModule = module {
     onInit {
