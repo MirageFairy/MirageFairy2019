@@ -33,6 +33,7 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.mod.placeditem.keyBindingPlaceItem
+import miragefairy2019.mod.systems.getAdvancedFacing
 import miragefairy2019.mod.systems.setFacedCursor
 import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.SoundType
@@ -187,40 +188,7 @@ class BlockItemFrame : BlockPedestal<TileEntityItemFrame>(Material.WOOD, { it as
     override fun withRotation(blockState: IBlockState, rotation: Rotation) = getBlockState(rotation.rotate(getFacing(blockState)))
     override fun withMirror(blockState: IBlockState, mirror: Mirror) = getBlockState(mirror.mirror(getFacing(blockState)))
     override fun getStateForPlacement(world: World, blockPos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, metadata: Int, placer: EntityLivingBase, hand: EnumHand): IBlockState {
-
-        // 角をクリック
-        val opposite = when (facing) {
-            EnumFacing.WEST, EnumFacing.EAST -> (hitY <= 0.25 || hitY >= 0.75) && (hitZ <= 0.25 || hitZ >= 0.75)
-            EnumFacing.DOWN, EnumFacing.UP -> (hitX <= 0.25 || hitX >= 0.75) && (hitZ <= 0.25 || hitZ >= 0.75)
-            EnumFacing.NORTH, EnumFacing.SOUTH -> (hitX <= 0.25 || hitX >= 0.75) && (hitY <= 0.25 || hitY >= 0.75)
-        }
-        if (opposite) return getBlockState(facing)
-
-        // 辺をクリック
-        when (facing) {
-            EnumFacing.DOWN, EnumFacing.UP, EnumFacing.NORTH, EnumFacing.SOUTH -> {
-                if (hitX <= 0.25) return getBlockState(EnumFacing.WEST)
-                if (hitX >= 0.75) return getBlockState(EnumFacing.EAST)
-            }
-            else -> Unit
-        }
-        when (facing) {
-            EnumFacing.WEST, EnumFacing.EAST, EnumFacing.NORTH, EnumFacing.SOUTH -> {
-                if (hitY <= 0.25) return getBlockState(EnumFacing.DOWN)
-                if (hitY >= 0.75) return getBlockState(EnumFacing.UP)
-            }
-            else -> Unit
-        }
-        when (facing) {
-            EnumFacing.WEST, EnumFacing.EAST, EnumFacing.DOWN, EnumFacing.UP -> {
-                if (hitZ <= 0.25) return getBlockState(EnumFacing.NORTH)
-                if (hitZ >= 0.75) return getBlockState(EnumFacing.SOUTH)
-            }
-            else -> Unit
-        }
-
-        // 中央部分をクリック
-        return getBlockState(facing.opposite)
+        return getBlockState(getAdvancedFacing(facing, hitX, hitY, hitZ))
     }
 
 

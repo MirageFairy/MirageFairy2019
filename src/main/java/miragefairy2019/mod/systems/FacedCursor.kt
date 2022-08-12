@@ -41,6 +41,43 @@ fun <I : Item> ItemScope<I>.setFacedCursor() = modScope.onInit {
     }
 }
 
+fun getAdvancedFacing(facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumFacing {
+
+    // 角をクリック
+    val opposite = when (facing) {
+        EnumFacing.WEST, EnumFacing.EAST -> (hitY <= 0.25 || hitY >= 0.75) && (hitZ <= 0.25 || hitZ >= 0.75)
+        EnumFacing.DOWN, EnumFacing.UP -> (hitX <= 0.25 || hitX >= 0.75) && (hitZ <= 0.25 || hitZ >= 0.75)
+        EnumFacing.NORTH, EnumFacing.SOUTH -> (hitX <= 0.25 || hitX >= 0.75) && (hitY <= 0.25 || hitY >= 0.75)
+    }
+    if (opposite) return facing
+
+    // 辺をクリック
+    when (facing) {
+        EnumFacing.DOWN, EnumFacing.UP, EnumFacing.NORTH, EnumFacing.SOUTH -> {
+            if (hitX <= 0.25) return EnumFacing.WEST
+            if (hitX >= 0.75) return EnumFacing.EAST
+        }
+        else -> Unit
+    }
+    when (facing) {
+        EnumFacing.WEST, EnumFacing.EAST, EnumFacing.NORTH, EnumFacing.SOUTH -> {
+            if (hitY <= 0.25) return EnumFacing.DOWN
+            if (hitY >= 0.75) return EnumFacing.UP
+        }
+        else -> Unit
+    }
+    when (facing) {
+        EnumFacing.WEST, EnumFacing.EAST, EnumFacing.DOWN, EnumFacing.UP -> {
+            if (hitZ <= 0.25) return EnumFacing.NORTH
+            if (hitZ >= 0.75) return EnumFacing.SOUTH
+        }
+        else -> Unit
+    }
+
+    // 中央部分をクリック
+    return facing.opposite
+}
+
 
 val facedCursorModule = module {
     onInit {
