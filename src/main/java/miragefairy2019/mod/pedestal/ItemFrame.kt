@@ -33,8 +33,7 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.mod.placeditem.keyBindingPlaceItem
-import miragefairy2019.mod.systems.ApiFacedCursor
-import miragefairy2019.mod.systems.IFacedCursorHandler
+import miragefairy2019.mod.systems.setFacedCursor
 import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
@@ -45,7 +44,6 @@ import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
-import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -56,7 +54,6 @@ import net.minecraft.util.Rotation
 import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.RayTraceResult
 import net.minecraft.util.text.TextComponentKeybind
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -139,6 +136,7 @@ val itemFrameModule = module {
     // アイテム
     item({ ItemBlock(blockItemFrame()) }, "item_frame") {
         setCustomModelResourceLocation(variant = "facing=down")
+        setFacedCursor()
         makeItemModel { block }
         makeRecipe {
             DataShapelessRecipe(
@@ -148,11 +146,6 @@ val itemFrameModule = module {
                 ),
                 result = DataResult(item = "miragefairy2019:item_frame")
             )
-        }
-        onInit {
-            ApiFacedCursor.facedCursorHandlers[item] = object : IFacedCursorHandler {
-                override fun hasFacedCursor(item: Item, itemStack: ItemStack, world: World, blockPos: BlockPos, player: EntityPlayer, rayTraceResult: RayTraceResult) = true
-            }
         }
     }
 
