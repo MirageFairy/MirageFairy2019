@@ -3,9 +3,9 @@ package miragefairy2019.mod.artifacts
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
-import miragefairy2019.lib.resourcemaker.DataVariant
 import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
+import miragefairy2019.lib.resourcemaker.DataVariant
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.material.EnumVariantOre1

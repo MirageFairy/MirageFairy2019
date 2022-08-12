@@ -30,7 +30,6 @@ import miragefairy2019.mod.fairy.colorSet
 import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.fairy.rare
 import miragefairy2019.mod.magicplant.BlockMagicPlant
-import miragefairy2019.mod.magicplant.blockMirageFlower
 import miragefairy2019.mod.magicplant.getGrowthRateModifiers
 import miragefairy2019.mod.magicplant.growthRate
 import miragefairy2019.mod.oreseed.ApiOreSeedDrop
