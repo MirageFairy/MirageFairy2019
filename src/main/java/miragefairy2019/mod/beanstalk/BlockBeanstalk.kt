@@ -1,5 +1,8 @@
 package miragefairy2019.mod.beanstalk
 
+import miragefairy2019.mod.systems.IFacedCursorBlock
+import miragefairy2019.mod.systems.IFacedCursorHandler
+import miragefairy2019.mod.systems.getAdvancedFacing
 import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.block.Block
@@ -10,6 +13,9 @@ import net.minecraft.block.state.BlockFaceShape
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
+import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
@@ -18,12 +24,13 @@ import net.minecraft.util.Mirror
 import net.minecraft.util.Rotation
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.RayTraceResult
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-abstract class BlockBeanstalk : Block(Material.WOOD) {
+abstract class BlockBeanstalk : Block(Material.WOOD), IFacedCursorBlock {
     companion object {
         val FACING: PropertyEnum<EnumFacing> = PropertyEnum.create("facing", EnumFacing::class.java)
     }
@@ -51,7 +58,7 @@ abstract class BlockBeanstalk : Block(Material.WOOD) {
     override fun withMirror(blockState: IBlockState, mirror: Mirror): IBlockState = getBlockState(mirror.mirror(getFacing(blockState)))
 
     override fun getStateForPlacement(world: World, blockPos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, metadata: Int, placer: EntityLivingBase, hand: EnumHand): IBlockState {
-        return getBlockState(facing.opposite)
+        return getBlockState(getAdvancedFacing(facing, hitX, hitY, hitZ))
     }
 
 
@@ -63,6 +70,9 @@ abstract class BlockBeanstalk : Block(Material.WOOD) {
     override fun isOpaqueCube(state: IBlockState) = false
     override fun isFullCube(state: IBlockState) = false
     override fun getBlockFaceShape(world: IBlockAccess, blockState: IBlockState, blockPos: BlockPos, facing: EnumFacing) = BlockFaceShape.UNDEFINED
+    override fun getFacedCursorHandler(itemStack: ItemStack) = object : IFacedCursorHandler {
+        override fun hasFacedCursor(item: Item, itemStack: ItemStack, world: World, blockPos: BlockPos, player: EntityPlayer, rayTraceResult: RayTraceResult) = true
+    }
 
 
     // 性質
