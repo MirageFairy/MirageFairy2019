@@ -2,6 +2,7 @@ package miragefairy2019.mod.systems
 
 import miragefairy2019.lib.modinitializer.ItemScope
 import miragefairy2019.lib.modinitializer.module
+import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.renderer.BufferBuilder
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
+import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
@@ -22,6 +24,10 @@ import org.lwjgl.opengl.GL11
 
 interface IFacedCursorHandler {
     fun hasFacedCursor(item: Item, itemStack: ItemStack, world: World, blockPos: BlockPos, player: EntityPlayer, rayTraceResult: RayTraceResult): Boolean
+}
+
+interface IFacedCursorBlock {
+    fun getFacedCursorHandler(itemStack: ItemStack): IFacedCursorHandler?
 }
 
 object ApiFacedCursor {
@@ -48,7 +54,9 @@ val facedCursorModule = module {
                     // 有効なアイテムを所持している場合のみ
                     fun hasFacedCursor(itemStack: ItemStack): Boolean {
                         val item = itemStack.item
-                        val handler = ApiFacedCursor.facedCursorHandlers[item] ?: return false
+                        val handler = ApiFacedCursor.facedCursorHandlers[item]
+                            ?: item.castOrNull<ItemBlock>()?.block?.castOrNull<IFacedCursorBlock>()?.getFacedCursorHandler(itemStack)
+                            ?: return false
                         return handler.hasFacedCursor(item, itemStack, event.player.world, event.target.blockPos, event.player, event.target)
                     }
                     if (!(hasFacedCursor(event.player.heldItemMainhand) || hasFacedCursor(event.player.heldItemOffhand))) return
