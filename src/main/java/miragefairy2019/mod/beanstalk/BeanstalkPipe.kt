@@ -26,6 +26,7 @@ import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.get
+import miragefairy2019.libkt.union
 import miragefairy2019.mod.Main
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import net.minecraft.block.properties.PropertyBool
@@ -39,6 +40,8 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.RayTraceResult
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
@@ -342,16 +345,39 @@ class BlockBeanstalkPipe : BlockBeanstalk() {
     private val collisionBoundingBoxSouth = AxisAlignedBB(5 / 16.0, 5 / 16.0, 11 / 16.0, 11 / 16.0, 11 / 16.0, 16 / 16.0)
     private val collisionBoundingBoxWest = AxisAlignedBB(0 / 16.0, 5 / 16.0, 5 / 16.0, 5 / 16.0, 11 / 16.0, 11 / 16.0)
     private val collisionBoundingBoxEast = AxisAlignedBB(11 / 16.0, 5 / 16.0, 5 / 16.0, 16 / 16.0, 11 / 16.0, 11 / 16.0)
+    private fun getBoxes(actualBlockState: IBlockState): List<AxisAlignedBB> {
+        val list = mutableListOf<AxisAlignedBB>()
+        list += collisionBoundingBoxElbow
+        val facing = getFacing(actualBlockState)
+        if (facing == EnumFacing.DOWN || actualBlockState[DOWN]) list += collisionBoundingBoxDown
+        if (facing == EnumFacing.UP || actualBlockState[UP]) list += collisionBoundingBoxUp
+        if (facing == EnumFacing.NORTH || actualBlockState[NORTH]) list += collisionBoundingBoxNorth
+        if (facing == EnumFacing.SOUTH || actualBlockState[SOUTH]) list += collisionBoundingBoxSouth
+        if (facing == EnumFacing.WEST || actualBlockState[WEST]) list += collisionBoundingBoxWest
+        if (facing == EnumFacing.EAST || actualBlockState[EAST]) list += collisionBoundingBoxEast
+        return list
+    }
+
+    override fun getBoundingBox(blockState: IBlockState, world: IBlockAccess, blockPos: BlockPos): AxisAlignedBB {
+        if (world !is World) return FULL_BLOCK_AABB
+        return getBoxes(blockState.getActualState(world, blockPos)).union() ?: FULL_BLOCK_AABB
+    }
+
     override fun addCollisionBoxToList(blockState: IBlockState, world: World, blockPos: BlockPos, entityBox: AxisAlignedBB, collidingBoxes: MutableList<AxisAlignedBB>, entity: Entity?, isActualState: Boolean) {
-        val actualBlockState = if (!isActualState) getActualState(blockState, world, blockPos) else blockState
-        addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxElbow)
-        val facing = getFacing(blockState)
-        if (facing == EnumFacing.DOWN || actualBlockState[DOWN]) addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxDown)
-        if (facing == EnumFacing.UP || actualBlockState[UP]) addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxUp)
-        if (facing == EnumFacing.NORTH || actualBlockState[NORTH]) addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxNorth)
-        if (facing == EnumFacing.SOUTH || actualBlockState[SOUTH]) addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxSouth)
-        if (facing == EnumFacing.WEST || actualBlockState[WEST]) addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxWest)
-        if (facing == EnumFacing.EAST || actualBlockState[EAST]) addCollisionBoxToList(blockPos, entityBox, collidingBoxes, collisionBoundingBoxEast)
+        val actualBlockState = if (isActualState) blockState else blockState.getActualState(world, blockPos)
+        getBoxes(actualBlockState).forEach {
+            addCollisionBoxToList(blockPos, entityBox, collidingBoxes, it)
+        }
+    }
+
+    override fun collisionRayTrace(blockState: IBlockState, world: World, blockPos: BlockPos, start: Vec3d, end: Vec3d): RayTraceResult? {
+        val collisionBoxes = getBoxes(blockState.getActualState(world, blockPos))
+        val rayTraceResultAndDistanceSqList = collisionBoxes.mapNotNull {
+            val rayTraceResult = rayTrace(blockPos, start, end, it) ?: return@mapNotNull null
+            Pair(rayTraceResult, rayTraceResult.hitVec.squareDistanceTo(start))
+        }
+        val (rayTraceResult, _) = rayTraceResultAndDistanceSqList.minBy { it.second } ?: return null
+        return rayTraceResult
     }
 
 }

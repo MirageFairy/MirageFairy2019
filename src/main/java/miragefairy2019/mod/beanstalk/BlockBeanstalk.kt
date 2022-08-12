@@ -16,6 +16,7 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.Mirror
 import net.minecraft.util.Rotation
+import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -71,5 +72,24 @@ abstract class BlockBeanstalk : Block(Material.WOOD) {
 }
 
 class BlockBeanstalkEnd : BlockBeanstalk() {
+
+    // Box
+
+    private val collisionBoundingBoxDown = AxisAlignedBB(5 / 16.0, 0 / 16.0, 5 / 16.0, 11 / 16.0, 16 / 16.0, 11 / 16.0)
+    private val collisionBoundingBoxUp = AxisAlignedBB(5 / 16.0, 0 / 16.0, 5 / 16.0, 11 / 16.0, 16 / 16.0, 11 / 16.0)
+    private val collisionBoundingBoxNorth = AxisAlignedBB(5 / 16.0, 5 / 16.0, 0 / 16.0, 11 / 16.0, 11 / 16.0, 16 / 16.0)
+    private val collisionBoundingBoxSouth = AxisAlignedBB(5 / 16.0, 5 / 16.0, 0 / 16.0, 11 / 16.0, 11 / 16.0, 16 / 16.0)
+    private val collisionBoundingBoxWest = AxisAlignedBB(0 / 16.0, 5 / 16.0, 5 / 16.0, 16 / 16.0, 11 / 16.0, 11 / 16.0)
+    private val collisionBoundingBoxEast = AxisAlignedBB(0 / 16.0, 5 / 16.0, 5 / 16.0, 16 / 16.0, 11 / 16.0, 11 / 16.0)
+    override fun getCollisionBoundingBox(blockState: IBlockState, world: IBlockAccess, blockPos: BlockPos) = when (getFacing(blockState)) {
+        EnumFacing.DOWN -> collisionBoundingBoxDown
+        EnumFacing.UP -> collisionBoundingBoxUp
+        EnumFacing.NORTH -> collisionBoundingBoxNorth
+        EnumFacing.SOUTH -> collisionBoundingBoxSouth
+        EnumFacing.WEST -> collisionBoundingBoxWest
+        EnumFacing.EAST -> collisionBoundingBoxEast
+    }
+
+    override fun getBoundingBox(blockState: IBlockState, world: IBlockAccess, blockPos: BlockPos) = getCollisionBoundingBox(blockState, world, blockPos)
 
 }
