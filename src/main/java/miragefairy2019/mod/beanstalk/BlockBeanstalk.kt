@@ -30,7 +30,11 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-abstract class BlockBeanstalk : Block(Material.WOOD), IFacedCursorBlock {
+interface IBeanstalkBlock {
+    fun getFacing(blockState: IBlockState, world: IBlockAccess, pos: BlockPos): EnumFacing?
+}
+
+abstract class BlockBeanstalk : Block(Material.WOOD), IBeanstalkBlock, IFacedCursorBlock {
     companion object {
         val FACING: PropertyEnum<EnumFacing> = PropertyEnum.create("facing", EnumFacing::class.java)
     }
@@ -51,6 +55,7 @@ abstract class BlockBeanstalk : Block(Material.WOOD), IFacedCursorBlock {
 
     fun getBlockState(facing: EnumFacing): IBlockState = defaultState.withProperty(FACING, facing)
     fun getFacing(blockState: IBlockState): EnumFacing = blockState.getValue(FACING)
+    override fun getFacing(blockState: IBlockState, world: IBlockAccess, pos: BlockPos) = getFacing(blockState)
     override fun getStateFromMeta(meta: Int) = getBlockState(EnumFacing.VALUES[meta atLeast 0 atMost 6])
     override fun getMetaFromState(blockState: IBlockState) = getFacing(blockState).index
     override fun createBlockState() = BlockStateContainer(this, FACING)
