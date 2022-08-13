@@ -299,20 +299,19 @@ class BlockBeanstalkPipe : BlockBeanstalk() {
 
     override fun createBlockState() = BlockStateContainer(this, FACING, DOWN, UP, NORTH, SOUTH, WEST, EAST)
 
-    override fun getActualState(blockState: IBlockState, world: IBlockAccess, pos: BlockPos): IBlockState {
-        fun IBlockState.a(property: PropertyBool, facing: EnumFacing): IBlockState {
-            val neighborBlockState = world.getBlockState(pos.offset(facing))
-            val neighborBlock = neighborBlockState.block as? BlockBeanstalk ?: return this
-            val canConnect = neighborBlock.getFacing(neighborBlockState) == facing.opposite
-            return if (canConnect) this.withProperty(property, true) else this
+    override fun getActualState(blockState: IBlockState, world: IBlockAccess, blockPos: BlockPos): IBlockState {
+        fun a(facing: EnumFacing): Boolean {
+            val neighborBlockState = world.getBlockState(blockPos.offset(facing))
+            val neighborBlock = neighborBlockState.block as? IBeanstalkBlock ?: return false
+            return neighborBlock.getFacing(neighborBlockState, world, blockPos) == facing.opposite
         }
         return blockState
-            .a(DOWN, EnumFacing.DOWN)
-            .a(UP, EnumFacing.UP)
-            .a(NORTH, EnumFacing.NORTH)
-            .a(SOUTH, EnumFacing.SOUTH)
-            .a(WEST, EnumFacing.WEST)
-            .a(EAST, EnumFacing.EAST)
+            .withProperty(DOWN, a(EnumFacing.DOWN))
+            .withProperty(UP, a(EnumFacing.UP))
+            .withProperty(NORTH, a(EnumFacing.NORTH))
+            .withProperty(SOUTH, a(EnumFacing.SOUTH))
+            .withProperty(WEST, a(EnumFacing.WEST))
+            .withProperty(EAST, a(EnumFacing.EAST))
     }
 
     fun isStraight(blockState: IBlockState): Boolean {
