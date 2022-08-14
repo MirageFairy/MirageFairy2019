@@ -28,3 +28,5 @@ eclipse
 fluorite-7
 ~$*.xlsx
 /logs
+/hs_err_pid*.log
+/replay_pid*.log
