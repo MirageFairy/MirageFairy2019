@@ -90,11 +90,11 @@ val beanstalkRootModule = module {
             DataShapedRecipe(
                 pattern = listOf(
                     "#",
-                    "m"
+                    "1"
                 ),
                 key = mapOf(
                     "#" to DataSimpleIngredient(item = "miragefairy2019:beanstalk_pipe"),
-                    "m" to DataOreIngredient(ore = "mirageFairyMandrake")
+                    "1" to DataOreIngredient(ore = "mirageFairyMandrake")
                 ),
                 result = DataResult(item = "miragefairy2019:beanstalk_root")
             )
