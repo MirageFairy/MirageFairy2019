@@ -59,6 +59,7 @@ val beanstalkPipeModule = module {
                 override fun getModelResourceLocation(blockState: IBlockState): ModelResourceLocation {
                     fun model(path: String, variant: String) = ModelResourceLocation(ResourceLocation("miragefairy2019", path), variant)
                     val block = blockState.block as? BlockBeanstalkPipe ?: return model("beanstalk_pipe_straight", "facing=down")
+                    if (block.isInvalid(blockState)) return model("beanstalk_pipe_invalid", "facing=${block.getFacing(blockState)}")
                     if (block.isStraight(blockState)) return model("beanstalk_pipe_straight", "facing=${block.getFacing(blockState)}")
                     if (block.isEnd(blockState)) return model("beanstalk_pipe_end", "facing=${block.getFacing(blockState)}")
                     return model("beanstalk_pipe", getPropertyString(blockState.properties))
@@ -139,6 +140,39 @@ val beanstalkPipeModule = module {
             )
         )
     }
+    makeBlockStates("beanstalk_pipe_invalid") {
+        DataModelBlockDefinition(
+            multipart = listOf(
+                DataSelector(
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_elbow"))
+                ),
+                DataSelector(
+                    `when` = mapOf("facing" to "down".jsonElement),
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_down_invalid"), x = Facing.DOWN.x, y = Facing.DOWN.y)
+                ),
+                DataSelector(
+                    `when` = mapOf("facing" to "up".jsonElement),
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_down_invalid"), x = Facing.UP.x, y = Facing.UP.y)
+                ),
+                DataSelector(
+                    `when` = mapOf("facing" to "north".jsonElement),
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_down_invalid"), x = Facing.NORTH.x, y = Facing.NORTH.y)
+                ),
+                DataSelector(
+                    `when` = mapOf("facing" to "south".jsonElement),
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_down_invalid"), x = Facing.SOUTH.x, y = Facing.SOUTH.y)
+                ),
+                DataSelector(
+                    `when` = mapOf("facing" to "west".jsonElement),
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_down_invalid"), x = Facing.WEST.x, y = Facing.WEST.y)
+                ),
+                DataSelector(
+                    `when` = mapOf("facing" to "east".jsonElement),
+                    apply = DataVariant(model = ResourceName("miragefairy2019", "beanstalk_pipe_down_invalid"), x = Facing.EAST.x, y = Facing.EAST.y)
+                )
+            )
+        )
+    }
 
     // ブロックモデル生成
     makeBlockModel("beanstalk_pipe_straight") {
@@ -205,6 +239,30 @@ val beanstalkPipeModule = module {
             textures = mapOf(
                 "particle" to "miragefairy2019:blocks/beanstalk",
                 "side" to "miragefairy2019:blocks/beanstalk",
+                "top" to "miragefairy2019:blocks/beanstalk_top"
+            ),
+            elements = listOf(
+                northDuplex(DataPoint(0.0, 0.0, 5.0), DataPoint(16.0, 5.0, 5.0), "#side"),
+                southDuplex(DataPoint(0.0, 0.0, 11.0), DataPoint(16.0, 5.0, 11.0), "#side"),
+                westDuplex(DataPoint(5.0, 0.0, 0.0), DataPoint(5.0, 5.0, 16.0), "#side"),
+                eastDuplex(DataPoint(11.0, 0.0, 0.0), DataPoint(11.0, 5.0, 16.0), "#side"),
+                DataElement(
+                    from = DataPoint(5.0, 0.0, 5.0),
+                    to = DataPoint(11.0, 0.0, 11.0),
+                    faces = DataFaces(
+                        down = DataFace(texture = "#top")
+                    )
+                )
+            )
+        )
+    }
+    makeBlockModel("beanstalk_pipe_down_invalid") {
+        DataModel(
+            parent = "block/block",
+            ambientOcclusion = false,
+            textures = mapOf(
+                "particle" to "miragefairy2019:blocks/beanstalk",
+                "side" to "miragefairy2019:blocks/beanstalk_invalid",
                 "top" to "miragefairy2019:blocks/beanstalk_top"
             ),
             elements = listOf(
@@ -333,6 +391,15 @@ class BlockBeanstalkPipe : BlockBeanstalk() {
     }
 
     fun isEnd(blockState: IBlockState) = !blockState[DOWN] && !blockState[UP] && !blockState[NORTH] && !blockState[SOUTH] && !blockState[WEST] && !blockState[EAST]
+
+    fun isInvalid(blockState: IBlockState) = when (getFacing(blockState)) {
+        EnumFacing.DOWN -> blockState[DOWN]
+        EnumFacing.UP -> blockState[UP]
+        EnumFacing.NORTH -> blockState[NORTH]
+        EnumFacing.SOUTH -> blockState[SOUTH]
+        EnumFacing.WEST -> blockState[WEST]
+        EnumFacing.EAST -> blockState[EAST]
+    }
 
 
     // Box

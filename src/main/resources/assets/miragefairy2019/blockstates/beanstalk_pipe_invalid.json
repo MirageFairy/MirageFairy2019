@@ -1,0 +1,69 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_elbow"
+      }
+    },
+    {
+      "when": {
+        "facing": "down"
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_down_invalid",
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "up"
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_down_invalid",
+        "x": 180,
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_down_invalid",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_down_invalid",
+        "x": 90,
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_down_invalid",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "miragefairy2019:beanstalk_pipe_down_invalid",
+        "x": 90,
+        "y": 270
+      }
+    }
+  ]
+}
