@@ -64,7 +64,7 @@ abstract class BlockBeanstalk : Block(Material.WOOD), IBeanstalkBlock, IFacedCur
     override fun withMirror(blockState: IBlockState, mirror: Mirror): IBlockState = getBlockState(mirror.mirror(getFacing(blockState)))
 
     override fun getStateForPlacement(world: World, blockPos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, metadata: Int, placer: EntityLivingBase, hand: EnumHand): IBlockState {
-        return getBlockState(getAdvancedFacing(facing, hitX, hitY, hitZ))
+        return getBlockState(getAdvancedFacing(facing, hitX, hitY, hitZ, 6.0 / 16.0))
     }
 
 
