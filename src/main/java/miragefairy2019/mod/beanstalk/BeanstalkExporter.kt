@@ -1,5 +1,8 @@
 package miragefairy2019.mod.beanstalk
 
+import miragefairy2019.lib.get
+import miragefairy2019.lib.getCapabilityIfHas
+import miragefairy2019.lib.itemStacks
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -19,10 +22,14 @@ import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
+import miragefairy2019.lib.set
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import net.minecraft.item.ItemBlock
 import net.minecraft.tileentity.TileEntity
+import net.minecraftforge.items.CapabilityItemHandler
+import net.minecraftforge.items.IItemHandlerModifiable
 
 lateinit var blockBeanstalkExporter: () -> BlockBeanstalkExporter
 lateinit var itemBlockBeanstalkExporter: () -> ItemBlock
@@ -102,12 +109,18 @@ class BlockBeanstalkExporter : BlockBeanstalkFlower<TileEntityBeanstalkExporter>
 
 class TileEntityBeanstalkExporter : TileEntityBeanstalkFlower() {
     override fun onUpdateTick() {
-        val rootBlockPos = getRootBlockPos(world, pos) ?: return
-        val encounterBlockPos = getEncounterBlockPos() ?: return
+        val src = getRoot(world, pos) ?: return // 豆の木が異常
+        val dest = getEncounterBlockPos() ?: return // 花が異常
 
-        // TODO
-        println("$rootBlockPos ${world.getBlockState(rootBlockPos)} ${world.getTileEntity(rootBlockPos)?.javaClass}")
-        println("$pos ${world.getBlockState(pos)} ${world.getTileEntity(pos)?.javaClass}")
-        println("$encounterBlockPos ${world.getBlockState(encounterBlockPos)} ${world.getTileEntity(encounterBlockPos)?.javaClass}")
+        val srcItemHandler = world.getTileEntity(src.blockPos)?.getCapabilityIfHas(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, src.facing) as? IItemHandlerModifiable ?: return // 元がコンテナでない
+        val destItemHandler = world.getTileEntity(dest.blockPos)?.getCapabilityIfHas(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, dest.facing) as? IItemHandlerModifiable ?: return // 先がコンテナでない
+
+        // TODO 半端な状態でも運搬する
+        val srcIndex = srcItemHandler.itemStacks.withIndex().firstOrNull { !it.value.isEmpty }?.index ?: return // 運ぶアイテムがない
+        val destIndex = destItemHandler.itemStacks.withIndex().firstOrNull { !it.value.isEmpty }?.index ?: return // 運ぶ先が開いていない
+        if (srcItemHandler[srcIndex].count > destItemHandler.getSlotLimit(destIndex)) return // 入りきらない
+
+        destItemHandler[destIndex] = srcItemHandler[srcIndex]
+        srcItemHandler[srcIndex] = EMPTY_ITEM_STACK.copy()
     }
 }

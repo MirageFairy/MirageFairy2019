@@ -4,6 +4,7 @@ import miragefairy2019.mod.fairybox.randomSkipTicks
 import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.state.IBlockState
 import net.minecraft.tileentity.TileEntity
+import net.minecraft.util.EnumFacing
 import net.minecraft.util.ITickable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -33,11 +34,11 @@ abstract class BlockBeanstalkFlower<T : TileEntity> : BlockBeanstalkEnd(), ITile
 
 abstract class TileEntityBeanstalkFlower : TileEntity(), ITickable {
 
-    fun getEncounterBlockPos(): BlockPos? {
+    fun getEncounterBlockPos(): FacedBlockPos? {
         val blockState = world.getBlockState(pos)
         val block = blockState.block as? IBeanstalkBlock ?: return null
         val facing = block.getFacing(blockState, world, pos) ?: return null
-        return pos.offset(facing.opposite)
+        return FacedBlockPos(pos.offset(facing.opposite), facing)
     }
 
 
@@ -65,16 +66,28 @@ abstract class TileEntityBeanstalkFlower : TileEntity(), ITickable {
 
 }
 
-fun getRootBlockPos(world: World, blockPos: BlockPos): BlockPos? {
+// TODO -> lib
+class FacedBlockPos(val blockPos: BlockPos, val facing: EnumFacing)
+
+fun getRoot(world: World, blockPos: BlockPos): FacedBlockPos? {
+    fun getFacing(blockPos: BlockPos): EnumFacing? {
+        if (!world.isBlockLoaded(blockPos)) return null // チャンクロード範囲外の場合は失敗
+        val blockState = world.getBlockState(blockPos)
+        val block = blockState.block as? IBeanstalkBlock ?: return null // 豆の木でない場合は終了
+        return block.getFacing(blockState, world, blockPos)
+    }
+
     var currentBlockPos = blockPos.toImmutable()
     val acceptedBlockPoses = mutableSetOf<BlockPos>()
 
+    val firstFacing = getFacing(currentBlockPos) ?: return null // 豆の木でない場合は終了
+    currentBlockPos = currentBlockPos.offset(firstFacing)
+    var lastFacing = firstFacing
+
     while (true) {
-        if (!world.isBlockLoaded(currentBlockPos)) return null // チャンクロード範囲外の場合は失敗
-        val blockState = world.getBlockState(currentBlockPos)
-        val block = blockState.block as? IBeanstalkBlock ?: return currentBlockPos // 豆の木でない場合は終了
-        val facing = block.getFacing(blockState, world, currentBlockPos) ?: return currentBlockPos // 豆の木でない場合は終了
+        val facing = getFacing(currentBlockPos) ?: return FacedBlockPos(currentBlockPos, lastFacing.opposite) // 豆の木でない場合は終了
         currentBlockPos = currentBlockPos.offset(facing)
+        lastFacing = facing
         if (currentBlockPos in acceptedBlockPoses) return null // ループを検出
         acceptedBlockPoses += currentBlockPos
     }
