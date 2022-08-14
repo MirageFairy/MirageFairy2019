@@ -122,5 +122,6 @@ class TileEntityBeanstalkExporter : TileEntityBeanstalkFlower() {
 
         destItemHandler[destIndex] = srcItemHandler[srcIndex]
         srcItemHandler[srcIndex] = EMPTY_ITEM_STACK.copy()
+        // TODO エフェクト
     }
 }
