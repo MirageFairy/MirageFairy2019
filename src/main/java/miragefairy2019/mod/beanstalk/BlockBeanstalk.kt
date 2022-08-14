@@ -89,7 +89,7 @@ abstract class BlockBeanstalk : Block(Material.WOOD), IBeanstalkBlock, IFacedCur
 
 }
 
-class BlockBeanstalkEnd : BlockBeanstalk() {
+open class BlockBeanstalkEnd : BlockBeanstalk() {
 
     // Box
 
