@@ -102,12 +102,6 @@ class BlockBeanstalkImporter : BlockBeanstalkFlower<TileEntityBeanstalkImporter>
 
 class TileEntityBeanstalkImporter : TileEntityBeanstalkFlower() {
     override fun onUpdateTick() {
-        val rootBlockPos = getRootBlockPos(world, pos) ?: return
-        val encounterBlockPos = getEncounterBlockPos() ?: return
-
         // TODO
-        println("$rootBlockPos ${world.getBlockState(rootBlockPos)} ${world.getTileEntity(rootBlockPos)?.javaClass}")
-        println("$pos ${world.getBlockState(pos)} ${world.getTileEntity(pos)?.javaClass}")
-        println("$encounterBlockPos ${world.getBlockState(encounterBlockPos)} ${world.getTileEntity(encounterBlockPos)?.javaClass}")
     }
 }
