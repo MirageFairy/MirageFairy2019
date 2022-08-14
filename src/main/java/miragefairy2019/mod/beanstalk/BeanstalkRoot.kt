@@ -10,15 +10,13 @@ import miragefairy2019.lib.resourcemaker.DataElement
 import miragefairy2019.lib.resourcemaker.DataFace
 import miragefairy2019.lib.resourcemaker.DataFaces
 import miragefairy2019.lib.resourcemaker.DataModel
-import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataPoint
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
-import miragefairy2019.lib.resourcemaker.DataSingleVariantList
-import miragefairy2019.lib.resourcemaker.DataVariant
 import miragefairy2019.lib.resourcemaker.block
+import miragefairy2019.lib.resourcemaker.faced
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
@@ -36,13 +34,7 @@ val beanstalkRootModule = module {
     blockBeanstalkRoot = block({ BlockBeanstalkEnd() }, "beanstalk_root") {
         setUnlocalizedName("beanstalkRoot")
         setCreativeTab { Main.creativeTab }
-        makeBlockStates {
-            DataModelBlockDefinition(
-                variants = Facing.values().associate { facing ->
-                    "facing=$facing" to DataSingleVariantList(DataVariant(model = resourceName, x = facing.x, y = facing.y))
-                }
-            )
-        }
+        makeBlockStates { faced }
         makeBlockModel {
             DataModel(
                 parent = "block/block",
