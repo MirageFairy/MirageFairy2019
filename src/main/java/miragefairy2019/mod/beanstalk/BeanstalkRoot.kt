@@ -81,6 +81,7 @@ val beanstalkRootModule = module {
             )
         }
     }
+
     // アイテム
     itemBlockBeanstalkRoot = item({ ItemBlock(blockBeanstalkRoot()) }, "beanstalk_root") {
         setCustomModelResourceLocation()
