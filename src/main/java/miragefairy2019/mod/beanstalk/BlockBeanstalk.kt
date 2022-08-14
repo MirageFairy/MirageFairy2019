@@ -1,5 +1,6 @@
 package miragefairy2019.mod.beanstalk
 
+import miragefairy2019.mod.systems.IFacedCursor
 import miragefairy2019.mod.systems.IFacedCursorBlock
 import miragefairy2019.mod.systems.IFacedCursorHandler
 import miragefairy2019.mod.systems.getAdvancedFacing
@@ -76,7 +77,9 @@ abstract class BlockBeanstalk : Block(Material.WOOD), IBeanstalkBlock, IFacedCur
     override fun isFullCube(state: IBlockState) = false
     override fun getBlockFaceShape(world: IBlockAccess, blockState: IBlockState, blockPos: BlockPos, facing: EnumFacing) = BlockFaceShape.UNDEFINED
     override fun getFacedCursorHandler(itemStack: ItemStack) = object : IFacedCursorHandler {
-        override fun hasFacedCursor(item: Item, itemStack: ItemStack, world: World, blockPos: BlockPos, player: EntityPlayer, rayTraceResult: RayTraceResult) = true
+        override fun getFacedCursor(item: Item, itemStack: ItemStack, world: World, blockPos: BlockPos, player: EntityPlayer, rayTraceResult: RayTraceResult) = object : IFacedCursor {
+            override val borderSize get() = 6.0 / 16.0
+        }
     }
 
 
