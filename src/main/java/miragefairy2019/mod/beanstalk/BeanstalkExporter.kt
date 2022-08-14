@@ -117,7 +117,7 @@ class TileEntityBeanstalkExporter : TileEntityBeanstalkFlower() {
 
         // TODO 半端な状態でも運搬する
         val srcIndex = srcItemHandler.itemStacks.withIndex().firstOrNull { !it.value.isEmpty }?.index ?: return // 運ぶアイテムがない
-        val destIndex = destItemHandler.itemStacks.withIndex().firstOrNull { !it.value.isEmpty }?.index ?: return // 運ぶ先が開いていない
+        val destIndex = destItemHandler.itemStacks.withIndex().firstOrNull { it.value.isEmpty }?.index ?: return // 運ぶ先が開いていない
         if (srcItemHandler[srcIndex].count > destItemHandler.getSlotLimit(destIndex)) return // 入りきらない
 
         destItemHandler[destIndex] = srcItemHandler[srcIndex]
