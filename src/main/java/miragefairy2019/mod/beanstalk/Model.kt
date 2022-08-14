@@ -30,6 +30,14 @@ fun ud(from: DataPoint, to: DataPoint, downTexture: String, upTexture: String) =
 )
 
 
+fun down(from: DataPoint, to: DataPoint, texture: String) = DataElement(from = from, to = to, faces = DataFaces(down = DataFace(texture = texture)))
+fun up(from: DataPoint, to: DataPoint, texture: String) = DataElement(from = from, to = to, faces = DataFaces(up = DataFace(texture = texture)))
+fun north(from: DataPoint, to: DataPoint, texture: String) = DataElement(from = from, to = to, faces = DataFaces(north = DataFace(texture = texture)))
+fun south(from: DataPoint, to: DataPoint, texture: String) = DataElement(from = from, to = to, faces = DataFaces(south = DataFace(texture = texture)))
+fun west(from: DataPoint, to: DataPoint, texture: String) = DataElement(from = from, to = to, faces = DataFaces(west = DataFace(texture = texture)))
+fun east(from: DataPoint, to: DataPoint, texture: String) = DataElement(from = from, to = to, faces = DataFaces(east = DataFace(texture = texture)))
+
+
 fun downDuplex(from: DataPoint, to: DataPoint, texture: String) = DataElement(
     from = from,
     to = to,
