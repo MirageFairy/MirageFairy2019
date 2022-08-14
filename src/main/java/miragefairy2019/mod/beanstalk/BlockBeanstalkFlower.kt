@@ -37,7 +37,7 @@ abstract class TileEntityBeanstalkFlower : TileEntity(), ITickable {
         val blockState = world.getBlockState(pos)
         val block = blockState.block as? IBeanstalkBlock ?: return null
         val facing = block.getFacing(blockState, world, pos) ?: return null
-        return pos.offset(facing)
+        return pos.offset(facing.opposite)
     }
 
 
