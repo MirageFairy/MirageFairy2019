@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "1",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:beanstalk_pipe"
+    },
+    "1": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereLevitate"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:beanstalk_exporter"
+  }
+}

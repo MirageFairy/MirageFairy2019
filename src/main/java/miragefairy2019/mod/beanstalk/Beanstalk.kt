@@ -5,4 +5,6 @@ import miragefairy2019.lib.modinitializer.module
 val beanstalkModule = module {
     beanstalkPipeModule()
     beanstalkRootModule()
+    beanstalkImporterModule()
+    beanstalkExporterModule()
 }

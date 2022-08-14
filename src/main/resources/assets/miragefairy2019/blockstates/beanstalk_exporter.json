@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "miragefairy2019:beanstalk_exporter",
+      "x": 0,
+      "y": 0
+    },
+    "facing=up": {
+      "model": "miragefairy2019:beanstalk_exporter",
+      "x": 180,
+      "y": 0
+    },
+    "facing=north": {
+      "model": "miragefairy2019:beanstalk_exporter",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south": {
+      "model": "miragefairy2019:beanstalk_exporter",
+      "x": 90,
+      "y": 0
+    },
+    "facing=west": {
+      "model": "miragefairy2019:beanstalk_exporter",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east": {
+      "model": "miragefairy2019:beanstalk_exporter",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

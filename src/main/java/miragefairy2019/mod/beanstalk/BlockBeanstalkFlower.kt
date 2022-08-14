@@ -33,6 +33,14 @@ abstract class BlockBeanstalkFlower<T : TileEntity> : BlockBeanstalkEnd(), ITile
 
 abstract class TileEntityBeanstalkFlower : TileEntity(), ITickable {
 
+    fun getEncounterBlockPos(): BlockPos? {
+        val blockState = world.getBlockState(pos)
+        val block = blockState.block as? IBeanstalkBlock ?: return null
+        val facing = block.getFacing(blockState, world, pos) ?: return null
+        return pos.offset(facing)
+    }
+
+
     // Tick
 
     private var tick = -1
