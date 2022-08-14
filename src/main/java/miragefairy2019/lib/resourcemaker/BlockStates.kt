@@ -84,6 +84,17 @@ data class DataSelector(
 
 
 val MakeBlockStatesScope.normal get() = DataModelBlockDefinition(variants = mapOf("normal" to DataSingleVariantList(DataVariant(resourceName))))
+val MakeBlockStatesScope.faced
+    get() = DataModelBlockDefinition(
+        variants = mapOf(
+            "facing=down" to DataSingleVariantList(DataVariant(model = resourceName, x = 0, y = 0)),
+            "facing=up" to DataSingleVariantList(DataVariant(model = resourceName, x = 180, y = 0)),
+            "facing=north" to DataSingleVariantList(DataVariant(model = resourceName, x = 90, y = 180)),
+            "facing=south" to DataSingleVariantList(DataVariant(model = resourceName, x = 90, y = 0)),
+            "facing=west" to DataSingleVariantList(DataVariant(model = resourceName, x = 90, y = 90)),
+            "facing=east" to DataSingleVariantList(DataVariant(model = resourceName, x = 90, y = 270))
+        )
+    )
 val MakeBlockStatesScope.fluid
     get() = DataModelBlockDefinition(
         forgeMarker = 1,
