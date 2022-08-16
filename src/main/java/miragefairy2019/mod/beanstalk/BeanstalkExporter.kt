@@ -105,7 +105,7 @@ class BlockBeanstalkExporter : BlockBeanstalkFlower<TileEntityBeanstalkExporter>
 
 class TileEntityBeanstalkExporter : TileEntityBeanstalkFlower() {
 
-    override fun onUpdateTick() {
+    override fun doAction() {
         val src = getRoot(world, pos) ?: return // 豆の木が異常
         val dest = getEncounterBlockPos() ?: return // 花が異常
 

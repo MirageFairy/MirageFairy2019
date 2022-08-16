@@ -65,10 +65,10 @@ abstract class TileEntityBeanstalkFlower : TileEntity(), ITickable {
             tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
         }
 
-        onUpdateTick()
+        doAction()
     }
 
-    abstract fun onUpdateTick()
+    abstract fun doAction()
 
 }
 
