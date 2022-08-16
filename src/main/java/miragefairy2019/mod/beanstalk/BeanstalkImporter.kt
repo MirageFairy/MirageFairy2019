@@ -1,5 +1,6 @@
 package miragefairy2019.mod.beanstalk
 
+import miragefairy2019.lib.getCapabilityIfHas
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -23,6 +24,8 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import net.minecraft.item.ItemBlock
 import net.minecraft.tileentity.TileEntity
+import net.minecraftforge.items.CapabilityItemHandler
+import net.minecraftforge.items.IItemHandlerModifiable
 
 lateinit var blockBeanstalkImporter: () -> BlockBeanstalkImporter
 lateinit var itemBlockBeanstalkImporter: () -> ItemBlock
@@ -102,6 +105,15 @@ class BlockBeanstalkImporter : BlockBeanstalkFlower<TileEntityBeanstalkImporter>
 
 class TileEntityBeanstalkImporter : TileEntityBeanstalkFlower() {
     override fun onUpdateTick() {
-        // TODO
+        val src = getEncounterBlockPos() ?: return // 豆の木が異常
+        val dest = getRoot(world, pos) ?: return // 花が異常
+
+        val srcItemHandler = world.getTileEntity(src.blockPos)?.getCapabilityIfHas(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, src.facing) as? IItemHandlerModifiable ?: return // 元がコンテナでない
+        val destItemHandler = world.getTileEntity(dest.blockPos)?.getCapabilityIfHas(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, dest.facing) as? IItemHandlerModifiable ?: return // 先がコンテナでない
+
+        move(9, srcItemHandler, destItemHandler)
+
+        // TODO エフェクト
+        // TODO 選別機能
     }
 }

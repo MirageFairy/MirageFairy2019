@@ -1,8 +1,6 @@
 package miragefairy2019.mod.beanstalk
 
-import miragefairy2019.lib.get
 import miragefairy2019.lib.getCapabilityIfHas
-import miragefairy2019.lib.itemStacks
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -22,8 +20,6 @@ import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.lib.set
-import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import net.minecraft.item.ItemBlock
@@ -108,6 +104,7 @@ class BlockBeanstalkExporter : BlockBeanstalkFlower<TileEntityBeanstalkExporter>
 }
 
 class TileEntityBeanstalkExporter : TileEntityBeanstalkFlower() {
+
     override fun onUpdateTick() {
         val src = getRoot(world, pos) ?: return // 豆の木が異常
         val dest = getEncounterBlockPos() ?: return // 花が異常
@@ -115,13 +112,9 @@ class TileEntityBeanstalkExporter : TileEntityBeanstalkFlower() {
         val srcItemHandler = world.getTileEntity(src.blockPos)?.getCapabilityIfHas(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, src.facing) as? IItemHandlerModifiable ?: return // 元がコンテナでない
         val destItemHandler = world.getTileEntity(dest.blockPos)?.getCapabilityIfHas(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, dest.facing) as? IItemHandlerModifiable ?: return // 先がコンテナでない
 
-        // TODO 半端な状態でも運搬する
-        val srcIndex = srcItemHandler.itemStacks.withIndex().firstOrNull { !it.value.isEmpty }?.index ?: return // 運ぶアイテムがない
-        val destIndex = destItemHandler.itemStacks.withIndex().firstOrNull { it.value.isEmpty }?.index ?: return // 運ぶ先が開いていない
-        if (srcItemHandler[srcIndex].count > destItemHandler.getSlotLimit(destIndex)) return // 入りきらない
+        move(9, srcItemHandler, destItemHandler)
 
-        destItemHandler[destIndex] = srcItemHandler[srcIndex]
-        srcItemHandler[srcIndex] = EMPTY_ITEM_STACK.copy()
         // TODO エフェクト
+        // TODO 選別機能
     }
 }

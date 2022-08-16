@@ -1,13 +1,19 @@
 package miragefairy2019.mod.beanstalk
 
+import miragefairy2019.lib.get
+import miragefairy2019.lib.indices
+import miragefairy2019.lib.set
+import miragefairy2019.libkt.copy
 import miragefairy2019.mod.fairybox.randomSkipTicks
 import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.state.IBlockState
+import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.ITickable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraftforge.items.IItemHandlerModifiable
 
 abstract class BlockBeanstalkFlower<T : TileEntity> : BlockBeanstalkEnd(), ITileEntityProvider {
     init {
@@ -91,4 +97,54 @@ fun getRoot(world: World, blockPos: BlockPos): FacedBlockPos? {
         if (currentBlockPos in acceptedBlockPoses) return null // ループを検出
         acceptedBlockPoses += currentBlockPos
     }
+}
+
+fun move(power: Int, srcItemHandler: IItemHandlerModifiable, destItemHandler: IItemHandlerModifiable): List<ItemStack> {
+    val movedItems = mutableListOf<ItemStack>()
+    var remainingPower = power
+
+    run finish@{
+        srcItemHandler.indices.forEach nextSrcSlot@{ srcIndex ->
+
+            if (remainingPower <= 0) return@finish // もうパワーがない
+            // まだパワーが残っている
+
+            val srcItemStack = srcItemHandler[srcIndex]
+            val originalSrcItem = srcItemStack.copy(count = 1)
+
+            if (srcItemStack.isEmpty) return@nextSrcSlot // 空のsrcスロットは無視
+            // srcスロットに何かが入っている
+
+            // 成立
+
+            var moved = false
+            try {
+                destItemHandler.indices.forEach nextDestSlot@{ destIndex ->
+
+                    if (srcItemStack.isEmpty) return@nextSrcSlot // すべて移動し終えた
+                    // まだ移動するものが残っている
+
+                    if (!destItemHandler.isItemValid(destIndex, srcItemStack)) return@nextDestSlot // 宛先がこのアイテムを受け付けない
+                    // 宛先がこのアイテムを受け付ける
+
+                    // 移動を試す
+                    val remainingSrcItemStack = destItemHandler.insertItem(destIndex, srcItemStack.copy(), false)
+                    if (remainingSrcItemStack.count != srcItemStack.count) {
+                        moved = true
+                        srcItemStack.count = remainingSrcItemStack.count
+                    }
+
+                }
+            } finally {
+                if (moved) {
+                    movedItems += originalSrcItem // 移動したアイテム標本に追加
+                    remainingPower-- // パワー消費
+                    srcItemHandler[srcIndex] = srcItemStack // イベント発火
+                }
+            }
+
+        }
+    }
+
+    return movedItems
 }
