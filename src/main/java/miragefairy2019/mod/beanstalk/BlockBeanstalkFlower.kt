@@ -7,15 +7,17 @@ import miragefairy2019.libkt.copy
 import miragefairy2019.mod.fairybox.randomSkipTicks
 import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.state.IBlockState
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumHand
 import net.minecraft.util.ITickable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.items.IItemHandlerModifiable
 
-abstract class BlockBeanstalkFlower<T : TileEntity> : BlockBeanstalkEnd(), ITileEntityProvider {
+abstract class BlockBeanstalkFlower<T : TileEntityBeanstalkFlower> : BlockBeanstalkEnd(), ITileEntityProvider {
     init {
         hasTileEntity = true
     }
@@ -36,6 +38,13 @@ abstract class BlockBeanstalkFlower<T : TileEntity> : BlockBeanstalkEnd(), ITile
         val tileEntity = world.getTileEntity(blockPos)
         return tileEntity?.receiveClientEvent(id, param) ?: false
     }
+
+    override fun onBlockActivated(world: World, blockPos: BlockPos, blockState: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        val tileEntity = getTileEntity(world, blockPos) ?: return false
+        tileEntity.doAction()
+        return true
+    }
+
 }
 
 abstract class TileEntityBeanstalkFlower : TileEntity(), ITickable {
