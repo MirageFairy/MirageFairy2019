@@ -33,7 +33,7 @@ abstract class BlockBeanstalkFlower<T : TileEntity> : BlockBeanstalkEnd(), ITile
 
     override fun eventReceived(blockState: IBlockState, world: World, blockPos: BlockPos, id: Int, param: Int): Boolean {
         super.eventReceived(blockState, world, blockPos, id, param)
-        val tileEntity: TileEntity? = world.getTileEntity(blockPos)
+        val tileEntity = world.getTileEntity(blockPos)
         return tileEntity?.receiveClientEvent(id, param) ?: false
     }
 }
