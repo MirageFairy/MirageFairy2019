@@ -1,6 +1,8 @@
 package miragefairy2019.mod.beanstalk
 
+import miragefairy2019.lib.get
 import miragefairy2019.lib.indices
+import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.mod.fairybox.randomSkipTicks
 import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.state.IBlockState
@@ -125,7 +127,17 @@ fun move(power: Int, srcItemHandler: IItemHandlerModifiable, destItemHandler: II
 
             var movedCount = 0
             try {
-                destItemHandler.indices.forEach nextDestSlot@{ destIndex ->
+                val notEmptyDestIndices = mutableListOf<Int>()
+                val emptyDestIndices = mutableListOf<Int>()
+                destItemHandler.indices.forEach { destIndex ->
+                    val destItemStack = destItemHandler[destIndex]
+                    if (destItemStack.isEmpty) {
+                        emptyDestIndices += destIndex
+                    } else if (destItemStack equalsItemDamageTag virtualSrcItemStack) {
+                        notEmptyDestIndices += destIndex
+                    }
+                }
+                (notEmptyDestIndices + emptyDestIndices).forEach nextDestSlot@{ destIndex ->
 
                     if (virtualSrcItemStack.isEmpty) return@nextSrcSlot // すべて移動し終えた
                     // まだ移動するものが残っている
