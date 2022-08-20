@@ -14,6 +14,7 @@ import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.handheld
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
+import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import net.minecraft.item.Item
@@ -81,8 +82,12 @@ val miniaRecipeModule = module {
 }
 
 class ItemApostleStick : Item() {
+    init {
+        maxStackSize = 1
+    }
+
     @SideOnly(Side.CLIENT)
     override fun isFull3D() = true
     override fun hasContainerItem(stack: ItemStack) = true
-    override fun getContainerItem(itemStack: ItemStack): ItemStack = itemStack.copy()
+    override fun getContainerItem(itemStack: ItemStack): ItemStack = itemStack.copy(1)
 }
