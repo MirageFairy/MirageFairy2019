@@ -355,7 +355,7 @@
           "texture": "#flower"
         },
         "up": {
-          "texture": "#flower"
+          "texture": "#flower_top"
         },
         "north": {
           "texture": "#flower"
@@ -378,6 +378,7 @@
     "top": "miragefairy2019:blocks/beanstalk_top",
     "elbow": "miragefairy2019:blocks/beanstalk_elbow",
     "stem": "miragefairy2019:blocks/beanstalk_stem",
-    "flower": "minecraft:blocks/wool_colored_orange"
+    "flower": "miragefairy2019:blocks/beanstalk_flower_output",
+    "flower_top": "miragefairy2019:blocks/beanstalk_flower_output_top"
   }
 }

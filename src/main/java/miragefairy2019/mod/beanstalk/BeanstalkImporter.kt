@@ -8,6 +8,9 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.modinitializer.tileEntity
+import miragefairy2019.lib.resourcemaker.DataElement
+import miragefairy2019.lib.resourcemaker.DataFace
+import miragefairy2019.lib.resourcemaker.DataFaces
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataPoint
@@ -47,7 +50,8 @@ val beanstalkImporterModule = module {
                     "top" to "miragefairy2019:blocks/beanstalk_top",
                     "elbow" to "miragefairy2019:blocks/beanstalk_elbow",
                     "stem" to "miragefairy2019:blocks/beanstalk_stem",
-                    "flower" to "minecraft:blocks/wool_colored_orange" // TODO
+                    "flower" to "miragefairy2019:blocks/beanstalk_flower_output",
+                    "flower_top" to "miragefairy2019:blocks/beanstalk_flower_output_top"
                 ),
                 elements = listOf(
                     down(DataPoint(5.0, 0.0, 5.0), DataPoint(11.0, 0.0, 11.0), "#top"),
@@ -63,7 +67,18 @@ val beanstalkImporterModule = module {
                     element(DataPoint(7.0, 12.0, 7.0), DataPoint(9.0, 13.0, 9.0), "#flower"),
                     element(DataPoint(6.0, 13.0, 6.0), DataPoint(10.0, 14.0, 10.0), "#flower"),
                     element(DataPoint(5.0, 14.0, 5.0), DataPoint(11.0, 15.0, 11.0), "#flower"),
-                    element(DataPoint(4.0, 15.0, 4.0), DataPoint(12.0, 16.0, 12.0), "#flower")
+                    DataElement(
+                        from = DataPoint(4.0, 15.0, 4.0),
+                        to = DataPoint(12.0, 16.0, 12.0),
+                        faces = DataFaces(
+                            down = DataFace(texture = "#flower"),
+                            up = DataFace(texture = "#flower_top"),
+                            north = DataFace(texture = "#flower"),
+                            south = DataFace(texture = "#flower"),
+                            west = DataFace(texture = "#flower"),
+                            east = DataFace(texture = "#flower")
+                        )
+                    )
                 )
             )
         }

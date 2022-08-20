@@ -47,7 +47,7 @@ val beanstalkExporterModule = module {
                     "top" to "miragefairy2019:blocks/beanstalk_top",
                     "elbow" to "miragefairy2019:blocks/beanstalk_elbow",
                     "stem" to "miragefairy2019:blocks/beanstalk_stem",
-                    "flower" to "minecraft:blocks/wool_colored_light_blue" // TODO
+                    "flower" to "miragefairy2019:blocks/beanstalk_flower_input"
                 ),
                 elements = listOf(
                     down(DataPoint(5.0, 0.0, 5.0), DataPoint(11.0, 0.0, 11.0), "#top"),

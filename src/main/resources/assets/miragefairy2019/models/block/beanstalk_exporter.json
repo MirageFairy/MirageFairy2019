@@ -346,6 +346,6 @@
     "top": "miragefairy2019:blocks/beanstalk_top",
     "elbow": "miragefairy2019:blocks/beanstalk_elbow",
     "stem": "miragefairy2019:blocks/beanstalk_stem",
-    "flower": "minecraft:blocks/wool_colored_light_blue"
+    "flower": "miragefairy2019:blocks/beanstalk_flower_input"
   }
 }
