@@ -25,8 +25,10 @@ import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
+import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemBlock
 import net.minecraft.tileentity.TileEntity
+import net.minecraft.util.SoundCategory
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.IItemHandlerModifiable
 
@@ -126,9 +128,14 @@ class TileEntityBeanstalkImporter : TileEntityBeanstalkFlower() {
         val srcItemHandler = world.getTileEntity(src.blockPos)?.getCapabilityIfHas(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, src.facing) as? IItemHandlerModifiable ?: return // 元がコンテナでない
         val destItemHandler = world.getTileEntity(dest.blockPos)?.getCapabilityIfHas(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, dest.facing) as? IItemHandlerModifiable ?: return // 先がコンテナでない
 
-        move(9, srcItemHandler, destItemHandler)
+        val movedItemStacks = move(9, srcItemHandler, destItemHandler)
 
         // TODO エフェクト
+        if (movedItemStacks.isNotEmpty()) {
+            world.playSound(null, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 0.1f, 1.0f) // 魔法のSE
+            world.playEvent(2005, pos, 0)
+        }
+
         // TODO 選別機能
     }
 }
