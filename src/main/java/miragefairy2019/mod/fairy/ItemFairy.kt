@@ -9,13 +9,15 @@ import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.IColoredItem
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.entries
+import miragefairy2019.lib.get
 import miragefairy2019.lib.mana
 import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
+import miragefairy2019.libkt.TextComponentScope
+import miragefairy2019.libkt.TextComponentScope.invoke
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
-import miragefairy2019.libkt.concat
 import miragefairy2019.libkt.concatNotNull
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.flatten
@@ -142,22 +144,26 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
         }
 
         // エルグ
-        tooltip += formattedText {
-            concat(
-                "エルグ: "(), // TRANSLATE
-                variant.ergSet.entries
-                    .filter { formatInt(it.second) >= 10 }
-                    .sortedByDescending { it.second }
-                    .map {
-                        if (flag.isAdvanced) {
-                            it.first.displayName() + format("(%.3f)", it.second)
-                        } else {
-                            it.first.displayName()
+        run {
+            val ergTexts = variant.ergSet.entries
+                .filter { if (flag.isAdvanced) formatInt(it.second) > 0.0 else formatInt(it.second) >= 10.0 }
+                .sortedByDescending { it.second }
+                .chunked(if (flag.isAdvanced) 4 else 5)
+                .map { entryList ->
+                    entryList
+                        .map {
+                            if (flag.isAdvanced) {
+                                it.first.displayName() + TextComponentScope.format("%.0f/%.0f", it.second, variant.fairyCard.rawErgSet[it.first])
+                            } else {
+                                it.first.displayName()
+                            }
                         }
-                    }
-                    .sandwich { ", "() }
-                    .flatten()
-            ).green
+                        .sandwich { ", "() }
+                        .flatten()
+                }
+            ergTexts.forEachIndexed { i, ergText ->
+                tooltip += formattedText { if (!flag.isAdvanced && i == 0) ("エルグ: "() + ergText).green else ergText.green } // TRANSLATE
+            }
         }
 
         // 妖精武器のステータス
