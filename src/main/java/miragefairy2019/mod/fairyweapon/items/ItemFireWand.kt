@@ -34,7 +34,7 @@ class ItemFireWand : ItemAoeWeaponBase() {
         return b * target.getErgFactor(Erg.FLAME) // エルグ耐性
     }
 
-    val damage = status("damage", { (5.0 + (!Mana.WIND + !Erg.FLAME) / 20.0) * costFactor }, { float2 })
+    val damage = status("damage", { (2.0 + (!Mana.WIND + !Erg.FLAME) / 20.0) * costFactor }, { float2 })
     val damageBoost = status("damageBoost", { 1.0 + !Mastery.magicCombat / 100.0 }, { boost })
     val criticalRate = status("criticalRate", { CriticalRate(0.0, 1.0, 1.0, 2.0, 0.0, 0.0, 0.0, 0.0) }, { criticalRate })
 
