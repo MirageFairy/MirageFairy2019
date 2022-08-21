@@ -51,7 +51,7 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
     open fun MagicArguments.onHitEffect(world: WorldServer, target: EntityLivingBase) = Unit
 
     /** サーバーワールドでのみ呼び出されます。 */
-    open fun createDamageSource(magicArguments: MagicArguments, world: World, player: EntityPlayer) = FairyMagicDamageSource(player, world.rand.randomInt(looting(magicArguments)))
+    open fun createDamageSource(a: MagicArguments, world: World, player: EntityPlayer) = FairyMagicDamageSource(player, world.rand.randomInt(looting(a)))
 
 
     override fun getMagic() = magic {

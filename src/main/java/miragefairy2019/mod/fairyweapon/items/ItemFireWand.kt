@@ -69,7 +69,7 @@ class ItemFireWand : ItemAoeWeaponBase() {
         )
     }
 
-    override fun createDamageSource(magicArguments: MagicArguments, world: World, player: EntityPlayer) = super.createDamageSource(magicArguments, world, player).also { it.setFireDamage() }
+    override fun createDamageSource(a: MagicArguments, world: World, player: EntityPlayer) = super.createDamageSource(a, world, player).also { it.setFireDamage() }
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックで攻撃") // TRANSLATE
