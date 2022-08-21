@@ -18,7 +18,7 @@ fun Entity.getErgFactor(erg: Erg): Double {
 
     // 特殊防御
     val specialFactor = when (erg) {
-        //Erg.FLAME -> if (this.isImmuneToFire) 0.0 else 1.0 // DamageSource側で防ぐべき
+        Erg.FLAME -> if (this.isImmuneToFire) 0.0 else 1.0 // ゾンビピッグマン等はこれが無いと貫通する
         else -> 1.0
     }
 
