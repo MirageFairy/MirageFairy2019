@@ -177,7 +177,7 @@ class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
                         val hopperBlockPos = pos.down()
                         if (world.getBlockState(hopperBlockPos).block != Blocks.HOPPER) return false // ホッパーじゃない場合は失敗
                         val hopperTileEntity = world.getTileEntity(hopperBlockPos) as? TileEntityHopper ?: return false // ホッパーじゃない場合は失敗
-                        if (!hopperTileEntity[0].isEmpty) return false // 最初のスロットが空でない場合は失敗
+                        if (!hopperTileEntity[0].isEmpty) return true // 最初のスロットが空でない場合は失敗
                         hopperTileEntity[0] = outputItemStack
                         return true
                     }
