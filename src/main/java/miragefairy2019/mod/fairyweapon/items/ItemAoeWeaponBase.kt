@@ -42,7 +42,10 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
     open fun onActionEffect(a: MagicArguments, world: WorldServer) = Unit
 
     /** サーバーワールドでのみ呼び出されます。 */
-    open fun onHit(a: MagicArguments, world: WorldServer, target: EntityLivingBase) = Unit
+    open fun onPreHit(a: MagicArguments, world: WorldServer, target: EntityLivingBase) = Unit
+
+    /** サーバーワールドでのみ呼び出されます。 */
+    open fun onPostHit(a: MagicArguments, world: WorldServer, target: EntityLivingBase) = Unit
 
     /** サーバーワールドでのみ呼び出されます。 */
     open fun onKill(a: MagicArguments, world: WorldServer, target: EntityLivingBase) = Unit
@@ -100,13 +103,14 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
 
                             // 効果
                             val actualDamage = getActualDamage(target) // ダメージ計算
+                            onPreHit(this@magic, worldServer, target)
                             if (actualDamage > 0) {
                                 target.attackEntityFrom(createDamageSource(this@magic, world, player), actualDamage.toFloat()) // ダメージ発生
                             } else if (actualDamage < 0) {
                                 target.heal(-actualDamage.toFloat())
                                 spawnVillagerHappyParticle(worldServer, target, count = (-actualDamage.toFloat()).ceilToInt())
                             }
-                            onHit(this@magic, worldServer, target)
+                            onPostHit(this@magic, worldServer, target)
                             if (target.health <= 0) onKill(this@magic, worldServer, target)
 
                             // ターゲットごとの消費

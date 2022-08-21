@@ -53,7 +53,7 @@ class ItemLightningMagicWand : ItemAoeWeaponBase() {
     }
 
     val lightning = status("lightning", { !Erg.THUNDER >= 10.0 }, { boolean.positive })
-    override fun onHit(a: MagicArguments, world: WorldServer, target: EntityLivingBase) {
+    override fun onPostHit(a: MagicArguments, world: WorldServer, target: EntityLivingBase) {
         if (lightning(a)) target.castOrNull<EntityCreeper>()?.onStruckByLightning(EntityLightningBolt(world, target.posX, target.posY, target.posZ, false)) // 匠の帯電
     }
 

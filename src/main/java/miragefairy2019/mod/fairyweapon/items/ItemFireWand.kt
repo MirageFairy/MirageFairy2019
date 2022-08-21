@@ -50,7 +50,7 @@ class ItemFireWand : ItemAoeWeaponBase() {
         world.playSound(null, a.player.posX, a.player.posY, a.player.posZ, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.PLAYERS, 0.5f, 1.0f) // 爆発音
     }
 
-    override fun onHit(a: MagicArguments, world: WorldServer, target: EntityLivingBase) {
+    override fun onPostHit(a: MagicArguments, world: WorldServer, target: EntityLivingBase) {
         target.setFire(5)
     }
 
