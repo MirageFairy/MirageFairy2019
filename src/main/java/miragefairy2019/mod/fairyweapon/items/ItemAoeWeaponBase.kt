@@ -17,6 +17,8 @@ import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.spawnDamageParticle
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
+import miragefairy2019.mod.fairyweapon.spawnVillagerHappyParticle
+import mirrg.kotlin.hydrogen.ceilToInt
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
@@ -93,7 +95,12 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
 
                             // 効果
                             val actualDamage = getActualDamage(target) // ダメージ計算
-                            target.attackEntityFrom(FairyMagicDamageSource(player, world.rand.randomInt(looting())), actualDamage.toFloat()) // ダメージ発生
+                            if (actualDamage > 0) {
+                                target.attackEntityFrom(FairyMagicDamageSource(player, world.rand.randomInt(looting())), actualDamage.toFloat()) // ダメージ発生
+                            } else if (actualDamage < 0) {
+                                target.heal(-actualDamage.toFloat())
+                                spawnVillagerHappyParticle(worldServer, target, count = (-actualDamage.toFloat()).ceilToInt())
+                            }
                             onHit(worldServer, target)
                             if (target.health <= 0) onKill(worldServer, target)
 
