@@ -153,10 +153,10 @@ fun spawnParticleSphericalRange(world: World, positionCenter: Vec3d, radius: Dou
 
 }
 
-fun spawnVillagerHappyParticle(worldServer: WorldServer, target: Entity) = worldServer.spawnParticle(
+fun spawnVillagerHappyParticle(worldServer: WorldServer, target: Entity, count: Int = 5) = worldServer.spawnParticle(
     EnumParticleTypes.VILLAGER_HAPPY,
     target.posX, target.posY + target.height * 0.5, target.posZ,
-    5,
+    count,
     target.width * 0.5,
     target.height * 0.5,
     target.width * 0.5,
