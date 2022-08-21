@@ -21,6 +21,7 @@ import miragefairy2019.mod.fairyweapon.magic4.percent0
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
+import miragefairy2019.mod.fairyweapon.spawnVillagerHappyParticle
 import miragefairy2019.mod.skill.Mastery
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.entity.EntityLivingBase
@@ -29,7 +30,6 @@ import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
-import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.SoundCategory
 import net.minecraft.world.WorldServer
 import net.minecraftforge.fml.relauncher.Side
@@ -125,15 +125,7 @@ class ItemTemptationOcarina : ItemFairyWeaponMagic4() {
                             weaponItemStack.damageItem(worldServer.rand.randomInt(wear()), player) // 耐久値の消費
 
                             // ターゲットごとのエフェクト
-                            worldServer.spawnParticle(
-                                EnumParticleTypes.VILLAGER_HAPPY,
-                                target.posX, target.posY + target.height * 0.5, target.posZ,
-                                5,
-                                target.width * 0.5,
-                                target.height * 0.5,
-                                target.width * 0.5,
-                                0.02
-                            )
+                            spawnVillagerHappyParticle(worldServer, target)
 
                         }
                     }
