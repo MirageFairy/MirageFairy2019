@@ -154,7 +154,7 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
                     entryList
                         .map {
                             if (flag.isAdvanced) {
-                                it.first.displayName() + TextComponentScope.format("%d/%d", it.second.floorToInt(), variant.fairyCard.rawErgSet[it.first].floorToInt())
+                                it.first.displayName() + TextComponentScope.format("%2d/%2d", it.second.floorToInt(), variant.fairyCard.rawErgSet[it.first].floorToInt())
                             } else {
                                 it.first.displayName()
                             }
