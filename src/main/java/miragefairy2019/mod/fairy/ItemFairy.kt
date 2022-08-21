@@ -31,6 +31,7 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.libkt.white
 import miragefairy2019.libkt.withColor
+import mirrg.kotlin.hydrogen.floorToInt
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
@@ -153,7 +154,7 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
                     entryList
                         .map {
                             if (flag.isAdvanced) {
-                                it.first.displayName() + TextComponentScope.format("%.0f/%.0f", it.second, variant.fairyCard.rawErgSet[it.first])
+                                it.first.displayName() + TextComponentScope.format("%d/%d", it.second.floorToInt(), variant.fairyCard.rawErgSet[it.first].floorToInt())
                             } else {
                                 it.first.displayName()
                             }
