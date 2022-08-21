@@ -138,9 +138,9 @@ val fairyModule = module {
             onRegisterItem {
                 FairyCard.values().forEach { fairyCard ->
                     val rateRare = 2.0.pow((fairyCard.rare + rank - 2) / 4.0)
-                    val rateVariance = 0.5.pow(((fairyCard.manaSet / fairyCard.manaSet.max).sum - 1) / 5.0)
-                    val manaSetBase = fairyCard.manaSet / fairyCard.manaSet.sum * (50 * rateRare * rateVariance * fairyCard.rateSpecial)
-                    val ergSetReal = ErgSet(fairyCard.ergSet.entries.associate { (erg, value) -> erg to value * rateRare })
+                    val rateVariance = 0.5.pow(((fairyCard.rawManaSet / fairyCard.rawManaSet.max).sum - 1) / 5.0)
+                    val manaSetBase = fairyCard.rawManaSet / fairyCard.rawManaSet.sum * (50 * rateRare * rateVariance * fairyCard.rateSpecial)
+                    val ergSetReal = ErgSet(fairyCard.rawErgSet.entries.associate { (erg, value) -> erg to value * rateRare })
                     val variant = VariantFairy(
                         fairyCard,
                         ResourceLocation(ModMirageFairy2019.MODID, fairyCard.registryName),

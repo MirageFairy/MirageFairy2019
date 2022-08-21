@@ -23,8 +23,8 @@ enum class FairyCard(
     val rare: Int,
     val cost: Int,
     val rateSpecial: Double,
-    val manaSet: ManaSet,
-    val ergSet: ErgSet,
+    val rawManaSet: ManaSet,
+    val rawErgSet: ErgSet,
     val colorSet: ColorSet,
     val englishName: String,
     val japaneseName: String
