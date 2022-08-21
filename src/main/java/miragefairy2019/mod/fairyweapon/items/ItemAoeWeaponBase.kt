@@ -20,8 +20,10 @@ import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import miragefairy2019.mod.fairyweapon.spawnVillagerHappyParticle
 import mirrg.kotlin.hydrogen.ceilToInt
 import net.minecraft.entity.EntityLivingBase
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
+import net.minecraft.world.World
 import net.minecraft.world.WorldServer
 import kotlin.math.ceil
 
@@ -47,6 +49,9 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
 
     /** サーバーワールドでのみ呼び出されます。 */
     open fun MagicArguments.onHitEffect(world: WorldServer, target: EntityLivingBase) = Unit
+
+    /** サーバーワールドでのみ呼び出されます。 */
+    open fun createDamageSource(magicArguments: MagicArguments, world: World, player: EntityPlayer) = FairyMagicDamageSource(player, world.rand.randomInt(looting(magicArguments)))
 
 
     override fun getMagic() = magic {
@@ -96,7 +101,7 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
                             // 効果
                             val actualDamage = getActualDamage(target) // ダメージ計算
                             if (actualDamage > 0) {
-                                target.attackEntityFrom(FairyMagicDamageSource(player, world.rand.randomInt(looting())), actualDamage.toFloat()) // ダメージ発生
+                                target.attackEntityFrom(createDamageSource(this@magic, world, player), actualDamage.toFloat()) // ダメージ発生
                             } else if (actualDamage < 0) {
                                 target.heal(-actualDamage.toFloat())
                                 spawnVillagerHappyParticle(worldServer, target, count = (-actualDamage.toFloat()).ceilToInt())
