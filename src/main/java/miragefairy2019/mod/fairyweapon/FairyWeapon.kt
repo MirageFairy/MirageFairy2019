@@ -48,6 +48,7 @@ import miragefairy2019.mod.fairyweapon.items.ItemCollectingMagicWand
 import miragefairy2019.mod.fairyweapon.items.ItemCrystalSword
 import miragefairy2019.mod.fairyweapon.items.ItemFairySword
 import miragefairy2019.mod.fairyweapon.items.ItemFairyWeapon
+import miragefairy2019.mod.fairyweapon.items.ItemFireWand
 import miragefairy2019.mod.fairyweapon.items.ItemFlowerPickingBell
 import miragefairy2019.mod.fairyweapon.items.ItemGravityRod
 import miragefairy2019.mod.fairyweapon.items.ItemLightMagicWand
@@ -361,6 +362,34 @@ enum class FairyWeaponCard(
                     "G" to DataOreIngredient(ore = "blockMirageFairyCrystalPure")
                 ),
                 result = DataResult(item = "miragefairy2019:lightning_magic_wand")
+            )
+        }
+    ),
+    fireWand(
+        magicWandBase, "fire_wand", "fireWand", 3, { ItemFireWand() },
+        LangPair("Fire Wand", "ファイアロッド"),
+        LangPair("", "古代魔法「ファイアボルト」"),
+        null,
+        LangPair("Get a specific item", "火球の空中制御が炎魔法の課題であった"),
+        "goal",
+        listOf(!Erg.FLAME, !Erg.KINESIS, !"dustCoal", !"gemHeliolite"),
+        {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cGk",
+                    "D#G",
+                    "fDp"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:magic_wand_base"),
+                    "f" to DataOreIngredient(ore = "mirageFairy2019SphereFlame"),
+                    "k" to DataOreIngredient(ore = "mirageFairy2019SphereKinesis"),
+                    "D" to DataOreIngredient(ore = "dustCoal"),
+                    "G" to DataOreIngredient(ore = "gemHeliolite"),
+                    "c" to WandType.CRAFTING.ingredientData,
+                    "p" to WandType.POLISHING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:fire_wand")
             )
         }
     ),

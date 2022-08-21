@@ -1,0 +1,40 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cGk",
+    "D#G",
+    "fDp"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:magic_wand_base"
+    },
+    "f": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereFlame"
+    },
+    "k": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereKinesis"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dustCoal"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gemHeliolite"
+    },
+    "c": {
+      "type": "miragefairy2019:wand",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    },
+    "p": {
+      "type": "miragefairy2019:wand",
+      "ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:fire_wand"
+  }
+}
