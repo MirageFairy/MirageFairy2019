@@ -1,5 +1,6 @@
 package miragefairy2019.mod.beanstalk
 
+import miragefairy2019.lib.TileEntityIgnoreBlockState
 import miragefairy2019.lib.get
 import miragefairy2019.lib.indices
 import miragefairy2019.libkt.equalsItemDamageTag
@@ -46,7 +47,7 @@ abstract class BlockBeanstalkFlower<T : TileEntityBeanstalkFlower> : BlockBeanst
 
 }
 
-abstract class TileEntityBeanstalkFlower : TileEntity(), ITickable {
+abstract class TileEntityBeanstalkFlower : TileEntityIgnoreBlockState(), ITickable {
 
     fun getEncounterBlockPos(): FacedBlockPos? {
         val blockState = world.getBlockState(pos)

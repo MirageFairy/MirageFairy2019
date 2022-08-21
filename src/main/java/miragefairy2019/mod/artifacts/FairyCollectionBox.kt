@@ -1,5 +1,6 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.lib.TileEntityIgnoreBlockState
 import miragefairy2019.lib.gui.rectangle
 import miragefairy2019.lib.gui.x
 import miragefairy2019.lib.gui.y
@@ -60,7 +61,6 @@ import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
@@ -481,7 +481,7 @@ class BlockFairyCollectionBox : BlockContainer(Material.WOOD) {
     }
 }
 
-class TileEntityFairyCollectionBox : TileEntity(), ISimpleGuiHandlerTileEntity {
+class TileEntityFairyCollectionBox : TileEntityIgnoreBlockState(), ISimpleGuiHandlerTileEntity {
     val inventory = InventoryFairyCollectionBox(this, "tile.fairyCollectionBox.name", false, 50)
 
     override fun readFromNBT(nbt: NBTTagCompound) {

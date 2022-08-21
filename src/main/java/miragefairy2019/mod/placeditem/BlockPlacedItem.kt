@@ -1,5 +1,6 @@
 package miragefairy2019.mod.placeditem
 
+import miragefairy2019.lib.TileEntityIgnoreBlockState
 import miragefairy2019.libkt.orEmpty
 import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.Block
@@ -22,7 +23,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.network.NetworkManager
 import net.minecraft.network.play.server.SPacketUpdateTileEntity
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
@@ -123,7 +123,7 @@ class BlockPlacedItem : BlockContainer(Material.CIRCUITS) {
     }
 }
 
-class TileEntityPlacedItem : TileEntity() {
+class TileEntityPlacedItem : TileEntityIgnoreBlockState() {
     var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(1, ItemStack.EMPTY)
     var rotation = 0.0
     var standing = false

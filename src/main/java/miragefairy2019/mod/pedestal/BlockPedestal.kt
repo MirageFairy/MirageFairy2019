@@ -2,6 +2,7 @@ package miragefairy2019.mod.pedestal
 
 import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
+import miragefairy2019.lib.TileEntityIgnoreBlockState
 import miragefairy2019.lib.obtain
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.notEmptyOrNull
@@ -166,7 +167,7 @@ interface ITransformProxy {
     fun scale(x: Double, y: Double, z: Double)
 }
 
-abstract class TileEntityPedestal : TileEntity() {
+abstract class TileEntityPedestal : TileEntityIgnoreBlockState() {
     var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(1, ItemStack.EMPTY)
     var itemStackOrNull: ItemStack?
         get() = itemStacks[0].notEmptyOrNull

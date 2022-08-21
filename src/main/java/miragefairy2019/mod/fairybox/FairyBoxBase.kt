@@ -1,5 +1,6 @@
 package miragefairy2019.mod.fairybox
 
+import miragefairy2019.lib.TileEntityIgnoreBlockState
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.formattedText
@@ -20,7 +21,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.network.NetworkManager
 import net.minecraft.network.play.server.SPacketUpdateTileEntity
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
@@ -137,7 +137,7 @@ class BlockFairyBoxBase(private val tier: Int, private val tileEntityProvider: (
     }
 }
 
-abstract class TileEntityFairyBoxBase : TileEntity(), ITickable {
+abstract class TileEntityFairyBoxBase : TileEntityIgnoreBlockState(), ITickable {
 
     // ブロック
 
