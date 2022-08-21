@@ -103,10 +103,6 @@ private fun writeAction(player: EntityPlayer, fileName: String, text: String) {
 }
 
 open class ItemDebug(val color: IRgb) : Item(), IColoredItem {
-    init {
-        maxStackSize = 1
-    }
-
     override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int) = color.rgb
 }
 
