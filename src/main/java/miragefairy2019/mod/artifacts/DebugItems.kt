@@ -88,6 +88,7 @@ val debugItemsModule = module {
     r({ ItemDebugMirageFlowerGrowthRate() }, "mirage_flower_growth_rate", "Magic Plant Growth Rate", "魔法植物成長速度表示")
     r({ ItemDebugShowData() }, "show_data", "Show Data", "データ表示")
     r({ ItemDebugSelectLanguage() }, "select_language", "Select Language", "言語選択")
+    r({ ItemDebugRotateBlock() }, "rotate_block", "Rotate Block", "ブロック回転")
 
 }
 
@@ -371,7 +372,18 @@ class ItemDebugSelectLanguage : ItemDebug(0x0040FF.toRgb()) {
     }
 }
 
-//0x2000FF
+class ItemDebugRotateBlock : ItemDebug(0x2000FF.toRgb()) {
+    override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        if (world.isRemote) return EnumActionResult.SUCCESS
+
+        if (!world.getBlockState(blockPos).block.rotateBlock(world, blockPos, facing)) {
+            player.sendStatusMessage(textComponent { "Failed!"() }, true)
+        }
+
+        return EnumActionResult.SUCCESS
+    }
+}
+
 //0x8000FF
 //0xDF00FF
 //0xFF00BF

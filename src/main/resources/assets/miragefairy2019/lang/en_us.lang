@@ -50,6 +50,7 @@ item.debugOreNameList.name=Debug: Ore Name List
 item.debugOreSeedDropRate.name=Debug: Ore Seed Drop Rate
 item.debugOreSeedStatistics.name=Debug: Ore Seed Statistics
 item.debugPlayerAuraReset.name=Debug: Player Aura Reset
+item.debugRotateBlock.name=Debug: Rotate Block
 item.debugSelectLanguage.name=Debug: Select Language
 item.debugShowData.name=Debug: Show Data
 item.debugSkillResetUnlock.name=Debug: Skill Reset Unlock
