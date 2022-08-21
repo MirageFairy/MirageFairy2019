@@ -98,7 +98,7 @@ val beanstalkImporterModule = module {
                 ),
                 key = mapOf(
                     "#" to DataSimpleIngredient(item = "miragefairy2019:beanstalk_pipe"),
-                    "1" to DataOreIngredient(ore = "mirageFairy2019SphereShoot")
+                    "1" to DataOreIngredient(ore = "mirageFairy2019SphereKinesis")
                 ),
                 result = DataResult(item = "miragefairy2019:beanstalk_importer")
             )

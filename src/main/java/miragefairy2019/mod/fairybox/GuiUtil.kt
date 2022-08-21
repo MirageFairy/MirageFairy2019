@@ -30,7 +30,7 @@ enum class TextureElement(val column: Int, val row: Int) {
     SOUND(1, 1),
     SPACE(2, 1),
     WARP(3, 1),
-    SHOOT(4, 1),
+    KINESIS(4, 1),
     DESTROY(5, 1),
     CHEMICAL(6, 1),
     SLASH(7, 1),
@@ -73,7 +73,7 @@ fun Erg.toTextureElement() = when (this) {
     Erg.SOUND -> TextureElement.SOUND
     Erg.SPACE -> TextureElement.SPACE
     Erg.WARP -> TextureElement.WARP
-    Erg.SHOOT -> TextureElement.SHOOT
+    Erg.KINESIS -> TextureElement.KINESIS
     Erg.DESTROY -> TextureElement.DESTROY
     Erg.CHEMICAL -> TextureElement.CHEMICAL
     Erg.SLASH -> TextureElement.SLASH

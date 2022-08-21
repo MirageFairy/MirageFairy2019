@@ -19,7 +19,7 @@ val ergModule = module {
                 Erg.SOUND -> enJa(getKey("sound"), "SOUND", "音波")
                 Erg.SPACE -> enJa(getKey("space"), "SPACE", "空間")
                 Erg.WARP -> enJa(getKey("warp"), "WARP", "縮地")
-                Erg.SHOOT -> enJa(getKey("shoot"), "PROJECTION", "射出")
+                Erg.KINESIS -> enJa(getKey("kinesis"), "KINESIS", "運動")
                 Erg.DESTROY -> enJa(getKey("destroy"), "DESTROY", "破壊")
                 Erg.CHEMICAL -> enJa(getKey("chemical"), "CHEMICAL", "化学")
                 Erg.SLASH -> enJa(getKey("slash"), "SLASH", "切断")

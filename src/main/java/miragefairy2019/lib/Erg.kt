@@ -22,7 +22,7 @@ val Erg.textColor
         Erg.SOUND -> TextFormatting.GRAY
         Erg.SPACE -> TextFormatting.DARK_PURPLE
         Erg.WARP -> TextFormatting.DARK_PURPLE
-        Erg.SHOOT -> TextFormatting.GREEN
+        Erg.KINESIS -> TextFormatting.GREEN
         Erg.DESTROY -> TextFormatting.DARK_RED
         Erg.CHEMICAL -> TextFormatting.DARK_AQUA
         Erg.SLASH -> TextFormatting.DARK_RED

@@ -156,7 +156,7 @@ val Erg.sphereType
             Erg.SOUND -> SphereType(Erg.SOUND, 0x98ACE7, 0xD8DDFF, 0xBFC9D8, 0xC9D0ED, block { Blocks.NOTEBLOCK }, null)
             Erg.SPACE -> SphereType(Erg.SPACE, 0x000000, 0x4D0065, 0x67009D, 0x001E74, block { Blocks.CHEST }, null)
             Erg.WARP -> SphereType(Erg.WARP, 0x3A00D3, 0x8CF4E2, 0x349988, 0xD004FB, ore("enderpearl"), null)
-            Erg.SHOOT -> SphereType(Erg.SHOOT, 0x969696, 0x896727, 0x896727, 0xD8D8D8, item { Items.BOW }, null)
+            Erg.KINESIS -> SphereType(Erg.KINESIS, 0x969696, 0x896727, 0x896727, 0xD8D8D8, item { Items.BOW }, null)
             Erg.DESTROY -> SphereType(Erg.DESTROY, 0xFFFFFF, 0xFF5A35, 0xFF4800, 0x000000, block { Blocks.TNT }, null)
             Erg.CHEMICAL -> SphereType(Erg.CHEMICAL, 0x0067FF, 0xC9DFEF, 0xB0C4D7, 0x0755FF, item { Items.FERMENTED_SPIDER_EYE }, null)
             Erg.SLASH -> SphereType(Erg.SLASH, 0xAAAAAA, 0xFFC9B2, 0xD20000, 0xFFFFFF, item { Items.SHEARS }, null)

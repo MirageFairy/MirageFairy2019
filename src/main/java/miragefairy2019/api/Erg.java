@@ -13,7 +13,7 @@ public enum Erg {
     SOUND,
     SPACE,
     WARP,
-    SHOOT,
+    KINESIS,
     DESTROY,
     CHEMICAL,
     SLASH,
