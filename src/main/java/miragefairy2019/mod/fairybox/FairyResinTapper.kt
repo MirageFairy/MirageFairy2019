@@ -1,5 +1,6 @@
 package miragefairy2019.mod.fairybox
 
+import miragefairy2019.lib.get
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -22,6 +23,7 @@ import miragefairy2019.lib.resourcemaker.DataVariant
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
+import miragefairy2019.lib.set
 import miragefairy2019.libkt.darkRed
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.enJa
@@ -35,7 +37,9 @@ import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Blocks
 import net.minecraft.item.ItemBlock
+import net.minecraft.tileentity.TileEntityHopper
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
@@ -166,7 +170,24 @@ class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
                 val baseCount = (auraCollectionSpeed / smallTreeAuraCollectionSpeed - 0.5) atLeast 0.0
 
                 val count = world.rand.randomInt(baseCount)
-                if (count > 0) FairyMaterialCard.FAIRY_WOOD_RESIN.createItemStack(count).drop(world, blockPosOutput, motionless = true)
+                if (count > 0) {
+                    val outputItemStack = FairyMaterialCard.FAIRY_WOOD_RESIN.createItemStack(count)
+
+                    fun insert(): Boolean {
+                        val hopperBlockPos = pos.down()
+                        if (world.getBlockState(hopperBlockPos).block != Blocks.HOPPER) return false // ホッパーじゃない場合は失敗
+                        val hopperTileEntity = world.getTileEntity(hopperBlockPos) as? TileEntityHopper ?: return false // ホッパーじゃない場合は失敗
+                        if (!hopperTileEntity[0].isEmpty) return false // 最初のスロットが空でない場合は失敗
+                        hopperTileEntity[0] = outputItemStack
+                        return true
+                    }
+
+                    fun drop() {
+                        outputItemStack.drop(world, blockPosOutput, motionless = true)
+                    }
+
+                    if (!insert()) drop()
+                }
             }
         }
     }
