@@ -46,16 +46,16 @@ class ItemFireWand : ItemAoeWeaponBase() {
     override val wear = status("wear", { 1.0 / (1.0 + (!Mana.FIRE + !Erg.WATER) / 20.0) * costFactor }, { percent2 })
     override val coolTime = status("coolTime", { (20.0 * 2) / (1.0 + (!Mana.DARK + !Erg.ENERGY) / 50.0) * costFactor }, { duration2 })
 
-    override fun MagicArguments.onActionEffect(world: WorldServer) {
-        world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.PLAYERS, 0.5f, 1.0f) // 爆発音
+    override fun onActionEffect(a: MagicArguments, world: WorldServer) {
+        world.playSound(null, a.player.posX, a.player.posY, a.player.posZ, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.PLAYERS, 0.5f, 1.0f) // 爆発音
     }
 
-    override fun MagicArguments.onHit(world: WorldServer, target: EntityLivingBase) {
+    override fun onHit(a: MagicArguments, world: WorldServer, target: EntityLivingBase) {
         target.setFire(5)
     }
 
-    override fun MagicArguments.onHitEffect(world: WorldServer, target: EntityLivingBase) {
-        spawnMagicParticle(world, player, target)  // 射線エフェクト
+    override fun onHitEffect(a: MagicArguments, world: WorldServer, target: EntityLivingBase) {
+        spawnMagicParticle(world, a.player, target)  // 射線エフェクト
         world.spawnParticle(
             EnumParticleTypes.FLAME,
             target.posX + (world.rand.nextDouble() - 0.5) * target.width,

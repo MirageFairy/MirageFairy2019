@@ -48,17 +48,17 @@ class ItemLightningMagicWand : ItemAoeWeaponBase() {
     override val wear = status("wear", { 1.0 / (1.0 + (!Mana.FIRE + !Erg.FREEZE) / 20.0) * costFactor }, { percent2 })
     override val coolTime = status("coolTime", { (20.0 * 2) / (1.0 + (!Mana.DARK + !Erg.ENERGY) / 50.0) * costFactor }, { duration2 })
 
-    override fun MagicArguments.onActionEffect(world: WorldServer) {
-        world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_LIGHTNING_IMPACT, SoundCategory.PLAYERS, 0.2f, 1.0f) // 爆発音
+    override fun onActionEffect(a: MagicArguments, world: WorldServer) {
+        world.playSound(null, a.player.posX, a.player.posY, a.player.posZ, SoundEvents.ENTITY_LIGHTNING_IMPACT, SoundCategory.PLAYERS, 0.2f, 1.0f) // 爆発音
     }
 
     val lightning = status("lightning", { !Erg.THUNDER >= 10.0 }, { boolean.positive })
-    override fun MagicArguments.onHit(world: WorldServer, target: EntityLivingBase) {
-        if (lightning()) target.castOrNull<EntityCreeper>()?.onStruckByLightning(EntityLightningBolt(world, target.posX, target.posY, target.posZ, false)) // 匠の帯電
+    override fun onHit(a: MagicArguments, world: WorldServer, target: EntityLivingBase) {
+        if (lightning(a)) target.castOrNull<EntityCreeper>()?.onStruckByLightning(EntityLightningBolt(world, target.posX, target.posY, target.posZ, false)) // 匠の帯電
     }
 
-    override fun MagicArguments.onHitEffect(world: WorldServer, target: EntityLivingBase) {
-        spawnMagicParticle(world, player, target)  // 射線エフェクト
+    override fun onHitEffect(a: MagicArguments, world: WorldServer, target: EntityLivingBase) {
+        spawnMagicParticle(world, a.player, target)  // 射線エフェクト
     }
 
     @SideOnly(Side.CLIENT)

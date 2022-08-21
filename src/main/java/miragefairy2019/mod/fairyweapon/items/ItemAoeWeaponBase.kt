@@ -39,16 +39,16 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
     abstract val coolTime: FormulaArguments.() -> Double
 
     /** サーバーワールドでのみ呼び出されます。 */
-    open fun MagicArguments.onActionEffect(world: WorldServer) = Unit
+    open fun onActionEffect(a: MagicArguments, world: WorldServer) = Unit
 
     /** サーバーワールドでのみ呼び出されます。 */
-    open fun MagicArguments.onHit(world: WorldServer, target: EntityLivingBase) = Unit
+    open fun onHit(a: MagicArguments, world: WorldServer, target: EntityLivingBase) = Unit
 
     /** サーバーワールドでのみ呼び出されます。 */
-    open fun MagicArguments.onKill(world: WorldServer, target: EntityLivingBase) = Unit
+    open fun onKill(a: MagicArguments, world: WorldServer, target: EntityLivingBase) = Unit
 
     /** サーバーワールドでのみ呼び出されます。 */
-    open fun MagicArguments.onHitEffect(world: WorldServer, target: EntityLivingBase) = Unit
+    open fun onHitEffect(a: MagicArguments, world: WorldServer, target: EntityLivingBase) = Unit
 
     /** サーバーワールドでのみ呼び出されます。 */
     open fun createDamageSource(a: MagicArguments, world: World, player: EntityPlayer) = FairyMagicDamageSource(player, world.rand.randomInt(looting(a)))
@@ -106,8 +106,8 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
                                 target.heal(-actualDamage.toFloat())
                                 spawnVillagerHappyParticle(worldServer, target, count = (-actualDamage.toFloat()).ceilToInt())
                             }
-                            onHit(worldServer, target)
-                            if (target.health <= 0) onKill(worldServer, target)
+                            onHit(this@magic, worldServer, target)
+                            if (target.health <= 0) onKill(this@magic, worldServer, target)
 
                             // ターゲットごとの消費
                             weaponItemStack.damageItem(world.rand.randomInt(wear()), player) // 耐久値の消費
@@ -115,7 +115,7 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
                             // ターゲットごとのエフェクト
                             spawnDamageParticle(worldServer, target, actualDamage)  // ダメージのエフェクト
                             // TODO クリティカル時のエフェクト
-                            onHitEffect(worldServer, target)
+                            onHitEffect(this@magic, worldServer, target)
 
                         }
                     }
@@ -124,7 +124,7 @@ abstract class ItemAoeWeaponBase : ItemFairyWeaponMagic4() {
                     player.cooldownTracker.setCooldown(this@ItemAoeWeaponBase, ceil(coolTime()).toInt()) // クールタイム
 
                     // 行使ごとのエフェクト
-                    onActionEffect(worldServer)
+                    onActionEffect(this@magic, worldServer)
 
                 } else {
 

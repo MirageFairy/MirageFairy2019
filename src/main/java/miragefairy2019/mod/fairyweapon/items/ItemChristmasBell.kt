@@ -39,11 +39,11 @@ class ItemChristmasBell : ItemAoeWeaponBase() {
     override val coolTime = status("coolTime", { (20.0 * 4) / (1.0 + (!Mana.AQUA + !Erg.ENERGY) / 50.0) * costFactor }, { duration2 })
 
     val pitch = status("pitch", { 0.5.pow(costFactor - 1.0) }, { pitch })
-    override fun MagicArguments.onActionEffect(world: WorldServer) {
-        world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, pitch().toFloat()) // 鐘の音
+    override fun onActionEffect(a: MagicArguments, world: WorldServer) {
+        world.playSound(null, a.player.posX, a.player.posY, a.player.posZ, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, pitch(a).toFloat()) // 鐘の音
     }
 
-    override fun MagicArguments.onKill(world: WorldServer, target: EntityLivingBase) {
+    override fun onKill(a: MagicArguments, world: WorldServer, target: EntityLivingBase) {
         if (target.isEntityUndead) Items.COAL.createItemStack().drop(world, target.positionVector)
     }
 
