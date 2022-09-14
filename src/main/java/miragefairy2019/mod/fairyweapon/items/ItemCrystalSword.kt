@@ -62,7 +62,7 @@ class ItemCrystalSword(
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf(
         "攻撃時、追加ダメージが発生", // TRANSLATE
-        "撃破時、フェアリークリスタルを消費して妖精を召喚" // TRANSLATE
+        "撃破時、妖精を召喚" // TRANSLATE
     )
 
     override fun getMagic() = magic {
