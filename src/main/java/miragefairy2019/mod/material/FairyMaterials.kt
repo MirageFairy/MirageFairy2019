@@ -669,6 +669,12 @@ enum class FairyMaterialCard(
         5, false, { ore("leafMirageFairyVelopeda") },
         { }
     ),
+    FAIRY_WOOD_ROSIN(
+        27, "fairy_wood_rosin", "fairyWoodRosin",
+        "Fairy Wood Rosin", "妖精の木の涙", "琥珀色の月が昇るとき、妖精の木は静かに泣く",
+        5, false, { ore("mirageFairyWoodRosin") },
+        { }
+    ),
     ;
 
     val oreNames = mutableListOf<String>()
@@ -721,6 +727,32 @@ val fairyMaterialsModule = module {
 
         // アイテム固有の初期化処理
         fairyMaterialCard.initializer(this)
+
+    }
+
+    onAddRecipe {
+
+        // 妖精の木の涙
+        fairyCentrifugeCraftHandler(60.0) {
+            process { !Mana.DARK + !Erg.FLAME * 2.0 }
+            process { !Mana.GAIA + !Erg.SPACE * 2.0 }
+            process { !Mana.AQUA + !Erg.CHEMICAL * 2.0 }
+            input("mirageFairyWoodResin".oreIngredient, 8)
+            input("container1000MiragiumWater".oreIngredient, 1)
+            output(FairyMaterialCard.FAIRY_WOOD_ROSIN.createItemStack(), 1.0, 0.5)
+        }
+
+        // 妖精のプラスチック
+        fairyCentrifugeCraftHandler(60.0) {
+            process { !Mana.WIND + !Erg.FLAME * 2.0 }
+            process { !Mana.SHINE + !Erg.SPACE * 2.0 }
+            process { !Mana.FIRE + !Erg.CHEMICAL * 2.0 }
+            input("mirageFairyWoodRosin".oreIngredient, 8)
+            input(Items.DYE.createItemStack(metadata = 15).ingredient, 8)
+            input("obsidian".oreIngredient, 1)
+            output(FairyMaterialCard.FAIRY_PLASTIC.createItemStack(), 1.0, 0.5)
+            output(FairyMaterialCard.FAIRY_PLASTIC_WITH_FAIRY.createItemStack(), 0.01)
+        }
 
     }
 
