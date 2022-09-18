@@ -355,18 +355,6 @@ val fairyCentrifugeModule = module {
             output(FairyMaterialCard.MIRAGE_FLOWER_OIL_BOTTLE.createItemStack(), 1.0)
         }
 
-        // 樹液64＋骨粉8＋黒曜石→妖精のプラスチック
-        fairyCentrifugeCraftHandler(150.0) {
-            process { !Mana.GAIA + !Erg.FLAME * 2.0 }
-            process { !Mana.FIRE + !Erg.SPACE * 2.0 }
-            process { !Mana.FIRE + !Erg.CHEMICAL * 2.0 }
-            input("mirageFairyWoodResin".oreIngredient, 64)
-            input(Items.DYE.createItemStack(metadata = 15).ingredient, 8)
-            input("obsidian".oreIngredient, 1)
-            output(FairyMaterialCard.FAIRY_PLASTIC.createItemStack(), 1.0, 1.0)
-            output(FairyMaterialCard.FAIRY_PLASTIC_WITH_FAIRY.createItemStack(), 0.01)
-        }
-
 
         // マグマクリーム分解
 
