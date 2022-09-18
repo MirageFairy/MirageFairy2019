@@ -1,0 +1,17 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "ingotMirageFairySolidFuel"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:fairy_materials",
+    "data": 30,
+    "count": 8
+  }
+}

@@ -14,6 +14,7 @@ import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
+import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
@@ -169,6 +170,15 @@ object CompressedMaterials {
                 }
             }
 
+            fun toBlock8(block: String, ingredientIngot: DataIngredient, resultBlock: DataResult) {
+                makeRecipe("materials/compress/$block") {
+                    DataShapelessRecipe(
+                        ingredients = (1..8).map { ingredientIngot },
+                        result = resultBlock
+                    )
+                }
+            }
+
             operator fun String.not() = DataOreIngredient(ore = this)
             operator fun String.invoke(data: Int) = DataSimpleIngredient(item = this, data = data)
             fun r(item: String, data: Int, count: Int) = DataResult(item = item, data = data, count = count)
@@ -211,8 +221,10 @@ object CompressedMaterials {
             // TODO move
             fromBlock("miragium_tiny_dust", "miragium_dust", !"dustMiragium", r(m, 4, 9))
             fromBlock("miragium_nugget", "miragium_ingot", !"ingotMiragium", r(m, 13, 9))
+            fromBlock("mirage_fairy_solid_fuel_half_chunk", "mirage_fairy_solid_fuel_ingot", !"ingotMirageFairySolidFuel", r(fm, 30, 8))
             toBlock("miragium_dust", !"dustTinyMiragium", r(m, 3, 1))
             toBlock("miragium_ingot", !"nuggetMiragium", r(m, 5, 1))
+            toBlock8("mirage_fairy_solid_fuel_ingot", !"halfChunkMirageFairySolidFuel", r(fm, 29, 1))
 
         }
 
