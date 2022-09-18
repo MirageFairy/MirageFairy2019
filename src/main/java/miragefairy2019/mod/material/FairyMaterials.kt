@@ -681,6 +681,18 @@ enum class FairyMaterialCard(
         5, false, { ore("bottleMirageFairyLiqueur").ore("container250MirageFairyLiqueur").bottle() },
         { }
     ),
+    MIRAGE_FAIRY_SOLID_FUEL_INGOT(
+        29, "mirage_fairy_solid_fuel_ingot", "ingotMirageFairySolidFuel",
+        "Solid Fuel", "固形燃料", "なぜかこれを食べる妖精が続出した",
+        5, false, { ore("ingotMirageFairySolidFuel").fuel(1600) },
+        { }
+    ),
+    MIRAGE_FAIRY_SOLID_FUEL_HALF_CHUNK(
+        30, "mirage_fairy_solid_fuel_half_chunk", "halfChunkMirageFairySolidFuel",
+        "1/8 Solid Fuel", "8分の1の固形燃料", "ひとくちサイズの固形燃料",
+        5, false, { ore("halfChunkMirageFairySolidFuel").fuel(200) },
+        { }
+    ),
     ;
 
     val oreNames = mutableListOf<String>()
@@ -777,6 +789,16 @@ val fairyMaterialsModule = module {
         }
     }
 
+    // 固形燃料
+    onAddRecipe {
+        fairyCentrifugeCraftHandler(30.0) {
+            process { !Mana.GAIA + !Erg.FLAME * 2.0 }
+            process { !Mana.DARK + !Erg.KINESIS * 2.0 }
+            process { !Mana.WIND + !Erg.FREEZE * 2.0 }
+            input("container250MirageFairyLiqueur".oreIngredient, 1)
+            input(Items.SUGAR.ingredient, 16)
+            output(FairyMaterialCard.MIRAGE_FAIRY_SOLID_FUEL_INGOT.createItemStack(), 16.0, 1.0)
+        }
     }
 
 }
