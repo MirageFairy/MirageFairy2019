@@ -675,6 +675,12 @@ enum class FairyMaterialCard(
         5, false, { ore("mirageFairyWoodRosin") },
         { }
     ),
+    MIRAGE_FAIRY_LIQUEUR_BOTTLE(
+        28, "mirage_fairy_liqueur_bottle", "bottleMirageFairyLiqueur",
+        "Fairy Liqueur", "妖精のリキュール", "妖精が飲むとハイになるが、人間は火傷する",
+        5, false, { ore("bottleMirageFairyLiqueur").ore("container250MirageFairyLiqueur").bottle() },
+        { }
+    ),
     ;
 
     val oreNames = mutableListOf<String>()
@@ -752,6 +758,18 @@ val fairyMaterialsModule = module {
             input("obsidian".oreIngredient, 1)
             output(FairyMaterialCard.FAIRY_PLASTIC.createItemStack(), 1.0, 0.5)
             output(FairyMaterialCard.FAIRY_PLASTIC_WITH_FAIRY.createItemStack(), 0.01)
+        }
+
+        // 妖精のリキュール
+        fairyCentrifugeCraftHandler(150.0) {
+            process { !Mana.WIND + !Erg.LIFE * 2.0 }
+            process { !Mana.AQUA + !Erg.CHEMICAL * 2.0 }
+            process { !Mana.GAIA + !Erg.FLAME * 2.0 }
+            input("mirageFairyWoodResin".oreIngredient, 16)
+            input("mirageFairyMandrake".oreIngredient, 1)
+            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+            output(FairyMaterialCard.MIRAGE_FAIRY_LIQUEUR_BOTTLE.createItemStack(), 1.0)
+            output(FairyMaterialCard.MANDRAKE.createItemStack(), 1.0)
         }
 
     }
