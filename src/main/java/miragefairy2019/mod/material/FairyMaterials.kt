@@ -736,9 +736,9 @@ val fairyMaterialsModule = module {
 
     }
 
-    onAddRecipe {
 
-        // 妖精の木の涙
+    // 妖精の木の涙
+    onAddRecipe {
         fairyCentrifugeCraftHandler(60.0) {
             process { !Mana.DARK + !Erg.FLAME * 2.0 }
             process { !Mana.GAIA + !Erg.SPACE * 2.0 }
@@ -747,8 +747,10 @@ val fairyMaterialsModule = module {
             input("container1000MiragiumWater".oreIngredient, 1)
             output(FairyMaterialCard.FAIRY_WOOD_ROSIN.createItemStack(), 1.0, 0.5)
         }
+    }
 
-        // 妖精のプラスチック
+    // 妖精のプラスチック
+    onAddRecipe {
         fairyCentrifugeCraftHandler(60.0) {
             process { !Mana.WIND + !Erg.FLAME * 2.0 }
             process { !Mana.SHINE + !Erg.SPACE * 2.0 }
@@ -759,8 +761,10 @@ val fairyMaterialsModule = module {
             output(FairyMaterialCard.FAIRY_PLASTIC.createItemStack(), 1.0, 0.5)
             output(FairyMaterialCard.FAIRY_PLASTIC_WITH_FAIRY.createItemStack(), 0.01)
         }
+    }
 
-        // 妖精のリキュール
+    // 妖精のリキュール
+    onAddRecipe {
         fairyCentrifugeCraftHandler(150.0) {
             process { !Mana.WIND + !Erg.LIFE * 2.0 }
             process { !Mana.AQUA + !Erg.CHEMICAL * 2.0 }
@@ -771,6 +775,7 @@ val fairyMaterialsModule = module {
             output(FairyMaterialCard.MIRAGE_FAIRY_LIQUEUR_BOTTLE.createItemStack(), 1.0)
             output(FairyMaterialCard.MANDRAKE.createItemStack(), 1.0)
         }
+    }
 
     }
 
