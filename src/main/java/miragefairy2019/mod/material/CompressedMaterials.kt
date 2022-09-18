@@ -140,7 +140,7 @@ object CompressedMaterials {
 
         // レシピの生成
         run {
-            fun fromBlock(ingot: String, block: String, ingredientBlock: DataIngredient, resultIngot: DataResult) {
+            fun decompress(ingot: String, block: String, ingredientBlock: DataIngredient, resultIngot: DataResult) {
                 makeRecipe("materials/compress/${block}_to_${ingot}") {
                     DataShapedRecipe(
                         pattern = listOf(
@@ -154,7 +154,7 @@ object CompressedMaterials {
                 }
             }
 
-            fun toBlock(block: String, ingredientIngot: DataIngredient, resultBlock: DataResult) {
+            fun compress(block: String, ingredientIngot: DataIngredient, resultBlock: DataResult) {
                 makeRecipe("materials/compress/$block") {
                     DataShapedRecipe(
                         pattern = listOf(
@@ -170,7 +170,7 @@ object CompressedMaterials {
                 }
             }
 
-            fun toBlock8(block: String, ingredientIngot: DataIngredient, resultBlock: DataResult) {
+            fun compress8(block: String, ingredientIngot: DataIngredient, resultBlock: DataResult) {
                 makeRecipe("materials/compress/$block") {
                     DataShapelessRecipe(
                         ingredients = (1..8).map { ingredientIngot },
@@ -185,46 +185,46 @@ object CompressedMaterials {
             val m = "miragefairy2019:materials"
             val fm = "miragefairy2019:fairy_materials"
             val m1 = "miragefairy2019:materials1"
-            fromBlock("apatite_gem", "apatite_block", !"blockApatite", r(m, 0, 9))
-            fromBlock("fluorite_gem", "fluorite_block", !"blockFluorite", r(m, 1, 9))
-            fromBlock("sulfur_gem", "sulfur_block", !"blockSulfur", r(m, 2, 9))
-            fromBlock("cinnabar_gem", "cinnabar_block", !"blockCinnabar", r(m, 6, 9))
-            fromBlock("moonstone_gem", "moonstone_block", !"blockMoonstone", r(m, 7, 9))
-            fromBlock("magnetite_gem", "magnetite_block", !"blockMagnetite", r(m, 8, 9))
-            fromBlock("pyrope_gem", "pyrope_block", !"blockPyrope", r(m, 10, 9))
-            fromBlock("smithsonite_gem", "smithsonite_block", !"blockSmithsonite", r(m, 11, 9))
-            fromBlock("charcoal", "charcoal_block", !"blockCharcoal", r("minecraft:coal", 1, 9))
-            fromBlock("mirage_flower_leaf", "mirage_flower_leaf_block", !"blockLeafMirageFlower", r(fm, 8, 9))
-            fromBlock("miragium_ingot", "miragium_ingot_block", !"blockMiragium", r(m, 5, 9))
-            fromBlock("miragium_dust", "miragium_dust_block", !"blockDustMiragium", r(m, 3, 9))
-            fromBlock("nephrite_gem", "nephrite_block", !"blockNephrite", r(m, 14, 9))
-            fromBlock("topaz_gem", "topaz_block", !"blockTopaz", r(m, 15, 9))
-            fromBlock("tourmaline_gem", "tourmaline_block", !"blockTourmaline", r(m, 16, 9))
-            fromBlock("velopeda_leaf", "velopeda_block", !"blockLeafMirageFairyVelopeda", r(fm, 26, 9))
-            toBlock("apatite_block", !"gemApatite", r(m1, 0, 1))
-            toBlock("fluorite_block", !"gemFluorite", r(m1, 1, 1))
-            toBlock("sulfur_block", !"gemSulfur", r(m1, 2, 1))
-            toBlock("cinnabar_block", !"gemCinnabar", r(m1, 3, 1))
-            toBlock("moonstone_block", !"gemMoonstone", r(m1, 4, 1))
-            toBlock("magnetite_block", !"gemMagnetite", r(m1, 5, 1))
-            toBlock("pyrope_block", !"gemPyrope", r(m1, 6, 1))
-            toBlock("smithsonite_block", !"gemSmithsonite", r(m1, 7, 1))
-            toBlock("charcoal_block", "minecraft:coal"(1), r(m1, 8, 1))
-            toBlock("mirage_flower_leaf_block", !"leafMirageFlower", r(m1, 9, 1))
-            toBlock("miragium_ingot_block", !"ingotMiragium", r(m1, 10, 1))
-            toBlock("miragium_dust_block", !"dustMiragium", r(m1, 11, 1))
-            toBlock("nephrite_block", !"gemNephrite", r(m1, 12, 1))
-            toBlock("topaz_block", !"gemTopaz", r(m1, 13, 1))
-            toBlock("tourmaline_block", !"gemTourmaline", r(m1, 14, 1))
-            toBlock("velopeda_block", !"leafMirageFairyVelopeda", r(m1, 15, 1))
+            decompress("apatite_gem", "apatite_block", !"blockApatite", r(m, 0, 9))
+            decompress("fluorite_gem", "fluorite_block", !"blockFluorite", r(m, 1, 9))
+            decompress("sulfur_gem", "sulfur_block", !"blockSulfur", r(m, 2, 9))
+            decompress("cinnabar_gem", "cinnabar_block", !"blockCinnabar", r(m, 6, 9))
+            decompress("moonstone_gem", "moonstone_block", !"blockMoonstone", r(m, 7, 9))
+            decompress("magnetite_gem", "magnetite_block", !"blockMagnetite", r(m, 8, 9))
+            decompress("pyrope_gem", "pyrope_block", !"blockPyrope", r(m, 10, 9))
+            decompress("smithsonite_gem", "smithsonite_block", !"blockSmithsonite", r(m, 11, 9))
+            decompress("charcoal", "charcoal_block", !"blockCharcoal", r("minecraft:coal", 1, 9))
+            decompress("mirage_flower_leaf", "mirage_flower_leaf_block", !"blockLeafMirageFlower", r(fm, 8, 9))
+            decompress("miragium_ingot", "miragium_ingot_block", !"blockMiragium", r(m, 5, 9))
+            decompress("miragium_dust", "miragium_dust_block", !"blockDustMiragium", r(m, 3, 9))
+            decompress("nephrite_gem", "nephrite_block", !"blockNephrite", r(m, 14, 9))
+            decompress("topaz_gem", "topaz_block", !"blockTopaz", r(m, 15, 9))
+            decompress("tourmaline_gem", "tourmaline_block", !"blockTourmaline", r(m, 16, 9))
+            decompress("velopeda_leaf", "velopeda_block", !"blockLeafMirageFairyVelopeda", r(fm, 26, 9))
+            compress("apatite_block", !"gemApatite", r(m1, 0, 1))
+            compress("fluorite_block", !"gemFluorite", r(m1, 1, 1))
+            compress("sulfur_block", !"gemSulfur", r(m1, 2, 1))
+            compress("cinnabar_block", !"gemCinnabar", r(m1, 3, 1))
+            compress("moonstone_block", !"gemMoonstone", r(m1, 4, 1))
+            compress("magnetite_block", !"gemMagnetite", r(m1, 5, 1))
+            compress("pyrope_block", !"gemPyrope", r(m1, 6, 1))
+            compress("smithsonite_block", !"gemSmithsonite", r(m1, 7, 1))
+            compress("charcoal_block", "minecraft:coal"(1), r(m1, 8, 1))
+            compress("mirage_flower_leaf_block", !"leafMirageFlower", r(m1, 9, 1))
+            compress("miragium_ingot_block", !"ingotMiragium", r(m1, 10, 1))
+            compress("miragium_dust_block", !"dustMiragium", r(m1, 11, 1))
+            compress("nephrite_block", !"gemNephrite", r(m1, 12, 1))
+            compress("topaz_block", !"gemTopaz", r(m1, 13, 1))
+            compress("tourmaline_block", !"gemTourmaline", r(m1, 14, 1))
+            compress("velopeda_block", !"leafMirageFairyVelopeda", r(m1, 15, 1))
 
             // TODO move
-            fromBlock("miragium_tiny_dust", "miragium_dust", !"dustMiragium", r(m, 4, 9))
-            fromBlock("miragium_nugget", "miragium_ingot", !"ingotMiragium", r(m, 13, 9))
-            fromBlock("mirage_fairy_solid_fuel_half_chunk", "mirage_fairy_solid_fuel_ingot", !"ingotMirageFairySolidFuel", r(fm, 30, 8))
-            toBlock("miragium_dust", !"dustTinyMiragium", r(m, 3, 1))
-            toBlock("miragium_ingot", !"nuggetMiragium", r(m, 5, 1))
-            toBlock8("mirage_fairy_solid_fuel_ingot", !"halfChunkMirageFairySolidFuel", r(fm, 29, 1))
+            decompress("miragium_tiny_dust", "miragium_dust", !"dustMiragium", r(m, 4, 9))
+            decompress("miragium_nugget", "miragium_ingot", !"ingotMiragium", r(m, 13, 9))
+            decompress("mirage_fairy_solid_fuel_half_chunk", "mirage_fairy_solid_fuel_ingot", !"ingotMirageFairySolidFuel", r(fm, 30, 8))
+            compress("miragium_dust", !"dustTinyMiragium", r(m, 3, 1))
+            compress("miragium_ingot", !"nuggetMiragium", r(m, 5, 1))
+            compress8("mirage_fairy_solid_fuel_ingot", !"halfChunkMirageFairySolidFuel", r(fm, 29, 1))
 
         }
 
