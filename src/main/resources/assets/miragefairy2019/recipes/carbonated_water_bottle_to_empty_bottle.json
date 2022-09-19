@@ -7,10 +7,11 @@
     },
     {
       "type": "forge:ore_dict",
-      "ore": "stickWood"
+      "ore": "rodMiragium"
     }
   ],
   "result": {
-    "item": "minecraft:stick"
+    "item": "miragefairy2019:materials",
+    "data": 12
   }
 }

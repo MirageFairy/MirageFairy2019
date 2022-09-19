@@ -827,9 +827,9 @@ val fairyMaterialsModule = module {
         DataShapelessRecipe(
             ingredients = listOf(
                 DataOreIngredient(ore = "container250CarbonatedWater"),
-                DataOreIngredient(ore = "stickWood")
+                DataOreIngredient(ore = CommonMaterialCard.MIRAGIUM_ROD.oreName)
             ),
-            result = DataResult(item = "minecraft:stick")
+            result = DataResult(item = "miragefairy2019:materials", data = CommonMaterialCard.MIRAGIUM_ROD.metadata)
         )
     }
 
