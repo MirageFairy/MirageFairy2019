@@ -9,8 +9,13 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.obtain
+import miragefairy2019.lib.resourcemaker.DataOreIngredient
+import miragefairy2019.lib.resourcemaker.DataResult
+import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
+import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeItemModel
+import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.ItemMultiMaterial
 import miragefairy2019.libkt.ItemVariantMaterial
 import miragefairy2019.libkt.canTranslate
@@ -223,6 +228,30 @@ val potionModule = module {
                 input(Items.GLASS_BOTTLE.createItemStack().ingredient, 8)
                 output(PotionCard.POISON_JUICE.createItemStack(), 8.0)
             }
+        }
+
+        // コーラ
+        makeRecipe("cola") {
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(ore = "mirageFairySyrup"),
+                    DataOreIngredient(ore = "container250CarbonatedWater"),
+                    DataOreIngredient(ore = "cropNetherWart")
+                ),
+                result = DataResult(item = "miragefairy2019:potion", data = PotionCard.COLA.metadata)
+            )
+        }
+
+        // ラムネ
+        makeRecipe("ramune") {
+            DataShapelessRecipe(
+                ingredients = listOf(
+                    DataOreIngredient(ore = "mirageFairySyrup"),
+                    DataOreIngredient(ore = "container250CarbonatedWater"),
+                    DataSimpleIngredient(item = "minecraft:sugar")
+                ),
+                result = DataResult(item = "miragefairy2019:potion", data = PotionCard.RAMUNE.metadata)
+            )
         }
 
     }

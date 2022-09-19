@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairySyrup"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "container250CarbonatedWater"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:potion",
+    "data": 6
+  }
+}
