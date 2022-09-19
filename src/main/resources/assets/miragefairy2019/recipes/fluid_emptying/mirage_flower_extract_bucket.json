@@ -1,0 +1,17 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "container1000MirageFlowerExtract"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyAnnihilationPottery"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:fairy_materials",
+    "data": 23
+  }
+}

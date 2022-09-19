@@ -12,4 +12,5 @@ val recipesModule = module {
     fairyLogDropLoaderModule()
     slabUncraftRecipeModule()
     fairyTamingRecipeModule()
+    fluidEmptyingRecipeModule()
 }

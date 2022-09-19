@@ -823,15 +823,6 @@ val fairyMaterialsModule = module {
             result = DataResult(item = "miragefairy2019:filled_bucket", data = 3, count = 2)
         )
     }
-    makeRecipe("carbonated_water_bottle_to_empty_bottle") {
-        DataShapelessRecipe(
-            ingredients = listOf(
-                DataOreIngredient(ore = "container250CarbonatedWater"),
-                DataOreIngredient(ore = CommonMaterialCard.MIRAGIUM_ROD.oreName)
-            ),
-            result = DataResult(item = "miragefairy2019:materials", data = CommonMaterialCard.MIRAGIUM_ROD.metadata)
-        )
-    }
 
 }
 

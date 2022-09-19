@@ -3,15 +3,15 @@
   "ingredients": [
     {
       "type": "forge:ore_dict",
-      "ore": "container250CarbonatedWater"
+      "ore": "container250MirageFlowerOil"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "rodMiragium"
+      "ore": "mirageFairyAnnihilationPottery"
     }
   ],
   "result": {
-    "item": "miragefairy2019:materials",
-    "data": 12
+    "item": "miragefairy2019:fairy_materials",
+    "data": 23
   }
 }
