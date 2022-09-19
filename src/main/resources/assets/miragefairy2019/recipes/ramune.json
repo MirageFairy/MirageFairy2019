@@ -11,6 +11,10 @@
     },
     {
       "item": "minecraft:sugar"
+    },
+    {
+      "type": "miragefairy2019:wand",
+      "ore": "mirageFairy2019CraftingToolFairyWandFreezing"
     }
   ],
   "result": {

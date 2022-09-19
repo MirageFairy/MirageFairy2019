@@ -236,7 +236,9 @@ val potionModule = module {
                 ingredients = listOf(
                     DataOreIngredient(ore = "mirageFairySyrup"),
                     DataOreIngredient(ore = "container250CarbonatedWater"),
-                    DataOreIngredient(ore = "cropNetherWart")
+                    DataOreIngredient(ore = "cropNetherWart"),
+                    WandType.BREAKING.ingredientData,
+                    WandType.FREEZING.ingredientData
                 ),
                 result = DataResult(item = "miragefairy2019:potion", data = PotionCard.COLA.metadata)
             )
@@ -248,7 +250,8 @@ val potionModule = module {
                 ingredients = listOf(
                     DataOreIngredient(ore = "mirageFairySyrup"),
                     DataOreIngredient(ore = "container250CarbonatedWater"),
-                    DataSimpleIngredient(item = "minecraft:sugar")
+                    DataSimpleIngredient(item = "minecraft:sugar"),
+                    WandType.FREEZING.ingredientData
                 ),
                 result = DataResult(item = "miragefairy2019:potion", data = PotionCard.RAMUNE.metadata)
             )

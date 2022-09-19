@@ -12,6 +12,14 @@
     {
       "type": "forge:ore_dict",
       "ore": "cropNetherWart"
+    },
+    {
+      "type": "miragefairy2019:wand",
+      "ore": "mirageFairy2019CraftingToolFairyWandBreaking"
+    },
+    {
+      "type": "miragefairy2019:wand",
+      "ore": "mirageFairy2019CraftingToolFairyWandFreezing"
     }
   ],
   "result": {
