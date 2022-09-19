@@ -53,7 +53,12 @@ val ItemStack.string
 /**
  * @receiver このインスタンスはメソッド内部でcopyされるため、破壊されません。
  */
-fun ItemStack.drop(world: World, pos: Vec3d, motionless: Boolean = false, noPickupDelay: Boolean = false): EntityItem {
+fun ItemStack.drop(
+    world: World,
+    pos: Vec3d,
+    motionless: Boolean = false,
+    noPickupDelay: Boolean = false
+): EntityItem {
     val entityItem = EntityItem(world, pos.x, pos.y, pos.z, copy())
     if (motionless) {
         entityItem.motionX = 0.0
@@ -68,7 +73,17 @@ fun ItemStack.drop(world: World, pos: Vec3d, motionless: Boolean = false, noPick
 /**
  * @receiver このインスタンスはメソッド内部でcopyされるため、破壊されません。
  */
-fun ItemStack.drop(world: World, blockPos: BlockPos, motionless: Boolean = false) = drop(world, Vec3d(blockPos).addVector(0.5, 0.5, 0.5), motionless)
+fun ItemStack.drop(
+    world: World,
+    blockPos: BlockPos,
+    motionless: Boolean = false,
+    noPickupDelay: Boolean = false
+) = drop(
+    world = world,
+    pos = Vec3d(blockPos).addVector(0.5, 0.5, 0.5),
+    motionless = motionless,
+    noPickupDelay = noPickupDelay
+)
 
 
 // 同値判定
