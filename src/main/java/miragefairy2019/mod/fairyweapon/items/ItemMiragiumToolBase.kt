@@ -33,6 +33,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     abstract val wear: FormulaArguments.() -> Double
     open val collection: FormulaArguments.() -> Boolean = { false }
     open val silkTouch: FormulaArguments.() -> Boolean = { false }
+    open val shearing: FormulaArguments.() -> Boolean = { false }
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TRANSLATE
@@ -94,7 +95,8 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
                             blockPos = target,
                             fortune = world.rand.randomInt(actualFortune()),
                             silkTouch = silkTouch(),
-                            collection = collection()
+                            collection = collection(),
+                            canShear = shearing()
                         )
                         count++
                     }

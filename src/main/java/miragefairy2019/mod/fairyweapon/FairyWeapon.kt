@@ -805,6 +805,7 @@ val fairyWeaponModule = module {
         enJa("mirageFairy2019.magic.status.wear.name", "Wear", "摩耗")
         enJa("mirageFairy2019.magic.status.additionalReach.name", "Additional Reach", "追加リーチ")
         enJa("mirageFairy2019.magic.status.collection.name", "Collection", "収集")
+        enJa("mirageFairy2019.magic.status.shearing.name", "Shearing", "刈り取り")
         enJa("mirageFairy2019.magic.status.damage.name", "Damage", "ダメージ")
         enJa("mirageFairy2019.magic.status.additionalDamage.name", "Additional Damage", "追加ダメージ")
         enJa("mirageFairy2019.magic.status.radius.name", "Radius", "半径")
