@@ -52,7 +52,8 @@ import kotlin.math.pow
 class ItemFlowerPickingBell(baseFortune: Double, extraItemDropRateFactor: Double) : ItemFairyWeaponMagic4() {
     val pitch = status("pitch", { 0.5.pow(costFactor - 1.0) }, { pitch })
     val maxTargetCount = status("maxTargetCount", { floor((8.0 + !Mana.DARK / 10.0 + !Erg.SUBMISSION / 5.0) * costFactor).toInt() atLeast 1 }, { integer })
-    val fortune = status("fortune", { baseFortune + !Mana.SHINE / 5.0 + !Erg.HARVEST / 10.0 }, { float2 })
+    val fortune = status("fortune", { baseFortune + !Mana.SHINE / 50.0 + !Erg.HARVEST / 25.0 }, { float2 })
+    val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.flowerPicking / 100.0 }, { boost })
     val additionalReach = status("additionalReach", { 0.0 + !Mana.WIND / 20.0 + !Erg.SPACE / 10.0 atMost 30.0 }, { float2 })
     val radius = status("radius", { 4 + !Mana.GAIA / 20.0 + !Erg.SOUND / 10.0 atMost 20.0 }, { float2 })
     val wear = status("wear", { 0.25 / (1 + !Mana.FIRE / 40.0 + !Erg.SLASH / 20.0) }, { percent2 })
@@ -162,7 +163,7 @@ class ItemFlowerPickingBell(baseFortune: Double, extraItemDropRateFactor: Double
                         run {
 
                             // 収穫試行
-                            val result = pickExecutor.tryPick(world.rand.randomInt(fortune()))
+                            val result = pickExecutor.tryPick(world.rand.randomInt(fortune() * fortuneBoost()))
                             if (!result) return@targets
 
                             // 種の追加ドロップ
