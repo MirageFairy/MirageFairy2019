@@ -696,7 +696,7 @@ enum class FairyMaterialCard(
     SPARKLING_WATER_BOTTLE(
         31, "carbonated_water_bottle", "bottleCarbonatedWater",
         "Sparkling Water", "炭酸水", "妖精界では魚の骨が刺さった際のおまじないにこれを飲む",
-        5, false, { ore("bottleCarbonatedWater").ore("container250CarbonatedWater").bottle() },
+        0, false, { ore("bottleCarbonatedWater").ore("container250CarbonatedWater").bottle() },
         { }
     ),
     ;
