@@ -109,6 +109,26 @@ enum class PotionCard(
             )
         }
     ),
+    COLA(
+        5, "cola", "cola",
+        "Cola", "コーラ", "",
+        false,
+        {
+            listOf(
+                PotionEffect(MobEffects.HEALTH_BOOST, 12000, 0)
+            )
+        }
+    ),
+    RAMUNE(
+        6, "ramune", "ramune",
+        "Ramune", "ラムネ", "",
+        false,
+        {
+            listOf(
+                PotionEffect(MobEffects.LUCK, 12000, 0)
+            )
+        }
+    ),
 }
 
 
