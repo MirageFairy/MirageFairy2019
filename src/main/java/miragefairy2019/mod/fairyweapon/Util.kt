@@ -14,6 +14,7 @@ import miragefairy2019.lib.toNbt
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.createItemStack
+import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.sq
 import net.minecraft.enchantment.EnchantmentHelper
@@ -30,6 +31,7 @@ import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
+import net.minecraftforge.common.IShearable
 
 /** メインハンド、オフハンド、最下段のインベントリスロット、最下段以外のインベントリスロットの順に所持アイテムを返します。 */
 val EntityPlayer.inventoryItems get() = listOf(getHeldItem(EnumHand.MAIN_HAND), getHeldItem(EnumHand.OFF_HAND)) + inventory.itemStacks
@@ -128,22 +130,55 @@ fun breakBlock(
     facing: EnumFacing = EnumFacing.UP,
     fortune: Int = 0,
     silkTouch: Boolean = false,
-    collection: Boolean = false
+    collection: Boolean = false,
+    canShear: Boolean = false
 ): Boolean {
+
+    // 安全装置
     if (!world.isBlockModifiable(player, blockPos)) return false
     if (!player.canPlayerEdit(blockPos, facing, itemStack)) return false
 
+    // 破壊成立
+
+    // ブロックの特定
     val blockState = world.getBlockState(blockPos)
     val block = blockState.block
 
-    val dummyItemStack = Items.STICK.createItemStack()
-    if (fortune > 0) EnchantmentHelper.setEnchantments(mapOf(Enchantments.FORTUNE to fortune), dummyItemStack)
-    if (silkTouch) EnchantmentHelper.setEnchantments(mapOf(Enchantments.SILK_TOUCH to 1), dummyItemStack)
+    // 破壊
+    run finish@{
 
-    block.harvestBlock(world, player, blockPos, blockState, world.getTileEntity(blockPos), dummyItemStack)
+        // はさみ
+        if (canShear) {
+            if (block is IShearable) {
+                if (block.isShearable(itemStack, world, blockPos)) {
 
-    world.setBlockState(blockPos, Blocks.AIR.defaultState, 3)
+                    val drops = block.onSheared(itemStack, world, blockPos, fortune)
+                    drops.forEach { drop ->
+                        drop.drop(world, blockPos)
+                    }
 
+                    world.setBlockState(blockPos, Blocks.AIR.defaultState, 3)
+
+                    return@finish
+                }
+            }
+        }
+
+        // 通常の破壊
+
+        val dummyItemStack = Items.STICK.createItemStack()
+        if (fortune > 0) EnchantmentHelper.setEnchantments(mapOf(Enchantments.FORTUNE to fortune), dummyItemStack)
+        if (silkTouch) EnchantmentHelper.setEnchantments(mapOf(Enchantments.SILK_TOUCH to 1), dummyItemStack)
+
+        block.harvestBlock(world, player, blockPos, blockState, world.getTileEntity(blockPos), dummyItemStack)
+
+        world.setBlockState(blockPos, Blocks.AIR.defaultState, 3)
+
+    }
+
+    // 破壊完了
+
+    // 収集
     if (collection) {
         world.getEntitiesWithinAABB(EntityItem::class.java, AxisAlignedBB(blockPos)).forEach { entityItem ->
             entityItem.setPosition(player.posX, player.posY, player.posZ)
