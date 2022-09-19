@@ -601,9 +601,7 @@ enum class FairyMaterialCard(
         22, "ancient_pottery", "ancientPottery",
         "Ancient Pottery", "古代の壺", "「煮る」という発明",
         5, false, { ore("mirageFairyAncientPottery") },
-        {
-
-        }
+        { }
     ),
     ANNIHILATION_POTTERY(
         23, "annihilation_pottery", "annihilationPottery",
