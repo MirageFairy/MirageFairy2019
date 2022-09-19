@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "bcb",
+    "brb",
+    " b "
+  ],
+  "key": {
+    "b": {
+      "type": "forge:ore_dict",
+      "ore": "ingotBrick"
+    },
+    "r": {
+      "type": "forge:ore_dict",
+      "ore": "dyeRed"
+    },
+    "c": {
+      "type": "miragefairy2019:wand",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:fairy_materials",
+    "data": 22
+  }
+}

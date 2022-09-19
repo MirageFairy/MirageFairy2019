@@ -736,6 +736,23 @@ val fairyMaterialsModule = module {
     }
 
 
+    // 古代の壺
+    makeRecipe("ancient_pottery") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "bcb",
+                "brb",
+                " b "
+            ),
+            key = mapOf(
+                "b" to DataOreIngredient(ore = "ingotBrick"),
+                "r" to DataOreIngredient(ore = "dyeRed"),
+                "c" to WandType.CRAFTING.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = FairyMaterialCard.ANCIENT_POTTERY.metadata)
+        )
+    }
+
     // 渇きの壺
     makeRecipe("annihilation_pottery") {
         DataShapedRecipe(
