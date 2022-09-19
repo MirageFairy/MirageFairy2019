@@ -781,7 +781,7 @@ val fairyMaterialsModule = module {
         }
     }
 
-    // 妖精のリキュール
+    // 妖精のリキュール・炭酸水
     onAddRecipe {
         fairyCentrifugeCraftHandler(150.0) {
             process { !Mana.WIND + !Erg.LIFE * 2.0 }
@@ -789,8 +789,9 @@ val fairyMaterialsModule = module {
             process { !Mana.GAIA + !Erg.FLAME * 2.0 }
             input("mirageFairyWoodResin".oreIngredient, 16)
             input("mirageFairyMandrake".oreIngredient, 1)
-            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 1)
+            input(Items.GLASS_BOTTLE.createItemStack().ingredient, 2)
             output(FairyMaterialCard.MIRAGE_FAIRY_LIQUEUR_BOTTLE.createItemStack(), 1.0)
+            output(FairyMaterialCard.SPARKLING_WATER_BOTTLE.createItemStack(), 1.0)
             output(FairyMaterialCard.MANDRAKE.createItemStack(), 1.0)
         }
     }
@@ -805,6 +806,31 @@ val fairyMaterialsModule = module {
             input(Items.SUGAR.ingredient, 16)
             output(FairyMaterialCard.MIRAGE_FAIRY_SOLID_FUEL_INGOT.createItemStack(), 16.0, 1.0)
         }
+    }
+
+    // 炭酸水分解
+    makeRecipe("carbonated_water_bottle_to_water_pot") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "container250CarbonatedWater"),
+                DataOreIngredient(ore = "container250CarbonatedWater"),
+                DataOreIngredient(ore = "container250CarbonatedWater"),
+                DataOreIngredient(ore = "container250CarbonatedWater"),
+                DataOreIngredient(ore = "container1000Water"),
+                DataOreIngredient(ore = "mirageFairyPot"),
+                DataOreIngredient(ore = "mirageFairyPot")
+            ),
+            result = DataResult(item = "miragefairy2019:filled_bucket", data = 3, count = 2)
+        )
+    }
+    makeRecipe("carbonated_water_bottle_to_empty_bottle") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "container250CarbonatedWater"),
+                DataOreIngredient(ore = "stickWood")
+            ),
+            result = DataResult(item = "minecraft:stick")
+        )
     }
 
 }
