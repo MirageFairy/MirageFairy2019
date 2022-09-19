@@ -600,13 +600,13 @@ enum class FairyMaterialCard(
     ANCIENT_POTTERY(
         22, "ancient_pottery", "ancientPottery",
         "Ancient Pottery", "古代の壺", "「煮る」という発明",
-        5, false, { ore("mirageFairyAncientPottery") },
+        1, false, { ore("mirageFairyAncientPottery") },
         { }
     ),
     ANNIHILATION_POTTERY(
         23, "annihilation_pottery", "annihilationPottery",
         "Annihilation Pottery", "渇きの壺", "無限の水を吸い込む壺",
-        5, false, { ore("mirageFairyAnnihilationPottery") },
+        1, false, { ore("mirageFairyAnnihilationPottery") },
         { }
     ),
     MIRAGE_FAIRY_BLOOD_BOTTLE(
