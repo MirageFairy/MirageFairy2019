@@ -609,24 +609,7 @@ enum class FairyMaterialCard(
         23, "annihilation_pottery", "annihilationPottery",
         "Annihilation Pottery", "渇きの壺", "無限の水を吸い込む壺",
         5, false, { ore("mirageFairyAnnihilationPottery") },
-        {
-            makeRecipe("annihilation_pottery") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "O#O",
-                        "OwO",
-                        "sOs"
-                    ),
-                    key = mapOf(
-                        "#" to DataOreIngredient(ore = "mirageFairyAncientPottery"),
-                        "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
-                        "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace"),
-                        "O" to DataOreIngredient(ore = "obsidian")
-                    ),
-                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 23)
-                )
-            }
-        }
+        { }
     ),
     MIRAGE_FAIRY_BLOOD_BOTTLE(
         24, "mirage_fairy_blood_bottle", "bottleMirageFairyBlood",
@@ -754,6 +737,24 @@ val fairyMaterialsModule = module {
 
     }
 
+
+    // 渇きの壺
+    makeRecipe("annihilation_pottery") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "O#O",
+                "OwO",
+                "sOs"
+            ),
+            key = mapOf(
+                "#" to DataOreIngredient(ore = "mirageFairyAncientPottery"),
+                "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
+                "s" to DataOreIngredient(ore = "mirageFairy2019SphereSpace"),
+                "O" to DataOreIngredient(ore = "obsidian")
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = FairyMaterialCard.ANNIHILATION_POTTERY.metadata)
+        )
+    }
 
     // 妖精の木の涙
     onAddRecipe {
