@@ -238,7 +238,8 @@ val potionModule = module {
                     DataOreIngredient(ore = "container250CarbonatedWater"),
                     DataOreIngredient(ore = "cropNetherWart"),
                     WandType.BREAKING.ingredientData,
-                    WandType.FREEZING.ingredientData
+                    WandType.FREEZING.ingredientData,
+                    DataSimpleIngredient(item = "minecraft:glass_bottle")
                 ),
                 result = DataResult(item = "miragefairy2019:potion", data = PotionCard.COLA.metadata)
             )
@@ -251,7 +252,8 @@ val potionModule = module {
                     DataOreIngredient(ore = "mirageFairySyrup"),
                     DataOreIngredient(ore = "container250CarbonatedWater"),
                     DataSimpleIngredient(item = "minecraft:sugar"),
-                    WandType.FREEZING.ingredientData
+                    WandType.FREEZING.ingredientData,
+                    DataSimpleIngredient(item = "minecraft:glass_bottle")
                 ),
                 result = DataResult(item = "miragefairy2019:potion", data = PotionCard.RAMUNE.metadata)
             )

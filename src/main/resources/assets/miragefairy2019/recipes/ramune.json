@@ -15,6 +15,9 @@
     {
       "type": "miragefairy2019:wand",
       "ore": "mirageFairy2019CraftingToolFairyWandFreezing"
+    },
+    {
+      "item": "minecraft:glass_bottle"
     }
   ],
   "result": {
