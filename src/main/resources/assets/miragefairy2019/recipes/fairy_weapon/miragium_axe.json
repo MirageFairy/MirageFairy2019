@@ -1,14 +1,17 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "sPI",
-    "fPR",
-    "cmR"
+    "hPI",
+    "mP#",
+    "  R"
   ],
   "key": {
+    "#": {
+      "item": "miragefairy2019:axe_base"
+    },
     "R": {
       "type": "forge:ore_dict",
-      "ore": "stickWood"
+      "ore": "rodMiragium"
     },
     "I": {
       "type": "forge:ore_dict",
@@ -18,17 +21,9 @@
       "type": "forge:ore_dict",
       "ore": "plateMiragium"
     },
-    "s": {
-      "type": "forge:ore_dict",
-      "ore": "mirageFairy2019SphereSlash"
-    },
-    "f": {
+    "h": {
       "type": "forge:ore_dict",
       "ore": "mirageFairy2019SphereHarvest"
-    },
-    "c": {
-      "type": "miragefairy2019:wand",
-      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
     },
     "m": {
       "type": "miragefairy2019:wand",

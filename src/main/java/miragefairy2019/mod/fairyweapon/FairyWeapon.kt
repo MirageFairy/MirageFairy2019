@@ -203,28 +203,52 @@ enum class FairyWeaponCard(
         }
     ),
 
-    miragiumAxe(
-        null, "miragium_axe", "miragiumAxe", 2, { ItemMiragiumAxe() },
-        LangPair("Miragium Axe", "ミラジウムの斧"),
+    axeBase(
+        null, "axe_base", "axeBase", 1, { ItemFairyWeapon() },
+        LangPair("Axe Base", "斧ベース"),
         LangPair("", "飛べるって素敵"),
         null,
         LangPair("Get a specific item", "切断のエルグを真空波にする構造"),
         null,
-        listOf(!SLASH, !HARVEST, !"plateMiragium"),
+        listOf(!SLASH, !"ingotIron"),
         {
             DataShapedRecipe(
                 pattern = listOf(
-                    "sPI",
-                    "fPR",
-                    "cmR"
+                    "sII",
+                    "cIR",
+                    "  R"
                 ),
                 key = mapOf(
                     "R" to DataOreIngredient(ore = "stickWood"),
+                    "I" to DataOreIngredient(ore = "ingotIron"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSlash"),
+                    "c" to WandType.CRAFTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:axe_base")
+            )
+        }
+    ),
+    miragiumAxe(
+        axeBase, "miragium_axe", "miragiumAxe", 2, { ItemMiragiumAxe() },
+        LangPair("Miragium Axe", "ミラジウムの斧"),
+        LangPair("", "バキッ！ぐにっ"),
+        null,
+        LangPair("Get a specific item", "切断のエルグを繊維質にのみ反応させる工夫"),
+        null,
+        listOf(!HARVEST, !"plateMiragium"),
+        {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "hPI",
+                    "mP#",
+                    "  R"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:axe_base"),
+                    "R" to DataOreIngredient(ore = "rodMiragium"),
                     "I" to DataOreIngredient(ore = "ingotMiragium"),
                     "P" to DataOreIngredient(ore = "plateMiragium"),
-                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSlash"),
-                    "f" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
-                    "c" to WandType.CRAFTING.ingredientData,
+                    "h" to DataOreIngredient(ore = "mirageFairy2019SphereHarvest"),
                     "m" to WandType.MELTING.ingredientData
                 ),
                 result = DataResult(item = "miragefairy2019:miragium_axe")

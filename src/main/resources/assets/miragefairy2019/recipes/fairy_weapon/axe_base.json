@@ -1,0 +1,29 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "sII",
+    "cIR",
+    "  R"
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereSlash"
+    },
+    "c": {
+      "type": "miragefairy2019:wand",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:axe_base"
+  }
+}

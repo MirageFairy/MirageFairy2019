@@ -1,23 +1,23 @@
 {
   "display": {
     "icon": {
-      "item": "miragefairy2019:miragium_axe"
+      "item": "miragefairy2019:axe_base"
     },
     "title": {
-      "translate": "item.miragiumAxe.name"
+      "translate": "item.axeBase.name"
     },
     "description": {
-      "translate": "item.miragiumAxe.recipe"
+      "translate": "item.axeBase.recipe"
     }
   },
-  "parent": "miragefairy2019:fairy_weapon/axe_base",
+  "parent": "miragefairy2019:fairy_weapon/root",
   "criteria": {
     "main": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "miragefairy2019:miragium_axe"
+            "item": "miragefairy2019:axe_base"
           }
         ]
       }
