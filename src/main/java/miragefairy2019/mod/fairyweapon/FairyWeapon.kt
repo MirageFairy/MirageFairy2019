@@ -233,7 +233,7 @@ enum class FairyWeaponCard(
         LangPair("Miragium Axe", "ミラジウムの斧"),
         LangPair("", "バキッ！ぐにっ"),
         null,
-        LangPair("Get a specific item", "切断のエルグを繊維質にのみ反応させる工夫"),
+        LangPair("Get a specific item", "大量のマナを刃先に送り込むための試行錯誤"),
         null,
         listOf(!HARVEST, !"plateMiragium"),
         {
