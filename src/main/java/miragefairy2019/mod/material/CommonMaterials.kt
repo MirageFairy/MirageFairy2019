@@ -32,20 +32,22 @@ enum class CommonMaterialCard(
     val unlocalizedName: String,
     val englishName: String,
     val japaneseName: String,
+    val japanesePoem: String,
     val oreName: String,
+    val tier: Int,
     val isHandheld: Boolean,
     val initializer: ItemVariantScope<ItemSimpleMaterials, ItemVariantSimpleMaterials>.() -> Unit
 ) {
-    APATITE_GEM(0, "apatite_gem", "gemApatite", "Apatite", "燐灰石", "gemApatite", false, { }),
-    FLUORITE_GEM(1, "fluorite_gem", "gemFluorite", "Fluorite", "蛍石", "gemFluorite", false, { }),
-    SULFUR_GEM(2, "sulfur_gem", "gemSulfur", "Sulfur", "硫黄", "gemSulfur", false, { }),
-    MIRAGIUM_DUST(3, "miragium_dust", "dustMiragium", "Miragium Dust", "ミラジウムの粉", "dustMiragium", false, { }),
-    MIRAGIUM_TINY_DUST(4, "miragium_tiny_dust", "dustTinyMiragium", "Tiny Pile of Miragium Dust", "ミラジウムの微粉", "dustTinyMiragium", false, { }),
-    MIRAGIUM_INGOT(5, "miragium_ingot", "ingotMiragium", "Miragium Ingot", "ミラジウムインゴット", "ingotMiragium", false, { }),
-    CINNABAR_GEM(6, "cinnabar_gem", "gemCinnabar", "Cinnabar", "辰砂", "gemCinnabar", false, { }),
-    MOONSTONE_GEM(7, "moonstone_gem", "gemMoonstone", "Moonstone", "月長石", "gemMoonstone", false, { }),
-    MAGNETITE_GEM(8, "magnetite_gem", "gemMagnetite", "Magnetite", "磁鉄鉱", "gemMagnetite", false, { }),
-    SALTPETER_GEM(9, "saltpeter_gem", "gemSaltpeter", "Saltpeter", "硝石", "gemSaltpeter", false, {
+    APATITE_GEM(0, "apatite_gem", "gemApatite", "Apatite", "燐灰石", "", "gemApatite", 0, false, { }),
+    FLUORITE_GEM(1, "fluorite_gem", "gemFluorite", "Fluorite", "蛍石", "", "gemFluorite", 0, false, { }),
+    SULFUR_GEM(2, "sulfur_gem", "gemSulfur", "Sulfur", "硫黄", "", "gemSulfur", 0, false, { }),
+    MIRAGIUM_DUST(3, "miragium_dust", "dustMiragium", "Miragium Dust", "ミラジウムの粉", "", "dustMiragium", 0, false, { }),
+    MIRAGIUM_TINY_DUST(4, "miragium_tiny_dust", "dustTinyMiragium", "Tiny Pile of Miragium Dust", "ミラジウムの微粉", "", "dustTinyMiragium", 0, false, { }),
+    MIRAGIUM_INGOT(5, "miragium_ingot", "ingotMiragium", "Miragium Ingot", "ミラジウムインゴット", "", "ingotMiragium", 2, false, { }),
+    CINNABAR_GEM(6, "cinnabar_gem", "gemCinnabar", "Cinnabar", "辰砂", "", "gemCinnabar", 0, false, { }),
+    MOONSTONE_GEM(7, "moonstone_gem", "gemMoonstone", "Moonstone", "月長石", "", "gemMoonstone", 0, false, { }),
+    MAGNETITE_GEM(8, "magnetite_gem", "gemMagnetite", "Magnetite", "磁鉄鉱", "", "gemMagnetite", 0, false, { }),
+    SALTPETER_GEM(9, "saltpeter_gem", "gemSaltpeter", "Saltpeter", "硝石", "", "gemSaltpeter", 0, false, {
         modScope.makeRecipe("saltpeter") {
             DataShapedRecipe(
                 pattern = listOf(
@@ -62,9 +64,9 @@ enum class CommonMaterialCard(
             )
         }
     }),
-    PYROPE_GEM(10, "pyrope_gem", "gemPyrope", "Pyrope", "パイロープ", "gemPyrope", false, { }),
-    SMITHSONITE_GEM(11, "smithsonite_gem", "gemSmithsonite", "Smithsonite", "スミソナイト", "gemSmithsonite", false, { }),
-    MIRAGIUM_ROD(12, "miragium_rod", "rodMiragium", "Miragium Rod", "ミラジウムの棒", "rodMiragium", true, {
+    PYROPE_GEM(10, "pyrope_gem", "gemPyrope", "Pyrope", "パイロープ", "", "gemPyrope", 0, false, { }),
+    SMITHSONITE_GEM(11, "smithsonite_gem", "gemSmithsonite", "Smithsonite", "スミソナイト", "", "gemSmithsonite", 0, false, { }),
+    MIRAGIUM_ROD(12, "miragium_rod", "rodMiragium", "Miragium Rod", "ミラジウムの棒", "", "rodMiragium", 2, true, {
         modScope.makeRecipe("miragium_rod_by_hand") { // TODO rename
             DataShapedRecipe(
                 pattern = listOf(
@@ -79,7 +81,7 @@ enum class CommonMaterialCard(
             )
         }
     }),
-    MIRAGIUM_NUGGET(13, "miragium_nugget", "nuggetMiragium", "Miragium Nugget", "ミラジウムの塊", "nuggetMiragium", false, {
+    MIRAGIUM_NUGGET(13, "miragium_nugget", "nuggetMiragium", "Miragium Nugget", "ミラジウムの塊", "", "nuggetMiragium", 2, false, {
         modScope.makeRecipe("miragium_nugget_by_fairy") { // 妖精→
             DataShapelessRecipe(
                 ingredients = listOf(
@@ -101,12 +103,12 @@ enum class CommonMaterialCard(
             )
         }
     }),
-    NEPHRITE_GEM(14, "nephrite_gem", "gemNephrite", "Nephrite", "ネフライト", "gemNephrite", false, { }),
-    TOPAZ_GEM(15, "topaz_gem", "gemTopaz", "Topaz", "トパーズ", "gemTopaz", false, { }),
-    TOURMALINE_GEM(16, "tourmaline_gem", "gemTourmaline", "Tourmaline", "トルマリン", "gemTourmaline", false, { }),
-    HELIOLITE_GEM(17, "heliolite_gem", "gemHeliolite", "Heliolite", "ヘリオライト", "gemHeliolite", false, { }),
-    LABRADORITE_GEM(18, "labradorite_gem", "gemLabradorite", "Labradorite", "ラブラドライト", "gemLabradorite", false, { }),
-    LILAGIUM_INGOT(19, "lilagium_ingot", "ingotLilagium", "Lilagium Ingot", "リラジウムインゴット", "ingotLilagium", false, {
+    NEPHRITE_GEM(14, "nephrite_gem", "gemNephrite", "Nephrite", "ネフライト", "", "gemNephrite", 0, false, { }),
+    TOPAZ_GEM(15, "topaz_gem", "gemTopaz", "Topaz", "トパーズ", "", "gemTopaz", 0, false, { }),
+    TOURMALINE_GEM(16, "tourmaline_gem", "gemTourmaline", "Tourmaline", "トルマリン", "", "gemTourmaline", 0, false, { }),
+    HELIOLITE_GEM(17, "heliolite_gem", "gemHeliolite", "Heliolite", "ヘリオライト", "", "gemHeliolite", 0, false, { }),
+    LABRADORITE_GEM(18, "labradorite_gem", "gemLabradorite", "Labradorite", "ラブラドライト", "", "gemLabradorite", 0, false, { }),
+    LILAGIUM_INGOT(19, "lilagium_ingot", "ingotLilagium", "Lilagium Ingot", "リラジウムインゴット", "草花よ、セルロースの神々よ、エーテルの導きにより道を開き給へ", "ingotLilagium", 2, false, {
         makeRecipe {
             DataShapedRecipe(
                 pattern = listOf(
@@ -123,7 +125,7 @@ enum class CommonMaterialCard(
             )
         }
     }),
-    MIRAGIUM_PLATE(20, "miragium_plate", "plateMiragium", "Miragium Plate", "ミラジウムの板", "plateMiragium", false, {
+    MIRAGIUM_PLATE(20, "miragium_plate", "plateMiragium", "Miragium Plate", "ミラジウムの板", "", "plateMiragium", 2, false, {
         makeRecipe {
             DataShapedRecipe(
                 pattern = listOf(
@@ -139,15 +141,15 @@ enum class CommonMaterialCard(
             )
         }
     }),
-    COAL_DUST(21, "coal_dust", "dustCoal", "Coal Dust", "石炭の粉", "dustCoal", false, {
+    COAL_DUST(21, "coal_dust", "dustCoal", "Coal Dust", "石炭の粉", "", "dustCoal", 0, false, {
         fuel(1600)
     }),
-    CHARCOAL_DUST(22, "charcoal_dust", "dustCharcoal", "Charcoal Dust", "木炭の粉", "dustCharcoal", false, {
+    CHARCOAL_DUST(22, "charcoal_dust", "dustCharcoal", "Charcoal Dust", "木炭の粉", "", "dustCharcoal", 0, false, {
         fuel(1600)
     }),
-    APATITE_DUST(23, "apatite_dust", "dustApatite", "Apatite Dust", "燐灰石の粉", "dustApatite", false, { }),
-    FLUORITE_DUST(24, "fluorite_dust", "dustFluorite", "Fluorite Dust", "蛍石の粉", "dustFluorite", false, { }),
-    SULFUR_DUST(25, "sulfur_dust", "dustSulfur", "Sulfur Dust", "硫黄の粉", "dustSulfur", false, {
+    APATITE_DUST(23, "apatite_dust", "dustApatite", "Apatite Dust", "燐灰石の粉", "", "dustApatite", 0, false, { }),
+    FLUORITE_DUST(24, "fluorite_dust", "dustFluorite", "Fluorite Dust", "蛍石の粉", "", "dustFluorite", 0, false, { }),
+    SULFUR_DUST(25, "sulfur_dust", "dustSulfur", "Sulfur Dust", "硫黄の粉", "", "dustSulfur", 0, false, {
         modScope.makeRecipe("fire_charge_from_sulfur_dust") { // →ファイヤーチャージ
             DataShapelessRecipe(
                 ingredients = listOf(
@@ -179,10 +181,10 @@ enum class CommonMaterialCard(
             )
         }
     }),
-    CINNABAR_DUST(26, "cinnabar_dust", "dustCinnabar", "Cinnabar Dust", "辰砂の粉", "dustCinnabar", false, { }),
-    MOONSTONE_DUST(27, "moonstone_dust", "dustMoonstone", "Moonstone Dust", "月長石の粉", "dustMoonstone", false, { }),
-    MAGNETITE_DUST(28, "magnetite_dust", "dustMagnetite", "Magnetite Dust", "磁鉄鉱の粉", "dustMagnetite", false, { }),
-    PYRITE_GEM(29, "pyrite_gem", "gemPyrite", "Pyrite", "パイライト", "gemPyrite", false, {
+    CINNABAR_DUST(26, "cinnabar_dust", "dustCinnabar", "Cinnabar Dust", "辰砂の粉", "", "dustCinnabar", 0, false, { }),
+    MOONSTONE_DUST(27, "moonstone_dust", "dustMoonstone", "Moonstone Dust", "月長石の粉", "", "dustMoonstone", 0, false, { }),
+    MAGNETITE_DUST(28, "magnetite_dust", "dustMagnetite", "Magnetite Dust", "磁鉄鉱の粉", "", "dustMagnetite", 0, false, { }),
+    PYRITE_GEM(29, "pyrite_gem", "gemPyrite", "Pyrite", "パイライト", "", "gemPyrite", 0, false, {
         modScope.onAddRecipe a@{
             GameRegistry.addSmelting("gemPyrite".toOreName().copyItemStack() ?: return@a, "nuggetIron".toOreName().copyItemStack(3) ?: return@a, 0.7f)
         }
@@ -205,10 +207,11 @@ val commonMaterialsModule = module {
         setCreativeTab { Main.creativeTab }
 
         CommonMaterialCard.values().forEach { card ->
-            itemVariant(card.registryName, { ItemVariantSimpleMaterials(it, card.unlocalizedName) }, card.metadata) {
+            itemVariant(card.registryName, { ItemVariantSimpleMaterials(card) }, card.metadata) {
                 addOreName(card.oreName)
                 makeItemModel { if (card.isHandheld) handheld else generated }
                 onMakeLang { enJa("item.${card.unlocalizedName}.name", card.englishName, card.japaneseName) }
+                onMakeLang { enJa("item.${card.unlocalizedName}.poem", "", card.japanesePoem) }
                 card.initializer(this@itemVariant)
             }
         }
