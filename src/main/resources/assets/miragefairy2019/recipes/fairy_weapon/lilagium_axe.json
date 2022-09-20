@@ -1,0 +1,36 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cII",
+    "mI#",
+    " rR"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:miragium_axe"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "stickMirageFairyWood"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotLilagium"
+    },
+    "r": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyRubber"
+    },
+    "c": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereChemical"
+    },
+    "m": {
+      "type": "miragefairy2019:wand",
+      "ore": "mirageFairy2019CraftingToolFairyWandMelting"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:lilagium_axe"
+  }
+}

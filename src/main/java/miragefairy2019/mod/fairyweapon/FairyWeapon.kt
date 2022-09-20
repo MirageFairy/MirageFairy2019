@@ -2,6 +2,7 @@ package miragefairy2019.mod.fairyweapon
 
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Erg.ATTACK
+import miragefairy2019.api.Erg.CHEMICAL
 import miragefairy2019.api.Erg.CHRISTMAS
 import miragefairy2019.api.Erg.CRYSTAL
 import miragefairy2019.api.Erg.DESTROY
@@ -252,6 +253,34 @@ enum class FairyWeaponCard(
                     "m" to WandType.MELTING.ingredientData
                 ),
                 result = DataResult(item = "miragefairy2019:miragium_axe")
+            )
+        }
+    ),
+
+    lilagiumAxe(
+        miragiumAxe, "lilagium_axe", "lilagiumAxe", 5, { ItemMiragiumAxe() },
+        LangPair("Lilagium Axe", "リラジウムの斧"),
+        LangPair("", "バキッ！スパッ"),
+        null,
+        LangPair("Get a specific item", "リラジウムの魔力により木質細胞を分解する"),
+        null,
+        listOf(!CHEMICAL, !"ingotLilagium", !"container250MirageFlowerOil", !"mirageFairyRubber"),
+        {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cII",
+                    "mI#",
+                    " rR"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:miragium_axe"),
+                    "R" to DataOreIngredient(ore = "stickMirageFairyWood"),
+                    "I" to DataOreIngredient(ore = "ingotLilagium"),
+                    "r" to DataOreIngredient(ore = "mirageFairyRubber"),
+                    "c" to DataOreIngredient(ore = "mirageFairy2019SphereChemical"),
+                    "m" to WandType.MELTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:lilagium_axe")
             )
         }
     ),
