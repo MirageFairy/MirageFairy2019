@@ -680,6 +680,12 @@ enum class FairyMaterialCard(
         0, false, { ore("bottleCarbonatedWater").ore("container250CarbonatedWater").bottle() },
         { }
     ),
+    MIRAGE_FAIRY_RUBBER(
+        32, "mirage_fairy_rubber", "mirageFairyRubber",
+        "Fairy Rubber", "夜のかけら", "空は怯えるニグチャに一握りの温かい闇を与えた",
+        5, false, { ore("mirageFairyRubber") },
+        { }
+    ),
     ;
 
     val oreNames = mutableListOf<String>()
@@ -821,6 +827,20 @@ val fairyMaterialsModule = module {
             input("container250MirageFairyLiqueur".oreIngredient, 1)
             input(Items.SUGAR.ingredient, 16)
             output(FairyMaterialCard.MIRAGE_FAIRY_SOLID_FUEL_INGOT.createItemStack(), 16.0, 1.0)
+        }
+    }
+
+    // 夜のかけら
+    onAddRecipe {
+        fairyCentrifugeCraftHandler(30.0) {
+            process { !Mana.WIND + !Erg.FLAME * 2.0 }
+            process { !Mana.FIRE + !Erg.CHEMICAL * 2.0 }
+            process { !Mana.GAIA + !Erg.KINESIS * 2.0 }
+            input("mirageFairyWoodResin".oreIngredient, 16)
+            input("mirageFairyWoodRosin".oreIngredient, 4)
+            input("dustSulfur".oreIngredient, 2)
+            input("dustCharcoal".oreIngredient, 1)
+            output(FairyMaterialCard.MIRAGE_FAIRY_RUBBER.createItemStack(), 1.0, 0.5)
         }
     }
 
