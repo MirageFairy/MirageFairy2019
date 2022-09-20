@@ -784,20 +784,20 @@ enum class FairyWeaponCard(
         null,
         LangPair("Get a specific item", "人、牛、妖精、ゾンビ、植物、土"),
         "challenge",
-        listOf(!"gemMirageFairyPlastic", !"gemMirageFairyPlastic"),
+        listOf(!"gemMirageFairyPlastic", !"mirageFairyRubber"),
         {
             DataShapedRecipe(
                 pattern = listOf(
                     " pf",
-                    "c#p",
-                    "Rc "
+                    "r#p",
+                    "Rr "
                 ),
                 key = mapOf(
                     "#" to DataSimpleIngredient(item = "miragefairy2019:prayer_wheel_2"),
                     "R" to DataOreIngredient(ore = "rodMirageFairyPlastic"),
                     "p" to DataOreIngredient(ore = "gemMirageFairyPlastic"),
                     "f" to DataOreIngredient(ore = "gemMirageFairyPlasticWithFairy"),
-                    "c" to DataOreIngredient(ore = "dustCoal")
+                    "r" to DataOreIngredient(ore = "mirageFairyRubber")
                 ),
                 result = DataResult(item = "miragefairy2019:prayer_wheel_3")
             )

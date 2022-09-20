@@ -2,8 +2,8 @@
   "type": "forge:ore_shaped",
   "pattern": [
     " pf",
-    "c#p",
-    "Rc "
+    "r#p",
+    "Rr "
   ],
   "key": {
     "#": {
@@ -21,9 +21,9 @@
       "type": "forge:ore_dict",
       "ore": "gemMirageFairyPlasticWithFairy"
     },
-    "c": {
+    "r": {
       "type": "forge:ore_dict",
-      "ore": "dustCoal"
+      "ore": "mirageFairyRubber"
     }
   },
   "result": {
