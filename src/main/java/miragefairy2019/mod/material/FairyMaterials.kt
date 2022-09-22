@@ -686,6 +686,12 @@ enum class FairyMaterialCard(
         5, false, { ore("mirageFairyRubber") },
         { }
     ),
+    AKAXITE_GEM(
+        33, "akaxite_gem", "gemAkaxite",
+        "Akaxite", "紅天石", "冥界より現れし異形の訪問者。鎖は繋がれる。魂の石へ。",
+        5, false, { ore("gemAkaxite") },
+        { }
+    ),
     ;
 
     val oreNames = mutableListOf<String>()
@@ -858,6 +864,21 @@ val fairyMaterialsModule = module {
             ),
             result = DataResult(item = "miragefairy2019:filled_bucket", data = 3, count = 2)
         )
+    }
+
+    // 紅天石
+    onAddRecipe {
+        fairyCentrifugeCraftHandler(300.0) {
+            process { !Mana.SHINE + !Erg.WARP * 2.0 }
+            process { !Mana.WIND + !Erg.KNOWLEDGE * 2.0 }
+            process { !Mana.FIRE + !Erg.CRYSTAL * 2.0 }
+            input("gemMirageFairyPlastic".oreIngredient, 1)
+            input("container1000MirageFlowerExtract".oreIngredient, 1)
+            input("ingotMiragium".oreIngredient, 8)
+            input("dustCinnabar".oreIngredient, 4)
+            input("dustMagnetite".oreIngredient, 4)
+            output(FairyMaterialCard.AKAXITE_GEM.createItemStack(), 1.0, 0.5)
+        }
     }
 
 }
