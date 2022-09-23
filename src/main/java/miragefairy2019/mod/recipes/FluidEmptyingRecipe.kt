@@ -34,5 +34,6 @@ val fluidEmptyingRecipeModule = module {
     makeRecipe("mirage_flower_oil")
     makeRecipe("mirage_fairy_blood")
     makeRecipe("carbonated_water")
+    makeRecipe("mirage_fairy_varnish")
 
 }

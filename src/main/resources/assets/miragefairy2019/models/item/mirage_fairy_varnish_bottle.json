@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "miragefairy2019:items/mirage_fairy_varnish_bottle"
+  }
+}

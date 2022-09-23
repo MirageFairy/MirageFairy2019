@@ -692,6 +692,12 @@ enum class FairyMaterialCard(
         5, false, { ore("gemAkaxite") },
         { }
     ),
+    MIRAGE_FAIRY_VARNISH_BOTTLE(
+        34, "mirage_fairy_varnish_bottle", "bottleMirageFairyVarnish",
+        "Fairy Varnish Bottle", "情緒体反射材", "冥界からの訪問者を封じ込めるための硬化性塗料",
+        5, false, { ore("bottleMirageFairyVarnish").ore("container250MirageFairyVarnish").bottle() },
+        { }
+    ),
     ;
 
     val oreNames = mutableListOf<String>()
@@ -879,6 +885,19 @@ val fairyMaterialsModule = module {
             input("dustMagnetite".oreIngredient, 4)
             output(FairyMaterialCard.AKAXITE_GEM.createItemStack(), 1.0, 1.0)
         }
+    }
+
+    // 情緒体反射材
+    makeRecipe("mirage_fairy_varnish_bottle") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "container250MirageFlowerOil"),
+                DataOreIngredient(ore = "gemAkaxite"),
+                WandType.MELTING.ingredientData,
+                DataSimpleIngredient(item = "minecraft:glass_bottle")
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = FairyMaterialCard.MIRAGE_FAIRY_VARNISH_BOTTLE.metadata)
+        )
     }
 
 }
