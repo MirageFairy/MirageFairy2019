@@ -50,7 +50,7 @@ lateinit var itemBlockFairyResinTapper: () -> ItemBlock
 val fairyResinTapperModule = module {
 
     // ブロック
-    blockFairyResinTapper = block({ BlockFairyBoxBase(4) { TileEntityFairyResinTapper() } }, "fairy_resin_tapper") {
+    blockFairyResinTapper = block({ BlockFairyBoxBase(5) { TileEntityFairyResinTapper() } }, "fairy_resin_tapper") {
         setUnlocalizedName("fairyResinTapper")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {

@@ -32,7 +32,7 @@ lateinit var itemBlockFairyHouse: () -> ItemBlock
 val fairyHouseModule = module {
 
     // ブロック
-    blockFairyHouse = block({ BlockFairyBoxBase(4) { TileEntityFairyHouse() } }, "fairy_box") {
+    blockFairyHouse = block({ BlockFairyBoxBase(5) { TileEntityFairyHouse() } }, "fairy_box") {
         setUnlocalizedName("fairyHouse")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {

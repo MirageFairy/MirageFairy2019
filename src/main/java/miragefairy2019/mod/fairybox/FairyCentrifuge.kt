@@ -128,7 +128,7 @@ lateinit var itemBlockFairyCentrifuge: () -> ItemBlock
 val fairyCentrifugeModule = module {
 
     // ブロック
-    blockFairyCentrifuge = block({ BlockFairyBoxBase(4) { TileEntityFairyCentrifuge() } }, "fairy_centrifuge") {
+    blockFairyCentrifuge = block({ BlockFairyBoxBase(5) { TileEntityFairyCentrifuge() } }, "fairy_centrifuge") {
         setUnlocalizedName("fairyCentrifuge")
         setCreativeTab { Main.creativeTab }
         makeBlockStates {
