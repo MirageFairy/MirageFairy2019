@@ -49,6 +49,38 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
+interface DrinkHandler {
+    @SideOnly(Side.CLIENT)
+    fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag)
+    fun check(itemStack: ItemStack, world: World, player: EntityLivingBase): Boolean
+    fun affect(itemStack: ItemStack, world: World, player: EntityLivingBase)
+}
+
+class PotionEffectDrinkHandler(private val potionEffectGetter: () -> PotionEffect) : DrinkHandler {
+    private val potionEffect by lazy { potionEffectGetter() }
+
+    @SideOnly(Side.CLIENT)
+    override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+        tooltip += formattedText {
+            concat(
+                translate(potionEffect.effectName),
+                " Lv.${potionEffect.amplifier + 1}"(),
+                if (potionEffect.duration > 20) " (${Potion.getPotionDurationString(potionEffect, 1.0f)})"() else ""()
+            ).withColor(if (potionEffect.potion.isBadEffect) TextFormatting.RED else TextFormatting.BLUE)
+        }
+    }
+
+    override fun check(itemStack: ItemStack, world: World, player: EntityLivingBase) = true
+    override fun affect(itemStack: ItemStack, world: World, player: EntityLivingBase) {
+        if (potionEffect.potion.isInstant) {
+            potionEffect.potion.affectEntity(player, player, player, potionEffect.amplifier, 1.0)
+        } else {
+            player.addPotionEffect(PotionEffect(potionEffect))
+        }
+    }
+}
+
+
 enum class PotionCard(
     val metadata: Int,
     val registryName: String,
@@ -57,82 +89,54 @@ enum class PotionCard(
     val japaneseName: String,
     val japanesePoem: String,
     val hasEffect: Boolean,
-    val potionEffects: () -> List<PotionEffect>
+    vararg val drinkHandlers: DrinkHandler
 ) {
     MANDRAKE_JUICE(
         0, "mandrake_juice", "mandrakeJuice",
         "Mandrake Juice", "アルラウンＥ  ２５０ｍｌ", "負傷の防止と恢復に！",
         true,
-        {
-            listOf(
-                PotionEffect(MobEffects.RESISTANCE, 1200, 0),
-                PotionEffect(MobEffects.ABSORPTION, 1200, 1),
-                PotionEffect(MobEffects.REGENERATION, 1200, 0),
-                PotionEffect(MobEffects.HASTE, 1200, 1)
-            )
-        }
+        PotionEffectDrinkHandler { PotionEffect(MobEffects.RESISTANCE, 1200, 0) },
+        PotionEffectDrinkHandler { PotionEffect(MobEffects.ABSORPTION, 1200, 1) },
+        PotionEffectDrinkHandler { PotionEffect(MobEffects.REGENERATION, 1200, 0) },
+        PotionEffectDrinkHandler { PotionEffect(MobEffects.HASTE, 1200, 1) }
     ),
     CACTUS_JUICE(
         1, "cactus_juice", "cactusJuice",
         "Cactus Juice", "サボテンジュース", "",
         false,
-        {
-            listOf(
-                PotionEffect(MobEffects.REGENERATION, 1200, 0)
-            )
-        }
+        PotionEffectDrinkHandler { PotionEffect(MobEffects.REGENERATION, 1200, 0) }
     ),
     APPLE_JUICE(
         2, "apple_juice", "appleJuice",
         "Apple Juice", "リンゴジュース", "",
         false,
-        {
-            listOf(
-                PotionEffect(MobEffects.SPEED, 12000, 0)
-            )
-        }
+        PotionEffectDrinkHandler { PotionEffect(MobEffects.SPEED, 12000, 0) }
     ),
     GREEN_JUICE(
         3, "green_juice", "greenJuice",
         "Green Juice", "青汁", "",
         false,
-        {
-            listOf(
-                PotionEffect(MobEffects.STRENGTH, 12000, 0)
-            )
-        }
+        PotionEffectDrinkHandler { PotionEffect(MobEffects.STRENGTH, 12000, 0) }
     ),
     POISON_JUICE(
         4, "poison_juice", "poisonJuice",
         "Poison Juice", "毒薬", "",
         false,
-        {
-            listOf(
-                PotionEffect(MobEffects.INSTANT_DAMAGE, 0, 19),
-                PotionEffect(MobEffects.WITHER, 1200, 9),
-                PotionEffect(MobEffects.HUNGER, 1200, 9)
-            )
-        }
+        PotionEffectDrinkHandler { PotionEffect(MobEffects.INSTANT_DAMAGE, 0, 19) },
+        PotionEffectDrinkHandler { PotionEffect(MobEffects.WITHER, 1200, 9) },
+        PotionEffectDrinkHandler { PotionEffect(MobEffects.HUNGER, 1200, 9) }
     ),
     COLA(
         5, "cola", "cola",
         "Cola", "コーラ", "",
         false,
-        {
-            listOf(
-                PotionEffect(MobEffects.HEALTH_BOOST, 12000, 0)
-            )
-        }
+        PotionEffectDrinkHandler { PotionEffect(MobEffects.HEALTH_BOOST, 12000, 0) }
     ),
     RAMUNE(
         6, "ramune", "ramune",
         "Ramune", "ラムネ", "",
         false,
-        {
-            listOf(
-                PotionEffect(MobEffects.LUCK, 12000, 0)
-            )
-        }
+        PotionEffectDrinkHandler { PotionEffect(MobEffects.LUCK, 12000, 0) }
     ),
 }
 
@@ -286,14 +290,8 @@ class ItemPotion : ItemMultiMaterial<ItemVariantPotion>() {
 
         val variant = getVariant(itemStack) ?: return
 
-        variant.potionCard.potionEffects().forEach { potionEffect ->
-            tooltip += formattedText {
-                concat(
-                    translate(potionEffect.effectName),
-                    " Lv.${potionEffect.amplifier + 1}"(),
-                    if (potionEffect.duration > 20) " (${Potion.getPotionDurationString(potionEffect, 1.0f)})"() else ""()
-                ).withColor(if (potionEffect.potion.isBadEffect) TextFormatting.RED else TextFormatting.BLUE)
-            }
+        variant.potionCard.drinkHandlers.forEach { drinkHandler ->
+            drinkHandler.addInformation(itemStack, world, tooltip, flag)
         }
 
     }
@@ -323,6 +321,11 @@ class ItemPotion : ItemMultiMaterial<ItemVariantPotion>() {
         val variant = getVariant(itemStack) ?: return itemStack
         val containerItem = itemStack.containerItem
 
+        // 前提検査
+        variant.potionCard.drinkHandlers.forEach { drinkHandler ->
+            if (!drinkHandler.check(itemStack, world, player)) return itemStack
+        }
+
         // 成立
 
         if (player is EntityPlayerMP) CriteriaTriggers.CONSUME_ITEM.trigger(player, itemStack) // 実績トリガー
@@ -337,12 +340,8 @@ class ItemPotion : ItemMultiMaterial<ItemVariantPotion>() {
 
         // 効果
         if (!world.isRemote) {
-            variant.potionCard.potionEffects().forEach { potionEffect ->
-                if (potionEffect.potion.isInstant) {
-                    potionEffect.potion.affectEntity(player, player, player, potionEffect.amplifier, 1.0)
-                } else {
-                    player.addPotionEffect(PotionEffect(potionEffect))
-                }
+            variant.potionCard.drinkHandlers.forEach { drinkHandler ->
+                drinkHandler.affect(itemStack, world, player)
             }
         }
 
