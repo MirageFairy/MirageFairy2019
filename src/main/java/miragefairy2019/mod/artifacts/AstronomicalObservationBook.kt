@@ -69,7 +69,7 @@ val astronomicalObservationBookModule = module {
                     DataSimpleIngredient(item = "minecraft:writable_book"),
                     DataOreIngredient(ore = "mirageFairyCrystal"),
                     DataOreIngredient(ore = "obsidian"),
-                    DataOreIngredient(ore = "mirageFairy2019SphereSense")
+                    DataOreIngredient(ore = "gemMoonstone")
                 ),
                 result = DataResult(item = "miragefairy2019:astronomical_observation_book")
             )
