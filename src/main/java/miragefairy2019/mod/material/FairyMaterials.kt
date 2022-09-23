@@ -688,7 +688,7 @@ enum class FairyMaterialCard(
     ),
     AKAXITE_GEM(
         33, "akaxite_gem", "gemAkaxite",
-        "Akaxite", "紅天石", "冥界より現れし異形の訪問者。鎖は繋がれる。魂の石へ。",
+        "Akaxite", "紅天石", "黒鉄の鎖は繋がれる。血腥い魂の檻へ。",
         5, false, { ore("gemAkaxite") },
         { }
     ),
@@ -873,11 +873,11 @@ val fairyMaterialsModule = module {
             process { !Mana.WIND + !Erg.KNOWLEDGE * 2.0 }
             process { !Mana.FIRE + !Erg.CRYSTAL * 2.0 }
             input("gemMirageFairyPlastic".oreIngredient, 1)
-            input("container1000MirageFlowerExtract".oreIngredient, 1)
+            input("container250MirageFairyBlood".oreIngredient, 1)
+            input("container250MirageFlowerExtract".oreIngredient, 1)
             input("ingotMiragium".oreIngredient, 8)
-            input("dustCinnabar".oreIngredient, 4)
             input("dustMagnetite".oreIngredient, 4)
-            output(FairyMaterialCard.AKAXITE_GEM.createItemStack(), 1.0, 0.5)
+            output(FairyMaterialCard.AKAXITE_GEM.createItemStack(), 1.0, 1.0)
         }
     }
 
