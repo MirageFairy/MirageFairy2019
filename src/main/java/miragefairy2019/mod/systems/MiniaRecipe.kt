@@ -11,12 +11,14 @@ import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
+import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.handheld
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.artifacts.PotionCard
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.relauncher.Side
@@ -64,6 +66,18 @@ val miniaRecipeModule = module {
         )
     }
 
+    fun registerWithBottle(name: String, input: DataIngredient, output: DataResult, inputRank: Int, count: Int) = makeRecipe("minia/$name") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                input,
+                DataOreIngredient(ore = "mirageFairyApostleStick"),
+                *(0 until count).map { DataOreIngredient(ore = "mirageFairy2019FairyMinaRank$inputRank") }.toTypedArray(),
+                DataSimpleIngredient(item = "minecraft:glass_bottle")
+            ),
+            result = output
+        )
+    }
+
     register("cobblestone", DataOreIngredient(ore = "cobblestone"), DataResult(item = "minecraft:cobblestone", data = null, count = 2), 2, 1) // 丸石
     register("coal_ore", DataOreIngredient(ore = "oreCoal"), DataResult(item = "minecraft:coal_ore", data = null, count = 2), 3, 1) // 石炭
     register("iron_ore", DataOreIngredient(ore = "oreIron"), DataResult(item = "minecraft:iron_ore", data = null, count = 2), 3, 1) // 鉄
@@ -78,6 +92,7 @@ val miniaRecipeModule = module {
     register("cinnabar_ore", DataOreIngredient(ore = "oreCinnabar"), DataResult(item = "miragefairy2019:ore1", data = 3, count = 2), 4, 1) // 辰砂
     register("fluorite_ore", DataOreIngredient(ore = "oreFluorite"), DataResult(item = "miragefairy2019:ore1", data = 1, count = 2), 4, 1) // 蛍石
     register("moonstone_ore", DataOreIngredient(ore = "oreMoonstone"), DataResult(item = "miragefairy2019:ore1", data = 4, count = 2), 4, 2) // 月長石
+    registerWithBottle("skill_point_reset_potion", DataOreIngredient(ore = "nuggetGold"), DataResult(item = "miragefairy2019:potion", data = PotionCard.SKILL_POINT_RESET_POTION.metadata), 7, 1) // SP還元ポーション
 
 }
 

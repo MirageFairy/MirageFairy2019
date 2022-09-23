@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "nuggetGold"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyApostleStick"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyMinaRank7"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:potion",
+    "data": 7
+  }
+}
