@@ -20,18 +20,33 @@ import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.enJa
+import miragefairy2019.libkt.get
+import miragefairy2019.libkt.with
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.fairyweapon.breakBlock
+import miragefairy2019.mod.fairyweapon.search
+import net.minecraft.advancements.CriteriaTriggers
+import net.minecraft.block.BlockLog
 import net.minecraft.block.BlockRotatedPillar
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
+import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemBlock
+import net.minecraft.item.ItemStack
+import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumHand
+import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
+import net.minecraft.world.World
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 
 lateinit var blockFairyWoodLog: () -> BlockFairyWoodLog
-lateinit var itemBlockFairyWoodLog: () -> ItemBlock
+lateinit var itemBlockFairyWoodLog: () -> ItemBlockFairyWoodLog
 
 val fairyWoodLogModule = module {
 
@@ -58,7 +73,7 @@ val fairyWoodLogModule = module {
     }
 
     // アイテム
-    itemBlockFairyWoodLog = item({ ItemBlock(blockFairyWoodLog()) }, "fairy_wood_log") {
+    itemBlockFairyWoodLog = item({ ItemBlockFairyWoodLog(blockFairyWoodLog()) }, "fairy_wood_log") {
         setUnlocalizedName("fairyWoodLog")
         addOreName("logFairyWood")
         setCreativeTab { Main.creativeTab }
@@ -98,6 +113,74 @@ val fairyWoodLogModule = module {
         enJa("tile.fairyWoodLog.name", "Fairy Wood Log", "妖精の原木")
     }
 
+}
+
+class ItemBlockFairyWoodLog(block: BlockFairyWoodLog) : ItemBlock(block) {
+    private fun isLog(world: World, blockPos: BlockPos) = when (world.getBlockState(blockPos).block) {
+        is BlockLog -> true
+        blockFairyLog() -> true
+        else -> false
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun canPlaceBlockOnSide(world: World, blockPos: BlockPos, facing: EnumFacing, player: EntityPlayer, itemStack: ItemStack): Boolean {
+        return if (isLog(world, blockPos)) {
+            true
+        } else {
+            super.canPlaceBlockOnSide(world, blockPos, facing, player, itemStack)
+        }
+    }
+
+    override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        val itemStack = player.getHeldItem(hand)
+
+        // 木の探索
+        val visited = mutableListOf(blockPos)
+        val logBlockPosList = search(32, visited, listOf(blockPos)) { isLog(world, it) }
+        if (logBlockPosList.isEmpty()) return super.onItemUse(player, world, blockPos, hand, facing, hitX, hitY, hitZ)
+
+        // 対象ブロック
+        val targetBlockPos = logBlockPosList.last()
+        val targetBlockState = world.getBlockState(targetBlockPos)
+
+        // 軸方向取得
+        val axis = when {
+            BlockRotatedPillar.AXIS in targetBlockState.properties -> targetBlockState[BlockRotatedPillar.AXIS]
+            BlockLog.LOG_AXIS in targetBlockState.properties -> EnumFacing.Axis.valueOf(targetBlockState[BlockLog.LOG_AXIS].name)
+            else -> EnumFacing.Axis.Y
+        }
+
+        // チェック
+        if (itemStack.isEmpty) return EnumActionResult.FAIL
+        if (!player.canPlayerEdit(targetBlockPos, facing, itemStack)) return EnumActionResult.FAIL
+
+        // 破壊
+        if (!breakBlock(world, player, itemStack, targetBlockPos, facing = facing, collection = true)) return EnumActionResult.FAIL
+
+        // チェック
+        if (!world.mayPlace(block, targetBlockPos, false, facing, player)) return EnumActionResult.FAIL
+
+        // 設置
+        if (!world.setBlockState(targetBlockPos, block.defaultState.with(BlockRotatedPillar.AXIS, axis), 11)) return EnumActionResult.FAIL
+
+        // 設置後処理
+        val newBlockState = world.getBlockState(targetBlockPos)
+        if (newBlockState.block === block) {
+            setTileEntityNBT(world, player, targetBlockPos, itemStack)
+            //block.onBlockPlacedBy(world, targetBlockPos, newBlockState, player, itemStack)
+            if (player is EntityPlayerMP) CriteriaTriggers.PLACED_BLOCK.trigger(player, targetBlockPos, itemStack)
+        }
+
+        // エフェクト
+        val soundType = newBlockState.block.getSoundType(newBlockState, world, targetBlockPos, player)
+        world.playSound(player, targetBlockPos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0f) / 2.0f, soundType.getPitch() * 0.8f)
+
+        // 消費
+        itemStack.shrink(1)
+        //player.cooldownTracker.setCooldown(this, 5)
+
+        return EnumActionResult.SUCCESS
+    }
 }
 
 class BlockFairyWoodLog : BlockRotatedPillar(Material.WOOD) {
