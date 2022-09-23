@@ -815,6 +815,17 @@ val fairyMaterialsModule = module {
         }
     }
 
+    // 妖精のプラスチック分解
+    makeRecipe("mirage_fairy_plastic_from_mirage_fairy_plastic_with_mirage_fairy") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "gemMirageFairyPlasticWithFairy"),
+                WandType.FUSION.ingredientData
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = FairyMaterialCard.FAIRY_PLASTIC.metadata)
+        )
+    }
+
     // 妖精のリキュール・炭酸水
     onAddRecipe {
         fairyCentrifugeCraftHandler(150.0) {
