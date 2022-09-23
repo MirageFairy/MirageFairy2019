@@ -99,7 +99,6 @@ import miragefairy2019.mod.material.FairyMaterialCard
 import miragefairy2019.mod.material.createItemStack
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
-import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.gui.Gui
@@ -592,7 +591,7 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         return getAuraCollectionSpeed(world, getLeaves() ?: return 0.0, times)
     }
 
-    fun getFoliaSpeedFactor(folia: Double) = ((folia atMost 300.0) - 30.0) / 30.0 atLeast 0.0
+    fun getFoliaSpeedFactor(folia: Double) = (folia atMost 300.0) / smallTreeAuraCollectionSpeed
 
 
     // Recipe
