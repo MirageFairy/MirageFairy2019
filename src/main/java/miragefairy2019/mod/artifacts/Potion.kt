@@ -9,6 +9,7 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.obtain
+import miragefairy2019.lib.proxy
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
@@ -16,6 +17,7 @@ import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
+import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.ItemMultiMaterial
 import miragefairy2019.libkt.ItemVariantMaterial
 import miragefairy2019.libkt.canTranslate
@@ -26,10 +28,13 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
+import miragefairy2019.libkt.red
 import miragefairy2019.libkt.setCustomModelResourceLocations
+import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.withColor
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.skill.canResetMastery
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.EntityLivingBase
@@ -48,6 +53,7 @@ import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+import java.time.Instant
 
 interface DrinkHandler {
     @SideOnly(Side.CLIENT)
@@ -77,6 +83,30 @@ class PotionEffectDrinkHandler(private val potionEffectGetter: () -> PotionEffec
         } else {
             player.addPotionEffect(PotionEffect(potionEffect))
         }
+    }
+}
+
+class SkillPointResetDrinkHandler : DrinkHandler {
+    @SideOnly(Side.CLIENT)
+    override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
+        tooltip += formattedText { "マスタリレベル初期化を可能にする"().red }
+    }
+
+    override fun check(itemStack: ItemStack, world: World, player: EntityPlayer): Boolean {
+        if (!player.proxy.skillContainer.canResetMastery(Instant.now())) {
+            return true
+        } else {
+            player.sendStatusMessage(textComponent { "マスタリレベル初期化は既に可能です"() }, true) // TRANSLATE
+            return false
+        }
+    }
+
+    override fun affect(itemStack: ItemStack, world: World, player: EntityPlayer) {
+        if (world.isRemote) return
+        if (player !is EntityPlayerMP) return
+        player.proxy.skillContainer.variables.lastMasteryResetTime = null
+        player.proxy.skillContainer.send(player)
+        player.sendStatusMessage(textComponent { "マスタリレベル初期化が可能になりました"() }, true) // TRANSLATE
     }
 }
 
@@ -137,6 +167,12 @@ enum class PotionCard(
         "Ramune", "ラムネ", "",
         false,
         PotionEffectDrinkHandler { PotionEffect(MobEffects.LUCK, 12000, 0) }
+    ),
+    SKILL_POINT_RESET_POTION(
+        7, "skill_point_reset_potion", "skillPointResetPotion",
+        "Skill Point Reset Potion", "SP還元ポーション", "",
+        false,
+        SkillPointResetDrinkHandler()
     ),
 }
 
