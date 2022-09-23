@@ -77,6 +77,20 @@ val fairyWoodLogModule = module {
                 result = DataResult(item = "miragefairy2019:fairy_wood_log")
             )
         }
+        makeRecipe("fairy_wood_log_from_mirage_fairy_varnish") {
+            DataShapedRecipe(
+                pattern = listOf(
+                    " o ",
+                    "oLo",
+                    " o "
+                ),
+                key = mapOf(
+                    "L" to DataOreIngredient(ore = "logWood"),
+                    "o" to DataOreIngredient(ore = "container250MirageFairyVarnish")
+                ),
+                result = DataResult(item = "miragefairy2019:fairy_wood_log")
+            )
+        }
     }
 
     // 翻訳生成
