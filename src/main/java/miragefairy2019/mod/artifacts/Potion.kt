@@ -52,8 +52,8 @@ import net.minecraftforge.fml.relauncher.SideOnly
 interface DrinkHandler {
     @SideOnly(Side.CLIENT)
     fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag)
-    fun check(itemStack: ItemStack, world: World, player: EntityLivingBase): Boolean
-    fun affect(itemStack: ItemStack, world: World, player: EntityLivingBase)
+    fun check(itemStack: ItemStack, world: World, player: EntityPlayer): Boolean
+    fun affect(itemStack: ItemStack, world: World, player: EntityPlayer)
 }
 
 class PotionEffectDrinkHandler(private val potionEffectGetter: () -> PotionEffect) : DrinkHandler {
@@ -70,8 +70,8 @@ class PotionEffectDrinkHandler(private val potionEffectGetter: () -> PotionEffec
         }
     }
 
-    override fun check(itemStack: ItemStack, world: World, player: EntityLivingBase) = true
-    override fun affect(itemStack: ItemStack, world: World, player: EntityLivingBase) {
+    override fun check(itemStack: ItemStack, world: World, player: EntityPlayer) = true
+    override fun affect(itemStack: ItemStack, world: World, player: EntityPlayer) {
         if (potionEffect.potion.isInstant) {
             potionEffect.potion.affectEntity(player, player, player, potionEffect.amplifier, 1.0)
         } else {
@@ -309,6 +309,16 @@ class ItemPotion : ItemMultiMaterial<ItemVariantPotion>() {
     // アクション
 
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
+        val itemStack = player.getHeldItem(hand)
+        val variant = getVariant(itemStack) ?: return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
+
+        // 前提検査
+        variant.potionCard.drinkHandlers.forEach { drinkHandler ->
+            if (!drinkHandler.check(itemStack, world, player)) return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
+        }
+
+        // 成立
+
         player.activeHand = hand
         return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
     }
