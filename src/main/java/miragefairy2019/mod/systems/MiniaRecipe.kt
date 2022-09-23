@@ -58,8 +58,8 @@ val miniaRecipeModule = module {
     fun register(name: String, input: DataIngredient, output: DataResult, inputRank: Int, count: Int) = makeRecipe("minia/$name") {
         DataShapelessRecipe(
             ingredients = listOf(
-                input,
                 DataOreIngredient(ore = "mirageFairyApostleStick"),
+                input,
                 *(0 until count).map { DataOreIngredient(ore = "mirageFairy2019FairyMinaRank$inputRank") }.toTypedArray()
             ),
             result = output
@@ -69,8 +69,8 @@ val miniaRecipeModule = module {
     fun registerWithBottle(name: String, input: DataIngredient, output: DataResult, inputRank: Int, count: Int) = makeRecipe("minia/$name") {
         DataShapelessRecipe(
             ingredients = listOf(
-                input,
                 DataOreIngredient(ore = "mirageFairyApostleStick"),
+                input,
                 *(0 until count).map { DataOreIngredient(ore = "mirageFairy2019FairyMinaRank$inputRank") }.toTypedArray(),
                 DataSimpleIngredient(item = "minecraft:glass_bottle")
             ),

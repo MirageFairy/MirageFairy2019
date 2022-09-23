@@ -3,11 +3,11 @@
   "ingredients": [
     {
       "type": "forge:ore_dict",
-      "ore": "oreGold"
+      "ore": "mirageFairyApostleStick"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairyApostleStick"
+      "ore": "oreGold"
     },
     {
       "type": "forge:ore_dict",
