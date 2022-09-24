@@ -147,6 +147,11 @@ class TileEntityFairyResinTapper : TileEntityFairyBoxBase() {
             compileFairyTree(world, pos)
         } catch (e: TreeCompileException) {
             return FailureFairyBoxExecutor(e.description)
+        } catch (e: TreeSearchException) {
+            return when (e) {
+                is PartiallyUnloadedTreeSearchException -> FailureFairyBoxExecutor(textComponent { "構造物の一部がロード範囲外にあります"().darkRed }) // TRANSLATE
+                is TooLargeTreeSearchException -> FailureFairyBoxExecutor(textComponent { "構造物が大きすぎます"().darkRed }) // TRANSLATE
+            }
         }
 
         // 成立

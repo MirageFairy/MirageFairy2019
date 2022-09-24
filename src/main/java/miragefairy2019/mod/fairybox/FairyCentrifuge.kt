@@ -585,6 +585,8 @@ class TileEntityFairyCentrifuge : TileEntityFairyBoxBase(), IInventory, ISidedIn
         compileFairyTree(world, pos)
     } catch (e: TreeCompileException) {
         null
+    } catch (e: TreeSearchException) {
+        null
     }
 
     fun getFolia(times: Int): Double {

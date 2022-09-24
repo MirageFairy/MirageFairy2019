@@ -5,6 +5,157 @@ import miragefairy2019.libkt.textComponent
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
+
+sealed class TreeSearchException : Exception()
+
+class TooLargeTreeSearchException : TreeSearchException()
+
+class PartiallyUnloadedTreeSearchException : TreeSearchException()
+
+enum class NeighborhoodType { SURFACE, VERTEX }
+
+enum class TooLargeBehaviour { IGNORE, EXCEPTION }
+
+enum class UnloadedPositionBehaviour { LOAD, IGNORE, EXCEPTION }
+
+class SearchResultEntry<out T>(val blockPos: BlockPos, val distance: Int, val tag: T)
+
+val List<SearchResultEntry<*>>.blockPoses get() = this.map { it.blockPos }
+
+/**
+ * @param includeZero 真の場合、開始座標にもステップ判定を行います。偽の場合、開始座標は確定済みとして起点にします。
+ * @throws TreeSearchException
+ */
+fun <T : Any> treeSearch(
+    world: World,
+    startBlockPoses: List<BlockPos>,
+    visitedBlockPoses: MutableSet<BlockPos>,
+    maxDistance: Int? = null,
+    maxSize: Int? = null,
+    startDistance: Int = 0,
+    includeZero: Boolean = false,
+    neighborhoodType: NeighborhoodType = NeighborhoodType.SURFACE,
+    tooLargeBehaviour: TooLargeBehaviour = TooLargeBehaviour.EXCEPTION,
+    unloadedPositionBehaviour: UnloadedPositionBehaviour = UnloadedPositionBehaviour.LOAD,
+    predicate: (blockPos: BlockPos, distance: Int) -> T?
+): List<SearchResultEntry<T>> {
+
+    val resultEntries = mutableListOf<SearchResultEntry<T>>()
+    var nextBlockPoses = mutableListOf<BlockPos>()
+    var distance = startDistance
+
+    fun step(blockPos: BlockPos) {
+        if (blockPos in visitedBlockPoses) return
+        visitedBlockPoses += blockPos
+
+        // 一部がチャンクロード範囲外にある場合
+        when (unloadedPositionBehaviour) {
+            UnloadedPositionBehaviour.LOAD -> Unit // 強制的に踏む
+            UnloadedPositionBehaviour.IGNORE -> {
+                if (!world.isBlockLoaded(blockPos)) return  // 踏まずに飛ばす
+            }
+            UnloadedPositionBehaviour.EXCEPTION -> {
+                if (!world.isBlockLoaded(blockPos)) throw PartiallyUnloadedTreeSearchException() // 例外にする
+            }
+        }
+
+        // 判定
+        val tag = predicate(blockPos, distance) ?: return
+
+        // 成功
+
+        resultEntries += SearchResultEntry(blockPos, distance, tag)
+        nextBlockPoses.add(blockPos)
+
+        if (tooLargeBehaviour == TooLargeBehaviour.EXCEPTION) {
+            if (maxDistance != null && distance > maxDistance) throw TooLargeTreeSearchException() // 距離の上限を超えている場合は例外
+        }
+        if (maxSize != null && resultEntries.size > maxSize) throw TooLargeTreeSearchException() // 大きすぎる場合は例外
+
+    }
+
+    var lastBlockPoses: List<BlockPos>
+
+    if (includeZero) {
+
+        startBlockPoses.forEach { blockPos ->
+            step(blockPos)
+        }
+
+        distance++
+        lastBlockPoses = nextBlockPoses
+
+    } else {
+
+        visitedBlockPoses += startBlockPoses // どちらにしろゼロ座標は再び判定しない
+
+        distance++
+        lastBlockPoses = startBlockPoses
+
+    }
+
+    while (true) {
+
+        if (tooLargeBehaviour == TooLargeBehaviour.IGNORE) {
+            if (maxDistance != null && distance > maxDistance) break // 距離の上限を超えている場合は終了
+        }
+
+        if (lastBlockPoses.isEmpty()) break
+
+        nextBlockPoses = mutableListOf()
+        lastBlockPoses.forEach { blockPos ->
+            when (neighborhoodType) {
+                NeighborhoodType.SURFACE -> {
+                    step(blockPos.add(-1, 0, 0))
+                    step(blockPos.add(1, 0, 0))
+                    step(blockPos.add(0, -1, 0))
+                    step(blockPos.add(0, 1, 0))
+                    step(blockPos.add(0, 0, -1))
+                    step(blockPos.add(0, 0, 1))
+                }
+                NeighborhoodType.VERTEX -> {
+                    step(blockPos.add(-1, -1, -1))
+                    step(blockPos.add(-1, -1, 0))
+                    step(blockPos.add(-1, -1, 1))
+                    step(blockPos.add(-1, 0, -1))
+                    step(blockPos.add(-1, 0, 0))
+                    step(blockPos.add(-1, 0, 1))
+                    step(blockPos.add(-1, 1, -1))
+                    step(blockPos.add(-1, 1, 0))
+                    step(blockPos.add(-1, 1, 1))
+                    step(blockPos.add(0, -1, -1))
+                    step(blockPos.add(0, -1, 0))
+                    step(blockPos.add(0, -1, 1))
+                    step(blockPos.add(0, 0, -1))
+
+                    step(blockPos.add(0, 0, 1))
+                    step(blockPos.add(0, 1, -1))
+                    step(blockPos.add(0, 1, 0))
+                    step(blockPos.add(0, 1, 1))
+                    step(blockPos.add(1, -1, -1))
+                    step(blockPos.add(1, -1, 0))
+                    step(blockPos.add(1, -1, 1))
+                    step(blockPos.add(1, 0, -1))
+                    step(blockPos.add(1, 0, 0))
+                    step(blockPos.add(1, 0, 1))
+                    step(blockPos.add(1, 1, -1))
+                    step(blockPos.add(1, 1, 0))
+                    step(blockPos.add(1, 1, 1))
+                }
+            }
+        }
+
+        //
+
+        distance++
+        lastBlockPoses = nextBlockPoses
+
+    }
+
+    return resultEntries
+}
+
+
 class PartiallyUnloadedException : TreeCompileException(textComponent { "構造物の一部がロード範囲外にあります"().darkRed }) // TRANSLATE
 class TooLargeTreeException : TreeCompileException(textComponent { "構造物が大きすぎます"().darkRed }) // TRANSLATE
 

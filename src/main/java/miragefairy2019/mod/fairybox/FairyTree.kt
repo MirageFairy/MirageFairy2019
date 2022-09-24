@@ -25,45 +25,87 @@ data class Leaves(
     val blockPosList: List<BlockPos>
 )
 
-@Throws(TreeCompileException::class)
+/**
+ * @throws TreeCompileException
+ * @throws TreeSearchException
+ */
 fun compileFairyTree(world: World, originBlockPos: BlockPos): Leaves {
-
-    // 基点
-    val originResult = listOf(Pair(originBlockPos, world.getBlockState(originBlockPos).block))
-
-    // 基点幹
-    val originalStemResult = originResult + treeSearch(world, originResult.map { it.first }, maxSize = 100) { world2, blockPos, _ ->
-        when (val block = world2.getBlockState(blockPos).block) {
-            is BlockFairyWoodLog -> Pair(blockPos, block)
-            is BlockFairyBoxBase -> Pair(blockPos, block)
-            else -> null
-        }
+    fun checkLog(blockPos: BlockPos) = when (world.getBlockState(blockPos).block) {
+        is BlockFairyWoodLog -> false
+        is BlockFairyBoxBase -> true
+        else -> null
     }
 
-    // 基点幹の葉
-    val leavesResult = treeSearch(world, originalStemResult.map { it.first }, maxSize = 2000) { world2, blockPos, distance ->
-        when (world2.getBlockState(blockPos).block) {
-            is BlockLeaves -> Pair(blockPos, (5 - distance) atLeast 0)
-            else -> null
-        }
+    fun checkLeaves(blockPos: BlockPos) = when (world.getBlockState(blockPos).block) {
+        is BlockLeaves -> Unit
+        else -> null
     }
 
-    // 基点木
-    val originalTreeResult = originalStemResult + leavesResult
+    // 起点座標を基点とした26隣接のメイン幹
+    val mainStemResult = treeSearch(
+        world,
+        listOf(originBlockPos),
+        mutableSetOf(),
+        maxSize = 100,
+        includeZero = true,
+        neighborhoodType = NeighborhoodType.VERTEX,
+        unloadedPositionBehaviour = UnloadedPositionBehaviour.EXCEPTION
+    ) { blockPos, _ -> checkLog(blockPos) }
 
-    // 基点木に隣接している幹
-    val extraStemResult = treeSearch(world, originalTreeResult.map { it.first }, maxSize = 100) { world2, blockPos, _ ->
-        when (val block = world2.getBlockState(blockPos).block) {
-            is BlockFairyWoodLog -> Pair(blockPos, block)
-            is BlockFairyBoxBase -> Pair(blockPos, block)
-            else -> null
-        }
-    }
+    // メイン幹に6隣接する葉ブロック
+    val originalLeavesResult = treeSearch(
+        world,
+        mainStemResult.blockPoses,
+        mainStemResult.blockPoses.toMutableSet(),
+        maxDistance = 1,
+        maxSize = 2000,
+        includeZero = false,
+        neighborhoodType = NeighborhoodType.SURFACE,
+        tooLargeBehaviour = TooLargeBehaviour.IGNORE,
+        unloadedPositionBehaviour = UnloadedPositionBehaviour.EXCEPTION
+    ) { blockPos, _ -> checkLeaves(blockPos) }
+
+    // メイン幹に所属するすべての葉ブロック
+    val leavesResult = treeSearch(
+        world,
+        originalLeavesResult.blockPoses,
+        mainStemResult.blockPoses.toMutableSet(),
+        maxSize = 2000,
+        startDistance = 1,
+        includeZero = true,
+        neighborhoodType = NeighborhoodType.SURFACE,
+        unloadedPositionBehaviour = UnloadedPositionBehaviour.EXCEPTION
+    ) { blockPos, _ -> checkLeaves(blockPos) }
+
+    // メイン幹の葉ブロックに6隣接する外部の幹
+    val originalExternalStemsResult = treeSearch(
+        world,
+        leavesResult.blockPoses,
+        (mainStemResult + leavesResult).blockPoses.toMutableSet(),
+        maxSize = 100,
+        includeZero = false,
+        neighborhoodType = NeighborhoodType.SURFACE,
+        unloadedPositionBehaviour = UnloadedPositionBehaviour.EXCEPTION
+    ) { blockPos, _ -> checkLog(blockPos) }
+
+    // 外部幹の起点から26隣接で繋がる幹ブロック
+    val externalStemsResult = treeSearch(
+        world,
+        originalExternalStemsResult.blockPoses,
+        (mainStemResult + leavesResult).blockPoses.toMutableSet(),
+        maxSize = 100,
+        includeZero = true,
+        neighborhoodType = NeighborhoodType.VERTEX,
+        unloadedPositionBehaviour = UnloadedPositionBehaviour.EXCEPTION
+    ) { blockPos, _ -> checkLog(blockPos) }
 
     // 木が隣接している場合はコンパイルエラー
-    if ((originalStemResult + extraStemResult).filter { it.second is BlockFairyBoxBase }.size > 1) throw MultipleFairyBoxException()
+    if ((mainStemResult + externalStemsResult).sumBy { if (it.tag) 1 else 0 } > 1) throw MultipleFairyBoxException()
 
-    return Leaves(leavesResult.map { (0 until it.second).map { _ -> it.first } }.flatten())
+    return Leaves(leavesResult.flatMap { entry ->
+        val rate = (5 - entry.distance) atLeast 0
+        (0 until rate).map { entry.blockPos }
+    })
 }
 
 
