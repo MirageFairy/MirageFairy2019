@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "AB",
+    "BA"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyReinforcedStone"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "gemMirageFairyPlastic"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:materials2",
+    "data": 1,
+    "count": 2
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "sms",
+    "mIm",
+    "sms"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotMiragium"
+    },
+    "m": {
+      "type": "forge:ore_dict",
+      "ore": "gemMagnetite"
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "stone"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:materials2",
+    "data": 0,
+    "count": 4
+  }
+}

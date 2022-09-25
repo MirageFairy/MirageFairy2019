@@ -35,9 +35,11 @@ import net.minecraft.util.ResourceLocation
 object CompressedMaterials {
     lateinit var blockMaterials1: () -> BlockMaterials<EnumVariantMaterials1>
     lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<EnumVariantMaterials1>
+    lateinit var blockMaterials2: () -> BlockMaterials<EnumVariantMaterials2>
+    lateinit var itemBlockMaterials2: () -> ItemBlockMaterials<EnumVariantMaterials2>
     val compressedMaterialsModule = module {
 
-        // ブロック状素材
+        // ブロック状素材1
         blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList) }, "materials1") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
@@ -70,6 +72,39 @@ object CompressedMaterials {
             }
         }
 
+        // ブロック状素材2
+        blockMaterials2 = block({ BlockMaterials(EnumVariantMaterials2.variantList) }, "materials2") {
+            setCreativeTab { Main.creativeTab }
+            makeBlockStates(resourceName.path) {
+                DataModelBlockDefinition(
+                    variants = listOf(
+                        "miragefairy2019:reinforced_stone",
+                        "miragefairy2019:reinforced_plastic",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone",
+                        "minecraft:stone"
+                    ).mapIndexed { i, model -> "variant=$i" to DataSingleVariantList(DataVariant(model = model)) }.toMap()
+                )
+            }
+        }
+        itemBlockMaterials2 = item({ ItemBlockMaterials(blockMaterials2()) }, "materials2") {
+            EnumVariantMaterials2.values().forEach {
+                setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
+                addOreName(it.oreName, it.metadata)
+            }
+        }
+
         // 翻訳の生成
         onMakeLang {
             enJa("tile.blockApatite.name", "Block of Apatite", "燐灰石ブロック")
@@ -88,6 +123,8 @@ object CompressedMaterials {
             enJa("tile.blockTopaz.name", "Block of Topaz", "トパーズブロック")
             enJa("tile.blockTourmaline.name", "Block of Tourmaline", "トルマリンブロック")
             enJa("tile.blockVelopeda.name", "Block of Velopeda Leaf", "呪いの布")
+            enJa("tile.reinforcedStone.name", "Reinforced Stone", "強化石材")
+            enJa("tile.reinforcedPlastic.name", "Reinforced Plastic", "強化プラスチック")
         }
 
         // ブロックモデルの生成
@@ -116,6 +153,8 @@ object CompressedMaterials {
             makeBlockModel("topaz_block")
             makeBlockModel("tourmaline_block")
             makeBlockModel("velopeda_block")
+            makeBlockModel("reinforced_stone")
+            makeBlockModel("reinforced_plastic")
         }
 
         // アイテムモデルの生成
@@ -136,6 +175,8 @@ object CompressedMaterials {
             makeItemModel("topaz_block") { block }
             makeItemModel("tourmaline_block") { block }
             makeItemModel("velopeda_block") { block }
+            makeItemModel("reinforced_stone") { block }
+            makeItemModel("reinforced_plastic") { block }
         }
 
         // レシピの生成
@@ -226,6 +267,36 @@ object CompressedMaterials {
             compress("miragium_ingot", !"nuggetMiragium", r(m, 5, 1))
             compress8("mirage_fairy_solid_fuel_ingot", !"halfChunkMirageFairySolidFuel", r(fm, 29, 1))
 
+            // TODO move
+            makeRecipe("reinforced_stone") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "sms",
+                        "mIm",
+                        "sms"
+                    ),
+                    key = mapOf(
+                        "I" to DataOreIngredient(ore = "ingotMiragium"),
+                        "m" to DataOreIngredient(ore = "gemMagnetite"),
+                        "s" to DataOreIngredient(ore = "stone")
+                    ),
+                    result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials2.REINFORCED_STONE.metadata, count = 4)
+                )
+            }
+            makeRecipe("reinforced_plastic") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "AB",
+                        "BA"
+                    ),
+                    key = mapOf(
+                        "A" to DataOreIngredient(ore = "mirageFairyReinforcedStone"),
+                        "B" to DataOreIngredient(ore = "gemMirageFairyPlastic")
+                    ),
+                    result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials2.REINFORCED_PLASTIC.metadata, count = 2)
+                )
+            }
+
         }
 
     }
@@ -237,6 +308,8 @@ class HardnessClass(val blockHardness: Float, val harvestTool: String, val harve
         val HARD = HardnessClass(5.0f, "pickaxe", 0) // 硬度5程度、石級
         val VERY_HARD = HardnessClass(5.0f, "pickaxe", 1) // 硬度7程度、クリスタル級
         val SUPER_HARD = HardnessClass(5.0f, "pickaxe", 2) // 硬度9程度、ダイヤモンド級
+        val OBSIDIAN = HardnessClass(50.0f, "pickaxe", 2) // 黒曜石と同じ
+        val REINFORCED = HardnessClass(80.0f, "pickaxe", 2) // IC2の強化石材と同じ
     }
 }
 
@@ -271,6 +344,38 @@ enum class EnumVariantMaterials1(
     TOPAZ_BLOCK(13, "topaz_block", "blockTopaz", "blockTopaz", HardnessClass.SUPER_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
     TOURMALINE_BLOCK(14, "tourmaline_block", "blockTourmaline", "blockTourmaline", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
     VELOPEDA_BLOCK(15, "velopeda_block", "blockVelopeda", "blockLeafMirageFairyVelopeda", HardnessClass(0.8f, "shovel", 0), 0, { SoundType.CLOTH }, false, { Material.CLOTH }, false, EnumFlammability.FAST.value, EnumFireSpreadSpeed.MEDIUM.value, 1.0f),
+    ;
+
+    override fun toString() = resourceName
+    override fun getName() = resourceName
+    override val blockHardness = hardnessClass.blockHardness
+    override val harvestTool = hardnessClass.harvestTool
+    override val harvestLevel = hardnessClass.harvestLevel
+    override val soundType: SoundType get() = soundTypeSupplier()
+    override val material: Material get() = materialSupplier()
+
+    companion object {
+        val variantList = BlockVariantList(values().toList())
+    }
+}
+
+enum class EnumVariantMaterials2(
+    override val metadata: Int,
+    override val resourceName: String,
+    override val unlocalizedName: String,
+    val oreName: String,
+    hardnessClass: HardnessClass,
+    override val burnTime: Int,
+    private val soundTypeSupplier: () -> SoundType,
+    override val isFallable: Boolean,
+    private val materialSupplier: () -> Material,
+    override val isBeaconBase: Boolean,
+    override val flammability: Int,
+    override val fireSpreadSpeed: Int,
+    override val enchantPowerBonus: Float
+) : IStringSerializable, IBlockVariantMaterials {
+    REINFORCED_STONE(0, "reinforced_stone", "reinforcedStone", "mirageFairyReinforcedStone", HardnessClass.OBSIDIAN, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
+    REINFORCED_PLASTIC(1, "reinforced_plastic", "reinforcedPlastic", "mirageFairyReinforcedPlastic", HardnessClass.REINFORCED, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
     ;
 
     override fun toString() = resourceName
