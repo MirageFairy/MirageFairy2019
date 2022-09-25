@@ -45,7 +45,7 @@ object CompressedMaterials {
             makeBlockStates(resourceName.path) {
                 DataModelBlockDefinition(
                     variants = (0..15).associate { meta ->
-                        val modelName = EnumVariantMaterials1.variantList.blockVariants.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                        val modelName = EnumVariantMaterials1.values().getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
                         "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
                     }
                 )
@@ -64,7 +64,7 @@ object CompressedMaterials {
             makeBlockStates(resourceName.path) {
                 DataModelBlockDefinition(
                     variants = (0..15).associate { meta ->
-                        val modelName = EnumVariantMaterials2.variantList.blockVariants.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                        val modelName = EnumVariantMaterials2.values().getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
                         "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
                     }
                 )
@@ -110,20 +110,20 @@ object CompressedMaterials {
                     )
                 )
             }
-            EnumVariantMaterials1.variantList.blockVariants.forEach { blockVariant ->
+            EnumVariantMaterials1.values().forEach { blockVariant ->
                 makeBlockModel(blockVariant.resourceName)
             }
-            EnumVariantMaterials2.variantList.blockVariants.forEach { blockVariant ->
+            EnumVariantMaterials2.values().forEach { blockVariant ->
                 makeBlockModel(blockVariant.resourceName)
             }
         }
 
         // アイテムモデルの生成
         run {
-            EnumVariantMaterials1.variantList.blockVariants.forEach { blockVariant ->
+            EnumVariantMaterials1.values().forEach { blockVariant ->
                 makeItemModel(blockVariant.resourceName) { block }
             }
-            EnumVariantMaterials2.variantList.blockVariants.forEach { blockVariant ->
+            EnumVariantMaterials2.values().forEach { blockVariant ->
                 makeItemModel(blockVariant.resourceName) { block }
             }
         }
