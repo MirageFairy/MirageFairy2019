@@ -853,6 +853,22 @@ val fairyMaterialsModule = module {
         }
     }
 
+    // 固形燃料→TNT
+    makeRecipe("tnt_from_mirage_fairy_solid_fuel_ingot") {
+        DataShapedRecipe(
+            pattern = listOf(
+                " g ",
+                "gfg",
+                " g "
+            ),
+            key = mapOf(
+                "f" to DataOreIngredient(ore = "ingotMirageFairySolidFuel"),
+                "g" to DataOreIngredient(ore = "gunpowder")
+            ),
+            result = DataResult(item = "minecraft:tnt")
+        )
+    }
+
     // 夜のかけら
     onAddRecipe {
         fairyCentrifugeCraftHandler(30.0) {

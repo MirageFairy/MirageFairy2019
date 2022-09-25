@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " g ",
+    "gfg",
+    " g "
+  ],
+  "key": {
+    "f": {
+      "type": "forge:ore_dict",
+      "ore": "ingotMirageFairySolidFuel"
+    },
+    "g": {
+      "type": "forge:ore_dict",
+      "ore": "gunpowder"
+    }
+  },
+  "result": {
+    "item": "minecraft:tnt"
+  }
+}
