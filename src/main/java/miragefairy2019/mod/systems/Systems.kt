@@ -14,6 +14,5 @@ val systemsModule = module {
     Ae2SpatialIoBlocking.ae2SpatialIoBlockingModule(this)
     DaemonSystem.daemonSystemModule(this)
     facedCursorModule()
-    miniaRecipeModule()
     fairyStickCraftModule()
 }

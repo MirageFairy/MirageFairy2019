@@ -1,4 +1,4 @@
-package miragefairy2019.mod.systems
+package miragefairy2019.mod.recipes
 
 import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.item

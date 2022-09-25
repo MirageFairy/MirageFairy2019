@@ -13,4 +13,5 @@ val recipesModule = module {
     slabUncraftRecipeModule()
     fairyTamingRecipeModule()
     fluidEmptyingRecipeModule()
+    miniaRecipeModule()
 }
