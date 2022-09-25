@@ -79,25 +79,12 @@ object CompressedMaterials {
 
         // 翻訳の生成
         onMakeLang {
-            enJa("tile.blockApatite.name", "Block of Apatite", "燐灰石ブロック")
-            enJa("tile.blockFluorite.name", "Block of Fluorite", "蛍石ブロック")
-            enJa("tile.blockSulfur.name", "Block of Sulfur", "硫黄ブロック")
-            enJa("tile.blockCinnabar.name", "Block of Cinnabar", "辰砂ブロック")
-            enJa("tile.blockMoonstone.name", "Block of Moonstone", "月長石ブロック")
-            enJa("tile.blockMagnetite.name", "Block of Magnetite", "磁鉄鉱ブロック")
-            enJa("tile.blockPyrope.name", "Block of Pyrope", "パイロープブロック")
-            enJa("tile.blockSmithsonite.name", "Block of Smithsonite", "スミソナイトブロック")
-            enJa("tile.blockCharcoal.name", "Block of Charcoal", "木炭ブロック")
-            enJa("tile.blockLeafMirageFlower.name", "Block of Mirage Flower Leaf", "ミラージュフラワーの葉ブロック")
-            enJa("tile.blockMiragium.name", "Block of Miragium", "ミラジウムブロック")
-            enJa("tile.blockDustMiragium.name", "Block of Miragium Dust", "ミラジウムの粉ブロック")
-            enJa("tile.blockNephrite.name", "Block of Nephrite", "ネフライトブロック")
-            enJa("tile.blockTopaz.name", "Block of Topaz", "トパーズブロック")
-            enJa("tile.blockTourmaline.name", "Block of Tourmaline", "トルマリンブロック")
-            enJa("tile.blockVelopeda.name", "Block of Velopeda Leaf", "呪いの布")
-            enJa("tile.reinforcedStone.name", "Reinforced Stone", "強化石材")
-            enJa("tile.reinforcedPlastic.name", "Reinforced Plastic", "強化プラスチック")
-            enJa("tile.drywall.name", "Drywall", "石膏ボード")
+            EnumVariantMaterials1.values().forEach { blockVariant ->
+                enJa("tile.${blockVariant.unlocalizedName}.name", blockVariant.englishName, blockVariant.japaneseName)
+            }
+            EnumVariantMaterials2.values().forEach { blockVariant ->
+                enJa("tile.${blockVariant.unlocalizedName}.name", blockVariant.englishName, blockVariant.japaneseName)
+            }
         }
 
         // ブロックモデルの生成
@@ -282,6 +269,8 @@ enum class EnumVariantMaterials1(
     override val resourceName: String,
     override val unlocalizedName: String,
     val oreName: String,
+    val englishName: String,
+    val japaneseName: String,
     hardnessClass: HardnessClass,
     override val burnTime: Int,
     private val soundTypeSupplier: () -> SoundType,
@@ -292,22 +281,22 @@ enum class EnumVariantMaterials1(
     override val fireSpreadSpeed: Int,
     override val enchantPowerBonus: Float
 ) : IStringSerializable, IBlockVariantMaterials {
-    APATITE_BLOCK(0, "apatite_block", "blockApatite", "blockApatite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    FLUORITE_BLOCK(1, "fluorite_block", "blockFluorite", "blockFluorite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    SULFUR_BLOCK(2, "sulfur_block", "blockSulfur", "blockSulfur", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    CINNABAR_BLOCK(3, "cinnabar_block", "blockCinnabar", "blockCinnabar", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    MOONSTONE_BLOCK(4, "moonstone_block", "blockMoonstone", "blockMoonstone", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    MAGNETITE_BLOCK(5, "magnetite_block", "blockMagnetite", "blockMagnetite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    PYROPE_BLOCK(6, "pyrope_block", "blockPyrope", "blockPyrope", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    SMITHSONITE_BLOCK(7, "smithsonite_block", "blockSmithsonite", "blockSmithsonite", HardnessClass.SOFT, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    CHARCOAL_BLOCK(8, "charcoal_block", "blockCharcoal", "blockCharcoal", HardnessClass(5.0f, "pickaxe", 0), 20 * 10 * 8 * 9, { SoundType.STONE }, false, { Material.ROCK }, false, EnumFlammability.VERY_SLOW.value, EnumFireSpreadSpeed.VERY_SLOW.value, 0.0f),
-    MIRAGE_FLOWER_LEAF_BLOCK(9, "mirage_flower_leaf_block", "blockLeafMirageFlower", "blockLeafMirageFlower", HardnessClass(2.0f, "axe", 0), 0, { SoundType.GLASS }, false, { Material.LEAVES }, false, EnumFlammability.SLIGHTLY_SLOW.value, EnumFireSpreadSpeed.FAST.value, 0.0f),
-    MIRAGIUM_INGOT_BLOCK(10, "miragium_ingot_block", "blockMiragium", "blockMiragium", HardnessClass(5.0f, "pickaxe", 1), 0, { SoundType.METAL }, false, { Material.IRON }, false, 0, 0, 0.0f),
-    MIRAGIUM_DUST_BLOCK(11, "miragium_dust_block", "blockDustMiragium", "blockDustMiragium", HardnessClass(0.5f, "shovel", 0), 0, { SoundType.SNOW }, true, { Material.SAND }, false, 0, 0, 0.0f),
-    NEPHRITE_BLOCK(12, "nephrite_block", "blockNephrite", "blockNephrite", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    TOPAZ_BLOCK(13, "topaz_block", "blockTopaz", "blockTopaz", HardnessClass.SUPER_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    TOURMALINE_BLOCK(14, "tourmaline_block", "blockTourmaline", "blockTourmaline", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    VELOPEDA_BLOCK(15, "velopeda_block", "blockVelopeda", "blockLeafMirageFairyVelopeda", HardnessClass(0.8f, "shovel", 0), 0, { SoundType.CLOTH }, false, { Material.CLOTH }, false, EnumFlammability.FAST.value, EnumFireSpreadSpeed.MEDIUM.value, 1.0f),
+    APATITE_BLOCK(0, "apatite_block", "blockApatite", "blockApatite", "Block of Apatite", "燐灰石ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    FLUORITE_BLOCK(1, "fluorite_block", "blockFluorite", "blockFluorite", "Block of Fluorite", "蛍石ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    SULFUR_BLOCK(2, "sulfur_block", "blockSulfur", "blockSulfur", "Block of Sulfur", "硫黄ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    CINNABAR_BLOCK(3, "cinnabar_block", "blockCinnabar", "blockCinnabar", "Block of Cinnabar", "辰砂ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    MOONSTONE_BLOCK(4, "moonstone_block", "blockMoonstone", "blockMoonstone", "Block of Moonstone", "月長石ブロック", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    MAGNETITE_BLOCK(5, "magnetite_block", "blockMagnetite", "blockMagnetite", "Block of Magnetite", "磁鉄鉱ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    PYROPE_BLOCK(6, "pyrope_block", "blockPyrope", "blockPyrope", "Block of Pyrope", "パイロープブロック", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    SMITHSONITE_BLOCK(7, "smithsonite_block", "blockSmithsonite", "blockSmithsonite", "Block of Smithsonite", "スミソナイトブロック", HardnessClass.SOFT, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    CHARCOAL_BLOCK(8, "charcoal_block", "blockCharcoal", "blockCharcoal", "Block of Charcoal", "木炭ブロック", HardnessClass(5.0f, "pickaxe", 0), 20 * 10 * 8 * 9, { SoundType.STONE }, false, { Material.ROCK }, false, EnumFlammability.VERY_SLOW.value, EnumFireSpreadSpeed.VERY_SLOW.value, 0.0f),
+    MIRAGE_FLOWER_LEAF_BLOCK(9, "mirage_flower_leaf_block", "blockLeafMirageFlower", "blockLeafMirageFlower", "Block of Mirage Flower Leaf", "ミラージュフラワーの葉ブロック", HardnessClass(2.0f, "axe", 0), 0, { SoundType.GLASS }, false, { Material.LEAVES }, false, EnumFlammability.SLIGHTLY_SLOW.value, EnumFireSpreadSpeed.FAST.value, 0.0f),
+    MIRAGIUM_INGOT_BLOCK(10, "miragium_ingot_block", "blockMiragium", "blockMiragium", "Block of Miragium", "ミラジウムブロック", HardnessClass(5.0f, "pickaxe", 1), 0, { SoundType.METAL }, false, { Material.IRON }, false, 0, 0, 0.0f),
+    MIRAGIUM_DUST_BLOCK(11, "miragium_dust_block", "blockDustMiragium", "blockDustMiragium", "Block of Miragium Dust", "ミラジウムの粉ブロック", HardnessClass(0.5f, "shovel", 0), 0, { SoundType.SNOW }, true, { Material.SAND }, false, 0, 0, 0.0f),
+    NEPHRITE_BLOCK(12, "nephrite_block", "blockNephrite", "blockNephrite", "Block of Nephrite", "ネフライトブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    TOPAZ_BLOCK(13, "topaz_block", "blockTopaz", "blockTopaz", "Block of Topaz", "トパーズブロック", HardnessClass.SUPER_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    TOURMALINE_BLOCK(14, "tourmaline_block", "blockTourmaline", "blockTourmaline", "Block of Tourmaline", "トルマリンブロック", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    VELOPEDA_BLOCK(15, "velopeda_block", "blockVelopeda", "blockLeafMirageFairyVelopeda", "Block of Velopeda Leaf", "呪いの布", HardnessClass(0.8f, "shovel", 0), 0, { SoundType.CLOTH }, false, { Material.CLOTH }, false, EnumFlammability.FAST.value, EnumFireSpreadSpeed.MEDIUM.value, 1.0f),
     ;
 
     override fun toString() = resourceName
@@ -328,6 +317,8 @@ enum class EnumVariantMaterials2(
     override val resourceName: String,
     override val unlocalizedName: String,
     val oreName: String,
+    val englishName: String,
+    val japaneseName: String,
     hardnessClass: HardnessClass,
     override val burnTime: Int,
     private val soundTypeSupplier: () -> SoundType,
@@ -338,9 +329,9 @@ enum class EnumVariantMaterials2(
     override val fireSpreadSpeed: Int,
     override val enchantPowerBonus: Float
 ) : IStringSerializable, IBlockVariantMaterials {
-    REINFORCED_STONE(0, "reinforced_stone", "reinforcedStone", "mirageFairyReinforcedStone", HardnessClass.OBSIDIAN, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
-    REINFORCED_PLASTIC(1, "reinforced_plastic", "reinforcedPlastic", "mirageFairyReinforcedPlastic", HardnessClass.REINFORCED, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
-    DRYWALL(2, "drywall", "drywall", "mirageFairyDrywall", HardnessClass.SOFT, 0, { SoundType.WOOD }, false, { Material.ROCK }, false, 0, 0, 0.0f),
+    REINFORCED_STONE(0, "reinforced_stone", "reinforcedStone", "mirageFairyReinforcedStone", "Reinforced Stone", "強化石材", HardnessClass.OBSIDIAN, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
+    REINFORCED_PLASTIC(1, "reinforced_plastic", "reinforcedPlastic", "mirageFairyReinforcedPlastic", "Reinforced Plastic", "強化プラスチック", HardnessClass.REINFORCED, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
+    DRYWALL(2, "drywall", "drywall", "mirageFairyDrywall", "Drywall", "石膏ボード", HardnessClass.SOFT, 0, { SoundType.WOOD }, false, { Material.ROCK }, false, 0, 0, 0.0f),
     ;
 
     override fun toString() = resourceName
