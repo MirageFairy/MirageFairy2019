@@ -34,7 +34,7 @@ import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
 import miragefairy2019.mod.material.CompressedMaterials
-import miragefairy2019.mod.material.EnumVariantMaterials1
+import miragefairy2019.mod.material.CompressedMaterialCard
 import miragefairy2019.mod.material.FairyMaterialCard
 import miragefairy2019.mod.material.createItemStack
 import mirrg.kotlin.hydrogen.atLeast
@@ -209,12 +209,12 @@ class BlockMirageFlower : BlockMagicPlant(3) {
                 bonus = bonus atLeast 1.2
                 if (floorBlockState.getValue(BlockFarmland.MOISTURE) > 0) bonus = bonus atLeast 1.3 // 耕土が湿っているなら加点
             }
-            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.APATITE_BLOCK)) bonus = bonus atLeast 1.5
-            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.FLUORITE_BLOCK)) bonus = bonus atLeast 2.0
-            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.SULFUR_BLOCK)) bonus = bonus atLeast 1.5
-            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.CINNABAR_BLOCK)) bonus = bonus atLeast 2.0
-            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MOONSTONE_BLOCK)) bonus = bonus atLeast 3.0
-            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(EnumVariantMaterials1.MAGNETITE_BLOCK)) bonus = bonus atLeast 1.2
+            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(CompressedMaterialCard.APATITE_BLOCK)) bonus = bonus atLeast 1.5
+            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(CompressedMaterialCard.FLUORITE_BLOCK)) bonus = bonus atLeast 2.0
+            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(CompressedMaterialCard.SULFUR_BLOCK)) bonus = bonus atLeast 1.5
+            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(CompressedMaterialCard.CINNABAR_BLOCK)) bonus = bonus atLeast 2.0
+            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(CompressedMaterialCard.MOONSTONE_BLOCK)) bonus = bonus atLeast 3.0
+            if (floorBlockState === CompressedMaterials.blockMaterials1().getState(CompressedMaterialCard.MAGNETITE_BLOCK)) bonus = bonus atLeast 1.2
 
             listOf(GrowthRateModifier(textComponent { "Ground Bonus"() }, bonus))
         },

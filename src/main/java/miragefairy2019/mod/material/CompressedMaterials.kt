@@ -33,48 +33,48 @@ import net.minecraft.util.IStringSerializable
 import net.minecraft.util.ResourceLocation
 
 object CompressedMaterials {
-    lateinit var blockMaterials1: () -> BlockMaterials<EnumVariantMaterials1>
-    lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<EnumVariantMaterials1>
-    lateinit var blockMaterials2: () -> BlockMaterials<EnumVariantMaterials1>
-    lateinit var itemBlockMaterials2: () -> ItemBlockMaterials<EnumVariantMaterials1>
+    lateinit var blockMaterials1: () -> BlockMaterials<CompressedMaterialCard>
+    lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<CompressedMaterialCard>
+    lateinit var blockMaterials2: () -> BlockMaterials<CompressedMaterialCard>
+    lateinit var itemBlockMaterials2: () -> ItemBlockMaterials<CompressedMaterialCard>
     val compressedMaterialsModule = module {
 
         // ブロックごと
         run {
 
             // ブロック状素材1
-            blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList1) }, "materials1") {
+            blockMaterials1 = block({ BlockMaterials(CompressedMaterialCard.variantList1) }, "materials1") {
                 setCreativeTab { Main.creativeTab }
                 makeBlockStates(resourceName.path) {
                     DataModelBlockDefinition(
                         variants = (0..15).associate { meta ->
-                            val modelName = EnumVariantMaterials1.values().filter { it.group == 1 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                            val modelName = CompressedMaterialCard.values().filter { it.group == 1 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
                             "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
                         }
                     )
                 }
             }
             itemBlockMaterials1 = item({ ItemBlockMaterials(blockMaterials1()) }, "materials1") {
-                EnumVariantMaterials1.values().filter { it.group == 1 }.forEach {
+                CompressedMaterialCard.values().filter { it.group == 1 }.forEach {
                     setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
                     addOreName(it.oreName, it.metadata)
                 }
             }
 
             // ブロック状素材2
-            blockMaterials2 = block({ BlockMaterials(EnumVariantMaterials1.variantList2) }, "materials2") {
+            blockMaterials2 = block({ BlockMaterials(CompressedMaterialCard.variantList2) }, "materials2") {
                 setCreativeTab { Main.creativeTab }
                 makeBlockStates(resourceName.path) {
                     DataModelBlockDefinition(
                         variants = (0..15).associate { meta ->
-                            val modelName = EnumVariantMaterials1.values().filter { it.group == 2 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                            val modelName = CompressedMaterialCard.values().filter { it.group == 2 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
                             "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
                         }
                     )
                 }
             }
             itemBlockMaterials2 = item({ ItemBlockMaterials(blockMaterials2()) }, "materials2") {
-                EnumVariantMaterials1.values().filter { it.group == 2 }.forEach {
+                CompressedMaterialCard.values().filter { it.group == 2 }.forEach {
                     setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
                     addOreName(it.oreName, it.metadata)
                 }
@@ -83,23 +83,23 @@ object CompressedMaterials {
         }
 
         // カードごと
-        EnumVariantMaterials1.values().forEach { blockVariant ->
+        CompressedMaterialCard.values().forEach { compressedMaterial ->
 
             // 翻訳生成
-            onMakeLang { enJa("tile.${blockVariant.unlocalizedName}.name", blockVariant.englishName, blockVariant.japaneseName) }
+            onMakeLang { enJa("tile.${compressedMaterial.unlocalizedName}.name", compressedMaterial.englishName, compressedMaterial.japaneseName) }
 
             // ブロックモデル生成
-            makeBlockModel(blockVariant.resourceName) {
+            makeBlockModel(compressedMaterial.resourceName) {
                 DataModel(
                     parent = "block/cube_all",
                     textures = mapOf(
-                        "all" to "miragefairy2019:blocks/${blockVariant.resourceName}"
+                        "all" to "miragefairy2019:blocks/${compressedMaterial.resourceName}"
                     )
                 )
             }
 
             // アイテムモデル生成
-            makeItemModel(blockVariant.resourceName) { block }
+            makeItemModel(compressedMaterial.resourceName) { block }
 
         }
 
@@ -204,7 +204,7 @@ object CompressedMaterials {
                         "m" to DataOreIngredient(ore = "gemMagnetite"),
                         "s" to DataOreIngredient(ore = "stone")
                     ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials1.REINFORCED_STONE.metadata, count = 4)
+                    result = DataResult(item = "miragefairy2019:materials2", data = CompressedMaterialCard.REINFORCED_STONE.metadata, count = 4)
                 )
             }
             makeRecipe("reinforced_plastic") {
@@ -217,7 +217,7 @@ object CompressedMaterials {
                         "A" to DataOreIngredient(ore = "mirageFairyReinforcedStone"),
                         "B" to DataOreIngredient(ore = "gemMirageFairyPlastic")
                     ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials1.REINFORCED_PLASTIC.metadata, count = 2)
+                    result = DataResult(item = "miragefairy2019:materials2", data = CompressedMaterialCard.REINFORCED_PLASTIC.metadata, count = 2)
                 )
             }
             makeRecipe("drywall") {
@@ -232,7 +232,7 @@ object CompressedMaterials {
                         "b" to DataSimpleIngredient(item = "minecraft:dye", data = 15),
                         "s" to DataOreIngredient(ore = "stone")
                     ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials1.DRYWALL.metadata, count = 4)
+                    result = DataResult(item = "miragefairy2019:materials2", data = CompressedMaterialCard.DRYWALL.metadata, count = 4)
                 )
             }
 
@@ -252,7 +252,7 @@ class HardnessClass(val blockHardness: Float, val harvestTool: String, val harve
     }
 }
 
-enum class EnumVariantMaterials1(
+enum class CompressedMaterialCard(
     val group: Int,
     override val metadata: Int,
     override val resourceName: String,
