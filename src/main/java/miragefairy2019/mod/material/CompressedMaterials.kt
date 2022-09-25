@@ -39,74 +39,71 @@ object CompressedMaterials {
     lateinit var itemBlockMaterials2: () -> ItemBlockMaterials<EnumVariantMaterials1>
     val compressedMaterialsModule = module {
 
-        // ブロック状素材1
-        blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList1) }, "materials1") {
-            setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName.path) {
-                DataModelBlockDefinition(
-                    variants = (0..15).associate { meta ->
-                        val modelName = EnumVariantMaterials1.values().filter { it.group == 1 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
-                        "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
-                    }
-                )
-            }
-        }
-        itemBlockMaterials1 = item({ ItemBlockMaterials(blockMaterials1()) }, "materials1") {
-            EnumVariantMaterials1.values().filter { it.group == 1 }.forEach {
-                setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
-                addOreName(it.oreName, it.metadata)
-            }
-        }
-
-        // ブロック状素材2
-        blockMaterials2 = block({ BlockMaterials(EnumVariantMaterials1.variantList2) }, "materials2") {
-            setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName.path) {
-                DataModelBlockDefinition(
-                    variants = (0..15).associate { meta ->
-                        val modelName = EnumVariantMaterials1.values().filter { it.group == 2 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
-                        "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
-                    }
-                )
-            }
-        }
-        itemBlockMaterials2 = item({ ItemBlockMaterials(blockMaterials2()) }, "materials2") {
-            EnumVariantMaterials1.values().filter { it.group == 2 }.forEach {
-                setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
-                addOreName(it.oreName, it.metadata)
-            }
-        }
-
-        // 翻訳の生成
-        onMakeLang {
-            EnumVariantMaterials1.values().forEach { blockVariant ->
-                enJa("tile.${blockVariant.unlocalizedName}.name", blockVariant.englishName, blockVariant.japaneseName)
-            }
-        }
-
-        // ブロックモデルの生成
+        // ブロックごと
         run {
-            fun makeBlockModel(name: String) = makeBlockModel(name) {
+
+            // ブロック状素材1
+            blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList1) }, "materials1") {
+                setCreativeTab { Main.creativeTab }
+                makeBlockStates(resourceName.path) {
+                    DataModelBlockDefinition(
+                        variants = (0..15).associate { meta ->
+                            val modelName = EnumVariantMaterials1.values().filter { it.group == 1 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                            "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
+                        }
+                    )
+                }
+            }
+            itemBlockMaterials1 = item({ ItemBlockMaterials(blockMaterials1()) }, "materials1") {
+                EnumVariantMaterials1.values().filter { it.group == 1 }.forEach {
+                    setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
+                    addOreName(it.oreName, it.metadata)
+                }
+            }
+
+            // ブロック状素材2
+            blockMaterials2 = block({ BlockMaterials(EnumVariantMaterials1.variantList2) }, "materials2") {
+                setCreativeTab { Main.creativeTab }
+                makeBlockStates(resourceName.path) {
+                    DataModelBlockDefinition(
+                        variants = (0..15).associate { meta ->
+                            val modelName = EnumVariantMaterials1.values().filter { it.group == 2 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                            "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
+                        }
+                    )
+                }
+            }
+            itemBlockMaterials2 = item({ ItemBlockMaterials(blockMaterials2()) }, "materials2") {
+                EnumVariantMaterials1.values().filter { it.group == 2 }.forEach {
+                    setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
+                    addOreName(it.oreName, it.metadata)
+                }
+            }
+
+        }
+
+        // カードごと
+        EnumVariantMaterials1.values().forEach { blockVariant ->
+
+            // 翻訳生成
+            onMakeLang { enJa("tile.${blockVariant.unlocalizedName}.name", blockVariant.englishName, blockVariant.japaneseName) }
+
+            // ブロックモデル生成
+            makeBlockModel(blockVariant.resourceName) {
                 DataModel(
                     parent = "block/cube_all",
                     textures = mapOf(
-                        "all" to "miragefairy2019:blocks/$name"
+                        "all" to "miragefairy2019:blocks/${blockVariant.resourceName}"
                     )
                 )
             }
-            EnumVariantMaterials1.values().forEach { blockVariant ->
-                makeBlockModel(blockVariant.resourceName)
-            }
+
+            // アイテムモデル生成
+            makeItemModel(blockVariant.resourceName) { block }
+
         }
 
-        // アイテムモデルの生成
-        run {
-            EnumVariantMaterials1.values().forEach { blockVariant ->
-                makeItemModel(blockVariant.resourceName) { block }
-            }
-        }
-
-        // レシピの生成
+        // 個別
         run {
             fun decompress(ingot: String, block: String, ingredientBlock: DataIngredient, resultIngot: DataResult) {
                 makeRecipe("materials/compress/${block}_to_${ingot}") {
