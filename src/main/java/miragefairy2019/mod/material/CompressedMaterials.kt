@@ -44,24 +44,10 @@ object CompressedMaterials {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
                 DataModelBlockDefinition(
-                    variants = listOf(
-                        "miragefairy2019:apatite_block",
-                        "miragefairy2019:fluorite_block",
-                        "miragefairy2019:sulfur_block",
-                        "miragefairy2019:cinnabar_block",
-                        "miragefairy2019:moonstone_block",
-                        "miragefairy2019:magnetite_block",
-                        "miragefairy2019:pyrope_block",
-                        "miragefairy2019:smithsonite_block",
-                        "miragefairy2019:charcoal_block",
-                        "miragefairy2019:mirage_flower_leaf_block",
-                        "miragefairy2019:miragium_ingot_block",
-                        "miragefairy2019:miragium_dust_block",
-                        "miragefairy2019:nephrite_block",
-                        "miragefairy2019:topaz_block",
-                        "miragefairy2019:tourmaline_block",
-                        "miragefairy2019:velopeda_block"
-                    ).mapIndexed { i, model -> "variant=$i" to DataSingleVariantList(DataVariant(model = model)) }.toMap()
+                    variants = (0..15).associate { meta ->
+                        val modelName = EnumVariantMaterials1.variantList.blockVariants.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                        "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
+                    }
                 )
             }
         }
@@ -77,24 +63,10 @@ object CompressedMaterials {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
                 DataModelBlockDefinition(
-                    variants = listOf(
-                        "miragefairy2019:reinforced_stone",
-                        "miragefairy2019:reinforced_plastic",
-                        "miragefairy2019:drywall",
-                        "minecraft:stone",
-                        "minecraft:stone",
-                        "minecraft:stone",
-                        "minecraft:stone",
-                        "minecraft:stone",
-                        "minecraft:stone",
-                        "minecraft:stone",
-                        "minecraft:stone",
-                        "minecraft:stone",
-                        "minecraft:stone",
-                        "minecraft:stone",
-                        "minecraft:stone",
-                        "minecraft:stone"
-                    ).mapIndexed { i, model -> "variant=$i" to DataSingleVariantList(DataVariant(model = model)) }.toMap()
+                    variants = (0..15).associate { meta ->
+                        val modelName = EnumVariantMaterials2.variantList.blockVariants.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                        "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
+                    }
                 )
             }
         }
@@ -138,48 +110,22 @@ object CompressedMaterials {
                     )
                 )
             }
-            makeBlockModel("apatite_block")
-            makeBlockModel("fluorite_block")
-            makeBlockModel("sulfur_block")
-            makeBlockModel("cinnabar_block")
-            makeBlockModel("moonstone_block")
-            makeBlockModel("magnetite_block")
-            makeBlockModel("pyrope_block")
-            makeBlockModel("smithsonite_block")
-            makeBlockModel("charcoal_block")
-            makeBlockModel("mirage_flower_leaf_block")
-            makeBlockModel("miragium_ingot_block")
-            makeBlockModel("miragium_dust_block")
-            makeBlockModel("nephrite_block")
-            makeBlockModel("topaz_block")
-            makeBlockModel("tourmaline_block")
-            makeBlockModel("velopeda_block")
-            makeBlockModel("reinforced_stone")
-            makeBlockModel("reinforced_plastic")
-            makeBlockModel("drywall")
+            EnumVariantMaterials1.variantList.blockVariants.forEach { blockVariant ->
+                makeBlockModel(blockVariant.resourceName)
+            }
+            EnumVariantMaterials2.variantList.blockVariants.forEach { blockVariant ->
+                makeBlockModel(blockVariant.resourceName)
+            }
         }
 
         // アイテムモデルの生成
         run {
-            makeItemModel("apatite_block") { block }
-            makeItemModel("fluorite_block") { block }
-            makeItemModel("sulfur_block") { block }
-            makeItemModel("cinnabar_block") { block }
-            makeItemModel("moonstone_block") { block }
-            makeItemModel("magnetite_block") { block }
-            makeItemModel("pyrope_block") { block }
-            makeItemModel("smithsonite_block") { block }
-            makeItemModel("charcoal_block") { block }
-            makeItemModel("mirage_flower_leaf_block") { block }
-            makeItemModel("miragium_ingot_block") { block }
-            makeItemModel("miragium_dust_block") { block }
-            makeItemModel("nephrite_block") { block }
-            makeItemModel("topaz_block") { block }
-            makeItemModel("tourmaline_block") { block }
-            makeItemModel("velopeda_block") { block }
-            makeItemModel("reinforced_stone") { block }
-            makeItemModel("reinforced_plastic") { block }
-            makeItemModel("drywall") { block }
+            EnumVariantMaterials1.variantList.blockVariants.forEach { blockVariant ->
+                makeItemModel(blockVariant.resourceName) { block }
+            }
+            EnumVariantMaterials2.variantList.blockVariants.forEach { blockVariant ->
+                makeItemModel(blockVariant.resourceName) { block }
+            }
         }
 
         // レシピの生成
