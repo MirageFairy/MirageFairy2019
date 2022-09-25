@@ -43,7 +43,7 @@ object CompressedMaterials {
         run {
 
             // ブロック状素材1
-            blockMaterials1 = block({ BlockMaterials(CompressedMaterialCard.variantList1) }, "materials1") {
+            blockMaterials1 = block({ BlockMaterials(BlockVariantList(CompressedMaterialCard.values().filter { it.group == 1 }.toList())) }, "materials1") {
                 setCreativeTab { Main.creativeTab }
                 makeBlockStates(resourceName.path) {
                     DataModelBlockDefinition(
@@ -62,7 +62,7 @@ object CompressedMaterials {
             }
 
             // ブロック状素材2
-            blockMaterials2 = block({ BlockMaterials(CompressedMaterialCard.variantList2) }, "materials2") {
+            blockMaterials2 = block({ BlockMaterials(BlockVariantList(CompressedMaterialCard.values().filter { it.group == 2 }.toList())) }, "materials2") {
                 setCreativeTab { Main.creativeTab }
                 makeBlockStates(resourceName.path) {
                     DataModelBlockDefinition(
@@ -299,9 +299,4 @@ enum class CompressedMaterialCard(
     override val harvestLevel = hardnessClass.harvestLevel
     override val soundType: SoundType get() = soundTypeSupplier()
     override val material: Material get() = materialSupplier()
-
-    companion object {
-        val variantList1 = BlockVariantList(values().filter { it.group == 1 }.toList())
-        val variantList2 = BlockVariantList(values().filter { it.group == 2 }.toList())
-    }
 }
