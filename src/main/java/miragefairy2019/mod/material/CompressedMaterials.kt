@@ -35,43 +35,43 @@ import net.minecraft.util.ResourceLocation
 object CompressedMaterials {
     lateinit var blockMaterials1: () -> BlockMaterials<EnumVariantMaterials1>
     lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<EnumVariantMaterials1>
-    lateinit var blockMaterials2: () -> BlockMaterials<EnumVariantMaterials2>
-    lateinit var itemBlockMaterials2: () -> ItemBlockMaterials<EnumVariantMaterials2>
+    lateinit var blockMaterials2: () -> BlockMaterials<EnumVariantMaterials1>
+    lateinit var itemBlockMaterials2: () -> ItemBlockMaterials<EnumVariantMaterials1>
     val compressedMaterialsModule = module {
 
         // ブロック状素材1
-        blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList) }, "materials1") {
+        blockMaterials1 = block({ BlockMaterials(EnumVariantMaterials1.variantList1) }, "materials1") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
                 DataModelBlockDefinition(
                     variants = (0..15).associate { meta ->
-                        val modelName = EnumVariantMaterials1.values().getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                        val modelName = EnumVariantMaterials1.values().filter { it.group == 1 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
                         "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
                     }
                 )
             }
         }
         itemBlockMaterials1 = item({ ItemBlockMaterials(blockMaterials1()) }, "materials1") {
-            EnumVariantMaterials1.values().forEach {
+            EnumVariantMaterials1.values().filter { it.group == 1 }.forEach {
                 setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
                 addOreName(it.oreName, it.metadata)
             }
         }
 
         // ブロック状素材2
-        blockMaterials2 = block({ BlockMaterials(EnumVariantMaterials2.variantList) }, "materials2") {
+        blockMaterials2 = block({ BlockMaterials(EnumVariantMaterials1.variantList2) }, "materials2") {
             setCreativeTab { Main.creativeTab }
             makeBlockStates(resourceName.path) {
                 DataModelBlockDefinition(
                     variants = (0..15).associate { meta ->
-                        val modelName = EnumVariantMaterials2.values().getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                        val modelName = EnumVariantMaterials1.values().filter { it.group == 2 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
                         "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
                     }
                 )
             }
         }
         itemBlockMaterials2 = item({ ItemBlockMaterials(blockMaterials2()) }, "materials2") {
-            EnumVariantMaterials2.values().forEach {
+            EnumVariantMaterials1.values().filter { it.group == 2 }.forEach {
                 setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
                 addOreName(it.oreName, it.metadata)
             }
@@ -80,9 +80,6 @@ object CompressedMaterials {
         // 翻訳の生成
         onMakeLang {
             EnumVariantMaterials1.values().forEach { blockVariant ->
-                enJa("tile.${blockVariant.unlocalizedName}.name", blockVariant.englishName, blockVariant.japaneseName)
-            }
-            EnumVariantMaterials2.values().forEach { blockVariant ->
                 enJa("tile.${blockVariant.unlocalizedName}.name", blockVariant.englishName, blockVariant.japaneseName)
             }
         }
@@ -100,17 +97,11 @@ object CompressedMaterials {
             EnumVariantMaterials1.values().forEach { blockVariant ->
                 makeBlockModel(blockVariant.resourceName)
             }
-            EnumVariantMaterials2.values().forEach { blockVariant ->
-                makeBlockModel(blockVariant.resourceName)
-            }
         }
 
         // アイテムモデルの生成
         run {
             EnumVariantMaterials1.values().forEach { blockVariant ->
-                makeItemModel(blockVariant.resourceName) { block }
-            }
-            EnumVariantMaterials2.values().forEach { blockVariant ->
                 makeItemModel(blockVariant.resourceName) { block }
             }
         }
@@ -216,7 +207,7 @@ object CompressedMaterials {
                         "m" to DataOreIngredient(ore = "gemMagnetite"),
                         "s" to DataOreIngredient(ore = "stone")
                     ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials2.REINFORCED_STONE.metadata, count = 4)
+                    result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials1.REINFORCED_STONE.metadata, count = 4)
                 )
             }
             makeRecipe("reinforced_plastic") {
@@ -229,7 +220,7 @@ object CompressedMaterials {
                         "A" to DataOreIngredient(ore = "mirageFairyReinforcedStone"),
                         "B" to DataOreIngredient(ore = "gemMirageFairyPlastic")
                     ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials2.REINFORCED_PLASTIC.metadata, count = 2)
+                    result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials1.REINFORCED_PLASTIC.metadata, count = 2)
                 )
             }
             makeRecipe("drywall") {
@@ -244,7 +235,7 @@ object CompressedMaterials {
                         "b" to DataSimpleIngredient(item = "minecraft:dye", data = 15),
                         "s" to DataOreIngredient(ore = "stone")
                     ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials2.DRYWALL.metadata, count = 4)
+                    result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials1.DRYWALL.metadata, count = 4)
                 )
             }
 
@@ -265,6 +256,7 @@ class HardnessClass(val blockHardness: Float, val harvestTool: String, val harve
 }
 
 enum class EnumVariantMaterials1(
+    val group: Int,
     override val metadata: Int,
     override val resourceName: String,
     override val unlocalizedName: String,
@@ -281,22 +273,26 @@ enum class EnumVariantMaterials1(
     override val fireSpreadSpeed: Int,
     override val enchantPowerBonus: Float
 ) : IStringSerializable, IBlockVariantMaterials {
-    APATITE_BLOCK(0, "apatite_block", "blockApatite", "blockApatite", "Block of Apatite", "燐灰石ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    FLUORITE_BLOCK(1, "fluorite_block", "blockFluorite", "blockFluorite", "Block of Fluorite", "蛍石ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    SULFUR_BLOCK(2, "sulfur_block", "blockSulfur", "blockSulfur", "Block of Sulfur", "硫黄ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    CINNABAR_BLOCK(3, "cinnabar_block", "blockCinnabar", "blockCinnabar", "Block of Cinnabar", "辰砂ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    MOONSTONE_BLOCK(4, "moonstone_block", "blockMoonstone", "blockMoonstone", "Block of Moonstone", "月長石ブロック", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    MAGNETITE_BLOCK(5, "magnetite_block", "blockMagnetite", "blockMagnetite", "Block of Magnetite", "磁鉄鉱ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    PYROPE_BLOCK(6, "pyrope_block", "blockPyrope", "blockPyrope", "Block of Pyrope", "パイロープブロック", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    SMITHSONITE_BLOCK(7, "smithsonite_block", "blockSmithsonite", "blockSmithsonite", "Block of Smithsonite", "スミソナイトブロック", HardnessClass.SOFT, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    CHARCOAL_BLOCK(8, "charcoal_block", "blockCharcoal", "blockCharcoal", "Block of Charcoal", "木炭ブロック", HardnessClass(5.0f, "pickaxe", 0), 20 * 10 * 8 * 9, { SoundType.STONE }, false, { Material.ROCK }, false, EnumFlammability.VERY_SLOW.value, EnumFireSpreadSpeed.VERY_SLOW.value, 0.0f),
-    MIRAGE_FLOWER_LEAF_BLOCK(9, "mirage_flower_leaf_block", "blockLeafMirageFlower", "blockLeafMirageFlower", "Block of Mirage Flower Leaf", "ミラージュフラワーの葉ブロック", HardnessClass(2.0f, "axe", 0), 0, { SoundType.GLASS }, false, { Material.LEAVES }, false, EnumFlammability.SLIGHTLY_SLOW.value, EnumFireSpreadSpeed.FAST.value, 0.0f),
-    MIRAGIUM_INGOT_BLOCK(10, "miragium_ingot_block", "blockMiragium", "blockMiragium", "Block of Miragium", "ミラジウムブロック", HardnessClass(5.0f, "pickaxe", 1), 0, { SoundType.METAL }, false, { Material.IRON }, false, 0, 0, 0.0f),
-    MIRAGIUM_DUST_BLOCK(11, "miragium_dust_block", "blockDustMiragium", "blockDustMiragium", "Block of Miragium Dust", "ミラジウムの粉ブロック", HardnessClass(0.5f, "shovel", 0), 0, { SoundType.SNOW }, true, { Material.SAND }, false, 0, 0, 0.0f),
-    NEPHRITE_BLOCK(12, "nephrite_block", "blockNephrite", "blockNephrite", "Block of Nephrite", "ネフライトブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    TOPAZ_BLOCK(13, "topaz_block", "blockTopaz", "blockTopaz", "Block of Topaz", "トパーズブロック", HardnessClass.SUPER_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    TOURMALINE_BLOCK(14, "tourmaline_block", "blockTourmaline", "blockTourmaline", "Block of Tourmaline", "トルマリンブロック", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
-    VELOPEDA_BLOCK(15, "velopeda_block", "blockVelopeda", "blockLeafMirageFairyVelopeda", "Block of Velopeda Leaf", "呪いの布", HardnessClass(0.8f, "shovel", 0), 0, { SoundType.CLOTH }, false, { Material.CLOTH }, false, EnumFlammability.FAST.value, EnumFireSpreadSpeed.MEDIUM.value, 1.0f),
+    APATITE_BLOCK(1, 0, "apatite_block", "blockApatite", "blockApatite", "Block of Apatite", "燐灰石ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    FLUORITE_BLOCK(1, 1, "fluorite_block", "blockFluorite", "blockFluorite", "Block of Fluorite", "蛍石ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    SULFUR_BLOCK(1, 2, "sulfur_block", "blockSulfur", "blockSulfur", "Block of Sulfur", "硫黄ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    CINNABAR_BLOCK(1, 3, "cinnabar_block", "blockCinnabar", "blockCinnabar", "Block of Cinnabar", "辰砂ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    MOONSTONE_BLOCK(1, 4, "moonstone_block", "blockMoonstone", "blockMoonstone", "Block of Moonstone", "月長石ブロック", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    MAGNETITE_BLOCK(1, 5, "magnetite_block", "blockMagnetite", "blockMagnetite", "Block of Magnetite", "磁鉄鉱ブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    PYROPE_BLOCK(1, 6, "pyrope_block", "blockPyrope", "blockPyrope", "Block of Pyrope", "パイロープブロック", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    SMITHSONITE_BLOCK(1, 7, "smithsonite_block", "blockSmithsonite", "blockSmithsonite", "Block of Smithsonite", "スミソナイトブロック", HardnessClass.SOFT, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    CHARCOAL_BLOCK(1, 8, "charcoal_block", "blockCharcoal", "blockCharcoal", "Block of Charcoal", "木炭ブロック", HardnessClass(5.0f, "pickaxe", 0), 20 * 10 * 8 * 9, { SoundType.STONE }, false, { Material.ROCK }, false, EnumFlammability.VERY_SLOW.value, EnumFireSpreadSpeed.VERY_SLOW.value, 0.0f),
+    MIRAGE_FLOWER_LEAF_BLOCK(1, 9, "mirage_flower_leaf_block", "blockLeafMirageFlower", "blockLeafMirageFlower", "Block of Mirage Flower Leaf", "ミラージュフラワーの葉ブロック", HardnessClass(2.0f, "axe", 0), 0, { SoundType.GLASS }, false, { Material.LEAVES }, false, EnumFlammability.SLIGHTLY_SLOW.value, EnumFireSpreadSpeed.FAST.value, 0.0f),
+    MIRAGIUM_INGOT_BLOCK(1, 10, "miragium_ingot_block", "blockMiragium", "blockMiragium", "Block of Miragium", "ミラジウムブロック", HardnessClass(5.0f, "pickaxe", 1), 0, { SoundType.METAL }, false, { Material.IRON }, false, 0, 0, 0.0f),
+    MIRAGIUM_DUST_BLOCK(1, 11, "miragium_dust_block", "blockDustMiragium", "blockDustMiragium", "Block of Miragium Dust", "ミラジウムの粉ブロック", HardnessClass(0.5f, "shovel", 0), 0, { SoundType.SNOW }, true, { Material.SAND }, false, 0, 0, 0.0f),
+    NEPHRITE_BLOCK(1, 12, "nephrite_block", "blockNephrite", "blockNephrite", "Block of Nephrite", "ネフライトブロック", HardnessClass.HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    TOPAZ_BLOCK(1, 13, "topaz_block", "blockTopaz", "blockTopaz", "Block of Topaz", "トパーズブロック", HardnessClass.SUPER_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    TOURMALINE_BLOCK(1, 14, "tourmaline_block", "blockTourmaline", "blockTourmaline", "Block of Tourmaline", "トルマリンブロック", HardnessClass.VERY_HARD, 0, { SoundType.STONE }, false, { Material.IRON }, true, 0, 0, 0.0f),
+    VELOPEDA_BLOCK(1, 15, "velopeda_block", "blockVelopeda", "blockLeafMirageFairyVelopeda", "Block of Velopeda Leaf", "呪いの布", HardnessClass(0.8f, "shovel", 0), 0, { SoundType.CLOTH }, false, { Material.CLOTH }, false, EnumFlammability.FAST.value, EnumFireSpreadSpeed.MEDIUM.value, 1.0f),
+
+    REINFORCED_STONE(2, 0, "reinforced_stone", "reinforcedStone", "mirageFairyReinforcedStone", "Reinforced Stone", "強化石材", HardnessClass.OBSIDIAN, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
+    REINFORCED_PLASTIC(2, 1, "reinforced_plastic", "reinforcedPlastic", "mirageFairyReinforcedPlastic", "Reinforced Plastic", "強化プラスチック", HardnessClass.REINFORCED, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
+    DRYWALL(2, 2, "drywall", "drywall", "mirageFairyDrywall", "Drywall", "石膏ボード", HardnessClass.SOFT, 0, { SoundType.WOOD }, false, { Material.ROCK }, false, 0, 0, 0.0f),
     ;
 
     override fun toString() = resourceName
@@ -308,41 +304,7 @@ enum class EnumVariantMaterials1(
     override val material: Material get() = materialSupplier()
 
     companion object {
-        val variantList = BlockVariantList(values().toList())
-    }
-}
-
-enum class EnumVariantMaterials2(
-    override val metadata: Int,
-    override val resourceName: String,
-    override val unlocalizedName: String,
-    val oreName: String,
-    val englishName: String,
-    val japaneseName: String,
-    hardnessClass: HardnessClass,
-    override val burnTime: Int,
-    private val soundTypeSupplier: () -> SoundType,
-    override val isFallable: Boolean,
-    private val materialSupplier: () -> Material,
-    override val isBeaconBase: Boolean,
-    override val flammability: Int,
-    override val fireSpreadSpeed: Int,
-    override val enchantPowerBonus: Float
-) : IStringSerializable, IBlockVariantMaterials {
-    REINFORCED_STONE(0, "reinforced_stone", "reinforcedStone", "mirageFairyReinforcedStone", "Reinforced Stone", "強化石材", HardnessClass.OBSIDIAN, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
-    REINFORCED_PLASTIC(1, "reinforced_plastic", "reinforcedPlastic", "mirageFairyReinforcedPlastic", "Reinforced Plastic", "強化プラスチック", HardnessClass.REINFORCED, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
-    DRYWALL(2, "drywall", "drywall", "mirageFairyDrywall", "Drywall", "石膏ボード", HardnessClass.SOFT, 0, { SoundType.WOOD }, false, { Material.ROCK }, false, 0, 0, 0.0f),
-    ;
-
-    override fun toString() = resourceName
-    override fun getName() = resourceName
-    override val blockHardness = hardnessClass.blockHardness
-    override val harvestTool = hardnessClass.harvestTool
-    override val harvestLevel = hardnessClass.harvestLevel
-    override val soundType: SoundType get() = soundTypeSupplier()
-    override val material: Material get() = materialSupplier()
-
-    companion object {
-        val variantList = BlockVariantList(values().toList())
+        val variantList1 = BlockVariantList(values().filter { it.group == 1 }.toList())
+        val variantList2 = BlockVariantList(values().filter { it.group == 2 }.toList())
     }
 }
