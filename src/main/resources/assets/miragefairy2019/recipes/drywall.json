@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "sbs",
+    "bmb",
+    "sbs"
+  ],
+  "key": {
+    "m": {
+      "type": "forge:ore_dict",
+      "ore": "dustMiragium"
+    },
+    "b": {
+      "item": "minecraft:dye",
+      "data": 15
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "stone"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:materials2",
+    "data": 2,
+    "count": 4
+  }
+}

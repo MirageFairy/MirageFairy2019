@@ -80,7 +80,7 @@ object CompressedMaterials {
                     variants = listOf(
                         "miragefairy2019:reinforced_stone",
                         "miragefairy2019:reinforced_plastic",
-                        "minecraft:stone",
+                        "miragefairy2019:drywall",
                         "minecraft:stone",
                         "minecraft:stone",
                         "minecraft:stone",
@@ -125,6 +125,7 @@ object CompressedMaterials {
             enJa("tile.blockVelopeda.name", "Block of Velopeda Leaf", "呪いの布")
             enJa("tile.reinforcedStone.name", "Reinforced Stone", "強化石材")
             enJa("tile.reinforcedPlastic.name", "Reinforced Plastic", "強化プラスチック")
+            enJa("tile.drywall.name", "Drywall", "石膏ボード")
         }
 
         // ブロックモデルの生成
@@ -155,6 +156,7 @@ object CompressedMaterials {
             makeBlockModel("velopeda_block")
             makeBlockModel("reinforced_stone")
             makeBlockModel("reinforced_plastic")
+            makeBlockModel("drywall")
         }
 
         // アイテムモデルの生成
@@ -177,6 +179,7 @@ object CompressedMaterials {
             makeItemModel("velopeda_block") { block }
             makeItemModel("reinforced_stone") { block }
             makeItemModel("reinforced_plastic") { block }
+            makeItemModel("drywall") { block }
         }
 
         // レシピの生成
@@ -296,6 +299,21 @@ object CompressedMaterials {
                     result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials2.REINFORCED_PLASTIC.metadata, count = 2)
                 )
             }
+            makeRecipe("drywall") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "sbs",
+                        "bmb",
+                        "sbs"
+                    ),
+                    key = mapOf(
+                        "m" to DataOreIngredient(ore = "dustMiragium"),
+                        "b" to DataSimpleIngredient(item = "minecraft:dye", data = 15),
+                        "s" to DataOreIngredient(ore = "stone")
+                    ),
+                    result = DataResult(item = "miragefairy2019:materials2", data = EnumVariantMaterials2.DRYWALL.metadata, count = 4)
+                )
+            }
 
         }
 
@@ -376,6 +394,7 @@ enum class EnumVariantMaterials2(
 ) : IStringSerializable, IBlockVariantMaterials {
     REINFORCED_STONE(0, "reinforced_stone", "reinforcedStone", "mirageFairyReinforcedStone", HardnessClass.OBSIDIAN, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
     REINFORCED_PLASTIC(1, "reinforced_plastic", "reinforcedPlastic", "mirageFairyReinforcedPlastic", HardnessClass.REINFORCED, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
+    DRYWALL(2, "drywall", "drywall", "mirageFairyDrywall", HardnessClass.SOFT, 0, { SoundType.WOOD }, false, { Material.ROCK }, false, 0, 0, 0.0f),
     ;
 
     override fun toString() = resourceName

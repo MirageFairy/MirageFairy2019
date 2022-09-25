@@ -683,6 +683,7 @@ tile.chatWebhookTransmitter.name=Chat Webhook Transmitter
 tile.creativeChatWebhookTransmitter.name=Creative Chat Webhook Transmitter
 tile.diamondMortar.name=Diamond Mortar
 tile.dish.name=Dish
+tile.drywall.name=Drywall
 tile.fairyCentrifuge.name=Fairy Centrifuge
 tile.fairyCentrifuge.poem=`Super Strange Theory'
 tile.fairyCollectionBox.name=Fairy Collection Box
