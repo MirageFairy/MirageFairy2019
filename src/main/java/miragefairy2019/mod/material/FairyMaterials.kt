@@ -801,6 +801,21 @@ val fairyMaterialsModule = module {
         }
     }
 
+    // 妖精の木の涙→粘着ピストン
+    makeRecipe("sticky_piston_from_mirage_fairy_wood_rosin") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "r",
+                "p"
+            ),
+            key = mapOf(
+                "p" to DataSimpleIngredient(item = "minecraft:piston"),
+                "r" to DataOreIngredient(ore = "mirageFairyWoodRosin")
+            ),
+            result = DataResult(item = "minecraft:sticky_piston")
+        )
+    }
+
     // 妖精のプラスチック
     onAddRecipe {
         fairyCentrifugeCraftHandler(60.0) {

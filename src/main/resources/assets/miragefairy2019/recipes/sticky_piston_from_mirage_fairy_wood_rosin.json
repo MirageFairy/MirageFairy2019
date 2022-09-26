@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "r",
+    "p"
+  ],
+  "key": {
+    "p": {
+      "item": "minecraft:piston"
+    },
+    "r": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyWoodRosin"
+    }
+  },
+  "result": {
+    "item": "minecraft:sticky_piston"
+  }
+}
