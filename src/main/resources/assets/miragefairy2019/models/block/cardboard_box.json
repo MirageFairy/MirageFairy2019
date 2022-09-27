@@ -1,0 +1,49 @@
+{
+  "parent": "block/block",
+  "elements": [
+    {
+      "from": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "to": [
+        16.0,
+        16.0,
+        16.0
+      ],
+      "faces": {
+        "down": {
+          "texture": "#top",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#top",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#side1",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#side1",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#side2",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#side2",
+          "cullface": "east"
+        }
+      }
+    }
+  ],
+  "textures": {
+    "particle": "miragefairy2019:blocks/cardboard_box_top",
+    "top": "miragefairy2019:blocks/cardboard_box_top",
+    "side1": "miragefairy2019:blocks/cardboard_box_side_1",
+    "side2": "miragefairy2019:blocks/cardboard_box_side_2"
+  }
+}

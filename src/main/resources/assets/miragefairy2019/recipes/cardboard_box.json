@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ppp",
+    "pcp",
+    "ppp"
+  ],
+  "key": {
+    "p": {
+      "type": "forge:ore_dict",
+      "ore": "paper"
+    },
+    "c": {
+      "type": "miragefairy2019:wand",
+      "ore": "mirageFairy2019CraftingToolFairyWandCrafting"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:materials2",
+    "data": 3,
+    "count": 2
+  }
+}

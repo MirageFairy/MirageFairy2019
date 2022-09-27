@@ -679,6 +679,7 @@ tile.blockSulfur.name=Block of Sulfur
 tile.blockTopaz.name=Block of Topaz
 tile.blockTourmaline.name=Block of Tourmaline
 tile.blockVelopeda.name=Block of Velopeda Leaf
+tile.cardboardBox.name=Cardboard Box
 tile.chatWebhookTransmitter.name=Chat Webhook Transmitter
 tile.creativeChatWebhookTransmitter.name=Creative Chat Webhook Transmitter
 tile.diamondMortar.name=Diamond Mortar

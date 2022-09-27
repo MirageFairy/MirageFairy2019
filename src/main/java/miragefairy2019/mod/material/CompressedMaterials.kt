@@ -8,10 +8,14 @@ import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
+import miragefairy2019.lib.resourcemaker.DataElement
+import miragefairy2019.lib.resourcemaker.DataFace
+import miragefairy2019.lib.resourcemaker.DataFaces
 import miragefairy2019.lib.resourcemaker.DataIngredient
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataOreIngredient
+import miragefairy2019.lib.resourcemaker.DataPoint
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
@@ -27,6 +31,8 @@ import miragefairy2019.libkt.BlockVariantList
 import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
+import miragefairy2019.mod.artifacts.WandType
+import miragefairy2019.mod.artifacts.ingredientData
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.util.IStringSerializable
@@ -230,6 +236,20 @@ object CompressedMaterials {
                     result = DataResult(item = "miragefairy2019:materials2", data = CompressedMaterialCard.DRYWALL.metadata, count = 4)
                 )
             }
+            makeRecipe("cardboard_box") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "ppp",
+                        "pcp",
+                        "ppp"
+                    ),
+                    key = mapOf(
+                        "p" to DataOreIngredient(ore = "paper"),
+                        "c" to WandType.CRAFTING.ingredientData
+                    ),
+                    result = DataResult(item = "miragefairy2019:materials2", data = CompressedMaterialCard.CARDBOARD_BOX.metadata, count = 2)
+                )
+            }
 
         }
 
@@ -238,6 +258,7 @@ object CompressedMaterials {
 
 class HardnessClass(val blockHardness: Float, val harvestTool: String, val harvestLevel: Int) {
     companion object {
+        val ZERO = HardnessClass(0.0f, "pickaxe", 0) // 一瞬
         val SOFT = HardnessClass(3.0f, "pickaxe", 0) // 硬度3程度、カルサイト級
         val HARD = HardnessClass(5.0f, "pickaxe", 0) // 硬度5程度、石級
         val VERY_HARD = HardnessClass(5.0f, "pickaxe", 1) // 硬度7程度、クリスタル級
@@ -286,6 +307,7 @@ enum class CompressedMaterialCard(
     REINFORCED_STONE(2, 0, "reinforced_stone", "reinforcedStone", "mirageFairyReinforcedStone", "Reinforced Stone", "強化石材", NormalBlockModel, HardnessClass.OBSIDIAN, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
     REINFORCED_PLASTIC(2, 1, "reinforced_plastic", "reinforcedPlastic", "mirageFairyReinforcedPlastic", "Reinforced Plastic", "強化プラスチック", NormalBlockModel, HardnessClass.REINFORCED, 0, { SoundType.STONE }, false, { Material.ROCK }, false, 0, 0, 0.0f),
     DRYWALL(2, 2, "drywall", "drywall", "mirageFairyDrywall", "Drywall", "石膏ボード", NormalBlockModel, HardnessClass.SOFT, 0, { SoundType.WOOD }, false, { Material.ROCK }, false, 0, 0, 0.0f),
+    CARDBOARD_BOX(2, 3, "cardboard_box", "cardboardBox", "mirageFairyCardboardBox", "Cardboard Box", "段ボール箱", CardboardBoxBlockModel, HardnessClass.ZERO, 0, { SoundType.CLOTH }, false, { Material.CLOTH }, false, EnumFlammability.FAST.value, EnumFireSpreadSpeed.MEDIUM.value, 0.0f),
     ;
 
     override fun toString() = resourceName
@@ -304,6 +326,34 @@ object NormalBlockModel : (CompressedMaterialCard) -> DataModel {
             parent = "block/cube_all",
             textures = mapOf(
                 "all" to "miragefairy2019:blocks/${compressedMaterialCard.resourceName}"
+            )
+        )
+    }
+}
+
+object CardboardBoxBlockModel : (CompressedMaterialCard) -> DataModel {
+    override fun invoke(compressedMaterialCard: CompressedMaterialCard): DataModel {
+        return DataModel(
+            parent = "block/block",
+            elements = listOf(
+                DataElement(
+                    from = DataPoint(0.0, 0.0, 0.0),
+                    to = DataPoint(16.0, 16.0, 16.0),
+                    faces = DataFaces(
+                        down = DataFace(texture = "#top", cullface = "down"),
+                        up = DataFace(texture = "#top", cullface = "up"),
+                        north = DataFace(texture = "#side1", cullface = "north"),
+                        south = DataFace(texture = "#side1", cullface = "south"),
+                        west = DataFace(texture = "#side2", cullface = "west"),
+                        east = DataFace(texture = "#side2", cullface = "east")
+                    )
+                )
+            ),
+            textures = mapOf(
+                "particle" to "miragefairy2019:blocks/${compressedMaterialCard.resourceName}_top",
+                "top" to "miragefairy2019:blocks/${compressedMaterialCard.resourceName}_top",
+                "side1" to "miragefairy2019:blocks/${compressedMaterialCard.resourceName}_side_1",
+                "side2" to "miragefairy2019:blocks/${compressedMaterialCard.resourceName}_side_2"
             )
         )
     }
