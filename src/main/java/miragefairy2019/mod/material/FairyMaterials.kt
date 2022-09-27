@@ -698,6 +698,12 @@ enum class FairyMaterialCard(
         5, false, { ore("bottleMirageFairyVarnish").ore("container250MirageFairyVarnish").bottle() },
         { }
     ),
+    CIRCUITIA_ROOT(
+        35, "circuitia_root", "circuitiaRoot",
+        "Circuitia Root", "回路草の根", "くさきといふなのおもひ、からくりといふなのおもひ",
+        6, false, { ore("mirageFairyCircuitiaRoot") },
+        { }
+    ),
     ;
 
     val oreNames = mutableListOf<String>()
