@@ -86,6 +86,7 @@ val miniaRecipeModule = module {
     register("lapis_ore", DataOreIngredient(ore = "oreLapis"), DataResult(item = "minecraft:lapis_ore", data = null, count = 2), 4, 2) // ラピスラズリ
     register("emerald_ore", DataOreIngredient(ore = "oreEmerald"), DataResult(item = "minecraft:emerald_ore", data = null, count = 2), 4, 1) // エメラルド
     register("diamond_ore", DataOreIngredient(ore = "oreDiamond"), DataResult(item = "minecraft:diamond_ore", data = null, count = 2), 4, 4) // ダイヤモンド
+    register("quartz_ore", DataOreIngredient(ore = "oreQuartz"), DataResult(item = "minecraft:quartz_ore", data = null, count = 2), 4, 1) // ネザークォーツ
     register("magnetite_ore", DataOreIngredient(ore = "oreMagnetite"), DataResult(item = "miragefairy2019:ore1", data = 5, count = 2), 4, 1) // 磁鉄鉱
     register("sulfur_ore", DataOreIngredient(ore = "oreSulfur"), DataResult(item = "miragefairy2019:ore1", data = 2, count = 2), 4, 1) // 硫黄
     register("apatite_ore", DataOreIngredient(ore = "oreApatite"), DataResult(item = "miragefairy2019:ore1", data = 0, count = 2), 4, 1) // 燐灰石
