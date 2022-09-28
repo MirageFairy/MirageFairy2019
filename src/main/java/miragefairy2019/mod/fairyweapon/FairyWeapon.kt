@@ -42,6 +42,7 @@ import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredientData
 import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
+import miragefairy2019.mod.fairyweapon.items.ItemAxeBase
 import miragefairy2019.mod.fairyweapon.items.ItemBellBase
 import miragefairy2019.mod.fairyweapon.items.ItemChargingRod
 import miragefairy2019.mod.fairyweapon.items.ItemChristmasBell
@@ -205,7 +206,7 @@ enum class FairyWeaponCard(
     ),
 
     axeBase(
-        null, "axe_base", "axeBase", 1, { ItemFairyWeapon() },
+        null, "axe_base", "axeBase", 1, { ItemAxeBase() },
         LangPair("Axe Base", "斧ベース"),
         LangPair("", "飛べるって素敵"),
         null,
@@ -230,7 +231,7 @@ enum class FairyWeaponCard(
         }
     ),
     miragiumAxe(
-        axeBase, "miragium_axe", "miragiumAxe", 2, { ItemMiragiumAxe() },
+        axeBase, "miragium_axe", "miragiumAxe", 2, { ItemMiragiumAxe(1.0, 3.0, 0.0) },
         LangPair("Miragium Axe", "ミラジウムの斧"),
         LangPair("", "バキッ！ぐにっ"),
         null,
@@ -256,9 +257,8 @@ enum class FairyWeaponCard(
             )
         }
     ),
-
     lilagiumAxe(
-        miragiumAxe, "lilagium_axe", "lilagiumAxe", 5, { ItemMiragiumAxe() },
+        miragiumAxe, "lilagium_axe", "lilagiumAxe", 5, { ItemMiragiumAxe(2.0, 10.0, 1.0) },
         LangPair("Lilagium Axe", "リラジウムの斧"),
         LangPair("", "バキッ！スパッ"),
         null,
