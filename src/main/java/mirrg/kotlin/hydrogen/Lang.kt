@@ -23,4 +23,4 @@ inline fun <reified O : Any> Any.castOrThrow() = this as O
 inline fun <reified O : Any> Any.castOrNull() = this as? O
 inline fun <S> S?.or(default: () -> S) = this ?: default()
 
-val Boolean.orNull get() = this.takeIf { this }
+fun Boolean.toUnitOrNull() = if (this) Unit else null
