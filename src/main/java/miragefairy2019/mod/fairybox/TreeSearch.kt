@@ -37,7 +37,7 @@ fun <T : Any> treeSearch(
     neighborhoodType: NeighborhoodType = NeighborhoodType.SURFACE,
     tooLargeBehaviour: TooLargeBehaviour = TooLargeBehaviour.EXCEPTION,
     unloadedPositionBehaviour: UnloadedPositionBehaviour = UnloadedPositionBehaviour.LOAD,
-    predicate: (blockPos: BlockPos, distance: Int) -> T?
+    validator: (blockPos: BlockPos, distance: Int) -> T?
 ): List<SearchResultEntry<T>> {
 
     val resultEntries = mutableListOf<SearchResultEntry<T>>()
@@ -57,7 +57,7 @@ fun <T : Any> treeSearch(
         }
 
         // 判定
-        val tag = predicate(blockPos, distance) ?: return false
+        val tag = validator(blockPos, distance) ?: return false
 
         // 成功
 
