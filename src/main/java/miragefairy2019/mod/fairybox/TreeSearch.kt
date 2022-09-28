@@ -44,34 +44,40 @@ fun <T : Any> treeSearch(
     var nextBlockPoses = mutableListOf<BlockPos>()
     var distance = startDistance
 
-    fun step(blockPos: BlockPos) {
-        if (blockPos in visitedBlockPoses) return
+    fun step(blockPos: BlockPos): Boolean {
+        if (blockPos in visitedBlockPoses) return false
         visitedBlockPoses += blockPos
 
-        // 一部がチャンクロード範囲外にある場合
-        when (unloadedPositionBehaviour) {
-            UnloadedPositionBehaviour.LOAD -> Unit // 強制的に踏む
-            UnloadedPositionBehaviour.IGNORE -> {
-                if (!world.isBlockLoaded(blockPos)) return  // 踏まずに飛ばす
-            }
-            UnloadedPositionBehaviour.EXCEPTION -> {
-                if (!world.isBlockLoaded(blockPos)) throw PartiallyUnloadedTreeSearchException() // 例外にする
+        if (!world.isBlockLoaded(blockPos)) { // 一部がチャンクロード範囲外にある
+            when (unloadedPositionBehaviour) {
+                UnloadedPositionBehaviour.LOAD -> Unit // 強制的に踏む
+                UnloadedPositionBehaviour.IGNORE -> return false // 踏まずに飛ばす
+                UnloadedPositionBehaviour.EXCEPTION -> throw PartiallyUnloadedTreeSearchException() // 例外にする
             }
         }
 
         // 判定
-        val tag = predicate(blockPos, distance) ?: return
+        val tag = predicate(blockPos, distance) ?: return false
 
         // 成功
+
+        if (maxDistance != null && distance > maxDistance) { // 距離の上限を超えているブロックが見つかった
+            when (tooLargeBehaviour) {
+                TooLargeBehaviour.IGNORE -> return true
+                TooLargeBehaviour.EXCEPTION -> throw TooLargeTreeSearchException()
+            }
+        }
+        if (maxSize != null && resultEntries.size >= maxSize) { // 個数の上限に達しているにもかかわらずブロックが見つかった
+            when (tooLargeBehaviour) {
+                TooLargeBehaviour.IGNORE -> return true
+                TooLargeBehaviour.EXCEPTION -> throw TooLargeTreeSearchException()
+            }
+        }
 
         resultEntries += SearchResultEntry(blockPos, distance, tag)
         nextBlockPoses.add(blockPos)
 
-        if (tooLargeBehaviour == TooLargeBehaviour.EXCEPTION) {
-            if (maxDistance != null && distance > maxDistance) throw TooLargeTreeSearchException() // 距離の上限を超えている場合は例外
-        }
-        if (maxSize != null && resultEntries.size > maxSize) throw TooLargeTreeSearchException() // 大きすぎる場合は例外
-
+        return false
     }
 
     var lastBlockPoses: List<BlockPos>
@@ -94,62 +100,60 @@ fun <T : Any> treeSearch(
 
     }
 
-    while (true) {
+    run finish@{
+        while (true) {
 
-        if (tooLargeBehaviour == TooLargeBehaviour.IGNORE) {
-            if (maxDistance != null && distance > maxDistance) break // 距離の上限を超えている場合は終了
-        }
+            if (lastBlockPoses.isEmpty()) return@finish
 
-        if (lastBlockPoses.isEmpty()) break
+            nextBlockPoses = mutableListOf()
+            lastBlockPoses.forEach { blockPos ->
+                when (neighborhoodType) {
+                    NeighborhoodType.SURFACE -> {
+                        if (step(blockPos.add(-1, 0, 0))) return@finish
+                        if (step(blockPos.add(1, 0, 0))) return@finish
+                        if (step(blockPos.add(0, -1, 0))) return@finish
+                        if (step(blockPos.add(0, 1, 0))) return@finish
+                        if (step(blockPos.add(0, 0, -1))) return@finish
+                        if (step(blockPos.add(0, 0, 1))) return@finish
+                    }
+                    NeighborhoodType.VERTEX -> {
+                        if (step(blockPos.add(-1, -1, -1))) return@finish
+                        if (step(blockPos.add(-1, -1, 0))) return@finish
+                        if (step(blockPos.add(-1, -1, 1))) return@finish
+                        if (step(blockPos.add(-1, 0, -1))) return@finish
+                        if (step(blockPos.add(-1, 0, 0))) return@finish
+                        if (step(blockPos.add(-1, 0, 1))) return@finish
+                        if (step(blockPos.add(-1, 1, -1))) return@finish
+                        if (step(blockPos.add(-1, 1, 0))) return@finish
+                        if (step(blockPos.add(-1, 1, 1))) return@finish
+                        if (step(blockPos.add(0, -1, -1))) return@finish
+                        if (step(blockPos.add(0, -1, 0))) return@finish
+                        if (step(blockPos.add(0, -1, 1))) return@finish
+                        if (step(blockPos.add(0, 0, -1))) return@finish
 
-        nextBlockPoses = mutableListOf()
-        lastBlockPoses.forEach { blockPos ->
-            when (neighborhoodType) {
-                NeighborhoodType.SURFACE -> {
-                    step(blockPos.add(-1, 0, 0))
-                    step(blockPos.add(1, 0, 0))
-                    step(blockPos.add(0, -1, 0))
-                    step(blockPos.add(0, 1, 0))
-                    step(blockPos.add(0, 0, -1))
-                    step(blockPos.add(0, 0, 1))
-                }
-                NeighborhoodType.VERTEX -> {
-                    step(blockPos.add(-1, -1, -1))
-                    step(blockPos.add(-1, -1, 0))
-                    step(blockPos.add(-1, -1, 1))
-                    step(blockPos.add(-1, 0, -1))
-                    step(blockPos.add(-1, 0, 0))
-                    step(blockPos.add(-1, 0, 1))
-                    step(blockPos.add(-1, 1, -1))
-                    step(blockPos.add(-1, 1, 0))
-                    step(blockPos.add(-1, 1, 1))
-                    step(blockPos.add(0, -1, -1))
-                    step(blockPos.add(0, -1, 0))
-                    step(blockPos.add(0, -1, 1))
-                    step(blockPos.add(0, 0, -1))
-
-                    step(blockPos.add(0, 0, 1))
-                    step(blockPos.add(0, 1, -1))
-                    step(blockPos.add(0, 1, 0))
-                    step(blockPos.add(0, 1, 1))
-                    step(blockPos.add(1, -1, -1))
-                    step(blockPos.add(1, -1, 0))
-                    step(blockPos.add(1, -1, 1))
-                    step(blockPos.add(1, 0, -1))
-                    step(blockPos.add(1, 0, 0))
-                    step(blockPos.add(1, 0, 1))
-                    step(blockPos.add(1, 1, -1))
-                    step(blockPos.add(1, 1, 0))
-                    step(blockPos.add(1, 1, 1))
+                        if (step(blockPos.add(0, 0, 1))) return@finish
+                        if (step(blockPos.add(0, 1, -1))) return@finish
+                        if (step(blockPos.add(0, 1, 0))) return@finish
+                        if (step(blockPos.add(0, 1, 1))) return@finish
+                        if (step(blockPos.add(1, -1, -1))) return@finish
+                        if (step(blockPos.add(1, -1, 0))) return@finish
+                        if (step(blockPos.add(1, -1, 1))) return@finish
+                        if (step(blockPos.add(1, 0, -1))) return@finish
+                        if (step(blockPos.add(1, 0, 0))) return@finish
+                        if (step(blockPos.add(1, 0, 1))) return@finish
+                        if (step(blockPos.add(1, 1, -1))) return@finish
+                        if (step(blockPos.add(1, 1, 0))) return@finish
+                        if (step(blockPos.add(1, 1, 1))) return@finish
+                    }
                 }
             }
+
+            //
+
+            distance++
+            lastBlockPoses = nextBlockPoses
+
         }
-
-        //
-
-        distance++
-        lastBlockPoses = nextBlockPoses
-
     }
 
     return resultEntries
