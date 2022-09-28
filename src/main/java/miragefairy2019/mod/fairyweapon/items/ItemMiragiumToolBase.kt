@@ -57,7 +57,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
 
         if (!hasPartnerFairy) return@magic fail(0xFF00FF, MagicMessage.NO_FAIRY) // パートナー妖精判定
         if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic fail(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
-        val blockPos = rayTraceMagicSelector.item.rayTraceWrapper.surfaceBlockPos
+        val blockPos = rayTraceMagicSelector.item.rayTraceWrapper.let { if (focusSurface()) it.surfaceBlockPos else it.blockPos }
         val targets = iterateTargets(this, blockPos) // 対象判定
         if (!targets.hasNext()) return@magic fail(0x00FFFF, MagicMessage.NO_TARGET) // ターゲットなし判定
         if (player.cooldownTracker.hasCooldown(weaponItem)) return@magic fail(0xFFFF00, MagicMessage.COOL_TIME) // クールタイム判定
@@ -120,6 +120,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
         }
     }
 
+    open fun focusSurface() = true
     open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 1.0
 
     /**
