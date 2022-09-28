@@ -15,6 +15,7 @@ import miragefairy2019.mod.fairyweapon.magic4.magic
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import mirrg.kotlin.hydrogen.atLeast
+import net.minecraft.block.state.IBlockState
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
@@ -23,6 +24,7 @@ import net.minecraft.util.SoundCategory
 import net.minecraft.util.SoundEvent
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
+import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
@@ -86,7 +88,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
                         // 破壊成立
                         weaponItemStack.damageItem(damage, player)
                         val blockState = world.getBlockState(target)
-                        actualCoolTime += actualCoolTimePerBlock * (blockState.getBlockHardness(world, target).toDouble() atLeast 1.0)
+                        actualCoolTime += actualCoolTimePerBlock * getActualBlockHardness(world, target, blockState)
                         breakSound = blockState.block.getSoundType(blockState, world, target, player).breakSound
                         breakBlock(
                             world = world,
@@ -117,6 +119,8 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
             }
         }
     }
+
+    open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 1.0
 
     /**
      * このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。
