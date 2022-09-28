@@ -36,12 +36,13 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     open val collection: FormulaArguments.() -> Boolean = { false }
     open val silkTouch: FormulaArguments.() -> Boolean = { false }
     open val shearing: FormulaArguments.() -> Boolean = { false }
+    open fun getAdditionalReach(magicArguments: MagicArguments) = 0.0
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TRANSLATE
 
     override fun getMagic() = magic {
-        val rayTraceMagicSelector = MagicSelector.rayTraceBlock(world, player, 0.0) // 視線判定
+        val rayTraceMagicSelector = MagicSelector.rayTraceBlock(world, player, getAdditionalReach(this)) // 視線判定
         val cursorMagicSelector = rayTraceMagicSelector.position // 視点判定
 
         fun fail(color: Int, magicMessage: MagicMessage) = object : MagicHandler() {
