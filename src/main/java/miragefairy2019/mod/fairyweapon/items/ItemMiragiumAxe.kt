@@ -42,7 +42,7 @@ class ItemMiragiumAxe(private val baseSpeed: Double, private val baseRange: Doub
     private fun isLeaves(blockState: IBlockState) = !blockState.isNormalCube && blockState.material === Material.LEAVES
 
     val range = status("range", { (baseRange + !Mana.GAIA / 10.0 + !Erg.DESTROY / 5.0).floorToInt() atMost 50 }, { integer })
-    override fun iterateTargets(a: MagicArguments, baseBlockPos: BlockPos) = iterator {
+    override fun getTargetBlockPoses(a: MagicArguments, baseBlockPos: BlockPos) = iterator {
 
         // 幹を探索
         val stemResult = treeSearch(

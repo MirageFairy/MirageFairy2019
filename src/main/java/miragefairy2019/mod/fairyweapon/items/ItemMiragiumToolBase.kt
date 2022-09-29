@@ -52,7 +52,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
         val blockPos = rayTraceMagicSelector.item.rayTraceWrapper.let { if (focusSurface()) it.surfaceBlockPos else it.blockPos }
         if (weaponItemStack.itemDamage + ceil(getDurabilityCost(this, world, blockPos, world.getBlockState(blockPos))).toInt() > weaponItemStack.maxDamage) return@magic fail(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
         val targets = iterator {
-            val iterator = iterateTargets(this@magic, blockPos)
+            val iterator = getTargetBlockPoses(this@magic, blockPos)
             while (iterator.hasNext()) {
                 val next = iterator.next()
                 if (canBreak(this@magic, next)) yield(next)
@@ -133,7 +133,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
         && a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) <= a.maxHardness() // 硬すぎてはいけない
 
     /** このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。 */
-    open fun iterateTargets(a: MagicArguments, baseBlockPos: BlockPos): Iterator<BlockPos> = iterator { yield(baseBlockPos) }
+    open fun getTargetBlockPoses(a: MagicArguments, baseBlockPos: BlockPos): Iterator<BlockPos> = iterator { yield(baseBlockPos) }
 
     open fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 1.0 / 8.0
 
