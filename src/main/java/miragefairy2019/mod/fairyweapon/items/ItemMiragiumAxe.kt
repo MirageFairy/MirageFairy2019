@@ -36,13 +36,14 @@ class ItemMiragiumAxe(private val baseSpeed: Double, private val baseRange: Doub
     val additionalReach = status("additionalReach", { 0.0 + !Mana.WIND / 20.0 + !Erg.LEVITATE / 10.0 atMost 30.0 }, { float2 })
     override fun getAdditionalReach(a: MagicArguments) = additionalReach(a)
 
+    override fun focusSurface() = false
+
     override val maxHardness = status("maxHardness", { 2.0 + !Mana.DARK / 20.0 + !Erg.CRYSTAL / 10.0 atMost 20.0 }, { float2 })
     override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = super.isEffective(itemStack, blockState) || isLog(blockState) || isLeaves(blockState)
     private fun isLog(blockState: IBlockState) = blockState.isNormalCube && blockState.block.isToolEffective("axe", blockState)
     private fun isLeaves(blockState: IBlockState) = !blockState.isNormalCube && blockState.material === Material.LEAVES
 
     val range = status("range", { (baseRange + !Mana.GAIA / 10.0 + !Erg.DESTROY / 5.0).floorToInt() atMost 50 }, { integer })
-    override fun focusSurface() = false
     override fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos) = iterator {
 
         // 幹を探索
@@ -80,7 +81,6 @@ class ItemMiragiumAxe(private val baseSpeed: Double, private val baseRange: Doub
     val breakSpeed = status("breakSpeed", { baseSpeed * 2.0/* 原木の硬度 */ * 1.0/* 基準秒間破壊個数 */ * (1.0 + !Mana.AQUA / 20.0 + !Erg.HARVEST / 10.0) * costFactor }, { float2 })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.lumbering / 100.0 }, { boost })
     override fun getActualCoolTimePerBlock(a: MagicArguments) = a.run { 20.0 / (breakSpeed() * speedBoost()) }
-
 
     val fortune = status("fortune", { baseFortune + !Mana.SHINE / 100.0 + !Erg.LIFE / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.lumbering / 100.0 }, { boost })

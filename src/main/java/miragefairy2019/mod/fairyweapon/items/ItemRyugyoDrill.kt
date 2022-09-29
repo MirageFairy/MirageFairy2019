@@ -26,8 +26,30 @@ import net.minecraft.world.World
 import kotlin.math.floor
 
 class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
+    init {
+        setHarvestLevel("pickaxe", 3)
+        setHarvestLevel("shovel", 3)
+        destroySpeed = 8.0f
+    }
+
     override val maxHardness = status("maxHardness", { 2.0 + !Mana.GAIA / 50.0 + !Erg.DESTROY / 25.0 + !Mastery.mining / 25.0 atMost 20.0 }, { float2 })
+    override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = super.isEffective(itemStack, blockState) || when {
+        blockState.block === Blocks.SNOW_LAYER -> true
+        blockState.material === Material.IRON -> true
+        blockState.material === Material.ANVIL -> true
+        blockState.material === Material.ROCK -> true
+        blockState.material === Material.SNOW -> true
+        else -> false
+    }
+
     val range = status("range", { floor(1.0 + !Mana.WIND / 50.0 + !Erg.LEVITATE / 25.0).toInt() atMost 5 }, { integer })
+    override fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos) = iterator {
+        a.run {
+            blockPosBase.region.grow(range(), range(), range()).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
+                if (canBreak(a, blockPos)) yield(blockPos)
+            }
+        }
+    }
 
     val wear = status("wear", { 0.04 / (1.0 + !Mana.FIRE / 50.0 + !Erg.LIFE / 25.0) * costFactor }, { percent2 })
     override fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(a)
@@ -45,27 +67,4 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
 
     val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
     override fun doCollection(a: FormulaArguments) = collection(a)
-
-    init {
-        setHarvestLevel("pickaxe", 3)
-        setHarvestLevel("shovel", 3)
-        destroySpeed = 8.0f
-    }
-
-    override fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos) = iterator {
-        a.run {
-            blockPosBase.region.grow(range(), range(), range()).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
-                if (canBreak(a, blockPos)) yield(blockPos)
-            }
-        }
-    }
-
-    override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = super.isEffective(itemStack, blockState) || when {
-        blockState.block === Blocks.SNOW_LAYER -> true
-        blockState.material === Material.IRON -> true
-        blockState.material === Material.ANVIL -> true
-        blockState.material === Material.ROCK -> true
-        blockState.material === Material.SNOW -> true
-        else -> false
-    }
 }

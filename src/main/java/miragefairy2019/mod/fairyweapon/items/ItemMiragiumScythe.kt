@@ -28,33 +28,6 @@ import kotlin.math.floor
 
 class ItemMiragiumScythe(private val baseFortune: Double, override var destroySpeed: Float) : ItemMiragiumToolBase() {
     override val maxHardness = status("maxHardness", { 0.0 + !Mana.GAIA / 50.0 + !Erg.SLASH / 25.0 + !Mastery.agriculture / 100.0 / 2.0 atMost 10.0 }, { float2 })
-    val range = status("range", { floor(2.0 + !Mana.WIND / 20.0 + !Erg.HARVEST / 20.0).toInt() atMost 5 }, { integer })
-    val breakSpeed = status("breakSpeed", { 10.0 * costFactor }, { float2 })
-    val speedBoost = status("speedBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })
-
-    val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SENSE / 10.0) * costFactor }, { percent2 })
-    override fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(a)
-
-    override fun getActualCoolTimePerBlock(a: MagicArguments) = a.run { 20.0 / (breakSpeed() * speedBoost()) }
-
-    val fortune = status("fortune", { baseFortune + !Mana.AQUA / 100.0 + !Erg.LIFE / 50.0 }, { float2 })
-    val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })
-    override fun getActualFortune(a: FormulaArguments) = fortune(a) * fortuneBoost(a)
-
-    val shearing = status("shearing", { !Erg.HARVEST >= 10.0 }, { boolean.positive })
-    override fun isShearing(a: FormulaArguments) = shearing(a)
-
-    val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
-    override fun doCollection(a: FormulaArguments) = collection(a)
-
-    override fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos) = iterator {
-        a.run {
-            blockPosBase.region.grow(range(), 1, range()).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
-                if (canBreak(a, blockPos)) yield(blockPos)
-            }
-        }
-    }
-
     override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = super.isEffective(itemStack, blockState) || when {
         blockState.block === Blocks.WEB -> true
         blockState.material === Material.PLANTS -> true
@@ -69,4 +42,30 @@ class ItemMiragiumScythe(private val baseFortune: Double, override var destroySp
 
     override fun canBreak(a: MagicArguments, blockPos: BlockPos) = super.canBreak(a, blockPos)
         && !a.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない
+
+    val range = status("range", { floor(2.0 + !Mana.WIND / 20.0 + !Erg.HARVEST / 20.0).toInt() atMost 5 }, { integer })
+    override fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos) = iterator {
+        a.run {
+            blockPosBase.region.grow(range(), 1, range()).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
+                if (canBreak(a, blockPos)) yield(blockPos)
+            }
+        }
+    }
+
+    val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SENSE / 10.0) * costFactor }, { percent2 })
+    override fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(a)
+
+    val breakSpeed = status("breakSpeed", { 10.0 * costFactor }, { float2 })
+    val speedBoost = status("speedBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })
+    override fun getActualCoolTimePerBlock(a: MagicArguments) = a.run { 20.0 / (breakSpeed() * speedBoost()) }
+
+    val fortune = status("fortune", { baseFortune + !Mana.AQUA / 100.0 + !Erg.LIFE / 50.0 }, { float2 })
+    val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })
+    override fun getActualFortune(a: FormulaArguments) = fortune(a) * fortuneBoost(a)
+
+    val shearing = status("shearing", { !Erg.HARVEST >= 10.0 }, { boolean.positive })
+    override fun isShearing(a: FormulaArguments) = shearing(a)
+
+    val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
+    override fun doCollection(a: FormulaArguments) = collection(a)
 }

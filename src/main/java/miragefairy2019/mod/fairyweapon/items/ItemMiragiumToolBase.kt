@@ -30,7 +30,6 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
 abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
-
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TRANSLATE
 
@@ -119,13 +118,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
 
     open fun focusSurface() = true
 
-    open fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 1.0
-
-    /**
-     * このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。
-     * 内部で必ず[canBreak]による破壊可能判定を行わなければなりません。
-     */
-    abstract fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos): Iterator<BlockPos>
+    abstract val maxHardness: FormulaArguments.() -> Double // TODO -> function
 
     @Suppress("SimplifyBooleanWithConstants")
     open fun canBreak(a: MagicArguments, blockPos: BlockPos) = true
@@ -133,10 +126,16 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
         && isEffective(a.weaponItemStack, a.world.getBlockState(blockPos)) // 効果的でなければならない
         && a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) <= a.maxHardness() // 硬すぎてはいけない
 
-    abstract val maxHardness: FormulaArguments.() -> Double // TODO -> function
+    /**
+     * このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。
+     * 内部で必ず[canBreak]による破壊可能判定を行わなければなりません。
+     */
+    abstract fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos): Iterator<BlockPos>
 
-    abstract fun getActualCoolTimePerBlock(a: MagicArguments): Double
+    open fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 1.0
+
     open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 1.0
+    abstract fun getActualCoolTimePerBlock(a: MagicArguments): Double
 
     open fun getActualFortune(a: FormulaArguments) = 0.0
 

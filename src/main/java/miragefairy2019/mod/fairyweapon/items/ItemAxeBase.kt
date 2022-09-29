@@ -14,8 +14,10 @@ class ItemAxeBase : ItemMiragiumToolBase() {
         destroySpeed = 6.0f // 鉄相当
     }
 
-    override val maxHardness = status("maxHardness", { 2.0 }, { float2 })
     override fun focusSurface() = false
+
+    override val maxHardness = status("maxHardness", { 2.0 }, { float2 })
+
     override fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos) = iterator {
         if (canBreak(a, blockPosBase)) yield(blockPosBase)
     }
