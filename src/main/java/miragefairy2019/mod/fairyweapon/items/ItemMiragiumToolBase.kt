@@ -88,7 +88,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
 
                         // 破壊成立
                         weaponItemStack.damageItem(damage, player)
-                        actualCoolTime += coolTimePerHardness * getActualBlockHardness(world, target, blockState)
+                        actualCoolTime += getActualBlockHardness(world, target, blockState) * coolTimePerHardness
                         breakSound = blockState.block.getSoundType(blockState, world, target, player).breakSound
                         breakBlock(
                             world = world,
