@@ -75,7 +75,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
                 }
 
                 // 行使
-                val coolTimePerHardness = 20.0 * getCoolTimePerHardness(this@magic)
+                val coolTimePerHardness = 20.0 / getBreakSpeed(this@magic)
                 var breakSound: SoundEvent? = null
                 var count = 0
                 var actualCoolTime = 0.0
@@ -136,7 +136,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     open fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 1.0 / 8.0
 
     open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 1.0
-    open fun getCoolTimePerHardness(a: MagicArguments) = 1.0
+    open fun getBreakSpeed(a: MagicArguments) = 1.0
 
     open fun getFortune(a: FormulaArguments) = 0.0
 
