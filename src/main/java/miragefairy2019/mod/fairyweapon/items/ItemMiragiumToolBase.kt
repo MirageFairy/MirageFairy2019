@@ -133,7 +133,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
         && a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) <= a.maxHardness() // 硬すぎてはいけない
 
     /** このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。 */
-    open fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos): Iterator<BlockPos> = iterator { yield(blockPosBase) }
+    open fun iterateTargets(a: MagicArguments, baseBlockPos: BlockPos): Iterator<BlockPos> = iterator { yield(baseBlockPos) }
 
     open fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 1.0 / 8.0
 

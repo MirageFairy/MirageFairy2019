@@ -45,8 +45,8 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
     }
 
     val range = status("range", { floor(1.0 + !Mana.WIND / 50.0 + !Erg.LEVITATE / 25.0).toInt() atMost 5 }, { integer })
-    override fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos) = iterator {
-        blockPosBase.region.grow(range(a), range(a), range(a)).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
+    override fun iterateTargets(a: MagicArguments, baseBlockPos: BlockPos) = iterator {
+        baseBlockPos.region.grow(range(a), range(a), range(a)).positions.sortedByDistance(baseBlockPos).forEach { blockPos ->
             yield(blockPos)
         }
     }
