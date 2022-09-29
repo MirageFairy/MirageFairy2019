@@ -89,7 +89,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
                             player = player,
                             itemStack = weaponItemStack,
                             blockPos = target,
-                            fortune = world.rand.randomInt(getActualFortune(this@magic)),
+                            fortune = world.rand.randomInt(getFortune(this@magic)),
                             silkTouch = isSilkTouch(this@magic),
                             collection = doCollection(this@magic),
                             canShear = isShearing(this@magic)
@@ -137,7 +137,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 1.0
     open fun getCoolTimePerHardness(a: MagicArguments) = 20.0
 
-    open fun getActualFortune(a: FormulaArguments) = 0.0
+    open fun getFortune(a: FormulaArguments) = 0.0
 
     open fun isSilkTouch(a: FormulaArguments) = false
 

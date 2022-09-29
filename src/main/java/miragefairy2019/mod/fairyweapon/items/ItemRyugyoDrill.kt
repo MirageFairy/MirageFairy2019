@@ -60,7 +60,7 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
 
     val fortune = status("fortune", { !Mana.SHINE / 50.0 + !Mana.DARK / 100.0 + !Erg.THUNDER / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
-    override fun getActualFortune(a: FormulaArguments) = fortune(a) * fortuneBoost(a)
+    override fun getFortune(a: FormulaArguments) = fortune(a) * fortuneBoost(a)
 
     val silkTouch = status("silkTouch", { !Erg.WATER >= 10.0 }, { boolean.positive })
     override fun isSilkTouch(a: FormulaArguments) = silkTouch(a)

@@ -61,7 +61,7 @@ class ItemMiragiumScythe(private val baseFortune: Double, override var destroySp
 
     val fortune = status("fortune", { baseFortune + !Mana.AQUA / 100.0 + !Erg.LIFE / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })
-    override fun getActualFortune(a: FormulaArguments) = fortune(a) * fortuneBoost(a)
+    override fun getFortune(a: FormulaArguments) = fortune(a) * fortuneBoost(a)
 
     val shearing = status("shearing", { !Erg.HARVEST >= 10.0 }, { boolean.positive })
     override fun isShearing(a: FormulaArguments) = shearing(a)
