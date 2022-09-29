@@ -78,12 +78,12 @@ class ItemMiragiumAxe(private val baseSpeed: Double, private val baseRange: Doub
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.lumbering / 100.0 }, { boost })
     override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = magicArguments.run { 20.0 / (breakSpeed() * speedBoost()) }
 
-    val fortune = status("fortune", { baseFortune + !Mana.SHINE / 100.0 + !Erg.LIFE / 50.0 }, { float2 })
-    val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.lumbering / 100.0 }, { boost })
-    override val actualFortune: FormulaArguments.() -> Double get() = { fortune(this) * fortuneBoost(this) }
-
     val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SLASH / 10.0) * costFactor }, { percent2 })
     override fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(formulaArguments)
+
+    val fortune = status("fortune", { baseFortune + !Mana.SHINE / 100.0 + !Erg.LIFE / 50.0 }, { float2 })
+    val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.lumbering / 100.0 }, { boost })
+    override fun getActualFortune(formulaArguments: FormulaArguments) = fortune(formulaArguments) * fortuneBoost(formulaArguments)
 
     val silkTouch = status("silkTouch", { !Erg.WATER >= 10.0 }, { boolean.positive })
     override fun isSilkTouch(formulaArguments: FormulaArguments) = silkTouch(formulaArguments)

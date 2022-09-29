@@ -21,7 +21,6 @@ class ItemAxeBase : ItemMiragiumToolBase() {
     }
 
     override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = 20.0
-    override val actualFortune: FormulaArguments.() -> Double get() = { 0.0 }
 
     override fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 0.1
 }

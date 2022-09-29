@@ -31,7 +31,6 @@ import kotlin.math.ceil
 
 abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     abstract val maxHardness: FormulaArguments.() -> Double
-    abstract val actualFortune: FormulaArguments.() -> Double
     open fun getAdditionalReach(magicArguments: MagicArguments) = 0.0
 
     @SideOnly(Side.CLIENT)
@@ -93,7 +92,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
                             player = player,
                             itemStack = weaponItemStack,
                             blockPos = target,
-                            fortune = world.rand.randomInt(actualFortune()),
+                            fortune = world.rand.randomInt(getActualFortune(this@magic)),
                             silkTouch = isSilkTouch(this@magic),
                             collection = doCollection(this@magic),
                             canShear = isShearing(this@magic)
@@ -121,6 +120,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     open fun focusSurface() = true
     open fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 1.0
     open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 1.0
+    open fun getActualFortune(formulaArguments: FormulaArguments) = 0.0
     open fun isSilkTouch(formulaArguments: FormulaArguments) = false
     open fun isShearing(formulaArguments: FormulaArguments) = false
     open fun doCollection(formulaArguments: FormulaArguments) = false
