@@ -22,6 +22,7 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
 import kotlin.math.floor
 
 class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
@@ -32,7 +33,9 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
     val fortune = status("fortune", { !Mana.SHINE / 50.0 + !Mana.DARK / 100.0 + !Erg.THUNDER / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
     override val actualFortune: FormulaArguments.() -> Double get() = { fortune(this) * fortuneBoost(this) }
-    override val wear = status("wear", { 0.04 / (1.0 + !Mana.FIRE / 50.0 + !Erg.LIFE / 25.0) * costFactor }, { percent2 })
+
+    val wear = status("wear", { 0.04 / (1.0 + !Mana.FIRE / 50.0 + !Erg.LIFE / 25.0) * costFactor }, { percent2 })
+    override fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(formulaArguments)
 
     val silkTouch = status("silkTouch", { !Erg.WATER >= 10.0 }, { boolean.positive })
     override fun isSilkTouch(formulaArguments: FormulaArguments) = silkTouch(formulaArguments)

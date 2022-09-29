@@ -32,7 +32,6 @@ import kotlin.math.ceil
 abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     abstract val maxHardness: FormulaArguments.() -> Double
     abstract val actualFortune: FormulaArguments.() -> Double
-    abstract val wear: FormulaArguments.() -> Double
     open fun getAdditionalReach(magicArguments: MagicArguments) = 0.0
 
     @SideOnly(Side.CLIENT)
@@ -54,8 +53,8 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
         }
 
         if (!hasPartnerFairy) return@magic fail(0xFF00FF, MagicMessage.NO_FAIRY) // パートナー妖精判定
-        if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return@magic fail(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
         val blockPos = rayTraceMagicSelector.item.rayTraceWrapper.let { if (focusSurface()) it.surfaceBlockPos else it.blockPos }
+        if (weaponItemStack.itemDamage + ceil(getDurabilityCost(this, world, blockPos, world.getBlockState(blockPos))).toInt() > weaponItemStack.maxDamage) return@magic fail(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
         val targets = iterateTargets(this, blockPos) // 対象判定
         if (!targets.hasNext()) return@magic fail(0x00FFFF, MagicMessage.NO_TARGET) // ターゲットなし判定
         if (player.cooldownTracker.hasCooldown(weaponItem)) return@magic fail(0xFFFF00, MagicMessage.COOL_TIME) // クールタイム判定
@@ -80,12 +79,13 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
                 var actualCoolTime = 0.0
                 run breakExecution@{
                     targets.forEach { target ->
-                        val damage = world.rand.randomInt(wear()) // 耐久コスト
+                        val blockState = world.getBlockState(target)
+
+                        val damage = world.rand.randomInt(getDurabilityCost(this@magic, world, target, blockState)) // 耐久コスト
                         if (weaponItemStack.itemDamage + damage > weaponItemStack.maxDamage) return@breakExecution // 耐久不足なら終了
 
                         // 破壊成立
                         weaponItemStack.damageItem(damage, player)
-                        val blockState = world.getBlockState(target)
                         actualCoolTime += actualCoolTimePerBlock * getActualBlockHardness(world, target, blockState)
                         breakSound = blockState.block.getSoundType(blockState, world, target, player).breakSound
                         breakBlock(
@@ -119,6 +119,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     }
 
     open fun focusSurface() = true
+    open fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 1.0
     open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 1.0
     open fun isSilkTouch(formulaArguments: FormulaArguments) = false
     open fun isShearing(formulaArguments: FormulaArguments) = false
