@@ -11,6 +11,7 @@ import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.Complex
 import miragefairy2019.libkt.IRgb
 import miragefairy2019.libkt.drawTriangle
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
@@ -66,6 +67,14 @@ val playerAuraModule = module {
     }
 
     // アイテムツールチップイベント
+    onMakeLang {
+        enJa("miragefairy2019.gui.playerAura.title", "Player Aura", "プレイヤーオーラ")
+        enJa("miragefairy2019.gui.playerAura.poem.step1", "It's an appetizing scent.", "食欲をそそられる香りだ")
+        enJa("miragefairy2019.gui.playerAura.poem.step2", "It's a familiar taste.", "食べ慣れた味だ")
+        enJa("miragefairy2019.gui.playerAura.poem.step3", "I'm getting tired of this taste...", "この味にも飽きてきたな…")
+        enJa("miragefairy2019.gui.playerAura.poem.step4", "The nutrition is biased...", "栄養が偏り気味だ…")
+        enJa("miragefairy2019.gui.playerAura.poem.step5", "I want to eat something else...", "そろそろ他のものが食べたい…")
+    }
     onInit {
         if (side.isClient) {
             MinecraftForge.EVENT_BUS.register(object : Any() {

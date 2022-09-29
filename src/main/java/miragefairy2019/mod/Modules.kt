@@ -53,12 +53,6 @@ val modules = module {
         enJa("miragefairy2019.gui.duration.minutes", "minutes", "分")
         enJa("miragefairy2019.gui.duration.seconds", "seconds", "秒")
         enJa("miragefairy2019.gui.duration.milliSeconds", "milli seconds", "ミリ秒")
-        enJa("miragefairy2019.gui.playerAura.title", "Player Aura", "プレイヤーオーラ")
-        enJa("miragefairy2019.gui.playerAura.poem.step1", "It's an appetizing scent.", "食欲をそそられる香りだ")
-        enJa("miragefairy2019.gui.playerAura.poem.step2", "It's a familiar taste.", "食べ慣れた味だ")
-        enJa("miragefairy2019.gui.playerAura.poem.step3", "I'm getting tired of this taste...", "この味にも飽きてきたな…")
-        enJa("miragefairy2019.gui.playerAura.poem.step4", "The nutrition is biased...", "栄養が偏り気味だ…")
-        enJa("miragefairy2019.gui.playerAura.poem.step5", "I want to eat something else...", "そろそろ他のものが食べたい…")
 
     }
 
