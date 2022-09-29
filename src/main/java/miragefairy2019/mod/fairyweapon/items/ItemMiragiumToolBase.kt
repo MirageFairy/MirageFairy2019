@@ -127,10 +127,12 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     abstract val maxHardness: FormulaArguments.() -> Double // TODO -> function
 
     @Suppress("SimplifyBooleanWithConstants")
-    open fun canBreak(a: MagicArguments, blockPos: BlockPos) = true
-        && a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) >= 0 // 岩盤であってはならない
-        && isEffective(a.weaponItemStack, a.world.getBlockState(blockPos)) // 効果的でなければならない
-        && a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) <= a.maxHardness() // 硬すぎてはいけない
+    open fun canBreak(a: MagicArguments, blockPos: BlockPos) = when {
+        !isEffective(a.weaponItemStack, a.world.getBlockState(blockPos)) -> false // 効果的でなければならない
+        a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) < 0 -> false // 岩盤であってはならない
+        a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) > a.maxHardness() -> false // 硬すぎてはいけない
+        else -> true
+    }
 
     /** このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。 */
     open fun getTargetBlockPoses(a: MagicArguments, baseBlockPos: BlockPos): Iterator<BlockPos> = iterator { yield(baseBlockPos) }

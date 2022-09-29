@@ -43,8 +43,11 @@ class ItemMiragiumScythe(private val baseFortune: Double, override var destroySp
         else -> false
     }
 
-    override fun canBreak(a: MagicArguments, blockPos: BlockPos) = super.canBreak(a, blockPos)
-        && !a.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない
+    override fun canBreak(a: MagicArguments, blockPos: BlockPos) = when {
+        !super.canBreak(a, blockPos) -> false
+        a.world.getBlockState(blockPos).isNormalCube -> false // 普通のキューブであってはならない
+        else -> true
+    }
 
     val range = status("range", { floor(2.0 + !Mana.WIND / 20.0 + !Erg.HARVEST / 20.0).toInt() atMost 5 }, { integer })
     override fun getTargetBlockPoses(a: MagicArguments, baseBlockPos: BlockPos) = iterator {
