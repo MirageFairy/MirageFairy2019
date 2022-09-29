@@ -17,6 +17,7 @@ import miragefairy2019.mod.fairyweapon.spawnParticleTargets
 import mirrg.kotlin.hydrogen.atLeast
 import net.minecraft.block.state.IBlockState
 import net.minecraft.init.SoundEvents
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
@@ -106,9 +107,25 @@ abstract class ItemMiragiumToolBase : ItemFairyWeaponMagic4() {
 
                 // 破壊時
                 if (count > 0) {
-                    if (doCollection(this@magic)) world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f)
-                    breakSound?.let { world.playSound(null, player.posX, player.posY, player.posZ, it, player.soundCategory, 1.0f, 1.0f) } // エフェクト
-                    player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, ceil(actualCoolTime + 10.0).toInt()) // クールタイム
+
+                    // エフェクト
+                    if (doCollection(this@magic)) {
+                        world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f)
+                    }
+                    breakSound?.let { world.playSound(null, player.posX, player.posY, player.posZ, it, player.soundCategory, 1.0f, 1.0f) }
+
+                    // クールタイム
+                    val coolTime = ceil(actualCoolTime + 10.0).toInt()
+                    val coolTimeCategories = getCoolTimeCategories()
+                    Item.REGISTRY.forEach { item ->
+                        val matched = when {
+                            item === this@ItemMiragiumToolBase -> true
+                            item is ItemMiragiumToolBase && coolTimeCategories.any { it in item.getCoolTimeCategories() } -> true
+                            else -> false
+                        }
+                        if (matched) player.cooldownTracker.setCooldown(item, coolTime)
+                    }
+
                 }
 
                 // エフェクト
@@ -138,6 +155,8 @@ abstract class ItemMiragiumToolBase : ItemFairyWeaponMagic4() {
     open fun getBlockHardnessForCoolTime(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 0.25
 
     open fun getBreakSpeed(a: MagicArguments) = 1.0
+
+    open fun getCoolTimeCategories(): List<String> = listOf()
 
     open fun getFortune(a: FormulaArguments) = 0.0
 

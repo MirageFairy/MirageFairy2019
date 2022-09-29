@@ -83,6 +83,8 @@ class ItemMiragiumAxe(private val baseSpeed: Double, private val baseRange: Doub
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.lumbering / 100.0 }, { boost })
     override fun getBreakSpeed(a: MagicArguments) = breakSpeed(a) * speedBoost(a)
 
+    override fun getCoolTimeCategories() = listOf("axe")
+
     val fortune = status("fortune", { baseFortune + !Mana.SHINE / 100.0 + !Erg.LIFE / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.lumbering / 100.0 }, { boost })
     override fun getFortune(a: FormulaArguments) = fortune(a) * fortuneBoost(a)

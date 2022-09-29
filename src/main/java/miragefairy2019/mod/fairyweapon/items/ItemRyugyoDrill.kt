@@ -66,6 +66,8 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
     override fun getBreakSpeed(a: MagicArguments) = breakSpeed(a) * speedBoost(a)
 
+    override fun getCoolTimeCategories() = listOf("pickaxe")
+
     val fortune = status("fortune", { !Mana.SHINE / 50.0 + !Mana.DARK / 100.0 + !Erg.THUNDER / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
     override fun getFortune(a: FormulaArguments) = fortune(a) * fortuneBoost(a)
