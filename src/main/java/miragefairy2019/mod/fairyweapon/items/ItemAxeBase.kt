@@ -16,11 +16,11 @@ class ItemAxeBase : ItemMiragiumToolBase() {
 
     override val maxHardness = status("maxHardness", { 2.0 }, { float2 })
     override fun focusSurface() = false
-    override fun iterateTargets(magicArguments: MagicArguments, blockPosBase: BlockPos) = iterator {
-        if (canBreak(magicArguments, blockPosBase)) yield(blockPosBase)
+    override fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos) = iterator {
+        if (canBreak(a, blockPosBase)) yield(blockPosBase)
     }
 
-    override fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 0.1
+    override fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 0.1
 
-    override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = 20.0
+    override fun getActualCoolTimePerBlock(a: MagicArguments) = 20.0
 }

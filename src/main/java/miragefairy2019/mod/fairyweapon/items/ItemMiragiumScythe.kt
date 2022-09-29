@@ -33,24 +33,24 @@ class ItemMiragiumScythe(private val baseFortune: Double, override var destroySp
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })
 
     val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SENSE / 10.0) * costFactor }, { percent2 })
-    override fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(formulaArguments)
+    override fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(a)
 
-    override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = magicArguments.run { 20.0 / (breakSpeed() * speedBoost()) }
+    override fun getActualCoolTimePerBlock(a: MagicArguments) = a.run { 20.0 / (breakSpeed() * speedBoost()) }
 
     val fortune = status("fortune", { baseFortune + !Mana.AQUA / 100.0 + !Erg.LIFE / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })
-    override fun getActualFortune(formulaArguments: FormulaArguments) = fortune(formulaArguments) * fortuneBoost(formulaArguments)
+    override fun getActualFortune(a: FormulaArguments) = fortune(a) * fortuneBoost(a)
 
     val shearing = status("shearing", { !Erg.HARVEST >= 10.0 }, { boolean.positive })
-    override fun isShearing(formulaArguments: FormulaArguments) = shearing(formulaArguments)
+    override fun isShearing(a: FormulaArguments) = shearing(a)
 
     val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
-    override fun doCollection(formulaArguments: FormulaArguments) = collection(formulaArguments)
+    override fun doCollection(a: FormulaArguments) = collection(a)
 
-    override fun iterateTargets(magicArguments: MagicArguments, blockPosBase: BlockPos) = iterator {
-        magicArguments.run {
+    override fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos) = iterator {
+        a.run {
             blockPosBase.region.grow(range(), 1, range()).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
-                if (canBreak(magicArguments, blockPos)) yield(blockPos)
+                if (canBreak(a, blockPos)) yield(blockPos)
             }
         }
     }
@@ -67,6 +67,6 @@ class ItemMiragiumScythe(private val baseFortune: Double, override var destroySp
         else -> false
     }
 
-    override fun canBreak(magicArguments: MagicArguments, blockPos: BlockPos) = super.canBreak(magicArguments, blockPos)
-        && !magicArguments.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない
+    override fun canBreak(a: MagicArguments, blockPos: BlockPos) = super.canBreak(a, blockPos)
+        && !a.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない
 }

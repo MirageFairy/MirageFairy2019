@@ -30,21 +30,21 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
     val range = status("range", { floor(1.0 + !Mana.WIND / 50.0 + !Erg.LEVITATE / 25.0).toInt() atMost 5 }, { integer })
 
     val wear = status("wear", { 0.04 / (1.0 + !Mana.FIRE / 50.0 + !Erg.LIFE / 25.0) * costFactor }, { percent2 })
-    override fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(formulaArguments)
+    override fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(a)
 
     val breakSpeed = status("breakSpeed", { baseBreakStonesPerTick * 20.0/* tick/sec */ * 2.0/* hardness */ * costFactor }, { float2 })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
-    override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = magicArguments.run { 20.0 / (breakSpeed() * speedBoost()) }
+    override fun getActualCoolTimePerBlock(a: MagicArguments) = a.run { 20.0 / (breakSpeed() * speedBoost()) }
 
     val fortune = status("fortune", { !Mana.SHINE / 50.0 + !Mana.DARK / 100.0 + !Erg.THUNDER / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
-    override fun getActualFortune(formulaArguments: FormulaArguments) = fortune(formulaArguments) * fortuneBoost(formulaArguments)
+    override fun getActualFortune(a: FormulaArguments) = fortune(a) * fortuneBoost(a)
 
     val silkTouch = status("silkTouch", { !Erg.WATER >= 10.0 }, { boolean.positive })
-    override fun isSilkTouch(formulaArguments: FormulaArguments) = silkTouch(formulaArguments)
+    override fun isSilkTouch(a: FormulaArguments) = silkTouch(a)
 
     val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
-    override fun doCollection(formulaArguments: FormulaArguments) = collection(formulaArguments)
+    override fun doCollection(a: FormulaArguments) = collection(a)
 
     init {
         setHarvestLevel("pickaxe", 3)
@@ -52,10 +52,10 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
         destroySpeed = 8.0f
     }
 
-    override fun iterateTargets(magicArguments: MagicArguments, blockPosBase: BlockPos) = iterator {
-        magicArguments.run {
+    override fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos) = iterator {
+        a.run {
             blockPosBase.region.grow(range(), range(), range()).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
-                if (canBreak(magicArguments, blockPos)) yield(blockPos)
+                if (canBreak(a, blockPos)) yield(blockPos)
             }
         }
     }
