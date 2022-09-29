@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
-abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
+abstract class ItemMiragiumToolBase : ItemFairyWeaponMagic4() {
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TRANSLATE
 
