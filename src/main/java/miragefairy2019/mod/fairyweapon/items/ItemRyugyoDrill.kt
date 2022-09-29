@@ -15,6 +15,7 @@ import miragefairy2019.mod.fairyweapon.magic4.integer
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.positive
 import miragefairy2019.mod.fairyweapon.magic4.status
+import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.skill.Mastery
 import mirrg.kotlin.hydrogen.atMost
 import net.minecraft.block.material.Material
@@ -34,7 +35,6 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
 
     override fun focusSurface() = true
 
-    override val maxHardness = status("maxHardness", { 2.0 + !Mana.GAIA / 50.0 + !Erg.DESTROY / 25.0 + !Mastery.mining / 25.0 atMost 20.0 }, { float2 })
     override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = when {
         super.isEffective(itemStack, blockState) -> true
         blockState.block === Blocks.SNOW_LAYER -> true
@@ -43,6 +43,13 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
         blockState.material === Material.ROCK -> true
         blockState.material === Material.SNOW -> true
         else -> false
+    }
+
+    val maxHardness = status("maxHardness", { 2.0 + !Mana.GAIA / 50.0 + !Erg.DESTROY / 25.0 + !Mastery.mining / 25.0 atMost 20.0 }, { float2 })
+    override fun canBreak(a: MagicArguments, blockPos: BlockPos) = when {
+        !super.canBreak(a, blockPos) -> false
+        a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) > maxHardness(a) -> false // 硬すぎてはいけない
+        else -> true
     }
 
     val range = status("range", { floor(1.0 + !Mana.WIND / 50.0 + !Erg.LEVITATE / 25.0).toInt() atMost 5 }, { integer })

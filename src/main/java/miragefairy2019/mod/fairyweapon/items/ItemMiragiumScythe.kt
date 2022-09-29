@@ -29,7 +29,6 @@ import kotlin.math.floor
 class ItemMiragiumScythe(private val baseFortune: Double, override var destroySpeed: Float) : ItemMiragiumToolBase() {
     override fun focusSurface() = true
 
-    override val maxHardness = status("maxHardness", { 0.0 + !Mana.GAIA / 50.0 + !Erg.SLASH / 25.0 + !Mastery.agriculture / 100.0 / 2.0 atMost 10.0 }, { float2 })
     override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = when {
         super.isEffective(itemStack, blockState) -> true
         blockState.block === Blocks.WEB -> true

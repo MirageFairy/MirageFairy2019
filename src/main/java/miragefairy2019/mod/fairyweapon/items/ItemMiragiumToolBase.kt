@@ -124,13 +124,10 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
 
     open fun focusSurface() = false
 
-    abstract val maxHardness: FormulaArguments.() -> Double // TODO -> function
-
     @Suppress("SimplifyBooleanWithConstants")
     open fun canBreak(a: MagicArguments, blockPos: BlockPos) = when {
         !isEffective(a.weaponItemStack, a.world.getBlockState(blockPos)) -> false // 効果的でなければならない
         a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) < 0 -> false // 岩盤であってはならない
-        a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) > a.maxHardness() -> false // 硬すぎてはいけない
         else -> true
     }
 
