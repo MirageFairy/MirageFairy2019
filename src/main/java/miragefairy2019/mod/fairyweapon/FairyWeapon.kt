@@ -206,7 +206,7 @@ enum class FairyWeaponCard(
     ),
 
     axeBase(
-        null, "axe_base", "axeBase", 1, { ItemAxeBase() },
+        null, "axe_base", "axeBase", 1, { ItemAxeBase(3.0) },
         LangPair("Axe Base", "斧ベース"),
         LangPair("", "飛べるって素敵"),
         null,
