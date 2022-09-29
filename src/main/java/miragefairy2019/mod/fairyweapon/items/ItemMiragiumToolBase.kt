@@ -135,7 +135,8 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
 
     open fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 1.0 / 8.0
 
-    open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 1.0
+    open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 0.25
+
     open fun getBreakSpeed(a: MagicArguments) = 1.0
 
     open fun getFortune(a: FormulaArguments) = 0.0

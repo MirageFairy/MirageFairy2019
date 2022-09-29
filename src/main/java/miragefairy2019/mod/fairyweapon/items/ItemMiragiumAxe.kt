@@ -17,7 +17,6 @@ import miragefairy2019.mod.fairyweapon.magic4.positive
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
 import miragefairy2019.mod.skill.Mastery
-import mirrg.kotlin.hydrogen.atLeast
 import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.hydrogen.floorToInt
 import mirrg.kotlin.hydrogen.toUnitOrNull
@@ -80,7 +79,6 @@ class ItemMiragiumAxe(private val baseSpeed: Double, private val baseRange: Doub
     val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SLASH / 10.0) * costFactor }, { percent2 })
     override fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(a)
 
-    override fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 0.2
     val breakSpeed = status("breakSpeed", { baseSpeed * 2.0/* 原木の硬度 */ * 1.0/* 基準秒間破壊個数 */ * (1.0 + !Mana.AQUA / 20.0 + !Erg.HARVEST / 10.0) * costFactor }, { float2 })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.lumbering / 100.0 }, { boost })
     override fun getBreakSpeed(a: MagicArguments) = breakSpeed(a) * speedBoost(a)
