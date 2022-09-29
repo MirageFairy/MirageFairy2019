@@ -33,7 +33,6 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     abstract val maxHardness: FormulaArguments.() -> Double
     abstract val actualFortune: FormulaArguments.() -> Double
     abstract val wear: FormulaArguments.() -> Double
-    open val collection: FormulaArguments.() -> Boolean = { false }
     open val silkTouch: FormulaArguments.() -> Boolean = { false }
     open val shearing: FormulaArguments.() -> Boolean = { false }
     open fun getAdditionalReach(magicArguments: MagicArguments) = 0.0
@@ -98,7 +97,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
                             blockPos = target,
                             fortune = world.rand.randomInt(actualFortune()),
                             silkTouch = silkTouch(),
-                            collection = collection(),
+                            collection = doCollection(this@magic),
                             canShear = shearing()
                         )
                         count++
@@ -107,7 +106,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
 
                 // 破壊時
                 if (count > 0) {
-                    if (collection()) world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f)
+                    if (doCollection(this@magic)) world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f)
                     breakSound?.let { world.playSound(null, player.posX, player.posY, player.posZ, it, player.soundCategory, 1.0f, 1.0f) } // エフェクト
                     player.cooldownTracker.setCooldown(this@ItemMiragiumToolBase, ceil(actualCoolTime + 10.0).toInt()) // クールタイム
                 }
@@ -123,6 +122,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
 
     open fun focusSurface() = true
     open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 1.0
+    open fun doCollection(formulaArguments: FormulaArguments) = false
 
     /**
      * このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。

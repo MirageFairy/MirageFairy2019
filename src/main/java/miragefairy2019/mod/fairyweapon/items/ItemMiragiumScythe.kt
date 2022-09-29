@@ -34,8 +34,10 @@ class ItemMiragiumScythe(private val baseFortune: Double, override var destroySp
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })
     override val actualFortune: FormulaArguments.() -> Double get() = { fortune(this) * fortuneBoost(this) }
     override val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SENSE / 10.0) * costFactor }, { percent2 })
-    override val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
     override val shearing = status("shearing", { !Erg.HARVEST >= 10.0 }, { boolean.positive })
+
+    val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
+    override fun doCollection(formulaArguments: FormulaArguments) = collection(formulaArguments)
 
     override fun iterateTargets(magicArguments: MagicArguments, blockPosBase: BlockPos) = iterator {
         magicArguments.run {

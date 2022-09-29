@@ -85,5 +85,7 @@ class ItemMiragiumAxe(private val baseSpeed: Double, private val baseRange: Doub
     override val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SLASH / 10.0) * costFactor }, { percent2 })
 
     override val silkTouch = status("silkTouch", { !Erg.WATER >= 10.0 }, { boolean.positive })
-    override val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
+
+    val collection = status("collection", { !Erg.WARP >= 10.0 }, { boolean.positive })
+    override fun doCollection(formulaArguments: FormulaArguments) = collection(formulaArguments)
 }
