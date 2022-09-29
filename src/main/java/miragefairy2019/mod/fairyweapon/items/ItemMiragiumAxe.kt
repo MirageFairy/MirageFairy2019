@@ -36,8 +36,6 @@ class ItemMiragiumAxe(private val baseSpeed: Double, private val baseRange: Doub
     val additionalReach = status("additionalReach", { 0.0 + !Mana.WIND / 20.0 + !Erg.LEVITATE / 10.0 atMost 30.0 }, { float2 })
     override fun getAdditionalReach(a: MagicArguments) = additionalReach(a)
 
-    override fun focusSurface() = false
-
     override val maxHardness = status("maxHardness", { 2.0 + !Mana.DARK / 20.0 + !Erg.CRYSTAL / 10.0 atMost 20.0 }, { float2 })
     override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = super.isEffective(itemStack, blockState) || isLog(blockState) || isLeaves(blockState)
     private fun isLog(blockState: IBlockState) = blockState.isNormalCube && blockState.block.isToolEffective("axe", blockState)

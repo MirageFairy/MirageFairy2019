@@ -116,7 +116,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
 
     open fun getAdditionalReach(a: MagicArguments) = 0.0
 
-    open fun focusSurface() = true
+    open fun focusSurface() = false
 
     abstract val maxHardness: FormulaArguments.() -> Double // TODO -> function
 
