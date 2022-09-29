@@ -37,7 +37,6 @@ class ItemMiragiumAxe(private val baseSpeed: Double, private val baseRange: Doub
     override fun getAdditionalReach(magicArguments: MagicArguments) = additionalReach(magicArguments)
 
     override val maxHardness = status("maxHardness", { 2.0 + !Mana.DARK / 20.0 + !Erg.CRYSTAL / 10.0 atMost 20.0 }, { float2 })
-    override fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 0.2
     override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = super.isEffective(itemStack, blockState) || isLog(blockState) || isLeaves(blockState)
     private fun isLog(blockState: IBlockState) = blockState.isNormalCube && blockState.block.isToolEffective("axe", blockState)
     private fun isLeaves(blockState: IBlockState) = !blockState.isNormalCube && blockState.material === Material.LEAVES
@@ -74,12 +73,14 @@ class ItemMiragiumAxe(private val baseSpeed: Double, private val baseRange: Doub
 
     }
 
+    val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SLASH / 10.0) * costFactor }, { percent2 })
+    override fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(formulaArguments)
+
+    override fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 0.2
     val breakSpeed = status("breakSpeed", { baseSpeed * 2.0/* 原木の硬度 */ * 1.0/* 基準秒間破壊個数 */ * (1.0 + !Mana.AQUA / 20.0 + !Erg.HARVEST / 10.0) * costFactor }, { float2 })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.lumbering / 100.0 }, { boost })
     override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = magicArguments.run { 20.0 / (breakSpeed() * speedBoost()) }
 
-    val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SLASH / 10.0) * costFactor }, { percent2 })
-    override fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(formulaArguments)
 
     val fortune = status("fortune", { baseFortune + !Mana.SHINE / 100.0 + !Erg.LIFE / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.lumbering / 100.0 }, { boost })

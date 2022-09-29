@@ -20,7 +20,7 @@ class ItemAxeBase : ItemMiragiumToolBase() {
         if (canBreak(magicArguments, blockPosBase)) yield(blockPosBase)
     }
 
-    override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = 20.0
-
     override fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 0.1
+
+    override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = 20.0
 }

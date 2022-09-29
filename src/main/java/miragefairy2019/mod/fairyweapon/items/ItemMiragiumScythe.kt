@@ -35,6 +35,8 @@ class ItemMiragiumScythe(private val baseFortune: Double, override var destroySp
     val wear = status("wear", { 0.1 / (1.0 + !Mana.FIRE / 20.0 + !Erg.SENSE / 10.0) * costFactor }, { percent2 })
     override fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(formulaArguments)
 
+    override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = magicArguments.run { 20.0 / (breakSpeed() * speedBoost()) }
+
     val fortune = status("fortune", { baseFortune + !Mana.AQUA / 100.0 + !Erg.LIFE / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })
     override fun getActualFortune(formulaArguments: FormulaArguments) = fortune(formulaArguments) * fortuneBoost(formulaArguments)
@@ -64,8 +66,6 @@ class ItemMiragiumScythe(private val baseFortune: Double, override var destroySp
         blockState.material === Material.CACTUS -> true
         else -> false
     }
-
-    override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = magicArguments.run { 20.0 / (breakSpeed() * speedBoost()) }
 
     override fun canBreak(magicArguments: MagicArguments, blockPos: BlockPos) = super.canBreak(magicArguments, blockPos)
         && !magicArguments.world.getBlockState(blockPos).isNormalCube // 普通のキューブであってはならない

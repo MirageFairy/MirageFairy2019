@@ -28,11 +28,13 @@ import kotlin.math.floor
 class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
     override val maxHardness = status("maxHardness", { 2.0 + !Mana.GAIA / 50.0 + !Erg.DESTROY / 25.0 + !Mastery.mining / 25.0 atMost 20.0 }, { float2 })
     val range = status("range", { floor(1.0 + !Mana.WIND / 50.0 + !Erg.LEVITATE / 25.0).toInt() atMost 5 }, { integer })
-    val breakSpeed = status("breakSpeed", { baseBreakStonesPerTick * 20.0/* tick/sec */ * 2.0/* hardness */ * costFactor }, { float2 })
-    val speedBoost = status("speedBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
 
     val wear = status("wear", { 0.04 / (1.0 + !Mana.FIRE / 50.0 + !Erg.LIFE / 25.0) * costFactor }, { percent2 })
     override fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = wear(formulaArguments)
+
+    val breakSpeed = status("breakSpeed", { baseBreakStonesPerTick * 20.0/* tick/sec */ * 2.0/* hardness */ * costFactor }, { float2 })
+    val speedBoost = status("speedBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
+    override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = magicArguments.run { 20.0 / (breakSpeed() * speedBoost()) }
 
     val fortune = status("fortune", { !Mana.SHINE / 50.0 + !Mana.DARK / 100.0 + !Erg.THUNDER / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
@@ -66,6 +68,4 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
         blockState.material === Material.SNOW -> true
         else -> false
     }
-
-    override fun getActualCoolTimePerBlock(magicArguments: MagicArguments) = magicArguments.run { 20.0 / (breakSpeed() * speedBoost()) }
 }

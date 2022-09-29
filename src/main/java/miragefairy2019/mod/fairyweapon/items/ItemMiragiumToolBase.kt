@@ -30,7 +30,6 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
 abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
-    abstract val maxHardness: FormulaArguments.() -> Double
     open fun getAdditionalReach(magicArguments: MagicArguments) = 0.0
 
     @SideOnly(Side.CLIENT)
@@ -118,23 +117,31 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     }
 
     open fun focusSurface() = true
+
     open fun getDurabilityCost(formulaArguments: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 1.0
-    open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 1.0
-    open fun getActualFortune(formulaArguments: FormulaArguments) = 0.0
-    open fun isSilkTouch(formulaArguments: FormulaArguments) = false
-    open fun isShearing(formulaArguments: FormulaArguments) = false
-    open fun doCollection(formulaArguments: FormulaArguments) = false
 
     /**
      * このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。
      * 内部で必ず[canBreak]による破壊可能判定を行わなければなりません。
      */
     abstract fun iterateTargets(magicArguments: MagicArguments, blockPosBase: BlockPos): Iterator<BlockPos>
-    abstract fun getActualCoolTimePerBlock(magicArguments: MagicArguments): Double
 
     @Suppress("SimplifyBooleanWithConstants")
     open fun canBreak(magicArguments: MagicArguments, blockPos: BlockPos) = true
         && magicArguments.world.getBlockState(blockPos).getBlockHardness(magicArguments.world, blockPos) >= 0 // 岩盤であってはならない
         && isEffective(magicArguments.weaponItemStack, magicArguments.world.getBlockState(blockPos)) // 効果的でなければならない
         && magicArguments.world.getBlockState(blockPos).getBlockHardness(magicArguments.world, blockPos) <= magicArguments.maxHardness() // 硬すぎてはいけない
+
+    abstract val maxHardness: FormulaArguments.() -> Double // TODO -> function
+
+    abstract fun getActualCoolTimePerBlock(magicArguments: MagicArguments): Double
+    open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 1.0
+
+    open fun getActualFortune(formulaArguments: FormulaArguments) = 0.0
+
+    open fun isSilkTouch(formulaArguments: FormulaArguments) = false
+
+    open fun isShearing(formulaArguments: FormulaArguments) = false
+
+    open fun doCollection(formulaArguments: FormulaArguments) = false
 }
