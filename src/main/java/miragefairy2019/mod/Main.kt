@@ -5,6 +5,7 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
+import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod.artifacts.variantFairyCrystal
@@ -45,6 +46,7 @@ object Main {
             Main.side = side
         }
 
+        onMakeLang { enJa("itemGroup.mirageFairy2019", "MirageFairy2019", "MirageFairy2019") }
         onInitCreativeTab {
             creativeTab = object : CreativeTabs("mirageFairy2019") {
                 @SideOnly(Side.CLIENT)
