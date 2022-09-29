@@ -30,7 +30,6 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.ceil
 
 abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
-    open fun getAdditionalReach(a: MagicArguments) = 0.0
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを破壊") // TRANSLATE
@@ -115,6 +114,8 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
             }
         }
     }
+
+    open fun getAdditionalReach(a: MagicArguments) = 0.0
 
     open fun focusSurface() = true
 
