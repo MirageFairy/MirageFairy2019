@@ -124,7 +124,6 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
 
     open fun focusSurface() = false
 
-    @Suppress("SimplifyBooleanWithConstants")
     open fun canBreak(a: MagicArguments, blockPos: BlockPos) = when {
         !isEffective(a.weaponItemStack, a.world.getBlockState(blockPos)) -> false // 効果的でなければならない
         a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) < 0 -> false // 岩盤であってはならない
