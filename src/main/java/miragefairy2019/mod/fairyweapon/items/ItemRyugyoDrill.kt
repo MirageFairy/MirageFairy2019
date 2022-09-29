@@ -35,7 +35,8 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
     override fun focusSurface() = true
 
     override val maxHardness = status("maxHardness", { 2.0 + !Mana.GAIA / 50.0 + !Erg.DESTROY / 25.0 + !Mastery.mining / 25.0 atMost 20.0 }, { float2 })
-    override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = super.isEffective(itemStack, blockState) || when {
+    override fun isEffective(itemStack: ItemStack, blockState: IBlockState) = when {
+        super.isEffective(itemStack, blockState) -> true
         blockState.block === Blocks.SNOW_LAYER -> true
         blockState.material === Material.IRON -> true
         blockState.material === Material.ANVIL -> true
