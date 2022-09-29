@@ -57,7 +57,7 @@ class ItemMiragiumScythe(private val baseFortune: Double, override var destroySp
 
     val breakSpeed = status("breakSpeed", { 10.0 * costFactor }, { float2 })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })
-    override fun getCoolTimePerHardness(a: MagicArguments) = a.run { 20.0 / (breakSpeed() * speedBoost()) }
+    override fun getCoolTimePerHardness(a: MagicArguments) = 20.0 / (breakSpeed(a) * speedBoost(a))
 
     val fortune = status("fortune", { baseFortune + !Mana.AQUA / 100.0 + !Erg.LIFE / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.agriculture / 100.0 }, { boost })

@@ -56,7 +56,7 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
 
     val breakSpeed = status("breakSpeed", { baseBreakStonesPerTick * 20.0/* tick/sec */ * 2.0/* hardness */ * costFactor }, { float2 })
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
-    override fun getCoolTimePerHardness(a: MagicArguments) = a.run { 20.0 / (breakSpeed() * speedBoost()) }
+    override fun getCoolTimePerHardness(a: MagicArguments) = 20.0 / (breakSpeed(a) * speedBoost(a))
 
     val fortune = status("fortune", { !Mana.SHINE / 50.0 + !Mana.DARK / 100.0 + !Erg.THUNDER / 50.0 }, { float2 })
     val fortuneBoost = status("fortuneBoost", { 1.0 + !Mastery.mining / 100.0 }, { boost })
