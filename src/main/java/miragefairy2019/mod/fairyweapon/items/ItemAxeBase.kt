@@ -24,5 +24,5 @@ class ItemAxeBase : ItemMiragiumToolBase() {
 
     override fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 0.1
 
-    override fun getActualCoolTimePerBlock(a: MagicArguments) = 20.0
+    override fun getCoolTimePerHardness(a: MagicArguments) = 20.0
 }
