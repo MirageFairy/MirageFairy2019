@@ -130,7 +130,9 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
      * このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。
      * 内部で必ず[canBreak]による破壊可能判定を行わなければなりません。
      */
-    abstract fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos): Iterator<BlockPos>
+    open fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos): Iterator<BlockPos> = iterator {
+        if (canBreak(a, blockPosBase)) yield(blockPosBase)
+    }
 
     open fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 1.0
 

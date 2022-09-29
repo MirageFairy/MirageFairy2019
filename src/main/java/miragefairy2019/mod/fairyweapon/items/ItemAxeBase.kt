@@ -1,7 +1,6 @@
 package miragefairy2019.mod.fairyweapon.items
 
 import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
-import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.float2
 import miragefairy2019.mod.fairyweapon.magic4.status
 import net.minecraft.block.state.IBlockState
@@ -15,10 +14,6 @@ class ItemAxeBase : ItemMiragiumToolBase() {
     }
 
     override val maxHardness = status("maxHardness", { 2.0 }, { float2 })
-
-    override fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos) = iterator {
-        if (canBreak(a, blockPosBase)) yield(blockPosBase)
-    }
 
     override fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 0.1
 }
