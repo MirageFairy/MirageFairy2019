@@ -48,7 +48,7 @@ class ItemMiragiumScythe(private val baseFortune: Double, override var destroySp
     val range = status("range", { floor(2.0 + !Mana.WIND / 20.0 + !Erg.HARVEST / 20.0).toInt() atMost 5 }, { integer })
     override fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos) = iterator {
         blockPosBase.region.grow(range(a), 1, range(a)).positions.sortedByDistance(blockPosBase).forEach { blockPos ->
-            if (canBreak(a, blockPos)) yield(blockPos)
+            yield(blockPos)
         }
     }
 

@@ -51,7 +51,13 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
         if (!hasPartnerFairy) return@magic fail(0xFF00FF, MagicMessage.NO_FAIRY) // パートナー妖精判定
         val blockPos = rayTraceMagicSelector.item.rayTraceWrapper.let { if (focusSurface()) it.surfaceBlockPos else it.blockPos }
         if (weaponItemStack.itemDamage + ceil(getDurabilityCost(this, world, blockPos, world.getBlockState(blockPos))).toInt() > weaponItemStack.maxDamage) return@magic fail(0xFF0000, MagicMessage.INSUFFICIENT_DURABILITY) // 耐久判定
-        val targets = iterateTargets(this, blockPos) // 対象判定
+        val targets = iterator {
+            val iterator = iterateTargets(this@magic, blockPos)
+            while (iterator.hasNext()) {
+                val next = iterator.next()
+                if (canBreak(this@magic, next)) yield(next)
+            }
+        } // 対象判定
         if (!targets.hasNext()) return@magic fail(0x00FFFF, MagicMessage.NO_TARGET) // ターゲットなし判定
         if (player.cooldownTracker.hasCooldown(weaponItem)) return@magic fail(0xFFFF00, MagicMessage.COOL_TIME) // クールタイム判定
 
@@ -126,13 +132,8 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
         && isEffective(a.weaponItemStack, a.world.getBlockState(blockPos)) // 効果的でなければならない
         && a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) <= a.maxHardness() // 硬すぎてはいけない
 
-    /**
-     * このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。
-     * 内部で必ず[canBreak]による破壊可能判定を行わなければなりません。
-     */
-    open fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos): Iterator<BlockPos> = iterator {
-        if (canBreak(a, blockPosBase)) yield(blockPosBase)
-    }
+    /** このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。 */
+    open fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos): Iterator<BlockPos> = iterator { yield(blockPosBase) }
 
     open fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 1.0
 

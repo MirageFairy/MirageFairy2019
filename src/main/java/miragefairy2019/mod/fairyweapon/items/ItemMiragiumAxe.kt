@@ -67,7 +67,7 @@ class ItemMiragiumAxe(private val baseSpeed: Double, private val baseRange: Doub
         ) { it, _ -> isLeaves(a.world.getBlockState(it)).toUnitOrNull() }
 
         (leavesResult.reversed() + stemResult.reversed()).blockPoses.forEach { blockPos ->
-            if (canBreak(a, blockPos)) yield(blockPos)
+            yield(blockPos)
         }
 
     }
