@@ -135,7 +135,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
     /** このイテレータは破壊処理中に逐次的に呼び出されるパターンと、破壊前に一括で呼び出されるパターンがあります。 */
     open fun iterateTargets(a: MagicArguments, blockPosBase: BlockPos): Iterator<BlockPos> = iterator { yield(blockPosBase) }
 
-    open fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 1.0
+    open fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 0.1
 
     open fun getActualBlockHardness(world: World, blockPos: BlockPos, blockState: IBlockState) = blockState.getBlockHardness(world, blockPos).toDouble() atLeast 1.0
     open fun getCoolTimePerHardness(a: MagicArguments) = 20.0

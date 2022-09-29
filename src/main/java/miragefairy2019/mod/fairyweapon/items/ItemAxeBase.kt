@@ -14,6 +14,4 @@ class ItemAxeBase : ItemMiragiumToolBase() {
     }
 
     override val maxHardness = status("maxHardness", { 2.0 }, { float2 })
-
-    override fun getDurabilityCost(a: FormulaArguments, world: World, blockPos: BlockPos, blockState: IBlockState) = 0.1
 }
