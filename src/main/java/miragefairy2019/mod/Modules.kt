@@ -4,6 +4,7 @@ import miragefairy2019.jei.jeiModule
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.artifacts.artifactsModule
+import miragefairy2019.mod.aura.auraModule
 import miragefairy2019.mod.beanstalk.beanstalkModule
 import miragefairy2019.mod.fairy.fairyModule
 import miragefairy2019.mod.fairybox.fairyBoxModule
@@ -29,6 +30,7 @@ val modules = module {
     systemsModule()
     recipesModule()
 
+    auraModule()
     playerAuraModule()
     placedItemModule(this)
     skillModule()
