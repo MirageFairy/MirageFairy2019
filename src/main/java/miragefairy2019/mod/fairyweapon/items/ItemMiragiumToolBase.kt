@@ -75,7 +75,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
                 }
 
                 // 行使
-                val coolTimePerHardness = 20.0 / getBreakSpeed(this@magic)
+                val breakSpeed = getBreakSpeed(this@magic)
                 var breakSound: SoundEvent? = null
                 var count = 0
                 var actualCoolTime = 0.0
@@ -88,7 +88,7 @@ abstract class ItemMiragiumToolBase() : ItemFairyWeaponMagic4() {
 
                         // 破壊成立
                         weaponItemStack.damageItem(damage, player)
-                        actualCoolTime += getActualBlockHardness(world, target, blockState) * coolTimePerHardness
+                        actualCoolTime += getActualBlockHardness(world, target, blockState) * 20.0 / breakSpeed
                         breakSound = blockState.block.getSoundType(blockState, world, target, player).breakSound
                         breakBlock(
                             world = world,
