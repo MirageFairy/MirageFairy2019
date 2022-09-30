@@ -23,8 +23,12 @@ import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.get
 import miragefairy2019.libkt.with
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.fairybox.NeighborhoodType
+import miragefairy2019.mod.fairybox.TooLargeBehaviour
+import miragefairy2019.mod.fairybox.UnloadedPositionBehaviour
+import miragefairy2019.mod.fairybox.treeSearch
 import miragefairy2019.mod.fairyweapon.breakBlock
-import miragefairy2019.mod.fairyweapon.search
+import mirrg.kotlin.hydrogen.toUnitOrNull
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.block.BlockLog
 import net.minecraft.block.BlockRotatedPillar
@@ -135,12 +139,21 @@ class ItemBlockFairyWoodLog(block: BlockFairyWoodLog) : ItemBlock(block) {
         val itemStack = player.getHeldItem(hand)
 
         // 木の探索
-        val visited = mutableListOf(blockPos)
-        val logBlockPosList = search(32, visited, listOf(blockPos)) { isLog(world, it) }
+        val logBlockPosList = treeSearch(
+            world,
+            listOf(blockPos),
+            mutableSetOf(),
+            maxDistance = 32,
+            maxSize = 2000,
+            includeZero = true,
+            neighborhoodType = NeighborhoodType.VERTEX,
+            tooLargeBehaviour = TooLargeBehaviour.IGNORE,
+            unloadedPositionBehaviour = UnloadedPositionBehaviour.LOAD
+        ) { it, _ -> isLog(world, it).toUnitOrNull() }
         if (logBlockPosList.isEmpty()) return super.onItemUse(player, world, blockPos, hand, facing, hitX, hitY, hitZ)
 
         // 対象ブロック
-        val targetBlockPos = logBlockPosList.last()
+        val targetBlockPos = logBlockPosList.last().blockPos
         val targetBlockState = world.getBlockState(targetBlockPos)
 
         // 軸方向取得
