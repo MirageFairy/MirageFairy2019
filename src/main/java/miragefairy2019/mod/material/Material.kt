@@ -8,4 +8,5 @@ val materialModule = module {
     Ores.oresModule(this)
     fairyMaterialsModule()
     FluidMaterials.fluidMaterialsModule(this)
+    creativeMaterialsModule()
 }
