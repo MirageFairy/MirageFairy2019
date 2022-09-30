@@ -52,69 +52,6 @@ fun findFairy(fairyWeaponItemStack: ItemStack, player: EntityPlayer): Pair<ItemS
 }
 
 
-// ブロック探索
-
-/** [predicate]にマッチするような[next]の要素のリストを返しつつ、マッチしたものを[result]に追加します。 */
-fun gain(result: MutableList<BlockPos>, next: List<BlockPos>, predicate: (BlockPos) -> Boolean): List<BlockPos> {
-    val next2 = mutableListOf<BlockPos>()
-    next.forEach { blockPos2 ->
-        if (predicate(blockPos2)) {
-            next2 += blockPos2
-            result += blockPos2
-        }
-    }
-    return next2
-}
-
-/** [next]の各要素に隣接する未訪問のブロックのリスト返しつつ、訪問済みにします。 */
-fun extend(visited: MutableList<BlockPos>, next: List<BlockPos>): List<BlockPos> {
-    val next2 = mutableListOf<BlockPos>()
-    next.forEach { blockPos2 ->
-        (-1..1).forEach { x ->
-            (-1..1).forEach { y ->
-                (-1..1).forEach { z ->
-                    val blockPos3 = blockPos2.add(x, y, z)
-                    if (blockPos3 !in visited) {
-                        next2 += blockPos3
-                        visited += blockPos3
-                    }
-                }
-            }
-        }
-    }
-    return next2
-}
-
-/** 最初に[zero]に回収判定を行い、[range]の分だけ幅優先探索を行います。 */
-fun search(range: Int, visited: MutableList<BlockPos>, zero: List<BlockPos>, predicate: (BlockPos) -> Boolean): List<BlockPos> {
-    val result = mutableListOf<BlockPos>()
-    var next = zero
-
-    if (next.isEmpty()) return result
-    next = gain(result, next, predicate)
-    repeat(range) {
-        if (next.isEmpty()) return result
-        next = extend(visited, next)
-        if (next.isEmpty()) return result
-        next = gain(result, next, predicate)
-    }
-    return result
-}
-
-/** 最初に[zero]に回収判定を行わず、[range]の分だけ幅優先探索を行います。 */
-fun extendSearch(range: Int, visited: MutableList<BlockPos>, zero: List<BlockPos>, predicate: (BlockPos) -> Boolean): List<BlockPos> {
-    val result = mutableListOf<BlockPos>()
-    var next = zero
-
-    repeat(range) {
-        if (next.isEmpty()) return result
-        next = extend(visited, next)
-        if (next.isEmpty()) return result
-        next = gain(result, next, predicate)
-    }
-    return result
-}
-
 // TODO var
 fun getFairyAttribute(attributeName: String, itemStack: ItemStack) = itemStack.nbtProvider["Fairy"][attributeName].double ?: 0.0
 fun setFairyAttribute(attributeName: String, itemStack: ItemStack, value: Double) = itemStack.nbtProvider["Fairy"][attributeName].setDouble(value)
