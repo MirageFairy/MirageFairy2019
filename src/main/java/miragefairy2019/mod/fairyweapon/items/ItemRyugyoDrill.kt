@@ -26,7 +26,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import kotlin.math.floor
 
-class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
+class ItemRyugyoDrill(baseBreakStonesPerTick: Double, private val baseMaxHardness: Double) : ItemMiragiumToolBase() {
     init {
         setHarvestLevel("pickaxe", 3)
         setHarvestLevel("shovel", 3)
@@ -45,7 +45,7 @@ class ItemRyugyoDrill(baseBreakStonesPerTick: Double) : ItemMiragiumToolBase() {
         else -> false
     }
 
-    val maxHardness = status("maxHardness", { 2.0 + !Mana.GAIA / 50.0 + !Erg.DESTROY / 25.0 + !Mastery.mining / 25.0 atMost 20.0 }, { float2 })
+    val maxHardness = status("maxHardness", { baseMaxHardness }, { float2 })
     override fun canBreak(a: MagicArguments, blockPos: BlockPos) = when {
         !super.canBreak(a, blockPos) -> false
         a.world.getBlockState(blockPos).getBlockHardness(a.world, blockPos) > maxHardness(a) -> false // 硬すぎてはいけない

@@ -700,7 +700,7 @@ enum class FairyWeaponCard(
     ),
 
     ryugyoDrill(
-        null, "ryugyo_drill", "ryugyoDrill", 4, { ItemRyugyoDrill(1.0) },
+        null, "ryugyo_drill", "ryugyoDrill", 4, { ItemRyugyoDrill(1.0, 10.0) },
         LangPair("Ryugyo Drill", "龍魚ドリル"),
         LangPair("Design Contest Work", "デザインコンテスト武器"),
         LangPair("Yoshinon", "よしのん"),
@@ -728,7 +728,7 @@ enum class FairyWeaponCard(
         }
     ),
     ryugyoDrill2(
-        ryugyoDrill, "ryugyo_drill_2", "ryugyoDrill2", 5, { ItemRyugyoDrill(2.0) },
+        ryugyoDrill, "ryugyo_drill_2", "ryugyoDrill2", 5, { ItemRyugyoDrill(2.0, 50.0) },
         LangPair("Ryugyo Drill II", "龍魚の一撃"),
         LangPair("Design Contest Work", "デザインコンテスト武器（派生作品）"),
         LangPair("Yoshinon", "よしのん（原作者）"),
