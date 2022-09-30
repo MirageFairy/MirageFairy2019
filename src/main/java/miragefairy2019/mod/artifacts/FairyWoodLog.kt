@@ -2,6 +2,9 @@ package miragefairy2019.mod.artifacts
 
 import miragefairy2019.lib.EnumFireSpreadSpeed
 import miragefairy2019.lib.EnumFlammability
+import miragefairy2019.lib.NeighborhoodType
+import miragefairy2019.lib.TooLargeBehaviour
+import miragefairy2019.lib.UnloadedPositionBehaviour
 import miragefairy2019.lib.modinitializer.addOreName
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item
@@ -19,14 +22,11 @@ import miragefairy2019.lib.resourcemaker.DataVariant
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
+import miragefairy2019.lib.treeSearch
 import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.get
 import miragefairy2019.libkt.with
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.fairybox.NeighborhoodType
-import miragefairy2019.mod.fairybox.TooLargeBehaviour
-import miragefairy2019.mod.fairybox.UnloadedPositionBehaviour
-import miragefairy2019.mod.fairybox.treeSearch
 import miragefairy2019.mod.fairyweapon.breakBlock
 import mirrg.kotlin.hydrogen.toUnitOrNull
 import net.minecraft.advancements.CriteriaTriggers

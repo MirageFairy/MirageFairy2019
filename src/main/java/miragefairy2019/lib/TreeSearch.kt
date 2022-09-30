@@ -1,4 +1,4 @@
-package miragefairy2019.mod.fairybox
+package miragefairy2019.lib
 
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World

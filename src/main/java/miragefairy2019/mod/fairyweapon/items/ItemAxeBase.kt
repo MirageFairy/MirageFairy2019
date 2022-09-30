@@ -1,9 +1,9 @@
 package miragefairy2019.mod.fairyweapon.items
 
-import miragefairy2019.mod.fairybox.NeighborhoodType
-import miragefairy2019.mod.fairybox.TooLargeBehaviour
-import miragefairy2019.mod.fairybox.blockPoses
-import miragefairy2019.mod.fairybox.treeSearch
+import miragefairy2019.lib.NeighborhoodType
+import miragefairy2019.lib.TooLargeBehaviour
+import miragefairy2019.lib.blockPoses
+import miragefairy2019.lib.treeSearch
 import miragefairy2019.mod.fairyweapon.magic4.FormulaArguments
 import miragefairy2019.mod.fairyweapon.magic4.MagicArguments
 import miragefairy2019.mod.fairyweapon.magic4.world

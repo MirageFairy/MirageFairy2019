@@ -1,5 +1,8 @@
 package miragefairy2019.mod.fairybox
 
+import miragefairy2019.lib.PartiallyUnloadedTreeSearchException
+import miragefairy2019.lib.TooLargeTreeSearchException
+import miragefairy2019.lib.TreeSearchException
 import miragefairy2019.lib.get
 import miragefairy2019.lib.modinitializer.block
 import miragefairy2019.lib.modinitializer.item

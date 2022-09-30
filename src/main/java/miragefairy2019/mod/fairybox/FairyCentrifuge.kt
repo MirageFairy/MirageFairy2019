@@ -7,6 +7,7 @@ import miragefairy2019.api.IFairyCentrifugeCraftRecipe
 import miragefairy2019.api.Mana
 import miragefairy2019.common.toOreName
 import miragefairy2019.lib.Symbols
+import miragefairy2019.lib.TreeSearchException
 import miragefairy2019.lib.compound
 import miragefairy2019.lib.compoundOrCreate
 import miragefairy2019.lib.displayName
