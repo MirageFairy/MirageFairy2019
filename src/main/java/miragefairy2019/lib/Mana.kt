@@ -51,6 +51,6 @@ operator fun ManaSet.minus(a: ManaSet) = ManaSet(shine - a.shine, fire - a.fire,
 operator fun ManaSet.times(a: Double) = ManaSet(shine * a, fire * a, wind * a, gaia * a, aqua * a, dark * a)
 operator fun ManaSet.div(a: Double) = ManaSet(shine / a, fire / a, wind / a, gaia / a, aqua / a, dark / a)
 
-val ManaSet.max get() = max(shine, max(fire, max(wind, max(gaia, max(aqua, dark)))))
-val ManaSet.sum get() = shine + fire + wind + gaia + aqua + dark
+fun ManaSet.max() = max(shine, max(fire, max(wind, max(gaia, max(aqua, dark)))))
+fun ManaSet.sum() = shine + fire + wind + gaia + aqua + dark
 fun ManaSet.sum(rateShine: Double, rateFire: Double, rateWind: Double, rateGaia: Double, rateAqua: Double, rateDark: Double) = shine * rateShine + fire * rateFire + wind * rateWind + gaia * rateGaia + aqua * rateAqua + dark * rateDark

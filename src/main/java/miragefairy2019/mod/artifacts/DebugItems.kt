@@ -143,7 +143,7 @@ class ItemDebugFairyList : ItemDebug(0xFF0000.toRgb()) {
                         "${if (a1 >= 10) "BGCOLOR(#FDD):" else if (a2 >= 10) "BGCOLOR(#DDF):" else ""}RIGHT:${a1.f3}"
                     },
                     listOf(
-                        "RIGHT:${(fairySpecRank1.manaSet.sum).f3}"
+                        "RIGHT:${(fairySpecRank1.manaSet.sum()).f3}"
                     ),
                     Erg.values().map {
                         val a1 = fairySpecRank1.erg(it)
