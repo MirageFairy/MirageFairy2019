@@ -10,6 +10,18 @@ operator fun ErgSet.get(erg: Erg) = getValue(erg)
 val ErgSet.ergs get() = (0 until size).map { getErg(it) }
 val ErgSet.entries get() = ergs.map { it to this[it] }
 
+operator fun ErgSet.plus(other: ErgSet): ErgSet {
+    val ergSet = this.ergs.toSet() + other.ergs.toSet()
+    return ErgSet(ergSet.associateWith { this[it] + other[it] })
+}
+
+operator fun ErgSet.times(value: Double) = ErgSet(this.ergs.associateWith { this[it] * value })
+operator fun ErgSet.div(value: Double) = ErgSet(this.ergs.associateWith { this[it] / value })
+
+fun ErgSet.sum() = (0 until this.size).sumByDouble { this.getValue(this.getErg(it)) }
+fun ErgSet.max() = (0 until this.size).maxBy { this.getValue(this.getErg(it)) }
+
+
 val Erg.textColor
     get() = when (this) {
         Erg.ATTACK -> TextFormatting.DARK_RED
