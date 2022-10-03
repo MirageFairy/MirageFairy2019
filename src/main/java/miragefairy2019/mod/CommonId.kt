@@ -11,4 +11,5 @@ object PacketId {
     const val skill = 2
     const val trainMastery = 3
     const val resetMastery = 4
+    const val aura = 5
 }
