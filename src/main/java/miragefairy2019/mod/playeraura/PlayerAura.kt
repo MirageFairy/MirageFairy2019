@@ -159,7 +159,7 @@ val playerAuraModule = module {
                         val entityLivingBase = event.entityLiving
                         if (entityLivingBase is EntityPlayerMP) {
                             val playerAuraHandler = ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(entityLivingBase)
-                            playerAuraHandler.onEat(itemStack, item.getHealAmount(itemStack))
+                            playerAuraHandler.onEat(itemStack, if (entityLivingBase.isSneaking) item.getHealAmount(itemStack) else 0)
                             playerAuraHandler.send()
                         }
                     }
@@ -209,12 +209,12 @@ val playerAuraModule = module {
                         player.heldItemMainhand.let next@{
                             val item = it.item as? ItemFood ?: return@next
                             val manaSet = playerAuraHandler.getLocalFoodAura(it) ?: return@result Pair(ManaSet.ZERO, 0)
-                            return@result Pair(manaSet, item.getHealAmount(it))
+                            return@result Pair(manaSet, if (player.isSneaking) item.getHealAmount(it) else 0)
                         }
                         player.heldItemOffhand.let next@{
                             val item = it.item as? ItemFood ?: return@next
                             val manaSet = playerAuraHandler.getLocalFoodAura(it) ?: return@result Pair(ManaSet.ZERO, 0)
-                            return@result Pair(manaSet, item.getHealAmount(it))
+                            return@result Pair(manaSet, if (player.isSneaking) item.getHealAmount(it) else 0)
                         }
                         null
                     } ?: return // 食べ物を持っている場合のみ
