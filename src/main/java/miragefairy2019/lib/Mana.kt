@@ -44,6 +44,8 @@ operator fun ManaSet.get(mana: Mana) = when (mana) {
     Mana.DARK -> dark
 }
 
+val ManaSet.entries get() = listOf(Mana.SHINE, Mana.FIRE, Mana.WIND, Mana.GAIA, Mana.AQUA, Mana.DARK).map { it to this[it] }
+
 operator fun ManaSet.plus(a: ManaSet) = ManaSet(shine + a.shine, fire + a.fire, wind + a.wind, gaia + a.gaia, aqua + a.aqua, dark + a.dark)
 operator fun ManaSet.minus(a: ManaSet) = ManaSet(shine - a.shine, fire - a.fire, wind - a.wind, gaia - a.gaia, aqua - a.aqua, dark - a.dark)
 operator fun ManaSet.times(a: Double) = ManaSet(shine * a, fire * a, wind * a, gaia * a, aqua * a, dark * a)
