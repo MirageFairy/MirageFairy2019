@@ -132,22 +132,20 @@ val fairyCrystalDropLoaderModule = module {
         // レア枠
         DropCategory.RARE {
 
-            fun IDrop.world(predicate: World.(BlockPos) -> Boolean) = this.register a@{
-                predicate(world ?: return@a false, (pos ?: return@a false).offset(facing ?: return@a false))
-            }
+            fun FairyCrystalDropEnvironment.world(predicate: World.(BlockPos) -> Boolean) = run { predicate(world ?: return false, (pos ?: return false).offset(facing ?: return false)) }
 
-            FairyCard.THUNDER(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) && isThundering }
-            FairyCard.SUN(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && time(6000, 18000) && !isRainingAt(it) }
-            FairyCard.MOON(0.0001).world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) }
-            FairyCard.STAR(0.0003).world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) }
+            FairyCard.THUNDER(0.01).register { world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) && isThundering } }
+            FairyCard.SUN(0.0001).register { world { provider.isSurfaceWorld && canSeeSky(it) && time(6000, 18000) && !isRainingAt(it) } }
+            FairyCard.MOON(0.0001).register { world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) } }
+            FairyCard.STAR(0.0003).register { world { provider.isSurfaceWorld && canSeeSky(it) && (time(19000, 24000) || time(0, 5000)) && !isRainingAt(it) } }
 
-            FairyCard.DAYTIME(0.001).world { time(6000, 18000) }
-            FairyCard.NIGHT(0.001).world { time(19000, 24000) || time(0, 5000) }
-            FairyCard.MORNING(0.001).world { time(5000, 9000) }
-            FairyCard.SUNRISE(0.001).world { time(5000, 6000) }
+            FairyCard.DAYTIME(0.001).register { world { time(6000, 18000) } }
+            FairyCard.NIGHT(0.001).register { world { time(19000, 24000) || time(0, 5000) } }
+            FairyCard.MORNING(0.001).register { world { time(5000, 9000) } }
+            FairyCard.SUNRISE(0.001).register { world { time(5000, 6000) } }
 
-            FairyCard.FINE(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) }
-            FairyCard.RAIN(0.01).world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) }
+            FairyCard.FINE(0.01).register { world { provider.isSurfaceWorld && canSeeSky(it) && !isRainingAt(it) } }
+            FairyCard.RAIN(0.01).register { world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) } }
 
             FairyCard.AUTUMN(0.001).register { LocalDateTime.now(ZoneOffset.UTC).monthValue in 8..12 }
 
