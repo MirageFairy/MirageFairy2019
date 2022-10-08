@@ -156,14 +156,6 @@ val fairyCrystalDropLoaderModule = module {
         // TODO イベントが終了したら削除
         DropCategory.RARE {
 
-            FairyCard.AVALON(0.00001).register {
-                LocalDateTime.now(ZoneOffset.UTC) < LocalDateTime.of(2022, 10, 1, 0, 0, 0)
-            }
-            FairyCard.AVALON(0.00001).register {
-                LocalDateTime.now(ZoneOffset.UTC) < LocalDateTime.of(2022, 10, 1, 0, 0, 0) &&
-                    BiomeDictionary.Type.MUSHROOM in this.biomeTypes
-            }
-
         }
 
 
