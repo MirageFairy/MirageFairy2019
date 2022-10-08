@@ -39,7 +39,10 @@ val fairyCrystalDropLoaderModule = module {
             fun IDrop.nether() = this.register { BiomeDictionary.Type.NETHER in biomeTypes }
             fun IDrop.end() = this.register { BiomeDictionary.Type.END in biomeTypes }
 
+
             // 地上
+
+            FairyCard.AIR().overworld()
             FairyCard.WATER().overworld()
             FairyCard.STONE().overworld()
             FairyCard.DIRT().overworld()
@@ -103,6 +106,9 @@ val fairyCrystalDropLoaderModule = module {
 
 
             // ネザー
+
+            FairyCard.AIR().nether()
+
             FairyCard.LAVA().nether()
             FairyCard.FIRE().nether()
 
@@ -116,6 +122,8 @@ val fairyCrystalDropLoaderModule = module {
 
 
             // エンド
+
+            FairyCard.AIR().end()
             FairyCard.ENDERMAN().end()
             FairyCard.ENDER_DRAGON().end()
             FairyCard.SHULKER().end()
