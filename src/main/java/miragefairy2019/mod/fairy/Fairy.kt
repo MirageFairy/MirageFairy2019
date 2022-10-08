@@ -55,7 +55,7 @@ fun EntityPlayer.obtainFairy(fairyCard: FairyCard, count: Int) {
     var rank = 1
 
     // まだ上がある間
-    while (rank < rankMax) {
+    while (rank < maxRank) {
         this.obtain(fairyCard.createItemStack(rank = rank, count = remainingCount % 8)) // そのランクの妖精を余りの分だけ排出
         remainingCount /= 8 // スケールダウン
         rank++
@@ -66,7 +66,7 @@ fun EntityPlayer.obtainFairy(fairyCard: FairyCard, count: Int) {
 
 }
 
-private val rankMax get() = listItemFairy.size
+val maxRank get() = listItemFairy.size
 
 lateinit var creativeTabFairyMotif: CreativeTabs
 lateinit var creativeTabFairyRank: CreativeTabs
