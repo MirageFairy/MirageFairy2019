@@ -20,6 +20,7 @@ import miragefairy2019.libkt.contains
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.formattedText
+import miragefairy2019.libkt.shrink
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.withColor
 import miragefairy2019.mod.fairy.FairyCard
@@ -79,7 +80,7 @@ class PluginErgResistance : IModPlugin {
                 }
 
                 override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) = drawListeners.forEach { it(minecraft) }
-                override fun getTooltipStrings(mouseX: Int, mouseY: Int) = tooltipListeners.filter { PointInt(mouseX, mouseY) in it.first }.flatMap { it.second() }
+                override fun getTooltipStrings(mouseX: Int, mouseY: Int) = tooltipListeners.filter { PointInt(mouseX, mouseY) in it.first.shrink(0, 0, 1, 1) }.flatMap { it.second() }
             }
         }, uid)
     }
