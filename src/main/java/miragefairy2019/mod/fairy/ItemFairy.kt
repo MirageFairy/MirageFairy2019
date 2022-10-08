@@ -9,7 +9,6 @@ import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.IColoredItem
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.entries
-import miragefairy2019.lib.get
 import miragefairy2019.lib.mana
 import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.ItemMulti
@@ -31,7 +30,6 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.libkt.white
 import miragefairy2019.libkt.withColor
-import mirrg.kotlin.hydrogen.floorToInt
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
@@ -147,19 +145,19 @@ class ItemFairy(val dressColor: Int) : ItemMulti<VariantFairy>(), IColoredItem, 
         // エルグ
         run {
             val ergTexts = variant.ergSet.entries
-                .filter { if (flag.isAdvanced) formatInt(it.second) > 0.0 else formatInt(it.second) >= 10.0 }
+                .filter { formatInt(it.second) >= 10.0 }
                 .sortedByDescending { it.second }
-                .chunked(if (flag.isAdvanced) 4 else 5)
+                .chunked(4)
                 .map { entryList ->
                     entryList
                         .map {
                             if (flag.isAdvanced) {
-                                it.first.displayName() + TextComponentScope.format(" %d/%d", it.second.floorToInt(), variant.fairyCard.rawErgSet[it.first].floorToInt())
+                                it.first.displayName() + TextComponentScope.format(" %.1f", it.second)
                             } else {
                                 it.first.displayName()
                             }
                         }
-                        .sandwich { ", "() }
+                        .sandwich { if (flag.isAdvanced) "  "() else " "() }
                         .flatten()
                 }
             ergTexts.forEachIndexed { i, ergText ->
