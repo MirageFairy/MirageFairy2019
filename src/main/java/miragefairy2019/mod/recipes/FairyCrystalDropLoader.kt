@@ -99,6 +99,7 @@ val fairyCrystalDropLoaderModule = module {
             FairyCard.SUGAR_CANE().overworld()
             FairyCard.POTATO().overworld()
             FairyCard.PEONY().overworld()
+            FairyCard.PUMPKIN().overworld()
 
 
             // ネザー
@@ -110,6 +111,8 @@ val fairyCrystalDropLoaderModule = module {
 
             FairyCard.MAGMA_CUBE().nether()
             FairyCard.BLAZE().nether()
+
+            FairyCard.NETHER_WART().nether()
 
 
             // エンド

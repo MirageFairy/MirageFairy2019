@@ -7,8 +7,8 @@ import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.magicplant.blockMandrake
 import miragefairy2019.mod.magicplant.blockMirageFlower
 import miragefairy2019.mod.magicplant.blockVelopeda
-import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.CompressedMaterialCard
+import miragefairy2019.mod.material.CompressedMaterials
 import net.minecraft.block.Block
 import net.minecraft.block.BlockDoublePlant
 import net.minecraft.block.BlockOldLeaf
@@ -220,6 +220,10 @@ val fairyRelationModule = module {
     FairyCard.SALMON.register(relevance = 2.0) { ingredient({ Ingredient.fromStacks(ItemStack(Items.FISH, 1, 1)) }) }
     FairyCard.PUFFERFISH.register(relevance = 2.0) { ingredient({ Ingredient.fromStacks(ItemStack(Items.FISH, 1, 3)) }) }
     FairyCard.CLOWNFISH.register(relevance = 2.0) { ingredient({ Ingredient.fromStacks(ItemStack(Items.FISH, 1, 2)) }) }
+    FairyCard.RAW_PORKCHOP.register { item({ Items.PORKCHOP }) }
+    FairyCard.RAW_BEEF.register { item({ Items.BEEF }) }
+    FairyCard.RAW_CHICKEN.register { item({ Items.CHICKEN }) }
+    FairyCard.RAW_MUTTON.register { item({ Items.MUTTON }) }
 
     // 植物
     FairyCard.CHORUS_FRUIT.register { item({ Items.CHORUS_FRUIT }) }
@@ -266,6 +270,10 @@ val fairyRelationModule = module {
     FairyCard.SUGAR_CANE.register { item({ Items.REEDS }) }
     FairyCard.POTATO.register { block({ Blocks.POTATOES }) }
     FairyCard.POTATO.register { item({ Items.POTATO }) }
+    FairyCard.NETHER_WART.register { block({ Blocks.NETHER_WART }) }
+    FairyCard.NETHER_WART.register { item({ Items.NETHER_WART }) }
+    FairyCard.PUMPKIN.register { block({ Blocks.PUMPKIN }) }
+    FairyCard.PUMPKIN.register(relevance = 0.5) { block({ Blocks.PUMPKIN_STEM }) }
 
     // 料理
     FairyCard.BREAD.register { item({ Items.BREAD }) }
@@ -286,6 +294,7 @@ val fairyRelationModule = module {
     FairyCard.MUSHROOM_STEW.register { item({ Items.MUSHROOM_STEW }) }
     FairyCard.GOLDEN_APPLE.register { ingredient({ Ingredient.fromStacks(ItemStack(Items.GOLDEN_APPLE, 1, 0)) }) }
     FairyCard.ENCHANTED_GOLDEN_APPLE.register { ingredient({ Ingredient.fromStacks(ItemStack(Items.GOLDEN_APPLE, 1, 1)) }) }
+    FairyCard.GOLDEN_CARROT.register { item({ Items.GOLDEN_CARROT }) }
 
     // 素材
     FairyCard.SUGAR.register { item({ Items.SUGAR }) }
@@ -324,6 +333,8 @@ val fairyRelationModule = module {
     FairyCard.TRINITROTOLUENE.register { block({ Blocks.TNT }) }
     FairyCard.NETHER_PORTAL.register { block({ Blocks.PORTAL }) }
     FairyCard.BUTTON.register { block({ Blocks.WOODEN_BUTTON }) }
+    FairyCard.JACK_OLANTERN.register { block({ Blocks.LIT_PUMPKIN }) }
+    FairyCard.BEACON.register { block({ Blocks.BEACON }) }
 
     // ツール
     FairyCard.AXE.register { item({ Items.WOODEN_AXE }, { Items.STONE_AXE }, { Items.IRON_AXE }, { Items.GOLDEN_AXE }, { Items.DIAMOND_AXE }) }
