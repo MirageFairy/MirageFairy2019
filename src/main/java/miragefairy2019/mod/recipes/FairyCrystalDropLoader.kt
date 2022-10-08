@@ -135,6 +135,10 @@ val fairyCrystalDropLoaderModule = module {
         DropCategory.FIXED {
 
             FairyCard.AIR(1.0).register { true }
+
+        }
+        DropCategory.RARE {
+
             FairyCard.TIME(0.0001).register { true }
             FairyCard.GRAVITY(0.0001).register { true }
 
