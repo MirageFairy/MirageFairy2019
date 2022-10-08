@@ -1,6 +1,7 @@
 package miragefairy2019.mod.recipes
 
 import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.fairyrelation.FairyRelationEntry
 import miragefairy2019.mod.fairyrelation.FairyRelationRegistries
@@ -11,6 +12,7 @@ import miragefairy2019.mod.systems.FairyCrystalDrop
 import miragefairy2019.mod.systems.FairyCrystalDropEnvironment
 import miragefairy2019.mod.systems.IDrop
 import mirrg.kotlin.hydrogen.or
+import net.minecraft.init.Items
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.BiomeDictionary
@@ -169,7 +171,26 @@ val fairyCrystalDropLoaderModule = module {
         }
 
         // TODO イベントが終了したら削除
-        DropCategory.RARE {
+        run {
+
+            fun FairyCrystalDropEnvironment.world(predicate: World.(BlockPos) -> Boolean) = run { predicate(world ?: return false, (pos ?: return false).offset(facing ?: return false)) }
+
+            @Suppress("unused")
+            fun FairyCrystalDropEnvironment.event11() = LocalDateTime.now(ZoneOffset.UTC) < LocalDateTime.of(2022, 12, 1, 0, 0, 0)
+
+
+            DropCategory.EVENT {
+                FairyCard.THUNDERSTORM(0.00001).register { event11() }
+                FairyCard.THUNDERSTORM(0.00001).register { event11() && world { provider.isSurfaceWorld && canSeeSky(it) && isRainingAt(it) } }
+            }
+            DropCategory.EVENT {
+                FairyCard.DARK_CHOCOLATE(0.00001).register { event11() }
+                FairyCard.DARK_CHOCOLATE(0.00001).register { event11() && Items.COOKIE in items }
+            }
+            DropCategory.EVENT {
+                FairyCard.IMPERIAL_TOPAZ(0.00001).register { event11() }
+                FairyCard.IMPERIAL_TOPAZ(0.00001).register { event11() && itemStacks.any { "gemTopaz".oreIngredient.test(it) } }
+            }
 
         }
 
