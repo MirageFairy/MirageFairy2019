@@ -441,6 +441,15 @@ enum class FairyMaterialCard(
                     result = DataResult(item = "miragefairy2019:fairy_materials", data = 14)
                 )
             }
+            makeRecipe("mirage_fairy_leather_from_mirage_fairy_varnish") {
+                DataShapelessRecipe(
+                    ingredients = listOf(
+                        DataOreIngredient(ore = "leather"),
+                        DataOreIngredient(ore = "container250MirageFairyVarnish")
+                    ),
+                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 14)
+                )
+            }
 
             // エリトラ
             makeRecipe("elytra_from_mirage_fairy_leather") {
