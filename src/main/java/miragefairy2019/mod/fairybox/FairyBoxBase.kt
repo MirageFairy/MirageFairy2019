@@ -5,6 +5,7 @@ import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.translateToLocal
+import mirrg.kotlin.hydrogen.atMost
 import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.SoundType
@@ -159,12 +160,12 @@ abstract class TileEntityFairyBoxBase : TileEntityIgnoreBlockState(), ITickable 
 
         // 平均して1分に1回行動する
         val interval = 20 * 60
-        if (tick < 0) tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
+        if (tick < 0) tick = randomSkipTicks(world.rand, 1 / interval.toDouble()) atMost 20 * 60 * 10
         if (tick != 0) {
             tick--
             return
         } else {
-            tick = randomSkipTicks(world.rand, 1 / interval.toDouble())
+            tick = randomSkipTicks(world.rand, 1 / interval.toDouble()) atMost 20 * 60 * 10
         }
 
         getExecutor().onUpdateTick()
