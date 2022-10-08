@@ -30,7 +30,7 @@ object FairyCrystalDrop {
 }
 
 
-enum class DropCategory { FIXED, COMMON, RARE }
+enum class DropCategory { FIXED, COMMON, RARE, EVENT }
 
 
 class FairyCrystalDropEnvironment(
@@ -98,23 +98,49 @@ fun FairyCrystalDropEnvironment.insertEntities(world: World, center: Vec3d, radi
 
 /** このメソッドはサーバーワールドのスレッドからしか呼び出せません。 */
 fun FairyCrystalDropEnvironment.getDropTable(rank: Int, commonBoost: Double, rareBoost: Double): List<WeightedItem<ItemStack>> {
-    val dropTable = FairyCrystalDrop.dropHandlers
-        .filter { it.predicate(this) }
-        .map {
-            val boost = when (it.drop.dropCategory) {
-                DropCategory.COMMON -> commonBoost
-                DropCategory.RARE -> rareBoost
-                else -> 1.0
-            }
-            WeightedItem(it.drop.getItemStack(rank), it.drop.weight * boost)
+
+    // 判定
+    val drops = FairyCrystalDrop.dropHandlers.filter { it.predicate(this) }.map { it.drop }
+
+    // 分類
+    val eventTable = mutableListOf<WeightedItem<ItemStack>>()
+    val rareTable = mutableListOf<WeightedItem<ItemStack>>()
+    val commonTable = mutableListOf<WeightedItem<ItemStack>>()
+    val fixedTable = mutableListOf<WeightedItem<ItemStack>>()
+    drops.forEach {
+        when (it.dropCategory) {
+            DropCategory.EVENT -> eventTable += WeightedItem(it.getItemStack(rank), it.weight * rareBoost)
+            DropCategory.RARE -> rareTable += WeightedItem(it.getItemStack(rank), it.weight * rareBoost)
+            DropCategory.COMMON -> commonTable += WeightedItem(it.getItemStack(rank), it.weight * commonBoost)
+            DropCategory.FIXED -> fixedTable += WeightedItem(it.getItemStack(rank), it.weight * 1.0)
         }
-        .unique { a, b -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b) }
-    val totalWeight = dropTable.totalWeight
-    return if (totalWeight < 1) {// 1に満たない場合はairを入れて詰める
-        dropTable + WeightedItem(FairyCard.AIR.createItemStack(), 1 - totalWeight)
-    } else {
-        dropTable
     }
+
+    // 合算
+    val outputTable = mutableListOf<WeightedItem<ItemStack>>()
+    var consumedChance = 0.0
+    fun add(inputTable: List<WeightedItem<ItemStack>>): Boolean {
+        val totalWeight = inputTable.totalWeight
+        if (totalWeight >= 1.0 - consumedChance) { // あふれた
+            val rate = (1.0 - consumedChance) / totalWeight
+            inputTable.forEach {
+                outputTable += WeightedItem(it.item, it.weight * rate)
+            }
+            return true
+        } else { // まだ入る
+            inputTable.forEach {
+                outputTable += it
+            }
+            consumedChance += totalWeight
+            return false
+        }
+    }
+    if (add(eventTable)) return outputTable.unique { a, b -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b) }
+    if (add(rareTable)) return outputTable.unique { a, b -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b) }
+    if (add(commonTable)) return outputTable.unique { a, b -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b) }
+    if (add(fixedTable)) return outputTable.unique { a, b -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b) }
+    if (add(listOf(WeightedItem(FairyCard.AIR.createItemStack(rank = rank), 1.0)))) return outputTable.unique { a, b -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b) }
+    return outputTable.unique { a, b -> ItemStack.areItemStacksEqualUsingNBTShareTag(a, b) }
 }
 
 
