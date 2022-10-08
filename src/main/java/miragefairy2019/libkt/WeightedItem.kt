@@ -1,8 +1,11 @@
 package miragefairy2019.libkt
 
+import mirrg.kotlin.hydrogen.formatAs
 import java.util.Random
 
-class WeightedItem<out T : Any>(val item: T, val weight: Double)
+class WeightedItem<out T : Any>(val item: T, val weight: Double) {
+    override fun toString() = "${weight formatAs "%.4f"} x $item"
+}
 
 fun <T : Any> List<WeightedItem<T>>.getRandomItem(random: Random) = getItem(random.nextDouble())
 
