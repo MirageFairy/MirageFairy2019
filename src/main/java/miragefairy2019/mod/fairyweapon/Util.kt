@@ -36,10 +36,15 @@ import net.minecraftforge.common.IShearable
 /** メインハンド、オフハンド、最下段のインベントリスロット、最下段以外のインベントリスロットの順に所持アイテムを返します。 */
 val EntityPlayer.inventoryItems get() = listOf(getHeldItem(EnumHand.MAIN_HAND), getHeldItem(EnumHand.OFF_HAND)) + inventory.itemStacks
 
-fun findItem(player: EntityPlayer, predicate: (ItemStack) -> Boolean) = player.inventoryItems.find(predicate)
+fun findAllItems(player: EntityPlayer, predicate: (ItemStack) -> Boolean): List<ItemStack> = player.inventoryItems.filter(predicate)
 
 /** アイテム、メタ、タグを考慮します。 */
-fun findItem(player: EntityPlayer, itemStackTarget: ItemStack) = findItem(player) { itemStackTarget.equalsItemDamageTag(it) }
+fun findAllItems(player: EntityPlayer, itemStackTarget: ItemStack) = findAllItems(player) { itemStackTarget equalsItemDamageTag it }
+
+fun findItem(player: EntityPlayer, predicate: (ItemStack) -> Boolean): ItemStack? = player.inventoryItems.find(predicate)
+
+/** アイテム、メタ、タグを考慮します。 */
+fun findItem(player: EntityPlayer, itemStackTarget: ItemStack) = findItem(player) { itemStackTarget equalsItemDamageTag it }
 
 /** 搭乗中の妖精を優先します。 */
 fun findFairy(fairyWeaponItemStack: ItemStack, player: EntityPlayer): Pair<ItemStack, IFairySpec>? {
