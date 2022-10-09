@@ -157,14 +157,14 @@ val miniaRecipeModule = module {
     b(7, 1, "skill_point_reset_potion", DataOreIngredient(ore = "nuggetGold"), DataResult(item = "miragefairy2019:potion", data = PotionCard.SKILL_POINT_RESET_POTION.metadata)) // SP還元ポーション
 
     // 妖精
-    f(7, 1, "dark_chocolate_fairy", DataSimpleIngredient(item = "minecraft:cookie"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.DARK_CHOCOLATE.id))
-    f(7, 2, "cupid_fairy", DataSimpleIngredient(item = "minecraft:bow"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.CUPID.id))
-    f(7, 2, "santa_claus_fairy", DataSimpleIngredient(item = "minecraft:sapling", data = 1), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.SANTA_CLAUS.id))
     f(7, 1, "hatsuyume_fairy", DataSimpleIngredient(item = "minecraft:bed", data = 0), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.HATSUYUME.id))
+    f(7, 1, "dark_chocolate_fairy", DataSimpleIngredient(item = "minecraft:cookie"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.DARK_CHOCOLATE.id))
+    f(6, 2, "diamond_dust_fairy", DataOreIngredient(ore = "gemDiamond"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.DIAMOND_DUST.id))
+    f(7, 1, "red_spinel_fairy", DataOreIngredient(ore = "dustRedstone"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.RED_SPINEL.id))
+    f(7, 2, "cupid_fairy", DataSimpleIngredient(item = "minecraft:bow"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.CUPID.id))
     f(7, 1, "imperial_topaz_fairy", DataOreIngredient(ore = "gemTopaz"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.IMPERIAL_TOPAZ.id))
     f(6, 4, "christmas_fairy", DataSimpleIngredient(item = "minecraft:sapling", data = 1), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.CHRISTMAS.id))
-    f(7, 1, "red_spinel_fairy", DataOreIngredient(ore = "dustRedstone"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.RED_SPINEL.id))
-    f(6, 2, "diamond_dust_fairy", DataOreIngredient(ore = "gemDiamond"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.DIAMOND_DUST.id))
+    f(7, 2, "santa_claus_fairy", DataSimpleIngredient(item = "minecraft:sapling", data = 1), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.SANTA_CLAUS.id))
     // avalon
 
 }
