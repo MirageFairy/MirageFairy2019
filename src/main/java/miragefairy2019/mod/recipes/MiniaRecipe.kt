@@ -55,7 +55,7 @@ val miniaRecipeModule = module {
     onMakeLang { enJa("item.apostleStick.name", "Apostle Stick", "使徒のステッキ") }
 
 
-    fun register(name: String, input: DataIngredient, output: DataResult, inputRank: Int, count: Int) = makeRecipe("minia/$name") {
+    fun r(inputRank: Int, count: Int, name: String, input: DataIngredient, output: DataResult) = makeRecipe("minia/$name") {
         DataShapelessRecipe(
             ingredients = listOf(
                 DataOreIngredient(ore = "mirageFairyApostleStick"),
@@ -66,7 +66,7 @@ val miniaRecipeModule = module {
         )
     }
 
-    fun registerWithBottle(name: String, input: DataIngredient, output: DataResult, inputRank: Int, count: Int) = makeRecipe("minia/$name") {
+    fun b(inputRank: Int, count: Int, name: String, input: DataIngredient, output: DataResult) = makeRecipe("minia/$name") {
         DataShapelessRecipe(
             ingredients = listOf(
                 DataOreIngredient(ore = "mirageFairyApostleStick"),
@@ -78,25 +78,25 @@ val miniaRecipeModule = module {
         )
     }
 
-    register("cobblestone", DataOreIngredient(ore = "cobblestone"), DataResult(item = "minecraft:cobblestone", data = null, count = 2), 2, 1) // 丸石
-    register("coal_ore", DataOreIngredient(ore = "oreCoal"), DataResult(item = "minecraft:coal_ore", data = null, count = 2), 3, 1) // 石炭
-    register("iron_ore", DataOreIngredient(ore = "oreIron"), DataResult(item = "minecraft:iron_ore", data = null, count = 2), 3, 1) // 鉄
-    register("gold_ore", DataOreIngredient(ore = "oreGold"), DataResult(item = "minecraft:gold_ore", data = null, count = 2), 3, 4) // 金
-    register("redstone_ore", DataOreIngredient(ore = "oreRedstone"), DataResult(item = "minecraft:redstone_ore", data = null, count = 2), 3, 2) // 赤石
-    register("lapis_ore", DataOreIngredient(ore = "oreLapis"), DataResult(item = "minecraft:lapis_ore", data = null, count = 2), 4, 2) // ラピスラズリ
-    register("emerald_ore", DataOreIngredient(ore = "oreEmerald"), DataResult(item = "minecraft:emerald_ore", data = null, count = 2), 4, 1) // エメラルド
-    register("diamond_ore", DataOreIngredient(ore = "oreDiamond"), DataResult(item = "minecraft:diamond_ore", data = null, count = 2), 4, 4) // ダイヤモンド
-    register("quartz_ore", DataOreIngredient(ore = "oreQuartz"), DataResult(item = "minecraft:quartz_ore", data = null, count = 2), 4, 1) // ネザークォーツ
-    register("magnetite_ore", DataOreIngredient(ore = "oreMagnetite"), DataResult(item = "miragefairy2019:ore1", data = 5, count = 2), 4, 1) // 磁鉄鉱
-    register("sulfur_ore", DataOreIngredient(ore = "oreSulfur"), DataResult(item = "miragefairy2019:ore1", data = 2, count = 2), 4, 1) // 硫黄
-    register("apatite_ore", DataOreIngredient(ore = "oreApatite"), DataResult(item = "miragefairy2019:ore1", data = 0, count = 2), 4, 1) // 燐灰石
-    register("cinnabar_ore", DataOreIngredient(ore = "oreCinnabar"), DataResult(item = "miragefairy2019:ore1", data = 3, count = 2), 4, 1) // 辰砂
-    register("fluorite_ore", DataOreIngredient(ore = "oreFluorite"), DataResult(item = "miragefairy2019:ore1", data = 1, count = 2), 4, 1) // 蛍石
-    register("moonstone_ore", DataOreIngredient(ore = "oreMoonstone"), DataResult(item = "miragefairy2019:ore1", data = 4, count = 2), 4, 2) // 月長石
-    register("log", DataOreIngredient(ore = "logWood"), DataResult(item = "minecraft:log", data = 0, count = 2), 3, 2) // 原木
-    register("glowstone", DataOreIngredient(ore = "glowstone"), DataResult(item = "minecraft:glowstone", count = 2), 4, 1) // グロウストーン
-    registerWithBottle("poison_juice", DataSimpleIngredient(item = "minecraft:rotten_flesh"), DataResult(item = "miragefairy2019:potion", data = PotionCard.POISON_JUICE.metadata), 3, 1) // SP還元ポーション
-    registerWithBottle("skill_point_reset_potion", DataOreIngredient(ore = "nuggetGold"), DataResult(item = "miragefairy2019:potion", data = PotionCard.SKILL_POINT_RESET_POTION.metadata), 7, 1) // SP還元ポーション
+    r(2, 1, "cobblestone", DataOreIngredient(ore = "cobblestone"), DataResult(item = "minecraft:cobblestone", data = null, count = 2)) // 丸石
+    r(3, 1, "coal_ore", DataOreIngredient(ore = "oreCoal"), DataResult(item = "minecraft:coal_ore", data = null, count = 2)) // 石炭
+    r(3, 1, "iron_ore", DataOreIngredient(ore = "oreIron"), DataResult(item = "minecraft:iron_ore", data = null, count = 2)) // 鉄
+    r(3, 4, "gold_ore", DataOreIngredient(ore = "oreGold"), DataResult(item = "minecraft:gold_ore", data = null, count = 2)) // 金
+    r(3, 2, "redstone_ore", DataOreIngredient(ore = "oreRedstone"), DataResult(item = "minecraft:redstone_ore", data = null, count = 2)) // 赤石
+    r(4, 2, "lapis_ore", DataOreIngredient(ore = "oreLapis"), DataResult(item = "minecraft:lapis_ore", data = null, count = 2)) // ラピスラズリ
+    r(4, 1, "emerald_ore", DataOreIngredient(ore = "oreEmerald"), DataResult(item = "minecraft:emerald_ore", data = null, count = 2)) // エメラルド
+    r(4, 4, "diamond_ore", DataOreIngredient(ore = "oreDiamond"), DataResult(item = "minecraft:diamond_ore", data = null, count = 2)) // ダイヤモンド
+    r(4, 1, "quartz_ore", DataOreIngredient(ore = "oreQuartz"), DataResult(item = "minecraft:quartz_ore", data = null, count = 2)) // ネザークォーツ
+    r(4, 1, "magnetite_ore", DataOreIngredient(ore = "oreMagnetite"), DataResult(item = "miragefairy2019:ore1", data = 5, count = 2)) // 磁鉄鉱
+    r(4, 1, "sulfur_ore", DataOreIngredient(ore = "oreSulfur"), DataResult(item = "miragefairy2019:ore1", data = 2, count = 2)) // 硫黄
+    r(4, 1, "apatite_ore", DataOreIngredient(ore = "oreApatite"), DataResult(item = "miragefairy2019:ore1", data = 0, count = 2)) // 燐灰石
+    r(4, 1, "cinnabar_ore", DataOreIngredient(ore = "oreCinnabar"), DataResult(item = "miragefairy2019:ore1", data = 3, count = 2)) // 辰砂
+    r(4, 1, "fluorite_ore", DataOreIngredient(ore = "oreFluorite"), DataResult(item = "miragefairy2019:ore1", data = 1, count = 2)) // 蛍石
+    r(4, 2, "moonstone_ore", DataOreIngredient(ore = "oreMoonstone"), DataResult(item = "miragefairy2019:ore1", data = 4, count = 2)) // 月長石
+    r(3, 2, "log", DataOreIngredient(ore = "logWood"), DataResult(item = "minecraft:log", data = 0, count = 2)) // 原木
+    r(4, 1, "glowstone", DataOreIngredient(ore = "glowstone"), DataResult(item = "minecraft:glowstone", count = 2)) // グロウストーン
+    b(3, 1, "poison_juice", DataSimpleIngredient(item = "minecraft:rotten_flesh"), DataResult(item = "miragefairy2019:potion", data = PotionCard.POISON_JUICE.metadata)) // SP還元ポーション
+    b(7, 1, "skill_point_reset_potion", DataOreIngredient(ore = "nuggetGold"), DataResult(item = "miragefairy2019:potion", data = PotionCard.SKILL_POINT_RESET_POTION.metadata)) // SP還元ポーション
 
 }
 
