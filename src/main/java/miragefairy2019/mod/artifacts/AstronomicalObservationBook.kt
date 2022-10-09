@@ -132,7 +132,7 @@ class ItemAstronomicalObservationBook : Item() {
     }
 
     override fun getItemUseAction(stack: ItemStack) = EnumAction.BOW
-    override fun getMaxItemUseDuration(itemStack: ItemStack) = 100
+    override fun getMaxItemUseDuration(itemStack: ItemStack) = 50
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
 
         // 視線判定
@@ -187,9 +187,6 @@ class ItemAstronomicalObservationBook : Item() {
         if (!player.world.isRemote) {
             if (player is EntityPlayer) {
                 when (count) {
-                    100 -> player.sendStatusMessage(textComponent { ">>> 5 <<<"().darkPurple }, true)
-                    80 -> player.sendStatusMessage(textComponent { ">>> 4 <<<"().darkPurple }, true)
-                    60 -> player.sendStatusMessage(textComponent { ">>> 3 <<<"().darkPurple }, true)
                     40 -> player.sendStatusMessage(textComponent { ">>> 2 <<<"().darkPurple }, true)
                     20 -> player.sendStatusMessage(textComponent { ">>> 1 <<<"().darkPurple }, true)
                 }
