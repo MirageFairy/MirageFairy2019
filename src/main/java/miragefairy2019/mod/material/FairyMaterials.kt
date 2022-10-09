@@ -948,6 +948,22 @@ val fairyMaterialsModule = module {
         )
     }
 
+    // 情緒体反射材から妖精の木の棒
+    makeRecipe("mirage_fairy_wood_stick_from_mirage_fairy_varnish") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "sss",
+                "svs",
+                "sss"
+            ),
+            key = mapOf(
+                "s" to DataOreIngredient(ore = "stickWood"),
+                "v" to DataOreIngredient(ore = "container250MirageFairyVarnish")
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = FairyMaterialCard.MIRAGE_FAIRY_WOOD_STICK.metadata, count = 8)
+        )
+    }
+
     // 情緒体反射材から妖精の革
     makeRecipe("mirage_fairy_leather_from_mirage_fairy_varnish") {
         DataShapelessRecipe(

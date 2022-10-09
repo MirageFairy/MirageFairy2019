@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "sss",
+    "svs",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "v": {
+      "type": "forge:ore_dict",
+      "ore": "container250MirageFairyVarnish"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:fairy_materials",
+    "data": 9,
+    "count": 8
+  }
+}
