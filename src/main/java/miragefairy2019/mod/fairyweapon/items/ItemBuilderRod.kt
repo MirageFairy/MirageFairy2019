@@ -45,7 +45,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.abs
 
-open class ItemBuilderRod(private val baseSpeed: Double) : ItemFairyWeaponMagic4() {
+open class ItemBuilderRod(private val maxRange: Int, private val baseSpeed: Double) : ItemFairyWeaponMagic4() {
 
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを設置") // TRANSLATE
@@ -170,7 +170,7 @@ open class ItemBuilderRod(private val baseSpeed: Double) : ItemFairyWeaponMagic4
     open fun getBlocksPerSecond(a: FormulaArguments) = speed(a) * speedBoost(a)
 
 
-    val range = status("range", { (50.0 * costFactor / 3 - 2.0).floorToInt() atMost 32 atLeast 1 }, { integer })
+    val range = status("range", { (50.0 * costFactor / 3 - 2.0).floorToInt() atMost maxRange atLeast 1 }, { integer })
 
     open fun getRange(a: MagicArguments) = range(a)
 
