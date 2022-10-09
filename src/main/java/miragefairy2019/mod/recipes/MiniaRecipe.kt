@@ -78,7 +78,7 @@ val miniaRecipeModule = module {
         )
     }
 
-    r(2, 1, "cobblestone", DataOreIngredient(ore = "cobblestone"), DataResult(item = "minecraft:cobblestone", data = null, count = 2)) // 丸石
+    r(1, 1, "cobblestone", DataOreIngredient(ore = "cobblestone"), DataResult(item = "minecraft:cobblestone", data = null, count = 2)) // 丸石
     r(3, 1, "coal_ore", DataOreIngredient(ore = "oreCoal"), DataResult(item = "minecraft:coal_ore", data = null, count = 2)) // 石炭
     r(3, 1, "iron_ore", DataOreIngredient(ore = "oreIron"), DataResult(item = "minecraft:iron_ore", data = null, count = 2)) // 鉄
     r(3, 4, "gold_ore", DataOreIngredient(ore = "oreGold"), DataResult(item = "minecraft:gold_ore", data = null, count = 2)) // 金
