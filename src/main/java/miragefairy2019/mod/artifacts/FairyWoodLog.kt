@@ -136,6 +136,7 @@ class ItemBlockFairyWoodLog(block: BlockFairyWoodLog) : ItemBlock(block) {
     }
 
     override fun onItemUse(player: EntityPlayer, world: World, blockPos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        if (player.isSneaking) return super.onItemUse(player, world, blockPos, hand, facing, hitX, hitY, hitZ)
         val itemStack = player.getHeldItem(hand)
 
         // 木の探索
