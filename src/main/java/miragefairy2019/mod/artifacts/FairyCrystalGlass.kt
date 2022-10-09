@@ -74,6 +74,35 @@ object FairyCrystalGlass {
         )
 
 
+        fun makeParticleModel(name: String) = makeBlockModel(name) {
+            DataModel(
+                parent = "block/block",
+                elements = listOf(
+                    DataElement(
+                        from = DataPoint(8.0, 8.0, 8.0),
+                        to = DataPoint(8.0, 8.0, 8.0),
+                        faces = DataFaces(
+                            down = DataFace(texture = "#particle", cullface = "down"),
+                            up = DataFace(texture = "#particle", cullface = "up"),
+                            north = DataFace(texture = "#particle", cullface = "north"),
+                            south = DataFace(texture = "#particle", cullface = "south"),
+                            west = DataFace(texture = "#particle", cullface = "west"),
+                            east = DataFace(texture = "#particle", cullface = "east")
+                        )
+                    )
+                ),
+                textures = mapOf(
+                    "particle" to "miragefairy2019:blocks/$name"
+                )
+            )
+        }
+        makeParticleModel("fairy_crystal_glass_particle")
+        makeParticleModel("pure_fairy_crystal_glass_particle")
+        makeParticleModel("very_pure_fairy_crystal_glass_particle")
+        makeParticleModel("wild_fairy_crystal_glass_particle")
+        makeParticleModel("very_wild_fairy_crystal_glass_particle")
+
+
         fun makeBackgroundModel(name: String) = makeBlockModel(name) {
             DataModel(
                 parent = "block/block",
@@ -105,7 +134,6 @@ object FairyCrystalGlass {
                     )
                 ),
                 textures = mapOf(
-                    "particle" to "miragefairy2019:blocks/$name",
                     "frame" to "miragefairy2019:blocks/$name"
                 )
             )
@@ -128,6 +156,9 @@ object FairyCrystalGlass {
                 makeBlockStates(resourceName.path) {
                     DataModelBlockDefinition(
                         multipart = listOf(
+                            DataSelector(
+                                apply = DataVariant("${ModMirageFairy2019.MODID}:${"${prefix}FairyCrystalGlassParticle".toSnakeCase()}")
+                            ),
                             DataSelector(
                                 `when` = mapOf("down" to false.jsonElement),
                                 apply = DataVariant("${ModMirageFairy2019.MODID}:${"${framePrefix}FairyCrystalGlassFrame".toSnakeCase()}", x = 180)

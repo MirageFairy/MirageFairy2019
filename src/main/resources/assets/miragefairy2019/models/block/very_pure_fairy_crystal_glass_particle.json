@@ -1,0 +1,46 @@
+{
+  "parent": "block/block",
+  "elements": [
+    {
+      "from": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "to": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "faces": {
+        "down": {
+          "texture": "#particle",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#particle",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#particle",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#particle",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#particle",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#particle",
+          "cullface": "east"
+        }
+      }
+    }
+  ],
+  "textures": {
+    "particle": "miragefairy2019:blocks/very_pure_fairy_crystal_glass_particle"
+  }
+}

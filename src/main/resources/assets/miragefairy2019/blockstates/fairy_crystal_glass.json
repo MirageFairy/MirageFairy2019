@@ -1,6 +1,11 @@
 {
   "multipart": [
     {
+      "apply": {
+        "model": "miragefairy2019:fairy_crystal_glass_particle"
+      }
+    },
+    {
       "when": {
         "down": false
       },
