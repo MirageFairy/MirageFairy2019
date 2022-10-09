@@ -19,6 +19,7 @@ import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.PotionCard
+import miragefairy2019.mod.fairy.FairyCard
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.relauncher.Side
@@ -78,7 +79,27 @@ val miniaRecipeModule = module {
         )
     }
 
+    fun f(inputRank: Int, count: Int, name: String, input: DataIngredient, output: DataResult) = makeRecipe("minia/$name") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "mirageFairyApostleStick"),
+                input,
+                *(0 until count).map { DataOreIngredient(ore = "mirageFairy2019FairyMinaRank$inputRank") }.toTypedArray(),
+                DataOreIngredient(ore = "mirageFairyCrystal")
+            ),
+            result = output
+        )
+    }
+
+
+    // 増殖
+
     // 岩石系
+    r(2, 2, "dirt", DataOreIngredient(ore = "dirt"), DataResult(item = "minecraft:dirt", data = 0, count = 2)) // 土
+    r(3, 1, "sand", DataOreIngredient(ore = "sand"), DataResult(item = "minecraft:sand", data = 0, count = 2)) // 砂
+    r(3, 1, "gravel", DataOreIngredient(ore = "gravel"), DataResult(item = "minecraft:gravel", data = 0, count = 2)) // 砂利
+    r(2, 2, "grass", DataOreIngredient(ore = "grass"), DataResult(item = "minecraft:grass", data = null, count = 2)) // 草ブロック
+    r(2, 2, "mycelium", DataSimpleIngredient(item = "minecraft:mycelium"), DataResult(item = "minecraft:mycelium", data = null, count = 2)) // 菌糸
     r(1, 1, "cobblestone", DataOreIngredient(ore = "cobblestone"), DataResult(item = "minecraft:cobblestone", data = null, count = 2)) // 丸石
 
     // 鉱石系
@@ -96,18 +117,55 @@ val miniaRecipeModule = module {
     r(4, 1, "cinnabar_ore", DataOreIngredient(ore = "oreCinnabar"), DataResult(item = "miragefairy2019:ore1", data = 3, count = 2)) // 辰砂
     r(4, 1, "fluorite_ore", DataOreIngredient(ore = "oreFluorite"), DataResult(item = "miragefairy2019:ore1", data = 1, count = 2)) // 蛍石
     r(4, 2, "moonstone_ore", DataOreIngredient(ore = "oreMoonstone"), DataResult(item = "miragefairy2019:ore1", data = 4, count = 2)) // 月長石
+    r(4, 2, "certus_quartz_ore", DataSimpleIngredient(item = "appliedenergistics2:quartz_ore"), DataResult(item = "appliedenergistics2:quartz_ore", data = null, count = 2)) // Certus Quarts
 
     // 無機物系
     r(4, 1, "glowstone", DataOreIngredient(ore = "glowstone"), DataResult(item = "minecraft:glowstone", count = 2)) // グロウストーン
+    r(3, 2, "clay", DataSimpleIngredient(item = "minecraft:clay"), DataResult(item = "minecraft:clay", data = null, count = 2)) // 粘土
 
     // 有機物系
     r(3, 1, "log", DataOreIngredient(ore = "logWood"), DataResult(item = "minecraft:log", data = 0, count = 2)) // 原木
+    r(3, 1, "wool", DataOreIngredient(ore = "wool"), DataResult(item = "minecraft:wool", data = 0, count = 2)) // 羊毛
+    r(3, 2, "leather", DataOreIngredient(ore = "leather"), DataResult(item = "minecraft:leather", data = null, count = 2)) // 革
+    r(3, 2, "vine", DataOreIngredient(ore = "vine"), DataResult(item = "minecraft:vine", data = null, count = 2)) // ツタ
+    r(3, 1, "leaves", DataOreIngredient(ore = "treeLeaves"), DataResult(item = "minecraft:leaves", data = 0, count = 2)) // 葉ブロック
+    r(4, 1, "waterlily", DataSimpleIngredient(item = "minecraft:waterlily"), DataResult(item = "minecraft:waterlily", data = null, count = 2)) // スイレン
+    r(4, 4, "sponge", DataSimpleIngredient(item = "minecraft:sponge", data = 0), DataResult(item = "minecraft:sponge", data = 0, count = 2)) // スポンジ
+    r(4, 4, "spider_eye", DataSimpleIngredient(item = "minecraft:spider_eye"), DataResult(item = "minecraft:spider_eye", data = null, count = 2)) // 蜘蛛の目
+    r(4, 2, "slime_ball", DataOreIngredient(ore = "slimeball"), DataResult(item = "minecraft:slime_ball", data = null, count = 2)) // スライムボール
+    r(5, 2, "ghast_tear", DataSimpleIngredient(item = "minecraft:ghast_tear"), DataResult(item = "minecraft:ghast_tear", data = null, count = 2)) // ガストの涙
+    r(4, 1, "mirage_flower_seeds", DataSimpleIngredient(item = "miragefairy2019:mirage_flower_seeds"), DataResult(item = "miragefairy2019:mirage_flower_seeds", data = null, count = 2)) // ミラージュフラワーの種
+    r(6, 1, "skeleton_skull", DataSimpleIngredient(item = "minecraft:skull", data = 0), DataResult(item = "minecraft:skull", data = 0, count = 2)) // スケルトンの頭
+    r(6, 2, "wither_skeleton_skull", DataSimpleIngredient(item = "minecraft:skull", data = 1), DataResult(item = "minecraft:skull", data = 1, count = 2)) // ウィザースケルトンの頭
+
+    // ダブルプラント
+    r(3, 1, "sunflower", DataSimpleIngredient(item = "minecraft:double_plant", data = 0), DataResult(item = "minecraft:double_plant", data = 0, count = 2)) // ヒマワリ
+    r(3, 1, "syringa", DataSimpleIngredient(item = "minecraft:double_plant", data = 1), DataResult(item = "minecraft:double_plant", data = 1, count = 2)) // ライラック
+    r(3, 1, "double_grass", DataSimpleIngredient(item = "minecraft:double_plant", data = 2), DataResult(item = "minecraft:double_plant", data = 2, count = 2)) // 高い草
+    r(3, 1, "double_fern", DataSimpleIngredient(item = "minecraft:double_plant", data = 3), DataResult(item = "minecraft:double_plant", data = 3, count = 2)) // 大きなシダ
+    r(3, 1, "double_rose", DataSimpleIngredient(item = "minecraft:double_plant", data = 4), DataResult(item = "minecraft:double_plant", data = 4, count = 2)) // バラの低木
+    r(3, 1, "paeonia", DataSimpleIngredient(item = "minecraft:double_plant", data = 5), DataResult(item = "minecraft:double_plant", data = 5, count = 2)) // 牡丹
+
+
+    // 一発入手
 
     // 加工品系
     b(3, 1, "poison_juice", DataSimpleIngredient(item = "minecraft:rotten_flesh"), DataResult(item = "miragefairy2019:potion", data = PotionCard.POISON_JUICE.metadata)) // 毒薬
+    r(7, 1, "totem_of_undying", DataSimpleIngredient(item = "minecraft:rotten_flesh"), DataResult(item = "minecraft:totem_of_undying")) // 不死のトーテム
 
     // 課金アイテム系
     b(7, 1, "skill_point_reset_potion", DataOreIngredient(ore = "nuggetGold"), DataResult(item = "miragefairy2019:potion", data = PotionCard.SKILL_POINT_RESET_POTION.metadata)) // SP還元ポーション
+
+    // 妖精
+    f(7, 1, "dark_chocolate_fairy", DataSimpleIngredient(item = "minecraft:cookie"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.DARK_CHOCOLATE.id))
+    f(7, 2, "cupid_fairy", DataSimpleIngredient(item = "minecraft:bow"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.CUPID.id))
+    f(7, 2, "santa_claus_fairy", DataSimpleIngredient(item = "minecraft:sapling", data = 1), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.SANTA_CLAUS.id))
+    f(7, 1, "hatsuyume_fairy", DataSimpleIngredient(item = "minecraft:bed", data = 0), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.HATSUYUME.id))
+    f(7, 1, "imperial_topaz_fairy", DataOreIngredient(ore = "gemTopaz"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.IMPERIAL_TOPAZ.id))
+    f(6, 4, "christmas_fairy", DataSimpleIngredient(item = "minecraft:sapling", data = 1), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.CHRISTMAS.id))
+    f(7, 1, "red_spinel_fairy", DataOreIngredient(ore = "dustRedstone"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.RED_SPINEL.id))
+    f(6, 2, "diamond_dust_fairy", DataOreIngredient(ore = "gemDiamond"), DataResult(item = "miragefairy2019:mirage_fairy", data = FairyCard.DIAMOND_DUST.id))
+    // avalon
 
 }
 
