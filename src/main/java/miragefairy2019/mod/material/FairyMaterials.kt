@@ -441,15 +441,6 @@ enum class FairyMaterialCard(
                     result = DataResult(item = "miragefairy2019:fairy_materials", data = 14)
                 )
             }
-            makeRecipe("mirage_fairy_leather_from_mirage_fairy_varnish") {
-                DataShapelessRecipe(
-                    ingredients = listOf(
-                        DataOreIngredient(ore = "leather"),
-                        DataOreIngredient(ore = "container250MirageFairyVarnish")
-                    ),
-                    result = DataResult(item = "miragefairy2019:fairy_materials", data = 14)
-                )
-            }
 
             // エリトラ
             makeRecipe("elytra_from_mirage_fairy_leather") {
@@ -954,6 +945,17 @@ val fairyMaterialsModule = module {
                 DataSimpleIngredient(item = "minecraft:glass_bottle")
             ),
             result = DataResult(item = "miragefairy2019:fairy_materials", data = FairyMaterialCard.MIRAGE_FAIRY_VARNISH_BOTTLE.metadata)
+        )
+    }
+
+    // 情緒体反射材から妖精の革
+    makeRecipe("mirage_fairy_leather_from_mirage_fairy_varnish") {
+        DataShapelessRecipe(
+            ingredients = listOf(
+                DataOreIngredient(ore = "leather"),
+                DataOreIngredient(ore = "container250MirageFairyVarnish")
+            ),
+            result = DataResult(item = "miragefairy2019:fairy_materials", data = FairyMaterialCard.MIRAGE_FAIRY_LEATHER.metadata)
         )
     }
 
