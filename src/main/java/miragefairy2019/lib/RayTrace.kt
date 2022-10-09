@@ -24,7 +24,7 @@ sealed class RayTraceWrapper {
 }
 
 sealed class HitRayTraceWrapper(
-    protected val rayTraceResult: RayTraceResult
+    val rayTraceResult: RayTraceResult
 ) : RayTraceWrapper() {
     override val targetPosition: Vec3d get() = rayTraceResult.hitVec
     override val isHit get() = true
