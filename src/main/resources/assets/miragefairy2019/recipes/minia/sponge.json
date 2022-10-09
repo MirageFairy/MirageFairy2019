@@ -1,0 +1,34 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyApostleStick"
+    },
+    {
+      "item": "minecraft:sponge",
+      "data": 0
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyMinaRank4"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyMinaRank4"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyMinaRank4"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyMinaRank4"
+    }
+  ],
+  "result": {
+    "item": "minecraft:sponge",
+    "data": 0,
+    "count": 2
+  }
+}

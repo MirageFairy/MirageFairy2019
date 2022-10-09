@@ -6,16 +6,15 @@
       "ore": "mirageFairyApostleStick"
     },
     {
-      "type": "forge:ore_dict",
-      "ore": "cobblestone"
+      "item": "miragefairy2019:mirage_flower_seeds"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank1"
+      "ore": "mirageFairy2019FairyMinaRank4"
     }
   ],
   "result": {
-    "item": "minecraft:cobblestone",
+    "item": "miragefairy2019:mirage_flower_seeds",
     "count": 2
   }
 }

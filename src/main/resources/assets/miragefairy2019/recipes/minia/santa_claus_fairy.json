@@ -1,0 +1,29 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyApostleStick"
+    },
+    {
+      "item": "minecraft:sapling",
+      "data": 1
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyMinaRank7"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyMinaRank7"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystal"
+    }
+  ],
+  "result": {
+    "item": "miragefairy2019:mirage_fairy",
+    "data": 79
+  }
+}

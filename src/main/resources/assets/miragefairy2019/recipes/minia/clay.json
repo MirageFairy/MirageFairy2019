@@ -6,16 +6,19 @@
       "ore": "mirageFairyApostleStick"
     },
     {
-      "type": "forge:ore_dict",
-      "ore": "cobblestone"
+      "item": "minecraft:clay"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank1"
+      "ore": "mirageFairy2019FairyMinaRank3"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyMinaRank3"
     }
   ],
   "result": {
-    "item": "minecraft:cobblestone",
+    "item": "minecraft:clay",
     "count": 2
   }
 }

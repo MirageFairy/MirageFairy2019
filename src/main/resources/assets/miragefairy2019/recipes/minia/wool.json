@@ -7,15 +7,16 @@
     },
     {
       "type": "forge:ore_dict",
-      "ore": "cobblestone"
+      "ore": "wool"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank1"
+      "ore": "mirageFairy2019FairyMinaRank3"
     }
   ],
   "result": {
-    "item": "minecraft:cobblestone",
+    "item": "minecraft:wool",
+    "data": 0,
     "count": 2
   }
 }

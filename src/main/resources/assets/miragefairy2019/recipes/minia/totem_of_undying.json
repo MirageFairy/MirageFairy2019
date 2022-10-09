@@ -6,16 +6,14 @@
       "ore": "mirageFairyApostleStick"
     },
     {
-      "type": "forge:ore_dict",
-      "ore": "cobblestone"
+      "item": "minecraft:rotten_flesh"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank1"
+      "ore": "mirageFairy2019FairyMinaRank7"
     }
   ],
   "result": {
-    "item": "minecraft:cobblestone",
-    "count": 2
+    "item": "minecraft:totem_of_undying"
   }
 }

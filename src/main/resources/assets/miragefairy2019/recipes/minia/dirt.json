@@ -7,15 +7,20 @@
     },
     {
       "type": "forge:ore_dict",
-      "ore": "cobblestone"
+      "ore": "dirt"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank1"
+      "ore": "mirageFairy2019FairyMinaRank2"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019FairyMinaRank2"
     }
   ],
   "result": {
-    "item": "minecraft:cobblestone",
+    "item": "minecraft:dirt",
+    "data": 0,
     "count": 2
   }
 }

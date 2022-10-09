@@ -7,15 +7,16 @@
     },
     {
       "type": "forge:ore_dict",
-      "ore": "cobblestone"
+      "ore": "treeLeaves"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank1"
+      "ore": "mirageFairy2019FairyMinaRank3"
     }
   ],
   "result": {
-    "item": "minecraft:cobblestone",
+    "item": "minecraft:leaves",
+    "data": 0,
     "count": 2
   }
 }

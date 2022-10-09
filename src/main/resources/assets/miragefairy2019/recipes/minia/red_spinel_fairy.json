@@ -7,15 +7,19 @@
     },
     {
       "type": "forge:ore_dict",
-      "ore": "cobblestone"
+      "ore": "dustRedstone"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "mirageFairy2019FairyMinaRank1"
+      "ore": "mirageFairy2019FairyMinaRank7"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyCrystal"
     }
   ],
   "result": {
-    "item": "minecraft:cobblestone",
-    "count": 2
+    "item": "miragefairy2019:mirage_fairy",
+    "data": 149
   }
 }
