@@ -9,7 +9,49 @@ class TooLargeTreeSearchException : TreeSearchException()
 
 class PartiallyUnloadedTreeSearchException : TreeSearchException()
 
-enum class NeighborhoodType { SURFACE, VERTEX }
+object NeighborhoodType {
+    val SURFACE: (BlockPos) -> Iterator<BlockPos> = {
+        iterator {
+            yield(it.add(-1, 0, 0))
+            yield(it.add(1, 0, 0))
+            yield(it.add(0, -1, 0))
+            yield(it.add(0, 1, 0))
+            yield(it.add(0, 0, -1))
+            yield(it.add(0, 0, 1))
+        }
+    }
+    val VERTEX: (BlockPos) -> Iterator<BlockPos> = {
+        iterator {
+            yield(it.add(-1, -1, -1))
+            yield(it.add(-1, -1, 0))
+            yield(it.add(-1, -1, 1))
+            yield(it.add(-1, 0, -1))
+            yield(it.add(-1, 0, 0))
+            yield(it.add(-1, 0, 1))
+            yield(it.add(-1, 1, -1))
+            yield(it.add(-1, 1, 0))
+            yield(it.add(-1, 1, 1))
+            yield(it.add(0, -1, -1))
+            yield(it.add(0, -1, 0))
+            yield(it.add(0, -1, 1))
+            yield(it.add(0, 0, -1))
+
+            yield(it.add(0, 0, 1))
+            yield(it.add(0, 1, -1))
+            yield(it.add(0, 1, 0))
+            yield(it.add(0, 1, 1))
+            yield(it.add(1, -1, -1))
+            yield(it.add(1, -1, 0))
+            yield(it.add(1, -1, 1))
+            yield(it.add(1, 0, -1))
+            yield(it.add(1, 0, 0))
+            yield(it.add(1, 0, 1))
+            yield(it.add(1, 1, -1))
+            yield(it.add(1, 1, 0))
+            yield(it.add(1, 1, 1))
+        }
+    }
+}
 
 enum class TooLargeBehaviour { IGNORE, EXCEPTION }
 
@@ -31,7 +73,7 @@ fun <T : Any> treeSearch(
     maxSize: Int? = null,
     startDistance: Int = 0,
     includeZero: Boolean = false,
-    neighborhoodType: NeighborhoodType = NeighborhoodType.SURFACE,
+    neighborhoodType: (BlockPos) -> Iterator<BlockPos> = NeighborhoodType.SURFACE,
     tooLargeBehaviour: TooLargeBehaviour = TooLargeBehaviour.EXCEPTION,
     unloadedPositionBehaviour: UnloadedPositionBehaviour = UnloadedPositionBehaviour.LOAD,
     validator: (blockPos: BlockPos, distance: Int) -> T?
@@ -104,44 +146,8 @@ fun <T : Any> treeSearch(
 
             nextBlockPoses = mutableListOf()
             lastBlockPoses.forEach { blockPos ->
-                when (neighborhoodType) {
-                    NeighborhoodType.SURFACE -> {
-                        if (step(blockPos.add(-1, 0, 0))) return@finish
-                        if (step(blockPos.add(1, 0, 0))) return@finish
-                        if (step(blockPos.add(0, -1, 0))) return@finish
-                        if (step(blockPos.add(0, 1, 0))) return@finish
-                        if (step(blockPos.add(0, 0, -1))) return@finish
-                        if (step(blockPos.add(0, 0, 1))) return@finish
-                    }
-                    NeighborhoodType.VERTEX -> {
-                        if (step(blockPos.add(-1, -1, -1))) return@finish
-                        if (step(blockPos.add(-1, -1, 0))) return@finish
-                        if (step(blockPos.add(-1, -1, 1))) return@finish
-                        if (step(blockPos.add(-1, 0, -1))) return@finish
-                        if (step(blockPos.add(-1, 0, 0))) return@finish
-                        if (step(blockPos.add(-1, 0, 1))) return@finish
-                        if (step(blockPos.add(-1, 1, -1))) return@finish
-                        if (step(blockPos.add(-1, 1, 0))) return@finish
-                        if (step(blockPos.add(-1, 1, 1))) return@finish
-                        if (step(blockPos.add(0, -1, -1))) return@finish
-                        if (step(blockPos.add(0, -1, 0))) return@finish
-                        if (step(blockPos.add(0, -1, 1))) return@finish
-                        if (step(blockPos.add(0, 0, -1))) return@finish
-
-                        if (step(blockPos.add(0, 0, 1))) return@finish
-                        if (step(blockPos.add(0, 1, -1))) return@finish
-                        if (step(blockPos.add(0, 1, 0))) return@finish
-                        if (step(blockPos.add(0, 1, 1))) return@finish
-                        if (step(blockPos.add(1, -1, -1))) return@finish
-                        if (step(blockPos.add(1, -1, 0))) return@finish
-                        if (step(blockPos.add(1, -1, 1))) return@finish
-                        if (step(blockPos.add(1, 0, -1))) return@finish
-                        if (step(blockPos.add(1, 0, 0))) return@finish
-                        if (step(blockPos.add(1, 0, 1))) return@finish
-                        if (step(blockPos.add(1, 1, -1))) return@finish
-                        if (step(blockPos.add(1, 1, 0))) return@finish
-                        if (step(blockPos.add(1, 1, 1))) return@finish
-                    }
+                neighborhoodType(blockPos).forEach {
+                    if (step(it)) return@finish
                 }
             }
 
