@@ -17,6 +17,7 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.sq
+import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponMagic4
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityItem
@@ -24,6 +25,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.init.Enchantments
 import net.minecraft.init.Items
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
@@ -145,5 +147,26 @@ fun <E : Entity> getEntities(classEntity: Class<E>, world: World, positionCenter
         if (e == null) return@getEntitiesWithinAABB false
         if (e.getDistanceSq(positionCenter.x, positionCenter.y, positionCenter.z) > radius.sq()) return@getEntitiesWithinAABB false
         true
+    }
+}
+
+
+fun addCoolTimeToFairyWeapon(item: ItemFairyWeaponMagic4, player: EntityPlayer, coolTime: Int) {
+    Item.REGISTRY.forEach { otherItem ->
+        val matched = when {
+            otherItem === item -> true
+            otherItem is ItemFairyWeaponMagic4 && item.getCoolTimeCategories().any { it in otherItem.getCoolTimeCategories() } -> true
+            else -> false
+        }
+        if (matched) {
+            if (player.cooldownTracker.hasCooldown(otherItem)) {
+                val oldCoolTime = player.cooldownTracker.getCooldown(otherItem, 0.0f)
+                if (coolTime > oldCoolTime) {
+                    player.cooldownTracker.setCooldown(otherItem, coolTime)
+                }
+            } else {
+                player.cooldownTracker.setCooldown(otherItem, coolTime)
+            }
+        }
     }
 }

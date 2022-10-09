@@ -70,6 +70,8 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), IMagicStatusContainer {
         }
     }
 
+    open fun getCoolTimeCategories(): List<String> = listOf()
+
 
     // Magic
 
