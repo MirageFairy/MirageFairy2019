@@ -1,5 +1,6 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.lib.BlockRayTraceWrapper
 import miragefairy2019.lib.MagicSelector
 import miragefairy2019.lib.modinitializer.item
 import miragefairy2019.lib.modinitializer.module
@@ -85,7 +86,7 @@ val astronomicalObservationBookModule = module {
         enJa("$prefix.impossible", "Impossible", "不可能")
         enJa("$prefix.incomplete", "Incomplete", "未完了")
         enJa("$prefix.completed", "Completed", "完了")
-        enJa("$prefix.usage", "Right-click and hold AO-Book toward the sun or the moon for Astronomical Observation.", "天体観測を行うには、天体観測ブックを太陽もしくは月に向かって右クリック長押しします。")
+        enJa("$prefix.usage", "Right-click and hold toward the Sun, the Moon or Twinkle Stone.", "太陽・月・トゥインクルストーンに向かって右クリック長押ししてください。")
         enJa("$prefix.message.remaining", "Updated with %s left", "残り %s で更新")
         enJa("$prefix.message.completed", "Completed!", "完了！")
         enJa("$prefix.message.gainExp", "You have earned %s Fairy Master XP!", "%s のフェアリーマスター経験値を獲得しました！")
@@ -134,33 +135,52 @@ class ItemAstronomicalObservationBook : Item() {
     override fun getMaxItemUseDuration(itemStack: ItemStack) = 100
     override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
 
-        // 現在地平線より上にある天体を見なければならない
-        if (player.lookVec.y < 0) {
-            player.sendStatusMessage(textComponent { "空がよく見えない"().darkPurple }, true) // TRANSLATE
-            return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
-        }
-
-        // 天井が塞がれている場合は失敗
+        // 視線判定
         val selector = MagicSelector.rayTraceBlock(world, player, 64.0)
-        if (selector.item.rayTraceWrapper.isHit) {
-            player.sendStatusMessage(textComponent { "空がよく見えない"().darkPurple }, true) // TRANSLATE
-            return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
+
+        // トゥインクルストーン判定
+        run next@{
+
+            if (selector.item.rayTraceWrapper !is BlockRayTraceWrapper) return@next // ブロックにヒットしなかった
+
+            if (world.getBlockState(selector.item.rayTraceWrapper.blockPos).block !is BlockTwinkleStone) return@next // トゥインクルストーンではない
+
+            player.activeHand = hand
+            return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
         }
 
-        // 太陽か月を見なければならない
-        val vectorLook = player.lookVec
-        val angle = player.world.getCelestialAngleRadians(0.0f)
-        val vectorSun = Vec3d(-sin(angle).toDouble(), cos(angle).toDouble(), 0.0)
-        val vectorMoon = Vec3d(-sin(angle + PI), cos(angle + PI), 0.0)
-        val angleSunDiff = abs(acos(vectorLook.dotProduct(vectorSun))) * 180 / PI
-        val angleMoonDiff = abs(acos(vectorLook.dotProduct(vectorMoon))) * 180 / PI
-        if (angleSunDiff >= 15 && angleMoonDiff >= 15) {
-            player.sendStatusMessage(textComponent { "観測可能な天体が見当たらない"().darkPurple }, true) // TRANSLATE
-            return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
+        // 天体判定
+        run next@{
+
+            // 現在地平線より上にある天体を見なければならない
+            if (player.lookVec.y < 0) {
+                player.sendStatusMessage(textComponent { "空がよく見えない"().darkPurple }, true) // TRANSLATE
+                return@next
+            }
+
+            // 天体が見えない場合は失敗
+            if (selector.item.rayTraceWrapper.isHit) {
+                player.sendStatusMessage(textComponent { "空がよく見えない"().darkPurple }, true) // TRANSLATE
+                return@next
+            }
+
+            // 太陽か月を見なければならない
+            val vectorLook = player.lookVec
+            val angle = player.world.getCelestialAngleRadians(0.0f)
+            val vectorSun = Vec3d(-sin(angle).toDouble(), cos(angle).toDouble(), 0.0)
+            val vectorMoon = Vec3d(-sin(angle + PI), cos(angle + PI), 0.0)
+            val angleSunDiff = abs(acos(vectorLook.dotProduct(vectorSun))) * 180 / PI
+            val angleMoonDiff = abs(acos(vectorLook.dotProduct(vectorMoon))) * 180 / PI
+            if (angleSunDiff >= 15 && angleMoonDiff >= 15) {
+                player.sendStatusMessage(textComponent { "観測可能な天体が見当たらない"().darkPurple }, true) // TRANSLATE
+                return@next
+            }
+
+            player.activeHand = hand
+            return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
         }
 
-        player.activeHand = hand
-        return ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand))
+        return ActionResult(EnumActionResult.FAIL, player.getHeldItem(hand))
     }
 
     override fun onUsingTick(itemStack: ItemStack, player: EntityLivingBase, count: Int) {
