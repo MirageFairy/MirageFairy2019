@@ -93,8 +93,8 @@ val miniaRecipeModule = module {
     r(4, 1, "cinnabar_ore", DataOreIngredient(ore = "oreCinnabar"), DataResult(item = "miragefairy2019:ore1", data = 3, count = 2)) // 辰砂
     r(4, 1, "fluorite_ore", DataOreIngredient(ore = "oreFluorite"), DataResult(item = "miragefairy2019:ore1", data = 1, count = 2)) // 蛍石
     r(4, 2, "moonstone_ore", DataOreIngredient(ore = "oreMoonstone"), DataResult(item = "miragefairy2019:ore1", data = 4, count = 2)) // 月長石
-    r(3, 2, "log", DataOreIngredient(ore = "logWood"), DataResult(item = "minecraft:log", data = 0, count = 2)) // 原木
     r(4, 1, "glowstone", DataOreIngredient(ore = "glowstone"), DataResult(item = "minecraft:glowstone", count = 2)) // グロウストーン
+    r(3, 2, "log", DataOreIngredient(ore = "logWood"), DataResult(item = "minecraft:log", data = 0, count = 2)) // 原木
     b(3, 1, "poison_juice", DataSimpleIngredient(item = "minecraft:rotten_flesh"), DataResult(item = "miragefairy2019:potion", data = PotionCard.POISON_JUICE.metadata)) // 毒薬
     b(7, 1, "skill_point_reset_potion", DataOreIngredient(ore = "nuggetGold"), DataResult(item = "miragefairy2019:potion", data = PotionCard.SKILL_POINT_RESET_POTION.metadata)) // SP還元ポーション
 
