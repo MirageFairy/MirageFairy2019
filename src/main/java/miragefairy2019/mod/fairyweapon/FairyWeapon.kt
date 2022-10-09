@@ -836,7 +836,7 @@ enum class FairyWeaponCard(
     ),
 
     builderRod(
-        null, "builder_rod", "builderRod", 1, { ItemBuilderRod() },
+        null, "builder_rod", "builderRod", 1, { ItemBuilderRod(5.0) },
         LangPair("Builder's Rod", "ビルダーズロッド"),
         LangPair("", "建物を織るロッド"),
         null,
@@ -861,7 +861,7 @@ enum class FairyWeaponCard(
         }
     ),
     builderRod2(
-        builderRod, "builder_rod_2", "builderRod2", 5, { ItemBuilderRod() },
+        builderRod, "builder_rod_2", "builderRod2", 5, { ItemBuilderRod(10.0) },
         LangPair("Better Builder's Rod", "ベタービルダーズロッド"),
         LangPair("", "石が紡ぐ記憶の形"),
         null,

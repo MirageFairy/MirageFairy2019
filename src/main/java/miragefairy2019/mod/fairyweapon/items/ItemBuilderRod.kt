@@ -45,7 +45,8 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import kotlin.math.abs
 
-open class ItemBuilderRod : ItemFairyWeaponMagic4() {
+open class ItemBuilderRod(private val baseSpeed: Double) : ItemFairyWeaponMagic4() {
+
     @SideOnly(Side.CLIENT)
     override fun getMagicDescription(itemStack: ItemStack) = listOf("右クリックでブロックを設置") // TRANSLATE
 
@@ -162,7 +163,7 @@ open class ItemBuilderRod : ItemFairyWeaponMagic4() {
     open fun getDurabilityCostPerBlock(a: FormulaArguments) = wear(a)
 
 
-    val speed = status("speed", { 10.0 + !Mana.GAIA / 4.0 + !Erg.CRAFT / 2.0 }, { float2 })
+    val speed = status("speed", { baseSpeed * (1.0 + !Mana.GAIA / 20.0 + !Erg.CRAFT / 10.0) }, { float2 })
 
     val speedBoost = status("speedBoost", { 1.0 + !Mastery.fabrication / 100.0 }, { boost })
 
