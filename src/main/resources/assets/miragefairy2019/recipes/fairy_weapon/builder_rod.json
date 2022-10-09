@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cSS",
+    " SS",
+    "R w"
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "c": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereCraft"
+    },
+    "w": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereWarp"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:builder_rod"
+  }
+}

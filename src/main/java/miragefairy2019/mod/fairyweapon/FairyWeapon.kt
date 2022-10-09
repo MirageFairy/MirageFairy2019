@@ -4,6 +4,7 @@ import miragefairy2019.api.Erg
 import miragefairy2019.api.Erg.ATTACK
 import miragefairy2019.api.Erg.CHEMICAL
 import miragefairy2019.api.Erg.CHRISTMAS
+import miragefairy2019.api.Erg.CRAFT
 import miragefairy2019.api.Erg.CRYSTAL
 import miragefairy2019.api.Erg.DESTROY
 import miragefairy2019.api.Erg.ENERGY
@@ -44,6 +45,7 @@ import miragefairy2019.mod.artifacts.oreName
 import miragefairy2019.mod.artifacts.sphereType
 import miragefairy2019.mod.fairyweapon.items.ItemAxeBase
 import miragefairy2019.mod.fairyweapon.items.ItemBellBase
+import miragefairy2019.mod.fairyweapon.items.ItemBuilderRod
 import miragefairy2019.mod.fairyweapon.items.ItemChargingRod
 import miragefairy2019.mod.fairyweapon.items.ItemChristmasBell
 import miragefairy2019.mod.fairyweapon.items.ItemCollectingMagicWand
@@ -829,6 +831,60 @@ enum class FairyWeaponCard(
                     "r" to DataOreIngredient(ore = "mirageFairyRubber")
                 ),
                 result = DataResult(item = "miragefairy2019:prayer_wheel_3")
+            )
+        }
+    ),
+
+    builderRod(
+        null, "builder_rod", "builderRod", 1, { ItemBuilderRod() },
+        LangPair("Builder's Rod", "ビルダーズロッド"),
+        LangPair("", "建物を織るロッド"),
+        null,
+        LangPair("Get a specific item", "家を建てるように、糸を絡ませて"),
+        null,
+        listOf(!CRAFT, !WARP, { Items.STRING.ingredient }),
+        {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cSS",
+                    " SS",
+                    "R w"
+                ),
+                key = mapOf(
+                    "R" to DataOreIngredient(ore = "stickWood"),
+                    "S" to DataSimpleIngredient(item = "minecraft:string"),
+                    "c" to DataOreIngredient(ore = "mirageFairy2019SphereCraft"),
+                    "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp")
+                ),
+                result = DataResult(item = "miragefairy2019:builder_rod")
+            )
+        }
+    ),
+    builderRod2(
+        builderRod, "builder_rod_2", "builderRod2", 5, { ItemBuilderRod() },
+        LangPair("Better Builder's Rod", "ベタービルダーズロッド"),
+        LangPair("", "石が紡ぐ記憶の形"),
+        null,
+        LangPair("Get a specific item", "翡翠の塊の中に埋まっている翡翠の網目模様を彫り起こす"),
+        null,
+        listOf(!CRAFT, !WARP, !"blockNephrite", !"mirageFairyRubber", !"container250MirageFlowerOil"),
+        {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "cpG",
+                    "r#p",
+                    "Rrw"
+                ),
+                key = mapOf(
+                    "#" to DataSimpleIngredient(item = "miragefairy2019:builder_rod"),
+                    "R" to DataOreIngredient(ore = "stickMirageFairyWood"),
+                    "r" to DataOreIngredient(ore = "mirageFairyRubber"),
+                    "G" to DataOreIngredient(ore = "blockNephrite"),
+                    "c" to DataOreIngredient(ore = "mirageFairy2019SphereCraft"),
+                    "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
+                    "p" to WandType.POLISHING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:builder_rod_2")
             )
         }
     ),

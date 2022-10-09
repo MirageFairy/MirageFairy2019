@@ -1,0 +1,40 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cpG",
+    "r#p",
+    "Rrw"
+  ],
+  "key": {
+    "#": {
+      "item": "miragefairy2019:builder_rod"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "stickMirageFairyWood"
+    },
+    "r": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairyRubber"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockNephrite"
+    },
+    "c": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereCraft"
+    },
+    "w": {
+      "type": "forge:ore_dict",
+      "ore": "mirageFairy2019SphereWarp"
+    },
+    "p": {
+      "type": "miragefairy2019:wand",
+      "ore": "mirageFairy2019CraftingToolFairyWandPolishing"
+    }
+  },
+  "result": {
+    "item": "miragefairy2019:builder_rod_2"
+  }
+}
