@@ -152,7 +152,7 @@ fun <E : Entity> getEntities(classEntity: Class<E>, world: World, positionCenter
 
 
 fun addCoolTimeToFairyWeapon(item: ItemFairyWeaponMagic4, player: EntityPlayer, coolTime: Int) {
-    Item.REGISTRY.forEach { otherItem ->
+    Item.REGISTRY.forEach { otherItem: Item/* 省略すると謎のビルドエラーになる */ ->
         val matched = when {
             otherItem === item -> true
             otherItem is ItemFairyWeaponMagic4 && item.getCoolTimeCategories().any { it in otherItem.getCoolTimeCategories() } -> true
