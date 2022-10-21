@@ -20,11 +20,11 @@ import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataSelector
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.with
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
@@ -212,7 +212,7 @@ object FairyCrystalGlass {
                 }
             }
 
-            onMakeLang { enJa("tile.${"${prefix}FairyCrystalGlass".toLowerCaseHead()}.name", "${englishPrefix}Fairy Crystal Glass", "${japanesePrefix}フェアリークリスタルガラス") }
+            lang("tile.${"${prefix}FairyCrystalGlass".toLowerCaseHead()}.name", "${englishPrefix}Fairy Crystal Glass", "${japanesePrefix}フェアリークリスタルガラス")
 
             // 圧縮レシピ
             makeRecipe("${prefix}FairyCrystalGlass".toSnakeCase()) {

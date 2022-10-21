@@ -28,7 +28,6 @@ import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.createItemStack
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.green
@@ -262,13 +261,11 @@ val wandModule = module {
         }
 
         // 翻訳生成
-        onMakeLang {
-            enJa(
-                "item.fairyWand${wandCard.type.registryName.toUpperCamelCase()}${if (wandCard.rank == 1) "" else "${wandCard.rank}"}.name",
-                "${wandCard.type.englishName} Wand${if (wandCard.rank == 1) "" else " ${wandCard.rank.toRoman()}"}",
-                "${wandCard.type.japaneseName}のワンド${if (wandCard.rank == 1) "" else " ${wandCard.rank.toRoman()}"}"
-            )
-        }
+        lang(
+            "item.fairyWand${wandCard.type.registryName.toUpperCamelCase()}${if (wandCard.rank == 1) "" else "${wandCard.rank}"}.name",
+            "${wandCard.type.englishName} Wand${if (wandCard.rank == 1) "" else " ${wandCard.rank.toRoman()}"}",
+            "${wandCard.type.japaneseName}のワンド${if (wandCard.rank == 1) "" else " ${wandCard.rank.toRoman()}"}"
+        )
         lang("item.${wandCard.unlocalizedName}.poem", wandCard.englishPoem, wandCard.japanesePoem)
 
         // 実績生成

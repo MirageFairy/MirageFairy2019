@@ -35,7 +35,6 @@ import miragefairy2019.lib.resourcemaker.makeAdvancement
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.BakedModelBuiltinWrapper
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.mod.Main.creativeTab
@@ -1011,7 +1010,7 @@ val fairyWeaponModule = module {
         // 翻訳生成
         lang("item.${fairyWeaponCard.unlocalizedName}.name", fairyWeaponCard.displayName.english, fairyWeaponCard.displayName.japanese)
         lang("item.${fairyWeaponCard.unlocalizedName}.poem", fairyWeaponCard.poem.english, fairyWeaponCard.poem.japanese)
-        if (fairyWeaponCard.author != null) onMakeLang { enJa("item.${fairyWeaponCard.unlocalizedName}.author", fairyWeaponCard.author.english, fairyWeaponCard.author.japanese) }
+        if (fairyWeaponCard.author != null) lang("item.${fairyWeaponCard.unlocalizedName}.author", fairyWeaponCard.author.english, fairyWeaponCard.author.japanese)
         lang("item.${fairyWeaponCard.unlocalizedName}.recipe", fairyWeaponCard.advancementText.english, fairyWeaponCard.advancementText.japanese)
 
         // レシピ生成
