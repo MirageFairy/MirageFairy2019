@@ -28,14 +28,19 @@ interface INbtPath {
 
 // Helper
 
-operator fun INbtProvider<NBTTagCompound>.get(key: String): INbtPath = object : INbtPath {
-    override fun getTag() = this@get.getTagOrNull()?.getTag(key)
-    override fun setTag(tag: NBTBase) = this@get.getTagOrCreate().setTag(key, tag)
+operator fun INbtProvider<NBTTagCompound>.get(key: String) = CompoundNbtPath(this, key)
+
+class CompoundNbtPath(private val parent: INbtProvider<NBTTagCompound>, private val key: String) : INbtPath {
+    override fun getTag() = parent.getTagOrNull()?.getTag(key)
+    override fun setTag(tag: NBTBase) = parent.getTagOrCreate().setTag(key, tag)
+    fun removeTag() = parent.getTagOrCreate().removeTag(key)
 }
 
-operator fun INbtProvider<NBTTagList>.get(index: Int): INbtPath = object : INbtPath {
-    override fun getTag() = this@get.getTagOrNull()?.get(index)
-    override fun setTag(tag: NBTBase) = this@get.getTagOrCreate().set(index, tag)
+operator fun INbtProvider<NBTTagList>.get(index: Int) = ListNbtPath(this, index)
+
+class ListNbtPath(private val parent: INbtProvider<NBTTagList>, private val index: Int) : INbtPath {
+    override fun getTag() = parent.getTagOrNull()?.get(index)
+    override fun setTag(tag: NBTBase) = parent.getTagOrCreate().set(index, tag)
 }
 
 val INbtPath.compound get() = getTag()?.castOrNull<NBTTagCompound>()
