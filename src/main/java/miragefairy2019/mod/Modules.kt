@@ -2,7 +2,6 @@ package miragefairy2019.mod
 
 import miragefairy2019.jei.jeiModule
 import miragefairy2019.lib.modinitializer.module
-import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.artifacts.artifactsModule
 import miragefairy2019.mod.aura.auraModule
 import miragefairy2019.mod.beanstalk.beanstalkModule

@@ -2,8 +2,6 @@ package miragefairy2019.lib
 
 import miragefairy2019.mod.playeraura.ApiPlayerAura
 import miragefairy2019.mod.playeraura.IPlayerAuraHandler
-import miragefairy2019.mod.skill.ApiSkill
-import miragefairy2019.mod.skill.ISkillContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 

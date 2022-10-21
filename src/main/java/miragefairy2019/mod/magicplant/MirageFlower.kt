@@ -33,8 +33,8 @@ import miragefairy2019.mod.fairy.getVariant
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
-import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.CompressedMaterialCard
+import miragefairy2019.mod.material.CompressedMaterials
 import miragefairy2019.mod.material.FairyMaterialCard
 import miragefairy2019.mod.material.createItemStack
 import mirrg.kotlin.hydrogen.atLeast
