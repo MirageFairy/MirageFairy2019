@@ -102,8 +102,6 @@ val placedItemModule = module {
     }
 
     // 翻訳生成
-    onMakeLang {
-        enJa("miragefairy2019.placeItem", "Place Item", "アイテムを置く")
-    }
+    onMakeLang { enJa("miragefairy2019.placeItem", "Place Item", "アイテムを置く") }
 
 }

@@ -90,9 +90,7 @@ val beanstalkExporterModule = module {
     }
 
     // 翻訳生成
-    onMakeLang {
-        enJa("tile.beanstalkExporter.name", "Beanstalk Exporter", "豆の木エクスポーター")
-    }
+    onMakeLang { enJa("tile.beanstalkExporter.name", "Beanstalk Exporter", "豆の木エクスポーター") }
 
     // タイルエンティティ
     tileEntity("beanstalk_exporter", TileEntityBeanstalkExporter::class.java)

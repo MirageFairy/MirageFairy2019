@@ -75,10 +75,8 @@ val fairyStickModule = module {
     }
 
     // 翻訳生成
-    onMakeLang {
-        enJa("item.fairyStick.name", "Fairy Stick", "妖精のステッキ")
-        enJa("item.fairyStick.poem", "", "頼みごとをしてみよう")
-    }
+    onMakeLang { enJa("item.fairyStick.name", "Fairy Stick", "妖精のステッキ") }
+    onMakeLang { enJa("item.fairyStick.poem", "", "頼みごとをしてみよう") }
 
 }
 

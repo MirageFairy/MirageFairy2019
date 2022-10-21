@@ -15,9 +15,7 @@ object Mfa {
     val mfaPages = mutableListOf<MfaPage>()
     val mfaModule = module {
         fun register(key: String, getMainIngredient: () -> List<ItemStack>, vararg subIngredientsGetters: () -> List<ItemStack>, getJapaneseContent: () -> String) {
-            onMakeLang {
-                enJa("miragefairy2019.mfa.$key", null, getJapaneseContent().trimIndent().replace("\n", "\\n"))
-            }
+            onMakeLang { enJa("miragefairy2019.mfa.$key", null, getJapaneseContent().trimIndent().replace("\n", "\\n")) }
             onAddRecipe {
                 mfaPages += MfaPage(getMainIngredient(), subIngredientsGetters.map { it() }, "miragefairy2019.mfa.$key")
             }

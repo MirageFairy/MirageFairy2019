@@ -76,10 +76,8 @@ object FluidMaterials {
                 setCustomModelResourceLocation()
                 makeItemModel { fluid }
             }
-            onMakeLang {
-                enJa("fluid.miragium_water", "Miragium Water", "ミラジウムウォーター")
-                enJa("tile.miragiumWater.name", "Miragium Water", "ミラジウムウォーター")
-            }
+            onMakeLang { enJa("fluid.miragium_water", "Miragium Water", "ミラジウムウォーター") }
+            onMakeLang { enJa("tile.miragiumWater.name", "Miragium Water", "ミラジウムウォーター") }
 
             // 作業台クラフト
             makeRecipe("miragium_water_pot") {
@@ -119,10 +117,8 @@ object FluidMaterials {
                 setCustomModelResourceLocation()
                 makeItemModel { fluid }
             }
-            onMakeLang {
-                enJa("fluid.mirage_flower_extract", "Mirage Extract", "ミラージュエキス")
-                enJa("tile.mirageFlowerExtract.name", "Mirage Extract", "ミラージュエキス")
-            }
+            onMakeLang { enJa("fluid.mirage_flower_extract", "Mirage Extract", "ミラージュエキス") }
+            onMakeLang { enJa("tile.mirageFlowerExtract.name", "Mirage Extract", "ミラージュエキス") }
         }
 
         // ミラージュオイル
@@ -140,10 +136,8 @@ object FluidMaterials {
                 setCustomModelResourceLocation()
                 makeItemModel { fluid }
             }
-            onMakeLang {
-                enJa("fluid.mirage_flower_oil", "Mirage Oil", "ミラージュオイル")
-                enJa("tile.mirageFlowerOil.name", "Mirage Oil", "ミラージュオイル")
-            }
+            onMakeLang { enJa("fluid.mirage_flower_oil", "Mirage Oil", "ミラージュオイル") }
+            onMakeLang { enJa("tile.mirageFlowerOil.name", "Mirage Oil", "ミラージュオイル") }
         }
 
         // 妖精の血
@@ -161,10 +155,8 @@ object FluidMaterials {
                 setCustomModelResourceLocation()
                 makeItemModel { fluid }
             }
-            onMakeLang {
-                enJa("fluid.mirage_fairy_blood", "Mirage Fairy Blood", "妖精の血")
-                enJa("tile.mirageFairyBlood.name", "irage Fairy Blood", "妖精の血")
-            }
+            onMakeLang { enJa("fluid.mirage_fairy_blood", "Mirage Fairy Blood", "妖精の血") }
+            onMakeLang { enJa("tile.mirageFairyBlood.name", "irage Fairy Blood", "妖精の血") }
         }
 
     }

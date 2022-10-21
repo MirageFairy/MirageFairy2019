@@ -62,15 +62,13 @@ val skillBookModule = module {
             )
         }
     }
-    onMakeLang {
-        enJa("item.skillBook.name", "Skill Book", "スキルブック")
-        enJa("skill_book.fairyMasterLevel", "Fairy Master Level", "フェアリーマスターレベル")
-        enJa("skill_book.requiredFairyMasterXp", "Required Fairy Master XP", "必要経験値")
-        enJa("skill_book.sp", "SP", "SP")
-        enJa("skill_book.masteryLevelReset", "Mastery Level Reset", "マスタリレベル初期化")
-        enJa("skill_book.possible", "Possible", "可能")
-        enJa("skill_book.impossible", "Impossible", "不可能")
-    }
+    onMakeLang { enJa("item.skillBook.name", "Skill Book", "スキルブック") }
+    onMakeLang { enJa("skill_book.fairyMasterLevel", "Fairy Master Level", "フェアリーマスターレベル") }
+    onMakeLang { enJa("skill_book.requiredFairyMasterXp", "Required Fairy Master XP", "必要経験値") }
+    onMakeLang { enJa("skill_book.sp", "SP", "SP") }
+    onMakeLang { enJa("skill_book.masteryLevelReset", "Mastery Level Reset", "マスタリレベル初期化") }
+    onMakeLang { enJa("skill_book.possible", "Possible", "可能") }
+    onMakeLang { enJa("skill_book.impossible", "Impossible", "不可能") }
 }
 
 class ItemSkillBook : Item() {

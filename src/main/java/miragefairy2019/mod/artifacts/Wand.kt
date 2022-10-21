@@ -178,11 +178,9 @@ val wandModule = module {
 
 
     // 翻訳生成
-    onMakeLang {
-        enJa("advancements.miragefairy2019.wand.root.title", "Wand", "ワンド")
-        enJa("advancements.miragefairy2019.wand.root.description", "Wand", "ワンド")
-        enJa("advancements.miragefairy2019.wand.all.description", "Get a specific item", "所定のアイテムを入手する")
-    }
+    onMakeLang { enJa("advancements.miragefairy2019.wand.root.title", "Wand", "ワンド") }
+    onMakeLang { enJa("advancements.miragefairy2019.wand.root.description", "Wand", "ワンド") }
+    onMakeLang { enJa("advancements.miragefairy2019.wand.all.description", "Get a specific item", "所定のアイテムを入手する") }
 
     // 実績生成
     makeAdvancement("wand/root") {
@@ -269,8 +267,8 @@ val wandModule = module {
                 "${wandCard.type.englishName} Wand${if (wandCard.rank == 1) "" else " ${wandCard.rank.toRoman()}"}",
                 "${wandCard.type.japaneseName}のワンド${if (wandCard.rank == 1) "" else " ${wandCard.rank.toRoman()}"}"
             )
-            enJa("item.${wandCard.unlocalizedName}.poem", wandCard.englishPoem, wandCard.japanesePoem)
         }
+        onMakeLang { enJa("item.${wandCard.unlocalizedName}.poem", wandCard.englishPoem, wandCard.japanesePoem) }
 
         // 実績生成
         makeAdvancement("wand/${wandCard.registryName}") {

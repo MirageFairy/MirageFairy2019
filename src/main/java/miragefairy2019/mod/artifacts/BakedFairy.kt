@@ -76,9 +76,7 @@ object BakedFairy {
             }
             creativeTabBakedFairy = { creativeTab }
         }
-        onMakeLang {
-            enJa("itemGroup.mirageFairy2019.bakedFairy", "MirageFairy2019: Baked Fairy", "MirageFairy2019：焼き妖精")
-        }
+        onMakeLang { enJa("itemGroup.mirageFairy2019.bakedFairy", "MirageFairy2019: Baked Fairy", "MirageFairy2019：焼き妖精") }
 
         // 焼き妖精
         itemBakedFairy = item({ ItemBakedFairy() }, "baked_fairy") {
@@ -101,10 +99,8 @@ object BakedFairy {
                 )
             )
         }
-        onMakeLang {
-            enJa("item.bakedFairy.name", "Baked Fairy", "焼き妖精")
-            enJa("item.bakedFairy.format", "Baked %s", "焼き%s")
-        }
+        onMakeLang { enJa("item.bakedFairy.name", "Baked Fairy", "焼き妖精") }
+        onMakeLang { enJa("item.bakedFairy.format", "Baked %s", "焼き%s") }
 
         // 焼き妖精レシピ
         onAddRecipe {

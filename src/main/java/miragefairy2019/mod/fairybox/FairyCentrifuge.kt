@@ -208,10 +208,8 @@ val fairyCentrifugeModule = module {
     tileEntity("fairy_centrifuge", TileEntityFairyCentrifuge::class.java)
 
     // 翻訳生成
-    onMakeLang {
-        enJa("tile.fairyCentrifuge.name", "Fairy Centrifuge", "錬金術師グラヴィーチャの家")
-        enJa("tile.fairyCentrifuge.poem", "`Super Strange Theory'", "“超変理論”")
-    }
+    onMakeLang { enJa("tile.fairyCentrifuge.name", "Fairy Centrifuge", "錬金術師グラヴィーチャの家") }
+    onMakeLang { enJa("tile.fairyCentrifuge.poem", "`Super Strange Theory'", "“超変理論”") }
 
     // 対応レシピ登録
     onAddRecipe {

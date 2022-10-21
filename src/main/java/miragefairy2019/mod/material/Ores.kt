@@ -124,22 +124,20 @@ object Ores {
         }
 
         // 翻訳の生成
-        onMakeLang {
-            enJa("tile.oreApatite.name", "Apatite Ore", "燐灰石鉱石")
-            enJa("tile.oreFluorite.name", "Fluorite Ore", "蛍石鉱石")
-            enJa("tile.oreSulfur.name", "Sulfur Ore", "硫黄鉱石")
-            enJa("tile.oreCinnabar.name", "Cinnabar Ore", "辰砂鉱石")
-            enJa("tile.oreMoonstone.name", "Moonstone Ore", "月長石鉱石")
-            enJa("tile.oreMagnetite.name", "Magnetite Ore", "磁鉄鉱鉱石")
-            enJa("tile.orePyrope.name", "Pyrope Ore", "パイロープ鉱石")
-            enJa("tile.oreSmithsonite.name", "Smithsonite Ore", "スミソナイト鉱石")
-            enJa("tile.oreNephrite.name", "Nephrite Ore", "ネフライト鉱石")
-            enJa("tile.oreTopaz.name", "Topaz Ore", "トパーズ鉱石")
-            enJa("tile.oreTourmaline.name", "Tourmaline Ore", "トルマリン鉱石")
-            enJa("tile.oreHeliolite.name", "Heliolite Ore", "ヘリオライト鉱石")
-            enJa("tile.oreLabradorite.name", "Labradorite Ore", "ラブラドライト鉱石")
-            enJa("tile.orePyrite.name", "Pyrite Ore", "パイライト鉱石")
-        }
+        onMakeLang { enJa("tile.oreApatite.name", "Apatite Ore", "燐灰石鉱石") }
+        onMakeLang { enJa("tile.oreFluorite.name", "Fluorite Ore", "蛍石鉱石") }
+        onMakeLang { enJa("tile.oreSulfur.name", "Sulfur Ore", "硫黄鉱石") }
+        onMakeLang { enJa("tile.oreCinnabar.name", "Cinnabar Ore", "辰砂鉱石") }
+        onMakeLang { enJa("tile.oreMoonstone.name", "Moonstone Ore", "月長石鉱石") }
+        onMakeLang { enJa("tile.oreMagnetite.name", "Magnetite Ore", "磁鉄鉱鉱石") }
+        onMakeLang { enJa("tile.orePyrope.name", "Pyrope Ore", "パイロープ鉱石") }
+        onMakeLang { enJa("tile.oreSmithsonite.name", "Smithsonite Ore", "スミソナイト鉱石") }
+        onMakeLang { enJa("tile.oreNephrite.name", "Nephrite Ore", "ネフライト鉱石") }
+        onMakeLang { enJa("tile.oreTopaz.name", "Topaz Ore", "トパーズ鉱石") }
+        onMakeLang { enJa("tile.oreTourmaline.name", "Tourmaline Ore", "トルマリン鉱石") }
+        onMakeLang { enJa("tile.oreHeliolite.name", "Heliolite Ore", "ヘリオライト鉱石") }
+        onMakeLang { enJa("tile.oreLabradorite.name", "Labradorite Ore", "ラブラドライト鉱石") }
+        onMakeLang { enJa("tile.orePyrite.name", "Pyrite Ore", "パイライト鉱石") }
 
         // ブロックモデルの生成
         run {

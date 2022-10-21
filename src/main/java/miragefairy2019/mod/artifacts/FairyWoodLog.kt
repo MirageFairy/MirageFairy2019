@@ -113,9 +113,7 @@ val fairyWoodLogModule = module {
     }
 
     // 翻訳生成
-    onMakeLang {
-        enJa("tile.fairyWoodLog.name", "Fairy Wood Log", "妖精の原木")
-    }
+    onMakeLang { enJa("tile.fairyWoodLog.name", "Fairy Wood Log", "妖精の原木") }
 
 }
 

@@ -102,8 +102,6 @@ val beanstalkRootModule = module {
     }
 
     // 翻訳生成
-    onMakeLang {
-        enJa("tile.beanstalkRoot.name", "Beanstalk Root", "豆の木の根")
-    }
+    onMakeLang { enJa("tile.beanstalkRoot.name", "Beanstalk Root", "豆の木の根") }
 
 }

@@ -326,9 +326,7 @@ val beanstalkPipeModule = module {
     }
 
     // 翻訳生成
-    onMakeLang {
-        enJa("tile.beanstalkPipe.name", "Beanstalk Pipe", "豆の木パイプ")
-    }
+    onMakeLang { enJa("tile.beanstalkPipe.name", "Beanstalk Pipe", "豆の木パイプ") }
 
 }
 

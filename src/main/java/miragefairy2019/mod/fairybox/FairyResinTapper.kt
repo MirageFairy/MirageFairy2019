@@ -127,10 +127,8 @@ val fairyResinTapperModule = module {
     tileEntity("fairy_resin_tapper", TileEntityFairyResinTapper::class.java)
 
     // 翻訳生成
-    onMakeLang {
-        enJa("tile.fairyResinTapper.name", "Fairy Resin Tapper", "樹液取り職人スプルーツァの家")
-        enJa("tile.fairyResinTapper.poem", "", "妖精だから、森に帰ります")
-    }
+    onMakeLang { enJa("tile.fairyResinTapper.name", "Fairy Resin Tapper", "樹液取り職人スプルーツァの家") }
+    onMakeLang { enJa("tile.fairyResinTapper.poem", "", "妖精だから、森に帰ります") }
 
 }
 

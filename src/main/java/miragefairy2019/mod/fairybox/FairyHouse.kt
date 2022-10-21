@@ -107,10 +107,8 @@ val fairyHouseModule = module {
     tileEntity("fairy_box", TileEntityFairyHouse::class.java)
 
     // 翻訳生成
-    onMakeLang {
-        enJa("tile.fairyHouse.name", "Fairy Box", "妖精の家")
-        enJa("tile.fairyHouse.poem", "", "大きな刳りの木の中で")
-    }
+    onMakeLang { enJa("tile.fairyHouse.name", "Fairy Box", "妖精の家") }
+    onMakeLang { enJa("tile.fairyHouse.poem", "", "大きな刳りの木の中で") }
 
 }
 

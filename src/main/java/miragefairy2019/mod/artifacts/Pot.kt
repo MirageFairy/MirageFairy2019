@@ -83,9 +83,7 @@ val potModule = module {
             result = DataResult(item = "${ModMirageFairy2019.MODID}:pot")
         )
     }
-    onMakeLang {
-        enJa("item.mirageFairyPot.name", "Fairy Pot", "妖精のポット")
-    }
+    onMakeLang { enJa("item.mirageFairyPot.name", "Fairy Pot", "妖精のポット") }
 
 
     // 中身入りポット

@@ -121,9 +121,7 @@ val fairyCollectionBoxModule = module {
     tileEntity("fairy_collection_box", TileEntityFairyCollectionBox::class.java)
 
     // 翻訳生成
-    onMakeLang {
-        enJa("tile.fairyCollectionBox.name", "Fairy Collection Box", "妖精蒐集箱")
-    }
+    onMakeLang { enJa("tile.fairyCollectionBox.name", "Fairy Collection Box", "妖精蒐集箱") }
 
     // 最下部のブロックモデル生成
     makeBlockModel("fairy_building_bottom") {

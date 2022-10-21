@@ -749,10 +749,8 @@ val fairyMaterialsModule = module {
         makeItemModel(fairyMaterialCard.registryName) { if (fairyMaterialCard.isHandheld) handheld else generated }
 
         // 翻訳生成
-        onMakeLang {
-            enJa("item.${fairyMaterialCard.unlocalizedName}.name", fairyMaterialCard.enName, fairyMaterialCard.jaName)
-            enJa("item.${fairyMaterialCard.unlocalizedName}.poem", "", fairyMaterialCard.jaPoem)
-        }
+        onMakeLang { enJa("item.${fairyMaterialCard.unlocalizedName}.name", fairyMaterialCard.enName, fairyMaterialCard.jaName) }
+        onMakeLang { enJa("item.${fairyMaterialCard.unlocalizedName}.poem", "", fairyMaterialCard.jaPoem) }
 
         // アイテム固有の初期化処理
         fairyMaterialCard.initializer(this)

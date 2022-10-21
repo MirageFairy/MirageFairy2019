@@ -132,9 +132,7 @@ val fairyLogModule = module {
     }
 
     // 翻訳生成
-    onMakeLang {
-        enJa("tile.fairyLog.name", "Fairy Log", "妖精の樹洞")
-    }
+    onMakeLang { enJa("tile.fairyLog.name", "Fairy Log", "妖精の樹洞") }
 
     // 地形生成
     onHookDecorator {

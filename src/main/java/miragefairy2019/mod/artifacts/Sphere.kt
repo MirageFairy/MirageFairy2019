@@ -71,10 +71,8 @@ val sphereModule = module {
     }
 
     // 翻訳生成
-    onMakeLang {
-        enJa("item.spheres.name", "Sphere", "スフィア")
-        enJa("item.spheres.format", "Sphere of %s", "%sのスフィア")
-    }
+    onMakeLang { enJa("item.spheres.name", "Sphere", "スフィア") }
+    onMakeLang { enJa("item.spheres.format", "Sphere of %s", "%sのスフィア") }
 
     // 鉱石辞書
     onCreateItemStack {
