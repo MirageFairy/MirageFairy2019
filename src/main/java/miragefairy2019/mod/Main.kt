@@ -6,7 +6,6 @@ import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.guiHandler
 import miragefairy2019.libkt.tileEntity
 import miragefairy2019.mod.artifacts.variantFairyCrystal
@@ -82,11 +81,11 @@ object Main {
         }
 
         // Common Translation
-        onMakeLang { enJa("miragefairy2019.gui.duration.days", "days", "日") }
-        onMakeLang { enJa("miragefairy2019.gui.duration.hours", "hours", "時間") }
-        onMakeLang { enJa("miragefairy2019.gui.duration.minutes", "minutes", "分") }
-        onMakeLang { enJa("miragefairy2019.gui.duration.seconds", "seconds", "秒") }
-        onMakeLang { enJa("miragefairy2019.gui.duration.milliSeconds", "milli seconds", "ミリ秒") }
+        lang("miragefairy2019.gui.duration.days", "days", "日")
+        lang("miragefairy2019.gui.duration.hours", "hours", "時間")
+        lang("miragefairy2019.gui.duration.minutes", "minutes", "分")
+        lang("miragefairy2019.gui.duration.seconds", "seconds", "秒")
+        lang("miragefairy2019.gui.duration.milliSeconds", "milli seconds", "ミリ秒")
 
     }
 }

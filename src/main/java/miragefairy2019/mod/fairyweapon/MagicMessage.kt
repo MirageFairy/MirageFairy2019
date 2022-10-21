@@ -1,7 +1,7 @@
 package miragefairy2019.mod.fairyweapon
 
 import miragefairy2019.lib.modinitializer.module
-import miragefairy2019.libkt.enJa
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.libkt.textComponent
 
 enum class MagicMessage(val unlocalizedName: String, val englishText: String, val japaneseText: String) {
@@ -17,6 +17,6 @@ val MagicMessage.displayText get() = textComponent { translate("miragefairy2019.
 
 val magicMessageModule = module {
     MagicMessage.values().forEach { magicMessage ->
-        onMakeLang { enJa("miragefairy2019.magic.${magicMessage.unlocalizedName}.text", magicMessage.englishText, magicMessage.japaneseText) }
+        lang("miragefairy2019.magic.${magicMessage.unlocalizedName}.text", magicMessage.englishText, magicMessage.japaneseText)
     }
 }

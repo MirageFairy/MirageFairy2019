@@ -16,7 +16,6 @@ import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
@@ -76,8 +75,8 @@ object FluidMaterials {
                 setCustomModelResourceLocation()
                 makeItemModel { fluid }
             }
-            onMakeLang { enJa("fluid.miragium_water", "Miragium Water", "ミラジウムウォーター") }
-            onMakeLang { enJa("tile.miragiumWater.name", "Miragium Water", "ミラジウムウォーター") }
+            lang("fluid.miragium_water", "Miragium Water", "ミラジウムウォーター")
+            lang("tile.miragiumWater.name", "Miragium Water", "ミラジウムウォーター")
 
             // 作業台クラフト
             makeRecipe("miragium_water_pot") {
@@ -117,8 +116,8 @@ object FluidMaterials {
                 setCustomModelResourceLocation()
                 makeItemModel { fluid }
             }
-            onMakeLang { enJa("fluid.mirage_flower_extract", "Mirage Extract", "ミラージュエキス") }
-            onMakeLang { enJa("tile.mirageFlowerExtract.name", "Mirage Extract", "ミラージュエキス") }
+            lang("fluid.mirage_flower_extract", "Mirage Extract", "ミラージュエキス")
+            lang("tile.mirageFlowerExtract.name", "Mirage Extract", "ミラージュエキス")
         }
 
         // ミラージュオイル
@@ -136,8 +135,8 @@ object FluidMaterials {
                 setCustomModelResourceLocation()
                 makeItemModel { fluid }
             }
-            onMakeLang { enJa("fluid.mirage_flower_oil", "Mirage Oil", "ミラージュオイル") }
-            onMakeLang { enJa("tile.mirageFlowerOil.name", "Mirage Oil", "ミラージュオイル") }
+            lang("fluid.mirage_flower_oil", "Mirage Oil", "ミラージュオイル")
+            lang("tile.mirageFlowerOil.name", "Mirage Oil", "ミラージュオイル")
         }
 
         // 妖精の血
@@ -155,8 +154,8 @@ object FluidMaterials {
                 setCustomModelResourceLocation()
                 makeItemModel { fluid }
             }
-            onMakeLang { enJa("fluid.mirage_fairy_blood", "Mirage Fairy Blood", "妖精の血") }
-            onMakeLang { enJa("tile.mirageFairyBlood.name", "Mirage Fairy Blood", "妖精の血") }
+            lang("fluid.mirage_fairy_blood", "Mirage Fairy Blood", "妖精の血")
+            lang("tile.mirageFairyBlood.name", "Mirage Fairy Blood", "妖精の血")
         }
 
     }

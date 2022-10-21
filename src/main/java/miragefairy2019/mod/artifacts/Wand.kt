@@ -19,6 +19,7 @@ import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeAdvancement
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
@@ -178,9 +179,9 @@ val wandModule = module {
 
 
     // 翻訳生成
-    onMakeLang { enJa("advancements.miragefairy2019.wand.root.title", "Wand", "ワンド") }
-    onMakeLang { enJa("advancements.miragefairy2019.wand.root.description", "Wand", "ワンド") }
-    onMakeLang { enJa("advancements.miragefairy2019.wand.all.description", "Get a specific item", "所定のアイテムを入手する") }
+    lang("advancements.miragefairy2019.wand.root.title", "Wand", "ワンド")
+    lang("advancements.miragefairy2019.wand.root.description", "Wand", "ワンド")
+    lang("advancements.miragefairy2019.wand.all.description", "Get a specific item", "所定のアイテムを入手する")
 
     // 実績生成
     makeAdvancement("wand/root") {
@@ -268,7 +269,7 @@ val wandModule = module {
                 "${wandCard.type.japaneseName}のワンド${if (wandCard.rank == 1) "" else " ${wandCard.rank.toRoman()}"}"
             )
         }
-        onMakeLang { enJa("item.${wandCard.unlocalizedName}.poem", wandCard.englishPoem, wandCard.japanesePoem) }
+        lang("item.${wandCard.unlocalizedName}.poem", wandCard.englishPoem, wandCard.japanesePoem)
 
         // 実績生成
         makeAdvancement("wand/${wandCard.registryName}") {

@@ -30,6 +30,7 @@ import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.handheld
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeAdvancement
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
@@ -897,51 +898,51 @@ val fairyWeaponModule = module {
 
     // 翻訳生成
     run {
-        onMakeLang { enJa("mirageFairy2019.formula.source.cost.name", "Cost", "コスト") }
+        lang("mirageFairy2019.formula.source.cost.name", "Cost", "コスト")
 
-        onMakeLang { enJa("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器") }
-        onMakeLang { enJa("advancements.miragefairy2019.fairy_weapon.root.description", "Fairy Weapon", "妖精の力を何かに使えないだろうか") }
+        lang("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器")
+        lang("advancements.miragefairy2019.fairy_weapon.root.description", "Fairy Weapon", "妖精の力を何かに使えないだろうか")
 
-        onMakeLang { enJa("mirageFairy2019.magic.status.strength.name", "Strength", "効果値") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.extent.name", "Extent", "拡散力") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.endurance.name", "Endurance", "持久力") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.production.name", "Production", "生産力") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.cost.name", "Cost", "コスト") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.pitch.name", "Pitch", "音程") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.maxHeight.name", "Max Height", "最大高さ") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.power.name", "Power", "パワー") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.fortune.name", "Fortune", "幸運") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.coolTime.name", "Cool Time", "クールタイム") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.dps.name", "DPS", "DPS") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.wear.name", "Wear", "摩耗") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.additionalReach.name", "Additional Reach", "追加リーチ") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.collection.name", "Collection", "収集") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.shearing.name", "Shearing", "刈り取り") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.damage.name", "Damage", "ダメージ") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.additionalDamage.name", "Additional Damage", "追加ダメージ") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.radius.name", "Radius", "半径") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.range.name", "Range", "範囲") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.maxTargetCount.name", "Max Target Count", "最大ターゲット数") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.looting.name", "Looting", "ドロップ増加") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.criticalRate.name", "Critical Rate", "クリティカル率") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.chargeTime.name", "Charge Time", "チャージタイム") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.extraItemDropRate.name", "Extra Drop Rate", "追加ドロップ率") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.maxHardness.name", "Max Hardness", "最大硬度") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.lightning.name", "Lightning", "雷属性") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.duration.name", "Duration", "持続時間") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.breakSpeed.name", "Break Speed", "破壊速度") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.speedUp.name", "Speed Up", "加速") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.coverRate.name", "Cover Rate", "カバー率") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.chargeSpeed.name", "Charge Speed", "チャージ速度") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.speed.name", "Speed", "速度") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.maxSpeed.name", "Max Speed", "最高速度") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.levelCost.name", "Level Cost", "レベルコスト") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.silkTouch.name", "Silk Touch", "シルクタッチ") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.speedBoost.name", "Speed Boost", "速度ブースト") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.damageBoost.name", "Damage Boost", "ダメージブースト") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.durationBoost.name", "Duration Boost", "持続時間ブースト") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.fortuneBoost.name", "Fortune Boost", "幸運ブースト") }
-        onMakeLang { enJa("mirageFairy2019.magic.status.productionBoost.name", "Production Boost", "生産力ブースト") }
+        lang("mirageFairy2019.magic.status.strength.name", "Strength", "効果値")
+        lang("mirageFairy2019.magic.status.extent.name", "Extent", "拡散力")
+        lang("mirageFairy2019.magic.status.endurance.name", "Endurance", "持久力")
+        lang("mirageFairy2019.magic.status.production.name", "Production", "生産力")
+        lang("mirageFairy2019.magic.status.cost.name", "Cost", "コスト")
+        lang("mirageFairy2019.magic.status.pitch.name", "Pitch", "音程")
+        lang("mirageFairy2019.magic.status.maxHeight.name", "Max Height", "最大高さ")
+        lang("mirageFairy2019.magic.status.power.name", "Power", "パワー")
+        lang("mirageFairy2019.magic.status.fortune.name", "Fortune", "幸運")
+        lang("mirageFairy2019.magic.status.coolTime.name", "Cool Time", "クールタイム")
+        lang("mirageFairy2019.magic.status.dps.name", "DPS", "DPS")
+        lang("mirageFairy2019.magic.status.wear.name", "Wear", "摩耗")
+        lang("mirageFairy2019.magic.status.additionalReach.name", "Additional Reach", "追加リーチ")
+        lang("mirageFairy2019.magic.status.collection.name", "Collection", "収集")
+        lang("mirageFairy2019.magic.status.shearing.name", "Shearing", "刈り取り")
+        lang("mirageFairy2019.magic.status.damage.name", "Damage", "ダメージ")
+        lang("mirageFairy2019.magic.status.additionalDamage.name", "Additional Damage", "追加ダメージ")
+        lang("mirageFairy2019.magic.status.radius.name", "Radius", "半径")
+        lang("mirageFairy2019.magic.status.range.name", "Range", "範囲")
+        lang("mirageFairy2019.magic.status.maxTargetCount.name", "Max Target Count", "最大ターゲット数")
+        lang("mirageFairy2019.magic.status.looting.name", "Looting", "ドロップ増加")
+        lang("mirageFairy2019.magic.status.criticalRate.name", "Critical Rate", "クリティカル率")
+        lang("mirageFairy2019.magic.status.chargeTime.name", "Charge Time", "チャージタイム")
+        lang("mirageFairy2019.magic.status.extraItemDropRate.name", "Extra Drop Rate", "追加ドロップ率")
+        lang("mirageFairy2019.magic.status.maxHardness.name", "Max Hardness", "最大硬度")
+        lang("mirageFairy2019.magic.status.lightning.name", "Lightning", "雷属性")
+        lang("mirageFairy2019.magic.status.duration.name", "Duration", "持続時間")
+        lang("mirageFairy2019.magic.status.breakSpeed.name", "Break Speed", "破壊速度")
+        lang("mirageFairy2019.magic.status.speedUp.name", "Speed Up", "加速")
+        lang("mirageFairy2019.magic.status.coverRate.name", "Cover Rate", "カバー率")
+        lang("mirageFairy2019.magic.status.chargeSpeed.name", "Charge Speed", "チャージ速度")
+        lang("mirageFairy2019.magic.status.speed.name", "Speed", "速度")
+        lang("mirageFairy2019.magic.status.maxSpeed.name", "Max Speed", "最高速度")
+        lang("mirageFairy2019.magic.status.levelCost.name", "Level Cost", "レベルコスト")
+        lang("mirageFairy2019.magic.status.silkTouch.name", "Silk Touch", "シルクタッチ")
+        lang("mirageFairy2019.magic.status.speedBoost.name", "Speed Boost", "速度ブースト")
+        lang("mirageFairy2019.magic.status.damageBoost.name", "Damage Boost", "ダメージブースト")
+        lang("mirageFairy2019.magic.status.durationBoost.name", "Duration Boost", "持続時間ブースト")
+        lang("mirageFairy2019.magic.status.fortuneBoost.name", "Fortune Boost", "幸運ブースト")
+        lang("mirageFairy2019.magic.status.productionBoost.name", "Production Boost", "生産力ブースト")
     }
 
     // 実績生成
@@ -1008,10 +1009,10 @@ val fairyWeaponModule = module {
         makeItemModel(fairyWeaponCard.registryName) { handheld }
 
         // 翻訳生成
-        onMakeLang { enJa("item.${fairyWeaponCard.unlocalizedName}.name", fairyWeaponCard.displayName.english, fairyWeaponCard.displayName.japanese) }
-        onMakeLang { enJa("item.${fairyWeaponCard.unlocalizedName}.poem", fairyWeaponCard.poem.english, fairyWeaponCard.poem.japanese) }
+        lang("item.${fairyWeaponCard.unlocalizedName}.name", fairyWeaponCard.displayName.english, fairyWeaponCard.displayName.japanese)
+        lang("item.${fairyWeaponCard.unlocalizedName}.poem", fairyWeaponCard.poem.english, fairyWeaponCard.poem.japanese)
         if (fairyWeaponCard.author != null) onMakeLang { enJa("item.${fairyWeaponCard.unlocalizedName}.author", fairyWeaponCard.author.english, fairyWeaponCard.author.japanese) }
-        onMakeLang { enJa("item.${fairyWeaponCard.unlocalizedName}.recipe", fairyWeaponCard.advancementText.english, fairyWeaponCard.advancementText.japanese) }
+        lang("item.${fairyWeaponCard.unlocalizedName}.recipe", fairyWeaponCard.advancementText.english, fairyWeaponCard.advancementText.japanese)
 
         // レシピ生成
         makeRecipe("fairy_weapon/${fairyWeaponCard.registryName}") {

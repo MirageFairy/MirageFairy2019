@@ -11,12 +11,12 @@ import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.TextComponentScope
 import miragefairy2019.libkt.TextComponentWrapper
 import miragefairy2019.libkt.blue
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.plus
@@ -62,13 +62,13 @@ val skillBookModule = module {
             )
         }
     }
-    onMakeLang { enJa("item.skillBook.name", "Skill Book", "スキルブック") }
-    onMakeLang { enJa("skill_book.fairyMasterLevel", "Fairy Master Level", "フェアリーマスターレベル") }
-    onMakeLang { enJa("skill_book.requiredFairyMasterXp", "Required Fairy Master XP", "必要経験値") }
-    onMakeLang { enJa("skill_book.sp", "SP", "SP") }
-    onMakeLang { enJa("skill_book.masteryLevelReset", "Mastery Level Reset", "マスタリレベル初期化") }
-    onMakeLang { enJa("skill_book.possible", "Possible", "可能") }
-    onMakeLang { enJa("skill_book.impossible", "Impossible", "不可能") }
+    lang("item.skillBook.name", "Skill Book", "スキルブック")
+    lang("skill_book.fairyMasterLevel", "Fairy Master Level", "フェアリーマスターレベル")
+    lang("skill_book.requiredFairyMasterXp", "Required Fairy Master XP", "必要経験値")
+    lang("skill_book.sp", "SP", "SP")
+    lang("skill_book.masteryLevelReset", "Mastery Level Reset", "マスタリレベル初期化")
+    lang("skill_book.possible", "Possible", "可能")
+    lang("skill_book.impossible", "Impossible", "不可能")
 }
 
 class ItemSkillBook : Item() {

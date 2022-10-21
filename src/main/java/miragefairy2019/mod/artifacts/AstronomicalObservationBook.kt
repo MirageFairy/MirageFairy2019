@@ -13,12 +13,12 @@ import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.darkGray
 import miragefairy2019.libkt.darkPurple
 import miragefairy2019.libkt.displayText
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.plus
@@ -77,21 +77,21 @@ val astronomicalObservationBookModule = module {
         }
     }
     run {
-        onMakeLang { enJa("item.astronomicalObservationBook.name", "Astronomical Observation Note", "天体観測ノート") }
+        lang("item.astronomicalObservationBook.name", "Astronomical Observation Note", "天体観測ノート")
         val prefix = "miragefairy2019.gui.astronomicalObservation"
-        onMakeLang { enJa("$prefix.title", "Astronomical Observation Quest", "天体観測クエスト") }
-        onMakeLang { enJa("$prefix.daily", "Daily", "日間") }
-        onMakeLang { enJa("$prefix.weekly", "Weekly", "週間") }
-        onMakeLang { enJa("$prefix.monthly", "Monthly", "月間") }
-        onMakeLang { enJa("$prefix.impossible", "Impossible", "不可能") }
-        onMakeLang { enJa("$prefix.incomplete", "Incomplete", "未完了") }
-        onMakeLang { enJa("$prefix.completed", "Completed", "完了") }
-        onMakeLang { enJa("$prefix.usage", "Right-click and hold toward the Sun, the Moon or Twinkle Stone.", "太陽・月・トゥインクルストーンに向かって右クリック長押ししてください。") }
-        onMakeLang { enJa("$prefix.message.remaining", "Updated with %s left", "残り %s で更新") }
-        onMakeLang { enJa("$prefix.message.completed", "Completed!", "完了！") }
-        onMakeLang { enJa("$prefix.message.gainExp", "You have earned %s Fairy Master XP!", "%s のフェアリーマスター経験値を獲得しました！") }
-        onMakeLang { enJa("$prefix.message.gainLevel", "You have earned %s Fairy Master Level!", "フェアリーマスターレベルが %s 上昇しました！") }
-        onMakeLang { enJa("$prefix.message.doNothing", "You got nothing...", "特筆すべき変化は見られなかった…") }
+        lang("$prefix.title", "Astronomical Observation Quest", "天体観測クエスト")
+        lang("$prefix.daily", "Daily", "日間")
+        lang("$prefix.weekly", "Weekly", "週間")
+        lang("$prefix.monthly", "Monthly", "月間")
+        lang("$prefix.impossible", "Impossible", "不可能")
+        lang("$prefix.incomplete", "Incomplete", "未完了")
+        lang("$prefix.completed", "Completed", "完了")
+        lang("$prefix.usage", "Right-click and hold toward the Sun, the Moon or Twinkle Stone.", "太陽・月・トゥインクルストーンに向かって右クリック長押ししてください。")
+        lang("$prefix.message.remaining", "Updated with %s left", "残り %s で更新")
+        lang("$prefix.message.completed", "Completed!", "完了！")
+        lang("$prefix.message.gainExp", "You have earned %s Fairy Master XP!", "%s のフェアリーマスター経験値を獲得しました！")
+        lang("$prefix.message.gainLevel", "You have earned %s Fairy Master Level!", "フェアリーマスターレベルが %s 上昇しました！")
+        lang("$prefix.message.doNothing", "You got nothing...", "特筆すべき変化は見られなかった…")
     }
 }
 

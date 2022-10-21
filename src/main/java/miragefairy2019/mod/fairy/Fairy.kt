@@ -13,10 +13,10 @@ import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.obtain
 import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.sum
 import miragefairy2019.lib.times
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main.side
@@ -113,8 +113,8 @@ val fairyModule = module {
     }
 
     // 翻訳生成
-    onMakeLang { enJa("itemGroup.mirageFairy2019.fairy.motif", "Fairy: Motif", "妖精：モチーフ") }
-    onMakeLang { enJa("itemGroup.mirageFairy2019.fairy.rank", "Fairy: Rank", "妖精：ランク") }
+    lang("itemGroup.mirageFairy2019.fairy.motif", "Fairy: Motif", "妖精：モチーフ")
+    lang("itemGroup.mirageFairy2019.fairy.rank", "Fairy: Rank", "妖精：ランク")
 
 
     val rankMax = 7
@@ -175,20 +175,20 @@ val fairyModule = module {
     }
 
     // 翻訳生成
-    onMakeLang { enJa("item.mirageFairyR1.name", "Mirage Fairy", "妖精") }
-    onMakeLang { enJa("item.mirageFairyR1.format", "%s", "%s") }
-    onMakeLang { enJa("item.mirageFairyR2.name", "Mirage Fairy II", "妖精 II") }
-    onMakeLang { enJa("item.mirageFairyR2.format", "%s II", "%s II") }
-    onMakeLang { enJa("item.mirageFairyR3.name", "Mirage Fairy III", "妖精 III") }
-    onMakeLang { enJa("item.mirageFairyR3.format", "%s III", "%s III") }
-    onMakeLang { enJa("item.mirageFairyR4.name", "Mirage Fairy IV", "妖精 IV") }
-    onMakeLang { enJa("item.mirageFairyR4.format", "%s IV", "%s IV") }
-    onMakeLang { enJa("item.mirageFairyR5.name", "Mirage Fairy V", "妖精 V") }
-    onMakeLang { enJa("item.mirageFairyR5.format", "%s V", "%s V") }
-    onMakeLang { enJa("item.mirageFairyR6.name", "Mirage Fairy VI", "妖精 VI") }
-    onMakeLang { enJa("item.mirageFairyR6.format", "%s VI", "%s VI") }
-    onMakeLang { enJa("item.mirageFairyR7.name", "Mirage Fairy VII", "妖精 VII") }
-    onMakeLang { enJa("item.mirageFairyR7.format", "%s VII", "%s VII") }
+    lang("item.mirageFairyR1.name", "Mirage Fairy", "妖精")
+    lang("item.mirageFairyR1.format", "%s", "%s")
+    lang("item.mirageFairyR2.name", "Mirage Fairy II", "妖精 II")
+    lang("item.mirageFairyR2.format", "%s II", "%s II")
+    lang("item.mirageFairyR3.name", "Mirage Fairy III", "妖精 III")
+    lang("item.mirageFairyR3.format", "%s III", "%s III")
+    lang("item.mirageFairyR4.name", "Mirage Fairy IV", "妖精 IV")
+    lang("item.mirageFairyR4.format", "%s IV", "%s IV")
+    lang("item.mirageFairyR5.name", "Mirage Fairy V", "妖精 V")
+    lang("item.mirageFairyR5.format", "%s V", "%s V")
+    lang("item.mirageFairyR6.name", "Mirage Fairy VI", "妖精 VI")
+    lang("item.mirageFairyR6.format", "%s VI", "%s VI")
+    lang("item.mirageFairyR7.name", "Mirage Fairy VII", "妖精 VII")
+    lang("item.mirageFairyR7.format", "%s VII", "%s VII")
 
     // 妖精ごと
     FairyCard.values().forEach { fairyCard ->
@@ -243,7 +243,7 @@ val fairyModule = module {
         }
 
         // 翻訳生成
-        onMakeLang { enJa("mirageFairy2019.fairy.${fairyCard.unlocalizedName}.name", fairyCard.englishName, fairyCard.japaneseName) }
+        lang("mirageFairy2019.fairy.${fairyCard.unlocalizedName}.name", fairyCard.englishName, fairyCard.japaneseName)
 
     }
 

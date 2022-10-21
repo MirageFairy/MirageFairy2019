@@ -17,11 +17,11 @@ import miragefairy2019.lib.resourcemaker.DataPoint
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
 import miragefairy2019.lib.resourcemaker.block
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.selectFairyLogDrop
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairy.FairyCard
@@ -132,7 +132,7 @@ val fairyLogModule = module {
     }
 
     // 翻訳生成
-    onMakeLang { enJa("tile.fairyLog.name", "Fairy Log", "妖精の樹洞") }
+    lang("tile.fairyLog.name", "Fairy Log", "妖精の樹洞")
 
     // 地形生成
     onHookDecorator {

@@ -19,11 +19,11 @@ import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.treeSearch
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.get
 import miragefairy2019.libkt.with
 import miragefairy2019.mod.Main
@@ -113,7 +113,7 @@ val fairyWoodLogModule = module {
     }
 
     // 翻訳生成
-    onMakeLang { enJa("tile.fairyWoodLog.name", "Fairy Wood Log", "妖精の原木") }
+    lang("tile.fairyWoodLog.name", "Fairy Wood Log", "妖精の原木")
 
 }
 

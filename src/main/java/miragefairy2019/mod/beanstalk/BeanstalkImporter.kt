@@ -19,11 +19,11 @@ import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.faced
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemBlock
@@ -106,7 +106,7 @@ val beanstalkImporterModule = module {
     }
 
     // 翻訳生成
-    onMakeLang { enJa("tile.beanstalkImporter.name", "Beanstalk Importer", "豆の木インポーター") }
+    lang("tile.beanstalkImporter.name", "Beanstalk Importer", "豆の木インポーター")
 
     // タイルエンティティ
     tileEntity("beanstalk_importer", TileEntityBeanstalkImporter::class.java)

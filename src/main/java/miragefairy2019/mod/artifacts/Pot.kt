@@ -21,7 +21,6 @@ import miragefairy2019.libkt.CapabilityProviderAdapter
 import miragefairy2019.libkt.ItemMultiMaterial
 import miragefairy2019.libkt.ItemVariantMaterial
 import miragefairy2019.libkt.createItemStack
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
@@ -83,7 +82,7 @@ val potModule = module {
             result = DataResult(item = "${ModMirageFairy2019.MODID}:pot")
         )
     }
-    onMakeLang { enJa("item.mirageFairyPot.name", "Fairy Pot", "妖精のポット") }
+    lang("item.mirageFairyPot.name", "Fairy Pot", "妖精のポット")
 
 
     // 中身入りポット

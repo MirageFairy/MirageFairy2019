@@ -20,11 +20,11 @@ import miragefairy2019.lib.resourcemaker.DataSelector
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.get
 import miragefairy2019.libkt.union
 import miragefairy2019.mod.Main
@@ -326,7 +326,7 @@ val beanstalkPipeModule = module {
     }
 
     // 翻訳生成
-    onMakeLang { enJa("tile.beanstalkPipe.name", "Beanstalk Pipe", "豆の木パイプ") }
+    lang("tile.beanstalkPipe.name", "Beanstalk Pipe", "豆の木パイプ")
 
 }
 

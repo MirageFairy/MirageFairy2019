@@ -17,11 +17,11 @@ import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.faced
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import net.minecraft.item.ItemBlock
 
@@ -102,6 +102,6 @@ val beanstalkRootModule = module {
     }
 
     // 翻訳生成
-    onMakeLang { enJa("tile.beanstalkRoot.name", "Beanstalk Root", "豆の木の根") }
+    lang("tile.beanstalkRoot.name", "Beanstalk Root", "豆の木の根")
 
 }

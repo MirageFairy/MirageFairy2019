@@ -16,6 +16,7 @@ import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.lib.resourcemaker.DataModel
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.setCompound
 import miragefairy2019.lib.setInt
@@ -26,7 +27,6 @@ import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
@@ -76,7 +76,7 @@ object BakedFairy {
             }
             creativeTabBakedFairy = { creativeTab }
         }
-        onMakeLang { enJa("itemGroup.mirageFairy2019.bakedFairy", "MirageFairy2019: Baked Fairy", "MirageFairy2019：焼き妖精") }
+        lang("itemGroup.mirageFairy2019.bakedFairy", "MirageFairy2019: Baked Fairy", "MirageFairy2019：焼き妖精")
 
         // 焼き妖精
         itemBakedFairy = item({ ItemBakedFairy() }, "baked_fairy") {
@@ -99,8 +99,8 @@ object BakedFairy {
                 )
             )
         }
-        onMakeLang { enJa("item.bakedFairy.name", "Baked Fairy", "焼き妖精") }
-        onMakeLang { enJa("item.bakedFairy.format", "Baked %s", "焼き%s") }
+        lang("item.bakedFairy.name", "Baked Fairy", "焼き妖精")
+        lang("item.bakedFairy.format", "Baked %s", "焼き%s")
 
         // 焼き妖精レシピ
         onAddRecipe {

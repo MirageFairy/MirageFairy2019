@@ -62,6 +62,7 @@ import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
@@ -75,7 +76,6 @@ import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.darkBlue
 import miragefairy2019.libkt.drawStringCentered
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.flatten
 import miragefairy2019.libkt.formattedText
@@ -208,8 +208,8 @@ val fairyCentrifugeModule = module {
     tileEntity("fairy_centrifuge", TileEntityFairyCentrifuge::class.java)
 
     // 翻訳生成
-    onMakeLang { enJa("tile.fairyCentrifuge.name", "Fairy Centrifuge", "錬金術師グラヴィーチャの家") }
-    onMakeLang { enJa("tile.fairyCentrifuge.poem", "`Super Strange Theory'", "“超変理論”") }
+    lang("tile.fairyCentrifuge.name", "Fairy Centrifuge", "錬金術師グラヴィーチャの家")
+    lang("tile.fairyCentrifuge.poem", "`Super Strange Theory'", "“超変理論”")
 
     // 対応レシピ登録
     onAddRecipe {

@@ -19,10 +19,10 @@ import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import net.minecraft.item.ItemBlock
 
@@ -107,8 +107,8 @@ val fairyHouseModule = module {
     tileEntity("fairy_box", TileEntityFairyHouse::class.java)
 
     // 翻訳生成
-    onMakeLang { enJa("tile.fairyHouse.name", "Fairy Box", "妖精の家") }
-    onMakeLang { enJa("tile.fairyHouse.poem", "", "大きな刳りの木の中で") }
+    lang("tile.fairyHouse.name", "Fairy Box", "妖精の家")
+    lang("tile.fairyHouse.poem", "", "大きな刳りの木の中で")
 
 }
 

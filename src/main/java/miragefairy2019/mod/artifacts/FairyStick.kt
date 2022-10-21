@@ -13,11 +13,11 @@ import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.handheld
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.canTranslate
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.gold
 import miragefairy2019.libkt.plus
@@ -75,8 +75,8 @@ val fairyStickModule = module {
     }
 
     // 翻訳生成
-    onMakeLang { enJa("item.fairyStick.name", "Fairy Stick", "妖精のステッキ") }
-    onMakeLang { enJa("item.fairyStick.poem", "", "頼みごとをしてみよう") }
+    lang("item.fairyStick.name", "Fairy Stick", "妖精のステッキ")
+    lang("item.fairyStick.poem", "", "頼みごとをしてみよう")
 
 }
 

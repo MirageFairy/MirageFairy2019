@@ -23,13 +23,13 @@ import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.set
 import miragefairy2019.libkt.darkRed
 import miragefairy2019.libkt.drop
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
@@ -127,8 +127,8 @@ val fairyResinTapperModule = module {
     tileEntity("fairy_resin_tapper", TileEntityFairyResinTapper::class.java)
 
     // 翻訳生成
-    onMakeLang { enJa("tile.fairyResinTapper.name", "Fairy Resin Tapper", "樹液取り職人スプルーツァの家") }
-    onMakeLang { enJa("tile.fairyResinTapper.poem", "", "妖精だから、森に帰ります") }
+    lang("tile.fairyResinTapper.name", "Fairy Resin Tapper", "樹液取り職人スプルーツァの家")
+    lang("tile.fairyResinTapper.poem", "", "妖精だから、森に帰ります")
 
 }
 

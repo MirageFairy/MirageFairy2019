@@ -7,11 +7,11 @@ import miragefairy2019.lib.color
 import miragefairy2019.lib.displayName
 import miragefairy2019.lib.get
 import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.textColor
 import miragefairy2019.libkt.Complex
 import miragefairy2019.libkt.IRgb
 import miragefairy2019.libkt.drawTriangle
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
@@ -67,12 +67,12 @@ val playerAuraModule = module {
     }
 
     // アイテムツールチップイベント
-    onMakeLang { enJa("miragefairy2019.gui.playerAura.title", "Player Aura", "プレイヤーオーラ") }
-    onMakeLang { enJa("miragefairy2019.gui.playerAura.poem.step1", "It's an appetizing scent.", "食欲をそそられる香りだ") }
-    onMakeLang { enJa("miragefairy2019.gui.playerAura.poem.step2", "It's a familiar taste.", "食べ慣れた味だ") }
-    onMakeLang { enJa("miragefairy2019.gui.playerAura.poem.step3", "I'm getting tired of this taste...", "この味にも飽きてきたな…") }
-    onMakeLang { enJa("miragefairy2019.gui.playerAura.poem.step4", "The nutrition is biased...", "栄養が偏り気味だ…") }
-    onMakeLang { enJa("miragefairy2019.gui.playerAura.poem.step5", "I want to eat something else...", "そろそろ他のものが食べたい…") }
+    lang("miragefairy2019.gui.playerAura.title", "Player Aura", "プレイヤーオーラ")
+    lang("miragefairy2019.gui.playerAura.poem.step1", "It's an appetizing scent.", "食欲をそそられる香りだ")
+    lang("miragefairy2019.gui.playerAura.poem.step2", "It's a familiar taste.", "食べ慣れた味だ")
+    lang("miragefairy2019.gui.playerAura.poem.step3", "I'm getting tired of this taste...", "この味にも飽きてきたな…")
+    lang("miragefairy2019.gui.playerAura.poem.step4", "The nutrition is biased...", "栄養が偏り気味だ…")
+    lang("miragefairy2019.gui.playerAura.poem.step5", "I want to eat something else...", "そろそろ他のものが食べたい…")
     onInit {
         if (side.isClient) {
             MinecraftForge.EVENT_BUS.register(object : Any() {
