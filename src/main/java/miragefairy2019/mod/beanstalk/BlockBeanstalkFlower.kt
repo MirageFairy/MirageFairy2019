@@ -2,21 +2,16 @@ package miragefairy2019.mod.beanstalk
 
 import miragefairy2019.lib.FacedBlockPos
 import miragefairy2019.lib.TileEntityIgnoreBlockState
-import miragefairy2019.lib.get
-import miragefairy2019.lib.indices
-import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.mod.fairybox.randomSkipTicks
 import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.ITickable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import net.minecraftforge.items.IItemHandlerModifiable
 
 abstract class BlockBeanstalkFlower<T : TileEntityBeanstalkFlower> : BlockBeanstalkEnd(), ITileEntityProvider {
     init {
@@ -104,67 +99,4 @@ fun getRoot(world: World, blockPos: BlockPos): FacedBlockPos? {
         if (currentBlockPos in acceptedBlockPoses) return null // ループを検出
         acceptedBlockPoses += currentBlockPos
     }
-}
-
-// TODO -> lib
-fun move(power: Int, srcItemHandler: IItemHandlerModifiable, destItemHandler: IItemHandlerModifiable): List<ItemStack> {
-    val movedItemStacks = mutableListOf<ItemStack>()
-    var remainingPower = power
-
-    run finish@{
-        srcItemHandler.indices.forEach nextSrcSlot@{ srcIndex ->
-
-            if (remainingPower <= 0) return@finish // もうパワーがない
-            // まだパワーが残っている
-
-            val virtualSrcItemStack = srcItemHandler.extractItem(srcIndex, 64, true).copy() // srcから搬出可能なアイテム
-            val originalSrcItemStack = virtualSrcItemStack.copy()
-
-            if (virtualSrcItemStack.isEmpty) return@nextSrcSlot // 空のsrcスロットは無視
-            // srcスロットに何かが入っている
-
-            // 成立
-
-            var movedCount = 0
-            try {
-                val notEmptyDestIndices = mutableListOf<Int>()
-                val emptyDestIndices = mutableListOf<Int>()
-                destItemHandler.indices.forEach { destIndex ->
-                    val destItemStack = destItemHandler[destIndex]
-                    if (destItemStack.isEmpty) {
-                        emptyDestIndices += destIndex
-                    } else if (destItemStack equalsItemDamageTag virtualSrcItemStack) {
-                        notEmptyDestIndices += destIndex
-                    }
-                }
-                (notEmptyDestIndices + emptyDestIndices).forEach nextDestSlot@{ destIndex ->
-
-                    if (virtualSrcItemStack.isEmpty) return@nextSrcSlot // すべて移動し終えた
-                    // まだ移動するものが残っている
-
-                    if (!destItemHandler.isItemValid(destIndex, virtualSrcItemStack)) return@nextDestSlot // 宛先がこのアイテムを受け付けない
-                    // 宛先がこのアイテムを受け付ける
-
-                    // 移動を試す
-                    val remainingSrcItemStack = destItemHandler.insertItem(destIndex, virtualSrcItemStack.copy(), false)
-                    if (remainingSrcItemStack.count != virtualSrcItemStack.count) { // 移動が発生した場合
-                        movedCount += virtualSrcItemStack.count - remainingSrcItemStack.count
-                        virtualSrcItemStack.count = remainingSrcItemStack.count
-                    }
-
-                }
-            } finally {
-                if (movedCount > 0) { // 移動が発生した
-                    originalSrcItemStack.count = movedCount
-                    movedItemStacks += originalSrcItemStack // 移動したアイテム標本に追加
-                    remainingPower-- // パワー消費
-                    val removedSrcItemStack = srcItemHandler.extractItem(srcIndex, movedCount, false) // 抽出イベント発火
-                    assert(removedSrcItemStack.count == movedCount) { "異常な移動処理が発生しました: ${removedSrcItemStack.count}, $movedCount" }
-                }
-            }
-
-        }
-    }
-
-    return movedItemStacks
 }

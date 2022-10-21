@@ -9,6 +9,7 @@ import net.minecraft.inventory.ItemStackHelper
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.NonNullList
+import net.minecraftforge.items.IItemHandlerModifiable
 
 // Merge
 
@@ -58,6 +59,71 @@ fun merge(srcInventory: IInventory, srcSlotIndices: Iterable<Int>, destInventory
 
 fun merge(srcInventory: IInventory, destInventory: IInventory): Boolean {
     return merge(srcInventory, srcInventory.indices, destInventory, destInventory.indices)
+}
+
+
+// Move
+
+fun move(power: Int, srcItemHandler: IItemHandlerModifiable, destItemHandler: IItemHandlerModifiable): List<ItemStack> {
+    val movedItemStacks = mutableListOf<ItemStack>()
+    var remainingPower = power
+
+    run finish@{
+        srcItemHandler.indices.forEach nextSrcSlot@{ srcIndex ->
+
+            if (remainingPower <= 0) return@finish // もうパワーがない
+            // まだパワーが残っている
+
+            val virtualSrcItemStack = srcItemHandler.extractItem(srcIndex, 64, true).copy() // srcから搬出可能なアイテム
+            val originalSrcItemStack = virtualSrcItemStack.copy()
+
+            if (virtualSrcItemStack.isEmpty) return@nextSrcSlot // 空のsrcスロットは無視
+            // srcスロットに何かが入っている
+
+            // 成立
+
+            var movedCount = 0
+            try {
+                val notEmptyDestIndices = mutableListOf<Int>()
+                val emptyDestIndices = mutableListOf<Int>()
+                destItemHandler.indices.forEach { destIndex ->
+                    val destItemStack = destItemHandler[destIndex]
+                    if (destItemStack.isEmpty) {
+                        emptyDestIndices += destIndex
+                    } else if (destItemStack equalsItemDamageTag virtualSrcItemStack) {
+                        notEmptyDestIndices += destIndex
+                    }
+                }
+                (notEmptyDestIndices + emptyDestIndices).forEach nextDestSlot@{ destIndex ->
+
+                    if (virtualSrcItemStack.isEmpty) return@nextSrcSlot // すべて移動し終えた
+                    // まだ移動するものが残っている
+
+                    if (!destItemHandler.isItemValid(destIndex, virtualSrcItemStack)) return@nextDestSlot // 宛先がこのアイテムを受け付けない
+                    // 宛先がこのアイテムを受け付ける
+
+                    // 移動を試す
+                    val remainingSrcItemStack = destItemHandler.insertItem(destIndex, virtualSrcItemStack.copy(), false)
+                    if (remainingSrcItemStack.count != virtualSrcItemStack.count) { // 移動が発生した場合
+                        movedCount += virtualSrcItemStack.count - remainingSrcItemStack.count
+                        virtualSrcItemStack.count = remainingSrcItemStack.count
+                    }
+
+                }
+            } finally {
+                if (movedCount > 0) { // 移動が発生した
+                    originalSrcItemStack.count = movedCount
+                    movedItemStacks += originalSrcItemStack // 移動したアイテム標本に追加
+                    remainingPower-- // パワー消費
+                    val removedSrcItemStack = srcItemHandler.extractItem(srcIndex, movedCount, false) // 抽出イベント発火
+                    assert(removedSrcItemStack.count == movedCount) { "異常な移動処理が発生しました: ${removedSrcItemStack.count}, $movedCount" }
+                }
+            }
+
+        }
+    }
+
+    return movedItemStacks
 }
 
 
