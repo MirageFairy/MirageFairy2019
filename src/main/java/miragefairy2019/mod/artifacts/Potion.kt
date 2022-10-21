@@ -17,7 +17,6 @@ import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.ItemMultiMaterial
 import miragefairy2019.libkt.ItemVariantMaterial
 import miragefairy2019.libkt.canTranslate
@@ -35,6 +34,7 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.withColor
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.skill.canResetMastery
+import miragefairy2019.mod.skill.skillContainer
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.EntityLivingBase

@@ -13,7 +13,6 @@ import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.BlockRegion
 import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
@@ -36,6 +35,7 @@ import miragefairy2019.mod.skill.ISkillContainer
 import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
+import miragefairy2019.mod.skill.skillContainer
 import miragefairy2019.mod.systems.DropCategory
 import miragefairy2019.mod.systems.FairyCrystalDropEnvironment
 import miragefairy2019.mod.systems.getDropTable

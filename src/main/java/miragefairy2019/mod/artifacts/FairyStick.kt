@@ -15,7 +15,6 @@ import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.handheld
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.enJa
@@ -30,6 +29,7 @@ import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
+import miragefairy2019.mod.skill.skillContainer
 import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag

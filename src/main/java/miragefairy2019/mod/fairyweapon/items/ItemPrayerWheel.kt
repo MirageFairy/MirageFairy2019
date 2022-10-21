@@ -3,7 +3,6 @@ package miragefairy2019.mod.fairyweapon.items
 import miragefairy2019.api.Erg
 import miragefairy2019.api.Mana
 import miragefairy2019.lib.proxy
-import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.BlockRegion
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.getRandomItem
@@ -23,6 +22,7 @@ import miragefairy2019.mod.fairyweapon.magic4.map
 import miragefairy2019.mod.fairyweapon.magic4.percent2
 import miragefairy2019.mod.fairyweapon.magic4.status
 import miragefairy2019.mod.fairyweapon.magic4.world
+import miragefairy2019.mod.skill.skillContainer
 import miragefairy2019.mod.systems.DropCategory
 import miragefairy2019.mod.systems.FairyCrystalDropEnvironment
 import miragefairy2019.mod.systems.getDropTable

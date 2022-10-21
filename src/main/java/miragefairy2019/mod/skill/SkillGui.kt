@@ -9,7 +9,6 @@ import miragefairy2019.lib.gui.rectangle
 import miragefairy2019.lib.gui.tooltip
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.proxy
-import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.darkBlue

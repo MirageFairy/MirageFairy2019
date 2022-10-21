@@ -21,9 +21,3 @@ val PlayerProxy.playerAuraHandler: IPlayerAuraHandler
         is ClientPlayerProxy -> ApiPlayerAura.playerAuraManager.getClientPlayerAuraHandler()
         is ServerPlayerProxy -> ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(player)
     }
-
-val PlayerProxy.skillContainer: ISkillContainer
-    get() = when (this) {
-        is ClientPlayerProxy -> ApiSkill.skillManager.getClientSkillContainer()
-        is ServerPlayerProxy -> ApiSkill.skillManager.getServerSkillContainer(player)
-    }

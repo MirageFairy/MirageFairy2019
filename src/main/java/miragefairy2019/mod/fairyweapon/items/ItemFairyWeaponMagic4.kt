@@ -9,7 +9,6 @@ import miragefairy2019.lib.get
 import miragefairy2019.lib.playerAuraHandler
 import miragefairy2019.lib.plus
 import miragefairy2019.lib.proxy
-import miragefairy2019.lib.skillContainer
 import miragefairy2019.lib.times
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.flatten
@@ -31,6 +30,7 @@ import miragefairy2019.mod.fairyweapon.magic4.getMagicHandler
 import miragefairy2019.mod.skill.IMastery
 import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.getSkillLevel
+import miragefairy2019.mod.skill.skillContainer
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity

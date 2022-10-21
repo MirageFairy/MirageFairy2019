@@ -13,7 +13,6 @@ import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.TextComponentScope
 import miragefairy2019.libkt.TextComponentWrapper
 import miragefairy2019.libkt.blue
@@ -29,6 +28,7 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.skill.canResetMastery
 import miragefairy2019.mod.skill.getRequiredFairyMasterExpForNextLevel
 import miragefairy2019.mod.skill.remainingSkillPoints
+import miragefairy2019.mod.skill.skillContainer
 import net.minecraft.client.Minecraft
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer

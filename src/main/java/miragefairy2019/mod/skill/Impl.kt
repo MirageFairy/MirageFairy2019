@@ -1,5 +1,8 @@
 package miragefairy2019.mod.skill
 
+import miragefairy2019.lib.ClientPlayerProxy
+import miragefairy2019.lib.PlayerProxy
+import miragefairy2019.lib.ServerPlayerProxy
 import miragefairy2019.libkt.textComponent
 import mirrg.kotlin.gson.hydrogen.JsonWrapper
 import mirrg.kotlin.gson.hydrogen.jsonElement
@@ -17,6 +20,13 @@ import java.io.File
 import java.time.Instant
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
+
+
+val PlayerProxy.skillContainer: ISkillContainer
+    get() = when (this) {
+        is ClientPlayerProxy -> ApiSkill.skillManager.getClientSkillContainer()
+        is ServerPlayerProxy -> ApiSkill.skillManager.getServerSkillContainer(player)
+    }
 
 
 abstract class SkillManager : ISkillManager {

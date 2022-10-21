@@ -22,7 +22,6 @@ import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.makeAdvancement
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.lib.skillContainer
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
@@ -55,6 +54,7 @@ import miragefairy2019.mod.skill.ApiSkill
 import miragefairy2019.mod.skill.Mastery
 import miragefairy2019.mod.skill.displayName
 import miragefairy2019.mod.skill.getSkillLevel
+import miragefairy2019.mod.skill.skillContainer
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
