@@ -5,11 +5,11 @@ import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.mod.skill.Mastery
 
 val masteryModule = module {
+    fun f(name: String, enName: String, jaName: String, jaPoem: String) {
+        lang("mirageFairy2019.mastery.$name.name", enName, jaName)
+        lang("mirageFairy2019.mastery.$name.poem", "", jaPoem)
+    }
     Mastery.values().forEach {
-        fun f(name: String, englishName: String, japaneseName: String, japanesePoem: String) {
-            lang("mirageFairy2019.mastery.$name.name", englishName, japaneseName)
-            lang("mirageFairy2019.mastery.$name.poem", "", japanesePoem)
-        }
         when (it) {
             Mastery.root -> f("root", "Fairy M.", "フェアリーマスタリ", "妖精と仲良くなるための知識です。")
             Mastery.combat -> f("combat", "Combat M.", "戦闘マスタリ", "マナの流れを敵にぶつけるための技術です。")
