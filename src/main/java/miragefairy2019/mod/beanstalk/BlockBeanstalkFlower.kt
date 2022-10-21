@@ -1,5 +1,6 @@
 package miragefairy2019.mod.beanstalk
 
+import miragefairy2019.lib.FacedBlockPos
 import miragefairy2019.lib.TileEntityIgnoreBlockState
 import miragefairy2019.lib.get
 import miragefairy2019.lib.indices
@@ -80,9 +81,6 @@ abstract class TileEntityBeanstalkFlower : TileEntityIgnoreBlockState(), ITickab
     abstract fun doAction()
 
 }
-
-// TODO -> lib
-class FacedBlockPos(val blockPos: BlockPos, val facing: EnumFacing)
 
 fun getRoot(world: World, blockPos: BlockPos): FacedBlockPos? {
     fun getFacing(blockPos: BlockPos): EnumFacing? {
