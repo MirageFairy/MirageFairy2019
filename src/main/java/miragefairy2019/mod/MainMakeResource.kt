@@ -1,9 +1,9 @@
 package miragefairy2019.mod
 
 import miragefairy2019.lib.modinitializer.ModScope
+import miragefairy2019.lib.resourcemaker.LangMaker
 import miragefairy2019.lib.resourcemaker.ResourceMaker
 import miragefairy2019.lib.resourcemaker.place
-import miragefairy2019.libkt.LangMaker
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import java.io.File

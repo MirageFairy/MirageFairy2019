@@ -1,7 +1,7 @@
 package miragefairy2019.lib.modinitializer
 
+import miragefairy2019.lib.resourcemaker.LangMaker
 import miragefairy2019.lib.resourcemaker.ResourceMaker
-import miragefairy2019.libkt.LangMaker
 import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraftforge.common.MinecraftForge
