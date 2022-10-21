@@ -41,15 +41,4 @@ val modules = module {
     magicPlantModule()
     beanstalkModule()
 
-    // TODO move
-    onMakeLang {
-
-        enJa("miragefairy2019.gui.duration.days", "days", "日")
-        enJa("miragefairy2019.gui.duration.hours", "hours", "時間")
-        enJa("miragefairy2019.gui.duration.minutes", "minutes", "分")
-        enJa("miragefairy2019.gui.duration.seconds", "seconds", "秒")
-        enJa("miragefairy2019.gui.duration.milliSeconds", "milli seconds", "ミリ秒")
-
-    }
-
 }
