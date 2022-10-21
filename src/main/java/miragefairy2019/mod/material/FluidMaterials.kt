@@ -156,7 +156,7 @@ object FluidMaterials {
                 makeItemModel { fluid }
             }
             onMakeLang { enJa("fluid.mirage_fairy_blood", "Mirage Fairy Blood", "妖精の血") }
-            onMakeLang { enJa("tile.mirageFairyBlood.name", "irage Fairy Blood", "妖精の血") }
+            onMakeLang { enJa("tile.mirageFairyBlood.name", "Mirage Fairy Blood", "妖精の血") }
         }
 
     }
