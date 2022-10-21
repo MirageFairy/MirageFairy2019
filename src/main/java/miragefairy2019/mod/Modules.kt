@@ -44,8 +44,6 @@ val modules = module {
     // TODO move
     onMakeLang {
 
-        enJa("mirageFairy2019.formula.source.cost.name", "Cost", "コスト")
-
         enJa("miragefairy2019.gui.duration.days", "days", "日")
         enJa("miragefairy2019.gui.duration.hours", "hours", "時間")
         enJa("miragefairy2019.gui.duration.minutes", "minutes", "分")

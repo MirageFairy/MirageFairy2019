@@ -897,6 +897,8 @@ val fairyWeaponModule = module {
 
     // 翻訳生成
     onMakeLang {
+        enJa("mirageFairy2019.formula.source.cost.name", "Cost", "コスト")
+
         enJa("advancements.miragefairy2019.fairy_weapon.root.title", "Fairy Weapon", "妖精武器")
         enJa("advancements.miragefairy2019.fairy_weapon.root.description", "Fairy Weapon", "妖精の力を何かに使えないだろうか")
 
