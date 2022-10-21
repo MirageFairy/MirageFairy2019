@@ -2,7 +2,7 @@ package miragefairy2019.mod.recipes
 
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.createItemStack
-import miragefairy2019.libkt.ja
+import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.ModMirageFairy2019
 import mirrg.kotlin.hydrogen.toUpperCamelCase
 import net.minecraft.item.Item
@@ -16,7 +16,7 @@ object Mfa {
     val mfaModule = module {
         fun register(key: String, getMainIngredient: () -> List<ItemStack>, vararg subIngredientsGetters: () -> List<ItemStack>, getJapaneseContent: () -> String) {
             onMakeLang {
-                ja("miragefairy2019.mfa.$key", getJapaneseContent().trimIndent().replace("\n", "\\n"))
+                enJa("miragefairy2019.mfa.$key", null, getJapaneseContent().trimIndent().replace("\n", "\\n"))
             }
             onAddRecipe {
                 mfaPages += MfaPage(getMainIngredient(), subIngredientsGetters.map { it() }, "miragefairy2019.mfa.$key")

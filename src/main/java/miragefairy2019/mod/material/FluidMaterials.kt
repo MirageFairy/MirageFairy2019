@@ -16,7 +16,6 @@ import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.enJa
-import miragefairy2019.libkt.ja
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
@@ -59,7 +58,7 @@ object FluidMaterials {
 
         // ユニバーサルバケツ
         onConstruction { FluidRegistry.enableUniversalBucket() }
-        onMakeLang { ja("item.forge.bucketFilled.name", "%s入りバケツ") }
+        onMakeLang { enJa("item.forge.bucketFilled.name", null, "%s入りバケツ") }
 
         // ミラジウムウォーター
         run {
