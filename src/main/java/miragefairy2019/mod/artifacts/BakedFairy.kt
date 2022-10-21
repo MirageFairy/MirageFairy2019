@@ -1,11 +1,15 @@
 package miragefairy2019.mod.artifacts
 
+import miragefairy2019.api.ErgSet
+import miragefairy2019.api.IAuraItem
 import miragefairy2019.api.IFoodAuraItem
+import miragefairy2019.api.ManaSet
 import miragefairy2019.lib.IColoredItem
 import miragefairy2019.lib.RecipeBase
 import miragefairy2019.lib.RecipeInput
 import miragefairy2019.lib.RecipeMatcher
 import miragefairy2019.lib.compound
+import miragefairy2019.lib.div
 import miragefairy2019.lib.fairySpec
 import miragefairy2019.lib.get
 import miragefairy2019.lib.int
@@ -134,7 +138,7 @@ object BakedFairy {
     }
 }
 
-class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
+class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem, IAuraItem {
     companion object {
         fun getFairy(itemStack: ItemStack) = itemStack["Fairy"]["CombinedFairy"].compound?.toItemStack()
         fun setFairy(itemStack: ItemStack, fairyItemStack: ItemStack) = itemStack["Fairy"]["CombinedFairy"].setCompound(fairyItemStack.toNbt())
@@ -202,6 +206,17 @@ class ItemBakedFairy : ItemFood(0, 0.0f, false), IColoredItem, IFoodAuraItem {
 
 
     override fun getFoodAura(itemStack: ItemStack) = getFairy(itemStack)?.fairySpec?.let { it.manaSet * (1 + 0.01 * getQuality(itemStack)) }
+
+    override fun getAuraManaSet(itemStack: ItemStack): ManaSet? {
+        val fairySpec = getFairy(itemStack)?.fairySpec ?: return null
+        return fairySpec.manaSet / 10.0
+    }
+
+    override fun getAuraErgSet(itemStack: ItemStack): ErgSet? {
+        val fairySpec = getFairy(itemStack)?.fairySpec ?: return null
+        return fairySpec.ergSet / 10.0
+    }
+
 }
 
 class RecipeFairyBaking(registryName: ResourceLocation) : RecipeBase<RecipeFairyBaking.Result>(registryName) {
