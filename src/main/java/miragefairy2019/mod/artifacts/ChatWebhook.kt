@@ -27,6 +27,7 @@ import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
@@ -41,7 +42,6 @@ import miragefairy2019.libkt.drawGuiBackground
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.drawStringRightAligned
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.setOrRemove
 import miragefairy2019.libkt.sq
 import miragefairy2019.libkt.string
@@ -170,7 +170,7 @@ object ChatWebhook {
                 result = DataResult(item = "${ModMirageFairy2019.MODID}:chat_webhook_transmitter")
             )
         }
-        onMakeLang { enJa("tile.chatWebhookTransmitter.name", "Chat Webhook Transmitter", "天耳通の祠") }
+        lang("tile.chatWebhookTransmitter.name", "Chat Webhook Transmitter", "天耳通の祠")
 
 
         // クリエイティブ用
@@ -212,7 +212,7 @@ object ChatWebhook {
         itemCreativeChatWebhookTransmitter = item({ ItemBlock(blockCreativeChatWebhookTransmitter()) }, "creative_chat_webhook_transmitter") {
             setCustomModelResourceLocation(variant = "facing=north")
         }
-        onMakeLang { enJa("tile.creativeChatWebhookTransmitter.name", "Creative Chat Webhook Transmitter", "アカーシャのお導きによる天耳通の祠") }
+        lang("tile.creativeChatWebhookTransmitter.name", "Creative Chat Webhook Transmitter", "アカーシャのお導きによる天耳通の祠")
 
 
         // 共通

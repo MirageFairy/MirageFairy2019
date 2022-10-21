@@ -18,12 +18,12 @@ import miragefairy2019.lib.resourcemaker.DataPoint
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.block
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.resourcemaker.normal
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
@@ -108,7 +108,7 @@ val swordStandModule = module {
             )
         }
     }
-    onMakeLang { enJa("tile.stoneSwordStand.name", "Stone Sword Stand", "ガルガーノの岩") }
+    lang("tile.stoneSwordStand.name", "Stone Sword Stand", "ガルガーノの岩")
     tileEntity("stone_sword_stand", TileEntitySwordStand::class.java)
     tileEntityRenderer(TileEntitySwordStand::class.java) { TileEntityRendererPedestal() }
 }

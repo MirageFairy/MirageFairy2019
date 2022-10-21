@@ -11,6 +11,7 @@ import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.BlockRegion
@@ -18,7 +19,6 @@ import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.drop
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.getRandomItem
 import miragefairy2019.libkt.gold
@@ -94,7 +94,7 @@ val fairyCrystalModule = module {
                 setCustomModelResourceLocation(metadata, model = ResourceLocation(ModMirageFairy2019.MODID, registryName))
                 onCreateItemStack { OreDictionary.registerOre(oreName, itemVariant.createItemStack()) }
                 onCreateItemStack { OreDictionary.registerOre("mirageFairyCrystalAny", itemVariant.createItemStack()) }
-                onMakeLang { enJa("item.$unlocalizedName.name", english, japanese) }
+                lang("item.$unlocalizedName.name", english, japanese)
                 if (recipeParameter != null) {
                     makeRecipe(registryName) {
                         DataShapelessRecipe(

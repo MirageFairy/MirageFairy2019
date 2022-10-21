@@ -11,12 +11,12 @@ import miragefairy2019.lib.modinitializer.setCreativeTab
 import miragefairy2019.lib.modinitializer.setCustomModelResourceLocation
 import miragefairy2019.lib.modinitializer.setUnlocalizedName
 import miragefairy2019.lib.registerItemColorHandler
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.sum
 import miragefairy2019.libkt.IRgb
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.customName
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.hex
 import miragefairy2019.libkt.plus
@@ -74,7 +74,7 @@ val debugItemsModule = module {
             setCustomModelResourceLocation(model = ResourceLocation("book"))
             registerItemColorHandler()
         }
-        onMakeLang { enJa("item.$unlocalizedName.name", "Debug: $english", "デバッグ：$japanese") }
+        lang("item.$unlocalizedName.name", "Debug: $english", "デバッグ：$japanese")
     }
 
     r({ ItemDebugFairyList() }, "fairy_list", "MirageFairy2019非公式Wiki: Generate Fairy List", "MirageFairy2019非公式Wiki：妖精一覧生成")

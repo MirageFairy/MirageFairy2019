@@ -14,6 +14,7 @@ import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.CapabilityProviderAdapter
@@ -135,7 +136,7 @@ val potModule = module {
     }
     PotCard.values().forEach { potCard ->
         makeItemModel("${potCard.fluidRegistryName}_pot") { generated }
-        onMakeLang { enJa("item.mirageFairyPot${potCard.fluidUnlocalizedName.toUpperCaseHead()}.name", "${potCard.fluidEnglishName} Pot", "${potCard.fluidJapaneseName}入りポット") }
+        lang("item.mirageFairyPot${potCard.fluidUnlocalizedName.toUpperCaseHead()}.name", "${potCard.fluidEnglishName} Pot", "${potCard.fluidJapaneseName}入りポット")
     }
 
 

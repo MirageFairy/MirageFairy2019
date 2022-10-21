@@ -22,6 +22,7 @@ import miragefairy2019.lib.resourcemaker.DataShapedRecipe
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
 import miragefairy2019.lib.resourcemaker.block
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
@@ -29,7 +30,6 @@ import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.aqua
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.createItemStack
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
@@ -215,7 +215,7 @@ val mortarModule = module {
         }
 
         // 翻訳生成
-        onMakeLang { enJa("tile.${variant.blockUnlocalizedName}.name", "${variant.englishName} Mortar", "${variant.japaneseName}の乳鉢") }
+        lang("tile.${variant.blockUnlocalizedName}.name", "${variant.englishName} Mortar", "${variant.japaneseName}の乳鉢")
 
     }
 

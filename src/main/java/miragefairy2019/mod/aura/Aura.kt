@@ -11,10 +11,10 @@ import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.aqua
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.mod.Main
 import mirrg.kotlin.hydrogen.atLeast
@@ -54,7 +54,7 @@ val auraModule = module {
             )
         }
     }
-    onMakeLang { enJa("item.auraBook.name", "Aura Test Kit", "オーラ検査キット") }
+    lang("item.auraBook.name", "Aura Test Kit", "オーラ検査キット")
 
     onInit {
         MinecraftForge.EVENT_BUS.register(object {

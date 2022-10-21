@@ -16,10 +16,10 @@ import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
 import miragefairy2019.lib.resourcemaker.handheld
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.copyItemStack
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.WandType
@@ -210,8 +210,8 @@ val commonMaterialsModule = module {
             itemVariant(card.registryName, { ItemVariantSimpleMaterials(card) }, card.metadata) {
                 addOreName(card.oreName)
                 makeItemModel { if (card.isHandheld) handheld else generated }
-                onMakeLang { enJa("item.${card.unlocalizedName}.name", card.englishName, card.japaneseName) }
-                onMakeLang { enJa("item.${card.unlocalizedName}.poem", "", card.japanesePoem) }
+                lang("item.${card.unlocalizedName}.name", card.englishName, card.japaneseName)
+                lang("item.${card.unlocalizedName}.poem", "", card.japanesePoem)
                 card.initializer(this@itemVariant)
             }
         }

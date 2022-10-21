@@ -10,6 +10,7 @@ import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
 import miragefairy2019.lib.resourcemaker.block
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
@@ -17,7 +18,6 @@ import miragefairy2019.libkt.BlockMulti
 import miragefairy2019.libkt.BlockVariantList
 import miragefairy2019.libkt.IBlockVariant
 import miragefairy2019.libkt.ItemBlockMulti
-import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import net.minecraft.block.SoundType
@@ -53,7 +53,7 @@ val creativeMaterialsModule = module {
     CreativeMaterialCard.values().forEach { creativeMaterialCard ->
 
         // 翻訳生成
-        onMakeLang { enJa("tile.${creativeMaterialCard.unlocalizedName}.name", creativeMaterialCard.englishName, creativeMaterialCard.japaneseName) }
+        lang("tile.${creativeMaterialCard.unlocalizedName}.name", creativeMaterialCard.englishName, creativeMaterialCard.japaneseName)
 
         // ブロックモデル生成
         makeBlockModel(creativeMaterialCard.resourceName) {

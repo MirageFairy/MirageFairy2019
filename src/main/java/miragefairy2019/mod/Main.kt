@@ -2,6 +2,7 @@ package miragefairy2019.mod
 
 import miragefairy2019.lib.modinitializer.ModScope
 import miragefairy2019.lib.modinitializer.module
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandler
 import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
@@ -46,7 +47,7 @@ object Main {
             Main.side = side
         }
 
-        onMakeLang { enJa("itemGroup.mirageFairy2019", "MirageFairy2019", "MirageFairy2019") }
+        lang("itemGroup.mirageFairy2019", "MirageFairy2019", "MirageFairy2019")
         onInitCreativeTab {
             creativeTab = object : CreativeTabs("mirageFairy2019") {
                 @SideOnly(Side.CLIENT)

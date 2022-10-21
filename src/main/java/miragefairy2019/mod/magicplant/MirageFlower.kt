@@ -17,6 +17,7 @@ import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
 import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
@@ -24,7 +25,6 @@ import miragefairy2019.libkt.BiomeDecoratorFlowers
 import miragefairy2019.libkt.WorldGenBush
 import miragefairy2019.libkt.copyItemStack
 import miragefairy2019.libkt.createItemStack
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.randomInt
 import miragefairy2019.libkt.textComponent
 import miragefairy2019.mod.Main
@@ -92,7 +92,7 @@ val mirageFlowerModule = module {
     }
 
     // 翻訳生成
-    onMakeLang { enJa("item.mirageFlowerSeeds.name", "Mirage Flower Seed", "ミラージュフラワーの種") }
+    lang("item.mirageFlowerSeeds.name", "Mirage Flower Seed", "ミラージュフラワーの種")
 
     // 地形生成
     onHookDecorator {

@@ -15,6 +15,7 @@ import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.ItemMultiMaterial
@@ -23,7 +24,6 @@ import miragefairy2019.libkt.canTranslate
 import miragefairy2019.libkt.concat
 import miragefairy2019.libkt.containerItem
 import miragefairy2019.libkt.createItemStack
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
@@ -198,8 +198,8 @@ val potionModule = module {
     // 種類別
     PotionCard.values().forEach { potionCard ->
         makeItemModel(potionCard.registryName) { generated }
-        onMakeLang { enJa("item.${potionCard.unlocalizedName}.name", potionCard.englishName, potionCard.japaneseName) }
-        onMakeLang { enJa("item.${potionCard.unlocalizedName}.poem", "", potionCard.japanesePoem) }
+        lang("item.${potionCard.unlocalizedName}.name", potionCard.englishName, potionCard.japaneseName)
+        lang("item.${potionCard.unlocalizedName}.poem", "", potionCard.japanesePoem)
     }
 
     // レシピ登録

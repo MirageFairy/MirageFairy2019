@@ -21,11 +21,11 @@ import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
 import miragefairy2019.lib.resourcemaker.block
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.libkt.enJa
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
@@ -151,7 +151,7 @@ val itemFrameModule = module {
     }
 
     // 翻訳生成
-    onMakeLang { enJa("tile.itemFrame.name", "Item Frame Block", "額縁ブロック") }
+    lang("tile.itemFrame.name", "Item Frame Block", "額縁ブロック")
 
     // タイルエンティティ登録
     tileEntity("item_frame", TileEntityItemFrame::class.java)

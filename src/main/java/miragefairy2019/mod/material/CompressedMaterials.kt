@@ -23,12 +23,12 @@ import miragefairy2019.lib.resourcemaker.DataSimpleIngredient
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
 import miragefairy2019.lib.resourcemaker.block
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.BlockVariantList
-import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.artifacts.WandType
@@ -92,7 +92,7 @@ object CompressedMaterials {
         CompressedMaterialCard.values().forEach { compressedMaterial ->
 
             // 翻訳生成
-            onMakeLang { enJa("tile.${compressedMaterial.unlocalizedName}.name", compressedMaterial.englishName, compressedMaterial.japaneseName) }
+            lang("tile.${compressedMaterial.unlocalizedName}.name", compressedMaterial.englishName, compressedMaterial.japaneseName)
 
             // ブロックモデル生成
             makeBlockModel(compressedMaterial.resourceName) {

@@ -12,6 +12,7 @@ import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.fluid
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
@@ -58,7 +59,7 @@ object FluidMaterials {
 
         // ユニバーサルバケツ
         onConstruction { FluidRegistry.enableUniversalBucket() }
-        onMakeLang { enJa("item.forge.bucketFilled.name", null, "%s入りバケツ") }
+        lang("item.forge.bucketFilled.name", null, "%s入りバケツ")
 
         // ミラジウムウォーター
         run {

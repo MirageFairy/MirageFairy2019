@@ -9,9 +9,9 @@ import miragefairy2019.lib.resourcemaker.DataOreIngredient
 import miragefairy2019.lib.resourcemaker.DataResult
 import miragefairy2019.lib.resourcemaker.DataShapelessRecipe
 import miragefairy2019.lib.resourcemaker.generated
+import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.libkt.enJa
 import miragefairy2019.mod.Main
 import net.minecraft.block.BlockDispenser
 import net.minecraft.dispenser.IBlockSource
@@ -62,7 +62,7 @@ val fertilizerModule = module {
             )
         }
     }
-    onMakeLang { enJa("item.fertilizer.name", "Fertilizer", "肥料") }
+    lang("item.fertilizer.name", "Fertilizer", "肥料")
 }
 
 class ItemFertilizer : Item() {
