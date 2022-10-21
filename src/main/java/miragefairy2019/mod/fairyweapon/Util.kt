@@ -36,7 +36,7 @@ import net.minecraft.world.World
 import net.minecraftforge.common.IShearable
 
 /** メインハンド、オフハンド、最下段のインベントリスロット、最下段以外のインベントリスロットの順に所持アイテムを返します。 */
-val EntityPlayer.inventoryItems get() = listOf(getHeldItem(EnumHand.MAIN_HAND), getHeldItem(EnumHand.OFF_HAND)) + inventory.itemStacks
+val EntityPlayer.inventoryItems: List<ItemStack> get() = listOf(getHeldItem(EnumHand.MAIN_HAND), getHeldItem(EnumHand.OFF_HAND)) + inventory.itemStacks
 
 fun findAllItems(player: EntityPlayer, predicate: (ItemStack) -> Boolean): List<ItemStack> = player.inventoryItems.filter(predicate)
 
