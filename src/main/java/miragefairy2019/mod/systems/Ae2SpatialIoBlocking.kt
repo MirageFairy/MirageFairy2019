@@ -4,7 +4,7 @@ import appeng.api.AEApi
 import miragefairy2019.lib.Compatibility
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.artifacts.ChatWebhook
+import miragefairy2019.mod.artifacts.blockCreativeChatWebhookTransmitter
 import miragefairy2019.mod.configProperty
 import miragefairy2019.mod.material.blockCreativeMaterials
 import mirrg.kotlin.log4j.hydrogen.getLogger
@@ -35,7 +35,7 @@ object Ae2SpatialIoBlocking {
                     disable(Blocks.STRUCTURE_VOID)
                 }
 
-                disable(ChatWebhook.blockCreativeChatWebhookTransmitter())
+                disable(blockCreativeChatWebhookTransmitter())
                 disable(blockCreativeMaterials())
 
             }

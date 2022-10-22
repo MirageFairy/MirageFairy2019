@@ -105,217 +105,215 @@ import java.net.URL
 import java.time.Instant
 import java.util.Random
 
-object ChatWebhook {
-    lateinit var enableChatWebhook: () -> Boolean
-    lateinit var blockChatWebhookTransmitter: () -> BlockChatWebhookTransmitter
-    lateinit var itemChatWebhookTransmitter: () -> ItemBlock
-    lateinit var blockCreativeChatWebhookTransmitter: () -> BlockCreativeChatWebhookTransmitter
-    lateinit var itemCreativeChatWebhookTransmitter: () -> ItemBlock
-    val chatWebhookModule = module {
-        enableChatWebhook = configProperty { it.getBoolean("enableChatWebhook", Main.categoryFeatures, true, "Whether the machines that send the in-game chat to the webhook is enabled") }
+lateinit var enableChatWebhook: () -> Boolean
+lateinit var blockChatWebhookTransmitter: () -> BlockChatWebhookTransmitter
+lateinit var itemChatWebhookTransmitter: () -> ItemBlock
+lateinit var blockCreativeChatWebhookTransmitter: () -> BlockCreativeChatWebhookTransmitter
+lateinit var itemCreativeChatWebhookTransmitter: () -> ItemBlock
+val chatWebhookModule = module {
+    enableChatWebhook = configProperty { it.getBoolean("enableChatWebhook", Main.categoryFeatures, true, "Whether the machines that send the in-game chat to the webhook is enabled") }
 
 
-        // 通常
-        blockChatWebhookTransmitter = block({ BlockChatWebhookTransmitter() }, "chat_webhook_transmitter") {
-            setUnlocalizedName("chatWebhookTransmitter")
-            setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName.path) {
-                DataModelBlockDefinition(
-                    variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
-                        "facing=${facing.first}" to DataSingleVariantList(DataVariant("miragefairy2019:chat_webhook_transmitter", y = facing.second))
-                    }
-                )
-            }
-            makeBlockModel(resourceName.path) {
-                DataModel(
-                    parent = "block/block",
-                    elements = listOf(
-                        DataElement(
-                            from = DataPoint(0.0, 0.0, 0.0),
-                            to = DataPoint(16.0, 16.0, 16.0),
-                            faces = DataFaces(
-                                down = DataFace(texture = "#side", cullface = "down"),
-                                up = DataFace(texture = "#side", cullface = "up"),
-                                north = DataFace(texture = "#front", cullface = "north"),
-                                south = DataFace(texture = "#side", cullface = "south"),
-                                west = DataFace(texture = "#side", cullface = "west"),
-                                east = DataFace(texture = "#side", cullface = "east")
-                            )
-                        )
-                    ),
-                    textures = mapOf(
-                        "particle" to "miragefairy2019:blocks/fairy_machine",
-                        "front" to "miragefairy2019:blocks/fairy_machine_display",
-                        "side" to "miragefairy2019:blocks/fairy_machine"
-                    )
-                )
-            }
-        }
-        itemChatWebhookTransmitter = item({ ItemBlock(blockChatWebhookTransmitter()) }, "chat_webhook_transmitter") {
-            setCustomModelResourceLocation(variant = "facing=north")
-        }
-        makeRecipe("chat_webhook_transmitter") {
-            DataShapedRecipe(
-                pattern = listOf(
-                    "wBw",
-                    "s#s",
-                    "wmw"
-                ),
-                key = mapOf(
-                    "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
-                    "B" to DataSimpleIngredient(item = "minecraft:beacon"),
-                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSound"),
-                    "#" to DataOreIngredient(ore = "blockMiragium"),
-                    "m" to DataOreIngredient(ore = "mirageFairy2019FairyMirageRank1")
-                ),
-                result = DataResult(item = "${ModMirageFairy2019.MODID}:chat_webhook_transmitter")
+    // 通常
+    blockChatWebhookTransmitter = block({ BlockChatWebhookTransmitter() }, "chat_webhook_transmitter") {
+        setUnlocalizedName("chatWebhookTransmitter")
+        setCreativeTab { Main.creativeTab }
+        makeBlockStates(resourceName.path) {
+            DataModelBlockDefinition(
+                variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
+                    "facing=${facing.first}" to DataSingleVariantList(DataVariant("miragefairy2019:chat_webhook_transmitter", y = facing.second))
+                }
             )
         }
-        lang("tile.chatWebhookTransmitter.name", "Chat Webhook Transmitter", "天耳通の祠")
-
-
-        // クリエイティブ用
-        blockCreativeChatWebhookTransmitter = block({ BlockCreativeChatWebhookTransmitter() }, "creative_chat_webhook_transmitter") {
-            setUnlocalizedName("creativeChatWebhookTransmitter")
-            setCreativeTab { Main.creativeTab }
-            makeBlockStates(resourceName.path) {
-                DataModelBlockDefinition(
-                    variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
-                        "facing=${facing.first}" to DataSingleVariantList(DataVariant("miragefairy2019:creative_chat_webhook_transmitter", y = facing.second))
-                    }
-                )
-            }
-            makeBlockModel(resourceName.path) {
-                DataModel(
-                    parent = "block/block",
-                    elements = listOf(
-                        DataElement(
-                            from = DataPoint(0.0, 0.0, 0.0),
-                            to = DataPoint(16.0, 16.0, 16.0),
-                            faces = DataFaces(
-                                down = DataFace(texture = "#side", cullface = "down"),
-                                up = DataFace(texture = "#side", cullface = "up"),
-                                north = DataFace(texture = "#front", cullface = "north"),
-                                south = DataFace(texture = "#side", cullface = "south"),
-                                west = DataFace(texture = "#side", cullface = "west"),
-                                east = DataFace(texture = "#side", cullface = "east")
-                            )
+        makeBlockModel(resourceName.path) {
+            DataModel(
+                parent = "block/block",
+                elements = listOf(
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 0.0),
+                        to = DataPoint(16.0, 16.0, 16.0),
+                        faces = DataFaces(
+                            down = DataFace(texture = "#side", cullface = "down"),
+                            up = DataFace(texture = "#side", cullface = "up"),
+                            north = DataFace(texture = "#front", cullface = "north"),
+                            south = DataFace(texture = "#side", cullface = "south"),
+                            west = DataFace(texture = "#side", cullface = "west"),
+                            east = DataFace(texture = "#side", cullface = "east")
                         )
-                    ),
-                    textures = mapOf(
-                        "particle" to "miragefairy2019:blocks/creative_fairy_machine",
-                        "front" to "miragefairy2019:blocks/creative_fairy_machine_display",
-                        "side" to "miragefairy2019:blocks/creative_fairy_machine"
                     )
+                ),
+                textures = mapOf(
+                    "particle" to "miragefairy2019:blocks/fairy_machine",
+                    "front" to "miragefairy2019:blocks/fairy_machine_display",
+                    "side" to "miragefairy2019:blocks/fairy_machine"
                 )
-            }
+            )
         }
-        itemCreativeChatWebhookTransmitter = item({ ItemBlock(blockCreativeChatWebhookTransmitter()) }, "creative_chat_webhook_transmitter") {
-            setCustomModelResourceLocation(variant = "facing=north")
-        }
-        lang("tile.creativeChatWebhookTransmitter.name", "Creative Chat Webhook Transmitter", "アカーシャのお導きによる天耳通の祠")
-
-
-        // 共通
-
-        tileEntity("chat_webhook_transmitter", TileEntityChatWebhookTransmitter::class.java)
-        tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java) { TileEntityRendererChatWebhookTransmitter() }
-
-        // チャット監視ルーチン
-        onInit {
-            MinecraftForge.EVENT_BUS.register(object {
-                @[Suppress("unused") SubscribeEvent]
-                fun handle(event: IotMessageEvent) {
-                    sendToWebhook(event.senderName, event.message)
-                }
-
-                @[Suppress("unused") SubscribeEvent]
-                fun handle(event: ServerChatEvent) {
-                    sendToWebhook(event.player.name, event.message)
-                }
-
-                fun sendToWebhook(playerName: String, message: String) {
-                    val manager = DaemonManager.instance ?: return
-
-                    // 本体ブロックが現存しないデーモンを除去する
-                    val onFinish = mutableListOf<() -> Unit>()
-                    manager.chatWebhook.forEach { (dimensionalPos, daemon) ->
-                        val isInvalid = run invalidDaemon@{
-                            val world = DimensionManager.getWorld(dimensionalPos.dimension) ?: return@invalidDaemon false // ディメンションがロードされていない
-                            if (!world.isBlockLoaded(dimensionalPos.pos)) return@invalidDaemon false // チャンクがロードされていない
-                            val block = world.getBlockState(dimensionalPos.pos).block as? IBlockDaemon ?: return@invalidDaemon true // ブロックがおかしい
-                            if (!block.canSupportDaemon(world, dimensionalPos.pos, daemon)) return@invalidDaemon true // このデーモンをサポートしていない
-                            false // 正常
-                        }
-                        if (isInvalid) {
-                            onFinish += { manager.chatWebhook.setOrRemove(dimensionalPos, null) }
-                            return@forEach
-                        }
-                    }
-                    onFinish.forEach { it() }
-
-                    // すべての監視デーモンに対して処理
-                    manager.chatWebhook.forEach { (_, daemon) ->
-
-                        // タイムリミット判定
-                        val remaining = daemon.timeLimit - Instant.now()
-                        if (remaining.isNegative) return@forEach // タイムリミットを越している場合は中止
-                        // 除去すると自動復活するため除去はしない
-
-                        // 送信処理
-                        // TODO 複数のチャットをまとめる
-                        // TODO 複数のデーモンに対してDiscordの負荷対策のためディレイ
-                        Thread({
-                            if (enableChatWebhook()) {
-                                Main.logger.trace("http request start")
-                                try {
-
-                                    // 接続設定
-                                    val connection = URL(daemon.webhookUrl).openConnection() as HttpURLConnection
-                                    connection.requestMethod = "POST"
-                                    connection.doOutput = true
-                                    connection.setRequestProperty("Content-Type", "application/json")
-                                    connection.setRequestProperty("User-Agent", "MirageFairy2019")
-
-                                    // 接続開始
-                                    Main.logger.trace("connecting")
-                                    connection.connect()
-
-                                    // 入力の送信
-                                    Main.logger.trace("sending")
-                                    val json = jsonObject(
-                                        "username" to "${daemon.username} @ ${remaining.displayText.unformattedText}".jsonElement,
-                                        "content" to "<$playerName> $message".jsonElement
-                                    ).toJson()
-                                    Main.logger.trace(json)
-                                    connection.outputStream.use { out -> out.write(json.utf8ByteArray) }
-
-                                    // 出力の受信
-                                    Main.logger.trace("receiving")
-                                    val responseBody = connection.inputStream.use { it.readBytes() }.utf8String
-
-                                    // 接続終了
-                                    Main.logger.trace("disconnecting")
-                                    connection.disconnect()
-
-                                    // 結果表示
-                                    Main.logger.trace("${connection.responseCode}")
-                                    Main.logger.trace(responseBody)
-
-                                } catch (e: Throwable) {
-                                    Main.logger.warn("failure", e)
-                                }
-                                Main.logger.trace("http request finished")
-                            }
-                        }, "ChatWebhook Request Thread").start()
-
-                    }
-
-                }
-            })
-        }
-
     }
+    itemChatWebhookTransmitter = item({ ItemBlock(blockChatWebhookTransmitter()) }, "chat_webhook_transmitter") {
+        setCustomModelResourceLocation(variant = "facing=north")
+    }
+    makeRecipe("chat_webhook_transmitter") {
+        DataShapedRecipe(
+            pattern = listOf(
+                "wBw",
+                "s#s",
+                "wmw"
+            ),
+            key = mapOf(
+                "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
+                "B" to DataSimpleIngredient(item = "minecraft:beacon"),
+                "s" to DataOreIngredient(ore = "mirageFairy2019SphereSound"),
+                "#" to DataOreIngredient(ore = "blockMiragium"),
+                "m" to DataOreIngredient(ore = "mirageFairy2019FairyMirageRank1")
+            ),
+            result = DataResult(item = "${ModMirageFairy2019.MODID}:chat_webhook_transmitter")
+        )
+    }
+    lang("tile.chatWebhookTransmitter.name", "Chat Webhook Transmitter", "天耳通の祠")
+
+
+    // クリエイティブ用
+    blockCreativeChatWebhookTransmitter = block({ BlockCreativeChatWebhookTransmitter() }, "creative_chat_webhook_transmitter") {
+        setUnlocalizedName("creativeChatWebhookTransmitter")
+        setCreativeTab { Main.creativeTab }
+        makeBlockStates(resourceName.path) {
+            DataModelBlockDefinition(
+                variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
+                    "facing=${facing.first}" to DataSingleVariantList(DataVariant("miragefairy2019:creative_chat_webhook_transmitter", y = facing.second))
+                }
+            )
+        }
+        makeBlockModel(resourceName.path) {
+            DataModel(
+                parent = "block/block",
+                elements = listOf(
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 0.0),
+                        to = DataPoint(16.0, 16.0, 16.0),
+                        faces = DataFaces(
+                            down = DataFace(texture = "#side", cullface = "down"),
+                            up = DataFace(texture = "#side", cullface = "up"),
+                            north = DataFace(texture = "#front", cullface = "north"),
+                            south = DataFace(texture = "#side", cullface = "south"),
+                            west = DataFace(texture = "#side", cullface = "west"),
+                            east = DataFace(texture = "#side", cullface = "east")
+                        )
+                    )
+                ),
+                textures = mapOf(
+                    "particle" to "miragefairy2019:blocks/creative_fairy_machine",
+                    "front" to "miragefairy2019:blocks/creative_fairy_machine_display",
+                    "side" to "miragefairy2019:blocks/creative_fairy_machine"
+                )
+            )
+        }
+    }
+    itemCreativeChatWebhookTransmitter = item({ ItemBlock(blockCreativeChatWebhookTransmitter()) }, "creative_chat_webhook_transmitter") {
+        setCustomModelResourceLocation(variant = "facing=north")
+    }
+    lang("tile.creativeChatWebhookTransmitter.name", "Creative Chat Webhook Transmitter", "アカーシャのお導きによる天耳通の祠")
+
+
+    // 共通
+
+    tileEntity("chat_webhook_transmitter", TileEntityChatWebhookTransmitter::class.java)
+    tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java) { TileEntityRendererChatWebhookTransmitter() }
+
+    // チャット監視ルーチン
+    onInit {
+        MinecraftForge.EVENT_BUS.register(object {
+            @[Suppress("unused") SubscribeEvent]
+            fun handle(event: IotMessageEvent) {
+                sendToWebhook(event.senderName, event.message)
+            }
+
+            @[Suppress("unused") SubscribeEvent]
+            fun handle(event: ServerChatEvent) {
+                sendToWebhook(event.player.name, event.message)
+            }
+
+            fun sendToWebhook(playerName: String, message: String) {
+                val manager = DaemonManager.instance ?: return
+
+                // 本体ブロックが現存しないデーモンを除去する
+                val onFinish = mutableListOf<() -> Unit>()
+                manager.chatWebhook.forEach { (dimensionalPos, daemon) ->
+                    val isInvalid = run invalidDaemon@{
+                        val world = DimensionManager.getWorld(dimensionalPos.dimension) ?: return@invalidDaemon false // ディメンションがロードされていない
+                        if (!world.isBlockLoaded(dimensionalPos.pos)) return@invalidDaemon false // チャンクがロードされていない
+                        val block = world.getBlockState(dimensionalPos.pos).block as? IBlockDaemon ?: return@invalidDaemon true // ブロックがおかしい
+                        if (!block.canSupportDaemon(world, dimensionalPos.pos, daemon)) return@invalidDaemon true // このデーモンをサポートしていない
+                        false // 正常
+                    }
+                    if (isInvalid) {
+                        onFinish += { manager.chatWebhook.setOrRemove(dimensionalPos, null) }
+                        return@forEach
+                    }
+                }
+                onFinish.forEach { it() }
+
+                // すべての監視デーモンに対して処理
+                manager.chatWebhook.forEach { (_, daemon) ->
+
+                    // タイムリミット判定
+                    val remaining = daemon.timeLimit - Instant.now()
+                    if (remaining.isNegative) return@forEach // タイムリミットを越している場合は中止
+                    // 除去すると自動復活するため除去はしない
+
+                    // 送信処理
+                    // TODO 複数のチャットをまとめる
+                    // TODO 複数のデーモンに対してDiscordの負荷対策のためディレイ
+                    Thread({
+                        if (enableChatWebhook()) {
+                            Main.logger.trace("http request start")
+                            try {
+
+                                // 接続設定
+                                val connection = URL(daemon.webhookUrl).openConnection() as HttpURLConnection
+                                connection.requestMethod = "POST"
+                                connection.doOutput = true
+                                connection.setRequestProperty("Content-Type", "application/json")
+                                connection.setRequestProperty("User-Agent", "MirageFairy2019")
+
+                                // 接続開始
+                                Main.logger.trace("connecting")
+                                connection.connect()
+
+                                // 入力の送信
+                                Main.logger.trace("sending")
+                                val json = jsonObject(
+                                    "username" to "${daemon.username} @ ${remaining.displayText.unformattedText}".jsonElement,
+                                    "content" to "<$playerName> $message".jsonElement
+                                ).toJson()
+                                Main.logger.trace(json)
+                                connection.outputStream.use { out -> out.write(json.utf8ByteArray) }
+
+                                // 出力の受信
+                                Main.logger.trace("receiving")
+                                val responseBody = connection.inputStream.use { it.readBytes() }.utf8String
+
+                                // 接続終了
+                                Main.logger.trace("disconnecting")
+                                connection.disconnect()
+
+                                // 結果表示
+                                Main.logger.trace("${connection.responseCode}")
+                                Main.logger.trace(responseBody)
+
+                            } catch (e: Throwable) {
+                                Main.logger.warn("failure", e)
+                            }
+                            Main.logger.trace("http request finished")
+                        }
+                    }, "ChatWebhook Request Thread").start()
+
+                }
+
+            }
+        })
+    }
+
 }
 
 
