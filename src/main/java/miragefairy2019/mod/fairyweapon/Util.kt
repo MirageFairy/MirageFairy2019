@@ -11,7 +11,6 @@ import miragefairy2019.lib.setCompound
 import miragefairy2019.lib.setDouble
 import miragefairy2019.lib.toItemStack
 import miragefairy2019.lib.toNbt
-import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
@@ -52,7 +51,7 @@ fun findItem(player: EntityPlayer, itemStackTarget: ItemStack) = findItem(player
 
 /** 搭乗中の妖精を優先します。 */
 fun findFairy(fairyWeaponItemStack: ItemStack, player: EntityPlayer): Pair<ItemStack, IFairySpec>? {
-    val itemStacks = listOf(fairyWeaponItemStack.combinedFairy) + player.inventoryItems
+    val itemStacks = listOf(fairyWeaponItemStack.combinedFairy.orEmpty) + player.inventoryItems
     itemStacks.forEach next@{ itemStack ->
         val fairySpec = itemStack.fairySpec ?: return@next
         return Pair(itemStack, fairySpec)
@@ -63,8 +62,8 @@ fun findFairy(fairyWeaponItemStack: ItemStack, player: EntityPlayer): Pair<ItemS
 
 fun getFairyAttribute(attributeName: String, itemStack: ItemStack) = itemStack.nbtProvider["Fairy"][attributeName].double ?: 0.0
 fun setFairyAttribute(attributeName: String, itemStack: ItemStack, value: Double) = itemStack.nbtProvider["Fairy"][attributeName].setDouble(value)
-var ItemStack.combinedFairy: ItemStack
-    get() = this.nbtProvider["Fairy"]["CombinedFairy"].compound?.toItemStack()?.notEmptyOrNull ?: EMPTY_ITEM_STACK
+var ItemStack.combinedFairy: ItemStack?
+    get() = this.nbtProvider["Fairy"]["CombinedFairy"].compound?.toItemStack()?.notEmptyOrNull
     set(it) = this.nbtProvider["Fairy"]["CombinedFairy"].setCompound(it.orEmpty.copy(1).toNbt())
 
 

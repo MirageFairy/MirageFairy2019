@@ -18,7 +18,7 @@ import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.lightPurple
-import miragefairy2019.libkt.notEmptyOrNull
+import miragefairy2019.libkt.orEmpty
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.translateToLocal
@@ -100,7 +100,7 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
 
         tooltip += formattedText { "耐久値: ${(getMaxDamage(itemStack) - getDamage(itemStack)) atLeast 0} / ${getMaxDamage(itemStack)}"().green } // 耐久値 // TRANSLATE
 
-        itemStack.combinedFairy.notEmptyOrNull?.let { tooltip += formattedText { "搭乗中: ${it.displayName}"().aqua } } // 搭乗中の妖精 // TRANSLATE
+        itemStack.combinedFairy?.let { tooltip += formattedText { "搭乗中: ${it.displayName}"().aqua } } // 搭乗中の妖精 // TRANSLATE
 
         // 妖精魔法ステータス
         val fairy = Minecraft.getMinecraft().player?.let { findFairy(itemStack, it) } ?: Pair(EMPTY_ITEM_STACK, EMPTY_FAIRY)
@@ -154,7 +154,7 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
     // 搭乗
 
     override fun getCombineHandler(itemStack: ItemStack) = ICombineHandler { otherItemStack ->
-        val fairyItemStack = itemStack.combinedFairy
+        val fairyItemStack = itemStack.combinedFairy.orEmpty
         if (otherItemStack.isEmpty && fairyItemStack.isEmpty) return@ICombineHandler null // 分解モードで搭乗中の妖精が無い場合は失敗
         if (!otherItemStack.isEmpty && otherItemStack.item !is IFairyItem) return@ICombineHandler null // 合成モードで合成対象が妖精でない場合は失敗
         object : ICombineResult {
@@ -164,7 +164,7 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
     }
 
     override fun hasContainerItem(itemStack: ItemStack) = !getContainerItem(itemStack).isEmpty
-    override fun getContainerItem(itemStack: ItemStack) = itemStack.combinedFairy
+    override fun getContainerItem(itemStack: ItemStack) = itemStack.combinedFairy.orEmpty
 
 
     // 手入れ
@@ -178,7 +178,7 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
         fun damageItem(itemStack: ItemStack, entityLivingBase: EntityLivingBase) {
             itemStack.damageItem(1, entityLivingBase) // アイテムスタックにダメージ
             // 壊れた場合、搭乗している妖精をドロップ
-            if (itemStack.isEmpty) itemStack.combinedFairy.drop(entityLivingBase.world, entityLivingBase.position).setNoPickupDelay()
+            if (itemStack.isEmpty) itemStack.combinedFairy.orEmpty.drop(entityLivingBase.world, entityLivingBase.position).setNoPickupDelay()
         }
     }
 }
@@ -205,7 +205,7 @@ class TileEntityItemStackRendererFairyWeapon : TileEntityItemStackRenderer() {
         GlStateManager.disableRescaleNormal()
 
         // 搭乗妖精描画
-        val itemStackFairy = itemStack.combinedFairy.notEmptyOrNull
+        val itemStackFairy = itemStack.combinedFairy
         if (itemStackFairy != null) {
             val bakedModel = Minecraft.getMinecraft().renderItem.getItemModelWithOverrides(itemStackFairy, null, null)
             GlStateManager.pushMatrix()

@@ -2,7 +2,6 @@ package miragefairy2019.mod.systems
 
 import miragefairy2019.api.Erg
 import miragefairy2019.lib.get
-import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.mod.fairy.fairyVariant
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
@@ -45,7 +44,7 @@ fun ItemStack.getRawErg(erg: Erg): Double? {
     val fairyErg = this.fairyVariant?.fairyCard?.rawErgSet?.get(erg)
 
     // 妖精武器に搭乗した妖精のエルグ
-    val combinedErg = if (this.item is ItemFairyWeapon) this.combinedFairy.notEmptyOrNull?.fairyVariant?.fairyCard?.rawErgSet?.get(erg) else null
+    val combinedErg = if (this.item is ItemFairyWeapon) this.combinedFairy?.fairyVariant?.fairyCard?.rawErgSet?.get(erg) else null
 
     return relationErg max fairyErg max combinedErg // 最大のものしか乗らない
 }
