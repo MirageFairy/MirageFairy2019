@@ -325,7 +325,6 @@ val chatWebhookModule = module {
 
 class IotMessageEvent(val senderName: String, val message: String) : Event()
 
-fun IotMessageEvent.send() = MinecraftForge.EVENT_BUS.post(this)
 
 class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String, val durationSeconds: Long) : Daemon() {
     val timeLimit: Instant get() = created.plusSeconds(durationSeconds)
