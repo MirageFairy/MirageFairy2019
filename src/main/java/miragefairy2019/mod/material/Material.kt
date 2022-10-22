@@ -4,7 +4,7 @@ import miragefairy2019.lib.modinitializer.module
 
 val materialModule = module {
     commonMaterialsModule()
-    CompressedMaterials.compressedMaterialsModule(this)
+    BuildingMaterials.buildingMaterialsModule(this)
     Ores.oresModule(this)
     fairyMaterialsModule()
     FluidMaterials.fluidMaterialsModule(this)

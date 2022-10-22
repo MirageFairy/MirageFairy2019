@@ -38,49 +38,49 @@ import net.minecraft.block.material.Material
 import net.minecraft.util.IStringSerializable
 import net.minecraft.util.ResourceLocation
 
-object CompressedMaterials {
-    lateinit var blockMaterials1: () -> BlockMaterials<CompressedMaterialCard>
-    lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<CompressedMaterialCard>
-    lateinit var blockMaterials2: () -> BlockMaterials<CompressedMaterialCard>
-    lateinit var itemBlockMaterials2: () -> ItemBlockMaterials<CompressedMaterialCard>
-    val compressedMaterialsModule = module {
+object BuildingMaterials {
+    lateinit var blockMaterials1: () -> BlockMaterials<BuildingMaterialCard>
+    lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<BuildingMaterialCard>
+    lateinit var blockMaterials2: () -> BlockMaterials<BuildingMaterialCard>
+    lateinit var itemBlockMaterials2: () -> ItemBlockMaterials<BuildingMaterialCard>
+    val buildingMaterialsModule = module {
 
         // ブロックごと
         run {
 
             // ブロック状素材1
-            blockMaterials1 = block({ BlockMaterials(BlockVariantList(CompressedMaterialCard.values().filter { it.group == 1 }.toList())) }, "materials1") {
+            blockMaterials1 = block({ BlockMaterials(BlockVariantList(BuildingMaterialCard.values().filter { it.group == 1 }.toList())) }, "materials1") {
                 setCreativeTab { Main.creativeTab }
                 makeBlockStates(resourceName.path) {
                     DataModelBlockDefinition(
                         variants = (0..15).associate { meta ->
-                            val modelName = CompressedMaterialCard.values().filter { it.group == 1 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                            val modelName = BuildingMaterialCard.values().filter { it.group == 1 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
                             "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
                         }
                     )
                 }
             }
             itemBlockMaterials1 = item({ ItemBlockMaterials(blockMaterials1()) }, "materials1") {
-                CompressedMaterialCard.values().filter { it.group == 1 }.forEach {
+                BuildingMaterialCard.values().filter { it.group == 1 }.forEach {
                     setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
                     addOreName(it.oreName, it.metadata)
                 }
             }
 
             // ブロック状素材2
-            blockMaterials2 = block({ BlockMaterials(BlockVariantList(CompressedMaterialCard.values().filter { it.group == 2 }.toList())) }, "materials2") {
+            blockMaterials2 = block({ BlockMaterials(BlockVariantList(BuildingMaterialCard.values().filter { it.group == 2 }.toList())) }, "materials2") {
                 setCreativeTab { Main.creativeTab }
                 makeBlockStates(resourceName.path) {
                     DataModelBlockDefinition(
                         variants = (0..15).associate { meta ->
-                            val modelName = CompressedMaterialCard.values().filter { it.group == 2 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                            val modelName = BuildingMaterialCard.values().filter { it.group == 2 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
                             "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
                         }
                     )
                 }
             }
             itemBlockMaterials2 = item({ ItemBlockMaterials(blockMaterials2()) }, "materials2") {
-                CompressedMaterialCard.values().filter { it.group == 2 }.forEach {
+                BuildingMaterialCard.values().filter { it.group == 2 }.forEach {
                     setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
                     addOreName(it.oreName, it.metadata)
                 }
@@ -89,18 +89,18 @@ object CompressedMaterials {
         }
 
         // カードごと
-        CompressedMaterialCard.values().forEach { compressedMaterial ->
+        BuildingMaterialCard.values().forEach { buildingMaterialCard ->
 
             // 翻訳生成
-            lang("tile.${compressedMaterial.unlocalizedName}.name", compressedMaterial.englishName, compressedMaterial.japaneseName)
+            lang("tile.${buildingMaterialCard.unlocalizedName}.name", buildingMaterialCard.englishName, buildingMaterialCard.japaneseName)
 
             // ブロックモデル生成
-            makeBlockModel(compressedMaterial.resourceName) {
-                compressedMaterial.modelProvider(compressedMaterial)
+            makeBlockModel(buildingMaterialCard.resourceName) {
+                buildingMaterialCard.modelProvider(buildingMaterialCard)
             }
 
             // アイテムモデル生成
-            makeItemModel(compressedMaterial.resourceName) { block }
+            makeItemModel(buildingMaterialCard.resourceName) { block }
 
         }
 
@@ -205,7 +205,7 @@ object CompressedMaterials {
                         "m" to DataOreIngredient(ore = "gemMagnetite"),
                         "s" to DataOreIngredient(ore = "stone")
                     ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = CompressedMaterialCard.REINFORCED_STONE.metadata, count = 4)
+                    result = DataResult(item = "miragefairy2019:materials2", data = BuildingMaterialCard.REINFORCED_STONE.metadata, count = 4)
                 )
             }
 
@@ -220,7 +220,7 @@ object CompressedMaterials {
                         "A" to DataOreIngredient(ore = "mirageFairyReinforcedStone"),
                         "B" to DataOreIngredient(ore = "gemMirageFairyPlastic")
                     ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = CompressedMaterialCard.REINFORCED_PLASTIC.metadata, count = 2)
+                    result = DataResult(item = "miragefairy2019:materials2", data = BuildingMaterialCard.REINFORCED_PLASTIC.metadata, count = 2)
                 )
             }
 
@@ -237,7 +237,7 @@ object CompressedMaterials {
                         "b" to DataSimpleIngredient(item = "minecraft:dye", data = 15),
                         "s" to DataOreIngredient(ore = "stone")
                     ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = CompressedMaterialCard.DRYWALL.metadata, count = 4)
+                    result = DataResult(item = "miragefairy2019:materials2", data = BuildingMaterialCard.DRYWALL.metadata, count = 4)
                 )
             }
 
@@ -253,7 +253,7 @@ object CompressedMaterials {
                         "p" to DataOreIngredient(ore = "paper"),
                         "c" to WandType.CRAFTING.ingredientData
                     ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = CompressedMaterialCard.CARDBOARD_BOX.metadata, count = 2)
+                    result = DataResult(item = "miragefairy2019:materials2", data = BuildingMaterialCard.CARDBOARD_BOX.metadata, count = 2)
                 )
             }
 
@@ -274,7 +274,7 @@ class HardnessClass(val blockHardness: Float, val harvestTool: String, val harve
     }
 }
 
-enum class CompressedMaterialCard(
+enum class BuildingMaterialCard(
     val group: Int,
     override val metadata: Int,
     override val resourceName: String,
@@ -282,7 +282,7 @@ enum class CompressedMaterialCard(
     val oreName: String,
     val englishName: String,
     val japaneseName: String,
-    val modelProvider: (CompressedMaterialCard) -> DataModel,
+    val modelProvider: (BuildingMaterialCard) -> DataModel,
     hardnessClass: HardnessClass,
     override val burnTime: Int,
     private val soundTypeSupplier: () -> SoundType,
@@ -326,19 +326,19 @@ enum class CompressedMaterialCard(
 }
 
 
-object NormalBlockModel : (CompressedMaterialCard) -> DataModel {
-    override fun invoke(compressedMaterialCard: CompressedMaterialCard): DataModel {
+object NormalBlockModel : (BuildingMaterialCard) -> DataModel {
+    override fun invoke(buildingMaterialCard: BuildingMaterialCard): DataModel {
         return DataModel(
             parent = "block/cube_all",
             textures = mapOf(
-                "all" to "miragefairy2019:blocks/${compressedMaterialCard.resourceName}"
+                "all" to "miragefairy2019:blocks/${buildingMaterialCard.resourceName}"
             )
         )
     }
 }
 
-object CardboardBoxBlockModel : (CompressedMaterialCard) -> DataModel {
-    override fun invoke(compressedMaterialCard: CompressedMaterialCard): DataModel {
+object CardboardBoxBlockModel : (BuildingMaterialCard) -> DataModel {
+    override fun invoke(buildingMaterialCard: BuildingMaterialCard): DataModel {
         return DataModel(
             parent = "block/block",
             elements = listOf(
@@ -356,10 +356,10 @@ object CardboardBoxBlockModel : (CompressedMaterialCard) -> DataModel {
                 )
             ),
             textures = mapOf(
-                "particle" to "miragefairy2019:blocks/${compressedMaterialCard.resourceName}_top",
-                "top" to "miragefairy2019:blocks/${compressedMaterialCard.resourceName}_top",
-                "side1" to "miragefairy2019:blocks/${compressedMaterialCard.resourceName}_side_1",
-                "side2" to "miragefairy2019:blocks/${compressedMaterialCard.resourceName}_side_2"
+                "particle" to "miragefairy2019:blocks/${buildingMaterialCard.resourceName}_top",
+                "top" to "miragefairy2019:blocks/${buildingMaterialCard.resourceName}_top",
+                "side1" to "miragefairy2019:blocks/${buildingMaterialCard.resourceName}_side_1",
+                "side2" to "miragefairy2019:blocks/${buildingMaterialCard.resourceName}_side_2"
             )
         )
     }
