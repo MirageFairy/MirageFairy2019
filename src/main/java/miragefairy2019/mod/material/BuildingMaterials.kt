@@ -42,6 +42,7 @@ lateinit var blockMaterials1: () -> BlockMaterials<BuildingMaterialCard>
 lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<BuildingMaterialCard>
 lateinit var blockMaterials2: () -> BlockMaterials<BuildingMaterialCard>
 lateinit var itemBlockMaterials2: () -> ItemBlockMaterials<BuildingMaterialCard>
+
 val buildingMaterialsModule = module {
 
     // ブロックごと
@@ -259,6 +260,7 @@ val buildingMaterialsModule = module {
     }
 
 }
+
 
 class HardnessClass(val blockHardness: Float, val harvestTool: String, val harvestLevel: Int) {
     companion object {
