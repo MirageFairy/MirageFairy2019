@@ -106,129 +106,135 @@ import java.time.Instant
 import java.util.Random
 
 lateinit var enableChatWebhook: () -> Boolean
+
 lateinit var blockChatWebhookTransmitter: () -> BlockChatWebhookTransmitter
 lateinit var itemChatWebhookTransmitter: () -> ItemBlock
 lateinit var blockCreativeChatWebhookTransmitter: () -> BlockCreativeChatWebhookTransmitter
 lateinit var itemCreativeChatWebhookTransmitter: () -> ItemBlock
+
 val chatWebhookModule = module {
+
+    // 設定
     enableChatWebhook = configProperty { it.getBoolean("enableChatWebhook", Main.categoryFeatures, true, "Whether the machines that send the in-game chat to the webhook is enabled") }
 
-
-    // 通常
-    blockChatWebhookTransmitter = block({ BlockChatWebhookTransmitter() }, "chat_webhook_transmitter") {
-        setUnlocalizedName("chatWebhookTransmitter")
-        setCreativeTab { Main.creativeTab }
-        makeBlockStates(resourceName.path) {
-            DataModelBlockDefinition(
-                variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
-                    "facing=${facing.first}" to DataSingleVariantList(DataVariant("miragefairy2019:chat_webhook_transmitter", y = facing.second))
-                }
-            )
-        }
-        makeBlockModel(resourceName.path) {
-            DataModel(
-                parent = "block/block",
-                elements = listOf(
-                    DataElement(
-                        from = DataPoint(0.0, 0.0, 0.0),
-                        to = DataPoint(16.0, 16.0, 16.0),
-                        faces = DataFaces(
-                            down = DataFace(texture = "#side", cullface = "down"),
-                            up = DataFace(texture = "#side", cullface = "up"),
-                            north = DataFace(texture = "#front", cullface = "north"),
-                            south = DataFace(texture = "#side", cullface = "south"),
-                            west = DataFace(texture = "#side", cullface = "west"),
-                            east = DataFace(texture = "#side", cullface = "east")
-                        )
-                    )
-                ),
-                textures = mapOf(
-                    "particle" to "miragefairy2019:blocks/fairy_machine",
-                    "front" to "miragefairy2019:blocks/fairy_machine_display",
-                    "side" to "miragefairy2019:blocks/fairy_machine"
+    // 天耳通
+    run {
+        blockChatWebhookTransmitter = block({ BlockChatWebhookTransmitter() }, "chat_webhook_transmitter") {
+            setUnlocalizedName("chatWebhookTransmitter")
+            setCreativeTab { Main.creativeTab }
+            makeBlockStates(resourceName.path) {
+                DataModelBlockDefinition(
+                    variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
+                        "facing=${facing.first}" to DataSingleVariantList(DataVariant("miragefairy2019:chat_webhook_transmitter", y = facing.second))
+                    }
                 )
-            )
-        }
-    }
-    itemChatWebhookTransmitter = item({ ItemBlock(blockChatWebhookTransmitter()) }, "chat_webhook_transmitter") {
-        setCustomModelResourceLocation(variant = "facing=north")
-    }
-    makeRecipe("chat_webhook_transmitter") {
-        DataShapedRecipe(
-            pattern = listOf(
-                "wBw",
-                "s#s",
-                "wmw"
-            ),
-            key = mapOf(
-                "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
-                "B" to DataSimpleIngredient(item = "minecraft:beacon"),
-                "s" to DataOreIngredient(ore = "mirageFairy2019SphereSound"),
-                "#" to DataOreIngredient(ore = "blockMiragium"),
-                "m" to DataOreIngredient(ore = "mirageFairy2019FairyMirageRank1")
-            ),
-            result = DataResult(item = "${ModMirageFairy2019.MODID}:chat_webhook_transmitter")
-        )
-    }
-    lang("tile.chatWebhookTransmitter.name", "Chat Webhook Transmitter", "天耳通の祠")
-
-
-    // クリエイティブ用
-    blockCreativeChatWebhookTransmitter = block({ BlockCreativeChatWebhookTransmitter() }, "creative_chat_webhook_transmitter") {
-        setUnlocalizedName("creativeChatWebhookTransmitter")
-        setCreativeTab { Main.creativeTab }
-        makeBlockStates(resourceName.path) {
-            DataModelBlockDefinition(
-                variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
-                    "facing=${facing.first}" to DataSingleVariantList(DataVariant("miragefairy2019:creative_chat_webhook_transmitter", y = facing.second))
-                }
-            )
-        }
-        makeBlockModel(resourceName.path) {
-            DataModel(
-                parent = "block/block",
-                elements = listOf(
-                    DataElement(
-                        from = DataPoint(0.0, 0.0, 0.0),
-                        to = DataPoint(16.0, 16.0, 16.0),
-                        faces = DataFaces(
-                            down = DataFace(texture = "#side", cullface = "down"),
-                            up = DataFace(texture = "#side", cullface = "up"),
-                            north = DataFace(texture = "#front", cullface = "north"),
-                            south = DataFace(texture = "#side", cullface = "south"),
-                            west = DataFace(texture = "#side", cullface = "west"),
-                            east = DataFace(texture = "#side", cullface = "east")
+            }
+            makeBlockModel(resourceName.path) {
+                DataModel(
+                    parent = "block/block",
+                    elements = listOf(
+                        DataElement(
+                            from = DataPoint(0.0, 0.0, 0.0),
+                            to = DataPoint(16.0, 16.0, 16.0),
+                            faces = DataFaces(
+                                down = DataFace(texture = "#side", cullface = "down"),
+                                up = DataFace(texture = "#side", cullface = "up"),
+                                north = DataFace(texture = "#front", cullface = "north"),
+                                south = DataFace(texture = "#side", cullface = "south"),
+                                west = DataFace(texture = "#side", cullface = "west"),
+                                east = DataFace(texture = "#side", cullface = "east")
+                            )
                         )
+                    ),
+                    textures = mapOf(
+                        "particle" to "miragefairy2019:blocks/fairy_machine",
+                        "front" to "miragefairy2019:blocks/fairy_machine_display",
+                        "side" to "miragefairy2019:blocks/fairy_machine"
                     )
-                ),
-                textures = mapOf(
-                    "particle" to "miragefairy2019:blocks/creative_fairy_machine",
-                    "front" to "miragefairy2019:blocks/creative_fairy_machine_display",
-                    "side" to "miragefairy2019:blocks/creative_fairy_machine"
                 )
+            }
+        }
+        itemChatWebhookTransmitter = item({ ItemBlock(blockChatWebhookTransmitter()) }, "chat_webhook_transmitter") {
+            setCustomModelResourceLocation(variant = "facing=north")
+        }
+        makeRecipe("chat_webhook_transmitter") {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "wBw",
+                    "s#s",
+                    "wmw"
+                ),
+                key = mapOf(
+                    "w" to DataOreIngredient(ore = "mirageFairy2019SphereWarp"),
+                    "B" to DataSimpleIngredient(item = "minecraft:beacon"),
+                    "s" to DataOreIngredient(ore = "mirageFairy2019SphereSound"),
+                    "#" to DataOreIngredient(ore = "blockMiragium"),
+                    "m" to DataOreIngredient(ore = "mirageFairy2019FairyMirageRank1")
+                ),
+                result = DataResult(item = "${ModMirageFairy2019.MODID}:chat_webhook_transmitter")
             )
         }
+        lang("tile.chatWebhookTransmitter.name", "Chat Webhook Transmitter", "天耳通の祠")
     }
-    itemCreativeChatWebhookTransmitter = item({ ItemBlock(blockCreativeChatWebhookTransmitter()) }, "creative_chat_webhook_transmitter") {
-        setCustomModelResourceLocation(variant = "facing=north")
-    }
-    lang("tile.creativeChatWebhookTransmitter.name", "Creative Chat Webhook Transmitter", "アカーシャのお導きによる天耳通の祠")
 
+    // クリエイティブ用天耳通
+    run {
+        blockCreativeChatWebhookTransmitter = block({ BlockCreativeChatWebhookTransmitter() }, "creative_chat_webhook_transmitter") {
+            setUnlocalizedName("creativeChatWebhookTransmitter")
+            setCreativeTab { Main.creativeTab }
+            makeBlockStates(resourceName.path) {
+                DataModelBlockDefinition(
+                    variants = listOf("north" to null, "south" to 180, "west" to 270, "east" to 90).associate { facing ->
+                        "facing=${facing.first}" to DataSingleVariantList(DataVariant("miragefairy2019:creative_chat_webhook_transmitter", y = facing.second))
+                    }
+                )
+            }
+            makeBlockModel(resourceName.path) {
+                DataModel(
+                    parent = "block/block",
+                    elements = listOf(
+                        DataElement(
+                            from = DataPoint(0.0, 0.0, 0.0),
+                            to = DataPoint(16.0, 16.0, 16.0),
+                            faces = DataFaces(
+                                down = DataFace(texture = "#side", cullface = "down"),
+                                up = DataFace(texture = "#side", cullface = "up"),
+                                north = DataFace(texture = "#front", cullface = "north"),
+                                south = DataFace(texture = "#side", cullface = "south"),
+                                west = DataFace(texture = "#side", cullface = "west"),
+                                east = DataFace(texture = "#side", cullface = "east")
+                            )
+                        )
+                    ),
+                    textures = mapOf(
+                        "particle" to "miragefairy2019:blocks/creative_fairy_machine",
+                        "front" to "miragefairy2019:blocks/creative_fairy_machine_display",
+                        "side" to "miragefairy2019:blocks/creative_fairy_machine"
+                    )
+                )
+            }
+        }
+        itemCreativeChatWebhookTransmitter = item({ ItemBlock(blockCreativeChatWebhookTransmitter()) }, "creative_chat_webhook_transmitter") {
+            setCustomModelResourceLocation(variant = "facing=north")
+        }
+        lang("tile.creativeChatWebhookTransmitter.name", "Creative Chat Webhook Transmitter", "アカーシャのお導きによる天耳通の祠")
+    }
 
     // 共通
-
     tileEntity("chat_webhook_transmitter", TileEntityChatWebhookTransmitter::class.java)
     tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java) { TileEntityRendererChatWebhookTransmitter() }
 
     // チャット監視ルーチン
     onInit {
         MinecraftForge.EVENT_BUS.register(object {
-            @[Suppress("unused") SubscribeEvent]
+            @Suppress("unused")
+            @SubscribeEvent
             fun handle(event: IotMessageEvent) {
                 sendToWebhook(event.senderName, event.message)
             }
 
-            @[Suppress("unused") SubscribeEvent]
+            @Suppress("unused")
+            @SubscribeEvent
             fun handle(event: ServerChatEvent) {
                 sendToWebhook(event.player.name, event.message)
             }
