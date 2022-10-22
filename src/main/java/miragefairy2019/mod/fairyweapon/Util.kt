@@ -19,6 +19,7 @@ import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.libkt.sq
 import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponMagic4
+import mirrg.kotlin.hydrogen.or
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityItem
@@ -51,7 +52,7 @@ fun findItem(player: EntityPlayer, itemStackTarget: ItemStack) = findItem(player
 
 /** 搭乗中の妖精を優先します。 */
 fun findFairy(fairyWeaponItemStack: ItemStack, player: EntityPlayer): Pair<ItemStack, IFairySpec>? {
-    val itemStacks = listOf(getCombinedFairy(fairyWeaponItemStack)) + player.inventoryItems
+    val itemStacks = listOf(fairyWeaponItemStack.combinedFairy) + player.inventoryItems
     itemStacks.forEach next@{ itemStack ->
         val fairySpec = itemStack.fairySpec ?: return@next
         return Pair(itemStack, fairySpec)
@@ -60,11 +61,11 @@ fun findFairy(fairyWeaponItemStack: ItemStack, player: EntityPlayer): Pair<ItemS
 }
 
 
-// TODO var
 fun getFairyAttribute(attributeName: String, itemStack: ItemStack) = itemStack.nbtProvider["Fairy"][attributeName].double ?: 0.0
 fun setFairyAttribute(attributeName: String, itemStack: ItemStack, value: Double) = itemStack.nbtProvider["Fairy"][attributeName].setDouble(value)
-fun getCombinedFairy(itemStack: ItemStack) = itemStack.nbtProvider["Fairy"]["CombinedFairy"].compound?.toItemStack()?.notEmptyOrNull ?: EMPTY_ITEM_STACK
-fun setCombinedFairy(itemStack: ItemStack, itemStackFairy: ItemStack?) = itemStack.nbtProvider["Fairy"]["CombinedFairy"].setCompound((itemStackFairy ?: EMPTY_ITEM_STACK).copy(1).toNbt())
+var ItemStack.combinedFairy: ItemStack
+    get() = this.nbtProvider["Fairy"]["CombinedFairy"].compound?.toItemStack()?.notEmptyOrNull ?: EMPTY_ITEM_STACK
+    set(it) = this.nbtProvider["Fairy"]["CombinedFairy"].setCompound(it.or { EMPTY_ITEM_STACK }.copy(1).toNbt())
 
 
 fun breakBlock(

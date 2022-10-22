@@ -7,7 +7,7 @@ import miragefairy2019.mod.fairy.fairyVariant
 import miragefairy2019.mod.fairyrelation.FairySelector
 import miragefairy2019.mod.fairyrelation.primaries
 import miragefairy2019.mod.fairyrelation.withoutPartiallyMatch
-import miragefairy2019.mod.fairyweapon.getCombinedFairy
+import miragefairy2019.mod.fairyweapon.combinedFairy
 import miragefairy2019.mod.fairyweapon.items.ItemFairyWeapon
 import mirrg.kotlin.hydrogen.max
 import mirrg.kotlin.hydrogen.min
@@ -45,7 +45,7 @@ fun ItemStack.getRawErg(erg: Erg): Double? {
     val fairyErg = this.fairyVariant?.fairyCard?.rawErgSet?.get(erg)
 
     // 妖精武器に搭乗した妖精のエルグ
-    val combinedErg = if (this.item is ItemFairyWeapon) getCombinedFairy(this).notEmptyOrNull?.fairyVariant?.fairyCard?.rawErgSet?.get(erg) else null
+    val combinedErg = if (this.item is ItemFairyWeapon) this.combinedFairy.notEmptyOrNull?.fairyVariant?.fairyCard?.rawErgSet?.get(erg) else null
 
     return relationErg max fairyErg max combinedErg // 最大のものしか乗らない
 }
