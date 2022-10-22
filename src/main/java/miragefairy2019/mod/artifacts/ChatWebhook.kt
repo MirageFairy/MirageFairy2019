@@ -56,6 +56,7 @@ import miragefairy2019.mod.systems.DaemonManager
 import miragefairy2019.mod.systems.IBlockDaemon
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
+import mirrg.kotlin.gson.hydrogen.JsonWrapper
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.toJson
@@ -325,6 +326,24 @@ val chatWebhookModule = module {
 
 class IotMessageEvent(val senderName: String, val message: String) : Event()
 
+
+object ChatWebhookDaemonFactory {
+
+    fun fromJson(data: JsonWrapper) = ChatWebhookDaemon(
+        created = Instant.ofEpochSecond(data["created"].asBigDecimal().toLong()),
+        username = data["username"].asString(),
+        webhookUrl = data["webhookUrl"].asString(),
+        durationSeconds = data["duration"].orNull?.asLong() ?: (60L * 60L * 24L * 30L)
+    )
+
+    fun toJson(daemon: ChatWebhookDaemon) = jsonObject(
+        "created" to daemon.created.epochSecond.jsonElement,
+        "username" to daemon.username.jsonElement,
+        "webhookUrl" to daemon.webhookUrl.jsonElement,
+        "duration" to daemon.durationSeconds.jsonElement
+    )
+
+}
 
 class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String, val durationSeconds: Long) : Daemon() {
     val timeLimit: Instant get() = created.plusSeconds(durationSeconds)

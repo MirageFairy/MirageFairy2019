@@ -7,6 +7,7 @@ import miragefairy2019.libkt.existsOrNull
 import miragefairy2019.libkt.mkdirsParent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.ChatWebhookDaemon
+import miragefairy2019.mod.artifacts.ChatWebhookDaemonFactory
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.toJson
@@ -15,7 +16,6 @@ import mirrg.kotlin.gson.hydrogen.toJsonWrapper
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import java.time.Instant
 
 object DaemonSystem {
     private fun getFile(server: MinecraftServer) = server.getWorld(0).saveHandler.worldDirectory.resolve("miragefairy2019/daemon_entities.json")
@@ -29,13 +29,7 @@ object DaemonSystem {
                 DaemonManager(
                     // TODO 分離
                     chatWebhook = data["chatWebhook"].asMap().map { (dimensionalPosExpression, daemonData) ->
-                        val dimensionalPos = DimensionalPos.parse(dimensionalPosExpression)
-                        dimensionalPos to ChatWebhookDaemon(
-                            created = Instant.ofEpochSecond(daemonData["created"].asBigDecimal().toLong()),
-                            username = daemonData["username"].asString(),
-                            webhookUrl = daemonData["webhookUrl"].asString(),
-                            durationSeconds = daemonData["duration"].orNull?.asLong() ?: (60L * 60L * 24L * 30L)
-                        )
+                        DimensionalPos.parse(dimensionalPosExpression) to ChatWebhookDaemonFactory.fromJson(daemonData)
                     }.toMap().toMutableMap()
                 )
             } else {
@@ -56,12 +50,7 @@ object DaemonSystem {
                 jsonObject(
                     // TODO 分離
                     "chatWebhook" to daemonEntityManager.chatWebhook.map { (dimensionalPos, daemon) ->
-                        dimensionalPos.expression to jsonObject(
-                            "created" to daemon.created.epochSecond.jsonElement,
-                            "username" to daemon.username.jsonElement,
-                            "webhookUrl" to daemon.webhookUrl.jsonElement,
-                            "duration" to daemon.durationSeconds.jsonElement
-                        )
+                        dimensionalPos.expression to ChatWebhookDaemonFactory.toJson(daemon)
                     }.jsonObject
                 ).toJson { setPrettyPrinting() }
             )
