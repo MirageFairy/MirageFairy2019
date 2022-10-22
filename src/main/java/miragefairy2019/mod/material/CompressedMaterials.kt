@@ -146,8 +146,8 @@ object CompressedMaterials {
             }
 
             operator fun String.not() = DataOreIngredient(ore = this)
-            operator fun String.invoke(data: Int) = DataSimpleIngredient(item = this, data = data)
-            fun r(item: String, data: Int, count: Int) = DataResult(item = item, data = data, count = count)
+            operator fun String.invoke(data: Int?) = DataSimpleIngredient(item = this, data = data)
+            fun r(item: String, data: Int?, count: Int) = DataResult(item = item, data = data, count = count)
             val m = "miragefairy2019:materials"
             val fm = "miragefairy2019:fairy_materials"
             val m1 = "miragefairy2019:materials1"
