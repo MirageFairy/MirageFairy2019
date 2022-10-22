@@ -12,9 +12,9 @@ import miragefairy2019.lib.registerItemColorHandler
 import miragefairy2019.lib.resourcemaker.DataModel
 import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
-import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemMulti
 import miragefairy2019.libkt.ItemVariant
+import miragefairy2019.libkt.orEmpty
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.translateToLocalFormatted
 import miragefairy2019.mod.Main.creativeTab
@@ -192,4 +192,4 @@ class ItemSpheres : ItemMulti<VariantSphere>(), IColoredItem {
     }
 }
 
-operator fun (() -> ItemSpheres).get(ergType: Erg) = this().getVariant(ergType.ordinal)?.createItemStack() ?: EMPTY_ITEM_STACK
+operator fun (() -> ItemSpheres).get(ergType: Erg) = this().getVariant(ergType.ordinal)?.createItemStack().orEmpty

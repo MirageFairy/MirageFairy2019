@@ -4,8 +4,8 @@ import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
 import miragefairy2019.lib.TileEntityIgnoreBlockState
 import miragefairy2019.lib.obtain
-import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.notEmptyOrNull
+import miragefairy2019.libkt.orEmpty
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
@@ -52,7 +52,7 @@ abstract class BlockPedestal<T : TileEntityPedestal>(material: Material, private
     // 破壊時ドロップ
     override fun breakBlock(world: World, blockPos: BlockPos, blockState: IBlockState) {
         val tileEntity = getTileEntity(world, blockPos) ?: return super.breakBlock(world, blockPos, blockState)
-        InventoryHelper.spawnItemStack(world, blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble(), tileEntity.itemStackOrNull ?: EMPTY_ITEM_STACK)
+        InventoryHelper.spawnItemStack(world, blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble(), tileEntity.itemStackOrNull.orEmpty)
         world.updateComparatorOutputLevel(blockPos, this)
     }
 
@@ -171,7 +171,7 @@ abstract class TileEntityPedestal : TileEntityIgnoreBlockState() {
     var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(1, ItemStack.EMPTY)
     var itemStackOrNull: ItemStack?
         get() = itemStacks[0].notEmptyOrNull
-        set(itemStack) = run { itemStacks[0] = itemStack ?: EMPTY_ITEM_STACK }
+        set(itemStack) = run { itemStacks[0] = itemStack.orEmpty }
 
     override fun writeToNBT(nbt: NBTTagCompound): NBTTagCompound {
         super.writeToNBT(nbt)

@@ -20,7 +20,6 @@ import miragefairy2019.lib.resourcemaker.handheld
 import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeItemModel
 import miragefairy2019.lib.resourcemaker.makeRecipe
-import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.ItemMultiMaterial
 import miragefairy2019.libkt.ItemVariantMaterial
 import miragefairy2019.libkt.aqua
@@ -30,6 +29,7 @@ import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.notEmptyOrNull
+import miragefairy2019.libkt.orEmpty
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.setCustomModelResourceLocations
@@ -1009,5 +1009,5 @@ class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
 
     private fun getContainerItemStack(itemStack: ItemStack) = getVariant(itemStack)?.fairyMaterialCard?.containerItemSupplier?.invoke()?.notEmptyOrNull
     override fun hasContainerItem(itemStack: ItemStack) = getContainerItemStack(itemStack) != null
-    override fun getContainerItem(itemStack: ItemStack) = getContainerItemStack(itemStack) ?: EMPTY_ITEM_STACK
+    override fun getContainerItem(itemStack: ItemStack) = getContainerItemStack(itemStack).orEmpty
 }

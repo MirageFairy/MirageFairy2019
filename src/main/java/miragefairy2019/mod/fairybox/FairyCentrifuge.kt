@@ -68,7 +68,6 @@ import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.set
 import miragefairy2019.lib.writeToNBT
-import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
 import miragefairy2019.libkt.PointInt
@@ -81,6 +80,7 @@ import miragefairy2019.libkt.flatten
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.green
 import miragefairy2019.libkt.ingredient
+import miragefairy2019.libkt.orEmpty
 import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.randomInt
@@ -447,7 +447,7 @@ val fairyCentrifugeModule = module {
             output(Blocks.STONE.createItemStack(metadata = 3), 0.1, 1.0) // 10% 閃緑岩
             output(Blocks.STONE.createItemStack(metadata = 5), 0.1, 1.0) // 10% 安山岩
             output("dustMagnetite".toOreName().copyItemStack() ?: cancel(), 0.05, 2.0) // 5% 磁鉄鉱
-            output("crystalCertusQuartz".toOreName().copyItemStack() ?: EMPTY_ITEM_STACK, 0.02, 2.0) // 2% ケルタスクォーツ
+            output("crystalCertusQuartz".toOreName().copyItemStack().orEmpty, 0.02, 2.0) // 2% ケルタスクォーツ
             output("ingotGold".toOreName().copyItemStack() ?: cancel(), 0.001, 2.0) // 0.1% 金
         }
 

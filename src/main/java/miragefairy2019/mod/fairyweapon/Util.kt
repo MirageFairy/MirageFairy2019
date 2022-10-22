@@ -17,9 +17,9 @@ import miragefairy2019.libkt.createItemStack
 import miragefairy2019.libkt.drop
 import miragefairy2019.libkt.equalsItemDamageTag
 import miragefairy2019.libkt.notEmptyOrNull
+import miragefairy2019.libkt.orEmpty
 import miragefairy2019.libkt.sq
 import miragefairy2019.mod.fairyweapon.items.ItemFairyWeaponMagic4
-import mirrg.kotlin.hydrogen.or
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityItem
@@ -65,7 +65,7 @@ fun getFairyAttribute(attributeName: String, itemStack: ItemStack) = itemStack.n
 fun setFairyAttribute(attributeName: String, itemStack: ItemStack, value: Double) = itemStack.nbtProvider["Fairy"][attributeName].setDouble(value)
 var ItemStack.combinedFairy: ItemStack
     get() = this.nbtProvider["Fairy"]["CombinedFairy"].compound?.toItemStack()?.notEmptyOrNull ?: EMPTY_ITEM_STACK
-    set(it) = this.nbtProvider["Fairy"]["CombinedFairy"].setCompound(it.or { EMPTY_ITEM_STACK }.copy(1).toNbt())
+    set(it) = this.nbtProvider["Fairy"]["CombinedFairy"].setCompound(it.orEmpty.copy(1).toNbt())
 
 
 fun breakBlock(
