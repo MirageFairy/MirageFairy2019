@@ -192,7 +192,7 @@ object CompressedMaterials {
             compress("miragium_ingot", !"nuggetMiragium", r(m, 5, 1))
             compress8("mirage_fairy_solid_fuel_ingot", !"halfChunkMirageFairySolidFuel", r(fm, 29, 1))
 
-            // TODO move
+            // 強化石材
             makeRecipe("reinforced_stone") {
                 DataShapedRecipe(
                     pattern = listOf(
@@ -208,6 +208,8 @@ object CompressedMaterials {
                     result = DataResult(item = "miragefairy2019:materials2", data = CompressedMaterialCard.REINFORCED_STONE.metadata, count = 4)
                 )
             }
+
+            // 強化プラスチック
             makeRecipe("reinforced_plastic") {
                 DataShapedRecipe(
                     pattern = listOf(
@@ -221,6 +223,8 @@ object CompressedMaterials {
                     result = DataResult(item = "miragefairy2019:materials2", data = CompressedMaterialCard.REINFORCED_PLASTIC.metadata, count = 2)
                 )
             }
+
+            // 石膏ボード
             makeRecipe("drywall") {
                 DataShapedRecipe(
                     pattern = listOf(
@@ -236,6 +240,8 @@ object CompressedMaterials {
                     result = DataResult(item = "miragefairy2019:materials2", data = CompressedMaterialCard.DRYWALL.metadata, count = 4)
                 )
             }
+
+            // 段ボール箱
             makeRecipe("cardboard_box") {
                 DataShapedRecipe(
                     pattern = listOf(
