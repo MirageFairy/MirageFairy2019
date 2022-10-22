@@ -65,17 +65,17 @@ class ContainerIntegrated : ContainerComponent() {
             }.flatten().map { it.slot }
 
             // 移動処理
-            if (!miragefairy2019.lib.mergeItemStack(itemStack, destComponentSlots).isChanged) return ItemStack.EMPTY
+            if (!miragefairy2019.lib.mergeItemStack(itemStack, destComponentSlots).isChanged) return EMPTY_ITEM_STACK
 
         }
 
         if (itemStack.isEmpty) { // スタックが丸ごと移動した
-            componentSlot.slot.putStack(ItemStack.EMPTY)
+            componentSlot.slot.putStack(EMPTY_ITEM_STACK)
         } else { // 部分的に残った
             componentSlot.slot.onSlotChanged()
         }
 
-        if (itemStack.count == itemStackOriginal.count) return ItemStack.EMPTY // アイテムが何も移動していない場合は終了
+        if (itemStack.count == itemStackOriginal.count) return EMPTY_ITEM_STACK // アイテムが何も移動していない場合は終了
 
         // スロットが改変を受けた場合にここを通過する
 

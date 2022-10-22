@@ -1,6 +1,7 @@
 package miragefairy2019.mod.placeditem
 
 import miragefairy2019.lib.TileEntityIgnoreBlockState
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.orEmpty
 import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.block.Block
@@ -124,7 +125,7 @@ class BlockPlacedItem : BlockContainer(Material.CIRCUITS) {
 }
 
 class TileEntityPlacedItem : TileEntityIgnoreBlockState() {
-    var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(1, ItemStack.EMPTY)
+    var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(1, EMPTY_ITEM_STACK)
     var rotation = 0.0
     var standing = false
 
@@ -138,7 +139,7 @@ class TileEntityPlacedItem : TileEntityIgnoreBlockState() {
 
     override fun readFromNBT(nbt: NBTTagCompound) {
         super.readFromNBT(nbt)
-        itemStacks.fill(ItemStack.EMPTY)
+        itemStacks.fill(EMPTY_ITEM_STACK)
         ItemStackHelper.loadAllItems(nbt, itemStacks)
         rotation = nbt.getDouble("rotation")
         standing = nbt.getBoolean("standing")

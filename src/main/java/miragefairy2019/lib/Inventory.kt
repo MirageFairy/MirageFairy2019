@@ -1,5 +1,6 @@
 package miragefairy2019.lib
 
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.copy
 import miragefairy2019.libkt.equalsItemDamageTag
 import mirrg.kotlin.hydrogen.atMost
@@ -136,13 +137,13 @@ val IInventory.indices get() = 0 until size
 val IInventory.itemStacks get() = indices.map { this[it] }
 
 fun IInventory.readFromNBT(nbt: NBTTagCompound) {
-    val list = NonNullList.withSize(size, ItemStack.EMPTY)
+    val list = NonNullList.withSize(size, EMPTY_ITEM_STACK)
     ItemStackHelper.loadAllItems(nbt, list)
     indices.map { i -> this[i] = list[i] }
 }
 
 fun IInventory.writeToNBT(nbt: NBTTagCompound) {
-    val list = NonNullList.withSize(size, ItemStack.EMPTY)
+    val list = NonNullList.withSize(size, EMPTY_ITEM_STACK)
     indices.map { i -> list[i] = this[i] }
     ItemStackHelper.saveAllItems(nbt, list)
 }

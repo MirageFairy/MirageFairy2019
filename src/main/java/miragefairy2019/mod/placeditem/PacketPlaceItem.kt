@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf
 import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
 import miragefairy2019.lib.obtain
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.libkt.sq
 import net.minecraft.entity.player.EntityPlayer
@@ -60,7 +61,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
             // プレイヤーの行動更新
             player.markPlayerActive()
 
-            if (!player.canPlayerEdit(blockPos, EnumFacing.UP, ItemStack.EMPTY)) return EnumActionResult.FAIL // 改変禁止なら中止
+            if (!player.canPlayerEdit(blockPos, EnumFacing.UP, EMPTY_ITEM_STACK)) return EnumActionResult.FAIL // 改変禁止なら中止
 
             // アクションを試行
             val result = block.place(world, blockPos, player, object : IPlaceExchanger {
@@ -86,14 +87,14 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
             // プレイヤーの行動更新
             player.markPlayerActive()
 
-            if (!player.canPlayerEdit(blockPos, EnumFacing.UP, ItemStack.EMPTY)) return EnumActionResult.FAIL // 改変禁止なら中止
+            if (!player.canPlayerEdit(blockPos, EnumFacing.UP, EMPTY_ITEM_STACK)) return EnumActionResult.FAIL // 改変禁止なら中止
 
             val tileEntity = world.getTileEntity(blockPos)
             if (tileEntity !is TileEntityPlacedItem) return EnumActionResult.FAIL // 異常なTileだった場合は中止
 
             // アイテムを回収
             val itemStackContained = tileEntity.itemStack
-            tileEntity.itemStack = ItemStack.EMPTY
+            tileEntity.itemStack = EMPTY_ITEM_STACK
             tileEntity.markDirty()
 
             // アイテムを増やす

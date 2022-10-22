@@ -33,6 +33,7 @@ import miragefairy2019.lib.resourcemaker.makeBlockStates
 import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.lib.writeToNBT
 import miragefairy2019.libkt.DimensionalPos
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.GuiHandlerEvent
 import miragefairy2019.libkt.ISimpleGuiHandlerTileEntity
 import miragefairy2019.libkt.dimensionalPos
@@ -519,8 +520,8 @@ class ContainerChatWebhookTransmitter(val tileEntity: TileEntityChatWebhookTrans
     override fun canInteractWith(playerIn: EntityPlayer) = inventoryTileEntity.isUsableByPlayer(playerIn)
 
     override fun transferStackInSlot(playerIn: EntityPlayer, index: Int): ItemStack {
-        val slot = inventorySlots[index] ?: return ItemStack.EMPTY // スロットがnullなら終了
-        if (!slot.hasStack) return ItemStack.EMPTY // スロットが空なら終了
+        val slot = inventorySlots[index] ?: return EMPTY_ITEM_STACK // スロットがnullなら終了
+        if (!slot.hasStack) return EMPTY_ITEM_STACK // スロットが空なら終了
 
         val itemStack = slot.stack
         val itemStackOriginal = itemStack.copy()
@@ -528,18 +529,18 @@ class ContainerChatWebhookTransmitter(val tileEntity: TileEntityChatWebhookTrans
         // 移動処理
         // itemStackを改変する
         if (index < 2) { // タイルエンティティ→プレイヤー
-            if (!mergeItemStack(itemStack, 2, 2 + 9 * 4, true)) return ItemStack.EMPTY
+            if (!mergeItemStack(itemStack, 2, 2 + 9 * 4, true)) return EMPTY_ITEM_STACK
         } else { // プレイヤー→タイルエンティティ
-            if (!mergeItemStack(itemStack, 0, 2, false)) return ItemStack.EMPTY
+            if (!mergeItemStack(itemStack, 0, 2, false)) return EMPTY_ITEM_STACK
         }
 
         if (itemStack.isEmpty) { // スタックが丸ごと移動した
-            slot.putStack(ItemStack.EMPTY)
+            slot.putStack(EMPTY_ITEM_STACK)
         } else { // 部分的に残った
             slot.onSlotChanged()
         }
 
-        if (itemStack.count == itemStackOriginal.count) return ItemStack.EMPTY // アイテムが何も移動していない場合は終了
+        if (itemStack.count == itemStackOriginal.count) return EMPTY_ITEM_STACK // アイテムが何も移動していない場合は終了
 
         // スロットが改変を受けた場合にここを通過する
 

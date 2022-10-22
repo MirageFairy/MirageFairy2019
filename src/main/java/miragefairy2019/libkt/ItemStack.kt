@@ -18,7 +18,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 val ItemStack.notEmptyOrNull get() = takeIf { !it.isEmpty }
-val ItemStack?.orEmpty: ItemStack get() = this ?: ItemStack.EMPTY
+val ItemStack?.orEmpty: ItemStack get() = this ?: EMPTY_ITEM_STACK
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 fun createEmptyItemStack() = ItemStack(null as Item?)

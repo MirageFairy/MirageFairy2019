@@ -4,6 +4,7 @@ import miragefairy2019.api.IPlaceAcceptorBlock
 import miragefairy2019.api.IPlaceExchanger
 import miragefairy2019.lib.TileEntityIgnoreBlockState
 import miragefairy2019.lib.obtain
+import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.libkt.orEmpty
 import net.minecraft.block.Block
@@ -168,7 +169,7 @@ interface ITransformProxy {
 }
 
 abstract class TileEntityPedestal : TileEntityIgnoreBlockState() {
-    var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(1, ItemStack.EMPTY)
+    var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(1, EMPTY_ITEM_STACK)
     var itemStackOrNull: ItemStack?
         get() = itemStacks[0].notEmptyOrNull
         set(itemStack) = run { itemStacks[0] = itemStack.orEmpty }
@@ -181,7 +182,7 @@ abstract class TileEntityPedestal : TileEntityIgnoreBlockState() {
 
     override fun readFromNBT(nbt: NBTTagCompound) {
         super.readFromNBT(nbt)
-        itemStacks.fill(ItemStack.EMPTY)
+        itemStacks.fill(EMPTY_ITEM_STACK)
         ItemStackHelper.loadAllItems(nbt, itemStacks)
     }
 
