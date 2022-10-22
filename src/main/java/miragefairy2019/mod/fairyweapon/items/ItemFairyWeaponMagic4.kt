@@ -132,7 +132,8 @@ open class ItemFairyWeaponMagic4 : ItemFairyWeapon(), IMagicStatusContainer {
         val fairySpec = findFairy(itemStack, attacker)?.second ?: EMPTY_FAIRY // 妖精取得
 
         val magicHandler = getMagic().getMagicHandler(getMagicArguments(attacker, itemStack, fairySpec))
-        magicHandler.hitEntity(target)
+        magicHandler.onHit(target)
+        if (target.health <= 0) magicHandler.onKill(target)
         return true
     }
 

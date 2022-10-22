@@ -67,16 +67,11 @@ class ItemCrystalSword(
 
     override fun getMagic() = magic {
         object : MagicHandler() {
-            override fun hitEntity(target: EntityLivingBase) {
-                onHit(target)
-                if (target.health <= 0) onKill(target)
-            }
-
             fun fail(magicMessage: MagicMessage, actionBar: Boolean) {
                 if (!world.isRemote) player.sendStatusMessage(magicMessage.displayText, actionBar)
             }
 
-            fun onHit(target: EntityLivingBase) {
+            override fun onHit(target: EntityLivingBase) {
                 if (!hasPartnerFairy) return fail(MagicMessage.NO_FAIRY, true) // 妖精を持っていない
                 if (weaponItemStack.itemDamage + ceil(wear()).toInt() > weaponItemStack.maxDamage) return fail(MagicMessage.INSUFFICIENT_DURABILITY, true) // 耐久不足
                 if (player.cooldownTracker.hasCooldown(weaponItem)) return fail(MagicMessage.COOL_TIME, true) // クールタイムが終わっていない
@@ -91,7 +86,7 @@ class ItemCrystalSword(
 
             }
 
-            fun onKill(target: EntityLivingBase) {
+            override fun onKill(target: EntityLivingBase) {
                 val times = world.rand.randomInt(extraItemDropRate()) // ステータスに基づいた回数
                 val table = FairySelector().entity(target).allMatch() // エンティティに紐づけられた妖精のリスト
                     .withoutPartiallyMatch // 抽象的な妖精を除外

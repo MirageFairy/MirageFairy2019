@@ -20,7 +20,8 @@ open class MagicHandler {
     open fun onUpdate(itemSlot: Int, isSelected: Boolean) = Unit
     open fun onClientUpdate(itemSlot: Int, isSelected: Boolean) = Unit
     open fun onServerUpdate(itemSlot: Int, isSelected: Boolean) = Unit
-    open fun hitEntity(target: EntityLivingBase) = Unit // TODO 撃破時と分離
+    open fun onHit(target: EntityLivingBase) = Unit
+    open fun onKill(target: EntityLivingBase) = Unit
 }
 
 typealias Magic = MagicArguments.() -> MagicHandler
