@@ -6,6 +6,7 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.ChatWebhook
 import miragefairy2019.mod.configProperty
+import miragefairy2019.mod.material.blockCreativeMaterials
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
@@ -35,6 +36,7 @@ object Ae2SpatialIoBlocking {
                 }
 
                 disable(ChatWebhook.blockCreativeChatWebhookTransmitter())
+                disable(blockCreativeMaterials())
 
             }
 
