@@ -8,7 +8,7 @@ import miragefairy2019.mod.magicplant.blockMandrake
 import miragefairy2019.mod.magicplant.blockMirageFlower
 import miragefairy2019.mod.magicplant.blockVelopeda
 import miragefairy2019.mod.material.BuildingMaterialCard
-import miragefairy2019.mod.material.BuildingMaterials
+import miragefairy2019.mod.material.blockMaterials1
 import net.minecraft.block.Block
 import net.minecraft.block.BlockDoublePlant
 import net.minecraft.block.BlockOldLeaf
@@ -184,27 +184,27 @@ val fairyRelationModule = module {
     FairyCard.LAPISLAZULI.register { material("Lapis") }
     FairyCard.EMERALD.register { block({ Blocks.EMERALD_BLOCK }) }
     FairyCard.EMERALD.register { material("Emerald") }
-    FairyCard.MAGNETITE.register { blockState({ BuildingMaterials.blockMaterials1().getState(BuildingMaterialCard.MAGNETITE_BLOCK) }) }
+    FairyCard.MAGNETITE.register { blockState({ blockMaterials1().getState(BuildingMaterialCard.MAGNETITE_BLOCK) }) }
     FairyCard.MAGNETITE.register { material("Magnetite") }
-    FairyCard.APATITE.register { blockState({ BuildingMaterials.blockMaterials1().getState(BuildingMaterialCard.APATITE_BLOCK) }) }
+    FairyCard.APATITE.register { blockState({ blockMaterials1().getState(BuildingMaterialCard.APATITE_BLOCK) }) }
     FairyCard.APATITE.register { material("Apatite") }
-    FairyCard.FLUORITE.register { blockState({ BuildingMaterials.blockMaterials1().getState(BuildingMaterialCard.FLUORITE_BLOCK) }) }
+    FairyCard.FLUORITE.register { blockState({ blockMaterials1().getState(BuildingMaterialCard.FLUORITE_BLOCK) }) }
     FairyCard.FLUORITE.register { material("Fluorite") }
-    FairyCard.SULFUR.register { blockState({ BuildingMaterials.blockMaterials1().getState(BuildingMaterialCard.SULFUR_BLOCK) }) }
+    FairyCard.SULFUR.register { blockState({ blockMaterials1().getState(BuildingMaterialCard.SULFUR_BLOCK) }) }
     FairyCard.SULFUR.register { material("Sulfur") }
-    FairyCard.CINNABAR.register { blockState({ BuildingMaterials.blockMaterials1().getState(BuildingMaterialCard.CINNABAR_BLOCK) }) }
+    FairyCard.CINNABAR.register { blockState({ blockMaterials1().getState(BuildingMaterialCard.CINNABAR_BLOCK) }) }
     FairyCard.CINNABAR.register { material("Cinnabar") }
-    FairyCard.MOONSTONE.register { blockState({ BuildingMaterials.blockMaterials1().getState(BuildingMaterialCard.MOONSTONE_BLOCK) }) }
+    FairyCard.MOONSTONE.register { blockState({ blockMaterials1().getState(BuildingMaterialCard.MOONSTONE_BLOCK) }) }
     FairyCard.MOONSTONE.register { material("Moonstone") }
-    FairyCard.PYROPE.register { blockState({ BuildingMaterials.blockMaterials1().getState(BuildingMaterialCard.PYROPE_BLOCK) }) }
+    FairyCard.PYROPE.register { blockState({ blockMaterials1().getState(BuildingMaterialCard.PYROPE_BLOCK) }) }
     FairyCard.PYROPE.register { material("Pyrope") }
-    FairyCard.SMITHSONITE.register { blockState({ BuildingMaterials.blockMaterials1().getState(BuildingMaterialCard.SMITHSONITE_BLOCK) }) }
+    FairyCard.SMITHSONITE.register { blockState({ blockMaterials1().getState(BuildingMaterialCard.SMITHSONITE_BLOCK) }) }
     FairyCard.SMITHSONITE.register { material("Smithsonite") }
-    FairyCard.NEPHRITE.register { blockState({ BuildingMaterials.blockMaterials1().getState(BuildingMaterialCard.NEPHRITE_BLOCK) }) }
+    FairyCard.NEPHRITE.register { blockState({ blockMaterials1().getState(BuildingMaterialCard.NEPHRITE_BLOCK) }) }
     FairyCard.NEPHRITE.register { material("Nephrite") }
-    FairyCard.TOURMALINE.register { blockState({ BuildingMaterials.blockMaterials1().getState(BuildingMaterialCard.TOURMALINE_BLOCK) }) }
+    FairyCard.TOURMALINE.register { blockState({ blockMaterials1().getState(BuildingMaterialCard.TOURMALINE_BLOCK) }) }
     FairyCard.TOURMALINE.register { material("Tourmaline") }
-    FairyCard.TOPAZ.register { blockState({ BuildingMaterials.blockMaterials1().getState(BuildingMaterialCard.TOPAZ_BLOCK) }) }
+    FairyCard.TOPAZ.register { blockState({ blockMaterials1().getState(BuildingMaterialCard.TOPAZ_BLOCK) }) }
     FairyCard.TOPAZ.register { material("Topaz") }
     FairyCard.PYRITE.register { material("Pyrite") }
     FairyCard.GLASS.register { block({ Blocks.GLASS }) }

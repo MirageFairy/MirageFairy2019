@@ -38,228 +38,226 @@ import net.minecraft.block.material.Material
 import net.minecraft.util.IStringSerializable
 import net.minecraft.util.ResourceLocation
 
-object BuildingMaterials {
-    lateinit var blockMaterials1: () -> BlockMaterials<BuildingMaterialCard>
-    lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<BuildingMaterialCard>
-    lateinit var blockMaterials2: () -> BlockMaterials<BuildingMaterialCard>
-    lateinit var itemBlockMaterials2: () -> ItemBlockMaterials<BuildingMaterialCard>
-    val buildingMaterialsModule = module {
+lateinit var blockMaterials1: () -> BlockMaterials<BuildingMaterialCard>
+lateinit var itemBlockMaterials1: () -> ItemBlockMaterials<BuildingMaterialCard>
+lateinit var blockMaterials2: () -> BlockMaterials<BuildingMaterialCard>
+lateinit var itemBlockMaterials2: () -> ItemBlockMaterials<BuildingMaterialCard>
+val buildingMaterialsModule = module {
 
-        // ブロックごと
-        run {
+    // ブロックごと
+    run {
 
-            // ブロック状素材1
-            blockMaterials1 = block({ BlockMaterials(BlockVariantList(BuildingMaterialCard.values().filter { it.group == 1 }.toList())) }, "materials1") {
-                setCreativeTab { Main.creativeTab }
-                makeBlockStates(resourceName.path) {
-                    DataModelBlockDefinition(
-                        variants = (0..15).associate { meta ->
-                            val modelName = BuildingMaterialCard.values().filter { it.group == 1 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
-                            "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
-                        }
-                    )
-                }
+        // ブロック状素材1
+        blockMaterials1 = block({ BlockMaterials(BlockVariantList(BuildingMaterialCard.values().filter { it.group == 1 }.toList())) }, "materials1") {
+            setCreativeTab { Main.creativeTab }
+            makeBlockStates(resourceName.path) {
+                DataModelBlockDefinition(
+                    variants = (0..15).associate { meta ->
+                        val modelName = BuildingMaterialCard.values().filter { it.group == 1 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                        "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
+                    }
+                )
             }
-            itemBlockMaterials1 = item({ ItemBlockMaterials(blockMaterials1()) }, "materials1") {
-                BuildingMaterialCard.values().filter { it.group == 1 }.forEach {
-                    setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
-                    addOreName(it.oreName, it.metadata)
-                }
+        }
+        itemBlockMaterials1 = item({ ItemBlockMaterials(blockMaterials1()) }, "materials1") {
+            BuildingMaterialCard.values().filter { it.group == 1 }.forEach {
+                setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
+                addOreName(it.oreName, it.metadata)
             }
-
-            // ブロック状素材2
-            blockMaterials2 = block({ BlockMaterials(BlockVariantList(BuildingMaterialCard.values().filter { it.group == 2 }.toList())) }, "materials2") {
-                setCreativeTab { Main.creativeTab }
-                makeBlockStates(resourceName.path) {
-                    DataModelBlockDefinition(
-                        variants = (0..15).associate { meta ->
-                            val modelName = BuildingMaterialCard.values().filter { it.group == 2 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
-                            "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
-                        }
-                    )
-                }
-            }
-            itemBlockMaterials2 = item({ ItemBlockMaterials(blockMaterials2()) }, "materials2") {
-                BuildingMaterialCard.values().filter { it.group == 2 }.forEach {
-                    setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
-                    addOreName(it.oreName, it.metadata)
-                }
-            }
-
         }
 
-        // カードごと
-        BuildingMaterialCard.values().forEach { buildingMaterialCard ->
-
-            // 翻訳生成
-            lang("tile.${buildingMaterialCard.unlocalizedName}.name", buildingMaterialCard.englishName, buildingMaterialCard.japaneseName)
-
-            // ブロックモデル生成
-            makeBlockModel(buildingMaterialCard.resourceName) {
-                buildingMaterialCard.modelProvider(buildingMaterialCard)
+        // ブロック状素材2
+        blockMaterials2 = block({ BlockMaterials(BlockVariantList(BuildingMaterialCard.values().filter { it.group == 2 }.toList())) }, "materials2") {
+            setCreativeTab { Main.creativeTab }
+            makeBlockStates(resourceName.path) {
+                DataModelBlockDefinition(
+                    variants = (0..15).associate { meta ->
+                        val modelName = BuildingMaterialCard.values().filter { it.group == 2 }.getOrNull(meta)?.let { "miragefairy2019:${it.resourceName}" } ?: "minecraft:stone"
+                        "variant=$meta" to DataSingleVariantList(DataVariant(model = modelName))
+                    }
+                )
             }
-
-            // アイテムモデル生成
-            makeItemModel(buildingMaterialCard.resourceName) { block }
-
         }
-
-        // 個別
-        run {
-            fun decompress(ingot: String, block: String, ingredientBlock: DataIngredient, resultIngot: DataResult) {
-                makeRecipe("materials/compress/${block}_to_${ingot}") {
-                    DataShapedRecipe(
-                        pattern = listOf(
-                            "#"
-                        ),
-                        key = mapOf(
-                            "#" to ingredientBlock
-                        ),
-                        result = resultIngot
-                    )
-                }
+        itemBlockMaterials2 = item({ ItemBlockMaterials(blockMaterials2()) }, "materials2") {
+            BuildingMaterialCard.values().filter { it.group == 2 }.forEach {
+                setCustomModelResourceLocation(it.metadata, model = ResourceLocation(ModMirageFairy2019.MODID, it.resourceName))
+                addOreName(it.oreName, it.metadata)
             }
-
-            fun compress(block: String, ingredientIngot: DataIngredient, resultBlock: DataResult) {
-                makeRecipe("materials/compress/$block") {
-                    DataShapedRecipe(
-                        pattern = listOf(
-                            "###",
-                            "###",
-                            "###"
-                        ),
-                        key = mapOf(
-                            "#" to ingredientIngot
-                        ),
-                        result = resultBlock
-                    )
-                }
-            }
-
-            fun compress8(block: String, ingredientIngot: DataIngredient, resultBlock: DataResult) {
-                makeRecipe("materials/compress/$block") {
-                    DataShapelessRecipe(
-                        ingredients = (1..8).map { ingredientIngot },
-                        result = resultBlock
-                    )
-                }
-            }
-
-            operator fun String.not() = DataOreIngredient(ore = this)
-            operator fun String.invoke(data: Int?) = DataSimpleIngredient(item = this, data = data)
-            fun r(item: String, data: Int?, count: Int) = DataResult(item = item, data = data, count = count)
-            val m = "miragefairy2019:materials"
-            val fm = "miragefairy2019:fairy_materials"
-            val m1 = "miragefairy2019:materials1"
-            decompress("apatite_gem", "apatite_block", !"blockApatite", r(m, 0, 9))
-            decompress("fluorite_gem", "fluorite_block", !"blockFluorite", r(m, 1, 9))
-            decompress("sulfur_gem", "sulfur_block", !"blockSulfur", r(m, 2, 9))
-            decompress("cinnabar_gem", "cinnabar_block", !"blockCinnabar", r(m, 6, 9))
-            decompress("moonstone_gem", "moonstone_block", !"blockMoonstone", r(m, 7, 9))
-            decompress("magnetite_gem", "magnetite_block", !"blockMagnetite", r(m, 8, 9))
-            decompress("pyrope_gem", "pyrope_block", !"blockPyrope", r(m, 10, 9))
-            decompress("smithsonite_gem", "smithsonite_block", !"blockSmithsonite", r(m, 11, 9))
-            decompress("charcoal", "charcoal_block", !"blockCharcoal", r("minecraft:coal", 1, 9))
-            decompress("mirage_flower_leaf", "mirage_flower_leaf_block", !"blockLeafMirageFlower", r(fm, 8, 9))
-            decompress("miragium_ingot", "miragium_ingot_block", !"blockMiragium", r(m, 5, 9))
-            decompress("miragium_dust", "miragium_dust_block", !"blockDustMiragium", r(m, 3, 9))
-            decompress("nephrite_gem", "nephrite_block", !"blockNephrite", r(m, 14, 9))
-            decompress("topaz_gem", "topaz_block", !"blockTopaz", r(m, 15, 9))
-            decompress("tourmaline_gem", "tourmaline_block", !"blockTourmaline", r(m, 16, 9))
-            decompress("velopeda_leaf", "velopeda_block", !"blockLeafMirageFairyVelopeda", r(fm, 26, 9))
-            compress("apatite_block", !"gemApatite", r(m1, 0, 1))
-            compress("fluorite_block", !"gemFluorite", r(m1, 1, 1))
-            compress("sulfur_block", !"gemSulfur", r(m1, 2, 1))
-            compress("cinnabar_block", !"gemCinnabar", r(m1, 3, 1))
-            compress("moonstone_block", !"gemMoonstone", r(m1, 4, 1))
-            compress("magnetite_block", !"gemMagnetite", r(m1, 5, 1))
-            compress("pyrope_block", !"gemPyrope", r(m1, 6, 1))
-            compress("smithsonite_block", !"gemSmithsonite", r(m1, 7, 1))
-            compress("charcoal_block", "minecraft:coal"(1), r(m1, 8, 1))
-            compress("mirage_flower_leaf_block", !"leafMirageFlower", r(m1, 9, 1))
-            compress("miragium_ingot_block", !"ingotMiragium", r(m1, 10, 1))
-            compress("miragium_dust_block", !"dustMiragium", r(m1, 11, 1))
-            compress("nephrite_block", !"gemNephrite", r(m1, 12, 1))
-            compress("topaz_block", !"gemTopaz", r(m1, 13, 1))
-            compress("tourmaline_block", !"gemTourmaline", r(m1, 14, 1))
-            compress("velopeda_block", !"leafMirageFairyVelopeda", r(m1, 15, 1))
-
-            // TODO move
-            decompress("miragium_tiny_dust", "miragium_dust", !"dustMiragium", r(m, 4, 9))
-            decompress("miragium_nugget", "miragium_ingot", !"ingotMiragium", r(m, 13, 9))
-            decompress("mirage_fairy_solid_fuel_half_chunk", "mirage_fairy_solid_fuel_ingot", !"ingotMirageFairySolidFuel", r(fm, 30, 8))
-            compress("miragium_dust", !"dustTinyMiragium", r(m, 3, 1))
-            compress("miragium_ingot", !"nuggetMiragium", r(m, 5, 1))
-            compress8("mirage_fairy_solid_fuel_ingot", !"halfChunkMirageFairySolidFuel", r(fm, 29, 1))
-
-            // 強化石材
-            makeRecipe("reinforced_stone") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "sms",
-                        "mIm",
-                        "sms"
-                    ),
-                    key = mapOf(
-                        "I" to DataOreIngredient(ore = "ingotMiragium"),
-                        "m" to DataOreIngredient(ore = "gemMagnetite"),
-                        "s" to DataOreIngredient(ore = "stone")
-                    ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = BuildingMaterialCard.REINFORCED_STONE.metadata, count = 4)
-                )
-            }
-
-            // 強化プラスチック
-            makeRecipe("reinforced_plastic") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "AB",
-                        "BA"
-                    ),
-                    key = mapOf(
-                        "A" to DataOreIngredient(ore = "mirageFairyReinforcedStone"),
-                        "B" to DataOreIngredient(ore = "gemMirageFairyPlastic")
-                    ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = BuildingMaterialCard.REINFORCED_PLASTIC.metadata, count = 2)
-                )
-            }
-
-            // 石膏ボード
-            makeRecipe("drywall") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "sbs",
-                        "bmb",
-                        "sbs"
-                    ),
-                    key = mapOf(
-                        "m" to DataOreIngredient(ore = "dustMiragium"),
-                        "b" to DataSimpleIngredient(item = "minecraft:dye", data = 15),
-                        "s" to DataOreIngredient(ore = "stone")
-                    ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = BuildingMaterialCard.DRYWALL.metadata, count = 4)
-                )
-            }
-
-            // 段ボール箱
-            makeRecipe("cardboard_box") {
-                DataShapedRecipe(
-                    pattern = listOf(
-                        "ppp",
-                        "pcp",
-                        "ppp"
-                    ),
-                    key = mapOf(
-                        "p" to DataOreIngredient(ore = "paper"),
-                        "c" to WandType.CRAFTING.ingredientData
-                    ),
-                    result = DataResult(item = "miragefairy2019:materials2", data = BuildingMaterialCard.CARDBOARD_BOX.metadata, count = 2)
-                )
-            }
-
         }
 
     }
+
+    // カードごと
+    BuildingMaterialCard.values().forEach { buildingMaterialCard ->
+
+        // 翻訳生成
+        lang("tile.${buildingMaterialCard.unlocalizedName}.name", buildingMaterialCard.englishName, buildingMaterialCard.japaneseName)
+
+        // ブロックモデル生成
+        makeBlockModel(buildingMaterialCard.resourceName) {
+            buildingMaterialCard.modelProvider(buildingMaterialCard)
+        }
+
+        // アイテムモデル生成
+        makeItemModel(buildingMaterialCard.resourceName) { block }
+
+    }
+
+    // 個別
+    run {
+        fun decompress(ingot: String, block: String, ingredientBlock: DataIngredient, resultIngot: DataResult) {
+            makeRecipe("materials/compress/${block}_to_${ingot}") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "#"
+                    ),
+                    key = mapOf(
+                        "#" to ingredientBlock
+                    ),
+                    result = resultIngot
+                )
+            }
+        }
+
+        fun compress(block: String, ingredientIngot: DataIngredient, resultBlock: DataResult) {
+            makeRecipe("materials/compress/$block") {
+                DataShapedRecipe(
+                    pattern = listOf(
+                        "###",
+                        "###",
+                        "###"
+                    ),
+                    key = mapOf(
+                        "#" to ingredientIngot
+                    ),
+                    result = resultBlock
+                )
+            }
+        }
+
+        fun compress8(block: String, ingredientIngot: DataIngredient, resultBlock: DataResult) {
+            makeRecipe("materials/compress/$block") {
+                DataShapelessRecipe(
+                    ingredients = (1..8).map { ingredientIngot },
+                    result = resultBlock
+                )
+            }
+        }
+
+        operator fun String.not() = DataOreIngredient(ore = this)
+        operator fun String.invoke(data: Int?) = DataSimpleIngredient(item = this, data = data)
+        fun r(item: String, data: Int?, count: Int) = DataResult(item = item, data = data, count = count)
+        val m = "miragefairy2019:materials"
+        val fm = "miragefairy2019:fairy_materials"
+        val m1 = "miragefairy2019:materials1"
+        decompress("apatite_gem", "apatite_block", !"blockApatite", r(m, 0, 9))
+        decompress("fluorite_gem", "fluorite_block", !"blockFluorite", r(m, 1, 9))
+        decompress("sulfur_gem", "sulfur_block", !"blockSulfur", r(m, 2, 9))
+        decompress("cinnabar_gem", "cinnabar_block", !"blockCinnabar", r(m, 6, 9))
+        decompress("moonstone_gem", "moonstone_block", !"blockMoonstone", r(m, 7, 9))
+        decompress("magnetite_gem", "magnetite_block", !"blockMagnetite", r(m, 8, 9))
+        decompress("pyrope_gem", "pyrope_block", !"blockPyrope", r(m, 10, 9))
+        decompress("smithsonite_gem", "smithsonite_block", !"blockSmithsonite", r(m, 11, 9))
+        decompress("charcoal", "charcoal_block", !"blockCharcoal", r("minecraft:coal", 1, 9))
+        decompress("mirage_flower_leaf", "mirage_flower_leaf_block", !"blockLeafMirageFlower", r(fm, 8, 9))
+        decompress("miragium_ingot", "miragium_ingot_block", !"blockMiragium", r(m, 5, 9))
+        decompress("miragium_dust", "miragium_dust_block", !"blockDustMiragium", r(m, 3, 9))
+        decompress("nephrite_gem", "nephrite_block", !"blockNephrite", r(m, 14, 9))
+        decompress("topaz_gem", "topaz_block", !"blockTopaz", r(m, 15, 9))
+        decompress("tourmaline_gem", "tourmaline_block", !"blockTourmaline", r(m, 16, 9))
+        decompress("velopeda_leaf", "velopeda_block", !"blockLeafMirageFairyVelopeda", r(fm, 26, 9))
+        compress("apatite_block", !"gemApatite", r(m1, 0, 1))
+        compress("fluorite_block", !"gemFluorite", r(m1, 1, 1))
+        compress("sulfur_block", !"gemSulfur", r(m1, 2, 1))
+        compress("cinnabar_block", !"gemCinnabar", r(m1, 3, 1))
+        compress("moonstone_block", !"gemMoonstone", r(m1, 4, 1))
+        compress("magnetite_block", !"gemMagnetite", r(m1, 5, 1))
+        compress("pyrope_block", !"gemPyrope", r(m1, 6, 1))
+        compress("smithsonite_block", !"gemSmithsonite", r(m1, 7, 1))
+        compress("charcoal_block", "minecraft:coal"(1), r(m1, 8, 1))
+        compress("mirage_flower_leaf_block", !"leafMirageFlower", r(m1, 9, 1))
+        compress("miragium_ingot_block", !"ingotMiragium", r(m1, 10, 1))
+        compress("miragium_dust_block", !"dustMiragium", r(m1, 11, 1))
+        compress("nephrite_block", !"gemNephrite", r(m1, 12, 1))
+        compress("topaz_block", !"gemTopaz", r(m1, 13, 1))
+        compress("tourmaline_block", !"gemTourmaline", r(m1, 14, 1))
+        compress("velopeda_block", !"leafMirageFairyVelopeda", r(m1, 15, 1))
+
+        // TODO move
+        decompress("miragium_tiny_dust", "miragium_dust", !"dustMiragium", r(m, 4, 9))
+        decompress("miragium_nugget", "miragium_ingot", !"ingotMiragium", r(m, 13, 9))
+        decompress("mirage_fairy_solid_fuel_half_chunk", "mirage_fairy_solid_fuel_ingot", !"ingotMirageFairySolidFuel", r(fm, 30, 8))
+        compress("miragium_dust", !"dustTinyMiragium", r(m, 3, 1))
+        compress("miragium_ingot", !"nuggetMiragium", r(m, 5, 1))
+        compress8("mirage_fairy_solid_fuel_ingot", !"halfChunkMirageFairySolidFuel", r(fm, 29, 1))
+
+        // 強化石材
+        makeRecipe("reinforced_stone") {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "sms",
+                    "mIm",
+                    "sms"
+                ),
+                key = mapOf(
+                    "I" to DataOreIngredient(ore = "ingotMiragium"),
+                    "m" to DataOreIngredient(ore = "gemMagnetite"),
+                    "s" to DataOreIngredient(ore = "stone")
+                ),
+                result = DataResult(item = "miragefairy2019:materials2", data = BuildingMaterialCard.REINFORCED_STONE.metadata, count = 4)
+            )
+        }
+
+        // 強化プラスチック
+        makeRecipe("reinforced_plastic") {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "AB",
+                    "BA"
+                ),
+                key = mapOf(
+                    "A" to DataOreIngredient(ore = "mirageFairyReinforcedStone"),
+                    "B" to DataOreIngredient(ore = "gemMirageFairyPlastic")
+                ),
+                result = DataResult(item = "miragefairy2019:materials2", data = BuildingMaterialCard.REINFORCED_PLASTIC.metadata, count = 2)
+            )
+        }
+
+        // 石膏ボード
+        makeRecipe("drywall") {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "sbs",
+                    "bmb",
+                    "sbs"
+                ),
+                key = mapOf(
+                    "m" to DataOreIngredient(ore = "dustMiragium"),
+                    "b" to DataSimpleIngredient(item = "minecraft:dye", data = 15),
+                    "s" to DataOreIngredient(ore = "stone")
+                ),
+                result = DataResult(item = "miragefairy2019:materials2", data = BuildingMaterialCard.DRYWALL.metadata, count = 4)
+            )
+        }
+
+        // 段ボール箱
+        makeRecipe("cardboard_box") {
+            DataShapedRecipe(
+                pattern = listOf(
+                    "ppp",
+                    "pcp",
+                    "ppp"
+                ),
+                key = mapOf(
+                    "p" to DataOreIngredient(ore = "paper"),
+                    "c" to WandType.CRAFTING.ingredientData
+                ),
+                result = DataResult(item = "miragefairy2019:materials2", data = BuildingMaterialCard.CARDBOARD_BOX.metadata, count = 2)
+            )
+        }
+
+    }
+
 }
 
 class HardnessClass(val blockHardness: Float, val harvestTool: String, val harvestLevel: Int) {
