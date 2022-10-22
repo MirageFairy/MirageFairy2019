@@ -2,13 +2,11 @@ package miragefairy2019.mod.fairyweapon
 
 import miragefairy2019.api.IFairySpec
 import miragefairy2019.lib.compound
-import miragefairy2019.lib.double
 import miragefairy2019.lib.fairySpec
 import miragefairy2019.lib.get
 import miragefairy2019.lib.itemStacks
 import miragefairy2019.lib.nbtProvider
 import miragefairy2019.lib.setCompound
-import miragefairy2019.lib.setDouble
 import miragefairy2019.lib.toItemStack
 import miragefairy2019.lib.toNbt
 import miragefairy2019.libkt.copy
@@ -60,8 +58,6 @@ fun findFairy(fairyWeaponItemStack: ItemStack, player: EntityPlayer): Pair<ItemS
 }
 
 
-fun getFairyAttribute(attributeName: String, itemStack: ItemStack) = itemStack.nbtProvider["Fairy"][attributeName].double ?: 0.0
-fun setFairyAttribute(attributeName: String, itemStack: ItemStack, value: Double) = itemStack.nbtProvider["Fairy"][attributeName].setDouble(value)
 var ItemStack.combinedFairy: ItemStack?
     get() = this.nbtProvider["Fairy"]["CombinedFairy"].compound?.toItemStack()?.notEmptyOrNull
     set(it) = this.nbtProvider["Fairy"]["CombinedFairy"].setCompound(it.orEmpty.copy(1).toNbt())

@@ -2,13 +2,15 @@ package miragefairy2019.mod.fairyweapon.items
 
 import com.google.common.collect.Multimap
 import miragefairy2019.api.IFairySpec
+import miragefairy2019.lib.double
+import miragefairy2019.lib.get
+import miragefairy2019.lib.nbtProvider
+import miragefairy2019.lib.setDouble
 import miragefairy2019.lib.sum
 import miragefairy2019.libkt.blue
 import miragefairy2019.libkt.formattedText
 import miragefairy2019.libkt.plus
 import miragefairy2019.mod.fairyweapon.findFairy
-import miragefairy2019.mod.fairyweapon.getFairyAttribute
-import miragefairy2019.mod.fairyweapon.setFairyAttribute
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.SharedMonsterAttributes
@@ -24,6 +26,8 @@ import kotlin.math.min
 
 // TODO magic4
 class ItemFairySword : ItemFairyWeapon() {
+    private fun getFairyAttribute(attributeName: String, itemStack: ItemStack) = itemStack.nbtProvider["Fairy"][attributeName].double ?: 0.0
+    private fun setFairyAttribute(attributeName: String, itemStack: ItemStack, value: Double) = itemStack.nbtProvider["Fairy"][attributeName].setDouble(value)
     private fun getAdditionalAttackDamage(itemStack: ItemStack) = getFairyAttribute("AdditionalAttackDamage", itemStack)
     private fun getAdditionalAttackSpeed(itemStack: ItemStack) = getFairyAttribute("AdditionalAttackSpeed", itemStack)
     private fun setAdditionalAttackDamage(itemStack: ItemStack, additionalAttackDamage: Double) = setFairyAttribute("AdditionalAttackDamage", itemStack, additionalAttackDamage)
