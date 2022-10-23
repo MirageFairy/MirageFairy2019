@@ -55,6 +55,7 @@ import miragefairy2019.mod.systems.DaemonManager
 import miragefairy2019.mod.systems.IDaemon
 import miragefairy2019.mod.systems.IDaemonBlock
 import miragefairy2019.mod.systems.IDaemonFactory
+import miragefairy2019.mod.systems.daemonFactory
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
 import mirrg.kotlin.gson.hydrogen.JsonWrapper
@@ -225,9 +226,7 @@ val chatWebhookModule = module {
     // 共通
     tileEntity("chat_webhook_transmitter", TileEntityChatWebhookTransmitter::class.java)
     tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java) { TileEntityRendererChatWebhookTransmitter() }
-    onInit {
-        DaemonManager.registerDaemonFactory(modId, "chat_webhook", ChatWebhookDaemonFactory)
-    }
+    daemonFactory(modId, "chat_webhook_transmitter") { ChatWebhookDaemonFactory }
 
     // チャット監視ルーチン
     onInit {

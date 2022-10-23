@@ -1,6 +1,7 @@
 package miragefairy2019.mod.systems
 
 import com.google.gson.JsonElement
+import miragefairy2019.lib.modinitializer.ModScope
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.onServerSave
 import miragefairy2019.libkt.DimensionalPos
@@ -64,12 +65,12 @@ object DaemonSystem {
 
 
 object DaemonManager {
-    private val daemonFactories = mutableMapOf<ResourceLocation, IDaemonFactory<*>>()
+    val daemonFactories = mutableMapOf<ResourceLocation, IDaemonFactory<*>>()
     var daemons: MutableMap<DimensionalPos, IDaemon>? = null
+}
 
-    fun registerDaemonFactory(modId: String, name: String, daemonFactory: IDaemonFactory<*>) {
-        daemonFactories[ResourceLocation(modId, name)] = daemonFactory
-    }
+fun ModScope.daemonFactory(modId: String, name: String, daemonFactoryGetter: () -> IDaemonFactory<*>) = onInit {
+    DaemonManager.daemonFactories[ResourceLocation(modId, name)] = daemonFactoryGetter()
 }
 
 
