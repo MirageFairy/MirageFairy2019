@@ -80,6 +80,6 @@ interface IDaemon {
 }
 
 
-interface IBlockDaemon {
-    fun canSupportDaemon(world: World, blockPos: BlockPos, daemon: IDaemon): Boolean
+interface IDaemonBlock {
+    fun supportsDaemon(world: World, blockPos: BlockPos, daemon: IDaemon): Boolean
 }

@@ -52,7 +52,7 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.configProperty
 import miragefairy2019.mod.systems.DaemonManager
-import miragefairy2019.mod.systems.IBlockDaemon
+import miragefairy2019.mod.systems.IDaemonBlock
 import miragefairy2019.mod.systems.IDaemon
 import miragefairy2019.mod.systems.IDaemonFactory
 import miragefairy2019.util.InventoryTileEntity
@@ -254,8 +254,8 @@ val chatWebhookModule = module {
                     val isInvalid = run invalidDaemon@{
                         val world = DimensionManager.getWorld(dimensionalPos.dimension) ?: return@invalidDaemon false // ディメンションがロードされていない
                         if (!world.isBlockLoaded(dimensionalPos.pos)) return@invalidDaemon false // チャンクがロードされていない
-                        val block = world.getBlockState(dimensionalPos.pos).block as? IBlockDaemon ?: return@invalidDaemon true // ブロックがおかしい
-                        if (!block.canSupportDaemon(world, dimensionalPos.pos, daemon)) return@invalidDaemon true // このデーモンをサポートしていない
+                        val block = world.getBlockState(dimensionalPos.pos).block as? IDaemonBlock ?: return@invalidDaemon true // ブロックがおかしい
+                        if (!block.supportsDaemon(world, dimensionalPos.pos, daemon)) return@invalidDaemon true // このデーモンをサポートしていない
                         false // 正常
                     }
                     if (isInvalid) {
@@ -352,7 +352,7 @@ class ChatWebhookDaemon(val created: Instant, val username: String, val webhookU
 }
 
 
-abstract class BlockChatWebhookTransmitterBase : BlockContainer(Material.IRON), IBlockDaemon {
+abstract class BlockChatWebhookTransmitterBase : BlockContainer(Material.IRON), IDaemonBlock {
     init {
         defaultState = blockState.baseState.withProperty(FACING, EnumFacing.NORTH)
         soundType = SoundType.METAL
@@ -392,7 +392,7 @@ abstract class BlockChatWebhookTransmitterBase : BlockContainer(Material.IRON), 
 
     // 特殊なインスタンス
     override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityChatWebhookTransmitter()
-    override fun canSupportDaemon(world: World, blockPos: BlockPos, daemon: IDaemon) = daemon is ChatWebhookDaemon
+    override fun supportsDaemon(world: World, blockPos: BlockPos, daemon: IDaemon) = daemon is ChatWebhookDaemon
 
 
     // アクション
