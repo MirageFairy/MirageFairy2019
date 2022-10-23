@@ -25,17 +25,13 @@ object DaemonSystem {
             Main.logger.info("DaemonSystem: Loading")
             val data = getFile(server).existsOrNull?.readText()?.toJsonElement().toJsonWrapper().orNull
             DaemonManager.instance = if (data != null) {
-                DaemonContainer(
-                    // TODO 分離
-                    chatWebhook = data["chatWebhook"].asMap().map { (dimensionalPosExpression, daemonData) ->
-                        DimensionalPos.parse(dimensionalPosExpression) to ChatWebhookDaemonFactory.fromJson(daemonData)
-                    }.toMap().toMutableMap()
-                )
+                // TODO 分離
+                data["chatWebhook"].asMap().map { (dimensionalPosExpression, daemonData) ->
+                    DimensionalPos.parse(dimensionalPosExpression) to ChatWebhookDaemonFactory.fromJson(daemonData)
+                }.toMap().toMutableMap()
             } else {
-                DaemonContainer(
-                    // TODO 分離
-                    chatWebhook = mutableMapOf()
-                )
+                // TODO 分離
+                mutableMapOf()
             }
         }
 
@@ -48,7 +44,7 @@ object DaemonSystem {
             getFile(server).writeText(
                 jsonObject(
                     // TODO 分離
-                    "chatWebhook" to daemonEntityManager.chatWebhook.map { (dimensionalPos, daemon) ->
+                    "chatWebhook" to daemonEntityManager.map { (dimensionalPos, daemon) ->
                         dimensionalPos.expression to ChatWebhookDaemonFactory.toJson(daemon)
                     }.jsonObject
                 ).toJson { setPrettyPrinting() }
@@ -66,12 +62,9 @@ object DaemonSystem {
 
 
 object DaemonManager {
-    var instance: DaemonContainer? = null
+    var instance: MutableMap<DimensionalPos, ChatWebhookDaemon>? = null // TODO 分離
 }
 
-class DaemonContainer(
-    val chatWebhook: MutableMap<DimensionalPos, ChatWebhookDaemon> // TODO 分離
-)
 
 abstract class Daemon
 
