@@ -54,6 +54,7 @@ import miragefairy2019.mod.configProperty
 import miragefairy2019.mod.systems.Daemon
 import miragefairy2019.mod.systems.DaemonManager
 import miragefairy2019.mod.systems.IBlockDaemon
+import miragefairy2019.mod.systems.IDaemonFactory
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
 import mirrg.kotlin.gson.hydrogen.JsonWrapper
@@ -90,6 +91,7 @@ import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.Mirror
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.Rotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
@@ -224,6 +226,9 @@ val chatWebhookModule = module {
     // 共通
     tileEntity("chat_webhook_transmitter", TileEntityChatWebhookTransmitter::class.java)
     tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java) { TileEntityRendererChatWebhookTransmitter() }
+    onInit {
+        DaemonManager.daemonFactories[ResourceLocation(ModMirageFairy2019.MODID, "chat_webhook")] = ChatWebhookDaemonFactory
+    }
 
     // チャット監視ルーチン
     onInit {
@@ -327,16 +332,16 @@ val chatWebhookModule = module {
 class IotMessageEvent(val senderName: String, val message: String) : Event()
 
 
-object ChatWebhookDaemonFactory {
+object ChatWebhookDaemonFactory : IDaemonFactory<ChatWebhookDaemon> {
 
-    fun fromJson(data: JsonWrapper) = ChatWebhookDaemon(
+    override fun fromJson(data: JsonWrapper) = ChatWebhookDaemon(
         created = Instant.ofEpochSecond(data["created"].asBigDecimal().toLong()),
         username = data["username"].asString(),
         webhookUrl = data["webhookUrl"].asString(),
         durationSeconds = data["duration"].orNull?.asLong() ?: (60L * 60L * 24L * 30L)
     )
 
-    fun toJson(daemon: ChatWebhookDaemon) = jsonObject(
+    override fun toJson(daemon: ChatWebhookDaemon) = jsonObject(
         "created" to daemon.created.epochSecond.jsonElement,
         "username" to daemon.username.jsonElement,
         "webhookUrl" to daemon.webhookUrl.jsonElement,

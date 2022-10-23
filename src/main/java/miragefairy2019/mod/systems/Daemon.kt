@@ -1,5 +1,6 @@
 package miragefairy2019.mod.systems
 
+import com.google.gson.JsonElement
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.lib.modinitializer.onServerSave
 import miragefairy2019.libkt.DimensionalPos
@@ -8,11 +9,13 @@ import miragefairy2019.libkt.mkdirsParent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.ChatWebhookDaemon
 import miragefairy2019.mod.artifacts.ChatWebhookDaemonFactory
+import mirrg.kotlin.gson.hydrogen.JsonWrapper
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.toJson
 import mirrg.kotlin.gson.hydrogen.toJsonElement
 import mirrg.kotlin.gson.hydrogen.toJsonWrapper
 import net.minecraft.server.MinecraftServer
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
@@ -62,7 +65,14 @@ object DaemonSystem {
 
 
 object DaemonManager {
+    val daemonFactories = mutableMapOf<ResourceLocation, IDaemonFactory<*>>()
     var daemons: MutableMap<DimensionalPos, ChatWebhookDaemon>? = null // TODO 分離
+}
+
+
+interface IDaemonFactory<D> {
+    fun fromJson(data: JsonWrapper): D
+    fun toJson(daemon: D): JsonElement
 }
 
 
