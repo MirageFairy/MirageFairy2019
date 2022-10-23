@@ -8,7 +8,6 @@ import miragefairy2019.libkt.mkdirsParent
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.ChatWebhookDaemon
 import miragefairy2019.mod.artifacts.ChatWebhookDaemonFactory
-import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.toJson
 import mirrg.kotlin.gson.hydrogen.toJsonElement
@@ -26,14 +25,14 @@ object DaemonSystem {
             Main.logger.info("DaemonSystem: Loading")
             val data = getFile(server).existsOrNull?.readText()?.toJsonElement().toJsonWrapper().orNull
             DaemonManager.instance = if (data != null) {
-                DaemonManager(
+                DaemonContainer(
                     // TODO 分離
                     chatWebhook = data["chatWebhook"].asMap().map { (dimensionalPosExpression, daemonData) ->
                         DimensionalPos.parse(dimensionalPosExpression) to ChatWebhookDaemonFactory.fromJson(daemonData)
                     }.toMap().toMutableMap()
                 )
             } else {
-                DaemonManager(
+                DaemonContainer(
                     // TODO 分離
                     chatWebhook = mutableMapOf()
                 )
@@ -65,13 +64,14 @@ object DaemonSystem {
     }
 }
 
-class DaemonManager(
-    val chatWebhook: MutableMap<DimensionalPos, ChatWebhookDaemon> // TODO 分離
-) {
-    companion object {
-        var instance: DaemonManager? = null
-    }
+
+object DaemonManager {
+    var instance: DaemonContainer? = null
 }
+
+class DaemonContainer(
+    val chatWebhook: MutableMap<DimensionalPos, ChatWebhookDaemon> // TODO 分離
+)
 
 abstract class Daemon
 
