@@ -241,11 +241,11 @@ val chatWebhookModule = module {
             }
 
             fun sendToWebhook(playerName: String, message: String) {
-                val manager = DaemonManager.instance ?: return
+                val daemons = DaemonManager.daemons ?: return
 
                 // 本体ブロックが現存しないデーモンを除去する
                 val onFinish = mutableListOf<() -> Unit>()
-                manager.forEach { (dimensionalPos, daemon) ->
+                daemons.forEach { (dimensionalPos, daemon) ->
                     val isInvalid = run invalidDaemon@{
                         val world = DimensionManager.getWorld(dimensionalPos.dimension) ?: return@invalidDaemon false // ディメンションがロードされていない
                         if (!world.isBlockLoaded(dimensionalPos.pos)) return@invalidDaemon false // チャンクがロードされていない
@@ -254,14 +254,14 @@ val chatWebhookModule = module {
                         false // 正常
                     }
                     if (isInvalid) {
-                        onFinish += { manager.setOrRemove(dimensionalPos, null) }
+                        onFinish += { daemons.setOrRemove(dimensionalPos, null) }
                         return@forEach
                     }
                 }
                 onFinish.forEach { it() }
 
                 // すべての監視デーモンに対して処理
-                manager.forEach { (_, daemon) ->
+                daemons.forEach { (_, daemon) ->
 
                     // タイムリミット判定
                     val remaining = daemon.timeLimit - Instant.now()
@@ -407,7 +407,7 @@ abstract class BlockChatWebhookTransmitterBase : BlockContainer(Material.IRON), 
             tileEntity.inventory.itemStacks.forEach { InventoryHelper.spawnItemStack(world, blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble(), it) }
             world.updateComparatorOutputLevel(blockPos, this)
         } // 中身のアイテムの放出
-        DaemonManager.instance?.remove(DimensionalPos(world.provider.dimension, blockPos)) // デーモンを消去
+        DaemonManager.daemons?.remove(DimensionalPos(world.provider.dimension, blockPos)) // デーモンを消去
         super.breakBlock(world, blockPos, blockState)
     }
 
@@ -461,7 +461,7 @@ class BlockCreativeChatWebhookTransmitter : BlockChatWebhookTransmitterBase() {
 class TileEntityChatWebhookTransmitter : TileEntityIgnoreBlockState(), ISimpleGuiHandlerTileEntity {
     val inventory = InventoryChatWebhookTransmitter(this, "tile.chatWebhookTransmitter.name", false, 2)
 
-    val daemon get() = DaemonManager.instance?.get(dimensionalPos)
+    val daemon get() = DaemonManager.daemons?.get(dimensionalPos)
     val username get() = inventory[0].string
     val webhookUrl get() = inventory[1].string
 
@@ -469,8 +469,8 @@ class TileEntityChatWebhookTransmitter : TileEntityIgnoreBlockState(), ISimpleGu
     fun updateDaemon(resetTimestamp: Boolean) {
         if (world.isRemote) return
         val block = world.getBlockState(pos).block as? BlockChatWebhookTransmitterBase ?: return
-        val manager = DaemonManager.instance ?: return
-        manager.setOrRemove(dimensionalPos, run fail@{
+        val daemons = DaemonManager.daemons ?: return
+        daemons.setOrRemove(dimensionalPos, run fail@{
             ChatWebhookDaemon(
                 (if (resetTimestamp) null else daemon?.created) ?: Instant.now(),
                 username?.let { "$it at ${world.provider.dimensionType.getName()} (${pos.x},${pos.y},${pos.z})" } ?: return@fail null,

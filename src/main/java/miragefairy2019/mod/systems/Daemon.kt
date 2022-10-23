@@ -24,7 +24,7 @@ object DaemonSystem {
         onServerStarting {
             Main.logger.info("DaemonSystem: Loading")
             val data = getFile(server).existsOrNull?.readText()?.toJsonElement().toJsonWrapper().orNull
-            DaemonManager.instance = if (data != null) {
+            DaemonManager.daemons = if (data != null) {
                 // TODO 分離
                 data["chatWebhook"].asMap().map { (dimensionalPosExpression, daemonData) ->
                     DimensionalPos.parse(dimensionalPosExpression) to ChatWebhookDaemonFactory.fromJson(daemonData)
@@ -38,22 +38,22 @@ object DaemonSystem {
         // 保存イベント
         onServerSave {
             Main.logger.info("DaemonSystem: Saving")
-            val daemonEntityManager = DaemonManager.instance ?: return@onServerSave
+            val daemons = DaemonManager.daemons ?: return@onServerSave
             val server = world.minecraftServer ?: return@onServerSave
             getFile(server).mkdirsParent()
             getFile(server).writeText(
                 jsonObject(
                     // TODO 分離
-                    "chatWebhook" to daemonEntityManager.map { (dimensionalPos, daemon) ->
+                    "chatWebhook" to daemons.map { (dimensionalPos, daemon) ->
                         dimensionalPos.expression to ChatWebhookDaemonFactory.toJson(daemon)
                     }.jsonObject
                 ).toJson { setPrettyPrinting() }
             )
         }
 
-        // サーバーが閉じたときにマネージャーをリセット
+        // サーバーが閉じたときにデーモンリストをリセット
         onServerStopping {
-            DaemonManager.instance = null
+            DaemonManager.daemons = null
             Main.logger.info("DaemonSystem: Terminated")
         }
 
@@ -62,7 +62,7 @@ object DaemonSystem {
 
 
 object DaemonManager {
-    var instance: MutableMap<DimensionalPos, ChatWebhookDaemon>? = null // TODO 分離
+    var daemons: MutableMap<DimensionalPos, ChatWebhookDaemon>? = null // TODO 分離
 }
 
 
