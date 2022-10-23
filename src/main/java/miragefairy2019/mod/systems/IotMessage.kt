@@ -21,10 +21,6 @@ val iotMessageModule = module {
             @Suppress("unused")
             @SubscribeEvent
             fun handle(event: IotGlobalMessageEvent) {
-                onIotMessage(event.senderName, event.message)
-            }
-
-            fun onIotMessage(playerName: String, message: String) {
                 val daemons = DaemonManager.daemons ?: return
 
                 // TODO
@@ -48,7 +44,7 @@ val iotMessageModule = module {
                 // すべての監視デーモンに対して処理
                 daemons.forEach { (_, daemon) ->
                     if (daemon !is IIotMessageDaemon) return@forEach
-                    daemon.onIotMessage(playerName, message)
+                    daemon.onIotMessage(event.senderName, event.message)
                 }
 
             }
