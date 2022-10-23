@@ -51,9 +51,9 @@ import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.configProperty
-import miragefairy2019.mod.systems.Daemon
 import miragefairy2019.mod.systems.DaemonManager
 import miragefairy2019.mod.systems.IBlockDaemon
+import miragefairy2019.mod.systems.IDaemon
 import miragefairy2019.mod.systems.IDaemonFactory
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
@@ -350,7 +350,7 @@ object ChatWebhookDaemonFactory : IDaemonFactory<ChatWebhookDaemon> {
 
 }
 
-class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String, val durationSeconds: Long) : Daemon() {
+class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String, val durationSeconds: Long) : IDaemon {
     val timeLimit: Instant get() = created.plusSeconds(durationSeconds)
 }
 
@@ -395,7 +395,7 @@ abstract class BlockChatWebhookTransmitterBase : BlockContainer(Material.IRON), 
 
     // 特殊なインスタンス
     override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityChatWebhookTransmitter()
-    override fun canSupportDaemon(world: World, blockPos: BlockPos, daemon: Daemon) = daemon is ChatWebhookDaemon
+    override fun canSupportDaemon(world: World, blockPos: BlockPos, daemon: IDaemon) = daemon is ChatWebhookDaemon
 
 
     // アクション

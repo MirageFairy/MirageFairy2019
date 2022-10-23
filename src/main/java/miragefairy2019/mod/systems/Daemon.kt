@@ -76,8 +76,9 @@ interface IDaemonFactory<D> {
 }
 
 
-abstract class Daemon
+interface IDaemon
+
 
 interface IBlockDaemon {
-    fun canSupportDaemon(world: World, blockPos: BlockPos, daemon: Daemon): Boolean
+    fun canSupportDaemon(world: World, blockPos: BlockPos, daemon: IDaemon): Boolean
 }
