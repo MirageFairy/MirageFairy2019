@@ -268,57 +268,63 @@ val chatWebhookModule = module {
                 daemons.forEach { (_, daemon) ->
                     if (daemon !is ChatWebhookDaemon) return@forEach
 
-                    // タイムリミット判定
-                    val remaining = daemon.timeLimit - Instant.now()
-                    if (remaining.isNegative) return@forEach // タイムリミットを越している場合は中止
-                    // 除去すると自動復活するため除去はしない
+                    fun ChatWebhookDaemon.onIotMessage(playerName: String, message: String) {
 
-                    // 送信処理
-                    // TODO 複数のチャットをまとめる
-                    // TODO 複数のデーモンに対してDiscordの負荷対策のためディレイ
-                    Thread({
-                        if (enableChatWebhook()) {
-                            Main.logger.trace("http request start")
-                            try {
+                        // タイムリミット判定
+                        val remaining = timeLimit - Instant.now()
+                        if (remaining.isNegative) return // タイムリミットを越している場合は中止
+                        // 除去すると自動復活するため除去はしない
 
-                                // 接続設定
-                                val connection = URL(daemon.webhookUrl).openConnection() as HttpURLConnection
-                                connection.requestMethod = "POST"
-                                connection.doOutput = true
-                                connection.setRequestProperty("Content-Type", "application/json")
-                                connection.setRequestProperty("User-Agent", "MirageFairy2019")
+                        // 送信処理
+                        // TODO 複数のチャットをまとめる
+                        // TODO 複数のデーモンに対してDiscordの負荷対策のためディレイ
+                        Thread({
+                            if (enableChatWebhook()) {
+                                Main.logger.trace("http request start")
+                                try {
 
-                                // 接続開始
-                                Main.logger.trace("connecting")
-                                connection.connect()
+                                    // 接続設定
+                                    val connection = URL(webhookUrl).openConnection() as HttpURLConnection
+                                    connection.requestMethod = "POST"
+                                    connection.doOutput = true
+                                    connection.setRequestProperty("Content-Type", "application/json")
+                                    connection.setRequestProperty("User-Agent", "MirageFairy2019")
 
-                                // 入力の送信
-                                Main.logger.trace("sending")
-                                val json = jsonObject(
-                                    "username" to "${daemon.username} @ ${remaining.displayText.unformattedText}".jsonElement,
-                                    "content" to "<$playerName> $message".jsonElement
-                                ).toJson()
-                                Main.logger.trace(json)
-                                connection.outputStream.use { out -> out.write(json.utf8ByteArray) }
+                                    // 接続開始
+                                    Main.logger.trace("connecting")
+                                    connection.connect()
 
-                                // 出力の受信
-                                Main.logger.trace("receiving")
-                                val responseBody = connection.inputStream.use { it.readBytes() }.utf8String
+                                    // 入力の送信
+                                    Main.logger.trace("sending")
+                                    val json = jsonObject(
+                                        "username" to "$username @ ${remaining.displayText.unformattedText}".jsonElement,
+                                        "content" to "<$playerName> $message".jsonElement
+                                    ).toJson()
+                                    Main.logger.trace(json)
+                                    connection.outputStream.use { out -> out.write(json.utf8ByteArray) }
 
-                                // 接続終了
-                                Main.logger.trace("disconnecting")
-                                connection.disconnect()
+                                    // 出力の受信
+                                    Main.logger.trace("receiving")
+                                    val responseBody = connection.inputStream.use { it.readBytes() }.utf8String
 
-                                // 結果表示
-                                Main.logger.trace("${connection.responseCode}")
-                                Main.logger.trace(responseBody)
+                                    // 接続終了
+                                    Main.logger.trace("disconnecting")
+                                    connection.disconnect()
 
-                            } catch (e: Throwable) {
-                                Main.logger.warn("failure", e)
+                                    // 結果表示
+                                    Main.logger.trace("${connection.responseCode}")
+                                    Main.logger.trace(responseBody)
+
+                                } catch (e: Throwable) {
+                                    Main.logger.warn("failure", e)
+                                }
+                                Main.logger.trace("http request finished")
                             }
-                            Main.logger.trace("http request finished")
-                        }
-                    }, "ChatWebhook Request Thread").start()
+                        }, "ChatWebhook Request Thread").start()
+
+                    }
+
+                    daemon.onIotMessage(playerName, message)
 
                 }
 
