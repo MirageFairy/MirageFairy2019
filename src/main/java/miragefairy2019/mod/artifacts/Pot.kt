@@ -184,7 +184,7 @@ val potModule = module {
         )
     )
 
-    fun bottleToPot(registerName: String, fluidOreSuffix: String, potMetadata: Int) = makeRecipe("pot/${registerName}_bottle_to_${registerName}_pot") {
+    fun bottleToPot(registryName: String, fluidOreSuffix: String, potMetadata: Int) = makeRecipe("pot/${registryName}_bottle_to_${registryName}_pot") {
         DataShapelessRecipe(
             ingredients = listOf(
                 DataOreIngredient(ore = "mirageFairyPot"),
@@ -197,7 +197,7 @@ val potModule = module {
         )
     }
 
-    fun potToBottle(registerName: String, fluidOreSuffix: String, bottleMetadata: Int) = makeRecipe("pot/${registerName}_pot_to_${registerName}_bottle") {
+    fun potToBottle(registryName: String, fluidOreSuffix: String, bottleMetadata: Int) = makeRecipe("pot/${registryName}_pot_to_${registryName}_bottle") {
         DataShapelessRecipe(
             ingredients = listOf(
                 DataSimpleIngredient(item = "minecraft:glass_bottle"),

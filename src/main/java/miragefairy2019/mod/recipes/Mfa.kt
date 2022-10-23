@@ -22,7 +22,7 @@ object Mfa {
         }
 
         fun ore(oreName: String): () -> List<ItemStack> = { OreIngredient(oreName).matchingStacks.toList() }
-        fun item(registerName: String): () -> List<ItemStack> = { listOf(Item.getByNameOrId("${ModMirageFairy2019.MODID}:$registerName")!!.createItemStack()) }
+        fun item(registryName: String): () -> List<ItemStack> = { listOf(Item.getByNameOrId("${ModMirageFairy2019.MODID}:$registryName")!!.createItemStack()) }
         fun fairy(type: String) = ore("mirageFairy2019Fairy${type.toUpperCamelCase()}Rank1")
 
         register("00000461", fairy("zombie")) {
