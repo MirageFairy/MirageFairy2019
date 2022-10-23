@@ -55,6 +55,7 @@ import miragefairy2019.mod.systems.DaemonManager
 import miragefairy2019.mod.systems.IDaemon
 import miragefairy2019.mod.systems.IDaemonBlock
 import miragefairy2019.mod.systems.IDaemonFactory
+import miragefairy2019.mod.systems.IIotMessageDaemon
 import miragefairy2019.mod.systems.daemonFactory
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
@@ -96,11 +97,6 @@ import net.minecraft.util.Rotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
-import net.minecraftforge.common.DimensionManager
-import net.minecraftforge.common.MinecraftForge
-import net.minecraftforge.event.ServerChatEvent
-import net.minecraftforge.fml.common.eventhandler.Event
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.net.HttpURLConnection
@@ -228,55 +224,7 @@ val chatWebhookModule = module {
     tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java) { TileEntityRendererChatWebhookTransmitter() }
     daemonFactory(modId, "chat_webhook_transmitter") { ChatWebhookDaemonFactory }
 
-    // チャット監視ルーチン
-    onInit {
-        MinecraftForge.EVENT_BUS.register(object {
-            @Suppress("unused")
-            @SubscribeEvent
-            fun handle(event: IotMessageEvent) {
-                sendToWebhook(event.senderName, event.message)
-            }
-
-            @Suppress("unused")
-            @SubscribeEvent
-            fun handle(event: ServerChatEvent) {
-                sendToWebhook(event.player.name, event.message)
-            }
-
-            fun sendToWebhook(playerName: String, message: String) {
-                val daemons = DaemonManager.daemons ?: return
-
-                // 本体ブロックが現存しないデーモンを除去する
-                val onFinish = mutableListOf<() -> Unit>()
-                daemons.forEach { (dimensionalPos, daemon) ->
-                    val isInvalid = run invalidDaemon@{
-                        val world = DimensionManager.getWorld(dimensionalPos.dimension) ?: return@invalidDaemon false // ディメンションがロードされていない
-                        if (!world.isBlockLoaded(dimensionalPos.pos)) return@invalidDaemon false // チャンクがロードされていない
-                        val block = world.getBlockState(dimensionalPos.pos).block as? IDaemonBlock ?: return@invalidDaemon true // ブロックがおかしい
-                        if (!block.supportsDaemon(world, dimensionalPos.pos, daemon)) return@invalidDaemon true // このデーモンをサポートしていない
-                        false // 正常
-                    }
-                    if (isInvalid) {
-                        onFinish += { daemons.setOrRemove(dimensionalPos, null) }
-                        return@forEach
-                    }
-                }
-                onFinish.forEach { it() }
-
-                // すべての監視デーモンに対して処理
-                daemons.forEach { (_, daemon) ->
-                    if (daemon !is ChatWebhookDaemon) return@forEach
-                    daemon.onIotMessage(playerName, message)
-                }
-
-            }
-        })
-    }
-
 }
-
-
-class IotMessageEvent(val senderName: String, val message: String) : Event()
 
 
 object ChatWebhookDaemonFactory : IDaemonFactory<ChatWebhookDaemon> {
@@ -288,7 +236,7 @@ object ChatWebhookDaemonFactory : IDaemonFactory<ChatWebhookDaemon> {
     )
 }
 
-class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String, val durationSeconds: Long) : IDaemon {
+class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String, val durationSeconds: Long) : IDaemon, IIotMessageDaemon {
     val timeLimit: Instant get() = created.plusSeconds(durationSeconds)
 
     override fun toJson() = jsonObject(
@@ -298,7 +246,7 @@ class ChatWebhookDaemon(val created: Instant, val username: String, val webhookU
         "duration" to durationSeconds.jsonElement
     )
 
-    fun onIotMessage(playerName: String, message: String) {
+    override fun onIotMessage(senderName: String, message: String) {
 
         // タイムリミット判定
         val remaining = timeLimit - Instant.now()
@@ -328,7 +276,7 @@ class ChatWebhookDaemon(val created: Instant, val username: String, val webhookU
                     Main.logger.trace("sending")
                     val json = jsonObject(
                         "username" to "$username @ ${remaining.displayText.unformattedText}".jsonElement,
-                        "content" to "<$playerName> $message".jsonElement
+                        "content" to "<$senderName> $message".jsonElement
                     ).toJson()
                     Main.logger.trace(json)
                     connection.outputStream.use { out -> out.write(json.utf8ByteArray) }

@@ -16,4 +16,5 @@ val systemsModule = module {
     facedCursorModule()
     fairyStickCraftModule()
     lightningBoltBlockerModule()
+    iotMessageModule()
 }
