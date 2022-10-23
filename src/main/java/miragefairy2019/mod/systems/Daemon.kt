@@ -65,8 +65,12 @@ object DaemonSystem {
 
 
 object DaemonManager {
-    val daemonFactories = mutableMapOf<ResourceLocation, IDaemonFactory<*>>()
+    private val daemonFactories = mutableMapOf<ResourceLocation, IDaemonFactory<*>>()
     var daemons: MutableMap<DimensionalPos, ChatWebhookDaemon>? = null // TODO 分離
+
+    fun registerDaemonFactory(modId: String, name: String, daemonFactory: IDaemonFactory<*>) {
+        daemonFactories[ResourceLocation(modId, name)] = daemonFactory
+    }
 }
 
 

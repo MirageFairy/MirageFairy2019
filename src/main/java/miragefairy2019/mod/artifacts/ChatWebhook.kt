@@ -52,8 +52,8 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.configProperty
 import miragefairy2019.mod.systems.DaemonManager
-import miragefairy2019.mod.systems.IDaemonBlock
 import miragefairy2019.mod.systems.IDaemon
+import miragefairy2019.mod.systems.IDaemonBlock
 import miragefairy2019.mod.systems.IDaemonFactory
 import miragefairy2019.util.InventoryTileEntity
 import miragefairy2019.util.SmartSlot
@@ -91,7 +91,6 @@ import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.Mirror
-import net.minecraft.util.ResourceLocation
 import net.minecraft.util.Rotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
@@ -227,7 +226,7 @@ val chatWebhookModule = module {
     tileEntity("chat_webhook_transmitter", TileEntityChatWebhookTransmitter::class.java)
     tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java) { TileEntityRendererChatWebhookTransmitter() }
     onInit {
-        DaemonManager.daemonFactories[ResourceLocation(ModMirageFairy2019.MODID, "chat_webhook")] = ChatWebhookDaemonFactory
+        DaemonManager.registerDaemonFactory(modId, "chat_webhook", ChatWebhookDaemonFactory)
     }
 
     // チャット監視ルーチン
