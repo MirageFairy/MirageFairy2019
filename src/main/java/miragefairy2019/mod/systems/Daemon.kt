@@ -48,7 +48,7 @@ object DaemonSystem {
                 jsonObject(
                     // TODO 分離
                     "chatWebhook" to daemons.map { (dimensionalPos, daemon) ->
-                        dimensionalPos.expression to ChatWebhookDaemonFactory.toJson(daemon)
+                        dimensionalPos.expression to daemon.toJson()
                     }.jsonObject
                 ).toJson { setPrettyPrinting() }
             )
@@ -70,13 +70,14 @@ object DaemonManager {
 }
 
 
-interface IDaemonFactory<D> {
+interface IDaemonFactory<D : IDaemon> {
     fun fromJson(data: JsonWrapper): D
-    fun toJson(daemon: D): JsonElement
 }
 
 
-interface IDaemon
+interface IDaemon {
+    fun toJson(): JsonElement
+}
 
 
 interface IBlockDaemon {

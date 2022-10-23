@@ -333,25 +333,22 @@ class IotMessageEvent(val senderName: String, val message: String) : Event()
 
 
 object ChatWebhookDaemonFactory : IDaemonFactory<ChatWebhookDaemon> {
-
     override fun fromJson(data: JsonWrapper) = ChatWebhookDaemon(
         created = Instant.ofEpochSecond(data["created"].asBigDecimal().toLong()),
         username = data["username"].asString(),
         webhookUrl = data["webhookUrl"].asString(),
         durationSeconds = data["duration"].orNull?.asLong() ?: (60L * 60L * 24L * 30L)
     )
-
-    override fun toJson(daemon: ChatWebhookDaemon) = jsonObject(
-        "created" to daemon.created.epochSecond.jsonElement,
-        "username" to daemon.username.jsonElement,
-        "webhookUrl" to daemon.webhookUrl.jsonElement,
-        "duration" to daemon.durationSeconds.jsonElement
-    )
-
 }
 
 class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String, val durationSeconds: Long) : IDaemon {
     val timeLimit: Instant get() = created.plusSeconds(durationSeconds)
+    override fun toJson() = jsonObject(
+        "created" to created.epochSecond.jsonElement,
+        "username" to username.jsonElement,
+        "webhookUrl" to webhookUrl.jsonElement,
+        "duration" to durationSeconds.jsonElement
+    )
 }
 
 
