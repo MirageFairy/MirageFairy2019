@@ -266,6 +266,7 @@ val chatWebhookModule = module {
 
                 // すべての監視デーモンに対して処理
                 daemons.forEach { (_, daemon) ->
+                    if (daemon !is ChatWebhookDaemon) return@forEach
 
                     // タイムリミット判定
                     val remaining = daemon.timeLimit - Instant.now()
@@ -462,7 +463,7 @@ class BlockCreativeChatWebhookTransmitter : BlockChatWebhookTransmitterBase() {
 class TileEntityChatWebhookTransmitter : TileEntityIgnoreBlockState(), ISimpleGuiHandlerTileEntity {
     val inventory = InventoryChatWebhookTransmitter(this, "tile.chatWebhookTransmitter.name", false, 2)
 
-    val daemon get() = DaemonManager.daemons?.get(dimensionalPos)
+    val daemon get() = DaemonManager.daemons?.get(dimensionalPos)?.castOrNull<ChatWebhookDaemon>()
     val username get() = inventory[0].string
     val webhookUrl get() = inventory[1].string
 

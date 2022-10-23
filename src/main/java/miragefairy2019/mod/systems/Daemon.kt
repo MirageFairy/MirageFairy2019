@@ -7,7 +7,6 @@ import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.existsOrNull
 import miragefairy2019.libkt.mkdirsParent
 import miragefairy2019.mod.Main
-import miragefairy2019.mod.artifacts.ChatWebhookDaemon
 import miragefairy2019.mod.artifacts.ChatWebhookDaemonFactory
 import mirrg.kotlin.gson.hydrogen.JsonWrapper
 import mirrg.kotlin.gson.hydrogen.jsonObject
@@ -66,7 +65,7 @@ object DaemonSystem {
 
 object DaemonManager {
     private val daemonFactories = mutableMapOf<ResourceLocation, IDaemonFactory<*>>()
-    var daemons: MutableMap<DimensionalPos, ChatWebhookDaemon>? = null // TODO 分離
+    var daemons: MutableMap<DimensionalPos, IDaemon>? = null
 
     fun registerDaemonFactory(modId: String, name: String, daemonFactory: IDaemonFactory<*>) {
         daemonFactories[ResourceLocation(modId, name)] = daemonFactory
