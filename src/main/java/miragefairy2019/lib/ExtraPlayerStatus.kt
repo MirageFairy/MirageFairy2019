@@ -85,6 +85,13 @@ abstract class ExtraPlayerStatusManager<H : ExtraPlayerStatusMessageHandler<M, D
     }
 
     /** Only Server World */
+    fun setServerData(player: EntityPlayerMP, data: D) {
+        synchronized(lock) {
+            serverData[player.cachedUniqueIdString] = data
+        }
+    }
+
+    /** Only Server World */
     fun resetAllServerData() {
         synchronized(lock) {
             serverData.clear()
