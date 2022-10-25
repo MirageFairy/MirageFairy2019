@@ -21,6 +21,7 @@ val lightningBoltBlockerModule = module {
                 val daemons = DaemonManager.daemons ?: return
                 val entity = event.entity as? EntityLightningBolt ?: return
                 val guard = daemons.any { (dimensionalPos, daemon) ->
+                    if (!daemon.checkBlock()) return@any false
                     if (daemon !is ILightningBoltBlockerDaemon) return@any false
                     if (!daemon.canBlockLightningBolt(event.world, entity)) return@any false
                     getLogger(LightningBoltBlocker::class.java).debug("$dimensionalPos $daemon") // TODO remove

@@ -7,6 +7,7 @@ import miragefairy2019.lib.modinitializer.onServerSave
 import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.existsOrNull
 import miragefairy2019.libkt.mkdirsParent
+import miragefairy2019.libkt.setOrRemove
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.ChatWebhookDaemonFactory
 import mirrg.kotlin.gson.hydrogen.JsonWrapper
@@ -18,6 +19,7 @@ import net.minecraft.server.MinecraftServer
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraftforge.common.DimensionManager
 
 object DaemonSystem {
     private fun getFile(server: MinecraftServer) = server.getWorld(0).saveHandler.worldDirectory.resolve("miragefairy2019/daemon_entities.json")
@@ -82,6 +84,17 @@ interface IDaemonFactory<D : Daemon> {
 
 abstract class Daemon(val dimensionalPos: DimensionalPos) {
     abstract fun toJson(): JsonElement
+    fun checkBlock(): Boolean {
+        val isInvalid = run invalidDaemon@{
+            val world = DimensionManager.getWorld(dimensionalPos.dimension) ?: return@invalidDaemon false // ディメンションがロードされていない
+            if (!world.isBlockLoaded(dimensionalPos.pos)) return@invalidDaemon false // チャンクがロードされていない
+            val block = world.getBlockState(dimensionalPos.pos).block as? IDaemonBlock ?: return@invalidDaemon true // ブロックがおかしい
+            if (!block.supportsDaemon(world, dimensionalPos.pos, this)) return@invalidDaemon true // このデーモンをサポートしていない
+            false // 正常
+        }
+        if (isInvalid) DaemonManager.daemons?.setOrRemove(dimensionalPos, null)
+        return !isInvalid
+    }
 }
 
 
