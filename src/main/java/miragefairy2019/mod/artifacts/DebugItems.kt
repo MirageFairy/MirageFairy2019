@@ -24,6 +24,7 @@ import miragefairy2019.libkt.textComponent
 import miragefairy2019.libkt.toRgb
 import miragefairy2019.libkt.yellow
 import miragefairy2019.mod.Main
+import miragefairy2019.mod.aura.auraManager
 import miragefairy2019.mod.fairy.ColorSet
 import miragefairy2019.mod.fairy.FairyCard
 import miragefairy2019.mod.fairy.colorSet
@@ -184,9 +185,14 @@ class ItemDebugPlayerAuraReset : ItemDebug(0xDFFF00.toRgb()) {
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (world.isRemote) return EnumActionResult.SUCCESS
         if (player !is EntityPlayerMP) return EnumActionResult.SUCCESS
+
         val playerAuraHandler = ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(player)
         playerAuraHandler.onReset()
         playerAuraHandler.send()
+
+        auraManager.setServerData(player, auraManager.createData())
+        auraManager.send(player)
+
         player.sendStatusMessage(textComponent { "プレイヤーオーラをリセットしました"() }, true) // TRANSLATE
         return EnumActionResult.SUCCESS
     }
