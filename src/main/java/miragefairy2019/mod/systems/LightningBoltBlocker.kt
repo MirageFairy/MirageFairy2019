@@ -22,7 +22,7 @@ val lightningBoltBlockerModule = module {
                 val entity = event.entity as? EntityLightningBolt ?: return
                 val guard = daemons.any { (dimensionalPos, daemon) ->
                     if (daemon !is ILightningBoltBlockerDaemon) return@any false
-                    if (!daemon.canBlockLightningBolt(dimensionalPos, event.world, entity)) return@any false
+                    if (!daemon.canBlockLightningBolt(event.world, entity)) return@any false
                     getLogger(LightningBoltBlocker::class.java).debug("$dimensionalPos $daemon") // TODO remove
                     true
                 }
@@ -34,7 +34,12 @@ val lightningBoltBlockerModule = module {
 }
 
 interface ILightningBoltBlockerDaemon {
-    fun canBlockLightningBolt(dimensionalPos: DimensionalPos, world: World, entity: EntityLightningBolt): Boolean { // TODO -> abstract
+    fun canBlockLightningBolt(world: World, entity: EntityLightningBolt): Boolean
+}
+
+// TODO remove
+abstract class SampleLightningBoltBlockerDaemon(dimensionalPos: DimensionalPos) : Daemon(dimensionalPos), ILightningBoltBlockerDaemon {
+    override fun canBlockLightningBolt(world: World, entity: EntityLightningBolt): Boolean { // TODO -> abstract
         if (dimensionalPos.dimension != world.provider.dimension) return false
         val distance = dimensionalPos.pos.getDistance(entity.position.x, entity.position.y, entity.position.z)
         if (distance > 64) return false
