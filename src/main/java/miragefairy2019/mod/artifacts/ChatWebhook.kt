@@ -52,7 +52,7 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.configProperty
 import miragefairy2019.mod.systems.DaemonManager
-import miragefairy2019.mod.systems.IDaemon
+import miragefairy2019.mod.systems.Daemon
 import miragefairy2019.mod.systems.IDaemonBlock
 import miragefairy2019.mod.systems.IDaemonFactory
 import miragefairy2019.mod.systems.IIotMessageDaemon
@@ -236,7 +236,7 @@ object ChatWebhookDaemonFactory : IDaemonFactory<ChatWebhookDaemon> {
     )
 }
 
-class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String, val durationSeconds: Long) : IDaemon, IIotMessageDaemon {
+class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String, val durationSeconds: Long) : Daemon(), IIotMessageDaemon {
     val timeLimit: Instant get() = created.plusSeconds(durationSeconds)
 
     override fun toJson() = jsonObject(
@@ -345,7 +345,7 @@ abstract class BlockChatWebhookTransmitterBase : BlockContainer(Material.IRON), 
 
     // 特殊なインスタンス
     override fun createNewTileEntity(worldIn: World, meta: Int) = TileEntityChatWebhookTransmitter()
-    override fun supportsDaemon(world: World, blockPos: BlockPos, daemon: IDaemon) = daemon is ChatWebhookDaemon
+    override fun supportsDaemon(world: World, blockPos: BlockPos, daemon: Daemon) = daemon is ChatWebhookDaemon
 
 
     // アクション

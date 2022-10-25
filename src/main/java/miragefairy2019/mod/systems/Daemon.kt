@@ -66,7 +66,7 @@ object DaemonSystem {
 
 object DaemonManager {
     val daemonFactories = mutableMapOf<ResourceLocation, IDaemonFactory<*>>()
-    var daemons: MutableMap<DimensionalPos, IDaemon>? = null
+    var daemons: MutableMap<DimensionalPos, Daemon>? = null
 }
 
 fun ModScope.daemonFactory(modId: String, name: String, daemonFactoryGetter: () -> IDaemonFactory<*>) = onInit {
@@ -74,16 +74,16 @@ fun ModScope.daemonFactory(modId: String, name: String, daemonFactoryGetter: () 
 }
 
 
-interface IDaemonFactory<D : IDaemon> {
+interface IDaemonFactory<D : Daemon> {
     fun fromJson(data: JsonWrapper): D
 }
 
 
-interface IDaemon {
-    fun toJson(): JsonElement
+abstract class Daemon {
+    abstract fun toJson(): JsonElement
 }
 
 
 interface IDaemonBlock {
-    fun supportsDaemon(world: World, blockPos: BlockPos, daemon: IDaemon): Boolean
+    fun supportsDaemon(world: World, blockPos: BlockPos, daemon: Daemon): Boolean
 }
