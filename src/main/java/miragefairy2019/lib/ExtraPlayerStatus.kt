@@ -85,6 +85,13 @@ abstract class ExtraPlayerStatusManager<H : ExtraPlayerStatusMessageHandler<M, D
     }
 
     /** Only Server World */
+    fun resetAllServerData() {
+        synchronized(lock) {
+            serverData.clear()
+        }
+    }
+
+    /** Only Server World */
     fun getFile(player: EntityPlayer) = File(player.world.minecraftServer!!.getWorld(0).saveHandler.worldDirectory, "${ModMirageFairy2019.MODID}/$name/${player.cachedUniqueIdString}.json")
 
     /** Only Server World */
@@ -133,13 +140,6 @@ abstract class ExtraPlayerStatusManager<H : ExtraPlayerStatusMessageHandler<M, D
             val message = createMessage()
             message.json = toJson(data).toJson()
             simpleNetworkWrapper.sendTo(message, player)
-        }
-    }
-
-    /** Only Server World */
-    fun resetAllServerData() {
-        synchronized(lock) {
-            serverData.clear()
         }
     }
 
