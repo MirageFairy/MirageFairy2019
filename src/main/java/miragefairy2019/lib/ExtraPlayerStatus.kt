@@ -66,6 +66,13 @@ abstract class ExtraPlayerStatusManager<H : ExtraPlayerStatusMessageHandler<M, D
         }
     }
 
+    /** Only Client World */
+    fun setClientData(data: D) {
+        synchronized(lock) {
+            clientData = data
+        }
+    }
+
     /** Only Server World */
     fun getServerData(player: EntityPlayerMP): D {
         synchronized(lock) {
@@ -126,13 +133,6 @@ abstract class ExtraPlayerStatusManager<H : ExtraPlayerStatusMessageHandler<M, D
             val message = createMessage()
             message.json = toJson(data).toJson()
             simpleNetworkWrapper.sendTo(message, player)
-        }
-    }
-
-    /** Only Client World */
-    fun receive(data: D) {
-        synchronized(lock) {
-            clientData = data
         }
     }
 
@@ -198,7 +198,7 @@ abstract class ExtraPlayerStatusMessageHandler<M : ExtraPlayerStatusMessage, D> 
     override fun onMessage(message: M, ctx: MessageContext): IMessage? {
         if (ctx.side == Side.CLIENT) {
             try {
-                manager.receive(manager.fromJson(message.json.toJsonElement()))
+                manager.setClientData(manager.fromJson(message.json.toJsonElement()))
             } catch (e: Exception) {
                 e.printStackTrace()
             }
