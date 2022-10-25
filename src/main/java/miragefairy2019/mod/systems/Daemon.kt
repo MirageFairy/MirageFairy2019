@@ -30,7 +30,8 @@ object DaemonSystem {
             DaemonManager.daemons = if (data != null) {
                 // TODO 分離
                 data["chatWebhook"].asMap().map { (dimensionalPosExpression, daemonData) ->
-                    DimensionalPos.parse(dimensionalPosExpression) to ChatWebhookDaemonFactory.fromJson(daemonData)
+                    val dimensionalPos = DimensionalPos.parse(dimensionalPosExpression)
+                    dimensionalPos to ChatWebhookDaemonFactory.fromJson(dimensionalPos, daemonData)
                 }.toMap().toMutableMap()
             } else {
                 // TODO 分離
@@ -75,11 +76,11 @@ fun ModScope.daemonFactory(modId: String, name: String, daemonFactoryGetter: () 
 
 
 interface IDaemonFactory<D : Daemon> {
-    fun fromJson(data: JsonWrapper): D
+    fun fromJson(dimensionalPos: DimensionalPos, data: JsonWrapper): D
 }
 
 
-abstract class Daemon {
+abstract class Daemon(val dimensionalPos: DimensionalPos) {
     abstract fun toJson(): JsonElement
 }
 

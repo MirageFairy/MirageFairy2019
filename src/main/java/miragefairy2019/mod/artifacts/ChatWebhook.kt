@@ -51,8 +51,8 @@ import miragefairy2019.mod.GuiId
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.configProperty
-import miragefairy2019.mod.systems.DaemonManager
 import miragefairy2019.mod.systems.Daemon
+import miragefairy2019.mod.systems.DaemonManager
 import miragefairy2019.mod.systems.IDaemonBlock
 import miragefairy2019.mod.systems.IDaemonFactory
 import miragefairy2019.mod.systems.IIotMessageDaemon
@@ -228,7 +228,8 @@ val chatWebhookModule = module {
 
 
 object ChatWebhookDaemonFactory : IDaemonFactory<ChatWebhookDaemon> {
-    override fun fromJson(data: JsonWrapper) = ChatWebhookDaemon(
+    override fun fromJson(dimensionalPos: DimensionalPos, data: JsonWrapper) = ChatWebhookDaemon(
+        dimensionalPos = dimensionalPos,
         created = Instant.ofEpochSecond(data["created"].asBigDecimal().toLong()),
         username = data["username"].asString(),
         webhookUrl = data["webhookUrl"].asString(),
@@ -236,7 +237,13 @@ object ChatWebhookDaemonFactory : IDaemonFactory<ChatWebhookDaemon> {
     )
 }
 
-class ChatWebhookDaemon(val created: Instant, val username: String, val webhookUrl: String, val durationSeconds: Long) : Daemon(), IIotMessageDaemon {
+class ChatWebhookDaemon(
+    dimensionalPos: DimensionalPos,
+    val created: Instant,
+    val username: String,
+    val webhookUrl: String,
+    val durationSeconds: Long
+) : Daemon(dimensionalPos), IIotMessageDaemon {
     val timeLimit: Instant get() = created.plusSeconds(durationSeconds)
 
     override fun toJson() = jsonObject(
@@ -427,6 +434,7 @@ class TileEntityChatWebhookTransmitter : TileEntityIgnoreBlockState(), ISimpleGu
         val daemons = DaemonManager.daemons ?: return
         daemons.setOrRemove(dimensionalPos, run fail@{
             ChatWebhookDaemon(
+                dimensionalPos,
                 (if (resetTimestamp) null else daemon?.created) ?: Instant.now(),
                 username?.let { "$it at ${world.provider.dimensionType.getName()} (${pos.x},${pos.y},${pos.z})" } ?: return@fail null,
                 webhookUrl ?: return@fail null,
