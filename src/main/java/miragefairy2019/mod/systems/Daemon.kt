@@ -81,6 +81,7 @@ object DaemonManager {
 
 fun ModScope.daemonFactory(daemonFactoryGetter: () -> IDaemonFactory<*>) = onInit {
     val daemonFactory = daemonFactoryGetter()
+    if (daemonFactory.id in DaemonManager.daemonFactories) throw RuntimeException("Duplicated daemon factory: ${daemonFactory.id}")
     DaemonManager.daemonFactories[daemonFactory.id] = daemonFactory
 }
 
