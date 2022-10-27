@@ -79,17 +79,19 @@ object DaemonManager {
     var daemons: MutableMap<DimensionalPos, Daemon>? = null
 }
 
-fun ModScope.daemonFactory(modId: String, name: String, daemonFactoryGetter: () -> IDaemonFactory<*>) = onInit {
-    DaemonManager.daemonFactories[ResourceLocation(modId, name)] = daemonFactoryGetter()
+fun ModScope.daemonFactory(daemonFactoryGetter: () -> IDaemonFactory<*>) = onInit {
+    val daemonFactory = daemonFactoryGetter()
+    DaemonManager.daemonFactories[daemonFactory.id] = daemonFactory
 }
 
 
 interface IDaemonFactory<D : Daemon> {
+    val id: ResourceLocation
     fun fromJson(dimensionalPos: DimensionalPos, data: JsonWrapper): D
 }
 
 
-abstract class Daemon(val dimensionalPos: DimensionalPos) {
+abstract class Daemon(val id: ResourceLocation, val dimensionalPos: DimensionalPos) {
     abstract fun toJson(): JsonElement
     fun checkBlock(): Boolean {
         val isInvalid = run invalidDaemon@{

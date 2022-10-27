@@ -93,6 +93,7 @@ import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.Mirror
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.Rotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
@@ -222,13 +223,15 @@ val chatWebhookModule = module {
     // 共通
     tileEntity("chat_webhook_transmitter", TileEntityChatWebhookTransmitter::class.java)
     tileEntityRenderer(TileEntityChatWebhookTransmitter::class.java) { TileEntityRendererChatWebhookTransmitter() }
-    daemonFactory(modId, "chat_webhook_transmitter") { ChatWebhookDaemonFactory }
+    daemonFactory { ChatWebhookDaemonFactory }
 
 }
 
 
 object ChatWebhookDaemonFactory : IDaemonFactory<ChatWebhookDaemon> {
+    override val id = ResourceLocation(ModMirageFairy2019.MODID, "chat_webhook_transmitter")
     override fun fromJson(dimensionalPos: DimensionalPos, data: JsonWrapper) = ChatWebhookDaemon(
+        id = id,
         dimensionalPos = dimensionalPos,
         created = Instant.ofEpochSecond(data["created"].asBigDecimal().toLong()),
         username = data["username"].asString(),
@@ -238,12 +241,13 @@ object ChatWebhookDaemonFactory : IDaemonFactory<ChatWebhookDaemon> {
 }
 
 class ChatWebhookDaemon(
+    id: ResourceLocation,
     dimensionalPos: DimensionalPos,
     val created: Instant,
     val username: String,
     val webhookUrl: String,
     val durationSeconds: Long
-) : Daemon(dimensionalPos), IIotMessageDaemon {
+) : Daemon(id, dimensionalPos), IIotMessageDaemon {
     val timeLimit: Instant get() = created.plusSeconds(durationSeconds)
 
     override fun toJson() = jsonObject(
@@ -434,6 +438,7 @@ class TileEntityChatWebhookTransmitter : TileEntityIgnoreBlockState(), ISimpleGu
         val daemons = DaemonManager.daemons ?: return
         daemons.setOrRemove(dimensionalPos, run fail@{
             ChatWebhookDaemon(
+                ChatWebhookDaemonFactory.id,
                 dimensionalPos,
                 (if (resetTimestamp) null else daemon?.created) ?: Instant.now(),
                 username?.let { "$it at ${world.provider.dimensionType.getName()} (${pos.x},${pos.y},${pos.z})" } ?: return@fail null,

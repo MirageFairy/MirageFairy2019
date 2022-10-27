@@ -4,6 +4,7 @@ import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.libkt.DimensionalPos
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.entity.effect.EntityLightningBolt
+import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.EntityJoinWorldEvent
@@ -39,7 +40,7 @@ interface ILightningBoltBlockerDaemon {
 }
 
 // TODO remove
-abstract class SampleLightningBoltBlockerDaemon(dimensionalPos: DimensionalPos) : Daemon(dimensionalPos), ILightningBoltBlockerDaemon {
+abstract class SampleLightningBoltBlockerDaemon(id: ResourceLocation, dimensionalPos: DimensionalPos) : Daemon(id, dimensionalPos), ILightningBoltBlockerDaemon {
     override fun canBlockLightningBolt(world: World, entity: EntityLightningBolt): Boolean { // TODO -> abstract
         if (dimensionalPos.dimension != world.provider.dimension) return false
         val distance = dimensionalPos.pos.getDistance(entity.position.x, entity.position.y, entity.position.z)
