@@ -8,13 +8,13 @@ import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.existsOrNull
 import miragefairy2019.libkt.mkdirsParent
 import miragefairy2019.libkt.setOrRemove
-import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.ChatWebhookDaemonFactory
 import mirrg.kotlin.gson.hydrogen.JsonWrapper
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.toJson
 import mirrg.kotlin.gson.hydrogen.toJsonElement
 import mirrg.kotlin.gson.hydrogen.toJsonWrapper
+import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
@@ -22,12 +22,13 @@ import net.minecraft.world.World
 import net.minecraftforge.common.DimensionManager
 
 object DaemonSystem {
+    private val logger = getLogger()
     private fun getFile(server: MinecraftServer) = server.getWorld(0).saveHandler.worldDirectory.resolve("miragefairy2019/daemon_entities.json")
     val daemonSystemModule = module {
 
         // セーブデータ読み込みとデーモンマネージャーの初期化
         onServerStarting {
-            Main.logger.info("DaemonSystem: Loading")
+            logger.info("Loading")
             val data = getFile(server).existsOrNull?.readText()?.toJsonElement().toJsonWrapper().orNull
             DaemonManager.daemons = if (data != null) {
                 // TODO 分離
@@ -43,7 +44,7 @@ object DaemonSystem {
 
         // 保存イベント
         onServerSave {
-            Main.logger.info("DaemonSystem: Saving")
+            logger.debug("Saving")
             val daemons = DaemonManager.daemons ?: return@onServerSave
             val server = world.minecraftServer ?: return@onServerSave
             getFile(server).mkdirsParent()
@@ -60,7 +61,7 @@ object DaemonSystem {
         // サーバーが閉じたときにデーモンリストをリセット
         onServerStopping {
             DaemonManager.daemons = null
-            Main.logger.info("DaemonSystem: Terminated")
+            logger.info("Terminated")
         }
 
     }
