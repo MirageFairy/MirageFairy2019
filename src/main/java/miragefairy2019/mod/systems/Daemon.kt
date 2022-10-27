@@ -8,7 +8,6 @@ import miragefairy2019.libkt.DimensionalPos
 import miragefairy2019.libkt.existsOrNull
 import miragefairy2019.libkt.mkdirsParent
 import miragefairy2019.libkt.setOrRemove
-import miragefairy2019.mod.artifacts.ChatWebhookDaemonFactory
 import mirrg.kotlin.gson.hydrogen.JsonWrapper
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.toJson
@@ -32,9 +31,16 @@ object DaemonSystem {
             val data = getFile(server).existsOrNull?.readText()?.toJsonElement().toJsonWrapper().orNull
             DaemonManager.daemons = if (data != null) {
                 // TODO 分離
-                data["chatWebhook"].asMap().map { (dimensionalPosExpression, daemonData) ->
+                data["chatWebhook"].asMap().mapNotNull { (dimensionalPosExpression, daemonData) ->
                     val dimensionalPos = DimensionalPos.parse(dimensionalPosExpression)
-                    dimensionalPos to ChatWebhookDaemonFactory.fromJson(dimensionalPos, daemonData)
+                    val registryName = daemonData["id"].orNull?.asString() ?: ResourceLocation("miragefairy2019", "chat_webhook_transmitter") // TODO remove
+                    val daemonFactory = DaemonManager.daemonFactories[registryName] ?: run {
+                        logger.error("Unknown daemon: $registryName at $dimensionalPos")
+                        return@mapNotNull null
+                    }
+                    val daemon = daemonFactory.fromJson(dimensionalPos, daemonData)
+                    logger.info("Daemon loaded: $daemon as $registryName at $dimensionalPos")
+                    dimensionalPos to daemon
                 }.toMap().toMutableMap()
             } else {
                 // TODO 分離
