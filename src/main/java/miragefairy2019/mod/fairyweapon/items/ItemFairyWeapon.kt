@@ -23,7 +23,6 @@ import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.red
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.libkt.white
-import miragefairy2019.mod.Main
 import miragefairy2019.mod.fairyweapon.combinedFairy
 import miragefairy2019.mod.fairyweapon.findFairy
 import mirrg.kotlin.hydrogen.atLeast
@@ -48,7 +47,6 @@ open class ItemFairyWeapon : ICombineAcceptorItem, Item(), IManualRepairAcceptor
 
     init {
         setMaxStackSize(1)
-        if (Main.side.isClient) tileEntityItemStackRenderer = TileEntityItemStackRendererFairyWeapon()
     }
 
 

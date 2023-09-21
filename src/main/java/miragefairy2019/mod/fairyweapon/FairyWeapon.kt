@@ -37,6 +37,7 @@ import miragefairy2019.lib.resourcemaker.makeRecipe
 import miragefairy2019.libkt.BakedModelBuiltinWrapper
 import miragefairy2019.libkt.ingredient
 import miragefairy2019.libkt.oreIngredient
+import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.creativeTab
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.artifacts.WandType
@@ -63,12 +64,15 @@ import miragefairy2019.mod.fairyweapon.items.ItemMiragiumScythe
 import miragefairy2019.mod.fairyweapon.items.ItemPrayerWheel
 import miragefairy2019.mod.fairyweapon.items.ItemRyugyoDrill
 import miragefairy2019.mod.fairyweapon.items.ItemTemptationOcarina
+import miragefairy2019.mod.fairyweapon.items.TileEntityItemStackRendererFairyWeapon
 import mirrg.kotlin.gson.hydrogen.jsonArray
 import mirrg.kotlin.gson.hydrogen.jsonElement
 import mirrg.kotlin.gson.hydrogen.jsonObject
 import mirrg.kotlin.gson.hydrogen.jsonObjectNotNull
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer
 import net.minecraft.init.Items
+import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
 import net.minecraftforge.client.event.ModelBakeEvent
 import net.minecraftforge.common.MinecraftForge
@@ -1049,6 +1053,22 @@ val fairyWeaponModule = module {
             )
         }
 
+    }
+
+    onInit {
+        if (Main.side.isClient) {
+            val old = TileEntityItemStackRenderer.instance
+            val renderer = TileEntityItemStackRendererFairyWeapon()
+            TileEntityItemStackRenderer.instance = object : TileEntityItemStackRenderer() {
+                override fun renderByItem(itemStack: ItemStack, partialTicks: Float) {
+                    if (itemStack.item is ItemFairyWeapon) {
+                        renderer.renderByItem(itemStack, partialTicks)
+                    } else {
+                        old.renderByItem(itemStack, partialTicks)
+                    }
+                }
+            }
+        }
     }
 
     magicMessageModule()
