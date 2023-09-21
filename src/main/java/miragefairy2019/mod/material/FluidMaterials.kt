@@ -168,8 +168,7 @@ fun ModScope.fluid(name: String, initializer: Fluid.() -> Unit = {}): () -> Flui
         fluid = Fluid(
             name,
             ResourceLocation(ModMirageFairy2019.MODID, "blocks/${name}_still"),
-            ResourceLocation(ModMirageFairy2019.MODID, "blocks/${name}_flow"),
-            ResourceLocation(ModMirageFairy2019.MODID, "blocks/${name}_overlay")
+            ResourceLocation(ModMirageFairy2019.MODID, "blocks/${name}_flow")
         )
         fluid.initializer()
         FluidRegistry.registerFluid(fluid)
