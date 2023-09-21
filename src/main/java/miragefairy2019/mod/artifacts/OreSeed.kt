@@ -95,8 +95,8 @@ object OreSeed {
 
                 @SubscribeEvent
                 fun accept(event: DecorateBiomeEvent.Post) {
-                    if (BiomeDictionary.hasType(event.world.getBiome(event.chunkPos.getBlock(8, 0, 8)), BiomeDictionary.Type.NETHER)) {
-                        worldGenCompound.accept(event.world, event.rand, event.chunkPos.getBlock(0, 0, 0))
+                    if (BiomeDictionary.hasType(event.world.getBiome(event.pos.add(8, 0, 8)), BiomeDictionary.Type.NETHER)) {
+                        worldGenCompound.accept(event.world, event.rand, event.pos.add(0, 0, 0))
                     }
                 }
             })

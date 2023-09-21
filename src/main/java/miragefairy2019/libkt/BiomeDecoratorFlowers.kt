@@ -11,7 +11,7 @@ class BiomeDecoratorFlowers(
 ) {
     fun decorate(event: DecorateBiomeEvent.Post) {
         repeat(event.rand.randomInt(chancesPerChunk)) {
-            val pos = event.chunkPos.getBlock(
+            val pos = event.pos.add(
                 8 + event.rand.nextInt(16),
                 0,
                 8 + event.rand.nextInt(16)

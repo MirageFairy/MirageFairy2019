@@ -142,7 +142,7 @@ val fairyLogModule = module {
                 val times = event.rand.randomInt((event.world.height.toDouble() / 16.0) * 50.0) // 1セクションあたり50回判定を行う // TODO
                 repeat(times) {
                     val facing = EnumFacing.HORIZONTALS[event.rand.nextInt(4)]
-                    val posLog = event.chunkPos.getBlock(
+                    val posLog = event.pos.add(
                         event.rand.nextInt(16) + 8,
                         event.rand.nextInt(event.world.height),
                         event.rand.nextInt(16) + 8
