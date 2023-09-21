@@ -747,7 +747,7 @@ val wandModule = module {
 
 class WandIngredient(ore: String) : OreIngredient(ore) {
     // これがtrueになっていると、subItemsを参照するようになるのでクラフティングツールが反応しなくなる
-    override fun isSimple(): Boolean = false
+    //override fun isSimple(): Boolean = false
 }
 
 /** 耐久が削れたクラフティングツールを鉱石辞書名にマッチさせるためのIngredient */
