@@ -6,17 +6,13 @@ import mezz.jei.api.JEIPlugin
 import mezz.jei.api.gui.IDrawable
 import mezz.jei.api.gui.IRecipeLayout
 import mezz.jei.api.ingredients.IIngredients
-import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
-import miragefairy2019.api.Erg
 import miragefairy2019.api.IManualRepairAcceptorItem
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.getSubItems
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod.artifacts.get
-import miragefairy2019.mod.artifacts.itemSpheres
 import net.minecraft.client.Minecraft
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
@@ -42,7 +38,6 @@ class PluginManualRepair : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(itemSpheres[Erg.CRAFT])
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 1, 1)
                 repeat(8) { recipeLayout.itemStacks.init(1 + it, true, 1 + 18 + 4 + 18 * it, 1) }
@@ -67,7 +62,7 @@ class PluginManualRepair : IModPlugin {
                             override fun getIngredients(ingredients: IIngredients) {
                                 val inputTarget = listOf(listOf(itemStack))
                                 val inputSubstitute = registry.jeiHelpers.stackHelper.expandRecipeItemStackInputs(item.getManualRepairRequirements(itemStack))
-                                ingredients.setInputLists(VanillaTypes.ITEM, listOf(inputTarget, inputSubstitute).flatten())
+                                ingredients.setInputLists(ItemStack::class.java, listOf(inputTarget, inputSubstitute).flatten())
                             }
 
                             override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) = Unit

@@ -6,7 +6,6 @@ import mezz.jei.api.JEIPlugin
 import mezz.jei.api.gui.IDrawable
 import mezz.jei.api.gui.IRecipeLayout
 import mezz.jei.api.ingredients.IIngredients
-import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
@@ -28,6 +27,7 @@ import miragefairy2019.mod.fairybox.GuiContainerFairyCentrifuge
 import miragefairy2019.mod.fairybox.blockFairyCentrifuge
 import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.Minecraft
+import net.minecraft.item.ItemStack
 
 @JEIPlugin
 class PluginFairyCentrifugeCraft : IModPlugin {
@@ -55,7 +55,6 @@ class PluginFairyCentrifugeCraft : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(blockFairyCentrifuge().createItemStack())
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 repeat(9) { c -> recipeLayout.itemStacks.init(c, true, 18 * c, 10) }
                 repeat(9) { c -> recipeLayout.itemStacks.init(9 + c, false, 18 * c, 10 + 18) }
@@ -70,8 +69,8 @@ class PluginFairyCentrifugeCraft : IModPlugin {
         registry.addRecipes(FairyCentrifugeCraftRegistry.fairyCentrifugeCraftHandlers.map { handler ->
             object : IRecipeWrapper {
                 override fun getIngredients(ingredients: IIngredients) {
-                    ingredients.setInputLists(VanillaTypes.ITEM, handler.inputs.map { input -> registry.jeiHelpers.stackHelper.toItemStackList(input.ingredient).map { it.copy(input.count) } })
-                    ingredients.setOutputLists(VanillaTypes.ITEM, handler.outputs.map { output -> listOf(output.itemStack) })
+                    ingredients.setInputLists(ItemStack::class.java, handler.inputs.map { input -> registry.jeiHelpers.stackHelper.toItemStackList(input.ingredient).map { it.copy(input.count) } })
+                    ingredients.setOutputLists(ItemStack::class.java, handler.outputs.map { output -> listOf(output.itemStack) })
                 }
 
                 val drawListeners = mutableListOf<(Minecraft) -> Unit>()

@@ -6,7 +6,6 @@ import mezz.jei.api.JEIPlugin
 import mezz.jei.api.gui.IDrawable
 import mezz.jei.api.gui.IRecipeLayout
 import mezz.jei.api.ingredients.IIngredients
-import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
@@ -17,6 +16,7 @@ import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.pedestal.MortarVariant
 import miragefairy2019.mod.pedestal.itemBlockMortar
 import net.minecraft.client.Minecraft
+import net.minecraft.item.ItemStack
 
 @JEIPlugin
 class PluginMortar : IModPlugin {
@@ -39,7 +39,6 @@ class PluginMortar : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(itemBlockMortar().createItemStack(metadata = MortarVariant.QUARTZ.metadata))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 0, 0)
                 recipeLayout.itemStacks.init(1, true, 18 + 4, 0)
@@ -56,8 +55,8 @@ class PluginMortar : IModPlugin {
                 if (inputList.isEmpty()) return@invalidRecipe null
                 val machineList = MortarVariant.values().filter { it.level >= recipe.level }.map { itemBlockMortar().createItemStack(metadata = it.metadata) }
                 IRecipeWrapper { ingredients ->
-                    ingredients.setInputLists(VanillaTypes.ITEM, listOf(inputList, machineList))
-                    ingredients.setOutputLists(VanillaTypes.ITEM, listOf(listOf(recipe.output)))
+                    ingredients.setInputLists(ItemStack::class.java, listOf(inputList, machineList))
+                    ingredients.setOutputLists(ItemStack::class.java, listOf(listOf(recipe.output)))
                 }
             }
         }, uid)

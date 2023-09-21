@@ -6,7 +6,6 @@ import mezz.jei.api.JEIPlugin
 import mezz.jei.api.gui.IDrawable
 import mezz.jei.api.gui.IRecipeLayout
 import mezz.jei.api.ingredients.IIngredients
-import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
@@ -38,7 +37,6 @@ class PluginFairyLogDrop : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(itemBlockFairyLog()))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 0, 0)
                 recipeLayout.itemStacks.init(1, false, 45, 0)
@@ -51,8 +49,8 @@ class PluginFairyLogDrop : IModPlugin {
         registry.addRecipes(FairyLogDropRegistry.fairyLogDropRecipes.map { recipe ->
             object : IRecipeWrapper {
                 override fun getIngredients(ingredients: IIngredients) {
-                    ingredients.setInput(VanillaTypes.ITEM, ItemStack(itemBlockFairyLog()))
-                    ingredients.setOutput(VanillaTypes.ITEM, recipe.output)
+                    ingredients.setInput(ItemStack::class.java, ItemStack(itemBlockFairyLog()))
+                    ingredients.setOutput(ItemStack::class.java, recipe.output)
                 }
 
                 override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {

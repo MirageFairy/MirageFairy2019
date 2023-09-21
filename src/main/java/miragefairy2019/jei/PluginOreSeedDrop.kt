@@ -6,15 +6,12 @@ import mezz.jei.api.JEIPlugin
 import mezz.jei.api.gui.IDrawable
 import mezz.jei.api.gui.IRecipeLayout
 import mezz.jei.api.ingredients.IIngredients
-import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod.material.EnumVariantOre1
-import miragefairy2019.mod.material.Ores
 import miragefairy2019.mod.oreseed.ApiOreSeedDrop
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
@@ -39,7 +36,6 @@ class PluginOreSeedDrop : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(Ores.blockOre1(), 1, EnumVariantOre1.APATITE_ORE.blockVariant.metadata))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 20, 0)
                 recipeLayout.itemStacks.init(1, false, 120, 0)
@@ -52,8 +48,8 @@ class PluginOreSeedDrop : IModPlugin {
         registry.addRecipes(ApiOreSeedDrop.oreSeedDropRegistry.recipes.map { recipe ->
             object : IRecipeWrapper {
                 override fun getIngredients(ingredients: IIngredients) {
-                    ingredients.setInputLists(VanillaTypes.ITEM, listOf(listOf(recipe.getType().getItemStack())))
-                    ingredients.setOutputLists(VanillaTypes.ITEM, listOf(recipe.getOutputItemStacks().toList()))
+                    ingredients.setInputLists(ItemStack::class.java, listOf(listOf(recipe.getType().getItemStack())))
+                    ingredients.setOutputLists(ItemStack::class.java, listOf(recipe.getOutputItemStacks().toList()))
                 }
 
                 override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {

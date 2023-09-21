@@ -6,14 +6,12 @@ import mezz.jei.api.JEIPlugin
 import mezz.jei.api.gui.IDrawable
 import mezz.jei.api.gui.IRecipeLayout
 import mezz.jei.api.ingredients.IIngredients
-import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
 import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.drawStringCentered
 import miragefairy2019.libkt.translateToLocal
-import miragefairy2019.mod.artifacts.itemFairyStick
 import miragefairy2019.mod.fairystickcraft.ApiFairyStickCraft
 import miragefairy2019.mod.fairystickcraft.FairyStickCraftRecipe
 import miragefairy2019.mod.fairystickcraft.IFairyStickCraftRecipe
@@ -42,7 +40,6 @@ class PluginFairyStickCraft : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(itemFairyStick()))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: RecipeWrapperFairyStickCraft, ingredients: IIngredients) {
                 recipeWrapper.listListItemStackInput.forEachIndexed { i, _ ->
                     recipeLayout.itemStacks.init(i, true, 18 * i, 0)
@@ -67,8 +64,8 @@ class PluginFairyStickCraft : IModPlugin {
         val listStringOutput: List<String> = recipe.conditions.flatMap { it.stringsOutput }
 
         override fun getIngredients(ingredients: IIngredients) {
-            ingredients.setInputLists(VanillaTypes.ITEM, listListItemStackInput)
-            ingredients.setOutputLists(VanillaTypes.ITEM, listListItemStackOutput)
+            ingredients.setInputLists(ItemStack::class.java, listListItemStackInput)
+            ingredients.setOutputLists(ItemStack::class.java, listListItemStackOutput)
         }
 
         override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {

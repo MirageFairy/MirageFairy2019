@@ -6,7 +6,6 @@ import mezz.jei.api.JEIPlugin
 import mezz.jei.api.gui.IDrawable
 import mezz.jei.api.gui.IRecipeLayout
 import mezz.jei.api.ingredients.IIngredients
-import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
@@ -29,6 +28,7 @@ import miragefairy2019.mod.fairy.maxRank
 import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Gui
+import net.minecraft.item.ItemStack
 
 @JEIPlugin
 class PluginErgResistance : IModPlugin {
@@ -50,7 +50,6 @@ class PluginErgResistance : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(FairyCard.THUNDER.createItemStack())
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 1, 1 + background.height / 2 - 10)
                 recipeLayout.itemStacks.set(ingredients)
@@ -62,7 +61,7 @@ class PluginErgResistance : IModPlugin {
         registry.addRecipes(FairyCard.values().map { fairyCard ->
             object : IRecipeWrapper {
                 override fun getIngredients(ingredients: IIngredients) {
-                    ingredients.setInputLists(VanillaTypes.ITEM, listOf((1..maxRank).map { fairyCard.createItemStack(rank = it) }))
+                    ingredients.setInputLists(ItemStack::class.java, listOf((1..maxRank).map { fairyCard.createItemStack(rank = it) }))
                 }
 
                 val drawListeners = mutableListOf<(Minecraft) -> Unit>()

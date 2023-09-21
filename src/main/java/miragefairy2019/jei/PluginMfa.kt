@@ -6,7 +6,6 @@ import mezz.jei.api.JEIPlugin
 import mezz.jei.api.gui.IDrawable
 import mezz.jei.api.gui.IRecipeLayout
 import mezz.jei.api.ingredients.IIngredients
-import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
@@ -15,7 +14,6 @@ import miragefairy2019.libkt.drawSlot
 import miragefairy2019.libkt.translateToLocal
 import miragefairy2019.mod.recipes.Mfa
 import net.minecraft.client.Minecraft
-import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 
 @JEIPlugin
@@ -38,7 +36,6 @@ class PluginMfa : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(Items.WRITABLE_BOOK))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 1, 1)
                 repeat(7) { recipeLayout.itemStacks.init(1 + it, true, 33 + 18 * it, 1) }
@@ -51,7 +48,7 @@ class PluginMfa : IModPlugin {
         registry.addRecipes(Mfa.mfaPages.map { mfaPage ->
             object : IRecipeWrapper {
                 override fun getIngredients(ingredients: IIngredients) {
-                    ingredients.setInputLists(VanillaTypes.ITEM, listOf(mfaPage.mainIngredient) + (0 until 7).map { mfaPage.subIngredients.getOrNull(it) ?: listOf() })
+                    ingredients.setInputLists(ItemStack::class.java, listOf(mfaPage.mainIngredient) + (0 until 7).map { mfaPage.subIngredients.getOrNull(it) ?: listOf() })
                 }
 
                 override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {

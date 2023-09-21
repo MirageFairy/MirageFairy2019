@@ -6,7 +6,6 @@ import mezz.jei.api.JEIPlugin
 import mezz.jei.api.gui.IDrawable
 import mezz.jei.api.gui.IRecipeLayout
 import mezz.jei.api.ingredients.IIngredients
-import mezz.jei.api.ingredients.VanillaTypes
 import mezz.jei.api.recipe.IRecipeCategory
 import mezz.jei.api.recipe.IRecipeCategoryRegistration
 import mezz.jei.api.recipe.IRecipeWrapper
@@ -21,7 +20,6 @@ import miragefairy2019.mod.playeraura.ApiPlayerAura
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Gui
 import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 
@@ -44,7 +42,6 @@ class PluginFoodAura : IModPlugin {
                 }
             }
 
-            override fun getIcon(): IDrawable? = registry.jeiHelpers.guiHelper.createDrawableIngredient(ItemStack(Items.CAKE))
             override fun setRecipe(recipeLayout: IRecipeLayout, recipeWrapper: IRecipeWrapper, ingredients: IIngredients) {
                 recipeLayout.itemStacks.init(0, true, 1, 1)
                 recipeLayout.itemStacks.set(ingredients)
@@ -67,7 +64,7 @@ class PluginFoodAura : IModPlugin {
 
                         // 登録
                         add(object : IRecipeWrapper {
-                            override fun getIngredients(ingredients: IIngredients) = ingredients.setInputLists(VanillaTypes.ITEM, listOf(listOf(itemStack)))
+                            override fun getIngredients(ingredients: IIngredients) = ingredients.setInputLists(ItemStack::class.java, listOf(listOf(itemStack)))
                             override fun drawInfo(minecraft: Minecraft, recipeWidth: Int, recipeHeight: Int, mouseX: Int, mouseY: Int) {
                                 fun d(mana: Mana, x: Int) {
                                     val value = foodAura[mana]
