@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
 fun <T : TileEntity> ModScope.tileEntity(registryName: String, tileEntityClass: Class<T>) = onRegisterTileEntity {
-    GameRegistry.registerTileEntity(tileEntityClass, ResourceName(modId, registryName).resourceLocation)
+    GameRegistry.registerTileEntity(tileEntityClass, ResourceName(modId, registryName).resourceLocation.toString())
 }
 
 fun <T : TileEntity, R : TileEntitySpecialRenderer<T>> ModScope.tileEntityRenderer(tileEntityClass: Class<T>, rendererCreator: () -> R) = onRegisterTileEntityRenderer {
