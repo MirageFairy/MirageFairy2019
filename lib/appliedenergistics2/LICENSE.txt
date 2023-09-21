@@ -1,8 +1,0 @@
-
-Applied Energistics 2 API
-https://github.com/AppliedEnergistics/Applied-Energistics-2
-
-(c) 2013 - 2020 AlgorithmX2 et al
-
-License MIT
-https://opensource.org/licenses/MIT

@@ -117,7 +117,7 @@ val miniaRecipeModule = module {
     r(4, 1, "cinnabar_ore", DataOreIngredient(ore = "oreCinnabar"), DataResult(item = "miragefairy2019:ore1", data = 3, count = 2)) // 辰砂
     r(4, 1, "fluorite_ore", DataOreIngredient(ore = "oreFluorite"), DataResult(item = "miragefairy2019:ore1", data = 1, count = 2)) // 蛍石
     r(4, 2, "moonstone_ore", DataOreIngredient(ore = "oreMoonstone"), DataResult(item = "miragefairy2019:ore1", data = 4, count = 2)) // 月長石
-    r(4, 2, "certus_quartz_ore", DataSimpleIngredient(item = "appliedenergistics2:quartz_ore"), DataResult(item = "appliedenergistics2:quartz_ore", data = null, count = 2)) // Certus Quarts
+    //r(4, 2, "certus_quartz_ore", DataSimpleIngredient(item = "appliedenergistics2:quartz_ore"), DataResult(item = "appliedenergistics2:quartz_ore", data = null, count = 2)) // Certus Quarts
 
     // 無機物系
     r(4, 1, "glowstone", DataOreIngredient(ore = "glowstone"), DataResult(item = "minecraft:glowstone", count = 2)) // グロウストーン

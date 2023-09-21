@@ -1,6 +1,5 @@
 package miragefairy2019.mod.systems
 
-import appeng.api.AEApi
 import miragefairy2019.lib.Compatibility
 import miragefairy2019.lib.modinitializer.module
 import miragefairy2019.mod.Main
@@ -20,7 +19,7 @@ object Ae2SpatialIoBlocking {
 
             logger.info("enabled: ${Compatibility.ae2}")
             if (Compatibility.ae2) {
-                fun disable(block: Block) = AEApi.instance().registries().movable().blacklistBlock(block)
+                fun disable(block: Block) = Unit// AEApi.instance().registries().movable().blacklistBlock(block)
 
                 logger.info("disableVanillaAe2SpatialIo: ${disableVanillaAe2SpatialIo()}")
                 if (disableVanillaAe2SpatialIo()) {

@@ -82,8 +82,6 @@ dependencies {
 
     compile("mezz.jei:jei_1.12:4.7.5.86")
     //runtime("mezz.jei:jei_1.12.2:4.16.1.302")
-
-    compile(files("lib/appliedenergistics2/appliedenergistics2-rv6-stable-7-api.jar"))
 }
 
 tasks {
