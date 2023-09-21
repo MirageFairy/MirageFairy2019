@@ -100,8 +100,8 @@ fun move(power: Int, srcItemHandler: IItemHandlerModifiable, destItemHandler: II
                     if (virtualSrcItemStack.isEmpty) return@nextSrcSlot // すべて移動し終えた
                     // まだ移動するものが残っている
 
-                    if (!destItemHandler.isItemValid(destIndex, virtualSrcItemStack)) return@nextDestSlot // 宛先がこのアイテムを受け付けない
-                    // 宛先がこのアイテムを受け付ける
+                    //if (!destItemHandler.isItemValid(destIndex, virtualSrcItemStack)) return@nextDestSlot // 宛先がこのアイテムを受け付けない
+                    //// 宛先がこのアイテムを受け付ける
 
                     // 移動を試す
                     val remainingSrcItemStack = destItemHandler.insertItem(destIndex, virtualSrcItemStack.copy(), false)
