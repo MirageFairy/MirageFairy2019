@@ -236,20 +236,25 @@ class TileEntityItemFrame : TileEntityPedestal() {
         transformProxy.translate(0.5, 0.5, 0.5)
         when (facing) {
             EnumFacing.DOWN -> Unit
+
             EnumFacing.UP -> {
                 transformProxy.rotate(180.0f, 1.0f, 0.0f, 0.0f)
             }
+
             EnumFacing.NORTH -> {
                 transformProxy.rotate(90.0f, 1.0f, 0.0f, 0.0f)
             }
+
             EnumFacing.EAST -> {
                 transformProxy.rotate(-90.0f, 0.0f, 1.0f, 0.0f)
                 transformProxy.rotate(90.0f, 1.0f, 0.0f, 0.0f)
             }
+
             EnumFacing.SOUTH -> {
                 transformProxy.rotate(-180.0f, 0.0f, 1.0f, 0.0f)
                 transformProxy.rotate(90.0f, 1.0f, 0.0f, 0.0f)
             }
+
             EnumFacing.WEST -> {
                 transformProxy.rotate(-270.0f, 0.0f, 1.0f, 0.0f)
                 transformProxy.rotate(90.0f, 1.0f, 0.0f, 0.0f)

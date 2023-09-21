@@ -41,8 +41,8 @@ object ApiFacedCursor {
 
 fun <I : Item> ItemScope<I>.setFacedCursor() = modScope.onInit {
     ApiFacedCursor.facedCursorHandlers[item] = object : IFacedCursorHandler {
-        override fun getFacedCursor(item: Item, itemStack: ItemStack, world: World, blockPos: BlockPos, player: EntityPlayer, rayTraceResult: RayTraceResult) = object: IFacedCursor {
-            override val borderSize                get() = 4.0 / 16.0
+        override fun getFacedCursor(item: Item, itemStack: ItemStack, world: World, blockPos: BlockPos, player: EntityPlayer, rayTraceResult: RayTraceResult) = object : IFacedCursor {
+            override val borderSize get() = 4.0 / 16.0
         }
     }
 }
@@ -65,6 +65,7 @@ fun getAdvancedFacing(facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float,
             if (hitX <= a) return EnumFacing.WEST
             if (hitX >= b) return EnumFacing.EAST
         }
+
         else -> Unit
     }
     when (facing) {
@@ -72,6 +73,7 @@ fun getAdvancedFacing(facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float,
             if (hitY <= a) return EnumFacing.DOWN
             if (hitY >= b) return EnumFacing.UP
         }
+
         else -> Unit
     }
     when (facing) {
@@ -79,6 +81,7 @@ fun getAdvancedFacing(facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float,
             if (hitZ <= a) return EnumFacing.NORTH
             if (hitZ >= b) return EnumFacing.SOUTH
         }
+
         else -> Unit
     }
 
@@ -134,21 +137,26 @@ val facedCursorModule = module {
                                 GlStateManager.translate(0.5f, 0.5f, 0.5f)
                                 when (facing) {
                                     EnumFacing.UP -> Unit
+
                                     EnumFacing.NORTH -> {
                                         GlStateManager.rotate(-90.0f, 1.0f, 0.0f, 0.0f)
                                     }
+
                                     EnumFacing.EAST -> {
                                         GlStateManager.rotate(-90.0f, 0.0f, 1.0f, 0.0f)
                                         GlStateManager.rotate(-90.0f, 1.0f, 0.0f, 0.0f)
                                     }
+
                                     EnumFacing.SOUTH -> {
                                         GlStateManager.rotate(-180.0f, 0.0f, 1.0f, 0.0f)
                                         GlStateManager.rotate(-90.0f, 1.0f, 0.0f, 0.0f)
                                     }
+
                                     EnumFacing.WEST -> {
                                         GlStateManager.rotate(-270.0f, 0.0f, 1.0f, 0.0f)
                                         GlStateManager.rotate(-90.0f, 1.0f, 0.0f, 0.0f)
                                     }
+
                                     EnumFacing.DOWN -> GlStateManager.rotate(180.0f, 1.0f, 0.0f, 0.0f)
                                 }
                                 GlStateManager.translate(-0.5f, -0.5f, -0.5f)

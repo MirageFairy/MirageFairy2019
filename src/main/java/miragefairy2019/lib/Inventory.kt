@@ -35,6 +35,7 @@ fun merge(srcInventory: IInventory, srcSlotIndex: Int, destInventory: IInventory
 
             return srcInventory[srcSlotIndex].isEmpty
         }
+
         else -> return false // 宛先に別のアイテムが入っているので何もできない
     }
 }

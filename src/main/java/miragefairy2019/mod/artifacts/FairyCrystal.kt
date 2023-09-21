@@ -273,5 +273,6 @@ fun VariantFairyCrystal.getRateBoost(dropCategory: DropCategory, skillContainer:
         val skillBonus = skillContainer?.getSkillLevel(Mastery.fairySummoning)?.let { it * 0.01 } ?: 0.0
         rateBoost * (1.0 + skillBonus) * additionalBoost
     }
+
     else -> 1.0
 }

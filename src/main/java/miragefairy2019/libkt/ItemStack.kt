@@ -44,6 +44,7 @@ val ItemStack.string
         Items.PAPER -> customName
         is ItemWritableBook,
         is ItemWrittenBook -> tagCompound?.getTag("pages")?.castOrNull<NBTTagList>()?.get(0)?.castOrNull<NBTTagString>()?.string
+
         else -> null
     }
 
