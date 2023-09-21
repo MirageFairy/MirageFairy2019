@@ -15,7 +15,7 @@ import net.minecraft.world.World
 
 abstract class BlockBeanstalkFlower<T : TileEntityBeanstalkFlower> : BlockBeanstalkEnd(), ITileEntityProvider {
     init {
-        hasTileEntity = true
+        isBlockContainer = true
     }
 
     abstract fun validateTileEntity(tileEntity: TileEntity): T?
