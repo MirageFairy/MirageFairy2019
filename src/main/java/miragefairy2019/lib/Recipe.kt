@@ -18,7 +18,7 @@ abstract class RecipeBase<R : Any>(registryName: ResourceLocation) : IForgeRegis
 
     protected abstract fun match(matcher: RecipeMatcher): R?
 
-    override fun isDynamic() = true
+    override fun isHidden() = true
     override fun matches(inventory: InventoryCrafting, world: World) = match(RecipeMatcher(inventory)) != null
     override fun getRecipeOutput() = EMPTY_ITEM_STACK
 
