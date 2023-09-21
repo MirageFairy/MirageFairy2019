@@ -26,7 +26,6 @@ import mirrg.kotlin.hydrogen.formatAs
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemFood
-import net.minecraft.network.NetHandlerPlayServer
 import net.minecraft.network.PacketBuffer
 import net.minecraft.util.text.ITextComponent
 import net.minecraftforge.client.event.RenderGameOverlayEvent
@@ -36,7 +35,6 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent
 import net.minecraftforge.event.entity.player.PlayerEvent
 import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.fml.common.network.FMLNetworkEvent.ServerConnectionFromClientEvent
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
@@ -59,9 +57,8 @@ val playerAuraModule = module {
         MinecraftForge.EVENT_BUS.register(object : Any() {
             @Suppress("unused")
             @SubscribeEvent
-            fun hook(event: ServerConnectionFromClientEvent) {
-                val handler = event.handler
-                if (handler is NetHandlerPlayServer) ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(handler.player).send()
+            fun hook(event: net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent) {
+                ApiPlayerAura.playerAuraManager.getServerPlayerAuraHandler(event.player as EntityPlayerMP).send()
             }
         })
     }

@@ -10,13 +10,11 @@ import mirrg.kotlin.java.hydrogen.mkdirsOrThrow
 import mirrg.kotlin.log4j.hydrogen.getLogger
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
-import net.minecraft.network.NetHandlerPlayServer
 import net.minecraft.network.PacketBuffer
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerEvent
 import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.fml.common.network.FMLNetworkEvent
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
@@ -165,9 +163,8 @@ abstract class ExtraPlayerStatusManager<H : ExtraPlayerStatusMessageHandler<M, D
                     // ログインイベント
                     @Suppress("unused")
                     @SubscribeEvent
-                    fun hook(event: FMLNetworkEvent.ServerConnectionFromClientEvent) {
-                        val handler = event.handler
-                        if (handler is NetHandlerPlayServer) send(handler.player)
+                    fun hook(event: net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent) {
+                        send(event.player as EntityPlayerMP)
                     }
 
                     // 保存イベント

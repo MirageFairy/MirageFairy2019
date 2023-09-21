@@ -7,12 +7,10 @@ import miragefairy2019.mod.ModMirageFairy2019
 import miragefairy2019.mod.PacketId
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
-import net.minecraft.network.NetHandlerPlayServer
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerEvent
 import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.fml.common.network.FMLNetworkEvent
 import net.minecraftforge.fml.relauncher.Side
 import java.io.File
 
@@ -40,9 +38,9 @@ val skillModule = module {
 
             // ログインイベント
             @[Suppress("unused") SubscribeEvent]
-            fun handle(event: FMLNetworkEvent.ServerConnectionFromClientEvent) {
-                val handler = event.handler as? NetHandlerPlayServer ?: return
-                ApiSkill.skillManager.getServerSkillContainer(handler.player).send(handler.player)
+            fun handle(event: net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent) {
+                val player = event.player as EntityPlayerMP
+                ApiSkill.skillManager.getServerSkillContainer(player).send(player)
             }
 
             // 保存イベント
