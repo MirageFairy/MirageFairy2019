@@ -17,7 +17,7 @@ fun <I> ItemScope<I>.registerItemColorHandler() where  I : Item, I : IColoredIte
     modScope.onRegisterItemColorHandler {
         @SideOnly(Side.CLIENT)
         class ItemColorImpl : IItemColor {
-            override fun colorMultiplier(itemStack: ItemStack, tintIndex: Int) = item.colorMultiplier(itemStack, tintIndex)
+            override fun getColorFromItemstack(itemStack: ItemStack, tintIndex: Int) = item.colorMultiplier(itemStack, tintIndex)
         }
         Minecraft.getMinecraft().itemColors.registerItemColorHandler(ItemColorImpl(), item)
     }
