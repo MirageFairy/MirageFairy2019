@@ -59,9 +59,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.world.World
-import net.minecraftforge.client.resource.VanillaResourceType
 import net.minecraftforge.common.BiomeDictionary
-import net.minecraftforge.fml.client.FMLClientHandler
 import net.minecraftforge.oredict.OreDictionary
 import java.io.File
 
@@ -365,7 +363,7 @@ class ItemDebugSelectLanguage : ItemDebug(0x0040FF.toRgb()) {
         }
 
         languageManager.currentLanguage = language
-        FMLClientHandler.instance().refreshResources(VanillaResourceType.LANGUAGES)
+        Minecraft.getMinecraft().refreshResources()
         fontRenderer.unicodeFlag = languageManager.isCurrentLocaleUnicode
         fontRenderer.bidiFlag = languageManager.isCurrentLanguageBidirectional
         gameSettings.saveOptions()
