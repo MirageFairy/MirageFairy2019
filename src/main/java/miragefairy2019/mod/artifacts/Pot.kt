@@ -275,7 +275,7 @@ class ItemFilledPot : ItemMultiMaterial<ItemVariantFilledPot>(), IPot {
 class FluidHandlerPot(@JvmField var container: ItemStack) : IFluidHandlerItem {
     private fun getFluid() = container.item.castOrNull<IPot>()?.getFluid(container)
     override fun getContainer() = container
-    override fun getTankProperties() = getFluid()?.let { fluid -> arrayOf(FluidTankProperties(FluidStack(fluid, 1000), 1000)) }
+    override fun getTankProperties() = getFluid()?.let { fluid -> arrayOf(FluidTankProperties(FluidStack(fluid, 1000), 1000)) } ?: arrayOf()
     override fun fill(resource: FluidStack, doFill: Boolean): Int {
         if (container.count != 1) return 0 // 複数スタックされている場合は不可
         if (getFluid() != null) return 0 // 中身が入っている場合は不可
