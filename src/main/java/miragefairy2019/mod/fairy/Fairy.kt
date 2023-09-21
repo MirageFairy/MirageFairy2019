@@ -91,7 +91,7 @@ val fairyModule = module {
                 }
             }
 
-            override fun hasSearchBar() = true
+            //override fun hasSearchBar() = true
         }.setBackgroundImageName("item_search.png")
         creativeTabFairyRank = object : CreativeTabs("mirageFairy2019.fairy.rank") {
             @SideOnly(Side.CLIENT)
@@ -108,7 +108,7 @@ val fairyModule = module {
                 }
             }
 
-            override fun hasSearchBar() = true
+            //override fun hasSearchBar() = true
         }.setBackgroundImageName("item_search.png")
     }
 
