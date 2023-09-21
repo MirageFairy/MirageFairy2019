@@ -85,7 +85,7 @@ val placedItemModule = module {
                                 if (player.isSpectator) return // スペクテイターの場合無効
 
                                 // 視線判定
-                                val result = player.rayTrace(player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue, 0f) ?: return // レイトレースが失敗したら中止
+                                val result = player.rayTrace(5.0, 0f) ?: return // レイトレースが失敗したら中止
                                 if (result.typeOfHit != RayTraceResult.Type.BLOCK) return // ブロックにヒットしなければ中止
 
                                 // 成立

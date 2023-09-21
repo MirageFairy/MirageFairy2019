@@ -7,7 +7,6 @@ import miragefairy2019.lib.obtain
 import miragefairy2019.libkt.EMPTY_ITEM_STACK
 import miragefairy2019.libkt.notEmptyOrNull
 import miragefairy2019.libkt.sq
-import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
@@ -38,7 +37,7 @@ class PacketPlaceItem : IMessageHandler<MessagePlaceItem, IMessage> {
         val world = player.world
 
         // 届かないなら中止
-        if (message.blockPos.distanceSq(player.position) > (player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue + 2).sq()) return null
+        if (message.blockPos.distanceSq(player.position) > (player.interactionManager.blockReachDistance + 2).sq()) return null
 
         fun effect(blockPos: BlockPos) = world.playSound(
             null,

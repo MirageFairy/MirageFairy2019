@@ -1,8 +1,10 @@
 package miragefairy2019.lib
 
 import miragefairy2019.libkt.axisAlignedBBOf
+import mirrg.kotlin.hydrogen.castOrNull
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
@@ -74,7 +76,7 @@ fun <E : Entity> rayTrace(
     classEntity: Class<E>,
     filterEntity: (E) -> Boolean
 ): RayTraceWrapper {
-    val reachDistance = player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue + additionalReach
+    val reachDistance = (player.castOrNull<EntityPlayerMP>()?.interactionManager?.blockReachDistance ?: 5.0) + additionalReach
     val eyePosition = Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ)
     val targetPosition = getTargetPosition(eyePosition, player.rotationPitch, player.rotationYaw, reachDistance)
 
@@ -102,7 +104,7 @@ fun rayTraceBlock(
     useLiquids: Boolean,
     additionalReach: Double
 ): RayTraceWrapper {
-    val reachDistance = player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue + additionalReach
+    val reachDistance = (player.castOrNull<EntityPlayerMP>()?.interactionManager?.blockReachDistance ?: 5.0) + additionalReach
     val eyePosition = Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ)
     val targetPosition = getTargetPosition(eyePosition, player.rotationPitch, player.rotationYaw, reachDistance)
 
