@@ -16,7 +16,6 @@ import miragefairy2019.lib.resourcemaker.DataModelBlockDefinition
 import miragefairy2019.lib.resourcemaker.DataPoint
 import miragefairy2019.lib.resourcemaker.DataSingleVariantList
 import miragefairy2019.lib.resourcemaker.DataVariant
-import miragefairy2019.lib.resourcemaker.block
 import miragefairy2019.lib.resourcemaker.lang
 import miragefairy2019.lib.resourcemaker.makeBlockModel
 import miragefairy2019.lib.resourcemaker.makeBlockStates
@@ -127,8 +126,38 @@ val fairyLogModule = module {
     itemBlockFairyLog = item({ ItemBlock(blockFairyLog()) }, "fairy_log") {
         setUnlocalizedName("fairyLog")
         setCreativeTab { Main.creativeTab }
-        setCustomModelResourceLocation(variant = "facing=north,variant=oak")
-        makeItemModel { block }
+        setCustomModelResourceLocation()
+        makeItemModel {
+            DataModel(
+                parent = "block/block",
+                elements = listOf(
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 0.0),
+                        to = DataPoint(16.0, 16.0, 16.0),
+                        faces = DataFaces(
+                            down = DataFace(texture = "#end", cullface = "down"),
+                            up = DataFace(texture = "#end", cullface = "up"),
+                            north = DataFace(texture = "#side", cullface = "north"),
+                            south = DataFace(texture = "#side", cullface = "south"),
+                            west = DataFace(texture = "#side", cullface = "west"),
+                            east = DataFace(texture = "#side", cullface = "east")
+                        )
+                    ),
+                    DataElement(
+                        from = DataPoint(0.0, 0.0, 0.0),
+                        to = DataPoint(16.0, 16.0, 16.0),
+                        faces = DataFaces(
+                            north = DataFace(texture = "#overlay", cullface = "north")
+                        )
+                    )
+                ),
+                textures = mapOf(
+                    "overlay" to "miragefairy2019:blocks/log_entrance",
+                    "end" to "blocks/log_oak_top",
+                    "side" to "blocks/log_oak"
+                )
+            )
+        }
     }
 
     // 翻訳生成
