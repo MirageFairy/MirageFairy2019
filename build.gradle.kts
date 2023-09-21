@@ -46,10 +46,10 @@ tasks.withType<KotlinCompile> {
 }
 
 minecraft {
-    version = "1.12.2-14.23.5.2847"
-    // !!gitHubAction-minecraftVersion="1.12.2-14.23.5.2847"
+    version = "1.12-14.21.1.2387"
+    // !!gitHubAction-minecraftVersion="1.12-14.21.1.2387"
     runDir = "run"
-    mappings = "snapshot_20171003"
+    mappings = "snapshot_20170624"
     clientRunArgs = listOf("--username", "Player1")
 }
 
@@ -80,7 +80,7 @@ dependencies {
 
     compile("mirrg.boron:mirrg.boron.swing:0.1+")
 
-    compile("mezz.jei:jei_1.12.2:4.16.1.302")
+    compile("mezz.jei:jei_1.12:4.7.5.86")
     //runtime("mezz.jei:jei_1.12.2:4.16.1.302")
 
     compile(files("lib/appliedenergistics2/appliedenergistics2-rv6-stable-7-api.jar"))
