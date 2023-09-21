@@ -14,15 +14,14 @@ import miragefairy2019.mod.Main
 import miragefairy2019.mod.Main.side
 import miragefairy2019.mod.PacketId
 import net.minecraft.block.Block
-import net.minecraft.client.entity.EntityPlayerSP
+import net.minecraft.client.Minecraft
 import net.minecraft.client.settings.KeyBinding
-import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.math.RayTraceResult
-import net.minecraftforge.client.event.InputUpdateEvent
 import net.minecraftforge.client.settings.KeyConflictContext
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.client.registry.ClientRegistry
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.fml.common.gameevent.InputEvent
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import org.lwjgl.input.Keyboard
@@ -78,13 +77,12 @@ val placedItemModule = module {
                     ClientRegistry.registerKeyBinding(keyBindingPlaceItem)
                     MinecraftForge.EVENT_BUS.register(object : Any() {
                         @SubscribeEvent
-                        fun accept(event: InputUpdateEvent) {
+                        fun accept(event: InputEvent.KeyInputEvent) {
                             while (keyBindingPlaceItem.isPressed) {
 
                                 // プレイヤー判定
-                                val player = event.entityPlayer
+                                val player = Minecraft.getMinecraft().player ?: return
                                 if (player.isSpectator) return // スペクテイターの場合無効
-                                if (player !is EntityPlayerSP) return
 
                                 // 視線判定
                                 val result = player.rayTrace(player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue, 0f) ?: return // レイトレースが失敗したら中止
