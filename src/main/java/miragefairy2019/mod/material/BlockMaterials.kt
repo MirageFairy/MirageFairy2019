@@ -4,6 +4,7 @@ import miragefairy2019.libkt.BlockMulti
 import miragefairy2019.libkt.BlockVariantList
 import miragefairy2019.libkt.IBlockVariant
 import miragefairy2019.libkt.ItemBlockMulti
+import miragefairy2019.mod.IFuelItem
 import net.minecraft.block.Block
 import net.minecraft.block.BlockFalling
 import net.minecraft.block.SoundType
@@ -134,6 +135,6 @@ class BlockMaterials<V : IBlockVariantMaterials>(variantList: BlockVariantList<V
     override fun isBeaconBase(world: IBlockAccess, blockPos: BlockPos, beaconBlockPos: BlockPos) = getVariant(world.getBlockState(blockPos)).isBeaconBase
 }
 
-class ItemBlockMaterials<V : IBlockVariantMaterials>(block: BlockMaterials<V>) : ItemBlockMulti<BlockMaterials<V>, V>(block) {
+class ItemBlockMaterials<V : IBlockVariantMaterials>(block: BlockMaterials<V>) : ItemBlockMulti<BlockMaterials<V>, V>(block), IFuelItem {
     override fun getItemBurnTime(itemStack: ItemStack) = block2.getVariant(itemStack.metadata).burnTime
 }

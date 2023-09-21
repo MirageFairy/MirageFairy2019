@@ -16,6 +16,7 @@ import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.fml.common.network.IGuiHandler
 import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper
+import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import org.apache.logging.log4j.Logger
@@ -86,6 +87,13 @@ object Main {
         lang("miragefairy2019.gui.duration.minutes", "minutes", "分")
         lang("miragefairy2019.gui.duration.seconds", "seconds", "秒")
         lang("miragefairy2019.gui.duration.milliSeconds", "milli seconds", "ミリ秒")
+
+        onInit {
+            GameRegistry.registerFuelHandler { itemStack ->
+                val item = itemStack.item
+                if (item is IFuelItem) item.getItemBurnTime(itemStack) else 0
+            }
+        }
 
     }
 }

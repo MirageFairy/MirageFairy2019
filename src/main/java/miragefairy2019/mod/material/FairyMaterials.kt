@@ -34,6 +34,7 @@ import miragefairy2019.libkt.oreIngredient
 import miragefairy2019.libkt.plus
 import miragefairy2019.libkt.setCustomModelResourceLocations
 import miragefairy2019.libkt.translateToLocal
+import miragefairy2019.mod.IFuelItem
 import miragefairy2019.mod.Main
 import miragefairy2019.mod.artifacts.WandType
 import miragefairy2019.mod.artifacts.ingredient
@@ -980,7 +981,7 @@ val fairyMaterialsModule = module {
 
 class ItemVariantFairyMaterial(registryName: String, val fairyMaterialCard: FairyMaterialCard) : ItemVariantMaterial(registryName, fairyMaterialCard.unlocalizedName)
 
-class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>() {
+class ItemMultiFairyMaterial : ItemMultiMaterial<ItemVariantFairyMaterial>(), IFuelItem {
     @SideOnly(Side.CLIENT)
     override fun addInformation(itemStack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
         val variant = getVariant(itemStack) ?: return
