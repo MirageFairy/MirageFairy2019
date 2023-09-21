@@ -22,7 +22,6 @@ class BakedModelBuiltinWrapper(val bakedModel: IBakedModel) : IBakedModel {
     override fun getParticleTexture(): TextureAtlasSprite = bakedModel.particleTexture
     override fun getItemCameraTransforms(): ItemCameraTransforms = bakedModel.itemCameraTransforms
     override fun getOverrides(): ItemOverrideList = bakedModel.overrides
-    override fun isAmbientOcclusion(state: IBlockState): Boolean = bakedModel.isAmbientOcclusion(state)
     override fun handlePerspective(cameraTransformType: TransformType): Pair<out IBakedModel, Matrix4f> {
         val pair = bakedModel.handlePerspective(cameraTransformType)
         return Pair.of(BakedModelBuiltinWrapper(pair.left), pair.right)
