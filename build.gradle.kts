@@ -140,13 +140,13 @@ tasks {
     named<Jar>("jar") {
         finalizedBy("reobfJar")
         classifier = "original"
-        version = "${project.version}-${project.minecraft.version}-${minecraft.forgeVersion}"
+        version = "${project.version}-${minecraft.forgeVersion}-${project.minecraft.version}"
     }
 
     named<ShadowJar>("shadowJar") {
         finalizedBy("reobfShadowJar")
         classifier = ""
-        version = "${project.version}-${project.minecraft.version}-${minecraft.forgeVersion}"
+        version = "${project.version}-${minecraft.forgeVersion}-${project.minecraft.version}"
         configurations = listOf(adder)
         listOf(
             "kotlin",
