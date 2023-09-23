@@ -47,7 +47,7 @@ tasks.withType<KotlinCompile> {
 
 minecraft {
     version = "1.12.2-14.23.5.2847"
-    // !!gitHubAction-minecraftVersion="1.12.2-14.23.5.2847"
+    // !!gitHubAction-minecraftVersion="1.12.2"
     runDir = "run"
     mappings = "snapshot_20171003"
     clientRunArgs = listOf("--username", "Player1")
@@ -143,13 +143,13 @@ tasks {
     named<Jar>("jar") {
         finalizedBy("reobfJar")
         classifier = "original"
-        version = "${project.version}-${minecraft.forgeVersion}-${project.minecraft.version}"
+        version = "${project.minecraft.version}-${project.version}"
     }
 
     named<ShadowJar>("shadowJar") {
         finalizedBy("reobfShadowJar")
         classifier = ""
-        version = "${project.version}-${minecraft.forgeVersion}-${project.minecraft.version}"
+        version = "${project.minecraft.version}-${project.version}"
         configurations = listOf(adder)
         listOf(
             "kotlin",
